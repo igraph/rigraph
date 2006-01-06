@@ -1,0 +1,102 @@
+
+# The igraph interface
+
+export(graph.empty, add.edges, add.vertices, delete.edges,
+       delete.vertices, vcount, ecount, neighbors)
+
+# Attributes
+
+export(add.graph.attribute, remove.graph.attribute,
+       get.graph.attribute, set.graph.attribute, g.a, "g.a<-",
+       add.vertex.attribute, remove.vertex.attribute,
+       get.vertex.attribute, set.vertex.attribute, v.a, "v.a<-",
+       add.edge.attribute, remove.edge.attribute,
+       get.edge.attribute, set.edge.attribute, e.a, "e.a<-")
+
+# iterators
+
+export(igraph.vs.all, igraph.vs.adj, igraph.vs.vector,
+       igraph.es.all, igraph.es.fromorder, igraph.es.adj,
+       igraph.es.vector,
+       igraph.vs.next, igraph.vs.end, igraph.vs.reset, igraph.vs.get,
+       igraph.es.next, igraph.es.end, igraph.es.reset, igraph.es.get,
+       igraph.es.from, igraph.es.to)
+
+S3method(igraph.vs.get, igraphvsseq)
+S3method(igraph.vs.get, igraphvsvector)
+S3method(igraph.es.get, igraphesseq)
+S3method(igraph.es.get, igraphesvector)
+S3method(igraph.es.from, igraphesseq)
+S3method(igraph.es.from, igraphesvector)
+S3method(igraph.es.to, igraphesseq)
+S3method(igraph.es.to, igraphesvector)
+
+export ("$.igraphvsseq", "$.igraphvsvector",
+        "$.igraphesseq", "$.igraphesvector")
+
+S3method("$", "igraphvsseq")
+S3method("$", "igraphvsvector")
+S3method("$", "igraphesseq")
+S3method("$", "igraphesvector")
+
+# basic functions, printing
+
+export(is.igraph, are.connected, print.igraph, summary.igraph, is.directed)
+
+# structure generators
+
+export(graph, graph.adjacency, graph.star, graph.tree, graph.lattice,
+       graph.ring, graph.full)
+
+# games
+
+export(erdos.renyi.game, random.graph.game, degree.sequence.game,
+       aging.prefatt.game, growing.random.game, barabasi.game)
+
+# community structure
+
+export(community.eb, community.cut, edge.type.matrix,
+       modularity, community.eb2)
+
+# conversion
+
+export(get.adjacency, get.edgelist)
+
+# fitting, other
+
+export(power.law.fit, running.mean, igraph.sample)
+
+# foreign formats
+
+export(read.graph, write.graph, read.graph.edgelist,
+       write.graph.edgelist, write.graph.lgl, read.graph.ncol,
+       write.graph.ncol, read.graph.lgl)
+
+# layouts
+
+export(layout.random, layout.circle, layout.fruchterman.reingold,
+       layout.spring, layout.kamada.kawai)
+
+# structural properties
+
+export(subgraph, simplify, degree, degree.distribution, diameter,
+       closeness, subcomponent, betweenness, bibcoupling, cocitation,
+       shortest.paths, minimum.spanning.tree, edge.betweenness,
+       get.shortest.paths, average.path.length, transitivity)
+
+# plotting
+
+export(plot.igraph, tkplot)
+
+# components
+
+export(clusters, cluster.distribution, is.connected)
+
+# centrality
+
+export(evcent)
+
+# dynamics measurement
+
+export(measure.dynamics.idage)
+
