@@ -265,3 +265,27 @@ graph.extended.chordal.ring <- function(n, w) {
         as.matrix(w),
         PACKAGE="igraph")
 }
+
+line.graph <- function(graph) {
+
+  if (!is.igraph(graph)) {
+    stop("Not a graph object")
+  }
+
+  .Call("R_igraph_line_graph", graph,
+        PACKAGE="igraph")
+}
+  
+  
+graph.de.bruijn <- function(m, n) {
+
+  .Call("R_igraph_de_bruijn", as.numeric(m), as.numeric(n),
+        PACKAGE="igraph")
+}
+
+graph.kautz <- function(m, n) {
+
+  .Call("R_igraph_kautz", as.numeric(m), as.numeric(n),
+        PACKAGE="igraph")
+}
+

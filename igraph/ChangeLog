@@ -13,10 +13,34 @@
 	* interfaces/R/igraph/R/community.R (walktrap.community) : bug 
 	corrected for weighted graphs
 
-2007-07-17  Csardi Gabor  <csardi@rmki.kfki.hu>
+2007-07-17  Csardi Gabor  <csardi@duplakave.rmki.kfki.hu>
 
 	* interfaces/R/igraph/R/plot.R (plot.igraph) : corrected bug when
 	igraph.Arrows called with a vector argument for h.lwd
+
+2007-06-12  Gabor Csardi  <csardi@rmki.kfki.hu>
+
+	* interfaces/R/igraph/R/revolver.R (revolver.e) 
+	* interfaces/R/src/rinterface.c (R_igraph_revolver_e) 
+	: added 'st' option
+
+2007-06-09  Gabor Csardi  <csardi@rmki.kfki.hu>
+
+	* interfaces/R/igraph/R/structure.generators.R (graph.de.bruijn)
+	(graph.kautz)
+	* interfaces/R/src/rinterface.c (R_igraph_de_bruijn, R_igraph_kautz) :
+	added
+
+2007-06-08  Gabor Csardi  <csardi@rmki.kfki.hu>
+
+	* interfaces/R/igraph/R/structure.generators.R (line.graph)
+	* interfaces/R/src/rinterface.c (R_igraph_line_graph) : added
+
+2007-06-07  Gabor Csardi  <csardi@rmki.kfki.hu>
+
+	* interfaces/R/igraph/R/layout.R (layout.fruchterman.reingold)
+	* interfaces/R/src/rinterface.c (R_igraph_layout_fruchterman_reingold)
+	(R_igraph_layout_fruchterman_reingold_3d) : weights argument added	
 
 2007-06-06  Gabor Csardi  <csardi@rmki.kfki.hu>
 
