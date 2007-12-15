@@ -24,17 +24,6 @@
 # Connected components, subgraphs, kinda
 ###################################################################
 
-clusters <- function(graph, mode="weak") {
-  if (!is.igraph(graph)) {
-    stop("Not a graph object")
-  }
-  if (is.character(mode)) {
-    mode <- switch(mode, "weak"=1, "strong"=2)
-  }
-  .Call("R_igraph_clusters", graph, as.numeric(mode),
-        PACKAGE="igraph")
-}
-
 no.clusters <- function(graph, mode="weak") {
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -93,22 +82,4 @@ decompose.graph <- function(graph, mode="weak", max.comps=NA,
         as.numeric(max.comps), as.numeric(min.vertices),
         PACKAGE="igraph"
         )
-}
-
-biconnected.components <- function(graph) {
-  # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
-
-  # Function call
-  .Call("R_igraph_biconnected_components", graph,
-        PACKAGE="igraph")
-}
-
-articulation.points <- function(graph) {
-  # Argument checks
-  if (!is.igraph(graph)) { stop("Not a graph object") }
-
-  # Function call
-  .Call("R_igraph_articulation_points", graph,
-        PACKAGE="igraph")
 }

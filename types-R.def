@@ -1,11 +1,81 @@
 
-TYPE GRAPH:
-	INCONV:	if (!is.igraph(%I%)) {
-		  stop("Not a graph object")
-		};
+GRAPH:
+    INCONV: if (!is.igraph(%I%)) { stop("Not a graph object") }
 
-TYPE INTEGER:
-	INCONV: %C% <- as.numeric(%I%);
+INTEGER:
+    INCONV: %I% <- as.numeric(%I%)
 
-TYPE BOOL:
-	INCONV:	%C% <- as.logical(%I%);
+REAL:
+    INCONV: %I% <- as.numeric(%I%)
+
+BOOLEAN:
+    INCONV: %I% <- as.logical(%I%)
+    DEFAULT:
+       True: TRUE
+       False: FALSE
+
+VECTOR:
+    INCONV: %I% <- as.numeric(%I%)
+
+VECTOR_OR_0:
+    INVONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
+
+MATRIX:
+    INCONV: %I% <- structure(as.double(%I%), dim=dim(%I%))
+
+ATTRIBUTES:
+
+CONNECTEDNESS:
+    INCONV: %I% <- as.numeric(pmatch(tolower(%I%), c("weak", "strong"))) ; \
+            if (is.na(%I%)) { stop("invalid `%I%' argument, see docs") }
+    DEFAULT:
+       WEAK: "weak"
+
+NEIMODE:
+    INCONV: %I% <- as.numeric(pmatch(tolower(%I%), c("out", "in", "all", "total")));\
+            if (is.na(%I%)) { stop("invalid `%I%' argument, see docs") } \
+            if (%I%==4) { %I% <- 3 } \
+            %I% <- as.numeric(%I%)
+    DEFAULT:
+       ALL: "all"
+       TOTAL: "total"
+       OUT: "out"
+       IN: "in"
+
+INTEGERPTR:
+    INCONV:
+       INOUT: %I% <- as.numeric(%I%)
+
+BOOLEANPTR:
+
+REALPTR:
+    INCONV:
+       INOUT: %I% <- as.numeric(%I%)
+
+INT:
+    INCONV: %I% <- as.integer(%I%)
+
+VERTEXSET:
+    INCONV: %I% <- as.igraph.vs(%I%)
+    DEFAULT:
+       ALL: V(%I1%)
+
+EDGEWEIGHTS:
+    INCONV: if (is.null(%I%) && "weight" %in% list.edge.attributes(%I1%)) { \
+               %I% <- E(%I1%)$weight \
+            } \
+            if (!is.null(%I%) && any(!is.na(%I%))) { \
+               %I% <- as.numeric(%I%) \
+            } else { \
+               %I% <- NULL \
+            }
+
+NULL:
+    CALL:
+    HEADER:
+
+VECTORLIST:
+
+ARPACKOPT:
+    INCONV:
+      INOUT: %I%.tmp <- igraph.arpack.default; %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp

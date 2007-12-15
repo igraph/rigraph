@@ -119,6 +119,7 @@ write.graph <- function(graph, file, format="edgelist", ...) {
                 "graphml"=write.graph.graphml(graph, file, ...),
                 "dimacs"=write.graph.dimacs(graph, file, ...),
                 "gml"=write.graph.gml(graph, file, ...),
+                "dot"=write.graph.dot(graph, file, ...),
                 stop(paste("Unknown file format:",format))
                 )
 
@@ -214,11 +215,19 @@ read.graph.dimacs <- function(file, directed=TRUE, ...) {
 
   res <- .Call("R_igraph_read_graph_dimacs", file, as.logical(directed),
                PACKAGE="igraph")
-  graph <- res[[1]]
-  graph <- set.graph.attribute(graph, "source", res[[2]])
-  graph <- set.graph.attribute(graph, "target", res[[3]])
-  E(graph)$capacity <- res[[4]]
-  graph
+  if (res[[1]][1] == "max") {
+    graph <- res[[2]]
+    graph <- set.graph.attribute(graph, "problem", res[[1]])
+    graph <- set.graph.attribute(graph, "source", res[[3]])
+    graph <- set.graph.attribute(graph, "target", res[[4]])
+    E(graph)$capacity <- res[[5]]
+    graph
+  } else if (res[[1]][1] == "edge") {
+    graph <- res[[2]]
+    graph <- set.graph.attribute(graph, "problem", res[[1]])
+    V(graph)$label <- res[[3]]
+    graph
+  }
 }
 
 write.graph.dimacs <- function(graph, file,
@@ -272,6 +281,15 @@ write.graph.gml <- function(graph, file, id=NULL, creator=NULL, ...) {
     creator <- as.character(creator)
   }
   .Call("R_igraph_write_graph_gml", graph, file, id, creator,
+        PACKAGE="igraph")
+}
+
+################################################################
+# Dot
+################################################################
+
+write.graph.dot <- function(graph, file, ...) {
+  .Call("R_igraph_write_graph_dot", graph, file,
         PACKAGE="igraph")
 }
 

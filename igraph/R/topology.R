@@ -45,12 +45,58 @@ graph.isocreate <- function(size, number, directed=TRUE) {
         PACKAGE="igraph")
 }
 
-graph.isomorphic.vf2 <- function(graph1, graph2) {
+graph.isomorphic.vf2 <- function(graph1, graph2, map12=FALSE, map21=FALSE) {
 
   if (!is.igraph(graph1) || !is.igraph(graph2)) {
     stop("Not a graph object")
   }
   .Call("R_igraph_isomorphic_vf2", graph1, graph2,
+        as.logical(map12), as.logical(map21),
+        PACKAGE="igraph")
+}  
+
+graph.count.isomorphisms.vf2 <- function(graph1, graph2) {
+
+  if (!is.igraph(graph1) || !is.igraph(graph2)) {
+    stop("Not a graph object")
+  }
+  .Call("R_igraph_count_isomorphisms_vf2", graph1, graph2,
+        PACKAGE="igraph")
+}  
+
+graph.get.isomorphisms.vf2 <- function(graph1, graph2) {
+  
+  if (!is.igraph(graph1) || !is.igraph(graph2)) {
+    stop("Not a graph object")
+  }
+  .Call("R_igraph_get_isomorphisms_vf2", graph1, graph2,
+        PACKAGE="igraph")
+}  
+
+graph.subisomorphic.vf2 <- function(graph1, graph2, map12=FALSE, map21=FALSE) {
+  if (!is.igraph(graph1) || !is.igraph(graph2)) {
+    stop("Not a graph object")
+  }
+  .Call("R_igraph_subisomorphic_vf2", graph1, graph2,
+        as.logical(map12), as.logical(map21),
+        PACKAGE="igraph")
+}  
+
+graph.count.subisomorphisms.vf2 <- function(graph1, graph2) {
+
+  if (!is.igraph(graph1) || !is.igraph(graph2)) {
+    stop("Not a graph object")
+  }
+  .Call("R_igraph_count_subisomorphisms_vf2", graph1, graph2,
+        PACKAGE="igraph")
+}  
+
+graph.get.subisomorphisms.vf2 <- function(graph1, graph2) {
+  
+  if (!is.igraph(graph1) || !is.igraph(graph2)) {
+    stop("Not a graph object")
+  }
+  .Call("R_igraph_get_subisomorphisms_vf2", graph1, graph2,
         PACKAGE="igraph")
 }  
 

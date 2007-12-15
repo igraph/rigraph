@@ -22,8 +22,8 @@
 
 plot.igraph <- function(x, 
                        # SPECIFIC: #####################################
-                       axes=FALSE, xlab="", ylab="",
-                       xlim=c(-1,1), ylim=c(-1,1),
+                       axes=FALSE, xlab="", ylab="", add=FALSE,
+                       xlim=c(-1,1), ylim=c(-1,1), main="", sub="",
                        ...) {
 
   graph <- x
@@ -59,19 +59,24 @@ plot.igraph <- function(x,
   layout             <- params("plot", "layout")
   margin             <- params("plot", "margin")
   margin <- rep(margin, length=4)
+  rescale            <- params("plot", "rescale")
+  asp                <- params("plot", "asp")
 
   # the new style parameters can't do this yet
   arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)
 
   # create the plot
   maxv <- max(vertex.size)
-  xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
-  ylim <- c(ylim[1]-margin[1]-maxv, ylim[2]+margin[3]+maxv)
-  plot(0, 0, type="n", xlab=xlab, ylab=ylab, asp=1, xlim=xlim, ylim=ylim,
-       axes=axes)
-
-  # norm layout to (-1, 1)
-  layout <- i.layout.norm(layout, -1, 1, -1, 1)
+  if (rescale) {
+    # norm layout to (-1, 1)
+    layout <- layout.norm(layout, -1, 1, -1, 1)
+    xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
+    ylim <- c(ylim[1]-margin[1]-maxv, ylim[2]+margin[3]+maxv)
+  }
+  if (!add) {
+    plot(0, 0, type="n", xlab=xlab, ylab=ylab, xlim=xlim, ylim=ylim,
+         axes=axes, asp=asp, main=main, sub=sub)
+  }
   
   # add the edges
   el <- get.edgelist(graph, names=FALSE)
@@ -431,13 +436,16 @@ rglplot.igraph <- function(x, ...) {
   arrow.size <- params("edge","arrow.size")
   
   layout <- params("plot", "layout")
+  rescale <- params("plot", "rescale")
 
   # the new style parameters can't do this yet
   arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)
   
   # norm layout to (-1, 1)
   if (ncol(layout)==2) { layout <- cbind(layout, 0) }
-  layout <- i.layout.norm(layout, -1, 1, -1, 1, -1, 1)
+  if (rescale) {
+    layout <- layout.norm(layout, -1, 1, -1, 1, -1, 1)
+  }
   
   # add the edges, the loops are handled separately
   el <- get.edgelist(graph, names=FALSE)

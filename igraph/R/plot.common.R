@@ -26,8 +26,6 @@
 
 i.parse.plot.params <- function(graph, params) {
   
-  ## TODO: check that names are present
-
   ## store the arguments
   p <- list(vertex=list(), edge=list(), plot=list())
   for (n in names(params)) {
@@ -42,6 +40,24 @@ i.parse.plot.params <- function(graph, params) {
     }
   }
 
+  ## check that names are present
+
+  mis <- ! names(p[["vertex"]]) %in% names(i.default.values$vertex) 
+  if (any(mis)) {
+    stop("Unknown vertex parameters: ",
+         paste(sep=", ", collapse=", ", names(p[["vertex"]])[mis]))
+  }
+  mis <- ! names(p[["edge"]]) %in% names(i.default.values$edge) 
+  if (any(mis)) {
+    stop("Unknown edge parameters: ",
+         paste(sep=", ", collapse=", ", names(p[["edge"]])[mis]))
+  }
+  mis <- ! names(p[["plot"]]) %in% names(i.default.values$plot) 
+  if (any(mis)) {
+    stop("Unknown plot parameters: ",
+         paste(sep=", ", collapse=", ", names(p[["plot"]]) [ mis ]))
+  }
+  
   func <- function(type, name, range=NULL, dontcall=FALSE) {
     if (! type %in% names(p)) {
       stop("Invalid plot option type")
@@ -252,4 +268,6 @@ i.default.values <- list(vertex=list(color="SkyBlue2",
                            arrow.size=1,
                            arrow.mode=i.get.arrow.mode),
                          plot=list(layout=layout.random,
-                           margin=c(0,0,0,0)))
+                           margin=c(0,0,0,0),
+                           rescale=TRUE,
+                           asp=1))
