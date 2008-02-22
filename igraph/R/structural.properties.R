@@ -112,8 +112,7 @@ closeness <- function(graph, v=V(graph), mode=c("all", "out", "in")) {
         PACKAGE="igraph")
 }
 
-shortest.paths <- function(graph, v=V(graph), mode=c("all", "out", "in"),
-                           weights=NULL) {
+shortest.paths <- function(graph, v=V(graph), mode=c("all", "out", "in")) {
 
   if (!is.igraph(graph)) {
     stop("Not a graph object")
@@ -121,17 +120,9 @@ shortest.paths <- function(graph, v=V(graph), mode=c("all", "out", "in"),
   mode <- igraph.match.arg(mode)
   mode <- switch(mode, "out"=1, "in"=2, "all"=3)
 
-  if (is.null(weights)) {
-    if ("weight" %in% list.edge.attributes(graph)) {
-      weights <- as.numeric(E(graph)$weight)
-    }
-  } else if (length(weights)==1 && is.na(weights)) {
-    weights <- NULL
-  }
-
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   .Call("R_igraph_shortest_paths", graph, as.igraph.vs(v),
-        as.numeric(mode), weights,
+        as.numeric(mode),
         PACKAGE="igraph")
 }
 
