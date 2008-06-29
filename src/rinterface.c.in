@@ -2008,7 +2008,7 @@ SEXP R_igraph_recent_degree_game(SEXP pn, SEXP ppower, SEXP pwindow,
   
 SEXP R_igraph_layout_kamada_kawai(SEXP graph, SEXP pniter, SEXP pinitemp, 
 				  SEXP pcoolexp, SEXP pkkconst, SEXP psigma, 
-				  SEXP start, SEXP pfixz,
+				  SEXP start,
 				  SEXP verbose) {
   
   igraph_t g;
@@ -2041,15 +2041,13 @@ SEXP R_igraph_layout_kamada_kawai(SEXP graph, SEXP pniter, SEXP pinitemp,
 
 SEXP R_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP pniter, SEXP pinitemp,
 				     SEXP pcoolexp, SEXP pkkconst, 
-				     SEXP psigma, SEXP start, SEXP pfixz,
-				     SEXP verbose) {
+				     SEXP psigma, SEXP start, SEXP verbose) {
   igraph_t g;
   igraph_integer_t niter=REAL(pniter)[0];
   igraph_real_t initemp=REAL(pinitemp)[0];
   igraph_real_t coolexp=REAL(pcoolexp)[0];
   igraph_real_t kkconst=REAL(pkkconst)[0];
   igraph_real_t sigma=REAL(psigma)[0];
-  igraph_bool_t fixz=LOGICAL(pfixz)[0];
   igraph_matrix_t res;
   SEXP result;
   
@@ -2062,7 +2060,7 @@ SEXP R_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP pniter, SEXP pinitemp,
     R_SEXP_to_igraph_matrix_copy(start, &res);
   }
   igraph_layout_kamada_kawai_3d(&g, &res, niter, sigma, 
-				initemp, coolexp, kkconst, !isNull(start), fixz);
+				initemp, coolexp, kkconst, !isNull(start));
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
   
@@ -3431,7 +3429,6 @@ SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP pniter,
 					  SEXP pmaxdelta, SEXP parea,
 					  SEXP pcoolexp, SEXP prepulserad,
 					  SEXP pweights, SEXP start,
-					  SEXP pminy, SEXP pmaxy,
 					  SEXP verbose) {
   igraph_t g;
   igraph_integer_t niter=REAL(pniter)[0];
@@ -3441,15 +3438,12 @@ SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP pniter,
   igraph_real_t repulserad=REAL(prepulserad)[0];
   igraph_vector_t weights, *ppweights=0;
   igraph_matrix_t res;
-  igraph_vector_t miny, maxy, *ppminy=0, *ppmaxy=0;
   SEXP result;
   
   R_igraph_before2(verbose, "3D FR layout");
   
   R_SEXP_to_igraph(graph, &g);
   if (!isNull(pweights)) { R_SEXP_to_vector(pweights, &weights);ppweights=&weights; }
-  if (!isNull(pminy)) { ppminy=&miny; R_SEXP_to_vector(pminy, &miny); }
-  if (!isNull(pmaxy)) { ppmaxy=&maxy; R_SEXP_to_vector(pmaxy, &maxy); }  
   if (isNull(start)) {
     igraph_matrix_init(&res, 0, 0);
   } else {
@@ -3457,7 +3451,7 @@ SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP pniter,
   }
   igraph_layout_fruchterman_reingold(&g, &res, niter, maxdelta, area, 
 				     coolexp, repulserad, !isNull(start),
-				     ppweights, ppminy, ppmaxy);
+				     ppweights);
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
   
@@ -4654,27 +4648,22 @@ SEXP R_igraph_reciprocity(SEXP graph, SEXP pignore_loops) {
   return result;
 }
   
-SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot, 
-				      SEXP pmode, SEXP prootlevel, SEXP pcirc) {
+SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot, SEXP pcirc) {
   
   igraph_t g;
-  igraph_vector_t root;
+  igraph_integer_t root=REAL(proot)[0];
   igraph_matrix_t res;
   igraph_bool_t circ=LOGICAL(pcirc)[0];
-  int mode=REAL(pmode)[0];
-  igraph_vector_t rootlevel;
   SEXP result;
   
   R_igraph_before();
   
   R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_vector(proot, &root);
-  R_SEXP_to_vector(prootlevel, &rootlevel);
   igraph_matrix_init(&res, 0, 0);
   if (!circ) {
-    igraph_layout_reingold_tilford(&g, &res, mode, &root, &rootlevel);
+    igraph_layout_reingold_tilford(&g, &res, root);
   } else {
-    igraph_layout_reingold_tilford_circular(&g, &res, mode, &root, &rootlevel);
+    igraph_layout_reingold_tilford_circular(&g, &res, root);
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);

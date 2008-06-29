@@ -92,19 +92,12 @@ layout.fruchterman.reingold <- function(graph, ..., dim=2,
   if (!is.null(params$start)) {
     params$start <- structure(as.numeric(params$start), dim=dim(params$start))
   }
-  if (!is.null(params$miny)) {
-    params$miny <- as.double(params$miny)
-  }
-  if (!is.null(params$maxy)) {
-    params$maxy <- as.double(params$maxy)
-  }
   
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   .Call(fn, graph,
         as.double(params$niter), as.double(params$maxdelta),
         as.double(params$area), as.double(params$coolexp),
         as.double(params$repulserad), params$weights, params$start,
-        params$miny, params$maxy,
         as.logical(verbose),
         PACKAGE="igraph")
 }
@@ -168,21 +161,14 @@ layout.kamada.kawai<-function(graph, ..., dim=2, verbose=igraph.par("verbose"),
   if (is.null(params$initemp))    { params$initemp <- 10   }
   if (is.null(params$coolexp))    { params$coolexp <- 0.99 }
   if (is.null(params$kkconst))    { params$kkconst <- vc^2 }
-  if (is.null(params$fixz))       { params$fixz    <- FALSE}
   if (!is.null(params$start)) {
     params$start <- structure(as.numeric(params$start), dim=dim(params$start))
   }
-
-  if (params$fixz && dim==2) {
-    warning("`fixz' works for 3D only, ignored.")
-  }
-  
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   .Call(fn, graph,
         as.double(params$niter), as.double(params$initemp),
         as.double(params$coolexp), as.double(params$kkconst),
-        as.double(params$sigma), params$start, as.logical(params$fixz),
-        as.logical(verbose),
+        as.double(params$sigma), params$start, as.logical(verbose),
         PACKAGE="igraph")
 }
 
@@ -252,16 +238,11 @@ layout.reingold.tilford <- function(graph, ..., params=list()) {
     params <- list(...)
   }
 
-  if (is.null(params$root))          { params$root       <- numeric()  }
-  if (is.null(params$circular))      { params$circular   <- FALSE      }
-  if (is.null(params$rootlevel))     { params$rootlevel  <- numeric()  }
-  if (is.null(params$mode))          { params$mode       <- "out"      }
-  params$mode <- tolower(params$mode)
-  params$mode <- switch(params$mode, "out"=1, "in"=2, "all"=3, "total"=3)
+  if (is.null(params$root))          { params$root       <- 0     }
+  if (is.null(params$circular))      { params$circular   <- FALSE }
 
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
   .Call("R_igraph_layout_reingold_tilford", graph, as.double(params$root),
-        as.double(params$mode), as.double(params$rootlevel),
         as.logical(params$circular),
         PACKAGE="igraph")
 }
