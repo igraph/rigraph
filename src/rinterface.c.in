@@ -181,16 +181,16 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
 		   R_igraph_attribute_protected_size, NEW_LIST(4));
     result=VECTOR_ELT(R_igraph_attribute_protected,
 		      R_igraph_attribute_protected_size);
-    SET_VECTOR_ELT(result, 0, NEW_NUMERIC(4));
-    REAL(VECTOR_ELT(result, 0))[3] = R_igraph_attribute_protected_size;
+    SET_VECTOR_ELT(result, 0, NEW_INTEGER(4));
+    INTEGER(VECTOR_ELT(result, 0))[3] = R_igraph_attribute_protected_size;
     R_igraph_attribute_protected_size += 1;
   } else {
     PROTECT(result=NEW_LIST(4));
-    SET_VECTOR_ELT(result, 0, NEW_NUMERIC(3));
+    SET_VECTOR_ELT(result, 0, NEW_INTEGER(3));
   }
-  REAL(VECTOR_ELT(result, 0))[0]=0; /* R objects */
-  REAL(VECTOR_ELT(result, 0))[1]=1; /* igraph_t objects */
-  REAL(VECTOR_ELT(result, 0))[2]=1; /* whether the graph is safe */
+  INTEGER(VECTOR_ELT(result, 0))[0]=0; /* R objects */
+  INTEGER(VECTOR_ELT(result, 0))[1]=1; /* igraph_t objects */
+  INTEGER(VECTOR_ELT(result, 0))[2]=1; /* whether the graph is safe */
   for (i=1; i<3; i++) {
     SET_VECTOR_ELT(result, i+1, NEW_LIST(0)); /* gal, val, eal */
   }
@@ -249,10 +249,10 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
 
 void R_igraph_attribute_destroy(igraph_t *graph) {
   SEXP attr=graph->attr;
-  REAL(VECTOR_ELT(attr, 0))[1] -= 1; /* refcount for igraph_t */
+  INTEGER(VECTOR_ELT(attr, 0))[1] -= 1; /* refcount for igraph_t */
   if (!R_igraph_attribute_protected &&
-      REAL(VECTOR_ELT(attr, 0))[1]==0 &&
-      REAL(VECTOR_ELT(attr, 0))[2]==1) {
+      INTEGER(VECTOR_ELT(attr, 0))[1]==0 &&
+      INTEGER(VECTOR_ELT(attr, 0))[2]==1) {
     UNPROTECT_PTR(attr);
   }
   graph->attr=0;
@@ -269,9 +269,9 @@ int R_igraph_attribute_copy(igraph_t *to, const igraph_t *from,
   SEXP fromattr=from->attr;
   if (ga && va && ea) {
     to->attr=from->attr;
-    REAL(VECTOR_ELT(fromattr, 0))[1] += 1; /* refcount only */
+    INTEGER(VECTOR_ELT(fromattr, 0))[1] += 1; /* refcount only */
     if (!R_igraph_attribute_protected && 
-	REAL(VECTOR_ELT(fromattr, 0))[1] == 1) {
+	INTEGER(VECTOR_ELT(fromattr, 0))[1] == 1) {
       PROTECT(to->attr);
     }
   } else {
@@ -296,28 +296,28 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
   SEXP val, rep=0, names, newnames;
   igraph_vector_t news;
   long int valno, i, origlen, nattrno, newattrs;
-  if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
+  if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) {
     SEXP newattr=duplicate(attr);
     if (!R_igraph_attribute_protected) { PROTECT(newattr); }
-    REAL(VECTOR_ELT(attr, 0))[1] -= 1;
+    INTEGER(VECTOR_ELT(attr, 0))[1] -= 1;
     if (!R_igraph_attribute_protected &&
-	REAL(VECTOR_ELT(attr, 0))[1] == 0) {
+	INTEGER(VECTOR_ELT(attr, 0))[1] == 0) {
       UNPROTECT_PTR(attr);
     }
-    REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-    REAL(VECTOR_ELT(newattr, 0))[1] = 1;
+    INTEGER(VECTOR_ELT(newattr, 0))[0] = 0;
+    INTEGER(VECTOR_ELT(newattr, 0))[1] = 1;
     if (R_igraph_attribute_protected) {
       long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
       if (alen == 4) {
-	pos=REAL(VECTOR_ELT(attr, 0))[3];
+	pos=INTEGER(VECTOR_ELT(attr, 0))[3];
 	SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
       } else {
-	SEXP tmp=NEW_NUMERIC(4);
+	SEXP tmp=NEW_INTEGER(4);
 	PROTECT(tmp);
-	REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-	REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-	REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-	pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
+	INTEGER(tmp)[0] = INTEGER(VECTOR_ELT(attr, 0))[0];
+	INTEGER(tmp)[1] = INTEGER(VECTOR_ELT(attr, 0))[1];
+	INTEGER(tmp)[2] = INTEGER(VECTOR_ELT(attr, 0))[2];
+	pos = INTEGER(tmp)[3] = R_igraph_attribute_protected_size;
 	R_igraph_attribute_protected_size += 1;
 	SET_VECTOR_ELT(newattr, 0, tmp);
 	UNPROTECT(1);
@@ -450,15 +450,15 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
 /*   SEXP attr=graph->attr; */
 /*   SEXP eal, val; */
 /*   long int valno, ealno, i; */
-/*   if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) { */
+/*   if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) { */
 /*     SEXP newattr; */
 /*     PROTECT(newattr=duplicate(attr)); */
-/*     REAL(VECTOR_ELT(attr, 0))[1] -= 1; */
-/*     if (REAL(VECTOR_ELT(attr, 0))[1] == 0) { */
+/*     INTEGER(VECTOR_ELT(attr, 0))[1] -= 1; */
+/*     if (INTEGER(VECTOR_ELT(attr, 0))[1] == 0) { */
 /*       UNPROTECT_PTR(attr); */
 /*     } */
-/*     REAL(VECTOR_ELT(newattr, 0))[0] = 0; */
-/*     REAL(VECTOR_ELT(newattr, 0))[1] = 1; */
+/*     INTEGER(VECTOR_ELT(newattr, 0))[0] = 0; */
+/*     INTEGER(VECTOR_ELT(newattr, 0))[1] = 1; */
 /*     attr=graph->attr=newattr; */
 /*   } */
 
@@ -523,28 +523,28 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
     SEXP ss;
 
     /* We copy if we need to */
-    if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
+    if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) {
       SEXP newattr=duplicate(attr);
       if (!R_igraph_attribute_protected) { PROTECT(newattr); }
-      REAL(VECTOR_ELT(attr, 0))[1] -= 1;
+      INTEGER(VECTOR_ELT(attr, 0))[1] -= 1;
       if (!R_igraph_attribute_protected &&
-	  REAL(VECTOR_ELT(attr, 0))[1] == 0) {
+	  INTEGER(VECTOR_ELT(attr, 0))[1] == 0) {
 	UNPROTECT_PTR(attr);
       }
-      REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-      REAL(VECTOR_ELT(newattr, 0))[1] = 1;
+      INTEGER(VECTOR_ELT(newattr, 0))[0] = 0;
+      INTEGER(VECTOR_ELT(newattr, 0))[1] = 1;
       if (R_igraph_attribute_protected) {
 	long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
 	if (alen == 4) {
-	  pos=REAL(VECTOR_ELT(attr, 0))[3];
+	  pos=INTEGER(VECTOR_ELT(attr, 0))[3];
 	  SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
 	} else {
-	  SEXP tmp=NEW_NUMERIC(4);
+	  SEXP tmp=NEW_INTEGER(4);
 	  PROTECT(tmp);
-	  REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-	  REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-	  REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-	  pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
+	  INTEGER(tmp)[0] = INTEGER(VECTOR_ELT(attr, 0))[0];
+	  INTEGER(tmp)[1] = INTEGER(VECTOR_ELT(attr, 0))[1];
+	  INTEGER(tmp)[2] = INTEGER(VECTOR_ELT(attr, 0))[2];
+	  pos = INTEGER(tmp)[3] = R_igraph_attribute_protected_size;
 	  R_igraph_attribute_protected_size += 1;
 	  SET_VECTOR_ELT(newattr, 0, tmp);
 	  UNPROTECT(1);
@@ -631,28 +631,28 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
   igraph_vector_t news;
   long int ealno, i, origlen, nattrno, newattrs;  
   long int ne=igraph_vector_size(edges)/2;
-  if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
+  if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) {
     SEXP newattr=duplicate(attr);
     if (!R_igraph_attribute_protected) { PROTECT(newattr); }
-    REAL(VECTOR_ELT(attr, 0))[1] -= 1;
+    INTEGER(VECTOR_ELT(attr, 0))[1] -= 1;
     if (!R_igraph_attribute_protected &&
-	REAL(VECTOR_ELT(attr, 0))[1] == 0) {
+	INTEGER(VECTOR_ELT(attr, 0))[1] == 0) {
       UNPROTECT_PTR(attr);
     }
-    REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-    REAL(VECTOR_ELT(newattr, 0))[1] = 1;
+    INTEGER(VECTOR_ELT(newattr, 0))[0] = 0;
+    INTEGER(VECTOR_ELT(newattr, 0))[1] = 1;
     if (R_igraph_attribute_protected) {
       long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
       if (alen == 4) {
-	pos=REAL(VECTOR_ELT(attr, 0))[3];
+	pos=INTEGER(VECTOR_ELT(attr, 0))[3];
 	SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
       } else {
-	SEXP tmp=NEW_NUMERIC(4);
+	SEXP tmp=NEW_INTEGER(4);
 	PROTECT(tmp);
-	REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-	REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-	REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-	pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
+	INTEGER(tmp)[0] = INTEGER(VECTOR_ELT(attr, 0))[0];
+	INTEGER(tmp)[1] = INTEGER(VECTOR_ELT(attr, 0))[1];
+	INTEGER(tmp)[2] = INTEGER(VECTOR_ELT(attr, 0))[2];
+	pos = INTEGER(tmp)[3] = R_igraph_attribute_protected_size;
 	R_igraph_attribute_protected_size += 1;
 	SET_VECTOR_ELT(newattr, 0, tmp);
 	UNPROTECT(1);
@@ -784,15 +784,15 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
 /*   SEXP attr=graph->attr; */
 /*   SEXP eal; */
 /*   long int ealno, i; */
-/*   if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) { */
+/*   if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) { */
 /*     SEXP newattr; */
 /*     PROTECT(newattr=duplicate(attr)); */
-/*     REAL(VECTOR_ELT(attr, 0))[1] -= 1; */
-/*     if (REAL(VECTOR_ELT(attr, 0))[1] == 0) { */
+/*     INTEGER(VECTOR_ELT(attr, 0))[1] -= 1; */
+/*     if (INTEGER(VECTOR_ELT(attr, 0))[1] == 0) { */
 /*       UNPROTECT_PTR(attr); */
 /*     } */
-/*     REAL(VECTOR_ELT(newattr, 0))[0] = 0; */
-/*     REAL(VECTOR_ELT(newattr, 0))[1] = 1; */
+/*     INTEGER(VECTOR_ELT(newattr, 0))[0] = 0; */
+/*     INTEGER(VECTOR_ELT(newattr, 0))[1] = 1; */
 /*     attr=graph->attr=newattr; */
 /*   } */
 
@@ -833,28 +833,28 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
     SEXP ss;
     
     /* We copy if we need to */
-    if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
+    if (INTEGER(VECTOR_ELT(attr, 0))[0]+INTEGER(VECTOR_ELT(attr, 0))[1] > 1) {
       SEXP newattr=duplicate(attr);
       if (!R_igraph_attribute_protected) { PROTECT(newattr); }
-      REAL(VECTOR_ELT(attr, 0))[1] -= 1;
+      INTEGER(VECTOR_ELT(attr, 0))[1] -= 1;
       if (!R_igraph_attribute_protected &&
-	  REAL(VECTOR_ELT(attr, 0))[1] == 0) {
+	  INTEGER(VECTOR_ELT(attr, 0))[1] == 0) {
       UNPROTECT_PTR(attr);
       }
-      REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-      REAL(VECTOR_ELT(newattr, 0))[1] = 1;
+      INTEGER(VECTOR_ELT(newattr, 0))[0] = 0;
+      INTEGER(VECTOR_ELT(newattr, 0))[1] = 1;
       if (R_igraph_attribute_protected) {
 	long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
 	if (alen == 4) {
-	  pos=REAL(VECTOR_ELT(attr, 0))[3];
+	  pos=INTEGER(VECTOR_ELT(attr, 0))[3];
 	  SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
 	} else {
-	  SEXP tmp=NEW_NUMERIC(4);
+	  SEXP tmp=NEW_INTEGER(4);
 	  PROTECT(tmp);
-	  REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-	  REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-	  REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-	  pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
+	  INTEGER(tmp)[0] = INTEGER(VECTOR_ELT(attr, 0))[0];
+	  INTEGER(tmp)[1] = INTEGER(VECTOR_ELT(attr, 0))[1];
+	  INTEGER(tmp)[2] = INTEGER(VECTOR_ELT(attr, 0))[2];
+	  pos = INTEGER(tmp)[3] = R_igraph_attribute_protected_size;
 	  R_igraph_attribute_protected_size += 1;
 	  SET_VECTOR_ELT(newattr, 0, tmp);
 	  UNPROTECT(1);
@@ -1701,8 +1701,8 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
   }
 
   /* Not safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=0;
-  REAL(VECTOR_ELT(toattr, 0))[2]=0;
+  INTEGER(VECTOR_ELT(attr, 0))[2]=0;
+  INTEGER(VECTOR_ELT(toattr, 0))[2]=0;
   
   PROTECT(res=NEW_LIST(keepno));
   PROTECT(newnames=NEW_CHARACTER(keepno));
@@ -1810,8 +1810,8 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
   } 
 
   /* It is now safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=1;
-  REAL(VECTOR_ELT(toattr, 0))[2]=1;
+  INTEGER(VECTOR_ELT(attr, 0))[2]=1;
+  INTEGER(VECTOR_ELT(toattr, 0))[2]=1;
 
   igraph_free(funcs);
   igraph_free(TODO);
@@ -1866,8 +1866,8 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
   }
 
   /* Not safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=0;
-  REAL(VECTOR_ELT(toattr, 0))[2]=0;
+  INTEGER(VECTOR_ELT(attr, 0))[2]=0;
+  INTEGER(VECTOR_ELT(toattr, 0))[2]=0;
 
   PROTECT(res=NEW_LIST(keepno));
   PROTECT(newnames=NEW_CHARACTER(keepno));
@@ -1974,8 +1974,8 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
   }   
 
   /* It is now safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=1;
-  REAL(VECTOR_ELT(toattr, 0))[2]=1;
+  INTEGER(VECTOR_ELT(attr, 0))[2]=1;
+  INTEGER(VECTOR_ELT(toattr, 0))[2]=1;
 
   igraph_free(funcs);
   igraph_free(TODO);
@@ -2355,35 +2355,35 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   long int no_of_edges=igraph_ecount(graph);
   
   PROTECT(result=NEW_LIST(9));
-  SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
+  SET_VECTOR_ELT(result, 0, NEW_INTEGER(1));
   SET_VECTOR_ELT(result, 1, NEW_LOGICAL(1));
-  SET_VECTOR_ELT(result, 2, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 3, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 4, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 5, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 6, NEW_NUMERIC(no_of_nodes+1));
-  SET_VECTOR_ELT(result, 7, NEW_NUMERIC(no_of_nodes+1));
+  SET_VECTOR_ELT(result, 2, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 3, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 4, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 5, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 6, NEW_INTEGER(no_of_nodes+1));
+  SET_VECTOR_ELT(result, 7, NEW_INTEGER(no_of_nodes+1));
 
-  REAL(VECTOR_ELT(result, 0))[0]=no_of_nodes;
+  INTEGER(VECTOR_ELT(result, 0))[0]=no_of_nodes;
   LOGICAL(VECTOR_ELT(result, 1))[0]=graph->directed;
-  memcpy(REAL(VECTOR_ELT(result, 2)), graph->from.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 3)), graph->to.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 4)), graph->oi.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 5)), graph->ii.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 6)), graph->os.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
-  memcpy(REAL(VECTOR_ELT(result, 7)), graph->is.stor_begin, 
-	 sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
+  memcpy(INTEGER(VECTOR_ELT(result, 2)), graph->from.stor_begin,
+	 sizeof(graph->from.stor_begin[0])*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 3)), graph->to.stor_begin,
+	 sizeof(graph->to.stor_begin[0])*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 4)), graph->oi.stor_begin,
+	 sizeof(graph->oi.stor_begin[0])*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 5)), graph->ii.stor_begin,
+	 sizeof(graph->ii.stor_begin[0])*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 6)), graph->os.stor_begin,
+	 sizeof(graph->os.stor_begin[0])*(size_t) (no_of_nodes+1));
+  memcpy(INTEGER(VECTOR_ELT(result, 7)), graph->is.stor_begin,
+	 sizeof(graph->is.stor_begin[0])*(size_t) (no_of_nodes+1));
   
   SET_CLASS(result, ScalarString(CREATE_STRING_VECTOR("igraph")));
 
   /* Attributes */
   SET_VECTOR_ELT(result, 8, graph->attr);
-  REAL(VECTOR_ELT(graph->attr, 0))[0] += 1;
+  INTEGER(VECTOR_ELT(graph->attr, 0))[0] += 1;
   
   UNPROTECT(1);
   return result;
@@ -2919,18 +2919,18 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   
-  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
+  res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  R_SEXP_to_vector(VECTOR_ELT(graph, 2), &res->from);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 3), &res->to);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 4), &res->oi);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 5), &res->ii);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 6), &res->os);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 7), &res->is);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 2), &res->from);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 3), &res->to);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 4), &res->oi);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 5), &res->ii);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 6), &res->os);
+  R_SEXP_to_vector_int(VECTOR_ELT(graph, 7), &res->is);
   
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 0; /* igraph_t objects */
+  INTEGER(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
+  INTEGER(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 0; /* igraph_t objects */
   res->attr=VECTOR_ELT(graph, 8);
   
   return 0;
@@ -2938,24 +2938,24 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 
 int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   
-  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
+  res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  igraph_vector_init_copy(&res->from, REAL(VECTOR_ELT(graph, 2)), 
-		   GET_LENGTH(VECTOR_ELT(graph, 2)));
-  igraph_vector_init_copy(&res->to, REAL(VECTOR_ELT(graph, 3)), 
-		   GET_LENGTH(VECTOR_ELT(graph, 3)));
-  igraph_vector_init_copy(&res->oi, REAL(VECTOR_ELT(graph, 4)), 
-		   GET_LENGTH(VECTOR_ELT(graph, 4)));
-  igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, 5)), 
-		   GET_LENGTH(VECTOR_ELT(graph, 5)));
-  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, 6)), 
-		   GET_LENGTH(VECTOR_ELT(graph, 6)));
-  igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, 7)),
-		   GET_LENGTH(VECTOR_ELT(graph, 7)));
+  igraph_vector_int_init_copy(&res->from, INTEGER(VECTOR_ELT(graph, 2)),
+			      GET_LENGTH(VECTOR_ELT(graph, 2)));
+  igraph_vector_int_init_copy(&res->to, INTEGER(VECTOR_ELT(graph, 3)),
+			      GET_LENGTH(VECTOR_ELT(graph, 3)));
+  igraph_vector_int_init_copy(&res->oi, INTEGER(VECTOR_ELT(graph, 4)),
+			      GET_LENGTH(VECTOR_ELT(graph, 4)));
+  igraph_vector_int_init_copy(&res->ii, INTEGER(VECTOR_ELT(graph, 5)),
+			      GET_LENGTH(VECTOR_ELT(graph, 5)));
+  igraph_vector_int_init_copy(&res->os, INTEGER(VECTOR_ELT(graph, 6)),
+			      GET_LENGTH(VECTOR_ELT(graph, 6)));
+  igraph_vector_int_init_copy(&res->is, INTEGER(VECTOR_ELT(graph, 7)),
+			      GET_LENGTH(VECTOR_ELT(graph, 7)));
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 1; /* igraph_t objects */
+  INTEGER(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects */
+  INTEGER(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 1; /* igraph_t objects */
   PROTECT(res->attr=VECTOR_ELT(graph, 8));  
 
   return 0;
