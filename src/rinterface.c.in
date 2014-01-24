@@ -2920,13 +2920,13 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   
   res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
-  res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 2), &res->from);
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 3), &res->to);
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 4), &res->oi);
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 5), &res->ii);
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 6), &res->os);
-  R_SEXP_to_vector_int(VECTOR_ELT(graph, 7), &res->is);
+  res->directed=LOGICAL(AS_LOGICAL(VECTOR_ELT(graph, 1)))[0];
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 2)), &res->from);
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 3)), &res->to);
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 4)), &res->oi);
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 5)), &res->ii);
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 6)), &res->os);
+  R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 7)), &res->is);
   
   /* attributes */
   INTEGER(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
@@ -2940,17 +2940,23 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   
   res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  igraph_vector_int_init_copy(&res->from, INTEGER(VECTOR_ELT(graph, 2)),
+  igraph_vector_int_init_copy(&res->from,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 2))),
 			      GET_LENGTH(VECTOR_ELT(graph, 2)));
-  igraph_vector_int_init_copy(&res->to, INTEGER(VECTOR_ELT(graph, 3)),
+  igraph_vector_int_init_copy(&res->to,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 3))),
 			      GET_LENGTH(VECTOR_ELT(graph, 3)));
-  igraph_vector_int_init_copy(&res->oi, INTEGER(VECTOR_ELT(graph, 4)),
+  igraph_vector_int_init_copy(&res->oi,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 4))),
 			      GET_LENGTH(VECTOR_ELT(graph, 4)));
-  igraph_vector_int_init_copy(&res->ii, INTEGER(VECTOR_ELT(graph, 5)),
+  igraph_vector_int_init_copy(&res->ii,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 5))),
 			      GET_LENGTH(VECTOR_ELT(graph, 5)));
-  igraph_vector_int_init_copy(&res->os, INTEGER(VECTOR_ELT(graph, 6)),
+  igraph_vector_int_init_copy(&res->os,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 6))),
 			      GET_LENGTH(VECTOR_ELT(graph, 6)));
-  igraph_vector_int_init_copy(&res->is, INTEGER(VECTOR_ELT(graph, 7)),
+  igraph_vector_int_init_copy(&res->is,
+			      INTEGER(AS_INTEGER(VECTOR_ELT(graph, 7))),
 			      GET_LENGTH(VECTOR_ELT(graph, 7)));
 
   /* attributes */
