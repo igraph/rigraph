@@ -17,7 +17,7 @@ test_that("We are compatible with old objects", {
   g[[8]] <- as.numeric(g[[8]])
 
   class(g) <- "igraph"
-  c2 <- closeness(g)
+  expect_that(c2 <- closeness(g), gives_warning("old format"))
 
   expect_that(c1, equals(c2))
 })

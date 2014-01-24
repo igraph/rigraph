@@ -2919,6 +2919,10 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   
+  if (!IS_INTEGER(VECTOR_ELT(graph, 2))) {
+    warning("igraph object in old format, please update, see ?update_format");
+  }
+
   res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
   res->directed=LOGICAL(AS_LOGICAL(VECTOR_ELT(graph, 1)))[0];
   R_SEXP_to_vector_int(AS_INTEGER(VECTOR_ELT(graph, 2)), &res->from);
@@ -2937,6 +2941,10 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 }
 
 int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
+
+  if (!IS_INTEGER(VECTOR_ELT(graph, 2))) {
+    warning("igraph object in old format, please update, see ?update_format");
+  }
   
   res->n=(igraph_integer_t) INTEGER(AS_INTEGER(VECTOR_ELT(graph, 0)))[0];
   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
