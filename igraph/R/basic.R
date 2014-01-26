@@ -53,4 +53,10 @@ get.edge <- function(graph, id) {
   res+1
 }
 
+update_format <- function(graph) {
+  if (!is.igraph(graph)) {
+    stop("Not a graph object")
+  }
 
+  .Call("R_igraph_update_format", graph, PACKAGE="igraph")
+}

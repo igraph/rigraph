@@ -210,3 +210,59 @@ SEXP R_igraph_srand(SEXP pseed) {
   srand(seed);
   return R_NilValue;
 }
+
+SEXP R_igraph_update_format(SEXP graph) {
+  SEXP res;
+  
+  if (IS_INTEGER(VECTOR_ELT(graph, 0)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 2)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 3)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 4)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 5)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 6)) &&
+      IS_INTEGER(VECTOR_ELT(graph, 7))) {
+    return graph;
+  } else {
+    PROTECT(res=NEW_LIST(9));
+    if (IS_INTEGER(VECTOR_ELT(graph, 0))) {
+      SET_VECTOR_ELT(res, 0, duplicate(VECTOR_ELT(graph, 0)));
+    } else {
+      SET_VECTOR_ELT(res, 0, AS_INTEGER(VECTOR_ELT(graph, 0)));
+    }
+    SET_VECTOR_ELT(res, 1, duplicate(VECTOR_ELT(graph, 1)));
+    if (IS_INTEGER(VECTOR_ELT(graph, 2))) {
+      SET_VECTOR_ELT(res, 2, duplicate(VECTOR_ELT(graph, 2)));
+    } else {
+      SET_VECTOR_ELT(res, 2, AS_INTEGER(VECTOR_ELT(graph, 2)));
+    }
+    if (IS_INTEGER(VECTOR_ELT(graph, 3))) {
+      SET_VECTOR_ELT(res, 3, duplicate(VECTOR_ELT(graph, 3)));
+    } else {
+      SET_VECTOR_ELT(res, 3, AS_INTEGER(VECTOR_ELT(graph, 3)));
+    }
+    if (IS_INTEGER(VECTOR_ELT(graph, 4))) {
+      SET_VECTOR_ELT(res, 4, duplicate(VECTOR_ELT(graph, 4)));
+    } else {
+      SET_VECTOR_ELT(res, 4, AS_INTEGER(VECTOR_ELT(graph, 4)));
+    }
+    if (IS_INTEGER(VECTOR_ELT(graph, 5))) {
+      SET_VECTOR_ELT(res, 5, duplicate(VECTOR_ELT(graph, 5)));
+    } else {
+      SET_VECTOR_ELT(res, 5, AS_INTEGER(VECTOR_ELT(graph, 5)));
+    }
+    if (IS_INTEGER(VECTOR_ELT(graph, 6))) {
+      SET_VECTOR_ELT(res, 6, duplicate(VECTOR_ELT(graph, 6)));
+    } else {
+      SET_VECTOR_ELT(res, 6, AS_INTEGER(VECTOR_ELT(graph, 6)));
+    }
+    if (IS_INTEGER(VECTOR_ELT(graph, 7))) {
+      SET_VECTOR_ELT(res, 7, duplicate(VECTOR_ELT(graph, 7)));
+    } else {
+      SET_VECTOR_ELT(res, 7, AS_INTEGER(VECTOR_ELT(graph, 7)));
+    }
+    SET_VECTOR_ELT(res, 8, duplicate(VECTOR_ELT(graph, 8)));
+    SET_CLASS(res, ScalarString(CREATE_STRING_VECTOR("igraph")));
+    UNPROTECT(1);
+    return res;
+  }
+}

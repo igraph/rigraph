@@ -59,7 +59,7 @@ S3method(print, igraph.es)
 
 export(is.igraph, is.named, is.weighted, is.bipartite,
        are.connected, print.igraph, str.igraph, summary.igraph,
-       is.directed, get.edge)
+       is.directed, get.edge, update_format)
 
 S3method("str", "igraph")
 
