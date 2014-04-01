@@ -1,6 +1,6 @@
 
 #   IGraph R package
-#   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
+#   Copyright (C) 2014  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
 #   
 #   This program is free software; you can redistribute it and/or modify
@@ -20,25 +20,6 @@
 #
 ###################################################################
 
-.onAttach <- function(library, pkg) {
-    ## we can't do this in .onLoad
-    unlockBinding(".igraph.pars", asNamespace("igraph"))
-    unlockBinding(".igraph.pb", asNamespace("igraph"))
-    invisible()
-}
-
-.onLoad <- function(libname, pkgname) {
-  library.dynam("igraph", pkgname, libname, local=FALSE);
-  .Call("R_igraph_init", FALSE, FALSE, PACKAGE="igraph")
-}
-
-.onUnload <- function(libpath) {
-  library.dynam.unload("igraph", libpath)
-}
-
-.Call <- function(.NAME, ...) {
-  if (.NAME != "R_igraph_finalizer") {
-    base::.Call("R_igraph_check_finally_stack", PACKAGE="igraph")
-  }
-  base::.Call(.NAME, ...)
+get.all.simple.paths.pp <- function(vect) {
+  .Call("R_igraph_get_all_simple_paths_pp", vect, PACKAGE="igraph")
 }
