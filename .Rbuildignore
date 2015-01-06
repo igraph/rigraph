@@ -2,3 +2,4 @@
 ^cigraph$
 ^Makefile$
 ^tools$
+^.gitmodules$
