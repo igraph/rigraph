@@ -56,9 +56,11 @@ LEX=flex
 CGEN = src/igraph_threading.h src/igraph_version.h
 
 src/igraph_threading.h: $(top_srcdir)/include/igraph_threading.h.in
+	mkdir -p src
 	sed 's/@HAVE_TLS@/0/g' $< >$@
 
 src/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
+	mkdir -p src
 	sed 's/@PACKAGE_VERSION@/'$(REALVERSION)'/g' $< >$@
 
 # R source and doc files
@@ -173,7 +175,7 @@ src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
 
 # We have everything, here we go
 
-igraph: ../igraph_$(VERSION).tar.gz
+igraph: igraph_$(VERSION).tar.gz
 
 igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 			  $(CGEN) $(GLPK2) $(RAY2) $(ARPACK2) $(UUID2)
@@ -184,7 +186,7 @@ igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	Rscript -e 'devtools::install_github("gaborcsardi/bundler")'
 	Rscript -e 'bundler::bundle_dependencies(".", overwrite = TRUE)'
 	tools/builddocs.sh
-	Rscript -e 'devtools::build()'
+	Rscript -e 'devtools::build(path = ".")'
 #############
 
 .PHONY: all igraph force

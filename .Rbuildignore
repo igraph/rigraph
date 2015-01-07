@@ -3,3 +3,4 @@
 ^Makefile$
 ^tools$
 ^.gitmodules$
+^igraph_.*\.tar\.gz$
