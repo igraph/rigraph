@@ -78,7 +78,7 @@
   1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
 }
 
-#' @importFrom printr indent_print
+indent_print <- printr$indent_print
 
 .print.graph.attributes <- function(x, full, max.lines) {
   list <- graph_attr_names(x)
@@ -122,8 +122,6 @@
 ## |   [11,]  0.809017 -5.877853e-01
 ## + edges:
 ##  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
-
-#' @importFrom printr indent_print
 
 .print.vertex.attributes <- function(x, full, max.lines) {
   pf <- function(x) .print.vertex.attributes.old(x, full, max.lines)
