@@ -29,4 +29,4 @@ Collate: 'adjacency.R' 'attributes.R' 'auto.R' 'basic.R' 'bipartite.R'
         'structural.properties.R' 'structure.info.R' 'test.R'
         'tkplot.R' 'topology.R' 'utils.R' 'uuid.R' 'versions.R'
         'weakref.R' 'zzz-deprecate.R'
-Packaged: 2015-01-07 18:12:47 UTC; travis
+Packaged: 2015-01-07 18:18:00 UTC; travis
