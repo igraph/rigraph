@@ -354,16 +354,16 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
     stop("Not a graphNEL graph")
   }
   
-  al <- lapply(edgeL(graphNEL), "[[", "edges")
-  if (edgemode(graphNEL)=="undirected") {
+  al <- lapply(graph::edgeL(graphNEL), "[[", "edges")
+  if (graph::edgemode(graphNEL)=="undirected") {
     al <- mapply(SIMPLIFY=FALSE, seq_along(al), al, FUN=function(n, l) {
       c(l, rep(n, sum(l==n)))
     })
   }
-  mode <- if (edgemode(graphNEL)=="directed") "out" else "all"
+  mode <- if (graph::edgemode(graphNEL)=="directed") "out" else "all"
   g <- graph_from_adj_list(al, mode=mode, duplicate=TRUE)
   if (name) {
-    V(g)$name <- nodes(graphNEL)
+    V(g)$name <- graph::nodes(graphNEL)
   }
 
   ## Graph attributes
@@ -374,21 +374,21 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
   }
   
   ## Vertex attributes
-  v.n <- names(nodeDataDefaults(graphNEL))
+  v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
-    val <- unname(nodeData(graphNEL, attr=n))
+    val <- unname(graph::nodeData(graphNEL, attr=n))
     if (unlist.attrs && all(sapply(val, length)==1)) { val <- unlist(val) }
     g <- set_vertex_attr(g, n, value=val)
   }
 
   ## Edge attributes
-  e.n <- names(edgeDataDefaults(graphNEL))
+  e.n <- names(graph::edgeDataDefaults(graphNEL))
   if (!weight) { e.n <- e.n [ e.n != "weight" ] }
   if (length(e.n) > 0) {
     el <- as_edgelist(g)
     el <- paste(sep="|", el[,1], el[,2])
     for (n in e.n) {
-      val <- unname(edgeData(graphNEL, attr=n)[el])
+      val <- unname(graph::edgeData(graphNEL, attr=n)[el])
       if (unlist.attrs && all(sapply(val, length)==1)) { val <- unlist(val) }
       g <- set_edge_attr(g, n, value=val)
     }
@@ -453,8 +453,8 @@ as_graphnel <- function(graph) {
   v.n <- vertex_attr_names(graph)
   v.n <- v.n[ v.n != "name" ]
   for (n in v.n) {
-    nodeDataDefaults(res, attr=n) <- NA
-    nodeData(res, attr=n) <- vertex_attr(graph, n)
+    graph::nodeDataDefaults(res, attr=n) <- NA
+    graph::nodeData(res, attr=n) <- vertex_attr(graph, n)
   }
 
   ## Add edge attributes (other than 'weight')
@@ -465,7 +465,7 @@ as_graphnel <- function(graph) {
     el <- as_edgelist(graph)
     el <- paste(sep="|", el[,1], el[,2])
     for (n in e.n) {
-      edgeDataDefaults(res, attr=n) <- NA
+      graph::edgeDataDefaults(res, attr=n) <- NA
       res@edgeData@data[el] <- mapply(function(x,y) {
         xx <- c(x,y); names(xx)[length(xx)] <- n; xx },
                                       res@edgeData@data[el],
