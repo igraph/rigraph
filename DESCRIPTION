@@ -1,5 +1,5 @@
 Package: igraph
-Version: 0.7.999-587
+Version: 0.7.999-593
 Title: Network analysis and visualization
 Author: See AUTHORS file.
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
@@ -29,4 +29,4 @@ Collate: 'adjacency.R' 'attributes.R' 'auto.R' 'basic.R' 'bipartite.R'
         'structural.properties.R' 'structure.info.R' 'test.R'
         'tkplot.R' 'topology.R' 'utils.R' 'uuid.R' 'versions.R'
         'weakref.R' 'zzz-deprecate.R'
-Packaged: 2015-01-16 19:07:26 UTC; travis
+Packaged: 2015-01-16 22:10:38 UTC; travis

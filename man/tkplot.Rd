@@ -183,7 +183,7 @@ tk_set_coords(id, coords)
 width <- as.numeric(tkcget(canvas, "-width"))
 height <- as.numeric(tkcget(canvas, "-height"))
 tkcreate(canvas, "text", width/2, 25, text="My title",
-         justify="center", font=tkfont.create(family="helvetica"
+         justify="center", font=tcltk::tkfont.create(family="helvetica"
                              ,size=20,weight="bold"))
 }
 }

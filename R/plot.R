@@ -455,12 +455,12 @@ rglplot.igraph <- function(x, ...) {
     dist <- sqrt(sum((v2-v1)^2))   # distance of the centers
 
     if (am==0) {
-      edge <- qmesh3d(c(-ew/2,-ew/2,dist,1, ew/2,-ew/2,dist,1, ew/2,ew/2,dist,1,
+      edge <- rgl::qmesh3d(c(-ew/2,-ew/2,dist,1, ew/2,-ew/2,dist,1, ew/2,ew/2,dist,1,
                         -ew/2,ew/2,dist,1,  -ew/2,-ew/2,0,1, ew/2,-ew/2,0,1,
                         ew/2,ew/2,0,1, -ew/2,ew/2,0,1),
                       c(1,2,3,4, 5,6,7,8, 1,2,6,5, 2,3,7,6, 3,4,8,7, 4,1,5,8))
     } else if (am==1) {
-      edge <- qmesh3d(c(-ew/2,-ew/2,dist,1, ew/2,-ew/2,dist,1,
+      edge <- rgl::qmesh3d(c(-ew/2,-ew/2,dist,1, ew/2,-ew/2,dist,1,
                         ew/2,ew/2,dist,1, -ew/2,ew/2,dist,1,
                         -ew/2,-ew/2,al+r1,1, ew/2,-ew/2,al+r1,1,
                         ew/2,ew/2,al+r1,1, -ew/2,ew/2,al+r1,1,
@@ -471,7 +471,7 @@ rglplot.igraph <- function(x, ...) {
                         11,12,13,13))
     } else if (am==2) {
       box <- dist-r2-al
-      edge <- qmesh3d(c(-ew/2,-ew/2,box,1, ew/2,-ew/2,box,1, ew/2,ew/2,box,1,
+      edge <- rgl::qmesh3d(c(-ew/2,-ew/2,box,1, ew/2,-ew/2,box,1, ew/2,ew/2,box,1,
                         -ew/2,ew/2,box,1,  -ew/2,-ew/2,0,1, ew/2,-ew/2,0,1,
                         ew/2,ew/2,0,1, -ew/2,ew/2,0,1,
                         -aw/2,-aw/2,box,1, aw/2,-aw/2,box,1, aw/2,aw/2,box,1,
@@ -480,7 +480,7 @@ rglplot.igraph <- function(x, ...) {
                         9,10,11,12, 9,12,13,13, 9,10,13,13, 10,11,13,13,
                         11,12,13,13))
     } else {
-      edge <- qmesh3d(c(-ew/2,-ew/2,dist-al-r2,1, ew/2,-ew/2,dist-al-r2,1,
+      edge <- rgl::qmesh3d(c(-ew/2,-ew/2,dist-al-r2,1, ew/2,-ew/2,dist-al-r2,1,
                         ew/2,ew/2,dist-al-r2,1, -ew/2,ew/2,dist-al-r2,1,
                         -ew/2,-ew/2,r1+al,1, ew/2,-ew/2,r1+al,1,
                         ew/2,ew/2,r1+al,1, -ew/2,ew/2,r1+al,1,
@@ -503,11 +503,11 @@ rglplot.igraph <- function(x, ...) {
     rot1 <- rbind(c(1,0,0),c(0,cos(psi),sin(psi)), c(0,-sin(psi),cos(psi)))
     rot2 <- rbind(c(cos(phi),sin(phi),0),c(-sin(phi),cos(phi),0), c(0,0,1))
     rot <- rot1 %*% rot2
-    edge <- transform3d(edge, rotationMatrix(matrix=rot))
-    edge <- transform3d(edge, translationMatrix(v1[1], v1[2], v1[3]))
+    edge <- rgl::transform3d(edge, rgl::rotationMatrix(matrix=rot))
+    edge <- rgl::transform3d(edge, rgl::translationMatrix(v1[1], v1[2], v1[3]))
 
     ## we are ready 
-    shade3d(edge, col=ec)
+    rgl::shade3d(edge, col=ec)
   }
   
   create.loop <- function(v, r, ec, ew, am, la, la2, as) {
@@ -519,7 +519,7 @@ rglplot.igraph <- function(x, ...) {
     gap <- wi-2*ew
 
     if (am==0) {
-      edge <- qmesh3d(c(-wi/2,-ew/2,0,1, -gap/2,-ew/2,0,1,
+      edge <- rgl::qmesh3d(c(-wi/2,-ew/2,0,1, -gap/2,-ew/2,0,1,
                         -gap/2,ew/2,0,1, -wi/2,ew/2,0,1,
                         -wi/2,-ew/2,hi-ew+r,1, -gap/2,-ew/2,hi-ew+r,1,
                         -gap/2,ew/2,hi-ew+r,1, -wi/2,ew/2,hi-ew+r,1,
@@ -537,7 +537,7 @@ rglplot.igraph <- function(x, ...) {
                         5,13,19,17, 17,18,20,19, 8,16,20,18, 6,7,15,14
                         ))
     } else if (am==1 || am==2) {
-      edge <- qmesh3d(c(-wi/2,-ew/2,r+al,1, -gap/2,-ew/2,r+al,1,
+      edge <- rgl::qmesh3d(c(-wi/2,-ew/2,r+al,1, -gap/2,-ew/2,r+al,1,
                         -gap/2,ew/2,r+al,1, -wi/2,ew/2,r+al,1,
                         -wi/2,-ew/2,hi-ew+r,1, -gap/2,-ew/2,hi-ew+r,1,
                         -gap/2,ew/2,hi-ew+r,1, -wi/2,ew/2,hi-ew+r,1,
@@ -562,7 +562,7 @@ rglplot.igraph <- function(x, ...) {
                         21,24,25,25
                         ))
     } else if (am==3) {
-      edge <- qmesh3d(c(-wi/2,-ew/2,r+al,1, -gap/2,-ew/2,r+al,1,
+      edge <- rgl::qmesh3d(c(-wi/2,-ew/2,r+al,1, -gap/2,-ew/2,r+al,1,
                         -gap/2,ew/2,r+al,1, -wi/2,ew/2,r+al,1,
                         -wi/2,-ew/2,hi-ew+r,1, -gap/2,-ew/2,hi-ew+r,1,
                         -gap/2,ew/2,hi-ew+r,1, -wi/2,ew/2,hi-ew+r,1,
@@ -597,11 +597,11 @@ rglplot.igraph <- function(x, ...) {
     rot1 <- rbind(c(1,0,0),c(0,cos(la2),sin(la2)), c(0,-sin(la2),cos(la2)))
     rot2 <- rbind(c(cos(la),sin(la),0),c(-sin(la),cos(la),0), c(0,0,1))
     rot <- rot1 %*% rot2
-    edge <- transform3d(edge, rotationMatrix(matrix=rot))
-    edge <- transform3d(edge, translationMatrix(v[1], v[2], v[3]))
+    edge <- rgl::transform3d(edge, rgl::rotationMatrix(matrix=rot))
+    edge <- rgl::transform3d(edge, rgl::translationMatrix(v[1], v[2], v[3]))
 
     ## we are ready
-    shade3d(edge, col=ec)
+    rgl::shade3d(edge, col=ec)
   }
   
   # Visual parameters
@@ -638,7 +638,7 @@ rglplot.igraph <- function(x, ...) {
   el <- as_edgelist(graph, names=FALSE)
   
   # It is faster this way
-  par3d(skipRedraw=TRUE)
+  rgl::par3d(skipRedraw=TRUE)
 
   # edges first
   for (i in seq(length=nrow(el))) {
@@ -664,7 +664,7 @@ rglplot.igraph <- function(x, ...) {
       
   # add the vertices
   if (length(vertex.size)==1) { vertex.size <- rep(vertex.size, nrow(layout)) }
-  rgl.spheres(layout[,1], layout[,2], layout[,3], radius=vertex.size,
+  rgl::rgl.spheres(layout[,1], layout[,2], layout[,3], radius=vertex.size,
               col=vertex.color)
 
   # add the labels, 'l1' is a stupid workaround of a mysterious rgl bug
@@ -676,8 +676,8 @@ rglplot.igraph <- function(x, ...) {
   z <- layout[,3]
   l1 <- labels[1]
   labels[1] <- ""
-  rgl.texts(x,y,z, labels, col=label.color, adj=0)
-  rgl.texts(c(0,x[1]), c(0,y[1]), c(0,z[1]),
+  rgl::rgl.texts(x,y,z, labels, col=label.color, adj=0)
+  rgl::rgl.texts(c(0,x[1]), c(0,y[1]), c(0,z[1]),
             c("",l1), col=c(label.color[1],label.color[1]), adj=0)
 
   edge.labels[is.na(edge.labels)] <- ""
@@ -688,12 +688,12 @@ rglplot.igraph <- function(x, ...) {
     y1 <- layout[,2][el[,2]]
     z0 <- layout[,3][el[,1]]
     z1 <- layout[,4][el[,2]]
-    rgl.texts((x0+x1)/2, (y0+y1)/2, (z0+z1)/2, edge.labels,
+    rgl::rgl.texts((x0+x1)/2, (y0+y1)/2, (z0+z1)/2, edge.labels,
               col=label.color)
   }
 
   # draw everything
-  par3d(skipRedraw=FALSE)
+  rgl::par3d(skipRedraw=FALSE)
   
   invisible(NULL)
 }

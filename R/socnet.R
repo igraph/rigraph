@@ -61,12 +61,12 @@ tkigraph <- function() {
   }
   
   # Create top window
-  top <- tktoplevel(background="lightgrey", width=700, height=400)
-  tktitle(top) <- "iGraph GUI (Social Network Basics)"
-  topframe <- tkframe(top, relief="sunken", borderwidth=1)
-  scr <- tkscrollbar(top, repeatinterval=5,
-                     command=function(...) tkyview(topframe))
-  tkplace(topframe, x=0, y=0, relwidth=1.0)
+  top <- tcltk::tktoplevel(background="lightgrey", width=700, height=400)
+  tcltk::tktitle(top) <- "iGraph GUI (Social Network Basics)"
+  topframe <- tcltk::tkframe(top, relief="sunken", borderwidth=1)
+  scr <- tcltk::tkscrollbar(top, repeatinterval=5,
+                     command=function(...) tcltk::tkyview(topframe))
+  tcltk::tkplace(topframe, x=0, y=0, relwidth=1.0)
   
   # Store myself in the environment if needed
   if (!exists("top", envir=.tkigraph.env, inherits=FALSE)) {
@@ -75,319 +75,319 @@ tkigraph <- function() {
   }
   
   # kill myself if window was closed
-  tkbind(top, "<Destroy>", function() .tkigraph.close())
+  tcltk::tkbind(top, "<Destroy>", function() .tkigraph.close())
 
   # pull-down menu
-  main.menu <- tkmenu(top)
+  main.menu <- tcltk::tkmenu(top)
 
-  graph.menu <- tkmenu(main.menu)
+  graph.menu <- tcltk::tkmenu(main.menu)
   
-  create.menu <- tkmenu(main.menu)
-  tkadd(create.menu, "command", label="By hand", command=function() {
+  create.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(create.menu, "command", label="By hand", command=function() {
     .tkigraph.by.hand()
   })
-  tkadd(create.menu, "separator")
-  tkadd(create.menu, "command", label="Ring", command=function() {
+  tcltk::tkadd(create.menu, "separator")
+  tcltk::tkadd(create.menu, "command", label="Ring", command=function() {
     .tkigraph.ring()
   })
-  tkadd(create.menu, "command", label="Tree", command=function() {
+  tcltk::tkadd(create.menu, "command", label="Tree", command=function() {
     .tkigraph.tree()
   })
-  tkadd(create.menu, "command", label="Lattice", command=function() {
+  tcltk::tkadd(create.menu, "command", label="Lattice", command=function() {
     .tkigraph.lattice()
   })
-  tkadd(create.menu, "command", label="Star", command=function() {
+  tcltk::tkadd(create.menu, "command", label="Star", command=function() {
     .tkigraph.star()
   })
-  tkadd(create.menu, "command", label="Full", command=function() {
+  tcltk::tkadd(create.menu, "command", label="Full", command=function() {
     .tkigraph.full()
   })
-  tkadd(create.menu, "separator")
-  tkadd(create.menu, "command", label="Graph atlas...", command=function() {
+  tcltk::tkadd(create.menu, "separator")
+  tcltk::tkadd(create.menu, "command", label="Graph atlas...", command=function() {
     .tkigraph.atlas()
   })
-  tkadd(create.menu, "separator")
-  tkadd(create.menu, "command", label="Moody-White network", command=function() {
+  tcltk::tkadd(create.menu, "separator")
+  tcltk::tkadd(create.menu, "command", label="Moody-White network", command=function() {
     g <- graph_from_adjacency_matrix(.tkigraph.net.moody.white, mode="undirected")
     g <- set_graph_attr(g, "name", "Moody-White network")
     .tkigraph.add.graph(g)
   })
   
-  tkadd(create.menu, "separator") 
-  tkadd(create.menu, "command", label="Random (Erdos-Renyi G(n,p))",
+  tcltk::tkadd(create.menu, "separator") 
+  tcltk::tkadd(create.menu, "command", label="Random (Erdos-Renyi G(n,p))",
         command=function() {
           .tkigraph.erdos.renyi.game()
         })
-  tkadd(create.menu, "command", label="Random (Erdos-Renyi G(n,m))",
+  tcltk::tkadd(create.menu, "command", label="Random (Erdos-Renyi G(n,m))",
         command=function() { .tkigraph.erdos.renyi.gnm.game() })
-  tkadd(create.menu, "command", label="Random (Barabasi-Albert)",
+  tcltk::tkadd(create.menu, "command", label="Random (Barabasi-Albert)",
         command=function() {
           .tkigraph.barabasi.game()
         })
-  tkadd(create.menu, "command", label="Random (Configuration model)",
+  tcltk::tkadd(create.menu, "command", label="Random (Configuration model)",
         command=function() {
           .tkigraph.degree.sequence.game()
         })
-  tkadd(create.menu, "command", label="Watts-Strogatz random graph",
+  tcltk::tkadd(create.menu, "command", label="Watts-Strogatz random graph",
         command=function() {
           .tkigraph.watts.strogatz()
         })
-  tkadd(create.menu, "separator")
-  tkadd(create.menu, "command", label="Simplify", command=function() {
+  tcltk::tkadd(create.menu, "separator")
+  tcltk::tkadd(create.menu, "command", label="Simplify", command=function() {
     .tkigraph.simplify()
   })
-  tkadd(graph.menu, "cascade", label="Create", menu=create.menu)
-  tkadd(graph.menu, "command", label="Delete", command=function() {
+  tcltk::tkadd(graph.menu, "cascade", label="Create", menu=create.menu)
+  tcltk::tkadd(graph.menu, "command", label="Delete", command=function() {
     .tkigraph.delete() })  
-  tkadd(graph.menu, "separator")
-  tkadd(graph.menu, "command", label="Show graph",
+  tcltk::tkadd(graph.menu, "separator")
+  tcltk::tkadd(graph.menu, "command", label="Show graph",
         command=function() { .tkigraph.show() })
-  tkadd(graph.menu, "command", label="Basic statistics",
+  tcltk::tkadd(graph.menu, "command", label="Basic statistics",
         command=function() { .tkigraph.stat() })
-  tkadd(graph.menu, "separator")
-  tkadd(graph.menu, "command", label="Import session", command=function() {
+  tcltk::tkadd(graph.menu, "separator")
+  tcltk::tkadd(graph.menu, "command", label="Import session", command=function() {
     .tkigraph.load()
   })
-#  tkadd(graph.menu, "command", label="Load from the Web", command=function() {
+#  tcltk::tkadd(graph.menu, "command", label="Load from the Web", command=function() {
 #    .tkigraph.load.online()
 #  })
-  tkadd(graph.menu, "command", label="Export session", command=function() {
+  tcltk::tkadd(graph.menu, "command", label="Export session", command=function() {
     .tkigraph.save()
   })
-  tkadd(graph.menu, "separator")
-  tkadd(graph.menu, "command", label="Import adjacency matrix",
+  tcltk::tkadd(graph.menu, "separator")
+  tcltk::tkadd(graph.menu, "command", label="Import adjacency matrix",
         command=function() .tkigraph.import.adjacency())
-  tkadd(graph.menu, "command", label="Import edge list",
+  tcltk::tkadd(graph.menu, "command", label="Import edge list",
         command=function() .tkigraph.import.edgelist())
-  tkadd(graph.menu, "command", label="Import Pajek file",
+  tcltk::tkadd(graph.menu, "command", label="Import Pajek file",
         command=function() .tkigraph.import.pajek())
-  tkadd(graph.menu, "command", label="Export adjacency matrix",
+  tcltk::tkadd(graph.menu, "command", label="Export adjacency matrix",
         command=function() .tkigraph.export.adjacency())
-  tkadd(graph.menu, "command", label="Export edge list",
+  tcltk::tkadd(graph.menu, "command", label="Export edge list",
         command=function() .tkigraph.export.edgelist())
-  tkadd(graph.menu, "command", label="Export Pajek file",
+  tcltk::tkadd(graph.menu, "command", label="Export Pajek file",
         command=function() .tkigraph.export.pajek())
-  tkadd(main.menu, "cascade", label="Graph", menu=graph.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Graph", menu=graph.menu)
 
-  plot.menu <- tkmenu(main.menu)
-  tkadd(plot.menu, "command", label="Simple", command=function() {
+  plot.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(plot.menu, "command", label="Simple", command=function() {
     .tkigraph.plot(simple=TRUE)
   })
-  tkadd(plot.menu, "command", label="Advanced", command=function() {
+  tcltk::tkadd(plot.menu, "command", label="Advanced", command=function() {
     .tkigraph.plot(simple=FALSE)
   })
-  tkadd(main.menu, "cascade", label="Draw", menu=plot.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Draw", menu=plot.menu)
   
-  centrality.menu <- tkmenu(main.menu)
-  tkadd(centrality.menu, "command", label="Degree (out)", command=function() {
+  centrality.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(centrality.menu, "command", label="Degree (out)", command=function() {
     .tkigraph.degree("out")
   })
-  tkadd(centrality.menu, "command", label="Degree (in)", command=function() {
+  tcltk::tkadd(centrality.menu, "command", label="Degree (in)", command=function() {
     .tkigraph.degree("in")
   })
-  tkadd(centrality.menu, "command", label="Degree (total)",
+  tcltk::tkadd(centrality.menu, "command", label="Degree (total)",
         command=function() {
           .tkigraph.degree("total")
         })
-  tkadd(centrality.menu, "command", label="Plot log-log degree distribution",
+  tcltk::tkadd(centrality.menu, "command", label="Plot log-log degree distribution",
         command=function() {
           .tkigraph.degree.dist(power=FALSE)
         })
-  tkadd(centrality.menu, "command", label="Fit a power-law to degree distribution",
+  tcltk::tkadd(centrality.menu, "command", label="Fit a power-law to degree distribution",
         command=function() {
           .tkigraph.degree.dist(power=TRUE)
         })
-  tkadd(centrality.menu, "separator")
-  tkadd(centrality.menu, "command", label="Closeness", command=function() {
+  tcltk::tkadd(centrality.menu, "separator")
+  tcltk::tkadd(centrality.menu, "command", label="Closeness", command=function() {
     .tkigraph.closeness()
   })
-  tkadd(centrality.menu, "command", label="Betweenness", command=function() {
+  tcltk::tkadd(centrality.menu, "command", label="Betweenness", command=function() {
     .tkigraph.betweenness()
   })
-  tkadd(centrality.menu, "command", label="Burt's constraint", command=function() {
+  tcltk::tkadd(centrality.menu, "command", label="Burt's constraint", command=function() {
     .tkigraph.constraints()
   })
-  tkadd(centrality.menu, "command", label="Page rank", command=function() {
+  tcltk::tkadd(centrality.menu, "command", label="Page rank", command=function() {
     .tkigraph.page.rank()
   })
-  tkadd(centrality.menu, "separator")  
-  tkadd(centrality.menu, "command", label="Edge betweenness",
+  tcltk::tkadd(centrality.menu, "separator")  
+  tcltk::tkadd(centrality.menu, "command", label="Edge betweenness",
         command=function() {
           .tkigraph.edge.betweenness()
         })
-  tkadd(main.menu, "cascade", label="Centrality", menu=centrality.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Centrality", menu=centrality.menu)
 
-  distances.menu <- tkmenu(main.menu)
-  tkadd(distances.menu, "command", label="Distance matrix",
+  distances.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(distances.menu, "command", label="Distance matrix",
         command=function() { .tkigraph.dist.matrix() })
-  tkadd(distances.menu, "command", label="Distances from/to vertex",
+  tcltk::tkadd(distances.menu, "command", label="Distances from/to vertex",
         command=function() { .tkigraph.distance.tofrom() })
-  tkadd(distances.menu, "command", label="Diameter (undirected)",
+  tcltk::tkadd(distances.menu, "command", label="Diameter (undirected)",
         command=function() { .tkigraph.diameter() })
-  tkadd(distances.menu, "command", label="Draw diameter",
+  tcltk::tkadd(distances.menu, "command", label="Draw diameter",
         command=function() { .tkigraph.plot.diameter(simple=FALSE) })
-  tkadd(distances.menu, "command", label="Average path length (undirected)",
+  tcltk::tkadd(distances.menu, "command", label="Average path length (undirected)",
         command=function() { .tkigraph.diameter(mode="path") })
-  tkadd(main.menu, "cascade", label="Distances", menu=distances.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Distances", menu=distances.menu)
 
-  component.menu <- tkmenu(main.menu)
-  tkadd(component.menu, "command", label="Show components",
+  component.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(component.menu, "command", label="Show components",
         command=function() { .tkigraph.clusters() })
-  tkadd(component.menu, "command", label="Show membership",
+  tcltk::tkadd(component.menu, "command", label="Show membership",
         command=function() { .tkigraph.clusters.membership() })
-  tkadd(component.menu, "command", label="Calculate component sizes",
+  tcltk::tkadd(component.menu, "command", label="Calculate component sizes",
         command=function() { .tkigraph.calculate.clusters() })
-  tkadd(component.menu, "command", label="Draw components",
+  tcltk::tkadd(component.menu, "command", label="Draw components",
         command=function() { .tkigraph.plot.comp(simple=FALSE) })
-  tkadd(component.menu, "command", label="Create graph from giant component",
+  tcltk::tkadd(component.menu, "command", label="Create graph from giant component",
         command=function() { .tkigraph.create.giantcomp() })
-  tkadd(component.menu, "command", label="Create graph from component of a vertex",
+  tcltk::tkadd(component.menu, "command", label="Create graph from component of a vertex",
         command=function() { .tkigraph.create.mycomp() })
-  tkadd(component.menu, "command", label="Create graph from a component",
+  tcltk::tkadd(component.menu, "command", label="Create graph from a component",
         command=function() { .tkigraph.create.comp() })
 
-  community.menu <- tkmenu(main.menu)
-  tkadd(community.menu, "command", label="Spinglass algorithm",
+  community.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(community.menu, "command", label="Spinglass algorithm",
         command=function() { .tkigraph.spinglass() })
-  tkadd(community.menu, "command", label="Spinglass algorithm, single vertex",
+  tcltk::tkadd(community.menu, "command", label="Spinglass algorithm, single vertex",
         command=function() { .tkigraph.my.spinglass() })
 
-  cohesion.menu <- tkmenu(main.menu)
-  tkadd(cohesion.menu, "command", label="Cohesion of all components",
+  cohesion.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(cohesion.menu, "command", label="Cohesion of all components",
         command=function() { .tkigraph.cohesion() })
   
-  subgraph.menu <- tkmenu(main.menu)
-  tkadd(subgraph.menu, "cascade", label="Components", menu=component.menu)
-  tkadd(subgraph.menu, "cascade", label="Communities", menu=community.menu)
-  tkadd(subgraph.menu, "cascade", label="Cohesion", menu=cohesion.menu)
+  subgraph.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(subgraph.menu, "cascade", label="Components", menu=component.menu)
+  tcltk::tkadd(subgraph.menu, "cascade", label="Communities", menu=community.menu)
+  tcltk::tkadd(subgraph.menu, "cascade", label="Cohesion", menu=cohesion.menu)
   
-  tkadd(main.menu, "cascade", label="Subgraphs", menu=subgraph.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Subgraphs", menu=subgraph.menu)
   
-  motif.menu <- tkmenu(main.menu)
-  tkadd(motif.menu, "command", label="Draw motifs", command=function() {
+  motif.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(motif.menu, "command", label="Draw motifs", command=function() {
     .tkigraph.motifs.draw()
   })
-  tkadd(motif.menu, "command", label="Find motifs", command=function() {
+  tcltk::tkadd(motif.menu, "command", label="Find motifs", command=function() {
     .tkigraph.motifs.find()
   })
-  tkadd(main.menu, "cascade", label="Motifs", menu=motif.menu)
+  tcltk::tkadd(main.menu, "cascade", label="Motifs", menu=motif.menu)
 
-  help.menu <- tkmenu(main.menu)
-  tkadd(help.menu, "command", label="Contents", command=function() { .tkigraph.help() })
-  tkadd(help.menu, "command", label="In external browser",
+  help.menu <- tcltk::tkmenu(main.menu)
+  tcltk::tkadd(help.menu, "command", label="Contents", command=function() { .tkigraph.help() })
+  tcltk::tkadd(help.menu, "command", label="In external browser",
         command=function() { .tkigraph.help.external() })
-  tkadd(help.menu, "separator")
-  tkadd(help.menu, "command", label="About", command=function() { .tkigraph.about() })
-  tkadd(main.menu, "cascade", label="Help", menu=help.menu)
+  tcltk::tkadd(help.menu, "separator")
+  tcltk::tkadd(help.menu, "command", label="About", command=function() { .tkigraph.about() })
+  tcltk::tkadd(main.menu, "cascade", label="Help", menu=help.menu)
   
-  tkadd(main.menu, "command", label="Quit", command=.tkigraph.close)
+  tcltk::tkadd(main.menu, "command", label="Quit", command=.tkigraph.close)
   
-  tkconfigure(top, "-menu", main.menu)
+  tcltk::tkconfigure(top, "-menu", main.menu)
 
   # Set up the main area
-  tkgrid(tklabel(top, text=""),
-         tklabel(top, text="#", justify="center", relief="raised"),
-         tklabel(top, text="Name", width=50, relief="raised",
+  tcltk::tkgrid(tcltk::tklabel(top, text=""),
+         tcltk::tklabel(top, text="#", justify="center", relief="raised"),
+         tcltk::tklabel(top, text="Name", width=50, relief="raised",
                  justify="left"),
-         tklabel(top, text="|V|", width=6, relief="raised",
+         tcltk::tklabel(top, text="|V|", width=6, relief="raised",
                  justify="left"),
-         tklabel(top, text="|E|", width=6, relief="raised",
+         tcltk::tklabel(top, text="|E|", width=6, relief="raised",
                  justify="left"),
-         tklabel(top, text="Dir.", width=6, relief="raised",
+         tcltk::tklabel(top, text="Dir.", width=6, relief="raised",
                  justify="left"),
          sticky="nsew", "in"=topframe)
-  tkgrid.columnconfigure(topframe, 2, weight=1)
+  tcltk::tkgrid.columnconfigure(topframe, 2, weight=1)
 
   invisible(NULL)
 }
 
 .tkigraph.close <- function() {
   message <- "Are you sure?"
-  yesno <- tkmessageBox(message=message, icon="question", type="yesno",
+  yesno <- tcltk::tkmessageBox(message=message, icon="question", type="yesno",
                         default="yes")
   if (as.character(yesno) == "no") { return() }
   top <- get("top", .tkigraph.env)
-  tkbind(top, "<Destroy>", "")
-  tkdestroy(top)
+  tcltk::tkbind(top, "<Destroy>", "")
+  tcltk::tkdestroy(top)
   rm(list=ls(envir=.tkigraph.env), envir=.tkigraph.env)
 }
 
 .tkigraph.get.selected <- function() {
   gnos <- get("selected", .tkigraph.env)
-  which(as.logical(sapply(gnos, tclvalue)))
+  which(as.logical(sapply(gnos, tcltk::tclvalue)))
 }
 
 .tkigraph.error <- function(message) {
-  tkmessageBox(message=message, icon="error", type="ok")
+  tcltk::tkmessageBox(message=message, icon="error", type="ok")
 }
 
 .tkigraph.warning <- function(message) {
-  tkmessageBox(message=message, icon="warning", type="ok")
+  tcltk::tkmessageBox(message=message, icon="warning", type="ok")
 }
 
 .tkigraph.dialogbox <- function(TITLE="Setup parameters", ...) {
   
   params <- list(...)
   answers <- lapply(params, "[[", "default")
-  dialog <- tktoplevel()
-  frame <- tkframe(dialog)
-  tkgrid(frame)
-  tktitle(dialog) <- TITLE
-  vars <- lapply(answers, tclVar)
+  dialog <- tcltk::tktoplevel()
+  frame <- tcltk::tkframe(dialog)
+  tcltk::tkgrid(frame)
+  tcltk::tktitle(dialog) <- TITLE
+  vars <- lapply(answers, tcltk::tclVar)
   retval <- list()
   widgets <- list()
 
   OnOK <- function() {
-    retval <<- lapply(vars, tclvalue)
+    retval <<- lapply(vars, tcltk::tclvalue)
     for (i in seq(along=params)) {
       if (params[[i]]$type == "listbox") {
-        retval[[i]] <<- as.numeric(tclvalue(tkcurselection(widgets[[i]])))
+        retval[[i]] <<- as.numeric(tcltk::tclvalue(tcltk::tkcurselection(widgets[[i]])))
       }
     }
-    tkdestroy(dialog)    
+    tcltk::tkdestroy(dialog)    
   }
 
-  tkgrid(tklabel(dialog, text=TITLE,
-                 font=tkfont.create(family="times", size="16", weight="bold")),
+  tcltk::tkgrid(tcltk::tklabel(dialog, text=TITLE,
+                 font=tcltk::tkfont.create(family="times", size="16", weight="bold")),
          columnspan=2, sticky="nsew", "in"=frame, padx=10, pady=10)
   
-  OK.but <- tkbutton(dialog, text="   OK    ", command=OnOK)
+  OK.but <- tcltk::tkbutton(dialog, text="   OK    ", command=OnOK)
   for (i in seq(along=params)) {
-    tkgrid(tklabel(dialog, text=params[[i]]$name),
+    tcltk::tkgrid(tcltk::tklabel(dialog, text=params[[i]]$name),
            column=0, row=i, sticky="nw", padx=10, "in"=frame)
     if (params[[i]]$type == "numeric" || params[[i]]$type == "text") {
-      tmp <- tkentry(dialog, width="10", textvariable=vars[[i]])
-      tkgrid(tmp, column=1, row=i, sticky="nsew", padx=10, "in"=frame)
-      tkbind(tmp, "<Return>", OnOK)
+      tmp <- tcltk::tkentry(dialog, width="10", textvariable=vars[[i]])
+      tcltk::tkgrid(tmp, column=1, row=i, sticky="nsew", padx=10, "in"=frame)
+      tcltk::tkbind(tmp, "<Return>", OnOK)
     } else if (params[[i]]$type == "boolean") {
-      b <- tkcheckbutton(dialog, onvalue="TRUE", offvalue="FALSE",
+      b <- tcltk::tkcheckbutton(dialog, onvalue="TRUE", offvalue="FALSE",
                            variable=vars[[i]])
-      if (params[[i]]$default == "TRUE") { tkselect(b) }
-      tkgrid(b, column=1, row=i, sticky="w", padx=10, "in"=frame)
+      if (params[[i]]$default == "TRUE") { tcltk::tkselect(b) }
+      tcltk::tkgrid(b, column=1, row=i, sticky="w", padx=10, "in"=frame)
     } else if (params[[i]]$type == "listbox") {
-      f <- tkframe(dialog)
-      tkgrid(f, "in"=frame, padx=10, sticky="nsew", column=1, row=i)
-      scr <- tkscrollbar(f, repeatinterval=5)
-      fun <- eval(eval(substitute(expression(function(...) tkset(scr,...)),
+      f <- tcltk::tkframe(dialog)
+      tcltk::tkgrid(f, "in"=frame, padx=10, sticky="nsew", column=1, row=i)
+      scr <- tcltk::tkscrollbar(f, repeatinterval=5)
+      fun <- eval(eval(substitute(expression(function(...) tcltk::tkset(scr,...)),
                                   list(scr=scr))))
-      lb <- tklistbox(f, selectmode="single", exportselection=FALSE,
+      lb <- tcltk::tklistbox(f, selectmode="single", exportselection=FALSE,
                       height=3, yscrollcommand=fun)
-      fun <- eval(eval(substitute(expression(function(...) tkyview(lb, ...)),
+      fun <- eval(eval(substitute(expression(function(...) tcltk::tkyview(lb, ...)),
           list(lb=lb))))
-      tkconfigure(scr, "-command", fun)
-      tkselection.set(lb, as.numeric(params[[i]]$default)+1)
-      lapply(params[[i]]$values, function(l) tkinsert(lb, "end", l))
-      tkselection.set(lb, as.numeric(params[[i]]$default))
-      tkgrid(lb, scr, sticky="nsew", "in"=f)
-      tkgrid.configure(scr, sticky="nsw")
-      tkgrid.columnconfigure(f, 0, weight=1)
+      tcltk::tkconfigure(scr, "-command", fun)
+      tcltk::tkselection.set(lb, as.numeric(params[[i]]$default)+1)
+      lapply(params[[i]]$values, function(l) tcltk::tkinsert(lb, "end", l))
+      tcltk::tkselection.set(lb, as.numeric(params[[i]]$default))
+      tcltk::tkgrid(lb, scr, sticky="nsew", "in"=f)
+      tcltk::tkgrid.configure(scr, sticky="nsw")
+      tcltk::tkgrid.columnconfigure(f, 0, weight=1)
       widgets[[i]] <- lb
     }
   }
-  tkgrid(OK.but, column=0, columnspan=2, sticky="nsew", "in"=frame, pady=10,
+  tcltk::tkgrid(OK.but, column=0, columnspan=2, sticky="nsew", "in"=frame, pady=10,
          padx=10)
-  tkgrid.columnconfigure(frame, 1, weight=1)
-  tkwait.window(dialog)
+  tcltk::tkgrid.columnconfigure(frame, 1, weight=1)
+  tcltk::tkwait.window(dialog)
 
   for (i in seq(retval)) {
     if (params[[i]]$type == "numeric") {
@@ -425,21 +425,21 @@ tkigraph <- function() {
   assign("graphs", append(graphs, list(g)), .tkigraph.env)
   no <- length(graphs)+1
 
-  selected[[no]] <- tclVar("FALSE")
+  selected[[no]] <- tcltk::tclVar("FALSE")
   assign("selected", selected, .tkigraph.env)
 
   name <- graph_attr(g, "name")
-  tmpvar <- tclVar(as.character(name))
-  but <- tkcheckbutton(top, onvalue="TRUE", offvalue="FALSE",
+  tmpvar <- tcltk::tclVar(as.character(name))
+  but <- tcltk::tkcheckbutton(top, onvalue="TRUE", offvalue="FALSE",
                        variable=selected[[no]])
-  lab <- tklabel(top, text=as.character(no), width=2)
-  ent <- tkentry(top, width=30, textvariable=tmpvar)
-  lab2 <- tklabel(top, text=as.character(vcount(g)),
+  lab <- tcltk::tklabel(top, text=as.character(no), width=2)
+  ent <- tcltk::tkentry(top, width=30, textvariable=tmpvar)
+  lab2 <- tcltk::tklabel(top, text=as.character(vcount(g)),
                   justify="right", padx=2)
-  lab3 <- tklabel(top, text=as.character(ecount(g)), justify="right",
+  lab3 <- tcltk::tklabel(top, text=as.character(ecount(g)), justify="right",
                   padx=2)
-  lab4 <- tklabel(top, text=if (is_directed(g)) "YES" else "NO")
-  tkgrid(but, lab, ent, lab2, lab3, lab4, "in"=topframe, sticky="nsew")
+  lab4 <- tcltk::tklabel(top, text=if (is_directed(g)) "YES" else "NO")
+  tcltk::tkgrid(but, lab, ent, lab2, lab3, lab4, "in"=topframe, sticky="nsew")
 
   tklines <- get("tklines", .tkigraph.env)
   tklines[[no]] <- list(but, lab, ent, lab2, lab3, lab4)
@@ -455,7 +455,7 @@ tkigraph <- function() {
   } else {
     message <- paste("Are you sure to delete graph #", gnos, "?")
   }
-  yesno <- tkmessageBox(message=message, icon="question", type="yesno",
+  yesno <- tcltk::tkmessageBox(message=message, icon="question", type="yesno",
                         default="yes")
   if (as.character(yesno) == "no") { return() }
 
@@ -465,20 +465,20 @@ tkigraph <- function() {
   todel <- get("tklines", .tkigraph.env)[gnos]
   todel <- unlist(recursive=FALSE, todel)
   for (i in todel) {
-    tkgrid.remove(topframe, i)
+    tcltk::tkgrid.remove(topframe, i)
   }
   ## delete the graphs
   graphs[gnos] <- NA
   assign("graphs", graphs, .tkigraph.env)
   selected <- get("selected", .tkigraph.env)
   for (i in gnos) { 
-    selected[[i]] <- tclVar("FALSE")
+    selected[[i]] <- tcltk::tclVar("FALSE")
   }
   assign("selected", selected, .tkigraph.env)
 }
 
 .tkigraph.load <- function() {
-  filename <- tkgetOpenFile(defaultextension="Rdata",
+  filename <- tcltk::tkgetOpenFile(defaultextension="Rdata",
                             title="Load graphs")
   env <- new.env()
   load(paste(as.character(filename), collapse=" "), envir=env)
@@ -500,19 +500,19 @@ tkigraph <- function() {
   topframe <- get("topframe", .tkigraph.env)
   for (i in seq(graphs)) {
     if (is.na(graphs)[i]) { next }
-    entry <- tkgrid.slaves(topframe, row=i, col=2)
+    entry <- tcltk::tkgrid.slaves(topframe, row=i, col=2)
     graphs[[i]] <- set_graph_attr(graphs[[i]], "name",
-                                       as.character(tcl(entry, "get")))
+                                       as.character(tcltk::tcl(entry, "get")))
   }
   graphs <- graphs[ !is.na(graphs) ]
-  filename <- tkgetSaveFile(initialfile="graphs.Rdata",
+  filename <- tcltk::tkgetSaveFile(initialfile="graphs.Rdata",
                             defaultextension="Rdata",
                             title="Save graphs")
   save(graphs, file=paste(as.character(filename), collapse=" "))
 }
 
 .tkigraph.import.adjacency <- function() {
-  filename <- tkgetOpenFile(defaultextension="adj",
+  filename <- tcltk::tkgetOpenFile(defaultextension="adj",
                             title="Import adjacency matrix")
   filename <- paste(as.character(filename), collapse=" ")
   if (filename=="") { return() }
@@ -547,7 +547,7 @@ tkigraph <- function() {
 }
 
 .tkigraph.import.edgelist <- function() {
-  filename <- tkgetOpenFile(defaultextension="el",
+  filename <- tcltk::tkgetOpenFile(defaultextension="el",
                             title="Import edge list")
   filename <- paste(as.character(filename), collapse=" ")
   if (filename=="") { return() }
@@ -565,7 +565,7 @@ tkigraph <- function() {
 }
 
 .tkigraph.import.pajek <- function() {
-  filename <- tkgetOpenFile(defaultextension="net",
+  filename <- tcltk::tkgetOpenFile(defaultextension="net",
                             title="Import Pajek file")
   filename <- paste(as.character(filename), collapse=" ")
   if (filename=="") { return() }
@@ -589,7 +589,7 @@ tkigraph <- function() {
   } else {
     tab <- as_adj(graph, names=FALSE, sparse=FALSE)
   }
-  filename <- tkgetSaveFile(initialfile="graph.adj",
+  filename <- tcltk::tkgetSaveFile(initialfile="graph.adj",
                             defaultextension="adj",
                             title="Export adjacency matrix")
   filename <- paste(as.character(filename), collapse=" ")
@@ -608,7 +608,7 @@ tkigraph <- function() {
   if ("weight" %in% edge_attr_names(graph)) {
     el <- cbind(el, E(graph)$weight)
   }
-  filename <- tkgetSaveFile(initialfile="graph.el",
+  filename <- tcltk::tkgetSaveFile(initialfile="graph.el",
                             defaultextension="el",
                             title="Export edge list")
   filename <- paste(as.character(filename), collapse=" ")
@@ -624,7 +624,7 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  filename <- tkgetSaveFile(initialfile="pajek.net",
+  filename <- tcltk::tkgetSaveFile(initialfile="pajek.net",
                             defaultextension="net",
                             title="Export Pajek file")
   filename <- paste(as.character(filename), collapse=" ")
@@ -845,7 +845,7 @@ tkigraph <- function() {
   if (!read$interactive) {
     fun <- function(...) { dev.new() ; plot.igraph(...) }
   } else {
-    fun <- tkplot
+    fun <- tcltk::tkplot
   }
   
   layout.default <- function(graph, layout.par) {
@@ -1715,36 +1715,36 @@ tkigraph <- function() {
 }
 
 .tkigraph.spinglass.community.dialog <- function(comm, read, gnos) {
-  dialog <- tktoplevel()
-  frame <- tkframe(dialog)
-  tkgrid(frame)
-  tktitle(dialog) <- "Spinglass community structure algorithm results"
+  dialog <- tcltk::tktoplevel()
+  frame <- tcltk::tkframe(dialog)
+  tcltk::tkgrid(frame)
+  tcltk::tktitle(dialog) <- "Spinglass community structure algorithm results"
 
   read$update.rule <- if (read$update.rule=="simple") "Simple" else "Configuration model"
-  tkgrid(tklabel(dialog, text="Spinglass community structure algorithm results",
-                 font=tkfont.create(family="times", size=16, weight="bold")),
+  tcltk::tkgrid(tcltk::tklabel(dialog, text="Spinglass community structure algorithm results",
+                 font=tcltk::tkfont.create(family="times", size=16, weight="bold")),
          columnspan=3, sticky="nsew", "in"=frame, padx=10, pady=10)
-  tkgrid(txt <- tktext(dialog), columnspan=1, rowspan=5, sticky="nsew",
+  tcltk::tkgrid(txt <- tcltk::tktext(dialog), columnspan=1, rowspan=5, sticky="nsew",
          "in"=frame, padx=10, pady=10)
-  tkconfigure(txt, height=15)
-  tkinsert(txt, "end", "Parameters were:\n")
-  tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
-  tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
+  tcltk::tkconfigure(txt, height=15)
+  tcltk::tkinsert(txt, "end", "Parameters were:\n")
+  tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
+  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
            "  Weights were used.\n")
-  tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
-  tkinsert(txt, "end", if (read$parupdate) "  Parallel updating.\n" else
+  tcltk::tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
+  tcltk::tkinsert(txt, "end", if (read$parupdate) "  Parallel updating.\n" else
            "  Sequential updating.\n")
-  tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
-  tkinsert(txt, "end", paste("  Start temperature was", read$start.temp, "\n"))
-  tkinsert(txt, "end", paste("  Stop temperaure was", read$stop.temp, "\n"))
-  tkinsert(txt, "end", paste("  Cooling factor was", read$cool.fact, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Start temperature was", read$start.temp, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Stop temperaure was", read$stop.temp, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Cooling factor was", read$cool.fact, "\n"))
 
-  tkinsert(txt, "end", "\nResults:\n")
-  tkinsert(txt, "end", paste("  Number of communities found:", length(comm$csize),
+  tcltk::tkinsert(txt, "end", "\nResults:\n")
+  tcltk::tkinsert(txt, "end", paste("  Number of communities found:", length(comm$csize),
                              "\n"))
-  tkinsert(txt, "end", paste("  Modularity of the result:", comm$modularity, "\n"))
-  tkinsert(txt, "end", paste("  Stopped at temperature:", comm$temperature, "\n"))
-  tkconfigure(txt, state="disabled")
+  tcltk::tkinsert(txt, "end", paste("  Modularity of the result:", comm$modularity, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Stopped at temperature:", comm$temperature, "\n"))
+  tcltk::tkconfigure(txt, state="disabled")
 
   show.communities <- function() {
     members <- sapply(sapply(seq(along=comm$csize),
@@ -1778,19 +1778,19 @@ tkigraph <- function() {
     ## TODO
   }
   
-  tkgrid(tkbutton(dialog, text="Show communities", command=show.communities),
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Show communities", command=show.communities),
          "in"=frame, sticky="ew", column=1, row=1, padx=10, pady=10)
-  tkgrid(tkbutton(dialog, text="Show membership", command=show.membership),
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Show membership", command=show.membership),
          "in"=frame, sticky="ew", column=1, row=2, padx=10, pady=10)
-  tkgrid(tkbutton(dialog, text="Show community sizes", command=show.csize),
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Show community sizes", command=show.csize),
          "in"=frame, sticky="ew", column=1, row=3, padx=10, pady=10)
-  tkgrid(tkbutton(dialog, text="Draw communities",
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Draw communities",
                   command=function() plot.communities(simple=FALSE)),
          "in"=frame, sticky="ew", column=1, row=4, padx=10, pady=10)
-##   tkgrid(tkbutton(dialog, text="Create subgraph", command=create.subgraph),
+##   tcltk::tkgrid(tcltk::tkbutton(dialog, text="Create subgraph", command=create.subgraph),
 ##          "in"=frame, sticky="nsew", column=1, row=6, padx=10, pady=10)
   
-  tkgrid(tkbutton(dialog, text="Close", command=function() tkdestroy(dialog)),
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Close", command=function() tcltk::tkdestroy(dialog)),
          "in"=frame, sticky="nsew", columnspan=2, padx=10, pady=10)
 }
 
@@ -1844,44 +1844,44 @@ tkigraph <- function() {
 }
 
 .tkigraph.spinglass.mycommunity.dialog <- function(comm, read, gnos) {
-  dialog <- tktoplevel()
-  frame <- tkframe(dialog)
-  tkgrid(frame)
-  tktitle(dialog) <- "Spinglass community of a single vertex"
+  dialog <- tcltk::tktoplevel()
+  frame <- tcltk::tkframe(dialog)
+  tcltk::tkgrid(frame)
+  tcltk::tktitle(dialog) <- "Spinglass community of a single vertex"
 
-  scr <- tkscrollbar(dialog, repeatinterval=5,
-                     command=function(...) tkyview(txt,...))
+  scr <- tcltk::tkscrollbar(dialog, repeatinterval=5,
+                     command=function(...) tcltk::tkyview(txt,...))
   
   read$update.rule <- if (read$update.rule=="simple") "Simple" else "Configuration model"
-  tkgrid(tklabel(dialog, text="Spinglass community of a single vertex",
-                 font=tkfont.create(family="times", size=16, weight="bold")),
+  tcltk::tkgrid(tcltk::tklabel(dialog, text="Spinglass community of a single vertex",
+                 font=tcltk::tkfont.create(family="times", size=16, weight="bold")),
          columnspan=3, sticky="nsew", "in"=frame, padx=10, pady=10)
-  tkgrid(txt <- tktext(dialog, yscrollcommand=function(...) tkset(scr,...)),
+  tcltk::tkgrid(txt <- tcltk::tktext(dialog, yscrollcommand=function(...) tcltk::tkset(scr,...)),
          columnspan=1, rowspan=3, sticky="nsew", "in"=frame, padx=10, pady=10)
-  tkconfigure(txt, height=17)
-  tkgrid(scr, row=1, column=1, rowspan=3, sticky="ns", "in"=frame, pady=10)
-  tkinsert(txt, "end", "Parameters were:\n")
-  tkinsert(txt, "end", paste("  Vertex:", read$vertex, "\n"));
-  tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
-  tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
+  tcltk::tkconfigure(txt, height=17)
+  tcltk::tkgrid(scr, row=1, column=1, rowspan=3, sticky="ns", "in"=frame, pady=10)
+  tcltk::tkinsert(txt, "end", "Parameters were:\n")
+  tcltk::tkinsert(txt, "end", paste("  Vertex:", read$vertex, "\n"));
+  tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
+  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
            "  Weights were used.\n")
-  tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
-  tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
 
-  tkinsert(txt, "end", "\nResults:\n")
-  tkinsert(txt, "end", paste("  Size of the community:", length(comm$community),
+  tcltk::tkinsert(txt, "end", "\nResults:\n")
+  tcltk::tkinsert(txt, "end", paste("  Size of the community:", length(comm$community),
                              "\n"))
-  tkinsert(txt, "end", paste("  Cohesion:", comm$cohesion, "\n"))
-  tkinsert(txt, "end", paste("  Adhesion:", comm$adhesion, "\n"))
-  tkinsert(txt, "end", paste("  Inner links:", comm$inner.links, "\n"))
-  tkinsert(txt, "end", paste("  Outer links:", comm$outer.links, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Cohesion:", comm$cohesion, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Adhesion:", comm$adhesion, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Inner links:", comm$inner.links, "\n"))
+  tcltk::tkinsert(txt, "end", paste("  Outer links:", comm$outer.links, "\n"))
 
-  tkinsert(txt, "end", "\nThe community:\n")
+  tcltk::tkinsert(txt, "end", "\nThe community:\n")
   con <- textConnection(NULL, open="w", local=TRUE)
   cat(sort(comm$community), file=con, fill=TRUE, sep=", ")
-  tkinsert(txt, "end", textConnectionValue(con))
+  tcltk::tkinsert(txt, "end", textConnectionValue(con))
   close(con)
-  tkconfigure(txt, state="disabled")
+  tcltk::tkconfigure(txt, state="disabled")
 
   plot.communities <- function(simple=FALSE) {
     graph <- get("graphs", .tkigraph.env)[[gnos]]
@@ -1896,14 +1896,14 @@ tkigraph <- function() {
     .tkigraph.add.graph(g)
   }
   
-  tkgrid(tkbutton(dialog, text="Draw community",
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Draw community",
                   command=function() plot.communities(simple=FALSE)),
          "in"=frame, sticky="ew", column=2, row=1, padx=10, pady=10)  
-  tkgrid(tkbutton(dialog, text="Create graph from community",
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Create graph from community",
                   command=create.graph),
          "in"=frame, sticky="ew", column=2, row=2, padx=10, pady=10)         
   
-  tkgrid(tkbutton(dialog, text="Close", command=function() tkdestroy(dialog)),
+  tcltk::tkgrid(tcltk::tkbutton(dialog, text="Close", command=function() tcltk::tkdestroy(dialog)),
          "in"=frame, sticky="nsew", columnspan=3, padx=10, pady=10)  
 }
 
@@ -1921,53 +1921,53 @@ tkigraph <- function() {
 }  
 
 .tkigraph.help <- function(page="index.html") {
-  dialog <- tktoplevel()
-  tktitle(dialog) <- "Help (main page)"
+  dialog <- tcltk::tktoplevel()
+  tcltk::tktitle(dialog) <- "Help (main page)"
 
   close <- function() {
-    tkdestroy(dialog)
+    tcltk::tkdestroy(dialog)
   }
 
-  scr <- tkscrollbar(dialog, repeatinterval=5,
-                     command=function(...) tkyview(txt,...))
-  txt <- tktext(dialog, yscrollcommand=function(...) tkset(scr, ...),
+  scr <- tcltk::tkscrollbar(dialog, repeatinterval=5,
+                     command=function(...) tcltk::tkyview(txt,...))
+  txt <- tcltk::tktext(dialog, yscrollcommand=function(...) tcltk::tkset(scr, ...),
                 width=80, height=40)
 
-  main.menu <- tkmenu(dialog)
-  tkadd(main.menu, "command", label="Back", command=function() {
-    tcl("render_back", txt)
+  main.menu <- tcltk::tkmenu(dialog)
+  tcltk::tkadd(main.menu, "command", label="Back", command=function() {
+    tcltk::tcl("render_back", txt)
   })
-  tkadd(main.menu, "command", label="Forw", command=function() {
-    tcl("render_forw", txt)
+  tcltk::tkadd(main.menu, "command", label="Forw", command=function() {
+    tcltk::tcl("render_forw", txt)
   })
-  tkadd(main.menu, "command", label="Home", command=function() {
-    tcl("render", txt, "index.html"); return()
+  tcltk::tkadd(main.menu, "command", label="Home", command=function() {
+    tcltk::tcl("render", txt, "index.html"); return()
   })
-  tkadd(main.menu, "command", label="Close", command=function() {
-    tkdestroy(dialog); return()
+  tcltk::tkadd(main.menu, "command", label="Close", command=function() {
+    tcltk::tkdestroy(dialog); return()
   })
-  tkconfigure(dialog, "-menu", main.menu)
+  tcltk::tkconfigure(dialog, "-menu", main.menu)
   
-  tkpack(scr, side="right", fill="y", expand=0)
-  tkpack(txt, side="left", fill="both", expand=1)
+  tcltk::tkpack(scr, side="right", fill="y", expand=0)
+  tcltk::tkpack(txt, side="left", fill="both", expand=1)
 
-  browser.button <- tkbutton(dialog, command=function() {
-    browseURL(tclvalue("browser_url"))
+  browser.button <- tcltk::tkbutton(dialog, command=function() {
+    browseURL(tcltk::tclvalue("browser_url"))
   })
   
-  tcl("global", "tkigraph_help_root", "tkigraph_help_history",
+  tcltk::tcl("global", "tkigraph_help_root", "tkigraph_help_history",
       "tkigraph_help_history_pos", "browser_button", "browser_url")  
-  tcl("set", "tkigraph_help_root",
+  tcltk::tcl("set", "tkigraph_help_root",
       system.file("tkigraph_help", package="igraph"))
-  tcl("set", "browser_button", browser.button)
+  tcltk::tcl("set", "browser_button", browser.button)
   
-  tcl("source", system.file("html_library.tcl", package="igraph"))
-  tcl("source", system.file("my_html_library.tcl", package="igraph"))
-  tcl("HMinit_win", txt)
-  tcl("start_history", txt)
-  tcl("render", txt, "index.html")
+  tcltk::tcl("source", system.file("html_library.tcl", package="igraph"))
+  tcltk::tcl("source", system.file("my_html_library.tcl", package="igraph"))
+  tcltk::tcl("HMinit_win", txt)
+  tcltk::tcl("start_history", txt)
+  tcltk::tcl("render", txt, "index.html")
   
-  tkconfigure(txt, state="disabled")
+  tcltk::tkconfigure(txt, state="disabled")
 }
 
 .tkigraph.help.external <- function(page="index.html") {
@@ -1976,24 +1976,24 @@ tkigraph <- function() {
 }
 
 .tkigraph.about <- function() {
-  dialog <- tktoplevel()
-  tktitle(dialog) <- "About tkigraph"
-  image <-tkimage.create("photo", "img", format="gif",
+  dialog <- tcltk::tktoplevel()
+  tcltk::tktitle(dialog) <- "About tkigraph"
+  image <- tcltk::tkimage.create("photo", "img", format="gif",
                          file=system.file("igraph.gif", package="igraph"))
-  logo <- tklabel(dialog, relief="flat", padx=10, pady=10, image=image)
-  label <- tklabel(dialog, padx=30, pady=10,
+  logo <- tcltk::tklabel(dialog, relief="flat", padx=10, pady=10, image=image)
+  label <- tcltk::tklabel(dialog, padx=30, pady=10,
                    text=paste(sep="", "tkigraph (c) 2009 Gabor Csardi\n",
                      "igraph (c) 2003-2009 Gabor Csardi and Tamas Nepusz\n\n",
                      "This is igraph version ",
                      packageDescription("igraph")$Version, " and\n",
                      R.version$version.string))
-  close <- tkbutton(dialog, text="Close", command=function() {
-    tkdestroy(dialog); return()
+  close <- tcltk::tkbutton(dialog, text="Close", command=function() {
+    tcltk::tkdestroy(dialog); return()
   })
 
-  tkpack(logo, side="top", anchor="c", expand=0)
-  tkpack(label, side="top", anchor="c", expand=0)
-  tkpack(close, side="bottom", anchor="c", expand=0)
+  tcltk::tkpack(logo, side="top", anchor="c", expand=0)
+  tcltk::tkpack(label, side="top", anchor="c", expand=0)
+  tcltk::tkpack(close, side="bottom", anchor="c", expand=0)
 }
 
 #####################################################
@@ -2057,9 +2057,9 @@ tkigraph <- function() {
        "data frame too wide")
     options(width = oldwidth)
     if (is.null(inthis)) {
-      base <- tktoplevel()
-      tkwm.geometry(base, placement)
-      tkwm.title(base, {
+      base <- tcltk::tktoplevel()
+      tcltk::tkwm.geometry(base, placement)
+      tcltk::tkwm.title(base, {
         if (is.null(title))
           object.name
         else title
@@ -2075,14 +2075,14 @@ tkigraph <- function() {
     yy <- substring(zz, 2 + max(nchar(row.names(dataframe))))
     datawidth <- max(nchar(yy))
     winwidth <- min(1 + datawidth, maxwidth)
-    hdr <- tktext(base,
+    hdr <- tcltk::tktext(base,
                   bg = colname.bgcolor,
                   fg = colname.textcolor,
                   font = font,
                   height = 1,
                   width = winwidth,
                   takefocus = TRUE)
-    ftr <- tktext(base,
+    ftr <- tcltk::tktext(base,
                   bg = colname.bgcolor,
                   fg = colname.textcolor,
                   font = font,
@@ -2090,7 +2090,7 @@ tkigraph <- function() {
                   width = winwidth,
                   takefocus = TRUE)
     textheight <- min(maxheight, nrows)
-    txt <- tktext(base,
+    txt <- tcltk::tktext(base,
                   bg = body.bgcolor,
                   fg = body.textcolor,
                   font = font,
@@ -2098,216 +2098,216 @@ tkigraph <- function() {
                   width = winwidth,
                   setgrid = 1,
                   takefocus = TRUE)
-     lnames <- tktext(base,
+     lnames <- tcltk::tktext(base,
                      bg = rowname.bgcolor,
                      fg = rowname.textcolor,
                      font = font,
                      height = textheight,
                      width = namewidth,
                      takefocus = TRUE)
-    rnames <- tktext(base,
+    rnames <- tcltk::tktext(base,
                      bg = rowname.bgcolor,
                      fg = rowname.textcolor,
                      font = font,
                      height = textheight,
                      width = namewidth,
                      takefocus = TRUE)
-    xscroll <- tkscrollbar(base,
+    xscroll <- tcltk::tkscrollbar(base,
                            orient = "horizontal",
                            repeatinterval = 1,
                            command = function(...) {
-                               tkxview(txt, ...)
-                               tkxview(hdr, ...)
-                               tkxview(ftr, ...)
+                               tcltk::tkxview(txt, ...)
+                               tcltk::tkxview(hdr, ...)
+                               tcltk::tkxview(ftr, ...)
                            })
     string.to.vector <- function(string.of.indices) {
-        string.of.indices <- tclvalue(string.of.indices)
+        string.of.indices <- tcltk::tclvalue(string.of.indices)
         as.numeric(strsplit(string.of.indices, split = " ")[[1]])
     }
-    tkconfigure(txt, xscrollcommand = function(...) {
-        tkset(xscroll, ...)
-        xy <- string.to.vector(tkget(xscroll))
-        tkxview.moveto(hdr, xy[1])
-        tkxview.moveto(ftr, xy[1])
+    tcltk::tkconfigure(txt, xscrollcommand = function(...) {
+        tcltk::tkset(xscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(xscroll))
+        tcltk::tkxview.moveto(hdr, xy[1])
+        tcltk::tkxview.moveto(ftr, xy[1])
     })
-    tkconfigure(hdr, xscrollcommand = function(...) {
-        tkset(xscroll, ...)
-        xy <- string.to.vector(tkget(xscroll))
-        tkxview.moveto(txt, xy[1])
-        tkxview.moveto(ftr, xy[1])
+    tcltk::tkconfigure(hdr, xscrollcommand = function(...) {
+        tcltk::tkset(xscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(xscroll))
+        tcltk::tkxview.moveto(txt, xy[1])
+        tcltk::tkxview.moveto(ftr, xy[1])
     })
-    tkconfigure(ftr, xscrollcommand = function(...) {
-        tkset(xscroll, ...)
-        xy <- string.to.vector(tkget(xscroll))
-        tkxview.moveto(hdr, xy[1])
-        tkxview.moveto(txt, xy[1])
+    tcltk::tkconfigure(ftr, xscrollcommand = function(...) {
+        tcltk::tkset(xscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(xscroll))
+        tcltk::tkxview.moveto(hdr, xy[1])
+        tcltk::tkxview.moveto(txt, xy[1])
     })
-    yscroll <- tkscrollbar(base,
+    yscroll <- tcltk::tkscrollbar(base,
                            orient = "vertical",
                            repeatinterval = 1,
                            command = function(...) {
-                               tkyview(txt, ...)
-                               tkyview(lnames, ...)
-                               tkyview(rnames, ...)
+                               tcltk::tkyview(txt, ...)
+                               tcltk::tkyview(lnames, ...)
+                               tcltk::tkyview(rnames, ...)
                            })
-    tkconfigure(txt, yscrollcommand = function(...) {
-        tkset(yscroll, ...)
-        xy <- string.to.vector(tkget(yscroll))
-        tkyview.moveto(lnames, xy[1])
-        tkyview.moveto(rnames, xy[1])
+    tcltk::tkconfigure(txt, yscrollcommand = function(...) {
+        tcltk::tkset(yscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(yscroll))
+        tcltk::tkyview.moveto(lnames, xy[1])
+        tcltk::tkyview.moveto(rnames, xy[1])
     })
-    tkconfigure(lnames, yscrollcommand = function(...) {
-        tkset(yscroll, ...)
-        xy <- string.to.vector(tkget(yscroll))
-        tkyview.moveto(txt, xy[1])
-        tkyview.moveto(rnames, xy[1])
+    tcltk::tkconfigure(lnames, yscrollcommand = function(...) {
+        tcltk::tkset(yscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(yscroll))
+        tcltk::tkyview.moveto(txt, xy[1])
+        tcltk::tkyview.moveto(rnames, xy[1])
     })
-    tkconfigure(rnames, yscrollcommand = function(...) {
-        tkset(yscroll, ...)
-        xy <- string.to.vector(tkget(yscroll))
-        tkyview.moveto(txt, xy[1])
-        tkyview.moveto(lnames, xy[1])
+    tcltk::tkconfigure(rnames, yscrollcommand = function(...) {
+        tcltk::tkset(yscroll, ...)
+        xy <- string.to.vector(tcltk::tkget(yscroll))
+        tcltk::tkyview.moveto(txt, xy[1])
+        tcltk::tkyview.moveto(lnames, xy[1])
     })
-    tkbind(txt, "<B2-Motion>", function(x, y) {
-        tkscan.dragto(txt, x, y)
+    tcltk::tkbind(txt, "<B2-Motion>", function(x, y) {
+        tcltk::tkscan.dragto(txt, x, y)
     })
 ## The next block just enables copying from the text boxes
 {
     copyText.hdr <- function(){
-        tcl("event", "generate",
-              .Tk.ID(hdr),
+        tcltk::tcl("event", "generate",
+                   tcltk::.Tk.ID(hdr),
               "<<Copy>>")}
-    tkbind(hdr, "<Button-1>", function() tkfocus(hdr))
-    editPopupMenu.hdr <- tkmenu(hdr, tearoff = FALSE)
-    tkadd(editPopupMenu.hdr, "command", label = "Copy <Ctrl-C>",
+    tcltk::tkbind(hdr, "<Button-1>", function() tcltk::tkfocus(hdr))
+    editPopupMenu.hdr <- tcltk::tkmenu(hdr, tearoff = FALSE)
+    tcltk::tkadd(editPopupMenu.hdr, "command", label = "Copy <Ctrl-C>",
               command = copyText.hdr)
     RightClick.hdr <- function(x,y) # x and y are the mouse coordinates
     {
-        rootx <- as.integer(tkwinfo("rootx", hdr))
-        rooty <- as.integer(tkwinfo("rooty", hdr))
+        rootx <- as.integer(tcltk::tkwinfo("rootx", hdr))
+        rooty <- as.integer(tcltk::tkwinfo("rooty", hdr))
         xTxt <- as.integer(x) + rootx
         yTxt <- as.integer(y) + rooty
-        tcl("tk_popup", editPopupMenu.hdr, xTxt, yTxt)
+        tcltk::tcl("tk_popup", editPopupMenu.hdr, xTxt, yTxt)
     }
-    tkbind(hdr, "<Button-3>", RightClick.hdr)
-    tkbind(hdr, "<Control-KeyPress-c>", copyText.hdr)
+    tcltk::tkbind(hdr, "<Button-3>", RightClick.hdr)
+    tcltk::tkbind(hdr, "<Control-KeyPress-c>", copyText.hdr)
     ##
     copyText.ftr <- function(){
-        tcl("event", "generate",
-              .Tk.ID(ftr),
+        tcltk::tcl("event", "generate",
+              tcltk::.Tk.ID(ftr),
               "<<Copy>>")}
-    tkbind(ftr, "<Button-1>", function() tkfocus(ftr))
-    editPopupMenu.ftr <- tkmenu(ftr, tearoff = FALSE)
-    tkadd(editPopupMenu.ftr, "command", label = "Copy <Ctrl-C>",
+    tcltk::tkbind(ftr, "<Button-1>", function() tcltk::tkfocus(ftr))
+    editPopupMenu.ftr <- tcltk::tkmenu(ftr, tearoff = FALSE)
+    tcltk::tkadd(editPopupMenu.ftr, "command", label = "Copy <Ctrl-C>",
               command = copyText.ftr)
     RightClick.ftr <- function(x,y) # x and y are the mouse coordinates
     {
-        rootx <- as.integer(tkwinfo("rootx", ftr))
-        rooty <- as.integer(tkwinfo("rooty", ftr))
+        rootx <- as.integer(tcltk::tkwinfo("rootx", ftr))
+        rooty <- as.integer(tcltk::tkwinfo("rooty", ftr))
         xTxt <- as.integer(x) + rootx
         yTxt <- as.integer(y) + rooty
-        tcl("tk_popup", editPopupMenu.ftr, xTxt, yTxt)
+        tcltk::tcl("tk_popup", editPopupMenu.ftr, xTxt, yTxt)
     }
-    tkbind(ftr, "<Button-3>", RightClick.ftr)
-    tkbind(ftr, "<Control-KeyPress-c>", copyText.ftr)
+    tcltk::tkbind(ftr, "<Button-3>", RightClick.ftr)
+    tcltk::tkbind(ftr, "<Control-KeyPress-c>", copyText.ftr)
     ##
     copyText.txt <- function(){
-        tcl("event", "generate",
-              .Tk.ID(txt),
+        tcltk::tcl("event", "generate",
+              tcltk::.Tk.ID(txt),
               "<<Copy>>")}
-    tkbind(txt, "<Button-1>", function() tkfocus(txt))
-    editPopupMenu.txt <- tkmenu(txt, tearoff = FALSE)
-    tkadd(editPopupMenu.txt, "command", label = "Copy <Ctrl-C>",
+    tcltk::tkbind(txt, "<Button-1>", function() tcltk::tkfocus(txt))
+    editPopupMenu.txt <- tcltk::tkmenu(txt, tearoff = FALSE)
+    tcltk::tkadd(editPopupMenu.txt, "command", label = "Copy <Ctrl-C>",
               command = copyText.txt)
     RightClick.txt <- function(x,y) # x and y are the mouse coordinates
     {
-        rootx <- as.integer(tkwinfo("rootx", txt))
-        rooty <- as.integer(tkwinfo("rooty", txt))
+        rootx <- as.integer(tcltk::tkwinfo("rootx", txt))
+        rooty <- as.integer(tcltk::tkwinfo("rooty", txt))
         xTxt <- as.integer(x) + rootx
         yTxt <- as.integer(y) + rooty
-        tcl("tk_popup", editPopupMenu.txt, xTxt, yTxt)
+        tcltk::tcl("tk_popup", editPopupMenu.txt, xTxt, yTxt)
     }
-    tkbind(txt, "<Button-3>", RightClick.txt)
-    tkbind(txt, "<Control-KeyPress-c>", copyText.txt)
+    tcltk::tkbind(txt, "<Button-3>", RightClick.txt)
+    tcltk::tkbind(txt, "<Control-KeyPress-c>", copyText.txt)
     ##
     copyText.lnames <- function(){
-        tcl("event", "generate",
-              .Tk.ID(lnames),
+        tcltk::tcl("event", "generate",
+              tcltk::.Tk.ID(lnames),
               "<<Copy>>")}
-    tkbind(lnames, "<Button-1>", function() tkfocus(lnames))
-    editPopupMenu.lnames <- tkmenu(lnames, tearoff = FALSE)
-    tkadd(editPopupMenu.lnames, "command", label = "Copy <Ctrl-C>",
+    tcltk::tkbind(lnames, "<Button-1>", function() tcltk::tkfocus(lnames))
+    editPopupMenu.lnames <- tcltk::tkmenu(lnames, tearoff = FALSE)
+    tcltk::tkadd(editPopupMenu.lnames, "command", label = "Copy <Ctrl-C>",
               command = copyText.lnames)
     RightClick.lnames <- function(x,y) # x and y are the mouse coordinates
     {
-        rootx <- as.integer(tkwinfo("rootx", lnames))
-        rooty <- as.integer(tkwinfo("rooty", lnames))
+        rootx <- as.integer(tcltk::tkwinfo("rootx", lnames))
+        rooty <- as.integer(tcltk::tkwinfo("rooty", lnames))
         xTxt <- as.integer(x) + rootx
         yTxt <- as.integer(y) + rooty
-        tcl("tk_popup", editPopupMenu.lnames, xTxt, yTxt)
+        tcltk::tcl("tk_popup", editPopupMenu.lnames, xTxt, yTxt)
     }
-    tkbind(lnames, "<Button-3>", RightClick.lnames)
-    tkbind(lnames, "<Control-KeyPress-c>", copyText.lnames)
+    tcltk::tkbind(lnames, "<Button-3>", RightClick.lnames)
+    tcltk::tkbind(lnames, "<Control-KeyPress-c>", copyText.lnames)
     ##
         copyText.rnames <- function(){
-        tcl("event", "generate",
-              .Tk.ID(rnames),
+        tcltk::tcl("event", "generate",
+              tcltk::.Tk.ID(rnames),
               "<<Copy>>")}
-    tkbind(rnames, "<Button-1>", function() tkfocus(rnames))
-    editPopupMenu.rnames <- tkmenu(rnames, tearoff = FALSE)
-    tkadd(editPopupMenu.rnames, "command", label = "Copy <Ctrl-C>",
+    tcltk::tkbind(rnames, "<Button-1>", function() tcltk::tkfocus(rnames))
+    editPopupMenu.rnames <- tcltk::tkmenu(rnames, tearoff = FALSE)
+    tcltk::tkadd(editPopupMenu.rnames, "command", label = "Copy <Ctrl-C>",
               command = copyText.rnames)
     RightClick.rnames <- function(x,y) # x and y are the mouse coordinates
     {
-        rootx <- as.integer(tkwinfo("rootx", rnames))
-        rooty <- as.integer(tkwinfo("rooty", rnames))
+        rootx <- as.integer(tcltk::tkwinfo("rootx", rnames))
+        rooty <- as.integer(tcltk::tkwinfo("rooty", rnames))
         xTxt <- as.integer(x) + rootx
         yTxt <- as.integer(y) + rooty
-        tcl("tk_popup", editPopupMenu.rnames, xTxt, yTxt)
+        tcltk::tcl("tk_popup", editPopupMenu.rnames, xTxt, yTxt)
     }
-    tkbind(rnames, "<Button-3>", RightClick.rnames)
-    tkbind(rnames, "<Control-KeyPress-c>", copyText.rnames)
+    tcltk::tkbind(rnames, "<Button-3>", RightClick.rnames)
+    tcltk::tkbind(rnames, "<Control-KeyPress-c>", copyText.rnames)
 }
 
-    tktag.configure(hdr, "notwrapped", wrap = "none")
-    tktag.configure(ftr, "notwrapped", wrap = "none")
-    tktag.configure(txt, "notwrapped", wrap = "none")
-    tktag.configure(lnames, "notwrapped", wrap = "none")
-    tktag.configure(rnames, "notwrapped", wrap = "none")
-    tkinsert(txt, "end", paste(paste(yy[-1], collapse = "\n"),
+    tcltk::tktag.configure(hdr, "notwrapped", wrap = "none")
+    tcltk::tktag.configure(ftr, "notwrapped", wrap = "none")
+    tcltk::tktag.configure(txt, "notwrapped", wrap = "none")
+    tcltk::tktag.configure(lnames, "notwrapped", wrap = "none")
+    tcltk::tktag.configure(rnames, "notwrapped", wrap = "none")
+    tcltk::tkinsert(txt, "end", paste(paste(yy[-1], collapse = "\n"),
                                sep = ""), "notwrapped")
 
-    tkgrid(txt, row = 1, column = 1, sticky = "nsew")
+    tcltk::tkgrid(txt, row = 1, column = 1, sticky = "nsew")
     if ("top" %in% colname.bar) {
-        tkinsert(hdr, "end", paste(yy[1], sep = ""), "notwrapped")
-        tkgrid(hdr, row = 0, column = 1, sticky = "ew")
+        tcltk::tkinsert(hdr, "end", paste(yy[1], sep = ""), "notwrapped")
+        tcltk::tkgrid(hdr, row = 0, column = 1, sticky = "ew")
     }
     if ("bottom" %in% colname.bar) {
-        tkinsert(ftr, "end", paste(yy[1], sep = ""), "notwrapped")
-        tkgrid(ftr, row = 2, column = 1, sticky = "ew")
+        tcltk::tkinsert(ftr, "end", paste(yy[1], sep = ""), "notwrapped")
+        tcltk::tkgrid(ftr, row = 2, column = 1, sticky = "ew")
     }
     if ("left" %in% rowname.bar) {
-        tkinsert(lnames, "end",
+        tcltk::tkinsert(lnames, "end",
                  paste(rowname.text, collapse = "\n"),
                  "notwrapped")
-        tkgrid(lnames, row = 1, column = 0, sticky = "ns")
+        tcltk::tkgrid(lnames, row = 1, column = 0, sticky = "ns")
     }
     if ("right" %in% rowname.bar) {
-        tkinsert(rnames, "end",
+        tcltk::tkinsert(rnames, "end",
                  paste(rowname.text, collapse = "\n"),
                  "notwrapped")
-        tkgrid(rnames, row = 1, column = 2, sticky = "ns")
+        tcltk::tkgrid(rnames, row = 1, column = 2, sticky = "ns")
     }
-    tkconfigure(hdr, state = "disabled")
-    tkconfigure(ftr, state = "disabled")
-    tkconfigure(txt, state = "disabled")
-    tkconfigure(lnames, state = "disabled")
-    tkconfigure(rnames, state = "disabled")
+    tcltk::tkconfigure(hdr, state = "disabled")
+    tcltk::tkconfigure(ftr, state = "disabled")
+    tcltk::tkconfigure(txt, state = "disabled")
+    tcltk::tkconfigure(lnames, state = "disabled")
+    tcltk::tkconfigure(rnames, state = "disabled")
     if (maxheight < nrows) {
-        tkgrid(yscroll, row = 1, column = 3, sticky = "ns")
+        tcltk::tkgrid(yscroll, row = 1, column = 3, sticky = "ns")
     }
     if (maxwidth < datawidth) {
-        tkgrid(xscroll, row = 3, column = 1, sticky = "ew")
+        tcltk::tkgrid(xscroll, row = 3, column = 1, sticky = "ew")
     }
 
     sortColumn <- function(n, decreasing=FALSE) {
@@ -2337,60 +2337,60 @@ tkigraph <- function() {
                          inthis=base)
     }
 
-    pf <- tkframe(base)
-    if (is.null(inthis)) { tkgrid(pf, column=5, row=0, rowspan=10, sticky="new") }
+    pf <- tcltk::tkframe(base)
+    if (is.null(inthis)) { tcltk::tkgrid(pf, column=5, row=0, rowspan=10, sticky="new") }
 
     if (!is.null(showmean) && is.null(inthis)) {
       for (i in seq(along=showmean)) {
-        tkgrid(tklabel(base, text=showmean[1]), sticky="nsew",
+        tcltk::tkgrid(tcltk::tklabel(base, text=showmean[1]), sticky="nsew",
                column=0, padx=1, pady=1, columnspan=4)
       }
     }
 
-    sortBut <- tkbutton(base, text="Sort otherwise", command=function() {})
+    sortBut <- tcltk::tkbutton(base, text="Sort otherwise", command=function() {})
 
     sortPopup <- function() {
-      sortMenu <- tkmenu(base, tearoff=FALSE)
+      sortMenu <- tcltk::tkmenu(base, tearoff=FALSE)
       sapply(seq(along=colnames(dataframe)),
              function(n) {
-               tkadd(sortMenu, "command", label=colnames(dataframe)[n],
+               tcltk::tkadd(sortMenu, "command", label=colnames(dataframe)[n],
                      command=function() sortColumn(colnames(dataframe)[n]))
                label <- paste(colnames(dataframe)[n], "decreasing", sep=", ")
-               tkadd(sortMenu, "command", label=label,
+               tcltk::tkadd(sortMenu, "command", label=label,
                      command=function() sortColumn(colnames(dataframe)[n],
                        decreasing=TRUE))
              })
-      rootx <- as.integer(tkwinfo("rootx", sortBut))
-      rooty <- as.integer(tkwinfo("rooty", sortBut))
-      tkpopup(sortMenu, rootx, rooty)
+      rootx <- as.integer(tcltk::tkwinfo("rootx", sortBut))
+      rooty <- as.integer(tcltk::tkwinfo("rooty", sortBut))
+      tcltk::tkpopup(sortMenu, rootx, rooty)
     }
 
     if (!is.null(plot.command)) {
-      but <- tkbutton(base, text=plot.text, command=plot.command)
-      tkgrid(but, "in"=pf, sticky="ew", column=10, row=1, padx=1, pady=1)
+      but <- tcltk::tkbutton(base, text=plot.text, command=plot.command)
+      tcltk::tkgrid(but, "in"=pf, sticky="ew", column=10, row=1, padx=1, pady=1)
     }
 
-    if (sort.button) { tkgrid(sortBut, "in"=pf, sticky="ew", column=10, row=2,
+    if (sort.button) { tcltk::tkgrid(sortBut, "in"=pf, sticky="ew", column=10, row=2,
                               padx=1, pady=1) }
-    tkconfigure(sortBut, command=sortPopup)
+    tcltk::tkconfigure(sortBut, command=sortPopup)
 
-    savebut <- tkbutton(base, text="Export table to file", command=function() {
-      filename <- tkgetSaveFile(initialfile="data.txt",
+    savebut <- tcltk::tkbutton(base, text="Export table to file", command=function() {
+      filename <- tcltk::tkgetSaveFile(initialfile="data.txt",
                                 defaultextension="txt",
                                 title="Export as table")
       filename <- paste(as.character(filename), collapse=" ")
       write.table(dataframe, file=filename, row.names=FALSE, col.names=FALSE)
     })
-    tkgrid(savebut, "in"=pf, sticky="ew", column=10, row=3, padx=1, pady=1)
+    tcltk::tkgrid(savebut, "in"=pf, sticky="ew", column=10, row=3, padx=1, pady=1)
 
-    but <- tkbutton(base, text="Close", command=function() tkdestroy(base))
-    tkgrid(but, "in"=pf, sticky="ew", column=10, row=4, padx=1, pady=1) 
-    tkgrid.columnconfigure(pf, 0, weight=1)
+    but <- tcltk::tkbutton(base, text="Close", command=function() tcltk::tkdestroy(base))
+    tcltk::tkgrid(but, "in"=pf, sticky="ew", column=10, row=4, padx=1, pady=1) 
+    tcltk::tkgrid.columnconfigure(pf, 0, weight=1)
 
-    tkgrid.rowconfigure(base, 1, weight = 1)
-    tkgrid.columnconfigure(base, 1, weight = 1)
-    tkwm.maxsize(base, 2 + datawidth, nrows)
-    tkwm.minsize(base, 2 + nchar(names(dataframe)[1]), 1)
+    tcltk::tkgrid.rowconfigure(base, 1, weight = 1)
+    tcltk::tkgrid.columnconfigure(base, 1, weight = 1)
+    tcltk::tkwm.maxsize(base, 2 + datawidth, nrows)
+    tcltk::tkwm.minsize(base, 2 + nchar(names(dataframe)[1]), 1)
 invisible(NULL)
 }
 

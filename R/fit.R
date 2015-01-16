@@ -168,7 +168,7 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
      -n*log(C)+alpha*sum(log(x))
   }
 
-  alpha <- mle(mlogl, start=list(alpha=start), ...)
+  alpha <- stats4::mle(mlogl, start=list(alpha=start), ...)
 
   alpha
 }

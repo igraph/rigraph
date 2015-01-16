@@ -75,9 +75,9 @@
   pb <- get(".igraph.pb", asNamespace("igraph"))
   if (percent==0) {
     if (!is.null(pb)) { close(pb) }
-    pb <- tkProgressBar(min=0, max=100, title=message, label="0 %")
+    pb <- tcltk::tkProgressBar(min=0, max=100, title=message, label="0 %")
   }
-  setTkProgressBar(pb, percent, label=paste(percent, "%"))
+  tcltk::setTkProgressBar(pb, percent, label=paste(percent, "%"))
   if (percent==100) {
     close(pb);
     pb <- NULL
@@ -98,8 +98,8 @@
 
   ## Update progress bar
   pb$pb$set(pb$pb$widget, percent)
-  tkconfigure(pb$pb$label, text=substr(message, 1, 20))
-  tcl("update", "idletasks")
+  tcltk::tkconfigure(pb$pb$label, text=substr(message, 1, 20))
+  tcltk::tcl("update", "idletasks")
   
   ## Done
   assign(".igraph.pb", pb, envir=asNamespace("igraph"))  
@@ -108,47 +108,47 @@
 }
 
 .igraph.progress.tkconsole.create <- function(oldverb) {
-  console <- tktoplevel()
-  tktitle(console) <- "igraph console"
+  console <- tcltk::tktoplevel()
+  tcltk::tktitle(console) <- "igraph console"
 
-  fn <- tkfont.create(family="courier", size=8)
+  fn <- tcltk::tkfont.create(family="courier", size=8)
 
-  lfr <- tkframe(console)
-  image <- tkimage.create("photo", "img", format="gif",
+  lfr <- tcltk::tkframe(console)
+  image <- tcltk::tkimage.create("photo", "img", format="gif",
                           file=system.file("igraph2.gif", package="igraph"))
-  logo <- tklabel(lfr, relief="flat", padx=10, pady=10, image=image)
+  logo <- tcltk::tklabel(lfr, relief="flat", padx=10, pady=10, image=image)
   
-  scr <- tkscrollbar(console, repeatinterval=5,
-                     command=function(...) tkyview(txt, ...)) 
-  txt <- tktext(console, yscrollcommand=function(...) tkset(scr, ...),
+  scr <- tcltk::tkscrollbar(console, repeatinterval=5,
+                     command=function(...) tcltk::tkyview(txt, ...)) 
+  txt <- tcltk::tktext(console, yscrollcommand=function(...) tcltk::tkset(scr, ...),
                 width=60, height=7, font=fn)
-  tkconfigure(txt, state="disabled")
+  tcltk::tkconfigure(txt, state="disabled")
   pbar <- .igraph.progress.tkconsole.pbar(console)
 
-  bclear <- tkbutton(lfr, text="Clear", command=function() {
-    tkconfigure(txt, state="normal")
-    tkdelete(txt, "0.0", "end")
-    tkconfigure(txt, state="disabled")
+  bclear <- tcltk::tkbutton(lfr, text="Clear", command=function() {
+    tcltk::tkconfigure(txt, state="normal")
+    tcltk::tkdelete(txt, "0.0", "end")
+    tcltk::tkconfigure(txt, state="disabled")
   })
-  bstop  <- tkbutton(lfr, text="Stop",  command=function() {})
-  bclose <- tkbutton(lfr, text="Close", command=function() {
+  bstop  <- tcltk::tkbutton(lfr, text="Stop",  command=function() {})
+  bclose <- tcltk::tkbutton(lfr, text="Close", command=function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose=oldverb)
     }
-    tkdestroy(console) })
+    tcltk::tkdestroy(console) })
 
-  tkpack(logo, side="top", fill="none", expand=0, anchor="n",
+  tcltk::tkpack(logo, side="top", fill="none", expand=0, anchor="n",
          ipadx=10, ipady=10)
-  tkpack(bclear, side="top", fill="x", expand=0, padx=10)
-  ## tkpack(bstop, side="top", fill="x", expand=0, padx=10)
-  tkpack(bclose, side="top", fill="x", expand=0, padx=10)  
+  tcltk::tkpack(bclear, side="top", fill="x", expand=0, padx=10)
+  ## tcltk::tkpack(bstop, side="top", fill="x", expand=0, padx=10)
+  tcltk::tkpack(bclose, side="top", fill="x", expand=0, padx=10)  
   
-  tkpack(lfr, side="left", fill="none", expand=0, anchor="n")
-  tkpack(pbar$frame, side="bottom", fill="x", expand=0)
-  tkpack(scr, side="right", fill="y", expand=0)
-  tkpack(txt, side="left", fill="both", expand=1)
+  tcltk::tkpack(lfr, side="left", fill="none", expand=0, anchor="n")
+  tcltk::tkpack(pbar$frame, side="bottom", fill="x", expand=0)
+  tcltk::tkpack(scr, side="right", fill="y", expand=0)
+  tcltk::tkpack(txt, side="left", fill="both", expand=1)
 
-  tkbind(console, "<Destroy>", function() {
+  tcltk::tkbind(console, "<Destroy>", function() {
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose=oldverb)
     }
@@ -171,14 +171,14 @@
       return()
     }
   }
-  tkconfigure(txt, state="normal")
+  tcltk::tkconfigure(txt, state="normal")
   now <- paste(sep="", substr(date(), 5, 19), ": ")
   s1 <- grepl("^ ", message)
-  if (!s1) { tkinsert(txt, "insert", now) }
-  tkinsert(txt, "insert", message)
-  tksee(txt, "end")
-  tkconfigure(txt, state="disabled")
-  tcl("update", "idletasks")
+  if (!s1) { tcltk::tkinsert(txt, "insert", now) }
+  tcltk::tkinsert(txt, "insert", message)
+  tcltk::tksee(txt, "end")
+  tcltk::tkconfigure(txt, state="disabled")
+  tcltk::tcl("update", "idletasks")
 }
 
 close.igraphconsole <- function(con, ...) {
@@ -189,33 +189,33 @@ close.igraphconsole <- function(con, ...) {
 
 .igraph.progress.tkconsole.pbar <- function(top) {
   useText <- FALSE
-  have_ttk <- as.character(tcl("info", "tclversion")) >= "8.5"
-  if (!have_ttk && as.character(tclRequire("PBar")) == "FALSE") 
+  have_ttk <- as.character(tcltk::tcl("info", "tclversion")) >= "8.5"
+  if (!have_ttk && as.character(tcltk::tclRequire("PBar")) == "FALSE") 
     useText <- TRUE
-  fn <- tkfont.create(family = "helvetica", size = 10)
-  frame <- tkframe(top)
+  fn <- tcltk::tkfont.create(family = "helvetica", size = 10)
+  frame <- tcltk::tkframe(top)
   if (useText) {
-    .lab <- tklabel(frame, text = " ", font = fn, anchor="w",
+    .lab <- tcltk::tklabel(frame, text = " ", font = fn, anchor="w",
                     padx = 20)
-    tkpack(.lab, side = "left", anchor="w", padx=5)
-    fn2 <- tkfont.create(family = "helvetica", size = 12)
-    .vlab <- tklabel(frame, text = "0%", font = fn2, padx = 20)
-    tkpack(.vlab, side = "right")
+    tcltk::tkpack(.lab, side = "left", anchor="w", padx=5)
+    fn2 <- tcltk::tkfont.create(family = "helvetica", size = 12)
+    .vlab <- tcltk::tklabel(frame, text = "0%", font = fn2, padx = 20)
+    tcltk::tkpack(.vlab, side = "right")
   } else {
-    .lab <- tklabel(frame, text = " ", font = fn, anchor="w",
+    .lab <- tcltk::tklabel(frame, text = " ", font = fn, anchor="w",
                     pady = 5)
-    tkpack(.lab, side = "top", anchor="w", padx=5)
-    tkpack(tklabel(frame, text = "", font = fn), side = "bottom")
-    .val <- tclVar()
+    tcltk::tkpack(.lab, side = "top", anchor="w", padx=5)
+    tcltk::tkpack(tcltk::tklabel(frame, text = "", font = fn), side = "bottom")
+    .val <- tcltk::tclVar()
     pBar <- if (have_ttk) {
-      ttkprogressbar(frame, length = 300, variable=.val)
+      tcltk::ttkprogressbar(frame, length = 300, variable=.val)
     } else {
-      tkwidget(frame, "ProgressBar", width = 300, variable=.val)
+      tcltk::tkwidget(frame, "ProgressBar", width = 300, variable=.val)
     }
-    tkpack(pBar, side = "bottom", anchor="w", padx=5)
+    tcltk::tkpack(pBar, side = "bottom", anchor="w", padx=5)
   }
-  get <- function(w) { return(tclvalue(.val)); }
-  set <- function(w, val) { tclvalue(.val) <<- val }
+  get <- function(w) { return(tcltk::tclvalue(.val)); }
+  set <- function(w, val) { tcltk::tclvalue(.val) <<- val }
   pb <- list(widget=pBar, get=get, set=set, label=.lab)
   list(frame=frame, pb=pb)
 }
