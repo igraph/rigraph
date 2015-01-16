@@ -8,3 +8,5 @@
 ^version_number$
 ^autom4te.cache$
 ^.travis.yml$
+^CONTRIBUTING.md$
+^NEWS.md$
