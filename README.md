@@ -22,6 +22,11 @@ devtools::install_github("igraph/rigraph")
 
 See the [igraph homepage](http://igraph.org/r) for more.
 
+## Contributions
+
+Please read our
+[contribution guide](https://github.com/igraph/rigraph/blob/dev/CONTRIBUTING.md).
+
 ## License
 
 GNU GPL version 2 or later
