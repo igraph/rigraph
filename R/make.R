@@ -177,7 +177,6 @@ constructor_spec <- function(fun, ..., .lazy = FALSE) {
 ## -----------------------------------------------------------------
 ## Constructor modifiers
 
-
 constructor_modifier <- function(...) {
   structure(
     list(...),
@@ -186,7 +185,17 @@ constructor_modifier <- function(...) {
 }
 
 
+#' Construtor modifier to remove all attributes from a graph
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' g1 <- make_ring(10)
+#' g1
+#'
+#' g2 <- make_(ring(10), without_attr())
+#' g2
 
 without_attr <- function() {
   constructor_modifier(
@@ -195,7 +204,15 @@ without_attr <- function() {
 }
 
 
+#' Constructor modifier to drop loop edges
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' # An artificial example
+#' make_(full_graph(5, loops = TRUE))
+#' make_(full_graph(5, loops = TRUE), without_loops())
 
 without_loops <- function() {
   constructor_modifier(
@@ -204,7 +221,14 @@ without_loops <- function() {
 }
 
 
+#' Constructor modifier to drop multiple edges
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' sample_(pa(10, m = 3, algorithm = "bag"))
+#' sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
 
 without_multiples <- function() {
   constructor_modifier(
@@ -213,7 +237,14 @@ without_multiples <- function() {
 }
 
 
+#' Constructor modifier to drop multiple and loop edges
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' sample_(pa(10, m = 3, algorithm = "bag"))
+#' sample_(pa(10, m = 3, algorithm = "bag"), simplified())
 
 simplified <- function() {
   constructor_modifier(
@@ -222,7 +253,20 @@ simplified <- function() {
 }
 
 
+#' Constructor modifier to add vertex attributes
+#'
+#' @param ... The attributes to add. They must be named.
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' make_(ring(10),
+#'   with_vertex_(
+#'     color = "#7fcdbb",
+#'     frame.color = "#7fcdbb",
+#'     name = LETTERS[1:10])) %>%
+#'   plot()
 
 with_vertex_ <- function(...) {
 
@@ -235,7 +279,19 @@ with_vertex_ <- function(...) {
 }
 
 
+#' Constructor modifier to add edge attributes
+#'
+#' @param ... The attributes to add. They must be named.
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' make_(ring(10),
+#'   with_edge_(
+#'     color = "red",
+#'     weight = rep(1:2, 5))) %>%
+#'   plot()
 
 with_edge_ <- function(...) {
 
@@ -248,7 +304,15 @@ with_edge_ <- function(...) {
 }
 
 
+#' Constructor modifier to add graph attributes
+#'
+#' @param ... The attributes to add. They must be named.
+#'
+#' @family constructor modifiers
+#'
 #' @export
+#' @examples
+#' make_(ring(10), with_graph_(name = "10-ring"))
 
 with_graph_ <- function(...) {
 
@@ -377,12 +441,14 @@ with_graph_ <- function(...) {
 #'   insensitive.
 #'
 #'   Starting from igraph 0.8.0, you can also include literals here,
-#'   via igraph's formula notation (see \code{\link{graph_from_formula}}).
+#'   via igraph's formula notation (see \code{\link{graph_from_literal}}).
 #'   In this case, the first term of the formula has to start with
 #'   a \sQuote{\code{~}} character, just like regular formulae in R.
 #'   See examples below.
-#' @param ... Extra arguments for the case when the graph is given
-#'   via a literal, see \code{\link{graph_from_literal}}.
+#' @param ... For \code{make_graph}: extra arguments for the case when the
+#'   graph is given via a literal, see \code{\link{graph_from_literal}}.
+#'   For \code{directed_graph} and \code{undirected_graph}:
+#'   Passed to \code{make_directed_graph} or \code{make_undirected_graph}.
 #' @param n The number of vertices in the graph. This argument is
 #'   ignored (with a warning) if \code{edges} are symbolic vertex names. It
 #'   is also ignored if there is a bigger vertex id in \code{edges}. This
@@ -522,8 +588,6 @@ make_undirected_graph <- function(edges, n = max(edges)) {
 }
 
 #' @rdname make_graph
-#' @param ... Passed to \code{make_directed_graph} or
-#'   \code{make_undirected_graph}.
 #' @export
 
 directed_graph <- function(...) constructor_spec(make_directed_graph, ...)

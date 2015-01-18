@@ -34,7 +34,7 @@ sample_motifs(graph, size = 3, cut.prob = rep(0, size), sample.size =
   \code{motifs} searches a graph for motifs of a given size and
   returns a numeric vector containing the number of different
   motifs. The order of the motifs is defined by their isomorphism class,
-  see \code{\link{iso_class}}.
+  see \code{\link{isomorphism_class}}.
 
   \code{count_motifs} calculates the total number of motifs of a
   given size in graph.
@@ -53,7 +53,7 @@ sample_motifs(graph, size = 3, cut.prob = rep(0, size), sample.size =
 }
 % \references{}
 \author{ Gabor Csardi \email{csardi.gabor@gmail.com}}
-\seealso{\code{\link{iso_class}}}
+\seealso{\code{\link{isomorphism_class}}}
 \examples{
 g <- barabasi.game(100)
 motifs(g, 3)

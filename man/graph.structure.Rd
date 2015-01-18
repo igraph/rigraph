@@ -44,7 +44,7 @@ delete_vertices(graph, v)
 }
 \arguments{
   \item{x,graph,e1}{The graph to work on.}
-  \item{i,j,from,to}{Vertex ids or names or logical vectors. See details below.}
+  \item{i,j}{Vertex ids or names or logical vectors. See details below.}
   \item{\dots}{These are currently ignored for the indexing operators.
     For \code{vertex}, \code{vertices}, \code{edge}, \code{edges} and
     \code{path} see details below.

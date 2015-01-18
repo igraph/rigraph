@@ -316,6 +316,8 @@ print.communities <- function(x, ...) {
 #'   modularity values is calculated automatically.
 #' @return A \code{communities} object.
 #'
+#' @aliases create.communities
+#'
 #' @export
 
 make_clusters <- function(graph, membership = NULL, algorithm = NULL,
@@ -2002,7 +2004,37 @@ i_compare <- function (comm1, comm2, method=c("vi", "nmi", "split.join",
   res  
 }
 
-
+#' Split-join distance of two community structures
+#'
+#' The split-join distance between partitions A and B is the sum of the
+#' projection distance of A from B and the projection distance of B from
+#' A. The projection distance is an asymmetric measure and it is defined as
+#' follows:
+#'
+#' First, each set in partition A is evaluated against all sets in
+#' partition B. For each set in partition A, the best matching set in
+#' partition B is found and the overlap size is calculated. (Matching is
+#' quantified by the size of the overlap between the two sets). Then, the
+#' maximal overlap sizes for each set in A are summed together and
+#' subtracted from the number of elements in A.
+#'
+#' The split-join distance will be returned as two numbers, the first is
+#' the projection distance of the first partition from the
+#' second, while the second number is the projection distance of the second
+#' partition from the first. This makes it easier to detect whether a
+#' partition is a subpartition of the other, since in this case, the
+#' corresponding distance will be zero.
+#'
+#' @param comm1 The first community structure.
+#' @param comm2 The second community structure.
+#' @return Two integer numbers, see details below.
+#'
+#' @references
+#' van Dongen S: Performance criteria for graph clustering and Markov
+#' cluster experiments. Technical Report INS-R0012, National Research
+#' Institute for Mathematics and Computer Science in the Netherlands,
+#' Amsterdam, May 2000.
+#'
 #' @export
 
 split_join_distance <- function(comm1, comm2) {
