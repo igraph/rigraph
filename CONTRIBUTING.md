@@ -68,8 +68,8 @@ edit the sources on your computer, instead of online on Github.
   means running:
 
   ```R
-  system("git module init")
-  system("git module update")
+  system("git submodule init")
+  system("git submodule update")
   system("make")
   library(devtools)
   install()
