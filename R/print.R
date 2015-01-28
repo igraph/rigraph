@@ -258,12 +258,14 @@ printer_callback <- printr$printer_callback
     ## Double bracket
     ea <- edge_attr(x)
     if (all(sapply(ea, is.atomic))) {
+      etail <- tail_of(x, edges)
+      ehead <- head_of(x, edges)
       df <- data.frame(
         stringsAsFactors = FALSE,
-        tail = tail_of(x, edges),
-        head = head_of(x, edges),
-        tid  = tail_of(x, edges, names = FALSE),
-        hid  = head_of(x, edges, names = FALSE)
+        tail = etail,
+        head = ehead,
+        tid  = as.vector(etail),
+        hid  = as.vector(ehead)
       )
       if (length(ea)) {
         ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)

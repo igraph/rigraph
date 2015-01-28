@@ -56,7 +56,7 @@ deprecated("aging.barabasi.game", sample_pa_age)
 #' @export alpha.centrality
 deprecated("alpha.centrality", alpha_centrality)
 #' @export are.connected
-deprecated("are.connected", is_adjacent_to)
+deprecated("are.connected", are_adjacent)
 #' @export asPhylo
 deprecated("asPhylo", as_phylo)
 #' @method asPhylo communities
@@ -196,7 +196,7 @@ deprecated("get.adjedgelist", as_adj_edge_list)
 #' @export get.adjlist
 deprecated("get.adjlist", as_adj_list)
 #' @export get.adjacency
-deprecated("get.adjacency", as_adj)
+deprecated("get.adjacency", as_adjacency_matrix)
 #' @export get.data.frame
 deprecated("get.data.frame", as_data_frame)
 #' @export get.edge.attribute

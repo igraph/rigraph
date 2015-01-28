@@ -89,6 +89,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' 
 #' @aliases graph.disjoint.union %du%
 #' @param \dots Graph objects or lists of graph objects.
+#' @param x,y Graph objects.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -101,7 +102,8 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' g2 <- make_ring(10)
 #' V(g2)$name <- letters[11:20]
 #' str(g1 %du% g2)
-#' 
+#' @export
+
 disjoint_union <- function(...) {
   
   graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
@@ -168,6 +170,7 @@ disjoint_union <- function(...) {
 }
 
 #' @export
+#' @rdname disjoint_union
 
 "%du%" <- function(x,y) {
   disjoint_union(x,y)
@@ -717,34 +720,235 @@ compose <- function(g1, g2, byname="auto") {
   compose(x,y)
 }
 
+#' Helper function for adding and deleting edges
+#'
+#' This is a helper function that simplifies adding and deleting
+#' edges to/from graphs.
+#'
+#' \code{edges} is an alias for \code{edge}.
+#' 
+#' @details
+#' When adding edges via \code{+}, all unnamed arguments of
+#' \code{edge} (or \code{edges}) are concatenated, and then passed to
+#' \code{\link{add_edges}}. They are interpreted as pairs of vertex ids,
+#' and an edge will added between each pair. Named arguments will be
+#' used as edge attributes for the new edges.
+#'
+#' When deleting edges via \code{-}, all arguments of \code{edge} (or
+#' \code{edges}) are concatenated via \code{c()} and passed to
+#' \code{\link{delete_edges}}.
+#'
+#' @param ... See details below.
+#' @return A special object that can be used with together with
+#'   igraph graphs and the plus and minus operators.
+#'
+#' @family functions for manipulating graph structure
+#'
 #' @export
+#' @examples
+#' g <- make_ring(10) %>%
+#'   set_edge_attr("color", value = "red")
+#'
+#' g <- g + edge(1, 5, color = "green") +
+#'   edge(2, 6, color = "blue") -
+#'   edge("8|9")
+#'
+#' E(g)[[]]
+#'
+#' g %>%
+#'   add_layout_(in_circle()) %>%
+#'   plot()
+#'
+#' g <- make_ring(10) + edges(1:10)
+#' plot(g)
 
 edge <- function(...) {
   structure(list(...), class="igraph.edge")
 }
 
 #' @export
+#' @rdname edge
 
 edges <- edge
 
+#' Helper function for adding and deleting vertices
+#'
+#' This is a helper function that simplifies adding and deleting
+#' vertices to/from graphs.
+#'
+#' \code{vertices} is an alias for \code{vertex}.
+#' 
+#' @details
+#' When adding vertices via \code{+}, all unnamed arguments are interpreted
+#' as vertex names of the new vertices. Named arguments are interpreted as
+#' vertex attributes for the new vertices. 
+#'
+#' When deleting vertices via \code{-}, all arguments of \code{vertex} (or
+#' \code{vertices}) are concatenated via \code{c()} and passed to
+#' \code{\link{delete_vertices}}. 
+#'
+#' @param ... See details below.
+#' @return A special object that can be used with together with
+#'   igraph graphs and the plus and minus operators.
+#'
+#' @family functions for manipulating graph structure
+#' 
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
+#'   vertices('X', 'Y')
+#' g
+#' plot(g)
 
 vertex <- function(...) {
   structure(list(...), class="igraph.vertex")
 }
 
 #' @export
+#' @rdname vertex
 
 vertices <- vertex
 
+#' Helper function to add or delete edges along a path
+#'
+#' This function can be used to add or delete edges that form a path.
+#'
+#' @details
+#' When adding edges via \code{+}, all unnamed arguments are
+#' concatenated, and each element of a final vector is interpreted
+#' as a vertex in the graph. For a vector of length \eqn{n+1}, \eqn{n}
+#' edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
+#' 3, etc. Named arguments will be used as edge attributes for the new
+#' edges.
+#'
+#' When deleting edges, all attributes are concatenated and then passed
+#' to \code{\link{delete_edges}}.
+#'
+#' @param ... See details below.
+#' @return A special object that can be used together with igraph
+#'   graphs and the plus and minus operators.
+#'
+#' @family functions for manipulating graph structure
+#' 
 #' @export
+#' @examples
+#' # Create a (directed) wheel
+#' g <- make_star(11, center = 1) + path(2:11, 2)
+#' plot(g)
+#'
+#' g <- make_empty_graph(directed = FALSE, n = 10) %>%
+#'   set_vertex_attr("name", value = letters[1:10])
+#'
+#' g2 <- g + path("a", "b", "c", "d")
+#' plot(g2)
+#' 
+#' g3 <- g2 + path("e", "f", "g", weight=1:2, color="red")
+#' E(g3)[[]]
+#' 
+#' g4 <- g3 + path(c("f", "c", "j", "d"), width=1:3, color="green")
+#' E(g4)[[]]
 
 path <- function(...) {
   structure(list(...), class="igraph.path")
 }
 
-#' @method "+" igraph
+#' Add vertices, edges or another graph to a graph
+#'
+#' @details
+#'   The plus operator can be used to add vertices or edges to graph.
+#'   The actual operation that is performed depends on the type of the
+#'   right hand side argument.
+#'   \itemize{
+#'   \item If is is another igraph graph object and they are both
+#'     named graphs, then the union of the two graphs are calculated,
+#'     see \code{\link{union}}.
+#'   \item If it is another igraph graph object, but either of the two
+#'     are not named, then the disjoint union of
+#'     the two graphs is calculated, see \code{\link{disjoint_union}}.
+#'   \item If it is a numeric scalar, then the specified number of vertices
+#'     are added to the graph.
+#'   \item If it is a character scalar or vector, then it is interpreted as
+#'     the names of the vertices to add to the graph.
+#'   \item If it is an object created with the \code{\link{vertex}} or
+#'     \code{\link{vertices}} function, then new vertices are added to the
+#'     graph. This form is appropriate when one wants to add some vertex
+#'     attributes as well. The operands of the \code{vertices} function
+#'     specifies the number of vertices to add and their attributes as
+#'     well.
+#' 
+#'     The unnamed arguments of \code{vertices} are concatenated and
+#'     used as the \sQuote{\code{name}} vertex attribute (i.e. vertex
+#'     names), the named arguments will be added as additional vertex
+#'     attributes. Examples: \preformatted{  g <- g +
+#'         vertex(shape="circle", color= "red")
+#'   g <- g + vertex("foo", color="blue")
+#'   g <- g + vertex("bar", "foobar")
+#'   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
+#' 
+#'     \code{vertex} is just an alias to \code{vertices}, and it is
+#'     provided for readability. The user should use it if a single vertex
+#'     is added to the graph.
+#' 
+#'   \item If it is an object created with the \code{\link{edge}} or
+#'     \code{\link{edges}} function, then new edges will be added to the
+#'     graph. The new edges and possibly their attributes can be specified as
+#'     the arguments of the \code{edges} function.
+#' 
+#'     The unnamed arguments of \code{edges} are concatenated and used
+#'     as vertex ids of the end points of the new edges. The named
+#'     arguments will be added as edge attributes.
+#' 
+#'     Examples: \preformatted{  g <- make_empty_graph() +
+#'          vertices(letters[1:10]) +
+#'          vertices("foo", "bar", "bar2", "foobar2")
+#'   g <- g + edge("a", "b")
+#'   g <- g + edges("foo", "bar", "bar2", "foobar2")
+#'   g <- g + edges(c("bar", "foo", "foobar2", "bar2"), color="red", weight=1:2)}
+#'     See more examples below.
+#'
+#'     \code{edge} is just an alias to \code{edges} and it is provided
+#'     for readability. The user should use it if a single edge is added to
+#'     the graph.
+#' 
+#'   \item If it is an object created with the \code{\link{path}} function, then
+#'     new edges that form a path are added. The edges and possibly their
+#'     attributes are specified as the arguments to the \code{path}
+#'     function. The non-named arguments are concatenated and interpreted
+#'     as the vertex ids along the path. The remaining arguments are added
+#'     as edge attributes.
+#' 
+#'     Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
+#'   g <- g + path("a", "b", "c", "d")
+#'   g <- g + path("e", "f", "g", weight=1:2, color="red")
+#'   g <- g + path(c("f", "c", "j", "d"), width=1:3, color="green")}
+#'   }
+#' 
+#'   It is important to note that, although the plus operator is
+#'   commutative, i.e. is possible to write \preformatted{  graph <- "foo" + make_empty_graph()}
+#'   it is not associative, e.g. \preformatted{  graph <- "foo" + "bar" + make_empty_graph()}
+#'   results a syntax error, unless parentheses are used: \preformatted{  graph <- "foo" + ( "bar" + make_empty_graph() )}
+#'   For clarity, we suggest to always put the graph object on the left
+#'   hand side of the operator: \preformatted{  graph <- make_empty_graph() + "foo" + "bar"}
+#' 
+#' @param e1 First argument, probably an igraph graph, but see details
+#'    below.
+#' @param e2 Second argument, see details below.
+#'
+#' @family functions for manipulating graph structure
+#'
+#' @method + igraph
 #' @export
+#' @examples
+#' # 10 vertices named a,b,c,... and no edges
+#' g <- make_empty_graph() + vertices(letters[1:10])
+#' 
+#' # Add edges to make it a ring
+#' g <- g + path(letters[1:10], letters[1], color = "grey")
+#' 
+#' # Add some extra random edges
+#' g <- g + edges(sample(V(g), 10, replace = TRUE), color = "red")
+#' g$layout <- layout_in_circle
+#' plot(g)
 
 `+.igraph` <- function(e1, e2) {
   if (!is_igraph(e1) && is_igraph(e2)) {
@@ -824,7 +1028,54 @@ path <- function(...) {
   res
 }
 
-#' @method "-" igraph
+#' Delete vertices or edges from a graph
+#'
+#' @details
+#' The minus operator (\sQuote{\code{-}}) can be used to remove vertices
+#' or edges from the graph. The operation performed is selected based on
+#' the type of the right hand side argument:
+#' \itemize{
+#' \item If it is an igraph graph object, then the difference of the
+#'   two graphs is calculated, see \code{\link{difference}}.
+#' \item If it is a numeric or character vector, then it is interpreted
+#'   as a vector of vertex ids and the specified vertices will be
+#'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
+#' V(g)$name <- letters[1:10]
+#' g <- g - c("a", "b")}
+#' \item If \code{e2} is a vertex sequence (e.g. created by the
+#'   \code{\link{V}} function), then these vertices will be deleted from
+#'   the graph.
+#' \item If it is an edge sequence (e.g. created by the \code{\link{E}}
+#'   function), then these edges will be deleted from the graph.
+#' \item If it is an object created with the \code{\link{vertex}} (or the
+#'   \code{\link{vertices}}) function, then all arguments of \code{\link{vertices}} are
+#'   concatenated and the result is interpreted as a vector of vertex
+#'   ids. These vertices will be removed from the graph.
+#' \item If it is an object created with the \code{\link{edge}} (or the
+#'   \code{\link{edges}}) function, then all arguments of \code{\link{edges}} are
+#'   concatenated and then interpreted as edges to be removed from the
+#'   graph.
+#'   Example: \preformatted{  g <- make_ring(10)
+#' V(g)$name <- letters[1:10]
+#' E(g)$name <- LETTERS[1:10]
+#' g <- g - edge("e|f")
+#' g <- g - edge("H")}
+#' \item If it is an object created with the \code{\link{path}} function,
+#'   then all \code{\link{path}} arguments are concatenated and then interpreted
+#'   as a path along which edges will be removed from the graph.
+#'   Example: \preformatted{  g <- make_ring(10)
+#' V(g)$name <- letters[1:10]
+#' g <- g - path("a", "b", "c", "d")}
+#' }
+#'
+#' @param e1 Left argument, see details below.
+#' @param e2 Right argument, see details below.
+#' @return An igraph graph.
+#'
+#' @family functions for manipulating graph structure
+#' @name igraph-minus
+#'
+#' @method - igraph
 #' @export
  
 `-.igraph` <- function(e1, e2) {

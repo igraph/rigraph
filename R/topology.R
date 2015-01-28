@@ -714,3 +714,164 @@ isomorphism_class <- function(graph, v) {
 #' @family graph isomorphism
 
 graph_from_isomorphism_class <- graph_from_isomorphism_class
+
+
+#' Canonical permutation of a graph
+#' 
+#' The canonical permutation brings every isomorphic graphs into the same
+#' (labeled) graph.
+#' 
+#' \code{canonical_permutation} computes a permutation which brings the graph
+#' into canonical form, as defined by the BLISS algorithm.  All isomorphic
+#' graphs have the same canonical form.
+#' 
+#' See the paper below for the details about BLISS. This and more information
+#' is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+#' 
+#' The possible values for the \code{sh} argument are: \describe{
+#' \item{list("f")}{First non-singleton cell.} \item{list("fl")}{First largest
+#' non-singleton cell.} \item{list("fs")}{First smallest non-singleton cell.}
+#' \item{list("fm")}{First maximally non-trivially connectec non-singleton
+#' cell.} \item{list("flm")}{Largest maximally non-trivially connected
+#' non-singleton cell.} \item{list("fsm")}{Smallest maximally non-trivially
+#' connected non-singleton cell.} } See the paper in references for details
+#' about these.
+#' 
+#' @aliases canonical.permutation canonical_permutation
+#' @param graph The input graph, treated as undirected.
+#' @param sh Type of the heuristics to use for the BLISS algorithm. See details
+#' for possible values.
+#' @return A list with the following members: \item{labeling}{The canonical
+#' parmutation which takes the input graph into canonical form. A numeric
+#' vector, the first element is the new label of vertex 0, the second element
+#' for vertex 1, etc. } \item{info}{Some information about the BLISS
+#' computation. A named list with the following members: \describe{
+#' \item{list("nof_nodes")}{The number of nodes in the search tree.}
+#' \item{list("nof_leaf_nodes")}{The number of leaf nodes in the search tree.}
+#' \item{list("nof_bad_nodes")}{Number of bad nodes.}
+#' \item{list("nof_canupdates")}{Number of canrep updates.}
+#' \item{list("max_level")}{Maximum level.} \item{list("group_size")}{The size
+#' of the automorphism group of the input graph, as a string. This number is
+#' exact if igraph was compiled with the GMP library, and approximate
+#' otherwise.} } }
+#' @author Tommi Junttila for BLISS, Gabor Csardi
+#' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
+#' @seealso \code{\link{permute}} to apply a permutation to a graph,
+#' \code{\link{graph.isomorphic}} for deciding graph isomorphism, possibly
+#' based on canonical labels.
+#' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
+#' Canonical Labeling Tool for Large and Sparse Graphs, \emph{Proceedings of
+#' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
+#' Workshop on Analytic Algorithms and Combinatorics.} 2007.
+#' @keywords graphs
+#' @examples
+#' 
+#' ## Calculate the canonical form of a random graph
+#' g1 <- sample_gnm(10, 20)
+#' cp1 <- canonical_permutation(g1)
+#' cf1 <- permute(g1, cp1$labeling)
+#' 
+#' ## Do the same with a random permutation of it
+#' g2 <- permute(g1, sample(vcount(g1)))
+#' cp2 <- canonical_permutation(g2)
+#' cf2 <- permute(g2, cp2$labeling)
+#' 
+#' ## Check that they are the same
+#' el1 <- as_edgelist(cf1)
+#' el2 <- as_edgelist(cf2)
+#' el1 <- el1[ order(el1[,1], el1[,2]), ]
+#' el2 <- el2[ order(el2[,1], el2[,2]), ]
+#' all(el1 == el2)
+#' @export
+
+canonical_permutation <- canonical_permutation
+
+
+#' Permute the vertices of a graph
+#' 
+#' Create a new graph, by permuting vertex ids.
+#' 
+#' This function creates a new graph from the input graph by permuting its
+#' vertices according to the specified mapping. Call this function with the
+#' output of \code{\link{canonical_permutation}} to create the canonical form
+#' of a graph.
+#' 
+#' \code{permute} keeps all graph, vertex and edge attributes of the graph.
+#' 
+#' @aliases permute.vertices permute
+#' @param graph The input graph, it can directed or undirected.
+#' @param permutation A numeric vector giving the permutation to apply. The
+#' first element is the new id of vertex 1, etc. Every number between one and
+#' \code{vcount(graph)} must appear exactly once.
+#' @return A new graph object.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{canonical_permutation}}
+#' @keywords graphs
+#' @examples
+#' 
+#' # Random permutation of a random graph
+#' g <- sample_gnm(20, 50)
+#' g2 <- permute(g, sample(vcount(g)))
+#' graph.isomorphic(g, g2)
+#' 
+#' # Permutation keeps all attributes
+#' g$name <- "Random graph, Gnm, 20, 50"
+#' V(g)$name <- letters[1:vcount(g)]
+#' E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
+#' g2 <- permute(g, sample(vcount(g)))
+#' graph.isomorphic(g, g2)
+#' g2$name
+#' V(g2)$name
+#' E(g2)$weight
+#' all(sort(E(g2)$weight) == sort(E(g)$weight))
+#' @export
+
+permute <- permute
+
+
+#' Number of automorphisms
+#' 
+#' Calculate the number of automorphisms of a graph, i.e. the number of
+#' isomorphisms to itself.
+#' 
+#' An automorphism of a graph is a permutation of its vertices which brings the
+#' graph into itself.
+#' 
+#' This function calculates the number of automorphism of a graph using the
+#' BLISS algorithm. See also the BLISS homepage at
+#' \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
+#' 
+#' @aliases graph.automorphisms automorphisms
+#' @param graph The input graph, it is treated as undirected.
+#' @param sh The splitting heuristics for the BLISS algorithm. Possible values
+#' are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
+#' largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
+#' cell, \sQuote{\code{fm}}: first maximally non-trivially connected
+#' non-singleton cell, \sQuote{\code{flm}}: first largest maximally
+#' non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
+#' smallest maximally non-trivially connected non-singleton cell.
+#' @return A named list with the following members: \item{group_size}{The size
+#' of the automorphism group of the input graph, as a string. This number is
+#' exact if igraph was compiled with the GMP library, and approximate
+#' otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
+#' \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
+#' \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
+#' canrep updates.} \item{max_level}{Maximum level.}
+#' @author Tommi Juntilla (\url{http://users.ics.aalto.fi/tjunttil/)} for BLISS
+#' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
+#' and this manual page.
+#' @seealso \code{\link{canonical_permutation}}, \code{\link{permute}}
+#' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
+#' Canonical Labeling Tool for Large and Sparse Graphs, \emph{Proceedings of
+#' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
+#' Workshop on Analytic Algorithms and Combinatorics.} 2007.
+#' @keywords graphs
+#' @examples
+#' 
+#' ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
+#' ## and each of these graphs can be "flipped"
+#' g <- make_ring(10)
+#' automorphisms(g)
+#' @export
+
+automorphisms <- automorphisms

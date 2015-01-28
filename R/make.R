@@ -1495,3 +1495,33 @@ make_full_citation_graph <- function(n, directed=TRUE) {
 full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, ...)
 
 ## -----------------------------------------------------------------
+
+#' Creating a graph from LCF notation
+#' 
+#' LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
+#' 3-regular Hamiltonian graphs. It constists of three parameters, the number
+#' of vertices in the graph, a list of shifts giving additional edges to a
+#' cycle backbone and another integer giving how many times the shifts should
+#' be performed. See \url{http://mathworld.wolfram.com/LCFNotation.html} for
+#' details.
+#' 
+#' 
+#' @aliases graph.lcf graph_from_lcf
+#' @param n Integer, the number of vertices in the graph.
+#' @param shifts Integer vector, the shifts.
+#' @param repeats Integer constant, how many times to repeat the shifts.
+#' @return A graph object.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{graph}} can create arbitrary graphs, see also the other
+#' functions on the its manual page for creating special graphs.
+#' @keywords graphs
+#' @examples
+#' 
+#' # This is the Franklin graph:
+#' g1 <- graph_from_lcf(12, c(5,-5), 6)
+#' g2 <- make_graph("Franklin")
+#' isomorphic(g1, g2)
+#' @export
+#' @include auto.R
+
+graph_from_lcf <- graph_from_lcf

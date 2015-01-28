@@ -1082,14 +1082,14 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
 ##       j <- first[b]
 
 ##       ## cj is the contribution of j
-##       cj <- is_adjacent_to(graph, i, j)      / deg[i+1]
-##       cj <- cj + is_adjacent_to(graph, j, i) / deg[i+1]
+##       cj <- are_adjacent(graph, i, j)      / deg[i+1]
+##       cj <- cj + are_adjacent(graph, j, i) / deg[i+1]
 
 ##       second <- not(i, not(j, neighbors(graph, j, mode="all")))
 ##       for (c in seq(along=second)) {
 ##         q <- second[c]
-##         cj <- cj + is_adjacent_to(graph, i, q) / deg[q+1] / deg[i+1]
-##         cj <- cj + is_adjacent_to(graph, q, i) / deg[q+1] / deg[i+1]
+##         cj <- cj + are_adjacent(graph, i, q) / deg[q+1] / deg[i+1]
+##         cj <- cj + are_adjacent(graph, q, i) / deg[q+1] / deg[i+1]
 ##       }
                             
 ##       ## Ok, we have the total contribution of j
@@ -2613,7 +2613,93 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
   res
 }
 
-#' @keywords graphs
+#' Graph matching
+#' 
+#' A matching in a graph means the selection of a set of edges that are
+#' pairwise non-adjacenct, i.e. they have no common incident vertices. A
+#' matching is maximal if it is not a proper subset of any other matching.
+#' 
+#' \code{is_matching} checks a matching vector and verifies whether its
+#' length matches the number of vertices in the given graph, its values are
+#' between zero (inclusive) and the number of vertices (inclusive), and
+#' whether there exists a corresponding edge in the graph for every matched
+#' vertex pair. For bipartite graphs, it also verifies whether the matched
+#' vertices are in different parts of the graph.
+#' 
+#' \code{is_max_matching} checks whether a matching is maximal.  A matching
+#' is maximal if and only if there exists no unmatched vertex in a graph
+#' such that one of its neighbors is also unmatched.
+#' 
+#' \code{max_bipartite_match} calculates a maximum matching in a bipartite
+#' graph. A matching in a bipartite graph is a partial assignment of
+#' vertices of the first kind to vertices of the second kind such that each
+#' vertex of the first kind is matched to at most one vertex of the second
+#' kind and vice versa, and matched vertices must be connected by an edge
+#' in the graph. The size (or cardinality) of a matching is the number of
+#' edges. A matching is a maximum matching if there exists no other
+#' matching with larger cardinality.  For weighted graphs, a maximum
+#' matching is a matching whose edges have the largest possible total
+#' weight among all possible matchings.
+#' 
+#' Maximum matchings in bipartite graphs are found by the push-relabel
+#' algorithm with greedy initialization and a global relabeling after every
+#' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
+#'
+#' @rdname matching
+#' @aliases is.matching is_matching is.maximal.matching is_max_matching
+#' maximum.bipartite.matching max_bipartite_match
+#' @param graph The input graph. It might be directed, but edge directions will
+#' be ignored.
+#' @param types Vertex types, if the graph is bipartite. By default they
+#' are taken from the \sQuote{\code{type}} vertex attribute, if present.
+#' @param matching A potential matching. An integer vector that gives the
+#' pair in the matching for each vertex. For vertices without a pair,
+#' supply \code{NA} here.
+#' @param weights Potential edge weights. If the graph has an edge
+#' attribute called \sQuote{\code{weight}}, and this argument is
+#' \code{NULL}, then the edge attribute is used automatically.
+#' @param eps A small real number used in equality tests in the weighted
+#' bipartite matching algorithm. Two real numbers are considered equal in
+#' the algorithm if their difference is smaller than \code{eps}. This is
+#' required to avoid the accumulation of numerical errors. By default it is
+#' set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
+#' holds. If you are running the algorithm with no weights, this argument
+#' is ignored.
+#' @return \code{is_matching} and \code{is_max_matching} return a logical
+#' scalar.
+#' 
+#' \code{max_bipartite_match} returns a list with components:
+#'   \item{matching_size}{The size of the matching, i.e. the number of edges
+#'     connecting the matched vertices.}
+#'   \item{matching_weight}{The weights of the matching, if the graph was
+#'     weighted. For unweighted graphs this is the same as the size of the
+#'     matching.}
+#'   \item{matching}{The matching itself. Numeric vertex id, or vertex
+#'     names if the graph was named. Non-matched vertices are denoted by
+#'     \code{NA}.} 
+#' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @examples
+#' g <- graph_from_literal( a-b-c-d-e-f )
+#' m1 <- c("b", "a", "d", "c", "f", "e")   # maximal matching
+#' m2 <- c("b", "a", "d", "c", NA, NA)     # non-maximal matching
+#' m3 <- c("b", "c", "d", "c", NA, NA)     # not a matching
+#' is_matching(g, m1)
+#' is_matching(g, m2)
+#' is_matching(g, m3)
+#' is_max_matching(g, m1)
+#' is_max_matching(g, m2)
+#' is_max_matching(g, m3)
+#' 
+#' V(g)$type <- c(FALSE,TRUE)
+#' str(g, v=TRUE)
+#' max_bipartite_match(g)
+#' 
+#' g2 <- graph_from_literal( a-b-c-d-e-f-g )
+#' V(g2)$type <- rep(c(FALSE,TRUE), length=vcount(g2))
+#' str(g2, v=TRUE)
+#' max_bipartite_match(g2)
+#' #' @keywords graphs
+#' @export
  
 is_matching <- function(graph, matching, types=NULL) {
   # Argument checks
@@ -2635,7 +2721,8 @@ is_matching <- function(graph, matching, types=NULL) {
   res
 }
 
-#' @keywords graphs
+#' @export
+#' @rdname matching
  
 is_max_matching <- function(graph, matching, types=NULL) {
   # Argument checks
@@ -2657,7 +2744,8 @@ is_max_matching <- function(graph, matching, types=NULL) {
   res
 }
 
-#' @keywords graphs
+#' @export
+#' @rdname matching
  
 max_bipartite_match <- function(graph, types=NULL, weights=NULL,
                                        eps=.Machine$double.eps) {
@@ -2692,3 +2780,94 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
   }
   res
 }
+
+
+#' Find mutual edges in a directed graph
+#' 
+#' This function checks the reciproc pair of the supplied edges.
+#' 
+#' In a directed graph an (A,B) edge is mutual if the graph also includes a
+#' (B,A) directed edge.
+#' 
+#' Note that multi-graphs are not handled properly, i.e. if the graph contains
+#' two copies of (A,B) and one copy of (B,A), then these three edges are
+#' considered to be mutual.
+#' 
+#' Undirected graphs contain only mutual edges by definition.
+#' 
+#' @aliases is.mutual which_mutual
+#' @param graph The input graph.
+#' @param es Edge sequence, the edges that will be probed. By default is
+#' includes all edges in the order of their ids.
+#' @return A logical vector of the same length as the number of edges supplied.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{reciprocity}}, \code{\link{dyad_census}} if you just
+#' want some statistics about mutual edges.
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- sample_gnm(10, 50, directed=TRUE)
+#' reciprocity(g)
+#' dyad_census(g)
+#' which_mutual(g)
+#' sum(which_mutual(g))/2 == dyad_census(g)$mut
+#' @export
+
+which_mutual <- which_mutual
+
+
+#' Average nearest neighbor degree
+#' 
+#' Calculate the average nearest neighbor degree of the given vertices and the
+#' same quantity in the function of vertex degree
+#' 
+#' Note that for zero degree vertices the answer in \sQuote{\code{knn}} is
+#' \code{NaN} (zero divided by zero), the same is true for \sQuote{\code{knnk}}
+#' if a given degree never appears in the network.
+#' 
+#' @aliases knn graph.knn
+#' @param graph The input graph. It can be directed, but it will be treated as
+#' undirected, i.e. the direction of the edges is ignored.
+#' @param vids The vertices for which the calculation is performed. Normally it
+#' includes all vertices. Note, that if not all vertices are given here, then
+#' both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
+#' on the given vertices only.
+#' @param weights Weight vector. If the graph has a \code{weight} edge
+#' attribute, then this is used by default. If this argument is given, then
+#' vertex strength (see \code{\link{strength}}) is used instead of vertex
+#' degree. But note that \code{knnk} is still given in the function of the
+#' normal vertex degree.
+#' @return A list with two members: \item{knn}{A numeric vector giving the
+#' average nearest neighbor degree for all vertices in \code{vids}.}
+#' \item{knnk}{A numeric vector, its length is the maximum (total) vertex
+#' degree in the graph. The first element is the average nearest neighbor
+#' degree of vertices with degree one, etc.  }
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @references Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras,
+#' Alessandro Vespignani: The architecture of complex weighted networks, Proc.
+#' Natl. Acad. Sci. USA 101, 3747 (2004)
+#' @keywords graphs
+#' @examples
+#' 
+#' # Some trivial ones
+#' g <- make_ring(10)
+#' knn(g)
+#' g2 <- make_star(10)
+#' knn(g2)
+#' 
+#' # A scale-free one, try to plot 'knnk'
+#' g3 <- sample_pa(1000, m=5)
+#' knn(g3)
+#' 
+#' # A random graph
+#' g4 <- sample_gnp(1000, p=5/1000)
+#' knn(g4)
+#' 
+#' # A weighted graph
+#' g5 <- make_star(10)
+#' E(g5)$weight <- seq(ecount(g5))
+#' knn(g5)
+#' @export
+#' @include auto.R
+
+knn <- knn

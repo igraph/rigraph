@@ -25,6 +25,7 @@ time_bins <- function(x, middle=TRUE)
   UseMethod("time_bins")
 
 #' @method time_bins sir
+#' @rdname sir
 #' @export
 
 time_bins.sir <- function(x, middle=TRUE) {
@@ -45,6 +46,7 @@ time_bins.sir <- function(x, middle=TRUE) {
 
 #' @importFrom stats median
 #' @method median sir
+#' @rdname sir
 #' @export
 
 median.sir <- function(x, na.rm=FALSE) {
@@ -65,6 +67,7 @@ median.sir <- function(x, na.rm=FALSE) {
 
 #' @importFrom stats quantile
 #' @method quantile sir
+#' @rdname sir
 #' @export
 
 quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {

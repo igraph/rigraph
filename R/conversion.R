@@ -141,11 +141,60 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   res
 }
 
+#' Convert a graph to an adjacency matrix
+#' 
+#' Sometimes it is useful to work with a standard representation of a
+#' graph, like an adjacency matrix.
+#' 
+#' \code{as_adjacency_matrix} returns the adjacency matrix of a graph, a
+#' regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
+#' defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
+#' \code{TRUE}.
+#' 
+#' @aliases get.adjacency
+#' @param graph The graph to convert.
+#' @param type Gives how to create the adjacency matrix for undirected graphs.
+#' It is ignored for directed graphs. Possible values: \code{upper}: the upper
+#' right triangle of the matrix is used, \code{lower}: the lower left triangle
+#' of the matrix is used. \code{both}: the whole matrix is used, a symmetric
+#' matrix is returned.
+#' @param attr Either \code{NULL} or a character string giving an edge
+#' attribute name. If \code{NULL} a traditional adjacency matrix is returned.
+#' If not \code{NULL} then the values of the given edge attribute are included
+#' in the adjacency matrix. If the graph has multiple edges, the edge attribute
+#' of an arbitrarily chosen edge (for the multiple edges) is included. This
+#' argument is ignored if \code{edges} is \code{TRUE}.
+#' 
+#' Note that this works only for certain attribute types. If the \code{sparse}
+#' argumen is \code{TRUE}, then the attribute must be either logical or
+#' numeric. If the \code{sparse} argument is \code{FALSE}, then character is
+#' also allowed. The reason for the difference is that the \code{Matrix}
+#' package does not support character sparse matrices yet.
+#' @param edges Logical scalar, whether to return the edge ids in the matrix.
+#' For non-existant edges zero is returned.
+#' @param names Logical constant, whether to assign row and column names
+#' to the matrix. These are only assigned if the \code{name} vertex attribute
+#' is present in the graph.
+#' @param sparse Logical scalar, whether to create a sparse matrix. The
+#' \sQuote{\code{Matrix}} package must be installed for creating sparse
+#' matrices.
+#' @return A \code{vcount(graph)} by \code{vcount(graph)} (usually) numeric
+#' matrix.
+#'
+#' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+#' @examples
+#' 
+#' g <- sample_gnp(10, 2/10)
+#' as_adjacency_matrix(g)
+#' V(g)$name <- letters[1:vcount(g)]
+#' as_adjacency_matrix(g)
+#' E(g)$weight <- runif(ecount(g))
+#' as_adjacency_matrix(g, attr="weight")
 #' @export
 
-as_adj <- function(graph, type=c("both", "upper", "lower"),
-                          attr=NULL, edges=FALSE, names=TRUE, 
-                          sparse=igraph_opt("sparsematrices")) {
+as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
+                                attr=NULL, edges=FALSE, names=TRUE, 
+                                sparse=igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -158,9 +207,33 @@ as_adj <- function(graph, type=c("both", "upper", "lower"),
 }
 
 #' @export
+#' @rdname as_adjacency_matrix
 
-as_adjacency_matrix <- as_adj
+as_adj <- as_adjacency_matrix
 
+#' Convert a graph to an edge list
+#' 
+#' Sometimes it is useful to work with a standard representation of a
+#' graph, like an edge list.
+#' 
+#' \code{as_edgelist} returns the list of edges in a graph.
+#' 
+#' @aliases get.edgelist
+#' @param graph The graph to convert.
+#' @param names Whether to return a character matrix containing vertex
+#' names (ie. the \code{name} vertex attribute) if they exist or numeric
+#' vertex ids.
+#' @return A \code{gsize(graph)} by 2 numeric matrix.
+#' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- sample_gnp(10, 2/10)
+#' as_edgelist(g)
+#'
+#' V(g)$name <- LETTERS[seq_len(gorder(g))]
+#' as_edgelist(g)
+#' 
 #' @export
 
 as_edgelist <- function(graph, names=TRUE) {
@@ -341,7 +414,51 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
   res
 }
 
-#' @export
+#' Convert graphNEL objects from the graph package to igraph
+#' 
+#' The graphNEL class is defined in the \code{graph} package, it is another
+#' way to represent graphs. \code{graph_from_graphnel} takes a graphNEL
+#' graph and converts it to an igraph graph. It handles all
+#' graph/vertex/edge attributes. If the graphNEL graph has a vertex
+#' attribute called \sQuote{\code{name}} it will be used as igraph vertex
+#' attribute \sQuote{\code{name}} and the graphNEL vertex names will be
+#' ignored.
+#' 
+#' Because graphNEL graphs poorly support multiple edges, the edge
+#' attributes of the multiple edges are lost: they are all replaced by the
+#' attributes of the first of the multiple edges.
+#' 
+#' @aliases igraph.from.graphNEL
+#' @param graphNEL The graphNEL graph.
+#' @param name Logical scalar, whether to add graphNEL vertex names as an
+#' igraph vertex attribute called \sQuote{\code{name}}.
+#' @param weight Logical scalar, whether to add graphNEL edge weights as an
+#' igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
+#' always weighted.)
+#' @param unlist.attrs Logical scalar. graphNEL attribute query functions
+#' return the values of the attributes in R lists, if this argument is
+#' \code{TRUE} (the default) these will be converted to atomic vectors,
+#' whenever possible, before adding them to the igraph graph.
+#' @return \code{graph_from_graphnel} returns an igraph graph object.
+#' @seealso \code{\link{as_graphnel}} for the other direction,
+#' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
+#' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
+#' graph representations.
+#' @examples
+#' ## Undirected
+#' g <- make_ring(10)
+#' V(g)$name <- letters[1:10]
+#' GNEL <- as_graphnel(g)
+#' g2 <- graph_from_graphnel(GNEL)
+#' g2
+#' 
+#' ## Directed
+#' g3 <- make_star(10, mode="in")
+#' V(g3)$name <- letters[1:10]
+#' GNEL2 <- as_graphnel(g3)
+#' g4 <- graph_from_graphnel(GNEL2)
+#' g4
+#' #' @export
 
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
                                  unlist.attrs=TRUE) {
@@ -397,7 +514,40 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
   g 
 }
 
-#' @export
+#' Convert igraph graphs to graphNEL objects from the graph package
+#' 
+#' The graphNEL class is defined in the \code{graph} package, it is another
+#' way to represent graphs. These functions are provided to convert between
+#' the igraph and the graphNEL objects.
+#' 
+#' \code{as_graphnel} converts and igraph graph to a graphNEL graph. It
+#' converts all graph/vertex/edge attributes. If the igraph graph has a
+#' vertex attribute \sQuote{\code{name}}, then it will be used to assign
+#' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
+#' will be used for this purpose.
+#' 
+#' @aliases igraph.to.graphNEL
+#' @param graph An igraph graph object.
+#' @return \code{as_graphnel} returns a graphNEL graph object.
+#' @seealso \code{\link{graph_from_graphnel}} for the other direction,
+#' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
+#' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for
+#' other graph representations.
+#' @examples
+#' ## Undirected
+#' g <- make_ring(10)
+#' V(g)$name <- letters[1:10]
+#' GNEL <- as_graphnel(g)
+#' g2 <- graph_from_graphnel(GNEL)
+#' g2
+#' 
+#' ## Directed
+#' g3 <- make_star(10, mode="in")
+#' V(g3)$name <- letters[1:10]
+#' GNEL2 <- as_graphnel(g3)
+#' g4 <- graph_from_graphnel(GNEL2)
+#' g4
+#' #' @export
 
 as_graphnel <- function(graph) {
 
@@ -677,3 +827,58 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
     edg
   }
 }
+
+
+#' Create graphs from adjacency lists
+#' 
+#' An adjacency list is a list of numeric vectors, containing the neighbor
+#' vertices for each vertex. This function creates an igraph graph object from
+#' such a list.
+#' 
+#' Adjacency lists are handy if you intend to do many (small) modifications to
+#' a graph. In this case adjacency lists are more efficient than igraph graphs.
+#' 
+#' The idea is that you convert your graph to an adjacency list by
+#' \code{\link{as_adj_list}}, do your modifications to the graphs and finally
+#' create again an igraph graph by calling \code{graph_from_adj_list}.
+#' 
+#' @aliases graph.adjlist graph_from_adj_list
+#' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
+#' throughout all vectors in the list must be less than the number of vectors
+#' (=the number of vertices in the graph). Note that the list is expected to be
+#' 0-indexed.
+#' @param mode Character scalar, it specifies whether the graph to create is
+#' undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
+#' case, whether it contains the outgoing (\sQuote{out}) or the incoming
+#' (\sQuote{in}) neighbors of the vertices.
+#' @param duplicate Logical scalar. For undirected graphs it gives whether
+#' edges are included in the list twice. E.g. if it is \code{TRUE} then for an
+#' undirected \code{{A,B}} edge \code{graph_from_adj_list} expects \code{A}
+#' included in the neighbors of \code{B} and \code{B} to be included in the
+#' neighbors of \code{A}.
+#' 
+#' This argument is ignored if \code{mode} is \code{out} or \code{in}.
+#' @return An igraph graph object.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{as_edgelist}}
+#' @keywords graphs
+#' @examples
+#' 
+#' ## Directed
+#' g <- make_ring(10, dir=TRUE)
+#' al <- as_adj_list(g, mode="out")
+#' g2 <- graph_from_adj_list(al)
+#' graph.isomorphic(g, g2)
+#' 
+#' ## Undirected
+#' g <- make_ring(10)
+#' al <- as_adj_list(g)
+#' g2 <- graph_from_adj_list(al, mode="all")
+#' graph.isomorphic(g, g2)
+#' ecount(g2)
+#' g3 <- graph_from_adj_list(al, mode="all", duplicate=FALSE)
+#' ecount(g3)
+#' which_multiple(g3)
+#' @export
+
+graph_from_adj_list <- graph_from_adj_list

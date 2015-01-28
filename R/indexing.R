@@ -54,7 +54,103 @@
 # - G[1:3,2,eid=TRUE]
 #               create an edge sequence
 
-#' @method "[" igraph
+
+#' Query and manipulate a graph as it were an adjacency matrix
+#'
+#' @details
+#' The single bracket indexes the (possibly weighted) adjacency matrix of
+#' the graph. Here is what you can do with it:
+#'
+#' \enumerate{
+#' \item Check whether there is an edge between two vertices (\eqn{v}
+#'   and \eqn{w}) in the graph: \preformatted{  graph[v, w]}
+#'    A numeric scalar is returned, one if the edge exists, zero
+#'     otherwise.
+#'   \item Extract the (sparse) adjacency matrix of the graph, or part of
+#'     it: \preformatted{  graph[]
+#' graph[1:3,5:6]
+#' graph[c(1,3,5),]}
+#'     The first variants returns the full adjacency matrix, the other
+#'     two return part of it.
+#'   \item The \code{from} and \code{to} arguments can be used to check
+#'     the existence of many edges. In this case, both \code{from} and
+#'     \code{to} must be present and they must have the same length. They
+#'     must contain vertex ids or names. A numeric vector is returned, of
+#'     the same length as \code{from} and \code{to}, it contains ones
+#'     for existing edges edges and zeros for non-existing ones.
+#'     Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
+#'   \item For weighted graphs, the \code{[} operator returns the edge
+#'     weights. For non-esistent edges zero weights are returned. Other
+#'     edge attributes can be queried as well, by giving the \code{attr}
+#'     argument. 
+#'   \item Querying edge ids instead of the existance of edges or edge
+#'     attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
+#'     returns the id of the edge between vertices 1 and 2, or zero if
+#'     there is no such edge.
+#'   \item Adding one or more edges to a graph. For this the element(s) of
+#'     the imaginary adjacency matrix must be set to a non-zero numeric
+#'     value (or \code{TRUE}): \preformatted{  graph[1, 2] <- 1
+#' graph[1:3,1] <- 1
+#' graph[from=1:3, to=c(2,3,5)] <- TRUE}
+#'     This does not affect edges that are already present in the graph,
+#'     i.e. no multiple edges are created.
+#'   \item Adding weighted edges to a graph. The \code{attr} argument
+#'     contains the name of the edge attribute to set, so it does not
+#'     have to be \sQuote{weight}: \preformatted{  graph[1, 2, attr="weight"]<- 5
+#' graph[from=1:3, to=c(2,3,5)] <- c(1,-1,4)}
+#'     If an edge is already present in the network, then only its
+#'     weigths or other attribute are updated. If the graph is already
+#'     weighted, then the \code{attr="weight"} setting is implicit, and
+#'     one does not need to give it explicitly.
+#'   \item Deleting edges. The replacement syntax allow the deletion of
+#'     edges, by specifying \code{FALSE} or \code{NULL} as the
+#'     replacement value: \preformatted{  graph[v, w] <- FALSE}
+#'     removes the edge from vertex \eqn{v} to vertex \eqn{w}.
+#'     As this can be used to delete edges between two sets of vertices,
+#'     either pairwise: \preformatted{  graph[from=v, to=w] <- FALSE}
+#'     or not: \preformatted{  graph[v, w] <- FALSE }
+#'     if \eqn{v} and \eqn{w} are vectors of edge ids or names.
+#' }
+#'
+#' \sQuote{\code{[}} allows logical indices and negative indices as well,
+#' with the usual R semantics. E.g. \preformatted{  graph[degree(graph)==0, 1] <- 1}
+#' adds an edge from every isolate vertex to vertex one,
+#' and \preformatted{  G <- make_empty_graph(10)
+#' G[-1,1] <- TRUE}
+#'  creates a star graph.
+#'
+#' Of course, the indexing operators support vertex names,
+#' so instead of a numeric vertex id a vertex can also be given to
+#' \sQuote{\code{[}} and \sQuote{\code{[[}}.
+#' 
+#' @param x The graph.
+#' @param i Index. Vertex ids or names or logical vectors. See details
+#'   below.
+#' @param j Index. Vertex ids or names or logical vectors. See details
+#'   below.
+#' @param ... Currently ignored.
+#' @param from A numeric or character vector giving vertex ids or
+#'   names. Together with the \code{to} argument, it can be used to
+#'   query/set a sequence of edges. See details below. This argument cannot
+#'   be present together with any of the \code{i} and \code{j} arguments
+#'   and if it is present, then the \code{to} argument must be present as
+#'   well.
+#' @param to A numeric or character vector giving vertex ids or
+#'   names. Together with the \code{from} argument, it can be used to
+#'   query/set a sequence of edges. See details below. This argument cannot
+#'   be present together with any of the \code{i} and \code{j} arguments
+#'   and if it is present, then the \code{from} argument must be present as
+#'   well.
+#' @param sparse Logical scalar, whether to return sparse matrices.
+#' @param edges Logical scalar, whether to return edge ids.
+#' @param drop Ignored.
+#' @param attr If not \code{NULL}, then it should be the name of an edge
+#'   attribute. This attribute is queried and returned.
+#' @return A scalar or matrix. See details below.
+#'
+#' @family structural queries
+#' 
+#' @method [ igraph
 #' @export
 
 `[.igraph` <- function(x, i, j, ..., from, to,
@@ -110,7 +206,62 @@
   }
 }
 
-#' @method "[[" igraph
+#' Query and manipulate a graph as it were an adjacency list
+#'
+#' @details
+#' The double bracket operator indexes the (imaginary) adjacency list
+#' of the graph. This can used for the following operations:
+#' \enumerate{
+#'   \item Querying the adjacent vertices for one or more
+#'     vertices: \preformatted{  graph[[1:3,]]
+#' graph[[,1:3]]}
+#'     The first form gives the successors, the second the predessors
+#'     or the 1:3 vertices. (For undirected graphs they are equivalent.)
+#'   \item Querying the incident edges for one or more vertices,
+#'     if the \code{edges} argument is set to
+#'     \code{TRUE}: \preformatted{  graph[[1:3, , edges=TRUE]]
+#' graph[[, 1:3, edges=TRUE]]}
+#'   \item Querying the edge ids between two sets or vertices,
+#'     if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
+#'     gives the edge ids of all the edges that exist from vertices
+#'     \eqn{v} to vertices \eqn{w}.
+#'  }
+#'
+#' The alternative argument names \code{from} and \code{to} can be used
+#' instead of the usual \code{i} and \code{j}, to make the code more
+#' readable: \preformatted{ graph[[from = 1:3]]
+#' graph[[from = v, to = w, edges = TRUE]]}
+#'
+#' \sQuote{\code{[[}} operators allows logical indices and negative indices
+#' as well, with the usual R semantics.
+#'
+#' Vertex names are also supported, so instead of a numeric vertex id a
+#' vertex can also be given to \sQuote{\code{[}} and \sQuote{\code{[[}}.
+#' 
+#' @param x The graph.
+#' @param i Index, integer, character or logical, see details below.
+#' @param j Index, integer, character or logical, see details below.
+#' @param from A numeric or character vector giving vertex ids or
+#'   names. Together with the \code{to} argument, it can be used to
+#'   query/set a sequence of edges. See details below. This argument cannot
+#'   be present together with any of the \code{i} and \code{j} arguments
+#'   and if it is present, then the \code{to} argument must be present as
+#'   well.
+#' @param to A numeric or character vector giving vertex ids or
+#'   names. Together with the \code{from} argument, it can be used to
+#'   query/set a sequence of edges. See details below. This argument cannot
+#'   be present together with any of the \code{i} and \code{j} arguments
+#'   and if it is present, then the \code{from} argument must be present as
+#'   well.
+#' @param ... Additional arguments are not used currently.
+#' @param directed Logical scalar, whether to consider edge directions
+#'   in directed graphs. It is ignored for undirected graphs.
+#' @param edges Logical scalar, whether to return edge ids.
+#' @param exact Ignored.
+#'
+#' @family structural queries
+#'
+#' @method [[ igraph
 #' @export
 
 `[[.igraph` <- function(x, i, j, from, to, ..., directed=TRUE,
@@ -151,7 +302,8 @@
   }
 }
 
-#' @method "[<-" igraph
+#' @method [<- igraph
+#' @family functions for manipulating graph structure
 #' @export
 
 `[<-.igraph` <- function(x, i, j, ..., from, to,
