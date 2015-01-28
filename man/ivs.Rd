@@ -57,6 +57,9 @@ These functions use the algorithm described by Tsukiyama et al., see
 reference below.
 }
 \examples{
+# Do not run, takes a couple of seconds
+\dontrun{
+
 # A quite dense graph
 set.seed(42)
 g <- sample_gnp(100, 0.9)
@@ -67,6 +70,7 @@ largest_ivs(g)
 induced_subgraph(g, largest_ivs(g)[[1]])
 
 length(maximal_ivs(g))
+}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty

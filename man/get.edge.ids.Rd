@@ -54,5 +54,15 @@ get.edge.ids(g, c(2,1, 1,4, 5,4))
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\keyword{graphs}
+\seealso{
+Other structural queries: \code{\link{[.igraph}};
+  \code{\link{[[.igraph}}; \code{\link{are.connected}},
+  \code{\link{are_adjacent}}; \code{\link{ecount}},
+  \code{\link{gsize}}; \code{\link{ends}},
+  \code{\link{get.edge}}, \code{\link{get.edges}};
+  \code{\link{gorder}}, \code{\link{vcount}};
+  \code{\link{head_of}}; \code{\link{incident}};
+  \code{\link{is.directed}}, \code{\link{is_directed}};
+  \code{\link{neighbors}}; \code{\link{tail_of}}
+}
 

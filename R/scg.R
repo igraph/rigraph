@@ -20,6 +20,50 @@
 ###################################################################
 
 
+#' Spectral Coarse Graining
+#' 
+#' Functions to perform the Spectral Coarse Graining (SCG) of matrices and
+#' graphs.
+#'
+#' @name scg-method
+#' @section Introduction: The SCG functions provide a framework, called
+#' Spectral Coarse Graining (SCG), for reducing large graphs while preserving
+#' their \emph{spectral-related features}, that is features closely related
+#' with the eigenvalues and eigenvectors of a graph matrix (which for now can
+#' be the adjacency, the stochastic, or the Laplacian matrix).
+#' 
+#' Common examples of such features comprise the first-passage-time of random
+#' walkers on Markovian graphs, thermodynamic properties of lattice models in
+#' statistical physics (e.g. Ising model), and the epidemic threshold of
+#' epidemic network models (SIR and SIS models).
+#' 
+#' SCG differs from traditional clustering schemes by producing a
+#' \emph{coarse-grained graph} (not just a partition of the vertices),
+#' representative of the original one. As shown in [1], Principal Component
+#' Analysis can be viewed as a particular SCG, called \emph{exact SCG}, where
+#' the matrix to be coarse-grained is the covariance matrix of some data set.
+#' 
+#' SCG should be of interest to practitioners of various fields dealing with
+#' problems where matrix eigenpairs play an important role, as for instance is
+#' the case of dynamical processes on networks.
+#' @author David Morton de Lachapelle,
+#' \url{http://people.epfl.ch/david.morton}.
+#' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
+#' Shrinking Matrices while Preserving their Eigenpairs with Application to the
+#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
+#' Matrix Analysis and Applications}, 2008.
+#' \url{http://people.epfl.ch/david.morton}
+#' 
+#' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
+#' in Oscillator Networks. \emph{Physical Review Letters}, \bold{100}(17),
+#' 2008.  \url{http://arxiv.org/abs/0708.2055}
+#' 
+#' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
+#' Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
+#' \url{http://arxiv.org/abs/0706.0812}
+#' @keywords graphs
+
+NULL
 
 #' Stochastic matrix of a graph
 #' 
@@ -150,7 +194,7 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' object (vertex) in the partition.
 #' @author David Morton de Lachapelle \email{david.morton@@epfl.ch},
 #' \email{david.mortondelachapelle@@swissquote.ch}
-#' @seealso \link{SCG} for a detailed introduction. \code{\link{scg}},
+#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
 #' \code{\link{scg_eps}}
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
@@ -278,7 +322,7 @@ scg_group <- function(V, nt,
 #' \eqn{R}.}
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.
-#' @seealso \link{SCG} for a detailed introduction. \code{\link{scg}},
+#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
 #' \code{\link{scg_eps}}, \code{\link{scg_group}}
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
@@ -343,7 +387,7 @@ scg_semi_proj <- function(groups,
 #' This function handles all the steps involved in the Spectral Coarse Graining
 #' (SCG) of some matrices and graphs as described in the reference below.
 #' 
-#' Please see \link{SCG} for an introduction.
+#' Please see \link{scg-method} for an introduction.
 #' 
 #' In the following \eqn{V} is the matrix of eigenvectors for which the SCG is
 #' solved. \eqn{V} is calculated from \code{X}, if it is not given in the
@@ -443,7 +487,7 @@ scg_semi_proj <- function(groups,
 #' For other matrix types this is missing.}
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.
-#' @seealso \link{SCG} for an introduction.  \code{\link{scg_eps}},
+#' @seealso \link{scg-method} for an introduction.  \code{\link{scg_eps}},
 #' \code{\link{scg_group}} and \code{\link{scg_semi_proj}}.
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
@@ -673,3 +717,43 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 
   res
 }
+
+
+#' Error of the spectral coarse graining (SCG) approximation
+#' 
+#' \code{scg_eps} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
+#' \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in \code{V} and \eqn{P} is the
+#' projector corresponding to the \code{mtype} argument.
+#' 
+#' @aliases scg_eps scgNormEps
+#' @param V A numeric matrix of (eigen)vectors assumed normalized.  The vectors
+#' are to be stored column-wise in \code{V}).
+#' @param groups A vector of \code{nrow(V)} integers labeling each group vertex
+#' in the partition.
+#' @param mtype The type of semi-projector used for the SCG. For now
+#' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
+#' available.
+#' @param p A probability vector of length \code{nrow(V)}.  \code{p} is the
+#' stationary probability distribution of a Markov chain when \code{mtype} =
+#' \dQuote{stochastic}. This parameter is ignored otherwise.
+#' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
+#' rows of the Laplacian matrix sum to zero and the rows of the stochastic
+#' matrix sum to one; otherwise it is the columns.
+#' @return \code{scg_eps} returns with a numeric vector whose \eqn{i}th
+#' component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
+#' @author David Morton de Lachapelle,
+#' \url{http://people.epfl.ch/david.morton}.
+#' @seealso \link{scg-method} and \code{\link{scg}}.
+#' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
+#' Shrinking Matrices while Preserving their Eigenpairs with Application to the
+#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
+#' Matrix Analysis and Applications}, 2008.
+#' \url{http://people.epfl.ch/david.morton}
+#' @examples
+#' 
+#' v <- rexp(20)
+#' km <- kmeans(v,5)
+#' sum(km$withinss)
+#' scg_eps(cbind(v), km$cluster)^2
+
+scg_eps <- scg_eps

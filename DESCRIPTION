@@ -1,5 +1,5 @@
 Package: igraph
-Version: 0.7.999-593
+Version: 0.7.999-594
 Title: Network analysis and visualization
 Author: See AUTHORS file.
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
@@ -14,19 +14,20 @@ License: GPL (>= 2)
 URL: http://igraph.org
 SystemRequirements: gmp, libxml2
 BugReports: https://github.com/igraph/igraph/issues
-Collate: 'adjacency.R' 'attributes.R' 'auto.R' 'basic.R' 'bipartite.R'
-        'centrality.R' 'cliques.R' 'cocitation.R' 'cohesive.blocks.R'
-        'printr.R' 'community.R' 'components.R' 'console.R'
-        'conversion.R' 'data_frame.R' 'decomposition.R' 'demo.R'
-        'epi.R' 'fit.R' 'flow.R' 'foreign.R' 'games.R' 'glet.R' 'hrg.R'
-        'igraph-package.R' 'incidence.R' 'indexing.R' 'interface.R'
-        'iterators.R' 'layout.R' 'layout_drl.R' 'make.R' 'mgclust.R'
-        'minimum.spanning.tree.R' 'motifs.R' 'nexus.R' 'operators.R'
-        'other.R' 'package.R' 'palette.R' 'par.R' 'paths.R' 'plot.R'
-        'plot.common.R' 'plot.shapes.R' 'pp.R' 'print.R'
-        'random_walk.R' 'rewire.R' 'scan.R' 'scg.R' 'sgm.R'
-        'similarity.R' 'socnet.R' 'sparsedf.R'
+Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
+        'basic.R' 'bipartite.R' 'centrality.R' 'centralization.R'
+        'cliques.R' 'cocitation.R' 'cohesive.blocks.R' 'printr.R'
+        'community.R' 'components.R' 'console.R' 'conversion.R'
+        'data_frame.R' 'decomposition.R' 'degseq.R' 'demo.R'
+        'embedding.R' 'epi.R' 'fit.R' 'flow.R' 'foreign.R' 'games.R'
+        'glet.R' 'hrg.R' 'igraph-package.R' 'incidence.R' 'indexing.R'
+        'interface.R' 'iterators.R' 'layout.R' 'layout_drl.R' 'make.R'
+        'mgclust.R' 'minimum.spanning.tree.R' 'motifs.R' 'nexus.R'
+        'operators.R' 'other.R' 'package.R' 'palette.R' 'par.R'
+        'paths.R' 'plot.R' 'plot.common.R' 'plot.shapes.R' 'pp.R'
+        'print.R' 'random_walk.R' 'rewire.R' 'scan.R' 'scg.R' 'sgm.R'
+        'similarity.R' 'simple.R' 'sir.R' 'socnet.R' 'sparsedf.R'
         'structural.properties.R' 'structure.info.R' 'test.R'
-        'tkplot.R' 'topology.R' 'utils.R' 'uuid.R' 'versions.R'
-        'weakref.R' 'zzz-deprecate.R'
-Packaged: 2015-01-28 19:02:56 UTC; travis
+        'tkplot.R' 'topology.R' 'triangles.R' 'utils.R' 'uuid.R'
+        'versions.R' 'weakref.R' 'zzz-deprecate.R'
+Packaged: 2015-01-28 21:28:34 UTC; travis

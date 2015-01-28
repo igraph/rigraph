@@ -845,7 +845,7 @@ tkigraph <- function() {
   if (!read$interactive) {
     fun <- function(...) { dev.new() ; plot.igraph(...) }
   } else {
-    fun <- tcltk::tkplot
+    fun <- tkplot
   }
   
   layout.default <- function(graph, layout.par) {

@@ -34,13 +34,15 @@ undirected_graph(...)
   insensitive.
 
   Starting from igraph 0.8.0, you can also include literals here,
-  via igraph's formula notation (see \code{\link{graph_from_formula}}).
+  via igraph's formula notation (see \code{\link{graph_from_literal}}).
   In this case, the first term of the formula has to start with
   a \sQuote{\code{~}} character, just like regular formulae in R.
   See examples below.}
 
-\item{...}{Extra arguments for the case when the graph is given
-via a literal, see \code{\link{graph_from_literal}}.}
+\item{...}{For \code{make_graph}: extra arguments for the case when the
+graph is given via a literal, see \code{\link{graph_from_literal}}.
+For \code{directed_graph} and \code{undirected_graph}:
+Passed to \code{make_directed_graph} or \code{make_undirected_graph}.}
 
 \item{n}{The number of vertices in the graph. This argument is
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
@@ -57,9 +59,6 @@ for symbolic edge lists. It is ignored for numeric edge lists.}
 Do not give both of them.}
 
 \item{simplify}{For graph literals, whether to simplify the graph.}
-
-\item{...}{Passed to \code{make_directed_graph} or
-\code{make_undirected_graph}.}
 }
 \value{
 An igraph graph.

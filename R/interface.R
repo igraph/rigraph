@@ -23,9 +23,41 @@
 # Structure building
 ###################################################################
 
+#' Add edges to a graph
+#'
+#' The new edges are given as a vertex sequence, e.g. internal
+#' numeric vertex ids, or vertex names. The first edge points from
+#' \code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]}
+#' to \code{edges[4]}, etc.
+#' 
+#' If attributes are supplied, and they are not present in the graph,
+#' their values for the original edges of the graph are set to \code{NA}.
+#' 
+#' @param graph The input graph
+#' @param edges The edges to add, a vertex sequence with even number
+#'   of vertices. 
+#' @param ... Additional arguments, they must be named,
+#'   and they will be added as edge attributes, for the newly added
+#'   edges. See also details below.
+#' @param attr A named list, its elements will be added
+#'   as edge attributes, for the newly added edges. See also details
+#'   below.
+#' @return The graph, with the edges (and attributes) added.
+#'
 #' @export
+#'
+#' @aliases add.edges
+#' @family functions for manipulating graph structure
+#' 
+#' @examples
+#' g <- make_empty_graph(n = 5) %>%
+#'   add_edges(c(1,2, 2,3, 3,4, 4,5)) %>%
+#'   set_edge_attr("color", value = "red") %>%
+#'   add_edges(c(5,1), color = "green")
+#' E(g)[[]]
+#' plot(g)
 
-add_edges <- function(graph, edges, ..., attr=list()) {
+add_edges <- function(graph, edges, ..., attr = list()) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -55,7 +87,34 @@ add_edges <- function(graph, edges, ..., attr=list()) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 4L, eattrs, PACKAGE="igraph")
 }
 
+#' Add vertices to a graph
+#' 
+#' If attributes are supplied, and they are not present in the graph,
+#' their values for the original vertices of the graph are set to
+#' \code{NA}.
+#'
+#' @param graph The input graph.
+#' @param nv The number of vertices to add.
+#' @param ... Additional arguments, they must be named,
+#'   and they will be added as vertex attributes, for the newly added
+#'   vertices. See also details below.
+#' @param attr A named list, its elements will be added
+#'   as vertex attributes, for the newly added vertices. See also details
+#'   below.
+#' @return The graph, with the vertices (and attributes) added.
+#'
+#' @aliases add.vertices
+#' @family functions for manipulating graph structure
+#' 
 #' @export
+#' @examples
+#' g <- make_empty_graph() %>%
+#'   add_vertices(3, color = "red") %>%
+#'   add_vertices(2, color = "green") %>%
+#'   add_edges(c(1,2, 2,3, 3,4, 4,5))
+#' g
+#' V(g)[[]]
+#' plot(g)
 
 add_vertices <- function(graph, nv, ..., attr=list()) {
   if (!is_igraph(graph)) {
@@ -87,7 +146,24 @@ add_vertices <- function(graph, nv, ..., attr=list()) {
   .Call("R_igraph_mybracket2_set", graph, 9L, 3L, vattrs, PACKAGE="igraph")
 }
 
+#' Delete edges from a graph
+#'
+#' @param graph The input graph.
+#' @param edges The edges to remove, specified as an edge sequence.
+#' @return The graph, with the edges removed.
+#'
+#' @aliases delete.edges
+#' @family functions for manipulating graph structure
+#' 
 #' @export
+#' @examples
+#' g <- make_ring(10) %>%
+#'   delete_edges(seq(1, 9, by = 2))
+#' g
+#'
+#' g <- make_ring(10) %>%
+#'   delete_edges("10|1")
+#' g
 
 delete_edges <- function(graph, edges) {
   if (!is_igraph(graph)) {
@@ -98,7 +174,26 @@ delete_edges <- function(graph, edges) {
         PACKAGE="igraph")
 }
 
+#' Delete vertices from a graph
+#' 
+#' @param graph The input graph.
+#' @param v The vertices to remove, a vertex sequence.
+#' @return The graph, with the vertices removed.
+#'
+#' @aliases delete.vertices
+#' @family functions for manipulating graph structure
+#' 
 #' @export
+#' @examples
+#' g <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10])
+#' g
+#' V(g)
+#' 
+#' g2 <- delete_vertices(g, c(1,5)) %>%
+#'   delete_vertices("B")
+#' g2
+#' V(g2)
 
 delete_vertices <- function(graph, v) {
   if (!is_igraph(graph)) {
@@ -113,7 +208,25 @@ delete_vertices <- function(graph, v) {
 # Structure query
 ###################################################################
 
+#' The size of the graph (number of edges)
+#'
+#' \code{ecount} of an alias of this function.
+#' 
+#' @param graph The graph.
+#' @return Numeric scalar, the number of edges.
+#'
+#' @aliases ecount
+#' @family structural queries
+#' 
 #' @export
+#' @examples
+#' g <- sample_gnp(100, 2/100)
+#' gsize(g)
+#' 
+#' # Number of edges in a G(n,p) graph
+#' replicate(100, sample_gnp(10, 1/2), simplify = FALSE) %>%
+#'   vapply(gsize, 0) %>%
+#'   hist()
 
 gsize <- function(graph) {
   if (!is_igraph(graph)) {
@@ -124,7 +237,26 @@ gsize <- function(graph) {
         PACKAGE="igraph")
 }
 
+#' Neighboring (adjacent) vertices in a graph
+#'
+#' A vertex is a neighbor of another one (in other words, the two
+#' vertices are adjacent), if they are incident to the same edge.
+#'
+#' @param graph The input graph.
+#' @param v The vertex of which the adjacent vertices are queried.
+#' @param mode Whether to query outgoing (\sQuote{out}), incoming
+#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
+#'   ignored for undirected graphs.
+#' @return A vertex sequence containing the neighbors of the input vertex.
+#'
+#' @family structural queries
+#' 
 #' @export
+#' @examples
+#' g <- make_graph("Zachary")
+#' n1 <- neighbors(g, 1)
+#' n34 <- neighbors(g, 34)
+#' intersection(n1, n34)
 
 neighbors <- function(graph, v, mode=1) {
   if (!is_igraph(graph)) {
@@ -140,7 +272,23 @@ neighbors <- function(graph, v, mode=1) {
   V(graph)[res + 1]
 }
 
+#' Incident edges of a vertex in a graph
+#'
+#' @param graph The input graph.
+#' @param v The vertex of which the indicent edges are queried.
+#' @param mode Whether to query outgoing (\sQuote{out}), incoming
+#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
+#'   ignored for undirected graphs.
+#' @return An edge sequence containing the incident edges of
+#'   the input vertex.
+#'
+#' @family structural queries
+#'
 #' @export
+#' @examples
+#' g <- make_graph("Zachary")
+#' incident(g, 1)
+#' incident(g, 34)
 
 incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
@@ -162,7 +310,21 @@ incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
   res
 }  
 
+#' Check whether a graph is directed
+#'
+#' @param graph The input graph
+#' @return Logical scalar, whether the graph is directed.
+#'
+#' @aliases is.directed
+#' @family structural queries
+#' 
 #' @export
+#' @examples
+#' g <- make_ring(10)
+#' is_directed(g)
+#'
+#' g2 <- make_ring(10, directed = TRUE)
+#' is_directed(g2)
 
 is_directed <- function(graph) {
   if (!is_igraph(graph)) {
@@ -173,7 +335,21 @@ is_directed <- function(graph) {
         PACKAGE="igraph")
 }
 
+#' Incident vertices of some graph edges
+#'
+#' @param graph The input graph
+#' @param es The sequence of edges to query
+#' @param names Whether to return vertex names or
+#'   numeric vertex ids. By default vertex names are used.
+#' @return A two column matrix of vertex names or vertex ids.
+#'
+#' @aliases get.edges get.edge
+#' @family structural queries
+#' 
 #' @export
+#' @examples
+#' g <- make_ring(5)
+#' ends(g, E(g))
 
 ends <- function(graph, es, names = TRUE) {
 
@@ -235,7 +411,8 @@ ends <- function(graph, es, names = TRUE) {
 #' zero is reported. (If the \code{error} argument is \code{FALSE}.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
-#' @keywords graphs
+#' @family structural queries
+#' 
 #' @examples
 #' 
 #' g <- make_ring(10)
@@ -254,3 +431,19 @@ get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
         as.logical(directed), as.logical(error), as.logical(multi),
         PACKAGE="igraph")+1
 }  
+
+
+#' Order (number of vertices) of a graph
+#'
+#' @param graph The graph
+#' @return Number of vertices, numeric scalar.
+#'
+#' @aliases vcount
+#' @family structural queries
+#' 
+#' @export
+#' @examples
+#' g <- make_ring(10)
+#' gorder(g)
+
+gorder <- gorder

@@ -149,3 +149,29 @@ srand <- function(seed) {
   res <- .Call("R_igraph_srand", seed, PACKAGE="igraph")
   invisible(res)
 }
+
+
+#' Convex hull of a set of vertices
+#' 
+#' Calculate the convex hull of a set of points, i.e. the covering polygon that
+#' has the smallest area.
+#' 
+#' 
+#' @aliases convex.hull convex_hull
+#' @param data The data points, a numeric matrix with two columns.
+#' @return A named list with components: \item{resverts}{The indices of the
+#' input vertices that constritute the convex hull.} \item{rescoords}{The
+#' coordinates of the corners of the convex hull.}
+#' @author Tamas Nepusz \email{ntamas@@gmail.com}
+#' @references Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+#' Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and
+#' McGraw-Hill, 2001. ISBN 0262032937. Pages 949-955 of section 33.3: Finding
+#' the convex hull.
+#' @keywords graphs
+#' @examples
+#' 
+#' M <- cbind( runif(100), runif(100) )
+#' convex_hull(M)
+#' @export
+
+convex_hull <- convex_hull

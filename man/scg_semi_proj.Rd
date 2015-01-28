@@ -94,7 +94,7 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{SCG} for a detailed introduction. \code{\link{scg}},
+\link{scg-method} for a detailed introduction. \code{\link{scg}},
 \code{\link{scg_eps}}, \code{\link{scg_group}}
 }
 

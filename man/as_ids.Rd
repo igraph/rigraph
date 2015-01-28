@@ -2,9 +2,15 @@
 % Please edit documentation in R/iterators.R
 \name{as_ids}
 \alias{as_ids}
+\alias{as_ids.igraph.es}
+\alias{as_ids.igraph.vs}
 \title{Convert a vertex or edge sequence to an ordinary vector}
 \usage{
 as_ids(seq)
+
+\method{as_ids}{igraph.vs}(seq)
+
+\method{as_ids}{igraph.es}(seq)
 }
 \arguments{
 \item{seq}{The vertex or edge sequence.}

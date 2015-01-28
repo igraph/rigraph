@@ -111,9 +111,9 @@ gclust.app <- function(glist, r=1, nmfout=FALSE, maxit=10000, nmfmethod='lee')
 	mynmf = NMF::nmf(XX,rank=r,method=nmfmethod)
 	WW = matrix(0,nrow=nrow(Xraw),ncol=r)
 	if(length(stash)>0){
-	    WW[-stash,] = cbind(basis(mynmf))
+	    WW[-stash,] = cbind(NMF::basis(mynmf))
 	} else {
-	    WW = basis(mynmf)
+	    WW = NMF::basis(mynmf)
 	}
 	HH = coef(mynmf)
 	if(r > 1) {

@@ -21,10 +21,7 @@
 
 
 
-#' Is this object a graph?
-#' 
-#' \code{is.graph} makes its decision based on the class attribute of the
-#' object.
+#' Is this object an igraph graph?
 #' 
 #' @aliases is.igraph
 #' @param graph An R object.
@@ -38,21 +35,9 @@
 #' g <- make_ring(10)
 #' is_igraph(g)
 #' is_igraph(numeric(10))
-#' 
+
 is_igraph <- function(graph){
   "igraph" %in% class(graph)
-}
-
-#' @export
-
-is_directed <- function(graph) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_is_directed", graph,
-        PACKAGE="igraph")
 }
 
 #' @export
@@ -79,14 +64,39 @@ get.edge <- function(graph, id) {
   res+1
 }
 
+
+#' Head of the edge(s) in a graph
+#'
+#' For undirected graphs, head and tail is not defined.  In this case
+#' \code{head_of} returns vertices incident to the supplied edges, and
+#' \code{tail_of} returns the other end(s) of the edge(s).
+#' 
+#' @param graph The input graph.
+#' @param es The edges to query.
+#' @return A vertex sequence with the head(s) of the edge(s).
+#'
+#' @family structural queries
+#' 
 #' @export
 
-head_of <- function(graph, es, names = TRUE) {
-  ends(graph, es, names)[,1]
+head_of <- function(graph, es) {
+  as.igraph.vs(graph, ends(graph, es, names = FALSE)[,1])
 }
 
+#' Tails of the edge(s) in a graph
+#'
+#' For undirected graphs, head and tail is not defined.  In this case
+#' \code{tail_of} returns vertices incident to the supplied edges, and
+#' \code{head_of} returns the other end(s) of the edge(s).
+#'
+#' @param graph The input graph.
+#' @param es The edges to query.
+#' @return A vertex sequence with the tail(s) of the edge(s).
+#'
+#' @family structural queries
+#' 
 #' @export
 
-tail_of <- function(graph, es, names = TRUE) {
-  ends(graph, es, names)[,2]
+tail_of <- function(graph, es) {
+  as.igraph.vs(graph, ends(graph, es, names = FALSE)[,2])
 }

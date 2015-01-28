@@ -25,4 +25,28 @@ They must belong to the same graph. Note that this function has
 \sQuote{set} semantics and the multiplicity of vertices is lost in the
 result.
 }
+\examples{
+g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+difference(V(g), V(g)[6:10])
+}
+\seealso{
+Other vertex and edge sequence operations: \code{\link{[.igraph.es}},
+  \code{\link{\%--\%}}, \code{\link{\%->\%}},
+  \code{\link{\%<-\%}}, \code{\link{igraph-es-indexing}};
+  \code{\link{[.igraph.vs}},
+  \code{\link{igraph-vs-indexing}};
+  \code{\link{[[.igraph.es}},
+  \code{\link{igraph-es-indexing2}};
+  \code{\link{[[.igraph.vs}},
+  \code{\link{igraph-vs-indexing2}};
+  \code{\link{c.igraph.es}}; \code{\link{c.igraph.vs}};
+  \code{\link{difference.igraph.es}};
+  \code{\link{intersection.igraph.es}};
+  \code{\link{intersection.igraph.vs}};
+  \code{\link{rev.igraph.es}}; \code{\link{rev.igraph.vs}};
+  \code{\link{union.igraph.es}};
+  \code{\link{union.igraph.vs}};
+  \code{\link{unique.igraph.es}};
+  \code{\link{unique.igraph.vs}}
+}
 

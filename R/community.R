@@ -316,6 +316,8 @@ print.communities <- function(x, ...) {
 #'   modularity values is calculated automatically.
 #' @return A \code{communities} object.
 #'
+#' @aliases create.communities
+#'
 #' @export
 
 make_clusters <- function(graph, membership = NULL, algorithm = NULL,
@@ -2002,7 +2004,37 @@ i_compare <- function (comm1, comm2, method=c("vi", "nmi", "split.join",
   res  
 }
 
-
+#' Split-join distance of two community structures
+#'
+#' The split-join distance between partitions A and B is the sum of the
+#' projection distance of A from B and the projection distance of B from
+#' A. The projection distance is an asymmetric measure and it is defined as
+#' follows:
+#'
+#' First, each set in partition A is evaluated against all sets in
+#' partition B. For each set in partition A, the best matching set in
+#' partition B is found and the overlap size is calculated. (Matching is
+#' quantified by the size of the overlap between the two sets). Then, the
+#' maximal overlap sizes for each set in A are summed together and
+#' subtracted from the number of elements in A.
+#'
+#' The split-join distance will be returned as two numbers, the first is
+#' the projection distance of the first partition from the
+#' second, while the second number is the projection distance of the second
+#' partition from the first. This makes it easier to detect whether a
+#' partition is a subpartition of the other, since in this case, the
+#' corresponding distance will be zero.
+#'
+#' @param comm1 The first community structure.
+#' @param comm2 The second community structure.
+#' @return Two integer numbers, see details below.
+#'
+#' @references
+#' van Dongen S: Performance criteria for graph clustering and Markov
+#' cluster experiments. Technical Report INS-R0012, National Research
+#' Institute for Mathematics and Computer Science in the Netherlands,
+#' Amsterdam, May 2000.
+#'
 #' @export
 
 split_join_distance <- function(comm1, comm2) {
@@ -2022,6 +2054,32 @@ split_join_distance <- function(comm1, comm2) {
   unlist(res)
 }
 
+#' Groups of a vertex partitioning
+#' 
+#' Create a list of vertex groups from some graph clustering or community
+#' structure.
+#' 
+#' Currently two methods are defined for this function. The default method
+#' works on the output of \code{\link{components}}. (In fact it works on any
+#' object that is a list with an entry called \code{membership}.)
+#' 
+#' The second method works on \code{\link{communities}} objects.
+#' 
+#' @aliases groups groups.default groups.communities
+#' @param x Some object that represents a grouping of the vertices. See details
+#' below.
+#' @return A named list of numeric or character vectors. The names are just
+#' numbers that refer to the groups. The vectors themselves are numeric or
+#' symbolic vertex ids.
+#' @seealso \code{\link{components}} and the various community finding
+#' functions.
+#' @examples
+#' g <- make_graph("Zachary")
+#' fgc <- cluster_fast_greedy(g)
+#' groups(fgc)
+#' 
+#' g2 <- make_ring(10) + make_full_graph(5)
+#' groups(components(g2))
 #' @export
 
 groups <- function(x)
@@ -2061,3 +2119,41 @@ communities <- groups.communities
 `[[.communities` <- function(x, i) {
   groups(x)[[i]]
 }
+
+
+#' Contract several vertices into a single one
+#' 
+#' This function creates a new graph, by merging several vertices into one. The
+#' vertices in the new graph correspond to sets of vertices in the input graph.
+#' 
+#' The attributes of the graph are kept. Graph and edge attributes are
+#' unchanged, vertex attributes are combined, according to the
+#' \code{vertex.attr.comb} parameter.
+#' 
+#' @aliases contract.vertices contract
+#' @param graph The input graph, it can be directed or undirected.
+#' @param mapping A numeric vector that specifies the mapping. Its elements
+#' correspond to the vertices, and for each element the id in the new graph is
+#' given.
+#' @param vertex.attr.comb Specifies how to combine the vertex attributes in
+#' the new graph. Please see \code{\link{attribute.combination}} for details.
+#' @return A new graph object.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- make_ring(10)
+#' g$name <- "Ring"
+#' V(g)$name <- letters[1:vcount(g)]
+#' E(g)$weight <- runif(ecount(g))
+#' 
+#' g2 <- contract(g, rep(1:5, each=2),
+#'                         vertex.attr.comb=toString)
+#' 
+#' ## graph and edge attributes are kept, vertex attributes are
+#' ## combined using the 'toString' function.
+#' print(g2, g=TRUE, v=TRUE, e=TRUE)
+#' 
+#' @export
+
+contract <- contract

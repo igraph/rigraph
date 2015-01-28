@@ -7,8 +7,12 @@
 \title{Disjoint union of graphs}
 \usage{
 disjoint_union(...)
+
+x \%du\% y
 }
 \arguments{
+\item{x,y}{Graph objects.}
+
 \item{\dots}{Graph objects or lists of graph objects.}
 }
 \value{

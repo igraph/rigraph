@@ -103,7 +103,7 @@ This function handles all the steps involved in the Spectral Coarse Graining
 (SCG) of some matrices and graphs as described in the reference below.
 }
 \details{
-Please see \link{SCG} for an introduction.
+Please see \link{scg-method} for an introduction.
 
 In the following \eqn{V} is the matrix of eigenvectors for which the SCG is
 solved. \eqn{V} is calculated from \code{X}, if it is not given in the
@@ -216,7 +216,7 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{SCG} for an introduction.  \code{\link{scg_eps}},
+\link{scg-method} for an introduction.  \code{\link{scg_eps}},
 \code{\link{scg_group}} and \code{\link{scg_semi_proj}}.
 }
 \keyword{graphs}

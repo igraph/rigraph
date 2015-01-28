@@ -5,18 +5,21 @@
 \alias{rep.igraph}
 \title{Replicate a graph multiple times}
 \usage{
-\method{rep}{igraph}(graph, n, mark = TRUE)
+\method{rep}{igraph}(x, n, mark = TRUE, ...)
 
-\method{"*"}{igraph}(graph, n)
+\method{*}{igraph}(x, n)
 }
 \arguments{
-\item{graph}{The input graph.}
+\item{x}{The input graph.}
 
 \item{n}{Number of times to replicate it.}
 
 \item{mark}{Whether to mark the vertices with a \code{which} attribute,
-  an integer number denoting which replication the vertex is coming
-  from.}
+an integer number denoting which replication the vertex is coming
+from.}
+
+\item{...}{Additional arguments to satisfy S3 requirements,
+  currently ignored.}
 }
 \description{
 The new graph will contain the input graph the given number

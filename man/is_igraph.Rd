@@ -3,7 +3,7 @@
 \name{is_igraph}
 \alias{is.igraph}
 \alias{is_igraph}
-\title{Is this object a graph?}
+\title{Is this object an igraph graph?}
 \usage{
 is_igraph(graph)
 }
@@ -15,8 +15,7 @@ A logical constant, \code{TRUE} if argument \code{graph} is a graph
 object.
 }
 \description{
-\code{is.graph} makes its decision based on the class attribute of the
-object.
+Is this object an igraph graph?
 }
 \examples{
 g <- make_ring(10)

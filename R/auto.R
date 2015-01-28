@@ -167,7 +167,6 @@ sample_sbm <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE)
   res
 }
 
-#' @export
 hsbm.1.game <- function(n, m, rho, C, p) {
   # Argument checks
   n <- as.integer(n)
@@ -189,7 +188,6 @@ hsbm.1.game <- function(n, m, rho, C, p) {
   res
 }
 
-#' @export
 hsbm.list.game <- function(n, mlist, rholist, Clist, p) {
   # Argument checks
   n <- as.integer(n)

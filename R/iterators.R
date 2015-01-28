@@ -56,7 +56,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' This is similar to \code{identical} in the \code{base} package,
 #' but ignores the mutable piece of igraph objects, that might be
 #' different, even if the two graphs are identical.
-#'
+#' 
 #' @param g1,g2 The two graphs
 #' @return Logical scalar
 #' @export
@@ -66,7 +66,56 @@ identical_graphs <- function(g1, g2) {
   base::.Call("R_igraph_identical_graphs", g1, g2, PACKAGE = "igraph");
 }
 
+#' Vertices of a graph
+#'
+#' Create a vertex sequence (vs) containing all vertices of a graph.
+#'
+#' @details
+#' A vertex sequence is just what the name says it is: a sequence of
+#' vertices. Vertex sequences are usually used as igraph function arguments
+#' that refer to vertices of a graph.
+#' 
+#' A vertex sequence is tied to the graph it refers to: it really denoted
+#' the specific vertices of that graph, and cannot be used together with
+#' another graph.
+#' 
+#' At the implementation level, a vertex sequence is simply a vector
+#' containing numeric vertex ids, but it has a special class attribute
+#' which makes it possible to perform graph specific operations on it, like
+#' selecting a subset of the vertices based on graph structure, or vertex
+#' attributes.
+#'
+#' A vertex sequence is most often created by the \code{V()} function. The
+#' result of this includes all vertices in increasing vertex id order. A
+#' vertex sequence can be indexed by a numeric vector, just like a regular
+#' R vector. See \code{\link{[.igraph.vs}} and additional links to other
+#' vertex sequence operations below.
+#'
+#' @section Indexing vertex sequences:
+#' Vertex sequences mostly behave like regular vectors, but there are some
+#' additional indexing operations that are specific for them;
+#' e.g. selecting vertices based on graph structure, or based on vertex
+#' attributes. See \code{\link{[.igraph.vs}} for details.
+#'  
+#' @section Querying or setting attributes:
+#' Vertex sequences can be used to query or set attributes for the
+#' vertices in the sequence. See \code{\link{$.igraph.vs}} for details.
+#'
+#' @param graph The graph
+#' @return A vertex sequence containing all vertices, in the order
+#'   of their numeric vertex ids.
+#'
+#' @family vertex and edge sequences
 #' @export
+#' @examples
+#' # Vertex ids of an unnamed graph
+#' g <- make_ring(10)
+#' V(g)
+#'
+#' # Vertex ids of a named graph
+#' g2 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = letters[1:10])
+#' V(g2)
 
 V <- function(graph) {
   if (!is_igraph(graph)) {
@@ -88,7 +137,60 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
   V(graph)[idx, na_ok = na_ok]
 }
 
+#' Edges of a graph
+#'
+#' An edge sequence is a vector containing numeric edge ids, with a special
+#' class attribute that allows custom operations: selecting subsets of
+#' edges based on attributes, or graph structure, creating the
+#' intersection, union of edges, etc.
+#'
+#' @details
+#' Edge sequences are usually used as igraph function arguments that 
+#' refer to edges of a graph.
+#'
+#' An edge sequence is tied to the graph it refers to: it really denoted
+#' the specific edges of that graph, and cannot be used together with
+#' another graph.
+#'
+#' An edge sequence is most often created by the \code{E()} function. The
+#' result includes edges in increasing edge id order by default (if. none
+#' of the \code{P} and \code{path} arguments are used). An edge
+#' sequence can be indexed by a numeric vector, just like a regular R
+#' vector. See links to other edge sequence operations below.
+#'
+#' @section Indexing edge sequences:
+#' Edge sequences mostly behave like regular vectors, but there are some
+#' additional indexing operations that are specific for them;
+#' e.g. selecting edges based on graph structure, or based on edge
+#' attributes. See \code{\link{[.igraph.es}} for details.
+#'
+#' @section Querying or setting attributes:
+#' Edge sequences can be used to query or set attributes for the
+#' edges in the sequence. See \code{\link{$.igraph.es}} for details.
+#'
+#' @param graph The graph.
+#' @param P A list of vertices to select edges via pairs of vertices.
+#'   The first and second vertices select the first edge, the third
+#'   and fourth the second, etc.
+#' @param path A list of vertices, to select edges along a path.
+#'   Note that this only works reliable for simple graphs. If the graph
+#'   has multiple edges, one of them will be chosen arbitrarily to
+#'   be included in the edge sequence.
+#' @param directed Whether to consider edge directions in the \code{P}
+#'   argument, for directed graphs.
+#' @return An edge sequence of the graph.
+#'
 #' @export
+#' @family vertex and edge sequences
+#' @examples
+#' # Edges of an unnamed graph
+#' g <- make_ring(10)
+#' E(g)
+#'
+#' # Edges of a named graph
+#' g2 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = letters[1:10])
+#' E(g2)
 
 E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   if (!is_igraph(graph)) {
@@ -135,15 +237,6 @@ create_es <- function(graph, idx, na_ok = FALSE) {
   E(graph)[idx]
 }
 
-#' @method "[[" igraph.vs
-#' @export
-
-`[[.igraph.vs` <- function(x, ...) {
-  res <- x[...]
-  attr(res, "single") <- TRUE
-  res
-}
-
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
   if (!na_ok && any(is.na(res))) stop('Unknown vertex selected')
@@ -151,9 +244,113 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   res
 }
 
-#' @method "[" igraph.vs
+#' Indexing vertex sequences
+#'
+#' Vertex sequences can be indexed very much like a plain numeric R vector,
+#' with some extras.
+#'
+#' @details
+#' Vertex sequences can be indexed using both the single bracket and
+#' the double bracket operators, and they both work the same way.
+#' The only difference between them is that the double bracket operator
+#' marks the result for printing vertex attributes.
+#'
+#' @section Multiple indices:
+#' When using multiple indices within the bracket, all of them
+#' are evaluated independently, and then the results are concatenated
+#' using the \code{c()} function (except for the \code{na_ok} argument,
+#' which is special an must be named. E.g. \code{V(g)[1, 2, nei(1)]}
+#' is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[nei(1)])}.
+#'
+#' @section Index types:
+#' Vertex sequences can be indexed with positive numeric vectors,
+#' negative numeric vectors, logical vectors, character vectors:
+#' \itemize{
+#'   \item When indexed with positive numeric vectors, the vertices at the
+#'     given positions in the sequence are selected. This is the same as
+#'     indexing a regular R atomic vector with positive numeric vectors.
+#'   \item When indexed with negative numeric vectors, the vertices at the
+#'     given positions in the sequence are omitted. Again, this is the same
+#'     as indexing a regular R atomic vector.
+#'   \item When indexed with a logical vector, the lengths of the vertex
+#'     sequence and the index must match, and the vertices for which the
+#'     index is \code{TRUE} are selected.
+#'   \item Named graphs can be indexed with character vectors,
+#'     to select vertices with the given names.
+#' }
+#' 
+#' @section Vertex attributes:
+#' When indexing vertex sequences, vertex attributes can be refered
+#' to simply by using their names. E.g. if a graph has a \code{name} vertex
+#' attribute, then \code{V(g)[name == "foo"]} is equivalent to
+#' \code{V(g)[V(g)$name == "foo"]}. See examples below.
+#'
+#' @section Special functions:
+#' There are some special igraph functions that can be used only
+#' in expressions indexing vertex sequences: \describe{
+#'   \item{\code{nei}}{takes a vertex sequence as its argument
+#'     and selects neighbors of these vertices. An optional \code{mode}
+#'     argument can be used to select successors (\code{mode="out"}), or
+#'     precedessors (\code{mode="in"}) in directed graphs.}
+#'   \item{\code{inc}}{Takes an edge sequence as an argument, and
+#'     selects vertices that have at least one incident edge in this
+#'     edge sequence.}
+#'   \item{\code{from}}{Similar to \code{inc}, but only considers the
+#'     tails of the edges.}
+#'   \item{\code{to}}{Similar to \code{inc}, but only considers the
+#'     heads of the edges.}
+#'   \item{\code{innei}, \code{outnei}}{\code{innei(v)} is a shorthand for
+#'     \code{nei(v, mode = "in")}, and \code{outnei(v)} is a shorthand for
+#'     \code{nei(v, mode = "out")}.
+#'   }
+#' }
+#' Note that multiple special functions can be used together, or with
+#' regular indices, and then their results are concatenated. See more
+#' examples below.
+#'
+#' @param x A vertex sequence.
+#' @param i First index, see details below.
+#' @param ... Rest of indices, see details below.
+#' @param na_ok Whether it is OK to have \code{NA}s in the vertex
+#'   sequence.
+#' @return Another vertex sequence, referring to the same graph.
+#' 
+#' @method [ igraph.vs
+#' @name igraph-vs-indexing
 #' @export
+#' @family vertex and edge sequences
+#' @family vertex and edge sequence operations
+#' 
 #' @importFrom lazyeval lazy_dots
+#' @examples
+#' # -----------------------------------------------------------------
+#' # Setting attributes for subsets of vertices
+#' largest_comp <- function(graph) {
+#'   cl <- components(graph)
+#'   V(graph)[which.max(cl$csize) == cl$membership]
+#' }
+#' g <- sample_(gnp(100, 2/100),
+#'   with_vertex_(size = 3, label = ""),
+#'   with_graph_(layout = layout_with_fr)
+#' )
+#' giant_v <- largest_comp(g)
+#' V(g)$color <- "green"
+#' V(g)[giant_v]$color <- "red"
+#' plot(g)
+#'
+#' # -----------------------------------------------------------------
+#' # nei() special function
+#' g <- graph( c(1,2, 2,3, 2,4, 4,2) )
+#' V(g)[ nei( c(2,4) ) ]
+#' V(g)[ nei( c(2,4), "in") ]
+#' V(g)[ nei( c(2,4), "out") ]
+#'
+#' # -----------------------------------------------------------------
+#' # The same with vertex names
+#' g <- graph(~ A -+ B, B -+ C:D, D -+ B)
+#' V(g)[ nei( c('B', 'D') ) ]
+#' V(g)[ nei( c('B', 'D'), "in" ) ]
+#' V(g)[ nei( c('B', 'D'), "out" ) ]
 
 `[.igraph.vs` <- function(x, i, ..., na_ok = FALSE) {
 
@@ -259,8 +456,74 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   }
 }
 
-#' @method "[[" igraph.es
+#' Select vertices and show their metadata
+#'
+#' The double bracket operator can be used on vertex sequences, to print
+#' the meta-data (vertex attributes) of the vertices in the sequence.
+#'
+#' @details
+#' Technically, when used with vertex sequences, the double bracket
+#' operator does exactly the same as the single bracket operator,
+#' but the resulting vertex sequence is printed differently: all
+#' attributes of the vertices in the sequence are printed as well.
+#'
+#' See \code{\link{[.igraph.vs}} for more about indexing vertex sequences.
+#' 
+#' @param x A vertex sequence.
+#' @param ... Additional arguments, passed to \code{[}.
+#' @return The double bracket operator returns another vertex sequence,
+#'   with meta-data (attribute) printing turned on. See details below.
+#' 
+#' @method [[ igraph.vs
+#' @name igraph-vs-indexing2
+#' @family vertex and edge sequences
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_ring(10) %>%
+#'   set_vertex_attr("color", value = "red") %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10])
+#' V(g)
+#' V(g)[[]]
+#' V(g)[1:5]
+#' V(g)[[1:5]]
+
+`[[.igraph.vs` <- function(x, ...) {
+  res <- x[...]
+  attr(res, "single") <- TRUE
+  res
+}
+
+#' Select edges and show their metadata
+#'
+#' The double bracket operator can be used on edge sequences, to print
+#' the meta-data (edge attributes) of the edges in the sequence.
+#'
+#' @details
+#' Technically, when used with edge sequences, the double bracket
+#' operator does exactly the same as the single bracket operator,
+#' but the resulting edge sequence is printed differently: all
+#' attributes of the edges in the sequence are printed as well.
+#'
+#' See \code{\link{[.igraph.es}} for more about indexing edge sequences.
+#' 
+#' @param x An edge sequence.
+#' @param ... Additional arguments, passed to \code{[}.
+#' @return Another edge sequence, with metadata printing turned on.
+#' See details below.
+#'
+#' @method [[ igraph.es
+#' @name igraph-es-indexing2
+#' @family vertex and edge sequences
+#' @family vertex and edge sequence operations
+#' @export
+#' @examples
+#' g <- make_(ring(10),
+#'   with_vertex_(name = LETTERS[1:10]),
+#'   with_edge_(weight = 1:10, color = "green"))
+#' E(g)
+#' E(g)[[]]
+#' E(g)[[inc('A')]]
 
 `[[.igraph.es` <- function(x, ...) {
   res <- x[...]
@@ -287,9 +550,101 @@ simple_es_index <- function(x, i) {
   res
 }
 
-#' @method "[" igraph.es
+#' Indexing edge sequences
+#'
+#' Edge sequences can be indexed very much like a plain numeric R vector,
+#' with some extras.
+#'
+#' @section Multiple indices:
+#' When using multiple indices within the bracket, all of them
+#' are evaluated independently, and then the results are concatenated
+#' using the \code{c()} function. E.g. \code{E(g)[1, 2, inc(1)]}
+#' is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[inc(1)])}.
+#'
+#' @section Index types:
+#' Edge sequences can be indexed with positive numeric vectors,
+#' negative numeric vectors, logical vectors, character vectors:
+#' \itemize{
+#'   \item When indexed with positive numeric vectors, the edges at the
+#'     given positions in the sequence are selected. This is the same as
+#'     indexing a regular R atomic vector with positive numeric vectors.
+#'   \item When indexed with negative numeric vectors, the edges at the
+#'     given positions in the sequence are omitted. Again, this is the same
+#'     as indexing a regular R atomic vector.
+#'   \item When indexed with a logical vector, the lengths of the edge
+#'     sequence and the index must match, and the edges for which the
+#'     index is \code{TRUE} are selected.
+#'   \item Named graphs can be indexed with character vectors,
+#'     to select edges with the given names. Note that a graph may
+#'     have edge names and vertex names, and both can be used to select
+#'     edges. Edge names are simply used as names of the nuumeric
+#'     edge id vector. Vertex names effectively only work in graphs without
+#'     multiple edges, and must be separated with a \code{|} bar character
+#'     to select an edges that incident to the two given vertices. See
+#'     examples below.
+#' }
+#'
+#' @section Edge attributes:
+#' When indexing edge sequences, edge attributes can be refered
+#' to simply by using their names. E.g. if a graph has a \code{weight} edge
+#' attribute, then \code{E(G)[weight > 1]} selects all edges with a larger
+#' than one weight. See more examples below.
+#'
+#' @section Special functions:
+#' There are some special igraph functions that can be used
+#' only in expressions indexing edge sequences: \describe{
+#'   \item{\code{inc}}{takes a vertex sequence, and selects
+#'     all edges that have at least one incident vertex in the vertex
+#'     sequence.}
+#'   \item{\code{from}}{similar to \code{inc()}, but only
+#'     the tails of the edges are considered.}
+#'   \item{\code{to}}{is similar to \code{inc()}, but only
+#'     the heads of the edges are considered.}
+#'   \item{\code{\%--\%}}{a special operator that can be
+#'     used to select all edges between two sets of vertices. It ignores
+#'     the edge directions in directed graphs.}
+#'   \item{\code{\%->\%}}{similar to \code{\%--\%},
+#'     but edges \emph{from} the left hand side argument, pointing
+#'     \emph{to} the right hand side argument, are selected, in directed
+#'     graphs.}
+#'   \item{\code{\%<-\%}}{similar to \code{\%--\%},
+#'     but edges \emph{to} the left hand side argument, pointing
+#'     \emph{from} the right hand side argument, are selected, in directed
+#'     graphs.}
+#' }
+#' Note that multiple special functions can be used together, or with
+#' regular indices, and then their results are concatenated. See more
+#' examples below.
+#'
+#' @aliases %--% %<-% %->%
+#' @param x An edge sequence
+#' @param i First index, see details below.
+#' @param ... Rest of indices, see details below.
+#' @return Another edge sequence, referring to the same graph.
+#' 
+#' @method [ igraph.es
+#' @name igraph-es-indexing
+#'
 #' @export
+#' @family vertex and edge sequences
+#' @family vertex and edge sequence operations
 #' @importFrom lazyeval lazy_dots
+#' @examples
+#' # special operators for indexing based on graph structure
+#' g <- sample_pa(100, power = 0.3)
+#' E(g) [ 1:3 %--% 2:6 ]
+#' E(g) [ 1:5 %->% 1:6 ]
+#' E(g) [ 1:3 %<-% 2:6 ]
+#'
+#' # the edges along the diameter
+#' g <- sample_pa(100, directed = FALSE)
+#' d <- get_diameter(g)
+#' E(g, path = d)
+#'
+#' # select edges based on attributes
+#' g <- sample_gnp(20, 3/20) %>%
+#'   set_edge_attr("weight", value = rnorm(gsize(.)))
+#' E(g)[[ weight < 0 ]]
 
 `[.igraph.es` <- function(x, i, ...) {
 
@@ -407,7 +762,9 @@ simple_es_index <- function(x, i) {
   }
 }
 
-#' @method "[[<-" igraph.vs
+#' @param i Index.
+#' @method [[<- igraph.vs
+#' @name igraph-vs-attributes
 #' @export
 
 `[[<-.igraph.vs` <- function(x, i, value) {
@@ -415,15 +772,19 @@ simple_es_index <- function(x, i) {
       ! "value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
+  if (is.null(get_vs_graph(x))) stop("Graph is unknown")
   value
 }
 
-#' @method "[<-" igraph.vs
+#' @method [<- igraph.vs
+#' @name igraph-vs-attributes
 #' @export
 
 `[<-.igraph.vs` <-  `[[<-.igraph.vs`
 
-#' @method "[[<-" igraph.es
+#' @param i Index.
+#' @method [[<- igraph.es
+#' @name igraph-es-attributes
 #' @export
 
 `[[<-.igraph.es` <- function(x, i, value) {
@@ -431,30 +792,67 @@ simple_es_index <- function(x, i) {
       ! "value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
+  if (is.null(get_es_graph(x))) stop("Graph is unknown")
   value
 }  
 
-#' @method "[<-" igraph.es
+#' @method [<- igraph.es
+#' @name igraph-es-attributes
 #' @export
 
 `[<-.igraph.es` <-  `[[<-.igraph.es`
 
-#' @method "$" igraph
+#' Query or set attributes of the vertices in a vertex sequence
+#'
+#' The \code{$} operator is a syntactic sugar to query and set the
+#' attributes of the vertices in a vertex sequence.
+#'
+#' @details
+#' The query form of \code{$} is a shortcut for
+#' \code{\link{vertex_attr}}, e.g. \code{V(g)[idx]$attr} is equivalent
+#' to \code{vertex_attr(g, attr, V(g)[idx])}.
+#'
+#' The assignment form of \code{$} is a shortcut for
+#' \code{\link{set_vertex_attr}}, e.g. \code{V(g)[idx]$attr <- value} is
+#' equivalent to \code{g <- set_vertex_attr(g, attr, V(g)[idx], value)}.
+#' 
+#' @param x A vertex sequence. For \code{V<-} it is a graph.
+#' @param name Name of the vertex attribute to query or set.
+#' @return A vector or list, containing the values of
+#'   attribute \code{name} for the vertices in the vertex sequence.
+#'   For numeric, character or logical attributes, it is a vector of the
+#'   appropriate type, otherwise it is a list.
+#' 
+#' @method $ igraph.vs
+#' @name igraph-vs-attributes
+#'
 #' @export
-
-`$.igraph` <- function(x, name) {
-  graph_attr(x, name)
-}
-
-#' @method "$<-" igraph
-#' @export
-
-`$<-.igraph` <- function(x, name, value) {
-  set_graph_attr(x, name, value)
-}
-
-#' @method "$" igraph.vs
-#' @export
+#' @family vertex and edge sequences
+#' @family graph attributes
+#' @examples
+#' g <- make_(ring(10),
+#'   with_vertex_(
+#'     name = LETTERS[1:10],
+#'     color = sample(1:2, 10, replace=TRUE)
+#'   )
+#' )
+#' V(g)$name
+#' V(g)$color
+#' V(g)$frame.color <- V(g)$color
+#'
+#' # color vertices of the largest component
+#' largest_comp <- function(graph) {
+#'   cl <- components(graph)
+#'   V(graph)[which.max(cl$csize) == cl$membership]
+#' }
+#' g <- sample_(gnp(100, 2/100),
+#'   with_vertex_(size = 3, label = ""),
+#'   with_graph_(layout = layout_with_fr)
+#' )
+#' giant_v <- largest_comp(g)
+#' V(g)$color <- "blue"
+#' V(g)[giant_v]$color <- "orange"
+#' plot(g)
 
 `$.igraph.vs` <- function(x, name) {
   graph <- get_vs_graph(x)
@@ -466,8 +864,47 @@ simple_es_index <- function(x, i) {
     res
   }
 }
-#' @method "$" igraph.es
+
+#' Query or set attributes of the edges in an edge sequence
+#'
+#' The \code{$} operator is a syntactic sugar to query and set
+#' edge attributes, for edges in an edge sequence.
+#'
+#' @details
+#' The query form of \code{$} is a shortcut for \code{\link{edge_attr}},
+#' e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr,
+#' E(g)[idx])}.
+#'
+#' The assignment form of \code{$} is a shortcut for
+#' \code{\link{set_edge_attr}}, e.g. \code{E(g)[idx]$attr <- value} is
+#' equivalent to \code{g <- set_edge_attr(g, attr, E(g)[idx], value)}.
+#'
+#' @param x An edge sequence. For \code{E<-} it is a graph.
+#' @param name Name of the edge attribute to query or set.
+#' @return A vector or list, containing the values of the attribute
+#'   \code{name} for the edges in the sequence. For numeric, character or
+#'   logical attributes, it is a vector of the appropriate type, otherwise
+#'   it is a list. 
+#' 
+#' @method $ igraph.es
+#' @name igraph-es-attributes
+#'
 #' @export
+#' @family vertex and edge sequences
+#' @examples
+#' # color edges of the largest component
+#' largest_comp <- function(graph) {
+#'   cl <- components(graph)
+#'   V(graph)[which.max(cl$csize) == cl$membership]
+#' }
+#' g <- sample_(gnp(100, 1/100),
+#'   with_vertex_(size = 3, label = ""),
+#'   with_graph_(layout = layout_with_fr)
+#' )
+#' giant_v <- largest_comp(g)
+#' E(g)$color <- "orange"
+#' E(g)[giant_v %--% giant_v]$color <- "blue"
+#' plot(g)
 
 `$.igraph.es` <- function(x, name) {
   graph <- get_es_graph(x)
@@ -480,24 +917,35 @@ simple_es_index <- function(x, i) {
   }
 }
 
-#' @method "$<-" igraph.vs
+#' @param value New value of the attribute, for the vertices in the
+#'   vertex sequence.
+#'
+#' @method $<- igraph.vs
+#' @name igraph-vs-attributes
 #' @export
 
 `$<-.igraph.vs` <- function(x, name, value) {
+  if (is.null(get_vs_graph(x))) stop("Graph is unknown")
   attr(x, "name") <- name
   attr(x, "value") <- value
   x
 }
 
-#' @method "$<-" igraph.es
+#' @param value New value of the attribute, for the edges in the edge
+#'   sequence.
+#' @method $<- igraph.es
+#' @name igraph-es-attributes
 #' @export
+#' @family vertex and edge sequences
 
 `$<-.igraph.es` <- function(x, name, value) {
+  if (is.null(get_es_graph(x))) stop("Graph is unknown")
   attr(x, "name") <- name
   attr(x, "value") <- value
   x
 }
 
+#' @name igraph-vs-attributes
 #' @export
 
 `V<-` <- function(x, value) {
@@ -512,6 +960,12 @@ simple_es_index <- function(x, i) {
                     value=attr(value, "value"), check = FALSE)
 }
 
+#' @param path Select edges along a path, given by a vertex sequence See
+#'   \code{\link{E}}.
+#' @param P Select edges via pairs of vertices. See \code{\link{E}}.
+#' @param directed Whether to use edge directions for the \code{path} or
+#'   \code{P} arguments.
+#' @name igraph-es-attributes
 #' @export
 
 `E<-` <- function(x, path=NULL, P=NULL, directed=NULL, value) {
@@ -530,8 +984,46 @@ simple_es_index <- function(x, i) {
 
 head_print <- printr$head_print
 
+#' Show a vertex sequence on the screen
+#'
+#' For long vertex sequences, the printing is truncated to fit to the 
+#' screen. Use \code{print} explicitly and the \code{full} argument to
+#' see the full sequence.
+#'
+#' Vertex sequence created with the double bracket operator are
+#' printed differently, together with all attributes of the vertices
+#' in the sequence, as a table.
+#' 
+#' @param x A vertex sequence.
+#' @param full Whether to show the full sequence, or truncate the output
+#'   to the screen size.
+#' @param ... These arguments are currently ignored.
+#' @return The vertex sequence, invisibly.
+#' 
 #' @method print igraph.vs
 #' @export
+#' @family vertex and edge sequences
+#' @examples
+#' # Unnamed graphs
+#' g <- make_ring(10)
+#' V(g)
+#'
+#' # Named graphs
+#' g2 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10])
+#' V(g2)
+#'
+#' # All vertices in the sequence
+#' g3 <- make_ring(1000)
+#' V(g3)
+#' print(V(g3), full = TRUE)
+#'
+#' # Metadata
+#' g4 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10]) %>%
+#'   set_vertex_attr("color", value = "red")
+#' V(g4)[[]]
+#' V(g4)[[2:5, 7:8]]
 
 print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
 
@@ -572,8 +1064,48 @@ print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
   invisible(x)
 }
 
+#' Print an edge sequence to the screen
+#'
+#' For long edge sequences, the printing is truncated to fit to the
+#' screen. Use \code{print} explicitly and the code{full} argument to
+#' see the full sequence.
+#'
+#' Edge sequences created with the double bracket operator are printed
+#' differently, together with all attributes of the edges in the sequence,
+#' as a table.
+#' 
+#' @param x An edge sequence.
+#' @param full Whether to show the full sequence, or truncate the output
+#'   to the screen size.
+#' @param ... Currently ignored.
+#' @return The edge sequence, invisibly.
+#' 
 #' @method print igraph.es
 #' @export
+#' @family vertex and edge sequences
+#' @examples
+#' # Unnamed graphs
+#' g <- make_ring(10)
+#' E(g)
+#'
+#' # Named graphs
+#' g2 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10])
+#' E(g2)
+#'
+#' # All edges in a long sequence
+#' g3 <- make_ring(200)
+#' E(g3)
+#' E(g3) %>% print(full = TRUE)
+#'
+#' # Metadata
+#' g4 <- make_ring(10) %>%
+#'   set_vertex_attr("name", value = LETTERS[1:10]) %>%
+#'   set_edge_attr("weight", value = 1:10) %>%
+#'   set_edge_attr("color", value = "green")
+#' E(g4)
+#' E(g4)[[]]
+#' E(g4)[[1:5]]
 
 print.igraph.es <- function(x, full = igraph_opt("print.full"), ...) {
   graph <- get_es_graph(x)
@@ -725,24 +1257,62 @@ create_op_result <- function(parsed, result, class, args) {
 }
 
 
+#' Remove duplicate vertices from a vertex sequence
+#' 
+#' @param x A vertex sequence.
+#' @param incomparables a vector of values that cannot be compared.
+#'   Passed to base function \code{duplicated}. See details there.
+#' @param ... Passed to base function \code{duplicated()}.
+#' @return A vertex sequence with the duplicate vertices removed.
+#' 
 #' @method unique igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' V(g)[1, 1:5, 1:10, 5:10]
+#' V(g)[1, 1:5, 1:10, 5:10] %>% unique()
 
 unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
 
 
+#' Remove duplicate edges from an edge sequence
+#' 
+#' @param x An edge sequence.
+#' @param incomparables a vector of values that cannot be compared.
+#'   Passed to base function \code{duplicated}. See details there.
+#' @param ... Passed to base function \code{duplicated()}.
+#' @return An edge sequence with the duplicate vertices removed.
+#' 
 #' @method unique igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' E(g)[1, 1:5, 1:10, 5:10]
+#' E(g)[1, 1:5, 1:10, 5:10] %>% unique()
 
 unique.igraph.es <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
 
 
+#' Concatenate vertex sequences
+#'
+#' @param ... The vertex sequences to concatenate. They must
+#'   refer to the same graph.
+#' @param recursive Ignored, included for S3 compatibility with
+#'   the base \code{c} function.
+#' @return A vertex sequence, the input sequences concatenated.
+#'
 #' @method c igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' c(V(g)[1], V(g)['A'], V(g)[1:4])
 
 c.igraph.vs <- function(..., recursive = FALSE) {
   parsed <- parse_vs_op_args(...)
@@ -751,8 +1321,20 @@ c.igraph.vs <- function(..., recursive = FALSE) {
 }
 
 
+#' Concatenate edge sequences
+#'
+#' @param ... The edge sequences to concatenate. They must
+#'   all refer to the same graph.
+#' @param recursive Ignored, included for S3 compatibility with the
+#'   base \code{c} function.
+#' @return An edge sequence, the input sequences concatenated.
+#' 
 #' @method c igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' c(E(g)[1], E(g)['A|B'], E(g)[1:4])
 
 c.igraph.es <- function(..., recursive = FALSE) {
   parsed <- parse_es_op_args(...)
@@ -768,22 +1350,43 @@ c.igraph.es <- function(..., recursive = FALSE) {
 #' @details
 #' They must belong to the same graph. Note that this function has
 #' \sQuote{set} semantics and the multiplicity of vertices is lost in the
-#' result.
+#' result. (This is to match the behavior of the based \code{unique}
+#' function.)
 #'
 #' @param ... The vertex sequences to take the union of.
 #' @return A vertex sequence that contains all vertices in the given
 #' sequences, exactly once.
 #'
 #' @method union igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' union(V(g)[1:6], V(g)[5:10])
 
 union.igraph.vs <- function(...) {
   unique(c(...))
 }
 
 
+#' Union of edge sequences
+#'
+#' @details
+#' They must belong to the same graph. Note that this function has
+#' \sQuote{set} semantics and the multiplicity of edges is lost in the
+#' result. (This is to match the behavior of the based \code{unique}
+#' function.)
+#'
+#' @param ... The edge sequences to take the union of.
+#' @return An edge sequence that contains all edges in the given
+#' sequences, exactly once.
+#'
 #' @method union igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' union(E(g)[1:6], E(g)[5:9], E(g)['A|J'])
 
 union.igraph.es <- union.igraph.vs
 
@@ -800,7 +1403,11 @@ union.igraph.es <- union.igraph.vs
 #' given sequences, each vertex exactly once.
 #'
 #' @method intersection igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' intersection(E(g)[1:6], E(g)[5:9])
 
 intersection.igraph.vs <- function(...) {
   ifun <- function(x, y) {
@@ -810,8 +1417,23 @@ intersection.igraph.vs <- function(...) {
 }
 
 
+#' Intersection of edge sequences
+#'
+#' @details
+#' They must belong to the same graph. Note that this function has
+#' \sQuote{set} semantics and the multiplicity of edges is lost in the
+#' result.
+#'
+#' @param ... The edge sequences to take the intersection of.
+#' @return An edge sequence that contains edges that appear in all
+#' given sequences, each edge exactly once.
+#'
 #' @method intersection igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' intersection(E(g)[1:6], E(g)[5:9])
 
 intersection.igraph.es <- intersection.igraph.vs
 
@@ -830,7 +1452,11 @@ intersection.igraph.es <- intersection.igraph.vs
 #' \code{big}, but not part of \code{small}.
 #'
 #' @method difference igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' difference(V(g), V(g)[6:10])
 
 difference.igraph.vs <- function(big, small, ...) {
   if (!length(big)) {
@@ -841,22 +1467,58 @@ difference.igraph.vs <- function(big, small, ...) {
 }
 
 
+#' Difference of edge sequences
+#'
+#' @details
+#' They must belong to the same graph. Note that this function has
+#' \sQuote{set} semantics and the multiplicity of edges is lost in the
+#' result.
+#'
+#' @param big The \sQuote{big} edge sequence.
+#' @param small The \sQuote{small} edge sequence.
+#' @param ... Ignored, included for S3 signature compatibility.
+#' @return An edge sequence that contains only edges that are part of
+#' \code{big}, but not part of \code{small}.
+#'
 #' @method difference igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' difference(V(g), V(g)[6:10])
 
 difference.igraph.es <- difference.igraph.vs
 
 
+#' Reverse the order in a vertex sequence
+#'
+#' @param x The vertex sequence to reverse.
+#' @return The reversed vertex sequence.
+#' 
 #' @method rev igraph.vs
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' V(g) %>% rev()
 
 rev.igraph.vs <- function(x) {
   x[rev(seq_along(x))]
 }
 
 
+#' Reverse the order in an edge sequence
+#'
+#' @param x The edge sequence to reverse.
+#' @return The reversed edge sequence.
+#' 
 #' @method rev igraph.es
+#' @family vertex and edge sequence operations
 #' @export
+#' @examples
+#' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
+#' E(g)
+#' E(g) %>% rev()
 
 rev.igraph.es <- rev.igraph.vs
 
@@ -890,6 +1552,7 @@ as_ids <- function(seq)
   UseMethod("as_ids")
 
 #' @method as_ids igraph.vs
+#' @rdname as_ids
 #' @export
 
 as_ids.igraph.vs <- function(seq) {
@@ -897,6 +1560,7 @@ as_ids.igraph.vs <- function(seq) {
 }
 
 #' @method as_ids igraph.es
+#' @rdname as_ids
 #' @export
 
 as_ids.igraph.es <- function(seq) {
