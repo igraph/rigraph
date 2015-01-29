@@ -9,7 +9,7 @@ before_install:
 - export PATH="$PATH:$(./pkg-build.sh r_path)"
 
 install:
-- ./pkg-build.sh install_github hadley/lazyeval igraph/igraphdata
+- ./pkg-build.sh install_github hadley/lazyeval igraph/igraphdata gaborcsardi/roxygen
 - ./pkg-build.sh install_r magrittr falsy roxygen2 NMF irlba
 
 script:
