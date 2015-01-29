@@ -5,8 +5,8 @@ all: igraph
 # Main package
 
 top_srcdir=cigraph
-REALVERSION=$(shell cd $(top_srcdir); tools/getversion.sh)
-VERSION=$(shell ./tools/convertversion.sh $(REALVERSION))
+REALVERSION=0.7.999
+VERSION=0.7.999
 
 # We put the version number in a file, so that we can detect
 # if it changes
