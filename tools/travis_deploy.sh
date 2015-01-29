@@ -23,9 +23,6 @@ tar xzf ${package}
 rm ${package}
 mv gitbak igraph/.git
 
-# Extra files to put in
-cp -r ../tools/deploy_extra/* igraph/
-
 # Record changes
 cd igraph
 git add -A .

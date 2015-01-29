@@ -11,10 +11,16 @@ before_install:
 install:
 - ./pkg-build.sh install_github hadley/lazyeval igraph/igraphdata gaborcsardi/roxygen
 - ./pkg-build.sh install_r magrittr falsy roxygen2 NMF irlba
-
-script:
 - git submodule update
 - make
+- ./pkg-build.sh install_deps
+
+script:
+- ./pkg-build.sh run_build
+- ./pkg-build.sh run_check
+
+after_failure:
+- ./pkg-build.sh dump_logs
 
 after_success:
 - tools/travis_deploy.sh igraph_*.tar.gz
