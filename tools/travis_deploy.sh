@@ -24,7 +24,7 @@ rm ${package}
 mv gitbak igraph/.git
 
 # Extra files to put in
-cp -r ../tools/deploy_extra/* igraph/_deploy/
+cp -r ../tools/deploy_extra/* igraph/
 
 # Record changes
 cd igraph
