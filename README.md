@@ -1,5 +1,5 @@
 
-[![Linux Build Status](https://travis-ci.org/igraph/rigraph.png?branch=master)](https://travis-ci.org/igraph/rigraph)
+[![Linux Build Status](https://travis-ci.org/igraph/rigraph.png?branch=dev)](https://travis-ci.org/igraph/rigraph)
 
 # R/igraph
 
