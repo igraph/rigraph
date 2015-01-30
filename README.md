@@ -1,4 +1,6 @@
 
+[![Linux Build Status](https://travis-ci.org/igraph/rigraph.png?branch=master)](https://travis-ci.org/igraph/rigraph)
+
 # R/igraph
 
 R/igraph is an R package of the igraph network analysis library.
