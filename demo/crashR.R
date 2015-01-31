@@ -1,11 +1,5 @@
 
-pause <- function() {
-  if (interactive()) {
-    cat("Press ENTER/RETURN/NEWLINE to continue.")
-    readLines(n=1)
-  }
-  invisible()
-}
+pause <- function() {}
 
 ### R objects, (real) numbers
 a <- 3

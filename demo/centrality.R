@@ -1,11 +1,5 @@
 
-pause <- function() {
-  if (interactive()) {
-    cat("Press ENTER/RETURN/NEWLINE to continue.")
-    readLines(n=1)
-  }
-  invisible()
-}
+pause <- function() {}
 
 ### Traditional approaches: degree, closeness, betweenness
 g <- graph_from_literal(Andre----Beverly:Diane:Fernando:Carol,

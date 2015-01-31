@@ -1,11 +1,5 @@
 
-pause <- function() {
-  if (interactive()) {
-    cat("Press ENTER/RETURN/NEWLINE to continue.")
-    readLines(n=1)
-  }
-  invisible()
-}
+pause <- function() {}
 
 ### A modular graph has dense subgraphs
 mod <- make_full_graph(10) %du% make_full_graph(10) %du% make_full_graph(10)
