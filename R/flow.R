@@ -510,9 +510,7 @@ st_min_cuts <- st_min_cuts
 #' dtree <- dominator_tree(g, root="R")
 #' layout <- layout_as_tree(dtree$domtree, root="R")
 #' layout[,2] <- -layout[,2]
-#' if (interactive()) {
-#'   plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
-#' }
+#' plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
 #' @export
 
 dominator_tree <- dominator_tree
