@@ -1,13 +1,5 @@
 
-pause <- function() {
-  if (interactive()) {
-    cat("Press ENTER/RETURN/NEWLINE to continue.")
-    readLines(n=1)
-  }
-  invisible()
-}
-
-pause()
+pause <- function() {}
 
 ### Create a star-like graph
 t1 <- graph_from_literal(A-B:C:D:E)
