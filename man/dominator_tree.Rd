@@ -55,9 +55,7 @@ g <- graph_from_literal(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
 dtree <- dominator_tree(g, root="R")
 layout <- layout_as_tree(dtree$domtree, root="R")
 layout[,2] <- -layout[,2]
-if (interactive()) {
-  plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
-}
+plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

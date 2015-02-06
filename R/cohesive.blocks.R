@@ -214,9 +214,7 @@
 #' }
 #' 
 #' # Plot the results
-#' if (interactive()) {
-#'   plot(mwBlocks, mw)
-#' }
+#' plot(mwBlocks, mw)
 #' 
 #' ## The science camp network
 #' camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
@@ -234,11 +232,9 @@
 #' campBlocks <- cohesive_blocks(camp)
 #' campBlocks
 #' 
-#' if (interactive()) {
-#'   plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
-#'        vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
-#'        mark.border=1, colbar=c(NA, NA,"cyan","orange") )
-#' }
+#' plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
+#'      vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
+#'      mark.border=1, colbar=c(NA, NA,"cyan","orange") )
 #' 
 cohesive_blocks <- function(graph, labels=TRUE) {
 
