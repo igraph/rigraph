@@ -68,17 +68,33 @@ procrustes_orig <- function (X, Xstar, translation = FALSE,
 ## at least as far as we need it
 
 procrustes <- function(X, Y) {
-  res <- procrustes_orig(Y, X, translation = TRUE, dilation = TRUE)
-  sc <- sum(scale(X, scale = FALSE) ^2)
-  list(
-    d = sum((res$X.new - X) ^2) / sc,
-    Z = res$X.new,
-    tr = list(
-      T = res$R,
-      b = res$s,
-      c = matrix(res$tt, nrow = nrow(X), ncol = length(res$tt), byrow = TRUE)
+
+  ## Special case, one row, the Matlab function does this
+  ## differently than the one from MCMCpack
+  if (nrow(X) == 1) {
+    list(
+      d = 0,
+      Z = X,
+      tr = list(
+        T = diag(length(X)),
+        b = 0,
+        c = X
+      )
     )
-  )
+  } else {
+
+    res <- procrustes_orig(Y, X, translation = TRUE, dilation = TRUE)
+    sc <- sum(scale(X, scale = FALSE) ^2)
+    list(
+      d = sum((res$X.new - X) ^2) / sc,
+      Z = res$X.new,
+      tr = list(
+        T = res$R,
+        b = res$s,
+        c = matrix(res$tt, nrow = nrow(X), ncol = length(res$tt), byrow = TRUE)
+      )
+    )
+  }
 }
 
 fill <- function(value, ...) {
@@ -113,7 +129,8 @@ lsgm <- function(A, B, s, numdim, numclust, embedAlg = spectralEmbed,
 
   ## compute procrusties othogonal projection (on the seed vertices)
   startt <- proc.time()
-  TRANSFORM <- procrustes(XA[1:s,], XB[1:s,])[[3]]
+  TRANSFORM <- procrustes(XA[1:s, , drop = FALSE],
+                          XB[1:s, , drop = FALSE])[[3]]
   TRANSFORM$c <- ones(sumn + s, 1) %*% TRANSFORM$c[1,]
   XB <- TRANSFORM$b * XB %*% TRANSFORM$T + TRANSFORM$c
   message(sprintf("done procrusties: %f",
