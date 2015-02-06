@@ -237,5 +237,8 @@ lsgm <- function(A, B, s, numdim, numclust, embedAlg = spectralEmbed,
   message(sprintf("total time: %f",
                   (proc.time() - start)["elapsed"]))
 
-  match
+  list(
+    match = match,
+    clust_labels = clust_labels
+  )
 }
