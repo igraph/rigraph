@@ -4340,12 +4340,22 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   if (pred) { igraph_vector_long_init(&predvec, no); }
   if (inbound) { igraph_vector_long_init(&inboundvec, no); }
   
-  igraph_get_shortest_paths_dijkstra(&g, 
-				     verts ? &ptrvec : 0, 
-				     edges ? &ptrevec : 0,
-				     from, to, pw, (igraph_neimode_t) mode, 
-				     pred ? &predvec : 0,
-				     inbound ? &inboundvec : 0);
+  if (pw && igraph_vector_min(pw) < 0){
+    igraph_get_shortest_paths_bellman_ford(&g, 
+					   verts ? &ptrvec : 0, 
+					   edges ? &ptrevec : 0,
+					   from, to, pw, (igraph_neimode_t) mode, 
+					   pred ? &predvec : 0,
+					   inbound ? &inboundvec : 0);
+  } else {
+    igraph_get_shortest_paths_dijkstra(&g, 
+				       verts ? &ptrvec : 0, 
+				       edges ? &ptrevec : 0,
+				       from, to, pw, (igraph_neimode_t) mode, 
+				       pred ? &predvec : 0,
+				       inbound ? &inboundvec : 0);
+  }
+  
   PROTECT(result=NEW_LIST(4));
   if (verts) { 
     SET_VECTOR_ELT(result, 0, NEW_LIST(no));
