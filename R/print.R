@@ -405,8 +405,8 @@ printer_callback <- printr$printer_callback
 #' @method str igraph
 #' @export
 
-str.igraph <- function(object, ...) {
-  print.igraph(object, full=TRUE, ...)
+str.igraph <- function(object, max.level = NA, ...) {
+  print.igraph(object, full=is.na(max.level) || max.level > 1, ...)
 }
 
 
