@@ -225,7 +225,7 @@ igraph.check.shapes <- function(x) {
 #' }
 #' 
 curve_multiple <- function(graph, start=0.5) {
-  el <- apply(get.edgelist(graph, names=FALSE), 1, paste, collapse=":")
+  el <- apply(as_edgelist(graph, names=FALSE), 1, paste, collapse=":")
   ave(rep(NA, length(el)), el, FUN=function(x) {
     if (length(x) == 1) {
       return(0)
