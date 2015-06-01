@@ -225,25 +225,14 @@ igraph.check.shapes <- function(x) {
 #' }
 #' 
 curve_multiple <- function(graph, start=0.5) {
-  cm <- count_multiple(graph)
-  el <- apply(as_edgelist(graph, names=FALSE), 1, paste, collapse=":")
-  ord <- order(el)
-  res <- numeric(length(ord))
-
-  p <- 1
-  while (p <= length(res)) {
-    m <- cm[ord[p]]
-    idx <- p:(p+m-1)
-    if (m==1) {
-      r <- 0
+  el <- apply(get.edgelist(graph, names=FALSE), 1, paste, collapse=":")
+  ave(rep(NA, length(el)), el, FUN=function(x) {
+    if (length(x) == 1) {
+      return(0)
     } else {
-      r <- seq(-start, start, length=m)
+      return(seq(-start, start, length=length(x)))
     }
-    res[ord[idx]] <- r
-    p <- p + m
-  }
-
-  res
+  })
 }
 
 .igraph.logo.raster <-
