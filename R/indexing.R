@@ -285,9 +285,9 @@
     getfun(x, mode=mode)[j]
   } else {
     mode <- if (directed) "out" else "all"
-    i <- V(x)[i]
-    j <- V(x)[j]
     if (!edges) {
+      i <- V(x)[i]
+      j <- V(x)[j]
       lapply(getfun(x, mode=mode)[i], intersection, j)
     } else {
       ee <- as_adj_edge_list(x, mode=mode)[i]
