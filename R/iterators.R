@@ -134,7 +134,10 @@ V <- function(graph) {
 
 create_vs <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) idx <- ifelse(idx < 1 | idx > gorder(graph), NA, idx)
-  V(graph)[idx, na_ok = na_ok]
+  res <- simple_vs_index(V(graph), idx, na_ok = na_ok)
+  attr(res, "env") <- make_weak_ref(get_vs_ref(graph), NULL)
+  attr(res, "graph") <- get_graph_id(graph)
+  res
 }
 
 #' Edges of a graph
@@ -234,7 +237,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 
 create_es <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) idx <- ifelse(idx < 1 | idx > gsize(graph), NA, idx)
-  E(graph)[idx]
+  simple_es_index(E(graph), idx)
 }
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
