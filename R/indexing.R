@@ -290,6 +290,8 @@
       j <- V(x)[j]
       lapply(getfun(x, mode=mode)[i], intersection, j)
     } else {
+      i <- as.igraph.vs(x, i)
+      j <- as.igraph.vs(x, j)
       ee <- as_adj_edge_list(x, mode=mode)[i]
       lapply(seq_along(i), function(yy) {
         from <- i[yy]
