@@ -254,5 +254,5 @@ test_that("unconnected vs/es can be reused with the same graph", {
   expect_true(identical_graphs(
     delete_edges(g, es),
     delete_edges(g, 1:5)
-  )
+  ))
 })
