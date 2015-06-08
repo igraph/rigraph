@@ -14,7 +14,7 @@ test_that("without_attr", {
   set.seed(42)
   g2 <- sample_(gnp(10, 2/10), without_attr())
 
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_equal(graph_attr_names(g2), character())
   expect_equal(vertex_attr_names(g2), character())
   expect_equal(edge_attr_names(g2), character())
@@ -30,7 +30,7 @@ test_that("without_loops", {
   g2 <- make_(from_literal(A - A:B:C, B - A:B:C, simplify = FALSE),
               without_loops())
               
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_true(all(!which_loop(g2)))
 
 })
@@ -44,7 +44,7 @@ test_that("without_multiple", {
   g2 <- make_(from_literal(A - A:B:C, B - A:B:C, simplify = FALSE),
               without_multiples())
               
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_true(all(!which_multiple(g2)))
 
 })
@@ -57,7 +57,7 @@ test_that("simplified", {
   g2 <- make_(from_literal(A - A:B:C, B - A:B:C, simplify = FALSE),
               simplified())
   
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_true(all(!which_multiple(g2)))
   expect_true(all(!which_loop(g2)))
   
@@ -75,7 +75,7 @@ test_that("with_vertex_", {
                            foo = paste0("xx", 1:3))
               )
 
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_equal(V(g2)$color, rep("red", gorder(g2)))
   expect_equal(V(g2)$foo, paste0("xx", 1:3))
   
@@ -92,7 +92,7 @@ test_that("with_edge_", {
               with_edge_(color = "red",
                          foo = seq_len(3)))
 
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_equal(E(g)$color, E(g2)$color)
   expect_equal(E(g)$foo, E(g2)$foo)
   
@@ -109,7 +109,7 @@ test_that("with_graph_", {
               with_graph_(color = "red",
                           foo = 1:5))
 
-  expect_equivalent(g, g2)
+  expect_true(identical_graphs(g, g2))
   expect_equal(g$color, g2$color)
   expect_equal(g$foo, g2$foo)
   
