@@ -34,8 +34,8 @@ test_that("operators work", {
 
 ####
 
-  expect_that(complementer(complementer(g2)),
-              equals(g2))
+  x <- complementer(complementer(g2))
+  expect_true(identical_graphs(x, g2))
 
 ####
 
