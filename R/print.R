@@ -262,8 +262,8 @@ printer_callback <- printr$printer_callback
       ehead <- head_of(x, edges)
       df <- data.frame(
         stringsAsFactors = FALSE,
-        tail = etail,
-        head = ehead,
+        tail = as_ids(etail),
+        head = as_ids(ehead),
         tid  = as.vector(etail),
         hid  = as.vector(ehead)
       )
