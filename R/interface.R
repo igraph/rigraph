@@ -447,3 +447,77 @@ get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
 #' gorder(g)
 
 gorder <- gorder
+
+#' Adjacent vertices of multiple vertices in a graph
+#'
+#' This function is similar to \code{\link{neighbors}}, but it queries
+#' the adjacent vertices for multiple vertices at once.
+#'
+#' @param graph Input graph.
+#' @param v The vertices to query.
+#' @param mode Whether to query outgoing (\sQuote{out}), incoming
+#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
+#'   ignored for undirected graphs.
+#' @return A list of vertex sequences.
+#'
+#' @family structural queries
+#' @export
+#' @examples
+#' g <- make_graph("Zachary")
+#' adjacent_vertices(g, c(1, 34))
+
+adjacent_vertices <- function(graph, v,
+                               mode = c("out", "in", "all", "total")) {
+
+  if (!is_igraph(graph)) stop("Not a graph object")
+
+  v <- as.igraph.vs(graph, v) - 1
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+
+  on.exit(.Call("R_igraph_finalizer", PACKAGE = "igraph") )
+
+  res <- .Call("R_igraph_adjacent_vertices", graph, v, mode,
+               PACKAGE = "igraph")
+
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(x) create_vs(graph, x + 1))
+  }
+  res
+}
+
+#' Incident edges of multiple vertices in a graph
+#'
+#' This function is similar to \code{\link{incident}}, but it
+#' queries multiple vertices at once.
+#'
+#' @param graph Input graph.
+#' @param v The vertices to query
+#' @param mode Whether to query outgoing (\sQuote{out}), incoming
+#'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
+#'   ignored for undirected graphs.
+#' @return A list of edge sequences.
+#'
+#' @family structural queries
+#' @export
+#' @examples
+#' g <- make_graph("Zachary")
+#' incident_edges(g, c(1, 34))
+
+incident_edges <- function(graph, v,
+                           mode = c("out", "in", "all", "total")) {
+
+  if (!is_igraph(graph)) stop("Not a graph object")
+
+  v <- as.igraph.es(graph, v) - 1
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+
+  on.exit(.Call("R_igraph_finalizer", PACKAGE = "igraph") )
+
+  res <- .Call("R_igraph_incident_edges", graph, v, mode,
+               PACKAGE = "igraph")
+
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, function(x) create_es(graph, x + 1))
+  }
+  res
+}
