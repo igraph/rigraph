@@ -357,7 +357,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
 `[.igraph.vs` <- function(x, i, ..., na_ok = FALSE) {
 
-  if (missing(i)) {
+  ## A workaround for a lazyeval bug
+  ## https://github.com/hadley/lazyeval/issues/24
+
+  if (nargs() == 1 || (!missing(na_ok) && nargs() == 2)) {
+    args <- structure(list(), class = "lazy_dots")
+  } else if (missing(i)) {
     args <- lazy_dots(..., .follow_symbols = TRUE)
   } else {
     args <- lazy_dots(i = i, ..., .follow_symbols = TRUE)

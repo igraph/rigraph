@@ -256,3 +256,17 @@ test_that("unconnected vs/es can be reused with the same graph", {
     delete_edges(g, 1:5)
   ))
 })
+
+test_that("indexing without arguments", {
+
+  g <- make_ring(10)
+
+  x <- V(g)[]
+  expect_equal(V(g), x)
+
+  x2 <- V(g)[[]]
+  v <- V(g)
+  attr(v, "single") <- TRUE
+
+  expect_equal(v, x2)
+})
