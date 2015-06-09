@@ -258,7 +258,7 @@ gsize <- function(graph) {
 #' n34 <- neighbors(g, 34)
 #' intersection(n1, n34)
 
-neighbors <- function(graph, v, mode=1) {
+neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
