@@ -432,6 +432,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   res <- replicate(length(args), NULL)
 
+  if (!is.null(graph)) {
+    attrs <- vertex_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
+  }
+
   for (idx in seq_along(args)) {
 
     if (is.null(graph)) {
@@ -440,8 +446,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     } else {
       ii <- lazy_eval(
         args[[idx]],
-        data = c(.Call("R_igraph_mybracket2", graph, 9L, 3L,
-          PACKAGE = "igraph"), nei = nei, innei = innei,
+        data = c(attrs, nei = nei, innei = innei,
           outnei = outnei, adj = adj, inc = inc, from = from, to = to)
       )
       if (! is.null(ii)) {
@@ -695,6 +700,12 @@ simple_es_index <- function(x, i) {
 
   res <- replicate(length(args), NULL)
 
+  if (!is.null(graph)) {
+    attrs <- edge_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
+  }
+
   for (idx in seq_along(args)) {
 
     if (is.null(graph)) {
@@ -703,9 +714,7 @@ simple_es_index <- function(x, i) {
     } else {
       ii <- lazy_eval(
         args[[idx]],
-        data = c(.Call("R_igraph_mybracket2", graph, 9L, 4L,
-          PACKAGE="igraph"),
-          inc = inc, adj = adj, from = from, to = to,
+        data = c(attrs, inc = inc, adj = adj, from = from, to = to,
           .igraph.from = list(.Call("R_igraph_mybracket",
             graph, 3L, PACKAGE = "igraph")[ as.numeric(x) ]),
           .igraph.to = list(.Call("R_igraph_mybracket",
