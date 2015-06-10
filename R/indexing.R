@@ -266,7 +266,7 @@
 
 `[[.igraph` <- function(x, i, j, from, to, ..., directed=TRUE,
                         edges=FALSE, exact=TRUE) {
-  ## TODO: make it faster, don't need the whole list usually
+
   getfun <- if (edges) as_adj_edge_list else as_adj_list
 
   if (!missing(i) && !missing(from)) stop("Cannot give both 'i' and 'from'")
@@ -279,20 +279,26 @@
     getfun(x, mode=mode)
   } else if (missing(j)) {
     mode <- if (directed) "out" else "all"
-    getfun(x, mode=mode)[i]
-  } else if (missing(i)) {
-    mode <- if (directed) "in" else "all"
-    getfun(x, mode=mode)[j]
-  } else {
-    mode <- if (directed) "out" else "all"
     if (!edges) {
-      i <- V(x)[i]
-      j <- V(x)[j]
-      lapply(getfun(x, mode=mode)[i], intersection, j)
+      adjacent_vertices(x, i, mode = if (directed) "out" else "all")
+    } else {
+      incident_edges(x, i, mode = if (directed) "out" else "all")
+    }
+  } else if (missing(i)) {
+    if (!edges) {
+      adjacent_vertices(x, j, mode = if (directed) "in" else "all")
+    } else {
+      incident_edges(x, j, mode = if (directed) "in" else "all")
+    }
+  } else {
+    if (!edges) {
+      mode <- if (directed) "out" else "all"
+      lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[j])
     } else {
       i <- as.igraph.vs(x, i)
       j <- as.igraph.vs(x, j)
-      ee <- as_adj_edge_list(x, mode=mode)[i]
+      mode <- if (directed) "out" else "all"
+      ee <- incident_edges(x, i, mode = mode)
       lapply(seq_along(i), function(yy) {
         from <- i[yy]
         el <- ends(x, ee[[yy]], names = FALSE)
@@ -382,8 +388,8 @@
     j <- if (missing(j)) as.numeric(V(x)) else as.igraph.vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
       ## Existing edges, and their endpoints
-      exe <- x[[i, j, ..., edges=TRUE]]
-      exv <- x[[i, j, ...]]
+      exe <- lapply(x[[i, j, ..., edges=TRUE]], as.vector)
+      exv <- lapply(x[[i, j, ...]], as.vector)
       toadd <- unlist(lapply(seq_along(exv), function(idx) {
         to <- setdiff(j, exv[[idx]])
         if (length(to!=0)) {
@@ -397,7 +403,7 @@
         x <- add_edges(x, toadd)
       } else {
         x <- add_edges(x, toadd, attr=structure(list(value), names=attr))
-        toupdate <- unlist(x[[i, j, ..., edges=TRUE]])
+        toupdate <- unlist(exe)
         x <- set_edge_attr(x, attr, toupdate, value)
       }
     }    
