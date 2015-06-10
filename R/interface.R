@@ -483,7 +483,7 @@ adjacent_vertices <- function(graph, v,
     res <- lapply(res, function(x) create_vs(graph, x + 1))
   }
 
-  if (is_named(graph)) names(res) <- V(graph)[v]$name
+  if (is_named(graph)) names(res) <- V(graph)$name[vv + 1]
 
   res
 }
@@ -511,7 +511,7 @@ incident_edges <- function(graph, v,
 
   if (!is_igraph(graph)) stop("Not a graph object")
 
-  vv <- as.igraph.es(graph, v) - 1
+  vv <- as.igraph.vs(graph, v) - 1
   mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
   on.exit(.Call("R_igraph_finalizer", PACKAGE = "igraph") )
@@ -523,7 +523,7 @@ incident_edges <- function(graph, v,
     res <- lapply(res, function(x) create_es(graph, x + 1))
   }
 
-  if (is_named(graph)) names(res) <- V(graph)[v]$name
+  if (is_named(graph)) names(res) <- V(graph)$name[vv + 1]
 
   res
 }
