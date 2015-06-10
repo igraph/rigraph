@@ -10,7 +10,7 @@ test_that("largest_cliques works", {
 
   ## TODO: this only checks that these are cliques
   expect_that(unique(sapply(lc, function(x)
-                            density(induced_subgraph(g, x)))),
+    edge_density(induced_subgraph(g, x)))),
               equals(1))
 
 })

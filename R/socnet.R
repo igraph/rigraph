@@ -705,7 +705,7 @@ tkigraph <- function() {
       recip[i] <- reciprocity( graphs[[ i ]] )
     }
     if (read$dens) {
-      dens[i] <- density( graphs[[ i ]] )
+      dens[i] <- edge_density( graphs[[ i ]] )
     }
     if (read$trans) {
       trans[i] <- transitivity( graphs[[ i ]], type="global")

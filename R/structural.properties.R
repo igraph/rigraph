@@ -1597,11 +1597,11 @@ alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
 #' 
 #' # loop edges
 #' g <- graph( c(1,2, 2,2, 2,3) )
-#' density(g, loops=FALSE)              # this is wrong!!!
-#' density(g, loops=TRUE)               # this is right!!!
-#' density(simplify(g), loops=FALSE)    # this is also right, but different
+#' edge_density(g, loops=FALSE)              # this is wrong!!!
+#' edge_density(g, loops=TRUE)               # this is right!!!
+#' edge_density(simplify(g), loops=FALSE)    # this is also right, but different
 #' 
-density <- function(graph, loops=FALSE) {
+edge_density <- function(graph, loops=FALSE) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")

@@ -865,9 +865,9 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 layout_with_dh <- function(graph, coords=NULL, maxiter=10,
            fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
            weight.node.dist=1.0, weight.border=0.0,
-           weight.edge.lengths=density(graph) / 10,
-           weight.edge.crossings=1.0 - sqrt(density(graph)),
-           weight.node.edge.dist=0.2 * (1-density(graph))) {
+           weight.edge.lengths=edge_density(graph) / 10,
+           weight.edge.crossings=1.0 - sqrt(edge_density(graph)),
+           weight.node.edge.dist=0.2 * (1-edge_density(graph))) {
 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

@@ -238,7 +238,7 @@ deprecated("graph.data.frame", graph_from_data_frame)
 #' @export graph.de.bruijn
 deprecated("graph.de.bruijn", make_de_bruijn_graph)
 #' @export graph.density
-deprecated("graph.density", density)
+deprecated("graph.density", edge_density)
 #' @export graph.disjoint.union
 deprecated("graph.disjoint.union", disjoint_union)
 #' @export graph.dfs
