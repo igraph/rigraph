@@ -216,3 +216,8 @@ eccentricity <- eccentricity
 #' @include auto.R
 
 radius <- radius
+
+#' @export
+#' @rdname distances
+
+distance_table <- distance_table

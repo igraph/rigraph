@@ -159,6 +159,7 @@ farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
 }       
 
 #' @export
+#' @rdname distances
 
 mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
 
@@ -521,6 +522,7 @@ shortest_paths <- function(graph, from, to=V(graph),
 }
 
 #' @export
+#' @rdname distances
 
 all_shortest_paths <- function(graph, from,
                                    to=V(graph),
