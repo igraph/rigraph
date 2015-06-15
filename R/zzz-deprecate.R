@@ -298,7 +298,7 @@ deprecated("graph.strength", strength)
 #' @export graph.tree
 deprecated("graph.tree", make_tree)
 #' @export graph.union
-deprecated("graph.union", union)
+deprecated("graph.union", union.igraph)
 #' @export graph.ring
 deprecated("graph.ring", make_ring)
 #' @export graphlets.candidate.basis
