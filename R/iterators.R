@@ -25,7 +25,7 @@
 ###################################################################
 
 update_es_ref <- update_vs_ref <- function(graph) {
-  check_version(graph)
+  graph <- warn_version(graph)
   env <- get_vs_ref(graph)
   assign("me", graph, envir = env)
 }

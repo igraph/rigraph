@@ -5,6 +5,6 @@ generate_uuid <- function(use_time = NA) {
 
 
 get_graph_id <- function(graph) {
-  check_version(graph)
+  graph <- warn_version(graph)
   .Call("R_igraph_get_graph_id", graph, PACKAGE = "igraph")
 }
