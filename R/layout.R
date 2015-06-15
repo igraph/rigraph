@@ -951,6 +951,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' \sQuote{z} coordinates.
 #' @param coolexp,maxdelta,area,repulserad These arguments are not supported
 #' from igraph version 0.8.0 and are ignored (with a warning).
+#' @param maxiter A deprecated synonym of \code{niter}, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #' vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -983,7 +984,7 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
                             grid=c("auto", "grid", "nogrid"), weights=NULL,
                             minx=NULL, maxx=NULL, miny=NULL, maxy=NULL,
                             minz=NULL, maxz=NULL,
-                            coolexp, maxdelta, area, repulserad) {
+                            coolexp, maxdelta, area, repulserad, maxiter) {
 
                                         # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -994,6 +995,10 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
   }
+  if (!missing(niter) && !missing(maxiter)) {
+    stop("Both `niter' and `maxiter' are given, give only one of them")
+  }
+  if (!missing(maxiter)) niter <- maxiter
   niter <- as.integer(niter)
   start.temp <- as.numeric(start.temp)
 
