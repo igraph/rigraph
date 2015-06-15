@@ -263,6 +263,7 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
     stop("Not a graph object")
   }
   if (is.character(mode)) {
+    mode <- igraph.match.arg(mode)
     mode <- switch(mode, "out"=1, "in"=2, "all"=3, "total"=3)
   }
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
