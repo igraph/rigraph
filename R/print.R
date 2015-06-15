@@ -474,6 +474,7 @@ str.igraph <- function(object, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method print igraph
 #' @export
+#' @export print.igraph
 #' @keywords graphs
 #' @examples
 #' 
