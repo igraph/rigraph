@@ -1246,6 +1246,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' \sQuote{z} coordinates.
 #' @param niter,sigma,initemp,coolexp These arguments are not supported from
 #' igraph version 0.8.0 and are ignored (with a warning).
+#' @param start Deprecated synonym for \code{coords}, for compatibility.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
 #' many rows as the number of vertices, the x, y and potentially z coordinates
 #' of the vertices.
@@ -1267,8 +1268,13 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
                                 epsilon=0.0, kkconst=vcount(graph),
                                 weights=NULL, minx=NULL, maxx=NULL,
                                 miny=NULL, maxy=NULL, minz=NULL, maxz=NULL,
-                                niter, sigma, initemp, coolexp) {
+                                niter, sigma, initemp, coolexp, start) {
   # Argument checks
+  if (!missing(coords) && !missing(start)) {
+    stop("Both `coords' and `start' are given, give only one of them.")
+  }
+  if (!missing(start)) coords <- start
+
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
