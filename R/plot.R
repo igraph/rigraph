@@ -68,6 +68,7 @@
 #' graph plotting functions.
 #' @method plot igraph
 #' @export
+#' @export plot.igraph
 #' @keywords graphs
 #' @examples
 #' 
