@@ -1901,3 +1901,33 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
   l[ unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
 }
+
+#' Spring layout, this was removed from igraph
+#'
+#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#'
+#' @param graph Input graph.
+#' @param ... Extra arguments are ignored.
+#' @return Layout coordinates, a two column matrix.
+#'
+#' @export
+
+layout.spring <- function(graph, ...) {
+  warning("Spring layout was removed, we use Fruchterman-Reingold instead.")
+  layout_with_fr(graph)
+}
+
+#' SVD layout, this was removed from igraph
+#'
+#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#'
+#' @param graph Input graph.
+#' @param ... Extra arguments are ignored.
+#' @return Layout coordinates, a two column matrix.
+#'
+#' @export
+
+layout.spring <- function(graph, ...) {
+  warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
+  layout_with_fr(graph)
+}
