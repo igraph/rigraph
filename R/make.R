@@ -500,7 +500,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
   } else {
 
-    if (length(list(...))) stop("Extra arguments in make_graph")
     if (!missing(simplify)) {
       stop("'simplify' should not be given for graph literals")
     }
@@ -522,6 +521,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!missing(dir)) {
         warning("'dir' is ignored for the '", edges, "' graph")
       }
+      if (length(list(...))) stop("Extra arguments in make_graph")
 
       make_famous_graph(edges)
 
@@ -529,15 +529,26 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!is.null(isolates)) {
         warning("'isolates' ignored for numeric edge list")
       }
-      on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-      .Call("R_igraph_create", as.numeric(edges)-1, as.numeric(n),
-            as.logical(directed),
-            PACKAGE="igraph")
+
+      old_graph <- function(edges, n = max(edges), directed = TRUE) {
+        on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+        .Call("R_igraph_create", as.numeric(edges)-1, as.numeric(n),
+              as.logical(directed),
+              PACKAGE="igraph")
+      }
+
+      args <- list(edges, ...)
+      if (!missing(n)) args <- c(args, list(n = n))
+      if (!missing(directed)) args <- c(args, list(directed = directed))
+
+      do.call(old_graph, args)
 
     } else if (is.character(edges)) {
       if (!missing(n)) {
         warning("'n' is ignored for edge list with vertex names")
       }
+      if (length(list(...))) stop("Extra arguments in make_graph")
+
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
       if (!is.null(isolates)) {
