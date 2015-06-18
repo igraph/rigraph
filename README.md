@@ -13,11 +13,11 @@ You can install the stable version of R/igraph from CRAN:
 install.packages("igraph")
 ```
 
-For the development version, you can use Github, with the `devtools`
+For the development version, you can use my fork on Github, with the `devtools`
 package:
 
 ```r
-devtools::install_github("igraph/rigraph")
+devtools::install_github("pyrovski/rigraph")
 ```
 
 ## Documentation
