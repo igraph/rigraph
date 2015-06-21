@@ -1453,7 +1453,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' island.
 #' @param n.inter The number of edges to create between two islands.
 #' @return An igraph graph.
-#' @author Samuel Thiriot (\url{http://samuelthiriot.res-ear.ch/})
+#' @author Samuel Thiriot (\url{https://www.linkedin.com/in/samthiriot})
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
