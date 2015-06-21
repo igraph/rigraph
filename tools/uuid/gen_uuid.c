@@ -92,6 +92,13 @@
 #include "uuidP.h"
 #include "uuidd.h"
 
+#ifdef USING_R
+#include <Rdefines.h>
+#include "igraph_random.h"
+#define srand(x) ;
+#define rand() RNG_INTEGER(0, RAND_MAX)
+#endif
+
 #ifdef HAVE_TLS
 #define THREAD_LOCAL static __thread
 #else

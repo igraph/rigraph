@@ -9,7 +9,6 @@ Description: Routines for simple graphs and network analysis. igraph can
 Depends: methods
 Imports: Matrix,
     magrittr,
-    lazyeval,
     NMF,
     irlba
 Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales

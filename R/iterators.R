@@ -324,7 +324,6 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' @family vertex and edge sequences
 #' @family vertex and edge sequence operations
 #' 
-#' @importFrom lazyeval lazy_dots
 #' @examples
 #' # -----------------------------------------------------------------
 #' # Setting attributes for subsets of vertices
@@ -357,12 +356,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
 `[.igraph.vs` <- function(x, i, ..., na_ok = FALSE) {
 
-  ## A workaround for a lazyeval bug
-  ## https://github.com/hadley/lazyeval/issues/24
-
-  if (nargs() == 1 || (!missing(na_ok) && nargs() == 2)) {
-    args <- structure(list(), class = "lazy_dots")
-  } else if (missing(i)) {
+  if (missing(i)) {
     args <- lazy_dots(..., .follow_symbols = TRUE)
   } else {
     args <- lazy_dots(i = i, ..., .follow_symbols = TRUE)
@@ -641,7 +635,6 @@ simple_es_index <- function(x, i) {
 #' @export
 #' @family vertex and edge sequences
 #' @family vertex and edge sequence operations
-#' @importFrom lazyeval lazy_dots
 #' @examples
 #' # special operators for indexing based on graph structure
 #' g <- sample_pa(100, power = 0.3)

@@ -86,7 +86,7 @@ $(UUID2): src/uuid/%: tools/uuid/%
 # R files that are generated/copied
 
 RGEN = R/auto.R src/rinterface.c src/rinterface.h \
-	src/rinterface_extra.c src/Makevars.in \
+	src/rinterface_extra.c src/lazyeval.c src/Makevars.in \
 	configure src/config.h.in src/Makevars.win \
 	DESCRIPTION
 
@@ -149,6 +149,10 @@ src/rinterface_extra.c: tools/stimulus/rinterface_extra.c
 	mkdir -p src
 	cp $< $@
 
+src/lazyeval.c: tools/stimulus/lazyeval.c
+	mkdir -p src
+	cp $< $@
+
 # This is the list of all object files in the R package,
 # we write it to a file to be able to depend on it.
 # Makevars.in and Makevars.win are only regenerated if 
@@ -162,7 +166,7 @@ OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(GLPK) $(RAY) $(UUID)   |     \
 		sed 's/\.[^\.][^\.]*$$/.o/' | 			 	 \
 		sed 's/^src\///' | sed 's/^tools\/arpack\///' |		 \
 		sed 's/^tools\///' | 					 \
-		sed 's/^optional\///') rinterface.o rinterface_extra.o
+		sed 's/^optional\///') rinterface.o rinterface_extra.o lazyeval.o
 
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@

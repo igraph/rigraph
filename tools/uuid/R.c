@@ -1,8 +1,12 @@
 #include "uuid.h"
 
 #include <Rinternals.h>
+#include "igraph_random.h"
 
 SEXP UUID_gen(SEXP sTime) {
+
+    RNG_BEGIN();
+
     uuid_t u;
     char c[40];
     int use_time = asInteger(sTime);
@@ -13,6 +17,9 @@ SEXP UUID_gen(SEXP sTime) {
     else
 	uuid_generate(u);
     uuid_unparse_lower(u, c);
+
+    RNG_END();
+
     return mkString(c);
 }
 
