@@ -754,6 +754,6 @@ is_min_separator <- is_min_separator
 #'                       Gery    - Pat:Steve:Russ:John,
 #'                       Russ    - Steve:Bert:Gery:John,
 #'                       John    - Gery:Russ:Michael)
-#' lapply(min_separators(camp), function(x) V(camp)[x])
+#' min_separators(camp)
 
 min_separators <- min_separators
