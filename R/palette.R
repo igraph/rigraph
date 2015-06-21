@@ -37,6 +37,7 @@
 #' @family palettes
 #' @export
 #' @examples
+#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
@@ -48,6 +49,7 @@
 #' V(karate)$color <- membership(cl_k)
 #' karate$palette <- categorical_pal(length(cl_k))
 #' plot(karate)
+#' }
 
 categorical_pal <- function(n) {
 
@@ -80,6 +82,7 @@ categorical_pal <- function(n) {
 #' @family palettes
 #' @export
 #' @examples
+#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
@@ -88,6 +91,7 @@ categorical_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), sequential_pal)
 #' plot(karate)
+#' }
 
 sequential_pal <- function(n) {
 
@@ -133,6 +137,7 @@ sequential_pal <- function(n) {
 #' @family palettes
 #' @export
 #' @examples
+#' \dontrun{
 #' library(igraphdata)
 #' data(foodwebs)
 #' fw <- foodwebs[[1]] %>%
@@ -145,7 +150,6 @@ sequential_pal <- function(n) {
 #' V(fw)$color <- scales::dscale(V(fw)$Biomass %>% cut(10), diverging_pal)
 #' plot(fw)
 #'
-#' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
 #'   add_layout_(with_kk()) %>%
@@ -153,6 +157,7 @@ sequential_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), diverging_pal)
 #' plot(karate)
+#' }
 
 diverging_pal <- function(n) {
 

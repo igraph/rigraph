@@ -485,6 +485,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
+#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
@@ -494,6 +495,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
+#' }
 
 layout_in_circle <- function(graph, order=V(graph)) {
   if (!is_igraph(graph)) {
