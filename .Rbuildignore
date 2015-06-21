@@ -1,6 +1,7 @@
 ^tags$
 ^cigraph$
 ^Makefile$
+^src/Makevars$
 ^tools$
 ^.gitmodules$
 ^igraph_.*\.tar\.gz$
