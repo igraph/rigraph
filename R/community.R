@@ -1645,7 +1645,7 @@ cluster_optimal <- function(graph, weights=NULL) {
 #' please see the \code{\link{communities}} manual page for details.
 #' @author Martin Rosvall (\url{http://www.tp.umu.se/~rosvall/}) wrote the
 #' original C++ code. This was ported to be more igraph-like by Emmanuel
-#' Navarro (\url{http://www.irit.fr/~Emmanuel.Navarro/}).  The R interface and
+#' Navarro (\url{http://enavarro.me/}).  The R interface and
 #' some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso Other community finding methods and \code{\link{communities}}.
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of
