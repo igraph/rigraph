@@ -445,6 +445,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
 #' graph representations.
 #' @examples
+#' \dontrun{
 #' ## Undirected
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
@@ -458,6 +459,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
+#' }
 #' #' @export
 
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
