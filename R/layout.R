@@ -1938,7 +1938,7 @@ layout.spring <- function(graph, ...) {
 #'
 #' @export
 
-layout.spring <- function(graph, ...) {
+layout.svd <- function(graph, ...) {
   warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
   layout_with_fr(graph)
 }
