@@ -9503,7 +9503,7 @@ SEXP R_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
   R_SEXP_to_igraph_vs(pv, &graph, &vs);
   IGRAPH_FINALLY(igraph_vs_destroy, &vs);
 
-  IGRAPH_CHECK(igraph_vit_create(&graph, vs, &vit));
+  igraph_vit_create(&graph, vs, &vit);
   IGRAPH_FINALLY(igraph_vit_destroy, &vit);
   n = IGRAPH_VIT_SIZE(vit);
 
@@ -9542,7 +9542,7 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   R_SEXP_to_igraph_vs(pe, &graph, &vs);
   IGRAPH_FINALLY(igraph_vs_destroy, &vs);
 
-  IGRAPH_CHECK(igraph_vit_create(&graph, vs, &vit));
+  igraph_vit_create(&graph, vs, &vit);
   IGRAPH_FINALLY(igraph_vit_destroy, &vit);
   n = IGRAPH_VIT_SIZE(vit);
 
