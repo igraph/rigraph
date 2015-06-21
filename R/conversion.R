@@ -463,10 +463,6 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
                                  unlist.attrs=TRUE) {
 
-  if (! "graph" %in% .packages()) {
-    library(graph, pos="package:base")
-  }
-
   if (!inherits(graphNEL, "graphNEL")) {
     stop("Not a graphNEL graph")
   }
@@ -555,10 +551,6 @@ as_graphnel <- function(graph) {
     stop("Not an igraph graph")
   }
   
-  if (! "graph" %in% .packages()) {
-    library(graph, pos="package:base")
-  }
-
   if ("name" %in% vertex_attr_names(graph) &&
       is.character(V(graph)$name)) {
     name <- V(graph)$name

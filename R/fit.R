@@ -144,8 +144,6 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
     stop("vector should be at least of length two")
   }  
 
-  require(stats4)
-  
   if (is.null(xmin)) { xmin <- min(x) }
   
   n <- length(x)

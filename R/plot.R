@@ -441,8 +441,6 @@ rglplot        <- function(x, ...)
 
 rglplot.igraph <- function(x, ...) {
 
-  require(rgl)
-  
   graph <- x
   if (!is_igraph(graph)) {
     stop("Not a graph object")

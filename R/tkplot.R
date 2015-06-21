@@ -177,7 +177,8 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   }
   
   # Libraries
-  require(tcltk) || stop("tcl/tk library not available")
+  requireNamespace("tcltk", quietly = TRUE) ||
+    stop("tcl/tk library not available")
 
   # Visual parameters
   params <- i.parse.plot.params(graph, list(...))

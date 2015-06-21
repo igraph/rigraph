@@ -47,7 +47,8 @@
 
 tkigraph <- function() {
 
-  require(tcltk) || stop("tcl/tk library not available")
+  requireNamespace("tcltk", quietly = TRUE) ||
+    stop("tcl/tk library not available")
 
   options(scipen=10000)
   

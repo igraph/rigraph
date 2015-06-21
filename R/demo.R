@@ -49,8 +49,6 @@
 #' }
 #' 
 igraph_demo <- function(which) {
-  require(igraph)
-  require(tcltk)
   
   if (missing(which)) {
     demodir <- system.file("demo", package="igraph")
