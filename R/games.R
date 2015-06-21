@@ -710,7 +710,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
 }
 
 #' @rdname sample_pa_age
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_pa_age}.
 #' @export
 
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
