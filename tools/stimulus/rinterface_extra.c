@@ -207,12 +207,6 @@ SEXP R_igraph_psumtree_draw(SEXP plength, SEXP howmany, SEXP prob) {
   return result;
 }
 
-SEXP R_igraph_srand(SEXP pseed) {
-  unsigned seed=INTEGER(AS_INTEGER(pseed))[0];
-  srand(seed);
-  return R_NilValue;
-}
-
 SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
   SEXP result;
   int i, no=0, n=GET_LENGTH(vector);

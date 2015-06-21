@@ -117,37 +117,16 @@ igraph.i.spMatrix <- function(M) {
 
 
 
-#' Set random seed of the C library's RNG
+#' Deprecated function, used to set random seed of the C library's RNG
 #' 
-#' Set the random seed of the C library's RNG, for a new sequence of
-#' pseudo-random numbers.
-#' 
-#' Note that this function has nothing to do with R's random number generator,
-#' see \code{set.seed} for that.
-#' 
-#' Some package (e.g. ngspatial) use internal C code and generate random
-#' numbers using the standard C library's built-in random number generator
-#' instead of using R's RNGs. The \code{srand} function is provided to set the
-#' random seed for these packages. It simply calls the standard C function
-#' \code{srand}, with the supplied integer seed value.
-#' 
-#' Note that the standard C library's RNGs are typically of very bad quality,
-#' and also slower than R's RNGs. It is not worth using them, really, other
-#' than taking over some legacy C code that already uses them, and that would
-#' be difficult to rewrite to use R's RNGs.
-#' 
-#' @param seed Numeric scalar, the new random seed. It must be non-negative and
-#' will be converted to an integer.
-#' @return \code{NULL}, invisibly.
+#' @param seed Ignored.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 
 srand <- function(seed) {
-  seed <- as.numeric(seed)
-  if (length(seed) != 1) { stop("Length of `seed' must be 1") }
-  if (seed < 0) { stop("Seed must be non-negative") }
-  res <- .Call("R_igraph_srand", seed, PACKAGE="igraph")
-  invisible(res)
+  warning("This function does nothing, as calling srand from R packages\n",
+          "is now not allowed. If you want to reproduce your past\n",
+          "results, use an older version of igraph, e.g. 0.7.1")
 }
 
 
