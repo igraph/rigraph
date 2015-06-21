@@ -3,9 +3,9 @@ Version: @@@@@@@@@@ missing @@@@@@@@@@
 Title:  Network Analysis and Visualization
 Author: See AUTHORS file.
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
-Description: Routines for simple graphs and network analysis. igraph can
+Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
-  and regular graphs, graph visualization, centrality indices and much more.
+  and regular graphs, graph visualization, centrality methods and much more.
 Depends: methods
 Imports: Matrix,
     magrittr,
