@@ -1,6 +1,6 @@
 Package: igraph
 Version: @@@@@@@@@@ missing @@@@@@@@@@
-Title:  Network analysis and visualization
+Title:  Network Analysis and Visualization
 Author: See AUTHORS file.
 Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
 Description: Routines for simple graphs and network analysis. igraph can
