@@ -10,5 +10,5 @@
 ^.travis.yml$
 ^CONTRIBUTING.md$
 ^NEWS.md$
-^/src/.*\.o$
-^/.BundledPackages$
+^src/.*\.o$
+^.BundledPackages$
