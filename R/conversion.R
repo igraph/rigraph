@@ -533,6 +533,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' other graph representations.
 #' @examples
 #' ## Undirected
+#' \dontrun{
 #' g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' GNEL <- as_graphnel(g)
@@ -545,6 +546,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' GNEL2 <- as_graphnel(g3)
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
+#' }
 #' #' @export
 
 as_graphnel <- function(graph) {
