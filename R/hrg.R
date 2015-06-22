@@ -40,8 +40,7 @@
 #' a network based on its HRG models (\code{predict_edges}).
 #' 
 #' The igraph HRG implementation is heavily based on the code published by
-#' Aaron Clauset, at his website,
-#' \url{http://tuvalu.santafe.edu/~aaronc/hierarchy/}.
+#' Aaron Clauset, at his website (not functional any more).
 #' 
 #' @name hrg-methods
 #' @family hierarchical random graph functions
