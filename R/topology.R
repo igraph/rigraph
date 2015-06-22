@@ -857,7 +857,7 @@ permute <- permute
 #' \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
 #' \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
 #' canrep updates.} \item{max_level}{Maximum level.}
-#' @author Tommi Juntilla (\url{http://users.ics.aalto.fi/tjunttil/)} for BLISS
+#' @author Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
 #' @seealso \code{\link{canonical_permutation}}, \code{\link{permute}}

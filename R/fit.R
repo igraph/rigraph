@@ -118,9 +118,9 @@
 #' fit2 <- fit_power_law(d+1, 10, implementation="R.mle")
 #' 
 #' fit1$alpha
-#' coef(fit2)
+#' stats4::coef(fit2)
 #' fit1$logLik
-#' logLik(fit2)
+#' stats4::logLik(fit2)
 #' 
 fit_power_law <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
                           implementation=c("plfit", "R.mle"), ...) {
@@ -144,8 +144,6 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
     stop("vector should be at least of length two")
   }  
 
-  require(stats4)
-  
   if (is.null(xmin)) { xmin <- min(x) }
   
   n <- length(x)

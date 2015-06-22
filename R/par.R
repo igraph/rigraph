@@ -47,7 +47,9 @@ igraph.pars.set.verbose <- function(verbose) {
     }
     if (verbose %in% c("tk", "tkconsole")) {
       if (!capabilities()[["X11"]]) { stop("X11 not available")           }
-      if (!require("tcltk"))        { stop("tcltk package not available") }
+      if (!requireNamespace("tcltk", quietly = TRUE)) {
+        stop("tcltk package not available")
+      }
     }
     .Call("R_igraph_set_verbose", verbose, PACKAGE="igraph")
   } else {

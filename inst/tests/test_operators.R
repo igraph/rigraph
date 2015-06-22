@@ -34,8 +34,8 @@ test_that("operators work", {
 
 ####
 
-  expect_that(complementer(complementer(g2)),
-              equals(g2))
+  x <- complementer(complementer(g2))
+  expect_true(identical_graphs(x, g2))
 
 ####
 
@@ -44,4 +44,19 @@ test_that("operators work", {
   expect_that(ecount(gc), equals(60))
   expect_that(diameter(gc), equals(2))
   
+})
+
+test_that("Union of directed named graphs", {
+
+  graphs <- list(
+    make_graph( ~1:2:3:4:5, 1-+2, 1-+3, 2-+3, 2-+4, 3-+4, 1-+5, 3-+5),
+    make_graph( ~1:2:3:4:5, 2-+3, 1-+4, 2-+4, 3-+4, 2-+5, 3-+5),
+    make_graph( ~1:2:3:4:5, 1-+2, 1-+3, 2-+4, 3-+4, 1-+5, 4-+5)
+  )
+
+  gg <- graph.union(graphs)
+
+  expect_equal(vcount(gg), 5)
+  expect_equal(ecount(gg), 10)
+
 })

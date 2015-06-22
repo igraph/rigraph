@@ -485,6 +485,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
+#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
@@ -494,6 +495,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
+#' }
 
 layout_in_circle <- function(graph, order=V(graph)) {
   if (!is_igraph(graph)) {
@@ -865,9 +867,9 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 layout_with_dh <- function(graph, coords=NULL, maxiter=10,
            fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
            weight.node.dist=1.0, weight.border=0.0,
-           weight.edge.lengths=density(graph) / 10,
-           weight.edge.crossings=1.0 - sqrt(density(graph)),
-           weight.node.edge.dist=0.2 * (1-density(graph))) {
+           weight.edge.lengths=edge_density(graph) / 10,
+           weight.edge.crossings=1.0 - sqrt(edge_density(graph)),
+           weight.node.edge.dist=0.2 * (1-edge_density(graph))) {
 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -951,6 +953,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' \sQuote{z} coordinates.
 #' @param coolexp,maxdelta,area,repulserad These arguments are not supported
 #' from igraph version 0.8.0 and are ignored (with a warning).
+#' @param maxiter A deprecated synonym of \code{niter}, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #' vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -983,7 +986,7 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
                             grid=c("auto", "grid", "nogrid"), weights=NULL,
                             minx=NULL, maxx=NULL, miny=NULL, maxy=NULL,
                             minz=NULL, maxz=NULL,
-                            coolexp, maxdelta, area, repulserad) {
+                            coolexp, maxdelta, area, repulserad, maxiter) {
 
                                         # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -994,6 +997,10 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
   }
+  if (!missing(niter) && !missing(maxiter)) {
+    stop("Both `niter' and `maxiter' are given, give only one of them")
+  }
+  if (!missing(maxiter)) niter <- maxiter
   niter <- as.integer(niter)
   start.temp <- as.numeric(start.temp)
 
@@ -1246,6 +1253,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' \sQuote{z} coordinates.
 #' @param niter,sigma,initemp,coolexp These arguments are not supported from
 #' igraph version 0.8.0 and are ignored (with a warning).
+#' @param start Deprecated synonym for \code{coords}, for compatibility.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
 #' many rows as the number of vertices, the x, y and potentially z coordinates
 #' of the vertices.
@@ -1267,8 +1275,13 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
                                 epsilon=0.0, kkconst=vcount(graph),
                                 weights=NULL, minx=NULL, maxx=NULL,
                                 miny=NULL, maxy=NULL, minz=NULL, maxz=NULL,
-                                niter, sigma, initemp, coolexp) {
+                                niter, sigma, initemp, coolexp, start) {
   # Argument checks
+  if (!missing(coords) && !missing(start)) {
+    stop("Both `coords' and `start' are given, give only one of them.")
+  }
+  if (!missing(start)) coords <- start
+
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
@@ -1900,4 +1913,34 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
   l <- merge_coords(gl, ll)
   l[ unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
+}
+
+#' Spring layout, this was removed from igraph
+#'
+#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#'
+#' @param graph Input graph.
+#' @param ... Extra arguments are ignored.
+#' @return Layout coordinates, a two column matrix.
+#'
+#' @export
+
+layout.spring <- function(graph, ...) {
+  warning("Spring layout was removed, we use Fruchterman-Reingold instead.")
+  layout_with_fr(graph)
+}
+
+#' SVD layout, this was removed from igraph
+#'
+#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#'
+#' @param graph Input graph.
+#' @param ... Extra arguments are ignored.
+#' @return Layout coordinates, a two column matrix.
+#'
+#' @export
+
+layout.svd <- function(graph, ...) {
+  warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
+  layout_with_fr(graph)
 }

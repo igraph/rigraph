@@ -25,7 +25,7 @@
 ###################################################################
 
 update_es_ref <- update_vs_ref <- function(graph) {
-  check_version(graph)
+  graph <- warn_version(graph)
   env <- get_vs_ref(graph)
   assign("me", graph, envir = env)
 }
@@ -134,7 +134,10 @@ V <- function(graph) {
 
 create_vs <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) idx <- ifelse(idx < 1 | idx > gorder(graph), NA, idx)
-  V(graph)[idx, na_ok = na_ok]
+  res <- simple_vs_index(V(graph), idx, na_ok = na_ok)
+  attr(res, "env") <- make_weak_ref(get_vs_ref(graph), NULL)
+  attr(res, "graph") <- get_graph_id(graph)
+  res
 }
 
 #' Edges of a graph
@@ -234,7 +237,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
 
 create_es <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) idx <- ifelse(idx < 1 | idx > gsize(graph), NA, idx)
-  E(graph)[idx]
+  simple_es_index(E(graph), idx)
 }
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
@@ -321,7 +324,6 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' @family vertex and edge sequences
 #' @family vertex and edge sequence operations
 #' 
-#' @importFrom lazyeval lazy_dots
 #' @examples
 #' # -----------------------------------------------------------------
 #' # Setting attributes for subsets of vertices
@@ -424,6 +426,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   res <- replicate(length(args), NULL)
 
+  if (!is.null(graph)) {
+    attrs <- vertex_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
+  }
+
   for (idx in seq_along(args)) {
 
     if (is.null(graph)) {
@@ -432,8 +440,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     } else {
       ii <- lazy_eval(
         args[[idx]],
-        data = c(.Call("R_igraph_mybracket2", graph, 9L, 3L,
-          PACKAGE = "igraph"), nei = nei, innei = innei,
+        data = c(attrs, nei = nei, innei = innei,
           outnei = outnei, adj = adj, inc = inc, from = from, to = to)
       )
       if (! is.null(ii)) {
@@ -628,7 +635,6 @@ simple_es_index <- function(x, i) {
 #' @export
 #' @family vertex and edge sequences
 #' @family vertex and edge sequence operations
-#' @importFrom lazyeval lazy_dots
 #' @examples
 #' # special operators for indexing based on graph structure
 #' g <- sample_pa(100, power = 0.3)
@@ -687,6 +693,12 @@ simple_es_index <- function(x, i) {
 
   res <- replicate(length(args), NULL)
 
+  if (!is.null(graph)) {
+    attrs <- edge_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
+  }
+
   for (idx in seq_along(args)) {
 
     if (is.null(graph)) {
@@ -695,9 +707,7 @@ simple_es_index <- function(x, i) {
     } else {
       ii <- lazy_eval(
         args[[idx]],
-        data = c(.Call("R_igraph_mybracket2", graph, 9L, 4L,
-          PACKAGE="igraph"),
-          inc = inc, adj = adj, from = from, to = to,
+        data = c(attrs, inc = inc, adj = adj, from = from, to = to,
           .igraph.from = list(.Call("R_igraph_mybracket",
             graph, 3L, PACKAGE = "igraph")[ as.numeric(x) ]),
           .igraph.to = list(.Call("R_igraph_mybracket",

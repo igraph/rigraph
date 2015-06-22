@@ -710,7 +710,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
 }
 
 #' @rdname sample_pa_age
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_pa_age}.
 #' @export
 
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
@@ -1453,7 +1453,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' island.
 #' @param n.inter The number of edges to create between two islands.
 #' @return An igraph graph.
-#' @author Samuel Thiriot (\url{http://samuelthiriot.res-ear.ch/})
+#' @author Samuel Thiriot (\url{https://www.linkedin.com/in/samthiriot})
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
@@ -1683,7 +1683,7 @@ sample_fitness_pl <- sample_fitness_pl
 #' g <- sample_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
 #' dd1 <- degree_distribution(g, mode="in")
 #' dd2 <- degree_distribution(g, mode="out")
-#  plot(seq(along=dd1)-1, dd1, log="xy")
+#' plot(seq(along=dd1)-1, dd1, log="xy")
 #' points(seq(along=dd2)-1, dd2, col=2, pch=2)
 
 sample_forestfire <- sample_forestfire

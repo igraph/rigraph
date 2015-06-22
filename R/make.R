@@ -32,7 +32,6 @@
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @importFrom lazyeval lazy_eval
 #' @export
 #' @examples
 #' r <- make_(ring(10))
@@ -149,7 +148,6 @@ sample_ <- make_
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @importFrom lazyeval lazy_dots
 #' @export
 #' @examples
 #' ## These are equivalent
@@ -362,11 +360,11 @@ with_graph_ <- function(...) {
 #'   \item{Frucht}{The Frucht Graph is the smallest
 #'     cubical graph whose automorphism group consists only of the identity
 #'     element. It has 12 vertices and 18 edges.}
-#'   \item{Grotzsch}{The Grötzsch
+#'   \item{Grotzsch}{The Groetzsch
 #'     graph is a triangle-free graph with 11 vertices, 20 edges, and chromatic
-#'     number 4. It is named after German mathematician Herbert Grötzsch, and its
+#'     number 4. It is named after German mathematician Herbert Groetzsch, and its
 #'     existence demonstrates that the assumption of planarity is necessary in
-#'     Grötzsch's theorem that every triangle-free planar graph is 3-colorable.}
+#'     Groetzsch's theorem that every triangle-free planar graph is 3-colorable.}
 #'   \item{Heawood}{The Heawood graph is an undirected graph with 14 vertices and
 #'     21 edges. The graph is cubic, and all cycles in the graph have six or more
 #'     edges. Every smaller cubic graph has shorter cycles, so this graph is the
@@ -500,7 +498,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
   } else {
 
-    if (length(list(...))) stop("Extra arguments in make_graph")
     if (!missing(simplify)) {
       stop("'simplify' should not be given for graph literals")
     }
@@ -522,6 +519,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!missing(dir)) {
         warning("'dir' is ignored for the '", edges, "' graph")
       }
+      if (length(list(...))) stop("Extra arguments in make_graph")
 
       make_famous_graph(edges)
 
@@ -529,15 +527,26 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!is.null(isolates)) {
         warning("'isolates' ignored for numeric edge list")
       }
-      on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-      .Call("R_igraph_create", as.numeric(edges)-1, as.numeric(n),
-            as.logical(directed),
-            PACKAGE="igraph")
+
+      old_graph <- function(edges, n = max(edges), directed = TRUE) {
+        on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+        .Call("R_igraph_create", as.numeric(edges)-1, as.numeric(n),
+              as.logical(directed),
+              PACKAGE="igraph")
+      }
+
+      args <- list(edges, ...)
+      if (!missing(n)) args <- c(args, list(n = n))
+      if (!missing(directed)) args <- c(args, list(directed = directed))
+
+      do.call(old_graph, args)
 
     } else if (is.character(edges)) {
       if (!missing(n)) {
         warning("'n' is ignored for edge list with vertex names")
       }
+      if (length(list(...))) stop("Extra arguments in make_graph")
+
       el <- matrix(edges, ncol = 2, byrow = TRUE)
       res <- graph_from_edgelist(el, directed = directed)
       if (!is.null(isolates)) {

@@ -92,6 +92,14 @@
 #include "uuidP.h"
 #include "uuidd.h"
 
+#ifdef USING_R
+#include <Rdefines.h>
+#include "igraph_random.h"
+#define srand(x) ;
+#define rand() RNG_INTEGER(0, RAND_MAX)
+int gettimeofday (struct timeval *tv, void *dummy);
+#endif
+
 #ifdef HAVE_TLS
 #define THREAD_LOCAL static __thread
 #else
@@ -100,7 +108,7 @@
 
 #ifdef _WIN32
 #if 0 /* MinGW has gettimeofday so we don't need this */
-static void gettimeofday (struct timeval *tv, void *dummy)
+static int gettimeofday (struct timeval *tv, void *dummy)
 {
 	FILETIME	ftime;
 	uint64_t	n;

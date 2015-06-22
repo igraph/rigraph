@@ -251,5 +251,22 @@ test_that("unconnected vs/es can be reused with the same graph", {
   load(tmp)
 
   expect_equal(degree(g, v = vs), rep(2, 10))
-  expect_equal(delete_edges(g, es), delete_edges(g, 1:5))
+  expect_true(identical_graphs(
+    delete_edges(g, es),
+    delete_edges(g, 1:5)
+  ))
+})
+
+test_that("indexing without arguments", {
+
+  g <- make_ring(10)
+
+  x <- V(g)[]
+  expect_equal(V(g), x)
+
+  x2 <- V(g)[[]]
+  v <- V(g)
+  attr(v, "single") <- TRUE
+
+  expect_equal(v, x2)
 })

@@ -40,8 +40,7 @@
 #' a network based on its HRG models (\code{predict_edges}).
 #' 
 #' The igraph HRG implementation is heavily based on the code published by
-#' Aaron Clauset, at his website,
-#' \url{http://tuvalu.santafe.edu/~aaronc/hierarchy/}.
+#' Aaron Clauset, at his website (not functional any more).
 #' 
 #' @name hrg-methods
 #' @family hierarchical random graph functions
@@ -493,7 +492,6 @@ as.hclust.igraphHRG <- function(x, ...) {
 #' @method as_phylo igraphHRG
 
 as_phylo.igraphHRG <- function(x, ...) {
-  require(ape, quietly=TRUE)
 
   ovc <- length(x$left)+1L
   ivc <- ovc-1L
@@ -592,13 +590,8 @@ as_phylo.igraphHRG <- function(x, ...) {
 plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...) {
 
   if (mode=="auto") {
-    value <- tryCatch(suppressWarnings(library("ape", character.only=TRUE,
-                                               logical.return=TRUE,
-                                               warn.conflicts=FALSE,
-                                               quietly=TRUE,
-                                               pos="package:base")),
-                      error=function(e) e)
-    mode <- if (value) "phylo" else "hclust"
+    have_ape <- requireNamespace("ape", quietly = TRUE)
+    mode <- if (have_ape) "phylo" else "hclust"
   }
 
   if (mode=="hclust") {
