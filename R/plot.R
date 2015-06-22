@@ -30,7 +30,8 @@
 #' first, handtune the placement of the vertices, query the coordinates by the
 #' \code{\link{tk_coords}} function and use them with \code{plot} to
 #' plot the graph to any R device.
-#' 
+#'
+#' @aliases plot.graph
 #' @param x The graph to plot.
 #' @param axes Logical, whether to plot axes, defaults to FALSE.
 #' @param add Logical scalar, whether to add the plot to the current device, or

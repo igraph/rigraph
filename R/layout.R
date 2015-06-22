@@ -49,6 +49,7 @@
 #' separately for each component, and then merged to get the
 #' final results.
 #'
+#' @aliases layout
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
 #' Currently implemented modifyers: \itemize{
