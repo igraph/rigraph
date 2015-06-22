@@ -35,6 +35,8 @@ notifications:
 
 env:
   matrix:
-  - RVERSION=3.1.2
+    - RVERSION=oldrel
+    - RVERSION=release
+    - RVERSION=devel
   global:
     secure: GRGRLr+X8JZf32QiEJ0UxpT0RRe8uVJe8ipAW4IwrNv2G3PxifsJAcpGE3XtEmFT9RAYAbo/tt7f00INOUa4xqn9smzvoP/0i2SLw7FegA+eE2yuNI3GCAkQ+lzalLyvUmkmjhYKGhUKiYqLUQ8iNs/Pjgbpqde+V3ZvP6rX0CI=
