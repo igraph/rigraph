@@ -10,6 +10,7 @@
 ^autom4te.cache$
 ^.travis.yml$
 ^CONTRIBUTING.md$
+^README.md$
 ^NEWS.md$
 ^src/.*\.o$
 ^.BundledPackages$
