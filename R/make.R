@@ -32,7 +32,6 @@
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @importFrom lazyeval lazy_eval
 #' @export
 #' @examples
 #' r <- make_(ring(10))
@@ -149,7 +148,6 @@ sample_ <- make_
 #'
 #' @param ... Parameters, see details below.
 #'
-#' @importFrom lazyeval lazy_dots
 #' @export
 #' @examples
 #' ## These are equivalent
