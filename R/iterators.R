@@ -25,13 +25,12 @@
 ###################################################################
 
 update_es_ref <- update_vs_ref <- function(graph) {
-  graph <- warn_version(graph)
   env <- get_vs_ref(graph)
-  assign("me", graph, envir = env)
+  if (!is.null(env)) assign("me", graph, envir = env)
 }
 
 get_es_ref <- get_vs_ref <- function(graph) {
-  if (is_igraph(graph)) {
+  if (is_igraph(graph) && !warn_version(graph)) {
     base::.Call("R_igraph_mybracket", graph, 10L, PACKAGE = "igraph")
   } else {
     NULL
@@ -39,7 +38,14 @@ get_es_ref <- get_vs_ref <- function(graph) {
 }
 
 get_es_graph <- get_vs_graph <- function(seq) {
-  weak_ref_key(attr(seq, "env"))$me
+  at <- attr(seq, "env")
+  if (class(at) == "weakref") {
+    weak_ref_key(at)$me
+  } else if (class(at) == "environment") {
+    get("graph", envir = at)
+  } else {
+    NULL
+  }
 }
 
 has_es_graph <- has_vs_graph <- function(seq) {
@@ -47,8 +53,14 @@ has_es_graph <- has_vs_graph <- function(seq) {
 }
 
 get_es_graph_id <- get_vs_graph_id <- function(seq) {
-  attr(seq, "graph") %||%
-    stop("Invalid vertex/edge sequence, maybe from older igraph version?")
+  new_g <- attr(seq, "graph")
+  if (!is.null(new_g)) {
+    new_g
+  } else if (!is.null(attr(seq, "env"))) {
+    get("graph", envir = attr(seq, "env"))
+  } else {
+    stop("Invalid vertex/edge sequence, internal error")
+  }
 }
 
 #' Decide if two graphs are identical
@@ -64,6 +76,20 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 identical_graphs <- function(g1, g2) {
   stopifnot(is_igraph(g1), is_igraph(g2))
   base::.Call("R_igraph_identical_graphs", g1, g2, PACKAGE = "igraph");
+}
+
+add_vses_graph_ref <- function(vses, graph) {
+  ref <- get_vs_ref(graph)
+  if (!is.null(ref)) {
+    attr(vses, "env") <- make_weak_ref(ref, NULL)
+    attr(vses, "graph") <- get_graph_id(graph)
+  } else {
+    ne <- new.env()
+    assign("graph", graph, envir = ne)
+    attr(vses, "env") <- ne
+  }
+
+  vses
 }
 
 #' Vertices of a graph
@@ -127,17 +153,13 @@ V <- function(graph) {
   res <- seq_len(vcount(graph))
   if (is_named(graph)) names(res) <- vertex_attr(graph)$name
   class(res) <- "igraph.vs"
-  attr(res, "env") <- make_weak_ref(get_vs_ref(graph), NULL)
-  attr(res, "graph") <- get_graph_id(graph)
-  res
+  add_vses_graph_ref(res, graph)
 }
 
 create_vs <- function(graph, idx, na_ok = FALSE) {
   if (na_ok) idx <- ifelse(idx < 1 | idx > gorder(graph), NA, idx)
   res <- simple_vs_index(V(graph), idx, na_ok = na_ok)
-  attr(res, "env") <- make_weak_ref(get_vs_ref(graph), NULL)
-  attr(res, "graph") <- get_graph_id(graph)
-  res
+  add_vses_graph_ref(res, graph)
 }
 
 #' Edges of a graph
@@ -230,9 +252,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   }
   
   class(res) <- "igraph.es"
-  attr(res, "env") <- make_weak_ref(get_es_ref(graph), NULL)
-  attr(res, "graph") <- get_graph_id(graph)
-  res
+  add_vses_graph_ref(res, graph)
 }
 
 create_es <- function(graph, idx, na_ok = FALSE) {
@@ -1128,7 +1148,8 @@ print.igraph.es <- function(x, full = igraph_opt("print.full"), ...) {
 # these are internal
 
 as.igraph.vs <- function(graph, v, na.ok=FALSE) {
-  if (inherits(v, "igraph.vs") && !is.null(graph)) {
+  if (inherits(v, "igraph.vs") && !is.null(graph) &&
+      !warn_version(graph)) {
     if (get_graph_id(graph) != get_vs_graph_id(v)) {
       stop("Cannot use a vertex sequence from another graph.")
     }
@@ -1155,7 +1176,8 @@ as.igraph.vs <- function(graph, v, na.ok=FALSE) {
 }
 
 as.igraph.es <- function(graph, e) {
-  if (inherits(e, "igraph.es") && !is.null(graph)) {
+  if (inherits(e, "igraph.es") && !is.null(graph)
+      && !warn_version(graph)) {
     if (get_graph_id(graph) != get_es_graph_id(e)) {
       stop("Cannot use an edge sequence from another graph.")
     }
@@ -1255,8 +1277,7 @@ parse_es_op_args <- function(...) {
 
 
 create_op_result <- function(parsed, result, class, args) {
-  attr(result, "env") <- make_weak_ref(get_vs_ref(parsed$graph), NULL)
-  attr(result, "graph") <- parsed$id
+  result <- add_vses_graph_ref(result, parsed$graph)
   class(result) <- class
   ## c() drops names for zero length vectors. Why???
   if (! length(result) &&
