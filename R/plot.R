@@ -23,14 +23,15 @@
 
 #' Plotting of graphs
 #' 
-#' \code{plot.graph} is able to plot graphs to any R device. It is the
+#' \code{plot.igraph} is able to plot graphs to any R device. It is the
 #' non-interactive companion of the \code{tkplot} function.
 #' 
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
 #' \code{\link{tk_coords}} function and use them with \code{plot} to
 #' plot the graph to any R device.
-#' 
+#'
+#' @aliases plot.graph
 #' @param x The graph to plot.
 #' @param axes Logical, whether to plot axes, defaults to FALSE.
 #' @param add Logical scalar, whether to add the plot to the current device, or
