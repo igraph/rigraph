@@ -114,13 +114,13 @@ all_values <- function(.values, ...) {
 missing_arg <- function() {
   quote(expr = )
 }
-#' @useDynLib igraph make_lazy_dots
 lazy_dots <- function(..., .follow_symbols = FALSE) {
   if (nargs() == 0 || (nargs() == 1 &&  ! missing(.follow_symbols))) {
     return(structure(list(), class = "lazy_dots"))
   }
 
-  base::.Call(make_lazy_dots, environment(), .follow_symbols)
+  base::.Call("make_lazy_dots", environment(), .follow_symbols,
+              PACKAGE = "igraph")
 }
 is.lazy_dots <- function(x) inherits(x, "lazy_dots")
 `[.lazy_dots` <- function(x, i) {
@@ -143,9 +143,9 @@ lazy_ <- function(expr, env) {
 
   structure(list(expr = expr, env = env), class = "lazy")
 }
-#' @useDynLib igraph make_lazy
 lazy <- function(expr, env = parent.frame(), .follow_symbols = TRUE) {
-  base::.Call(make_lazy, quote(expr), environment(), .follow_symbols)
+  base::.Call("make_lazy", quote(expr), environment(), .follow_symbols,
+              PACKAGE = "igraph")
 }
 is.lazy <- function(x) inherits(x, "lazy")
 print.lazy <- function(x, ...) {
@@ -231,14 +231,12 @@ deparse_trunc <- function(x, width = getOption("width")) {
 
   paste0(substr(text[1], 1, width - 3), "...")
 }
-#' @useDynLib igraph promise_expr_
 promise_expr <- function(prom) {
-  base::.Call(promise_expr_, prom)
+  base::.Call("promise_expr_", prom, PACKAGE = "igraph")
 }
 
-#' @useDynLib igraph promise_env_
 promise_env <- function(prom) {
-  base::.Call(promise_env_, prom)
+  base::.Call("promise_env_", prom, PACKAGE = "igraph")
 }
 as.lazy.promise <- function(x, ...) {
   lazy_(promise_expr(x), promise_env(x))
