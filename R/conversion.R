@@ -878,3 +878,50 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' @export
 
 graph_from_adj_list <- graph_from_adj_list
+
+
+#' Convert a graph to a long data frame
+#'
+#' A long data frame contains all metadata about both the vertices
+#' and edges of the graph. It contains one row for each edge, and
+#' all metadata about that edge and its incident vertices are included
+#' in that row. The names of the columns that contain the metadata
+#' of the incident vertices are prefixed with \code{from_} and \code{to_}.
+#' The first two columns are always named \code{from} and \code{to} and
+#' they contain the numeric ids of the incident vertices. The rows are
+#' listed in the order of numeric vertex ids.
+#'
+#' @param graph Input graph
+#' @return A long data frame.
+#'
+#' @export
+#' @examples
+#' g <- make_(ring(10),
+#'         with_vertex_(name = letters[1:10], color = "red"),
+#'         with_edge_(weight = 1:10, color = "green")
+#'       )
+#' as_long_data_frame(g)
+
+as_long_data_frame <- function(graph) {
+
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  ver <- .Call("R_igraph_mybracket2", graph, 9L, 3L, PACKAGE="igraph")
+  class(ver) <- "data.frame"
+  rn <- if (is_named(graph)) { V(graph)$name } else { seq_len(vcount(graph)) }
+  rownames(ver) <- rn
+
+  el <- as_edgelist(graph, names = FALSE)
+  edg <- c(list(from=el[,1]), list(to=el[,2]),
+           .Call("R_igraph_mybracket2", graph, 9L, 4L, PACKAGE="igraph"))
+  class(edg) <- "data.frame"
+  rownames(edg) <- seq_len(ecount(graph))
+
+  ver2 <- ver
+  names(ver) <- paste0("from_", names(ver))
+  names(ver2) <- paste0("to_", names(ver2))
+
+  edg <- cbind(edg, ver[ el[,1], ], ver2[ el[,2], ])
+
+  edg
+}

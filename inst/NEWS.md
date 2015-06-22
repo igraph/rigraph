@@ -56,6 +56,7 @@ The biggest changes in the release are
 - Random walk on a graph: `random_walk()`
 - `adjacenct_vertices()` and `incident_edges()` functions,
   they are vectorized, as opposed to `neighhors()` and `incident()`.
+- Convert a graph to a _long_ data frame with `as_long_data_frame()`.
 
 ## Bug fixes
 
