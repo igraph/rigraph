@@ -405,24 +405,16 @@ deprecated("lastcit.game", sample_last_cit)
 deprecated("layout.auto", layout_nicely)
 #' @export layout.bipartite
 deprecated("layout.bipartite", layout_as_bipartite)
-#' @export layout.circle
-deprecated("layout.circle", layout_in_circle)
 #' @export layout.davidson.harel
 deprecated("layout.davidson.harel", layout_with_dh)
 #' @export layout.drl
 deprecated("layout.drl", layout_with_drl)
-#' @export layout.fruchterman.reingold
-deprecated("layout.fruchterman.reingold", layout_with_fr)
 #' @export layout.gem
 deprecated("layout.gem", layout_with_gem)
 #' @export layout.graphopt
 deprecated("layout.graphopt", layout_with_graphopt)
 #' @export layout.grid
 deprecated("layout.grid", layout_on_grid)
-#' @export layout.kamada.kawai
-deprecated("layout.kamada.kawai", layout_with_kk)
-#' @export layout.lgl
-deprecated("layout.lgl", layout_with_lgl)
 #' @export layout.mds
 deprecated("layout.mds", layout_with_mds)
 #' @export layout.merge
@@ -431,10 +423,6 @@ deprecated("layout.merge", merge_coords)
 deprecated("layout.norm", norm_coords)
 #' @export layout.random
 deprecated("layout.random", layout_randomly)
-#' @export layout.reingold.tilford
-deprecated("layout.reingold.tilford", layout_as_tree)
-#' @export layout.sphere
-deprecated("layout.sphere", layout_on_sphere)
 #' @export layout.star
 deprecated("layout.star", layout_as_star)
 #' @export layout.sugiyama
