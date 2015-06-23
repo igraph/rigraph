@@ -549,9 +549,9 @@ layout.circle <- function(..., params = list()) {
 #' \item Otherwise, if the graph has vertex attributes called \sQuote{x} and
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
 #' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
-#' if the graph is connected and has less than 1000 vertices, the Kamada-Kawai
-#' layout is used, by calling \code{layout_with_kk}.  \item Otherwise the
-#' DrL layout is used, \code{layout_with_drl} is called.  }
+#' if the graph is connected and has less than 1000 vertices, the
+#' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
+#' \item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
 #'
 #' @aliases layout.auto
 #' @param graph The input graph
@@ -572,7 +572,7 @@ layout_nicely <- function(graph, dim=2, ...) {
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
   ##    we use those (and the 'z' vertex attribute as well, if present).
   ## 3. Otherwise, if the graph is small (<1000) we use
-  ##    the Kamada-Kawai layout.
+  ##    the Fruchterman-Reingold layout.
   ## 5. Otherwise we use the DrL layout generator.
 
   if ("layout" %in% graph_attr_names(graph)) {
@@ -591,7 +591,7 @@ layout_nicely <- function(graph, dim=2, ...) {
     }
 
   } else if (vcount(graph) < 1000) {
-    layout_with_kk(graph, dim=dim, ...)
+    layout_with_fr(graph, dim=dim, ...)
 
   } else {
     layout_with_drl(graph, dim=dim, ...)
