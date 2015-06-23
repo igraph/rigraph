@@ -16,7 +16,7 @@ layout.circle(..., params = list())
 
 layout.sphere(..., params = list())
 
-layout.random(graph, dim = 2)
+layout.random(..., params = list())
 
 layout.fruchterman.reingold(..., params = list())
 

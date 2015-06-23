@@ -421,8 +421,6 @@ deprecated("layout.mds", layout_with_mds)
 deprecated("layout.merge", merge_coords)
 #' @export layout.norm
 deprecated("layout.norm", norm_coords)
-#' @export layout.random
-deprecated("layout.random", layout_randomly)
 #' @export layout.star
 deprecated("layout.star", layout_as_star)
 #' @export layout.sugiyama

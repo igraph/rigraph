@@ -472,7 +472,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @rdname layout.deprecated
 
 layout.reingold.tilford <- function(..., params = list()) {
-  do_call(layout_as_tree, .args = c(list(...), .params))
+  do_call(layout_as_tree, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
