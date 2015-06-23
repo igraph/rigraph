@@ -28,8 +28,6 @@
 #ifndef _BOX_LIST_H
 #define _BOX_LIST_H
 
-#define register
-
 namespace gengraph {
 
 class box_list {

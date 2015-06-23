@@ -21,10 +21,6 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
-#ifndef register
-#define register
-#endif
-
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
