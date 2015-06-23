@@ -472,7 +472,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @rdname layout.deprecated
 
 layout.reingold.tilford <- function(..., params = list()) {
-  do_call(layout_as_tree, ..., args = .params)
+  do_call(layout_as_tree, .args = c(list(...), .params))
 }
 
 ## ----------------------------------------------------------------
@@ -530,7 +530,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @rdname layout.deprecated
 
 layout.circle <- function(..., params = list()) {
-  do.call(layout_in_circle, ..., .args = params)
+  do_call(layout_in_circle, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
@@ -737,7 +737,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @rdname layout.deprecated
 
 layout.sphere <- function(..., params = list()) {
-  do_call(layout_on_sphere, ..., .args = params)
+  do_call(layout_on_sphere, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
@@ -794,7 +794,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @rdname layout.deprecated
 
 layout.random <- function(..., params = list()) {
-  do_call(layout_randomly, ..., .args = params)
+  do_call(layout_randomly, .args = c(list(...), params))
 }
 
 
@@ -1396,7 +1396,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @rdname layout.deprecated
 
 layout.kamada.kawai <- function(..., params = list()) {
-  do_call(layout_with_kk, ..., .args = params)
+  do_call(layout_with_kk, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
@@ -1463,7 +1463,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @rdname layout.deprecated
 
 layout.lgl <- function(..., params = list()) {
-  do_call(layout_with_lgl, ..., .args = params)
+  do_call(layout_with_lgl, .args = c(list(...), params))
 }
 
 ## ----------------------------------------------------------------
