@@ -5,14 +5,12 @@
 \alias{igraph-vs-indexing}
 \title{Indexing vertex sequences}
 \usage{
-\method{[}{igraph.vs}(x, i, ..., na_ok = FALSE)
+\method{[}{igraph.vs}(x, ..., na_ok = FALSE)
 }
 \arguments{
 \item{x}{A vertex sequence.}
 
-\item{i}{First index, see details below.}
-
-\item{...}{Rest of indices, see details below.}
+\item{...}{Indices, see details below.}
 
 \item{na_ok}{Whether it is OK to have \code{NA}s in the vertex
 sequence.}

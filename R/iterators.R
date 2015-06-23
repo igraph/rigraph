@@ -59,7 +59,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
   } else if (!is.null(attr(seq, "env"))) {
     get("graph", envir = attr(seq, "env"))
   } else {
-    stop("Invalid vertex/edge sequence, internal error")
+    NULL
   }
 }
 
@@ -332,8 +332,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' examples below.
 #'
 #' @param x A vertex sequence.
-#' @param i First index, see details below.
-#' @param ... Rest of indices, see details below.
+#' @param ... Indices, see details below.
 #' @param na_ok Whether it is OK to have \code{NA}s in the vertex
 #'   sequence.
 #' @return Another vertex sequence, referring to the same graph.
@@ -374,15 +373,16 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' V(g)[ nei( c('B', 'D'), "in" ) ]
 #' V(g)[ nei( c('B', 'D'), "out" ) ]
 
-`[.igraph.vs` <- function(x, i, ..., na_ok = FALSE) {
+`[.igraph.vs` <- function(x, ..., na_ok = FALSE) {
 
-  if (missing(i)) {
-    args <- lazy_dots(..., .follow_symbols = TRUE)
-  } else {
-    args <- lazy_dots(i = i, ..., .follow_symbols = TRUE)
-  }
+  args <- lazy_dots(..., .follow_symbols = FALSE)
 
-  if (length(args) < 1) {
+  ## If indexing has no argument at all, then we still get one,
+  ## but it is "empty", a name that is ""
+
+  if (length(args) < 1 ||
+      (length(args) == 1 && class(args[[1]]$expr) == "name" &&
+         as.character(args[[1]]$expr) == "")) {
     return(x)
   }
 
@@ -444,35 +444,28 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   graph <- get_vs_graph(x)
 
-  res <- replicate(length(args), NULL)
+  if (is.null(graph)) {
+    res <- lapply(lazy_eval(args), simple_vs_index, x = x, na_ok = na_ok)
 
-  if (!is.null(graph)) {
+  } else {
+
     attrs <- vertex_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
-  }
 
-  for (idx in seq_along(args)) {
-
-    if (is.null(graph)) {
-      res[[idx]] <- simple_vs_index(x, lazy_eval(args[[idx]]), na_ok)
-
-    } else {
-      ii <- lazy_eval(
-        args[[idx]],
-        data = c(attrs, nei = nei, innei = innei,
-          outnei = outnei, adj = adj, inc = inc, from = from, to = to)
-      )
-      if (! is.null(ii)) {
-        res[[idx]] <- simple_vs_index(x, ii, na_ok)
-      }
-    }
-
-    if (!is.null(res[[idx]])) {
-      attr(res[[idx]], "env") <- attr(x, "env")
-      attr(res[[idx]], "graph") <- attr(x, "graph")
-      class(res[[idx]]) <- class(x)
-    }
+    res <- lazy_eval(
+      args,
+      data =  c(attrs, nei = nei, innei = innei,
+        outnei = outnei, adj = adj, inc = inc, from = from, to = to)
+    )
+    res <- lapply(res, function(ii) {
+      if (is.null(ii)) return(NULL)
+      ii <- simple_vs_index(x, ii, na_ok)
+      attr(ii, "env") <- attr(x, "env")
+      attr(ii, "graph") <- attr(x, "graph")
+      class(ii) <- class(x)
+      ii
+    })
   }
 
   res <- drop_null(res)
@@ -645,8 +638,7 @@ simple_es_index <- function(x, i) {
 #'
 #' @aliases %--% %<-% %->%
 #' @param x An edge sequence
-#' @param i First index, see details below.
-#' @param ... Rest of indices, see details below.
+#' @param ... Indices, see details below.
 #' @return Another edge sequence, referring to the same graph.
 #' 
 #' @method [ igraph.es
@@ -672,15 +664,16 @@ simple_es_index <- function(x, i) {
 #'   set_edge_attr("weight", value = rnorm(gsize(.)))
 #' E(g)[[ weight < 0 ]]
 
-`[.igraph.es` <- function(x, i, ...) {
+`[.igraph.es` <- function(x, ...) {
 
-  if (missing(i)) {
-    args <- lazy_dots(..., .follow_symbols = TRUE)
-  } else {
-    args <- lazy_dots(i = i, ..., .follow_symbols = TRUE)
-  }
+  args <- lazy_dots(..., .follow_symbols = TRUE)
 
-  if (length(args) < 1) {
+  ## If indexing has no argument at all, then we still get one,
+  ## but it is "empty", a name that is ""
+
+  if (length(args) < 1 ||
+      (length(args) == 1 && class(args[[1]]$expr) == "name" &&
+         as.character(args[[1]]$expr) == "")) {
     return(x)
   }
 
@@ -711,22 +704,17 @@ simple_es_index <- function(x, i) {
 
   graph <- get_es_graph(x)
 
-  res <- replicate(length(args), NULL)
+  if (is.null(graph)) {
+    res <- lapply(lazy_eval(args), simple_es_index, x = x)
 
-  if (!is.null(graph)) {
+  } else {
+
     attrs <- edge_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
-  }
 
-  for (idx in seq_along(args)) {
-
-    if (is.null(graph)) {
-      res[[idx]] <- simple_es_index(x, lazy_eval(args[[idx]]))
-
-    } else {
-      ii <- lazy_eval(
-        args[[idx]],
+    res <- lazy_eval(
+        args,
         data = c(attrs, inc = inc, adj = adj, from = from, to = to,
           .igraph.from = list(.Call("R_igraph_mybracket",
             graph, 3L, PACKAGE = "igraph")[ as.numeric(x) ]),
@@ -734,11 +722,15 @@ simple_es_index <- function(x, i) {
             graph, 4L, PACKAGE = "igraph")[as.numeric(x)]),
           .igraph.graph = list(graph),
           `%--%`=`%--%`, `%->%`=`%->%`, `%<-%`=`%<-%`)
-      )
-      if (! is.null(ii)) {
-        res[[idx]] <- simple_es_index(x, ii)
-      }
-    }
+    )
+    res <- lapply(res, function(ii) {
+      if (is.null(ii)) return(NULL)
+      ii <- simple_es_index(x, ii)
+      attr(ii, "env") <- attr(x, "env")
+      attr(ii, "graph") <- attr(x, "graph")
+      class(ii) <- class(x)
+      ii
+    })
   }
 
   res <- drop_null(res)
@@ -1241,7 +1233,8 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (length(graph_id) != 1) {
-    stop("Cannot combine vertex/edge sequences from different graphs")
+    warning("Combining vertex/edge sequences from different graphs.\n",
+            "This will not work in future igraph versions")
   }
 
   graphs <- args %>%
@@ -1253,7 +1246,8 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (check_graph && length(addresses) >= 2) {
-    stop("Cannot combine vertex/edge sequences from different graphs")
+    warning("Combining vertex/edge sequences from different graphs.\n",
+            "This will not work in future igraph versions")
   }
 
   graph <- if (length(graphs)) graphs[[1]] else NULL

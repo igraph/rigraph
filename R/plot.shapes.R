@@ -152,7 +152,7 @@
 #' useful) plotting function, that does not plot anything.
 #'
 #' @aliases add.vertex.shape igraph.shape.noclip igraph.shape.noplot
-#'   vertex.shapes
+#'   vertex.shapes igraph.vertex.shapes
 #'
 #' @param shape Character scalar, name of a vertex shape. If it is
 #'    \code{NULL} for \code{shapes}, then the names of all defined

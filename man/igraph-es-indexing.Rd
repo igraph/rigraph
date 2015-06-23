@@ -8,14 +8,12 @@
 \alias{igraph-es-indexing}
 \title{Indexing edge sequences}
 \usage{
-\method{[}{igraph.es}(x, i, ...)
+\method{[}{igraph.es}(x, ...)
 }
 \arguments{
 \item{x}{An edge sequence}
 
-\item{i}{First index, see details below.}
-
-\item{...}{Rest of indices, see details below.}
+\item{...}{Indices, see details below.}
 }
 \value{
 Another edge sequence, referring to the same graph.

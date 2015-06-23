@@ -5,6 +5,7 @@
 \alias{add_shape}
 \alias{igraph.shape.noclip}
 \alias{igraph.shape.noplot}
+\alias{igraph.vertex.shapes}
 \alias{shape_noclip}
 \alias{shape_noplot}
 \alias{shapes}
