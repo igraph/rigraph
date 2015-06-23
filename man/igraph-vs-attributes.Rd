@@ -76,7 +76,9 @@ plot(g)
 \seealso{
 Other graph attributes: \code{\link{$.igraph}},
   \code{\link{$<-.igraph}}, \code{\link{igraph-dollar}},
-  \code{\link{igraph-dollar}};
+  \code{\link{igraph-dollar}}; \code{\link{attributes}},
+  \code{\link{graph_attr_names}},
+  \code{\link{list.graph.attributes}};
   \code{\link{delete_edge_attr}},
   \code{\link{remove.edge.attribute}};
   \code{\link{delete_graph_attr}},
@@ -96,8 +98,6 @@ Other graph attributes: \code{\link{$.igraph}},
   \code{\link{vertex_attr}};
   \code{\link{graph.attributes<-}},
   \code{\link{graph_attr<-}};
-  \code{\link{graph_attr_names}},
-  \code{\link{list.graph.attributes}};
   \code{\link{list.vertex.attributes}},
   \code{\link{vertex_attr_names}};
   \code{\link{set.edge.attribute}},

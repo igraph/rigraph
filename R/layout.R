@@ -397,7 +397,6 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' If the given graph is not a tree, a breadth-first search is executed first
 #' to obtain a possible spanning tree.
 #'
-#' @aliases layout.reingold.tilford
 #' @param graph The input graph.
 #' @param root The index of the root vertex or root vertices.  If this is a
 #' non-empty vector then the supplied vertex ids are used as the roots of the
@@ -469,6 +468,12 @@ layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
 
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
+#' @export
+#' @rdname layout.deprecated
+
+layout.reingold.tilford <- function(..., params = list()) {
+  do_call(layout_as_tree, ..., args = .params)
+}
 
 ## ----------------------------------------------------------------
 
@@ -480,7 +485,6 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' If you want to order the vertices differently, then permute them using the
 #' \code{\link{permute}} function.
 #'
-#' @aliases layout.circle
 #' @param graph The input graph.
 #' @param order The vertices to place on the circle, in the order of their
 #' desired placement. Vertices that are not included here will be placed at
@@ -522,6 +526,12 @@ layout_in_circle <- function(graph, order=V(graph)) {
 
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
+#' @export
+#' @rdname layout.deprecated
+
+layout.circle <- function(..., params = list()) {
+  do.call(layout_in_circle, ..., .args = params)
+}
 
 ## ----------------------------------------------------------------
 
@@ -539,9 +549,9 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' \item Otherwise, if the graph has vertex attributes called \sQuote{x} and
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
 #' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
-#' if the graph is connected and has less than 1000 vertices, the Kamada-Kawai
-#' layout is used, by calling \code{layout_with_kk}.  \item Otherwise the
-#' DrL layout is used, \code{layout_with_drl} is called.  }
+#' if the graph is connected and has less than 1000 vertices, the
+#' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
+#' \item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
 #'
 #' @aliases layout.auto
 #' @param graph The input graph
@@ -562,7 +572,7 @@ layout_nicely <- function(graph, dim=2, ...) {
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
   ##    we use those (and the 'z' vertex attribute as well, if present).
   ## 3. Otherwise, if the graph is small (<1000) we use
-  ##    the Kamada-Kawai layout.
+  ##    the Fruchterman-Reingold layout.
   ## 5. Otherwise we use the DrL layout generator.
 
   if ("layout" %in% graph_attr_names(graph)) {
@@ -581,7 +591,7 @@ layout_nicely <- function(graph, dim=2, ...) {
     }
 
   } else if (vcount(graph) < 1000) {
-    layout_with_kk(graph, dim=dim, ...)
+    layout_with_fr(graph, dim=dim, ...)
 
   } else {
     layout_with_drl(graph, dim=dim, ...)
@@ -700,7 +710,6 @@ layout.grid.3d <- function(graph, width=0, height=0) {
 #' If you want to order the vertices differently, then permute them using the
 #' \code{\link{permute}} function.
 #'
-#' @aliases layout.sphere
 #' @param graph The input graph.
 #' @return A numeric matrix with three columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -724,7 +733,12 @@ layout_on_sphere <- function(graph) {
 
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
+#' @export
+#' @rdname layout.deprecated
 
+layout.sphere <- function(..., params = list()) {
+  do_call(layout_on_sphere, ..., .args = params)
+}
 
 ## ----------------------------------------------------------------
 
@@ -738,7 +752,6 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' is probably a useless layout, but it can use as a starting point for other
 #' layout generators.
 #'
-#' @aliases layout.random
 #' @param graph The input graph.
 #' @param dim Integer scalar, the dimension of the space to use. It must be 2
 #' or 3.
@@ -770,6 +783,19 @@ layout_randomly <- function(graph, dim=2) {
 #' @export
 
 randomly <- function(...) layout_spec(layout_randomly, ...)
+
+#' Deprecated layout functions
+#'
+#' Please use the new names, see \code{\link{layout_}}.
+#'
+#' @param ... Passed to the new layout functions.
+#' @param params Passed to the new layout functions as arguments.
+#' @export
+#' @rdname layout.deprecated
+
+layout.random <- function(..., params = list()) {
+  do_call(layout_randomly, ..., .args = params)
+}
 
 
 ## ----------------------------------------------------------------
@@ -934,7 +960,6 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'
 #' This function was rewritten from scratch in igraph version 0.8.0.
 #'
-#' @aliases layout.fruchterman.reingold
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
 #' is not \code{NULL} then it should be an appropriate matrix of starting
@@ -1069,6 +1094,12 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
 
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
+#' @export
+#' @rdname layout.deprecated
+
+layout.fruchterman.reingold <- function(..., params = list()) {
+  do_call(layout_with_fr, .args = c(list(...), params))
+}
 
 ## ----------------------------------------------------------------
 
@@ -1239,7 +1270,6 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' This function was rewritten from scratch in igraph version 0.8.0 and it
 #' follows truthfully the original publication by Kamada and Kawai now.
 #'
-#' @aliases layout.kamada.kawai
 #' @param graph The input graph. Edge directions are ignored.
 #' @param coords If not \code{NULL}, then the starting coordinates should be
 #' given here, in a two or three column matrix, depending on the \code{dim}
@@ -1362,6 +1392,12 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
 #'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
+#' @export
+#' @rdname layout.deprecated
+
+layout.kamada.kawai <- function(..., params = list()) {
+  do_call(layout_with_kk, ..., .args = params)
+}
 
 ## ----------------------------------------------------------------
 
@@ -1374,7 +1410,6 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' generator of the Large Graph Layout software
 #' (\url{http://lgl.sourceforge.net/}).
 #'
-#' @aliases layout.lgl
 #' @param graph The input graph
 #' @param maxiter The maximum number of iterations to perform (150).
 #' @param maxdelta The maximum change for a vertex during an iteration (the
@@ -1424,6 +1459,12 @@ layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
 
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
+#' @export
+#' @rdname layout.deprecated
+
+layout.lgl <- function(..., params = list()) {
+  do_call(layout_with_lgl, ..., .args = params)
+}
 
 ## ----------------------------------------------------------------
 

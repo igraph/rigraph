@@ -379,6 +379,11 @@ ends <- function(graph, es, names = TRUE) {
   matrix(res, ncol = 2, byrow = TRUE)
 }
 
+#' @export
+
+get.edges <- function(graph, es) {
+  ends(graph, es, names = FALSE)
+}
 
 
 #' Find the edge ids based on the incident vertices of the edges

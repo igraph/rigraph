@@ -523,7 +523,11 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
       make_famous_graph(edges)
 
-    } else if (is.numeric(edges)) {
+      ## NULL and empty logical vector is allowed for compatibility
+    } else if (is.numeric(edges) || is.null(edges) ||
+               (is.logical(edges) && length(edges) == 0)) {
+
+      if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
         warning("'isolates' ignored for numeric edge list")
       }
@@ -556,7 +560,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       res
 
     } else {
-      stop("'edges' must be numeric of character")
+      stop("'edges' must be numeric or character")
     }
   }
 }

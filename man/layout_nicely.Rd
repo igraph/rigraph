@@ -35,9 +35,9 @@ R function, then it is called, with the graph and any other extra arguments.
 \item Otherwise, if the graph has vertex attributes called \sQuote{x} and
 \sQuote{y}, then these are used as coordinates. If the graph has an
 additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
-if the graph is connected and has less than 1000 vertices, the Kamada-Kawai
-layout is used, by calling \code{layout_with_kk}.  \item Otherwise the
-DrL layout is used, \code{layout_with_drl} is called.  }
+if the graph is connected and has less than 1000 vertices, the
+Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
+\item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
@@ -50,16 +50,11 @@ Other graph layouts: \code{\link{add_layout_}};
   \code{\link{layout.bipartite}},
   \code{\link{layout_as_bipartite}}; \code{\link{as_star}},
   \code{\link{layout.star}}, \code{\link{layout_as_star}};
-  \code{\link{as_tree}},
-  \code{\link{layout.reingold.tilford}},
-  \code{\link{layout_as_tree}};
+  \code{\link{as_tree}}, \code{\link{layout_as_tree}};
   \code{\link{component_wise}}; \code{\link{in_circle}},
-  \code{\link{layout.circle}},
   \code{\link{layout_in_circle}};
   \code{\link{layout.davidson.harel}},
   \code{\link{layout_with_dh}}, \code{\link{with_dh}};
-  \code{\link{layout.fruchterman.reingold}},
-  \code{\link{layout_with_fr}}, \code{\link{with_fr}};
   \code{\link{layout.gem}}, \code{\link{layout_with_gem}},
   \code{\link{with_gem}}; \code{\link{layout.graphopt}},
   \code{\link{layout_with_graphopt}},
@@ -67,25 +62,22 @@ Other graph layouts: \code{\link{add_layout_}};
   \code{\link{layout.grid.3d}},
   \code{\link{layout.grid.3d}},
   \code{\link{layout_on_grid}}, \code{\link{on_grid}};
-  \code{\link{layout.kamada.kawai}},
-  \code{\link{layout_with_kk}}, \code{\link{with_kk}};
-  \code{\link{layout.lgl}}, \code{\link{layout_with_lgl}},
-  \code{\link{with_lgl}}; \code{\link{layout.mds}},
-  \code{\link{layout_with_mds}}, \code{\link{with_mds}};
-  \code{\link{layout.merge}},
+  \code{\link{layout.mds}}, \code{\link{layout_with_mds}},
+  \code{\link{with_mds}}; \code{\link{layout.merge}},
   \code{\link{layout_components}},
   \code{\link{merge_coords}},
   \code{\link{piecewise.layout}},
   \code{\link{piecewise.layout}};
   \code{\link{layout.norm}}, \code{\link{norm_coords}};
-  \code{\link{layout.random}},
-  \code{\link{layout_randomly}}, \code{\link{randomly}};
-  \code{\link{layout.sphere}},
-  \code{\link{layout_on_sphere}}, \code{\link{on_sphere}};
   \code{\link{layout.sugiyama}},
   \code{\link{layout_with_sugiyama}},
-  \code{\link{with_sugiyama}}; \code{\link{layout}},
-  \code{\link{layout_}},
+  \code{\link{with_sugiyama}};
+  \code{\link{layout_on_sphere}}, \code{\link{on_sphere}};
+  \code{\link{layout_randomly}}, \code{\link{randomly}};
+  \code{\link{layout_with_fr}}, \code{\link{with_fr}};
+  \code{\link{layout_with_kk}}, \code{\link{with_kk}};
+  \code{\link{layout_with_lgl}}, \code{\link{with_lgl}};
+  \code{\link{layout}}, \code{\link{layout_}},
   \code{\link{print.igraph_layout_modifier}},
   \code{\link{print.igraph_layout_spec}};
   \code{\link{normalize}}

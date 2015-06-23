@@ -35,6 +35,8 @@ Other graph attributes: \code{\link{$.igraph.vs}},
   \code{\link{igraph-vs-attributes}};
   \code{\link{$.igraph}}, \code{\link{$<-.igraph}},
   \code{\link{igraph-dollar}}, \code{\link{igraph-dollar}};
+  \code{\link{attributes}}, \code{\link{graph_attr_names}},
+  \code{\link{list.graph.attributes}};
   \code{\link{delete_edge_attr}},
   \code{\link{remove.edge.attribute}};
   \code{\link{delete_graph_attr}},
@@ -54,8 +56,6 @@ Other graph attributes: \code{\link{$.igraph.vs}},
   \code{\link{vertex_attr}};
   \code{\link{graph.attributes<-}},
   \code{\link{graph_attr<-}};
-  \code{\link{graph_attr_names}},
-  \code{\link{list.graph.attributes}};
   \code{\link{set.edge.attribute}},
   \code{\link{set_edge_attr}};
   \code{\link{set.graph.attribute}},
