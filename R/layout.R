@@ -1945,3 +1945,19 @@ layout.svd <- function(graph, ...) {
   warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
   layout_with_fr(graph)
 }
+
+#' Grid Fruchterman-Reingold layout, this was removed from igraph
+#'
+#' Now it calls the Fruchterman-Reingold layout, with a warning.
+#'
+#' @param graph Input graph.
+#' @param ... Extra arguments are ignored.
+#' @return Layout coordinates, a two column matrix.
+#'
+#' @export
+
+layout.svd <- function(graph, ...) {
+  warning("Grid Fruchterman-Reingold layout was removed,\n",
+          "we use Fruchterman-Reingold instead.")
+  layout_with_fr(graph)
+}
