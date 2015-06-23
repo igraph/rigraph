@@ -506,7 +506,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' @param graph The graph.
 #' @return Character vector, the names of the graph attributes.
 #'
-#' @aliases list.graph.attributes
+#' @aliases list.graph.attributes attributes
 #' @family graph attributes
 #' 
 #' @export
