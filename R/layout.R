@@ -1978,7 +1978,7 @@ layout.svd <- function(graph, ...) {
 #'
 #' @export
 
-layout.svd <- function(graph, ...) {
+layout.fruchterman.reingold.grid <- function(graph, ...) {
   warning("Grid Fruchterman-Reingold layout was removed,\n",
           "we use Fruchterman-Reingold instead.")
   layout_with_fr(graph)
