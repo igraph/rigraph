@@ -70,6 +70,7 @@
 #' @seealso \code{\link{add_layout_}} to add the layout to the
 #'   graph as an attribute.
 #' @export
+#' @family graph layouts
 #' @examples
 #' g <- make_ring(10) + make_full_graph(5)
 #' coords <- layout_(g, as_star())
@@ -124,6 +125,7 @@ layout_ <- function(graph, layout, ...) {
 #'
 #' @seealso \code{\link{layout_}} for a description of the layout API.
 #' @export
+#' @family graph layouts
 #' @examples
 #' (make_star(11) + make_star(11)) %>%
 #'   add_layout_(as_star(), component_wise()) %>%
@@ -192,6 +194,7 @@ print.igraph_layout_modifier <- function(x, ...) {
 #'   argument of \code{\link{merge_coords}}.
 #'
 #' @family layout modifiers
+#' @family graph layouts
 #' @seealso \code{\link{merge_coords}}, \code{\link{layout_}}.
 #' @export
 #' @examples
@@ -219,6 +222,7 @@ component_wise <- function(merge_method = "dla") {
 #' @param zmin,zmax Minimum and maximum for z coordinates.
 #'
 #' @family layout modifiers
+#' @family graph layouts
 #' @seealso \code{\link{merge_coords}}, \code{\link{layout_}}.
 #' @export
 #' @examples
@@ -269,6 +273,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' @seealso \code{\link{layout_with_sugiyama}}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 #' @examples
 #' # Random bipartite graph
 #' inc <- matrix(sample(0:1, 50, replace = TRUE, prob=c(2,1)), 10, 5)
@@ -346,6 +351,7 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' plot graphs and \code{\link{star}} on how to create ring graphs.
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 #' @examples
 #'
 #' g <- make_star(10)
@@ -422,6 +428,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' \emph{IEEE Trans. on Softw. Eng.}, SE-7(2):223--228.
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 #' @examples
 #'
 #' tree <- make_tree(20, 3)
@@ -482,6 +489,7 @@ as_tree <- function(...) layout_spec(layout_as_tree, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 #' @examples
 #'
 #' ## Place vertices on a circle, order them according to their
@@ -546,6 +554,7 @@ in_circle <- function(...) layout_spec(layout_in_circle, ...)
 #' @seealso \code{\link{plot.igraph}}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 
 layout_nicely <- function(graph, dim=2, ...) {
 
@@ -614,6 +623,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @seealso \code{\link{layout}} for other layout generators
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 #' @examples
 #'
 #' g <- make_lattice( c(3,3) )
@@ -696,6 +706,7 @@ layout.grid.3d <- function(graph, width=0, height=0) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 
 layout_on_sphere <- function(graph) {
   if (!is_igraph(graph)) {
@@ -735,6 +746,7 @@ on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 
 layout_randomly <- function(graph, dim=2) {
   if (!is_igraph(graph)) {
@@ -812,6 +824,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 #' @export
+#' @family graph layouts
 #' @examples
 #'
 #' set.seed(42)
@@ -964,6 +977,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' Force-directed Placement. \emph{Software - Practice and Experience},
 #' 21(11):1129-1164.
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1090,6 +1104,7 @@ with_fr <- function(...) layout_spec(layout_with_fr, ...)
 #' Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
 #' LNCS 894, pp. 388-403, 1995.
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1178,6 +1193,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 
 layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
                             mass=30, spring.length=0, spring.constant=1,
@@ -1264,6 +1280,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1377,6 +1394,7 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
+#' @family graph layouts
 
 layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
                        area=vcount(graph)^2, coolexp=1.5,
@@ -1444,6 +1462,7 @@ with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 #' @references Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional
 #' Scaling}.  Second edition. Chapman and Hall.
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1535,6 +1554,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 #' and Cybernetics 11(2):109-125, 1981.
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1809,6 +1829,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @seealso \code{\link{plot.igraph}}, \code{\link{tkplot}},
 #' \code{\link{layout}}, \code{\link{disjoint_union}}
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 #' @examples
 #'
@@ -1857,6 +1878,7 @@ merge_coords <- function(graphs, layouts, method="dla") {
 #' @return A numeric matrix with at the same dimension as \code{layout}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
+#' @family graph layouts
 #' @keywords graphs
 
 norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
