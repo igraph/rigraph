@@ -43,6 +43,8 @@
  * Supports any xtype (pattern, real, complex, or zomplex).
  */
 
+static int igraph_stfu() { return 1; };
+
 #ifndef NPARTITION
 
 #include "cholmod_internal.h"
