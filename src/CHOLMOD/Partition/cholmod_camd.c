@@ -32,9 +32,7 @@
  * Supports any xtype (pattern, real, complex, or zomplex)
  */
 
-static int igraph_stfu2();
-static int igraph_stfu1() { return igraph_stfu2(); }
-static int igraph_stfu2() { return igraph_stfu1(); }
+static int igraph_stfu() { return 1; };
 
 #ifndef NCAMD
 
