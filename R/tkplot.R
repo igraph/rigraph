@@ -538,37 +538,21 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
                          niter=list(name="Number of iterations",
                            type="numeric",
                            default=500),
-                         maxdelta=list(name="Maximum change (n)",
+                         start.temp=list(name="Start temperature",
                            type="expression",
-                           default=expression(vcount(.tkplot.g))),
-                         area=list(name="Area parameter (n^2)",
-                           type="expression",
-                           default=expression(vcount(.tkplot.g)^2)),
-                         coolexp=list(name="Cooling exponent",
-                           type="numeric",
-                           default=3),                         
-                         repulserad=list(name="Cancellation radius (n^3)",
-                           type="expression",
-                           # FIXME: this should be area * n, but parameters
-                           # can't depend on each other....
-                           default=expression(vcount(.tkplot.g)^3))
-                         )
+                           default=expression(sqrt(vcount(.tkplot.g)))))
                        )
                   )
 .tkplot.addlayout("kamada.kawai",
                   list(name="Kamada-Kawai",
                        f=layout_with_kk,
                        params=list(
-                         niter=list(name="Number of iterations",
-                           type="numeric",
-                           default=1000),
-                         initemp=list(name="Initial temperature",
-                           type="numeric",
-                           default=10),
-                         coolexp=list(name="Cooling exponent",
-                           type="numeric",
-                           default=0.99)
-                         )
+                         maxiter=list(name="Maximum number of iterations",
+                           type="expression",
+                           default=expression(50 * vcount(.tkplot.g))),
+                         kkconst=list(name="Vertex attraction constant",
+                           type="expression",
+                           default=expression(vcount(.tkplot.g))))
                        )
                   )
 .tkplot.addlayout("reingold.tilford",
@@ -668,9 +652,10 @@ tk_center <- function(tkp.id) {
 #' @rdname tkplot
 #' @export
 
-tk_reshape <- function(tkp.id, newlayout, ...) {
+tk_reshape <- function(tkp.id, newlayout, params) {
   tkp <- .tkplot.get(tkp.id)
-  .tkplot.set(tkp.id, "coords", newlayout(tkp$graph, ...))
+  new_coords <- do_call(newlayout, .args=c(list(tkp$graph), params))
+  .tkplot.set(tkp.id, "coords", new_coords)
   tk_fit(tkp.id)
   .tkplot.update.vertices(tkp.id)
   invisible(NULL)
@@ -1456,7 +1441,8 @@ tk_canvas <- function(tkp.id) {
                               "character"=as.character(tcltk::tkget(values[[i]])),
                               "logical"=as.logical(tcltk::tclvalue(values[[i]])),
                               "choice"=as.character(tcltk::tclvalue(values[[i]])),
-                              "initial"=as.logical(tcltk::tclvalue(values[[i]]))
+                              "initial"=as.logical(tcltk::tclvalue(values[[i]])),
+                              "expression"=as.numeric(tcltk::tkget(values[[i]]))
                               )
       if (layout$params[[i]]$type=="initial" &&
           params[[i]]) {
