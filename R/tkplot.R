@@ -650,11 +650,12 @@ tk_center <- function(tkp.id) {
 }
   
 #' @rdname tkplot
+#' @param params Extra parameters in a list, to pass to the layout function.
 #' @export
 
-tk_reshape <- function(tkp.id, newlayout, params) {
+tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
-  new_coords <- do_call(newlayout, .args=c(list(tkp$graph), params))
+  new_coords <- do_call(newlayout, .args=c(list(tkp$graph), list(...), params))
   .tkplot.set(tkp.id, "coords", new_coords)
   tk_fit(tkp.id)
   .tkplot.update.vertices(tkp.id)
