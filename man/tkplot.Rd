@@ -34,7 +34,7 @@ tk_fit(tkp.id, width = NULL, height = NULL)
 
 tk_center(tkp.id)
 
-tk_reshape(tkp.id, newlayout, params)
+tk_reshape(tkp.id, newlayout, ..., params)
 
 tk_postscript(tkp.id)
 
@@ -60,6 +60,8 @@ tk_canvas(tkp.id)
 \item{height}{The height of the rectangle for generating new coordinates.}
 
 \item{newlayout}{The new layout, see the \code{layout} parameter of tkplot.}
+
+\item{params}{Extra parameters in a list, to pass to the layout function.}
 
 \item{norm}{Logical, should we norm the coordinates.}
 
