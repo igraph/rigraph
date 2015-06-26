@@ -4,5 +4,3 @@ PKG_CPPFLAGS= -I${LIB_XML}/include/libxml2 -I${LIB_XML}/include -DLIBXML_STATIC 
 PKG_CFLAGS = -DINTERNAL_ARPACK -I. -I$(LIB_GMP)/include
 
 PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -lgmp -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
-
-CXX_STD = CXX11
