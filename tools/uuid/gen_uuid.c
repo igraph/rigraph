@@ -325,6 +325,10 @@ static int flock(int fd, int op)
 }
 #endif
 
+#if !defined(HAVE_FLOCK) && !defined(__sun)
+# define HAVE_FLOCK 1
+#endif
+
 /* Assume that the gettimeofday() has microsecond granularity */
 #define MAX_ADJUSTMENT 10
 
@@ -365,6 +369,7 @@ static int get_clock(uint32_t *clock_high, uint32_t *clock_low,
 	}
 	if (state_fd >= 0) {
 		rewind(state_f);
+#ifdef HAVE_FLOCK
 		while (flock(state_fd, LOCK_EX) < 0) {
 			if ((errno == EAGAIN) || (errno == EINTR))
 				continue;
@@ -374,6 +379,7 @@ static int get_clock(uint32_t *clock_high, uint32_t *clock_low,
 			ret = -1;
 			break;
 		}
+#endif
 	}
 	if (state_fd >= 0) {
 		unsigned int cl;
@@ -437,7 +443,9 @@ try_again:
 			fflush(state_f);
 		}
 		rewind(state_f);
+#ifdef HAVE_FLOCK
 		flock(state_fd, LOCK_UN);
+#endif
 	}
 
 	*clock_high = clock_reg >> 32;
