@@ -124,6 +124,13 @@ static int gettimeofday (struct timeval *tv, void *dummy)
 }
 #endif
 
+#ifdef __MINGW32__
+int gettimeofday (struct timeval *tv, void *dummy);
+#endif
+#ifdef __MINGW64__
+int gettimeofday (struct timeval *tv, void *dummy);
+#endif
+
 static int getuid (void)
 {
 	return 1;
