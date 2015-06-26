@@ -27,9 +27,3 @@
     invisible()
 }
 
-.Call <- function(.NAME, ...) {
-  if (.NAME != "R_igraph_finalizer") {
-    base::.Call("R_igraph_check_finally_stack", PACKAGE="igraph")
-  }
-  base::.Call(.NAME, ...)
-}

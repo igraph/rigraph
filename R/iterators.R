@@ -378,12 +378,29 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   args <- lazy_dots(..., .follow_symbols = FALSE)
 
   ## If indexing has no argument at all, then we still get one,
-  ## but it is "empty", a name that is ""
+  ## but it is "empty", a name that is  ""
 
+  ## Special case, no argument (but we might get an artificial
+  ## empty one
   if (length(args) < 1 ||
       (length(args) == 1 && class(args[[1]]$expr) == "name" &&
          as.character(args[[1]]$expr) == "")) {
     return(x)
+  }
+
+  ## Special case: single numeric argument
+  if (length(args) == 1 && class(args[[1]]$expr) == "numeric") {
+    res <- simple_vs_index(x, args[[1]]$expr)
+    return (add_vses_graph_ref(res, get_vs_graph(x)))
+  }
+
+  ## Special case: single symbol argument, no such attribute
+  if (length(args) == 1 && class(args[[1]]$expr) == "name") {
+    graph <- get_vs_graph(x)
+    if (! (as.character(args[[1]]$expr) %in% vertex_attr_names(graph))) {
+      res <- simple_vs_index(x, lazy_eval(args[[1]]))
+      return (add_vses_graph_ref(res, graph))
+    }
   }
 
   nei <- function(v, mode=c("all", "in", "out", "total")) {
