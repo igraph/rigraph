@@ -64,22 +64,22 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' constant with exactly two characters.
 #' 
 #' Possible values for symmetric input matrices: \describe{
-#' \item{list(list("LA"))}{Compute \code{nev} largest (algebraic) eigenvalues.}
-#' \item{list(list("SA"))}{Compute \code{nev} smallest (algebraic)
-#' eigenvalues.} \item{list(list("LM"))}{Compute \code{nev} largest (in
-#' magnitude) eigenvalues.} \item{list(list("SM"))}{Compute \code{nev} smallest
-#' (in magnitude) eigenvalues.} \item{list(list("BE"))}{Compute \code{nev}
+#' \item{"LA"}{Compute \code{nev} largest (algebraic) eigenvalues.}
+#' \item{"SA"}{Compute \code{nev} smallest (algebraic)
+#' eigenvalues.} \item{"LM"}{Compute \code{nev} largest (in
+#' magnitude) eigenvalues.} \item{"SM"}{Compute \code{nev} smallest
+#' (in magnitude) eigenvalues.} \item{"BE"}{Compute \code{nev}
 #' eigenvalues, half from each end of the spectrum. When \code{nev} is odd,
 #' compute one more from the high end than from the low end.} }
 #' 
 #' Possible values for non-symmetric input matrices: \describe{
-#' \item{list(list("LM"))}{Compute \code{nev} eigenvalues of largest
-#' magnitude.} \item{list(list("SM"))}{Compute \code{nev} eigenvalues of
-#' smallest magnitude.} \item{list(list("LR"))}{Compute \code{nev} eigenvalues
-#' of largest real part.} \item{list(list("SR"))}{Compute \code{nev}
-#' eigenvalues of smallest real part.} \item{list(list("LI"))}{Compute
+#' \item{"LM"}{Compute \code{nev} eigenvalues of largest
+#' magnitude.} \item{"SM"}{Compute \code{nev} eigenvalues of
+#' smallest magnitude.} \item{"LR"}{Compute \code{nev} eigenvalues
+#' of largest real part.} \item{"SR"}{Compute \code{nev}
+#' eigenvalues of smallest real part.} \item{"LI"}{Compute
 #' \code{nev} eigenvalues of largest imaginary part.}
-#' \item{list(list("SI"))}{Compute \code{nev} eigenvalues of smallest imaginary
+#' \item{"SI"}{Compute \code{nev} eigenvalues of smallest imaginary
 #' part.} }
 #' 
 #' This parameter is sometimes overwritten by the various functions, e.g.

@@ -13,19 +13,19 @@ transitivity(graph, type = c("undirected", "global", "globalundirected",
 \item{graph}{The graph to analyze.}
 
 \item{type}{The type of the transitivity to calculate. Possible values:
-\describe{ \item{list("global")}{The global transitivity of an undirected
+\describe{ \item{"global"}{The global transitivity of an undirected
 graph (directed graphs are considered as undirected ones as well). This is
 simply the ratio of the triangles and the connected triples in the graph.
 For directed graph the direction of the edges is ignored. }
-\item{list("local")}{The local transitivity of an undirected graph, this is
+\item{"local"}{The local transitivity of an undirected graph, this is
 calculated for each vertex given in the \code{vids} argument. The local
 transitivity of a vertex is the ratio of the triangles connected to the
 vertex and the triples centered on the vertex. For directed graph the
-direction of the edges is ignored. } \item{list("undirected")}{This is the
-same as \code{global}.} \item{list("globalundirected")}{This is the same as
-\code{global}.} \item{list("localundirected")}{This is the same as
-\code{local}.} \item{list("barrat")}{The weighted transitivity as defined A.
-Barrat. See details below.} \item{list("weighted")}{The same as
+direction of the edges is ignored. } \item{"undirected"}{This is the
+same as \code{global}.} \item{"globalundirected"}{This is the same as
+\code{global}.} \item{"localundirected"}{This is the same as
+\code{local}.} \item{"barrat"}{The weighted transitivity as defined A.
+Barrat. See details below.} \item{"weighted"}{The same as
 \code{barrat}.} }}
 
 \item{vids}{The vertex ids for the local transitivity will be calculated.

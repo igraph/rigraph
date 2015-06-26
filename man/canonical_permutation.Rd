@@ -19,11 +19,11 @@ parmutation which takes the input graph into canonical form. A numeric
 vector, the first element is the new label of vertex 0, the second element
 for vertex 1, etc. } \item{info}{Some information about the BLISS
 computation. A named list with the following members: \describe{
-\item{list("nof_nodes")}{The number of nodes in the search tree.}
-\item{list("nof_leaf_nodes")}{The number of leaf nodes in the search tree.}
-\item{list("nof_bad_nodes")}{Number of bad nodes.}
-\item{list("nof_canupdates")}{Number of canrep updates.}
-\item{list("max_level")}{Maximum level.} \item{list("group_size")}{The size
+\item{"nof_nodes"}{The number of nodes in the search tree.}
+\item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
+\item{"nof_bad_nodes"}{Number of bad nodes.}
+\item{"nof_canupdates"}{Number of canrep updates.}
+\item{"max_level"}{Maximum level.} \item{"group_size"}{The size
 of the automorphism group of the input graph, as a string. This number is
 exact if igraph was compiled with the GMP library, and approximate
 otherwise.} } }
@@ -41,11 +41,11 @@ See the paper below for the details about BLISS. This and more information
 is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
 
 The possible values for the \code{sh} argument are: \describe{
-\item{list("f")}{First non-singleton cell.} \item{list("fl")}{First largest
-non-singleton cell.} \item{list("fs")}{First smallest non-singleton cell.}
-\item{list("fm")}{First maximally non-trivially connectec non-singleton
-cell.} \item{list("flm")}{Largest maximally non-trivially connected
-non-singleton cell.} \item{list("fsm")}{Smallest maximally non-trivially
+\item{"f"}{First non-singleton cell.} \item{"fl"}{First largest
+non-singleton cell.} \item{"fs"}{First smallest non-singleton cell.}
+\item{"fm"}{First maximally non-trivially connectec non-singleton
+cell.} \item{"flm"}{Largest maximally non-trivially connected
+non-singleton cell.} \item{"fsm"}{Smallest maximally non-trivially
 connected non-singleton cell.} } See the paper in references for details
 about these.
 }

@@ -34,17 +34,17 @@ undirected.
 }
 \details{
 Conversion algorithms for \code{as.directed}: \describe{
-\item{list("arbitrary")}{The number of edges in the graph stays the same, an
+\item{"arbitrary"}{The number of edges in the graph stays the same, an
 arbitrarily directed edge is created for each undirected edge.}
-\item{list("mutual")}{Two directed edges are created for each undirected
+\item{"mutual"}{Two directed edges are created for each undirected
 edge, one in each direction.} }
 
 Conversion algorithms for \code{as.undirected}: \describe{
-\item{list("each")}{The number of edges remains constant, an undirected edge
+\item{"each"}{The number of edges remains constant, an undirected edge
 is created for each directed one, this version might create graphs with
-multiple edges.} \item{list("collapse")}{One undirected edge will be created
+multiple edges.} \item{"collapse"}{One undirected edge will be created
 for each pair of vertices which are connected with at least one directed
-edge, no multiple edges will be created.} \item{list("mutual")}{One
+edge, no multiple edges will be created.} \item{"mutual"}{One
 undirected edge will be created for each pair of mutual edges. Non-mutual
 edges are ignored. This mode might create multiple edges if there are more
 than one mutual edge pairs between the same pair of vertices.  } }
