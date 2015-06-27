@@ -56,13 +56,13 @@ test_that("es printing", {
 
   o1 <- c("+ 1/3 edge (vertex names):",
           "  tail head tid hid color weight",
-          "1    B    A   2   1   red     10")
+          "1    A    B   1   2   red     10")
   expect_output(E(g)[[1]], paste(o1, collapse = "\n"), fixed = TRUE)
 
   o2 <- c("+ 2/3 edges (vertex names):",
           "  tail head tid hid color weight",
-          "2    C    A   3   1   red      9",
-          "3    C    B   3   2   red      3")
+          "2    A    C   1   3   red      9",
+          "3    B    C   2   3   red      3")
   expect_output(E(g)[[2:3]], paste(o2, collapse = "\n"), fixed = TRUE)
 
 })
