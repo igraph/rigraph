@@ -80,7 +80,7 @@ get.edge <- function(graph, id) {
 #' @export
 
 head_of <- function(graph, es) {
-  create_vs(graph,  ends(graph, es, names = FALSE)[,1])
+  create_vs(graph,  ends(graph, es, names = FALSE)[,2])
 }
 
 #' Tails of the edge(s) in a graph
@@ -98,5 +98,5 @@ head_of <- function(graph, es) {
 #' @export
 
 tail_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[,2])
+  create_vs(graph, ends(graph, es, names = FALSE)[,1])
 }
