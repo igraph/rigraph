@@ -108,6 +108,12 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #'     graph attributes when printing graphs. Defaults to \code{FALSE}.}
 #'   \item{print.vertex.attributes}{Logical constant, whether to print
 #'     vertex attributes when printing graphs. Defaults to \code{FALSE}.}
+#'   \item{return.vs.es}{Whether functions that return a set or sequence
+#'     of vertices/edges should return formal vertex/edge sequence
+#'     objects. This option was introduced in igraph version 1.0.0 and
+#'     defaults to TRUE. If your package requires the old behavior,
+#'     you can set it to FALSE in the \code{.onLoad} function of
+#'     your package, without affecting other packages.}
 #'   \item{sparsematrices}{Whether to use the \code{Matrix} package for
 #'     (sparse) matrices. It is recommended, if the user works with
 #'     larger graphs.}
