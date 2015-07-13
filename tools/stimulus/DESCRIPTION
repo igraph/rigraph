@@ -10,7 +10,8 @@ Depends: methods
 Imports: Matrix,
     magrittr,
     NMF,
-    irlba
+    irlba,
+    pkgconfig (>= 2.0.0)
 Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales
 License: GPL (>= 2)
 URL: http://igraph.org
