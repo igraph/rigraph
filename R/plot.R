@@ -385,9 +385,9 @@ plot.igraph <- function(x,
   # add the labels
   par(xpd=TRUE)
   x <- layout[,1]+label.dist*cos(-label.degree)* 
-    (vertex.size+6*8*log10(nchar(labels)+1))/200
+    (vertex.size+6*8*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
-    (vertex.size+6*8*log10(nchar(labels)+1))/200
+    (vertex.size+6*8*log10(2))/200
   if (length(label.family)==1) {
     text(x, y, labels=labels, col=label.color, family=label.family,
          font=label.font, cex=label.cex)
@@ -670,9 +670,9 @@ rglplot.igraph <- function(x, ...) {
   # add the labels, 'l1' is a stupid workaround of a mysterious rgl bug
   labels[is.na(labels)] <- ""
   x <- layout[,1]+label.dist*cos(-label.degree)* 
-    (vertex.size+6*10*log10(nchar(labels)+1))/200
+    (vertex.size+6*10*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
-    (vertex.size+6*10*log10(nchar(labels)+1))/200
+    (vertex.size+6*10*log10(2))/200
   z <- layout[,3]
   l1 <- labels[1]
   labels[1] <- ""
