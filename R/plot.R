@@ -755,7 +755,9 @@ function (x1, y1, x2, y2,
     x1d <- r.seg*cos(th.seg1)/uin[1]
     y1d <- r.seg*sin(th.seg1)/uin[2]
   }
-  if (is.logical(curved) && all(!curved)) {
+  if (is.logical(curved) && all(!curved) ||
+      is.numeric(curved) && all(!curved)) {
+
     segments(x1+x1d, y1+y1d, x2+x2d, y2+y2d, lwd=sh.lwd, col=sh.col, lty=sh.lty)
     phi <- atan2(y1-y2, x1-x2)
     r <- sqrt( (x1-x2)^2 + (y1-y2)^2 )
@@ -768,6 +770,8 @@ function (x1, y1, x2, y2,
     } else {
       lambda <- as.logical(curved) * 0.5
     }
+    lambda <- rep(lambda, length.out = length(x1))
+    print(lambda)
     c.x1 <- x1+x1d
     c.y1 <- y1+y1d
     c.x2 <- x2+x2d
@@ -781,20 +785,32 @@ function (x1, y1, x2, y2,
     sh.lty <- rep(sh.lty, length=length(c.x1))
     sh.lwd <- rep(sh.lwd, length=length(c.x1))
     lc.x <- lc.y <- numeric(length(c.x1))
+
     for (i in seq_len(length(c.x1))) {
-      spl <- xspline(x=c(c.x1[i],spx[i],c.x2[i]),
-                     y=c(c.y1[i],spy[i],c.y2[i]), shape=1, draw=FALSE)
-      lines(spl, lwd=sh.lwd[i], col=sh.col[i], lty=sh.lty[i])
-      if (code %in% c(2,3)) {
-        x1[i] <- spl$x[3*length(spl$x)/4]
-        y1[i] <- spl$y[3*length(spl$y)/4]
+      ## Straight line?
+      if (lambda[i] == 0) {
+        segments(c.x1[i], c.y1[i], c.x2[i], c.y2[i],
+                 lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+        phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
+        r <- sqrt( (x1[i] - x2[i])^2 + (y1[i] - y2[i])^2 )
+        lc.x[i] <- x2[i] + 2/3*r*cos(phi)
+        lc.y[i] <- y2[i] + 2/3*r*sin(phi)
+
+      } else {
+        spl <- xspline(x=c(c.x1[i],spx[i],c.x2[i]),
+                       y=c(c.y1[i],spy[i],c.y2[i]), shape=1, draw=FALSE)
+        lines(spl, lwd=sh.lwd[i], col=sh.col[i], lty=sh.lty[i])
+        if (code %in% c(2,3)) {
+          x1[i] <- spl$x[3*length(spl$x)/4]
+          y1[i] <- spl$y[3*length(spl$y)/4]
+        }
+        if (code %in% c(1,3)) {
+          x2[i] <- spl$x[length(spl$x)/4]
+          y2[i] <- spl$y[length(spl$y)/4]
+        }
+        lc.x[i] <- spl$x[2/3 * length(spl$x)]
+        lc.y[i] <- spl$y[2/3 * length(spl$y)]
       }
-      if (code %in% c(1,3)) {
-        x2[i] <- spl$x[length(spl$x)/4]
-        y2[i] <- spl$y[length(spl$y)/4]
-      }
-      lc.x[i] <- spl$x[2/3 * length(spl$x)]
-      lc.y[i] <- spl$y[2/3 * length(spl$y)]
     }
   }
 
