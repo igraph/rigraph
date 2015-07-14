@@ -108,6 +108,12 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #'     graph attributes when printing graphs. Defaults to \code{FALSE}.}
 #'   \item{print.vertex.attributes}{Logical constant, whether to print
 #'     vertex attributes when printing graphs. Defaults to \code{FALSE}.}
+#'   \item{return.vs.es}{Whether functions that return a set or sequence
+#'     of vertices/edges should return formal vertex/edge sequence
+#'     objects. This option was introduced in igraph version 1.0.0 and
+#'     defaults to TRUE. If your package requires the old behavior,
+#'     you can set it to FALSE in the \code{.onLoad} function of
+#'     your package, without affecting other packages.}
 #'   \item{sparsematrices}{Whether to use the \code{Matrix} package for
 #'     (sparse) matrices. It is recommended, if the user works with
 #'     larger graphs.}
@@ -144,11 +150,13 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' igraph_options(verbose=TRUE)
 #' layout_with_kk(make_ring(10))
 #' igraph_options(verbose=oldval)
-#' #' @export
+#' @export
+#' @importFrom pkgconfig set_config_in get_config
 
 igraph_options <- function(...) {
-  if (nargs() == 0) return(.igraph.pars)
-  current <- .igraph.pars
+  if (nargs() == 0) return(get_all_options())
+
+  ## Short notation
   temp <- list(...)
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
@@ -157,27 +165,41 @@ igraph_options <- function(...) {
            character = return(.igraph.pars[arg]),
            stop("invalid argument: ", sQuote(arg)))
   }
-  if (length(temp) == 0) return(current)
+  if (length(temp) == 0) return(get_all_options())
+
+  ## Callbacks
   n <- names(temp)
   if (is.null(n)) stop("options must be given by name")
-  env <- asNamespace("igraph")
   cb <- intersect(names(igraph.pars.callbacks), n)
   for (cn in cb) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])
   }
-  current <- .igraph.pars               # callback might have updated it
-  current[n] <- temp
-  assign(".igraph.pars", current, envir = env)
-  invisible(current)
+
+  ## Set them
+  names(temp) <- paste0("igraph::", names(temp))
+  do.call(set_config_in, c(temp, list(.in = parent.frame())))
+  invisible(lapply(names(temp), get_config))
+}
+
+#' @importFrom pkgconfig set_config get_config
+
+get_all_options <- function() {
+  res <- lapply(names(.igraph.pars), function(n) {
+    nn <- paste0("igraph::", n)
+    get_config(nn, fallback = .igraph.pars[[n]])
+  })
+
+  names(res) <- names(.igraph.pars)
+  res
 }
 
 #' @rdname igraph_options
 #' @export
 
-igraph_opt <- function(x, default=NULL) {
-  if (missing(default)) 
-    return(igraph_options(x)[[1L]])
-  if (x %in% names(igraph_options())) 
-    igraph_options(x)[[1L]]
-  else default
+igraph_opt <- function(x, default = NULL) {
+  if (missing(default)) {
+    get_config(paste0("igraph::", x), .igraph.pars[[x]])
+  } else {
+    get_config(paste0("igraph::", x), default)
+  }
 }

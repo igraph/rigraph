@@ -22,7 +22,6 @@
 
 .onAttach <- function(library, pkg) {
     ## we can't do this in .onLoad
-    unlockBinding(".igraph.pars", asNamespace("igraph"))
     unlockBinding(".igraph.pb", asNamespace("igraph"))
     invisible()
 }
