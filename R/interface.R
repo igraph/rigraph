@@ -348,6 +348,7 @@ is_directed <- function(graph) {
 #' @family structural queries
 #' 
 #' @export
+#' @importFrom stats na.omit
 #' @examples
 #' g <- make_ring(5)
 #' ends(g, E(g))

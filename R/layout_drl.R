@@ -72,6 +72,7 @@
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.
 #' @export
+#' @importFrom stats runif
 #' @keywords graphs
 #' @examples
 #' 

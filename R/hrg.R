@@ -603,6 +603,10 @@ plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...)
   }
 }
 
+#' @importFrom graphics plot
+#' @importFrom grDevices rainbow
+#' @importFrom stats rect.hclust
+
 hrgPlotHclust <- function(x, rect=0, colbar=rainbow(rect), hang=.01,
                           ann=FALSE, main="", sub="", xlab="", ylab="",
                           ...) {
@@ -615,9 +619,14 @@ hrgPlotHclust <- function(x, rect=0, colbar=rainbow(rect), hang=.01,
   invisible(ret)
 }
 
+#' @importFrom graphics plot
+
 hrgPlotDendrogram <- function(x, ...) {
   plot(as.dendrogram(x), ...)
 }
+
+#' @importFrom graphics plot
+#' @importFrom grDevices rainbow
 
 hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
                          edge.color=NULL, use.edge.length=FALSE, ...) {

@@ -233,6 +233,7 @@ degree <- function(graph, v=V(graph),
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #' be calculated.
 #' @export
+#' @importFrom graphics hist
 
 degree_distribution <- function(graph, cumulative=FALSE, ...) {
   

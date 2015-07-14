@@ -55,6 +55,8 @@
   0L
 }
 
+#' @importFrom utils txtProgressBar setTxtProgressBar
+
 .igraph.progress.txt <- function(percent, message) {
   pb <- get(".igraph.pb", asNamespace("igraph"))
   if (percent==0) {

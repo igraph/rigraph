@@ -70,6 +70,8 @@
 #' @method plot igraph
 #' @export
 #' @export plot.igraph
+#' @importFrom grDevices rainbow
+#' @importFrom graphics plot polygon text par
 #' @keywords graphs
 #' @examples
 #' 
@@ -701,6 +703,8 @@ rglplot.igraph <- function(x, ...) {
 # This is taken from the IDPmisc package,
 # slightly modified: code argument added
 
+#' @importFrom graphics par xyinch segments xspline lines polygon
+
 igraph.Arrows <-
 function (x1, y1, x2, y2,
                     code=2,
@@ -834,6 +838,8 @@ function (x1, y1, x2, y2,
   list(lab.x=lc.x, lab.y=lc.y)
 
 } # Arrows
+
+#' @importFrom graphics xspline
 
 igraph.polygon <- function(points, vertex.size=15/200, expand.by=15/200,
                            shape=1/2, col="#ff000033", border=NA) {

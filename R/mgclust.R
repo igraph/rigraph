@@ -82,6 +82,7 @@ gclust.rsvt <- function(glist,r=1,maxsvt=10,nmfout=FALSE,maxit=10000,nmfmethod='
 }
 
 #' @export
+#' @importFrom stats coef
 
 gclust.app <- function(glist, r=1, nmfout=FALSE, maxit=10000, nmfmethod='lee') 
 {

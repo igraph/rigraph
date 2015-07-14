@@ -33,6 +33,8 @@ NULL
 
 ## For the future, right now, we do not warn or even message
 
+#' @importFrom utils packageName
+
 deprecated <- function(old, new) {
   assign(old, new, envir = asNamespace(packageName()))
 }

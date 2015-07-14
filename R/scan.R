@@ -358,6 +358,8 @@ scan_stat <- function(graphs, tau = 1, ell = 0,
   )
 }
 
+#' @importFrom stats sd
+
 scan_vertex_norm <-function (input_stat, tau) {
   if (is.matrix(input_stat)) {
     n <- nrow(input_stat)
@@ -395,6 +397,8 @@ scan_vertex_norm <-function (input_stat, tau) {
   }
   return(nstat)
 }
+
+#' @importFrom stats sd
 
 scan_temp_norm <- function (stat, tau, ell) {
   maxTime <- ncol(stat)

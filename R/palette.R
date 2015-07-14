@@ -201,6 +201,7 @@ diverging_pal <- function(n) {
 #'
 #' @family palettes
 #' @export
+#' @importFrom grDevices palette
 
 r_pal <- function(n) {
   x <- palette()

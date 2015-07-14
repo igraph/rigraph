@@ -716,7 +716,7 @@ as_phylo.communities <- function(x, use.modularity=FALSE, ...) {
   obj <- list(edge=edge, edge.length=edge.length/2, tip.label=labels,
               Nnode=N)
   class(obj) <- "phylo"
-  reorder(obj)
+  ape::reorder.phylo(obj)
 }
 
 #' @rdname communities
@@ -1711,6 +1711,7 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
 #' @rdname communities
 #' @method plot communities
 #' @export
+#' @importFrom graphics plot
 
 plot.communities <- function(x, y,
                              col=membership(x),
@@ -1836,6 +1837,10 @@ plot_dendrogram.communities <- function(x,
   }
 }
 
+#' @importFrom grDevices palette
+#' @importFrom graphics plot
+#' @importFrom stats rect.hclust
+
 dendPlotHclust <- function(communities, rect=length(communities),
                            colbar=palette(), hang=-1, ann=FALSE,
                            main="", sub="", xlab="", ylab="", ...,
@@ -1849,11 +1854,16 @@ dendPlotHclust <- function(communities, rect=length(communities),
   invisible(ret)
 }
 
+#' @importFrom graphics plot
+
 dendPlotDendrogram <- function(communities, hang=-1, ...,
                                use.modularity=FALSE) {
   plot(as.dendrogram(communities, hang=hang, use.modularity=use.modularity),
        ...)
 }
+
+#' @importFrom grDevices palette
+#' @importFrom graphics plot
 
 dendPlotPhylo <- function(communities, colbar=palette(),
                           col=colbar[membership(communities)],
