@@ -350,6 +350,31 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 }
 
 
+#' Reverse the direction of all edges.
+#'
+#' Return a new graph with the same edge and vertex attributes
+#' but with the edge directions reversed.
+#' If the graph is undirected, it is returned as is.
+#'
+#' @param graph The graph to reverse.
+#' @return A new graph object.
+#' @author Sam Steingold \email{sds@@gnu.org}
+#' @keywords graphs
+#' @export
+rev.graph <- function (graph) {
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is.directed(graph))
+    return(graph)
+  e <- get.data.frame(graph, what="edges")
+  ## swap "from" & "to"
+  neworder <- 1:length(e)
+  neworder[1:2] <- c(2,1)
+  e <- e[neworder]
+  names(e) <- names(e)[neworder]
+  graph.data.frame(e, vertices = get.data.frame(graph, what="vertices"))
+}
+
+
 #' Adjacency lists
 #' 
 #' Create adjacency lists from a graph, either for adjacent edges or for
