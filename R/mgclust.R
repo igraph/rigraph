@@ -3,6 +3,11 @@
 
 gclust.rsvt <- function(glist,r=1,maxsvt=10,nmfout=FALSE,maxit=10000,nmfmethod='lee') 
 {
+
+    if (! requireNamespace("NMF", quietly = TRUE)) {
+      stop("This function requires the 'NMF' package")
+    }
+
     # rsvt -- repeated singular value thresholding 
     # input could be a list of graphs (igraph model) 
     # or a matrix, where each column corresponds to 
@@ -86,6 +91,10 @@ gclust.rsvt <- function(glist,r=1,maxsvt=10,nmfout=FALSE,maxit=10000,nmfmethod='
 
 gclust.app <- function(glist, r=1, nmfout=FALSE, maxit=10000, nmfmethod='lee') 
 {
+    if (! requireNamespace("NMF", quietly = TRUE)) {
+      stop("This function requires the 'NMF' package")
+    }
+
     # app -- apparent (clustering), i.e. no rsvt
     # input could be a list of graphs (igraph model) 
     # or a matrix, where each column corresponds to 

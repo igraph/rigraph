@@ -9,14 +9,13 @@ Description: Routines for simple graphs and network analysis. It can
 Depends: methods
 Imports: Matrix,
     magrittr,
-    NMF,
     irlba,
     pkgconfig (>= 2.0.0),
     grDevices,
     graphics,
     stats,
     utils
-Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales
+Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales, NMF
 License: GPL (>= 2)
 URL: http://igraph.org
 SystemRequirements: gmp, libxml2
