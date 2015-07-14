@@ -1,4 +1,36 @@
 
+# igraph 1.0.2
+
+July xx, 2015
+
+- Use the `pkgconfig` package for options. This allows setting options
+  on a per-package basis. E.g. a package using igraph can set `return.vs.es`
+  to `FALSE` in its `.onLoad()` function, and then igraph will return
+  plain numeric vectors instead of vertex/edge sequences
+  *if called from this package*.
+- `get.edge()` is deprecated, use `ends()` instead. (This was already the case
+  for igraph 1.0.0, but we forgot to add a NEWS point for it.)
+- Do not redefine `.Call()`, to make native calls faster.
+- Speed up special cases of indexing vertex sequences.
+- Removed an `anyNA()` call, to be compatible with older R versions.
+- Fixed a fast-greedy community finding bug,
+  https://github.com/igraph/igraph/issues/836
+- Fixed `head_of()` and `tail_of()`, they were mixed up.
+- Plot: make `label.dist` independent of label lengths, fixes #63.
+- Plot: no error for unknown graphical parameters.
+- Import functions from base packages, to eliminate
+  `R CMD check` `NOTE`s.
+
+# igraph 1.0.1
+
+June 26, 2015
+
+Some minor updates:
+
+- Documentation fixes.
+- Do not require a C++-11 compiler any more.
+- Fedora, Solaris and Windows compilation fixes.
+
 # igraph 1.0.0
 
 June 21, 2015
