@@ -1818,8 +1818,9 @@ coreness <- function(graph, mode=c("all", "out", "in")) {
 #' all nodes to which it has edges, so nodes with no incoming edges go first.
 #' For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
 #' nodes from which it receives edges. Nodes with no outgoing edges go first.
-#' @return A numeric vector containing vertex ids in topologically sorted
-#' order.
+#' @return A vertex sequence (by default, but see the \code{return.vs.es}
+#' option of \code{\link{igraph_options}}) containing vertices in
+#' topologically sorted order.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @keywords graphs

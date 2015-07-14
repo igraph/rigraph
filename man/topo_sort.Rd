@@ -17,8 +17,9 @@ For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
 nodes from which it receives edges. Nodes with no outgoing edges go first.}
 }
 \value{
-A numeric vector containing vertex ids in topologically sorted
-order.
+A vertex sequence (by default, but see the \code{return.vs.es}
+option of \code{\link{igraph_options}}) containing vertices in
+topologically sorted order.
 }
 \description{
 A topological sorting of a directed acyclic graph is a linear ordering of
