@@ -986,6 +986,8 @@ sample_asym_pref <- function(nodes, types,
     res$pref.matrix <- pref.matrix
     res$loops <- loops
   }
+
+  res
 }
 
 #' @rdname sample_pref
