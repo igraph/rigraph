@@ -579,7 +579,7 @@ simple_es_index <- function(x, i) {
   } else {
     res <- unclass(x)[i]
   }
-  if (anyNA(res)) stop('Unknown edge selected')
+  if (any(is.na(res))) stop('Unknown edge selected')
 
   attr(res, "env") <- attr(x, "env")
   attr(res, "graph") <- attr(x, "graph")
