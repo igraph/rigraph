@@ -43,6 +43,7 @@ count_components <- function(graph, mode=c("weak", "strong")) {
 #' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
 #' by the cluster sizes.
 #' @export
+#' @importFrom graphics hist
 
 component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
                                  ...) {

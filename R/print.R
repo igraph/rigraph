@@ -80,6 +80,8 @@
 
 indent_print <- printr$indent_print
 
+#' @importFrom utils capture.output
+
 .print.graph.attributes <- function(x, full, max.lines) {
   list <- graph_attr_names(x)
   if (length(list)!=0) {
@@ -304,6 +306,8 @@ printer_callback <- printr$printer_callback
   }
 
 }
+
+#' @importFrom utils capture.output
 
 .print.edges.compressed.limit <- function(x, edges, names, max.lines) {
 

@@ -410,6 +410,8 @@ add_shape <- function(shape, clip=shape_noclip,
   res
 }
 
+#' @importFrom graphics symbols
+
 .igraph.shape.circle.plot <- function(coords, v=NULL, params) {
   
   vertex.color       <- params("vertex", "color")
@@ -490,6 +492,8 @@ add_shape <- function(shape, clip=shape_noclip,
   
   res
 }
+
+#' @importFrom graphics symbols
 
 .igraph.shape.square.plot <- function(coords, v=NULL, params) {
 
@@ -637,6 +641,8 @@ add_shape <- function(shape, clip=shape_noclip,
   
   res
 }
+
+#' @importFrom graphics symbols
 
 .igraph.shape.rectangle.plot <- function(coords, v=NULL, params) {
 
@@ -795,6 +801,8 @@ add_shape <- function(shape, clip=shape_noclip,
   invisible(NULL)
 }
 
+#' @importFrom graphics par polygon
+
 mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
                   density=NULL, border=NULL, lty=NULL, init.angle=90, ...) {
   values <- c(0, cumsum(values)/sum(values))
@@ -873,6 +881,8 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
   res
 }
 
+#' @importFrom stats na.omit
+
 .igraph.shape.pie.plot <- function(coords, v=NULL, params) {
 
   getparam <- function(pname) {
@@ -913,6 +923,9 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
 
 .igraph.shape.sphere.clip <- .igraph.shape.circle.clip
 
+#' @importFrom graphics rasterImage
+#' @importFrom grDevices col2rgb as.raster
+
 .igraph.shape.sphere.plot <- function(coords, v=NULL, params) {
 
   getparam <- function(pname) {
@@ -946,6 +959,8 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
 }
 
 .igraph.shape.raster.clip <- .igraph.shape.rectangle.clip
+
+#' @importFrom graphics rasterImage
 
 .igraph.shape.raster.plot <- function(coords, v=NULL, params) {
 

@@ -364,6 +364,7 @@ nexus.format.result <- function(l, name="") {
 #' nexus_search("blog or US or karate")
 #' }
 #' @export
+#' @importFrom utils URLencode
 
 nexus_list <- function(tags=NULL, offset=0, limit=10,
                        operator=c("or", "and"),
@@ -393,6 +394,7 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
 
 #' @export
 #' @rdname nexus
+#' @importFrom utils URLencode
  
 nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 
@@ -428,6 +430,7 @@ nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 
 #' @export
 #' @rdname nexus
+#' @importFrom utils URLencode
 
 nexus_get <- function(id, offset=0,
                       order=c("date", "name", "popularity"),
@@ -462,6 +465,7 @@ nexus_get <- function(id, offset=0,
 
 #' @export
 #' @rdname nexus
+#' @importFrom utils URLencode
 
 nexus_search <- function(q, offset=0, limit=10,
                          order=c("date", "name", "popularity"),

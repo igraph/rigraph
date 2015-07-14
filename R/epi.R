@@ -27,6 +27,7 @@ time_bins <- function(x, middle=TRUE)
 #' @method time_bins sir
 #' @rdname sir
 #' @export
+#' @importFrom stats IQR
 
 time_bins.sir <- function(x, middle=TRUE) {
   sir <- x
@@ -136,6 +137,7 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
 #' @method plot sir
 #' @export
+#' @importFrom graphics plot lines
 #' @keywords graphs
 #' @examples
 #' 

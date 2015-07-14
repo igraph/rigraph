@@ -1533,6 +1533,8 @@ tk_canvas <- function(tkp.id) {
 # Internal functions: other
 ###################################################################
 
+#' @importFrom grDevices palette
+
 .tkplot.convert.color <- function(col) {
   if (is.numeric(col)) {
     ## convert numeric color based on current palette

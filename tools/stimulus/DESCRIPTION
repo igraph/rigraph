@@ -11,7 +11,11 @@ Imports: Matrix,
     magrittr,
     NMF,
     irlba,
-    pkgconfig (>= 2.0.0)
+    pkgconfig (>= 2.0.0),
+    grDevices,
+    graphics,
+    stats,
+    utils
 Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales
 License: GPL (>= 2)
 URL: http://igraph.org

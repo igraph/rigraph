@@ -1595,6 +1595,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
 #' and Cybernetics 11(2):109-125, 1981.
 #' @export
+#' @importFrom utils head
 #' @family graph layouts
 #' @keywords graphs
 #' @examples
