@@ -20,7 +20,9 @@ on the given vertices only.}
 attribute, then this is used by default. If this argument is given, then
 vertex strength (see \code{\link{strength}}) is used instead of vertex
 degree. But note that \code{knnk} is still given in the function of the
-normal vertex degree.}
+normal vertex degree.
+Weights are are used to calculate a weighted degree (also called
+\code{\link{strength}}) instead of the degree.}
 }
 \value{
 A list with two members: \item{knn}{A numeric vector giving the

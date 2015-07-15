@@ -19,7 +19,8 @@ is neglected.}
 attribute then that will be used. If \code{NULL} and no such attribute is
 present then the edges will have equal weights. Set this to \code{NA} if the
 graph was a \sQuote{weight} edge attribute, but you don't want to use it for
-community detection.}
+community detection. A larger edge weight means a stronger connection
+for this function.}
 
 \item{vertex}{This parameter can be used to calculate the community of a
 given vertex without calculating all communities. Note that if this argument

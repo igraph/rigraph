@@ -34,7 +34,8 @@
 #' @param graph The graph object to analyze.
 #' @param weights Numeric algorithm giving the weights of the edges in the
 #' graph. The order is determined by the edge ids. This is ignored if the
-#' \code{unweighted} algorithm is chosen
+#' \code{unweighted} algorithm is chosen. Edge weights are interpreted as
+#' distances.
 #' @param algorithm The algorithm to use for calculation. \code{unweighted} can
 #' be used for unwieghted graphs, and \code{prim} runs Prim's algorithm for
 #' weighted graphs.  If this is \code{NULL} then igraph tries to select the

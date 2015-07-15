@@ -839,7 +839,8 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' attribute then that will be used. If \code{NULL} and no such attribute is
 #' present then the edges will have equal weights. Set this to \code{NA} if the
 #' graph was a \sQuote{weight} edge attribute, but you don't want to use it for
-#' community detection.
+#' community detection. A larger edge weight means a stronger connection
+#' for this function.
 #' @param vertex This parameter can be used to calculate the community of a
 #' given vertex without calculating all communities. Note that if this argument
 #' is present then some other arguments are ignored.
@@ -989,7 +990,9 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' @aliases walktrap.community
 #' @param graph The input graph, edge directions are ignored in directed
 #' graphs.
-#' @param weights The edge weights.
+#' @param weights The edge weights. Larger edge weights increase the
+#' probability that an edge is selected by the random walker. In other
+#' words, larger edge weights correspond to stronger connections.
 #' @param steps The length of the random walks to perform.
 #' @param merges Logical scalar, whether to include the merge matrix in the
 #' result.
@@ -1080,6 +1083,8 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
 #' @param graph The graph to analyze.
 #' @param weights The edge weights. Supply \code{NULL} to omit edge weights. By
 #' default the \sQuote{\code{weight}} edge attribute is used, if it is present.
+#' Edge weights are used to calculate weighted edge betweenness. This means
+#' that edges are interpreted as distances, not as connection strengths.
 #' @param directed Logical constant, whether to calculate directed edge
 #' betweenness for directed graphs. It is ignored for undirected graphs.
 #' @param edge.betweenness Logical constant, whether to return the edge
@@ -1185,6 +1190,7 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
 #' The length must match the number of edges in the graph.  By default the
 #' \sQuote{\code{weight}} edge attribute is used as weights. If it is not
 #' present, then all edges are considered to have the same weight.
+#' Larger edge weights correspond to stronger connections.
 #' @return \code{cluster_fast_greedy} returns a \code{\link{communities}}
 #' object, please see the \code{\link{communities}} manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -1275,9 +1281,10 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' symmetric matrix.
 #' @param steps The number of steps to take, this is actually the number of
 #' tries to make a step. It is not a particularly useful parameter.
-#' #' @param weights An optional weight vector. The \sQuote{weight} edge attribute
+#' @param weights An optional weight vector. The \sQuote{weight} edge attribute
 #' is used if present. Supply \sQuote{\code{NA}} here if you want to ignore the
-#' \sQuote{weight} edge attribute.
+#' \sQuote{weight} edge attribute. Larger edge weights correspond to stronger
+#' connections between vertices.
 #' @param start \code{NULL}, or a numeric membership vector, giving the start
 #' configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
@@ -1393,7 +1400,8 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
 #' @param weights An optional weight vector. It should contain a positive
 #' weight for all the edges. The \sQuote{weight} edge attribute is used if
 #' present. Supply \sQuote{\code{NA}} here if you want to ignore the
-#' \sQuote{weight} edge attribute.
+#' \sQuote{weight} edge attribute. Larger edge weights correspond to
+#' stronger connections.
 #' @param initial The initial state. If \code{NULL}, every vertex will have a
 #' different label at the beginning. Otherwise it must be a vector with an
 #' entry for each vertex. Non-negative values denote different labels, negative
@@ -1479,7 +1487,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' @param weights Optional positive weight vector.  If the graph has a
 #' \code{weight} edge attribute, then this is used by default. Supply \code{NA}
 #' here if the graph has a \code{weight} edge attribute, but you want to ignore
-#' it.
+#' it. Larger edge weights correspond to stronger connections.
 #' @return \code{cluster_louvain} returns a \code{\link{communities}}
 #' object, please see the \code{\link{communities}} manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
@@ -1557,6 +1565,7 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' @param weights Optional positive weight vector for optimizing weighted
 #' modularity. If the graph has a \code{weight} edge attribute, then this is
 #' used by default. Supply \code{NA} to ignore the weights of a weighted graph.
+#' Larger edge weights correspond to stronger connections.
 #' @return \code{cluster_optimal} returns a \code{\link{communities}} object,
 #' please see the \code{\link{communities}} manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1631,10 +1640,13 @@ cluster_optimal <- function(graph, weights=NULL) {
 #' The length must match the number of edges in the graph.  By default the
 #' \sQuote{\code{weight}} edge attribute is used as weights. If it is not
 #' present, then all edges are considered to have the same weight.
+#' Larger edge weights correspond to stronger connections.
 #' @param v.weights If not \code{NULL}, then a numeric vector of vertex
 #' weights. The length must match the number of vertices in the graph.  By
 #' default the \sQuote{\code{weight}} vertex attribute is used as weights. If
 #' it is not present, then all vertices are considered to have the same weight.
+#' A larger vertex weight means a larger probability that the random surfer
+#' jumps to that vertex.
 #' @param nb.trials The number of attempts to partition the network (can be any
 #' integer value equal or larger than 1).
 #' @param modularity Logical scalar, whether to calculate the modularity score

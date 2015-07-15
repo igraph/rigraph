@@ -15,12 +15,12 @@ cluster_leading_eigen(graph, steps = -1, weights = NULL, start = NULL,
 symmetric matrix.}
 
 \item{steps}{The number of steps to take, this is actually the number of
-tries to make a step. It is not a particularly useful parameter.
-#'}
+tries to make a step. It is not a particularly useful parameter.}
 
 \item{weights}{An optional weight vector. The \sQuote{weight} edge attribute
 is used if present. Supply \sQuote{\code{NA}} here if you want to ignore the
-\sQuote{weight} edge attribute.}
+\sQuote{weight} edge attribute. Larger edge weights correspond to stronger
+connections between vertices.}
 
 \item{start}{\code{NULL}, or a numeric membership vector, giving the start
 configuration of the algorithm.}

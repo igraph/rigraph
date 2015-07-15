@@ -15,7 +15,8 @@ max_flow(graph, source, target, capacity = NULL)
 \item{target}{The id of the target vertex (sometimes also called sink).}
 
 \item{capacity}{Vector giving the capacity of the edges. If this is
-\code{NULL} (the default) then the \code{capacity} edge attribute is used.}
+\code{NULL} (the default) then the \code{capacity} edge attribute is used.
+Note that the \code{weight} edge attribute is not used by this function.}
 }
 \value{
 A named list with components:

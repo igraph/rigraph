@@ -75,7 +75,7 @@
 #'   E(g)[ width == 2 ]$color <- "#E495A5"
 #'   plot(g, layout=co)
 #' }
-#' #' @export
+#' @export
 
 graphlet_basis <- function(graph, weights=NULL) {
   ## Argument checks

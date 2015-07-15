@@ -773,7 +773,8 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' determining the shortest paths.
 #' @param weights Optional positive weight vector for calculating weighted
 #' betweenness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default.
+#' used by default. Weights are used to calculate weighted shortest paths,
+#' so they are interpreted as distances.
 #' @param nobigint Logical scalar, whether to use big integers during the
 #' calculation. This is only required for lattice-like graphs that have very
 #' many shortest paths between a pair of vertices. If \code{TRUE} (the
@@ -2471,7 +2472,8 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' \eqn{n-1}, where \eqn{n} is the number of vertices in the graph.
 #' @param weights Optional positive weight vector for calculating weighted
 #' closeness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default.
+#' used by default. Weights are used for calculating weighted shortest
+#' paths, so they are interpreted as distances.
 #' @return Numeric vector with the closeness values of all the vertices in
 #' \code{v}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -2662,6 +2664,8 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 #' @param weights Potential edge weights. If the graph has an edge
 #' attribute called \sQuote{\code{weight}}, and this argument is
 #' \code{NULL}, then the edge attribute is used automatically.
+#' In weighed matching, the weights of the edges must match as
+#' much as possible.
 #' @param eps A small real number used in equality tests in the weighted
 #' bipartite matching algorithm. Two real numbers are considered equal in
 #' the algorithm if their difference is smaller than \code{eps}. This is
@@ -2841,6 +2845,8 @@ which_mutual <- which_mutual
 #' vertex strength (see \code{\link{strength}}) is used instead of vertex
 #' degree. But note that \code{knnk} is still given in the function of the
 #' normal vertex degree.
+#' Weights are are used to calculate a weighted degree (also called
+#' \code{\link{strength}}) instead of the degree.
 #' @return A list with two members: \item{knn}{A numeric vector giving the
 #' average nearest neighbor degree for all vertices in \code{vids}.}
 #' \item{knnk}{A numeric vector, its length is the maximum (total) vertex

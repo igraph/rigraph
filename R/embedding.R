@@ -49,9 +49,10 @@
 #' spectral embedding. Should be smaller than the number of vertices. The
 #' largest \code{no}-dimensional non-zero singular values are used for the
 #' spectral embedding.
-#' @param weights Optional positive weight vector for calculating weighted
-#' closeness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default.
+#' @param weights Optional positive weight vector for calculating a weighted
+#' embedding. If the graph has a \code{weight} edge attribute, then this is
+#' used by default. In a weighted embedding, the edge weights are used instead
+#' of the binary adjacencny matrix.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
 #' use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
 #' the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
@@ -166,9 +167,11 @@ dim_select <- dim_select
 #' spectral embedding. Should be smaller than the number of vertices. The
 #' largest \code{no}-dimensional non-zero singular values are used for the
 #' spectral embedding.
-#' @param weights Optional positive weight vector for calculating weighted
-#' closeness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default.
+#' @param weights Optional positive weight vector for calculating a weighted
+#' embedding. If the graph has a \code{weight} edge attribute, then this is
+#' used by default. For weighted embedding, edge weights are used instead
+#' of the binary adjacency matrix, and vertex stregth (see
+#' \code{\link{strength}}) is used instead of the degrees.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
 #' use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
 #' the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest

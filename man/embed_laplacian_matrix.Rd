@@ -17,9 +17,11 @@ spectral embedding. Should be smaller than the number of vertices. The
 largest \code{no}-dimensional non-zero singular values are used for the
 spectral embedding.}
 
-\item{weights}{Optional positive weight vector for calculating weighted
-closeness. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
+\item{weights}{Optional positive weight vector for calculating a weighted
+embedding. If the graph has a \code{weight} edge attribute, then this is
+used by default. For weighted embedding, edge weights are used instead
+of the binary adjacency matrix, and vertex stregth (see
+\code{\link{strength}}) is used instead of the degrees.}
 
 \item{which}{Which eigenvalues (or singular values, for directed graphs) to
 use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is

@@ -25,7 +25,8 @@ graphs.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 closeness. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
+used by default. Weights are used for calculating weighted shortest
+paths, so they are interpreted as distances.}
 
 \item{normalized}{Logical scalar, whether to calculate the normalized
 closeness. Normalization is performed by multiplying the raw closeness by

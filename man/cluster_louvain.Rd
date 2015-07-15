@@ -13,7 +13,7 @@ cluster_louvain(graph, weights = NULL)
 \item{weights}{Optional positive weight vector.  If the graph has a
 \code{weight} edge attribute, then this is used by default. Supply \code{NA}
 here if the graph has a \code{weight} edge attribute, but you want to ignore
-it.}
+it. Larger edge weights correspond to stronger connections.}
 }
 \value{
 \code{cluster_louvain} returns a \code{\link{communities}}

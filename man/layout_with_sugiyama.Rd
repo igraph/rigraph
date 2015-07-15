@@ -29,7 +29,9 @@ you have too many edge crossings, increase this.}
 
 \item{weights}{Optional edge weight vector. If \code{NULL}, then the
 'weight' edge attribute is used, if there is one. Supply \code{NA} here and
-igraph ignores the edge weights.}
+igraph ignores the edge weights. These are used only if the graph
+contains cycles; igraph will tend to reverse edges with smaller weights
+when breaking the cycles.}
 
 \item{attributes}{Which graph/vertex/edge attributes to keep in the extended
 graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},

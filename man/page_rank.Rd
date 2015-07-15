@@ -45,7 +45,10 @@ to give edge weights for calculating the weighted PageRank of vertices. If
 this is \code{NULL} and the graph has a \code{weight} edge attribute then
 that is used. If \code{weights} is a numerical vector then it used, even if
 the graph has a \code{weights} edge attribute. If this is \code{NA}, then no
-edge weights are used (even if the graph has a \code{weight} edge attribute.}
+edge weights are used (even if the graph has a \code{weight} edge attribute.
+This function interprets edge weights as connection strengths. In the
+random surfer model, an edge with a larger weigth is more likely to be
+selected by the surfer.}
 
 \item{options}{Either a named list, to override some ARPACK options. See
 \code{\link{arpack}} for details; or a named list to override the default

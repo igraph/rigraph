@@ -94,6 +94,5 @@ for (i in 1:length(gl$cliques)) {
   E(g)[ width == 2 ]$color <- "#E495A5"
   plot(g, layout=co)
 }
-#'
 }
 

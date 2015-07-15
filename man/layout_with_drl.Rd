@@ -32,7 +32,8 @@ below.}
 
 \item{weights}{Optional edge weights. Supply \code{NULL} here if you want to
 weight edges equally. By default the \code{weight} edge attribute is used if
-the graph has one.}
+the graph has one. Larger weights correspond to stronger connections,
+and the vertices will be placed closer to each other.}
 
 \item{fixed}{Logical vector, it can be used to fix some vertices. All
 vertices for which it is \code{TRUE} are kept at the coordinates supplied in

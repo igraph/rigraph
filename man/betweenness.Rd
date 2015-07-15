@@ -32,7 +32,8 @@ betweenness. If zero or negative then there is no such limit.}
 
 \item{weights}{Optional positive weight vector for calculating weighted
 betweenness. If the graph has a \code{weight} edge attribute, then this is
-used by default.}
+used by default. Weights are used to calculate weighted shortest paths,
+so they are interpreted as distances.}
 
 \item{nobigint}{Logical scalar, whether to use big integers during the
 calculation. This is only required for lattice-like graphs that have very

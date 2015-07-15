@@ -12,7 +12,9 @@ cluster_walktrap(graph, weights = E(graph)$weight, steps = 4,
 \item{graph}{The input graph, edge directions are ignored in directed
 graphs.}
 
-\item{weights}{The edge weights.}
+\item{weights}{The edge weights. Larger edge weights increase the
+probability that an edge is selected by the random walker. In other
+words, larger edge weights correspond to stronger connections.}
 
 \item{steps}{The length of the random walks to perform.}
 

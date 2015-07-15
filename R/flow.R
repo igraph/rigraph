@@ -572,6 +572,7 @@ min_st_separators <- min_st_separators
 #' @param target The id of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
 #' \code{NULL} (the default) then the \code{capacity} edge attribute is used.
+#' Note that the \code{weight} edge attribute is not used by this function.
 #' @return A named list with components:
 #'   \item{value}{A numeric scalar, the value of the maximum flow.}
 #'   \item{flow}{A numeric vector, the flow itself, one entry for each

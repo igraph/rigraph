@@ -19,7 +19,8 @@ ignored during the computation.}
 graph has no \sQuote{\code{type}} vertex attribute.}
 
 \item{multiplicity}{If \code{TRUE}, then igraph keeps the multiplicity of
-the edges as an edge attribute. E.g. if there is an A-C-B and also an A-D-B
+the edges as an edge attribute called \sQuote{weight}.
+E.g. if there is an A-C-B and also an A-D-B
 triple in the bipartite graph (but no more X, such that A-X-B is also in the
 graph), then the multiplicity of the A-B edge in the projection will be 2.}
 

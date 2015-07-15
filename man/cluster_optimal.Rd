@@ -13,7 +13,8 @@ graphs.}
 
 \item{weights}{Optional positive weight vector for optimizing weighted
 modularity. If the graph has a \code{weight} edge attribute, then this is
-used by default. Supply \code{NA} to ignore the weights of a weighted graph.}
+used by default. Supply \code{NA} to ignore the weights of a weighted graph.
+Larger edge weights correspond to stronger connections.}
 }
 \value{
 \code{cluster_optimal} returns a \code{\link{communities}} object,

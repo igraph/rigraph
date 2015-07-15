@@ -23,7 +23,8 @@ community structures along the merges.}
 \item{weights}{If not \code{NULL}, then a numeric vector of edge weights.
 The length must match the number of edges in the graph.  By default the
 \sQuote{\code{weight}} edge attribute is used as weights. If it is not
-present, then all edges are considered to have the same weight.}
+present, then all edges are considered to have the same weight.
+Larger edge weights correspond to stronger connections.}
 }
 \value{
 \code{cluster_fast_greedy} returns a \code{\link{communities}}

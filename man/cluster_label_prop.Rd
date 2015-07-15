@@ -13,7 +13,8 @@ cluster_label_prop(graph, weights = NULL, initial = NULL, fixed = NULL)
 \item{weights}{An optional weight vector. It should contain a positive
 weight for all the edges. The \sQuote{weight} edge attribute is used if
 present. Supply \sQuote{\code{NA}} here if you want to ignore the
-\sQuote{weight} edge attribute.}
+\sQuote{weight} edge attribute. Larger edge weights correspond to
+stronger connections.}
 
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an

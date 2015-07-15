@@ -13,7 +13,9 @@ cluster_edge_betweenness(graph, weights = E(graph)$weight, directed = TRUE,
 \item{graph}{The graph to analyze.}
 
 \item{weights}{The edge weights. Supply \code{NULL} to omit edge weights. By
-default the \sQuote{\code{weight}} edge attribute is used, if it is present.}
+default the \sQuote{\code{weight}} edge attribute is used, if it is present.
+Edge weights are used to calculate weighted edge betweenness. This means
+that edges are interpreted as distances, not as connection strengths.}
 
 \item{directed}{Logical constant, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}
