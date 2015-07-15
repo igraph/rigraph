@@ -431,6 +431,8 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' \code{weight} edge attribute. Note that if there are negative edge weights
 #' and the direction of the edges is considered, then the eigenvector might be
 #' complex. In this case only the real part is reported.
+#' This function interprets weights as connection strength. Higher
+#' weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details.
 #' @return A named list with components: \item{vector}{A vector containing the
@@ -559,6 +561,9 @@ diversity <- diversity
 #' @param weights Optional positive weight vector for calculating weighted
 #' scores. If the graph has a \code{weight} edge attribute, then this is used
 #' by default.
+#' This function interprets edge weights as connection strengths. In the
+#' random surfer model, an edge with a larger weigth is more likely to be
+#' selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details.
 #' @return A named list with members:
@@ -606,6 +611,9 @@ hub_score <- hub_score
 #' @param weights Optional positive weight vector for calculating weighted
 #' scores. If the graph has a \code{weight} edge attribute, then this is used
 #' by default.
+#' This function interprets edge weights as connection strengths. In the
+#' random surfer model, an edge with a larger weigth is more likely to be
+#' selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details.
 #' @return A named list with members:
@@ -703,6 +711,9 @@ authority_score <- authority_score
 #' that is used. If \code{weights} is a numerical vector then it used, even if
 #' the graph has a \code{weights} edge attribute. If this is \code{NA}, then no
 #' edge weights are used (even if the graph has a \code{weight} edge attribute.
+#' This function interprets edge weights as connection strengths. In the
+#' random surfer model, an edge with a larger weigth is more likely to be
+#' selected by the surfer.
 #' @param options Either a named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details; or a named list to override the default
 #' options for the power method (if \code{algo="power"}).  The default options

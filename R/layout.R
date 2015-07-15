@@ -978,6 +978,8 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @param weights A vector giving edge weights. The \code{weight} edge
 #' attribute is used by default, if present. If weights are given, then the
 #' attraction along the edges will be multiplied by the given edge weights.
+#' This places vertices connected with a highly weighted edge closer to
+#' each other.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.
@@ -1286,6 +1288,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #' Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
+#' Note that this is opposite to \code{\link{layout_with_fr}}.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.
@@ -1576,7 +1579,9 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' you have too many edge crossings, increase this.
 #' @param weights Optional edge weight vector. If \code{NULL}, then the
 #' 'weight' edge attribute is used, if there is one. Supply \code{NA} here and
-#' igraph ignores the edge weights.
+#' igraph ignores the edge weights. These are used only if the graph
+#' contains cycles; igraph will tend to reverse edges with smaller weights
+#' when breaking the cycles.
 #' @param attributes Which graph/vertex/edge attributes to keep in the extended
 #' graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
 #' \sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
