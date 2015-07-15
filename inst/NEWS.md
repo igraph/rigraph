@@ -20,7 +20,8 @@ July xx, 2015
 - Plot: no error for unknown graphical parameters.
 - Import functions from base packages, to eliminate
   `R CMD check` `NOTE`s.
-
+- Readd support for edge weights in Fruchterman-Reingold layout
+  
 # igraph 1.0.1
 
 June 26, 2015
