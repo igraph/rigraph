@@ -157,6 +157,7 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' igraph_opt("verbose")
 #' 
 #' @export
+#' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
 
 igraph_options <- function(...) {
@@ -212,4 +213,26 @@ igraph_opt <- function(x, default = NULL) {
   } else {
     get_config(paste0("igraph::", x), default)
   }
+}
+
+
+#' Run code with a temporary igraph options setting
+#'
+#' @param options A named list of the options to change.
+#' @param code The code to run.
+#' @return The result of the \code{code}.
+#'
+#' @export
+#' @family igraph options
+#' @examples
+#' with_igraph_opt(
+#'   list(sparsematrices = FALSE),
+#'   make_ring(10)[]
+#' )
+#' igraph_opt("sparsematrices")
+
+with_igraph_opt <- function(options, code) {
+  on.exit(igraph_options(old))
+  old <- igraph_options(options)
+  force(code)
 }
