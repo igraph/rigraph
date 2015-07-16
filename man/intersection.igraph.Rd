@@ -54,7 +54,7 @@ undirected.
 net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
                   H-F:G, H-I-J)
 net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
-str(net1 \%s\% net2)
+print_all(net1 \%s\% net2)
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

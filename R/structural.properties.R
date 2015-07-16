@@ -2699,12 +2699,12 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 #' is_max_matching(g, m3)
 #' 
 #' V(g)$type <- c(FALSE,TRUE)
-#' str(g, v=TRUE)
+#' print_all(g, v=TRUE)
 #' max_bipartite_match(g)
 #' 
 #' g2 <- graph_from_literal( a-b-c-d-e-f-g )
 #' V(g2)$type <- rep(c(FALSE,TRUE), length=vcount(g2))
-#' str(g2, v=TRUE)
+#' print_all(g2, v=TRUE)
 #' max_bipartite_match(g2)
 #' #' @keywords graphs
 #' @export

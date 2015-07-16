@@ -54,7 +54,7 @@ V(wheel)$name <- letters[seq_len(vcount(wheel))]
 sstar <- make_star(6, center=6, mode="undirected")
 V(sstar)$name <- letters[c(1,3,5,7,9,11)]
 G <- wheel \%m\% sstar
-str(G)
+print_all(G)
 plot(G, layout=layout_nicely(wheel))
 }
 \author{

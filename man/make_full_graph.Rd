@@ -27,7 +27,7 @@ Create a full graph
 }
 \examples{
 make_full_graph(5)
-str(make_full_graph(4, directed = TRUE))
+print_all(make_full_graph(4, directed = TRUE))
 }
 \seealso{
 Other determimistic constructors: \code{\link{atlas}},

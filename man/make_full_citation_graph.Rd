@@ -26,7 +26,7 @@ directed graph, where every \code{i->j} edge is present if and only if
 \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
 }
 \examples{
-str(make_full_citation_graph(10))
+print_all(make_full_citation_graph(10))
 }
 \seealso{
 Other determimistic constructors: \code{\link{atlas}},

@@ -247,7 +247,7 @@ if (loadIfYouCan("XML") && loadIfYouCan("png") &&
 
   musnet <- simplify(graph_from_data_frame(edges, dir=FALSE,
                      vertices=data.frame(name=c(ego$name, ego$similar))))
-  str(musnet)
+  print_all(musnet)
 
   V(musnet)$raster <- c(list(ego$image), lapply(similar, "[[", "image"))
   plot(musnet, layout=layout_as_star, vertex.shape="raster",

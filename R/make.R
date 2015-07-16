@@ -953,7 +953,7 @@ star <- function(...) constructor_spec(make_star, ...)
 #' @export
 #' @examples
 #' make_full_graph(5)
-#' str(make_full_graph(4, directed = TRUE))
+#' print_all(make_full_graph(4, directed = TRUE))
 
 make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -1054,8 +1054,8 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' str(make_ring(10))
-#' str(make_ring(10, directed = TRUE, mutual = TRUE))
+#' print_all(make_ring(10))
+#' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 
 make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
@@ -1508,7 +1508,7 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' @family determimistic constructors
 #' @export
 #' @examples
-#' str(make_full_citation_graph(10))
+#' print_all(make_full_citation_graph(10))
 
 make_full_citation_graph <- function(n, directed=TRUE) {
   # Argument checks

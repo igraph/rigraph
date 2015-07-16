@@ -32,8 +32,8 @@ A ring is a one-dimensional lattice and this function is a special case
 of \code{\link{make_lattice}}.
 }
 \examples{
-str(make_ring(10))
-str(make_ring(10, directed = TRUE, mutual = TRUE))
+print_all(make_ring(10))
+print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 }
 \seealso{
 Other determimistic constructors: \code{\link{atlas}},

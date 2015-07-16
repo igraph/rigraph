@@ -23,7 +23,7 @@ g <- make_ring(10)
 g \%>\%
   rewire(each_edge(p = .1, loops = FALSE)) \%>\%
   plot(layout=layout_in_circle)
-str(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 }
 \seealso{
 Other rewiring functions: \code{\link{each_edge}};

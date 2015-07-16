@@ -27,7 +27,7 @@ g <- make_ring(10)
 g \%>\%
   rewire(keeping_degseq(niter = 20)) \%>\%
   degree()
-str(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

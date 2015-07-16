@@ -48,7 +48,7 @@ g1 <- make_star(10, mode="undirected")
 V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]
-str(g1 \%du\% g2)
+print_all(g1 \%du\% g2)
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
