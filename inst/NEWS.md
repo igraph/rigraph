@@ -1,5 +1,5 @@
 
-# igraph 1.0.2
+# igraph 1.1.0
 
 July xx, 2015
 
