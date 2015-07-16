@@ -33,8 +33,8 @@ marks the result for printing vertex attributes.
 When using multiple indices within the bracket, all of them
 are evaluated independently, and then the results are concatenated
 using the \code{c()} function (except for the \code{na_ok} argument,
-which is special an must be named. E.g. \code{V(g)[1, 2, nei(1)]}
-is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[nei(1)])}.
+which is special an must be named. E.g. \code{V(g)[1, 2, .nei(1)]}
+is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
 }
 
 \section{Index types}{
@@ -68,20 +68,20 @@ attribute, then \code{V(g)[name == "foo"]} is equivalent to
 
 There are some special igraph functions that can be used only
 in expressions indexing vertex sequences: \describe{
-  \item{\code{nei}}{takes a vertex sequence as its argument
+  \item{\code{.nei}}{takes a vertex sequence as its argument
     and selects neighbors of these vertices. An optional \code{mode}
     argument can be used to select successors (\code{mode="out"}), or
     precedessors (\code{mode="in"}) in directed graphs.}
-  \item{\code{inc}}{Takes an edge sequence as an argument, and
+  \item{\code{.inc}}{Takes an edge sequence as an argument, and
     selects vertices that have at least one incident edge in this
     edge sequence.}
-  \item{\code{from}}{Similar to \code{inc}, but only considers the
+  \item{\code{.from}}{Similar to \code{.inc}, but only considers the
     tails of the edges.}
-  \item{\code{to}}{Similar to \code{inc}, but only considers the
+  \item{\code{.to}}{Similar to \code{.inc}, but only considers the
     heads of the edges.}
-  \item{\code{innei}, \code{outnei}}{\code{innei(v)} is a shorthand for
-    \code{nei(v, mode = "in")}, and \code{outnei(v)} is a shorthand for
-    \code{nei(v, mode = "out")}.
+  \item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
+    \code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
+    \code{.nei(v, mode = "out")}.
   }
 }
 Note that multiple special functions can be used together, or with
@@ -107,16 +107,16 @@ plot(g)
 # -----------------------------------------------------------------
 # nei() special function
 g <- graph( c(1,2, 2,3, 2,4, 4,2) )
-V(g)[ nei( c(2,4) ) ]
-V(g)[ nei( c(2,4), "in") ]
-V(g)[ nei( c(2,4), "out") ]
+V(g)[ .nei( c(2,4) ) ]
+V(g)[ .nei( c(2,4), "in") ]
+V(g)[ .nei( c(2,4), "out") ]
 
 # -----------------------------------------------------------------
 # The same with vertex names
 g <- graph(~ A -+ B, B -+ C:D, D -+ B)
-V(g)[ nei( c('B', 'D') ) ]
-V(g)[ nei( c('B', 'D'), "in" ) ]
-V(g)[ nei( c('B', 'D'), "out" ) ]
+V(g)[ .nei( c('B', 'D') ) ]
+V(g)[ .nei( c('B', 'D'), "in" ) ]
+V(g)[ .nei( c('B', 'D'), "out" ) ]
 }
 \seealso{
 Other vertex and edge sequence operations: \code{\link{[.igraph.es}},

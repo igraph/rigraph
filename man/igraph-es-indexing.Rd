@@ -67,12 +67,12 @@ than one weight. See more examples below.
 
 There are some special igraph functions that can be used
 only in expressions indexing edge sequences: \describe{
-  \item{\code{inc}}{takes a vertex sequence, and selects
+  \item{\code{.inc}}{takes a vertex sequence, and selects
     all edges that have at least one incident vertex in the vertex
     sequence.}
-  \item{\code{from}}{similar to \code{inc()}, but only
+  \item{\code{.from}}{similar to \code{.inc()}, but only
     the tails of the edges are considered.}
-  \item{\code{to}}{is similar to \code{inc()}, but only
+  \item{\code{.to}}{is similar to \code{.inc()}, but only
     the heads of the edges are considered.}
   \item{\code{\%--\%}}{a special operator that can be
     used to select all edges between two sets of vertices. It ignores
