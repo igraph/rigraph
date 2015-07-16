@@ -8,6 +8,10 @@ July xx, 2015
   to `FALSE` in its `.onLoad()` function, and then igraph will return
   plain numeric vectors instead of vertex/edge sequences
   *if called from this package*.
+- `igraph_options()` returns the *old* values of the updated options,
+  this is actually useful, returning the new values was not.
+- `with_igraph_opt()` function to temporarily change values of
+  igraph options.
 - `get.edge()` is deprecated, use `ends()` instead. (This was already the case
   for igraph 1.0.0, but we forgot to add a NEWS point for it.)
 - Do not redefine `.Call()`, to make native calls faster.
@@ -21,7 +25,10 @@ July xx, 2015
 - Import functions from base packages, to eliminate
   `R CMD check` `NOTE`s.
 - Readd support for edge weights in Fruchterman-Reingold layout
-  
+- Check membershiph vector in `modularity()`.
+- Rename `str.igraph()` to `print_all()`.
+- Use the igraph version in exported graphs, instread of @VERSION@ #75.
+
 # igraph 1.0.1
 
 June 26, 2015
