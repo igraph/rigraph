@@ -406,10 +406,9 @@ printer_callback <- printr$printer_callback
   cat(alstr, sep="\n")
 }
 
-#' @method str igraph
 #' @export
 
-str.igraph <- function(object, ...) {
+print_all <- function(object, ...) {
   print.igraph(object, full=TRUE, ...)
 }
 
@@ -423,15 +422,15 @@ str.igraph <- function(object, ...) {
 #' \code{summary.igraph} prints the number of vertices, edges and whether the
 #' graph is directed.
 #' 
-#' \code{str.igraph} prints the same information, and also lists the edges, and
+#' \code{print_all} prints the same information, and also lists the edges, and
 #' optionally graph, vertex and/or edge attributes.
 #' 
 #' \code{print.igraph} behaves either as \code{summary.igraph} or
-#' \code{str.igraph} depending on the \code{full} argument. See also the
+#' \code{print_all} depending on the \code{full} argument. See also the
 #' \sQuote{print.full} igraph option and \code{\link{igraph_opt}}.
 #' 
 #' The graph summary printed by \code{summary.igraph} (and \code{print.igraph}
-#' and \code{str.igraph}) consists one or more lines. The first line contains
+#' and \code{print_all}) consists one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
 #' Here is an example, a small star graph with weighed directed edges and named
 #' vertices: \preformatted{    IGRAPH DNW- 10 9 -- In-star
@@ -457,10 +456,10 @@ str.igraph <- function(object, ...) {
 #' (\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical
 #' (\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
 #' 
-#' As of igraph 0.4 \code{str.igraph} and \code{print.igraph} use the
+#' As of igraph 0.4 \code{print_all} and \code{print.igraph} use the
 #' \code{max.print} option, see \code{\link[base]{options}} for details.
 #' 
-#' @aliases print.igraph str.igraph summary.igraph
+#' @aliases print.igraph print_all summary.igraph
 #' @param x The graph to print.
 #' @param full Logical scalar, whether to print the graph structure itself as
 #' well.

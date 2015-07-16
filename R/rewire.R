@@ -39,7 +39,7 @@
 #' g %>%
 #'   rewire(each_edge(p = .1, loops = FALSE)) %>%
 #'   plot(layout=layout_in_circle)
-#' str(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+#' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 
 rewire <- function(graph, with) {
   if (! is(with, "igraph_rewiring_method")) {
@@ -73,7 +73,7 @@ rewire <- function(graph, with) {
 #' g %>%
 #'   rewire(keeping_degseq(niter = 20)) %>%
 #'   degree()
-#' str(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
+#' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 
 keeping_degseq <- function(loops = FALSE, niter = 100) {
   method <- list(

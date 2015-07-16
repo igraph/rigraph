@@ -101,7 +101,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' V(g1)$name <- letters[1:10]
 #' g2 <- make_ring(10)
 #' V(g2)$name <- letters[11:20]
-#' str(g1 %du% g2)
+#' print_all(g1 %du% g2)
 #' @export
 
 disjoint_union <- function(...) {
@@ -336,7 +336,7 @@ union.default <- function(...) {
 #' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
 #'                   H-F:G, H-I-J)
 #' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
-#' str(net1 %u% net2)
+#' print_all(net1 %u% net2)
 
 union.igraph <- function(..., byname="auto") {
   .igraph.graph.union.or.intersection("R_igraph_union", ..., byname=byname,
@@ -412,7 +412,7 @@ intersection <- function(...)
 #' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
 #'                   H-F:G, H-I-J)
 #' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
-#' str(net1 %s% net2)
+#' print_all(net1 %s% net2)
 
 intersection.igraph <- function(..., byname="auto",
                                 keep.all.vertices=TRUE) {
@@ -491,7 +491,7 @@ difference <- function(...)
 #' sstar <- make_star(6, center=6, mode="undirected")
 #' V(sstar)$name <- letters[c(1,3,5,7,9,11)]
 #' G <- wheel %m% sstar
-#' str(G)
+#' print_all(G)
 #' plot(G, layout=layout_nicely(wheel))
 
 difference.igraph <- function(big, small, byname="auto", ...) {
@@ -646,8 +646,8 @@ complementer <- function(graph, loops=FALSE) {
 #' g1 <- make_ring(10)
 #' g2 <- make_star(10, mode="undirected")
 #' gc <- compose(g1, g2)
-#' str(gc)
-#' str(simplify(gc))
+#' print_all(gc)
+#' print_all(simplify(gc))
 #' 
 compose <- function(g1, g2, byname="auto") {
 

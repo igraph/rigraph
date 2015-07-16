@@ -77,8 +77,7 @@ NULL
 #'   details.
 #' 
 #'   If you want to see the edges of the graph as well, then use the
-#'   \code{\link{str.igraph}} function, it is of course enough to type
-#'   \code{str} instead of \code{str.igraph}: \preformatted{    > str(g)
+#'   \code{\link{print_all}} function: \preformatted{    > print_all(g)
 #'     IGRAPH U--- 10 10 -- Ring graph
 #'     + attr: name (g/c), mutual (g/x), circular (g/x)
 #'     + edges:
