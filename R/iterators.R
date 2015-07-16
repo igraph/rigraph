@@ -92,6 +92,52 @@ add_vses_graph_ref <- function(vses, graph) {
   vses
 }
 
+#' Get the id of a graph
+#'
+#' Graph ids are used to check that a vertex or edge sequence
+#' belongs to a graph. If you create a new graph by changing the
+#' structure of a graph, the new graph will have a new id.
+#' Changing the attributes will not change the id.
+#'
+#' @param x A graph or a vertex sequence or an edge sequence.
+#' @param ... Not used currently.
+#' @return The id of the graph, a character scalar. For
+#' vertex and edge sequences the id of the graph they were created from.
+#'
+#' @export
+#' @examples
+#' g <- make_ring(10)
+#' graph_id(g)
+#' graph_id(V(g))
+#' graph_id(E(g))
+#'
+#' g2 <- g + 1
+#' graph_id(g2)
+
+graph_id <- function(x, ...)
+  UseMethod("graph_id")
+
+#' @method graph_id igraph
+#' @export
+
+graph_id.igraph <- function(x, ...) {
+  get_graph_id(x)
+}
+
+#' @method graph_id igraph.vs
+#' @export
+
+graph_id.igraph.vs <- function(x, ...) {
+  get_vs_graph_id(x) %||% NA_character_
+}
+
+#' @method graph_id igraph.es
+#' @export
+
+graph_id.igraph.es <- function(x, ...) {
+  get_es_graph_id(x) %||% NA_character_
+}
+
 #' Vertices of a graph
 #'
 #' Create a vertex sequence (vs) containing all vertices of a graph.
@@ -1068,11 +1114,15 @@ print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
 
   graph <- get_vs_graph(x)
   len <- length(x)
+  id <- graph_id(x)
 
   title <- "+ " %+% chr(len) %+% "/" %+%
     (if (is.null(graph)) "?" else chr(vcount(graph))) %+%
     (if (len == 1) " vertex" else " vertices") %+%
-    (if (!is.null(names(x))) ", named" else "") %+% ":\n"
+    (if (!is.null(names(x))) ", named" else "") %+%
+    (if (!is.na(id)) paste(", from", substr(id, 1, 7)) else "") %+%
+    (if (is.null(graph)) " (deleted)" else "") %+%
+    ":\n"
   cat(title)
 
   if (!is.null(attr(x, "single")) && attr(x, "single") &&
