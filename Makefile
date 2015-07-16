@@ -65,7 +65,7 @@ src/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 
 # R source and doc files
 
-RSRC := $(shell git ls-files R man inst demo NEWS configure.ac configure.win)
+RSRC := $(shell git ls-files R man inst demo NEWS configure.win)
 
 # ARPACK Fortran sources
 
@@ -170,6 +170,9 @@ OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(GLPK) $(RAY) $(UUID)   |     \
 
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@
+
+configure.ac: %: tools/stimulus/%
+	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
 
 src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
