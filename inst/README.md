@@ -15,6 +15,7 @@ For the development version, you can use Github, with the `devtools`
 package:
 
 ```r
+devtools::install_github("gaborcsardi/pkgconfig")
 devtools::install_github("igraph/rigraph")
 ```
 
