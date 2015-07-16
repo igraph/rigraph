@@ -78,7 +78,7 @@ NULL
 #' 
 #'   If you want to see the edges of the graph as well, then use the
 #'   \code{\link{print_all}} function: \preformatted{    > print_all(g)
-#'     IGRAPH U--- 10 10 -- Ring graph
+#'     IGRAPH badcafe U--- 10 10 -- Ring graph
 #'     + attr: name (g/c), mutual (g/x), circular (g/x)
 #'     + edges:
 #'      [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10 }
