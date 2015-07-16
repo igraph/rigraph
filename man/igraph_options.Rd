@@ -23,9 +23,9 @@ arguments may be in the \code{name=value} form, or no argument at all may be
 given. See the Value and Details sections for explanation.}
 }
 \value{
-\code{igraph_options} returns a list with the updated values of the
-parameters. If the argument list is not empty, the returned list is
-invisible.
+\code{igraph_options} returns a list with the old values of the
+updated parameters, invisibly. Without any arguments, it returns the
+values of all options.
 
 For \code{igraph_opt}, the current value set for option \code{x}, or
 \code{NULL} if the option is unset.
@@ -96,9 +96,14 @@ The currently used parameters in alphabetical order:
 }
 \examples{
 oldval <- igraph_opt("verbose")
-igraph_options(verbose=TRUE)
+igraph_options(verbose = TRUE)
 layout_with_kk(make_ring(10))
-igraph_options(verbose=oldval)
+igraph_options(verbose = oldval)
+
+oldval <- igraph_options(verbose = TRUE, sparsematrices = FALSE)
+make_ring(10)[]
+igraph_options(oldval)
+igraph_opt("verbose")
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
@@ -106,6 +111,8 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 \seealso{
 \code{igraph_options} is similar to \code{\link{options}} and
 \code{igraph_opt} is similar to \code{\link{getOption}}.
+
+Other igraph options: \code{\link{with_igraph_opt}}
 }
 \keyword{graphs}
 

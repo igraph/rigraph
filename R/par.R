@@ -134,9 +134,9 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @param default If the specified option is not set in the options list, this
 #' value is returned. This facilitates retrieving an option and checking
 #' whether it is set and setting it separately if not.
-#' @return \code{igraph_options} returns a list with the updated values of the
-#' parameters. If the argument list is not empty, the returned list is
-#' invisible.
+#' @return \code{igraph_options} returns a list with the old values of the
+#' updated parameters, invisibly. Without any arguments, it returns the
+#' values of all options.
 #' 
 #' For \code{igraph_opt}, the current value set for option \code{x}, or
 #' \code{NULL} if the option is unset.
@@ -147,10 +147,17 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @examples
 #' 
 #' oldval <- igraph_opt("verbose")
-#' igraph_options(verbose=TRUE)
+#' igraph_options(verbose = TRUE)
 #' layout_with_kk(make_ring(10))
-#' igraph_options(verbose=oldval)
+#' igraph_options(verbose = oldval)
+#'
+#' oldval <- igraph_options(verbose = TRUE, sparsematrices = FALSE)
+#' make_ring(10)[]
+#' igraph_options(oldval)
+#' igraph_opt("verbose")
+#' 
 #' @export
+#' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
 
 igraph_options <- function(...) {
@@ -175,10 +182,14 @@ igraph_options <- function(...) {
     temp[[cn]] <- igraph.pars.callbacks[[cn]](temp[[cn]])
   }
 
+  ## Old values
+  old <- lapply(names(temp), igraph_opt)
+  names(old) <- names(temp)
+
   ## Set them
   names(temp) <- paste0("igraph::", names(temp))
   do.call(set_config_in, c(temp, list(.in = parent.frame())))
-  invisible(lapply(names(temp), get_config))
+  invisible(old)
 }
 
 #' @importFrom pkgconfig set_config get_config
@@ -202,4 +213,26 @@ igraph_opt <- function(x, default = NULL) {
   } else {
     get_config(paste0("igraph::", x), default)
   }
+}
+
+
+#' Run code with a temporary igraph options setting
+#'
+#' @param options A named list of the options to change.
+#' @param code The code to run.
+#' @return The result of the \code{code}.
+#'
+#' @export
+#' @family igraph options
+#' @examples
+#' with_igraph_opt(
+#'   list(sparsematrices = FALSE),
+#'   make_ring(10)[]
+#' )
+#' igraph_opt("sparsematrices")
+
+with_igraph_opt <- function(options, code) {
+  on.exit(igraph_options(old))
+  old <- igraph_options(options)
+  force(code)
 }
