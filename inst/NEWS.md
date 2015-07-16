@@ -28,6 +28,10 @@ July xx, 2015
 - Check membershiph vector in `modularity()`.
 - Rename `str.igraph()` to `print_all()`.
 - Use the igraph version in exported graphs, instread of @VERSION@ #75.
+- Functions that can be used inside a `V()` or `E()` indexing
+  now begin with a dot. Old names are deprecated.
+  New names: `.nei()`, `.innei()`, `.outnei()`, `.inc()`, `.from()`,
+  `.to()`. #22
 
 # igraph 1.0.1
 
