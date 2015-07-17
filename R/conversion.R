@@ -579,7 +579,7 @@ as_graphnel <- function(graph) {
   }  
   
   names(al) <- name
-  res <- new("graphNEL", nodes=name, edgeL=al, edgemode=edgemode)
+  res <- graph::graphNEL(nodes=name, edgeL=al, edgemode=edgemode)
 
   ## Add graph attributes (other than 'directed')
   ## Are this "officially" supported at all?
