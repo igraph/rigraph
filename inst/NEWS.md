@@ -32,6 +32,8 @@ July xx, 2015
   now begin with a dot. Old names are deprecated.
   New names: `.nei()`, `.innei()`, `.outnei()`, `.inc()`, `.from()`,
   `.to()`. #22
+- Fix packages that convert graphs to graph::graphNEL: they
+  don't need to attach 'graph' manually any more.
 
 # igraph 1.0.1
 
