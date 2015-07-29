@@ -1616,9 +1616,10 @@ edge_density <- function(graph, loops=FALSE) {
         PACKAGE="igraph")
 }
 
+#' @rdname ego
 #' @export
 
-ego_size <- function(graph, order, nodes=V(graph),
+ego_size <- function(graph, order = 1, nodes=V(graph),
                               mode=c("all", "out", "in"), mindist=0) {
 
   if (!is_igraph(graph)) {
@@ -1686,22 +1687,22 @@ ego_size <- function(graph, order, nodes=V(graph),
 #' @examples
 #' 
 #' g <- make_ring(10)
-#' ego_size(g, 0, 1:3)
-#' ego_size(g, 1, 1:3)
-#' ego_size(g, 2, 1:3)
-#' ego(g, 0, 1:3)
-#' ego(g, 1, 1:3)
-#' ego(g, 2, 1:3)
+#' ego_size(g, order = 0, 1:3)
+#' ego_size(g, order = 1, 1:3)
+#' ego_size(g, order = 2, 1:3)
+#' ego(g, order = 0, 1:3)
+#' ego(g, order = 1, 1:3)
+#' ego(g, order = 2, 1:3)
 #' 
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
-#' make_ego_graph(g, 2, 1:3)
+#' make_ego_graph(g, order = 2, 1:3)
 #' 
 #' # connecting to the neighborhood
 #' g <- make_ring(10)
 #' g <- connect(g, 2)
 #' 
-ego <- function(graph, order, nodes=V(graph),
+ego <- function(graph, order = 1, nodes=V(graph),
                          mode=c("all", "out", "in"), mindist=0) {
   
   if (!is_igraph(graph)) {
@@ -1728,7 +1729,7 @@ ego <- function(graph, order, nodes=V(graph),
 #' @rdname ego
 #' @export
 
-make_ego_graph <- function(graph, order, nodes=V(graph),
+make_ego_graph <- function(graph, order = 1, nodes=V(graph),
                   mode=c("all", "out", "in"), mindist=0) {
 
   if (!is_igraph(graph)) {
