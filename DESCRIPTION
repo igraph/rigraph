@@ -32,4 +32,4 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'triangles.R' 'utils.R' 'uuid.R' 'versions.R' 'weakref.R'
         'zzz-deprecate.R'
 NeedsCompilation: yes
-Packaged: 2015-07-17 21:26:50 UTC; travis
+Packaged: 2015-07-29 20:18:49 UTC; travis
