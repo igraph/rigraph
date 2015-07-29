@@ -97,3 +97,11 @@ chr <- as.character
 drop_null <- function(x) {
   x [!sapply(x, is.null)]
 }
+
+safe_sample <- function(x, ...) {
+  if (length(x) == 1 && is.numeric(x)) {
+    unlist(sample(list(x), ...), recursive = FALSE, use.names = FALSE)
+  } else {
+    sample(x, ...)
+  }
+}
