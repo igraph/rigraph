@@ -54,7 +54,7 @@
 #' \code{get_diameter}. \code{farthest_vertices} returns a list with two
 #' entries: \itemize{
 #'   \item \code{vertices} The two vertices that are the farthest.
-#'   \item \code{distnace} Their distance.
+#'   \item \code{distance} Their distance.
 #' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{distances}}
