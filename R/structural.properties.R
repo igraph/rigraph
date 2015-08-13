@@ -621,7 +621,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' 
 #' \code{induced_subgraph} calculates the induced subgraph of a set of vertices
 #' in a graph. This means that exactly the specified vertices and all the edges
-#' between then will be kept in the result graph.
+#' between them will be kept in the result graph.
 #' 
 #' \code{subgraph.edges} calculates the subgraph of a graph. For this function
 #' one can specify the vertices and edges to keep. This function will be
