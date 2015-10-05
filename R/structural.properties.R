@@ -1665,7 +1665,7 @@ ego_size <- function(graph, order = 1, nodes=V(graph),
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
 #' @param nodes The vertices for which the calculation is performed.
-#' @param mode Character constatnt, it specifies how to use the direction of
+#' @param mode Character constant, it specifies how to use the direction of
 #' the edges if a directed graph is analyzed. For \sQuote{out} only the
 #' outgoing edges are followed, so all vertices reachable from the source
 #' vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
