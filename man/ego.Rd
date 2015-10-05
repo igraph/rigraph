@@ -28,7 +28,7 @@ make_ego_graph(graph, order = 1, nodes = V(graph), mode = c("all", "out",
 
 \item{nodes}{The vertices for which the calculation is performed.}
 
-\item{mode}{Character constatnt, it specifies how to use the direction of
+\item{mode}{Character constant, it specifies how to use the direction of
 the edges if a directed graph is analyzed. For \sQuote{out} only the
 outgoing edges are followed, so all vertices reachable from the source
 vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
