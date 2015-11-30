@@ -771,7 +771,6 @@ function (x1, y1, x2, y2,
       lambda <- as.logical(curved) * 0.5
     }
     lambda <- rep(lambda, length.out = length(x1))
-    print(lambda)
     c.x1 <- x1+x1d
     c.y1 <- y1+y1d
     c.x2 <- x2+x2d
