@@ -1534,7 +1534,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' algorithm, the routine may fail is certain cases.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{eigen_centrality}} and \code{\link{power_centrality}}
-#' @references Bonacich, P. and Paulette, L. (2001). ``Eigenvector-like
+#' @references Bonacich, P. and Lloyd, P. (2001). ``Eigenvector-like
 #' measures of centrality for asymmetric relations'' \emph{Social Networks},
 #' 23, 191-201.
 #' @export
