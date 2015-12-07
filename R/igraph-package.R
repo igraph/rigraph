@@ -26,13 +26,13 @@ NULL
 #'   result of the left hand side.
 #'
 #' @export
+#' @name %>%
 #' @rdname pipe
 #' @examples
 #' make_ring(10) %>%
 #'   add_edges(c(1,6)) %>%
 #'   plot()
-
-`%>%` <- magrittr::`%>%`
+NULL
 
 #' The igraph package
 #' 
