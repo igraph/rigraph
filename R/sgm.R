@@ -71,7 +71,7 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #'  B  <- as.matrix(get.adjacency(g2))
 #'  P  <-match_vertices (A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
 #'  P
-#'  #' @export
+#' @export
 
 match_vertices <- function(A, B, m, start, iteration) {
   ## Seeds are assumed to be vertices 1:m in both graphs
