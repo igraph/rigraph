@@ -78,8 +78,6 @@
   1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
 }
 
-indent_print <- printr$indent_print
-
 #' @importFrom utils capture.output
 
 .print.graph.attributes <- function(x, full, max.lines) {
@@ -235,11 +233,6 @@ indent_print <- printr$indent_print
               'edges ]\n\n'))
   }    
 }
-
-#' @include printr.R
-
-head_print <- printr$head_print
-printer_callback <- printr$printer_callback
 
 .print.edges.compressed <- function(x, edges = E(x), names, num = FALSE,
                                       max.lines = igraph_opt("auto.print.lines")) {

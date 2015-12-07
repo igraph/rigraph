@@ -13,4 +13,4 @@
 ^README.md$
 ^NEWS.md$
 ^src/.*\.o$
-^.BundledPackages$
+

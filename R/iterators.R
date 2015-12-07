@@ -1079,10 +1079,6 @@ simple_es_index <- function(x, i) {
                   value=attr(value, "value"), check = FALSE)
 }
 
-#' @include printr.R
-
-head_print <- printr$head_print
-
 #' Show a vertex sequence on the screen
 #'
 #' For long vertex sequences, the printing is truncated to fit to the 

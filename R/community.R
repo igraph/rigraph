@@ -261,11 +261,6 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 
 as_membership <- function(x) add_class(x, "membership")
 
-
-#' @include printr.R
-
-head_print <- printr$head_print
-
 #' @rdname communities
 #' @method print communities
 #' @export

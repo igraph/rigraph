@@ -190,8 +190,6 @@ igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	rm -f src/Makevars
 	touch src/config.h
 	mkdir -p man
-	Rscript -e 'devtools::install_github("gaborcsardi/bundler")'
-	Rscript -e 'bundler::bundle_dependencies(".", overwrite = TRUE)'
 	tools/builddocs.sh
 	Rscript -e 'devtools::build(path = ".")'
 #############
