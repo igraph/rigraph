@@ -1168,7 +1168,7 @@ graph_from_atlas <- function(n) {
 }
 
 #' @rdname graph_from_atlas
-#'  @param ... Passed to \code{graph_from_atlas}.
+#' @param ... Passed to \code{graph_from_atlas}.
 #' @export
 
 atlas <- function(...) constructor_spec(graph_from_atlas, ...)
