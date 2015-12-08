@@ -615,7 +615,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'   with_edge_(weight = 1:10, color = "green"))
 #' E(g)
 #' E(g)[[]]
-#' E(g)[[inc('A')]]
+#' E(g)[[.inc('A')]]
 
 `[[.igraph.es` <- function(x, ...) {
   res <- x[...]
@@ -650,8 +650,8 @@ simple_es_index <- function(x, i) {
 #' @section Multiple indices:
 #' When using multiple indices within the bracket, all of them
 #' are evaluated independently, and then the results are concatenated
-#' using the \code{c()} function. E.g. \code{E(g)[1, 2, inc(1)]}
-#' is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[inc(1)])}.
+#' using the \code{c()} function. E.g. \code{E(g)[1, 2, .inc(1)]}
+#' is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
 #'
 #' @section Index types:
 #' Edge sequences can be indexed with positive numeric vectors,
