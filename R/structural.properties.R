@@ -2110,7 +2110,7 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
   neimode <- switch(igraph.match.arg(neimode),
                     "out"=1, "in"=2, "all"=3, "total"=3)
   unreachable <- as.logical(unreachable)
-  if (!is.null(restricted)) { restricted <- as.igraph.vs(graph, restricted) }
+  if (!is.null(restricted)) { restricted <- as.igraph.vs(graph, restricted) - 1 }
   if (!is.null(callback)) { callback <- as.function(callback) }
   
   on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )

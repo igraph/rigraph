@@ -19,3 +19,13 @@ test_that("BFS works from multiple root vertices", {
               equals(c(12,11,13,20,14,19,15,18,16,17,1,2,10,3,9,4,8,5,7,6)))
 
 })
+
+test_that("issue 133", {
+
+  g <- graph_from_edgelist(matrix(c(1,2,2,3), ncol = 2, byrow = TRUE))
+
+  expect_equal(
+    bfs(g, 1, restricted = c(1, 2), unreachable = FALSE)$order,
+    V(g)[c(1, 2, NA_real_), na_ok = TRUE]
+  )
+})
