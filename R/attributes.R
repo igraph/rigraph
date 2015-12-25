@@ -283,8 +283,8 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
   if (!missing(index) &&
       (length(index) != vcount(graph) || any(index != V(graph)))) {
-    for (i in seq_along(value)) {
-      value[[i]] <- value[[i]][index]
+    for (i in seq_along(res)) {
+      res[[i]] <- res[[i]][index]
     }
   }
   res
@@ -456,8 +456,8 @@ edge.attributes <- function(graph, index = E(graph)) {
 
   if (!missing(index) &&
       (length(index) != ecount(graph) || any(index != E(graph)))) {
-    for (i in seq_along(value)) {
-      value[[i]] <- value[[i]][index]
+    for (i in seq_along(res)) {
+      res[[i]] <- res[[i]][index]
     }
   }
   res
