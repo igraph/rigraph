@@ -266,7 +266,7 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #' 
 #' \code{distances} calculates the lengths of pairwise shortest paths from
 #' a set of vertices (\code{from}) to another set of vertices (\code{to}). It
-#' uses different algorithms, depending on the \code{argorithm} argument and
+#' uses different algorithms, depending on the \code{algorithm} argument and
 #' the \code{weight} edge attribute of the graph. The implemented algorithms
 #' are breadth-first search (\sQuote{\code{unweighted}}), this only works for
 #' unweighted graphs; the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this
