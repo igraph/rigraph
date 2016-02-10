@@ -99,7 +99,7 @@
 #'     have to be \sQuote{weight}: \preformatted{  graph[1, 2, attr="weight"]<- 5
 #' graph[from=1:3, to=c(2,3,5)] <- c(1,-1,4)}
 #'     If an edge is already present in the network, then only its
-#'     weigths or other attribute are updated. If the graph is already
+#'     weights or other attribute are updated. If the graph is already
 #'     weighted, then the \code{attr="weight"} setting is implicit, and
 #'     one does not need to give it explicitly.
 #'   \item Deleting edges. The replacement syntax allow the deletion of

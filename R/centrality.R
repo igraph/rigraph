@@ -562,7 +562,7 @@ diversity <- diversity
 #' scores. If the graph has a \code{weight} edge attribute, then this is used
 #' by default.
 #' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weigth is more likely to be
+#' random surfer model, an edge with a larger weight is more likely to be
 #' selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details.
@@ -612,7 +612,7 @@ hub_score <- hub_score
 #' scores. If the graph has a \code{weight} edge attribute, then this is used
 #' by default.
 #' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weigth is more likely to be
+#' random surfer model, an edge with a larger weight is more likely to be
 #' selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details.
@@ -712,7 +712,7 @@ authority_score <- authority_score
 #' the graph has a \code{weights} edge attribute. If this is \code{NA}, then no
 #' edge weights are used (even if the graph has a \code{weight} edge attribute.
 #' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weigth is more likely to be
+#' random surfer model, an edge with a larger weight is more likely to be
 #' selected by the surfer.
 #' @param options Either a named list, to override some ARPACK options. See
 #' \code{\link{arpack}} for details; or a named list to override the default
