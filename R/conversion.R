@@ -518,7 +518,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' way to represent graphs. These functions are provided to convert between
 #' the igraph and the graphNEL objects.
 #' 
-#' \code{as_graphnel} converts and igraph graph to a graphNEL graph. It
+#' \code{as_graphnel} converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{\code{name}}, then it will be used to assign
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
