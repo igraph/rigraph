@@ -98,6 +98,8 @@ head_print_object <- function(x, max_lines, header, footer, omitted_footer,
   invisible(c(lines = length(cout), printed = cout_no))
 }
 
+#' @importFrom utils tail
+
 head_print_callback <- function(x, max_lines, header, footer,
                                 omitted_footer, ...) {
 

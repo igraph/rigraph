@@ -490,6 +490,7 @@ as.hclust.igraphHRG <- function(x, ...) {
 }
 
 #' @method as_phylo igraphHRG
+#' @importFrom stats reorder
 
 as_phylo.igraphHRG <- function(x, ...) {
 
