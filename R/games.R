@@ -397,8 +397,7 @@ random.graph.game <- erdos.renyi.game
 #' with the given degree sequence (if this is possible at all). Then some
 #' rewiring is done to make the graph connected. Finally a Monte-Carlo
 #' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-#' undirected, connected simple graphs unformly. See
-#' \url{http://www-rp.lip6.fr/~latapy/FV/generation.html} for details.
+#' undirected, connected simple graphs unformly.
 #'
 #' @aliases degree.sequence.game
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
@@ -1455,7 +1454,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' island.
 #' @param n.inter The number of edges to create between two islands.
 #' @return An igraph graph.
-#' @author Samuel Thiriot (\url{https://www.linkedin.com/in/samthiriot})
+#' @author Samuel Thiriot
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @examples
