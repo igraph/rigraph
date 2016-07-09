@@ -1,8 +1,23 @@
 
 # igraph 1.1.0
 
-July xx, 2015
+July 9, 2016
 
+- Graph id is printed in the header, and a `graph_id` function was added
+- Fix `edge_attr` for some index values
+- Fix a `bfs()` bug, `restricted` argument was zero-based
+- `match_vertices` is exported now
+- `%>%` is re-exported in a better way, to avoid interference with other
+  packages
+- `ego_` functions default to `order = 1` now
+- New function `igraph_with_opt` to run code with temporary igraph 
+  options settings
+- Fix broken `sample_asym_pref` function
+- Fix `curve_multiple` to avoid warnings for graphs with self-loops.
+- The `NMF` package is only suggested now, it is not a hard 
+  dependency
+- Fix gen_uid.c _SVID_SOURCE issues
+- Avoid drawing straight lines as Bezier curves
 - Use the `pkgconfig` package for options. This allows setting options
   on a per-package basis. E.g. a package using igraph can set `return.vs.es`
   to `FALSE` in its `.onLoad()` function, and then igraph will return
