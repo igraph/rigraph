@@ -323,7 +323,7 @@
 #' @method $ igraph
 #' @family functions for manipulating graph structure
 #' @export
-`$.igraph` <- function(x, i, ...) induced_subgraph(x, ego(x, 1, i)[[1]])
+`$.igraph` <- function(x, i, ...) induced_subgraph(x, ego(x, 1, i)[[i]])
 
 
 #' @method [<- igraph
