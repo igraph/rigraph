@@ -1159,3 +1159,30 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
     stop("Cannot multiply igraph graph with this type")
   }
 }
+
+
+#' Extract the subgraph created by a vertex and its next-door neighbors,
+#' i.e., the subgraph "around" the specified vertex. 
+#'
+#' @details
+#'
+#' The `x %around% i` operation selects the induced subgraph 's' of graph 'x' 
+#' that results when a single vertex 'i' and its neighbors of order 1 are 
+#' used as the set of vertices to induce s from x.
+#' 
+#' @param x The graph.
+#' @param i A character string or integer identifying the vertex to use.
+#'
+#' @value s A subgraph (which is an igraph object like the parent graph). 
+#'
+#' @method around igraph
+#' 
+#' @family functions for manipulating graph structure
+#'
+#' @export
+around.igraph <- function(x, i) induced_subgraph(x, ego(x, 1, i)[[i]])
+
+#' @rdname around.igraph
+#' @method %around% igraph
+#' @export
+"%around%" <- function(x, y) around.igraph(x, y)

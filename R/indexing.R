@@ -311,21 +311,6 @@
 }
 
 
-#' @details
-#' The dollar-sign operator selects the induced subgraph 's' of graph 'x' 
-#' that results when a single vertex 'i' and its neighbors of order 1 are 
-#' used as the set of vertices to induce s from x.
-#' 
-#' @param x The graph.
-#' @param i A character string naming a vertex of x. 
-#' @param ... Additional arguments are not used currently.
-#'
-#' @method $ igraph
-#' @family functions for manipulating graph structure
-#' @export
-`$.igraph` <- function(x, i, ...) induced_subgraph(x, ego(x, 1, i)[[i]])
-
-
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
