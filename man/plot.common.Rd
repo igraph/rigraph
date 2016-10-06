@@ -21,7 +21,7 @@
   See \code{\link{plot.igraph}} for some more information.
 
   \code{\link{tkplot}} does interactive 2D plotting using the \code{tcltk}
-  package. It can only handle graphs of moderate size, a thousend
+  package. It can only handle graphs of moderate size, a thousand
   vertices is probably already too many. Some parameters of the plotted
   graph can be changed interactively after issuing the \code{tkplot}
   command: the position, color and size of the vertices and the color
@@ -95,16 +95,21 @@
       are scaled in order have about the same size of vertices for a
       given value for all three plotting commands. It does not need to
       be an integer number.
-
-      The default value is 15. This is big enough to place short labels
-      on vertices.}
+      
+      The scaling is made according to \code{relative.size} (see
+      below), so the sizes of smallest and largest vertices are equal to
+      \code{relative.size[1]} and \code{relative.size[2]} as a percentage
+      of the x-axis of the plotting region.
+      
+      The default value is 15.
+    }
     \item{size2}{The \dQuote{other} size of the vertex, for some vertex
       shapes. For the various rectangle shapes this gives the height of
       the vertices, whereas \code{size} gives the width. It is ignored
       by shapes for which the size can be specified with a single
-      number.
-
-      The default is 15.
+      number. Like \code{size}, is rescaled and is relative to the x-axis.
+      
+      The default value is 15.
     }
     \item{color}{The fill color of the vertex. If it is numeric then
       the current palette is used, see
@@ -173,8 +178,8 @@
 
       For \code{\link{tkplot}} some
       conversion is performed. If this parameter is the name of an
-      exixting Tk font, then that font is used and the \code{label.font}
-      and \code{label.cex} parameters are ignored complerely. If it is
+      existing Tk font, then that font is used and the \code{label.font}
+      and \code{label.cex} parameters are ignored completely. If it is
       one of the base families (serif, sans, mono) then Times,
       Helvetica or Courier fonts are used, there are guaranteed to exist
       on all systems. For the \sQuote{symbol} base family we used the
@@ -230,7 +235,7 @@
     }
     \item{label.degree}{
       It defines the position of the vertex labels, relative to the
-      center of the vertices. It is interpreted as an angle in radian,
+      center of the vertices. It is interpreted as an angle in radians,
       zero means \sQuote{to the right}, and \sQuote{\code{pi}} means to
       the left, up is \code{-pi/2} and down is \code{pi/2}.
 
@@ -240,7 +245,15 @@
       vertex parameter discussed earlier for the possible values.
 
       The default value is \code{black}.
-    }    
+    }
+    \item{relative.size}{
+      The relative size of the smallest and largest vertices as percentage of
+      the plotting region. When all vertices have the same size, then by default
+      the relative size observed in the plot will be equal to
+      \code{relative.size[2]}.
+      
+      The default value is \code{c(.01,.025)} (1\% and 2.5\% respectively).
+    }
   }
 
   Edge parameters require to add the \sQuote{\code{edge.}} prefix when
@@ -320,7 +333,7 @@
       edge bends clockwise, positive values the opposite. \code{TRUE}
       means curvature 0.5, \code{FALSE} means curvature zero.
 
-      By default the vector specifying the curvatire is calculated via a
+      By default the vector specifying the curvature is calculated via a
       call to the \code{\link{curve_multiple}} function. This function makes
       sure that multiple edges are curved and are all visible. This
       parameter is ignored for loop edges. 
@@ -352,13 +365,13 @@
       to its direction. This is not very surprising, it is the expected
       behavior.
     }
-    \item{loop.angle}{Gives the angle in radian for plotting loop
+    \item{loop.angle}{Gives the angle in radians for plotting loop
       edges. See the \code{label.dist} vertex parameter to see how this
       is interpreted.
 
       The default value is 0.
     }    
-    \item{loop.angle2}{Gives the second angle in radian for plotting
+    \item{loop.angle2}{Gives the second angle in radians for plotting
       loop edges. This is only used in 3D, \code{loop.angle} is enough
       in 2D.
 
@@ -388,7 +401,7 @@
       or three columns. For the 2D plots the third column is ignored.
 
       The default value is \code{layout_nicely}, a smart function that
-      chooses a layouter based on the graph.}
+      chooses a layout based on the graph.}
     \item{margin}{The amount of empty space below, over, at the left and
       right of the plot, it is a numeric vector of length four. Usually
       values between 0 and 0.5 are meaningful, but negative values are
@@ -478,5 +491,20 @@ plot(make_tree(50, 3), vertex.size=3, vertex.label=NA)
 tkplot(make_tree(50, 2, mode="undirected"), vertex.size=10,
 vertex.color="green")
 }
+
+# plot using vertex.relative.size
+igraph_options(plot.layout=layout_nicely)
+set.seed(312)
+g <- barabasi.game(10)
+
+oldpar <- par(no.readonly=TRUE)
+par(mfrow=c(2,2))
+set.seed(1);plot(g, main="Default")
+set.seed(1);plot(g, vertex.size=degree(g), main="size=degree")
+set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.05,.1),
+                main="size=degree,relative.size=c(.05,.1)")
+set.seed(1);plot(g, vertex.size=degree(g), vertex.relative.size=c(.025,.2),
+                main="size=degree,relative.size=c(.025,.2)")
+par(oldpar)
 }
 \keyword{graphs}

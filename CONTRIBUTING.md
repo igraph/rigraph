@@ -76,6 +76,10 @@ edit the sources on your computer, instead of online on Github.
   build()
   test()
   ```
+  
+  To be able to run `make`, you'll need to have installed `flex` and `bison`
+  in your system. The `DESCRIPTION` and `NAMESPACE` files are created during
+  the process.
 
 * Submit your pull request.
 * Now you need to wait for us, unfortunately. Please ping us, if it takes
