@@ -1,7 +1,7 @@
 
 # igraph 1.1.0
 
-July 9, 2016
+March 1, 2017
 
 - Graph id is printed in the header, and a `graph_id` function was added
 - Fix `edge_attr` for some index values
