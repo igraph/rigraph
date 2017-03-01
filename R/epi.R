@@ -48,9 +48,11 @@ time_bins.sir <- function(x, middle=TRUE) {
 #' @importFrom stats median
 #' @method median sir
 #' @rdname sir
+#' @param ... Extra arguments, to be compatible with recent R versions,
+#'   it is not used.
 #' @export
 
-median.sir <- function(x, na.rm=FALSE) {
+median.sir <- function(x, na.rm=FALSE, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {
     stop("This is not an SIR model output")
