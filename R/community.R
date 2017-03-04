@@ -1121,7 +1121,7 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- barabasi.game(100,m=2)
+#' g <- sample_pa(100, m = 2, directed = FALSE)
 #' eb <- cluster_edge_betweenness(g)
 #' 
 #' g <- make_full_graph(10) %du% make_full_graph(10)
