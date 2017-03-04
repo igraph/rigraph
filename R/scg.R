@@ -93,7 +93,7 @@ NULL
 #' 
 #' library(Matrix)
 #' ## g is a large sparse graph
-#' g <- barabasi.game(n = 10^5, power = 2, directed = FALSE)
+#' g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
 #' W <- stochastic_matrix(g, sparse=TRUE)
 #' 
 #' ## a dense matrix here would probably not fit in the memory
@@ -335,7 +335,7 @@ scg_group <- function(V, nt,
 #' library(Matrix)
 #' # compute the semi-projectors and projector for the partition
 #' # provided by a community detection method
-#' g <- barabasi.game(20, m=1.5)
+#' g <- sample_pa(20, m = 1.5, directed = FALSE)
 #' eb <- cluster_edge_betweenness(g)
 #' memb <- membership(eb)
 #' lr <- scg_semi_proj(memb)
