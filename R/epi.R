@@ -48,8 +48,6 @@ time_bins.sir <- function(x, middle=TRUE) {
 #' @importFrom stats median
 #' @method median sir
 #' @rdname sir
-#' @param ... Extra arguments, to be compatible with recent R versions,
-#'   it is not used.
 #' @export
 
 median.sir <- function(x, na.rm=FALSE, ...) {
