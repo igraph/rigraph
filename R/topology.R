@@ -412,9 +412,7 @@ is_isomorphic_to <- isomorphic
 #'
 #' # Directed LAD example
 #' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
-#' uring <- make_ring(10)
 #' dring <- make_ring(10, directed = TRUE)
-#' subgraph_isomorphic(pattern, uring)
 #' subgraph_isomorphic(pattern, dring)
 
 subgraph_isomorphic <- function(pattern, target,

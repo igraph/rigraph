@@ -202,11 +202,12 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' ## First three eigenvalues of the adjacency matrix of a graph
 #' ## We need the 'Matrix' package for this
 #' if (require(Matrix)) {
+#'   set.seed(42)
 #'   g <- sample_gnp(1000, 5/1000)
 #'   M <- as_adj(g, sparse=TRUE)
 #'   f2 <- function(x, extra=NULL) { cat("."); as.vector(M %*% x) }
 #'   baev <- arpack(f2, sym=TRUE, options=list(n=vcount(g), nev=3, ncv=8,
-#'                                   which="LM", maxiter=200))
+#'                                   which="LM", maxiter=2000))
 #' }
 #' @export
 
