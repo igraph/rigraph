@@ -1726,7 +1726,7 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
   SEXP res;
   int keepno=0;
   int *TODO;
-  void **funcs;
+  igraph_function_pointer_t *funcs;
   
   /* Create the TODO list first */
   PROTECT(names=GET_NAMES(val));
@@ -1736,7 +1736,7 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
 		 IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_free, TODO);
-  funcs=igraph_Calloc(valno, void*);
+  funcs=igraph_Calloc(valno, igraph_function_pointer_t);
   if (!funcs) {
     IGRAPH_ERROR("Cannot combine edge attributes",
 		 IGRAPH_ENOMEM);
@@ -1745,7 +1745,7 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
   for (i=0; i<valno; i++) {
     const char *name=CHAR(STRING_ELT(names, i));
     igraph_attribute_combination_type_t todo;
-    void *voidfunc;
+    igraph_function_pointer_t voidfunc;
     igraph_attribute_combination_query(comb, name, &todo, &voidfunc);
     TODO[i]=todo;
     funcs[i]=voidfunc;
@@ -1891,7 +1891,7 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
   SEXP res;
   int keepno=0;
   int *TODO;
-  void **funcs;
+  igraph_function_pointer_t *funcs;
 
   /* Create the TODO list first */
   PROTECT(names=GET_NAMES(eal));
@@ -1901,7 +1901,7 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
 		 IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_free, TODO);
-  funcs=igraph_Calloc(ealno, void*);
+  funcs=igraph_Calloc(ealno, igraph_function_pointer_t);
   if (!funcs) {
     IGRAPH_ERROR("Cannot combine edge attributes",
 		 IGRAPH_ENOMEM);
@@ -1910,7 +1910,7 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
   for (i=0; i<ealno; i++) {
     const char *name=CHAR(STRING_ELT(names, i));
     igraph_attribute_combination_type_t todo;
-    void *voidfunc;
+    igraph_function_pointer_t voidfunc;
     igraph_attribute_combination_query(comb, name, &todo, &voidfunc);
     TODO[i]=todo;
     funcs[i]=voidfunc;
@@ -7993,9 +7993,13 @@ SEXP R_igraph_cohesive_blocks(SEXP graph) {
   return result;
 }
 
+typedef struct {
+  igraph_arpack_function_t *fun;
+} R_igraph_i_function_container_t;
+
 SEXP R_igraph_i_levc_arp(SEXP extP, SEXP extE, SEXP pv) {
-  igraph_arpack_function_t *fun=
-    (igraph_arpack_function_t *) R_ExternalPtrAddr(extP);
+  R_igraph_i_function_container_t *cont = R_ExternalPtrAddr(extP);
+  igraph_arpack_function_t *fun= cont->fun;
   void *extra=R_ExternalPtrAddr(extE);
   SEXP res;
   
@@ -8026,6 +8030,7 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
   SEXP res;
   int result;
   R_igraph_i_levc_data_t *data=extra;
+  R_igraph_i_function_container_t cont = { arpack_multiplier };
 
   PROTECT(s_memb=R_igraph_vector_to_SEXP(membership));
   PROTECT(s_comm=NEW_NUMERIC(1)); REAL(s_comm)[0]=comm;
@@ -8033,8 +8038,7 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
   PROTECT(s_evector=R_igraph_vector_to_SEXP(eigenvector));
   PROTECT(R_multip_call =
 	  lang3(install("igraph.i.levc.arp"), 
-		R_MakeExternalPtr((void*) arpack_multiplier, R_NilValue, 
-				  R_NilValue),
+		R_MakeExternalPtr((void*) &cont, R_NilValue, R_NilValue),
 		R_MakeExternalPtr(arpack_extra, R_NilValue, R_NilValue)));
   PROTECT(s_multip = eval(R_multip_call, data->rho2));
 
