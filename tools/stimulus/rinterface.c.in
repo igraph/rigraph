@@ -4088,7 +4088,6 @@ SEXP R_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
   /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_coords;
-  igraph_bool_t c_use_seed;
   igraph_integer_t c_maxiter;
   igraph_real_t c_epsilon;
   igraph_real_t c_kkconst;
@@ -4146,7 +4145,6 @@ SEXP R_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
   /* Declarations */
   igraph_t c_graph;
   igraph_matrix_t c_coords;
-  igraph_bool_t c_use_seed;
   igraph_integer_t c_maxiter;
   igraph_real_t c_epsilon;
   igraph_real_t c_kkconst;
@@ -6832,7 +6830,6 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
 SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file, 
 				   SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
-  long int i;
   igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
   igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
   igraph_vector_int_t subset;
