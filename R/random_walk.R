@@ -11,7 +11,7 @@
 #' @param steps The number of steps to make.
 #' @param mode How to follow directed edges. \code{"out"} steps along the
 #'   edge direction, \code{"in"} is opposite to that. \code{"all"} ignores
-#'   edge directions. This argument is ignored for directed graphs.
+#'   edge directions. This argument is ignored for undirected graphs.
 #' @param stuck What to do if the random walk gets stuck. \code{"return"}
 #'   returns the partial walk, \code{"error"} raises an error.
 #' @return A vertex sequence containing the vertices along the walk.
