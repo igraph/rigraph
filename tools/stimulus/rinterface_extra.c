@@ -23,7 +23,6 @@
 
 #include "igraph.h"
 
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>

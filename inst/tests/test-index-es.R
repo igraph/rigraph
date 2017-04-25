@@ -36,5 +36,5 @@ test_that("I can index an es twice", {
 
   x <- E(g)['BOS' %->% 'JFK'][carrier == 'foo']
 
-  expect_equal(x, E(g)[ carrier == 'foo' & from('BOS') & to('JFK')])
+  expect_equal(x, E(g)[ carrier == 'foo' & .from('BOS') & .to('JFK')])
 })

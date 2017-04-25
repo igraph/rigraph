@@ -19,7 +19,7 @@ test_that("edge_betweenness works", {
   ebet <- edge_betweenness(kite)
 
   bet2 <- sapply(1:vcount(kite), function(x) {
-    ae <- E(kite)[ adj(x) ]
+    ae <- E(kite)[ .inc(x) ]
     (sum(ebet[ae])-vcount(kite)+1) / 2
   })
 
@@ -32,7 +32,7 @@ test_that("edge_betweenness works", {
   bet <- betweenness(kite)
   ebet <- edge_betweenness(kite)
   bet2 <- sapply(1:vcount(kite), function(x) {
-    ae <- E(kite)[ adj(x) ]
+    ae <- E(kite)[ .inc(x) ]
     (sum(ebet[ae])-vcount(kite)+1) / 2
   })
 

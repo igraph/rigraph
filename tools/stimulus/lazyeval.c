@@ -79,7 +79,6 @@ SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
 
   return lazy_dots;
 }
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rdefines.h>
 
@@ -134,7 +133,6 @@ SEXP eval_call_(SEXP fun, SEXP dots, SEXP env) {
 }
 
 */
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rdefines.h>
 

@@ -17,7 +17,7 @@ test_that("as_adj_list works", {
 
   el <- as_adj_edge_list(g)
   for (i in 1:vcount(g)) {
-    a <- E(g)[adj(i)]
+    a <- E(g)[.inc(i)]
     expect_that(length(a), is_equivalent_to(length(el[[i]])))
     expect_that(sort(el[[i]]), is_equivalent_to(sort(a)))
   }
@@ -26,12 +26,12 @@ test_that("as_adj_list works", {
   el1 <- as_adj_edge_list(g, mode="out")
   el2 <- as_adj_edge_list(g, mode="in")
   for (i in 1:vcount(g)) {
-    a <- E(g)[from(i)]
+    a <- E(g)[.from(i)]
     expect_that(length(a), is_equivalent_to(length(el1[[i]])))
     expect_that(sort(el1[[i]]), is_equivalent_to(sort(a)))
   }
   for (i in 1:vcount(g)) {
-    a <- E(g)[to(i)]
+    a <- E(g)[.to(i)]
     expect_that(length(a), is_equivalent_to(length(el2[[i]])))
     expect_that(sort(el2[[i]]), is_equivalent_to(sort(a)))
   }
