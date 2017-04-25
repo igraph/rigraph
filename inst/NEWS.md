@@ -1,7 +1,7 @@
 
 # igraph 1.1.0
 
-March 1, 2017
+April 25, 2017
 
 - Graph id is printed in the header, and a `graph_id` function was added
 - Fix `edge_attr` for some index values
@@ -49,6 +49,8 @@ March 1, 2017
   `.to()`. #22
 - Fix packages that convert graphs to graph::graphNEL: they
   don't need to attach 'graph' manually any more.
+- Fix a bugs in `layout_with_dh`, `layout_with_gem` and
+  `layout_with_sugiyama`. They crashed in some cases.
 
 # igraph 1.0.1
 
