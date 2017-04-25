@@ -917,7 +917,7 @@ layout_with_dh <- function(graph, coords=NULL, maxiter=10,
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
     use.seed <- TRUE
   } else {
-    coords <- matrix(ncol=2, nrow=0)
+    coords <- matrix(NA_real_, ncol=2, nrow=0)
     use.seed <- FALSE
   }
   maxiter <- as.integer(maxiter)
