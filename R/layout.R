@@ -1155,7 +1155,7 @@ layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
     coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
     use.seed <- TRUE
   } else {
-    coords <- matrix(ncol=2, nrow=0)
+    coords <- matrix(NA_real_, ncol=2, nrow=0)
     use.seed <- FALSE
   }
 
@@ -1754,7 +1754,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
   vc <- vcount(graph)
   res$layout <- res$res[seq_len(vc),]
   if (nrow(res$res)==vc) {
-    res$layout.dummy <- matrix(nrow=0, ncol=2)
+    res$layout.dummy <- matrix(NA_real_, nrow=0, ncol=2)
   } else {
     res$layout.dummy <- res$res[(vc+1):nrow(res$res),]
   }
