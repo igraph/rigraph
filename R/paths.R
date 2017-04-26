@@ -66,7 +66,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   on.exit( .Call(C_R_igraph_finalizer) )
 
   ## Function call
-  res <- .CallC(C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
+  res <- .Call(C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
                 mode)
   res <- get.all.simple.paths.pp(res)
 
