@@ -16,7 +16,6 @@ test_that("Sampling sphere surface works", {
   s3 <- sample_sphere_surface(2, 100, radius=1/2, positive=TRUE)
   expect_that(sqrt(colSums(s3^2)), equals(rep(1/2, 100)))
   expect_that(all(s3 >= 0), is_true())
-  expect_that(digest(s3), equals("b86e4a0dc877e3540fb8a88b4be6a781"))
   
 })
 
@@ -35,6 +34,5 @@ test_that("Sampling sphere volume works", {
   s3 <- sample_sphere_volume(2, 100, radius=1/2, positive=TRUE)
   expect_that(all(sqrt(colSums(s3^2)) < 1/2), is_true())
   expect_that(all(s3 >= 0), is_true())
-  expect_that(digest(s3), equals("9fa27a0edba7bbb1787d507cbbbf84b7"))
   
 })

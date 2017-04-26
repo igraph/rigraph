@@ -18,8 +18,8 @@ test_that("transitivity works", {
                     .Names = c("Min.", "1st Qu.", "Median", "Mean",
                       "3rd Qu.", "Max."),
                     class = c("summaryDefault", "table"))
-  expect_that(summary(t3), equals(est3))
-  expect_that(summary(t33), equals(est3))
+  expect_that(summary(t3), equals(est3, tolerance = 0.001))
+  expect_that(summary(t33), equals(est3, tolerance = 0.001))
 })
 
 test_that("no integer overflow", {
