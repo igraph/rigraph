@@ -93,10 +93,9 @@ graphlet_basis <- function(graph, weights=NULL) {
   graph2 <- graph
   graph2[[9]] <- list(c(1,0,1), list(), list(), list())
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   ## Function call
-  res <- .Call("R_igraph_graphlets_candidate_basis", graph2, weights,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_graphlets_candidate_basis, graph2, weights)
 
   res
 }
@@ -119,10 +118,9 @@ graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
   Mu <- as.numeric(Mu)
   niter <- as.integer(niter)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_graphlets_project", graph, weights, cliques, Mu, niter,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
 
   res
 }

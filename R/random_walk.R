@@ -41,11 +41,10 @@ random_walk <- function(graph, start, steps, mode = c("out", "in", "all"),
   steps <- as.integer(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE = "igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
 
   ## Function call
-  res <- .Call("R_igraph_random_walk", graph, start - 1, mode, steps, stuck,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_random_walk, graph, start - 1, mode, steps, stuck)
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
   }

@@ -86,7 +86,7 @@ $(UUID2): src/uuid/%: tools/uuid/%
 # R files that are generated/copied
 
 RGEN = R/auto.R src/rinterface.c src/rinterface.h \
-	src/rinterface_extra.c src/lazyeval.c src/Makevars.in \
+	src/rinterface_extra.c src/lazyeval.c src/init.c src/Makevars.in \
 	configure src/config.h.in src/Makevars.win \
 	DESCRIPTION
 
@@ -150,6 +150,10 @@ src/rinterface_extra.c: tools/stimulus/rinterface_extra.c
 	cp $< $@
 
 src/lazyeval.c: tools/stimulus/lazyeval.c
+	mkdir -p src
+	cp $< $@
+
+src/init.c: tools/stimulus/init.c
 	mkdir -p src
 	cp $< $@
 

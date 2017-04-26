@@ -71,8 +71,8 @@ igraph_test <- function() {
 #' igraph_version()
 
 igraph_version <- function() {
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_version", PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_version)
 }
 
 checkpkg <- function(package_file, args=character()) {

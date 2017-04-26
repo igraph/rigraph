@@ -31,6 +31,8 @@
 #include <Rdefines.h>
 #include "rinterface.h"
 
+#include "init.c"		/* registration table */
+
 #include <stdio.h>
 
 int igraph_free(void *p);
@@ -2123,12 +2125,15 @@ int R_igraph_status_handler(const char *message, void *data) {
   return 0;
 }
 
-SEXP R_init_igraph() {
+void R_init_igraph(DllInfo *dll) {
+  R_registerRoutines(dll, CEntries, CallEntries, NULL, NULL);
+  R_useDynamicSymbols(dll, FALSE);
+  R_forceSymbols(dll, TRUE);
+
   igraph_set_error_handler(R_igraph_myhandler);
   igraph_set_warning_handler(R_igraph_warning_handler);
   igraph_set_interruption_handler(R_igraph_interrupt_handler);
   igraph_i_set_attribute_table(&R_igraph_attribute_table);
-  return R_NilValue;
 }
 
 SEXP R_igraph_set_verbose(SEXP verbose) {

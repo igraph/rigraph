@@ -31,19 +31,19 @@
   gal <- graph_attr_names(object)
   if (length(gal) != 0) {
     ga <- paste(sep="", gal, " (g/",
-                .Call("R_igraph_get_attr_mode", object, 2L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 2L),
                 ")")
   }
   val <- vertex_attr_names(object)
   if (length(val) != 0) {
     va <- paste(sep="", val, " (v/",
-                .Call("R_igraph_get_attr_mode", object, 3L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 3L),
                 ")")
   }
   eal <- edge_attr_names(object)
   if (length(eal) != 0) {
     ea <- paste(sep="", edge_attr_names(object), " (e/",
-                .Call("R_igraph_get_attr_mode", object, 4L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 4L),
                 ")")
   }
   c(ga, va, ea)

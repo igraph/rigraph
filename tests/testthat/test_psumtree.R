@@ -7,8 +7,7 @@ test_that("Prefix sum tree works", {
   set.seed(42)
   mysample <- function(x, size, prob=NULL) {
     if (!is.null(prob)) { prob <- as.numeric(prob) }
-    .Call("R_igraph_psumtree_draw", as.integer(x), as.integer(size),
-          prob, PACKAGE="igraph")
+    .Call(C_R_igraph_psumtree_draw, as.integer(x), as.integer(size), prob)
   }
   S <- mysample(100, 10000)
   expect_that(range(table(S)), equals(c(69, 129)))

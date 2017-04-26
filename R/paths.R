@@ -63,11 +63,11 @@ all_simple_paths <- function(graph, from, to = V(graph),
   mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3,
                  "total" = 3)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
 
   ## Function call
-  res <- .Call("R_igraph_get_all_simple_paths", graph, from - 1, to - 1,
-                mode, PACKAGE = "igraph")
+  res <- .CallC(C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
+                mode)
   res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) { 
