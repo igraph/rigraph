@@ -31,7 +31,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    base::.Call(C_R_igraph_mybracket, graph, 10L)
+    .Call(C_R_igraph_mybracket, graph, 10L)
   } else {
     NULL
   }
@@ -75,7 +75,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 
 identical_graphs <- function(g1, g2) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  base::.Call(C_R_igraph_identical_graphs, g1, g2)
+  .Call(C_R_igraph_identical_graphs, g1, g2)
 }
 
 add_vses_graph_ref <- function(vses, graph) {

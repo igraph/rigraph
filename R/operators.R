@@ -216,7 +216,11 @@ disjoint_union <- function(...) {
     }
     
     on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(call, newgraphs, edgemaps)
+    if (call == "union") {
+      res <- .Call(C_R_igraph_union, newgraphs, edgemaps)
+    } else {
+      res <- .Call(C_R_igraph_intersection, newgraphs, edgemaps)
+    }
     maps <- res$edgemaps
     res <- res$graph
 
@@ -247,7 +251,11 @@ disjoint_union <- function(...) {
     }
 
     on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(call, graphs, edgemaps)
+    if (call == "union") {
+      res <- .Call(C_R_igraph_union, graphs, edgemaps)
+    } else {
+      res <- .Call(C_R_igraph_intersection, graphs, edgemaps)
+    }
     maps <- res$edgemaps
     res <- res$graph
 
@@ -338,7 +346,7 @@ union.default <- function(...) {
 #' print_all(net1 %u% net2)
 
 union.igraph <- function(..., byname="auto") {
-  .igraph.graph.union.or.intersection(C_R_igraph_union, ..., byname=byname,
+  .igraph.graph.union.or.intersection("union", ..., byname=byname,
                                       keep.all.vertices=TRUE)
 }
 
@@ -415,7 +423,7 @@ intersection <- function(...)
 
 intersection.igraph <- function(..., byname="auto",
                                 keep.all.vertices=TRUE) {
-  .igraph.graph.union.or.intersection(C_R_igraph_intersection, ...,
+  .igraph.graph.union.or.intersection("intersection", ...,
                                       byname=byname,
                                       keep.all.vertices=keep.all.vertices)
 }

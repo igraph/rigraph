@@ -1229,7 +1229,7 @@ cluster_fast_greedy <- function(graph, merges=TRUE, modularity=TRUE,
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    base::.Call(C_R_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(C_R_igraph_i_levc_arp, externalP, externalE, v)
   }
   f
 }

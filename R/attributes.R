@@ -57,7 +57,7 @@ graph_attr <- function(graph, name) {
   if (missing(name)) {
     graph.attributes(graph)
   } else {
-    base::.Call(C_R_igraph_mybracket2, graph, 9L, 2L)[[as.character(name)]]
+    .Call(C_R_igraph_mybracket2, graph, 9L, 2L)[[as.character(name)]]
   }
 }
 
@@ -116,7 +116,7 @@ set_graph_attr <- function(graph, name, value) {
     stop("Not a graph object")
   }
 
-  base::.Call(C_R_igraph_mybracket3_set, graph, 9L, 2L, name, value)
+  .Call(C_R_igraph_mybracket3_set, graph, 9L, 2L, name, value)
 }
 
 #' @export
@@ -125,7 +125,7 @@ graph.attributes <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  base::.Call(C_R_igraph_mybracket2_copy, graph, 9L, 2L)
+  .Call(C_R_igraph_mybracket2_copy, graph, 9L, 2L)
 } 
 
 #' @export
@@ -139,7 +139,7 @@ graph.attributes <- function(graph) {
     stop("Value must be a named list with unique names")
   }
             
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, value)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, value)
 }
 
 
@@ -177,7 +177,7 @@ vertex_attr <- function(graph, name, index=V(graph)) {
     }
   } else {
     myattr <-
-      base::.Call(C_R_igraph_mybracket2, graph, 9L, 3L)[[as.character(name)]]
+      .Call(C_R_igraph_mybracket2, graph, 9L, 3L)[[as.character(name)]]
     if (! missing(index)) {
       index <- as.igraph.vs(graph, index)
       myattr <- myattr[index]
@@ -253,7 +253,7 @@ i_set_vertex_attr <- function(graph, name, index=V(graph), value,
   name <- as.character(name)
   vc <- vcount(graph)
 
-  vattrs <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 3L)
+  vattrs <- .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -261,7 +261,7 @@ i_set_vertex_attr <- function(graph, name, index=V(graph), value,
   }
   length(vattrs[[name]]) <- vc
   
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattrs)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattrs)
 }
 
 #' @export
@@ -275,7 +275,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
     index <- as.igraph.vs(graph, index)
   }
 
-  res <- base::.Call(C_R_igraph_mybracket2_copy, graph, 9L, 3L)
+  res <- .Call(C_R_igraph_mybracket2_copy, graph, 9L, 3L)
 
   if (!missing(index) &&
       (length(index) != vcount(graph) || any(index != V(graph)))) {
@@ -319,7 +319,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
     }
   }
 
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, value)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, value)
 }
 
 
@@ -353,7 +353,7 @@ edge_attr <- function(graph, name, index=E(graph)) {
   } else {
     name <- as.character(name)
     index <- as.igraph.es(graph, index)
-    myattr <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 4L)[[name]]
+    myattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 4L)[[name]]
     myattr[index]
   }
 }
@@ -424,7 +424,7 @@ i_set_edge_attr <- function(graph, name, index=E(graph), value,
   if (!missing(index) && check) index <- as.igraph.es(graph, index)
   ec <- ecount(graph)
 
-  eattrs <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 4L)
+  eattrs <- .Call(C_R_igraph_mybracket2, graph, 9L, 4L)
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
@@ -432,7 +432,7 @@ i_set_edge_attr <- function(graph, name, index=E(graph), value,
   }
   length(eattrs[[name]]) <- ec
 
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, eattrs)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, eattrs)
 }
 
 #' @export
@@ -446,7 +446,7 @@ edge.attributes <- function(graph, index = E(graph)) {
     index <- as.igraph.es(graph, index)
   }
 
-  res <- base::.Call(C_R_igraph_mybracket2_copy, graph, 9L, 4L)
+  res <- .Call(C_R_igraph_mybracket2_copy, graph, 9L, 4L)
 
   if (!missing(index) &&
       (length(index) != ecount(graph) || any(index != E(graph)))) {
@@ -491,7 +491,7 @@ edge.attributes <- function(graph, index = E(graph)) {
     }
   }
   
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, value)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, value)
 }
 
 #' List names of graph attributes
@@ -511,7 +511,7 @@ graph_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  res <- base::.Call(C_R_igraph_mybracket2_names, graph, 9L, 2L)
+  res <- .Call(C_R_igraph_mybracket2_names, graph, 9L, 2L)
   if (is.null(res)) { res <- character() }
   res
 }
@@ -536,7 +536,7 @@ vertex_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  res <- base::.Call(C_R_igraph_mybracket2_names, graph, 9L, 3L)
+  res <- .Call(C_R_igraph_mybracket2_names, graph, 9L, 3L)
                      
   if (is.null(res)) { res <- character() }
   res
@@ -561,7 +561,7 @@ edge_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  res <- base::.Call(C_R_igraph_mybracket2_names, graph, 9L, 4L)
+  res <- .Call(C_R_igraph_mybracket2_names, graph, 9L, 4L)
   if (is.null(res)) { res <- character() }
   res
 }
@@ -591,10 +591,10 @@ delete_graph_attr <- function(graph, name) {
     stop("No such graph attribute: ", name)
   }
 
-  gattr <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 2L)
+  gattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 2L)
   gattr[[name]] <- NULL
   
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, gattr)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, gattr)
 }
 
 #' Delete a vertex attribute
@@ -623,10 +623,10 @@ delete_vertex_attr <- function(graph, name) {
     stop("No such vertex attribute: ", name)
   }
 
-  vattr <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 3L)
+  vattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
   vattr[[name]] <- NULL
   
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattr)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattr)
 }
 
 #' Delete an edge attribute
@@ -655,10 +655,10 @@ delete_edge_attr <- function(graph, name) {
     stop("No such edge attribute: ", name)
   }
 
-  eattr <- base::.Call(C_R_igraph_mybracket2, graph, 9L, 4L)
+  eattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 4L)
   eattr[[name]] <- NULL
   
-  base::.Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, eattr)
+  .Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, eattr)
 }
 
 #############
