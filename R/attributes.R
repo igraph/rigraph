@@ -254,6 +254,9 @@ i_set_vertex_attr <- function(graph, name, index=V(graph), value,
   vc <- vcount(graph)
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
+  if (is.null(vattrs[[name]]) || length(unique(index)) == vc) {
+    vattrs[[name]] <- value[NA]
+  }
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -425,6 +428,9 @@ i_set_edge_attr <- function(graph, name, index=E(graph), value,
   ec <- ecount(graph)
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, 9L, 4L)
+  if (is.null(eattrs[[name]]) || length(unique(index)) == ec) {
+    eattrs[[name]] <- value[NA]
+  }
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
