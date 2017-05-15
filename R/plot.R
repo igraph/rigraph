@@ -162,6 +162,8 @@ plot.igraph <- function(x,
   if (!is.list(mark.groups) && is.numeric(mark.groups)) {
     mark.groups <- list(mark.groups)
   }
+  
+  if (is_named(x)) rownames(layout) <- V(x)$name
 
   mark.shape  <- rep(mark.shape,  length=length(mark.groups))
   mark.border <- rep(mark.border, length=length(mark.groups))
