@@ -395,7 +395,7 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   
   if (is_named(graph)) names(res) <- V(graph)$name
