@@ -1656,13 +1656,15 @@ ego_size <- function(graph, order = 1, nodes=V(graph),
 #' steps are counted. \sQuote{"all"} ignores the direction of the edges. This
 #' argument is ignored for undirected graphs.
 #' @param mindist The minimum distance to include the vertex in the result.
-#' @return \code{ego_size} returns with an integer vector.
-#' 
-#' \code{ego} returns with a list of integer vectors.
-#' 
-#' \code{make_ego_graph} returns with a list of graphs.
-#' 
-#' \code{connect} returns with a new graph object.
+#' @return
+#' \itemize{
+#'   \item{\code{ego_size} returns with an integer vector.}
+#'   \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
+#'         vectors depending on the value of \code{igraph_opt("return.vs.es")},
+#'         see details for performance characteristics.}
+#'   \item{\code{make_ego_graph} returns with a list of graphs.}
+#'   \item{\code{connect} returns with a new graph object.}
+#' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
 #' @export
