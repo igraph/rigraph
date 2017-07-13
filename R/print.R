@@ -455,8 +455,11 @@ print_all <- function(object, ...) {
 #' 
 #' As of igraph 0.4 \code{print_all} and \code{print.igraph} use the
 #' \code{max.print} option, see \code{\link[base]{options}} for details.
-#' 
-#' @aliases print.igraph print_all summary.igraph
+#'
+#' As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
+#' \code{print_all()}.
+#'
+#' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
 #' @param full Logical scalar, whether to print the graph structure itself as
 #' well.
