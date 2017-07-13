@@ -439,8 +439,8 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'                                            rootlevel=c(2,1)))
 
 layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
-                                    rootlevel=numeric(), mode="out",
-                                    flip.y=TRUE) {
+                           rootlevel=numeric(), mode=c("out", "in", "all"),
+                           flip.y=TRUE) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
