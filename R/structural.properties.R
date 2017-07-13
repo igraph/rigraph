@@ -1821,7 +1821,7 @@ topo_sort <- function(graph, mode=c("out", "all", "in")) {
   mode <- switch(mode, "out"=1, "in"=2, "all"=3)
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_topological_sorting, graph, as.numeric(mode))
+  res <- .Call(C_R_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) res <- create_vs(graph, res)
 
