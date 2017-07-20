@@ -3,7 +3,8 @@ context("graphNEL conversion")
 
 test_that("graphNEL conversion works", {
 
-  library(igraph)
+  if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
+
   library(graph, warn.conflicts=FALSE)
 
   g <- sample_gnp(100, 5/100)
