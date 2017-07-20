@@ -5,8 +5,8 @@ all: igraph
 # Main package
 
 top_srcdir=cigraph
-REALVERSION=1.1.1
-VERSION=1.1.1
+REALVERSION=1.1.2
+VERSION=1.1.2
 
 # We put the version number in a file, so that we can detect
 # if it changes

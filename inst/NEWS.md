@@ -1,4 +1,11 @@
 
+# igraph 1.1.2
+
+Jul 20, 2017
+
+- Fix compilation on Solaris
+
+
 # igraph 1.1.1
 
 Jul 13, 2017
