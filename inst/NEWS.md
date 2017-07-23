@@ -1,4 +1,10 @@
 
+# igraph 1.1.2.9000
+
+??? ??, ????
+
+- Fix compilation without libxml2
+
 # igraph 1.1.2
 
 Jul 20, 2017
