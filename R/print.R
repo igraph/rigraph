@@ -427,7 +427,7 @@ print_all <- function(object, ...) {
 #' The graph summary printed by \code{summary.igraph} (and \code{print.igraph}
 #' and \code{print_all}) consists one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
-#' Here is an example, a small star graph with weighed directed edges and named
+#' Here is an example, a small star graph with weighted directed edges and named
 #' vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 #'     + attr: name (g/c), mode (g/c), center (g/n), name (v/c),
 #'       weight (e/n) }
