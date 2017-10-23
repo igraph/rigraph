@@ -1162,7 +1162,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
 #' 
 #' Calculates the reciprocity of a directed graph.
 #' 
-#' The measure of reciprocity defines the proporsion of mutual connections, in
+#' The measure of reciprocity defines the proportion of mutual connections, in
 #' a directed graph. It is most commonly defined as the probability that the
 #' opposite counterpart of a directed edge is also included in the graph. Or in
 #' adjacency matrix notation: \eqn{\sum_{ij} (A\cdot A')_{ij}}{sum(i, j,
