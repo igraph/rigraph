@@ -663,7 +663,7 @@ simple_es_index <- function(x, i) {
 #'   \item Named graphs can be indexed with character vectors,
 #'     to select edges with the given names. Note that a graph may
 #'     have edge names and vertex names, and both can be used to select
-#'     edges. Edge names are simply used as names of the nuumeric
+#'     edges. Edge names are simply used as names of the numeric
 #'     edge id vector. Vertex names effectively only work in graphs without
 #'     multiple edges, and must be separated with a \code{|} bar character
 #'     to select an edges that incident to the two given vertices. See
