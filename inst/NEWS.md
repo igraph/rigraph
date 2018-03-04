@@ -2,7 +2,12 @@
 # igraph 1.2.0
 
 - The GLPK library is optional, if it is not available, then the
-  `cluster_optimal()` function does not work.
+  `cluster_optimal()` function does not work. Unfortunately we cannot
+  bundle the GLPK library into igraph on CRAN any more, because CRAN
+  maintainers forbid the pragmas in its source code.
+- Removed the cs sparse matrix library, we cannot bundle it because it has
+  pragmas. This means that the SCG functions, `laplacian_matrix()`,
+  `stochastic_matrix()` and `layout_with_mds()` do not work any more.
 - Removed the NMF package dependency, and related functions.
 - Fix compilation without libxml2
 
