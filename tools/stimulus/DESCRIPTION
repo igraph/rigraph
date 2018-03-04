@@ -20,7 +20,6 @@ Suggests:
     ape,
     graph,
     igraphdata,
-    NMF,
     rgl,
     scales,
     stats4,
