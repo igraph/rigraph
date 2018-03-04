@@ -2553,13 +2553,13 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' g <- make_ring(10)
 #' laplacian_matrix(g)
 #' laplacian_matrix(g, norm=TRUE)
 #' laplacian_matrix(g, norm=TRUE, sparse=FALSE)
-#' 
+#' }
 laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
                             sparse=igraph_opt("sparsematrices")) {
   # Argument checks

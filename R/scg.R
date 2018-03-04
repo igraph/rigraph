@@ -89,8 +89,8 @@ NULL
 #' @seealso \code{\link{as_adj}}
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' library(Matrix)
 #' ## g is a large sparse graph
 #' g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
@@ -101,7 +101,7 @@ NULL
 #' 
 #' ## may not be exactly 1, due to numerical errors
 #' max(abs(rowSums(W))-1)
-#' 
+#' }
 stochastic_matrix <- function(graph, column.wise=FALSE,
                            sparse=igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
@@ -201,15 +201,14 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' \url{http://people.epfl.ch/david.morton}
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' 
 #' ## We are not running these examples any more, because they
 #' ## take a long time to run and this is against the CRAN repository
 #' ## policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #' 
-#' \dontrun{
 #' # eigenvectors of a random symmetric matrix
 #' M <- matrix(rexp(10^6), 10^3, 10^3)
 #' M <- (M + t(M))/2
@@ -327,8 +326,8 @@ scg_group <- function(V, nt,
 #' Matrix Analysis and Applications}, 2008.
 #' \url{http://people.epfl.ch/david.morton}
 #' @export
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' library(Matrix)
 #' # compute the semi-projectors and projector for the partition
 #' # provided by a community detection method
@@ -337,19 +336,19 @@ scg_group <- function(V, nt,
 #' memb <- membership(eb)
 #' lr <- scg_semi_proj(memb)
 #' #In the symmetric case L = R
-#' tcrossprod(lr$R)  # same as lr$R %*% t(lr$R)
-#' P <- crossprod(lr$R)  # same as t(lr$R) %*% lr$R
+#' tcrossprod(lr$R)  # same as lr$R \%*\% t(lr$R)
+#' P <- crossprod(lr$R)  # same as t(lr$R) \%*\% lr$R
 #' #P is an orthogonal projector
 #' isSymmetric(P)
-#' sum( (P %*% P-P)^2 )
+#' sum( (P \%*\% P-P)^2 )
 #' 
 #' ## use L and R to coarse-grain the graph Laplacian
 #' lr <- scg_semi_proj(memb, mtype="laplacian")
 #' L <- laplacian_matrix(g)
-#' Lt <- lr$L %*% L %*% t(lr$R)
-#' ## or better lr$L %*% tcrossprod(L,lr$R)
+#' Lt <- lr$L \%*\% L \%*\% t(lr$R)
+#' ## or better lr$L \%*\% tcrossprod(L,lr$R)
 #' rowSums(Lt)
-#' 
+#' }
 scg_semi_proj <- function(groups,
                                mtype=c("symmetric", "laplacian",
                                  "stochastic"), p=NULL,
@@ -492,15 +491,13 @@ scg_semi_proj <- function(groups,
 #' \url{http://people.epfl.ch/david.morton}
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
-#' 
+#' @section Examples:
+#' \preformatted{
 #' ## We are not running these examples any more, because they
 #' ## take a long time (~20 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #' 
-#' \dontrun{
 #' # SCG of a toy network
 #' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
@@ -742,11 +739,12 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 #' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
 #' Matrix Analysis and Applications}, 2008.
 #' \url{http://people.epfl.ch/david.morton}
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' v <- rexp(20)
 #' km <- kmeans(v,5)
 #' sum(km$withinss)
 #' scg_eps(cbind(v), km$cluster)^2
+#' }
 
 scg_eps <- scg_eps

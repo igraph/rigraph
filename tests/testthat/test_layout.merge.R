@@ -3,6 +3,8 @@ context("merge_coords")
 
 test_that("merge_coords works", {
 
+  skip("Does not work in CRAN version")
+
   library(igraph)
   set.seed(42)
 

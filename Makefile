@@ -19,7 +19,8 @@ version_number: force
 # we use the Fortran files for that. We don't need F2C, either.
 
 CSRC := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
-	 grep -v "^src/lapack/" | grep -v "^src/f2c" | grep -v Makefile.am)
+	 grep -v "^src/lapack/" | grep -v "^src/f2c" | \
+	 grep -v "^src/cs/" | grep -v Makefile.am)
 
 $(CSRC): src/%: $(top_srcdir)/src/%
 	mkdir -p $(@D) && cp $< $@
