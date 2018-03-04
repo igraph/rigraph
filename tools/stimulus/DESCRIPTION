@@ -10,7 +10,6 @@ Depends: methods
 Imports: 
     graphics,
     grDevices,
-    irlba,
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
