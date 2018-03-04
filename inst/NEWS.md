@@ -1,8 +1,9 @@
 
-# igraph 1.1.2.9000
+# igraph 1.2.0
 
-??? ??, ????
-
+- The GLPK library is optional, if it is not available, then the
+  `cluster_optimal()` function does not work.
+- Removed the NMF package dependency, and related functions.
 - Fix compilation without libxml2
 
 # igraph 1.1.2
