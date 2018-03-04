@@ -890,7 +890,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' of \code{vertex}.} \item{outer.links}{The number of edges between the
 #' community of \code{vertex} and the rest of the graph. }
 #' @author Jorg Reichardt
-#' (\url{http://theorie.physik.uni-wuerzburg.de/~reichardt/}) for the original
+#' (\url{https://pawn.physik.uni-wuerzburg.de/~reichardt/}) for the original
 #' code and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue
 #' code.
 #' 
