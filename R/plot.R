@@ -75,8 +75,8 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- ring(10)
-#' \dontrun{plot(g, layout=layout_with_kk, vertex.color="green")}
+#' g <- make_ring(10)
+#' plot(g, layout=layout_with_kk, vertex.color="green")
 #' 
 plot.igraph <- function(x, 
                        # SPECIFIC: #####################################
