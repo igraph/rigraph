@@ -889,10 +889,8 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' see references.} \item{inner.links}{The number of edges within the community
 #' of \code{vertex}.} \item{outer.links}{The number of edges between the
 #' community of \code{vertex} and the rest of the graph. }
-#' @author Jorg Reichardt
-#' (\url{https://pawn.physik.uni-wuerzburg.de/~reichardt/}) for the original
-#' code and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue
-#' code.
+#' @author Jorg Reichardt for the original code and Gabor Csardi
+#' \email{csardi.gabor@@gmail.com} for the igraph glue code.
 #' 
 #' Changes to the original function for including the possibility of negative
 #' ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
