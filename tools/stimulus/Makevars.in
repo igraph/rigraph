@@ -1,5 +1,5 @@
 
-PKG_CFLAGS=-DUSING_R -I. -Iinclude -Ics -Iglpk -Iplfit \
+PKG_CFLAGS=-DUSING_R -I. -Iinclude -Ics -Iplfit \
         -ICHOLMOD/Include -IAMD/Include -ICOLAMD/Include \
 	-ISuiteSparse_config \
 	@CPPFLAGS@ @CFLAGS@ -DNDEBUG -DNPARTITION -DNTIMER -DNCAMD -DNPRINT\

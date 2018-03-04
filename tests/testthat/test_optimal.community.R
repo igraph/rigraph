@@ -3,6 +3,8 @@ context("cluster_optimal")
 
 test_that("cluster_optimal works", {
 
+  skip_if_no_glpk()
+
   library(igraph)
   g <- make_graph("Zachary")
   oc <- cluster_optimal(g)
@@ -21,6 +23,8 @@ test_that("cluster_optimal works", {
 })
 
 test_that("weighted cluster_optimal works", {
+
+  skip_if_no_glpk()
 
   library(igraph)
   set.seed(42)

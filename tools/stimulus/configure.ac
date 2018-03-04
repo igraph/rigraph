@@ -122,12 +122,32 @@ AC_SUBST(HAVE_GMP)
 AC_SUBST(GMP_LIBS)
 AC_LANG_POP([C++])
 
-glpk_support=yes
-AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
-HAVE_GLPK=1
-GLPK_LIBS=""
+glpk_support=no
+AC_ARG_ENABLE(glpk,
+              AC_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
+              [glpk_support=$enableval], [glpk_support=no])
+
+HAVE_GLPK=0
+if test $glpk_support = yes; then
+  glpk_support=no
+  AC_CHECK_LIB([glpk], [glp_read_mps], [
+    AC_CHECK_HEADER([glpk.h], [
+      AC_EGREP_CPP(yes, [
+        #include <glpk.h>
+        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 38)
+          yes
+        #endif
+      ], [
+      AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
+        HAVE_GLPK=1
+        glpk_support=yes
+        GLPK_LIBS="-lglpk"
+        AC_SUBST(GLPK_LIBS)
+      ])
+    ])
+  ])
+fi
 AC_SUBST(HAVE_GLPK)
-AC_SUBST(GLPK_LIBS)
 
 AC_DEFINE(IGRAPH_THREAD_LOCAL, [], [We don't care about thread-local storage in R])
 

@@ -7,8 +7,8 @@ test_that("community detection functions work", {
 
   F <- list("cluster_edge_betweenness", "cluster_fast_greedy",
             "cluster_label_prop", "cluster_leading_eigen",
-            "cluster_louvain", "cluster_optimal",
-            "cluster_spinglass", "cluster_walktrap")
+            "cluster_louvain", "cluster_spinglass", "cluster_walktrap")
+  if (has_glpk()) F <- c(F, list("cluster_optimal"))
 
   karate <- make_graph("Zachary")
 
@@ -70,6 +70,7 @@ test_that("creating communities objects works", {
 })
 
 test_that("communities function works", {
+  skip_if_no_glpk()
   library(igraph)
   g <- make_graph("Zachary")
   oc <- cluster_optimal(g)

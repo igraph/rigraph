@@ -1542,6 +1542,27 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' fifty vertices should be fine, graphs with a couple of hundred vertices
 #' might be possible.
 #'
+#' @section Examples:
+#' \preformatted{
+#' 
+#' ## Zachary's karate club
+#' g <- make_graph("Zachary")
+#' 
+#' ## We put everything into a big 'try' block, in case 
+#' ## igraph was compiled without GLPK support
+#' 
+#' ## The calculation only takes a couple of seconds
+#' oc <- cluster_optimal(g)
+#' 
+#' ## Double check the result
+#' print(modularity(oc))
+#' print(modularity(g, membership(oc)))
+#' 
+#' ## Compare to the greedy optimizer
+#' fc <- cluster_fast_greedy(g)
+#' print(modularity(fc))
+#' }
+#'
 #' @aliases optimal.community
 #' @param graph The input graph. Edge directions are ignored for directed
 #' graphs.
@@ -1561,27 +1582,7 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' 2008.
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
-#' ## Zachary's karate club
-#' g <- make_graph("Zachary")
-#' 
-#' ## We put everything into a big 'try' block, in case 
-#' ## igraph was compiled without GLPK support
-#' 
-#' try({
-#'   ## The calculation only takes a couple of seconds
-#'   oc <- cluster_optimal(g)
-#' 
-#'   ## Double check the result
-#'   print(modularity(oc))
-#'   print(modularity(g, membership(oc)))
-#' 
-#'   ## Compare to the greedy optimizer
-#'   fc <- cluster_fast_greedy(g)
-#'   print(modularity(fc))
-#' }, silent=TRUE)
-#' 
+
 cluster_optimal <- function(graph, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

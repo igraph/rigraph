@@ -1424,7 +1424,13 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' 
 #' Create a number of Erdos-Renyi random graphs with identical parameters, and
 #' connect them with the specified number of edges.
-#' 
+#'
+#' @section Examples:
+#' \preformatted{
+#' g <- sample_islands(3, 10, 5/10, 1)
+#' oc <- cluster_optimal(g)
+#' oc
+#' }
 #' 
 #' @aliases interconnected.islands.game sample_islands
 #' @param islands.n The number of islands in the graph.
@@ -1436,11 +1442,6 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @author Samuel Thiriot
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
-#' @examples
-#' 
-#' g <- sample_islands(3, 10, 5/10, 1)
-#' oc <- cluster_optimal(g)
-#' oc
 #' @export
 
 sample_islands <- sample_islands
