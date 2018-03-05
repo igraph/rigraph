@@ -7327,9 +7327,11 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
   
   R_SEXP_to_matrix(pmerges, &merges);
   igraph_vector_init(&membership, 0);
+  IGRAPH_FINALLY(igraph_vector_destroy, &membership);
 
   igraph_community_to_membership(&merges, vcount, steps, &membership, 0);
   PROTECT(result=R_igraph_vector_to_SEXP(&membership));
+  IGRAPH_FINALLY_CLEAN(1);
   
   UNPROTECT(1);
   return result;
