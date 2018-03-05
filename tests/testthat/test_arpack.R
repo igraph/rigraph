@@ -9,9 +9,6 @@ test_that("arpack works for identity matrix", {
 })
 
 test_that("arpack works on the Laplacian of a star", {
-
-  skip("Does not work in CRAN version")
-
   library(igraph)
   f <- function(x, extra=NULL) {
     y <- x

@@ -176,9 +176,9 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' B.N. Parlett & Y. Saad, Complex Shift and Invert Strategies for Real
 #' Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 #' (1987).
-#'
-#' @section Examples:
-#' \preformatted{
+#' @keywords graphs
+#' @examples
+#' 
 #' # Identity matrix
 #' f <- function(x, extra=NULL) x
 #' arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
@@ -205,12 +205,10 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #'   set.seed(42)
 #'   g <- sample_gnp(1000, 5/1000)
 #'   M <- as_adj(g, sparse=TRUE)
-#'   f2 <- function(x, extra=NULL) { cat("."); as.vector(M \%*\% x) }
+#'   f2 <- function(x, extra=NULL) { cat("."); as.vector(M %*% x) }
 #'   baev <- arpack(f2, sym=TRUE, options=list(n=vcount(g), nev=3, ncv=8,
 #'                                   which="LM", maxiter=2000))
 #' }
-#' }
-#' @keywords graphs
 #' @export
 
 arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,

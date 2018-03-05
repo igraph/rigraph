@@ -492,11 +492,11 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-#' @section Examples:
-#' \preformatted{
+#' @examples
+#'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
-#'
+#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
@@ -1494,12 +1494,11 @@ layout.lgl <- function(..., params = list()) {
 #' @export
 #' @family graph layouts
 #' @keywords graphs
-#' @section Examples:
-#' \preformatted{
+#' @examples
+#'
 #' g <- sample_gnp(100, 2/100)
 #' l <- layout_with_mds(g)
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
-#' }
 
 layout_with_mds <- function(graph, dist=NULL, dim=2,
                        options=arpack_defaults) {
