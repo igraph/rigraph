@@ -125,7 +125,7 @@ AC_LANG_POP([C++])
 glpk_support=no
 AC_ARG_ENABLE(glpk,
               AC_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
-              [glpk_support=$enableval], [glpk_support=no])
+              [glpk_support=$enableval], [glpk_support=yes])
 
 HAVE_GLPK=0
 if test $glpk_support = yes; then
