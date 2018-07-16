@@ -17,6 +17,7 @@ Imports:
     utils
 Suggests: 
     ape,
+    digest,
     graph,
     igraphdata,
     rgl,
