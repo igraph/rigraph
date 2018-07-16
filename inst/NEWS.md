@@ -1,5 +1,5 @@
 
-# igraph 1.2.0
+# igraph 1.2.1
 
 - The GLPK library is optional, if it is not available, then the
   `cluster_optimal()` function does not work. Unfortunately we cannot
