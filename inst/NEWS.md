@@ -1,4 +1,10 @@
 
+# igraph 1.2.2
+
+Jul  27, 2018
+
+No user visible changes.
+
 # igraph 1.2.1
 
 - The GLPK library is optional, if it is not available, then the
