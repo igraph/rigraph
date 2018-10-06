@@ -1916,7 +1916,7 @@ norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
                           zmin=-1, zmax=1) {
 
   if (!is.matrix(layout)) {
-    stop("`layout' not a matrix")
+    stop("`layout' must be a matrix")
   }
   if (ncol(layout) != 2 && ncol(layout) != 3) {
     stop("`layout' should have 2 or three columns")
