@@ -1,4 +1,23 @@
-
+#' Graph Clustering Using SVT and NMF -- Clusters Implied by Singular Value Thresholding
+#' 
+#' Performs Clustering of Graphs using Singular Value Thresholding and Non-negative Factorization.
+#' 
+#' @concept Graph Clustering
+#' @aliases gclust.rsvt
+#' 
+#' @param glist List of \code{igraph} Objects
+#' @param r Maximum Number of Clusters Allowed
+#' @param maxsvt Maximum Number of Singular Value Thresholding; Default is 10
+#' @param nmfout T/F indicating if the output from nmf should be returned; Default is FALSE
+#' @param maxit A number passed to irlba or svd function limiting the number of iteration; Default is 10000
+#' @param nmfmethod A number passed to irlba or svd, limiting the number of iterations; Default is 'lee'
+#' 
+#' @return \code{nmf} An NMF object
+#' @return \code{W} Basis Graphs
+#' @return \code{H} Probability Vector for Cluster Weights timeseries of graphs
+#' @return \code{Xorigin} Input Data in the matrix form
+#'
+#' @author Nam Lee \email{nhlee@jhu.edu}
 #' @export
 
 gclust.rsvt <- function(glist,r=1,maxsvt=10,nmfout=FALSE,maxit=10000,nmfmethod='lee') 
@@ -86,6 +105,27 @@ gclust.rsvt <- function(glist,r=1,maxsvt=10,nmfout=FALSE,maxit=10000,nmfmethod='
 	    return(list(nmf=NULL,  W=WW, H=HH, Xorigin=Xraw))
 }
 
+
+
+#' Graph Clustering Using NMF (and no SVT) -- Apparent Clusters
+#'
+#' Performs Clustering of Graphs using Non-negative Factorization.
+#' 
+#' @concept Graph Clustering
+#' 
+#' @param glist List of \code{igraph} Objects
+#' @param r Maximum Number of Clusters Allowed
+#' @param nmfout T/F indicating if the output from nmf should be returned; Default is FALSE
+#' @param maxit A number passed to irlba or svd function limiting the number of iteration; Default is 10000
+#' @param nmfmethod A number passed to irlba or svd, limiting the number of iterations; Default is 'lee'
+#' 
+#' @return \code{nmf} An NMF object
+#' @return \code{W} Basis Graphs
+#' @return \code{H} Probability Vector for Cluster Weights timeseries of graphs
+#' @return \code{Xorigin} Input Data in the matrix form
+#' 
+#' @author Nam Lee \email{nhlee@jhu.edu}
+#' 
 #' @export
 #' @importFrom stats coef
 
@@ -142,6 +182,25 @@ gclust.app <- function(glist, r=1, nmfout=FALSE, maxit=10000, nmfmethod='lee')
 	    return(list(nmf=NULL,W=WW,H=HH, Xorigin=Xraw))
 }
 
+
+
+#' Compute AIC based on a Poisson Approximation using the output from \code{gclust}
+#'
+#'     Compute and Extract information Criteria Value from \code{gclust} using a Poisson
+#'     approximation, where the penality term is adjusted for small sample cases.  
+#'
+#' @concept Compute Information Criteria Value Using a Poisson Approximation 
+#' 
+#' @param gfit The output from a call to \code{gclust.rsvt} or \code{gclust.app}
+#'
+#' @return \code{nclust} Number of clusters being considered
+#' @return \code{negloglikpart} Negative log likelihood part
+#' @return \code{parampart} Parameter penalty term
+#' @return \code{AIC} AIC Value Using a Possion approximation
+#' 
+#' @author Nam Lee \email{nhlee@jhu.edu}
+#' 
+#' @aliases getAICc
 #' @export
 
 getAICc <- function(gfit) {

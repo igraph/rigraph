@@ -870,3 +870,162 @@ igraph.polygon <- function(points, vertex.size=15/200, expand.by=15/200,
   xspline(cl$rescoords, shape=shape, open=FALSE, col=col, border=border)
 }
 
+#' Drawing graphs
+#'
+#' The common bits of the three plotting functions \code{plot.igraph},
+#' \code{tkplot} and \code{rglplot} are discussed in this manual page
+#'
+#' There are currently three different functions in the igraph package which
+#' can draw graph in various ways:
+#'
+#' \code{plot.igraph} does simple non-interactive 2D plotting to R devices.
+#' Actually it is an implementation of the \code{\link[graphics]{plot}} generic
+#' function, so you can write \code{plot(graph)} instead of
+#' \code{plot.igraph(graph)}. As it used the standard R devices it supports
+#' every output format for which R has an output device. The list is quite
+#' impressing: PostScript, PDF files, XFig files, SVG files, JPG, PNG and of
+#' course you can plot to the screen as well using the default devices, or the
+#' good-looking anti-aliased Cairo device.  See \code{\link{plot.igraph}} for
+#' some more information.
+#'
+#' \code{\link{tkplot}} does interactive 2D plotting using the \code{tcltk}
+#' package. It can only handle graphs of moderate size, a thousend vertices is
+#' probably already too many. Some parameters of the plotted graph can be
+#' changed interactively after issuing the \code{tkplot} command: the position,
+#' color and size of the vertices and the color and width of the edges. See
+#' \code{\link{tkplot}} for details.
+#'
+#' \code{\link{rglplot}} is an experimental function to draw graphs in 3D using
+#' OpenGL. See \code{\link{rglplot}} for some more information.
+#'
+#' Please also check the examples below.
+#'
+#' @aliases igraph.plotting
+#' @section How to specify graphical parameters: There are three ways to give
+#' values to the parameters described below, in section 'Parameters'. We give
+#' these three ways here in the order of their precedence.
+#'
+#' The first method is to supply named arguments to the plotting commands:
+#' \code{\link{plot.igraph}}, \code{\link{tkplot}} or \code{\link{rglplot}}.
+#' Parameters for vertices start with prefix \sQuote{\code{vertex.}},
+#' parameters for edges have prefix \sQuote{\code{edge.}}, and global
+#' parameters have no prefix. Eg. the color of the vertices can be given via
+#' argument \code{vertex.color}, whereas \code{edge.color} sets the color of
+#' the edges. \code{layout} gives the layout of the graphs.
+#'
+#' The second way is to assign vertex, edge and graph attributes to the graph.
+#' These attributes have no prefix, ie. the color of the vertices is taken from
+#' the \code{color} vertex attribute and the color of the edges from the
+#' \code{color} edge attribute. The layout of the graph is given by the
+#' \code{layout} graph attribute. (Always assuming that the corresponding
+#' command argument is not present.) Setting vertex and edge attributes are
+#' handy if you want to assign a given \sQuote{look} to a graph, attributes are
+#' saved with the graph is you save it with \code{\link[base]{save}} or in
+#' GraphML format with \code{\link{write_graph}}, so the graph will have the
+#' same look after loading it again.
+#'
+#' If a parameter is not given in the command line, and the corresponding
+#' vertex/edge/graph attribute is also missing then the general igraph
+#' parameters handled by \code{\link{igraph_options}} are also checked. Vertex
+#' parameters have prefix \sQuote{\code{vertex.}}, edge parameters are prefixed
+#' with \sQuote{\code{edge.}}, general parameters like \code{layout} are
+#' prefixed with \sQuote{\code{plot}}.  These parameters are useful if you want
+#' all or most of your graphs to have the same look, vertex size, vertex color,
+#' etc. Then you don't need to set these at every plotting, and you also don't
+#' need to assign vertex/edge attributes to every graph.
+#'
+#' If the value of a parameter is not specified by any of the three ways
+#' described here, its default valued is used, as given in the source code.
+#'
+#' Different parameters can have different type, eg. vertex colors can be given
+#' as a character vector with color names, or as an integer vector with the
+#' color numbers from the current palette. Different types are valid for
+#' different parameters, this is discussed in detail in the next section. It is
+#' however always true that the parameter can always be a function object in
+#' which it will be called with the graph as its single argument to get the
+#' \dQuote{proper} value of the parameter.  (If the function returns another
+#' function object that will \emph{not} be called again\dots{})
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{plot.igraph}}, \code{\link{tkplot}},
+#' \code{\link{rglplot}}, \code{\link{igraph_options}}
+#' @keywords graphs
+#' @examples
+#'
+#' \dontrun{
+#'
+#' # plotting a simple ring graph, all default parameters, except the layout
+#' g <- make_ring(10)
+#' g$layout <- layout_in_circle
+#' plot(g)
+#' tkplot(g)
+#' rglplot(g)
+#'
+#' # plotting a random graph, set the parameters in the command arguments
+#' g <- barabasi.game(100)
+#' plot(g, layout=layout_with_fr, vertex.size=4,
+#'      vertex.label.dist=0.5, vertex.color="red", edge.arrow.size=0.5)
+#'
+#' # plot a random graph, different color for each component
+#' g <- sample_gnp(100, 1/100)
+#' comps <- components(g)$membership
+#' colbar <- rainbow(max(comps)+1)
+#' V(g)$color <- colbar[comps+1]
+#' plot(g, layout=layout_with_fr, vertex.size=5, vertex.label=NA)
+#'
+#' # plot communities in a graph
+#' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
+#' g <- add_edges(g, c(1,6, 1,11, 6,11))
+#' com <- cluster_spinglass(g, spins=5)
+#' V(g)$color <- com$membership+1
+#' g <- set_graph_attr(g, "layout", layout_with_kk(g))
+#' plot(g, vertex.label.dist=1.5)
+#'
+#' # draw a bunch of trees, fix layout
+#' igraph_options(plot.layout=layout_as_tree)
+#' plot(make_tree(20, 2))
+#' plot(make_tree(50, 3), vertex.size=3, vertex.label=NA)
+#' tkplot(make_tree(50, 2, mode="undirected"), vertex.size=10,
+#' vertex.color="green")
+#' }
+#'
+#' @concept Visualization
+#' @name plot.common
+NULL
+
+
+#' Using pie charts as vertices in graph plots
+#'
+#' More complex vertex images can be used to express addtional information
+#' about vertices. E.g. pie charts can be used as vertices, to denote vertex
+#' classes, fuzzy classification of vertices, etc.
+#'
+#' The vertex shape \sQuote{pie} makes igraph draw a pie chart for every
+#' vertex. There are some extra graphical vertex parameters that specify how
+#' the pie charts will look like: \describe{ \item{pie}{Numeric vector, gives
+#' the sizes of the pie slices.} \item{pie.color}{A list of color vectors to
+#' use for the pies. If it is a list of a single vector, then this is used for
+#' all pies. It the color vector is shorter than the number of areas in a pie,
+#' then it is recycled.} \item{pie.border}{The color of the border line of the
+#' pie charts, in the same format as \code{pie.color}.} \item{pie.angle}{The
+#' slope of shading lines, given as an angle in degrees (counter-clockwise).}
+#' \item{pie.density}{The density of the shading lines, in lines per inch.
+#' Non-positive values inhibit the drawing of shading lines.}
+#' \item{pie.lty}{The line type of the border of the slices.} }
+#'
+#' @aliases vertex.shape.pie
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{igraph.plotting}}, \code{\link{plot.igraph}}
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_ring(10)
+#' values <- lapply(1:10, function(x) sample(1:10,3))
+#' if (interactive()) {
+#'   plot(g, vertex.shape="pie", vertex.pie=values,
+#'        vertex.pie.color=list(heat.colors(5)),
+#'        vertex.size=seq(10,30,length=10), vertex.label=NA)
+#' }
+#'
+#' @concept Vertex shapes
+#' @name vertex.shape.pie
+NULL
