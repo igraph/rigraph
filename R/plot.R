@@ -59,9 +59,13 @@
 #' the marked vertex groups. It is in the same units as the vertex sizes. If a
 #' vector is given, then different values are used for the different vertex
 #' groups.
+#' @param returnCoordinates A boolean specifiying if the coordinates and labels 
+#' of the vertices are to be returned.
 #' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
 #' the complete list.
 #' @return Returns \code{NULL}, invisibly.
+#' @return If returnCoordinates = TRUE, returns coordinates and labels of vertices
+#' as data.frame
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout}} for different layouts,
 #' \code{\link{igraph.plotting}} for the detailed description of the plotting
@@ -86,6 +90,7 @@ plot.igraph <- function(x,
                        mark.col=rainbow(length(mark.groups), alpha=0.3),
                        mark.border=rainbow(length(mark.groups), alpha=1),
                        mark.expand=15,
+                        returnCoordinates = FALSE,
                        ...) {
 
   graph <- x
@@ -400,6 +405,9 @@ plot.igraph <- function(x,
            family=if1(label.family, v), font=if1(label.font, v),
            cex=if1(label.cex, v))
     })
+  }
+ if (returnCoordinates){
+  return(data.frame("x"=x, "y"=y, "labels" = labels))
   }
   rm(x, y)
   invisible(NULL)
