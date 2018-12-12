@@ -422,7 +422,7 @@ modularity <- function(x, ...)
 modularity.igraph <- function(x, membership, weights=NULL, ...) {
   # Argument checks
   if (!is_igraph(x)) { stop("Not a graph object") }
-  membership <- as.numeric(membership)
+  membership <- as.numeric(as.factor(membership))
   if (!is.null(weights)) weights <- as.numeric(weights)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -450,7 +450,7 @@ modularity.communities <- function(x, ...) {
 modularity_matrix <- function(graph, membership, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  membership <- as.numeric(membership)-1
+  membership <- as.numeric(as.factor(membership))-1
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
