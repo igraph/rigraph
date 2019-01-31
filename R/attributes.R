@@ -186,6 +186,11 @@ vertex_attr <- function(graph, name, index=V(graph)) {
   }
 }
 
+# lightweight version for developers
+.vertex_attr <- function(graph) {
+  .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
+}
+
 #' Set one or more vertex attributes
 #'
 #' @param graph The graph.
