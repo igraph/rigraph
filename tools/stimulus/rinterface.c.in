@@ -569,8 +569,7 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
 
     /* We copy if we need to */
     if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-      SEXP newattr=duplicate(attr);
-      if (!R_igraph_attribute_protected) { PROTECT(newattr); }
+      SEXP newattr = PROTECT(duplicate(attr));
       REAL(VECTOR_ELT(attr, 0))[1] -= 1;
       if (!R_igraph_attribute_protected &&
 	  REAL(VECTOR_ELT(attr, 0))[1] == 0) {
@@ -595,6 +594,7 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
 	  UNPROTECT(1);
 	}
 	SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
+	UNPROTECT(1);
       }
       attr=newgraph->attr=newattr;
     }
@@ -613,13 +613,14 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
     
     for (i=0; i<valno; i++) {
       SEXP oldva=VECTOR_ELT(val, i);
-      SEXP newva;
       
       /* We do NOT do any copying, the attributes were already copied, 
 	 we're doing this in place. */
-      PROTECT(newva=EVAL(lang3(install("["), oldva, ss)));
+      SEXP l1 = PROTECT(install("["));
+      SEXP l2 = PROTECT(lang3(l1, oldva, ss));
+      SEXP newva = PROTECT(EVAL(l2));
       SET_VECTOR_ELT(val, i, newva);
-      UNPROTECT(1);
+      UNPROTECT(3);
     }
     
     UNPROTECT(1);    
@@ -654,11 +655,11 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
     
     for (i=0; i<valno; i++) {
       SEXP oldva=VECTOR_ELT(val, i);
-      SEXP newva;
-      
-      PROTECT(newva=EVAL(lang3(install("["), oldva, ss)));
+      SEXP l1 = PROTECT(install("["));
+      SEXP l2 = PROTECT(lang3(l1, oldva, ss));
+      SEXP newva = PROTECT(EVAL(l2));
       SET_VECTOR_ELT(toval, i, newva);
-      UNPROTECT(1);
+      UNPROTECT(3);
     }
     
     SET_VECTOR_ELT(toattr, 2, toval);
@@ -889,8 +890,7 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
     
     /* We copy if we need to */
     if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-      SEXP newattr=duplicate(attr);
-      if (!R_igraph_attribute_protected) { PROTECT(newattr); }
+      SEXP newattr=PROTECT(duplicate(attr));
       REAL(VECTOR_ELT(attr, 0))[1] -= 1;
       if (!R_igraph_attribute_protected &&
 	  REAL(VECTOR_ELT(attr, 0))[1] == 0) {
@@ -915,6 +915,7 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
 	  UNPROTECT(1);
 	}
 	SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
+	UNPROTECT(1);
       }
       attr=newgraph->attr=newattr;
     }
@@ -933,13 +934,14 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
     
     for (i=0; i<ealno; i++) {
       SEXP oldea=VECTOR_ELT(eal, i);
-      SEXP newea;
       
       /* We do NOT do any copying, the attributes were already copied, 
 	 we're doing this in place. */
-      PROTECT(newea=EVAL(lang3(install("["), oldea, ss)));
+      SEXP l1 = PROTECT(install("["));
+      SEXP l2 = PROTECT(lang3(l1, oldea, ss));
+      SEXP newea = PROTECT(EVAL(l2));
       SET_VECTOR_ELT(eal, i, newea);
-      UNPROTECT(1);
+      UNPROTECT(3);
     }
     
     UNPROTECT(1);
@@ -974,11 +976,11 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
     
     for (i=0; i<ealno; i++) {
       SEXP oldea=VECTOR_ELT(eal, i);
-      SEXP newea;
-      
-      PROTECT(newea=EVAL(lang3(install("["), oldea, ss)));
+      SEXP l1 = PROTECT(install("["));
+      SEXP l2 = PROTECT(lang3(l1, oldea, ss));
+      SEXP newea = PROTECT(EVAL(l2));
       SET_VECTOR_ELT(toeal, i, newea);
-      UNPROTECT(1);
+      UNPROTECT(3);
     }
     
     SET_VECTOR_ELT(toattr, 3, toeal);
@@ -1007,8 +1009,9 @@ int R_igraph_attribute_get_info(const igraph_t *graph,
     SEXP al=VECTOR_ELT(attr, i+1);
 
     if (n) {			/* return names */
-      SEXP names=GET_NAMES(al);
+      SEXP names = PROTECT(GET_NAMES(al));
       R_igraph_SEXP_to_strvector_copy(names, n);
+      UNPROTECT(1);
     }
 
     if (t) {			/* return types */
@@ -1855,24 +1858,30 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_random_numeric(va, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(va, merges, "sample", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_FIRST:
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_first_numeric(va, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(va, merges, "head", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_LAST:
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_last_numeric(va, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(va, merges, "tail", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_MEAN:
@@ -2019,24 +2028,30 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_random_numeric(ea, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(ea, merges, "sample", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_FIRST:
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_first_numeric(ea, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(ea, merges, "head", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_LAST:
       if (type==IGRAPH_ATTRIBUTE_NUMERIC) {
 	SET_VECTOR_ELT(res, j, R_igraph_ac_last_numeric(ea, merges));
       } else {
+	SEXP tx = PROTECT(ScalarInteger(1));
 	SET_VECTOR_ELT(res, j, R_igraph_ac_all_other(ea, merges, "tail", 
-						     ScalarInteger(1)));
+						     tx));
+	UNPROTECT(1);
       }
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_MEAN:
@@ -3448,7 +3463,7 @@ SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
 
   PROTECT(newgraph=duplicate(graph));
   attrs=VECTOR_ELT(VECTOR_ELT(newgraph, idx1), idx2);
-  names=getAttrib(attrs, R_NamesSymbol);
+  names=PROTECT(getAttrib(attrs, R_NamesSymbol));
   n=length(attrs);
   
   for (i=0; i<n; i++) {
@@ -3474,7 +3489,7 @@ SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
     SET_VECTOR_ELT(VECTOR_ELT(newgraph, idx1), idx2, attrs);
   }
   
-  UNPROTECT(1);
+  UNPROTECT(2);
   return newgraph;
 }
 
@@ -8977,7 +8992,7 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
       igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM); 
     }
     IGRAPH_FINALLY(igraph_vector_destroy, &c_map); 
-    map=NEW_NUMERIC(0); /* hack to have a non-NULL value */
+    map=R_GlobalEnv; /* hack to have a non-NULL value */
   } else { 
     map=R_NilValue;
   }
@@ -8987,7 +9002,7 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
       igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM); 
     } 
     IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &c_maps);
-    maps=NEW_NUMERIC(0); /* hack to have a non-NULL value */ 
+    maps=R_GlobalEnv; /* hack to have a non-NULL value */ 
   } else {
     maps=R_NilValue;
   }
@@ -9420,12 +9435,12 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_multiplicity1);
-  multiplicity1=NEW_NUMERIC(0); /* hack to have a non-NULL value */
+  multiplicity1 = R_GlobalEnv; /* hack to have a non-NULL value */
   if (0 != igraph_vector_init(&c_multiplicity2, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_multiplicity2);
-  multiplicity2=NEW_NUMERIC(0); /* hack to have a non-NULL value */
+  multiplicity2=R_GlobalEnv; /* hack to have a non-NULL value */
   c_probe1=INTEGER(probe1)[0];
   /* Call igraph */
   igraph_bipartite_projection(&c_graph, (isNull(types) ? 0 : &c_types),
