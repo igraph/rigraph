@@ -281,9 +281,14 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
-  defineVar(install("myid"), mkString(my_id_chr), VECTOR_ELT(graph, 9));
-  defineVar(install(R_IGRAPH_VERSION_VAR), mkString(R_IGRAPH_TYPE_VERSION),
-	    VECTOR_ELT(graph, 9));
+  SEXP l1 = PROTECT(install("myid"));
+  SEXP l2 = PROTECT(mkString(my_id_chr));
+  defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  UNPROTECT(2);
+  l1 = PROTECT(install(R_IGRAPH_VERSION_VAR));
+  l2 = PROTECT(mkString(R_IGRAPH_TYPE_VERSION));
+  defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  UNPROTECT(2);
 
   UNPROTECT(1);
   return graph;
@@ -307,9 +312,16 @@ SEXP R_igraph_add_env(SEXP graph) {
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
-  defineVar(install("myid"), mkString(my_id_chr), VECTOR_ELT(result, 9));
-  defineVar(install(R_IGRAPH_VERSION_VAR), mkString(R_IGRAPH_TYPE_VERSION),
-	    VECTOR_ELT(result, 9));
+
+  SEXP l1 = PROTECT(install("myid"));
+  SEXP l2 = PROTECT(mkString(my_id_chr));
+  defineVar(l1, l2, VECTOR_ELT(result, 9));
+  UNPROTECT(2);
+
+  l1 = PROTECT(install(R_IGRAPH_VERSION_VAR));
+  l2 = PROTECT(mkString(R_IGRAPH_TYPE_VERSION));
+  defineVar(l1, l2, VECTOR_ELT(result, 9));
+  UNPROTECT(2);
 
   if (result != graph) { UNPROTECT(1); }
   return result;

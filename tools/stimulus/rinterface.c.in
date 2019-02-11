@@ -153,7 +153,7 @@ SEXP R_igraph_get_attr_mode(SEXP graph, SEXP pwhich) {
 
 int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
   long int i, n=GET_LENGTH(input);
-  SEXP names=GET_NAMES(input);
+  SEXP names = PROTECT(GET_NAMES(input));
   
   igraph_attribute_combination_init(comb);
   
@@ -180,7 +180,8 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
     }
     igraph_attribute_combination_add(comb, n, type, func);
   }
-  
+
+  UNPROTECT(1);
   return 0;
 }
 
@@ -391,8 +392,11 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
     SEXP app, newval;
     PROTECT(app=NEW_LIST(newattrs));
     PROTECT(newnames=NEW_CHARACTER(newattrs));
-    PROTECT(rep=EVAL(lang3(install("rep"), ScalarLogical(NA_LOGICAL), 
-			   ScalarInteger((int) origlen))));
+    SEXP l1 = PROTECT(install("rep"));
+    SEXP l2 = PROTECT(ScalarLogical(NA_LOGICAL));
+    SEXP l3 = PROTECT(ScalarInteger((int) origlen));
+    SEXP l4 = PROTECT(lang3(l1, l2, l3));
+    PROTECT(rep = EVAL(l4));
     for (i=0; i<newattrs; i++) {
       igraph_attribute_record_t *tmp=
 	VECTOR(*nattr)[(long int)VECTOR(news)[i]];
@@ -400,6 +404,7 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
       SET_STRING_ELT(newnames, i, CREATE_STRING_VECTOR(tmp->name));
     }
     UNPROTECT(1); 		/* rep */
+    UNPROTECT(4);
     PROTECT(newval=EVAL(lang3(install("c"), val, app)));
     PROTECT(newnames=EVAL(lang3(install("c"), names, newnames)));
     SET_NAMES(newval, newnames);
@@ -414,6 +419,7 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
   IGRAPH_FINALLY_CLEAN(1);	/* news */
 
   /* Now append the new values */
+  int up = 0;
   for (i=0; i<valno; i++) {
     SEXP oldva=VECTOR_ELT(val, i), newva;
     const char *sexpname=CHAR(STRING_ELT(names,i));
@@ -463,8 +469,12 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
     } else {
       /* No such attribute, append NA's */
       if (rep==0) {
-	PROTECT(rep=EVAL(lang3(install("rep"), ScalarLogical(NA_LOGICAL), 
-			       ScalarInteger((int) nv))));
+	SEXP l1 = PROTECT(install("rep"));
+	SEXP l2 = PROTECT(ScalarLogical(NA_LOGICAL));
+	SEXP l3 = PROTECT(ScalarInteger((int) nv));
+	SEXP l4 = PROTECT(lang3(l1, l2, l3));
+	PROTECT(rep=EVAL(l4));
+	up += 4;
       }
       PROTECT(newva=EVAL(lang3(install("c"), oldva, rep)));
       SET_VECTOR_ELT(val, i, newva);
@@ -473,7 +483,8 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
   }
   if (rep != 0) {
     UNPROTECT(1);
-  } 
+  }
+  if (up > 0) UNPROTECT(up);
   
   return 0;
 }
@@ -726,8 +737,11 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
     SEXP app, neweal;
     PROTECT(app=NEW_LIST(newattrs));
     PROTECT(newnames=NEW_CHARACTER(newattrs));
-    PROTECT(rep=EVAL(lang3(install("rep"), ScalarLogical(NA_LOGICAL),
-			   ScalarInteger((int) origlen))));
+    SEXP l1 = PROTECT(install("rep"));
+    SEXP l2 = PROTECT(ScalarLogical(NA_LOGICAL));
+    SEXP l3 = PROTECT(ScalarInteger((int) origlen));
+    SEXP l4 = PROTECT(lang3(l1, l2, l3));
+    rep = PROTECT(EVAL(l4));
     for (i=0; i<newattrs; i++) {
       igraph_attribute_record_t *tmp=
 	VECTOR(*nattr)[ (long int) VECTOR(news)[i]];
@@ -735,6 +749,7 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
       SET_STRING_ELT(newnames, i, CREATE_STRING_VECTOR(tmp->name));
     }
     UNPROTECT(1);		/* rep */
+    UNPROTECT(4);
     PROTECT(neweal=EVAL(lang3(install("c"), eal, app)));
     PROTECT(newnames=EVAL(lang3(install("c"), names, newnames)));
     SET_NAMES(neweal, newnames);
@@ -749,6 +764,7 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
   IGRAPH_FINALLY_CLEAN(1);
 
   /* Now append the new values */
+  int up = 0;
   for (i=0; i<ealno; i++) {
     SEXP oldea=VECTOR_ELT(eal, i), newea;
     const char *sexpname=CHAR(STRING_ELT(names, i));
@@ -797,9 +813,13 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
       }
     } else {
       /* No such attribute, append NA's */
-      if (rep==0) {
-	PROTECT(rep=EVAL(lang3(install("rep"), ScalarLogical(NA_LOGICAL),
-			       ScalarInteger((int) ne))));
+      if (rep == 0) {
+       SEXP l1 = PROTECT(install("rep"));
+       SEXP l2 = PROTECT(ScalarLogical(NA_LOGICAL));
+       SEXP l3 = PROTECT(ScalarInteger((int) ne));
+       SEXP l4 = PROTECT(lang3(l1, l2, l3));
+       up += 4;
+       PROTECT(rep = EVAL(l4));
       }
       PROTECT(newea=EVAL(lang3(install("c"), oldea, rep)));
       SET_VECTOR_ELT(eal, i, newea);
@@ -809,6 +829,7 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
   if (rep != 0) {
     UNPROTECT(1);
   }
+  if (up > 0) UNPROTECT(up);
 
   return 0;
 }
@@ -1637,14 +1658,23 @@ SEXP R_igraph_ac_all_other(SEXP attr,
       REAL(tmp)[j] = src+1;
     }
     if (! arg) {
-      SET_VECTOR_ELT(res, i, 
-		     EVAL(lang2(install(function_name), 
-				EVAL(lang3(install("["), attr, tmp)))));
+      SEXP l1 = PROTECT(install(function_name));
+      SEXP l2 = PROTECT(install("["));
+      SEXP l3 = PROTECT(lang3(l2, attr, tmp));
+      SEXP l4 = PROTECT(EVAL(l3));
+      SEXP l5 = PROTECT(lang2(l1, l4));
+      SEXP l6 = PROTECT(EVAL(l5));
+      SET_VECTOR_ELT(res, i, l6);
+      UNPROTECT(6);
     } else {
-      SET_VECTOR_ELT(res, i, 
-		     EVAL(lang3(install(function_name), 
-				EVAL(lang3(install("["), attr, tmp)),
-				arg)));
+      SEXP l1 = PROTECT(install(function_name));
+      SEXP l2 = PROTECT(install("["));
+      SEXP l3 = PROTECT(lang3(l2, attr, tmp));
+      SEXP l4 = PROTECT(EVAL(l3));
+      SEXP l5 = PROTECT(lang3(l1, l4, arg));
+      SEXP l6 = PROTECT(EVAL(l5));
+      SET_VECTOR_ELT(res, i, l6);
+      UNPROTECT(6);
     }
     UNPROTECT(1);
   }
@@ -1659,8 +1689,11 @@ SEXP R_igraph_ac_all_other(SEXP attr,
       }
     }
     if (good) {
-      res2=EVAL(lang3(install("unlist"), res, 
-		      ScalarLogical(0)));
+      SEXP l1 = PROTECT(install("unlist"));
+      SEXP l2 = PROTECT(ScalarLogical(0));
+      SEXP l3 = PROTECT(lang3(l1, res, l2));
+      res2 = EVAL(l3);
+      UNPROTECT(3);
       UNPROTECT(1);
       return res2;
     }
@@ -1687,9 +1720,13 @@ SEXP R_igraph_ac_func(SEXP attr,
       long int src=(long int) VECTOR(*v)[j];
       REAL(tmp)[j] = src+1;
     }
-    SET_VECTOR_ELT(res, i, 
-		   EVAL(lang2(func, 
-			      EVAL(lang3(install("["), attr, tmp)))));
+    SEXP l1 = PROTECT(install("["));
+    SEXP l2 = PROTECT(lang3(l1, attr, tmp));
+    SEXP l3 = PROTECT(EVAL(l2));
+    SEXP l4 = PROTECT(lang2(func, l3));
+    SEXP l5 = PROTECT(EVAL(l4));
+    SET_VECTOR_ELT(res, i, l5);
+    UNPROTECT(5);
     UNPROTECT(1);
   }
   
@@ -1703,8 +1740,11 @@ SEXP R_igraph_ac_func(SEXP attr,
       }
     }
     if (good) {
-      res2=EVAL(lang3(install("unlist"), res, 
-		      ScalarLogical(0)));
+      SEXP l1 = PROTECT(install("unlist"));
+      SEXP l2 = PROTECT(ScalarLogical(0));
+      SEXP l3 = PROTECT(lang3(l1, res, l2));
+      res2 = EVAL(l3);
+      UNPROTECT(3);
       UNPROTECT(1);
       return res2;
     }
@@ -2101,27 +2141,32 @@ int R_igraph_interrupt_handler(void *data) {
 
 int R_igraph_progress_handler(const char *message, igraph_real_t percent,
 			      void * data) {
-  SEXP ec, rho;
+  SEXP ec;
   int ecint;
-  PROTECT(rho = EVAL(lang2(install("getNamespace"), 
-			   ScalarString(mkChar("igraph"))))); 
+  SEXP l1 = PROTECT(install("getNamespace"));
+  SEXP l2 = PROTECT(ScalarString(mkChar("igraph")));
+  SEXP l3 = PROTECT(lang2(l1, l2));
+  SEXP rho = PROTECT(EVAL(l3));
 
-  PROTECT(ec=eval(lang3(install(".igraph.progress"), ScalarReal(percent), 
-			ScalarString(mkChar(message))), rho));
+  SEXP l4 = PROTECT(install(".igraph.progress"));
+  SEXP l5 = PROTECT(ScalarReal(percent));
+  SEXP l6 = PROTECT(ScalarString(mkChar(message)));
+  SEXP l7 = PROTECT(lang3(l4, l5, l6));
+  PROTECT(ec=eval(l7, rho));
   ecint=INTEGER(ec)[0];
-  UNPROTECT(2);
+  UNPROTECT(9);
   return ecint;
 }
 
 int R_igraph_status_handler(const char *message, void *data) {
-  SEXP ec, rho;
   int ecint;
-  PROTECT(rho = EVAL(lang2(install("getNamespace"), 
-                           ScalarString(mkChar("igraph"))))); 
-  PROTECT(ec=EVAL(lang2(install(".igraph.status"), 
-			ScalarString(mkChar(message)))));
+  SEXP l4 = PROTECT(install(".igraph.status"));
+  SEXP l5 = PROTECT(ScalarString(mkChar(message)));
+  SEXP l6 = PROTECT(lang2(l4, l5));
+  SEXP ec = PROTECT(EVAL(l6));
+
   ecint=INTEGER(ec)[0];
-  UNPROTECT(2);
+  UNPROTECT(4);
   return 0;
 }
 
@@ -2148,13 +2193,18 @@ SEXP R_igraph_set_verbose(SEXP verbose) {
 }
 
 SEXP R_igraph_finalizer() {
-  SEXP rho;
-  PROTECT(rho = EVAL(lang2(install("getNamespace"), 
-			   ScalarString(mkChar("igraph")))));
-  eval(lang4(install(".igraph.progress"), ScalarReal(0.0), 
-	     ScalarString(mkChar("")), ScalarLogical(1)), rho);
+  SEXP l1 = PROTECT(install("getNamespace"));
+  SEXP l2 = PROTECT(ScalarString(mkChar("igraph")));
+  SEXP l3 = PROTECT(lang2(l1, l2));
+  SEXP rho = PROTECT(EVAL(l3));
+  SEXP l4 = PROTECT(install(".igraph.progress"));
+  SEXP l5 = PROTECT(ScalarReal(0.0));
+  SEXP l6 = PROTECT(ScalarString(mkChar("")));
+  SEXP l7 = PROTECT(ScalarLogical(1));
+  SEXP l8 = PROTECT(lang4(l4, l5, l6, l7));
+  eval(l8, rho);
   IGRAPH_FINALLY_FREE();
-  UNPROTECT(1);
+  UNPROTECT(9);
   return R_NilValue;
 }
 
@@ -8032,7 +8082,7 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
 
   SEXP s_memb, s_comm, s_evalue, s_evector, s_multip;
   SEXP R_fcall, R_multip_call;
-  SEXP res;
+  SEXP res, l1, l2, l3;
   int result;
   R_igraph_i_levc_data_t *data=extra;
   R_igraph_i_function_container_t cont = { arpack_multiplier };
@@ -8041,10 +8091,10 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
   PROTECT(s_comm=NEW_NUMERIC(1)); REAL(s_comm)[0]=comm;
   PROTECT(s_evalue=NEW_NUMERIC(1)); REAL(s_evalue)[0]=eigenvalue;
   PROTECT(s_evector=R_igraph_vector_to_SEXP(eigenvector));
-  PROTECT(R_multip_call =
-	  lang3(install("igraph.i.levc.arp"), 
-		R_MakeExternalPtr((void*) &cont, R_NilValue, R_NilValue),
-		R_MakeExternalPtr(arpack_extra, R_NilValue, R_NilValue)));
+  PROTECT(l1 = install("igraph.i.levc.arp"));
+  PROTECT(l2 = R_MakeExternalPtr((void*) &cont, R_NilValue, R_NilValue));
+  PROTECT(l3 = R_MakeExternalPtr(arpack_extra, R_NilValue, R_NilValue));
+  PROTECT(R_multip_call = lang3(l1, l2, l3));
   PROTECT(s_multip = eval(R_multip_call, data->rho2));
 
   PROTECT(R_fcall = R_igraph_i_lang7(data->fun, s_memb, s_comm, 
@@ -8054,7 +8104,7 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
   
   result=(int) REAL(AS_NUMERIC(res))[0];
 	  
-  UNPROTECT(8);
+  UNPROTECT(11);
   return result;
 }
 
