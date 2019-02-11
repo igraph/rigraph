@@ -189,7 +189,7 @@ static SEXP R_igraph_attribute_protected=0;
 static long int R_igraph_attribute_protected_size=0;
 
 void R_igraph_attribute_protected_destroy(void *dummy) {
-  UNPROTECT_PTR(R_igraph_attribute_protected);
+  R_ReleaseObject(R_igraph_attribute_protected);
   R_igraph_attribute_protected=0;
   R_igraph_attribute_protected_size=0;
 }
@@ -209,7 +209,7 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
 		       VECTOR_ELT(R_igraph_attribute_protected, i));
       }
       PROTECT(newl);
-      UNPROTECT_PTR(R_igraph_attribute_protected);
+      R_ReleaseObject(R_igraph_attribute_protected);
       R_igraph_attribute_protected=newl;
     }
     SET_VECTOR_ELT(R_igraph_attribute_protected,
@@ -5258,7 +5258,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   SEXP result;
   long int i;
 
-  PROTECT(R_igraph_attribute_protected=NEW_LIST(100));
+  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
   R_igraph_attribute_protected_size=0;
   IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
   
@@ -5276,8 +5276,9 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   igraph_vector_ptr_destroy(&comps);
   IGRAPH_FINALLY_CLEAN(1);
 
-  UNPROTECT(2);			/* protected list must be on top */
+  UNPROTECT(1);
   IGRAPH_FINALLY_CLEAN(1);
+  R_ReleaseObject(R_igraph_attribute_protected);
   R_igraph_attribute_protected=0;
   R_igraph_attribute_protected_size=0;
 
@@ -6643,7 +6644,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
   
-  PROTECT(R_igraph_attribute_protected=NEW_LIST(100));
+  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
   R_igraph_attribute_protected_size=0;
   IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
@@ -6662,8 +6663,9 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vector_ptr_destroy(&res);
   igraph_vs_destroy(&vids);
   
-  UNPROTECT(2);			/* protected list must be on top */
+  UNPROTECT(1);
   IGRAPH_FINALLY_CLEAN(1);
+  R_ReleaseObject(R_igraph_attribute_protected);
   R_igraph_attribute_protected=0;
   R_igraph_attribute_protected_size=0;
 
@@ -9045,7 +9047,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SEXP Mu;
   SEXP result, names;
 
-  PROTECT(R_igraph_attribute_protected=NEW_LIST(100));
+  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
   R_igraph_attribute_protected_size=0;
   IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
@@ -9080,8 +9082,9 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SET_STRING_ELT(names, 1, CREATE_STRING_VECTOR("Mu"));
   SET_NAMES(result, names);
 
-  UNPROTECT(5);			/* protected list must be on top */
+  UNPROTECT(4);
   IGRAPH_FINALLY_CLEAN(1);
+  R_ReleaseObject(R_igraph_attribute_protected);
   R_igraph_attribute_protected=0;
   R_igraph_attribute_protected_size=0;
 
@@ -9102,7 +9105,7 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
 
   SEXP result, names;
 
-  PROTECT(R_igraph_attribute_protected=NEW_LIST(100));
+  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
   R_igraph_attribute_protected_size=0;
   IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
@@ -9136,8 +9139,9 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   SET_STRING_ELT(names, 1, CREATE_STRING_VECTOR("thresholds"));
   SET_NAMES(result, names);
 
-  UNPROTECT(5);			/* protected list must be on top */
+  UNPROTECT(4);
   IGRAPH_FINALLY_CLEAN(1);
+  R_ReleaseObject(R_igraph_attribute_protected);
   R_igraph_attribute_protected=0;
   R_igraph_attribute_protected_size=0;
 
