@@ -1,3 +1,3 @@
 #! /bin/bash
 
-R -e 'devtools::document()'
+R -e 'devtools::load_all(); devtools::document()'
