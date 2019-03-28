@@ -11,3 +11,17 @@ has_glpk <- function() {
 skip_if_no_glpk <- function() {
   if (!has_glpk()) skip("No GLPK library")
 }
+
+with_rng_version <- function(version, expr) {
+  orig <- RNGkind()
+  on.exit(do.call(RNGkind, as.list(orig)), add = TRUE)
+  suppressWarnings(RNGversion(version))
+  expr
+}
+
+local_rng_version <- function(version, .local_envir = parent.frame()) {
+  orig <- RNGkind()
+  withr::defer(do.call(RNGkind, as.list(orig)), envir = .local_envir)
+  suppressWarnings(RNGversion(version))
+  orig
+}

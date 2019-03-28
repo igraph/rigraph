@@ -4,6 +4,7 @@ context("Local scan statistics")
 library(igraph)
 require(digest)
 
+local_rng_version("3.5.0")
 set.seed(12345)
 n <- 10^3
 p <- 0.1

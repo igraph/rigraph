@@ -24,7 +24,8 @@ Suggests:
     scales,
     stats4,
     tcltk,
-    testthat
+    testthat,
+    withr
 License: GPL (>= 2)
 URL: http://igraph.org
 SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)

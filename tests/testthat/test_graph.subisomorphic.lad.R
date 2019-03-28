@@ -27,6 +27,7 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 test_that("LAD stress test", {
 
   library(igraph)
+  local_rng_version("3.5.0")
   set.seed(42)
   N <- 100
   

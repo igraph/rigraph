@@ -27,6 +27,7 @@ test_that("weighted cluster_optimal works", {
   skip_if_no_glpk()
 
   library(igraph)
+  local_rng_version("3.5.0")
   set.seed(42)
   g <- make_full_graph(5) + make_ring(5)
   E(g)$weight <- sample(1:2, ecount(g), replace=TRUE)
