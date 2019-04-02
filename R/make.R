@@ -1429,7 +1429,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
 #'
-#' \code{make_bipartite_graph} basically does three things. First it checks tha
+#' \code{make_bipartite_graph} basically does three things. First it checks the
 #' \code{edges} vector against the vertex \code{types}. Then it creates a graph
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
 #' a vertex attribute called \code{type}.
