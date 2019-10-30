@@ -1,5 +1,5 @@
 
-# R/igraph
+# R/igraph <img src="man/figures/logo.png" width="160px" align="right" />
 
 R/igraph is an R package of the igraph network analysis library.
 
