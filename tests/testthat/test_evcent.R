@@ -40,7 +40,6 @@ test_that("eigen_centrality works", {
   for (i in 1:1000) {
     G <- sample_gnm(10, sample(1:20, 1))
     ev <- eigen_centrality(G)
-    expect_that(is.good(as_adj(G, sparse=FALSE), ev$vector,
-                        ev$value), is_true())
+    expect_true(is.good(as_adj(G, sparse=FALSE), ev$vector, ev$value))
   }
 })

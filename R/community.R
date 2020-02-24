@@ -391,8 +391,6 @@ modularity <- function(x, ...)
 #'
 #' @aliases modularity
 #' @param x,graph The input graph.
-#' @param membership Numeric vector, for each vertex it gives its community.
-#' The communities are numbered from one.
 #' @param weights If not \code{NULL} then a numeric vector giving edge weights.
 #' @param \dots Additional arguments, none currently.
 #' @return For \code{modularity} a numeric scalar, the modularity score of the
@@ -447,10 +445,10 @@ modularity.communities <- function(x, ...) {
 #' @aliases mod.matrix
 #' @export
 
-modularity_matrix <- function(graph, membership, weights=NULL) {
+modularity_matrix <- function(graph, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  membership <- as.numeric(membership)-1
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
   weights <- E(graph)$weight 
   } 
@@ -462,7 +460,7 @@ modularity_matrix <- function(graph, membership, weights=NULL) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_modularity_matrix, graph, membership, weights)
+  res <- .Call(C_R_igraph_modularity_matrix, graph, weights)
 
   res
 }

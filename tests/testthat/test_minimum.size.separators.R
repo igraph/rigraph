@@ -19,6 +19,6 @@ test_that("min_separators works", {
                     John    - Gery:Russ:Michael)
   camp <- simplify(camp)
   sep <- min_separators(camp)
-  expect_that(all(sapply(sep, is_min_separator, graph=camp)), is_true())
+  expect_true(all(sapply(sep, is_min_separator, graph=camp)))
 
 })

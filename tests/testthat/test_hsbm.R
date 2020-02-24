@@ -12,28 +12,28 @@ test_that("HSBM works", {
   g <- sample_hierarchical_sbm(100, 10, rho=c(3,3,4)/10, C=C, p=0)
   expect_that(ecount(g), equals(172))
   expect_that(vcount(g), equals(100))
-  expect_that(is.directed(g), is_false())
+  expect_false(is.directed(g))
 
   set.seed(42)
 
   g2 <- sample_hierarchical_sbm(100, 10, rho=c(3,3,4)/10, C=C, p=1)
   expect_that(ecount(g2), equals(ecount(g) + 10 * 9 * (90 + 10) / 2))
   expect_that(vcount(g2), equals(100))
-  expect_that(is.simple(g2), is_true())
+  expect_true(is.simple(g2))
 
   set.seed(42)
   
   g3 <- sample_hierarchical_sbm(100, 10, rho=c(3,3,4)/10, C=C, p=1e-15)
   expect_that(ecount(g3), equals(ecount(g)))
   expect_that(vcount(g3), equals(100))
-  expect_that(is.simple(g3), is_true())
+  expect_true(is.simple(g3))
 
   set.seed(42)
   
   g4 <- sample_hierarchical_sbm(100, 10, rho=c(3,3,4)/10, C=C, p=1-1e-15)
   expect_that(ecount(g4), equals(ecount(g2)))
   expect_that(vcount(g4), equals(100))
-  expect_that(is.simple(g4), is_true())
+  expect_true(is.simple(g4))
 
 })
 
@@ -88,7 +88,7 @@ test_that("HSBM with list arguments works", {
 
   gg1 <- sample_hierarchical_sbm(21, m=c(3, 10, 5, 3), rho=list(rho1, rho2, rho3, rho4),
                    C=list(C1, C2, C3, C4), p=1)
-  expect_that(is.simple(gg1), is_true())
+  expect_true(is.simple(gg1))
 
   set.seed(42)
   gg11 <- sample_hierarchical_sbm(21, m=c(3, 10, 5, 3), rho=list(rho1, rho2, rho3, rho4),
@@ -105,7 +105,7 @@ test_that("HSBM with list arguments works", {
   C4 <- matrix(1, nrow=2, ncol=2)
   gg2 <- sample_hierarchical_sbm(21, m=c(3, 10, 5, 3), rho=list(rho1, rho2, rho3, rho4),
                    C=list(C1, C2, C3, C4), p=0)
-  expect_that(is.simple(gg2), is_true())
+  expect_true(is.simple(gg2))
 
   gg22 <- sample_hierarchical_sbm(21, m=c(3, 10, 5, 3), rho=list(rho1, rho2, rho3, rho4),
                    C=list(C1, C2, C3, C4), p=1)

@@ -11,8 +11,8 @@ test_that("as.directed works", {
   expect_that(degree(g), equals(degree(g3)))
   expect_that(degree(g), equals(degree(g2) / 2))  
 
-  expect_that(graph.isomorphic(g, as.undirected(g2)), is_true())
-  expect_that(graph.isomorphic(g, as.undirected(g3)), is_true())
+  expect_true(graph.isomorphic(g, as.undirected(g2)))
+  expect_true(graph.isomorphic(g, as.undirected(g3)))
 })
 
 test_that("as.directed keeps attributes", {
