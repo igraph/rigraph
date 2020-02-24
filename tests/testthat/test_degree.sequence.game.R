@@ -16,8 +16,8 @@ test_that("sample_degseq works", {
 
   nG <- sample_degseq(degree(g), method="vl")
   expect_that(degree(nG), equals(degree(g)))
-  expect_that(is_connected(nG), is_true())
-  expect_that(is_simple(nG), is_true())
+  expect_true(is_connected(nG))
+  expect_true(is_simple(nG))
 
   #####
 

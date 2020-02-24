@@ -15,7 +15,7 @@ test_that("sample_correlated_gnp works", {
 
   g3 <- sample_correlated_gnp(g, corr=0, p=g$p, perm=NULL)
   c3 <- cor(as.vector(g[]), as.vector(g3[]))
-  expect_that(abs(c3) < .3, is_true())
+  expect_true(abs(c3) < .3)
 
 })
 
@@ -25,7 +25,7 @@ test_that("sample_correlated_gnp_pair works", {
   set.seed(42)
 
   gp <- sample_correlated_gnp_pair(10, corr=.95, p=.1, perm=NULL)
-  expect_that(abs(ecount(gp[[1]]) - ecount(gp[[2]])) < 3, is_true())
+  expect_true(abs(ecount(gp[[1]]) - ecount(gp[[2]])) < 3)
 
 })
 
@@ -43,7 +43,7 @@ test_that("sample_correlated_gnp corner cases work", {
 
   g <- erdos.renyi.game(10, .3)
   g2 <- sample_correlated_gnp(g, corr=0.000001, p=.99999999)
-  expect_that(is.full(g2), is_true())
+  expect_true(is.full(g2))
 
   g3 <- sample_correlated_gnp(g, corr=0.000001, p=0.0000001)
   expect_that(ecount(g3), equals(0))
@@ -51,7 +51,7 @@ test_that("sample_correlated_gnp corner cases work", {
 
   gg <- erdos.renyi.game(10, .3, directed=TRUE)
   gg2 <- sample_correlated_gnp(gg, corr=0.000001, p=.99999999)
-  expect_that(is.full(gg2), is_true())
+  expect_true(is.full(gg2))
 
   gg3 <- sample_correlated_gnp(gg, corr=0.000001, p=0.0000001)
   expect_that(ecount(gg3), equals(0))

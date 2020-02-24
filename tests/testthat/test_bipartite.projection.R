@@ -7,8 +7,8 @@ test_that("bipartite_projection works", {
 
   g <- make_full_bipartite_graph(10,5)
   proj <- bipartite_projection(g)
-  expect_that(graph.isomorphic(proj[[1]], make_full_graph(10)), is_true())
-  expect_that(graph.isomorphic(proj[[2]], make_full_graph(5)), is_true())
+  expect_true(graph.isomorphic(proj[[1]], make_full_graph(10)))
+  expect_true(graph.isomorphic(proj[[2]], make_full_graph(5)))
 
   M <- matrix(0, nr=5, nc=3)
   rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
@@ -45,8 +45,8 @@ test_that("bipartite_projection can calculate only one projection", {
   proj1 <- bipartite_projection(g, which="false")
   proj2 <- bipartite_projection(g, which="true")
 
-  expect_that(graph.isomorphic(proj$proj1, proj1), is_true())
-  expect_that(graph.isomorphic(proj$proj2, proj2), is_true())
+  expect_true(graph.isomorphic(proj$proj1, proj1))
+  expect_true(graph.isomorphic(proj$proj2, proj2))
   expect_that(vertex.attributes(proj$proj1), equals(vertex.attributes(proj1)))
   expect_that(vertex.attributes(proj$proj2), equals(vertex.attributes(proj2)))
   expect_that(edge_attr(proj$proj1), equals(edge_attr(proj1)))
@@ -66,15 +66,15 @@ test_that("bipartite_projection removes 'type' attribute if requested", {
   proj4 <- bipartite_projection(g, which="true", remove.type=FALSE)
   proj5 <- bipartite_projection(g, which="false", remove.type=FALSE)
 
-  expect_that("type" %in% vertex_attr_names(proj[[1]]), is_false())
-  expect_that("type" %in% vertex_attr_names(proj[[2]]), is_false())
-  expect_that("type" %in% vertex_attr_names(proj1), is_false())
-  expect_that("type" %in% vertex_attr_names(proj2), is_false())
+  expect_false("type" %in% vertex_attr_names(proj[[1]]))
+  expect_false("type" %in% vertex_attr_names(proj[[2]]))
+  expect_false("type" %in% vertex_attr_names(proj1))
+  expect_false("type" %in% vertex_attr_names(proj2))
 
-  expect_that("type" %in% vertex_attr_names(proj3[[1]]), is_true())
-  expect_that("type" %in% vertex_attr_names(proj3[[2]]), is_true())
-  expect_that("type" %in% vertex_attr_names(proj4), is_true())
-  expect_that("type" %in% vertex_attr_names(proj5), is_true())
+  expect_true("type" %in% vertex_attr_names(proj3[[1]]))
+  expect_true("type" %in% vertex_attr_names(proj3[[2]]))
+  expect_true("type" %in% vertex_attr_names(proj4))
+  expect_true("type" %in% vertex_attr_names(proj5))
 })
 
 test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {

@@ -27,7 +27,7 @@ test_that("add_edges unknown attributes to NA", {
   g <- make_empty_graph(10)
   g2 <- add_edges(g, (edges <- c(1,2, 2,3, 3,4, 1,6, 1,7, 9,10)) )
   g4 <- add_edges(g2, c(1,4, 4,6, 7,1), attr=list(weight=c(-1,1,-2.5)))
-  expect_that(all(is.na(E(g4)$weight[seq_len(length(edges)/2)])), is_true())
+  expect_true(all(is.na(E(g4)$weight[seq_len(length(edges)/2)])))
 })
 
 test_that("add_edges appends attributes properly", {
