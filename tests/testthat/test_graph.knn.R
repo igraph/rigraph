@@ -29,14 +29,12 @@ test_that("knn works", {
   expect_that(r4$knnk[12], equals(19/3))
   
   ## A weighted graph
-  # g5 <- make_star(10)
-  # E(g5)$weight <- seq(ecount(g5))
-  # r5 <- knn(g5)
-  # expect_that(r5, equals(structure(list(knn = c(1, 45, 22.5, 15,
-  #                                         11.25, 9, 7.5, 6.42857142857143,
-  #                                         5.625, 5), knnk =
-  #                                       c(14.1448412698413, NaN, NaN,
-  #                                         NaN, NaN, NaN, NaN, NaN,
-  #                                         1)), .Names = c("knn",
-  #                                                "knnk")) ))
+  g5 <- make_star(10)
+  E(g5)$weight <- seq(ecount(g5))
+  r5 <- knn(g5)
+  expect_that(r5, equals(structure(list(knn = c(1, rep(9, 9)), knnk =
+                                        c(9, NaN, NaN,
+                                          NaN, NaN, NaN, NaN, NaN,
+                                          1)), .Names = c("knn",
+                                                 "knnk")) ))
 })
