@@ -70,8 +70,8 @@ write.graph.fromraw <- function(buffer, file) {
 #' Reading foreign file formats
 #' 
 #' The \code{read_graph} function is able to read graphs in various
-#' representations from a file, or from a http connection. Currently some
-#' simple formats are supported.
+#' representations from a file, or from a http connection. Various formats 
+#' are supported.
 #' 
 #' The \code{read_graph} function may have additional arguments depending on
 #' the file format (the \code{format} argument). See the details separately for
@@ -82,9 +82,10 @@ write.graph.fromraw <- function(buffer, file) {
 #' \code{http} or \code{ftp} connection. It can also be a character string with
 #' the file name or URI.
 #' @param format Character constant giving the file format. Right now
-#' \code{as_edgelist}, \code{pajek}, \code{graphml}, \code{gml}, \code{ncol},
-#' \code{lgl}, \code{dimacs} and \code{graphdb} are supported, the default is
-#' \code{edgelist}. As of igraph 0.4 this argument is case insensitive.
+#' \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml}, 
+#' \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported, 
+#' the default is \code{edgelist}. As of igraph 0.4 this argument is case 
+#' insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
 #' @section Edge list format: This format is a simple text file with numeric
