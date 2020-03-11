@@ -6,7 +6,8 @@ r:
   - release
   - devel
 
-install:
+before_install:
+  - Rscript -e 'install.packages(c("roxygen2", "devtools"))'
   - git submodule update
   - make
 
@@ -26,9 +27,6 @@ r_packages:
   - rgl
   - ape
   - scales
-
-after_failure:
-- ./pkg-build.sh dump_logs
 
 after_success:
 - tools/travis_deploy.sh igraph_*.tar.gz
