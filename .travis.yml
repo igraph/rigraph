@@ -16,6 +16,7 @@ apt_packages:
   - libglu1-mesa-dev
   - libfreetype6-dev
   - libxml2-dev
+  - libgmp-dev
 
 bioc_packages:
   - graph
@@ -27,7 +28,6 @@ r_github_packages:
   - gaborcsardi/pkgconfig
 
 r_packages:
-  - falsy
   - roxygen2
   - NMF
   - rgl
