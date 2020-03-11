@@ -391,6 +391,8 @@ modularity <- function(x, ...)
 #'
 #' @aliases modularity
 #' @param x,graph The input graph.
+#' @param membership Numeric vector, one value for each vertex, the membership
+#' vector of the community structure.
 #' @param weights If not \code{NULL} then a numeric vector giving edge weights.
 #' @param \dots Additional arguments, none currently.
 #' @return For \code{modularity} a numeric scalar, the modularity score of the

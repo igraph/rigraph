@@ -1,29 +1,39 @@
 
-language: c
-sudo: required
+language: r
+
+warnings_are_errors: false
+
+r:
+  - oldrel
+  - release
+  - devel
 
 before_install:
-- curl -OL https://raw.githubusercontent.com/metacran/r-builder/master/pkg-build.sh
-- chmod 755 pkg-build.sh
-- ./pkg-build.sh bootstrap
-- export TRAVIS_COMMIT_MSG="$(git log --format=%B --no-merges -n 1)"
-- export PATH="$PATH:$(./pkg-build.sh r_path)"
+  - Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+  - make
 
-install:
-- ./pkg-build.sh install_github hadley/lazyeval igraph/igraphdata gaborcsardi/roxygen gaborcsardi/pkgconfig
-- ./pkg-build.sh install_r magrittr falsy roxygen2
-- git submodule update
-- make
-- ./pkg-build.sh install_deps
-- ./pkg-build.sh install_bioc graph
-- ./pkg-build.sh install_r rgl ape scales
+apt_packages:
+  - libx11-dev
+  - libglu1-mesa-dev
+  - libfreetype6-dev
+  - libxml2-dev
+  - libgmp-dev
 
-script:
-- ./pkg-build.sh run_build
-- ./pkg-build.sh run_check
+bioc_packages:
+  - graph
 
-after_failure:
-- ./pkg-build.sh dump_logs
+r_github_packages:
+  - hadley/lazyeval
+  - igraph/igraphdata
+  - gaborcsardi/roxygen
+  - gaborcsardi/pkgconfig
+
+r_packages:
+  - roxygen2
+  - NMF
+  - rgl
+  - ape
+  - scales
 
 after_success:
 - tools/travis_deploy.sh igraph_*.tar.gz
@@ -32,9 +42,3 @@ notifications:
   email:
     on_success: change
     on_failure: change
-
-env:
-  matrix:
-    - RVERSION=release
-  global:
-    secure: GRGRLr+X8JZf32QiEJ0UxpT0RRe8uVJe8ipAW4IwrNv2G3PxifsJAcpGE3XtEmFT9RAYAbo/tt7f00INOUa4xqn9smzvoP/0i2SLw7FegA+eE2yuNI3GCAkQ+lzalLyvUmkmjhYKGhUKiYqLUQ8iNs/Pjgbpqde+V3ZvP6rX0CI=
