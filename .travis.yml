@@ -11,6 +11,12 @@ before_install:
   - git submodule update
   - make
 
+apt_packages:
+  - libx11-dev
+  - libglu1-mesa-dev
+  - libfreetype6-dev
+  - libxml2-dev
+
 bioc_packages:
   - graph
 
