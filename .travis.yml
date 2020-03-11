@@ -6,7 +6,7 @@ r:
   - release
   - devel
 
-before_install:
+before_script:
   - git submodule update
   - make
 
