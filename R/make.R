@@ -1184,6 +1184,7 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' @param n The number of vertices.
 #' @param w A matrix which specifies the extended chordal ring. See
 #'   details below.
+#' @param directed Logical scalar, whether or not to create a directed graph.
 #' @return An igraph graph.
 #'
 #' @family determimistic constructors
@@ -1192,11 +1193,11 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' chord <- make_chordal_ring(15,
 #'     matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
 
-make_chordal_ring <- function(n, w) {
+make_chordal_ring <- function(n, w, directed=FALSE) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_extended_chordal_ring, as.numeric(n),
-               as.matrix(w))
+  res <- .Call(C_R_igraph_extended_chordal_ring, as.integer(n),
+               as.matrix(w), as.logical(directed))
   if (igraph_opt("add.params")) {
     res$name <- "Extended chordal ring"
     res$w <- w
