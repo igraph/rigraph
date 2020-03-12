@@ -6,9 +6,8 @@ rsync -avq --exclude=cigraph --exclude=.git --exclude revdep . ${tempdir}/
 
 (
     cd ${tempdir}
-    rm -rf src
-    Rscript -e 'roxygen2::update_collate(".")'
-    Rscript -e 'library(devtools) ; document()'
+    Rscript -e 'pkgbuild::compile_dll(); roxygen2::update_collate(".")'
+    Rscript -e 'library(devtools); document()'
 )
 
 cp ${tempdir}/DESCRIPTION .

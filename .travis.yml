@@ -7,8 +7,7 @@ r:
   - devel
 
 before_install:
-  - Rscript -e 'install.packages(c("roxygen2", "devtools"))'
-  - git submodule update
+  - Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba"))'
   - make
 
 apt_packages:
