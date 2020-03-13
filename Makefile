@@ -199,3 +199,5 @@ igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 #############
 
 .PHONY: all igraph force
+
+.NOTPARALLEL:
