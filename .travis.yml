@@ -9,7 +9,7 @@ r:
   - devel
 
 before_install:
-  - Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba"))'
+  - Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
   - make
 
 apt_packages:
