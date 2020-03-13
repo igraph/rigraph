@@ -510,7 +510,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 2},
     {"R_igraph_get_all_shortest_paths",                     (DL_FUNC) &R_igraph_get_all_shortest_paths,                      4},
     {"R_igraph_get_all_shortest_paths_dijkstra",            (DL_FUNC) &R_igraph_get_all_shortest_paths_dijkstra,             5},
-    {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        4},
+    {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        5},
     {"R_igraph_get_all_simple_paths_pp",                    (DL_FUNC) &R_igraph_get_all_simple_paths_pp,                     1},
     {"R_igraph_get_attr_mode",                              (DL_FUNC) &R_igraph_get_attr_mode,                               2},
     {"R_igraph_get_diameter",                               (DL_FUNC) &R_igraph_get_diameter,                                4},
