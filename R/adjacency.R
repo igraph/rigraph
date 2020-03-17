@@ -69,6 +69,17 @@ graph.adjacency.dense <- function(adjmatrix, mode=c("directed", "undirected", "m
   res
 }
 
+m2triplet <- get0("mat2triplet", asNamespace("Matrix"), inherits=FALSE)
+if(!is.function(m2triplet)) ## <==> (packageVersion("Matrix") < "1.3")
+    m2triplet <- function(x) {  ## a simplified version of new Matrix' mat2triplet()
+        T <- as(x, "TsparseMatrix")
+        if(is(T, "nsparseMatrix"))
+             list(i = T@i + 1L, j = T@j + 1L)
+        else list(i = T@i + 1L, j = T@j + 1L, x = T@x)
+    }
+
+mysummary <- function(x) do.call(cbind, m2triplet(x))
+
 graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "max",
                                                 "min", "upper", "lower", "plus"),
                                    weighted=NULL, diag=TRUE) {
