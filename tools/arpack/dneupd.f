@@ -533,7 +533,7 @@ c
          end if
 c
          if (msglvl .gt. 2) then
-            call igraphdvout(logfil, 1, thres, ndigit,
+            call igraphdvout(logfil, 1, [thres], ndigit,
      &           '_neupd: Threshold eigenvalue used for re-ordering')
          end if
 c
@@ -611,9 +611,9 @@ c
  10      continue 
 c
          if (msglvl .gt. 2) then
-             call igraphivout(logfil, 1, ktrord, ndigit,
+             call igraphivout(logfil, 1, [ktrord], ndigit,
      &            '_neupd: Number of specified eigenvalues')
-             call igraphivout(logfil, 1, nconv, ndigit,
+             call igraphivout(logfil, 1, [nconv], ndigit,
      &            '_neupd: Number of "converged" eigenvalues')
          end if
 c
@@ -969,16 +969,16 @@ c
       end if
 c
       if (type .eq. 'SHIFTI' .and. msglvl .gt. 1) then
-         call igraphdvout (logfil, nconv, dr, ndigit,
+         call igraphdvout (logfil, nconv, [dr], ndigit,
      &   '_neupd: Untransformed real part of the Ritz valuess.')
-         call igraphdvout (logfil, nconv, di, ndigit,
+         call igraphdvout (logfil, nconv, [di], ndigit,
      &   '_neupd: Untransformed imag part of the Ritz valuess.')
          call igraphdvout (logfil, nconv, workl(ihbds), ndigit,
      &   '_neupd: Ritz estimates of untransformed Ritz values.')
       else if (type .eq. 'REGULR' .and. msglvl .gt. 1) then
-         call igraphdvout (logfil, nconv, dr, ndigit,
+         call igraphdvout (logfil, nconv, [dr], ndigit,
      &   '_neupd: Real parts of converged Ritz values.')
-         call igraphdvout (logfil, nconv, di, ndigit,
+         call igraphdvout (logfil, nconv, [di], ndigit,
      &   '_neupd: Imag parts of converged Ritz values.')
          call igraphdvout (logfil, nconv, workl(ihbds), ndigit,
      &   '_neupd: Associated Ritz estimates.')
