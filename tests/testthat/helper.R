@@ -25,3 +25,9 @@ local_rng_version <- function(version, .local_envir = parent.frame()) {
   suppressWarnings(RNGversion(version))
   orig
 }
+
+expect_that <- function(object, condition, info = NULL, label = NULL) {
+  suppressWarnings(
+    condition(object)
+  )
+}
