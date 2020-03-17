@@ -40,6 +40,6 @@ test_that("with_igraph_opt works", {
                          make_ring(3)[])
 
   expect_equal(igraph_opt("sparsematrices"), TRUE)
-  expect_equal(class(res), "matrix")
+  expect_true(inherits(res, "matrix"))
 
 })
