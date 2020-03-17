@@ -1292,6 +1292,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
 sample_sbm <- sample_sbm
 
+#' @rdname sample_sbm
 #' @export
 
 sbm <- function(...) constructor_spec(sample_sbm, ...)
@@ -1366,6 +1367,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   }  
 }
 
+#' @rdname sample_hierarchical_sbm
 #' @export
 
 hierarchical_sbm <- function(...)
@@ -1416,6 +1418,7 @@ hierarchical_sbm <- function(...)
 sample_dot_product <- sample_dot_product
 
 #' @export
+#' @rdname sample_dot_product
 
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 
