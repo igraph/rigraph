@@ -1,4 +1,5 @@
 #! /bin/bash
 
 touch NAMESPACE
-R -e 'devtools::load_all(); devtools::document()'
+R CMD INSTALL .
+R -q -e 'devtools::document()'
