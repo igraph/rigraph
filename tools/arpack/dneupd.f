@@ -969,16 +969,16 @@ c
       end if
 c
       if (type .eq. 'SHIFTI' .and. msglvl .gt. 1) then
-         call igraphdvout (logfil, nconv, [dr], ndigit,
+         call igraphdvout (logfil, nconv, dr, ndigit,
      &   '_neupd: Untransformed real part of the Ritz valuess.')
-         call igraphdvout (logfil, nconv, [di], ndigit,
+         call igraphdvout (logfil, nconv, di, ndigit,
      &   '_neupd: Untransformed imag part of the Ritz valuess.')
          call igraphdvout (logfil, nconv, workl(ihbds), ndigit,
      &   '_neupd: Ritz estimates of untransformed Ritz values.')
       else if (type .eq. 'REGULR' .and. msglvl .gt. 1) then
-         call igraphdvout (logfil, nconv, [dr], ndigit,
+         call igraphdvout (logfil, nconv, dr, ndigit,
      &   '_neupd: Real parts of converged Ritz values.')
-         call igraphdvout (logfil, nconv, [di], ndigit,
+         call igraphdvout (logfil, nconv, di, ndigit,
      &   '_neupd: Imag parts of converged Ritz values.')
          call igraphdvout (logfil, nconv, workl(ihbds), ndigit,
      &   '_neupd: Associated Ritz estimates.')
