@@ -1325,7 +1325,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sbm.game}}
-#' @keywords graphs, random graphs
+#' @keywords graphs
 #' @examples
 #' 
 #' ## Ten blocks with three clusters each
@@ -1736,7 +1736,7 @@ sample_correlated_gnp <- sample_correlated_gnp
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
 #' \url{http://arxiv.org/abs/1304.7844}
-#' @keywords graphs,random graphs
+#' @keywords graphs
 #' @examples
 #' gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
 #'            directed = FALSE)
