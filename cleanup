@@ -1,0 +1,4 @@
+#! /bin/sh
+
+rm -f src/config.h src/Makevars
+touch src/config.h

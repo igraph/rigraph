@@ -34,10 +34,8 @@
 #' \code{n} colors from the total 8.
 #' @return A character vector of RGB color codes.
 #'
-#' @family palettes
-#' @export
-#' @examples
-#' \dontrun{
+#' @section Examples:
+#' \preformatted{
 #' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
@@ -50,6 +48,9 @@
 #' karate$palette <- categorical_pal(length(cl_k))
 #' plot(karate)
 #' }
+#'
+#' @family palettes
+#' @export
 
 categorical_pal <- function(n) {
 

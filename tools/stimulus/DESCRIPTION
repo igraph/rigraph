@@ -10,7 +10,6 @@ Depends: methods
 Imports: 
     graphics,
     grDevices,
-    irlba,
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
@@ -18,16 +17,17 @@ Imports:
     utils
 Suggests: 
     ape,
+    digest,
     graph,
     igraphdata,
-    NMF,
     rgl,
     scales,
     stats4,
     tcltk,
-    testthat
+    testthat,
+    withr
 License: GPL (>= 2)
 URL: http://igraph.org
-SystemRequirements: gmp, libxml2
+SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
 BugReports: https://github.com/igraph/igraph/issues
 Encoding: UTF-8

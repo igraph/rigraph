@@ -13,4 +13,6 @@
 ^README.md$
 ^NEWS.md$
 ^src/.*\.o$
+^src/.*\.so$
 ^revdep$
+^src/igraph.so.dSYM$

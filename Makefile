@@ -5,8 +5,8 @@ all: igraph
 # Main package
 
 top_srcdir=cigraph
-REALVERSION=1.1.2.9000
-VERSION=1.1.2.9000
+REALVERSION=1.2.5
+VERSION=1.2.5
 
 # We put the version number in a file, so that we can detect
 # if it changes
@@ -90,14 +90,6 @@ RGEN = R/auto.R src/rinterface.c src/rinterface.h \
 	configure src/config.h.in src/Makevars.win \
 	DESCRIPTION
 
-# GLPK
-
-GLPK := $(shell cd $(top_srcdir); git ls-files --full-name optional/glpk)
-GLPK2 := $(patsubst optional/glpk/%, src/glpk/%, $(GLPK))
-
-$(GLPK2): src/%: $(top_srcdir)/optional/%
-	mkdir -p $(@D) && cp $< $@
-
 # Simpleraytracer
 
 RAY := $(shell cd $(top_srcdir); git ls-files --full-name optional/simpleraytracer)
@@ -162,7 +154,7 @@ src/init.c: tools/stimulus/init.c
 # Makevars.in and Makevars.win are only regenerated if 
 # the list of object files changes.
 
-OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(GLPK) $(RAY) $(UUID)   |     \
+OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
 		tr ' ' '\n' |                                            \
 	        grep -E '\.(c|cpp|cc|f|l|y)$$' | 			 \
 		grep -F -v '/t_cholmod' | 				 \
@@ -189,7 +181,7 @@ src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
 igraph: igraph_$(VERSION).tar.gz
 
 igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
-			  $(CGEN) $(GLPK2) $(RAY2) $(ARPACK2) $(UUID2)
+			  $(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
 	rm -f src/config.h
 	rm -f src/Makevars
 	touch src/config.h

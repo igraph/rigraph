@@ -3,6 +3,7 @@ context("Kamada-Kawai layouts")
 
 test_that("Kamada-Kawai layout generator works", {
 
+  skip_on_cran()
   library(igraph)
   g <- make_ring(10)
   l <- layout_with_kk(g, maxiter=50)

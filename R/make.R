@@ -75,7 +75,7 @@ make_ <- function(...) {
   args <- args[!cidx]
 
   ## Modifiers
-  wmods <- vapply(args, class, "") == "igraph_constructor_modifier"
+  wmods <- vapply(args, inherits, TRUE, what = "igraph_constructor_modifier")
   mods <- args[wmods]
   args <- args[!wmods]
 
@@ -506,7 +506,7 @@ with_graph_ <- function(...) {
 make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
                        directed = TRUE, dir = directed, simplify = TRUE) {
 
-  if (class(edges) == "formula") {
+  if (inherits(edges, "formula")) {
     if (!missing(n)) stop("'n' should not be given for graph literals")
     if (!missing(isolates)) {
       stop("'isolates' should not be given for graph literals")

@@ -11,7 +11,7 @@ before_install:
 
 install:
 - ./pkg-build.sh install_github hadley/lazyeval igraph/igraphdata gaborcsardi/roxygen gaborcsardi/pkgconfig
-- ./pkg-build.sh install_r magrittr falsy roxygen2 NMF irlba
+- ./pkg-build.sh install_r magrittr falsy roxygen2
 - git submodule update
 - make
 - ./pkg-build.sh install_deps

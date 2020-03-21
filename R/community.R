@@ -889,10 +889,8 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' see references.} \item{inner.links}{The number of edges within the community
 #' of \code{vertex}.} \item{outer.links}{The number of edges between the
 #' community of \code{vertex} and the rest of the graph. }
-#' @author Jorg Reichardt
-#' (\url{http://theorie.physik.uni-wuerzburg.de/~reichardt/}) for the original
-#' code and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue
-#' code.
+#' @author Jorg Reichardt for the original code and Gabor Csardi
+#' \email{csardi.gabor@@gmail.com} for the igraph glue code.
 #' 
 #' Changes to the original function for including the possibility of negative
 #' ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
@@ -1542,6 +1540,27 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' fifty vertices should be fine, graphs with a couple of hundred vertices
 #' might be possible.
 #'
+#' @section Examples:
+#' \preformatted{
+#' 
+#' ## Zachary's karate club
+#' g <- make_graph("Zachary")
+#' 
+#' ## We put everything into a big 'try' block, in case 
+#' ## igraph was compiled without GLPK support
+#' 
+#' ## The calculation only takes a couple of seconds
+#' oc <- cluster_optimal(g)
+#' 
+#' ## Double check the result
+#' print(modularity(oc))
+#' print(modularity(g, membership(oc)))
+#' 
+#' ## Compare to the greedy optimizer
+#' fc <- cluster_fast_greedy(g)
+#' print(modularity(fc))
+#' }
+#'
 #' @aliases optimal.community
 #' @param graph The input graph. Edge directions are ignored for directed
 #' graphs.
@@ -1561,27 +1580,7 @@ cluster_louvain <- function(graph, weights=NULL) {
 #' 2008.
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
-#' ## Zachary's karate club
-#' g <- make_graph("Zachary")
-#' 
-#' ## We put everything into a big 'try' block, in case 
-#' ## igraph was compiled without GLPK support
-#' 
-#' try({
-#'   ## The calculation only takes a couple of seconds
-#'   oc <- cluster_optimal(g)
-#' 
-#'   ## Double check the result
-#'   print(modularity(oc))
-#'   print(modularity(g, membership(oc)))
-#' 
-#'   ## Compare to the greedy optimizer
-#'   fc <- cluster_fast_greedy(g)
-#'   print(modularity(fc))
-#' }, silent=TRUE)
-#' 
+
 cluster_optimal <- function(graph, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1635,9 +1634,8 @@ cluster_optimal <- function(graph, weights=NULL) {
 #' of the detected community structure.
 #' @return \code{cluster_infomap} returns a \code{\link{communities}} object,
 #' please see the \code{\link{communities}} manual page for details.
-#' @author Martin Rosvall (\url{http://www.tp.umu.se/~rosvall/}) wrote the
-#' original C++ code. This was ported to be more igraph-like by Emmanuel
-#' Navarro (\url{http://enavarro.me/}).  The R interface and
+#' @author Martin Rosvall wrote the original C++ code. This was ported to
+#' be more igraph-like by Emmanuel Navarro.  The R interface and
 #' some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso Other community finding methods and \code{\link{communities}}.
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of

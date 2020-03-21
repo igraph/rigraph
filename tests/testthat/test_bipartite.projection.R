@@ -3,6 +3,7 @@ context("bipartite_projection")
 
 test_that("bipartite_projection works", {
   library(igraph)
+  local_rng_version("3.5.0")
   set.seed(42)
 
   g <- make_full_bipartite_graph(10,5)

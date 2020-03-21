@@ -1292,6 +1292,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
 sample_sbm <- sample_sbm
 
+#' @rdname sample_sbm
 #' @export
 
 sbm <- function(...) constructor_spec(sample_sbm, ...)
@@ -1324,7 +1325,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sbm.game}}
-#' @keywords graphs, random graphs
+#' @keywords graphs
 #' @examples
 #' 
 #' ## Ten blocks with three clusters each
@@ -1366,6 +1367,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   }  
 }
 
+#' @rdname sample_hierarchical_sbm
 #' @export
 
 hierarchical_sbm <- function(...)
@@ -1416,6 +1418,7 @@ hierarchical_sbm <- function(...)
 sample_dot_product <- sample_dot_product
 
 #' @export
+#' @rdname sample_dot_product
 
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 
@@ -1424,7 +1427,13 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' 
 #' Create a number of Erdos-Renyi random graphs with identical parameters, and
 #' connect them with the specified number of edges.
-#' 
+#'
+#' @section Examples:
+#' \preformatted{
+#' g <- sample_islands(3, 10, 5/10, 1)
+#' oc <- cluster_optimal(g)
+#' oc
+#' }
 #' 
 #' @aliases interconnected.islands.game sample_islands
 #' @param islands.n The number of islands in the graph.
@@ -1436,11 +1445,6 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @author Samuel Thiriot
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
-#' @examples
-#' 
-#' g <- sample_islands(3, 10, 5/10, 1)
-#' oc <- cluster_optimal(g)
-#' oc
 #' @export
 
 sample_islands <- sample_islands
@@ -1732,7 +1736,7 @@ sample_correlated_gnp <- sample_correlated_gnp
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
 #' \url{http://arxiv.org/abs/1304.7844}
-#' @keywords graphs,random graphs
+#' @keywords graphs
 #' @examples
 #' gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
 #'            directed = FALSE)
