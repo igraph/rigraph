@@ -48,7 +48,7 @@ extern SEXP R_igraph_atlas(SEXP);
 extern SEXP R_igraph_authority_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_automorphisms(SEXP, SEXP);
 extern SEXP R_igraph_average_path_length(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_avg_nearest_neighbor_degree(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_avg_nearest_neighbor_degree(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_betweenness(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -135,7 +135,7 @@ extern SEXP R_igraph_es_adj(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_es_pairs(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_es_path(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_establishment_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_extended_chordal_ring(SEXP, SEXP);
+extern SEXP R_igraph_extended_chordal_ring(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_famous(SEXP);
 extern SEXP R_igraph_farthest_points(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_finalizer();
@@ -148,7 +148,7 @@ extern SEXP R_igraph_get_adjedgelist(SEXP, SEXP);
 extern SEXP R_igraph_get_adjlist(SEXP, SEXP);
 extern SEXP R_igraph_get_all_shortest_paths(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_shortest_paths_dijkstra(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_get_all_simple_paths(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_all_simple_paths(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_simple_paths_pp(SEXP);
 extern SEXP R_igraph_get_attr_mode(SEXP, SEXP);
 extern SEXP R_igraph_get_diameter(SEXP, SEXP, SEXP, SEXP);
@@ -266,7 +266,7 @@ extern SEXP R_igraph_minimum_size_separators(SEXP);
 extern SEXP R_igraph_minimum_spanning_tree_prim(SEXP, SEXP);
 extern SEXP R_igraph_minimum_spanning_tree_unweighted(SEXP);
 extern SEXP R_igraph_modularity(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_modularity_matrix(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_modularity_matrix(SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_estimate(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_no(SEXP, SEXP, SEXP);
@@ -410,7 +410,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_authority_score",                            (DL_FUNC) &R_igraph_authority_score,                             4},
     {"R_igraph_automorphisms",                              (DL_FUNC) &R_igraph_automorphisms,                               2},
     {"R_igraph_average_path_length",                        (DL_FUNC) &R_igraph_average_path_length,                         3},
-    {"R_igraph_avg_nearest_neighbor_degree",                (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                 3},
+    {"R_igraph_avg_nearest_neighbor_degree",                (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                 5},
     {"R_igraph_barabasi_aging_game",                        (DL_FUNC) &R_igraph_barabasi_aging_game,                        12},
     {"R_igraph_barabasi_game",                              (DL_FUNC) &R_igraph_barabasi_game,                               9},
     {"R_igraph_betweenness",                                (DL_FUNC) &R_igraph_betweenness,                                 5},
@@ -497,7 +497,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_es_pairs",                                   (DL_FUNC) &R_igraph_es_pairs,                                    3},
     {"R_igraph_es_path",                                    (DL_FUNC) &R_igraph_es_path,                                     3},
     {"R_igraph_establishment_game",                         (DL_FUNC) &R_igraph_establishment_game,                          6},
-    {"R_igraph_extended_chordal_ring",                      (DL_FUNC) &R_igraph_extended_chordal_ring,                       2},
+    {"R_igraph_extended_chordal_ring",                      (DL_FUNC) &R_igraph_extended_chordal_ring,                       3},
     {"R_igraph_famous",                                     (DL_FUNC) &R_igraph_famous,                                      1},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
     {"R_igraph_finalizer",                                  (DL_FUNC) &R_igraph_finalizer,                                   0},
@@ -510,7 +510,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 2},
     {"R_igraph_get_all_shortest_paths",                     (DL_FUNC) &R_igraph_get_all_shortest_paths,                      4},
     {"R_igraph_get_all_shortest_paths_dijkstra",            (DL_FUNC) &R_igraph_get_all_shortest_paths_dijkstra,             5},
-    {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        4},
+    {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        5},
     {"R_igraph_get_all_simple_paths_pp",                    (DL_FUNC) &R_igraph_get_all_simple_paths_pp,                     1},
     {"R_igraph_get_attr_mode",                              (DL_FUNC) &R_igraph_get_attr_mode,                               2},
     {"R_igraph_get_diameter",                               (DL_FUNC) &R_igraph_get_diameter,                                4},
@@ -628,7 +628,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_minimum_spanning_tree_prim",                 (DL_FUNC) &R_igraph_minimum_spanning_tree_prim,                  2},
     {"R_igraph_minimum_spanning_tree_unweighted",           (DL_FUNC) &R_igraph_minimum_spanning_tree_unweighted,            1},
     {"R_igraph_modularity",                                 (DL_FUNC) &R_igraph_modularity,                                  3},
-    {"R_igraph_modularity_matrix",                          (DL_FUNC) &R_igraph_modularity_matrix,                           3},
+    {"R_igraph_modularity_matrix",                          (DL_FUNC) &R_igraph_modularity_matrix,                           2},
     {"R_igraph_motifs_randesu",                             (DL_FUNC) &R_igraph_motifs_randesu,                              3},
     {"R_igraph_motifs_randesu_estimate",                    (DL_FUNC) &R_igraph_motifs_randesu_estimate,                     5},
     {"R_igraph_motifs_randesu_no",                          (DL_FUNC) &R_igraph_motifs_randesu_no,                           3},

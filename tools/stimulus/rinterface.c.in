@@ -6703,22 +6703,6 @@ SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
   return result;
 }
 
-SEXP R_igraph_extended_chordal_ring(SEXP pnodes, SEXP pw) {
-
-  igraph_t g;
-  igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
-  igraph_matrix_t w;
-  SEXP result;
-
-  R_SEXP_to_matrix(pw, &w);
-  igraph_extended_chordal_ring(&g, nodes, &w);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_destroy(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_no_clusters(SEXP graph, SEXP pmode) {
 
   igraph_t g;
@@ -9345,6 +9329,9 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Mu);
   c_niter=INTEGER(niter)[0];
 
+  /* TODO: Change igraph_i_graphlets_project to igraph_graphlets_project, because
+   * we should not depend on non-public functions from igraph.
+   */
   /* Call igraph */
   igraph_i_graphlets_project(&c_graph, (isNull(weights) ? 0 : &c_weights),
 			     &c_cliques, &c_Mu, /*startMu=*/ 1, c_niter,

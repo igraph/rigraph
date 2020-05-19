@@ -28,7 +28,7 @@ test_that("count_multiple works", {
   g <- barabasi.game(10, m=3, algorithm="bag")
   E(g)$weight <- 1
   g <- simplify(g)
-  expect_that(any(which_multiple(g)), is_false())
+  expect_false(any(which_multiple(g)))
   expect_that(E(g)$weight, equals(c(3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2,
                                     1, 1, 1, 1, 1, 1, 1)))
 

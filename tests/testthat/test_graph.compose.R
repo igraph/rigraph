@@ -11,7 +11,7 @@ test_that("compose works", {
   g2 <- compose(g1, gi)
   g3 <- compose(gi, g1)
 
-  expect_that(graph.isomorphic(g1, g2), is_true())
-  expect_that(graph.isomorphic(g1, g3), is_true())
+  expect_true(graph.isomorphic(g1, g2))
+  expect_true(graph.isomorphic(g1, g3))
 
 })

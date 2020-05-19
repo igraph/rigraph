@@ -6,12 +6,12 @@ test_that("Weighted indexing does not remove edges", {
 
   g <- make_ring(10)
   g[1, 2, attr="weight"] <- 0
-  expect_that("weight" %in% edge_attr_names(g), is_true())
+  expect_true("weight" %in% edge_attr_names(g))
   expect_that(E(g)$weight, equals(c(0, rep(NA, 9))))
 
   el <- as_edgelist(g)
   g[from=el[,1], to=el[,2], attr="sim"] <- rep(0:1, length=ecount(g))
-  expect_that("sim" %in% edge_attr_names(g), is_true())
+  expect_true("sim" %in% edge_attr_names(g))
   expect_that(E(g)$sim, equals(rep(0:1, 5)))
 
   V(g)$name <- letters[seq_len(vcount(g))]
