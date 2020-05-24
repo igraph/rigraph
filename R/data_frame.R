@@ -47,6 +47,10 @@
 #' Excel and are imported into R via \code{\link{read.table}},
 #' \code{\link{read.delim}} or \code{\link{read.csv}}.
 #'
+#' Regardless of the \code{directed} status of the graph, the graph is not
+#' simplified. To remove the loops and/or multiple edges from a graph, use
+#' \code{simplify}. Simplifying the graph can speed up some calculations.
+#'
 #' \code{as_data_frame} converts the igraph graph into one or more data
 #' frames, depending on the \code{what} argument.
 #'
