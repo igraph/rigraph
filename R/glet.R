@@ -1,20 +1,20 @@
 
 #' Graphlet decomposition of a graph
-#' 
+#'
 #' Graphlet decomposition models a weighted undirected graph via the union of
 #' potentially overlapping dense social groups.  This is done by a two-step
 #' algorithm. In the first step a candidate set of groups (a candidate basis)
 #' is created by finding cliques if the thresholded input graph. In the second
 #' step these the graph is projected on the candidate basis, resulting a weight
 #' coefficient for each clique in the candidate basis.
-#' 
+#'
 #' igraph contains three functions for performing the graph decomponsition of a
 #' graph. The first is \code{graphlets}, which performed both steps on the
 #' method and returns a list of subgraphs, with their corresponding weights.
 #' The second and third functions correspond to the first and second steps of
 #' the algorithm, and they are useful if the user wishes to perform them
 #' individually: \code{graphlet_basis} and \code{graphlet_proj}.
-#' 
+#'
 #' @aliases graphlets graphlets.project graphlet_proj graphlet_basis
 #' graphlets.candidate.basis
 #' @param graph The input graph, edge directions are ignored. Only simple graph
@@ -30,16 +30,16 @@
 #' list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 #' vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
 #' basis.}
-#' 
+#'
 #' \code{graphlet_basis} returns a list of two elements: \item{cliques}{A list
 #' of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 #' vector of vertex ids.} \item{thresholds}{The weight thresholds used for
 #' finding the subgraphs.}
-#' 
+#'
 #' \code{graphlet_proj} return a numeric vector, the weights of the graphlet
 #' basis subgraphs.
 #' @examples
-#' 
+#'
 #' ## Create an example graph first
 #' D1 <- matrix(0, 5, 5)
 #' D2 <- matrix(0, 5, 5)
@@ -47,7 +47,7 @@
 #' D1[1:3, 1:3] <- 2
 #' D2[3:5, 3:5] <- 3
 #' D3[2:5, 2:5] <- 1
-#'   
+#'
 #' g <- simplify(graph_from_adjacency_matrix(D1 + D2 + D3,
 #'       mode="undirected", weighted=TRUE))
 #' V(g)$color <- "white"
@@ -58,10 +58,10 @@
 #' co <- layout_with_kk(g)
 #' par(mar=c(1,1,1,1))
 #' plot(g, layout=co)
-#' 
+#'
 #' ## Calculate graphlets
 #' gl <- graphlets(g, niter=1000)
-#' 
+#'
 #' ## Plot graphlets
 #' for (i in 1:length(gl$cliques)) {
 #'   sel <- gl$cliques[[i]]
@@ -83,7 +83,7 @@ graphlet_basis <- function(graph, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !any(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -110,7 +110,7 @@ graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) {
+  if (!is.null(weights) && !any(is.na(weights))) {
     weights <- as.numeric(weights)
   } else {
     weights <- NULL
@@ -130,7 +130,7 @@ graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
 
 function() {
   library(igraph)
-  
+
   fitandplot <- function(g, gl) {
     g <- simplify(g)
     V(g)$color <- "white"
@@ -162,7 +162,7 @@ function() {
   D1[1:3, 1:3] <- 2
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
-  
+
   g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE)
   gl <- graphlets(g, iter=1000)
 
@@ -173,6 +173,6 @@ function() {
   g2 <- set_edge_attr(g, "weight", value=sample(E(g)$weight))
   gl2 <- graphlet_proj(g2, gl$Bc, 1000)
   fitandplot(g2, gl2)
-  
+
 }
 
