@@ -206,8 +206,9 @@
 #' \code{\link{cluster_fast_greedy}},
 #' \code{\link{cluster_label_prop}},
 #' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_louvain}}, \code{\link{cluster_optimal}},
-#' \code{\link{cluster_spinglass}}, \code{\link{cluster_walktrap}}.
+#' \code{\link{cluster_louvain}}, \code{\link{cluster_leiden}},
+#' \code{\link{cluster_optimal}}, \code{\link{cluster_spinglass}},
+#' \code{\link{cluster_walktrap}}.
 #' @keywords graphs
 #' @export
 #' @examples
@@ -403,7 +404,8 @@ modularity <- function(x, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{cluster_walktrap}},
 #' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_spinglass}} for
+#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_spinglass}},
+#' \code{\link{cluster_louvain}} and \code{\link{cluster_leiden}} for
 #' various community detection methods.
 #' @references Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 #' structure in very large networks, \emph{Phyisical Review E} 2004, 70, 066111
@@ -963,38 +965,52 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
   res
 }
 
-#' cluster_leiden(objective_function=CPM, weights=None,
-#' resolution_parameter=1.0, beta=0.01, initial_membership=None,
-#' n_iterations=2, vertex_weights=None)
+#' Finding community structure of a graph using the Leiden algorithm of Traag,
+#' van Eck & Waltman.
 #'
-#' Finds the community structure of the graph using the
-#' Leiden algorithm of Traag, van Eck & Waltman.
-#'
-#' @keyword objective_function: whether to use the Constant Potts
-#'   Model (CPM) or modularity. Must be either C{"CPM"} or C{"modularity"}.
-#' @keyword weights: edge weights to be used. Can be a sequence or
-#'   iterable or even an edge attribute name.
-#' @keyword resolution_parameter: the resolution parameter to use.
-#'   Higher resolutions lead to more smaller communities, while
-#'   lower resolutions lead to fewer larger communities.
-#' @keyword beta: parameter affecting the randomness in the Leiden
-#'   algorithm. This affects only the refinement step of the algorithm.
-#' @keyword initial_membership: if provided, the Leiden algorithm
+#' @param objective_function Whether to use the Constant Potts Model (CPM) or
+#'   modularity. Must be either \code{"CPM"} or \code{"modularity"}.
+#' @param weights Optional edge weights to be used. Can be a vector or an edge
+#'   attribute name. If the graph has a \code{weight} edge attribute, then this
+#'   is used by default. Supply \code{NA} here if the graph has a \code{weight}
+#'   edge attribute, but you want to ignore it.
+#' @param resolution_parameter The resolution parameter to use. Higher
+#'   resolutions lead to more smaller communities, while lower resolutions lead
+#'   to fewer larger communities.
+#' @param beta Parameter affecting the randomness in the Leiden algorithm.
+#'   This affects only the refinement step of the algorithm.
+#' @param initial_membership If provided, the Leiden algorithm
 #'   will try to improve this provided membership. If no argument is
 #'   provided, the aglorithm simply starts from the singleton partition.
-#' @keyword n_iterations: the number of iterations to iterate the Leiden
+#' @param n_iterations the number of iterations to iterate the Leiden
 #'   algorithm. Each iteration may improve the partition further.
-#' @keyword vertex_weights: the node weights used in the Leiden algorithm.
+#' @param vertex_weights the vertex weights used in the Leiden algorithm.
 #'   If this is not provided, it will be automatically determined on the
 #'   basis of whether you want to use CPM or modularity. If you do provide
 #'   this, please make sure that you understand what you are doing.
-#' @return: an appropriate L{VertexClustering} object.
+#' @return \code{cluster_leiden} returns a \code{\link{communities}}
+#' object, please see the \code{\link{communities}} manual page for details.
+#' @author Vincent Traag
+#' @seealso See \code{\link{communities}} for extracting the membership,
+#' modularity scores, etc. from the results.
 #'
-#' @newfield ref: Reference
-#' @ref: Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
+#' Other community detection algorithms: \code{\link{cluster_walktrap}},
+#' \code{\link{cluster_spinglass}},
+#' \code{\link{cluster_leading_eigen}},
+#' \code{\link{cluster_edge_betweenness}},
+#' \code{\link{cluster_fast_greedy}},
+#' \code{\link{cluster_label_prop}}
+#' \code{\link{cluster_louvain}}
+#' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z
-
+#' @export
+#' @keywords graphs
+#' @examples
+#' g <- graph.famous("Zachary")
+#' # By default CPM is used
+#' g <- cluster_leiden(g, resolution_parameter=0.06)
+#'
 cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
                            weights=NULL, resolution_parameter=1, beta=0.01,
                            initial_membership=NULL, n_iterations=2, vertex_weights=NULL)
@@ -1106,7 +1122,8 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
 #' \code{\link{modularity}} and \code{\link{cluster_fast_greedy}},
 #' \code{\link{cluster_spinglass}},
 #' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}} for other community detection
+#' \code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}},
+#' and \code{\link{cluster_leiden}} for other community detection
 #' methods.
 #' @references Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, http://arxiv.org/abs/physics/0512106
@@ -1293,7 +1310,8 @@ cluster_edge_betweenness <- function(graph, weights=E(graph)$weight,
 #' See also \code{\link{cluster_walktrap}},
 #' \code{\link{cluster_spinglass}},
 #' \code{\link{cluster_leading_eigen}} and
-#' \code{\link{cluster_edge_betweenness}} for other methods.
+#' \code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}}
+#' \code{\link{cluster_leiden}} for other methods.
 #' @references A Clauset, MEJ Newman, C Moore: Finding community structure in
 #' very large networks, http://www.arxiv.org/abs/cond-mat/0408187
 #' @export
@@ -1506,8 +1524,9 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for this manual page.
 #' @seealso \code{\link{communities}} for extracting the actual results.
 #'
-#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_walktrap}} and
-#' \code{\link{cluster_spinglass}} for other community detection methods.
+#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_walktrap}},
+#' \code{\link{cluster_spinglass}}, \code{\link{cluster_louvain}} and
+#' \code{\link{cluster_leiden}} for other community detection methods.
 #' @references Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time
 #' algorithm to detect community structures in large-scale networks. \emph{Phys
 #' Rev E} 76, 036106. (2007)
@@ -1589,6 +1608,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' \code{\link{cluster_edge_betweenness}},
 #' \code{\link{cluster_fast_greedy}},
 #' \code{\link{cluster_label_prop}}
+#' \code{\link{cluster_leiden}}
 #' @references Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte,
 #' Etienne Lefebvre: Fast unfolding of communities in large networks. J. Stat.
 #' Mech. (2008) P10008
@@ -2022,10 +2042,15 @@ dendPlotPhylo <- function(communities, colbar=palette(),
 #' (1985).
 #' @return A real number.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso \code{\link{cluster_walktrap}},
+#' @seealso See \code{\link{cluster_walktrap}},
+#' \code{\link{cluster_spinglass}},
+#' \code{\link{cluster_leading_eigen}},
 #' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_spinglass}} for
-#' various community detection methods.
+#' \code{\link{cluster_fast_greedy}},
+#' \code{\link{cluster_label_prop}}
+#' \code{\link{cluster_louvain}}
+#' \code{\link{cluster_leiden}}
+#' for various community detection methods.
 #' @references Meila M: Comparing clusterings by the variation of information.
 #' In: Scholkopf B, Warmuth MK (eds.). \emph{Learning Theory and Kernel
 #' Machines: 16th Annual Conference on Computational Learning Theory and 7th

@@ -25,7 +25,6 @@ bioc_packages:
 r_github_packages:
   - hadley/lazyeval
   - igraph/igraphdata
-  - gaborcsardi/roxygen
   - gaborcsardi/pkgconfig
 
 r_packages:
