@@ -1699,7 +1699,7 @@ sample_forestfire <- sample_forestfire
 #'   \code{\link{sample_gnp}}
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
-#' \url{http://arxiv.org/abs/1304.7844}
+#' \url{https://arxiv.org/abs/1304.7844}
 #' @examples
 #' g <- sample_gnp(1000, .1)
 #' g2 <- sample_correlated_gnp(g, corr = 0.5)
@@ -1735,7 +1735,7 @@ sample_correlated_gnp <- sample_correlated_gnp
 #'   \code{\link{sample_gnp}}.
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
-#' \url{http://arxiv.org/abs/1304.7844}
+#' \url{https://arxiv.org/abs/1304.7844}
 #' @keywords graphs
 #' @examples
 #' gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,

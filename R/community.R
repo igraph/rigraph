@@ -897,13 +897,13 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' @seealso \code{\link{communities}}, \code{\link{components}}
 #' @references J. Reichardt and S. Bornholdt: Statistical Mechanics of
 #' Community Detection, \emph{Phys. Rev. E}, 74, 016110 (2006),
-#' \url{http://arxiv.org/abs/cond-mat/0603718}
+#' \url{https://arxiv.org/abs/cond-mat/0603718}
 #' 
 #' M. E. J. Newman and M. Girvan: Finding and evaluating community structure in
 #' networks, \emph{Phys. Rev. E} 69, 026113 (2004)
 #' 
 #' V.A. Traag and Jeroen Bruggeman: Community detection in networks with
-#' positive and negative links, \url{http://arxiv.org/abs/0811.2329} (2008).
+#' positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 #' @export
 #' @keywords graphs
 #' @examples
@@ -973,7 +973,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' 
 #' This function is the implementation of the Walktrap community finding
 #' algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
-#' networks using random walks, http://arxiv.org/abs/physics/0512106
+#' networks using random walks, https://arxiv.org/abs/physics/0512106
 #'
 #' @aliases walktrap.community
 #' @param graph The input graph, edge directions are ignored in directed
@@ -1002,7 +1002,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' \code{\link{cluster_edge_betweenness}} for other community detection
 #' methods.
 #' @references Pascal Pons, Matthieu Latapy: Computing communities in large
-#' networks using random walks, http://arxiv.org/abs/physics/0512106
+#' networks using random walks, https://arxiv.org/abs/physics/0512106
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1451,7 +1451,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' This function implements the multi-level modularity optimization algorithm
 #' for finding community structure, see VD Blondel, J-L Guillaume, R Lambiotte
 #' and E Lefebvre: Fast unfolding of community hierarchies in large networks,
-#' \url{http://arxiv.org/abs/arXiv:0803.0476} for the details.
+#' \url{https://arxiv.org/abs/arXiv:0803.0476} for the details.
 #' 
 #' It is based on the modularity measure and a hierarchial approach.
 #' Initially, each vertex is assigned to a community on its own. In every step,
@@ -1641,12 +1641,12 @@ cluster_optimal <- function(graph, weights=NULL) {
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of
 #' information flow reveal community structure in complex networks, \emph{PNAS}
 #' 105, 1118 (2008) \url{http://dx.doi.org/10.1073/pnas.0706851105},
-#' \url{http://arxiv.org/abs/0707.0609}
+#' \url{https://arxiv.org/abs/0707.0609}
 #' 
 #' A more detailed paper: M. Rosvall, D. Axelsson, and C. T. Bergstrom, The map
 #' equation, \emph{Eur. Phys. J. Special Topics} 178, 13 (2009).
 #' \url{http://dx.doi.org/10.1140/epjst/e2010-01179-1},
-#' \url{http://arxiv.org/abs/0906.1405}.
+#' \url{https://arxiv.org/abs/0906.1405}.
 #' @export
 #' @keywords graphs
 #' @examples

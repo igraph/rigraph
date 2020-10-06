@@ -1,4 +1,4 @@
 library(testthat)
 library(igraph)
 
-test_check("igraph")
+if (Sys.getenv("NOT_CRAN", "") != "true") test_check("igraph")
