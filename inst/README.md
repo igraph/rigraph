@@ -21,7 +21,7 @@ devtools::install_github("igraph/rigraph")
 
 ## Documentation
 
-See the [igraph homepage](https://igraph.org/r) for the complete manual.
+See the [igraph homepage](https://igraph.org/r/) for the complete manual.
 
 ## Contributions
 
