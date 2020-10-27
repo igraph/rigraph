@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/igraph/rigraph.svg?branch=dev)](https://travis-ci.org/igraph/rigraph)
 
 # R/igraph
 
