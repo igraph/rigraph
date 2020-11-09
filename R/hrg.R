@@ -308,7 +308,7 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 
 #' Conversion to igraph
 #' 
-#' These fucntions convert various objects to igraph graphs.
+#' These functions convert various objects to igraph graphs.
 #' 
 #' You can use \code{as.igraph} to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
