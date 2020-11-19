@@ -34,8 +34,12 @@ r_packages:
   - ape
   - scales
 
-after_success:
-- test $TRAVIS_BRANCH = "dev" && tools/travis_deploy.sh igraph_*.tar.gz
+jobs:
+  include:
+    - stage: Deploy
+      if: branch = dev
+      script: 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; tools/travis_deploy.sh igraph_*.tar.gz'
+      r: release
 
 notifications:
   email:
