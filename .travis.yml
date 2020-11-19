@@ -37,8 +37,8 @@ r_packages:
 jobs:
   include:
     - stage: Deploy
-      if: branch = dev
-      script: 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; tools/travis_deploy.sh igraph_*.tar.gz'
+      if: branch = dev AND type != pull_request
+      script: tools/travis_deploy.sh igraph_*.tar.gz
       r: release
 
 notifications:
