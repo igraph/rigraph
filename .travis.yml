@@ -35,7 +35,7 @@ r_packages:
   - scales
 
 after_success:
-- tools/travis_deploy.sh igraph_*.tar.gz
+- test $TRAVIS_BRANCH = "dev" && tools/travis_deploy.sh igraph_*.tar.gz
 
 notifications:
   email:

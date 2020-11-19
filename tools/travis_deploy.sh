@@ -28,7 +28,7 @@ cd igraph
 git add -A .
 
 git config --global user.name "igraph builder robot"
-git config --global user.email "csardi.gabor@gmail.com"
+git config --global user.email "vincent@traag.net"
 git config --global push.default matching
 git remote set-branches --add origin ${branch}
 
