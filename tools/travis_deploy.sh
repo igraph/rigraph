@@ -39,5 +39,5 @@ python -c 'import os; print "https://" + os.environ["GH_TOKEN"] + ":@github.com"
 
 ## OK, ready to deploy
 
-git commit -q --allow-empty -m "$TRAVIS_COMMIT_MSG"
+git commit -q --allow-empty -m "${TRAVIS_COMMIT} - ${TRAVIS_COMMIT_MSG}"
 git push -q origin ${branch}
