@@ -75,8 +75,8 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- ring(10)
-#' \dontrun{plot(g, layout=layout_with_kk, vertex.color="green")}
+#' g <- make_ring(10)
+#' plot(g, layout=layout_with_kk, vertex.color="green")
 #' 
 plot.igraph <- function(x, 
                        # SPECIFIC: #####################################
@@ -771,7 +771,6 @@ function (x1, y1, x2, y2,
       lambda <- as.logical(curved) * 0.5
     }
     lambda <- rep(lambda, length.out = length(x1))
-    print(lambda)
     c.x1 <- x1+x1d
     c.y1 <- y1+y1d
     c.x2 <- x2+x2d

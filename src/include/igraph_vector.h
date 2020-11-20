@@ -24,26 +24,9 @@
 #ifndef IGRAPH_VECTOR_H
 #define IGRAPH_VECTOR_H
 
-#undef __BEGIN_DECLS
-#undef __END_DECLS
-#ifdef __cplusplus
-# define __BEGIN_DECLS extern "C" {
-# define __END_DECLS }
-#else
-# define __BEGIN_DECLS /* empty */
-# define __END_DECLS /* empty */
-#endif
-
+#include "igraph_decls.h"
 #include "igraph_types.h"
 #include "igraph_complex.h"
-
-#ifdef HAVE_STDINT_H
-#  include <stdint.h>
-#else
-#  if HAVE_SYS_INT_TYPES_H
-#    include <sys/int_types.h>    /* for Solaris */
-#  endif
-#endif
 
 __BEGIN_DECLS
 
@@ -140,48 +123,57 @@ __BEGIN_DECLS
 /* -------------------------------------------------- */
 
 #ifndef IGRAPH_VECTOR_NULL
-#define IGRAPH_VECTOR_NULL { 0,0,0 }
+    #define IGRAPH_VECTOR_NULL { 0,0,0 }
 #endif
 
 #ifndef IGRAPH_VECTOR_INIT_FINALLY
 #define IGRAPH_VECTOR_INIT_FINALLY(v, size) \
-  do { IGRAPH_CHECK(igraph_vector_init(v, size)); \
-  IGRAPH_FINALLY(igraph_vector_destroy, v); } while (0)
+    do { IGRAPH_CHECK(igraph_vector_init(v, size)); \
+        IGRAPH_FINALLY(igraph_vector_destroy, v); } while (0)
 #endif
 #ifndef IGRAPH_VECTOR_BOOL_INIT_FINALLY
 #define IGRAPH_VECTOR_BOOL_INIT_FINALLY(v, size) \
-  do { IGRAPH_CHECK(igraph_vector_bool_init(v, size)); \
-  IGRAPH_FINALLY(igraph_vector_bool_destroy, v); } while (0)
+    do { IGRAPH_CHECK(igraph_vector_bool_init(v, size)); \
+        IGRAPH_FINALLY(igraph_vector_bool_destroy, v); } while (0)
+#endif
+#ifndef IGRAPH_VECTOR_CHAR_INIT_FINALLY
+#define IGRAPH_VECTOR_CHAR_INIT_FINALLY(v, size) \
+  do { IGRAPH_CHECK(igraph_vector_char_init(v, size)); \
+  IGRAPH_FINALLY(igraph_vector_char_destroy, v); } while (0)
+#endif
+#ifndef IGRAPH_VECTOR_INT_INIT_FINALLY
+#define IGRAPH_VECTOR_INT_INIT_FINALLY(v, size) \
+    do { IGRAPH_CHECK(igraph_vector_int_init(v, size)); \
+        IGRAPH_FINALLY(igraph_vector_int_destroy, v); } while (0)
 #endif
 #ifndef IGRAPH_VECTOR_LONG_INIT_FINALLY
 #define IGRAPH_VECTOR_LONG_INIT_FINALLY(v, size) \
-  do { IGRAPH_CHECK(igraph_vector_long_init(v, size)); \
-  IGRAPH_FINALLY(igraph_vector_long_destroy, v); } while (0)
+    do { IGRAPH_CHECK(igraph_vector_long_init(v, size)); \
+        IGRAPH_FINALLY(igraph_vector_long_destroy, v); } while (0)
 #endif
 
 /* -------------------------------------------------- */
 /* Type-specific vector functions                     */
 /* -------------------------------------------------- */
 
-int igraph_vector_floor(const igraph_vector_t *from, igraph_vector_long_t *to);
-int igraph_vector_round(const igraph_vector_t *from, igraph_vector_long_t *to);
+DECLDIR int igraph_vector_floor(const igraph_vector_t *from, igraph_vector_long_t *to);
+DECLDIR int igraph_vector_round(const igraph_vector_t *from, igraph_vector_long_t *to);
 
-igraph_bool_t igraph_vector_e_tol(const igraph_vector_t *lhs,
-				  const igraph_vector_t *rhs,
-				  igraph_real_t tol);
+DECLDIR igraph_bool_t igraph_vector_e_tol(const igraph_vector_t *lhs,
+        const igraph_vector_t *rhs,
+        igraph_real_t tol);
 
-int igraph_vector_zapsmall(igraph_vector_t *v, igraph_real_t tol);
+DECLDIR int igraph_vector_zapsmall(igraph_vector_t *v, igraph_real_t tol);
 
-/* These are for internal use only */
-int igraph_vector_order(const igraph_vector_t* v, const igraph_vector_t *v2,
-			igraph_vector_t* res, igraph_real_t maxval);
-int igraph_vector_order1(const igraph_vector_t* v,
-			 igraph_vector_t* res, igraph_real_t maxval);
-int igraph_vector_order1_int(const igraph_vector_t* v,
-			 igraph_vector_int_t* res, igraph_real_t maxval);
-int igraph_vector_order2(igraph_vector_t *v);
-int igraph_vector_rank(const igraph_vector_t *v, igraph_vector_t *res,
-		       long int nodes);
+DECLDIR int igraph_vector_order(const igraph_vector_t* v, const igraph_vector_t *v2,
+                        igraph_vector_t* res, igraph_real_t maxval);
+DECLDIR int igraph_vector_order1(const igraph_vector_t* v,
+                         igraph_vector_t* res, igraph_real_t maxval);
+DECLDIR int igraph_vector_order1_int(const igraph_vector_t* v,
+                             igraph_vector_int_t* res, igraph_real_t maxval);
+DECLDIR int igraph_vector_order2(igraph_vector_t *v);
+DECLDIR int igraph_vector_rank(const igraph_vector_t *v, igraph_vector_t *res,
+                       long int nodes);
 
 __END_DECLS
 

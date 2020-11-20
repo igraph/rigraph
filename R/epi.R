@@ -50,7 +50,7 @@ time_bins.sir <- function(x, middle=TRUE) {
 #' @rdname sir
 #' @export
 
-median.sir <- function(x, na.rm=FALSE) {
+median.sir <- function(x, na.rm=FALSE, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {
     stop("This is not an SIR model output")

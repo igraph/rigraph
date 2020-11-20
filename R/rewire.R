@@ -92,9 +92,8 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
   loops <- as.logical(loops)
   mode <- if (loops) 1 else 0
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_rewire", graph, as.numeric(niter), as.numeric(mode),
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex
@@ -135,8 +134,7 @@ rewire_each_edge <- function(graph, prob, loops=FALSE, multiple=FALSE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_rewire_edges", graph, as.numeric(prob), as.logical(loops),
-        as.logical(multiple),
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
+        as.logical(multiple))
 }

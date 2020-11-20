@@ -44,11 +44,6 @@
 
 */
 
-#ifdef __clang__
-#pragma clang diagnostic ignored "-Wconversion"
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#endif
-
 #include "config.h"
 #include "igraph_hacks_internal.h"
 #include "igraph_math.h"
@@ -109,6 +104,7 @@ extern igraph_real_t igraph_pajek_get_number(const char *str, long int len);
 %token DIGIT
 %token LABEL
 %token EOFF
+%token ERROR
 
 %%
 
@@ -181,7 +177,7 @@ labeledmatrixline: LABEL zerooneseq NEWLINE { } ;
 
 edgelist1: FORMATEDGELIST1 newline edgelist1rest {} ;
 
-edgelist1rest:   DATA edgelist1data {}
+edgelist1rest:   DATA newline edgelist1data {}
              | LABELS newline labels newline DATA newline edgelist1data {}
              | LABELSEMBEDDED newline DATA newline labelededgelist1data {}
              | LABELS newline labels newline LABELSEMBEDDED newline DATA newline labelededgelist1data {}

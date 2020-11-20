@@ -23,7 +23,6 @@
 
 #include "igraph.h"
 
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
@@ -282,9 +281,14 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
-  defineVar(install("myid"), mkString(my_id_chr), VECTOR_ELT(graph, 9));
-  defineVar(install(R_IGRAPH_VERSION_VAR), mkString(R_IGRAPH_TYPE_VERSION),
-	    VECTOR_ELT(graph, 9));
+  SEXP l1 = PROTECT(install("myid"));
+  SEXP l2 = PROTECT(mkString(my_id_chr));
+  defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  UNPROTECT(2);
+  l1 = PROTECT(install(R_IGRAPH_VERSION_VAR));
+  l2 = PROTECT(mkString(R_IGRAPH_TYPE_VERSION));
+  defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  UNPROTECT(2);
 
   UNPROTECT(1);
   return graph;
@@ -295,24 +299,32 @@ SEXP R_igraph_add_env(SEXP graph) {
   int i;
   uuid_t my_id;
   char my_id_chr[40];
+  int px = 0;
 
-  if (GET_LENGTH(result) != 10) {
-    PROTECT(result = NEW_LIST(10));
+  if (GET_LENGTH(graph) != 10) {
+    PROTECT(result = NEW_LIST(10)); px++;
     for (i = 0; i < 9; i++) {
       SET_VECTOR_ELT(result, i, duplicate(VECTOR_ELT(graph, i)));
     }
     SET_ATTRIB(result, duplicate(ATTRIB(graph)));
     SET_CLASS(result, duplicate(GET_CLASS(graph)));
   }
+
   SET_VECTOR_ELT(result, 9, allocSExp(ENVSXP));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
-  defineVar(install("myid"), mkString(my_id_chr), VECTOR_ELT(result, 9));
-  defineVar(install(R_IGRAPH_VERSION_VAR), mkString(R_IGRAPH_TYPE_VERSION),
-	    VECTOR_ELT(result, 9));
 
-  if (result != graph) { UNPROTECT(1); }
+  SEXP l1 = PROTECT(install("myid")); px++;
+  SEXP l2 = PROTECT(mkString(my_id_chr)); px++;
+  defineVar(l1, l2, VECTOR_ELT(result, 9));
+
+  l1 = PROTECT(install(R_IGRAPH_VERSION_VAR)); px++;
+  l2 = PROTECT(mkString(R_IGRAPH_TYPE_VERSION)); px++;
+  defineVar(l1, l2, VECTOR_ELT(result, 9));
+
+  UNPROTECT(px);
+
   return result;
 }
 

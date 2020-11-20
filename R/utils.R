@@ -84,7 +84,7 @@ capitalize <- function(x) {
 }
 
 address <- function(x) {
-  .Call("R_igraph_address", x, PACKAGE = "igraph")
+  .Call(C_R_igraph_address, x)
 }
 
 `%+%` <- function(x, y) {

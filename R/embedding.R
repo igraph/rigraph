@@ -262,10 +262,9 @@ sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_sample_sphere_surface", dim, n, radius, positive,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_sample_sphere_surface, dim, n, radius, positive)
 
   res
 }
@@ -304,10 +303,9 @@ sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_sample_sphere_volume", dim, n, radius, positive,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_sample_sphere_volume, dim, n, radius, positive)
 
   res
 }
@@ -341,10 +339,9 @@ sample_dirichlet <- function(n, alpha) {
   n <- as.integer(n)
   alpha <- as.numeric(alpha)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_sample_dirichlet", n, alpha,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_sample_dirichlet, n, alpha)
 
   res
 }

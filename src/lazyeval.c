@@ -38,14 +38,15 @@ SEXP promise_as_lazy(SEXP promise, SEXP env, int follow_symbols) {
 }
 
 SEXP make_lazy(SEXP name, SEXP env, SEXP follow_symbols_) {
-  SEXP promise = findVar(name, env);
+  SEXP promise = PROTECT(findVar(name, env));
   int follow_symbols = asLogical(follow_symbols_);
-
-  return promise_as_lazy(promise, env, follow_symbols);
+  SEXP ret = promise_as_lazy(promise, env, follow_symbols);
+  UNPROTECT(1);
+  return ret;
 }
 
 SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
-  SEXP dots = findVar(install("..."), env);
+  SEXP dots = PROTECT(findVar(install("..."), env));
   int follow_symbols = asLogical(follow_symbols_);
 
   // Figure out how many elements in dots
@@ -75,11 +76,10 @@ SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
   setAttrib(lazy_dots, install("names"), names);
   setAttrib(lazy_dots, install("class"), PROTECT(mkString("lazy_dots")));
 
-  UNPROTECT(3);
+  UNPROTECT(4);
 
   return lazy_dots;
 }
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rdefines.h>
 
@@ -134,7 +134,6 @@ SEXP eval_call_(SEXP fun, SEXP dots, SEXP env) {
 }
 
 */
-#define USE_RINTERNALS
 #include <R.h>
 #include <Rdefines.h>
 

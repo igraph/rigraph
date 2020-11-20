@@ -187,6 +187,7 @@ igraph.check.shapes <- function(x) {
 #' \code{\link{plot.igraph}}, \code{\link{tkplot}} and \code{\link{rglplot}}
 #' for plotting functions.
 #' @export
+#' @importFrom stats ave
 #' @keywords graphs
 #' @examples
 #' 

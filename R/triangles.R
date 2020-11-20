@@ -43,7 +43,7 @@
 #' @return For \code{triangles} a numeric vector of vertex ids, the first three
 #' vertices belong to the first triangle found, etc.
 #' 
-#' For \code{triangles} a numeric vector, the number of triangles for all
+#' For \code{count_triangles} a numeric vector, the number of triangles for all
 #' vertices queried.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{transitivity}}

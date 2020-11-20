@@ -9,8 +9,7 @@ solve_LSAP <- function (x, maximum = FALSE) {
   if (nc > nr)  x <- rbind(x, matrix(2 * sum(x), nc - nr, nc))
   if (maximum)  x <- max(x) - x
   storage.mode(x) <- "double"
-  out <- .Call("R_igraph_solve_lsap", x, as.integer(nc),
-               PACKAGE = "igraph") + 1L
+  out <- .Call(C_R_igraph_solve_lsap, x, as.integer(nc)) + 1L
   out[seq_len(nr)]
 }
 
@@ -71,7 +70,7 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #'  B  <- as.matrix(get.adjacency(g2))
 #'  P  <-match_vertices (A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
 #'  P
-#'  #' @export
+#' @export
 
 match_vertices <- function(A, B, m, start, iteration) {
   ## Seeds are assumed to be vertices 1:m in both graphs

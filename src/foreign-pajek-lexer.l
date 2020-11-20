@@ -44,26 +44,22 @@
 
 */
 
-#ifdef __clang__
-#pragma clang diagnostic ignored "-Wconversion"
-#pragma clang diagnostic ignored "-Wsign-conversion"
-#endif
-
 #include "config.h"
 #include <stdlib.h>
 #include "foreign-pajek-header.h"
 #include "foreign-pajek-parser.h"
 #define YY_EXTRA_TYPE igraph_i_pajek_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;
-/* We assume that 'file' is 'stderr' here. */
-#define fprintf(file, msg, ...) \
-  igraph_warningf(msg, __FILE__, __LINE__, 0, __VA_ARGS__)
+#ifdef USING_R
+#define fprintf(file, msg, ...) (1)
+#define YY_FATAL_ERROR(msg)                                        \
+  igraph_error("Fatal error in PAJEK parser: " # msg, __FILE__,    \
+               __LINE__, IGRAPH_PARSEERROR);
 #ifdef stdout 
 #  undef stdout
 #endif
 #define stdout 0
-#define exit(code) igraph_error("Fatal error in DL parser", __FILE__, \
-				__LINE__, IGRAPH_PARSEERROR);
+#endif
 %}
 
 %option noyywrap
@@ -71,6 +67,7 @@
 %option outfile="lex.yy.c"
 %option nounput
 %option noinput
+%option nodefault
 %option reentrant
 %option bison-bridge
 %option bison-locations
@@ -145,4 +142,7 @@ word [^ \t\r\n]
                        return NEWLINE; 
                     }
                   }
+
+.                 { return ERROR; }
+
 %%

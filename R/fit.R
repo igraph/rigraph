@@ -177,10 +177,9 @@ power.law.fit.new <- function(data, xmin=-1, force.continuous=FALSE) {
   xmin <- as.numeric(xmin)
   force.continuous <- as.logical(force.continuous)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_power_law_fit", data, xmin, force.continuous,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_power_law_fit, data, xmin, force.continuous)
 
   res
 }

@@ -24,7 +24,7 @@
 *     ..
 *     .. Executable Statements ..
 *
-
+      TARRAY( 1 ) = 0.0
       T1 = ETIME( TARRAY )
       T  = TARRAY( 1 )
 

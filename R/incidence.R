@@ -26,8 +26,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
                                    weighted) {
   n1 <- nrow(incidence)
   n2 <- ncol(incidence)
-  el <- Matrix::summary(incidence)
-  ## el <- summary(incidence)
+  el <- mysummary(incidence)
   el[,2] <- el[,2] + n1
 
   if (!is.null(weighted)) {
@@ -128,10 +127,9 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
   } else {
 
     mode(incidence) <- "double"
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+    on.exit( .Call(C_R_igraph_finalizer) )
     ## Function call
-    res <- .Call("R_igraph_incidence", incidence, directed, mode, multiple,
-                 PACKAGE="igraph")
+    res <- .Call(C_R_igraph_incidence, incidence, directed, mode, multiple)
     res <- set_vertex_attr(res$graph, "type", value=res$types)
 
   }

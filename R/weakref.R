@@ -23,19 +23,17 @@
 ## -----------------------------------------------------------------------
 
 make_weak_ref <- function(key, value, finalizer = NULL) {
-  base::.Call("R_igraph_make_weak_ref", key, value,
-              finalizer, PACKAGE = "igraph")
+  .Call(C_R_igraph_make_weak_ref, key, value, finalizer)
 }
 
 weak_ref_key <- function(ref) {
-  base::.Call("R_igraph_weak_ref_key", ref, PACKAGE = "igraph")
+  .Call(C_R_igraph_weak_ref_key, ref)
 }
 
 weak_ref_value <- function(ref) {
-  base::.Call("R_igraph_weak_ref_value", ref, PACKAGE = "igraph")
+  .Call(C_R_igraph_weak_ref_value, ref)
 }
 
 weak_ref_run_finalizer <- function(ref) {
-  base::.Call("R_igraph_weak_ref_run_finalizer", ref,
-              PACKAGE = "igraph")
+  .Call(C_R_igraph_weak_ref_run_finalizer, ref)
 }

@@ -1,5 +1,5 @@
 
-#' @useDynLib igraph
+#' @useDynLib igraph, .registration = TRUE, .fixes = "C_"
 #' @import methods
 #' @importFrom magrittr %>%
 #' @export make_bipartite_graph
@@ -26,13 +26,13 @@ NULL
 #'   result of the left hand side.
 #'
 #' @export
+#' @name %>%
 #' @rdname pipe
 #' @examples
 #' make_ring(10) %>%
 #'   add_edges(c(1,6)) %>%
 #'   plot()
-
-`%>%` <- magrittr::`%>%`
+NULL
 
 #' The igraph package
 #' 

@@ -107,13 +107,13 @@ layout_with_drl <- function(graph, use.seed = FALSE,
     if (!is.null(fixed)) {
       fixed <- as.logical(fixed)
     }
-    on.exit(.Call("R_igraph_finalizer", PACKAGE = "igraph"))
+    on.exit(.Call(C_R_igraph_finalizer))
     if (dim==2) {
-      res <- .Call("R_igraph_layout_drl", graph, seed, use.seed, options, 
-                   weights, fixed, PACKAGE = "igraph")
+      res <- .Call(C_R_igraph_layout_drl, graph, seed, use.seed, options, 
+                   weights, fixed)
     } else {
-      res <- .Call("R_igraph_layout_drl_3d", graph, seed, use.seed, options, 
-                   weights, fixed, PACKAGE = "igraph")
+      res <- .Call(C_R_igraph_layout_drl_3d, graph, seed, use.seed, options, 
+                   weights, fixed)
     }      
     res
 }

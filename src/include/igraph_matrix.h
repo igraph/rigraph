@@ -24,16 +24,7 @@
 #ifndef IGRAPH_MATRIX_H
 #define IGRAPH_MATRIX_H
 
-#undef __BEGIN_DECLS
-#undef __END_DECLS
-#ifdef __cplusplus
-# define __BEGIN_DECLS extern "C" {
-# define __END_DECLS }
-#else
-# define __BEGIN_DECLS /* empty */
-# define __END_DECLS /* empty */
-#endif
-
+#include "igraph_decls.h"
 #include "igraph_vector.h"
 
 __BEGIN_DECLS
@@ -80,8 +71,8 @@ __BEGIN_DECLS
 
 #define IGRAPH_MATRIX_NULL { IGRAPH_VECTOR_NULL, 0, 0 }
 #define IGRAPH_MATRIX_INIT_FINALLY(m, nr, nc) \
-  do { IGRAPH_CHECK(igraph_matrix_init(m, nr, nc)); \
-  IGRAPH_FINALLY(igraph_matrix_destroy, m); } while (0)
+    do { IGRAPH_CHECK(igraph_matrix_init(m, nr, nc)); \
+        IGRAPH_FINALLY(igraph_matrix_destroy, m); } while (0)
 
 /**
  * \ingroup matrix
@@ -98,11 +89,11 @@ __BEGIN_DECLS
  */
 #define MATRIX(m,i,j) ((m).data.stor_begin[(m).nrow*(j)+(i)])
 
-igraph_bool_t igraph_matrix_all_e_tol(const igraph_matrix_t *lhs,
-				      const igraph_matrix_t *rhs,
-				      igraph_real_t tol);
+DECLDIR igraph_bool_t igraph_matrix_all_e_tol(const igraph_matrix_t *lhs,
+                                      const igraph_matrix_t *rhs,
+                                      igraph_real_t tol);
 
-int igraph_matrix_zapsmall(igraph_matrix_t *m, igraph_real_t tol);
+DECLDIR int igraph_matrix_zapsmall(igraph_matrix_t *m, igraph_real_t tol);
 
 __END_DECLS
 

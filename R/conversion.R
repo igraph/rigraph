@@ -30,9 +30,9 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
   type <- switch(type, "upper"=0, "lower"=1, "both"=2)
   
   if (edges || is.null(attr)) {    
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    res <- .Call("R_igraph_get_adjacency", graph, as.numeric(type),
-                 as.logical(edges), PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    res <- .Call(C_R_igraph_get_adjacency, graph, as.numeric(type),
+                 as.logical(edges))
   } else {
     attr <- as.character(attr)
     if (! attr %in% edge_attr_names(graph)) {
@@ -240,9 +240,9 @@ as_edgelist <- function(graph, names=TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  res <- matrix(.Call("R_igraph_get_edgelist", graph, TRUE,
-                      PACKAGE="igraph"), ncol=2)
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- matrix(.Call(C_R_igraph_get_edgelist, graph, TRUE),
+                ncol=2)
   res <- res+1
   if (names && "name" %in% vertex_attr_names(graph)) {
     res <- matrix(V(graph)$name[ res ], ncol=2)
@@ -322,9 +322,8 @@ as.directed <- function(graph, mode=c("mutual", "arbitrary")) {
   mode <- igraph.match.arg(mode)
   mode <- switch(mode, "arbitrary"=0, "mutual"=1)
   
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_to_directed", graph, as.numeric(mode),
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_to_directed, graph, as.numeric(mode))
 }
 
 #' @rdname as.directed
@@ -341,10 +340,9 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
   mode <- switch(igraph.match.arg(mode), "collapse"=1, "each"=0, "mutual"=2)
   edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_to_undirected", graph, mode, edge.attr.comb,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_to_undirected, graph, mode, edge.attr.comb)
 
   res
 }
@@ -387,9 +385,8 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  res <- .Call("R_igraph_get_adjlist", graph, mode,
-               PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- .Call(C_R_igraph_get_adjlist, graph, mode)
   res <- lapply(res, function(x) V(graph)[x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
@@ -406,9 +403,8 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  res <- .Call("R_igraph_get_adjedgelist", graph, mode,
-               PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode)
   res <- lapply(res, function(x) E(graph)[x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
@@ -460,7 +456,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
-#' #' @export
+#' @export
 
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
                                  unlist.attrs=TRUE) {
@@ -518,7 +514,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' way to represent graphs. These functions are provided to convert between
 #' the igraph and the graphNEL objects.
 #' 
-#' \code{as_graphnel} converts and igraph graph to a graphNEL graph. It
+#' \code{as_graphnel} converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{\code{name}}, then it will be used to assign
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
@@ -547,7 +543,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
-#' #' @export
+#' @export
 
 as_graphnel <- function(graph) {
 
@@ -626,10 +622,9 @@ as_graphnel <- function(graph) {
 get.incidence.dense <- function(graph, types, names, attr) {
 
   if (is.null(attr)) {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+    on.exit( .Call(C_R_igraph_finalizer) )
     ## Function call
-    res <- .Call("R_igraph_get_incidence", graph, types,
-                 PACKAGE="igraph")
+    res <- .Call(C_R_igraph_get_incidence, graph, types)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[ res$row_ids+1 ]
@@ -801,7 +796,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
   what <- igraph.match.arg(what)
 
   if (what %in% c("vertices", "both")) {
-    ver <- .Call("R_igraph_mybracket2", x, 9L, 3L, PACKAGE="igraph")
+    ver <- .Call(C_R_igraph_mybracket2, x, 9L, 3L)
     class(ver) <- "data.frame"
     rn <- if (is_named(x)) { V(x)$name } else { seq_len(vcount(x)) }
     rownames(ver) <- rn
@@ -810,7 +805,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
   if (what %in% c("edges", "both")) {
     el <- as_edgelist(x)
     edg <- c(list(from=el[,1]), list(to=el[,2]),
-             .Call("R_igraph_mybracket2", x, 9L, 4L, PACKAGE="igraph"))
+             .Call(C_R_igraph_mybracket2, x, 9L, 4L))
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
   }
@@ -906,14 +901,14 @@ as_long_data_frame <- function(graph) {
 
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
-  ver <- .Call("R_igraph_mybracket2", graph, 9L, 3L, PACKAGE="igraph")
+  ver <- .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
   class(ver) <- "data.frame"
   rn <- if (is_named(graph)) { V(graph)$name } else { seq_len(vcount(graph)) }
   rownames(ver) <- rn
 
   el <- as_edgelist(graph, names = FALSE)
   edg <- c(list(from=el[,1]), list(to=el[,2]),
-           .Call("R_igraph_mybracket2", graph, 9L, 4L, PACKAGE="igraph"))
+           .Call(C_R_igraph_mybracket2, graph, 9L, 4L))
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))
 

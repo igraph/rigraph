@@ -1,8 +1,63 @@
 
-# igraph 1.1.0
+# igraph 1.2.5
 
-July xx, 2015
+Mar 27, 2020
 
+No user visible changes.
+
+# igraph 1.2.4
+
+Feb 13, 2019
+
+No user visible changes.
+
+# igraph 1.2.3
+
+Jan 27, 2019
+
+No user visible changes.
+
+# igraph 1.2.2
+
+Jul  27, 2018
+
+No user visible changes.
+
+# igraph 1.2.1
+
+- The GLPK library is optional, if it is not available, then the
+  `cluster_optimal()` function does not work. Unfortunately we cannot
+  bundle the GLPK library into igraph on CRAN any more, because CRAN
+  maintainers forbid the pragmas in its source code.
+- Removed the NMF package dependency, and related functions.
+- Fix compilation without libxml2
+
+# igraph 1.1.2
+
+Jul 20, 2017
+
+- Fix compilation on Solaris
+
+
+# igraph 1.1.1
+
+Jul 13, 2017
+
+- Graph id is printed in the header, and a `graph_id` function was added
+- Fix `edge_attr` for some index values
+- Fix a `bfs()` bug, `restricted` argument was zero-based
+- `match_vertices` is exported now
+- `%>%` is re-exported in a better way, to avoid interference with other
+  packages
+- `ego_` functions default to `order = 1` now
+- New function `igraph_with_opt` to run code with temporary igraph 
+  options settings
+- Fix broken `sample_asym_pref` function
+- Fix `curve_multiple` to avoid warnings for graphs with self-loops.
+- The `NMF` package is only suggested now, it is not a hard 
+  dependency
+- Fix gen_uid.c _SVID_SOURCE issues
+- Avoid drawing straight lines as Bezier curves
 - Use the `pkgconfig` package for options. This allows setting options
   on a per-package basis. E.g. a package using igraph can set `return.vs.es`
   to `FALSE` in its `.onLoad()` function, and then igraph will return
@@ -34,6 +89,8 @@ July xx, 2015
   `.to()`. #22
 - Fix packages that convert graphs to graph::graphNEL: they
   don't need to attach 'graph' manually any more.
+- Fix a bugs in `layout_with_dh`, `layout_with_gem` and
+  `layout_with_sugiyama`. They crashed in some cases.
 
 # igraph 1.0.1
 

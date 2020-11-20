@@ -100,14 +100,12 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
   }
 
   value.only <- as.logical(value.only)
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   if (is.null(target) && is.null(source)) {
     if (value.only) {
-      res <- .Call("R_igraph_mincut_value", graph, capacity,
-                   PACKAGE="igraph")
+      res <- .Call(C_R_igraph_mincut_value, graph, capacity)
     } else {
-      res <- .Call("R_igraph_mincut", graph, capacity,
-                   PACKAGE="igraph")
+      res <- .Call(C_R_igraph_mincut, graph, capacity)
       res$cut <- res$cut + 1
       res$partition1 <- res$partition1 + 1
       res$partition2 <- res$partition2 + 1
@@ -122,10 +120,9 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
     }
   } else {
     if (value.only) {
-      res <- .Call("R_igraph_st_mincut_value", graph,
+      res <- .Call(C_R_igraph_st_mincut_value, graph,
                    as.igraph.vs(graph, source)-1,
-                   as.igraph.vs(graph, target)-1, capacity,
-                   PACKAGE="igraph")
+                   as.igraph.vs(graph, target)-1, capacity)
     } else {
       stop("Calculating minimum s-t cuts is not implemented yet")
     }
@@ -216,14 +213,12 @@ vertex_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
   }
 
   if (is.null(source) && is.null(target)) {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_vertex_connectivity", graph, as.logical(checks),
-          PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_vertex_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_st_vertex_connectivity", graph, as.igraph.vs(graph, source)-1,
-          as.igraph.vs(graph, target)-1,
-          PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_st_vertex_connectivity, graph, as.igraph.vs(graph, source)-1,
+          as.igraph.vs(graph, target)-1)
   } else {
     stop("either give both source and target or neither")
   }
@@ -301,14 +296,12 @@ edge_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
   }
 
   if (is.null(source) && is.null(target)) {    
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_edge_connectivity", graph, as.logical(checks),
-          PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_edge_connectivity, graph, as.logical(checks))
   } else if (!is.null(source) && !is.null(target)) {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_st_edge_connectivity", graph,
-          as.igraph.vs(graph, source)-1, as.igraph.vs(graph, target)-1,
-          PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_st_edge_connectivity, graph,
+          as.igraph.vs(graph, source)-1, as.igraph.vs(graph, target)-1)
   } else {
     stop("either give both source and target or neither")
   }
@@ -322,10 +315,9 @@ edge_disjoint_paths <- function(graph, source, target) {
     stop("Not a graph object")
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_edge_disjoint_paths", graph,
-        as.igraph.vs(graph, source)-1, as.igraph.vs(graph, target)-1,
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_edge_disjoint_paths, graph,
+        as.igraph.vs(graph, source)-1, as.igraph.vs(graph, target)-1)
 }
 
 #' @export
@@ -336,10 +328,9 @@ vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
     stop("Not a graph object")
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_vertex_disjoint_paths", graph, as.igraph.vs(graph, source)-1,
-        as.igraph.vs(graph, target)-1,
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_vertex_disjoint_paths, graph, as.igraph.vs(graph, source)-1,
+        as.igraph.vs(graph, target)-1)
 }
 
 #' @export
@@ -350,9 +341,8 @@ adhesion <- function(graph, checks=TRUE) {
     stop("Not a graph object")
   }
   
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_adhesion", graph, as.logical(checks),
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_adhesion, graph, as.logical(checks))
 }
 
 #' @rdname vertex_connectivity
@@ -365,9 +355,8 @@ cohesion.igraph <- function(x, checks=TRUE, ...) {
     stop("Not a graph object")
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-  .Call("R_igraph_cohesion", x, as.logical(checks),
-        PACKAGE="igraph")
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_cohesion, x, as.logical(checks))
 }
 
 #' List all (s,t)-cuts of a graph
