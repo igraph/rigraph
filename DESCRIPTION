@@ -34,4 +34,4 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'versions.R' 'weakref.R' 'zzz-deprecate.R'
 RoxygenNote: 7.1.1
 NeedsCompilation: yes
-Packaged: 2020-11-20 11:00:54 UTC; travis
+Packaged: 2020-11-24 14:49:01 UTC; travis
