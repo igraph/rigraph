@@ -5,8 +5,7 @@ all: igraph
 # Main package
 
 top_srcdir=cigraph
-REALVERSION=1.2.6
-VERSION=1.2.6
+VERSION=$(shell tools/getversion.sh)
 
 # We put the version number in a file, so that we can detect
 # if it changes
@@ -19,7 +18,8 @@ version_number: force
 # we use the Fortran files for that. We don't need F2C, either.
 
 CSRC := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
-	 grep -v "^src/lapack/" | grep -v "^src/f2c" | grep -v Makefile.am)
+	      grep -v "^src/lapack/" | grep -v "^src/f2c" | \
+	      grep -v Makefile.am)
 
 $(CSRC): src/%: $(top_srcdir)/src/%
 	mkdir -p $(@D) && cp $< $@
@@ -61,7 +61,7 @@ src/igraph_threading.h: $(top_srcdir)/include/igraph_threading.h.in
 
 src/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 	mkdir -p src
-	sed 's/@PACKAGE_VERSION@/'$(REALVERSION)'/g' $< >$@
+	sed 's/@PACKAGE_VERSION@/'$(VERSION)'/g' $< >$@
 
 # R source and doc files
 
@@ -157,7 +157,6 @@ src/init.c: tools/stimulus/init.c
 OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
 		tr ' ' '\n' |                                            \
 	        grep -E '\.(c|cpp|cc|f|l|y)$$' | 			 \
-		grep -F -v '/t_cholmod' | 				 \
 		grep -F -v f2c/arithchk.c | grep -F -v f2c_dummy.c |	 \
 		sed 's/\.[^\.][^\.]*$$/.o/' | 			 	 \
 		sed 's/^src\///' | sed 's/^tools\/arpack\///' |		 \
