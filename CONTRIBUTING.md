@@ -72,9 +72,9 @@ edit the sources on your computer, instead of online on Github.
   system("git submodule update")
   system("make")
   library(devtools)
-  install()
-  build()
-  test()
+  devtools::install()
+  devtools::build()
+  devtools::test()
   ```
 
 * Submit your pull request.
