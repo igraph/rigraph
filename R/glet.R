@@ -83,10 +83,13 @@ graphlet_basis <- function(graph, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   ## Drop all attributes, we don't want to deal with them, TODO
@@ -110,10 +113,13 @@ graphlet_proj <- function(graph, weights=NULL, cliques, niter=1000,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
   Mu <- as.numeric(Mu)
   niter <- as.integer(niter)

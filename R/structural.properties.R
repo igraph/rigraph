@@ -85,10 +85,13 @@ diameter <- function(graph, directed=TRUE, unconnected=TRUE, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -108,10 +111,13 @@ get_diameter <- function(graph, directed=TRUE, unconnected=TRUE,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -137,10 +143,13 @@ farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -709,11 +718,15 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   nobigint <- as.logical(nobigint)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -810,11 +823,15 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_betweenness, graph, v-1,
                as.logical(directed), weights, as.logical(nobigint))
@@ -945,10 +962,13 @@ transitivity <- function(graph, type=c("undirected", "global", "globalundirected
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   isolates <- igraph.match.arg(isolates)
@@ -1407,6 +1427,7 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
     attr <- "weight"
   } else {
     ## weights != NULL, but some weights are NA
+    warning("Weights contains NA elements, ignoring the weights.")
     attr <- NULL
   }
 
@@ -1450,6 +1471,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
     attr <- "weight"
   } else {
     ## weights != NULL, but some weights are NA
+    warning("Weights contains NA elements, ignoring the weights.")
     attr <- NULL
   }
 
@@ -2255,10 +2277,13 @@ edge_betweenness <- function(graph, e=E(graph),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -2279,10 +2304,13 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -2471,11 +2499,15 @@ closeness <- function(graph, vids=V(graph),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   normalized <- as.logical(normalized)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -2502,11 +2534,15 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+     weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   normalized <- as.logical(normalized)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -2568,11 +2604,15 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   sparse <- as.logical(sparse)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -2734,11 +2774,15 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   eps <- as.numeric(eps)
 
   on.exit( .Call(C_R_igraph_finalizer) )

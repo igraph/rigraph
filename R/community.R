@@ -456,10 +456,13 @@ modularity_matrix <- function(graph, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -930,10 +933,13 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   update.rule <- igraph.match.arg(update.rule)
@@ -1027,17 +1033,23 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   # Parse initial_membership argument
-  if (!is.null(initial_membership) && !any(is.na(initial_membership))) {
-    initial_membership <- as.numeric(initial_membership)
-  } else {
-    initial_membership <- NULL
+  if (!is.null(initial_membership)) {
+      if (!any(is.na(initial_membership))) {
+      initial_membership <- as.numeric(initial_membership)
+    } else {
+      warning("Initial membership vector contains NA elements, ignoring the initial membership vector.")
+      initial_membership <- NULL
+    }
   }
 
   # Parse node weights argument
@@ -1459,11 +1471,15 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   if (!is.null(start)) { start <- as.numeric(start)-1 }
   options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
 
@@ -1545,11 +1561,15 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
@@ -1627,10 +1647,13 @@ cluster_louvain <- function(graph, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-  weights <- as.numeric(weights)
-  } else {
-  weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+    weights <- as.numeric(weights)
+    } else {
+    warning("Weights vector contains NA elements, ignoring the weights vector.")
+    weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1714,10 +1737,13 @@ cluster_optimal <- function(graph, weights=NULL) {
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1793,18 +1819,24 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
   if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
     e.weights <- E(graph)$weight
   }
-  if (!is.null(e.weights) && !any(is.na(e.weights))) {
-    e.weights <- as.numeric(e.weights)
-  } else {
-    e.weights <- NULL
+  if (!is.null(e.weights)) {
+    if (!any(is.na(e.weights))) {
+      e.weights <- as.numeric(e.weights)
+    } else {
+      warning("e.weights vector contains NA elements, ignoring the e.weights vector.")
+      e.weights <- NULL
+    }
   }
   if (is.null(v.weights) && "weight" %in% vertex_attr_names(graph)) {
     v.weights <- V(graph)$weight
   }
-  if (!is.null(v.weights) && !any(is.na(v.weights))) {
-    v.weights <- as.numeric(v.weights)
-  } else {
-    v.weights <- NULL
+  if (!is.null(v.weights)) {
+    if (!any(is.na(v.weights))) {
+      v.weights <- as.numeric(v.weights)
+    } else {
+      warning("v.weights vector contains NA elements, ignoring the v.weights vector.")
+      v.weights <- NULL
+    }
   }
   nb.trials <- as.integer(nb.trials)
 

@@ -2,7 +2,7 @@
 GRAPH:
     INCONV: if (!is_igraph(%I%)) { stop("Not a graph object") }
 
-GRAPH_OR_0:    
+GRAPH_OR_0:
     INCONV: if (!is.null(graph) && !is_igraph(%I%)) { stop("Not a graph object") }
 
 INTEGER:
@@ -29,13 +29,13 @@ VECTOR:
        AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
 
 VERTEXINDEX:
-    OUTCONV: 
+    OUTCONV:
         OUT:  if (igraph_opt("add.vertex.names") && is_named(%I1%)) { \
                 names(%I%) <- vertex_attr(%I1%, "name", %I2%) \
               }
 
 VERTEXINDEX_OR_0:
-    OUTCONV: 
+    OUTCONV:
         OUT:  if (igraph_opt("add.vertex.names") && is_named(%I1%)) { \
                 names(%I%) <- vertex_attr(%I1%, "name", %I2%) \
               }
@@ -115,7 +115,7 @@ INTEGERPTR_OR_0:
 
 BOOLEANPTR:
 
-BOOLEANPTR_OR_0:    
+BOOLEANPTR_OR_0:
 
 REALPTR:
     INCONV:
@@ -186,30 +186,39 @@ EDGEWEIGHTS:
     INCONV: if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) { \
                %I% <- E(%I1%)$weight \
             } \
-            if (!is.null(%I%) && !any(is.na(%I%))) { \
+            if (!is.null(%I%)) {
+              if (!any(is.na(%I%))) { \
                %I% <- as.numeric(%I%) \
-            } else { \
-               %I% <- NULL \
+              } else { \
+                warning("Edge weights contains NA elements, ignoring the edge weights.")
+                %I% <- NULL \
+              }
             }
 
 VERTEXWEIGHTS:
     INCONV: if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) { \
                %I% <- V(%I1%)$weight \
             } \
-            if (!is.null(%I%) && !any(is.na(%I%))) { \
-               %I% <- as.numeric(%I%) \
-            } else { \
-               %I% <- NULL \
+            if (!is.null(%I%)) {
+              if (!any(is.na(%I%))) { \
+                %I% <- as.numeric(%I%) \
+              } else { \
+                warning("Vertex weights contains NA elements, ignoring the vertex weights.")
+                %I% <- NULL \
+              }
             }
 
 EDGECAPACITY:
     INCONV: if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) { \
                %I% <- E(%I1%)$capacity \
             } \
-            if (!is.null(%I%) && !any(is.na(%I%))) { \
-               %I% <- as.numeric(%I%) \
-            } else { \
-               %I% <- NULL \
+            if (!is.null(%I%)) {
+              if (!any(is.na(%I%))) { \
+                %I% <- as.numeric(%I%) \
+              } else { \
+                warning("Edge capacities contains NA elements, ignoring the edge capacities.")
+                %I% <- NULL \
+              }
             }
 
 
@@ -351,12 +360,12 @@ SUBGRAPH_IMPL:
 
 EDGE_ATTRIBUTE_COMBINATION:
     INCONV: %I% <- igraph.i.attribute.combination(%I%)
-    DEFAULT: 
+    DEFAULT:
        Default: igraph_opt("edge.attr.comb")
 
 VERTEX_ATTRIBUTE_COMBINATION:
     INCONV: %I% <- igraph.i.attribute.combination(%I%)
-    DEFAULT: 
+    DEFAULT:
        Default: igraph_opt("vertex.attr.comb")
 
 ADD_WEIGHTS:
@@ -396,7 +405,7 @@ SCGNORM:
 
 SCGDIR:
     INCONV: %I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)
-    DEFAULT: 
+    DEFAULT:
       Default: c("default", "left", "right")
 
 SPARSEMAT:
@@ -431,13 +440,13 @@ EIGENALGO:
     INCONV: %I% <- switch(igraph.match.arg(%I%), "auto"=0, "lapack"=1, \
                           "arpack"=2, "comp_auto"=3, "comp_lapack"=4, \
                           "comp_arpack"=5)
-    DEFAULT: 
+    DEFAULT:
       ARPACK: c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack")
 
 EIGENWHICH:
     INCONV: %I%.tmp <- eigen_defaults; \
             %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp
-    DEFAULT: 
+    DEFAULT:
       Default: list()
 
 EIGENWHICHPOS:

@@ -1043,11 +1043,15 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   if (!is.null(minx)) minx <- as.numeric(minx)
   if (!is.null(maxx)) maxx <- as.numeric(maxx)
   if (!is.null(miny)) miny <- as.numeric(miny)
@@ -1336,11 +1340,15 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   if (!is.null(minx)) minx <- as.numeric(minx)
   if (!is.null(maxx)) maxx <- as.numeric(maxx)
   if (!is.null(miny)) miny <- as.numeric(miny)
@@ -1720,11 +1728,15 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
-  if (!is.null(weights) && !any(is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
+  if (!is.null(weights)) {
+    if (!any(is.na(weights))) {
+      weights <- as.numeric(weights)
+    } else {
+      warning("Weights vector contains NA elements, ignoring the weights vector.")
+      weights <- NULL
+    }
   }
+
   attributes <- igraph.match.arg(attributes)
 
   on.exit(.Call(C_R_igraph_finalizer) )
