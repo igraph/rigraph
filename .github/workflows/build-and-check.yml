@@ -40,8 +40,8 @@ jobs:
 
       - name: Create R package
         run: |
-          - Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
-          - make
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+          make
         shell: bash
 
       - uses: r-lib/actions/setup-pandoc@v1
