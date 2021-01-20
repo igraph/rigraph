@@ -21,7 +21,7 @@ AC_PROG_CC
 
 # Fortran compiler, we need to check if it is the GNU compiler
 AC_PROG_FC
-if test "x$ac_cv_fc_compiler_gnu" == xyes; then
+if test "x$ac_cv_fc_compiler_gnu" = xyes; then
   AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU fortran compiler])
 fi
 
