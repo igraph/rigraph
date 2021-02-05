@@ -17,3 +17,4 @@
 ^src/.*\.so$
 ^revdep$
 ^src/igraph.so.dSYM$
+^.vscode$
