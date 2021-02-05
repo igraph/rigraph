@@ -28,11 +28,15 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CI = "GitHub actions"
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - uses: r-lib/actions/setup-r@v1
         with:
@@ -40,8 +44,9 @@ jobs:
 
       - name: Create R package
         run: |
-          - install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))
-        shell: make
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+          make
+        shell: bash
 
       - uses: r-lib/actions/setup-pandoc@v1
 

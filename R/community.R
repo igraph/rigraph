@@ -968,6 +968,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' Finding community structure of a graph using the Leiden algorithm of Traag,
 #' van Eck & Waltman.
 #'
+#' @param graph The input graph, only undirected graphs are supported.
 #' @param objective_function Whether to use the Constant Potts Model (CPM) or
 #'   modularity. Must be either \code{"CPM"} or \code{"modularity"}.
 #' @param weights Optional edge weights to be used. Can be a vector or an edge

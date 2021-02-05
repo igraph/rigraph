@@ -15,7 +15,7 @@ version_number: force
 	@echo '$(VERSION)' | cmp -s - $@ || echo '$(VERSION)' > $@
 
 # Source files from the C library, we don't need BLAS/LAPACK
-# because they are included in R and ARPACK, because 
+# because they are included in R and ARPACK, because
 # we use the Fortran files for that. We don't need F2C, either.
 
 CSRC := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
@@ -103,23 +103,23 @@ $(RAY2): src/%: $(top_srcdir)/optional/%
 
 src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
-		tools/stimulus/types-C.def \
+		tools/stimulus/types-RC.def \
 		$(top_srcdir)/tools/stimulus.py
 	$(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
-           -t tools/stimulus/types-C.def \
+           -t tools/stimulus/types-RC.def \
            -l RC
 
 R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
-		tools/stimulus/types-R.def \
+		tools/stimulus/types-RR.def \
 		$(top_srcdir)/tools/stimulus.py
 	$(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
-           -t tools/stimulus/types-R.def \
+           -t tools/stimulus/types-RR.def \
            -l RR
 
 # configure files
@@ -151,7 +151,7 @@ src/init.c: tools/stimulus/init.c
 
 # This is the list of all object files in the R package,
 # we write it to a file to be able to depend on it.
-# Makevars.in and Makevars.win are only regenerated if 
+# Makevars.in and Makevars.win are only regenerated if
 # the list of object files changes.
 
 OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
