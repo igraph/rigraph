@@ -31,7 +31,6 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CI: "GitHub actions"
 
     steps:
       - uses: actions/checkout@v2
