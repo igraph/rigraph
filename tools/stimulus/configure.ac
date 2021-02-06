@@ -25,6 +25,7 @@ if test "x$ac_cv_fc_compiler_gnu" = xyes; then
   AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU fortran compiler])
 fi
 
+AC_DEFINE([INTERNAL_SUITESPARSE], [1], [Define to 1 if you use the internal SuiteSparse library])
 
 # Tricky check for C++ compiler, because Autoconf has a weird bug:
 # http://lists.gnu.org/archive/html/autoconf/2006-03/msg00067.html
@@ -46,7 +47,7 @@ AC_CHECK_DECL([stpcpy],
 	[AC_DEFINE([HAVE_STPCPY_SIGNATURE], [1], [Define to 1 if the stpcpy function has a signature])])
 LIBS=$LIBS_SAVE
 
-AC_CHECK_HEADER([sys/times.h], 
+AC_CHECK_HEADER([sys/times.h],
       [AC_DEFINE([HAVE_TIMES_H], [1], [Define to 1 if you have the sys/times.h header])])
 
 AC_CHECK_HEADERS([ \
@@ -114,7 +115,7 @@ if test "x$enable_gmp" != "xno"; then
       HAVE_GMP=1
       AC_DEFINE([HAVE_GMP], [1], [Define to 1 if you have the GMP library])
       gmp_support=yes
-      GMP_LIBS="-lgmp"      
+      GMP_LIBS="-lgmp"
     ])
   ])
 fi
