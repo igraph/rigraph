@@ -46,11 +46,18 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
-      - name: Create R package
+      - name: Create R package (non-Windows)
+        if: runner.os != 'Windows'
         run: |
           Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
           make
         shell: bash
+
+      - name: Create R package (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+          make
 
       - uses: r-lib/actions/setup-pandoc@v1
 
