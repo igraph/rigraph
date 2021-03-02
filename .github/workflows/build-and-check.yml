@@ -13,10 +13,46 @@ on:
 name: R-CMD-check
 
 jobs:
+  build_src_package:
+    runs-on: ubuntu-latest
+    r: 'release'
+    rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
+
+    name: Build source R package
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+
+      - name: Create R source package
+        run: |
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+          make
+        shell: bash
+
+      - name: Upload R source package
+        uses: actions/upload-artifact@v2
+        with:
+          name: rigraph
+          path: igraph_*.tar.gz
+
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    needs: build_src_package
+
+    name: Check ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
@@ -34,30 +70,12 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CI: "GitHub actions"
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Download R source package
+        uses: actions/download-artifact@v2
         with:
-          submodules: true
-          fetch-depth: 0
-
-      - uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: ${{ matrix.config.r }}
-
-      - name: Create R package (non-Windows)
-        if: runner.os != 'Windows'
-        run: |
-          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
-          make
-        shell: bash
-
-      - name: Create R package (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
-          make
+          name: rigraph
 
       - uses: r-lib/actions/setup-pandoc@v1
 
