@@ -40,9 +40,14 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Install necessary dependencies
+        run: |
+          sudo apt install libcurl4-openssl-dev
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+        shell: bash
+
       - name: Create R source package
         run: |
-          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
           make
         shell: bash
 
