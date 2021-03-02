@@ -49,13 +49,15 @@ jobs:
       - name: Create R source package
         run: |
           make
+          mkdir package && tar -xvf igraph_*.tar.gz package
         shell: bash
 
       - name: Upload R source package
         uses: actions/upload-artifact@v2
         with:
           name: rigraph
-          path: igraph_*.tar.gz
+          path: package/igraph
+          retention-days: 5
 
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
@@ -87,6 +89,10 @@ jobs:
         with:
           name: rigraph
 
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: ${{ matrix.config.r }}
+
       - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Query dependencies
@@ -95,6 +101,7 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+        working-directory: packages/igraph
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -103,6 +110,7 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+        working-directory: packages/igraph
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -111,21 +119,25 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+        working-directory: packages/igraph
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+        working-directory: packages/igraph
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+        working-directory: packages/igraph
 
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          path: packages/igraph/check
