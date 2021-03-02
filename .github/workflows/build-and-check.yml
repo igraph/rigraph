@@ -49,7 +49,7 @@ jobs:
       - name: Create R source package
         run: |
           make
-          mkdir package && tar -xvf igraph_*.tar.gz package
+          mkdir package && tar -xvf igraph_*.tar.gz -C package
         shell: bash
 
       - name: Upload R source package
