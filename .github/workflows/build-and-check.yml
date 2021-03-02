@@ -14,9 +14,13 @@ name: R-CMD-check
 
 jobs:
   build_src_package:
-    runs-on: ubuntu-latest
-    r: 'release'
-    rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     name: Build source R package
 
