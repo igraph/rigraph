@@ -97,9 +97,8 @@ jobs:
       - name: Query dependencies
         run: |
           install.packages('remotes')
-          dir.create(".github")
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "~/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "~/R-version")
         shell: Rscript {0}
 
       - name: Cache R packages
@@ -107,8 +106,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ${{ runner.os }}-${{ hashFiles('~/R-version') }}-1-${{ hashFiles('~/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('~/R-version') }}-1-
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
@@ -118,6 +117,10 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
 
+      - name: Install system dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
