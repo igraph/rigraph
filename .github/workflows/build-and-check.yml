@@ -121,7 +121,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
-        shell: ${RTOOLS40_HOME}\msys2.exe
+        shell: msys2.exe
 
       - name: Install dependencies
         run: |
