@@ -120,8 +120,7 @@ jobs:
       - name: Install system dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
-          pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
-        shell: msys2.exe
+          pacman -Sy mingw-w64-x86_64-glpk mingw-w64-x86_64-libxml2 mingw-w64-x86_64-gmp
 
       - name: Install dependencies
         run: |
