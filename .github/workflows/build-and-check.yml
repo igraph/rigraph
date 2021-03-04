@@ -48,14 +48,13 @@ jobs:
       - name: Create R source package
         run: |
           make
-          mkdir package && tar -xvf igraph_*.tar.gz -C package
         shell: bash
 
       - name: Upload R source package
         uses: actions/upload-artifact@v2
         with:
           name: rigraph
-          path: package/igraph
+          path: igraph_*.tar.gz
           retention-days: 5
 
   R-CMD-check:
@@ -88,11 +87,18 @@ jobs:
         with:
           name: rigraph
 
+      - name: Extract source package
+        run: tar -xvf igraph*.tar.gz
+
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@v1
+
+      - name: Install remotes package
+        run: install.packages('remotes')
+        shell: Rscript {0}
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -115,10 +121,8 @@ jobs:
         run: |
           pacman -Sy --noconfirm mingw-w64-i686-glpk mingw-w64-i686-libxml2 mingw-w64-i686-gmp mingw-w64-x86_64-glpk mingw-w64-x86_64-libxml2 mingw-w64-x86_64-gmp
 
-
       - name: Install dependencies
         run: |
-          install.packages('remotes')
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
