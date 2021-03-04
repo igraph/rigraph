@@ -115,6 +115,7 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+        working-directory: igraph
 
       - name: Install system dependencies (Windows)
         if: runner.os == 'Windows'
@@ -126,16 +127,18 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+        working-directory: igraph
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+        working-directory: igraph
 
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          path: igraph/check
