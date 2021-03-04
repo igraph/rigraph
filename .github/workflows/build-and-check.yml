@@ -20,9 +20,8 @@ jobs:
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
+      _R_CHECK_FORCE_SUGGESTS_: false   # graph package is unavailable
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      MAKEFLAGS: -j2
 
     steps:
       - uses: actions/checkout@v2
@@ -81,6 +80,8 @@ jobs:
       _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RGL_USE_NULL: true  # Ensure that rgl functions correctly on macOS
+      MAKEFLAGS: -j2
 
     steps:
       - name: Download R source package
@@ -128,7 +129,7 @@ jobs:
 
       - name: Install system dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install xquartz libxml2 glpk gmp automake
+        run: brew install libxml2 glpk gmp automake
 
       - name: Install system dependencies (Windows)
         if: runner.os == 'Windows'
