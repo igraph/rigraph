@@ -182,7 +182,7 @@ igraph: igraph_$(VERSION).tar.gz
 igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 			  $(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
 	if [ -d "patches" ]; then \
-		find patches -type f -name '*.patch' -print0 | sort -z | xargs -t -0 -n 1 patch -p1; \
+		find patches -type f -name '*.patch' -print0 | sort -z | xargs -t -0 -n 1 patch -p1 -t -i; \
 	fi
 	rm -f src/config.h
 	rm -f src/Makevars
