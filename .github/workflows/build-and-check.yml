@@ -89,6 +89,7 @@ jobs:
 
       - name: Extract source package
         run: tar -xvf igraph*.tar.gz
+        shell: bash
 
       - uses: r-lib/actions/setup-r@v1
         with:
