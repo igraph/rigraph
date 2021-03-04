@@ -127,7 +127,7 @@ jobs:
 
       - name: Install system dependencies (macOS)
         if: runner.os == 'macOS'
-        run: brew install xquartz libxml2 glpk gmp
+        run: brew install xquartz libxml2 glpk gmp automake
 
       - name: Install system dependencies (Windows)
         if: runner.os == 'Windows'
