@@ -43,6 +43,7 @@ AC_LANG_POP([C++])
 LIBS_SAVE=$LIBS
 LIBS="$LIBS -lm"
 AC_CHECK_FUNCS([rintf finite expm1 rint log2 logbl snprintf log1p round fmin stpcpy])
+AC_CHECK_DECLS(isfinite,,,[#include <math.h>])
 AC_CHECK_DECL([stpcpy],
 	[AC_DEFINE([HAVE_STPCPY_SIGNATURE], [1], [Define to 1 if the stpcpy function has a signature])])
 LIBS=$LIBS_SAVE
