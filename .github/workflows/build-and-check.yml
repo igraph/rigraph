@@ -22,6 +22,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAKEFLAGS: -j2
 
     steps:
       - uses: actions/checkout@v2
