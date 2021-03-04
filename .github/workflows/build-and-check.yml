@@ -156,3 +156,36 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: igraph/check
+
+  # temporary attempt at a automatically deploying the source code to the master branch
+  deploy_src:
+    runs-on: ubuntu-20.04
+
+    name: Deploy source R package to master branch
+
+    if: success() # && github.ref == 'refs/heads/dev'
+    needs: R-CMD-check
+
+    steps:
+
+      - name: Checkout master branch
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Download R source package
+        uses: actions/download-artifact@v2
+        with:
+          name: rigraph
+
+      - name: Extract source package
+        run: |
+          tar -xvf igraph*.tar.gz --strip-components=1
+          rm *.tar.gz
+
+      - name: Push to master branch
+        uses: github-actions-x/commit@v2.7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: master
+          commit-message: '${{ github.event.head_commit.message }}. Auto-deployed based on ${{ github.event.sha }}.'
