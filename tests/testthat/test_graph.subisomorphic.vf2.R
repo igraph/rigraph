@@ -13,11 +13,11 @@ test_that("graph.subisomorphic.vf2 works", {
   ig1 <- graph.subisomorphic.vf2(g, g1)
   ig2 <- graph.subisomorphic.vf2(g, g2)
 
-  expect_that(ig1$iso, is_true())
+  expect_true(ig1$iso)
   expect_that(ig1$map12, equals(c(1:vcount(g1), rep(0, vcount(g2)))))
   expect_that(ig1$map21, equals(1:vcount(g1)))
 
-  expect_that(ig2$iso, is_true())
+  expect_true(ig2$iso)
   expect_that(ig2$map12, equals(c(rep(0, vcount(g1)), 1:vcount(g2))))
   expect_that(ig2$map21, equals(1:vcount(g2) + vcount(g1)))
   

@@ -326,7 +326,6 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @param directed Logical, whether the graph will be directed, defaults to
 #' FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
-#' @param \dots Additional arguments, ignored.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_pa}}
@@ -340,7 +339,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' degree_distribution(g)
 #' 
 erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
-                             directed=FALSE, loops=FALSE, ...) {
+                             directed=FALSE, loops=FALSE) {
 
   type <- igraph.match.arg(type)
   type1 <- switch(type, "gnp"=0, "gnm"=1)
@@ -1275,7 +1274,6 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' group. The sum of the vector must match the number of vertices.
 #' @param directed Logical scalar, whether to generate a directed graph.
 #' @param loops Logical scalar, whether self-loops are allowed in the graph.
-#' @param \dots Passed to \code{sample_sbm}.
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}}, \code{\link{sample_gnm}}
@@ -1293,6 +1291,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 sample_sbm <- sample_sbm
 
 #' @rdname sample_sbm
+#' @param ... Passed to \code{sample_sbm}.
 #' @export
 
 sbm <- function(...) constructor_spec(sample_sbm, ...)
@@ -1321,7 +1320,6 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' differ in different blocks.
 #' @param p Numeric scalar, the Bernoulli rate of connections between vertices
 #' in different blocks.
-#' @param \dots Passed to \code{sample_hierarchical_sbm}.
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sbm.game}}
@@ -1368,6 +1366,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 }
 
 #' @rdname sample_hierarchical_sbm
+#' @param ... Passed to \code{sample_hierarchical_sbm}.
 #' @export
 
 hierarchical_sbm <- function(...)
@@ -1391,7 +1390,6 @@ hierarchical_sbm <- function(...)
 #' column.
 #' @param directed A logical scalar, TRUE if the generated graph should be
 #' directed.
-#' @param \dots Passed to \code{sample_dot_product}.
 #' @return An igraph graph object which is the generated random dot product
 #' graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1417,8 +1415,9 @@ hierarchical_sbm <- function(...)
 
 sample_dot_product <- sample_dot_product
 
-#' @export
 #' @rdname sample_dot_product
+#' @param ... Passed to \code{sample_dot_product}.
+#' @export
 
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 

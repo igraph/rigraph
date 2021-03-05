@@ -7,7 +7,7 @@ Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
   and regular graphs, graph visualization, centrality methods and much more.
 Depends: methods
-Imports: 
+Imports:
     graphics,
     grDevices,
     magrittr,
@@ -15,9 +15,8 @@ Imports:
     pkgconfig (>= 2.0.0),
     stats,
     utils
-Suggests: 
+Suggests:
     ape,
-    digest,
     graph,
     igraphdata,
     rgl,
@@ -25,7 +24,8 @@ Suggests:
     stats4,
     tcltk,
     testthat,
-    withr
+    withr,
+    digest
 License: GPL (>= 2)
 URL: http://igraph.org
 SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)

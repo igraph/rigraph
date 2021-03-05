@@ -8,8 +8,7 @@ test_that("Generating stochastic block models works", {
   bs <- c(4,6)
   g1 <- sample_sbm(10, pref.matrix=pm, block.sizes=bs,
                  directed=FALSE, loops=FALSE)
-  expect_that(graph.isomorphic(g1, make_full_graph(10, directed=FALSE, loops=FALSE)),
-              is_true())
+  expect_true(graph.isomorphic(g1, make_full_graph(10, directed=FALSE, loops=FALSE)))
 
   g2 <- sample_sbm(10, pref.matrix=pm, block.sizes=bs,
                 directed=FALSE, loops=TRUE)
