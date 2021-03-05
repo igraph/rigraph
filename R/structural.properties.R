@@ -819,7 +819,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   res <- .Call(C_R_igraph_betweenness, graph, v-1,
                as.logical(directed), weights, as.logical(nobigint))
   if (normalized) {
-    vc <- vcount(graph)
+    vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
       res <- res / ( vc*vc-3*vc+2)
     } else {
