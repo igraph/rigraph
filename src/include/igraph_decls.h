@@ -8,18 +8,15 @@
     #define __END_DECLS /* empty */
 #endif
 
+/* In igraph 0.8, we use DECLDIR only with MSVC, not other compilers on Windows. */
 #undef DECLDIR
-#if defined (_WIN32) || defined (WIN32) || defined (_WIN64) || defined (WIN64)
-    #if defined (__MINGW32__) || defined (__CYGWIN32__)
+#if defined (_MSC_VER)
+    #ifdef IGRAPH_EXPORTS
+        #define DECLDIR __declspec(dllexport)
+    #elif defined(IGRAPH_STATIC)
         #define DECLDIR /**/
     #else
-        #ifdef IGRAPH_EXPORTS
-            #define DECLDIR __declspec(dllexport)
-        #elif defined(IGRAPH_STATIC)
-            #define DECLDIR /**/
-        #else
-            #define DECLDIR __declspec(dllimport)
-        #endif
+        #define DECLDIR __declspec(dllimport)
     #endif
 #else
     #define DECLDIR /**/

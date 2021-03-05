@@ -50,6 +50,11 @@
     #define igraphdtrsm_    dtrsm_
     #define igraphdtrsv_    dtrsv_
     #define igraphdnrm2_    dnrm2_
+    #define igraphdsymv_    dsymv_
+    #define igraphdsyr2_    dsyr2_
+    #define igraphdsyr2k_   dsyr2k_
+    #define igraphdtrmv_    dtrmv_
+    #define igraphdsyrk_    dsyrk_
 #endif
 
 int igraphdgemv_(char *trans, int *m, int *n, igraph_real_t *alpha,
@@ -61,5 +66,7 @@ int igraphdgemm_(char *transa, char *transb, int *m, int *n, int *k,
                  double *beta, double *c__, int *ldc);
 
 double igraphdnrm2_(int *n, double *x, int *incx);
+
+double igraphddot_(int *n, double *dx, int *incx, double *dy, int *incy);
 
 #endif

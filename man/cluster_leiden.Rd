@@ -17,6 +17,8 @@ cluster_leiden(
 )
 }
 \arguments{
+\item{graph}{The input graph, only undirected graphs are supported.}
+
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
 

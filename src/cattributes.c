@@ -1577,7 +1577,8 @@ int igraph_i_cattribute_combine_vertices(const igraph_t *graph,
 
     igraph_free(funcs);
     igraph_free(TODO);
-    IGRAPH_FINALLY_CLEAN(2);
+    igraph_i_cattribute_permute_free(new_val);
+    IGRAPH_FINALLY_CLEAN(3);
 
     return 0;
 }
@@ -2638,7 +2639,7 @@ const igraph_attribute_table_t igraph_cattribute_table = {
  * is no attribute handler at all.</para>
  *
  * <para>The C attribute handler supports attaching real numbers and
- * character strings as attributes. No vectors are allowed, ie. every
+ * character strings as attributes. No vectors are allowed, i.e. every
  * vertex might have an attribute called <code>name</code>, but it is
  * not possible to have a <code>coords</code> graph (or other)
  * attribute which is a vector of numbers.</para>

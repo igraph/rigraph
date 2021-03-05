@@ -1,4 +1,10 @@
 
+# igraph 1.2.6
+
+Oct 5, 2020
+
+No use visible changes.
+
 # igraph 1.2.5
 
 Mar 27, 2020

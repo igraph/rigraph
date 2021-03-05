@@ -31,6 +31,8 @@
  * SUCH DAMAGE.
  */
 
+#include "igraph_qsort.h"
+
 #ifdef _MSC_VER
     /* MSVC does not have inline when compiling C source files */
     #define inline __inline
@@ -76,9 +78,7 @@ static inline void   swapfunc(char *, char *, int, int);
                                    es % sizeof(long) ? 2 : es == sizeof(long)? 0 : 1;
 
 static inline void
-swapfunc(a, b, n, swaptype)
-char *a, *b;
-int n, swaptype;
+swapfunc(char *a, char *b, int n, int swaptype)
 {
     if (swaptype <= 1)
         swapcode(long, a, b, n)

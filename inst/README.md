@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/igraph/rigraph.svg?branch=dev)](https://travis-ci.org/igraph/rigraph)
+![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
 
 # R/igraph
 

@@ -1554,7 +1554,7 @@ int igraph_pagerank_old(const igraph_t *graph, igraph_vector_t *res,
 }
 
 /* Not declared static so that the testsuite can use it, but not part of the public API. */
-int igraph_rewire_core(igraph_t *graph, igraph_integer_t n, igraph_rewiring_t mode, igraph_bool_t use_adjlist) {
+int igraph_i_rewire(igraph_t *graph, igraph_integer_t n, igraph_rewiring_t mode, igraph_bool_t use_adjlist) {
     long int no_of_nodes = igraph_vcount(graph);
     long int no_of_edges = igraph_ecount(graph);
     char message[256];
@@ -1785,7 +1785,7 @@ int igraph_rewire_core(igraph_t *graph, igraph_integer_t n, igraph_rewiring_t mo
 int igraph_rewire(igraph_t *graph, igraph_integer_t n, igraph_rewiring_t mode) {
 
     igraph_bool_t use_adjlist = n >= REWIRE_ADJLIST_THRESHOLD;
-    return igraph_rewire_core(graph, n, mode, use_adjlist);
+    return igraph_i_rewire(graph, n, mode, use_adjlist);
 
 }
 
@@ -2556,7 +2556,7 @@ int igraph_reciprocity(const igraph_t *graph, igraph_real_t *res,
  * C[i] = sum( sum( (p[i,q] p[q,j])^2, q in V[i], q != i,j ), j in
  * V[], j != i)
  * </para></blockquote>
- * for a graph of order (ie. number of vertices) N, where proportional
+ * for a graph of order (i.e. number of vertices) N, where proportional
  * tie strengths are defined as
  * <blockquote><para>
  * p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),
@@ -2964,7 +2964,7 @@ int igraph_density(const igraph_t *graph, igraph_real_t *res,
  * \brief Calculates the size of the neighborhood of a given vertex.
  *
  * The neighborhood of a given order of a vertex includes all vertices
- * which are closer to the vertex than the order. Ie. order 0 is
+ * which are closer to the vertex than the order. I.e., order 0 is
  * always the vertex itself, order 1 is the vertex plus its immediate
  * neighbors, order 2 is order 1 plus the immediate neighbors of the
  * vertices in order 1, etc.
@@ -3090,7 +3090,7 @@ int igraph_neighborhood_size(const igraph_t *graph, igraph_vector_t *res,
  * Calculate the neighborhood of vertices.
  *
  * The neighborhood of a given order of a vertex includes all vertices
- * which are closer to the vertex than the order. Ie. order 0 is
+ * which are closer to the vertex than the order. I.e., order 0 is
  * always the vertex itself, order 1 is the vertex plus its immediate
  * neighbors, order 2 is order 1 plus the immediate neighbors of the
  * vertices in order 1, etc.
@@ -3101,15 +3101,15 @@ int igraph_neighborhood_size(const igraph_t *graph, igraph_vector_t *res,
  * \param res An initialized pointer vector. Note that the objects
  *    (pointers) in the vector will \em not be freed, but the pointer
  *    vector will be resized as needed. The result of the calculation
- *    will be stored here in \c vector_t objects.
+ *    will be stored here in \ref igraph_vector_t objects.
  * \param vids The vertices for which the calculation is performed.
  * \param order Integer giving the order of the neighborhood.
  * \param mode Specifies how to use the direction of the edges if a
  *   directed graph is analyzed. For \c IGRAPH_OUT only the outgoing
  *   edges are followed, so all vertices reachable from the source
- *   vertex in at most \c order steps are included. For \c IGRAPH_IN
+ *   vertex in at most \p order steps are included. For \c IGRAPH_IN
  *   all vertices from which the source vertex is reachable in at most
- *   \c order steps are included. \c IGRAPH_ALL ignores the direction
+ *   \p order steps are included. \c IGRAPH_ALL ignores the direction
  *   of the edges. This argument is ignored for undirected graphs.
  * \param mindist The minimum distance to include a vertex in the counting.
  *   If this is one, then the starting vertex is not counted. If this is
@@ -3244,7 +3244,7 @@ int igraph_neighborhood(const igraph_t *graph, igraph_vector_ptr_t *res,
  * Vincent Matossian, thanks Vincent.
  * \param graph The input graph.
  * \param res Pointer to a pointer vector, the result will be stored
- *   here, ie. \c res will contain pointers to \c igraph_t
+ *   here, ie. \p res will contain pointers to \c igraph_t
  *   objects. It will be resized if needed but note that the
  *   objects in the pointer vector will not be freed.
  * \param vids The vertices for which the calculation is performed.
@@ -3252,9 +3252,9 @@ int igraph_neighborhood(const igraph_t *graph, igraph_vector_ptr_t *res,
  * \param mode Specifies how to use the direction of the edges if a
  *   directed graph is analyzed. For \c IGRAPH_OUT only the outgoing
  *   edges are followed, so all vertices reachable from the source
- *   vertex in at most \c order steps are counted. For \c IGRAPH_IN
+ *   vertex in at most \p order steps are counted. For \c IGRAPH_IN
  *   all vertices from which the source vertex is reachable in at most
- *   \c order steps are counted. \c IGRAPH_ALL ignores the direction
+ *   \p order steps are counted. \c IGRAPH_ALL ignores the direction
  *   of the edges. This argument is ignored for undirected graphs.
  * \param mindist The minimum distance to include a vertex in the counting.
  *   If this is one, then the starting vertex is not counted. If this is
@@ -6531,8 +6531,7 @@ int igraph_sort_vertex_ids_by_degree(const igraph_t *graph,
 
 int igraph_contract_vertices(igraph_t *graph,
                              const igraph_vector_t *mapping,
-                             const igraph_attribute_combination_t
-                             *vertex_comb) {
+                             const igraph_attribute_combination_t *vertex_comb) {
     igraph_vector_t edges;
     long int no_of_nodes = igraph_vcount(graph);
     long int no_of_edges = igraph_ecount(graph);

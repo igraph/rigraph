@@ -21,6 +21,7 @@
 
 */
 
+#include "igraph_blas.h"
 #include "igraph_lapack.h"
 #include "igraph_lapack_internal.h"
 
@@ -615,7 +616,7 @@ int igraph_lapack_dgeev(const igraph_matrix_t *A,
  *
  * </para><para>
  * Optionally also, it computes a balancing transformation to improve
- * the conditioning of the eigenvalues and eigenvectors (\p ilo, \pihi,
+ * the conditioning of the eigenvalues and eigenvectors (\p ilo, \p ihi,
  * \p scale, and \p abnrm), reciprocal condition numbers for the
  * eigenvalues (\p rconde), and reciprocal condition numbers for the
  * right eigenvectors (\p rcondv).
@@ -625,8 +626,8 @@ int igraph_lapack_dgeev(const igraph_matrix_t *A,
  *                   A * v(j) = lambda(j) * v(j)
  * where lambda(j) is its eigenvalue.
  * The left eigenvector u(j) of A satisfies
- *               u(j)**H * A = lambda(j) * u(j)**H
- * where u(j)**H denotes the conjugate transpose of u(j).
+ *               u(j)^H * A = lambda(j) * u(j)^H
+ * where u(j)^H denotes the conjugate transpose of u(j).
  *
  * </para><para>
  * The computed eigenvectors are normalized to have Euclidean norm
@@ -635,7 +636,7 @@ int igraph_lapack_dgeev(const igraph_matrix_t *A,
  * </para><para>
  * Balancing a matrix means permuting the rows and columns to make it
  * more nearly upper triangular, and applying a diagonal similarity
- * transformation D * A * D**(-1), where D is a diagonal matrix, to
+ * transformation D * A * D^(-1), where D is a diagonal matrix, to
  * make its rows and columns closer in norm and the condition numbers
  * of its eigenvalues and eigenvectors smaller.  The computed
  * reciprocal condition numbers correspond to the balanced matrix.
@@ -654,7 +655,7 @@ int igraph_lapack_dgeev(const igraph_matrix_t *A,
  *          triangular. Do not diagonally scale.
  *     \cli IGRAPH_LAPACK_DGEEVX_BALANCE_SCALE
  *          diagonally scale the matrix, i.e. replace A by
- *          D*A*D**(-1), where D is a diagonal matrix, chosen to make
+ *          D*A*D^(-1), where D is a diagonal matrix, chosen to make
  *          the rows and columns of A more equal in norm. Do not
  *          permute.
  *     \cli IGRAPH_LAPACK_DGEEVX_BALANCE_BOTH
@@ -683,7 +684,7 @@ int igraph_lapack_dgeev(const igraph_matrix_t *A,
  *   J=1,...,ilo-1 or I=ihi+1,...,N.
  * \param scale Pointer to an initialized vector or a NULL pointer. If
  *   not a NULL pointer, then details of the permutations and scaling
- *   factors applied when balancing \param A, are stored here.
+ *   factors applied when balancing \p A, are stored here.
  *   If P(j) is the index of the row and column
  *   interchanged with row and column j, and D(j) is the scaling
  *   factor applied to row and column j, then
@@ -938,17 +939,10 @@ int igraph_lapack_dgehrd(const igraph_matrix_t *A,
 
 int igraph_lapack_ddot(const igraph_vector_t *v1, const igraph_vector_t *v2,
                        igraph_real_t *res) {
-
-    int n = igraph_vector_size(v1);
-    int one = 1;
-
-    if (igraph_vector_size(v2) != n) {
-        IGRAPH_ERROR("Dot product of vectors with different dimensions",
-                     IGRAPH_EINVAL);
-    }
-
-    *res = igraphddot_(&n, VECTOR(*v1), &one, VECTOR(*v2), &one);
-
-    return 0;
+    IGRAPH_WARNING(
+        "igraph_lapack_ddot() is a misnomer; use igraph_blas_ddot() instead. "
+        "igraph_lapack_ddot() will be removed in igraph 0.9.0."
+    );
+    return igraph_blas_ddot(v1, v2, res);
 }
 

@@ -425,7 +425,7 @@ eigen_centrality <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, op
   # Function call
   res <- .Call(C_R_igraph_eigenvector_centrality, graph, directed, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-  names(res$vector) <- vertex_attr(graph, "name", ) 
+  names(res$vector) <- vertex_attr(graph, "name", V(graph)) 
   }
   res
 }
@@ -449,7 +449,7 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) 
   # Function call
   res <- .Call(C_R_igraph_hub_score, graph, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-  names(res$vector) <- vertex_attr(graph, "name", ) 
+  names(res$vector) <- vertex_attr(graph, "name", V(graph)) 
   }
   res
 }
@@ -473,7 +473,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
   # Function call
   res <- .Call(C_R_igraph_authority_score, graph, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-  names(res$vector) <- vertex_attr(graph, "name", ) 
+  names(res$vector) <- vertex_attr(graph, "name", V(graph)) 
   }
   res
 }

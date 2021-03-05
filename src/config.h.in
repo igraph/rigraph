@@ -1,5 +1,9 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Define to 1 if you have the declaration of `isfinite', and to 0 if you
+   don't. */
+#undef HAVE_DECL_ISFINITE
+
 /* Define to 1 if you have the `expm1' function. */
 #undef HAVE_EXPM1
 
@@ -110,6 +114,9 @@
 
 /* We don't care about thread-local storage in R */
 #undef IGRAPH_THREAD_LOCAL
+
+/* Define to 1 if you use the internal SuiteSparse library */
+#undef INTERNAL_SUITESPARSE
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
