@@ -18,15 +18,16 @@ test_that("graph.subisomorphic, method = 'lad' works", {
   i3 <- subgraph_isomorphic(pattern, target, domains=domains,
                             method = "lad")
 
-  expect_that(i1, is_true())
-  expect_that(i2, is_true())
-  expect_that(i3, is_true())
+  expect_true(i1)
+  expect_true(i2)
+  expect_true(i3)
 
 })
 
 test_that("LAD stress test", {
 
   library(igraph)
+  local_rng_version("3.5.0")
   set.seed(42)
   N <- 100
   
@@ -36,7 +37,7 @@ test_that("LAD stress test", {
     pattern <- induced_subgraph(target, sample(vcount(target), pn))
     iso <- subgraph_isomorphic(pattern, target, induced=TRUE,
                                method = "lad")
-    expect_that(iso, is_true())
+    expect_true(iso)
   }
 
   set.seed(42)
@@ -47,7 +48,7 @@ test_that("LAD stress test", {
     pattern <- sample_gnp(pn, .6)
     iso <- subgraph_isomorphic(pattern, target, induced=TRUE,
                                method = "lad")
-    expect_that(iso, is_false())
+    expect_false(iso)
   }
 
 })

@@ -404,13 +404,13 @@ c
          iter = iter + 1
 c
          if (msglvl .gt. 0) then
-            call igraphivout (logfil, 1, iter, ndigit, 
+            call igraphivout (logfil, 1, [iter], ndigit, 
      &           '_saup2: **** Start of major iteration number ****')
          end if
          if (msglvl .gt. 1) then
-            call igraphivout (logfil, 1, nev, ndigit, 
+            call igraphivout (logfil, 1, [nev], ndigit, 
      &     '_saup2: The length of the current Lanczos factorization')
-            call igraphivout (logfil, 1, np, ndigit, 
+            call igraphivout (logfil, 1, [np], ndigit, 
      &           '_saup2: Extend the Lanczos factorization by')
          end if
 c 
@@ -448,7 +448,7 @@ c
          update = .false.
 c
          if (msglvl .gt. 1) then
-            call igraphdvout (logfil, 1, rnorm, ndigit, 
+            call igraphdvout (logfil, 1, [rnorm], ndigit, 
      &           '_saup2: Current B-norm of residual for factorization')
          end if
 c 
@@ -697,7 +697,7 @@ c
          end if
 c
          if (msglvl .gt. 0) then
-            call igraphivout (logfil, 1, nconv, ndigit,
+            call igraphivout (logfil, 1, [nconv], ndigit,
      &           '_saup2: no. of "converged" Ritz values at this iter.')
             if (msglvl .gt. 1) then
                kp(1) = nev
@@ -745,7 +745,7 @@ c
          if (ishift .eq. 0) call dcopy (np, workl, 1, ritz, 1)
 c
          if (msglvl .gt. 2) then
-            call igraphivout (logfil, 1, np, ndigit,
+            call igraphivout (logfil, 1, [np], ndigit,
      &                  '_saup2: The number of shifts to apply ')
             call igraphdvout (logfil, np, workl, ndigit,
      &                  '_saup2: shifts selected')
@@ -812,7 +812,7 @@ c
   130    continue
 c
          if (msglvl .gt. 2) then
-            call igraphdvout (logfil, 1, rnorm, ndigit, 
+            call igraphdvout (logfil, 1, [rnorm], ndigit, 
      &      '_saup2: B-norm of residual for NEV factorization')
             call igraphdvout (logfil, nev, h(1,2), ndigit,
      &           '_saup2: main diagonal of compressed H matrix')
