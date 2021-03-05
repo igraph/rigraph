@@ -23,7 +23,7 @@
 # Community structure
 ###################################################################
 
-
+#' @include auto.R
 
 #' Functions to deal with the result of network community detection
 #'
@@ -1123,6 +1123,7 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
 #' @examples
 #' g <- graph.famous("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
+
 cluster_fluid_communities <- cluster_fluid_communities
 
 #' Community strucure via short random walks
