@@ -1097,7 +1097,7 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
 #' @param graph The input graph. The graph must be simple and connected.
 #'   Empty graphs are not supported as well as single vertex graphs.
 #'   Edge directions are ignored. Weights are not considered.
-#' @param no_of_communities The number of communities to be found. Must be
+#' @param no.of.communities The number of communities to be found. Must be
 #'   greater than 0 and fewer than number of vertices in the graph.
 #' @return \code{cluster_fluid_communities} returns a \code{\link{communities}}
 #' object, please see the \code{\link{communities}} manual page for details.
