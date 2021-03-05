@@ -43,9 +43,12 @@
 #' symbolic edge list given in \code{d} is checked to contain only vertex names
 #' listed in \code{vertices}.
 #'
-#' Typically, the data frames are exported from some speadsheat software like
+#' Typically, the data frames are exported from some speadsheet software like
 #' Excel and are imported into R via \code{\link{read.table}},
 #' \code{\link{read.delim}} or \code{\link{read.csv}}.
+#'
+#' All edges in the data frame are included in the graph, which may include
+#' multiple parallel edges and loops.
 #'
 #' \code{as_data_frame} converts the igraph graph into one or more data
 #' frames, depending on the \code{what} argument.
