@@ -13,75 +13,183 @@ on:
 name: R-CMD-check
 
 jobs:
+  build_src_package:
+    runs-on: ubuntu-20.04
+
+    name: Build source R package
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      _R_CHECK_FORCE_SUGGESTS_: false   # graph package is unavailable
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.1'
+
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: R-source-${{ runner.os }}
+
+      - name: Install necessary dependencies
+        run: |
+          sudo apt install libcurl4-openssl-dev
+          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
+        shell: bash
+
+      - name: Create R source package
+        run: |
+          make
+        shell: bash
+
+      - name: Upload R source package
+        uses: actions/upload-artifact@v2
+        with:
+          name: rigraph
+          path: igraph_*.tar.gz
+          retention-days: 5
+
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    needs: build_src_package
+
+    name: Check ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-
+          - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest,   r: 'release'}
+          - {os: ubuntu-20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'devel',   rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: 'oldrel',  rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: '3.5',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+          - {os: ubuntu-20.04,   r: '3.4',     rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      _R_CHECK_FORCE_SUGGESTS_: false # graph package is unavailable
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RGL_USE_NULL: true  # Ensure that rgl functions correctly on macOS
+      MAKEFLAGS: -j2
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Download R source package
+        uses: actions/download-artifact@v2
+        with:
+          name: rigraph
+
+      - name: Extract source package
+        run: tar -xvf igraph*.tar.gz
+        shell: bash
 
       - uses: r-lib/actions/setup-r@v1
         with:
           r-version: ${{ matrix.config.r }}
 
-      - name: Create R package
-        run: |
-          - install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))
-        shell: make
-
       - uses: r-lib/actions/setup-pandoc@v1
+
+      - name: Install remotes package
+        run: install.packages('remotes')
+        shell: Rscript {0}
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          dir.create('../.github/')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "../.github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), "../.github/R-version")
         shell: Rscript {0}
+        working-directory: igraph
 
       - name: Cache R packages
-        if: runner.os != 'Windows'
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install system dependencies
+      - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
           while read -r cmd
           do
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "20.04"))')
+        working-directory: igraph
+
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install libxml2 glpk gmp automake
+
+      - name: Install system dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          pacman -Sy --noconfirm mingw-w64-i686-glpk mingw-w64-i686-libxml2 mingw-w64-i686-gmp mingw-w64-x86_64-glpk mingw-w64-x86_64-libxml2 mingw-w64-x86_64-gmp
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
+        working-directory: igraph
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+        working-directory: igraph
 
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
+          path: igraph/check
+
+  # temporary attempt at a automatically deploying the source code to the master branch
+  deploy_src:
+    runs-on: ubuntu-20.04
+
+    name: Deploy source R package to master branch
+
+    if: success() && github.ref == 'refs/heads/dev'
+    needs: R-CMD-check
+
+    steps:
+
+      - name: Checkout master branch
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Download R source package
+        uses: actions/download-artifact@v2
+        with:
+          name: rigraph
+
+      - name: Extract source package
+        run: |
+          tar -xvf igraph*.tar.gz --strip-components=1
+          rm *.tar.gz
+
+      - name: Push to master branch
+        run: |
+          # Setup the username and email.
+          git config user.name "GH actions bot"
+          git config user.email "<>"
+
+          # Stage files, commit and push
+          git add .
+          git commit -m "${{ github.event.head_commit.message }} [Triggered by ${{ github.event.after }}]"
+          git push origin master

@@ -4,6 +4,7 @@ context("Kamada-Kawai layouts")
 test_that("Kamada-Kawai layout generator works", {
 
   skip_on_cran()
+  skip_on_ci()
   library(igraph)
   g <- make_ring(10)
   l <- layout_with_kk(g, maxiter=50)
@@ -41,7 +42,7 @@ test_that("Kamada-Kawai layout generator works", {
              Sys.info()["machine"] == "i686") {
     expect_that(sum(l), equals(0.0631144692360025))
   }
-  
+
 })
 
 test_that("3D Kamada-Kawai layout generator works", {

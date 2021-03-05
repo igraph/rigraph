@@ -14,3 +14,4 @@
 /version_number
 /configure.ac
 igraph.Rcheck/
+.vscode/
