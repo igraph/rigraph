@@ -135,12 +135,11 @@ assign(".next", 1, .tkplot.env)
 #' @seealso \code{\link{plot.igraph}}, \code{\link{layout}}
 #' @export
 #' @keywords graphs
-#' @examples
-#' 
+#' @section Examples:
+#' \preformatted{
 #' g <- make_ring(10)
-#' \dontrun{tkplot(g)}
+#' tkplot(g)
 #' 
-#' \dontrun{
 #' ## Saving a tkplot() to a file programatically
 #' g <- make_star(10, center=10) %u% make_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
@@ -148,11 +147,9 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' id <- tkplot(g, layout=lay)
 #' canvas <- tk_canvas(id)
-#' tkpostscript(canvas, file="/tmp/output.eps")
+#' tcltk::tkpostscript(canvas, file="/tmp/output.eps")
 #' tk_close(id)
-#' }
 #' 
-#' \dontrun{
 #' ## Setting the coordinates and adding a title label
 #' g <- make_ring(10)
 #' id <- tkplot(make_ring(10), canvas.width=450, canvas.height=500)
@@ -166,8 +163,8 @@ assign(".next", 1, .tkplot.env)
 #' width <- as.numeric(tkcget(canvas, "-width"))
 #' height <- as.numeric(tkcget(canvas, "-height"))
 #' tkcreate(canvas, "text", width/2, 25, text="My title",
-#'          justify="center", font=tcltk::tkfont.create(family="helvetica"
-#'                              ,size=20,weight="bold"))
+#'          justify="center", font=tcltk::tkfont.create(family="helvetica",
+#'          size=20,weight="bold"))
 #' }
 #' 
 tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {

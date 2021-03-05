@@ -343,8 +343,9 @@ nexus.format.result <- function(l, name="") {
 #' 
 #' \code{nexus_get} returns an igraph graph object, or a list of graph objects,
 #' if the data set consists of multiple networks.
-#' @examples
-#' \dontrun{nexus_list(tag="weighted")
+#' @section Examples:
+#' \preformatted{
+#' nexus_list(tag="weighted")
 #' nexus_list(limit=3, order="name")
 #' nexus_list(limit=3, order="name")[[1]]
 #' nexus_info(2)

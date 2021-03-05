@@ -819,7 +819,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   res <- .Call(C_R_igraph_betweenness, graph, v-1,
                as.logical(directed), weights, as.logical(nobigint))
   if (normalized) {
-    vc <- vcount(graph)
+    vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
       res <- res / ( vc*vc-3*vc+2)
     } else {
@@ -1162,7 +1162,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
 #' 
 #' Calculates the reciprocity of a directed graph.
 #' 
-#' The measure of reciprocity defines the proporsion of mutual connections, in
+#' The measure of reciprocity defines the proportion of mutual connections, in
 #' a directed graph. It is most commonly defined as the probability that the
 #' opposite counterpart of a directed edge is also included in the graph. Or in
 #' adjacency matrix notation: \eqn{\sum_{ij} (A\cdot A')_{ij}}{sum(i, j,
@@ -1823,7 +1823,7 @@ topo_sort <- function(graph, mode=c("out", "all", "in")) {
   mode <- switch(mode, "out"=1, "in"=2, "all"=3)
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_topological_sorting, graph, as.numeric(mode))
+  res <- .Call(C_R_igraph_topological_sorting, graph, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) res <- create_vs(graph, res)
 
@@ -2800,13 +2800,28 @@ which_mutual <- which_mutual
 #' \code{NaN} (zero divided by zero), the same is true for \sQuote{\code{knnk}}
 #' if a given degree never appears in the network.
 #' 
+#' The weighted version computes a weighted average of the neighbor degrees as
+#'
+#' \code{k_nn_u = 1/s_u sum_v w_uv k_v},
+#'
+#' where \code{s_u = sum_v w_uv} is the sum of the incident edge weights
+#' of vertex \code{u}, i.e. its strength.
+#' The sum runs over the neighbors \code{v} of vertex \code{u}
+#' as indicated by \code{mode}. \code{w_uv} denotes the weighted adjacency matrix
+#' and \code{k_v} is the neighbors' degree, specified by \code{neighbor_degree_mode}.
+#'
 #' @aliases knn graph.knn
-#' @param graph The input graph. It can be directed, but it will be treated as
-#' undirected, i.e. the direction of the edges is ignored.
+#' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
 #' includes all vertices. Note, that if not all vertices are given here, then
 #' both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
 #' on the given vertices only.
+#' @param mode Character constant to indicate the type of neighbors to consider
+#' in directed graphs. \code{out} considers out-neighbors, \code{in} considers
+#' in-neighbors and \code{all} ignores edge directions.
+#' @param neighbor.degree.mode The type of degree to average in directed graphs.
+#' \code{out} averages out-degrees, \code{in} averages in-degrees and \code{all}
+#' ignores edge directions for the degree calculation.
 #' @param weights Weight vector. If the graph has a \code{weight} edge
 #' attribute, then this is used by default. If this argument is given, then
 #' vertex strength (see \code{\link{strength}}) is used instead of vertex

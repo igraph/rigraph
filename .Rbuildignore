@@ -1,4 +1,5 @@
 ^tags$
+^.github$
 ^cigraph$
 ^Makefile$
 ^src/Makevars$
@@ -13,4 +14,8 @@
 ^README.md$
 ^NEWS.md$
 ^src/.*\.o$
-
+^src/.*\.so$
+^revdep$
+^src/igraph.so.dSYM$
+^.vscode$
+^patches$

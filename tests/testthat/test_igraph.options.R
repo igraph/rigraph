@@ -6,10 +6,10 @@ test_that("igraph_options works", {
   library(igraph)
 
   igraph_options(verbose=TRUE)
-  expect_that(igraph_opt("verbose"), is_true())
+  expect_true(igraph_opt("verbose"))
   
   igraph_options(verbose=FALSE)
-  expect_that(igraph_opt("verbose"), is_false())
+  expect_false(igraph_opt("verbose"))
 
 })
 
@@ -40,6 +40,6 @@ test_that("with_igraph_opt works", {
                          make_ring(3)[])
 
   expect_equal(igraph_opt("sparsematrices"), TRUE)
-  expect_equal(class(res), "matrix")
+  expect_true(inherits(res, "matrix"))
 
 })

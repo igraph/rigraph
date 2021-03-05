@@ -21,6 +21,5 @@ test_that("cliques works", {
 
   ## To have a bit less maximal cliques, about 100-200 usually
   g <- sample_gnp(100, 0.03)
-  expect_that(all(sapply(max_cliques(g), check.clique, graph=g)),
-              is_true())
+  expect_true(all(sapply(max_cliques(g), check.clique, graph=g)))
 })

@@ -21,10 +21,11 @@ AC_PROG_CC
 
 # Fortran compiler, we need to check if it is the GNU compiler
 AC_PROG_FC
-if test "x$ac_cv_fc_compiler_gnu" == xyes; then
+if test "x$ac_cv_fc_compiler_gnu" = xyes; then
   AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU fortran compiler])
 fi
 
+AC_DEFINE([INTERNAL_SUITESPARSE], [1], [Define to 1 if you use the internal SuiteSparse library])
 
 # Tricky check for C++ compiler, because Autoconf has a weird bug:
 # http://lists.gnu.org/archive/html/autoconf/2006-03/msg00067.html
@@ -42,11 +43,12 @@ AC_LANG_POP([C++])
 LIBS_SAVE=$LIBS
 LIBS="$LIBS -lm"
 AC_CHECK_FUNCS([rintf finite expm1 rint log2 logbl snprintf log1p round fmin stpcpy])
+AC_CHECK_DECLS(isfinite,,,[#include <math.h>])
 AC_CHECK_DECL([stpcpy],
 	[AC_DEFINE([HAVE_STPCPY_SIGNATURE], [1], [Define to 1 if the stpcpy function has a signature])])
 LIBS=$LIBS_SAVE
 
-AC_CHECK_HEADER([sys/times.h], 
+AC_CHECK_HEADER([sys/times.h],
       [AC_DEFINE([HAVE_TIMES_H], [1], [Define to 1 if you have the sys/times.h header])])
 
 AC_CHECK_HEADERS([ \
@@ -114,7 +116,7 @@ if test "x$enable_gmp" != "xno"; then
       HAVE_GMP=1
       AC_DEFINE([HAVE_GMP], [1], [Define to 1 if you have the GMP library])
       gmp_support=yes
-      GMP_LIBS="-lgmp"      
+      GMP_LIBS="-lgmp"
     ])
   ])
 fi
@@ -122,12 +124,32 @@ AC_SUBST(HAVE_GMP)
 AC_SUBST(GMP_LIBS)
 AC_LANG_POP([C++])
 
-glpk_support=yes
-AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
-HAVE_GLPK=1
-GLPK_LIBS=""
+glpk_support=no
+AC_ARG_ENABLE(glpk,
+              AC_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
+              [glpk_support=$enableval], [glpk_support=yes])
+
+HAVE_GLPK=0
+if test $glpk_support = yes; then
+  glpk_support=no
+  AC_CHECK_LIB([glpk], [glp_read_mps], [
+    AC_CHECK_HEADER([glpk.h], [
+      AC_EGREP_CPP(yes, [
+        #include <glpk.h>
+        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 38)
+          yes
+        #endif
+      ], [
+      AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
+        HAVE_GLPK=1
+        glpk_support=yes
+        GLPK_LIBS="-lglpk"
+        AC_SUBST(GLPK_LIBS)
+      ])
+    ])
+  ])
+fi
 AC_SUBST(HAVE_GLPK)
-AC_SUBST(GLPK_LIBS)
 
 AC_DEFINE(IGRAPH_THREAD_LOCAL, [], [We don't care about thread-local storage in R])
 

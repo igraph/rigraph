@@ -466,7 +466,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
-#' #' @export
+#' @export
 
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
                                  unlist.attrs=TRUE) {
@@ -553,7 +553,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
-#' #' @export
+#' @export
 
 as_graphnel <- function(graph) {
 

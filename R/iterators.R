@@ -472,15 +472,15 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
                  as.numeric(mode))
     tmp[as.numeric(x)]
   }
-  nei <- function(...) { .Deprecated(".nei") ; .nei(...) }
+  nei <- function(...) { .nei(...) }
   .innei <- function(v, mode=c("in", "all", "out", "total")) {
     .nei(v, mode = mode[1])
   }
-  innei <- function(...) { .Deprecated(".innei") ; .innei(...) }
+  innei <- function(...) { .innei(...) }
   .outnei <- function(v, mode=c("out", "all", "in", "total")) {
     .nei(v, mode = mode[1])
   }
-  outnei <- function(...) { .Deprecated(".outnei") ; .outnei(...) }
+  outnei <- function(...) { .outnei(...) }
   .inc <- function(e) {
     ## TRUE iff the vertex (in the vs) is incident
     ## to at least one edge in e
@@ -492,8 +492,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
                  as.numeric(3))
     tmp[as.numeric(x)]
   }
-  inc <- function(...) { .Deprecated(".inc") ; .inc(...) }
-  adj <- function(...) { .Deprecated(".inc") ; .inc(...) }
+  inc <- function(...) { .inc(...) }
+  adj <- function(...) { .inc(...) }
   .from <- function(e) {
     ## TRUE iff the vertex is the source of at least one edge in e
     if (is.logical(e)) {
@@ -504,7 +504,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
                  as.numeric(1))
     tmp[as.numeric(x)]
   }
-  from <- function(...) { .Deprecated(".from") ; .from(...) }
+  from <- function(...) { .from(...) }
   .to <- function(e) {
     ## TRUE iff the vertex is the target of at least one edge in e
     if (is.logical(e)) {
@@ -515,7 +515,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
                  as.numeric(2))
     tmp[as.numeric(x)]
   }
-  to <- function(...) { .Deprecated(".to") ; .to(...) }
+  to <- function(...) { .to(...) }
 
   graph <- get_vs_graph(x)
 
@@ -674,7 +674,7 @@ simple_es_index <- function(x, i) {
 #'   \item Named graphs can be indexed with character vectors,
 #'     to select edges with the given names. Note that a graph may
 #'     have edge names and vertex names, and both can be used to select
-#'     edges. Edge names are simply used as names of the nuumeric
+#'     edges. Edge names are simply used as names of the numeric
 #'     edge id vector. Vertex names effectively only work in graphs without
 #'     multiple edges, and must be separated with a \code{|} bar character
 #'     to select an edges that incident to the two given vertices. See
@@ -761,8 +761,8 @@ simple_es_index <- function(x, i) {
                  as.numeric(3))
     tmp[ as.numeric(x) ]
   }
-  adj <- function(...) { .Deprecated(".inc"); .inc(...) }
-  inc <- function(...) { .Deprecated(".inc"); .inc(...) }
+  adj <- function(...) { .inc(...) }
+  inc <- function(...) { .inc(...) }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(C_R_igraph_finalizer) )
@@ -770,7 +770,7 @@ simple_es_index <- function(x, i) {
                  as.numeric(1))
     tmp[ as.numeric(x) ]
   }
-  from <- function(...) { .Deprecated(".from"); .from(...) }
+  from <- function(...) { .from(...) }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(C_R_igraph_finalizer) )
@@ -778,7 +778,7 @@ simple_es_index <- function(x, i) {
                  as.numeric(2))
     tmp[ as.numeric(x) ]
   }
-  to <- function(...) { .Deprecated(".to"); .to(...) }
+  to <- function(...) { .to(...) }
 
   graph <- get_es_graph(x)
 

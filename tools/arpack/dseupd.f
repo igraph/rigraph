@@ -474,7 +474,7 @@ c
              thres1 = workl(ritz)
 c
              if (msglvl .gt. 2) then
-                call igraphdvout(logfil, 1, thres1, ndigit,
+                call igraphdvout(logfil, 1, [thres1], ndigit,
      &          '_seupd: Threshold eigenvalue used for re-ordering')
              end if
 c
@@ -571,9 +571,9 @@ c        | If KTRORD .ne. NCONV, something is wrong. |
 c        %-------------------------------------------%
 c
          if (msglvl .gt. 2) then
-             call igraphivout(logfil, 1, ktrord, ndigit,
+             call igraphivout(logfil, 1, [ktrord], ndigit,
      &            '_seupd: Number of specified eigenvalues')
-             call igraphivout(logfil, 1, nconv, ndigit,
+             call igraphivout(logfil, 1, [nconv], ndigit,
      &            '_seupd: Number of "converged" eigenvalues')
          end if
 c
