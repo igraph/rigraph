@@ -3,14 +3,15 @@ context("graphNEL conversion")
 
 test_that("graphNEL conversion works", {
 
-  library(igraph)
+  if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
+
   library(graph, warn.conflicts=FALSE)
 
   g <- sample_gnp(100, 5/100)
   N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
   gi <- graph.isomorphic.vf2(g, g2)
-  expect_that(gi$iso, is_true())
+  expect_true(gi$iso)
   expect_that(gi$map12, equals(1:vcount(g)))
   expect_that(gi$map21, equals(1:vcount(g)))
 
@@ -22,7 +23,7 @@ test_that("graphNEL conversion works", {
 
   N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
-  expect_that(graph.isomorphic(g, g2), is_true())
+  expect_true(graph.isomorphic(g, g2))
   expect_that(V(g)$name, equals(V(g2)$name))
 
   A <- as_adj(g, attr="weight", sparse=FALSE)

@@ -439,8 +439,8 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'                                            rootlevel=c(2,1)))
 
 layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
-                                    rootlevel=numeric(), mode="out",
-                                    flip.y=TRUE) {
+                           rootlevel=numeric(), mode=c("out", "in", "all"),
+                           flip.y=TRUE) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1916,7 +1916,7 @@ norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
                           zmin=-1, zmax=1) {
 
   if (!is.matrix(layout)) {
-    stop("`layout' not a matrix")
+    stop("`layout' must be a matrix")
   }
   if (ncol(layout) != 2 && ncol(layout) != 3) {
     stop("`layout' should have 2 or three columns")

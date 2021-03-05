@@ -212,8 +212,8 @@ c
       tngets = tngets + (t1 - t0)
 c
       if (msglvl .gt. 0) then
-         call igraphivout (logfil, 1, kev, ndigit, '_ngets: KEV is')
-         call igraphivout (logfil, 1, np, ndigit, '_ngets: NP is')
+         call igraphivout (logfil, 1, [kev], ndigit, '_ngets: KEV is')
+         call igraphivout (logfil, 1, [np], ndigit, '_ngets: NP is')
          call igraphdvout (logfil, kev+np, ritzr, ndigit,
      &        '_ngets: Eigenvalues of current H matrix -- real part')
          call igraphdvout (logfil, kev+np, ritzi, ndigit,

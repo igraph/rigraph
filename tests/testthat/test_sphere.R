@@ -15,7 +15,7 @@ test_that("Sampling sphere surface works", {
 
   s3 <- sample_sphere_surface(2, 100, radius=1/2, positive=TRUE)
   expect_that(sqrt(colSums(s3^2)), equals(rep(1/2, 100)))
-  expect_that(all(s3 >= 0), is_true())
+  expect_true(all(s3 >= 0))
   
 })
 
@@ -26,13 +26,13 @@ test_that("Sampling sphere volume works", {
   
   set.seed(42)
   s1 <- sample_sphere_volume(4, 10000, positive=FALSE)
-  expect_that(all(colSums(s1^2) < 1), is_true())
+  expect_true(all(colSums(s1^2) < 1))
 
   s2 <- sample_sphere_volume(3, 100, radius=2, positive=FALSE)
-  expect_that(all(sqrt(colSums(s2^2)) < 2), is_true())
+  expect_true(all(sqrt(colSums(s2^2)) < 2))
 
   s3 <- sample_sphere_volume(2, 100, radius=1/2, positive=TRUE)
-  expect_that(all(sqrt(colSums(s3^2)) < 1/2), is_true())
-  expect_that(all(s3 >= 0), is_true())
+  expect_true(all(sqrt(colSums(s3^2)) < 1/2))
+  expect_true(all(s3 >= 0))
   
 })

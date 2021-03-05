@@ -18,7 +18,7 @@ test_that("ego works", {
   v <- sample(vcount(g), 1)
   g1 <- make_ego_graph(g, 2, v)[[1]]
   g2 <- neig(g, 2, v)
-  expect_that(graph.isomorphic(g1, g2), is_true())
+  expect_true(graph.isomorphic(g1, g2))
 
 #########
 

@@ -3,6 +3,7 @@ context("Detailed printing of vs and es")
 
 test_that("vs printing", {
 
+  local_rng_version("3.5.0")
   set.seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
@@ -37,6 +38,7 @@ test_that("vs printing", {
 
 test_that("vs printing, complex attributes", {
 
+  local_rng_version("3.5.0")
   set.seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
@@ -63,6 +65,7 @@ test_that("vs printing, complex attributes", {
 
 test_that("es printing", {
 
+  local_rng_version("3.5.0")
   set.seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%
@@ -86,6 +89,7 @@ test_that("es printing", {
 
 test_that("es printing, complex attributes", {
 
+  local_rng_version("3.5.0")
   set.seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_edge_attr("color", value = "red") %>%

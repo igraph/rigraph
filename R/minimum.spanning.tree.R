@@ -40,7 +40,7 @@
 #' be used for unwieghted graphs, and \code{prim} runs Prim's algorithm for
 #' weighted graphs.  If this is \code{NULL} then igraph tries to select the
 #' algorithm automatically: if the graph has an edge attribute called
-#' \code{weight} of the \code{weights} argument is not \code{NULL} then Prim's
+#' \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
 #' algorithm is chosen, otherwise the unwweighted algorithm is performed.
 #' @param \dots Additional arguments, unused.
 #' @return A graph object with the minimum spanning forest. (To check that it
