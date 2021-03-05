@@ -164,7 +164,7 @@ jobs:
     name: Deploy source R package to master branch
 
     if: success() # && github.ref == 'refs/heads/dev'
-    needs: R-CMD-check
+    needs: build_src_package
 
     steps:
 
@@ -184,8 +184,12 @@ jobs:
           rm *.tar.gz
 
       - name: Push to master branch
-        uses: github-actions-x/commit@v2.7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: master
-          commit-message: '${{ github.event.head_commit.message }}. Auto-deployed based on ${{ github.event.sha }}.'
+        run: |
+          # Setup the username and email.
+          git config user.name "GH actions bot"
+          git config user.email "<>"
+
+          # Stage files, commit and push
+          git add .
+          git commit -m "${{ github.event.head_commit.message }} [Triggered by ${{ github.event.after }}]"
+          git push origin master
