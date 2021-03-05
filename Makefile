@@ -5,8 +5,7 @@ all: igraph
 # Main package
 
 top_srcdir=cigraph
-REALVERSION=1.1.0
-VERSION=1.1.0
+VERSION=$(shell tools/getversion.sh)
 
 # We put the version number in a file, so that we can detect
 # if it changes
@@ -15,11 +14,12 @@ version_number: force
 	@echo '$(VERSION)' | cmp -s - $@ || echo '$(VERSION)' > $@
 
 # Source files from the C library, we don't need BLAS/LAPACK
-# because they are included in R and ARPACK, because 
+# because they are included in R and ARPACK, because
 # we use the Fortran files for that. We don't need F2C, either.
 
 CSRC := $(shell cd $(top_srcdir) ; git ls-files --full-name src | \
-	 grep -v "^src/lapack/" | grep -v "^src/f2c" | grep -v Makefile.am)
+	      grep -v "^src/lapack/" | grep -v "^src/f2c" | \
+	      grep -v Makefile.am)
 
 $(CSRC): src/%: $(top_srcdir)/src/%
 	mkdir -p $(@D) && cp $< $@
@@ -61,7 +61,7 @@ src/igraph_threading.h: $(top_srcdir)/include/igraph_threading.h.in
 
 src/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 	mkdir -p src
-	sed 's/@PACKAGE_VERSION@/'$(REALVERSION)'/g' $< >$@
+	sed 's/@PACKAGE_VERSION@/'$(VERSION)'/g' $< >$@
 
 # R source and doc files
 
@@ -86,17 +86,9 @@ $(UUID2): src/uuid/%: tools/uuid/%
 # R files that are generated/copied
 
 RGEN = R/auto.R src/rinterface.c src/rinterface.h \
-	src/rinterface_extra.c src/lazyeval.c src/Makevars.in \
+	src/rinterface_extra.c src/lazyeval.c src/init.c src/Makevars.in \
 	configure src/config.h.in src/Makevars.win \
 	DESCRIPTION
-
-# GLPK
-
-GLPK := $(shell cd $(top_srcdir); git ls-files --full-name optional/glpk)
-GLPK2 := $(patsubst optional/glpk/%, src/glpk/%, $(GLPK))
-
-$(GLPK2): src/%: $(top_srcdir)/optional/%
-	mkdir -p $(@D) && cp $< $@
 
 # Simpleraytracer
 
@@ -111,23 +103,23 @@ $(RAY2): src/%: $(top_srcdir)/optional/%
 
 src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
-		tools/stimulus/types-C.def \
+		tools/stimulus/types-RC.def \
 		$(top_srcdir)/tools/stimulus.py
 	$(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
-           -t tools/stimulus/types-C.def \
+           -t tools/stimulus/types-RC.def \
            -l RC
 
 R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
-		tools/stimulus/types-R.def \
+		tools/stimulus/types-RR.def \
 		$(top_srcdir)/tools/stimulus.py
 	$(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
-           -t tools/stimulus/types-R.def \
+           -t tools/stimulus/types-RR.def \
            -l RR
 
 # configure files
@@ -153,15 +145,18 @@ src/lazyeval.c: tools/stimulus/lazyeval.c
 	mkdir -p src
 	cp $< $@
 
+src/init.c: tools/stimulus/init.c
+	mkdir -p src
+	cp $< $@
+
 # This is the list of all object files in the R package,
 # we write it to a file to be able to depend on it.
-# Makevars.in and Makevars.win are only regenerated if 
+# Makevars.in and Makevars.win are only regenerated if
 # the list of object files changes.
 
-OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(GLPK) $(RAY) $(UUID)   |     \
+OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
 		tr ' ' '\n' |                                            \
 	        grep -E '\.(c|cpp|cc|f|l|y)$$' | 			 \
-		grep -F -v '/t_cholmod' | 				 \
 		grep -F -v f2c/arithchk.c | grep -F -v f2c_dummy.c |	 \
 		sed 's/\.[^\.][^\.]*$$/.o/' | 			 	 \
 		sed 's/^src\///' | sed 's/^tools\/arpack\///' |		 \
@@ -185,7 +180,10 @@ src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
 igraph: igraph_$(VERSION).tar.gz
 
 igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
-			  $(CGEN) $(GLPK2) $(RAY2) $(ARPACK2) $(UUID2)
+			  $(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
+	if [ -d "patches" ]; then \
+		find patches -type f -name '*.patch' -print0 | sort -z | xargs -t -0 -n 1 patch -p1 -t -i; \
+	fi
 	rm -f src/config.h
 	rm -f src/Makevars
 	touch src/config.h
@@ -195,3 +193,5 @@ igraph_$(VERSION).tar.gz: $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 #############
 
 .PHONY: all igraph force
+
+.NOTPARALLEL:

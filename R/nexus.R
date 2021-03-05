@@ -327,9 +327,7 @@ nexus.format.result <- function(l, name="") {
 #' Instead of the data set ids, it is possible to supply a
 #' \code{nexusDatasetInfo} or \code{nexusDatasetInfoList} object here directly
 #' and then the query is done on the corresponding data set(s).
-#' @param q Nexus search string. See examples below. For the complete
-#' documentation please see the Nexus homepage at
-#' \url{http://nexus.igraph.org}.
+#' @param q Nexus search string. See examples below.
 #' @param nexus.url The URL of the Nexus server. Don't change this from the
 #' default, unless you set up your own Nexus server.
 #' @param x,object The \code{nexusDatasetInfo} object to print.
@@ -345,9 +343,9 @@ nexus.format.result <- function(l, name="") {
 #' 
 #' \code{nexus_get} returns an igraph graph object, or a list of graph objects,
 #' if the data set consists of multiple networks.
-#' @seealso \url{http://nexus.igraph.org}
-#' @examples
-#' \dontrun{nexus_list(tag="weighted")
+#' @section Examples:
+#' \preformatted{
+#' nexus_list(tag="weighted")
 #' nexus_list(limit=3, order="name")
 #' nexus_list(limit=3, order="name")[[1]]
 #' nexus_info(2)

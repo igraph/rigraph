@@ -48,7 +48,7 @@
 #' @keywords graphs
 #'
 #' @family graphical degree sequences
-#' 
+#' @examples
 #' g <- sample_gnp(100, 2/100)
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
@@ -79,7 +79,7 @@ is_degseq <- is_degseq
 #' @keywords graphs
 #' 
 #' @family graphical degree sequences
-#'
+#' @examples
 #' g <- sample_gnp(100, 2/100)
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))

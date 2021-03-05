@@ -69,11 +69,10 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     edge.color2 <- as.integer(edge.color2)-1L
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_get_isomorphisms_vf2", graph1, graph2, vertex.color1,
-               vertex.color2, edge.color1, edge.color2,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
+               vertex.color2, edge.color1, edge.color2)
 
   lapply(res, function(x) V(graph2)[x + 1])
 }
@@ -127,11 +126,10 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     edge.color2 <- as.integer(edge.color2)-1L
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_get_subisomorphisms_vf2", graph1, graph2,
-               vertex.color1, vertex.color2, edge.color1, edge.color2,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_get_subisomorphisms_vf2, graph1, graph2,
+               vertex.color1, vertex.color2, edge.color1, edge.color2)
 
   lapply(res, function(x) V(graph1)[x + 1])
 }
@@ -143,10 +141,9 @@ graph.isoclass.subgraph <- function(graph, vids) {
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)-1
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_isoclass_subgraph", graph, vids,
-        PACKAGE="igraph")
+  res <- .Call(C_R_igraph_isoclass_subgraph, graph, vids)
   res
 }
 
@@ -176,11 +173,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
     domains <- lapply(domains, function(x) as.igraph.vs(target, x)-1)
   }
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_subisomorphic_lad", pattern, target, domains,
-               induced, time.limit, map, all.maps,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_subisomorphic_lad, pattern, target, domains,
+               induced, time.limit, map, all.maps)
 
   if (map) {
     res$map <- res$map + 1
@@ -309,12 +305,12 @@ isomorphic <- function(graph1, graph2, method = c("auto", "direct",
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_isomorphic", graph1, graph2, PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_isomorphic, graph1, graph2)
 
   } else if (method == "direct") {
-    on.exit(.Call("R_igraph_finalizer", PACKAGE = "igraph"))
-    .Call("R_igraph_isomorphic_34", graph1, graph2, PACKAGE = "igraph")
+    on.exit(.Call(C_R_igraph_finalizer))
+    .Call(C_R_igraph_isomorphic_34, graph1, graph2)
 
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
@@ -412,9 +408,7 @@ is_isomorphic_to <- isomorphic
 #'
 #' # Directed LAD example
 #' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
-#' uring <- make_ring(10)
 #' dring <- make_ring(10, directed = TRUE)
-#' subgraph_isomorphic(pattern, uring)
 #' subgraph_isomorphic(pattern, dring)
 
 subgraph_isomorphic <- function(pattern, target,

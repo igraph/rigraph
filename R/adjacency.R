@@ -50,10 +50,9 @@ graph.adjacency.dense <- function(adjmatrix, mode=c("directed", "undirected", "m
       stop("not a square matrix")
     }
 
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    res <- .Call("R_igraph_weighted_adjacency", adjmatrix,
-                 as.numeric(mode), weighted, diag,
-                 PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    res <- .Call(C_R_igraph_weighted_adjacency, adjmatrix,
+                 as.numeric(mode), weighted, diag)
   } else {
 
     adjmatrix <- as.matrix(adjmatrix)
@@ -63,13 +62,23 @@ graph.adjacency.dense <- function(adjmatrix, mode=c("directed", "undirected", "m
 
     if (!diag) { diag(adjmatrix) <- 0 }
 
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    res <- .Call("R_igraph_graph_adjacency", adjmatrix, as.numeric(mode),
-                 PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    res <- .Call(C_R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
   }
 
   res
 }
+
+m2triplet <- get0("mat2triplet", asNamespace("Matrix"), inherits=FALSE)
+if(!is.function(m2triplet)) ## <==> (packageVersion("Matrix") < "1.3")
+    m2triplet <- function(x) {  ## a simplified version of new Matrix' mat2triplet()
+        T <- as(x, "TsparseMatrix")
+        if(is(T, "nsparseMatrix"))
+             list(i = T@i + 1L, j = T@j + 1L)
+        else list(i = T@i + 1L, j = T@j + 1L, x = T@x)
+    }
+
+mysummary <- function(x) do.call(cbind, m2triplet(x))
 
 graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "max",
                                                 "min", "upper", "lower", "plus"),
@@ -96,6 +105,8 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
 
   ## to remove non-redundancies that can persist in a dgtMatrix
   if(inherits(adjmatrix, "dgTMatrix")) {
+    adjmatrix = as(adjmatrix, "CsparseMatrix")
+  } else if (inherits(adjmatrix, "ddiMatrix")) {
     adjmatrix = as(adjmatrix, "CsparseMatrix")
   }
 

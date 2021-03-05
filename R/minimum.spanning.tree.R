@@ -40,7 +40,7 @@
 #' be used for unwieghted graphs, and \code{prim} runs Prim's algorithm for
 #' weighted graphs.  If this is \code{NULL} then igraph tries to select the
 #' algorithm automatically: if the graph has an edge attribute called
-#' \code{weight} of the \code{weights} argument is not \code{NULL} then Prim's
+#' \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
 #' algorithm is chosen, otherwise the unwweighted algorithm is performed.
 #' @param \dots Additional arguments, unused.
 #' @return A graph object with the minimum spanning forest. (To check that it
@@ -74,18 +74,16 @@ mst <- function(graph, weights=NULL,
   }
   
   if (algorithm=="unweighted") {
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_minimum_spanning_tree_unweighted", graph,
-          PACKAGE="igraph")
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_minimum_spanning_tree_unweighted, graph)
   } else if (algorithm=="prim") {
     if (is.null(weights) && ! "weight" %in% edge_attr_names(graph)) {
       stop("edges weights must be supplied for Prim's algorithm")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
-    .Call("R_igraph_minimum_spanning_tree_prim", graph, as.numeric(weights),
-          PACKAGE="igraph")    
+    on.exit( .Call(C_R_igraph_finalizer) )
+    .Call(C_R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
   } else {
     stop("Invalid algorithm")
   }

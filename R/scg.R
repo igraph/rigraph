@@ -93,7 +93,7 @@ NULL
 #' 
 #' library(Matrix)
 #' ## g is a large sparse graph
-#' g <- barabasi.game(n = 10^5, power = 2, directed = FALSE)
+#' g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
 #' W <- stochastic_matrix(g, sparse=TRUE)
 #' 
 #' ## a dense matrix here would probably not fit in the memory
@@ -118,14 +118,12 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
     stop("`sparse' must be a logical scalar")
   }
 
-  on.exit(.Call("R_igraph_finalizer", PACKAGE="igraph"))
+  on.exit(.Call(C_R_igraph_finalizer))
   if (sparse) {
-    res <- .Call("R_igraph_get_stochastic_sparsemat", graph, column.wise,
-                 PACKAGE="igraph")
+    res <- .Call(C_R_igraph_get_stochastic_sparsemat, graph, column.wise)
     res <- igraph.i.spMatrix(res)
   } else {
-    res <- .Call("R_igraph_get_stochastic", graph, column.wise,
-                 PACKAGE="igraph")
+    res <- .Call(C_R_igraph_get_stochastic, graph, column.wise)
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -264,12 +262,11 @@ scg_group <- function(V, nt,
   if (!is.null(p)) p <- as.numeric(p)
   maxiter <- as.integer(maxiter)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_scg_grouping", V, as.integer(nt[1]),
+  res <- .Call(C_R_igraph_scg_grouping, V, as.integer(nt[1]),
                if (length(nt)==1) NULL else nt,
-               mtype, algo, p, maxiter,
-               PACKAGE="igraph")
+               mtype, algo, p, maxiter)
   res
 }
 
@@ -335,7 +332,7 @@ scg_group <- function(V, nt,
 #' library(Matrix)
 #' # compute the semi-projectors and projector for the partition
 #' # provided by a community detection method
-#' g <- barabasi.game(20, m=1.5)
+#' g <- sample_pa(20, m = 1.5, directed = FALSE)
 #' eb <- cluster_edge_betweenness(g)
 #' memb <- membership(eb)
 #' lr <- scg_semi_proj(memb)
@@ -366,11 +363,10 @@ scg_semi_proj <- function(groups,
   norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
   sparse <- as.logical(sparse)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_scg_semiprojectors", groups, mtype, p, norm,
-               sparse,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_scg_semiprojectors, groups, mtype, p, norm,
+               sparse)
 
   if (sparse) {
     res$L <- igraph.i.spMatrix(res$L)
@@ -673,35 +669,32 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
   semproj <- as.logical(semproj)
   epairs <- as.logical(epairs)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
 
   if (mtype=="symmetric") {
     if (!is.null(evec)) { storage.mode(evec) <- "double" }
-    res <- .Call("R_igraph_scg_adjacency", graph, matrix, sparsemat, ev,
+    res <- .Call(C_R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
                  nt, algo, evec, groups,
-                 use.arpack, maxiter, sparse, output, semproj, epairs,
-                 PACKAGE="igraph")
+                 use.arpack, maxiter, sparse, output, semproj, epairs)
 
   } else if (mtype=="laplacian") {
     norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
     if (!is.null(evec)) { storage.mode(evec) <- "complex" }
     direction <- switch(igraph.match.arg(direction), "default"=1, "left"=2,
                         "right"=3)
-    res <- .Call("R_igraph_scg_laplacian", graph, matrix, sparsemat, ev,
+    res <- .Call(C_R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
                  nt, algo, norm, direction,
                  evec, groups, use.arpack, maxiter, sparse, output,
-                 semproj, epairs,
-                 PACKAGE="igraph")
+                 semproj, epairs)
 
   } else if (mtype=="stochastic") {
     norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
     if (!is.null(evec)) { storage.mode(evec) <- "complex" }
     if (!is.null(p)) { storage.mode(p) <- "double" }
     stat.prob <- as.logical(stat.prob)
-    res <- .Call("R_igraph_scg_stochastic", graph, matrix, sparsemat, ev,
+    res <- .Call(C_R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
                  nt, algo, norm, evec, groups, p, use.arpack,
-                 maxiter, sparse, output, semproj, epairs, stat.prob,
-                 PACKAGE="igraph")    
+                 maxiter, sparse, output, semproj, epairs, stat.prob)
   }
 
   if (!is.null(res$Xt) &&

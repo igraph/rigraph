@@ -40,7 +40,7 @@
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
-    .Call("R_igraph_set_verbose", verbose, PACKAGE="igraph")
+    .Call(C_R_igraph_set_verbose, verbose)
   } else if (is.character(verbose)) {
     if (!verbose %in% c("tk", "tkconsole")) {
       stop("Unknown 'verbose' value")
@@ -51,7 +51,7 @@ igraph.pars.set.verbose <- function(verbose) {
         stop("tcltk package not available")
       }
     }
-    .Call("R_igraph_set_verbose", verbose, PACKAGE="igraph")
+    .Call(C_R_igraph_set_verbose, verbose)
   } else {
     stop("'verbose' should be a logical or character scalar")
   }

@@ -13,4 +13,5 @@
 /src/
 /version_number
 /configure.ac
-.Rproj.user
+igraph.Rcheck/
+.vscode/

@@ -123,10 +123,9 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   start <- as.logical(start)
   steps <- as.integer(steps)
   
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_hrg_fit", graph, hrg, start, steps,
-               PACKAGE="igraph")
+  res <- .Call(C_R_igraph_hrg_fit, graph, hrg, start, steps)
   
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -295,10 +294,10 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
   num.samples <- as.integer(num.samples)
   num.bins <- as.integer(num.bins)
 
-  on.exit( .Call("R_igraph_finalizer", PACKAGE="igraph") )
+  on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call("R_igraph_hrg_predict", graph, hrg, start, num.samples,
-               num.bins, PACKAGE="igraph")
+  res <- .Call(C_R_igraph_hrg_predict, graph, hrg, start, num.samples,
+               num.bins)
   res$edges <- matrix(res$edges, ncol=2, byrow=TRUE)
   class(res$hrg) <- "igraphHRG"
   res
@@ -478,8 +477,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   hcass <- .C("igraphhcass2", n=as.integer(n),
               ia=as.integer(mergeInto[,1]),
               ib=as.integer(mergeInto[,2]),
-              order=integer(n), iia=integer(n), iib=integer(n),
-              PACKAGE="igraph")
+              order=integer(n), iia=integer(n), iib=integer(n))
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(merge=merge, height=1:nrow(merge), order=hcass$order,

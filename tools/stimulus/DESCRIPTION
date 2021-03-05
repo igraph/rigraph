@@ -2,21 +2,32 @@ Package: igraph
 Version: @@@@@@@@@@ missing @@@@@@@@@@
 Title:  Network Analysis and Visualization
 Author: See AUTHORS file.
-Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
+Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
   and regular graphs, graph visualization, centrality methods and much more.
 Depends: methods
-Imports: Matrix,
-    magrittr,
-    irlba,
-    pkgconfig (>= 2.0.0),
-    grDevices,
+Imports:
     graphics,
+    grDevices,
+    magrittr,
+    Matrix,
+    pkgconfig (>= 2.0.0),
     stats,
     utils
-Suggests: igraphdata, stats4, rgl, tcltk, graph, ape, scales, NMF
+Suggests:
+    ape,
+    graph,
+    igraphdata,
+    rgl,
+    scales,
+    stats4,
+    tcltk,
+    testthat,
+    withr,
+    digest
 License: GPL (>= 2)
 URL: http://igraph.org
-SystemRequirements: gmp, libxml2
+SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
 BugReports: https://github.com/igraph/igraph/issues
+Encoding: UTF-8

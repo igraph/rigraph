@@ -119,8 +119,7 @@ lazy_dots <- function(..., .follow_symbols = FALSE) {
     return(structure(list(), class = "lazy_dots"))
   }
 
-  base::.Call("make_lazy_dots", environment(), .follow_symbols,
-              PACKAGE = "igraph")
+  .Call(C_make_lazy_dots, environment(), .follow_symbols)
 }
 is.lazy_dots <- function(x) inherits(x, "lazy_dots")
 `[.lazy_dots` <- function(x, i) {
@@ -144,8 +143,7 @@ lazy_ <- function(expr, env) {
   structure(list(expr = expr, env = env), class = "lazy")
 }
 lazy <- function(expr, env = parent.frame(), .follow_symbols = TRUE) {
-  base::.Call("make_lazy", quote(expr), environment(), .follow_symbols,
-              PACKAGE = "igraph")
+  .Call(C_make_lazy, quote(expr), environment(), .follow_symbols)
 }
 is.lazy <- function(x) inherits(x, "lazy")
 print.lazy <- function(x, ...) {
@@ -232,11 +230,11 @@ deparse_trunc <- function(x, width = getOption("width")) {
   paste0(substr(text[1], 1, width - 3), "...")
 }
 promise_expr <- function(prom) {
-  base::.Call("promise_expr_", prom, PACKAGE = "igraph")
+  .Call(C_promise_expr_, prom)
 }
 
 promise_env <- function(prom) {
-  base::.Call("promise_env_", prom, PACKAGE = "igraph")
+  .Call(C_promise_env_, prom)
 }
 as.lazy.promise <- function(x, ...) {
   lazy_(promise_expr(x), promise_env(x))

@@ -1,5 +1,5 @@
 
-#' @useDynLib igraph
+#' @useDynLib igraph, .registration = TRUE, .fixes = "C_"
 #' @import methods
 #' @importFrom magrittr %>%
 #' @export make_bipartite_graph

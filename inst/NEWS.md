@@ -1,7 +1,62 @@
+# Next release
 
-# igraph 1.1.0
+The C core is updated to 0.8.5, fixing a range of bugs and introducing a number of new functions.
 
-July 9, 2016
+Added:
+- cluster_leiden added (#399).
+
+Fixed:
+- Betweenness normalisation no longer overflows (#442).
+
+# igraph 1.2.6
+
+Oct 5, 2020
+
+No use visible changes.
+
+# igraph 1.2.5
+
+Mar 27, 2020
+
+No user visible changes.
+
+# igraph 1.2.4
+
+Feb 13, 2019
+
+No user visible changes.
+
+# igraph 1.2.3
+
+Jan 27, 2019
+
+No user visible changes.
+
+# igraph 1.2.2
+
+Jul  27, 2018
+
+No user visible changes.
+
+# igraph 1.2.1
+
+- The GLPK library is optional, if it is not available, then the
+  `cluster_optimal()` function does not work. Unfortunately we cannot
+  bundle the GLPK library into igraph on CRAN any more, because CRAN
+  maintainers forbid the pragmas in its source code.
+- Removed the NMF package dependency, and related functions.
+- Fix compilation without libxml2
+
+# igraph 1.1.2
+
+Jul 20, 2017
+
+- Fix compilation on Solaris
+
+
+# igraph 1.1.1
+
+Jul 13, 2017
 
 - Graph id is printed in the header, and a `graph_id` function was added
 - Fix `edge_attr` for some index values
@@ -10,11 +65,11 @@ July 9, 2016
 - `%>%` is re-exported in a better way, to avoid interference with other
   packages
 - `ego_` functions default to `order = 1` now
-- New function `igraph_with_opt` to run code with temporary igraph 
+- New function `igraph_with_opt` to run code with temporary igraph
   options settings
 - Fix broken `sample_asym_pref` function
 - Fix `curve_multiple` to avoid warnings for graphs with self-loops.
-- The `NMF` package is only suggested now, it is not a hard 
+- The `NMF` package is only suggested now, it is not a hard
   dependency
 - Fix gen_uid.c _SVID_SOURCE issues
 - Avoid drawing straight lines as Bezier curves
@@ -49,6 +104,8 @@ July 9, 2016
   `.to()`. #22
 - Fix packages that convert graphs to graph::graphNEL: they
   don't need to attach 'graph' manually any more.
+- Fix a bugs in `layout_with_dh`, `layout_with_gem` and
+  `layout_with_sugiyama`. They crashed in some cases.
 
 # igraph 1.0.1
 
@@ -166,25 +223,25 @@ February 4, 2014
 
 ## Release Notes
 
-There are a bunch of new features in the library itself, and 
+There are a bunch of new features in the library itself, and
 other important changes in the life of the project. Thanks everyone
 for sending code and reporting bugs!
 
 ### igraph @ github
 
-igraph's development has moved from Launchpad to github. 
-This has actually happened several month ago, but never 
-announced officially. The place for reporting bugs is 
+igraph's development has moved from Launchpad to github.
+This has actually happened several month ago, but never
+announced officially. The place for reporting bugs is
 at https://github.com/igraph/igraph/issues.
 
 ### New homepage
 
-igraph's homepage is now hosted at http://igraph.org, and it is 
+igraph's homepage is now hosted at http://igraph.org, and it is
 brand new. We wanted to make it easier to use and modern.
 
 ### Better nightly downloads
 
-You can download nightly builds from igraph at 
+You can download nightly builds from igraph at
 http://igraph.org/nightly. Source and binary R packages (for windows
 and OSX), are all built.
 
@@ -204,7 +261,7 @@ and OSX), are all built.
   are bipartite.
 - Support weighted (and signed) networks in Pajek when file is in
   matrix format.
-- Fixed a bug in `barabasi.game()`, algorithm psumtree-multiple 
+- Fixed a bug in `barabasi.game()`, algorithm psumtree-multiple
   just froze.
 - Function `layout.mds()` by default returns a layout matrix now.
 - Added support for Boolean attributes in the GraphML and GML readers
@@ -222,7 +279,7 @@ and OSX), are all built.
 - Erdos-Renyi type bipartite random graphs: `bipartite.random.game()`.
 - Support the new options (predecessors and inbound_edges) of
   `get_shortest_paths()`, reorganized the output of
-  `get.shortest.paths()` completely. 
+  `get.shortest.paths()` completely.
 - Added `graphlets()` and related functions.
 - Fix modularity values of multilevel community if there are no merges
   at all.
@@ -230,15 +287,15 @@ and OSX), are all built.
 - Fix `bonpow()` and `alpha.centrality()` and make sure that the
   sparse solver is called.
 - `tkplot()` news: enable setting coordinates from the command line
-  via `tkplot.setcoords()` and access to the canvas via 
+  via `tkplot.setcoords()` and access to the canvas via
   `tkplot.canvas()`.
 - Fixed a potential crash in `igraph_edge_connectivity()`, because of an
   un-initialized variable in the C code.
 - Avoiding overflow in `closeness()` and related functions.
-- Check for NAs after converting 'type' to logical in 
+- Check for NAs after converting 'type' to logical in
   `bipartite.projection()`.
-- `graphNEL` conversion functions only load the 'graph' package if it was 
-  not loaded before and they load it at the end of the search path, 
+- `graphNEL` conversion functions only load the 'graph' package if it was
+  not loaded before and they load it at the end of the search path,
   to minimize conflicts.
 - Fixed a bug when creating graphs from adjacency matrices, we now convert
   them to double, in case they are integers.
@@ -276,7 +333,7 @@ and OSX), are all built.
   `adjacenct.triangles()`.
 - Added `graph.eigen()` function, eigenproblems on adjacency matrices.
 - Added some workarounds for functions that create a lot of
-  graphs, `decompose.graph()` and `graph.neighborhood()` use it. 
+  graphs, `decompose.graph()` and `graph.neighborhood()` use it.
   Fixes issue #508.
 - Added weights support for `optimal.community()`, closes #511.
 - Faster maximal clique finding.
@@ -286,7 +343,7 @@ and OSX), are all built.
   keep attributes, closes #20.
 - Removed functions `graph.intersection.by.name()`,
   `graph.union.by.name()`, `graph.difference.by.name()`.
-- The `+` operator on graphs now calls `graph.union()` if both 
+- The `+` operator on graphs now calls `graph.union()` if both
   argument graphs are named, and calls `graph.disjoint.union()`
   otherwise.
 - Added function `igraph.version()`.
@@ -341,7 +398,7 @@ Some bugs fixed:
 - Better arpack() error messages.
 - Fixed missing whitespace in Pajek writer when ID attribute
   was numeric.
-- Fixed dyad census instability, sometimes incorrect 
+- Fixed dyad census instability, sometimes incorrect
   results were reported (#496).
 - Fixed a bug that caused the GML reader to crash when the ID
   attribute was non-numeric
@@ -350,8 +407,8 @@ Some bugs fixed:
 - Added the igraphtest() function to run tests from R (#485).
 - Dyad census detects integer overflow now and gives a warning (#497).
 - R: add.edges() does not allow now zeros in the vertex set (#503).
-- Add C++ namespace to the files that didn't have one. 
-  Fixes some incompatibility with other packages (e.g. rgl) 
+- Add C++ namespace to the files that didn't have one.
+  Fixes some incompatibility with other packages (e.g. rgl)
   and mysterious crashes (#523).
 - Fixed a bug that caused a side effect in set.vertex.attributes(),
   set.edge.attributes() and set.graph.attributes() (#533).
@@ -374,7 +431,7 @@ Released February 27, 2013
 
 Fixing an annoying bug, that broke two other packages on CRAN:
 
-- Setting graph attributes failed sometimes, if the attributes were 
+- Setting graph attributes failed sometimes, if the attributes were
   lists or other complex objects.
 
 # igraph 0.6.5
@@ -389,21 +446,21 @@ This is a minor release, to fix some very annoying bugs in 0.6.4:
 - Fixed an out-of-bounds array indexing error in the DrL layout, that
   potentially caused crashes.
 - Fixed a crash in weighted betweenness calculation.
-- Plotting: fixed a bug that caused misplaced arrows at rectangle 
-  vertex shapes. 
+- Plotting: fixed a bug that caused misplaced arrows at rectangle
+  vertex shapes.
 
 # igraph 0.6.4
 
 Released February 2, 2013
 
-The version number is not a mistake, we jump to 0.6.4 from 0.6, 
+The version number is not a mistake, we jump to 0.6.4 from 0.6,
 for technical reasons. This version was actually never really
-released, but some R packages of this version were uplodaded to 
+released, but some R packages of this version were uplodaded to
 CRAN, so we include this version in this NEW file.
 
 # New features and bug fixes
 
-- Added a vertex shape API for defining new vertex shapes, and also 
+- Added a vertex shape API for defining new vertex shapes, and also
   a couple of new vertex shapes.
 - Added the get.data.frame() function, opposite of graph.data.frame().
 - Added bipartite support to the Pajek reader and writer, closes bug
@@ -423,9 +480,9 @@ CRAN, so we include this version in this NEW file.
 - power.law.fit() can now use a C implementation.
 
 - Fixed a bug in barabasi.game() when out.seq was an empty vector.
-- Fixed a bug that made functions with a progress bar fail if called 
+- Fixed a bug that made functions with a progress bar fail if called
   from another package.
-- Fixed a bug when creating graphs from a weighted integer adjacency 
+- Fixed a bug when creating graphs from a weighted integer adjacency
   matrix via graph.adjacency(). Bug #1019624.
 - Fixed overflow issues in centralization calculations.
 - Fixed a minimal.st.separators() bug, some vertex sets were incorrectly
@@ -433,14 +490,14 @@ CRAN, so we include this version in this NEW file.
 - Fixed a bug that mishandled vertex colors in VF2 isomorphism
   functions. Bug #1032819.
 - Pajek exporter now always quotes strings, thanks to Elena Tea Russo.
-- Fixed a bug with handling small edge weights in shortest paths 
-  calculation in shortest.paths() (Dijkstra's algorithm.) Thanks to 
+- Fixed a bug with handling small edge weights in shortest paths
+  calculation in shortest.paths() (Dijkstra's algorithm.) Thanks to
   Martin J Reed.
 - Weighted transitivity uses V(graph) as 'vids' if it is NULL.
-- Fixed a bug when 'pie' vertices were drawn together with other 
+- Fixed a bug when 'pie' vertices were drawn together with other
   vertex shapes.
 - Speed up printing graphs.
-- Speed up attribute queries and other basic operations, by avoiding 
+- Speed up attribute queries and other basic operations, by avoiding
   copying of the graph. Bug #1043616.
 - Fixed a bug in the NCV setting for ARPACK functions. It cannot be
   bigger than the matrix size.
@@ -449,18 +506,18 @@ CRAN, so we include this version in this NEW file.
   other.
 - Fixed a bug in layout.spring(), it was not working properly.
 - Fixed layout.svd(), which was completely defunct.
-- Fixed a bug in layout.graphopt() that caused warnings and on 
+- Fixed a bug in layout.graphopt() that caused warnings and on
   some platforms crashes.
 - Fixed community.to.membership(). Bug #1022850.
 - Fixed a graph.incidence() crash if it was called with a non-matrix
   argument.
 - Fixed a get.shortest.paths bug, when output was set to "both".
 - Motif finding functions return NA for isomorphism classes that are
-  not motifs (i.e. not connected). Fixes bug #1050859. 
+  not motifs (i.e. not connected). Fixes bug #1050859.
 - Fixed get.adjacency() when attr is given, and the attribute has some
-  complex type. Bug #1025799. 
+  complex type. Bug #1025799.
 - Fixed attribute name in graph.adjacency() for dense matrices. Bug
-  #1066952. 
+  #1066952.
 - Fixed erratic behavior of alpha.centrality().
 - Fixed igraph indexing, when attr is given. Bug #1073705.
 - Fixed a bug when calculating the largest cliques of a directed
@@ -468,12 +525,12 @@ CRAN, so we include this version in this NEW file.
 - Fixed a bug in the maximal clique search, closes #1074402.
 - Warn for negative weights when calculating PageRank.
 - Fixed dense, unweighted graph.adjacency when diag=FALSE. Closes
-  issue #1077425. 
+  issue #1077425.
 - Fixed a bug in eccentricity() and radius(), the results were often
   simply wrong.
 - Fixed a bug in get.all.shortest.paths() when some edges had zero weight.
 - graph.data.frame() is more careful when vertex names are numbers, to
-  avoid their scientific notation. Fixes issue #1082221. 
+  avoid their scientific notation. Fixes issue #1082221.
 - Better check for NAs in vertex names. Fixes issue #1087215
 - Fixed a potential crash in the DrL layout generator.
 - Fixed a bug in the Reingold-Tilford layout when the graph is
@@ -483,34 +540,34 @@ CRAN, so we include this version in this NEW file.
 
 Released June 11, 2012
 
-See also the release notes at 
+See also the release notes at
 http://igraph.sf.net/relnotes-0.6.html
 
 # R: Major new features
 
-- Vertices and edges are numbered from 1 instead of 0. 
+- Vertices and edges are numbered from 1 instead of 0.
   Note that this makes most of the old R igraph code incompatible
-  with igraph 0.6. If you want to use your old code, please use 
+  with igraph 0.6. If you want to use your old code, please use
   the igraph0 package. See more at http://igraph.sf.net/relnotes-0.6.html.
-- The '[' and '[[' operators can now be used on igraph graphs, 
-  for '[' the graph behaves as an adjacency matrix, for '[[' is 
+- The '[' and '[[' operators can now be used on igraph graphs,
+  for '[' the graph behaves as an adjacency matrix, for '[[' is
   is treated as an adjacency list. It is also much simpler to
-  manipulate the graph structure, i.e. add/remove edges and vertices, 
+  manipulate the graph structure, i.e. add/remove edges and vertices,
   with some new operators. See more at ?graph.structure.
-- In all functions that take a vector or list of vertices or edges, 
+- In all functions that take a vector or list of vertices or edges,
   vertex/edge names can be given instead of the numeric ids.
 - New package 'igraphdata', contains a number of data sets that can
   be used directly in igraph.
 - Igraph now supports loading graphs from the Nexus online data
-  repository, see nexus.get(), nexus.info(), nexus.list() and 
+  repository, see nexus.get(), nexus.info(), nexus.list() and
   nexus.search().
 - All the community structure finding algorithm return a 'communities'
-  object now, which has a bunch of useful operations, see 
+  object now, which has a bunch of useful operations, see
   ?communities for details.
-- Vertex and edge attributes are handled much better now. They 
+- Vertex and edge attributes are handled much better now. They
   are kept whenever possible, and can be combined via a flexible API.
   See ?attribute.combination.
-- R now prints igraph graphs to the screen in a more structured and 
+- R now prints igraph graphs to the screen in a more structured and
   informative way. The output of summary() was also updated
   accordingly.
 
@@ -519,13 +576,13 @@ http://igraph.sf.net/relnotes-0.6.html
 - It is possible to mark vertex groups on plots, via
   shading. Communities and cohesive blocks are plotted using this by
   default.
-- Some igraph demos are now available, see a list via 
+- Some igraph demos are now available, see a list via
   'demo(package="igraph")'.
 - igraph now tries to select the optimal layout algorithm, when
   plotting a graph.
 - Added a simple console, using Tcl/Tk. It contains a text area
   for status messages and also a status bar. See igraph.console().
-- Reimplemented igraph options support, see igraph.options() and 
+- Reimplemented igraph options support, see igraph.options() and
   getIgraphOpt().
 - Igraph functions can now print status messages.
 
@@ -533,7 +590,7 @@ http://igraph.sf.net/relnotes-0.6.html
 
 ## Community detection
 
-- The multi-level modularity optimization community structure detection 
+- The multi-level modularity optimization community structure detection
   algorithm by Blondel et al. was added, see multilevel.community().
 - Distance between two community structures: compare.communities().
 - Community structure via exact modularity optimization,
@@ -546,29 +603,29 @@ http://igraph.sf.net/relnotes-0.6.html
 ## Shortest paths
 
 - Eccentricity (eccentricity()), and radius (radius()) calculations.
-- Shortest path calculations with get.shortest.paths() can now 
+- Shortest path calculations with get.shortest.paths() can now
   return the edges along the shortest paths.
 - get.all.shortest.paths() now supports edge weights.
 
 ## Centrality
 
-- Centralization scores for degree, closeness, betweenness and 
+- Centralization scores for degree, closeness, betweenness and
   eigenvector centrality. See centralization.scores().
 - Personalized Page-Rank scores, see page.rank().
 - Subgraph centrality, subgraph.centrality().
-- Authority (authority.score()) and hub (hub.score()) scores support 
+- Authority (authority.score()) and hub (hub.score()) scores support
   edge weights now.
 - Support edge weights in betweenness and closeness calculations.
-- bonpow(), Bonacich's power centrality and alpha.centrality(), 
+- bonpow(), Bonacich's power centrality and alpha.centrality(),
   Alpha centrality calculations now use sparse matrices by default.
-- Eigenvector centrality calculation, evcent() now works for 
+- Eigenvector centrality calculation, evcent() now works for
   directed graphs.
 - Betweenness calculation can now use arbitrarily large integers,
   this is required for some lattice-like graphs to avoid overflow.
 
 ## Input/output and file formats
 
-- Support the DL file format in graph.read(). See 
+- Support the DL file format in graph.read(). See
   http://www.analytictech.com/networks/dataentry.htm.
 - Support writing the LEDA file format in write.graph().
 
@@ -577,7 +634,7 @@ http://igraph.sf.net/relnotes-0.6.html
 - Star layout: layout.star().
 - Layout based on multidimensional scaling, layout.mds().
 - New layouts layout.grid() and layout.grid.3d().
-- Sugiyama layout algorithm for layered directed acyclic graphs, 
+- Sugiyama layout algorithm for layered directed acyclic graphs,
   layout.sugiyama().
 
 ## Graph generators
@@ -586,39 +643,39 @@ http://igraph.sf.net/relnotes-0.6.html
 - barabasi.game() was rewritten and it supports three algorithms now,
   the default algorithm does not generate multiple or loop edges.
   The graph generation process can now start from a supplied graph.
-- The Watts-Strogatz graph generator, igraph_watts_strogatz() can 
+- The Watts-Strogatz graph generator, igraph_watts_strogatz() can
   now create graphs without loop edges.
 
 ## Others
 
-- Added the Spectral Coarse Graining algorithm, see scg(). 
+- Added the Spectral Coarse Graining algorithm, see scg().
 - The cohesive.blocks() function was rewritten in C, it is much faster
   now. It has a nicer API, too. See demo("cohesive").
 - Added generic breadth-first and depth-first search implementations
   with many callbacks, graph.bfs() and graph_dfs().
-- Support vertex and edge coloring in the VF2 (sub)graph isomorphism 
-  functions (graph.isomorphic.vf2(), graph.count.isomorphisms.vf2(), 
-  graph.get.isomorphisms.vf2(), graph.subisomorphic.vf2(), 
+- Support vertex and edge coloring in the VF2 (sub)graph isomorphism
+  functions (graph.isomorphic.vf2(), graph.count.isomorphisms.vf2(),
+  graph.get.isomorphisms.vf2(), graph.subisomorphic.vf2(),
   graph.count.subisomorphisms.vf2(), graph.get.subisomorphisms.vf2()).
 - Assortativity coefficient, assortativity(), assortativity.nominal()
   and assortativity.degree().
-- Vertex operators that work by vertex names: 
-  graph.intersection.by.name(), graph.union.by.name(), 
-  graph.difference.by.name(). Thanks to Magnus Torfason for 
+- Vertex operators that work by vertex names:
+  graph.intersection.by.name(), graph.union.by.name(),
+  graph.difference.by.name(). Thanks to Magnus Torfason for
   contributing his code!
 - Function to calculate a non-induced subraph: subgraph.edges().
-- More comprehensive maximum flow and minimum cut calculation, 
+- More comprehensive maximum flow and minimum cut calculation,
   see functions graph.maxflow(), graph.mincut(), stCuts(), stMincuts().
 - Check whether a directed graph is a DAG, is.dag().
 - has.multiple() to decide whether a graph has multiple edges.
 - Added a function to calculate a diversity score for the vertices,
   graph.diversity().
-- Graph Laplacian calculation (graph.laplacian()) supports edge 
+- Graph Laplacian calculation (graph.laplacian()) supports edge
   weights now.
-- Biconnected component calculation, biconnected.components() 
+- Biconnected component calculation, biconnected.components()
   now returns the components themselves.
 - bipartite.projection() calculates multiplicity of edges.
-- Maximum cardinality search: maximum.cardinality.search() and 
+- Maximum cardinality search: maximum.cardinality.search() and
   chordality test: is.chordal()
 - Convex hull computation, convex.hull().
 - Contract vertices, contract.vertices().
@@ -630,14 +687,14 @@ Released November 22, 2009
 ## Bugs corrected in the R interface
 
 - Some small changes to make 'R CMD check' clean
-- Fixed a bug in graph.incidence, the 'directed' and 'mode' arguments 
+- Fixed a bug in graph.incidence, the 'directed' and 'mode' arguments
   were not handled correctly
 - Betweenness and edge betweenness functions work for graphs with
   many shortest paths now (up to the limit of long long int)
 - When compiling the package, the configure script fails if there is
   no C compiler available
 - igraph.from.graphNEL creates the right number of loop edges now
-- Fixed a bug in bipartite.projection() that caused occasional crashes 
+- Fixed a bug in bipartite.projection() that caused occasional crashes
   on some systems
 
 # igraph 0.5.2
@@ -709,58 +766,58 @@ http://igraph.sf.net/relnotes-0.5.2.html
 
 Released July 14, 2008
 
-See also the release notes at 
+See also the release notes at
 http://igraph.sf.net/relnotes-0.5.1.html
 
 ## New in the R interface
 
 - A new layout generator called DrL.
-- Uniform sampling of random connected undirected graphs with a 
+- Uniform sampling of random connected undirected graphs with a
   given degree sequence.
-- Edge labels are plotted at 1/3 of the edge, this is better if 
+- Edge labels are plotted at 1/3 of the edge, this is better if
   the graph has mutual edges.
 - Initial and experimental vertex shape support in 'plot'.
 - New function, 'graph.adjlist' creates igraph graphs from
   adjacency lists.
 - Conversion to/from graphNEL graphs, from the 'graph' R package.
-- Fastgreedy community detection can utilize edge weights now, this 
+- Fastgreedy community detection can utilize edge weights now, this
   was missing from the R interface.
 - The 'arrow.width' graphical parameter was added.
 - graph.data.frame has a new argument 'vertices'.
-- graph.adjacency and get.adjacency support sparse matrices, 
+- graph.adjacency and get.adjacency support sparse matrices,
   the 'Matrix' package is required to use this functionality.
 - graph.adjacency adds column/row names as 'name' attribute.
-- Weighted shortest paths using Dijkstra's or the Belmann-Ford 
+- Weighted shortest paths using Dijkstra's or the Belmann-Ford
   algorithm.
 - Shortest path functions return 'Inf' for unreachable vertices.
 - New function 'is.mutual' to find mutual edges in a directed graph.
 - Added inverse log-weighted similarity measure (a.k.a. Adamic/Adar
   similarity).
-- preference.game and asymmetric.preference.game were 
+- preference.game and asymmetric.preference.game were
   rewritten, they are O(|V|+|E|) now, instead of O(|V|^2).
-- Edge weight support in function 'get.shortest.paths', it uses 
+- Edge weight support in function 'get.shortest.paths', it uses
   Dijkstra's algorithm.
 
 ## Bugs corrected in the R interface
-  
+
 - A bug was corrected in write.pajek.bgraph.
 - Several bugs were corrected in graph.adjacency.
-- Pajek reader bug corrected, used to segfault if '*Vertices' 
+- Pajek reader bug corrected, used to segfault if '*Vertices'
   was missing.
 - Directedness is handled correctly when writing GML files.
   (But note that 'correct' conflicts the standard here.)
-- Corrected a bug when calculating weighted, directed PageRank on an 
+- Corrected a bug when calculating weighted, directed PageRank on an
   undirected graph. (Which does not make sense anyway.)
-- Several bugs were fixed in the Reingold-Tilford layout to avoid 
+- Several bugs were fixed in the Reingold-Tilford layout to avoid
   edge crossings.
 - A bug was fixed in the GraphML reader, when the value of a graph
   attribute was not specified.
 - Fixed a bug in the graph isomorphism routine for small (3-4 vertices)
   graphs.
 - Corrected the random sampling implementation (igraph_random_sample),
-  now it always generates unique numbers. This affects the 
+  now it always generates unique numbers. This affects the
   Gnm Erdos-Renyi generator, it always generates simple graphs now.
-- The basic igraph constructor (igraph_empty_attrs, all functions 
+- The basic igraph constructor (igraph_empty_attrs, all functions
   are expected to call this internally) now checks whether the number
   of vertices is finite.
 - The LGL, NCOL and Pajek graph readers handle errors properly now.
@@ -768,10 +825,10 @@ http://igraph.sf.net/relnotes-0.5.1.html
   now.
 - The fast greedy community detection routine now checks that the graph
   is simple.
-- The LGL and NCOL parsers were corrected to work with all 
+- The LGL and NCOL parsers were corrected to work with all
   kinds of end-of-line encodings.
 - Hub & authority score calculations initialize ARPACK parameters now.
-- Fixed a bug in the Walktrap community detection routine, when applied 
+- Fixed a bug in the Walktrap community detection routine, when applied
   to unconnected graphs.
 - Several small memory leaks were removed, and a big one from the Spinglass
   community structure detection function
@@ -792,7 +849,7 @@ See also the release notes at http://igraph.sf.net/relnotes-0.5.html
 - Eigenvector centrality computation is much faster now
 - Proper R warnings, instead of writing the warning to the terminal
 - R checks graphical parameters now, the unknown ones are not just
-  ignored, but an error message is given  
+  ignored, but an error message is given
 - plot.igraph has an 'add' argument now to compose plots with multiple
   graphs
 - plot.igraph supports the 'main' and 'sub' arguments
@@ -802,7 +859,7 @@ See also the release notes at http://igraph.sf.net/relnotes-0.5.html
   systems
 - plot.igraph can plot square vertices now, see the 'shape' parameter
 - graph.adjacency rewritten when creating weighted graphs
-- We use match.arg whenever possible. This means that character scalar 
+- We use match.arg whenever possible. This means that character scalar
   options can be abbreviated and they are always case insensitive
 
 - VF2 graph isomorphism routines can check subgraph isomorphism now,
@@ -839,7 +896,7 @@ See also the release notes at http://igraph.sf.net/relnotes-0.5.html
   a membership vector (community.le.to.membership)
 - Weighted fast greedy community detection
 - Weighted page rank calculation
-- Functions for estimating closeness, betweenness, edge betweenness by 
+- Functions for estimating closeness, betweenness, edge betweenness by
   introducing a cutoff for path lengths (closeness.estimate,
   betweenness.estimate, edge.betweenness.estimate)
 - Weighted modularity calculation
@@ -864,7 +921,7 @@ New:
 - Cohesive block finding in the R interface, thanks to Peter McMahan
   for contributing his code. See James Moody and Douglas R. White,
   2003, in Structural Cohesion and Embeddedness: A Hierarchical
-  Conception of Social Groups American Sociological Review 68(1):1-25 
+  Conception of Social Groups American Sociological Review 68(1):1-25
 - Biconnected components and articulation points.
 - R interface: better printing of attributes.
 - R interface: graph attributes can be used via '$'.
@@ -889,7 +946,7 @@ The next one in the sequence of bugfix releases. Thanks to many people
 sending bug reports. Here are the changes:
 - Some memory leaks removed when using attributes from R or Python.
 - GraphML parser: entities and character data in multiple chunks are
-  now handled correctly. 
+  now handled correctly.
 - A bug corrected in edge betweenness community structure detection,
   it failed if called many times from the same program/session.
 - Edge betweeness community structure: handle unconnected graphs properly.
@@ -900,17 +957,17 @@ sending bug reports. Here are the changes:
 - R interface: plot now handles properly if called with a vector as
   the edge.width argument for directed graphs.
 - R interface: bug (typo) corrected for walktrap.community and
-  weighted graphs. 
+  weighted graphs.
 
 # igraph 0.4.2
 
 Released June 7, 2007
 
-This is another bugfix release, as there was a serious bug in the 
+This is another bugfix release, as there was a serious bug in the
 R package of the previous version: it could not read and write graphs
 to files in any format under MS Windows.
 
-Some other bits added: 
+Some other bits added:
 - circular Reingold-Tilford layout generator for trees
 - corrected a bug, Pajek files are written properly under MS Windows now.
 - arrow.size graphical edge parameter added in the R interface.
@@ -919,7 +976,7 @@ Some other bits added:
 
 Released May 23, 2007
 
-This is a minor release, it corrects a number of bugs, mostly in the 
+This is a minor release, it corrects a number of bugs, mostly in the
 R package.
 
 # igraph 0.4
@@ -927,12 +984,12 @@ R package.
 Released May 21, 2007
 
 The major new additions in this release is a bunch of community
-detection algorithms and support for the GML file format. Here 
+detection algorithms and support for the GML file format. Here
 is the complete list of changes:
 
 ## New in the R interface
 
-- as the internal representation changed, graphs stored with 'save' 
+- as the internal representation changed, graphs stored with 'save'
   with an older igraph version cannot be read back with the new
   version reliably.
 - neighbors returns ordered lists
@@ -945,19 +1002,19 @@ is the complete list of changes:
 - girth calculation added, thanks to Keith Briggs
 - support for reading and writing GML files
 
-- Walktrap community detection algorithm added, thanks to Matthieu Latapy 
+- Walktrap community detection algorithm added, thanks to Matthieu Latapy
   and Pascal Pons
 - edge betweenness based community detection algorithm added
 - fast greedy algorithm for community detection by Clauset et al. added
-  thanks to Aaron Clauset for sharing his code  
+  thanks to Aaron Clauset for sharing his code
 - leading eigenvector community detection algorithm by Mark Newman added
-- functions for creating dendrograms from the output of the 
+- functions for creating dendrograms from the output of the
   community detection algorithms added
-- community.membership supporting function added, creates 
+- community.membership supporting function added, creates
   a membership vector from a community structure merge tree
 - modularity calculation added
 
-- graphics parameter handling is completely rewritten, uniform handling 
+- graphics parameter handling is completely rewritten, uniform handling
   of colors and fonts, make sure you read ?igraph.plotting
 - new plotting parameter for edges: arrow.mode
 - a bug corrected when playing a nonlinear barabasi.game
@@ -973,14 +1030,14 @@ is the complete list of changes:
 
 ## Others
 
-- many functions benefit from the new internal representation and are 
-  faster now: transitivity, reciprocity, graph operator functions like 
+- many functions benefit from the new internal representation and are
+  faster now: transitivity, reciprocity, graph operator functions like
   intersection and union, etc.
 
 ## Bugs corrected
 
 - corrected a bug when reading Pajek files: directed graphs were read
-  as undirected 
+  as undirected
 
 # igraph 0.3.2
 
@@ -998,19 +1055,19 @@ This is a new major release, it contains many new things:
 - graph.density, graph density calculation
 - edge and vertex attributes can be added easily now when added new
   edges with add.edges or new vertices with add.vertices
-- graph.data.frame creates graph from data frames, this can be used to 
+- graph.data.frame creates graph from data frames, this can be used to
   create graphs with edge attributes easily
 - plot.igraph and tkplot can plot self-loop edges now
-- graph.edgelist to create a graph from an edge list, can also handle 
+- graph.edgelist to create a graph from an edge list, can also handle
   edge lists with symbolic names
 - get.edgelist has now a 'names' argument and can return symbolic
   vertex names instead of vertex ids, by default id uses the 'name'
-  vertex attribute is returned 
+  vertex attribute is returned
 - printing graphs on screen also prints symbolic symbolic names
   (the 'name' attribute if present)
 - maximum flow and minimum cut functions: graph.maxflow, graph.mincut
 - vertex and edge connectivity: edge.connectivity, vertex.connectivity
-- edge and vertex disjoint paths: edge.disjoint.paths, 
+- edge and vertex disjoint paths: edge.disjoint.paths,
   vertex.disjoint.paths
 - White's cohesion and adhesion measure: graph.adhesion, graph.cohesion
 - dimacs file format added
@@ -1033,9 +1090,9 @@ This is a new major release, it contains many new things:
 
 - attribute handling bug when deleting edges corrected
 - GraphML escaping and NaN handling corrected
-- bug corrected to make it possible compile the R package without the 
+- bug corrected to make it possible compile the R package without the
   libxml2 library
-- a bug in Erdos-Renyi graph generation corrected: it had problems 
+- a bug in Erdos-Renyi graph generation corrected: it had problems
   with generating large directed graphs
 - bug in constraint calculation corrected, it works well now
 - fixed memory leaks in the GraphML reader
@@ -1074,7 +1131,7 @@ New things specifically in the R package:
 - support for CTRL+C
 - new functions: Graph Laplacian, Burt's constraint, etc.
 - vertex/edge sequences totally rewritten, smart indexing (see manual)
-- new R manual and tutorial: `Network Analysis with igraph', still 
+- new R manual and tutorial: `Network Analysis with igraph', still
   under development but useful
 - very basic 3D plotting using OpenGL
 
@@ -1087,9 +1144,9 @@ better.
 
 Released Jan 30, 2006
 
-After about a year of development this is the first "official" release 
-of the igraph library. This release should be considered as beta 
-software, but it should be useful in general. Please send your 
+After about a year of development this is the first "official" release
+of the igraph library. This release should be considered as beta
+software, but it should be useful in general. Please send your
 questions and comments.
 
 

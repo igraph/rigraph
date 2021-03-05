@@ -31,19 +31,19 @@
   gal <- graph_attr_names(object)
   if (length(gal) != 0) {
     ga <- paste(sep="", gal, " (g/",
-                .Call("R_igraph_get_attr_mode", object, 2L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 2L),
                 ")")
   }
   val <- vertex_attr_names(object)
   if (length(val) != 0) {
     va <- paste(sep="", val, " (v/",
-                .Call("R_igraph_get_attr_mode", object, 3L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 3L),
                 ")")
   }
   eal <- edge_attr_names(object)
   if (length(eal) != 0) {
     ea <- paste(sep="", edge_attr_names(object), " (e/",
-                .Call("R_igraph_get_attr_mode", object, 4L, PACKAGE="igraph"),
+                .Call(C_R_igraph_get_attr_mode, object, 4L),
                 ")")
   }
   c(ga, va, ea)
@@ -427,7 +427,7 @@ print_all <- function(object, ...) {
 #' The graph summary printed by \code{summary.igraph} (and \code{print.igraph}
 #' and \code{print_all}) consists one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
-#' Here is an example, a small star graph with weighed directed edges and named
+#' Here is an example, a small star graph with weighted directed edges and named
 #' vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 #'     + attr: name (g/c), mode (g/c), center (g/n), name (v/c),
 #'       weight (e/n) }
@@ -455,8 +455,11 @@ print_all <- function(object, ...) {
 #' 
 #' As of igraph 0.4 \code{print_all} and \code{print.igraph} use the
 #' \code{max.print} option, see \code{\link[base]{options}} for details.
-#' 
-#' @aliases print.igraph print_all summary.igraph
+#'
+#' As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
+#' \code{print_all()}.
+#'
+#' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
 #' @param full Logical scalar, whether to print the graph structure itself as
 #' well.
