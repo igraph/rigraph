@@ -11,7 +11,7 @@ test_that("merge_coords works", {
   l
 
   lm <- merge_coords(g, l)
-  expect_that(is.matrix(lm), is_true())
+  expect_true(is.matrix(lm))
   expect_that(ncol(lm), equals(2))
   expect_that(nrow(lm), equals(sum(sapply(g, vcount))))
 

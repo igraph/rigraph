@@ -10,7 +10,7 @@ test_that("sample_smallworld works", {
     d <- sample(1:3, 1)
     nei <- sample(2:5, 1)
     g <- sample_smallworld(d, 10, nei, p, loops=FALSE)
-    expect_that(any(which_loop(g)), is_false())
+    expect_false(any(which_loop(g)))
   }
 
 })

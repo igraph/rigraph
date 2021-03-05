@@ -173,6 +173,8 @@ indent_print <- function(..., .indent = " ", .printer = print) {
 
 #' Better printing of R packages
 #'
+#' This package provides better printing of R packages.
+#'
 #' @docType package
 #' @name printr
 NULL

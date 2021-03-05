@@ -8,14 +8,14 @@ test_that("graph_from_edgelist works", {
   g <- sample_gnp(50, 5/50)
   el <- as_edgelist(g)
   g2 <- graph_from_edgelist(el, dir=FALSE)
-  expect_that(graph.isomorphic(g, g2), is_true())
+  expect_true(graph.isomorphic(g, g2))
 
 ####
 
   g <- sample_gnp(50, 5/50, dir=TRUE)
   el <- as_edgelist(g)
   g2 <- graph_from_edgelist(el, dir=TRUE)
-  expect_that(graph.isomorphic(g, g2), is_true())
+  expect_true(graph.isomorphic(g, g2))
 
 ####
 
@@ -26,6 +26,6 @@ test_that("graph_from_edgelist works", {
   mode(el) <- "character"
   el[] <- n[el]
   g2 <- graph_from_edgelist(el, dir=TRUE)
-  expect_that(graph.isomorphic(g, g2), is_true())
+  expect_true(graph.isomorphic(g, g2))
 
 })

@@ -316,10 +316,12 @@ static void random_get_bytes(void *buf, size_t nbytes)
 #define LOCK_UN 2
 static int flock(int fd, int op)
 {
-    HANDLE h = (HANDLE) _get_osfhandle(fd);
+    intptr_t ret = _get_osfhandle(fd);
+    HANDLE h;
     OVERLAPPED offset;
-    if (h < 0)
+    if (ret == INVALID_HANDLE_VALUE)
 	return -1;
+    h = (HANDLE) ret;
     memset(&offset, 0, sizeof(offset));
     switch (op) {
     case LOCK_EX:

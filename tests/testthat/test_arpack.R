@@ -41,7 +41,7 @@ test_that("arpack works for non-symmetric matrices", {
                  .Dim = c(10L, 10L))
 
   f <- function(x, extra=NULL) A %*% x
-  res <- arpack(f, options=list(n=10, nev=3, ncv=7), sym=FALSE)
+  res <- arpack(f, options=list(n=10, nev=3, ncv=7, which="LM"), sym=FALSE)
   ## This is needed because they might return a different complex conjugate
   expect_that(abs(res$values/eigen(A)$values[1:3]), equals(c(1,1,1)))
   expect_that((res$values[1] * res$vectors[,1]) / (A %*% res$vectors[,1]),
@@ -52,7 +52,7 @@ test_that("arpack works for non-symmetric matrices", {
               equals(cbind(rep(1, nrow(A)))))
 
   f <- function(x, extra=NULL) A %*% x
-  res <- arpack(f, options=list(n=10, nev=4, ncv=9), sym=FALSE)
+  res <- arpack(f, options=list(n=10, nev=4, ncv=9, which="LM"), sym=FALSE)
   ## This is needed because they might return a different complex conjugate
   expect_that(abs(res$values/eigen(A)$values[1:4]), equals(rep(1, 4)))
   expect_that((res$values[1] * res$vectors[,1]) / (A %*% res$vectors[,1]),

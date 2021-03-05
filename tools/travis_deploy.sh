@@ -28,7 +28,7 @@ cd igraph
 git add -A .
 
 git config --global user.name "igraph builder robot"
-git config --global user.email "csardi.gabor@gmail.com"
+git config --global user.email "vincent@traag.net"
 git config --global push.default matching
 git remote set-branches --add origin ${branch}
 
@@ -39,5 +39,5 @@ python -c 'import os; print "https://" + os.environ["GH_TOKEN"] + ":@github.com"
 
 ## OK, ready to deploy
 
-git commit -q --allow-empty -m "$TRAVIS_COMMIT_MSG"
+git commit -q --allow-empty -m "${TRAVIS_COMMIT} - ${TRAVIS_COMMIT_MSG}"
 git push -q origin ${branch}
