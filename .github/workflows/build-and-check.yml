@@ -163,8 +163,8 @@ jobs:
 
     name: Deploy source R package to master branch
 
-    if: success() # && github.ref == 'refs/heads/dev'
-    needs: build_src_package
+    if: success() && github.ref == 'refs/heads/dev'
+    needs: R-CMD-check
 
     steps:
 
