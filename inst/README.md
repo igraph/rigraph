@@ -27,7 +27,7 @@ Additionally, the three system requirements of `glpk`, `libxml2` and `gmp` are
 not optional, but hard requirements. For version R > 4.0 you can install these
 thee using
 ```
-pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp`
+pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
 ```
 
 ## Documentation
