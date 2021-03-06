@@ -23,8 +23,6 @@
 # Community structure
 ###################################################################
 
-
-
 #' Functions to deal with the result of network community detection
 #'
 #' igraph community detection functions return their results as an object from
@@ -1088,6 +1086,45 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
   class(res) <- "communities"
   res
 }
+
+#' Community detection algorithm based on interacting fluids
+#'
+#' The algorithm detects communities based on the simple idea of
+#' several fluids interacting in a non-homogeneous environment
+#' (the graph topology), expanding and contracting based on their
+#' interaction and density.
+#'
+#' @param graph The input graph. The graph must be simple and connected.
+#'   Empty graphs are not supported as well as single vertex graphs.
+#'   Edge directions are ignored. Weights are not considered.
+#' @param no.of.communities The number of communities to be found. Must be
+#'   greater than 0 and fewer than number of vertices in the graph.
+#' @return \code{cluster_fluid_communities} returns a \code{\link{communities}}
+#' object, please see the \code{\link{communities}} manual page for details.
+#' @author Ferran Parés
+#' @seealso See \code{\link{communities}} for extracting the membership,
+#' modularity scores, etc. from the results.
+#'
+#' Other community detection algorithms: \code{\link{cluster_walktrap}},
+#' \code{\link{cluster_spinglass}},
+#' \code{\link{cluster_leading_eigen}},
+#' \code{\link{cluster_edge_betweenness}},
+#' \code{\link{cluster_fast_greedy}},
+#' \code{\link{cluster_label_prop}}
+#' \code{\link{cluster_louvain}},
+#' \code{\link{cluster_leiden}}
+#' @references Parés F, Gasulla DG, et. al. (2018) Fluid Communities: A Competitive,
+#' Scalable and Diverse Community Detection Algorithm. In: Complex Networks
+#' &amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
+#' International Conference on Complex Networks and Their Applications),
+#' Springer, vol 689, p 229, doi: 10.1007/978-3-319-72150-7_19
+#' @export
+#' @keywords graphs
+#' @examples
+#' g <- graph.famous("Zachary")
+#' comms <- cluster_fluid_communities(g, 2)
+
+cluster_fluid_communities <- cluster_fluid_communities
 
 #' Community strucure via short random walks
 #'

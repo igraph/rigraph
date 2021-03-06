@@ -948,6 +948,19 @@ similarity.invlogweighted <- function(graph, vids=V(graph), mode=c("all", "out",
 }
 
 #' @export
+cluster_fluid_communities <- function(graph, no.of.communities) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  no.of.communities <- as.integer(no.of.communities)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_community_fluid_communities, graph, no.of.communities)
+
+  res
+}
+
+#' @export
 sample_hrg <- function(hrg) {
   # Argument checks
   if (is.null(hrg)) { 
