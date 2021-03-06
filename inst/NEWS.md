@@ -4,6 +4,7 @@ The C core is updated to 0.8.5, fixing a range of bugs and introducing a number 
 
 Added:
 - cluster_leiden added (#399).
+- cluster_fluid_communties added (#454)
 
 Fixed:
 - Betweenness normalisation no longer overflows (#442).
