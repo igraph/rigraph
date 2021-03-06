@@ -89,6 +89,7 @@ extern SEXP R_igraph_community_leading_eigenvector(SEXP, SEXP, SEXP, SEXP, SEXP,
 extern SEXP R_igraph_community_multilevel(SEXP, SEXP);
 extern SEXP R_igraph_community_optimal_modularity(SEXP, SEXP);
 extern SEXP R_igraph_community_leiden(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_community_fluid_communities(SEXP, SEXP);
 extern SEXP R_igraph_community_to_membership2(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_compare_communities(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_complementer(SEXP, SEXP);
@@ -452,6 +453,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_multilevel",                       (DL_FUNC) &R_igraph_community_multilevel,                        2},
     {"R_igraph_community_optimal_modularity",               (DL_FUNC) &R_igraph_community_optimal_modularity,                2},
     {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            7},
+    {"R_igraph_community_fluid_communities",                (DL_FUNC) &R_igraph_community_fluid_communities,                 2},
     {"R_igraph_community_to_membership2",                   (DL_FUNC) &R_igraph_community_to_membership2,                    3},
     {"R_igraph_compare_communities",                        (DL_FUNC) &R_igraph_compare_communities,                         3},
     {"R_igraph_complementer",                               (DL_FUNC) &R_igraph_complementer,                                2},

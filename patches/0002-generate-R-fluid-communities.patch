@@ -1,0 +1,14 @@
+diff --git a/interfaces/functions.def b/interfaces/functions.def
+index 324a7f5b0..e40195dc0 100644
+--- a/cigraph/interfaces/functions.def
++++ b/cigraph/interfaces/functions.def
+@@ -1358,8 +1358,7 @@ igraph_community_leading_eigenvector:
+ igraph_community_fluid_communities:
+         PARAMS: GRAPH graph, INTEGER no_of_communities, \
+ 		            OUT VECTOR membership, OUT REALPTR modularity
+-        NAME-R: cluster_fluid_com
+-        IGNORE: RR
++        NAME-R: cluster_fluid_communities
+
+ igraph_community_label_propagation:
+         PARAMS: GRAPH graph, OUT VECTOR membership, EDGEWEIGHTS weights=NULL, \
