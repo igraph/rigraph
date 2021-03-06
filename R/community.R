@@ -23,8 +23,6 @@
 # Community structure
 ###################################################################
 
-#' @include auto.R
-
 #' Functions to deal with the result of network community detection
 #'
 #' igraph community detection functions return their results as an object from
