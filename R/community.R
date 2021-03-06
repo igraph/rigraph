@@ -1087,7 +1087,9 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
   res
 }
 
-#' Community detection algorithm based on the simple idea of
+#' Community detection algorithm based on interacting fluids
+#'
+#' The algorithm detects communities based on the simple idea of
 #' several fluids interacting in a non-homogeneous environment
 #' (the graph topology), expanding and contracting based on their
 #' interaction and density.
