@@ -159,7 +159,7 @@ graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
     if (ncol(vertices) > 1) {
       for (i in 2:ncol(vertices)) {
         newval <- vertices[,i]
-        if (class(newval) == "factor") {
+        if (inherits(newval, "factor")) {
           newval <- as.character(newval)
         }
         attrs[[ names(vertices)[i] ]] <- newval
@@ -180,7 +180,7 @@ graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
   if (ncol(d) > 2) {
     for (i in 3:ncol(d)) {
       newval <- d[,i]
-      if (class(newval) == "factor") {
+      if (inherits(newval, "factor")) {
         newval <- as.character(newval)
       }
       attrs[[ names(d)[i] ]] <- newval
