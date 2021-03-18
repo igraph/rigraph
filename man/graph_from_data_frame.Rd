@@ -44,7 +44,7 @@ the (symbolic) edge list and edge/vertex attributes.
 }
 \details{
 \code{graph_from_data_frame} creates igraph graphs from one or two data frames.
-It has two modes of operatation, depending whether the \code{vertices}
+It has two modes of operation, depending whether the \code{vertices}
 argument is \code{NULL} or not.
 
 If \code{vertices} is \code{NULL}, then the first two columns of \code{d}
