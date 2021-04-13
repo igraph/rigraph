@@ -167,6 +167,7 @@ OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
 		sed 's/\.[^\.][^\.]*$$/.o/' | 			 	 \
 		sed 's/^src\///' | sed 's/^tools\/arpack\///' |		 \
 		sed 's/^tools\///' | 					 \
+		sed 's/^vendor\///' | 					 \
 		sed 's/^optional\///') rinterface.o rinterface_extra.o lazyeval.o
 
 object_files: force
