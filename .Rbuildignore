@@ -19,3 +19,4 @@
 ^src/igraph.so.dSYM$
 ^.vscode$
 ^patches$
+^vendor$
