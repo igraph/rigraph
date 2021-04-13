@@ -70,7 +70,7 @@ AC_CHECK_MEMBER([struct sockaddr.sa_len],
 
 graphml_support=yes
 AC_ARG_ENABLE(graphml,
-              AC_HELP_STRING([--disable-graphml], [Disable support for GraphML format]),
+              AS_HELP_STRING([--disable-graphml], [Disable support for GraphML format]),
               [graphml_support=$enableval], [graphml_support=yes])
 
 HAVE_LIBXML=0
@@ -109,7 +109,7 @@ AC_LANG_PUSH([C++])
 HAVE_GMP=0
 GMP_LIBS=""
 gmp_support=no
-AC_ARG_ENABLE(gmp, AC_HELP_STRING([--disable-gmp], [Compile without the GMP library]))
+AC_ARG_ENABLE(gmp, AS_HELP_STRING([--disable-gmp], [Compile without the GMP library]))
 if test "x$enable_gmp" != "xno"; then
   AC_CHECK_LIB([gmp], [__gmpz_add], [
     AC_CHECK_HEADER([gmp.h], [
@@ -126,7 +126,7 @@ AC_LANG_POP([C++])
 
 glpk_support=no
 AC_ARG_ENABLE(glpk,
-              AC_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
+              AS_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
               [glpk_support=$enableval], [glpk_support=yes])
 
 HAVE_GLPK=0
