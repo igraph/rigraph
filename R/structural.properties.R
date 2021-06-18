@@ -2411,7 +2411,7 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 
 #' Closeness centrality of vertices
 #' 
-#' Cloness centrality measures how many steps is required to access every other
+#' Closeness centrality measures how many steps is required to access every other
 #' vertex from a given vertex.
 #' 
 #' The closeness centrality of a vertex is defined by the inverse of the
