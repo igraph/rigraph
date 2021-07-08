@@ -310,6 +310,7 @@
   }
 }
 
+
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
