@@ -1,0 +1,9 @@
+#! /bin/sh
+
+rm -f src/config.h src/Makevars
+touch src/config.h
+
+# Object files cause problems on Github Actions where they get included
+# in the source package that is re-generated from the original source, so
+# we remove them here in the cleanup step
+find src -name *.o | xargs rm
