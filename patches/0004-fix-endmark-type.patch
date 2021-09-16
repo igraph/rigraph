@@ -1,0 +1,26 @@
+diff --git a/src/include/igraph_vector_pmt.h b/src/include/igraph_vector_pmt.h
+index 3bf2a4da65..8d7bdd75dc 100644
+--- a/src/include/igraph_vector_pmt.h
++++ b/src/include/igraph_vector_pmt.h
+@@ -238,7 +238,7 @@ DECLDIR int igraph_vector_complex_create_polar(igraph_vector_complex_t *v,
+ 
+ DECLDIR int FUNCTION(igraph_vector, init_real)(TYPE(igraph_vector)*v, int no, ...);
+ DECLDIR int FUNCTION(igraph_vector, init_int)(TYPE(igraph_vector)*v, int no, ...);
+-DECLDIR int FUNCTION(igraph_vector, init_real_end)(TYPE(igraph_vector)*v, BASE endmark, ...);
++DECLDIR int FUNCTION(igraph_vector, init_real_end)(TYPE(igraph_vector)*v, double endmark, ...);
+ DECLDIR int FUNCTION(igraph_vector, init_int_end)(TYPE(igraph_vector)*v, int endmark, ...);
+ 
+ DECLDIR int FUNCTION(igraph_vector, move_interval)(TYPE(igraph_vector) *v,
+diff --git a/src/vector.pmt b/src/vector.pmt
+index 673d66aa64..efa871fada 100644
+--- a/src/vector.pmt
++++ b/src/vector.pmt
+@@ -241,7 +241,7 @@ int FUNCTION(igraph_vector, init_real)(TYPE(igraph_vector) *v, int no, ...) {
+  */
+ 
+ int FUNCTION(igraph_vector, init_real_end)(TYPE(igraph_vector) *v,
+-        BASE endmark, ...) {
++        double endmark, ...) {
+     int i = 0, n = 0;
+     va_list ap;
+ 
