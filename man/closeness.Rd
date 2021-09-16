@@ -51,7 +51,7 @@ Numeric vector with the closeness values of all the vertices in
 \code{v}.
 }
 \description{
-Cloness centrality measures how many steps is required to access every other
+Closeness centrality measures how many steps is required to access every other
 vertex from a given vertex.
 }
 \details{

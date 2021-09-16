@@ -323,7 +323,6 @@ isomorphic <- function(graph1, graph2, method = c("auto", "direct",
 
 #' @export
 #' @rdname isomorphic
-#' @inheritParams isomorphic
 
 is_isomorphic_to <- isomorphic
 
@@ -431,7 +430,6 @@ subgraph_isomorphic <- function(pattern, target,
 
 #' @export
 #' @rdname subgraph_isomorphic
-#' @inheritParams subgraph_isomorphic
 
 is_subgraph_isomorphic_to <- subgraph_isomorphic
 

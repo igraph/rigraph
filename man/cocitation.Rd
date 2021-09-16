@@ -21,7 +21,7 @@ or bibliographic coupling for vertices \code{v[i]} and \code{j}.
 }
 \description{
 Two vertices are cocited if there is another vertex citing both of them.
-\code{cocitation} siply counts how many types two vertices are cocited. The
+\code{cocitation} simply counts how many types two vertices are cocited. The
 bibliographic coupling of two vertices is the number of other vertices they
 both cite, \code{bibcoupling} calculates this.
 }
