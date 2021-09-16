@@ -29,5 +29,5 @@ Suggests:
 License: GPL (>= 2)
 URL: http://igraph.org
 SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
-BugReports: https://github.com/igraph/igraph/issues
+BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
