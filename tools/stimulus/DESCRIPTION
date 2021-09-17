@@ -27,7 +27,7 @@ Suggests:
     withr,
     digest
 License: GPL (>= 2)
-URL: http://igraph.org
+URL: https://igraph.org
 SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
 BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
