@@ -73,7 +73,7 @@ src/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 
 # R source and doc files
 
-RSRC := $(shell git ls-files R man inst demo NEWS configure.win)
+RSRC := $(shell git ls-files R man inst demo NEWS cleanup.win configure.win)
 
 # ARPACK Fortran sources
 
