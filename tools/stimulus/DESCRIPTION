@@ -2,7 +2,7 @@ Package: igraph
 Version: @@@@@@@@@@ missing @@@@@@@@@@
 Title:  Network Analysis and Visualization
 Author: See AUTHORS file.
-Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
+Maintainer: Tamás Nepusz <ntamas@gmail.com>
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
   and regular graphs, graph visualization, centrality methods and much more.
