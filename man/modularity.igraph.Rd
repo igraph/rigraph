@@ -25,7 +25,7 @@ vector of the community structure.}
 For \code{modularity} a numeric scalar, the modularity score of the
 given configuration.
 
-For \code{modularity_matrix} a numeic square matrix, its order is the number of
+For \code{modularity_matrix} a numeric square matrix, its order is the number of
 vertices in the graph.
 }
 \description{

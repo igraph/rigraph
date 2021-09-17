@@ -182,7 +182,7 @@ NULL
 #'   \code{\link{write_graph}} for details.
 #'
 #' @section Further information:
-#'   The igraph homepage is at \url{http://igraph.org}.
+#'   The igraph homepage is at \url{https://igraph.org}.
 #'   See especially the documentation section. Join the igraph-help mailing
 #'   list if you have questions or comments.
 
