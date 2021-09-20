@@ -68,7 +68,7 @@
 #' @seealso \code{\link{ivs}}
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
-#' in Sparse Graphs in Near-optimal Time.  \url{http://arxiv.org/abs/1006.5440}
+#' in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 #' @export
 #' @keywords graphs
 #' @examples
