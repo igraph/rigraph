@@ -59,11 +59,11 @@ communities(imc)
 \references{
 The original paper: M. Rosvall and C. T. Bergstrom, Maps of
 information flow reveal community structure in complex networks, \emph{PNAS}
-105, 1118 (2008) \doi{10.1073/pnas.0706851105}, \url{http://arxiv.org/abs/0707.0609}
+105, 1118 (2008) \doi{10.1073/pnas.0706851105}, \url{https://arxiv.org/abs/0707.0609}
 
 A more detailed paper: M. Rosvall, D. Axelsson, and C. T. Bergstrom, The map
 equation, \emph{Eur. Phys. J. Special Topics} 178, 13 (2009).
-\doi{10.1140/epjst/e2010-01179-1}, \url{http://arxiv.org/abs/0906.1405}.
+\doi{10.1140/epjst/e2010-01179-1}, \url{https://arxiv.org/abs/0906.1405}.
 }
 \seealso{
 Other community finding methods and \code{\link{communities}}.

@@ -46,7 +46,7 @@ tend to stay in the same community.
 \details{
 This function is the implementation of the Walktrap community finding
 algorithm, see Pascal Pons, Matthieu Latapy: Computing communities in large
-networks using random walks, http://arxiv.org/abs/physics/0512106
+networks using random walks, https://arxiv.org/abs/physics/0512106
 }
 \examples{
 
@@ -57,7 +57,7 @@ cluster_walktrap(g)
 }
 \references{
 Pascal Pons, Matthieu Latapy: Computing communities in large
-networks using random walks, http://arxiv.org/abs/physics/0512106
+networks using random walks, https://arxiv.org/abs/physics/0512106
 }
 \seealso{
 See \code{\link{communities}} on getting the actual membership

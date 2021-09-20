@@ -44,7 +44,7 @@ g2
 \references{
 Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 graph matching for correlated Erdos-Renyi graphs.
-\url{http://arxiv.org/abs/1304.7844}
+\url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
 \code{\link{sample_correlated_gnp_pair}},

@@ -28,7 +28,7 @@ modularity measure and a hierarchial approach.
 This function implements the multi-level modularity optimization algorithm
 for finding community structure, see VD Blondel, J-L Guillaume, R Lambiotte
 and E Lefebvre: Fast unfolding of community hierarchies in large networks,
-\url{http://arxiv.org/abs/arXiv:0803.0476} for the details.
+\url{https://arxiv.org/abs/0803.0476} for the details.
 
 It is based on the modularity measure and a hierarchial approach.
 Initially, each vertex is assigned to a community on its own. In every step,

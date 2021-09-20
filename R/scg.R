@@ -56,11 +56,11 @@
 #' 
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
 #' in Oscillator Networks. \emph{Physical Review Letters}, \bold{100}(17),
-#' 2008.  \url{http://arxiv.org/abs/0708.2055}
+#' 2008.  \url{https://arxiv.org/abs/0708.2055}
 #' 
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
 #' Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
-#' \url{http://arxiv.org/abs/0706.0812}
+#' \url{https://arxiv.org/abs/0706.0812}
 #' @keywords graphs
 
 NULL

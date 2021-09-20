@@ -14,7 +14,7 @@ currently.}
 A character vector of RGB color codes.
 }
 \description{
-This is the \sQuote{PuOr} palette from \url{http://colorbrewer2.org}.
+This is the \sQuote{PuOr} palette from \url{https://colorbrewer2.org/}.
 It has at most eleven colors.
 }
 \details{

@@ -135,13 +135,13 @@ community of the the given vertex. See also the examples below.
 \references{
 J. Reichardt and S. Bornholdt: Statistical Mechanics of
 Community Detection, \emph{Phys. Rev. E}, 74, 016110 (2006),
-\url{http://arxiv.org/abs/cond-mat/0603718}
+\url{https://arxiv.org/abs/cond-mat/0603718}
 
 M. E. J. Newman and M. Girvan: Finding and evaluating community structure in
 networks, \emph{Phys. Rev. E} 69, 026113 (2004)
 
 V.A. Traag and Jeroen Bruggeman: Community detection in networks with
-positive and negative links, \url{http://arxiv.org/abs/0811.2329} (2008).
+positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 }
 \seealso{
 \code{\link{communities}}, \code{\link{components}}

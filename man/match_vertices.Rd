@@ -65,10 +65,10 @@ See references for further details.
 Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
 G., Harley, E. T., Fishkind, D. E.,Vogelstein, R. J., Priebe, C. E. (2011).
 Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.
-Online: \url{http://arxiv.org/abs/1112.5507}
+Online: \url{https://arxiv.org/abs/1112.5507}
 
 Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
-Online: \url{http://arxiv.org/abs/1209.0367}
+Online: \url{https://arxiv.org/abs/1209.0367}
 }
 \seealso{
 \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
