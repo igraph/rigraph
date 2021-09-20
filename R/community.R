@@ -447,17 +447,20 @@ modularity.communities <- function(x, ...) {
 #' @aliases mod.matrix
 #' @export
 
-modularity_matrix <- function(graph, weights=NULL) {
+modularity_matrix <- function(graph, membership, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!missing(membership)) {
+    warning("The membership argument is deprecated; modularity_matrix does not need it")
+  }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-  weights <- E(graph)$weight
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
-  weights <- as.numeric(weights)
+    weights <- as.numeric(weights)
   } else {
-  weights <- NULL
+    weights <- NULL
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )

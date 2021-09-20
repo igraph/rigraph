@@ -1,9 +1,9 @@
 
 pause <- function() {}
 
-### Download the Zachary Karate Club network from Nexus
+### Construct the Zachary Karate Club network
 
-karate <- nexus.get("karate")
+karate <- make_graph("zachary")
 karate
 
 pause()

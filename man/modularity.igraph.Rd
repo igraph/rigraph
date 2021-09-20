@@ -9,7 +9,7 @@
 \usage{
 \method{modularity}{igraph}(x, membership, weights = NULL, ...)
 
-modularity_matrix(graph, weights = NULL)
+modularity_matrix(graph, membership, weights = NULL)
 }
 \arguments{
 \item{x, graph}{The input graph.}
