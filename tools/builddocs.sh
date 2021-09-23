@@ -11,6 +11,7 @@ rsync -avq --exclude=cigraph --exclude=.git --exclude revdep . ${tempdir}/
     Rscript -e 'library(devtools) ; document()'
 )
 
+cp doc/*.Rd man/
 cp ${tempdir}/DESCRIPTION .
 cp ${tempdir}/NAMESPACE .
 cp ${tempdir}/man/* man/
