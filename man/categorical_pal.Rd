@@ -15,7 +15,7 @@ A character vector of RGB color codes.
 }
 \description{
 This is a color blind friendly palette from
-\url{https://jfly.iam.u-tokyo.ac.jp/color/}. It has 8 colors.
+\url{https://jfly.uni-koeln.de/color/}. It has 8 colors.
 }
 \details{
 This is the suggested palette for visualizations where vertex colors

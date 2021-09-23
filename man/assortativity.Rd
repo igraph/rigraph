@@ -96,7 +96,7 @@ M. E. J. Newman: Mixing patterns in networks, \emph{Phys. Rev.
 E} 67, 026126 (2003) \url{https://arxiv.org/abs/cond-mat/0209450}
 
 M. E. J. Newman: Assortative mixing in networks, \emph{Phys. Rev. Lett.} 89,
-208701 (2002) \url{https://arxiv.org/abs/cond-mat/0205405/}
+208701 (2002) \url{https://arxiv.org/abs/cond-mat/0205405}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
