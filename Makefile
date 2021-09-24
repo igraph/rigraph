@@ -197,6 +197,21 @@ igraph_$(VERSION).tar.gz: patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	Rscript -e 'devtools::build(path = ".")'
 #############
 
-.PHONY: all igraph force
+clean:
+	@rm -f  DESCRIPTION
+	@rm -f  NAMESPACE
+	@rm -f  R/auto.R
+	@rm -rf autom4te.cache/
+	@rm -f  config.log
+	@rm -f  config.status
+	@rm -f  configure
+	@rm -f  igraph_*.tar.gz
+	@rm -rf man/*.Rd
+	@rm -f  object_files
+	@rm -rf src/
+	@rm -rf version_number
+	@rm -f  configure.ac
+
+.PHONY: all igraph force clean
 
 .NOTPARALLEL:
