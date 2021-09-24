@@ -211,9 +211,9 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
 # Internal function to quickly convert integer vectors to igraph.vs
 # for use after c code, when NA and bounds checking is unnecessary
 unsafe_create_vs <- function(graph, idx, verts = NULL){
-  if(is.null(verts))
+  if (is.null(verts)) {
     verts <- V(graph)
-
+  }
   res <- simple_vs_index(verts, idx, na_ok = TRUE)
   add_vses_graph_ref(res, graph)  
 }
@@ -317,7 +317,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
-  if (!(na_ok | !any(is.na(res)))) stop('Unknown vertex selected')
+  if (!na_ok && any(is.na(res))) stop('Unknown vertex selected')
   class(res) <- "igraph.vs"
   res
 }
