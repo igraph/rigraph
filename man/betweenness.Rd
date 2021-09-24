@@ -55,8 +55,10 @@ default), then big integers are not used.}
 \item{v}{The vertices for which the vertex betweenness will be calculated.}
 
 \item{normalized}{Logical scalar, whether to normalize the betweenness
-scores. If \code{TRUE}, then the results are normalized according to
-\deqn{B^n=\frac{2B}{n^2-3n+2}}{Bnorm=2*B/(n*n-3*n+2)}, where
+scores. If \code{TRUE}, then the results are normalized by the number of ordered
+or unordered vertex pairs in directed and undirected graphs, respectively.
+In an undirected graph,            
+\deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
 \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 is the number of vertices in the graph.}
 
