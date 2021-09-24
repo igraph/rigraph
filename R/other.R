@@ -92,7 +92,25 @@ sample_seq <- function(low, high, length) {
         as.numeric(length))
 }
 
-handle_vertex_type_arg <- function(types, graph) {
+#' Common handler for vertex type arguments in igraph functions
+#'
+#' This function takes the \code{types} and \code{graph} arguments from a
+#' public igraph function call and validates the vertex type vector.
+#'
+#' When the provided vertex types are NULL and the graph has a \code{types}
+#' vertex attribute, then the value of this vertex attribute will be used as
+#' vertex types. Non-logical vertex type vectors are coerced into logical
+#' vectors after printing a warning.
+#'
+#' @param types the vertex types
+#' @param graph the graph
+#' @param required whether the graph has to be bipartite
+#' @return A logical vector representing the resolved vertex type for each
+#' vertex in the graph
+#' @author Tamas Nepusz \email{ntamas@gmail.com}
+#' @keywords internal
+#'
+handle_vertex_type_arg <- function(types, graph, required = T) {
   if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
     types <- V(graph)$type 
   } 
@@ -104,7 +122,8 @@ handle_vertex_type_arg <- function(types, graph) {
     if (any(is.na(types))) {
       stop("`NA' is not allowed in vertex types")
     }
-  } else { 
+  }
+  if (is.null(types) && required) {
     stop("Not a bipartite graph, supply `types' argument") 
   }
   return(types)

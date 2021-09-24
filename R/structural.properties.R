@@ -2682,7 +2682,7 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 is_matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  types <- handle_vertex_type_arg(types, graph)
+  types <- handle_vertex_type_arg(types, graph, required=F)
   matching <- as.igraph.vs(graph, matching, na.ok=TRUE)-1
   matching[ is.na(matching) ] <- -1
 
@@ -2699,7 +2699,7 @@ is_matching <- function(graph, matching, types=NULL) {
 is_max_matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  types <- handle_vertex_type_arg(types, graph)
+  types <- handle_vertex_type_arg(types, graph, required=F)
   matching <- as.igraph.vs(graph, matching, na.ok=TRUE)-1
   matching[ is.na(matching) ] <- -1
 
@@ -2717,7 +2717,7 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
                                        eps=.Machine$double.eps) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  types <- handle_vertex_type_arg(types, graph)
+  types <- handle_vertex_type_arg(types, graph, required=F)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
