@@ -89,3 +89,13 @@ test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
   expect_that(bipartite_projection(g),
           throws_error("Non-bipartite edge found in bipartite projection"))
 })
+
+test_that("bipartite_projection prints a warning if the type attribute is non-logical (#476)", {
+
+  library(igraph)
+  g <- make_full_bipartite_graph(10, 5)
+  V(g)$type <- as.numeric(V(g)$type)
+  expect_warning(bipartite_projection(g), "logical")
+  expect_warning(bipartite_projection_size(g), "logical")
+})
+

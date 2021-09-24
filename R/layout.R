@@ -291,20 +291,7 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
 
   ## Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
-    types <- V(graph)$type
-  }
-  if (!is.null(types)) {
-    if (!is.logical(types)) {
-      warning("vertex types converted to logical")
-    }
-    types <- as.logical(types)
-    if (any(is.na(types))) {
-      stop("`NA' is not allowed in vertex types")
-    }
-  } else {
-    stop("Not a bipartite graph, supply `types' argument")
-  }
+  types <- handle_vertex_type_arg(types, graph)
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
   maxiter <- as.integer(maxiter)
