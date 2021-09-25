@@ -173,7 +173,7 @@ The biggest changes in the release are
   used as `rep()`.
 - Better default colors, color palettes for vertices.
 - Random walk on a graph: `random_walk()`
-- `adjacenct_vertices()` and `incident_edges()` functions,
+- `adjacent_vertices()` and `incident_edges()` functions,
   they are vectorized, as opposed to `neighhors()` and `incident()`.
 - Convert a graph to a _long_ data frame with `as_long_data_frame()`.
 
@@ -331,7 +331,7 @@ and OSX), are all built.
 - Dyad census detects integer overflow now and gives a warning.
 - Function `add.edges()` does not allow now zeros in the vertex set.
 - Added a function to count the number of adjacent triangles:
-  `adjacenct.triangles()`.
+  `adjacent.triangles()`.
 - Added `graph.eigen()` function, eigenproblems on adjacency matrices.
 - Added some workarounds for functions that create a lot of
   graphs, `decompose.graph()` and `graph.neighborhood()` use it.

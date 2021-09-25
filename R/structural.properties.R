@@ -2592,7 +2592,7 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 #' Graph matching
 #' 
 #' A matching in a graph means the selection of a set of edges that are
-#' pairwise non-adjacenct, i.e. they have no common incident vertices. A
+#' pairwise non-adjacent, i.e. they have no common incident vertices. A
 #' matching is maximal if it is not a proper subset of any other matching.
 #' 
 #' \code{is_matching} checks a matching vector and verifies whether its

@@ -1,5 +1,5 @@
 
-context("graph.adjancency")
+context("graph.adjacency")
 
 test_that("graph_from_adjacency_matrix works", {
 
@@ -156,7 +156,7 @@ test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
 
 })
 
-test_that("graph.adjacenct empty graph bug is fixed", {
+test_that("graph_from_adjacency_matrix empty graph bug is fixed", {
 
   library(Matrix)
   library(igraph)
