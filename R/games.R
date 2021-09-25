@@ -524,9 +524,8 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' network containing a single vertex (and no edges) in the first time step.
 #' Then in each time step (starting with the second) a new vertex is added and
 #' it initiates a number of edges to the old vertices in the network. The
-#' probability that an old vertex is connected to is proportional to \deqn{P[i]
-#' \sim (c\cdot k_i^\alpha+a)(d\cdot l_i^\beta+b)\cdot }{% P[i] ~ (c k[i]^alpha
-#' + a) (d l[i]^beta + a)}
+#' probability that an old vertex is connected to is proportional to
+#' \deqn{P[i] \sim (c\cdot k_i^\alpha+a)(d\cdot l_i^\beta+b)}.
 #' 
 #' Here \eqn{k_i}{k[i]} is the in-degree of vertex \eqn{i} in the current time
 #' step and \eqn{l_i}{l[i]} is the age of vertex \eqn{i}. The age is simply
