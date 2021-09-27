@@ -9,6 +9,13 @@ test_that("make_graph works", {
 
 })
 
+test_that("make_graph accepts an empty vector or NULL", {
+
+  g <- make_graph(c())
+  g2 <- make_empty_graph(n = 0)
+  expect_true(identical_graphs(g, g2))
+})
+
 test_that("make_graph works for numeric edges and isolates", {
 
   g <- make_graph(1:10, n = 20)

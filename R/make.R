@@ -557,6 +557,9 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
         on.exit( .Call(C_R_igraph_finalizer) )
+        if (missing(n) && (is.null(edges) || length(edges) == 0)) {
+          n <- 0
+        }
         .Call(C_R_igraph_create, as.numeric(edges)-1, as.numeric(n),
               as.logical(directed))
       }
