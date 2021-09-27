@@ -1,3 +1,7 @@
+########################################################
+# Configuration variables
+
+PYTHON ?= python3
 
 all: igraph
 
@@ -112,7 +116,7 @@ src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
 		tools/stimulus/types-RC.def \
 		$(top_srcdir)/tools/stimulus.py
-	$(top_srcdir)/tools/stimulus.py \
+	$(PYTHON) $(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
@@ -122,7 +126,7 @@ src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
 		tools/stimulus/types-RR.def \
 		$(top_srcdir)/tools/stimulus.py
-	$(top_srcdir)/tools/stimulus.py \
+	$(PYTHON) $(top_srcdir)/tools/stimulus.py \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
