@@ -9,6 +9,19 @@ test_that("make_graph works", {
 
 })
 
+test_that("make_graph accepts an empty vector or NULL", {
+
+  g <- make_graph(c())
+  g2 <- make_empty_graph(n = 0)
+  expect_true(identical_graphs(g, g2))
+
+  g <- make_graph(NULL, n=NULL)
+  expect_true(identical_graphs(g, g2))
+
+  g <- make_graph(edges=c(), n=NULL)
+  expect_true(identical_graphs(g, g2))
+})
+
 test_that("make_graph works for numeric edges and isolates", {
 
   g <- make_graph(1:10, n = 20)
@@ -25,7 +38,7 @@ test_that("make_graph handles names", {
 
 })
 
-test_that("make_graph hadles names and isolates", {
+test_that("make_graph handles names and isolates", {
 
   g <- make_graph(letters[1:10], isolates = letters[11:20])
   g2 <- make_empty_graph() + vertices(letters[1:20]) + edges(letters[1:10])
@@ -53,5 +66,12 @@ test_that("a make_graph bug is fixed", {
 
   expect_equal(vcount(g), 3)
   expect_equal(ecount(g), 1)
+
+})
+
+test_that("make_empty_graph gives an error for invalid arguments", {
+
+  expect_error(make_empty_graph(NULL))
+  expect_error(make_empty_graph("spam"))
 
 })

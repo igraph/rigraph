@@ -557,6 +557,9 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
         on.exit( .Call(C_R_igraph_finalizer) )
+        if (missing(n) && (is.null(edges) || length(edges) == 0)) {
+          n <- 0
+        }
         .Call(C_R_igraph_create, as.numeric(edges)-1, as.numeric(n),
               as.logical(directed))
       }
@@ -649,7 +652,15 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 
 make_empty_graph <- function(n=0, directed=TRUE) {
   # Argument checks
-  n <- as.integer(n)
+  if (is.null(n)) {
+    stop("number of vertices must be an integer")
+  }
+
+  n <- suppressWarnings(as.integer(n))
+  if (is.na(n)) {
+    stop("number of vertices must be an integer")
+  }
+
   directed <- as.logical(directed)
 
   on.exit( .Call(C_R_igraph_finalizer) )
