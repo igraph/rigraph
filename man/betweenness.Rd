@@ -80,12 +80,12 @@ The vertex and edge betweenness are (roughly) defined by the number of
 geodesics (shortest paths) going through a vertex or an edge.
 }
 \details{
-The vertex betweenness of vertex \eqn{v}{\code{v}} is defined by
+The vertex betweenness of vertex \code{v} is defined by
 
 \deqn{\sum_{i\ne j, i\ne v, j\ne v} g_{ivj}/g_{ij}}{sum( g_ivj / g_ij,
 i!=j,i!=v,j!=v)}
 
-The edge betweenness of edge \eqn{e}{\code{e}} is defined by
+The edge betweenness of edge \code{e} is defined by
 
 \deqn{\sum_{i\ne j} g{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 

@@ -61,9 +61,9 @@ graph:
 
 \deqn{\frac{1}{\sum_{i\ne v} d_vi}}{1/sum( d(v,i), i != v)}
 
-If there is no (directed) path between vertex \eqn{v}{\code{v}} and
-\eqn{i}{\code{i}} then the total number of vertices is used in the formula
-instead of the path length.
+If there is no (directed) path between vertex \code{v} and \code{i}, then
+the total number of vertices is used in the formula instead of the path
+length.
 
 \code{estimate_closeness} only considers paths of length \code{cutoff} or
 smaller, this can be run for larger graphs, as the running time is not
