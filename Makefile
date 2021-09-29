@@ -2,6 +2,7 @@
 # Configuration variables
 
 PYTHON ?= python3
+PYVENV ?= .venv
 
 all: igraph
 
@@ -54,6 +55,15 @@ LEX=flex
 %.c: %.l
 	$(LEX) $<
 	mv -f lex.yy.c $@
+
+# Create Python virtualenv for Stimulus
+
+venv: $(PYVENV)/stamp
+
+$(PYVENV)/stamp: tools/stimulus-requirements.txt
+	$(PYTHON) -m venv $(PYVENV)
+	$(PYVENV)/bin/pip install -r $<
+	touch $(PYVENV)/.stamp
 
 # Apply possible patches
 
@@ -114,9 +124,8 @@ $(RAY2): src/%: vendor/%
 
 src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
-		tools/stimulus/types-RC.def \
-		$(top_srcdir)/tools/stimulus.py
-	$(PYTHON) $(top_srcdir)/tools/stimulus.py \
+		tools/stimulus/types-RC.def
+	$(PYVENV)/bin/stimulus \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
@@ -124,9 +133,8 @@ src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
            -l RC
 
 R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
-		tools/stimulus/types-RR.def \
-		$(top_srcdir)/tools/stimulus.py
-	$(PYTHON) $(top_srcdir)/tools/stimulus.py \
+		tools/stimulus/types-RR.def
+	$(PYVENV)/bin/stimulus \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
@@ -191,7 +199,7 @@ src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
 
 igraph: igraph_$(VERSION).tar.gz
 
-igraph_$(VERSION).tar.gz: patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
+igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 			  $(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
 	rm -f src/config.h
 	rm -f src/Makevars
@@ -215,6 +223,9 @@ clean:
 	@rm -rf src/
 	@rm -rf version_number
 	@rm -f  configure.ac
+
+distclean: clean
+	@rm -rf $(PYVENV)
 
 .PHONY: all igraph force clean
 
