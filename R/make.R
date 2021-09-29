@@ -1015,6 +1015,11 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                           nei = 1, directed = FALSE, mutual = FALSE,
                           circular=FALSE) {
 
+  if (is.numeric(length) && length != floor(length)) {
+    warning("length was rounded to the nearest integer")
+    length <- round(length)
+  }
+
   if (is.null(dimvector)) {
     dimvector <- rep(length, dim)
   }
