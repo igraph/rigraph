@@ -7,7 +7,22 @@ Added:
 - cluster_fluid_communties added (#454)
 
 Fixed:
+- `make_lattice()` correctly rounds `length` to the nearest integer while
+  printing a warning (#115).
+- `make_empty_graph(NULL)` now prints an error instead of producing an
+  invalid graph (#404).
+- `make_graph(c())` now produces an empty graph instead of printing a
+  misleading error message (#431).
+- The `types` argument of functions related to bipartite graphs now prints
+  a warning when the types are coerced to booleans (#476).
 - Betweenness normalisation no longer overflows (#442).
+
+Deprecated:
+- The `membership` argument of `modularity.matrix()` is now deprecated as the
+  function never needed it anyway.
+
+Misc:
+- Documentation improvements.
 
 # igraph 1.2.6
 
