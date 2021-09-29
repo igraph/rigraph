@@ -732,12 +732,12 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' The vertex and edge betweenness are (roughly) defined by the number of
 #' geodesics (shortest paths) going through a vertex or an edge.
 #' 
-#' The vertex betweenness of vertex \eqn{v}{\code{v}} is defined by
+#' The vertex betweenness of vertex \code{v} is defined by
 #' 
 #' \deqn{\sum_{i\ne j, i\ne v, j\ne v} g_{ivj}/g_{ij}}{sum( g_ivj / g_ij,
 #' i!=j,i!=v,j!=v)}
 #' 
-#' The edge betweenness of edge \eqn{e}{\code{e}} is defined by
+#' The edge betweenness of edge \code{e} is defined by
 #' 
 #' \deqn{\sum_{i\ne j} g{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 #' 
@@ -2422,9 +2422,9 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' 
 #' \deqn{\frac{1}{\sum_{i\ne v} d_vi}}{1/sum( d(v,i), i != v)}
 #' 
-#' If there is no (directed) path between vertex \eqn{v}{\code{v}} and
-#' \eqn{i}{\code{i}} then the total number of vertices is used in the formula
-#' instead of the path length.
+#' If there is no (directed) path between vertex \code{v} and \code{i}, then
+#' the total number of vertices is used in the formula instead of the path
+#' length.
 #' 
 #' \code{estimate_closeness} only considers paths of length \code{cutoff} or
 #' smaller, this can be run for larger graphs, as the running time is not
