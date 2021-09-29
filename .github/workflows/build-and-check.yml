@@ -39,6 +39,12 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: R-source-${{ runner.os }}
 
+      - name: Cache Python virtualenv
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/stimulus-requirements.txt') }}
+
       - name: Install necessary dependencies
         run: |
           sudo apt install libcurl4-openssl-dev
