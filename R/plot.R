@@ -286,6 +286,8 @@ plot.igraph <- function(x,
       cp[,1] <- cx+r*cos(phi)
       cp[,2] <- cy+r*sin(phi)
 
+      if (is.na(width)) { width <- 0 }
+
       plot.bezier(cp, 50, color, width, arr=arr, lty=lty, arrow.size=arrow.size, arr.w=arr.w)
 
       if (is.language(label) || !is.na(label)) {
