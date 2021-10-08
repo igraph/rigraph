@@ -163,7 +163,7 @@ allowing rapid prototyping via high level languages like R.
 \section{Further information}{
 
   The igraph homepage is at \url{https://igraph.org}.
-  See especially the documentation section. Join the discussion forum at
-  \url{https://igraph.discourse.group} if you have questions or comments.
+  See especially the documentation section. Join the igraph-help mailing
+  list if you have questions or comments.
 }
 
