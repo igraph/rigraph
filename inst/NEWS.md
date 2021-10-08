@@ -18,6 +18,8 @@ Fixed:
 - The `types` argument of functions related to bipartite graphs now prints
   a warning when the types are coerced to booleans (#476).
 - Betweenness normalisation no longer overflows (#442).
+- `layout_with_sugiyama()` returns a layout of type matrix even if there is
+  only one vertex in the graph (#408).
 
 Deprecated:
 - The `membership` argument of `modularity.matrix()` is now deprecated as the

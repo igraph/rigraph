@@ -1724,10 +1724,11 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
   # Separate real and dummy vertices
   vc <- vcount(graph)
-  res$layout <- res$res[seq_len(vc),]
   if (nrow(res$res)==vc) {
+    res$layout <- res$res
     res$layout.dummy <- matrix(NA_real_, nrow=0, ncol=2)
   } else {
+    res$layout <- res$res[seq_len(vc),]
     res$layout.dummy <- res$res[(vc+1):nrow(res$res),]
   }
 
