@@ -93,6 +93,8 @@ plot.igraph <- function(x,
     stop("Not a graph object")
   }
 
+  vc <- vcount(graph)
+
   ################################################################
   ## Visual parameters
   params <- i.parse.plot.params(graph, list(...))
@@ -146,7 +148,7 @@ plot.igraph <- function(x,
   ################################################################
   ## create the plot
   maxv <- max(vertex.size)
-  if (rescale) {
+  if (vc > 0 && rescale) {
     # norm layout to (-1, 1)
     layout <- norm_coords(layout, -1, 1, -1, 1)
     xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
@@ -376,13 +378,15 @@ plot.igraph <- function(x,
   
   ################################################################
   # add the vertices
-  if (length(unique(shape)) == 1) {
-    .igraph.shapes[[ shape[1] ]]$plot(layout, params=params)
-  } else {
-    sapply(seq(length=vcount(graph)), function(x) {
-      .igraph.shapes[[ shape[x] ]]$plot(layout[x,,drop=FALSE], v=x,
-                                        params=params)
-    })
+  if (vc > 0) {
+    if (length(unique(shape)) == 1) {
+      .igraph.shapes[[ shape[1] ]]$plot(layout, params=params)
+    } else {
+      sapply(seq(length=vcount(graph)), function(x) {
+        .igraph.shapes[[ shape[x] ]]$plot(layout[x,,drop=FALSE], v=x,
+                                          params=params)
+      })
+    }
   }
       
   ################################################################
@@ -392,16 +396,18 @@ plot.igraph <- function(x,
     (vertex.size+6*8*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
     (vertex.size+6*8*log10(2))/200
-  if (length(label.family)==1) {
-    text(x, y, labels=labels, col=label.color, family=label.family,
-         font=label.font, cex=label.cex)
-  } else {
-    if1 <- function(vect, idx) if (length(vect)==1) vect else vect[idx]
-    sapply(seq_len(vcount(graph)), function(v) {
-      text(x[v], y[v], labels=if1(labels, v), col=if1(label.color, v),
-           family=if1(label.family, v), font=if1(label.font, v),
-           cex=if1(label.cex, v))
-    })
+  if (vc > 0) {
+    if (length(label.family)==1) {
+      text(x, y, labels=labels, col=label.color, family=label.family,
+           font=label.font, cex=label.cex)
+    } else {
+      if1 <- function(vect, idx) if (length(vect)==1) vect else vect[idx]
+      sapply(seq_len(vcount(graph)), function(v) {
+        text(x[v], y[v], labels=if1(labels, v), col=if1(label.color, v),
+             family=if1(label.family, v), font=if1(label.font, v),
+             cex=if1(label.cex, v))
+      })
+    }
   }
   rm(x, y)
   invisible(NULL)

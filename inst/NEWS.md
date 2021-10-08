@@ -20,6 +20,8 @@ Fixed:
 - Betweenness normalisation no longer overflows (#442).
 - `layout_with_sugiyama()` returns a layout of type matrix even if there is
   only one vertex in the graph (#408).
+- Plotting a null graph (i.e. a graph with no vertices) does not throw an error
+  any more (#387).
 
 Deprecated:
 - The `membership` argument of `modularity.matrix()` is now deprecated as the
