@@ -2337,7 +2337,7 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 #' plus one. Note that (for currently unknown reasons) the first element of the
 #' vector is the number of clusters of size zero, so this is always zero.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{subcomponent}}, \code{\link{groups}}
+#' @seealso \code{\link{decompose}}, \code{\link{subcomponent}}, \code{\link{groups}}
 #' @export
 #' @keywords graphs
 #' @examples
