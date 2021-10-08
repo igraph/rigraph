@@ -207,7 +207,11 @@ igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGE
 	mkdir -p man
 	tools/builddocs.sh
 	Rscript -e 'devtools::build(path = ".")'
+
 #############
+
+check: igraph_$(VERSION).tar.gz
+	R CMD check --as-cran $<
 
 clean:
 	@rm -f  DESCRIPTION
@@ -227,6 +231,6 @@ clean:
 distclean: clean
 	@rm -rf $(PYVENV)
 
-.PHONY: all igraph force clean
+.PHONY: all igraph force clean check
 
 .NOTPARALLEL:
