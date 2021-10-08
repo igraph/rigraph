@@ -13,6 +13,8 @@ Fixed:
   invalid graph (#404).
 - `make_graph(c())` now produces an empty graph instead of printing a
   misleading error message (#431).
+- Printing a graph where some edges have NA as the names of both endpoints
+  does not produce a misleading error message any more (#410).
 - The `types` argument of functions related to bipartite graphs now prints
   a warning when the types are coerced to booleans (#476).
 - Betweenness normalisation no longer overflows (#442).

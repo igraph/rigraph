@@ -32,7 +32,7 @@ pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w6
 
 ## Documentation
 
-See the [igraph homepage](https://igraph.org/r) for the complete manual.
+See the [igraph homepage](https://igraph.org/r/) for the complete manual.
 
 ## Contributions
 
