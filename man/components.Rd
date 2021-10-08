@@ -74,7 +74,7 @@ groups(clu)
 
 }
 \seealso{
-\code{\link{subcomponent}}, \code{\link{groups}}
+\code{\link{decompose}}, \code{\link{subcomponent}}, \code{\link{groups}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
