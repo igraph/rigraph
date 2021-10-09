@@ -1176,7 +1176,7 @@ constraint <- function(graph, nodes=V(graph), weights=NULL) {
 #' probability of mutual connection between a vertex pair, if we know that
 #' there is a (possibly non-mutual) connection between them. In other words,
 #' (unordered) vertex pairs are classified into three groups: (1)
-#' not-connected, (2) non-reciprocaly connected, (3) reciprocally connected.
+#' not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
 #' The result is the size of group (3), divided by the sum of group sizes
 #' (2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
 #' 
@@ -1485,7 +1485,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' 
 #' The alpha centrality of the vertices in a graph is defined as the solution
 #' of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
-#' where \eqn{A}{A} is the (not neccessarily symmetric) adjacency matrix of the
+#' where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
 #' graph, \eqn{e}{e} is the vector of exogenous sources of status of the
 #' vertices and \eqn{\alpha}{alpha} is the relative importance of the
 #' endogenous versus exogenous factors.
@@ -1913,7 +1913,7 @@ which_loop <- function(graph, eids=E(graph)) {
 #' \code{count_multiple} counts the multiplicity of each edge of a graph.
 #' 
 #' Note that the semantics for \code{which_multiple} and \code{count_multiple} is
-#' different. \code{which_multiple} gives \code{TRUE} for all occurences of a
+#' different. \code{which_multiple} gives \code{TRUE} for all occurrences of a
 #' multiple edge except for one. Ie. if there are three \code{i-j} edges in the
 #' graph then \code{which_multiple} returns \code{TRUE} for only two of them while
 #' \code{count_multiple} returns \sQuote{3} for all three.
@@ -2744,7 +2744,7 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
 
 #' Find mutual edges in a directed graph
 #' 
-#' This function checks the reciproc pair of the supplied edges.
+#' This function checks the reciprocal pair of the supplied edges.
 #' 
 #' In a directed graph an (A,B) edge is mutual if the graph also includes a
 #' (B,A) directed edge.

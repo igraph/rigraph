@@ -347,7 +347,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' }
 #' 
 #' @section Vertex attributes:
-#' When indexing vertex sequences, vertex attributes can be refered
+#' When indexing vertex sequences, vertex attributes can be referred
 #' to simply by using their names. E.g. if a graph has a \code{name} vertex
 #' attribute, then \code{V(g)[name == "foo"]} is equivalent to
 #' \code{V(g)[V(g)$name == "foo"]}. See examples below.
@@ -358,7 +358,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'   \item{\code{.nei}}{takes a vertex sequence as its argument
 #'     and selects neighbors of these vertices. An optional \code{mode}
 #'     argument can be used to select successors (\code{mode="out"}), or
-#'     precedessors (\code{mode="in"}) in directed graphs.}
+#'     predecessors (\code{mode="in"}) in directed graphs.}
 #'   \item{\code{.inc}}{Takes an edge sequence as an argument, and
 #'     selects vertices that have at least one incident edge in this
 #'     edge sequence.}
@@ -671,7 +671,7 @@ simple_es_index <- function(x, i) {
 #' }
 #'
 #' @section Edge attributes:
-#' When indexing edge sequences, edge attributes can be refered
+#' When indexing edge sequences, edge attributes can be referred
 #' to simply by using their names. E.g. if a graph has a \code{weight} edge
 #' attribute, then \code{E(G)[weight > 1]} selects all edges with a larger
 #' than one weight. See more examples below.

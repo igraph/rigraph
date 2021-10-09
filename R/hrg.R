@@ -163,7 +163,7 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 #'     vertex ids (from 0) refer to the original vertices of the graph, the
 #'     other ids refer to vertex groups.}
 #'   \item{weights}{Numeric vector, counts the number of times a given tree
-#'     split occured in the generated network samples, for each internal
+#'     split occurred in the generated network samples, for each internal
 #'     vertices. The order is the same as in the \code{parents} vector.}
 
 #' @include auto.R
@@ -307,7 +307,7 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 
 #' Conversion to igraph
 #' 
-#' These fucntions convert various objects to igraph graphs.
+#' These functions convert various objects to igraph graphs.
 #' 
 #' You can use \code{as.igraph} to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
@@ -546,7 +546,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'     the dendrogram. The dendrogram is cut into exactly \code{rect}
 #'     groups and they are marked via the \code{rect.hclust} command. Set
 #'     this to zero if you don't want to mark any groups.
-#'   \item \code{colbar} The colors of the rectanges that mark the
+#'   \item \code{colbar} The colors of the rectangles that mark the
 #'     vertex groups via the \code{rect} argument.
 #'   \item \code{hang} Where to put the leaf nodes, this corresponds to the
 #'     \code{hang} argument of \code{plot.hclust}.

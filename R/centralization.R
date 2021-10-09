@@ -130,7 +130,7 @@ centr_degree <- centr_degree
 #'   \code{degree}.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph degree
+#' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
 #' @aliases centralization.degree.tmax
@@ -193,7 +193,7 @@ centr_betw <- centr_betw
 #'   given.
 #' @param directed logical scalar, whether to use directed shortest paths
 #'   for calculating betweenness.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
@@ -253,7 +253,7 @@ centr_clo <- centr_clo
 #'   given.
 #' @param mode This is the same as the \code{mode} argument of 
 #'   \code{closeness}.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
 #'
@@ -326,7 +326,7 @@ centr_eigen <- centr_eigen
 #'   for calculating betweenness.
 #' @param scale Whether to rescale the eigenvector centrality scores,
 #'   such that the maximum score is one.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'

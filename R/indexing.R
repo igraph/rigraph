@@ -44,7 +44,7 @@
 # - G[1,-1]     negative indices work
 #
 # - G[[1,]]     adjacent vertices of 1
-# - G[[,1]]     adjacent predessors of 1
+# - G[[,1]]     adjacent predecessors of 1
 # - G[[degree(G),]]
 #               logical vectors work
 # - G[[-1,]]    negative indices work
@@ -215,7 +215,7 @@
 #'   \item Querying the adjacent vertices for one or more
 #'     vertices: \preformatted{  graph[[1:3,]]
 #' graph[[,1:3]]}
-#'     The first form gives the successors, the second the predessors
+#'     The first form gives the successors, the second the predecessors
 #'     or the 1:3 vertices. (For undirected graphs they are equivalent.)
 #'   \item Querying the incident edges for one or more vertices,
 #'     if the \code{edges} argument is set to

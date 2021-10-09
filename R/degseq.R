@@ -35,7 +35,7 @@
 #' @aliases is.degree.sequence is_degseq
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #' the out-degree sequence for directed graphs.
-#' @param in.deg \code{NULL} or an integer vector. For undireted graphs, it
+#' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
 #' should be \code{NULL}. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -60,13 +60,13 @@ is_degseq <- is_degseq
 #' Is a degree sequence graphical?
 #' 
 #' Determine whether the given vertex degrees (in- and out-degrees for
-#' directed graphs) can be reliazed in a simple graph, i.e. a graph without
+#' directed graphs) can be realized in a simple graph, i.e. a graph without
 #' multiple or loop edges.
 #' 
 #' @aliases is.graphical.degree.sequence
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #' the out-degree sequence for directed graphs.
-#' @param in.deg \code{NULL} or an integer vector. For undireted graphs, it
+#' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
 #' should be \code{NULL}. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}

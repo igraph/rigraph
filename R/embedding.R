@@ -170,7 +170,7 @@ dim_select <- dim_select
 #' @param weights Optional positive weight vector for calculating a weighted
 #' embedding. If the graph has a \code{weight} edge attribute, then this is
 #' used by default. For weighted embedding, edge weights are used instead
-#' of the binary adjacency matrix, and vertex stregth (see
+#' of the binary adjacency matrix, and vertex strength (see
 #' \code{\link{strength}}) is used instead of the degrees.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
 #' use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
@@ -192,7 +192,7 @@ dim_select <- dim_select
 #' \eqn{O^{1/2}}{O^1/2} is the inverse of the square root of the out-degree
 #' matrix and \eqn{P^{1/2}}{P^1/2} is the same for the in-degree matrix.
 #' 
-#' \code{OAP} is not defined for undireted graphs, and is the only defined type
+#' \code{OAP} is not defined for undirected graphs, and is the only defined type
 #' for directed graphs.
 #' 
 #' The default (i.e. type \code{default}) is to use \code{D-A} for undirected

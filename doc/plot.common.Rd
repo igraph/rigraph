@@ -21,7 +21,7 @@
   See \code{\link{plot.igraph}} for some more information.
 
   \code{\link{tkplot}} does interactive 2D plotting using the \code{tcltk}
-  package. It can only handle graphs of moderate size, a thousend
+  package. It can only handle graphs of moderate size, a thousand
   vertices is probably already too many. Some parameters of the plotted
   graph can be changed interactively after issuing the \code{tkplot}
   command: the position, color and size of the vertices and the color

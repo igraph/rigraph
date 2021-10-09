@@ -48,10 +48,10 @@
 #' @param target The id of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
 #' \code{NULL} (the default) then the \code{capacity} edge attribute is used.
-#' @param value.only Logical scalar, if \code{TRUE} only the minumum cut value
+#' @param value.only Logical scalar, if \code{TRUE} only the minimum cut value
 #' is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 #' partitions are also returned.
-#' @return For \code{min_cut} a numeric constant, the value of the minimum
+#' @return For \code{min_cut} a nuieric constant, the value of the minimum
 #' cut, except if \code{value.only = FALSE}. In this case a named list with
 #' components:
 #'   \item{value}{Numeric scalar, the cut value.}
@@ -148,7 +148,7 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
 #' (ordered) pairs of vertices in the graph. In other words this is the minimum
 #' number of vertices needed to remove to make the graph not strongly
 #' connected. (If the graph is not strongly connected then this is zero.)
-#' \code{vertex_connectivity} calculates this quantitty if neither the
+#' \code{vertex_connectivity} calculates this quantity if neither the
 #' \code{source} nor \code{target} arguments are given. (Ie. they are both
 #' \code{NULL}.)
 #' 
@@ -411,7 +411,7 @@ st_cuts <- st_cuts
 #' \eqn{t}.
 #' 
 #' The size of an \eqn{(s,t)}-cut is defined as the sum of the capacities (or
-#' weights) in the cut. For unweighed (=equally weighted) graphs, this is
+#' weights) in the cut. For unweighted (=equally weighted) graphs, this is
 #' simply the number of edges.
 #' 
 #' An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
@@ -629,7 +629,7 @@ max_flow <- max_flow
 is_separator <- is_separator
 
 
-#' Minumal vertex separators
+#' Minimal vertex separators
 #' 
 #' Check whether a given set of vertices is a minimal vertex separator.
 #' 
