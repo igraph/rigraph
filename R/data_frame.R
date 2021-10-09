@@ -43,7 +43,7 @@
 #' symbolic edge list given in \code{d} is checked to contain only vertex names
 #' listed in \code{vertices}.
 #'
-#' Typically, the data frames are exported from some speadsheet software like
+#' Typically, the data frames are exported from some spreadsheet software like
 #' Excel and are imported into R via \code{\link{read.table}},
 #' \code{\link{read.delim}} or \code{\link{read.csv}}.
 #'
