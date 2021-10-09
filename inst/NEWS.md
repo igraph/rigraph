@@ -1,4 +1,6 @@
-# Next release
+# igraph 1.2.7
+
+Oct 9, 2021
 
 The C core is updated to 0.8.5, fixing a range of bugs and introducing a number of new functions.
 
