@@ -60,10 +60,10 @@ LEX=flex
 
 venv: $(PYVENV)/stamp
 
-$(PYVENV)/stamp: tools/stimulus-requirements.txt
+$(PYVENV)/stamp: tools/build-requirements.txt
 	$(PYTHON) -m venv $(PYVENV)
 	$(PYVENV)/bin/pip install -r $<
-	touch $(PYVENV)/.stamp
+	touch $(PYVENV)/stamp
 
 # Apply possible patches
 
@@ -213,6 +213,11 @@ igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGE
 check: igraph_$(VERSION).tar.gz
 	R CMD check --as-cran $< && Rscript -e 'rhub::check_for_cran()'
 
+check-links: igraph_$(VERSION).tar.gz
+	mkdir -p html-docs
+	R CMD INSTALL --html --no-R --no-configure --no-inst --no-libs --no-exec --no-test-load -l html-docs $<
+	$(PYVENV)/bin/linkchecker html-docs/igraph/html/00Index.html ; rm -rf html-docs
+
 check-rhub: igraph
 	Rscript -e 'rhub::check_for_cran()'
 
@@ -235,6 +240,6 @@ clean:
 distclean: clean
 	@rm -rf $(PYVENV)
 
-.PHONY: all igraph force clean check
+.PHONY: all igraph force clean check check-rhub check-links
 
 .NOTPARALLEL:

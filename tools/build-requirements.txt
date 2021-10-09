@@ -1,7 +1,8 @@
 # Make sure to use an exact version or commit hash in the line below,
 # _not_ the name of a branch. The hash of this file is used by the CI
 # environment to detect when to re-create the virtualenv so the hash
-# needs to change whenever stimulus is updated.
+# needs to change whenever a package is updated.
 
 git+git://github.com/igraph/stimulus@0.3.1#egg=stimulus
+git+git://github.com/linkchecker/linkchecker@v10.0.1#egg=linkchecker
 

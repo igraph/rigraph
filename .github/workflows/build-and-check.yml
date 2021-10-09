@@ -43,7 +43,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .venv
-          key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/stimulus-requirements.txt') }}
+          key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
       - name: Install necessary dependencies
         run: |
