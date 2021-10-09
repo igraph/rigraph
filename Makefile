@@ -225,6 +225,7 @@ clean:
 	@rm -f  config.status
 	@rm -f  configure
 	@rm -f  igraph_*.tar.gz
+	@rm -f  igraph_*.tgz
 	@rm -rf man/*.Rd
 	@rm -f  object_files
 	@rm -rf src/
