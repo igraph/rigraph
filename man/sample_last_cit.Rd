@@ -78,7 +78,7 @@ happened.
 graph is growing.
 
 \code{sample_cit_types} is similarly a growing stochastic block model,
-but the probability of an edge depends on the (potentiall) cited
+but the probability of an edge depends on the (potentially) cited
 vertex only.
 }
 \author{

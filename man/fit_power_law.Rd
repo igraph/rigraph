@@ -27,7 +27,7 @@ automatically determined for the \sQuote{\code{plfit}} implementation. This
 argument makes it possible to fit only the tail of the distribution.}
 
 \item{start}{Numeric scalar. The initial value of the exponent for the
-minimizing function, for the \sQuote{\code{R.mle}} implementation. Ususally
+minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
 it is safe to leave this untouched.}
 
 \item{force.continuous}{Logical scalar. Whether to force a continuous

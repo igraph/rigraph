@@ -60,7 +60,7 @@ first creating an initial (possibly unconnected) simple undirected graph
 with the given degree sequence (if this is possible at all). Then some
 rewiring is done to make the graph connected. Finally a Monte-Carlo
 algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-undirected, connected simple graphs unformly.
+undirected, connected simple graphs uniformly.
 }
 \examples{
 

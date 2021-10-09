@@ -77,7 +77,7 @@ Create an igraph graph from a list of edges, or a notable graph
 
 
 \code{make_graph} can create some notable graphs. The name of the
-graph (case insensitive), a character scalar must be suppliced as
+graph (case insensitive), a character scalar must be supplied as
 the \code{edges} argument, and other arguments are ignored. (A warning
 is given is they are specified.)
 
@@ -101,7 +101,7 @@ is given is they are specified.)
     and not vertex transitive.}
   \item{Franklin}{This is a graph whose embedding
     to the Klein bottle can be colored with six colors, it is a counterexample
-    to the neccessity of the Heawood conjecture on a Klein bottle. It has 12
+    to the necessity of the Heawood conjecture on a Klein bottle. It has 12
     vertices and 18 edges.}
   \item{Frucht}{The Frucht Graph is the smallest
     cubical graph whose automorphism group consists only of the identity
@@ -156,9 +156,9 @@ is given is they are specified.)
   \item{Tetrahedral,
     Tetrahedron}{Platonic solid with 4 vertices and 6 edges.}
   \item{Thomassen}{The smallest hypotraceable graph, on 34 vertices and 52
-    edges. A hypotracable graph does not contain a Hamiltonian path but after
+    edges. A hypotraceable graph does not contain a Hamiltonian path but after
     removing any single vertex from it the remainder always contains a
-    Hamiltonian path. A graph containing a Hamiltonian path is called tracable.}
+    Hamiltonian path. A graph containing a Hamiltonian path is called traceable.}
   \item{Tutte}{Tait's Hamiltonian graph conjecture states that every
     3-connected 3-regular planar graph is Hamiltonian.  This graph is a
     counterexample. It has 46 vertices and 69 edges.}

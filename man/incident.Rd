@@ -9,7 +9,7 @@ incident(graph, v, mode = c("all", "out", "in", "total"))
 \arguments{
 \item{graph}{The input graph.}
 
-\item{v}{The vertex of which the indicent edges are queried.}
+\item{v}{The vertex of which the incident edges are queried.}
 
 \item{mode}{Whether to query outgoing (\sQuote{out}), incoming
 (\sQuote{in}) edges, or both types (\sQuote{all}). This is

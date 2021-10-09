@@ -79,7 +79,7 @@ betweenness score, then recalculating edge betweenness of the edges and
 again removing the one with the highest score, etc.
 
 \code{edge.betweeness.community} returns various information collected
-throught the run of the algorithm. See the return value down here.
+through the run of the algorithm. See the return value down here.
 }
 \examples{
 

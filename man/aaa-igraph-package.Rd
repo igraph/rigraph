@@ -83,7 +83,7 @@ allowing rapid prototyping via high level languages like R.
   \eqn{n} vertices the vertex ids are between \eqn{1} and
   \eqn{n}. If some operation changes the number of vertices in the
   graphs, e.g. a subgraph is created via \code{\link{induced_subgraph}}, then
-  the vertices are renumbered to satisfty this criteria.
+  the vertices are renumbered to satisfy this criteria.
 
   The same is true for the edges as well, edge ids are always between
   one and \eqn{m}, the total number of edges in the graph.

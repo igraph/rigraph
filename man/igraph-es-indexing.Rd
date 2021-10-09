@@ -57,7 +57,7 @@ negative numeric vectors, logical vectors, character vectors:
 
 \section{Edge attributes}{
 
-When indexing edge sequences, edge attributes can be refered
+When indexing edge sequences, edge attributes can be referred
 to simply by using their names. E.g. if a graph has a \code{weight} edge
 attribute, then \code{E(G)[weight > 1]} selects all edges with a larger
 than one weight. See more examples below.

@@ -63,7 +63,7 @@ eigenvector centerality to directed graphs. It was proposed by Bonacich in
 
 The alpha centrality of the vertices in a graph is defined as the solution
 of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
-where \eqn{A}{A} is the (not neccessarily symmetric) adjacency matrix of the
+where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
 graph, \eqn{e}{e} is the vector of exogenous sources of status of the
 vertices and \eqn{\alpha}{alpha} is the relative importance of the
 endogenous versus exogenous factors.

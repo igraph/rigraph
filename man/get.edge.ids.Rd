@@ -9,7 +9,7 @@ get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = FALSE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{vp}{The indicent vertices, given as vertex ids or symbolic vertex
+\item{vp}{The incident vertices, given as vertex ids or symbolic vertex
 names. They are interpreted pairwise, i.e. the first and second are used for
 the first edge, the third and fourth for the second, etc.}
 

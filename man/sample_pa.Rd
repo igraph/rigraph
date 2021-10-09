@@ -57,7 +57,7 @@ Before the 0.6 version igraph used this algorithm if \code{power} was not
 one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
 was previously (before version 0.6) used if \code{power} was one and
 \code{zero.appeal} was one as well. It works by putting the ids of the
-vertices into a bag (mutliset, really), exactly as many times as their
+vertices into a bag (multiset, really), exactly as many times as their
 (in-)degree, plus once more. Then the required number of cited vertices are
 drawn from the bag, with replacement. This method might generate multiple
 edges. It only works if \code{power} and \code{zero.appeal} are equal one.}

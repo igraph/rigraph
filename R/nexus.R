@@ -210,7 +210,7 @@ nexus.format.result <- function(l, name="") {
 #' as an igraph graph.
 #' 
 #' Nexus is an online repository of networks, with an API that allow
-#' programatic queries against it, and programatic data download as well.
+#' programmatic queries against it, and programmatic data download as well.
 #' 
 #' The \code{nexus_list} and \code{nexus_info} functions query the online
 #' database. They both return \code{nexusDatasetInfo} objects.
@@ -250,7 +250,7 @@ nexus.format.result <- function(l, name="") {
 #'     available. The various formats are separated by semicolons.}
 #'   \item{licence}{Character scalar, the licence of the dataset.}
 #'   \item{licence url}{Character scalar, the URL of the licence of the
-#'     dataset. Pleaase make sure you consult this before using a dataset.}
+#'     dataset. Please make sure you consult this before using a dataset.}
 #'   \item{summary}{Character scalar, the short description of the dataset,
 #'     this is usually a single sentence.}
 #'   \item{description}{Character scalar, the full description of the
@@ -284,7 +284,7 @@ nexus.format.result <- function(l, name="") {
 #' given about them: the character id of the data set (e.g. \code{kaptail}
 #' or \code{powergrid}), the number of vertices and number of edges in the
 #' graph of the data sets.  For data sets with multiple graphs, intervals
-#' are given here. Then the numeric id of the data set and the reamining
+#' are given here. Then the numeric id of the data set and the remaining
 #' space is filled with the name of the data set.
 #' 
 #' Summary information about an individual Nexus data set is printed as

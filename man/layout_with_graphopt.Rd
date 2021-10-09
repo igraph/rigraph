@@ -60,7 +60,7 @@ graphs.
 \code{layout_with_graphopt} is a port of the graphopt layout algorithm by Michael
 Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 layers was removed (might be added later) and a code was a bit reorganized
-to avoid some unneccessary steps is the node charge (see below) is zero.
+to avoid some unnecessary steps is the node charge (see below) is zero.
 
 graphopt uses physical analogies for defining attracting and repelling
 forces among the vertices and then the physical system is simulated until it

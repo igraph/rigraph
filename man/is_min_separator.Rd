@@ -3,7 +3,7 @@
 \name{is_min_separator}
 \alias{is_min_separator}
 \alias{is.minimal.separator}
-\title{Minumal vertex separators}
+\title{Minimal vertex separators}
 \usage{
 is_min_separator(graph, candidate)
 }

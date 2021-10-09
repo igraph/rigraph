@@ -82,7 +82,7 @@ able to calculate the eigenvalues very quickly.
 The \code{options} argument specifies what kind of calculation to perform.
 It is a list with the following members, they correspond directly to ARPACK
 parameters. On input it has the following fields: \describe{
-\item{bmat}{Character constant, possible values: \sQuote{\code{I}}, stadard
+\item{bmat}{Character constant, possible values: \sQuote{\code{I}}, standard
 eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and \sQuote{\code{G}},
 generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
 Currently only \sQuote{\code{I}} is supported.} \item{n}{Numeric scalar. The

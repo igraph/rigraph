@@ -52,7 +52,7 @@ final results.
 \section{Modifiers}{
 
 Modifiers modify how a layout calculation is performed.
-Currently implemented modifyers: \itemize{
+Currently implemented modifiers: \itemize{
   \item \code{component_wise} calculates the layout separately
     for each component of the graph, and then merges
     them.

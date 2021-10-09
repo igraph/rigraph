@@ -17,7 +17,7 @@ graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument). By default no cuts are made.}
 }
 \value{
-\code{motifs} returns a numeric vector, the number of occurences of
+\code{motifs} returns a numeric vector, the number of occurrences of
 each motif in the graph. The motifs are ordered by their isomorphism
 classes. Note that for unconnected subgraphs, which are not considered to be
 motifs, the result will be \code{NA}.

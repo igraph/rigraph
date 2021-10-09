@@ -55,7 +55,7 @@ Generate bipartite graphs using the Erdos-Renyi model
 Similarly to unipartite (one-mode) networks, we can define the $G(n,p)$, and
 $G(n,m)$ graph classes for bipartite graphs, via their generating process.
 In $G(n,p)$ every possible edge between top and bottom vertices is realized
-with probablity $p$, independently of the rest of the edges. In $G(n,m)$, we
+with probability $p$, independently of the rest of the edges. In $G(n,m)$, we
 uniformly choose $m$ edges to realize.
 }
 \examples{

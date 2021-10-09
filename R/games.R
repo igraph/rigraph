@@ -87,7 +87,7 @@
 #' one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
 #' was previously (before version 0.6) used if \code{power} was one and
 #' \code{zero.appeal} was one as well. It works by putting the ids of the
-#' vertices into a bag (mutliset, really), exactly as many times as their
+#' vertices into a bag (multiset, really), exactly as many times as their
 #' (in-)degree, plus once more. Then the required number of cited vertices are
 #' drawn from the bag, with replacement. This method might generate multiple
 #' edges. It only works if \code{power} and \code{zero.appeal} are equal one.
@@ -392,7 +392,7 @@ random.graph.game <- erdos.renyi.game
 #' with the given degree sequence (if this is possible at all). Then some
 #' rewiring is done to make the graph connected. Finally a Monte-Carlo
 #' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-#' undirected, connected simple graphs unformly.
+#' undirected, connected simple graphs uniformly.
 #'
 #' @aliases degree.sequence.game
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
@@ -555,7 +555,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' 
 #' By default a directed graph is generated, but it \code{directed} is set to
 #' \code{FALSE} then an undirected is created. Even if an undirected graph is
-#' generaed \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
+#' generated \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
 #' the vertex itself except if \code{out.pref} is set to \code{TRUE}.
 #' 
 #' If the \code{time.window} argument is given (and not NULL) then
@@ -566,7 +566,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' 
 #' @aliases sample_pa_age aging.prefatt.game aging.barabasi.game aging.ba.game
 #' @param n The number of vertices in the graph.
-#' @param pa.exp The preferantial attachment exponent, see the details below.
+#' @param pa.exp The preferential attachment exponent, see the details below.
 #' @param aging.exp The exponent of the aging, usually a non-positive number,
 #' see details below.
 #' @param m The number of edges each new vertex creates (except the very first
@@ -865,7 +865,7 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' \code{sample_pref} the probability that two vertices will be connected
 #' depends on their type and is given by the \sQuote{pref.matrix} argument.
 #' This matrix should be symmetric to make sense but this is not checked. The
-#' distribution of the different vertes types is given by the
+#' distribution of the different vertex types is given by the
 #' \sQuote{type.dist} vector.
 #' 
 #' For \code{sample_asym_pref} each vertex has an in-type and an
@@ -1065,7 +1065,7 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' graph is growing.
 #'
 #' \code{sample_cit_types} is similarly a growing stochastic block model,
-#' but the probability of an edge depends on the (potentiall) cited
+#' but the probability of an edge depends on the (potentially) cited
 #' vertex only.
 #' 
 #' @aliases cited.type.game sample_cit_types citing.cited.type.game
@@ -1167,7 +1167,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' Similarly to unipartite (one-mode) networks, we can define the $G(n,p)$, and
 #' $G(n,m)$ graph classes for bipartite graphs, via their generating process.
 #' In $G(n,p)$ every possible edge between top and bottom vertices is realized
-#' with probablity $p$, independently of the rest of the edges. In $G(n,m)$, we
+#' with probability $p$, independently of the rest of the edges. In $G(n,m)$, we
 #' uniformly choose $m$ edges to realize.
 #'
 #' @aliases bipartite.random.game

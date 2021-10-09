@@ -31,7 +31,7 @@ following members:
     vertex ids (from 0) refer to the original vertices of the graph, the
     other ids refer to vertex groups.}
   \item{weights}{Numeric vector, counts the number of times a given tree
-    split occured in the generated network samples, for each internal
+    split occurred in the generated network samples, for each internal
     vertices. The order is the same as in the \code{parents} vector.}
 }
 \description{

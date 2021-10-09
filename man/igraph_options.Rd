@@ -86,7 +86,7 @@ The currently used parameters in alphabetical order:
     (sparse) matrices. It is recommended, if the user works with
     larger graphs.}
   \item{verbose}{Logical constant, whether igraph functions should
-    talk more than minimal. Eg. if \code{TRUE} thne some functions
+    talk more than minimal. Eg. if \code{TRUE} then some functions
     will use progress bars while computing. Defaults to \code{FALSE}.}
   \item{vertex.attr.comb}{Specifies what to do with the vertex
     attributes if the graph is modified. The default value is

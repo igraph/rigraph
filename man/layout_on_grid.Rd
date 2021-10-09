@@ -33,7 +33,7 @@ determinted automatically.}
 A two-column or three-column matrix.
 }
 \description{
-This layout places vertices on a rectangulat grid, in two or three
+This layout places vertices on a rectangular grid, in two or three
 dimensions.
 }
 \details{

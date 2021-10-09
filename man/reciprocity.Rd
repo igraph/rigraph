@@ -32,7 +32,7 @@ Prior to igraph version 0.6, another measure was implemented, defined as the
 probability of mutual connection between a vertex pair, if we know that
 there is a (possibly non-mutual) connection between them. In other words,
 (unordered) vertex pairs are classified into three groups: (1)
-not-connected, (2) non-reciprocaly connected, (3) reciprocally connected.
+not-connected, (2) non-reciprocally connected, (3) reciprocally connected.
 The result is the size of group (3), divided by the sum of group sizes
 (2)+(3). This measure is calculated if \code{mode} is \code{ratio}.
 }

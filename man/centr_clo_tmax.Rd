@@ -18,7 +18,7 @@ given.}
 \code{closeness}.}
 }
 \value{
-Real scalar, the theoratical maximum (unnormalized) graph
+Real scalar, the theoretical maximum (unnormalized) graph
   closeness centrality score for graphs with given order and other
   parameters.
 }

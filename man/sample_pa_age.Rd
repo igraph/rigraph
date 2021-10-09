@@ -30,7 +30,7 @@ pa_age(...)
 \arguments{
 \item{n}{The number of vertices in the graph.}
 
-\item{pa.exp}{The preferantial attachment exponent, see the details below.}
+\item{pa.exp}{The preferential attachment exponent, see the details below.}
 
 \item{aging.exp}{The exponent of the aging, usually a non-positive number,
 see details below.}
@@ -118,7 +118,7 @@ will be normalized to sum up to 1. This behavior is similar to the
 
 By default a directed graph is generated, but it \code{directed} is set to
 \code{FALSE} then an undirected is created. Even if an undirected graph is
-generaed \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
+generated \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
 the vertex itself except if \code{out.pref} is set to \code{TRUE}.
 
 If the \code{time.window} argument is given (and not NULL) then

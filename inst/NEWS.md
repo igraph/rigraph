@@ -116,10 +116,10 @@ Jul 13, 2017
 - Plot: no error for unknown graphical parameters.
 - Import functions from base packages, to eliminate
   `R CMD check` `NOTE`s.
-- Readd support for edge weights in Fruchterman-Reingold layout
-- Check membershiph vector in `modularity()`.
+- Re-add support for edge weights in Fruchterman-Reingold layout
+- Check membership vector in `modularity()`.
 - Rename `str.igraph()` to `print_all()`.
-- Use the igraph version in exported graphs, instread of @VERSION@ #75.
+- Use the igraph version in exported graphs, instead of @VERSION@ #75.
 - Functions that can be used inside a `V()` or `E()` indexing
   now begin with a dot. Old names are deprecated.
   New names: `.nei()`, `.innei()`, `.outnei()`, `.inc()`, `.from()`,
@@ -330,7 +330,7 @@ and OSX), are all built.
 - Fix a bug in triad census that set the first element of the result
   to NaN.
 - Fixed a crash in `is.chordal()`.
-- Fixed a bug in weighted mudularity calculation, sum of the weights
+- Fixed a bug in weighted modularity calculation, sum of the weights
   was truncated to an integer.
 - Fixed a bug in weighted multilevel communtiies, the maximum weight
   was rounded to an integer.
@@ -477,7 +477,7 @@ Released February 2, 2013
 
 The version number is not a mistake, we jump to 0.6.4 from 0.6,
 for technical reasons. This version was actually never really
-released, but some R packages of this version were uplodaded to
+released, but some R packages of this version were uploaded to
 CRAN, so we include this version in this NEW file.
 
 # New features and bug fixes
@@ -498,7 +498,7 @@ CRAN, so we include this version in this NEW file.
   #1066986.
 - Added k.regular.game().
 - Use vertex names to plot if no labels are specified in the function
-  call or as vetex attributes. Fixes issue #1085431.
+  call or as vertex attributes. Fixes issue #1085431.
 - power.law.fit() can now use a C implementation.
 
 - Fixed a bug in barabasi.game() when out.seq was an empty vector.
@@ -685,7 +685,7 @@ http://igraph.sf.net/relnotes-0.6.html
   graph.intersection.by.name(), graph.union.by.name(),
   graph.difference.by.name(). Thanks to Magnus Torfason for
   contributing his code!
-- Function to calculate a non-induced subraph: subgraph.edges().
+- Function to calculate a non-induced subgraph: subgraph.edges().
 - More comprehensive maximum flow and minimum cut calculation,
   see functions graph.maxflow(), graph.mincut(), stCuts(), stMincuts().
 - Check whether a directed graph is a DAG, is.dag().
@@ -739,7 +739,7 @@ http://igraph.sf.net/relnotes-0.5.2.html
 - Average nearest neighbor degree calculation, graph.knn()
 - Weighted degree (also called strength) calculation, graph.strength()
 - Some new functions to support bipartite graphs: graph.bipartite(),
-  is.bipartite(), get.indicence(), graph.incidence(),
+  is.bipartite(), get.incidence(), graph.incidence(),
   bipartite.projection(), bipartite.projection.size()
 - Support for plotting curved edges with plot.igraph() and tkplot()
 - Added support for weighted graphs in alpha.centrality()
@@ -955,7 +955,7 @@ Bug fixed:
 
 Released October 3, 2007
 
-This release should work seemlessly with the new R 2.6.0 version.
+This release should work seamlessly with the new R 2.6.0 version.
 Some other bugs were also fixed:
 - A bug was fixed in the Erdos-Renyi graph generator, which sometimes
   added an extra vertex.

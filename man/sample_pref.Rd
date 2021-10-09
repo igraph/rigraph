@@ -68,7 +68,7 @@ Both models generate random graphs with given vertex types. For
 \code{sample_pref} the probability that two vertices will be connected
 depends on their type and is given by the \sQuote{pref.matrix} argument.
 This matrix should be symmetric to make sense but this is not checked. The
-distribution of the different vertes types is given by the
+distribution of the different vertex types is given by the
 \sQuote{type.dist} vector.
 
 For \code{sample_asym_pref} each vertex has an in-type and an

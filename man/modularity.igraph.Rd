@@ -72,7 +72,7 @@ modularity(g, membership(wtc))
 }
 \references{
 Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
-structure in very large networks, \emph{Phyisical Review E} 2004, 70, 066111
+structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 }
 \seealso{
 \code{\link{cluster_walktrap}},

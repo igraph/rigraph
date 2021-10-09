@@ -25,7 +25,7 @@ centr_degree_tmax(
 calculating the degree.}
 }
 \value{
-Real scalar, the theoratical maximum (unnormalized) graph degree
+Real scalar, the theoretical maximum (unnormalized) graph degree
   centrality score for graphs with given order and other parameters.
 }
 \description{

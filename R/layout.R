@@ -52,7 +52,7 @@
 #' @aliases layout
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
-#' Currently implemented modifyers: \itemize{
+#' Currently implemented modifiers: \itemize{
 #'   \item \code{component_wise} calculates the layout separately
 #'     for each component of the graph, and then merges
 #'     them.
@@ -377,7 +377,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'
 #' Arranges the nodes in a tree where the given node is used as the root.  The
 #' tree is directed downwards and the parents are centered above its children.
-#' For the exact algorithm, the refernce below.
+#' For the exact algorithm, the reference below.
 #'
 #' If the given graph is not a tree, a breadth-first search is executed first
 #' to obtain a possible spanning tree.
@@ -595,7 +595,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 
 #' Simple grid layout
 #'
-#' This layout places vertices on a rectangulat grid, in two or three
+#' This layout places vertices on a rectangular grid, in two or three
 #' dimensions.
 #'
 #' The function places the vertices on a simple rectangular grid, one after the
@@ -1168,7 +1168,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' \code{layout_with_graphopt} is a port of the graphopt layout algorithm by Michael
 #' Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 #' layers was removed (might be added later) and a code was a bit reorganized
-#' to avoid some unneccessary steps is the node charge (see below) is zero.
+#' to avoid some unnecessary steps is the node charge (see below) is zero.
 #'
 #' graphopt uses physical analogies for defining attracting and repelling
 #' forces among the vertices and then the physical system is simulated until it
@@ -1239,7 +1239,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 #' The Kamada-Kawai layout algorithm
 #'
-#' Place the vertices on the plane, or in the 3d space, based on a phyisical
+#' Place the vertices on the plane, or in the 3d space, based on a physical
 #' model of springs.
 #'
 #' See the referenced paper below for the details of the algorithm.

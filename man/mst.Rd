@@ -16,11 +16,11 @@ graph. The order is determined by the edge ids. This is ignored if the
 distances.}
 
 \item{algorithm}{The algorithm to use for calculation. \code{unweighted} can
-be used for unwieghted graphs, and \code{prim} runs Prim's algorithm for
+be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
 weighted graphs.  If this is \code{NULL} then igraph tries to select the
 algorithm automatically: if the graph has an edge attribute called
 \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
-algorithm is chosen, otherwise the unwweighted algorithm is performed.}
+algorithm is chosen, otherwise the unweighted algorithm is performed.}
 
 \item{\dots}{Additional arguments, unused.}
 }

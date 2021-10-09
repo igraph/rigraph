@@ -32,7 +32,7 @@
 #' vertex connectivity greater than or equal to \eqn{k}. Cohesive blocking is a
 #' process through which, given a \eqn{k}-cohesive set of vertices, maximally
 #' \eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}. Thus a
-#' hiearchy of vertex subsets is found, whith the entire graph \eqn{G} at its
+#' hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
 #' root.
 #' 
 #' The function \code{cohesive_blocks} implements cohesive blocking.  It

@@ -441,7 +441,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #' @param method Currently only \sQuote{vf2} is supported, see
 #'   \code{\link{isomorphic}} for details about it and extra arguments.
 #' @param ... Passed to the individual methods.
-#' @return Number of isomirphic mappings between the two graphs.
+#' @return Number of isomorphic mappings between the two graphs.
 #'
 #' @include auto.R
 #' @aliases graph.count.isomorphisms.vf2
@@ -734,7 +734,7 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #' for possible values.
 #' @return A list with the following members: \item{labeling}{The canonical
-#' parmutation which takes the input graph into canonical form. A numeric
+#' permutation which takes the input graph into canonical form. A numeric
 #' vector, the first element is the new label of vertex 0, the second element
 #' for vertex 1, etc. } \item{info}{Some information about the BLISS
 #' computation. A named list with the following members: \describe{

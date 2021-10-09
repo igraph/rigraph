@@ -40,7 +40,7 @@ edges.
 \code{count_multiple} counts the multiplicity of each edge of a graph.
 
 Note that the semantics for \code{which_multiple} and \code{count_multiple} is
-different. \code{which_multiple} gives \code{TRUE} for all occurences of a
+different. \code{which_multiple} gives \code{TRUE} for all occurrences of a
 multiple edge except for one. Ie. if there are three \code{i-j} edges in the
 graph then \code{which_multiple} returns \code{TRUE} for only two of them while
 \code{count_multiple} returns \sQuote{3} for all three.

@@ -18,7 +18,7 @@ count_isomorphisms(graph1, graph2, method = "vf2", ...)
 \item{...}{Passed to the individual methods.}
 }
 \value{
-Number of isomirphic mappings between the two graphs.
+Number of isomorphic mappings between the two graphs.
 }
 \description{
 Count the number of isomorphic mappings between two graphs

@@ -17,7 +17,7 @@ includes all edges in the order of their ids.}
 A logical vector of the same length as the number of edges supplied.
 }
 \description{
-This function checks the reciproc pair of the supplied edges.
+This function checks the reciprocal pair of the supplied edges.
 }
 \details{
 In a directed graph an (A,B) edge is mutual if the graph also includes a

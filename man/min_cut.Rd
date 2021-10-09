@@ -23,12 +23,12 @@ min_cut(
 \item{capacity}{Vector giving the capacity of the edges. If this is
 \code{NULL} (the default) then the \code{capacity} edge attribute is used.}
 
-\item{value.only}{Logical scalar, if \code{TRUE} only the minumum cut value
+\item{value.only}{Logical scalar, if \code{TRUE} only the minimum cut value
 is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
 \value{
-For \code{min_cut} a numeric constant, the value of the minimum
+For \code{min_cut} a nuieric constant, the value of the minimum
 cut, except if \code{value.only = FALSE}. In this case a named list with
 components:
   \item{value}{Numeric scalar, the cut value.}

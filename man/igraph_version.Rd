@@ -15,7 +15,7 @@ Queries igraph's original version string. See details below.
 }
 \details{
 The igraph version string is the same as the version of the R package for
-all realeased igraph versions. For development versions and nightly builds,
+all released igraph versions. For development versions and nightly builds,
 they might differ however.
 
 The reason for this is, that R package version numbers are not flexible

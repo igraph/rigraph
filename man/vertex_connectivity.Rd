@@ -52,7 +52,7 @@ The vertex connectivity of a graph is the minimum vertex connectivity of all
 (ordered) pairs of vertices in the graph. In other words this is the minimum
 number of vertices needed to remove to make the graph not strongly
 connected. (If the graph is not strongly connected then this is zero.)
-\code{vertex_connectivity} calculates this quantitty if neither the
+\code{vertex_connectivity} calculates this quantity if neither the
 \code{source} nor \code{target} arguments are given. (Ie. they are both
 \code{NULL}.)
 

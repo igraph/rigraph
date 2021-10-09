@@ -41,7 +41,7 @@ removing these edges from \eqn{G} there is no directed path from \eqn{s} to
 \eqn{t}.
 
 The size of an \eqn{(s,t)}-cut is defined as the sum of the capacities (or
-weights) in the cut. For unweighed (=equally weighted) graphs, this is
+weights) in the cut. For unweighted (=equally weighted) graphs, this is
 simply the number of edges.
 
 An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.

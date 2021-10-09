@@ -1,7 +1,7 @@
 
 #' Create a printer callback function
 #'
-#' A printer callback fucntion is a function can performs the actual
+#' A printer callback function is a function can performs the actual
 #' printing. It has a number of subcommands, that are called by
 #' the \code{printer} package, in a form \preformatted{
 #'     printer_callback("subcommand", argument1, argument2, ...)

@@ -57,7 +57,7 @@ The syntax for \code{plot.hclust} (\code{mode="hclust"}): \preformatted{
     the dendrogram. The dendrogram is cut into exactly \code{rect}
     groups and they are marked via the \code{rect.hclust} command. Set
     this to zero if you don't want to mark any groups.
-  \item \code{colbar} The colors of the rectanges that mark the
+  \item \code{colbar} The colors of the rectangles that mark the
     vertex groups via the \code{rect} argument.
   \item \code{hang} Where to put the leaf nodes, this corresponds to the
     \code{hang} argument of \code{plot.hclust}.

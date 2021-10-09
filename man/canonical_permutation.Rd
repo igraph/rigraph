@@ -15,7 +15,7 @@ for possible values.}
 }
 \value{
 A list with the following members: \item{labeling}{The canonical
-parmutation which takes the input graph into canonical form. A numeric
+permutation which takes the input graph into canonical form. A numeric
 vector, the first element is the new label of vertex 0, the second element
 for vertex 1, etc. } \item{info}{Some information about the BLISS
 computation. A named list with the following members: \describe{

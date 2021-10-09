@@ -84,7 +84,7 @@ many rows as the number of vertices, the x, y and potentially z coordinates
 of the vertices.
 }
 \description{
-Place the vertices on the plane, or in the 3d space, based on a phyisical
+Place the vertices on the plane, or in the 3d space, based on a physical
 model of springs.
 }
 \details{

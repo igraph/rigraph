@@ -406,7 +406,7 @@ modularity <- function(x, ...)
 #' \code{\link{cluster_louvain}} and \code{\link{cluster_leiden}} for
 #' various community detection methods.
 #' @references Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
-#' structure in very large networks, \emph{Phyisical Review E} 2004, 70, 066111
+#' structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 #' @method modularity igraph
 #' @export
 #' @keywords graphs
@@ -1233,7 +1233,7 @@ cluster_walktrap <- function(graph, weights=E(graph)$weight, steps=4,
 #' again removing the one with the highest score, etc.
 #'
 #' \code{edge.betweeness.community} returns various information collected
-#' throught the run of the algorithm. See the return value down here.
+#' through the run of the algorithm. See the return value down here.
 #'
 #' @aliases edge.betweenness.community cluster_edge_betweenness
 #' @param graph The graph to analyze.
@@ -1617,14 +1617,14 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #'
 #' This function implements the multi-level modularity optimization algorithm
 #' for finding community structure, see references below. It is based on the
-#' modularity measure and a hierarchial approach.
+#' modularity measure and a hierarchical approach.
 #'
 #' This function implements the multi-level modularity optimization algorithm
 #' for finding community structure, see VD Blondel, J-L Guillaume, R Lambiotte
 #' and E Lefebvre: Fast unfolding of community hierarchies in large networks,
 #' \url{https://arxiv.org/abs/0803.0476} for the details.
 #'
-#' It is based on the modularity measure and a hierarchial approach.
+#' It is based on the modularity measure and a hierarchical approach.
 #' Initially, each vertex is assigned to a community on its own. In every step,
 #' vertices are re-assigned to communities in a local, greedy way: each vertex
 #' is moved to the community with which it achieves the highest contribution to
@@ -1933,7 +1933,7 @@ plot_dendrogram <- function(x, mode=igraph_opt("dend.plot.type"), ...)
 #'     the dendrogram. The dendrogram is cut into exactly \code{rect}
 #'     groups and they are marked via the \code{rect.hclust} command. Set
 #'     this to zero if you don't want to mark any groups.
-#'   \item \code{colbar} The colors of the rectanges that mark the
+#'   \item \code{colbar} The colors of the rectangles that mark the
 #'     vertex groups via the \code{rect} argument.
 #'   \item \code{hang} Where to put the leaf nodes, this corresponds to the
 #'     \code{hang} argument of \code{plot.hclust}.

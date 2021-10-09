@@ -45,7 +45,7 @@ An igraph graph.
 }
 \description{
 \code{make_lattice} is a flexible function, it can create lattices of
-arbitrary dimensions, periodic or unperiodic ones. It has two
+arbitrary dimensions, periodic or aperiodic ones. It has two
 forms. In the first form you only supply \code{dimvector}, but not
 \code{length} and \code{dim}. In the second form you omit
 \code{dimvector} and supply \code{length} and \code{dim}.

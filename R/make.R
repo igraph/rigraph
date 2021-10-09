@@ -354,7 +354,7 @@ with_graph_ <- function(...) {
 #' @section Notable graphs:
 #'
 #' \code{make_graph} can create some notable graphs. The name of the
-#' graph (case insensitive), a character scalar must be suppliced as
+#' graph (case insensitive), a character scalar must be supplied as
 #' the \code{edges} argument, and other arguments are ignored. (A warning
 #' is given is they are specified.)
 #'
@@ -378,7 +378,7 @@ with_graph_ <- function(...) {
 #'     and not vertex transitive.}
 #'   \item{Franklin}{This is a graph whose embedding
 #'     to the Klein bottle can be colored with six colors, it is a counterexample
-#'     to the neccessity of the Heawood conjecture on a Klein bottle. It has 12
+#'     to the necessity of the Heawood conjecture on a Klein bottle. It has 12
 #'     vertices and 18 edges.}
 #'   \item{Frucht}{The Frucht Graph is the smallest
 #'     cubical graph whose automorphism group consists only of the identity
@@ -433,9 +433,9 @@ with_graph_ <- function(...) {
 #'   \item{Tetrahedral,
 #'     Tetrahedron}{Platonic solid with 4 vertices and 6 edges.}
 #'   \item{Thomassen}{The smallest hypotraceable graph, on 34 vertices and 52
-#'     edges. A hypotracable graph does not contain a Hamiltonian path but after
+#'     edges. A hypotraceable graph does not contain a Hamiltonian path but after
 #'     removing any single vertex from it the remainder always contains a
-#'     Hamiltonian path. A graph containing a Hamiltonian path is called tracable.}
+#'     Hamiltonian path. A graph containing a Hamiltonian path is called traceable.}
 #'   \item{Tutte}{Tait's Hamiltonian graph conjecture states that every
 #'     3-connected 3-regular planar graph is Hamiltonian.  This graph is a
 #'     counterexample. It has 46 vertices and 69 edges.}
@@ -984,7 +984,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' Create a lattice graph
 #'
 #' \code{make_lattice} is a flexible function, it can create lattices of
-#' arbitrary dimensions, periodic or unperiodic ones. It has two
+#' arbitrary dimensions, periodic or aperiodic ones. It has two
 #' forms. In the first form you only supply \code{dimvector}, but not
 #' \code{length} and \code{dim}. In the second form you omit
 #' \code{dimvector} and supply \code{length} and \code{dim}.
@@ -1446,7 +1446,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
 #'
-#' \code{make_bipartite_graph} basically does three things. First it checks tha
+#' \code{make_bipartite_graph} basically does three things. First it checks the
 #' \code{edges} vector against the vertex \code{types}. Then it creates a graph
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
 #' a vertex attribute called \code{type}.

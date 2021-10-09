@@ -16,7 +16,7 @@ as.igraph(x, ...)
 All these functions return an igraph graph.
 }
 \description{
-These fucntions convert various objects to igraph graphs.
+These functions convert various objects to igraph graphs.
 }
 \details{
 You can use \code{as.igraph} to convert various objects to igraph graphs.

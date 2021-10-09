@@ -77,9 +77,9 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \code{tk_off} closes all Tk plots.
 #' 
-#' \code{tk_fit} fits the plot to the given rectange
+#' \code{tk_fit} fits the plot to the given rectangle
 #' (\code{width} and \code{height}), if some of these are \code{NULL} the
-#' actual phisical width od height of the plot window is used.
+#' actual physical width od height of the plot window is used.
 #' 
 #' \code{tk_reshape} applies a new layout to the plot, its optional
 #' parameters will be collected to a list analogous to \code{layout.par}.
@@ -89,7 +89,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \code{tk_canvas} returns the Tk canvas object that belongs to a graph
 #' plot. The canvas can be directly manipulated then, eg. labels can be added,
-#' it could be saved to a file programatically, etc. See an example below.
+#' it could be saved to a file programmatically, etc. See an example below.
 #' 
 #' \code{tk_coords} returns the coordinates of the vertices in a matrix.
 #' Each row corresponds to one vertex.
@@ -124,7 +124,7 @@ assign(".next", 1, .tkplot.env)
 #' @return \code{tkplot} returns an integer, the id of the plot, this can be
 #' used to manipulate it from the command line.
 #' 
-#' \code{tk_canvas} retuns \code{tkwin} object, the Tk canvas.
+#' \code{tk_canvas} returns \code{tkwin} object, the Tk canvas.
 #' 
 #' \code{tk_coords} returns a matrix with the coordinates.
 #' 
@@ -140,7 +140,7 @@ assign(".next", 1, .tkplot.env)
 #' g <- make_ring(10)
 #' tkplot(g)
 #' 
-#' ## Saving a tkplot() to a file programatically
+#' ## Saving a tkplot() to a file programmatically
 #' g <- make_star(10, center=10) %u% make_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
 #' lay <- layout_nicely(g)

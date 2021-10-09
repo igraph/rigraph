@@ -82,7 +82,7 @@ The SIR model is a simple model from epidemiology. The individuals of the
 population might be in three states: susceptible, infected and recovered.
 Recovered people are assumed to be immune to the disease. Susceptibles
 become infected with a rate that depends on their number of infected
-neigbors. Infected people become recovered with a constant rate.
+neighbors. Infected people become recovered with a constant rate.
 
 The function \code{sir} simulates the model.
 
