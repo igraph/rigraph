@@ -422,8 +422,7 @@ modularity <- function(x, ...)
 modularity.igraph <- function(x, membership, weights=NULL, ...) {
   # Argument checks
   if (!is_igraph(x)) { stop("Not a graph object") }
-  if (is.null(membership) || !is.numeric(membership))
-  {
+  if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
     stop("Membership is not a numerical vector")
   }
   membership <- as.numeric(membership)
