@@ -20,12 +20,17 @@ transitivity(
 \describe{ \item{"global"}{The global transitivity of an undirected
 graph (directed graphs are considered as undirected ones as well). This is
 simply the ratio of the triangles and the connected triples in the graph.
-For directed graph the direction of the edges is ignored. }
+For directed graphs the direction of the edges is ignored.}
 \item{"local"}{The local transitivity of an undirected graph, this is
 calculated for each vertex given in the \code{vids} argument. The local
 transitivity of a vertex is the ratio of the triangles connected to the
 vertex and the triples centered on the vertex. For directed graph the
-direction of the edges is ignored. } \item{"undirected"}{This is the
+direction of the edges is ignored. Note that calculations do not work
+reliably in non-simple graphs, and since the presence of mutual edges in
+a directed graph becomes non-simple when treated as undirected, therefore
+it is advised to avoid using this function on non-simple and/or directed
+graphs. igraph prints a warning in these cases; the warning will be turned
+into an error in igraph 1.3.0.} \item{"undirected"}{This is the
 same as \code{global}.} \item{"globalundirected"}{This is the same as
 \code{global}.} \item{"localundirected"}{This is the same as
 \code{local}.} \item{"barrat"}{The weighted transitivity as defined A.
