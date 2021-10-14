@@ -28,6 +28,19 @@ Fixed:
 Deprecated:
 - The `membership` argument of `modularity.matrix()` is now deprecated as the
   function never needed it anyway.
+- `modularity()` now prints a warning when it is applied on a directed graph
+  because the implementation in igraph's C core does not support directed
+  graphs as of version 0.8.5. The warning will be turned into an error in
+  the next minor (1.3.0) version of the R interface; the error will be removed
+  later when the C core is updated to a version that supports modularity for
+  directed networks.
+- `transitivity()` now prints a warning when its local variant (`type="local"`)
+  is called on a directed graph or a graph with multiple edges beecause the
+  implementation in the C core of igraph does not work reliably in these cases
+  as of version 0.8.5. The warning will be turned into an error in the next
+  minor (1.3.0) version of the R interface; the error will be removed later
+  when the C core is updated to a version that supports transitivity for
+  networks with multiple edges.
 
 Misc:
 - Documentation improvements.
