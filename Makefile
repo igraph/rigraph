@@ -211,7 +211,7 @@ igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGE
 #############
 
 check: igraph_$(VERSION).tar.gz
-	R CMD check --as-cran $< && Rscript -e 'rhub::check_for_cran()'
+	_R_CHECK_FORCE_SUGGESTS_=0 R CMD check --as-cran $< && Rscript -e 'rhub::check_for_cran()'
 
 check-links: igraph_$(VERSION).tar.gz
 	mkdir -p html-docs
