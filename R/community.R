@@ -2157,12 +2157,12 @@ i_compare <- function (comm1, comm2, method=c("vi", "nmi", "split.join",
   comm1 <- if (inherits(comm1, "communities")) {
     as.numeric(membership(comm1))
   } else {
-    as.numeric(comm1)
+    as.numeric(as.factor(comm1))
   }
   comm2 <- if (inherits(comm2, "communities")) {
     as.numeric(membership(comm2))
   } else {
-    as.numeric(comm2)
+    as.numeric(as.factor(comm2))
   }
   method <- switch(igraph.match.arg(method), vi = 0, nmi = 1,
                    split.join = 2, rand = 3, adjusted.rand = 4)
