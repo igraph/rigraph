@@ -21,3 +21,4 @@
 ^doc$
 ^patches$
 ^vendor$
+^cran-comments\.md$
