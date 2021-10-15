@@ -22,3 +22,4 @@
 ^patches$
 ^vendor$
 ^cran-comments\.md$
+^CRAN-RELEASE$
