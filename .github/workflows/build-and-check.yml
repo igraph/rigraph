@@ -164,7 +164,7 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: igraph/check
 
-  # temporary attempt at a automatically deploying the source code to the master branch
+  # Automatically deploy the source code to the master branch
   deploy_src:
     runs-on: ubuntu-20.04
 
@@ -174,7 +174,6 @@ jobs:
     needs: R-CMD-check
 
     steps:
-
       - name: Checkout master branch
         uses: actions/checkout@v2
         with:
@@ -187,6 +186,8 @@ jobs:
 
       - name: Extract source package
         run: |
+          find . -type f -maxdepth 1 | xargs rm
+          rm -rf R build demo doc inst man src tests
           tar -xvf igraph*.tar.gz --strip-components=1
           rm *.tar.gz
 
