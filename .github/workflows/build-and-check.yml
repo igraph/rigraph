@@ -186,7 +186,7 @@ jobs:
 
       - name: Extract source package
         run: |
-          find . -type f -maxdepth 1 | xargs rm
+          find . -type f -maxdepth 1 | grep -v '^igraph.*tar.gz' | xargs rm
           rm -rf R build demo doc inst man src tests
           tar -xvf igraph*.tar.gz --strip-components=1
           rm *.tar.gz
