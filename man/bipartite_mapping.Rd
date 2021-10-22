@@ -13,7 +13,7 @@ bipartite_mapping(graph)
 \value{
 A named list with two elements: \item{res}{A logical scalar,
 \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
-possibly vertex type mapping, a logical vector. If no such mapping exists,
+possible vertex type mapping, a logical vector. If no such mapping exists,
 then an empty vector.}
 }
 \description{
@@ -38,15 +38,15 @@ mapped independently.
 }
 \examples{
 
-## A ring has just one loop, so it is fine
+## Rings with an even number of vertices are bipartite
 g <- make_ring(10)
 bipartite_mapping(g)
 
-## A star is fine, too
+## All star graphs are bipartite
 g2 <- make_star(10)
 bipartite_mapping(g2)
 
-## A graph containing a triangle is not fine
+## A graph containing a triangle is not bipartite
 g3 <- make_ring(10)
 g3 <- add_edges(g3, c(1,3))
 bipartite_mapping(g3)
