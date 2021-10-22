@@ -25,7 +25,7 @@ function without that prefix.
 These shorter forms can be used together with \code{make_}.
 The advantage of this form is that the user can specify constructor
 modifiers which work with all constructors. E.g. the
-\code{link{with_vertex_}} modifier adds vertex attributes
+\code{\link{with_vertex_}} modifier adds vertex attributes
 to the newly created graphs.
 
 See the examples and the various constructor modifiers below.
