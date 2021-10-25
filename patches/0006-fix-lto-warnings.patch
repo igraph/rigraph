@@ -1,0 +1,168 @@
+diff --git a/src/foreign-dl-parser.y b/src/foreign-dl-parser.y
+index 3282b6b85..8ae43f49c 100644
+--- a/src/foreign-dl-parser.y
++++ b/src/foreign-dl-parser.y
+@@ -58,7 +58,6 @@ int igraph_dl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
+ int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context, 
+ 		      const char *s);
+ char *igraph_dl_yyget_text (yyscan_t yyscanner );
+-int igraph_dl_yyget_leng (yyscan_t yyscanner );
+ 
+ int igraph_i_dl_add_str(char *newstr, int length, 
+ 			igraph_i_dl_parsedata_t *context);
+diff --git a/src/foreign-gml-parser.y b/src/foreign-gml-parser.y
+index ddaba88f9..41beec35b 100644
+--- a/src/foreign-gml-parser.y
++++ b/src/foreign-gml-parser.y
+@@ -63,7 +63,6 @@ int igraph_gml_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void *scanner);
+ int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
+ 		       const char *s);
+ char *igraph_gml_yyget_text (yyscan_t yyscanner );
+-int igraph_gml_yyget_leng (yyscan_t yyscanner );
+ void igraph_i_gml_get_keyword(char *s, int len, void *res);
+ void igraph_i_gml_get_string(char *s, int len, void *res);
+ double igraph_i_gml_get_real(char *s, int len);
+diff --git a/src/foreign-lgl-parser.y b/src/foreign-lgl-parser.y
+index 0b997b554..e8c694d9e 100644
+--- a/src/foreign-lgl-parser.y
++++ b/src/foreign-lgl-parser.y
+@@ -63,7 +63,6 @@ int igraph_lgl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp,
+ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
+ 		       const char *s);
+ char *igraph_lgl_yyget_text (yyscan_t yyscanner );
+-int igraph_lgl_yyget_leng (yyscan_t yyscanner );
+ igraph_real_t igraph_lgl_get_number(const char *str, long int len);
+ 
+ #define scanner context->scanner
+diff --git a/src/foreign-ncol-parser.y b/src/foreign-ncol-parser.y
+index 7ce3b4390..da4a0adf9 100644
+--- a/src/foreign-ncol-parser.y
++++ b/src/foreign-ncol-parser.y
+@@ -64,7 +64,6 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
+ 			igraph_i_ncol_parsedata_t *context, 
+ 			const char *s);
+ char *igraph_ncol_yyget_text (yyscan_t yyscanner );
+-int igraph_ncol_yyget_leng (yyscan_t yyscanner );
+ igraph_real_t igraph_ncol_get_number(const char *str, long int len);
+ 
+ #define scanner context->scanner
+diff --git a/src/foreign-pajek-parser.y b/src/foreign-pajek-parser.y
+index 4643b5666..593b23d90 100644
+--- a/src/foreign-pajek-parser.y
++++ b/src/foreign-pajek-parser.y
+@@ -66,7 +66,6 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
+ 			 igraph_i_pajek_parsedata_t *context, 
+ 			 const char *s);
+ char *igraph_pajek_yyget_text (yyscan_t yyscanner );
+-int igraph_pajek_yyget_leng (yyscan_t yyscanner );
+ 
+ int igraph_i_pajek_add_string_vertex_attribute(const char *name, 
+ 					       const char *value,
+--- a/src/igraph_blas_internal.h
++++ b/src/igraph_blas_internal.h
+@@ -57,7 +57,7 @@
+     #define igraphdsyrk_    dsyrk_
+ #endif
+ 
+-int igraphdgemv_(char *trans, int *m, int *n, igraph_real_t *alpha,
++void igraphdgemv_(char *trans, int *m, int *n, igraph_real_t *alpha,
+                  igraph_real_t *a, int *lda, igraph_real_t *x, int *incx,
+                  igraph_real_t *beta, igraph_real_t *y, int *incy);
+ 
+--- a/src/igraph_arpack_internal.h
++++ b/src/igraph_arpack_internal.h
+@@ -126,7 +126,7 @@
+ 
+ #ifdef HAVE_GFORTRAN
+ 
+-int igraphdsaupd_(int *ido, char *bmat, int *n,
++void igraphdsaupd_(int *ido, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
+                   int *ldv, int *iparam, int *ipntr,
+@@ -134,7 +134,7 @@
+                   int *lworkl, int *info,
+                   int bmat_len, int which_len);
+ 
+-int igraphdseupd_(int *rvec, char *howmny, int *select,
++void igraphdseupd_(int *rvec, char *howmny, int *select,
+                   igraph_real_t *d, igraph_real_t *z, int *ldz,
+                   igraph_real_t *sigma, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+@@ -144,7 +144,7 @@
+                   int *lworkl, int *info,
+                   int howmny_len, int bmat_len, int which_len);
+ 
+-int igraphdnaupd_(int *ido, char *bmat, int *n,
++void igraphdnaupd_(int *ido, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
+                   int *ldv, int *iparam, int *ipntr,
+@@ -152,7 +152,7 @@
+                   int *lworkl, int *info,
+                   int bmat_len, int which_len);
+ 
+-int igraphdneupd_(int *rvec, char *howmny, int *select,
++void igraphdneupd_(int *rvec, char *howmny, int *select,
+                   igraph_real_t *dr, igraph_real_t *di,
+                   igraph_real_t *z, int *ldz,
+                   igraph_real_t *sigmar, igraph_real_t *sigmai,
+@@ -164,24 +164,24 @@
+                   int *lworkl, int *info,
+                   int howmny_len, int bmat_len, int which_len);
+ 
+-int igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
++void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
+                   igraph_real_t *x2,
+                   int which_len);
+ 
+-int igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
++void igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
+                   igraph_real_t *ximag, igraph_real_t *y,
+                   int which_len);
+ 
+ #else
+ 
+-int igraphdsaupd_(int *ido, char *bmat, int *n,
++void igraphdsaupd_(int *ido, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
+                   int *ldv, int *iparam, int *ipntr,
+                   igraph_real_t *workd, igraph_real_t *workl,
+                   int *lworkl, int *info);
+ 
+-int igraphdseupd_(int *rvec, char *howmny, int *select,
++void igraphdseupd_(int *rvec, char *howmny, int *select,
+                   igraph_real_t *d, igraph_real_t *z, int *ldz,
+                   igraph_real_t *sigma, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+@@ -190,14 +190,14 @@
+                   igraph_real_t *workd, igraph_real_t *workl,
+                   int *lworkl, int *info);
+ 
+-int igraphdnaupd_(int *ido, char *bmat, int *n,
++void igraphdnaupd_(int *ido, char *bmat, int *n,
+                   char *which, int *nev, igraph_real_t *tol,
+                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
+                   int *ldv, int *iparam, int *ipntr,
+                   igraph_real_t *workd, igraph_real_t *workl,
+                   int *lworkl, int *info);
+ 
+-int igraphdneupd_(int *rvec, char *howmny, int *select,
++void igraphdneupd_(int *rvec, char *howmny, int *select,
+                   igraph_real_t *dr, igraph_real_t *di,
+                   igraph_real_t *z, int *ldz,
+                   igraph_real_t *sigmar, igraph_real_t *sigmai,
+@@ -208,10 +208,10 @@
+                   igraph_real_t *workd, igraph_real_t *workl,
+                   int *lworkl, int *info);
+ 
+-int igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
++void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
+                   igraph_real_t *x2);
+ 
+-int igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
++void igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
+                   igraph_real_t *ximag, igraph_real_t *y);
+ 
+ #endif

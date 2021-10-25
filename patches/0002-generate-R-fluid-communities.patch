@@ -1,4 +1,4 @@
-diff --git a/interfaces/functions.def b/interfaces/functions.def
+diff --git a/cigraph/interfaces/functions.def b/cigraph/interfaces/functions.def
 index 324a7f5b0..e40195dc0 100644
 --- a/cigraph/interfaces/functions.def
 +++ b/cigraph/interfaces/functions.def
