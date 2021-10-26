@@ -27,7 +27,7 @@ in the Euclidean norm.}
 to give edge weights for calculating the weighted eigenvector centrality of
 vertices. If this is \code{NULL} and the graph has a \code{weight} edge
 attribute then that is used. If \code{weights} is a numerical vector then it
-used, even if the graph has a \code{weights} edge attribute. If this is
+used, even if the graph has a \code{weight} edge attribute. If this is
 \code{NA}, then no edge weights are used (even if the graph has a
 \code{weight} edge attribute. Note that if there are negative edge weights
 and the direction of the edges is considered, then the eigenvector might be
