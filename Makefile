@@ -124,21 +124,21 @@ $(RAY2): src/%: vendor/%
 
 src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
-		tools/stimulus/types-RC.def
+		tools/stimulus/types-RC.yaml
 	$(PYVENV)/bin/stimulus \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
-           -t tools/stimulus/types-RC.def \
+           -t tools/stimulus/types-RC.yaml \
            -l RC
 
 R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
-		tools/stimulus/types-RR.def
+		tools/stimulus/types-RR.yaml
 	$(PYVENV)/bin/stimulus \
            -f $(top_srcdir)/interfaces/functions.def \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
-           -t tools/stimulus/types-RR.def \
+           -t tools/stimulus/types-RR.yaml \
            -l RR
 
 # configure files
