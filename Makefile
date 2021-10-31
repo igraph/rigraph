@@ -3,6 +3,7 @@
 
 PYTHON ?= python3
 PYVENV ?= .venv
+STIMULUS ?= $(PYVENV)/bin/stimulus
 
 all: igraph
 
@@ -124,18 +125,23 @@ $(RAY2): src/%: vendor/%
 
 src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/rinterface.c.in  \
+		tools/stimulus/functions-R.yaml \
 		tools/stimulus/types-RC.yaml
-	$(PYVENV)/bin/stimulus \
+	$(STIMULUS) \
            -f $(top_srcdir)/interfaces/functions.def \
+           -f tools/stimulus/functions-R.yaml \
            -i tools/stimulus/rinterface.c.in \
            -o src/rinterface.c \
            -t tools/stimulus/types-RC.yaml \
            -l RC
 
-R/auto.R: $(top_srcdir)/interfaces/functions.def tools/stimulus/auto.R.in \
+R/auto.R: $(top_srcdir)/interfaces/functions.def \
+		tools/stimulus/auto.R.in \
+		tools/stimulus/functions-R.yaml \
 		tools/stimulus/types-RR.yaml
-	$(PYVENV)/bin/stimulus \
+	$(STIMULUS) \
            -f $(top_srcdir)/interfaces/functions.def \
+           -f tools/stimulus/functions-R.yaml \
            -i tools/stimulus/auto.R.in \
            -o R/auto.R \
            -t tools/stimulus/types-RR.yaml \

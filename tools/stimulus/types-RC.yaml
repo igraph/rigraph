@@ -1108,8 +1108,8 @@ PAGERANKALGO:
 PAGERANKOPT:
     CTYPE: |-
         igraph_pagerank_power_options_t %C%1;
-          igraph_arpack_options_t %C%2;
-          void*
+        igraph_arpack_options_t %C%2;
+        void*
     INCONV:
         INOUT: "if (%C1% == IGRAPH_PAGERANK_ALGO_POWER) {\n  R_SEXP_to_pagerank_power_options(%I%,\
             \ &%C%1);\n  %C% = &%C%1;\n  } else if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK)\
