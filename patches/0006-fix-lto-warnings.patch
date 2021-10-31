@@ -1,7 +1,7 @@
-diff --git a/src/foreign-dl-parser.y b/src/foreign-dl-parser.y
+diff --git a/cigraph/src/foreign-dl-parser.y b/cigraph/src/foreign-dl-parser.y
 index 3282b6b85..8ae43f49c 100644
---- a/src/foreign-dl-parser.y
-+++ b/src/foreign-dl-parser.y
+--- a/cigraph/src/foreign-dl-parser.y
++++ b/cigraph/src/foreign-dl-parser.y
 @@ -58,7 +58,6 @@ int igraph_dl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
  int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context, 
  		      const char *s);
@@ -10,10 +10,10 @@ index 3282b6b85..8ae43f49c 100644
  
  int igraph_i_dl_add_str(char *newstr, int length, 
  			igraph_i_dl_parsedata_t *context);
-diff --git a/src/foreign-gml-parser.y b/src/foreign-gml-parser.y
+diff --git a/cigraph/src/foreign-gml-parser.y b/cigraph/src/foreign-gml-parser.y
 index ddaba88f9..41beec35b 100644
---- a/src/foreign-gml-parser.y
-+++ b/src/foreign-gml-parser.y
+--- a/cigraph/src/foreign-gml-parser.y
++++ b/cigraph/src/foreign-gml-parser.y
 @@ -63,7 +63,6 @@ int igraph_gml_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void *scanner);
  int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
  		       const char *s);
@@ -22,10 +22,10 @@ index ddaba88f9..41beec35b 100644
  void igraph_i_gml_get_keyword(char *s, int len, void *res);
  void igraph_i_gml_get_string(char *s, int len, void *res);
  double igraph_i_gml_get_real(char *s, int len);
-diff --git a/src/foreign-lgl-parser.y b/src/foreign-lgl-parser.y
+diff --git a/cigraph/src/foreign-lgl-parser.y b/cigraph/src/foreign-lgl-parser.y
 index 0b997b554..e8c694d9e 100644
---- a/src/foreign-lgl-parser.y
-+++ b/src/foreign-lgl-parser.y
+--- a/cigraph/src/foreign-lgl-parser.y
++++ b/cigraph/src/foreign-lgl-parser.y
 @@ -63,7 +63,6 @@ int igraph_lgl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp,
  int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
  		       const char *s);
@@ -34,10 +34,10 @@ index 0b997b554..e8c694d9e 100644
  igraph_real_t igraph_lgl_get_number(const char *str, long int len);
  
  #define scanner context->scanner
-diff --git a/src/foreign-ncol-parser.y b/src/foreign-ncol-parser.y
+diff --git a/cigraph/src/foreign-ncol-parser.y b/cigraph/src/foreign-ncol-parser.y
 index 7ce3b4390..da4a0adf9 100644
---- a/src/foreign-ncol-parser.y
-+++ b/src/foreign-ncol-parser.y
+--- a/cigraph/src/foreign-ncol-parser.y
++++ b/cigraph/src/foreign-ncol-parser.y
 @@ -64,7 +64,6 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
  			igraph_i_ncol_parsedata_t *context, 
  			const char *s);
@@ -46,10 +46,10 @@ index 7ce3b4390..da4a0adf9 100644
  igraph_real_t igraph_ncol_get_number(const char *str, long int len);
  
  #define scanner context->scanner
-diff --git a/src/foreign-pajek-parser.y b/src/foreign-pajek-parser.y
+diff --git a/cigraph/src/foreign-pajek-parser.y b/cigraph/src/foreign-pajek-parser.y
 index 4643b5666..593b23d90 100644
---- a/src/foreign-pajek-parser.y
-+++ b/src/foreign-pajek-parser.y
+--- a/cigraph/src/foreign-pajek-parser.y
++++ b/cigraph/src/foreign-pajek-parser.y
 @@ -66,7 +66,6 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
  			 igraph_i_pajek_parsedata_t *context, 
  			 const char *s);
