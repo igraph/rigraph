@@ -4,5 +4,4 @@
 # needs to change whenever a package is updated.
 
 git+git://github.com/igraph/stimulus@0.5.0#egg=stimulus
-git+git://github.com/linkchecker/linkchecker@v10.0.1#egg=linkchecker
 
