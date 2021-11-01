@@ -60,18 +60,21 @@ index 4643b5666..593b23d90 100644
  					       const char *value,
 --- a/src/igraph_blas_internal.h
 +++ b/src/igraph_blas_internal.h
-@@ -57,7 +57,7 @@
+@@ -57,9 +57,9 @@
      #define igraphdsyrk_    dsyrk_
  #endif
  
 -int igraphdgemv_(char *trans, int *m, int *n, igraph_real_t *alpha,
 +void igraphdgemv_(char *trans, int *m, int *n, igraph_real_t *alpha,
                   igraph_real_t *a, int *lda, igraph_real_t *x, int *incx,
-                  igraph_real_t *beta, igraph_real_t *y, int *incy);
+-                 igraph_real_t *beta, igraph_real_t *y, int *incy);
++                 igraph_real_t *beta, igraph_real_t *y, int *incy, long int trans_len);
  
+ int igraphdgemm_(char *transa, char *transb, int *m, int *n, int *k,
+                  double *alpha, double *a, int *lda, double *b, int *ldb,
 --- a/src/igraph_arpack_internal.h
 +++ b/src/igraph_arpack_internal.h
-@@ -126,7 +126,7 @@
+@@ -126,15 +126,15 @@
  
  #ifdef HAVE_GFORTRAN
  
@@ -80,36 +83,44 @@ index 4643b5666..593b23d90 100644
                    char *which, int *nev, igraph_real_t *tol,
                    igraph_real_t *resid, int *ncv, igraph_real_t *v,
                    int *ldv, int *iparam, int *ipntr,
-@@ -134,7 +134,7 @@
+                   igraph_real_t *workd, igraph_real_t *workl,
                    int *lworkl, int *info,
-                   int bmat_len, int which_len);
+-                  int bmat_len, int which_len);
++                  long int bmat_len, long int which_len);
  
 -int igraphdseupd_(int *rvec, char *howmny, int *select,
 +void igraphdseupd_(int *rvec, char *howmny, int *select,
                    igraph_real_t *d, igraph_real_t *z, int *ldz,
                    igraph_real_t *sigma, char *bmat, int *n,
                    char *which, int *nev, igraph_real_t *tol,
-@@ -144,7 +144,7 @@
+@@ -142,17 +142,17 @@
+                   int *ldv, int *iparam, int *ipntr,
+                   igraph_real_t *workd, igraph_real_t *workl,
                    int *lworkl, int *info,
-                   int howmny_len, int bmat_len, int which_len);
+-                  int howmny_len, int bmat_len, int which_len);
++                  long int howmny_len, long int bmat_len, long int which_len);
  
 -int igraphdnaupd_(int *ido, char *bmat, int *n,
 +void igraphdnaupd_(int *ido, char *bmat, int *n,
                    char *which, int *nev, igraph_real_t *tol,
                    igraph_real_t *resid, int *ncv, igraph_real_t *v,
                    int *ldv, int *iparam, int *ipntr,
-@@ -152,7 +152,7 @@
+                   igraph_real_t *workd, igraph_real_t *workl,
                    int *lworkl, int *info,
-                   int bmat_len, int which_len);
+-                  int bmat_len, int which_len);
++                  long int bmat_len, long int which_len);
  
 -int igraphdneupd_(int *rvec, char *howmny, int *select,
 +void igraphdneupd_(int *rvec, char *howmny, int *select,
                    igraph_real_t *dr, igraph_real_t *di,
                    igraph_real_t *z, int *ldz,
                    igraph_real_t *sigmar, igraph_real_t *sigmai,
-@@ -164,24 +164,24 @@
+@@ -162,13 +162,13 @@
+                   int *ldv, int *iparam, int *ipntr,
+                   igraph_real_t *workd, igraph_real_t *workl,
                    int *lworkl, int *info,
-                   int howmny_len, int bmat_len, int which_len);
+-                  int howmny_len, int bmat_len, int which_len);
++                  long int howmny_len, long int bmat_len, long int which_len);
  
 -int igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
 +void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
@@ -121,48 +132,33 @@ index 4643b5666..593b23d90 100644
                    igraph_real_t *ximag, igraph_real_t *y,
                    int which_len);
  
- #else
+--- cigraph/src/blas.c	2021-09-27 23:23:54.000000000 +0200
++++ src/blas.c	2021-11-01 21:43:13.000000000 +0100
+@@ -63,8 +63,13 @@
+     assert(igraph_vector_size(x) == transpose ? m : n);
+     assert(igraph_vector_size(y) == transpose ? n : m);
  
--int igraphdsaupd_(int *ido, char *bmat, int *n,
-+void igraphdsaupd_(int *ido, char *bmat, int *n,
-                   char *which, int *nev, igraph_real_t *tol,
-                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
-                   int *ldv, int *iparam, int *ipntr,
-                   igraph_real_t *workd, igraph_real_t *workl,
-                   int *lworkl, int *info);
++#ifdef HAVE_GFORTRAN
++    igraphdgemv_(&trans, &m, &n, &alpha, VECTOR(a->data), &m,
++                 VECTOR(*x), &inc, &beta, VECTOR(*y), &inc, /* trans_len = */ 1);
++#else
+     igraphdgemv_(&trans, &m, &n, &alpha, VECTOR(a->data), &m,
+                  VECTOR(*x), &inc, &beta, VECTOR(*y), &inc);
++#endif
+ }
  
--int igraphdseupd_(int *rvec, char *howmny, int *select,
-+void igraphdseupd_(int *rvec, char *howmny, int *select,
-                   igraph_real_t *d, igraph_real_t *z, int *ldz,
-                   igraph_real_t *sigma, char *bmat, int *n,
-                   char *which, int *nev, igraph_real_t *tol,
-@@ -190,14 +190,14 @@
-                   igraph_real_t *workd, igraph_real_t *workl,
-                   int *lworkl, int *info);
+ /**
+@@ -99,8 +104,13 @@
+     m = (int) igraph_matrix_nrow(a);
+     n = (int) igraph_matrix_ncol(a);
  
--int igraphdnaupd_(int *ido, char *bmat, int *n,
-+void igraphdnaupd_(int *ido, char *bmat, int *n,
-                   char *which, int *nev, igraph_real_t *tol,
-                   igraph_real_t *resid, int *ncv, igraph_real_t *v,
-                   int *ldv, int *iparam, int *ipntr,
-                   igraph_real_t *workd, igraph_real_t *workl,
-                   int *lworkl, int *info);
++#ifdef HAVE_GFORTRAN
++    igraphdgemv_(&trans, &m, &n, &alpha, VECTOR(a->data), &m,
++                 (igraph_real_t*)x, &inc, &beta, y, &inc, /* trans_len = */ 1);
++#else
+     igraphdgemv_(&trans, &m, &n, &alpha, VECTOR(a->data), &m,
+                  (igraph_real_t*)x, &inc, &beta, y, &inc);
++#endif
+ }
  
--int igraphdneupd_(int *rvec, char *howmny, int *select,
-+void igraphdneupd_(int *rvec, char *howmny, int *select,
-                   igraph_real_t *dr, igraph_real_t *di,
-                   igraph_real_t *z, int *ldz,
-                   igraph_real_t *sigmar, igraph_real_t *sigmai,
-@@ -208,10 +208,10 @@
-                   igraph_real_t *workd, igraph_real_t *workl,
-                   int *lworkl, int *info);
- 
--int igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
-+void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
-                   igraph_real_t *x2);
- 
--int igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
-+void igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
-                   igraph_real_t *ximag, igraph_real_t *y);
- 
- #endif
+ igraph_real_t igraph_blas_dnrm2(const igraph_vector_t *v) {
