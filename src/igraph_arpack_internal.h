@@ -134,7 +134,7 @@ void igraphdsaupd_(int *ido, char *bmat, int *n,
                   int *lworkl, int *info,
                   long int bmat_len, long int which_len);
 
-void igraphdseupd_(int *rvec, char *howmny, int *select,
+void igraphdseupd_(void *rvec, char *howmny, void *select,
                   igraph_real_t *d, igraph_real_t *z, int *ldz,
                   igraph_real_t *sigma, char *bmat, int *n,
                   char *which, int *nev, igraph_real_t *tol,
@@ -152,7 +152,7 @@ void igraphdnaupd_(int *ido, char *bmat, int *n,
                   int *lworkl, int *info,
                   long int bmat_len, long int which_len);
 
-void igraphdneupd_(int *rvec, char *howmny, int *select,
+void igraphdneupd_(void *rvec, char *howmny, void *select,
                   igraph_real_t *dr, igraph_real_t *di,
                   igraph_real_t *z, int *ldz,
                   igraph_real_t *sigmar, igraph_real_t *sigmai,
@@ -164,11 +164,11 @@ void igraphdneupd_(int *rvec, char *howmny, int *select,
                   int *lworkl, int *info,
                   long int howmny_len, long int bmat_len, long int which_len);
 
-void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
+void igraphdsortr_(char *which, void *apply, int* n, igraph_real_t *x1,
                   igraph_real_t *x2,
                   long int which_len);
 
-void igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
+void igraphdsortc_(char *which, void *apply, int* n, igraph_real_t *xreal,
                   igraph_real_t *ximag, igraph_real_t *y,
                   long int which_len);
 
