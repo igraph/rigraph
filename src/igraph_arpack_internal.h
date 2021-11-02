@@ -166,11 +166,11 @@ void igraphdneupd_(int *rvec, char *howmny, int *select,
 
 void igraphdsortr_(char *which, int *apply, int* n, igraph_real_t *x1,
                   igraph_real_t *x2,
-                  int which_len);
+                  long int which_len);
 
 void igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
                   igraph_real_t *ximag, igraph_real_t *y,
-                  int which_len);
+                  long int which_len);
 
 #else
 
