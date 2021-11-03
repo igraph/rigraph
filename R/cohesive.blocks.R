@@ -183,8 +183,8 @@
 #' itself, invisibly.
 #' 
 #' \code{length} returns a numeric scalar, the number of blocks.
-#' @author Gabor Csardi \email{csardi.gabor@@gmail.com} for the current
-#' implementation, Peter McMahan (\url{http://home.uchicago.edu/~mcmahan/})
+#' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
+#' implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
 #' wrote the first version in R.
 #' @seealso \code{\link{cohesion}}
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:
