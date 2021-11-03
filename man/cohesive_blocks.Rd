@@ -286,7 +286,7 @@ Review}, 68(1):103--127, Feb 2003.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} for the current
-implementation, Peter McMahan (\url{http://home.uchicago.edu/~mcmahan/})
+implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
 wrote the first version in R.
 }
 \keyword{graphs}
