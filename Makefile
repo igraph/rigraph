@@ -242,6 +242,7 @@ clean:
 	@rm -rf src/
 	@rm -rf version_number
 	@rm -f  configure.ac
+	@cd cigraph && git reset --hard
 
 distclean: clean
 	@rm -rf $(PYVENV)

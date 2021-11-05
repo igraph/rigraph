@@ -1,60 +1,70 @@
-diff --git a/cigraph/src/foreign-dl-parser.y b/cigraph/src/foreign-dl-parser.y
+diff --git a/src/foreign-dl-parser.y b/src/foreign-dl-parser.y
 index 3282b6b85..8ae43f49c 100644
---- a/cigraph/src/foreign-dl-parser.y
-+++ b/cigraph/src/foreign-dl-parser.y
-@@ -58,7 +58,6 @@ int igraph_dl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
+--- a/src/foreign-dl-parser.y
++++ b/src/foreign-dl-parser.y
+@@ -58,7 +58,8 @@ int igraph_dl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
  int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context, 
  		      const char *s);
  char *igraph_dl_yyget_text (yyscan_t yyscanner );
 -int igraph_dl_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_dl_yyget_leng (yyscan_t yyscanner );
  
  int igraph_i_dl_add_str(char *newstr, int length, 
  			igraph_i_dl_parsedata_t *context);
-diff --git a/cigraph/src/foreign-gml-parser.y b/cigraph/src/foreign-gml-parser.y
+diff --git a/src/foreign-gml-parser.y b/src/foreign-gml-parser.y
 index ddaba88f9..41beec35b 100644
---- a/cigraph/src/foreign-gml-parser.y
-+++ b/cigraph/src/foreign-gml-parser.y
-@@ -63,7 +63,6 @@ int igraph_gml_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void *scanner);
+--- a/src/foreign-gml-parser.y
++++ b/src/foreign-gml-parser.y
+@@ -63,7 +63,8 @@ int igraph_gml_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void *scanner);
  int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
  		       const char *s);
  char *igraph_gml_yyget_text (yyscan_t yyscanner );
 -int igraph_gml_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_gml_yyget_leng (yyscan_t yyscanner );
  void igraph_i_gml_get_keyword(char *s, int len, void *res);
  void igraph_i_gml_get_string(char *s, int len, void *res);
  double igraph_i_gml_get_real(char *s, int len);
-diff --git a/cigraph/src/foreign-lgl-parser.y b/cigraph/src/foreign-lgl-parser.y
+diff --git a/src/foreign-lgl-parser.y b/src/foreign-lgl-parser.y
 index 0b997b554..e8c694d9e 100644
---- a/cigraph/src/foreign-lgl-parser.y
-+++ b/cigraph/src/foreign-lgl-parser.y
-@@ -63,7 +63,6 @@ int igraph_lgl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp,
+--- a/src/foreign-lgl-parser.y
++++ b/src/foreign-lgl-parser.y
+@@ -63,7 +63,8 @@ int igraph_lgl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp,
  int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
  		       const char *s);
  char *igraph_lgl_yyget_text (yyscan_t yyscanner );
 -int igraph_lgl_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_lgl_yyget_leng (yyscan_t yyscanner );
  igraph_real_t igraph_lgl_get_number(const char *str, long int len);
  
  #define scanner context->scanner
-diff --git a/cigraph/src/foreign-ncol-parser.y b/cigraph/src/foreign-ncol-parser.y
+diff --git a/src/foreign-ncol-parser.y b/src/foreign-ncol-parser.y
 index 7ce3b4390..da4a0adf9 100644
---- a/cigraph/src/foreign-ncol-parser.y
-+++ b/cigraph/src/foreign-ncol-parser.y
-@@ -64,7 +64,6 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
+--- a/src/foreign-ncol-parser.y
++++ b/src/foreign-ncol-parser.y
+@@ -64,7 +64,8 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
  			igraph_i_ncol_parsedata_t *context, 
  			const char *s);
  char *igraph_ncol_yyget_text (yyscan_t yyscanner );
 -int igraph_ncol_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_ncol_yyget_leng (yyscan_t yyscanner );
  igraph_real_t igraph_ncol_get_number(const char *str, long int len);
  
  #define scanner context->scanner
-diff --git a/cigraph/src/foreign-pajek-parser.y b/cigraph/src/foreign-pajek-parser.y
+diff --git a/src/foreign-pajek-parser.y b/src/foreign-pajek-parser.y
 index 4643b5666..593b23d90 100644
---- a/cigraph/src/foreign-pajek-parser.y
-+++ b/cigraph/src/foreign-pajek-parser.y
-@@ -66,7 +66,6 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
+--- a/src/foreign-pajek-parser.y
++++ b/src/foreign-pajek-parser.y
+@@ -66,7 +66,8 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
  			 igraph_i_pajek_parsedata_t *context, 
  			 const char *s);
  char *igraph_pajek_yyget_text (yyscan_t yyscanner );
 -int igraph_pajek_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_pajek_yyget_leng (yyscan_t yyscanner );
  
  int igraph_i_pajek_add_string_vertex_attribute(const char *name, 
  					       const char *value,
@@ -136,8 +146,8 @@ index 4643b5666..593b23d90 100644
  
  #else
  
---- cigraph/src/blas.c	2021-09-27 23:23:54.000000000 +0200
-+++ src/blas.c	2021-11-01 21:43:13.000000000 +0100
+--- a/src/blas.c	2021-09-27 23:23:54.000000000 +0200
++++ b/src/blas.c	2021-11-01 21:43:13.000000000 +0100
 @@ -63,8 +63,13 @@
      assert(igraph_vector_size(x) == transpose ? m : n);
      assert(igraph_vector_size(y) == transpose ? n : m);
@@ -166,3 +176,63 @@ index 4643b5666..593b23d90 100644
  }
  
  igraph_real_t igraph_blas_dnrm2(const igraph_vector_t *v) {
+--- a/src/foreign-dl-parser.c
++++ b/src/foreign-dl-parser.c
+@@ -149,7 +149,8 @@
+ int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context, 
+ 		      const char *s);
+ char *igraph_dl_yyget_text (yyscan_t yyscanner );
+-int igraph_dl_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_dl_yyget_leng (yyscan_t yyscanner );
+ 
+ int igraph_i_dl_add_str(char *newstr, int length, 
+ 			igraph_i_dl_parsedata_t *context);
+--- a/src/foreign-gml-parser.c
++++ b/src/foreign-gml-parser.c
+@@ -140,7 +140,8 @@
+ int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
+ 		       const char *s);
+ char *igraph_gml_yyget_text (yyscan_t yyscanner );
+-int igraph_gml_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_gml_yyget_leng (yyscan_t yyscanner );
+ void igraph_i_gml_get_keyword(char *s, int len, void *res);
+ void igraph_i_gml_get_string(char *s, int len, void *res);
+ double igraph_i_gml_get_real(char *s, int len);
+--- a/src/foreign-lgl-parser.c
++++ b/src/foreign-lgl-parser.c
+@@ -134,7 +134,8 @@
+ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
+ 		       const char *s);
+ char *igraph_lgl_yyget_text (yyscan_t yyscanner );
+-int igraph_lgl_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_lgl_yyget_leng (yyscan_t yyscanner );
+ igraph_real_t igraph_lgl_get_number(const char *str, long int len);
+ 
+ #define scanner context->scanner
+--- a/src/foreign-ncol-parser.c
++++ b/src/foreign-ncol-parser.c
+@@ -133,7 +133,8 @@
+ 			igraph_i_ncol_parsedata_t *context, 
+ 			const char *s);
+ char *igraph_ncol_yyget_text (yyscan_t yyscanner );
+-int igraph_ncol_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_ncol_yyget_leng (yyscan_t yyscanner );
+ igraph_real_t igraph_ncol_get_number(const char *str, long int len);
+ 
+ #define scanner context->scanner
+--- a/src/foreign-pajek-parser.c
++++ b/src/foreign-pajek-parser.c
+@@ -227,7 +227,8 @@
+ 			 igraph_i_pajek_parsedata_t *context, 
+ 			 const char *s);
+ char *igraph_pajek_yyget_text (yyscan_t yyscanner );
+-int igraph_pajek_yyget_leng (yyscan_t yyscanner );
++typedef size_t yy_size_t;
++yy_size_t igraph_pajek_yyget_leng (yyscan_t yyscanner );
+ 
+ int igraph_i_pajek_add_string_vertex_attribute(const char *name, 
+ 					       const char *value,
