@@ -66,7 +66,8 @@ int igraph_pajek_yyerror(YYLTYPE* locp,
 			 igraph_i_pajek_parsedata_t *context, 
 			 const char *s);
 char *igraph_pajek_yyget_text (yyscan_t yyscanner );
-int igraph_pajek_yyget_leng (yyscan_t yyscanner );
+typedef size_t yy_size_t;
+yy_size_t igraph_pajek_yyget_leng (yyscan_t yyscanner );
 
 int igraph_i_pajek_add_string_vertex_attribute(const char *name, 
 					       const char *value,

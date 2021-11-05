@@ -58,7 +58,8 @@ int igraph_dl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void* scanner);
 int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context, 
 		      const char *s);
 char *igraph_dl_yyget_text (yyscan_t yyscanner );
-int igraph_dl_yyget_leng (yyscan_t yyscanner );
+typedef size_t yy_size_t;
+yy_size_t igraph_dl_yyget_leng (yyscan_t yyscanner );
 
 int igraph_i_dl_add_str(char *newstr, int length, 
 			igraph_i_dl_parsedata_t *context);

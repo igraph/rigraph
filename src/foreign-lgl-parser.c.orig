@@ -64,19 +64,19 @@
 
 
 /* Substitute the variable and function names.  */
-#define yyparse         igraph_gml_yyparse
-#define yylex           igraph_gml_yylex
-#define yyerror         igraph_gml_yyerror
-#define yydebug         igraph_gml_yydebug
-#define yynerrs         igraph_gml_yynerrs
+#define yyparse         igraph_lgl_yyparse
+#define yylex           igraph_lgl_yylex
+#define yyerror         igraph_lgl_yyerror
+#define yydebug         igraph_lgl_yydebug
+#define yynerrs         igraph_lgl_yynerrs
 
 /* First part of user prologue.  */
-#line 23 "src/foreign-gml-parser.y"
+#line 23 "src/foreign-lgl-parser.y"
 
 
 /* 
    IGraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
    
    This program is free software; you can redistribute it and/or modify
@@ -97,43 +97,30 @@
 */
 
 #include <stdio.h>
-#include <math.h>
 #include <string.h>
-
-#include "igraph_error.h"
-#include "igraph_memory.h"
-#include "config.h"
 #include "igraph_hacks_internal.h"
+#include "igraph_types.h" 
+#include "igraph_types_internal.h"
 #include "igraph_math.h"
-#include "igraph_gml_tree.h"
-#include "foreign-gml-header.h"
-#include "foreign-gml-parser.h"
+#include "igraph_memory.h"
+#include "igraph_error.h"
+#include "config.h"
+#include "foreign-lgl-header.h"
+#include "foreign-lgl-parser.h"
 
 #define yyscan_t void*
 
-int igraph_gml_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, void *scanner);
-int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
+int igraph_lgl_yylex(YYSTYPE* lvalp, YYLTYPE* llocp, 
+		     void* scanner);
+int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
 		       const char *s);
-char *igraph_gml_yyget_text (yyscan_t yyscanner );
-typedef size_t yy_size_t;
-yy_size_t igraph_gml_yyget_leng (yyscan_t yyscanner );
-void igraph_i_gml_get_keyword(char *s, int len, void *res);
-void igraph_i_gml_get_string(char *s, int len, void *res);
-double igraph_i_gml_get_real(char *s, int len);
-igraph_gml_tree_t *igraph_i_gml_make_numeric(char* s, int len, double value);
-igraph_gml_tree_t *igraph_i_gml_make_numeric2(char* s, int len, 
-					      char *v, int vlen);
-igraph_gml_tree_t *igraph_i_gml_make_string(char* s, int len, 
-					    char *value, int valuelen);
-igraph_gml_tree_t *igraph_i_gml_make_list(char* s, int len, 
-					  igraph_gml_tree_t *list);
-igraph_gml_tree_t *igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_t* t2);
+char *igraph_lgl_yyget_text (yyscan_t yyscanner );
+int igraph_lgl_yyget_leng (yyscan_t yyscanner );
+igraph_real_t igraph_lgl_get_number(const char *str, long int len);
 
 #define scanner context->scanner
-#define USE(x) /*(x)*/
 
-
-#line 136 "y.tab.c"
+#line 124 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -166,14 +153,14 @@ igraph_gml_tree_t *igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_t* 
 
 /* Use api.header.include to #include this header
    instead of duplicating it here.  */
-#ifndef YY_IGRAPH_GML_YY_Y_TAB_H_INCLUDED
-# define YY_IGRAPH_GML_YY_Y_TAB_H_INCLUDED
+#ifndef YY_IGRAPH_LGL_YY_Y_TAB_H_INCLUDED
+# define YY_IGRAPH_LGL_YY_Y_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
 #endif
 #if YYDEBUG
-extern int igraph_gml_yydebug;
+extern int igraph_lgl_yydebug;
 #endif
 
 /* Token type.  */
@@ -181,13 +168,10 @@ extern int igraph_gml_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    STRING = 258,
-    NUM = 259,
-    KEYWORD = 260,
-    LISTOPEN = 261,
-    LISTCLOSE = 262,
-    EOFF = 263,
-    ERROR = 264
+    ALNUM = 258,
+    NEWLINE = 259,
+    HASH = 260,
+    ERROR = 261
   };
 #endif
 
@@ -195,16 +179,12 @@ extern int igraph_gml_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 93 "src/foreign-gml-parser.y"
+#line 81 "src/foreign-lgl-parser.y"
 
-   struct {
-      char *s;
-      int len;
-   } str;
-   void *tree;
-   double real;
+  long int edgenum;
+  double weightnum;
 
-#line 207 "y.tab.c"
+#line 188 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -228,9 +208,9 @@ struct YYLTYPE
 
 
 
-int igraph_gml_yyparse (igraph_i_gml_parsedata_t* context);
+int igraph_lgl_yyparse (igraph_i_lgl_parsedata_t* context);
 
-#endif /* !YY_IGRAPH_GML_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_IGRAPH_LGL_YY_Y_TAB_H_INCLUDED  */
 
 
 
@@ -537,21 +517,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  6
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   14
+#define YYLAST   10
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  10
+#define YYNTOKENS  7
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  7
+#define YYNNTS  8
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  12
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  17
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   264
+#define YYMAXUTOK   261
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -589,15 +569,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9
+       5,     6
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int8 yyrline[] =
 {
-       0,   121,   121,   122,   125,   126,   128,   130,   132,   134,
-     138,   141,   144
+       0,    96,    96,    97,    98,   101,   103,   105,   105,   107,
+     112,   121,   126
 };
 #endif
 
@@ -606,9 +586,9 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "STRING", "NUM", "KEYWORD", "LISTOPEN",
-  "LISTCLOSE", "EOFF", "ERROR", "$accept", "input", "list", "keyvalue",
-  "key", "num", "string", YY_NULLPTR
+  "$end", "error", "$undefined", "ALNUM", "NEWLINE", "HASH", "ERROR",
+  "$accept", "input", "vertex", "vertexdef", "edges", "edge", "edgeid",
+  "weight", YY_NULLPTR
 };
 #endif
 
@@ -617,11 +597,11 @@ static const char *const yytname[] =
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_int16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264
+       0,   256,   257,   258,   259,   260,   261
 };
 # endif
 
-#define YYPACT_NINF (-4)
+#define YYPACT_NINF (-3)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -635,8 +615,8 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       1,    -4,    10,     0,    -4,    -2,    -4,    -4,    -4,    -4,
-      -4,     1,    -4,    -4,    -4,     2,    -4
+      -3,     0,    -3,    -3,     3,    -3,    -3,    -3,    -1,     3,
+      -3,    -3,    -2,    -3,    -3,     4,    -3
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -644,20 +624,20 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,    10,     0,     2,     4,     0,     1,     3,     5,    12,
-      11,     0,     9,     6,     7,     0,     8
+       2,     0,     1,     3,     0,     4,     7,    11,     0,     5,
+       6,     8,     0,    12,     9,     0,    10
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4,     3,    -3,     6,    -4,    -4
+      -3,    -3,    -3,    -3,    -3,    -3,     1,    -3
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3,     4,     5,    13,    14
+      -1,     1,     5,     6,     9,    11,     8,    15
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -665,36 +645,36 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       8,     9,    10,     1,    11,     1,     1,     1,     7,    16,
-       6,    12,     8,     0,    15
+       2,    13,    14,    10,     3,     4,     7,     0,    16,     0,
+      12
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,     3,     4,     5,     6,     5,     5,     5,     8,     7,
-       0,     5,    15,    -1,    11
+       0,     3,     4,     4,     4,     5,     3,    -1,     4,    -1,
+       9
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,    11,    12,    13,    14,     0,     8,    13,     3,
-       4,     6,    14,    15,    16,    12,     7
+       0,     8,     0,     4,     5,     9,    10,     3,    13,    11,
+       4,    12,    13,     3,     4,    14,     4
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    10,    11,    11,    12,    12,    13,    13,    13,    13,
-      14,    15,    16
+       0,     7,     8,     8,     8,     9,    10,    11,    11,    12,
+      12,    13,    14
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     2,     2,     2,     4,     2,
-       1,     1,     1
+       0,     2,     0,     2,     2,     2,     3,     0,     2,     2,
+       3,     1,     1
 };
 
 
@@ -835,7 +815,7 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_gml_parsedata_t* context)
+yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_lgl_parsedata_t* context)
 {
   FILE *yyoutput = yyo;
   YYUSE (yyoutput);
@@ -858,7 +838,7 @@ yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YY
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_gml_parsedata_t* context)
+yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_lgl_parsedata_t* context)
 {
   YYFPRINTF (yyo, "%s %s (",
              yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
@@ -898,7 +878,7 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, igraph_i_gml_parsedata_t* context)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, igraph_i_lgl_parsedata_t* context)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1188,7 +1168,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_gml_parsedata_t* context)
+yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_lgl_parsedata_t* context)
 {
   YYUSE (yyvaluep);
   YYUSE (yylocationp);
@@ -1198,41 +1178,7 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
   YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  switch (yytype)
-    {
-    case 5: /* KEYWORD  */
-#line 116 "src/foreign-gml-parser.y"
-            { igraph_Free(((*yyvaluep).str).s); }
-#line 1206 "y.tab.c"
-        break;
-
-    case 12: /* list  */
-#line 117 "src/foreign-gml-parser.y"
-            { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1212 "y.tab.c"
-        break;
-
-    case 13: /* keyvalue  */
-#line 117 "src/foreign-gml-parser.y"
-            { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1218 "y.tab.c"
-        break;
-
-    case 14: /* key  */
-#line 116 "src/foreign-gml-parser.y"
-            { igraph_Free(((*yyvaluep).str).s); }
-#line 1224 "y.tab.c"
-        break;
-
-    case 16: /* string  */
-#line 116 "src/foreign-gml-parser.y"
-            { igraph_Free(((*yyvaluep).str).s); }
-#line 1230 "y.tab.c"
-        break;
-
-      default:
-        break;
-    }
+  YYUSE (yytype);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1244,7 +1190,7 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
 `----------*/
 
 int
-yyparse (igraph_i_gml_parsedata_t* context)
+yyparse (igraph_i_lgl_parsedata_t* context)
 {
 /* The lookahead symbol.  */
 int yychar;
@@ -1526,79 +1472,51 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2:
-#line 121 "src/foreign-gml-parser.y"
-                   { context->tree=(yyvsp[0].tree); }
-#line 1532 "y.tab.c"
-    break;
-
-  case 3:
-#line 122 "src/foreign-gml-parser.y"
-                   { context->tree=(yyvsp[-1].tree); }
-#line 1538 "y.tab.c"
-    break;
-
-  case 4:
-#line 125 "src/foreign-gml-parser.y"
-                      { (yyval.tree)=(yyvsp[0].tree); }
-#line 1544 "y.tab.c"
-    break;
-
-  case 5:
-#line 126 "src/foreign-gml-parser.y"
-                      { (yyval.tree)=igraph_i_gml_merge((yyvsp[-1].tree), (yyvsp[0].tree)); }
-#line 1550 "y.tab.c"
-    break;
-
   case 6:
-#line 129 "src/foreign-gml-parser.y"
-            { (yyval.tree)=igraph_i_gml_make_numeric((yyvsp[-1].str).s, (yyvsp[-1].str).len, (yyvsp[0].real)); }
-#line 1556 "y.tab.c"
-    break;
-
-  case 7:
-#line 131 "src/foreign-gml-parser.y"
-            { (yyval.tree)=igraph_i_gml_make_string((yyvsp[-1].str).s, (yyvsp[-1].str).len, (yyvsp[0].str).s, (yyvsp[0].str).len); }
-#line 1562 "y.tab.c"
-    break;
-
-  case 8:
-#line 133 "src/foreign-gml-parser.y"
-            { (yyval.tree)=igraph_i_gml_make_list((yyvsp[-3].str).s, (yyvsp[-3].str).len, (yyvsp[-1].tree)); }
-#line 1568 "y.tab.c"
+#line 103 "src/foreign-lgl-parser.y"
+                                      { context->actvertex=(yyvsp[-1].edgenum); }
+#line 1479 "y.tab.c"
     break;
 
   case 9:
-#line 135 "src/foreign-gml-parser.y"
-            { (yyval.tree)=igraph_i_gml_make_numeric2((yyvsp[-1].str).s, (yyvsp[-1].str).len, (yyvsp[0].str).s, (yyvsp[0].str).len); }
-#line 1574 "y.tab.c"
+#line 107 "src/foreign-lgl-parser.y"
+                                    { 
+             igraph_vector_push_back(context->vector, context->actvertex);
+             igraph_vector_push_back(context->vector, (yyvsp[-1].edgenum));
+             igraph_vector_push_back(context->weights, 0);
+           }
+#line 1489 "y.tab.c"
     break;
 
   case 10:
-#line 138 "src/foreign-gml-parser.y"
-             { igraph_i_gml_get_keyword(igraph_gml_yyget_text(scanner), 
-					igraph_gml_yyget_leng(scanner), 
-					&(yyval.str)); USE((yyvsp[0].str)) }
-#line 1582 "y.tab.c"
+#line 112 "src/foreign-lgl-parser.y"
+                                    { 
+	     igraph_vector_push_back(context->vector, context->actvertex);
+             igraph_vector_push_back(context->vector, (yyvsp[-2].edgenum));
+             igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum));
+	     context->has_weights = 1;
+           }
+#line 1500 "y.tab.c"
     break;
 
   case 11:
-#line 141 "src/foreign-gml-parser.y"
-          { (yyval.real)=igraph_i_gml_get_real(igraph_gml_yyget_text(scanner), 
-				     igraph_gml_yyget_leng(scanner)); }
-#line 1589 "y.tab.c"
+#line 121 "src/foreign-lgl-parser.y"
+                { igraph_trie_get2(context->trie, 
+				   igraph_lgl_yyget_text(scanner), 
+				   igraph_lgl_yyget_leng(scanner), 
+				   &(yyval.edgenum)); }
+#line 1509 "y.tab.c"
     break;
 
   case 12:
-#line 144 "src/foreign-gml-parser.y"
-               { igraph_i_gml_get_string(igraph_gml_yyget_text(scanner), 
-					 igraph_gml_yyget_leng(scanner), 
-					 &(yyval.str)); }
-#line 1597 "y.tab.c"
+#line 126 "src/foreign-lgl-parser.y"
+                { (yyval.weightnum)=igraph_lgl_get_number(igraph_lgl_yyget_text(scanner), 
+					   igraph_lgl_yyget_leng(scanner)); }
+#line 1516 "y.tab.c"
     break;
 
 
-#line 1601 "y.tab.c"
+#line 1520 "y.tab.c"
 
       default: break;
     }
@@ -1836,115 +1754,24 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 148 "src/foreign-gml-parser.y"
+#line 129 "src/foreign-lgl-parser.y"
 
 
-int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context, 
+int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context, 
 		       const char *s) {
-  snprintf(context->errmsg, sizeof(context->errmsg)/sizeof(char)-1, 
-	   "Parse error in GML file, line %i (%s)", 
+  snprintf(context->errmsg, sizeof(context->errmsg)/sizeof(char), 
+	   "Parse error in LGL file, line %i (%s)", 
 	   locp->first_line, s);
   return 0;
 }
 
-void igraph_i_gml_get_keyword(char *s, int len, void *res) {
-  struct { char *s; int len; } *p=res;
-  p->s=igraph_Calloc(len+1, char);
-  if (!p->s) { 
-    igraph_error("Cannot read GML file", __FILE__, __LINE__, IGRAPH_PARSEERROR);
-  }
-  memcpy(p->s, s, sizeof(char)*len);
-  p->s[len]='\0';
-  p->len=len;
-}
-
-void igraph_i_gml_get_string(char *s, int len, void *res) {
-  struct { char *s; int len; } *p=res;
-  p->s=igraph_Calloc(len-1, char);
-  if (!p->s) { 
-    igraph_error("Cannot read GML file", __FILE__, __LINE__, IGRAPH_PARSEERROR);
-  }
-  memcpy(p->s, s+1, sizeof(char)*(len-2));
-  p->s[len-2]='\0';
-  p->len=len-2;
-}
-
-double igraph_i_gml_get_real(char *s, int len) {
+igraph_real_t igraph_lgl_get_number(const char *str, long int length) {
   igraph_real_t num;
-  char tmp=s[len];
-  s[len]='\0';
-  sscanf(s, "%lf", &num);
-  s[len]=tmp;
+  char *tmp=igraph_Calloc(length+1, char);
+  
+  strncpy(tmp, str, length);
+  tmp[length]='\0';
+  sscanf(tmp, "%lf", &num);
+  igraph_Free(tmp);
   return num;
 } 
-
-igraph_gml_tree_t *igraph_i_gml_make_numeric(char* s, int len, double value) {
-  igraph_gml_tree_t *t=igraph_Calloc(1, igraph_gml_tree_t);
-  if (!t) { 
-    igraph_error("Cannot build GML tree", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    return 0;
-  }
-  if (floor(value)==value) {
-    igraph_gml_tree_init_integer(t, s, len, value);
-  } else {
-    igraph_gml_tree_init_real(t, s, len, value);
-  }
-  
-  return t;
-}
-
-igraph_gml_tree_t *igraph_i_gml_make_numeric2(char* s, int len, 
-					      char *v, int vlen) {
-  igraph_gml_tree_t *t=igraph_Calloc(1, igraph_gml_tree_t);
-  char tmp=v[vlen];
-  igraph_real_t value=0;
-  if (!t) { 
-    igraph_error("Cannot build GML tree", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    return 0;
-  }
-  v[vlen]='\0';
-  if (strcasecmp(v, "inf")) {
-    value=IGRAPH_INFINITY;
-  } else if (strcasecmp(v, "nan")) {
-    value=IGRAPH_NAN;
-  } else {
-    igraph_error("Parse error", __FILE__, __LINE__, IGRAPH_PARSEERROR);
-  }
-  v[vlen]=tmp;
-  igraph_gml_tree_init_real(t, s, len, value);  
-
-  return t;
-}
-
-igraph_gml_tree_t *igraph_i_gml_make_string(char* s, int len, 
-					    char *value, int valuelen) {
-  igraph_gml_tree_t *t=igraph_Calloc(1, igraph_gml_tree_t);
-  if (!t) { 
-    igraph_error("Cannot build GML tree", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    return 0;
-  }
-  igraph_gml_tree_init_string(t, s, len, value, valuelen);
-
-  return t;
-}
-
-igraph_gml_tree_t *igraph_i_gml_make_list(char* s, int len, 
-					  igraph_gml_tree_t *list) {
-  
-  igraph_gml_tree_t *t=igraph_Calloc(1, igraph_gml_tree_t);
-  if (!t) { 
-    igraph_error("Cannot build GML tree", __FILE__, __LINE__, IGRAPH_ENOMEM);
-    return 0;
-  }
-  igraph_gml_tree_init_tree(t, s, len, list);
-
-  return t;
-}
-
-igraph_gml_tree_t *igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_t* t2) {
-
-  igraph_gml_tree_mergedest(t1, t2);
-  igraph_Free(t2);
-
-  return t1;
-}
