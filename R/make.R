@@ -1265,7 +1265,7 @@ make_line_graph <- function(graph) {
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_line_graph, graph)
+  res <- .Call(C_R_igraph_linegraph, graph)
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
   }
