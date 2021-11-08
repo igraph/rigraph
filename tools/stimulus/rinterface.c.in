@@ -7554,7 +7554,7 @@ SEXP R_igraph_girth(SEXP graph, SEXP pcircle) {
   return result;
 }
 
-SEXP R_igraph_line_graph(SEXP graph) {
+SEXP R_igraph_linegraph(SEXP graph) {
 
   igraph_t g, lg;
   SEXP result;
