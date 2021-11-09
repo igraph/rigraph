@@ -71,6 +71,7 @@ extern SEXP R_igraph_is_chordal(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_laplacian(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_fruchterman_reingold(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_fruchterman_reingold_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_layout_graphopt(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_kamada_kawai(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_kamada_kawai_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_reingold_tilford(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -271,7 +272,6 @@ extern SEXP R_igraph_layout_davidson_harel(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, S
 extern SEXP R_igraph_layout_drl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_drl_3d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_gem(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_layout_graphopt(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_grid(SEXP, SEXP);
 extern SEXP R_igraph_layout_grid_3d(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_layout_lgl(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -327,6 +327,7 @@ extern SEXP R_igraph_read_graph_lgl(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_read_graph_ncol(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_read_graph_pajek(SEXP);
 extern SEXP R_igraph_recent_degree_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_recent_degree_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_reciprocity(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire_edges(SEXP, SEXP, SEXP, SEXP);
@@ -439,6 +440,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_laplacian",                                  (DL_FUNC) &R_igraph_laplacian,                                   4},
     {"R_igraph_layout_fruchterman_reingold",                (DL_FUNC) &R_igraph_layout_fruchterman_reingold,                10},
     {"R_igraph_layout_fruchterman_reingold_3d",             (DL_FUNC) &R_igraph_layout_fruchterman_reingold_3d,             11},
+    {"R_igraph_layout_graphopt",                            (DL_FUNC) &R_igraph_layout_graphopt,                             8},
     {"R_igraph_layout_kamada_kawai",                        (DL_FUNC) &R_igraph_layout_kamada_kawai,                        10},
     {"R_igraph_layout_kamada_kawai_3d",                     (DL_FUNC) &R_igraph_layout_kamada_kawai_3d,                     12},
     {"R_igraph_layout_reingold_tilford",                    (DL_FUNC) &R_igraph_layout_reingold_tilford,                     5},
@@ -639,7 +641,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_drl",                                 (DL_FUNC) &R_igraph_layout_drl,                                  6},
     {"R_igraph_layout_drl_3d",                              (DL_FUNC) &R_igraph_layout_drl_3d,                               6},
     {"R_igraph_layout_gem",                                 (DL_FUNC) &R_igraph_layout_gem,                                  7},
-    {"R_igraph_layout_graphopt",                            (DL_FUNC) &R_igraph_layout_graphopt,                             8},
     {"R_igraph_layout_grid",                                (DL_FUNC) &R_igraph_layout_grid,                                 2},
     {"R_igraph_layout_grid_3d",                             (DL_FUNC) &R_igraph_layout_grid_3d,                              3},
     {"R_igraph_layout_lgl",                                 (DL_FUNC) &R_igraph_layout_lgl,                                  8},
@@ -695,6 +696,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_read_graph_ncol",                            (DL_FUNC) &R_igraph_read_graph_ncol,                             5},
     {"R_igraph_read_graph_pajek",                           (DL_FUNC) &R_igraph_read_graph_pajek,                            1},
     {"R_igraph_recent_degree_aging_game",                   (DL_FUNC) &R_igraph_recent_degree_aging_game,                   10},
+    {"R_igraph_recent_degree_game",                         (DL_FUNC) &R_igraph_recent_degree_game,                          8},
     {"R_igraph_reciprocity",                                (DL_FUNC) &R_igraph_reciprocity,                                 3},
     {"R_igraph_rewire",                                     (DL_FUNC) &R_igraph_rewire,                                      3},
     {"R_igraph_rewire_edges",                               (DL_FUNC) &R_igraph_rewire_edges,                                4},
