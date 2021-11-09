@@ -135,6 +135,16 @@ src/rinterface.c: $(top_srcdir)/interfaces/functions.def \
            -t tools/stimulus/types-RC.yaml \
            -l RC
 
+src/init.c: $(top_srcdir)/interfaces/functions.def \
+		tools/stimulus/init.c.in  \
+		tools/stimulus/functions-R.yaml
+	$(STIMULUS) \
+           -f $(top_srcdir)/interfaces/functions.def \
+           -f tools/stimulus/functions-R.yaml \
+           -i tools/stimulus/init.c.in \
+           -o src/init.c \
+           -l RInit
+
 R/auto.R: $(top_srcdir)/interfaces/functions.def \
 		tools/stimulus/auto.R.in \
 		tools/stimulus/functions-R.yaml \
@@ -167,10 +177,6 @@ src/rinterface_extra.c: tools/stimulus/rinterface_extra.c
 	cp $< $@
 
 src/lazyeval.c: tools/stimulus/lazyeval.c
-	mkdir -p src
-	cp $< $@
-
-src/init.c: tools/stimulus/init.c
 	mkdir -p src
 	cp $< $@
 

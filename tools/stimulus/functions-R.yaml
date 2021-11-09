@@ -687,7 +687,7 @@ igraph_layout_kamada_kawai_3d:
     IGNORE: RR, RC, RInit
 
 igraph_layout_graphopt:
-    IGNORE: RR, RC
+    IGNORE: RR, RC, RInit
     NAME: layout.graphopt
 
 igraph_layout_drl:
