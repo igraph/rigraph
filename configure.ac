@@ -1,4 +1,4 @@
-AC_INIT(igraph, 1.2.8.9006, csardi.gabor@gmail.com)
+AC_INIT(igraph, 1.2.8.9009, csardi.gabor@gmail.com)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
@@ -15,6 +15,7 @@ CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS`
 CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
 FCFLAGS=`"${R_HOME}/bin/R" CMD config FCFLAGS`
 FLIBS=`"${R_HOME}/bin/R" CMD config FLIBS`
+LDFLAGS=`"${R_HOME}/bin/R" CMD config LDFLAGS`
 
 AC_LANG(C)
 AC_PROG_CC
