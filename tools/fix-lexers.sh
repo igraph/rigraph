@@ -6,5 +6,7 @@
 for fname in src/*-lexer.c; do
     cat ${fname} | grep -v '^\s*exit.*YY_EXIT_FAILURE' >${fname}.new
     mv ${fname}.new ${fname}
+    cat ${fname} | sed -e 's/void yynoreturn/void/g' >${fname}.new
+    mv ${fname}.new ${fname}
 done
 
