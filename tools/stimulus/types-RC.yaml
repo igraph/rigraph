@@ -1106,24 +1106,12 @@ PAGERANKALGO:
         IN: '%C%=(igraph_pagerank_algo_t) INTEGER(%I%)[0];'
 
 PAGERANKOPT:
-    CTYPE: |-
-        igraph_pagerank_power_options_t %C%1;
-        igraph_arpack_options_t %C%2;
-        void*
+    CALL: '&%C%'
+    CTYPE: igraph_arpack_options_t
     INCONV:
-        INOUT: "if (%C1% == IGRAPH_PAGERANK_ALGO_POWER) {\n  R_SEXP_to_pagerank_power_options(%I%,\
-            \ &%C%1);\n  %C% = &%C%1;\n  } else if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK)\
-            \ {\n  R_SEXP_to_igraph_arpack_options(%I%, &%C%2);\n  %C% = &%C%2;\t\n\
-            \  } else {\n  %C% = 0;\n  }"
+        INOUT: 'R_SEXP_to_igraph_arpack_options(%I%, &%C%);'
     OUTCONV:
-        INOUT: |-
-            if (%C1% == IGRAPH_PAGERANK_ALGO_POWER) {
-              PROTECT(%I%);
-              } else if (%C1% == IGRAPH_PAGERANK_ALGO_ARPACK) {
-              PROTECT(%I% = R_igraph_arpack_options_to_SEXP(&%C%2));
-              } else {
-              PROTECT(%I%);
-              }
+        INOUT: 'PROTECT(%I% = R_igraph_arpack_options_to_SEXP(&%C%));'
 
 DEPRECATED:
     CALL: {}
