@@ -51,7 +51,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- kautz_graph(2,3)
+#' g <- make_kautz_graph(2,3)
 #' cocitation(g)
 #' bibcoupling(g)
 #' 
