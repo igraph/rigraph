@@ -8448,10 +8448,8 @@ SEXP R_igraph_scg_semiprojectors(SEXP groups, SEXP matrix_type, SEXP p,
   } else {
     PROTECT(Lsparse=R_igraph_0orsparsemat_to_SEXP(&c_Lsparse));
     igraph_sparsemat_destroy(&c_Lsparse);
-    IGRAPH_FINALLY_CLEAN(1);
     PROTECT(Rsparse=R_igraph_0orsparsemat_to_SEXP(&c_Rsparse));
     igraph_sparsemat_destroy(&c_Rsparse);
-    IGRAPH_FINALLY_CLEAN(1);
     SET_VECTOR_ELT(result, 0, Lsparse);
     SET_VECTOR_ELT(result, 1, Rsparse);
   }
@@ -9170,10 +9168,10 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   if (!isNull(maps)) {
     PROTECT(maps=R_igraph_0orvectorlist_to_SEXP(&c_maps));
     R_igraph_vectorlist_destroy(&c_maps);
+    IGRAPH_FINALLY_CLEAN(1);
   } else {
     PROTECT(maps=R_NilValue);
   }
-  IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(result, 0, iso);
   SET_VECTOR_ELT(result, 1, map);
   SET_VECTOR_ELT(result, 2, maps);
@@ -13835,7 +13833,6 @@ SEXP R_igraph_get_stochastic_sparsemat(SEXP graph, SEXP column_wise) {
                                         /* Convert output */
   PROTECT(sparsemat=R_igraph_sparsemat_to_SEXP(&c_sparsemat));
   igraph_sparsemat_destroy(&c_sparsemat);
-  IGRAPH_FINALLY_CLEAN(1);
   result=sparsemat;
 
   UNPROTECT(1);
