@@ -695,17 +695,9 @@ authority_score <- authority_score
 #' This function interprets edge weights as connection strengths. In the
 #' random surfer model, an edge with a larger weight is more likely to be
 #' selected by the surfer.
-#' @param options Either a named list, to override some ARPACK options. See
-#' \code{\link{arpack}} for details; or a named list to override the default
-#' options for the power method (if \code{algo="power"}).  The default options
-#' for the power method are \code{niter=1000} and \code{eps=0.001}. This
-#' argument is ignored if the PRPACK implementation is used.
-#' @param niter The maximum number of iterations to perform.
-#' @param eps The algorithm will consider the calculation as complete if the
-#' difference of PageRank values between iterations change less than this value
-#' for every node.
-#' @param old A logical scalar, whether the old style (pre igraph 0.5)
-#' normalization to use. See details below.
+#' @param options A named list, to override some ARPACK options. See
+#' \code{\link{arpack}} for details. This argument is ignored if the PRPACK
+#' implementation is used.
 #' @return A named list with entries: \item{vector}{A
 #' numeric vector with the PageRank scores.} \item{value}{The eigenvalue
 #' corresponding to the eigenvector with the page rank scores. It should be
