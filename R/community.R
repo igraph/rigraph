@@ -419,7 +419,7 @@ modularity <- function(x, ...)
 #' modularity(g, membership(wtc))
 #'
 
-modularity.igraph <- function(x, membership, weights=NULL, ...) {
+modularity.igraph <- function(x, membership, weights=NULL, resolution=1, directed=TRUE, ...) {
   # Argument checks
   if (!is_igraph(x)) { stop("Not a graph object") }
   if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
@@ -427,10 +427,12 @@ modularity.igraph <- function(x, membership, weights=NULL, ...) {
   }
   membership <- as.numeric(membership)
   if (!is.null(weights)) weights <- as.numeric(weights)
+  resolution <- as.numeric(resolution)
+  directed <- as.logical(directed)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_modularity, x, membership-1, weights)
+  res <- .Call(C_R_igraph_modularity, x, membership-1, weights, resolution, directed)
   res
 }
 
@@ -450,7 +452,7 @@ modularity.communities <- function(x, ...) {
 #' @aliases mod.matrix
 #' @export
 
-modularity_matrix <- function(graph, membership, weights=NULL) {
+modularity_matrix <- function(graph, membership, weights=NULL, resolution=1, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!missing(membership)) {
@@ -466,9 +468,12 @@ modularity_matrix <- function(graph, membership, weights=NULL) {
     weights <- NULL
   }
 
+  resolution <- as.numeric(resolution)
+  directed <- as.logical(directed)
+
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_modularity_matrix, graph, weights)
+  res <- .Call(C_R_igraph_modularity_matrix, graph, weights, resolution, directed)
 
   res
 }
@@ -1665,21 +1670,22 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' cluster_louvain(g)
 #'
-cluster_louvain <- function(graph, weights=NULL) {
+cluster_louvain <- function(graph, weights=NULL, resolution=1) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-  weights <- E(graph)$weight
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
-  weights <- as.numeric(weights)
+    weights <- as.numeric(weights)
   } else {
-  weights <- NULL
+    weights <- NULL
   }
+  resolution <- as.numeric(resolution)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_community_multilevel, graph, weights)
+  res <- .Call(C_R_igraph_community_multilevel, graph, weights, resolution)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

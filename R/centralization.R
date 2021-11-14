@@ -156,8 +156,8 @@ centr_degree_tmax <- centr_degree_tmax
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
 #' @param nobigint Logical scalar, whether to use big integers for the
-#' betweenness calculation. This argument is passed to the
-#' \code{\link{betweenness}} function.
+#'   betweenness calculation. This argument is deprecated in igraph 1.3 and
+#'   will be removed in igraph 1.4.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:

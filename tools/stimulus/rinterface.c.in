@@ -2268,9 +2268,16 @@ igraph_attribute_table_t *R_igraph_attribute_oldtable;
  * calling an interface function                      *
  *****************************************************/
 
-igraph_error_handler_t *R_igraph_oldhandler;
+void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
+  IGRAPH_FINALLY_FREE();
+  error(
+    "At %s:%i : %s. This is an unexpected igraph error; please report this "
+    "as a bug, along with the steps to reproduce it.",
+    file, line, reason
+  );
+}
 
-void R_igraph_myhandler (const char *reason, const char *file,
+void R_igraph_error_handler(const char *reason, const char *file,
 			 int line, int igraph_errno) {
   IGRAPH_FINALLY_FREE();
   error("At %s:%i : %s, %s", file, line, reason,
@@ -2332,7 +2339,8 @@ void R_init_igraph(DllInfo *dll) {
   R_useDynamicSymbols(dll, FALSE);
   R_forceSymbols(dll, TRUE);
 
-  igraph_set_error_handler(R_igraph_myhandler);
+  igraph_set_fatal_handler(R_igraph_fatal_handler);
+  igraph_set_error_handler(R_igraph_error_handler);
   igraph_set_warning_handler(R_igraph_warning_handler);
   igraph_set_interruption_handler(R_igraph_interrupt_handler);
   igraph_set_attribute_table(&R_igraph_attribute_table);

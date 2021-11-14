@@ -176,6 +176,8 @@ R/auto.R: $(top_srcdir)/interfaces/functions.yaml \
 
 configure src/config.h.in: configure.ac
 	autoheader; autoconf
+	# CMake needs HAVE_ISFINITE but configure.ac generates HAVE_DECL_ISFINITE
+	echo "#define HAVE_ISFINITE HAVE_DECL_ISFINITE" >>src/config.h.in
 
 # DESCRIPTION file, we re-generate it only if the VERSION number
 # changes or $< changes
