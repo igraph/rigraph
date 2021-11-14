@@ -38,7 +38,7 @@ in the future.
 }
 \examples{
 
-g <- make_ring(10)
+g <- make_kautz_graph(2,3)
 cocitation(g)
 bibcoupling(g)
 
