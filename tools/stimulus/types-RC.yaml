@@ -909,7 +909,6 @@ SPARSEMATPTR:
         OUT: |-
             PROTECT(%I%=R_igraph_sparsemat_to_SEXP(&%C%));
               igraph_sparsemat_destroy(&%C%);
-              IGRAPH_FINALLY_CLEAN(1);
 
 SPARSEMAT_OR_0:
     CALL: '(isNull(%I%) ? 0 : &%C%)'
