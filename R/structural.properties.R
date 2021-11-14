@@ -2485,7 +2485,7 @@ closeness <- function(graph, vids=V(graph),
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_closeness, graph, vids-1, mode, weights,
-               normalized)
+               normalized)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
