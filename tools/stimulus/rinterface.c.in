@@ -179,7 +179,7 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
     /* Type and function, if any */
     if (isFunction(VECTOR_ELT(input, i))) {
       type=IGRAPH_ATTRIBUTE_COMBINE_FUNCTION;
-      func=(igraph_function_pointer_t) VECTOR_ELT(input, i);
+      func=(igraph_function_pointer_t) (void*) VECTOR_ELT(input, i);
     } else {
       type=REAL(AS_NUMERIC(VECTOR_ELT(input, i)))[0];
       func=0;
@@ -1960,7 +1960,7 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
     case IGRAPH_ATTRIBUTE_COMBINE_IGNORE:
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_FUNCTION:
-      func=(SEXP)voidfunc;
+      func = (SEXP) (void*) voidfunc;
       SET_VECTOR_ELT(res, j, R_igraph_ac_func(va, merges, func));
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_SUM:
@@ -2134,7 +2134,7 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
     case IGRAPH_ATTRIBUTE_COMBINE_IGNORE:
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_FUNCTION:
-      func=(SEXP)voidfunc;
+      func = (SEXP) (void*) voidfunc;
       SET_VECTOR_ELT(res, j, R_igraph_ac_func(ea, merges, func));
       break;
     case IGRAPH_ATTRIBUTE_COMBINE_SUM:
