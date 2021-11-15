@@ -6,4 +6,4 @@ PKG_CPPFLAGS= -I${LIB_XML}/include/libxml2 -I${LIB_XML}/include -DLIBXML_STATIC 
 
 PKG_CFLAGS = -DINTERNAL_ARPACK -Icore -I$(LIB_GMP)/include -DHAVE_GFORTRAN
 
-PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -L${GLPK_HOME}/lib -lglpk -lgmp -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
+PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -lstdc++ -L${GLPK_HOME}/lib -lglpk -lgmp -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
