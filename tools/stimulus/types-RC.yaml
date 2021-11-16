@@ -1138,3 +1138,8 @@ RWSTUCK:
     INCONV:
         IN: '%C%=(igraph_random_walk_stuck_t) INTEGER(%I%)[0];'
 
+EDGE_TYPE_SW:
+    CTYPE: igraph_edge_type_sw_t
+    INCONV:
+        IN: '%C%=(igraph_edge_type_sw_t) INTEGER(%I%)[0];'
+

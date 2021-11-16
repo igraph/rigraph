@@ -55,7 +55,9 @@
 #' @export
 #' @include auto.R
 
-is_degseq <- is_degseq
+is_degseq <- function(out.deg, in.deg=NULL) {
+  is_graphical(out.deg, in.deg, allowed.edge.types="all")
+}
 
 #' Is a degree sequence graphical?
 #' 

@@ -299,6 +299,9 @@ igraph_closeness:
     IGNORE: RR
     NAME: closeness
 
+igraph_closeness_cutoff:
+    IGNORE: RR
+
 igraph_shortest_paths:
     IGNORE: RR, RC, RInit
 
@@ -338,9 +341,15 @@ igraph_subcomponent:
 igraph_betweenness:
     IGNORE: RR, RC
 
+igraph_betweenness_cutoff:
+    IGNORE: RR
+
 igraph_edge_betweenness:
     IGNORE: RR
     NAME: edge_betweenness
+
+igraph_edge_betweenness_cutoff:
+    IGNORE: RR
 
 igraph_pagerank:
     IGNORE: RR, RC, RInit
@@ -525,10 +534,20 @@ igraph_random_walk:
 #######################################
 
 igraph_is_degree_sequence:
+    IGNORE: RR, RC, RInit
     NAME: is_degseq
 
 igraph_is_graphical_degree_sequence:
+    IGNORE: RR, RC, RInit
+
+igraph_is_graphical:
+    PARAMS: VECTOR out_deg, VECTOR_OR_0 in_deg=NULL, EDGE_TYPE_SW allowed_edge_types=SIMPLE, OUT BOOLEANPTR res
     NAME: is_graphical
+
+igraph_is_bigraphical:
+    PARAMS: VECTOR degrees1, VECTOR degrees2, EDGE_TYPE_SW allowed_edge_types=SIMPLE, OUT BOOLEANPTR res
+    IGNORE: RR, RC, RInit
+    NAME: is_bigraphical
 
 #######################################
 # Visitors

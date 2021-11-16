@@ -514,3 +514,13 @@ RWSTUCK:
         RETURN: c("return", "error")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "error" = 0L, "return" = 1L)'
 
+EDGE_TYPE_SW:
+    DEFAULT:
+        SIMPLE: c("simple", "loops", "multi", "all")
+        LOOPS: c("loops", "simple", "multi", "all")
+        MULTI: c("multi", "simple", "loops", "all")
+        ALL: c("all", "simple", "loops", "multi")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%),
+          "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
+
