@@ -12,6 +12,7 @@
 ^.travis.yml$
 ^CONTRIBUTING.md$
 ^README.md$
+^R/.*\.R\.in$
 ^src/.*\.o$
 ^src/.*\.so$
 ^revdep$
