@@ -541,11 +541,9 @@ igraph_is_graphical_degree_sequence:
     IGNORE: RR, RC, RInit
 
 igraph_is_graphical:
-    PARAMS: VECTOR out_deg, VECTOR_OR_0 in_deg=NULL, EDGE_TYPE_SW allowed_edge_types=SIMPLE, OUT BOOLEANPTR res
     NAME: is_graphical
 
 igraph_is_bigraphical:
-    PARAMS: VECTOR degrees1, VECTOR degrees2, EDGE_TYPE_SW allowed_edge_types=SIMPLE, OUT BOOLEANPTR res
     IGNORE: RR, RC, RInit
     NAME: is_bigraphical
 
@@ -727,8 +725,6 @@ igraph_layout_sugiyama:
 igraph_layout_mds:
     IGNORE: RR
     NAME: layout.mds
-    PARAMS: |-
-        GRAPH graph, OUT MATRIX res, MATRIX_OR_0 dist=NULL, INTEGER dim=2
 
 igraph_layout_bipartite:
     IGNORE: RR
@@ -796,19 +792,10 @@ igraph_le_community_to_membership:
 igraph_modularity:
     IGNORE: RR
     NAME: modularity.igraph
-    PARAMS: |-
-        GRAPH graph, VECTOR membership, IN VECTOR_OR_0 weights=NULL,
-        REAL resolution=1.0, BOOLEAN directed=True, OUT REALPTR modularity
 
 igraph_modularity_matrix:
     IGNORE: RR
     NAME: modularity_matrix
-    PARAMS: |-
-        GRAPH graph,
-        EDGEWEIGHTS weights=NULL,
-        REAL resolution=1.0,
-        OUT MATRIX modmat,
-        BOOLEAN directed=True
 
 igraph_reindex_membership:
     IGNORE: RR, RC, RInit
@@ -1208,12 +1195,6 @@ igraph_adjacency_spectral_embedding:
 igraph_laplacian_spectral_embedding:
     IGNORE: RC
     NAME: embed_laplacian_matrix
-    PARAMS: |-
-        GRAPH graph, INTEGER no, EDGEWEIGHTS weights=NULL,
-        EIGENWHICHPOS which=ASE,
-        LSETYPE type=Default, BOOLEAN scaled=True, OUT MATRIX X,
-        OUT MATRIX_OR_0 Y, OUT VECTOR_OR_0 D,
-        INOUT ARPACKOPT options=igraph.arpack.default
 
 #######################################
 # Eigensolvers
