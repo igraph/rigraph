@@ -1586,6 +1586,7 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
                                         fixed=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  stopifnot("Graph must be fully connected to use an initial state" = is_connected(graph) | is.null(initial))
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
   weights <- E(graph)$weight
   }
