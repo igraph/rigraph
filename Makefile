@@ -110,7 +110,7 @@ $(UUID2): src/uuid/%: tools/uuid/%
 
 RGEN = R/auto.R src/rinterface.c src/rinterface.h \
 	src/rinterface_extra.c src/lazyeval.c src/init.c src/Makevars.in \
-	configure src/config.h.in src/Makevars.win \
+	configure src/config.h.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
 
 # Simpleraytracer
@@ -182,7 +182,7 @@ src/lazyeval.c: tools/stimulus/lazyeval.c
 
 # This is the list of all object files in the R package,
 # we write it to a file to be able to depend on it.
-# Makevars.in and Makevars.win are only regenerated if
+# Makevars.in, Makevars.win and Makevars.ucrt are only regenerated if
 # the list of object files changes.
 
 OBJECTS := $(shell echo $(CSRC) $(ARPACK) $(RAY) $(UUID)   |             \
@@ -201,7 +201,7 @@ object_files: force
 configure.ac: %: tools/stimulus/%
 	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
 
-src/Makevars.win src/Makevars.in: src/%: tools/stimulus/% \
+src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
 	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
 	printf "%s" "OBJECTS=" >> $@
