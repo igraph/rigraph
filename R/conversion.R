@@ -261,9 +261,21 @@ as_edgelist <- function(graph, names=TRUE) {
 #' 
 #' Conversion algorithms for \code{as.directed}: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
-#' arbitrarily directed edge is created for each undirected edge.}
+#' arbitrarily directed edge is created for each undirected edge, but the
+#' direction of the edge is deterministic (i.e. it always points the same
+#' way if you call the function multiple times).}
 #' \item{"mutual"}{Two directed edges are created for each undirected
 #' edge, one in each direction.} }
+#' \item{"random"}{The number of edges in the graph stays the same, and
+#' a randomly directed edge is created for each undirected edge. You
+#' will get different results if you call the function multiple times
+#' with the same graph.} }
+#' \item{"acyclic"}{The number of edges in the graph stays the same, and
+#' a directed edge is created for each undirected edge such that the
+#' resulting graph is guaranteed to be acyclic. This is achieved by ensuring
+#' that edges always point from a lower index vertex to a higher index.
+#' Note that the graph may include cycles of length 1 if the original
+#' graph contained loop edges.} }
 #' 
 #' Conversion algorithms for \code{as.undirected}: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
@@ -314,17 +326,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #'               edge.attr.comb=list(weight=length))
 #' print(ug4, e=TRUE)
 #' 
-as.directed <- function(graph, mode=c("mutual", "arbitrary")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "arbitrary"=0, "mutual"=1)
-  
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_to_directed, graph, as.numeric(mode))
-}
+as.directed <- as.directed
 
 #' @rdname as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if

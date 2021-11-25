@@ -146,6 +146,11 @@ INOUTMODE:
     INCONV:
         IN: '%C%=(igraph_neimode_t) REAL(%I%)[0];'
 
+TODIRECTED:
+    CTYPE: igraph_to_directed_t
+    INCONV:
+        IN: '%C%=(igraph_to_directed_t) REAL(%I%)[0];'
+
 TOUNDIRECTED:
     CTYPE: igraph_to_undirected_t
     INCONV:

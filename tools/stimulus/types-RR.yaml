@@ -102,9 +102,19 @@ INOUTMODE:
         OUT: c("out", "in")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2)'
 
+TODIRECTED:
+    DEFAULT:
+        ARBITRARY: c("arbitrary", "mutual", "random", "acyclic")
+        MUTUAL: c("mutual", "arbitrary", "random", "acyclic")
+        RANDOM: c("random", "arbitrary", "mutual", "acyclic")
+        ACYCLIC: c("acyclic", "arbitrary", "mutual", "random")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)'
+
 TOUNDIRECTED:
     DEFAULT:
         COLLAPSE: c("collapse", "each", "mutual")
+        EACH: c("each", "collapse", "mutual")
+        MUTUAL: c("mutual", "collapse", "each")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1, "each"=0, "mutual"=2)'
 
 INTEGERPTR:

@@ -884,7 +884,7 @@ igraph_get_edgelist:
     IGNORE: RR, RC
 
 igraph_to_directed:
-    IGNORE: RR, RC
+    NAME: as.directed
 
 igraph_to_undirected:
     IGNORE: RR
