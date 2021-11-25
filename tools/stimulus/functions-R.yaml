@@ -884,6 +884,7 @@ igraph_get_edgelist:
     IGNORE: RR, RC
 
 igraph_to_directed:
+    PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
     NAME: as.directed
 
 igraph_to_undirected:
