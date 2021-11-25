@@ -4,14 +4,18 @@
 # statements (which we won't hit anyway)
 
 for fname in src/core/io/*-lexer.c; do
+    # Remove unused exit points from the lexer
     cat ${fname} | grep -v '^\s*exit.*YY_EXIT_FAILURE' >${fname}.new
     mv ${fname}.new ${fname}
+
+    # Remove 'noreturn' declaration from exit points
 	sed -e 's/^\([^#]*\)yynoreturn /\1__attribute__((unused)) /g' ${fname} >${fname}.new
     mv ${fname}.new ${fname}
-done
 
-for fname in src/core/io/*-parser.[cy] src/core/io/*-lexer.[cl]; do
-    sed -e 's,io/parsers,io,g' ${fname} >${fname}.new
+    # flex on Ubuntu 20.04 generates 'int yyget_leng'; flex on macOS generates
+    # 'yy_size_t yyget_leng'. We need to be consistent as we also declare
+    # yyget_leng ourselves in the parser and we use yy_size_t there
+    cat ${fname} | sed -e 's/int yyget_leng/yy_size_t yyget_leng/g' >${fname}.new
     mv ${fname}.new ${fname}
 done
 

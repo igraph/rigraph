@@ -1,5 +1,11 @@
 # Unreleased
 
+# igraph 1.2.9
+
+Nov 22, 2021
+
+No user visible changes.
+
 # igraph 1.2.8
 
 Oct 26, 2021
