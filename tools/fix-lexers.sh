@@ -19,3 +19,10 @@ for fname in src/core/io/*-lexer.c; do
     mv ${fname}.new ${fname}
 done
 
+for fname in src/core/io/*-lexer.c src/core/io/*-parser.c; do
+    # the CMake build system puts the generated parsers in build/core/io/parsers.
+	# Here it is easier to put stuff in src/core/io so we rewrite the includes
+    cat ${fname} | sed -e 's,io/parsers/,io/,g' >${fname}.new
+    mv ${fname}.new ${fname}
+done
+
