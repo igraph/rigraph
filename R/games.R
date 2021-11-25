@@ -384,6 +384,11 @@ random.graph.game <- erdos.renyi.game
 #' fast and it will eventually succeed if the provided degree sequence is
 #' graphical, but there is no upper bound on the number of iterations.
 #' 
+#' The \dQuote{simple.no.multiple.uniform} method is a variant of
+#' \dQuote{simple.no.multiple} with the added benefit of sampling uniformly
+#' from the set of all possible simple graphs with the given degree sequence.
+#' Ensuring uniformity has some performance implications, though.
+#'
 #' The \dQuote{vl} method is a more sophisticated generator. The algorithm and
 #' the implementation was done by Fabien Viger and Matthieu Latapy. This
 #' generator always generates undirected, connected simple graphs, it is an
@@ -440,11 +445,10 @@ random.graph.game <- erdos.renyi.game
 #' all(degree(g5) == degs)
 
 sample_degseq <- function(out.deg, in.deg=NULL,
-                                 method=c("simple", "vl",
-                                   "simple.no.multiple")) {
+                          method=c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
 
   method <- igraph.match.arg(method)
-  method1 <- switch(method, "simple"=0, "vl"=1, "simple.no.multiple"=2)
+  method1 <- switch(method, "simple"=0, "vl"=1, "simple.no.multiple"=2, "simple.no.multiple.uniform"=3)
   if (!is.null(in.deg)) { in.deg <- as.numeric(in.deg) }
 
   on.exit( .Call(C_R_igraph_finalizer) )
