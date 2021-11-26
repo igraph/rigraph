@@ -23,10 +23,8 @@ AC_PROG_CC
 # Fortran compiler, we need to check if it is the GNU compiler
 AC_PROG_FC
 if test "x$ac_cv_fc_compiler_gnu" = xyes; then
-  AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU fortran compiler])
+  AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU Fortran compiler])
 fi
-
-AC_DEFINE([INTERNAL_SUITESPARSE], [1], [Define to 1 if you use the internal SuiteSparse library])
 
 # Tricky check for C++ compiler, because Autoconf has a weird bug:
 # http://lists.gnu.org/archive/html/autoconf/2006-03/msg00067.html
@@ -104,22 +102,24 @@ if test $graphml_support = yes; then
 fi
 AC_SUBST(HAVE_LIBXML)
 
+AC_DEFINE([INTERNAL_GMP], [1], [Define to 1 if you use the vendored mini-GMP library])
+
 AC_LANG_PUSH([C++])
 HAVE_GMP=0
+INTERNAL_GMP=1
 GMP_LIBS=""
 gmp_support=no
-AC_ARG_ENABLE(gmp, AS_HELP_STRING([--disable-gmp], [Compile without the GMP library]))
-if test "x$enable_gmp" != "xno"; then
-  AC_CHECK_LIB([gmp], [__gmpz_add], [
-    AC_CHECK_HEADER([gmp.h], [
-      HAVE_GMP=1
-      AC_DEFINE([HAVE_GMP], [1], [Define to 1 if you have the GMP library])
-      gmp_support=yes
-      GMP_LIBS="-lgmp"
-    ])
+AC_CHECK_LIB([gmp], [__gmpz_add], [
+  AC_CHECK_HEADER([gmp.h], [
+    HAVE_GMP=1
+    INTERNAL_GMP=0
+    AC_DEFINE([HAVE_GMP], [1], [Define to 1 if you have the GMP library])
+    gmp_support=yes
+    GMP_LIBS="-lgmp"
   ])
-fi
+])
 AC_SUBST(HAVE_GMP)
+AC_SUBST(INTERNAL_GMP)
 AC_SUBST(GMP_LIBS)
 AC_LANG_POP([C++])
 
