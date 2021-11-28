@@ -1,5 +1,12 @@
 # Unreleased
 
+Added:
+
+- `has_eulerian_path()` and `has_eulerian_cycle()` decides whether there is an
+  Eulerian path or cycle in the graph.
+- `eulerian_path()` and `eulerian_cycle()` returns the edges and vertices in an
+  Eulerian path or cycle in the graph.
+
 # igraph 1.2.9
 
 Nov 22, 2021

@@ -1347,7 +1347,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   commonlen <- unique(c(mlen, rholen, Clen))
 
   if (length(commonlen) == 1 && commonlen == 1) {
-    hsbm.1.game(n, m, rho, C, p)
+    hsbm_1_game(n, m, rho, C, p)
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
@@ -1364,7 +1364,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     } else {
       rep(list(C), length.out=commonlen)
     }
-    hsbm.list.game(n, m, rho, C, p)
+    hsbm_list_game(n, m, rho, C, p)
   }  
 }
 

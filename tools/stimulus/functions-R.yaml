@@ -13,7 +13,6 @@ igraph_empty:
 
 igraph_add_edges:
     IGNORE: RR, RC, RInit
-    NAME: add_edges
 
 igraph_add_vertices:
     IGNORE: RR, RC, RInit
@@ -32,19 +31,15 @@ igraph_vcount:
 
 igraph_ecount:
     IGNORE: RR, RC
-    NAME: ecount
 
 igraph_neighbors:
     IGNORE: RR, RC
-    NAME: neighbors
 
 igraph_is_directed:
     IGNORE: RR, RC
-    NAME: is_directed
 
 igraph_degree:
     IGNORE: RR, RC
-    NAME: degree
 
 igraph_edge:
     IGNORE: RR, RC, RInit
@@ -233,7 +228,7 @@ igraph_sbm_game:
 
 igraph_hsbm_game:
     INTERNAL: true
-    NAME: hsbm.1.game
+    NAME: hsbm_1_game
     R:
         GATTR:
           name: Hierarchical stochastic block model
@@ -241,7 +236,6 @@ igraph_hsbm_game:
 
 igraph_hsbm_list_game:
     INTERNAL: true
-    NAME: hsbm.list.game
     R:
         GATTR:
           name: Hierarchical stochastic block model
@@ -259,15 +253,6 @@ igraph_correlated_pair_game:
 
 igraph_dot_product_game:
     NAME: sample_dot_product
-
-igraph_sample_sphere_surface:
-    NAME: sample_sphere_surface
-
-igraph_sample_sphere_volume:
-    NAME: sample_sphere_volume
-
-igraph_sample_dirichlet:
-    NAME: sample_dirichlet
 
 #######################################
 # Basic query functions
@@ -297,7 +282,6 @@ igraph_minimum_spanning_tree_prim:
 
 igraph_closeness:
     IGNORE: RR
-    NAME: closeness
 
 igraph_closeness_cutoff:
     IGNORE: RR
@@ -346,7 +330,6 @@ igraph_betweenness_cutoff:
 
 igraph_edge_betweenness:
     IGNORE: RR
-    NAME: edge_betweenness
 
 igraph_edge_betweenness_cutoff:
     IGNORE: RR
@@ -363,7 +346,6 @@ igraph_rewire:
 
 igraph_induced_subgraph:
     IGNORE: RR
-    NAME: induced_subgraph
 
 igraph_subgraph_edges:
     IGNORE: RR
@@ -374,9 +356,6 @@ igraph_average_path_length:
 
 igraph_path_length_hist:
     NAME: distance_table
-
-igraph_simplify:
-    NAME: simplify
 
 igraph_transitivity_undirected:
     IGNORE: RR, RC
@@ -417,12 +396,6 @@ igraph_topological_sorting:
 igraph_is_loop:
     IGNORE: RR, RC
 
-igraph_is_dag:
-    NAME: is_dag
-
-igraph_is_simple:
-    NAME: is_simple
-
 igraph_is_multiple:
     IGNORE: RR, RC
 
@@ -441,12 +414,6 @@ igraph_add_edge:
 igraph_eigenvector_centrality:
     NAME: eigen_centrality
 
-igraph_hub_score:
-    NAME: hub_score
-
-igraph_authority_score:
-    NAME: authority_score
-
 igraph_arpack_rssolve:
     IGNORE: RR, RC, RInit
 
@@ -459,7 +426,6 @@ igraph_arpack_unpack_complex:
 
 igraph_unfold_tree:
     IGNORE: RR
-    NAME: unfold_tree
 
 igraph_is_mutual:
     NAME: which_mutual
@@ -469,13 +435,9 @@ igraph_maximum_cardinality_search:
 
 igraph_is_chordal:
     IGNORE: RR, RC, RInit
-    NAME: is_chordal
 
 igraph_avg_nearest_neighbor_degree:
     NAME: knn
-
-igraph_strength:
-    NAME: strength
 
 igraph_centralization:
     NAME: centralize
@@ -504,30 +466,11 @@ igraph_centralization_eigenvector_centrality:
 igraph_centralization_eigenvector_centrality_tmax:
     NAME: centr_eigen_tmax
 
-igraph_assortativity_nominal:
-    NAME: assortativity_nominal
-
-igraph_assortativity:
-    NAME: assortativity
-
-igraph_assortativity_degree:
-    NAME: assortativity_degree
-
 igraph_contract_vertices:
     NAME: contract
 
-igraph_eccentricity:
-    NAME: eccentricity
-
-igraph_radius:
-    NAME: radius
-
-igraph_diversity:
-    NAME: diversity
-
 igraph_random_walk:
     IGNORE: RR
-    NAME: random_walk
 
 #######################################
 # Degree sequences
@@ -540,12 +483,8 @@ igraph_is_degree_sequence:
 igraph_is_graphical_degree_sequence:
     IGNORE: RR, RC, RInit
 
-igraph_is_graphical:
-    NAME: is_graphical
-
 igraph_is_bigraphical:
     IGNORE: RR, RC, RInit
-    NAME: is_bigraphical
 
 #######################################
 # Visitors
@@ -560,9 +499,6 @@ igraph_dfs:
 #######################################
 # Bipartite graphs
 #######################################
-
-igraph_bipartite_projection_size:
-    NAME: bipartite_projection_size
 
 igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
@@ -602,19 +538,12 @@ igraph_laplacian:
 
 igraph_clusters:
     IGNORE: RR
-    NAME: clusters
 
 igraph_is_connected:
     IGNORE: RR, RC
 
 igraph_decompose:
     IGNORE: RR, RC
-
-igraph_articulation_points:
-    NAME: articulation_points
-
-igraph_biconnected_components:
-    NAME: biconnected_components
 
 #######################################
 # Cliques
@@ -795,7 +724,6 @@ igraph_modularity:
 
 igraph_modularity_matrix:
     IGNORE: RR
-    NAME: modularity_matrix
 
 igraph_reindex_membership:
     IGNORE: RR, RC, RInit
@@ -863,7 +791,6 @@ igraph_community_infomap:
 
 igraph_graphlets:
     IGNORE: RC
-    NAME: graphlets
 
 igraph_graphlets_candidate_basis:
     IGNORE: RR, RC
@@ -968,12 +895,6 @@ igraph_motifs_randesu_estimate:
 
 igraph_motifs_randesu_no:
     IGNORE: RR, RC
-
-igraph_dyad_census:
-    NAME: dyad_census
-
-igraph_triad_census:
-    NAME: triad_census
 
 igraph_adjacent_triangles:
     NAME: count_triangles
@@ -1080,17 +1001,11 @@ igraph_cohesion:
 # Listing s-t cuts, separators
 #######################################
 
-igraph_dominator_tree:
-    NAME: dominator_tree
-
 igraph_all_st_cuts:
     NAME: st_cuts
 
 igraph_all_st_mincuts:
     NAME: st_min_cuts
-
-igraph_is_separator:
-    NAME: is_separator
 
 igraph_is_minimal_separator:
     NAME: is_min_separator
@@ -1127,23 +1042,39 @@ igraph_isoclass_subgraph:
 igraph_isoclass_create:
     NAME: graph_from_isomorphism_class
 
+igraph_isomorphic:
+    NAME: graph.isomorphic
+
+igraph_isomorphic_34:
+    NAME: graph.isomorphic.34
+
+igraph_isomorphic_bliss:
+    NAME: graph.isomorphic.bliss
+
+igraph_isomorphic_vf2:
+    NAME: graph.isomorphic.vf2
+
+igraph_count_isomorphisms_vf2:
+    NAME: graph.count.isomorphisms.vf2
+
+igraph_count_subisomorphisms_vf2:
+    NAME: graph.count.subisomorphisms.vf2
+
 igraph_get_isomorphisms_vf2:
     IGNORE: RR
 
 igraph_get_subisomorphisms_vf2:
     IGNORE: RR
 
-igraph_canonical_permutation:
-    NAME: canonical_permutation
-
 igraph_permute_vertices:
     NAME: permute
 
-igraph_automorphisms:
-    NAME: automorphisms
-
 igraph_subisomorphic_lad:
     IGNORE: RR, RC, RInit
+    NAME: graph.subisomorphic.lad
+
+igraph_subisomorphic_vf2:
+    NAME: graph.subisomorphic.vf2
 
 #######################################
 # SCG
@@ -1175,7 +1106,6 @@ igraph_scg_laplacian:
 
 igraph_is_matching:
     IGNORE: RR
-    NAME: is_matching
 
 igraph_is_maximal_matching:
     IGNORE: RR
@@ -1231,24 +1161,26 @@ igraph_running_mean:
 igraph_random_sample:
     IGNORE: RR, RC
 
-igraph_convex_hull:
-    NAME: convex_hull
-
-igraph_dim_select:
-    NAME: dim_select
-
 #######################################
 # Eulerian functions
 #######################################
 
 igraph_is_eulerian:
-    IGNORE: RR, RC, RInit
+    INTERNAL: true
 
 igraph_eulerian_path:
-    IGNORE: RR, RC, RInit
+    PARAMS: GRAPH graph, OUT EDGESET_OR_0 edge_res, OUT VERTEXSET_OR_0 vertex_res
+    DEPS: edge_res ON graph, vertex_res ON graph
+    OUTPARAMNAMES:
+        edge_res: epath
+        vertex_res: vpath
 
 igraph_eulerian_cycle:
-    IGNORE: RR, RC, RInit
+    PARAMS: GRAPH graph, OUT EDGESET_OR_0 edge_res, OUT VERTEXSET_OR_0 vertex_res
+    DEPS: edge_res ON graph, vertex_res ON graph
+    OUTPARAMNAMES:
+        edge_res: epath
+        vertex_res: vpath
 
 #######################################
 # Other, (yet) undocumented functions
