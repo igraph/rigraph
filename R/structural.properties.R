@@ -1958,8 +1958,8 @@ which_loop <- function(graph, eids=E(graph)) {
 #' 
 #' # Remove multiple edges but keep multiplicity
 #' g <- barabasi.game(10, m=3, algorithm="bag")
-#' E(g)$weight <- count_multiple(g, edge.attr.comb=list(weight = "min"))
-#' g <- simplify(g)
+#' E(g)$weight <- count_multiple(g)
+#' g <- simplify(g, edge.attr.comb=list(weight = "min"))
 #' any(which_multiple(g))
 #' E(g)$weight
 #' 
