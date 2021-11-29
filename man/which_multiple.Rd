@@ -69,7 +69,7 @@ which_multiple(graph( c(1,2, 2,1), dir=FALSE ))
 # Remove multiple edges but keep multiplicity
 g <- barabasi.game(10, m=3, algorithm="bag")
 E(g)$weight <- count_multiple(g)
-g <- simplify(g)
+g <- simplify(g, edge.attr.comb=list(weight = "min"))
 any(which_multiple(g))
 E(g)$weight
 
