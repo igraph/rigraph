@@ -1169,15 +1169,11 @@ igraph_is_eulerian:
     INTERNAL: true
 
 igraph_eulerian_path:
-    PARAMS: GRAPH graph, OUT EDGESET_OR_0 edge_res, OUT VERTEXSET_OR_0 vertex_res
-    DEPS: edge_res ON graph, vertex_res ON graph
     OUTPARAMNAMES:
         edge_res: epath
         vertex_res: vpath
 
 igraph_eulerian_cycle:
-    PARAMS: GRAPH graph, OUT EDGESET_OR_0 edge_res, OUT VERTEXSET_OR_0 vertex_res
-    DEPS: edge_res ON graph, vertex_res ON graph
     OUTPARAMNAMES:
         edge_res: epath
         vertex_res: vpath

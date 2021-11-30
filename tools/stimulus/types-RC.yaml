@@ -670,6 +670,17 @@ VERTEX:
     INCONV:
         IN: '%C%=(igraph_integer_t) REAL(%I%)[0];'
 
+VERTEXPTR:
+    CALL:
+        OUT: '&%C%'
+    CTYPE: igraph_integer_t
+    INCONV:
+        OUT: '%C% = -1;'
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
+
 VERTEXSET:
     CALL:
         IN: '%C%'

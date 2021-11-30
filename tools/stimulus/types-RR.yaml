@@ -140,6 +140,17 @@ REALPTR_OR_0:
 INT:
     INCONV: '%I% <- as.integer(%I%)'
 
+VERTEX:
+    CALL: '%I%-1'
+    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+
+VERTEXPTR:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
 VERTEXSET:
     CALL: '%I%-1'
     DEFAULT:
@@ -172,10 +183,6 @@ VERTEXSET_INT:
             if (igraph_opt("return.vs.es")) {
               %I% <- create_vs(%I1%, %I%)
             }
-
-VERTEX:
-    CALL: '%I%-1'
-    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
 
 EDGESET:
     CALL: '%I%-1'
