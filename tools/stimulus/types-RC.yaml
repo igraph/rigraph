@@ -40,24 +40,14 @@ GRAPH_OR_0:
 
 INTEGER:
     CTYPE: igraph_integer_t
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=NEW_INTEGER(1));
-            INTEGER(%I%)[0]=%C%;
-
-INTEGERPTR:
-    CALL: '&%C%'
-    CTYPE: igraph_integer_t
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=NEW_INTEGER(1));
-            INTEGER(%I%)[0]=%C%;
-
-INTEGERPTR_OR_0:
-    CALL: '&%C%'
-    CTYPE: igraph_integer_t
+        INOUT: '%C%=INTEGER(%I%)[0];'
+        OUT: '%C%=0;'
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_INTEGER(1));
@@ -70,61 +60,35 @@ INT:
 
 REAL:
     CTYPE: igraph_real_t
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=NEW_NUMERIC(1));
-            REAL(%I%)[0]=%C%;
-
-REALPTR:
-    CALL: '&%C%'
-    CTYPE: igraph_real_t
-    INCONV:
         INOUT: '%C%=REAL(%I%)[0];'
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=NEW_NUMERIC(1));
-            REAL(%I%)[0]=%C%;
         OUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
             REAL(%I%)[0]=%C%;
-
-REALPTR_OR_0:
-    CALL: '&%C%'
-    CTYPE: igraph_real_t
-    INCONV:
-        INOUT: '%C%=REAL(%I%)[0];'
-    OUTCONV:
         INOUT: |-
-            PROTECT(%I%=NEW_NUMERIC(1));
-            REAL(%I%)[0]=%C%;
-        OUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
             REAL(%I%)[0]=%C%;
 
 BOOLEAN:
     CTYPE: igraph_bool_t
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
     INCONV:
         IN: '%C%=LOGICAL(%I%)[0];'
+        INOUT: '%C%=LOGICAL(%I%)[0];'
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
-
-BOOLEANPTR:
-    CALL: '&%C%'
-    CTYPE: igraph_bool_t
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=NEW_LOGICAL(1));
-            LOGICAL(%I%)[0]=%C%;
-
-BOOLEANPTR_OR_0:
-    CALL: '&%C%'
-    CTYPE: igraph_bool_t
-    OUTCONV:
-        OUT: |-
+        INOUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
 

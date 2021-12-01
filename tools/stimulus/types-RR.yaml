@@ -8,20 +8,26 @@ GRAPH_OR_0:
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
-    INCONV: '%I% <- as.integer(%I%)'
+    INCONV:
+        IN: '%I% <- as.integer(%I%)'
+        INOUT: '%I% <- as.integer(%I%)'
 
 REAL:
     DEFAULT:
         ECROSSW: 1.0 - sqrt(density(graph))
         ELENW: density(graph) / 10
         NEDISTW: 0.2 * (1-density(graph))
-    INCONV: '%I% <- as.numeric(%I%)'
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+        INOUT: '%I% <- as.numeric(%I%)'
 
 BOOLEAN:
     DEFAULT:
         'False': 'FALSE'
         'True': 'TRUE'
-    INCONV: '%I% <- as.logical(%I%)'
+    INCONV:
+        IN: '%I% <- as.logical(%I%)'
+        INOUT: '%I% <- as.logical(%I%)'
 
 VECTOR:
     DEFAULT:
@@ -116,26 +122,6 @@ TOUNDIRECTED:
         EACH: c("each", "collapse", "mutual")
         MUTUAL: c("mutual", "collapse", "each")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1, "each"=0, "mutual"=2)'
-
-INTEGERPTR:
-    INCONV:
-        INOUT: '%I% <- as.integer(%I%)'
-
-INTEGERPTR_OR_0:
-    INCONV:
-        INOUT: '%I% <- as.integer(%I%)'
-
-BOOLEANPTR: {}
-
-BOOLEANPTR_OR_0: {}
-
-REALPTR:
-    INCONV:
-        INOUT: '%I% <- as.numeric(%I%)'
-
-REALPTR_OR_0:
-    INCONV:
-        INOUT: '%I% <- as.numeric(%I%)'
 
 INT:
     INCONV: '%I% <- as.integer(%I%)'
