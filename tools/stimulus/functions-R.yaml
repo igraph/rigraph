@@ -1,3 +1,5 @@
+# vim:set ts=4 sw=4 sts=4 et:
+#
 # This file is a YAML representation of the R-specific parts of the function
 # definitions. They are currently used by Stimulus to generate code for the
 # R interface
@@ -1177,6 +1179,13 @@ igraph_eulerian_cycle:
     OUTPARAMNAMES:
         edge_res: epath
         vertex_res: vpath
+
+#######################################
+# Trees
+#######################################
+
+igraph_from_prufer:
+    NAME: make_from_prufer
 
 #######################################
 # Other, (yet) undocumented functions

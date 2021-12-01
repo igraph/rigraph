@@ -29,6 +29,11 @@ BOOLEAN:
         IN: '%I% <- as.logical(%I%)'
         INOUT: '%I% <- as.logical(%I%)'
 
+INDEX_VECTOR:
+    # Indices in R are 1-based; the conversion takes place here
+    INCONV: '%I% <- as.integer(%I%)-1L'
+    OUTCONV: '%I% <- %I%+1'
+
 VECTOR:
     DEFAULT:
         AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)

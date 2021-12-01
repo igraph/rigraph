@@ -34,3 +34,52 @@
 #'
 #' @export
 is_tree <- is_tree
+
+#' Convert a tree graph to its Prufer sequence
+#'
+#' \code{to_prufer} converts a tree graph into its Prufer sequence.
+#'
+#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
+#' find a vertex with degree one, remove it from the tree and add the label of
+#' the vertex that it was connected to to the sequence. Repeat until there are
+#' only two vertices in the remaining graph.
+#'
+#' @param graph The graph to convert to a Prufer sequence
+#' @return The Prufer sequence of the graph, represented as a numeric vector of
+#' vertex IDs in the sequence.
+#'
+#' @seealso \code{\link{make_from_prufer}} to construct a graph from its
+#' Prufer sequence
+#' @keywords graphs
+#' @wxamples
+#'
+#' g <- make_tree(13, 3)
+#' to_prufer(g)
+#'
+#' @export
+to_prufer <- to_prufer
+
+#' Create an undirected tree graph from its Prufer sequence
+#'
+#' \code{make_from_prufer} creates an undirected tree graph from its Prufer
+#' sequence.
+#'
+#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
+#' find a vertex with degree one, remove it from the tree and add the label of
+#' the vertex that it was connected to to the sequence. Repeat until there are
+#' only two vertices in the remaining graph.
+#'
+#' @param prufer The Prufer sequence to convert into a graph
+#' @return A graph object.
+#'
+#' @seealso \code{\link{to_prufer}} to convert a graph into its Prufer sequence
+#' @keywords graphs
+#' @wxamples
+#'
+#' g <- make_tree(13, 3)
+#' to_prufer(g)
+#'
+#' @export
+make_from_prufer <- make_from_prufer

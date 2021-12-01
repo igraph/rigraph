@@ -6,6 +6,9 @@ Added:
   Eulerian path or cycle in the graph.
 - `eulerian_path()` and `eulerian_cycle()` returns the edges and vertices in an
   Eulerian path or cycle in the graph.
+- `is_tree()` checks whether a graph is a tree and also finds a possible root
+- `to_prufer()` converts a tree graph into its Prufer sequence
+- `make_from_prufer()` creates a tree graph from its Prufer sequence
 
 # igraph 1.2.9
 
