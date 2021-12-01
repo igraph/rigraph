@@ -41,13 +41,6 @@ VERTEXINDEX:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
-VERTEXINDEX_OR_0:
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
-              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
-            }
-
 VECTOR_LONG:
     INCONV: '%I% <- as.numeric(%I%)'
 
@@ -291,16 +284,12 @@ EDGE_COLOR:
 
 VECTORLIST: {}
 
-VECTORLIST_OR_0: {}
-
 MATRIXLIST:
     INCONV:
         IN: |-
             if (!all(sapply(%I%, is.matrix))) {
               stop("%I% is not a list of matrices")
             }
-
-VECTORLIST_INT_OR_0: {}
 
 VERTEXSETLIST:
     OUTCONV:

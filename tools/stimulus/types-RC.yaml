@@ -314,40 +314,6 @@ EDGESETLIST:
             R_igraph_vectorlist_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VECTORLIST_OR_0:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
-    CTYPE: igraph_vector_ptr_t
-    INCONV:
-        IN: if (!isNull(%I%)) { R_SEXP_to_vectorlist(%I%, &%C%); }
-        OUT: |-
-            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
-            if (0 != igraph_vector_ptr_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_to_SEXP(&%C%));
-            R_igraph_vectorlist_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-VECTORLIST_INT_OR_0:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
-    CTYPE: igraph_vector_ptr_t
-    INCONV:
-        IN: if (!isNull(%I%)) { R_SEXP_to_vectorlist_int(%I%, &%C%); }
-        OUT: |-
-            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
-            if (0 != igraph_vector_ptr_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(R_igraph_vectorlist_int_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_int_to_SEXP(&%C%));
-            R_igraph_vectorlist_int_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
 VERTEXSETLIST_OR_0:
     CALL: '&%C%'
     CTYPE: igraph_vector_ptr_t
@@ -1035,21 +1001,6 @@ CMATRIX_OR_0:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEXINDEX:
-    CALL: '&%C%'
-    CTYPE: igraph_vector_t
-    INCONV:
-        OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-VERTEXINDEX_OR_0:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:
