@@ -6812,13 +6812,15 @@ SEXP R_igraph_preference_game(SEXP pnodes, SEXP ptypes, SEXP ptype_dist,
   return result;
 }
 
-SEXP R_igraph_asymmetric_preference_game(SEXP pnodes, SEXP ptypes,
-					 SEXP ptype_dist_matrix, SEXP pmatrix,
-					 SEXP ploops) {
+SEXP R_igraph_asymmetric_preference_game(
+        SEXP pnodes, SEXP pout_types, SEXP pin_types,
+        SEXP ptype_dist_matrix, SEXP pmatrix, SEXP ploops
+) {
 
   igraph_t g;
   igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
-  igraph_integer_t types=(igraph_integer_t) REAL(ptypes)[0];
+  igraph_integer_t out_types=(igraph_integer_t) REAL(pout_types)[0];
+  igraph_integer_t in_types=(igraph_integer_t) REAL(pin_types)[0];
   igraph_matrix_t type_dist_matrix;
   igraph_matrix_t matrix;
   igraph_bool_t loops=LOGICAL(ploops)[0];
@@ -6826,7 +6828,7 @@ SEXP R_igraph_asymmetric_preference_game(SEXP pnodes, SEXP ptypes,
 
   R_SEXP_to_matrix(ptype_dist_matrix, &type_dist_matrix);
   R_SEXP_to_matrix(pmatrix, &matrix);
-  igraph_asymmetric_preference_game(&g, nodes, types, types, &type_dist_matrix,
+  igraph_asymmetric_preference_game(&g, nodes, out_types, in_types, &type_dist_matrix,
 				    &matrix, 0, 0, loops);
   PROTECT(result=R_igraph_to_SEXP(&g));
   igraph_destroy(&g);

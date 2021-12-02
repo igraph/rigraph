@@ -61,9 +61,6 @@ VECTOR_OR_0:
 VECTORM1_OR_0:
     INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)-1
 
-VECTOR_LONG_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
-
 VECTOR_LONG_M1:
     INCONV: '%I% <- as.numeric(%I%)-1'
 
@@ -309,25 +306,7 @@ VERTEXSETLIST_INT:
     INCONV:
         IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
 
-VERTEXSETLIST_OR_0:
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("return.vs.es")) {
-              for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- create_vs(%I1%, %I%[[i_]])
-              }
-            }
-
 EDGESETLIST:
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("return.vs.es")) {
-              for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- create_es(%I1%, %I%[[i_]])
-              }
-            }
-
-EDGESETLIST_OR_0:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
