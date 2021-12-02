@@ -46,7 +46,6 @@ SEXP R_igraph_getsphere(SEXP pos, SEXP radius, SEXP color, SEXP bgcolor,
   int i;
   double *spos=REAL(pos);
   double *scolor=REAL(color);
-  double *svgcolor=REAL(bgcolor);
   int no_lights=GET_LENGTH(lightpos); 
   RayTracer* p_ray_tracer;
   Sphere * sphere;
