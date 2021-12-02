@@ -97,12 +97,6 @@ NEIMODE:
         TOTAL: c("total", "out", "in", "all")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2, "all"=3, "total"=3)'
 
-INOUTMODE:
-    DEFAULT:
-        IN: c("in", "out")
-        OUT: c("out", "in")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2)'
-
 TODIRECTED:
     DEFAULT:
         ARBITRARY: c("arbitrary", "mutual", "random", "acyclic")
@@ -124,8 +118,6 @@ INT:
 VERTEX:
     CALL: '%I%-1'
     INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
-
-VERTEXPTR:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -133,17 +125,6 @@ VERTEXPTR:
             }
 
 VERTEXSET:
-    CALL: '%I%-1'
-    DEFAULT:
-        ALL: V(%I1%)
-    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("return.vs.es")) {
-              %I% <- create_vs(%I1%, %I%)
-            }
-
-VERTEXSET_OR_0:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
@@ -166,17 +147,6 @@ VERTEXSET_INT:
             }
 
 EDGESET:
-    CALL: '%I%-1'
-    DEFAULT:
-        ALL: E(%I1%)
-    INCONV: '%I% <- as.igraph.es(%I1%, %I%)'
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("return.vs.es")) {
-              %I% <- create_es(%I1%, %I%)
-            }
-
-EDGESET_OR_0:
     CALL: '%I%-1'
     DEFAULT:
         ALL: E(%I1%)
@@ -237,23 +207,6 @@ BIPARTITE_TYPES:
           stop("Not a bipartite graph, supply `types' argument")
         }
 
-BIPARTITE_TYPES_OR_0:
-    INCONV: |-
-        if (is.null(%I%) && "type" %in% vertex_attr_names(%I1%)) {
-          %I% <- V(%I1%)$type
-        }
-        if (!is.null(%I%)) {
-          if (!is.logical(%I%)) {
-            warning("vertex types converted to logical")
-          }
-          %I% <- as.logical(%I%)
-          if (any(is.na(%I%))) {
-            stop("`NA' is not allowed in vertex types")
-          }
-        } else {
-          stop("Not a bipartite graph, supply `types' argument")
-        }
-
 VERTEX_COLOR:
     INCONV: |-
         if (missing(%I%)) {
@@ -282,7 +235,15 @@ EDGE_COLOR:
 
 'NULL':
     CALL: {}
-    HEADER: {}
+    HEADER: ~
+
+EXTRA:
+    CALL: {}
+    HEADER: ~
+
+ISOCOMPAT_FUNC:
+    CALL: {}
+    HEADER: ~
 
 VECTORLIST: {}
 
@@ -314,6 +275,10 @@ EDGESETLIST:
                 %I%[[i_]] <- create_es(%I1%, %I%[[i_]])
               }
             }
+
+'ARPACKSTORAGE':
+    CALL: {}
+    HEADER: ~
 
 ARPACKOPT:
     INCONV:
@@ -402,17 +367,17 @@ SPARSEMAT_OR_0:
           require(Matrix); %I% <- as(%I%, "dgCMatrix")
         }
 
-CVECTOR:
+VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
 
-CMATRIX:
+MATRIX_COMPLEX:
     INCONV: '%I% <- as.matrix(structure(as.complex(%I%), dim=dim(%I%)))'
 
 PLFIT: {}
 
 MAXFLOW_STATS:
     CALL: {}
-    HEADER: {}
+    HEADER: ~
 
 EIGENALGO:
     DEFAULT:
@@ -456,6 +421,7 @@ PAGERANKOPT:
 
 DEPRECATED:
     CALL: {}
+    HEADER: ~
     INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
 
 LSETYPE:

@@ -58,6 +58,11 @@ INT:
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
 
+LONGINT:
+    CTYPE: long int
+    INCONV:
+        IN: '%C%=INTEGER(%I%)[0];'
+
 REAL:
     CTYPE: igraph_real_t
     CALL:
@@ -119,11 +124,6 @@ CONNECTEDNESS:
         IN: '%C%=REAL(%I%)[0];'
 
 NEIMODE:
-    CTYPE: igraph_neimode_t
-    INCONV:
-        IN: '%C%=(igraph_neimode_t) REAL(%I%)[0];'
-
-INOUTMODE:
     CTYPE: igraph_neimode_t
     INCONV:
         IN: '%C%=(igraph_neimode_t) REAL(%I%)[0];'
@@ -567,43 +567,24 @@ ARRAY3_OR_0:
             IGRAPH_FINALLY_CLEAN(1);
 
 VERTEX:
-    CTYPE: igraph_integer_t
-    INCONV:
-        IN: '%C%=(igraph_integer_t) REAL(%I%)[0];'
-
-VERTEXPTR:
     CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
         OUT: '&%C%'
     CTYPE: igraph_integer_t
     INCONV:
+        IN: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
         OUT: '%C% = -1;'
     OUTCONV:
+        INOUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
         OUT: |-
             PROTECT(%I% = NEW_INTEGER(1));
             INTEGER(%I%)[0] = %C% + 1;
 
 VERTEXSET:
-    CALL:
-        IN: '%C%'
-        OUT: '&%C%'
-    CTYPE:
-        IN: igraph_vs_t
-        OUT: igraph_vector_t
-    INCONV:
-        IN: R_SEXP_to_igraph_vs(%I%, &%C1%, &%C%);
-        OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
-    OUTCONV:
-        IN: igraph_vs_destroy(&%C%);
-        OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-VERTEXSET_OR_0:
     CALL:
         IN: '%C%'
         OUT: '&%C%'
@@ -664,29 +645,19 @@ EDGESET:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGESET_OR_0:
-    CALL:
-        IN: '%C%'
-        OUT: '&%C%'
-    CTYPE:
-        IN: igraph_es_t
-        OUT: igraph_vector_t
-    INCONV:
-        IN: R_SEXP_to_igraph_es(%I%, &%C1%, &%C%);
-        OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
-    OUTCONV:
-        IN: igraph_es_destroy(&%C%);
-        OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
 'NULL':
     CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
+EXTRA:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
+ISOCOMPAT_FUNC:
+    CALL: '0'
+    CTYPE: ~
     HEADER: {}
 
 ARPACKOPT:
@@ -696,6 +667,11 @@ ARPACKOPT:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
         INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
+
+ARPACKSTORAGE:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
 
 DRL_OPTIONS:
     CALL: '&%C%'
@@ -728,12 +704,6 @@ STRVECTOR:
             IGRAPH_FINALLY_CLEAN(1);
 
 BIPARTITE_TYPES:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
-    CTYPE: igraph_vector_bool_t
-    INCONV:
-        IN: if (!isNull(%I%)) { R_SEXP_to_vector_bool(%I%, &%C%); }
-
-BIPARTITE_TYPES_OR_0:
     CALL: '(isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_bool_t
     INCONV:
@@ -871,39 +841,7 @@ SPARSEMAT_OR_0:
             igraph_sparsemat_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-CVECTOR:
-    CALL: '&%C%'
-    CTYPE: igraph_vector_complex_t
-    INCONV:
-        IN: R_SEXP_to_vector_complex(%I%, &%C%);
-        OUT: |-
-            if (0 != igraph_vector_complex_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_vector_complex_to_SEXP(&%C%));
-            igraph_vector_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-CMATRIX:
-    CALL: '&%C%'
-    CTYPE: igraph_matrix_complex_t
-    INCONV:
-        IN: R_SEXP_to_matrix_complex(%I%, &%C%);
-        OUT: |-
-            if (0 != igraph_matrix_complex_init(&%C%, 0, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-            }
-            IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
-    OUTCONV:
-        OUT: |-
-            PROTECT(%I%=R_igraph_matrix_complex_to_SEXP(&%C%));
-            igraph_matrix_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
-
-CVECTOR_OR_0:
+VECTOR_COMPLEX:
     CALL: '(isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_complex_t
     INCONV:
@@ -936,7 +874,7 @@ CVECTOR_OR_0:
             igraph_vector_complex_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-CMATRIX_OR_0:
+MATRIX_COMPLEX:
     CALL: '(isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_matrix_complex_t
     INCONV:
@@ -1055,6 +993,7 @@ PAGERANKOPT:
 
 DEPRECATED:
     CALL: {}
+    CTYPE: ~
     HEADER: {}
 
 LSETYPE:

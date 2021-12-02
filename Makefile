@@ -159,6 +159,7 @@ src/init.c: $(top_srcdir)/interfaces/functions.yaml \
            -f tools/stimulus/functions-R.yaml \
            -i tools/stimulus/init.c.in \
            -o src/init.c \
+           -t tools/stimulus/types-RR.yaml \
            -l RInit
 
 R/auto.R: $(top_srcdir)/interfaces/functions.yaml \
