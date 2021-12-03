@@ -10,6 +10,10 @@ Added:
 - `to_prufer()` converts a tree graph into its Prufer sequence
 - `make_from_prufer()` creates a tree graph from its Prufer sequence
 
+Fixed:
+
+- `is_connected()` now returns FALSE for the null graph
+
 # igraph 1.2.9
 
 Nov 22, 2021

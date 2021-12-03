@@ -65,19 +65,6 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
   res
 }
 
-#' @export
-
-is_connected <- function(graph, mode=c("weak", "strong")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak"=1, "strong"=2)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_is_connected, graph, as.numeric(mode))
-}
-
 
 
 #' Decompose a graph into components

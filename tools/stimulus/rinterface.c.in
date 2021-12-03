@@ -3813,23 +3813,6 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP pmode, SEXP ploops) {
   return result;
 }
 
-SEXP R_igraph_is_connected(SEXP graph, SEXP pmode) {
-
-  igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_bool_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_is_connected(&g, &res, (igraph_connectedness_t) mode);
-
-  PROTECT(result=NEW_LOGICAL(1));
-  LOGICAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_diameter(SEXP graph, SEXP pdirected, SEXP punconnected,
 		       SEXP pweights) {
 
