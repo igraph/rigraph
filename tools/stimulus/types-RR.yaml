@@ -10,7 +10,6 @@ INTEGER:
         FINEITER: max(10, log2(vcount(graph)))
     INCONV:
         IN: '%I% <- as.integer(%I%)'
-        INOUT: '%I% <- as.integer(%I%)'
 
 REAL:
     DEFAULT:
@@ -19,7 +18,6 @@ REAL:
         NEDISTW: 0.2 * (1-density(graph))
     INCONV:
         IN: '%I% <- as.numeric(%I%)'
-        INOUT: '%I% <- as.numeric(%I%)'
 
 BOOLEAN:
     DEFAULT:
@@ -27,7 +25,6 @@ BOOLEAN:
         'True': 'TRUE'
     INCONV:
         IN: '%I% <- as.logical(%I%)'
-        INOUT: '%I% <- as.logical(%I%)'
 
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here

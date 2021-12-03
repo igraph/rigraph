@@ -1,4 +1,3 @@
-
 GRAPH:
     CALL: '&%C%'
     CTYPE: igraph_t
@@ -46,7 +45,6 @@ INTEGER:
         INOUT: '&%C%'
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
-        INOUT: '%C%=INTEGER(%I%)[0];'
         OUT: '%C%=0;'
     OUTCONV:
         OUT: |-
@@ -71,12 +69,8 @@ REAL:
         INOUT: '&%C%'
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
-        INOUT: '%C%=REAL(%I%)[0];'
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=NEW_NUMERIC(1));
-            REAL(%I%)[0]=%C%;
-        INOUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
             REAL(%I%)[0]=%C%;
 
@@ -88,12 +82,8 @@ BOOLEAN:
         INOUT: '&%C%'
     INCONV:
         IN: '%C%=LOGICAL(%I%)[0];'
-        INOUT: '%C%=LOGICAL(%I%)[0];'
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=NEW_LOGICAL(1));
-            LOGICAL(%I%)[0]=%C%;
-        INOUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));
             LOGICAL(%I%)[0]=%C%;
 
@@ -164,10 +154,6 @@ VECTOR:
             }
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_vector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
@@ -189,10 +175,6 @@ VECTORM1:
             }
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
@@ -214,10 +196,6 @@ VECTOR_BOOL:
             }
             IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
-            igraph_vector_bool_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
             igraph_vector_bool_destroy(&%C%);
@@ -365,10 +343,6 @@ VECTOR_OR_0:
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
             igraph_vector_destroy(&%C%);
@@ -398,10 +372,6 @@ VECTORM1_OR_0:
             IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_0orvector_to_SEXPp1(&%C%));
-            igraph_vector_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_0orvector_to_SEXPp1(&%C%));
             igraph_vector_destroy(&%C%);
@@ -491,10 +461,6 @@ MATRIX:
             }
             IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_matrix_to_SEXP(&%C%));
-            igraph_matrix_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_matrix_to_SEXP(&%C%));
             igraph_matrix_destroy(&%C%);
@@ -524,10 +490,6 @@ MATRIX_OR_0:
             IGRAPH_FINALLY(igraph_matrix_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_0ormatrix_to_SEXP(&%C%));
-            igraph_matrix_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_0ormatrix_to_SEXP(&%C%));
             igraph_matrix_destroy(&%C%);
@@ -577,9 +539,6 @@ VERTEX:
         INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
         OUT: '%C% = -1;'
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I% = NEW_INTEGER(1));
-            INTEGER(%I%)[0] = %C% + 1;
         OUT: |-
             PROTECT(%I% = NEW_INTEGER(1));
             INTEGER(%I%)[0] = %C% + 1;
@@ -763,10 +722,6 @@ HRG:
             }
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
-            igraph_hrg_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);
@@ -865,10 +820,6 @@ VECTOR_COMPLEX:
             IGRAPH_FINALLY(igraph_vector_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_0orvector_complex_to_SEXP(&%C%));
-            igraph_vector_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_0orvector_complex_to_SEXP(&%C%));
             igraph_vector_complex_destroy(&%C%);
@@ -898,10 +849,6 @@ MATRIX_COMPLEX:
             IGRAPH_FINALLY(igraph_matrix_complex_destroy, &%C%);
             %I%=R_GlobalEnv; /* hack to have a non-NULL value */
     OUTCONV:
-        INOUT: |-
-            PROTECT(%I%=R_igraph_0ormatrix_complex_to_SEXP(&%C%));
-            igraph_matrix_complex_destroy(&%C%);
-            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_0ormatrix_complex_to_SEXP(&%C%));
             igraph_matrix_complex_destroy(&%C%);
