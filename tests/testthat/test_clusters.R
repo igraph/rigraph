@@ -64,8 +64,10 @@ test_that("is_connected works", {
   expect_false(is_connected(g))
 })
 
-test_that("is_connected returns FALSE for the null graph"< {
+test_that("is_connected returns FALSE for the null graph", {
+  library(igraph)
+
   g <- make_empty_graph(0)
-  expect_false(is_connected(G))
+  expect_false(is_connected(g))
 })
 
