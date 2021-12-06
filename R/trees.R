@@ -52,7 +52,7 @@ is_tree <- is_tree
 #' @seealso \code{\link{make_from_prufer}} to construct a graph from its
 #' Prufer sequence
 #' @keywords graphs
-#' @wxamples
+#' @examples
 #'
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
@@ -76,10 +76,37 @@ to_prufer <- to_prufer
 #'
 #' @seealso \code{\link{to_prufer}} to convert a graph into its Prufer sequence
 #' @keywords graphs
-#' @wxamples
+#' @examples
 #'
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
 #'
 #' @export
 make_from_prufer <- make_from_prufer
+
+#' Sample trees randomly and uniformly
+#'
+#' \code{sample_tree} generates a random with a given number of nodes uniform
+#' at random from the set of labelled trees.
+#'
+#' In other words, the function generates each possible labelled tree with the
+#' given number of nodes with the same probability.
+#'
+#' @param n The number of nodes in the tree
+#' @param directed Whether to create a directed tree. The edges of the tree are
+#' oriented away from the root.
+#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
+#' samples Prufer sequences uniformly and then converts the sampled sequence to
+#' a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
+#' graph to uniformly sampleits spanning trees. (This is also known as Wilson's
+#' algorithm). The default is \sQuote{lerw}. Note that the method based on
+#' Prufer sequences does not support directed trees at the moment.
+#' @return A graph object.
+#'
+#' @keywords graphs
+#' @examples
+#'
+#' g <- sample_tree(100, method="lerw")
+#'
+#' @export
+sample_tree <- sample_tree

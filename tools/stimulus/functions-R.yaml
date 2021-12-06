@@ -1184,6 +1184,9 @@ igraph_eulerian_cycle:
 igraph_from_prufer:
     NAME: make_from_prufer
 
+igraph_tree_game:
+    NAME: sample_tree
+
 #######################################
 # Other, (yet) undocumented functions
 #######################################

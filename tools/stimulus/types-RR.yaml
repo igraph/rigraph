@@ -444,3 +444,11 @@ EDGE_TYPE_SW:
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%),
           "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
+
+RANDOM_TREE_METHOD:
+    DEFAULT:
+        PRUFER: c("prufer", "lerw")
+        LERW: c("lerw", "prufer")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "prufer"=0L, "lerw"=1L)
+

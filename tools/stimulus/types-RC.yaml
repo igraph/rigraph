@@ -958,3 +958,8 @@ EDGE_TYPE_SW:
     INCONV:
         IN: '%C%=(igraph_edge_type_sw_t) INTEGER(%I%)[0];'
 
+RANDOM_TREE_METHOD:
+    CTYPE: igraph_random_tree_t
+    INCONV:
+        IN: '%C%=(igraph_random_tree_t) INTEGER(%I%)[0];'
+

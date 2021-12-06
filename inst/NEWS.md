@@ -9,6 +9,7 @@ Added:
 - `is_tree()` checks whether a graph is a tree and also finds a possible root
 - `to_prufer()` converts a tree graph into its Prufer sequence
 - `make_from_prufer()` creates a tree graph from its Prufer sequence
+- `sample_tree()` to sample labelled trees uniformly at random
 
 Fixed:
 
