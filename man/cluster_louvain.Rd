@@ -5,7 +5,7 @@
 \alias{multilevel.community}
 \title{Finding community structure by multi-level optimization of modularity}
 \usage{
-cluster_louvain(graph, weights = NULL)
+cluster_louvain(graph, weights = NULL, resolution = 1)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -14,6 +14,12 @@ cluster_louvain(graph, weights = NULL)
 \code{weight} edge attribute, then this is used by default. Supply \code{NA}
 here if the graph has a \code{weight} edge attribute, but you want to ignore
 it. Larger edge weights correspond to stronger connections.}
+
+\item{resolution}{Optional resolution parameter that allows the user to
+adjust the resolution parameter of the modularity function that the algorithm
+uses internally. Lower values typically yield fewer, larger clusters. The
+original definition of modularity is recovered when the resolution parameter
+is set to 1.}
 }
 \value{
 \code{cluster_louvain} returns a \code{\link{communities}}

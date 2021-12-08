@@ -366,7 +366,7 @@ modularity <- function(x, ...)
 #' The modularity of a graph with respect to some division (or vertex types)
 #' measures how good the division is, or how separated are the different vertex
 #' types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
-#' (A_{ij}-\frac{k_ik_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-ki*kj/(2m)
+#' (A_{ij}-\gamma\frac{k_ik_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
 #' ) delta(ci,cj),i,j),} here \eqn{m} is the number of edges, \eqn{A_{ij}}{Aij}
 #' is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column
 #' \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i}, \eqn{k_j}{kj} is the degree
@@ -374,6 +374,14 @@ modularity <- function(x, ...)
 #' \eqn{c_j}{cj} that of \eqn{j}, the sum goes over all \eqn{i} and \eqn{j}
 #' pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
 #' otherwise.
+#'
+#' The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
+#' null model, which might be useful when finding partitions with a high
+#' modularity. Maximizing modularity with higher values of the resolution
+#' parameter typically results in more, smaller clusters when finding
+#' partitions with a high modularity. Lower values typically results in fewer,
+#' larger clusters. The original definition of modularity is retrieved when
+#' setting \eqn{\gamma}{gamma} to 1. 
 #'
 #' If edge weights are given, then these are considered as the element of the
 #' \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
@@ -393,6 +401,10 @@ modularity <- function(x, ...)
 #' @param membership Numeric vector, one value for each vertex, the membership
 #' vector of the community structure.
 #' @param weights If not \code{NULL} then a numeric vector giving edge weights.
+#' @param resolution The resolution parameter. Must be greater than or equal to
+#' 0. Set it to 1 to use the classical definition of modularity. 
+#' @param directed Whether to use the directed or undirected version of
+#' modularity. Ignored for undirected graphs. 
 #' @param \dots Additional arguments, none currently.
 #' @return For \code{modularity} a numeric scalar, the modularity score of the
 #' given configuration.
@@ -419,7 +431,7 @@ modularity <- function(x, ...)
 #' modularity(g, membership(wtc))
 #'
 
-modularity.igraph <- function(x, membership, weights=NULL, ...) {
+modularity.igraph <- function(x, membership, weights=NULL, resolution=1, directed=TRUE, ...) {
   # Argument checks
   if (!is_igraph(x)) { stop("Not a graph object") }
   if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
@@ -427,10 +439,12 @@ modularity.igraph <- function(x, membership, weights=NULL, ...) {
   }
   membership <- as.numeric(membership)
   if (!is.null(weights)) weights <- as.numeric(weights)
+  resolution <- as.numeric(resolution)
+  directed <- as.logical(directed)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_modularity, x, membership-1, weights)
+  res <- .Call(C_R_igraph_modularity, x, membership-1, weights, resolution, directed)
   res
 }
 
@@ -450,7 +464,7 @@ modularity.communities <- function(x, ...) {
 #' @aliases mod.matrix
 #' @export
 
-modularity_matrix <- function(graph, membership, weights=NULL) {
+modularity_matrix <- function(graph, membership, weights=NULL, resolution=1, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (!missing(membership)) {
@@ -466,9 +480,12 @@ modularity_matrix <- function(graph, membership, weights=NULL) {
     weights <- NULL
   }
 
+  resolution <- as.numeric(resolution)
+  directed <- as.logical(directed)
+
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_modularity_matrix, graph, weights)
+  res <- .Call(C_R_igraph_modularity_matrix, graph, weights, resolution, directed)
 
   res
 }
@@ -1640,6 +1657,11 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' \code{weight} edge attribute, then this is used by default. Supply \code{NA}
 #' here if the graph has a \code{weight} edge attribute, but you want to ignore
 #' it. Larger edge weights correspond to stronger connections.
+#' @param resolution Optional resolution parameter that allows the user to
+#' adjust the resolution parameter of the modularity function that the algorithm
+#' uses internally. Lower values typically yield fewer, larger clusters. The
+#' original definition of modularity is recovered when the resolution parameter
+#' is set to 1.
 #' @return \code{cluster_louvain} returns a \code{\link{communities}}
 #' object, please see the \code{\link{communities}} manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
@@ -1665,21 +1687,22 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL,
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' cluster_louvain(g)
 #'
-cluster_louvain <- function(graph, weights=NULL) {
+cluster_louvain <- function(graph, weights=NULL, resolution=1) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-  weights <- E(graph)$weight
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
-  weights <- as.numeric(weights)
+    weights <- as.numeric(weights)
   } else {
-  weights <- NULL
+    weights <- NULL
   }
+  resolution <- as.numeric(resolution)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_community_multilevel, graph, weights)
+  res <- .Call(C_R_igraph_community_multilevel, graph, weights, resolution)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

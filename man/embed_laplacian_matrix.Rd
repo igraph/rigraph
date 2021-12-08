@@ -9,7 +9,6 @@ embed_laplacian_matrix(
   no,
   weights = NULL,
   which = c("lm", "la", "sa"),
-  degmode = c("out", "in", "all", "total"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
   options = igraph.arpack.default
@@ -35,8 +34,6 @@ the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
 eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 are used for the ordering.}
-
-\item{degmode}{TODO}
 
 \item{type}{The type of the Laplacian to use. Various definitions exist for
 the Laplacian of a graph, and one can choose between them with this

@@ -731,6 +731,12 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' 
 #' @aliases canonical.permutation canonical_permutation
 #' @param graph The input graph, treated as undirected.
+#' @param colors The colors of the individual vertices of the graph; only
+#' vertices having the same color are allowed to match each other in an
+#' automorphism. When omitted, igraph uses the \code{color} attribute of the
+#' vertices, or, if there is no such vertex attribute, it simply assumes that
+#' all vertices have the same color. Pass NULL explicitly if the graph has a
+#' \code{color} vertex attribute but you do not want to use it.
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
 #' for possible values.
 #' @return A list with the following members: \item{labeling}{The canonical
@@ -835,6 +841,12 @@ permute <- permute
 #' 
 #' @aliases graph.automorphisms automorphisms
 #' @param graph The input graph, it is treated as undirected.
+#' @param colors The colors of the individual vertices of the graph; only
+#' vertices having the same color are allowed to match each other in an
+#' automorphism. When omitted, igraph uses the \code{color} attribute of the
+#' vertices, or, if there is no such vertex attribute, it simply assumes that
+#' all vertices have the same color. Pass NULL explicitly if the graph has a
+#' \code{color} vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
 #' are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
 #' largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
@@ -864,6 +876,11 @@ permute <- permute
 #' ## and each of these graphs can be "flipped"
 #' g <- make_ring(10)
 #' automorphisms(g)
+#' 
+#' ## A full graph has n! automorphisms; however, we restrict the vertex
+#' ## matching by colors, leading to only 4 automorphisms
+#' g <- make_full_graph(4)
+#' automorphisms(g, colors=c(1,2,1,2))
 #' @export
 
 automorphisms <- automorphisms

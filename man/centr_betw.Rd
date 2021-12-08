@@ -14,8 +14,8 @@ centr_betw(graph, directed = TRUE, nobigint = TRUE, normalized = TRUE)
 calculating betweenness.}
 
 \item{nobigint}{Logical scalar, whether to use big integers for the
-betweenness calculation. This argument is passed to the
-\code{\link{betweenness}} function.}
+betweenness calculation. This argument is deprecated in igraph 1.3 and
+will be removed in igraph 1.4.}
 
 \item{normalized}{Logical scalar. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}

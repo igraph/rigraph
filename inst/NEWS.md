@@ -1,5 +1,21 @@
 # Unreleased
 
+Added:
+
+- `has_eulerian_path()` and `has_eulerian_cycle()` decides whether there is an
+  Eulerian path or cycle in the graph.
+- `eulerian_path()` and `eulerian_cycle()` returns the edges and vertices in an
+  Eulerian path or cycle in the graph.
+- `is_tree()` checks whether a graph is a tree and also finds a possible root
+- `to_prufer()` converts a tree graph into its Prufer sequence
+- `make_from_prufer()` creates a tree graph from its Prufer sequence
+- `sample_tree()` to sample labelled trees uniformly at random
+- `automorphisms()` and `canonical_permutation()` now supports vertex colors
+
+Fixed:
+
+- `is_connected()` now returns FALSE for the null graph
+
 # igraph 1.2.9
 
 Nov 22, 2021

@@ -9,7 +9,7 @@
 sample_degseq(
   out.deg,
   in.deg = NULL,
-  method = c("simple", "vl", "simple.no.multiple")
+  method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")
 )
 
 degseq(...)
@@ -51,6 +51,11 @@ scratch if it gets stuck. It is not guaranteed to sample uniformly from the
 space of all possible graphs with the given sequence, but it is relatively
 fast and it will eventually succeed if the provided degree sequence is
 graphical, but there is no upper bound on the number of iterations.
+
+The \dQuote{simple.no.multiple.uniform} method is a variant of
+\dQuote{simple.no.multiple} with the added benefit of sampling uniformly
+from the set of all possible simple graphs with the given degree sequence.
+Ensuring uniformity has some performance implications, though.
 
 The \dQuote{vl} method is a more sophisticated generator. The algorithm and
 the implementation was done by Fabien Viger and Matthieu Latapy. This

@@ -32,19 +32,22 @@ is_degseq(degree(g))
 is_graphical(degree(g))
 }
 \references{
-Hakimi SL: On the realizability of a set of integers as degrees
-of the vertices of a simple graph. \emph{J SIAM Appl Math} 10:496-506, 1962.
+Z Kiraly, Recognizing graphic degree sequences and generating
+all realizations. TR-2011-11, Egervary Research Group, H-1117, Budapest,
+Hungary. ISSN 1587-4451 (2012).
 
-PL Erdos, I Miklos and Z Toroczkai: A simple Havel-Hakimi type algorithm to
-realize graphical degree sequences of directed graphs.  \emph{The Electronic
-Journal of Combinatorics} 17(1):R66, 2010.
+B. Cloteaux, Is This for Real? Fast Graphicality Testing, \emph{Comput. Sci. Eng.} 17, 91 (2015).
+
+A. Berger, A note on the characterization of digraphic sequences, \emph{Discrete Math.} 314, 38 (2014).
+
+G. Cairns and S. Mendan, Degree Sequence for Graphs with Loops (2013).
 }
 \seealso{
 Other graphical degree sequences: 
 \code{\link{is_graphical}()}
 }
 \author{
-Tamas Nepusz \email{ntamas@gmail.com}
+Tamas Nepusz \email{ntamas@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
 }
 \concept{graphical degree sequences}
 \keyword{graphs}

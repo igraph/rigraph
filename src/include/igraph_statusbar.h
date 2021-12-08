@@ -48,7 +48,7 @@ __BEGIN_DECLS
  * </para>
  *
  * <para>
- * Igraph functions report their status via a call to the
+ * igraph functions report their status via a call to the
  * \ref IGRAPH_STATUS() or the \ref IGRAPH_STATUSF() macro.
  * </para>
  */
@@ -64,11 +64,11 @@ __BEGIN_DECLS
 
 typedef int igraph_status_handler_t(const char *message, void *data);
 
-extern igraph_status_handler_t igraph_status_handler_stderr;
+IGRAPH_EXPORT extern igraph_status_handler_t igraph_status_handler_stderr;
 
-DECLDIR igraph_status_handler_t * igraph_set_status_handler(igraph_status_handler_t new_handler);
+IGRAPH_EXPORT igraph_status_handler_t * igraph_set_status_handler(igraph_status_handler_t new_handler);
 
-DECLDIR int igraph_status(const char *message, void *data);
+IGRAPH_EXPORT int igraph_status(const char *message, void *data);
 
 /**
  * \define IGRAPH_STATUS
@@ -95,7 +95,7 @@ DECLDIR int igraph_status(const char *message, void *data);
         } \
     } while (0)
 
-DECLDIR int igraph_statusf(const char *message, void *data, ...);
+IGRAPH_EXPORT int igraph_statusf(const char *message, void *data, ...);
 
 /**
  * \define IGRAPH_STATUSF

@@ -38,13 +38,17 @@
 #' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
 #' should be \code{NULL}. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
-#' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @references Hakimi SL: On the realizability of a set of integers as degrees
-#' of the vertices of a simple graph. \emph{J SIAM Appl Math} 10:496-506, 1962.
-#' 
-#' PL Erdos, I Miklos and Z Toroczkai: A simple Havel-Hakimi type algorithm to
-#' realize graphical degree sequences of directed graphs.  \emph{The Electronic
-#' Journal of Combinatorics} 17(1):R66, 2010.
+#' @author Tamas Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
+#' @references Z Kiraly, Recognizing graphic degree sequences and generating
+#' all realizations. TR-2011-11, Egervary Research Group, H-1117, Budapest,
+#' Hungary. ISSN 1587-4451 (2012).
+#'
+#' B. Cloteaux, Is This for Real? Fast Graphicality Testing, \emph{Comput. Sci. Eng.} 17, 91 (2015).
+#'
+#' A. Berger, A note on the characterization of digraphic sequences, \emph{Discrete Math.} 314, 38 (2014).
+#'
+#' G. Cairns and S. Mendan, Degree Sequence for Graphs with Loops (2013).
+#'
 #' @keywords graphs
 #'
 #' @family graphical degree sequences
@@ -55,19 +59,30 @@
 #' @export
 #' @include auto.R
 
-is_degseq <- is_degseq
+is_degseq <- function(out.deg, in.deg=NULL) {
+  is_graphical(out.deg, in.deg, allowed.edge.types="all")
+}
 
 #' Is a degree sequence graphical?
 #' 
 #' Determine whether the given vertex degrees (in- and out-degrees for
-#' directed graphs) can be realized in a simple graph, i.e. a graph without
-#' multiple or loop edges.
+#' directed graphs) can be realized in a graph.
+#'
+#' The classical concept of graphicality assumes simple graphs. This function
+#' can perform the check also when self-loops, multi-edges, or both are allowed
+#' in the graph.
 #' 
 #' @aliases is.graphical.degree.sequence
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #' the out-degree sequence for directed graphs.
 #' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
 #' should be \code{NULL}. For directed graphs it specifies the in-degrees.
+#' @param allowed.edge.types The allowed edge types in the graph. \sQuote{simple}
+#' means that neither loop nor multiple edges are allowed (i.e. the graph must be
+#' simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
+#' are not. \sQuote{multi} means that multiple edges are allowed but loop edges
+#' are not. \sQuote{all} means that both loop edges and multiple edges are
+#' allowed.
 #' @return A logical scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Hakimi SL: On the realizability of a set of integers as degrees

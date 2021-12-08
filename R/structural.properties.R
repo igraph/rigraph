@@ -640,12 +640,7 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
 subgraph <- function(graph, v) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_subgraph, graph, as.igraph.vs(graph, v)-1)
+  induced_subgraph(graph, v)
 }
 
 #' @rdname subgraph
@@ -714,11 +709,13 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
   } else { 
   weights <- NULL 
   }
-  nobigint <- as.logical(nobigint)
+  if (!missing(nobigint)) {
+    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
+  }
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_betweenness_estimate, graph, vids-1, directed, cutoff, weights, nobigint)
+  res <- .Call(C_R_igraph_betweenness_cutoff, graph, vids-1, directed, cutoff, weights)
   if (igraph_opt("add.vertex.names") && is_named(graph)) { 
   names(res) <- vertex_attr(graph, "name", vids) 
   }
@@ -766,9 +763,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' used by default. Weights are used to calculate weighted shortest paths,
 #' so they are interpreted as distances.
 #' @param nobigint Logical scalar, whether to use big integers during the
-#' calculation. This is only required for lattice-like graphs that have very
-#' many shortest paths between a pair of vertices. If \code{TRUE} (the
-#' default), then big integers are not used.
+#' calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.
 #' @param normalized Logical scalar, whether to normalize the betweenness
 #' scores. If \code{TRUE}, then the results are normalized by the number of ordered
 #' or unordered vertex pairs in directed and undirected graphs, respectively.
@@ -817,9 +812,11 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   } else {
     weights <- NULL
   }
+  if (!missing(nobigint)) {
+    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
+  }
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_betweenness, graph, v-1,
-               as.logical(directed), weights, as.logical(nobigint))
+  res <- .Call(C_R_igraph_betweenness, graph, v-1, as.logical(directed), weights)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -2294,7 +2291,7 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_edge_betweenness_estimate, graph, directed, cutoff, weights)
+  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, cutoff, weights)
   res[as.numeric(e)]
 }
 
@@ -2488,7 +2485,7 @@ closeness <- function(graph, vids=V(graph),
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_closeness, graph, vids-1, mode, weights,
-               normalized)
+               normalized)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
@@ -2518,7 +2515,7 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_closeness_estimate, graph, vids-1, mode, cutoff, weights, normalized)
+  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, cutoff, weights, normalized)
   if (igraph_opt("add.vertex.names") && is_named(graph)) { 
   names(res) <- vertex_attr(graph, "name", vids) 
   }

@@ -184,9 +184,9 @@ test_that("[[ can query incident edges", {
   expect_that(g[[1, , edges=TRUE]], is_equivalent_to(list(a=E(g)[1:2])))
   expect_that(g[[, 2, edges=TRUE]], is_equivalent_to(list(b=E(g)[1])))
   expect_that(g[[, 2, directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
   expect_that(g[[2, directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
 
   expect_that(g[[1:3, , edges=TRUE]],
               is_equivalent_to(list(a=E(g)[1:2], b=E(g)[3:4], c=E(g)[5:6])))
@@ -202,9 +202,9 @@ test_that("[[ queries edges with vertex names", {
   expect_that(g[[, 'b', edges=TRUE]],
               is_equivalent_to(list(b=E(g)[1])))
   expect_that(g[[, 'b', directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
   expect_that(g[['b', directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
 
   expect_that(g[[letters[1:3],, edges=TRUE]],
               is_equivalent_to(list(a=E(g)[1:2], b=E(g)[3:4], c=E(g)[5:6])))

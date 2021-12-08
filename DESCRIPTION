@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.2.9.9002
+Version: 1.2.9.9046
 Title: Network Analysis and Visualization
 Author: See AUTHORS file.
 Maintainer: Tamás Nepusz <ntamas@gmail.com>
@@ -21,17 +21,17 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'cliques.R' 'cocitation.R' 'cohesive.blocks.R' 'community.R'
         'components.R' 'console.R' 'conversion.R' 'data_frame.R'
         'decomposition.R' 'degseq.R' 'demo.R' 'embedding.R' 'epi.R'
-        'fit.R' 'flow.R' 'foreign.R' 'games.R' 'glet.R' 'hrg.R'
-        'igraph-package.R' 'incidence.R' 'indexing.R' 'interface.R'
-        'iterators.R' 'layout.R' 'layout_drl.R' 'lazyeval.R' 'make.R'
-        'minimum.spanning.tree.R' 'motifs.R' 'nexus.R' 'operators.R'
-        'other.R' 'package.R' 'palette.R' 'par.R' 'paths.R' 'plot.R'
-        'plot.common.R' 'plot.shapes.R' 'pp.R' 'print.R' 'printr.R'
-        'random_walk.R' 'rewire.R' 'scan.R' 'scg.R' 'sgm.R'
-        'similarity.R' 'simple.R' 'sir.R' 'socnet.R' 'sparsedf.R'
-        'structural.properties.R' 'structure.info.R' 'test.R'
-        'tkplot.R' 'topology.R' 'triangles.R' 'utils.R' 'uuid.R'
-        'versions.R' 'weakref.R' 'zzz-deprecate.R'
+        'eulerian.R' 'fit.R' 'flow.R' 'foreign.R' 'games.R' 'glet.R'
+        'hrg.R' 'igraph-package.R' 'incidence.R' 'indexing.R'
+        'interface.R' 'iterators.R' 'layout.R' 'layout_drl.R'
+        'lazyeval.R' 'make.R' 'minimum.spanning.tree.R' 'motifs.R'
+        'nexus.R' 'operators.R' 'other.R' 'package.R' 'palette.R'
+        'par.R' 'paths.R' 'plot.R' 'plot.common.R' 'plot.shapes.R'
+        'pp.R' 'print.R' 'printr.R' 'random_walk.R' 'rewire.R' 'scan.R'
+        'scg.R' 'sgm.R' 'similarity.R' 'simple.R' 'sir.R' 'socnet.R'
+        'sparsedf.R' 'structural.properties.R' 'structure.info.R'
+        'test.R' 'tkplot.R' 'topology.R' 'trees.R' 'triangles.R'
+        'utils.R' 'uuid.R' 'versions.R' 'weakref.R' 'zzz-deprecate.R'
 RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2021-11-29 09:15:24 UTC; runner
+Packaged: 2021-12-08 08:36:43 UTC; runner

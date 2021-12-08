@@ -51,3 +51,23 @@ test_that("groups works", {
                                         `2` = letters[11:15]), .Dim = 2L,
                                         .Dimnames = list(c("1", "2")))))
 })
+
+context("is_connected")
+
+test_that("is_connected works", {
+  library(igraph)
+
+  g <- make_ring(10)
+  expect_that(g, is_connected)
+
+  g <- make_ring(10) + make_full_graph(5)
+  expect_false(is_connected(g))
+})
+
+test_that("is_connected returns FALSE for the null graph", {
+  library(igraph)
+
+  g <- make_empty_graph(0)
+  expect_false(is_connected(g))
+})
+

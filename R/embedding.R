@@ -178,7 +178,6 @@ dim_select <- dim_select
 #' eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
 #' \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
 #' are used for the ordering.
-#' @param degmode TODO
 #' @param type The type of the Laplacian to use. Various definitions exist for
 #' the Laplacian of a graph, and one can choose between them with this
 #' argument.

@@ -481,8 +481,6 @@ deprecated("optimal.community", cluster_optimal)
 
 #' @export page.rank
 deprecated("page.rank", page_rank)
-#' @export page.rank.old
-deprecated("page.rank.old", page_rank_old)
 #' @export path.length.hist
 deprecated("path.length.hist", distance_table)
 #' @export permute.vertices

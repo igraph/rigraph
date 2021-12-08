@@ -5,7 +5,7 @@
 \alias{dominator.tree}
 \title{Dominator tree}
 \usage{
-dominator_tree(graph, root, mode = c("out", "in"))
+dominator_tree(graph, root, mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{A directed graph. If it is not a flowgraph, and it contains

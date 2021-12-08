@@ -7,9 +7,15 @@
 \alias{mod.matrix}
 \title{Modularity of a community structure of a graph}
 \usage{
-\method{modularity}{igraph}(x, membership, weights = NULL, ...)
+\method{modularity}{igraph}(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...)
 
-modularity_matrix(graph, membership, weights = NULL)
+modularity_matrix(
+  graph,
+  membership,
+  weights = NULL,
+  resolution = 1,
+  directed = TRUE
+)
 }
 \arguments{
 \item{x, graph}{The input graph.}
@@ -18,6 +24,12 @@ modularity_matrix(graph, membership, weights = NULL)
 vector of the community structure.}
 
 \item{weights}{If not \code{NULL} then a numeric vector giving edge weights.}
+
+\item{resolution}{The resolution parameter. Must be greater than or equal to
+0. Set it to 1 to use the classical definition of modularity.}
+
+\item{directed}{Whether to use the directed or undirected version of
+modularity. Ignored for undirected graphs.}
 
 \item{\dots}{Additional arguments, none currently.}
 }
@@ -39,7 +51,7 @@ given \code{membership} vector.
 The modularity of a graph with respect to some division (or vertex types)
 measures how good the division is, or how separated are the different vertex
 types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
-(A_{ij}-\frac{k_ik_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-ki*kj/(2m)
+(A_{ij}-\gamma\frac{k_ik_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
 ) delta(ci,cj),i,j),} here \eqn{m} is the number of edges, \eqn{A_{ij}}{Aij}
 is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column
 \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i}, \eqn{k_j}{kj} is the degree
@@ -47,6 +59,14 @@ of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i},
 \eqn{c_j}{cj} that of \eqn{j}, the sum goes over all \eqn{i} and \eqn{j}
 pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
 otherwise.
+
+The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
+null model, which might be useful when finding partitions with a high
+modularity. Maximizing modularity with higher values of the resolution
+parameter typically results in more, smaller clusters when finding
+partitions with a high modularity. Lower values typically results in fewer,
+larger clusters. The original definition of modularity is retrieved when
+setting \eqn{\gamma}{gamma} to 1. 
 
 If edge weights are given, then these are considered as the element of the
 \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of

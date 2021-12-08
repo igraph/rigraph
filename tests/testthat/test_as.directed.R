@@ -7,12 +7,18 @@ test_that("as.directed works", {
   g <- sample_gnp(100, 2/100)
   g2 <- as.directed(g, mode="mutual")
   g3 <- as.directed(g, mode="arbitrary")
+  g4 <- as.directed(g, mode="random")
+  g5 <- as.directed(g, mode="acyclic")
 
-  expect_that(degree(g), equals(degree(g3)))
   expect_that(degree(g), equals(degree(g2) / 2))  
+  expect_that(degree(g), equals(degree(g3)))
+  expect_that(degree(g), equals(degree(g4)))
+  expect_that(degree(g), equals(degree(g5)))
 
   expect_true(graph.isomorphic(g, as.undirected(g2)))
   expect_true(graph.isomorphic(g, as.undirected(g3)))
+  expect_true(graph.isomorphic(g, as.undirected(g4)))
+  expect_true(graph.isomorphic(g, as.undirected(g5)))
 })
 
 test_that("as.directed keeps attributes", {

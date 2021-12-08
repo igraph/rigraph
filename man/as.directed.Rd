@@ -5,7 +5,7 @@
 \alias{as.undirected}
 \title{Convert between directed and undirected graphs}
 \usage{
-as.directed(graph, mode = c("mutual", "arbitrary"))
+as.directed(graph, mode = c("mutual", "arbitrary", "random", "acyclic"))
 
 as.undirected(
   graph,
@@ -38,9 +38,22 @@ undirected.
 \details{
 Conversion algorithms for \code{as.directed}: \describe{
 \item{"arbitrary"}{The number of edges in the graph stays the same, an
-arbitrarily directed edge is created for each undirected edge.}
+arbitrarily directed edge is created for each undirected edge, but the
+direction of the edge is deterministic (i.e. it always points the same
+way if you call the function multiple times).}
 \item{"mutual"}{Two directed edges are created for each undirected
-edge, one in each direction.} }
+edge, one in each direction.}
+\item{"random"}{The number of edges in the graph stays the same, and
+a randomly directed edge is created for each undirected edge. You
+will get different results if you call the function multiple times
+with the same graph.}
+\item{"acyclic"}{The number of edges in the graph stays the same, and
+a directed edge is created for each undirected edge such that the
+resulting graph is guaranteed to be acyclic. This is achieved by ensuring
+that edges always point from a lower index vertex to a higher index.
+Note that the graph may include cycles of length 1 if the original
+graph contained loop edges.}
+}
 
 Conversion algorithms for \code{as.undirected}: \describe{
 \item{"each"}{The number of edges remains constant, an undirected edge

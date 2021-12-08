@@ -13,7 +13,7 @@
 /* Define to 1 if you have the `fmin' function. */
 #undef HAVE_FMIN
 
-/* Define to 1 if using the GNU fortran compiler */
+/* Define to 1 if using the GNU Fortran compiler */
 #undef HAVE_GFORTRAN
 
 /* Define to 1 if you have the GLPK library */
@@ -33,9 +33,6 @@
 
 /* Define to 1 if you have the `log2' function. */
 #undef HAVE_LOG2
-
-/* Define to 1 if you have the `logbl' function. */
-#undef HAVE_LOGBL
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
@@ -61,9 +58,6 @@
 /* Define if struct sockaddr contains sa_len */
 #undef HAVE_SA_LEN
 
-/* Define to 1 if you have the `snprintf' function. */
-#undef HAVE_SNPRINTF
-
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
@@ -73,8 +67,11 @@
 /* Define to 1 if you have the `stpcpy' function. */
 #undef HAVE_STPCPY
 
-/* Define to 1 if the stpcpy function has a signature */
-#undef HAVE_STPCPY_SIGNATURE
+/* Define to 1 if you have the `strcasecmp' function. */
+#undef HAVE_STRCASECMP
+
+/* Define to 1 if you have the `strdup' function. */
+#undef HAVE_STRDUP
 
 /* Define to 1 if you have the <strings.h> header file. */
 #undef HAVE_STRINGS_H
@@ -112,11 +109,14 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Define to 1 if you have the `_stricmp' function. */
+#undef HAVE__STRICMP
+
 /* We don't care about thread-local storage in R */
 #undef IGRAPH_THREAD_LOCAL
 
-/* Define to 1 if you use the internal SuiteSparse library */
-#undef INTERNAL_SUITESPARSE
+/* Define to 1 if you use the vendored mini-GMP library */
+#undef INTERNAL_GMP
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
@@ -138,3 +138,4 @@
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+#define HAVE_ISFINITE HAVE_DECL_ISFINITE

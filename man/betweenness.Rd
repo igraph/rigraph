@@ -48,9 +48,7 @@ used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
 
 \item{nobigint}{Logical scalar, whether to use big integers during the
-calculation. This is only required for lattice-like graphs that have very
-many shortest paths between a pair of vertices. If \code{TRUE} (the
-default), then big integers are not used.}
+calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.}
 
 \item{v}{The vertices for which the vertex betweenness will be calculated.}
 

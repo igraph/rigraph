@@ -5,10 +5,17 @@
 \alias{canonical.permutation}
 \title{Canonical permutation of a graph}
 \usage{
-canonical_permutation(graph, sh = "fm")
+canonical_permutation(graph, colors, sh = "fm")
 }
 \arguments{
 \item{graph}{The input graph, treated as undirected.}
+
+\item{colors}{The colors of the individual vertices of the graph; only
+vertices having the same color are allowed to match each other in an
+automorphism. When omitted, igraph uses the \code{color} attribute of the
+vertices, or, if there is no such vertex attribute, it simply assumes that
+all vertices have the same color. Pass NULL explicitly if the graph has a
+\code{color} vertex attribute but you do not want to use it.}
 
 \item{sh}{Type of the heuristics to use for the BLISS algorithm. See details
 for possible values.}
