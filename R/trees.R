@@ -110,3 +110,30 @@ make_from_prufer <- make_from_prufer
 #'
 #' @export
 sample_tree <- sample_tree
+
+#' Samples from the spanning trees of a graph randomly and uniformly
+#'
+#' \code{sample_spanning_tree} picks a spanning tree of an undirected graph
+#' randomly and uniformly, using loop-erased random walks.
+#'
+#' @param graph The input graph to sample from. Edge directions are ignored if
+#' the graph is directed.
+#' @param vid When the graph is disconnected, this argument specifies how to
+#' handle the situation. When the argument is zero (the default), the sampling
+#' will be performed component-wise, and the result will be a spanning forest.
+#' When the argument contains a vertex ID, only the component containing the
+#' given vertex will be processed, and the result will be a spanning tree of the
+#' component of the graph.
+#' @return An edge sequence containing the edges of the spanning tree. Use
+#' \code{\link{subgraph.edges}} to extract the corresponding subgraph.
+#'
+#' @keywords graph
+#' @seealso \code{\link{subgraph.edges}} to extract the tree itself
+#' @examples
+#'
+#' g <- make_full_graph(10) %du% make_full_graph(5)
+#' edges <- sample_spanning_tree(g)
+#' forest <- subgraph.edges(g, edges)
+#'
+#' @export
+sample_spanning_tree <- sample_spanning_tree

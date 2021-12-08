@@ -10,7 +10,10 @@ Added:
 - `to_prufer()` converts a tree graph into its Prufer sequence
 - `make_from_prufer()` creates a tree graph from its Prufer sequence
 - `sample_tree()` to sample labelled trees uniformly at random
+- `sample_spanning_tree()` to sample spanning trees of an undirected graph
+  uniformly at random
 - `automorphisms()` and `canonical_permutation()` now supports vertex colors
+- `random_edge_walk()` to record the edges traversed during a random walk
 
 Fixed:
 

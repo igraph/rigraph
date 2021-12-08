@@ -472,7 +472,10 @@ igraph_contract_vertices:
     NAME: contract
 
 igraph_random_walk:
-    IGNORE: RR
+    PARAM_ORDER: graph, start, steps, ...
+
+igraph_random_edge_walk:
+    PARAM_ORDER: graph, start, steps, ...
 
 #######################################
 # Degree sequences
@@ -1186,6 +1189,10 @@ igraph_from_prufer:
 
 igraph_tree_game:
     NAME: sample_tree
+
+igraph_random_spanning_tree:
+    PARAMS: GRAPH graph, OUT EDGESET res, OPTIONAL VERTEX vid=0
+    NAME: sample_spanning_tree
 
 #######################################
 # Other, (yet) undocumented functions
