@@ -2,13 +2,23 @@
 % Please edit documentation in R/random_walk.R
 \name{random_walk}
 \alias{random_walk}
+\alias{random_edge_walk}
 \title{Random walk on a graph}
 \usage{
 random_walk(
   graph,
   start,
   steps,
-  mode = c("out", "in", "all"),
+  mode = c("out", "in", "all", "total"),
+  stuck = c("return", "error")
+)
+
+random_edge_walk(
+  graph,
+  start,
+  steps,
+  weights = NULL,
+  mode = c("out", "in", "all", "total"),
   stuck = c("return", "error")
 )
 }
@@ -25,11 +35,25 @@ edge directions. This argument is ignored for undirected graphs.}
 
 \item{stuck}{What to do if the random walk gets stuck. \code{"return"}
 returns the partial walk, \code{"error"} raises an error.}
+
+\item{weights}{The edge weights. Larger edge weights increase the
+probability that an edge is selected by the random walker. In other
+words, larger edge weights correspond to stronger connections. The
+\sQuote{weight} edge attribute is used if present. Supply
+\sQuote{\code{NA}} here if you want to ignore the \sQuote{weight} edge
+attribute.}
 }
 \value{
-A vertex sequence containing the vertices along the walk.
+For \code{random_walk}, a vertex sequence containing the vertices
+  along the walk. For \code{random_edge_walk}, an edge sequence containing
+  the edges along the walk.
 }
 \description{
+\code{random_walk} performs a random walk on the graph and returns the
+vertices that the random walk passed through. \code{random_edge_walk}
+is the same but returns the edges that that random walk passed through.
+}
+\details{
 Do a random walk. From the given start vertex, take the given number of
 steps, choosing an edge from the actual vertex uniformly randomly. Edge
 directions are observed in directed graphs (see the \code{mode} argument

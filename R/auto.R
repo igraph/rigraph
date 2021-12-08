@@ -777,6 +777,50 @@ diversity <- function(graph, weights=NULL, vids=V(graph)) {
 }
 
 #' @export
+random_walk <- function(graph, start, steps, mode=c("out", "in", "all", "total"), stuck=c("return", "error")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  start <- as.igraph.vs(graph, start)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  steps <- as.integer(steps)
+  stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_random_walk, graph, start-1, mode, steps, stuck)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
+#' @export
+random_edge_walk <- function(graph, start, steps, weights=NULL, mode=c("out", "in", "all", "total"), stuck=c("return", "error")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  start <- as.igraph.vs(graph, start)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  steps <- as.integer(steps)
+  stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_random_edge_walk, graph, weights, start-1, mode, steps, stuck)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
+  res
+}
+
+#' @export
 is_graphical <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all")) {
   # Argument checks
   out.deg <- as.numeric(out.deg)
@@ -1820,6 +1864,21 @@ to_prufer <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_to_prufer, graph)
   res <- res+1
+  res
+}
+
+#' @export
+sample_spanning_tree <- function(graph, vid=0) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  vid <- as.igraph.vs(graph, vid)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_random_spanning_tree, graph, vid-1)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 

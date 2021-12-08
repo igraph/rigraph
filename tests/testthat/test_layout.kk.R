@@ -5,6 +5,9 @@ test_that("Kamada-Kawai layout generator works", {
 
   skip_on_cran()
   skip_on_ci()
+
+  set.seed(42)
+
   library(igraph)
   g <- make_ring(10)
   l <- layout_with_kk(g, maxiter=50)

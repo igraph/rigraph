@@ -318,7 +318,9 @@ extern SEXP R_igraph_personalized_pagerank(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, S
 extern SEXP R_igraph_power_law_fit(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_preference_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_radius(SEXP, SEXP);
+extern SEXP R_igraph_random_edge_walk(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_random_sample(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_random_spanning_tree(SEXP, SEXP);
 extern SEXP R_igraph_random_walk(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_read_graph_dimacs(SEXP, SEXP);
 extern SEXP R_igraph_read_graph_dl(SEXP, SEXP);
@@ -691,7 +693,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_power_law_fit",                              (DL_FUNC) &R_igraph_power_law_fit,                               3},
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
     {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      2},
+    {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},
+    {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},
     {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 5},
     {"R_igraph_read_graph_dimacs",                          (DL_FUNC) &R_igraph_read_graph_dimacs,                           2},
     {"R_igraph_read_graph_dl",                              (DL_FUNC) &R_igraph_read_graph_dl,                               2},

@@ -11967,6 +11967,45 @@ SEXP R_igraph_random_walk(SEXP graph, SEXP start, SEXP mode, SEXP steps, SEXP st
 }
 
 /*-------------------------------------------/
+/ igraph_random_edge_walk                    /
+/-------------------------------------------*/
+SEXP R_igraph_random_edge_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, SEXP steps, SEXP stuck) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_vector_t c_edgewalk;
+  igraph_integer_t c_start;
+  igraph_neimode_t c_mode;
+  igraph_integer_t c_steps;
+  igraph_random_walk_stuck_t c_stuck;
+  SEXP edgewalk;
+
+  SEXP result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  if (0 != igraph_vector_init(&c_edgewalk, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_edgewalk);
+  c_start = (igraph_integer_t) REAL(start)[0];
+  c_mode=(igraph_neimode_t) REAL(mode)[0];
+  c_steps=INTEGER(steps)[0];
+  c_stuck=(igraph_random_walk_stuck_t) INTEGER(stuck)[0];
+                                        /* Call igraph */
+  igraph_random_edge_walk(&c_graph, (isNull(weights) ? 0 : &c_weights), &c_edgewalk, c_start, c_mode, c_steps, c_stuck);
+
+                                        /* Convert output */
+  PROTECT(edgewalk=R_igraph_vector_to_SEXPp1(&c_edgewalk));
+  igraph_vector_destroy(&c_edgewalk);
+  IGRAPH_FINALLY_CLEAN(1);
+  result=edgewalk;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
 / igraph_is_graphical                        /
 /-------------------------------------------*/
 SEXP R_igraph_is_graphical(SEXP out_deg, SEXP in_deg, SEXP allowed_edge_types) {
@@ -15738,6 +15777,37 @@ SEXP R_igraph_to_prufer(SEXP graph) {
   igraph_vector_int_destroy(&c_prufer);
   IGRAPH_FINALLY_CLEAN(1);
   result=prufer;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
+/ igraph_random_spanning_tree                /
+/-------------------------------------------*/
+SEXP R_igraph_random_spanning_tree(SEXP graph, SEXP vid) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_res;
+  igraph_integer_t c_vid;
+  SEXP res;
+
+  SEXP result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  c_vid = (igraph_integer_t) REAL(vid)[0];
+                                        /* Call igraph */
+  igraph_random_spanning_tree(&c_graph, &c_res, c_vid);
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_to_SEXPp1(&c_res));
+  igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  result=res;
 
   UNPROTECT(1);
   return(result);
