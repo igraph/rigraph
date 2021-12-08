@@ -2719,7 +2719,7 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
                                        eps=.Machine$double.eps) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  types <- handle_vertex_type_arg(types, graph, required=F)
+  types <- handle_vertex_type_arg(types, graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
     weights <- E(graph)$weight 
   } 
