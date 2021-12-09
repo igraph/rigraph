@@ -165,7 +165,17 @@ igraph.check.shapes <- function(x) {
   x
 }
 
-
+i.postprocess.layout <- function(maybe_layout) {
+  if ("layout" %in% names(maybe_layout)) {
+    # This branch caters for layout_with_sugiyama, which returns multiple
+    # things
+    layout <- maybe_layout$layout
+  } else {
+    # This is the normal path for layout functions that return matrices
+    layout <- maybe_layout
+  }
+  layout
+}
 
 #' Optimal edge curvature when plotting graphs
 #' 
