@@ -19,6 +19,12 @@ Fixed:
 
 - `is_connected()` now returns FALSE for the null graph
 
+Changed:
+
+- The `neimode` argument of `bfs()` and `dfs()` was renamed to `mode` for sake
+  of consistency with other functions. The old argument name is deprecated and
+  will be removed in 1.4.0.
+
 # igraph 1.2.9
 
 Nov 22, 2021

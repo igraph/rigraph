@@ -2001,7 +2001,7 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
 #' vertices to start the search from.
-#' @param neimode For directed graphs specifies the type of edges to follow.
+#' @param mode For directed graphs specifies the type of edges to follow.
 #' \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #' ignores edge directions completely. \sQuote{total} is a synonym for
 #' \sQuote{all}. This argument is ignored for undirected graphs.
@@ -2025,9 +2025,11 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' is called whenever a vertex is visited. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
+#' @param neimode This argument is deprecated from igraph 1.3.0; use
+#' \code{mode} instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
 #' The root vertex that was used as the starting point of the search.}
-#' \item{neimode}{Character scalar. The \code{neimode} argument of the function
+#' \item{neimode}{Character scalar. The \code{mode} argument of the function
 #' call. Note that for undirected graphs this is always \sQuote{all},
 #' irrespectively of the supplied value.} \item{order}{Numeric vector. The
 #' vertex ids, in the order in which they were visited by the search.}
@@ -2069,14 +2071,22 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' bfs(make_ring(10) %du% make_ring(10), root=1, callback=f)
 #' 
 #' 
-bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
+bfs <- function(graph, root, mode=c("out", "in", "all", "total"),
                       unreachable=TRUE, restricted=NULL,
                       order=TRUE, rank=FALSE, father=FALSE,
                       pred=FALSE, succ=FALSE, dist=FALSE,
-                      callback=NULL, extra=NULL, rho=parent.frame()) {
+                      callback=NULL, extra=NULL, rho=parent.frame(),
+                      neimode) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object");
+  }
+
+  if (!missing(neimode)) {
+    warning("Argument `neimode' is deprecated; use `mode' instead")
+    if (missing(mode)) {
+      mode <- neimode
+    }
   }
 
   if (length(root)==1) {
@@ -2086,19 +2096,22 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
     roots <- as.igraph.vs(graph, root)-1
     root <- 0      # ignored anyway
   }
-  neimode <- switch(igraph.match.arg(neimode),
-                    "out"=1, "in"=2, "all"=3, "total"=3)
+  mode <- switch(igraph.match.arg(mode),
+                 "out"=1, "in"=2, "all"=3, "total"=3)
   unreachable <- as.logical(unreachable)
   if (!is.null(restricted)) { restricted <- as.igraph.vs(graph, restricted) - 1 }
   if (!is.null(callback)) { callback <- as.function(callback) }
   
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_bfs, graph, root, roots, neimode, unreachable,
+  res <- .Call(C_R_igraph_bfs, graph, root, roots, mode, unreachable,
                restricted,
                as.logical(order), as.logical(rank), as.logical(father),
                as.logical(pred), as.logical(succ), as.logical(dist),
                callback, extra, rho)
   
+  # Remove in 1.4.0
+  res$neimode <- res$mode
+
   if (order)  res$order  <- res$order+1
   if (rank)   res$rank   <- res$rank+1
   if (father) res$father <- res$father+1
@@ -2140,7 +2153,7 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' @aliases graph.dfs
 #' @param graph The input graph.
 #' @param root The single root vertex to start the search from.
-#' @param neimode For directed graphs specifies the type of edges to follow.
+#' @param mode For directed graphs specifies the type of edges to follow.
 #' \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 #' ignores edge directions completely. \sQuote{total} is a synonym for
 #' \sQuote{all}. This argument is ignored for undirected graphs.
@@ -2162,9 +2175,11 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #' algorithm. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
+#' @param neimode This argument is deprecated from igraph 1.3.0; use
+#' \code{mode} instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
 #' The root vertex that was used as the starting point of the search.}
-#' \item{neimode}{Character scalar. The \code{neimode} argument of the function
+#' \item{neimode}{Character scalar. The \code{mode} argument of the function
 #' call. Note that for undirected graphs this is always \sQuote{all},
 #' irrespectively of the supplied value.} \item{order}{Numeric vector. The
 #' vertex ids, in the order in which they were visited by the search.}
@@ -2206,28 +2221,38 @@ bfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
 #'                  out.callback=f.out)
 #' 
 #' 
-dfs <- function(graph, root, neimode=c("out", "in", "all", "total"),
+dfs <- function(graph, root, mode=c("out", "in", "all", "total"),
                       unreachable=TRUE,
                       order=TRUE, order.out=FALSE, father=FALSE, dist=FALSE,
                       in.callback=NULL, out.callback=NULL, extra=NULL,
-                      rho=parent.frame()) {
+                      rho=parent.frame(), neimode) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
 
+  if (!missing(neimode)) {
+    warning("Argument `neimode' is deprecated; use `mode' instead")
+    if (missing(mode)) {
+      mode <- neimode
+    }
+  }
+
   root <- as.igraph.vs(graph, root)-1
-  neimode <- switch(igraph.match.arg(neimode),
-                    "out"=1, "in"=2, "all"=3, "total"=3)
+  mode <- switch(igraph.match.arg(mode),
+                 "out"=1, "in"=2, "all"=3, "total"=3)
   unreachable <- as.logical(unreachable)
   if (!is.null(in.callback)) { in.callback <- as.function(in.callback) }
   if (!is.null(out.callback)) { out.callback <- as.function(out.callback) }
   
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_dfs, graph, root, neimode, unreachable,
+  res <- .Call(C_R_igraph_dfs, graph, root, mode, unreachable,
                as.logical(order), as.logical(order.out), as.logical(father),
                as.logical(dist), in.callback, out.callback, extra, rho)
-  
+
+  # Remove in 1.4.0
+  res$neimode <- res$mode
+
   if (order)     res$order     <- res$order+1
   if (order.out) res$order.out <- res$order.out+1
   if (father)    res$father    <- res$father+1

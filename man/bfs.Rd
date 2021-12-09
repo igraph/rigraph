@@ -8,7 +8,7 @@
 bfs(
   graph,
   root,
-  neimode = c("out", "in", "all", "total"),
+  mode = c("out", "in", "all", "total"),
   unreachable = TRUE,
   restricted = NULL,
   order = TRUE,
@@ -19,7 +19,8 @@ bfs(
   dist = FALSE,
   callback = NULL,
   extra = NULL,
-  rho = parent.frame()
+  rho = parent.frame(),
+  neimode
 )
 }
 \arguments{
@@ -28,7 +29,7 @@ bfs(
 \item{root}{Numeric vector, usually of length one. The root vertex, or root
 vertices to start the search from.}
 
-\item{neimode}{For directed graphs specifies the type of edges to follow.
+\item{mode}{For directed graphs specifies the type of edges to follow.
 \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
 ignores edge directions completely. \sQuote{total} is a synonym for
 \sQuote{all}. This argument is ignored for undirected graphs.}
@@ -63,11 +64,14 @@ is called whenever a vertex is visited. See details below.}
 \item{extra}{Additional argument to supply to the callback function.}
 
 \item{rho}{The environment in which the callback function is evaluated.}
+
+\item{neimode}{This argument is deprecated from igraph 1.3.0; use
+\code{mode} instead.}
 }
 \value{
 A named list with the following entries: \item{root}{Numeric scalar.
 The root vertex that was used as the starting point of the search.}
-\item{neimode}{Character scalar. The \code{neimode} argument of the function
+\item{neimode}{Character scalar. The \code{mode} argument of the function
 call. Note that for undirected graphs this is always \sQuote{all},
 irrespectively of the supplied value.} \item{order}{Numeric vector. The
 vertex ids, in the order in which they were visited by the search.}

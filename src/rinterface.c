@@ -7882,7 +7882,7 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   REAL(VECTOR_ELT(result, 0))[0] = root+1;
 
-  SET_STRING_ELT(names, 1, mkChar("neimode"));
+  SET_STRING_ELT(names, 1, mkChar("mode"));
   SET_VECTOR_ELT(result, 1, NEW_CHARACTER(1));
   if (neimode==1) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, mkChar("out"));
@@ -8019,7 +8019,7 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   REAL(VECTOR_ELT(result, 0))[0] = root;
 
-  SET_STRING_ELT(names, 1, mkChar("neimode"));
+  SET_STRING_ELT(names, 1, mkChar("mode"));
   SET_VECTOR_ELT(result, 1, NEW_CHARACTER(1));
   if (neimode==1) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, mkChar("out"));
