@@ -239,6 +239,9 @@ igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGE
 #############
 
 check: igraph_$(VERSION).tar.gz
+	_R_CHECK_FORCE_SUGGESTS_=0 R CMD check $<
+
+check-cran: igraph_$(VERSION).tar.gz
 	_R_CHECK_FORCE_SUGGESTS_=0 R CMD check --as-cran $<
 
 check-links: igraph_$(VERSION).tar.gz
@@ -248,6 +251,12 @@ check-links: igraph_$(VERSION).tar.gz
 
 check-rhub: igraph
 	Rscript -e 'rhub::check_for_cran()'
+
+install:
+	Rscript -e 'devtools::install(".")'
+
+test:
+	Rscript -e 'devtools::test(".")'
 
 clean:
 	@rm -f  DESCRIPTION
@@ -269,6 +278,6 @@ clean:
 distclean: clean
 	@rm -rf $(PYVENV)
 
-.PHONY: all igraph force clean check check-rhub check-links
+.PHONY: all igraph force clean check check-cran check-rhub check-links install test
 
 .NOTPARALLEL:
