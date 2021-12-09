@@ -125,7 +125,7 @@ plot.igraph <- function(x,
   curved             <- params("edge", "curved")
   if (is.function(curved)) { curved <- curved(graph) }
   
-  layout             <- params("plot", "layout")
+  layout             <- i.postprocess.layout(params("plot", "layout"))
   margin             <- params("plot", "margin")
   margin <- rep(margin, length=4)
   rescale            <- params("plot", "rescale")
