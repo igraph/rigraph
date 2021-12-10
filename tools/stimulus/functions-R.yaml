@@ -336,6 +336,13 @@ igraph_edge_betweenness:
 igraph_edge_betweenness_cutoff:
     IGNORE: RR
 
+igraph_harmonic_centrality:
+    # This is handled by igraph_harmonic_centrality_cutoff
+    IGNORE: RR, RC, RInit
+
+igraph_harmonic_centrality_cutoff:
+    NAME: harmonic_centrality
+
 igraph_pagerank:
     IGNORE: RR, RC, RInit
     NAME: page_rank
@@ -415,6 +422,25 @@ igraph_add_edge:
 
 igraph_eigenvector_centrality:
     NAME: eigen_centrality
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: weights ON graph, vector ON graph V(graph)
+
+igraph_hub_score:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: weights ON graph, vector ON graph V(graph)
+
+igraph_authority_score:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: weights ON graph, vector ON graph V(graph)
 
 igraph_arpack_rssolve:
     IGNORE: RR, RC, RInit

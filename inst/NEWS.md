@@ -14,6 +14,8 @@ Added:
   uniformly at random
 - `automorphisms()` and `canonical_permutation()` now supports vertex colors
 - `random_edge_walk()` to record the edges traversed during a random walk
+- `harmonic_centrality()` calculates the harmonic centrality of vertices,
+  optionally with a cutoff on path lengths
 
 Fixed:
 
@@ -24,6 +26,14 @@ Changed:
 - The `neimode` argument of `bfs()` and `dfs()` was renamed to `mode` for sake
   of consistency with other functions. The old argument name is deprecated and
   will be removed in 1.4.0.
+- `closeness()`, `betweenness()` and `edge_betweenness()` now all take a
+  `cutoff` argument on their own. `estimate_closeness()`, `estimate_betweenness()`
+  and `estimate_edge_betweenness()` became aliases, with identical signature.
+  They are _not_ deprecated but their implementation might change in future
+  versions to provide proper estimation schemes instead of a simple cutoff-based
+  approximation. If you explicitly need cutoffs and you want your results to be
+  reproducible with future versions, use `closeness()`, `betweenness()` and
+  `edge_betweenness()` in your code with a `cutoff` argument.
 
 # igraph 1.2.9
 
