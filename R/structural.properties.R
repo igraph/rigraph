@@ -696,30 +696,10 @@ subgraph.edges <- function(graph, eids, delete.vertices=TRUE) {
 #' @export
 
 estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  vids <- as.igraph.vs(graph, vids)
-  directed <- as.logical(directed)
-  cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-  weights <- E(graph)$weight 
-  } 
-  if (!is.null(weights) && any(!is.na(weights))) { 
-  weights <- as.numeric(weights) 
-  } else { 
-  weights <- NULL 
-  }
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_betweenness_cutoff, graph, vids-1, directed, cutoff, weights)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-  names(res) <- vertex_attr(graph, "name", vids) 
-  }
-  res
+  betweenness(graph, v=vids, directed=directed, cutoff=cutoff, weights=weights)
 }
 
 
@@ -741,13 +721,18 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
 #' calculates edge betweenness.
 #' 
-#' \code{estimate_betweenness} only considers paths of length \code{cutoff} or
-#' smaller, this can be run for larger graphs, as the running time is not
-#' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative
-#' then the function calculates the exact betweenness scores.
-#' 
-#' \code{estimate_edge_betweenness} is similar, but for edges.
-#' 
+#' Both functions allow you to consider only paths of length \code{cutoff} or
+#' smaller; this can be run for larger graphs, as the running time is not
+#' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative,
+#' then the function calculates the exact betweenness scores. Using zero as a
+#' cutoff is \emph{deprecated} and future versions (from 1.4.0) will treat zero
+#' cutoff literally (i.e. no paths considered at all). If you want no cutoff,
+#' use a negative number.
+#'
+#' \code{estimate_betweenness} and \code{estimate_edge_betweenness} are
+#' aliases for \code{betweenness} and \code{edge_betweenness}, with a different
+#' argument order, for sake of compatibility with older versions of igraph.
+#'
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #' 
@@ -777,13 +762,10 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' A numeric vector with the edge betweenness score for each edge in \code{e}
 #' for \code{edge_betweenness}.
 #' 
-#' \code{estimate_betweenness} returns the estimated betweenness scores for
-#' vertices in \code{vids}, \code{estimate_edge_betweenness} the estimated edge
-#' betweenness score for \emph{all} edges; both in a numeric vector.
 #' @note \code{edge_betweenness} might give false values for graphs with
 #' multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{closeness}}, \code{\link{degree}}
+#' @seealso \code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 #' 
@@ -798,12 +780,13 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' edge_betweenness(g)
 #' 
 betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
-                        nobigint=TRUE, normalized=FALSE) {
+                        nobigint=TRUE, normalized=FALSE, cutoff=-1) {
   
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   v <- as.igraph.vs(graph, v)
+  directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -812,11 +795,16 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   } else {
     weights <- NULL
   }
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
+  }
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_betweenness, graph, v-1, as.logical(directed), weights)
+  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v-1, directed, weights, cutoff)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -2276,23 +2264,28 @@ dfs <- function(graph, root, mode=c("out", "in", "all", "total"),
 #' @export
 
 edge_betweenness <- function(graph, e=E(graph),
-                             directed=TRUE, weights=NULL) {
+                             directed=TRUE, weights=NULL, cutoff=-1) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-  weights <- E(graph)$weight 
-  } 
+    weights <- E(graph)$weight 
+  }
   if (!is.null(weights) && any(!is.na(weights))) { 
-  weights <- as.numeric(weights) 
+    weights <- as.numeric(weights) 
   } else { 
-  weights <- NULL 
+    weights <- NULL 
+  }
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_edge_betweenness, graph, directed, weights)
+  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
   res[as.numeric(e)]
 }
 
@@ -2300,24 +2293,7 @@ edge_betweenness <- function(graph, e=E(graph),
 
 estimate_edge_betweenness <- function(graph, e=E(graph),
                                       directed=TRUE, cutoff, weights=NULL) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  e <- as.igraph.es(graph, e)
-  directed <- as.logical(directed)
-  cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-  weights <- E(graph)$weight 
-  } 
-  if (!is.null(weights) && any(!is.na(weights))) { 
-  weights <- as.numeric(weights) 
-  } else { 
-  weights <- NULL 
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, cutoff, weights)
-  res[as.numeric(e)]
+  edge_betweenness(graph, e, directed=directed, cutoff=cutoff, weights=weights)
 }
 
 
@@ -2453,11 +2429,21 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' the total number of vertices is used in the formula instead of the path
 #' length.
 #' 
-#' \code{estimate_closeness} only considers paths of length \code{cutoff} or
-#' smaller, this can be run for larger graphs, as the running time is not
-#' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative
-#' then the function calculates the exact closeness scores.
-#' 
+#" You may use the \code{cutoff} argument to consider only paths of length
+#' \code{cutoff} or smaller. this can be run for larger graphs, as the running
+#' time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is zero
+#' or negative (which is the default), then the function calculates the exact
+#' closeness scores. Using zero as a cutoff is \emph{deprecated} and future
+#' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
+#' considered at all). If you want no cutoff, use a negative number.
+#'
+#' \code{estimate_closeness} is an alias for \code{closeness} with a different
+#' argument order, for sake of compatibility with older versions of igraph.
+#'
+#' Closeness centrality is meaningful only for connected graphs. In disconnected
+#' graphs, consider using the harmonic centrality with
+#' \code{\link{harmonic_centrality}}
+#'
 #' @aliases closeness closeness.estimate estimate_closeness
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
@@ -2473,10 +2459,12 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' closeness. If the graph has a \code{weight} edge attribute, then this is
 #' used by default. Weights are used for calculating weighted shortest
 #' paths, so they are interpreted as distances.
+#' @param cutoff The maximum path length to consider when calculating the
+#' betweenness. If zero or negative then there is no such limit.
 #' @return Numeric vector with the closeness values of all the vertices in
 #' \code{v}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{betweenness}}, \code{\link{degree}}
+#' @seealso \code{\link{betweenness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 #' @export
@@ -2492,59 +2480,38 @@ unfold_tree <- function(graph, mode=c("all", "out", "in", "total"), roots) {
 #' 
 closeness <- function(graph, vids=V(graph),
                       mode=c("out", "in", "all", "total"), weights=NULL,
-                      normalized=FALSE) {
+                      normalized=FALSE, cutoff=-1) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-  weights <- E(graph)$weight 
+    weights <- E(graph)$weight 
   } 
   if (!is.null(weights) && any(!is.na(weights))) { 
-  weights <- as.numeric(weights) 
+    weights <- as.numeric(weights) 
   } else { 
-  weights <- NULL 
+    weights <- NULL 
   }
   normalized <- as.logical(normalized)
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
+  }
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_closeness, graph, vids-1, mode, weights,
-               normalized)$res
+  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, weights, normalized, cutoff)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
   res
 }
 
-#' @rdname closeness
-#' @param cutoff The maximum path length to consider when calculating the
-#' betweenness. If zero or negative then there is no such limit.
 #' @export
-
 estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), cutoff, weights=NULL, normalized=FALSE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  vids <- as.igraph.vs(graph, vids)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-  cutoff <- as.numeric(cutoff)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-  weights <- E(graph)$weight 
-  } 
-  if (!is.null(weights) && any(!is.na(weights))) { 
-  weights <- as.numeric(weights) 
-  } else { 
-  weights <- NULL 
-  }
-  normalized <- as.logical(normalized)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, cutoff, weights, normalized)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-  names(res) <- vertex_attr(graph, "name", vids) 
-  }
-  res
+  closeness(graph, vids, mode=mode, weights=weights, normalized=normalized, cutoff=cutoff)
 }
 
 

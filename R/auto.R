@@ -287,6 +287,32 @@ sample_dirichlet <- function(n, alpha) {
 }
 
 #' @export
+harmonic_centrality <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), weights=NULL, normalized=FALSE, cutoff=-1) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  vids <- as.igraph.vs(graph, vids)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  normalized <- as.logical(normalized)
+  cutoff <- as.numeric(cutoff)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_harmonic_centrality_cutoff, graph, vids-1, mode, weights, normalized, cutoff)
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
+  res
+}
+
+#' @export
 page_rank <- function(graph, algo=c("prpack", "arpack", "power"), vids=V(graph), directed=TRUE, damping=0.85, personalized=NULL, weights=NULL, options=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

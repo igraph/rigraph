@@ -10681,6 +10681,46 @@ SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, S
 }
 
 /*-------------------------------------------/
+/ igraph_harmonic_centrality_cutoff          /
+/-------------------------------------------*/
+SEXP R_igraph_harmonic_centrality_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP weights, SEXP normalized, SEXP cutoff) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_res;
+  igraph_vs_t c_vids;
+  igraph_neimode_t c_mode;
+  igraph_vector_t c_weights;
+  igraph_bool_t c_normalized;
+  igraph_real_t c_cutoff;
+  SEXP res;
+
+  SEXP result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids);
+  c_mode=(igraph_neimode_t) REAL(mode)[0];
+  if (!isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  c_normalized=LOGICAL(normalized)[0];
+  c_cutoff=REAL(cutoff)[0];
+                                        /* Call igraph */
+  igraph_harmonic_centrality_cutoff(&c_graph, &c_res, c_vids, c_mode, (isNull(weights) ? 0 : &c_weights), c_normalized, c_cutoff);
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
+  igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vs_destroy(&c_vids);
+  result=res;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
 / igraph_personalized_pagerank               /
 /-------------------------------------------*/
 SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP directed, SEXP damping, SEXP personalized, SEXP weights, SEXP options) {

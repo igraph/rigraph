@@ -25,10 +25,17 @@ betweenness(
   directed = TRUE,
   weights = NULL,
   nobigint = TRUE,
-  normalized = FALSE
+  normalized = FALSE,
+  cutoff = -1
 )
 
-edge_betweenness(graph, e = E(graph), directed = TRUE, weights = NULL)
+edge_betweenness(
+  graph,
+  e = E(graph),
+  directed = TRUE,
+  weights = NULL,
+  cutoff = -1
+)
 }
 \arguments{
 \item{graph}{The graph to analyze.}
@@ -68,10 +75,6 @@ A numeric vector with the betweenness score for each vertex in
 
 A numeric vector with the edge betweenness score for each edge in \code{e}
 for \code{edge_betweenness}.
-
-\code{estimate_betweenness} returns the estimated betweenness scores for
-vertices in \code{vids}, \code{estimate_edge_betweenness} the estimated edge
-betweenness score for \emph{all} edges; both in a numeric vector.
 }
 \description{
 The vertex and edge betweenness are (roughly) defined by the number of
@@ -90,12 +93,17 @@ The edge betweenness of edge \code{e} is defined by
 \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
 calculates edge betweenness.
 
-\code{estimate_betweenness} only considers paths of length \code{cutoff} or
-smaller, this can be run for larger graphs, as the running time is not
-quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative
-then the function calculates the exact betweenness scores.
+Both functions allow you to consider only paths of length \code{cutoff} or
+smaller; this can be run for larger graphs, as the running time is not
+quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative,
+then the function calculates the exact betweenness scores. Using zero as a
+cutoff is \emph{deprecated} and future versions (from 1.4.0) will treat zero
+cutoff literally (i.e. no paths considered at all). If you want no cutoff,
+use a negative number.
 
-\code{estimate_edge_betweenness} is similar, but for edges.
+\code{estimate_betweenness} and \code{estimate_edge_betweenness} are
+aliases for \code{betweenness} and \code{edge_betweenness}, with a different
+argument order, for sake of compatibility with older versions of igraph.
 
 For calculating the betweenness a similar algorithm to the one proposed by
 Brandes (see References) is used.
@@ -119,7 +127,7 @@ Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. \emph{Journal
 of Mathematical Sociology} 25(2):163-177, 2001.
 }
 \seealso{
-\code{\link{closeness}}, \code{\link{degree}}
+\code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

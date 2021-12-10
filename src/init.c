@@ -225,6 +225,7 @@ extern SEXP R_igraph_get_subisomorphisms_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP)
 extern SEXP R_igraph_graphlets(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_graphlets_candidate_basis(SEXP, SEXP);
 extern SEXP R_igraph_growing_random_game(SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_harmonic_centrality_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_has_multiple(SEXP);
 extern SEXP R_igraph_hrg_consensus(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_create(SEXP, SEXP);
@@ -600,6 +601,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_graphlets",                                  (DL_FUNC) &R_igraph_graphlets,                                   3},
     {"R_igraph_graphlets_candidate_basis",                  (DL_FUNC) &R_igraph_graphlets_candidate_basis,                   2},
     {"R_igraph_growing_random_game",                        (DL_FUNC) &R_igraph_growing_random_game,                         4},
+    {"R_igraph_harmonic_centrality_cutoff",                 (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                  6},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},

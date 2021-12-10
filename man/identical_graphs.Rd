@@ -13,7 +13,14 @@ identical_graphs(g1, g2)
 Logical scalar
 }
 \description{
+Two graphs are considered identical by this function if and only if
+they are represented in exactly the same way in the internal R
+representationi. This means that the two graphs must have the same
+list of vertices and edges, in exactly the same order, with same directness
+and identical graph, vertex and edge attributes.
+}
+\details{
 This is similar to \code{identical} in the \code{base} package,
-but ignores the mutable piece of igraph objects, that might be
-different, even if the two graphs are identical.
+but it ignores the mutable piece of igraph objects; those might be
+different even if the two graphs are identical.
 }
