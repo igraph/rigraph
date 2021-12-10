@@ -35,6 +35,12 @@ Changed:
   reproducible with future versions, use `closeness()`, `betweenness()` and
   `edge_betweenness()` in your code with a `cutoff` argument.
 
+Deprecated:
+
+- Using `cutoff=0` for `closeness()`, `betweenness()` and `edge_betweenness()`
+  is deprecated; if you want exact scores, use a negative cutoff. `cutoff=0`
+  will be interpreted literally from igraph 1.4.0.
+
 # igraph 1.2.9
 
 Nov 22, 2021
