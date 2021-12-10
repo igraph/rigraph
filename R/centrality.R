@@ -772,7 +772,7 @@ page_rank <- page_rank
 #' harmonic_centrality(g)
 #' harmonic_centrality(g2, mode="in")
 #' harmonic_centrality(g2, mode="out")
-#' harmonic_centrality(g %du% g2, mode="all")
+#' harmonic_centrality(g %du% make_full_graph(5), mode="all")
 #' 
 
 harmonic_centrality <- harmonic_centrality

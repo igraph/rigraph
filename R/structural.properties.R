@@ -699,7 +699,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-  betweenness(graph, vids, directed=directed, cutoff=cutoff, weights=weights, normalized=normalized)
+  betweenness(graph, v=vids, directed=directed, cutoff=cutoff, weights=weights)
 }
 
 
@@ -804,7 +804,7 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_betweenness_cutoff, graph, vids-1, directed, cutoff, weights)
+  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v-1, directed, weights, cutoff)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -2285,7 +2285,7 @@ edge_betweenness <- function(graph, e=E(graph),
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, cutoff, weights)
+  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
   res[as.numeric(e)]
 }
 
@@ -2502,7 +2502,7 @@ closeness <- function(graph, vids=V(graph),
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, cutoff, weights, normalized)
+  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, weights, normalized, cutoff)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
