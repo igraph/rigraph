@@ -146,6 +146,16 @@ test_that("[[ indexing works with filtering on both ends", {
                           i=V(g)[numeric()], j=V(g)[numeric()])))
 })
 
+test_that("[[ indexing is consistent with length()", {
+
+  expect_that(length(g), equals(vcount(g)))
+
+  # Check that str() does not throw an error, which it did before when
+  # length() was not consistent with `[[`
+  str(g)
+
+})
+
 ################################################################
 
 test_that("[ can query edge ids", {

@@ -310,6 +310,14 @@
   }
 }
 
+#' @method length igraph
+#' @rdname [[.igraph
+#' @export
+
+length.igraph <- function(x) {
+  vcount(x)
+}
+
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
