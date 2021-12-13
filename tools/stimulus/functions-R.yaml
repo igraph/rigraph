@@ -361,7 +361,12 @@ igraph_subgraph_edges:
     NAME: subgraph.edges
 
 igraph_average_path_length:
-    IGNORE: RR, RC
+    # No need for it, igraph_average_path_length_dijkstra takes care of the
+    # unweighted case as well
+    IGNORE: RR, RC, RInit
+
+igraph_average_path_length_dijkstra:
+    NAME: mean_distance
 
 igraph_path_length_hist:
     NAME: distance_table

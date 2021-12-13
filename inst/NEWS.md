@@ -16,6 +16,8 @@ Added:
 - `random_edge_walk()` to record the edges traversed during a random walk
 - `harmonic_centrality()` calculates the harmonic centrality of vertices,
   optionally with a cutoff on path lengths
+- `mean_distance()` now supports edge weights and it can also return the number
+  of unconnected vertex pairs when `details=TRUE` is passed as an argument
 
 Fixed:
 

@@ -158,15 +158,7 @@ farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
 #' @export
 #' @rdname distances
 
-mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_average_path_length, graph, as.logical(directed),
-        as.logical(unconnected))
-}
+mean_distance <- mean_distance
 
 
 
