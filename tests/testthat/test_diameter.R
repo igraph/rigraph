@@ -41,3 +41,11 @@ test_that("diameter works", {
   E(g)$weight <- 2
   expect_that(diameter(g, unconnected=FALSE), equals(16))
 })
+
+test_that("diameter correctly handles disconnected graphs", {
+  g <- make_tree(7, 2, mode="undirected") %du% make_tree(4, 3, mode="undirected")
+  expect_that(diameter(g, unconnected=TRUE), equals(4))
+  expect_that(diameter(g, unconnected=FALSE), equals(Inf))
+  E(g)$weight <- 2
+  expect_that(diameter(g, unconnected=FALSE), equals(Inf))
+})
