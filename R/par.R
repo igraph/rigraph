@@ -28,6 +28,7 @@
                     "edge.attr.comb"=list(weight="sum", name="concat",
                       "ignore"),
                      "sparsematrices"=TRUE,
+                     # Nexus is deprecated but the parameter is kept here for backwards compatibility
                      "nexus.url"="http://nexus.igraph.org",
                      "add.params"=TRUE,
                      "add.vertex.names"=TRUE,
@@ -97,8 +98,6 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #'     attributes if the graph is modified. The default value is
 #'     \code{list(weight="sum", name="concat", "ignore")}. See
 #'     \code{\link{attribute.combination}} for details on this.}
-#'   \item{nexus.url}{The base URL of the default Nexus server. See
-#'     \code{\link{nexus}} for details.}
 #'   \item{print.edge.attributes}{Logical constant, whether to print edge
 #'     attributes when printing graphs. Defaults to \code{FALSE}.}
 #'   \item{print.full}{Logical scalar, whether \code{\link{print.igraph}}

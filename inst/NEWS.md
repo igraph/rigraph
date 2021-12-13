@@ -52,6 +52,10 @@ Deprecated:
 - Using `cutoff=0` for `closeness()`, `betweenness()` and `edge_betweenness()`
   is deprecated; if you want exact scores, use a negative cutoff. `cutoff=0`
   will be interpreted literally from igraph 1.4.0.
+- The `nexus_list()`, `nexus_info()`, `nexus_get()` and `nexus_search()`
+  functions now return an error informing the user that the Nexus graph
+  repository has been taken offline (actually, several years ago). These
+  functions will be removed in 1.4.0.
 
 Removed:
 
