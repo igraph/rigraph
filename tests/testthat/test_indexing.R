@@ -152,7 +152,7 @@ test_that("[[ indexing is consistent with length()", {
 
   # Check that str() does not throw an error, which it did before when
   # length() was not consistent with `[[`
-  str(g)
+  invisible(str(g))
 
 })
 
