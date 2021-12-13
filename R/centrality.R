@@ -19,6 +19,274 @@
 #
 ###################################################################
 
+#' @rdname betweenness
+#' @param vids The vertices for which the vertex betweenness estimation will be
+#' calculated.
+#' @param cutoff The maximum path length to consider when calculating the
+#' betweenness. If zero or negative then there is no such limit.
+#' @export
+
+estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
+  if (!missing(nobigint)) {
+    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
+  }
+  betweenness(graph, v=vids, directed=directed, cutoff=cutoff, weights=weights)
+}
+
+
+
+#' Vertex and edge betweenness centrality
+#' 
+#' The vertex and edge betweenness are (roughly) defined by the number of
+#' geodesics (shortest paths) going through a vertex or an edge.
+#' 
+#' The vertex betweenness of vertex \code{v} is defined by
+#' 
+#' \deqn{\sum_{i\ne j, i\ne v, j\ne v} g_{ivj}/g_{ij}}{sum( g_ivj / g_ij,
+#' i!=j,i!=v,j!=v)}
+#' 
+#' The edge betweenness of edge \code{e} is defined by
+#' 
+#' \deqn{\sum_{i\ne j} g{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
+#' 
+#' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
+#' calculates edge betweenness.
+#' 
+#' Both functions allow you to consider only paths of length \code{cutoff} or
+#' smaller; this can be run for larger graphs, as the running time is not
+#' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative,
+#' then the function calculates the exact betweenness scores. Using zero as a
+#' cutoff is \emph{deprecated} and future versions (from 1.4.0) will treat zero
+#' cutoff literally (i.e. no paths considered at all). If you want no cutoff,
+#' use a negative number.
+#'
+#' \code{estimate_betweenness} and \code{estimate_edge_betweenness} are
+#' aliases for \code{betweenness} and \code{edge_betweenness}, with a different
+#' argument order, for sake of compatibility with older versions of igraph.
+#'
+#' For calculating the betweenness a similar algorithm to the one proposed by
+#' Brandes (see References) is used.
+#' 
+#' @aliases betweenness edge.betweenness betweenness.estimate
+#' edge.betweenness.estimate edge_betweenness estimate_betweenness
+#' estimate_edge_betweenness
+#' @param graph The graph to analyze.
+#' @param v The vertices for which the vertex betweenness will be calculated.
+#' @param directed Logical, whether directed paths should be considered while
+#' determining the shortest paths.
+#' @param weights Optional positive weight vector for calculating weighted
+#' betweenness. If the graph has a \code{weight} edge attribute, then this is
+#' used by default. Weights are used to calculate weighted shortest paths,
+#' so they are interpreted as distances.
+#' @param nobigint Logical scalar, whether to use big integers during the
+#' calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.
+#' @param normalized Logical scalar, whether to normalize the betweenness
+#' scores. If \code{TRUE}, then the results are normalized by the number of ordered
+#' or unordered vertex pairs in directed and undirected graphs, respectively.
+#' In an undirected graph,			
+#' \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
+#' \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
+#' is the number of vertices in the graph.
+#' @return A numeric vector with the betweenness score for each vertex in
+#' \code{v} for \code{betweenness}.
+#' 
+#' A numeric vector with the edge betweenness score for each edge in \code{e}
+#' for \code{edge_betweenness}.
+#' 
+#' @note \code{edge_betweenness} might give false values for graphs with
+#' multiple edges.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+#' @references Freeman, L.C. (1979). Centrality in Social Networks I:
+#' Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
+#' 
+#' Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. \emph{Journal
+#' of Mathematical Sociology} 25(2):163-177, 2001.
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- sample_gnp(10, 3/10)
+#' betweenness(g)
+#' edge_betweenness(g)
+#' 
+betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
+                        nobigint=TRUE, normalized=FALSE, cutoff=-1) {
+  
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  v <- as.igraph.vs(graph, v)
+  directed <- as.logical(directed)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
+  }
+  if (!missing(nobigint)) {
+    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
+  }
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v-1, directed, weights, cutoff)
+  if (normalized) {
+    vc <- as.numeric(vcount(graph))
+    if (is_directed(graph) && directed) {
+      res <- res / ( vc*vc-3*vc+2)
+    } else {
+      res <- 2*res / ( vc*vc-3*vc+2)
+    }
+  }
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- V(graph)$name[v]
+  }
+  res
+}
+
+#' @rdname betweenness
+#' @param e The edges for which the edge betweenness will be calculated.
+#' @export
+
+edge_betweenness <- function(graph, e=E(graph),
+                             directed=TRUE, weights=NULL, cutoff=-1) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  e <- as.igraph.es(graph, e)
+  directed <- as.logical(directed)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
+    weights <- E(graph)$weight 
+  }
+  if (!is.null(weights) && any(!is.na(weights))) { 
+    weights <- as.numeric(weights) 
+  } else { 
+    weights <- NULL 
+  }
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
+  }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
+  res[as.numeric(e)]
+}
+
+#' @export
+
+estimate_edge_betweenness <- function(graph, e=E(graph),
+                                      directed=TRUE, cutoff, weights=NULL) {
+  edge_betweenness(graph, e, directed=directed, cutoff=cutoff, weights=weights)
+}
+
+#' Closeness centrality of vertices
+#' 
+#' Closeness centrality measures how many steps is required to access every other
+#' vertex from a given vertex.
+#' 
+#' The closeness centrality of a vertex is defined by the inverse of the
+#' average length of the shortest paths to/from all the other vertices in the
+#' graph:
+#' 
+#' \deqn{\frac{1}{\sum_{i\ne v} d_vi}}{1/sum( d(v,i), i != v)}
+#' 
+#' If there is no (directed) path between vertex \code{v} and \code{i}, then
+#' the total number of vertices is used in the formula instead of the path
+#' length.
+#' 
+#" You may use the \code{cutoff} argument to consider only paths of length
+#' \code{cutoff} or smaller. this can be run for larger graphs, as the running
+#' time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is zero
+#' or negative (which is the default), then the function calculates the exact
+#' closeness scores. Using zero as a cutoff is \emph{deprecated} and future
+#' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
+#' considered at all). If you want no cutoff, use a negative number.
+#'
+#' \code{estimate_closeness} is an alias for \code{closeness} with a different
+#' argument order, for sake of compatibility with older versions of igraph.
+#'
+#' Closeness centrality is meaningful only for connected graphs. In disconnected
+#' graphs, consider using the harmonic centrality with
+#' \code{\link{harmonic_centrality}}
+#'
+#' @aliases closeness closeness.estimate estimate_closeness
+#' @param graph The graph to analyze.
+#' @param vids The vertices for which closeness will be calculated.
+#' @param mode Character string, defined the types of the paths used for
+#' measuring the distance in directed graphs. \dQuote{in} measures the paths
+#' \emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex,
+#' \emph{all} uses undirected paths. This argument is ignored for undirected
+#' graphs.
+#' @param normalized Logical scalar, whether to calculate the normalized
+#' closeness. Normalization is performed by multiplying the raw closeness by
+#' \eqn{n-1}, where \eqn{n} is the number of vertices in the graph.
+#' @param weights Optional positive weight vector for calculating weighted
+#' closeness. If the graph has a \code{weight} edge attribute, then this is
+#' used by default. Weights are used for calculating weighted shortest
+#' paths, so they are interpreted as distances.
+#' @param cutoff The maximum path length to consider when calculating the
+#' betweenness. If zero or negative then there is no such limit.
+#' @return Numeric vector with the closeness values of all the vertices in
+#' \code{v}.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{betweenness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+#' @references Freeman, L.C. (1979). Centrality in Social Networks I:
+#' Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- make_ring(10)
+#' g2 <- make_star(10)
+#' closeness(g)
+#' closeness(g2, mode="in")
+#' closeness(g2, mode="out")
+#' closeness(g2, mode="all")
+#' 
+closeness <- function(graph, vids=V(graph),
+                      mode=c("out", "in", "all", "total"), weights=NULL,
+                      normalized=FALSE, cutoff=-1) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  vids <- as.igraph.vs(graph, vids)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
+    weights <- E(graph)$weight 
+  } 
+  if (!is.null(weights) && any(!is.na(weights))) { 
+    weights <- as.numeric(weights) 
+  } else { 
+    weights <- NULL 
+  }
+  normalized <- as.logical(normalized)
+  cutoff <- as.numeric(cutoff)
+  if (cutoff == 0) {
+    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
+    cutoff <- -1
+  }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, weights, normalized, cutoff)$res
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- V(graph)$name[vids]
+  }
+  res
+}
+
+#' @export
+estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), cutoff, weights=NULL, normalized=FALSE) {
+  closeness(graph, vids, mode=mode, weights=weights, normalized=normalized, cutoff=cutoff)
+}
+
 #' @rdname arpack
 #' @export
 
@@ -776,3 +1044,351 @@ page_rank <- page_rank
 #' 
 
 harmonic_centrality <- harmonic_centrality
+
+
+
+bonpow.dense <- function(graph, nodes=V(graph),
+                         loops=FALSE, exponent=1,
+                         rescale=FALSE, tol=1e-7){
+
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }  
+  
+  d <- as_adj(graph)
+  if (!loops) {
+    diag(d) <- 0
+  }
+  n <- vcount(graph)
+  id <- matrix(0,nrow=n,ncol=n)
+  diag(id) <- 1
+
+#  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
+  ev <- solve(id-exponent*d, tol=tol) %*% apply(d,1,sum)
+  if(rescale) {
+    ev <- ev/sum(ev)
+  } else {
+    ev <- ev*sqrt(n/sum((ev)^2))
+  } 
+  ev[as.numeric(nodes)]
+}
+
+bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
+                          exponent=1, rescale=FALSE, tol=1e-07) {
+
+  ## remove loops if requested
+  if (!loops) {
+    graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
+  }
+
+  vg <- vcount(graph)
+  
+  ## sparse adjacency matrix
+  d <- as_adj(graph, sparse=TRUE)
+
+  ## sparse identity matrix
+  id <- Matrix::Diagonal(vg)
+
+  ## solve it
+  ev <- Matrix::solve(id - exponent * d, degree(graph, mode="out"), tol=tol)
+
+  if (rescale) {
+    ev <- ev/sum(ev)
+  } else {
+    ev <- ev * sqrt(vcount(graph)/sum((ev)^2))
+  }
+
+  ev[as.numeric(nodes)]
+}
+
+
+
+#' Find Bonacich Power Centrality Scores of Network Positions
+#' 
+#' \code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
+#' centralities of positions (selected by \code{nodes}).  The decay rate for
+#' power contributions is specified by \code{exponent} (1 by default).
+#' 
+#' Bonacich's power centrality measure is defined by
+#' \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha\left(\mathbf{I}-\beta\mathbf{A}\right)^{-1}\mathbf{A}\mathbf{1}}{C_BP(alpha,beta)=alpha
+#' (I-beta A)^-1 A 1}, where \eqn{\beta}{beta} is an attenuation parameter (set
+#' here by \code{exponent}) and \eqn{\mathbf{A}}{A} is the graph adjacency
+#' matrix.  (The coefficient \eqn{\alpha}{alpha} acts as a scaling parameter,
+#' and is set here (following Bonacich (1987)) such that the sum of squared
+#' scores is equal to the number of vertices.  This allows 1 to be used as a
+#' reference value for the ``middle'' of the centrality range.)  When
+#' \eqn{\beta \rightarrow }{beta->1/lambda_A1}\eqn{
+#' 1/\lambda_{\mathbf{A}1}}{beta->1/lambda_A1} (the reciprocal of the largest
+#' eigenvalue of \eqn{\mathbf{A}}{A}), this is to within a constant multiple of
+#' the familiar eigenvector centrality score; for other values of \eqn{\beta},
+#' the behavior of the measure is quite different.  In particular, \eqn{\beta}
+#' gives positive and negative weight to even and odd walks, respectively, as
+#' can be seen from the series expansion
+#' \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha \sum_{k=0}^\infty \beta^k
+#' }{C_BP(alpha,beta) = alpha sum( beta^k A^(k+1) 1, k in 0..infinity )}\eqn{
+#' \mathbf{A}^{k+1} \mathbf{1}}{C_BP(alpha,beta) = alpha sum( beta^k A^(k+1) 1,
+#' k in 0..infinity )} which converges so long as \eqn{|\beta|
+#' }{|beta|<1/lambda_A1}\eqn{ < 1/\lambda_{\mathbf{A}1}}{|beta|<1/lambda_A1}.
+#' The magnitude of \eqn{\beta}{beta} controls the influence of distant actors
+#' on ego's centrality score, with larger magnitudes indicating slower rates of
+#' decay.  (High rates, hence, imply a greater sensitivity to edge effects.)
+#' 
+#' Interpretively, the Bonacich power measure corresponds to the notion that
+#' the power of a vertex is recursively defined by the sum of the power of its
+#' alters.  The nature of the recursion involved is then controlled by the
+#' power exponent: positive values imply that vertices become more powerful as
+#' their alters become more powerful (as occurs in cooperative relations),
+#' while negative values imply that vertices become more powerful only as their
+#' alters become \emph{weaker} (as occurs in competitive or antagonistic
+#' relations).  The magnitude of the exponent indicates the tendency of the
+#' effect to decay across long walks; higher magnitudes imply slower decay.
+#' One interesting feature of this measure is its relative instability to
+#' changes in exponent magnitude (particularly in the negative case).  If your
+#' theory motivates use of this measure, you should be very careful to choose a
+#' decay parameter on a non-ad hoc basis.
+#'
+#' @aliases bonpow
+#' @param graph the input graph.
+#' @param nodes vertex sequence indicating which vertices are to be included in
+#' the calculation.  By default, all vertices are included.
+#' @param loops boolean indicating whether or not the diagonal should be
+#' treated as valid data.  Set this true if and only if the data can contain
+#' loops.  \code{loops} is \code{FALSE} by default.
+#' @param exponent exponent (decay rate) for the Bonacich power centrality
+#' score; can be negative
+#' @param rescale if true, centrality scores are rescaled such that they sum to
+#' 1.
+#' @param tol tolerance for near-singularities during matrix inversion (see
+#' \code{\link{solve}})
+#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' calculation. The \sQuote{Matrix} package is required for sparse matrix
+#' support
+#' @return A vector, containing the centrality scores.
+#' @note This function was ported (ie. copied) from the SNA package.
+#' @section Warning : Singular adjacency matrices cause no end of headaches for
+#' this algorithm; thus, the routine may fail in certain cases.  This will be
+#' fixed when I get a better algorithm.  \code{power_centrality} will not symmetrize your
+#' data before extracting eigenvectors; don't send this routine asymmetric
+#' matrices unless you really mean to do so.
+#' @author Carter T. Butts
+#' (\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
+#' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{eigen_centrality}} and \code{\link{alpha_centrality}}
+#' @references Bonacich, P.  (1972).  ``Factoring and Weighting Approaches to
+#' Status Scores and Clique Identification.'' \emph{Journal of Mathematical
+#' Sociology}, 2, 113-120.
+#' 
+#' Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
+#' \emph{American Journal of Sociology}, 92, 1170-1182.
+#' @keywords graphs
+#' @export
+#' @examples
+#' 
+#' # Generate some test data from Bonacich, 1987:
+#' g.c <- graph( c(1,2,1,3,2,4,3,5), dir=FALSE)
+#' g.d <- graph( c(1,2,1,3,1,4,2,5,3,6,4,7), dir=FALSE)
+#' g.e <- graph( c(1,2,1,3,1,4,2,5,2,6,3,7,3,8,4,9,4,10), dir=FALSE)
+#' g.f <- graph( c(1,2,1,3,1,4,2,5,2,6,2,7,3,8,3,9,3,10,4,11,4,12,4,13), dir=FALSE)
+#' # Compute power centrality scores
+#' for (e in seq(-0.5,.5, by=0.1)) {
+#'   print(round(power_centrality(g.c, exp=e)[c(1,2,4)], 2))
+#' }
+#' 
+#' for (e in seq(-0.4,.4, by=0.1)) {
+#'   print(round(power_centrality(g.d, exp=e)[c(1,2,5)], 2))
+#' }
+#' 
+#' for (e in seq(-0.4,.4, by=0.1)) {
+#'   print(round(power_centrality(g.e, exp=e)[c(1,2,5)], 2))
+#' }
+#' 
+#' for (e in seq(-0.4,.4, by=0.1)) {
+#'   print(round(power_centrality(g.f, exp=e)[c(1,2,5)], 2))
+#' }
+#' 
+power_centrality <- function(graph, nodes=V(graph),
+                   loops=FALSE, exponent=1,
+                   rescale=FALSE, tol=1e-7, sparse=TRUE){
+
+  nodes <- as.igraph.vs(graph, nodes)
+  if (sparse) {
+    res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
+  }  else {
+    res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
+  }
+
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", nodes)
+  }
+  
+  res
+}
+
+alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
+                                   loops=FALSE, exo=1, weights=NULL,
+                                   tol=1e-7) {
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+
+  exo <- rep(exo, length=vcount(graph))
+  exo <- matrix(exo, ncol=1)
+
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    ## weights == NULL and there is a "weight" edge attribute
+    attr <- "weight"
+  } else if (is.null(weights)) {
+    ## weights == NULL, but there is no "weight" edge attribute
+    attr <- NULL
+  } else if (is.character(weights) && length(weights)==1) {
+    ## name of an edge attribute, nothing to do
+    attr <- "weight"
+  } else if (any(!is.na(weights))) {
+    ## weights != NULL and weights != rep(NA, x)
+    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
+    attr <- "weight"
+  } else {
+    ## weights != NULL, but weights == rep(NA, x)
+    attr <- NULL
+  }
+
+  d <- t(as_adj(graph, attr=attr, sparse=FALSE))
+  if (!loops) {
+    diag(d) <- 0
+  }
+  n <- vcount(graph)
+  id <- matrix(0, nrow=n, ncol=n)
+  diag(id) <- 1
+  
+  ev <- solve(id-alpha*d, tol=tol) %*% exo
+  ev[as.numeric(nodes)]
+}
+
+alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
+                                   loops=FALSE, exo=1, weights=NULL,
+                                   tol=1e-7) {
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+
+  vc <- vcount(graph)
+
+  if (!loops) {
+    graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
+  }  
+
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    ## weights == NULL and there is a "weight" edge attribute
+    attr <- "weight"
+  } else if (is.null(weights)) {
+    ## weights == NULL, but there is no "weight" edge attribute
+    attr <- NULL
+  } else if (is.character(weights) && length(weights)==1) {
+    ## name of an edge attribute, nothing to do
+    attr <- "weight"
+  } else if (any(!is.na(weights))) {
+    ## weights != NULL and weights != rep(NA, x)
+    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
+    attr <- "weight"
+  } else {
+    ## weights != NULL, but weights == rep(NA, x)
+    attr <- NULL
+  }
+
+  M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
+  M <- as(M, "dgCMatrix")
+  
+  ## Create an identity matrix
+  M2 <- Matrix::sparseMatrix(dims=c(vc, vc), i=1:vc, j=1:vc, x=rep(1, vc))
+  M2 <- as(M2, "dgCMatrix")
+
+  ## exo
+  exo <- cbind(rep(exo, length=vc))
+
+  ## Solve the equation
+  M3 <- M2-alpha*M
+  r <- Matrix::solve(M3, tol=tol, exo)
+  
+  r[ as.numeric(nodes)]
+}
+
+
+
+#' Find Bonacich alpha centrality scores of network positions
+#' 
+#' \code{alpha_centrality} calculates the alpha centrality of some (or all)
+#' vertices in a graph.
+#' 
+#' The alpha centrality measure can be considered as a generalization of
+#' eigenvector centerality to directed graphs. It was proposed by Bonacich in
+#' 2001 (see reference below).
+#' 
+#' The alpha centrality of the vertices in a graph is defined as the solution
+#' of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
+#' where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
+#' graph, \eqn{e}{e} is the vector of exogenous sources of status of the
+#' vertices and \eqn{\alpha}{alpha} is the relative importance of the
+#' endogenous versus exogenous factors.
+#'
+#' @aliases alpha.centrality
+#' @param graph The input graph, can be directed or undirected
+#' @param nodes Vertex sequence, the vertices for which the alpha centrality
+#' values are returned. (For technical reasons they will be calculated for all
+#' vertices, anyway.)
+#' @param alpha Parameter specifying the relative importance of endogenous
+#' versus exogenous factors in the determination of centrality. See details
+#' below.
+#' @param loops Whether to eliminate loop edges from the graph before the
+#' calculation.
+#' @param exo The exogenous factors, in most cases this is either a constant --
+#' the same factor for every node, or a vector giving the factor for every
+#' vertex. Note that too long vectors will be truncated and too short vectors
+#' will be replicated to match the number of vertices.
+#' @param weights A character scalar that gives the name of the edge attribute
+#' to use in the adjacency matrix. If it is \code{NULL}, then the
+#' \sQuote{weight} edge attribute of the graph is used, if there is one.
+#' Otherwise, or if it is \code{NA}, then the calculation uses the standard
+#' adjacency matrix.
+#' @param tol Tolerance for near-singularities during matrix inversion, see
+#' \code{\link{solve}}.
+#' @param sparse Logical scalar, whether to use sparse matrices for the
+#' calculation. The \sQuote{Matrix} package is required for sparse matrix
+#' support
+#' @return A numeric vector contaning the centrality scores for the selected
+#' vertices.
+#' @section Warning: Singular adjacency matrices cause problems for this
+#' algorithm, the routine may fail is certain cases.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{eigen_centrality}} and \code{\link{power_centrality}}
+#' @references Bonacich, P. and Lloyd, P. (2001). ``Eigenvector-like
+#' measures of centrality for asymmetric relations'' \emph{Social Networks},
+#' 23, 191-201.
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' # The examples from Bonacich's paper
+#' g.1 <- graph( c(1,3,2,3,3,4,4,5) )
+#' g.2 <- graph( c(2,1,3,1,4,1,5,1) )
+#' g.3 <- graph( c(1,2,2,3,3,4,4,1,5,1) )
+#' alpha_centrality(g.1)
+#' alpha_centrality(g.2)
+#' alpha_centrality(g.3,alpha=0.5)
+#' 
+alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
+                             loops=FALSE, exo=1, weights=NULL,
+                             tol=1e-7, sparse=TRUE) {
+
+  nodes <- as.igraph.vs(graph, nodes)
+  if (sparse) {
+    res <- alpha.centrality.sparse(graph, nodes, alpha, loops,
+                                   exo, weights, tol)
+  } else {
+    res <- alpha.centrality.dense(graph, nodes, alpha, loops,
+                                  exo, weights, tol)
+  }
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", nodes)
+  }
+  res
+}

@@ -20,6 +20,8 @@ Added:
 Fixed:
 
 - `is_connected()` now returns FALSE for the null graph
+- Calling `length()` on a graph now returns the number of vertices to make it
+  consistent with indexing the graph with `[[`.
 
 Changed:
 
