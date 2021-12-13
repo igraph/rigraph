@@ -21,14 +21,12 @@
 ###################################################################
 
 .igraph.pars <- list("print.vertex.attributes"=FALSE,
-                    "print.edge.attributes"=FALSE,
-                    "print.graph.attributes"=FALSE,
-                    "verbose"=FALSE,
-                    "vertex.attr.comb"=list(name="concat", "ignore"),
-                    "edge.attr.comb"=list(weight="sum", name="concat",
-                      "ignore"),
+                     "print.edge.attributes"=FALSE,
+                     "print.graph.attributes"=FALSE,
+                     "verbose"=FALSE,
+                     "vertex.attr.comb"=list(name="concat", "ignore"),
+                     "edge.attr.comb"=list(weight="sum", name="concat", "ignore"),
                      "sparsematrices"=TRUE,
-                     # Nexus is deprecated but the parameter is kept here for backwards compatibility
                      "nexus.url"="http://nexus.igraph.org",
                      "add.params"=TRUE,
                      "add.vertex.names"=TRUE,
