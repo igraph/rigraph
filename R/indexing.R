@@ -311,7 +311,7 @@
 }
 
 #' @method length igraph
-#' @rdname [[.igraph
+#' @family structural queries
 #' @export
 
 length.igraph <- function(x) {
