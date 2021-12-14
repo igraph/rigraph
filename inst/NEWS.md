@@ -1,4 +1,10 @@
-# Unreleased
+# igraph 1.2.10
+
+Dec 14, 2021
+
+Fixed:
+- The macOS versions of `igraph` were accidentally built without GraphML
+  support on CRAN; this should now be fixed.
 
 # igraph 1.2.9
 
