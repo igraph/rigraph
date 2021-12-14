@@ -8,8 +8,21 @@ has_glpk <- function() {
   glpk
 }
 
+has_graphml <- function() {
+  graphml <- TRUE
+  tryCatch(
+    read_graph(rawConnection(charToRaw("<graphml><graph></graph></graphml>")), format="graphml"),
+    error = function(e) graphml <<- FALSE
+  )
+  graphml
+}
+
 skip_if_no_glpk <- function() {
   if (!has_glpk()) skip("No GLPK library")
+}
+
+skip_if_no_graphml <- function() {
+  if (!has_graphml()) skip("No GraphML support")
 }
 
 with_rng_version <- function(version, expr) {
