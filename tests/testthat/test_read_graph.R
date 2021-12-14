@@ -1,6 +1,8 @@
-context("GraphML format")
+context("Graph file formats")
 
-test_that("GraphML support is compiled in", {
+test_that("reading GraphML file works", {
+    skip_if_no_graphml()
+
     g <- read_graph(f <- gzfile("zachary.graphml.gz"), format="graphml")
     g2 <- make_graph("zachary")
 

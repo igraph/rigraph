@@ -65,6 +65,14 @@ Removed:
 - The deprecated `page_rank_old()` function and the deprecated `power` method of
   `page_rank()` were removed.
 
+# igraph 1.2.10
+
+Dec 14, 2021
+
+Fixed:
+- The macOS versions of `igraph` were accidentally built without GraphML
+  support on CRAN; this should now be fixed.
+
 # igraph 1.2.9
 
 Nov 22, 2021
