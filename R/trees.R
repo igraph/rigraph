@@ -84,6 +84,11 @@ to_prufer <- to_prufer
 #' @export
 make_from_prufer <- make_from_prufer
 
+#' @rdname make_from_prufer
+#' @param ... Passed to \code{make_from_prufer}
+#' @export
+from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
+
 #' Sample trees randomly and uniformly
 #'
 #' \code{sample_tree} generates a random with a given number of nodes uniform
