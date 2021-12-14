@@ -158,15 +158,7 @@ farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
 #' @export
 #' @rdname distances
 
-mean_distance <- function(graph, directed=TRUE, unconnected=TRUE) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_average_path_length, graph, as.logical(directed),
-        as.logical(unconnected))
-}
+mean_distance <- mean_distance
 
 
 
@@ -291,8 +283,9 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #' 
 #' \code{mean_distance} calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
-#' directed graphs). This function does not consider edge weights currently and
-#' uses a breadth-first search.
+#' directed graphs). It uses a breadth-=first search for unweighted graphs and
+#' Dijkstra's algorithm for weighted ones. The latter only supports non-negative
+#' edge weights.
 #' 
 #' \code{distance_table} calculates a histogram, by calculating the shortest
 #' path length between each pair of vertices. For directed graphs both
@@ -329,6 +322,15 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #' that the igraph C core might still override your choice in obvious cases,
 #' i.e. if there are no edge weights, then the unweighted algorithm will be
 #' used, regardless of this argument.
+#' @param details Whether to provide additional details in the result.
+#' Functions accepting this argument (like \code{mean_distance}) return
+#' additional information like the number of disconnected vertex pairs in
+#' the result when this parameter is set to \code{TRUE}.
+#' @param unconnected What to do if the graph is unconnected (not
+#' trongly connected if directed paths are considered). If TRUE, only
+#' the lengths of the existing paths are considered and averaged; if
+#' FALSE, the length of the missing paths are considered as having infinite
+#' length, making the mean distance infinite as well.
 #' @return For \code{distances} a numeric matrix with \code{length(to)}
 #' columns and \code{length(v)} rows. The shortest path length from a vertex to
 #' itself is always zero. For unreachable vertices \code{Inf} is included.
@@ -355,7 +357,10 @@ degree_distribution <- function(graph, cumulative=FALSE, ...) {
 #' shortest paths to the same vertex are collected into consecutive elements of
 #' the list.
 #' 
-#' For \code{mean_distance} a single number is returned.
+#' For \code{mean_distance} a single number is returned if \code{details=FALSE},
+#' or a named list with two entries: \code{res} is the mean distance as a numeric
+#' scalar and \code{unconnected} is the number of unconnected vertex pairs,
+#' also as a numeric scalar.
 #' 
 #' \code{distance_table} returns a named list with two entries: \code{res} is
 #' a numeric vector, the histogram of distances, \code{unconnected} is a

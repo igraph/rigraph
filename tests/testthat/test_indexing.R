@@ -147,13 +147,7 @@ test_that("[[ indexing works with filtering on both ends", {
 })
 
 test_that("[[ indexing is consistent with length()", {
-
   expect_that(length(g), equals(vcount(g)))
-
-  # Check that str() does not throw an error, which it did before when
-  # length() was not consistent with `[[`
-  invisible(str(g))
-
 })
 
 ################################################################

@@ -15,7 +15,13 @@
 \usage{
 distance_table(graph, directed = TRUE)
 
-mean_distance(graph, directed = TRUE, unconnected = TRUE)
+mean_distance(
+  graph,
+  weights = NULL,
+  directed = TRUE,
+  unconnected = TRUE,
+  details = FALSE
+)
 
 distances(
   graph,
@@ -51,12 +57,21 @@ all_shortest_paths(
 \item{directed}{Whether to consider directed paths in directed graphs,
 this argument is ignored for undirected graphs.}
 
+\item{weights}{Possibly a numeric vector giving edge weights. If this is
+\code{NULL} and the graph has a \code{weight} edge attribute, then the
+attribute is used. If this is \code{NA} then no weights are used (even if
+the graph has a \code{weight} attribute).}
+
 \item{unconnected}{What to do if the graph is unconnected (not
-strongly connected if directed paths are considered). If TRUE only
+trongly connected if directed paths are considered). If TRUE, only
 the lengths of the existing paths are considered and averaged; if
-FALSE the length of the missing paths are counted having length
-\code{vcount(graph)}, one longer than the longest possible geodesic
-in the network.}
+FALSE, the length of the missing paths are considered as having infinite
+length, making the mean distance infinite as well.}
+
+\item{details}{Whether to provide additional details in the result.
+Functions accepting this argument (like \code{mean_distance}) return
+additional information like the number of disconnected vertex pairs in
+the result when this parameter is set to \code{TRUE}.}
 
 \item{v}{Numeric vector, the vertices from which the shortest paths will be
 calculated.}
@@ -72,11 +87,6 @@ then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
 it will be considered. If \code{all}, the default, then the corresponding
 undirected graph will be used, ie. not directed paths are searched. This
 argument is ignored for undirected graphs.}
-
-\item{weights}{Possibly a numeric vector giving edge weights. If this is
-\code{NULL} and the graph has a \code{weight} edge attribute, then the
-attribute is used. If this is \code{NA} then no weights are used (even if
-the graph has a \code{weight} attribute).}
 
 \item{algorithm}{Which algorithm to use for the calculation. By default
 igraph tries to select the fastest suitable algorithm. If there are no
@@ -141,7 +151,10 @@ contains a shortest path from \code{from} to a vertex in \code{to}. The
 shortest paths to the same vertex are collected into consecutive elements of
 the list.
 
-For \code{mean_distance} a single number is returned.
+For \code{mean_distance} a single number is returned if \code{details=FALSE},
+or a named list with two entries: \code{res} is the mean distance as a numeric
+scalar and \code{unconnected} is the number of unconnected vertex pairs,
+also as a numeric scalar.
 
 \code{distance_table} returns a named list with two entries: \code{res} is
 a numeric vector, the histogram of distances, \code{unconnected} is a
@@ -191,8 +204,9 @@ non-negative edge weights.
 
 \code{mean_distance} calculates the average path length in a graph, by
 calculating the shortest paths between all pairs of vertices (both ways for
-directed graphs). This function does not consider edge weights currently and
-uses a breadth-first search.
+directed graphs). It uses a breadth-=first search for unweighted graphs and
+Dijkstra's algorithm for weighted ones. The latter only supports non-negative
+edge weights.
 
 \code{distance_table} calculates a histogram, by calculating the shortest
 path length between each pair of vertices. For directed graphs both

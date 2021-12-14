@@ -65,8 +65,6 @@ The currently used parameters in alphabetical order:
     attributes if the graph is modified. The default value is
     \code{list(weight="sum", name="concat", "ignore")}. See
     \code{\link{attribute.combination}} for details on this.}
-  \item{nexus.url}{The base URL of the default Nexus server. See
-    \code{\link{nexus}} for details.}
   \item{print.edge.attributes}{Logical constant, whether to print edge
     attributes when printing graphs. Defaults to \code{FALSE}.}
   \item{print.full}{Logical scalar, whether \code{\link{print.igraph}}

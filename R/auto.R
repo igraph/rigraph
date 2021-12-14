@@ -349,6 +349,30 @@ page_rank <- function(graph, algo=c("prpack", "arpack", "power"), vids=V(graph),
 }
 
 #' @export
+mean_distance <- function(graph, weights=NULL, directed=TRUE, unconnected=TRUE, details=FALSE) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  directed <- as.logical(directed)
+  unconnected <- as.logical(unconnected)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_average_path_length_dijkstra, graph, weights, directed, unconnected)
+  if (!details) {
+    res <- res$res
+  }
+  res
+}
+
+#' @export
 distance_table <- function(graph, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

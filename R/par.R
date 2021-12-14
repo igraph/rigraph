@@ -21,12 +21,11 @@
 ###################################################################
 
 .igraph.pars <- list("print.vertex.attributes"=FALSE,
-                    "print.edge.attributes"=FALSE,
-                    "print.graph.attributes"=FALSE,
-                    "verbose"=FALSE,
-                    "vertex.attr.comb"=list(name="concat", "ignore"),
-                    "edge.attr.comb"=list(weight="sum", name="concat",
-                      "ignore"),
+                     "print.edge.attributes"=FALSE,
+                     "print.graph.attributes"=FALSE,
+                     "verbose"=FALSE,
+                     "vertex.attr.comb"=list(name="concat", "ignore"),
+                     "edge.attr.comb"=list(weight="sum", name="concat", "ignore"),
                      "sparsematrices"=TRUE,
                      "nexus.url"="http://nexus.igraph.org",
                      "add.params"=TRUE,
@@ -97,8 +96,6 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #'     attributes if the graph is modified. The default value is
 #'     \code{list(weight="sum", name="concat", "ignore")}. See
 #'     \code{\link{attribute.combination}} for details on this.}
-#'   \item{nexus.url}{The base URL of the default Nexus server. See
-#'     \code{\link{nexus}} for details.}
 #'   \item{print.edge.attributes}{Logical constant, whether to print edge
 #'     attributes when printing graphs. Defaults to \code{FALSE}.}
 #'   \item{print.full}{Logical scalar, whether \code{\link{print.igraph}}

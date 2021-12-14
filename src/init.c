@@ -127,7 +127,7 @@ extern SEXP R_igraph_asymmetric_preference_game(SEXP, SEXP, SEXP, SEXP, SEXP, SE
 extern SEXP R_igraph_atlas(SEXP);
 extern SEXP R_igraph_authority_score(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_automorphisms(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_average_path_length(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_average_path_length_dijkstra(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_avg_nearest_neighbor_degree(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_barabasi_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -503,7 +503,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_atlas",                                      (DL_FUNC) &R_igraph_atlas,                                       1},
     {"R_igraph_authority_score",                            (DL_FUNC) &R_igraph_authority_score,                             4},
     {"R_igraph_automorphisms",                              (DL_FUNC) &R_igraph_automorphisms,                               3},
-    {"R_igraph_average_path_length",                        (DL_FUNC) &R_igraph_average_path_length,                         3},
+    {"R_igraph_average_path_length_dijkstra",               (DL_FUNC) &R_igraph_average_path_length_dijkstra,                4},
     {"R_igraph_avg_nearest_neighbor_degree",                (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                 5},
     {"R_igraph_barabasi_aging_game",                        (DL_FUNC) &R_igraph_barabasi_aging_game,                        12},
     {"R_igraph_barabasi_game",                              (DL_FUNC) &R_igraph_barabasi_game,                               9},

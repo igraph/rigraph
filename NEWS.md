@@ -16,12 +16,22 @@ Added:
 - `random_edge_walk()` to record the edges traversed during a random walk
 - `harmonic_centrality()` calculates the harmonic centrality of vertices,
   optionally with a cutoff on path lengths
+- `mean_distance()` now supports edge weights and it can also return the number
+  of unconnected vertex pairs when `details=TRUE` is passed as an argument
 
 Fixed:
 
 - `is_connected()` now returns FALSE for the null graph
 - Calling `length()` on a graph now returns the number of vertices to make it
   consistent with indexing the graph with `[[`.
+- `diameter()` now corrently returns infinity for disconnected graphs when
+  `unconnected=FALSE`. Previous versions returned the number of vertices plus
+  one, which was clearly invalid for weighted graphs.
+- `mean_distance()` now correctly treats the path length between disconnected
+  vertices as infinite when `unconnected=FALSE`. Previous versions used the
+  number of vertices plus one, adding a bias towards this number, even if the
+  graph was weighted and the number of vertices plus one was not a path length
+  that could safely have been considered as being longer than any "valid" path.
 
 Changed:
 
@@ -42,6 +52,15 @@ Deprecated:
 - Using `cutoff=0` for `closeness()`, `betweenness()` and `edge_betweenness()`
   is deprecated; if you want exact scores, use a negative cutoff. `cutoff=0`
   will be interpreted literally from igraph 1.4.0.
+- The `nexus_list()`, `nexus_info()`, `nexus_get()` and `nexus_search()`
+  functions now return an error informing the user that the Nexus graph
+  repository has been taken offline (actually, several years ago). These
+  functions will be removed in 1.4.0.
+
+Removed:
+
+- The deprecated `page_rank_old()` function and the deprecated `power` method of
+  `page_rank()` were removed.
 
 # igraph 1.2.9
 

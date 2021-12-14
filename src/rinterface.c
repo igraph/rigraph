@@ -4641,25 +4641,6 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
   return result;
 }
 
-SEXP R_igraph_average_path_length(SEXP graph, SEXP pdirected,
-				  SEXP punconnected) {
-
-  igraph_t g;
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t unconnected=LOGICAL(punconnected)[0];
-  igraph_real_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_average_path_length(&g, &res, /* unconn_pairs = */ 0, directed, unconnected);
-
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_star(SEXP pn, SEXP pmode, SEXP pcenter) {
 
   igraph_t g;
@@ -10845,6 +10826,47 @@ SEXP R_igraph_subgraph_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
   IGRAPH_FINALLY_CLEAN(1);
   igraph_es_destroy(&c_eids);
   result=res;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
+/ igraph_average_path_length_dijkstra        /
+/-------------------------------------------*/
+SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_real_t c_res;
+  igraph_real_t c_unconnected_pairs;
+  igraph_vector_t c_weights;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_unconnected;
+  SEXP res;
+  SEXP unconnected_pairs;
+
+  SEXP result, names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  c_directed=LOGICAL(directed)[0];
+  c_unconnected=LOGICAL(unconnected)[0];
+                                        /* Call igraph */
+  igraph_average_path_length_dijkstra(&c_graph, &c_res, &c_unconnected_pairs, (isNull(weights) ? 0 : &c_weights), c_directed, c_unconnected);
+
+                                        /* Convert output */
+  PROTECT(result=NEW_LIST(2));
+  PROTECT(names=NEW_CHARACTER(2));
+  PROTECT(res=NEW_NUMERIC(1));
+  REAL(res)[0]=c_res;
+  PROTECT(unconnected_pairs=NEW_NUMERIC(1));
+  REAL(unconnected_pairs)[0]=c_unconnected_pairs;
+  SET_VECTOR_ELT(result, 0, res);
+  SET_VECTOR_ELT(result, 1, unconnected_pairs);
+  SET_STRING_ELT(names, 0, CREATE_STRING_VECTOR("res"));
+  SET_STRING_ELT(names, 1, CREATE_STRING_VECTOR("unconnected"));
+  SET_NAMES(result, names);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(result);
