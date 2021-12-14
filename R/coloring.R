@@ -13,7 +13,7 @@
 #' @param graph The graph object to color
 #' @param heuristic The selection heuristic for the next vertex to consider.
 #' Currently only one heuristic is supported:
-#' \item{\code{colored_neighbors}}{This heuristic selects the vertex with the
+#' \item{colored_neighbors}{This heuristic selects the vertex with the
 #' largest number of already colored neighbors.}
 #' @return A numeric vector where item \code{i} contains the color index
 #' associated to vertex \code{i}
@@ -21,5 +21,8 @@
 #' @export
 #' @keywords graphs
 #' @examples
-
+#'
+#' g <- make_graph("petersen")
+#' greedy_vertex_coloring(g)
+#'
 greedy_vertex_coloring <- greedy_vertex_coloring
