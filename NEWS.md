@@ -18,6 +18,9 @@ Added:
   optionally with a cutoff on path lengths
 - `mean_distance()` now supports edge weights and it can also return the number
   of unconnected vertex pairs when `details=TRUE` is passed as an argument
+- `greedy_vertex_coloring()` finds vertex colorings based on a simple greedy
+  algorithm.
+- `bridges()` finds the bridges (cut-edges) of a graph
 
 Fixed:
 

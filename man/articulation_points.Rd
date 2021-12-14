@@ -3,28 +3,33 @@
 \name{articulation_points}
 \alias{articulation_points}
 \alias{articulation.points}
-\title{Articulation points of a graph}
+\alias{bridges}
+\title{Articulation points and bridges of a graph}
 \usage{
 articulation_points(graph)
+
+bridges(graph)
 }
 \arguments{
 \item{graph}{The input graph. It is treated as an undirected graph, even if
 it is directed.}
 }
 \value{
-A numeric vector giving the vertex ids of the articulation points of
-the input graph.
+For \code{articulation_points}, a numeric vector giving the vertex
+IDs of the articulation points of the input graph. For \code{bridges}, a
+numeric vector giving the edge IDs of the bridges of the input graph.
 }
 \description{
-Articuation points or cut vertices are vertices whose removal increases the
-number of connected components in a graph.
+\code{articulation_points} finds the articulation points (or cut vertices)
 }
 \details{
-Articuation points or cut vertices are vertices whose removal increases the
-number of connected components in a graph. If the original graph was
-connected, then the removal of a single articulation point makes it
-undirected. If a graph contains no articulation points, then its vertex
-connectivity is at least two.
+Articulation points or cut vertices are vertices whose removal increases the
+number of connected components in a graph. Similarly, bridges or cut-edges
+are edges whose removal increases the number of connected components in a
+graph. If the original graph was connected, then the removal of a single
+articulation point or a single bridge makes it undirected. If a graph
+contains no articulation points, then its vertex connectivity is at least
+two.
 }
 \examples{
 
@@ -32,10 +37,15 @@ g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
 clu <- components(g)$membership
 g <- add_edges(g, c(match(1, clu), match(2, clu)) )
 articulation_points(g)
+
+g <- make_graph("krackhardt_kite")
+bridges(g)
+
 }
 \seealso{
 \code{\link{biconnected_components}}, \code{\link{components}},
-\code{\link{is_connected}}, \code{\link{vertex_connectivity}}
+\code{\link{is_connected}}, \code{\link{vertex_connectivity}},
+\code{\link{edge_connectivity}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

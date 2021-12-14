@@ -12613,6 +12613,35 @@ SEXP R_igraph_biconnected_components(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_bridges                             /
+/-------------------------------------------*/
+SEXP R_igraph_bridges(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_res;
+  SEXP res;
+
+  SEXP result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+                                        /* Call igraph */
+  igraph_bridges(&c_graph, &c_res);
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_to_SEXPp1(&c_res));
+  igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  result=res;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
 / igraph_layout_star                         /
 /-------------------------------------------*/
 SEXP R_igraph_layout_star(SEXP graph, SEXP center, SEXP order) {
@@ -15900,6 +15929,37 @@ SEXP R_igraph_tree_game(SEXP n, SEXP directed, SEXP method) {
   igraph_destroy(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   result=graph;
+
+  UNPROTECT(1);
+  return(result);
+}
+
+/*-------------------------------------------/
+/ igraph_vertex_coloring_greedy              /
+/-------------------------------------------*/
+SEXP R_igraph_vertex_coloring_greedy(SEXP graph, SEXP heuristic) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_int_t c_colors;
+  igraph_coloring_greedy_t c_heuristic;
+  SEXP colors;
+
+  SEXP result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_int_init(&c_colors, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
+  c_heuristic=(igraph_coloring_greedy_t) INTEGER(heuristic)[0];
+                                        /* Call igraph */
+  igraph_vertex_coloring_greedy(&c_graph, &c_colors, c_heuristic);
+
+                                        /* Convert output */
+  PROTECT(colors=R_igraph_vector_int_to_SEXP(&c_colors));
+  igraph_vector_int_destroy(&c_colors);
+  IGRAPH_FINALLY_CLEAN(1);
+  result=colors;
 
   UNPROTECT(1);
   return(result);

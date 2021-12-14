@@ -980,6 +980,20 @@ biconnected_components <- function(graph) {
 }
 
 #' @export
+bridges <- function(graph) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_bridges, graph)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
+  res
+}
+
+#' @export
 similarity.jaccard <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1943,6 +1957,22 @@ sample_tree <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
   # Function call
   res <- .Call(C_R_igraph_tree_game, n, directed, method)
 
+  res
+}
+
+#' @export
+greedy_vertex_coloring <- function(graph, heuristic=c("colored_neighbors")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  heuristic <- switch(igraph.match.arg(heuristic), "colored_neighbors"=0L)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_vertex_coloring_greedy, graph, heuristic)
+  res <- res+1L
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", )
+  }
   res
 }
 

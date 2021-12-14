@@ -138,6 +138,7 @@ extern SEXP R_igraph_biconnected_components(SEXP);
 extern SEXP R_igraph_bipartite_game_gnm(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_game_gnp(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_bipartite_projection_size(SEXP, SEXP);
+extern SEXP R_igraph_bridges(SEXP);
 extern SEXP R_igraph_callaway_traits_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_canonical_permutation(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_centralization(SEXP, SEXP, SEXP);
@@ -375,6 +376,7 @@ extern SEXP R_igraph_triad_census(SEXP);
 extern SEXP R_igraph_unfold_tree(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_union(SEXP, SEXP);
 extern SEXP R_igraph_vcount(SEXP);
+extern SEXP R_igraph_vertex_coloring_greedy(SEXP, SEXP);
 extern SEXP R_igraph_vertex_connectivity(SEXP, SEXP);
 extern SEXP R_igraph_vertex_disjoint_paths(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_watts_strogatz_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -514,6 +516,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_bipartite_game_gnm",                         (DL_FUNC) &R_igraph_bipartite_game_gnm,                          5},
     {"R_igraph_bipartite_game_gnp",                         (DL_FUNC) &R_igraph_bipartite_game_gnp,                          5},
     {"R_igraph_bipartite_projection_size",                  (DL_FUNC) &R_igraph_bipartite_projection_size,                   2},
+    {"R_igraph_bridges",                                    (DL_FUNC) &R_igraph_bridges,                                     1},
     {"R_igraph_callaway_traits_game",                       (DL_FUNC) &R_igraph_callaway_traits_game,                        6},
     {"R_igraph_canonical_permutation",                      (DL_FUNC) &R_igraph_canonical_permutation,                       3},
     {"R_igraph_centralization",                             (DL_FUNC) &R_igraph_centralization,                              3},
@@ -751,6 +754,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_unfold_tree",                                (DL_FUNC) &R_igraph_unfold_tree,                                 3},
     {"R_igraph_union",                                      (DL_FUNC) &R_igraph_union,                                       2},
     {"R_igraph_vcount",                                     (DL_FUNC) &R_igraph_vcount,                                      1},
+    {"R_igraph_vertex_coloring_greedy",                     (DL_FUNC) &R_igraph_vertex_coloring_greedy,                      2},
     {"R_igraph_vertex_connectivity",                        (DL_FUNC) &R_igraph_vertex_connectivity,                         2},
     {"R_igraph_vertex_disjoint_paths",                      (DL_FUNC) &R_igraph_vertex_disjoint_paths,                       3},
     {"R_igraph_watts_strogatz_game",                        (DL_FUNC) &R_igraph_watts_strogatz_game,                         6},
