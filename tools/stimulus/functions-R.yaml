@@ -1233,6 +1233,13 @@ igraph_random_spanning_tree:
     NAME: sample_spanning_tree
 
 #######################################
+# Coloring
+#######################################
+
+igraph_vertex_coloring_greedy:
+    NAME: greedy_vertex_coloring
+
+#######################################
 # Other, (yet) undocumented functions
 #######################################
 

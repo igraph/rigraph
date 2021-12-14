@@ -663,22 +663,58 @@ STRVECTOR:
             IGRAPH_FINALLY_CLEAN(1);
 
 BIPARTITE_TYPES:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
+    CALL:
+        IN: '(isNull(%I%) ? 0 : &%C%)'
+        OUT: '&%C%'
     CTYPE: igraph_vector_bool_t
     INCONV:
         IN: if (!isNull(%I%)) { R_SEXP_to_vector_bool(%I%, &%C%); }
+        OUT: |-
+            if (0 != igraph_vector_bool_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_bool_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_bool_to_SEXP(&%C%));
+            igraph_vector_bool_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 VERTEX_COLOR:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
+    CALL:
+        IN: '(isNull(%I%) ? 0 : &%C%)'
+        OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: if (!isNull(%I%)) { R_SEXP_to_vector_int(%I%, &%C%); }
+        OUT: |-
+            if (0 != igraph_vector_int_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_COLOR:
-    CALL: '(isNull(%I%) ? 0 : &%C%)'
+    CALL:
+        IN: '(isNull(%I%) ? 0 : &%C%)'
+        OUT: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
         IN: if (!isNull(%I%)) { R_SEXP_to_vector_int(%I%, &%C%); }
+        OUT: |-
+            if (0 != igraph_vector_int_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            igraph_vector_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 COMMCMP:
     CTYPE: igraph_community_comparison_t
@@ -962,4 +998,9 @@ RANDOM_TREE_METHOD:
     CTYPE: igraph_random_tree_t
     INCONV:
         IN: '%C%=(igraph_random_tree_t) INTEGER(%I%)[0];'
+
+GREEDY_COLORING_HEURISTIC:
+    CTYPE: igraph_coloring_greedy_t
+    INCONV:
+        IN: '%C%=(igraph_coloring_greedy_t) INTEGER(%I%)[0];'
 

@@ -203,6 +203,11 @@ BIPARTITE_TYPES:
         } else {
           stop("Not a bipartite graph, supply `types' argument")
         }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
 
 VERTEX_COLOR:
     INCONV: |-
@@ -216,6 +221,12 @@ VERTEX_COLOR:
         if (!is.null(%I%)) {
           %I% <- as.integer(%I%)-1L
         }
+    OUTCONV:
+        OUT: |-
+            %I% <- %I%+1L
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
 
 EDGE_COLOR:
     INCONV: |-
@@ -229,6 +240,9 @@ EDGE_COLOR:
         if (!is.null(%I%)) {
           %I% <- as.integer(%I%)-1L
         }
+    OUTCONV:
+        OUT: |-
+            %I% <- %I%+1L
 
 'NULL':
     CALL: {}
@@ -451,4 +465,10 @@ RANDOM_TREE_METHOD:
         LERW: c("lerw", "prufer")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "prufer"=0L, "lerw"=1L)
+
+GREEDY_COLORING_HEURISTIC:
+    DEFAULT:
+        NEIGHBORS: c("colored_neighbors")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L)
 
