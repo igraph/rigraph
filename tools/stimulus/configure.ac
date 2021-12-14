@@ -78,6 +78,8 @@ if test $graphml_support = yes; then
   else
     XML2_LIBS=`$XML2CONFIG --libs`
     XML2_CFLAGS=`$XML2CONFIG --cflags`
+    OLDLIBS=${LIBS}
+    LIBS=${XML2_LIBS}
     AC_CHECK_LIB([xml2], [xmlSAXUserParseFile], [
       OLDCFLAGS=${CFLAGS}
       OLDCPPFLAGS=${CPPFLAGS}
@@ -98,6 +100,7 @@ if test $graphml_support = yes; then
     ], [
       graphml_support=no
     ])
+    LIBS=${OLDLIBS}
   fi
 fi
 AC_SUBST(HAVE_LIBXML)
