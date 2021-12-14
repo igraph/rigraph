@@ -2,12 +2,17 @@
 % Please edit documentation in R/trees.R
 \name{make_from_prufer}
 \alias{make_from_prufer}
+\alias{from_prufer}
 \title{Create an undirected tree graph from its Prufer sequence}
 \usage{
 make_from_prufer(prufer)
+
+from_prufer(...)
 }
 \arguments{
 \item{prufer}{The Prufer sequence to convert into a graph}
+
+\item{...}{Passed to \code{make_from_prufer}}
 }
 \value{
 A graph object.
