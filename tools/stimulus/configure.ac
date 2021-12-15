@@ -93,13 +93,13 @@ if test $graphml_support = yes; then
         HAVE_LIBXML=1
 	AC_DEFINE([HAVE_LIBXML], [1], [Define to 1 if you have the libxml2 libraries installed])
         CFLAGS="${OLDCFLAGS} ${XML2_CFLAGS}"
-	CPPFLAGS="${OLDCFLAGS} ${XML2_CFLAGS}"
+	CPPFLAGS="${OLDCPPFLAGS} ${XML2_CFLAGS}"
 	AC_SUBST(XML2_LIBS)
 	AC_SUBST(XML2_CFLAGS)
       ], [
         graphml_support=no
         CFLAGS=${OLDCFLAGS}
-	CPPFLAGS=${OLDCPPFLAGS}
+        CPPFLAGS=${OLDCPPFLAGS}
       ])
     ], [
       graphml_support=no
