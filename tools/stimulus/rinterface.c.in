@@ -3689,13 +3689,13 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
   igraph_vector_t neis;
   SEXP result;
   igraph_real_t vid;
-  igraph_integer_t mode;
+  igraph_neimode_t mode;
 
   igraph_vector_init(&neis, 0);
   vid=REAL(pvid)[0];
-  mode=(igraph_integer_t) REAL(pmode)[0];
+  mode = (igraph_neimode_t) Rf_asInteger(pmode);
   R_SEXP_to_igraph(graph, &g);
-  igraph_neighbors(&g, &neis, (igraph_integer_t) vid, (igraph_neimode_t) mode);
+  igraph_neighbors(&g, &neis, (igraph_integer_t) vid, mode);
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&neis)));
   igraph_vector_copy_to(&neis, REAL(result));
@@ -3711,13 +3711,13 @@ SEXP R_igraph_incident(SEXP graph, SEXP pvid, SEXP pmode) {
   igraph_vector_t neis;
   SEXP result;
   igraph_real_t vid;
-  igraph_integer_t mode;
+  igraph_neimode_t mode;
 
   igraph_vector_init(&neis, 0);
   vid=REAL(pvid)[0];
-  mode=(igraph_integer_t) REAL(pmode)[0];
+  mode = (igraph_neimode_t) Rf_asInteger(pmode);
   R_SEXP_to_igraph(graph, &g);
-  igraph_incident(&g, &neis, (igraph_integer_t) vid, (igraph_neimode_t) mode);
+  igraph_incident(&g, &neis, (igraph_integer_t) vid, mode);
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&neis)));
   igraph_vector_copy_to(&neis, REAL(result));
@@ -3795,14 +3795,14 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP pmode, SEXP ploops) {
   igraph_t g;
   igraph_vs_t vs;
   igraph_vector_t res;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
   igraph_bool_t loops=LOGICAL(ploops)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(vids, &g, &vs);
   igraph_vector_init(&res, 0);
-  igraph_degree(&g, &res, vs, (igraph_neimode_t) mode, loops);
+  igraph_degree(&g, &res, vs, mode, loops);
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
   igraph_vector_copy_to(&res, REAL(result));
@@ -3899,13 +3899,13 @@ SEXP R_igraph_subcomponent(SEXP graph, SEXP pvertex, SEXP pmode) {
 
   igraph_t g;
   igraph_real_t vertex=REAL(pvertex)[0];
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_t res;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_init(&res, 0);
-  igraph_subcomponent(&g, &res, vertex, (igraph_neimode_t) mode);
+  igraph_subcomponent(&g, &res, vertex, mode);
 
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
   igraph_vector_copy_to(&res, REAL(result));
@@ -4112,7 +4112,7 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   igraph_bool_t outpref=LOGICAL(poutpref)[0];
   igraph_real_t A=REAL(pA)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_barabasi_algorithm_t algo=(igraph_barabasi_algorithm_t) REAL(palgo)[0];
+  igraph_barabasi_algorithm_t algo = (igraph_barabasi_algorithm_t) Rf_asInteger(palgo);
   igraph_t start, *ppstart=0;
   SEXP result;
 
@@ -5354,7 +5354,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
 			SEXP pminelements) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_connectedness_t mode = (igraph_connectedness_t) Rf_asInteger(pmode);
   igraph_integer_t maxcompno=(igraph_integer_t) REAL(pmaxcompno)[0];
   igraph_integer_t minelements=(igraph_integer_t) REAL(pminelements)[0];
   igraph_vector_ptr_t comps;
@@ -5368,8 +5368,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_ptr_init(&comps, 0);
   IGRAPH_FINALLY(igraph_vector_ptr_destroy, &comps);
-  igraph_decompose(&g, &comps, (igraph_connectedness_t) mode, maxcompno,
-		   minelements);
+  igraph_decompose(&g, &comps, mode, maxcompno, minelements);
   PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&comps)));
   for (i=0; i<igraph_vector_ptr_size(&comps); i++) {
     SET_VECTOR_ELT(result, i, R_igraph_to_SEXP(VECTOR(comps)[i]));

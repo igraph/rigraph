@@ -115,28 +115,18 @@ CONNECTEDNESS:
 
 NEIMODE:
     CTYPE: igraph_neimode_t
-    INCONV:
-        IN: '%C%=(igraph_neimode_t) REAL(%I%)[0];'
 
 TODIRECTED:
     CTYPE: igraph_to_directed_t
-    INCONV:
-        IN: '%C%=(igraph_to_directed_t) REAL(%I%)[0];'
 
 TOUNDIRECTED:
     CTYPE: igraph_to_undirected_t
-    INCONV:
-        IN: '%C%=(igraph_to_undirected_t) REAL(%I%)[0];'
 
 BLISSSH:
     CTYPE: igraph_bliss_sh_t
-    INCONV:
-        IN: '%C%=REAL(%I%)[0];'
 
 ADD_WEIGHTS:
     CTYPE: igraph_add_weights_t
-    INCONV:
-        IN: '%C%=REAL(%I%)[0];'
 
 VECTOR:
     CALL: '&%C%'
@@ -718,13 +708,9 @@ EDGE_COLOR:
 
 COMMCMP:
     CTYPE: igraph_community_comparison_t
-    INCONV:
-        IN: '%C%=(igraph_community_comparison_t) REAL(%I%)[0];'
 
 SUBGRAPH_IMPL:
     CTYPE: igraph_subgraph_implementation_t
-    INCONV:
-        IN: '%C%=(igraph_subgraph_implementation_t) REAL(%I%)[0];'
 
 VERTEX_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
@@ -770,18 +756,12 @@ RECIP:
 
 SCGMAT:
     CTYPE: igraph_scg_matrix_t
-    INCONV:
-        IN: '%C%=(igraph_scg_matrix_t) REAL(%I%)[0];'
 
 SCGALGO:
     CTYPE: igraph_scg_algorithm_t
-    INCONV:
-        IN: '%C%=(igraph_scg_algorithm_t) REAL(%I%)[0];'
 
 SCGNORM:
     CTYPE: igraph_scg_norm_t
-    INCONV:
-        IN: '%C%=(igraph_scg_norm_t) REAL(%I%)[0];'
 
 SCGDIR:
     CTYPE: igraph_integer_t
@@ -951,8 +931,6 @@ SIRLIST:
 
 PAGERANKALGO:
     CTYPE: igraph_pagerank_algo_t
-    INCONV:
-        IN: '%C%=(igraph_pagerank_algo_t) INTEGER(%I%)[0];'
 
 PAGERANKOPT:
     CTYPE: |-
@@ -981,26 +959,15 @@ DEPRECATED:
 
 LSETYPE:
     CTYPE: igraph_laplacian_spectral_embedding_type_t
-    INCONV:
-        IN: '%C%=(igraph_laplacian_spectral_embedding_type_t) INTEGER(%I%)[0];'
 
 RWSTUCK:
     CTYPE: igraph_random_walk_stuck_t
-    INCONV:
-        IN: '%C%=(igraph_random_walk_stuck_t) INTEGER(%I%)[0];'
 
 EDGE_TYPE_SW:
     CTYPE: igraph_edge_type_sw_t
-    INCONV:
-        IN: '%C%=(igraph_edge_type_sw_t) INTEGER(%I%)[0];'
 
 RANDOM_TREE_METHOD:
     CTYPE: igraph_random_tree_t
-    INCONV:
-        IN: '%C%=(igraph_random_tree_t) INTEGER(%I%)[0];'
 
 GREEDY_COLORING_HEURISTIC:
     CTYPE: igraph_coloring_greedy_t
-    INCONV:
-        IN: '%C%=(igraph_coloring_greedy_t) INTEGER(%I%)[0];'
-
