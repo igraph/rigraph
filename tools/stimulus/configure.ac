@@ -138,7 +138,7 @@ if test $glpk_support = yes; then
     AC_CHECK_HEADER([glpk.h], [
       AC_EGREP_CPP(yes, [
         #include <glpk.h>
-        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 38)
+        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 57)
           yes
         #endif
       ], [
