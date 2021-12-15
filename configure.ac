@@ -1,4 +1,4 @@
-AC_INIT(igraph, 1.2.9.9079, csardi.gabor@gmail.com)
+AC_INIT(igraph, 1.2.10.9074, csardi.gabor@gmail.com)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
@@ -138,7 +138,7 @@ if test $glpk_support = yes; then
     AC_CHECK_HEADER([glpk.h], [
       AC_EGREP_CPP(yes, [
         #include <glpk.h>
-        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 38)
+        #if GLP_MAJOR_VERSION > 4 || (GLP_MAJOR_VERSION == 4 && GLP_MINOR_VERSION >= 57)
           yes
         #endif
       ], [
