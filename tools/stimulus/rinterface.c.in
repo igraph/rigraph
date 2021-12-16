@@ -7022,21 +7022,6 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   return(result);
 }
 
-SEXP R_igraph_clique_number(SEXP graph) {
-
-  igraph_t g;
-  igraph_integer_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_clique_number(&g, &res);
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_independent_vertex_sets(SEXP graph,
 				      SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;

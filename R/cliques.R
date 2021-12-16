@@ -208,15 +208,7 @@ count_max_cliques <- function(graph, min=NULL, max=NULL,
 
 #' @export
 
-clique_num <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object");
-  }
-  
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_clique_number, graph)
-}
-
+clique_num <- clique_num
 
 
 #' Independent vertex sets

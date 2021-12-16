@@ -592,10 +592,16 @@ igraph_decompose:
 igraph_cliques:
     IGNORE: RR, RC
 
+igraph_cliques_callback:
+    IGNORE: RR, RC, RInit
+
 igraph_largest_cliques:
     IGNORE: RR, RC
 
 igraph_maximal_cliques:
+    IGNORE: RR, RC, RInit
+
+igraph_maximal_cliques_callback:
     IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques_count:
@@ -607,7 +613,10 @@ igraph_maximal_cliques_file:
     NAME: maximal.cliques.file
 
 igraph_clique_number:
-    IGNORE: RR, RC
+    NAME: clique_num
+
+igraph_weighted_cliques_callback:
+    IGNORE: RR, RC, RInit
 
 igraph_independent_vertex_sets:
     IGNORE: RR, RC
