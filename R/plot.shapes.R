@@ -422,14 +422,19 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.frame.color) != 1 && !is.null(v)) {
     vertex.frame.color <- vertex.frame.color[v]
   }
+  vertex.frame.width <- params("vertex", "frame.width")
+  if (length(vertex.frame.width) != 1 && !is.null(v)) {
+    vertex.frame.width <- vertex.frame.width[v]
+  }
   vertex.size        <- 1/200 * params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
+
   vertex.size <- rep(vertex.size, length=nrow(coords))
   
   symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
-          circles=vertex.size, add=TRUE, inches=FALSE)
+          circles=vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
 }
 
 .igraph.shape.square.clip <- function(coords, el, params,
