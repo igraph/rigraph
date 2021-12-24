@@ -433,8 +433,17 @@ add_shape <- function(shape, clip=shape_noclip,
 
   vertex.size <- rep(vertex.size, length=nrow(coords))
   
-  symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
+  if (length(vertex.frame.width) ==1) {
+    symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
           circles=vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
+  } else {
+    mapply(coords[,1], coords[,2], vertex.color, vertex.frame.color,
+           vertex.size, vertex.frame.width,
+           FUN=function(x, y, bg, fg, size, lwd) {
+               symbols(x=x, y=y, bg=bg, fg=fg, lwd=lwd,
+                       circles=size, add=TRUE, inches=FALSE)
+           })
+  }
 }
 
 .igraph.shape.square.clip <- function(coords, el, params,
@@ -510,14 +519,27 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.frame.color) != 1 && !is.null(v)) {
     vertex.frame.color <- vertex.frame.color[v]
   }
+  vertex.frame.width <- params("vertex", "frame.width")
+  if (length(vertex.frame.width) != 1 && !is.null(v)) {
+    vertex.frame.width <- vertex.frame.width[v]
+  }
   vertex.size        <- 1/200 * params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
   vertex.size <- rep(vertex.size, length=nrow(coords))
   
-  symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
-          squares=2*vertex.size, add=TRUE, inches=FALSE)
+  if (length(vertex.frame.width) ==1) {
+    symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
+          squares=2*vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
+  } else {
+    mapply(coords[,1], coords[,2], vertex.color, vertex.frame.color,
+           vertex.size, vertex.frame.width,
+           FUN=function(x, y, bg, fg, size, lwd) {
+               symbols(x=x, y=y, bg=bg, fg=fg, lwd=lwd,
+                       square=2*size, add=TRUE, inches=FALSE)
+           })
+  }
 }  
 
 .igraph.shape.csquare.clip <- function(coords, el, params,
@@ -659,6 +681,10 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.frame.color) != 1 && !is.null(v)) {
     vertex.frame.color <- vertex.frame.color[v]
   }
+  vertex.frame.width <- params("vertex", "frame.width")
+  if (length(vertex.frame.width) != 1 && !is.null(v)) {
+    vertex.frame.width <- vertex.frame.width[v]
+  }
   vertex.size        <- 1/200 * params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
@@ -670,8 +696,17 @@ add_shape <- function(shape, clip=shape_noclip,
   }
   vertex.size <- cbind(vertex.size, vertex.size2)
   
-  symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
-          rectangles=2*vertex.size, add=TRUE, inches=FALSE)
+  if (length(vertex.frame.width) ==1) {
+    symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
+          rectangles=2*vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
+  } else {
+    mapply(coords[,1], coords[,2], vertex.color, vertex.frame.color,
+           vertex.size[,1], vertex.size[,2], vertex.frame.width,
+           FUN=function(x, y, bg, fg, size, size2 , lwd) {
+               symbols(x=x, y=y, bg=bg, fg=fg, lwd=lwd,
+                       rectangles=2*cbind(size,size2), add=TRUE, inches=FALSE)
+           })
+  }
 }
 
 .igraph.shape.crectangle.clip <- function(coords, el, params,
