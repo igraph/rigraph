@@ -472,3 +472,10 @@ GREEDY_COLORING_HEURISTIC:
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L)
 
+REALIZE_DEGSEQ_METHOD:
+    DEFAULT:
+        SMALLEST: c("smallest", "largest", "index")
+        LARGEST: c("largest", "smallest", "index")
+        INDEX: c("index", "smallest", "largest")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "smallest"=0L, "largest"=1L, "index"=2L)
