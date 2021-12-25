@@ -21,6 +21,10 @@ Added:
 - `greedy_vertex_coloring()` finds vertex colorings based on a simple greedy
   algorithm.
 - `bridges()` finds the bridges (cut-edges) of a graph
+- The frame width of circle, rectangle and square vertex shapes can now be
+  adjusted on plots with the `frame.width` vertex attribute or the
+  `vertex.frame.width` keyword argumen, thanks to @simoncarrignon .
+  See PR #500 for more details.
 
 Fixed:
 
