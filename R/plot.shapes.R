@@ -537,7 +537,7 @@ add_shape <- function(shape, clip=shape_noclip,
            vertex.size, vertex.frame.width,
            FUN=function(x, y, bg, fg, size, lwd) {
                symbols(x=x, y=y, bg=bg, fg=fg, lwd=lwd,
-                       square=2*size, add=TRUE, inches=FALSE)
+                       squares=2*size, add=TRUE, inches=FALSE)
            })
   }
 }  
