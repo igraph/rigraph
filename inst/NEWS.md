@@ -1,3 +1,9 @@
+# igraph 1.2.11
+
+Dec 27, 2021
+
+No user visible changes.
+
 # igraph 1.2.10
 
 Dec 14, 2021
