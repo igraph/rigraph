@@ -80,27 +80,23 @@ if test $graphml_support = yes; then
   if test "$XML2CONFIG" = "none"; then
     graphml_support=no
   else
+    # xml2-config puts only preprocessor flags in --cflags (i.e. -D and -I) so
+    # we can put them in XML2_CPPFLAGS. This might not be true for other
+    # libraries, though.
+    XML2_CPPFLAGS=`$XML2CONFIG --cflags`
     XML2_LIBS=`$XML2CONFIG --libs`
-    XML2_CFLAGS=`$XML2CONFIG --cflags`
     OLDLIBS=${LIBS}
     LIBS=${XML2_LIBS}
     AC_CHECK_LIB([xml2], [xmlSAXUserParseFile], [
-      OLDCFLAGS=${CFLAGS}
       OLDCPPFLAGS=${CPPFLAGS}
-      CFLAGS=${XML2_CFLAGS}
-      CPPFLAGS=${XML2_CFLAGS}
+      CPPFLAGS=${XML2_CPPFLAGS}
       AC_CHECK_HEADER([libxml/parser.h], [
         HAVE_LIBXML=1
-	AC_DEFINE([HAVE_LIBXML], [1], [Define to 1 if you have the libxml2 libraries installed])
-        CFLAGS="${OLDCFLAGS} ${XML2_CFLAGS}"
-	CPPFLAGS="${OLDCPPFLAGS} ${XML2_CFLAGS}"
-	AC_SUBST(XML2_LIBS)
-	AC_SUBST(XML2_CFLAGS)
+        AC_DEFINE([HAVE_LIBXML], [1], [Define to 1 if you have the libxml2 libraries installed])
       ], [
         graphml_support=no
-        CFLAGS=${OLDCFLAGS}
-        CPPFLAGS=${OLDCPPFLAGS}
       ])
+      CPPFLAGS=${OLDCPPFLAGS}
     ], [
       graphml_support=no
     ])
@@ -108,6 +104,8 @@ if test $graphml_support = yes; then
   fi
 fi
 AC_SUBST(HAVE_LIBXML)
+AC_SUBST(XML2_LIBS)
+AC_SUBST(XML2_CPPFLAGS)
 
 AC_LANG_PUSH([C++])
 HAVE_GMP=0
