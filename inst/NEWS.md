@@ -69,6 +69,12 @@ Removed:
 - The deprecated `page_rank_old()` function and the deprecated `power` method of
   `page_rank()` were removed.
 
+# igraph 1.2.11
+
+Dec 27, 2021
+
+No user visible changes.
+
 # igraph 1.2.10
 
 Dec 14, 2021
