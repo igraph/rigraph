@@ -106,13 +106,13 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
 #' @param loops Logical scalar, whether loop edges are allowed in the rewired
-#'   graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed int the
-#'   generated graph.
+#' graph.
+#' @param multiple Logical scalar, whether multiple edges are allowed in the
+#' generated graph.
 #' @param mode Character string, specifies which endpoint of the edges to rewire
-#'   in directed graphs. \dQuote{all} rewires both endpoints, \dQuote{in} rewires
-#'   the start (tail) of each directed edge, \dQuote{out] rewires the end (head)
-#'   of each directed edge. Ignored for undirected graphs.
+#' in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
+#' the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
+#' of each directed edge. Ignored for undirected graphs.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family rewiring functions
@@ -129,7 +129,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' # Rewiring the start of each directed edge preserves the in-degree distribution
 #' # but not the out-degree distribution
 #' g <- barabasi.game(1000)
-#' g2 <- g %>% rewire(each_edge(mode="in", multiple=T, prob=0.2))
+#' g2 <- g %>% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
 #' degree(g, mode="in") == degree(g2, mode="in")
 
 each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {

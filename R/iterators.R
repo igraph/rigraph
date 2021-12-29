@@ -68,20 +68,25 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' Two graphs are considered identical by this function if and only if
 #' they are represented in exactly the same way in the internal R
 #' representation. This means that the two graphs must have the same
-#' list of vertices and edges, in exactly the same order, with same directness
-#' and identical graph, vertex and edge attributes.
+#' list of vertices and edges, in exactly the same order, with same
+#' directedness, and the two graphs must also have identical graph, vertex and
+#' edge attributes. 
 #'
 #' This is similar to \code{identical} in the \code{base} package,
 #' but it ignores the mutable piece of igraph objects; those might be
 #' different even if the two graphs are identical.
 #' 
+#' Attribute comparison can be turned off with the \code{attrs} parameter if
+#' the attributes of the two graphs are allowed to be different.
+#'
 #' @param g1,g2 The two graphs
+#' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
 
-identical_graphs <- function(g1, g2) {
+identical_graphs <- function(g1, g2, attrs=TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  .Call(C_R_igraph_identical_graphs, g1, g2)
+  .Call(C_R_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 
 add_vses_graph_ref <- function(vses, graph) {

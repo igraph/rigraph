@@ -60,6 +60,11 @@ igraph_get_eids:
 igraph_incident:
     IGNORE: RR, RC
 
+igraph_is_same_graph:
+    # Not needed in R; we can simply compare things in the R layer without
+    # calling into C
+    IGNORE: RR, RC, RInit
+
 #######################################
 # Constructors, deterministic
 #######################################
