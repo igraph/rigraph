@@ -6816,24 +6816,6 @@ SEXP R_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_rewire_edges(SEXP graph, SEXP pprob, SEXP ploops,
-			   SEXP pmultiple) {
-
-  igraph_t g;
-  igraph_real_t prob=REAL(pprob)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  igraph_bool_t multiple=LOGICAL(pmultiple)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph_copy(graph, &g);
-  igraph_rewire_edges(&g, prob, loops, multiple);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_destroy(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
 				  SEXP ploops, SEXP pmultiple) {
 

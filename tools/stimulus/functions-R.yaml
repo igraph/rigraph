@@ -171,7 +171,12 @@ igraph_asymmetric_preference_game:
     IGNORE: RR, RC
 
 igraph_rewire_edges:
-    IGNORE: RR, RC
+    # Handled by rewire() in the R interface and rewire_directed_edges()
+    IGNORE: RR
+
+igraph_rewire_directed_edges:
+    # Handled by rewire() in the R interface
+    IGNORE: RR
 
 igraph_watts_strogatz_game:
     IGNORE: RR, RC

@@ -67,7 +67,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #'
 #' Two graphs are considered identical by this function if and only if
 #' they are represented in exactly the same way in the internal R
-#' representationi. This means that the two graphs must have the same
+#' representation. This means that the two graphs must have the same
 #' list of vertices and edges, in exactly the same order, with same directness
 #' and identical graph, vertex and edge attributes.
 #'
