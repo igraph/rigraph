@@ -57,6 +57,9 @@
 #' \code{weight} vertex attribute and this argument is \code{NULL}, then every
 #' vertex is assumed to have a weight of 1. Note that the current implementation
 #' of the weighted clique finder supports positive integer weights only.
+#' @param maximal Specifies whether to look for all cliques (\code{FALSE}) or
+#' only the maximal ones (\code{TRUE}), for functions that are capable of looking
+#' for both.
 #' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
 #' return a list containing numeric vectors of vertex ids. Each list element is
 #' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.

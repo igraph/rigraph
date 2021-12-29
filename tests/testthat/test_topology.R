@@ -36,7 +36,7 @@ test_that("automorphism_group works", {
 })
 
 
-test_that("automorphism_group works with coolored graphs", {
+test_that("automorphism_group works with colored graphs", {
   g <- make_full_graph(4)
   aut <- lapply(automorphism_group(g, colors=c(1,2,1,2)), as.vector)
   aut <- aut[order(sapply(aut, '[[', 1))]

@@ -920,8 +920,14 @@ automorphisms <- automorphisms
 #' non-singleton cell, \sQuote{\code{flm}}: first largest maximally
 #' non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
 #' smallest maximally non-trivially connected non-singleton cell.
-#' @return A list of vertex permutations that form a generating set of the
-#' automorphism group of the input graph.
+#' @param details Specifies whether to provide additional details about the
+#' BLISS internals in the result.
+#' @return When \code{details} is \code{FALSE}, a list of vertex permutations
+#' that form a generating set of the automorphism group of the input graph.
+#' When \code{details} is \code{TRUE}, a named list with two members:
+#' \item{generators}{Returns the generators themselves} \item{info}{Additional
+#' information about the BLISS internals. See \code{\link{automorphisms}} for
+#' more details.}
 #' @author Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
