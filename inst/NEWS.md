@@ -25,6 +25,8 @@ Added:
   adjusted on plots with the `frame.width` vertex attribute or the
   `vertex.frame.width` keyword argumen, thanks to @simoncarrignon .
   See PR #500 for more details.
+- `automorphism_group()` returns a possible (not necessarily minimal)
+  generating set of the automorphism group of a graph.
 
 Fixed:
 

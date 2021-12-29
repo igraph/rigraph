@@ -25,25 +25,24 @@
 #' 
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
+#' Most of these functions also support vertex weights.
 #' 
 #' \code{cliques} find all complete subgraphs in the input graph, obeying the
-#' size limitations given in the \code{min} and \code{max} arguments.
+#' size (or weight) limitations given in the \code{min} and \code{max} arguments.
 #' 
 #' \code{largest_cliques} finds all largest cliques in the input graph. A
-#' clique is largest if there is no other clique including more vertices.
+#' clique is largest if there is no other clique including more vertices
+#' (or vertices with a larger total weight).
 #' 
 #' \code{max_cliques} finds all maximal cliques in the input graph.  A
-#' clique in maximal if it cannot be extended to a larger clique. The largest
-#' cliques are always maximal, but a maximal clique is not necessarily the
-#' largest.
+#' clique in maximal if it cannot be extended to a larger clique (or a clique
+#' with larger total weight). The largest cliques are always maximal, but a
+#' maximal clique is not necessarily the largest.
 #' 
 #' \code{count_max_cliques} counts the maximal cliques.
 #' 
-#' \code{clique_num} calculates the size of the largest clique(s).
-#' 
-#' The current implementation of these functions searches for maximal
-#' independent vertex sets (see \code{\link{ivs}}) in the
-#' complementer graph.
+#' \code{clique_num} calculates the size or weight of the largest clique(s),
+#' depending on whether vertex weights are provided or not.
 #' 
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
@@ -53,6 +52,11 @@
 #' \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #' \code{NULL} means no limit.
+#' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
+#' vertex attribute, then this is used by default. If the graph does not have a
+#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
+#' vertex is assumed to have a weight of 1. Note that the current implementation
+#' of the weighted clique finder supports positive integer weights only.
 #' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
 #' return a list containing numeric vectors of vertex ids. Each list element is
 #' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
@@ -82,48 +86,16 @@
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
-#' 
-#' 
-cliques <- function(graph, min=NULL, max=NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  if (is.null(min)) {
-    min <- 0
-  }
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_cliques, graph, as.numeric(min), as.numeric(max))
-  res <- lapply(res, function(x) x+1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
-  }
-
-  res
-}
+#'
+#' # Vertex weights may be used
+#' g <- make_graph("zachary")
+#' V(g)$weight <- 1
+#' V(g)[c(1,2,3,4,14)]$weight <- 3
+#' clique_num(g)
+cliques <- cliques
 
 #' @export
-
-largest_cliques <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_largest_cliques, graph)
-  res <- lapply(res, function(x) x+1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
-  }
-
-  res
-}
+largest_cliques <- largest_cliques
 
 #' @rdname cliques
 #' @param subset If not \code{NULL}, then it must be a vector of vertex ids,
@@ -137,9 +109,7 @@ largest_cliques <- function(graph) {
 #' in the file, given with the numeric ids of its vertices, separated by
 #' whitespace.
 #' @export
-
-max_cliques <- function(graph, min=NULL, max=NULL,
-                            subset=NULL, file=NULL) {
+max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
@@ -207,7 +177,6 @@ count_max_cliques <- function(graph, min=NULL, max=NULL,
 }
 
 #' @export
-
 clique_num <- clique_num
 
 

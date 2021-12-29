@@ -590,13 +590,15 @@ igraph_decompose:
 #######################################
 
 igraph_cliques:
-    IGNORE: RR, RC
+    # Handled by igraph_weighted_cliques
+    IGNORE: RR, RC, RInit
 
 igraph_cliques_callback:
     IGNORE: RR, RC, RInit
 
 igraph_largest_cliques:
-    IGNORE: RR, RC
+    # Handled by igraph_largest_weighted_cliques
+    IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques:
     IGNORE: RR, RC, RInit
@@ -613,7 +615,21 @@ igraph_maximal_cliques_file:
     NAME: maximal.cliques.file
 
 igraph_clique_number:
+    # Handled by igraph_weighted_clique_number
+    IGNORE: RR, RC, RInit
+
+igraph_weighted_cliques:
+    # Parameters repeated here so we can rename min_weight and max_weight
+    PARAMS: |-
+        GRAPH graph, VERTEXWEIGHTS vertex_weights=NULL, OUT VERTEXSETLIST res,
+        REAL min=0, REAL max=0, BOOLEAN maximal=False
+    NAME: cliques
+
+igraph_weighted_clique_number:
     NAME: clique_num
+
+igraph_largest_weighted_cliques:
+    NAME: largest_cliques
 
 igraph_weighted_cliques_callback:
     IGNORE: RR, RC, RInit

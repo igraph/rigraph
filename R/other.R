@@ -107,7 +107,7 @@ sample_seq <- function(low, high, length) {
 #' @param required whether the graph has to be bipartite
 #' @return A logical vector representing the resolved vertex type for each
 #' vertex in the graph
-#' @author Tamas Nepusz \email{ntamas@gmail.com}
+#' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @keywords internal
 #'
 handle_vertex_type_arg <- function(types, graph, required = T) {
