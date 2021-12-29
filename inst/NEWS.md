@@ -27,6 +27,11 @@ Added:
   See PR #500 for more details.
 - `automorphism_group()` returns a possible (not necessarily minimal)
   generating set of the automorphism group of a graph.
+- `global_efficiency()` calculates the global efficiency of the graph.
+- `local_efficiency()` calculates the local efficiency of each vertex in a graph.
+- `average_local_efficiency()` calculates the average local efficiency across
+  the set of vertices in a graph.
+- `rewire(each_edge(...))` now supports rewiring only one endpoint of each edge.
 
 Fixed:
 
