@@ -132,6 +132,16 @@ igraph_adjlist:
 igraph_full_bipartite:
     IGNORE: RR
 
+igraph_realize_degree_sequence:
+    NAME: realize_degseq
+    PARAMS: |-
+        OUT GRAPH graph, VECTOR out_deg, VECTOR_OR_0 in_deg=NULL,
+        EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
+    R:
+      GATTR:
+        name: Graph from degree sequence
+      GATTR-PARAM: out_deg, in_deg, allowed_edge_types, method
+
 #######################################
 # Constructors, games
 #######################################

@@ -215,7 +215,7 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)

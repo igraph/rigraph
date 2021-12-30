@@ -31,9 +31,9 @@
 #' @param ... Parameters to extract from
 #' @param .operation Human-readable description of the operation that this
 #' helper is a part of
-#' @param .variant Constructor variant; must be one of \sQuote{make} or
-#' \sQuote{sample}. Used in cases when the same constructor specification has
-#' deterministic and random variants.
+#' @param .variant Constructor variant; must be one of \sQuote{make},
+#' \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
+#' specification has deterministic and random variants.
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #' function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #' remaining, unparsed arguments.
@@ -56,7 +56,17 @@
 
   ## Resolve the actual function in the specifier if it has multiple variants
   if (!is.function(cons$fun)) {
-    if (.variant %in% names(cons$fun)) {
+    variants <- names(cons$fun)
+    ## 'graph' can fall back to 'make' and vice versa if one is present but
+    ## not the other
+    if (!(.variant %in% variants)) {
+      if (.variant == "graph" && "make" %in% variants) {
+        .variant <- "make"
+      } else if (.variant == "make" && "graph" %in% variants) {
+        .variant <- "graph"
+      }
+    }
+    if (.variant %in% variants) {
       cons$fun <- cons$fun[[.variant]]
     } else {
       stop("Don't know how to ", .operation, ", unknown constructor")
@@ -223,7 +233,14 @@ sample_ <- function(...) {
 #' graph_(cbind(1:5,2:6), from_edgelist(directed = FALSE))
 #' graph_(cbind(1:5,2:6), from_edgelist(), directed = FALSE)
 
-graph_ <- make_
+graph_ <- function(...) {
+  me <- attr(sys.function(), "name") %||% "construct"
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
+}
 
 attr(make_, "name") <- "make_"
 attr(sample_, "name") <- "sample_"
@@ -529,7 +546,7 @@ with_graph_ <- function(...) {
 #' @param simplify For graph literals, whether to simplify the graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
@@ -690,7 +707,7 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_empty_graph(n = 10)
@@ -805,7 +822,7 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #'   multiple edges are removed.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' # A simple undirected graph
@@ -962,7 +979,7 @@ from_literal <- function(...)
 #' @param center ID of the center vertex.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_star(10, mode = "out")
@@ -1002,7 +1019,7 @@ star <- function(...) constructor_spec(make_star, ...)
 #' @param loops Whether to add self-loops to the graph.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_full_graph(5)
@@ -1051,7 +1068,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #'   circular.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_lattice(c(5, 5, 5))
@@ -1107,7 +1124,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #'   vertex has one child.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' print_all(make_ring(10))
@@ -1149,7 +1166,7 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #'   graph.
 #' @return An igraph graph
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' make_tree(10, 2)
@@ -1260,7 +1277,7 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' @param n The id of the graph to create.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' ## Some randomly picked graphs from the atlas
@@ -1308,7 +1325,7 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' @param directed Logical scalar, whether or not to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' chord <- make_chordal_ring(15,
@@ -1612,7 +1629,7 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' print_all(make_full_citation_graph(10))
@@ -1667,3 +1684,78 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' @include auto.R
 
 graph_from_lcf <- graph_from_lcf
+
+## -----------------------------------------------------------------
+
+#' Creating a graph from a given degree sequence, deterministically
+#' 
+#' It is often useful to create a graph with given vertex degrees. This function
+#' creates such a graph in a deterministic manner.
+#'
+#' Simple undirected graphs are constructed using the Havel-Hakimi algorithm
+#' (undirected case), or the analogous Kleitman-Wang algorithm (directed case).
+#' These algorithms work by choosing an arbitrary vertex and connecting all its
+#' stubs to other vertices. This step is repeated until all degrees have been
+#' connected up.
+#'
+#' The \sQuote{method} argument controls in which order the vertices are
+#' selected during the course of the algorithm.
+#'
+#' The \dQuote{smallest} method selects the vertex with the smallest remaining
+#' degree. The result is usually a graph with high negative degree assortativity.
+#' In the undirected case, this method is guaranteed to generate a connected
+#' graph, regardless of whether multi-edges are allowed, provided that a
+#' connected realization exists.  In the directed case it tends to generate
+#' weakly connected graphs, but this is not guaranteed. This is the default
+#' method.
+#'
+#' The \dQuote{largest} method selects the vertex with the largest remaining
+#' degree. The result is usually a graph with high positive degree assortativity,
+#' and is often disconnected.
+#'
+#' The \dQuote{index} method selects the vertices in order of their index.
+#'
+#' @param out.deg Numeric vector, the sequence of degrees (for undirected
+#' graphs) or out-degrees (for directed graphs). For undirected graphs its sum
+#' should be even. For directed graphs its sum should be the same as the sum of
+#' \code{in.deg}.
+#' @param in.deg For directed graph, the in-degree sequence. By default this is
+#' \code{NULL} and an undirected graph is created.
+#' @param method Character, the method for generating the graph; see above.
+#' @param allowed.edge.types Character, specifies the types of allowed edges.
+#' \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
+#' \dQuote{multiple} allows multiple edges but disallows loop.
+#' \dQuote{loops} allows loop edges but disallows multiple edges (currently
+#' unimplemented). \dQuote{all} allows all types of edges. The default is
+#' \dQuote{simple}.
+#' @return The new graph object.
+#' @seealso \code{\link{sample_degseq}} for a randomized variant that samples
+#' from graphs with the given degree sequence.
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- realize_degseq(rep(2,100))
+#' degree(g)
+#' is_simple(g)
+#' g2 <- realize_degseq(1:10, 10:1)
+#' degree(g2, mode="out")
+#' degree(g2, mode="in")
+#' 
+#' ## Exponential degree distribution, with high positive assortativity.
+#' ## Loop and multiple edges are explicitly allowed.
+#' ## Note that we correct the degree sequence if its sum is odd.
+#' degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
+#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
+#' g4 <- realize_degseq(degs, method="largest", allowed.edge.types="all")
+#' all(degree(g4) == degs)
+#' 
+#' ## Power-law degree distribution, no loops allowed but multiple edges
+#' ## are okay.
+#' ## Note that we correct the degree sequence if its sum is odd.
+#' degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
+#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
+#' g5 <- realize_degseq(degs, allowed.edge.types="multi")
+#' all(degree(g5) == degs)
+
+realize_degseq <- realize_degseq

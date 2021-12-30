@@ -366,8 +366,8 @@ random.graph.game <- erdos.renyi.game
 
 #' Generate random graphs with a given degree sequence
 #' 
-#' It is often useful to create a graph with given vertex degrees. This is
-#' exactly what \code{sample_degseq} does.
+#' It is often useful to create a graph with given vertex degrees. This function
+#' creates such a graph in a randomized manner.
 #' 
 #' The \dQuote{simple} method connects the out-stubs of the edges (undirected
 #' graphs) or the out-stubs and in-stubs (directed graphs) together. This way
@@ -412,7 +412,8 @@ random.graph.game <- erdos.renyi.game
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}},
-#' \code{\link{simplify}} to get rid of the multiple and/or loops edges.
+#' \code{\link{simplify}} to get rid of the multiple and/or loops edges,
+#' \code{\link{realize_degseq}} for a deterministic variant.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -462,11 +463,14 @@ sample_degseq <- function(out.deg, in.deg=NULL,
 }
 
 #' @rdname sample_degseq
-#' @param ... Passed to \code{sample_degree}.
+#' @param deterministic  Whether the construction should be deterministic
+#' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
+#' or to \code{sample_degseq} otherwise.
 #' @export
 
-degseq <- function(...) constructor_spec(sample_degseq, ...)
-
+degseq <- function(..., deterministic=FALSE) constructor_spec(
+  if (deterministic) realize_degseq else sample_degseq, ...
+)
 
 ## -----------------------------------------------------------------
 

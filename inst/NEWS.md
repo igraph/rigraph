@@ -32,6 +32,8 @@ Added:
 - `average_local_efficiency()` calculates the average local efficiency across
   the set of vertices in a graph.
 - `rewire(each_edge(...))` now supports rewiring only one endpoint of each edge.
+- `realize_degseq()` generates graphs from degree sequences in a deterministic
+  manner. It is also available as `make_(degseq(..., deterministic=TRUE))`.
 
 Fixed:
 
