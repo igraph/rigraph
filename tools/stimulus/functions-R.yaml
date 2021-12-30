@@ -235,7 +235,7 @@ igraph_sbm_game:
     NAME: sample_sbm
     R:
         GATTR:
-          name: Stochastic block-model
+          name: Stochastic block model
         GATTR-PARAM: loops
 
 igraph_hsbm_game:
