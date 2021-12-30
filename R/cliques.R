@@ -21,7 +21,7 @@
 
 
 
-#' The functions find cliques, ie. complete subgraphs in a graph
+#' Functions to find cliques, ie. complete subgraphs in a graph
 #' 
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
@@ -44,8 +44,12 @@
 #' \code{clique_num} calculates the size or weight of the largest clique(s),
 #' depending on whether vertex weights are provided or not.
 #' 
+#' \code{clique_sizes} returns a numeric vector representing a histogram
+#' of clique sizes, between the given minimum and maximum clique size.
+#'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
+#' clique_sizes
 #' @param graph The input graph, directed graphs will be considered as
 #' undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -70,6 +74,10 @@
 #' 
 #' \code{clique_num} and \code{count_max_cliques} return an integer
 #' scalar.
+#'
+#' \code{clique_sizes} returns a numeric vector with the clique sizes, starting
+#' from the specified minimum clique size.
+#'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{ivs}}
@@ -320,4 +328,14 @@ ivs_size <- function(graph) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_independence_number, graph)
+}
+
+#' @export
+
+clique_sizes <- function(graph, min=0, max=0, maximal=FALSE, ...) {
+  if (maximal) {
+    maximal_clique_sizes(graph, min, max, ...)
+  } else {
+    all_clique_sizes(graph, min, max, ...)
+  }
 }

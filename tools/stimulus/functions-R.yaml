@@ -638,6 +638,18 @@ igraph_clique_number:
     # Handled by igraph_weighted_clique_number
     IGNORE: RR, RC, RInit
 
+igraph_clique_size_hist:
+    # Wrapper function is hand-rolled in the R layer; the generated version
+    # is renamed and internal
+    NAME: all_clique_sizes
+    INTERNAL: true
+
+igraph_maximal_cliques_hist:
+    # Wrapper function is hand-rolled in the R layer; the generated version
+    # is renamed and internal
+    NAME: maximal_clique_sizes
+    INTERNAL: true
+
 igraph_weighted_cliques:
     # Parameters repeated here so we can rename min_weight and max_weight
     PARAMS: |-

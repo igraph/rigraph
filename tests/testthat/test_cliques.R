@@ -50,3 +50,17 @@ test_that("cliques works with vertex weights", {
   V(g)$weight <- weights * 2
   expect_that(clique_num(g), equals(30))
 })
+
+test_that("clique_sizes works", {
+  g <- make_full_graph(5) %du% make_full_graph(3)
+
+  expect_that(clique_sizes(g), equals(c(8, 13, 11, 5, 1)))
+  expect_that(clique_sizes(g, min=3), equals(c(0, 0, 11, 5, 1)))
+  expect_that(clique_sizes(g, max=4), equals(c(8, 13, 11, 5)))
+  expect_that(clique_sizes(g, min=2, max=4), equals(c(0, 13, 11, 5)))
+
+  expect_that(clique_sizes(g, maximal=TRUE), equals(c(0, 0, 1, 0, 1)))
+  expect_that(clique_sizes(g, min=3, maximal=TRUE), equals(c(0, 0, 1, 0, 1)))
+  expect_that(clique_sizes(g, max=4, maximal=TRUE), equals(c(0, 0, 1)))
+  expect_that(clique_sizes(g, min=2, max=4, maximal=TRUE), equals(c(0, 0, 1)))
+})
