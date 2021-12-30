@@ -75,8 +75,9 @@
 #' \code{clique_num} and \code{count_max_cliques} return an integer
 #' scalar.
 #'
-#' \code{clique_sizes} returns a numeric vector with the clique sizes, starting
-#' from the specified minimum clique size.
+#' \code{clique_sizes} returns a numeric vector with the clique sizes such that
+#' the i-th item belongs to cliques of size i. Trailing zeros are currently
+#' truncated, but this might change in future versions.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
