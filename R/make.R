@@ -1738,7 +1738,7 @@ graph_from_lcf <- graph_from_lcf
 #' g <- realize_degseq(rep(2,100))
 #' degree(g)
 #' is_simple(g)
-#' g2 <- realize_degseq(1:10, 10:1)
+#' g2 <- realize_degseq(1:10, 10:1, allowed.edge.types="all")
 #' degree(g2, mode="out")
 #' degree(g2, mode="in")
 #' 
