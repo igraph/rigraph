@@ -22,9 +22,117 @@
 ##
 ## -----------------------------------------------------------------
 
+#' Takes an argument list and extracts the constructor specification and
+#' constructor modifiers from it.
+#'
+#' This is a helper function for the common parts of \code{make_} and
+#' \code{sample_}.
+#'
+#' @param ... Parameters to extract from
+#' @param .operation Human-readable description of the operation that this
+#' helper is a part of
+#' @param .variant Constructor variant; must be one of \sQuote{make} or
+#' \sQuote{sample}. Used in cases when the same constructor specification has
+#' deterministic and random variants.
+#' @return A named list with three items: \sQuote{cons} for the constructor
+#' function, \sQuote{mods} for the modifiers and \sQuote{args} for the
+#' remaining, unparsed arguments.
+.extract_constructor_and_modifiers <- function(..., .operation, .variant) {
+  args <- list(...)
+  cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
+  if (sum(cidx) == 0) {
+    stop("Don't know how to ", .operation, ", nothing given")
+  }
+  if (sum(cidx) > 1) {
+    stop("Don't know how to ", .operation, ", multiple constructors given")
+  }
+  cons <- args[ cidx][[1]]
+  args <- args[!cidx]
+
+  ## Modifiers
+  wmods <- vapply(args, inherits, TRUE, what = "igraph_constructor_modifier")
+  mods <- args[wmods]
+  args <- args[!wmods]
+
+  ## Resolve the actual function in the specifier if it has multiple variants
+  if (!is.function(cons$fun)) {
+    if (.variant %in% names(cons$fun)) {
+      cons$fun <- cons$fun[[.variant]]
+    } else {
+      stop("Don't know how to ", .operation, ", unknown constructor")
+    }
+  }
+
+  list(cons=cons, mods=mods, args=args)
+}
+
+#' Applies a set of constructor modifiers to an already constructed graph.
+#'
+#' This is a helper function for the common parts of \code{make_} and
+#' \code{sample_}.
+#'
+#' @param graph The graph to apply the modifiers to
+#' @param mods The modifiers to apply
+#' @return The modified graph
+.apply_modifiers <- function(graph, mods) {
+  for (m in mods) {
+    if (m$id == "without_attr") {
+      ## TODO: speed this up
+      ga <- graph_attr_names(graph)
+      va <- vertex_attr_names(graph)
+      ea <- edge_attr_names(graph)
+      for (g in ga) graph <- delete_graph_attr(graph, g)
+      for (v in va) graph <- delete_vertex_attr(graph, v)
+      for (e in ea) graph <- delete_edge_attr(graph, e)
+
+    } else if (m$id == "without_loops") {
+      graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
+
+    } else if (m$id == "without_multiples") {
+      graph <- simplify(graph, remove.loops = FALSE, remove.multiple = TRUE)
+
+    } else if (m$id == "simplified") {
+      graph <- simplify(graph)
+
+    } else if (m$id == "with_vertex_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(! is.null(n))
+        graph <- set_vertex_attr(graph, n, value = v)
+      }
+
+    } else if (m$id == "with_edge_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(! is.null(n))
+        graph <- set_edge_attr(graph, n, value = v)
+      }
+
+    } else if (m$id == "with_graph_") {
+      m$args <- lapply(m$args, eval)
+      ## TODO speed this up
+      for (a in seq_along(m$args)) {
+        n <- names(m$args)[a]
+        v <- m$args[[a]]
+        stopifnot(! is.null(n))
+        graph <- set_graph_attr(graph, n, value = v)
+      }
+
+    }
+  }
+
+  graph
+}
+
 #' Make a new graph
 #'
-#' This is is generic function for creating graphs.
+#' This is a generic function for creating graphs.
 #'
 #' @details
 #' \code{make_} is a generic function for creating graphs.
@@ -61,81 +169,12 @@
 #' is_simple(ran)
 
 make_ <- function(...) {
-
   me <- attr(sys.function(), "name") %||% "construct"
-  args <- list(...)
-  cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
-  if (sum(cidx) == 0) {
-    stop("Don't know how to ", me, ", nothing given")
-  }
-  if (sum(cidx) > 1) {
-    stop("Don't know how to ", me, ", multiple constructors given")
-  }
-  cons <- args[ cidx][[1]]
-  args <- args[!cidx]
-
-  ## Modifiers
-  wmods <- vapply(args, inherits, TRUE, what = "igraph_constructor_modifier")
-  mods <- args[wmods]
-  args <- args[!wmods]
-
-  args2 <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
-
-  res <- do_call(cons$fun, args2, args)
-
-  for (m in mods) {
-    if (m$id == "without_attr") {
-      ## TODO: speed this up
-      ga <- graph_attr_names(res)
-      va <- vertex_attr_names(res)
-      ea <- edge_attr_names(res)
-      for (g in ga) res <- delete_graph_attr(res, g)
-      for (v in va) res <- delete_vertex_attr(res, v)
-      for (e in ea) res <- delete_edge_attr(res, e)
-
-    } else if (m$id == "without_loops") {
-      res <- simplify(res, remove.loops = TRUE, remove.multiple = FALSE)
-
-    } else if (m$id == "without_multiples") {
-      res <- simplify(res, remove.loops = FALSE, remove.multiple = TRUE)
-
-    } else if (m$id == "simplified") {
-      res <- simplify(res)
-
-    } else if (m$id == "with_vertex_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_vertex_attr(res, n, value = v)
-      }
-
-    } else if (m$id == "with_edge_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_edge_attr(res, n, value = v)
-      }
-
-    } else if (m$id == "with_graph_") {
-      m$args <- lapply(m$args, eval)
-      ## TODO speed this up
-      for (a in seq_along(m$args)) {
-        n <- names(m$args)[a]
-        v <- m$args[[a]]
-        stopifnot(! is.null(n))
-        res <- set_graph_attr(res, n, value = v)
-      }
-
-    }
-  }
-
-  res
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
 }
 
 #' Sample from a random graph model
@@ -160,7 +199,14 @@ make_ <- function(...) {
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 
-sample_ <- make_
+sample_ <- function(...) {
+  me <- attr(sys.function(), "name") %||% "construct"
+  extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
+  cons <- extracted$cons
+  cons_args <- if (cons$lazy) lapply(cons$args, "[[", "expr") else lazy_eval(cons$args)
+  res <- do_call(cons$fun, cons_args, extracted$args)
+  .apply_modifiers(res, extracted$mods)
+}
 
 #' Convert object to a graph
 #'
@@ -1125,11 +1171,70 @@ make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
   res
 }
 
+#' Sample trees randomly and uniformly
+#'
+#' \code{sample_tree} generates a random with a given number of nodes uniform
+#' at random from the set of labelled trees.
+#'
+#' In other words, the function generates each possible labelled tree with the
+#' given number of nodes with the same probability.
+#'
+#' @param n The number of nodes in the tree
+#' @param directed Whether to create a directed tree. The edges of the tree are
+#' oriented away from the root.
+#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
+#' samples Prufer sequences uniformly and then converts the sampled sequence to
+#' a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
+#' graph to uniformly sampleits spanning trees. (This is also known as Wilson's
+#' algorithm). The default is \sQuote{lerw}. Note that the method based on
+#' Prufer sequences does not support directed trees at the moment.
+#' @return A graph object.
+#'
+#' @keywords graphs
+#' @examples
+#'
+#' g <- sample_tree(100, method="lerw")
+#'
+#' @export
+sample_tree <- sample_tree
+
 #' @rdname make_tree
-#' @param ... Passed to \code{make_tree}.
+#' @param ... Passed to \code{make_tree} or \code{sample_tree}.
 #' @export
 
-tree <- function(...) constructor_spec(make_tree, ...)
+tree <- function(...) constructor_spec(list(make=make_tree, sample=sample_tree), ...)
+
+
+## -----------------------------------------------------------------
+
+#' Create an undirected tree graph from its Prufer sequence
+#'
+#' \code{make_from_prufer} creates an undirected tree graph from its Prufer
+#' sequence.
+#'
+#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
+#' find a vertex with degree one, remove it from the tree and add the label of
+#' the vertex that it was connected to to the sequence. Repeat until there are
+#' only two vertices in the remaining graph.
+#'
+#' @param prufer The Prufer sequence to convert into a graph
+#' @return A graph object.
+#'
+#' @seealso \code{\link{to_prufer}} to convert a graph into its Prufer sequence
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_tree(13, 3)
+#' to_prufer(g)
+#'
+#' @export
+make_from_prufer <- make_from_prufer
+
+#' @rdname make_from_prufer
+#' @param ... Passed to \code{make_from_prufer}
+#' @export
+from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 
 ## -----------------------------------------------------------------
 

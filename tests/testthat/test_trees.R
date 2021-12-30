@@ -86,8 +86,6 @@ test_that("to_prufer prints an error for non-trees", {
 context("sample_tree")
 
 test_that("sample_tree works", {
-    library(igraph)
-
     g <- sample_tree(100)
     expect_false(is_directed(g))
     expect_that(ecount(g), equals(99))
@@ -111,6 +109,21 @@ test_that("sample_tree works", {
     expect_that(ecount(g), equals(199))
     expect_that(vcount(g), equals(200))
     expect_true(is_tree(g))
+})
+
+test_that("sample_(tree(...)) works", {
+    g <- sample_(tree(200, method="prufer"))
+    expect_false(is_directed(g))
+    expect_that(ecount(g), equals(199))
+    expect_that(vcount(g), equals(200))
+    expect_true(is_tree(g))
+
+    g2 <- sample_(tree(200, method="prufer"))
+    expect_false(is_directed(g2))
+    expect_that(ecount(g2), equals(199))
+    expect_that(vcount(g2), equals(200))
+    expect_true(is_tree(g2))
+    expect_false(identical_graphs(g, g2))
 })
 
 test_that("sample_tree yields a singleton graph for n=1", {

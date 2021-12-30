@@ -60,62 +60,6 @@ is_tree <- is_tree
 #' @export
 to_prufer <- to_prufer
 
-#' Create an undirected tree graph from its Prufer sequence
-#'
-#' \code{make_from_prufer} creates an undirected tree graph from its Prufer
-#' sequence.
-#'
-#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
-#' n-2 numbers, constructed as follows. If the graph has more than two vertices,
-#' find a vertex with degree one, remove it from the tree and add the label of
-#' the vertex that it was connected to to the sequence. Repeat until there are
-#' only two vertices in the remaining graph.
-#'
-#' @param prufer The Prufer sequence to convert into a graph
-#' @return A graph object.
-#'
-#' @seealso \code{\link{to_prufer}} to convert a graph into its Prufer sequence
-#' @keywords graphs
-#' @examples
-#'
-#' g <- make_tree(13, 3)
-#' to_prufer(g)
-#'
-#' @export
-make_from_prufer <- make_from_prufer
-
-#' @rdname make_from_prufer
-#' @param ... Passed to \code{make_from_prufer}
-#' @export
-from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
-
-#' Sample trees randomly and uniformly
-#'
-#' \code{sample_tree} generates a random with a given number of nodes uniform
-#' at random from the set of labelled trees.
-#'
-#' In other words, the function generates each possible labelled tree with the
-#' given number of nodes with the same probability.
-#'
-#' @param n The number of nodes in the tree
-#' @param directed Whether to create a directed tree. The edges of the tree are
-#' oriented away from the root.
-#' @param method The algorithm to use to generate the tree. \sQuote{prufer}
-#' samples Prufer sequences uniformly and then converts the sampled sequence to
-#' a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
-#' graph to uniformly sampleits spanning trees. (This is also known as Wilson's
-#' algorithm). The default is \sQuote{lerw}. Note that the method based on
-#' Prufer sequences does not support directed trees at the moment.
-#' @return A graph object.
-#'
-#' @keywords graphs
-#' @examples
-#'
-#' g <- sample_tree(100, method="lerw")
-#'
-#' @export
-sample_tree <- sample_tree
-
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
 #' \code{sample_spanning_tree} picks a spanning tree of an undirected graph
