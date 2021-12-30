@@ -224,7 +224,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
                as.numeric(p), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     res$p <- p
@@ -279,7 +279,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
                as.numeric(m), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     res$m <- m
@@ -349,7 +349,7 @@ erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
                as.numeric(p.or.m), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     if (type=="gnp") { res$p <- p.or.m }

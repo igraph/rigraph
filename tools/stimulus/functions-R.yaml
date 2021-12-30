@@ -1259,6 +1259,10 @@ igraph_eulerian_cycle:
 
 igraph_from_prufer:
     NAME: make_from_prufer
+    R:
+        GATTR:
+          name: Tree from Prufer sequence
+        GATTR-PARAM: prufer
 
 igraph_tree_game:
     NAME: sample_tree
