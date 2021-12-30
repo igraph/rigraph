@@ -1173,6 +1173,12 @@ igraph_subisomorphic_lad:
 igraph_subisomorphic_vf2:
     NAME: graph.subisomorphic.vf2
 
+igraph_simplify_and_colorize:
+    # Despite their names, vertex_color and edge_color are not really colors
+    # but _multiplicities_, so we simply use VECTOR_INT there
+    PARAMS: |-
+        GRAPH graph, OUT GRAPH res, OUT VECTOR_INT vertex_color, OUT VECTOR_INT edge_color
+
 #######################################
 # SCG
 #######################################

@@ -36,8 +36,16 @@
 #' \code{simplify} removes the loop and/or multiple edges from a graph.  If
 #' both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
 #' function returns a simple graph.
-#' 
-#' @aliases simplify is.simple is_simple
+#'
+#' \code{simplify_and_colorize} constructs a new, simple graph from a graph and
+#' also returns two additional "color" vectors, one for the vertices and one for
+#' the edges. The colors of the vertices represent the number of self-loops that
+#' were originally incident on them, while the colors of the edges represent the
+#' multiplicities of the same edges in the original graph. This allows one to
+#' take into account the edge multiplicities and the number of loop edges in
+#' the VF2 isomorphism algorithm.
+#'
+#' @aliases simplify is.simple is_simple simplify_and_colorize
 #' @param graph The graph to work on.
 #' @param remove.loops Logical, whether the loop edges are to be removed.
 #' @param remove.multiple Logical, whether the multiple edges are to be
@@ -46,7 +54,10 @@
 #' \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
 #' single one in the new graph, and their attributes are combined. Please see
 #' \code{\link{attribute.combination}} for details on this.
-#' @return A new graph object with the edges deleted.
+#' @return For \code{simplify}, a new graph object with the edges deleted. For
+#' \code{simplify_and_colorize}, a named vector with three items: \sQuote{res}
+#' contains the simplified graph, \sQuote{vertex_color} contains the vertex
+#' colors and \sQuote{edge_color} contains the edge colors.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{which_loop}}, \code{\link{which_multiple}} and
 #' \code{\link{count_multiple}}, \code{\link{delete_edges}},
@@ -68,3 +79,8 @@ simplify <- simplify
 #' @rdname simplify
 
 is_simple <- is_simple
+
+#' @export
+#' @rdname simplify_and_colorize
+
+simplify_and_colorize <- simplify_and_colorize
