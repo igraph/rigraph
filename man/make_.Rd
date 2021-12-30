@@ -10,7 +10,7 @@ make_(...)
 \item{...}{Parameters, see details below.}
 }
 \description{
-This is is generic function for creating graphs.
+This is a generic function for creating graphs.
 }
 \details{
 \code{make_} is a generic function for creating graphs.

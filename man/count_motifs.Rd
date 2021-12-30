@@ -10,7 +10,7 @@ count_motifs(graph, size = 3, cut.prob = rep(0, size))
 \arguments{
 \item{graph}{Graph object, the input graph.}
 
-\item{size}{The size of the motif, currently 3 and 4 are supported only.}
+\item{size}{The size of the motif.}
 
 \item{cut.prob}{Numeric vector giving the probabilities that the search
 graph is cut at a certain level. Its length should be the same as the size

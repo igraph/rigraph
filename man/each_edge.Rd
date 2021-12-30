@@ -4,7 +4,12 @@
 \alias{each_edge}
 \title{Rewires the endpoints of the edges of a graph to a random vertex}
 \usage{
-each_edge(prob, loops = FALSE, multiple = FALSE)
+each_edge(
+  prob,
+  loops = FALSE,
+  multiple = FALSE,
+  mode = c("all", "out", "in", "total")
+)
 }
 \arguments{
 \item{prob}{The rewiring probability, a real number between zero and one.}
@@ -12,8 +17,13 @@ each_edge(prob, loops = FALSE, multiple = FALSE)
 \item{loops}{Logical scalar, whether loop edges are allowed in the rewired
 graph.}
 
-\item{multiple}{Logical scalar, whether multiple edges are allowed int the
+\item{multiple}{Logical scalar, whether multiple edges are allowed in the
 generated graph.}
+
+\item{mode}{Character string, specifies which endpoint of the edges to rewire
+in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
+the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
+of each directed edge. Ignored for undirected graphs.}
 }
 \description{
 This function can be used together with \code{\link{rewire}}.
@@ -30,6 +40,12 @@ g <- make_lattice(length = 100, dim = 1, nei = 5)
 mean_distance(g)
 g <- rewire(g, each_edge(prob = 0.05))
 mean_distance(g)
+
+# Rewiring the start of each directed edge preserves the in-degree distribution
+# but not the out-degree distribution
+g <- barabasi.game(1000)
+g2 <- g \%>\% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
+degree(g, mode="in") == degree(g2, mode="in")
 }
 \seealso{
 Other rewiring functions: 

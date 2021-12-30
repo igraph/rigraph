@@ -36,7 +36,7 @@ graph_from_edgelist(el)
 graph_from_edgelist(cbind(1:10, c(2:10, 1)))
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_literal}()},
 \code{\link{make_chordal_ring}()},
@@ -50,4 +50,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Edge list}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

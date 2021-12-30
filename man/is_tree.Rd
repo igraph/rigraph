@@ -4,7 +4,7 @@
 \alias{is_tree}
 \title{Decide whether a graph is a tree.}
 \usage{
-is_tree(graph, mode = c("all", "out", "in", "total"), details = FALSE)
+is_tree(graph, mode = c("out", "in", "all", "total"), details = FALSE)
 }
 \arguments{
 \item{graph}{An igraph graph object}

@@ -28,7 +28,7 @@ make_empty_graph(n = 10)
 make_empty_graph(n = 5, directed = FALSE)
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -42,4 +42,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Empty graph.}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

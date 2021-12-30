@@ -36,7 +36,7 @@ print_all(make_ring(10))
 print_all(make_ring(10, directed = TRUE, mutual = TRUE))
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -49,4 +49,4 @@ Other determimistic constructors:
 \code{\link{make_star}()},
 \code{\link{make_tree}()}
 }
-\concept{determimistic constructors}
+\concept{deterministic constructors}

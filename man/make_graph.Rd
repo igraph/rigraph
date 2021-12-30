@@ -191,7 +191,7 @@ graph <- make_graph( ~ A-B-C-D-A, E-A:B:C:D,
                       C-P, C-L, I-L, I-P)
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -204,4 +204,4 @@ Other determimistic constructors:
 \code{\link{make_star}()},
 \code{\link{make_tree}()}
 }
-\concept{determimistic constructors}
+\concept{deterministic constructors}

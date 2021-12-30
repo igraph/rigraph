@@ -4,10 +4,12 @@
 \alias{identical_graphs}
 \title{Decide if two graphs are identical}
 \usage{
-identical_graphs(g1, g2)
+identical_graphs(g1, g2, attrs = TRUE)
 }
 \arguments{
 \item{g1, g2}{The two graphs}
+
+\item{attrs}{Whether to compare the attributes of the graphs}
 }
 \value{
 Logical scalar
@@ -15,12 +17,16 @@ Logical scalar
 \description{
 Two graphs are considered identical by this function if and only if
 they are represented in exactly the same way in the internal R
-representationi. This means that the two graphs must have the same
-list of vertices and edges, in exactly the same order, with same directness
-and identical graph, vertex and edge attributes.
+representation. This means that the two graphs must have the same
+list of vertices and edges, in exactly the same order, with same
+directedness, and the two graphs must also have identical graph, vertex and
+edge attributes.
 }
 \details{
 This is similar to \code{identical} in the \code{base} package,
 but it ignores the mutable piece of igraph objects; those might be
 different even if the two graphs are identical.
+
+Attribute comparison can be turned off with the \code{attrs} parameter if
+the attributes of the two graphs are allowed to be different.
 }

@@ -1,4 +1,4 @@
-AC_INIT(igraph, 1.2.10.9076, csardi.gabor@gmail.com)
+AC_INIT(igraph, 1.2.10.9110, ntamas@gmail.com)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
@@ -76,27 +76,23 @@ if test $graphml_support = yes; then
   if test "$XML2CONFIG" = "none"; then
     graphml_support=no
   else
+    # xml2-config puts only preprocessor flags in --cflags (i.e. -D and -I) so
+    # we can put them in XML2_CPPFLAGS. This might not be true for other
+    # libraries, though.
+    XML2_CPPFLAGS=`$XML2CONFIG --cflags`
     XML2_LIBS=`$XML2CONFIG --libs`
-    XML2_CFLAGS=`$XML2CONFIG --cflags`
     OLDLIBS=${LIBS}
     LIBS=${XML2_LIBS}
     AC_CHECK_LIB([xml2], [xmlSAXUserParseFile], [
-      OLDCFLAGS=${CFLAGS}
       OLDCPPFLAGS=${CPPFLAGS}
-      CFLAGS=${XML2_CFLAGS}
-      CPPFLAGS=${XML2_CFLAGS}
+      CPPFLAGS=${XML2_CPPFLAGS}
       AC_CHECK_HEADER([libxml/parser.h], [
         HAVE_LIBXML=1
-	AC_DEFINE([HAVE_LIBXML], [1], [Define to 1 if you have the libxml2 libraries installed])
-        CFLAGS="${OLDCFLAGS} ${XML2_CFLAGS}"
-	CPPFLAGS="${OLDCFLAGS} ${XML2_CFLAGS}"
-	AC_SUBST(XML2_LIBS)
-	AC_SUBST(XML2_CFLAGS)
+        AC_DEFINE([HAVE_LIBXML], [1], [Define to 1 if you have the libxml2 libraries installed])
       ], [
         graphml_support=no
-        CFLAGS=${OLDCFLAGS}
-	CPPFLAGS=${OLDCPPFLAGS}
       ])
+      CPPFLAGS=${OLDCPPFLAGS}
     ], [
       graphml_support=no
     ])
@@ -104,6 +100,8 @@ if test $graphml_support = yes; then
   fi
 fi
 AC_SUBST(HAVE_LIBXML)
+AC_SUBST(XML2_LIBS)
+AC_SUBST(XML2_CPPFLAGS)
 
 AC_DEFINE([INTERNAL_GMP], [1], [Define to 1 if you use the vendored mini-GMP library])
 
@@ -126,14 +124,11 @@ AC_SUBST(INTERNAL_GMP)
 AC_SUBST(GMP_LIBS)
 AC_LANG_POP([C++])
 
-glpk_support=no
-AC_ARG_ENABLE(glpk,
-              AS_HELP_STRING([--enable-glpk], [Enable support for GLPK]),
-              [glpk_support=$enableval], [glpk_support=yes])
-
 HAVE_GLPK=0
-if test $glpk_support = yes; then
-  glpk_support=no
+GLPK_LIBS=""
+glpk_support=no
+AC_ARG_ENABLE(glpk, AS_HELP_STRING([--disable-glpk], [Compile without the GLPK library]))
+if test "x$enable_gmp" != "xno"; then
   AC_CHECK_LIB([glpk], [glp_read_mps], [
     AC_CHECK_HEADER([glpk.h], [
       AC_EGREP_CPP(yes, [
@@ -142,16 +137,16 @@ if test $glpk_support = yes; then
           yes
         #endif
       ], [
-      AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
         HAVE_GLPK=1
+        AC_DEFINE([HAVE_GLPK], [1], [Define to 1 if you have the GLPK library])
         glpk_support=yes
         GLPK_LIBS="-lglpk"
-        AC_SUBST(GLPK_LIBS)
       ])
     ])
   ])
 fi
 AC_SUBST(HAVE_GLPK)
+AC_SUBST(GLPK_LIBS)
 
 AC_DEFINE(IGRAPH_THREAD_LOCAL, [], [We don't care about thread-local storage in R])
 

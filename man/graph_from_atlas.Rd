@@ -40,7 +40,7 @@ graph_from_atlas(sample(0:1252, 1))
 graph_from_atlas(sample(0:1252, 1))
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
 \code{\link{make_chordal_ring}()},
@@ -54,4 +54,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Graph Atlas.}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

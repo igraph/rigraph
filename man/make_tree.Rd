@@ -22,7 +22,7 @@ the children, \code{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
 
-\item{...}{Passed to \code{make_tree}.}
+\item{...}{Passed to \code{make_tree} or \code{sample_tree}.}
 }
 \value{
 An igraph graph
@@ -35,7 +35,7 @@ make_tree(10, 2)
 make_tree(10, 3, mode = "undirected")
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -49,4 +49,4 @@ Other determimistic constructors:
 \code{\link{make_star}()}
 }
 \concept{Trees.}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

@@ -35,7 +35,7 @@ make_star(10, mode = "out")
 make_star(5, mode = "undirected")
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -49,4 +49,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Star graph}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

@@ -22,7 +22,10 @@ graph_from_lcf <- function(n, shifts, repeats=1) {
   # Function call
   res <- .Call(C_R_igraph_lcf_vector, n, shifts, repeats)
 
-  res <- set.graph.attribute(res, 'name', 'LCF graph')
+  if (igraph_opt("add.params")) {
+    res$name <- 'LCF graph'
+  }
+
   res
 }
 
@@ -41,6 +44,30 @@ graph_from_adj_list <- function(adjlist, mode=c("out", "in", "all", "total"), du
 }
 
 #' @export
+realize_degseq <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
+  # Argument checks
+  out.deg <- as.numeric(out.deg)
+  if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
+  allowed.edge.types <- switch(igraph.match.arg(allowed.edge.types),
+    "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
+  method <- switch(igraph.match.arg(method), "smallest"=0L, "largest"=1L, "index"=2L)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_realize_degree_sequence, out.deg, in.deg, allowed.edge.types, method)
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Graph from degree sequence'
+    res$out.deg <- out.deg
+    res$in.deg <- in.deg
+    res$allowed.edge.types <- allowed.edge.types
+    res$method <- method
+  }
+
+  res
+}
+
+#' @export
 sample_forestfire <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.integer(nodes)
@@ -53,10 +80,13 @@ sample_forestfire <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE
   # Function call
   res <- .Call(C_R_igraph_forest_fire_game, nodes, fw.prob, bw.factor, ambs, directed)
 
-  res <- set.graph.attribute(res, 'name', 'Forest fire model')
-  res <- set.graph.attribute(res, 'fw.prob', fw.prob)
-  res <- set.graph.attribute(res, 'bw.factor', bw.factor)
-  res <- set.graph.attribute(res, 'ambs', ambs)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Forest fire model'
+    res$fw.prob <- fw.prob
+    res$bw.factor <- bw.factor
+    res$ambs <- ambs
+  }
+
   res
 }
 
@@ -72,11 +102,14 @@ sample_islands <- function(islands.n, islands.size, islands.pin, n.inter) {
   # Function call
   res <- .Call(C_R_igraph_simple_interconnected_islands_game, islands.n, islands.size, islands.pin, n.inter)
 
-  res <- set.graph.attribute(res, 'name', 'Interconnected islands model')
-  res <- set.graph.attribute(res, 'islands.n', islands.n)
-  res <- set.graph.attribute(res, 'islands.size', islands.size)
-  res <- set.graph.attribute(res, 'islands.pin', islands.pin)
-  res <- set.graph.attribute(res, 'n.inter', n.inter)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Interconnected islands model'
+    res$islands.n <- islands.n
+    res$islands.size <- islands.size
+    res$islands.pin <- islands.pin
+    res$n.inter <- n.inter
+  }
+
   res
 }
 
@@ -93,9 +126,12 @@ sample_fitness <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALS
   # Function call
   res <- .Call(C_R_igraph_static_fitness_game, no.of.edges, fitness.out, fitness.in, loops, multiple)
 
-  res <- set.graph.attribute(res, 'name', 'Static fitness model')
-  res <- set.graph.attribute(res, 'loops', loops)
-  res <- set.graph.attribute(res, 'multiple', multiple)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Static fitness model'
+    res$loops <- loops
+    res$multiple <- multiple
+  }
+
   res
 }
 
@@ -114,12 +150,15 @@ sample_fitness_pl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.i
   # Function call
   res <- .Call(C_R_igraph_static_power_law_game, no.of.nodes, no.of.edges, exponent.out, exponent.in, loops, multiple, finite.size.correction)
 
-  res <- set.graph.attribute(res, 'name', 'Static power law model')
-  res <- set.graph.attribute(res, 'exponent.out', exponent.out)
-  res <- set.graph.attribute(res, 'exponent.in', exponent.in)
-  res <- set.graph.attribute(res, 'loops', loops)
-  res <- set.graph.attribute(res, 'multiple', multiple)
-  res <- set.graph.attribute(res, 'finite.size.correction', finite.size.correction)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Static power law model'
+    res$exponent.out <- exponent.out
+    res$exponent.in <- exponent.in
+    res$loops <- loops
+    res$multiple <- multiple
+    res$finite.size.correction <- finite.size.correction
+  }
+
   res
 }
 
@@ -135,8 +174,11 @@ sample_k_regular <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) {
   # Function call
   res <- .Call(C_R_igraph_k_regular_game, no.of.nodes, k, directed, multiple)
 
-  res <- set.graph.attribute(res, 'name', 'k-regular graph')
-  res <- set.graph.attribute(res, 'k', k)
+  if (igraph_opt("add.params")) {
+    res$name <- 'k-regular graph'
+    res$k <- k
+  }
+
   res
 }
 
@@ -153,8 +195,11 @@ sample_sbm <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE)
   # Function call
   res <- .Call(C_R_igraph_sbm_game, n, pref.matrix, block.sizes, directed, loops)
 
-  res <- set.graph.attribute(res, 'name', 'Stochastic block-model')
-  res <- set.graph.attribute(res, 'loops', loops)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Stochastic block model'
+    res$loops <- loops
+  }
+
   res
 }
 
@@ -170,11 +215,14 @@ hsbm_1_game <- function(n, m, rho, C, p) {
   # Function call
   res <- .Call(C_R_igraph_hsbm_game, n, m, rho, C, p)
 
-  res <- set.graph.attribute(res, 'name', 'Hierarchical stochastic block model')
-  res <- set.graph.attribute(res, 'm', m)
-  res <- set.graph.attribute(res, 'rho', rho)
-  res <- set.graph.attribute(res, 'C', C)
-  res <- set.graph.attribute(res, 'p', p)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Hierarchical stochastic block model'
+    res$m <- m
+    res$rho <- rho
+    res$C <- C
+    res$p <- p
+  }
+
   res
 }
 
@@ -191,8 +239,11 @@ hsbm_list_game <- function(n, mlist, rholist, Clist, p) {
   # Function call
   res <- .Call(C_R_igraph_hsbm_list_game, n, mlist, rholist, Clist, p)
 
-  res <- set.graph.attribute(res, 'name', 'Hierarchical stochastic block model')
-  res <- set.graph.attribute(res, 'p', p)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Hierarchical stochastic block model'
+    res$p <- p
+  }
+
   res
 }
 
@@ -208,9 +259,12 @@ sample_correlated_gnp <- function(old.graph, corr, p=old.graph$p, permutation=NU
   # Function call
   res <- .Call(C_R_igraph_correlated_game, old.graph, corr, p, permutation)
 
-  res <- set.graph.attribute(res, 'name', 'Correlated random graph')
-  res <- set.graph.attribute(res, 'corr', corr)
-  res <- set.graph.attribute(res, 'p', p)
+  if (igraph_opt("add.params")) {
+    res$name <- 'Correlated random graph'
+    res$corr <- corr
+    res$p <- p
+  }
+
   res
 }
 
@@ -871,6 +925,74 @@ random_edge_walk <- function(graph, start, steps, weights=NULL, mode=c("out", "i
 }
 
 #' @export
+global_efficiency <- function(graph, weights=NULL, directed=TRUE) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  directed <- as.logical(directed)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_global_efficiency, graph, weights, directed)
+
+  res
+}
+
+#' @export
+local_efficiency <- function(graph, vids=V(graph), weights=NULL, directed=TRUE, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  vids <- as.igraph.vs(graph, vids)
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  directed <- as.logical(directed)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_local_efficiency, graph, vids-1, weights, directed, mode)
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
+  res
+}
+
+#' @export
+average_local_efficiency <- function(graph, weights=NULL, directed=TRUE, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
+    weights <- V(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  directed <- as.logical(directed)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_average_local_efficiency, graph, weights, directed, mode)
+
+  res
+}
+
+#' @export
 is_graphical <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all")) {
   # Argument checks
   out.deg <- as.numeric(out.deg)
@@ -993,6 +1115,103 @@ bridges <- function(graph) {
   res
 }
 
+all_clique_sizes <- function(graph, min.size=0, max.size=0) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  min.size <- as.integer(min.size)
+  max.size <- as.integer(max.size)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_clique_size_hist, graph, min.size, max.size)
+
+  res
+}
+
+maximal_clique_sizes <- function(graph, min.size=0, max.size=0) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  min.size <- as.integer(min.size)
+  max.size <- as.integer(max.size)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_maximal_cliques_hist, graph, min.size, max.size)
+
+  res
+}
+
+#' @export
+cliques <- function(graph, vertex.weights=NULL, min=0, max=0, maximal=FALSE) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex.weights <- V(graph)$weight
+  }
+  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+    vertex.weights <- as.numeric(vertex.weights)
+  } else {
+    vertex.weights <- NULL
+  }
+  min <- as.numeric(min)
+  max <- as.numeric(max)
+  maximal <- as.logical(maximal)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_weighted_cliques, graph, vertex.weights, min, max, maximal)
+  if (igraph_opt("return.vs.es")) {
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- create_vs(graph, res[[i_]])
+    }
+  }
+  res
+}
+
+#' @export
+largest_cliques <- function(graph, vertex.weights=NULL) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex.weights <- V(graph)$weight
+  }
+  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+    vertex.weights <- as.numeric(vertex.weights)
+  } else {
+    vertex.weights <- NULL
+  }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_largest_weighted_cliques, graph, vertex.weights)
+  if (igraph_opt("return.vs.es")) {
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- create_vs(graph, res[[i_]])
+    }
+  }
+  res
+}
+
+#' @export
+clique_num <- function(graph, vertex.weights=NULL) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
+    vertex.weights <- V(graph)$weight
+  }
+  if (!is.null(vertex.weights) && any(!is.na(vertex.weights))) {
+    vertex.weights <- as.numeric(vertex.weights)
+  } else {
+    vertex.weights <- NULL
+  }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_weighted_clique_number, graph, vertex.weights)
+
+  res
+}
+
 #' @export
 similarity.jaccard <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
@@ -1062,7 +1281,10 @@ sample_hrg <- function(hrg) {
   # Function call
   res <- .Call(C_R_igraph_hrg_game, hrg)
 
-  res <- set.graph.attribute(res, 'name', 'Hierarchical random graph model')
+  if (igraph_opt("add.params")) {
+    res$name <- 'Hierarchical random graph model'
+  }
+
   res
 }
 
@@ -1718,6 +1940,48 @@ automorphisms <- function(graph, colors, sh="fm") {
 }
 
 #' @export
+automorphism_group <- function(graph, colors, sh="fm", details=FALSE) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (missing(colors)) {
+    if ("color" %in% vertex_attr_names(graph)) {
+      colors <- V(graph)$color
+    } else {
+      colors <- NULL
+    }
+  }
+  if (!is.null(colors)) {
+    colors <- as.integer(colors)-1L
+  }
+  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_automorphism_group, graph, colors, sh)
+  if (igraph_opt("return.vs.es")) {
+    for (i_ in seq_along(res$generators)) {
+      res$generators[[i_]] <- create_vs(graph, res$generators[[i_]])
+    }
+  }
+  if (!details) {
+    res <- res$generators
+  }
+  res
+}
+
+#' @export
+simplify_and_colorize <- function(graph) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_simplify_and_colorize, graph)
+
+  res
+}
+
+#' @export
 scg_eps <- function(V, groups, mtype=c("symmetric", "laplacian", "stochastic"), p=NULL, norm=c("row", "col")) {
   # Argument checks
   V <- as.matrix(structure(as.double(V), dim=dim(V)))
@@ -1890,7 +2154,7 @@ eulerian_cycle <- function(graph) {
 }
 
 #' @export
-is_tree <- function(graph, mode=c("all", "out", "in", "total"), details=FALSE) {
+is_tree <- function(graph, mode=c("out", "in", "all", "total"), details=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
@@ -1915,6 +2179,11 @@ make_from_prufer <- function(prufer) {
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_from_prufer, prufer)
+
+  if (igraph_opt("add.params")) {
+    res$name <- 'Tree from Prufer sequence'
+    res$prufer <- prufer
+  }
 
   res
 }

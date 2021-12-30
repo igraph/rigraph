@@ -21,6 +21,20 @@ Added:
 - `greedy_vertex_coloring()` finds vertex colorings based on a simple greedy
   algorithm.
 - `bridges()` finds the bridges (cut-edges) of a graph
+- The frame width of circle, rectangle and square vertex shapes can now be
+  adjusted on plots with the `frame.width` vertex attribute or the
+  `vertex.frame.width` keyword argumen, thanks to @simoncarrignon .
+  See PR #500 for more details.
+- `automorphism_group()` returns a possible (not necessarily minimal)
+  generating set of the automorphism group of a graph.
+- `global_efficiency()` calculates the global efficiency of the graph.
+- `local_efficiency()` calculates the local efficiency of each vertex in a graph.
+- `average_local_efficiency()` calculates the average local efficiency across
+  the set of vertices in a graph.
+- `rewire(each_edge(...))` now supports rewiring only one endpoint of each edge.
+- `realize_degseq()` generates graphs from degree sequences in a deterministic
+  manner. It is also available as `make_(degseq(..., deterministic=TRUE))`.
+- `clique_sizes()` counts cliques of different sizes without storing them all.
 
 Fixed:
 
@@ -64,6 +78,12 @@ Removed:
 
 - The deprecated `page_rank_old()` function and the deprecated `power` method of
   `page_rank()` were removed.
+
+# igraph 1.2.11
+
+Dec 27, 2021
+
+No user visible changes.
 
 # igraph 1.2.10
 

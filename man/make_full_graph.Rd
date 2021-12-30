@@ -30,7 +30,7 @@ make_full_graph(5)
 print_all(make_full_graph(4, directed = TRUE))
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -44,4 +44,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Full graph}
-\concept{determimistic constructors}
+\concept{deterministic constructors}

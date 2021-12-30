@@ -55,7 +55,7 @@ make_lattice(c(5, 5, 5))
 make_lattice(length = 5, dim = 3)
 }
 \seealso{
-Other determimistic constructors: 
+Other deterministic constructors: 
 \code{\link{graph_from_atlas}()},
 \code{\link{graph_from_edgelist}()},
 \code{\link{graph_from_literal}()},
@@ -69,4 +69,4 @@ Other determimistic constructors:
 \code{\link{make_tree}()}
 }
 \concept{Lattice}
-\concept{determimistic constructors}
+\concept{deterministic constructors}
