@@ -49,6 +49,8 @@ Fixed:
   number of vertices plus one, adding a bias towards this number, even if the
   graph was weighted and the number of vertices plus one was not a path length
   that could safely have been considered as being longer than any "valid" path.
+- `layout_with_sugiyama()` now handles the case of exactly one extra virtual
+  node correctly; fixeds #85
 
 Changed:
 
