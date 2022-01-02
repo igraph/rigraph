@@ -1970,18 +1970,6 @@ automorphism_group <- function(graph, colors, sh="fm", details=FALSE) {
 }
 
 #' @export
-simplify_and_colorize <- function(graph) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_simplify_and_colorize, graph)
-
-  res
-}
-
-#' @export
 scg_eps <- function(V, groups, mtype=c("symmetric", "laplacian", "stochastic"), p=NULL, norm=c("row", "col")) {
   # Argument checks
   V <- as.matrix(structure(as.double(V), dim=dim(V)))
