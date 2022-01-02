@@ -1729,7 +1729,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
     res$layout.dummy <- matrix(NA_real_, nrow=0, ncol=2)
   } else {
     res$layout <- res$res[seq_len(vc),]
-    res$layout.dummy <- res$res[(vc+1):nrow(res$res),]
+    res$layout.dummy <- res$res[(vc+1):nrow(res$res),, drop=FALSE]
   }
 
   # Add some attributes to the extended graph
