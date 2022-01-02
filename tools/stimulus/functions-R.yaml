@@ -1178,6 +1178,8 @@ igraph_simplify_and_colorize:
     # but _multiplicities_, so we simply use VECTOR_INT there
     PARAMS: |-
         GRAPH graph, OUT GRAPH res, OUT VECTOR_INT vertex_color, OUT VECTOR_INT edge_color
+    # R function is hand-rolled
+    IGNORE: RR
 
 #######################################
 # SCG
