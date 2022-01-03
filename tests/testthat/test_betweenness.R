@@ -65,3 +65,26 @@ test_that("normalization works well", {
   b2  <- betweenness(g2, normalized=TRUE)
   expect_that(b2, equals(c('0'=0, '1'=1, '2'=0)))
 })
+
+test_that("shortest paths are compared with tolerance when calculating betweenness", {
+  # The test case below is designed in a way that the paths 3-6 and 3-4-6 have the
+  # same total weight when compared with a tolerance, but they appear different
+  # if the comparison is made without an epsilon tolerance due to numeric
+  # inaccuracies.
+  #
+  # See https://github.com/igraph/rigraph/issues/314
+
+  from <- c(1, 2, 3, 3, 3, 4, 6, 7, 2, 9, 5, 7, 9, 9, 5, 8)
+  to <- c(4, 3, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
+  edges <- cbind(from, to)
+  edges.dists <- c(1.9617537, 0.9060834, 2.2165446, 1.6251956,  
+	               2.4473929, 0.5913490, 8.7093236, 2.8387330,
+	               6.1225042, 20.7217776, 6.8027218, 16.3147479,
+	               5.2605598, 6.6816853, 4.9482123, 1.8989790)
+
+  g <- graph.data.frame(edges, directed = FALSE)
+  result <- betweenness(g, weights = edges.dists)
+
+  expect_that(result[1:5], equals(c('1'=0, '2'=44, '3'=71, '4'=36.5, '6'=44)))
+})
+
