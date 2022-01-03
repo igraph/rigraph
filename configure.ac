@@ -1,4 +1,4 @@
-AC_INIT(igraph, 1.2.10.9113, ntamas@gmail.com)
+AC_INIT(igraph, 1.2.10.9114, ntamas@gmail.com)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
