@@ -87,7 +87,8 @@ The callback functions must have the following arguments: \describe{
 \item{data}{A named numeric vector, with the following entries:
 \sQuote{vid}, the vertex that was just visited and \sQuote{dist}, its
 distance from the root of the search tree.} \item{extra}{The extra
-argument.} } See examples below on how to use the callback functions.
+argument.} } The callback must return FALSE to continue the search or TRUE
+to terminate it. See examples below on how to use the callback functions.
 }
 \examples{
 

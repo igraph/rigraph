@@ -1390,10 +1390,12 @@ count_multiple <- function(graph, eids=E(graph)) {
 #' \item{graph}{The input graph is passed to the callback function here.}
 #' \item{data}{A named numeric vector, with the following entries:
 #' \sQuote{vid}, the vertex that was just visited, \sQuote{pred}, its
-#' predecessor, \sQuote{succ}, its successor, \sQuote{rank}, the rank of the
+#' predecessor (zero if this is the first vertex), \sQuote{succ}, its successor
+#' (zero if this is the last vertex), \sQuote{rank}, the rank of the
 #' current vertex, \sQuote{dist}, its distance from the root of the search
-#' tree.} \item{extra}{The extra argument.} } See examples below on how to use
-#' the callback function.
+#' tree.} \item{extra}{The extra argument.} } The callback must return FALSE
+#' to continue the search or TRUE to terminate it. See examples below on how to
+#' use the callback function.
 #'
 #' @aliases graph.bfs
 #' @param graph The input graph.
@@ -1546,7 +1548,8 @@ bfs <- function(graph, root, mode=c("out", "in", "all", "total"),
 #' \item{data}{A named numeric vector, with the following entries:
 #' \sQuote{vid}, the vertex that was just visited and \sQuote{dist}, its
 #' distance from the root of the search tree.} \item{extra}{The extra
-#' argument.} } See examples below on how to use the callback functions.
+#' argument.} } The callback must return FALSE to continue the search or TRUE
+#' to terminate it. See examples below on how to use the callback functions.
 #'
 #' @aliases graph.dfs
 #' @param graph The input graph.

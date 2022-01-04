@@ -51,12 +51,19 @@ Fixed:
   that could safely have been considered as being longer than any "valid" path.
 - `layout_with_sugiyama()` now handles the case of exactly one extra virtual
   node correctly; fixeds #85
+- `bfs()` and `dfs()` callback functions now correctly receive 1-based vertex
+  indices and ranks; it used to be zero-based in earlier versions
+- Accidentally returning a non-logical value from a `bfs()` or `dfs()` callback
+  does not crash R any more
 
 Changed:
 
 - The `neimode` argument of `bfs()` and `dfs()` was renamed to `mode` for sake
   of consistency with other functions. The old argument name is deprecated and
   will be removed in 1.4.0.
+- `bfs()` and `dfs()` callback functions now correctly receive 1-based vertex
+  indices and ranks; it used to be zero-based in earlier versions. (This is
+  actually a bugfix so it's also mentioned in the "Fixed" section).
 - `closeness()`, `betweenness()` and `edge_betweenness()` now all take a
   `cutoff` argument on their own. `estimate_closeness()`, `estimate_betweenness()`
   and `estimate_edge_betweenness()` became aliases, with identical signature.
