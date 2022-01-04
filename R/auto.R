@@ -1115,7 +1115,7 @@ bridges <- function(graph) {
   res
 }
 
-all_clique_sizes <- function(graph, min.size=0, max.size=0) {
+all_clique_size_counts <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   min.size <- as.integer(min.size)
@@ -1128,7 +1128,7 @@ all_clique_sizes <- function(graph, min.size=0, max.size=0) {
   res
 }
 
-maximal_clique_sizes <- function(graph, min.size=0, max.size=0) {
+maximal_clique_size_counts <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   min.size <- as.integer(min.size)

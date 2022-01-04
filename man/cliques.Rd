@@ -10,7 +10,7 @@
 \alias{largest.cliques}
 \alias{count_max_cliques}
 \alias{max_cliques}
-\alias{clique_sizes}
+\alias{clique_size_counts}
 \title{Functions to find cliques, ie. complete subgraphs in a graph}
 \usage{
 cliques(graph, vertex.weights = NULL, min = 0, max = 0, maximal = FALSE)
@@ -61,7 +61,7 @@ this case.
 \code{clique_num} and \code{count_max_cliques} return an integer
 scalar.
 
-\code{clique_sizes} returns a numeric vector with the clique sizes such that
+\code{clique_size_counts} returns a numeric vector with the clique sizes such that
 the i-th item belongs to cliques of size i. Trailing zeros are currently
 truncated, but this might change in future versions.
 }
@@ -88,7 +88,7 @@ maximal clique is not necessarily the largest.
 \code{clique_num} calculates the size or weight of the largest clique(s),
 depending on whether vertex weights are provided or not.
 
-\code{clique_sizes} returns a numeric vector representing a histogram
+\code{clique_size_counts} returns a numeric vector representing a histogram
 of clique sizes, between the given minimum and maximum clique size.
 }
 \examples{
