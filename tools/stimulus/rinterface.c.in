@@ -7764,17 +7764,17 @@ igraph_bool_t R_igraph_bfshandler(const igraph_t *graph,
   SET_STRING_ELT(names, 2, mkChar("succ"));
   SET_STRING_ELT(names, 3, mkChar("rank"));
   SET_STRING_ELT(names, 4, mkChar("dist"));
-  REAL(args)[0]=vid;
-  REAL(args)[1]=pred;
-  REAL(args)[2]=succ;
-  REAL(args)[3]=rank;
+  REAL(args)[0]=vid + 1;
+  REAL(args)[1]=pred + 1;
+  REAL(args)[2]=succ + 1;
+  REAL(args)[3]=rank + 1;
   REAL(args)[4]=dist;
   SET_NAMES(args, names);
 
   PROTECT(R_fcall = lang4(data->fun, data->graph, args, data->extra));
   PROTECT(result = eval(R_fcall, data->rho));
 
-  cres=LOGICAL(result)[0];
+  cres=Rf_asLogical(result);
 
   UNPROTECT(4);
   return cres;
@@ -7896,7 +7896,7 @@ igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
 
   SET_STRING_ELT(names, 0, mkChar("vid"));
   SET_STRING_ELT(names, 1, mkChar("dist"));
-  REAL(args)[0]=vid;
+  REAL(args)[0]=vid + 1;
   REAL(args)[1]=dist;
   SET_NAMES(args, names);
 
@@ -7904,7 +7904,7 @@ igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
 			  data->graph, args, data->extra));
   PROTECT(result = eval(R_fcall, data->rho));
 
-  cres=LOGICAL(result)[0];
+  cres=Rf_asLogical(result);
 
   UNPROTECT(4);
   return cres;
