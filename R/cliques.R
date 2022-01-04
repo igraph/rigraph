@@ -44,12 +44,12 @@
 #' \code{clique_num} calculates the size or weight of the largest clique(s),
 #' depending on whether vertex weights are provided or not.
 #' 
-#' \code{clique_sizes} returns a numeric vector representing a histogram
+#' \code{clique_size_counts} returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
-#' clique_sizes
+#' clique_size_counts
 #' @param graph The input graph, directed graphs will be considered as
 #' undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -75,7 +75,7 @@
 #' \code{clique_num} and \code{count_max_cliques} return an integer
 #' scalar.
 #'
-#' \code{clique_sizes} returns a numeric vector with the clique sizes such that
+#' \code{clique_size_counts} returns a numeric vector with the clique sizes such that
 #' the i-th item belongs to cliques of size i. Trailing zeros are currently
 #' truncated, but this might change in future versions.
 #'
@@ -333,10 +333,10 @@ ivs_size <- function(graph) {
 
 #' @export
 
-clique_sizes <- function(graph, min=0, max=0, maximal=FALSE, ...) {
+clique_size_counts <- function(graph, min=0, max=0, maximal=FALSE, ...) {
   if (maximal) {
-    maximal_clique_sizes(graph, min, max, ...)
+    maximal_clique_size_counts(graph, min, max, ...)
   } else {
-    all_clique_sizes(graph, min, max, ...)
+    all_clique_size_counts(graph, min, max, ...)
   }
 }

@@ -34,7 +34,7 @@ Added:
 - `rewire(each_edge(...))` now supports rewiring only one endpoint of each edge.
 - `realize_degseq()` generates graphs from degree sequences in a deterministic
   manner. It is also available as `make_(degseq(..., deterministic=TRUE))`.
-- `clique_sizes()` counts cliques of different sizes without storing them all.
+- `clique_size_counts()` counts cliques of different sizes without storing them all.
 
 Fixed:
 

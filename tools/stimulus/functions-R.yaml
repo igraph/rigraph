@@ -641,13 +641,13 @@ igraph_clique_number:
 igraph_clique_size_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
-    NAME: all_clique_sizes
+    NAME: all_clique_size_counts
     INTERNAL: true
 
 igraph_maximal_cliques_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
-    NAME: maximal_clique_sizes
+    NAME: maximal_clique_size_counts
     INTERNAL: true
 
 igraph_weighted_cliques:
