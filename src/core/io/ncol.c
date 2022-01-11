@@ -38,7 +38,7 @@ void igraph_ncol_yyset_in  (FILE * in_str, void* yyscanner );
 /**
  * \ingroup loadsave
  * \function igraph_read_graph_ncol
- * \brief Reads a <code>.ncol</code> file used by LGL.
+ * \brief Reads an <code>.ncol</code> file used by LGL.
  *
  * Also useful for creating graphs from \quote named\endquote (and
  * optionally weighted) edge lists.
@@ -48,8 +48,8 @@ void igraph_ncol_yyset_in  (FILE * in_str, void* yyscanner );
  * (http://lgl.sourceforge.net), and it is simply a
  * symbolic weighted edge list. It is a simple text file with one edge
  * per line. An edge is defined by two symbolic vertex names separated
- * by whitespace. (The symbolic vertex names themselves cannot contain
- * whitespace. They might follow by an optional number, this will be
+ * by whitespace. The vertex names themselves cannot contain
+ * whitespace. They may be followed by an optional number,
  * the weight of the edge; the number can be negative and can be in
  * scientific notation. If there is no weight specified to an edge it
  * is assumed to be zero.
@@ -59,13 +59,14 @@ void igraph_ncol_yyset_in  (FILE * in_str, void* yyscanner );
  * LGL cannot deal with files which contain multiple or loop edges,
  * this is however not checked here, as \a igraph is happy with
  * these.
+ *
  * \param graph Pointer to an uninitialized graph object.
  * \param instream Pointer to a stream, it should be readable.
  * \param predefnames Pointer to the symbolic names of the vertices in
  *        the file. If \c NULL is given here then vertex ids will be
  *        assigned to vertex names in the order of their appearance in
- *        the \c .ncol file. If it is not \c NULL and some unknown
- *        vertex names are found in the \c .ncol file then new vertex
+ *        the <code>.ncol</code> file. If it is not \c NULL and some unknown
+ *        vertex names are found in the <code>.ncol</code> file then new vertex
  *        ids will be assigned to them.
  * \param names Logical value, if TRUE the symbolic names of the
  *        vertices will be added to the graph as a vertex attribute
@@ -206,7 +207,7 @@ int igraph_read_graph_ncol(igraph_t *graph, FILE *instream,
 /**
  * \ingroup loadsave
  * \function igraph_write_graph_ncol
- * \brief Writes the graph to a file in <code>.ncol</code> format
+ * \brief Writes the graph to a file in <code>.ncol</code> format.
  *
  * </para><para>
  * <code>.ncol</code> is a format used by LGL, see \ref
@@ -216,14 +217,19 @@ int igraph_read_graph_ncol(igraph_t *graph, FILE *instream,
  * Note that having multiple or loop edges in an
  * <code>.ncol</code> file breaks the  LGL software but
  * \a igraph does not check for this condition.
+ *
+ * </para><para>
+ * This format cannot represent zero-degree vertices.
+ *
  * \param graph The graph to write.
  * \param outstream The stream object to write to, it should be
  *        writable.
- * \param names The name of the vertex attribute, if symbolic names
- *        are written to the file. If not, supply 0 here.
- * \param weights The name of the edge attribute, if they are also
- *        written to the file. If you don't want weights, supply 0
- *        here.
+ * \param names The name of a string vertex attribute, if symbolic names
+ *        are to be written to the file. Supply \c NULL to write vertex
+ *        ids instead.
+ * \param weights The name of a numerical edge attribute, which will be
+ *        written as weights to the file. Supply \c NULL to skip writing
+ *        edge weights.
  * \return Error code:
  *         \c IGRAPH_EFILE if there is an error writing the
  *         file.
@@ -252,7 +258,7 @@ int igraph_write_graph_ncol(const igraph_t *graph, FILE *outstream,
     if (names) {
         IGRAPH_CHECK(igraph_i_attribute_gettype(graph, &nametype,
                                                 IGRAPH_ATTRIBUTE_VERTEX, names));
-        if (nametype != IGRAPH_ATTRIBUTE_NUMERIC && nametype != IGRAPH_ATTRIBUTE_STRING) {
+        if (nametype != IGRAPH_ATTRIBUTE_STRING) {
             IGRAPH_WARNING("ignoring names attribute, unknown attribute type");
             names = 0;
         }
