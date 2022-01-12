@@ -199,8 +199,9 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
       return R_NilValue;
 
     case SAFEEVAL_INTERRUPTION:
-      /* TODO: handle interruption! */
-      return result;
+      IGRAPH_FINALLY_FREE();
+      error("Interrupted by user");
+      return R_NilValue;
       
     default:
       error(
