@@ -129,6 +129,89 @@ SEXP R_igraph_c2(SEXP x1, SEXP x2) {
   return ret;
 }
 
+/* evaluate an expression in a tryCatch() block to ensure that errors do not
+ * longjmp() back to the top level. Adapted from include/Rcpp/api/meat/Rcpp_eval.h
+ * in the Rcpp project */
+
+typedef enum {
+  SAFEEVAL_OK = 0,
+  SAFEEVAL_ERROR = 1,
+  SAFEEVAL_INTERRUPTION = 2
+} R_igraph_safe_eval_result_t;
+
+R_igraph_safe_eval_result_t R_igraph_safe_eval_classify_result(SEXP result) {
+  if (Rf_inherits(result, "condition")) {
+    if (Rf_inherits(result, "error")) {
+      return SAFEEVAL_ERROR;
+    } else if (Rf_inherits(result, "interrupt")) {
+      return SAFEEVAL_INTERRUPTION;
+    }
+  }
+
+  return SAFEEVAL_OK;
+}
+
+SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
+  /* find `identity` function used to capture errors */
+  SEXP identity = PROTECT(Rf_install("identity"));
+  SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
+  if (identity_func == R_UnboundValue) {
+    Rf_error("Failed to find 'base::identity()'");
+  }
+
+  /* define the call -- enclose with `tryCatch` so we can record errors */
+  SEXP try_catch = PROTECT(Rf_install("tryCatch"));
+  SEXP try_catch_call = PROTECT(Rf_lang4(try_catch, expr_call, identity_func, identity_func));
+
+  SET_TAG(CDDR(try_catch_call), Rf_install("error"));
+  SET_TAG(CDDR(CDR(try_catch_call)), Rf_install("interrupt"));
+
+  /* execute the call */
+  SEXP retval = PROTECT(Rf_eval(try_catch_call, R_GlobalEnv));
+
+  /* did we get an error or an interrupt? */
+  if (result) {
+    *result = R_igraph_safe_eval_classify_result(retval);
+  }
+
+  UNPROTECT(5);
+
+  return retval;
+}
+
+SEXP R_igraph_handle_safe_eval_result(SEXP result) {
+  switch (R_igraph_safe_eval_classify_result(result)) {
+    case SAFEEVAL_OK:
+      return result;
+
+    case SAFEEVAL_ERROR:
+      /* extract the error message, call IGRAPH_FINALLY_FREE() and then throw
+       * the error. We cannot raise the error directly because that would
+       * longjmp() and could potentially overwrite stack-allocated data structures
+       * that are also in the "finally" stack */
+      IGRAPH_FINALLY_FREE();
+
+      SEXP condition_message = PROTECT(Rf_install("conditionMessage"));
+      SEXP condition_message_call = PROTECT(Rf_lang2(condition_message, result));
+      SEXP evaluated_condition_message = PROTECT(Rf_eval(condition_message_call, R_GlobalEnv));
+      error(CHAR(STRING_ELT(evaluated_condition_message, 0)));
+      UNPROTECT(3);
+      return R_NilValue;
+
+    case SAFEEVAL_INTERRUPTION:
+      IGRAPH_FINALLY_FREE();
+      error("Interrupted by user");
+      return R_NilValue;
+      
+    default:
+      error(
+        "Invalid object type returned from R_igraph_safe_eval(). This is a "
+        "bug; please report it to the developers."
+      );
+      return R_NilValue;
+  }
+}
+
 /******************************************************
  * Attributes                                         *
  *****************************************************/
@@ -1781,6 +1864,7 @@ SEXP R_igraph_ac_all_other(SEXP attr,
                            const char *function_name,
                            SEXP arg) {
   SEXP res, res2;
+  R_igraph_safe_eval_result_t evalResult;
   long int i, len=igraph_vector_ptr_size(merges);
 
   PROTECT(res=NEW_LIST(len));
@@ -1794,25 +1878,14 @@ SEXP R_igraph_ac_all_other(SEXP attr,
       long int src=(long int) VECTOR(*v)[j];
       REAL(tmp)[j] = src+1;
     }
-    if (! arg) {
-      SEXP l1 = PROTECT(install(function_name));
-      SEXP l2 = PROTECT(install("["));
-      SEXP l3 = PROTECT(lang3(l2, attr, tmp));
-      SEXP l4 = PROTECT(EVAL(l3));
-      SEXP l5 = PROTECT(lang2(l1, l4));
-      SEXP l6 = PROTECT(EVAL(l5));
-      SET_VECTOR_ELT(res, i, l6);
-      UNPROTECT(6);
-    } else {
-      SEXP l1 = PROTECT(install(function_name));
-      SEXP l2 = PROTECT(install("["));
-      SEXP l3 = PROTECT(lang3(l2, attr, tmp));
-      SEXP l4 = PROTECT(EVAL(l3));
-      SEXP l5 = PROTECT(lang3(l1, l4, arg));
-      SEXP l6 = PROTECT(EVAL(l5));
-      SET_VECTOR_ELT(res, i, l6);
-      UNPROTECT(6);
-    }
+    SEXP l1 = PROTECT(install(function_name));
+    SEXP l2 = PROTECT(install("["));
+    SEXP l3 = PROTECT(lang3(l2, attr, tmp));
+    SEXP l4 = PROTECT(EVAL(l3));
+    SEXP l5 = PROTECT(arg ? lang3(l1, l4, arg) : lang2(l1, l4));
+    SEXP l6 = PROTECT(R_igraph_safe_eval(l5, NULL));
+    SET_VECTOR_ELT(res, i, R_igraph_handle_safe_eval_result(l6));
+    UNPROTECT(6);
     UNPROTECT(1);
   }
 
@@ -1861,8 +1934,8 @@ SEXP R_igraph_ac_func(SEXP attr,
     SEXP l2 = PROTECT(lang3(l1, attr, tmp));
     SEXP l3 = PROTECT(EVAL(l2));
     SEXP l4 = PROTECT(lang2(func, l3));
-    SEXP l5 = PROTECT(EVAL(l4));
-    SET_VECTOR_ELT(res, i, l5);
+    SEXP l5 = PROTECT(R_igraph_safe_eval(l4, NULL));
+    SET_VECTOR_ELT(res, i, R_igraph_handle_safe_eval_result(l5));
     UNPROTECT(5);
     UNPROTECT(1);
   }
@@ -2314,6 +2387,7 @@ void R_igraph_error_handler(const char *reason, const char *file,
     maybe_add_punctuation(R_igraph_error_reason, ","),
     igraph_strerror(igraph_errno)
   );
+
 }
 
 void R_igraph_warning_handler(const char *reason, const char *file,
@@ -2324,7 +2398,7 @@ void R_igraph_warning_handler(const char *reason, const char *file,
 extern int R_interrupts_pending;
 
 int R_igraph_interrupt_handler(void *data) {
-#if  ( defined(HAVE_AQUA) || defined(Win32) )
+#if  ( defined(Win32) )
   R_CheckUserInterrupt();
 #else
   if (R_interrupts_pending) {
@@ -2390,6 +2464,7 @@ SEXP R_igraph_set_verbose(SEXP verbose) {
 }
 
 SEXP R_igraph_finalizer() {
+  IGRAPH_FINALLY_FREE();
   SEXP l1 = PROTECT(install("getNamespace"));
   SEXP l2 = PROTECT(ScalarString(mkChar("igraph")));
   SEXP l3 = PROTECT(lang2(l1, l2));
@@ -2400,7 +2475,6 @@ SEXP R_igraph_finalizer() {
   SEXP l7 = PROTECT(ScalarLogical(1));
   SEXP l8 = PROTECT(lang4(l4, l5, l6, l7));
   eval(l8, rho);
-  IGRAPH_FINALLY_FREE();
   UNPROTECT(9);
   return R_NilValue;
 }

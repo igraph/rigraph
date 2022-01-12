@@ -196,3 +196,12 @@ test_that("cannot use vs/es from another graph", {
   e <- E(g)[1:2]
   expect_error(g2 - e, "Cannot use an edge sequence from another graph")
 })
+
+test_that("attribute combinations handle errors correctly", {
+
+  g <- graph(c(1,2, 2,1))
+  E(g)$weight <- c('a', 'b')
+  expect_error(as.undirected(g, edge.attr.comb=list(weight="sum")), "invalid 'type'")
+  expect_error(as.undirected(g, edge.attr.comb=list(weight=sum)), "invalid 'type'")
+
+})
