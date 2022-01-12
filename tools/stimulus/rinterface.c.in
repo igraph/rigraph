@@ -146,9 +146,9 @@ R_igraph_safe_eval_result_t R_igraph_safe_eval_classify_result(SEXP result) {
     } else if (Rf_inherits(result, "interrupt")) {
       return SAFEEVAL_INTERRUPTION;
     }
-  } else {
-    return SAFEEVAL_OK;
   }
+
+  return SAFEEVAL_OK;
 }
 
 SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
