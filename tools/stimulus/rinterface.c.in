@@ -1934,8 +1934,8 @@ SEXP R_igraph_ac_func(SEXP attr,
     SEXP l2 = PROTECT(lang3(l1, attr, tmp));
     SEXP l3 = PROTECT(EVAL(l2));
     SEXP l4 = PROTECT(lang2(func, l3));
-    SEXP l5 = PROTECT(EVAL(l4));
-    SET_VECTOR_ELT(res, i, l5);
+    SEXP l5 = PROTECT(R_igraph_safe_eval(l4, NULL));
+    SET_VECTOR_ELT(res, i, R_igraph_handle_safe_eval_result(l5));
     UNPROTECT(5);
     UNPROTECT(1);
   }
