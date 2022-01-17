@@ -29,6 +29,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
+#include <R_ext/Visibility.h>
 #include "rinterface.h"
 
 #include "init.c"               /* registration table */
@@ -2440,7 +2441,7 @@ int R_igraph_status_handler(const char *message, void *data) {
   return 0;
 }
 
-void R_init_igraph(DllInfo *dll) {
+void attribute_visible R_init_igraph(DllInfo *dll) {
   R_registerRoutines(dll, CEntries, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
   R_forceSymbols(dll, TRUE);
