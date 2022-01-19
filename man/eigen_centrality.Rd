@@ -65,6 +65,11 @@ relationship which is easy to see in the special case of a diagonalizable
 symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
 decomposition).)
 
+The adjacency matrix used in the eigenvector centrality calculation assumes
+that loop edges are counted \emph{twice}; this is because each loop edge has
+\emph{two} endpoints that are both connected to the same vertex, and you
+could traverse the loop edge via either endpoint.
+
 From igraph version 0.5 this function uses ARPACK for the underlying
 computation, see \code{\link{arpack}} for more about ARPACK in igraph.
 }
