@@ -189,20 +189,7 @@ EDGECAPACITY:
 
 BIPARTITE_TYPES:
     INCONV: |-
-        if (is.null(%I%) && "type" %in% vertex_attr_names(%I1%)) {
-          %I% <- V(%I1%)$type
-        }
-        if (!is.null(%I%)) {
-          if (!is.logical(%I%)) {
-            warning("vertex types converted to logical")
-          }
-          %I% <- as.logical(%I%)
-          if (any(is.na(%I%))) {
-            stop("`NA' is not allowed in vertex types")
-          }
-        } else {
-          stop("Not a bipartite graph, supply `types' argument")
-        }
+        %I% <- handle_vertex_type_arg(%I%, %I1%)
     OUTCONV:
         OUT: |-
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {

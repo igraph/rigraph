@@ -768,14 +768,7 @@ as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
                           names=TRUE, sparse=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
-    types <- V(graph)$type 
-  } 
-  if (!is.null(types)) { 
-    types <- as.logical(types) 
-  } else { 
-    stop("Not a bipartite graph, supply `types' argument") 
-  }
+  types <- handle_vertex_type_arg(types, graph)
   
   names <- as.logical(names)
   sparse <- as.logical(sparse)
