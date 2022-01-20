@@ -124,7 +124,7 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
     }
   }
   if (is.null(types) && required) {
-    stop("Not a bipartite graph, supply `types' argument") 
+    stop("Not a bipartite graph, supply `types' argument or add a vertex attribute named `type'")
   }
   return(types)
 }
