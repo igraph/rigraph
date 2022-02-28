@@ -1,5 +1,5 @@
 
-context("Bug 1033045")
+context("Bug 1033045 from Launchpad")
 
 test_that("Minimal s-t separators work", {
   library(igraph)
