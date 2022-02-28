@@ -390,7 +390,7 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjlist, graph, mode)
-  res <- lapply(res, function(x) V(graph)[x + 1])
+  res <- lapply(res, function(.x) V(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
 }
@@ -408,7 +408,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjedgelist, graph, mode)
-  res <- lapply(res, function(x) E(graph)[x + 1])
+  res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
 }

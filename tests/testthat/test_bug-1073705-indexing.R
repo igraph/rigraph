@@ -1,5 +1,5 @@
 
-context("Bug 1073705")
+context("Bug 1073705 from Launchpad")
 
 test_that("Weighted indexing does not remove edges", {
   library(igraph)

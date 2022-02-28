@@ -1,5 +1,5 @@
 
-context("Bug 1073800")
+context("Bug 1073800 from Launchpad")
 
 test_that("Largest cliques is correct", {
   library(igraph)
