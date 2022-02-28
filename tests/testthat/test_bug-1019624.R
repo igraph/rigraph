@@ -1,5 +1,5 @@
 
-context("Bug 1019624 from Launchpad")
+context("Bug 1019624")
 
 test_that("weighted graph_from_adjacency_matrix works on integer matrices", {
   library(igraph)
