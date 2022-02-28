@@ -74,7 +74,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
   res <- .Call(C_R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
                vertex.color2, edge.color1, edge.color2)
 
-  lapply(res, function(x) V(graph2)[x + 1])
+  lapply(res, function(.x) V(graph2)[.x + 1])
 }
 
 #' @export
@@ -131,7 +131,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
   res <- .Call(C_R_igraph_get_subisomorphisms_vf2, graph1, graph2,
                vertex.color1, vertex.color2, edge.color1, edge.color2)
 
-  lapply(res, function(x) V(graph1)[x + 1])
+  lapply(res, function(.x) V(graph1)[.x + 1])
 }
 
 #' @export
