@@ -132,7 +132,7 @@ $(RAY2): src/vendor/%: vendor/%
 
 # R files that are generated/copied
 
-RGEN = R/auto.R src/rinterface.c src/rinterface.h \
+RGEN = R/auto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
 	src/rinterface_extra.c src/lazyeval.c src/init.c src/Makevars.in \
 	configure src/config.h.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
@@ -197,7 +197,7 @@ configure src/config.h.in: configure.ac
 DESCRIPTION: tools/stimulus/DESCRIPTION version_number
 	sed 's/^Version: .*$$/Version: '$(VERSION)'/' $< > $@
 
-src/rinterface.h: tools/stimulus/rinterface.h
+src/%.h: tools/stimulus/%.h
 	mkdir -p src
 	cp $< $@
 
@@ -206,6 +206,10 @@ src/rinterface_extra.c: tools/stimulus/rinterface_extra.c
 	cp $< $@
 
 src/lazyeval.c: tools/stimulus/lazyeval.c
+	mkdir -p src
+	cp $< $@
+
+src/rrandom.c: tools/stimulus/rrandom.c
 	mkdir -p src
 	cp $< $@
 
@@ -219,7 +223,7 @@ OBJECTS := $(shell echo $(CORESRC) $(VENDORSRC) $(ARPACK) $(RAY) $(UUID) | \
         grep -E '\.(c|cpp|cc|f|l|y)$$' | \
 		sed 's/\.[^\.][^\.]*$$/.o/' | \
 		sed 's,^src/,,' \
-		) rinterface.o rinterface_extra.o lazyeval.o
+		) rinterface.o rinterface_extra.o rrandom.o lazyeval.o
 
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@
