@@ -1867,7 +1867,6 @@ SEXP R_igraph_ac_all_other(SEXP attr,
                            const char *function_name,
                            SEXP arg) {
   SEXP res, res2;
-  R_igraph_safe_eval_result_t evalResult;
   long int i, len=igraph_vector_ptr_size(merges);
 
   PROTECT(res=NEW_LIST(len));
@@ -7567,60 +7566,6 @@ SEXP R_igraph_kautz(SEXP pm, SEXP pn) {
   igraph_kautz(&g, m, n);
   PROTECT(result=R_igraph_to_SEXP(&g));
   igraph_destroy(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_is_loop(SEXP graph, SEXP edges) {
-
-  igraph_es_t es;
-  igraph_t g;
-  igraph_vector_bool_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_es(edges, &g, &es);
-  igraph_vector_bool_init(&res, 0);
-  igraph_is_loop(&g, &res, es);
-  PROTECT(result=R_igraph_vector_bool_to_SEXP(&res));
-  igraph_vector_bool_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_is_multiple(SEXP graph, SEXP edges) {
-
-  igraph_es_t es;
-  igraph_t g;
-  igraph_vector_bool_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_es(edges, &g, &es);
-  igraph_vector_bool_init(&res, 0);
-  igraph_is_multiple(&g, &res, es);
-  PROTECT(result=R_igraph_vector_bool_to_SEXP(&res));
-  igraph_vector_bool_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_count_multiple(SEXP graph, SEXP edges) {
-
-  igraph_es_t es;
-  igraph_t g;
-  igraph_vector_t res;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_igraph_es(edges, &g, &es);
-  igraph_vector_init(&res, 0);
-  igraph_count_multiple(&g, &res, es);
-  PROTECT(result=R_igraph_vector_to_SEXP(&res));
-  igraph_vector_destroy(&res);
 
   UNPROTECT(1);
   return result;

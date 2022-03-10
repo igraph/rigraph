@@ -1230,7 +1230,44 @@ topo_sort <- function(graph, mode=c("out", "all", "in")) {
   res
 }
 
+#' Finding a feedback arc set in a graph
+#'
+#' A feedback arc set of a graph is a subset of edges whose removal breaks all
+#' cycles in the graph.
+#'
+#' Feedback arc sets are typically used in directed graphs. The removal of a
+#' feedback arc set of a directed graph ensures that the remaining graph is a
+#' directed acyclic graph (DAG). For undirected graphs, the removal of a feedback
+#' arc set ensures that the remaining graph is a forest (i.e. every connected
+#' component is a tree).
+#'
+#' @param graph The input graph
+#' @param weights Potential edge weights. If the graph has an edge
+#' attribute called \sQuote{\code{weight}}, and this argument is
+#' \code{NULL}, then the edge attribute is used automatically. The goal of
+#' the feedback arc set problem is to find a feedback arc set with the smallest
+#' total weight.
+#' @param algo Specifies the algorithm to use. \dQuote{\code{exact_ip}} solves
+#' the feedback arc set problem with an exact integer programming algorithm that
+#' guarantees that the total weight of the removed edges is as small as possible.
+#' \dQuote{\code{approx_eades}} uses a fast (linear-time) approximation
+#' algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
+#' \dQuote{\code{exact_ip}} while \dQuote{\code{approx}} is an alias to
+#' \dQuote{\code{approx_eades}}.
+#' @return An edge sequence (by default, but see the \code{return.vs.es} option
+#' of \code{\link{igraph_options}}) containing the feedback arc set.
+#' @references Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
+#' heuristic for the feedback arc set problem. \emph{Information Processing Letters}
+#' 47:6, pp. 319-323, 1993
+#' @keywords graphs
+#' @export
+#' @examples
+#'
+#' g <- sample_gnm(20, 40, directed=TRUE)
+#' feedback_arc_set(g)
+#' feedback_arc_set(g, algo="approx")
 
+feedback_arc_set <- feedback_arc_set
 
 #' Girth of a graph
 #' 
@@ -1284,24 +1321,13 @@ girth <- function(graph, circle=TRUE) {
   res
 }
 
-#' @export
-
-which_loop <- function(graph, eids=E(graph)) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object");
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_is_loop, graph, as.igraph.es(graph, eids)-1)
-}
-
-
-
 #' Find the multiple or loop edges in a graph
 #' 
 #' A loop edge is an edge from a vertex to itself. An edge is a multiple edge
 #' if it has exactly the same head and tail vertices as another edge. A graph
 #' without multiple and loop edges is called a simple graph.
+#' 
+#' \code{any_loop} decides whether the graph has any loop edges.
 #' 
 #' \code{which_loop} decides whether the edges of the graph are loop edges.
 #' 
@@ -1322,13 +1348,13 @@ which_loop <- function(graph, eids=E(graph)) {
 #' original multiplicity as an edge attribute.
 #' 
 #' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
-#'   any_multiple which_loop
+#'   any_loop any_multiple which_loop
 #' @param graph The input graph.
-#' @param eids The edges to which the query is restricted. By default this is
+#' @param es The edges to which the query is restricted. By default this is
 #' all edges in the graph.
-#' @return \code{any_multiple} returns a logical scalar.  \code{which_loop} and
-#' \code{which_multiple} return a logical vector. \code{count_multiple} returns a
-#' numeric vector.
+#' @return \code{any_loop} and \code{any_multiple} return a logical scalar.
+#' \code{which_loop} and \code{which_multiple} return a logical vector.
+#' \code{count_multiple} returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} to eliminate loop and multiple edges.
 #' @export
@@ -1337,6 +1363,7 @@ which_loop <- function(graph, eids=E(graph)) {
 #' 
 #' # Loops
 #' g <- graph( c(1,1,2,2,3,3,4,5) )
+#' any_loop(g)
 #' which_loop(g)
 #' 
 #' # Multiple edges
@@ -1358,26 +1385,11 @@ which_loop <- function(graph, eids=E(graph)) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #' 
-which_multiple <- function(graph, eids=E(graph)) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object");
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_is_multiple, graph, as.igraph.es(graph, eids)-1)
-}
-
-#' @export
-
-count_multiple <- function(graph, eids=E(graph)) {
-
-  if (!is_igraph(graph)) {
-    stop("Not a graph object");
-  }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_count_multiple, graph, as.igraph.es(graph, eids)-1)
-}
-
+which_multiple <- which_multiple
+any_multiple <- any_multiple
+count_multiple <- count_multiple
+which_loop <- which_loop
+any_loop <- any_loop
 
 
 #' Breadth-first search
@@ -1899,7 +1911,7 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 #' @param weights Potential edge weights. If the graph has an edge
 #' attribute called \sQuote{\code{weight}}, and this argument is
 #' \code{NULL}, then the edge attribute is used automatically.
-#' In weighed matching, the weights of the edges must match as
+#' In weighted matching, the weights of the edges must match as
 #' much as possible.
 #' @param eps A small real number used in equality tests in the weighted
 #' bipartite matching algorithm. Two real numbers are considered equal in

@@ -109,24 +109,8 @@ INDEX_VECTOR:
             IGRAPH_FINALLY_CLEAN(1);
 
 CONNECTEDNESS:
-    CTYPE: igraph_connectedness_t
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
-
-NEIMODE:
-    CTYPE: igraph_neimode_t
-
-TODIRECTED:
-    CTYPE: igraph_to_directed_t
-
-TOUNDIRECTED:
-    CTYPE: igraph_to_undirected_t
-
-BLISSSH:
-    CTYPE: igraph_bliss_sh_t
-
-ADD_WEIGHTS:
-    CTYPE: igraph_add_weights_t
 
 VECTOR:
     CALL: '&%C%'
@@ -611,7 +595,6 @@ ISOCOMPAT_FUNC:
 
 ARPACKOPT:
     CALL: '&%C%'
-    CTYPE: igraph_arpack_options_t
     INCONV:
         INOUT: R_SEXP_to_igraph_arpack_options(%I%, &%C%);
     OUTCONV:
@@ -624,13 +607,11 @@ ARPACKSTORAGE:
 
 DRL_OPTIONS:
     CALL: '&%C%'
-    CTYPE: igraph_layout_drl_options_t
     INCONV:
         IN: R_SEXP_to_igraph_layout_drl_options(%I%, &%C%);
 
 BLISSINFO:
     CALL: '&%C%'
-    CTYPE: igraph_bliss_info_t
     OUTCONV:
         OUT: |-
             PROTECT(%I%=R_igraph_bliss_info_to_SEXP(&%C%));
@@ -706,12 +687,6 @@ EDGE_COLOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-COMMCMP:
-    CTYPE: igraph_community_comparison_t
-
-SUBGRAPH_IMPL:
-    CTYPE: igraph_subgraph_implementation_t
-
 VERTEX_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
     CTYPE: igraph_attribute_combination_t
@@ -730,7 +705,6 @@ EDGE_ATTRIBUTE_COMBINATION:
 
 HRG:
     CALL: '&%C%'
-    CTYPE: igraph_hrg_t
     INCONV:
         IN: R_SEXP_to_hrg(%I%, &%C%);
         INOUT: |-
@@ -750,18 +724,8 @@ HRG:
             IGRAPH_FINALLY_CLEAN(1);
 
 RECIP:
-    CTYPE: igraph_reciprocity_t
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
-
-SCGMAT:
-    CTYPE: igraph_scg_matrix_t
-
-SCGALGO:
-    CTYPE: igraph_scg_algorithm_t
-
-SCGNORM:
-    CTYPE: igraph_scg_norm_t
 
 SCGDIR:
     CTYPE: igraph_integer_t
@@ -887,30 +851,25 @@ VERTEXINDEX:
 
 PLFIT:
     CALL: '&%C%'
-    CTYPE: igraph_plfit_result_t
     OUTCONV:
         OUT: PROTECT(%I%=R_igraph_plfit_result_to_SEXP(&%C%));
 
 MAXFLOW_STATS:
     CALL: '&%C%'
-    CTYPE: igraph_maxflow_stats_t
     HEADER: {}
     OUTCONV:
         OUT: PROTECT(%I%=R_igraph_maxflow_stats_to_SEXP(&%C%));
 
 EIGENALGO:
-    CTYPE: igraph_integer_t
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
 
 EIGENWHICH:
     CALL: '&%C%'
-    CTYPE: igraph_eigen_which_t
     INCONV:
         IN: R_SEXP_to_igraph_eigen_which(%I%, &%C%);
 
 EIGENWHICHPOS:
-    CTYPE: igraph_eigen_which_position_t
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
 
@@ -928,9 +887,6 @@ SIRLIST:
             PROTECT(%I%=R_igraph_sirlist_to_SEXP(&%C%));
             R_igraph_sirlist_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
-
-PAGERANKALGO:
-    CTYPE: igraph_pagerank_algo_t
 
 PAGERANKOPT:
     CTYPE: |-
@@ -956,18 +912,3 @@ DEPRECATED:
     CALL: {}
     CTYPE: ~
     HEADER: {}
-
-LSETYPE:
-    CTYPE: igraph_laplacian_spectral_embedding_type_t
-
-RWSTUCK:
-    CTYPE: igraph_random_walk_stuck_t
-
-EDGE_TYPE_SW:
-    CTYPE: igraph_edge_type_sw_t
-
-RANDOM_TREE_METHOD:
-    CTYPE: igraph_random_tree_t
-
-GREEDY_COLORING_HEURISTIC:
-    CTYPE: igraph_coloring_greedy_t

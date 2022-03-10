@@ -466,3 +466,10 @@ REALIZE_DEGSEQ_METHOD:
         INDEX: c("index", "smallest", "largest")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "smallest"=0L, "largest"=1L, "index"=2L)
+
+FAS_ALGORITHM:
+    DEFAULT:
+        EXACT_IP: c("exact_ip", "approx_eades")
+        APPROX_EADES: c("approx_eades", "exact_ip")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)

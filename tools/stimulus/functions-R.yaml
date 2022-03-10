@@ -434,17 +434,17 @@ igraph_neighborhood_graphs:
 igraph_topological_sorting:
     IGNORE: RR, RC
 
+igraph_has_loop:
+    NAME: any_loop
+
 igraph_is_loop:
-    IGNORE: RR, RC
+    NAME: which_loop
 
 igraph_is_multiple:
-    IGNORE: RR, RC
+    NAME: which_multiple
 
 igraph_has_multiple:
     NAME: any_multiple
-
-igraph_count_multiple:
-    IGNORE: RR, RC
 
 igraph_girth:
     IGNORE: RR, RC, RInit
