@@ -6,6 +6,7 @@ Added:
   Eulerian path or cycle in the graph.
 - `eulerian_path()` and `eulerian_cycle()` returns the edges and vertices in an
   Eulerian path or cycle in the graph.
+- `any_loop()` checks whether a graph contains at least one loop edge.
 - `is_tree()` checks whether a graph is a tree and also finds a possible root
 - `to_prufer()` converts a tree graph into its Prufer sequence
 - `make_from_prufer()` creates a tree graph from its Prufer sequence
@@ -35,6 +36,8 @@ Added:
 - `realize_degseq()` generates graphs from degree sequences in a deterministic
   manner. It is also available as `make_(degseq(..., deterministic=TRUE))`.
 - `clique_size_counts()` counts cliques of different sizes without storing them all.
+- `feedback_arc_set()` finds a minimum-weight feedback arc set in a graph, either
+  with an exact integer programming algorithm or with a linear-time approximation.
 
 Fixed:
 

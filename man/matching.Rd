@@ -34,7 +34,7 @@ are taken from the \sQuote{\code{type}} vertex attribute, if present.}
 \item{weights}{Potential edge weights. If the graph has an edge
 attribute called \sQuote{\code{weight}}, and this argument is
 \code{NULL}, then the edge attribute is used automatically.
-In weighed matching, the weights of the edges must match as
+In weighted matching, the weights of the edges must match as
 much as possible.}
 
 \item{eps}{A small real number used in equality tests in the weighted

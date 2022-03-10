@@ -455,6 +455,42 @@ simplify <- function(graph, remove.multiple=TRUE, remove.loops=TRUE, edge.attr.c
 }
 
 #' @export
+feedback_arc_set <- function(graph, weights=NULL, algo=c("exact_ip", "approx_eades")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  algo <- switch(igraph.match.arg(algo), "exact_ip"=0L, "approx_eades"=1L)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_feedback_arc_set, graph, weights, algo)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
+  res
+}
+
+#' @export
+which_loop <- function(graph, es=E(graph)) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  es <- as.igraph.es(graph, es)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_is_loop, graph, es-1)
+
+  res
+}
+
+#' @export
 is_dag <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -479,6 +515,31 @@ is_simple <- function(graph) {
 }
 
 #' @export
+which_multiple <- function(graph, es=E(graph)) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  es <- as.igraph.es(graph, es)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_is_multiple, graph, es-1)
+
+  res
+}
+
+#' @export
+any_loop <- function(graph) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_has_loop, graph)
+
+  res
+}
+
+#' @export
 any_multiple <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -486,6 +547,19 @@ any_multiple <- function(graph) {
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_has_multiple, graph)
+
+  res
+}
+
+#' @export
+count_multiple <- function(graph, es=E(graph)) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  es <- as.igraph.es(graph, es)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_count_multiple, graph, es-1)
 
   res
 }
