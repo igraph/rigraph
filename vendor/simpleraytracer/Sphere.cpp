@@ -26,7 +26,7 @@ bool Sphere::Intersect(const Ray& vRay, Point& vIntersectPoint) const
 	double d;
 	Vector E(Point(0,0,0), vRay.Origin()); // E = vector from origin to ray origin
 	Vector P;
-	c = mCenter.Distance(vRay.Origin()); //c = distance from eye to center of sphere
+	mCenter.Distance(vRay.Origin()); //c = distance from eye to center of sphere
 	V = vRay.Direction();
 	V.NormalizeThis();
 	v = EO.Dot(V);
