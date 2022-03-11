@@ -77,11 +77,6 @@ static igraph_real_t igraph_rng_R_get_binom(void *state, long int n,
     return Rf_rbinom(n, p);
 }
 
-static igraph_real_t igraph_rng_R_get_gamma(void *state, igraph_real_t shape,
-                                     igraph_real_t scale) {
-    return Rf_rgamma(shape, scale);
-}
-
 static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
     igraph_real_t scale = 1.0 / rate;
     if (!IGRAPH_FINITE(scale) || scale <= 0.0) {
