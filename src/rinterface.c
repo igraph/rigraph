@@ -250,16 +250,16 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
   igraph_attribute_combination_init(comb);
 
   for (i=0; i<n; i++) {
-    const char *n;
+    const char *name = 0;
     igraph_attribute_combination_type_t type;
     igraph_function_pointer_t func;
 
     /* Name */
     if (!isNull(names)) {
-      n=CHAR(STRING_ELT(names, i));
+      name = CHAR(STRING_ELT(names, i));
     }
-    if (isNull(names) || strlen(n)==0) {
-      n=0;
+    if (isNull(names) || strlen(name) == 0) {
+      name = 0;
     }
 
     /* Type and function, if any */
@@ -270,7 +270,7 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
       type=REAL(AS_NUMERIC(VECTOR_ELT(input, i)))[0];
       func=0;
     }
-    igraph_attribute_combination_add(comb, n, type, func);
+    igraph_attribute_combination_add(comb, name, type, func);
   }
 
   UNPROTECT(1);
@@ -2431,13 +2431,11 @@ int R_igraph_progress_handler(const char *message, igraph_real_t percent,
 }
 
 int R_igraph_status_handler(const char *message, void *data) {
-  int ecint;
   SEXP l4 = PROTECT(install(".igraph.status"));
   SEXP l5 = PROTECT(ScalarString(mkChar(message)));
   SEXP l6 = PROTECT(lang2(l4, l5));
   SEXP ec = PROTECT(EVAL(l6));
 
-  ecint=INTEGER(ec)[0];
   UNPROTECT(4);
   return 0;
 }
