@@ -19,7 +19,6 @@ Sphere::~Sphere()
 
 bool Sphere::Intersect(const Ray& vRay, Point& vIntersectPoint) const
 {
-	double c;
 	Vector V;
 	Vector EO(vRay.Origin(), mCenter);
 	double v;
