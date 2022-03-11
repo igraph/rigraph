@@ -455,7 +455,7 @@ simplify <- function(graph, remove.multiple=TRUE, remove.loops=TRUE, edge.attr.c
 }
 
 #' @export
-feedback_arc_set <- function(graph, weights=NULL, algo=c("exact_ip", "approx_eades")) {
+feedback_arc_set <- function(graph, weights=NULL, algo=c("approx_eades", "exact_ip")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1002,8 +1002,8 @@ random_edge_walk <- function(graph, start, steps, weights=NULL, mode=c("out", "i
 global_efficiency <- function(graph, weights=NULL, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
-    weights <- V(graph)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1024,8 +1024,8 @@ local_efficiency <- function(graph, vids=V(graph), weights=NULL, directed=TRUE, 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
-  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
-    weights <- V(graph)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)
@@ -1048,8 +1048,8 @@ local_efficiency <- function(graph, vids=V(graph), weights=NULL, directed=TRUE, 
 average_local_efficiency <- function(graph, weights=NULL, directed=TRUE, mode=c("all", "out", "in", "total")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% vertex_attr_names(graph)) {
-    weights <- V(graph)$weight
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
   if (!is.null(weights) && any(!is.na(weights))) {
     weights <- as.numeric(weights)

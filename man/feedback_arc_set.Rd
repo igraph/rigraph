@@ -4,7 +4,7 @@
 \alias{feedback_arc_set}
 \title{Finding a feedback arc set in a graph}
 \usage{
-feedback_arc_set(graph, weights = NULL, algo = c("exact_ip", "approx_eades"))
+feedback_arc_set(graph, weights = NULL, algo = c("approx_eades", "exact_ip"))
 }
 \arguments{
 \item{graph}{The input graph}
