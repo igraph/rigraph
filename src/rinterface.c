@@ -2385,7 +2385,7 @@ void R_igraph_error_handler(const char *reason, const char *file,
   IGRAPH_FINALLY_FREE();
 
   error(
-    "At %s:%i : %s%s %s", file, line, reason,
+    "At %s:%i : %s%s %s", file, line, R_igraph_error_reason,
     maybe_add_punctuation(R_igraph_error_reason, ","),
     igraph_strerror(igraph_errno)
   );
