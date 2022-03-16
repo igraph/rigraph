@@ -1692,7 +1692,10 @@ sample_forestfire <- sample_forestfire
 #' correlation between the adjacency matrices of the original and the generated
 #' graph (the adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two
-#' vertices, it must in the open (0,1) interval.
+#' vertices, it must in the open (0,1) interval. The default is the empirical
+#' edge density of the graph. If you are resampling an Erdos-Renyi graph and
+#' you know the original edge probability of the Erdos-Renyi model, you should
+#' supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
 #' applied on the vertices of the first graph, to get the second graph.  If
 #' \code{NULL}, the vertices are not permuted.
