@@ -16,7 +16,7 @@ sample_correlated_gnp(
 \item{old.graph}{The original graph.}
 
 \item{corr}{A scalar in the unit interval, the target Pearson
-correlation between the adjacency matrices of the original the generated
+correlation between the adjacency matrices of the original and the generated
 graph (the adjacency matrix being used as a vector).}
 
 \item{p}{A numeric scalar, the probability of an edge between two
