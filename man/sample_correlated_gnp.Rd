@@ -5,7 +5,12 @@
 \title{Generate a new random graph from a given graph by randomly
 adding/removing edges}
 \usage{
-sample_correlated_gnp(old.graph, corr, p = old.graph$p, permutation = NULL)
+sample_correlated_gnp(
+  old.graph,
+  corr,
+  p = edge_density(old.graph),
+  permutation = NULL
+)
 }
 \arguments{
 \item{old.graph}{The original graph.}

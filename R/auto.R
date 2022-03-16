@@ -248,7 +248,7 @@ hsbm_list_game <- function(n, mlist, rholist, Clist, p) {
 }
 
 #' @export
-sample_correlated_gnp <- function(old.graph, corr, p=old.graph$p, permutation=NULL) {
+sample_correlated_gnp <- function(old.graph, corr, p=edge_density(old.graph), permutation=NULL) {
   # Argument checks
   if (!is_igraph(old.graph)) { stop("Not a graph object") }
   corr <- as.numeric(corr)
