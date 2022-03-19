@@ -506,6 +506,9 @@ igraph_centralization_degree:
     NAME: centr_degree
 
 igraph_centralization_degree_tmax:
+    # temporarily coded manually because we need to handle a deprecation
+    # between igraph 1.3.0 and 1.4.0
+    IGNORE: RR
     NAME: centr_degree_tmax
 
 igraph_centralization_betweenness:
