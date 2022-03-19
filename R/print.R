@@ -515,8 +515,7 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
       .print.edges.adjlist(x)
     }
   } else if (full == "auto") {
-    .print.edges.compressed(x, names = names, max.lines =
-                              max.lines - head_lines)
+    .print.edges.compressed(x, names = names, max.lines = max(0, max.lines - head_lines))
   }
   
   invisible(x)

@@ -745,21 +745,6 @@ centr_degree <- function(graph, mode=c("all", "out", "in", "total"), loops=TRUE,
 }
 
 #' @export
-centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "total"), loops=FALSE) {
-  # Argument checks
-  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
-  nodes <- as.integer(nodes)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-  loops <- as.logical(loops)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
-
-  res
-}
-
-#' @export
 centr_betw <- function(graph, directed=TRUE, normalized=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

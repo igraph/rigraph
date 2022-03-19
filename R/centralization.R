@@ -129,7 +129,8 @@ centr_degree <- centr_degree
 #' @param mode This is the same as the \code{mode} argument of
 #'   \code{degree}.
 #' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
+#'   calculating the degree. Currently the default value is \code{FALSE},
+#'   but this argument will be required from igraph 1.4.0.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -142,10 +143,26 @@ centr_degree <- centr_degree
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_degree(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_degree_tmax(g))
+#'  `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
 
-centr_degree_tmax <- centr_degree_tmax
+centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "total"), loops=FALSE) {
+  # Compatibility check with pre-igraph 1.3.0
+  if (missing(loops)) {
+    warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
+  }
+  # Argument checks
+  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  nodes <- as.integer(nodes)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
+
+  res
+}
 
 
 #' Centralize a graph according to the betweenness of vertices

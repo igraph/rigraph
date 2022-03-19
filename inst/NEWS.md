@@ -53,11 +53,14 @@ Fixed:
   graph was weighted and the number of vertices plus one was not a path length
   that could safely have been considered as being longer than any "valid" path.
 - `layout_with_sugiyama()` now handles the case of exactly one extra virtual
-  node correctly; fixeds #85
+  node correctly; fixes #85
 - `bfs()` and `dfs()` callback functions now correctly receive 1-based vertex
   indices and ranks; it used to be zero-based in earlier versions
 - Accidentally returning a non-logical value from a `bfs()` or `dfs()` callback
   does not crash R any more
+- Calling `print()` on a graph with a small `max.lines` value (smaller than the
+  number of lines needed to print the attribute list and the header) does not
+  raise an error any more; fixes #179
 
 Changed:
 
@@ -81,6 +84,8 @@ Deprecated:
 - Using `cutoff=0` for `closeness()`, `betweenness()` and `edge_betweenness()`
   is deprecated; if you want exact scores, use a negative cutoff. `cutoff=0`
   will be interpreted literally from igraph 1.4.0.
+- `centr_degree_tmax()` now prints a warning when it is invoked without an
+  explicit `loops` argument. `loops` will be mandatory from igraph 1.4.0.
 - The `nexus_list()`, `nexus_info()`, `nexus_get()` and `nexus_search()`
   functions now return an error informing the user that the Nexus graph
   repository has been taken offline (actually, several years ago). These
