@@ -392,7 +392,7 @@ igraph_average_path_length_dijkstra:
         EDGEWEIGHTS weights=NULL, BOOLEAN directed=True, BOOLEAN unconnected=True
     DEPS: weights ON graph
     NAME: mean_distance
-    OUTPARAMNAMES:
+    PARAM_NAMES:
         unconnected_pairs: unconnected
 
 igraph_path_length_hist:
@@ -439,12 +439,20 @@ igraph_has_loop:
 
 igraph_is_loop:
     NAME: which_loop
+    PARAM_NAMES:
+        es: eids
 
 igraph_is_multiple:
     NAME: which_multiple
+    PARAM_NAMES:
+        es: eids
 
 igraph_has_multiple:
     NAME: any_multiple
+
+igraph_count_multiple:
+    PARAM_NAMES:
+        es: eids
 
 igraph_girth:
     IGNORE: RR, RC, RInit
@@ -489,6 +497,8 @@ igraph_unfold_tree:
 
 igraph_is_mutual:
     NAME: which_mutual
+    PARAM_NAMES:
+        es: eids
 
 igraph_maximum_cardinality_search:
     NAME: max_cardinality
@@ -1277,12 +1287,12 @@ igraph_is_eulerian:
     INTERNAL: true
 
 igraph_eulerian_path:
-    OUTPARAMNAMES:
+    PARAM_NAMES:
         edge_res: epath
         vertex_res: vpath
 
 igraph_eulerian_cycle:
-    OUTPARAMNAMES:
+    PARAM_NAMES:
         edge_res: epath
         vertex_res: vpath
 
