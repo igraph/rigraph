@@ -2434,7 +2434,7 @@ int R_igraph_status_handler(const char *message, void *data) {
   SEXP l4 = PROTECT(install(".igraph.status"));
   SEXP l5 = PROTECT(ScalarString(mkChar(message)));
   SEXP l6 = PROTECT(lang2(l4, l5));
-  SEXP ec = PROTECT(EVAL(l6));
+  PROTECT(EVAL(l6));
 
   UNPROTECT(4);
   return 0;
@@ -6963,56 +6963,6 @@ SEXP R_igraph_coreness(SEXP graph, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_cliques(SEXP graph, SEXP pminsize, SEXP pmaxsize) {
-
-  igraph_t g;
-  igraph_vector_ptr_t ptrvec;
-  igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
-  igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
-  long int i;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec, 0);
-  igraph_cliques(&g, &ptrvec, minsize, maxsize);
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_largest_cliques(SEXP graph) {
-
-  igraph_t g;
-  igraph_vector_ptr_t ptrvec;
-  long int i;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec,0);
-  igraph_largest_cliques(&g, &ptrvec);
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
                               SEXP pminsize, SEXP pmaxsize) {
 
@@ -10946,35 +10896,35 @@ SEXP R_igraph_subgraph_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
 /*-------------------------------------------/
 / igraph_average_path_length_dijkstra        /
 /-------------------------------------------*/
-SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconnected) {
+SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconn) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_real_t c_res;
-  igraph_real_t c_unconnected_pairs;
+  igraph_real_t c_unconn_pairs;
   igraph_vector_t c_weights;
   igraph_bool_t c_directed;
-  igraph_bool_t c_unconnected;
+  igraph_bool_t c_unconn;
   SEXP res;
-  SEXP unconnected_pairs;
+  SEXP unconn_pairs;
 
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_directed=LOGICAL(directed)[0];
-  c_unconnected=LOGICAL(unconnected)[0];
+  c_unconn=LOGICAL(unconn)[0];
                                         /* Call igraph */
-  igraph_average_path_length_dijkstra(&c_graph, &c_res, &c_unconnected_pairs, (isNull(weights) ? 0 : &c_weights), c_directed, c_unconnected);
+  igraph_average_path_length_dijkstra(&c_graph, &c_res, &c_unconn_pairs, (isNull(weights) ? 0 : &c_weights), c_directed, c_unconn);
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
   PROTECT(res=NEW_NUMERIC(1));
   REAL(res)[0]=c_res;
-  PROTECT(unconnected_pairs=NEW_NUMERIC(1));
-  REAL(unconnected_pairs)[0]=c_unconnected_pairs;
+  PROTECT(unconn_pairs=NEW_NUMERIC(1));
+  REAL(unconn_pairs)[0]=c_unconn_pairs;
   SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, unconnected_pairs);
+  SET_VECTOR_ELT(r_result, 1, unconn_pairs);
   SET_STRING_ELT(r_names, 0, CREATE_STRING_VECTOR("res"));
   SET_STRING_ELT(r_names, 1, CREATE_STRING_VECTOR("unconnected"));
   SET_NAMES(r_result, r_names);
@@ -13003,6 +12953,39 @@ SEXP R_igraph_bridges(SEXP graph) {
 }
 
 /*-------------------------------------------/
+/ igraph_cliques                             /
+/-------------------------------------------*/
+SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_ptr_t c_res;
+  igraph_integer_t c_min_size;
+  igraph_integer_t c_max_size;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_ptr_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &c_res);
+  c_min_size=INTEGER(min_size)[0];
+  c_max_size=INTEGER(max_size)[0];
+                                        /* Call igraph */
+  igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size);
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vectorlist_to_SEXP_p1(&c_res));
+  R_igraph_vectorlist_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_clique_size_hist                    /
 /-------------------------------------------*/
 SEXP R_igraph_clique_size_hist(SEXP graph, SEXP min_size, SEXP max_size) {
@@ -13030,6 +13013,35 @@ SEXP R_igraph_clique_size_hist(SEXP graph, SEXP min_size, SEXP max_size) {
   igraph_vector_destroy(&c_hist);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = hist;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_largest_cliques                     /
+/-------------------------------------------*/
+SEXP R_igraph_largest_cliques(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_ptr_t c_res;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_ptr_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &c_res);
+                                        /* Call igraph */
+  igraph_largest_cliques(&c_graph, &c_res);
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vectorlist_to_SEXP_p1(&c_res));
+  R_igraph_vectorlist_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
 
   UNPROTECT(1);
   return(r_result);
@@ -13069,15 +13081,40 @@ SEXP R_igraph_maximal_cliques_hist(SEXP graph, SEXP min_size, SEXP max_size) {
 }
 
 /*-------------------------------------------/
+/ igraph_clique_number                       /
+/-------------------------------------------*/
+SEXP R_igraph_clique_number(SEXP graph) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_no;
+  SEXP no;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_no=0;
+                                        /* Call igraph */
+  igraph_clique_number(&c_graph, &c_no);
+
+                                        /* Convert output */
+  PROTECT(no=NEW_INTEGER(1));
+  INTEGER(no)[0]=c_no;
+  r_result = no;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_weighted_cliques                    /
 /-------------------------------------------*/
-SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min, SEXP max, SEXP maximal) {
+SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight, SEXP max_weight, SEXP maximal) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_vertex_weights;
   igraph_vector_ptr_t c_res;
-  igraph_real_t c_min;
-  igraph_real_t c_max;
+  igraph_real_t c_min_weight;
+  igraph_real_t c_max_weight;
   igraph_bool_t c_maximal;
   SEXP res;
 
@@ -13089,11 +13126,11 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min, SEXP m
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &c_res);
-  c_min=REAL(min)[0];
-  c_max=REAL(max)[0];
+  c_min_weight=REAL(min_weight)[0];
+  c_max_weight=REAL(max_weight)[0];
   c_maximal=LOGICAL(maximal)[0];
                                         /* Call igraph */
-  igraph_weighted_cliques(&c_graph, (isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_min, c_max, c_maximal);
+  igraph_weighted_cliques(&c_graph, (isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_min_weight, c_max_weight, c_maximal);
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vectorlist_to_SEXP_p1(&c_res));

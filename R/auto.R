@@ -1161,6 +1161,24 @@ bridges <- function(graph) {
   res
 }
 
+#' @export
+cliques <- function(graph, min=0, max=0) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  min <- as.integer(min)
+  max <- as.integer(max)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_cliques, graph, min, max)
+  if (igraph_opt("return.vs.es")) {
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- create_vs(graph, res[[i_]])
+    }
+  }
+  res
+}
+
 all_clique_size_counts <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1171,6 +1189,22 @@ all_clique_size_counts <- function(graph, min.size=0, max.size=0) {
   # Function call
   res <- .Call(C_R_igraph_clique_size_hist, graph, min.size, max.size)
 
+  res
+}
+
+#' @export
+largest_cliques <- function(graph) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_largest_cliques, graph)
+  if (igraph_opt("return.vs.es")) {
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- create_vs(graph, res[[i_]])
+    }
+  }
   res
 }
 
@@ -1188,7 +1222,19 @@ maximal_clique_size_counts <- function(graph, min.size=0, max.size=0) {
 }
 
 #' @export
-cliques <- function(graph, vertex.weights=NULL, min=0, max=0, maximal=FALSE) {
+clique_num <- function(graph) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_clique_number, graph)
+
+  res
+}
+
+#' @export
+weighted_cliques <- function(graph, vertex.weights=NULL, min.weight=0, max.weight=0, maximal=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
@@ -1199,13 +1245,13 @@ cliques <- function(graph, vertex.weights=NULL, min=0, max=0, maximal=FALSE) {
   } else {
     vertex.weights <- NULL
   }
-  min <- as.numeric(min)
-  max <- as.numeric(max)
+  min.weight <- as.numeric(min.weight)
+  max.weight <- as.numeric(max.weight)
   maximal <- as.logical(maximal)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_weighted_cliques, graph, vertex.weights, min, max, maximal)
+  res <- .Call(C_R_igraph_weighted_cliques, graph, vertex.weights, min.weight, max.weight, maximal)
   if (igraph_opt("return.vs.es")) {
     for (i_ in seq_along(res)) {
       res[[i_]] <- create_vs(graph, res[[i_]])
@@ -1215,7 +1261,7 @@ cliques <- function(graph, vertex.weights=NULL, min=0, max=0, maximal=FALSE) {
 }
 
 #' @export
-largest_cliques <- function(graph, vertex.weights=NULL) {
+largest_weighted_cliques <- function(graph, vertex.weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
@@ -1239,7 +1285,7 @@ largest_cliques <- function(graph, vertex.weights=NULL) {
 }
 
 #' @export
-clique_num <- function(graph, vertex.weights=NULL) {
+weighted_clique_num <- function(graph, vertex.weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {

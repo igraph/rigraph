@@ -25,24 +25,21 @@
 #' 
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
-#' Most of these functions also support vertex weights.
 #' 
 #' \code{cliques} find all complete subgraphs in the input graph, obeying the
-#' size (or weight) limitations given in the \code{min} and \code{max} arguments.
+#' size limitations given in the \code{min} and \code{max} arguments.
 #' 
 #' \code{largest_cliques} finds all largest cliques in the input graph. A
-#' clique is largest if there is no other clique including more vertices
-#' (or vertices with a larger total weight).
+#' clique is largest if there is no other clique including more vertices.
 #' 
 #' \code{max_cliques} finds all maximal cliques in the input graph.  A
-#' clique in maximal if it cannot be extended to a larger clique (or a clique
-#' with larger total weight). The largest cliques are always maximal, but a
-#' maximal clique is not necessarily the largest.
+#' clique is maximal if it cannot be extended to a larger clique. The largest
+#' cliques are always maximal, but a maximal clique is not necessarily the
+#' largest.
 #' 
 #' \code{count_max_cliques} counts the maximal cliques.
 #' 
-#' \code{clique_num} calculates the size or weight of the largest clique(s),
-#' depending on whether vertex weights are provided or not.
+#' \code{clique_num} calculates the size of the largest clique(s).
 #' 
 #' \code{clique_size_counts} returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
@@ -56,14 +53,6 @@
 #' \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #' \code{NULL} means no limit.
-#' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
-#' vertex attribute, then this is used by default. If the graph does not have a
-#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
-#' vertex is assumed to have a weight of 1. Note that the current implementation
-#' of the weighted clique finder supports positive integer weights only.
-#' @param maximal Specifies whether to look for all cliques (\code{FALSE}) or
-#' only the maximal ones (\code{TRUE}), for functions that are capable of looking
-#' for both.
 #' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
 #' return a list containing numeric vectors of vertex ids. Each list element is
 #' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
@@ -98,12 +87,6 @@
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
-#'
-#' # Vertex weights may be used
-#' g <- make_graph("zachary")
-#' V(g)$weight <- 1
-#' V(g)[c(1,2,3,4,14)]$weight <- 3
-#' clique_num(g)
 cliques <- cliques
 
 #' @export
@@ -191,6 +174,69 @@ count_max_cliques <- function(graph, min=NULL, max=NULL,
 #' @export
 clique_num <- clique_num
 
+
+#' Functions to find weighted cliques, ie. weighted complete subgraphs in a graph
+#' 
+#' These functions find all, the largest or all the maximal weighted cliques in
+#' an undirected graph. The weight of a clique is the sum of the weights of its
+#' edges.
+#' 
+#' \code{weighted_cliques} find all complete subgraphs in the input graph,
+#' obeying the weight limitations given in the \code{min} and \code{max}
+#' arguments.
+#' 
+#' \code{largest_weighted_cliques} finds all largest weighted cliques in the
+#' input graph. A clique is largest if there is no other clique whose total
+#' weight is larger than the weight of this clique.
+#' 
+#' \code{max_weighted_cliques} finds all maximal weighted cliques in the input graph.
+#' A weighted clique is maximal if it cannot be extended to a clique with larger
+#' total weight. The largest weighted cliques are always maximal, but a maximal
+#' weighted clique is not necessarily the largest.
+#' 
+#' \code{count_max_weighted_cliques} counts the maximal weighted cliques.
+#' 
+#' \code{weighted_clique_num} calculates the weight of the largest weighted clique(s).
+#' 
+#' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
+#' count_max_weighted_cliques weighted_clique_num
+#' @param graph The input graph, directed graphs will be considered as
+#' undirected ones, multiple edges and loops are ignored.
+#' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
+#' \code{NULL} means no limit, ie. it is the same as 0.
+#' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
+#' \code{NULL} means no limit.
+#' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
+#' vertex attribute, then this is used by default. If the graph does not have a
+#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
+#' vertex is assumed to have a weight of 1. Note that the current implementation
+#' of the weighted clique finder supports positive integer weights only.
+#' @param maximal Specifies whether to look for all weighted cliques (\code{FALSE})
+#' or only the maximal ones (\code{TRUE}).
+#' @return \code{weighted_cliques} and \code{largest_weighted_cliques} return a
+#' list containing numeric vectors of vertex IDs. Each list element is a weighted
+#' clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#' 
+#' \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
+#' scalar.
+#'
+#' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
+#' \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{ivs}}
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- make_graph("zachary")
+#' V(g)$weight <- 1
+#' V(g)[c(1,2,3,4,14)]$weight <- 3
+#' weighted_cliques(g)
+#' weighted_cliques(g, maximal=TRUE)
+#' largest_weighted_cliques(g)
+#' weighted_clique_num(g)
+weighted_cliques <- weighted_cliques
+largest_weighted_cliques <- largest_weighted_cliques
+weighted_clique_num <- weighted_clique_num
 
 #' Independent vertex sets
 #' 

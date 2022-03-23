@@ -154,7 +154,9 @@ extern SEXP R_igraph_centralization_eigenvector_centrality(SEXP, SEXP, SEXP, SEX
 extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_citing_cited_type_game(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_clique_number(SEXP);
 extern SEXP R_igraph_clique_size_hist(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_cliques(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_closeness(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_closeness_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_clusters(SEXP, SEXP);
@@ -272,6 +274,7 @@ extern SEXP R_igraph_isomorphic_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_k_regular_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_kautz(SEXP, SEXP);
 extern SEXP R_igraph_laplacian_spectral_embedding(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_largest_cliques(SEXP);
 extern SEXP R_igraph_largest_independent_vertex_sets(SEXP);
 extern SEXP R_igraph_largest_weighted_cliques(SEXP, SEXP);
 extern SEXP R_igraph_lastcit_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -543,7 +546,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_centralization_eigenvector_centrality_tmax", (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,  4},
     {"R_igraph_cited_type_game",                            (DL_FUNC) &R_igraph_cited_type_game,                             5},
     {"R_igraph_citing_cited_type_game",                     (DL_FUNC) &R_igraph_citing_cited_type_game,                      5},
+    {"R_igraph_clique_number",                              (DL_FUNC) &R_igraph_clique_number,                               1},
     {"R_igraph_clique_size_hist",                           (DL_FUNC) &R_igraph_clique_size_hist,                            3},
+    {"R_igraph_cliques",                                    (DL_FUNC) &R_igraph_cliques,                                     3},
     {"R_igraph_closeness",                                  (DL_FUNC) &R_igraph_closeness,                                   5},
     {"R_igraph_closeness_cutoff",                           (DL_FUNC) &R_igraph_closeness_cutoff,                            6},
     {"R_igraph_clusters",                                   (DL_FUNC) &R_igraph_clusters,                                    2},
@@ -661,6 +666,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
     {"R_igraph_laplacian_spectral_embedding",               (DL_FUNC) &R_igraph_laplacian_spectral_embedding,                7},
+    {"R_igraph_largest_cliques",                            (DL_FUNC) &R_igraph_largest_cliques,                             1},
     {"R_igraph_largest_independent_vertex_sets",            (DL_FUNC) &R_igraph_largest_independent_vertex_sets,             1},
     {"R_igraph_largest_weighted_cliques",                   (DL_FUNC) &R_igraph_largest_weighted_cliques,                    2},
     {"R_igraph_lastcit_game",                               (DL_FUNC) &R_igraph_lastcit_game,                                5},

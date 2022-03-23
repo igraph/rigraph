@@ -13,7 +13,7 @@
 \alias{clique_size_counts}
 \title{Functions to find cliques, ie. complete subgraphs in a graph}
 \usage{
-cliques(graph, vertex.weights = NULL, min = 0, max = 0, maximal = FALSE)
+cliques(graph, min = 0, max = 0)
 
 max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 }
@@ -21,21 +21,11 @@ max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 \item{graph}{The input graph, directed graphs will be considered as
 undirected ones, multiple edges and loops are ignored.}
 
-\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
-vertex attribute, then this is used by default. If the graph does not have a
-\code{weight} vertex attribute and this argument is \code{NULL}, then every
-vertex is assumed to have a weight of 1. Note that the current implementation
-of the weighted clique finder supports positive integer weights only.}
-
 \item{min}{Numeric constant, lower limit on the size of the cliques to find.
 \code{NULL} means no limit, ie. it is the same as 0.}
 
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
-
-\item{maximal}{Specifies whether to look for all cliques (\code{FALSE}) or
-only the maximal ones (\code{TRUE}), for functions that are capable of looking
-for both.}
 
 \item{subset}{If not \code{NULL}, then it must be a vector of vertex ids,
 numeric or symbolic if the graph is named. The algorithm is run from these
@@ -68,25 +58,22 @@ truncated, but this might change in future versions.
 \description{
 These functions find all, the largest or all the maximal cliques in an
 undirected graph. The size of the largest clique can also be calculated.
-Most of these functions also support vertex weights.
 }
 \details{
 \code{cliques} find all complete subgraphs in the input graph, obeying the
-size (or weight) limitations given in the \code{min} and \code{max} arguments.
+size limitations given in the \code{min} and \code{max} arguments.
 
 \code{largest_cliques} finds all largest cliques in the input graph. A
-clique is largest if there is no other clique including more vertices
-(or vertices with a larger total weight).
+clique is largest if there is no other clique including more vertices.
 
 \code{max_cliques} finds all maximal cliques in the input graph.  A
-clique in maximal if it cannot be extended to a larger clique (or a clique
-with larger total weight). The largest cliques are always maximal, but a
-maximal clique is not necessarily the largest.
+clique is maximal if it cannot be extended to a larger clique. The largest
+cliques are always maximal, but a maximal clique is not necessarily the
+largest.
 
 \code{count_max_cliques} counts the maximal cliques.
 
-\code{clique_num} calculates the size or weight of the largest clique(s),
-depending on whether vertex weights are provided or not.
+\code{clique_num} calculates the size of the largest clique(s).
 
 \code{clique_size_counts} returns a numeric vector representing a histogram
 of clique sizes, between the given minimum and maximum clique size.
@@ -102,12 +89,6 @@ largest_cliques(g)
 # To have a bit less maximal cliques, about 100-200 usually
 g <- sample_gnp(100, 0.03)
 max_cliques(g)
-
-# Vertex weights may be used
-g <- make_graph("zachary")
-V(g)$weight <- 1
-V(g)[c(1,2,3,4,14)]$weight <- 3
-clique_num(g)
 }
 \references{
 For maximal cliques the following algorithm is implemented:
