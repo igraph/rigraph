@@ -2034,7 +2034,7 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
 #' 
 #' @aliases is.mutual which_mutual
 #' @param graph The input graph.
-#' @param es Edge sequence, the edges that will be probed. By default is
+#' @param eids Edge sequence, the edges that will be probed. By default is
 #' includes all edges in the order of their ids.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
