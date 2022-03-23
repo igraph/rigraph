@@ -1350,7 +1350,7 @@ girth <- function(graph, circle=TRUE) {
 #' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
 #'   any_loop any_multiple which_loop
 #' @param graph The input graph.
-#' @param es The edges to which the query is restricted. By default this is
+#' @param eids The edges to which the query is restricted. By default this is
 #' all edges in the graph.
 #' @return \code{any_loop} and \code{any_multiple} return a logical scalar.
 #' \code{which_loop} and \code{which_multiple} return a logical vector.
