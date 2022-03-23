@@ -924,6 +924,11 @@ sample_pref <- function(nodes, types, type.dist=rep(1, types),
     stop("Invalid size for preference matrix")
   }
   
+  if (!directed && !isSymmetric(pref.matrix)) {
+    warning("Undirected graphs require symmetric preference matrices, symmetrizing matrix. igraph 1.4.0 will reject non-symmetric matrices for undirected graphs.")
+    pref.matrix <- Matrix::forceSymmetric((pref.matrix + t(pref.matrix)) / 2)
+  }
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_preference_game, as.double(nodes),
                as.double(types),
