@@ -386,14 +386,10 @@ igraph_average_path_length:
     IGNORE: RR, RC, RInit
 
 igraph_average_path_length_dijkstra:
-    # Parameter definition repeated here because we need to rename 'unconn'
-    # to 'unconnected'
-    PARAMS: GRAPH graph, PRIMARY OUT REAL res, OUT REAL unconnected_pairs=NULL,
-        EDGEWEIGHTS weights=NULL, BOOLEAN directed=True, BOOLEAN unconnected=True
-    DEPS: weights ON graph
     NAME: mean_distance
     PARAM_NAMES:
-        unconnected_pairs: unconnected
+        unconn_pairs: unconnected
+        unconn: unconnected
 
 igraph_path_length_hist:
     NAME: distance_table
@@ -623,14 +619,14 @@ igraph_decompose:
 #######################################
 
 igraph_cliques:
-    # Handled by igraph_weighted_cliques
-    IGNORE: RR, RC, RInit
+    PARAM_NAMES:
+        min_size: min
+        max_size: max
+
+igraph_clique_number:
+    NAME: clique_num
 
 igraph_cliques_callback:
-    IGNORE: RR, RC, RInit
-
-igraph_largest_cliques:
-    # Handled by igraph_largest_weighted_cliques
     IGNORE: RR, RC, RInit
 
 igraph_maximal_cliques:
@@ -647,10 +643,6 @@ igraph_maximal_cliques_file:
     IGNORE: RR, RC, RInit
     NAME: maximal.cliques.file
 
-igraph_clique_number:
-    # Handled by igraph_weighted_clique_number
-    IGNORE: RR, RC, RInit
-
 igraph_clique_size_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
@@ -663,18 +655,8 @@ igraph_maximal_cliques_hist:
     NAME: maximal_clique_size_counts
     INTERNAL: true
 
-igraph_weighted_cliques:
-    # Parameters repeated here so we can rename min_weight and max_weight
-    PARAMS: |-
-        GRAPH graph, VERTEXWEIGHTS vertex_weights=NULL, OUT VERTEXSETLIST res,
-        REAL min=0, REAL max=0, BOOLEAN maximal=False
-    NAME: cliques
-
 igraph_weighted_clique_number:
-    NAME: clique_num
-
-igraph_largest_weighted_cliques:
-    NAME: largest_cliques
+    NAME: weighted_clique_num
 
 igraph_weighted_cliques_callback:
     IGNORE: RR, RC, RInit

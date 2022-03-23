@@ -2434,7 +2434,7 @@ int R_igraph_status_handler(const char *message, void *data) {
   SEXP l4 = PROTECT(install(".igraph.status"));
   SEXP l5 = PROTECT(ScalarString(mkChar(message)));
   SEXP l6 = PROTECT(lang2(l4, l5));
-  SEXP ec = PROTECT(EVAL(l6));
+  PROTECT(EVAL(l6));
 
   UNPROTECT(4);
   return 0;
@@ -6958,56 +6958,6 @@ SEXP R_igraph_coreness(SEXP graph, SEXP pmode) {
   PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
   igraph_vector_copy_to(&res, REAL(result));
   igraph_vector_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_cliques(SEXP graph, SEXP pminsize, SEXP pmaxsize) {
-
-  igraph_t g;
-  igraph_vector_ptr_t ptrvec;
-  igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
-  igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
-  long int i;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec, 0);
-  igraph_cliques(&g, &ptrvec, minsize, maxsize);
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_largest_cliques(SEXP graph) {
-
-  igraph_t g;
-  igraph_vector_ptr_t ptrvec;
-  long int i;
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec,0);
-  igraph_largest_cliques(&g, &ptrvec);
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
 
   UNPROTECT(1);
   return result;
