@@ -478,14 +478,14 @@ feedback_arc_set <- function(graph, weights=NULL, algo=c("approx_eades", "exact_
 }
 
 #' @export
-which_loop <- function(graph, es=E(graph)) {
+which_loop <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  es <- as.igraph.es(graph, es)
+  eids <- as.igraph.es(graph, eids)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_is_loop, graph, es-1)
+  res <- .Call(C_R_igraph_is_loop, graph, eids-1)
 
   res
 }
@@ -515,14 +515,14 @@ is_simple <- function(graph) {
 }
 
 #' @export
-which_multiple <- function(graph, es=E(graph)) {
+which_multiple <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  es <- as.igraph.es(graph, es)
+  eids <- as.igraph.es(graph, eids)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_is_multiple, graph, es-1)
+  res <- .Call(C_R_igraph_is_multiple, graph, eids-1)
 
   res
 }
@@ -552,14 +552,14 @@ any_multiple <- function(graph) {
 }
 
 #' @export
-count_multiple <- function(graph, es=E(graph)) {
+count_multiple <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  es <- as.igraph.es(graph, es)
+  eids <- as.igraph.es(graph, eids)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_count_multiple, graph, es-1)
+  res <- .Call(C_R_igraph_count_multiple, graph, eids-1)
 
   res
 }
@@ -638,14 +638,14 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 }
 
 #' @export
-which_mutual <- function(graph, es=E(graph)) {
+which_mutual <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  es <- as.igraph.es(graph, es)
+  eids <- as.igraph.es(graph, eids)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
-  res <- .Call(C_R_igraph_is_mutual, graph, es-1)
+  res <- .Call(C_R_igraph_is_mutual, graph, eids-1)
 
   res
 }
@@ -1127,13 +1127,13 @@ biconnected_components <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_biconnected_components, graph)
   if (igraph_opt("return.vs.es")) {
-    for (i_ in seq_along(res$tree_edges)) {
-      res$tree_edges[[i_]] <- create_es(graph, res$tree_edges[[i_]])
+    for (i_ in seq_along(res$tree.edges)) {
+      res$tree.edges[[i_]] <- create_es(graph, res$tree.edges[[i_]])
     }
   }
   if (igraph_opt("return.vs.es")) {
-    for (i_ in seq_along(res$component_edges)) {
-      res$component_edges[[i_]] <- create_es(graph, res$component_edges[[i_]])
+    for (i_ in seq_along(res$component.edges)) {
+      res$component.edges[[i_]] <- create_es(graph, res$component.edges[[i_]])
     }
   }
   if (igraph_opt("return.vs.es")) {
@@ -1142,7 +1142,7 @@ biconnected_components <- function(graph) {
     }
   }
   if (igraph_opt("return.vs.es")) {
-    res$articulation_points <- create_vs(graph, res$articulation_points)
+    res$articulation.points <- create_vs(graph, res$articulation.points)
   }
   res
 }
@@ -2162,10 +2162,10 @@ eulerian_path <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_eulerian_path, graph)
   if (igraph_opt("return.vs.es")) {
-    res$edge_res <- create_es(graph, res$edge_res)
+    res$epath <- create_es(graph, res$epath)
   }
   if (igraph_opt("return.vs.es")) {
-    res$vertex_res <- create_vs(graph, res$vertex_res)
+    res$vpath <- create_vs(graph, res$vpath)
   }
   res
 }
@@ -2179,10 +2179,10 @@ eulerian_cycle <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_eulerian_cycle, graph)
   if (igraph_opt("return.vs.es")) {
-    res$edge_res <- create_es(graph, res$edge_res)
+    res$epath <- create_es(graph, res$epath)
   }
   if (igraph_opt("return.vs.es")) {
-    res$vertex_res <- create_vs(graph, res$vertex_res)
+    res$vpath <- create_vs(graph, res$vpath)
   }
   res
 }

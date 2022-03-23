@@ -12,12 +12,12 @@
 \alias{which_loop}
 \title{Find the multiple or loop edges in a graph}
 \usage{
-which_multiple(graph, es = E(graph))
+which_multiple(graph, eids = E(graph))
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{es}{The edges to which the query is restricted. By default this is
+\item{eids}{The edges to which the query is restricted. By default this is
 all edges in the graph.}
 }
 \value{

@@ -5,12 +5,12 @@
 \alias{is.mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, es = E(graph))
+which_mutual(graph, eids = E(graph))
 }
 \arguments{
 \item{graph}{The input graph.}
 
-\item{es}{Edge sequence, the edges that will be probed. By default is
+\item{eids}{Edge sequence, the edges that will be probed. By default is
 includes all edges in the order of their ids.}
 }
 \value{
