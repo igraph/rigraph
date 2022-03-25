@@ -56,10 +56,10 @@
 #' weight edges equally. By default the \code{weight} edge attribute is used if
 #' the graph has one. Larger weights correspond to stronger connections,
 #' and the vertices will be placed closer to each other.
-#' @param fixed Logical vector, it can be used to fix some vertices. All
-#' vertices for which it is \code{TRUE} are kept at the coordinates supplied in
-#' the \code{seed} matrix. It is ignored it \code{NULL} or if \code{use.seed}
-#' is \code{FALSE}.
+#' @param fixed Logical vector, it can be used to fix some vertices. Unfortunately
+#' this has never been implemented in the C core of the igraph library and thus
+#' it never worked. The argument is now deprecated and will be removed in
+#' igraph 1.4.0.
 #' @param dim Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
 #' two dimensional or a three dimensional layout. Note that because of the
 #' nature of the DrL algorithm, the three dimensional layout takes
@@ -103,6 +103,9 @@ layout_with_drl <- function(graph, use.seed = FALSE,
     options <- options.tmp
     if (!is.null(weights)) {
       weights <- as.numeric(weights)
+    }
+    if (!missing(fixed)) {
+      warning("The `fixed` argument of `layout_with_drl` has no effect and will be removed in igraph 1.4.0.")
     }
     if (!is.null(fixed)) {
       fixed <- as.logical(fixed)
