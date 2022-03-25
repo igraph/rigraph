@@ -350,6 +350,9 @@ layout_as_star <- function(graph, center=V(graph)[1], order=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   center <- as.igraph.vs(graph, center)
+  if (length(center)==0) {
+    center <- 1
+  }
   if (!is.null(order)) order <- as.numeric(order)-1
 
   on.exit(.Call(C_R_igraph_finalizer) )

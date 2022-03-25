@@ -114,7 +114,11 @@ INT:
 
 VERTEX:
     CALL: '%I%-1'
-    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    INCONV: |-
+        %I% <- as.igraph.vs(%I1%, %I%)
+        if (length(%I%) == 0) {
+          stop("No vertex was specified")
+        }
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {

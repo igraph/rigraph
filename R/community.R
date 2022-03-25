@@ -963,7 +963,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
                                             "orig"=0, "neg"=1)
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  if (is.null(vertex)) {
+  if (is.null(vertex) || length(vertex)==0) {
     res <- .Call(C_R_igraph_spinglass_community, graph, weights,
                  as.numeric(spins), as.logical(parupdate),
                  as.numeric(start.temp),

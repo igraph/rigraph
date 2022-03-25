@@ -90,13 +90,16 @@
 #' 
 bipartite_projection <- function(graph, types=NULL,
                                  multiplicity=TRUE, probe1=NULL,
-				 which=c("both", "true", "false"),
+                                 which=c("both", "true", "false"),
                                  remove.type=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   types <- handle_vertex_type_arg(types, graph)
   if (!is.null(probe1)) {
     probe1 <- as.igraph.vs(graph, probe1)-1
+    if (length(probe1) < 1) {
+      probe1 <- -1
+    }
   } else {
     probe1 <- -1
   }
