@@ -91,6 +91,12 @@ min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL,
       capacity <- E(graph)$capacity
     }
   }
+  if (length(source)==0) {
+    source <- NULL
+  }
+  if (length(target)==0) {
+    target <- NULL
+  }
   if (is.null(source) && !is.null(target) ||
       is.null(target) && !is.null(source)) {
     stop("Please give both source and target or neither")
@@ -212,6 +218,13 @@ vertex_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
     stop("Not a graph object")
   }
 
+  if (length(source)==0) {
+    source <- NULL
+  }
+  if (length(target)==0) {
+    target <- NULL
+  }
+
   if (is.null(source) && is.null(target)) {
     on.exit( .Call(C_R_igraph_finalizer) )
     .Call(C_R_igraph_vertex_connectivity, graph, as.logical(checks))
@@ -295,6 +308,13 @@ edge_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
     stop("Not a graph object")
   }
 
+  if (length(source)==0) {
+    source <- NULL
+  }
+  if (length(target)==0) {
+    target <- NULL
+  }
+
   if (is.null(source) && is.null(target)) {    
     on.exit( .Call(C_R_igraph_finalizer) )
     .Call(C_R_igraph_edge_connectivity, graph, as.logical(checks))
@@ -315,6 +335,13 @@ edge_disjoint_paths <- function(graph, source, target) {
     stop("Not a graph object")
   }
 
+  if (length(source)==0) {
+    source <- NULL
+  }
+  if (length(target)==0) {
+    target <- NULL
+  }
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_edge_disjoint_paths, graph,
         as.igraph.vs(graph, source)-1, as.igraph.vs(graph, target)-1)
@@ -326,6 +353,13 @@ vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
+  }
+
+  if (length(source)==0) {
+    source <- NULL
+  }
+  if (length(target)==0) {
+    target <- NULL
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )

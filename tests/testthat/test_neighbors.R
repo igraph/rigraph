@@ -13,3 +13,12 @@ test_that("neighbors works", {
   }
 
 })
+
+test_that("neighbors prints an error for an empty input vector", {
+  library(igraph)
+
+  g <- make_tree(10)
+  expect_error(neighbors(g, numeric()), "No vertex was specified")
+
+})
+

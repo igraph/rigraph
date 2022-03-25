@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.2.11.9156
+Version: 1.2.11.9157
 Title: Network Analysis and Visualization
 Author: See AUTHORS file.
 Maintainer: Tamás Nepusz <ntamas@gmail.com>
@@ -36,4 +36,4 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'uuid.R' 'versions.R' 'weakref.R' 'zzz-deprecate.R'
 RoxygenNote: 7.1.2
 NeedsCompilation: yes
-Packaged: 2022-03-25 16:27:14 UTC; runner
+Packaged: 2022-03-25 17:15:25 UTC; runner

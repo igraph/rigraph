@@ -944,6 +944,9 @@ random_walk <- function(graph, start, steps, mode=c("out", "in", "all", "total")
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   start <- as.igraph.vs(graph, start)
+  if (length(start) == 0) {
+    stop("No vertex was specified")
+  }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   steps <- as.integer(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
@@ -970,6 +973,9 @@ random_edge_walk <- function(graph, start, steps, weights=NULL, mode=c("out", "i
     weights <- NULL
   }
   start <- as.igraph.vs(graph, start)
+  if (length(start) == 0) {
+    stop("No vertex was specified")
+  }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   steps <- as.integer(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
@@ -1521,7 +1527,13 @@ max_flow <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
+  if (length(source) == 0) {
+    stop("No vertex was specified")
+  }
   target <- as.igraph.vs(graph, target)
+  if (length(target) == 0) {
+    stop("No vertex was specified")
+  }
   if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$capacity
   }
@@ -1548,6 +1560,9 @@ dominator_tree <- function(graph, root, mode=c("out", "in", "all", "total")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   root <- as.igraph.vs(graph, root)
+  if (length(root) == 0) {
+    stop("No vertex was specified")
+  }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1567,7 +1582,13 @@ st_cuts <- function(graph, source, target) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
+  if (length(source) == 0) {
+    stop("No vertex was specified")
+  }
   target <- as.igraph.vs(graph, target)
+  if (length(target) == 0) {
+    stop("No vertex was specified")
+  }
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
@@ -1590,7 +1611,13 @@ st_min_cuts <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
+  if (length(source) == 0) {
+    stop("No vertex was specified")
+  }
   target <- as.igraph.vs(graph, target)
+  if (length(target) == 0) {
+    stop("No vertex was specified")
+  }
   if (is.null(capacity) && "weight" %in% edge_attr_names(graph)) {
     capacity <- E(graph)$weight
   }
@@ -2285,6 +2312,9 @@ sample_spanning_tree <- function(graph, vid=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vid <- as.igraph.vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
