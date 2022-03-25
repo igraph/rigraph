@@ -25,7 +25,7 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  
+
   type <- igraph.match.arg(type)
   type <- switch(type, "upper"=0, "lower"=1, "both"=2)
   
@@ -99,8 +99,11 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   vc <- vcount(graph)
   
   el <- as_edgelist(graph, names=FALSE)
+  use.last.ij <- FALSE
+
   if (edges) {
     value <- seq_len(nrow(el))
+    use.last.ij <- TRUE
   } else if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
@@ -116,20 +119,20 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   }
 
   if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(dims=c(vc, vc), i=el[,1], j=el[,2], x=value)
+    res <- Matrix::sparseMatrix(dims=c(vc, vc), i=el[,1], j=el[,2], x=value, use.last.ij=use.last.ij)
   } else {
     if (type=="upper") {
       ## upper
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmin(el[,1],el[,2]),
-                          j=pmax(el[,1],el[,2]), x=value)
+                          j=pmax(el[,1],el[,2]), x=value, use.last.ij=use.last.ij)
     } else if (type=="lower") {
       ## lower
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmax(el[,1],el[,2]),
-                          j=pmin(el[,1],el[,2]), x=value)
+                          j=pmin(el[,1],el[,2]), x=value, use.last.ij=use.last.ij)
     } else if (type=="both") {
       ## both
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmin(el[,1],el[,2]),
-                          j=pmax(el[,1],el[,2]), x=value, symmetric=TRUE)
+                          j=pmax(el[,1],el[,2]), x=value, symmetric=TRUE, use.last.ij=use.last.ij)
       res <- as(res, "dgCMatrix")
     }
   }
@@ -197,6 +200,10 @@ as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
                                 sparse=igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
+  }
+
+  if (!missing(edges)) {
+    warning("The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0")
   }
 
   if (!sparse) {

@@ -61,6 +61,8 @@ Fixed:
 - Calling `print()` on a graph with a small `max.lines` value (smaller than the
   number of lines needed to print the attribute list and the header) does not
   raise an error any more; fixes #179
+- `as_adjacency_matrix(edges=TRUE, sparse=TRUE)` now consistently returns the
+  last edge ID for each cell in the matrix instead of summing them.
 
 Changed:
 
@@ -90,6 +92,8 @@ Deprecated:
   functions now return an error informing the user that the Nexus graph
   repository has been taken offline (actually, several years ago). These
   functions will be removed in 1.4.0.
+- The `edges` argument of `as_adjacency_matrix()` is deprecated; it will be
+  removed in igraph 1.4.0.
 
 Removed:
 
