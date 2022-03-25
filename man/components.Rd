@@ -51,7 +51,7 @@ Calculate the maximal (weakly or strongly) connected components of a graph
 }
 \details{
 \code{is_connected} decides whether the graph is weakly or strongly
-connected.
+connected. The null graph is considered disconnected.
 
 \code{components} finds the maximal (weakly or strongly) connected components
 of a graph.
