@@ -1689,7 +1689,7 @@ dfs <- function(graph, root, mode=c("out", "in", "all", "total"),
 #' Calculate the maximal (weakly or strongly) connected components of a graph
 #' 
 #' \code{is_connected} decides whether the graph is weakly or strongly
-#' connected.
+#' connected. The null graph is considered disconnected.
 #' 
 #' \code{components} finds the maximal (weakly or strongly) connected components
 #' of a graph.
