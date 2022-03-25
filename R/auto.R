@@ -659,7 +659,7 @@ max_cardinality <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_maximum_cardinality_search, graph)
   if (igraph_opt("return.vs.es")) {
-    res$alpha <- create_vs(graph, res$alpha)
+    res$alpham1 <- create_vs(graph, res$alpham1)
   }
   res
 }

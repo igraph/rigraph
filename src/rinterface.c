@@ -11525,9 +11525,8 @@ SEXP R_igraph_maximum_cardinality_search(SEXP graph) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_alpham1);
-  alpham1=R_GlobalEnv; /* hack to have a non-NULL value */
                                         /* Call igraph */
-  igraph_maximum_cardinality_search(&c_graph, &c_alpha, (isNull(alpham1) ? 0 : &c_alpham1));
+  igraph_maximum_cardinality_search(&c_graph, &c_alpha, &c_alpham1);
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -11535,7 +11534,7 @@ SEXP R_igraph_maximum_cardinality_search(SEXP graph) {
   PROTECT(alpha=R_igraph_vector_to_SEXPp1(&c_alpha));
   igraph_vector_destroy(&c_alpha);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(alpham1=R_igraph_0orvector_to_SEXPp1(&c_alpham1));
+  PROTECT(alpham1=R_igraph_vector_to_SEXPp1(&c_alpham1));
   igraph_vector_destroy(&c_alpham1);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, alpha);

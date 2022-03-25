@@ -13,8 +13,11 @@ ignored, as the algorithm is defined for undirected graphs.}
 }
 \value{
 A list with two components: \item{alpha}{Numeric vector. The
-vertices ordered according to the maximum cardinality search.}
-\item{alpham1}{Numeric vector. The inverse of \code{alpha}.}
+1-based rank of each vertex in the graph such that the vertex with rank 1
+is visited first, the vertex with rank 2 is visited second and so on.}
+\item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
+the elements of this vector are the vertices in reverse maximum cardinality
+search order.}
 }
 \description{
 Maximum cardinality search is a simple ordering a vertices that is useful in

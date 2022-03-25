@@ -122,8 +122,11 @@ is_dag <- is_dag
 #' @param graph The input graph. It may be directed, but edge directions are
 #' ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The
-#' vertices ordered according to the maximum cardinality search.}
-#' \item{alpham1}{Numeric vector. The inverse of \code{alpha}.}
+#' 1-based rank of each vertex in the graph such that the vertex with rank 1
+#' is visited first, the vertex with rank 2 is visited second and so on.}
+#' \item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
+#' the elements of this vector are the vertices in reverse maximum cardinality
+#' search order.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{is_chordal}}
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
