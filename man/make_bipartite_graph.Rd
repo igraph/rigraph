@@ -18,12 +18,14 @@ bipartite_graph(...)
 \item{graph}{The input graph.}
 
 \item{types}{A vector giving the vertex types. It will be coerced into
-boolean. The length of the vector gives the number of vertices in the graph.}
+boolean. The length of the vector gives the number of vertices in the graph.
+When the vector is a named vector, the names will be attached to the graph
+as the \code{name} vertex attribute.}
 
 \item{edges}{A vector giving the edges of the graph, the same way as for the
 regular \code{\link{graph}} function. It is checked that the edges indeed
-connect vertices of different kind, accoding to the supplied \code{types}
-vector.}
+connect vertices of different kind, according to the supplied \code{types}
+vector. The vector may be a string vector if \code{types} is a named vector.}
 
 \item{directed}{Whether to create a directed graph, boolean constant. Note
 that by default undirected graphs are created, as this is more common for
@@ -49,7 +51,9 @@ for vertices of the second kind.
 \code{make_bipartite_graph} basically does three things. First it checks the
 \code{edges} vector against the vertex \code{types}. Then it creates a graph
 using the \code{edges} vector and finally it adds the \code{types} vector as
-a vertex attribute called \code{type}.
+a vertex attribute called \code{type}. \code{edges} may contain strings as
+vertex names; in this case, \code{types} must be a named vector that specifies
+the type for each vertex name that occurs in \code{edges}.
 
 \code{is_bipartite} checks whether the graph is bipartite or not. It just
 checks whether the graph has a vertex attribute called \code{type}.

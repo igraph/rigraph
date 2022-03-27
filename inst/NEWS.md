@@ -38,6 +38,7 @@ Added:
 - `clique_size_counts()` counts cliques of different sizes without storing them all.
 - `feedback_arc_set()` finds a minimum-weight feedback arc set in a graph, either
   with an exact integer programming algorithm or with a linear-time approximation.
+- `make_bipartite_graph()` now handles vertices with names.
 
 Fixed:
 
