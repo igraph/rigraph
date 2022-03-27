@@ -1571,7 +1571,9 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' \code{make_bipartite_graph} basically does three things. First it checks the
 #' \code{edges} vector against the vertex \code{types}. Then it creates a graph
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
-#' a vertex attribute called \code{type}.
+#' a vertex attribute called \code{type}. \code{edges} may contain strings as
+#' vertex names; in this case, \code{types} must be a named vector that specifies
+#' the type for each vertex name that occurs in \code{edges}.
 #'
 #' \code{is_bipartite} checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called \code{type}.
@@ -1579,10 +1581,12 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #' boolean. The length of the vector gives the number of vertices in the graph.
+#' When the vector is a named vector, the names will be attached to the graph
+#' as the \code{name} vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
 #' regular \code{\link{graph}} function. It is checked that the edges indeed
-#' connect vertices of different kind, accoding to the supplied \code{types}
-#' vector.
+#' connect vertices of different kind, according to the supplied \code{types}
+#' vector. The vector may be a string vector if \code{types} is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
 #' that by default undirected graphs are created, as this is more common for
 #' bipartite graphs.
@@ -1600,14 +1604,31 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' print(g, v=TRUE)
 #'
 make_bipartite_graph <- function(types, edges, directed=FALSE) {
+  vertex.names <- names(types)
+
+  if (is.character(edges)) {
+    if (is.null(vertex.names)) {
+      stop("`types` vector must be named when the edge vector contains strings")
+    }
+    edges <- match(edges, vertex.names)
+    if (any(is.na(edges))) {
+      stop("edge vector contains a vertex name that is not found in `types`")
+    }
+  }
 
   types <- as.logical(types)
   edges <- as.numeric(edges)-1
   directed <- as.logical(directed)
-
+  
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_create_bipartite, types, edges, directed)
-  set_vertex_attr(res, "type", value=types)
+  res <- set_vertex_attr(res, "type", value=types)
+
+  if (!is.null(vertex.names)) {
+    res <- set_vertex_attr(res, "name", value=vertex.names)
+  }
+
+  res
 }
 
 #' @rdname make_bipartite_graph
