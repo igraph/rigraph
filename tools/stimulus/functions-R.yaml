@@ -1065,6 +1065,9 @@ igraph_st_mincut_value:
 igraph_mincut:
     IGNORE: RR, RC
 
+igraph_st_mincut:
+    IGNORE: RR
+
 igraph_st_vertex_connectivity:
     IGNORE: RR, RC, RInit
 
