@@ -57,7 +57,7 @@ extern SEXP R_igraph_get_diameter(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_edge(SEXP, SEXP);
 extern SEXP R_igraph_get_eids(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_graph_id(SEXP);
-extern SEXP R_igraph_get_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_getsphere(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_girth(SEXP, SEXP);
 extern SEXP R_igraph_graph_adjacency(SEXP, SEXP);
@@ -449,7 +449,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_edge",                                   (DL_FUNC) &R_igraph_get_edge,                                    2},
     {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    5},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
-    {"R_igraph_get_shortest_paths",                         (DL_FUNC) &R_igraph_get_shortest_paths,                          9},
+    {"R_igraph_get_shortest_paths",                         (DL_FUNC) &R_igraph_get_shortest_paths,                         10},
     {"R_igraph_getsphere",                                  (DL_FUNC) &R_igraph_getsphere,                                   8},
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_graph_adjacency",                            (DL_FUNC) &R_igraph_graph_adjacency,                             2},

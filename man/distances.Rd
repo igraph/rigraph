@@ -40,7 +40,8 @@ shortest_paths(
   weights = NULL,
   output = c("vpath", "epath", "both"),
   predecessors = FALSE,
-  inbound.edges = FALSE
+  inbound.edges = FALSE,
+  algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")
 )
 
 all_shortest_paths(

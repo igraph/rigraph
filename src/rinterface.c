@@ -4148,7 +4148,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
     pw=0;
   } else {
     R_SEXP_to_vector(weights, &w);
-    negw = igraph_vector_min(&w) < 0;
+    negw = igraph_vector_size(&w) > 0 && igraph_vector_min(&w) < 0;
   }
   igraph_matrix_init(&res, 0, 0);
   switch (algo) {
@@ -4592,7 +4592,8 @@ SEXP R_igraph_minimum_spanning_tree_prim(SEXP graph, SEXP pweights) {
 
 SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
                                  SEXP pmode, SEXP pno, SEXP weights,
-                                 SEXP output, SEXP ppred, SEXP pinbound) {
+                                 SEXP output, SEXP ppred, SEXP pinbound,
+                                 SEXP palgo) {
 
   igraph_t g;
   igraph_integer_t from=(igraph_integer_t) REAL(pfrom)[0];
@@ -4602,11 +4603,13 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   long int i;
   igraph_vector_ptr_t ptrvec, ptrevec;
   igraph_vector_t w, *pw=&w;
+  igraph_bool_t negw=0;
   SEXP result, result1, result2, names;
   igraph_bool_t verts=REAL(output)[0]==0 || REAL(output)[0]==2;
   igraph_bool_t edges=REAL(output)[0]==1 || REAL(output)[0]==2;
   igraph_bool_t pred=LOGICAL(ppred)[0];
   igraph_bool_t inbound=LOGICAL(pinbound)[0];
+  long int algo=(long int) REAL(palgo)[0];
   igraph_vector_long_t predvec, inboundvec;
 
   long int no=(long int) REAL(pno)[0];
@@ -4637,17 +4640,57 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     pw=0;
   } else {
     R_SEXP_to_vector(weights, &w);
+    negw = igraph_vector_size(&w) > 0 && igraph_vector_min(&w) < 0;
   }
 
   if (pred) { igraph_vector_long_init(&predvec, no); }
   if (inbound) { igraph_vector_long_init(&inboundvec, no); }
 
-  igraph_get_shortest_paths_dijkstra(&g,
-                                     verts ? &ptrvec : 0,
-                                     edges ? &ptrevec : 0,
-                                     from, to, pw, (igraph_neimode_t) mode,
-                                     pred ? &predvec : 0,
-                                     inbound ? &inboundvec : 0);
+  switch (algo) {
+  case 0:                       /* automatic */
+    if (negw) {
+      igraph_get_shortest_paths_bellman_ford(&g,
+                                        verts ? &ptrvec : 0,
+                                        edges ? &ptrevec : 0,
+                                        from, to, pw, (igraph_neimode_t) mode,
+                                        pred ? &predvec : 0,
+                                        inbound ? &inboundvec : 0);
+    } else {
+      /* This one chooses 'unweighted' if there are no weights */
+      igraph_get_shortest_paths_dijkstra(&g,
+                                        verts ? &ptrvec : 0,
+                                        edges ? &ptrevec : 0,
+                                        from, to, pw, (igraph_neimode_t) mode,
+                                        pred ? &predvec : 0,
+                                        inbound ? &inboundvec : 0);
+    }
+    break;
+  case 1:                       /* unweighted */
+    igraph_get_shortest_paths(&g,
+                             verts ? &ptrvec : 0,
+                             edges ? &ptrevec : 0,
+                             from, to, (igraph_neimode_t) mode,
+                             pred ? &predvec : 0,
+                             inbound ? &inboundvec : 0);
+    break;
+  case 2:                       /* dijkstra */
+    igraph_get_shortest_paths_dijkstra(&g,
+                                      verts ? &ptrvec : 0,
+                                      edges ? &ptrevec : 0,
+                                      from, to, pw, (igraph_neimode_t) mode,
+                                      pred ? &predvec : 0,
+                                      inbound ? &inboundvec : 0);
+    break;
+  case 3:                       /* bellman-ford */
+    igraph_get_shortest_paths_bellman_ford(&g,
+                                      verts ? &ptrvec : 0,
+                                      edges ? &ptrevec : 0,
+                                      from, to, pw, (igraph_neimode_t) mode,
+                                      pred ? &predvec : 0,
+                                      inbound ? &inboundvec : 0);
+    break;
+  }
+
   PROTECT(result=NEW_LIST(4));
   if (verts) {
     SET_VECTOR_ELT(result, 0, NEW_LIST(no));

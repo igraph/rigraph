@@ -32,3 +32,18 @@ test_that("shortest_paths works", {
   expect_true(s2$vpath %in% all2)
 
 })
+
+test_that("shortest_paths can handle negative weights", {
+  g <- make_tree(7)
+  E(g)$weight <- -1
+  sps <- shortest_paths(g, 2)$vpath
+
+  expect_true(length(sps) == 7)
+  expect_equivalent(as.vector(sps[[1]]), integer(0))
+  expect_equivalent(as.vector(sps[[2]]), c(2))
+  expect_equivalent(as.vector(sps[[3]]), integer(0))
+  expect_equivalent(as.vector(sps[[4]]), c(2, 4))
+  expect_equivalent(as.vector(sps[[5]]), c(2, 5))
+  expect_equivalent(as.vector(sps[[6]]), integer(0))
+  expect_equivalent(as.vector(sps[[7]]), integer(0))
+})

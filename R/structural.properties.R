@@ -457,10 +457,11 @@ distances <- function(graph, v=V(graph), to=V(graph),
 #' @export
 
 shortest_paths <- function(graph, from, to=V(graph),
-                               mode=c("out", "all", "in"),
-                               weights=NULL,
-                               output=c("vpath", "epath", "both"),
-                               predecessors=FALSE, inbound.edges=FALSE) {
+                           mode=c("out", "all", "in"),
+                           weights=NULL,
+                           output=c("vpath", "epath", "both"),
+                           predecessors=FALSE, inbound.edges=FALSE,
+                           algorithm=c("automatic", "unweighted", "dijkstra", "bellman-ford")) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -469,6 +470,8 @@ shortest_paths <- function(graph, from, to=V(graph),
   mode <- switch(mode, "out"=1, "in"=2, "all"=3)
   output <- igraph.match.arg(output)
   output <- switch(output, "vpath"=0, "epath"=1, "both"=2)
+  algorithm <- igraph.match.arg(algorithm)
+  algorithm <- switch(algorithm, "automatic"=0, "unweighted"=1, "dijkstra"=2, "bellman-ford"=3)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -482,12 +485,19 @@ shortest_paths <- function(graph, from, to=V(graph),
     }
   }
   
+  if (! is.null(weights) && algorithm==1) {
+    weights <- NULL
+    warning("Unweighted algorithm chosen, weights ignored")
+  }
+  
   to <- as.igraph.vs(graph, to)-1
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_shortest_paths, graph,
                as.igraph.vs(graph, from)-1, to, as.numeric(mode),
                as.numeric(length(to)), weights, as.numeric(output),
-               as.logical(predecessors), as.logical(inbound.edges))
+               as.logical(predecessors), as.logical(inbound.edges),
+               as.numeric(algorithm)
+               )
 
   if (!is.null(res$vpath)) {
     res$vpath <- lapply(res$vpath, function(x) x+1)
@@ -571,7 +581,7 @@ all_shortest_paths <- function(graph, from,
 #' Finds all vertices reachable from a given vertex, or the opposite: all
 #' vertices from which a given vertex is reachable via a directed path.
 #' 
-#' A breadh-first search is conducted starting from vertex \code{v}.
+#' A breadth-first search is conducted starting from vertex \code{v}.
 #' 
 #' @aliases subcomponent
 #' @param graph The graph to analyze.

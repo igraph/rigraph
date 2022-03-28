@@ -26,7 +26,7 @@ Finds all vertices reachable from a given vertex, or the opposite: all
 vertices from which a given vertex is reachable via a directed path.
 }
 \details{
-A breadh-first search is conducted starting from vertex \code{v}.
+A breadth-first search is conducted starting from vertex \code{v}.
 }
 \examples{
 
