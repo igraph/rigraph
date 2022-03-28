@@ -8,15 +8,15 @@ if test -z "${R_HOME}"; then
    exit 1
 fi
 CC=`"${R_HOME}/bin/R" CMD config CC`
-CXX11=`"${R_HOME}/bin/R" CMD config CXX11`
-if test -z "$CXX11"; then
+CXX=`"${R_HOME}/bin/R" CMD config CXX11`
+if test -z "$CXX"; then
   AC_MSG_ERROR([No C++11 compiler is available])
 fi
-CXX11STD=`"${R_HOME}/bin/R" CMD config CXX11STD`
-CXX="${CXX11} ${CXX11STD}"
 FC=`"${R_HOME}/bin/R" CMD config FC`
 CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
 CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXX11FLAGS`
+CXX11STD=`"${R_HOME}/bin/R" CMD config CXX11STD`
+CXXFLAGS="${CXX11STD} ${CXXFLAGS}"
 CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
 FCFLAGS=`"${R_HOME}/bin/R" CMD config FCFLAGS`
 FLIBS=`"${R_HOME}/bin/R" CMD config FLIBS`
@@ -37,7 +37,16 @@ fi
 LIBS_SAVE=$LIBS
 LIBS="$LIBS -lm"
 AC_CHECK_FUNCS([expm1 fmin finite log2 log1p rint rintf round stpcpy strcasecmp _stricmp strdup])
-AC_CHECK_DECLS(isfinite,,,[#include <math.h>])
+AC_CHECK_FUNCS(isfinite,
+  [AC_DEFINE(HAVE_ISFINITE, 1)],
+  [AC_LINK_IFELSE(
+    [AC_LANG_PROGRAM(
+	  [[#include <math.h>]],
+	  [[double f = 0.0; isfinite(f)]])],
+	[AC_DEFINE(HAVE_ISFINITE, 1)],
+	[AC_MSG_FAILURE([isfinite() not available])]
+  )]
+)
 LIBS=$LIBS_SAVE
 
 AC_CHECK_HEADER([sys/times.h],
