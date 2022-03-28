@@ -7,7 +7,7 @@
 \usage{
 cluster_edge_betweenness(
   graph,
-  weights = E(graph)$weight,
+  weights = NULL,
   directed = TRUE,
   edge.betweenness = TRUE,
   merges = TRUE,
@@ -19,10 +19,14 @@ cluster_edge_betweenness(
 \arguments{
 \item{graph}{The graph to analyze.}
 
-\item{weights}{The edge weights. Supply \code{NULL} to omit edge weights. By
-default the \sQuote{\code{weight}} edge attribute is used, if it is present.
-Edge weights are used to calculate weighted edge betweenness. This means
-that edges are interpreted as distances, not as connection strengths.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. Edge weights
+are used to calculate weighted edge betweenness. This means that edges are
+interpreted as distances, not as connection strengths.}
 
 \item{directed}{Logical constant, whether to calculate directed edge
 betweenness for directed graphs. It is ignored for undirected graphs.}

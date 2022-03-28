@@ -11,10 +11,13 @@ cluster_optimal(graph, weights = NULL)
 \item{graph}{The input graph. Edge directions are ignored for directed
 graphs.}
 
-\item{weights}{Optional positive weight vector for optimizing weighted
-modularity. If the graph has a \code{weight} edge attribute, then this is
-used by default. Supply \code{NA} to ignore the weights of a weighted graph.
-Larger edge weights correspond to stronger connections.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 }
 \value{
 \code{cluster_optimal} returns a \code{\link{communities}} object,

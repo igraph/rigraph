@@ -10,11 +10,13 @@ cluster_label_prop(graph, weights = NULL, initial = NULL, fixed = NULL)
 \arguments{
 \item{graph}{The input graph, should be undirected to make sense.}
 
-\item{weights}{An optional weight vector. It should contain a positive
-weight for all the edges. The \sQuote{weight} edge attribute is used if
-present. Supply \sQuote{\code{NA}} here if you want to ignore the
-\sQuote{weight} edge attribute. Larger edge weights correspond to
-stronger connections.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an

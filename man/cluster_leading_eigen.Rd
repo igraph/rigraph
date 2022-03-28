@@ -24,10 +24,13 @@ symmetric matrix.}
 \item{steps}{The number of steps to take, this is actually the number of
 tries to make a step. It is not a particularly useful parameter.}
 
-\item{weights}{An optional weight vector. The \sQuote{weight} edge attribute
-is used if present. Supply \sQuote{\code{NA}} here if you want to ignore the
-\sQuote{weight} edge attribute. Larger edge weights correspond to stronger
-connections between vertices.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 
 \item{start}{\code{NULL}, or a numeric membership vector, giving the start
 configuration of the algorithm.}

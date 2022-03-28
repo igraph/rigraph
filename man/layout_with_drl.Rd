@@ -17,7 +17,7 @@ layout_with_drl(
   use.seed = FALSE,
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,
-  weights = E(graph)$weight,
+  weights = NULL,
   fixed = NULL,
   dim = 2
 )
@@ -36,10 +36,13 @@ vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.}
 \item{options}{Options for the layout generator, a named list. See details
 below.}
 
-\item{weights}{Optional edge weights. Supply \code{NULL} here if you want to
-weight edges equally. By default the \code{weight} edge attribute is used if
-the graph has one. Larger weights correspond to stronger connections,
-and the vertices will be placed closer to each other.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for the layout. Larger edge weights
+correspond to stronger connections.}
 
 \item{fixed}{Logical vector, it can be used to fix some vertices. Unfortunately
 this has never been implemented in the C core of the igraph library and thus

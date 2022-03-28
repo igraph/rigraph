@@ -22,10 +22,13 @@ cluster_leiden(
 \item{objective_function}{Whether to use the Constant Potts Model (CPM) or
 modularity. Must be either \code{"CPM"} or \code{"modularity"}.}
 
-\item{weights}{Optional edge weights to be used. Can be a vector or an edge
-attribute name. If the graph has a \code{weight} edge attribute, then this
-is used by default. Supply \code{NA} here if the graph has a \code{weight}
-edge attribute, but you want to ignore it.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 
 \item{resolution_parameter}{The resolution parameter to use. Higher
 resolutions lead to more smaller communities, while lower resolutions lead

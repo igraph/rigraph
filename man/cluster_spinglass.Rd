@@ -24,13 +24,13 @@ cluster_spinglass(
 \item{graph}{The input graph, can be directed but the direction of the edges
 is neglected.}
 
-\item{weights}{The weights of the edges. Either a numeric vector or
-\code{NULL}. If it is null and the input graph has a \sQuote{weight} edge
-attribute then that will be used. If \code{NULL} and no such attribute is
-present then the edges will have equal weights. Set this to \code{NA} if the
-graph was a \sQuote{weight} edge attribute, but you don't want to use it for
-community detection. A larger edge weight means a stronger connection
-for this function.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 
 \item{vertex}{This parameter can be used to calculate the community of a
 given vertex without calculating all communities. Note that if this argument

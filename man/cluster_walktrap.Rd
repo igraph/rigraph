@@ -3,11 +3,11 @@
 \name{cluster_walktrap}
 \alias{cluster_walktrap}
 \alias{walktrap.community}
-\title{Community strucure via short random walks}
+\title{Community structure via short random walks}
 \usage{
 cluster_walktrap(
   graph,
-  weights = E(graph)$weight,
+  weights = NULL,
   steps = 4,
   merges = TRUE,
   modularity = TRUE,
@@ -18,9 +18,14 @@ cluster_walktrap(
 \item{graph}{The input graph, edge directions are ignored in directed
 graphs.}
 
-\item{weights}{The edge weights. Larger edge weights increase the
-probability that an edge is selected by the random walker. In other
-words, larger edge weights correspond to stronger connections.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. Larger edge
+weights increase the probability that an edge is selected by the random
+walker. In other words, larger edge weights correspond to stronger connections.}
 
 \item{steps}{The length of the random walks to perform.}
 

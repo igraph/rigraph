@@ -10,10 +10,13 @@ cluster_louvain(graph, weights = NULL, resolution = 1)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{weights}{Optional positive weight vector.  If the graph has a
-\code{weight} edge attribute, then this is used by default. Supply \code{NA}
-here if the graph has a \code{weight} edge attribute, but you want to ignore
-it. Larger edge weights correspond to stronger connections.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 
 \item{resolution}{Optional resolution parameter that allows the user to
 adjust the resolution parameter of the modularity function that the algorithm

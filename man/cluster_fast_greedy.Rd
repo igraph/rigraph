@@ -10,7 +10,7 @@ cluster_fast_greedy(
   merges = TRUE,
   modularity = TRUE,
   membership = TRUE,
-  weights = E(graph)$weight
+  weights = NULL
 )
 }
 \arguments{
@@ -25,11 +25,13 @@ modularity after each merge.}
 corresponding to the maximum modularity score, considering all possible
 community structures along the merges.}
 
-\item{weights}{If not \code{NULL}, then a numeric vector of edge weights.
-The length must match the number of edges in the graph.  By default the
-\sQuote{\code{weight}} edge attribute is used as weights. If it is not
-present, then all edges are considered to have the same weight.
-Larger edge weights correspond to stronger connections.}
+\item{weights}{The weights of the edges. It must be a positive numeric vector,
+\code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+\sQuote{weight} edge attribute, then that attribute will be used. If
+\code{NULL} and no such attribute is present, then the edges will have equal
+weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+attribute, but you don't want to use it for community detection. A larger
+edge weight means a stronger connection for this function.}
 }
 \value{
 \code{cluster_fast_greedy} returns a \code{\link{communities}}
