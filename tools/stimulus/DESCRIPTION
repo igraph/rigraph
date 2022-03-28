@@ -28,6 +28,6 @@ Suggests:
     digest
 License: GPL (>= 2)
 URL: https://igraph.org
-SystemRequirements: gmp (optional), libxml2 (optional), glpk (>= 4.38, optional)
+SystemRequirements: gmp (optional), libxml2 (optional), glpk (>= 4.38, optional), C++11
 BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
