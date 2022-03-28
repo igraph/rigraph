@@ -65,6 +65,8 @@ Fixed:
   raise an error any more; fixes #179
 - `as_adjacency_matrix(edges=TRUE, sparse=TRUE)` now consistently returns the
   last edge ID for each cell in the matrix instead of summing them.
+- Using the `+` and `-` operators with a `path()` object consisting of two
+  vertices is now handled correctly; fixes #355
 
 Changed:
 
