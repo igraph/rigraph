@@ -1,9 +1,5 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to 1 if you have the declaration of `isfinite', and to 0 if you
-   don't. */
-#undef HAVE_DECL_ISFINITE
-
 /* Define to 1 if you have the `expm1' function. */
 #undef HAVE_EXPM1
 
@@ -24,6 +20,9 @@
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `isfinite' function. */
+#undef HAVE_ISFINITE
 
 /* Define to 1 if you have the libxml2 libraries installed */
 #undef HAVE_LIBXML

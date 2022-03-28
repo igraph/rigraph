@@ -1,4 +1,4 @@
-AC_INIT(igraph, 1.2.11.9165, ntamas@gmail.com)
+AC_INIT(igraph, 1.2.11.9167, ntamas@gmail.com)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
@@ -8,10 +8,15 @@ if test -z "${R_HOME}"; then
    exit 1
 fi
 CC=`"${R_HOME}/bin/R" CMD config CC`
-CXX=`"${R_HOME}/bin/R" CMD config CXX`
+CXX=`"${R_HOME}/bin/R" CMD config CXX11`
+if test -z "$CXX"; then
+  AC_MSG_ERROR([No C++11 compiler is available])
+fi
 FC=`"${R_HOME}/bin/R" CMD config FC`
 CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
-CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS`
+CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXX11FLAGS`
+CXX11STD=`"${R_HOME}/bin/R" CMD config CXX11STD`
+CXXFLAGS="${CXX11STD} ${CXXFLAGS}"
 CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
 FCFLAGS=`"${R_HOME}/bin/R" CMD config FCFLAGS`
 FLIBS=`"${R_HOME}/bin/R" CMD config FLIBS`
@@ -20,29 +25,28 @@ LDFLAGS=`"${R_HOME}/bin/R" CMD config LDFLAGS`
 AC_LANG(C)
 AC_PROG_CC
 
+AC_LANG(C++)
+AC_PROG_CXX
+
 # Fortran compiler, we need to check if it is the GNU compiler
 AC_PROG_FC
 if test "x$ac_cv_fc_compiler_gnu" = xyes; then
   AC_DEFINE([HAVE_GFORTRAN], [1], [Define to 1 if using the GNU Fortran compiler])
 fi
 
-# Tricky check for C++ compiler, because Autoconf has a weird bug:
-# http://lists.gnu.org/archive/html/autoconf/2006-03/msg00067.html
-AC_PROG_CXX
-AC_LANG_PUSH([C++])
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-#include <iostream>
-const char hw[] = "Hello, World\n";]],
-                [[std::cout << hw;]])],
-        [AC_PROG_CXXCPP
-        cxx_error=no],
-        [AC_MSG_ERROR([no C++ compiler found or it cannot create executables])])
-AC_LANG_POP([C++])
-
 LIBS_SAVE=$LIBS
 LIBS="$LIBS -lm"
 AC_CHECK_FUNCS([expm1 fmin finite log2 log1p rint rintf round stpcpy strcasecmp _stricmp strdup])
-AC_CHECK_DECLS(isfinite,,,[#include <math.h>])
+AC_CHECK_FUNCS(isfinite,
+  [AC_DEFINE(HAVE_ISFINITE, 1)],
+  [AC_LINK_IFELSE(
+    [AC_LANG_PROGRAM(
+	  [[#include <math.h>]],
+	  [[double f = 0.0; isfinite(f)]])],
+	[AC_DEFINE(HAVE_ISFINITE, 1)],
+	[AC_MSG_FAILURE([isfinite() not available])]
+  )]
+)
 LIBS=$LIBS_SAVE
 
 AC_CHECK_HEADER([sys/times.h],
