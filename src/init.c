@@ -366,6 +366,7 @@ extern SEXP R_igraph_simplify_and_colorize(SEXP);
 extern SEXP R_igraph_sir(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_split_join_distance(SEXP, SEXP);
 extern SEXP R_igraph_st_edge_connectivity(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_st_mincut(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_st_mincut_value(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_star(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_static_fitness_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -758,6 +759,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_sir",                                        (DL_FUNC) &R_igraph_sir,                                         4},
     {"R_igraph_split_join_distance",                        (DL_FUNC) &R_igraph_split_join_distance,                         2},
     {"R_igraph_st_edge_connectivity",                       (DL_FUNC) &R_igraph_st_edge_connectivity,                        3},
+    {"R_igraph_st_mincut",                                  (DL_FUNC) &R_igraph_st_mincut,                                   4},
     {"R_igraph_st_mincut_value",                            (DL_FUNC) &R_igraph_st_mincut_value,                             4},
     {"R_igraph_star",                                       (DL_FUNC) &R_igraph_star,                                        3},
     {"R_igraph_static_fitness_game",                        (DL_FUNC) &R_igraph_static_fitness_game,                         5},

@@ -40,6 +40,7 @@ Added:
   with an exact integer programming algorithm or with a linear-time approximation.
 - `make_bipartite_graph()` now handles vertices with names.
 - `shortest_paths()` now supports graphs with negative edge weights.
+- `min_cut()` now supports s-t mincuts even if `value.only=FALSE`.
 
 Fixed:
 

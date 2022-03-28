@@ -14981,6 +14981,75 @@ SEXP R_igraph_maxflow(SEXP graph, SEXP source, SEXP target, SEXP capacity) {
 }
 
 /*-------------------------------------------/
+/ igraph_st_mincut                           /
+/-------------------------------------------*/
+SEXP R_igraph_st_mincut(SEXP graph, SEXP source, SEXP target, SEXP capacity) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_real_t c_value;
+  igraph_vector_t c_cut;
+  igraph_vector_t c_partition1;
+  igraph_vector_t c_partition2;
+  igraph_integer_t c_source;
+  igraph_integer_t c_target;
+  igraph_vector_t c_capacity;
+  SEXP value;
+  SEXP cut;
+  SEXP partition1;
+  SEXP partition2;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_cut, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_cut);
+  cut=R_GlobalEnv; /* hack to have a non-NULL value */
+  if (0 != igraph_vector_init(&c_partition1, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_partition1);
+  if (0 != igraph_vector_init(&c_partition2, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_partition2);
+  c_source = (igraph_integer_t) REAL(source)[0];
+  c_target = (igraph_integer_t) REAL(target)[0];
+  if (!isNull(capacity)) { R_SEXP_to_vector(capacity, &c_capacity); }
+                                        /* Call igraph */
+  igraph_st_mincut(&c_graph, &c_value, (isNull(cut) ? 0 : &c_cut), &c_partition1, &c_partition2, c_source, c_target, (isNull(capacity) ? 0 : &c_capacity));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(4));
+  PROTECT(r_names=NEW_CHARACTER(4));
+  PROTECT(value=NEW_NUMERIC(1));
+  REAL(value)[0]=c_value;
+  PROTECT(cut=R_igraph_0orvector_to_SEXPp1(&c_cut));
+  igraph_vector_destroy(&c_cut);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(partition1=R_igraph_vector_to_SEXPp1(&c_partition1));
+  igraph_vector_destroy(&c_partition1);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(partition2=R_igraph_vector_to_SEXPp1(&c_partition2));
+  igraph_vector_destroy(&c_partition2);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, value);
+  SET_VECTOR_ELT(r_result, 1, cut);
+  SET_VECTOR_ELT(r_result, 2, partition1);
+  SET_VECTOR_ELT(r_result, 3, partition2);
+  SET_STRING_ELT(r_names, 0, CREATE_STRING_VECTOR("value"));
+  SET_STRING_ELT(r_names, 1, CREATE_STRING_VECTOR("cut"));
+  SET_STRING_ELT(r_names, 2, CREATE_STRING_VECTOR("partition1"));
+  SET_STRING_ELT(r_names, 3, CREATE_STRING_VECTOR("partition2"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(5);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_dominator_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_dominator_tree(SEXP graph, SEXP root, SEXP mode) {
