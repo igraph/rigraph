@@ -270,6 +270,9 @@ check-links: igraph_$(VERSION).tar.gz
 check-rhub: igraph
 	Rscript -e 'rhub::check_for_cran()'
 
+check-revdeps: igraph
+	Rscript -e 'options(width=204); revdepcheck::revdep_check(num_workers=8, quiet=F, bioc=F)'
+
 install:
 	Rscript -e 'devtools::install(".")'
 
