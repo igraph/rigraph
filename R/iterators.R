@@ -39,9 +39,9 @@ get_es_ref <- get_vs_ref <- function(graph) {
 
 get_es_graph <- get_vs_graph <- function(seq) {
   at <- attr(seq, "env")
-  if (class(at) == "weakref") {
+  if (inherits(at, "weakref")) {
     weak_ref_key(at)$me
-  } else if (class(at) == "environment") {
+  } else if (inherits(at, "environment")) {
     get("graph", envir = at)
   } else {
     NULL
