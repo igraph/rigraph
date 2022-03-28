@@ -12,11 +12,11 @@ CXX=`"${R_HOME}/bin/R" CMD config CXX11`
 if test -z "$CXX"; then
   AC_MSG_ERROR([No C++11 compiler is available])
 fi
+CXX11STD=`"${R_HOME}/bin/R" CMD config CXX11STD`
+CXX="${CXX} ${CXX11STD}"
 FC=`"${R_HOME}/bin/R" CMD config FC`
 CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
 CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXX11FLAGS`
-CXX11STD=`"${R_HOME}/bin/R" CMD config CXX11STD`
-CXXFLAGS="${CXX11STD} ${CXXFLAGS}"
 CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
 FCFLAGS=`"${R_HOME}/bin/R" CMD config FCFLAGS`
 FLIBS=`"${R_HOME}/bin/R" CMD config FLIBS`
@@ -167,3 +167,15 @@ AC_CONFIG_FILES([src/Makevars.tmp:src/Makevars.in], [
 )
 
 AC_OUTPUT
+
+echo ""
+echo "*** Compiler settings used:"
+echo "    CC=${CC}"
+echo "    LD=${LD}"
+echo "    CFLAGS=${CFLAGS}"
+echo "    CPPFLAGS=${CPPFLAGS}"
+echo "    CXX=${CXX}"
+echo "    CXXFLAGS=${CXXFLAGS}"
+echo "    LDFLAGS=${LDFLAGS}"
+echo "    LIBS=${LIBS}"
+
