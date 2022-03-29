@@ -2401,14 +2401,19 @@ extern int R_interrupts_pending;
 extern int R_interrupts_suspended;
 
 int R_igraph_interrupt_handler(void *data) {
-  if (R_interrupts_suspended) {
-    return 0;
-  }
-  R_ProcessEvents();
-  if (R_interrupts_pending) {
+  /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
+   * However, if an interruption is pending, R_CheckUserInterrupt() will
+   * longjmp back to the top level so we cannot clean up ourselves by calling
+   * IGRAPH_FINALLY_FREE(). Therefore, we first check whether there are any
+   * pending interruptions. If so, and interruptions are not suspended, we call
+   * IGRAPH_FINALLY_FREE(), knowing that the upcoming invocation of
+   * R_CheckUserInterrupt() will longjmp. This means that the conditions used
+   * here must be kept in sync with the source code of R_CheckUserInterrupt()
+   */
+  if (!R_interrupts_suspended && R_interrupts_pending) {
     IGRAPH_FINALLY_FREE();
-    R_CheckUserInterrupt();
   }
+  R_CheckUserInterrupt(); /* longjmps if there was an interruption */
   return 0;
 }
 
