@@ -163,7 +163,7 @@ clique.community <- function(graph, k) {
   }
   clq.graph <- simplify(graph(edges))
   V(clq.graph)$name <- 
-    seq(length=vcount(clq.graph))
+    seq(length.out=vcount(clq.graph))
   comps <- decompose(clq.graph)
   
   lapply(comps, function(x) {

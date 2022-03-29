@@ -213,7 +213,7 @@
 #' add_shape("triangle", clip=shapes("circle")$clip,
 #'                  plot=mytriangle)
 #' plot(g, vertex.shape="triangle", vertex.color=rainbow(vcount(g)),
-#'      vertex.size=seq(10,20,length=vcount(g)))
+#'      vertex.size=seq(10,20,length.out=vcount(g)))
 #'
 #' #################################################################
 #' # generic star vertex shape, with a parameter for number of rays
@@ -242,10 +242,10 @@
 #' add_shape("star", clip=shape_noclip,
 #'                  plot=mystar, parameters=list(vertex.norays=5))
 #' plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-#'      vertex.size=seq(10,20,length=vcount(g)))
+#'      vertex.size=seq(10,20,length.out=vcount(g)))
 #' plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-#'      vertex.size=seq(10,20,length=vcount(g)),
-#'      vertex.norays=rep(4:8, length=vcount(g)))
+#'      vertex.size=seq(10,20,length.out=vcount(g)),
+#'      vertex.norays=rep(4:8, length.out=vcount(g)))
 #'
 #' #################################################################
 #' # Pictures as vertices.
@@ -431,7 +431,7 @@ add_shape <- function(shape, clip=shape_noclip,
     vertex.size <- vertex.size[v]
   }
 
-  vertex.size <- rep(vertex.size, length=nrow(coords))
+  vertex.size <- rep(vertex.size, length.out=nrow(coords))
   
   if (length(vertex.frame.width) ==1) {
     symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
@@ -475,7 +475,7 @@ add_shape <- function(shape, clip=shape_noclip,
                (l[,5]-x0)^2 + (l[,6]-y0)^2,
                (l[,7]-x0)^2 + (l[,8]-y0)^2)
     
-    t(sapply(seq(length=nrow(l)), function(x) {
+    t(sapply(seq(length.out=nrow(l)), function(x) {
       d[x,][!v[x,]] <- Inf
       m <- which.min(d[x,])
       l[x, c(m*2-1, m*2)]
@@ -527,7 +527,7 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length=nrow(coords))
+  vertex.size <- rep(vertex.size, length.out=nrow(coords))
   
   if (length(vertex.frame.width) ==1) {
     symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
@@ -563,7 +563,7 @@ add_shape <- function(shape, clip=shape_noclip,
                (l[,5]-x0)^2 + (l[,6]-y0)^2,
                (l[,7]-x0)^2 + (l[,8]-y0)^2)
     
-    t(sapply(seq(length=nrow(l)), function(x) {
+    t(sapply(seq(length.out=nrow(l)), function(x) {
       m <- which.min(d[x,])
       l[x, c(m*2-1, m*2)]
     }))
@@ -627,7 +627,7 @@ add_shape <- function(shape, clip=shape_noclip,
                (l[,5]-x0)^2 + (l[,6]-y0)^2,
                (l[,7]-x0)^2 + (l[,8]-y0)^2)
     
-    t(sapply(seq(length=nrow(l)), function(x) {
+    t(sapply(seq(length.out=nrow(l)), function(x) {
       d[x,][!v[x,]] <- Inf
       m <- which.min(d[x,])
       l[x, c(m*2-1, m*2)]
@@ -689,7 +689,7 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-  vertex.size <- rep(vertex.size, length=nrow(coords))   
+  vertex.size <- rep(vertex.size, length.out=nrow(coords))   
   vertex.size2       <- 1/200 * params("vertex", "size2")
   if (length(vertex.size2) != 1 && !is.null(v)) {
     vertex.size2 <- vertex.size2[v]
@@ -731,7 +731,7 @@ add_shape <- function(shape, clip=shape_noclip,
                (l[,5]-x0)^2 + (l[,6]-y0)^2,
                (l[,7]-x0)^2 + (l[,8]-y0)^2)
       
-    t(sapply(seq(length=nrow(l)), function(x) {
+    t(sapply(seq(length.out=nrow(l)), function(x) {
       m <- which.min(d[x,])
       l[x, c(m*2-1, m*2)]
     }))
@@ -791,7 +791,7 @@ add_shape <- function(shape, clip=shape_noclip,
     d <- cbind((l[,1]-x0)^2 + (l[,2]-y0)^2,
                (l[,3]-x0)^2 + (l[,4]-y0)^2)
     
-    t(sapply(seq(length=nrow(l)), function(x) {
+    t(sapply(seq(length.out=nrow(l)), function(x) {
       m <- which.min(d[x,])
       l[x, c(m*2-1, m*2)]
     }))
@@ -934,7 +934,7 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
   }
   vertex.color       <- getparam("color")
   vertex.frame.color <- getparam("frame.color")
-  vertex.size        <- rep(1/200 * getparam("size"), length=nrow(coords))
+  vertex.size        <- rep(1/200 * getparam("size"), length.out=nrow(coords))
   vertex.pie         <- getparam("pie")
   vertex.pie.color   <- getparam("pie.color")
   vertex.pie.angle   <- getparam("pie.angle")
@@ -975,8 +975,8 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
     }
     p
   }
-  vertex.color       <- rep(getparam("color"), length=nrow(coords))
-  vertex.size        <- rep(1/200 * getparam("size"), length=nrow(coords))
+  vertex.color       <- rep(getparam("color"), length.out=nrow(coords))
+  vertex.size        <- rep(1/200 * getparam("size"), length.out=nrow(coords))
 
   ## Need to create a separate image for every different vertex color
   allcols <- unique(vertex.color)
@@ -1011,8 +1011,8 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
     p
   }
 
-  size   <- rep(1/200 * getparam("size"), length=nrow(coords))
-  size2  <- rep(1/200 * getparam("size2"), length=nrow(coords))
+  size   <- rep(1/200 * getparam("size"), length.out=nrow(coords))
+  size2  <- rep(1/200 * getparam("size2"), length.out=nrow(coords))
   raster <- getparam("raster")
 
   for (i in seq_len(nrow(coords))) {

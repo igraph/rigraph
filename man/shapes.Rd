@@ -161,7 +161,7 @@ mytriangle <- function(coords, v=NULL, params) {
 add_shape("triangle", clip=shapes("circle")$clip,
                  plot=mytriangle)
 plot(g, vertex.shape="triangle", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length=vcount(g)))
+     vertex.size=seq(10,20,length.out=vcount(g)))
 
 #################################################################
 # generic star vertex shape, with a parameter for number of rays
@@ -190,10 +190,10 @@ mystar <- function(coords, v=NULL, params) {
 add_shape("star", clip=shape_noclip,
                  plot=mystar, parameters=list(vertex.norays=5))
 plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length=vcount(g)))
+     vertex.size=seq(10,20,length.out=vcount(g)))
 plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length=vcount(g)),
-     vertex.norays=rep(4:8, length=vcount(g)))
+     vertex.size=seq(10,20,length.out=vcount(g)),
+     vertex.norays=rep(4:8, length.out=vcount(g)))
 
 #################################################################
 # Pictures as vertices.

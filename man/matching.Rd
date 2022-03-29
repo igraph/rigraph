@@ -108,7 +108,7 @@ print_all(g, v=TRUE)
 max_bipartite_match(g)
 
 g2 <- graph_from_literal( a-b-c-d-e-f-g )
-V(g2)$type <- rep(c(FALSE,TRUE), length=vcount(g2))
+V(g2)$type <- rep(c(FALSE,TRUE), length.out=vcount(g2))
 print_all(g2, v=TRUE)
 max_bipartite_match(g2)
 #' @keywords graphs

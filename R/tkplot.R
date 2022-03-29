@@ -202,12 +202,12 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   edge.label.color <- params("edge", "label.color")
   arrow.size  <- params("edge", "arrow.size")[1]
   curved <- params("edge", "curved")
-  curved <- rep(curved, length=ecount(graph))
+  curved <- rep(curved, length.out=ecount(graph))
   
   layout <- unname(params("plot", "layout"))
   layout[,2] <- -layout[,2]
   margin <- params("plot", "margin")
-  margin <- rep(margin, length=4)
+  margin <- rep(margin, length.out=4)
 
   # the new style parameters can't do this yet
   arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)

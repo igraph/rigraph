@@ -102,7 +102,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     if (length(value) != length(i) && length(value) != 1) {
       stop("Replacement value has the wrong length")
     }
-    tmp <- rep(x[[j]], length=attr(x, "NROW"))
+    tmp <- rep(x[[j]], length.out=attr(x, "NROW"))
     tmp[i] <- value
     if (length(unique(tmp)) == 1) {
       tmp <- tmp[1]

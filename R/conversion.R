@@ -50,26 +50,26 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
            "and the edge attribute is not")
     }
     if (is_directed(graph)) {
-      for (i in seq(length=ecount(graph))) {
+      for (i in seq(length.out=ecount(graph))) {
         e <- ends(graph, i, names = FALSE)
         res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
       }
     } else {
       if (type==0) {
         ## upper
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ min(e), max(e) ] <- edge_attr(graph, attr, i)
         }        
       } else if (type==1) {
         ## lower
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ max(e), min(e) ] <- edge_attr(graph, attr, i)
         }        
       } else if (type==2) {
         ## both
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
           if (e[1] != e[2]) {
@@ -661,7 +661,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
     recode[!types] <- seq_len(n1)
     recode[types]  <- seq_len(n2)
     
-    for (i in seq(length=ecount(graph))) {
+    for (i in seq(length.out=ecount(graph))) {
       eo <- ends(graph, i, names = FALSE)
       e <- recode[eo]
       if (!types[eo[1]]) {
