@@ -2401,7 +2401,11 @@ extern int R_interrupts_pending;
 extern int R_interrupts_suspended;
 
 int R_igraph_interrupt_handler(void *data) {
-  if (! R_interrupts_suspended && R_interrupts_pending) {
+  if (R_interrupts_suspended) {
+    return 0;
+  }
+  R_ProcessEvents();
+  if (R_interrupts_pending) {
     IGRAPH_FINALLY_FREE();
     R_CheckUserInterrupt();
   }
