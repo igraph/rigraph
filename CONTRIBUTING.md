@@ -42,7 +42,7 @@ and test the `igraph` package using the `devtools` package as follows:
 When building from source on Windows, you need to have
 [RTools](https://cran.r-project.org/bin/windows/Rtools/) installed.
 Additionally, the two system requirements of `glpk` and `libxml2` are
-not optional, but hard requirements. For version R > 4.0 you can install these
+not optional, but hard requirements. For version R >= 4.0 you can install these
 two from an RTools terminal using
 
 ```
