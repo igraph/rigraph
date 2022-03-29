@@ -2400,14 +2400,10 @@ void R_igraph_warning_handler(const char *reason, const char *file,
 extern int R_interrupts_pending;
 
 int R_igraph_interrupt_handler(void *data) {
-#if  ( defined(Win32) )
-  R_CheckUserInterrupt();
-#else
   if (R_interrupts_pending) {
     IGRAPH_FINALLY_FREE();
     R_CheckUserInterrupt();
   }
-#endif
   return 0;
 }
 
