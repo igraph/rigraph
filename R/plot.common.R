@@ -54,7 +54,7 @@ i.parse.plot.params <- function(graph, params) {
         if (length(v)==1) {
           return(rep(v, length(range)))
         } else {
-          return (rep(v, length=max(range)+1)[[range+1]])
+          return (rep(v, length.out=max(range)+1)[[range+1]])
         }
       }
     }
@@ -217,7 +217,7 @@ curve_multiple <- function(graph, start=0.5) {
     if (length(x) == 1) {
       return(0)
     } else {
-      return(seq(-start, start, length=length(x)))
+      return(seq(-start, start, length.out=length(x)))
     }
   })
 }

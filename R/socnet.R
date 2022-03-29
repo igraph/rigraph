@@ -650,7 +650,7 @@ tkigraph <- function() {
   graphs <- get("graphs", .tkigraph.env)
   el <- as_edgelist(graphs[[gnos]])
   el <- data.frame(from=el[,1], to=el[,2])
-#  if (any(V(graphs[[gnos]])$name != seq(length=vcount(graphs[[gnos]])))) {
+#  if (any(V(graphs[[gnos]])$name != seq(length.out=vcount(graphs[[gnos]])))) {
 #    el2 <- as_edgelist(graphs[[gnos]], names=FALSE)
 #    el <- cbind(el, el2)
 #  }
@@ -1948,7 +1948,7 @@ tkigraph <- function() {
   }
   graphs <- decompose(get("graphs", .tkigraph.env)[[gnos]])
   coh <- sapply(graphs, cohesion)
-  value <- data.frame("Component"=seq(length=length(graphs)), "Cohesion"=coh)
+  value <- data.frame("Component"=seq(length.out=length(graphs)), "Cohesion"=coh)
   .tkigraph.showData(value, title=paste("Cohesion of components in graph #",
                               gnos), right=FALSE)
 }  
@@ -2353,7 +2353,7 @@ tkigraph <- function() {
 
     sortColumn <- function(n, decreasing=FALSE) {
       dataframe <<- dataframe[ order(dataframe[[n]], decreasing=decreasing), ]
-      rownames(dataframe) <- seq(length=nrow(dataframe))
+      rownames(dataframe) <- seq(length.out=nrow(dataframe))
       .tkigraph.showData(dataframe,
                          colname.bgcolor = colname.bgcolor,
                          rowname.bgcolor = rowname.bgcolor,

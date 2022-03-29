@@ -1236,7 +1236,7 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
     stop("Not a graph object")
   }
 
-  exo <- rep(exo, length=vcount(graph))
+  exo <- rep(exo, length.out=vcount(graph))
   exo <- matrix(exo, ncol=1)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1308,7 +1308,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   M2 <- as(M2, "dgCMatrix")
 
   ## exo
-  exo <- cbind(rep(exo, length=vc))
+  exo <- cbind(rep(exo, length.out=vc))
 
   ## Solve the equation
   M3 <- M2-alpha*M

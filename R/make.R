@@ -1600,7 +1600,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_bipartite_graph( rep(0:1,length=10), c(1:10))
+#' g <- make_bipartite_graph(rep(0:1, length.out=10), c(1:10))
 #' print(g, v=TRUE)
 #'
 make_bipartite_graph <- function(types, edges, directed=FALSE) {

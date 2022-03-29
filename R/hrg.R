@@ -631,7 +631,7 @@ hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
                          edge.color=NULL, use.edge.length=FALSE, ...) {
   vc <- length(x$left)+1
   phy <- as_phylo(x)
-  br <- seq(0,1,length=length(colbar)) ; br[1] <- -1
+  br <- seq(0,1,length.out=length(colbar)) ; br[1] <- -1
   cc <- as.integer(cut(x$prob[phy$edge[,1] - vc], breaks=br))
   if (is.null(edge.color)) { edge.color <- colbar[cc] }
   plot(phy, edge.color=edge.color, use.edge.length=use.edge.length, ...)
