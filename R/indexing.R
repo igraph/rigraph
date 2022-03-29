@@ -196,13 +196,29 @@
     }
     res
   } else if (missing(i) && missing(j)) {
-    as_adj(x, sparse=sparse, attr=attr, edges=edges)
+    if (missing(edges)) {
+      as_adj(x, sparse=sparse, attr=attr)
+    } else {
+      as_adj(x, sparse=sparse, attr=attr, edges=edges)
+    }
   } else if (missing(j)) {
-    as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
+    if (missing(edges)) {
+      as_adj(x, sparse=sparse, attr=attr)[i,,drop=drop]
+    } else {
+      as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,,drop=drop]
+    }
   } else if (missing(i)) {
-    as_adj(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
+    if (missing(edges)) {
+      as_adj(x, sparse=sparse, attr=attr)[,j,drop=drop]
+    } else {
+      as_adj(x, sparse=sparse, attr=attr, edges=edges)[,j,drop=drop]
+    }
   } else {
-    as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
+    if (missing(edges)) {
+      as_adj(x, sparse=sparse, attr=attr)[i,j,drop=drop]
+    } else {
+      as_adj(x, sparse=sparse, attr=attr, edges=edges)[i,j,drop=drop]
+    }
   }
 }
 

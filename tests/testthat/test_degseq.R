@@ -23,7 +23,7 @@ test_that("realize_degseq works", {
 
   #####
 
-  g2 <- sample_gnp(1000, 2/1000, dir=TRUE)
+  g2 <- sample_gnp(1000, 2/1000, directed=TRUE)
 
   nG <- realize_degseq(degree(g2, mode="out"), degree(g2, mode="in"))
   expect_that(degree(nG, mode="out"), equals(degree(g2, mode="out")))
@@ -66,7 +66,7 @@ test_that("sample_degseq works", {
   nG <- sample_degseq(degree(g), method="simple")
   expect_that(degree(nG), equals(degree(g)))
 
-  g2 <- sample_gnp(1000, 2/1000, dir=TRUE)
+  g2 <- sample_gnp(1000, 2/1000, directed=TRUE)
 
   nG2 <- sample_degseq(degree(g, mode="out"),
                               degree(g, mode="in"),

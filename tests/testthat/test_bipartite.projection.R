@@ -11,7 +11,7 @@ test_that("bipartite_projection works", {
   expect_true(graph.isomorphic(proj[[1]], make_full_graph(10)))
   expect_true(graph.isomorphic(proj[[2]], make_full_graph(5)))
 
-  M <- matrix(0, nr=5, nc=3)
+  M <- matrix(0, nrow=5, ncol=3)
   rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
   colnames(M) <- c("Party", "Skiing", "Badminton")
   M[] <- sample(0:1, length(M), replace=TRUE)

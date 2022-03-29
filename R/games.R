@@ -750,8 +750,8 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' @examples
 #' 
 #' # two types of vertices, they like only themselves
-#' g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), nc=2))
-#' g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), nc=2))
+#' g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
+#' g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
 
 sample_traits_callaway <- function(nodes, types, edge.per.step=1,
                                  type.dist=rep(1, types),
@@ -907,11 +907,11 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @keywords graphs
 #' @examples
 #' 
-#' pf <- matrix( c(1, 0, 0, 1), nr=2)
+#' pf <- matrix( c(1, 0, 0, 1), nrow=2)
 #' g <- sample_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_with_fr)}
 #' 
-#' pf <- matrix( c(0, 1, 0, 0), nr=2)
+#' pf <- matrix( c(0, 1, 0, 0), nrow=2)
 #' g <- sample_asym_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_in_circle)}
 #' 
@@ -1678,8 +1678,8 @@ sample_fitness_pl <- sample_fitness_pl
 #' g <- sample_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
 #' dd1 <- degree_distribution(g, mode="in")
 #' dd2 <- degree_distribution(g, mode="out")
-#' plot(seq(along=dd1)-1, dd1, log="xy")
-#' points(seq(along=dd2)-1, dd2, col=2, pch=2)
+#' plot(seq(along.with=dd1)-1, dd1, log="xy")
+#' points(seq(along.with=dd2)-1, dd2, col=2, pch=2)
 
 sample_forestfire <- sample_forestfire
 

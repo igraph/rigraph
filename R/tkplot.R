@@ -508,7 +508,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 
 .tkplot.layouts.newdefaults <- function(name, defaults) {
   assign("tmp", defaults, .tkplot.env)
-  for (i in seq(along=defaults)) {
+  for (i in seq(along.with=defaults)) {
     cmd <- paste(sep="", '.layouts[["', name, '"]]$params[[', i,
                  ']]$default <- tmp[[', i, ']]')
     eval(parse(text=cmd), .tkplot.env)
@@ -883,10 +883,10 @@ tk_canvas <- function(tkp.id) {
                                      paste("from-", id, sep="")))
   edge.to.ids <- as.numeric(tcltk::tkfind(tkp$canvas, "withtag",
                                    paste("to-", id, sep="")))
-  for (i in seq(along=edge.from.ids)) {
+  for (i in seq(along.with=edge.from.ids)) {
     .tkplot.update.edge(tkp.id, edge.from.ids[i])
   }
-  for (i in seq(along=edge.to.ids)) {
+  for (i in seq(along.with=edge.to.ids)) {
     .tkplot.update.edge(tkp.id, edge.to.ids[i])
   }
 }
@@ -1156,7 +1156,7 @@ tk_canvas <- function(tkp.id) {
   }
   
   OK.but <- tcltk::tkbutton(dialog, text="   OK   ", command=OnOK)
-  for (i in seq(along=labels)) {
+  for (i in seq(along.with=labels)) {
     tcltk::tkgrid(tcltk::tklabel(dialog, text=labels[[i]]))
     tmp <- tcltk::tkentry(dialog, width="40",textvariable=vars[[i]])
     tcltk::tkgrid(tmp)
@@ -1432,7 +1432,7 @@ tk_canvas <- function(tkp.id) {
   submit <- function() {
     realparams <- params <- vector(mode="list", length(layout$params))
     names(realparams) <- names(params) <- names(layout$params)
-    for (i in seq(along=layout$params)) {
+    for (i in seq(along.with=layout$params)) {
       realparams[[i]] <-
         params[[i]] <- switch(layout$params[[i]]$type,
                               "numeric"=as.numeric(tcltk::tkget(values[[i]])),
@@ -1465,7 +1465,7 @@ tk_canvas <- function(tkp.id) {
                  
   row <- 1
   values <- list()
-  for (i in seq(along=layout$params)) {
+  for (i in seq(along.with=layout$params)) {
     
     tcltk::tkgrid(tcltk::tklabel(dialog, text=paste(sep="", layout$params[[i]]$name, ":")),
                    row=row, column=0, sticky="ne", padx=5, pady=5)

@@ -905,7 +905,7 @@ graph_from_literal_i <- function(mf) {
   ## Merge symbols for ":"
   ret <- lapply(ret, function(x) {
     res <- list()
-    for (i in seq(along=x)) {
+    for (i in seq(along.with=x)) {
       if (x[i]==":" && names(x)[i]=="op") {
         ## SKIP
       } else if (i>1 && x[i-1]==":" && names(x)[i-1]=="op") {
@@ -919,10 +919,10 @@ graph_from_literal_i <- function(mf) {
 
   ## Ok, create the edges
   edges <- numeric()
-  for (i in seq(along=ret)) {
+  for (i in seq(along.with=ret)) {
     prev.sym <- character()
     lhead <- rhead <- character()
-    for (j in seq(along=ret[[i]])) {
+    for (j in seq(along.with=ret[[i]])) {
       act <- ret[[i]][[j]]
       if (names(ret[[i]])[j]=="op") {
         if (length(lhead)==0) {
@@ -947,7 +947,7 @@ graph_from_literal_i <- function(mf) {
     }
   }
 
-  ids <- seq(along=v)
+  ids <- seq(along.with=v)
   names(ids) <- v
   res <- graph( unname(ids[edges]), n=length(v), directed=directed)
   if (simplify) res <- simplify(res)
@@ -1528,9 +1528,9 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' @examples
 #'
 #' g <- make_full_bipartite_graph(2, 3)
-#' g2 <- make_full_bipartite_graph(2, 3, dir=TRUE)
-#' g3 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="in")
-#' g4 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="all")
+#' g2 <- make_full_bipartite_graph(2, 3, directed=TRUE)
+#' g3 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="in")
+#' g4 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="all")
 #'
 make_full_bipartite_graph <- function(n1, n2, directed=FALSE,
                        mode=c("all", "out", "in")) {

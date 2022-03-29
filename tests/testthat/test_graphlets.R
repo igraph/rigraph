@@ -150,7 +150,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu=NULL) {
   }
 
   ## Sort the cliques according to their weights
-  Smb <- sort(Mu, decreasing=TRUE, index=TRUE)
+  Smb <- sort(Mu, decreasing=TRUE, index.return=TRUE)
   list(cliques=clf[Smb$ix], Mu=Mu[Smb$ix])
 }
 
