@@ -80,11 +80,11 @@ asymmetric. The joint distribution for the in- and out-types is given in the
 }
 \examples{
 
-pf <- matrix( c(1, 0, 0, 1), nr=2)
+pf <- matrix( c(1, 0, 0, 1), nrow=2)
 g <- sample_pref(20, 2, pref.matrix=pf)
 \dontrun{tkplot(g, layout=layout_with_fr)}
 
-pf <- matrix( c(0, 1, 0, 0), nr=2)
+pf <- matrix( c(0, 1, 0, 0), nrow=2)
 g <- sample_asym_pref(20, 2, pref.matrix=pf)
 \dontrun{tkplot(g, layout=layout_in_circle)}
 

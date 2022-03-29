@@ -21,13 +21,13 @@ test_that("mean_distance works", {
   g <- giant.component(sample_gnp(100, 3/100))
   expect_that(apl(g), equals(mean_distance(g)))
 
-  g <- giant.component(sample_gnp(100, 6/100, dir=TRUE), mode="strong")
+  g <- giant.component(sample_gnp(100, 6/100, directed=TRUE), mode="strong")
   expect_that(apl(g), equals(mean_distance(g)))
 
   g <- sample_gnp(100, 2/100)
   expect_that(apl(g), equals(mean_distance(g)))
   
-  g <- sample_gnp(100, 4/100, dir=TRUE)
+  g <- sample_gnp(100, 4/100, directed=TRUE)
   expect_that(apl(g), equals(mean_distance(g)))
 })
 

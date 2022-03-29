@@ -172,8 +172,8 @@ test_that("Issue 20 is resolved", {
 
   library(igraph)
   set.seed(12345)
-  g1 <- erdos.renyi.game(n=20, p=0.1, directed=TRUE)
-  g2 <- erdos.renyi.game(n=20, p=0.1, directed=TRUE)
+  g1 <- erdos.renyi.game(n=20, p.or.m=0.1, directed=TRUE)
+  g2 <- erdos.renyi.game(n=20, p.or.m=0.1, directed=TRUE)
   ls <- local_scan(g2, g1, k=1, mode="all")
   correct <- c(4, 1, 2, 1, 1, 8, 1, 2, 0, 5, 2, 3, 3, 4, 5, 3, 5, 4, 2, 1)
   expect_that(ls, equals(correct))

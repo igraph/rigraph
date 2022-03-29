@@ -76,8 +76,8 @@ depends on the types of the vertices involved and is taken from
 \examples{
 
 # two types of vertices, they like only themselves
-g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), nc=2))
-g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), nc=2))
+g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
+g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -1,5 +1,8 @@
 # Unreleased
 
+The C core is updated to 0.9.7, fixing a range of bugs and introducing a number
+of new functions.
+
 Added:
 
 - `has_eulerian_path()` and `has_eulerian_cycle()` decides whether there is an

@@ -573,7 +573,7 @@ as_graphnel <- function(graph) {
   if ("weight" %in% edge_attr_names(graph) &&
       is.numeric(E(graph)$weight)) {
     al <- lapply(as_adj_edge_list(graph, "out"), as.vector)
-    for (i in seq(along=al)) {
+    for (i in seq(along.with=al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse( edges[,2]==i, edges[,1], edges[,2])
       weights <- E(graph)$weight[al[[i]]]
@@ -859,7 +859,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' @examples
 #' 
 #' ## Directed
-#' g <- make_ring(10, dir=TRUE)
+#' g <- make_ring(10, directed=TRUE)
 #' al <- as_adj_list(g, mode="out")
 #' g2 <- graph_from_adj_list(al)
 #' graph.isomorphic(g, g2)

@@ -45,9 +45,9 @@ this is boolean and \code{FALSE} for the vertices of the first kind and
 \examples{
 
 g <- make_full_bipartite_graph(2, 3)
-g2 <- make_full_bipartite_graph(2, 3, dir=TRUE)
-g3 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="in")
-g4 <- make_full_bipartite_graph(2, 3, dir=TRUE, mode="all")
+g2 <- make_full_bipartite_graph(2, 3, directed=TRUE)
+g3 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="in")
+g4 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="all")
 
 }
 \seealso{

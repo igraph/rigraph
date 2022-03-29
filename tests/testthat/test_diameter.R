@@ -23,7 +23,7 @@ test_that("diameter works", {
 
 #### Directed
 
-  g <- sample_gnp(30, 3/30, dir=TRUE)
+  g <- sample_gnp(30, 3/30, directed=TRUE)
   sp <- distances(g, mode="out")
   sp[sp==Inf] <- NA
   expect_that(max(sp, na.rm=TRUE), equals(diameter(g, unconnected=TRUE)))

@@ -49,7 +49,7 @@ create again an igraph graph by calling \code{graph_from_adj_list}.
 \examples{
 
 ## Directed
-g <- make_ring(10, dir=TRUE)
+g <- make_ring(10, directed=TRUE)
 al <- as_adj_list(g, mode="out")
 g2 <- graph_from_adj_list(al)
 graph.isomorphic(g, g2)

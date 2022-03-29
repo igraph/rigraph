@@ -12,7 +12,7 @@ test_that("edge_density works", {
 
 ####
 
-  g <- sample_gnp(50, 4/50, dir=TRUE)
+  g <- sample_gnp(50, 4/50, directed=TRUE)
   gd <- edge_density(g)
   gd2 <- ecount(g) / vcount(g) / (vcount(g)-1)
   expect_that(gd, equals(gd2))

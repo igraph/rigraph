@@ -12,7 +12,7 @@ test_that("graph_from_adj_list works", {
 
   ##
   
-  g <- sample_gnp(100, 3/100, dir=TRUE)
+  g <- sample_gnp(100, 3/100, directed=TRUE)
   al <- as_adj_list(g, mode="out")
   g2 <- graph_from_adj_list(al, mode="out")
   expect_true(graph.isomorphic(g, g2))

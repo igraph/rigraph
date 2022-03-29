@@ -78,15 +78,13 @@ test_that("BFS callback does not blow up when an invalid value is returned", {
 })
 
 test_that("BFS callback does not blow up when an error is raised within the callback", {
-  skip("error handling not implemented yet")
-
   callback <- function(graph, data, extra) {
-    error("test")
+    stop("test")
     FALSE
   }
 
   g <- make_ring(5, directed=TRUE)
-  bfs(g, root=3, mode="out", callback=callback)
+  expect_error(bfs(g, root=3, mode="out", callback=callback), "test")
 
   expect_true(TRUE)
 })
