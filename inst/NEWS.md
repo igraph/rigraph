@@ -130,6 +130,7 @@ No user visible changes.
 Dec 14, 2021
 
 Fixed:
+
 - The macOS versions of `igraph` were accidentally built without GraphML
   support on CRAN; this should now be fixed.
 
@@ -152,10 +153,12 @@ Oct 15, 2021
 The C core is updated to 0.8.5, fixing a range of bugs and introducing a number of new functions.
 
 Added:
+
 - cluster_leiden added (#399).
 - cluster_fluid_communities added (#454)
 
 Fixed:
+
 - `make_lattice()` correctly rounds `length` to the nearest integer while
   printing a warning (#115).
 - `make_empty_graph(NULL)` now prints an error instead of producing an
@@ -173,6 +176,7 @@ Fixed:
   any more (#387).
 
 Deprecated:
+
 - The `membership` argument of `modularity.matrix()` is now deprecated as the
   function never needed it anyway.
 - `modularity()` now prints a warning when it is applied on a directed graph
@@ -190,6 +194,7 @@ Deprecated:
   networks with multiple edges.
 
 Misc:
+
 - Documentation improvements.
 
 # igraph 1.2.6
