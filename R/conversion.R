@@ -944,8 +944,6 @@ as_long_data_frame <- function(graph) {
 #' @param x object of class igraph, the network
 #' @param matrix.type character, type of matrix to return, currently "adjacency"
 #' or "edgelist" are supported
-#' @param attrname character, name of the edge attribute to use to fill in the
-#' cells of the adjacency matrix
 #' @param \dots other arguments to/from other methods
 #' @return Depending on the value of \code{matrix.type} either a square
 #' adjacency matrix or a two-column numeric matrix representing the edgelist.
