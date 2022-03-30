@@ -44,6 +44,9 @@ Added:
 - `make_bipartite_graph()` now handles vertices with names.
 - `shortest_paths()` now supports graphs with negative edge weights.
 - `min_cut()` now supports s-t mincuts even if `value.only=FALSE`.
+- `as.matrix()` now supports converting an igraph graph to an adjacency or edge
+  list matrix representation. See `as.matrix.igraph()` for more details. This
+  function was migrated from `intergraph`; thanks to Michal Bojanowski.
 
 Fixed:
 
