@@ -4,24 +4,13 @@
 \alias{as.matrix.igraph}
 \title{Convert igraph objects to adjacency or edge list matrices}
 \usage{
-\method{as.matrix}{igraph}(
-  x,
-  matrix.type = c("adjacency", "edgelist"),
-  attrname = NULL,
-  sparse = FALSE,
-  ...
-)
+\method{as.matrix}{igraph}(x, matrix.type = c("adjacency", "edgelist"), ...)
 }
 \arguments{
 \item{x}{object of class igraph, the network}
 
 \item{matrix.type}{character, type of matrix to return, currently "adjacency"
 or "edgelist" are supported}
-
-\item{attrname}{character, name of the edge attribute to use to fill in the
-cells of the adjacency matrix}
-
-\item{sparse}{logical, whether to return a sparse matrix}
 
 \item{\dots}{other arguments to/from other methods}
 }
@@ -38,12 +27,12 @@ If \code{matrix.type} is \code{"edgelist"}, then a two-column numeric edge list
 matrix is returned.  The value of \code{attrname} is ignored.
 
 If \code{matrix.type} is \code{"adjacency"}, then a square adjacency matrix is
-returned. If \code{attrname} is \code{NULL} (default), the matrix is binary.
-Otherwise \code{attrname} can be a name of edge attribute of \code{x}. In
-that case the cells of the results are the values of that attribute.
+returned. For adjacency matrices, you can use the \code{attr} keyword argument
+to use the values of an edge attribute in the matrix cells. See the
+documentation of \link{as_adjacency_matrix} for more details.
 
 Other arguments passed through \code{...} are passed to either
-\code{\link[igraph]{as_adjacency_matrix}} or \code{\link[igraph]{as_edgelist}}
+\code{\link{as_adjacency_matrix}} or \code{\link{as_edgelist}}
 depending on the value of \code{matrix.type}.
 }
 \examples{
@@ -57,7 +46,7 @@ as.matrix(g, "adjacency", sparse=FALSE, attr="weight")
 
 }
 \seealso{
-\code{\link[igraph]{as_adjacency_matrix}}, \code{\link[igraph]{as_edgelist}}
+\code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
 }
 \author{
 Michal Bojanowski, originally from the \code{intergraph} package
