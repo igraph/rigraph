@@ -205,7 +205,7 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
       IGRAPH_FINALLY_FREE();
       error("Interrupted by user");
       return R_NilValue;
-      
+
     default:
       error(
         "Invalid object type returned from R_igraph_safe_eval(). This is a "
@@ -2398,23 +2398,35 @@ void R_igraph_warning_handler(const char *reason, const char *file,
 }
 
 extern int R_interrupts_pending;
-extern int R_interrupts_suspended;
+
+void checkInterruptFn(void *dummy) {
+  IGRAPH_UNUSED(dummy);
+  R_CheckUserInterrupt();
+}
 
 int R_igraph_interrupt_handler(void *data) {
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
-   * IGRAPH_FINALLY_FREE(). Therefore, we first check whether there are any
-   * pending interruptions. If so, and interruptions are not suspended, we call
-   * IGRAPH_FINALLY_FREE(), knowing that the upcoming invocation of
-   * R_CheckUserInterrupt() will longjmp. This means that the conditions used
-   * here must be kept in sync with the source code of R_CheckUserInterrupt()
+   * IGRAPH_FINALLY_FREE(). Therefore, we call R_CheckUserInterrupt()
+   * encapsulated in checkInterruptFn(), called through R_ToplevelExec(). If
+   * an interruption is pending, the function will properly return here instead
+   * of doing a longjmp all the way to the top. If an interruption was indeed
+   * pending, we then call IGRAPH_FINALLY_FREE(), knowing that the upcoming
+   * invocation of R_CheckUserInterrupt() will longjmp. However, we need to
+   * make sure that R_interrupts_pending = 1, in order to make sure that the
+   * interrupt will longjmp. This means that the conditions used here must be
+   * kept in sync with the source code of R_CheckUserInterrupt()
    */
-  if (!R_interrupts_suspended && R_interrupts_pending) {
+  if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
+    /* We set R_interrupts_pending to 1 to indicate want to interrupt. */
+    R_interrupts_pending = 1;
+    R_CheckUserInterrupt();
+    /* Process was not yet interrupted, so we bail out instead */
+    IGRAPH_FATAL("Interruption failed");
   }
-  R_CheckUserInterrupt(); /* longjmps if there was an interruption */
-  return 0;
+  return IGRAPH_SUCCESS;
 }
 
 int R_igraph_progress_handler(const char *message, igraph_real_t percent,
