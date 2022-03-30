@@ -2420,13 +2420,11 @@ int R_igraph_interrupt_handler(void *data) {
    */
   if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
-    /* We keep looping until R_CheckUserInterrupt will longjmp */
-    while (1)
-    {
-      /* We indicate that an interrupt is pending to indicate we want to interrupt. */
-      R_interrupts_pending = 1;
-      R_CheckUserInterrupt();
-    }
+    /* We set R_interrupts_pending to 1 to indicate want to interrupt. */
+    R_interrupts_pending = 1;
+    R_CheckUserInterrupt();
+    /* Process was not yet interrupted, so we bail out instead */
+    IGRAPH_FATAL("Interruption failed");
   }
   return IGRAPH_SUCCESS;
 }
