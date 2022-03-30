@@ -71,6 +71,11 @@ Fixed:
   last edge ID for each cell in the matrix instead of summing them.
 - Using the `+` and `-` operators with a `path()` object consisting of two
   vertices is now handled correctly; fixes #355
+- `topo_sort()` now throws an error if the input graph is not acyclic instead
+  of returning an incorrect partial ordering.
+- Weighted transitivity calculations (i.e. `transitivity(mode="barrat")` now
+  throw an error for multigraphs; the implementation does not work correctly
+  for multigraphs and earlier versions did not warn about this.
 
 Changed:
 
@@ -88,6 +93,9 @@ Changed:
   approximation. If you explicitly need cutoffs and you want your results to be
   reproducible with future versions, use `closeness()`, `betweenness()` and
   `edge_betweenness()` in your code with a `cutoff` argument.
+- `closeness()` now only considers _reachable_ vertices during the calculation;
+  in other words, closeness centrality is now calculated on a per-component
+  basis for disconnected graphs. Earlier versions considered _all_ vertices.
 
 Deprecated:
 
