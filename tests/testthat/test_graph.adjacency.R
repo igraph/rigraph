@@ -177,3 +177,15 @@ test_that("bug #554 is fixed", {
   expect_that(g[], equals(M))
 
 })
+
+test_that("graph_from_adjacency_matrix works for sparse matrices without values", {
+
+  library(igraph)
+
+  # https://github.com/igraph/rigraph/issues/269
+  M <- Matrix::sparseMatrix(i=c(1,3),j=c(3,4),dims=c(5,5))
+  g <- graph_from_adjacency_matrix(M)
+  M <- Matrix::sparseMatrix(i=c(1,3),j=c(3,4),dims=c(5,5),x=1)
+  expect_that(g[], equals(M))
+})
+

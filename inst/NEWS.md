@@ -1,3 +1,10 @@
+# Unreleased
+
+Fixed:
+
+- `graph_from_adjacency_matrix()` now works with sparse matrices even if the
+  cell values in the sparse matrix are unspecified
+
 # igraph 1.3.0
 
 The C core is updated to 0.9.7, fixing a range of bugs and introducing a number
