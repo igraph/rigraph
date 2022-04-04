@@ -293,6 +293,13 @@ DRL_OPTIONS:
 STRVECTOR: {}
 
 BLISSSH:
+    DEFAULT:
+        '"f"': c("f", "fs", "fl", "fm", "flm", "fsm")
+        '"fs"': c("fs", "f", "fl", "fm", "flm", "fsm")
+        '"fl"': c("fl", "f", "fs", "fm", "flm", "fsm")
+        '"fm"': c("fm", "f", "fs", "fl", "flm", "fsm")
+        '"flm"': c("flm", "f", "fs", "fl", "fm", "fsm")
+        '"fsm"': c("fsm", "f", "fs", "fl", "fm", "flm")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)'
 
 BLISSINFO: {}
