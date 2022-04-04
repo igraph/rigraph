@@ -4,7 +4,12 @@
 \alias{automorphism_group}
 \title{Generating set of the automorphism group of a graph}
 \usage{
-automorphism_group(graph, colors, sh = "fm", details = FALSE)
+automorphism_group(
+  graph,
+  colors,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm"),
+  details = FALSE
+)
 }
 \arguments{
 \item{graph}{The input graph, it is treated as undirected.}

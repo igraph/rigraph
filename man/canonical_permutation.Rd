@@ -5,7 +5,11 @@
 \alias{canonical.permutation}
 \title{Canonical permutation of a graph}
 \usage{
-canonical_permutation(graph, colors, sh = "fm")
+canonical_permutation(
+  graph,
+  colors,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+)
 }
 \arguments{
 \item{graph}{The input graph, treated as undirected.}

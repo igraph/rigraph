@@ -1966,7 +1966,7 @@ graph.isomorphic.34 <- function(graph1, graph2) {
 }
 
 #' @export
-canonical_permutation <- function(graph, colors, sh="fm") {
+canonical_permutation <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (missing(colors)) {
@@ -2002,7 +2002,7 @@ permute <- function(graph, permutation) {
 }
 
 #' @export
-graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh="fm") {
+graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -2036,7 +2036,7 @@ graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh="fm") {
 }
 
 #' @export
-automorphisms <- function(graph, colors, sh="fm") {
+automorphisms <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (missing(colors)) {
@@ -2059,7 +2059,7 @@ automorphisms <- function(graph, colors, sh="fm") {
 }
 
 #' @export
-automorphism_group <- function(graph, colors, sh="fm", details=FALSE) {
+automorphism_group <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm"), details=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (missing(colors)) {

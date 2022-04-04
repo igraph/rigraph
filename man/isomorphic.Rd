@@ -86,14 +86,11 @@ function is called to transfer them into canonical form; finally the
 canonical forms are compared.
 Extra arguments:
 \describe{
-  \item{sh1}{Character constant, the heuristics to use in the BLISS
-    algorithm, for \code{graph1}. See the \code{sh} argument of
-    \code{\link{canonical_permutation}} for possible values.}
-  \item{sh2}{Character constant, the heuristics to use in the BLISS
-    algorithm, for \code{graph2}. See the \code{sh} argument of
+  \item{sh}{Character constant, the heuristics to use in the BLISS
+    algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of
     \code{\link{canonical_permutation}} for possible values.}
 }
-\code{sh1} and \code{sh2} default to \sQuote{fm}.
+\code{sh} defaults to \sQuote{fm}.
 }
 
 \examples{

@@ -5,7 +5,7 @@
 \alias{graph.automorphisms}
 \title{Number of automorphisms}
 \usage{
-automorphisms(graph, colors, sh = "fm")
+automorphisms(graph, colors, sh = c("fm", "f", "fs", "fl", "flm", "fsm"))
 }
 \arguments{
 \item{graph}{The input graph, it is treated as undirected.}

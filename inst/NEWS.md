@@ -5,6 +5,12 @@ Fixed:
 - `graph_from_adjacency_matrix()` now works with sparse matrices even if the
   cell values in the sparse matrix are unspecified
 - Fixed crash in `cluster_walktrap()` when `modularity=FALSE` and `membership=FALSE`
+- `automorphisms()`, `automorphism_group()` and `canonical_permutation()` now
+  allow all possible values supported by the C core in the `sh` argument.
+  Earlier versions supported only `"fm"`.
+- The documentation of the `sh` argument of the BLISS isomorphism algorithm in
+  `isomorphic()` was fixed; earlier versions incorrectly referred to `sh1` and
+  `sh2`.
 
 # igraph 1.3.0
 
