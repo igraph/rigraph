@@ -34,7 +34,7 @@ result.}
 
 \item{modularity}{Logical scalar, whether to include the vector of the
 modularity scores in the result. If the \code{membership} argument is true,
-then it will be always calculated.}
+then it will always be calculated.}
 
 \item{membership}{Logical scalar, whether to calculate the membership vector
 for the split corresponding to the highest modularity value.}
