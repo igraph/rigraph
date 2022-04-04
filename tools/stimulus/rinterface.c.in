@@ -7285,29 +7285,33 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
     ppweights=&weights;
     R_SEXP_to_vector(pweights, ppweights);
   }
-  if (LOGICAL(pmerges)[0]) {
-    ppmerges=&merges;
-    igraph_matrix_init(ppmerges, 0, 0);
-  }
-  if (LOGICAL(pmodularity)[0]) {
-    ppmodularity=&modularity;
-    igraph_vector_init(ppmodularity, 0);
-  }
-  if (LOGICAL(pmembership)[0]) {
-    ppmembership=&membership;
-    igraph_vector_init(ppmembership, 0);
-  }
 
-  igraph_community_walktrap(&g, ppweights, steps, ppmerges, ppmodularity,
-                            ppmembership);
+  igraph_matrix_init(&merges, 0, 0);
+  igraph_vector_init(&modularity, 0);
+  igraph_vector_init(&membership, 0);
+
+  igraph_community_walktrap(&g, ppweights, steps, &merges, &modularity,
+                            &membership);
 
   PROTECT(result=NEW_LIST(3));
-  SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_to_SEXP(ppmerges));
-  if (ppmerges) { igraph_matrix_destroy(ppmerges); }
-  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(ppmodularity));
-  if (ppmodularity) { igraph_vector_destroy(ppmodularity); }
-  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP(ppmembership));
-  if (ppmembership) { igraph_vector_destroy(ppmembership); }
+  if (LOGICAL(pmerges)[0]) {
+    SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_to_SEXP(&merges));
+  } else {
+    SET_VECTOR_ELT(result, 0, R_NilValue);
+  }
+  igraph_matrix_destroy(&merges);
+  if (LOGICAL(pmodularity)[0]) {
+    SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(&modularity));
+  } else {
+    SET_VECTOR_ELT(result, 1, R_NilValue);
+  }
+  igraph_vector_destroy(&modularity);
+  if (LOGICAL(pmembership)[0]) {
+    SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP(&membership));
+  } else {
+    SET_VECTOR_ELT(result, 2, R_NilValue);
+  }
+  igraph_vector_destroy(&membership);
   PROTECT(names=NEW_CHARACTER(3));
   SET_STRING_ELT(names, 0, CREATE_STRING_VECTOR("merges"));
   SET_STRING_ELT(names, 1, CREATE_STRING_VECTOR("modularity"));

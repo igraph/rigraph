@@ -4,6 +4,7 @@ Fixed:
 
 - `graph_from_adjacency_matrix()` now works with sparse matrices even if the
   cell values in the sparse matrix are unspecified
+- Fixed crash in `cluster_walktrap()` when `modularity=FALSE` and `membership=FALSE`
 
 # igraph 1.3.0
 

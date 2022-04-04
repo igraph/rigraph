@@ -1178,7 +1178,7 @@ cluster_fluid_communities <- cluster_fluid_communities
 #' result.
 #' @param modularity Logical scalar, whether to include the vector of the
 #' modularity scores in the result. If the \code{membership} argument is true,
-#' then it will be always calculated.
+#' then it will always be calculated.
 #' @param membership Logical scalar, whether to calculate the membership vector
 #' for the split corresponding to the highest modularity value.
 #' @return \code{cluster_walktrap} returns a \code{\link{communities}}
@@ -1233,8 +1233,12 @@ cluster_walktrap <- function(graph, weights=NULL, steps=4,
 
   res$vcount <- vcount(graph)
   res$algorithm <- "walktrap"
-  res$membership <- res$membership + 1
-  res$merges <- res$merges + 1
+  if (!is.null(res$membership)) {
+    res$membership <- res$membership + 1
+  }
+  if (!is.null(res$merges)) {
+    res$merges <- res$merges + 1
+  }
   class(res) <- "communities"
   res
 }
