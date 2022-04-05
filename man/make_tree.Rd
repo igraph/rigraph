@@ -28,7 +28,8 @@ graph.}
 An igraph graph
 }
 \description{
-Create a regular tree graph.
+Create a k-ary tree graph, where almost all vertices other than the leaves
+have the same number of children.
 }
 \examples{
 make_tree(10, 2)

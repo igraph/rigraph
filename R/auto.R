@@ -1569,9 +1569,6 @@ dominator_tree <- function(graph, root, mode=c("out", "in", "all", "total")) {
   # Function call
   res <- .Call(C_R_igraph_dominator_tree, graph, root-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res$dom <- create_vs(graph, res$dom)
-  }
-  if (igraph_opt("return.vs.es")) {
     res$leftout <- create_vs(graph, res$leftout)
   }
   res

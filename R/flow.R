@@ -543,7 +543,27 @@ st_min_cuts <- st_min_cuts
 #' plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
 #' @export
 
-dominator_tree <- dominator_tree
+dominator_tree <- function(graph, root, mode=c("out", "in", "all", "total")) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  root <- as.igraph.vs(graph, root)
+  if (length(root) == 0) {
+    stop("No vertex was specified")
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_dominator_tree, graph, root-1, mode)
+  if (igraph_opt("return.vs.es")) {
+    res$leftout <- create_vs(graph, res$leftout)
+  }
+
+  # Replace 0 with -1 in `res$dom' to conform with documentation
+  res$dom[res$dom == 0] <- -1
+
+  res
+}
 
 
 #' Minimum size vertex separators
