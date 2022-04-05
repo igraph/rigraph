@@ -27,7 +27,7 @@ Suggests:
     withr,
     digest
 License: GPL (>= 2)
-URL: https://igraph.org
+URL: https://igraph.org, https://igraph.discourse.group/
 SystemRequirements:
     gmp (optional),
     libxml2 (optional),
