@@ -30,7 +30,7 @@ pause()
 
 ### A real little network, Zachary's karate club data
 karate <- make_graph("Zachary")
-karate$layout <- layout_with_kk(karate, niter=1000)
+karate$layout <- layout_with_kk(karate)
 
 pause()
 
