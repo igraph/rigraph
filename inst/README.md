@@ -1,5 +1,4 @@
 ![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
-![CRAN Downloads](https://cranlogs.r-pkg.org/badges/igraph)
 
 # R/igraph
 
