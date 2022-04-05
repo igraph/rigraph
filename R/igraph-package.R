@@ -49,8 +49,8 @@ NULL
 #' fast handling of large graphs, with millions of vertices and edges, 3)
 #' allowing rapid prototyping via high level languages like R.
 #' 
-#' @section Igraph graphs:
-#'   Igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
+#' @section igraph graphs:
+#'   igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
 #'   the screen in a special format, here is an example, a ring graph
 #'   created using \code{\link{make_ring}}: \preformatted{
 #'     IGRAPH U--- 10 10 -- Ring graph

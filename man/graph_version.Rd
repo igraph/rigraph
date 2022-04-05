@@ -2,7 +2,7 @@
 % Please edit documentation in R/versions.R
 \name{graph_version}
 \alias{graph_version}
-\title{Igraph data structure versions}
+\title{igraph data structure versions}
 \usage{
 graph_version(graph)
 }
@@ -14,7 +14,7 @@ the version number of the current data format is returned.}
 A character scalar.
 }
 \description{
-Igraph's internal data representation changes sometimes between
+igraph's internal data representation changes sometimes between
 versions. This means that it is not possible to use igraph objects
 that were created (and possibly saved to a file) with an older
 igraph version.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/versions.R
 \name{upgrade_graph}
 \alias{upgrade_graph}
-\title{Igraph data structure versions}
+\title{igraph data structure versions}
 \usage{
 upgrade_graph(graph)
 }
@@ -13,7 +13,7 @@ upgrade_graph(graph)
 The graph in the current format.
 }
 \description{
-Igraph's internal data representation changes sometimes between
+igraph's internal data representation changes sometimes between
 versions. This means that it is not possible to use igraph objects
 that were created (and possibly saved to a file) with an older
 igraph version.
