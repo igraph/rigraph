@@ -412,9 +412,9 @@ SIRLIST: {}
 
 PAGERANKALGO:
     DEFAULT:
-        PRPACK: c("prpack", "arpack", "power")
+        PRPACK: c("prpack", "arpack")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "power"=0L, "arpack"=1L, "prpack"=2L)
+        %I% <- switch(igraph.match.arg(%I%), "arpack"=1L, "prpack"=2L)
 
 PAGERANKOPT:
     INCONV: |-
