@@ -7,7 +7,7 @@
 \usage{
 page_rank(
   graph,
-  algo = c("prpack", "arpack", "power"),
+  algo = c("prpack", "arpack"),
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
