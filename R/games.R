@@ -233,7 +233,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_gnp}.
 #' @export
 
 gnp <- function(...) constructor_spec(sample_gnp, ...)
@@ -288,7 +288,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_gnm}.
 #' @export
 
 gnm <- function(...) constructor_spec(sample_gnm, ...)
@@ -513,7 +513,7 @@ sample_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
 }
 
 #' @rdname sample_growing
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_growing}.
 #' @export
 
 growing <- function(...) constructor_spec(sample_growing, ...)
