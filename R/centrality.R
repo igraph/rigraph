@@ -929,8 +929,8 @@ authority_score <- authority_score
 #' Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
 #' Australia, April 1998.
 #' 
-#' The \code{page_rank} function uses ARPACK to perform the calculation, see
-#' also \code{\link{arpack}}.
+#' The \code{page_rank} function can use either the PRPACK library or ARPACK 
+#' (see \code{\link{arpack}}) to perform the calculation.
 #' 
 #' Please note that the PageRank of a given vertex depends on the PageRank of
 #' all other vertices, so even if you want to calculate the PageRank for only
@@ -938,15 +938,11 @@ authority_score <- authority_score
 #' PageRank for only some of the vertices does not result in any performance
 #' increase at all.
 #' 
-#' Since the calculation is an iterative process, the algorithm is stopped
-#' after a given count of iterations or if the PageRank value differences
-#' between iterations are less than a predefined value.
-#' 
 #' @aliases page.rank page_rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
 #' calculation. The default is \code{"prpack"}, which uses the PRPACK library
-#' (https://github.com/dgleich/prpack). This is a new implementation in igraph
+#' (\url{https://github.com/dgleich/prpack}). This is a new implementation in igraph
 #' version 0.7, and the suggested one, as it is the most stable and the fastest
 #' for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
 #' default implementation from igraph version 0.5 until version 0.7.

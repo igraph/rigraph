@@ -3,7 +3,7 @@
 Fixed:
 
 - `graph_from_adjacency_matrix()` now works with sparse matrices even if the
-  cell values in the sparse matrix are unspecified
+  cell values in the sparse matrix are unspecified.
 - Fixed crash in `cluster_walktrap()` when `modularity=FALSE` and `membership=FALSE`
 - `automorphisms()`, `automorphism_group()` and `canonical_permutation()` now
   allow all possible values supported by the C core in the `sh` argument.
@@ -13,7 +13,9 @@ Fixed:
   `sh2`.
 - `dominator_tree()` now conforms to its documentation with respect to the
   `dom` component of the result: it contains the indices of the dominator
-  vertices for each vertex and -1 for the root of the dominator tree
+  vertices for each vertex and -1 for the root of the dominator tree.
+- Mentions of the `"power"` algorithm of `page_rank()` have been removed from
+  the documentation, as this method is no longer available.
 
 # igraph 1.3.0
 
