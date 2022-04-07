@@ -22,8 +22,8 @@ An igraph object, the graph of the given size, directedness
 The isomorphism class is a non-negative integer number.
 Graphs (with the same number of vertices) having the same isomorphism
 class are isomorphic and isomorphic graphs always have the same
-isomorphism class. Currently it can handle only graphs with 3 or 4
-vertices.
+isomorphism class. Currently it can handle directed graphs with 3 or 4
+vertices and undirected graphd with 3 to 6 vertices.
 }
 \seealso{
 Other graph isomorphism: 
