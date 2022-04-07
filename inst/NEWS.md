@@ -16,6 +16,8 @@ Fixed:
   vertices for each vertex and -1 for the root of the dominator tree.
 - Mentions of the `"power"` algorithm of `page_rank()` have been removed from
   the documentation, as this method is no longer available.
+- Several other documentation fixes to bring the docs up to date with new behaviours
+  in igraph 1.3.
 
 # igraph 1.3.0
 
