@@ -7,13 +7,17 @@
 \alias{clusters}
 \alias{is.connected}
 \alias{cluster.distribution}
-\alias{count_components}
 \alias{is_connected}
+\alias{count_components}
 \title{Connected components of a graph}
 \usage{
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
 
 components(graph, mode = c("weak", "strong"))
+
+is_connected(graph, mode = c("weak", "strong"))
+
+count_components(graph, mode = c("weak", "strong"))
 }
 \arguments{
 \item{graph}{The graph to analyze.}
