@@ -636,9 +636,10 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' one can specify the vertices and edges to keep. This function will be
 #' renamed to \code{subgraph} in the next major version of igraph.
 #' 
-#' The \code{subgraph} function does the same as \code{induced_subgraph} currently
-#' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but it is
-#' deprecated and will be removed in the next major version of igraph.
+#' The \code{subgraph} function currently does the same as \code{induced_subgraph}
+#' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
+#' is deprecated. In the next major version, \code{subgraph} will overtake the
+#' functionality of \code{subgraph.edges}.
 #' 
 #' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
 #' @param graph The original graph.
