@@ -636,14 +636,12 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' one can specify the vertices and edges to keep. This function will be
 #' renamed to \code{subgraph} in the next major version of igraph.
 #' 
-#' The \code{subgraph} function does the same as \code{induced.graph} currently
+#' The \code{subgraph} function does the same as \code{induced_subgraph} currently
 #' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but it is
 #' deprecated and will be removed in the next major version of igraph.
 #' 
 #' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
 #' @param graph The original graph.
-#' @param v Numeric vector, the vertices of the original graph which will
-#' form the subgraph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -654,8 +652,8 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' g2 <- induced_subgraph(g, 1:7)
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
-subgraph <- function(graph, v) {
-  induced_subgraph(graph, v)
+subgraph <- function(graph, vids) {
+  induced_subgraph(graph, vids)
 }
 
 #' @rdname subgraph
@@ -733,24 +731,19 @@ subgraph.edges <- function(graph, eids, delete.vertices=TRUE) {
 #' @param graph The graph to analyze.
 #' @param type The type of the transitivity to calculate. Possible values:
 #' \describe{ \item{"global"}{The global transitivity of an undirected
-#' graph (directed graphs are considered as undirected ones as well). This is
-#' simply the ratio of the triangles and the connected triples in the graph.
-#' For directed graphs the direction of the edges is ignored.}
-#' \item{"local"}{The local transitivity of an undirected graph, this is
+#' graph. This is simply the ratio of the count of triangles and connected triples 
+#' in the graph. In directed graphs, edge directions are ignored.}
+#' \item{"local"}{The local transitivity of an undirected graph. It is
 #' calculated for each vertex given in the \code{vids} argument. The local
-#' transitivity of a vertex is the ratio of the triangles connected to the
-#' vertex and the triples centered on the vertex. For directed graph the
-#' direction of the edges is ignored. Note that calculations do not work
-#' reliably in non-simple graphs, and since the presence of mutual edges in
-#' a directed graph becomes non-simple when treated as undirected, therefore
-#' it is advised to avoid using this function on non-simple and/or directed
-#' graphs. igraph prints a warning in these cases; the warning will be turned
-#' into an error in igraph 1.3.0.} \item{"undirected"}{This is the
-#' same as \code{global}.} \item{"globalundirected"}{This is the same as
-#' \code{global}.} \item{"localundirected"}{This is the same as
-#' \code{local}.} \item{"barrat"}{The weighted transitivity as defined A.
-#' Barrat. See details below.} \item{"weighted"}{The same as
-#' \code{barrat}.} }
+#' transitivity of a vertex is the ratio of the count of triangles connected to the
+#' vertex and the triples centered on the vertex. In directed graphs, edge
+#' directions are ignored.} 
+#' \item{"undirected"}{This is the same as \code{global}.} 
+#' \item{"globalundirected"}{This is the same as \code{global}.} 
+#' \item{"localundirected"}{This is the same as \code{local}.} 
+#' \item{"barrat"}{The weighted transitivity as defined by A.
+#' Barrat. See details below.} 
+#' \item{"weighted"}{The same as \code{barrat}.} }
 #' @param vids The vertex ids for the local transitivity will be calculated.
 #' This will be ignored for global transitivity types.  The default value is
 #' \code{NULL}, in this case all vertices are considered. It is slightly faster
