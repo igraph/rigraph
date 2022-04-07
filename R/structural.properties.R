@@ -1715,7 +1715,6 @@ dfs <- function(graph, root, mode=c("out", "in", "all", "total"),
 #' depth-first searches.
 #' 
 #' @aliases no.clusters clusters is.connected cluster.distribution components
-#'   count_components is_connected
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #' directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -1761,7 +1760,11 @@ components <- function(graph, mode=c("weak", "strong")) {
   res
 }
 
+#' @rdname components
+is_connected <- is_connected
 
+#' @rdname components
+count_components <- count_components
 
 #' Convert a general graph into a forest
 #' 
