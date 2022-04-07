@@ -746,9 +746,9 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' \item{"nof_bad_nodes"}{Number of bad nodes.}
 #' \item{"nof_canupdates"}{Number of canrep updates.}
 #' \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
-#' of the automorphism group of the input graph, as a string. This number is
-#' exact if igraph was compiled with the GMP library, and approximate
-#' otherwise.} } }
+#' of the automorphism group of the input graph, as a string. The string
+#' representation is necessary because the group size can easily exceed
+#' values that are exactly representable in floating point.} } }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso \code{\link{permute}} to apply a permutation to a graph,
