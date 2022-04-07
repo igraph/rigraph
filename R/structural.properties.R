@@ -636,14 +636,12 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' one can specify the vertices and edges to keep. This function will be
 #' renamed to \code{subgraph} in the next major version of igraph.
 #' 
-#' The \code{subgraph} function does the same as \code{induced.graph} currently
+#' The \code{subgraph} function does the same as \code{induced_subgraph} currently
 #' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but it is
 #' deprecated and will be removed in the next major version of igraph.
 #' 
 #' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
 #' @param graph The original graph.
-#' @param v Numeric vector, the vertices of the original graph which will
-#' form the subgraph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -654,8 +652,8 @@ subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 #' g2 <- induced_subgraph(g, 1:7)
 #' g3 <- subgraph.edges(g, 1:5, 1:5)
 #' 
-subgraph <- function(graph, v) {
-  induced_subgraph(graph, v)
+subgraph <- function(graph, vids) {
+  induced_subgraph(graph, vids)
 }
 
 #' @rdname subgraph
