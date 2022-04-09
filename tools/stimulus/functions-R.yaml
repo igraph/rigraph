@@ -828,6 +828,7 @@ igraph_community_leading_eigenvector:
         CLASS: igraph.eigenc
 
 igraph_community_fluid_communities:
+    IGNORE: RR
     NAME: cluster_fluid_communities
 
 igraph_community_label_propagation:

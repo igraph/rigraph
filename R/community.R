@@ -1150,7 +1150,24 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
 #' g <- graph.famous("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
 
-cluster_fluid_communities <- cluster_fluid_communities
+cluster_fluid_communities <- function(graph, no.of.communities) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  no.of.communities <- as.integer(no.of.communities)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_community_fluid_communities, graph, no.of.communities)
+
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    res$names <- V(graph)$name
+  }
+  res$vcount <- vcount(graph)
+  res$algorithm <- "fluid communities"
+  res$membership <- res$membership + 1
+  class(res) <- "communities"
+  res
+}
 
 #' Community structure via short random walks
 #'
