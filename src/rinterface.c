@@ -7508,6 +7508,8 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
 
   igraph_community_to_membership(&merges, vcount, steps, &membership, 0);
   PROTECT(result=R_igraph_vector_to_SEXP(&membership));
+
+  igraph_vector_destroy(&membership);
   IGRAPH_FINALLY_CLEAN(1);
 
   UNPROTECT(1);
@@ -7924,6 +7926,14 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   SET_NAMES(result, names);
 
   UNPROTECT(2);
+
+  if (p_order) { igraph_vector_destroy(p_order); p_order = 0; }
+  if (p_rank) { igraph_vector_destroy(p_rank); p_rank = 0; }
+  if (p_father) { igraph_vector_destroy(p_father); p_father = 0; }
+  if (p_pred) { igraph_vector_destroy(p_pred); p_pred = 0; }
+  if (p_succ) { igraph_vector_destroy(p_succ); p_succ = 0; }
+  if (p_dist) { igraph_vector_destroy(p_dist); p_dist = 0; }
+
   return result;
 }
 
@@ -11058,6 +11068,7 @@ SEXP R_igraph_simplify(SEXP graph, SEXP remove_multiple, SEXP remove_loops, SEXP
   c_remove_multiple=LOGICAL(remove_multiple)[0];
   c_remove_loops=LOGICAL(remove_loops)[0];
   R_SEXP_to_attr_comb(edge_attr_comb, &c_edge_attr_comb);
+  IGRAPH_FINALLY(igraph_attribute_combination_destroy, &c_edge_attr_comb);
                                         /* Call igraph */
   igraph_simplify(&c_graph, c_remove_multiple, c_remove_loops, &c_edge_attr_comb);
 
@@ -11066,6 +11077,7 @@ SEXP R_igraph_simplify(SEXP graph, SEXP remove_multiple, SEXP remove_loops, SEXP
   igraph_destroy(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_edge_attr_comb);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
   UNPROTECT(1);
@@ -12162,6 +12174,7 @@ SEXP R_igraph_contract_vertices(SEXP graph, SEXP mapping, SEXP vertex_attr_comb)
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   R_SEXP_to_vector(mapping, &c_mapping);
   R_SEXP_to_attr_comb(vertex_attr_comb, &c_vertex_attr_comb);
+  IGRAPH_FINALLY(igraph_attribute_combination_destroy, &c_vertex_attr_comb);
                                         /* Call igraph */
   igraph_contract_vertices(&c_graph, &c_mapping, &c_vertex_attr_comb);
 
@@ -12170,6 +12183,7 @@ SEXP R_igraph_contract_vertices(SEXP graph, SEXP mapping, SEXP vertex_attr_comb)
   igraph_destroy(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_vertex_attr_comb);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
   UNPROTECT(1);
@@ -14469,6 +14483,7 @@ SEXP R_igraph_to_undirected(SEXP graph, SEXP mode, SEXP edge_attr_comb) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   c_mode = (igraph_to_undirected_t) Rf_asInteger(mode);
   R_SEXP_to_attr_comb(edge_attr_comb, &c_edge_attr_comb);
+  IGRAPH_FINALLY(igraph_attribute_combination_destroy, &c_edge_attr_comb);
                                         /* Call igraph */
   igraph_to_undirected(&c_graph, c_mode, &c_edge_attr_comb);
 
@@ -14477,6 +14492,7 @@ SEXP R_igraph_to_undirected(SEXP graph, SEXP mode, SEXP edge_attr_comb) {
   igraph_destroy(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_edge_attr_comb);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
   UNPROTECT(1);
