@@ -691,17 +691,25 @@ VERTEX_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
     CTYPE: igraph_attribute_combination_t
     INCONV:
-        IN: R_SEXP_to_attr_comb(%I%, &%C%);
+        IN: |-
+            R_SEXP_to_attr_comb(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_attribute_combination_destroy, &%C%);
     OUTCONV:
-        IN: igraph_attribute_combination_destroy(&%C%);
+        IN: |-
+            igraph_attribute_combination_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 EDGE_ATTRIBUTE_COMBINATION:
     CALL: '&%C%'
     CTYPE: igraph_attribute_combination_t
     INCONV:
-        IN: R_SEXP_to_attr_comb(%I%, &%C%);
+        IN: |-
+            R_SEXP_to_attr_comb(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_attribute_combination_destroy, &%C%);
     OUTCONV:
-        IN: igraph_attribute_combination_destroy(&%C%);
+        IN: |-
+            igraph_attribute_combination_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
 
 HRG:
     CALL: '&%C%'
