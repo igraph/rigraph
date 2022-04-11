@@ -154,7 +154,7 @@ R_igraph_safe_eval_result_t R_igraph_safe_eval_classify_result(SEXP result) {
   return SAFEEVAL_OK;
 }
 
-SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
+SEXP R_igraph_safe_eval_in_env(SEXP expr_call, SEXP rho, R_igraph_safe_eval_result_t* result) {
   /* find `identity` function used to capture errors */
   SEXP identity = PROTECT(Rf_install("identity"));
   SEXP identity_func = PROTECT(Rf_findFun(identity, R_BaseNamespace));
@@ -170,7 +170,7 @@ SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
   SET_TAG(CDDR(CDR(try_catch_call)), Rf_install("interrupt"));
 
   /* execute the call */
-  SEXP retval = PROTECT(Rf_eval(try_catch_call, R_GlobalEnv));
+  SEXP retval = PROTECT(Rf_eval(try_catch_call, rho));
 
   /* did we get an error or an interrupt? */
   if (result) {
@@ -182,7 +182,7 @@ SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
   return retval;
 }
 
-SEXP R_igraph_handle_safe_eval_result(SEXP result) {
+SEXP R_igraph_handle_safe_eval_result_in_env(SEXP result, SEXP rho) {
   switch (R_igraph_safe_eval_classify_result(result)) {
     case SAFEEVAL_OK:
       return result;
@@ -196,7 +196,7 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
 
       SEXP condition_message = PROTECT(Rf_install("conditionMessage"));
       SEXP condition_message_call = PROTECT(Rf_lang2(condition_message, result));
-      SEXP evaluated_condition_message = PROTECT(Rf_eval(condition_message_call, R_GlobalEnv));
+      SEXP evaluated_condition_message = PROTECT(Rf_eval(condition_message_call, rho));
       error(CHAR(STRING_ELT(evaluated_condition_message, 0)));
       UNPROTECT(3);
       return R_NilValue;
@@ -213,6 +213,14 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
       );
       return R_NilValue;
   }
+}
+
+SEXP R_igraph_safe_eval(SEXP expr_call, R_igraph_safe_eval_result_t* result) {
+  return R_igraph_safe_eval_in_env(expr_call, R_GlobalEnv, result);
+}
+
+SEXP R_igraph_handle_safe_eval_result(SEXP result) {
+  return R_igraph_handle_safe_eval_result_in_env(result, R_GlobalEnv);
 }
 
 /******************************************************
@@ -7275,9 +7283,9 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
   igraph_t g;
   igraph_vector_t weights, *ppweights=0;
   igraph_integer_t steps=(igraph_integer_t) REAL(psteps)[0];
-  igraph_matrix_t merges, *ppmerges=0;
-  igraph_vector_t modularity, *ppmodularity=0;
-  igraph_vector_t membership, *ppmembership=0;
+  igraph_matrix_t merges;
+  igraph_vector_t modularity;
+  igraph_vector_t membership;
   SEXP result, names;
 
   R_SEXP_to_igraph(graph, &g);
@@ -7824,9 +7832,8 @@ igraph_bool_t R_igraph_bfshandler(const igraph_t *graph,
   SET_NAMES(args, names);
 
   PROTECT(R_fcall = lang4(data->fun, data->graph, args, data->extra));
-  PROTECT(result = eval(R_fcall, data->rho));
-
-  cres=Rf_asLogical(result);
+  PROTECT(result = R_igraph_safe_eval_in_env(R_fcall, data->rho, NULL));
+  cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
 
   UNPROTECT(4);
   return cres;
@@ -7861,22 +7868,28 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   }
 
   if (LOGICAL(porder)[0]) {
-    igraph_vector_init(&order, 0); p_order=&order;
+    igraph_vector_init(&order, 0); IGRAPH_FINALLY(igraph_vector_destroy, &order);
+    p_order=&order;
   }
   if (LOGICAL(prank)[0]) {
-    igraph_vector_init(&rank, 0); p_rank=&rank;
+    igraph_vector_init(&rank, 0); IGRAPH_FINALLY(igraph_vector_destroy, &rank);
+    p_rank=&rank;
   }
   if (LOGICAL(pfather)[0]) {
-    igraph_vector_init(&father, 0); p_father=&father;
+    igraph_vector_init(&father, 0); IGRAPH_FINALLY(igraph_vector_destroy, &father);
+    p_father=&father;
   }
   if (LOGICAL(ppred)[0]) {
-    igraph_vector_init(&pred, 0); p_pred=&pred;
+    igraph_vector_init(&pred, 0); IGRAPH_FINALLY(igraph_vector_destroy, &pred);
+    p_pred=&pred;
   }
   if (LOGICAL(psucc)[0]) {
-    igraph_vector_init(&succ, 0); p_succ=&succ;
+    igraph_vector_init(&succ, 0); IGRAPH_FINALLY(igraph_vector_destroy, &succ);
+    p_succ=&succ;
   }
   if (LOGICAL(pdist)[0]) {
-    igraph_vector_init(&dist, 0); p_dist=&dist;
+    igraph_vector_init(&dist, 0); IGRAPH_FINALLY(igraph_vector_destroy, &dist);
+    p_dist=&dist;
   }
 
   if (!isNull(pcallback)) {
@@ -7927,12 +7940,12 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
 
   UNPROTECT(2);
 
-  if (p_order) { igraph_vector_destroy(p_order); p_order = 0; }
-  if (p_rank) { igraph_vector_destroy(p_rank); p_rank = 0; }
-  if (p_father) { igraph_vector_destroy(p_father); p_father = 0; }
-  if (p_pred) { igraph_vector_destroy(p_pred); p_pred = 0; }
-  if (p_succ) { igraph_vector_destroy(p_succ); p_succ = 0; }
-  if (p_dist) { igraph_vector_destroy(p_dist); p_dist = 0; }
+  if (p_dist) { igraph_vector_destroy(p_dist); IGRAPH_FINALLY_CLEAN(1); p_dist = 0; }
+  if (p_succ) { igraph_vector_destroy(p_succ); IGRAPH_FINALLY_CLEAN(1); p_succ = 0; }
+  if (p_pred) { igraph_vector_destroy(p_pred); IGRAPH_FINALLY_CLEAN(1); p_pred = 0; }
+  if (p_father) { igraph_vector_destroy(p_father); IGRAPH_FINALLY_CLEAN(1); p_father = 0; }
+  if (p_rank) { igraph_vector_destroy(p_rank); IGRAPH_FINALLY_CLEAN(1); p_rank = 0; }
+  if (p_order) { igraph_vector_destroy(p_order); IGRAPH_FINALLY_CLEAN(1); p_order = 0; }
 
   return result;
 }
@@ -7962,9 +7975,8 @@ igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
 
   PROTECT(R_fcall = lang4(which==0 ? data->fun_in : data->fun_out,
                           data->graph, args, data->extra));
-  PROTECT(result = eval(R_fcall, data->rho));
-
-  cres=Rf_asLogical(result);
+  PROTECT(result = R_igraph_safe_eval_in_env(R_fcall, data->rho, NULL));
+  cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
 
   UNPROTECT(4);
   return cres;
