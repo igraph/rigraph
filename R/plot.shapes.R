@@ -430,9 +430,12 @@ add_shape <- function(shape, clip=shape_noclip,
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
-
   vertex.size <- rep(vertex.size, length.out=nrow(coords))
-  
+
+  # Handle vertex.frame.width <= 0 by hiding the border
+  vertex.frame.color[vertex.frame.width <= 0] <- NA
+  vertex.frame.width[vertex.frame.width <= 0] <- 1
+
   if (length(vertex.frame.width) ==1) {
     symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
           circles=vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
@@ -529,6 +532,10 @@ add_shape <- function(shape, clip=shape_noclip,
   }
   vertex.size <- rep(vertex.size, length.out=nrow(coords))
   
+  # Handle vertex.frame.width <= 0 by hiding the border
+  vertex.frame.color[vertex.frame.width <= 0] <- NA
+  vertex.frame.width[vertex.frame.width <= 0] <- 1
+
   if (length(vertex.frame.width) ==1) {
     symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
           squares=2*vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
@@ -696,6 +703,10 @@ add_shape <- function(shape, clip=shape_noclip,
   }
   vertex.size <- cbind(vertex.size, vertex.size2)
   
+  # Handle vertex.frame.width <= 0 by hiding the border
+  vertex.frame.color[vertex.frame.width <= 0] <- NA
+  vertex.frame.width[vertex.frame.width <= 0] <- 1
+
   if (length(vertex.frame.width) ==1) {
     symbols(x=coords[,1], y=coords[,2], bg=vertex.color, fg=vertex.frame.color,
           rectangles=2*vertex.size, lwd=vertex.frame.width, add=TRUE, inches=FALSE)
