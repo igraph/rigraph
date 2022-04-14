@@ -8,6 +8,8 @@ Fixed:
 - `automorphisms()`, `automorphism_group()` and `canonical_permutation()` now
   allow all possible values supported by the C core in the `sh` argument.
   Earlier versions supported only `"fm"`.
+- The `vertex.frame.width` plotting parameter now allows zero and negative
+  values; these will simply remove the outline of the corresponding vertex.
 - The documentation of the `sh` argument of the BLISS isomorphism algorithm in
   `isomorphic()` was fixed; earlier versions incorrectly referred to `sh1` and
   `sh2`.
@@ -48,7 +50,7 @@ Added:
 - `bridges()` finds the bridges (cut-edges) of a graph
 - The frame width of circle, rectangle and square vertex shapes can now be
   adjusted on plots with the `frame.width` vertex attribute or the
-  `vertex.frame.width` keyword argumen, thanks to @simoncarrignon .
+  `vertex.frame.width` keyword argument, thanks to @simoncarrignon .
   See PR #500 for more details.
 - `automorphism_group()` returns a possible (not necessarily minimal)
   generating set of the automorphism group of a graph.
