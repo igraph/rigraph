@@ -74,6 +74,6 @@ Online: \url{https://arxiv.org/abs/1209.0367}
 \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
 }
 \author{
-Vince Lyzinski \url{http://www.ams.jhu.edu/~lyzinski/}
+Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}
 }
 \keyword{graphs}

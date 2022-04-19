@@ -128,12 +128,29 @@ int igraph_community_walktrap(const igraph_t *graph,
                               igraph_vector_t *membership) {
 
     IGRAPH_HANDLE_EXCEPTIONS(
-        long int no_of_nodes = (long int)igraph_vcount(graph);
+        long int no_of_nodes = (long int) igraph_vcount(graph);
+        long int no_of_edges = (long int) igraph_ecount(graph);
         int length = steps;
         long max_memory = -1;
+        igraph_integer_t comp_count;
 
         if (steps <= 0) {
             IGRAPH_ERROR("Length of random walks must be positive for walktrap community detection.", IGRAPH_EINVAL);
+        }
+
+        if (weights) {
+            if (igraph_vector_size(weights) != no_of_edges) {
+                IGRAPH_ERROR("Invalid weight vector length.", IGRAPH_EINVAL);
+            }
+
+            if (no_of_edges > 0) {
+                igraph_real_t minweight = igraph_vector_min(weights);
+                if (minweight < 0) {
+                    IGRAPH_ERROR("Weight vector must be non-negative.", IGRAPH_EINVAL);
+                } else if (igraph_is_nan(minweight)) {
+                    IGRAPH_ERROR("Weight vector must not contain NaN values.", IGRAPH_EINVAL);
+                }
+            }
         }
 
         if (membership && !(modularity && merges)) {
@@ -142,18 +159,17 @@ int igraph_community_walktrap(const igraph_t *graph,
         }
 
         Graph G;
-        if (G.convert_from_igraph(graph, weights)) {
-            IGRAPH_ERROR("Cannot convert igraph graph into walktrap format", IGRAPH_EINVAL);
-        }
+        IGRAPH_CHECK(G.convert_from_igraph(graph, weights));
 
-        if (merges) {
-            igraph_integer_t no;
+        if (merges || modularity) {
             IGRAPH_CHECK(igraph_clusters(graph, /*membership=*/ 0, /*csize=*/ 0,
-                                         &no, IGRAPH_WEAK));
-            IGRAPH_CHECK(igraph_matrix_resize(merges, no_of_nodes - no, 2));
+                                         &comp_count, IGRAPH_WEAK));
+        }
+        if (merges) {
+            IGRAPH_CHECK(igraph_matrix_resize(merges, no_of_nodes - comp_count, 2));
         }
         if (modularity) {
-            IGRAPH_CHECK(igraph_vector_resize(modularity, no_of_nodes));
+            IGRAPH_CHECK(igraph_vector_resize(modularity, no_of_nodes - comp_count + 1));
             igraph_vector_null(modularity);
         }
         Communities C(&G, length, max_memory, merges, modularity);

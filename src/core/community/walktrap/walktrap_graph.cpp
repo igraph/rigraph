@@ -99,18 +99,18 @@ class Edge_list {
 public:
     int* V1;
     int* V2;
-    float* W;
+    double* W;
 
     int size;
     int size_max;
 
-    void add(int v1, int v2, float w);
+    void add(int v1, int v2, double w);
     Edge_list() {
         size = 0;
         size_max = 1024;
         V1 = new int[1024];
         V2 = new int[1024];
-        W = new float[1024];
+        W = new double[1024];
     }
     ~Edge_list() {
         if (V1) {
@@ -125,11 +125,11 @@ public:
     }
 };
 
-void Edge_list::add(int v1, int v2, float w) {
+void Edge_list::add(int v1, int v2, double w) {
     if (size == size_max) {
         int* tmp1 = new int[2 * size_max];
         int* tmp2 = new int[2 * size_max];
-        float* tmp3 = new float[2 * size_max];
+        double* tmp3 = new double[2 * size_max];
         for (int i = 0; i < size_max; i++) {
             tmp1[i] = V1[i];
             tmp2[i] = V2[i];
@@ -204,6 +204,13 @@ int Graph::convert_from_igraph(const igraph_t *graph,
     }
 
     for (int i = 0; i < G.nb_vertices; i++) {
+        /* Check for zero strength, as it may lead to crashed in walktrap algorithm.
+         * See https://github.com/igraph/igraph/pull/2043 */
+        if (G.vertices[i].total_weight == 0) {
+            /* G.vertices will be destroyed by Graph::~Graph() */
+            IGRAPH_ERROR("Vertex with zero strength found: all vertices must have positive strength for walktrap",
+                         IGRAPH_EINVAL);
+        }
         sort(G.vertices[i].edges, G.vertices[i].edges + G.vertices[i].degree);
     }
 
@@ -219,7 +226,7 @@ int Graph::convert_from_igraph(const igraph_t *graph,
         G.vertices[i].degree = a + 1;
     }
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }
 
 long Graph::memory() {
