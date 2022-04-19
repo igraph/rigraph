@@ -698,13 +698,13 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
   }
 
   if (!is.null(res$Xt) &&
-      class(res$Xt) == "igraph.tmp.sparse") {
+      inherits(res$Xt, "igraph.tmp.sparse")) {
     res$Xt <- igraph.i.spMatrix(res$Xt)
   }
-  if (!is.null(res$L) && class(res$L) == "igraph.tmp.sparse") {
+  if (!is.null(res$L) && inherits(res$L, "igraph.tmp.sparse")) {
     res$L <- igraph.i.spMatrix(res$L)
   }
-  if (!is.null(res$R) && class(res$R) == "igraph.tmp.sparse") {
+  if (!is.null(res$R) && inherits(res$R, "igraph.tmp.sparse")) {
     res$R <- igraph.i.spMatrix(res$R)
   }
 
