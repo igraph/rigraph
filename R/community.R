@@ -496,7 +496,7 @@ modularity_matrix <- function(graph, membership, weights=NULL, resolution=1, dir
 
 length.communities <- function(x) {
   m <- membership(x)
-  max(m)
+  max(m, 0)
 }
 
 #' @rdname communities
