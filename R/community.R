@@ -266,7 +266,7 @@ as_membership <- function(x) add_class(x, "membership")
 
 print.communities <- function(x, ...) {
 
-  noc <- if (!is.null(x$membership)) max(membership(x)) else NA
+  noc <- if (!is.null(x$membership)) max(membership(x), 0) else NA
   mod <- if (!is.null(x$modularity)) {
     modularity(x) %>% format(digits = 2)
   } else {
