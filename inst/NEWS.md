@@ -4,7 +4,11 @@ Fixed:
 
 - `graph_from_adjacency_matrix()` now works with sparse matrices even if the
   cell values in the sparse matrix are unspecified.
-- Fixed crash in `cluster_walktrap()` when `modularity=FALSE` and `membership=FALSE`
+- Fixed crash in `cluster_walktrap()` when `modularity=FALSE` and `membership=FALSE`.
+- `cluster_walktrap()` no longer accepts invalid weight vectors.
+- `cluster_walktrap()` no longer returns a modularity vector of invalid length for
+  disconnected graphs. This also fixes some rare failures of this function on
+  weighted disconnected graphs.
 - `edge_attr()` does not ignore its `index=...` argument any more.
 - `automorphisms()`, `automorphism_group()` and `canonical_permutation()` now
   allow all possible values supported by the C core in the `sh` argument.
