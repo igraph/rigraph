@@ -49,7 +49,7 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #' @param iteration The number of iterations for the Frank-Wolfe algorithm
 #' @return A numeric matrix which is the permutation matrix that determines the
 #' bijection between the graphs of \code{A} and \code{B}
-#' @author Vince Lyzinski \url{http://www.ams.jhu.edu/~lyzinski/}
+#' @author Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}
 #' @seealso
 #' \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
 #' @references Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
