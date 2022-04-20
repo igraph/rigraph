@@ -32,7 +32,8 @@ this way is not necessarily minimal but it can be calculated in linear time.
 \examples{
 
 g <- make_graph("petersen")
-greedy_vertex_coloring(g)
+col <- greedy_vertex_coloring(g)
+plot(g, vertex.color=col)
 
 }
 \keyword{graphs}
