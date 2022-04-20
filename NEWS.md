@@ -1,3 +1,9 @@
+# Unreleased
+
+Fixed:
+
+- The length of size-zero `communities` objects is now reported correctly.
+
 # igraph 1.3.1
 
 Fixed:
@@ -21,7 +27,6 @@ Fixed:
 - `dominator_tree()` now conforms to its documentation with respect to the
   `dom` component of the result: it contains the indices of the dominator
   vertices for each vertex and -1 for the root of the dominator tree.
-- The length of size-zero `communities` objects is now reported correctly.
 - Mentions of the `"power"` algorithm of `page_rank()` have been removed from
   the documentation, as this method is no longer available.
 - Several other documentation fixes to bring the docs up to date with new behaviours
