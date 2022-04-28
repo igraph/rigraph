@@ -20,7 +20,7 @@ test_that("", {
     (Sys.info()["machine"] %in% c("aarch64", "ppc64", "ppc64le", "s390x") &&
      isTRUE(all.equal(sum(l), 1079, tolerance = 1))) ||
     isTRUE(all.equal(sum(l), 1004.00737470853)) ||
-    isTRUE(all.equal(sum(l), 941.472420651506))
+    isTRUE(all.equal(sum(l), 1022.97740161314))
   )
 
 })

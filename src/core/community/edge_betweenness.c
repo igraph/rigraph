@@ -241,7 +241,8 @@ int igraph_community_eb_get_merges(const igraph_t *graph,
             igraph_vector_clear(bridges);
         }
         if (modularity) {
-            igraph_vector_clear(modularity);
+            igraph_vector_resize(modularity, 1);
+            VECTOR(*modularity)[0] = IGRAPH_NAN;
         }
         if (membership) {
             igraph_vector_clear(membership);
@@ -481,7 +482,7 @@ int igraph_community_edge_betweenness(const igraph_t *graph,
         }
 
         if (membership != 0) {
-            IGRAPH_WARNING("Membership vector will be selected based on the lowest "
+            IGRAPH_WARNING("Membership vector will be selected based on the highest "
                            "modularity score.");
         }
 
