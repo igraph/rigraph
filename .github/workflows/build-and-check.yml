@@ -108,6 +108,15 @@ jobs:
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v2
 
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install libxml2 glpk gmp automake
+
+      - name: Install system dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          pacman -Syu --noconfirm mingw-w64-i686-glpk mingw-w64-i686-libxml2 mingw-w64-i686-gmp mingw-w64-x86_64-glpk mingw-w64-x86_64-libxml2 mingw-w64-x86_64-gmp
+
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
