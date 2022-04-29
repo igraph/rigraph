@@ -35,7 +35,7 @@ other vertices, i.e. it is normalized by the number of vertices minus one.
 If false, the result is the sum of inverse path lengths to other vertices.}
 
 \item{cutoff}{The maximum path length to consider when calculating the
-betweenness. There is no such limit when the cutoff is negative. Note that
+harmonic centrality. There is no such limit when the cutoff is negative. Note that
 zero cutoff means that only paths of at most length 0 are considered.}
 }
 \value{

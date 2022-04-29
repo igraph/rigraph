@@ -36,7 +36,7 @@ closeness. Normalization is performed by multiplying the raw closeness by
 \eqn{n-1}, where \eqn{n} is the number of vertices in the graph.}
 
 \item{cutoff}{The maximum path length to consider when calculating the
-betweenness. If zero or negative then there is no such limit.}
+closeness. If zero or negative then there is no such limit.}
 }
 \value{
 Numeric vector with the closeness values of all the vertices in

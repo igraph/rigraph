@@ -88,10 +88,14 @@ i!=j,i!=v,j!=v)}
 
 The edge betweenness of edge \code{e} is defined by
 
-\deqn{\sum_{i\ne j} g{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
+\deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 
 \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
 calculates edge betweenness.
+
+Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
+\eqn{i} and \eqn{j} while \eqn{g_{ivj}} is the number of those shortest paths
+which pass though vertex \eqn{v}.
 
 Both functions allow you to consider only paths of length \code{cutoff} or
 smaller; this can be run for larger graphs, as the running time is not
