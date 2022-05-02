@@ -3,6 +3,11 @@
 Fixed:
 
 - The length of size-zero `communities` objects is now reported correctly.
+- `layout_with_kk()` would fail to produce reasonable results with the default initial
+  coordinates. This has been corrected, however, this function no longer produces
+  precisely the same output for a given graph as before. To restore the previous
+  behaviour, use `layout_with_kk(g, coord=layout_in_circle(g))` in 2D or
+  `layout_with_kk(g, dim=3, coord=layout_on_sphere(g))` in 3D.
 
 # igraph 1.3.1
 
