@@ -44,6 +44,10 @@
  * far-apart veritces will have a smaller effect on the layout.
  *
  * </para><para>
+ * This layout works particularly well for locally connected spatial networks
+ * such as lattices.
+ *
+ * </para><para>
  * This layout algorithm is not suitable for large graphs. The memory
  * requirements are of the order O(|V|^2).
  *
@@ -148,6 +152,11 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
             igraph_i_layout_random_bounded(graph, res, minx, maxx, miny, maxy);
         } else {
             igraph_layout_circle(graph, res, /* order= */ igraph_vss_all());
+            /* The original paper recommends using a radius of 0.5*L0 here.
+             * The coefficient of 0.36 was chosen empirically so that this initial
+             * layout would be as close as possible to the equilibrium layout
+             * when the graph is a cycle graph. */
+            igraph_matrix_scale(res, 0.36 * L0);
         }
     }
 
@@ -332,7 +341,7 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
  * \function igraph_layout_kamada_kawai_3d
  * \brief 3D version of the Kamada-Kawai layout generator.
  *
- * This is the 3D version of igraph_layout_kamada_kawai().
+ * This is the 3D version of \ref igraph_layout_kamada_kawai().
  * See the documentation of that function for more information.
  *
  * </para><para>
@@ -446,6 +455,10 @@ int igraph_layout_kamada_kawai_3d(const igraph_t *graph, igraph_matrix_t *res,
             igraph_i_layout_random_bounded_3d(graph, res, minx, maxx, miny, maxy, minz, maxz);
         } else {
             igraph_layout_sphere(graph, res);
+            /* The coefficient of 0.36 was chosen empirically so that this initial layout
+             * would be as close as possible to the equilibrium layout when the graph is
+             * a Goldberg polyhedron, i.e. having a naturally spherical layout. */
+            igraph_matrix_scale(res, 0.36*L0);
         }
     }
 

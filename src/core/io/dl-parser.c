@@ -169,6 +169,7 @@ extern int igraph_dl_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     NUM = 258,
     NEWLINE = 259,
     DL = 260,
@@ -195,7 +196,7 @@ union YYSTYPE
   long int integer;
   igraph_real_t real;
 
-#line 199 "yy.tab.c"
+#line 200 "yy.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -588,13 +589,13 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   108,   108,   110,   110,   112,   112,   114,   115,   116,
-     119,   119,   121,   121,   123,   124,   125,   128,   129,   135,
-     135,   140,   140,   142,   152,   154,   156,   156,   158,   162,
-     166,   171,   175,   177,   178,   179,   180,   181,   184,   185,
-     188,   190,   194,   197,   198,   201,   203,   207,   210,   226,
-     228,   229,   230,   231,   232,   235,   236,   239,   241,   244,
-     244,   250,   251,   254,   256,   260,   260
+       0,   109,   109,   111,   111,   113,   113,   115,   116,   117,
+     120,   120,   122,   122,   124,   125,   126,   129,   130,   136,
+     136,   141,   141,   143,   153,   155,   157,   157,   159,   163,
+     167,   172,   176,   178,   179,   180,   181,   182,   185,   186,
+     189,   191,   195,   198,   199,   202,   204,   208,   211,   227,
+     229,   230,   231,   232,   233,   236,   237,   240,   242,   245,
+     245,   251,   252,   255,   257,   261,   261
 };
 #endif
 
@@ -603,11 +604,11 @@ static const yytype_int16 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "NUM", "NEWLINE", "DL", "NEQ", "DATA",
-  "LABELS", "LABELSEMBEDDED", "FORMATFULLMATRIX", "FORMATEDGELIST1",
-  "FORMATNODELIST1", "DIGIT", "LABEL", "EOFF", "ERROR", "$accept", "input",
-  "trail", "eof", "rest", "formfullmatrix", "newline", "fullmatrix",
-  "labels", "fullmatrixdata", "zerooneseq", "zeroone",
+  "\"end of file\"", "error", "$undefined", "NUM", "NEWLINE", "DL", "NEQ",
+  "DATA", "LABELS", "LABELSEMBEDDED", "FORMATFULLMATRIX",
+  "FORMATEDGELIST1", "FORMATNODELIST1", "DIGIT", "LABEL", "EOFF", "ERROR",
+  "$accept", "input", "trail", "eof", "rest", "formfullmatrix", "newline",
+  "fullmatrix", "labels", "fullmatrixdata", "zerooneseq", "zeroone",
   "labeledfullmatrixdata", "reallabeledfullmatrixdata", "labelseq",
   "label", "labeledmatrixlines", "labeledmatrixline", "edgelist1",
   "edgelist1rest", "edgelist1data", "edgelist1dataline", "integer",
@@ -1572,97 +1573,97 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 108 "src/core/io/dl-parser.y"
+#line 109 "src/core/io/dl-parser.y"
                                              { context->n=(yyvsp[-4].integer); }
-#line 1578 "yy.tab.c"
+#line 1579 "yy.tab.c"
     break;
 
   case 7:
-#line 114 "src/core/io/dl-parser.y"
+#line 115 "src/core/io/dl-parser.y"
                         { context->type=IGRAPH_DL_MATRIX; }
-#line 1584 "yy.tab.c"
+#line 1585 "yy.tab.c"
     break;
 
   case 8:
-#line 115 "src/core/io/dl-parser.y"
+#line 116 "src/core/io/dl-parser.y"
                         { context->type=IGRAPH_DL_EDGELIST1; }
-#line 1590 "yy.tab.c"
+#line 1591 "yy.tab.c"
     break;
 
   case 9:
-#line 116 "src/core/io/dl-parser.y"
+#line 117 "src/core/io/dl-parser.y"
                         { context->type=IGRAPH_DL_NODELIST1; }
-#line 1596 "yy.tab.c"
+#line 1597 "yy.tab.c"
     break;
 
   case 10:
-#line 119 "src/core/io/dl-parser.y"
+#line 120 "src/core/io/dl-parser.y"
                                                      {}
-#line 1602 "yy.tab.c"
+#line 1603 "yy.tab.c"
     break;
 
   case 11:
-#line 119 "src/core/io/dl-parser.y"
+#line 120 "src/core/io/dl-parser.y"
                                                                      {}
-#line 1608 "yy.tab.c"
+#line 1609 "yy.tab.c"
     break;
 
   case 14:
-#line 123 "src/core/io/dl-parser.y"
+#line 124 "src/core/io/dl-parser.y"
                                           { }
-#line 1614 "yy.tab.c"
+#line 1615 "yy.tab.c"
     break;
 
   case 15:
-#line 124 "src/core/io/dl-parser.y"
+#line 125 "src/core/io/dl-parser.y"
                                                                         { }
-#line 1620 "yy.tab.c"
+#line 1621 "yy.tab.c"
     break;
 
   case 16:
-#line 125 "src/core/io/dl-parser.y"
+#line 126 "src/core/io/dl-parser.y"
                                                                         { }
-#line 1626 "yy.tab.c"
+#line 1627 "yy.tab.c"
     break;
 
   case 17:
-#line 128 "src/core/io/dl-parser.y"
+#line 129 "src/core/io/dl-parser.y"
               {}
-#line 1632 "yy.tab.c"
+#line 1633 "yy.tab.c"
     break;
 
   case 18:
-#line 129 "src/core/io/dl-parser.y"
+#line 130 "src/core/io/dl-parser.y"
                                    {
               igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
                                   igraph_dl_yyget_leng(scanner),
                                   context); }
-#line 1641 "yy.tab.c"
+#line 1642 "yy.tab.c"
     break;
 
   case 19:
-#line 135 "src/core/io/dl-parser.y"
+#line 136 "src/core/io/dl-parser.y"
                 {}
-#line 1647 "yy.tab.c"
+#line 1648 "yy.tab.c"
     break;
 
   case 20:
-#line 135 "src/core/io/dl-parser.y"
+#line 136 "src/core/io/dl-parser.y"
                                                        {
   context->from += 1;
   context->to = 0;
  }
-#line 1656 "yy.tab.c"
+#line 1657 "yy.tab.c"
     break;
 
   case 22:
-#line 140 "src/core/io/dl-parser.y"
+#line 141 "src/core/io/dl-parser.y"
                                  { }
-#line 1662 "yy.tab.c"
+#line 1663 "yy.tab.c"
     break;
 
   case 23:
-#line 142 "src/core/io/dl-parser.y"
+#line 143 "src/core/io/dl-parser.y"
                {
   if (igraph_dl_yyget_text(scanner)[0]=='1') {
     IGRAPH_CHECK(igraph_vector_push_back(&context->edges,
@@ -1672,159 +1673,159 @@ yyreduce:
   }
   context->to += 1;
 }
-#line 1676 "yy.tab.c"
+#line 1677 "yy.tab.c"
     break;
 
   case 24:
-#line 152 "src/core/io/dl-parser.y"
+#line 153 "src/core/io/dl-parser.y"
                                                  {}
-#line 1682 "yy.tab.c"
+#line 1683 "yy.tab.c"
     break;
 
   case 25:
-#line 154 "src/core/io/dl-parser.y"
+#line 155 "src/core/io/dl-parser.y"
                                                                {}
-#line 1688 "yy.tab.c"
+#line 1689 "yy.tab.c"
     break;
 
   case 28:
-#line 158 "src/core/io/dl-parser.y"
+#line 159 "src/core/io/dl-parser.y"
              { igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
                                    igraph_dl_yyget_leng(scanner),
                                    context); }
-#line 1696 "yy.tab.c"
+#line 1697 "yy.tab.c"
     break;
 
   case 29:
-#line 162 "src/core/io/dl-parser.y"
+#line 163 "src/core/io/dl-parser.y"
                                       {
                  context->from += 1;
                  context->to = 0;
                }
-#line 1705 "yy.tab.c"
+#line 1706 "yy.tab.c"
     break;
 
   case 30:
-#line 166 "src/core/io/dl-parser.y"
+#line 167 "src/core/io/dl-parser.y"
                                                     {
                  context->from += 1;
                  context->to = 0;
                }
-#line 1714 "yy.tab.c"
+#line 1715 "yy.tab.c"
     break;
 
   case 31:
-#line 171 "src/core/io/dl-parser.y"
+#line 172 "src/core/io/dl-parser.y"
                                             { }
-#line 1720 "yy.tab.c"
+#line 1721 "yy.tab.c"
     break;
 
   case 32:
-#line 175 "src/core/io/dl-parser.y"
+#line 176 "src/core/io/dl-parser.y"
                                                  {}
-#line 1726 "yy.tab.c"
+#line 1727 "yy.tab.c"
     break;
 
   case 33:
-#line 177 "src/core/io/dl-parser.y"
+#line 178 "src/core/io/dl-parser.y"
                                             {}
-#line 1732 "yy.tab.c"
+#line 1733 "yy.tab.c"
     break;
 
   case 34:
-#line 178 "src/core/io/dl-parser.y"
+#line 179 "src/core/io/dl-parser.y"
                                                                         {}
-#line 1738 "yy.tab.c"
+#line 1739 "yy.tab.c"
     break;
 
   case 35:
-#line 179 "src/core/io/dl-parser.y"
+#line 180 "src/core/io/dl-parser.y"
                                                                         {}
-#line 1744 "yy.tab.c"
+#line 1745 "yy.tab.c"
     break;
 
   case 36:
-#line 180 "src/core/io/dl-parser.y"
+#line 181 "src/core/io/dl-parser.y"
                                                                                                       {}
-#line 1750 "yy.tab.c"
+#line 1751 "yy.tab.c"
     break;
 
   case 37:
-#line 181 "src/core/io/dl-parser.y"
+#line 182 "src/core/io/dl-parser.y"
                                                                                                       {}
-#line 1756 "yy.tab.c"
+#line 1757 "yy.tab.c"
     break;
 
   case 38:
-#line 184 "src/core/io/dl-parser.y"
+#line 185 "src/core/io/dl-parser.y"
                {}
-#line 1762 "yy.tab.c"
+#line 1763 "yy.tab.c"
     break;
 
   case 39:
-#line 185 "src/core/io/dl-parser.y"
+#line 186 "src/core/io/dl-parser.y"
                                                {}
-#line 1768 "yy.tab.c"
+#line 1769 "yy.tab.c"
     break;
 
   case 40:
-#line 188 "src/core/io/dl-parser.y"
+#line 189 "src/core/io/dl-parser.y"
                                                   {
                    igraph_i_dl_add_edge_w((yyvsp[-3].integer)-1, (yyvsp[-2].integer)-1, (yyvsp[-1].real), context); }
-#line 1775 "yy.tab.c"
+#line 1776 "yy.tab.c"
     break;
 
   case 41:
-#line 190 "src/core/io/dl-parser.y"
+#line 191 "src/core/io/dl-parser.y"
                                            {
                    igraph_i_dl_add_edge((yyvsp[-2].integer)-1, (yyvsp[-1].integer)-1, context);
 }
-#line 1783 "yy.tab.c"
+#line 1784 "yy.tab.c"
     break;
 
   case 42:
-#line 194 "src/core/io/dl-parser.y"
+#line 195 "src/core/io/dl-parser.y"
              { (yyval.integer)=igraph_pajek_get_number(igraph_dl_yyget_text(scanner),
                                           igraph_dl_yyget_leng(scanner)); }
-#line 1790 "yy.tab.c"
+#line 1791 "yy.tab.c"
     break;
 
   case 43:
-#line 197 "src/core/io/dl-parser.y"
+#line 198 "src/core/io/dl-parser.y"
                       {}
-#line 1796 "yy.tab.c"
+#line 1797 "yy.tab.c"
     break;
 
   case 44:
-#line 198 "src/core/io/dl-parser.y"
+#line 199 "src/core/io/dl-parser.y"
                                                                     {}
-#line 1802 "yy.tab.c"
+#line 1803 "yy.tab.c"
     break;
 
   case 45:
-#line 201 "src/core/io/dl-parser.y"
+#line 202 "src/core/io/dl-parser.y"
                                                        {
                           igraph_i_dl_add_edge_w((yyvsp[-3].integer), (yyvsp[-2].integer), (yyvsp[-1].real), context); }
-#line 1809 "yy.tab.c"
+#line 1810 "yy.tab.c"
     break;
 
   case 46:
-#line 203 "src/core/io/dl-parser.y"
+#line 204 "src/core/io/dl-parser.y"
                                                 {
                           igraph_i_dl_add_edge((yyvsp[-2].integer), (yyvsp[-1].integer), context);
  }
-#line 1817 "yy.tab.c"
+#line 1818 "yy.tab.c"
     break;
 
   case 47:
-#line 207 "src/core/io/dl-parser.y"
+#line 208 "src/core/io/dl-parser.y"
             { (yyval.real)=igraph_pajek_get_number(igraph_dl_yyget_text(scanner),
                                          igraph_dl_yyget_leng(scanner)); }
-#line 1824 "yy.tab.c"
+#line 1825 "yy.tab.c"
     break;
 
   case 48:
-#line 210 "src/core/io/dl-parser.y"
+#line 211 "src/core/io/dl-parser.y"
               {
   /* Copy label list to trie, if needed */
   if (igraph_strvector_size(&context->labels) != 0) {
@@ -1838,124 +1839,124 @@ yyreduce:
   igraph_trie_get2(&context->trie, igraph_dl_yyget_text(scanner),
                    igraph_dl_yyget_leng(scanner), &(yyval.integer));
  }
-#line 1842 "yy.tab.c"
+#line 1843 "yy.tab.c"
     break;
 
   case 49:
-#line 226 "src/core/io/dl-parser.y"
+#line 227 "src/core/io/dl-parser.y"
                                                  {}
-#line 1848 "yy.tab.c"
+#line 1849 "yy.tab.c"
     break;
 
   case 50:
-#line 228 "src/core/io/dl-parser.y"
+#line 229 "src/core/io/dl-parser.y"
                                     {}
-#line 1854 "yy.tab.c"
+#line 1855 "yy.tab.c"
     break;
 
   case 51:
-#line 229 "src/core/io/dl-parser.y"
+#line 230 "src/core/io/dl-parser.y"
                                                                         {}
-#line 1860 "yy.tab.c"
+#line 1861 "yy.tab.c"
     break;
 
   case 52:
-#line 230 "src/core/io/dl-parser.y"
+#line 231 "src/core/io/dl-parser.y"
                                                                         {}
-#line 1866 "yy.tab.c"
+#line 1867 "yy.tab.c"
     break;
 
   case 53:
-#line 231 "src/core/io/dl-parser.y"
+#line 232 "src/core/io/dl-parser.y"
                                                                                                       {}
-#line 1872 "yy.tab.c"
+#line 1873 "yy.tab.c"
     break;
 
   case 54:
-#line 232 "src/core/io/dl-parser.y"
+#line 233 "src/core/io/dl-parser.y"
                                                                                                       {}
-#line 1878 "yy.tab.c"
+#line 1879 "yy.tab.c"
     break;
 
   case 55:
-#line 235 "src/core/io/dl-parser.y"
+#line 236 "src/core/io/dl-parser.y"
                {}
-#line 1884 "yy.tab.c"
+#line 1885 "yy.tab.c"
     break;
 
   case 56:
-#line 236 "src/core/io/dl-parser.y"
+#line 237 "src/core/io/dl-parser.y"
                                                {}
-#line 1890 "yy.tab.c"
+#line 1891 "yy.tab.c"
     break;
 
   case 57:
-#line 239 "src/core/io/dl-parser.y"
+#line 240 "src/core/io/dl-parser.y"
                                        {}
-#line 1896 "yy.tab.c"
+#line 1897 "yy.tab.c"
     break;
 
   case 58:
-#line 241 "src/core/io/dl-parser.y"
+#line 242 "src/core/io/dl-parser.y"
           { context->from=igraph_pajek_get_number(igraph_dl_yyget_text(scanner),
                                                           igraph_dl_yyget_leng(scanner)); }
-#line 1903 "yy.tab.c"
+#line 1904 "yy.tab.c"
     break;
 
   case 59:
-#line 244 "src/core/io/dl-parser.y"
+#line 245 "src/core/io/dl-parser.y"
         {}
-#line 1909 "yy.tab.c"
+#line 1910 "yy.tab.c"
     break;
 
   case 60:
-#line 244 "src/core/io/dl-parser.y"
+#line 245 "src/core/io/dl-parser.y"
                             {
   IGRAPH_CHECK(igraph_vector_push_back(&context->edges,
                                        context->from-1));
   IGRAPH_CHECK(igraph_vector_push_back(&context->edges, (yyvsp[0].integer)-1));
  }
-#line 1919 "yy.tab.c"
+#line 1920 "yy.tab.c"
     break;
 
   case 61:
-#line 250 "src/core/io/dl-parser.y"
+#line 251 "src/core/io/dl-parser.y"
                       {}
-#line 1925 "yy.tab.c"
+#line 1926 "yy.tab.c"
     break;
 
   case 62:
-#line 251 "src/core/io/dl-parser.y"
+#line 252 "src/core/io/dl-parser.y"
                                                                     {}
-#line 1931 "yy.tab.c"
+#line 1932 "yy.tab.c"
     break;
 
   case 63:
-#line 254 "src/core/io/dl-parser.y"
+#line 255 "src/core/io/dl-parser.y"
                                                          { }
-#line 1937 "yy.tab.c"
+#line 1938 "yy.tab.c"
     break;
 
   case 64:
-#line 256 "src/core/io/dl-parser.y"
+#line 257 "src/core/io/dl-parser.y"
                    {
   context->from=(yyvsp[0].integer);
  }
-#line 1945 "yy.tab.c"
+#line 1946 "yy.tab.c"
     break;
 
   case 66:
-#line 260 "src/core/io/dl-parser.y"
+#line 261 "src/core/io/dl-parser.y"
                                   {
   IGRAPH_CHECK(igraph_vector_push_back(&context->edges,
                                        context->from));
   IGRAPH_CHECK(igraph_vector_push_back(&context->edges, (yyvsp[0].integer)));
  }
-#line 1955 "yy.tab.c"
+#line 1956 "yy.tab.c"
     break;
 
 
-#line 1959 "yy.tab.c"
+#line 1960 "yy.tab.c"
 
       default: break;
     }
@@ -2193,7 +2194,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 266 "src/core/io/dl-parser.y"
+#line 267 "src/core/io/dl-parser.y"
 
 
 int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context,

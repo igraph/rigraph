@@ -49,6 +49,7 @@ extern int igraph_pajek_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     NEWLINE = 258,
     NUM = 259,
     ALNUM = 260,
@@ -114,7 +115,7 @@ union YYSTYPE
     int len;
   } string;
 
-#line 118 "yy.tab.h"
+#line 119 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

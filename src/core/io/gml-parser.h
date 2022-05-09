@@ -49,6 +49,7 @@ extern int igraph_gml_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     STRING = 258,
     NUM = 259,
     KEYWORD = 260,
@@ -72,7 +73,7 @@ union YYSTYPE
    void *tree;
    double real;
 
-#line 76 "yy.tab.h"
+#line 77 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

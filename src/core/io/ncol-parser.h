@@ -49,6 +49,7 @@ extern int igraph_ncol_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     ALNUM = 258,
     NEWLINE = 259,
     ERROR = 260
@@ -64,7 +65,7 @@ union YYSTYPE
   long int edgenum;
   double weightnum;
 
-#line 68 "yy.tab.h"
+#line 69 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

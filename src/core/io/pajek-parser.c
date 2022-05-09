@@ -201,6 +201,7 @@ extern int igraph_pajek_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     NEWLINE = 258,
     NUM = 259,
     ALNUM = 260,
@@ -266,7 +267,7 @@ union YYSTYPE
     int len;
   } string;
 
-#line 270 "yy.tab.c"
+#line 271 "yy.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -662,20 +663,20 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   189,   189,   193,   193,   195,   197,   201,   207,   207,
-     209,   210,   211,   211,   214,   216,   221,   222,   226,   232,
-     232,   236,   236,   239,   240,   243,   246,   251,   256,   261,
-     264,   267,   270,   273,   276,   279,   282,   285,   290,   290,
-     294,   294,   298,   298,   302,   302,   307,   307,   314,   316,
-     316,   316,   316,   316,   316,   318,   319,   321,   321,   323,
-     324,   324,   330,   332,   334,   335,   337,   337,   339,   340,
-     340,   346,   348,   350,   350,   354,   354,   357,   358,   363,
-     366,   369,   372,   375,   378,   381,   384,   387,   390,   393,
-     396,   399,   402,   405,   410,   410,   414,   414,   418,   418,
-     422,   422,   426,   426,   432,   434,   436,   436,   438,   438,
-     440,   440,   442,   444,   449,   451,   451,   453,   453,   455,
-     455,   457,   459,   466,   468,   473,   473,   475,   477,   477,
-     479,   499,   502,   505,   505,   507,   509,   511
+       0,   190,   190,   194,   194,   196,   198,   202,   208,   208,
+     210,   211,   212,   212,   215,   217,   222,   223,   227,   233,
+     233,   237,   237,   240,   241,   244,   247,   252,   257,   262,
+     265,   268,   271,   274,   277,   280,   283,   286,   291,   291,
+     295,   295,   299,   299,   303,   303,   308,   308,   315,   317,
+     317,   317,   317,   317,   317,   319,   320,   322,   322,   324,
+     325,   325,   331,   333,   335,   336,   338,   338,   340,   341,
+     341,   347,   349,   351,   351,   355,   355,   358,   359,   364,
+     367,   370,   373,   376,   379,   382,   385,   388,   391,   394,
+     397,   400,   403,   406,   411,   411,   415,   415,   419,   419,
+     423,   423,   427,   427,   433,   435,   437,   437,   439,   439,
+     441,   441,   443,   445,   450,   452,   452,   454,   454,   456,
+     456,   458,   460,   467,   469,   474,   474,   476,   478,   478,
+     480,   500,   503,   506,   506,   508,   510,   512
 };
 #endif
 
@@ -684,8 +685,8 @@ static const yytype_int16 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "NEWLINE", "NUM", "ALNUM", "QSTR",
-  "PSTR", "NETWORKLINE", "VERTICESLINE", "ARCSLINE", "EDGESLINE",
+  "\"end of file\"", "error", "$undefined", "NEWLINE", "NUM", "ALNUM",
+  "QSTR", "PSTR", "NETWORKLINE", "VERTICESLINE", "ARCSLINE", "EDGESLINE",
   "ARCSLISTLINE", "EDGESLISTLINE", "MATRIXLINE", "ERROR", "VP_X_FACT",
   "VP_Y_FACT", "VP_IC", "VP_BC", "VP_LC", "VP_LR", "VP_LPHI", "VP_BW",
   "VP_FOS", "VP_PHI", "VP_R", "VP_Q", "VP_LA", "VP_FONT", "VP_URL",
@@ -1733,619 +1734,619 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 189 "src/core/io/pajek-parser.y"
+#line 190 "src/core/io/pajek-parser.y"
                                   {
   if (context->vcount2 > 0) { igraph_i_pajek_check_bipartite(context); }
  }
-#line 1741 "yy.tab.c"
+#line 1742 "yy.tab.c"
     break;
 
   case 6:
-#line 197 "src/core/io/pajek-parser.y"
+#line 198 "src/core/io/pajek-parser.y"
                                    {
   context->vcount=(yyvsp[0].intnum);
   context->vcount2=0;
             }
-#line 1750 "yy.tab.c"
+#line 1751 "yy.tab.c"
     break;
 
   case 7:
-#line 201 "src/core/io/pajek-parser.y"
+#line 202 "src/core/io/pajek-parser.y"
                                            {
   context->vcount=(yyvsp[-1].intnum);
   context->vcount2=(yyvsp[0].intnum);
   igraph_i_pajek_add_bipartite_type(context);
 }
-#line 1760 "yy.tab.c"
+#line 1761 "yy.tab.c"
     break;
 
   case 12:
-#line 211 "src/core/io/pajek-parser.y"
+#line 212 "src/core/io/pajek-parser.y"
                    { context->actvertex=(yyvsp[0].intnum); }
-#line 1766 "yy.tab.c"
+#line 1767 "yy.tab.c"
     break;
 
   case 13:
-#line 211 "src/core/io/pajek-parser.y"
+#line 212 "src/core/io/pajek-parser.y"
                                                                                          { }
-#line 1772 "yy.tab.c"
+#line 1773 "yy.tab.c"
     break;
 
   case 14:
-#line 214 "src/core/io/pajek-parser.y"
+#line 215 "src/core/io/pajek-parser.y"
                 { (yyval.intnum)=(yyvsp[0].intnum); context->mode=1; }
-#line 1778 "yy.tab.c"
+#line 1779 "yy.tab.c"
     break;
 
   case 15:
-#line 216 "src/core/io/pajek-parser.y"
+#line 217 "src/core/io/pajek-parser.y"
                {
   igraph_i_pajek_add_string_vertex_attribute("id", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
   igraph_i_pajek_add_string_vertex_attribute("name", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
 }
-#line 1787 "yy.tab.c"
+#line 1788 "yy.tab.c"
     break;
 
   case 17:
-#line 222 "src/core/io/pajek-parser.y"
+#line 223 "src/core/io/pajek-parser.y"
                             {
   igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-1].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[0].realnum), context);
             }
-#line 1796 "yy.tab.c"
+#line 1797 "yy.tab.c"
     break;
 
   case 18:
-#line 226 "src/core/io/pajek-parser.y"
+#line 227 "src/core/io/pajek-parser.y"
                                    {
   igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-2].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[-1].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("z", (yyvsp[0].realnum), context);
             }
-#line 1806 "yy.tab.c"
+#line 1807 "yy.tab.c"
     break;
 
   case 20:
-#line 232 "src/core/io/pajek-parser.y"
+#line 233 "src/core/io/pajek-parser.y"
                           {
   igraph_i_pajek_add_string_vertex_attribute("shape", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
 }
-#line 1814 "yy.tab.c"
+#line 1815 "yy.tab.c"
     break;
 
   case 24:
-#line 240 "src/core/io/pajek-parser.y"
+#line 241 "src/core/io/pajek-parser.y"
                         {
          igraph_i_pajek_add_numeric_vertex_attribute("xfact", (yyvsp[0].realnum), context);
        }
-#line 1822 "yy.tab.c"
+#line 1823 "yy.tab.c"
     break;
 
   case 25:
-#line 243 "src/core/io/pajek-parser.y"
+#line 244 "src/core/io/pajek-parser.y"
                         {
          igraph_i_pajek_add_numeric_vertex_attribute("yfact", (yyvsp[0].realnum), context);
        }
-#line 1830 "yy.tab.c"
+#line 1831 "yy.tab.c"
     break;
 
   case 26:
-#line 246 "src/core/io/pajek-parser.y"
+#line 247 "src/core/io/pajek-parser.y"
                                   { /* RGB color */
          igraph_i_pajek_add_numeric_vertex_attribute("color-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("color-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("color-blue", (yyvsp[0].realnum), context);
        }
-#line 1840 "yy.tab.c"
+#line 1841 "yy.tab.c"
     break;
 
   case 27:
-#line 251 "src/core/io/pajek-parser.y"
+#line 252 "src/core/io/pajek-parser.y"
                                   {
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-blue", (yyvsp[0].realnum), context);
        }
-#line 1850 "yy.tab.c"
+#line 1851 "yy.tab.c"
     break;
 
   case 28:
-#line 256 "src/core/io/pajek-parser.y"
+#line 257 "src/core/io/pajek-parser.y"
                                   {
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-blue", (yyvsp[0].realnum), context);
        }
-#line 1860 "yy.tab.c"
+#line 1861 "yy.tab.c"
     break;
 
   case 29:
-#line 261 "src/core/io/pajek-parser.y"
+#line 262 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldist", (yyvsp[0].realnum), context);
      }
-#line 1868 "yy.tab.c"
+#line 1869 "yy.tab.c"
     break;
 
   case 30:
-#line 264 "src/core/io/pajek-parser.y"
+#line 265 "src/core/io/pajek-parser.y"
                       {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldegree2", (yyvsp[0].realnum), context);
      }
-#line 1876 "yy.tab.c"
+#line 1877 "yy.tab.c"
     break;
 
   case 31:
-#line 267 "src/core/io/pajek-parser.y"
+#line 268 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("framewidth", (yyvsp[0].realnum), context);
      }
-#line 1884 "yy.tab.c"
+#line 1885 "yy.tab.c"
     break;
 
   case 32:
-#line 270 "src/core/io/pajek-parser.y"
+#line 271 "src/core/io/pajek-parser.y"
                      {
          igraph_i_pajek_add_numeric_vertex_attribute("fontsize", (yyvsp[0].realnum), context);
      }
-#line 1892 "yy.tab.c"
+#line 1893 "yy.tab.c"
     break;
 
   case 33:
-#line 273 "src/core/io/pajek-parser.y"
+#line 274 "src/core/io/pajek-parser.y"
                      {
          igraph_i_pajek_add_numeric_vertex_attribute("rotation", (yyvsp[0].realnum), context);
      }
-#line 1900 "yy.tab.c"
+#line 1901 "yy.tab.c"
     break;
 
   case 34:
-#line 276 "src/core/io/pajek-parser.y"
+#line 277 "src/core/io/pajek-parser.y"
                    {
          igraph_i_pajek_add_numeric_vertex_attribute("radius", (yyvsp[0].realnum), context);
      }
-#line 1908 "yy.tab.c"
+#line 1909 "yy.tab.c"
     break;
 
   case 35:
-#line 279 "src/core/io/pajek-parser.y"
+#line 280 "src/core/io/pajek-parser.y"
                    {
          igraph_i_pajek_add_numeric_vertex_attribute("diamondratio", (yyvsp[0].realnum), context);
      }
-#line 1916 "yy.tab.c"
+#line 1917 "yy.tab.c"
     break;
 
   case 36:
-#line 282 "src/core/io/pajek-parser.y"
+#line 283 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldegree", (yyvsp[0].realnum), context);
      }
-#line 1924 "yy.tab.c"
+#line 1925 "yy.tab.c"
     break;
 
   case 37:
-#line 285 "src/core/io/pajek-parser.y"
+#line 286 "src/core/io/pajek-parser.y"
                       {
          igraph_i_pajek_add_numeric_vertex_attribute("vertexsize", (yyvsp[0].realnum), context);
      }
-#line 1932 "yy.tab.c"
+#line 1933 "yy.tab.c"
     break;
 
   case 38:
-#line 290 "src/core/io/pajek-parser.y"
+#line 291 "src/core/io/pajek-parser.y"
                 { context->mode=3; }
-#line 1938 "yy.tab.c"
+#line 1939 "yy.tab.c"
     break;
 
   case 39:
-#line 290 "src/core/io/pajek-parser.y"
+#line 291 "src/core/io/pajek-parser.y"
                                                {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1947 "yy.tab.c"
+#line 1948 "yy.tab.c"
     break;
 
   case 40:
-#line 294 "src/core/io/pajek-parser.y"
+#line 295 "src/core/io/pajek-parser.y"
               { context->mode=3; }
-#line 1953 "yy.tab.c"
+#line 1954 "yy.tab.c"
     break;
 
   case 41:
-#line 294 "src/core/io/pajek-parser.y"
+#line 295 "src/core/io/pajek-parser.y"
                                              {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("url", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1962 "yy.tab.c"
+#line 1963 "yy.tab.c"
     break;
 
   case 42:
-#line 298 "src/core/io/pajek-parser.y"
+#line 299 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 1968 "yy.tab.c"
+#line 1969 "yy.tab.c"
     break;
 
   case 43:
-#line 298 "src/core/io/pajek-parser.y"
+#line 299 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1977 "yy.tab.c"
+#line 1978 "yy.tab.c"
     break;
 
   case 44:
-#line 302 "src/core/io/pajek-parser.y"
+#line 303 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 1983 "yy.tab.c"
+#line 1984 "yy.tab.c"
     break;
 
   case 45:
-#line 302 "src/core/io/pajek-parser.y"
+#line 303 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("framecolor",
                                                     (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1993 "yy.tab.c"
+#line 1994 "yy.tab.c"
     break;
 
   case 46:
-#line 307 "src/core/io/pajek-parser.y"
+#line 308 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 1999 "yy.tab.c"
+#line 2000 "yy.tab.c"
     break;
 
   case 47:
-#line 307 "src/core/io/pajek-parser.y"
+#line 308 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("labelcolor",
                                                     (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 2009 "yy.tab.c"
+#line 2010 "yy.tab.c"
     break;
 
   case 48:
-#line 314 "src/core/io/pajek-parser.y"
+#line 315 "src/core/io/pajek-parser.y"
                 { (yyval.string)=(yyvsp[0].string); }
-#line 2015 "yy.tab.c"
+#line 2016 "yy.tab.c"
     break;
 
   case 55:
-#line 318 "src/core/io/pajek-parser.y"
+#line 319 "src/core/io/pajek-parser.y"
                                          { context->directed=1; }
-#line 2021 "yy.tab.c"
+#line 2022 "yy.tab.c"
     break;
 
   case 56:
-#line 319 "src/core/io/pajek-parser.y"
+#line 320 "src/core/io/pajek-parser.y"
                                          { context->directed=1; }
-#line 2027 "yy.tab.c"
+#line 2028 "yy.tab.c"
     break;
 
   case 60:
-#line 324 "src/core/io/pajek-parser.y"
+#line 325 "src/core/io/pajek-parser.y"
                         { context->actedge++;
                           context->mode=2; }
-#line 2034 "yy.tab.c"
+#line 2035 "yy.tab.c"
     break;
 
   case 61:
-#line 325 "src/core/io/pajek-parser.y"
+#line 326 "src/core/io/pajek-parser.y"
                                                                         {
   igraph_vector_push_back(context->vector, (yyvsp[-5].intnum)-1);
   igraph_vector_push_back(context->vector, (yyvsp[-4].intnum)-1); }
-#line 2042 "yy.tab.c"
+#line 2043 "yy.tab.c"
     break;
 
   case 64:
-#line 334 "src/core/io/pajek-parser.y"
+#line 335 "src/core/io/pajek-parser.y"
                                      { context->directed=0; }
-#line 2048 "yy.tab.c"
+#line 2049 "yy.tab.c"
     break;
 
   case 65:
-#line 335 "src/core/io/pajek-parser.y"
+#line 336 "src/core/io/pajek-parser.y"
                                             { context->directed=0; }
-#line 2054 "yy.tab.c"
+#line 2055 "yy.tab.c"
     break;
 
   case 69:
-#line 340 "src/core/io/pajek-parser.y"
+#line 341 "src/core/io/pajek-parser.y"
                           { context->actedge++;
                             context->mode=2; }
-#line 2061 "yy.tab.c"
+#line 2062 "yy.tab.c"
     break;
 
   case 70:
-#line 341 "src/core/io/pajek-parser.y"
+#line 342 "src/core/io/pajek-parser.y"
                                                                          {
   igraph_vector_push_back(context->vector, (yyvsp[-5].intnum)-1);
   igraph_vector_push_back(context->vector, (yyvsp[-4].intnum)-1); }
-#line 2069 "yy.tab.c"
+#line 2070 "yy.tab.c"
     break;
 
   case 74:
-#line 350 "src/core/io/pajek-parser.y"
+#line 351 "src/core/io/pajek-parser.y"
                              {
   igraph_i_pajek_add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context);
 }
-#line 2077 "yy.tab.c"
+#line 2078 "yy.tab.c"
     break;
 
   case 78:
-#line 358 "src/core/io/pajek-parser.y"
+#line 359 "src/core/io/pajek-parser.y"
                                {
        igraph_i_pajek_add_numeric_edge_attribute("color-red", (yyvsp[-2].realnum), context);
        igraph_i_pajek_add_numeric_edge_attribute("color-green", (yyvsp[-1].realnum), context);
        igraph_i_pajek_add_numeric_edge_attribute("color-blue", (yyvsp[0].realnum), context);
    }
-#line 2087 "yy.tab.c"
+#line 2088 "yy.tab.c"
     break;
 
   case 79:
-#line 363 "src/core/io/pajek-parser.y"
+#line 364 "src/core/io/pajek-parser.y"
                  {
        igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context);
    }
-#line 2095 "yy.tab.c"
+#line 2096 "yy.tab.c"
     break;
 
   case 80:
-#line 366 "src/core/io/pajek-parser.y"
+#line 367 "src/core/io/pajek-parser.y"
                  {
        igraph_i_pajek_add_numeric_edge_attribute("edgewidth", (yyvsp[0].realnum), context);
    }
-#line 2103 "yy.tab.c"
+#line 2104 "yy.tab.c"
     break;
 
   case 81:
-#line 369 "src/core/io/pajek-parser.y"
+#line 370 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("hook1", (yyvsp[0].realnum), context);
    }
-#line 2111 "yy.tab.c"
+#line 2112 "yy.tab.c"
     break;
 
   case 82:
-#line 372 "src/core/io/pajek-parser.y"
+#line 373 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("hook2", (yyvsp[0].realnum), context);
    }
-#line 2119 "yy.tab.c"
+#line 2120 "yy.tab.c"
     break;
 
   case 83:
-#line 375 "src/core/io/pajek-parser.y"
+#line 376 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("angle1", (yyvsp[0].realnum), context);
    }
-#line 2127 "yy.tab.c"
+#line 2128 "yy.tab.c"
     break;
 
   case 84:
-#line 378 "src/core/io/pajek-parser.y"
+#line 379 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("angle2", (yyvsp[0].realnum), context);
    }
-#line 2135 "yy.tab.c"
+#line 2136 "yy.tab.c"
     break;
 
   case 85:
-#line 381 "src/core/io/pajek-parser.y"
+#line 382 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("velocity1", (yyvsp[0].realnum), context);
    }
-#line 2143 "yy.tab.c"
+#line 2144 "yy.tab.c"
     break;
 
   case 86:
-#line 384 "src/core/io/pajek-parser.y"
+#line 385 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("velocity2", (yyvsp[0].realnum), context);
    }
-#line 2151 "yy.tab.c"
+#line 2152 "yy.tab.c"
     break;
 
   case 87:
-#line 387 "src/core/io/pajek-parser.y"
+#line 388 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("arrowpos", (yyvsp[0].realnum), context);
    }
-#line 2159 "yy.tab.c"
+#line 2160 "yy.tab.c"
     break;
 
   case 88:
-#line 390 "src/core/io/pajek-parser.y"
+#line 391 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labelpos", (yyvsp[0].realnum), context);
    }
-#line 2167 "yy.tab.c"
+#line 2168 "yy.tab.c"
     break;
 
   case 89:
-#line 393 "src/core/io/pajek-parser.y"
+#line 394 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labelangle", (yyvsp[0].realnum), context);
    }
-#line 2175 "yy.tab.c"
+#line 2176 "yy.tab.c"
     break;
 
   case 90:
-#line 396 "src/core/io/pajek-parser.y"
+#line 397 "src/core/io/pajek-parser.y"
                     {
        igraph_i_pajek_add_numeric_edge_attribute("labelangle2", (yyvsp[0].realnum), context);
    }
-#line 2183 "yy.tab.c"
+#line 2184 "yy.tab.c"
     break;
 
   case 91:
-#line 399 "src/core/io/pajek-parser.y"
+#line 400 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labeldegree", (yyvsp[0].realnum), context);
    }
-#line 2191 "yy.tab.c"
+#line 2192 "yy.tab.c"
     break;
 
   case 92:
-#line 402 "src/core/io/pajek-parser.y"
+#line 403 "src/core/io/pajek-parser.y"
                     { /* what is this??? */
        igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context);
    }
-#line 2199 "yy.tab.c"
+#line 2200 "yy.tab.c"
     break;
 
   case 93:
-#line 405 "src/core/io/pajek-parser.y"
+#line 406 "src/core/io/pajek-parser.y"
                    {
        igraph_i_pajek_add_numeric_edge_attribute("fontsize", (yyvsp[0].realnum), context);
    }
-#line 2207 "yy.tab.c"
+#line 2208 "yy.tab.c"
     break;
 
   case 94:
-#line 410 "src/core/io/pajek-parser.y"
+#line 411 "src/core/io/pajek-parser.y"
              { context->mode=4; }
-#line 2213 "yy.tab.c"
+#line 2214 "yy.tab.c"
     break;
 
   case 95:
-#line 410 "src/core/io/pajek-parser.y"
+#line 411 "src/core/io/pajek-parser.y"
                                             {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("arrowtype", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2222 "yy.tab.c"
+#line 2223 "yy.tab.c"
     break;
 
   case 96:
-#line 414 "src/core/io/pajek-parser.y"
+#line 415 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2228 "yy.tab.c"
+#line 2229 "yy.tab.c"
     break;
 
   case 97:
-#line 414 "src/core/io/pajek-parser.y"
+#line 415 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("linepattern", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2237 "yy.tab.c"
+#line 2238 "yy.tab.c"
     break;
 
   case 98:
-#line 418 "src/core/io/pajek-parser.y"
+#line 419 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2243 "yy.tab.c"
+#line 2244 "yy.tab.c"
     break;
 
   case 99:
-#line 418 "src/core/io/pajek-parser.y"
+#line 419 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("label", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2252 "yy.tab.c"
+#line 2253 "yy.tab.c"
     break;
 
   case 100:
-#line 422 "src/core/io/pajek-parser.y"
+#line 423 "src/core/io/pajek-parser.y"
             { context->mode=4; }
-#line 2258 "yy.tab.c"
+#line 2259 "yy.tab.c"
     break;
 
   case 101:
-#line 422 "src/core/io/pajek-parser.y"
+#line 423 "src/core/io/pajek-parser.y"
                                            {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2267 "yy.tab.c"
+#line 2268 "yy.tab.c"
     break;
 
   case 102:
-#line 426 "src/core/io/pajek-parser.y"
+#line 427 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2273 "yy.tab.c"
+#line 2274 "yy.tab.c"
     break;
 
   case 103:
-#line 426 "src/core/io/pajek-parser.y"
+#line 427 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2282 "yy.tab.c"
+#line 2283 "yy.tab.c"
     break;
 
   case 104:
-#line 432 "src/core/io/pajek-parser.y"
+#line 433 "src/core/io/pajek-parser.y"
                 { context->mode=2; (yyval.string)=(yyvsp[0].string); }
-#line 2288 "yy.tab.c"
+#line 2289 "yy.tab.c"
     break;
 
   case 105:
-#line 434 "src/core/io/pajek-parser.y"
+#line 435 "src/core/io/pajek-parser.y"
                                              { context->directed=1; }
-#line 2294 "yy.tab.c"
+#line 2295 "yy.tab.c"
     break;
 
   case 112:
-#line 442 "src/core/io/pajek-parser.y"
+#line 443 "src/core/io/pajek-parser.y"
                      { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2300 "yy.tab.c"
+#line 2301 "yy.tab.c"
     break;
 
   case 113:
-#line 444 "src/core/io/pajek-parser.y"
+#line 445 "src/core/io/pajek-parser.y"
                    {
   igraph_vector_push_back(context->vector, context->actfrom);
   igraph_vector_push_back(context->vector, labs((yyvsp[0].intnum))-1);
 }
-#line 2309 "yy.tab.c"
+#line 2310 "yy.tab.c"
     break;
 
   case 114:
-#line 449 "src/core/io/pajek-parser.y"
+#line 450 "src/core/io/pajek-parser.y"
                                                { context->directed=0; }
-#line 2315 "yy.tab.c"
+#line 2316 "yy.tab.c"
     break;
 
   case 121:
-#line 457 "src/core/io/pajek-parser.y"
+#line 458 "src/core/io/pajek-parser.y"
                       { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2321 "yy.tab.c"
+#line 2322 "yy.tab.c"
     break;
 
   case 122:
-#line 459 "src/core/io/pajek-parser.y"
+#line 460 "src/core/io/pajek-parser.y"
                     {
   igraph_vector_push_back(context->vector, context->actfrom);
   igraph_vector_push_back(context->vector, labs((yyvsp[0].intnum))-1);
 }
-#line 2330 "yy.tab.c"
+#line 2331 "yy.tab.c"
     break;
 
   case 124:
-#line 468 "src/core/io/pajek-parser.y"
+#line 469 "src/core/io/pajek-parser.y"
                        { context->actfrom=0;
                          context->actto=0;
                          context->directed=(context->vcount2==0);
                        }
-#line 2339 "yy.tab.c"
+#line 2340 "yy.tab.c"
     break;
 
   case 127:
-#line 475 "src/core/io/pajek-parser.y"
+#line 476 "src/core/io/pajek-parser.y"
                                         { context->actfrom++; context->actto=0; }
-#line 2345 "yy.tab.c"
+#line 2346 "yy.tab.c"
     break;
 
   case 130:
-#line 479 "src/core/io/pajek-parser.y"
+#line 480 "src/core/io/pajek-parser.y"
                        {
   if ((yyvsp[0].realnum) != 0) {
     if (context->vcount2==0) {
@@ -2363,46 +2364,46 @@ yyreduce:
   }
   context->actto++;
 }
-#line 2367 "yy.tab.c"
+#line 2368 "yy.tab.c"
     break;
 
   case 131:
-#line 499 "src/core/io/pajek-parser.y"
+#line 500 "src/core/io/pajek-parser.y"
              { (yyval.intnum)=igraph_pajek_get_number(igraph_pajek_yyget_text(scanner),
                                           igraph_pajek_yyget_leng(scanner)); }
-#line 2374 "yy.tab.c"
+#line 2375 "yy.tab.c"
     break;
 
   case 132:
-#line 502 "src/core/io/pajek-parser.y"
+#line 503 "src/core/io/pajek-parser.y"
              { (yyval.realnum)=igraph_pajek_get_number(igraph_pajek_yyget_text(scanner),
                                           igraph_pajek_yyget_leng(scanner)); }
-#line 2381 "yy.tab.c"
+#line 2382 "yy.tab.c"
     break;
 
   case 135:
-#line 507 "src/core/io/pajek-parser.y"
+#line 508 "src/core/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2388 "yy.tab.c"
+#line 2389 "yy.tab.c"
     break;
 
   case 136:
-#line 509 "src/core/io/pajek-parser.y"
+#line 510 "src/core/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2395 "yy.tab.c"
+#line 2396 "yy.tab.c"
     break;
 
   case 137:
-#line 511 "src/core/io/pajek-parser.y"
+#line 512 "src/core/io/pajek-parser.y"
              { (yyval.string).str=igraph_pajek_yyget_text(scanner)+1;
                (yyval.string).len=igraph_pajek_yyget_leng(scanner)-2; }
-#line 2402 "yy.tab.c"
+#line 2403 "yy.tab.c"
     break;
 
 
-#line 2406 "yy.tab.c"
+#line 2407 "yy.tab.c"
 
       default: break;
     }
@@ -2640,7 +2641,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 514 "src/core/io/pajek-parser.y"
+#line 515 "src/core/io/pajek-parser.y"
 
 
 int igraph_pajek_yyerror(YYLTYPE* locp,

@@ -49,6 +49,7 @@ extern int igraph_dl_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     NUM = 258,
     NEWLINE = 259,
     DL = 260,
@@ -75,7 +76,7 @@ union YYSTYPE
   long int integer;
   igraph_real_t real;
 
-#line 79 "yy.tab.h"
+#line 80 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

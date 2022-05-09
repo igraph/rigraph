@@ -164,6 +164,7 @@ extern int igraph_lgl_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     ALNUM = 258,
     NEWLINE = 259,
     HASH = 260,
@@ -180,7 +181,7 @@ union YYSTYPE
   long int edgenum;
   double weightnum;
 
-#line 184 "yy.tab.c"
+#line 185 "yy.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -572,8 +573,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    93,    93,    94,    95,    98,   100,   102,   102,   104,
-     109,   118,   123
+       0,    94,    94,    95,    96,    99,   101,   103,   103,   105,
+     110,   119,   124
 };
 #endif
 
@@ -582,9 +583,9 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "ALNUM", "NEWLINE", "HASH", "ERROR",
-  "$accept", "input", "vertex", "vertexdef", "edges", "edge", "edgeid",
-  "weight", YY_NULLPTR
+  "\"end of file\"", "error", "$undefined", "ALNUM", "NEWLINE", "\"#\"",
+  "ERROR", "$accept", "input", "vertex", "vertexdef", "edges", "edge",
+  "edgeid", "weight", YY_NULLPTR
 };
 #endif
 
@@ -1469,50 +1470,50 @@ yyreduce:
   switch (yyn)
     {
   case 6:
-#line 100 "src/core/io/lgl-parser.y"
+#line 101 "src/core/io/lgl-parser.y"
                                       { context->actvertex=(yyvsp[-1].edgenum); }
-#line 1475 "yy.tab.c"
+#line 1476 "yy.tab.c"
     break;
 
   case 9:
-#line 104 "src/core/io/lgl-parser.y"
+#line 105 "src/core/io/lgl-parser.y"
                                     {
              igraph_vector_push_back(context->vector, context->actvertex);
              igraph_vector_push_back(context->vector, (yyvsp[-1].edgenum));
              igraph_vector_push_back(context->weights, 0);
            }
-#line 1485 "yy.tab.c"
+#line 1486 "yy.tab.c"
     break;
 
   case 10:
-#line 109 "src/core/io/lgl-parser.y"
+#line 110 "src/core/io/lgl-parser.y"
                                     {
              igraph_vector_push_back(context->vector, context->actvertex);
              igraph_vector_push_back(context->vector, (yyvsp[-2].edgenum));
              igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum));
              context->has_weights = 1;
            }
-#line 1496 "yy.tab.c"
+#line 1497 "yy.tab.c"
     break;
 
   case 11:
-#line 118 "src/core/io/lgl-parser.y"
+#line 119 "src/core/io/lgl-parser.y"
                 { igraph_trie_get2(context->trie,
                                    igraph_lgl_yyget_text(scanner),
                                    igraph_lgl_yyget_leng(scanner),
                                    &(yyval.edgenum)); }
-#line 1505 "yy.tab.c"
+#line 1506 "yy.tab.c"
     break;
 
   case 12:
-#line 123 "src/core/io/lgl-parser.y"
+#line 124 "src/core/io/lgl-parser.y"
                 { (yyval.weightnum)=igraph_lgl_get_number(igraph_lgl_yyget_text(scanner),
                                            igraph_lgl_yyget_leng(scanner)); }
-#line 1512 "yy.tab.c"
+#line 1513 "yy.tab.c"
     break;
 
 
-#line 1516 "yy.tab.c"
+#line 1517 "yy.tab.c"
 
       default: break;
     }
@@ -1750,7 +1751,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 126 "src/core/io/lgl-parser.y"
+#line 127 "src/core/io/lgl-parser.y"
 
 
 int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,

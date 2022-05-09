@@ -165,6 +165,7 @@ extern int igraph_ncol_yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
+    END = 0,
     ALNUM = 258,
     NEWLINE = 259,
     ERROR = 260
@@ -180,7 +181,7 @@ union YYSTYPE
   long int edgenum;
   double weightnum;
 
-#line 184 "yy.tab.c"
+#line 185 "yy.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -572,7 +573,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    93,    93,    94,    95,    98,   103,   111,   116
+       0,    94,    94,    95,    96,    99,   104,   112,   117
 };
 #endif
 
@@ -581,8 +582,8 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "ALNUM", "NEWLINE", "ERROR", "$accept",
-  "input", "edge", "edgeid", "weight", YY_NULLPTR
+  "\"end of file\"", "error", "$undefined", "ALNUM", "NEWLINE", "ERROR",
+  "$accept", "input", "edge", "edgeid", "weight", YY_NULLPTR
 };
 #endif
 
@@ -1465,44 +1466,44 @@ yyreduce:
   switch (yyn)
     {
   case 5:
-#line 98 "src/core/io/ncol-parser.y"
+#line 99 "src/core/io/ncol-parser.y"
                                       {
            igraph_vector_push_back(context->vector, (yyvsp[-2].edgenum));
            igraph_vector_push_back(context->vector, (yyvsp[-1].edgenum));
            igraph_vector_push_back(context->weights, 0);
        }
-#line 1475 "yy.tab.c"
+#line 1476 "yy.tab.c"
     break;
 
   case 6:
-#line 103 "src/core/io/ncol-parser.y"
+#line 104 "src/core/io/ncol-parser.y"
                                       {
            igraph_vector_push_back(context->vector, (yyvsp[-3].edgenum));
            igraph_vector_push_back(context->vector, (yyvsp[-2].edgenum));
            igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum));
            context->has_weights = 1;
        }
-#line 1486 "yy.tab.c"
+#line 1487 "yy.tab.c"
     break;
 
   case 7:
-#line 111 "src/core/io/ncol-parser.y"
+#line 112 "src/core/io/ncol-parser.y"
                 { igraph_trie_get2(context->trie,
                   igraph_ncol_yyget_text(scanner),
                   igraph_ncol_yyget_leng(scanner),
                   &(yyval.edgenum)); }
-#line 1495 "yy.tab.c"
+#line 1496 "yy.tab.c"
     break;
 
   case 8:
-#line 116 "src/core/io/ncol-parser.y"
+#line 117 "src/core/io/ncol-parser.y"
                 { (yyval.weightnum)=igraph_ncol_get_number(igraph_ncol_yyget_text(scanner),
                         igraph_ncol_yyget_leng(scanner)); }
-#line 1502 "yy.tab.c"
+#line 1503 "yy.tab.c"
     break;
 
 
-#line 1506 "yy.tab.c"
+#line 1507 "yy.tab.c"
 
       default: break;
     }
@@ -1740,7 +1741,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 119 "src/core/io/ncol-parser.y"
+#line 120 "src/core/io/ncol-parser.y"
 
 
 int igraph_ncol_yyerror(YYLTYPE* locp,
