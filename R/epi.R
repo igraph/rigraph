@@ -137,7 +137,7 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
 #' @method plot sir
 #' @export
-#' @importFrom graphics plot lines
+#' @importFrom graphics lines
 #' @keywords graphs
 #' @examples
 #' 
