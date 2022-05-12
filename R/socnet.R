@@ -1203,7 +1203,7 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices dev.new
-#' @importFrom graphics plot hist lines legend
+#' @importFrom graphics hist lines legend
 #' @importFrom stats coef vcov
 
 .tkigraph.degree.dist <- function(power=FALSE) {
@@ -1468,7 +1468,7 @@ tkigraph <- function() {
   .tkigraph.showData(value, title=paste("Components of graph #", gnos))
 }
 
-#' @importFrom graphics hist plot
+#' @importFrom graphics hist
 #' @importFrom grDevices dev.new
 
 .tkigraph.calculate.clusters <- function() {
@@ -1582,7 +1582,7 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices dev.new
-#' @importFrom graphics layout layout.show par plot text
+#' @importFrom graphics layout layout.show par text
 
 .tkigraph.motifs.draw <- function() {
   read <- .tkigraph.dialogbox(TITLE="Draw all motifs",
@@ -1632,7 +1632,7 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices dev.new
-#' @importFrom graphics barplot layout layout.show par plot text
+#' @importFrom graphics barplot layout layout.show par text
 
 .tkigraph.motifs.find <- function() {
 
