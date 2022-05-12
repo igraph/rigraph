@@ -71,7 +71,7 @@
 #' @export
 #' @export plot.igraph
 #' @importFrom grDevices rainbow
-#' @importFrom graphics plot polygon text par
+#' @importFrom graphics polygon text par
 #' @keywords graphs
 #' @examples
 #' 
