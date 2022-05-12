@@ -365,7 +365,6 @@ summary.cohesiveBlocks <- function(object, ...) {
 #' @method plot cohesiveBlocks
 #' @export
 #' @importFrom grDevices rainbow
-#' @importFrom graphics plot
  
 plot.cohesiveBlocks <- function(x, y,
                                 colbar=rainbow(max(cohesion(x))+1),
@@ -378,7 +377,6 @@ plot.cohesiveBlocks <- function(x, y,
 
 #' @rdname cohesive_blocks
 #' @export
-#' @importFrom graphics plot
 
 plot_hierarchy <- function(blocks,
                           layout=layout_as_tree(hierarchy(blocks),
