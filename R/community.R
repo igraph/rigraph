@@ -1953,7 +1953,6 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
 #' @rdname communities
 #' @method plot communities
 #' @export
-#' @importFrom graphics plot
 
 plot.communities <- function(x, y,
                              col=membership(x),
@@ -2080,7 +2079,6 @@ plot_dendrogram.communities <- function(x,
 }
 
 #' @importFrom grDevices palette
-#' @importFrom graphics plot
 #' @importFrom stats rect.hclust
 
 dendPlotHclust <- function(communities, rect=length(communities),
@@ -2096,8 +2094,6 @@ dendPlotHclust <- function(communities, rect=length(communities),
   invisible(ret)
 }
 
-#' @importFrom graphics plot
-
 dendPlotDendrogram <- function(communities, hang=-1, ...,
                                use.modularity=FALSE) {
   plot(as.dendrogram(communities, hang=hang, use.modularity=use.modularity),
@@ -2105,7 +2101,6 @@ dendPlotDendrogram <- function(communities, hang=-1, ...,
 }
 
 #' @importFrom grDevices palette
-#' @importFrom graphics plot
 
 dendPlotPhylo <- function(communities, colbar=palette(),
                           col=colbar[membership(communities)],
