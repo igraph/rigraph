@@ -2368,10 +2368,6 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
 }
 
 void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
-#ifdef IGRAPH_SANITIZER_AVAILABLE
-    fprintf(stderr, "\nStack trace:\n");
-    __sanitizer_print_stack_trace();
-#endif
   IGRAPH_FINALLY_FREE();
   error(
     "At %s:%i : %s%s This is an unexpected igraph error; please report this "

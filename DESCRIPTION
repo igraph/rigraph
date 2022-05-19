@@ -36,4 +36,4 @@ Collate: 'adjacency.R' 'auto.R' 'assortativity.R' 'attributes.R'
         'uuid.R' 'versions.R' 'weakref.R' 'zzz-deprecate.R'
 RoxygenNote: 7.2.0
 NeedsCompilation: yes
-Packaged: 2022-05-19 15:47:30 UTC; runner
+Packaged: 2022-05-19 15:51:51 UTC; runner
