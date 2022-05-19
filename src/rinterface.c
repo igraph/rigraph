@@ -37,6 +37,18 @@
 
 #include <stdio.h>
 
+#if defined(__SANITIZE_ADDRESS__)
+#  define IGRAPH_SANITIZER_AVAILABLE 1
+#elif defined(__has_feature)
+#  if __has_feature(address_sanitizer)
+#    define IGRAPH_SANITIZER_AVAILABLE 1
+#  endif
+#endif
+
+#ifdef IGRAPH_SANITIZER_AVAILABLE
+#include <sanitizer/asan_interface.h>
+#endif
+
 SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_vector_int_to_SEXP(const igraph_vector_int_t *v);
 SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v);
@@ -2368,6 +2380,9 @@ static inline const char* maybe_add_punctuation(const char* msg, const char* pun
 }
 
 void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
+#ifdef IGRAPH_SANITIZER_AVAILABLE
+    __sanitizer_print_stack_trace();
+#endif
   IGRAPH_FINALLY_FREE();
   error(
     "At %s:%i : %s%s This is an unexpected igraph error; please report this "
