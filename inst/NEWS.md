@@ -1,5 +1,7 @@
 # Unreleased
 
+The C core is updated to 0.9.9, fixing a range of bugs.
+
 Fixed:
 
 - The length of size-zero `communities` objects is now reported correctly.
@@ -8,6 +10,10 @@ Fixed:
   precisely the same output for a given graph as before. To restore the previous
   behaviour, use `layout_with_kk(g, coord=layout_in_circle(g))` in 2D or
   `layout_with_kk(g, dim=3, coord=layout_on_sphere(g))` in 3D.
+
+Other:
+
+ - Documentation improvements and fixes.
 
 # igraph 1.3.1
 
@@ -31,7 +37,7 @@ Fixed:
   `sh2`.
 - `dominator_tree()` now conforms to its documentation with respect to the
   `dom` component of the result: it contains the indices of the dominator
-  vertices for each vertex and -1 for the root of the dominator tree.
+  vertices for each vertex and `-1` for the root of the dominator tree.
 - Mentions of the `"power"` algorithm of `page_rank()` have been removed from
   the documentation, as this method is no longer available.
 - Several other documentation fixes to bring the docs up to date with new behaviours
