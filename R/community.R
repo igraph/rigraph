@@ -1700,7 +1700,8 @@ cluster_label_prop <- function(graph, weights=NULL, initial=NULL, fixed=NULL) {
 #' modularity. When no vertices can be reassigned, each community is considered
 #' a vertex on its own, and the process starts again with the merged
 #' communities. The process stops when there is only a single vertex left or
-#' when the modularity cannot be increased any more in a step.
+#' when the modularity cannot be increased any more in a step. Since igraph 1.3,
+#' vertices are processed in a random order.
 #'
 #' This function was contributed by Tom Gregorovic.
 #'
