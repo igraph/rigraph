@@ -1274,6 +1274,8 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' This function samples graphs from a stochastic block model by (doing the
 #' equivalent of) Bernoulli trials for each potential edge with the
 #' probabilities given by the Bernoulli rate matrix, \code{pref.matrix}.
+#' The order of the vertices in the generated graph corresponds to the 
+#' \code{block.sizes} argument. 
 #' 
 #' @aliases sample_sbm sbm.game sbm
 #' @param n Number of vertices in the graph.
