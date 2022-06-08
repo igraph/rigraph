@@ -381,7 +381,7 @@ modularity <- function(x, ...)
 #' parameter typically results in more, smaller clusters when finding
 #' partitions with a high modularity. Lower values typically results in fewer,
 #' larger clusters. The original definition of modularity is retrieved when
-#' setting \eqn{\gamma}{gamma} to 1. 
+#' setting \eqn{\gamma}{gamma} to 1.
 #'
 #' If edge weights are given, then these are considered as the element of the
 #' \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
@@ -402,9 +402,9 @@ modularity <- function(x, ...)
 #' vector of the community structure.
 #' @param weights If not \code{NULL} then a numeric vector giving edge weights.
 #' @param resolution The resolution parameter. Must be greater than or equal to
-#' 0. Set it to 1 to use the classical definition of modularity. 
+#' 0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
-#' modularity. Ignored for undirected graphs. 
+#' modularity. Ignored for undirected graphs.
 #' @param \dots Additional arguments, none currently.
 #' @return For \code{modularity} a numeric scalar, the modularity score of the
 #' given configuration.
@@ -989,6 +989,50 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' Finding community structure of a graph using the Leiden algorithm of Traag,
 #' van Eck & Waltman.
 #'
+#' The Leiden algorithm is similar to the Louvain algorithm,
+#' \code{\link{cluster_louvain}}, but it is faster and yields higher quality
+#' solutions. It can optimize both modularity and the Constant Potts Model,
+#' which does not suffer from the resolution-limit (see preprint
+#' http://arxiv.org/abs/1104.3083).
+#'
+#' The Leiden algorithm consists of three phases: (1) local moving of nodes,
+#' (2) refinement of the partition and (3) aggregation of the network based on
+#' the refined partition, using the non-refined partition to create an initial
+#' partition for the aggregate network. In the local move procedure in the
+#' Leiden algorithm, only nodes whose neighborhood has changed are visited. The
+#' refinement is done by restarting from a singleton partition within each
+#' cluster and gradually merging the subclusters. When aggregating, a single
+#' cluster may then be represented by several nodes (which are the subclusters
+#' identified in the refinement).
+#'
+#' The Leiden algorithm provides several guarantees. The Leiden algorithm is
+#' typically iterated: the output of one iteration is used as the input for the
+#' next iteration. At each iteration all clusters are guaranteed to be
+#' connected and well-separated. After an iteration in which nothing has
+#' changed, all nodes and some parts are guaranteed to be locally optimally
+#' assigned. Finally, asymptotically, all subsets of all clusters are
+#' guaranteed to be locally optimally assigned. For more details, please see
+#' Traag, Waltman & van Eck (2019).
+#'
+#' The objective function being optimized is
+#'
+#' \deqn{\frac{1}{2m} \sum_{ij} (A_{ij} - \gamma n_i n_j)\delta(\sigma_i, \sigma_j)}{1 / 2m sum_ij (A_ij - gamma n_i n_j)d(s_i, s_j)}
+#'
+#' where \eqn{m}{m} is the total edge weight, \eqn{A_{ij}}{A_ij} is the weight
+#' of edge \eqn{(i, j)}, \eqn{\gamma}{gamma} is the so-called resolution
+#' parameter, \eqn{n_i} is the node weight of node \eqn{i}, \eqn{\sigma_i}{s_i}
+#' is the cluster of node \eqn{i} and \eqn{\delta(x, y) = 1}{d(x, y) = 1} if and
+#' only if \eqn{x = y} and \eqn{0} otherwise. By setting \eqn{n_i = k_i}, the
+#' degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m}, you
+#' effectively obtain an expression for modularity.
+#'
+#' Hence, the standard modularity will be optimized when you supply the degrees
+#' as \code{vertex_weights} and by supplying as a resolution parameter
+#' \eqn{\frac{1}{2m}}{1/(2m)}, with \eqn{m} the number of edges. If you do not
+#' specify any \code{vertex_weights}, the correct vertex weights and scaling of
+#' \eqn{\gamma}{gamma} is determined automatically by the
+#' \code{objective_function} argument.
+#'
 #' @param graph The input graph, only undirected graphs are supported.
 #' @param objective_function Whether to use the Constant Potts Model (CPM) or
 #'   modularity. Must be either \code{"CPM"} or \code{"modularity"}.
@@ -1010,9 +1054,9 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' @param n_iterations the number of iterations to iterate the Leiden
 #'   algorithm. Each iteration may improve the partition further.
 #' @param vertex_weights the vertex weights used in the Leiden algorithm.
-#'   If this is not provided, it will be automatically determined on the
-#'   basis of whether you want to use CPM or modularity. If you do provide
-#'   this, please make sure that you understand what you are doing.
+#'   If this is not provided, it will be automatically determined on the basis
+#'   of the \code{objective_function}. Please see the details of this function
+#'   how to interpret the vertex weights.
 #' @return \code{cluster_leiden} returns a \code{\link{communities}}
 #' object, please see the \code{\link{communities}} manual page for details.
 #' @author Vincent Traag

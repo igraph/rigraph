@@ -45,17 +45,59 @@ provided, the aglorithm simply starts from the singleton partition.}
 algorithm. Each iteration may improve the partition further.}
 
 \item{vertex_weights}{the vertex weights used in the Leiden algorithm.
-If this is not provided, it will be automatically determined on the
-basis of whether you want to use CPM or modularity. If you do provide
-this, please make sure that you understand what you are doing.}
+If this is not provided, it will be automatically determined on the basis
+of the \code{objective_function}. Please see the details of this function
+how to interpret the vertex weights.}
 }
 \value{
 \code{cluster_leiden} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{
-Finding community structure of a graph using the Leiden algorithm of Traag,
-van Eck & Waltman.
+The Leiden algorithm is similar to the Louvain algorithm,
+\code{\link{cluster_louvain}}, but it is faster and yields higher quality
+solutions. It can optimize both modularity and the Constant Potts Model,
+which does not suffer from the resolution-limit (see preprint
+http://arxiv.org/abs/1104.3083).
+}
+\details{
+The Leiden algorithm consists of three phases: (1) local moving of nodes,
+(2) refinement of the partition and (3) aggregation of the network based on
+the refined partition, using the non-refined partition to create an initial
+partition for the aggregate network. In the local move procedure in the
+Leiden algorithm, only nodes whose neighborhood has changed are visited. The
+refinement is done by restarting from a singleton partition within each
+cluster and gradually merging the subclusters. When aggregating, a single
+cluster may then be represented by several nodes (which are the subclusters
+identified in the refinement).
+
+The Leiden algorithm provides several guarantees. The Leiden algorithm is
+typically iterated: the output of one iteration is used as the input for the
+next iteration. At each iteration all clusters are guaranteed to be
+connected and well-separated. After an iteration in which nothing has
+changed, all nodes and some parts are guaranteed to be locally optimally
+assigned. Finally, asymptotically, all subsets of all clusters are
+guaranteed to be locally optimally assigned. For more details, please see
+Traag, Waltman & van Eck (2019).
+
+The objective function being optimized is
+
+\deqn{\frac{1}{2m} \sum_{ij} (A_{ij} - \gamma n_i n_j)\delta(\sigma_i, \sigma_j)}{1 / 2m sum_ij (A_ij - gamma n_i n_j)d(s_i, s_j)}
+
+where \eqn{m}{m} is the total edge weight, \eqn{A_{ij}}{A_ij} is the weight
+of edge \eqn{(i, j)}, \eqn{\gamma}{gamma} is the so-called resolution
+parameter, \eqn{n_i} is the node weight of node \eqn{i}, \eqn{\sigma_i}{s_i}
+is the cluster of node \eqn{i} and \eqn{\delta(x, y) = 1}{d(x, y) = 1} if and
+only if \eqn{x = y} and \eqn{0} otherwise. By setting \eqn{n_i = k_i}, the
+degree of node \eqn{i}, and dividing \eqn{\gamma}{gamma} by \eqn{2m}, you
+effectively obtain an expression for modularity.
+
+Hence, the standard modularity will be optimized when you supply the degrees
+as \code{vertex_weights} and by supplying as a resolution parameter
+\eqn{\frac{1}{2m}}{1/(2m)}, with \eqn{m} the number of edges. If you do not
+specify any \code{vertex_weights}, the correct vertex weights and scaling of
+\eqn{\gamma}{gamma} is determined automatically by the
+\code{objective_function} argument.
 }
 \examples{
 g <- graph.famous("Zachary")

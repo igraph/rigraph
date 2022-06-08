@@ -66,7 +66,7 @@ modularity. Maximizing modularity with higher values of the resolution
 parameter typically results in more, smaller clusters when finding
 partitions with a high modularity. Lower values typically results in fewer,
 larger clusters. The original definition of modularity is retrieved when
-setting \eqn{\gamma}{gamma} to 1. 
+setting \eqn{\gamma}{gamma} to 1.
 
 If edge weights are given, then these are considered as the element of the
 \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
