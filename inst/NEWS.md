@@ -10,6 +10,9 @@ Fixed:
   precisely the same output for a given graph as before. To restore the previous
   behaviour, use `layout_with_kk(g, coord=layout_in_circle(g))` in 2D or
   `layout_with_kk(g, dim=3, coord=layout_on_sphere(g))` in 3D.
+- Indexing an `igraph.vs` object with `v[x, na_ok=T]` now correctly handles the
+  `na_ok` argument in all cases; previous versions ignored it when `x` was
+  a single number.
 
 Other:
 
