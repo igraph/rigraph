@@ -246,68 +246,6 @@
 #' plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
 #'      vertex.size=seq(10,20,length.out=vcount(g)),
 #'      vertex.norays=rep(4:8, length.out=vcount(g)))
-#'
-#' #################################################################
-#' # Pictures as vertices.
-#' # Similar musicians from last.fm, we start from an artist and
-#' # will query two levels. We will use the XML, png and jpeg packages
-#' # for this, so these must be available. Otherwise the example is
-#' # skipped
-#'
-#' loadIfYouCan <- function(pkg) suppressWarnings(do.call(require, list(pkg)))
-#'
-#' if (loadIfYouCan("XML") && loadIfYouCan("png") &&
-#'     loadIfYouCan("jpeg")) {
-#'   url <- paste(sep="",
-#'                'http://ws.audioscrobbler.com/',
-#'                '2.0/?method=artist.getinfo&artist=%s',
-#'                '&api_key=1784468ada3f544faf9172ee8b99fca3')
-#'   getartist <- function(artist) {
-#'     cat("Downloading from last.fm. ... ")
-#'     txt <- readLines(sprintf(url, URLencode(artist)))
-#'     xml <- xmlTreeParse(txt, useInternal=TRUE)
-#'     img <- xpathSApply(xml, "/lfm/artist/image[@@size='medium'][1]",
-#'                        xmlValue)
-#'     if (img != "") {
-#'       con <- url(img, open="rb")
-#'       bin <- readBin(con, what="raw", n=10^6)
-#'       close(con)
-#'       if (grepl("\\\\.png$", img)) {
-#'         rast <- readPNG(bin, native=TRUE)
-#'       } else if (grepl("\\\\.jpe?g$", img)) {
-#'         rast <- readJPEG(bin, native=TRUE)
-#'       } else {
-#'         rast <- as.raster(matrix())
-#'       }
-#'     } else {
-#'       rast <- as.raster(numeric())
-#'     }
-#'     sim <- xpathSApply(xml, "/lfm/artist/similar/artist/name", xmlValue)
-#'     cat("done.\\n")
-#'     list(name=artist, image=rast, similar=sim)
-#'   }
-#'
-#'   ego <- getartist("Placebo")
-#'   similar <- lapply(ego$similar, getartist)
-#'
-#'   edges1 <- cbind(ego$name, ego$similar)
-#'   edges2 <- lapply(similar, function(x) cbind(x$name, x$similar))
-#'   edges3 <- rbind(edges1, do.call(rbind, edges2))
-#'   edges <- edges3[ edges3[,1] %in% c(ego$name, ego$similar) &
-#'                    edges3[,2] %in% c(ego$name, ego$similar), ]
-#'
-#'   musnet <- simplify(graph_from_data_frame(edges, dir=FALSE,
-#'                      vertices=data.frame(name=c(ego$name, ego$similar))))
-#'   print_all(musnet)
-#'
-#'   V(musnet)$raster <- c(list(ego$image), lapply(similar, "[[", "image"))
-#'   plot(musnet, layout=layout_as_star, vertex.shape="raster",
-#'        vertex.label=V(musnet)$name, margin=.2,
-#'        vertex.size=50, vertex.size2=50,
-#'        vertex.label.dist=2, vertex.label.degree=0)
-#' } else {
-#'   message("You need the `XML', `png' and `jpeg' packages to run this")
-#' }
 
 shapes <- function(shape=NULL) {
   if (is.null(shape)) {
