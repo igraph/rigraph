@@ -445,7 +445,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   ## Special case: single numeric argument
   if (length(args) == 1 && inherits(args[[1]]$expr, "numeric")) {
-    res <- simple_vs_index(x, args[[1]]$expr)
+    res <- simple_vs_index(x, args[[1]]$expr, na_ok)
     return (add_vses_graph_ref(res, get_vs_graph(x)))
   }
 
@@ -453,7 +453,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   if (length(args) == 1 && inherits(args[[1]]$expr, "name")) {
     graph <- get_vs_graph(x)
     if (! (as.character(args[[1]]$expr) %in% vertex_attr_names(graph))) {
-      res <- simple_vs_index(x, lazy_eval(args[[1]]))
+      res <- simple_vs_index(x, lazy_eval(args[[1]]), na_ok)
       return (add_vses_graph_ref(res, graph))
     }
   }
