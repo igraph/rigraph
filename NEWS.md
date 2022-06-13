@@ -1,4 +1,4 @@
-# Unreleased
+# igraph 1.3.2
 
 The C core is updated to 0.9.9, fixing a range of bugs.
 

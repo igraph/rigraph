@@ -148,10 +148,10 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
 #' 
-#' The algorithms \dQuote{interv} and \dQuote{interv\_km} solve approximately
+#' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
 #' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
-#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv\_km}, the (Lloyd)
+#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
 #' 
@@ -161,7 +161,7 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' each minimizing partition. In general the size of the final partition is not
 #' known in advance when \code{ncol(V)}>1.
 #' 
-#' Finally, the algorithm \dQuote{exact\_scg} groups the vertices with equal
+#' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
 #' linear running time and memory load.
 #'
@@ -171,22 +171,22 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' @param nt A vector of positive integers of length one or equal to
 #' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
 #' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv\_km} or \dQuote{interv}, \code{nt}
+#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
 #' contains the number of intervals used to partition each eigenvector. The
 #' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact\_cg} this
+#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
 #' parameter is ignored.
 #' @param mtype The type of semi-projectors used in the SCG. For now
 #' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
 #' available.
 #' @param algo The algorithm used to solve the SCG problem. Possible values are
-#' \dQuote{optimum}, \dQuote{interv\_km}, \dQuote{interv} and
-#' \dQuote{exact\_scg}.
+#' \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv} and
+#' \dQuote{exact_scg}.
 #' @param p A probability vector of length equal to \code{nrow(V)}. \code{p} is
 #' the stationary probability distribution of a Markov chain when \code{mtype}
 #' = \dQuote{stochastic}. This parameter is ignored in all other cases.
 #' @param maxiter A positive integer giving the maximum number of iterations of
-#' the k-means algorithm when \code{algo} = \dQuote{interv\_km}. This parameter
+#' the k-means algorithm when \code{algo} = \dQuote{interv_km}. This parameter
 #' is ignored in all other cases.
 #' @return A vector of \code{nrow(V)} integers giving the group label of each
 #' object (vertex) in the partition.
@@ -397,10 +397,10 @@ scg_semi_proj <- function(groups,
 #' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
 #' 
-#' The algorithms \dQuote{interv} and \dQuote{interv\_km} solve approximately
+#' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
 #' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
-#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv\_km}, the (Lloyd)
+#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
 #' 
@@ -410,7 +410,7 @@ scg_semi_proj <- function(groups,
 #' each minimizing partition. In general the size of the final partition is not
 #' known in advance when \code{ncol(V)}>1.
 #' 
-#' Finally, the algorithm \dQuote{exact\_scg} groups the vertices with equal
+#' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
 #' linear running time and memory load.
 #' 
@@ -423,10 +423,10 @@ scg_semi_proj <- function(groups,
 #' @param nt A vector of positive integers of length one or equal to
 #' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
 #' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv\_km} or \dQuote{interv}, \code{nt}
+#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
 #' contains the number of intervals used to partition each eigenvector. The
 #' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact\_cg} this
+#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
 #' parameter is ignored.
 #' @param groups A vector of \code{nrow(X)} or \code{vcount(X)} integers
 #' labeling each group vertex in the partition. If this parameter is supplied
@@ -435,8 +435,8 @@ scg_semi_proj <- function(groups,
 #' SCG. For now \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic}
 #' are available.
 #' @param algo Character scalar. The algorithm used to solve the SCG problem.
-#' Possible values are \dQuote{optimum}, \dQuote{interv\_km}, \dQuote{interv}
-#' and \dQuote{exact\_scg}.
+#' Possible values are \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv}
+#' and \dQuote{exact_scg}.
 #' @param norm Character scalar. Either \dQuote{row} or \dQuote{col}. If set to
 #' \dQuote{row} the rows of the Laplacian matrix sum up to zero and the rows of
 #' the stochastic matrix sum up to one; otherwise it is the columns.
@@ -460,7 +460,7 @@ scg_semi_proj <- function(groups,
 #' or matrices. This argument is not implemented currently and LAPACK is used
 #' for solving the eigenproblems.
 #' @param maxiter A positive integer giving the maximum number of iterations
-#' for the k-means algorithm when \code{algo} = \dQuote{interv\_km}. This
+#' for the k-means algorithm when \code{algo} = \dQuote{interv_km}. This
 #' parameter is ignored in all other cases.
 #' @param sparse Logical scalar. Whether to return sparse matrices in the
 #' result, if matrices are requested.
