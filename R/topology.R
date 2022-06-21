@@ -184,7 +184,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
       names(res$map) <- V(target)$name[res$map]
     }
   }
-  if (all.maps) res$maps <- lapply(res$maps, function(x) V(target)[x+1])
+  if (all.maps) res$maps <- lapply(res$maps, function(.x) V(target)[.x+1])
 
   res
 }
