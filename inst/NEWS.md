@@ -1,3 +1,14 @@
+# Unreleased
+
+Deprecated:
+
+- Names of functions that can be used inside a `V()` or `E()` indexing start
+  with a dot since igraph 1.1.1; however, the old dotless names did not print
+  a deprecation warning so this may have gone unnoticed for years. We are
+  introducting a deprecation warning for `nei()`, `innei()`, `outnei()`,
+  `inc()`, `from()` and `to()` inside single-bracket indexing of vertex and
+  edge sequences and will remove the old variants soon.
+
 # igraph 1.3.2
 
 The C core is updated to 0.9.9, fixing a range of bugs.
