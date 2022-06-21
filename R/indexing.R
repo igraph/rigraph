@@ -309,7 +309,8 @@
   } else {
     if (!edges) {
       mode <- if (directed) "out" else "all"
-      lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[j])
+      .j <- j   # to prevent problems if we hav a vertex attribute named "j"
+      lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[.j])
     } else {
       i <- as.igraph.vs(x, i)
       j <- as.igraph.vs(x, j)
