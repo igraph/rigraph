@@ -265,3 +265,14 @@ test_that("[[ returns vertex and edges sequences", {
   expect_true(is_igraph_es(g[[1:3, 2:6, edges = TRUE]][[1]]))
 
 })
+
+test_that("[[ handles from and to properly even if the graph has conflicting vertex attributes", {
+  
+  ## from & to
+  g <- make_tree(20)
+  V(g)$i <- 200:219
+  V(g)$j <- 200:219
+  expect_true(is_igraph_vs(g[[1:3, 2:6]][[1]]))
+  expect_true(is_igraph_vs(g[[from = 1:3, to = 2:6]][[1]]))
+
+})

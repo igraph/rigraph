@@ -1,5 +1,14 @@
 # Unreleased
 
+Added:
+
+- Single-bracket indexing of `V()` and `E()` resolves attribute names in the
+  indexing expressions by default (for instance, `E(g)[weight > x]` matches
+  edges with a weight larger than a threshold). This can be problematic if the
+  attribute masks one of the variables in the local evaluation context.
+  Attribute name lookup can now be turned off by passing `resolve_attrs = FALSE`
+  to the indexing expression.
+
 Deprecated:
 
 - Names of functions that can be used inside a `V()` or `E()` indexing start

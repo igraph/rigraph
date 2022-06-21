@@ -5,7 +5,7 @@
 \alias{[.igraph.vs}
 \title{Indexing vertex sequences}
 \usage{
-\method{[}{igraph.vs}(x, ..., na_ok = FALSE)
+\method{[}{igraph.vs}(x, ..., na_ok = FALSE, resolve_attrs = TRUE)
 }
 \arguments{
 \item{x}{A vertex sequence.}
@@ -14,6 +14,9 @@
 
 \item{na_ok}{Whether it is OK to have \code{NA}s in the vertex
 sequence.}
+
+\item{resolve_attrs}{Whether names of vertex attributes are resolved to their
+corresponding values within the indexing expression.}
 }
 \value{
 Another vertex sequence, referring to the same graph.
@@ -61,7 +64,10 @@ negative numeric vectors, logical vectors, character vectors:
 When indexing vertex sequences, vertex attributes can be referred
 to simply by using their names. E.g. if a graph has a \code{name} vertex
 attribute, then \code{V(g)[name == "foo"]} is equivalent to
-\code{V(g)[V(g)$name == "foo"]}. See examples below.
+\code{V(g)[V(g)$name == "foo"]}. See examples below. This can be turned
+off by passing \code{FALSE} to \code{resolve_attrs}, which is helpful in
+situations where a vertex attribute may mask a variable in the scope the
+indexing expression is evaluated.
 }
 
 \section{Special functions}{
@@ -118,6 +124,19 @@ g <- graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)[ .nei( c('B', 'D') ) ]
 V(g)[ .nei( c('B', 'D'), "in" ) ]
 V(g)[ .nei( c('B', 'D'), "out" ) ]
+
+# -----------------------------------------------------------------
+# Resolving attributes
+g <- graph(~ A -+ B, B -+ C:D, D -+ B)
+V(g)$color <- c("red", "red", "green", "green")
+V(g)[ color == "red" ]
+
+# Indexing with a variable whose name matches the name of an attribute
+# may fail; use resolve_attrs = FALSE to prevent that
+V(g)$x <- 10:13
+x <- 2
+V(g)[x, resolve_attrs=FALSE]
+
 }
 \seealso{
 Other vertex and edge sequences: 
