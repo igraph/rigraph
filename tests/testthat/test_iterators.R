@@ -79,7 +79,7 @@ test_that("indexing with characters work as expected", {
   expect_error(E(g)[6:9]['a|b'], 'Unknown edge selected')
 })
 
-test_that("attribute resolution can be turned off", {
+test_that("variable lookup in environment works", {
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
@@ -88,11 +88,11 @@ test_that("attribute resolution can be turned off", {
   name <- c("d", "e")
   index <- 3
 
-  # resolve_attrs is TRUE by default, which means that attribute names take
-  # precedence over local variables
+  # attribute names take precedence over local variables by default...
   expect_equal(as.vector(V(g)[name]), 1:10)
   expect_error(E(g)[index], 'Unknown edge selected')
 
-  expect_equal(as.vector(V(g)[name, resolve_attrs=FALSE]), c(4, 5))
-  expect_equal(as.vector(E(g)[index, resolve_attrs=FALSE]), 3)
+  # ...but you can use .env to get access to the variables
+  expect_equal(as.vector(V(g)[.env$name]), c(4, 5))
+  expect_equal(as.vector(E(g)[.env$index]), 3)
 })

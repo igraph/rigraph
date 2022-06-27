@@ -361,10 +361,14 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' When indexing vertex sequences, vertex attributes can be referred
 #' to simply by using their names. E.g. if a graph has a \code{name} vertex
 #' attribute, then \code{V(g)[name == "foo"]} is equivalent to
-#' \code{V(g)[V(g)$name == "foo"]}. See examples below. This can be turned
-#' off by passing \code{FALSE} to \code{resolve_attrs}, which is helpful in
-#' situations where a vertex attribute may mask a variable in the scope the
-#' indexing expression is evaluated.
+#' \code{V(g)[V(g)$name == "foo"]}. See more examples below. Note that attribute
+#' names mask the names of variables present in the calling environment; if
+#' you need to look up a variable and you do not want a similarly named
+#' vertex attribute to mask it, use the \code{.env} pronoun to perform the
+#' name lookup in the calling environment. In other words, use
+#' \code{V(g)[.env$name == "foo"]} to make sure that \code{name} is looked up
+#' from the calling environment even if there is a vertex attribute with the
+#' same name. Similarly, you can use \code{.data} to match attribute names only.
 #'
 #' @section Special functions:
 #' There are some special igraph functions that can be used only
@@ -393,8 +397,6 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' @param ... Indices, see details below.
 #' @param na_ok Whether it is OK to have \code{NA}s in the vertex
 #'   sequence.
-#' @param resolve_attrs Whether names of vertex attributes are resolved to their
-#'   corresponding values within the indexing expression.
 #' @return Another vertex sequence, referring to the same graph.
 #' 
 #' @method [ igraph.vs
@@ -440,13 +442,13 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' V(g)[ color == "red" ]
 #'
 #' # Indexing with a variable whose name matches the name of an attribute
-#' # may fail; use resolve_attrs = FALSE to prevent that
+#' # may fail; use .env to force the name lookup in the parent environment
 #' V(g)$x <- 10:13
 #' x <- 2
-#' V(g)[x, resolve_attrs=FALSE]
+#' V(g)[.env$x]
 #'
 
-`[.igraph.vs` <- function(x, ..., na_ok = FALSE, resolve_attrs = TRUE) {
+`[.igraph.vs` <- function(x, ..., na_ok = FALSE) {
 
   args <- lazy_dots(..., .follow_symbols = FALSE)
 
@@ -542,14 +544,11 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   } else {
 
-    if (resolve_attrs) {
-      attrs <- vertex_attr(graph)
-      xvec <- as.vector(x)
-      for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
-    } else {
-      attrs <- list()
-    }
+    attrs <- vertex_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
+    env <- parent.frame()
     res <- lazy_eval(
       args,
       data = c(
@@ -557,9 +556,11 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
         .nei = .nei, nei = nei,
         .innei = .innei, innei = innei,
         .outnei = .outnei, outnei = outnei,
-        adj = adj, .inc = .inc, inc = inc,
+        .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
-        .to = .to, to = to
+        .to = .to, to = to,
+        .env = env,
+        .data = attrs
       )
     )
 
@@ -712,11 +713,15 @@ simple_es_index <- function(x, i) {
 #' @section Edge attributes:
 #' When indexing edge sequences, edge attributes can be referred
 #' to simply by using their names. E.g. if a graph has a \code{weight} edge
-#' attribute, then \code{E(G)[weight > 1]} selects all edges with a larger
-#' than one weight. See more examples below. This can be turned off by passing
-#' \code{FALSE} to \code{resolve_attrs}, which is helpful in situations where an
-#' edge attribute may mask a variable in the scope the indexing expression is
-#' evaluated.
+#' attribute, then \code{E(G)[weight > 1]} selects all edges with a weight
+#' larger than one. See more examples below. Note that attribute names mask the
+#' names of variables present in the calling environment; if you need to look up
+#' a variable and you do not want a similarly named edge attribute to mask it,
+#' use the \code{.env} pronoun to perform the name lookup in the calling
+#' environment. In other words, use \code{E(g)[.env$weight > 1]} to make sure
+#' that \code{weight} is looked up from the calling environment even if there is
+#' an edge attribute with the same name. Similarly, you can use \code{.data} to
+#' match attribute names only.
 #'
 #' @section Special functions:
 #' There are some special igraph functions that can be used
@@ -747,8 +752,6 @@ simple_es_index <- function(x, i) {
 #' @aliases %--% %<-% %->%
 #' @param x An edge sequence
 #' @param ... Indices, see details below.
-#' @param resolve_attrs Whether names of edge attributes are resolved to their
-#'   corresponding values within the indexing expression.
 #' @return Another edge sequence, referring to the same graph.
 #' 
 #' @method [ igraph.es
@@ -778,13 +781,13 @@ simple_es_index <- function(x, i) {
 #' E(g)[[ weight < 0 ]]
 #'
 #' # Indexing with a variable whose name matches the name of an attribute
-#' # may fail; use resolve_attrs = FALSE to prevent that
+#' # may fail; use .env to force the name lookup in the parent environment
 #' E(g)$x <- E(g)$weight
 #' x <- 2
-#' E(g)[ x, resolve_attrs=FALSE]
+#' E(g)[.env$x]
 #'
 
-`[.igraph.es` <- function(x, ..., resolve_attrs = TRUE) {
+`[.igraph.es` <- function(x, ...) {
 
   args <- lazy_dots(..., .follow_symbols = TRUE)
 
@@ -830,14 +833,11 @@ simple_es_index <- function(x, i) {
 
   } else {
 
-    if (resolve_attrs) {
-      attrs <- edge_attr(graph)
-      xvec <- as.vector(x)
-      for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
-    } else {
-      attrs <- list()
-    }
+    attrs <- edge_attr(graph)
+    xvec <- as.vector(x)
+    for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
 
+    env <- parent.frame()
     res <- lazy_eval(
       args,
       data = c(
@@ -848,7 +848,9 @@ simple_es_index <- function(x, i) {
         .igraph.from = list(.Call(C_R_igraph_mybracket, graph, 3L)[ as.numeric(x) ]),
         .igraph.to = list(.Call(C_R_igraph_mybracket, graph, 4L)[as.numeric(x)]),
         .igraph.graph = list(graph),
-        `%--%`=`%--%`, `%->%`=`%->%`, `%<-%`=`%<-%`
+        `%--%`=`%--%`, `%->%`=`%->%`, `%<-%`=`%<-%`,
+        .env = env,
+        .data = attrs
       )
     )
     
