@@ -6,8 +6,12 @@ Added:
   indexing expressions by default (for instance, `E(g)[weight > x]` matches
   edges with a weight larger than a threshold). This can be problematic if the
   attribute masks one of the variables in the local evaluation context.
-  Attribute name lookup can now be turned off by passing `resolve_attrs = FALSE`
-  to the indexing expression.
+  We now have a pronoun called `.env` (similarly to `rlang::.env`) that
+  allows you to force attribute name lookup to the calling environment. For
+  sake of completeness, we also provide `.data` (similarly to `rlang::.data`)
+  to force attribute name lookup to the vertex / edge attributes only. These
+  pronouns are automatically injected into the environment where the indexing
+  expression is evaluated.
 
 Deprecated:
 

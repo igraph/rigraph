@@ -5,7 +5,7 @@
 \alias{[.igraph.vs}
 \title{Indexing vertex sequences}
 \usage{
-\method{[}{igraph.vs}(x, ..., na_ok = FALSE, resolve_attrs = TRUE)
+\method{[}{igraph.vs}(x, ..., na_ok = FALSE)
 }
 \arguments{
 \item{x}{A vertex sequence.}
@@ -14,9 +14,6 @@
 
 \item{na_ok}{Whether it is OK to have \code{NA}s in the vertex
 sequence.}
-
-\item{resolve_attrs}{Whether names of vertex attributes are resolved to their
-corresponding values within the indexing expression.}
 }
 \value{
 Another vertex sequence, referring to the same graph.
@@ -64,10 +61,14 @@ negative numeric vectors, logical vectors, character vectors:
 When indexing vertex sequences, vertex attributes can be referred
 to simply by using their names. E.g. if a graph has a \code{name} vertex
 attribute, then \code{V(g)[name == "foo"]} is equivalent to
-\code{V(g)[V(g)$name == "foo"]}. See examples below. This can be turned
-off by passing \code{FALSE} to \code{resolve_attrs}, which is helpful in
-situations where a vertex attribute may mask a variable in the scope the
-indexing expression is evaluated.
+\code{V(g)[V(g)$name == "foo"]}. See more examples below. Note that attribute
+names mask the names of variables present in the calling environment; if
+you need to look up a variable and you do not want a similarly named
+vertex attribute to mask it, use the \code{.env} pronoun to perform the
+name lookup in the calling environment. In other words, use
+\code{V(g)[.env$name == "foo"]} to make sure that \code{name} is looked up
+from the calling environment even if there is a vertex attribute with the
+same name. Similarly, you can use \code{.data} to match attribute names only.
 }
 
 \section{Special functions}{
@@ -132,10 +133,10 @@ V(g)$color <- c("red", "red", "green", "green")
 V(g)[ color == "red" ]
 
 # Indexing with a variable whose name matches the name of an attribute
-# may fail; use resolve_attrs = FALSE to prevent that
+# may fail; use .env to force the name lookup in the parent environment
 V(g)$x <- 10:13
 x <- 2
-V(g)[x, resolve_attrs=FALSE]
+V(g)[.env$x]
 
 }
 \seealso{

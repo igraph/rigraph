@@ -8,15 +8,12 @@
 \alias{\%->\%}
 \title{Indexing edge sequences}
 \usage{
-\method{[}{igraph.es}(x, ..., resolve_attrs = TRUE)
+\method{[}{igraph.es}(x, ...)
 }
 \arguments{
 \item{x}{An edge sequence}
 
 \item{...}{Indices, see details below.}
-
-\item{resolve_attrs}{Whether names of edge attributes are resolved to their
-corresponding values within the indexing expression.}
 }
 \value{
 Another edge sequence, referring to the same graph.
@@ -62,11 +59,15 @@ negative numeric vectors, logical vectors, character vectors:
 
 When indexing edge sequences, edge attributes can be referred
 to simply by using their names. E.g. if a graph has a \code{weight} edge
-attribute, then \code{E(G)[weight > 1]} selects all edges with a larger
-than one weight. See more examples below. This can be turned off by passing
-\code{FALSE} to \code{resolve_attrs}, which is helpful in situations where an
-edge attribute may mask a variable in the scope the indexing expression is
-evaluated.
+attribute, then \code{E(G)[weight > 1]} selects all edges with a weight
+larger than one. See more examples below. Note that attribute names mask the
+names of variables present in the calling environment; if you need to look up
+a variable and you do not want a similarly named edge attribute to mask it,
+use the \code{.env} pronoun to perform the name lookup in the calling
+environment. In other words, use \code{E(g)[.env$weight > 1]} to make sure
+that \code{weight} is looked up from the calling environment even if there is
+an edge attribute with the same name. Similarly, you can use \code{.data} to
+match attribute names only.
 }
 
 \section{Special functions}{
@@ -118,10 +119,10 @@ g <- sample_gnp(20, 3/20) \%>\%
 E(g)[[ weight < 0 ]]
 
 # Indexing with a variable whose name matches the name of an attribute
-# may fail; use resolve_attrs = FALSE to prevent that
+# may fail; use .env to force the name lookup in the parent environment
 E(g)$x <- E(g)$weight
 x <- 2
-E(g)[ x, resolve_attrs=FALSE]
+E(g)[.env$x]
 
 }
 \seealso{
