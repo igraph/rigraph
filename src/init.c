@@ -346,6 +346,7 @@ extern SEXP R_igraph_realize_degree_sequence(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_recent_degree_aging_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_recent_degree_game(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_reciprocity(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_reverse_edges(SEXP, SEXP);
 extern SEXP R_igraph_rewire(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire_directed_edges(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_rewire_edges(SEXP, SEXP, SEXP, SEXP);
@@ -739,6 +740,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_recent_degree_aging_game",                   (DL_FUNC) &R_igraph_recent_degree_aging_game,                   10},
     {"R_igraph_recent_degree_game",                         (DL_FUNC) &R_igraph_recent_degree_game,                          8},
     {"R_igraph_reciprocity",                                (DL_FUNC) &R_igraph_reciprocity,                                 3},
+    {"R_igraph_reverse_edges",                              (DL_FUNC) &R_igraph_reverse_edges,                               2},
     {"R_igraph_rewire",                                     (DL_FUNC) &R_igraph_rewire,                                      3},
     {"R_igraph_rewire_directed_edges",                      (DL_FUNC) &R_igraph_rewire_directed_edges,                       4},
     {"R_igraph_rewire_edges",                               (DL_FUNC) &R_igraph_rewire_edges,                                4},

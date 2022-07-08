@@ -403,6 +403,19 @@ page_rank <- function(graph, algo=c("prpack", "arpack"), vids=V(graph), directed
 }
 
 #' @export
+reverse_edges <- function(graph, eids=E(graph)) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  eids <- as.igraph.es(graph, eids)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_reverse_edges, graph, eids-1)
+
+  res
+}
+
+#' @export
 mean_distance <- function(graph, weights=NULL, directed=TRUE, unconnected=TRUE, details=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

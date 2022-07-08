@@ -2,6 +2,8 @@
 
 Added:
 
+- `reverse_edges()` reverses specific or all edges in a graph.
+
 - Single-bracket indexing of `V()` and `E()` resolves attribute names in the
   indexing expressions by default (for instance, `E(g)[weight > x]` matches
   edges with a weight larger than a threshold). This can be problematic if the

@@ -10993,6 +10993,33 @@ SEXP R_igraph_subgraph_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
 }
 
 /*-------------------------------------------/
+/ igraph_reverse_edges                       /
+/-------------------------------------------*/
+SEXP R_igraph_reverse_edges(SEXP graph, SEXP eids) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_es_t c_eids;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph_copy(graph, &c_graph);
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  R_SEXP_to_igraph_es(eids, &c_graph, &c_eids);
+                                        /* Call igraph */
+  igraph_reverse_edges(&c_graph, c_eids);
+
+                                        /* Convert output */
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_eids);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_average_path_length_dijkstra        /
 /-------------------------------------------*/
 SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP directed, SEXP unconn) {

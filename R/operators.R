@@ -1164,3 +1164,22 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
     stop("Cannot multiply igraph graph with this type")
   }
 }
+
+#' Reverse edges in a graph
+#'
+#' The new graph will contain the same vertices, edges and attributes as
+#' the original graph, except that the direction of the edges selected by
+#' their edge IDs in the \code{eids} argument will be reversed.
+#'
+#' @param graph The input graph.
+#' @param eids The edge IDs of the edges to reverse.
+#' @return The result graph where the direction of the edges with the given
+#'   IDs are reversed
+#'
+#' @examples
+#' 
+#' g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
+#' reverse_edges(g, 2)
+#' @export
+
+reverse_edges <- reverse_edges
