@@ -1189,4 +1189,4 @@ reverse_edges <- reverse_edges
 #' @method t igraph
 #' @export
 
-t.igraph <- reverse_edges
+t.igraph <- function(x) reverse_edges(x)
