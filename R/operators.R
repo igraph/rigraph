@@ -1169,7 +1169,8 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' The new graph will contain the same vertices, edges and attributes as
 #' the original graph, except that the direction of the edges selected by
-#' their edge IDs in the \code{eids} argument will be reversed.
+#' their edge IDs in the \code{eids} argument will be reversed. When reversing
+#' all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.
 #' @param eids The edge IDs of the edges to reverse.
@@ -1183,3 +1184,9 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @export
 
 reverse_edges <- reverse_edges
+
+#' @rdname reverse_edges
+#' @method t igraph
+#' @export
+
+t.igraph <- reverse_edges
