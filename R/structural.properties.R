@@ -514,7 +514,7 @@ shortest_paths <- function(graph, from, to=V(graph),
 
   if (igraph_opt("return.vs.es")) {
     if (!is.null(res$vpath)) {
-      res$vpath <- lapply(res$vpath, create_vs, graph = graph)
+      res$vpath <- lapply(res$vpath, unsafe_create_vs, graph = graph, verts = V(graph))
     }
     if (!is.null(res$epath)) {
       res$epath <- lapply(res$epath, create_es, graph = graph)
@@ -570,7 +570,7 @@ all_shortest_paths <- function(graph, from,
   }       
 
   if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, create_vs, graph = graph)
+    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res

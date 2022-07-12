@@ -141,7 +141,7 @@ max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
     res <- lapply(res, function(x) x+1)
 
     if (igraph_opt("return.vs.es")) {
-      res <- lapply(res, create_vs, graph = graph)
+      res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
     }
 
     res
@@ -321,10 +321,10 @@ ivs <- function(graph, min=NULL, max=NULL) {
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
                as.numeric(max))
-  res <- lapply(res, function(x) x+1)
+  res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res
@@ -339,10 +339,10 @@ largest_ivs <- function(graph) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_largest_independent_vertex_sets, graph)
-  res <- lapply(res, function(x) x+1)
+  res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res
@@ -357,10 +357,10 @@ maximal_ivs <- function(graph) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_maximal_independent_vertex_sets, graph)
-  res <- lapply(res, function(x) x+1)
+  res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res

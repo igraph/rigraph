@@ -484,7 +484,8 @@ adjacent_vertices <- function(graph, v,
   res <- .Call(C_R_igraph_adjacent_vertices, graph, vv, mode)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, function(x) create_vs(graph, x + 1))
+    res <- lapply(res, `+`, 1)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   if (is_named(graph)) names(res) <- V(graph)$name[vv + 1]
