@@ -1146,13 +1146,15 @@ biconnected_components <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_biconnected_components, graph)
   if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
     for (i_ in seq_along(res$tree.edges)) {
-      res$tree.edges[[i_]] <- create_es(graph, res$tree.edges[[i_]])
+      res$tree.edges[[i_]] <- unsafe_create_es(graph, res$tree.edges[[i_]], es = es)
     }
   }
   if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
     for (i_ in seq_along(res$component.edges)) {
-      res$component.edges[[i_]] <- create_es(graph, res$component.edges[[i_]])
+      res$component.edges[[i_]] <- unsafe_create_es(graph, res$component.edges[[i_]], es = es)
     }
   }
   if (igraph_opt("return.vs.es")) {
@@ -1597,8 +1599,9 @@ st_cuts <- function(graph, source, target) {
   # Function call
   res <- .Call(C_R_igraph_all_st_cuts, graph, source-1, target-1)
   if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
     for (i_ in seq_along(res$cuts)) {
-      res$cuts[[i_]] <- create_es(graph, res$cuts[[i_]])
+      res$cuts[[i_]] <- unsafe_create_es(graph, res$cuts[[i_]], es = es)
     }
   }
   if (igraph_opt("return.vs.es")) {
@@ -1635,8 +1638,9 @@ st_min_cuts <- function(graph, source, target, capacity=NULL) {
   # Function call
   res <- .Call(C_R_igraph_all_st_mincuts, graph, source-1, target-1, capacity)
   if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
     for (i_ in seq_along(res$cuts)) {
-      res$cuts[[i_]] <- create_es(graph, res$cuts[[i_]])
+      res$cuts[[i_]] <- unsafe_create_es(graph, res$cuts[[i_]], es = es)
     }
   }
   if (igraph_opt("return.vs.es")) {

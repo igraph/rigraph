@@ -524,7 +524,8 @@ incident_edges <- function(graph, v,
   res <- .Call(C_R_igraph_incident_edges, graph, vv, mode)
 
   if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, function(x) create_es(graph, x + 1))
+    res <- lapply(res, `+`, 1)
+    res <- lapply(res, unsafe_create_es, graph = graph, es = E(graph))
   }
 
   if (is_named(graph)) names(res) <- V(graph)$name[vv + 1]

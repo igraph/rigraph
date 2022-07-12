@@ -517,7 +517,7 @@ shortest_paths <- function(graph, from, to=V(graph),
       res$vpath <- lapply(res$vpath, unsafe_create_vs, graph = graph, verts = V(graph))
     }
     if (!is.null(res$epath)) {
-      res$epath <- lapply(res$epath, create_es, graph = graph)
+      res$epath <- lapply(res$epath, unsafe_create_es, graph = graph, es = E(graph))
     }
     if (!is.null(res$predecessors)) {
       res$predecessors <- create_vs(res$predecessors, graph = graph,

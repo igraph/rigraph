@@ -220,13 +220,27 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
 }
 
 # Internal function to quickly convert integer vectors to igraph.vs
-# for use after c code, when NA and bounds checking is unnecessary
+# for use after C code, when NA and bounds checking is unnecessary.
+# Also allows us to construct V(graph) outside the function call in
+# lapply() so it's created only once.
 unsafe_create_vs <- function(graph, idx, verts = NULL){
   if (is.null(verts)) {
     verts <- V(graph)
   }
   res <- simple_vs_index(verts, idx, na_ok = TRUE)
   add_vses_graph_ref(res, graph)  
+}
+
+# Internal function to quickly convert integer vectors to igraph.es
+# for use after C code, when NA and bounds checking is unnecessary
+# Also allows us to construct V(graph) outside the function call in
+# lapply() so it's created only once.
+unsafe_create_es <- function(graph, idx, es = NULL){
+  if (is.null(es)) {
+    es <- E(graph)
+  }
+  res <- simple_es_index(es, idx, na_ok = TRUE)
+  add_vses_graph_ref(res, graph)
 }
 
 
@@ -668,7 +682,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   res
 }
 
-simple_es_index <- function(x, i) {
+simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!is.null(attr(x, "vnames"))) {
     wh1 <- structure(seq_along(x), names = names(x))[i]
     wh2 <- structure(seq_along(x), names = attr(x, "vnames"))[i]
@@ -679,8 +693,7 @@ simple_es_index <- function(x, i) {
   } else {
     res <- unclass(x)[i]
   }
-  if (any(is.na(res))) stop('Unknown edge selected')
-
+  if (!na_ok && any(is.na(res))) stop('Unknown edge selected')
   attr(res, "env") <- attr(x, "env")
   attr(res, "graph") <- attr(x, "graph")
   class(res) <- "igraph.es"
