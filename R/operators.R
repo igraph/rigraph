@@ -1186,6 +1186,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 reverse_edges <- reverse_edges
 
 #' @rdname reverse_edges
+#' @param x The input graph.
 #' @method t igraph
 #' @export
 
