@@ -249,7 +249,7 @@ cohesive_blocks <- function(graph, labels=TRUE) {
     res$labels <- V(graph)$name
   }
   if (igraph_opt("return.vs.es")) {
-    res$blocks <- lapply(res$blocks, create_vs, graph = graph)
+    res$blocks <- lapply(res$blocks, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res$vcount <- vcount(graph)

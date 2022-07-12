@@ -73,7 +73,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) { 
-    res <- lapply(res, create_vs, graph = graph)
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
 }

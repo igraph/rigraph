@@ -1156,8 +1156,9 @@ biconnected_components <- function(graph) {
     }
   }
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res$components)) {
-      res$components[[i_]] <- create_vs(graph, res$components[[i_]])
+      res$components[[i_]] <- unsafe_create_vs(graph, res$components[[i_]], verts = verts)
     }
   }
   if (igraph_opt("return.vs.es")) {
@@ -1191,8 +1192,9 @@ cliques <- function(graph, min=0, max=0) {
   # Function call
   res <- .Call(C_R_igraph_cliques, graph, min, max)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -1220,8 +1222,9 @@ largest_cliques <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_largest_cliques, graph)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -1272,8 +1275,9 @@ weighted_cliques <- function(graph, vertex.weights=NULL, min.weight=0, max.weigh
   # Function call
   res <- .Call(C_R_igraph_weighted_cliques, graph, vertex.weights, min.weight, max.weight, maximal)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -1296,8 +1300,9 @@ largest_weighted_cliques <- function(graph, vertex.weights=NULL) {
   # Function call
   res <- .Call(C_R_igraph_largest_weighted_cliques, graph, vertex.weights)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -1451,8 +1456,9 @@ graphlets <- function(graph, weights=NULL, niter=1000) {
   # Function call
   res <- .Call(C_R_igraph_graphlets, graph, weights, niter)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res$cliques)) {
-      res$cliques[[i_]] <- create_vs(graph, res$cliques[[i_]])
+      res$cliques[[i_]] <- unsafe_create_vs(graph, res$cliques[[i_]], verts = verts)
     }
   }
   res
@@ -1596,8 +1602,9 @@ st_cuts <- function(graph, source, target) {
     }
   }
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res$partition1s)) {
-      res$partition1s[[i_]] <- create_vs(graph, res$partition1s[[i_]])
+      res$partition1s[[i_]] <- unsafe_create_vs(graph, res$partition1s[[i_]], verts = verts)
     }
   }
   res
@@ -1633,8 +1640,9 @@ st_min_cuts <- function(graph, source, target, capacity=NULL) {
     }
   }
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res$partition1s)) {
-      res$partition1s[[i_]] <- create_vs(graph, res$partition1s[[i_]])
+      res$partition1s[[i_]] <- unsafe_create_vs(graph, res$partition1s[[i_]], verts = verts)
     }
   }
   res
@@ -1675,8 +1683,9 @@ min_st_separators <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_all_minimal_st_separators, graph)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -1691,8 +1700,9 @@ min_separators <- function(graph) {
   # Function call
   res <- .Call(C_R_igraph_minimum_size_separators, graph)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res)) {
-      res[[i_]] <- create_vs(graph, res[[i_]])
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
     }
   }
   res
@@ -2075,8 +2085,9 @@ automorphism_group <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm",
   # Function call
   res <- .Call(C_R_igraph_automorphism_group, graph, colors, sh)
   if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
     for (i_ in seq_along(res$generators)) {
-      res$generators[[i_]] <- create_vs(graph, res$generators[[i_]])
+      res$generators[[i_]] <- unsafe_create_vs(graph, res$generators[[i_]], verts = verts)
     }
   }
   if (!details) {
