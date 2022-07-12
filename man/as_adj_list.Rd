@@ -20,7 +20,9 @@ to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 for both. This argument is ignored for undirected graphs.}
 }
 \value{
-A list of numeric vectors.
+A list of \code{igraph.vs} or a list of numeric vectors depending on
+the value of \code{igraph_opt("return.vs.es")}, see details for performance
+characteristics.
 }
 \description{
 Create adjacency lists from a graph, either for adjacent edges or for
@@ -34,6 +36,10 @@ vertices.
 \code{as_adj_edge_list} returns a list of numeric vectors, which include the
 ids of adjacent edgs (according to the \code{mode} argument) of all
 vertices.
+
+If \code{igraph_opt("return.vs.es")} is true (default), the numeric
+vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
+a very expensive operation on large graphs.
 }
 \examples{
 

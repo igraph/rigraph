@@ -377,7 +377,12 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 #' \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 #' for both. This argument is ignored for undirected graphs.
-#' @return A list of numeric vectors.
+#' @return A list of \code{igraph.vs} or a list of numeric vectors depending on
+#' the value of \code{igraph_opt("return.vs.es")}, see details for performance
+#' characteristics.
+#' @details If \code{igraph_opt("return.vs.es")} is true (default), the numeric
+#' vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
+#' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_edgelist}}, \code{\link{as_adj}}
 #' @export
@@ -397,7 +402,10 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjlist, graph, mode)
-  res <- lapply(res, function(.x) V(graph)[.x + 1])
+  res <- lapply(res, `+`, 1)
+  if (igraph_opt("return.vs.es")) {
+    res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
+  }
   if (is_named(graph)) names(res) <- V(graph)$name
   res
 }

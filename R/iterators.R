@@ -219,6 +219,17 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
   add_vses_graph_ref(res, graph)
 }
 
+# Internal function to quickly convert integer vectors to igraph.vs
+# for use after c code, when NA and bounds checking is unnecessary
+unsafe_create_vs <- function(graph, idx, verts = NULL){
+  if (is.null(verts)) {
+    verts <- V(graph)
+  }
+  res <- simple_vs_index(verts, idx, na_ok = TRUE)
+  add_vses_graph_ref(res, graph)  
+}
+
+
 #' Edges of a graph
 #'
 #' An edge sequence is a vector containing numeric edge ids, with a special

@@ -54,13 +54,14 @@ argument is ignored for undirected graphs.}
 \item{mindist}{The minimum distance to include the vertex in the result.}
 }
 \value{
-\code{ego_size} returns with an integer vector.
-
-\code{ego} returns with a list of integer vectors.
-
-\code{make_ego_graph} returns with a list of graphs.
-
-\code{connect} returns with a new graph object.
+\itemize{
+  \item{\code{ego_size} returns with an integer vector.}
+  \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
+        vectors depending on the value of \code{igraph_opt("return.vs.es")},
+        see details for performance characteristics.}
+  \item{\code{make_ego_graph} returns with a list of graphs.}
+  \item{\code{connect} returns with a new graph object.}
+}
 }
 \description{
 These functions find the vertices not farther than a given limit from
