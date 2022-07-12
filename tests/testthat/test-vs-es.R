@@ -94,20 +94,6 @@ test_that("save/load breaks references", {
 
 })
 
-test_that("we can use vs/es with broken refs", {
-
-  g <- make_ring(10)
-  vs <- V(g)
-  es <- E(g)
-
-  rm(g)
-  gc()
-
-  g2 <- make_ring(10)
-  ## TODO
-  
-})
-
 test_that("vs/es keeps names after graph is deleted", {
 
   g <- make_ring(10)

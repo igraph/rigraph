@@ -22,6 +22,13 @@ test_that("infix operators work", {
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
+  g <- g - path("a", "b")
+  expect_true(graph.isomorphic(g, graph_from_literal(a, b-c-d-e-f-g-h-i-j-a)))
+  g <- g + path("a", "b")
+  expect_true(graph.isomorphic(g, make_ring(10)))
+
+  g <- make_ring(10)
+  V(g)$name <- letters[1:10]
 
   g <- g - path("a", "b", "c", "d")
   expect_true(graph.isomorphic(g, make_lattice(8) + 2))

@@ -23,7 +23,7 @@ test_that("diameter works", {
 
 #### Directed
 
-  g <- sample_gnp(30, 3/30, dir=TRUE)
+  g <- sample_gnp(30, 3/30, directed=TRUE)
   sp <- distances(g, mode="out")
   sp[sp==Inf] <- NA
   expect_that(max(sp, na.rm=TRUE), equals(diameter(g, unconnected=TRUE)))
@@ -40,4 +40,12 @@ test_that("diameter works", {
   g <- make_tree(30, mode="undirected")
   E(g)$weight <- 2
   expect_that(diameter(g, unconnected=FALSE), equals(16))
+})
+
+test_that("diameter correctly handles disconnected graphs", {
+  g <- make_tree(7, 2, mode="undirected") %du% make_tree(4, 3, mode="undirected")
+  expect_that(diameter(g, unconnected=TRUE), equals(4))
+  expect_that(diameter(g, unconnected=FALSE), equals(Inf))
+  E(g)$weight <- 2
+  expect_that(diameter(g, unconnected=FALSE), equals(Inf))
 })

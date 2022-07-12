@@ -60,3 +60,35 @@ test_that("Union of directed named graphs", {
   expect_equal(ecount(gg), 10)
 
 })
+
+test_that("edge reversal works", {
+  # directed graph
+  g <- make_graph( ~ 1-+2, 1-+3, 1-+4, 2-+3, 3-+4 )
+  g2 <- reverse_edges(g, 1:3)
+  expected <- make_graph( ~ 1+-2, 1+-3, 1+-4, 2-+3, 3-+4 )
+  expect_true(isomorphic(g2, expected))
+
+  # undirected graph
+  g <- make_graph( ~ 1--2, 1--3, 1--4, 2--3, 3--4 )
+  g2 <- reverse_edges(g, 1:3)
+  expect_true(identical_graphs(g, g2))
+
+  # all edges
+  g <- make_graph( ~ 1-+2, 1-+3, 1-+4, 2-+3, 3-+4 )
+  g2 <- reverse_edges(g)
+  expect_that(vcount(g2), equals(vcount(g)))
+  expect_that(get.edgelist(g2), equals(get.edgelist(g)[,c(2,1)]))
+
+  # graph with isolated vertices
+  g <- make_graph( ~1:2:3:4:5, 1-+2, 1-+4 )
+  g2 <- reverse_edges(g)
+  expect_that(vcount(g2), equals(vcount(g)))
+  expect_that(get.edgelist(g2), equals(get.edgelist(g)[,c(2,1)]))
+})
+
+test_that("t() is aliased to edge reversal for graphs", {
+  g <- make_graph( ~ 1-+2, 1-+3, 1-+4, 2-+3, 3-+4 )
+  expect_that(vcount(t(g)), equals(vcount(g)))
+  expect_that(get.edgelist(t(g)), equals(get.edgelist(g)[,c(2,1)]))
+})
+

@@ -1010,8 +1010,10 @@ path <- function(...) {
     }
     toadd <- as.igraph.vs(e1, toadd)
     lt <- length(toadd)
-    if (lt >= 2) {
+    if (lt > 2) {
       toadd <- c(toadd[1], rep(toadd[2:(lt-1)], each=2), toadd[lt])
+      res <- add_edges(e1, toadd, attr=attr)
+	  } else if (lt == 2) {
       res <- add_edges(e1, toadd, attr=attr)
     } else {
       res <- e1
@@ -1162,3 +1164,30 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
     stop("Cannot multiply igraph graph with this type")
   }
 }
+
+#' Reverse edges in a graph
+#'
+#' The new graph will contain the same vertices, edges and attributes as
+#' the original graph, except that the direction of the edges selected by
+#' their edge IDs in the \code{eids} argument will be reversed. When reversing
+#' all edges, this operation is also known as graph transpose.
+#'
+#' @param graph The input graph.
+#' @param eids The edge IDs of the edges to reverse.
+#' @return The result graph where the direction of the edges with the given
+#'   IDs are reversed
+#'
+#' @examples
+#' 
+#' g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
+#' reverse_edges(g, 2)
+#' @export
+
+reverse_edges <- reverse_edges
+
+#' @rdname reverse_edges
+#' @param x The input graph.
+#' @method t igraph
+#' @export
+
+t.igraph <- function(x) reverse_edges(x)

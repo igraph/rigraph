@@ -8,8 +8,8 @@ citEntry(entry="article",
          volume="Complex Systems",
          pages="1695",
          year="2006",
-         url="http://igraph.org",
+         url="https://igraph.org",
          textVersion=paste("Csardi G, Nepusz T: The igraph software package for ",
                            "complex network research, InterJournal, ",
                            "Complex Systems 1695. 2006. ",
-                           "http://igraph.org", sep=""))
+                           "https://igraph.org", sep=""))

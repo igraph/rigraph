@@ -93,6 +93,8 @@ plot.igraph <- function(x,
     stop("Not a graph object")
   }
 
+  vc <- vcount(graph)
+
   ################################################################
   ## Visual parameters
   params <- i.parse.plot.params(graph, list(...))
@@ -123,9 +125,9 @@ plot.igraph <- function(x,
   curved             <- params("edge", "curved")
   if (is.function(curved)) { curved <- curved(graph) }
   
-  layout             <- params("plot", "layout")
+  layout             <- i.postprocess.layout(params("plot", "layout"))
   margin             <- params("plot", "margin")
-  margin <- rep(margin, length=4)
+  margin <- rep(margin, length.out=4)
   rescale            <- params("plot", "rescale")
   asp                <- params("plot", "asp")
   frame              <- params("plot", "frame")
@@ -146,7 +148,7 @@ plot.igraph <- function(x,
   ################################################################
   ## create the plot
   maxv <- max(vertex.size)
-  if (rescale) {
+  if (vc > 0 && rescale) {
     # norm layout to (-1, 1)
     layout <- norm_coords(layout, -1, 1, -1, 1)
     xlim <- c(xlim[1]-margin[2]-maxv, xlim[2]+margin[4]+maxv)
@@ -163,17 +165,18 @@ plot.igraph <- function(x,
     mark.groups <- list(mark.groups)
   }
 
-  mark.shape  <- rep(mark.shape,  length=length(mark.groups))
-  mark.border <- rep(mark.border, length=length(mark.groups))
-  mark.col    <- rep(mark.col,    length=length(mark.groups))
-  mark.expand <- rep(mark.expand, length=length(mark.groups))
+  mark.shape  <- rep(mark.shape,  length.out=length(mark.groups))
+  mark.border <- rep(mark.border, length.out=length(mark.groups))
+  mark.col    <- rep(mark.col,    length.out=length(mark.groups))
+  mark.expand <- rep(mark.expand, length.out=length(mark.groups))
   
   for (g in seq_along(mark.groups)) {
-    v <- V(graph)[mark.groups[[g]]]
+    .members <- mark.groups[[g]]
+    v <- V(graph)[.members]
     if (length(vertex.size)==1) {
       vs <- vertex.size
     } else {
-      vs <- rep(vertex.size, length=vcount(graph))[v]
+      vs <- rep(vertex.size, length.out=vcount(graph))[v]
     }
     igraph.polygon(layout[v,,drop=FALSE],
                    vertex.size=vs,
@@ -216,14 +219,14 @@ plot.igraph <- function(x,
                                             params=params, end="both")
   } else {
     ## different vertex shapes, do it by "endpoint"
-    shape <- rep(shape, length=vcount(graph))
+    shape <- rep(shape, length.out=vcount(graph))
     ec <- edge.coords
-    ec[,1:2] <- t(sapply(seq(length=nrow(el)), function(x) {
+    ec[,1:2] <- t(sapply(seq(length.out=nrow(el)), function(x) {
       .igraph.shapes[[ shape[el[x,1]] ]]$clip(edge.coords[x,,drop=FALSE],
                                               el[x,,drop=FALSE],
                                               params=params, end="from")
     }))
-    ec[,3:4] <- t(sapply(seq(length=nrow(el)), function(x) {
+    ec[,3:4] <- t(sapply(seq(length.out=nrow(el)), function(x) {
       .igraph.shapes[[ shape[el[x,2]] ]]$clip(edge.coords[x,,drop=FALSE],
                                               el[x,,drop=FALSE],
                                               params=params, end="to")
@@ -285,6 +288,8 @@ plot.igraph <- function(x,
 
       cp[,1] <- cx+r*cos(phi)
       cp[,2] <- cy+r*sin(phi)
+
+      if (is.na(width)) { width <- 1 }
 
       plot.bezier(cp, 50, color, width, arr=arr, lty=lty, arrow.size=arrow.size, arr.w=arr.w)
 
@@ -348,7 +353,7 @@ plot.igraph <- function(x,
     } else {
       ## different kinds of arrows drawn separately as 'arrows' cannot
       ## handle a vector as the 'code' argument
-      curved <- rep(curved, length=ecount(graph))[nonloops.e]
+      curved <- rep(curved, length.out=ecount(graph))[nonloops.e]
       lc.x <- lc.y <- numeric(length(curved))
       for (code in 0:3) {
         valid <- arrow.mode==code
@@ -374,13 +379,15 @@ plot.igraph <- function(x,
   
   ################################################################
   # add the vertices
-  if (length(unique(shape)) == 1) {
-    .igraph.shapes[[ shape[1] ]]$plot(layout, params=params)
-  } else {
-    sapply(seq(length=vcount(graph)), function(x) {
-      .igraph.shapes[[ shape[x] ]]$plot(layout[x,,drop=FALSE], v=x,
-                                        params=params)
-    })
+  if (vc > 0) {
+    if (length(unique(shape)) == 1) {
+      .igraph.shapes[[ shape[1] ]]$plot(layout, params=params)
+    } else {
+      sapply(seq(length.out=vcount(graph)), function(x) {
+        .igraph.shapes[[ shape[x] ]]$plot(layout[x,,drop=FALSE], v=x,
+                                          params=params)
+      })
+    }
   }
       
   ################################################################
@@ -390,16 +397,18 @@ plot.igraph <- function(x,
     (vertex.size+6*8*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
     (vertex.size+6*8*log10(2))/200
-  if (length(label.family)==1) {
-    text(x, y, labels=labels, col=label.color, family=label.family,
-         font=label.font, cex=label.cex)
-  } else {
-    if1 <- function(vect, idx) if (length(vect)==1) vect else vect[idx]
-    sapply(seq_len(vcount(graph)), function(v) {
-      text(x[v], y[v], labels=if1(labels, v), col=if1(label.color, v),
-           family=if1(label.family, v), font=if1(label.font, v),
-           cex=if1(label.cex, v))
-    })
+  if (vc > 0) {
+    if (length(label.family)==1) {
+      text(x, y, labels=labels, col=label.color, family=label.family,
+           font=label.font, cex=label.cex)
+    } else {
+      if1 <- function(vect, idx) if (length(vect)==1) vect else vect[idx]
+      sapply(seq_len(vcount(graph)), function(v) {
+        text(x[v], y[v], labels=if1(labels, v), col=if1(label.color, v),
+             family=if1(label.family, v), font=if1(label.font, v),
+             cex=if1(label.cex, v))
+      })
+    }
   }
   rm(x, y)
   invisible(NULL)
@@ -643,7 +652,7 @@ rglplot.igraph <- function(x, ...) {
   rgl::par3d(skipRedraw=TRUE)
 
   # edges first
-  for (i in seq(length=nrow(el))) {
+  for (i in seq(length.out=nrow(el))) {
     from <- el[i,1]
     to   <- el[i,2]
     v1 <- layout[from,]
@@ -780,9 +789,9 @@ function (x1, y1, x2, y2,
     midy <- (y1+y2)/2  
     spx <- midx - lambda * 1/2 * (c.y2-c.y1)
     spy <- midy + lambda * 1/2 * (c.x2-c.x1)
-    sh.col <- rep(sh.col, length=length(c.x1))
-    sh.lty <- rep(sh.lty, length=length(c.x1))
-    sh.lwd <- rep(sh.lwd, length=length(c.x1))
+    sh.col <- rep(sh.col, length.out=length(c.x1))
+    sh.lty <- rep(sh.lty, length.out=length(c.x1))
+    sh.lwd <- rep(sh.lwd, length.out=length(c.x1))
     lc.x <- lc.y <- numeric(length(c.x1))
 
     for (i in seq_len(length(c.x1))) {

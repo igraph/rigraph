@@ -1,5 +1,5 @@
 
-context("Bug 1032819")
+context("Bug 1032819 from Launchpad")
 
 test_that("VF2 isomorphism considers colors", {
   library(igraph)

@@ -229,7 +229,7 @@ SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
 
 SEXP R_igraph_address(SEXP object) {
   char s[64];
-  snprintf(s, 64, "%p", object);
+  snprintf(s, 64, "%p", (void*) object);
   return ScalarString(mkChar(s));
 }
 
@@ -250,9 +250,10 @@ SEXP R_igraph_weak_ref_run_finalizer(SEXP ref) {
   return R_NilValue;
 }
 
-SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2) {
+SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
   int i;
-  for (i = 0; i < 9 ; i++) {
+  int n = LOGICAL(attrs)[0] ? 9 : 8;
+  for (i = 0; i < n; i++) {
     if (!R_compute_identical(VECTOR_ELT(g1, i), VECTOR_ELT(g2, i), 0)) {
       return ScalarLogical(0);
     }

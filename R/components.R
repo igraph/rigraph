@@ -65,19 +65,6 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
   res
 }
 
-#' @export
-
-is_connected <- function(graph, mode=c("weak", "strong")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak"=1, "strong"=2)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_is_connected, graph, as.numeric(mode))
-}
-
 
 
 #' Decompose a graph into components
@@ -127,25 +114,30 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 }
 
 
-#' Articulation points of a graph
+#' Articulation points and bridges of a graph
 #' 
-#' Articuation points or cut vertices are vertices whose removal increases the
-#' number of connected components in a graph.
-#' 
-#' Articuation points or cut vertices are vertices whose removal increases the
-#' number of connected components in a graph. If the original graph was
-#' connected, then the removal of a single articulation point makes it
-#' undirected. If a graph contains no articulation points, then its vertex
-#' connectivity is at least two.
+#' \code{articulation_points} finds the articulation points (or cut vertices)
+#" of a graph, while \code{bridges} finds the bridges (or cut-edges) of a graph.
+#'
+#' Articulation points or cut vertices are vertices whose removal increases the
+#' number of connected components in a graph. Similarly, bridges or cut-edges
+#' are edges whose removal increases the number of connected components in a
+#' graph. If the original graph was connected, then the removal of a single
+#' articulation point or a single bridge makes it undirected. If a graph
+#' contains no articulation points, then its vertex connectivity is at least
+#" two. If a graph contains no bridges, then its edge connectivity is at least
+#' two.
 #' 
 #' @aliases articulation.points articulation_points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #' it is directed.
-#' @return A numeric vector giving the vertex ids of the articulation points of
-#' the input graph.
+#' @return For \code{articulation_points}, a numeric vector giving the vertex
+#' IDs of the articulation points of the input graph. For \code{bridges}, a
+#' numeric vector giving the edge IDs of the bridges of the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{biconnected_components}}, \code{\link{components}},
-#' \code{\link{is_connected}}, \code{\link{vertex_connectivity}}
+#' \code{\link{is_connected}}, \code{\link{vertex_connectivity}},
+#' \code{\link{edge_connectivity}}
 #' @keywords graphs
 #' @examples
 #' 
@@ -153,10 +145,19 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' clu <- components(g)$membership
 #' g <- add_edges(g, c(match(1, clu), match(2, clu)) )
 #' articulation_points(g)
+#'
+#' g <- make_graph("krackhardt_kite")
+#' bridges(g)
+#'
 #' @export
 #' @include auto.R
 
 articulation_points <- articulation_points
+
+#' @rdname articulation_points
+#' @export
+
+bridges <- bridges
 
 
 #' Biconnected components

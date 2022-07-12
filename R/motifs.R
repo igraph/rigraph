@@ -32,11 +32,12 @@
 #' 
 #' @aliases graph.motifs
 #' @param graph Graph object, the input graph.
-#' @param size The size of the motif, currently 3 and 4 are supported only.
+#' @param size The size of the motif, currently sizes 3 and 4 are supported in
+#' directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #' graph is cut at a certain level. Its length should be the same as the size
 #' of the motif (the \code{size} argument). By default no cuts are made.
-#' @return \code{motifs} returns a numeric vector, the number of occurences of
+#' @return \code{motifs} returns a numeric vector, the number of occurrences of
 #' each motif in the graph. The motifs are ordered by their isomorphism
 #' classes. Note that for unconnected subgraphs, which are not considered to be
 #' motifs, the result will be \code{NA}.
@@ -79,7 +80,7 @@ motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 #' 
 #' @aliases graph.motifs.no
 #' @param graph Graph object, the input graph.
-#' @param size The size of the motif, currently 3 and 4 are supported only.
+#' @param size The size of the motif.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #' graph is cut at a certain level. Its length should be the same as the size
 #' of the motif (the \code{size} argument). By default no cuts are made.
@@ -121,7 +122,8 @@ count_motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 #' 
 #' @aliases graph.motifs.est
 #' @param graph Graph object, the input graph.
-#' @param size The size of the motif, currently 3 and 4 are supported only.
+#' @param size The size of the motif, currently size 3 and 4 are supported
+#' in directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #' graph is cut at a certain level. Its length should be the same as the size
 #' of the motif (the \code{size} argument). By default no cuts are made.

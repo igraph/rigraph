@@ -18,7 +18,7 @@ pause()
 ### Hand-drawn coordinates
 coords <- c(5,5,119,256,119,256,120,340,478,
             622,116,330,231,116,5,330,451,231,231,231)
-coords <- matrix(coords, nc=2)
+coords <- matrix(coords, ncol=2)
 
 pause()
 
@@ -94,7 +94,7 @@ pause()
 ## ##  You will need internet connection for this to work
 ## vertices <- read.csv("http://jhfowler.ucsd.edu/data/judicial.csv")
 ## edges <- read.table("http://jhfowler.ucsd.edu/data/allcites.txt")
-## jg <- graph.data.frame(edges, vertices=vertices, dir=TRUE)
+## jg <- graph.data.frame(edges, vertices=vertices, directed=TRUE)
 
 ## pause()
 

@@ -23,3 +23,17 @@ test_that("cliques works", {
   g <- sample_gnp(100, 0.03)
   expect_true(all(sapply(max_cliques(g), check.clique, graph=g)))
 })
+
+test_that("clique_size_counts works", {
+  g <- make_full_graph(5) %du% make_full_graph(3)
+
+  expect_that(clique_size_counts(g), equals(c(8, 13, 11, 5, 1)))
+  expect_that(clique_size_counts(g, min=3), equals(c(0, 0, 11, 5, 1)))
+  expect_that(clique_size_counts(g, max=4), equals(c(8, 13, 11, 5)))
+  expect_that(clique_size_counts(g, min=2, max=4), equals(c(0, 13, 11, 5)))
+
+  expect_that(clique_size_counts(g, maximal=TRUE), equals(c(0, 0, 1, 0, 1)))
+  expect_that(clique_size_counts(g, min=3, maximal=TRUE), equals(c(0, 0, 1, 0, 1)))
+  expect_that(clique_size_counts(g, max=4, maximal=TRUE), equals(c(0, 0, 1)))
+  expect_that(clique_size_counts(g, min=2, max=4, maximal=TRUE), equals(c(0, 0, 1)))
+})

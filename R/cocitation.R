@@ -24,7 +24,7 @@
 #' Cocitation coupling
 #' 
 #' Two vertices are cocited if there is another vertex citing both of them.
-#' \code{cocitation} siply counts how many types two vertices are cocited. The
+#' \code{cocitation} simply counts how many types two vertices are cocited. The
 #' bibliographic coupling of two vertices is the number of other vertices they
 #' both cite, \code{bibcoupling} calculates this.
 #' 
@@ -51,7 +51,7 @@
 #' @keywords graphs
 #' @examples
 #' 
-#' g <- make_ring(10)
+#' g <- make_kautz_graph(2,3)
 #' cocitation(g)
 #' bibcoupling(g)
 #' 

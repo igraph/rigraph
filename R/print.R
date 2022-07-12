@@ -140,7 +140,7 @@
       ind <- as.numeric(V(x))
     } else {
       omitted.vertices <- vc-mp
-      ind <- seq(length=mp)
+      ind <- seq(length.out=mp)
     }
     if (vc==0 ||
         all(sapply(list, function(v)
@@ -202,7 +202,7 @@
   ename <- if ("name" %in% edge_attr_names(x)) {
     paste(sep="", "'", E(x)$name, "'")
   } else {
-    seq(length=nrow(el))
+    seq(length.out=nrow(el))
   }
   if (ec==0 || 
       all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
@@ -362,7 +362,7 @@
     sm <- paste(collapse="", rep(" ", mw+4))
     alstr <- lapply(seq_along(al), function(x) {
       len <- length(al[[x]])
-      fac <- rep(1:(len/mpl+1), each=mpl, length=len)
+      fac <- rep(1:(len/mpl+1), each=mpl, length.out=len)
       nei <- tapply(format(al[[x]], width=mw), fac, paste, collapse=" ")
       mark <- paste(sep="", format(x, width=mw), arrow)
       mark <- c(mark, rep(sm, max(0, length(nei)-1)))
@@ -380,7 +380,7 @@
     ncol <- trunc((getOption("width")-1+nchar(sep)) / (maxw+nchar(sep)))
     if (ncol > 1) {
       alstr <- format(alstr, width=maxw, justify="left")
-      fac <- rep(1:(vc/ncol+1), each=ncol, length=vc)
+      fac <- rep(1:(vc/ncol+1), each=ncol, length.out=vc)
       alstr <- tapply(alstr, fac, paste, collapse=sep)
     }
     cat(alstr, sep="\n")
@@ -515,8 +515,7 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
       .print.edges.adjlist(x)
     }
   } else if (full == "auto") {
-    .print.edges.compressed(x, names = names, max.lines =
-                              max.lines - head_lines)
+    .print.edges.compressed(x, names = names, max.lines = max(0, max.lines - head_lines))
   }
   
   invisible(x)

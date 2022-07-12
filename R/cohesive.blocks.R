@@ -32,7 +32,7 @@
 #' vertex connectivity greater than or equal to \eqn{k}. Cohesive blocking is a
 #' process through which, given a \eqn{k}-cohesive set of vertices, maximally
 #' \eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}. Thus a
-#' hiearchy of vertex subsets is found, whith the entire graph \eqn{G} at its
+#' hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
 #' root.
 #' 
 #' The function \code{cohesive_blocks} implements cohesive blocking.  It
@@ -183,8 +183,8 @@
 #' itself, invisibly.
 #' 
 #' \code{length} returns a numeric scalar, the number of blocks.
-#' @author Gabor Csardi \email{csardi.gabor@@gmail.com} for the current
-#' implementation, Peter McMahan (\url{http://home.uchicago.edu/~mcmahan/})
+#' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
+#' implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
 #' wrote the first version in R.
 #' @seealso \code{\link{cohesion}}
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:

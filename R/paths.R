@@ -122,8 +122,11 @@ is_dag <- is_dag
 #' @param graph The input graph. It may be directed, but edge directions are
 #' ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The
-#' vertices ordered according to the maximum cardinality search.}
-#' \item{alpham1}{Numeric vector. The inverse of \code{alpha}.}
+#' 1-based rank of each vertex in the graph such that the vertex with rank 1
+#' is visited first, the vertex with rank 2 is visited second and so on.}
+#' \item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
+#' the elements of this vector are the vertices in reverse maximum cardinality
+#' search order.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{is_chordal}}
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
@@ -222,12 +225,6 @@ radius <- radius
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
-#' @param unconnected What to do if the graph is unconnected (not
-#'   strongly connected if directed paths are considered). If TRUE only
-#'   the lengths of the existing paths are considered and averaged; if
-#'   FALSE the length of the missing paths are counted having length
-#'   \code{vcount(graph)}, one longer than the longest possible geodesic
-#'   in the network.
 #' @export
 
 distance_table <- distance_table

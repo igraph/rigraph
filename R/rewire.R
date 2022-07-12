@@ -106,9 +106,13 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
 #' @param loops Logical scalar, whether loop edges are allowed in the rewired
-#'   graph.
-#' @param multiple Logical scalar, whether multiple edges are allowed int the
-#'   generated graph.
+#' graph.
+#' @param multiple Logical scalar, whether multiple edges are allowed in the
+#' generated graph.
+#' @param mode Character string, specifies which endpoint of the edges to rewire
+#' in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
+#' the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
+#' of each directed edge. Ignored for undirected graphs.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family rewiring functions
@@ -121,20 +125,47 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' mean_distance(g)
 #' g <- rewire(g, each_edge(prob = 0.05))
 #' mean_distance(g)
+#'
+#' # Rewiring the start of each directed edge preserves the in-degree distribution
+#' # but not the out-degree distribution
+#' g <- barabasi.game(1000)
+#' g2 <- g %>% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
+#' degree(g, mode="in") == degree(g2, mode="in")
 
-each_edge <- function(prob, loops = FALSE, multiple = FALSE) {
-  method <- list(
-    fun = rewire_each_edge,
-    args = list(prob = prob, loops = loops, multiple = multiple)
-  )
+each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  multiple <- as.logical(multiple)
+  if (mode != 3) {
+    if (!multiple) {
+      stop("multiple = FALSE not supported when mode != \"all\"")
+    }
+    method <- list(
+      fun = rewire_each_directed_edge,
+      args = list(prob = prob, loops = loops, mode = mode)
+    )
+  } else {
+    method <- list(
+      fun = rewire_each_edge,
+      args = list(prob = prob, loops = loops, multiple = multiple)
+    )
+  }
   add_class(method, "igraph_rewiring_method")
 }
 
-rewire_each_edge <- function(graph, prob, loops=FALSE, multiple=FALSE) {
+rewire_each_edge <- function(graph, prob, loops, multiple) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
         as.logical(multiple))
+}
+
+rewire_each_directed_edge <- function(graph, prob, loops, mode) {
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
+        as.numeric(mode))
 }

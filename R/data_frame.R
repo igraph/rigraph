@@ -28,7 +28,7 @@
 #' the (symbolic) edge list and edge/vertex attributes.
 #'
 #' \code{graph_from_data_frame} creates igraph graphs from one or two data frames.
-#' It has two modes of operatation, depending whether the \code{vertices}
+#' It has two modes of operation, depending whether the \code{vertices}
 #' argument is \code{NULL} or not.
 #'
 #' If \code{vertices} is \code{NULL}, then the first two columns of \code{d}
@@ -43,9 +43,12 @@
 #' symbolic edge list given in \code{d} is checked to contain only vertex names
 #' listed in \code{vertices}.
 #'
-#' Typically, the data frames are exported from some speadsheat software like
+#' Typically, the data frames are exported from some spreadsheet software like
 #' Excel and are imported into R via \code{\link{read.table}},
 #' \code{\link{read.delim}} or \code{\link{read.csv}}.
+#'
+#' All edges in the data frame are included in the graph, which may include
+#' multiple parallel edges and loops.
 #'
 #' \code{as_data_frame} converts the igraph graph into one or more data
 #' frames, depending on the \code{what} argument.
@@ -156,7 +159,7 @@ graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
     if (ncol(vertices) > 1) {
       for (i in 2:ncol(vertices)) {
         newval <- vertices[,i]
-        if (class(newval) == "factor") {
+        if (inherits(newval, "factor")) {
           newval <- as.character(newval)
         }
         attrs[[ names(vertices)[i] ]] <- newval
@@ -177,7 +180,7 @@ graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
   if (ncol(d) > 2) {
     for (i in 3:ncol(d)) {
       newval <- d[,i]
-      if (class(newval) == "factor") {
+      if (inherits(newval, "factor")) {
         newval <- as.character(newval)
       }
       attrs[[ names(d)[i] ]] <- newval
@@ -212,7 +215,7 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
 #'
-#' @family determimistic constructors
+#' @family deterministic constructors
 #' @export
 #' @examples
 #' el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)

@@ -87,7 +87,7 @@
 #' one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
 #' was previously (before version 0.6) used if \code{power} was one and
 #' \code{zero.appeal} was one as well. It works by putting the ids of the
-#' vertices into a bag (mutliset, really), exactly as many times as their
+#' vertices into a bag (multiset, really), exactly as many times as their
 #' (in-)degree, plus once more. Then the required number of cited vertices are
 #' drawn from the bag, with replacement. This method might generate multiple
 #' edges. It only works if \code{power} and \code{zero.appeal} are equal one.
@@ -224,7 +224,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
                as.numeric(p), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     res$p <- p
@@ -233,7 +233,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_gnp}.
 #' @export
 
 gnp <- function(...) constructor_spec(sample_gnp, ...)
@@ -279,7 +279,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
                as.numeric(m), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     res$m <- m
@@ -288,7 +288,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_gnm}.
 #' @export
 
 gnm <- function(...) constructor_spec(sample_gnm, ...)
@@ -349,7 +349,7 @@ erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
                as.numeric(p.or.m), as.logical(directed), as.logical(loops))
 
   if (igraph_opt("add.params")) {
-    res$name <- sprintf("Erdos renyi (%s) graph", type)
+    res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
     if (type=="gnp") { res$p <- p.or.m }
@@ -366,8 +366,8 @@ random.graph.game <- erdos.renyi.game
 
 #' Generate random graphs with a given degree sequence
 #' 
-#' It is often useful to create a graph with given vertex degrees. This is
-#' exactly what \code{sample_degseq} does.
+#' It is often useful to create a graph with given vertex degrees. This function
+#' creates such a graph in a randomized manner.
 #' 
 #' The \dQuote{simple} method connects the out-stubs of the edges (undirected
 #' graphs) or the out-stubs and in-stubs (directed graphs) together. This way
@@ -384,6 +384,11 @@ random.graph.game <- erdos.renyi.game
 #' fast and it will eventually succeed if the provided degree sequence is
 #' graphical, but there is no upper bound on the number of iterations.
 #' 
+#' The \dQuote{simple.no.multiple.uniform} method is a variant of
+#' \dQuote{simple.no.multiple} with the added benefit of sampling uniformly
+#' from the set of all possible simple graphs with the given degree sequence.
+#' Ensuring uniformity has some performance implications, though.
+#'
 #' The \dQuote{vl} method is a more sophisticated generator. The algorithm and
 #' the implementation was done by Fabien Viger and Matthieu Latapy. This
 #' generator always generates undirected, connected simple graphs, it is an
@@ -392,7 +397,7 @@ random.graph.game <- erdos.renyi.game
 #' with the given degree sequence (if this is possible at all). Then some
 #' rewiring is done to make the graph connected. Finally a Monte-Carlo
 #' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
-#' undirected, connected simple graphs unformly.
+#' undirected, connected simple graphs uniformly.
 #'
 #' @aliases degree.sequence.game
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
@@ -407,7 +412,8 @@ random.graph.game <- erdos.renyi.game
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}},
-#' \code{\link{simplify}} to get rid of the multiple and/or loops edges.
+#' \code{\link{simplify}} to get rid of the multiple and/or loops edges,
+#' \code{\link{realize_degseq}} for a deterministic variant.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -440,11 +446,10 @@ random.graph.game <- erdos.renyi.game
 #' all(degree(g5) == degs)
 
 sample_degseq <- function(out.deg, in.deg=NULL,
-                                 method=c("simple", "vl",
-                                   "simple.no.multiple")) {
+                          method=c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
 
   method <- igraph.match.arg(method)
-  method1 <- switch(method, "simple"=0, "vl"=1, "simple.no.multiple"=2)
+  method1 <- switch(method, "simple"=0, "vl"=1, "simple.no.multiple"=2, "simple.no.multiple.uniform"=3)
   if (!is.null(in.deg)) { in.deg <- as.numeric(in.deg) }
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -458,11 +463,14 @@ sample_degseq <- function(out.deg, in.deg=NULL,
 }
 
 #' @rdname sample_degseq
-#' @param ... Passed to \code{sample_degree}.
+#' @param deterministic  Whether the construction should be deterministic
+#' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
+#' or to \code{sample_degseq} otherwise.
 #' @export
 
-degseq <- function(...) constructor_spec(sample_degseq, ...)
-
+degseq <- function(..., deterministic=FALSE) constructor_spec(
+  if (deterministic) realize_degseq else sample_degseq, ...
+)
 
 ## -----------------------------------------------------------------
 
@@ -505,7 +513,7 @@ sample_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
 }
 
 #' @rdname sample_growing
-#' @param ... Passed to \code{sample_app}.
+#' @param ... Passed to \code{sample_growing}.
 #' @export
 
 growing <- function(...) constructor_spec(sample_growing, ...)
@@ -524,9 +532,8 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' network containing a single vertex (and no edges) in the first time step.
 #' Then in each time step (starting with the second) a new vertex is added and
 #' it initiates a number of edges to the old vertices in the network. The
-#' probability that an old vertex is connected to is proportional to \deqn{P[i]
-#' \sim (c\cdot k_i^\alpha+a)(d\cdot l_i^\beta+b)\cdot }{% P[i] ~ (c k[i]^alpha
-#' + a) (d l[i]^beta + a)}
+#' probability that an old vertex is connected to is proportional to
+#' \deqn{P[i] \sim (c\cdot k_i^\alpha+a)(d\cdot l_i^\beta+b)}.
 #' 
 #' Here \eqn{k_i}{k[i]} is the in-degree of vertex \eqn{i} in the current time
 #' step and \eqn{l_i}{l[i]} is the age of vertex \eqn{i}. The age is simply
@@ -556,7 +563,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' 
 #' By default a directed graph is generated, but it \code{directed} is set to
 #' \code{FALSE} then an undirected is created. Even if an undirected graph is
-#' generaed \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
+#' generated \eqn{k_i}{k[i]} denotes only the adjacent edges not initiated by
 #' the vertex itself except if \code{out.pref} is set to \code{TRUE}.
 #' 
 #' If the \code{time.window} argument is given (and not NULL) then
@@ -567,7 +574,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' 
 #' @aliases sample_pa_age aging.prefatt.game aging.barabasi.game aging.ba.game
 #' @param n The number of vertices in the graph.
-#' @param pa.exp The preferantial attachment exponent, see the details below.
+#' @param pa.exp The preferential attachment exponent, see the details below.
 #' @param aging.exp The exponent of the aging, usually a non-positive number,
 #' see details below.
 #' @param m The number of edges each new vertex creates (except the very first
@@ -743,8 +750,8 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' @examples
 #' 
 #' # two types of vertices, they like only themselves
-#' g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), nc=2))
-#' g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), nc=2))
+#' g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
+#' g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
 
 sample_traits_callaway <- function(nodes, types, edge.per.step=1,
                                  type.dist=rep(1, types),
@@ -866,7 +873,7 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' \code{sample_pref} the probability that two vertices will be connected
 #' depends on their type and is given by the \sQuote{pref.matrix} argument.
 #' This matrix should be symmetric to make sense but this is not checked. The
-#' distribution of the different vertes types is given by the
+#' distribution of the different vertex types is given by the
 #' \sQuote{type.dist} vector.
 #' 
 #' For \code{sample_asym_pref} each vertex has an in-type and an
@@ -900,11 +907,11 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @keywords graphs
 #' @examples
 #' 
-#' pf <- matrix( c(1, 0, 0, 1), nr=2)
+#' pf <- matrix( c(1, 0, 0, 1), nrow=2)
 #' g <- sample_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_with_fr)}
 #' 
-#' pf <- matrix( c(0, 1, 0, 0), nr=2)
+#' pf <- matrix( c(0, 1, 0, 0), nrow=2)
 #' g <- sample_asym_pref(20, 2, pref.matrix=pf)
 #' \dontrun{tkplot(g, layout=layout_in_circle)}
 #' 
@@ -917,6 +924,11 @@ sample_pref <- function(nodes, types, type.dist=rep(1, types),
     stop("Invalid size for preference matrix")
   }
   
+  if (!directed && !isSymmetric(pref.matrix)) {
+    warning("Undirected graphs require symmetric preference matrices, symmetrizing matrix. igraph 1.4.0 will reject non-symmetric matrices for undirected graphs.")
+    pref.matrix <- Matrix::forceSymmetric((pref.matrix + t(pref.matrix)) / 2)
+  }
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_preference_game, as.double(nodes),
                as.double(types),
@@ -959,7 +971,7 @@ sample_asym_pref <- function(nodes, types,
   
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_asymmetric_preference_game,
-               as.double(nodes), as.double(types),
+               as.double(nodes), as.double(types), as.double(types),
                matrix(as.double(type.dist.matrix), types, types),
                matrix(as.double(pref.matrix), types, types),
                as.logical(loops))
@@ -1066,7 +1078,7 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' graph is growing.
 #'
 #' \code{sample_cit_types} is similarly a growing stochastic block model,
-#' but the probability of an edge depends on the (potentiall) cited
+#' but the probability of an edge depends on the (potentially) cited
 #' vertex only.
 #' 
 #' @aliases cited.type.game sample_cit_types citing.cited.type.game
@@ -1168,7 +1180,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' Similarly to unipartite (one-mode) networks, we can define the $G(n,p)$, and
 #' $G(n,m)$ graph classes for bipartite graphs, via their generating process.
 #' In $G(n,p)$ every possible edge between top and bottom vertices is realized
-#' with probablity $p$, independently of the rest of the edges. In $G(n,m)$, we
+#' with probability $p$, independently of the rest of the edges. In $G(n,m)$, we
 #' uniformly choose $m$ edges to realize.
 #'
 #' @aliases bipartite.random.game
@@ -1262,6 +1274,8 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' This function samples graphs from a stochastic block model by (doing the
 #' equivalent of) Bernoulli trials for each potential edge with the
 #' probabilities given by the Bernoulli rate matrix, \code{pref.matrix}.
+#' The order of the vertices in the generated graph corresponds to the 
+#' \code{block.sizes} argument. 
 #' 
 #' @aliases sample_sbm sbm.game sbm
 #' @param n Number of vertices in the graph.
@@ -1344,7 +1358,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   commonlen <- unique(c(mlen, rholen, Clen))
 
   if (length(commonlen) == 1 && commonlen == 1) {
-    hsbm.1.game(n, m, rho, C, p)
+    hsbm_1_game(n, m, rho, C, p)
   } else {
     commonlen <- setdiff(commonlen, 1)
     if (length(commonlen) != 1) {
@@ -1361,7 +1375,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
     } else {
       rep(list(C), length.out=commonlen)
     }
-    hsbm.list.game(n, m, rho, C, p)
+    hsbm_list_game(n, m, rho, C, p)
   }  
 }
 
@@ -1666,8 +1680,8 @@ sample_fitness_pl <- sample_fitness_pl
 #' g <- sample_forestfire(10000, fw.prob=0.37, bw.factor=0.32/0.37)
 #' dd1 <- degree_distribution(g, mode="in")
 #' dd2 <- degree_distribution(g, mode="out")
-#' plot(seq(along=dd1)-1, dd1, log="xy")
-#' points(seq(along=dd2)-1, dd2, col=2, pch=2)
+#' plot(seq(along.with=dd1)-1, dd1, log="xy")
+#' points(seq(along.with=dd2)-1, dd2, col=2, pch=2)
 
 sample_forestfire <- sample_forestfire
 
@@ -1682,10 +1696,13 @@ sample_forestfire <- sample_forestfire
 #' 
 #' @param old.graph The original graph.
 #' @param corr A scalar in the unit interval, the target Pearson
-#' correlation between the adjacency matrices of the original the generated
+#' correlation between the adjacency matrices of the original and the generated
 #' graph (the adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two
-#' vertices, it must in the open (0,1) interval.
+#' vertices, it must in the open (0,1) interval. The default is the empirical
+#' edge density of the graph. If you are resampling an Erdos-Renyi graph and
+#' you know the original edge probability of the Erdos-Renyi model, you should
+#' supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
 #' applied on the vertices of the first graph, to get the second graph.  If
 #' \code{NULL}, the vertices are not permuted.
@@ -1698,7 +1715,7 @@ sample_forestfire <- sample_forestfire
 #'   \code{\link{sample_gnp}}
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
-#' \url{http://arxiv.org/abs/1304.7844}
+#' \url{https://arxiv.org/abs/1304.7844}
 #' @examples
 #' g <- sample_gnp(1000, .1)
 #' g2 <- sample_correlated_gnp(g, corr = 0.5)
@@ -1734,7 +1751,7 @@ sample_correlated_gnp <- sample_correlated_gnp
 #'   \code{\link{sample_gnp}}.
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
-#' \url{http://arxiv.org/abs/1304.7844}
+#' \url{https://arxiv.org/abs/1304.7844}
 #' @keywords graphs
 #' @examples
 #' gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,

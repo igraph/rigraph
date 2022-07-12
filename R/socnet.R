@@ -340,7 +340,7 @@ tkigraph <- function() {
 
   OnOK <- function() {
     retval <<- lapply(vars, tcltk::tclvalue)
-    for (i in seq(along=params)) {
+    for (i in seq(along.with=params)) {
       if (params[[i]]$type == "listbox") {
         retval[[i]] <<- as.numeric(tcltk::tclvalue(tcltk::tkcurselection(widgets[[i]])))
       }
@@ -353,7 +353,7 @@ tkigraph <- function() {
          columnspan=2, sticky="nsew", "in"=frame, padx=10, pady=10)
   
   OK.but <- tcltk::tkbutton(dialog, text="   OK    ", command=OnOK)
-  for (i in seq(along=params)) {
+  for (i in seq(along.with=params)) {
     tcltk::tkgrid(tcltk::tklabel(dialog, text=params[[i]]$name),
            column=0, row=i, sticky="nw", padx=10, "in"=frame)
     if (params[[i]]$type == "numeric" || params[[i]]$type == "text") {
@@ -650,7 +650,7 @@ tkigraph <- function() {
   graphs <- get("graphs", .tkigraph.env)
   el <- as_edgelist(graphs[[gnos]])
   el <- data.frame(from=el[,1], to=el[,2])
-#  if (any(V(graphs[[gnos]])$name != seq(length=vcount(graphs[[gnos]])))) {
+#  if (any(V(graphs[[gnos]])$name != seq(length.out=vcount(graphs[[gnos]])))) {
 #    el2 <- as_edgelist(graphs[[gnos]], names=FALSE)
 #    el <- cbind(el, el2)
 #  }
@@ -703,7 +703,7 @@ tkigraph <- function() {
   v <- e <- recip <- dens <- trans <- ltrans <- 
     deg <- maxdeg <- maxindeg <- maxoutdeg <-
       mindeg <- minindeg <- minoutdeg <- numeric()
-  for (i in seq(along=gnos)) {
+  for (i in seq(along.with=gnos)) {
     if (read$vertices) {
       v[i] <- vcount( graphs[[ i ]] )
     }
@@ -1399,7 +1399,7 @@ tkigraph <- function() {
   isconn <- logical()
   dia <- numeric()
   graphs <- get("graphs", .tkigraph.env)
-  for (i in seq(along=gnos)) {
+  for (i in seq(along.with=gnos)) {
     if (mode=="dia") {
       dia[i] <- diameter(graphs[[ gnos[i] ]], directed=FALSE)
     } else if (mode=="path") {
@@ -1447,10 +1447,10 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   comm <- components(graph)
-  members <- sapply(sapply(seq(along=comm$csize),
+  members <- sapply(sapply(seq(along.with=comm$csize),
                            function(i) which(comm$membership==i)),
                     paste, collapse=", ")
-  value <- data.frame("Component"=seq(along=comm$csize), "Members"=members)
+  value <- data.frame("Component"=seq(along.with=comm$csize), "Members"=members)
   .tkigraph.showData(value, title=paste("Components of graph #",
                        gnos), right=FALSE)
 }
@@ -1463,7 +1463,7 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   comm <- components(graph)
-  value <- data.frame("Vertex"=seq(along=comm$membership),
+  value <- data.frame("Vertex"=seq(along.with=comm$membership),
                  "Component"=comm$membership)
   .tkigraph.showData(value, title=paste("Components of graph #", gnos))
 }
@@ -1479,7 +1479,7 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   cs <- components(graph)$csize
-  value <- data.frame(seq(along=cs), cs)
+  value <- data.frame(seq(along.with=cs), cs)
   colnames(value) <- c("Cluster #", "Size")
 
   plot.command <- function() {
@@ -1780,23 +1780,23 @@ tkigraph <- function() {
   tcltk::tkconfigure(txt, state="disabled")
 
   show.communities <- function() {
-    members <- sapply(sapply(seq(along=comm$csize),
+    members <- sapply(sapply(seq(along.with=comm$csize),
                              function(i) which(comm$membership==i)),
                       paste, collapse=", ")
-    value <- data.frame("Community"=seq(along=comm$csize), "Members"=members)
+    value <- data.frame("Community"=seq(along.with=comm$csize), "Members"=members)
     .tkigraph.showData(value,
                        title=paste("Communities, spinglass algorithm on graph #",
                          gnos), right=FALSE)
   }
   show.membership <- function() {
-    value <- data.frame("Vertex"=seq(along=comm$membership),
+    value <- data.frame("Vertex"=seq(along.with=comm$membership),
                    "Community"=comm$membership)
     .tkigraph.showData(value,
                        title=paste("Communities, spinglass algorithm on graph #",
                          gnos))
   }
   show.csize <- function() {
-    value <- data.frame("Comm. #"=seq(along=comm$csize), "Size"=comm$csize)
+    value <- data.frame("Comm. #"=seq(along.with=comm$csize), "Size"=comm$csize)
     value <- value[ order(value[,2], decreasing=TRUE), ]
     .tkigraph.showData(value,
                        title=paste("Communities, spinglass algorithm on graph #",
@@ -1948,7 +1948,7 @@ tkigraph <- function() {
   }
   graphs <- decompose(get("graphs", .tkigraph.env)[[gnos]])
   coh <- sapply(graphs, cohesion)
-  value <- data.frame("Component"=seq(length=length(graphs)), "Cohesion"=coh)
+  value <- data.frame("Component"=seq(length.out=length(graphs)), "Cohesion"=coh)
   .tkigraph.showData(value, title=paste("Cohesion of components in graph #",
                               gnos), right=FALSE)
 }  
@@ -2353,7 +2353,7 @@ tkigraph <- function() {
 
     sortColumn <- function(n, decreasing=FALSE) {
       dataframe <<- dataframe[ order(dataframe[[n]], decreasing=decreasing), ]
-      rownames(dataframe) <- seq(length=nrow(dataframe))
+      rownames(dataframe) <- seq(length.out=nrow(dataframe))
       .tkigraph.showData(dataframe,
                          colname.bgcolor = colname.bgcolor,
                          rowname.bgcolor = rowname.bgcolor,
@@ -2382,7 +2382,7 @@ tkigraph <- function() {
     if (is.null(inthis)) { tcltk::tkgrid(pf, column=5, row=0, rowspan=10, sticky="new") }
 
     if (!is.null(showmean) && is.null(inthis)) {
-      for (i in seq(along=showmean)) {
+      for (i in seq(along.with=showmean)) {
         tcltk::tkgrid(tcltk::tklabel(base, text=showmean[1]), sticky="nsew",
                column=0, padx=1, pady=1, columnspan=4)
       }
@@ -2392,7 +2392,7 @@ tkigraph <- function() {
 
     sortPopup <- function() {
       sortMenu <- tcltk::tkmenu(base, tearoff=FALSE)
-      sapply(seq(along=colnames(dataframe)),
+      sapply(seq(along.with=colnames(dataframe)),
              function(n) {
                tcltk::tkadd(sortMenu, "command", label=colnames(dataframe)[n],
                      command=function() sortColumn(colnames(dataframe)[n]))

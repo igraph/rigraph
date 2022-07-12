@@ -11,7 +11,7 @@ test_that("degree works", {
 
   expect_that(degree(g) / (vcount(g)-1), equals(degree(g, normalized=TRUE)))
 
-  g2 <- sample_gnp(100, 2/100, dir=TRUE)
+  g2 <- sample_gnp(100, 2/100, directed=TRUE)
   din <- degree(g2, mode="in")
   dout <- degree(g2, mode="out")
   el2 <- as_edgelist(g2)

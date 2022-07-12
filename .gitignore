@@ -8,10 +8,13 @@
 /config.status
 /configure
 /igraph_*.tar.gz
+/igraph_*.tgz
 /man/*.Rd
 /object_files
+/revdep/
 /src/
 /version_number
 /configure.ac
 igraph.Rcheck/
+.venv/
 .vscode/

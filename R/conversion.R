@@ -25,7 +25,7 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  
+
   type <- igraph.match.arg(type)
   type <- switch(type, "upper"=0, "lower"=1, "both"=2)
   
@@ -50,26 +50,26 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
            "and the edge attribute is not")
     }
     if (is_directed(graph)) {
-      for (i in seq(length=ecount(graph))) {
+      for (i in seq(length.out=ecount(graph))) {
         e <- ends(graph, i, names = FALSE)
         res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
       }
     } else {
       if (type==0) {
         ## upper
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ min(e), max(e) ] <- edge_attr(graph, attr, i)
         }        
       } else if (type==1) {
         ## lower
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ max(e), min(e) ] <- edge_attr(graph, attr, i)
         }        
       } else if (type==2) {
         ## both
-        for (i in seq(length=ecount(graph))) {
+        for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
           if (e[1] != e[2]) {
@@ -99,8 +99,11 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   vc <- vcount(graph)
   
   el <- as_edgelist(graph, names=FALSE)
+  use.last.ij <- FALSE
+
   if (edges) {
     value <- seq_len(nrow(el))
+    use.last.ij <- TRUE
   } else if (!is.null(attr)) {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
@@ -116,20 +119,20 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   }
 
   if (is_directed(graph)) {
-    res <- Matrix::sparseMatrix(dims=c(vc, vc), i=el[,1], j=el[,2], x=value)
+    res <- Matrix::sparseMatrix(dims=c(vc, vc), i=el[,1], j=el[,2], x=value, use.last.ij=use.last.ij)
   } else {
     if (type=="upper") {
       ## upper
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmin(el[,1],el[,2]),
-                          j=pmax(el[,1],el[,2]), x=value)
+                          j=pmax(el[,1],el[,2]), x=value, use.last.ij=use.last.ij)
     } else if (type=="lower") {
       ## lower
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmax(el[,1],el[,2]),
-                          j=pmin(el[,1],el[,2]), x=value)
+                          j=pmin(el[,1],el[,2]), x=value, use.last.ij=use.last.ij)
     } else if (type=="both") {
       ## both
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmin(el[,1],el[,2]),
-                          j=pmax(el[,1],el[,2]), x=value, symmetric=TRUE)
+                          j=pmax(el[,1],el[,2]), x=value, symmetric=TRUE, use.last.ij=use.last.ij)
       res <- as(res, "dgCMatrix")
     }
   }
@@ -199,6 +202,10 @@ as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
     stop("Not a graph object")
   }
 
+  if (!missing(edges)) {
+    warning("The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0")
+  }
+
   if (!sparse) {
     get.adjacency.dense(graph, type=type, attr=attr, edges=edges, names=names)
   } else {
@@ -261,9 +268,22 @@ as_edgelist <- function(graph, names=TRUE) {
 #' 
 #' Conversion algorithms for \code{as.directed}: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
-#' arbitrarily directed edge is created for each undirected edge.}
+#' arbitrarily directed edge is created for each undirected edge, but the
+#' direction of the edge is deterministic (i.e. it always points the same
+#' way if you call the function multiple times).}
 #' \item{"mutual"}{Two directed edges are created for each undirected
-#' edge, one in each direction.} }
+#' edge, one in each direction.}
+#' \item{"random"}{The number of edges in the graph stays the same, and
+#' a randomly directed edge is created for each undirected edge. You
+#' will get different results if you call the function multiple times
+#' with the same graph.}
+#' \item{"acyclic"}{The number of edges in the graph stays the same, and
+#' a directed edge is created for each undirected edge such that the
+#' resulting graph is guaranteed to be acyclic. This is achieved by ensuring
+#' that edges always point from a lower index vertex to a higher index.
+#' Note that the graph may include cycles of length 1 if the original
+#' graph contained loop edges.}
+#' }
 #' 
 #' Conversion algorithms for \code{as.undirected}: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
@@ -314,17 +334,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #'               edge.attr.comb=list(weight=length))
 #' print(ug4, e=TRUE)
 #' 
-as.directed <- function(graph, mode=c("mutual", "arbitrary")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "arbitrary"=0, "mutual"=1)
-  
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_to_directed, graph, as.numeric(mode))
-}
+as.directed <- as.directed
 
 #' @rdname as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
@@ -393,11 +403,9 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjlist, graph, mode)
   res <- lapply(res, `+`, 1)
-
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
-  
   if (is_named(graph)) names(res) <- V(graph)$name
   res
 }
@@ -415,7 +423,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjedgelist, graph, mode)
-  res <- lapply(res, function(x) E(graph)[x + 1])
+  res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
 }
@@ -573,7 +581,7 @@ as_graphnel <- function(graph) {
   if ("weight" %in% edge_attr_names(graph) &&
       is.numeric(E(graph)$weight)) {
     al <- lapply(as_adj_edge_list(graph, "out"), as.vector)
-    for (i in seq(along=al)) {
+    for (i in seq(along.with=al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse( edges[,2]==i, edges[,1], edges[,2])
       weights <- E(graph)$weight[al[[i]]]
@@ -661,7 +669,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
     recode[!types] <- seq_len(n1)
     recode[types]  <- seq_len(n2)
     
-    for (i in seq(length=ecount(graph))) {
+    for (i in seq(length.out=ecount(graph))) {
       eo <- ends(graph, i, names = FALSE)
       e <- recode[eo]
       if (!types[eo[1]]) {
@@ -775,14 +783,7 @@ as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
                           names=TRUE, sparse=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
-    types <- V(graph)$type 
-  } 
-  if (!is.null(types)) { 
-    types <- as.logical(types) 
-  } else { 
-    stop("Not a bipartite graph, supply `types' argument") 
-  }
+  types <- handle_vertex_type_arg(types, graph)
   
   names <- as.logical(names)
   sparse <- as.logical(sparse)
@@ -866,7 +867,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' @examples
 #' 
 #' ## Directed
-#' g <- make_ring(10, dir=TRUE)
+#' g <- make_ring(10, directed=TRUE)
 #' al <- as_adj_list(g, mode="out")
 #' g2 <- graph_from_adj_list(al)
 #' graph.isomorphic(g, g2)
@@ -929,4 +930,47 @@ as_long_data_frame <- function(graph) {
   edg <- cbind(edg, ver[ el[,1], ], ver2[ el[,2], ])
 
   edg
+}
+
+#' Convert igraph objects to adjacency or edge list matrices
+#'
+#' Get adjacency or edgelist representation of the network stored as an
+#' \code{igraph} object.
+#'
+#' If \code{matrix.type} is \code{"edgelist"}, then a two-column numeric edge list
+#' matrix is returned.  The value of \code{attrname} is ignored.
+#'
+#' If \code{matrix.type} is \code{"adjacency"}, then a square adjacency matrix is
+#' returned. For adjacency matrices, you can use the \code{attr} keyword argument
+#' to use the values of an edge attribute in the matrix cells. See the
+#' documentation of \link{as_adjacency_matrix} for more details.
+#'
+#' Other arguments passed through \code{...} are passed to either
+#' \code{\link{as_adjacency_matrix}} or \code{\link{as_edgelist}}
+#' depending on the value of \code{matrix.type}.
+#'
+#' @param x object of class igraph, the network
+#' @param matrix.type character, type of matrix to return, currently "adjacency"
+#' or "edgelist" are supported
+#' @param \dots other arguments to/from other methods
+#' @return Depending on the value of \code{matrix.type} either a square
+#' adjacency matrix or a two-column numeric matrix representing the edgelist.
+#' @author Michal Bojanowski, originally from the \code{intergraph} package
+#' @seealso \code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
+#' @export
+#' @examples
+#'
+#' g <- make_graph("zachary")
+#' as.matrix(g, "adjacency")
+#' as.matrix(g, "edgelist")
+#' # use edge attribute "weight" 
+#' E(g)$weight <- rep(1:10, each=ecount(g))
+#' as.matrix(g, "adjacency", sparse=FALSE, attr="weight")
+#'
+as.matrix.igraph <- function(x, matrix.type=c("adjacency", "edgelist"), ...) {
+  mt <- match.arg(matrix.type)
+  switch(mt,
+      adjacency = as_adjacency_matrix(graph=x, ...),
+      edgelist = as_edgelist(graph=x, ...)
+  )
 }

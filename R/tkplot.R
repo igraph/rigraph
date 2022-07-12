@@ -77,9 +77,9 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \code{tk_off} closes all Tk plots.
 #' 
-#' \code{tk_fit} fits the plot to the given rectange
+#' \code{tk_fit} fits the plot to the given rectangle
 #' (\code{width} and \code{height}), if some of these are \code{NULL} the
-#' actual phisical width od height of the plot window is used.
+#' actual physical width od height of the plot window is used.
 #' 
 #' \code{tk_reshape} applies a new layout to the plot, its optional
 #' parameters will be collected to a list analogous to \code{layout.par}.
@@ -89,7 +89,7 @@ assign(".next", 1, .tkplot.env)
 #' 
 #' \code{tk_canvas} returns the Tk canvas object that belongs to a graph
 #' plot. The canvas can be directly manipulated then, eg. labels can be added,
-#' it could be saved to a file programatically, etc. See an example below.
+#' it could be saved to a file programmatically, etc. See an example below.
 #' 
 #' \code{tk_coords} returns the coordinates of the vertices in a matrix.
 #' Each row corresponds to one vertex.
@@ -124,7 +124,7 @@ assign(".next", 1, .tkplot.env)
 #' @return \code{tkplot} returns an integer, the id of the plot, this can be
 #' used to manipulate it from the command line.
 #' 
-#' \code{tk_canvas} retuns \code{tkwin} object, the Tk canvas.
+#' \code{tk_canvas} returns \code{tkwin} object, the Tk canvas.
 #' 
 #' \code{tk_coords} returns a matrix with the coordinates.
 #' 
@@ -140,7 +140,7 @@ assign(".next", 1, .tkplot.env)
 #' g <- make_ring(10)
 #' tkplot(g)
 #' 
-#' ## Saving a tkplot() to a file programatically
+#' ## Saving a tkplot() to a file programmatically
 #' g <- make_star(10, center=10) %u% make_ring(9, directed=TRUE)
 #' E(g)$width <- sample(1:10, ecount(g), replace=TRUE)
 #' lay <- layout_nicely(g)
@@ -202,12 +202,12 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   edge.label.color <- params("edge", "label.color")
   arrow.size  <- params("edge", "arrow.size")[1]
   curved <- params("edge", "curved")
-  curved <- rep(curved, length=ecount(graph))
+  curved <- rep(curved, length.out=ecount(graph))
   
   layout <- unname(params("plot", "layout"))
   layout[,2] <- -layout[,2]
   margin <- params("plot", "margin")
-  margin <- rep(margin, length=4)
+  margin <- rep(margin, length.out=4)
 
   # the new style parameters can't do this yet
   arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)
@@ -508,7 +508,7 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 
 .tkplot.layouts.newdefaults <- function(name, defaults) {
   assign("tmp", defaults, .tkplot.env)
-  for (i in seq(along=defaults)) {
+  for (i in seq(along.with=defaults)) {
     cmd <- paste(sep="", '.layouts[["', name, '"]]$params[[', i,
                  ']]$default <- tmp[[', i, ']]')
     eval(parse(text=cmd), .tkplot.env)
@@ -883,10 +883,10 @@ tk_canvas <- function(tkp.id) {
                                      paste("from-", id, sep="")))
   edge.to.ids <- as.numeric(tcltk::tkfind(tkp$canvas, "withtag",
                                    paste("to-", id, sep="")))
-  for (i in seq(along=edge.from.ids)) {
+  for (i in seq(along.with=edge.from.ids)) {
     .tkplot.update.edge(tkp.id, edge.from.ids[i])
   }
-  for (i in seq(along=edge.to.ids)) {
+  for (i in seq(along.with=edge.to.ids)) {
     .tkplot.update.edge(tkp.id, edge.to.ids[i])
   }
 }
@@ -1156,7 +1156,7 @@ tk_canvas <- function(tkp.id) {
   }
   
   OK.but <- tcltk::tkbutton(dialog, text="   OK   ", command=OnOK)
-  for (i in seq(along=labels)) {
+  for (i in seq(along.with=labels)) {
     tcltk::tkgrid(tcltk::tklabel(dialog, text=labels[[i]]))
     tmp <- tcltk::tkentry(dialog, width="40",textvariable=vars[[i]])
     tcltk::tkgrid(tmp)
@@ -1432,7 +1432,7 @@ tk_canvas <- function(tkp.id) {
   submit <- function() {
     realparams <- params <- vector(mode="list", length(layout$params))
     names(realparams) <- names(params) <- names(layout$params)
-    for (i in seq(along=layout$params)) {
+    for (i in seq(along.with=layout$params)) {
       realparams[[i]] <-
         params[[i]] <- switch(layout$params[[i]]$type,
                               "numeric"=as.numeric(tcltk::tkget(values[[i]])),
@@ -1465,7 +1465,7 @@ tk_canvas <- function(tkp.id) {
                  
   row <- 1
   values <- list()
-  for (i in seq(along=layout$params)) {
+  for (i in seq(along.with=layout$params)) {
     
     tcltk::tkgrid(tcltk::tklabel(dialog, text=paste(sep="", layout$params[[i]]$name, ":")),
                    row=row, column=0, sticky="ne", padx=5, pady=5)

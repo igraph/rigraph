@@ -261,16 +261,22 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
     mode <- igraph.match.arg(mode)
     mode <- switch(mode, "out"=1, "in"=2, "all"=3, "total"=3)
   }
+  v <- as.igraph.vs(graph, v)
+  if (length(v) == 0) {
+    stop("No vertex was specified")
+  }
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_neighbors, graph, as.igraph.vs(graph, v)-1,
-               as.numeric(mode))
-  V(graph)[res + 1]
+  res <- .Call(C_R_igraph_neighbors, graph, v-1, as.numeric(mode)) + 1L
+
+  if (igraph_opt("return.vs.es")) res <- create_vs(graph, res)
+
+  res
 }
 
 #' Incident edges of a vertex in a graph
 #'
 #' @param graph The input graph.
-#' @param v The vertex of which the indicent edges are queried.
+#' @param v The vertex of which the incident edges are queried.
 #' @param mode Whether to query outgoing (\sQuote{out}), incoming
 #'   (\sQuote{in}) edges, or both types (\sQuote{all}). This is
 #'   ignored for undirected graphs.
@@ -295,9 +301,12 @@ incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
   } else {
     mode=1
   }
+  v <- as.igraph.vs(graph, v)
+  if (length(v) == 0) {
+    stop("No vertex was specified")
+  }
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_incident, graph, as.igraph.vs(graph, v)-1,
-               as.numeric(mode)) + 1L
+  res <- .Call(C_R_igraph_incident, graph, v-1, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) res <- create_es(graph, res)
 
@@ -391,7 +400,7 @@ get.edges <- function(graph, es) {
 #' vertices.
 #' 
 #' @param graph The input graph.
-#' @param vp The indicent vertices, given as vertex ids or symbolic vertex
+#' @param vp The incident vertices, given as vertex ids or symbolic vertex
 #' names. They are interpreted pairwise, i.e. the first and second are used for
 #' the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in

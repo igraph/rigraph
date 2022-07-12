@@ -146,6 +146,10 @@ test_that("[[ indexing works with filtering on both ends", {
                           i=V(g)[numeric()], j=V(g)[numeric()])))
 })
 
+test_that("[[ indexing is consistent with length()", {
+  expect_that(length(g), equals(vcount(g)))
+})
+
 ################################################################
 
 test_that("[ can query edge ids", {
@@ -184,9 +188,9 @@ test_that("[[ can query incident edges", {
   expect_that(g[[1, , edges=TRUE]], is_equivalent_to(list(a=E(g)[1:2])))
   expect_that(g[[, 2, edges=TRUE]], is_equivalent_to(list(b=E(g)[1])))
   expect_that(g[[, 2, directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
   expect_that(g[[2, directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
 
   expect_that(g[[1:3, , edges=TRUE]],
               is_equivalent_to(list(a=E(g)[1:2], b=E(g)[3:4], c=E(g)[5:6])))
@@ -202,9 +206,9 @@ test_that("[[ queries edges with vertex names", {
   expect_that(g[[, 'b', edges=TRUE]],
               is_equivalent_to(list(b=E(g)[1])))
   expect_that(g[[, 'b', directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
   expect_that(g[['b', directed=FALSE, edges=TRUE]],
-              is_equivalent_to(list(b=E(g)[c(3,4,1)])))
+              is_equivalent_to(list(b=E(g)[c(1,3,4)])))
 
   expect_that(g[[letters[1:3],, edges=TRUE]],
               is_equivalent_to(list(a=E(g)[1:2], b=E(g)[3:4], c=E(g)[5:6])))
@@ -259,5 +263,16 @@ test_that("[[ returns vertex and edges sequences", {
   expect_true(is_igraph_es(g[[1, edges = TRUE]][[1]]))
   expect_true(is_igraph_vs(g[[1:3, 2:6]][[1]]))
   expect_true(is_igraph_es(g[[1:3, 2:6, edges = TRUE]][[1]]))
+
+})
+
+test_that("[[ handles from and to properly even if the graph has conflicting vertex attributes", {
+  
+  ## from & to
+  g <- make_tree(20)
+  V(g)$i <- 200:219
+  V(g)$j <- 200:219
+  expect_true(is_igraph_vs(g[[1:3, 2:6]][[1]]))
+  expect_true(is_igraph_vs(g[[from = 1:3, to = 2:6]][[1]]))
 
 })

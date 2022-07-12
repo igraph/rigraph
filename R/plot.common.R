@@ -54,7 +54,7 @@ i.parse.plot.params <- function(graph, params) {
         if (length(v)==1) {
           return(rep(v, length(range)))
         } else {
-          return (rep(v, length=max(range)+1)[[range+1]])
+          return (rep(v, length.out=max(range)+1)[[range+1]])
         }
       }
     }
@@ -165,7 +165,17 @@ igraph.check.shapes <- function(x) {
   x
 }
 
-
+i.postprocess.layout <- function(maybe_layout) {
+  if ("layout" %in% names(maybe_layout)) {
+    # This branch caters for layout_with_sugiyama, which returns multiple
+    # things
+    layout <- maybe_layout$layout
+  } else {
+    # This is the normal path for layout functions that return matrices
+    layout <- maybe_layout
+  }
+  layout
+}
 
 #' Optimal edge curvature when plotting graphs
 #' 
@@ -207,7 +217,7 @@ curve_multiple <- function(graph, start=0.5) {
     if (length(x) == 1) {
       return(0)
     } else {
-      return(seq(-start, start, length=length(x)))
+      return(seq(-start, start, length.out=length(x)))
     }
   })
 }
@@ -915,6 +925,7 @@ i.vertex.default <- list(color=1,
                          label.font=1,
                          label.cex=1,
                          frame.color="black",
+                         frame.width=1,
                          shape="circle",
                          pie=1,
                          pie.color=list(c("white", "lightblue", "mistyrose",

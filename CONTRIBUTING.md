@@ -19,7 +19,7 @@ igraph C library internally for most things. If your changes involve the C
 library as well, then you need make those changes first, in the repository
 of the C library: https://github.com/igraph/igraph.
 
-## Development and compilation
+## Development and Compilation
 
 All development is being done on the `dev` branch. The actual R package is being
 generated using `make`, which can then be installed. We automatically push the
@@ -41,12 +41,12 @@ and test the `igraph` package using the `devtools` package as follows:
 
 When building from source on Windows, you need to have
 [RTools](https://cran.r-project.org/bin/windows/Rtools/) installed.
-Additionally, the three system requirements of `glpk`, `libxml2` and `gmp` are
-not optional, but hard requirements. For version R > 4.0 you can install these
-thee using
+Additionally, the two system requirements of `glpk` and `libxml2` are
+not optional, but hard requirements. For version R >= 4.0 you can install these
+two from an RTools terminal using
 
 ```
-pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp`
+pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2
 ```
 
 ## Making Trivial Changes

@@ -22,9 +22,9 @@
 ##
 ## ----------------------------------------------------------------------
 
-#' Igraph data structure versions
+#' igraph data structure versions
 #'
-#' Igraph's internal data representation changes sometimes between
+#' igraph's internal data representation changes sometimes between
 #' versions. This means that it is not possible to use igraph objects
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
@@ -52,9 +52,9 @@ graph_version <- function(graph) {
   }
 }
 
-#' Igraph data structure versions
+#' igraph data structure versions
 #'
-#' Igraph's internal data representation changes sometimes between
+#' igraph's internal data representation changes sometimes between
 #' versions. This means that it is not possible to use igraph objects
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.

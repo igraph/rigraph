@@ -77,7 +77,7 @@
 #' graph.isomorphic(proj[[2]], make_full_graph(5))
 #' 
 #' ## The projection keeps the vertex attributes
-#' M <- matrix(0, nr=5, nc=3)
+#' M <- matrix(0, nrow=5, ncol=3)
 #' rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
 #' colnames(M) <- c("Party", "Skiing", "Badminton")
 #' M[] <- sample(0:1, length(M), replace=TRUE)
@@ -90,26 +90,16 @@
 #' 
 bipartite_projection <- function(graph, types=NULL,
                                  multiplicity=TRUE, probe1=NULL,
-				 which=c("both", "true", "false"),
+                                 which=c("both", "true", "false"),
                                  remove.type=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
-  types <- V(graph)$type 
-  } 
-  if (!is.null(types)) {
-    if (!is.logical(types)) {
-      warning("vertex types converted to logical")
-    }
-    types <- as.logical(types)
-    if (any(is.na(types))) {
-      stop("`NA' is not allowed in vertex types")
-    }
-  } else { 
-  stop("Not a bipartite graph, supply `types' argument") 
-  }
+  types <- handle_vertex_type_arg(types, graph)
   if (!is.null(probe1)) {
     probe1 <- as.igraph.vs(graph, probe1)-1
+    if (length(probe1) < 1) {
+      probe1 <- -1
+    }
   } else {
     probe1 <- -1
   }
@@ -171,21 +161,21 @@ bipartite_projection <- function(graph, types=NULL,
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
 #' \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
-#' possibly vertex type mapping, a logical vector. If no such mapping exists,
+#' possible vertex type mapping, a logical vector. If no such mapping exists,
 #' then an empty vector.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples
 #' 
-#' ## A ring has just one loop, so it is fine
+#' ## Rings with an even number of vertices are bipartite
 #' g <- make_ring(10)
 #' bipartite_mapping(g)
 #' 
-#' ## A star is fine, too
+#' ## All star graphs are bipartite
 #' g2 <- make_star(10)
 #' bipartite_mapping(g2)
 #' 
-#' ## A graph containing a triangle is not fine
+#' ## A graph containing a triangle is not bipartite
 #' g3 <- make_ring(10)
 #' g3 <- add_edges(g3, c(1,3))
 #' bipartite_mapping(g3)

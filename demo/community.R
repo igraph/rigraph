@@ -30,7 +30,7 @@ pause()
 
 ### A real little network, Zachary's karate club data
 karate <- make_graph("Zachary")
-karate$layout <- layout_with_kk(karate, niter=1000)
+karate$layout <- layout_with_kk(karate)
 
 pause()
 
@@ -153,8 +153,8 @@ pause()
 clique.community <- function(graph, k) {
   clq <- cliques(graph, min=k, max=k)
   edges <- c()
-  for (i in seq(along=clq)) {
-    for (j in seq(along=clq)) {
+  for (i in seq(along.with=clq)) {
+    for (j in seq(along.with=clq)) {
       if ( length(unique(c(clq[[i]], 
              clq[[j]]))) == k+1 ) {
         edges <- c(edges, c(i,j))
@@ -163,7 +163,7 @@ clique.community <- function(graph, k) {
   }
   clq.graph <- simplify(graph(edges))
   V(clq.graph)$name <- 
-    seq(length=vcount(clq.graph))
+    seq(length.out=vcount(clq.graph))
   comps <- decompose(clq.graph)
   
   lapply(comps, function(x) {
@@ -194,7 +194,7 @@ lay <- c(387.0763, 306.6947, 354.0305, 421.0153, 483.5344, 512.1145,
          465.1220, 317.561, 216.3415, 226.0976, 343.1707, 306.5854, 
          123.6585, 360.2439, 444.3902, 532.1951, 720, 571.2195, 
          639.5122, 505.3659, 644.3902)
-lay <- matrix(lay, nc=2)
+lay <- matrix(lay, ncol=2)
 lay[,2] <- max(lay[,2])-lay[,2]
 
 pause()
@@ -212,7 +212,7 @@ pause()
 
 ### Paint them to different colors
 colbar <- rainbow( length(res)+1 )
-for (i in seq(along=res)) {
+for (i in seq(along.with=res)) {
   V(g)[ res[[i]] ]$color <- colbar[i+1]
 }
 

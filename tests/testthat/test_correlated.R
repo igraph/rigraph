@@ -10,10 +10,40 @@ test_that("sample_correlated_gnp works", {
   set.seed(42)
 
   g <- erdos.renyi.game(10, .1)
-  g2 <- sample_correlated_gnp(g, corr=1, p=g$p, perm=NULL)
+  g2 <- sample_correlated_gnp(g, corr=1, p=g$p, permutation=NULL)
   expect_that(g[], equals(g2[]))
 
-  g3 <- sample_correlated_gnp(g, corr=0, p=g$p, perm=NULL)
+  g3 <- sample_correlated_gnp(g, corr=0, p=g$p, permutation=NULL)
+  c3 <- cor(as.vector(g[]), as.vector(g3[]))
+  expect_true(abs(c3) < .3)
+
+})
+
+test_that("sample_correlated_gnp works when p is not given", {
+
+  library(igraph)
+  set.seed(42)
+
+  g <- erdos.renyi.game(10, .1)
+  g2 <- sample_correlated_gnp(g, corr=1)
+  expect_that(g[], equals(g2[]))
+
+  g3 <- sample_correlated_gnp(g, corr=0)
+  c3 <- cor(as.vector(g[]), as.vector(g3[]))
+  expect_true(abs(c3) < .3)
+
+})
+
+test_that("sample_correlated_gnp works even for non-ER graphs", {
+
+  library(igraph)
+  set.seed(42)
+
+  g <- grg.game(100, 0.2)
+  g2 <- sample_correlated_gnp(g, corr=1)
+  expect_that(g[], equals(g2[]))
+
+  g3 <- sample_correlated_gnp(g, corr=0)
   c3 <- cor(as.vector(g[]), as.vector(g3[]))
   expect_true(abs(c3) < .3)
 
@@ -24,7 +54,7 @@ test_that("sample_correlated_gnp_pair works", {
   library(igraph)
   set.seed(42)
 
-  gp <- sample_correlated_gnp_pair(10, corr=.95, p=.1, perm=NULL)
+  gp <- sample_correlated_gnp_pair(10, corr=.95, p=.1, permutation=NULL)
   expect_true(abs(ecount(gp[[1]]) - ecount(gp[[2]])) < 3)
 
 })

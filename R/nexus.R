@@ -210,7 +210,7 @@ nexus.format.result <- function(l, name="") {
 #' as an igraph graph.
 #' 
 #' Nexus is an online repository of networks, with an API that allow
-#' programatic queries against it, and programatic data download as well.
+#' programmatic queries against it, and programmatic data download as well.
 #' 
 #' The \code{nexus_list} and \code{nexus_info} functions query the online
 #' database. They both return \code{nexusDatasetInfo} objects.
@@ -250,7 +250,7 @@ nexus.format.result <- function(l, name="") {
 #'     available. The various formats are separated by semicolons.}
 #'   \item{licence}{Character scalar, the licence of the dataset.}
 #'   \item{licence url}{Character scalar, the URL of the licence of the
-#'     dataset. Pleaase make sure you consult this before using a dataset.}
+#'     dataset. Please make sure you consult this before using a dataset.}
 #'   \item{summary}{Character scalar, the short description of the dataset,
 #'     this is usually a single sentence.}
 #'   \item{description}{Character scalar, the full description of the
@@ -284,7 +284,7 @@ nexus.format.result <- function(l, name="") {
 #' given about them: the character id of the data set (e.g. \code{kaptail}
 #' or \code{powergrid}), the number of vertices and number of edges in the
 #' graph of the data sets.  For data sets with multiple graphs, intervals
-#' are given here. Then the numeric id of the data set and the reamining
+#' are given here. Then the numeric id of the data set and the remaining
 #' space is filled with the name of the data set.
 #' 
 #' Summary information about an individual Nexus data set is printed as
@@ -369,25 +369,27 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
                        order=c("date", "name", "popularity"),
                        nexus.url=igraph_opt("nexus.url")) {
 
-  operator=igraph.match.arg(operator)
-  order=igraph.match.arg(order)
-  
-  if (is.null(tags)) {
-    u <- paste(sep="", nexus.url, "/api/dataset_info?format=text",
-               "&offset=", offset, "&limit=", limit, "&order=", order)
-    name <- "data set list"
-  } else {
-    tags <- paste(tags, collapse="|")
-    u <- paste(sep="", nexus.url, "/api/dataset_info?tag=", tags,
-               "&operator=", operator, "&format=text",
-               "&offset=", offset, "&limit=", limit, "&order=", order)
-    name <- paste("tags:", gsub("|", "; ", tags, fixed=TRUE))
-  }
-  f <- url(URLencode(u))
-  l <- readLines(f)
-  close(f)
+  stop("The Nexus graph repository is not online any more")
 
-  nexus.format.result(l, name)
+#  operator=igraph.match.arg(operator)
+#  order=igraph.match.arg(order)
+#  
+#  if (is.null(tags)) {
+#    u <- paste(sep="", nexus.url, "/api/dataset_info?format=text",
+#               "&offset=", offset, "&limit=", limit, "&order=", order)
+#    name <- "data set list"
+#  } else {
+#    tags <- paste(tags, collapse="|")
+#    u <- paste(sep="", nexus.url, "/api/dataset_info?tag=", tags,
+#               "&operator=", operator, "&format=text",
+#               "&offset=", offset, "&limit=", limit, "&order=", order)
+#    name <- paste("tags:", gsub("|", "; ", tags, fixed=TRUE))
+#  }
+#  f <- url(URLencode(u))
+#  l <- readLines(f)
+#  close(f)
+#
+#  nexus.format.result(l, name)
 }
 
 #' @export
@@ -396,34 +398,36 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
  
 nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 
-  if (inherits(id, "nexusDatasetInfo")) {
-    id <- id$id
-  } else if (inherits(id, "nexusDatasetInfoList")) {
-    rid <- sapply(id, "[[", "id")
-    res <- lapply(rid, nexus_info, nexus.url=nexus.url)
-    class(res) <- class(id)
-    attributes(res) <- attributes(id)
-    return(res)
-  }  
-  
-  u <- paste(sep="", nexus.url, "/api/dataset_info?format=text&id=", id)
-  f <- url(URLencode(u))
-  l <- readLines(f)
-  close(f)
-  l2 <- character()
-  for (i in seq_along(l)) {
-    if (!grepl("^  ", l[i])) {
-      l2 <- c(l2, l[i])
-    } else {
-      l2[length(l2)] <- paste(sep="\n", l2[length(l2)],
-                              sub("  ", "", l[i], fixed=TRUE))
-    }
-  }
-  l2 <- lapply(l2, function(x)
-               c(sub("[ ]*:.*$", "", x), sub("^[^:]*:[ ]*", "", x)))
-  res <- makeNexusDatasetInfo(l2)
-  if (! "attributes" %in% names(res)) { res$attributes <- list() }
-  return(res)
+  stop("The Nexus graph repository is not online any more")
+
+#  if (inherits(id, "nexusDatasetInfo")) {
+#    id <- id$id
+#  } else if (inherits(id, "nexusDatasetInfoList")) {
+#    rid <- sapply(id, "[[", "id")
+#    res <- lapply(rid, nexus_info, nexus.url=nexus.url)
+#    class(res) <- class(id)
+#    attributes(res) <- attributes(id)
+#    return(res)
+#  }  
+#  
+#  u <- paste(sep="", nexus.url, "/api/dataset_info?format=text&id=", id)
+#  f <- url(URLencode(u))
+#  l <- readLines(f)
+#  close(f)
+#  l2 <- character()
+#  for (i in seq_along(l)) {
+#    if (!grepl("^  ", l[i])) {
+#      l2 <- c(l2, l[i])
+#    } else {
+#      l2[length(l2)] <- paste(sep="\n", l2[length(l2)],
+#                              sub("  ", "", l[i], fixed=TRUE))
+#    }
+#  }
+#  l2 <- lapply(l2, function(x)
+#               c(sub("[ ]*:.*$", "", x), sub("^[^:]*:[ ]*", "", x)))
+#  res <- makeNexusDatasetInfo(l2)
+#  if (! "attributes" %in% names(res)) { res$attributes <- list() }
+#  return(res)
 }  
 
 #' @export
@@ -434,31 +438,33 @@ nexus_get <- function(id, offset=0,
                       order=c("date", "name", "popularity"),
                       nexus.url=igraph_opt("nexus.url")) {
 
-  order=igraph.match.arg(order)
+  stop("The Nexus graph repository is not online any more")
 
-  if (inherits(id, "nexusDatasetInfo")) {
-    id <- id$id
-  } else if (inherits(id, "nexusDatasetInfoList")) {
-    id <- sapply(id, "[[", "id")
-    return(lapply(id, nexus_get, nexus.url=nexus.url))
-  }
-  
-  u <- paste(sep="", nexus.url, "/api/dataset?id=", id, "&format=R-igraph")
-  env <- new.env()
-  rdata <- url(URLencode(u))
-  load(rdata, envir=env)
-  close(rdata)
-  res <- get(ls(env)[1], env)
-
-  upgrade_if_igraph <- function(x) if (is_igraph(x)) upgrade_graph(x) else x
-
-  if (is_igraph(res)) {
-    upgrade_if_igraph(res)
-  } else if (is.list(res)) {
-    res2 <- lapply(res, upgrade_if_igraph)
-    attributes(res2) <- attributes(res)
-    res2
-  }
+#  order=igraph.match.arg(order)
+#
+#  if (inherits(id, "nexusDatasetInfo")) {
+#    id <- id$id
+#  } else if (inherits(id, "nexusDatasetInfoList")) {
+#    id <- sapply(id, "[[", "id")
+#    return(lapply(id, nexus_get, nexus.url=nexus.url))
+#  }
+#  
+#  u <- paste(sep="", nexus.url, "/api/dataset?id=", id, "&format=R-igraph")
+#  env <- new.env()
+#  rdata <- url(URLencode(u))
+#  load(rdata, envir=env)
+#  close(rdata)
+#  res <- get(ls(env)[1], env)
+#
+#  upgrade_if_igraph <- function(x) if (is_igraph(x)) upgrade_graph(x) else x
+#
+#  if (is_igraph(res)) {
+#    upgrade_if_igraph(res)
+#  } else if (is.list(res)) {
+#    res2 <- lapply(res, upgrade_if_igraph)
+#    attributes(res2) <- attributes(res)
+#    res2
+# }
 }
 
 #' @export
@@ -469,22 +475,24 @@ nexus_search <- function(q, offset=0, limit=10,
                          order=c("date", "name", "popularity"),
                          nexus.url=igraph_opt("nexus.url")) {
 
-  order=igraph.match.arg(order)
+  stop("The Nexus graph repository is not online any more")
 
-  u <- paste(sep="", nexus.url, "/api/search?q=", q,
-             "&format=text","&offset=", offset, "&limit=", limit,
-             "&order=", order)
-  f <- url(URLencode(u))
-  l <- readLines(f)
-  close(f)
-
-  if (length(l)==0) {
-    res <- list()
-    class(res) <- "nexusDatasetInfoList"
-    return(res)
-  }
-
-  nexus.format.result(l, name=paste("q:", q))
+#  order=igraph.match.arg(order)
+#
+#  u <- paste(sep="", nexus.url, "/api/search?q=", q,
+#             "&format=text","&offset=", offset, "&limit=", limit,
+#             "&order=", order)
+#  f <- url(URLencode(u))
+#  l <- readLines(f)
+#  close(f)
+#
+#  if (length(l)==0) {
+#    res <- list()
+#    class(res) <- "nexusDatasetInfoList"
+#    return(res)
+#  }
+#
+#  nexus.format.result(l, name=paste("q:", q))
 }
 
 #' @param i Index.

@@ -11,7 +11,7 @@ test_that("bipartite_projection works", {
   expect_true(graph.isomorphic(proj[[1]], make_full_graph(10)))
   expect_true(graph.isomorphic(proj[[2]], make_full_graph(5)))
 
-  M <- matrix(0, nr=5, nc=3)
+  M <- matrix(0, nrow=5, ncol=3)
   rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
   colnames(M) <- c("Party", "Skiing", "Badminton")
   M[] <- sample(0:1, length(M), replace=TRUE)
@@ -89,3 +89,13 @@ test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
   expect_that(bipartite_projection(g),
           throws_error("Non-bipartite edge found in bipartite projection"))
 })
+
+test_that("bipartite_projection prints a warning if the type attribute is non-logical (#476)", {
+
+  library(igraph)
+  g <- make_full_bipartite_graph(10, 5)
+  V(g)$type <- as.numeric(V(g)$type)
+  expect_warning(bipartite_projection(g), "logical")
+  expect_warning(bipartite_projection_size(g), "logical")
+})
+

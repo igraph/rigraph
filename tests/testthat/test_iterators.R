@@ -78,3 +78,21 @@ test_that("indexing with characters work as expected", {
   expect_error(E(g)[1:5]['H'], 'Unknown edge selected')
   expect_error(E(g)[6:9]['a|b'], 'Unknown edge selected')
 })
+
+test_that("variable lookup in environment works", {
+
+  g <- make_ring(10)
+  V(g)$name <- letters[1:10]
+  E(g)$index <- 10:19
+
+  name <- c("d", "e")
+  index <- 3
+
+  # attribute names take precedence over local variables by default...
+  expect_equal(as.vector(V(g)[name]), 1:10)
+  expect_error(E(g)[index], 'Unknown edge selected')
+
+  # ...but you can use .env to get access to the variables
+  expect_equal(as.vector(V(g)[.env$name]), c(4, 5))
+  expect_equal(as.vector(E(g)[.env$index]), 3)
+})

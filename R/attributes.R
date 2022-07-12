@@ -349,7 +349,11 @@ edge_attr <- function(graph, name, index=E(graph)) {
     stop("Not a graph object")
   }
   if (missing(name)) {
-    edge.attributes(graph, name)
+    if (missing(index)) {
+      edge.attributes(graph)
+    } else {
+      edge.attributes(graph, index = index)
+    }
   } else {
     name <- as.character(name)
     index <- as.igraph.es(graph, index)

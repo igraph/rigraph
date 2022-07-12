@@ -129,8 +129,9 @@ centr_degree <- centr_degree
 #' @param mode This is the same as the \code{mode} argument of
 #'   \code{degree}.
 #' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph degree
+#'   calculating the degree. Currently the default value is \code{FALSE},
+#'   but this argument will be required from igraph 1.4.0.
+#' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
 #' @aliases centralization.degree.tmax
@@ -142,10 +143,26 @@ centr_degree <- centr_degree
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_degree(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_degree_tmax(g))
+#'  `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
 
-centr_degree_tmax <- centr_degree_tmax
+centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "total"), loops=FALSE) {
+  # Compatibility check with pre-igraph 1.3.0
+  if (missing(loops)) {
+    warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
+  }
+  # Argument checks
+  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  nodes <- as.integer(nodes)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  loops <- as.logical(loops)
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
+
+  res
+}
 
 
 #' Centralize a graph according to the betweenness of vertices
@@ -156,8 +173,8 @@ centr_degree_tmax <- centr_degree_tmax
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
 #' @param nobigint Logical scalar, whether to use big integers for the
-#' betweenness calculation. This argument is passed to the
-#' \code{\link{betweenness}} function.
+#'   betweenness calculation. This argument is deprecated in igraph 1.3 and
+#'   will be removed in igraph 1.4.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -181,7 +198,22 @@ centr_degree_tmax <- centr_degree_tmax
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
 
-centr_betw <- centr_betw
+centr_betw <- function(graph, directed=TRUE, nobigint=TRUE, normalized=TRUE) {
+  # Argument checks
+  if (!is_igraph(graph)) { stop("Not a graph object") }
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
+
+  if (!missing(nobigint)) {
+    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
+  }
+
+  on.exit( .Call(C_R_igraph_finalizer) )
+  # Function call
+  res <- .Call(C_R_igraph_centralization_betweenness, graph, directed, normalized)
+
+  res
+}
 
 #' Theoretical maximum for betweenness centralization
 #'
@@ -193,7 +225,7 @@ centr_betw <- centr_betw
 #'   given.
 #' @param directed logical scalar, whether to use directed shortest paths
 #'   for calculating betweenness.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
@@ -253,7 +285,7 @@ centr_clo <- centr_clo
 #'   given.
 #' @param mode This is the same as the \code{mode} argument of 
 #'   \code{closeness}.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
 #'
@@ -326,7 +358,7 @@ centr_eigen <- centr_eigen
 #'   for calculating betweenness.
 #' @param scale Whether to rescale the eigenvector centrality scores,
 #'   such that the maximum score is one.
-#' @return Real scalar, the theoratical maximum (unnormalized) graph
+#' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'

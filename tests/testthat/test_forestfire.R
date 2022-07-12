@@ -11,7 +11,7 @@ test_that("sample_forestfire works", {
                dense=c(0.38, 0.38/0.37))
 
   N <- 5000
-  G <- lapply(pars, function(x) sample_forestfire(N, fw=x[1], bw=x[2]))
+  G <- lapply(pars, function(x) sample_forestfire(N, fw.prob=x[1], bw.factor=x[2]))
   
   xv <- log(2:N)
   

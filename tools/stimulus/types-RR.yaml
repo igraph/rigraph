@@ -1,0 +1,486 @@
+
+GRAPH:
+    INCONV: if (!is_igraph(%I%)) { stop("Not a graph object") }
+
+GRAPH_OR_0:
+    INCONV: if (!is.null(graph) && !is_igraph(%I%)) { stop("Not a graph object") }
+
+INTEGER:
+    DEFAULT:
+        FINEITER: max(10, log2(vcount(graph)))
+    INCONV:
+        IN: '%I% <- as.integer(%I%)'
+
+REAL:
+    DEFAULT:
+        ECROSSW: 1.0 - sqrt(density(graph))
+        ELENW: density(graph) / 10
+        NEDISTW: 0.2 * (1-density(graph))
+    INCONV:
+        IN: '%I% <- as.numeric(%I%)'
+
+BOOLEAN:
+    DEFAULT:
+        'False': 'FALSE'
+        'True': 'TRUE'
+    INCONV:
+        IN: '%I% <- as.logical(%I%)'
+
+INDEX_VECTOR:
+    # Indices in R are 1-based; the conversion takes place here
+    INCONV: '%I% <- as.integer(%I%)-1L'
+    OUTCONV: '%I% <- %I%+1'
+
+VECTOR:
+    DEFAULT:
+        AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
+    INCONV: '%I% <- as.numeric(%I%)'
+
+VERTEXINDEX:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
+
+VECTOR_LONG:
+    INCONV: '%I% <- as.numeric(%I%)'
+
+VECTOR_INT:
+    INCONV: '%I% <- as.integer(%I%)'
+
+VECTORM1:
+    INCONV: '%I% <- as.numeric(%I%)-1'
+
+VECTOR_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
+
+VECTORM1_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)-1
+
+VECTOR_LONG_M1:
+    INCONV: '%I% <- as.numeric(%I%)-1'
+
+VECTOR_BOOL:
+    INCONV: '%I% <- as.logical(%I%)'
+
+VECTOR_BOOL_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- as.logical(%I%)
+
+MATRIX:
+    INCONV: '%I% <- as.matrix(structure(as.double(%I%), dim=dim(%I%)))'
+
+MATRIX_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
+
+ARRAY3:
+    INCONV: '%I% <- structure(as.double(%I%), dim=dim(%I%))'
+
+ARRAY3_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
+
+ATTRIBUTES: {}
+
+CONNECTEDNESS:
+    DEFAULT:
+        WEAK: c("weak", "strong")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "weak"=1, "strong"=2)'
+
+NEIMODE:
+    DEFAULT:
+        ALL: c("all", "out", "in", "total")
+        IN: c("in", "out", "all", "total")
+        OUT: c("out", "in", "all", "total")
+        TOTAL: c("total", "out", "in", "all")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2, "all"=3, "total"=3)'
+
+TODIRECTED:
+    DEFAULT:
+        ARBITRARY: c("arbitrary", "mutual", "random", "acyclic")
+        MUTUAL: c("mutual", "arbitrary", "random", "acyclic")
+        RANDOM: c("random", "arbitrary", "mutual", "acyclic")
+        ACYCLIC: c("acyclic", "arbitrary", "mutual", "random")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)'
+
+TOUNDIRECTED:
+    DEFAULT:
+        COLLAPSE: c("collapse", "each", "mutual")
+        EACH: c("each", "collapse", "mutual")
+        MUTUAL: c("mutual", "collapse", "each")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1, "each"=0, "mutual"=2)'
+
+INT:
+    INCONV: '%I% <- as.integer(%I%)'
+
+VERTEX:
+    CALL: '%I%-1'
+    INCONV: |-
+        %I% <- as.igraph.vs(%I1%, %I%)
+        if (length(%I%) == 0) {
+          stop("No vertex was specified")
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
+VERTEXSET:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: V(%I1%)
+    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
+VERTEXSET_INT:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: V(%I1%)
+    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
+EDGESET:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: E(%I1%)
+    INCONV: '%I% <- as.igraph.es(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
+EDGEWEIGHTS:
+    INCONV: |-
+        if (is.null(%I%) && "weight" %in% edge_attr_names(%I1%)) {
+          %I% <- E(%I1%)$weight
+        }
+        if (!is.null(%I%) && any(!is.na(%I%))) {
+          %I% <- as.numeric(%I%)
+        } else {
+          %I% <- NULL
+        }
+
+VERTEXWEIGHTS:
+    INCONV: |-
+        if (is.null(%I%) && "weight" %in% vertex_attr_names(%I1%)) {
+          %I% <- V(%I1%)$weight
+        }
+        if (!is.null(%I%) && any(!is.na(%I%))) {
+          %I% <- as.numeric(%I%)
+        } else {
+          %I% <- NULL
+        }
+
+EDGECAPACITY:
+    INCONV: |-
+        if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
+          %I% <- E(%I1%)$capacity
+        }
+        if (!is.null(%I%) && any(!is.na(%I%))) {
+          %I% <- as.numeric(%I%)
+        } else {
+          %I% <- NULL
+        }
+
+BIPARTITE_TYPES:
+    INCONV: |-
+        %I% <- handle_vertex_type_arg(%I%, %I1%)
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
+
+VERTEX_COLOR:
+    INCONV: |-
+        if (missing(%I%)) {
+          if ("color" %in% vertex_attr_names(%I1%)) {
+            %I% <- V(%I1%)$color
+          } else {
+            %I% <- NULL
+          }
+        }
+        if (!is.null(%I%)) {
+          %I% <- as.integer(%I%)-1L
+        }
+    OUTCONV:
+        OUT: |-
+            %I% <- %I%+1L
+            if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
+              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+            }
+
+EDGE_COLOR:
+    INCONV: |-
+        if (missing(%I%)) {
+          if ("color" %in% edge_attr_names(%I1%)) {
+            %I% <- E(%I1%)$color
+          } else {
+            %I% <- NULL
+          }
+        }
+        if (!is.null(%I%)) {
+          %I% <- as.integer(%I%)-1L
+        }
+    OUTCONV:
+        OUT: |-
+            %I% <- %I%+1L
+
+'NULL':
+    CALL: {}
+    HEADER: ~
+
+EXTRA:
+    CALL: {}
+    HEADER: ~
+
+ISOCOMPAT_FUNC:
+    CALL: {}
+    HEADER: ~
+
+VECTORLIST: {}
+
+MATRIXLIST:
+    INCONV:
+        IN: |-
+            if (!all(sapply(%I%, is.matrix))) {
+              stop("%I% is not a list of matrices")
+            }
+
+VERTEXSETLIST:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              for (i_ in seq_along(%I%)) {
+                %I%[[i_]] <- create_vs(%I1%, %I%[[i_]])
+              }
+            }
+
+VERTEXSETLIST_INT:
+    INCONV:
+        IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
+
+EDGESETLIST:
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              for (i_ in seq_along(%I%)) {
+                %I%[[i_]] <- create_es(%I1%, %I%[[i_]])
+              }
+            }
+
+'ARPACKSTORAGE':
+    CALL: {}
+    HEADER: ~
+
+ARPACKOPT:
+    INCONV:
+        INOUT: '%I%.tmp <- arpack_defaults; %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp'
+
+DRL_OPTIONS:
+    INCONV:
+        IN: '%I%.tmp <- drl_defaults$default; %I%.tmp [names(%I%)] <- %I%; %I% <- %I%.tmp'
+
+STRVECTOR: {}
+
+BLISSSH:
+    DEFAULT:
+        '"f"': c("f", "fs", "fl", "fm", "flm", "fsm")
+        '"fs"': c("fs", "f", "fl", "fm", "flm", "fsm")
+        '"fl"': c("fl", "f", "fs", "fm", "flm", "fsm")
+        '"fm"': c("fm", "f", "fs", "fl", "flm", "fsm")
+        '"flm"': c("flm", "f", "fs", "fl", "fm", "fsm")
+        '"fsm"': c("fsm", "f", "fs", "fl", "fm", "flm")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)'
+
+BLISSINFO: {}
+
+ADJLIST:
+    INCONV: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
+
+COMMCMP:
+    DEFAULT:
+        VI: c("vi", "nmi", "split.join", "rand", "adjusted.rand")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "vi"=0, "nmi"=1, "split.join"=2, "rand"=3, "adjusted.rand"=4)
+
+SUBGRAPH_IMPL:
+    DEFAULT:
+        AUTO: c("auto", "copy_and_delete", "create_from_scratch")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "auto"=0, "copy_and_delete"=1, "create_from_scratch"=2)'
+
+EDGE_ATTRIBUTE_COMBINATION:
+    DEFAULT:
+        Default: igraph_opt("edge.attr.comb")
+    INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
+
+VERTEX_ATTRIBUTE_COMBINATION:
+    DEFAULT:
+        Default: igraph_opt("vertex.attr.comb")
+    INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
+
+ADD_WEIGHTS:
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "no"=0, "yes"=1, "auto"=2)'
+
+HRG:
+    DEFAULT:
+        Default: 'NULL'
+    INCONV: |-
+        if (is.null(%I%)) {
+          %I% <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
+        }
+        %I% <- lapply(%I%[c("left","right","prob","edges","vertices")], as.numeric)
+
+RECIP:
+    DEFAULT:
+        Default: c('default', 'ratio')
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), ''default''=0, ''ratio''=1)'
+
+SCGMAT:
+    DEFAULT:
+        Default: c("symmetric", "laplacian", "stochastic")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "symmetric"=1, "laplacian"=2, "stochastic"=3)
+
+SCGALGO:
+    DEFAULT:
+        Default: c("optimum", "interv_km", "interv", "exact_scg")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "optimum"=1, "interv_km"=2, "interv"=3, "exact_scg"=4)
+
+SCGNORM:
+    DEFAULT:
+        Default: c("row", "col")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "row"=1, "col"=2)'
+
+SCGDIR:
+    DEFAULT:
+        Default: c("default", "left", "right")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)'
+
+SPARSEMAT:
+    INCONV: require(Matrix); %I% <- as(%I%, "dgCMatrix")
+
+SPARSEMAT_OR_0:
+    INCONV: |-
+        if (!is.null(%I%)) {
+          require(Matrix); %I% <- as(%I%, "dgCMatrix")
+        }
+
+VECTOR_COMPLEX:
+    INCONV: '%I% <- as.complex(%I%)'
+
+MATRIX_COMPLEX:
+    INCONV: '%I% <- as.matrix(structure(as.complex(%I%), dim=dim(%I%)))'
+
+PLFIT: {}
+
+MAXFLOW_STATS:
+    CALL: {}
+    HEADER: ~
+
+EIGENALGO:
+    DEFAULT:
+        ARPACK: c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "auto"=0, "lapack"=1,
+          "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
+          "comp_arpack"=5)
+
+EIGENWHICH:
+    DEFAULT:
+        Default: list()
+    INCONV: |-
+        %I%.tmp <- eigen_defaults;
+        %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp
+
+EIGENWHICHPOS:
+    DEFAULT:
+        ASE: c("lm", "la", "sa")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "lm"=0L, "la"=2L, "sa"=3L)'
+
+SIRLIST: {}
+
+PAGERANKALGO:
+    DEFAULT:
+        PRPACK: c("prpack", "arpack")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "arpack"=1L, "prpack"=2L)
+
+PAGERANKOPT:
+    INCONV: |-
+        if (is.null(%I%)) {
+          if (%I1% == 0L) {
+            %I% <- list(niter=1000, eps=0.001)
+          } else if (%I1% == 1L) {
+            %I% <- arpack_defaults
+          } else {
+            %I% <- NULL
+          }
+        }
+
+DEPRECATED:
+    CALL: {}
+    HEADER: ~
+    INCONV: if (!missing(%I%)) { warning("Argument `%I%' is deprecated and has no effect") }
+
+LSETYPE:
+    DEFAULT:
+        Default: c("default", "D-A", "DAD", "I-DAD", "OAP")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%),
+          "default"=if (is.directed(%I1%)) 3L else 0L,
+          "da"=0L, "d-a"=0L, "idad"=1L, "i-dad"=1L, "dad"=2L,
+          "oap"=3L)
+
+RWSTUCK:
+    DEFAULT:
+        RETURN: c("return", "error")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "error" = 0L, "return" = 1L)'
+
+EDGE_TYPE_SW:
+    DEFAULT:
+        SIMPLE: c("simple", "loops", "multi", "all")
+        LOOPS: c("loops", "simple", "multi", "all")
+        MULTI: c("multi", "simple", "loops", "all")
+        ALL: c("all", "simple", "loops", "multi")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%),
+          "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
+
+RANDOM_TREE_METHOD:
+    DEFAULT:
+        PRUFER: c("prufer", "lerw")
+        LERW: c("lerw", "prufer")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "prufer"=0L, "lerw"=1L)
+
+GREEDY_COLORING_HEURISTIC:
+    DEFAULT:
+        NEIGHBORS: c("colored_neighbors")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L)
+
+REALIZE_DEGSEQ_METHOD:
+    DEFAULT:
+        SMALLEST: c("smallest", "largest", "index")
+        LARGEST: c("largest", "smallest", "index")
+        INDEX: c("index", "smallest", "largest")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "smallest"=0L, "largest"=1L, "index"=2L)
+
+FAS_ALGORITHM:
+    DEFAULT:
+        EXACT_IP: c("exact_ip", "approx_eades")
+        APPROX_EADES: c("approx_eades", "exact_ip")
+    INCONV: |-
+        %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)

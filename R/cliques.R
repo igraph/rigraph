@@ -21,7 +21,7 @@
 
 
 
-#' The functions find cliques, ie. complete subgraphs in a graph
+#' Functions to find cliques, ie. complete subgraphs in a graph
 #' 
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
@@ -33,20 +33,20 @@
 #' clique is largest if there is no other clique including more vertices.
 #' 
 #' \code{max_cliques} finds all maximal cliques in the input graph.  A
-#' clique in maximal if it cannot be extended to a larger clique. The largest
-#' cliques are always maximal, but a maximal clique is not neccessarily the
+#' clique is maximal if it cannot be extended to a larger clique. The largest
+#' cliques are always maximal, but a maximal clique is not necessarily the
 #' largest.
 #' 
 #' \code{count_max_cliques} counts the maximal cliques.
 #' 
 #' \code{clique_num} calculates the size of the largest clique(s).
 #' 
-#' The current implementation of these functions searches for maximal
-#' independent vertex sets (see \code{\link{ivs}}) in the
-#' complementer graph.
-#' 
+#' \code{clique_size_counts} returns a numeric vector representing a histogram
+#' of clique sizes, between the given minimum and maximum clique size.
+#'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
+#' clique_size_counts
 #' @param graph The input graph, directed graphs will be considered as
 #' undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -55,7 +55,7 @@
 #' \code{NULL} means no limit.
 #' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
 #' return a list containing numeric vectors of vertex ids. Each list element is
-#' a clique.
+#' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
 #' 
 #' \code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
 #' argument is not \code{NULL}. The output is written to the specified file in
@@ -63,12 +63,17 @@
 #' 
 #' \code{clique_num} and \code{count_max_cliques} return an integer
 #' scalar.
+#'
+#' \code{clique_size_counts} returns a numeric vector with the clique sizes such that
+#' the i-th item belongs to cliques of size i. Trailing zeros are currently
+#' truncated, but this might change in future versions.
+#'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{ivs}}
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
-#' in Sparse Graphs in Near-optimal Time.  \url{http://arxiv.org/abs/1006.5440}
+#' in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 #' @export
 #' @keywords graphs
 #' @examples
@@ -82,48 +87,10 @@
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
-#' 
-#' 
-cliques <- function(graph, min=NULL, max=NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  if (is.null(min)) {
-    min <- 0
-  }
-  if (is.null(max)) {
-    max <- 0
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_cliques, graph, as.numeric(min), as.numeric(max))
-  res <- lapply(res, function(x) x+1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
-  }
-
-  res
-}
+cliques <- cliques
 
 #' @export
-
-largest_cliques <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_largest_cliques, graph)
-  res <- lapply(res, function(x) x+1)
-
-  if (igraph_opt("return.vs.es")) {
-    res <- lapply(res, create_vs, graph = graph)
-  }
-
-  res
-}
+largest_cliques <- largest_cliques
 
 #' @rdname cliques
 #' @param subset If not \code{NULL}, then it must be a vector of vertex ids,
@@ -137,9 +104,7 @@ largest_cliques <- function(graph) {
 #' in the file, given with the numeric ids of its vertices, separated by
 #' whitespace.
 #' @export
-
-max_cliques <- function(graph, min=NULL, max=NULL,
-                            subset=NULL, file=NULL) {
+max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
   }
@@ -207,17 +172,71 @@ count_max_cliques <- function(graph, min=NULL, max=NULL,
 }
 
 #' @export
-
-clique_num <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object");
-  }
-  
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_clique_number, graph)
-}
+clique_num <- clique_num
 
 
+#' Functions to find weighted cliques, ie. weighted complete subgraphs in a graph
+#' 
+#' These functions find all, the largest or all the maximal weighted cliques in
+#' an undirected graph. The weight of a clique is the sum of the weights of its
+#' edges.
+#' 
+#' \code{weighted_cliques} find all complete subgraphs in the input graph,
+#' obeying the weight limitations given in the \code{min} and \code{max}
+#' arguments.
+#' 
+#' \code{largest_weighted_cliques} finds all largest weighted cliques in the
+#' input graph. A clique is largest if there is no other clique whose total
+#' weight is larger than the weight of this clique.
+#' 
+#' \code{max_weighted_cliques} finds all maximal weighted cliques in the input graph.
+#' A weighted clique is maximal if it cannot be extended to a clique with larger
+#' total weight. The largest weighted cliques are always maximal, but a maximal
+#' weighted clique is not necessarily the largest.
+#' 
+#' \code{count_max_weighted_cliques} counts the maximal weighted cliques.
+#' 
+#' \code{weighted_clique_num} calculates the weight of the largest weighted clique(s).
+#' 
+#' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
+#' count_max_weighted_cliques weighted_clique_num
+#' @param graph The input graph, directed graphs will be considered as
+#' undirected ones, multiple edges and loops are ignored.
+#' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
+#' \code{NULL} means no limit, ie. it is the same as 0.
+#' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
+#' \code{NULL} means no limit.
+#' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
+#' vertex attribute, then this is used by default. If the graph does not have a
+#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
+#' vertex is assumed to have a weight of 1. Note that the current implementation
+#' of the weighted clique finder supports positive integer weights only.
+#' @param maximal Specifies whether to look for all weighted cliques (\code{FALSE})
+#' or only the maximal ones (\code{TRUE}).
+#' @return \code{weighted_cliques} and \code{largest_weighted_cliques} return a
+#' list containing numeric vectors of vertex IDs. Each list element is a weighted
+#' clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#' 
+#' \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
+#' scalar.
+#'
+#' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
+#' \email{csardi.gabor@@gmail.com}
+#' @seealso \code{\link{ivs}}
+#' @export
+#' @keywords graphs
+#' @examples
+#' 
+#' g <- make_graph("zachary")
+#' V(g)$weight <- 1
+#' V(g)[c(1,2,3,4,14)]$weight <- 3
+#' weighted_cliques(g)
+#' weighted_cliques(g, maximal=TRUE)
+#' largest_weighted_cliques(g)
+#' weighted_clique_num(g)
+weighted_cliques <- weighted_cliques
+largest_weighted_cliques <- largest_weighted_cliques
+weighted_clique_num <- weighted_clique_num
 
 #' Independent vertex sets
 #' 
@@ -356,4 +375,14 @@ ivs_size <- function(graph) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_independence_number, graph)
+}
+
+#' @export
+
+clique_size_counts <- function(graph, min=0, max=0, maximal=FALSE, ...) {
+  if (maximal) {
+    maximal_clique_size_counts(graph, min, max, ...)
+  } else {
+    all_clique_size_counts(graph, min, max, ...)
+  }
 }

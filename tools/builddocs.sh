@@ -2,7 +2,12 @@
 
 tempdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 trap "rm -rf ${tempdir}" EXIT
-rsync -avq --exclude=cigraph --exclude=.git --exclude revdep . ${tempdir}/
+rsync -avq \
+    --exclude=cigraph \
+    --exclude=.git \
+    --exclude=revdep \
+    --exclude=.venv \
+    . ${tempdir}/
 
 (
     cd ${tempdir}
@@ -11,6 +16,7 @@ rsync -avq --exclude=cigraph --exclude=.git --exclude revdep . ${tempdir}/
     Rscript -e 'library(devtools) ; document()'
 )
 
+cp doc/*.Rd man/
 cp ${tempdir}/DESCRIPTION .
 cp ${tempdir}/NAMESPACE .
 cp ${tempdir}/man/* man/

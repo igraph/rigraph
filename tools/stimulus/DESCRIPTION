@@ -2,7 +2,7 @@ Package: igraph
 Version: @@@@@@@@@@ missing @@@@@@@@@@
 Title:  Network Analysis and Visualization
 Author: See AUTHORS file.
-Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
+Maintainer: Tamás Nepusz <ntamas@gmail.com>
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
   and regular graphs, graph visualization, centrality methods and much more.
@@ -27,7 +27,11 @@ Suggests:
     withr,
     digest
 License: GPL (>= 2)
-URL: http://igraph.org
-SystemRequirements: gmp (optional), libxml2 (optional), glpk (optional)
-BugReports: https://github.com/igraph/igraph/issues
+URL: https://igraph.org, https://igraph.discourse.group/
+SystemRequirements:
+    gmp (optional),
+    libxml2 (optional),
+    glpk (>= 4.57, optional),
+    C++11
+BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
