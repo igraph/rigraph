@@ -26,31 +26,12 @@
 #' @format NULL
 #' @usage NULL
 #' @export
-.data <- structure(list(), class = "igraph_fake_env_pronoun")
+#' @md
+.data <- rlang::.data
 
 #' @rdname dot-data
 #' @format NULL
 #' @usage NULL
 #' @export
-.env <- .data
+.env <- rlang::.env
 
-# Helps work around roxygen loading issues
-#' @export
-length.igraph_fake_env_pronoun <- function(...) 0L
-#' @export
-names.igraph_fake_env_pronoun <- function(...) NULL
-#' @export
-`$.igraph_fake_env_pronoun` <- function(...) NULL
-#' @export
-`[[.igraph_fake_env_pronoun` <- function(...) NULL
-#' @export
-print.igraph_fake_env_pronoun <- function(...) cat("<pronoun>\n")
-
-#' @export
-`$.igraph_fake_env_pronoun` <- function(...) {
-  stop("This object can be used only in an indexing expression.")
-}
-#' @export
-`[[.igraph_fake_env_pronoun` <- function(...) {
-  stop("This object can be used only in an indexing expression.")
-}

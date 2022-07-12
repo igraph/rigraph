@@ -2,6 +2,7 @@
 #' @useDynLib igraph, .registration = TRUE, .fixes = "C_"
 #' @import methods
 #' @importFrom magrittr %>%
+#' @importFrom rlang .data .env
 #' @export make_bipartite_graph
 #' @export connect
 #' @export make_de_bruijn_graph

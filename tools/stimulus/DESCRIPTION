@@ -13,6 +13,7 @@ Imports:
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),
+    rlang,
     stats,
     utils
 Suggests:
