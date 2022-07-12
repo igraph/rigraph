@@ -95,4 +95,7 @@ test_that("variable lookup in environment works", {
   # ...but you can use .env to get access to the variables
   expect_equal(as.vector(V(g)[.env$name]), c(4, 5))
   expect_equal(as.vector(E(g)[.env$index]), 3)
+
+  # ...and you can use .data to get access to the attributes explicitly
+  expect_equal(as.vector(E(g)[.data$index >= 15]), 6:10)
 })
