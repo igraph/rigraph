@@ -585,7 +585,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
         .from = .from, from = from,
         .to = .to, to = to,
         .env = env,
-        .data = attrs
+        .data = list(attrs)
       )
     )
 
@@ -874,7 +874,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .igraph.graph = list(graph),
         `%--%`=`%--%`, `%->%`=`%->%`, `%<-%`=`%<-%`,
         .env = env,
-        .data = attrs
+        .data = list(attrs)
       )
     )
     
