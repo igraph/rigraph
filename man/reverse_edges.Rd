@@ -2,14 +2,19 @@
 % Please edit documentation in R/operators.R
 \name{reverse_edges}
 \alias{reverse_edges}
+\alias{t.igraph}
 \title{Reverse edges in a graph}
 \usage{
 reverse_edges(graph, eids = E(graph))
+
+\method{t}{igraph}(x)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{eids}{The edge IDs of the edges to reverse.}
+
+\item{x}{The input graph.}
 }
 \value{
 The result graph where the direction of the edges with the given
@@ -18,7 +23,8 @@ The result graph where the direction of the edges with the given
 \description{
 The new graph will contain the same vertices, edges and attributes as
 the original graph, except that the direction of the edges selected by
-their edge IDs in the \code{eids} argument will be reversed.
+their edge IDs in the \code{eids} argument will be reversed. When reversing
+all edges, this operation is also known as graph transpose.
 }
 \examples{
 
