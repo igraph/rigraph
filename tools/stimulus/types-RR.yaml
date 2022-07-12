@@ -274,8 +274,9 @@ EDGESETLIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
+              es <- E(%I1%)
               for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- create_es(%I1%, %I%[[i_]])
+                %I%[[i_]] <- unsafe_create_es(%I1%, %I%[[i_]], es = es)
               }
             }
 
