@@ -721,7 +721,7 @@ for technical reasons. This version was actually never really
 released, but some R packages of this version were uploaded to
 CRAN, so we include this version in this NEW file.
 
-# New features and bug fixes
+## New features and bug fixes
 
 - Added a vertex shape API for defining new vertex shapes, and also
   a couple of new vertex shapes.
@@ -806,7 +806,7 @@ Released June 11, 2012
 See also the release notes at
 http://igraph.sf.net/relnotes-0.6.html
 
-# R: Major new features
+## R: Major new features
 
 - Vertices and edges are numbered from 1 instead of 0.
   Note that this makes most of the old R igraph code incompatible
@@ -834,7 +834,7 @@ http://igraph.sf.net/relnotes-0.6.html
   informative way. The output of summary() was also updated
   accordingly.
 
-# R: Other new features
+## R: Other new features
 
 - It is possible to mark vertex groups on plots, via
   shading. Communities and cohesive blocks are plotted using this by
@@ -849,9 +849,9 @@ http://igraph.sf.net/relnotes-0.6.html
   getIgraphOpt().
 - Igraph functions can now print status messages.
 
-# R: New or updated functions
+## R: New or updated functions
 
-## Community detection
+### Community detection
 
 - The multi-level modularity optimization community structure detection
   algorithm by Blondel et al. was added, see multilevel.community().
@@ -863,14 +863,14 @@ http://igraph.sf.net/relnotes-0.6.html
 - Added the InfoMAP community finding method, thanks to Emmanuel
   Navarro for the code. See infomap.community().
 
-## Shortest paths
+### Shortest paths
 
 - Eccentricity (eccentricity()), and radius (radius()) calculations.
 - Shortest path calculations with get.shortest.paths() can now
   return the edges along the shortest paths.
 - get.all.shortest.paths() now supports edge weights.
 
-## Centrality
+### Centrality
 
 - Centralization scores for degree, closeness, betweenness and
   eigenvector centrality. See centralization.scores().
@@ -886,13 +886,13 @@ http://igraph.sf.net/relnotes-0.6.html
 - Betweenness calculation can now use arbitrarily large integers,
   this is required for some lattice-like graphs to avoid overflow.
 
-## Input/output and file formats
+### Input/output and file formats
 
 - Support the DL file format in graph.read(). See
   http://www.analytictech.com/networks/dataentry.htm.
 - Support writing the LEDA file format in write.graph().
 
-## Plotting and layouts
+### Plotting and layouts
 
 - Star layout: layout.star().
 - Layout based on multidimensional scaling, layout.mds().
@@ -900,7 +900,7 @@ http://igraph.sf.net/relnotes-0.6.html
 - Sugiyama layout algorithm for layered directed acyclic graphs,
   layout.sugiyama().
 
-## Graph generators
+### Graph generators
 
 - New graph generators: static.fitness.game(), static.power.law.game().
 - barabasi.game() was rewritten and it supports three algorithms now,
@@ -909,7 +909,7 @@ http://igraph.sf.net/relnotes-0.6.html
 - The Watts-Strogatz graph generator, igraph_watts_strogatz() can
   now create graphs without loop edges.
 
-## Others
+### Others
 
 - Added the Spectral Coarse Graining algorithm, see scg().
 - The cohesive.blocks() function was rewritten in C, it is much faster
