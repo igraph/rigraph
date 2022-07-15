@@ -1177,21 +1177,21 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' 
 #' Generate bipartite graphs using the Erdos-Renyi model
 #' 
-#' Similarly to unipartite (one-mode) networks, we can define the $G(n,p)$, and
-#' $G(n,m)$ graph classes for bipartite graphs, via their generating process.
-#' In $G(n,p)$ every possible edge between top and bottom vertices is realized
-#' with probability $p$, independently of the rest of the edges. In $G(n,m)$, we
-#' uniformly choose $m$ edges to realize.
+#' Similarly to unipartite (one-mode) networks, we can define the \eqn{G(n,p)}, and
+#' \eqn{G(n,m)} graph classes for bipartite graphs, via their generating process.
+#' In \eqn{G(n,p)} every possible edge between top and bottom vertices is realized
+#' with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
+#' uniformly choose \eqn{m} edges to realize.
 #'
 #' @aliases bipartite.random.game
 #' @param n1 Integer scalar, the number of bottom vertices.
 #' @param n2 Integer scalar, the number of top vertices.
 #' @param type Character scalar, the type of the graph, \sQuote{gnp} creates a
-#' $G(n,p)$ graph, \sQuote{gnm} creates a $G(n,m)$ graph. See details below.
-#' @param p Real scalar, connection probability for $G(n,p)$ graphs. Should not
-#' be given for $G(n,m)$ graphs.
-#' @param m Integer scalar, the number of edges for $G(n,p)$ graphs. Should not
-#' be given for $G(n,p)$ graphs.
+#' \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
+#' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
+#' be given for \eqn{G(n,m)} graphs.
+#' @param m Integer scalar, the number of edges for \eqn{G(n,p)} graphs. Should not
+#' be given for \eqn{G(n,p)} graphs.
 #' @param directed Logical scalar, whether to create a directed graph. See also
 #' the \code{mode} argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
