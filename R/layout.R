@@ -577,11 +577,21 @@ layout_nicely <- function(graph, dim=2, ...) {
       cbind(V(graph)$x, V(graph)$y)
     }
 
-  } else if (vcount(graph) < 1000) {
-    layout_with_fr(graph, dim=dim, ...)
-
   } else {
-    layout_with_drl(graph, dim=dim, ...)
+    weights <- list(...)$weights
+    if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+      weights <- E(graph)$weight
+    }
+    if (any(weights <= 0)) {
+      warning("Negative edge weight found, ignoring all weights during graph layout.")
+      weights <- NA
+    }
+    if (vcount(graph) < 1000) {
+      layout_with_fr(graph, dim=dim, weights=weights, ...)
+
+    } else {
+      layout_with_drl(graph, dim=dim, weights=weights, ...)
+    }
   }
 
 }
