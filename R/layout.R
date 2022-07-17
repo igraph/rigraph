@@ -583,7 +583,7 @@ layout_nicely <- function(graph, dim=2, ...) {
       weights <- E(graph)$weight
     }
     if (any(weights <= 0)) {
-      warning("Negative edge weight found, ignoring all weights during graph layout.")
+      warning("Non-positive edge weight found, ignoring all weights during graph layout.")
       weights <- NA
     }
     if (vcount(graph) < 1000) {
@@ -970,7 +970,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' attribute is used by default, if present. If weights are given, then the
 #' attraction along the edges will be multiplied by the given edge weights.
 #' This places vertices connected with a highly weighted edge closer to
-#' each other.
+#' each other. Weights must be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.
@@ -1252,7 +1252,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 #' The Kamada-Kawai layout algorithm
 #'
-#' Place the vertices on the plane, or in the 3d space, based on a physical
+#' Place the vertices on the plane, or in 3D space, based on a physical
 #' model of springs.
 #'
 #' See the referenced paper below for the details of the algorithm.
@@ -1276,7 +1276,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #' Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
-#' Note that this is opposite to \code{\link{layout_with_fr}}.
+#' Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+#' be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.
