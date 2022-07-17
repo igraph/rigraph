@@ -543,6 +543,9 @@ layout.circle <- function(..., params = list()) {
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
+#' @param weights A vector giving edge weights. The \code{weight} edge
+#' attribute is used by default, if present. Weights may not be used,
+#' depending on which layout method is selected automatically.
 #' @param \dots For \code{layout_nicely} the extra arguments are passed to
 #'   the real layout function. For \code{nicely} all argument are passed to
 #'   \code{layout_nicely}.
