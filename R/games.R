@@ -975,15 +975,17 @@ sample_asym_pref <- function(nodes, types,
                matrix(as.double(type.dist.matrix), types, types),
                matrix(as.double(pref.matrix), types, types),
                as.logical(loops))
+  V(res[[1]])$outtype <- res[[2]] + 1
+  V(res[[1]])$intype  <- res[[3]] + 1
   if (igraph_opt("add.params")) {
-    res$name <- "Asymmetric preference random graph"
-    res$types <- types
-    res$type.dist.matrix <- type.dist.matrix
-    res$pref.matrix <- pref.matrix
-    res$loops <- loops
+    res[[1]]$name <- "Asymmetric preference random graph"
+    res[[1]]$types <- types
+    res[[1]]$type.dist.matrix <- type.dist.matrix
+    res[[1]]$pref.matrix <- pref.matrix
+    res[[1]]$loops <- loops
   }
 
-  res
+  res[[1]]
 }
 
 #' @rdname sample_pref
