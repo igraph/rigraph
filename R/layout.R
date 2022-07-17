@@ -553,7 +553,7 @@ layout.circle <- function(..., params = list()) {
 #' @export
 #' @family graph layouts
 
-layout_nicely <- function(graph, dim=2, ...) {
+layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
 
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
@@ -578,7 +578,6 @@ layout_nicely <- function(graph, dim=2, ...) {
     }
 
   } else {
-    weights <- list(...)$weights
     if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
       weights <- E(graph)$weight
     }
