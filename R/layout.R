@@ -543,9 +543,11 @@ layout.circle <- function(..., params = list()) {
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param weights A vector giving edge weights. The \code{weight} edge
-#' attribute is used by default, if present. Weights may not be used,
-#' depending on which layout method is selected automatically.
+#' @param weights A vector giving edge weights. If \code{NULL} (the default),
+#' then the 'weight' edge attribute is used, if present. Supply \code{NA} here
+#' to ignore edge weights. Weights must be strictly positive, otherwise
+#' they will be ignored. Weights may not be used at all, depending on which
+#' layout method is selected automatically.
 #' @param \dots For \code{layout_nicely} the extra arguments are passed to
 #'   the real layout function. For \code{nicely} all argument are passed to
 #'   \code{layout_nicely}.
@@ -563,7 +565,7 @@ layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
   ##    we use those (and the 'z' vertex attribute as well, if present).
   ## 3. Otherwise, if the graph is small (<1000) we use
   ##    the Fruchterman-Reingold layout.
-  ## 5. Otherwise we use the DrL layout generator.
+  ## 4. Otherwise we use the DrL layout generator.
 
   if ("layout" %in% graph_attr_names(graph)) {
     lay <- graph_attr(graph, "layout")
