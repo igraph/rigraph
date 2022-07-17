@@ -6976,14 +6976,33 @@ SEXP R_igraph_asymmetric_preference_game(
   igraph_matrix_t type_dist_matrix;
   igraph_matrix_t matrix;
   igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_vector_t outtypes, intypes;
   SEXP result;
 
   R_SEXP_to_matrix(ptype_dist_matrix, &type_dist_matrix);
   R_SEXP_to_matrix(pmatrix, &matrix);
+  if (0!=igraph_vector_init(&outtypes, 0)) {
+    igraph_error("Cannot run asymmetric preference game",
+                 __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &outtypes);
+  if (0!=igraph_vector_init(&intypes, 0)) {
+    igraph_error("Cannot run asymmetric preference game",
+                 __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &intypes);
   igraph_asymmetric_preference_game(&g, nodes, out_types, in_types, &type_dist_matrix,
-                                    &matrix, 0, 0, loops);
-  PROTECT(result=R_igraph_to_SEXP(&g));
+                                    &matrix, &outtypes, &intypes, loops);
+  IGRAPH_FINALLY(igraph_destroy, &g);
+  PROTECT(result=NEW_LIST(3));
+  SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&g));
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&outtypes));
+  SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&intypes));
+
   igraph_destroy(&g);
+  igraph_vector_destroy(&intypes);
+  igraph_vector_destroy(&outtypes);
+  IGRAPH_FINALLY_CLEAN(3);
 
   UNPROTECT(1);
   return result;
