@@ -6928,86 +6928,6 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   return result;
 }
 
-SEXP R_igraph_preference_game(SEXP pnodes, SEXP ptypes, SEXP ptype_dist,
-                              SEXP pfixed_sizes, SEXP pmatrix,
-                              SEXP pdirected, SEXP ploops) {
-  igraph_t g;
-  igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
-  igraph_integer_t types=(igraph_integer_t) REAL(ptypes)[0];
-  igraph_vector_t type_dist;
-  igraph_bool_t fixed_sizes=LOGICAL(pfixed_sizes)[0];
-  igraph_matrix_t matrix;
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  igraph_vector_t vtypes;
-  SEXP result;
-
-  R_SEXP_to_vector(ptype_dist, &type_dist);
-  R_SEXP_to_matrix(pmatrix, &matrix);
-  if (0!=igraph_vector_init(&vtypes, 0)) {
-    igraph_error("Cannot run preference game",
-                 __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &vtypes);
-  igraph_preference_game(&g, nodes, types, &type_dist, fixed_sizes,
-                         &matrix, &vtypes,
-                         directed, loops);
-  IGRAPH_FINALLY(igraph_destroy, &g);
-  PROTECT(result=NEW_LIST(2));
-  SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&g));
-  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&vtypes));
-  igraph_destroy(&g);
-  igraph_vector_destroy(&vtypes);
-  IGRAPH_FINALLY_CLEAN(2);
-
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_asymmetric_preference_game(
-        SEXP pnodes, SEXP pout_types, SEXP pin_types,
-        SEXP ptype_dist_matrix, SEXP pmatrix, SEXP ploops
-) {
-
-  igraph_t g;
-  igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
-  igraph_integer_t out_types=(igraph_integer_t) REAL(pout_types)[0];
-  igraph_integer_t in_types=(igraph_integer_t) REAL(pin_types)[0];
-  igraph_matrix_t type_dist_matrix;
-  igraph_matrix_t matrix;
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  igraph_vector_t outtypes, intypes;
-  SEXP result;
-
-  R_SEXP_to_matrix(ptype_dist_matrix, &type_dist_matrix);
-  R_SEXP_to_matrix(pmatrix, &matrix);
-  if (0!=igraph_vector_init(&outtypes, 0)) {
-    igraph_error("Cannot run asymmetric preference game",
-                 __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &outtypes);
-  if (0!=igraph_vector_init(&intypes, 0)) {
-    igraph_error("Cannot run asymmetric preference game",
-                 __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &intypes);
-  igraph_asymmetric_preference_game(&g, nodes, out_types, in_types, &type_dist_matrix,
-                                    &matrix, &outtypes, &intypes, loops);
-  IGRAPH_FINALLY(igraph_destroy, &g);
-  PROTECT(result=NEW_LIST(3));
-  SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&g));
-  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&outtypes));
-  SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&intypes));
-
-  igraph_destroy(&g);
-  igraph_vector_destroy(&intypes);
-  igraph_vector_destroy(&outtypes);
-  IGRAPH_FINALLY_CLEAN(3);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
 
   igraph_t g;
@@ -9954,6 +9874,123 @@ SEXP R_igraph_realize_degree_sequence(SEXP out_deg, SEXP in_deg, SEXP allowed_ed
   igraph_destroy(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_preference_game                     /
+/-------------------------------------------*/
+SEXP R_igraph_preference_game(SEXP nodes, SEXP types, SEXP type_dist, SEXP fixed_sizes, SEXP pref_matrix, SEXP directed, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_nodes;
+  igraph_integer_t c_types;
+  igraph_vector_t c_type_dist;
+  igraph_bool_t c_fixed_sizes;
+  igraph_matrix_t c_pref_matrix;
+  igraph_vector_t c_node_type_vec;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_loops;
+  SEXP graph;
+  SEXP node_type_vec;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  c_nodes=INTEGER(nodes)[0];
+  c_types=INTEGER(types)[0];
+  R_SEXP_to_vector(type_dist, &c_type_dist);
+  c_fixed_sizes=LOGICAL(fixed_sizes)[0];
+  R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
+  if (0 != igraph_vector_init(&c_node_type_vec, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_node_type_vec);
+  c_directed=LOGICAL(directed)[0];
+  c_loops=LOGICAL(loops)[0];
+                                        /* Call igraph */
+  igraph_preference_game(&c_graph, c_nodes, c_types, &c_type_dist, c_fixed_sizes, &c_pref_matrix, &c_node_type_vec, c_directed, c_loops);
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(node_type_vec=R_igraph_vector_to_SEXP(&c_node_type_vec));
+  igraph_vector_destroy(&c_node_type_vec);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, node_type_vec);
+  SET_STRING_ELT(r_names, 0, CREATE_STRING_VECTOR("graph"));
+  SET_STRING_ELT(r_names, 1, CREATE_STRING_VECTOR("node_type_vec"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_asymmetric_preference_game          /
+/-------------------------------------------*/
+SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_types, SEXP type_dist_matrix, SEXP pref_matrix, SEXP loops) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_integer_t c_nodes;
+  igraph_integer_t c_out_types;
+  igraph_integer_t c_in_types;
+  igraph_matrix_t c_type_dist_matrix;
+  igraph_matrix_t c_pref_matrix;
+  igraph_vector_t c_node_type_in_vec;
+  igraph_vector_t c_node_type_out_vec;
+  igraph_bool_t c_loops;
+  SEXP graph;
+  SEXP node_type_in_vec;
+  SEXP node_type_out_vec;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  c_nodes=INTEGER(nodes)[0];
+  c_out_types=INTEGER(out_types)[0];
+  c_in_types=INTEGER(in_types)[0];
+  R_SEXP_to_matrix(type_dist_matrix, &c_type_dist_matrix);
+  R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
+  if (0 != igraph_vector_init(&c_node_type_in_vec, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_node_type_in_vec);
+  if (0 != igraph_vector_init(&c_node_type_out_vec, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_node_type_out_vec);
+  c_loops=LOGICAL(loops)[0];
+                                        /* Call igraph */
+  igraph_asymmetric_preference_game(&c_graph, c_nodes, c_out_types, c_in_types, &c_type_dist_matrix, &c_pref_matrix, &c_node_type_in_vec, &c_node_type_out_vec, c_loops);
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(node_type_in_vec=R_igraph_vector_to_SEXP(&c_node_type_in_vec));
+  igraph_vector_destroy(&c_node_type_in_vec);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(node_type_out_vec=R_igraph_vector_to_SEXP(&c_node_type_out_vec));
+  igraph_vector_destroy(&c_node_type_out_vec);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, node_type_in_vec);
+  SET_VECTOR_ELT(r_result, 2, node_type_out_vec);
+  SET_STRING_ELT(r_names, 0, CREATE_STRING_VECTOR("graph"));
+  SET_STRING_ELT(r_names, 1, CREATE_STRING_VECTOR("node_type_in_vec"));
+  SET_STRING_ELT(r_names, 2, CREATE_STRING_VECTOR("node_type_out_vec"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
 
   UNPROTECT(1);
   return(r_result);
