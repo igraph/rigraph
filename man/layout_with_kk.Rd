@@ -51,7 +51,8 @@ iterations.}
 Typical (and default) value is the number of vertices.}
 
 \item{weights}{Edge weights, larger values will result longer edges.
-Note that this is opposite to \code{\link{layout_with_fr}}.}
+Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+be positive.}
 
 \item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
 lower boundaries for the \sQuote{x} coordinates of the vertices. The length
@@ -84,7 +85,7 @@ many rows as the number of vertices, the x, y and potentially z coordinates
 of the vertices.
 }
 \description{
-Place the vertices on the plane, or in the 3d space, based on a physical
+Place the vertices on the plane, or in 3D space, based on a physical
 model of springs.
 }
 \details{

@@ -54,7 +54,7 @@ vertices.}
 attribute is used by default, if present. If weights are given, then the
 attraction along the edges will be multiplied by the given edge weights.
 This places vertices connected with a highly weighted edge closer to
-each other.}
+each other. Weights must be positive.}
 
 \item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
 lower boundaries for the \sQuote{x} coordinates of the vertices. The length

@@ -543,6 +543,11 @@ layout.circle <- function(..., params = list()) {
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
+#' @param weights A vector giving edge weights. If \code{NULL} (the default),
+#' then the 'weight' edge attribute is used, if present. Supply \code{NA} here
+#' to ignore edge weights. Weights must be strictly positive, otherwise
+#' they will be ignored. Weights may not be used at all, depending on which
+#' layout method is selected automatically.
 #' @param \dots For \code{layout_nicely} the extra arguments are passed to
 #'   the real layout function. For \code{nicely} all argument are passed to
 #'   \code{layout_nicely}.
@@ -553,14 +558,14 @@ layout.circle <- function(..., params = list()) {
 #' @export
 #' @family graph layouts
 
-layout_nicely <- function(graph, dim=2, ...) {
+layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
 
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
   ##    we use those (and the 'z' vertex attribute as well, if present).
   ## 3. Otherwise, if the graph is small (<1000) we use
   ##    the Fruchterman-Reingold layout.
-  ## 5. Otherwise we use the DrL layout generator.
+  ## 4. Otherwise we use the DrL layout generator.
 
   if ("layout" %in% graph_attr_names(graph)) {
     lay <- graph_attr(graph, "layout")
@@ -577,11 +582,20 @@ layout_nicely <- function(graph, dim=2, ...) {
       cbind(V(graph)$x, V(graph)$y)
     }
 
-  } else if (vcount(graph) < 1000) {
-    layout_with_fr(graph, dim=dim, ...)
-
   } else {
-    layout_with_drl(graph, dim=dim, ...)
+    if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+      weights <- E(graph)$weight
+    }
+    if (any(weights <= 0, na.rm=TRUE)) {
+      warning("Non-positive edge weight found, ignoring all weights during graph layout.")
+      weights <- NA
+    }
+    if (vcount(graph) < 1000) {
+      layout_with_fr(graph, dim=dim, weights=weights, ...)
+
+    } else {
+      layout_with_drl(graph, dim=dim, weights=weights, ...)
+    }
   }
 
 }
@@ -960,7 +974,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' attribute is used by default, if present. If weights are given, then the
 #' attraction along the edges will be multiplied by the given edge weights.
 #' This places vertices connected with a highly weighted edge closer to
-#' each other.
+#' each other. Weights must be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.
@@ -1242,7 +1256,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 #' The Kamada-Kawai layout algorithm
 #'
-#' Place the vertices on the plane, or in the 3d space, based on a physical
+#' Place the vertices on the plane, or in 3D space, based on a physical
 #' model of springs.
 #'
 #' See the referenced paper below for the details of the algorithm.
@@ -1266,7 +1280,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #' Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
-#' Note that this is opposite to \code{\link{layout_with_fr}}.
+#' Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+#' be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
 #' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #' of the vector must match the number of vertices in the graph.

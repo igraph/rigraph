@@ -6,7 +6,7 @@
 \alias{nicely}
 \title{Choose an appropriate graph layout algorithm automatically}
 \usage{
-layout_nicely(graph, dim = 2, ...)
+layout_nicely(graph, dim = 2, weights = NULL, ...)
 
 nicely(...)
 }
@@ -14,6 +14,12 @@ nicely(...)
 \item{graph}{The input graph}
 
 \item{dim}{Dimensions, should be 2 or 3.}
+
+\item{weights}{A vector giving edge weights. If \code{NULL} (the default),
+then the 'weight' edge attribute is used, if present. Supply \code{NA} here
+to ignore edge weights. Weights must be strictly positive, otherwise
+they will be ignored. Weights may not be used at all, depending on which
+layout method is selected automatically.}
 
 \item{\dots}{For \code{layout_nicely} the extra arguments are passed to
 the real layout function. For \code{nicely} all argument are passed to
