@@ -883,6 +883,10 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' asymmetric. The joint distribution for the in- and out-types is given in the
 #' \sQuote{type.dist.matrix} argument.
 #' 
+#' The types of the generated vertices can be retrieved from the
+#' \code{type} vertex attribute for \code{sample_pref} and from the
+#' \code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref}.
+#'
 #' @aliases sample_pref sample_asym_pref preference.game asymmetric.preference.game
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.

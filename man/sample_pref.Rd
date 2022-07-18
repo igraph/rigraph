@@ -77,6 +77,10 @@ edge is realized from a vertex with a given out-type to a vertex with a
 given in-type is given in the \sQuote{pref.matrix} argument, which can be
 asymmetric. The joint distribution for the in- and out-types is given in the
 \sQuote{type.dist.matrix} argument.
+
+The types of the generated vertices can be retrieved from the
+\code{type} vertex attribute for \code{sample_pref} and from the
+\code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref}.
 }
 \examples{
 
