@@ -180,10 +180,10 @@ igraph_grg_game:
     IGNORE: RR, RC, RInit
 
 igraph_preference_game:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_asymmetric_preference_game:
-    IGNORE: RR, RC
+    IGNORE: RR
 
 igraph_rewire_edges:
     # Handled by rewire() in the R interface and rewire_directed_edges()

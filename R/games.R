@@ -934,8 +934,7 @@ sample_pref <- function(nodes, types, type.dist=rep(1, types),
   }
 
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_preference_game, as.double(nodes),
-               as.double(types),
+  res <- .Call(C_R_igraph_preference_game, as.integer(nodes), as.integer(types),
                as.double(type.dist), as.logical(fixed.sizes),
                matrix(as.double(pref.matrix), types, types),
                as.logical(directed), as.logical(loops))
@@ -975,7 +974,7 @@ sample_asym_pref <- function(nodes, types,
   
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_asymmetric_preference_game,
-               as.double(nodes), as.double(types), as.double(types),
+               as.integer(nodes), as.integer(types), as.integer(types),
                matrix(as.double(type.dist.matrix), types, types),
                matrix(as.double(pref.matrix), types, types),
                as.logical(loops))
