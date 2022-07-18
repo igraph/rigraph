@@ -540,14 +540,23 @@ layout.circle <- function(..., params = list()) {
 #' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
 #' \item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
 #'
+#' In layout algorithm implementations, an argument named \sQuote{weights} is
+#' typically used to specify the weights of the edges if the layout algorithm
+#' supports them. In this case, omitting \sQuote{weights} or setting it to
+#' \code{NULL} will make igraph use the 'weight' edge attribute from the graph
+#' if it is present. However, most layout algorithms do not support non-positive
+#' weights, so \code{layout_nicely} would fail if you simply called it on
+#' your graph without specifying explicit weights and the weights happened to
+#' include non-positive numbers. We strive to ensure that \code{layout_nicely}
+#' works out-of-the-box for most graphs, so the rule is that if you omit
+#' \sQuote{weights} or set it to \code{NULL} and \code{layout_nicely} would
+#' end up calling \code{layout_with_fr} or \code{layout_with_drl}, we do not
+#' forward the weights to these functions and issue a warning about this. You
+#' can use \code{weights = NA} to silence the warning.
+#' 
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param weights A vector giving edge weights. If \code{NULL} (the default),
-#' then the 'weight' edge attribute is used, if present. Supply \code{NA} here
-#' to ignore edge weights. Weights must be strictly positive, otherwise
-#' they will be ignored. Weights may not be used at all, depending on which
-#' layout method is selected automatically.
 #' @param \dots For \code{layout_nicely} the extra arguments are passed to
 #'   the real layout function. For \code{nicely} all argument are passed to
 #'   \code{layout_nicely}.
@@ -558,7 +567,7 @@ layout.circle <- function(..., params = list()) {
 #' @export
 #' @family graph layouts
 
-layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
+layout_nicely <- function(graph, dim=2, ...) {
 
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
@@ -570,12 +579,17 @@ layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
   if ("layout" %in% graph_attr_names(graph)) {
     lay <- graph_attr(graph, "layout")
     if (is.function(lay)) {
-      lay(graph, ...)
+      if (!identical(lay, layout_nicely)) {
+        return(lay(graph, ...))
+      } else {
+        # nop, we'll deal with it later below
+      }
     } else {
-      lay
+      return(lay)
     }
-
-  } else if ( all(c("x", "y") %in% vertex_attr_names(graph)) ) {
+  }
+  
+  if ( all(c("x", "y") %in% vertex_attr_names(graph)) ) {
     if ("z" %in% vertex_attr_names(graph)) {
       cbind(V(graph)$x, V(graph)$y, V(graph)$z)
     } else {
@@ -583,18 +597,25 @@ layout_nicely <- function(graph, dim=2, weights=NULL, ...) {
     }
 
   } else {
-    if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-      weights <- E(graph)$weight
-    }
-    if (any(weights <= 0, na.rm=TRUE)) {
-      warning("Non-positive edge weight found, ignoring all weights during graph layout.")
-      weights <- NA
-    }
-    if (vcount(graph) < 1000) {
-      layout_with_fr(graph, dim=dim, weights=weights, ...)
 
+    args <- list(...)
+    if (!("weights" %in% names(args)) || is.null(args$weights)) {
+      if ("weight" %in% edge_attr_names(graph)) {
+        weights <- E(graph)$weight
+        if (any(weights <= 0, na.rm=TRUE)) {
+          warning("Non-positive edge weight found, ignoring all weights during graph layout.")
+          args$weights <- NA
+        }
+      }
+    }
+
+    args$graph <- graph
+    args$dim <- dim
+  
+    if (vcount(graph) < 1000) {
+      do.call(layout_with_fr, args)
     } else {
-      layout_with_drl(graph, dim=dim, weights=weights, ...)
+      do.call(layout_with_drl, args)
     }
   }
 
