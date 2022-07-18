@@ -7,6 +7,9 @@ Added:
 
 Fixed:
 
+- `layout_nicely()` does not recurse infinitely any more if it is assigned to
+  the `layout` attribute of a graph
+
 - `layout_nicely()` now ignores edge weights when there are non-positive
   edge weights. This is needed because igraph 1.3.3 started validating edge
   weights in `layout_with_fr()` and `layout_with_drl()`, resulting in

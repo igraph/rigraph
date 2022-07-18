@@ -6,7 +6,7 @@
 \alias{nicely}
 \title{Choose an appropriate graph layout algorithm automatically}
 \usage{
-layout_nicely(graph, dim = 2, weights = NULL, ...)
+layout_nicely(graph, dim = 2, ...)
 
 nicely(...)
 }
@@ -14,12 +14,6 @@ nicely(...)
 \item{graph}{The input graph}
 
 \item{dim}{Dimensions, should be 2 or 3.}
-
-\item{weights}{A vector giving edge weights. If \code{NULL} (the default),
-then the 'weight' edge attribute is used, if present. Supply \code{NA} here
-to ignore edge weights. Weights must be strictly positive, otherwise
-they will be ignored. Weights may not be used at all, depending on which
-layout method is selected automatically.}
 
 \item{\dots}{For \code{layout_nicely} the extra arguments are passed to
 the real layout function. For \code{nicely} all argument are passed to
@@ -44,6 +38,20 @@ additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
 if the graph is connected and has less than 1000 vertices, the
 Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
 \item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
+
+In layout algorithm implementations, an argument named \sQuote{weights} is
+typically used to specify the weights of the edges if the layout algorithm
+supports them. In this case, omitting \sQuote{weights} or setting it to
+\code{NULL} will make igraph use the 'weight' edge attribute from the graph
+if it is present. However, most layout algorithms do not support non-positive
+weights, so \code{layout_nicely} would fail if you simply called it on
+your graph without specifying explicit weights and the weights happened to
+include non-positive numbers. We strive to ensure that \code{layout_nicely}
+works out-of-the-box for most graphs, so the rule is that if you omit
+\sQuote{weights} or set it to \code{NULL} and \code{layout_nicely} would
+end up calling \code{layout_with_fr} or \code{layout_with_drl}, we do not
+forward the weights to these functions and issue a warning about this. You
+can use \code{weights = NA} to silence the warning.
 }
 \seealso{
 \code{\link{plot.igraph}}
