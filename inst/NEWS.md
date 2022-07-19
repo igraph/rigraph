@@ -1,4 +1,4 @@
-# Unreleased
+# igraph 1.3.4
 
 Added:
 
