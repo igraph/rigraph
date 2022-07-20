@@ -132,7 +132,7 @@ HAVE_GLPK=0
 GLPK_LIBS=""
 glpk_support=no
 AC_ARG_ENABLE(glpk, AS_HELP_STRING([--disable-glpk], [Compile without the GLPK library]))
-if test "x$enable_gmp" != "xno"; then
+if test "x$enable_glpk" != "xno"; then
   AC_CHECK_LIB([glpk], [glp_read_mps], [
     AC_CHECK_HEADER([glpk.h], [
       AC_EGREP_CPP(yes, [
