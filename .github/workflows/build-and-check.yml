@@ -32,7 +32,7 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.0.1'
+          r-version: '4.2.1'
 
       - name: Cache R packages
         uses: actions/cache@v2
@@ -48,7 +48,7 @@ jobs:
 
       - name: Install necessary dependencies
         run: |
-          sudo apt install libcurl4-openssl-dev
+          sudo apt install libcurl4-openssl-dev libharfbuzz-dev libfribidi-dev
           Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
         shell: bash
 
