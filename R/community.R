@@ -1070,21 +1070,23 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' \code{\link{cluster_fast_greedy}},
 #' \code{\link{cluster_label_prop}}
 #' \code{\link{cluster_louvain}}
-#'\code{\link{cluster_fluid_communities}}
-#'\code{\link{cluster_infomap}}
-#'\code{\link{cluster_optimal}}             
-#'\code{\link{cluster_walktrap}}                
+#' \code{\link{cluster_fluid_communities}}
+#' \code{\link{cluster_infomap}}
+#' \code{\link{cluster_optimal}}             
+#' \code{\link{cluster_walktrap}}                
 #' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 [cs.SI]
 #' @export
 #' @keywords graphs
 #' @examples
-#' g <- graph.famous("Zachary") #' # By default CPM is used
+#' g <- make_graph("Zachary")
+#' # By default CPM is used
 #' r <- quantile(strength(g))[2] / (gorder(g) - 1)
+#' # Set seed for sake of reproducibility
 #' set.seed(1)
-#' ldc <- cluster_leiden(g, resolution=r)
-#' print.default(ldc) 
+#' ldc <- cluster_leiden(g, resolution_parameter=r)
+#' print(ldc) 
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
                            weights=NULL, resolution_parameter=1, beta=0.01,
