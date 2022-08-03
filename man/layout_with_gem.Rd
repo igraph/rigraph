@@ -10,9 +10,9 @@ layout_with_gem(
   graph,
   coords = NULL,
   maxiter = 40 * vcount(graph)^2,
-  temp.max = vcount(graph),
+  temp.max = max(vcount(graph), 1),
   temp.min = 1/10,
-  temp.init = sqrt(vcount(graph))
+  temp.init = sqrt(max(vcount(graph), 1))
 )
 
 with_gem(...)

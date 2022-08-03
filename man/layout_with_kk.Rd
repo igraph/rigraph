@@ -11,7 +11,7 @@ layout_with_kk(
   dim = 2,
   maxiter = 50 * vcount(graph),
   epsilon = 0,
-  kkconst = vcount(graph),
+  kkconst = max(vcount(graph), 1),
   weights = NULL,
   minx = NULL,
   maxx = NULL,
