@@ -164,6 +164,9 @@ plot.igraph <- function(x,
   if (!is.list(mark.groups) && is.numeric(mark.groups)) {
     mark.groups <- list(mark.groups)
   }
+  if (inherits(mark.groups, "communities")) {
+    mark.groups <- communities(mark.groups)
+  }
 
   mark.shape  <- rep(mark.shape,  length.out=length(mark.groups))
   mark.border <- rep(mark.border, length.out=length(mark.groups))
@@ -737,7 +740,7 @@ function (x1, y1, x2, y2,
   uin <- if (is.R()) 
     1/xyinch()
   else par("uin")
-  x <- sqrt(seq(0, cin^2, length = floor(35 * cin) + 2))
+  x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
   delta <-  sqrt(h.lwd)*par("cin")[2]*0.005      ## has been 0.05
   x.arr <- c(-rev(x), -x)
   wx2 <- width * x^2
