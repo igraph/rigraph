@@ -349,6 +349,11 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 layout_as_star <- function(graph, center=V(graph)[1], order=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (vcount(graph) == 0) {
+    # Any other layout will do so just pick one that supports graphs with no
+    # vertices
+    return(layout_in_circle(graph))
+  }
   center <- as.igraph.vs(graph, center)
   if (length(center)==0) {
     center <- 1
