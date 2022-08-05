@@ -147,7 +147,10 @@ add_vertices <- function(graph, nv, ..., attr=list()) {
 #' Delete edges from a graph
 #'
 #' @param graph The input graph.
-#' @param edges The edges to remove, specified as an edge sequence.
+#' @param edges The edges to remove, specified as an edge sequence. Typically
+#' this is either a numeric vector containing edge IDs, or a character vector
+#' containing the IDs or names of the source and target vertices, separated by
+#' \code{|}
 #' @return The graph, with the edges removed.
 #'
 #' @aliases delete.edges
@@ -161,6 +164,10 @@ add_vertices <- function(graph, nv, ..., attr=list()) {
 #'
 #' g <- make_ring(10) %>%
 #'   delete_edges("10|1")
+#' g
+#'
+#' g <- make_ring(5)
+#' g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 #' g
 
 delete_edges <- function(graph, edges) {
