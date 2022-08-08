@@ -52,6 +52,20 @@ E(g)[ei]
 ## non-existant edge
 get.edge.ids(g, c(2,1, 1,4, 5,4))
 
+## multiple edges
+## multi = FALSE, a single edge id is returned,
+## as many times as corresponding pairs in the vertex series.
+g <-  make_graph(rep(c(1,2), 5))
+eis <- get.edge.ids(g, c(1,2, 1,2), multi=FALSE)
+eis
+E(g)[eis]
+
+## multi = TRUE, as many different edges, if any,
+## are returned as pairs in the vertex series.
+eim <- get.edge.ids(g, c(1,2, 1,2, 1,2), multi=TRUE)
+eim
+E(g)[eim]
+
 }
 \seealso{
 Other structural queries: 
