@@ -18,11 +18,13 @@ mag_sort <- function(x) {
 
 test_that("Undirected, unweighted, D-A case works", {
   library(igraph)
+  library(Matrix)
+
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
   no <- 3
-  A <- as(diag(degree(g)), "generalMatrix") - g[]
+  A <- Matrix(diag(degree(g)), doDiag=FALSE) - g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -121,7 +123,6 @@ test_that("Undirected, unweighted, DAD case works", {
 })
 
 test_that("Undirected, unweighted, I-DAD case works", {
-  library(igraph)
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
@@ -174,12 +175,14 @@ test_that("Undirected, unweighted, I-DAD case works", {
 
 test_that("Undirected, weighted, D-A case works", {
   library(igraph)
+  library(Matrix)
+
   set.seed(42*42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   no <- 3
-  A <- as(diag(graph.strength(g)), "generalMatrix") - g[]
+  A <- Matrix(diag(graph.strength(g)), doDiag=FALSE) - g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -229,6 +232,7 @@ test_that("Undirected, weighted, D-A case works", {
 test_that("Undirected, unweighted, DAD case works", {
   library(igraph)
   set.seed(42)
+
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
   no <- 3
@@ -281,6 +285,7 @@ test_that("Undirected, unweighted, DAD case works", {
 test_that("Undirected, unweighted, I-DAD case works", {
   library(igraph)
   set.seed(42)
+
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
   no <- 3
@@ -333,6 +338,7 @@ test_that("Undirected, unweighted, I-DAD case works", {
 test_that("Directed, unweighted, OAP case works", {
   library(igraph)
   set.seed(42*42)
+
   g <- random.graph.game(10, 30, type="gnm", directed=TRUE)
 
   no <- 3
@@ -388,6 +394,7 @@ test_that("Directed, unweighted, OAP case works", {
 test_that("Directed, weighted case works", {
   library(igraph)
   set.seed(42*42)
+
   g <- random.graph.game(10, 30, type="gnm", directed=TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
