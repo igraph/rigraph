@@ -22,7 +22,7 @@ test_that("Undirected, unweighted, D-A case works", {
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
   no <- 3
-  A <- diag(degree(g)) - g[]
+  A <- as(diag(degree(g)), "generalMatrix") - g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -179,7 +179,7 @@ test_that("Undirected, weighted, D-A case works", {
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   no <- 3
-  A <- diag(graph.strength(g)) - g[]
+  A <- as(diag(graph.strength(g)), "generalMatrix") - g[]
   ss <- eigen(A)
 
   D <- ss$values

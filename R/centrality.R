@@ -1092,7 +1092,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
   d <- as_adj(graph, sparse=TRUE)
 
   ## sparse identity matrix
-  id <- Matrix::Diagonal(vg)
+  id <- as(diag(vg), "generalMatrix")
 
   ## solve it
   ev <- Matrix::solve(id - exponent * d, degree(graph, mode="out"), tol=tol)
@@ -1301,11 +1301,9 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   }
 
   M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
-  M <- as(M, "dgCMatrix")
   
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(dims=c(vc, vc), i=1:vc, j=1:vc, x=rep(1, vc))
-  M2 <- as(M2, "dgCMatrix")
 
   ## exo
   exo <- cbind(rep(exo, length.out=vc))

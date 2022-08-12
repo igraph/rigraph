@@ -23,7 +23,7 @@ test_that("Undirected, unweighted case works", {
 
   no <- 7
   A <- g[]
-  A <- A + 1/2 * diag(degree(g))
+  A <- A + 1/2 * as(diag(degree(g)), "generalMatrix")
   ss <- eigen(A)
 
   U <- std(ss$vectors)
@@ -68,7 +68,7 @@ test_that("Undirected, weighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * diag(degree(g))
+  A <- A + 1/2 * as(diag(degree(g)), "generalMatrix")
   ss <- eigen(A)
 
   U <- std(ss$vectors)
@@ -110,7 +110,7 @@ test_that("Directed, unweighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * diag(degree(g))
+  A <- A + 1/2 * as(diag(degree(g)), "generalMatrix")
   ss <- svd(A)
 
   U <- std(ss$u)
@@ -163,7 +163,7 @@ test_that("Directed, weighted case works", {
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * diag(degree(g))
+  A <- A + 1/2 * as(diag(degree(g)), "generalMatrix")
   ss <- svd(A)
 
   U <- std(ss$u)

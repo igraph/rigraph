@@ -39,7 +39,7 @@ test_that("HSBM works", {
 
 test_that("HSBM with 1 cluster per block works", {
   library(igraph)
-  res <- Matrix(0, nrow=10, ncol=10)
+  res <- Matrix(0, nrow=10, ncol=10, doDiag=FALSE)
   res[6:10, 1:5] <- res[1:5, 6:10] <- 1
   g <- sample_hierarchical_sbm(10, 5, rho=1, C=matrix(0), p=1)
   expect_that(g[], equals(res))
