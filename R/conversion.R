@@ -133,7 +133,7 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
       ## both
       res <- Matrix::sparseMatrix(dims=c(vc, vc), i=pmin(el[,1],el[,2]),
                           j=pmax(el[,1],el[,2]), x=value, symmetric=TRUE, use.last.ij=use.last.ij)
-      res <- as(res, "dgCMatrix")
+      res <- as(res, "generalMatrix")
     }
   }
 

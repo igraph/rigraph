@@ -653,7 +653,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
   if (!is.null(matrix)) { stopifnot(is.matrix(matrix)) }
   if (!is.null(sparsemat)) { stopifnot(inherits(sparsemat, "Matrix")) }
 
-  if (!is.null(sparsemat)) { sparsemat <- as(sparsemat, "dgCMatrix") }
+  if (!is.null(sparsemat)) { sparsemat <- as(as(as(sparsemat, "dMatrix"), "generalMatrix"), "CsparseMatrix") }
   ev <- as.numeric(as.integer(ev))
   nt <- as.numeric(as.integer(nt))
   if (!is.null(groups)) groups <- as.numeric(groups)

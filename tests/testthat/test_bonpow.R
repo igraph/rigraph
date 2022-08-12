@@ -3,6 +3,7 @@ context("Bonacich's power centrality")
 
 test_that("Power centrality works", {
   library(igraph)
+  library(Matrix)
 
   ## Generate some test data from Bonacich, 1987:
   fig1 <- graph_from_literal( A -+ B -+ C:D )
