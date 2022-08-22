@@ -5,7 +5,7 @@
 \alias{barabasi.game}
 \alias{ba.game}
 \alias{pa}
-\title{Generate scale-free graphs according to the Barabasi-Albert model}
+\title{Generate random graphs using preferential attachment}
 \usage{
 sample_pa(
   n,
@@ -75,7 +75,8 @@ contain the out degrees of the new vertices only, not the ones in the
 A graph object.
 }
 \description{
-The BA-model is a very simple stochastic algorithm for building a graph.
+Preferential attachment is a family of simple stochastic algorithms for building
+a graph. Variants include the Barabási-Abert model and the Price model.
 }
 \details{
 This is a simple stochastic algorithm to generate a graph. It is a discrete
@@ -122,6 +123,9 @@ degree_distribution(g)
 \references{
 Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
 random networks \emph{Science}, 286 509--512.
+
+de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
+149 510--515.
 }
 \seealso{
 \code{\link{sample_gnp}}
