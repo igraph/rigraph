@@ -21,9 +21,10 @@
 ##
 ## -----------------------------------------------------------------
 
-#' Generate scale-free graphs according to the Barabasi-Albert model
+#' Generate random graphs using preferential attachment
 #' 
-#' The BA-model is a very simple stochastic algorithm for building a graph.
+#' Preferential attachment is a family of simple stochastic algorithms for building
+#' a graph. Variants include the Barabási-Abert model and the Price model.
 #' 
 #' This is a simple stochastic algorithm to generate a graph. It is a discrete
 #' time step model and in each time step a single vertex is added.
@@ -102,6 +103,9 @@
 #' @seealso \code{\link{sample_gnp}}
 #' @references Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
 #' random networks \emph{Science}, 286 509--512.
+#' 
+#' de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
+#' 149 510--515.
 #' @export
 #' @keywords graphs
 #' @examples
