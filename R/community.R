@@ -366,14 +366,17 @@ modularity <- function(x, ...)
 #' The modularity of a graph with respect to some division (or vertex types)
 #' measures how good the division is, or how separated are the different vertex
 #' types from each other. It defined as \deqn{Q=\frac{1}{2m} \sum_{i,j}
-#' (A_{ij}-\gamma\frac{k_ik_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
+#' (A_{ij}-\gamma\frac{k_i k_j}{2m})\delta(c_i,c_j),}{Q=1/(2m) * sum( (Aij-gamma*ki*kj/(2m)
 #' ) delta(ci,cj),i,j),} here \eqn{m} is the number of edges, \eqn{A_{ij}}{Aij}
 #' is the element of the \eqn{A} adjacency matrix in row \eqn{i} and column
 #' \eqn{j}, \eqn{k_i}{ki} is the degree of \eqn{i}, \eqn{k_j}{kj} is the degree
 #' of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i},
 #' \eqn{c_j}{cj} that of \eqn{j}, the sum goes over all \eqn{i} and \eqn{j}
 #' pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
-#' otherwise.
+#' otherwise. For directed graphs, it is defined as
+#' \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
+#' \frac{k_i^\text{out} k_j^\text{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum( 
+#' (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 #'
 #' The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
 #' null model, which might be useful when finding partitions with a high
