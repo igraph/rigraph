@@ -43,7 +43,7 @@ A named list with components: \item{vector}{A vector containing the
 centrality scores.} \item{value}{The eigenvalue corresponding to the
 calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
 list, information about the underlying ARPACK computation. See
-\code{\link{arpack}} for the details.  }
+\code{\link{arpack}} for the details.}
 }
 \description{
 \code{eigen_centrality} takes a graph (\code{graph}) and returns the
@@ -70,15 +70,27 @@ that loop edges are counted \emph{twice}; this is because each loop edge has
 \emph{two} endpoints that are both connected to the same vertex, and you
 could traverse the loop edge via either endpoint.
 
+In the directed case, the left eigenvector of the adjacency matrix is
+calculated. In other words, the centrality of a vertex is proportional to
+the sum of centralities of vertices pointing to it.
+
+Eigenvector centrality is meaningful only for connected graphs. Graphs that
+are not connected should be decomposed into connected components, and the
+eigenvector centrality calculated for each separately. This function does
+not verify that the graph is connected. If it is not, in the undirected case
+the scores of all but one component will be zeros.
+
+Also note that the adjacency matrix of a directed acyclic graph or the
+adjacency matrix of an empty graph does not possess positive eigenvalues,
+therefore the eigenvector centrality is not defined for these graphs.
+igraph will return an eigenvalue of zero in such cases. The eigenvector
+centralities will all be equal for an empty graph and will all be zeros for
+a directed acyclic graph. Such pathological cases can be detected by checking
+whether the eigenvalue is very close to zero. 
+
 From igraph version 0.5 this function uses ARPACK for the underlying
 computation, see \code{\link{arpack}} for more about ARPACK in igraph.
 }
-\section{WARNING }{
- \code{eigen_centrality} will not symmetrize your data
-before extracting eigenvectors; don't send this routine asymmetric matrices
-unless you really mean to do so.
-}
-
 \examples{
 
 #Generate some test data
