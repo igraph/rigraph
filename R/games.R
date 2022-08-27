@@ -1003,6 +1003,9 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 ## -----------------------------------------------------------------
 
 
+#' @rdname ego
+#' @export
+
 connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
