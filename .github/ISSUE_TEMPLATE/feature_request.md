@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 **What is the feature or improvement you would like to see?**
-A concise and mmathematically precise description of the requested feature. 
+A concise and mathematically precise description of the requested feature. 
 
 <!-- If the feature request is about an algorithm, consider adding your 
 request in the main [igraph repo](https://github.com/igraph/igraph) instead.
