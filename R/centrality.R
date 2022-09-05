@@ -1107,7 +1107,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
   d <- as_adj(graph, sparse=TRUE)
 
   ## sparse identity matrix
-  id <- Matrix::Matrix(diag(vg), doDiag=FALSE)
+  id <- as(Matrix::Matrix(diag(vg), doDiag=FALSE), "generalMatrix")
 
   ## solve it
   ev <- Matrix::solve(id - exponent * d, degree(graph, mode="out"), tol=tol)
