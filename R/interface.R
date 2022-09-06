@@ -213,7 +213,7 @@ delete_vertices <- function(graph, v) {
 
 #' The size of the graph (number of edges)
 #'
-#' \code{ecount} of an alias of this function.
+#' \code{ecount} is an alias of this function.
 #' 
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
@@ -225,6 +225,7 @@ delete_vertices <- function(graph, v) {
 #' @examples
 #' g <- sample_gnp(100, 2/100)
 #' gsize(g)
+#' ecount(g)
 #' 
 #' # Number of edges in a G(n,p) graph
 #' replicate(100, sample_gnp(10, 1/2), simplify = FALSE) %>%
@@ -462,6 +463,8 @@ get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
 
 #' Order (number of vertices) of a graph
 #'
+#' \code{vcount} is an alias of this function.
+#'
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
 #'
@@ -472,6 +475,7 @@ get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
 #' @examples
 #' g <- make_ring(10)
 #' gorder(g)
+#' vcount(g)
 
 gorder <- gorder
 
