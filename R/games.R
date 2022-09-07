@@ -136,9 +136,6 @@ sample_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
   if (!is.null(m) && m==0) {
     warning("`m' is zero, graph will be empty")
   }
-  if (power < 0) {
-    warning("`power' is negative")
-  }
   
   if (is.null(m) && is.null(out.dist) && is.null(out.seq)) {
     m <- 1
@@ -650,9 +647,6 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
   }
   if (!is.null(m) && m==0) {
     warning("`m' is zero, graph will be empty")
-  }
-  if (pa.exp < 0) {
-    warning("preferential attachment is negative")
   }
   if (aging.exp > 0) {
     warning("aging exponent is positive")
