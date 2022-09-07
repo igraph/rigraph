@@ -33,10 +33,10 @@ NULL
 #' Centralization is a general method for calculating a graph-level
 #' centrality score based on node-level centrality measure. The formula for
 #' this is
-#' \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum( max(c(w), w) - c(v),v),}
+#' \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum(max(c(w), w) - c(v), v),}
 #' where \eqn{c_v}{c(v)} is the centrality of vertex \eqn{v}.
 #' 
-#' The graph-level centrality score can be normalized by dividing by the
+#' The graph-level centralization measure can be normalized by dividing by the
 #' maximum theoretical score for a graph with the same number of vertices,
 #' using the same parameters, e.g. directedness, whether we consider loop
 #' edges, etc.
@@ -51,7 +51,7 @@ NULL
 #' a graph-level score from vertex-level scores.
 #' 
 #' @param scores The vertex level centrality scores.
-#' @param theoretical.max Real scalar. The graph level centrality score of
+#' @param theoretical.max Real scalar. The graph-level centralization measure of
 #'   the most centralized graph with the same number of vertices as the graph
 #'   under study. This is only used if the \code{normalized} argument is set
 #'   to \code{TRUE}.
@@ -76,6 +76,11 @@ NULL
 #' centr_degree(g)$centralization
 #' centr_clo(g, mode="all")$centralization
 #' centr_eigen(g, directed=FALSE)$centralization
+#'
+#' # Calculate centralization from pre-computed scores
+#' deg <- degree(g)
+#' tmax <- centr_degree_tmax(g, loops=FALSE)
+#' centralize(deg, tmax)
 #' 
 #' # The most centralized graph according to eigenvector centrality
 #' g0 <- graph( c(2,1), n=10, dir=FALSE )

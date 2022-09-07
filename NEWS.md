@@ -1,3 +1,23 @@
+# igraph 1.3.5
+
+The C core is updated to 0.9.11, fixing a range of bugs.
+
+Added:
+
+- `mark.groups=...` argument of `plot.igraph()` now accepts `communities`
+  objects
+
+Fixed:
+
+- Negative degree exponents are not allowed any more in `sample_pa()` and
+  `sample_aging_pa()`.
+
+- Package updated to be compatible with Matrix 1.5.
+
+Other:
+
+ - Documentation improvements and fixes.
+
 # igraph 1.3.4
 
 Added:

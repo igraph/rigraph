@@ -14,11 +14,12 @@ gorder(graph)
 Number of vertices, numeric scalar.
 }
 \description{
-Order (number of vertices) of a graph
+\code{vcount} is an alias of this function.
 }
 \examples{
 g <- make_ring(10)
 gorder(g)
+vcount(g)
 }
 \seealso{
 Other structural queries: 
