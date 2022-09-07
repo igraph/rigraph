@@ -1,7 +1,5 @@
 # igraph 1.3.5
 
-The C core is updated to 0.9.11, fixing a range of bugs.
-
 Added:
 
 - `mark.groups=...` argument of `plot.igraph()` now accepts `communities`
