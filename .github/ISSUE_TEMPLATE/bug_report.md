@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a problem in the R interface of igraph
+about: Report a defect in the R interface of igraph
 title: ''
 labels: ''
 assignees: ''
