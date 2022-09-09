@@ -308,8 +308,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}. It is most
 #' appropriate for large sparse or structured matrices \eqn{A} where structured
 #' means that a matrix-vector product \code{w <- Av} requires order \eqn{n}
-#' rather than the usual order \eqn{n^2} floating point operations. Please see
-#' \url{http://www.caam.rice.edu/software/ARPACK/} for details.
+#' rather than the usual order \eqn{n^2} floating point operations.
 #' 
 #' This function is an interface to ARPACK. igraph does not contain all ARPACK
 #' routines, only the ones dealing with symmetric and non-symmetric eigenvalue
@@ -435,8 +434,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso \code{\link{eigen_centrality}}, \code{\link{page_rank}},
 #' \code{\link{hub_score}}, \code{\link{cluster_leading_eigen}} are some of the
-#' functions in igraph which use ARPACK. The ARPACK homepage is at
-#' \url{http://www.caam.rice.edu/software/ARPACK/}.
+#' functions in igraph that use ARPACK.
 #' @references D.C. Sorensen, Implicit Application of Polynomial Filters in a
 #' k-Step Arnoldi Method. \emph{SIAM J. Matr. Anal. Apps.}, 13 (1992), pp
 #' 357-385.
