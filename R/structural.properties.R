@@ -396,6 +396,14 @@ distances <- function(graph, v=V(graph), to=V(graph),
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+
+  # make sure that the lower-level function in C gets mode == "out"
+  # unconditionally when the graph is undirected; this is used for 
+  # the selection of Johnson's algorithm in automatic mode
+  if (!is_directed(graph)) {
+    mode <- "out"
+  }
+
   v <- as.igraph.vs(graph, v)
   to <- as.igraph.vs(graph, to)
   mode <- igraph.match.arg(mode)
@@ -420,7 +428,7 @@ distances <- function(graph, v=V(graph), to=V(graph),
     weights <- NULL
     warning("Unweighted algorithm chosen, weights ignored")
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_shortest_paths, graph, v-1, to-1,
                as.numeric(mode), weights, as.numeric(algorithm))
