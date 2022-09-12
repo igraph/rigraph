@@ -4191,7 +4191,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   igraph_matrix_init(&res, 0, 0);
   switch (algo) {
   case 0:                       /* automatic */
-    if (negw && mode==IGRAPH_OUT && GET_LENGTH(pvids)>100) {
+    if (negw && mode == IGRAPH_OUT && GET_LENGTH(pvids)>100) {
       igraph_shortest_paths_johnson(&g, &res, vs, to, pw);
     } else if (negw) {
       igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw,
@@ -4214,6 +4214,13 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
                                        (igraph_neimode_t) mode);
     break;
   case 4:                       /* johnson */
+    if (mode != IGRAPH_OUT) {
+      if (igraph_is_directed(&g)) {
+        Rf_error("Johnson's algorithm works with mode=\"out\" only for directed graphs");
+      } else {
+        Rf_error("Johnson's algorithm works with mode=\"all\" or mode=\"out\" only for undirected graphs");
+      }
+    }
     igraph_shortest_paths_johnson(&g, &res, vs, to, pw);
     break;
   }
