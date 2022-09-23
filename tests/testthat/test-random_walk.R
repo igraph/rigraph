@@ -54,7 +54,7 @@ test_that("directed random_edge_walk works", {
 
   set.seed(42)
   w <- random_edge_walk(g, start = 7, steps = 10)
-  expect_equivalent(w, structure(list(), class = "igraph.es"))
+  expect_equivalent(w, structure(integer(), class = "igraph.es"))
 
   g <- make_ring(10, directed = TRUE)
 
