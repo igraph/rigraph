@@ -14,14 +14,12 @@ mag_sort <- function(x) {
 }
 
 test_that("Undirected, unweighted case works", {
-  library(Matrix)
-
   set.seed(42)
   g <- random.graph.game(10, 15, type="gnm", directed=FALSE)
 
   no <- 7
   A <- g[]
-  A <- A + 1/2 * as(Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
+  A <- A + 1/2 * as(Matrix::Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
   ss <- eigen(A)
 
   U <- std(ss$vectors)
@@ -59,15 +57,13 @@ test_that("Undirected, unweighted case works", {
 })
 
 test_that("Undirected, weighted case works", {
-  library(Matrix)
-
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * as(Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
+  A <- A + 1/2 * as(Matrix::Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
   ss <- eigen(A)
 
   U <- std(ss$vectors)
@@ -103,14 +99,12 @@ test_that("Undirected, weighted case works", {
 })
 
 test_that("Directed, unweighted case works", {
-  library(Matrix)
-
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=TRUE)
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * as(Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
+  A <- A + 1/2 * as(Matrix::Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
   ss <- svd(A)
 
   U <- std(ss$u)
@@ -156,15 +150,13 @@ test_that("Directed, unweighted case works", {
 })
 
 test_that("Directed, weighted case works", {
-  library(Matrix)
-
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=TRUE)
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   no <- 3
   A <- g[]
-  A <- A + 1/2 * as(Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
+  A <- A + 1/2 * as(Matrix::Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix")
   ss <- svd(A)
 
   U <- std(ss$u)

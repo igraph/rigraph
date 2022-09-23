@@ -1,6 +1,4 @@
 test_that("Power centrality works", {
-  library(Matrix)
-
   ## Generate some test data from Bonacich, 1987:
   fig1 <- graph_from_literal( A -+ B -+ C:D )
   fig1.bp <- lapply(seq(0, 0.8, by=0.2), function(x)

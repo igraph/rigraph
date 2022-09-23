@@ -14,13 +14,11 @@ mag_sort <- function(x) {
 }
 
 test_that("Undirected, unweighted, D-A case works", {
-  library(Matrix)
-
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
   no <- 3
-  A <- as(Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix") - g[]
+  A <- as(Matrix::Matrix(diag(degree(g)), doDiag=FALSE), "generalMatrix") - g[]
   ss <- eigen(A)
 
   D <- ss$values
@@ -169,14 +167,12 @@ test_that("Undirected, unweighted, I-DAD case works", {
 })
 
 test_that("Undirected, weighted, D-A case works", {
-  library(Matrix)
-
   set.seed(42*42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   no <- 3
-  A <- as(Matrix(diag(graph.strength(g)), doDiag=FALSE), "generalMatrix") - g[]
+  A <- as(Matrix::Matrix(diag(graph.strength(g)), doDiag=FALSE), "generalMatrix") - g[]
   ss <- eigen(A)
 
   D <- ss$values

@@ -142,8 +142,7 @@ test_that("graph_from_adjacency_matrix works", {
 
 test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
 
-  library(Matrix)
-  A <- Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
+  A <- Matrix::Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
   A[3,5] <- A[5,3] <- 1
   g <- graph_from_adjacency_matrix(A, mode="undirected")
   expect_that(g[], equals(A))
@@ -152,8 +151,7 @@ test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
 
 test_that("graph_from_adjacency_matrix empty graph bug is fixed", {
 
-  library(Matrix)
-  A <- Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
+  A <- Matrix::Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
   g <- graph_from_adjacency_matrix(A, mode="undirected")
   expect_equal(ignore_attr = TRUE, as.matrix(g[]), as.matrix(A))
 
@@ -161,9 +159,7 @@ test_that("graph_from_adjacency_matrix empty graph bug is fixed", {
 
 test_that("bug #554 is fixed", {
 
-  library(Matrix)
-
-  M <- Matrix(0, 5, 5, doDiag=FALSE)
+  M <- Matrix::Matrix(0, 5, 5, doDiag=FALSE)
   M[1,2] <- M[2,1] <- M[3,4] <- M[4,3] <- 1
   g <- graph_from_adjacency_matrix(M, mode="undirected", weighted=TRUE)
   expect_that(g[], equals(M))
