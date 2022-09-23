@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2014  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -94,19 +94,19 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #             comp := compartment (i.e., "NS", "NI", or "NR")
 #                q := vector of lower and upper quantiles, resp
 #             cols := char vector of colors for lines, median, and quantiles, resp.
-# Outputs:  None.  Just produces the plot of all compartment curves, 
+# Outputs:  None.  Just produces the plot of all compartment curves,
 #           with median and quantiles.
 
 
 
 #' Plotting the results on multiple SIR model runs
-#' 
+#'
 #' This function can conveniently plot the results of multiple SIR model
 #' simulations.
-#' 
+#'
 #' The number of susceptible/infected/recovered individuals is plotted over
 #' time, for multiple simulations.
-#' 
+#'
 #' @param x The output of the SIR simulation, coming from the \code{\link{sir}}
 #' function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
@@ -140,11 +140,11 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #' @importFrom graphics plot lines
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnm(100, 100)
 #' sm <- sir(g, beta=5, gamma=1)
 #' plot(sm)
-#' 
+#'
 plot.sir <- function(x, comp=c("NI", "NS", "NR"),
                      median=TRUE, quantiles=c(0.1, 0.9), color=NULL,
                      median_color=NULL, quantile_color=NULL,
@@ -160,7 +160,7 @@ plot.sir <- function(x, comp=c("NI", "NS", "NR"),
   if (!all(quantiles >= 0 & quantiles <= 1)) {
     stop("Quantiles should be in [0,1]")
   }
-  
+
   if (is.null(color)) {
     color <- c(NI="skyblue", NS="pink", NR="palegoldenrod")[comp]
   }
@@ -180,7 +180,7 @@ plot.sir <- function(x, comp=c("NI", "NS", "NR"),
     ylim <- c(0, max(sapply(sir, function(x) max(x[[comp]]))))
   }
 
-  ## Generate the plot, first with individual curves, and then 
+  ## Generate the plot, first with individual curves, and then
   ## adding median and quantile curves.
 
   if (is.null(ylab)) {

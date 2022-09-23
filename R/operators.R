@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -44,7 +44,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
     if (!is.null(newsize)) { length(newval) <- newsize }
     newval
   }
-  
+
   attr <- list()
   for (name in an) {
     w <- which(sapply(alist, function(x) name %in% x))
@@ -55,7 +55,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
         nname <- paste(name, sep="_", w2)
         newval <- getval(w2, name)
         attr[[nname]] <-newval
-      }      
+      }
     }
   }
   attr
@@ -64,29 +64,29 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 
 
 #' Disjoint union of graphs
-#' 
+#'
 #' The union of two or more graphs are created. The graphs are assumed to have
 #' disjoint vertex sets.
-#' 
+#'
 #' \code{disjoint_union} creates a union of two or more disjoint graphs.
 #' Thus first the vertices in the second, third, etc. graphs are relabeled to
 #' have completely disjoint graphs. Then a simple union is created. This
 #' function can also be used via the \%du\% operator.
-#' 
+#'
 #' \code{graph.disjont.union} handles graph, vertex and edge attributes.  In
 #' particular, it merges vertex and edge attributes using the basic \code{c()}
 #' function. For graphs that lack some vertex/edge attribute, the corresponding
 #' values in the new graph are set to \code{NA}. Graph attributes are simply
 #' copied to the result. If this would result a name clash, then they are
 #' renamed by adding suffixes: _1, _2, etc.
-#' 
+#'
 #' Note that if both graphs have vertex names (ie. a \code{name} vertex
 #' attribute), then the concatenated vertex names might be non-unique in the
 #' result. A warning is given if this happens.
-#' 
+#'
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
-#' 
+#'
 #' @aliases graph.disjoint.union %du%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
@@ -95,7 +95,7 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A star and a ring
 #' g1 <- make_star(10, mode="undirected")
 #' V(g1)$name <- letters[1:10]
@@ -105,20 +105,20 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' @export
 
 disjoint_union <- function(...) {
-  
+
   graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
     if (is_igraph(l)) list(l) else l
   } ))
   if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_disjoint_union, graphs)
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
-    
+
   ## Vertex attributes
   attr <- list()
   vc <- sapply(graphs, vcount)
@@ -143,7 +143,7 @@ disjoint_union <- function(...) {
   if ("name" %in% names(attr) && any(duplicated(attr$name))) {
     warning("Duplicate vertex names in disjoint union")
   }
-  
+
   ## Edge attributes
   attr <- list()
   ec <- sapply(graphs, ecount)
@@ -164,7 +164,7 @@ disjoint_union <- function(...) {
     }
   }
   edge.attributes(res) <- attr
-  
+
   res
 }
 
@@ -198,7 +198,7 @@ disjoint_union <- function(...) {
   }
 
   edgemaps <- length(unlist(lapply(graphs, edge_attr_names))) != 0
-  
+
   if (byname) {
     allnames <- lapply(graphs, vertex_attr, "name")
     if (keep.all.vertices) {
@@ -214,7 +214,7 @@ disjoint_union <- function(...) {
         permute(g, match(V(g)$name, uninames))
       })
     }
-    
+
     on.exit( .Call(C_R_igraph_finalizer) )
     if (call == "union") {
       res <- .Call(C_R_igraph_union, newgraphs, edgemaps)
@@ -301,30 +301,30 @@ union.default <- function(...) {
 }
 
 #' Union of graphs
-#' 
+#'
 #' The union of two or more graphs are created. The graphs may have identical
 #' or overlapping vertex sets.
-#' 
+#'
 #' \code{union} creates the union of two or more graphs.  Edges which are
 #' included in at least one graph will be part of the new graph. This function
 #' can be also used via the \%u\% operator.
-#' 
+#'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
-#' 
+#'
 #' \code{union} keeps the attributes of all graphs. All graph, vertex and
 #' edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
-#' 
+#'
 #' The \code{name} vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case \code{name} must be
 #' present in all graphs, and it is not renamed in the result graph.
-#' 
+#'
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
-#' 
+#'
 #' @aliases graph.union %u%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
@@ -338,7 +338,7 @@ union.default <- function(...) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Union of two social networks with overlapping sets of actors
 #' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
 #'                   H-F:G, H-I-J)
@@ -375,30 +375,30 @@ intersection <- function(...)
   UseMethod("intersection")
 
 #' Intersection of graphs
-#' 
+#'
 #' The intersection of two or more graphs are created.  The graphs may have
 #' identical or overlapping vertex sets.
-#' 
+#'
 #' \code{intersection} creates the intersection of two or more graphs:
 #' only edges present in all graphs will be included.  The corresponding
 #' operator is \%s\%.
-#' 
+#'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
-#' 
+#'
 #' \code{intersection} keeps the attributes of all graphs. All graph,
 #' vertex and edge attributes are copied to the result. If an attribute is
 #' present in multiple graphs and would result a name clash, then this
 #' attribute is renamed by adding suffixes: _1, _2, etc.
-#' 
+#'
 #' The \code{name} vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case \code{name} must be
 #' present in all graphs, and it is not renamed in the result graph.
-#' 
+#'
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
-#' 
+#'
 #' @aliases graph.intersection %s%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
@@ -414,7 +414,7 @@ intersection <- function(...)
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Common part of two social networks
 #' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
 #'                   H-F:G, H-I-J)
@@ -454,23 +454,23 @@ difference <- function(...)
 
 
 #' Difference of graphs
-#' 
+#'
 #' The difference of two graphs are created.
-#' 
+#'
 #' \code{difference} creates the difference of two graphs. Only edges
 #' present in the first graph but not in the second will be be included in the
 #' new graph. The corresponding operator is \%m\%.
-#' 
+#'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
-#' 
+#'
 #' \code{difference} keeps all attributes (graph, vertex and edge) of the
 #' first graph.
-#' 
+#'
 #' Note that \code{big} and \code{small} must both be directed or both be
 #' undirected, otherwise an error message is given.
-#' 
+#'
 #' @aliases graph.difference %m%
 #' @param big The left hand side argument of the minus operator. A directed or
 #' undirected graph.
@@ -488,12 +488,12 @@ difference <- function(...)
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Create a wheel graph
 #' wheel <- union(make_ring(10),
 #'                      make_star(11, center=11, mode="undirected"))
 #' V(wheel)$name <- letters[seq_len(vcount(wheel))]
-#' 
+#'
 #' ## Subtract a star graph from it
 #' sstar <- make_star(6, center=6, mode="undirected")
 #' V(sstar)$name <- letters[c(1,3,5,7,9,11)]
@@ -518,7 +518,7 @@ difference.igraph <- function(big, small, byname="auto", ...) {
   } else if (byname && nonamed != 2) {
     stop("Some graphs are not named")
   }
-  
+
   if (byname) {
     bnames <- V(big)$name
     snames <- V(small)$name
@@ -551,14 +551,14 @@ difference.igraph <- function(big, small, byname="auto", ...) {
 
 
 #' Complementer of a graph
-#' 
+#'
 #' A complementer graph contains all edges that were not present in the input
 #' graph.
-#' 
+#'
 #' \code{complementer} creates the complementer of a graph. Only edges
 #' which are \emph{not} present in the original graph will be included in the
 #' new graph.
-#' 
+#'
 #' \code{complementer} keeps graph and vertex attriubutes, edge
 #' attributes are lost.
 #'
@@ -570,18 +570,18 @@ difference.igraph <- function(big, small, byname="auto", ...) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Complementer of a ring
 #' g <- make_ring(10)
 #' complementer(g)
-#' 
+#'
 #' ## A graph and its complementer give together the full graph
 #' g <- make_ring(10)
 #' gc <- complementer(g)
 #' gu <- union(g, gc)
 #' gu
 #' graph.isomorphic(gu, make_full_graph(vcount(g)))
-#' 
+#'
 complementer <- function(graph, loops=FALSE) {
 
   if (!is_igraph(graph)) {
@@ -594,45 +594,45 @@ complementer <- function(graph, loops=FALSE) {
 
 
 #' Compose two graphs as binary relations
-#' 
+#'
 #' Relational composition of two graph.
-#' 
+#'
 #' \code{compose} creates the relational composition of two graphs. The
 #' new graph will contain an (a,b) edge only if there is a vertex c, such that
 #' edge (a,c) is included in the first graph and (c,b) is included in the
 #' second graph. The corresponding operator is \%c\%.
-#' 
+#'
 #' The function gives an error if one of the input graphs is directed and the
 #' other is undirected.
-#' 
+#'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
-#' 
+#'
 #' \code{compose} keeps the attributes of both graphs. All graph, vertex
 #' and edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
-#' 
+#'
 #' The \code{name} vertex attribute is treated specially if the operation is
 #' performed based on symbolic vertex names. In this case \code{name} must be
 #' present in both graphs, and it is not renamed in the result graph.
-#' 
+#'
 #' Note that an edge in the result graph corresponds to two edges in the input,
 #' one in the first graph, one in the second. This mapping is not injective and
 #' several edges in the result might correspond to the same edge in the first
 #' (and/or the second) graph. The edge attributes in the result graph are
 #' updated accordingly.
-#' 
+#'
 #' Also note that the function may generate multigraphs, if there are more than
 #' one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the
 #' result. See \code{\link{simplify}} if you want to get rid of the multiple
 #' edges.
-#' 
+#'
 #' The function may create loop edges, if edges (a,b) and (b,a) are present in
 #' g1 and g2, respectively, then (a,a) is included in the result. See
 #' \code{\link{simplify}} if you want to get rid of the self-loops.
-#' 
+#'
 #' @aliases graph.compose %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
@@ -646,13 +646,13 @@ complementer <- function(graph, loops=FALSE) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g1 <- make_ring(10)
 #' g2 <- make_star(10, mode="undirected")
 #' gc <- compose(g1, g2)
 #' print_all(gc)
 #' print_all(simplify(gc))
-#' 
+#'
 compose <- function(g1, g2, byname="auto") {
 
   if (!is_igraph(g1) || !is_igraph(g2)) {
@@ -729,7 +729,7 @@ compose <- function(g1, g2, byname="auto") {
 #' edges to/from graphs.
 #'
 #' \code{edges} is an alias for \code{edge}.
-#' 
+#'
 #' @details
 #' When adding edges via \code{+}, all unnamed arguments of
 #' \code{edge} (or \code{edges}) are concatenated, and then passed to
@@ -780,22 +780,22 @@ edges <- edge
 #' vertices to/from graphs.
 #'
 #' \code{vertices} is an alias for \code{vertex}.
-#' 
+#'
 #' @details
 #' When adding vertices via \code{+}, all unnamed arguments are interpreted
 #' as vertex names of the new vertices. Named arguments are interpreted as
-#' vertex attributes for the new vertices. 
+#' vertex attributes for the new vertices.
 #'
 #' When deleting vertices via \code{-}, all arguments of \code{vertex} (or
 #' \code{vertices}) are concatenated via \code{c()} and passed to
-#' \code{\link{delete_vertices}}. 
+#' \code{\link{delete_vertices}}.
 #'
 #' @param ... See details below.
 #' @return A special object that can be used with together with
 #'   igraph graphs and the plus and minus operators.
 #'
 #' @family functions for manipulating graph structure
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
@@ -832,7 +832,7 @@ vertices <- vertex
 #'   graphs and the plus and minus operators.
 #'
 #' @family functions for manipulating graph structure
-#' 
+#'
 #' @export
 #' @examples
 #' # Create a (directed) wheel
@@ -844,10 +844,10 @@ vertices <- vertex
 #'
 #' g2 <- g + path("a", "b", "c", "d")
 #' plot(g2)
-#' 
+#'
 #' g3 <- g2 + path("e", "f", "g", weight=1:2, color="red")
 #' E(g3)[[]]
-#' 
+#'
 #' g4 <- g3 + path(c("f", "c", "j", "d"), width=1:3, color="green")
 #' E(g4)[[]]
 
@@ -878,7 +878,7 @@ path <- function(...) {
 #'     attributes as well. The operands of the \code{vertices} function
 #'     specifies the number of vertices to add and their attributes as
 #'     well.
-#' 
+#'
 #'     The unnamed arguments of \code{vertices} are concatenated and
 #'     used as the \sQuote{\code{name}} vertex attribute (i.e. vertex
 #'     names), the named arguments will be added as additional vertex
@@ -887,20 +887,20 @@ path <- function(...) {
 #'   g <- g + vertex("foo", color="blue")
 #'   g <- g + vertex("bar", "foobar")
 #'   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
-#' 
+#'
 #'     \code{vertex} is just an alias to \code{vertices}, and it is
 #'     provided for readability. The user should use it if a single vertex
 #'     is added to the graph.
-#' 
+#'
 #'   \item If it is an object created with the \code{\link{edge}} or
 #'     \code{\link{edges}} function, then new edges will be added to the
 #'     graph. The new edges and possibly their attributes can be specified as
 #'     the arguments of the \code{edges} function.
-#' 
+#'
 #'     The unnamed arguments of \code{edges} are concatenated and used
 #'     as vertex ids of the end points of the new edges. The named
 #'     arguments will be added as edge attributes.
-#' 
+#'
 #'     Examples: \preformatted{  g <- make_empty_graph() +
 #'          vertices(letters[1:10]) +
 #'          vertices("foo", "bar", "bar2", "foobar2")
@@ -912,27 +912,27 @@ path <- function(...) {
 #'     \code{edge} is just an alias to \code{edges} and it is provided
 #'     for readability. The user should use it if a single edge is added to
 #'     the graph.
-#' 
+#'
 #'   \item If it is an object created with the \code{\link{path}} function, then
 #'     new edges that form a path are added. The edges and possibly their
 #'     attributes are specified as the arguments to the \code{path}
 #'     function. The non-named arguments are concatenated and interpreted
 #'     as the vertex ids along the path. The remaining arguments are added
 #'     as edge attributes.
-#' 
+#'
 #'     Examples: \preformatted{  g <- make_empty_graph() + vertices(letters[1:10])
 #'   g <- g + path("a", "b", "c", "d")
 #'   g <- g + path("e", "f", "g", weight=1:2, color="red")
 #'   g <- g + path(c("f", "c", "j", "d"), width=1:3, color="green")}
 #'   }
-#' 
+#'
 #'   It is important to note that, although the plus operator is
 #'   commutative, i.e. is possible to write \preformatted{  graph <- "foo" + make_empty_graph()}
 #'   it is not associative, e.g. \preformatted{  graph <- "foo" + "bar" + make_empty_graph()}
 #'   results a syntax error, unless parentheses are used: \preformatted{  graph <- "foo" + ( "bar" + make_empty_graph() )}
 #'   For clarity, we suggest to always put the graph object on the left
 #'   hand side of the operator: \preformatted{  graph <- make_empty_graph() + "foo" + "bar"}
-#' 
+#'
 #' @param e1 First argument, probably an igraph graph, but see details
 #'    below.
 #' @param e2 Second argument, see details below.
@@ -944,10 +944,10 @@ path <- function(...) {
 #' @examples
 #' # 10 vertices named a,b,c,... and no edges
 #' g <- make_empty_graph() + vertices(letters[1:10])
-#' 
+#'
 #' # Add edges to make it a ring
 #' g <- g + path(letters[1:10], letters[1], color = "grey")
-#' 
+#'
 #' # Add some extra random edges
 #' g <- g + edges(sample(V(g), 10, replace = TRUE), color = "red")
 #' g$layout <- layout_in_circle
@@ -1018,7 +1018,7 @@ path <- function(...) {
     } else {
       res <- e1
     }
-    
+
   } else if (is.numeric(e2) && length(e2)==1) {
     ## Adding some isolate vertices
     res <- add_vertices(e1, e2)
@@ -1026,7 +1026,7 @@ path <- function(...) {
   } else if (is.character(e2)) {
     ## Adding named vertices
     res <- add_vertices(e1, length(e2), name=e2)
-    
+
   } else {
     stop("Cannot add unknown type to igraph graph")
   }
@@ -1082,7 +1082,7 @@ path <- function(...) {
 #'
 #' @method - igraph
 #' @export
- 
+
 `-.igraph` <- function(e1, e2) {
   if (missing(e2)) {
     stop("Non-numeric argument to negation operator")
@@ -1178,7 +1178,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'   IDs are reversed
 #'
 #' @examples
-#' 
+#'
 #' g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
 #' reverse_edges(g, 2)
 #' @export

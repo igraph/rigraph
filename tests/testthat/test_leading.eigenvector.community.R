@@ -25,7 +25,7 @@ test_that("cluster_leading_eigen works", {
 
   g <- make_graph("Zachary")
   lc <- cluster_leading_eigen(g, callback=f)
-  
+
   expect_that(lc$modularity, equals(modularity(g, lc$membership)))
   expect_that(as.vector(membership(lc)),
               equals(c(1, 3, 3, 3, 1, 1, 1, 3, 2, 2, 1, 1, 3, 3, 2, 2,
@@ -50,7 +50,7 @@ test_that("cluster_leading_eigen works", {
     myc <- membership==community
     B <- A[myc,myc] - (deg[myc] %*% t(deg[myc]))/2/ec
     BG <- B-diag(rowSums(B))
-    
+
     expect_that(M, equals(BG))
     0
   }

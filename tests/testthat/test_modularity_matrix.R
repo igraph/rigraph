@@ -12,7 +12,7 @@ test_that("modularity_matrix works", {
   m1 <- modularity(kar, membership(fc))
   m2 <- modularity(kar, membership(fc), weights=rep(1, ecount(kar)))
   expect_that(m1, equals(m2))
-  
+
   B1 <- modularity_matrix(kar)
   B2 <- modularity_matrix(kar, weights=rep(1, ecount(kar)))
 

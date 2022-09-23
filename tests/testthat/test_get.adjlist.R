@@ -34,5 +34,5 @@ test_that("as_adj_list works", {
     expect_that(length(a), is_equivalent_to(length(el2[[i]])))
     expect_that(sort(el2[[i]]), is_equivalent_to(sort(a)))
   }
-  
+
 })

@@ -12,5 +12,5 @@ test_that("simplify argument works", {
 
   expect_that(vcount(g2), equals(2))
   expect_that(ecount(g2), equals(3))
-  
+
 })

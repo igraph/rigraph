@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -39,7 +39,7 @@ read.graph.toraw <- function(filename) {
   }
   close(filename)
   rm(tmpbuffer)
-  
+
   buffer
 }
 
@@ -50,7 +50,7 @@ write.graph.fromraw <- function(buffer, file) {
     file <- file(file, open="w+b")
     closeit <- TRUE
   }
-  
+
   if (!isOpen(file)) {
     file <- open(file)
     closeit <- TRUE
@@ -68,30 +68,30 @@ write.graph.fromraw <- function(buffer, file) {
 
 
 #' Reading foreign file formats
-#' 
+#'
 #' The \code{read_graph} function is able to read graphs in various
-#' representations from a file, or from a http connection. Various formats 
+#' representations from a file, or from a http connection. Various formats
 #' are supported.
-#' 
+#'
 #' The \code{read_graph} function may have additional arguments depending on
 #' the file format (the \code{format} argument). See the details separately for
 #' each file format, below.
-#' 
+#'
 #' @aliases read.graph LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
 #' \code{http} or \code{ftp} connection. It can also be a character string with
 #' the file name or URI.
 #' @param format Character constant giving the file format. Right now
-#' \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml}, 
-#' \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported, 
-#' the default is \code{edgelist}. As of igraph 0.4 this argument is case 
+#' \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
+#' \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported,
+#' the default is \code{edgelist}. As of igraph 0.4 this argument is case
 #' insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
 #' @section Edge list format: This format is a simple text file with numeric
 #' vertex ids defining the edges. There is no need to have newline characters
 #' between the edges, a simple space will also do.
-#' 
+#'
 #' Additional arguments: \describe{ \item{n}{The number of vertices in the
 #' graph. If it is smaller than or equal to the largest integer in the file,
 #' then it is ignored; so it is safe to set it to zero (the default).}
@@ -132,10 +132,10 @@ read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 
 
 #' Writing the graph to a file in some format
-#' 
+#'
 #' \code{write_graph} is a general function for exporting graphs to foreign
 #' file formats, however not many formats are implemented right now.
-#' 
+#'
 #' @aliases write.graph
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
@@ -158,10 +158,10 @@ read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' \dontrun{write_graph(g, "/tmp/g.txt", "edgelist")}
-#' 
+#'
 write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl",
                                        "graphml", "dimacs", "gml", "dot", "leda"), ...) {
 
@@ -176,7 +176,7 @@ write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl"
   } else {
     tmpfile <- FALSE
   }
-  
+
   format <- igraph.match.arg(format)
   res <- switch(format,
                 "pajek"=write.graph.pajek(graph, file, ...),
@@ -195,7 +195,7 @@ write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl"
     buffer <- read.graph.toraw(file)
     write.graph.fromraw(buffer, origfile)
   }
-  
+
   invisible(res)
 }
 
@@ -215,7 +215,7 @@ read.graph.edgelist <- function(file, n=0,
 }
 
 write.graph.edgelist <- function(graph, file, ...) {
-  
+
   if (length(list(...))>0) {
     stop("Unknown arguments to write_graph (edgelist format)")
   }
@@ -240,7 +240,7 @@ read.graph.ncol <- function(file, predef=character(0), names=TRUE,
         as.logical(names), as.numeric(weights), as.logical(directed))
 }
 
-write.graph.ncol <- function(graph, file, 
+write.graph.ncol <- function(graph, file,
                              names="name", weights="weight", ...) {
   if (length(list(...))>0) {
     stop("Unknown arguments to write_graph (NCOL format)")
@@ -249,11 +249,11 @@ write.graph.ncol <- function(graph, file,
   weights <- as.character(weights)
   if (length(names)==0 || ! names %in% vertex_attr_names(graph)) { names <- NULL }
   if (length(weights)==0 || ! weights %in% edge_attr_names(graph)) { weights <- NULL }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_write_graph_ncol, graph, file,
         names, weights)
-}  
+}
 
 read.graph.lgl <- function(file, names=TRUE,
                            weights=c("auto", "yes", "no"),
@@ -269,7 +269,7 @@ read.graph.lgl <- function(file, names=TRUE,
         as.logical(names), as.numeric(weights), as.logical(directed))
 }
 
-write.graph.lgl <- function(graph, file, 
+write.graph.lgl <- function(graph, file,
                             names="name", weights="weight",
                             isolates=FALSE, ...) {
   if (length(list(...))>0) {
@@ -279,11 +279,11 @@ write.graph.lgl <- function(graph, file,
   weights <- as.character(weights)
   if (length(names)==0 || ! names %in% vertex_attr_names(graph)) { names <- NULL }
   if (length(weights)==0 || ! weights %in% edge_attr_names(graph)) { weights <- NULL }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_write_graph_lgl, graph, file,
         names, weights, as.logical(isolates))
-}  
+}
 
 read.graph.pajek <- function(file, ...) {
 
@@ -345,7 +345,7 @@ write.graph.dimacs <- function(graph, file,
   if (is.null(capacity)) {
     capacity <- E(graph)$capacity
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_write_graph_dimacs, graph, file, as.numeric(source),
         as.numeric(target), as.numeric(capacity))
@@ -409,7 +409,7 @@ read.graph.dl <- function(file, directed=TRUE, ...) {
   }
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_read_graph_dl, file, as.logical(directed))
-}  
+}
 
 ################################################################
 # Dot
@@ -431,21 +431,21 @@ write.graph.dot <- function(graph, file, ...) {
 
 
 #' Load a graph from the graph database for testing graph isomorphism.
-#' 
+#'
 #' This function downloads a graph from a database created for the evaluation
 #' of graph isomorphism testing algothitms.
-#' 
+#'
 #' \code{graph_from_graphdb} reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
-#' 
+#'
 #' If the \code{url} argument is specified then it should the complete path to
 #' a local or remote graph database file. In this case we simply call
 #' \code{\link{read_graph}} with the proper arguments to read the file.
-#' 
+#'
 #' If \code{url} is \code{NULL}, and this is the default, then the filename is
 #' assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
 #' \code{pair} and \code{which} arguments.
-#' 
+#'
 #' Unfortunately the original graph database homepage is now defunct, but see
 #' its old version at
 #' \url{http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
@@ -497,13 +497,13 @@ graph_from_graphdb <- function(url=NULL,
                           prefix="iso", type="r001", nodes=NULL, pair="A", which=0,
                           base="http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
                           compressed=TRUE, directed=TRUE) {
-  
+
   if (is.null(nodes) && is.null(url)) {
     stop("The `nodes' or the `url' argument must be non-null")
   }
 
   if (is.null(url)) {
-  
+
     prefixes <- c("iso", "si6", "mcs10", "mcs30", "mcs50", "mcs70", "mcs90")
     types <- c("r001", "r005", "r01", "r02", "m2D", "m2Dr2", "m2Dr4", "m2Dr6",
                "m3D", "m3Dr2", "m3Dr4", "m3Dr6", "m4D", "m4Dr2", "m4Dr4",
@@ -515,7 +515,7 @@ graph_from_graphdb <- function(url=NULL,
                     "m4D", "m4D", "m4D", "m4D",
                     "bvg", "bvg", "bvg", "bvg", "bvg", "bvg")
     typegroup <- typegroups[which(types==type)]
-    
+
     if (!prefix %in% prefixes) {
       stop("Invalid prefix!")
     }
@@ -529,7 +529,7 @@ graph_from_graphdb <- function(url=NULL,
   } else {
     filename <- url
   }
-  
+
   ## ok, we have the filename
 
   f <- try(gzcon(file(filename, open="rb")))

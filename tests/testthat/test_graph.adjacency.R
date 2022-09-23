@@ -188,4 +188,3 @@ test_that("graph_from_adjacency_matrix works for sparse matrices without values"
   M <- Matrix::sparseMatrix(i=c(1,3),j=c(3,4),dims=c(5,5),x=1)
   expect_that(g[], equals(M))
 })
-

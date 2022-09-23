@@ -1,12 +1,12 @@
 
 #' The DrL graph layout generator
-#' 
+#'
 #' DrL is a force-directed graph layout toolbox focused on real-world
 #' large-scale graphs, developed by Shawn Martin and colleagues at Sandia
 #' National Laboratories.
-#' 
+#'
 #' This function implements the force-directed DrL layout generator.
-#' 
+#'
 #' The generator has the following parameters: \describe{ \item{edge.cut}{Edge
 #' cutting is done in the late stages of the algorithm in order to achieve less
 #' dense layouts.  Edges are cut if there is a lot of stress on them (a large
@@ -36,12 +36,12 @@
 #' \item{simmer.temperature}{Start temperature, simmer phase.}
 #' \item{simmer.attraction}{Attraction, simmer phase.}
 #' \item{simmer.damping.mult}{Damping, simmer phase.}
-#' 
+#'
 #' There are five pre-defined parameter settings as well, these are called
 #' \code{drl_defaults$default}, \code{drl_defaults$coarsen},
 #' \code{drl_defaults$coarsest}, \code{drl_defaults$refine} and
 #' \code{drl_defaults$final}.  }
-#' 
+#'
 #' @aliases layout.drl drl_defaults igraph.drl.coarsen
 #'  igraph.drl.coarsest igraph.drl.default igraph.drl.final
 #'  igraph.drl.refine
@@ -79,13 +79,13 @@
 #' @importFrom stats runif
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- as.undirected(sample_pa(100, m=1))
 #' l <- layout_with_drl(g, options=list(simmer.attraction=0))
 #' \dontrun{
 #' plot(g, layout=l, vertex.size=3, vertex.label=NA)
 #' }
-#' 
+#'
 layout_with_drl <- function(graph, use.seed = FALSE,
                        seed=matrix(runif(vcount(graph)*2), ncol=2),
                        options=drl_defaults$default,
@@ -126,12 +126,12 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 
     on.exit(.Call(C_R_igraph_finalizer))
     if (dim==2) {
-      res <- .Call(C_R_igraph_layout_drl, graph, seed, use.seed, options, 
+      res <- .Call(C_R_igraph_layout_drl, graph, seed, use.seed, options,
                    weights, fixed)
     } else {
-      res <- .Call(C_R_igraph_layout_drl_3d, graph, seed, use.seed, options, 
+      res <- .Call(C_R_igraph_layout_drl_3d, graph, seed, use.seed, options,
                    weights, fixed)
-    }      
+    }
     res
 }
 

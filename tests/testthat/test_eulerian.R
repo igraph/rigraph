@@ -7,7 +7,7 @@ test_that("has_eulerian_path works", {
 
     g <- graph_from_literal(A-B-C-D-E-A-F-D-B-F-E, simplify=FALSE)
     expect_true(has_eulerian_path(g))
-    
+
     g <- graph_from_literal(A-B-C-D-A-D-C, B-D, simplify=FALSE)
     expect_false(has_eulerian_path(g))
 
@@ -36,7 +36,7 @@ test_that("eulerian_path works", {
     path$vpath <- as.vector(path$vpath)
     expect_equal(path$epath, as.vector(E(g, path=c(1, 2, 3, 4, 2, 6, 1, 5, 4, 6, 5))))
     expect_equal(path$vpath, c(1, 2, 3, 4, 2, 6, 1, 5, 4, 6, 5))
-    
+
     g <- graph_from_literal(A-B-C-D-A-D-C, B-D, simplify=FALSE)
     expect_error(eulerian_path(g), "The graph does not have an Eulerian path")
 })
@@ -49,7 +49,7 @@ test_that("has_eulerian_cycle works", {
 
     g <- graph_from_literal(A-B-C-D-E-A-F-D-B-F-E, simplify=FALSE)
     expect_false(has_eulerian_cycle(g))
-    
+
     g <- graph_from_literal(A-B-C-D-A-D-C, B-D, simplify=FALSE)
     expect_false(has_eulerian_cycle(g))
 
@@ -74,7 +74,7 @@ test_that("eulerian_cycle works", {
 
     g <- graph_from_literal(A-B-C-D-E-A-F-D-B-F-E, simplify=FALSE)
     expect_error(eulerian_cycle(g), "The graph does not have an Eulerian cycle")
-    
+
     g <- graph_from_literal(A-B-C-D-A-D-C, B-D, simplify=FALSE)
     expect_error(eulerian_cycle(g), "The graph does not have an Eulerian cycle")
 })

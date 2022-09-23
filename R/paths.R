@@ -22,17 +22,17 @@
 ## -----------------------------------------------------------------------
 
 #' List all simple paths from one source
-#' 
+#'
 #' This function lists are simple paths from one source vertex to another
 #' vertex or vertices. A path is simple if the vertices it visits are not
 #' visited more than once.
-#' 
+#'
 #' Note that potentially there are exponentially many paths between two
 #' vertices of a graph, and you may run out of memory when using this
 #' function, if your graph is lattice-like.
-#' 
+#'
 #' This function currently ignored multiple and loop edges.
-#' 
+#'
 #' @param graph The input graph.
 #' @param from The source vertex.
 #' @param to The target vertex of vertices. Defaults to all vertices.
@@ -48,11 +48,11 @@
 #'   vertex ids.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' all_simple_paths(g, 1, 5)
 #' all_simple_paths(g, 1, c(3,5))
-#' 
+#'
 #' @export
 
 all_simple_paths <- function(graph, from, to = V(graph),
@@ -72,7 +72,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
                as.integer(cutoff), mode)
   res <- get.all.simple.paths.pp(res)
 
-  if (igraph_opt("return.vs.es")) { 
+  if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   res
@@ -80,13 +80,13 @@ all_simple_paths <- function(graph, from, to = V(graph),
 
 
 #' Directed acyclic graphs
-#' 
+#'
 #' This function tests whether the given graph is a DAG, a directed acyclic
 #' graph.
-#' 
+#'
 #' \code{is_dag} checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
-#' 
+#'
 #' @aliases is.dag is_dag
 #' @param graph The input graph. It may be undirected, in which case
 #' \code{FALSE} is reported.
@@ -95,7 +95,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' \email{csardi.gabor@@gmail.com} for the R interface.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_tree(10)
 #' is_dag(g)
 #' g2 <- g + edge(5,1)
@@ -107,17 +107,17 @@ is_dag <- is_dag
 
 
 #' Maximum cardinality search
-#' 
+#'
 #' Maximum cardinality search is a simple ordering a vertices that is useful in
 #' determining the chordality of a graph.
-#' 
+#'
 #' Maximum cardinality search visits the vertices in such an order that every
 #' time the vertex with the most already visited neighbors is visited. Ties are
 #' broken randomly.
-#' 
+#'
 #' The algorithm provides a simple basis for deciding whether a graph is
 #' chordal, see References below, and also \code{\link{is_chordal}}.
-#' 
+#'
 #' @aliases maximum.cardinality.search max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
 #' ignored, as the algorithm is defined for undirected graphs.
@@ -135,14 +135,14 @@ is_dag <- is_dag
 #' of Computation} 13, 566--579.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## The examples from the Tarjan-Yannakakis paper
 #' g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
 #'                 E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
 #'                 I-A:H)
 #' max_cardinality(g1)
 #' is_chordal(g1, fillin=TRUE)
-#' 
+#'
 #' g2 <- graph_from_literal(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
 #'                 E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
 #'                 I-G:H:J, J-H:I)
@@ -153,17 +153,17 @@ max_cardinality <- max_cardinality
 
 
 #' Eccentricity of the vertices in a graph
-#' 
+#'
 #' The eccentricity of a vertex is its shortest path distance from the farthest
 #' other node in the graph.
-#' 
+#'
 #' The eccentricity of a vertex is calculated by measuring the shortest
 #' distance from (or to) the vertex, to (or from) all vertices in the graph,
 #' and taking the maximum.
-#' 
+#'
 #' This implementation ignores vertex pairs that are in different components.
 #' Isolate vertices have eccentricity zero.
-#' 
+#'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
 #' @param mode Character constant, gives whether the shortest paths to or from
@@ -188,18 +188,18 @@ eccentricity <- eccentricity
 
 
 #' Radius of a graph
-#' 
+#'
 #' The eccentricity of a vertex is its shortest path distance from the
 #' farthest other node in the graph. The smallest eccentricity in a graph
 #' is called its radius
-#' 
+#'
 #' The eccentricity of a vertex is calculated by measuring the shortest
 #' distance from (or to) the vertex, to (or from) all vertices in the
 #' graph, and taking the maximum.
-#' 
+#'
 #' This implementation ignores vertex pairs that are in different
 #' components.  Isolate vertices have eccentricity zero.
-#' 
+#'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mode Character constant, gives whether the shortest paths to or from
 #' the given vertices should be calculated for directed graphs. If \code{out}
@@ -210,7 +210,7 @@ eccentricity <- eccentricity
 #' @return A numeric scalar, the radius of the graph.
 #' @seealso \code{\link{eccentricity}} for the underlying
 #'   calculations, code{\link{distances}} for general shortest path
-#'   calculations. 
+#'   calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples

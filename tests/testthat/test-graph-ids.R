@@ -63,7 +63,7 @@ test_that("ids of vertex and edge sequence remain after removing graph", {
 
   rm(g)
   gc()
-  
+
   expect_equal(id, graph_id(vs))
   expect_equal(id, graph_id(vs2))
   expect_equal(id, graph_id(es))

@@ -8,7 +8,7 @@ test_that("SGM works", {
 
   vc <- 10
   nos <- 3
-  
+
   g1 <- erdos.renyi.game(vc, .5)
   randperm <- c(1:nos, nos + sample(vc-nos))
   g2 <- sample_correlated_gnp(g1, corr=.7, p=g1$p, permutation=randperm)
@@ -45,5 +45,5 @@ test_that("LSAP does not change input matrix", {
   solve_LSAP(x)
 
   expect_equal(x, matrix(c(5, 1, 4, 3, 5, 2, 2, 4, 4), nrow = 3))
-  
+
 })

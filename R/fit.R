@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -27,9 +27,9 @@
 
 
 #' Fitting a power-law distribution function to discrete data
-#' 
+#'
 #' \code{fit_power_law} fits a power-law distribution to a data set.
-#' 
+#'
 #' This function fits a power-law distribution to a vector containing samples
 #' from a distribution (that is assumed to follow a power-law of course). In a
 #' power-law distribution, it is generally assumed that \eqn{P(X=x)} is
@@ -39,7 +39,7 @@
 #' \eqn{x_{min}}{xmin}. The goal of this function is to determine
 #' \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 #' \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
-#' 
+#'
 #' \code{fit_power_law} provides two maximum likelihood implementations.  If
 #' the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
 #' optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
@@ -47,7 +47,7 @@
 #' optimization method and/or its parameters.  This implementation can
 #' \emph{not} to fit the \eqn{x_{min}}{xmin} argument, so use the
 #' \sQuote{\code{plfit}} implementation if you want to do that.
-#' 
+#'
 #' The \sQuote{\code{plfit}} implementation also uses the maximum likelihood
 #' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_{min}}{xmin};
 #' When \eqn{x_{min}}{xmin} is not given in advance, the algorithm will attempt
@@ -84,7 +84,7 @@
 #' \sQuote{\code{R.mle}}, then an object with class \sQuote{\code{mle}}. It can
 #' be used to calculate confidence intervals and log-likelihood. See
 #' \code{\link[stats4]{mle-class}} for details.
-#' 
+#'
 #' If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
 #' named list with entries: \item{continuous}{Logical scalar, whether the
 #' fitted power-law distribution was continuous or discrete.}
@@ -104,24 +104,24 @@
 #' @seealso \code{\link[stats4]{mle}}
 #' @references Power laws, Pareto distributions and Zipf's law, M. E. J.
 #' Newman, \emph{Contemporary Physics}, 46, 323-351, 2005.
-#' 
+#'
 #' Aaron Clauset, Cosma R .Shalizi and Mark E.J. Newman: Power-law
 #' distributions in empirical data. SIAM Review 51(4):661-703, 2009.
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # This should approximately yield the correct exponent 3
 #' g <- barabasi.game(1000) # increase this number to have a better estimate
 #' d <- degree(g, mode="in")
 #' fit1 <- fit_power_law(d+1, 10)
 #' fit2 <- fit_power_law(d+1, 10, implementation="R.mle")
-#' 
+#'
 #' fit1$alpha
 #' stats4::coef(fit2)
 #' fit1$logLik
 #' stats4::logLik(fit2)
-#' 
+#'
 fit_power_law <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
                           implementation=c("plfit", "R.mle"), ...) {
 
@@ -142,16 +142,16 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
   }
   if (length(x) == 1) {
     stop("vector should be at least of length two")
-  }  
+  }
 
   if (is.null(xmin)) { xmin <- min(x) }
-  
+
   n <- length(x)
   x <- x[ x >= xmin]
   if (length(x) != n) {
     n <- length(x)
   }
-  
+
 #  mlogl <- function(alpha) {
 #    if (xmin > 1) {
 #      C <- 1/(1/(alpha-1)-sum(beta(1:(xmin-1), alpha)))

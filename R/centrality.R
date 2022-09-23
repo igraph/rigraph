@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -36,26 +36,26 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 
 
 #' Vertex and edge betweenness centrality
-#' 
+#'
 #' The vertex and edge betweenness are (roughly) defined by the number of
 #' geodesics (shortest paths) going through a vertex or an edge.
-#' 
+#'
 #' The vertex betweenness of vertex \code{v} is defined by
-#' 
+#'
 #' \deqn{\sum_{i\ne j, i\ne v, j\ne v} g_{ivj}/g_{ij}}{sum( g_ivj / g_ij,
 #' i!=j,i!=v,j!=v)}
-#' 
+#'
 #' The edge betweenness of edge \code{e} is defined by
-#' 
+#'
 #' \deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
-#' 
+#'
 #' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
 #' calculates edge betweenness.
 #'
 #' Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
 #' \eqn{i} and \eqn{j} while \eqn{g_{ivj}} is the number of those shortest paths
 #' which pass though vertex \eqn{v}.
-#' 
+#'
 #' Both functions allow you to consider only paths of length \code{cutoff} or
 #' smaller; this can be run for larger graphs, as the running time is not
 #' quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative,
@@ -70,7 +70,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #'
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
-#' 
+#'
 #' @aliases betweenness edge.betweenness betweenness.estimate
 #' edge.betweenness.estimate edge_betweenness estimate_betweenness
 #' estimate_edge_betweenness
@@ -93,30 +93,30 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' is the number of vertices in the graph.
 #' @return A numeric vector with the betweenness score for each vertex in
 #' \code{v} for \code{betweenness}.
-#' 
+#'
 #' A numeric vector with the edge betweenness score for each edge in \code{e}
 #' for \code{edge_betweenness}.
-#' 
+#'
 #' @note \code{edge_betweenness} might give false values for graphs with
 #' multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
-#' 
+#'
 #' Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. \emph{Journal
 #' of Mathematical Sociology} 25(2):163-177, 2001.
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnp(10, 3/10)
 #' betweenness(g)
 #' edge_betweenness(g)
-#' 
+#'
 betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
                         nobigint=TRUE, normalized=FALSE, cutoff=-1) {
-  
+
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -164,13 +164,13 @@ edge_betweenness <- function(graph, e=E(graph),
   if (!is_igraph(graph)) { stop("Not a graph object") }
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-    weights <- E(graph)$weight 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
   }
-  if (!is.null(weights) && any(!is.na(weights))) { 
-    weights <- as.numeric(weights) 
-  } else { 
-    weights <- NULL 
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
   }
   cutoff <- as.numeric(cutoff)
   if (cutoff == 0) {
@@ -192,19 +192,19 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 }
 
 #' Closeness centrality of vertices
-#' 
+#'
 #' Closeness centrality measures how many steps is required to access every other
 #' vertex from a given vertex.
-#' 
+#'
 #' The closeness centrality of a vertex is defined as the inverse of the
 #' sum of distances to all the other vertices in the graph:
-#' 
+#'
 #' \deqn{\frac{1}{\sum_{i\ne v} d_{vi}}}{1/sum( d(v,i), i != v)}
-#' 
+#'
 #' If there is no (directed) path between vertex \code{v} and \code{i}, then
 #' \code{i} is omitted from the calculation. If no other vertices are reachable
 #' from \code{v}, then its closeness is returned as NaN.
-#' 
+#'
 #" You may use the \code{cutoff} argument to consider only paths of length
 #' \code{cutoff} or smaller. This can be run for larger graphs, as the running
 #' time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is zero
@@ -247,14 +247,14 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' g2 <- make_star(10)
 #' closeness(g)
 #' closeness(g2, mode="in")
 #' closeness(g2, mode="out")
 #' closeness(g2, mode="all")
-#' 
+#'
 closeness <- function(graph, vids=V(graph),
                       mode=c("out", "in", "all", "total"), weights=NULL,
                       normalized=FALSE, cutoff=-1) {
@@ -262,13 +262,13 @@ closeness <- function(graph, vids=V(graph),
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) { 
-    weights <- E(graph)$weight 
-  } 
-  if (!is.null(weights) && any(!is.na(weights))) { 
-    weights <- as.numeric(weights) 
-  } else { 
-    weights <- NULL 
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
   }
   normalized <- as.logical(normalized)
   cutoff <- as.numeric(cutoff)
@@ -299,28 +299,28 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
                               mode=1, start=0, sigma=0.0, sigmai=0.0)
 
 #' ARPACK eigenvector calculation
-#' 
+#'
 #' Interface to the ARPACK library for calculating eigenvectors of sparse
 #' matrices
-#' 
+#'
 #' ARPACK is a library for solving large scale eigenvalue problems.  The
 #' package is designed to compute a few eigenvalues and corresponding
 #' eigenvectors of a general \eqn{n} by \eqn{n} matrix \eqn{A}. It is most
 #' appropriate for large sparse or structured matrices \eqn{A} where structured
 #' means that a matrix-vector product \code{w <- Av} requires order \eqn{n}
 #' rather than the usual order \eqn{n^2} floating point operations.
-#' 
+#'
 #' This function is an interface to ARPACK. igraph does not contain all ARPACK
 #' routines, only the ones dealing with symmetric and non-symmetric eigenvalue
 #' problems using double precision real numbers.
-#' 
+#'
 #' The eigenvalue calculation in ARPACK (in the simplest case) involves the
 #' calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
 #' and \eqn{v} is an arbitrary vector. The function supplied in the \code{fun}
 #' argument is expected to perform this product. If the product can be done
 #' efficiently, e.g. if the matrix is sparse, then \code{arpack} is usually
 #' able to calculate the eigenvalues very quickly.
-#' 
+#'
 #' The \code{options} argument specifies what kind of calculation to perform.
 #' It is a list with the following members, they correspond directly to ARPACK
 #' parameters. On input it has the following fields: \describe{
@@ -333,7 +333,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' \code{\link{eigen_centrality}}, \code{\link{page_rank}}, etc.)}
 #' \item{which}{Specify which eigenvalues/vectors to compute, character
 #' constant with exactly two characters.
-#' 
+#'
 #' Possible values for symmetric input matrices: \describe{
 #' \item{"LA"}{Compute \code{nev} largest (algebraic) eigenvalues.}
 #' \item{"SA"}{Compute \code{nev} smallest (algebraic)
@@ -342,7 +342,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' (in magnitude) eigenvalues.} \item{"BE"}{Compute \code{nev}
 #' eigenvalues, half from each end of the spectrum. When \code{nev} is odd,
 #' compute one more from the high end than from the low end.} }
-#' 
+#'
 #' Possible values for non-symmetric input matrices: \describe{
 #' \item{"LM"}{Compute \code{nev} eigenvalues of largest
 #' magnitude.} \item{"SM"}{Compute \code{nev} eigenvalues of
@@ -352,7 +352,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' \code{nev} eigenvalues of largest imaginary part.}
 #' \item{"SI"}{Compute \code{nev} eigenvalues of smallest imaginary
 #' part.} }
-#' 
+#'
 #' This parameter is sometimes overwritten by the various functions, e.g.
 #' \code{\link{page_rank}} always sets \sQuote{\code{LM}}.  }
 #' \item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
@@ -378,7 +378,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' is symmetric positive semi-definite. (Cayley transformed mode.)} } Please
 #' note that only \code{mode==1} was tested and other values might not work
 #' properly.
-#' 
+#'
 #' Possible values if the input matrix is not symmetric: \describe{
 #' \item{1}{\eqn{Ax=\lambda x}{A*x=lambda*x}.} \item{2}{\eqn{Ax=\lambda
 #' Mx}{A*x=lambda*M*x}, \eqn{M} is symmetric positive definite.}
@@ -388,14 +388,14 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' and other values might not work properly.  } \item{start}{Not used
 #' currently. Later it be used to set a starting vector.} \item{sigma}{Not used
 #' currently.} \item{sigmai}{Not use currently.}
-#' 
+#'
 #' On output the following additional fields are added: \describe{
 #' \item{info}{Error flag of ARPACK. Possible values: \describe{
 #' \item{0}{Normal exit.} \item{1}{Maximum number of iterations taken.}
 #' \item{3}{No shifts could be applied during a cycle of the Implicitly
 #' restarted Arnoldi iteration. One possibility is to increase the size of
 #' \code{ncv} relative to \code{nev}.} }
-#' 
+#'
 #' ARPACK can return more error conditions than these, but they are converted
 #' to regular igraph errors.  } \item{iter}{Number of Arnoldi iterations
 #' taken.} \item{nconv}{Number of \dQuote{converged} Ritz values. This
@@ -404,7 +404,7 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' \item{numopb}{Not used currently.} \item{numreo}{Total number of steps of
 #' re-orthogonalization.} } } Please see the ARPACK documentation for
 #' additional details.
-#' 
+#'
 #' @aliases arpack arpack-options igraph.arpack.default arpack.unpack.complex
 #' arpack_defaults
 #' @param func The function to perform the matrix-vector multiplication. ARPACK
@@ -438,21 +438,21 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' @references D.C. Sorensen, Implicit Application of Polynomial Filters in a
 #' k-Step Arnoldi Method. \emph{SIAM J. Matr. Anal. Apps.}, 13 (1992), pp
 #' 357-385.
-#' 
+#'
 #' R.B. Lehoucq, Analysis and Implementation of an Implicitly Restarted Arnoldi
 #' Iteration. \emph{Rice University Technical Report} TR95-13, Department of
 #' Computational and Applied Mathematics.
-#' 
+#'
 #' B.N. Parlett & Y. Saad, Complex Shift and Invert Strategies for Real
 #' Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 #' (1987).
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # Identity matrix
 #' f <- function(x, extra=NULL) x
 #' arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
-#' 
+#'
 #' # Graph laplacian of a star graph (undirected), n>=2
 #' # Note that this is a linear operation
 #' f <- function(x, extra=NULL) {
@@ -463,12 +463,12 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #'   }
 #'   y
 #' }
-#' 
+#'
 #' arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
-#' 
+#'
 #' # double check
 #' eigen(laplacian_matrix(make_star(10, mode="undirected")))
-#' 
+#'
 #' ## First three eigenvalues of the adjacency matrix of a graph
 #' ## We need the 'Matrix' package for this
 #' if (require(Matrix)) {
@@ -496,7 +496,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
          paste(setdiff(names(options), names(arpack_defaults)),
                        collapse=", "))
   }
-  
+
   options.tmp <- arpack_defaults
   options.tmp[ names(options) ] <- options
   options <- options.tmp
@@ -505,7 +505,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
     complex <- FALSE
     warning("Symmetric matrix, setting `complex' to FALSE")
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_arpack, func, extra, options, env, sym)
 
@@ -530,7 +530,7 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
     }
     res$vectors <- res$vectors[,1:length(res$values)]
   }
-  
+
   res
 }
 
@@ -550,14 +550,14 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 
 
 #' Find subgraph centrality scores of network positions
-#' 
+#'
 #' Subgraph centrality of a vertex measures the number of subgraphs a vertex
 #' participates in, weighting them according to their size.
-#' 
+#'
 #' The subgraph centrality of a vertex is defined as the number of closed loops
 #' originating at the vertex, where longer loops are exponentially
 #' downweighted.
-#' 
+#'
 #' Currently the calculation is performed by explicitly calculating all
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
@@ -577,28 +577,28 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_pa(100, m=4, dir=FALSE)
 #' sc <- subgraph_centrality(g)
 #' cor(degree(g), sc)
-#' 
+#'
 subgraph_centrality <- function(graph, diag=FALSE) {
   A <- as_adj(graph)
   if (!diag) { diag(A) <- 0 }
   eig <- eigen(A)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
-  if (igraph_opt("add.vertex.names") && is_named(graph)) { 
-    names(res) <- vertex_attr(graph, "name") 
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name")
   }
   res
 }
 
 
 #' Eigenvalues and eigenvectors of the adjacency matrix of a graph
-#' 
+#'
 #' Calculate selected eigenvalues and eigenvectors of a (supposedly sparse)
 #' graph.
-#' 
+#'
 #' The \code{which} argument is a list and it specifies which eigenvalues and
 #' corresponding eigenvectors to calculate: There are eight options:
 #' \enumerate{ \item Eigenvalues with the largest magnitude. Set \code{pos} to
@@ -615,10 +615,10 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' Eigenvalues in an interval. This is not (yet) implemented.  \item All
 #' eigenvalues. This is not implemented yet. The standard \code{eigen} function
 #' does a better job at this, anyway.  }
-#' 
+#'
 #' Note that ARPACK might be unstable for graphs with multiple components, e.g.
 #' graphs with isolate vertices.
-#' 
+#'
 #' @aliases graph.eigen spectrum igraph.eigen.default
 #' @param graph The input graph, can be directed or undirected.
 #' @param algorithm The algorithm to use. Currently only \code{arpack} is
@@ -629,7 +629,7 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' @param options Options for the ARPACK solver. See
 #' \code{\link{arpack_defaults}}.
 #' @return Depends on the algorithm used.
-#' 
+#'
 #' For \code{arpack} a list with three entries is returned: \item{options}{See
 #' the return value for \code{arpack} for a complete description.}
 #' \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
@@ -638,20 +638,20 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' @seealso \code{\link{as_adj}} to create a (sparse) adjacency matrix.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Small example graph, leading eigenvector by default
 #' kite <- make_graph("Krackhardt_kite")
 #' spectrum(kite)[c("values", "vectors")]
-#' 
+#'
 #' ## Double check
 #' eigen(as_adj(kite, sparse=FALSE))$vectors[,1]
-#' 
+#'
 #' ## Should be the same as 'eigen_centrality' (but rescaled)
 #' cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
-#' 
+#'
 #' ## Smallest eigenvalues
 #' spectrum(kite, which=list(pos="SM", howmany=2))$values
-#' 
+#'
 #' @export
 #' @include auto.R
 
@@ -662,10 +662,10 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
                              balance="none")
 
 #' Find Eigenvector Centrality Scores of Network Positions
-#' 
+#'
 #' \code{eigen_centrality} takes a graph (\code{graph}) and returns the
 #' eigenvector centralities of positions \code{v} within it
-#' 
+#'
 #' Eigenvector centrality scores correspond to the values of the first
 #' eigenvector of the graph adjacency matrix; these scores may, in turn, be
 #' interpreted as arising from a reciprocal process in which the centrality of
@@ -680,12 +680,12 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' relationship which is easy to see in the special case of a diagonalizable
 #' symmetric real matrix via the \eqn{SLS^-1}{$S \Lambda S^{-1}$}
 #' decomposition).)
-#' 
+#'
 #' The adjacency matrix used in the eigenvector centrality calculation assumes
 #' that loop edges are counted \emph{twice}; this is because each loop edge has
 #' \emph{two} endpoints that are both connected to the same vertex, and you
 #' could traverse the loop edge via either endpoint.
-#' 
+#'
 #' In the directed case, the left eigenvector of the adjacency matrix is
 #' calculated. In other words, the centrality of a vertex is proportional to
 #' the sum of centralities of vertices pointing to it.
@@ -702,11 +702,11 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' igraph will return an eigenvalue of zero in such cases. The eigenvector
 #' centralities will all be equal for an empty graph and will all be zeros for
 #' a directed acyclic graph. Such pathological cases can be detected by checking
-#' whether the eigenvalue is very close to zero. 
+#' whether the eigenvalue is very close to zero.
 #'
 #' From igraph version 0.5 this function uses ARPACK for the underlying
 #' computation, see \code{\link{arpack}} for more about ARPACK in igraph.
-#' 
+#'
 #' @aliases evcent eigen_centrality
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
@@ -739,7 +739,7 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' Measures. \emph{American Journal of Sociology}, 92, 1170-1182.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' #Generate some test data
 #' g <- make_ring(10, directed=FALSE)
 #' #Compute eigenvector centrality scores
@@ -750,10 +750,10 @@ eigen_centrality <- eigen_centrality
 
 
 #' Strength or weighted vertex degree
-#' 
+#'
 #' Summing up the edge weights of the adjacent edges for each vertex.
-#' 
-#' 
+#'
+#'
 #' @aliases graph.strength strength
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
@@ -773,13 +773,13 @@ eigen_centrality <- eigen_centrality
 #' Natl. Acad. Sci. USA 101, 3747 (2004)
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_star(10)
 #' E(g)$weight <- seq(ecount(g))
 #' strength(g)
 #' strength(g, mode="out")
 #' strength(g, mode="in")
-#' 
+#'
 #' # No weights, a warning is given
 #' g <- make_ring(10)
 #' strength(g)
@@ -789,9 +789,9 @@ strength <- strength
 
 
 #' Graph diversity
-#' 
+#'
 #' Calculates a measure of diversity for all vertices.
-#' 
+#'
 #' The diversity of a vertex is defined as the (scaled) Shannon entropy of the
 #' weights of its incident edges:
 #' \deqn{D(i)=\frac{H(i)}{\log k_i}}{D(i)=H(i)/log(k[i])}
@@ -802,9 +802,9 @@ strength <- strength
 #' sum(w[i,l], l=1..k[i]),} and \eqn{k_i}{k[i]} is the (total) degree of vertex
 #' \eqn{i}, \eqn{w_{ij}}{w[i,j]} is the weight of the edge(s) between vertices
 #' \eqn{i} and \eqn{j}.
-#' 
+#'
 #' For vertices with degree less than two the function returns \code{NaN}.
-#' 
+#'
 #' @aliases graph.diversity diversity
 #' @param graph The input graph. Edge directions are ignored.
 #' @param weights \code{NULL}, or the vector of edge weights to use for the
@@ -817,7 +817,7 @@ strength <- strength
 #' and Economic Development, \emph{Science} \bold{328}, 1029--1031, 2010.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g1 <- sample_gnp(20, 2/20)
 #' g2 <- sample_gnp(20, 2/20)
 #' g3 <- sample_gnp(20, 5/20)
@@ -833,15 +833,15 @@ diversity <- diversity
 
 
 #' Kleinberg's hub centrality scores.
-#' 
+#'
 #' The hub scores of the vertices are defined as the principal eigenvector
 #' of \eqn{A A^T}{A*t(A)}, where \eqn{A} is the adjacency matrix of the
 #' graph.
-#' 
+#'
 #' For undirected matrices the adjacency matrix is symmetric and the hub
 #' scores are the same as authority scores, see
 #' \code{\link{authority_score}}.
-#' 
+#'
 #' @aliases hub.score
 #' @param graph The input graph.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
@@ -860,7 +860,7 @@ diversity <- diversity
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
-#'     the same members as the \code{options} member returned 
+#'     the same members as the \code{options} member returned
 #'     by \code{\link{arpack}}, see that for documentation.}
 #' @seealso \code{\link{authority_score}},
 #' \code{\link{eigen_centrality}} for eigenvector centrality,
@@ -874,7 +874,7 @@ diversity <- diversity
 #' ## An in-star
 #' g <- make_star(10)
 #' hub_score(g)$vector
-#' 
+#'
 #' ## A ring
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
@@ -883,15 +883,15 @@ hub_score <- hub_score
 
 
 #' Kleinberg's authority centrality scores.
-#' 
+#'
 #' The authority scores of the vertices are defined as the principal
 #' eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency
 #' matrix of the graph.
-#' 
+#'
 #' For undirected matrices the adjacency matrix is symmetric and the
 #' authority scores are the same as hub scores, see
 #' \code{\link{hub_score}}.
-#' 
+#'
 #' @aliases authority.score
 #' @param graph The input graph.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
@@ -910,7 +910,7 @@ hub_score <- hub_score
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
-#'     the same members as the \code{options} member returned 
+#'     the same members as the \code{options} member returned
 #'     by \code{\link{arpack}}, see that for documentation.}
 #' @seealso \code{\link{hub_score}}, \code{\link{eigen_centrality}} for
 #' eigenvector centrality, \code{\link{page_rank}} for the Page Rank
@@ -925,7 +925,7 @@ hub_score <- hub_score
 #' g <- make_star(10)
 #' hub_score(g)$vector
 #' authority_score(g)$vector
-#' 
+#'
 #' ## A ring
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
@@ -935,26 +935,26 @@ authority_score <- authority_score
 
 
 #' The Page Rank algorithm
-#' 
+#'
 #' Calculates the Google PageRank for the specified vertices.
-#' 
+#'
 #' For the explanation of the PageRank algorithm, see the following webpage:
 #' \url{http://infolab.stanford.edu/~backrub/google.html}, or the following
 #' reference:
-#' 
+#'
 #' Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web
 #' Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
 #' Australia, April 1998.
-#' 
-#' The \code{page_rank} function can use either the PRPACK library or ARPACK 
+#'
+#' The \code{page_rank} function can use either the PRPACK library or ARPACK
 #' (see \code{\link{arpack}}) to perform the calculation.
-#' 
+#'
 #' Please note that the PageRank of a given vertex depends on the PageRank of
 #' all other vertices, so even if you want to calculate the PageRank for only
 #' some of the vertices, all of them must be calculated. Requesting the
 #' PageRank for only some of the vertices does not result in any performance
 #' increase at all.
-#' 
+#'
 #' @aliases page.rank page_rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
@@ -990,7 +990,7 @@ authority_score <- authority_score
 #' always exactly one.} \item{options}{Some information about the underlying
 #' ARPACK calculation. See \code{\link{arpack}} for details. This entry is
 #' \code{NULL} if not the ARPACK implementation was used.}
-#' 
+#'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso Other centrality scores: \code{\link{closeness}},
@@ -1000,13 +1000,13 @@ authority_score <- authority_score
 #' Conference, Brisbane, Australia, April 1998.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnp(20, 5/20, directed=TRUE)
 #' page_rank(g)$vector
-#' 
+#'
 #' g2 <- make_star(10)
 #' page_rank(g2)$vector
-#' 
+#'
 #' # Personalized PageRank
 #' g3 <- make_ring(10)
 #' page_rank(g3)$vector
@@ -1017,15 +1017,15 @@ authority_score <- authority_score
 page_rank <- page_rank
 
 #' Harmonic centrality of vertices
-#' 
+#'
 #' The harmonic centrality of a vertex is the mean inverse distance to all other
-#' vertices. The inverse distance to an unreachable vertex is considered to be zero. 
+#' vertices. The inverse distance to an unreachable vertex is considered to be zero.
 #'
 #' The \code{cutoff} argument can be used to restrict the calculation to paths
 #' of length \code{cutoff} or smaller only; this can be used for larger graphs
 #' to speed up the calculation. If \code{cutoff} is negative (which is the
 #' default), then the function calculates the exact harmonic centrality scores.
-#' 
+#'
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
 #' @param mode Character string, defining the types of the paths used for
@@ -1052,14 +1052,14 @@ page_rank <- page_rank
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' g2 <- make_star(10)
 #' harmonic_centrality(g)
 #' harmonic_centrality(g2, mode="in")
 #' harmonic_centrality(g2, mode="out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode="all")
-#' 
+#'
 
 harmonic_centrality <- harmonic_centrality
 
@@ -1071,8 +1071,8 @@ bonpow.dense <- function(graph, nodes=V(graph),
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
-  }  
-  
+  }
+
   d <- as_adj(graph)
   if (!loops) {
     diag(d) <- 0
@@ -1087,7 +1087,7 @@ bonpow.dense <- function(graph, nodes=V(graph),
     ev <- ev/sum(ev)
   } else {
     ev <- ev*sqrt(n/sum((ev)^2))
-  } 
+  }
   ev[as.numeric(nodes)]
 }
 
@@ -1100,7 +1100,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
   }
 
   vg <- vcount(graph)
-  
+
   ## sparse adjacency matrix
   d <- as_adj(graph, sparse=TRUE)
 
@@ -1122,11 +1122,11 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 
 
 #' Find Bonacich Power Centrality Scores of Network Positions
-#' 
+#'
 #' \code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
 #' centralities of positions (selected by \code{nodes}).  The decay rate for
 #' power contributions is specified by \code{exponent} (1 by default).
-#' 
+#'
 #' Bonacich's power centrality measure is defined by
 #' \eqn{C_{BP}\left(\alpha,\beta\right)=\alpha\left(\mathbf{I}-\beta\mathbf{A}\right)^{-1}\mathbf{A}\mathbf{1}}{C_BP(alpha,beta)=alpha
 #' (I-beta A)^-1 A 1}, where \eqn{\beta}{beta} is an attenuation parameter (set
@@ -1150,7 +1150,7 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' The magnitude of \eqn{\beta}{beta} controls the influence of distant actors
 #' on ego's centrality score, with larger magnitudes indicating slower rates of
 #' decay.  (High rates, hence, imply a greater sensitivity to edge effects.)
-#' 
+#'
 #' Interpretively, the Bonacich power measure corresponds to the notion that
 #' the power of a vertex is recursively defined by the sum of the power of its
 #' alters.  The nature of the recursion involved is then controlled by the
@@ -1195,13 +1195,13 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' @references Bonacich, P.  (1972).  ``Factoring and Weighting Approaches to
 #' Status Scores and Clique Identification.'' \emph{Journal of Mathematical
 #' Sociology}, 2, 113-120.
-#' 
+#'
 #' Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 #' \emph{American Journal of Sociology}, 92, 1170-1182.
 #' @keywords graphs
 #' @export
 #' @examples
-#' 
+#'
 #' # Generate some test data from Bonacich, 1987:
 #' g.c <- graph( c(1,2,1,3,2,4,3,5), dir=FALSE)
 #' g.d <- graph( c(1,2,1,3,1,4,2,5,3,6,4,7), dir=FALSE)
@@ -1211,19 +1211,19 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' for (e in seq(-0.5,.5, by=0.1)) {
 #'   print(round(power_centrality(g.c, exp=e)[c(1,2,4)], 2))
 #' }
-#' 
+#'
 #' for (e in seq(-0.4,.4, by=0.1)) {
 #'   print(round(power_centrality(g.d, exp=e)[c(1,2,5)], 2))
 #' }
-#' 
+#'
 #' for (e in seq(-0.4,.4, by=0.1)) {
 #'   print(round(power_centrality(g.e, exp=e)[c(1,2,5)], 2))
 #' }
-#' 
+#'
 #' for (e in seq(-0.4,.4, by=0.1)) {
 #'   print(round(power_centrality(g.f, exp=e)[c(1,2,5)], 2))
 #' }
-#' 
+#'
 power_centrality <- function(graph, nodes=V(graph),
                    loops=FALSE, exponent=1,
                    rescale=FALSE, tol=1e-7, sparse=TRUE){
@@ -1238,7 +1238,7 @@ power_centrality <- function(graph, nodes=V(graph),
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", nodes)
   }
-  
+
   res
 }
 
@@ -1277,7 +1277,7 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
   n <- vcount(graph)
   id <- matrix(0, nrow=n, ncol=n)
   diag(id) <- 1
-  
+
   ev <- solve(id-alpha*d, tol=tol) %*% exo
   ev[as.numeric(nodes)]
 }
@@ -1293,7 +1293,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 
   if (!loops) {
     graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
-  }  
+  }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     ## weights == NULL and there is a "weight" edge attribute
@@ -1314,7 +1314,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   }
 
   M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
-  
+
   ## Create an identity matrix
   M2 <- Matrix::sparseMatrix(dims=c(vc, vc), i=1:vc, j=1:vc, x=rep(1, vc))
 
@@ -1324,21 +1324,21 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   ## Solve the equation
   M3 <- M2-alpha*M
   r <- Matrix::solve(M3, tol=tol, exo)
-  
+
   r[ as.numeric(nodes)]
 }
 
 
 
 #' Find Bonacich alpha centrality scores of network positions
-#' 
+#'
 #' \code{alpha_centrality} calculates the alpha centrality of some (or all)
 #' vertices in a graph.
-#' 
+#'
 #' The alpha centrality measure can be considered as a generalization of
 #' eigenvector centerality to directed graphs. It was proposed by Bonacich in
 #' 2001 (see reference below).
-#' 
+#'
 #' The alpha centrality of the vertices in a graph is defined as the solution
 #' of the following matrix equation: \deqn{x=\alpha A^T x+e,}{x=alpha t(A)x+e,}
 #' where \eqn{A}{A} is the (not necessarily symmetric) adjacency matrix of the
@@ -1382,7 +1382,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # The examples from Bonacich's paper
 #' g.1 <- graph( c(1,3,2,3,3,4,4,5) )
 #' g.2 <- graph( c(2,1,3,1,4,1,5,1) )
@@ -1390,7 +1390,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' alpha_centrality(g.1)
 #' alpha_centrality(g.2)
 #' alpha_centrality(g.3,alpha=0.5)
-#' 
+#'
 alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
                              loops=FALSE, exo=1, weights=NULL,
                              tol=1e-7, sparse=TRUE) {

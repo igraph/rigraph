@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -41,10 +41,10 @@ makeNexusDatasetInfo <- function(entries) {
                                     description=desc)
                              })
   }
-  
+
   dsi$id <- as.numeric(dsi$id)
   dsi$tags <- strsplit(dsi$tags, ";", fixed=TRUE)[[1]]
-  
+
   dsi
 }
 
@@ -64,7 +64,7 @@ print.nexusDatasetInfo <- function(x, ...) {
   } else if (any(sapply(x$attributes,
                         function(X) X$name=="name" && X$type=="vertex"))) {
     nc[2] <- "N"
-  } 
+  }
   if ("weighted" %in% x$tags) {
     nc[3] <- "W"
   }
@@ -154,9 +154,9 @@ parseVE <- function(ve) {
 
 print.nexusDatasetInfoList <- function(x, ...) {
   summary(x)
-  
+
   if (length(x)==0) { return(invisible(x)) }
-  
+
   ve <- parseVE(unname(sapply(x, "[[", "vertices/edges")))
   nets <- sapply(x, function(y) length(strsplit(y$networks, " ")[[1]]))
   sid <- sapply(x, "[[", "sid")
@@ -169,7 +169,7 @@ print.nexusDatasetInfoList <- function(x, ...) {
                    id=paste(sep="", " #", format(sapply(x, "[[", "id")), " "),
                    name=sapply(x, "[[", "name"))
   out <- do.call(paste, c(as.list(df), sep=""))
-  long <- nchar(out) > getOption("width")  
+  long <- nchar(out) > getOption("width")
   out <- paste(sep="", substr(out, 1, getOption("width")-1),
                ifelse(long, "+", ""))
   cat(out, sep="\n")
@@ -177,20 +177,20 @@ print.nexusDatasetInfoList <- function(x, ...) {
 }
 
 nexus.format.result <- function(l, name="") {
-  
+
   if (length(l)==0) {
     res <- list()
     class(res) <- "nexusDatasetInfoList"
     return(res)
   }
-  
+
   l <- lapply(l, function(x) c(sub("[ ]*:[^:]*$", "", x),
                                sub("^[^:]*:[ ]*", "", x)))
   spos <- which(sapply(l, function(x) x[1]=="id"))
   epos <- c((spos-1), length(l))
   ehead <- epos[1]
   epos <- epos[-1]
-  
+
   res <- mapply(spos, epos, SIMPLIFY=FALSE, FUN=function(s, e)
                 makeNexusDatasetInfo(l[s:e]))
   class(res) <- "nexusDatasetInfoList"
@@ -199,31 +199,31 @@ nexus.format.result <- function(l, name="") {
     attr(res, l[[h]][1]) <- l[[h]][2]
     attr(res, "name") <- name
   }
-  
+
   res
 }
 
 #' Query and download from the Nexus network repository
-#' 
+#'
 #' The Nexus network repository is an online collection of network data sets.
 #' These functions can be used to query it and download data from it, directly
 #' as an igraph graph.
-#' 
+#'
 #' Nexus is an online repository of networks, with an API that allow
 #' programmatic queries against it, and programmatic data download as well.
-#' 
+#'
 #' The \code{nexus_list} and \code{nexus_info} functions query the online
 #' database. They both return \code{nexusDatasetInfo} objects.
 #' \code{nexus_info} returns more information than \code{nexus_list}.
-#' 
+#'
 #' \code{nexus_search} searches Nexus, and returns a list of data sets, as
 #' \code{nexusDatasetInfo} objects. See below for some search examples.
-#' 
+#'
 #' \code{nexus_get} downloads a data set from Nexus, based on its numeric id,
 #' or based on a Nexus search string. For search strings, only the first search
 #' hit is downloaded, but see also the \code{offset} argument. (If there are
 #' not data sets found, then the function returns an error.)
-#' 
+#'
 #' The \code{nexusDatasetInfo} objects returned by \code{nexus_list} have the
 #' following fields: \describe{
 #'   \item{id}{The numeric id of the dataset.}
@@ -234,18 +234,18 @@ nexus.format.result <- function(l, name="") {
 #'     the data set consists of multiple networks, then they are separated
 #'     by spaces.}
 #'   \item{tags}{Character vector, the tags of the dataset. Directed graph
-#'     have the tags \sQuote{directed}. Undirected graphs are tagged 
+#'     have the tags \sQuote{directed}. Undirected graphs are tagged
 #'     as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
 #'     \sQuote{bipartite}, \sQuote{social network}, etc.}
 #'   \item{networks}{The ids and names of the networks in the data set. The
 #'     numeric and character id are separated by a slash, and multiple networks
 #'     are separated by spaces.}
-#' } 
-#' 
+#' }
+#'
 #' \code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
 #' following additional fields: \describe{
 #'   \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
-#'     the dataset was added to the database.} 
+#'     the dataset was added to the database.}
 #'   \item{formats}{Character vector, the data formats in which the data set is
 #'     available. The various formats are separated by semicolons.}
 #'   \item{licence}{Character scalar, the licence of the dataset.}
@@ -263,14 +263,14 @@ nexus.format.result <- function(l, name="") {
 #'       \item{type}{Type of the attribute, either \sQuote{graph},
 #'         \sQuote{vertex} or \sQuote{edge}.}
 #'       \item{datatype}{Data type of the attribute, currently it can be
-#'         \sQuote{numeric} and \sQuote{string}.} 
+#'         \sQuote{numeric} and \sQuote{string}.}
 #'       \item{name}{Character scalar, the name of the attribute.}
 #'       \item{description}{Character scalar, the description of the
 #'         attribute.}
 #'     }
-#'   } 
+#'   }
 #' }
-#' 
+#'
 #' The results of the Nexus queries are printed to the screen in a consise
 #' format, similar to the format of igraph graphs. A data set list (typically
 #' the result of \code{nexus_list} and \code{nexus_search}) looks like this:
@@ -286,7 +286,7 @@ nexus.format.result <- function(l, name="") {
 #' graph of the data sets.  For data sets with multiple graphs, intervals
 #' are given here. Then the numeric id of the data set and the remaining
 #' space is filled with the name of the data set.
-#' 
+#'
 #' Summary information about an individual Nexus data set is printed as
 #' \preformatted{NEXUS B--- 39 109-223 #18 kaptail -- Kapferer tailor shop
 #' + tags: directed; social network; undirected
@@ -305,7 +305,7 @@ nexus.format.result <- function(l, name="") {
 #' id of the data set. The end of the first line contains the name of the
 #' data set. The second row lists the data set tags, and the third row the
 #' networks that are included in the data set.
-#' 
+#'
 #' Detailed data set information is printed similarly, but it contains more
 #' fields.
 #'
@@ -338,9 +338,9 @@ nexus.format.result <- function(l, name="") {
 #' \item{totalsize}{The total number of data sets found for the query.}
 #' \item{offset}{The offset parameter of the query.} \item{limit}{The limit
 #' parameter of the query.} }
-#' 
+#'
 #' \code{nexus_info} returns a single \code{nexusDatasetInfo} object.
-#' 
+#'
 #' \code{nexus_get} returns an igraph graph object, or a list of graph objects,
 #' if the data set consists of multiple networks.
 #' @section Examples:
@@ -351,13 +351,13 @@ nexus.format.result <- function(l, name="") {
 #' nexus_info(2)
 #' g <- nexus_get(2)
 #' summary(g)
-#' 
+#'
 #' ## Data sets related to 'US':
 #' nexus_search("US")
-#' 
+#'
 #' ## Search for data sets that have 'network' in their name:
 #' nexus_search("name:network")
-#' 
+#'
 #' ## Any word can match
 #' nexus_search("blog or US or karate")
 #' }
@@ -373,7 +373,7 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
 
 #  operator=igraph.match.arg(operator)
 #  order=igraph.match.arg(order)
-#  
+#
 #  if (is.null(tags)) {
 #    u <- paste(sep="", nexus.url, "/api/dataset_info?format=text",
 #               "&offset=", offset, "&limit=", limit, "&order=", order)
@@ -395,7 +395,7 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
- 
+
 nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
@@ -408,8 +408,8 @@ nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 #    class(res) <- class(id)
 #    attributes(res) <- attributes(id)
 #    return(res)
-#  }  
-#  
+#  }
+#
 #  u <- paste(sep="", nexus.url, "/api/dataset_info?format=text&id=", id)
 #  f <- url(URLencode(u))
 #  l <- readLines(f)
@@ -428,7 +428,7 @@ nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 #  res <- makeNexusDatasetInfo(l2)
 #  if (! "attributes" %in% names(res)) { res$attributes <- list() }
 #  return(res)
-}  
+}
 
 #' @export
 #' @rdname nexus
@@ -448,7 +448,7 @@ nexus_get <- function(id, offset=0,
 #    id <- sapply(id, "[[", "id")
 #    return(lapply(id, nexus_get, nexus.url=nexus.url))
 #  }
-#  
+#
 #  u <- paste(sep="", nexus.url, "/api/dataset?id=", id, "&format=R-igraph")
 #  env <- new.env()
 #  rdata <- url(URLencode(u))
@@ -535,7 +535,7 @@ NEXUS 1-4/4 -- tags: directed
 
 FULL TEXT SEARCH:
 -----------------
-  
+
 NEXUS 1-2/2 -- q: US
 [1] powergrid #15 4941/6594  Western US power grid
 [2] polblogs  #13 1490/19090 US political blog network
@@ -543,7 +543,7 @@ NEXUS 1-2/2 -- q: US
 
 DATA SET SUMMARY:
 -----------------
-  
+
 NEXUS B--- 39 109-223 -- #18 Kapferer tailor shop
 + tags: directed; social network; undirected
 + networks: 1/KAPFTI2; 2/KAPFTS2; 3/KAPFTI1; 4/KAPFTS1
@@ -577,5 +577,5 @@ NEXUS B--- 39 109-223 -- #18 Kapferer tailor shop
   successful strike took place after the second.
 + formats: Pajek; R-igraph
 + citation: Kapferer B. (1972). Strategy and transaction in an African
-  factory. Manchester: Manchester University Press. 
+  factory. Manchester: Manchester University Press.
 '

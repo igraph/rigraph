@@ -13,7 +13,7 @@ test_that("biconnected_components works", {
     list <- lapply(list, as.vector)
     list[order(sapply(list, paste, collapse="x"))]
   }
-    
+
   bc <- biconnected_components(g)
   expect_that(bc$no, equals(3))
   expect_that(sortlist(bc$tree_edges), equals(list(c(11,15,18,20),

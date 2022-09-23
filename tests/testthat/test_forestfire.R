@@ -2,7 +2,7 @@
 context("sample_forestfire")
 
 test_that("sample_forestfire works", {
-  
+
   library(igraph)
   set.seed(42)
 
@@ -12,14 +12,14 @@ test_that("sample_forestfire works", {
 
   N <- 5000
   G <- lapply(pars, function(x) sample_forestfire(N, fw.prob=x[1], bw.factor=x[2]))
-  
+
   xv <- log(2:N)
-  
+
   co <- sapply(G, function(x) {
     yv <- log(cumsum(degree(x, mode="out"))[-1])
     coef(lm( yv ~ xv ))[2]
   })
-  
+
   expect_that(co, equals(structure(c(1.06045500245466,
                                      1.22800967143684,
                                      1.96234121488344),

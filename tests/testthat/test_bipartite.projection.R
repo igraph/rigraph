@@ -19,8 +19,8 @@ test_that("bipartite_projection works", {
   g2 <- graph_from_incidence_matrix(M)
   expect_that(as.matrix(g2[1:5,6:8]), equals(M))
   expect_that(as.matrix(g2[1:5,1:5]), is_equivalent_to(matrix(0, 5, 5)))
-  expect_that(as.matrix(g2[6:8,6:8]), is_equivalent_to(matrix(0, 3, 3)))  
-    
+  expect_that(as.matrix(g2[6:8,6:8]), is_equivalent_to(matrix(0, 3, 3)))
+
   g2$name <- "Event network"
   proj2 <- bipartite_projection(g2)
   expect_that(as.matrix(proj2[[1]][]),
@@ -29,7 +29,7 @@ test_that("bipartite_projection works", {
                                      c(2,2,0,2,0))))
   expect_that(as.matrix(proj2[[2]][]),
               is_equivalent_to(cbind(c(0,4,1), c(4,0,1), c(1,1,0))))
-  
+
   bs <- bipartite_projection_size(g2)
   expect_that(bs$vcount1, equals(vcount(proj2[[1]])))
   expect_that(bs$ecount1, equals(ecount(proj2[[1]])))
@@ -98,4 +98,3 @@ test_that("bipartite_projection prints a warning if the type attribute is non-lo
   expect_warning(bipartite_projection(g), "logical")
   expect_warning(bipartite_projection_size(g), "logical")
 })
-

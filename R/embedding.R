@@ -4,7 +4,7 @@
 ##   IGraph R package
 ##   Copyright (C) 2015  Gabor Csardi <csardi.gabor@gmail.com>
 ##   334 Harvard street, Cambridge, MA 02139 USA
-##   
+##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
 ##   the Free Software Foundation; either version 2 of the License, or
@@ -14,7 +14,7 @@
 ##   but WITHOUT ANY WARRANTY; without even the implied warranty of
 ##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##   GNU General Public License for more details.
-##   
+##
 ##   You should have received a copy of the GNU General Public License
 ##   along with this program; if not, write to the Free Software
 ##   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -23,27 +23,27 @@
 ## -----------------------------------------------------------------------
 
 #' Spectral Embedding of Adjacency Matrices
-#' 
+#'
 #' Spectral decomposition of the adjacency matrices of graphs.
-#' 
+#'
 #' This function computes a \code{no}-dimensional Euclidean representation of
 #' the graph based on its adjacency matrix, \eqn{A}. This representation is
 #' computed via the singular value decomposition of the adjacency matrix,
 #' \eqn{A=UDV^T}.In the case, where the graph is a random dot product graph
 #' generated using latent position vectors in \eqn{R^{no}} for each vertex, the
 #' embedding will provide an estimate of these latent vectors.
-#' 
+#'
 #' For undirected graphs the latent positions are calculated as
 #' \eqn{X=U^{no}D^{1/2}}{U[no] sqrt(D[no])}, where \eqn{U^{no}}{U[no]} equals
 #' to the first \code{no} columns of \eqn{U}, and \eqn{D^{1/2}}{sqrt(D[no])} is
 #' a diagonal matrix containing the top \code{no} singular values on the
 #' diagonal.
-#' 
+#'
 #' For directed graphs the embedding is defined as the pair
 #' \eqn{X=U^{no}D^{1/2}}{U[no] sqrt(D[no])} and \eqn{Y=V^{no}D^{1/2}}{V[no]
 #' sqrt(D[no])}. (For undirected graphs \eqn{U=V}, so it is enough to keep one
 #' of them.)
-#' 
+#'
 #' @param graph The input graph, directed or undirected.
 #' @param no An integer scalar. This value is the embedding dimension of the
 #' spectral embedding. Should be smaller than the number of vertices. The
@@ -80,7 +80,7 @@
 #' \emph{Journal of the American Statistical Association}, Vol. 107(499), 2012
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
 #' lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
@@ -93,13 +93,13 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 
 
 #' Dimensionality selection for singular values using profile likelihood.
-#' 
+#'
 #' Select the number of significant singular values, by finding the
 #' \sQuote{elbow} of the scree plot, in a principled way.
-#' 
+#'
 #' The input of the function is a numeric vector which contains the measure of
 #' \sQuote{importance} for each dimension.
-#' 
+#'
 #' For spectral embedding, these are the singular values of the adjacency
 #' matrix. The singular values are assumed to be generated from a Gaussian
 #' mixture distribution with two components that have different means and same
@@ -107,12 +107,12 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' when the \eqn{d} largest singular values are assigned to one component of
 #' the mixture and the rest of the singular values assigned to the other
 #' component.
-#' 
+#'
 #' This function can also be used for the general separation problem, where we
 #' assume that the left and the right of the vector are coming from two Normal
 #' distributions, with different means, and we want to know their border. See
 #' examples below.
-#' 
+#'
 #' @param sv A numeric vector, the ordered singular values.
 #' @return A numeric scalar, the estimate of \eqn{d}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -122,46 +122,46 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' Statistics and Data Analysis}, Vol. 51, 918--930.
 #' @keywords graphs
 #' @examples
-#' 
-#' # Generate the two groups of singular values with 
+#'
+#' # Generate the two groups of singular values with
 #' # Gaussian mixture of two components that have different means
 #' sing.vals  <- c( rnorm (10, mean=1, sd=1), rnorm(10, mean=3, sd=1) )
 #' dim.chosen <- dim_select(sing.vals)
 #' dim.chosen
-#' 
+#'
 #' # Sample random vectors with multivariate normal distribution
 #' # and normalize to unit length
 #' lpvs <- matrix(rnorm(200), 10, 20)
 #' lpvs <- apply(lpvs, 2, function(x) { (abs(x) / sqrt(sum(x^2))) })
 #' RDP.graph  <- sample_dot_product(lpvs)
 #' dim_select( embed_adjacency_matrix(RDP.graph, 10)$D )
-#' 
+#'
 #' # Sample random vectors with the Dirichlet distribution
 #' lpvs.dir    <- sample_dirichlet(n=20, rep(1, 10))
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' dim_select( embed_adjacency_matrix(RDP.graph.2, 10)$D )
-#' 
+#'
 #' # Sample random vectors from hypersphere with radius 1.
 #' lpvs.sph    <- sample_sphere_surface(dim=10, n=20, radius=1)
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
 #' dim_select( embed_adjacency_matrix(RDP.graph.3, 10)$D )
-#' 
+#'
 #' @export
 
 dim_select <- dim_select
 
 
 #' Spectral Embedding of the Laplacian of a Graph
-#' 
+#'
 #' Spectral decomposition of Laplacian matrices of graphs.
-#' 
+#'
 #' This function computes a \code{no}-dimensional Euclidean representation of
 #' the graph based on its Laplacian matrix, \eqn{L}. This representation is
 #' computed via the singular value decomposition of the Laplacian matrix.
-#' 
+#'
 #' They are essentially doing the same as \code{\link{embed_adjacency_matrix}},
 #' but work on the Laplacian matrix, instead of the adjacency matrix.
-#' 
+#'
 #' @param graph The input graph, directed or undirected.
 #' @param no An integer scalar. This value is the embedding dimension of the
 #' spectral embedding. Should be smaller than the number of vertices. The
@@ -181,7 +181,7 @@ dim_select <- dim_select
 #' @param type The type of the Laplacian to use. Various definitions exist for
 #' the Laplacian of a graph, and one can choose between them with this
 #' argument.
-#' 
+#'
 #' Possible values: \code{D-A} means \eqn{D-A} where \eqn{D} is the degree
 #' matrix and \eqn{A} is the adjacency matrix; \code{DAD} means
 #' \eqn{D^{1/2}}{D^1/2} times \eqn{A} times \eqn{D^{1/2}{D^1/2}},
@@ -190,10 +190,10 @@ dim_select <- dim_select
 #' matrix.  \code{OAP} is \eqn{O^{1/2}AP^{1/2}}{O^1/2 A P^1/2}, where
 #' \eqn{O^{1/2}}{O^1/2} is the inverse of the square root of the out-degree
 #' matrix and \eqn{P^{1/2}}{P^1/2} is the same for the in-degree matrix.
-#' 
+#'
 #' \code{OAP} is not defined for undirected graphs, and is the only defined type
 #' for directed graphs.
-#' 
+#'
 #' The default (i.e. type \code{default}) is to use \code{D-A} for undirected
 #' graphs and \code{OAP} for directed graphs.
 #' @param scaled Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
@@ -217,7 +217,7 @@ dim_select <- dim_select
 #' \emph{Journal of the American Statistical Association}, Vol. 107(499), 2012
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
 #' lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
@@ -235,7 +235,7 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' \code{sample_sphere_surface} generates uniform samples from \eqn{S^{dim-1}}
 #' (the \code{(dim-1)}-sphere) with radius \code{radius}, i.e. the Euclidean
 #' norm of the samples equal \code{radius}.
-#' 
+#'
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
 #' @param radius Numeric scalar, the radius of the sphere to sample.
@@ -246,7 +246,7 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' vectors.
 #'
 #' @family latent position vector samplers
-#' 
+#'
 #' @export
 #' @examples
 #' lpvs.sph    <- sample_sphere_surface(dim=10, n=20, radius=1)
@@ -276,7 +276,7 @@ sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
 #' \code{sample_sphere_volume} generates uniform samples from \eqn{S^{dim-1}}
 #' (the \code{(dim-1)}-sphere) i.e. the Euclidean norm of the samples is
 #' smaller or equal to \code{radius}.
-#' 
+#'
 #' @param dim Integer scalar, the dimension of the random vectors.
 #' @param n Integer scalar, the sample size.
 #' @param radius Numeric scalar, the radius of the sphere to sample.
@@ -287,7 +287,7 @@ sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
 #' vectors.
 #'
 #' @family latent position vector samplers
-#' 
+#'
 #' @export
 #' @examples
 #' lpvs.sph.vol <- sample_sphere_volume(dim=10, n=20, radius=1)
@@ -317,7 +317,7 @@ sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
 #' \code{sample_dirichlet} generates samples from the Dirichlet distribution
 #' with given \eqn{\alpha}{alpha} parameter. The sample is drawn from
 #' \code{length(alpha)-1}-simplex.
-#' 
+#'
 #' @param n Integer scalar, the sample size.
 #' @param alpha Numeric vector, the vector of \eqn{\alpha}{alpha} parameter for
 #' the Dirichlet distribution.
@@ -326,7 +326,7 @@ sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
 #' vectors.
 #'
 #' @family latent position vector samplers
-#' 
+#'
 #' @export
 #' @examples
 #' lpvs.dir    <- sample_dirichlet(n=20, alpha=rep(1, 10))

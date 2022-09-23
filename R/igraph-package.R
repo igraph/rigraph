@@ -36,9 +36,9 @@ NULL
 NULL
 
 #' The igraph package
-#' 
+#'
 #' igraph is a library and R package for network analysis.
-#' 
+#'
 #' @rdname aaa-igraph-package
 #' @name igraph-package
 #' @aliases igraph-package igraph
@@ -49,7 +49,7 @@ NULL
 #' and functions for 1) pain-free implementation of graph algorithms, 2)
 #' fast handling of large graphs, with millions of vertices and edges, 3)
 #' allowing rapid prototyping via high level languages like R.
-#' 
+#'
 #' @section igraph graphs:
 #'   igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
 #'   the screen in a special format, here is an example, a ring graph
@@ -65,7 +65,7 @@ NULL
 #'   \sQuote{\code{weight}} edge attribute is set). The fourth is
 #'   \sQuote{\code{B}} for bipartite graphs (i.e. if the
 #'   \sQuote{\code{type}} vertex attribute is set).
-#' 
+#'
 #'   Then come two numbers, the number of vertices and the number of edges
 #'   in the graph, and after a double dash, the name of the graph (the
 #'   \sQuote{\code{name}} graph attribute) is printed if present. The
@@ -76,7 +76,7 @@ NULL
 #'   type. A complex type is simply anything that is not numeric or
 #'   character. See the documentation of \code{\link{print.igraph}} for
 #'   details.
-#' 
+#'
 #'   If you want to see the edges of the graph as well, then use the
 #'   \code{\link{print_all}} function: \preformatted{    > print_all(g)
 #'     IGRAPH badcafe U--- 10 10 -- Ring graph
@@ -88,23 +88,23 @@ NULL
 #'   There are many functions in igraph for creating graphs, both
 #'   deterministic and stochastic; stochastic graph constructors are called
 #'   \sQuote{games}.
-#' 
+#'
 #'   To create small graphs with a given structure probably the
 #'   \code{\link{graph_from_literal}} function is easiest. It uses R's formula
 #'   interface, its manual page contains many examples. Another option is
 #'   \code{\link{graph}}, which takes numeric vertex ids directly.
 #'   \code{\link{graph_from_atlas}} creates graph from the Graph Atlas,
 #'   \code{\link{make_graph}} can create some special graphs.
-#' 
+#'
 #'   To create graphs from field data, \code{\link{graph_from_edgelist}},
 #'   \code{\link{graph_from_data_frame}} and \code{\link{graph_from_adjacency_matrix}} are
 #'   probably the best choices.
-#' 
+#'
 #'   The igraph package includes some classic random graphs like the
 #'   Erdos-Renyi GNP and GNM graphs (\code{\link{sample_gnp}}, \code{\link{sample_gnm}}) and
 #'   some recent  popular models, like preferential attachment
 #'   (\code{\link{sample_pa}}) and the small-world model
-#'   (\code{\link{sample_smallworld}}). 
+#'   (\code{\link{sample_smallworld}}).
 #'
 #' @section Vertex and edge IDs:
 #'   Vertices and edges have numerical vertex ids in igraph. Vertex ids are
@@ -113,10 +113,10 @@ NULL
 #'   \eqn{n}. If some operation changes the number of vertices in the
 #'   graphs, e.g. a subgraph is created via \code{\link{induced_subgraph}}, then
 #'   the vertices are renumbered to satisfy this criteria.
-#' 
+#'
 #'   The same is true for the edges as well, edge ids are always between
 #'   one and \eqn{m}, the total number of edges in the graph.
-#' 
+#'
 #'   It is often desirable to follow vertices along a number of graph
 #'   operations, and vertex ids don't allow this because of the
 #'   renumbering. The solution is to assign attributes to the
@@ -129,7 +129,7 @@ NULL
 #'   constructs for selecting a set of vertices or edges based on their
 #'   attribute values, see \code{\link{vertex_attr}},
 #'   \code{\link{V}} and \code{\link{E}} for details.
-#' 
+#'
 #'   Some vertex/edge/graph attributes are treated specially. One of them
 #'   is the \sQuote{name} attribute. This is used for printing the graph
 #'   instead of the numerical ids, if it exists. Vertex names can also be
@@ -137,22 +137,22 @@ NULL
 #'   functions. E.g. \code{\link{degree}} has a \code{v} argument
 #'   that gives the vertices for which the degree is calculated. This
 #'   argument can be given as a character vector of vertex names.
-#' 
+#'
 #'   Edges can also have a \sQuote{name} attribute, and this is treated
 #'   specially as well. Just like for vertices, edges can also be selected
 #'   based on their names, e.g. in the \code{\link{delete_edges}} and
 #'   other functions.
-#' 
+#'
 #'   We note here, that vertex names can also be used to select edges.
 #'   The form \sQuote{\code{from|to}}, where \sQuote{\code{from}} and
 #'   \sQuote{\code{to}} are vertex names, select a single, possibly
 #'   directed, edge going from \sQuote{\code{from}} to
 #'   \sQuote{\code{to}}. The two forms can also be mixed in the same edge
 #'   selector.
-#'   
+#'
 #'   Other attributes define visualization parameters, see
 #'   \code{\link{igraph.plotting}} for details.
-#' 
+#'
 #'   Attribute values can be set to any R object, but note that storing the
 #'   graph in some file formats might result the loss of complex attribute
 #'   values. All attribute values are preserved if you use
@@ -164,14 +164,14 @@ NULL
 #'   the \code{\link{plot.igraph}} function. (Actually you don't need to
 #'   write \code{plot.igraph}, \code{plot} is enough. This function uses
 #'   regular R graphics and can be used with any R device.
-#' 
+#'
 #'   The second function is \code{\link{tkplot}}, which uses a Tk GUI for
 #'   basic interactive graph manipulation. (Tk is quite resource hungry, so
 #'   don't try this for very large graphs.)
-#' 
+#'
 #'   The third way requires the \code{rgl} package and uses OpenGL. See the
 #'   \code{\link{rglplot}} function for the details.
-#' 
+#'
 #'   Make sure you read \code{\link{igraph.plotting}} before you start
 #'   plotting your graphs.
 #'

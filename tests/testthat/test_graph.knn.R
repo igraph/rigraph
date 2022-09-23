@@ -20,14 +20,14 @@ test_that("knn works", {
   expect_that(r3$knn[1000], equals(192.4))
   expect_that(r3$knnk[100], equals(18.78))
   expect_that(length(r3$knnk), equals(359))
-  
+
   ## A random graph
   g4 <- sample_gnp(1000, p=5/1000)
   r4 <- knn(g4)
   expect_that(r4$knn[1000], equals(20/3))
   expect_that(length(r4$knnk), equals(15))
   expect_that(r4$knnk[12], equals(19/3))
-  
+
   ## A weighted graph
   g5 <- make_star(10)
   E(g5)$weight <- seq(ecount(g5))

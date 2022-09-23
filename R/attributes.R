@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -24,9 +24,9 @@
 ##
 ## g(graph)$name                   # get a graph attribute
 ## g(graph)$name <- "Ring"         # set a graph attribute
-## 
+##
 ## v(graph)$color <- "red"         # set vertex attribute
-## v(graph)$color[1:5] <- "blue"   
+## v(graph)$color[1:5] <- "blue"
 ## v(graph)$color[c(5,6,7)]        # get vertex attribute
 ##
 ## e(graph)$weight <- 1            # set edge attribute
@@ -43,7 +43,7 @@
 #'
 #' @aliases get.graph.attribute graph.attributes
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10)
@@ -73,7 +73,7 @@ graph_attr <- function(graph, name) {
 #'
 #' @aliases graph.attributes<-
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_graph(~ A - B:C:D)
@@ -95,7 +95,7 @@ graph_attr <- function(graph, name) {
 #' Set a graph attribute
 #'
 #' An existing attribute with the same name is overwritten.
-#' 
+#'
 #' @param graph The graph.
 #' @param name The name of the attribute to set.
 #' @param value New value of the attribute.
@@ -103,7 +103,7 @@ graph_attr <- function(graph, name) {
 #'
 #' @family graph attributes
 #' @aliases set.graph.attribute
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -126,7 +126,7 @@ graph.attributes <- function(graph) {
     stop("Not a graph object")
   }
   .Call(C_R_igraph_mybracket2_copy, graph, 9L, 2L)
-} 
+}
 
 #' @export
 
@@ -138,7 +138,7 @@ graph.attributes <- function(graph) {
       any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
-            
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, value)
 }
 
@@ -155,7 +155,7 @@ graph.attributes <- function(graph) {
 #'
 #' @aliases get.vertex.attribute vertex.attributes
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -195,12 +195,12 @@ vertex_attr <- function(graph, name, index=V(graph)) {
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
 #' @param value The new value of the attribute(s) for all
-#'   (or \code{index}) vertices. 
+#'   (or \code{index}) vertices.
 #' @return The graph, with the vertex attribute(s) added or set.
 #'
 #' @aliases vertex.attributes<-
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10)
@@ -219,7 +219,7 @@ vertex_attr <- function(graph, name, index=V(graph)) {
 }
 
 #' Set vertex attributes
-#' 
+#'
 #' @param graph The graph.
 #' @param name  The name of the attribute to set.
 #' @param index An optional vertex sequence to set the attributes
@@ -230,7 +230,7 @@ vertex_attr <- function(graph, name, index=V(graph)) {
 #'
 #' @aliases set.vertex.attribute
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -260,7 +260,7 @@ i_set_vertex_attr <- function(graph, name, index=V(graph), value,
     vattrs[[name]][index] <- value
   }
   length(vattrs[[name]]) <- vc
-  
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattrs)
 }
 
@@ -324,7 +324,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 
 
 #' Query edge attributes of a graph
-#' 
+#'
 #' @param graph The graph
 #' @param name The name of the attribute to query. If missing, then
 #'   all edge attributes are returned in a list.
@@ -335,7 +335,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 #'
 #' @aliases get.edge.attribute edge.attributes
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -363,7 +363,7 @@ edge_attr <- function(graph, name, index=E(graph)) {
 }
 
 #' Set one or more edge attributes
-#' 
+#'
 #' @param graph The graph.
 #' @param name The name of the edge attribute to set. If missing,
 #'   then \code{value} must be a named list, and its entries are
@@ -376,7 +376,7 @@ edge_attr <- function(graph, name, index=E(graph)) {
 #'
 #' @aliases edge.attributes<-
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10)
@@ -395,7 +395,7 @@ edge_attr <- function(graph, name, index=E(graph)) {
 }
 
 #' Set edge attributes
-#' 
+#'
 #' @param graph The graph
 #' @param name  The name of the attribute to set.
 #' @param index An optional edge sequence to set the attributes of
@@ -406,7 +406,7 @@ edge_attr <- function(graph, name, index=E(graph)) {
 #'
 #' @aliases set.edge.attribute
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -494,18 +494,18 @@ edge.attributes <- function(graph, index = E(graph)) {
       value[[i]] <- tmp
     }
   }
-  
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, value)
 }
 
 #' List names of graph attributes
-#' 
+#'
 #' @param graph The graph.
 #' @return Character vector, the names of the graph attributes.
 #'
 #' @aliases list.graph.attributes attributes
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10)
@@ -541,7 +541,7 @@ vertex_attr_names <- function(graph) {
     stop("Not a graph object")
   }
   res <- .Call(C_R_igraph_mybracket2_names, graph, 9L, 3L)
-                     
+
   if (is.null(res)) { res <- character() }
   res
 }
@@ -553,7 +553,7 @@ vertex_attr_names <- function(graph) {
 #'
 #' @aliases list.edge.attributes
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -578,7 +578,7 @@ edge_attr_names <- function(graph) {
 #'
 #' @aliases remove.graph.attribute
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10)
@@ -597,7 +597,7 @@ delete_graph_attr <- function(graph, name) {
 
   gattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 2L)
   gattr[[name]] <- NULL
-  
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 2L, gattr)
 }
 
@@ -609,7 +609,7 @@ delete_graph_attr <- function(graph, name) {
 #'
 #' @aliases remove.vertex.attribute
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -629,7 +629,7 @@ delete_vertex_attr <- function(graph, name) {
 
   vattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 3L)
   vattr[[name]] <- NULL
-  
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 3L, vattr)
 }
 
@@ -641,7 +641,7 @@ delete_vertex_attr <- function(graph, name) {
 #'
 #' @aliases remove.edge.attribute
 #' @family graph attributes
-#' 
+#'
 #' @export
 #' @examples
 #' g <- make_ring(10) %>%
@@ -661,7 +661,7 @@ delete_edge_attr <- function(graph, name) {
 
   eattr <- .Call(C_R_igraph_mybracket2, graph, 9L, 4L)
   eattr[[name]] <- NULL
-  
+
   .Call(C_R_igraph_mybracket2_set, graph, 9L, 4L, eattr)
 }
 
@@ -670,10 +670,10 @@ delete_edge_attr <- function(graph, name) {
 
 
 #' Named graphs
-#' 
+#'
 #' An igraph graph is named, if there is a symbolic name associated with its
 #' vertices.
-#' 
+#'
 #' In igraph vertices can always be identified and specified via their numeric
 #' vertex ids. This is, however, not always convenient, and in many cases there
 #' exist symbolic ids that correspond to the vertices. To allow this more
@@ -681,7 +681,7 @@ delete_edge_attr <- function(graph, name) {
 #' called \sQuote{name} to an igraph graph. After doing this, the symbolic
 #' vertex names can be used in all igraph functions, instead of the numeric
 #' ids.
-#' 
+#'
 #' Note that the uniqueness of vertex names are currently not enforced in
 #' igraph, you have to check that for yourself, when assigning the vertex
 #' names.
@@ -693,13 +693,13 @@ delete_edge_attr <- function(graph, name) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' is_named(g)
 #' V(g)$name <- letters[1:10]
 #' is_named(g)
 #' neighbors(g, "a")
-#' 
+#'
 is_named <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -710,15 +710,15 @@ is_named <- function(graph) {
 
 
 #' Weighted graphs
-#' 
+#'
 #' In weighted graphs, a real number is assigned to each (directed or
 #' undirected) edge.
-#' 
+#'
 #' In igraph edge weights are represented via an edge attribute, called
 #' \sQuote{weight}. The \code{is_weighted} function only checks that such an
 #' attribute exists. (It does not even checks that it is a numeric edge
 #' attribute.)
-#' 
+#'
 #' Edge weights are used for different purposes by the different functions.
 #' E.g. shortest path functions use it as the cost of the path; community
 #' finding methods use it as the strength of the relationship between two
@@ -732,12 +732,12 @@ is_named <- function(graph) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' shortest_paths(g, 8, 2)
 #' E(g)$weight <- seq_len(ecount(g))
 #' shortest_paths(g, 8, 2)
-#' 
+#'
 is_weighted <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -791,35 +791,35 @@ igraph.i.attribute.combination <- function(comb) {
 }
 
 #' How igraph functions handle attributes when the graph changes
-#' 
+#'
 #' Many times, when the structure of a graph is modified, vertices/edges map of
 #' the original graph map to vertices/edges in the newly created (modified)
 #' graph. For example \code{\link{simplify}} maps multiple edges to single
 #' edges. igraph provides a flexible mechanism to specify what to do with the
 #' vertex/edge attributes in these cases.
-#' 
+#'
 #' The functions that support the combination of attributes have one or two
 #' extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
 #' that specify how to perform the mapping of the attributes. E.g.
 #' \code{\link{contract}} contracts many vertices into a single one, the
 #' attributes of the vertices can be combined and stores as the vertex
 #' attributes of the new graph.
-#' 
+#'
 #' The specification of the combination of (vertex or edge) attributes can be
 #' given as \enumerate{
 #'   \item a character scalar,
 #'   \item a function object or
 #'   \item a list of character scalars and/or function objects.
 #' }
-#' 
+#'
 #' If it is a character scalar, then it refers to one of the predefined
 #' combinations, see their list below.
-#' 
+#'
 #' If it is a function, then the given function is expected to perform the
 #' combination. It will be called once for each new vertex/edge in the graph,
 #' with a single argument: the attribute values of the vertices that map to
 #' that single vertex.
-#' 
+#'
 #' The third option, a list can be used to specify different combination
 #' methods for different attributes. A named entry of the list corresponds to
 #' the attribute with the same name. An unnamed entry (i.e. if the name is the
@@ -858,33 +858,33 @@ igraph.i.attribute.combination <- function(comb) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph_attr}}, \code{\link{vertex_attr}},
 #'   \code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
-#'   general. \code{\link{igraph_options}} on igraph parameters.  
+#'   general. \code{\link{igraph_options}} on igraph parameters.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- graph( c(1,2, 1,2, 1,2, 2,3, 3,4) )
 #' E(g)$weight <- 1:5
-#' 
+#'
 #' ## print attribute values with the graph
 #' igraph_options(print.graph.attributes=TRUE)
 #' igraph_options(print.vertex.attributes=TRUE)
 #' igraph_options(print.edge.attributes=TRUE)
-#' 
+#'
 #' ## new attribute is the sum of the old ones
 #' simplify(g, edge.attr.comb="sum")
-#' 
+#'
 #' ## collect attributes into a string
 #' simplify(g, edge.attr.comb=toString)
-#' 
+#'
 #' ## concatenate them into a vector, this creates a complex
 #' ## attribute
 #' simplify(g, edge.attr.comb="concat")
-#' 
+#'
 #' E(g)$name <- letters[seq_len(ecount(g))]
-#' 
+#'
 #' ## both attributes are collected into strings
 #' simplify(g, edge.attr.comb=toString)
-#' 
+#'
 #' ## harmonic average of weights, names are dropped
 #' simplify(g, edge.attr.comb=list(weight=function(x) length(x)/sum(1/x),
 #'                                 name="ignore"))

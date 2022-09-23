@@ -19,7 +19,7 @@ test_that("any_multiple, count_multiple, which_multiple works", {
   expect_that(count_multiple(simplify(g)),
               equals(rep(1, ecount(simplify(g)))))
 
-  
+
   ## Direction of the edge is important
   expect_false(any_multiple(graph( c(1,2, 2,1) )))
   expect_that(which_multiple(graph( c(1,2, 2,1) )), equals(c(FALSE, FALSE)))

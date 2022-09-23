@@ -28,7 +28,7 @@ test_that("is_chordal works", {
   mc2$alpham1 <- as.vector(mc2$alpham1)
   expect_that(mc2, equals(list(alpha=c(10,8,9,6,7,5,4,2,3,1),
                                alpham1=c(10,8,9,7,6,4,5,2,3,1))))
-  
+
   ic2 <- is_chordal(g2, fillin=TRUE)
   expect_that(ic2, equals(list(chordal=TRUE, fillin=numeric(),
                                newgraph=NULL)))

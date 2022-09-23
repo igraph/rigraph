@@ -11,7 +11,7 @@ test_that("authority score works", {
       x
     }
     A <- as_adj(graph, sparse=FALSE)
-    if (as) { 
+    if (as) {
       s1 <- eigen(t(A) %*% A)$vectors[,1]
       s2 <- authority_score(graph)$vector
     } else {

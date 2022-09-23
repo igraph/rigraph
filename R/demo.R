@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,15 +22,15 @@
 
 
 #' Run igraph demos, step by step
-#' 
+#'
 #' Run one of the accompanying igraph demos, somewhat interactively, using a Tk
 #' window.
-#' 
+#'
 #' This function provides a somewhat nicer interface to igraph demos that come
 #' with the package, than the standard \code{\link{demo}} function. igraph
 #' demos are divided into chunks and \code{igraph_demo} runs them chunk by
 #' chunk, with the possibility of inspecting the workspace between two chunks.
-#' 
+#'
 #' The \code{tcltk} package is needed for \code{igraph_demo}.
 #'
 #' @aliases igraphdemo
@@ -42,14 +42,14 @@
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' igraph_demo()
 #' if (interactive()) {
 #'   igraph_demo("centrality")
 #' }
-#' 
+#'
 igraph_demo <- function(which) {
-  
+
   if (missing(which)) {
     demodir <- system.file("demo", package="igraph")
     if (demodir=="") {
@@ -69,7 +69,7 @@ igraph_demo <- function(which) {
   if (which=="" || !file.exists(which)) {
     stop("Could not find demo file")
   }
-  
+
   .igraphdemo.next <- function(top, txt) {
     act <- as.character(tcltk::tktag.nextrange(txt, "active", "0.0"))
     if (length(act)==0) {
@@ -77,7 +77,7 @@ igraph_demo <- function(which) {
     }
 
     options(keep.source=TRUE)
-    
+
     text <- tcltk::tclvalue(tcltk::tkget(txt, act[1], act[2]))
     cat("=======================================================\n");
 
@@ -96,7 +96,7 @@ igraph_demo <- function(which) {
     }
     cat("> -------------------------------------------------------\n");
     cat(options()$prompt)
-    
+
     tcltk::tktag.remove(txt, "activechunk", act[1], act[2])
     tcltk::tktag.remove(txt, "active", act[1], act[2])
 
@@ -107,11 +107,11 @@ igraph_demo <- function(which) {
       tcltk::tksee(txt, paste(sep="", as.numeric(nex[1]), ".0"))
     }
   }
-  
+
   .igraphdemo.close <- function(top) {
     tcltk::tkdestroy(top)
   }
-  
+
   .igraphdemo.reset <- function(top, txt, which) {
     demolines <- readLines(which)
     demolines <- demolines[!grepl("^pause\\(\\)$", demolines)]
@@ -126,7 +126,7 @@ igraph_demo <- function(which) {
       ch <- grep("^[ ]*###", demolines)
       ch <- c(ch, length(demolines)+1)
     }
-    
+
     tcltk::tkconfigure(txt, state="normal")
     tcltk::tkdelete(txt, "0.0", "end")
     tcltk::tkinsert(txt, "insert", paste(demolines, collapse="\n"))
@@ -158,7 +158,7 @@ igraph_demo <- function(which) {
 
   top <- tcltk::tktoplevel(background="lightgrey")
   tcltk::tktitle(top) <- paste("igraph demo:", which)
-  
+
   main.menu <- tcltk::tkmenu(top)
   tcltk::tkadd(main.menu, "command", label="Close", command=function()
         .igraphdemo.close(top))
@@ -172,12 +172,12 @@ igraph_demo <- function(which) {
                 width=80, height=40)
   but <- tcltk::tkbutton(top, text="Next", command=function()
                   .igraphdemo.next(top, txt))
-  
+
   tcltk::tkpack(but, side="bottom", fill="x", expand=0)
   tcltk::tkpack(scr, side="right", fill="y", expand=0)
   tcltk::tkpack(txt, side="left", fill="both", expand=1)
 
   .igraphdemo.reset(top, txt, which)
-  
+
   invisible()
 }

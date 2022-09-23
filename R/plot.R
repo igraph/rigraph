@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,10 +22,10 @@
 
 
 #' Plotting of graphs
-#' 
+#'
 #' \code{plot.igraph} is able to plot graphs to any R device. It is the
 #' non-interactive companion of the \code{tkplot} function.
-#' 
+#'
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
 #' \code{\link{tk_coords}} function and use them with \code{plot} to
@@ -74,11 +74,11 @@
 #' @importFrom graphics plot polygon text par
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' plot(g, layout=layout_with_kk, vertex.color="green")
-#' 
-plot.igraph <- function(x, 
+#'
+plot.igraph <- function(x,
                        # SPECIFIC: #####################################
                        axes=FALSE, add=FALSE,
                        xlim=c(-1,1), ylim=c(-1,1),
@@ -124,7 +124,7 @@ plot.igraph <- function(x,
   arrow.width        <- params("edge", "arrow.width")[1]
   curved             <- params("edge", "curved")
   if (is.function(curved)) { curved <- curved(graph) }
-  
+
   layout             <- i.postprocess.layout(params("plot", "layout"))
   margin             <- params("plot", "margin")
   margin <- rep(margin, length.out=4)
@@ -172,7 +172,7 @@ plot.igraph <- function(x,
   mark.border <- rep(mark.border, length.out=length(mark.groups))
   mark.col    <- rep(mark.col,    length.out=length(mark.groups))
   mark.expand <- rep(mark.expand, length.out=length(mark.groups))
-  
+
   for (g in seq_along(mark.groups)) {
     .members <- mark.groups[[g]]
     v <- V(graph)[.members]
@@ -235,7 +235,7 @@ plot.igraph <- function(x,
                                               params=params, end="to")
     }))
   }
-  
+
   x0 <- ec[,1] ; y0 <- ec[,2] ; x1 <- ec[,3] ; y1 <- ec[,4]
 
   ################################################################
@@ -249,10 +249,10 @@ plot.igraph <- function(x,
       c <- 3 * (cp[2,] - cp[1,])
       b <- 3 * (cp[3,] - cp[2,]) - c
       a <- cp[4,] - cp[1,] - c - b
-      
+
       t2 <- t*t;
       t3 <- t*t*t
-      
+
       a*t3 + b*t2 + c*t + cp[1,]
     }
 
@@ -260,7 +260,7 @@ plot.igraph <- function(x,
       dt <- seq(0, 1, by=1/(points-1))
       sapply(dt, function(t) point.on.cubic.bezier(cp, t))
     }
-    
+
     plot.bezier <- function(cp, points, color, width, arr, lty, arrow.size, arr.w) {
       p <- compute.bezier( cp, points )
       polygon(p[1,], p[2,], border=color, lwd=width, lty=lty)
@@ -275,7 +275,7 @@ plot.igraph <- function(x,
                       sh.lwd=width, h.lwd=width, open=FALSE, code=2, width=arr.w)
       }
     }
-    
+
     loop <- function(x0, y0, cx=x0, cy=y0, color, angle=0, label=NA,
                      width=1, arr=2, lty=1, arrow.size=arrow.size,
                      arr.w=arr.w, lab.x, lab.y) {
@@ -286,7 +286,7 @@ plot.igraph <- function(x,
                    ncol=2, byrow=TRUE)
       phi <- atan2(cp[,2]-center[2], cp[,1]-center[1])
       r <- sqrt((cp[,1]-center[1])**2 + (cp[,2]-center[2])**2)
-      
+
       phi <- phi + rad
 
       cp[,1] <- cx+r*cos(phi)
@@ -377,9 +377,9 @@ plot.igraph <- function(x,
     text(lc.x, lc.y, labels=edge.labels, col=edge.label.color,
          family=edge.label.family, font=edge.label.font, cex=edge.label.cex)
   }
-  
+
   rm(x0, y0, x1, y1)
-  
+
   ################################################################
   # add the vertices
   if (vc > 0) {
@@ -392,11 +392,11 @@ plot.igraph <- function(x,
       })
     }
   }
-      
+
   ################################################################
   # add the labels
   par(xpd=TRUE)
-  x <- layout[,1]+label.dist*cos(-label.degree)* 
+  x <- layout[,1]+label.dist*cos(-label.degree)*
     (vertex.size+6*8*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
     (vertex.size+6*8*log10(2))/200
@@ -420,15 +420,15 @@ plot.igraph <- function(x,
 
 
 #' 3D plotting of graphs with OpenGL
-#' 
+#'
 #' Using the \code{rgl} package, \code{rglplot} plots a graph in 3D. The plot
 #' can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
 #' fixed.
-#' 
+#'
 #' Note that \code{rglplot} is considered to be highly experimental. It is not
 #' very useful either. See \code{\link{igraph.plotting}} for the possible
 #' arguments.
-#' 
+#'
 #' @aliases rglplot rglplot.igraph
 #' @param x The graph to plot.
 #' @param \dots Additional arguments, see \code{\link{igraph.plotting}} for the
@@ -441,13 +441,13 @@ plot.igraph <- function(x,
 #' @keywords graphs
 #' @export
 #' @examples
-#' 
+#'
 #' \dontrun{
 #' g <- make_lattice( c(5,5,5) )
 #' coords <- layout_with_fr(g, dim=3)
 #' rglplot(g, layout=coords)
 #' }
-#' 
+#'
 rglplot        <- function(x, ...)
   UseMethod("rglplot", x)
 
@@ -464,8 +464,8 @@ rglplot.igraph <- function(x, ...) {
   create.edge <- function(v1, v2, r1, r2, ec, ew, am, as) {
     ## these could also be parameters:
     aw <- 0.005*3*as                      # arrow width
-    al <- 0.005*4*as                      # arrow length    
-    
+    al <- 0.005*4*as                      # arrow length
+
     dist <- sqrt(sum((v2-v1)^2))   # distance of the centers
 
     if (am==0) {
@@ -509,21 +509,21 @@ rglplot.igraph <- function(x, ...) {
                         13,14,15,16, 13,16,18,18, 13,14,18,18, 14,15,18,18,
                         15,16,18,18))
     }
-      
+
 
     ## rotate and shift it to its position
     phi<- -atan2(v2[2]-v1[2],v1[1]-v2[1])-pi/2
-    psi<- acos((v2[3]-v1[3])/dist)    
+    psi<- acos((v2[3]-v1[3])/dist)
     rot1 <- rbind(c(1,0,0),c(0,cos(psi),sin(psi)), c(0,-sin(psi),cos(psi)))
     rot2 <- rbind(c(cos(phi),sin(phi),0),c(-sin(phi),cos(phi),0), c(0,0,1))
     rot <- rot1 %*% rot2
     edge <- rgl::transform3d(edge, rgl::rotationMatrix(matrix=rot))
     edge <- rgl::transform3d(edge, rgl::translationMatrix(v1[1], v1[2], v1[3]))
 
-    ## we are ready 
+    ## we are ready
     rgl::shade3d(edge, col=ec)
   }
-  
+
   create.loop <- function(v, r, ec, ew, am, la, la2, as) {
     aw <- 0.005*3*as
     al <- 0.005*4*as
@@ -564,7 +564,7 @@ rglplot.igraph <- function(x, ...) {
                         # the arrow
                         -wi2/2,-aw/2,r+al,1, -wi2/2+aw,-aw/2,r+al,1,
                         -wi2/2+aw,aw/2,r+al,1, -wi2/2,aw/2,r+al,1,
-                        -wi2/2+aw/2,0,r,1                   
+                        -wi2/2+aw/2,0,r,1
                         ),
                       c(1,2,3,4, 5,6,7,8, 1,2,6,5, 2,3,7,6, 3,4,8,7,
                         1,4,18,17,
@@ -592,7 +592,7 @@ rglplot.igraph <- function(x, ...) {
                         -wi2/2+aw/2,0,r,1,
                         wi2/2,-aw/2,r+al,1, wi2/2-aw,-aw/2,r+al,1,
                         wi2/2-aw,aw/2,r+al,1, wi2/2,aw/2,r+al,1,
-                        wi2/2-aw/2,0,r,1                   
+                        wi2/2-aw/2,0,r,1
                         ),
                       c(1,2,3,4, 5,6,7,8, 1,2,6,5, 2,3,7,6, 3,4,8,7,
                         1,4,18,17,
@@ -617,7 +617,7 @@ rglplot.igraph <- function(x, ...) {
     ## we are ready
     rgl::shade3d(edge, col=ec)
   }
-  
+
   # Visual parameters
   params <- i.parse.plot.params(graph, list(...))
   labels <- params("vertex", "label")
@@ -635,22 +635,22 @@ rglplot.igraph <- function(x, ...) {
   edge.labels <- params("edge","label")
   arrow.mode <- params("edge","arrow.mode")
   arrow.size <- params("edge","arrow.size")
-  
+
   layout <- params("plot", "layout")
   rescale <- params("plot", "rescale")
 
   # the new style parameters can't do this yet
   arrow.mode         <- i.get.arrow.mode(graph, arrow.mode)
-  
+
   # norm layout to (-1, 1)
   if (ncol(layout)==2) { layout <- cbind(layout, 0) }
   if (rescale) {
     layout <- norm_coords(layout, -1, 1, -1, 1, -1, 1)
   }
-  
+
   # add the edges, the loops are handled separately
   el <- as_edgelist(graph, names=FALSE)
-  
+
   # It is faster this way
   rgl::par3d(skipRedraw=TRUE)
 
@@ -670,12 +670,12 @@ rglplot.igraph <- function(x, ...) {
       create.edge(v1,v2,r1,r2,ec,ew,am,arrow.size)
     } else {
       la <- loop.angle; if (length(la)>1) { la <- la[i] }
-      la2 <- loop.angle2; if (length(la2)>1) { la2 <- la2[i] }      
+      la2 <- loop.angle2; if (length(la2)>1) { la2 <- la2[i] }
       create.loop(v1,r1,ec,ew,am,la,la2,arrow.size)
     }
-    
+
   }
-      
+
   # add the vertices
   if (length(vertex.size)==1) { vertex.size <- rep(vertex.size, nrow(layout)) }
   rgl::rgl.spheres(layout[,1], layout[,2], layout[,3], radius=vertex.size,
@@ -683,7 +683,7 @@ rglplot.igraph <- function(x, ...) {
 
   # add the labels, 'l1' is a stupid workaround of a mysterious rgl bug
   labels[is.na(labels)] <- ""
-  x <- layout[,1]+label.dist*cos(-label.degree)* 
+  x <- layout[,1]+label.dist*cos(-label.degree)*
     (vertex.size+6*10*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
     (vertex.size+6*10*log10(2))/200
@@ -708,7 +708,7 @@ rglplot.igraph <- function(x, ...) {
 
   # draw everything
   rgl::par3d(skipRedraw=FALSE)
-  
+
   invisible(NULL)
 }
 
@@ -720,10 +720,10 @@ rglplot.igraph <- function(x, ...) {
 igraph.Arrows <-
 function (x1, y1, x2, y2,
                     code=2,
-                    size= 1,     
+                    size= 1,
                     width= 1.2/4/cin,
                     open=TRUE,
-                    sh.adj=0.1, 
+                    sh.adj=0.1,
                     sh.lwd=1,
                     sh.col=if(is.R()) par("fg") else 1,
                     sh.lty=1,
@@ -737,7 +737,7 @@ function (x1, y1, x2, y2,
 {
   cin <- size * par("cin")[2]
   width <- width * (1.2/4/cin)
-  uin <- if (is.R()) 
+  uin <- if (is.R())
     1/xyinch()
   else par("uin")
   x <- sqrt(seq(0, cin^2, length.out = floor(35 * cin) + 2))
@@ -750,7 +750,7 @@ function (x1, y1, x2, y2,
 
   ## backup
   bx1 <- x1 ; bx2 <- x2 ; by1 <- y1 ; by2 <- y2
-  
+
   ## shaft
   lx <- length(x1)
   r.seg <- rep(cin*sh.adj, lx)
@@ -789,7 +789,7 @@ function (x1, y1, x2, y2,
     c.y2 <- y2+y2d
 
     midx <- (x1+x2)/2
-    midy <- (y1+y2)/2  
+    midy <- (y1+y2)/2
     spx <- midx - lambda * 1/2 * (c.y2-c.y1)
     spy <- midy + lambda * 1/2 * (c.x2-c.x1)
     sh.col <- rep(sh.col, length.out=length(c.x1))
@@ -826,21 +826,21 @@ function (x1, y1, x2, y2,
   }
 
   ## forward arrowhead
-  if (code %in% c(2,3)) {    
+  if (code %in% c(2,3)) {
     theta <- atan2((by2 - y1) * uin[2], (bx2 - x1) * uin[1])
     Rep <- rep(length(deg.arr), lx)
     p.x2 <- rep(bx2, Rep)
     p.y2 <- rep(by2, Rep)
     ttheta <- rep(theta, Rep) + rep(deg.arr, lx)
-    r.arr <- rep(r.arr, lx)  
+    r.arr <- rep(r.arr, lx)
     if(open) lines((p.x2 + r.arr * cos(ttheta)/uin[1]),
-                   (p.y2 + r.arr*sin(ttheta)/uin[2]), 
+                   (p.y2 + r.arr*sin(ttheta)/uin[2]),
                    lwd=h.lwd, col = h.col.bo, lty=h.lty) else
-    polygon(p.x2 + r.arr * cos(ttheta)/uin[1], p.y2 + r.arr*sin(ttheta)/uin[2], 
+    polygon(p.x2 + r.arr * cos(ttheta)/uin[1], p.y2 + r.arr*sin(ttheta)/uin[2],
             col = h.col, lwd=h.lwd,
             border=h.col.bo, lty=h.lty)
   }
-    
+
   ## backward arrow head
   if (code %in% c(1,3)) {
     x1 <- bx1; y1 <- by1
@@ -855,9 +855,9 @@ function (x1, y1, x2, y2,
     r.arr <- rep(r.arr, lx)
 
     if(open) lines((p.x2 + r.arr * cos(ttheta)/uin[1]),
-                   (p.y2 + r.arr*sin(ttheta)/uin[2]), 
+                   (p.y2 + r.arr*sin(ttheta)/uin[2]),
                    lwd=h.lwd, col = h.col.bo, lty=h.lty) else
-    polygon(p.x2 + r.arr * cos(ttheta)/uin[1], p.y2 + r.arr*sin(ttheta)/uin[2], 
+    polygon(p.x2 + r.arr * cos(ttheta)/uin[1], p.y2 + r.arr*sin(ttheta)/uin[2],
             col = h.col, lwd=h.lwd,
             border=h.col.bo, lty=h.lty)
   }
@@ -881,4 +881,3 @@ igraph.polygon <- function(points, vertex.size=15/200, expand.by=15/200,
   cl <- convex_hull(pp)
   xspline(cl$rescoords, shape=shape, open=FALSE, col=col, border=border)
 }
-

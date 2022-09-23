@@ -1,6 +1,6 @@
 
 #' Efficiency of a graph
-#' 
+#'
 #' These functions calculate the global or average local efficiency of a network,
 #' or the local efficiency of every vertex in the network. See below for
 #' definitions.
@@ -18,8 +18,8 @@
 #' where \eqn{n}{n} is the number of vertices.
 #'
 #' The inverse distance between pairs that are not reachable from each other is
-#' considered to be zero. For graphs with fewer than 2 vertices, NaN is returned. 
-#' 
+#' considered to be zero. For graphs with fewer than 2 vertices, NaN is returned.
+#'
 #' @section Local efficiency:
 #'
 #' The local efficiency of a network around a vertex is defined as follows: We
@@ -52,7 +52,7 @@
 #' single number. For \code{average_local_efficiency}, the average local
 #' efficiency of the graph as a single number. For \code{local_efficiency}, the
 #' local efficiency of each vertex in a vector.
-#' 
+#'
 #' @references V. Latora and M. Marchiori: Efficient Behavior of Small-World
 #' Networks, Phys. Rev. Lett. 87, 198701 (2001).
 #'
@@ -62,7 +62,7 @@
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_graph("zachary")
 #' global_efficiency(g)
 #' average_local_efficiency(g)

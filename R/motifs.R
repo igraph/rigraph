@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -21,15 +21,15 @@
 ###################################################################
 
 #' Graph motifs
-#' 
+#'
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
-#' 
+#'
 #' \code{motifs} searches a graph for motifs of a given size and returns a
 #' numeric vector containing the number of different motifs. The order of
 #' the motifs is defined by their isomorphism class, see
 #' \code{\link{isomorphism_class}}.
-#' 
+#'
 #' @aliases graph.motifs
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
@@ -62,7 +62,7 @@ motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
     cut.prob <- c(cut.prob[-length(cut.prob)],
                   rep(cut.prob[-length(cut.prob)], length(cut.prob)-1))
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_motifs_randesu, graph, as.integer(size),
                as.numeric(cut.prob))
@@ -71,13 +71,13 @@ motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 }
 
 #' Graph motifs
-#' 
+#'
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
-#' 
+#'
 #' \code{count_motifs} calculates the total number of motifs of a given
 #' size in graph.
-#' 
+#'
 #' @aliases graph.motifs.no
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif.
@@ -106,20 +106,20 @@ count_motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
     cut.prob <- c(cut.prob[-length(cut.prob)],
                   rep(cut.prob[-length(cut.prob)], length(cut.prob)-1))
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_motifs_randesu_no, graph, as.integer(size),
         as.numeric(cut.prob))
 }
 
 #' Graph motifs
-#' 
+#'
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
-#' 
+#'
 #' \code{sample_motifs} estimates the total number of motifs of a given
 #' size in a graph based on a sample.
-#' 
+#'
 #' @aliases graph.motifs.est
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently size 3 and 4 are supported
@@ -155,20 +155,20 @@ sample_motifs <- function(graph, size=3, cut.prob=rep(0, size),
     cut.prob <- c(cut.prob[-length(cut.prob)],
                   rep(cut.prob[-length(cut.prob)], length(cut.prob)-1))
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_motifs_randesu_estimate, graph, as.integer(size),
         as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample))
 }
-  
+
 
 #' Dyad census of a graph
-#' 
+#'
 #' Classify dyads in a directed graphs. The relationship between each pair of
 #' vertices is measured. It can be in three states: mutual, asymmetric or
 #' non-existent.
-#' 
-#' 
+#'
+#'
 #' @aliases dyad.census dyad_census
 #' @param graph The input graph. A warning is given if it is not directed.
 #' @return A named numeric vector with three elements: \item{mut}{The number of
@@ -181,12 +181,12 @@ sample_motifs <- function(graph, size=3, cut.prob=rep(0, size),
 #' @references Holland, P.W. and Leinhardt, S. A Method for Detecting Structure
 #' in Sociometric Data. \emph{American Journal of Sociology}, 76, 492--513.
 #' 1970.
-#' 
+#'
 #' Wasserman, S., and Faust, K. \emph{Social Network Analysis: Methods and
 #' Applications.} Cambridge: Cambridge University Press. 1994.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_pa(100)
 #' dyad_census(g)
 #' @export
@@ -195,9 +195,9 @@ dyad_census <- dyad_census
 
 
 #' Triad census, subgraphs with three vertices
-#' 
+#'
 #' This function counts the different subgraphs of three vertices in a graph.
-#' 
+#'
 #' Triad census was defined by David and Leinhardt (see References below).
 #' Every triple of vertices (A, B, C) are classified into the 16 possible
 #' states: \describe{ \item{003}{A,B,C, the empty graph.} \item{012}{A->B, C,
@@ -209,10 +209,10 @@ dyad_census <- dyad_census
 #' \item{120D}{A<-B->C, A<->C.} \item{120U}{A->B<-C, A<->C.}
 #' \item{120C}{A->B->C, A<->C.} \item{210}{A->B<->C, A<->C.}
 #' \item{300}{A<->B<->C, A<->C, the complete graph.} }
-#' 
+#'
 #' This functions uses the RANDESU motif finder algorithm to find and count the
 #' subgraphs, see \code{\link{motifs}}.
-#' 
+#'
 #' @aliases triad.census triad_census
 #' @param graph The input graph, it should be directed. An undirected graph
 #' results a warning, and undefined results.
@@ -227,7 +227,7 @@ dyad_census <- dyad_census
 #' Mifflin.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnm(15, 45, directed = TRUE)
 #' triad_census(g)
 #' @export

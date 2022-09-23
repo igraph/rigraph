@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -49,7 +49,7 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  
+
   cs <- components(graph, ...)$csize;
   hi <- hist(cs, -1:max(cs), plot=FALSE)$density
   if (mul.size) {
@@ -61,16 +61,16 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
   } else {
     res <- rev(cumsum(rev(hi)));
   }
-  
+
   res
 }
 
 
 
 #' Decompose a graph into components
-#' 
+#'
 #' Creates a separate graph for each component of a graph.
-#' 
+#'
 #' @aliases decompose.graph
 #' @param graph The original graph.
 #' @param mode Character constant giving the type of the components, wither
@@ -91,12 +91,12 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # the diameter of each component in a random graph
 #' g <- sample_gnp(1000, 1/1000)
 #' components <- decompose(g, min.vertices=2)
 #' sapply(components, diameter)
-#' 
+#'
 decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
                       min.vertices=0) {
   if (!is_igraph(graph)) {
@@ -115,7 +115,7 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 
 
 #' Articulation points and bridges of a graph
-#' 
+#'
 #' \code{articulation_points} finds the articulation points (or cut vertices)
 #" of a graph, while \code{bridges} finds the bridges (or cut-edges) of a graph.
 #'
@@ -127,7 +127,7 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' contains no articulation points, then its vertex connectivity is at least
 #" two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
-#' 
+#'
 #' @aliases articulation.points articulation_points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #' it is directed.
@@ -140,7 +140,7 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' \code{\link{edge_connectivity}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
 #' clu <- components(g)$membership
 #' g <- add_edges(g, c(match(1, clu), match(2, clu)) )
@@ -161,18 +161,18 @@ bridges <- bridges
 
 
 #' Biconnected components
-#' 
+#'
 #' Finding the biconnected components of a graph
-#' 
+#'
 #' A graph is biconnected if the removal of any single vertex (and its adjacent
 #' edges) does not disconnect it.
-#' 
+#'
 #' A biconnected component of a graph is a maximal biconnected subgraph of it.
 #' The biconnected components of a graph can be given by the partition of its
 #' edges: every edge is a member of exactly one biconnected component. Note
 #' that this is not true for vertices: the same vertex can be part of many
 #' biconnected components.
-#' 
+#'
 #' @aliases biconnected.components biconnected_components
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #' it is directed.
@@ -190,7 +190,7 @@ bridges <- bridges
 #' \code{\link{is_connected}}, \code{\link{vertex_connectivity}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
 #' clu <- components(g)$membership
 #' g <- add_edges(g, c(which(clu==1), which(clu==2)))
