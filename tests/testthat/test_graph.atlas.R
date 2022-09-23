@@ -1,6 +1,3 @@
-
-context("graph.atlas")
-
 test_that("graph.atlas works", {
   library(igraph)
   g124 <- graph.atlas(124)

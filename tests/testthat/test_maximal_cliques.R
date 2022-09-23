@@ -1,6 +1,3 @@
-
-context("Maximal cliques")
-
 mysort <- function(x) {
   xl <- sapply(x, length)
   x <- lapply(x, sort)

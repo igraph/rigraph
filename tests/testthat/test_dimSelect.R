@@ -1,6 +1,3 @@
-
-context("Dimensionality selection")
-
 test_that("dimensionality selection works", {
   library(igraph)
   set.seed(42)

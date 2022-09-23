@@ -1,6 +1,3 @@
-
-context("communities")
-
 test_that("community detection functions work", {
   library(igraph)
   set.seed(42)

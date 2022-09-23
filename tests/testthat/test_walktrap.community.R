@@ -1,6 +1,3 @@
-
-context("cluster_walktrap")
-
 test_that("cluster_walktrap works", {
 
   library(igraph)

@@ -1,6 +1,3 @@
-
-context("min_cut")
-
 test_that("min_cut works", {
 
   library(igraph)

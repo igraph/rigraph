@@ -1,5 +1,3 @@
-context("greedy vertex coloring")
-
 test_that("greedy_vertex_coloring works", {
     g <- make_star(10, mode="undirected")
     expect_that(
@@ -19,8 +17,6 @@ test_that("greedy_vertex_coloring works on named graphs", {
     expect_that(as.vector(vc), equals(c(1, rep(2, vcount(g)-1))))
     expect_that(names(vc), equals(V(g)$name))
 })
-
-context("simplify_and_colorize")
 
 test_that("simplify_and_colorize works", {
     g <- make_graph(~ A-B-C-D-E, B-C, B-C, B-C, D-E-E, simplify=FALSE)

@@ -1,6 +1,3 @@
-
-context("New isomorphism API")
-
 test_that("isomorphic", {
 
   g <- graph_(from_literal(A - B - C - A))

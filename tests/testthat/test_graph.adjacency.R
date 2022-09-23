@@ -1,6 +1,3 @@
-
-context("graph.adjacency")
-
 test_that("graph_from_adjacency_matrix works", {
 
   library(igraph)

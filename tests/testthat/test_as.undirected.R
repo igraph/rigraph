@@ -1,6 +1,3 @@
-
-context("as.undirected")
-
 test_that("as.undirected keeps attributes", {
   library(igraph)
   g <- graph_from_literal(A+-+B, A--+C, C+-+D)

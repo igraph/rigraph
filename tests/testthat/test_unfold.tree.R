@@ -1,6 +1,3 @@
-
-context("unfold_tree")
-
 test_that("unfold_tree works", {
 
   library(igraph)

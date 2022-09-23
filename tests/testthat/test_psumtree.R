@@ -1,6 +1,3 @@
-
-context("Prefix sum tree")
-
 test_that("Prefix sum tree works", {
 
   library(igraph)

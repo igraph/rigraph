@@ -1,6 +1,3 @@
-
-context("ends")
-
 test_that("ends works", {
   library(igraph)
   g <- sample_gnp(100, 3/100)

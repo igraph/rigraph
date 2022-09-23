@@ -1,6 +1,3 @@
-
-context("min_st_separators")
-
 test_that("min_st_separators works", {
 
   library(igraph)

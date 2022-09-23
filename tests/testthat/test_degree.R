@@ -1,6 +1,3 @@
-
-context("degree")
-
 test_that("degree works", {
   library(igraph)
 

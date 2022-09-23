@@ -1,5 +1,3 @@
-context("Random walks")
-
 test_that("undirected random_walk works", {
 
   set.seed(42)

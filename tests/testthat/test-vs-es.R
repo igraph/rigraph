@@ -1,6 +1,3 @@
-
-context("Vertex and edge sequences")
-
 test_that("we can create vertex/edge seqs", {
 
   g <- make_ring(10)

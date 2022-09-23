@@ -1,6 +1,3 @@
-
-context("is_chordal")
-
 test_that("is_chordal works", {
 
   library(igraph)

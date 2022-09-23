@@ -1,6 +1,3 @@
-
-context("compose")
-
 test_that("compose works", {
 
   library(igraph)

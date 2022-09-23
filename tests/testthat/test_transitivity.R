@@ -1,6 +1,3 @@
-
-context("transitivity")
-
 test_that("transitivity works", {
   library(igraph)
   set.seed(42)

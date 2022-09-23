@@ -1,6 +1,3 @@
-
-context("Dot-product random graphs")
-
 test_that("Dot product rng works", {
 
   library(igraph)

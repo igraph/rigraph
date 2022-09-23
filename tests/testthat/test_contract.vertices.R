@@ -1,6 +1,3 @@
-
-context("contract")
-
 test_that("contract works", {
   library(igraph)
   local_rng_version("3.5.0")

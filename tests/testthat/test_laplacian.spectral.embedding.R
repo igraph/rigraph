@@ -1,6 +1,3 @@
-
-context("Spectral embedding of the Laplacian")
-
 std <- function(x) {
   x <- zapsmall(x)
   apply(x, 2, function(col) {

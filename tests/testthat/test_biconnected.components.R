@@ -1,6 +1,3 @@
-
-context("biconnected_components")
-
 test_that("biconnected_components works", {
   library(igraph)
 

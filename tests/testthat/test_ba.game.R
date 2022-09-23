@@ -1,6 +1,3 @@
-
-context("sample_pa")
-
 test_that("sample_pa works", {
   library(igraph)
 

@@ -1,6 +1,3 @@
-
-context("graph_from_literal")
-
 test_that("simplify argument works", {
 
   library(igraph)

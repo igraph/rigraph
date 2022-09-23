@@ -1,6 +1,3 @@
-
-context("get_diameter")
-
 test_that("get_diameter works", {
 
   library(igraph)

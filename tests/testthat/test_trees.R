@@ -1,5 +1,3 @@
-context("is_tree")
-
 test_that("is_tree works for non-trees", {
     g <- make_graph("zachary")
     expect_false(is_tree(g))
@@ -51,8 +49,6 @@ test_that("a graph with a single vertex and no edges is tree", {
     expect_true(is_tree(make_empty_graph(1)))
 })
 
-context("to_prufer, make_from_prufer")
-
 test_that("to_prufer and make_from_prufer works for trees", {
     g <- make_tree(13, 3, mode="undirected")
     seq <- to_prufer(g)
@@ -82,8 +78,6 @@ test_that("make_(from_prufer(...)) works", {
 test_that("to_prufer prints an error for non-trees", {
     expect_error(to_prufer(make_graph("zachary")), "must be a tree")
 })
-
-context("sample_tree")
 
 test_that("sample_tree works", {
     g <- sample_tree(100)
@@ -145,8 +139,6 @@ test_that("sample_tree yields a null graph for n=0", {
 test_that("sample_tree throws an error for the Prufer method with directed graphs", {
     expect_error(sample_tree(10, method="prufer", directed=T), "nvalid value")
 })
-
-context("sample_spanning_tree")
 
 test_that("sample_spanning_tree works for connected graphs", {
     g <- make_full_graph(8)

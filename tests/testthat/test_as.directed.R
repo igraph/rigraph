@@ -1,6 +1,3 @@
-
-context("as.directed")
-
 test_that("as.directed works", {
   library(igraph)
 

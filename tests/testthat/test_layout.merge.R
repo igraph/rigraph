@@ -1,6 +1,3 @@
-
-context("merge_coords")
-
 test_that("merge_coords works", {
 
   library(igraph)

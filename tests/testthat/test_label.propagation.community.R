@@ -1,6 +1,3 @@
-
-context("cluster_label_prop")
-
 test_that("label.probagation.community works", {
 
   library(igraph)

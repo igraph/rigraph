@@ -1,6 +1,3 @@
-
-context("dyad_census")
-
 test_that("dyad_census works", {
 
   library(igraph)

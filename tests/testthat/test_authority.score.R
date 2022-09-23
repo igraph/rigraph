@@ -1,6 +1,3 @@
-
-context("authority_score")
-
 test_that("authority score works", {
   library(igraph)
 

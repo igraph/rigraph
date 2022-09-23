@@ -1,5 +1,3 @@
-context("identical_graphs")
-
 test_that("identical_graphs works", {
     g <- make_ring(5)
     g2 <- make_ring(5)

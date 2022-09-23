@@ -1,6 +1,3 @@
-
-context("Bonacich's power centrality")
-
 test_that("Power centrality works", {
   library(igraph)
   library(Matrix)

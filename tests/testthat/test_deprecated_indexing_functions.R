@@ -1,6 +1,3 @@
-
-context("Deprecated indexing functions")
-
 test_that("deprecated indexing functions are indeed deprecated", {
 
   g <- make_ring(10)

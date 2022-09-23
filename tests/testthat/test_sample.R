@@ -1,6 +1,3 @@
-
-context("Various samplers")
-
 test_that("Sampling from a Dirichlet works", {
 
   library(igraph)

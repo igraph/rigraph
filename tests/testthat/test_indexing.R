@@ -1,6 +1,3 @@
-
-context("Indexing")
-
 mm <- function(...) {
   v <- as.numeric(as.vector(list(...)))
   matrix(v, nrow=sqrt(length(v)))

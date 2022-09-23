@@ -1,6 +1,3 @@
-
-context("make_graph")
-
 test_that("make_graph works", {
 
   g <- make_graph(1:10)

@@ -1,6 +1,3 @@
-
-context("Detailed printing of vs and es")
-
 test_that("vs printing", {
 
   local_rng_version("3.5.0")

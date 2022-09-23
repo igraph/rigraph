@@ -1,6 +1,3 @@
-
-context("motifs")
-
 test_that("motif finding works", {
 
   library(igraph)

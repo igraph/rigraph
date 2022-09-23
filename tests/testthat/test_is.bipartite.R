@@ -1,6 +1,3 @@
-
-context("is_bipartite")
-
 test_that("is_bipartite works", {
 
   library(igraph)

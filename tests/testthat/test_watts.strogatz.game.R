@@ -1,6 +1,3 @@
-
-context("sample_smallworld")
-
 test_that("sample_smallworld works", {
 
   library(igraph)

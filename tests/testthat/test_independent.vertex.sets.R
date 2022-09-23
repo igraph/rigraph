@@ -1,6 +1,3 @@
-
-context("ivs")
-
 test_that("ivs works", {
 
   library(igraph)

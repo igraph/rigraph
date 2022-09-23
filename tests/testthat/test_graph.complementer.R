@@ -1,6 +1,3 @@
-
-context("complementer")
-
 test_that("complementer works", {
 
   library(igraph)

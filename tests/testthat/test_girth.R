@@ -1,6 +1,3 @@
-
-context("girth")
-
 test_that("girth works", {
 
   library(igraph)

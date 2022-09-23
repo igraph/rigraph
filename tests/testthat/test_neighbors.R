@@ -1,6 +1,3 @@
-
-context("neighbors")
-
 test_that("neighbors works", {
 
   library(igraph)

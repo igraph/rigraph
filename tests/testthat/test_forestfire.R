@@ -1,6 +1,3 @@
-
-context("sample_forestfire")
-
 test_that("sample_forestfire works", {
 
   library(igraph)

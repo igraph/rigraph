@@ -1,6 +1,3 @@
-
-context("mean_distance")
-
 test_that("mean_distance works", {
   apl <- function(graph) {
     sp <- distances(graph, mode="out")

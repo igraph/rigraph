@@ -1,6 +1,3 @@
-
-context("Data version and conversion")
-
 test_that("we create graphs of the current version", {
 
   g <- make_ring(10)

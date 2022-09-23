@@ -1,6 +1,3 @@
-
-context("iterators")
-
 test_that("iterators work", {
 
   library(igraph)

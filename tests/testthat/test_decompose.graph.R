@@ -1,6 +1,3 @@
-
-context("decompose")
-
 test_that("decompose works", {
   library(igraph)
   g <- sample_gnp(1000, 1/1500)

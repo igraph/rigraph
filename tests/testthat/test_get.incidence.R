@@ -1,6 +1,3 @@
-
-context("as_incidence_matrix")
-
 test_that("as_incidence_matrix works", {
 
   library(igraph)

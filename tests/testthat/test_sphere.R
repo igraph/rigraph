@@ -1,6 +1,3 @@
-
-context("Sampling points from a sphere")
-
 test_that("Sampling sphere surface works", {
 
   library(igraph)

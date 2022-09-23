@@ -1,6 +1,3 @@
-
-context("SIR epidemics model on a network")
-
 test_that("SIR works", {
 
   skip_on_os("solaris")

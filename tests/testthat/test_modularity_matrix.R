@@ -1,6 +1,3 @@
-
-context("modularity_matrix")
-
 test_that("modularity_matrix works", {
 
   library(igraph)

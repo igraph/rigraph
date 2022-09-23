@@ -1,6 +1,3 @@
-
-context("cluster_edge_betweenness")
-
 test_that("cluster_edge_betweenness works", {
   library(igraph)
 

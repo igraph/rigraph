@@ -1,6 +1,3 @@
-
-context("are_adjacent")
-
 test_that("are_adjacent works", {
   library(igraph)
 

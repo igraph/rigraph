@@ -1,6 +1,3 @@
-
-context("cliques")
-
 test_that("cliques works", {
   library(igraph)
   set.seed(42)

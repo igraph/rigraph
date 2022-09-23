@@ -1,6 +1,3 @@
-
-context("alpha_centrality")
-
 test_that("dense alpha_centrality works", {
   library(igraph)
   g.1 <- graph( c(1,3,2,3,3,4,4,5) )

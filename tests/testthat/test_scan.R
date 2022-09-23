@@ -1,6 +1,3 @@
-
-context("Local scan statistics")
-
 library(igraph)
 require(digest)
 

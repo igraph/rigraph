@@ -1,6 +1,3 @@
-
-context("components")
-
 test_that("components works", {
   library(igraph)
   set.seed(42)
@@ -51,8 +48,6 @@ test_that("groups works", {
                                         `2` = letters[11:15]), .Dim = 2L,
                                         .Dimnames = list(c("1", "2")))))
 })
-
-context("is_connected")
 
 test_that("is_connected works", {
   library(igraph)

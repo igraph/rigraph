@@ -1,6 +1,3 @@
-
-context("infix operators")
-
 test_that("infix operators work", {
 
   library(igraph)

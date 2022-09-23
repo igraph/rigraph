@@ -1,6 +1,3 @@
-
-context("graphNEL conversion")
-
 test_that("graphNEL conversion works", {
 
   if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")

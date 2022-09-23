@@ -1,6 +1,3 @@
-
-context("operators")
-
 test_that("operators work", {
 
   library(igraph)

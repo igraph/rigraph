@@ -1,6 +1,3 @@
-
-context("adjacency spectral embedding")
-
 std <- function(x) {
   x <- zapsmall(x)
   apply(x, 2, function(col) {

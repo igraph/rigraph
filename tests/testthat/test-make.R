@@ -1,6 +1,3 @@
-
-context("Make API")
-
 test_that("make_ works, order of arguments does not matter", {
 
   g0 <- make_undirected_graph(1:10)

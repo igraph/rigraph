@@ -1,6 +1,3 @@
-
-context("eigen_centrality")
-
 test_that("eigen_centrality works", {
 
   library(igraph)

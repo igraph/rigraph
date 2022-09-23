@@ -1,6 +1,3 @@
-
-context("articulation_points")
-
 test_that("articulation_points works", {
   library(igraph)
 

@@ -1,6 +1,3 @@
-
-context("sdf")
-
 test_that("sdf works", {
 
   library(igraph)

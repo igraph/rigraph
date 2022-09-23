@@ -1,6 +1,3 @@
-
-context("isomorphism_class")
-
 test_that("isomorphism_class works", {
 
   library(igraph)

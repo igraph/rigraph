@@ -1,6 +1,3 @@
-
-context("Stochastic block models")
-
 test_that("Generating stochastic block models works", {
 
   library(igraph)

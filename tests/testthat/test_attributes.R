@@ -1,6 +1,3 @@
-
-context("attributes")
-
 test_that("assigning and querying attributes work", {
   library(igraph)
 

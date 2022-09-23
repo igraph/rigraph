@@ -1,6 +1,3 @@
-
-context("Eigenproblems")
-
 test_that("spectrum works for symmetric matrices", {
   library(igraph)
   set.seed(42)

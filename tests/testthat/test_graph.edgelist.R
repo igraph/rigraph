@@ -1,6 +1,3 @@
-
-context("graph_from_edgelist")
-
 test_that("graph_from_edgelist works", {
 
   library(igraph)

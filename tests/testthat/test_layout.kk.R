@@ -1,6 +1,3 @@
-
-context("Kamada-Kawai layouts")
-
 test_that("Kamada-Kawai layout generator works", {
 
   set.seed(42)

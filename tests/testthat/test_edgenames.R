@@ -1,6 +1,3 @@
-
-context("edge names")
-
 test_that("edge names work", {
 
   library(igraph)

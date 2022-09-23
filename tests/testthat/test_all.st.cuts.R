@@ -1,6 +1,3 @@
-
-context("all.st.cuts")
-
 test_that("all.st.cuts works", {
 
   library(igraph)

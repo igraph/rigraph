@@ -1,6 +1,3 @@
-
-context("Fruchterman-Reingold layout")
-
 test_that("", {
 
   skip_on_os("solaris")

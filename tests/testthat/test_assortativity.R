@@ -1,6 +1,3 @@
-
-context("assortativity")
-
 test_that("assortativity works", {
   library(igraph)
 

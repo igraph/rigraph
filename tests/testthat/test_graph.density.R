@@ -1,6 +1,3 @@
-
-context("edge_density")
-
 test_that("edge_density works", {
 
   library(igraph)

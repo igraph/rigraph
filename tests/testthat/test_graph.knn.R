@@ -1,6 +1,3 @@
-
-context("knn")
-
 test_that("knn works", {
   library(igraph)
   set.seed(42)

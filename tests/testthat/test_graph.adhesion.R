@@ -1,6 +1,3 @@
-
-context("adhesion")
-
 test_that("adhesion works", {
 
   library(igraph)

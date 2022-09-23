@@ -1,6 +1,3 @@
-
-context("VS/ES indexing")
-
 test_that("I can index a vs twice", {
 
   edges <- data.frame(

@@ -1,6 +1,3 @@
-
-context("canonical_permutation")
-
 test_that("canonical_permutation works", {
   library(igraph)
 

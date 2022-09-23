@@ -1,8 +1,6 @@
 
 `%>%` <- magrittr::`%>%`
 
-context("New layout API")
-
 test_that("two step layouting works", {
 
   g <- make_ring(10)

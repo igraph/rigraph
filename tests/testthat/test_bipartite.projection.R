@@ -1,6 +1,3 @@
-
-context("bipartite_projection")
-
 test_that("bipartite_projection works", {
   library(igraph)
   local_rng_version("3.5.0")

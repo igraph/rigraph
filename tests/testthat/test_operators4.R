@@ -1,7 +1,3 @@
-
-context("operators on named graphs")
-
-
 test_that("disjoint union works for named graphs", {
 
   library(igraph)

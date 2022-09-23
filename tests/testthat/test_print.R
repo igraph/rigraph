@@ -1,6 +1,3 @@
-
-context("print.igraph")
-
 test_that("print.igraph works", {
 
   library(igraph)

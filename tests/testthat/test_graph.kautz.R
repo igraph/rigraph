@@ -1,6 +1,3 @@
-
-context("make_kautz_graph")
-
 test_that("make_kautz_graph works", {
   library(igraph)
   g <- make_kautz_graph(2,3)

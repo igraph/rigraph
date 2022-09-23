@@ -1,6 +1,3 @@
-
-context("largest_ivs")
-
 test_that("largest_ivs works", {
 
   library(igraph)

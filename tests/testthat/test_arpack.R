@@ -1,6 +1,3 @@
-
-context("arpack")
-
 test_that("arpack works for identity matrix", {
   library(igraph)
   f <- function(x, extra=NULL) x

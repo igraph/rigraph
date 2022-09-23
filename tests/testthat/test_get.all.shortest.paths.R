@@ -1,6 +1,3 @@
-
-context("all_shortest_paths")
-
 test_that("all_shortest_paths works", {
 
   library(igraph)

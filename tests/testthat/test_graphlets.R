@@ -1,6 +1,3 @@
-
-context("Graphlets")
-
 sortgl <- function(x) {
   cl <- lapply(x$cliques, sort)
   n <- sapply(cl, length)

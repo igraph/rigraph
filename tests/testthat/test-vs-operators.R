@@ -1,6 +1,3 @@
-
-context("VS/ES operators")
-
 test_that("c on attached vs", {
   g <- make_ring(10)
 

@@ -1,6 +1,3 @@
-
-context("add_edges")
-
 test_that("add_edges keeps edge id order", {
   library(igraph)
   g <- make_empty_graph(10)

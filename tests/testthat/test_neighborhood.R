@@ -1,6 +1,3 @@
-
-context("ego")
-
 test_that("ego works", {
 
   library(igraph)

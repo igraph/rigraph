@@ -1,6 +1,3 @@
-
-context("make_de_bruijn_graph")
-
 test_that("make_de_bruijn_graph works", {
 
   library(igraph)

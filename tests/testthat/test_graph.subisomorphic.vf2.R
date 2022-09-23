@@ -1,6 +1,3 @@
-
-context("graph.subisomorphic.vf2")
-
 test_that("graph.subisomorphic.vf2 works", {
 
   library(igraph)

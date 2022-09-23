@@ -1,6 +1,3 @@
-
-context("add_vertices")
-
 test_that("add_vertices works", {
   library(igraph)
   g <- graph_from_literal(A-B-C-D-E)

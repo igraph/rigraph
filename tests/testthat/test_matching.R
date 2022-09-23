@@ -1,5 +1,3 @@
-context("is_matching")
-
 test_that("is_matching works", {
   library(igraph)
 
@@ -29,8 +27,6 @@ test_that("is_matching works with names", {
   expect_false(is_matching(g, c("a", "b")))
 })
 
-context("is_max_matching")
-
 test_that("is_max_matching works", {
   library(igraph)
 
@@ -59,8 +55,6 @@ test_that("is_max_matching works with names", {
   expect_false(is_max_matching(g, c("a", "b", "c", "d", "e", "5", "4", "3", "2", "1")))
   expect_false(is_max_matching(g, c("a", "b")))
 })
-
-context("max_bipartite_match")
 
 test_that("max_bipartite_match works", {
   library(igraph)

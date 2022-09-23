@@ -1,6 +1,3 @@
-
-context("cluster_louvain")
-
 test_that("cluster_louvain works", {
 
   library(igraph)

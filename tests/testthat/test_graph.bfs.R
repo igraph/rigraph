@@ -1,6 +1,3 @@
-
-context("BFS")
-
 test_that("BFS works from multiple root vertices", {
 
   library(igraph)

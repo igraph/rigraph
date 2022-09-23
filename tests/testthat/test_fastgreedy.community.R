@@ -1,6 +1,3 @@
-
-context("cluster_fast_greedy")
-
 test_that("cluster_fast_greedy works", {
 
   library(igraph)

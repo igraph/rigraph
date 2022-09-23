@@ -1,6 +1,3 @@
-
-context("make_bipartite_graph")
-
 test_that("make_bipartite_graph works", {
   library(igraph)
 

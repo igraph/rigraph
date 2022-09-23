@@ -1,6 +1,3 @@
-
-context("as_adj")
-
 test_that("as_adj works", {
 
   library(igraph)

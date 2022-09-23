@@ -1,6 +1,3 @@
-
-context("largest_cliques")
-
 test_that("largest_cliques works", {
 
   library(igraph)

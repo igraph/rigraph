@@ -1,5 +1,3 @@
-context("automorphisms")
-
 test_that("automorphisms works", {
   library(igraph)
 

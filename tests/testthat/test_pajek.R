@@ -1,6 +1,3 @@
-
-context("Pajek file format")
-
 test_that("writing Pajek files works", {
 
   library(igraph)

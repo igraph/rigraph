@@ -1,6 +1,3 @@
-
-context("edge_betweenness")
-
 test_that("edge_betweenness works", {
   library(igraph)
 

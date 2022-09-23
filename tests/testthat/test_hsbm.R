@@ -1,6 +1,3 @@
-
-context("Hierarchical stochastic block models")
-
 test_that("HSBM works", {
   library(igraph)
   set.seed(42)

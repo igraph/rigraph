@@ -1,6 +1,3 @@
-
-context("Correlated E-R random graphs")
-
 ## Not very meaningful tests. They good for testing that the
 ## functions run, but not much more
 

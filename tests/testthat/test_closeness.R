@@ -1,6 +1,3 @@
-
-context("closeness")
-
 test_that("closeness works", {
   library(igraph)
 

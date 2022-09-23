@@ -1,6 +1,3 @@
-
-context("graph.subisomorphic, lad")
-
 test_that("graph.subisomorphic, method = 'lad' works", {
 
   library(igraph)

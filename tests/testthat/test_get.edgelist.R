@@ -1,6 +1,3 @@
-
-context("edgelist")
-
 test_that("as_edgelist works", {
   library(igraph)
   g <- sample_gnp(100, 3/100)

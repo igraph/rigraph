@@ -1,6 +1,3 @@
-
-context("Indexing")
-
 test_that("Indexing multi-graphs as adjacency list", {
 
   g <- make_graph(~ A -+ B:C, A -+ B:C:D, simplify = FALSE)

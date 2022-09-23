@@ -1,6 +1,3 @@
-
-context("betweenness")
-
 test_that("betweenness works for kite graph", {
   library(igraph)
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,

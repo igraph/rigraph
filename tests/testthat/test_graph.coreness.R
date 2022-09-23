@@ -1,6 +1,3 @@
-
-context("coreness")
-
 test_that("coreness works", {
   library(igraph)
   g <- make_ring(10)

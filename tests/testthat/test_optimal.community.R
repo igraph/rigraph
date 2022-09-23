@@ -1,6 +1,3 @@
-
-context("cluster_optimal")
-
 test_that("cluster_optimal works", {
 
   skip_if_no_glpk()

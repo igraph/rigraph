@@ -1,6 +1,3 @@
-
-context("graph_from_adj_list")
-
 test_that("graph_from_adj_list works", {
 
   library(igraph)

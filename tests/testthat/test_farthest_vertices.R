@@ -1,6 +1,3 @@
-
-context("farthest_vertices")
-
 test_that("farthest_vertices works", {
 
   library(igraph)

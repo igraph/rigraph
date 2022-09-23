@@ -1,6 +1,3 @@
-
-context("Weak references")
-
 test_that("we can create weak references", {
 
   g <- new.env()

@@ -1,6 +1,3 @@
-
-context("igraph_options")
-
 test_that("igraph_options works", {
 
   library(igraph)

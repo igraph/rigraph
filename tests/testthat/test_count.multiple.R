@@ -1,6 +1,3 @@
-
-context("multiple edges")
-
 test_that("any_multiple, count_multiple, which_multiple works", {
   library(igraph)
   set.seed(42)

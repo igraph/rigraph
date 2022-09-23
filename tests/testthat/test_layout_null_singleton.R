@@ -1,5 +1,3 @@
-context("layouts for null and singleton graphs")
-
 test_that("layout algorithms work for null graphs", {
     g <- make_empty_graph()
     mat <- matrix(as.numeric(c()), ncol=2)

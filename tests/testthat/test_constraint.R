@@ -1,6 +1,3 @@
-
-context("constraint")
-
 test_that("constraint works", {
   library(igraph)
 
