@@ -158,7 +158,7 @@ head_print_callback <- function(x, max_lines, header, footer,
 indent_print <- function(..., .indent = " ", .printer = print) {
 
   if (length(.indent) != 1) stop(".indent must be a scalar")
-  
+
   opt <- options(width = getOption("width") - nchar(.indent))
   on.exit(options(opt), add = TRUE)
 

@@ -24,5 +24,5 @@ test_that("Generating stochastic block models works", {
                  directed=TRUE, loops=TRUE)
   g4x <- make_full_graph(10, directed=TRUE, loops=TRUE)
   expect_that(g4[sparse=FALSE], equals(g4x[sparse=FALSE]))
-  
+
 })

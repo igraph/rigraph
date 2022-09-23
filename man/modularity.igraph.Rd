@@ -60,7 +60,7 @@ of \eqn{j}, \eqn{c_i}{ci} is the type (or component) of \eqn{i},
 pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
 otherwise. For directed graphs, it is defined as
 \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
-\frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum( 
+\frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum(
 (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 
 The resolution parameter \eqn{\gamma}{gamma} allows weighting the random

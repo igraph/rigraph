@@ -18,7 +18,7 @@ to the screen size.}
 The vertex sequence, invisibly.
 }
 \description{
-For long vertex sequences, the printing is truncated to fit to the 
+For long vertex sequences, the printing is truncated to fit to the
 screen. Use \code{print} explicitly and the \code{full} argument to
 see the full sequence.
 }

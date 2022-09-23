@@ -122,7 +122,7 @@ allowing rapid prototyping via high level languages like R.
   directed, edge going from \sQuote{\code{from}} to
   \sQuote{\code{to}}. The two forms can also be mixed in the same edge
   selector.
-  
+
   Other attributes define visualization parameters, see
   \code{\link{igraph.plotting}} for details.
 

@@ -9,7 +9,7 @@ test_that("layout_with_mds works", {
 
   g <- make_tree(10, 2, "undirected")
 
-  mymds <- function(g) { 
+  mymds <- function(g) {
     sp <- distances(g)
     sp <- sp * sp
     sp <- sp - rowMeans(sp) - rep(rowMeans(sp), each=nrow(sp)) + mean(sp)
@@ -28,7 +28,7 @@ test_that("layout_with_mds works", {
   set.seed(42)
   g <- make_ring(10) + make_ring(3)
   expect_that(ncol(layout_with_mds(g)), equals(2))
-  
+
   ## Small stress test
 
   for (i in 1:10) {

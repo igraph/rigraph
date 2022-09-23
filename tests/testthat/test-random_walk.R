@@ -76,4 +76,3 @@ test_that("directed random_edge_walk can return wtih an error when stuck", {
   g <- make_star(11, mode = "out")
   expect_error(random_edge_walk(g, start = 7, steps = 10, stuck="error"), "Random walk got stuck")
 })
-

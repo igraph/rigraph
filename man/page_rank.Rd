@@ -73,7 +73,7 @@ Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web
 Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
 Australia, April 1998.
 
-The \code{page_rank} function can use either the PRPACK library or ARPACK 
+The \code{page_rank} function can use either the PRPACK library or ARPACK
 (see \code{\link{arpack}}) to perform the calculation.
 
 Please note that the PageRank of a given vertex depends on the PageRank of

@@ -15,10 +15,10 @@ test_that("disjoint union works for named graphs", {
 
   V(g1)$a1 <- 1:10
   V(g2)$a2 <- 11:20
-  
+
   E(g1)$b1 <- 1:10
   E(g2)$b2 <- 11:20
-  
+
   g <- disjoint_union(g1, g2)
 
   expect_that(sort(graph_attr_names(g)),
@@ -45,11 +45,11 @@ test_that("disjoint union gives warning for non-unique vertex names", {
 
   g1 <- make_ring(5); V(g1)$name <- letters[1:5]
   g2 <- make_ring(5); V(g2)$name <- letters[5:9]
-  
+
   expect_that(disjoint_union(g1, g2),
               gives_warning("Duplicate vertex names in disjoint union"))
 })
-  
+
 
 test_that("union of unnamed graphs works", {
 
@@ -60,13 +60,13 @@ test_that("union of unnamed graphs works", {
   g1$foo <- "bar"
   E(g1)$weight <- 1:10
   E(g2)$weight <- 13:1
-  
+
   V(g1)$a1 <- 1:10
   V(g2)$a2 <- 11:23
-  
+
   E(g1)$b1 <- letters[1:10]
   E(g2)$b2 <- letters[11:23]
-  
+
   g <- graph.union(g1, g2)
 
   expect_that(sort(graph_attr_names(g)),
@@ -99,7 +99,7 @@ test_that("union of named graphs works", {
   g1$foo <- "bar"
   E(g1)$weight <- 1:10
   E(g2)$weight <- 13:1
-  
+
   V(g1)$a1 <- 1:10
   V(g2)$a2 <- 11:23
 
@@ -115,7 +115,7 @@ test_that("union of named graphs works", {
               equals(c("a1", "a2", "name")))
   expect_that(sort(edge_attr_names(g)),
               equals(c("b1", "b2", "weight_1", "weight_2")))
-  
+
   df1 <- as_data_frame(g, what="both")
 
   g.v <- read.table(stringsAsFactors=FALSE, textConnection("
@@ -155,7 +155,7 @@ m NA 23    m
 "))
   rownames(df1$edges) <- rownames(df1$edges)
   expect_that(df1$edges, equals(g.e))
-  
+
 })
 
 test_that("intersection of named graphs works", {

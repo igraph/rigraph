@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,9 +22,9 @@
 
 
 #' Calculate Cohesive Blocks
-#' 
+#'
 #' Calculates cohesive blocks for objects of class \code{igraph}.
-#' 
+#'
 #' Cohesive blocking is a method of determining hierarchical subsets of graph
 #' vertices based on their structural cohesion (or vertex connectivity). For a
 #' given graph \eqn{G}, a subset of its vertices \eqn{S\subset V(G)}{S} is said
@@ -34,38 +34,38 @@
 #' \eqn{l}-cohesive subsets are recursively identified with \eqn{l>k}. Thus a
 #' hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
 #' root.
-#' 
+#'
 #' The function \code{cohesive_blocks} implements cohesive blocking.  It
 #' returns a \code{cohesiveBlocks} object. \code{cohesiveBlocks} should be
 #' handled as an opaque class, i.e. its internal structure should not be
 #' accessed directly, but through the functions listed here.
-#' 
+#'
 #' The function \code{length} can be used on \code{cohesiveBlocks} objects and
 #' it gives the number of blocks.
-#' 
+#'
 #' The function \code{blocks} returns the actual blocks stored in the
 #' \code{cohesiveBlocks} object. They are returned in a list of numeric
 #' vectors, each containing vertex ids.
-#' 
+#'
 #' The function \code{graphs_from_cohesive_blocks} is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 #' attributes are kept in the subgraph.
-#' 
+#'
 #' The function \code{cohesion} returns a numeric vector, the cohesion of the
 #' different blocks. The order of the blocks is the same as for the
 #' \code{blocks} and \code{graphs_from_cohesive_blocks} functions.
-#' 
+#'
 #' The block hierarchy can be queried using the \code{hierarchy} function. It
 #' returns an igraph graph, its vertex ids are ordered according the order of
 #' the blocks in the \code{blocks} and \code{graphs_from_cohesive_blocks}, \code{cohesion},
 #' etc. functions.
-#' 
+#'
 #' \code{parent} gives the parent vertex of each block, in the block hierarchy,
 #' for the root vertex it gives 0.
-#' 
+#'
 #' \code{plot_hierarchy} plots the hierarchy tree of the cohesive blocks on the
 #' active graphics device, by calling \code{igraph.plot}.
-#' 
+#'
 #' The \code{export_pajek} function can be used to export the graph and its
 #' cohesive blocks in Pajek format. It can either export a single Pajek project
 #' file with all the information, or a set of files, depending on its
@@ -81,13 +81,13 @@
 #' \sQuote{basename_hierarchy.net} for the hierarchy graph; (3)
 #' \sQuote{basename_block_x.net} for each cohesive block, where \sQuote{x} is
 #' the number of the block, starting with one.
-#' 
+#'
 #' \code{max_cohesion} returns the maximal cohesion of each vertex, i.e. the
 #' cohesion of the most cohesive block of the vertex.
-#' 
+#'
 #' The generic function \code{summary} works on \code{cohesiveBlocks} objects
 #' and it prints a one line summary to the terminal.
-#' 
+#'
 #' The generic function \code{print} is also defined on \code{cohesiveBlocks}
 #' objects and it is invoked automatically if the name of the
 #' \code{cohesiveBlocks} object is typed in. It produces an output like this:
@@ -104,10 +104,10 @@
 #' enough and shows the vertices in the blocks, ordered by vertex ids.
 #' \sQuote{o} means that the vertex is included, a dot means that it is not,
 #' and the vertices are shown in groups of ten.
-#' 
+#'
 #' The generic function \code{plot} plots the graph, showing one or more
 #' cohesive blocks in it.
-#' 
+#'
 #' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
 #' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
@@ -115,7 +115,7 @@
 #' @param graph For \code{cohesive_blocks} a graph object of class
 #' \code{igraph}. It must be undirected and simple. (See
 #' \code{\link{is_simple}}.)
-#' 
+#'
 #' For \code{graphs_from_cohesive_blocks} and \code{export_pajek} the same graph must be
 #' supplied whose cohesive block structure is given in the \code{blocks}
 #' argument.
@@ -125,15 +125,15 @@
 #' @param blocks,x,object A \code{cohesiveBlocks} object, created with the
 #' \code{cohesive_blocks} function.
 #' @param file Defines the file (or connection) the Pajek file is written to.
-#' 
+#'
 #' If the \code{project.file} argument is \code{TRUE}, then it can be a
 #' filename (with extension), a file object, or in general any king of
 #' connection object. The file/connection will be opened if it wasn't already.
-#' 
+#'
 #' If the \code{project.file} argument is \code{FALSE}, then several files are
 #' created and \code{file} must be a character scalar containing the base name
 #' of the files, without extension. (But it can contain the path to the files.)
-#' 
+#'
 #' See also details below.
 #' @param project.file Logical scalar, whether to create a single Pajek project
 #' file containing all the data, or to create separated files for each item.
@@ -158,30 +158,30 @@
 #' @param \dots Additional arguments. \code{plot_hierarchy} and \code{plot} pass
 #' them to \code{plot.igraph}.  \code{print} and \code{summary} ignore them.
 #' @return \code{cohesive_blocks} returns a \code{cohesiveBlocks} object.
-#' 
+#'
 #' \code{blocks} returns a list of numeric vectors, containing vertex ids.
-#' 
+#'
 #' \code{graphs_from_cohesive_blocks} returns a list of igraph graphs, corresponding to the
 #' cohesive blocks.
-#' 
+#'
 #' \code{cohesion} returns a numeric vector, the cohesion of each block.
-#' 
+#'
 #' \code{hierarchy} returns an igraph graph, the representation of the cohesive
 #' block hierarchy.
-#' 
+#'
 #' \code{parent} returns a numeric vector giving the parent block of each
 #' cohesive block, in the block hierarchy. The block at the root of the
 #' hierarchy has no parent and \code{0} is returned for it.
-#' 
+#'
 #' \code{plot_hierarchy}, \code{plot} and \code{export_pajek} return \code{NULL},
 #' invisibly.
-#' 
+#'
 #' \code{max_cohesion} returns a numeric vector with one entry for each vertex,
 #' giving the cohesion of its most cohesive block.
-#' 
+#'
 #' \code{print} and \code{summary} return the \code{cohesiveBlocks} object
 #' itself, invisibly.
-#' 
+#'
 #' \code{length} returns a numeric scalar, the number of blocks.
 #' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
 #' implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
@@ -193,29 +193,29 @@
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## The graph from the Moody-White paper
 #' mw <- graph_from_literal(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
 #'                 5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
 #'                 10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
 #'                 17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
 #'                 21-22:23, 22-23)
-#' 
+#'
 #' mwBlocks <- cohesive_blocks(mw)
-#' 
+#'
 #' # Inspect block membership and cohesion
 #' mwBlocks
 #' blocks(mwBlocks)
 #' cohesion(mwBlocks)
-#' 
+#'
 #' # Save results in a Pajek file
 #' \dontrun{
 #' export_pajek(mwBlocks, mw, file="/tmp/mwBlocks.paj")
 #' }
-#' 
+#'
 #' # Plot the results
 #' plot(mwBlocks, mw)
-#' 
+#'
 #' ## The science camp network
 #' camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
 #'                   Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
@@ -231,11 +231,11 @@
 #'                   John    - Gery:Russ:Michael)
 #' campBlocks <- cohesive_blocks(camp)
 #' campBlocks
-#' 
+#'
 #' plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
 #'      vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
 #'      mark.border=1, colbar=c(NA, NA,"cyan","orange") )
-#' 
+#'
 cohesive_blocks <- function(graph, labels=TRUE) {
 
   # Argument checks
@@ -259,7 +259,7 @@ cohesive_blocks <- function(graph, labels=TRUE) {
 #' @rdname cohesive_blocks
 #' @method length cohesiveBlocks
 #' @export
- 
+
 length.cohesiveBlocks <- function(x) {
   length(x$blocks)
 }
@@ -318,7 +318,7 @@ print.cohesiveBlocks <- function(x, ...) {
 
   cs <- 3 + 2 + nchar(length(x)) +
     max(distances(hierarchy(x), mode="out", v=1)) * 3
-  
+
   .plot <- function(b, ind="") {
     if (b!=1) {
       he <- format(paste(sep="", ind, "'- B-", b), width=cs)
@@ -347,7 +347,7 @@ print.cohesiveBlocks <- function(x, ...) {
     sapply(wc, .plot, ind=ind)
   }
   if (length(x) >0) .plot(1) else cat("No cohesive blocks found.")
-  
+
   invisible(x)
 }
 
@@ -366,7 +366,7 @@ summary.cohesiveBlocks <- function(object, ...) {
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
- 
+
 plot.cohesiveBlocks <- function(x, y,
                                 colbar=rainbow(max(cohesion(x))+1),
                                 col=colbar[max_cohesion(x)+1],
@@ -412,10 +412,10 @@ exportPajek.cohesiveblocks.pf <- function(blocks, graph, file) {
     thisb <- rep(0, vcount(graph))
     thisb[ myb[[b]] ] <- 1
     cat(file=file, sep="", "\r\n*Partition block_", b, ".clu\r\n",
-        "*Vertices ", vcount(graph), "\r\n   ")    
+        "*Vertices ", vcount(graph), "\r\n   ")
     cat(thisb, sep="\r\n   ", file=file)
   }
-  
+
   if (closeit) {
     close(file)
   }
@@ -439,7 +439,7 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
     cat(file=paste(sep="", file, "_block_", b, ".clu"), sep="\r\n",
         paste("*Vertices", vcount(graph)), thisb)
   }
-  
+
   invisible(NULL)
 }
 
@@ -448,7 +448,7 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 
 export_pajek <- function(blocks, graph, file,
                         project.file=TRUE) {
-  
+
   if (!project.file && !is.character(file)) {
     stop(paste("`file' must be a filename (without extension) when writing",
                "to separate files"))
@@ -501,7 +501,7 @@ max_cohesion <- function(blocks) {
 ## #########################################################
 
 ## Cohesive block structure:
-## B-1        c 1, n 34    
+## B-1        c 1, n 34
 ## '- B-2     c 2, n 28    oooo...ooo ..oooo.ooo oooooooooo oooo
 ##    '- B-4  c 4, n  5    oooo...o.. .......... .......... ....
 ##    '- B-5  c 3, n  7    ooo.....o. .......... .......... o.oo
@@ -559,30 +559,30 @@ max_cohesion <- function(blocks) {
 ## ##########################################################
 
 ## Cohesive block structure:
-## B-1        c. 1, n. 34    
-## |- B-2     c. 2, n. 28  [ 1] oooo...ooo ..oooo.ooo 
+## B-1        c. 1, n. 34
+## |- B-2     c. 2, n. 28  [ 1] oooo...ooo ..oooo.ooo
 ## |  |                    [21] oooooooooo oooo
-## |  |- B-4  c. 4, n.  5  [ 1] oooo...o.. .......... 
+## |  |- B-4  c. 4, n.  5  [ 1] oooo...o.. ..........
 ## |  |                    [21] .......... ....
-## |  |- B-5  c. 3, n.  7  [ 1] ooo.....o. .......... 
+## |  |- B-5  c. 3, n.  7  [ 1] ooo.....o. ..........
 ## |  |                    [21] .......... o.oo
-## |  |- B-7  c. 4, n.  5  [ 1] oooo...... ...o...... 
+## |  |- B-7  c. 4, n.  5  [ 1] oooo...... ...o......
 ## |  |                    [21] .......... ....
-## |  |- B-8  c. 3, n. 10  [ 1] ..o....... .......... 
+## |  |- B-8  c. 3, n. 10  [ 1] ..o....... ..........
 ## |                       [21] ...ooo.ooo .ooo
-## '- B-3     c. 2, n.  6  [ 1] o...ooo... o.....o... 
+## '- B-3     c. 2, n.  6  [ 1] o...ooo... o.....o...
 ##    |                    [21] .......... ....
-##    '- B-6  c. 3, n.  5  [ 1] o...ooo... o......... 
+##    '- B-6  c. 3, n.  5  [ 1] o...ooo... o.........
 ##                         [21] .......... ....
 
 ## Cohesive block structure:
-## B-1          c. 1, n. 23  [ 1] oooooooooo oooooooooo 
+## B-1          c. 1, n. 23  [ 1] oooooooooo oooooooooo
 ## |                         [21] ooo
-## |- B-2       c. 2, n. 14  [ 1] oooooooo.. .o......oo 
+## |- B-2       c. 2, n. 14  [ 1] oooooooo.. .o......oo
 ## |  |                      [21] ooo
-## |  '- B-4    c. 5, n.  7  [ 1] ooooooo... .......... 
+## |  '- B-4    c. 5, n.  7  [ 1] ooooooo... ..........
 ## |                         [21] ...
-## '- B-3       c. 2, n. 10  [ 1] ......o.oo o.oooooo.. 
+## '- B-3       c. 2, n. 10  [ 1] ......o.oo o.oooooo..
 ##    |                      [21] ...
 ##    '- B-5    c. 3, n.  4  [ 1] ......o.oo o.........
 ##                           [21] ...

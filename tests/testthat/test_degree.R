@@ -3,7 +3,7 @@ context("degree")
 
 test_that("degree works", {
   library(igraph)
-  
+
   g <- sample_gnp(100, 1/100)
   d <- degree(g)
   el <- as_edgelist(g)

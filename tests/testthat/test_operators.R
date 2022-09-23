@@ -43,7 +43,7 @@ test_that("operators work", {
   expect_that(vcount(gc), equals(11))
   expect_that(ecount(gc), equals(60))
   expect_that(diameter(gc), equals(2))
-  
+
 })
 
 test_that("Union of directed named graphs", {
@@ -91,4 +91,3 @@ test_that("t() is aliased to edge reversal for graphs", {
   expect_that(vcount(t(g)), equals(vcount(g)))
   expect_that(get.edgelist(t(g)), equals(get.edgelist(g)[,c(2,1)]))
 })
-

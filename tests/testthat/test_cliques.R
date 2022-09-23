@@ -12,7 +12,7 @@ test_that("cliques works", {
 
   g <- sample_gnp(100, 0.3)
   expect_that(clique_num(g), equals(6))
-  
+
   cl <- sapply(cliques(g, min=6), check.clique, graph=g)
   lcl <- sapply(largest_cliques(g), check.clique, graph=g)
   expect_that(cl, equals(lcl))

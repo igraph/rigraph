@@ -21,7 +21,7 @@ test_that("betweenness works for kite graph", {
                                     names=c("Heather", "Fernando",
                                       "Garth", "Ike", "Diane", "Andre",
                                       "Beverly", "Carol", "Ed", "Jane"))))
-  
+
   bet2 <- structure(betweenness(kite, normalized=TRUE), names=V(kite)$name)
   bet2 <- round(sort(bet2, decreasing=TRUE), 3)
   expect_that(bet2, equals(bet))
@@ -34,17 +34,17 @@ test_that("weighted betweenness works", {
                       6,9,7,20,9,10,9,20,10,19,
                       11,12,11,20,12,15,13,15,
                       14,18,14,16,14,17,15,16,17,18)+1, dir=FALSE )
-  
-  E(nontriv)$weight <- c(0.5249, 1, 0.1934, 0.6274, 0.5249, 
-                         0.0029, 0.3831, 0.05, 0.6274, 0.3831, 
-                         0.5249, 0.0587, 0.0579, 0.0562, 0.0562, 
-                         0.1934, 0.6274, 0.6274, 0.6274, 0.0418, 
-                         0.6274, 0.3511, 0.3511, 0.1486, 1, 1, 
+
+  E(nontriv)$weight <- c(0.5249, 1, 0.1934, 0.6274, 0.5249,
+                         0.0029, 0.3831, 0.05, 0.6274, 0.3831,
+                         0.5249, 0.0587, 0.0579, 0.0562, 0.0562,
+                         0.1934, 0.6274, 0.6274, 0.6274, 0.0418,
+                         0.6274, 0.3511, 0.3511, 0.1486, 1, 1,
                          0.0711, 0.2409)
-  
+
   nontrivRes <- c(20,0,0,0,0,19,80,85,32,0,10,
                   75,70,0,36,81,60,0,19,19,86)
-  
+
   bet <- betweenness(nontriv)
   expect_that(bet, equals(nontrivRes))
 })
@@ -77,7 +77,7 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
   from <- c(1, 2, 3, 3, 3, 4, 6, 7, 2, 9, 5, 7, 9, 9, 5, 8)
   to <- c(4, 3, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
   edges <- cbind(from, to)
-  edges.dists <- c(1.9617537, 0.9060834, 2.2165446, 1.6251956,  
+  edges.dists <- c(1.9617537, 0.9060834, 2.2165446, 1.6251956,
 	               2.4473929, 0.5913490, 8.7093236, 2.8387330,
 	               6.1225042, 20.7217776, 6.8027218, 16.3147479,
 	               5.2605598, 6.6816853, 4.9482123, 1.8989790)
@@ -87,4 +87,3 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
 
   expect_that(result[1:5], equals(c('1'=0, '2'=44, '3'=71, '4'=36.5, '6'=44)))
 })
-

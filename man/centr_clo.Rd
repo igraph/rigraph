@@ -10,7 +10,7 @@ centr_clo(graph, mode = c("out", "in", "all", "total"), normalized = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{mode}{This is the same as the \code{mode} argument of 
+\item{mode}{This is the same as the \code{mode} argument of
 \code{closeness}.}
 
 \item{normalized}{Logical scalar. Whether to normalize the graph level

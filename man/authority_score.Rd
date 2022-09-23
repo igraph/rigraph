@@ -30,7 +30,7 @@ A named list with members:
   \item{value}{The corresponding eigenvalue of the calculated
     principal eigenvector.}
   \item{options}{Some information about the ARPACK computation, it has
-    the same members as the \code{options} member returned 
+    the same members as the \code{options} member returned
     by \code{\link{arpack}}, see that for documentation.}
 }
 \description{

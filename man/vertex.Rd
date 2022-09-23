@@ -26,7 +26,7 @@ vertices to/from graphs.
 
 When adding vertices via \code{+}, all unnamed arguments are interpreted
 as vertex names of the new vertices. Named arguments are interpreted as
-vertex attributes for the new vertices. 
+vertex attributes for the new vertices.
 
 When deleting vertices via \code{-}, all arguments of \code{vertex} (or
 \code{vertices}) are concatenated via \code{c()} and passed to

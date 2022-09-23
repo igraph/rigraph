@@ -171,7 +171,7 @@ ewidth <- round(E(cg$Xt)$weight,2)
 op <- par(mfrow=c(1,2))
 plot(g, vertex.color = col[cg$groups], vertex.size = 20,
 		vertex.label = NA, layout = layout)
-plot(cg$Xt, edge.width = ewidth, edge.label = ewidth, 
+plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
 	vertex.label=NA, layout = layout_with_kk)
 par(op)
@@ -213,7 +213,7 @@ vsize <- sqrt(as.vector(table(cg$groups)))
 op <- par(mfrow=c(1,2))
 plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
                 vertex.label=NA)
-plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize), 
+plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
                 vertex.color=col[com.cg],vertex.label=NA)
 par(op)
 

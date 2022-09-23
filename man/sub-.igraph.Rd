@@ -82,7 +82,7 @@ graph[c(1,3,5),]}
   \item For weighted graphs, the \code{[} operator returns the edge
     weights. For non-esistent edges zero weights are returned. Other
     edge attributes can be queried as well, by giving the \code{attr}
-    argument. 
+    argument.
   \item Querying edge ids instead of the existance of edges or edge
     attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
     returns the id of the edge between vertices 1 and 2, or zero if

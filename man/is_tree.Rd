@@ -31,7 +31,7 @@ possible root vertex if the graph is a tree.
 \details{
 An undirected graph is a tree if it is connected and has no cycles.
 In the directed case, a possible additional requirement is that all edges
-are oriented away from a root (out-tree or arborescence) or all edges are 
+are oriented away from a root (out-tree or arborescence) or all edges are
 oriented towards a root (in-tree or anti-arborescence). This test can be
 controlled using the mode parameter.
 

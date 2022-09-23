@@ -11,7 +11,7 @@ test_that("diameter works", {
   }
 
 #### Undirected
-  
+
   g <- gc(sample_gnp(30, 3/30))
   sp <- distances(g)
   expect_that(max(sp), equals(diameter(g)))

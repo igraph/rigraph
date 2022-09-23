@@ -15,7 +15,7 @@
 
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 
+## Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 ## 02110-1301 USA
 
 # Indexing of igraph graphs.
@@ -82,7 +82,7 @@
 #'   \item For weighted graphs, the \code{[} operator returns the edge
 #'     weights. For non-esistent edges zero weights are returned. Other
 #'     edge attributes can be queried as well, by giving the \code{attr}
-#'     argument. 
+#'     argument.
 #'   \item Querying edge ids instead of the existance of edges or edge
 #'     attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
 #'     returns the id of the edge between vertices 1 and 2, or zero if
@@ -122,7 +122,7 @@
 #' Of course, the indexing operators support vertex names,
 #' so instead of a numeric vertex id a vertex can also be given to
 #' \sQuote{\code{[}} and \sQuote{\code{[[}}.
-#' 
+#'
 #' @param x The graph.
 #' @param i Index. Vertex ids or names or logical vectors. See details
 #'   below.
@@ -149,7 +149,7 @@
 #' @return A scalar or matrix. See details below.
 #'
 #' @family structural queries
-#' 
+#'
 #' @method [ igraph
 #' @export
 
@@ -182,7 +182,7 @@
   }
 
   ##################################################################
-  
+
   if (!missing(from)) {
     res <- get.edge.ids(x, rbind(from, to), error=FALSE)
     if (edges) {
@@ -253,7 +253,7 @@
 #'
 #' Vertex names are also supported, so instead of a numeric vertex id a
 #' vertex can also be given to \sQuote{\code{[}} and \sQuote{\code{[[}}.
-#' 
+#'
 #' @param x The graph.
 #' @param i Index, integer, character or logical, see details below.
 #' @param j Index, integer, character or logical, see details below.
@@ -321,7 +321,7 @@
         other <- ifelse(el[,1]==from, el[,2], el[,1])
         ee[[yy]][other %in% j]
       })
-      
+
     }
   }
 }
@@ -356,7 +356,7 @@ length.igraph <- function(x) {
   if (is.null(attr) &&
       (!is.null(value) && !is.numeric(value) && !is.logical(value))) {
     stop("New value should be NULL, numeric or logical")
-  }  
+  }
   if (is.null(attr) && !is.null(value) && length(value) != 1) {
     stop("Logical or numeric value must be of length 1")
   }
@@ -374,7 +374,7 @@ length.igraph <- function(x) {
 
   ##################################################################
 
-  if (!missing(from)) {    
+  if (!missing(from)) {
     if (is.null(value) ||
         (is.logical(value) && !value) ||
         (is.null(attr) && is.numeric(value) && value==0)) {
@@ -430,7 +430,7 @@ length.igraph <- function(x) {
         toupdate <- unlist(exe)
         x <- set_edge_attr(x, attr, toupdate, value)
       }
-    }    
+    }
   }
   x
 }

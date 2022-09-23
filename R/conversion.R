@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -28,8 +28,8 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
 
   type <- igraph.match.arg(type)
   type <- switch(type, "upper"=0, "lower"=1, "both"=2)
-  
-  if (edges || is.null(attr)) {    
+
+  if (edges || is.null(attr)) {
     on.exit( .Call(C_R_igraph_finalizer) )
     res <- .Call(C_R_igraph_get_adjacency, graph, as.numeric(type),
                  as.logical(edges))
@@ -60,13 +60,13 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
         for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ min(e), max(e) ] <- edge_attr(graph, attr, i)
-        }        
+        }
       } else if (type==1) {
         ## lower
         for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
           res[ max(e), min(e) ] <- edge_attr(graph, attr, i)
-        }        
+        }
       } else if (type==2) {
         ## both
         for (i in seq(length.out=ecount(graph))) {
@@ -83,8 +83,8 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
   if (names && "name" %in% vertex_attr_names(graph)) {
     colnames(res) <- rownames(res) <- V(graph)$name
   }
-  
-  res  
+
+  res
 }
 
 get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
@@ -97,7 +97,7 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
   type <- igraph.match.arg(type)
 
   vc <- vcount(graph)
-  
+
   el <- as_edgelist(graph, names=FALSE)
   use.last.ij <- FALSE
 
@@ -145,15 +145,15 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
 }
 
 #' Convert a graph to an adjacency matrix
-#' 
+#'
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an adjacency matrix.
-#' 
+#'
 #' \code{as_adjacency_matrix} returns the adjacency matrix of a graph, a
 #' regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
 #' defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 #' \code{TRUE}.
-#' 
+#'
 #' @aliases get.adjacency
 #' @param graph The graph to convert.
 #' @param type Gives how to create the adjacency matrix for undirected graphs.
@@ -167,7 +167,7 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
 #' in the adjacency matrix. If the graph has multiple edges, the edge attribute
 #' of an arbitrarily chosen edge (for the multiple edges) is included. This
 #' argument is ignored if \code{edges} is \code{TRUE}.
-#' 
+#'
 #' Note that this works only for certain attribute types. If the \code{sparse}
 #' argumen is \code{TRUE}, then the attribute must be either logical or
 #' numeric. If the \code{sparse} argument is \code{FALSE}, then character is
@@ -186,7 +186,7 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
 #'
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
 #' @examples
-#' 
+#'
 #' g <- sample_gnp(10, 2/10)
 #' as_adjacency_matrix(g)
 #' V(g)$name <- letters[1:vcount(g)]
@@ -196,7 +196,7 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
 #' @export
 
 as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
-                                attr=NULL, edges=FALSE, names=TRUE, 
+                                attr=NULL, edges=FALSE, names=TRUE,
                                 sparse=igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -210,7 +210,7 @@ as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
     get.adjacency.dense(graph, type=type, attr=attr, edges=edges, names=names)
   } else {
     get.adjacency.sparse(graph, type=type, attr=attr, edges=edges, names=names)
-  }  
+  }
 }
 
 #' @export
@@ -219,12 +219,12 @@ as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
 as_adj <- as_adjacency_matrix
 
 #' Convert a graph to an edge list
-#' 
+#'
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an edge list.
-#' 
+#'
 #' \code{as_edgelist} returns the list of edges in a graph.
-#' 
+#'
 #' @aliases get.edgelist
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
@@ -234,13 +234,13 @@ as_adj <- as_adjacency_matrix
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnp(10, 2/10)
 #' as_edgelist(g)
 #'
 #' V(g)$name <- LETTERS[seq_len(gorder(g))]
 #' as_edgelist(g)
-#' 
+#'
 #' @export
 
 as_edgelist <- function(graph, names=TRUE) {
@@ -261,11 +261,11 @@ as_edgelist <- function(graph, names=TRUE) {
 
 
 #' Convert between directed and undirected graphs
-#' 
+#'
 #' \code{as.directed} converts an undirected graph to directed,
 #' \code{as.undirected} does the opposite, it converts a directed graph to
 #' undirected.
-#' 
+#'
 #' Conversion algorithms for \code{as.directed}: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
 #' arbitrarily directed edge is created for each undirected edge, but the
@@ -284,7 +284,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #' Note that the graph may include cycles of length 1 if the original
 #' graph contained loop edges.}
 #' }
-#' 
+#'
 #' Conversion algorithms for \code{as.undirected}: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
 #' is created for each directed one, this version might create graphs with
@@ -294,7 +294,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #' undirected edge will be created for each pair of mutual edges. Non-mutual
 #' edges are ignored. This mode might create multiple edges if there are more
 #' than one mutual edge pairs between the same pair of vertices.  } }
-#' 
+#'
 #' @aliases as.directed as.undirected
 #' @param graph The graph to convert.
 #' @param mode Character constant, defines the conversion algorithm. For
@@ -308,12 +308,12 @@ as_edgelist <- function(graph, names=TRUE) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' as.directed(g, "mutual")
 #' g2 <- make_star(10)
 #' as.undirected(g)
-#' 
+#'
 #' # Combining edge attributes
 #' g3 <- make_ring(10, directed=TRUE, mutual=TRUE)
 #' E(g3)$weight <- seq_len(ecount(g3))
@@ -325,7 +325,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #'   plot( g3, layout=layout_in_circle, edge.label=E(g3)$weight)
 #'   plot(ug3, layout=layout_in_circle, edge.label=E(ug3)$weight)
 #' }
-#' 
+#'
 #' g4 <- graph(c(1,2, 3,2,3,4,3,4, 5,4,5,4,
 #'               6,7, 7,6,7,8,7,8, 8,7,8,9,8,9,
 #'               9,8,9,8,9,9, 10,10,10,10))
@@ -333,7 +333,7 @@ as_edgelist <- function(graph, names=TRUE) {
 #' ug4 <- as.undirected(g4, mode="mutual",
 #'               edge.attr.comb=list(weight=length))
 #' print(ug4, e=TRUE)
-#' 
+#'
 as.directed <- as.directed
 
 #' @rdname as.directed
@@ -359,18 +359,18 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 
 
 #' Adjacency lists
-#' 
+#'
 #' Create adjacency lists from a graph, either for adjacent edges or for
 #' neighboring vertices
-#' 
+#'
 #' \code{as_adj_list} returns a list of numeric vectors, which include the ids
 #' of neighbor vertices (according to the \code{mode} argument) of all
 #' vertices.
-#' 
+#'
 #' \code{as_adj_edge_list} returns a list of numeric vectors, which include the
 #' ids of adjacent edgs (according to the \code{mode} argument) of all
 #' vertices.
-#' 
+#'
 #' @aliases as_adj_list get.adjedgelist
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
@@ -388,11 +388,11 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
-#' 
+#'
 as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -429,7 +429,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 }
 
 #' Convert graphNEL objects from the graph package to igraph
-#' 
+#'
 #' The graphNEL class is defined in the \code{graph} package, it is another
 #' way to represent graphs. \code{graph_from_graphnel} takes a graphNEL
 #' graph and converts it to an igraph graph. It handles all
@@ -437,11 +437,11 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' attribute called \sQuote{\code{name}} it will be used as igraph vertex
 #' attribute \sQuote{\code{name}} and the graphNEL vertex names will be
 #' ignored.
-#' 
+#'
 #' Because graphNEL graphs poorly support multiple edges, the edge
 #' attributes of the multiple edges are lost: they are all replaced by the
 #' attributes of the first of the multiple edges.
-#' 
+#'
 #' @aliases igraph.from.graphNEL
 #' @param graphNEL The graphNEL graph.
 #' @param name Logical scalar, whether to add graphNEL vertex names as an
@@ -466,7 +466,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' GNEL <- as_graphnel(g)
 #' g2 <- graph_from_graphnel(GNEL)
 #' g2
-#' 
+#'
 #' ## Directed
 #' g3 <- make_star(10, mode="in")
 #' V(g3)$name <- letters[1:10]
@@ -482,7 +482,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
   if (!inherits(graphNEL, "graphNEL")) {
     stop("Not a graphNEL graph")
   }
-  
+
   al <- lapply(graph::edgeL(graphNEL), "[[", "edges")
   if (graph::edgemode(graphNEL)=="undirected") {
     al <- mapply(SIMPLIFY=FALSE, seq_along(al), al, FUN=function(n, l) {
@@ -501,7 +501,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
   for (n in g.n) {
     g <- set_graph_attr(g, n, graphNEL@graphData[[n]])
   }
-  
+
   ## Vertex attributes
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
@@ -522,22 +522,22 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
       g <- set_edge_attr(g, n, value=val)
     }
   }
-  
-  g 
+
+  g
 }
 
 #' Convert igraph graphs to graphNEL objects from the graph package
-#' 
+#'
 #' The graphNEL class is defined in the \code{graph} package, it is another
 #' way to represent graphs. These functions are provided to convert between
 #' the igraph and the graphNEL objects.
-#' 
+#'
 #' \code{as_graphnel} converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{\code{name}}, then it will be used to assign
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 #' will be used for this purpose.
-#' 
+#'
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
 #' @return \code{as_graphnel} returns a graphNEL graph object.
@@ -553,7 +553,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' GNEL <- as_graphnel(g)
 #' g2 <- graph_from_graphnel(GNEL)
 #' g2
-#' 
+#'
 #' ## Directed
 #' g3 <- make_star(10, mode="in")
 #' V(g3)$name <- letters[1:10]
@@ -568,15 +568,15 @@ as_graphnel <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not an igraph graph")
   }
-  
+
   if ("name" %in% vertex_attr_names(graph) &&
       is.character(V(graph)$name)) {
     name <- V(graph)$name
   } else {
-    name <- as.character(seq(vcount(graph)))    
+    name <- as.character(seq(vcount(graph)))
   }
 
-  edgemode <- if (is_directed(graph)) "directed" else "undirected"  
+  edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
   if ("weight" %in% edge_attr_names(graph) &&
       is.numeric(E(graph)$weight)) {
@@ -590,8 +590,8 @@ as_graphnel <- function(graph) {
   } else {
     al <- as_adj_list(graph, "out")
     al <- lapply(al, function(x) list(edges=as.vector(x)))
-  }  
-  
+  }
+
   names(al) <- name
   res <- graph::graphNEL(nodes=name, edgeL=al, edgemode=edgemode)
 
@@ -609,7 +609,7 @@ as_graphnel <- function(graph) {
 
   ## Add vertex attributes (other than 'name', that is already
   ## added as vertex names)
-  
+
   v.n <- vertex_attr_names(graph)
   v.n <- v.n[ v.n != "name" ]
   for (n in v.n) {
@@ -618,7 +618,7 @@ as_graphnel <- function(graph) {
   }
 
   ## Add edge attributes (other than 'weight')
-  
+
   e.n <- edge_attr_names(graph)
   e.n <- e.n[ e.n != "weight" ]
   if (length(e.n) > 0) {
@@ -633,7 +633,7 @@ as_graphnel <- function(graph) {
                                       SIMPLIFY=FALSE)
     }
   }
-  
+
   res
 }
 
@@ -652,7 +652,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
       colnames(res$res) <- res$col_ids+1
     }
     res$res
-    
+
   } else {
 
     attr <- as.character(attr)
@@ -662,13 +662,13 @@ get.incidence.dense <- function(graph, types, names, attr) {
 
     vc <- vcount(graph)
     n1 <- sum(!types)
-    n2 <- vc-n1    
+    n2 <- vc-n1
     res <- matrix(0, n1, n2)
 
     recode <- numeric(vc)
     recode[!types] <- seq_len(n1)
     recode[types]  <- seq_len(n2)
-    
+
     for (i in seq(length.out=ecount(graph))) {
       eo <- ends(graph, i, names = FALSE)
       e <- recode[eo]
@@ -723,7 +723,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
       stop("no such edge attribute")
     }
     value <- edge_attr(graph, name=attr)
-  } else { 
+  } else {
     value <- rep(1, nrow(el))
   }
 
@@ -742,11 +742,11 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 
 
 #' Incidence matrix of a bipartite graph
-#' 
+#'
 #' This function can return a sparse or dense incidence matrix of a bipartite
 #' network. The incidence matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n}
 #' and \eqn{m} are the number of vertices of the two kinds.
-#' 
+#'
 #' Bipartite graphs have a \code{type} vertex attribute in igraph, this is
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
@@ -775,19 +775,19 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_bipartite_graph( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
 #' as_incidence_matrix(g)
-#' 
+#'
 as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
                           names=TRUE, sparse=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   types <- handle_vertex_type_arg(types, graph)
-  
+
   names <- as.logical(names)
   sparse <- as.logical(sparse)
-  
+
   if (sparse) {
     get.incidence.sparse(graph, types=types, names=names, attr=attr)
   } else {
@@ -820,7 +820,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
   }
-  
+
   if (what=="both") {
     list(vertices=ver, edges=edg)
   } else if (what=="vertices") {
@@ -832,18 +832,18 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 
 
 #' Create graphs from adjacency lists
-#' 
+#'
 #' An adjacency list is a list of numeric vectors, containing the neighbor
 #' vertices for each vertex. This function creates an igraph graph object from
 #' such a list.
-#' 
+#'
 #' Adjacency lists are handy if you intend to do many (small) modifications to
 #' a graph. In this case adjacency lists are more efficient than igraph graphs.
-#' 
+#'
 #' The idea is that you convert your graph to an adjacency list by
 #' \code{\link{as_adj_list}}, do your modifications to the graphs and finally
 #' create again an igraph graph by calling \code{graph_from_adj_list}.
-#' 
+#'
 #' @aliases graph.adjlist graph_from_adj_list
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #' throughout all vectors in the list must be less than the number of vectors
@@ -858,20 +858,20 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' undirected \code{{A,B}} edge \code{graph_from_adj_list} expects \code{A}
 #' included in the neighbors of \code{B} and \code{B} to be included in the
 #' neighbors of \code{A}.
-#' 
+#'
 #' This argument is ignored if \code{mode} is \code{out} or \code{in}.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_edgelist}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Directed
 #' g <- make_ring(10, directed=TRUE)
 #' al <- as_adj_list(g, mode="out")
 #' g2 <- graph_from_adj_list(al)
 #' graph.isomorphic(g, g2)
-#' 
+#'
 #' ## Undirected
 #' g <- make_ring(10)
 #' al <- as_adj_list(g)
@@ -963,7 +963,7 @@ as_long_data_frame <- function(graph) {
 #' g <- make_graph("zachary")
 #' as.matrix(g, "adjacency")
 #' as.matrix(g, "edgelist")
-#' # use edge attribute "weight" 
+#' # use edge attribute "weight"
 #' E(g)$weight <- rep(1:10, each=ecount(g))
 #' as.matrix(g, "adjacency", sparse=FALSE, attr="weight")
 #'

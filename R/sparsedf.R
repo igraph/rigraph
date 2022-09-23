@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -25,21 +25,21 @@
 # stores that column more economically.
 
 sdf <- function(..., row.names = NULL, NROW = NULL) {
-  
+
   cols <- list(...)
-  
+
   if (is.null(names(cols)) || any(names(cols) == "") ||
       any(duplicated(names(cols)))) {
     stop("Columns must be have (unique) names")
   }
-  
+
   lens <- sapply(cols, length)
   n1lens <- lens[ lens != 1 ]
-  
+
   if (length(unique(n1lens)) > 1) {
     stop("Columns must be constants or have the same length")
   }
-  
+
   if (length(n1lens) == 0) {
     if (is.null(NROW)) {
       stop("Cannot determine number of rows")
@@ -54,7 +54,7 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 
   class(cols) <- "igraphSDF"
   attr(cols, "row.names") <- row.names
-  
+
   cols
 }
 
@@ -85,7 +85,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
 }
 
 #' @method "[<-" igraphSDF
- 
+
 `[<-.igraphSDF` <- function(x, i, j, value) {
   if (!is.character(j)) {
     stop("The column index must be character")

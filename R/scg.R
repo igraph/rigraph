@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -21,7 +21,7 @@
 
 
 #' Spectral Coarse Graining
-#' 
+#'
 #' Functions to perform the Spectral Coarse Graining (SCG) of matrices and
 #' graphs.
 #'
@@ -31,18 +31,18 @@
 #' their \emph{spectral-related features}, that is features closely related
 #' with the eigenvalues and eigenvectors of a graph matrix (which for now can
 #' be the adjacency, the stochastic, or the Laplacian matrix).
-#' 
+#'
 #' Common examples of such features comprise the first-passage-time of random
 #' walkers on Markovian graphs, thermodynamic properties of lattice models in
 #' statistical physics (e.g. Ising model), and the epidemic threshold of
 #' epidemic network models (SIR and SIS models).
-#' 
+#'
 #' SCG differs from traditional clustering schemes by producing a
 #' \emph{coarse-grained graph} (not just a partition of the vertices),
 #' representative of the original one. As shown in [1], Principal Component
 #' Analysis can be viewed as a particular SCG, called \emph{exact SCG}, where
 #' the matrix to be coarse-grained is the covariance matrix of some data set.
-#' 
+#'
 #' SCG should be of interest to practitioners of various fields dealing with
 #' problems where matrix eigenpairs play an important role, as for instance is
 #' the case of dynamical processes on networks.
@@ -53,11 +53,11 @@
 #' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
 #' Matrix Analysis and Applications}, 2008.
 #' \url{http://people.epfl.ch/david.morton}
-#' 
+#'
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
 #' in Oscillator Networks. \emph{Physical Review Letters}, \bold{100}(17),
 #' 2008.  \url{https://arxiv.org/abs/0708.2055}
-#' 
+#'
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
 #' Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
 #' \url{https://arxiv.org/abs/0706.0812}
@@ -66,13 +66,13 @@
 NULL
 
 #' Stochastic matrix of a graph
-#' 
+#'
 #' Retrieves the stochastic matrix of a graph of class \code{igraph}.
-#' 
+#'
 #' Let \eqn{M} be an \eqn{n \times n}{n x n} adjacency matrix with real
 #' non-negative entries. Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
 #' \dots, \sum_{i}M_{ni})}{D=diag( sum(M[1,i], i), ..., sum(M[n,i], i) )}
-#' 
+#'
 #' The (row) stochastic matrix is defined as \deqn{W = D^{-1}M,}{W = inv(D) M,}
 #' where it is assumed that \eqn{D} is non-singular.  Column stochastic
 #' matrices are defined in a symmetric way.
@@ -90,24 +90,24 @@ NULL
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' library(Matrix)
 #' ## g is a large sparse graph
 #' g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
 #' W <- stochastic_matrix(g, sparse=TRUE)
-#' 
+#'
 #' ## a dense matrix here would probably not fit in the memory
 #' class(W)
-#' 
+#'
 #' ## may not be exactly 1, due to numerical errors
 #' max(abs(rowSums(W))-1)
-#' 
+#'
 stochastic_matrix <- function(graph, column.wise=FALSE,
                            sparse=igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
- 
+
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {
     stop("`column.wise' must be a logical scalar")
@@ -131,15 +131,15 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
   }
 
   res
-} 
+}
 
 
 
 #' SCG Problem Solver
-#' 
+#'
 #' This function solves the Spectral Coarse Graining (SCG) problem; either
 #' exactly, or approximately but faster.
-#' 
+#'
 #' The algorithm \dQuote{optimum} solves exactly the SCG problem for each
 #' eigenvector in \code{V}. The running time of this algorithm is \eqn{O(\max
 #' nt \cdot m^2)}{O(max(nt) m^2)} for the symmetric and laplacian matrix
@@ -147,20 +147,20 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' \dQuote{laplacian}. It is \eqn{O(m^3)} for the stochastic problem. Here
 #' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
-#' 
+#'
 #' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
 #' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
 #' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
-#' 
+#'
 #' Once a minimizing partition (either exact or approximate) has been found for
 #' each eigenvector, the final grouping is worked out as follows: two vertices
 #' are grouped together in the final partition if they are grouped together in
 #' each minimizing partition. In general the size of the final partition is not
 #' known in advance when \code{ncol(V)}>1.
-#' 
+#'
 #' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
 #' linear running time and memory load.
@@ -202,24 +202,24 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
-#' 
+#'
+#'
 #' ## We are not running these examples any more, because they
 #' ## take a long time to run and this is against the CRAN repository
 #' ## policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
-#' 
+#'
 #' \dontrun{
 #' # eigenvectors of a random symmetric matrix
 #' M <- matrix(rexp(10^6), 10^3, 10^3)
 #' M <- (M + t(M))/2
 #' V <- eigen(M, symmetric=TRUE)$vectors[,c(1,2)]
-#' 
+#'
 #' # displays size of the groups in the final partition
 #' gr <- scg_group(V, nt=c(2,3))
 #' col <- rainbow(max(gr))
 #' plot(table(gr), col=col, main="Group size", xlab="group", ylab="size")
-#' 
+#'
 #' ## comparison with the grouping obtained by kmeans
 #' ## for a partition of same size
 #' gr.km <- kmeans(V,centers=max(gr), iter.max=100, nstart=100)$cluster
@@ -235,7 +235,7 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' par(op)
 #' ## kmeans disregards the first eigenvector as it
 #' ## spreads a much smaller range of values than the second one
-#' 
+#'
 #' ### comparing optimal and k-means solutions
 #' ### in the one-dimensional case.
 #' x <- rexp(2000, 2)
@@ -244,7 +244,7 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' scg_eps(cbind(x), gr.true)
 #' scg_eps(cbind(x), gr.km)
 #' }
-#' 
+#'
 scg_group <- function(V, nt,
                          mtype=c("symmetric", "laplacian",
                            "stochastic"),
@@ -255,7 +255,7 @@ scg_group <- function(V, nt,
   V <- as.matrix(structure(as.double(V), dim=dim(V)))
   groups <- as.numeric(nt)
 
-  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1, 
+  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1,
                         "laplacian"=2, "stochastic"=3)
   algo <- switch(igraph.match.arg(algo), "optimum"=1,
                       "interv_km"=2, "interv"=3, "exact_scg"=4)
@@ -273,14 +273,14 @@ scg_group <- function(V, nt,
 
 
 #' Semi-Projectors
-#' 
+#'
 #' A function to compute the \eqn{L} and \eqn{R} semi-projectors for a given
 #' partition of the vertices.
-#' 
+#'
 #' The three types of semi-projectors are defined as follows.  Let
 #' \eqn{\gamma(j)}{gamma(j)} label the group of vertex \eqn{j} in a partition
 #' of all the vertices.
-#' 
+#'
 #' The symmetric semi-projectors are defined as \deqn{L_{\alpha j}=R_{\alpha
 #' j}= }{% L[alpha,j] = R[alpha,j] = 1/sqrt(|alpha|)
 #' delta[alpha,gamma(j)],}\deqn{
@@ -328,7 +328,7 @@ scg_group <- function(V, nt,
 #' \url{http://people.epfl.ch/david.morton}
 #' @export
 #' @examples
-#' 
+#'
 #' library(Matrix)
 #' # compute the semi-projectors and projector for the partition
 #' # provided by a community detection method
@@ -342,14 +342,14 @@ scg_group <- function(V, nt,
 #' #P is an orthogonal projector
 #' isSymmetric(P)
 #' sum( (P %*% P-P)^2 )
-#' 
+#'
 #' ## use L and R to coarse-grain the graph Laplacian
 #' lr <- scg_semi_proj(memb, mtype="laplacian")
 #' L <- laplacian_matrix(g)
 #' Lt <- lr$L %*% L %*% t(lr$R)
 #' ## or better lr$L %*% tcrossprod(L,lr$R)
 #' rowSums(Lt)
-#' 
+#'
 scg_semi_proj <- function(groups,
                                mtype=c("symmetric", "laplacian",
                                  "stochastic"), p=NULL,
@@ -357,7 +357,7 @@ scg_semi_proj <- function(groups,
                                sparse=igraph_opt("sparsematrices")) {
   # Argument checks
   groups <- as.numeric(groups)-1
-  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1, 
+  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1,
   "laplacian"=2, "stochastic"=3)
   if (!is.null(p)) p <- as.numeric(p)
   norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
@@ -372,23 +372,23 @@ scg_semi_proj <- function(groups,
     res$L <- igraph.i.spMatrix(res$L)
     res$R <- igraph.i.spMatrix(res$R)
   }
-                
+
   res
 }
 
 
 
 #' All-in-one Function for the SCG of Matrices and Graphs
-#' 
+#'
 #' This function handles all the steps involved in the Spectral Coarse Graining
 #' (SCG) of some matrices and graphs as described in the reference below.
-#' 
+#'
 #' Please see \link{scg-method} for an introduction.
-#' 
+#'
 #' In the following \eqn{V} is the matrix of eigenvectors for which the SCG is
 #' solved. \eqn{V} is calculated from \code{X}, if it is not given in the
 #' \code{evec} argument.
-#' 
+#'
 #' The algorithm \dQuote{optimum} solves exactly the SCG problem for each
 #' eigenvector in \code{V}. The running time of this algorithm is \eqn{O(\max
 #' nt \cdot m^2)}{O(max(nt) m^2)} for the symmetric and laplacian matrix
@@ -396,24 +396,24 @@ scg_semi_proj <- function(groups,
 #' \dQuote{laplacian}. It is \eqn{O(m^3)} for the stochastic problem. Here
 #' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
-#' 
+#'
 #' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
 #' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
 #' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
-#' 
+#'
 #' Once a minimizing partition (either exact or approximate) has been found for
 #' each eigenvector, the final grouping is worked out as follows: two vertices
 #' are grouped together in the final partition if they are grouped together in
 #' each minimizing partition. In general the size of the final partition is not
 #' known in advance when \code{ncol(V)}>1.
-#' 
+#'
 #' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
 #' linear running time and memory load.
-#' 
+#'
 #' @param X The input graph or square matrix. Can be of class \code{igraph},
 #' \code{matrix} or \code{Matrix}.
 #' @param ev A vector of positive integers giving the indexes of the eigenpairs
@@ -493,34 +493,34 @@ scg_semi_proj <- function(groups,
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
-#' 
+#'
+#'
 #' ## We are not running these examples any more, because they
 #' ## take a long time (~20 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
-#' 
+#'
 #' \dontrun{
 #' # SCG of a toy network
 #' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
 #' cg <- scg(g, 1, 3, algo="exact_scg")
-#' 
+#'
 #' #plot the result
 #' layout <- layout_with_kk(g)
 #' nt <- vcount(cg$Xt)
 #' col <- rainbow(nt)
 #' vsize <- table(cg$groups)
 #' ewidth <- round(E(cg$Xt)$weight,2)
-#' 
+#'
 #' op <- par(mfrow=c(1,2))
 #' plot(g, vertex.color = col[cg$groups], vertex.size = 20,
 #' 		vertex.label = NA, layout = layout)
-#' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth, 
+#' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
 #' 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
 #' 	vertex.label=NA, layout = layout_with_kk)
 #' par(op)
-#' 
+#'
 #' ## SCG of real-world network
 #' library(igraphdata)
 #' data(immuno)
@@ -529,7 +529,7 @@ scg_semi_proj <- function(groups,
 #' interv <- c(100,100,50,25,12,6,3,2,2)
 #' cg <- scg(immuno, ev= n-(1:9), nt=interv, mtype="laplacian",
 #'                         algo="interv", epairs=TRUE)
-#' 
+#'
 #' ## are the eigenvalues well-preserved?
 #' gt <- cg$Xt
 #' nt <- vcount(gt)
@@ -540,31 +540,31 @@ scg_semi_proj <- function(groups,
 #' colnames(res) <- c("interv","lambda_i","lambda_tilde_i")
 #' rownames(res) <- c("N-1","N-2","N-3","N-4","N-5","N-6","N-7","N-8","N-9")
 #' print(res)
-#' 
+#'
 #' ## use SCG to get the communities
 #' com <- scg(laplacian_matrix(immuno), ev=n-c(1,2), nt=2)$groups
 #' col <- rainbow(max(com))
 #' layout <- layout_nicely(immuno)
-#' 
+#'
 #' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
 #'                 vertex.label=NA)
-#' 
+#'
 #' ## display the coarse-grained graph
 #' gt <- simplify(as.undirected(gt))
 #' layout.cg <- layout_with_kk(gt)
 #' com.cg <- scg(laplacian_matrix(gt), nt-c(1,2), 2)$groups
 #' vsize <- sqrt(as.vector(table(cg$groups)))
-#' 
+#'
 #' op <- par(mfrow=c(1,2))
 #' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
 #'                 vertex.label=NA)
-#' plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize), 
+#' plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
 #'                 vertex.color=col[com.cg],vertex.label=NA)
 #' par(op)
-#' 
+#'
 #' }
-#' 
-scg <- function(X, ev, nt, groups=NULL, 
+#'
+scg <- function(X, ev, nt, groups=NULL,
                 mtype=c("symmetric", "laplacian", "stochastic"),
                 algo=c("optimum", "interv_km", "interv",
                   "exact_scg"), norm=c("row", "col"),
@@ -587,7 +587,7 @@ scg.igraph <- function(X, ev, nt, groups=NULL,
                        sparse=igraph_opt("sparsematrices"),
                        output=c("default", "matrix", "graph"), semproj=FALSE,
                        epairs=FALSE, stat.prob=FALSE) {
-  
+
   myscg(graph=X, matrix=NULL, sparsemat=NULL, ev=ev, nt=nt,
         groups=groups, mtype=mtype, algo=algo,
         norm=norm, direction=direction, evec=evec, p=p,
@@ -608,10 +608,10 @@ scg.matrix <- function(X, ev, nt, groups=NULL,
                        sparse=igraph_opt("sparsematrices"),
                        output=c("default", "matrix", "graph"), semproj=FALSE,
                        epairs=FALSE, stat.prob=FALSE) {
-  
+
   myscg(graph=NULL, matrix=X, sparsemat=NULL, ev=ev, nt=nt,
         groups=groups, mtype=mtype, algo=algo,
-        norm=norm, direction=direction, evec=evec, p=p, 
+        norm=norm, direction=direction, evec=evec, p=p,
         use.arpack=use.arpack, maxiter=maxiter, sparse=sparse,
         output=output, semproj=semproj, epairs=epairs,
         stat.prob=stat.prob)
@@ -713,11 +713,11 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 
 
 #' Error of the spectral coarse graining (SCG) approximation
-#' 
+#'
 #' \code{scg_eps} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
 #' \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in \code{V} and \eqn{P} is the
 #' projector corresponding to the \code{mtype} argument.
-#' 
+#'
 #' @aliases scg_eps scgNormEps
 #' @param V A numeric matrix of (eigen)vectors assumed normalized.  The vectors
 #' are to be stored column-wise in \code{V}).
@@ -743,7 +743,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 #' Matrix Analysis and Applications}, 2008.
 #' \url{http://people.epfl.ch/david.morton}
 #' @examples
-#' 
+#'
 #' v <- rexp(20)
 #' km <- kmeans(v,5)
 #' sum(km$withinss)

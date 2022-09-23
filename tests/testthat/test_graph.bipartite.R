@@ -13,7 +13,7 @@ test_that("make_bipartite_graph works", {
   }))
   g2 <- make_bipartite_graph(seq_len(nrow(I)+ncol(I)) > nrow(I), edges)
   I2 <- as_incidence_matrix(g2)
-  
+
   expect_that(I2, is_equivalent_to(I))
 })
 

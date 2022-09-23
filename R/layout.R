@@ -558,7 +558,7 @@ layout.circle <- function(..., params = list()) {
 #' end up calling \code{layout_with_fr} or \code{layout_with_drl}, we do not
 #' forward the weights to these functions and issue a warning about this. You
 #' can use \code{weights = NA} to silence the warning.
-#' 
+#'
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
@@ -593,7 +593,7 @@ layout_nicely <- function(graph, dim=2, ...) {
       return(lay)
     }
   }
-  
+
   if ( all(c("x", "y") %in% vertex_attr_names(graph)) ) {
     if ("z" %in% vertex_attr_names(graph)) {
       cbind(V(graph)$x, V(graph)$y, V(graph)$z)
@@ -616,7 +616,7 @@ layout_nicely <- function(graph, dim=2, ...) {
 
     args$graph <- graph
     args$dim <- dim
-  
+
     if (vcount(graph) < 1000) {
       do.call(layout_with_fr, args)
     } else {

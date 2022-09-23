@@ -72,7 +72,7 @@ D3 <- matrix(0, 5, 5)
 D1[1:3, 1:3] <- 2
 D2[3:5, 3:5] <- 3
 D3[2:5, 2:5] <- 1
-  
+
 g <- simplify(graph_from_adjacency_matrix(D1 + D2 + D3,
       mode="undirected", weighted=TRUE))
 V(g)$color <- "white"

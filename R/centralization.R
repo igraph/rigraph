@@ -4,7 +4,7 @@
 ##   IGraph R package
 ##   Copyright (C) 2015  Gabor Csardi <csardi.gabor@gmail.com>
 ##   334 Harvard street, Cambridge, MA 02139 USA
-##   
+##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
 ##   the Free Software Foundation; either version 2 of the License, or
@@ -14,7 +14,7 @@
 ##   but WITHOUT ANY WARRANTY; without even the implied warranty of
 ##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##   GNU General Public License for more details.
-##   
+##
 ##   You should have received a copy of the GNU General Public License
 ##   along with this program; if not, write to the Free Software
 ##   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -26,30 +26,30 @@
 NULL
 
 #' Centralization of a graph
-#' 
+#'
 #' Centralization is a method for creating a graph level centralization
 #' measure from the centrality scores of the vertices.
-#' 
+#'
 #' Centralization is a general method for calculating a graph-level
 #' centrality score based on node-level centrality measure. The formula for
 #' this is
 #' \deqn{C(G)=\sum_v (\max_w c_w - c_v),}{ C(G)=sum(max(c(w), w) - c(v), v),}
 #' where \eqn{c_v}{c(v)} is the centrality of vertex \eqn{v}.
-#' 
+#'
 #' The graph-level centralization measure can be normalized by dividing by the
 #' maximum theoretical score for a graph with the same number of vertices,
 #' using the same parameters, e.g. directedness, whether we consider loop
 #' edges, etc.
-#' 
+#'
 #' For degree, closeness and betweenness the most centralized structure is
 #' some version of the star graph, in-star, out-star or undirected star.
-#' 
+#'
 #' For eigenvector centrality the most centralized structure is the graph
 #' with a single edge (and potentially many isolates).
-#' 
+#'
 #' \code{centralize} implements general centralization formula to calculate
 #' a graph-level score from vertex-level scores.
-#' 
+#'
 #' @param scores The vertex level centrality scores.
 #' @param theoretical.max Real scalar. The graph-level centralization measure of
 #'   the most centralized graph with the same number of vertices as the graph
@@ -62,11 +62,11 @@ NULL
 #'
 #' @aliases centralization centralize.scores
 #' @family centralization related
-#' 
+#'
 #' @export
 #' @references Freeman, L.C.  (1979).  Centrality in Social Networks I:
 #' Conceptual Clarification. \emph{Social Networks} 1, 215--239.
-#' 
+#'
 #' Wasserman, S., and Faust, K.  (1994).  \emph{Social Network Analysis:
 #' Methods and Applications.} Cambridge University Press.
 #'
@@ -81,7 +81,7 @@ NULL
 #' deg <- degree(g)
 #' tmax <- centr_degree_tmax(g, loops=FALSE)
 #' centralize(deg, tmax)
-#' 
+#'
 #' # The most centralized graph according to eigenvector centrality
 #' g0 <- graph( c(2,1), n=10, dir=FALSE )
 #' g1 <- make_star(10, mode="undirected")
@@ -93,7 +93,7 @@ centralize <- centralize
 #' Centralize a graph according to the degrees of vertices
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph.
 #' @param mode This is the same as the \code{mode} argument of
 #'   \code{degree}.
@@ -111,9 +111,9 @@ centralize <- centralize
 #'
 #' @aliases centralization.degree
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -127,7 +127,7 @@ centr_degree <- centr_degree
 #' Theoretical maximum for degree centralization
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph. It can also be \code{NULL}, if
 #'   \code{nodes}, \code{mode} and \code{loops} are all given.
 #' @param nodes The number of vertices. This is ignored if the graph is given.
@@ -141,9 +141,9 @@ centr_degree <- centr_degree
 #'
 #' @aliases centralization.degree.tmax
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -173,7 +173,7 @@ centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "t
 #' Centralize a graph according to the betweenness of vertices
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
@@ -192,9 +192,9 @@ centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "t
 #'
 #' @aliases centralization.betweenness
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -223,7 +223,7 @@ centr_betw <- function(graph, directed=TRUE, nobigint=TRUE, normalized=TRUE) {
 #' Theoretical maximum for betweenness centralization
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph. It can also be \code{NULL}, if
 #'   \code{nodes} is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
@@ -236,9 +236,9 @@ centr_betw <- function(graph, directed=TRUE, nobigint=TRUE, normalized=TRUE) {
 #'
 #' @aliases centralization.betweenness.tmax
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -251,9 +251,9 @@ centr_betw_tmax <- centr_betw_tmax
 #' Centralize a graph according to the closeness of vertices
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph.
-#' @param mode This is the same as the \code{mode} argument of 
+#' @param mode This is the same as the \code{mode} argument of
 #'   \code{closeness}.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
@@ -267,9 +267,9 @@ centr_betw_tmax <- centr_betw_tmax
 #'
 #' @aliases centralization.closeness
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -283,12 +283,12 @@ centr_clo <- centr_clo
 #' Theoretical maximum for closeness centralization
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph. It can also be \code{NULL}, if
 #'   \code{nodes} is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param mode This is the same as the \code{mode} argument of 
+#' @param mode This is the same as the \code{mode} argument of
 #'   \code{closeness}.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
@@ -296,9 +296,9 @@ centr_clo <- centr_clo
 #'
 #' @aliases centralization.closeness.tmax
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -311,7 +311,7 @@ centr_clo_tmax <- centr_clo_tmax
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
@@ -325,16 +325,16 @@ centr_clo_tmax <- centr_clo_tmax
 #'   \item{vector}{The node-level centrality scores.}
 #'   \item{value}{The corresponding eigenvalue.}
 #'   \item{options}{ARPACK options, see the return value of
-#'     \code{\link{eigen_centrality}} for details.} 
+#'     \code{\link{eigen_centrality}} for details.}
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The same as above, the theoretical maximum
 #'     centralization score for a graph with the same number of vertices.}
 #'
 #' @aliases centralization.evcent
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
@@ -354,7 +354,7 @@ centr_eigen <- centr_eigen
 #' Theoretical maximum for betweenness centralization
 #'
 #' See \code{\link{centralize}} for a summary of graph centralization.
-#' 
+#'
 #' @param graph The input graph. It can also be \code{NULL}, if
 #'   \code{nodes} is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
@@ -369,9 +369,9 @@ centr_eigen <- centr_eigen
 #'
 #' @aliases centralization.evcent.tmax
 #' @family centralization related
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)

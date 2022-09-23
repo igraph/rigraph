@@ -22,7 +22,7 @@ test_that("eigen_centrality works", {
                         "Fernando", "Ed", "Garth", "Heather", "Ike",
                         "Jane"))))
 
-  
+
   ## Eigenvector-centrality, small stress-test
 
   is.principal <- function(M, lambda, eps=1e-12) {

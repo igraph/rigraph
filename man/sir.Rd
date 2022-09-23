@@ -60,7 +60,7 @@ numeric vectors, with equal length: \describe{
     time.}
   \item{NR}{The number of recovered individuals in the population, over
     time.}
-} 
+}
 
 Function \code{time_bins} returns a numeric vector, the middle or the
 boundaries of the time bins, depending on the \code{middle} argument.

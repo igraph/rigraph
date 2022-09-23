@@ -21,4 +21,3 @@ test_that("neighbors prints an error for an empty input vector", {
   expect_error(neighbors(g, numeric()), "No vertex was specified")
 
 })
-

@@ -1620,7 +1620,7 @@ make_bipartite_graph <- function(types, edges, directed=FALSE) {
   types <- as.logical(types)
   edges <- as.numeric(edges)-1
   directed <- as.logical(directed)
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_create_bipartite, types, edges, directed)
   res <- set_vertex_attr(res, "type", value=types)
@@ -1678,15 +1678,15 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 ## -----------------------------------------------------------------
 
 #' Creating a graph from LCF notation
-#' 
+#'
 #' LCF is short for Lederberg-Coxeter-Frucht, it is a concise notation for
 #' 3-regular Hamiltonian graphs. It constists of three parameters, the number
 #' of vertices in the graph, a list of shifts giving additional edges to a
 #' cycle backbone and another integer giving how many times the shifts should
 #' be performed. See \url{http://mathworld.wolfram.com/LCFNotation.html} for
 #' details.
-#' 
-#' 
+#'
+#'
 #' @aliases graph.lcf graph_from_lcf
 #' @param n Integer, the number of vertices in the graph.
 #' @param shifts Integer vector, the shifts.
@@ -1697,7 +1697,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # This is the Franklin graph:
 #' g1 <- graph_from_lcf(12, c(5,-5), 6)
 #' g2 <- make_graph("Franklin")
@@ -1710,7 +1710,7 @@ graph_from_lcf <- graph_from_lcf
 ## -----------------------------------------------------------------
 
 #' Creating a graph from a given degree sequence, deterministically
-#' 
+#'
 #' It is often useful to create a graph with given vertex degrees. This function
 #' creates such a graph in a deterministic manner.
 #'
@@ -1756,11 +1756,11 @@ graph_from_lcf <- graph_from_lcf
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- realize_degseq(rep(2,100))
 #' degree(g)
 #' is_simple(g)
-#' 
+#'
 #' ## Exponential degree distribution, with high positive assortativity.
 #' ## Loop and multiple edges are explicitly allowed.
 #' ## Note that we correct the degree sequence if its sum is odd.
@@ -1768,7 +1768,7 @@ graph_from_lcf <- graph_from_lcf
 #' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
 #' g4 <- realize_degseq(degs, method="largest", allowed.edge.types="all")
 #' all(degree(g4) == degs)
-#' 
+#'
 #' ## Power-law degree distribution, no loops allowed but multiple edges
 #' ## are okay.
 #' ## Note that we correct the degree sequence if its sum is odd.

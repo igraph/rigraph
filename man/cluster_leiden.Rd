@@ -106,7 +106,7 @@ r <- quantile(strength(g))[2] / (gorder(g) - 1)
 # Set seed for sake of reproducibility
 set.seed(1)
 ldc <- cluster_leiden(g, resolution_parameter=r)
-print(ldc) 
+print(ldc)
 plot(ldc, g)
 }
 \references{
@@ -127,7 +127,7 @@ Other community detection algorithms: \code{\link{cluster_walktrap}},
 \code{\link{cluster_louvain}}
 \code{\link{cluster_fluid_communities}}
 \code{\link{cluster_infomap}}
-\code{\link{cluster_optimal}}             
+\code{\link{cluster_optimal}}
 \code{\link{cluster_walktrap}}
 }
 \author{

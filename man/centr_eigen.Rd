@@ -33,7 +33,7 @@ A named list with the following components:
   \item{vector}{The node-level centrality scores.}
   \item{value}{The corresponding eigenvalue.}
   \item{options}{ARPACK options, see the return value of
-    \code{\link{eigen_centrality}} for details.} 
+    \code{\link{eigen_centrality}} for details.}
   \item{centralization}{The graph level centrality index.}
   \item{theoretical_max}{The same as above, the theoretical maximum
     centralization score for a graph with the same number of vertices.}

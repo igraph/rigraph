@@ -11,7 +11,7 @@ test_that("spectrum works for symmetric matrices", {
       if (any(col < 0) && col[which(col != 0)[1]] < 0) { -col } else { col }
     })
   }
-  
+
   g <- sample_gnp(50, 5/50)
   e0 <- eigen(as_adj(g, sparse=FALSE))
 

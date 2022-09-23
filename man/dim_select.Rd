@@ -35,7 +35,7 @@ examples below.
 }
 \examples{
 
-# Generate the two groups of singular values with 
+# Generate the two groups of singular values with
 # Gaussian mixture of two components that have different means
 sing.vals  <- c( rnorm (10, mean=1, sd=1), rnorm(10, mean=3, sd=1) )
 dim.chosen <- dim_select(sing.vals)

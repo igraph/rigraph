@@ -8,7 +8,7 @@ test_that("BFS works from multiple root vertices", {
 
   expect_that(as.vector(bfs(g, 1)$order),
               equals(c(1,2,10,3,9,4,8,5,7,6,11,12,20,13,19,14,18,15,17,16)))
-  
+
   expect_that(as.vector(bfs(g, 1, unreachable=FALSE)$order),
               equals(c(1,2,10,3,9,4,8,5,7,6,rep(NaN, 10))))
 
@@ -91,7 +91,7 @@ test_that("BFS callback does not blow up when an error is raised within the call
 
 test_that("BFS callback does not blow up when another igraph function is raised within the callback", {
   skip("nested igraph call handling not implemented yet")
-  
+
   callback <- function(graph, data, extra) {
     neighbors(graph, 1)
     FALSE

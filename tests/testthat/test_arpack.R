@@ -18,10 +18,10 @@ test_that("arpack works on the Laplacian of a star", {
     }
     y
   }
-  
+
   r1 <- arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
   r2 <- eigen(laplacian_matrix(make_star(10, mode="undirected")))
-  
+
   correctSign <- function(x) { if (x[1]<0) { -x } else { x } }
   expect_that(r1$values, equals(r2$values[1]))
   expect_that(correctSign(r1$vectors), equals(correctSign(r2$vectors[,1])))
@@ -32,10 +32,10 @@ test_that("arpack works on the Laplacian of a star", {
 
 test_that("arpack works for non-symmetric matrices", {
   library(igraph)
-  A <- structure(c(-6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8, 
-                   -7, 10, 0, 0, 1, 1, 10, 0, 8, -4, -4, -5, 8, 9, -6, 9, 3, 8, 
-                   6, -1, 9, -9, -6, -3, -1, -7, 8, -4, -4, 10, 0, 5, -2, 0, 7, 
-                   10, 1, 4, -8, 3, 5, 3, -7, -9, 10, -1, -4, -7, -1, 7, 5, -5, 
+  A <- structure(c(-6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8,
+                   -7, 10, 0, 0, 1, 1, 10, 0, 8, -4, -4, -5, 8, 9, -6, 9, 3, 8,
+                   6, -1, 9, -9, -6, -3, -1, -7, 8, -4, -4, 10, 0, 5, -2, 0, 7,
+                   10, 1, 4, -8, 3, 5, 3, -7, -9, 10, -1, -4, -7, -1, 7, 5, -5,
                    1, -4, 9, -2, 10, 1, -7, 7, 6, 7, -3, 0, 9, -5, -8, 1, -3,
                    -3, -8, -7, -8, 10, 8, 7, 0, 6, -7, -8, 10, 10, 1, 0, -2, 6),
                  .Dim = c(10L, 10L))

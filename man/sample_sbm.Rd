@@ -38,7 +38,7 @@ Sampling from the stochastic block model of networks
 This function samples graphs from a stochastic block model by (doing the
 equivalent of) Bernoulli trials for each potential edge with the
 probabilities given by the Bernoulli rate matrix, \code{pref.matrix}.
-The order of the vertices in the generated graph corresponds to the 
+The order of the vertices in the generated graph corresponds to the
 \code{block.sizes} argument.
 }
 \examples{

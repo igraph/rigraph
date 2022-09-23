@@ -19,7 +19,7 @@ Consensus dendrograms (\code{igraphHRGConsensus} objects) are printed
 simply by listing the children of each internal node of the
 dendrogram: \preformatted{HRG consensus tree:
 g1 -> 11 12 13 14 15 16 17 18 19 20
-g2 -> 1  2  3  4  5  6  7  8  9  10   
+g2 -> 1  2  3  4  5  6  7  8  9  10
 g3 -> g1 g2}
 The root of the dendrogram is \code{g3} (because it has no incoming
 edges), and it has two subgroups, \code{g1} and \code{g2}.

@@ -40,7 +40,7 @@ depending on the value of \code{matrix.type}.
 g <- make_graph("zachary")
 as.matrix(g, "adjacency")
 as.matrix(g, "edgelist")
-# use edge attribute "weight" 
+# use edge attribute "weight"
 E(g)$weight <- rep(1:10, each=ecount(g))
 as.matrix(g, "adjacency", sparse=FALSE, attr="weight")
 

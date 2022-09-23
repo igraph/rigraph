@@ -30,7 +30,7 @@ test_that("LAD stress test", {
   local_rng_version("3.5.0")
   set.seed(42)
   N <- 100
-  
+
   for (i in 1:N) {
     target <- sample_gnp(20, .5)
     pn <- sample(4:18, 1)
@@ -41,7 +41,7 @@ test_that("LAD stress test", {
   }
 
   set.seed(42)
-  
+
   for (i in 1:N) {
     target <- sample_gnp(20, 1/20)
     pn <- sample(5:18, 1)

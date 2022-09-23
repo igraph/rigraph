@@ -25,10 +25,10 @@ print function. By default the \code{auto} type is used, which selects
 \code{tree} for small graphs and \code{simple} (=list) for bigger
 ones. The \code{tree} format looks like
  this: \preformatted{Hierarchical random graph, at level 3:
-g1        p=   0  
-'- g15    p=0.33  1 
-   '- g13 p=0.88  6  3  9  4  2  10 7  5  8 
-'- g8     p= 0.5  
+g1        p=   0
+'- g15    p=0.33  1
+   '- g13 p=0.88  6  3  9  4  2  10 7  5  8
+'- g8     p= 0.5
    '- g16 p= 0.2  20 14 17 19 11 15 16 13
    '- g5  p=   0  12 18  }
 This is a graph with 20 vertices, and the
@@ -42,12 +42,12 @@ single vertex (vertex 1), and another larger subgroup that contains
 vertices 6, 3, etc. on lower levels, etc.
 The \code{plain} printing is simpler and faster to produce, but less
 visual: \preformatted{Hierarchical random graph:
-g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14    
-g4  p=1.0 -> g17 15    g5  p=0.4 -> g15 17    g6  p=0.0 -> 1 4       
-g7  p=1.0 -> 11 16     g8  p=0.1 -> g9 3      g9  p=0.3 -> g11 g16   
-g10 p=0.2 -> g4 g5     g11 p=1.0 -> g6 5      g12 p=0.8 -> g8 8      
-g13 p=0.0 -> g14 9     g14 p=1.0 -> 2 6       g15 p=0.2 -> g19 18    
-g16 p=1.0 -> g13 g2    g17 p=0.5 -> g7 13     g18 p=1.0 -> 12 19     
+g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14
+g4  p=1.0 -> g17 15    g5  p=0.4 -> g15 17    g6  p=0.0 -> 1 4
+g7  p=1.0 -> 11 16     g8  p=0.1 -> g9 3      g9  p=0.3 -> g11 g16
+g10 p=0.2 -> g4 g5     g11 p=1.0 -> g6 5      g12 p=0.8 -> g8 8
+g13 p=0.0 -> g14 9     g14 p=1.0 -> 2 6       g15 p=0.2 -> g19 18
+g16 p=1.0 -> g13 g2    g17 p=0.5 -> g7 13     g18 p=1.0 -> 12 19
 g19 p=0.7 -> g3 20}
 It lists the two subgroups of each internal node, in
 as many columns as the screen width allows.

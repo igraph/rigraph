@@ -165,7 +165,7 @@
     if (omitted.vertices != 0) {
       cat(paste('[ reached getOption("max.print") -- omitted',
                 omitted.vertices, "vertices ]\n\n"))
-    }      
+    }
   }
 }
 
@@ -189,7 +189,7 @@
     warning("Can't print vertex names, complex `name' vertex attribute")
     names <- FALSE
   }
-  
+
   mp <- getOption("max.print")
   if (mp >= ec) {
     omitted.edges <- 0
@@ -204,7 +204,7 @@
   } else {
     seq(length.out=nrow(el))
   }
-  if (ec==0 || 
+  if (ec==0 ||
       all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
                  is.character(edge_attr(x,v)) |
                  is.logical(edge_attr(x, v))))) {
@@ -231,7 +231,7 @@
   if (omitted.edges != 0) {
     cat(paste('[ reached getOption("max.print") -- omitted', omitted.edges,
               'edges ]\n\n'))
-  }    
+  }
 }
 
 .print.edges.compressed <- function(x, edges = E(x), names, num = FALSE,
@@ -369,7 +369,7 @@
       paste(sep="", mark, nei)
     })
     cat(unlist(alstr), sep="\n")
-  } else { 
+  } else {
     alstr <- sapply(al, function(x) {
       paste(format(x, width=w), collapse=" ")
     })
@@ -410,20 +410,20 @@ print_all <- function(object, ...) {
 
 
 #' Print graphs to the terminal
-#' 
+#'
 #' These functions attempt to print a graph to the terminal in a human readable
 #' form.
-#' 
+#'
 #' \code{summary.igraph} prints the number of vertices, edges and whether the
 #' graph is directed.
-#' 
+#'
 #' \code{print_all} prints the same information, and also lists the edges, and
 #' optionally graph, vertex and/or edge attributes.
-#' 
+#'
 #' \code{print.igraph} behaves either as \code{summary.igraph} or
 #' \code{print_all} depending on the \code{full} argument. See also the
 #' \sQuote{print.full} igraph option and \code{\link{igraph_opt}}.
-#' 
+#'
 #' The graph summary printed by \code{summary.igraph} (and \code{print.igraph}
 #' and \code{print_all}) consists one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
@@ -442,17 +442,17 @@ print_all <- function(object, ...) {
 #' letter is \sQuote{\code{W}} for weighted graphs, i.e. graphs with the
 #' \code{weight} edge attribute set. The fourth letter is \sQuote{\code{B}} for
 #' bipartite graphs, i.e. for graphs with the \code{type} vertex attribute set.
-#' 
+#'
 #' Then, after two dashes, the name of the graph is printed, if it has one,
 #' i.e. if the \code{name} graph attribute is set.
-#' 
+#'
 #' From the second line, the attributes of the graph are listed, separated by a
 #' comma. After the attribute names, the kind of the attribute -- graph
 #' (\sQuote{\code{g}}), vertex (\sQuote{\code{v}}) or edge (\sQuote{\code{e}})
 #' -- is denoted, and the type of the attribute as well, character
 #' (\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical
 #' (\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
-#' 
+#'
 #' As of igraph 0.4 \code{print_all} and \code{print.igraph} use the
 #' \code{max.print} option, see \code{\link[base]{options}} for details.
 #'
@@ -480,17 +480,17 @@ print_all <- function(object, ...) {
 #' @export print.igraph
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_ring(10)
 #' g
 #' summary(g)
-#' 
+#'
 print.igraph <- function(x, full=igraph_opt("print.full"),
                 graph.attributes=igraph_opt("print.graph.attributes"),
                 vertex.attributes=igraph_opt("print.vertex.attributes"),
                 edge.attributes=igraph_opt("print.edge.attributes"),
                 names=TRUE, max.lines = igraph_opt("auto.print.lines"), ...) {
-  
+
   if (!is_igraph(x)) {
     stop("Not a graph object")
   }
@@ -517,7 +517,7 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
   } else if (full == "auto") {
     .print.edges.compressed(x, names = names, max.lines = max(0, max.lines - head_lines))
   }
-  
+
   invisible(x)
 }
 
@@ -546,7 +546,7 @@ IGRAPH D-W- 100 200 -- Gnm random graph
 IGRAPH-UNW--V5-E5----------------------------------------- A ring -
 + attributes: name (g), name (v), weight (e).
 + edges:
-     edge  weight              
+     edge  weight
 [1]' a--b       1
 [2]' b--c       2
 [3]' c--d      -1
@@ -555,7 +555,7 @@ IGRAPH-UNW--V5-E5----------------------------------------- A ring -
 
 ## Compressed edge list
 
-IGRAPH UNW- 5 10 -- A ring 
+IGRAPH UNW- 5 10 -- A ring
 + attributes: name (g/c), name (v/n), weight (e/n)
 + edges:
 [1]' 1--2 2--3 3--4 4--5 1--5 2--5 5--1
@@ -594,7 +594,7 @@ Jane     -- Ike
 
 ## This is the good one if vertices are not named
 
-IGRAPH U--- 100 200 -- Gnm random graph 
+IGRAPH U--- 100 200 -- Gnm random graph
 + edges:
 [  1] 28 46 89 90                 [  2] 47 69 72 89
 [  3] 29                          [  4] 17 20
@@ -621,7 +621,7 @@ Edge attributes: weight.
 
 IGRAPH-UNW--V5-E5----------------------------------------- A ring -
 '- attributes: name (g), name (v), weight (e).
-'         edge  weight              
+'         edge  weight
 [1] 'a' -- 'b'       1
 [2] 'b' -- 'c'       2
 [3] 'c' -- 'd'      -1

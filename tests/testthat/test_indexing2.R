@@ -15,13 +15,13 @@ test_that("[ can add and delete edges", {
 
   A[1,2] <- g[1,2] <- TRUE
   expect_that(am(g[]), equals(A))
-  
+
   A[2,1] <- g[2,1] <- TRUE
   expect_that(am(g[]), equals(A))
-  
+
   g[2,1] <- NULL ; A[2,1] <- 0
   expect_that(am(g[]), equals(A))
-  
+
   A[1,2] <- g[1,2] <- FALSE
   expect_that(am(g[]), equals(A))
 
@@ -36,13 +36,13 @@ test_that("[ can set weights and delete weighted edges", {
   g <- set_edge_attr(g, "weight", c(), 1)
   A[1,2] <- g[1,2] <- 1
   expect_that(am(g[]), equals(A))
-  
+
   A[2,1] <- g[2,1] <- 2
   expect_that(am(g[]), equals(A))
-  
+
   A[1,2] <- g[1,2] <- 3
   expect_that(am(g[]), equals(A))
-  
+
   A[1:2,2:3] <- g[1:2,2:3] <- -1
   expect_that(am(g[]), equals(A))
 
@@ -59,7 +59,7 @@ test_that("[ can add edges and ste weights via vertex names", {
   A['a', 'b'] <- g['a','b'] <- TRUE
   A['b', 'c'] <- g['b','c'] <- TRUE
   expect_that(am(g[]), equals(am(A)))
-  
+
   A[c('a','f'), c('f','a')] <- g[c('a','f'),c('f','a')] <- TRUE
   expect_that(am(g[]), equals(am(A)))
 

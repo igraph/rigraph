@@ -127,18 +127,18 @@ following fields: \describe{
     the data set consists of multiple networks, then they are separated
     by spaces.}
   \item{tags}{Character vector, the tags of the dataset. Directed graph
-    have the tags \sQuote{directed}. Undirected graphs are tagged 
+    have the tags \sQuote{directed}. Undirected graphs are tagged
     as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
     \sQuote{bipartite}, \sQuote{social network}, etc.}
   \item{networks}{The ids and names of the networks in the data set. The
     numeric and character id are separated by a slash, and multiple networks
     are separated by spaces.}
-} 
+}
 
 \code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
 following additional fields: \describe{
   \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
-    the dataset was added to the database.} 
+    the dataset was added to the database.}
   \item{formats}{Character vector, the data formats in which the data set is
     available. The various formats are separated by semicolons.}
   \item{licence}{Character scalar, the licence of the dataset.}
@@ -156,12 +156,12 @@ following additional fields: \describe{
       \item{type}{Type of the attribute, either \sQuote{graph},
         \sQuote{vertex} or \sQuote{edge}.}
       \item{datatype}{Data type of the attribute, currently it can be
-        \sQuote{numeric} and \sQuote{string}.} 
+        \sQuote{numeric} and \sQuote{string}.}
       \item{name}{Character scalar, the name of the attribute.}
       \item{description}{Character scalar, the description of the
         attribute.}
     }
-  } 
+  }
 }
 
 The results of the Nexus queries are printed to the screen in a consise

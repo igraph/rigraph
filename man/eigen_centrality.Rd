@@ -86,7 +86,7 @@ therefore the eigenvector centrality is not defined for these graphs.
 igraph will return an eigenvalue of zero in such cases. The eigenvector
 centralities will all be equal for an empty graph and will all be zeros for
 a directed acyclic graph. Such pathological cases can be detected by checking
-whether the eigenvalue is very close to zero. 
+whether the eigenvalue is very close to zero.
 
 From igraph version 0.5 this function uses ARPACK for the underlying
 computation, see \code{\link{arpack}} for more about ARPACK in igraph.

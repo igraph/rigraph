@@ -31,7 +31,7 @@ edges based on attributes, or graph structure, creating the
 intersection, union of edges, etc.
 }
 \details{
-Edge sequences are usually used as igraph function arguments that 
+Edge sequences are usually used as igraph function arguments that
 refer to edges of a graph.
 
 An edge sequence is tied to the graph it refers to: it really denoted
