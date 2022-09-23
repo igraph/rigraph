@@ -282,11 +282,11 @@ test_that("indexing without arguments", {
   g <- make_ring(10)
 
   x <- V(g)[]
-  expect_equal(V(g), x)
+  expect_equal(ignore_attr = TRUE, V(g), x)
 
   x2 <- V(g)[[]]
   v <- V(g)
   attr(v, "single") <- TRUE
 
-  expect_equal(v, x2)
+  expect_equal(ignore_attr = TRUE, v, x2)
 })
