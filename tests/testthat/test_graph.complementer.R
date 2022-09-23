@@ -11,5 +11,3 @@ test_that("complementer works", {
   expect_true(graph.isomorphic(g, g3))
 
 })
-
-

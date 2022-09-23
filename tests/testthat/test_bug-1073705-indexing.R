@@ -19,5 +19,3 @@ test_that("Weighted indexing does not remove edges", {
   g[from=el[,1], to=el[,2], attr="sim"] <- rep(1:0, length.out=ecount(g))
   expect_that(E(g)$sim, equals(rep(1:0, 5)))
 })
-
-

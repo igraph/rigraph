@@ -25,4 +25,3 @@
     unlockBinding(".igraph.pb", asNamespace("igraph"))
     invisible()
 }
-

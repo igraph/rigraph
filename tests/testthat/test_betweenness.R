@@ -87,4 +87,3 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
 
   expect_that(result[1:5], equals(c('1'=0, '2'=44, '3'=71, '4'=36.5, '6'=44)))
 })
-

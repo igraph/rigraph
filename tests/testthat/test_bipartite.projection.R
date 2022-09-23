@@ -98,4 +98,3 @@ test_that("bipartite_projection prints a warning if the type attribute is non-lo
   expect_warning(bipartite_projection(g), "logical")
   expect_warning(bipartite_projection_size(g), "logical")
 })
-

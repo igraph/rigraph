@@ -43,4 +43,3 @@ test_that("constraint works", {
   wc2 <- constraint.orig(karate, attr="weight")
   expect_that(wc1, equals(wc2))
 })
-

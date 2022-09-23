@@ -175,4 +175,3 @@ function() {
   fitandplot(g2, gl2)
 
 }
-

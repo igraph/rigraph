@@ -38,4 +38,3 @@ test_that("as.directed keeps attributes", {
   expect_that(df4[order(df4[,1], df4[,2]),]$weight, equals(c(1,2,1,3,3,2)))
   expect_that(df5[order(df5[,1], df5[,2]),]$weight, equals(1:3))
 })
-

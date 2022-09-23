@@ -17,4 +17,3 @@ test_that("SIR works", {
   )
   expect_true(digest(res) %in% exps)
 })
-

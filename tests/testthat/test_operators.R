@@ -91,4 +91,3 @@ test_that("t() is aliased to edge reversal for graphs", {
   expect_that(vcount(t(g)), equals(vcount(g)))
   expect_that(get.edgelist(t(g)), equals(get.edgelist(g)[,c(2,1)]))
 })
-

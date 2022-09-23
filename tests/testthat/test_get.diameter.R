@@ -22,4 +22,3 @@ test_that("get_diameter works", {
   length(gd) == d + 1
   expect_that(sp[ gd[1], gd[length(gd)] ], equals(d))
 })
-

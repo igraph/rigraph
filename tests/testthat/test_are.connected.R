@@ -19,6 +19,3 @@ test_that("are_adjacent works", {
   expect_true(are_adjacent(g3, "A", "B"))
   expect_false(are_adjacent(g3, "B", "A"))
 })
-
-
-

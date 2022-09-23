@@ -186,4 +186,3 @@ test_that("FUN argument works, #32", {
   expect_that(r1, equals(rep(2, 10)))
   expect_that(r2, equals(rep(2, 10)))
 })
-

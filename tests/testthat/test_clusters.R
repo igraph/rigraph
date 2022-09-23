@@ -70,4 +70,3 @@ test_that("is_connected returns FALSE for the null graph", {
   g <- make_empty_graph(0)
   expect_false(is_connected(g))
 })
-

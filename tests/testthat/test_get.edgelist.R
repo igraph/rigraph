@@ -8,4 +8,3 @@ test_that("as_edgelist works", {
   g2 <- graph(t(e), n=vcount(g), dir=FALSE)
   expect_true(graph.isomorphic(g, g2))
 })
-
