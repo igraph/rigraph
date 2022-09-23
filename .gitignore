@@ -18,3 +18,4 @@
 igraph.Rcheck/
 .venv/
 .vscode/
+.Rproj.user
