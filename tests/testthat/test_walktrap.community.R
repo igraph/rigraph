@@ -1,9 +1,4 @@
-
-context("cluster_walktrap")
-
 test_that("cluster_walktrap works", {
-
-  library(igraph)
 
   g <- make_graph("Zachary")
   set.seed(42)

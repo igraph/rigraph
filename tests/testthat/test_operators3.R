@@ -1,9 +1,4 @@
-
-context("infix operators")
-
 test_that("infix operators work", {
-
-  library(igraph)
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]

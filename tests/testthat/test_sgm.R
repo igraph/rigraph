@@ -1,8 +1,4 @@
-
-context("Seeded graph matching")
-
 test_that("SGM works", {
-  library(igraph)
   local_rng_version("3.5.0")
   set.seed(42)
 

@@ -1,9 +1,7 @@
-context("is_tree")
-
 test_that("is_tree works for non-trees", {
     g <- make_graph("zachary")
     expect_false(is_tree(g))
-    expect_equal(is_tree(g, details=TRUE), list(res=FALSE, root=V(g)[numeric(0)]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, details=TRUE), list(res=FALSE, root=V(g)[numeric(0)]))
 
     g <- sample_pa(15, m=3)
     expect_false(is_tree(g))
@@ -14,17 +12,17 @@ test_that("is_tree works for undirected trees", {
     # g <- permute(make_tree(7, 2), c(5, 2, 3, 4, 1, 6, 7))
     g <- make_tree(7, 2)
     expect_true(is_tree(g))
-    expect_equal(is_tree(g, details=TRUE), list(res=TRUE, root=V(g)[1]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, details=TRUE), list(res=TRUE, root=V(g)[1]))
 })
 
 test_that("is_tree works for directed in-trees", {
     g <- permute(make_tree(7, 2, mode="in"), c(5, 2, 3, 4, 1, 6, 7))
 
     expect_true(is_tree(g, mode="in"))
-    expect_equal(is_tree(g, mode="in", details=TRUE), list(res=TRUE, root=V(g)[5]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, mode="in", details=TRUE), list(res=TRUE, root=V(g)[5]))
 
     expect_true(is_tree(g, mode="all"))
-    expect_equal(is_tree(g, mode="all", details=TRUE), list(res=TRUE, root=V(g)[1]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, mode="all", details=TRUE), list(res=TRUE, root=V(g)[1]))
 
     expect_false(is_tree(g, mode="out"))
     expect_false(is_tree(g, mode="out", details=TRUE)$res)
@@ -34,10 +32,10 @@ test_that("is_tree works for directed out-trees", {
     g <- permute(make_tree(7, 2, mode="out"), c(3, 2, 1, 4, 5, 6, 7))
 
     expect_true(is_tree(g, mode="out"))
-    expect_equal(is_tree(g, mode="out", details=TRUE), list(res=TRUE, root=V(g)[3]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, mode="out", details=TRUE), list(res=TRUE, root=V(g)[3]))
 
     expect_true(is_tree(g, mode="all"))
-    expect_equal(is_tree(g, mode="all", details=TRUE), list(res=TRUE, root=V(g)[1]))
+    expect_equal(ignore_attr = TRUE, is_tree(g, mode="all", details=TRUE), list(res=TRUE, root=V(g)[1]))
 
     expect_false(is_tree(g, mode="in"))
     expect_false(is_tree(g, mode="in", details=TRUE)$res)
@@ -50,8 +48,6 @@ test_that("the null graph is not a tree", {
 test_that("a graph with a single vertex and no edges is tree", {
     expect_true(is_tree(make_empty_graph(1)))
 })
-
-context("to_prufer, make_from_prufer")
 
 test_that("to_prufer and make_from_prufer works for trees", {
     g <- make_tree(13, 3, mode="undirected")
@@ -82,8 +78,6 @@ test_that("make_(from_prufer(...)) works", {
 test_that("to_prufer prints an error for non-trees", {
     expect_error(to_prufer(make_graph("zachary")), "must be a tree")
 })
-
-context("sample_tree")
 
 test_that("sample_tree works", {
     g <- sample_tree(100)
@@ -145,8 +139,6 @@ test_that("sample_tree yields a null graph for n=0", {
 test_that("sample_tree throws an error for the Prufer method with directed graphs", {
     expect_error(sample_tree(10, method="prufer", directed=T), "nvalid value")
 })
-
-context("sample_spanning_tree")
 
 test_that("sample_spanning_tree works for connected graphs", {
     g <- make_full_graph(8)

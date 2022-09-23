@@ -1,6 +1,3 @@
-
-context("New isomorphism API")
-
 test_that("isomorphic", {
 
   g <- graph_(from_literal(A - B - C - A))
@@ -71,7 +68,7 @@ test_that("isomorphisms", {
               V(g2)[4,1,2,3],
               V(g2)[4,3,2,1])
 
-  expect_equivalent(isomorphisms(g, g2), res)
+  expect_equal(ignore_attr = TRUE, isomorphisms(g, g2), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))
   expect_equal(isomorphisms(g, g3), list())
@@ -92,7 +89,7 @@ test_that("subgraph_isomorphisms, lad", {
               V(g)[4,3,2],
               V(g)[4,1,2])
 
-  expect_equivalent(subgraph_isomorphisms(g2, g, method = "lad"), res)
+  expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g, method = "lad"), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))
   expect_equal(subgraph_isomorphisms(g3, g, method = "lad"), list())
@@ -113,7 +110,7 @@ test_that("subgraph_isomorphisms, vf2", {
               V(g)[4,1,2],
               V(g)[4,3,2])
 
-  expect_equivalent(subgraph_isomorphisms(g2, g, method = "vf2"), res)
+  expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g, method = "vf2"), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))
   expect_equal(subgraph_isomorphisms(g3, g, method = "vf2"), list())

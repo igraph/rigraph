@@ -1,9 +1,4 @@
-
-context("sample_bipartite")
-
 test_that("sample_bipartite works", {
-
-  library(igraph)
 
   set.seed(42)
   g1 <- sample_bipartite(10, 5, type="gnp", p=.1)

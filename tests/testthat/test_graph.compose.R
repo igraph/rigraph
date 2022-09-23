@@ -1,9 +1,4 @@
-
-context("compose")
-
 test_that("compose works", {
-
-  library(igraph)
 
   g1 <- sample_gnp(50, 3/50, directed=TRUE)
   gi <- graph( rep(1:vcount(g1), each=2), directed=TRUE )

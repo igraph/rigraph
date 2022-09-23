@@ -1,6 +1,3 @@
-
-context("Notable graphs")
-
 test_that("notable graphs work with make_graph", {
 
   g <- make_graph("Levi")

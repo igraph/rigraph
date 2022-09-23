@@ -1,9 +1,4 @@
-
-context("all.st.cuts")
-
 test_that("all.st.cuts works", {
-
-  library(igraph)
 
   unvs <- function(x) lapply(x, as.vector)
 

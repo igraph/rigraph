@@ -1,9 +1,4 @@
-
-context("min_separators")
-
 test_that("min_separators works", {
-
-  library(igraph)
 
   camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
                     Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,

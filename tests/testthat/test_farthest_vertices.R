@@ -1,9 +1,4 @@
-
-context("farthest_vertices")
-
 test_that("farthest_vertices works", {
-
-  library(igraph)
 
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,

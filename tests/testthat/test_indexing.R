@@ -1,6 +1,3 @@
-
-context("Indexing")
-
 mm <- function(...) {
   v <- as.numeric(as.vector(list(...)))
   matrix(v, nrow=sqrt(length(v)))
@@ -248,9 +245,9 @@ test_that("[[ works with from and to", {
 
   g <- make_tree(20)
 
-  expect_equivalent(g[[1, ]], g[[from = 1]])
-  expect_equivalent(g[[, 1]], g[[to = 1]])
-  expect_equivalent(g[[1:5, 4:10]], g[[from = 1:5, to = 4:10]])
+  expect_equal(ignore_attr = TRUE, g[[1, ]], g[[from = 1]])
+  expect_equal(ignore_attr = TRUE, g[[, 1]], g[[to = 1]])
+  expect_equal(ignore_attr = TRUE, g[[1:5, 4:10]], g[[from = 1:5, to = 4:10]])
 
   expect_error(g[[1, from = 1]], "Cannot give both")
   expect_error(g[[, 2, to = 10]], "Cannot give both")

@@ -1,9 +1,4 @@
-
-context("as_adj_list")
-
 test_that("as_adj_list works", {
-
-  library(igraph)
 
   g <- sample_gnp(50, 2/50)
   al <- as_adj_list(g)

@@ -1,8 +1,4 @@
-
-context("Dimensionality selection")
-
 test_that("dimensionality selection works", {
-  library(igraph)
   set.seed(42)
 
   k <- graph.famous("zachary")

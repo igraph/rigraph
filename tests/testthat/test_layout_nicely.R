@@ -1,5 +1,3 @@
-context("Automatic layout")
-
 test_that("layout_nicely() works with negative weights", {
     g <- make_graph("petersen")
     E(g)$weight <- -5:9

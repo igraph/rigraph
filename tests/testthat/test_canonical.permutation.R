@@ -1,9 +1,4 @@
-
-context("canonical_permutation")
-
 test_that("canonical_permutation works", {
-  library(igraph)
-
   g1 <- sample_gnm(10, 20)
   cp1 <- canonical_permutation(g1)
   cf1 <- permute(g1, cp1$labeling)

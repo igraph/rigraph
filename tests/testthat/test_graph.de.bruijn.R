@@ -1,9 +1,5 @@
-
-context("make_de_bruijn_graph")
-
 test_that("make_de_bruijn_graph works", {
 
-  library(igraph)
   g <- make_de_bruijn_graph(2,1)
   g2 <- make_de_bruijn_graph(2,2)
   g3 <- make_line_graph(g)

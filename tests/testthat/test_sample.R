@@ -1,9 +1,5 @@
-
-context("Various samplers")
-
 test_that("Sampling from a Dirichlet works", {
 
-  library(igraph)
   set.seed(42)
   sd <- sample_dirichlet(100, alpha=c(1, 1, 1))
   expect_that(dim(sd), equals(c(3, 100)))

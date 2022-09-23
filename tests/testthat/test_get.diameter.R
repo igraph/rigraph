@@ -1,9 +1,4 @@
-
-context("get_diameter")
-
 test_that("get_diameter works", {
-
-  library(igraph)
 
   g <- make_ring(10)
   E(g)$weight <- sample(seq_len(ecount(g)))

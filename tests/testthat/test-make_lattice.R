@@ -1,6 +1,3 @@
-
-context("make_lattice")
-
 test_that("make_lattice works", {
 
   g <- make_lattice(dim = 2, length = 3, circular=F)

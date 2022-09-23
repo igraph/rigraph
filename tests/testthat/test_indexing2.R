@@ -1,6 +1,3 @@
-
-context("Assignments via indexing")
-
 library(igraph)
 
 am <- function(x) {

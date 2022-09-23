@@ -1,9 +1,4 @@
-
-context("graph.subisomorphic, lad")
-
 test_that("graph.subisomorphic, method = 'lad' works", {
-
-  library(igraph)
 
   pattern <- graph_from_literal(1:2:3:4:5,
                        1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
@@ -26,7 +21,6 @@ test_that("graph.subisomorphic, method = 'lad' works", {
 
 test_that("LAD stress test", {
 
-  library(igraph)
   local_rng_version("3.5.0")
   set.seed(42)
   N <- 100

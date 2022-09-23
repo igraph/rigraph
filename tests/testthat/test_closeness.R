@@ -1,9 +1,4 @@
-
-context("closeness")
-
 test_that("closeness works", {
-  library(igraph)
-
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
                     Carol    - Andre:Diane:Fernando,
@@ -29,7 +24,6 @@ test_that("closeness works", {
 
 test_that("closeness centralization works", {
 
-  library(igraph)
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
                     Carol    - Andre:Diane:Fernando,
