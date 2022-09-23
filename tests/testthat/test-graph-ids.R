@@ -1,6 +1,3 @@
-
-context("Graph ids")
-
 test_that("ids change when updating the graph", {
 
   g <- make_ring(10)

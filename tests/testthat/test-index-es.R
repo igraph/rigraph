@@ -1,6 +1,3 @@
-
-context("VS/ES indexing")
-
 test_that("I can index a vs twice", {
 
   edges <- data.frame(
@@ -20,7 +17,7 @@ test_that("I can index a vs twice", {
 
   x <- V(g)[ 3:4 ] [ state == 'NM' ]
 
-  expect_equal(x, V(g)['ABQ'])
+  expect_equal(ignore_attr = TRUE, x, V(g)['ABQ'])
 })
 
 test_that("I can index an es twice", {
@@ -36,5 +33,5 @@ test_that("I can index an es twice", {
 
   x <- E(g)['BOS' %->% 'JFK'][carrier == 'foo']
 
-  expect_equal(x, E(g)[ carrier == 'foo' & .from('BOS') & .to('JFK')])
+  expect_equal(ignore_attr = TRUE, x, E(g)[ carrier == 'foo' & .from('BOS') & .to('JFK')])
 })

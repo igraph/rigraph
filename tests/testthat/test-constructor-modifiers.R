@@ -1,7 +1,3 @@
-
-context("Constructor modifiers")
-
-
 test_that("without_attr", {
 
   set.seed(42)

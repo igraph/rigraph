@@ -1,9 +1,4 @@
-
-context("ivs")
-
 test_that("ivs works", {
-
-  library(igraph)
 
   g <- sample_gnp(50, 0.8)
   ivs <- ivs(g, min=ivs_size(g))

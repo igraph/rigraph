@@ -1,6 +1,3 @@
-
-context("eulerian_path")
-
 test_that("has_eulerian_path works", {
     g <- graph_from_literal(A-B-C-D-A)
     expect_true(has_eulerian_path(g))
@@ -40,8 +37,6 @@ test_that("eulerian_path works", {
     g <- graph_from_literal(A-B-C-D-A-D-C, B-D, simplify=FALSE)
     expect_error(eulerian_path(g), "The graph does not have an Eulerian path")
 })
-
-context("eulerian_cycle")
 
 test_that("has_eulerian_cycle works", {
     g <- graph_from_literal(A-B-C-D-A)

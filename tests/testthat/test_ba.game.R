@@ -1,9 +1,4 @@
-
-context("sample_pa")
-
 test_that("sample_pa works", {
-  library(igraph)
-
   g <- sample_pa(100, m=2)
   expect_that(ecount(g), equals(197))
   expect_that(vcount(g), equals(100))
@@ -21,7 +16,6 @@ test_that("sample_pa works", {
 })
 
 test_that("sample_pa can start from a graph", {
-  library(igraph)
   set.seed(1234)
 
   g4 <- sample_pa(10, m=1, algorithm="bag", start.graph=make_empty_graph(5))

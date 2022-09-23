@@ -1,6 +1,3 @@
-
-context("realize_degseq, sample_degseq")
-
 test_that("realize_degseq works", {
   gc <- function(graph) {
     clu <- components(graph)

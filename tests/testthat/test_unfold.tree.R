@@ -1,9 +1,4 @@
-
-context("unfold_tree")
-
 test_that("unfold_tree works", {
-
-  library(igraph)
 
   g <- make_tree(7, 2)
   g <- add_edges(g, c(2,7, 1,4))

@@ -1,9 +1,4 @@
-
-context("constraint")
-
 test_that("constraint works", {
-  library(igraph)
-
   constraint.orig <- function(graph, nodes=V(graph), attr=NULL) {
     if (!is_igraph(graph)) {
       stop("Not a graph object")

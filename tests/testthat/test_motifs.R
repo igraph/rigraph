@@ -1,9 +1,5 @@
-
-context("motifs")
-
 test_that("motif finding works", {
 
-  library(igraph)
   set.seed(123)
 
   b <- sample_gnp(10000, 4/10000, directed=TRUE)

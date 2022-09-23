@@ -1,9 +1,4 @@
-
-context("edge_connectivity")
-
 test_that("edge_connectivity works", {
-
-  library(igraph)
 
   gc <- function(graph) {
     clu <- components(graph)

@@ -1,8 +1,4 @@
-
-context("dominator_tree")
-
 test_that("dominator_tree works", {
-  library(igraph)
   g <- graph_from_literal(R-+A:B:C, A-+D, B-+A:D:E, C-+F:G, D-+L,
                  E-+H, F-+I, G-+I:J, H-+E:K, I-+K, J-+I,
                  K-+I:R, L-+H)

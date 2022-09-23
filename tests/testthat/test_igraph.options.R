@@ -1,9 +1,4 @@
-
-context("igraph_options")
-
 test_that("igraph_options works", {
-
-  library(igraph)
 
   igraph_options(verbose=TRUE)
   expect_true(igraph_opt("verbose"))

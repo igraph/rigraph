@@ -1,9 +1,4 @@
-
-context("iterators")
-
 test_that("iterators work", {
-
-  library(igraph)
 
   ## Create a small ring graph, assign attributes
   ring <- graph_from_literal( A-B-C-D-E-F-G-A )
@@ -18,8 +13,6 @@ test_that("iterators work", {
 })
 
 test_that("complex attributes work", {
-  library(igraph)
-
   g <- make_ring(10)
   foo <- lapply(1:vcount(g), seq, from=1)
   V(g)$foo <- foo

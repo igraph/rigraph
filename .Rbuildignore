@@ -27,3 +27,5 @@
 ^cran-comments\.template.md$
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
+^igraph\.Rproj$
+^\.Rproj\.user$

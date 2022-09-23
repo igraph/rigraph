@@ -1,6 +1,3 @@
-
-context("Vertex and edge sequence quirks")
-
 test_that("graph is not updated if not in LHS", {
 
   g <- make_(ring(10),

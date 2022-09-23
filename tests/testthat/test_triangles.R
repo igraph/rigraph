@@ -1,6 +1,3 @@
-
-context("Triangles")
-
 test_that("Listing triangles works", {
 
   triangles <- function(...) as.vector(igraph::triangles(...))

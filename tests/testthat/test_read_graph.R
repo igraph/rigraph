@@ -1,5 +1,3 @@
-context("Graph file formats")
-
 test_that("reading GraphML file works", {
     skip_if_no_graphml()
 

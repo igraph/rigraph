@@ -1,9 +1,5 @@
-
-context("BFS")
-
 test_that("BFS works from multiple root vertices", {
 
-  library(igraph)
   g <- make_ring(10) %du% make_ring(10)
 
   expect_that(as.vector(bfs(g, 1)$order),
@@ -24,7 +20,7 @@ test_that("issue 133", {
 
   g <- graph_from_edgelist(matrix(c(1,2,2,3), ncol = 2, byrow = TRUE))
 
-  expect_equal(
+  expect_equal(ignore_attr = TRUE,
     bfs(g, 1, restricted = c(1, 2), unreachable = FALSE)$order,
     V(g)[c(1, 2, NA_real_), na_ok = TRUE]
   )

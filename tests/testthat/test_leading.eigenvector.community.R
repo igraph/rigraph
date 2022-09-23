@@ -1,6 +1,3 @@
-
-context("cluster_leading_eigen")
-
 test_that("cluster_leading_eigen works", {
 
   library(igraph)

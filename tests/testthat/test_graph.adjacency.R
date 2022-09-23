@@ -1,9 +1,4 @@
-
-context("graph.adjacency")
-
 test_that("graph_from_adjacency_matrix works", {
-
-  library(igraph)
 
   M1 <- rbind(c(0,0,1,1),
               c(1,0,0,0),
@@ -147,9 +142,7 @@ test_that("graph_from_adjacency_matrix works", {
 
 test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
 
-  library(Matrix)
-  library(igraph)
-  A <- Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
+  A <- Matrix::Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
   A[3,5] <- A[5,3] <- 1
   g <- graph_from_adjacency_matrix(A, mode="undirected")
   expect_that(g[], equals(A))
@@ -158,20 +151,15 @@ test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
 
 test_that("graph_from_adjacency_matrix empty graph bug is fixed", {
 
-  library(Matrix)
-  library(igraph)
-  A <- Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
+  A <- Matrix::Matrix(0, 10, 10, sparse=TRUE, doDiag=FALSE)
   g <- graph_from_adjacency_matrix(A, mode="undirected")
-  expect_equal(as.matrix(g[]), as.matrix(A), check.attributes=FALSE)
+  expect_equal(ignore_attr = TRUE, as.matrix(g[]), as.matrix(A))
 
 })
 
 test_that("bug #554 is fixed", {
 
-  library(igraph)
-  library(Matrix)
-
-  M <- Matrix(0, 5, 5, doDiag=FALSE)
+  M <- Matrix::Matrix(0, 5, 5, doDiag=FALSE)
   M[1,2] <- M[2,1] <- M[3,4] <- M[4,3] <- 1
   g <- graph_from_adjacency_matrix(M, mode="undirected", weighted=TRUE)
   expect_that(g[], equals(M))
@@ -179,8 +167,6 @@ test_that("bug #554 is fixed", {
 })
 
 test_that("graph_from_adjacency_matrix works for sparse matrices without values", {
-
-  library(igraph)
 
   # https://github.com/igraph/rigraph/issues/269
   M <- Matrix::sparseMatrix(i=c(1,3),j=c(3,4),dims=c(5,5))

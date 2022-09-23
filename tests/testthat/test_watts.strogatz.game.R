@@ -1,9 +1,4 @@
-
-context("sample_smallworld")
-
 test_that("sample_smallworld works", {
-
-  library(igraph)
 
   for (i in 1:50) {
     p <- runif(1)

@@ -1,5 +1,3 @@
-context("layout_with_sugiyama")
-
 test_that("layout_with_sugiyama does not demote matrices to vectors in res$layout.dummy", {
     ex <- graph.formula( A -+ B:C, B -+ C:D)
     layex <- layout.sugiyama(ex, layers=NULL)

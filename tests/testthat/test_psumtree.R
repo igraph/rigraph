@@ -1,9 +1,5 @@
-
-context("Prefix sum tree")
-
 test_that("Prefix sum tree works", {
 
-  library(igraph)
   set.seed(42)
   mysample <- function(x, size, prob=NULL) {
     if (!is.null(prob)) { prob <- as.numeric(prob) }

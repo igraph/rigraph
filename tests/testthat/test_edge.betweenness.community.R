@@ -1,9 +1,4 @@
-
-context("cluster_edge_betweenness")
-
 test_that("cluster_edge_betweenness works", {
-  library(igraph)
-
   g <- make_graph("Zachary")
   ebc <- cluster_edge_betweenness(g)
 

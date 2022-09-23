@@ -1,6 +1,3 @@
-
-context("igraph_version")
-
 test_that("igraph_version returns a version string", {
 
   ## This is essentially a semver regex, we do not allow a

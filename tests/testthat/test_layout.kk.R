@@ -1,6 +1,3 @@
-
-context("Kamada-Kawai layouts")
-
 test_that("Kamada-Kawai layout generator works", {
 
   set.seed(42)
@@ -23,7 +20,6 @@ test_that("Kamada-Kawai layout generator works", {
     all(abs(norm_radii) < eps) && all(abs(norm_dists) < eps)
   }
 
-  library(igraph)
   g <- make_ring(10)
   l <- layout_with_kk(g, maxiter=50, coords=layout_in_circle(g))
   expect_true(looks_circular(l))
@@ -58,8 +54,6 @@ test_that("3D Kamada-Kawai layout generator works", {
 
   skip_on_cran()
   skip_on_ci()
-
-  library(igraph)
 
   set.seed(42)
 

@@ -1,5 +1,3 @@
-context("rewire")
-
 test_that("rewire(each_edge(mode='in')) keeps the in-degree distribution", {
     g <- barabasi.game(1000)
 

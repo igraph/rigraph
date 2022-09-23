@@ -1,9 +1,4 @@
-
-context("largest_ivs")
-
 test_that("largest_ivs works", {
-
-  library(igraph)
 
   g <- sample_gnp(50, 0.8)
   livs <- largest_ivs(g)

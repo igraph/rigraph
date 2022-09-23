@@ -1,9 +1,5 @@
-
-context("Dot-product random graphs")
-
 test_that("Dot product rng works", {
 
-  library(igraph)
   set.seed(42)
   vecs <- cbind(c(0,1,1,1,0)/3, c(0,1,1,0,1)/3, c(1,1,1,1,0)/4,
                 c(0,1,1,1,0))
@@ -34,7 +30,6 @@ test_that("Dot product rng works", {
 
 test_that("Dot product rng gives warnings", {
 
-  library(igraph)
   vecs <- cbind(c(1,1,1)/3, -c(1,1,1)/3)
   expect_that(g <- sample_dot_product(vecs),
       gives_warning("Negative connection probability in dot-product graph"))

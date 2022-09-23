@@ -1,9 +1,4 @@
-
-context("layout_with_mds")
-
 test_that("layout_with_mds works", {
-
-  library(igraph)
 
   ## A tree
 

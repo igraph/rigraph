@@ -1,9 +1,4 @@
-
-context("edge names")
-
 test_that("edge names work", {
-
-  library(igraph)
 
   ## named edges
   igraph_options(print.edge.attributes = TRUE)

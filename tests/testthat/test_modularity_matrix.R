@@ -1,9 +1,4 @@
-
-context("modularity_matrix")
-
 test_that("modularity_matrix works", {
-
-  library(igraph)
 
   kar <- make_graph("zachary")
 
@@ -21,8 +16,6 @@ test_that("modularity_matrix works", {
 })
 
 test_that("modularity_matrix still accepts a membership argument for compatibility", {
-
-  library(igraph)
 
   kar <- make_graph("zachary")
   expect_warning(

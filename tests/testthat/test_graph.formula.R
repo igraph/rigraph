@@ -1,9 +1,5 @@
-
-context("graph_from_literal")
-
 test_that("simplify argument works", {
 
-  library(igraph)
   g1 <- graph_from_literal(1-1, 1-2, 1-2)
   g2 <- graph_from_literal(1-1, 1-2, 1-2, simplify=FALSE)
 

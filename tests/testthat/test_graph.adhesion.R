@@ -1,9 +1,4 @@
-
-context("adhesion")
-
 test_that("adhesion works", {
-
-  library(igraph)
 
   g <- make_graph("Zachary")
   expect_that(adhesion(g), equals(1))

@@ -1,8 +1,4 @@
-
-context("dyad_census")
-
 test_that("dyad_census works", {
-  library(igraph)
   ce <- simplify(read_graph(gzfile("celegansneural.gml.gz"), format="gml"))
   dc <- dyad_census(ce)
 

@@ -1,9 +1,4 @@
-
-context("dyad_census")
-
 test_that("dyad_census works", {
-
-  library(igraph)
 
   g1 <- make_ring(10)
   expect_that(dc1 <- dyad_census(g1), gives_warning("undirected"))

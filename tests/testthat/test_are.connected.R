@@ -1,9 +1,4 @@
-
-context("are_adjacent")
-
 test_that("are_adjacent works", {
-  library(igraph)
-
   g <- graph_from_literal( A-B-C, B-D )
   expect_true(are_adjacent(g, "A", "B"))
   expect_true(are_adjacent(g, "B", "A"))

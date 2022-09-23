@@ -1,9 +1,5 @@
-
-context("cluster_louvain")
-
 test_that("cluster_louvain works", {
 
-  library(igraph)
   set.seed(42)
 
   g <- make_graph("Zachary")

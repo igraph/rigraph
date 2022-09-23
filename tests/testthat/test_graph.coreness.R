@@ -1,8 +1,4 @@
-
-context("coreness")
-
 test_that("coreness works", {
-  library(igraph)
   g <- make_ring(10)
   g <- add_edges(g, c(1,2, 2,3, 1,3))
   gc <- coreness(g)

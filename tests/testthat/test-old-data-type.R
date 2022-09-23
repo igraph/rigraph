@@ -1,6 +1,3 @@
-
-context("Old data type and VS/ES")
-
 test_that("VS/ES work with old data type", {
 
   karate <-

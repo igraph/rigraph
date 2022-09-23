@@ -1,6 +1,3 @@
-
-context("Graphlets")
-
 sortgl <- function(x) {
   cl <- lapply(x$cliques, sort)
   n <- sapply(cl, length)
@@ -8,8 +5,6 @@ sortgl <- function(x) {
 }
 
 test_that("Graphlets work for some simple graphs", {
-  library(igraph)
-
   g <- make_full_graph(5)
   E(g)$weight <- 1
   gl <- graphlet_basis(g)
@@ -28,7 +23,6 @@ test_that("Graphlets work for some simple graphs", {
 })
 
 test_that("Graphlets filtering works", {
-  library(igraph)
   gt <- data.frame(from  =c("A", "A", "B", "B", "B", "C", "C", "D"),
                    to    =c("B", "C", "C", "D", "E", "D", "E", "E"),
                    weight=c( 8 ,  8 ,  8 ,  5 ,  5 ,  5 ,  5 ,  5 ))
@@ -81,7 +75,6 @@ graphlets.old <- function(graph) {
 }
 
 test_that("Graphlets work for a bigger graph", {
-  library(igraph)
   set.seed(42)
   g <- make_graph("zachary")
   E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
@@ -155,8 +148,6 @@ graphlets.project.old <- function(graph, cliques, iter, Mu=NULL) {
 }
 
 test_that("Graphlet projection works", {
-  library(igraph)
-
   D1 <- matrix(0, 5, 5)
   D2 <- matrix(0, 5, 5)
   D3 <- matrix(0, 5, 5)

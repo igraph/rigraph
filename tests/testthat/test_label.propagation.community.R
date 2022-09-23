@@ -1,9 +1,4 @@
-
-context("cluster_label_prop")
-
 test_that("label.probagation.community works", {
-
-  library(igraph)
 
   g <- make_graph("Zachary")
   set.seed(42)

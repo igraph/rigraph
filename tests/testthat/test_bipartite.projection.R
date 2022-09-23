@@ -1,8 +1,4 @@
-
-context("bipartite_projection")
-
 test_that("bipartite_projection works", {
-  library(igraph)
   local_rng_version("3.5.0")
   set.seed(42)
 
@@ -38,7 +34,6 @@ test_that("bipartite_projection works", {
 })
 
 test_that("bipartite_projection can calculate only one projection", {
-  library(igraph)
   set.seed(42)
 
   g <- sample_bipartite(5, 10, p=.3)
@@ -57,7 +52,6 @@ test_that("bipartite_projection can calculate only one projection", {
 
 test_that("bipartite_projection removes 'type' attribute if requested", {
 
-  library(igraph)
   g <- make_full_bipartite_graph(10,5)
   proj <- bipartite_projection(g)
   proj1 <- bipartite_projection(g, which="true")
@@ -80,7 +74,6 @@ test_that("bipartite_projection removes 'type' attribute if requested", {
 
 test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
 
-  library(igraph)
   g <- graph_from_literal(A-0, B-1, A-1, 0-1)
   V(g)$type <- V(g)$name %in% LETTERS
 
@@ -92,7 +85,6 @@ test_that("bipartite_projection breaks for non-bipartite graphs (#543)", {
 
 test_that("bipartite_projection prints a warning if the type attribute is non-logical (#476)", {
 
-  library(igraph)
   g <- make_full_bipartite_graph(10, 5)
   V(g)$type <- as.numeric(V(g)$type)
   expect_warning(bipartite_projection(g), "logical")

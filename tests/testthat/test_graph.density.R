@@ -1,9 +1,4 @@
-
-context("edge_density")
-
 test_that("edge_density works", {
-
-  library(igraph)
 
   g <- sample_gnp(50, 4/50)
   gd <- edge_density(g)
