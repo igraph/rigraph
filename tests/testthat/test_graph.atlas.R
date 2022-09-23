@@ -1,5 +1,4 @@
 test_that("graph.atlas works", {
-  library(igraph)
   g124 <- graph.atlas(124)
   expect_true(graph.isomorphic(g124, graph(c(1,2,2,3,3,4,4,5,1,5,1,3,2,6),
                                            directed=FALSE)))

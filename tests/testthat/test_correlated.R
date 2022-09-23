@@ -3,7 +3,6 @@
 
 test_that("sample_correlated_gnp works", {
 
-  library(igraph)
   set.seed(42)
 
   g <- erdos.renyi.game(10, .1)
@@ -18,7 +17,6 @@ test_that("sample_correlated_gnp works", {
 
 test_that("sample_correlated_gnp works when p is not given", {
 
-  library(igraph)
   set.seed(42)
 
   g <- erdos.renyi.game(10, .1)
@@ -33,7 +31,6 @@ test_that("sample_correlated_gnp works when p is not given", {
 
 test_that("sample_correlated_gnp works even for non-ER graphs", {
 
-  library(igraph)
   set.seed(42)
 
   g <- grg.game(100, 0.2)
@@ -48,7 +45,6 @@ test_that("sample_correlated_gnp works even for non-ER graphs", {
 
 test_that("sample_correlated_gnp_pair works", {
 
-  library(igraph)
   set.seed(42)
 
   gp <- sample_correlated_gnp_pair(10, corr=.95, p=.1, permutation=NULL)
@@ -60,7 +56,6 @@ test_that("sample_correlated_gnp_pair works", {
 
 test_that("sample_correlated_gnp corner cases work", {
 
-  library(igraph)
   set.seed(42)
 
   is.full <- function(g) {
@@ -88,7 +83,6 @@ test_that("sample_correlated_gnp corner cases work", {
 
 test_that("permutation works for sample_correlated_gnp", {
 
-  library(igraph)
   set.seed(42)
 
   g <- erdos.renyi.game(10, .3)

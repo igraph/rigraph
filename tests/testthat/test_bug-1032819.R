@@ -1,5 +1,4 @@
 test_that("VF2 isomorphism considers colors", {
-  library(igraph)
   g <- make_full_graph(3)
   path <- make_ring(3, circular=F)
   V(g)$color <- c(1,1,2)

@@ -1,7 +1,5 @@
 test_that("all.st.cuts works", {
 
-  library(igraph)
-
   unvs <- function(x) lapply(x, as.vector)
 
   g <- graph_from_literal( a -+ b -+ c -+ d -+ e )

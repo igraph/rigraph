@@ -1,5 +1,4 @@
 test_that("as.undirected keeps attributes", {
-  library(igraph)
   g <- graph_from_literal(A+-+B, A--+C, C+-+D)
   g$name <- "Tiny graph"
   E(g)$weight <- seq_len(ecount(g))

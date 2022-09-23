@@ -1,6 +1,4 @@
 test_that("assigning and querying attributes work", {
-  library(igraph)
-
   ## Create a small ring graph, assign attributes
   ring <- graph_from_literal( A-B-C-D-E-F-G-A )
   E(ring)$weight <- seq_len(ecount(ring))
@@ -11,8 +9,6 @@ test_that("assigning and querying attributes work", {
 })
 
 test_that("brackering works", {
-  library(igraph)
-
   g <- graph(c(1,2, 1,3, 3,4))
   g <- set_vertex_attr(g, name="weight", value=1:vcount(g))
   g <- set_edge_attr(g, name="weight", value=1:ecount(g))
@@ -32,7 +28,6 @@ test_that("brackering works", {
 })
 
 test_that("brackering works with a function", {
-  library(igraph)
   library(testthat)
 
   g <- graph(c(1,2, 1,3, 3,4))
@@ -57,8 +52,6 @@ test_that("brackering works with a function", {
 })
 
 test_that("brackering works with shortcuts", {
-  library(igraph)
-
   g <- graph(c(1,2, 1,3, 3,4))
   g <- set_vertex_attr(g, name="weight", value=1:vcount(g))
   g <- set_edge_attr(g, name="weight", value=1:ecount(g))

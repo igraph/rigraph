@@ -1,7 +1,5 @@
 test_that("as_adj works", {
 
-  library(igraph)
-
   g <- sample_gnp(50, 1/50)
   A <- as_adj(g, sparse=FALSE)
   g2 <- graph_from_adjacency_matrix(A, mode="undirected")

@@ -1,7 +1,5 @@
 test_that("modularity_matrix works", {
 
-  library(igraph)
-
   kar <- make_graph("zachary")
 
   fc <- cluster_fast_greedy(kar)
@@ -18,8 +16,6 @@ test_that("modularity_matrix works", {
 })
 
 test_that("modularity_matrix still accepts a membership argument for compatibility", {
-
-  library(igraph)
 
   kar <- make_graph("zachary")
   expect_warning(

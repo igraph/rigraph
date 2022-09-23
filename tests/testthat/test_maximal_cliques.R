@@ -80,7 +80,6 @@ bk4 <- function(graph, min=0, max=Inf) {
 #################################################################
 
 test_that("Maximal cliques work", {
-  library(igraph)
   set.seed(42)
   G <- sample_gnm(1000, 1000)
   cli <- make_full_graph(10)
@@ -97,7 +96,6 @@ test_that("Maximal cliques work", {
 })
 
 test_that("Maximal cliques work for subsets", {
-  library(igraph)
   set.seed(42)
   G <- sample_gnp(100, .5)
 
@@ -111,7 +109,6 @@ test_that("Maximal cliques work for subsets", {
 })
 
 test_that("Counting maximal cliques works", {
-  library(igraph)
   set.seed(42)
   G <- sample_gnp(100, .5)
 

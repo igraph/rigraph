@@ -1,6 +1,5 @@
 test_that("Generating stochastic block models works", {
 
-  library(igraph)
   pm <- matrix(1, nrow=2, ncol=2)
   bs <- c(4,6)
   g1 <- sample_sbm(10, pref.matrix=pm, block.sizes=bs,

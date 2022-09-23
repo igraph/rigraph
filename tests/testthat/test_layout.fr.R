@@ -2,7 +2,6 @@ test_that("", {
 
   skip_on_os("solaris")
 
-  library(igraph)
   set.seed(42)
   g <- make_ring(10)
   l <- layout_with_fr(g, niter=50, start.temp=sqrt(10)/10)

@@ -1,12 +1,10 @@
 test_that("arpack works for identity matrix", {
-  library(igraph)
   f <- function(x, extra=NULL) x
   res <- arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
   expect_that(res$values, equals(c(1,1)))
 })
 
 test_that("arpack works on the Laplacian of a star", {
-  library(igraph)
   f <- function(x, extra=NULL) {
     y <- x
     y[1] <- (length(x)-1)*x[1] - sum(x[-1])
@@ -28,7 +26,6 @@ test_that("arpack works on the Laplacian of a star", {
 # Complex case
 
 test_that("arpack works for non-symmetric matrices", {
-  library(igraph)
   A <- structure(c(-6, -6, 7, 6, 1, -9, -3, 2, -9, -7, 0, 1, -7, 8,
                    -7, 10, 0, 0, 1, 1, 10, 0, 8, -4, -4, -5, 8, 9, -6, 9, 3, 8,
                    6, -1, 9, -9, -6, -3, -1, -7, 8, -4, -4, 10, 0, 5, -2, 0, 7,

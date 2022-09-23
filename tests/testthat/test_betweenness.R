@@ -1,5 +1,4 @@
 test_that("betweenness works for kite graph", {
-  library(igraph)
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,
                         Beverly  - Andre:Diane:Ed:Garth,
                         Carol    - Andre:Diane:Fernando,
@@ -25,7 +24,6 @@ test_that("betweenness works for kite graph", {
 })
 
 test_that("weighted betweenness works", {
-  library(igraph)
   nontriv <- graph( c(0,19,0,16,0,20,1,19,2,5,3,7,3,8,
                       4,15,4,11,5,8,5,19,6,7,6,10,6,8,
                       6,9,7,20,9,10,9,20,10,19,
@@ -47,8 +45,6 @@ test_that("weighted betweenness works", {
 })
 
 test_that("normalization works well", {
-  library(igraph)
-
   g1 <- graph_from_literal( 0 +-+ 1 +-+ 2 )
 
   b11 <- betweenness(g1, normalized=TRUE, directed=FALSE)

@@ -1,7 +1,5 @@
 test_that("disjoint union works for named graphs", {
 
-  library(igraph)
-
   g1 <- g2 <- make_ring(10)
   g1$foo <- "bar"
   V(g1)$name <- letters[ 1:10]
@@ -37,8 +35,6 @@ test_that("disjoint union works for named graphs", {
 
 test_that("disjoint union gives warning for non-unique vertex names", {
 
-  library(igraph)
-
   g1 <- make_ring(5); V(g1)$name <- letters[1:5]
   g2 <- make_ring(5); V(g2)$name <- letters[5:9]
 
@@ -48,8 +44,6 @@ test_that("disjoint union gives warning for non-unique vertex names", {
 
 
 test_that("union of unnamed graphs works", {
-
-  library(igraph)
 
   g1 <- make_ring(10)
   g2 <- make_ring(13)
@@ -84,8 +78,6 @@ test_that("union of unnamed graphs works", {
 })
 
 test_that("union of named graphs works", {
-
-  library(igraph)
 
   g1 <- make_ring(10)
   g2 <- make_ring(13)
@@ -155,8 +147,6 @@ m NA 23    m
 })
 
 test_that("intersection of named graphs works", {
-
-  library(igraph)
 
   g1 <- make_ring(10)
   g2 <- make_ring(13)
@@ -243,8 +233,6 @@ m NA 23    m
 
 test_that("difference of named graphs works", {
 
-  library(igraph)
-
   g1 <- make_ring(10)
   g2 <- make_star(11, center=11, mode="undirected")
   V(g1)$name <- letters[1:10]
@@ -290,8 +278,6 @@ test_that("difference of named graphs works", {
 })
 
 test_that("compose works for named graphs", {
-
-  library(igraph)
 
   g1 <- graph_from_literal( A-B:D:E, B-C:D, C-D, D-E )
   g2 <- graph_from_literal( A-B-E-A )
@@ -344,7 +330,6 @@ C    5     e    NA   NA    C
 })
 
 test_that("intersection of non-named graphs keeps attributes properly", {
-  library(igraph)
   set.seed(42)
 
   g <- sample_gnp(10, 1/2)
@@ -369,7 +354,6 @@ test_that("intersection of non-named graphs keeps attributes properly", {
 })
 
 test_that("union of non-named graphs keeps attributes properly", {
-  library(igraph)
   set.seed(42)
 
   g <- sample_gnp(10, 1/2)

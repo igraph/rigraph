@@ -1,5 +1,4 @@
 test_that("make_kautz_graph works", {
-  library(igraph)
   g <- make_kautz_graph(2,3)
   expect_that(g$name, equals("Kautz graph 2-3"))
   expect_that(g$m, equals(2))

@@ -14,7 +14,6 @@ mag_sort <- function(x) {
 }
 
 test_that("Undirected, unweighted case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42)
@@ -60,7 +59,6 @@ test_that("Undirected, unweighted case works", {
 })
 
 test_that("Undirected, weighted case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42)
@@ -105,7 +103,6 @@ test_that("Undirected, weighted case works", {
 })
 
 test_that("Directed, unweighted case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42)
@@ -159,7 +156,6 @@ test_that("Directed, unweighted case works", {
 })
 
 test_that("Directed, weighted case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42)
@@ -208,7 +204,6 @@ test_that("Directed, weighted case works", {
 })
 
 test_that("Issue #50 is resolved", {
-  library(igraph)
   set.seed(12345)
 
   g <- erdos.renyi.game(15, .4)
@@ -223,7 +218,6 @@ test_that("Issue #50 is resolved", {
 })
 
 test_that("Issue #51 is resolved", {
-  library(igraph)
   set.seed(12345)
 
   pref.matrix <- diag(0.2, 2) + 0.2

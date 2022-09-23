@@ -1,7 +1,5 @@
 test_that("is_chordal works", {
 
-  library(igraph)
-
   ## The examples from the Tarjan-Yannakakis paper
   g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
                   E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,

@@ -1,7 +1,5 @@
 test_that("girth works", {
 
-  library(igraph)
-
   ## No circle in a tree
   g <- make_tree(1000, 3)
   gi <- girth(g)

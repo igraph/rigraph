@@ -1,7 +1,5 @@
 test_that("sample_smallworld works", {
 
-  library(igraph)
-
   for (i in 1:50) {
     p <- runif(1)
     d <- sample(1:3, 1)

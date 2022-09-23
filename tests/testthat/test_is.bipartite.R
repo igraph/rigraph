@@ -1,7 +1,5 @@
 test_that("is_bipartite works", {
 
-  library(igraph)
-
   I <- matrix(sample(0:1, 35, replace=TRUE, prob=c(3,1)), ncol=5)
   g <- graph_from_incidence_matrix(I)
   expect_true(bipartite_mapping(g)$res)

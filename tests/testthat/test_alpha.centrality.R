@@ -1,5 +1,4 @@
 test_that("dense alpha_centrality works", {
-  library(igraph)
   g.1 <- graph( c(1,3,2,3,3,4,4,5) )
   ac1 <- alpha_centrality(g.1, sparse=FALSE)
   expect_that(ac1, equals(c(1, 1, 3, 4, 5)))
@@ -15,7 +14,6 @@ test_that("dense alpha_centrality works", {
 
 test_that("sparse alpha_centrality works", {
   if (require(Matrix, quietly=TRUE)) {
-    library(igraph)
     g.1 <- graph( c(1,3,2,3,3,4,4,5) )
     ac1 <- alpha_centrality(g.1, sparse=TRUE)
     expect_that(ac1, equals(c(1, 1, 3, 4, 5)))
@@ -34,7 +32,6 @@ test_that("sparse alpha_centrality works", {
 ## weighted version
 
 test_that("weighted dense alpha_centrality works", {
-  library(igraph)
   star <- make_star(10)
   E(star)$weight <- sample(ecount(star))
 
@@ -50,7 +47,6 @@ test_that("weighted dense alpha_centrality works", {
 
 test_that("weighted sparse alpha_centrality works", {
   if (require("Matrix", quietly=TRUE)) {
-    library(igraph)
     star <- make_star(10)
     E(star)$weight <- sample(ecount(star))
 
@@ -67,7 +63,6 @@ test_that("weighted sparse alpha_centrality works", {
 
 test_that("undirected, alpha centrality works, #653", {
   if (require("Matrix", quietly = TRUE)) {
-    library(igraph)
     g <- make_ring(10)
 
     ac1 <- alpha_centrality(g, sparse = TRUE)

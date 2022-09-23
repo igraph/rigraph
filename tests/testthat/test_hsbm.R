@@ -1,5 +1,4 @@
 test_that("HSBM works", {
-  library(igraph)
   set.seed(42)
 
   C <- matrix(c(1  , 1/2,   0,
@@ -35,7 +34,6 @@ test_that("HSBM works", {
 })
 
 test_that("HSBM with 1 cluster per block works", {
-  library(igraph)
   res <- Matrix(0, nrow=10, ncol=10, doDiag=FALSE)
   res[6:10, 1:5] <- res[1:5, 6:10] <- 1
   g <- sample_hierarchical_sbm(10, 5, rho=1, C=matrix(0), p=1)
@@ -43,8 +41,6 @@ test_that("HSBM with 1 cluster per block works", {
 })
 
 test_that("HSBM with list arguments works", {
-  library(igraph)
-
   b <- 5
   C <- matrix(c(1  , 1/2,   0,
                 1/2,   0, 1/2,

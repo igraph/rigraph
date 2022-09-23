@@ -1,6 +1,5 @@
 test_that("graph.subisomorphic.vf2 works", {
 
-  library(igraph)
   set.seed(42)
 
   g1 <- sample_gnp(20,6/20)

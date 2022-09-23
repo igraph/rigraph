@@ -1,7 +1,5 @@
 test_that("dyad_census works", {
 
-  library(igraph)
-
   g1 <- make_ring(10)
   expect_that(dc1 <- dyad_census(g1), gives_warning("undirected"))
   expect_that(dc1, equals(list(mut=10, asym=0, null=35)))

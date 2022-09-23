@@ -1,6 +1,5 @@
 test_that("print.igraph works", {
 
-  library(igraph)
   igraph_options(print.full=TRUE)
   options(width=76)
 

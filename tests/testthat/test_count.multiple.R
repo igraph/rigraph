@@ -1,5 +1,4 @@
 test_that("any_multiple, count_multiple, which_multiple works", {
-  library(igraph)
   set.seed(42)
 
   g <- barabasi.game(10, m=3, algorithm="bag")

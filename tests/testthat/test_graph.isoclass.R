@@ -1,7 +1,5 @@
 test_that("isomorphism_class works", {
 
-  library(igraph)
-
   g1 <- graph_from_isomorphism_class(3, 10)
   g2 <- graph_from_isomorphism_class(3, 11)
   expect_that(isomorphism_class(g1), equals(10))

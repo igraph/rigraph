@@ -1,7 +1,5 @@
 test_that("writing Pajek files works", {
 
-  library(igraph)
-
   g <- make_ring(9)
   V(g)$color <- c("red", "green", "yellow")
 

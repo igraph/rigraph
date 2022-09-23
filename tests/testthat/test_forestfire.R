@@ -1,6 +1,5 @@
 test_that("sample_forestfire works", {
 
-  library(igraph)
   set.seed(42)
 
   pars <- list(sparse=c(0.35, 0.2/0.35),

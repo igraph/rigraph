@@ -138,7 +138,6 @@ test_that("General scan-stat works, US, scan-1, weighted, directed", {
 
 test_that("Issue 18 is resolved", {
 
-  library(igraph)
   g <- graph(c(1,2,2,1, 1,3,3,1, 2,4, 3,4, 3,5,5,3, 4,5,5,4))
   expect_that(local_scan(g, mode="all"), equals(c(4, 3, 7, 6, 5)))
   expect_that(local_scan(g, mode="out"), equals(c(4, 3, 7, 2, 5)))
@@ -146,7 +145,6 @@ test_that("Issue 18 is resolved", {
 })
 
 test_that("Issue 18 is really resolved", {
-  library(igraph)
   el <- c(1, 5, 1, 7, 2, 5, 2, 7, 2, 10, 2, 13, 2, 18, 3, 5, 3, 10, 3,
           13, 4, 5, 4, 10, 5, 7, 5, 10, 5, 13, 5, 18, 6, 3, 6, 5, 6, 7,
           6, 13, 7, 5, 8, 5, 8, 10, 8, 18, 9, 3, 9, 5, 9, 7, 9, 10, 11,
@@ -167,7 +165,6 @@ test_that("Issue 18 is really resolved", {
 
 test_that("Issue 20 is resolved", {
 
-  library(igraph)
   set.seed(12345)
   g1 <- erdos.renyi.game(n=20, p.or.m=0.1, directed=TRUE)
   g2 <- erdos.renyi.game(n=20, p.or.m=0.1, directed=TRUE)
@@ -177,7 +174,6 @@ test_that("Issue 20 is resolved", {
 })
 
 test_that("FUN argument works, #32", {
-  library(igraph)
   r1 <- local_scan(graph.ring(10), k=1, FUN="ecount")
   r2 <- local_scan(graph.ring(10), k=1, FUN=ecount)
   expect_that(r1, equals(rep(2, 10)))

@@ -1,6 +1,5 @@
 test_that("Sampling sphere surface works", {
 
-  library(igraph)
   library(digest)
 
   set.seed(42)
@@ -18,7 +17,6 @@ test_that("Sampling sphere surface works", {
 
 test_that("Sampling sphere volume works", {
 
-  library(igraph)
   library(digest)
 
   set.seed(42)

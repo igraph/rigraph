@@ -1,7 +1,5 @@
 test_that("sdf works", {
 
-  library(igraph)
-
   sdf <- igraph:::sdf
   `[.igraphSDF` <- igraph:::`[.igraphSDF`
   `[<-.igraphSDF` <- igraph:::`[<-.igraphSDF`

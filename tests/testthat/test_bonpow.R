@@ -1,5 +1,4 @@
 test_that("Power centrality works", {
-  library(igraph)
   library(Matrix)
 
   ## Generate some test data from Bonacich, 1987:

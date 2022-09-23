@@ -1,7 +1,5 @@
 test_that("min_cut works", {
 
-  library(igraph)
-
   g2 <- graph( c(1,2,2,3,3,4, 1,6,6,5,5,4, 4,1) )
   E(g2)$capacity <- c(3,1,2, 10,1,3, 2)
   mc <- min_cut(g2, value.only=FALSE)
@@ -14,8 +12,6 @@ test_that("min_cut works", {
 })
 
 test_that("s-t min_cut works", {
-
-  library(igraph)
 
   g2 <- graph( c(1,2,2,3,3,4, 1,6,6,5,5,4, 4,1) )
   E(g2)$capacity <- c(3,1,2, 10,1,3, 2)

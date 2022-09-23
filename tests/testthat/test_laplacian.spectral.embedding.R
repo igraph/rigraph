@@ -14,7 +14,6 @@ mag_sort <- function(x) {
 }
 
 test_that("Undirected, unweighted, D-A case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42)
@@ -68,7 +67,6 @@ test_that("Undirected, unweighted, D-A case works", {
 })
 
 test_that("Undirected, unweighted, DAD case works", {
-  library(igraph)
   set.seed(42)
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
 
@@ -171,7 +169,6 @@ test_that("Undirected, unweighted, I-DAD case works", {
 })
 
 test_that("Undirected, weighted, D-A case works", {
-  library(igraph)
   library(Matrix)
 
   set.seed(42*42)
@@ -227,7 +224,6 @@ test_that("Undirected, weighted, D-A case works", {
 })
 
 test_that("Undirected, unweighted, DAD case works", {
-  library(igraph)
   set.seed(42)
 
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
@@ -280,7 +276,6 @@ test_that("Undirected, unweighted, DAD case works", {
 })
 
 test_that("Undirected, unweighted, I-DAD case works", {
-  library(igraph)
   set.seed(42)
 
   g <- random.graph.game(10, 20, type="gnm", directed=FALSE)
@@ -333,7 +328,6 @@ test_that("Undirected, unweighted, I-DAD case works", {
 })
 
 test_that("Directed, unweighted, OAP case works", {
-  library(igraph)
   set.seed(42*42)
 
   g <- random.graph.game(10, 30, type="gnm", directed=TRUE)
@@ -389,7 +383,6 @@ test_that("Directed, unweighted, OAP case works", {
 })
 
 test_that("Directed, weighted case works", {
-  library(igraph)
   set.seed(42*42)
 
   g <- random.graph.game(10, 30, type="gnm", directed=TRUE)

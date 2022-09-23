@@ -1,6 +1,5 @@
 test_that("BFS works from multiple root vertices", {
 
-  library(igraph)
   g <- make_ring(10) %du% make_ring(10)
 
   expect_that(as.vector(bfs(g, 1)$order),

@@ -1,5 +1,4 @@
 test_that("transitivity works", {
-  library(igraph)
   set.seed(42)
   g <- sample_gnp(100, p=10/100)
 
@@ -21,7 +20,6 @@ test_that("transitivity works", {
 
 test_that("no integer overflow", {
 
-  library(igraph)
   set.seed(42)
   g <- graph.star(80000, mode="undirected") + edges(sample(2:1000), 100)
   mtr <- min(transitivity(g, type="local"), na.rm=TRUE)

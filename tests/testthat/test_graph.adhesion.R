@@ -1,7 +1,5 @@
 test_that("adhesion works", {
 
-  library(igraph)
-
   g <- make_graph("Zachary")
   expect_that(adhesion(g), equals(1))
   expect_that(cohesion(g), equals(1))

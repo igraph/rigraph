@@ -1,5 +1,4 @@
 test_that("community detection functions work", {
-  library(igraph)
   set.seed(42)
 
   F <- list("cluster_edge_betweenness", "cluster_fast_greedy",
@@ -49,7 +48,6 @@ test_that("community detection functions work", {
 })
 
 test_that("creating communities objects works", {
-  library(igraph)
   set.seed(42)
 
   karate <- make_graph("Zachary")
@@ -67,7 +65,6 @@ test_that("creating communities objects works", {
 
 test_that("communities function works", {
   skip_if_no_glpk()
-  library(igraph)
   g <- make_graph("Zachary")
   oc <- cluster_optimal(g)
   gr <- communities(oc)

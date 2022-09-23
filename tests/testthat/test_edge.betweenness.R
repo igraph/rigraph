@@ -1,6 +1,4 @@
 test_that("edge_betweenness works", {
-  library(igraph)
-
   kite <- graph_from_literal(Andre    - Beverly:Carol:Diane:Fernando,
                     Beverly  - Andre:Diane:Ed:Garth,
                     Carol    - Andre:Diane:Fernando,

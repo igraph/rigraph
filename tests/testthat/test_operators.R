@@ -1,7 +1,5 @@
 test_that("operators work", {
 
-  library(igraph)
-
   o <- function(x) x[order(x[,1], x[,2]),]
 
   g1 <- make_ring(10)

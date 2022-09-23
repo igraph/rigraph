@@ -1,7 +1,5 @@
 test_that("label.probagation.community works", {
 
-  library(igraph)
-
   g <- make_graph("Zachary")
   set.seed(42)
   lpc <- cluster_label_prop(g)

@@ -1,5 +1,4 @@
 test_that("cliques works", {
-  library(igraph)
   set.seed(42)
 
   check.clique <- function(graph, vids) {

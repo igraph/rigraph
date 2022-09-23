@@ -1,7 +1,5 @@
 test_that("ego works", {
 
-  library(igraph)
-
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
@@ -40,7 +38,6 @@ test_that("ego works", {
 
 test_that("mindist works", {
 
-  library(igraph)
   g <- make_ring(10)
   expect_that(ego_size(g, order=2, mindist=0), equals(rep(5, 10)))
   expect_that(ego_size(g, order=2, mindist=1), equals(rep(4, 10)))

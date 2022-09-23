@@ -1,6 +1,5 @@
 test_that("cluster_leiden works", {
 
-  library(igraph)
   set.seed(42)
 
   g <- make_graph("Zachary")

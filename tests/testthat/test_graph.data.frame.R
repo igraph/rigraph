@@ -24,8 +24,6 @@ test_that("graph_from_data_frame works", {
 
 test_that("graph_from_data_frame works on matrices", {
 
-  library(igraph)
-
   el <- cbind(1:5,5:1,weight=1:5)
   g <- graph_from_data_frame(el)
   g <- delete_vertex_attr(g, "name")

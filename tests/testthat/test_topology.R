@@ -1,6 +1,4 @@
 test_that("automorphisms works", {
-  library(igraph)
-
   g <- make_ring(10)
   expect_that(automorphisms(g)$group_size, equals("20"))
 
@@ -10,8 +8,6 @@ test_that("automorphisms works", {
 
 
 test_that("automorphisms works with colored graphs", {
-  library(igraph)
-
   g <- make_full_graph(4)
   expect_that(automorphisms(g, colors=c(1,2,1,2))$group_size, equals("4"))
 

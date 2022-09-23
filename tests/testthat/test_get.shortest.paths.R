@@ -1,7 +1,5 @@
 test_that("shortest_paths works", {
 
-  library(igraph)
-
   edges <- matrix(c("s", "a", 2,
                     "s", "b", 4,
                     "a", "t", 4,
