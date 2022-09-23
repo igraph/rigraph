@@ -15,10 +15,10 @@ test_that("community detection functions work", {
   for (f in F) {
     f <- get(f)
     comm <- f(karate)
-    
+
     expect_that(modularity(comm),
                 equals(modularity(karate, membership(comm))))
-  
+
     cc <- communities(comm)
     expect_true(all(!duplicated(unlist(cc))))
     expect_true(all(unlist(cc) <= vcount(karate) & unlist(cc) >= 1))

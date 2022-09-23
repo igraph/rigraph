@@ -375,7 +375,7 @@ modularity <- function(x, ...)
 #' pairs of vertices, and \eqn{\delta(x,y)}{delta(x,y)} is 1 if \eqn{x=y} and 0
 #' otherwise. For directed graphs, it is defined as
 #' \deqn{Q = \frac{1}{m} \sum_{i,j} (A_{ij}-\gamma
-#' \frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum( 
+#' \frac{k_i^{out} k_j^{in}}{m})\delta(c_i,c_j).}{Q=1/(m) * sum(
 #' (Aij-gamma*ki^out*kj^in/(m) ) delta(ci,cj),i,j).}
 #'
 #' The resolution parameter \eqn{\gamma}{gamma} allows weighting the random
@@ -1075,8 +1075,8 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' \code{\link{cluster_louvain}}
 #' \code{\link{cluster_fluid_communities}}
 #' \code{\link{cluster_infomap}}
-#' \code{\link{cluster_optimal}}             
-#' \code{\link{cluster_walktrap}}                
+#' \code{\link{cluster_optimal}}
+#' \code{\link{cluster_walktrap}}
 #' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 [cs.SI]
@@ -1089,7 +1089,7 @@ cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
 #' # Set seed for sake of reproducibility
 #' set.seed(1)
 #' ldc <- cluster_leiden(g, resolution_parameter=r)
-#' print(ldc) 
+#' print(ldc)
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
                            weights=NULL, resolution_parameter=1, beta=0.01,

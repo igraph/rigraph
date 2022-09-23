@@ -11,5 +11,5 @@ test_that("make_de_bruijn_graph works", {
   expect_true(graph.isomorphic(g3, graph(c(1,1,3,1,1,2,3,2,2,3,
                                            4,3,2,4,4,4))))
   expect_true(graph.isomorphic(g2, g3))
-  
+
 })

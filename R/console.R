@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -102,9 +102,9 @@
   pb$pb$set(pb$pb$widget, percent)
   tcltk::tkconfigure(pb$pb$label, text=substr(message, 1, 20))
   tcltk::tcl("update", "idletasks")
-  
+
   ## Done
-  assign(".igraph.pb", pb, envir=asNamespace("igraph"))  
+  assign(".igraph.pb", pb, envir=asNamespace("igraph"))
   if (startmess) .igraph.progress.tkconsole.message("Console started.\n")
   0L
 }
@@ -119,9 +119,9 @@
   image <- tcltk::tkimage.create("photo", "img", format="gif",
                           file=system.file("igraph2.gif", package="igraph"))
   logo <- tcltk::tklabel(lfr, relief="flat", padx=10, pady=10, image=image)
-  
+
   scr <- tcltk::tkscrollbar(console, repeatinterval=5,
-                     command=function(...) tcltk::tkyview(txt, ...)) 
+                     command=function(...) tcltk::tkyview(txt, ...))
   txt <- tcltk::tktext(console, yscrollcommand=function(...) tcltk::tkset(scr, ...),
                 width=60, height=7, font=fn)
   tcltk::tkconfigure(txt, state="disabled")
@@ -143,8 +143,8 @@
          ipadx=10, ipady=10)
   tcltk::tkpack(bclear, side="top", fill="x", expand=0, padx=10)
   ## tcltk::tkpack(bstop, side="top", fill="x", expand=0, padx=10)
-  tcltk::tkpack(bclose, side="top", fill="x", expand=0, padx=10)  
-  
+  tcltk::tkpack(bclose, side="top", fill="x", expand=0, padx=10)
+
   tcltk::tkpack(lfr, side="left", fill="none", expand=0, anchor="n")
   tcltk::tkpack(pbar$frame, side="bottom", fill="x", expand=0)
   tcltk::tkpack(scr, side="right", fill="y", expand=0)
@@ -156,7 +156,7 @@
     }
     assign(".igraph.pb", NULL, envir=asNamespace("igraph"))
   })
-  
+
   res <- list(top=console, txt=txt, pb=pbar$pb, oldverb=oldverb)
   class(res) <- "igraphconsole"
   res
@@ -169,7 +169,7 @@
       pb <- .igraph.progress.tkconsole.create(NA)
       assign(".igraph.pb", pb, envir=asNamespace("igraph"))
       txt <- pb$txt
-    } else { 
+    } else {
       return()
     }
   }
@@ -192,7 +192,7 @@ close.igraphconsole <- function(con, ...) {
 .igraph.progress.tkconsole.pbar <- function(top) {
   useText <- FALSE
   have_ttk <- as.character(tcltk::tcl("info", "tclversion")) >= "8.5"
-  if (!have_ttk && as.character(tcltk::tclRequire("PBar")) == "FALSE") 
+  if (!have_ttk && as.character(tcltk::tclRequire("PBar")) == "FALSE")
     useText <- TRUE
   fn <- tcltk::tkfont.create(family = "helvetica", size = 10)
   frame <- tcltk::tkframe(top)
@@ -223,20 +223,20 @@ close.igraphconsole <- function(con, ...) {
 }
 
 #' The igraph console
-#' 
+#'
 #' The igraph console is a GUI windows that shows what the currently running
 #' igraph function is doing.
-#' 
+#'
 #' The console can be started by calling the \code{console} function.
 #' Then it stays open, until the user closes it.
-#' 
+#'
 #' Another way to start it to set the \code{verbose} igraph option to
 #' \dQuote{tkconsole} via \code{igraph_options}. Then the console (re)opens
 #' each time an igraph function supporting it starts; to close it, set the
 #' \code{verbose} option to another value.
-#' 
+#'
 #' The console is written in Tcl/Tk and required the \code{tcltk} package.
-#' 
+#'
 #' @aliases igraph.console
 #' @return \code{NULL}, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -248,7 +248,7 @@ console <- function() {
   oldverb <- igraph_opt("verbose")
   igraph_options(verbose="tkconsole")
   pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir=asNamespace("igraph"))  
+  assign(".igraph.pb", pb, envir=asNamespace("igraph"))
   .igraph.progress.tkconsole.message("Console started.\n")
   invisible()
 }

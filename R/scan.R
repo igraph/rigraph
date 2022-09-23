@@ -183,7 +183,7 @@ local_scan <- function(graph.us, graph.them=NULL, k=1, FUN=NULL,
                FUN, ...)
       }
     }
-    
+
   } else {
 
     if (!is.null(neighborhoods)) {

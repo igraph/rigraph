@@ -4,7 +4,7 @@
 ##   IGraph R package
 ##   Copyright (C) 2015  Gabor Csardi <csardi.gabor@gmail.com>
 ##   334 Harvard street, Cambridge, MA 02139 USA
-##   
+##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
 ##   the Free Software Foundation; either version 2 of the License, or
@@ -14,7 +14,7 @@
 ##   but WITHOUT ANY WARRANTY; without even the implied warranty of
 ##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##   GNU General Public License for more details.
-##   
+##
 ##   You should have received a copy of the GNU General Public License
 ##   along with this program; if not, write to the Free Software
 ##   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -24,16 +24,16 @@
 
 
 #' Find triangles in graphs
-#' 
+#'
 #' Count how many triangles a vertex is part of, in a graph, or just list the
 #' triangles of a graph.
-#' 
+#'
 #' \code{triangles} lists all triangles of a graph. For efficiency, all
 #' triangles are returned in a single vector. The first three vertices belong
 #' to the first triangle, etc.
-#' 
+#'
 #' \code{count_triangles} counts how many triangles a vertex is part of.
-#' 
+#'
 #' @aliases count_triangles adjacent.triangles triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #' ignored.
@@ -42,26 +42,26 @@
 #' named graphs.
 #' @return For \code{triangles} a numeric vector of vertex ids, the first three
 #' vertices belong to the first triangle found, etc.
-#' 
+#'
 #' For \code{count_triangles} a numeric vector, the number of triangles for all
 #' vertices queried.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{transitivity}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A small graph
 #' kite <- make_graph("Krackhardt_Kite")
 #' plot(kite)
 #' matrix(triangles(kite), nrow=3)
-#' 
+#'
 #' ## Adjacenct triangles
 #' atri <- count_triangles(kite)
 #' plot(kite, vertex.label=atri)
-#' 
+#'
 #' ## Always true
 #' sum(count_triangles(kite)) == length(triangles(kite))
-#' 
+#'
 #' ## Should match, local transitivity is the
 #' ## number of adjacent triangles divided by the number
 #' ## of adjacency triples

@@ -29,7 +29,7 @@ test_that("Dot product rng works", {
 
   g2 <- sample_dot_product(vecs, directed=TRUE)
   expect_that(ecount(g2), equals(4938))
-  
+
 })
 
 test_that("Dot product rng gives warnings", {

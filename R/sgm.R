@@ -14,11 +14,11 @@ solve_LSAP <- function (x, maximum = FALSE) {
 }
 
 #' Match Graphs given a seeding of vertex correspondences
-#' 
+#'
 #' Given two adjacency matrices \code{A} and \code{B} of the same size, match
 #' the two graphs with the help of \code{m} seed vertex pairs which correspond
 #' to the first \code{m} rows (and columns) of the adjacency matrices.
-#' 
+#'
 #' The approximate graph matching problem is to find a bijection between the
 #' vertices of two graphs , such that the number of edge disagreements between
 #' the corresponding vertex pairs is minimized. For seeded graph matching, part
@@ -26,7 +26,7 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #' and the problem task is to complete the bijection by estimating the
 #' permutation matrix that permutes the rows and columns of the adjacency
 #' matrix of the second graph.
-#' 
+#'
 #' It is assumed that for the two supplied adjacency matrices \code{A} and
 #' \code{B}, both of size \eqn{n\times n}{n*n}, the first \eqn{m} rows(and
 #' columns) of \code{A} and \code{B} correspond to the same vertices in both
@@ -36,9 +36,9 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #' identity matrix \eqn{I_{m}}. The function \code{match_vertices} estimates
 #' the permutation matrix \eqn{P} via an optimization algorithm based on the
 #' Frank-Wolfe algorithm.
-#' 
+#'
 #' See references for further details.
-#' 
+#'
 #' @aliases match_vertices seeded.graph.match
 #' @param A a numeric matrix, the adjacency matrix of the first graph
 #' @param B a numeric matrix, the adjacency matrix of the second graph
@@ -56,12 +56,12 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #' G., Harley, E. T., Fishkind, D. E.,Vogelstein, R. J., Priebe, C. E. (2011).
 #' Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.
 #' Online: \url{https://arxiv.org/abs/1112.5507}
-#' 
+#'
 #' Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
 #' Online: \url{https://arxiv.org/abs/1209.0367}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #'  #require(Matrix)
 #'  g1 <- sample_gnp(10, 0.1)
 #'  randperm <- c(1:3, 3+sample(7))

@@ -17,7 +17,7 @@ test_that("edge_connectivity works", {
     for (k in (j+1):vcount(g)) {
       ec2 <- edge_connectivity(g, source=j, target=k)
       if (ec2 < ecST) { ecST <- ec2 }
-    } 
+    }
   }
   expect_that(ec, equals(ecST))
 

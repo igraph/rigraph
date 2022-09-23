@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,12 +22,12 @@
 
 
 #' Minimum spanning tree
-#' 
+#'
 #' A subgraph of a connected graph is a \emph{minimum spanning tree} if it is
 #' tree, and the sum of its edge weights are the minimal among all tree
 #' subgraphs of the graph. A minimum spanning forest of a graph is the graph
 #' consisting of the minimum spanning trees of its components.
-#' 
+#'
 #' If the graph is unconnected a minimum spanning forest is returned.
 #'
 #' @aliases minimum.spanning.tree
@@ -54,10 +54,10 @@
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- sample_gnp(100, 3/100)
 #' g_mst <- mst(g)
-#' 
+#'
 mst <- function(graph, weights=NULL,
                                   algorithm=NULL, ...) {
 
@@ -72,7 +72,7 @@ mst <- function(graph, weights=NULL,
       algorithm <- "unweighted"
     }
   }
-  
+
   if (algorithm=="unweighted") {
     on.exit( .Call(C_R_igraph_finalizer) )
     .Call(C_R_igraph_minimum_spanning_tree_unweighted, graph)

@@ -87,7 +87,7 @@ test_that("Undirected, weighted case works", {
   expect_that(std(as_la$X), equals(std(U[,1:no])))
   expect_that(au_la$D, equals(ss$values[1:no]))
   expect_that(std(au_la$X), equals(X[,1:no]))
-  
+
   au_lm <- embed_adjacency_matrix(g, no=no, which="lm",
                                         cvec=degree(g)/2, scaled=TRUE)
   as_lm <- embed_adjacency_matrix(g, no=no, which="lm",

@@ -4,16 +4,16 @@ context("components")
 test_that("components works", {
   library(igraph)
   set.seed(42)
-  
+
   gc <- function(graph) {
     cl <- components(graph)
     induced_subgraph(graph, which(cl$membership==which.max(cl$csize)))
   }
-  
+
   rg <- function(n) {
     gc(sample_gnp(n, 1/n))
   }
-  
+
   G <- lapply(1:30, function(x) rg(sample(100, 1)))
   Gsize <- sapply(G, vcount)
 

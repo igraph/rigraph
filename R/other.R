@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,10 +22,10 @@
 
 
 #' Running mean of a time series
-#' 
+#'
 #' \code{running_mean} calculates the running mean in a vector with the given
 #' bin width.
-#' 
+#'
 #' The running mean of \code{v} is a \code{w} vector of length
 #' \code{length(v)-binwidth+1}. The first element of \code{w} id the average of
 #' the first \code{binwidth} elements of \code{v}, the second element of
@@ -40,9 +40,9 @@
 #' @export
 #' @keywords manip
 #' @examples
-#' 
+#'
 #' running_mean(1:100, 10)
-#' 
+#'
 running_mean <- function(v, binwidth) {
 
   v <- as.numeric(v)
@@ -50,7 +50,7 @@ running_mean <- function(v, binwidth) {
   if (length(v) < binwidth) {
     stop("Vector too short for this binwidth.")
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_running_mean, v, binwidth)
 }
@@ -58,10 +58,10 @@ running_mean <- function(v, binwidth) {
 
 
 #' Sampling a random integer sequence
-#' 
+#'
 #' This function provides a very efficient way to pull an integer random sample
 #' sequence from an integer interval.
-#' 
+#'
 #' The algorithm runs in \code{O(length)} expected time, even if
 #' \code{high-low} is big. It is much faster (but of course less general) than
 #' the builtin \code{sample} function of R.
@@ -78,15 +78,15 @@ running_mean <- function(v, binwidth) {
 #' @export
 #' @keywords datagen
 #' @examples
-#' 
+#'
 #' rs <- sample_seq(1, 100000000, 10)
 #' rs
-#' 
+#'
 sample_seq <- function(low, high, length) {
   if (length>high-low+1) {
     stop("length too big for this interval")
   }
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_random_sample, as.numeric(low), as.numeric(high),
         as.numeric(length))
@@ -111,9 +111,9 @@ sample_seq <- function(low, high, length) {
 #' @keywords internal
 #'
 handle_vertex_type_arg <- function(types, graph, required = T) {
-  if (is.null(types) && "type" %in% vertex_attr_names(graph)) { 
-    types <- V(graph)$type 
-  } 
+  if (is.null(types) && "type" %in% vertex_attr_names(graph)) {
+    types <- V(graph)$type
+  }
   if (!is.null(types)) {
     if (!is.logical(types)) {
       warning("vertex types converted to logical")
@@ -153,7 +153,7 @@ igraph.i.spMatrix <- function(M) {
 
 
 #' Deprecated function, used to set random seed of the C library's RNG
-#' 
+#'
 #' @param seed Ignored.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -166,11 +166,11 @@ srand <- function(seed) {
 
 
 #' Convex hull of a set of vertices
-#' 
+#'
 #' Calculate the convex hull of a set of points, i.e. the covering polygon that
 #' has the smallest area.
-#' 
-#' 
+#'
+#'
 #' @aliases convex.hull convex_hull
 #' @param data The data points, a numeric matrix with two columns.
 #' @return A named list with components: \item{resverts}{The indices of the
@@ -183,7 +183,7 @@ srand <- function(seed) {
 #' the convex hull.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' M <- cbind( runif(100), runif(100) )
 #' convex_hull(M)
 #' @export

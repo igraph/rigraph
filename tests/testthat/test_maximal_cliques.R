@@ -26,7 +26,7 @@ bk4 <- function(graph, min=0, max=Inf) {
 
       pres <- list()
       for (v in setdiff(P, Gamma(u))) {
-        
+
         p0 <- if (PX$PS > 1) { PX$PX[1:(PX$PS-1)] } else { numeric() }
         p1 <- setdiff(P, Gamma(v))
         p2 <- intersect(P, Gamma(v))
@@ -43,7 +43,7 @@ bk4 <- function(graph, min=0, max=Inf) {
                       PE=length(p0) + length(p1) + length(p2),
                       XS=length(p0) + length(p1) + length(p2) + 1,
                       XE=length(p0) + length(p1) + length(p2) + length(x1))
-        
+
         pres <- c(pres, bkpivot(newPX, c(R, v)))
 
         vpos <- which(PX$PX==v)
@@ -109,7 +109,7 @@ test_that("Maximal cliques work for subsets", {
   c1 <- unvs(max_cliques(G, min=8, subset=1:13))
   c2 <- unvs(max_cliques(G, min=8, subset=14:100))
   cl2 <- mysort(c(c1, c2))
-  
+
   expect_that(cl1, is_identical_to(cl2))
 })
 
@@ -119,10 +119,10 @@ test_that("Counting maximal cliques works", {
   G <- sample_gnp(100, .5)
 
   cl1  <- count_max_cliques(G, min=8)
-          
+
   c1 <- count_max_cliques(G, min=8, subset=1:13)
   c2 <- count_max_cliques(G, min=8, subset=14:100)
   cl2 <- c1+c2
-  
+
   expect_that(cl1, is_identical_to(cl2))
 })

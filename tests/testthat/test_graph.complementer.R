@@ -9,7 +9,7 @@ test_that("complementer works", {
   g2 <- complementer(g)
   g3 <- complementer(g2)
   expect_true(graph.isomorphic(g, g3))
-  
+
 })
 
 

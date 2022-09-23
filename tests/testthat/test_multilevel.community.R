@@ -8,7 +8,7 @@ test_that("cluster_louvain works", {
 
   g <- make_graph("Zachary")
   mc <- cluster_louvain(g)
-  
+
   expect_that(as.vector(membership(mc)),
               equals(c(1,2,2,2,1,1,1,2,3,2,1,1,1,2,3,3,1,
                        1,3,1,3,1,3,4,4,4,3,4,4,3,3,4,3,3)))

@@ -72,7 +72,7 @@ test_that("vs/es references are weak", {
 
   expect_null(get_vs_graph(vs))
   expect_null(get_es_graph(es))
-  
+
 })
 
 test_that("save/load breaks references", {
@@ -83,7 +83,7 @@ test_that("save/load breaks references", {
 
   tmp <- tempfile()
   on.exit(try(unlink(tmp)))
-  
+
   save(vs, es, file = tmp)
   rm(vs, es)
   gc()
@@ -102,10 +102,10 @@ test_that("vs/es keeps names after graph is deleted", {
 
   E(g)$name <- LETTERS[1:10]
   es <- E(g)
-  
+
   rm(g)
   gc()
-  
+
   expect_equal(names(vs), letters[1:10])
 
   vs2 <- vs[4:7]
@@ -255,7 +255,7 @@ test_that("printing unconnected vs/es works", {
     paste0("+ 10/? edges from ", sid,
            " (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j")
   )
-  
+
 })
 
 test_that("unconnected vs/es can be reused with the same graph", {

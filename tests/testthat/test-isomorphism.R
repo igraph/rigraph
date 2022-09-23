@@ -14,7 +14,7 @@ test_that("isomorphic", {
   expect_false(isomorphic(g, g2, method = "direct"))
   expect_false(isomorphic(g, g2, method = "vf2"))
   expect_false(isomorphic(g, g2, method = "bliss"))
-  
+
 })
 
 test_that("subgraph_isomorphic", {
@@ -30,7 +30,7 @@ test_that("subgraph_isomorphic", {
   expect_false(subgraph_isomorphic(g3, g))
   expect_false(subgraph_isomorphic(g3, g, method = "vf2"))
   expect_false(subgraph_isomorphic(g3, g, method = "lad"))
-  
+
 })
 
 test_that("count_isomorphisms", {
@@ -40,7 +40,7 @@ test_that("count_isomorphisms", {
 
   g2 <- graph_(from_literal(A - B - C - A))
   expect_equal(count_isomorphisms(g, g2), 0)
-  
+
 })
 
 test_that("count_subgraph_isomorphisms", {
@@ -54,7 +54,7 @@ test_that("count_subgraph_isomorphisms", {
   g3 <- graph_(from_literal(A - B - C - A))
   expect_equal(count_subgraph_isomorphisms(g3, g, method = "lad"), 0)
   expect_equal(count_subgraph_isomorphisms(g3, g, method = "vf2"), 0)
-  
+
 })
 
 test_that("isomorphisms", {
@@ -70,7 +70,7 @@ test_that("isomorphisms", {
               V(g2)[3,4,1,2],
               V(g2)[4,1,2,3],
               V(g2)[4,3,2,1])
-                
+
   expect_equivalent(isomorphisms(g, g2), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))
@@ -91,7 +91,7 @@ test_that("subgraph_isomorphisms, lad", {
               V(g)[3,4,1],
               V(g)[4,3,2],
               V(g)[4,1,2])
-  
+
   expect_equivalent(subgraph_isomorphisms(g2, g, method = "lad"), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))
@@ -112,7 +112,7 @@ test_that("subgraph_isomorphisms, vf2", {
               V(g)[3,4,1],
               V(g)[4,1,2],
               V(g)[4,3,2])
-  
+
   expect_equivalent(subgraph_isomorphisms(g2, g, method = "vf2"), res)
 
   g3 <- graph_(from_literal(X - Y - Z - X))

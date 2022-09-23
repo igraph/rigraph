@@ -19,7 +19,7 @@ test_that("weighted_cliques works", {
   cl <- sapply(weighted_cliques(g, min.weight=9), check.clique, graph=g, min_weight=9)
   expect_that(cl, equals(rep(TRUE, 14)))
 
-  g <- make_graph("zachary")  
+  g <- make_graph("zachary")
   weights <- rep(1, vcount(g))
   weights[c(1,2,3,4,14)] <- 3
   expect_that(weighted_clique_num(g, vertex.weights=weights), equals(15))

@@ -19,7 +19,7 @@ test_that("Listing triangles works", {
   g6 <- make_empty_graph(n=100, directed=FALSE)
   expect_that(triangles(g5), equals(numeric()))
   expect_that(triangles(g6), equals(numeric()))
-  
+
   g7 <- make_ring(3, directed=FALSE)
   g8 <- make_ring(3, directed=TRUE)
   g9 <- graph_from_literal(A-+B:C, B-+C)
@@ -29,7 +29,7 @@ test_that("Listing triangles works", {
 
   g10 <- make_full_graph(5, directed=FALSE)
   g11 <- make_full_graph(5, directed=TRUE)
-  r10 <- c(1L, 2L, 5L, 1L, 2L, 3L, 1L, 2L, 4L, 1L, 3L, 5L, 1L, 3L, 4L, 
+  r10 <- c(1L, 2L, 5L, 1L, 2L, 3L, 1L, 2L, 4L, 1L, 3L, 5L, 1L, 3L, 4L,
            1L, 4L, 5L, 2L, 3L, 5L, 2L, 3L, 4L, 2L, 4L, 5L, 3L, 4L, 5L)
   r11 <- r10
   expect_that(triangles(g10), equals(r10))

@@ -4,7 +4,7 @@
 ##   IGraph R package
 ##   Copyright (C) 2015  Gabor Csardi <csardi.gabor@gmail.com>
 ##   334 Harvard street, Cambridge, MA 02139 USA
-##   
+##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License as published by
 ##   the Free Software Foundation; either version 2 of the License, or
@@ -14,7 +14,7 @@
 ##   but WITHOUT ANY WARRANTY; without even the implied warranty of
 ##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ##   GNU General Public License for more details.
-##   
+##
 ##   You should have received a copy of the GNU General Public License
 ##   along with this program; if not, write to the Free Software
 ##   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -23,16 +23,16 @@
 ## -----------------------------------------------------------------------
 
 #' Simple graphs
-#' 
+#'
 #' Simple graphs are graphs which do not contain loop and multiple edges.
-#' 
+#'
 #' A loop edge is an edge for which the two endpoints are the same
 #' vertex. Two edges are multiple edges if they have exactly the same two
 #' endpoints (for directed graphs order does matter). A graph is simple is
 #' it does not contain loop edges and multiple edges.
-#' 
+#'
 #' \code{is_simple} checks whether a graph is simple.
-#' 
+#'
 #' \code{simplify} removes the loop and/or multiple edges from a graph.  If
 #' both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
 #' function returns a simple graph.
@@ -63,7 +63,7 @@
 #' \code{\link{delete_vertices}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- graph( c(1,2,1,2,3,3) )
 #' is_simple(g)
 #' is_simple(simplify(g, remove.loops=FALSE))
@@ -89,7 +89,7 @@ simplify_and_colorize <- function(graph) {
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_simplify_and_colorize, graph)
-  
+
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color
   res$res

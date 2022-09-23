@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -22,25 +22,25 @@
 
 
 #' Project a bipartite graph
-#' 
+#'
 #' A bipartite graph is projected into two one-mode networks
-#' 
+#'
 #' Bipartite graphs have a \code{type} vertex attribute in igraph, this is
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
-#' 
+#'
 #' \code{bipartite_projection_size} calculates the number of vertices and edges
 #' in the two projections of the bipartite graphs, without calculating the
 #' projections themselves. This is useful to check how much memory the
 #' projections would need if you have a large bipartite graph.
-#' 
+#'
 #' \code{bipartite_projection} calculates the actual projections.  You can use
 #' the \code{probe1} argument to specify the order of the projections in the
 #' result. By default vertex type \code{FALSE} is the first and \code{TRUE} is
 #' the second.
-#' 
+#'
 #' \code{bipartite_projection} keeps vertex attributes.
-#' 
+#'
 #' @aliases bipartite.projection bipartite.projection.size bipartite_projection_size bipartite_projection
 #' @param graph The input graph. It can be directed, but edge directions are
 #' ignored during the computation.
@@ -69,13 +69,13 @@
 #' @export
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Projection of a full bipartite graph is a full graph
 #' g <- make_full_bipartite_graph(10,5)
 #' proj <- bipartite_projection(g)
 #' graph.isomorphic(proj[[1]], make_full_graph(10))
 #' graph.isomorphic(proj[[2]], make_full_graph(5))
-#' 
+#'
 #' ## The projection keeps the vertex attributes
 #' M <- matrix(0, nrow=5, ncol=3)
 #' rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
@@ -87,7 +87,7 @@
 #' proj2 <- bipartite_projection(g2)
 #' print(proj2[[1]], g=TRUE, e=TRUE)
 #' print(proj2[[2]], g=TRUE, e=TRUE)
-#' 
+#'
 bipartite_projection <- function(graph, types=NULL,
                                  multiplicity=TRUE, probe1=NULL,
                                  which=c("both", "true", "false"),
@@ -138,25 +138,25 @@ bipartite_projection <- function(graph, types=NULL,
 
 
 #' Decide whether a graph is bipartite
-#' 
+#'
 #' This function decides whether the vertices of a network can be mapped to two
 #' vertex types in a way that no vertices of the same type are connected.
-#' 
+#'
 #' A bipartite graph in igraph has a \sQuote{\code{type}} vertex attribute
 #' giving the two vertex types.
-#' 
+#'
 #' This function simply checks whether a graph \emph{could} be bipartite. It
 #' tries to find a mapping that gives a possible division of the vertices into
 #' two classes, such that no two vertices of the same class are connected by an
 #' edge.
-#' 
+#'
 #' The existence of such a mapping is equivalent of having no circuits of odd
 #' length in the graph. A graph with loop edges cannot bipartite.
-#' 
+#'
 #' Note that the mapping is not necessarily unique, e.g. if the graph has at
 #' least two components, then the vertices in the separate components can be
 #' mapped independently.
-#' 
+#'
 #' @aliases bipartite.mapping bipartite_mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
@@ -166,15 +166,15 @@ bipartite_projection <- function(graph, types=NULL,
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Rings with an even number of vertices are bipartite
 #' g <- make_ring(10)
 #' bipartite_mapping(g)
-#' 
+#'
 #' ## All star graphs are bipartite
 #' g2 <- make_star(10)
 #' bipartite_mapping(g2)
-#' 
+#'
 #' ## A graph containing a triangle is not bipartite
 #' g3 <- make_ring(10)
 #' g3 <- add_edges(g3, c(1,3))

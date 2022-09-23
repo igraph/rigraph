@@ -27,7 +27,7 @@ test_that("sample_bipartite works", {
   expect_that(vcount(g4), equals(15))
   expect_that(ecount(g4), equals(8))
   expect_true(bipartite_mapping(g4)$res)
-  expect_false(is_directed(g4))  
+  expect_false(is_directed(g4))
 
   g5 <- sample_bipartite(10, 5, type="gnm", m=8, directed=TRUE)
   expect_that(vcount(g5), equals(15))

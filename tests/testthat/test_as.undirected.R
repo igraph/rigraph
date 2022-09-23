@@ -14,7 +14,7 @@ test_that("as.undirected keeps attributes", {
   expect_that(g2$name, equals(g$name))
   expect_that(g3$name, equals(g$name))
   expect_that(g4$name, equals(g$name))
-  
+
   expect_that(df2[order(df2[,1], df2[,2]),]$weight, equals(c(4,2,9)))
   expect_that(df3[order(df3[,1], df3[,2]),]$weight, equals(c(1,3,2,4,5)))
   expect_that(df4[order(df4[,1], df4[,2]),]$weight, equals(c(4,9)))

@@ -5,10 +5,10 @@
 #'
 #' An undirected graph is a tree if it is connected and has no cycles.
 #' In the directed case, a possible additional requirement is that all edges
-#' are oriented away from a root (out-tree or arborescence) or all edges are 
+#' are oriented away from a root (out-tree or arborescence) or all edges are
 #' oriented towards a root (in-tree or anti-arborescence). This test can be
 #' controlled using the mode parameter.
-#' 
+#'
 #' By convention, the null graph (i.e. the graph with no vertices) is considered
 #' not to be a tree.
 #'

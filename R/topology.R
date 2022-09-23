@@ -706,17 +706,17 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 
 
 #' Canonical permutation of a graph
-#' 
+#'
 #' The canonical permutation brings every isomorphic graphs into the same
 #' (labeled) graph.
-#' 
+#'
 #' \code{canonical_permutation} computes a permutation which brings the graph
 #' into canonical form, as defined by the BLISS algorithm.  All isomorphic
 #' graphs have the same canonical form.
-#' 
+#'
 #' See the paper below for the details about BLISS. This and more information
 #' is available at \url{http://www.tcs.hut.fi/Software/bliss/index.html}.
-#' 
+#'
 #' The possible values for the \code{sh} argument are: \describe{
 #' \item{"f"}{First non-singleton cell.} \item{"fl"}{First largest
 #' non-singleton cell.} \item{"fs"}{First smallest non-singleton cell.}
@@ -725,7 +725,7 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' non-singleton cell.} \item{"fsm"}{Smallest maximally non-trivially
 #' connected non-singleton cell.} } See the paper in references for details
 #' about these.
-#' 
+#'
 #' @aliases canonical.permutation canonical_permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
@@ -760,17 +760,17 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' Workshop on Analytic Algorithms and Combinatorics.} 2007.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## Calculate the canonical form of a random graph
 #' g1 <- sample_gnm(10, 20)
 #' cp1 <- canonical_permutation(g1)
 #' cf1 <- permute(g1, cp1$labeling)
-#' 
+#'
 #' ## Do the same with a random permutation of it
 #' g2 <- permute(g1, sample(vcount(g1)))
 #' cp2 <- canonical_permutation(g2)
 #' cf2 <- permute(g2, cp2$labeling)
-#' 
+#'
 #' ## Check that they are the same
 #' el1 <- as_edgelist(cf1)
 #' el2 <- as_edgelist(cf2)
@@ -783,16 +783,16 @@ canonical_permutation <- canonical_permutation
 
 
 #' Permute the vertices of a graph
-#' 
+#'
 #' Create a new graph, by permuting vertex ids.
-#' 
+#'
 #' This function creates a new graph from the input graph by permuting its
 #' vertices according to the specified mapping. Call this function with the
 #' output of \code{\link{canonical_permutation}} to create the canonical form
 #' of a graph.
-#' 
+#'
 #' \code{permute} keeps all graph, vertex and edge attributes of the graph.
-#' 
+#'
 #' @aliases permute.vertices permute
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
@@ -803,12 +803,12 @@ canonical_permutation <- canonical_permutation
 #' @seealso \code{\link{canonical_permutation}}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' # Random permutation of a random graph
 #' g <- sample_gnm(20, 50)
 #' g2 <- permute(g, sample(vcount(g)))
 #' graph.isomorphic(g, g2)
-#' 
+#'
 #' # Permutation keeps all attributes
 #' g$name <- "Random graph, Gnm, 20, 50"
 #' V(g)$name <- letters[1:vcount(g)]
@@ -825,19 +825,19 @@ permute <- permute
 
 
 #' Number of automorphisms
-#' 
+#'
 #' Calculate the number of automorphisms of a graph, i.e. the number of
 #' isomorphisms to itself.
-#' 
+#'
 #' An automorphism of a graph is a permutation of its vertices which brings the
 #' graph into itself.
-#' 
+#'
 #' This function calculates the number of automorphism of a graph using the
 #' BLISS algorithm. See also the BLISS homepage at
 #' \url{http://www.tcs.hut.fi/Software/bliss/index.html}. If you need the
 #' automorphisms themselves, use \code{\link{automorphism_group}} to obtain
 #' a compact representation of the automorphism group.
-#' 
+#'
 #' @aliases graph.automorphisms automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
@@ -872,12 +872,12 @@ permute <- permute
 #' Workshop on Analytic Algorithms and Combinatorics.} 2007.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
 #' ## and each of these graphs can be "flipped"
 #' g <- make_ring(10)
 #' automorphisms(g)
-#' 
+#'
 #' ## A full graph has n! automorphisms; however, we restrict the vertex
 #' ## matching by colors, leading to only 4 automorphisms
 #' g <- make_full_graph(4)
@@ -888,21 +888,21 @@ automorphisms <- automorphisms
 
 
 #' Generating set of the automorphism group of a graph
-#' 
+#'
 #' Compute the generating set of the automorphism group of a graph.
-#' 
+#'
 #' An automorphism of a graph is a permutation of its vertices which brings the
 #' graph into itself. The automorphisms of a graph form a group and there exists
 #' a subset of this group (i.e. a set of permutations) such that every other
 #' permutation can be expressed as a combination of these permutations. These
 #' permutations are called the generating set of the automorphism group.
-#' 
+#'
 #' This function calculates a possible generating set of the automorphism of
 #' a graph using the BLISS algorithm. See also the BLISS homepage at
 #' \url{http://www.tcs.hut.fi/Software/bliss/index.html}. The calculated
 #' generating set is not necessarily minimal, and it may depend on the splitting
 #' heuristics used by BLISS.
-#' 
+#'
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #' vertices having the same color are allowed to match each other in an
@@ -936,7 +936,7 @@ automorphisms <- automorphisms
 #' Workshop on Analytic Algorithms and Combinatorics.} 2007.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' ## A ring has n*2 automorphisms, and a possible generating set is one that
 #' ## "turns" the ring by one vertex to the left or right
 #' g <- make_ring(10)

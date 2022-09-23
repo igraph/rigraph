@@ -43,7 +43,7 @@ test_that("operators work", {
   expect_that(vcount(gc), equals(11))
   expect_that(ecount(gc), equals(60))
   expect_that(diameter(gc), equals(2))
-  
+
 })
 
 test_that("Union of directed named graphs", {

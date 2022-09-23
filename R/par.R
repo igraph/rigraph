@@ -2,7 +2,7 @@
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -12,7 +12,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -62,19 +62,19 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 ## This is based on 'sm.options' in the 'sm' package
 
 #' Parameters for the igraph package
-#' 
+#'
 #' igraph has some parameters which (usually) affect the behavior of many
 #' functions. These can be set for the whole session via \code{igraph_options}.
-#' 
+#'
 #' The parameter values set via a call to the \code{igraph_options} function
 #' will remain in effect for the rest of the session, affecting the subsequent
 #' behaviour of the other functions of the \code{igraph} package for which the
 #' given parameters are relevant.
-#' 
+#'
 #' This offers the possibility of customizing the functioning of the
 #' \code{igraph} package, for instance by insertions of appropriate calls to
 #' \code{igraph_options} in a load hook for package \pkg{igraph}.
-#' 
+#'
 #' The currently used parameters in alphabetical order:
 #' \describe{
 #'   \item{add.params}{Logical scalar, whether to add model
@@ -122,7 +122,7 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #'     \code{list(name="concat", "ignore")} See
 #'     \code{\link{attribute.combination}} for details on this.}
 #' }
-#' 
+#'
 #' @aliases igraph.options igraph_options getIgraphOpt igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of
 #' arguments may be in the \code{name=value} form, or no argument at all may be
@@ -134,7 +134,7 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @return \code{igraph_options} returns a list with the old values of the
 #' updated parameters, invisibly. Without any arguments, it returns the
 #' values of all options.
-#' 
+#'
 #' For \code{igraph_opt}, the current value set for option \code{x}, or
 #' \code{NULL} if the option is unset.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -142,7 +142,7 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' \code{igraph_opt} is similar to \code{\link{getOption}}.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' oldval <- igraph_opt("verbose")
 #' igraph_options(verbose = TRUE)
 #' layout_with_kk(make_ring(10))
@@ -152,7 +152,7 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' make_ring(10)[]
 #' igraph_options(oldval)
 #' igraph_opt("verbose")
-#' 
+#'
 #' @export
 #' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config

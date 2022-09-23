@@ -12,7 +12,7 @@ test_that("constraint works", {
     A <- as_adj(graph, attr=attr, sparse=FALSE)
     A <- A[idx, idx]
     n <- sum(idx)
-    
+
     one <- c(rep(1,n))
     CZ <- A + t(A)
     cs <- CZ %*% one                      # degree of vertices

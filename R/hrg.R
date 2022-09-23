@@ -1,7 +1,7 @@
 #   IGraph R package
 #   Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
-#   
+#
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
 #   the Free Software Foundation; either version 2 of the License, or
@@ -11,7 +11,7 @@
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
 #   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #   GNU General Public License for more details.
-#   
+#
 #   You should have received a copy of the GNU General Public License
 #   along with this program; if not, write to the Free Software
 #   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
@@ -20,28 +20,28 @@
 ###################################################################
 
 #' Hierarchical random graphs
-#' 
+#'
 #' Fitting and sampling hierarchical random graph models.
-#' 
+#'
 #' A hierarchical random graph is an ensemble of undirected graphs with \eqn{n}
 #' vertices. It is defined via a binary tree with \eqn{n} leaf and \eqn{n-1}
 #' internal vertices, where the internal vertices are labeled with
 #' probabilities.  The probability that two vertices are connected in the
 #' random graph is given by the probability label at their closest common
 #' ancestor.
-#' 
+#'
 #' Please see references below for more about hierarchical random graphs.
-#' 
+#'
 #' igraph contains functions for fitting HRG models to a given network
 #' (\code{fit_hrg}, for generating networks from a given HRG ensemble
 #' (\code{sample_hrg}), converting an igraph graph to a HRG and back
 #' (\code{hrg}, \code{hrg_tree}), for calculating a consensus tree from a set
 #' of sampled HRGs (\code{consensus_tree}) and for predicting missing edges in
 #' a network based on its HRG models (\code{predict_edges}).
-#' 
+#'
 #' The igraph HRG implementation is heavily based on the code published by
 #' Aaron Clauset, at his website (not functional any more).
-#' 
+#'
 #' @name hrg-methods
 #' @family hierarchical random graph functions
 NULL
@@ -84,7 +84,7 @@ NULL
 #' @references A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure
 #' and the prediction of missing links in networks. \emph{Nature} 453, 98--101
 #' (2008);
-#' 
+#'
 #' A. Clauset, C. Moore, and M.E.J. Newman. Structural Inference of Hierarchies
 #' in Networks. In E. M. Airoldi et al. (Eds.): ICML 2006 Ws, \emph{Lecture
 #' Notes in Computer Science} 4503, 1--13. Springer-Verlag, Berlin Heidelberg
@@ -94,16 +94,16 @@ NULL
 #' ## take a long time (~15 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
-#' 
+#'
 #' \dontrun{
 #' ## A graph with two dense groups
 #' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 #' hrg <- fit_hrg(g)
 #' hrg
-#' 
+#'
 #' ## The consensus tree for it
 #' consensus_tree(g, hrg=hrg, start=TRUE)
-#' 
+#'
 #' ## Prediction of missing edges
 #' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
 #' predict_edges(g2)
@@ -114,19 +114,19 @@ NULL
 fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(hrg)) { 
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), 
-                vertices=c()) 
-  } 
-  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], 
+  if (is.null(hrg)) {
+    hrg <- list(left=c(), right=c(), prob=c(), edges=c(),
+                vertices=c())
+  }
+  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")],
                 as.numeric)
   start <- as.logical(start)
   steps <- as.integer(steps)
-  
+
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
   res <- .Call(C_R_igraph_hrg_fit, graph, hrg, start, steps)
-  
+
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -143,7 +143,7 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 #' argument is given and \code{start} is set to \code{TRUE}, then it starts
 #' sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
 #' first, and then samples starting from the optimum.
-#' 
+#'
 #' @aliases hrg.consensus
 #' @param graph The graph the models were fitted to.
 #' @param hrg A hierarchical random graph model, in the form of an
@@ -174,7 +174,7 @@ consensus_tree <- consensus_tree
 
 
 #' Create a hierarchical random graph from an igraph graph
-#' 
+#'
 #' \code{hrg} creates a HRG from an igraph graph. The igraph graph must be
 #' a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
 #' vertices. The \code{prob} argument contains the HRG probability labels
@@ -193,7 +193,7 @@ hrg <- hrg
 
 
 #' Create an igraph graph from a hierarchical random graph model
-#' 
+#'
 #' \code{hrg_tree} creates the corresponsing igraph tree of a hierarchical
 #' random graph model.
 #'
@@ -221,7 +221,7 @@ hrg_tree <- hrg_tree
 sample_hrg <- sample_hrg
 
 #' Predict edges based on a hierarchical random graph model
-#' 
+#'
 #' \code{predict_edges} uses a hierarchical random graph model to predict
 #' missing edges from a network. This is done by sampling hierarchical models
 #' around the optimum model, proportionally to their likelihood. The MCMC
@@ -252,7 +252,7 @@ sample_hrg <- sample_hrg
 #' @references A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure
 #' and the prediction of missing links in networks. \emph{Nature} 453, 98--101
 #' (2008);
-#' 
+#'
 #' A. Clauset, C. Moore, and M.E.J. Newman. Structural Inference of Hierarchies
 #' in Networks. In E. M. Airoldi et al. (Eds.): ICML 2006 Ws, \emph{Lecture
 #' Notes in Computer Science} 4503, 1--13. Springer-Verlag, Berlin Heidelberg
@@ -262,16 +262,16 @@ sample_hrg <- sample_hrg
 #' ## take a long time (~15 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
-#' 
+#'
 #' \dontrun{
 #' ## A graph with two dense groups
 #' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 #' hrg <- fit_hrg(g)
 #' hrg
-#' 
+#'
 #' ## The consensus tree for it
 #' consensus_tree(g, hrg=hrg, start=TRUE)
-#' 
+#'
 #' ## Prediction of missing edges
 #' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
 #' predict_edges(g2)
@@ -281,14 +281,14 @@ sample_hrg <- sample_hrg
 
 predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
                         num.bins=25) {
-  
+
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(hrg)) { 
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), 
-                vertices=c()) 
-  } 
-  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], 
+  if (is.null(hrg)) {
+    hrg <- list(left=c(), right=c(), prob=c(), edges=c(),
+                vertices=c())
+  }
+  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")],
                 as.numeric)
   start <- as.logical(start)
   num.samples <- as.integer(num.samples)
@@ -306,14 +306,14 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 
 
 #' Conversion to igraph
-#' 
+#'
 #' These functions convert various objects to igraph graphs.
-#' 
+#'
 #' You can use \code{as.igraph} to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
 #' These objects are created by the \code{\link{fit_hrg}} and
 #' \code{\link{consensus_tree}} functions.  }
-#' 
+#'
 #' @aliases as.igraph as.igraph.igraphHRG
 #' @param x The object to convert.
 #' @param \dots Additional arguments. None currently.
@@ -322,11 +322,11 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}.
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_full_graph(5) + make_full_graph(5)
 #' hrg <- fit_hrg(g)
 #' as.igraph(hrg)
-#' 
+#'
 as.igraph <- function(x, ...)
   UseMethod("as.igraph")
 
@@ -340,7 +340,7 @@ as.igraph.igraphHRG <- function(x, ...) {
   rr <- ifelse(x$right < 0, -x$right + ovc, x$right + 1)
   edges <- c(rbind(seq_len(ivc)+ovc, ll), rbind(seq_len(ivc)+ovc, rr))
   res <- graph(edges)
-  
+
   V(res)$name <- c(if (!is.null(x$names)) x$names else as.character(1:ovc),
                    paste0("g", 1:ivc))
   V(res)$prob <- c(rep(NA, ovc), x$prob)
@@ -381,7 +381,7 @@ buildMerges <- function(object) {
     prev <- curr
   }
   merges
-} 
+}
 
 #' @method as.dendrogram igraphHRG
 
@@ -389,7 +389,7 @@ as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
 
   nMerge <- length(object$left)
   merges <- buildMerges(object)
-  
+
   .memberDend <- function(x) {
     r <- attr(x,"x.member")
     if(is.null(r)) {
@@ -398,12 +398,12 @@ as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
     }
     r
   }
-  
+
   oHgt <- 1:nrow(merges)
   hMax <- oHgt[length(oHgt)]
   mynames <- if (is.null(object$names)) 1:(nMerge+1) else object$names
   z <- list()
-  
+
   for (k in 1:nMerge) {
     x <- merges[k,1:2]
     if (any(neg <- x >= 0)) {
@@ -456,7 +456,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   ## We need to rewrite the merge matrix, because hclust assumes
   ## that group ids are assigned in the order of the merges
   map <- order(-merge3[,3])
-  
+
   merge <- merge3[,1:2]
   gs <- which(merge < 0)
   merge[ gs] <- map[ -merge[gs] ]
@@ -484,7 +484,7 @@ as.hclust.igraphHRG <- function(x, ...) {
               labels=mynames, method=NA_character_,
               dist.method=NA_character_)
   class(res) <- "hclust"
-  res  
+  res
 }
 
 #' @method as_phylo igraphHRG
@@ -510,9 +510,9 @@ as_phylo.igraphHRG <- function(x, ...) {
 
 
 #' HRG dendrogram plot
-#' 
+#'
 #' Plot a hierarchical random graph as a dendrogram.
-#' 
+#'
 #' \code{plot_dendrogram} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
@@ -523,7 +523,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' package.  \item \code{hclust} Use \code{plot.hclust} from the \code{stats}
 #' package.  \item \code{dendrogram} Use \code{plot.dendrogram} from the
 #' \code{stats} package.  }
-#' 
+#'
 #' The different plotting functions take different sets of arguments. When
 #' using \code{plot.phylo} (\code{mode="phylo"}), we have the following syntax:
 #' \preformatted{
@@ -536,7 +536,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'   \item \code{use.edge.length} Passed to \code{plot.phylo}.
 #'   \item \code{dots} Attitional arguments to pass to \code{plot.phylo}.
 #' }
-#' 
+#'
 #' The syntax for \code{plot.hclust} (\code{mode="hclust"}): \preformatted{
 #'     plot_dendrogram(x, mode="hclust", rect = 0, colbar = rainbow(rect),
 #'             hang = 0.01, ann = FALSE, main = "", sub = "", xlab = "",
@@ -562,7 +562,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'     \code{plot.hclust}.
 #'   \item \code{dots} Attitional arguments to pass to \code{plot.hclust}.
 #' }
-#' 
+#'
 #' The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
 #' \preformatted{
 #'     plot_dendrogram(x, \dots)
@@ -581,11 +581,11 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples
-#' 
+#'
 #' g <- make_full_graph(5) + make_full_graph(5)
 #' hrg <- fit_hrg(g)
 #' plot_dendrogram(hrg)
-#' 
+#'
 plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...) {
 
   if (mode=="auto") {
@@ -645,10 +645,10 @@ hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
 #' \code{tree} for small graphs and \code{simple} (=list) for bigger
 #' ones. The \code{tree} format looks like
 #'  this: \preformatted{Hierarchical random graph, at level 3:
-#' g1        p=   0  
-#' '- g15    p=0.33  1 
-#'    '- g13 p=0.88  6  3  9  4  2  10 7  5  8 
-#' '- g8     p= 0.5  
+#' g1        p=   0
+#' '- g15    p=0.33  1
+#'    '- g13 p=0.88  6  3  9  4  2  10 7  5  8
+#' '- g8     p= 0.5
 #'    '- g16 p= 0.2  20 14 17 19 11 15 16 13
 #'    '- g5  p=   0  12 18  }
 #' This is a graph with 20 vertices, and the
@@ -662,22 +662,22 @@ hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
 #' vertices 6, 3, etc. on lower levels, etc.
 #' The \code{plain} printing is simpler and faster to produce, but less
 #' visual: \preformatted{Hierarchical random graph:
-#' g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14    
-#' g4  p=1.0 -> g17 15    g5  p=0.4 -> g15 17    g6  p=0.0 -> 1 4       
-#' g7  p=1.0 -> 11 16     g8  p=0.1 -> g9 3      g9  p=0.3 -> g11 g16   
-#' g10 p=0.2 -> g4 g5     g11 p=1.0 -> g6 5      g12 p=0.8 -> g8 8      
-#' g13 p=0.0 -> g14 9     g14 p=1.0 -> 2 6       g15 p=0.2 -> g19 18    
-#' g16 p=1.0 -> g13 g2    g17 p=0.5 -> g7 13     g18 p=1.0 -> 12 19     
+#' g1  p=0.0 -> g12 g10   g2  p=1.0 -> 7 10      g3  p=1.0 -> g18 14
+#' g4  p=1.0 -> g17 15    g5  p=0.4 -> g15 17    g6  p=0.0 -> 1 4
+#' g7  p=1.0 -> 11 16     g8  p=0.1 -> g9 3      g9  p=0.3 -> g11 g16
+#' g10 p=0.2 -> g4 g5     g11 p=1.0 -> g6 5      g12 p=0.8 -> g8 8
+#' g13 p=0.0 -> g14 9     g14 p=1.0 -> 2 6       g15 p=0.2 -> g19 18
+#' g16 p=1.0 -> g13 g2    g17 p=0.5 -> g7 13     g18 p=1.0 -> 12 19
 #' g19 p=0.7 -> g3 20}
 #' It lists the two subgroups of each internal node, in
 #' as many columns as the screen width allows.
-#' 
+#'
 #' @param x \code{igraphHRG} object to print.
 #' @param type How to print the dendrogram, see details below.
 #' @param level The number of top levels to print from the dendrogram.
 #' @param ... Additional arguments, not used currently.
 #' @return The hierarchical random graph model itself, invisibly.
-#' 
+#'
 #' @method print igraphHRG
 #' @export
 #' @family hierarchical random graph functions
@@ -718,7 +718,7 @@ print1.igraphHRG <- function(x, level=3, ...) {
   vw <- nchar(as.character(length(x$left)+1))
   sp <- paste(collapse="", rep(" ", cs+pw+2+2))
   nn <- if (is.null(x$names)) seq_len(length(x$left)+1) else x$names
-  
+
   ## Function to collect all individual vertex children
   .children <- function(b) {
     res <- c()
@@ -825,7 +825,7 @@ print2.igraphHRG <- function(x, ...) {
 #' simply by listing the children of each internal node of the
 #' dendrogram: \preformatted{HRG consensus tree:
 #' g1 -> 11 12 13 14 15 16 17 18 19 20
-#' g2 -> 1  2  3  4  5  6  7  8  9  10   
+#' g2 -> 1  2  3  4  5  6  7  8  9  10
 #' g3 -> g1 g2}
 #' The root of the dendrogram is \code{g3} (because it has no incoming
 #' edges), and it has two subgroups, \code{g1} and \code{g2}.
@@ -837,7 +837,7 @@ print2.igraphHRG <- function(x, ...) {
 #' @method print igraphHRGConsensus
 #' @export
 #' @family hierarchical random graph functions
- 
+
 print.igraphHRGConsensus <- function(x, ...) {
   cat("HRG consensus tree:\n")
   n <- length(x$parents) - length(x$weights)
@@ -867,7 +867,7 @@ print.igraphHRGConsensus <- function(x, ...) {
   } else {
     cat(op, sep="\n")
   }
-  
+
   invisible(x)
 }
 

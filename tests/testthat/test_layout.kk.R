@@ -6,7 +6,7 @@ test_that("Kamada-Kawai layout generator works", {
   set.seed(42)
 
   get_radii <- function(layout) {
-    apply(layout - colMeans(layout), 1, function(x) sqrt(sum(x ** 2)))    
+    apply(layout - colMeans(layout), 1, function(x) sqrt(sum(x ** 2)))
   }
 
   sort_by_angles <- function(layout) {
