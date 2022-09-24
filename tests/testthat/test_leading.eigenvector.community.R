@@ -1,7 +1,4 @@
 test_that("cluster_leading_eigen works", {
-
-  library(igraph)
-
   ## Check-test
 
   f <- function(membership, community, value, vector, multiplier, extra) {
