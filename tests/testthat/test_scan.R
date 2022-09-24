@@ -1,4 +1,3 @@
-library(igraph)
 require(digest)
 
 local_rng_version("3.5.0")

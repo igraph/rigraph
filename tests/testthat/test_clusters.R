@@ -1,5 +1,4 @@
 test_that("components works", {
-  library(igraph)
   set.seed(42)
 
   gc <- function(graph) {
@@ -23,8 +22,6 @@ test_that("components works", {
 })
 
 test_that("components names results", {
-  library(igraph)
-
   g <- make_ring(10) + make_full_graph(5)
   V(g)$name <- letters[1:15]
 
@@ -33,8 +30,6 @@ test_that("components names results", {
 })
 
 test_that("groups works", {
-  library(igraph)
-
   g <- make_ring(10) + make_full_graph(5)
   gr <- groups(components(g))
 
@@ -50,8 +45,6 @@ test_that("groups works", {
 })
 
 test_that("is_connected works", {
-  library(igraph)
-
   g <- make_ring(10)
   expect_that(g, is_connected)
 
@@ -60,8 +53,6 @@ test_that("is_connected works", {
 })
 
 test_that("is_connected returns FALSE for the null graph", {
-  library(igraph)
-
   g <- make_empty_graph(0)
   expect_false(is_connected(g))
 })

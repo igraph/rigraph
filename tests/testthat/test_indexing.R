@@ -8,9 +8,6 @@ am <- function(x) {
   x
 }
 
-library(igraph)
-library(Matrix, quietly=TRUE, warn.conflicts=FALSE)
-
 g <- make_tree(20)
 
 test_that("[ indexing works", {

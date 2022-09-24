@@ -1,5 +1,3 @@
-library(igraph)
-
 am <- function(x) {
   x <- as.matrix(x)
   dimnames(x) <- NULL
