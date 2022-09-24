@@ -4,6 +4,8 @@ test_that("cluster_leading_eigen works", {
 
   ## Check-test
 
+  set.seed(18)
+
   f <- function(membership, community, value, vector, multiplier, extra) {
     M <- sapply(1:length(vector), function(x) {
       v <- rep(0, length(vector))
