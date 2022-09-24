@@ -284,9 +284,9 @@
 
 .print.edges.compressed.all <- function(x, edges, names) {
 
-  arrow <- c("--", "->")[is_directed(x)+1]
-
   if (!is.null(x)) {
+    arrow <- c("--", "->")[is_directed(x)+1]
+
     el <- ends(x, edges, names=names)
     pr <- paste(sep="", format(el[,1]), arrow, format(el[,2]))
     print(pr, quote=FALSE)
