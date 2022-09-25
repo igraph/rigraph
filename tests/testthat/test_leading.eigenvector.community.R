@@ -5,7 +5,6 @@ test_that("cluster_leading_eigen works", {
   ## Check-test
 
   set.seed(18)
-  arpack_defaults$maxiter <- 3000
 
   f <- function(membership, community, value, vector, multiplier, extra) {
     M <- sapply(1:length(vector), function(x) {

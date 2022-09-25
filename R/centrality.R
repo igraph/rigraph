@@ -295,7 +295,7 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 #' @export
 
 arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
-                              ncv=3, ldv=0, ishift=1, maxiter=1000, nb=1,
+                              ncv=3, ldv=0, ishift=1, maxiter=3000, nb=1,
                               mode=1, start=0, sigma=0.0, sigmai=0.0)
 
 #' ARPACK eigenvector calculation
