@@ -100,7 +100,10 @@ src/include/igraph_threading.h: $(top_srcdir)/include/igraph_threading.h.in
 
 src/include/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 	mkdir -p src
-	sed 's/@PACKAGE_VERSION@/'$(VERSION)'/g' $< >$@
+	# Don't use ${VERSION} here in the replacement; this would mean that the
+	# replacement would be done _now_ and not at compile time where we pass
+	# -DPACKAGE_VERSION=... to the compiler
+	sed 's/"@PACKAGE_VERSION@"/PACKAGE_VERSION/g' $< >$@
 
 # R source and doc files
 
