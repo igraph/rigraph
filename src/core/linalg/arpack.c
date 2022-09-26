@@ -24,6 +24,7 @@
 
 #include "igraph_arpack.h"
 #include "igraph_memory.h"
+#include "igraph_random.h"
 
 #include "linalg/arpack_internal.h"
 
@@ -825,7 +826,7 @@ static void igraph_i_arpack_report_no_convergence(const igraph_arpack_options_t*
  * \param vectors If not a null pointer, then it must be a pointer to
  *     an initialized matrix. The eigenvectors will be stored in the
  *     columns of the matrix. The matrix will be resized as needed.
- *     Either this or the \p vectors argument must be non-null if the
+ *     Either this or the \p storage argument must be non-null if the
  *     ARPACK iteration is started from a given starting vector. If
  *     both are given \p vectors take precedence.
  * \return Error code.
@@ -935,13 +936,14 @@ int igraph_arpack_rssolve(igraph_arpack_function_t *fun, void *extra,
     options->iparam[8] = 0;   // return value
     options->iparam[9] = 0;   // return value
     options->iparam[10] = 0;  // return value
-    options->info = options->start;
+    options->info = 1;  // always use a provided starting vector
     if (options->start) {
+        // user provided the starting vector so we just use that
         if (!storage && !vectors) {
             IGRAPH_ERROR("Starting vector not given", IGRAPH_EINVAL);
         }
         if (vectors && (igraph_matrix_nrow(vectors) != options->n ||
-                        igraph_matrix_ncol(vectors) != 1)) {
+                        igraph_matrix_ncol(vectors) < 1)) {
             IGRAPH_ERROR("Invalid starting vector size", IGRAPH_EINVAL);
         }
         if (vectors) {
@@ -949,6 +951,14 @@ int igraph_arpack_rssolve(igraph_arpack_function_t *fun, void *extra,
                 resid[i] = MATRIX(*vectors, i, 0);
             }
         }
+    } else {
+        // we need to generate a random vector on our own; let's not rely on
+        // ARPACK to do so because we want to use our own RNG
+        RNG_BEGIN();
+        for (i = 0; i < options->n; i++) {
+            resid[i] = RNG_UNIF(-1, 1);
+        }
+        RNG_END();
     }
 
     /* Ok, we have everything */
@@ -1202,7 +1212,7 @@ int igraph_arpack_rnsolve(igraph_arpack_function_t *fun, void *extra,
     options->iparam[8] = 0;   // return value
     options->iparam[9] = 0;   // return value
     options->iparam[10] = 0;  // return value
-    options->info = options->start;
+    options->info = 1;  // always use a provided starting vector
     if (options->start) {
         if (!storage && !vectors) {
             IGRAPH_ERROR("Starting vector not given", IGRAPH_EINVAL);
@@ -1216,6 +1226,14 @@ int igraph_arpack_rnsolve(igraph_arpack_function_t *fun, void *extra,
                 resid[i] = MATRIX(*vectors, i, 0);
             }
         }
+    } else {
+        // we need to generate a random vector on our own; let's not rely on
+        // ARPACK to do so because we want to use our own RNG
+        RNG_BEGIN();
+        for (i = 0; i < options->n; i++) {
+            resid[i] = RNG_UNIF(-1, 1);
+        }
+        RNG_END();
     }
 
     /* Ok, we have everything */
