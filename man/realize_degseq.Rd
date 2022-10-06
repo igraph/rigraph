@@ -50,9 +50,9 @@ The \dQuote{smallest} method selects the vertex with the smallest remaining
 degree. The result is usually a graph with high negative degree assortativity.
 In the undirected case, this method is guaranteed to generate a connected
 graph, regardless of whether multi-edges are allowed, provided that a
-connected realization exists.  In the directed case it tends to generate
-weakly connected graphs, but this is not guaranteed. This is the default
-method.
+connected realization exists. See Horvát and Modes (2021) for details.
+In the directed case it tends to generate weakly connected graphs, but this
+is not guaranteed. This is the default method.
 
 The \dQuote{largest} method selects the vertex with the largest remaining
 degree. The result is usually a graph with high positive degree assortativity,
@@ -81,6 +81,26 @@ degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
 if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
 g5 <- realize_degseq(degs, allowed.edge.types="multi")
 all(degree(g5) == degs)
+}
+\references{
+V. Havel, 
+Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
+Časopis pro pěstování matematiky 80, 477-480 (1955).
+http://eudml.org/doc/19050
+
+S. L. Hakimi,
+On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
+Journal of the SIAM 10, 3 (1962).
+https://www.jstor.org/stable/2098770
+
+D. J. Kleitman and D. L. Wang,
+Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
+Discrete Mathematics 6, 1 (1973).
+https://doi.org/10.1016/0012-365X%2873%2990037-X
+
+Sz. Horvát and C. D. Modes,
+Connectedness matters: construction and exact random sampling of connected networks (2021).
+https://doi.org/10.1088/2632-072X/abced5
 }
 \seealso{
 \code{\link{sample_degseq}} for a randomized variant that samples
