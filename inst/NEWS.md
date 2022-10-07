@@ -1,3 +1,17 @@
+# Unreleased
+
+Fixed:
+
+ - The default maximum number of iterations has been increased to 3000 to match that of the igraph C core.
+ - Rare convergence problems have been corrected in `eigen_centrality()`.
+ - All ARPACK-based functions now respect random seeds set in R when generating a random starting vector.
+ - `distances(algorithm='johnson')` now throws an error if `mode != 'out'` for directed graphs, as no other `mode` is currently supported.
+ - `igraph_version()` returned an invalid value in 1.3.4, this is now corrected.
+
+Other:
+
+ - Documentation improvements.
+
 # igraph 1.3.5
 
 Added:
