@@ -23,6 +23,6 @@
 #ifndef IGRAPH_RRANDOM_H
 #define IGRAPH_RRANDOM_H
 
-void igraph_rng_R_install();
+void igraph_rng_R_install(void);
 
 #endif

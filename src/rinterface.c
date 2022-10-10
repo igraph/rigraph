@@ -2503,7 +2503,7 @@ SEXP R_igraph_set_verbose(SEXP verbose) {
   return R_NilValue;
 }
 
-SEXP R_igraph_finalizer() {
+SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
   SEXP l1 = PROTECT(install("getNamespace"));
   SEXP l2 = PROTECT(ScalarString(mkChar("igraph")));
@@ -2519,7 +2519,7 @@ SEXP R_igraph_finalizer() {
   return R_NilValue;
 }
 
-SEXP R_igraph_check_finally_stack() {
+SEXP R_igraph_check_finally_stack(void) {
   if (!IGRAPH_FINALLY_STACK_EMPTY) {
     error("igraph callbacks cannot call igraph functions");
   }
@@ -9437,7 +9437,7 @@ SEXP R_igraph_simple_interconnected_islands_game(SEXP islands_n, SEXP islands_si
   return result;
 }
 
-SEXP R_igraph_version() {
+SEXP R_igraph_version(void) {
   const char *version;
   SEXP result;
   igraph_version(&version, /*major=*/ 0, /*minor=*/ 0, /*patch=*/ 0);

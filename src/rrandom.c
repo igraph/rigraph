@@ -105,7 +105,7 @@ static igraph_rng_type_t igraph_rng_R_type = {
 
 igraph_rng_t igraph_rng_R_instance;
 
-void igraph_rng_R_install() {
+void igraph_rng_R_install(void) {
     igraph_rng_init(&igraph_rng_R_instance, &igraph_rng_R_type);
     igraph_rng_set_default(&igraph_rng_R_instance);
 }
