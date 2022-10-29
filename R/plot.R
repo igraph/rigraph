@@ -396,6 +396,7 @@ plot.igraph <- function(x,
   ################################################################
   # add the labels
   old_xpd <- par(xpd=TRUE)
+  on.exit(par(old_xpd), add = TRUE)
   x <- layout[,1]+label.dist*cos(-label.degree)*
     (vertex.size+6*8*log10(2))/200
   y <- layout[,2]+label.dist*sin(-label.degree)*
@@ -414,7 +415,6 @@ plot.igraph <- function(x,
     }
   }
   rm(x, y)
-  par(old_xpd)
   invisible(NULL)
 }
 
