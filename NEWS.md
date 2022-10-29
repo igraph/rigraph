@@ -1,5 +1,9 @@
 # Unreleased
 
+Added:
+
+ - `tkplot()` gained a `palette` argument and it is now using the same palette as `plot()` by default, for sake of consistency.
+
 Fixed:
 
  - The default maximum number of iterations has been increased to 3000 to match that of the igraph C core.
