@@ -1180,6 +1180,9 @@ igraph_simplify_and_colorize:
     # R function is hand-rolled
     IGNORE: RR
 
+igraph_automorphisms:
+    NAME: count_automorphisms
+
 #######################################
 # SCG
 #######################################

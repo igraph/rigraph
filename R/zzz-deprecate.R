@@ -73,6 +73,8 @@ deprecated("assortativity.nominal", assortativity_nominal)
 deprecated("asymmetric.preference.game", sample_asym_pref)
 #' @export authority.score
 deprecated("authority.score", authority_score)
+#' @export automorphisms
+deprecated("automorphisms", count_automorphisms)
 #' @export autocurve.edges
 deprecated("autocurve.edges", curve_multiple)
 #' @export average.path.length
@@ -222,7 +224,7 @@ deprecated("graph.adjlist", graph_from_adj_list)
 #' @export graph.atlas
 deprecated("graph.atlas", graph_from_atlas)
 #' @export graph.automorphisms
-deprecated("graph.automorphisms", automorphisms)
+deprecated("graph.automorphisms", count_automorphisms)
 #' @export graph.bfs
 deprecated("graph.bfs", bfs)
 #' @export graph.bipartite
