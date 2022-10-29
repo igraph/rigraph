@@ -17,8 +17,6 @@
       is a list of a single vector, then this is used for all pies. It
       the color vector is shorter than the number of areas in a pie,
       then it is recycled.}
-    \item{pie.border}{The color of the border line of the pie charts, in
-      the same format as \code{pie.color}.}
     \item{pie.angle}{The slope of shading lines, given as an angle in
       degrees (counter-clockwise).}
     \item{pie.density}{The density of the shading lines, in lines per
