@@ -177,8 +177,16 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
   requireNamespace("tcltk", quietly = TRUE) ||
     stop("tcl/tk library not available")
 
-  # Visual parameters
   params <- i.parse.plot.params(graph, list(...))
+
+  # Use the palette specified by the user (if any)
+  palette <- params("plot", "palette")
+  if (!is.null(palette)) {
+    old_palette <- palette(palette)
+    on.exit(palette(old_palette), add = TRUE)
+  }
+
+  # Visual parameters
   labels <- params("vertex", "label")
   label.color <- .tkplot.convert.color(params("vertex", "label.color"))
   label.font <- .tkplot.convert.font(params("vertex", "label.font"),
