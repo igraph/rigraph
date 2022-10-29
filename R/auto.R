@@ -2047,7 +2047,7 @@ graph.isomorphic.bliss <- function(graph1, graph2, colors1, colors2, sh=c("fm", 
 }
 
 #' @export
-automorphisms <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+count_automorphisms <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (missing(colors)) {

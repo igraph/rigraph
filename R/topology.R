@@ -838,7 +838,7 @@ permute <- permute
 #' automorphisms themselves, use \code{\link{automorphism_group}} to obtain
 #' a compact representation of the automorphism group.
 #'
-#' @aliases graph.automorphisms automorphisms
+#' @aliases graph.automorphisms automorphisms count_automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #' vertices having the same color are allowed to match each other in an
@@ -876,15 +876,15 @@ permute <- permute
 #' ## A ring has n*2 automorphisms, you can "turn" it by 0-9 vertices
 #' ## and each of these graphs can be "flipped"
 #' g <- make_ring(10)
-#' automorphisms(g)
+#' count_automorphisms(g)
 #'
 #' ## A full graph has n! automorphisms; however, we restrict the vertex
 #' ## matching by colors, leading to only 4 automorphisms
 #' g <- make_full_graph(4)
-#' automorphisms(g, colors=c(1,2,1,2))
+#' count_automorphisms(g, colors=c(1,2,1,2))
 #' @export
 
-automorphisms <- automorphisms
+count_automorphisms <- count_automorphisms
 
 
 #' Generating set of the automorphism group of a graph
@@ -923,13 +923,13 @@ automorphisms <- automorphisms
 #' that form a generating set of the automorphism group of the input graph.
 #' When \code{details} is \code{TRUE}, a named list with two members:
 #' \item{generators}{Returns the generators themselves} \item{info}{Additional
-#' information about the BLISS internals. See \code{\link{automorphisms}} for
+#' information about the BLISS internals. See \code{\link{count_automorphisms}} for
 #' more details.}
 #' @author Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
 #' @seealso \code{\link{canonical_permutation}}, \code{\link{permute}},
-#' \code{\link{automorphisms}}
+#' \code{\link{count_automorphisms}}
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, \emph{Proceedings of
 #' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
