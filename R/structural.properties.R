@@ -970,18 +970,20 @@ reciprocity <- function(graph, ignore.loops=TRUE,
 
 #' Graph density
 #'
-#' The density of a graph is the ratio of the number of edges and the number of
-#' possible edges.
+#' The density of a graph is the ratio of the actual number of edges and the
+#' largest possible number of edges in the graph, assuming that no multi-edges
+#' are present.
 #'
-#' Note that this function may return strange results for graph with multiple
-#' edges, density is ill-defined for graphs with multiple edges.
+#' The concept of density is ill-defined for multigraphs. Note that this function
+#' does not check whether the graph has multi-edges and will return meaningless
+#' results for such graphs.
 #'
 #' @aliases graph.density
 #' @param graph The input graph.
-#' @param loops Logical constant, whether to allow loop edges in the graph. If
-#' this is TRUE then self loops are considered to be possible. If this is FALSE
-#' then we assume that the graph does not contain any loop edges and that loop
-#' edges are not meaningful.
+#' @param loops Logical constant, whether loop edges may exist in the graph.
+#' This affects the calculation of the largest possible number of edges in the
+#' graph. If this parameter is set to FALSE yet the graph contains self-loops,
+#' the result will not be meaningful.
 #' @return A real constant. This function returns \code{NaN} (=0.0/0.0) for an
 #' empty graph with zero vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -998,7 +1000,7 @@ reciprocity <- function(graph, ignore.loops=TRUE,
 #' g3 <- sample_gnp(n=10, 0.4)
 #'
 #' # loop edges
-#' g <- graph( c(1,2, 2,2, 2,3) )
+#' g <- graph( c(1,2, 2,2, 2,3) )            # graph with a self-loop
 #' edge_density(g, loops=FALSE)              # this is wrong!!!
 #' edge_density(g, loops=TRUE)               # this is right!!!
 #' edge_density(simplify(g), loops=FALSE)    # this is also right, but different
