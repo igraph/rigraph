@@ -847,8 +847,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' @aliases graph.adjlist graph_from_adj_list
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #' throughout all vectors in the list must be less than the number of vectors
-#' (=the number of vertices in the graph). Note that the list is expected to be
-#' 0-indexed.
+#' (=the number of vertices in the graph).
 #' @param mode Character scalar, it specifies whether the graph to create is
 #' undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
 #' case, whether it contains the outgoing (\sQuote{out}) or the incoming
