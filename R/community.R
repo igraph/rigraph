@@ -654,7 +654,7 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
     else {                        # two nodes
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
-      X <- format(x, scientific=FALSE, trim=TRUE)
+      x <- format(x, scientific=FALSE, trim=TRUE)
       zk <- list(z[[x[1]]], z[[x[2]]])
       attr(zk, "members") <- attr(z[[x[1]]], "members") +
         attr(z[[x[2]]], "members")
