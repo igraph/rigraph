@@ -12,6 +12,8 @@ Fixed:
  - `distances(algorithm='johnson')` now throws an error if `mode != 'out'` for directed graphs, as no other `mode` is currently supported.
  - `igraph_version()` returned an invalid value in 1.3.4, this is now corrected.
  - The value of `par(xpd=...)` is now restored after plotting a graph.
+ - Fixed a bug in `as.dendrogram.communities()` for large dendrograms, thanks
+   to @pkharchenko (see PR #292).
 
 Deprecated:
 

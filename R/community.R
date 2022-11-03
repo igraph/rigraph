@@ -591,7 +591,7 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
     r <- attr(x,"x.member")
     if(is.null(r)) {
       r <- attr(x,"members")
-    if(is.null(r)) r <- 1:1
+      if(is.null(r)) r <- 1:1
     }
     r
   }
@@ -634,7 +634,9 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
       attr(zk[[1]], "leaf") <- attr(zk[[2]], "leaf") <- TRUE
     }
     else if (any(neg)) {            # one leaf, one node
-      X <- as.character(x)
+      # as.character(x) is not okay as it starts converting values >= 100000
+      # to scientific notation
+      X <- format(x, scientific=FALSE, trim=TRUE)
       ## Originally had "x <- sort(..) above => leaf always left, x[1];
       ## don't want to assume this
       isL <- x[1] < leafs+1 ## is leaf left?
@@ -650,7 +652,9 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
       attr(zk[[2 - isL]], "leaf") <- TRUE
       }
     else {                        # two nodes
-      x <- as.character(x)
+      # as.character(x) is not okay as it starts converting values >= 100000
+      # to scientific notation
+      X <- format(x, scientific=FALSE, trim=TRUE)
       zk <- list(z[[x[1]]], z[[x[2]]])
       attr(zk, "members") <- attr(z[[x[1]]], "members") +
         attr(z[[x[2]]], "members")
@@ -659,7 +663,7 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
                                attr(z[[x[2]]], "midpoint"))/2
     }
     attr(zk, "height") <- oHgt[k]
-    z[[k <- as.character(k+leafs)]] <- zk
+    z[[k <- format(k+leafs, scientific=FALSE)]] <- zk
   }
   z <- z[[k]]
   class(z) <- "dendrogram"
