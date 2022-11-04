@@ -52,28 +52,28 @@ get.adjacency.dense <- function(graph, type=c("both", "upper", "lower"),
     if (is_directed(graph)) {
       for (i in seq(length.out=ecount(graph))) {
         e <- ends(graph, i, names = FALSE)
-        res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
+        res[ e[1], e[2] ] <- exattr[i]
       }
     } else {
       if (type==0) {
         ## upper
         for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
-          res[ min(e), max(e) ] <- edge_attr(graph, attr, i)
+          res[ min(e), max(e) ] <- exattr[i]
         }
       } else if (type==1) {
         ## lower
         for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
-          res[ max(e), min(e) ] <- edge_attr(graph, attr, i)
+          res[ max(e), min(e) ] <- exattr[i]
         }
       } else if (type==2) {
         ## both
         for (i in seq(length.out=ecount(graph))) {
           e <- ends(graph, i, names = FALSE)
-          res[ e[1], e[2] ] <- edge_attr(graph, attr, i)
+          res[ e[1], e[2] ] <- exattr[i]
           if (e[1] != e[2]) {
-            res[ e[2], e[1] ] <- edge_attr(graph, attr, i)
+            res[ e[2], e[1] ] <- exattr[i]
           }
         }
       }
