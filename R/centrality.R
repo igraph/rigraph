@@ -959,10 +959,12 @@ authority_score <- authority_score
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
 #' calculation. The default is \code{"prpack"}, which uses the PRPACK library
-#' (\url{https://github.com/dgleich/prpack}). This is a new implementation in igraph
+#' (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
+#' by solving a set of linear equations. This is a new implementation in igraph
 #' version 0.7, and the suggested one, as it is the most stable and the fastest
 #' for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
-#' default implementation from igraph version 0.5 until version 0.7.
+#' default implementation from igraph version 0.5 until version 0.7. It computes
+#' PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
 #' @param directed Logical, if true directed paths will be considered for
 #' directed graphs. It is ignored for undirected graphs.
@@ -985,11 +987,13 @@ authority_score <- authority_score
 #' \code{\link{arpack}} for details. This argument is ignored if the PRPACK
 #' implementation is used.
 #' @return A named list with entries: \item{vector}{A
-#' numeric vector with the PageRank scores.} \item{value}{The eigenvalue
-#' corresponding to the eigenvector with the page rank scores. It should be
-#' always exactly one.} \item{options}{Some information about the underlying
-#' ARPACK calculation. See \code{\link{arpack}} for details. This entry is
-#' \code{NULL} if not the ARPACK implementation was used.}
+#' numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
+#' method, the eigenvalue corresponding to the eigenvector with the PageRank scores
+#' is returned here. It is expected to be exactly one, and can be used to check
+#' that ARPACK has successfully converged to the expected eingevector. When using
+#' the PRPACK method, it is always set to 1.0.} \item{options}{Some information
+#' about the underlying ARPACK calculation. See \code{\link{arpack}} for details.
+#' This entry is \code{NULL} if not the ARPACK implementation was used.}
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
