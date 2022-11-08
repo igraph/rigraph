@@ -14,7 +14,7 @@ Fixed:
  - The value of `par(xpd=...)` is now restored after plotting a graph.
  - Fixed a bug in `as.dendrogram.communities()` for large dendrograms, thanks
    to @pkharchenko (see PR #292).
- - Fixed a bug in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense matrices.
+ - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
 
 Deprecated:
 
