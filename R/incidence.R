@@ -43,7 +43,9 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
     } else if (mode==2) {
       el[,1:2] <- el[,c(2,1)]
     } else if (mode==3) {
-      el <- rbind(el, el[,c(2,1,3)])
+      reversed_el <- el[,c(2,1,3)]
+      names(reversed_el) <- names(el)
+      el <- rbind(el, reversed_el)
     }
 
     res <- make_empty_graph(n=n1+n2, directed=directed)
