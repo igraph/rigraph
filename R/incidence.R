@@ -113,6 +113,8 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
             ptr <- ptr + 1
             edges[2*ptr-1] <- n1+j
             edges[2*ptr] <- i
+            weight[ptr] <- incidence[i,j]
+            ptr <- ptr + 1
           }
         }
       }
