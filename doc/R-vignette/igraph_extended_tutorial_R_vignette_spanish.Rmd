@@ -1,0 +1,587 @@
+---
+title: "Introduction to igraph (spanish)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to igraph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Tutorial
+
+El objetivo principal de igraph es proporcionar un conjunto de tipos de datos y funciones para 1) implementar sin problemas algoritmos de grafos, 2) manejar rápidamente grandes grafos con millones de vértices y aristas, 3) permitir la creación rápida de prototipos mediante lenguajes de alto nivel como R.
+
+## Crear un grafo
+
+La forma más sencilla de crear un grafo es con el constructor `Graph`. Para hacer un grafo vacío:
+
+```{r}
+library("igraph")
+
+gi <- make_empty_graph()
+```
+
+Para hacer un grafo con 10 nodos (numerados `1` a `10`) y dos aristas que conecten los nodos `1-2` y `1-5`:
+
+```{r}
+gi <- graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
+```
+	
+Podemos imprimir el grafo para obtener un resumen de sus nodos y aristas:
+
+```{r echo = TRUE}
+print(gi)
+```
+	
+Tenemos entonces: grafo no dirigido (**U**ndirected)  con **10** vértices y **2** aristas, que se enlistan en la última parte. Si el grafo tiene un atributo [nombre], también se imprime.
+
+Nota
+
+`summary` es similar a `print` pero no enlista las aristas, lo cual es conveniente para grafos grandes con millones de aristas:
+
+```{r echo = TRUE}
+summary(gi)
+```
+	
+## Añadir y borrar vértices y aristas
+
+Empecemos de nuevo con un grafo vacío. Para añadir vértices a un grafo existente, utiliza `add_vertices`:
+
+```{r}
+gi <- make_empty_graph()
+
+gi <- add_vertices(gi,3)
+```
+	
+En igraph, los vértices se numeran siempre a partir de uno. El número de un vértice es el *ID del vértice*. Un vértice puede tener o no un nombre.
+
+Del mismo modo, para añadir aristas se utiliza `add_edges`:
+
+```{r}
+gi <- add_edges(gi, edges = c(1,2, 1,3))
+```
+
+Las aristas se añaden especificando el vértice origen y el vértice destino de cada arista. Esta llamada añade dos aristas, una que conecta los vértices `1` y `2`, y otra que conecta los vértices `1` y `3`. Las aristas también se numeran a partir de uno (el *ID del arista*) y tienen un nombre opcional.
+
+**Atención**
+
+Crear un grafo vacío y añadir vértices y aristas como se muestra aquí puede ser mucho más lento que crear un grafo con sus vértices y aristas como se ha demostrado anteriormente. Si la velocidad es una preocupación, deberías evitar especialmente añadir vértices y aristas *de uno en uno*. Si necesitas hacerlo de todos modos, puedes usar `add_vertex` y `add_edge`.
+
+Si intentas añadir aristas a vértices con IDs no válidos (por ejemplo, intentas añadir una arista al vértice `5` cuando el grafo sólo tiene tres vértices), obtienes un error:
+
+	> gi <- add_edges(gi, edges = c(5,4))
+	Error in add_edges(gi, edges = c(5, 4)) : 
+  	At core/graph/type_indexededgelist.c:265 : cannot add edges, Invalid vertex id
+  	
+Añadamos más vértices y aristas a nuestro grafo:
+
+```{r echo = TRUE}
+gi <- add_edges(gi, edges = c(3,1))
+gi <- add_vertices(gi, 3)
+gi <- add_edges(gi, edges = c(3,4, 4,5, 5,6, 6,4))
+print(gi)
+```
+	
+Ahora tenemos un grafo dirigido con 6 vértices y 7 aristas. Los IDs de los vértices y aristas son siempre *continuos*, por lo que si eliminas un vértice todos los vértices subsiguientes serán renumerados. Cuando se renumera un vértice, las aristas **no** se renumeran, pero sí sus vértices de origen y destino. Utilice `delete.vertices` y `delete.edges` para realizar estas operaciones. Por ejemplo, para eliminar la arista que conecta los vértices `3-4`:
+
+```{r echo = TRUE}
+get.edge.ids(gi, c(3,4))
+```
+
+```{r}
+gi <- delete.edges(gi, 4)
+```
+	
+## Generar grafos
+
+igraph incluye generadores de grafos tanto deterministas como estocásticos. Los generadores *deterministas* producen el mismo grafo cada vez que se llama a la función, por ejemplo:
+
+```{r echo = TRUE}
+gi <- make_empty_graph()
+gi <- make_tree(127, 2, mode = "undirected")
+summary(gi)
+```
+	
+Utiliza `make_tree` para generar un grafo regular en forma de árbol con 127 vértices, cada vértice con dos hijos (y un padre, por supuesto). No importa cuántas veces llames a `make_tree`, el grafo generado será siempre el mismo si utilizas los mismos parámetros:
+
+```{r}
+gi2 <- make_tree(127, 2, mode = "undirected")
+```
+
+```{r echo = TRUE}
+get.edgelist(gi) == get.edgelist(gi2)
+```
+ 		
+El fragmento de código anterior también muestra el método `get_edgelist()`, que devuelve una lista de vértices de origen y destino para todas las aristas, ordenados por el ID de la arista. Si imprimes los 10 primeros elementos, obtienes:
+
+```{r echo = TRUE}
+head(get.edgelist(gi2),10)
+```
+	
+Los generadores *estocásticos* producen un grafo diferente cada vez; por ejemplo, `sample_grg`:
+
+```{r echo = TRUE}
+gi <- make_empty_graph()
+gi <- sample_grg(100, 0.2)
+summary(gi)
+```
+	
+Esto genera un grafo geométrico aleatorio: Se eligen *n* puntos de forma aleatoria y uniforme dentro del cuadrado unitario y los pares de puntos más cercanos entre sí respecto a una distancia predefinida *d* se conectan mediante una arista. Si se generan GRGs con los mismos parámetros, serán diferentes:
+
+
+```{r echo = TRUE}
+gi2 <- make_empty_graph()
+gi2 <- sample_grg(100, 0.2)
+
+gi_a <- head(get.edgelist(gi), 10) 
+gi2_a <-head(get.edgelist(gi2), 10)
+
+gi_a == gi2_a
+```
+	
+Una forma un poco más relajada de comprobar si los grafos son equivalentes es mediante `isomorphic()`:
+
+```{r echo = TRUE}
+isomorphic(gi,gi2)
+```
+	
+Comprobar por el isomorfismo puede llevar un tiempo en el caso de grafos grandes (en este caso, la respuesta puede darse rápidamente comprobando las distribuciones de grados de los dos grafos).
+
+## Establecer y recuperar atributos
+
+Como se ha mencionado anteriormente, en igraph cada vértice y cada arista tienen un ID numérico de `1` en adelante. Por lo tanto, la eliminación de vértices o aristas puede causar la reasignación de los ID de vértices y/o aristas. Además de los IDs, los vértices y aristas pueden tener *atributos* como un nombre, coordenadas para graficar, metadatos y pesos. El propio grafo puede tener estos atributos también (por ejemplo, un nombre, que se mostrará en `print` o `summary`). En cierto sentido, cada `Graph`, vértice y arista puede ser utilizado como una variable R para almacenar y recuperar estos atributos.
+
+Para demostrar el uso de los atributos, creemos una red social sencilla:
+
+```{r}
+gi <- make_empty_graph()
+gi <- graph(edges = c(1,2, 1,3, 3,4, 4,5, 5,3, 3,6, 6,1, 7,4, 6,7), directed = FALSE)
+```
+
+Cada vértice representa una persona, por lo que queremos almacenar nombres, edades y géneros:
+
+```{r echo = TRUE}
+V(gi)$name <- c("Alice", "Bob", "Claire", "Dennis", "Esther", "Frank", "George")
+V(gi)$age <- c(25, 31, 18, 47, 22, 23, 50) 
+V(gi)$gender <- c("f", "m", "f", "m", "f", "m", "m")
+E(gi)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
+summary(gi)
+```
+	
+`V` y `E` son la forma estándar de obtener una secuencia de todos los vértices y aristas respectivamente. El valor debe ser una lista con la misma longitud que los vértices (para `V`) o aristas (para `E`). Esto asigna un atributo a *todos* los vértices/aristas a la vez.
+
+Para asignar o modificar un atributo para un solo vértice/borde, puedes hacer lo siguiente:
+
+```{r echo = TRUE}
+E(gi)$is_formal
+```
+    
+```{r}
+E(gi)$is_formal[1] <- c(TRUE)
+```
+	
+```{r echo = TRUE}
+E(gi)$is_formal
+```
+	
+De hecho, un solo vértice se representa mediante la clase `Vertex`, y una sola arista mediante `Edge`. Ambos, junto con `Graph`, pueden ser tecleados como un diccionario para establecer atributos, por ejemplo, para añadir una fecha al grafo:
+
+```{r echo = TRUE}
+gi <- set_graph_attr(gi, "date", "2022-02-11")
+graph_attr(gi, "date")
+```
+	
+Para recuperar un diccionario de atributos, puedes utilizar `graph_attr`, `vertex_attr` y `edge_attr`. Para encontrar el ID de un vértice puedes utilizar la función `match`:
+
+```{r echo = TRUE}
+match(c("George"),V(gi)$name)
+```
+
+Para asignar atributos a un subconjunto de vértices o aristas, puedes utilizar el corte:
+
+```{r echo = TRUE}
+V(gi)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
+V(gi)
+```
+	
+Para eliminar atributos:
+
+```{r echo = TRUE}
+gi <- delete_vertex_attr(gi,"gender")
+V(gi)$gender
+```
+	
+## Propiedades estructurales de los grafos
+
+Además de las funciones simples de manipulación de grafos y atributos descritas anteriormente, igraph proporciona un amplio conjunto de métodos para calcular varias propiedades estructurales de los grafos. Está más allá del alcance de este tutorial documentar todos ellos, por lo que esta sección sólo presentará algunos de ellos con fines ilustrativos. Trabajaremos con la pequeña red social que construimos en la sección anterior.
+
+Probablemente, la propiedad más sencilla en la que se puede pensar es el "grado del vértice". El grado de un vértice es igual al número de aristas incidentes a él. En el caso de los grafos dirigidos, también podemos definir el `grado de entrada` (el número de aristas que apuntan hacia el vértice) y el `grado de salida` (el número de aristas que se originan en el vértice). 
+
+```{r echo = TRUE}
+degree(gi)
+```
+
+Si el grafo fuera dirigido, habríamos podido calcular los grados de entrada y salida por separado utilizando `degree(mode="in")` y `degree(mode="out")`. También puedes usar un único ID de un vértice o una lista de ID de los vértices a `degree` si quieres calcular los grados sólo para un subconjunto de vértices:
+
+```{r echo = TRUE}
+degree(gi,7)
+```
+
+```{r echo = TRUE}
+degree(gi, v = c(3,4,5))
+```
+	
+Este procedimiento se aplica a la mayoría de las propiedades estructurales que igraph puede calcular. Para las propiedades de los vértices, los métodos aceptan un ID o una lista de IDs de los vértices (y si se omiten, el valor predeterminado es el conjunto de todos los vértices). Para las propiedades de las aristas, los métodos también aceptan un único ID de o una lista de IDs de aristas. Más adelante, en el próximo capítulo <consulta de vértices y aristas>, aprenderás a restringirlos exactamente a los vértices o aristas que quieras.
+
+Nota
+
+Para algunos casos, no tiene sentido realizar el calculo sólo para unos pocos vértices o aristas en lugar de todo el grafo, ya que de todas formas se tardaría el mismo tiempo. En este caso, los métodos no aceptan IDs de vértices o aristas, pero se puede restringir la lista resultante más tarde usando operadores estándar de indexación y de corte. Un ejemplo de ello es la centralidad de los vectores propios (`evcent()`).
+
+Además de los grados, igraph incluye rutinas integradas para calcular muchas otras propiedades de centralidad, como la intermediación de vértices y aristas o el PageRank de Google (`Graph.pagerank`), por nombrar algunas. Aquí sólo ilustramos la interrelación de aristas:
+
+```{r echo = TRUE}
+edge_betweenness(gi)
+```
+
+La mayoría de las propiedades estructurales también pueden ser obtenidas para un subconjunto de vértices o aristas o para un solo vértice o arista llamando al método apropiado en el objeto `Vertex` o `Edge` de interés:
+
+```{r echo = TRUE}
+degree(gi)
+```
+
+```{r echo = TRUE}
+    degree(gi)[3]
+```
+	
+## Busqueda de vértices y aristas basada en atributos
+
+### Selección de vértices y aristas
+
+Tomando como ejemplo la red social anterirormente creada, te gustaría averiguar quién tiene el mayor grado o centralidad de intermediación. Puedes hacerlo con las herramientas presentadas hasta ahora y algunos conocimientos básicos de R:
+
+```{r echo = TRUE}
+which.max(degree(gi))
+```
+
+Si el primer argumento posicional es un objeto invocable (es decir, una función, un método vinculado o cualquier cosa que se comporte como una función), el objeto será llamado para cada vértice que esté actualmente en la secuencia. Si la función devuelve `Verdadero`, el vértice será incluido, en caso contrario será excluido:
+
+```{r echo = TRUE}
+graph <- graph.full(n=10)
+only_odd_vertices <- which(V(graph)%%2==1)
+length(only_odd_vertices)
+```
+	
+Si el primer argumento posicional es un iterable (es decir, una lista, un generador o cualquier cosa sobre la que se pueda iterar), *debe* devolver enteros y estos enteros se considerarán como índices del conjunto de vértices actual (que *no* es necesariamente todo el grafo). Sólo se incluirán en el conjunto de vértices filtrados los vértices que coincidan con los índices dados. Los numero flotantes, las cadenas y los ID de vértices no válidos mostrarán un mensaje de error:
+
+```{r echo = TRUE}
+seq <- V(graph)[2,3,7]
+length(seq)
+```
+
+```{r echo = TRUE}
+seq
+```
+
+```{r echo = TRUE}
+seq <- seq[1,3]    #filtering an existing vertex set
+seq
+```
+
+```{r echo = TRUE, eval = FALSE}
+seq <- V(graph)[2,3,7,"foo", 3.5]
+```
+
+Se pueden utilizar operadores para filtrar los vértices en función de sus atributos o sus propiedades estructurales. Primero se selecciona el nombre del atributo o la propiedad estructural y luego se utiliza la función `which` para evaluar cada vértice utilizando algún operador u otro atributo. Por ejemplo, el siguiente comando te da las personas menores de 30 años en nuestra red social imaginaria:
+
+```{r echo = TRUE}
+V(gi)$name[which(V(gi)$age < 30)]
+```
+
+Las posibilidades son las siguientes:
+
+| Operador | Significado              |
+|------------------|-----------------------|
+| `==`        | El valor del atributo/propiedad debe ser *igual* a      |
+| `!=`        | El valor del atributo/propiedad debe *no ser igual* a   |
+| `<`        | El valor del atributo/propiedad debe ser *menos* que  |
+| `<=`        | El valor del atributo/propiedad debe ser *inferior o igual a*  |
+| `>`        | El valor del atributo/propiedad debe ser *mayor que*   |
+| `>=`        | El valor del atributo/propiedad debe ser *mayor o igual a*  |
+| `%in%`        | El valor del atributo/propiedad debe estar *incluido en*      |
+| `%notin% <- Negate(%in%)` (primero crea la función)    | El valor del atributo/propiedad debe *no estar incluido en* |
+
+Teóricamente, puede ocurrir que exista un atributo y una propiedad estructural con el mismo nombre (por ejemplo, podrías tener un atributo de vértice llamado "grado"). En ese caso, sólo hay que tener cuidado de referenciar correctamente el atributo y luego llamar a la función para calcular la propiedad estructural. Por ejemplo, creamos un nuevo atributo llamado grado:
+
+```{r echo = TRUE}
+V(gi)$degree <- c("A", "B", "C", "D", "E", "F", "G")
+V(gi)$degree[degree(gi) == 3]
+```
+
+```{r echo = TRUE}
+    V(gi)$name[degree(gi) == 3]
+``` 
+
+También hay algunas propiedades estructurales especiales para seleccionar los aristas:
+
+Utilizando `from` o `to` en función de los vértices de donde se originan las aristas. Por ejemplo, para seleccionar todas las aristas procedentes de Claire (que tiene el índice de vértice 3):
+
+```{r echo = TRUE, warning = FALSE}
+E(gi)[from(3)]
+```
+	
+Usarr el filtro `to` en base a los vértices de destino. Esto es diferente de `from` si el grafo es dirigido.
+
+Por ejemplo, la siguiente expresión selecciona todas las aristas entre Carmina (índice de vértice 2), Dennis (índice de vértice 3) y Esther (índice de vértice 4). La expresión %--% es un operador especial que puede utilizarse para seleccionar todas las aristas entre dos conjuntos de vértices. Ignora las direcciones de las aristas en los grafos dirigidos.
+
+```{r echo = TRUE}
+E(gi) [ 3:4 %--% 4:5 ]
+```
+
+Puede construir listas basadas en atributos y evaluar las aristas que se originan en un conjunto y terminan en el otro. Por ejemplo, para seleccionar todas las aristas que conectan a los hombres con las mujeres. Recuerda que borramos el atributo de género, para ello es necesario generarlo de nuevo:
+
+```{r}
+V(gi)$gender <- c("f", "m", "f", "m", "f", "m", "m")
+```
+
+```{r echo = TRUE}
+men <- V(gi)$name[(which(V(gi)$gender == "m"))]
+men
+```
+
+```{r echo = TRUE}
+women <- V(gi)$name[(which(V(gi)$gender == "f"))]
+women
+```
+	
+```{r echo = TRUE}
+E(gi)[men %--% women]
+```
+	
+### Encontrar un solo vértice o arista con algunas propiedades
+
+En muchos casos buscamos un solo vértice o arista de un grafo con algunas propiedades, sin importar cuál de las coincidencias se devuelve o que sólo sea una coincidencia. Un ejemplo típico es buscar vértices por su nombre en la propiedad `name`.
+
+Por ejemplo, para buscar el vértice correspondiente a Carmina, se puede hacer lo siguiente:
+
+```{r echo = TRUE}
+Carmina <- match(c("Carmina"),V(gi)$name)
+Carmina
+```
+	
+La búsqueda de un nombre desconocido dará lugar a una excepción:
+
+```{r echo = TRUE}
+match(c("Joe"),V(gi)$name)
+```
+	
+### Búsqueda de vértices por nombres
+
+Buscar vértices por su nombre es una operación muy común, y normalmente es mucho más fácil recordar los nombres de los vértices de un grafo que sus IDs. Para ello, igraph trata el atributo `name` de los vértices de forma especial; se indexan de forma que los vértices se puedan buscar por sus nombres. Por ejemplo, puedes buscar el grado (número de conexiones) de Dennis de la siguiente manera:
+
+```{r echo = TRUE}
+degree(gi,v="Dennis")
+```
+
+El mapeo entre los nombres de los vértices y los IDs es mantenido de forma transparente por igraph en segundo plano; cada vez que el grafo cambia, igraph también actualiza el mapeo interno. Sin embargo, la singularidad de los nombres de los vértices *no* se impone; puedes crear fácilmente un grafo en el que dos vértices tengan el mismo nombre, pero igraph sólo devolverá uno de ellos cuando los busques por nombres, el otro sólo estará disponible por su índice.
+
+## Tratar un grafo como una matriz de adyacencia 
+
+La matriz de adyacencia es otra forma de formar un grafo. En la matriz de adyacencia, las filas y columnas están etiquetadas por los vértices del grafo: los elementos de la matriz indican si los vértices *i* y *j* tienen una arista común (*i, j*). La matriz de adyacencia del grafo de nuestra red social imaginaria es:
+
+```{r echo = TRUE}
+get.adjacency(gi)
+```
+	
+Por ejemplo, Carmina (`[1, 0, 0, 1, 1, 1, 0]`) está directamente conectada con Alejandra (que tiene el índice 1), Dennis (índice 4), Esther (índice 5) y Frank (índice 6), pero no con Bruno (índice 2) ni con George (índice 7).
+
+## Diseños ("layouts") y graficación
+
+Un grafo es un objeto matemático abstracto sin una representación específica en el espacio 2D o 3D. Esto significa que cuando queremos visualizar un grafo, tenemos que encontrar primero un trazado de los vértices a las coordenadas en el espacio bidimensional o tridimensional, preferiblemente de una manera que sea agradable a la vista. Una rama separada de la teoría de grafos, denominada dibujo de grafos, trata de resolver este problema mediante varios algoritmos de disposición de grafos. igraph implementa varios algoritmos de diseño y también es capaz de dibujarlos en la pantalla o en un archivo PDF, PNG o SVG utilizando la [biblioteca Cairo](https://www.cairographics.org).
+
+### Algoritmos de diseños ("layouts")
+
+Los métodos de diseño en igraph se encuentran en el objeto `graph`, y siempre comienzan con `layout`. La siguiente tabla los resume:
+
+| Nombre del metodo |  Descripción |
+| --- | --- |
+|`layout_in_circle` `layout.circle`  | Disposición determinista que coloca los vértices en un círculo |
+|`layout_with_drl` `layout.drl`  | El algoritmo [Distributed Recursive Layout] para grafos grandes |
+|`layout.fruchterman.reingold`| El algoritmo dirigido Fruchterman-Reingold |
+|`layout_with_kk` `layout.kamada.kawai` | El algoritmo dirigido Kamada-Kawai |
+|`layout_with_lgl` `layout.lgl` | El algoritmo [Large Graph Layout] para grafos grandes | 
+|`layout.random`| Coloca los vértices de forma totalmente aleatoria |
+|`layout_randomly`| Coloca los vértices de forma totalmente aleatoria en 3D |
+|`layout.reingold.tilford`| Diseño de árbol de Reingold-Tilford, útil para grafos (casi) arbóreos |
+|`layout_as_tree`| Diseño de árbol de Reingold-Tilford con una post-transformación de coordenadas polares, útil para grafos (casi) arbóreos |
+|`layout_on_sphere` `layout.sphere`  | Disposición determinista que coloca los vértices de manera uniforme en la superficie de una esfera |
+
+Los algoritmos de diseño pueden ser llamados directamente:
+
+```{r}
+layout <- layout.kamada.kawai(gi)
+```
+
+```{r}
+layout <- layout_with_kk(gi)
+```
+	
+Por ejemplo, las dos llamadas siguientes son completamente equivalentes:
+
+```{r}
+layout <- layout.reingold.tilford(gi, root= 2)
+```
+
+```{r}
+layout <- layout_as_tree(gi, root = 2)
+```
+	
+Los métodos de diseño devuelven un objeto `layout` que se comporta principalmente como una lista de listas. Cada entrada de la lista en un objeto `layout` corresponde a un vértice en el grafo original y contiene las coordenadas del vértice en el espacio 2D o 3D. Los objetos `layout` también contienen algunos métodos útiles para traducir, escalar o rotar las coordenadas en un lote. Sin embargo, la principal utilidad de los objetos `layout` es que puedes pasarlos a la función `plot` junto con el grafo para obtener un dibujo en 2D.
+
+### Dibujar un grafo utilizando un diseño ("layout")
+
+Por ejemplo, podemos trazar nuestra red social imaginaria con el algoritmo de distribución Kamada-Kawai de la siguiente manera:
+
+```{r}
+layout <- layout_with_kk(gi)
+```
+
+```{r}
+plot(gi, layout = layout, main = "Nuestra red social con el algoritmo de distribución Kamada-Kawai")
+```
+	
+Esto debería abrir un visor de imágenes externo que muestre una representación visual de la red. Recuerde que la colocación exacta de los nodos puede ser diferente en su computadora, ya que la disposición no es determinista.
+
+Hmm, esto no es demasiado bonito hasta ahora. Una adición trivial sería usar los nombres como etiquetas de los vértices y colorear los vértices según el género. Las etiquetas de los vértices se toman del atributo `label` por defecto y los colores de los vértices se determinan por el atributo `color`. Para el ejemplo, es importante tener en cuenta que los atributos que seleccionamos como condición (por ejemplo, el género) para seleccionar un color son enteros y no cadenas:
+
+Así que podemos crear simplemente estos atributos y volver a trazar el grafo:
+
+```{r}
+V(gi)$gender_num <- c(1,2,1,2,1,2,2)
+colors <- c("yellow", "red")
+V(gi)$color <- colors[V(gi)$gender_num]
+plot(gi, layout = layout, main = "Nuestra red social - con nombres como etiquetas y géneros como colores")
+```
+	
+Otras formas de enfocar este ejemplo:
+
+```{r}
+V(gi)$color <- ifelse(V(gi)$gender == "m", "red","yellow")
+plot(gi, layout = layout)
+```
+
+```{r}
+plot(gi, layout= layout, vertex.color=as.factor(V(gi)$gender))
+```
+	
+```{r}
+plot(gi, layout= layout, vertex.color=c( "yellow", "red")[1+(V(gi)$gender == "f")])
+```
+
+En lugar de especificar las propiedades visuales como atributos de vértices y aristas, también puedes darlas como argumentos a `plot`. El gráfico final muestra los vínculos formales con líneas gruesas y los informales con líneas finas:
+
+```{r}
+plot(gi, layout =layout, vertex.size = 20, margin = 0.5,
+           vertex.color=c( "red", "yellow")[1+(V(gi)$gender == "m")], 
+           edge.width=c(1,3)[1+(E(gi)$is_formal == TRUE)],
+           )
+```
+
+Este último enfoque es preferible si quiere mantener las propiedades de la representación visual de su gráfico separadas del propio gráfico.
+
+Para resumirlo todo: hay propiedades especiales de vértices y aristas que corresponden a la representación visual del grafo. Estos atributos anulan la configuración por defecto de igraph (es decir, el color, el peso, el nombre, la forma, el diseño, etc.). Las dos tablas siguientes resumen los atributos visuales más utilizados para los vértices y las aristas, respectivamente:
+
+### Atributos de los vértices que controlan los gráficos
+
+| Nombre del atributo | Argumento | Propósito |
+|---|---|----|
+| `color` |`vertex.color` | Color del vertice |
+| `font` |   `vertex.label.font`   |   Familia tipográfica del vértice |
+|  `label`  | `vertex.label`   |  Etiqueta del vértice. Se convertirán en caracteres. Especifique NA para omitir las etiquetas de los vértices. Las etiquetas de vértices por defecto son los ids de los vértices. |
+| `label angle`  | `vertex.label.degree` | Define la posición de las etiquetas de los vértices, en relación con el centro de los mismos. Se interpreta como un ángulo en radianes, cero significa 'a la derecha', y 'pi' significa a la izquierda, arriba es -pi/2 y abajo es pi/2. El valor por defecto es -pi/4 |
+|  `label color`  | `vertex.label.color`    |    Color de la etiqueta del vértice |
+|  `label dist`  | `vertex.label.dist`   |   Distancia de la etiqueta del vértice desde el propio vértice, en relación con el tamaño del vértice |
+|  `label size`  |  `vertex.label.size`   |  Tamaño de letra de la etiqueta de vértice |
+|  `shape`  | `vertex.shape`    | La forma del vértice, actualmente “circle”, “square”, “csquare”, “rectangle”, “crectangle”, “vrectangle”, “pie” (ver vertex.shape.pie), ‘sphere’ y “none” son admitidos, y sólo por el comando plot.igraph. |
+| `size` | `vertex.size`  | El tamaño del vértice, un escalar numérico o vector, en este último caso el tamaño de cada vértice puede ser diferente |
+
+### Atributos de las aristas que controlan los gráficos
+
+| Nombre del atributo | Argumento  | Propósito |
+|-----------|-------------|------|
+|  `color`   |    `edge.color`      |      Color de la arista |
+|  `curved`    |     `edge.curved`     |  Un valor numérico especifica la curvatura de la arista; una curvatura cero significa aristas rectas, valores negativos significan que la arista se curva en el sentido de las agujas del reloj, valores positivos lo contrario. TRUE significa curvatura 0.5, FALSE significa curvatura cero |
+| `font`  |  `edge.font`    |  Familia tipográfica del borde |
+| `arrow size`  |   `edge.arrow.size`   |   Actualmente es una constante, por lo que es la misma para todas las aristas. Si se presenta un vector, sólo se utiliza el primer elemento, es decir, si se toma de un atributo de arista, sólo se utiliza el atributo de la primera arista para todas las flechas  |
+|`arrow_width`    |     `edge.arrow.width`    |   El ancho de las flechas. Actualmente es una constante, por lo que es la misma para todas las aristas |
+|  `width` |    `edge.width`    |   Anchura del borde en píxeles  |
+|  `label`    |   `edge.label`   |  Si se especifica, añade una etiqueta al borde |
+
+### Argumentos genéricos de `plot()`
+
+Estos ajustes se pueden especificar como argumentos de palabra clave a la función `plot` para controlar la apariencia general del gráfico
+
+|  Keyword argument   |       Purpose   |
+|----|-----|
+|  `autocurve.edges`   |  Determinación automática de la curvatura de las aristas en grafos con múltiples aristas |
+|  `layout`           |    El diseño que se va a utilizar. Puede ser una instancia de `layout`, una lista de tuplas que contengan coordenadas X-Y, o el nombre de un algoritmo de diseño. El valor por defecto es `auto`, que selecciona un algoritmo de diseño automáticamente basado en el tamaño y la conectividad del grafo. |
+|  `margin`           |   La cantidad de espacio vacío debajo, encima, a la izquierda y a la derecha del gráfico, es un vector numérico de longitud cuatro |
+
+### Especificación de colores en los gráficos
+
+igraph entiende las siguientes especificaciones de color siempre que espera un color (por ejemplo, colores de aristas, vértices o etiquetas en los respectivos atributos):
+
+***Nombres de colores X11***
+
+Consulta la [lista de nombres de colores X11](https://en.wikipedia.org/wiki/X11_color_names) en Wikipedia para ver la lista completa. Los nombres de los colores no distinguen entre mayúsculas y minúsculas en igraph, por lo que "DarkBLue" puede escribirse también como "darkblue".
+
+***Especificación del color en la sintaxis CSS***
+
+Se trata de una cadena según uno de los siguientes formatos (donde *R*, *G* y *B* denotan los componentes rojo, verde y azul, respectivamente):
+
+-   `#RRGGBB`, los componentes van de 0 a 255 en formato hexadecimal. Ejemplo: `"#0088ff"`
+-   `#RGB`, los componentes van de 0 a 15 en formato hexadecimal. Ejemplo: `"#08f"`
+-   `rgb(R, G, B)`, los componentes van de 0 a 255 o de 0% a 100%. Ejemplo: `"rgb(0, 127, 255)"` o `"rgb(0%, 50%, 100%)"`.
+
+### Guardar gráficos
+
+igraph puede usarse para crear gráficos de calidad de publicación. El formato preferido se deduce de la extensión. igraph puede guardar en cualquier cosa que soporte Cairo, incluyendo archivos SVG, PDF y PNG. Los archivos SVG o PDF pueden ser convertidos posteriormente al formato PostScript (`.ps`) o PostScript encapsulado (`.eps`) si lo prefieres, mientras que los archivos PNG pueden ser convertidos a TIF (`.tif`):
+
+```{r echo=FALSE,eval=FALSE}
+png("social_network.png", 600, 600) 
+plot(gi, layout =layout, vertex.size = 20, margin = 0.5,
+            vertex.color=c( "red", "yellow")[1+(V(gi)$gender == "m")], 
+            edge.width=c(1,3)[1+(E(gi)$is_formal == TRUE)]
+        )
+dev.off()
+```
+
+## igraph y el mundo exterior
+
+Ningún módulo de grafos estaría completo sin algún tipo de funcionalidad de importación/exportación que permita al paquete comunicarse con programas y kits de herramientas externos. igraph no es una excepción: proporciona funciones para leer los formatos de grafos más comunes y para guardar objetos `Graph` en archivos que obedezcan estas especificaciones de formato. La siguiente tabla resume los formatos que igraph puede leer o escribir:
+
+| Formato | Nombre corto | Metodo de lectura |  Metodo de escritura |
+ |---|---|----|----|
+ | Adjacency list (a.k.a. [LGL](https://lgl.sourceforge.net/#FileFormat))   |   `lgl`  |     `read_graph(file, format = c("lgl"))`    |     `write_graph(graph, file, format = c("lgl"))` |
+ | Adjacency matrix   |     `adjacency`   |  `graph_from_adjacency_matrix(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper","lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA)`   |  `as.matrix(graph, "adjacency")` |
+ |DIMACS   |       `dimacs`  |  `read_graph(file, format = c("dimacs"))`   |  `write_graph(graph, file, format = c("dimacs"))"` |
+ | DL       |  `dl`        |                  `Graph.Read_DL`       |     not supported yet |
+ | Edge list |   `edgelist` |  `read_graph(file, format = c("edgelist"))`    |  `write_graph(graph, file, format = c("edgelist"))` |
+ | [GraphViz](https://www.graphviz.org)   |    `dot`      |       not supported yet     |         `write_graph(graph, file, formati = c("dot"))` |
+ | GML   |   `gml`   |    `read_graph(file, format = c("gml"))`  |  `write_graph(graph, file, format = c("gml"))` |
+ | GraphML  |    `graphml`   |        `read_graph(file, format = c("graphml"))`   |    `write_graph(graph, file, format = c("graphml"))` |
+ | LEDA     |         `leda`       |    not supported yet    |       `write_graph(graph, file, format = c("leda"))` |
+ | Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat))  | `ncol`     |                   `read_graph(file, format = c("ncol"))`     |    `write_graph(graph, file, format = c("ncol"))` |
+ | [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format   |     `pajek`   | `read_graph(file, format = c("pajek"))`   |   `write_graph(graph, file, format = c("pajek"))` |
+
+Nota
+
+La mayoría de los formatos tienen sus propias limitaciones; por ejemplo, no todos pueden almacenar atributos. Tu mejor opción es probablemente GraphML o GML si quieres guardar los grafos de igraph en un formato que pueda ser leído desde un paquete externo y quieres preservar los atributos numéricos y de cadena. La lista de aristas y NCOL también están bien si no tienes atributos (aunque NCOL soporta nombres de vértices y pesos de aristas).
+
+## Dónde ir a continuación
+
+Este tutorial sólo ha arañado la superficie de lo que igraph puede hacer. Los planes a largo plazo son ampliar este tutorial para convertirlo en una documentación adecuada de estilo manual para igraph en los próximos capítulos. Un buen punto de partida es la documentación de la clase `Graph`. Si te quedas atascado, intenta preguntar primero en nuestro [grupo Discourse](https://igraph.discourse.group) - quizás haya alguien que pueda ayudarte inmediatamente.
+
+
+
+
+
