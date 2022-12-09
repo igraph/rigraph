@@ -16,7 +16,7 @@ if [ $RETVAL = 0 ]; then
 elif [ $RETVAL = 1 ]; then
     rm -f .reject
     # Maybe the patch was reversed?
-    COUNT=`echo "$OUT" | grep -c "^Reversed.*Skipping"`
+	COUNT=`echo "$OUT" | grep -E -c "^(Reversed.*Skipping)|(Ignoring previously applied)"`
     if [ $COUNT -gt 0 ]; then
         echo "$1 seems to be applied already, skipping."
 		exit
