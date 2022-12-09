@@ -1,3 +1,8 @@
+test_that("BFS uses 1-based root vertex index", {
+  g <- make_ring(3)
+  expect_that(bfs(g, root=1)$root, equals(1))
+})
+
 test_that("BFS works from multiple root vertices", {
 
   g <- make_ring(10) %du% make_ring(10)

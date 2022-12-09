@@ -15,6 +15,7 @@ Fixed:
  - Fixed a bug in `as.dendrogram.communities()` for large dendrograms, thanks
    to @pkharchenko (see PR #292).
  - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
+ - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
 
 Deprecated:
 
