@@ -8013,7 +8013,7 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
 
   SET_STRING_ELT(names, 0, mkChar("root"));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
-  REAL(VECTOR_ELT(result, 0))[0] = root;
+  REAL(VECTOR_ELT(result, 0))[0] = root+1;
 
   SET_STRING_ELT(names, 1, mkChar("mode"));
   SET_VECTOR_ELT(result, 1, NEW_CHARACTER(1));
