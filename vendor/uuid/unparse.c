@@ -53,7 +53,7 @@ static void uuid_unparse_x(const uuid_t uu, char *out, const char *fmt)
 	struct uuid uuid;
 
 	uuid_unpack(uu, &uuid);
-	sprintf(out, fmt,
+	snprintf(out, 37, fmt,
 		uuid.time_low, uuid.time_mid, uuid.time_hi_and_version,
 		uuid.clock_seq >> 8, uuid.clock_seq & 0xFF,
 		uuid.node[0], uuid.node[1], uuid.node[2],
