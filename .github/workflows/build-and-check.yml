@@ -44,9 +44,9 @@ jobs:
           path: .venv
           key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
-      - name: Create R source package
+      - name: Create DESCRIPTION
         run: |
-          make igraph
+          make DESCRIPTION
         shell: bash
 
       - name: Install R dependencies
@@ -59,6 +59,11 @@ jobs:
             pkgconfig
           needs: check
           pak-version: devel
+
+      - name: Create R source package
+        run: |
+          make igraph
+        shell: bash
 
       - name: Smoke test
         run: |
