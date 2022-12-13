@@ -184,7 +184,7 @@ jobs:
             quiet = FALSE
           )
           covr::codecov(cov, quiet = FALSE)
-        shell: Rscript -e {0}
+        shell: Rscript {0}
 
   # Automatically deploy the source code to the master branch
   deploy_src:
