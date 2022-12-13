@@ -16,13 +16,13 @@ code.
 
 This guide is for the igraph R package, but note that the package uses the
 igraph C library internally for most things. If your changes involve the C
-library as well, then you need make those changes first, in the repository
+library as well, then you need to make those changes first, in the repository
 of the C library: https://github.com/igraph/igraph.
 
 ## Development and Compilation
 
 All development is being done on the `dev` branch. The actual R package is being
-generated using `make`, which can then be installed. We automatically push the
+generated using `make igraph`, which can then be installed. We automatically push the
 generated R package to the `master` branch, so that it can be automatically
 installed using `remotes::install_github("igraph/igraph@master")`.
 
@@ -33,10 +33,7 @@ and test the `igraph` package using the `devtools` package as follows:
   system("git submodule init")
   system("git submodule update")
   system("make")
-  library(devtools)
-  install()
-  build()
-  test()
+  testthat::test_local()
 ```
 
 When building from source on Windows, you need to have
@@ -45,7 +42,7 @@ Additionally, the two system requirements of `glpk` and `libxml2` are
 not optional, but hard requirements. For version R >= 4.0 you can install these
 two from an RTools terminal using
 
-```
+```sh
 pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2
 ```
 
