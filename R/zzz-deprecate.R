@@ -20,7 +20,7 @@
 #
 ###################################################################
 
-#' @include attributes.R auto.R basic.R bipartite.R centrality.R
+#' @include attributes.R basic.R bipartite.R centrality.R
 #' @include cliques.R cocitation.R cohesive.blocks.R community.R
 #' @include components.R console.R conversion.R decomposition.R demo.R
 #' @include epi.R fit.R flow.R foreign.R games.R glet.R hrg.R indexing.R
