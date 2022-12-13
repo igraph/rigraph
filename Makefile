@@ -5,7 +5,7 @@ PYTHON ?= python3
 PYVENV ?= .venv
 STIMULUS ?= $(PYVENV)/bin/stimulus
 
-all: igraph
+all: build
 
 ########################################################
 # Main package
@@ -135,7 +135,7 @@ $(RAY2): src/vendor/%: vendor/%
 
 # R files that are generated/copied
 
-RGEN = R/auto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
+RGEN = R/aaaauto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
 	src/rinterface_extra.c src/lazyeval.c src/init.c src/igraph-win.def \
 	src/Makevars.in configure src/config.h.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
@@ -172,17 +172,17 @@ src/init.c: \
            -t tools/stimulus/types-RR.yaml \
            -l RInit
 
-R/auto.R: \
+R/aaaauto.R: \
 		$(top_srcdir)/interfaces/functions.yaml \
 		$(top_srcdir)/interfaces/types.yaml \
-		tools/stimulus/auto.R.in \
+		tools/stimulus/aaaauto.R.in \
 		tools/stimulus/functions-R.yaml \
 		tools/stimulus/types-RR.yaml
 	$(STIMULUS) \
            -f $(top_srcdir)/interfaces/functions.yaml \
            -f tools/stimulus/functions-R.yaml \
-           -i tools/stimulus/auto.R.in \
-           -o R/auto.R \
+           -i tools/stimulus/aaaauto.R.in \
+           -o R/aaaauto.R \
            -t $(top_srcdir)/interfaces/types.yaml \
            -t tools/stimulus/types-RR.yaml \
            -l RR
@@ -244,12 +244,18 @@ src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 	printf "%s" "OBJECTS=" >> $@
 	cat object_files >> $@
 
+pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
+	$(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
+
 # We have everything, here we go
+
+build: pre_build
+	if ! [ -f src/Makevars ]; then ./configure; fi
+	R CMD INSTALL -l "/tmp" --no-configure --no-byte-compile .
 
 igraph: igraph_$(VERSION).tar.gz
 
-igraph_$(VERSION).tar.gz: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
-			  $(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
+igraph_$(VERSION).tar.gz: pre_build
 	rm -f src/config.h
 	rm -f src/Makevars
 	touch src/config.h
@@ -284,8 +290,7 @@ test:
 
 clean:
 	@rm -f  DESCRIPTION
-	@rm -f  NAMESPACE
-	@rm -f  R/auto.R
+	@rm -f  R/aaaauto.R
 	@rm -rf autom4te.cache/
 	@rm -f  config.log
 	@rm -f  config.status
