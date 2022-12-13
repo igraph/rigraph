@@ -57,11 +57,8 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: |
-            roxygen2
-            devtools
-            irlba
-            pkgconfig
+          needs: build
+          pak-version: devel
 
       - name: Create R source package
         run: |
