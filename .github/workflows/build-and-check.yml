@@ -19,8 +19,6 @@ jobs:
     name: Build source R package
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      _R_CHECK_FORCE_SUGGESTS_: false   # graph package is unavailable
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -48,13 +46,22 @@ jobs:
 
       - name: Install necessary dependencies
         run: |
-          sudo apt install libcurl4-openssl-dev libharfbuzz-dev libfribidi-dev
-          Rscript -e 'install.packages(c("roxygen2", "devtools", "irlba", "pkgconfig"))'
-        shell: bash
+          pak::pak(c("roxygen2", "devtools", "irlba", "pkgconfig"))
+        shell: Rscript -e {0}
 
       - name: Create R source package
         run: |
           make igraph
+        shell: bash
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          needs: check
+
+      - name: Smoke test
+        run: |
+          make test
         shell: bash
 
       - name: Upload R source package
