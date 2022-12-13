@@ -19,6 +19,7 @@ jobs:
     name: Build source R package
 
     env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
