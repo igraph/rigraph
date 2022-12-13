@@ -135,7 +135,7 @@ $(RAY2): src/vendor/%: vendor/%
 
 # R files that are generated/copied
 
-RGEN = R/aaaauto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
+RGEN = R/aaa-auto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
 	src/rinterface_extra.c src/lazyeval.c src/init.c src/igraph-win.def \
 	src/Makevars.in configure src/config.h.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
@@ -172,17 +172,17 @@ src/init.c: \
            -t tools/stimulus/types-RR.yaml \
            -l RInit
 
-R/aaaauto.R: \
+R/aaa-auto.R: \
 		$(top_srcdir)/interfaces/functions.yaml \
 		$(top_srcdir)/interfaces/types.yaml \
-		tools/stimulus/aaaauto.R.in \
+		tools/stimulus/aaa-auto.R.in \
 		tools/stimulus/functions-R.yaml \
 		tools/stimulus/types-RR.yaml
 	$(STIMULUS) \
            -f $(top_srcdir)/interfaces/functions.yaml \
            -f tools/stimulus/functions-R.yaml \
-           -i tools/stimulus/aaaauto.R.in \
-           -o R/aaaauto.R \
+           -i tools/stimulus/aaa-auto.R.in \
+           -o R/aaa-auto.R \
            -t $(top_srcdir)/interfaces/types.yaml \
            -t tools/stimulus/types-RR.yaml \
            -l RR
@@ -290,7 +290,7 @@ test:
 
 clean:
 	@rm -f  DESCRIPTION
-	@rm -f  R/aaaauto.R
+	@rm -f  R/aaa-auto.R
 	@rm -rf autom4te.cache/
 	@rm -f  config.log
 	@rm -f  config.status
