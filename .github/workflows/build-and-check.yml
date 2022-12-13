@@ -183,7 +183,7 @@ jobs:
             line_exclusions = as.list(names(line_exclusions)),
             quiet = FALSE
           )
-          covr::codecov(cov, quiet = FALSE)
+          covr::codecov(coverage = cov, quiet = FALSE)
         shell: Rscript {0}
 
   # Automatically deploy the source code to the master branch
