@@ -62,8 +62,6 @@ jobs:
             devtools
             irlba
             pkgconfig
-          needs: check
-          pak-version: devel
 
       - name: Create R source package
         run: |
