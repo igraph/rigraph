@@ -2141,6 +2141,5 @@ which_mutual <- which_mutual
 #' E(g5)$weight <- seq(ecount(g5))
 #' knn(g5)
 #' @export
-#' @include auto.R
 
 knn <- knn

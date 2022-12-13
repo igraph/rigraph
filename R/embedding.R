@@ -87,7 +87,6 @@
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @export
-#' @include auto.R
 
 embed_adjacency_matrix <- embed_adjacency_matrix
 

@@ -100,7 +100,6 @@
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m=4))
-#' @include auto.R
 
 assortativity <- assortativity
 

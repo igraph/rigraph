@@ -68,6 +68,5 @@
 #' transitivity(kite, type="local")
 #' count_triangles(kite) / (degree(kite) * (degree(kite)-1)/2)
 #' @export
-#' @include auto.R
 
 count_triangles <- count_triangles
