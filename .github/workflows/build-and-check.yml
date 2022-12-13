@@ -54,7 +54,7 @@ jobs:
 
       - name: Create R source package
         run: |
-          make
+          make igraph
         shell: bash
 
       - name: Upload R source package
