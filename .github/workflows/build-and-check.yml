@@ -169,8 +169,8 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr
-          needs: check
+          needs: coverage
+          pak-version: devel
           working-directory: igraph
 
       - name: Run coverage
