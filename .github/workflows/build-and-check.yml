@@ -175,10 +175,10 @@ jobs:
 
       - name: Run coverage
         run: |
+          setwd("igraph")
           line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
 
           cov <- covr::package_coverage(
-            "./igraph",
             type = c("tests", "examples"),
             line_exclusions = as.list(names(line_exclusions)),
             quiet = FALSE
