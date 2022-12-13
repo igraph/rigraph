@@ -80,10 +80,10 @@ add_edges <- function(graph, edges, ..., attr = list()) {
     idx <- numeric()
   }
 
-  eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, 4L)
+  eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
   for (i in seq(attrs)) { eattrs[[nam[i]]][idx] <- attrs[[nam[i]]] }
 
-  .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, 4L, eattrs)
+  .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattrs)
 }
 
 #' Add vertices to a graph
@@ -138,10 +138,10 @@ add_vertices <- function(graph, nv, ..., attr=list()) {
     idx <- numeric()
   }
 
-  vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, 3L)
+  vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
   for (i in seq(attrs)) { vattrs[[nam[i]]][idx] <- attrs[[nam[i]]] }
 
-  .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, 3L, vattrs)
+  .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattrs)
 }
 
 #' Delete edges from a graph

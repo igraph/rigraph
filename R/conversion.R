@@ -807,7 +807,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
   what <- igraph.match.arg(what)
 
   if (what %in% c("vertices", "both")) {
-    ver <- .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, 3L)
+    ver <- .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_vertex)
     class(ver) <- "data.frame"
     rn <- if (is_named(x)) { V(x)$name } else { seq_len(vcount(x)) }
     rownames(ver) <- rn
@@ -816,7 +816,7 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
   if (what %in% c("edges", "both")) {
     el <- as_edgelist(x)
     edg <- c(list(from=el[,1]), list(to=el[,2]),
-             .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, 4L))
+             .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge))
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
   }
@@ -911,14 +911,14 @@ as_long_data_frame <- function(graph) {
 
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
-  ver <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, 3L)
+  ver <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
   class(ver) <- "data.frame"
   rn <- if (is_named(graph)) { V(graph)$name } else { seq_len(vcount(graph)) }
   rownames(ver) <- rn
 
   el <- as_edgelist(graph, names = FALSE)
   edg <- c(list(from=el[,1]), list(to=el[,2]),
-           .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, 4L))
+           .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge))
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))
 
