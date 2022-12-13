@@ -70,7 +70,6 @@
 #' is_simple(simplify(g, remove.multiple=FALSE))
 #' is_simple(simplify(g))
 #' @export
-#' @include auto.R
 
 simplify <- simplify
 

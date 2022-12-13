@@ -1703,7 +1703,6 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-#' @include auto.R
 
 graph_from_lcf <- graph_from_lcf
 

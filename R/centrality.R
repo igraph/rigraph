@@ -653,7 +653,6 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' spectrum(kite, which=list(pos="SM", howmany=2))$values
 #'
 #' @export
-#' @include auto.R
 
 spectrum <- spectrum
 

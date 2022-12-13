@@ -78,7 +78,6 @@
 #' E(g2)$capacity <- c(3,1,2, 10,1,3, 2)
 #' min_cut(g2, value.only=FALSE)
 #' @export
-#' @include auto.R
 
 min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL, value.only=TRUE) {
 
@@ -436,7 +435,6 @@ cohesion.igraph <- function(x, checks=TRUE, ...) {
 #'                    a --+ 1:2:3, 1:2:3 --+ b)
 #' st_cuts(g2, source="s", target="t")
 #' @export
-#' @include auto.R
 
 st_cuts <- st_cuts
 
@@ -486,7 +484,6 @@ st_cuts <- st_cuts
 #'                a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
 #' st_min_cuts(g, source="s", target="t")
 #' @export
-#' @include auto.R
 
 st_min_cuts <- st_min_cuts
 
@@ -660,7 +657,6 @@ min_st_separators <- min_st_separators
 #' g1 <- graph_from_data_frame(as.data.frame(E))
 #' max_flow(g1, source=V(g1)["1"], target=V(g1)["2"])
 #' @export
-#' @include auto.R
 
 max_flow <- max_flow
 

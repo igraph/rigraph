@@ -912,8 +912,6 @@ structure(c(16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
 16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
 16777215L, 16777215L, 16777215L), .Dim = c(64L, 64L), class = "nativeRaster", channels = 4L)
 
-#' @include palette.R
-
 i.vertex.default <- list(color=1,
                          size=15,
                          size2=15,
