@@ -44,20 +44,21 @@ jobs:
           path: .venv
           key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
-      - name: Install necessary dependencies
-        run: |
-          pak::pak(c("roxygen2", "devtools", "irlba", "pkgconfig"))
-        shell: Rscript -e {0}
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            roxygen2
+            devtools
+            irlba
+            pkgconfig
+          needs: check
+          pak-version: devel
 
       - name: Create R source package
         run: |
           make igraph
         shell: bash
-
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          needs: check
 
       - name: Smoke test
         run: |
