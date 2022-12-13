@@ -150,7 +150,6 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' bridges(g)
 #'
 #' @export
-#' @include auto.R
 
 articulation_points <- articulation_points
 

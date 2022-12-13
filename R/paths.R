@@ -101,7 +101,6 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' g2 <- g + edge(5,1)
 #' is_dag(g2)
 #' @export
-#' @include auto.R
 
 is_dag <- is_dag
 
@@ -182,7 +181,6 @@ max_cardinality <- max_cardinality
 #' g <- make_star(10, mode="undirected")
 #' eccentricity(g)
 #' @export
-#' @include auto.R
 
 eccentricity <- eccentricity
 
@@ -218,7 +216,6 @@ eccentricity <- eccentricity
 #' eccentricity(g)
 #' radius(g)
 #' @export
-#' @include auto.R
 
 radius <- radius
 

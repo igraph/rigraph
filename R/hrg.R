@@ -166,7 +166,6 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 #'     split occurred in the generated network samples, for each internal
 #'     vertices. The order is the same as in the \code{parents} vector.}
 
-#' @include auto.R
 #' @family hierarchical random graph functions
 #' @export
 

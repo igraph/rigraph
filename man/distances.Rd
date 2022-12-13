@@ -64,7 +64,7 @@ attribute is used. If this is \code{NA} then no weights are used (even if
 the graph has a \code{weight} attribute).}
 
 \item{unconnected}{What to do if the graph is unconnected (not
-trongly connected if directed paths are considered). If TRUE, only
+strongly connected if directed paths are considered). If TRUE, only
 the lengths of the existing paths are considered and averaged; if
 FALSE, the length of the missing paths are considered as having infinite
 length, making the mean distance infinite as well.}

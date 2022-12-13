@@ -440,7 +440,6 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #' @param ... Passed to the individual methods.
 #' @return Number of isomorphic mappings between the two graphs.
 #'
-#' @include auto.R
 #' @aliases graph.count.isomorphisms.vf2
 #'
 #' @references
@@ -698,7 +697,6 @@ isomorphism_class <- function(graph, v) {
 #'   and isomorphism class.
 #'
 #' @aliases graph.isocreate
-#' @include auto.R
 #'
 #' @family graph isomorphism
 
