@@ -139,7 +139,7 @@ jobs:
 
     needs: build_src_package
 
-    name: Check ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: Coverage
 
     env:
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
