@@ -135,8 +135,8 @@ $(RAY2): src/vendor/%: vendor/%
 
 # R files that are generated/copied
 
-RGEN = R/aaa-auto.R src/rinterface.c src/rinterface.h src/rrandom.c src/rrandom.h \
-	src/rinterface_extra.c src/lazyeval.c src/init.c src/igraph-win.def \
+RGEN = R/aaa-auto.R src/rinterface.c \
+	src/igraph-win.def \
 	src/Makevars.in configure src/config.h.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
 
