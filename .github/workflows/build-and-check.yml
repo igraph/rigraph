@@ -69,7 +69,7 @@ jobs:
       - name: Package validation
         run: |
           if [ -n "$(git status --porcelain)" ]; then
-            git add 
+            git add .
             git diff --cached
             /bin/false
           fi
