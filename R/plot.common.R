@@ -206,10 +206,8 @@ i.postprocess.layout <- function(maybe_layout) {
 #'
 #' curve_multiple(g)
 #'
-#' \dontrun{
 #' set.seed(42)
 #' plot(g)
-#' }
 #'
 curve_multiple <- function(graph, start=0.5) {
   el <- apply(as_edgelist(graph, names=FALSE), 1, paste, collapse=":")

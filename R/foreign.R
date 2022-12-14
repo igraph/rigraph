@@ -160,7 +160,11 @@ read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
 #' @examples
 #'
 #' g <- make_ring(10)
-#' \dontrun{write_graph(g, "/tmp/g.txt", "edgelist")}
+#' file <- tempfile(fileext = ".txt")
+#' write_graph(g, file, "edgelist")
+#' if (!interactive()) {
+#'   unlink(file)
+#' }
 #'
 write_graph <- function(graph, file, format=c("edgelist", "pajek", "ncol", "lgl",
                                        "graphml", "dimacs", "gml", "dot", "leda"), ...) {

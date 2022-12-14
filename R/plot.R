@@ -443,10 +443,10 @@ plot.igraph <- function(x,
 #' @export
 #' @examples
 #'
-#' \dontrun{
 #' g <- make_lattice( c(5,5,5) )
 #' coords <- layout_with_fr(g, dim=3)
-#' rglplot(g, layout=coords)
+#' if (interactive()) {
+#'   rglplot(g, layout=coords)
 #' }
 #'
 rglplot        <- function(x, ...)

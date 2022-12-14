@@ -487,11 +487,10 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-#' @examples
+#' @examplesIf has_glpk()
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
-#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
@@ -501,7 +500,6 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
-#' }
 
 layout_in_circle <- function(graph, order=V(graph)) {
   if (!is_igraph(graph)) {
@@ -669,9 +667,9 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' g2 <- make_lattice( c(3,3,3) )
 #' layout_on_grid(g2, dim = 3)
 #'
-#' \dontrun{
 #' plot(g, layout=layout_on_grid)
-#' rglplot(g, layout=layout_on_grid(g, dim = 3))
+#' if (interactive()) {
+#'   rglplot(g, layout=layout_on_grid(g, dim = 3))
 #' }
 
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
@@ -1905,7 +1903,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' layouts <- lapply(graphs, layout_with_kk)
 #' lay <- merge_coords(graphs, layouts)
 #' g <- disjoint_union(graphs)
-#' \dontrun{plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")}
+#' plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")
 
 merge_coords <- function(graphs, layouts, method="dla") {
 
