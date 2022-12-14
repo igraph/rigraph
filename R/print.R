@@ -250,8 +250,7 @@
     ":\n"
   cat(title)
 
-  if (!is.null(attr(edges, "single")) && attr(edges, "single") &&
-      !is.null(x)) {
+  if (is_single_index(edges) && !is.null(x)) {
     ## Double bracket
     ea <- edge_attr(x)
     if (all(sapply(ea, is.atomic))) {

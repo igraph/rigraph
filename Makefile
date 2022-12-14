@@ -242,7 +242,7 @@ src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
 	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
 	printf "%s" "OBJECTS=" >> $@
-	cat object_files >> $@
+	sed 's/ / \\\n/g' object_files >> $@
 
 pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	$(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
