@@ -1,0 +1,6 @@
+/core/
+/vendor/
+/include/
+/*.o
+/*.so
+config.h
