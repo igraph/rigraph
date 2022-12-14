@@ -487,7 +487,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-#' @examplesIf has_glpk()
+#' @examplesIf igraph::has_glpk()
 #'
 #' ## Place vertices on a circle, order them according to their
 #' ## community
