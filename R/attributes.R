@@ -248,7 +248,7 @@ i_set_vertex_attr <- function(graph, name, index=V(graph), value,
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  single <- "single" %in% names(attributes(index)) && attr(index, "single")
+  single <- is_single_index(index)
   if (!missing(index) && check) { index <- as.igraph.vs(graph, index) }
   name <- as.character(name)
   vc <- vcount(graph)
@@ -423,7 +423,7 @@ i_set_edge_attr <- function(graph, name, index=E(graph), value,
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  single <- "single" %in% names(attributes(index)) && attr(index, "single")
+  single <- is_single_index(index)
   name <- as.character(name)
   if (!missing(index) && check) index <- as.igraph.es(graph, index)
   ec <- ecount(graph)

@@ -607,6 +607,15 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   }
 }
 
+is_single_index <- function(x) {
+  isTRUE(attr(x, "single"))
+}
+
+set_single_index <- function(x, value = TRUE) {
+  attr(x, "single") <- value
+  x
+}
+
 #' Select vertices and show their metadata
 #'
 #' The double bracket operator can be used on vertex sequences, to print
@@ -641,8 +650,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
 `[[.igraph.vs` <- function(x, ...) {
   res <- x[...]
-  attr(res, "single") <- TRUE
-  res
+  set_single_index(res)
 }
 
 #' Select edges and show their metadata
@@ -678,8 +686,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
 `[[.igraph.es` <- function(x, ...) {
   res <- x[...]
-  attr(res, "single") <- TRUE
-  res
+  set_single_index(res)
 }
 
 simple_es_index <- function(x, i, na_ok = FALSE) {
@@ -1035,7 +1042,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   graph <- get_vs_graph(x)
   if (is.null(graph)) stop("Graph is unknown")
   res <- vertex_attr(graph, name, x)
-  if ("single" %in% names(attributes(x)) && attr(x, "single")) {
+  if (is_single_index(x)) {
     res[[1]]
   } else {
     res
@@ -1087,7 +1094,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   graph <- get_es_graph(x)
   if (is.null(graph)) stop("Graph is unknown")
   res <- edge_attr(graph, name, x)
-  if ("single" %in% names(attributes(x)) && attr(x, "single")) {
+  if (is_single_index(x)) {
     res[[1]]
   } else {
     res
@@ -1213,8 +1220,7 @@ print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
     ":\n"
   cat(title)
 
-  if (!is.null(attr(x, "single")) && attr(x, "single") &&
-      !is.null(graph) && length(vertex_attr_names(graph) > 0)) {
+  if (is_single_index(x) && !is.null(graph) && length(vertex_attr_names(graph) > 0)) {
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
