@@ -10,15 +10,15 @@
 as_adj_list(
   graph,
   mode = c("all", "out", "in", "total"),
-  loops = c("twice", "once"),
-  multiple
+  loops = c("ignore", "twice", "once"),
+  multiple = TRUE
 )
 
 as_adj_edge_list(
   graph,
   mode = c("all", "out", "in", "total"),
-  loops = c("twice", "once"),
-  multiple
+  loops = c("ignore", "twice", "once"),
+  multiple = TRUE
 )
 }
 \arguments{

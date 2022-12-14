@@ -393,7 +393,7 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
 #'
-as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple = TRUE) {
+as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("ignore", "twice", "once"), multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -401,7 +401,7 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twi
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   loops <- igraph.match.arg(loops)
-  loops <- as.numeric(switch(loops, "twice"=1, "once"=2))
+  loops <- as.numeric(switch(loops, "ignore"=0, "twice"=1, "once"=2))
   multiple <- if (multiple) 1 else 0
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjlist, graph, mode, loops, multiple)
@@ -417,7 +417,7 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twi
 #' @aliases get.adjlist
 #' @export
 
-as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple = TRUE) {
+as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("ignore", "twice", "once"), multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -425,7 +425,7 @@ as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   loops <- igraph.match.arg(loops)
-  loops <- as.numeric(switch(loops, "twice"=1, "once"=2))
+  loops <- as.numeric(switch(loops, "ignore"=0, "twice"=1, "once"=2))
   multiple <- if (multiple) 1 else 0
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_get_adjedgelist, graph, mode, loops, multiple)
