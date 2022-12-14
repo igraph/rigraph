@@ -7,9 +7,19 @@
 \alias{get.adjlist}
 \title{Adjacency lists}
 \usage{
-as_adj_list(graph, mode = c("all", "out", "in", "total"))
+as_adj_list(
+  graph,
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "once"),
+  multiple
+)
 
-as_adj_edge_list(graph, mode = c("all", "out", "in", "total"))
+as_adj_edge_list(
+  graph,
+  mode = c("all", "out", "in", "total"),
+  loops = c("twice", "once"),
+  multiple
+)
 }
 \arguments{
 \item{graph}{The input graph.}
