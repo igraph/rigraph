@@ -59,6 +59,9 @@
 #' the marked vertex groups. It is in the same units as the vertex sizes. If a
 #' vector is given, then different values are used for the different vertex
 #' groups.
+#' @param loop.size A numeric scalar that allows the user to scale the loop edges
+#' of the network. The default loop size is 1. Larger values will produce larger
+#' loops.
 #' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
 #' the complete list.
 #' @return Returns \code{NULL}, invisibly.
@@ -85,7 +88,7 @@ plot.igraph <- function(x,
                        mark.groups=list(), mark.shape=1/2,
                        mark.col=rainbow(length(mark.groups), alpha=0.3),
                        mark.border=rainbow(length(mark.groups), alpha=1),
-                       mark.expand=15,
+                       mark.expand=15, loop.size=1, 
                        ...) {
 
   graph <- x
@@ -278,11 +281,12 @@ plot.igraph <- function(x,
 
     loop <- function(x0, y0, cx=x0, cy=y0, color, angle=0, label=NA,
                      width=1, arr=2, lty=1, arrow.size=arrow.size,
-                     arr.w=arr.w, lab.x, lab.y) {
+                     arr.w=arr.w, lab.x, lab.y, loopSize=loop.size) {
 
       rad <- angle
       center <- c(cx,cy)
-      cp <- matrix( c(x0,y0, x0+.4,y0+.2, x0+.4,y0-.2, x0,y0),
+      cp <- matrix( c(x0,y0, x0+.4*loopSize,y0+.2*loopSize, 
+                   x0+.4*loopSize,y0-.2*loopSize, x0,y0),
                    ncol=2, byrow=TRUE)
       phi <- atan2(cp[,2]-center[2], cp[,1]-center[1])
       r <- sqrt((cp[,1]-center[1])**2 + (cp[,2]-center[2])**2)

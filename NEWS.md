@@ -3,6 +3,7 @@
 Added:
 
  - `tkplot()` gained a `palette` argument and it is now using the same palette as `plot()` by default, for sake of consistency.
+ - `plot.igraph()` gained a `loop.size` argument that can be used to scale the common radius of the loop edges.
 
 Fixed:
 
