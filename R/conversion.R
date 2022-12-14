@@ -393,15 +393,18 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
 #'
-as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
+as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
+  loops <- igraph.match.arg(loops)
+  loops <- as.numeric(switch(loops, "twice"=1, "once"=2))
+  multiple <- if (multiple) 1 else 0
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_get_adjlist, graph, mode)
+  res <- .Call(C_R_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -414,15 +417,18 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total")) {
 #' @aliases get.adjlist
 #' @export
 
-as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total")) {
+as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
+  loops <- igraph.match.arg(loops)
+  loops <- as.numeric(switch(loops, "twice"=1, "once"=2))
+  multiple <- if (multiple) 1 else 0
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode)
+  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode, loops, multiple)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
@@ -563,8 +569,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' }
 #' @export
 
-as_graphnel <- function(graph) {
-
+as_graphnel <- function(graph, loops, multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not an igraph graph")
   }
@@ -580,7 +585,7 @@ as_graphnel <- function(graph) {
 
   if ("weight" %in% edge_attr_names(graph) &&
       is.numeric(E(graph)$weight)) {
-    al <- lapply(as_adj_edge_list(graph, "out"), as.vector)
+    al <- lapply(as_adj_edge_list(graph, "out", loops, multiple), as.vector)
     for (i in seq(along.with=al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse( edges[,2]==i, edges[,1], edges[,2])
@@ -588,7 +593,7 @@ as_graphnel <- function(graph) {
       al[[i]] <- list(edges=edges, weights=weights)
     }
   } else {
-    al <- as_adj_list(graph, "out")
+    al <- as_adj_list(graph, "out", loops, multiple)
     al <- lapply(al, function(x) list(edges=as.vector(x)))
   }
 
