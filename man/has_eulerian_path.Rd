@@ -53,7 +53,7 @@ has_eulerian_path(g)
 eulerian_path(g)
 
 has_eulerian_cycle(g)
-\dontrun{eulerian_cycle(g)}
+try(eulerian_cycle(g))
 
 }
 \keyword{graphs}

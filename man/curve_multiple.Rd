@@ -33,10 +33,8 @@ g <- graph( c(0,1,1,0,1,2,1,3,1,3,1,3,
 
 curve_multiple(g)
 
-\dontrun{
 set.seed(42)
 plot(g)
-}
 
 }
 \seealso{

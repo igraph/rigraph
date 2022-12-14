@@ -49,9 +49,9 @@ layout_on_grid(g)
 g2 <- make_lattice( c(3,3,3) )
 layout_on_grid(g2, dim = 3)
 
-\dontrun{
 plot(g, layout=layout_on_grid)
-rglplot(g, layout=layout_on_grid(g, dim = 3))
+if (interactive()) {
+  rglplot(g, layout=layout_on_grid(g, dim = 3))
 }
 }
 \seealso{

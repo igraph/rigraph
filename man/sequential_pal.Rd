@@ -23,7 +23,6 @@ centrality measure, or some ordinal vertex covariate, like the age of
 people, or their seniority level.
 }
 \examples{
-\dontrun{
 library(igraphdata)
 data(karate)
 karate <- karate \%>\%
@@ -32,7 +31,6 @@ karate <- karate \%>\%
 
 V(karate)$color <- scales::dscale(degree(karate) \%>\% cut(5), sequential_pal)
 plot(karate)
-}
 }
 \seealso{
 Other palettes: 

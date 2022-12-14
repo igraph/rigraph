@@ -155,7 +155,6 @@ linear running time and memory load.
 ## repository policy. Copy and paste them by hand to your R prompt if
 ## you want to run them.
 
-\dontrun{
 # SCG of a toy network
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)
 g <- add_edges(g, c(1,6, 1,11, 6, 11))
@@ -217,7 +216,6 @@ plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
                 vertex.color=col[com.cg],vertex.label=NA)
 par(op)
 
-}
 
 }
 \references{

@@ -29,10 +29,10 @@ If you want to order the vertices differently, then permute them using the
 \code{\link{permute}} function.
 }
 \examples{
+\dontshow{if (igraph:::has_glpk()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 ## Place vertices on a circle, order them according to their
 ## community
-\dontrun{
 library(igraphdata)
 data(karate)
 karate_groups <- cluster_optimal(karate)
@@ -42,7 +42,7 @@ V(karate)$label <- sub("Actor ", "", V(karate)$name)
 V(karate)$label.color <- membership(karate_groups)
 V(karate)$shape <- "none"
 plot(karate, layout = coords)
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other graph layouts: 

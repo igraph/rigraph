@@ -106,9 +106,7 @@ There are five pre-defined parameter settings as well, these are called
 
 g <- as.undirected(sample_pa(100, m=1))
 l <- layout_with_drl(g, options=list(simmer.attraction=0))
-\dontrun{
 plot(g, layout=l, vertex.size=3, vertex.label=NA)
-}
 
 }
 \references{

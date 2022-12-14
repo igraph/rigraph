@@ -53,7 +53,6 @@ from a given HRG, if this is given in the \code{hrg} argument and the
 ## repository policy. Copy and paste them by hand to your R prompt if
 ## you want to run them.
 
-\dontrun{
 ## A graph with two dense groups
 g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 hrg <- fit_hrg(g)
@@ -65,7 +64,6 @@ consensus_tree(g, hrg=hrg, start=TRUE)
 ## Prediction of missing edges
 g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
 predict_edges(g2)
-}
 }
 \references{
 A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure

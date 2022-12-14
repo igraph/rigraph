@@ -71,7 +71,7 @@ which generates the fitnesses for you with a given exponent.
 N <- 10000
 g <- sample_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
 degree_distribution(g)
-\dontrun{plot(degree_distribution(g, cumulative=TRUE), log="xy")}
+plot(degree_distribution(g, cumulative=TRUE), log="xy")
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load
