@@ -1,17 +1,4 @@
 #' @export
-empty <- function(n=0, directed=TRUE) {
-  # Argument checks
-  n <- as.integer(n)
-  directed <- as.logical(directed)
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  # Function call
-  res <- .Call(C_R_igraph_empty, n, directed)
-
-  res
-}
-
-#' @export
 gorder <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
