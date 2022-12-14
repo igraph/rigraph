@@ -285,8 +285,7 @@ test_that("indexing without arguments", {
   expect_equal(ignore_attr = TRUE, V(g), x)
 
   x2 <- V(g)[[]]
-  v <- V(g)
-  attr(v, "single") <- TRUE
+  v <- set_single_index(V(g))
 
   expect_equal(ignore_attr = TRUE, v, x2)
 })
