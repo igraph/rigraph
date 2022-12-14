@@ -1,4 +1,6 @@
 test_that("basic plot test", {
+  set.seed("20221214")
+
   vdiffr::expect_doppelganger(
     "Basic graph",
     function() {
