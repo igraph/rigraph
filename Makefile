@@ -103,7 +103,10 @@ src/include/igraph_version.h: $(top_srcdir)/include/igraph_version.h.in
 	# Don't use ${VERSION} here in the replacement; this would mean that the
 	# replacement would be done _now_ and not at compile time where we pass
 	# -DPACKAGE_VERSION=... to the compiler
-	sed 's/"@PACKAGE_VERSION@"/PACKAGE_VERSION/g' $< >$@
+	cat $< | \
+	    awk '/^.*@PACKAGE_VERSION@/{ print "#define __IGRAPH_QUOTE(x) #x\n#define __IGRAPH_QUOTE2(x) __IGRAPH_QUOTE(x)" }1' | \
+	    sed 's/"@PACKAGE_VERSION@"/__IGRAPH_QUOTE2(PACKAGE_VERSION)/g' \
+	>$@
 
 # R source and doc files
 
