@@ -290,18 +290,18 @@ test:
 
 clean:
 	@rm -f  DESCRIPTION
-	@rm -f  R/aaa-auto.R
 	@rm -rf autom4te.cache/
 	@rm -f  config.log
 	@rm -f  config.status
-	@rm -f  configure
 	@rm -f  igraph_*.tar.gz
 	@rm -f  igraph_*.tgz
-	@rm -rf man/*.Rd
 	@rm -f  object_files
-	@rm -rf src/
 	@rm -rf version_number
 	@rm -f  configure.ac
+	@rm -rf src/*.o
+	@rm -rf src/*.so
+	@rm -rf src/Makevars*
+	@rm -f src/config.*
 	@cd $(top_srcdir) && git reset --hard
 
 distclean: clean
