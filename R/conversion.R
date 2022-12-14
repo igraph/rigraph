@@ -393,7 +393,7 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
 #'
-as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple) {
+as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -417,7 +417,7 @@ as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twi
 #' @aliases get.adjlist
 #' @export
 
-as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple) {
+as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("twice", "once"), multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
