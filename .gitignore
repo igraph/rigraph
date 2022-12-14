@@ -10,7 +10,6 @@
 /igraph_*.tgz
 /object_files
 /revdep/
-/src/
 /version_number
 /configure.ac
 igraph.Rcheck/
