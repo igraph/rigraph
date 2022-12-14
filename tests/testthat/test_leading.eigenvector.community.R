@@ -57,14 +57,13 @@ test_that("cluster_leading_eigen works", {
 
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
+  skip_if(getRversion() <= "3.5")
 
-  if (R.version$major > 3 || (R.version$major == 3 && R.version$minor > 5)) {
-    for (i in 1:100) {
-      g <- sample_gnm(20, sample(5:40, 1))
-      lec1 <- cluster_leading_eigen(g)
-      lec2 <- cluster_leading_eigen(g)
-      expect_that(as.vector(membership(lec1)),
-                  equals(as.vector(membership(lec2))))
-    }
+  for (i in 1:100) {
+    g <- sample_gnm(20, sample(5:40, 1))
+    lec1 <- cluster_leading_eigen(g)
+    lec2 <- cluster_leading_eigen(g)
+    expect_that(as.vector(membership(lec1)),
+                equals(as.vector(membership(lec2))))
   }
 })
