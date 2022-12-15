@@ -15,6 +15,7 @@
   edge.attributes = igraph_opt("print.edge.attributes"),
   names = TRUE,
   max.lines = igraph_opt("auto.print.lines"),
+  id = igraph_opt("print.id"),
   ...
 )
 
@@ -38,6 +39,8 @@ the \code{name} vertex attribute) or vertex ids.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the
 output will be truncated.}
+
+\item{id}{Whether to print the graph ID.}
 
 \item{\dots}{Additional agruments.}
 

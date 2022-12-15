@@ -34,7 +34,8 @@
                      "print.full"="auto",
                      "annotate.plot"=FALSE,
                      "auto.print.lines" = 10,
-                     "return.vs.es" = TRUE
+                     "return.vs.es" = TRUE,
+                     "print.id" = TRUE
                     )
 
 igraph.pars.set.verbose <- function(verbose) {

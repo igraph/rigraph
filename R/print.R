@@ -49,18 +49,25 @@
   c(ga, va, ea)
 }
 
-.print.header <- function(object) {
+.print.header <- function(object, id = igraph_opt("print.id")) {
 
   if (!is_igraph(object)) {
     stop("Not a graph object")
   }
 
-  title <- paste(sep="", "IGRAPH ", substr(graph_id(object), 1, 7), " ",
-                 c("U","D")[is_directed(object)+1],
-                 c("-","N")[is_named(object)+1],
-                 c("-","W")[is_weighted(object)+1],
-                 c("-","B")[is_bipartite(object)+1], " ",
-                 vcount(object), " ", ecount(object), " -- ")
+  title <- paste0(
+    "IGRAPH ",
+    if (id) paste0(substr(graph_id(object), 1, 7), " "),
+    c("U","D")[is_directed(object)+1],
+    c("-","N")[is_named(object)+1],
+    c("-","W")[is_weighted(object)+1],
+    c("-","B")[is_bipartite(object)+1],
+    " ",
+    vcount(object),
+    " ",
+    ecount(object),
+    " -- "
+  )
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
     title <- substring(paste(sep="", title,
@@ -234,17 +241,21 @@
   }
 }
 
-.print.edges.compressed <- function(x, edges = E(x), names, num = FALSE,
-                                      max.lines = igraph_opt("auto.print.lines")) {
+.print.edges.compressed <- function(x,
+                                    edges = E(x),
+                                    names,
+                                    num = FALSE,
+                                    max.lines = igraph_opt("auto.print.lines"),
+                                    id = igraph_opt("print.id")) {
 
   len <- length(edges)
-  id <- graph_id(edges)
+  gid <- graph_id(edges)
 
   title <- "+" %+%
     (if (num) " " %+% chr(len) %+% "/" %+%
        (if (is.null(x)) "?" else chr(gsize(x))) else "") %+%
     (if (len == 1) " edge" else " edges") %+%
-    (if (!is.na(id)) paste(" from", substr(id, 1, 7)) else " unknown") %+%
+    (if (isTRUE(id) && !is.na(gid)) paste(" from", substr(gid, 1, 7)) else " unknown") %+%
     (if (is.null(x)) " (deleted)" else "") %+%
     (if (is.null(attr(edges, "vnames"))) "" else " (vertex names)") %+%
     ":\n"
@@ -470,6 +481,7 @@ print_all <- function(object, ...) {
 #' the \code{name} vertex attribute) or vertex ids.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #' output will be truncated.
+#' @param id Whether to print the graph ID.
 #' @param object The graph of which the summary will be printed.
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
@@ -488,13 +500,15 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
                 graph.attributes=igraph_opt("print.graph.attributes"),
                 vertex.attributes=igraph_opt("print.vertex.attributes"),
                 edge.attributes=igraph_opt("print.edge.attributes"),
-                names=TRUE, max.lines = igraph_opt("auto.print.lines"), ...) {
+                names=TRUE, max.lines = igraph_opt("auto.print.lines"),
+                id = igraph_opt("print.id"),
+                ...) {
 
   if (!is_igraph(x)) {
     stop("Not a graph object")
   }
 
-  head_lines <- .print.header(x)
+  head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {
     if (graph.attributes) {
       head_lines <- head_lines + .print.graph.attributes(x, full, max.lines)
