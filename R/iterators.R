@@ -1318,7 +1318,9 @@ as.igraph.vs <- function(graph, v, na.ok=FALSE) {
       stop("Cannot use a vertex sequence from another graph.")
     }
   }
-  if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
+  if (is.null(v)) {
+    V(graph)
+  } else if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
     if (!na.ok && any(is.na(v))) {
       stop("Invalid vertex names")
@@ -1346,7 +1348,9 @@ as.igraph.es <- function(graph, e) {
       stop("Cannot use an edge sequence from another graph.")
     }
   }
-  if (is.character(e)) {
+  if (is.null(e)) {
+    res <- E(graph)
+  } else if (is.character(e)) {
     Pairs <- grep("|", e, fixed=TRUE)
     Names <- if (length(Pairs)==0) seq_along(e) else -Pairs
     res <- numeric(length(e))
