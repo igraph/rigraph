@@ -1,0 +1,7 @@
+/core/
+/vendor/
+/include/
+/*.o
+/*.so
+/config.*
+/Makevars*

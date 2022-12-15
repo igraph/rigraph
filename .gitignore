@@ -1,6 +1,5 @@
 /tags
 /DESCRIPTION
-/R/aaa-auto.R
 /R/printr.R
 /autom4te.cache/
 /config.log
@@ -8,10 +7,8 @@
 /configure
 /igraph_*.tar.gz
 /igraph_*.tgz
-/man/*.Rd
 /object_files
 /revdep/
-/src/
 /version_number
 /configure.ac
 igraph.Rcheck/
