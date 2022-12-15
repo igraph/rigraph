@@ -57,7 +57,7 @@
 #' eulerian_path(g)
 #'
 #' has_eulerian_cycle(g)
-#' \dontrun{eulerian_cycle(g)}
+#' try(eulerian_cycle(g))
 #'
 #' @export
 has_eulerian_path <- function(graph) is_eulerian(graph)$has_path

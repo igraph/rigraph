@@ -95,7 +95,6 @@ NULL
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #'
-#' \dontrun{
 #' ## A graph with two dense groups
 #' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 #' hrg <- fit_hrg(g)
@@ -107,7 +106,6 @@ NULL
 #' ## Prediction of missing edges
 #' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
 #' predict_edges(g2)
-#' }
 #' @export
 #' @family hierarchical random graph functions
 
@@ -262,7 +260,6 @@ sample_hrg <- sample_hrg
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #'
-#' \dontrun{
 #' ## A graph with two dense groups
 #' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
 #' hrg <- fit_hrg(g)
@@ -274,7 +271,6 @@ sample_hrg <- sample_hrg
 #' ## Prediction of missing edges
 #' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
 #' predict_edges(g2)
-#' }
 #' @export
 #' @family hierarchical random graph functions
 

@@ -43,7 +43,11 @@ additional arguments.
 \examples{
 
 g <- make_ring(10)
-\dontrun{write_graph(g, "/tmp/g.txt", "edgelist")}
+file <- tempfile(fileext = ".txt")
+write_graph(g, file, "edgelist")
+if (!interactive()) {
+  unlink(file)
+}
 
 }
 \references{

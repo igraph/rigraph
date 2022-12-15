@@ -73,7 +73,7 @@ paper of Chung and Lu, and Cho et al for more details.
 \examples{
 
 g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
-\dontrun{plot(degree_distribution(g, cumulative=TRUE, mode="out"), log="xy")}
+plot(degree_distribution(g, cumulative=TRUE, mode="out"), log="xy")
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load
