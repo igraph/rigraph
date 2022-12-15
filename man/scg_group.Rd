@@ -85,7 +85,6 @@ linear running time and memory load.
 ## policy. Copy and paste them by hand to your R prompt if
 ## you want to run them.
 
-\dontrun{
 # eigenvectors of a random symmetric matrix
 M <- matrix(rexp(10^6), 10^3, 10^3)
 M <- (M + t(M))/2
@@ -119,7 +118,6 @@ gr.true <- scg_group(cbind(x), 100)
 gr.km <- kmeans(x, 100, 100, 300)$cluster
 scg_eps(cbind(x), gr.true)
 scg_eps(cbind(x), gr.km)
-}
 
 }
 \references{

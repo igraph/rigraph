@@ -60,7 +60,7 @@ graphs <- lapply(sample(5:20, 20, replace=TRUE),
 layouts <- lapply(graphs, layout_with_kk)
 lay <- merge_coords(graphs, layouts)
 g <- disjoint_union(graphs)
-\dontrun{plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")}
+plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")
 }
 \seealso{
 \code{\link{plot.igraph}}, \code{\link{tkplot}},

@@ -16,6 +16,7 @@
   mark.col = rainbow(length(mark.groups), alpha = 0.3),
   mark.border = rainbow(length(mark.groups), alpha = 1),
   mark.expand = 15,
+  loop.size = 1,
   ...
 )
 }
@@ -56,6 +57,10 @@ drawn.}
 the marked vertex groups. It is in the same units as the vertex sizes. If a
 vector is given, then different values are used for the different vertex
 groups.}
+
+\item{loop.size}{A numeric scalar that allows the user to scale the loop edges
+of the network. The default loop size is 1. Larger values will produce larger
+loops.}
 
 \item{\dots}{Additional plotting parameters. See \link{igraph.plotting} for
 the complete list.}

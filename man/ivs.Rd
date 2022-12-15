@@ -59,7 +59,6 @@ reference below.
 \examples{
 
 # Do not run, takes a couple of seconds
-\dontrun{
 
 # A quite dense graph
 set.seed(42)
@@ -71,7 +70,6 @@ largest_ivs(g)
 induced_subgraph(g, largest_ivs(g)[[1]])
 
 length(maximal_ivs(g))
-}
 }
 \references{
 S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new

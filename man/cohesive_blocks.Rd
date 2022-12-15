@@ -248,8 +248,10 @@ blocks(mwBlocks)
 cohesion(mwBlocks)
 
 # Save results in a Pajek file
-\dontrun{
-export_pajek(mwBlocks, mw, file="/tmp/mwBlocks.paj")
+file <- tempfile(fileext = ".paj")
+export_pajek(mwBlocks, mw, file = file)
+if (!interactive()) {
+  unlink(file)
 }
 
 # Plot the results
