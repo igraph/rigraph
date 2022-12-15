@@ -83,7 +83,6 @@ categorical_pal <- function(n) {
 #' @family palettes
 #' @export
 #' @examples
-#' \dontrun{
 #' library(igraphdata)
 #' data(karate)
 #' karate <- karate %>%
@@ -92,7 +91,6 @@ categorical_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), sequential_pal)
 #' plot(karate)
-#' }
 
 sequential_pal <- function(n) {
 
@@ -138,7 +136,6 @@ sequential_pal <- function(n) {
 #' @family palettes
 #' @export
 #' @examples
-#' \dontrun{
 #' library(igraphdata)
 #' data(foodwebs)
 #' fw <- foodwebs[[1]] %>%
@@ -158,7 +155,6 @@ sequential_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), diverging_pal)
 #' plot(karate)
-#' }
 
 diverging_pal <- function(n) {
 

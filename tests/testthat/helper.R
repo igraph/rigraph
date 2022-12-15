@@ -1,22 +1,3 @@
-
-has_glpk <- function() {
-  glpk <- TRUE
-  tryCatch(
-    cluster_optimal(make_ring(10)),
-    error = function(e) glpk <<- FALSE
-  )
-  glpk
-}
-
-has_graphml <- function() {
-  graphml <- TRUE
-  tryCatch(
-    read_graph(rawConnection(charToRaw("<graphml><graph></graph></graphml>")), format="graphml"),
-    error = function(e) graphml <<- FALSE
-  )
-  graphml
-}
-
 skip_if_no_glpk <- function() {
   if (!has_glpk()) skip("No GLPK library")
 }
