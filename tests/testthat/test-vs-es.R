@@ -148,65 +148,27 @@ test_that("printing connected vs/es works", {
   vs <- V(g)
   es <- E(g)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    "+ 10/10 vertices:\n [1]  1  2  3  4  5  6  7  8  9 10"
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    "+ 10/10 edges unknown:\n [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10"
-  )
-
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
-
-  expect_output(print(vs2), fixed = TRUE,
-                "+ 5/10 vertices:\n[1] 1 2 3 4 5")
-  expect_output(print(es2), fixed = TRUE,
-                paste0("+ 5/10 edges unknown:\n[1] 1--2 2--3 3--4 4--5 5--6"))
-
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                "+ 0/10 vertices:")
-  expect_output(print(es3), fixed = TRUE,
-                "+ 0/10 edges unknown:")
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+    es[numeric()]
+  })
 
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    "+ 10/10 vertices, named:\n [1] a b c d e f g h i j"
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/10 edges unknown (vertex names):\n",
-           " [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j")
-  )
-
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
-
-  expect_output(
-    print(vs2), fixed = TRUE,
-    "+ 5/10 vertices, named:\n[1] a b c d e"
-  )
-  expect_output(
-    print(es2), fixed = TRUE,
-    paste0("+ 5/10 edges unknown (vertex names):\n",
-           "[1] a--b b--c c--d d--e e--f")
-  )
-
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                "+ 0/10 vertices, named:")
-  expect_output(print(es3), fixed = TRUE,
-                "+ 0/10 edges unknown (vertex names):")
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+    es[numeric()]
+  })
 })
 
 test_that("printing unconnected vs/es works", {
@@ -220,14 +182,10 @@ test_that("printing unconnected vs/es works", {
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    "+ 10/? vertices (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10"
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    "+ 10/? edges unknown (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10"
-  )
+  expect_snapshot({
+    vs
+    es
+  })
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
@@ -237,14 +195,10 @@ test_that("printing unconnected vs/es works", {
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    "+ 10/? vertices, named (deleted):\n [1] a b c d e f g h i j"
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    "+ 10/? edges unknown (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j"
-  )
+  expect_snapshot({
+    vs
+    es
+  })
 
 })
 
