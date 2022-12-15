@@ -5,7 +5,7 @@
 \alias{igraph.to.graphNEL}
 \title{Convert igraph graphs to graphNEL objects from the graph package}
 \usage{
-as_graphnel(graph, loops, multiple = TRUE)
+as_graphnel(graph, loops = c("ignore", "twice", "once"), multiple = TRUE)
 }
 \arguments{
 \item{graph}{An igraph graph object.}

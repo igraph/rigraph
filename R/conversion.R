@@ -424,7 +424,10 @@ as_adj_list <- function(graph,
 #' @aliases get.adjlist
 #' @export
 
-as_adj_edge_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("ignore", "twice", "once"), multiple = TRUE) {
+as_adj_edge_list <- function(graph,
+                             mode=c("all", "out", "in", "total"),
+                             loops=c("ignore", "twice", "once"),
+                             multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -577,7 +580,9 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' }
 #' @export
 
-as_graphnel <- function(graph, loops, multiple = TRUE) {
+as_graphnel <- function(graph,
+                        loops=c("ignore", "twice", "once"),
+                        multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not an igraph graph")
   }
