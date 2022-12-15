@@ -377,6 +377,10 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 #' \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 #' for both. This argument is ignored for undirected graphs.
+#' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
+#'   (to include loop edges twice) and `"once"` (to include them once).
+#' @param multiple Logical scalar, set to `FALSE` to use only one representative
+#'   of each set of parallel edges.
 #' @return A list of \code{igraph.vs} or a list of numeric vectors depending on
 #' the value of \code{igraph_opt("return.vs.es")}, see details for performance
 #' characteristics.
@@ -393,7 +397,10 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' as_adj_list(g)
 #' as_adj_edge_list(g)
 #'
-as_adj_list <- function(graph, mode=c("all", "out", "in", "total"), loops=c("ignore", "twice", "once"), multiple = TRUE) {
+as_adj_list <- function(graph,
+                        mode=c("all", "out", "in", "total"),
+                        loops=c("ignore", "twice", "once"),
+                        multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
