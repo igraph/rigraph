@@ -18,6 +18,7 @@ Imports:
     utils
 Suggests:
     ape,
+    digest,
     graph,
     igraphdata,
     rgl,
@@ -26,7 +27,7 @@ Suggests:
     tcltk,
     testthat,
     withr,
-    digest
+    vdiffr
 License: GPL (>= 2)
 URL: https://igraph.org, https://igraph.discourse.group/
 SystemRequirements:
