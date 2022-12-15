@@ -230,7 +230,7 @@ build: pre_build
 	R CMD INSTALL -l "/tmp" --no-configure --no-byte-compile .
 
 docs: pre_build
-		tools/builddocs.sh
+	tools/builddocs.sh
 
 igraph: igraph_$(VERSION).tar.gz
 
