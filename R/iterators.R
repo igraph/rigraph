@@ -149,6 +149,15 @@ graph_id.igraph.es <- function(x, ...) {
   get_es_graph_id(x) %||% NA_character_
 }
 
+is_complete_iterator <- function(x) {
+  identical(attr(x, "is_all"), TRUE)
+}
+
+set_complete_iterator <- function(x, value = TRUE) {
+  attr(x, "is_all") <- TRUE
+  x
+}
+
 #' Vertices of a graph
 #'
 #' Create a vertex sequence (vs) containing all vertices of a graph.
@@ -210,6 +219,7 @@ V <- function(graph) {
   res <- seq_len(vcount(graph))
   if (is_named(graph)) names(res) <- vertex_attr(graph)$name
   class(res) <- "igraph.vs"
+  res <- set_complete_iterator(res)
   add_vses_graph_ref(res, graph)
 }
 
@@ -332,6 +342,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   }
 
   class(res) <- "igraph.es"
+  res <- set_complete_iterator(res)
   add_vses_graph_ref(res, graph)
 }
 
