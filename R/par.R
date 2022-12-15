@@ -159,6 +159,10 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @importFrom pkgconfig set_config_in get_config
 
 igraph_options <- function(...) {
+  igraph_i_options(...)
+}
+
+igraph_i_options <- function(..., .in = parent.frame()) {
   if (nargs() == 0) return(get_all_options())
 
   ## Short notation
@@ -186,8 +190,14 @@ igraph_options <- function(...) {
 
   ## Set them
   names(temp) <- paste0("igraph::", names(temp))
-  do.call(set_config_in, c(temp, list(.in = parent.frame())))
+  do.call(set_config_in, c(temp, list(.in = .in)))
   invisible(old)
+}
+
+local_igraph_options <- function(..., .in = parent.frame()) {
+  old <- igraph_options(..., .in = .in)
+  withr::defer(rlang::inject(igraph_options(!!!old)), envir = .in)
+  invisible()
 }
 
 #' @importFrom pkgconfig set_config get_config

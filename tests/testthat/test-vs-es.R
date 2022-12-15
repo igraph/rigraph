@@ -142,38 +142,36 @@ test_that("both edge and vertex names", {
 
 test_that("printing connected vs/es works", {
 
+  local_igraph_options(print.id = FALSE)
+
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   expect_output(
     print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, from ", sid,
-           ":\n [1]  1  2  3  4  5  6  7  8  9 10")
+    "+ 10/10 vertices:\n [1]  1  2  3  4  5  6  7  8  9 10"
   )
   expect_output(
     print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid,
-           ":\n [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10")
+    "+ 10/10 edges unknown:\n [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10"
   )
 
   vs2 <- vs[1:5]
   es2 <- es[1:5]
 
   expect_output(print(vs2), fixed = TRUE,
-                paste0("+ 5/10 vertices, from ", sid, ":\n[1] 1 2 3 4 5"))
+                "+ 5/10 vertices:\n[1] 1 2 3 4 5")
   expect_output(print(es2), fixed = TRUE,
-                paste0("+ 5/10 edges from ", sid,
-                       ":\n[1] 1--2 2--3 3--4 4--5 5--6"))
+                paste0("+ 5/10 edges unknown:\n[1] 1--2 2--3 3--4 4--5 5--6"))
 
   vs3 <- vs[numeric()]
   es3 <- es[numeric()]
 
   expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, from ", sid, ":"))
+                "+ 0/10 vertices:")
   expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, ":"))
+                "+ 0/10 edges unknown:")
 
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -181,12 +179,11 @@ test_that("printing connected vs/es works", {
 
   expect_output(
     print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, named, from ", sid,
-           ":\n [1] a b c d e f g h i j")
+    "+ 10/10 vertices, named:\n [1] a b c d e f g h i j"
   )
   expect_output(
     print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid, " (vertex names):\n",
+    paste0("+ 10/10 edges unknown (vertex names):\n",
            " [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j")
   )
 
@@ -195,11 +192,11 @@ test_that("printing connected vs/es works", {
 
   expect_output(
     print(vs2), fixed = TRUE,
-    paste0("+ 5/10 vertices, named, from ", sid, ":\n[1] a b c d e")
+    "+ 5/10 vertices, named:\n[1] a b c d e"
   )
   expect_output(
     print(es2), fixed = TRUE,
-    paste0("+ 5/10 edges from ", sid, " (vertex names):\n",
+    paste0("+ 5/10 edges unknown (vertex names):\n",
            "[1] a--b b--c c--d d--e e--f")
   )
 
@@ -207,50 +204,46 @@ test_that("printing connected vs/es works", {
   es3 <- es[numeric()]
 
   expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, named, from ", sid, ":"))
+                "+ 0/10 vertices, named:")
   expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, " (vertex names):"))
+                "+ 0/10 edges unknown (vertex names):")
 })
 
 test_that("printing unconnected vs/es works", {
 
+  local_igraph_options(print.id = FALSE)
+
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
   expect_output(
     print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
+    "+ 10/? vertices (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10"
   )
   expect_output(
     print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
+    "+ 10/? edges unknown (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10"
   )
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
   expect_output(
     print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, named, from ", sid,
-           " (deleted):\n [1] a b c d e f g h i j")
+    "+ 10/? vertices, named (deleted):\n [1] a b c d e f g h i j"
   )
   expect_output(
     print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j")
+    "+ 10/? edges unknown (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j"
   )
 
 })
