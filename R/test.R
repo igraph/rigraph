@@ -49,15 +49,9 @@ igraph_test <- function() {
 
 #' Query igraph's version string
 #'
-#' Queries igraph's original version string. See details below.
+#' Returns the package version.
 #'
-#' The igraph version string is the same as the version of the R package for
-#' all released igraph versions. For development versions and nightly builds,
-#' they might differ however.
-#'
-#' The reason for this is, that R package version numbers are not flexible
-#' enough to cover in-between releases versions, e.g. alpha and beta versions,
-#' release candidates, etc.
+#' The igraph version string is always the same as the version of the R package.
 #'
 #' @aliases igraph.version
 #' @return A character scalar, the igraph version string.
@@ -70,9 +64,11 @@ igraph_test <- function() {
 #' packageDescription("igraph")$Version
 #' igraph_version()
 
+# R_igraph_vers -----------------------------------------------------------------------
+
+
 igraph_version <- function() {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_version)
+  unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }
 
 checkpkg <- function(package_file, args=character()) {
