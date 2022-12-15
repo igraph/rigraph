@@ -209,7 +209,6 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' ## policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #'
-#' \dontrun{
 #' # eigenvectors of a random symmetric matrix
 #' M <- matrix(rexp(10^6), 10^3, 10^3)
 #' M <- (M + t(M))/2
@@ -243,7 +242,6 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' gr.km <- kmeans(x, 100, 100, 300)$cluster
 #' scg_eps(cbind(x), gr.true)
 #' scg_eps(cbind(x), gr.km)
-#' }
 #'
 scg_group <- function(V, nt,
                          mtype=c("symmetric", "laplacian",
@@ -500,7 +498,6 @@ scg_semi_proj <- function(groups,
 #' ## repository policy. Copy and paste them by hand to your R prompt if
 #' ## you want to run them.
 #'
-#' \dontrun{
 #' # SCG of a toy network
 #' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
 #' g <- add_edges(g, c(1,6, 1,11, 6, 11))
@@ -562,7 +559,6 @@ scg_semi_proj <- function(groups,
 #'                 vertex.color=col[com.cg],vertex.label=NA)
 #' par(op)
 #'
-#' }
 #'
 scg <- function(X, ev, nt, groups=NULL,
                 mtype=c("symmetric", "laplacian", "stochastic"),

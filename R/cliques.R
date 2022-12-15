@@ -291,7 +291,6 @@ weighted_clique_num <- weighted_clique_num
 #' @examples
 #'
 #' # Do not run, takes a couple of seconds
-#' \dontrun{
 #'
 #' # A quite dense graph
 #' set.seed(42)
@@ -303,7 +302,6 @@ weighted_clique_num <- weighted_clique_num
 #' induced_subgraph(g, largest_ivs(g)[[1]])
 #'
 #' length(maximal_ivs(g))
-#' }
 
 ivs <- function(graph, min=NULL, max=NULL) {
   if (!is_igraph(graph)) {
