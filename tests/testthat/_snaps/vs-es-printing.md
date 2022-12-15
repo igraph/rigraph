@@ -70,13 +70,13 @@
     Code
       E(g)[[1]]
     Output
-      + 1/3 edge unknown (vertex names):
+      + 1/3 edge (vertex names):
         tail head tid hid color weight
       1    A    B   1   2   red     10
     Code
       E(g)[[2:3]]
     Output
-      + 2/3 edges unknown (vertex names):
+      + 2/3 edges (vertex names):
         tail head tid hid color weight
       2    A    C   1   3   red      9
       3    B    C   2   3   red      3
@@ -86,7 +86,7 @@
     Code
       E(g)[[1]]
     Output
-      + 1/3 edge unknown (vertex names):
+      + 1/3 edge (vertex names):
       $color
       [1] "red"
       
@@ -101,7 +101,7 @@
     Code
       E(g)[[2:3]]
     Output
-      + 2/3 edges unknown (vertex names):
+      + 2/3 edges (vertex names):
       $color
       [1] "red" "red"
       

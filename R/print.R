@@ -255,7 +255,7 @@
     (if (num) " " %+% chr(len) %+% "/" %+%
        (if (is.null(x)) "?" else chr(gsize(x))) else "") %+%
     (if (len == 1) " edge" else " edges") %+%
-    (if (isTRUE(id) && !is.na(gid)) paste(" from", substr(gid, 1, 7)) else " unknown") %+%
+    (if (isTRUE(id) && !is.na(gid)) paste(" from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(x)) " (deleted)" else "") %+%
     (if (is.null(attr(edges, "vnames"))) "" else " (vertex names)") %+%
     ":\n"

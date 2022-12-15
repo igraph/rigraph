@@ -8,7 +8,7 @@
     Code
       es
     Output
-      + 10/10 edges unknown:
+      + 10/10 edges:
        [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10
     Code
       vs[1:5]
@@ -18,7 +18,7 @@
     Code
       es[1:5]
     Output
-      + 5/10 edges unknown:
+      + 5/10 edges:
       [1] 1--2 2--3 3--4 4--5 5--6
     Code
       vs[numeric()]
@@ -27,7 +27,7 @@
     Code
       es[numeric()]
     Output
-      + 0/10 edges unknown:
+      + 0/10 edges:
 
 ---
 
@@ -39,7 +39,7 @@
     Code
       es
     Output
-      + 10/10 edges unknown (vertex names):
+      + 10/10 edges (vertex names):
        [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j
     Code
       vs[1:5]
@@ -49,7 +49,7 @@
     Code
       es[1:5]
     Output
-      + 5/10 edges unknown (vertex names):
+      + 5/10 edges (vertex names):
       [1] a--b b--c c--d d--e e--f
     Code
       vs[numeric()]
@@ -58,7 +58,7 @@
     Code
       es[numeric()]
     Output
-      + 0/10 edges unknown (vertex names):
+      + 0/10 edges (vertex names):
 
 # printing unconnected vs/es works
 
@@ -70,7 +70,7 @@
     Code
       es
     Output
-      + 10/? edges unknown (deleted):
+      + 10/? edges (deleted):
        [1]  1  2  3  4  5  6  7  8  9 10
 
 ---
@@ -83,6 +83,6 @@
     Code
       es
     Output
-      + 10/? edges unknown (deleted) (vertex names):
+      + 10/? edges (deleted) (vertex names):
        [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j
 
