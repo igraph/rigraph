@@ -553,6 +553,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #'
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
+#' @inheritParams as_adj_edge_list
 #' @return \code{as_graphnel} returns a graphNEL graph object.
 #' @seealso \code{\link{graph_from_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},

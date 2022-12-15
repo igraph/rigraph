@@ -9,6 +9,12 @@ as_graphnel(graph, loops, multiple = TRUE)
 }
 \arguments{
 \item{graph}{An igraph graph object.}
+
+\item{loops}{Character scalar, one of `"ignore"` (to omit loops), `"twice"`
+(to include loop edges twice) and `"once"` (to include them once).}
+
+\item{multiple}{Logical scalar, set to `FALSE` to use only one representative
+of each set of parallel edges.}
 }
 \value{
 \code{as_graphnel} returns a graphNEL graph object.
