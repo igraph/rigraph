@@ -368,7 +368,7 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' vertices.
 #'
 #' \code{as_adj_edge_list} returns a list of numeric vectors, which include the
-#' ids of adjacent edgs (according to the \code{mode} argument) of all
+#' ids of adjacent edges (according to the \code{mode} argument) of all
 #' vertices.
 #'
 #' @aliases as_adj_list get.adjedgelist
