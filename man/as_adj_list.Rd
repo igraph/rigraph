@@ -50,7 +50,7 @@ of neighbor vertices (according to the \code{mode} argument) of all
 vertices.
 
 \code{as_adj_edge_list} returns a list of numeric vectors, which include the
-ids of adjacent edgs (according to the \code{mode} argument) of all
+ids of adjacent edges (according to the \code{mode} argument) of all
 vertices.
 
 If \code{igraph_opt("return.vs.es")} is true (default), the numeric

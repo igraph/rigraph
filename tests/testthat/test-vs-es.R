@@ -142,116 +142,63 @@ test_that("both edge and vertex names", {
 
 test_that("printing connected vs/es works", {
 
+  local_igraph_options(print.id = FALSE)
+
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, from ", sid,
-           ":\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid,
-           ":\n [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10")
-  )
-
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
-
-  expect_output(print(vs2), fixed = TRUE,
-                paste0("+ 5/10 vertices, from ", sid, ":\n[1] 1 2 3 4 5"))
-  expect_output(print(es2), fixed = TRUE,
-                paste0("+ 5/10 edges from ", sid,
-                       ":\n[1] 1--2 2--3 3--4 4--5 5--6"))
-
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, from ", sid, ":"))
-  expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, ":"))
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+    es[numeric()]
+  })
 
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/10 vertices, named, from ", sid,
-           ":\n [1] a b c d e f g h i j")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/10 edges from ", sid, " (vertex names):\n",
-           " [1] a--b b--c c--d d--e e--f f--g g--h h--i i--j a--j")
-  )
-
-  vs2 <- vs[1:5]
-  es2 <- es[1:5]
-
-  expect_output(
-    print(vs2), fixed = TRUE,
-    paste0("+ 5/10 vertices, named, from ", sid, ":\n[1] a b c d e")
-  )
-  expect_output(
-    print(es2), fixed = TRUE,
-    paste0("+ 5/10 edges from ", sid, " (vertex names):\n",
-           "[1] a--b b--c c--d d--e e--f")
-  )
-
-  vs3 <- vs[numeric()]
-  es3 <- es[numeric()]
-
-  expect_output(print(vs3), fixed = TRUE,
-                paste0("+ 0/10 vertices, named, from ", sid, ":"))
-  expect_output(print(es3), fixed = TRUE,
-                paste0("+ 0/10 edges from ", sid, " (vertex names):"))
+  expect_snapshot({
+    vs
+    es
+    vs[1:5]
+    es[1:5]
+    vs[numeric()]
+    es[numeric()]
+  })
 })
 
 test_that("printing unconnected vs/es works", {
 
+  local_igraph_options(print.id = FALSE)
+
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted):\n [1]  1  2  3  4  5  6  7  8  9 10")
-  )
+  expect_snapshot({
+    vs
+    es
+  })
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
-  sid <- substr(graph_id(g), 1, 7)
 
   rm(g)
   gc()
 
-  expect_output(
-    print(vs), fixed = TRUE,
-    paste0("+ 10/? vertices, named, from ", sid,
-           " (deleted):\n [1] a b c d e f g h i j")
-  )
-  expect_output(
-    print(es), fixed = TRUE,
-    paste0("+ 10/? edges from ", sid,
-           " (deleted) (vertex names):\n [1] a|b b|c c|d d|e e|f f|g g|h h|i i|j a|j")
-  )
+  expect_snapshot({
+    vs
+    es
+  })
 
 })
 

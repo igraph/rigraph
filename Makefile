@@ -229,14 +229,15 @@ build: pre_build
 	if ! [ -f src/Makevars ]; then ./configure; fi
 	R CMD INSTALL -l "/tmp" --no-configure --no-byte-compile .
 
+docs: pre_build
+	tools/builddocs.sh
+
 igraph: igraph_$(VERSION).tar.gz
 
-igraph_$(VERSION).tar.gz: pre_build
+igraph_$(VERSION).tar.gz: docs
 	rm -f src/config.h
 	rm -f src/Makevars
 	touch src/config.h
-	mkdir -p man
-	tools/builddocs.sh
 	Rscript -e 'devtools::build(path = ".")'
 
 #############

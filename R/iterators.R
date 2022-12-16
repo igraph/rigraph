@@ -1188,6 +1188,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @param x A vertex sequence.
 #' @param full Whether to show the full sequence, or truncate the output
 #'   to the screen size.
+#' @inheritParams print.igraph
 #' @param ... These arguments are currently ignored.
 #' @return The vertex sequence, invisibly.
 #'
@@ -1216,17 +1217,20 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' V(g4)[[]]
 #' V(g4)[[2:5, 7:8]]
 
-print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
+print.igraph.vs <- function(x,
+                            full = igraph_opt("print.full"),
+                            id = igraph_opt("print.id"),
+                            ...) {
 
   graph <- get_vs_graph(x)
   len <- length(x)
-  id <- graph_id(x)
+  gid <- graph_id(x)
 
   title <- "+ " %+% chr(len) %+% "/" %+%
     (if (is.null(graph)) "?" else chr(vcount(graph))) %+%
     (if (len == 1) " vertex" else " vertices") %+%
     (if (!is.null(names(x))) ", named" else "") %+%
-    (if (!is.na(id)) paste(", from", substr(id, 1, 7)) else "") %+%
+    (if (isTRUE(id) && !is.na(gid)) paste(", from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(graph)) " (deleted)" else "") %+%
     ":\n"
   cat(title)
@@ -1271,6 +1275,7 @@ print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
 #' @param x An edge sequence.
 #' @param full Whether to show the full sequence, or truncate the output
 #'   to the screen size.
+#' @inheritParams print.igraph
 #' @param ... Currently ignored.
 #' @return The edge sequence, invisibly.
 #'
@@ -1301,11 +1306,14 @@ print.igraph.vs <- function(x, full = igraph_opt("print.full"), ...) {
 #' E(g4)[[]]
 #' E(g4)[[1:5]]
 
-print.igraph.es <- function(x, full = igraph_opt("print.full"), ...) {
+print.igraph.es <- function(x,
+                            full = igraph_opt("print.full"),
+                            id = igraph_opt("print.id"),
+                            ...) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
   .print.edges.compressed(x = graph, edges = x, max.lines = ml, names = TRUE,
-                          num = TRUE)
+                          num = TRUE, id = id)
   invisible(x)
 }
 
@@ -1318,7 +1326,9 @@ as.igraph.vs <- function(graph, v, na.ok=FALSE) {
       stop("Cannot use a vertex sequence from another graph.")
     }
   }
-  if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
+  if (is.null(v)) {
+    V(graph)
+  } else if (is.character(v) && "name" %in% vertex_attr_names(graph)) {
     v <- as.numeric(match(v, V(graph)$name))
     if (!na.ok && any(is.na(v))) {
       stop("Invalid vertex names")
@@ -1346,7 +1356,9 @@ as.igraph.es <- function(graph, e) {
       stop("Cannot use an edge sequence from another graph.")
     }
   }
-  if (is.character(e)) {
+  if (is.null(e)) {
+    res <- E(graph)
+  } else if (is.character(e)) {
     Pairs <- grep("|", e, fixed=TRUE)
     Names <- if (length(Pairs)==0) seq_along(e) else -Pairs
     res <- numeric(length(e))
