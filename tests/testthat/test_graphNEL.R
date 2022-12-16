@@ -30,3 +30,21 @@ test_that("graphNEL conversion works", {
 
   suppressWarnings(unloadNamespace("graph"))
 })
+
+test_that("graphNEL does not duplicate loop edges", {
+
+  if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
+
+  library(graph, warn.conflicts=FALSE)
+
+  mat <- matrix(c(1, 0.5, 0.5, 0), nrow = 2)
+  dimnames(mat) <- list(c("A", "B"), c("A", "B"))
+
+  igr <- graph_from_adjacency_matrix(mat, mode = "undirected", weighted = T)
+
+  grNEL <- as_graphnel(igr) 
+  expect_that(graph::edgeL(grNEL)$A$edges, equals(c(1, 2)))
+
+  suppressWarnings(unloadNamespace("graph"))
+})
+
