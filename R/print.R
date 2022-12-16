@@ -363,11 +363,7 @@
   cat("+ edges:\n")
   vc <- vcount(x)
   arrow <- c(" -- ", " -> ")[is_directed(x)+1]
-  if (is_directed(x)) {
-    al <- as_adj_list(x, mode="out", loops = "once")
-  } else {
-    al <- as_adj_list(x, mode="out", loops = "twice")
-  }
+  al <- as_adj_list(x, mode="out")
   w <- nchar(max(which(degree(x, mode="in") != 0)))
   mpl <- trunc((getOption("width")-nchar(arrow)-nchar(vc)) / (w+1))
   if (any(sapply(al, length) > mpl)) {

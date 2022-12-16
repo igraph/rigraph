@@ -1,7 +1,7 @@
 test_that("as_adj_list works", {
 
   g <- sample_gnp(50, 2/50)
-  al <- as_adj_list(g, mode = "all", loops = "once")
+  al <- as_adj_list(g)
   g2 <- graph_from_adj_list(al, mode="all")
   expect_true(graph.isomorphic(g, g2))
   expect_true(graph.isomorphic.vf2(g, g2, vertex.color1=1:vcount(g),
@@ -17,8 +17,8 @@ test_that("as_adj_list works", {
   }
 
   g <- sample_gnp(50, 4/50, directed=TRUE)
-  el1 <- as_adj_edge_list(g, mode="out", loops="once")
-  el2 <- as_adj_edge_list(g, mode="in", loops="once")
+  el1 <- as_adj_edge_list(g, mode="out")
+  el2 <- as_adj_edge_list(g, mode="in")
   for (i in 1:vcount(g)) {
     a <- E(g)[.from(i)]
     expect_that(length(a), is_equivalent_to(length(el1[[i]])))

@@ -5,7 +5,7 @@ test_that("graphNEL conversion works", {
   library(graph, warn.conflicts=FALSE)
 
   g <- sample_gnp(100, 5/100)
-  N <- as_graphnel(g, "twice")
+  N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
   gi <- graph.isomorphic.vf2(g, g2)
   expect_true(gi$iso)
@@ -18,7 +18,7 @@ test_that("graphNEL conversion works", {
   E(g)$weight <- sample(1:10, ecount(g), replace=TRUE)
   g$name <- "Foobar"
 
-  N <- as_graphnel(g, "twice")
+  N <- as_graphnel(g)
   g2 <- graph_from_graphnel(N)
   expect_true(graph.isomorphic(g, g2))
   expect_that(V(g)$name, equals(V(g2)$name))

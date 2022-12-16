@@ -377,10 +377,6 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 #' \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 #' for both. This argument is ignored for undirected graphs.
-#' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
-#'   (to include loop edges twice) and `"once"` (to include them once).
-#' @param multiple Logical scalar, set to `FALSE` to use only one representative
-#'   of each set of parallel edges.
 #' @return A list of \code{igraph.vs} or a list of numeric vectors depending on
 #' the value of \code{igraph_opt("return.vs.es")}, see details for performance
 #' characteristics.
@@ -398,9 +394,20 @@ as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr
 #' as_adj_edge_list(g)
 #'
 as_adj_list <- function(graph,
-                        mode=c("all", "out", "in", "total"),
-                        loops=c("ignore", "twice", "once"),
-                        multiple = TRUE) {
+                        mode=c("all", "out", "in", "total")) {
+  if (is_directed(graph)) {
+    loops <- "once"
+  } else {
+    loops <- "twice"
+  }
+
+  as_adj_list_i(graph, mode, loops, multiple = TRUE)
+}
+
+as_adj_list_i <- function(graph,
+                          mode=c("all", "out", "in", "total"),
+                          loops=c("twice", "once", "ignore"),
+                          multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -425,9 +432,20 @@ as_adj_list <- function(graph,
 #' @export
 
 as_adj_edge_list <- function(graph,
-                             mode=c("all", "out", "in", "total"),
-                             loops=c("ignore", "twice", "once"),
-                             multiple = TRUE) {
+                             mode=c("all", "out", "in", "total")) {
+  if (is_directed(graph)) {
+    loops <- "once"
+  } else {
+    loops <- "twice"
+  }
+
+  as_adj_edge_list_i(graph, mode, loops, multiple = TRUE)
+}
+
+as_adj_edge_list_i <- function(graph,
+                               mode=c("all", "out", "in", "total"),
+                               loops=c("twice", "once", "ignore"),
+                               multiple = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -556,7 +574,6 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #'
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
-#' @inheritParams as_adj_edge_list
 #' @return \code{as_graphnel} returns a graphNEL graph object.
 #' @seealso \code{\link{graph_from_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
@@ -580,9 +597,7 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' }
 #' @export
 
-as_graphnel <- function(graph,
-                        loops=c("ignore", "twice", "once"),
-                        multiple = TRUE) {
+as_graphnel <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not an igraph graph")
   }
@@ -598,7 +613,7 @@ as_graphnel <- function(graph,
 
   if ("weight" %in% edge_attr_names(graph) &&
       is.numeric(E(graph)$weight)) {
-    al <- lapply(as_adj_edge_list(graph, "out", loops, multiple), as.vector)
+    al <- lapply(as_adj_edge_list_i(graph, "out", loops = "once", multiple = TRUE), as.vector)
     for (i in seq(along.with=al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
       edges <- ifelse( edges[,2]==i, edges[,1], edges[,2])
@@ -606,7 +621,7 @@ as_graphnel <- function(graph,
       al[[i]] <- list(edges=edges, weights=weights)
     }
   } else {
-    al <- as_adj_list(graph, "out", loops, multiple)
+    al <- as_adj_list_i(graph, "out", loops = "once", multiple = TRUE)
     al <- lapply(al, function(x) list(edges=as.vector(x)))
   }
 
