@@ -7,19 +7,9 @@
 \alias{get.adjlist}
 \title{Adjacency lists}
 \usage{
-as_adj_list(
-  graph,
-  mode = c("all", "out", "in", "total"),
-  loops = c("ignore", "twice", "once"),
-  multiple = TRUE
-)
+as_adj_list(graph, mode = c("all", "out", "in", "total"))
 
-as_adj_edge_list(
-  graph,
-  mode = c("all", "out", "in", "total"),
-  loops = c("ignore", "twice", "once"),
-  multiple = TRUE
-)
+as_adj_edge_list(graph, mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -28,12 +18,6 @@ as_adj_edge_list(
 to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 for both. This argument is ignored for undirected graphs.}
-
-\item{loops}{Character scalar, one of `"ignore"` (to omit loops), `"twice"`
-(to include loop edges twice) and `"once"` (to include them once).}
-
-\item{multiple}{Logical scalar, set to `FALSE` to use only one representative
-of each set of parallel edges.}
 }
 \value{
 A list of \code{igraph.vs} or a list of numeric vectors depending on
