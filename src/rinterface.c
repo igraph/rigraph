@@ -22,6 +22,7 @@
 */
 
 #include "igraph.h"
+#include "graph/neighbors.h"
 
 #include "config.h"
 
@@ -7565,7 +7566,7 @@ SEXP R_igraph_famous(SEXP name) {
   return result;
 }
 
-SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode) {
+SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) {
 
   igraph_t g;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
@@ -7573,13 +7574,15 @@ SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode) {
   int i;
   long int no_of_nodes;
   igraph_vector_t neis;
+  igraph_integer_t loops=(igraph_integer_t) REAL(ploops)[0];
+  igraph_integer_t multiple=(igraph_integer_t) REAL(pmultiple)[0];
 
   R_SEXP_to_igraph(graph, &g);
   no_of_nodes=igraph_vcount(&g);
   igraph_vector_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (i=0; i<no_of_nodes; i++) {
-    igraph_neighbors(&g, &neis, i, (igraph_neimode_t) mode);
+    igraph_i_neighbors(&g, &neis, i, (igraph_neimode_t) mode, (igraph_loops_t) loops, (igraph_multiple_t) multiple);
     SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(&neis));
   }
   igraph_vector_destroy(&neis);
@@ -7588,7 +7591,7 @@ SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode) {
+SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode, SEXP ploops) {
 
   igraph_t g;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
@@ -7596,13 +7599,14 @@ SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode) {
   long int i;
   long int no_of_nodes;
   igraph_vector_t neis;
+  igraph_integer_t loops=(igraph_integer_t) REAL(ploops)[0];
 
   R_SEXP_to_igraph(graph, &g);
   no_of_nodes=igraph_vcount(&g);
   igraph_vector_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (i=0; i<no_of_nodes; i++) {
-    igraph_incident(&g, &neis, (igraph_integer_t) i, (igraph_neimode_t) mode);
+    igraph_i_incident(&g, &neis, (igraph_integer_t) i, (igraph_neimode_t) mode, (igraph_loops_t) loops, IGRAPH_MULTIPLE);
     SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(&neis));
   }
   igraph_vector_destroy(&neis);
