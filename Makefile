@@ -132,7 +132,7 @@ $(RAY2): src/vendor/%: vendor/%
 
 # R files that are generated/copied
 
-RGEN = R/aaa-auto.R src/rinterface.c \
+RGEN = R/aaa-auto.R src/rinterface.c src/init.c \
 	configure src/config.h.in src/Makevars.in src/Makevars.win src/Makevars.ucrt \
 	DESCRIPTION
 

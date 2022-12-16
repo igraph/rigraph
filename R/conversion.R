@@ -444,8 +444,7 @@ as_adj_edge_list <- function(graph,
 
 as_adj_edge_list_i <- function(graph,
                                mode=c("all", "out", "in", "total"),
-                               loops=c("twice", "once", "ignore"),
-                               multiple = TRUE) {
+                               loops=c("twice", "once", "ignore")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -454,9 +453,8 @@ as_adj_edge_list_i <- function(graph,
   mode <- as.numeric(switch(mode, "out"=1, "in"=2, "all"=3, "total"=3))
   loops <- igraph.match.arg(loops)
   loops <- as.numeric(switch(loops, "ignore"=0, "twice"=1, "once"=2))
-  multiple <- if (multiple) 1 else 0
   on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode, loops, multiple)
+  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
