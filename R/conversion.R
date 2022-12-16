@@ -600,6 +600,10 @@ as_graphnel <- function(graph) {
     stop("Not an igraph graph")
   }
 
+  if (any_multiple(graph)) {
+    stop("multiple edges are not supported in graphNEL graphs")
+  }
+
   if ("name" %in% vertex_attr_names(graph) &&
       is.character(V(graph)$name)) {
     name <- V(graph)$name
