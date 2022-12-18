@@ -33,7 +33,7 @@ effectively means that the measure can only be calculated for small graphs.
 }
 \examples{
 
-g <- sample_pa(100, m=4, dir=FALSE)
+g <- sample_pa(100, m = 4, dir = FALSE)
 sc <- subgraph_centrality(g)
 cor(degree(g), sc)
 

@@ -56,7 +56,7 @@ Since igraph version 0.8.0, both \code{erdos.renyi.game} and
 
 \examples{
 
-g <- erdos.renyi.game(1000, 1/1000)
+g <- erdos.renyi.game(1000, 1 / 1000)
 degree_distribution(g)
 
 }

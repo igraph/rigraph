@@ -40,8 +40,8 @@ Summing up the edge weights of the adjacent edges for each vertex.
 g <- make_star(10)
 E(g)$weight <- seq(ecount(g))
 strength(g)
-strength(g, mode="out")
-strength(g, mode="in")
+strength(g, mode = "out")
+strength(g, mode = "in")
 
 # No weights, a warning is given
 g <- make_ring(10)

@@ -41,7 +41,7 @@ If the graph is unconnected a minimum spanning forest is returned.
 }
 \examples{
 
-g <- sample_gnp(100, 3/100)
+g <- sample_gnp(100, 3 / 100)
 g_mst <- mst(g)
 
 }

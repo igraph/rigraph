@@ -73,12 +73,12 @@ defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 }
 \examples{
 
-g <- sample_gnp(10, 2/10)
+g <- sample_gnp(10, 2 / 10)
 as_adjacency_matrix(g)
 V(g)$name <- letters[1:vcount(g)]
 as_adjacency_matrix(g)
 E(g)$weight <- runif(ecount(g))
-as_adjacency_matrix(g, attr="weight")
+as_adjacency_matrix(g, attr = "weight")
 }
 \seealso{
 \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}

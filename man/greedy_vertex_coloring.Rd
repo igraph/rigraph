@@ -33,7 +33,7 @@ this way is not necessarily minimal but it can be calculated in linear time.
 
 g <- make_graph("petersen")
 col <- greedy_vertex_coloring(g)
-plot(g, vertex.color=col)
+plot(g, vertex.color = col)
 
 }
 \keyword{graphs}

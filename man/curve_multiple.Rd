@@ -28,8 +28,10 @@ plotting a graph with multiple edges, so that all edges are visible.
 }
 \examples{
 
-g <- graph( c(0,1,1,0,1,2,1,3,1,3,1,3,
-              2,3,2,3,2,3,2,3,0,1)+1 )
+g <- graph(c(
+  0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
+  2, 3, 2, 3, 2, 3, 2, 3, 0, 1
+) + 1)
 
 curve_multiple(g)
 

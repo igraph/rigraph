@@ -54,15 +54,15 @@ from a given HRG, if this is given in the \code{hrg} argument and the
 ## you want to run them.
 
 ## A graph with two dense groups
-g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
+g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 hrg <- fit_hrg(g)
 hrg
 
 ## The consensus tree for it
-consensus_tree(g, hrg=hrg, start=TRUE)
+consensus_tree(g, hrg = hrg, start = TRUE)
 
 ## Prediction of missing edges
-g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
+g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 predict_edges(g2)
 }
 \references{

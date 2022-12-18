@@ -27,7 +27,7 @@ with given \eqn{\alpha}{alpha} parameter. The sample is drawn from
 \code{length(alpha)-1}-simplex.
 }
 \examples{
-lpvs.dir    <- sample_dirichlet(n=20, alpha=rep(1, 10))
+lpvs.dir <- sample_dirichlet(n = 20, alpha = rep(1, 10))
 RDP.graph.2 <- sample_dot_product(lpvs.dir)
 colSums(lpvs.dir)
 }

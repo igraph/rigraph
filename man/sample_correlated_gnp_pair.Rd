@@ -35,8 +35,10 @@ shuffling its vertices.
 Please see the reference given below.
 }
 \examples{
-gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
-           directed = FALSE)
+gg <- sample_correlated_gnp_pair(
+  n = 10, corr = .8, p = .5,
+  directed = FALSE
+)
 gg
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 }

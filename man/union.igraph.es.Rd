@@ -24,7 +24,7 @@ function.)
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-union(E(g)[1:6], E(g)[5:9], E(g)['A|J'])
+union(E(g)[1:6], E(g)[5:9], E(g)["A|J"])
 }
 \seealso{
 Other vertex and edge sequence operations: 

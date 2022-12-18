@@ -115,7 +115,6 @@ f.out <- function(graph, data, extra) {
 tmp <- dfs(make_tree(10) \%du\% make_tree(10), root=1,
                  out.callback=f.out)
 
-
 }
 \seealso{
 \code{\link{bfs}} for breadth-first search.

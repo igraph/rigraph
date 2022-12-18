@@ -36,12 +36,14 @@ are added; dot products that are larger than one always add an edge.
 
 ## A randomly generated  graph
 lpvs <- matrix(rnorm(200), 20, 10)
-lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+lpvs <- apply(lpvs, 2, function(x) {
+  return(abs(x) / sqrt(sum(x^2)))
+})
 g <- sample_dot_product(lpvs)
 g
 
 ## Sample latent vectors from the surface of the unit sphere
-lpvs2 <- sample_sphere_surface(dim=5, n=20)
+lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
 }

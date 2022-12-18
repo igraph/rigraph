@@ -46,7 +46,7 @@ edges. You can use \code{\link{simplify}} to get rid of these.
 
 g <- sample_smallworld(1, 100, 5, 0.05)
 mean_distance(g)
-transitivity(g, type="average")
+transitivity(g, type = "average")
 
 }
 \references{

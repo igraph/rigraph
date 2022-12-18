@@ -36,7 +36,7 @@ See \code{\link{centralize}} for a summary of graph centralization.
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
 centr_degree(g, normalized = FALSE)$centralization \%>\%
- `/`(centr_degree_tmax(g, loops = FALSE))
+  `/`(centr_degree_tmax(g, loops = FALSE))
 centr_degree(g, normalized = TRUE)$centralization
 }
 \seealso{

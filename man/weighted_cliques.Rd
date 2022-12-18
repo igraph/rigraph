@@ -70,9 +70,9 @@ weighted clique is not necessarily the largest.
 
 g <- make_graph("zachary")
 V(g)$weight <- 1
-V(g)[c(1,2,3,4,14)]$weight <- 3
+V(g)[c(1, 2, 3, 4, 14)]$weight <- 3
 weighted_cliques(g)
-weighted_cliques(g, maximal=TRUE)
+weighted_cliques(g, maximal = TRUE)
 largest_weighted_cliques(g)
 weighted_clique_num(g)
 }

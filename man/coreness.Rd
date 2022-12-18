@@ -35,7 +35,7 @@ This function calculates the coreness for each vertex.
 
 g <- make_ring(10)
 g <- add_edges(g, c(1,2, 2,3, 1,3))
-coreness(g) 		# small core triangle in a ring
+coreness(g)             # small core triangle in a ring
 
 }
 \references{

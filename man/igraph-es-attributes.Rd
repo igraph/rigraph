@@ -62,7 +62,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 1/100),
+g <- sample_(
+  gnp(100, 1 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )
