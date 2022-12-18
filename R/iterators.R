@@ -123,8 +123,9 @@ add_vses_graph_ref <- function(vses, graph) {
 #'
 #' g2 <- g + 1
 #' graph_id(g2)
-graph_id <- function(x, ...)
+graph_id <- function(x, ...) {
   UseMethod("graph_id")
+}
 
 #' @method graph_id igraph
 #' @export
@@ -629,7 +630,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     )
 
     res <- lapply(res, function(ii) {
-      if (is.null(ii)) return(NULL)
+      if (is.null(ii)) {
+        return(NULL)
+      }
       ii <- simple_vs_index(x, ii, na_ok)
       attr(ii, "env") <- attr(x, "env")
       attr(ii, "graph") <- attr(x, "graph")
@@ -939,7 +942,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     )
 
     res <- lapply(res, function(ii) {
-      if (is.null(ii)) return(NULL)
+      if (is.null(ii)) {
+        return(NULL)
+      }
       ii <- simple_es_index(x, ii)
       attr(ii, "env") <- attr(x, "env")
       attr(ii, "graph") <- attr(x, "graph")
@@ -1788,8 +1793,9 @@ rev.igraph.es <- rev.igraph.vs
 #' V(g)$name <- letters[1:10]
 #' as_ids(V(g))
 #' as_ids(E(g))
-as_ids <- function(seq)
+as_ids <- function(seq) {
   UseMethod("as_ids")
+}
 
 #' @method as_ids igraph.vs
 #' @rdname as_ids

@@ -208,8 +208,9 @@ close.igraphconsole <- function(con, ...) {
 .igraph.progress.tkconsole.pbar <- function(top) {
   useText <- FALSE
   have_ttk <- as.character(tcltk::tcl("info", "tclversion")) >= "8.5"
-  if (!have_ttk && as.character(tcltk::tclRequire("PBar")) == "FALSE")
+  if (!have_ttk && as.character(tcltk::tclRequire("PBar")) == "FALSE") {
     useText <- TRUE
+  }
   fn <- tcltk::tkfont.create(family = "helvetica", size = 10)
   frame <- tcltk::tkframe(top)
   if (useText) {

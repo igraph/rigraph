@@ -155,10 +155,11 @@
       ind <- seq(length.out = mp)
     }
     if (vc == 0 ||
-      all(sapply(list, function(v)
+      all(sapply(list, function(v) {
         is.numeric(vertex_attr(x, v)) ||
           is.character(vertex_attr(x, v)) ||
-          is.logical(vertex_attr(x, v))))) {
+          is.logical(vertex_attr(x, v))
+      }))) {
       ## create a table
       tab <- data.frame(v = paste(sep = "", "[", ind, "]"), row.names = "v")
       for (i in list) {
@@ -222,9 +223,11 @@
     seq(length.out = nrow(el))
   }
   if (ec == 0 ||
-    all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
-      is.character(edge_attr(x, v)) |
-      is.logical(edge_attr(x, v))))) {
+    all(sapply(list, function(v) {
+      is.numeric(edge_attr(x, v)) |
+        is.character(edge_attr(x, v)) |
+        is.logical(edge_attr(x, v))
+    }))) {
     ## create a table
     tab <- data.frame(row.names = paste(sep = "", "[", ename, "]"))
     if (is.numeric(el)) {
@@ -270,8 +273,12 @@
   gid <- graph_id(edges)
 
   title <- "+" %+%
-    (if (num) " " %+% chr(len) %+% "/" %+%
-      (if (is.null(x)) "?" else chr(gsize(x))) else "") %+%
+    (if (num) {
+      " " %+% chr(len) %+% "/" %+%
+        (if (is.null(x)) "?" else chr(gsize(x)))
+    } else {
+      ""
+    }) %+%
     (if (len == 1) " edge" else " edges") %+%
     (if (isTRUE(id) && !is.na(gid)) paste(" from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(x)) " (deleted)" else "") %+%

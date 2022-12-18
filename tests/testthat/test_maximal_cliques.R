@@ -30,8 +30,9 @@ bk4 <- function(graph, min = 0, max = Inf) {
         list()
       }
     } else if (length(P) != 0) {
-      psize <- sapply(c(P, X), function(u)
-        length(intersect(P, Gamma(u))))
+      psize <- sapply(c(P, X), function(u) {
+        length(intersect(P, Gamma(u)))
+      })
       u <- c(P, X)[which.max(psize)]
 
       pres <- list()

@@ -500,9 +500,11 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 #' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
 #' or to \code{sample_degseq} otherwise.
 #' @export
-degseq <- function(..., deterministic = FALSE) constructor_spec(
-  if (deterministic) realize_degseq else sample_degseq, ...
-)
+degseq <- function(..., deterministic = FALSE) {
+  constructor_spec(
+    if (deterministic) realize_degseq else sample_degseq, ...
+  )
+}
 
 ## -----------------------------------------------------------------
 
@@ -1447,8 +1449,9 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 #' @rdname sample_hierarchical_sbm
 #' @param ... Passed to \code{sample_hierarchical_sbm}.
 #' @export
-hierarchical_sbm <- function(...)
+hierarchical_sbm <- function(...) {
   constructor_spec(sample_hierarchical_sbm, ...)
+}
 
 ## -----------------------------------------------------------------
 

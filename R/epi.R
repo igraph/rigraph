@@ -20,8 +20,9 @@
 ###################################################################
 
 #' @export
-time_bins <- function(x, middle = TRUE)
+time_bins <- function(x, middle = TRUE) {
   UseMethod("time_bins")
+}
 
 #' @method time_bins sir
 #' @rdname sir

@@ -106,8 +106,12 @@ print.nexusDatasetInfo <- function(x, ...) {
   x <- x[setdiff(names(x), printed)]
   if (length(attr) > 0) {
     dcode <- function(d) {
-      if (d == "numeric") return("n")
-      if (d == "string") return("c")
+      if (d == "numeric") {
+        return("n")
+      }
+      if (d == "string") {
+        return("c")
+      }
       "x"
     }
     cat("+ attr: ")
@@ -204,17 +208,20 @@ nexus.format.result <- function(l, name = "") {
     return(res)
   }
 
-  l <- lapply(l, function(x) c(
-    sub("[ ]*:[^:]*$", "", x),
-    sub("^[^:]*:[ ]*", "", x)
-  ))
+  l <- lapply(l, function(x) {
+    c(
+      sub("[ ]*:[^:]*$", "", x),
+      sub("^[^:]*:[ ]*", "", x)
+    )
+  })
   spos <- which(sapply(l, function(x) x[1] == "id"))
   epos <- c((spos - 1), length(l))
   ehead <- epos[1]
   epos <- epos[-1]
 
-  res <- mapply(spos, epos, SIMPLIFY = FALSE, FUN = function(s, e)
-    makeNexusDatasetInfo(l[s:e]))
+  res <- mapply(spos, epos, SIMPLIFY = FALSE, FUN = function(s, e) {
+    makeNexusDatasetInfo(l[s:e])
+  })
   class(res) <- "nexusDatasetInfoList"
 
   for (h in 1:ehead) {

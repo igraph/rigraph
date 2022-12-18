@@ -268,11 +268,15 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     command = function() {
       tkp <- .tkplot.get(tkp.id)
       vids <- .tkplot.get.selected.vertices(tkp.id)
-      if (length(vids) == 0) return(FALSE)
+      if (length(vids) == 0) {
+        return(FALSE)
+      }
 
       initialcolor <- tkp$params$vertex.params[vids[1], "vertex.color"]
       color <- .tkplot.select.color(initialcolor)
-      if (color == "") return(FALSE) # Cancel
+      if (color == "") {
+        return(FALSE)
+      } # Cancel
 
       .tkplot.update.vertex.color(tkp.id, vids, color)
     }
@@ -282,11 +286,15 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     command = function() {
       tkp <- .tkplot.get(tkp.id)
       vids <- .tkplot.get.selected.vertices(tkp.id)
-      if (length(vids) == 0) return(FALSE)
+      if (length(vids) == 0) {
+        return(FALSE)
+      }
 
       initialsize <- tkp$params$vertex.params[1, "vertex.size"]
       size <- .tkplot.select.number("Vertex size", initialsize, 1, 20)
-      if (is.na(size)) return(FALSE)
+      if (is.na(size)) {
+        return(FALSE)
+      }
 
       .tkplot.update.vertex.size(tkp.id, vids, size)
     }
@@ -299,14 +307,18 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     command = function() {
       tkp <- .tkplot.get(tkp.id)
       eids <- .tkplot.get.selected.edges(tkp.id)
-      if (length(eids) == 0) return(FALSE)
+      if (length(eids) == 0) {
+        return(FALSE)
+      }
 
       initialcolor <- ifelse(length(tkp$params$edge.color) > 1,
         tkp$params$edge.color[eids[1]],
         tkp$params$edge.color
       )
       color <- .tkplot.select.color(initialcolor)
-      if (color == "") return(FALSE) # Cancel
+      if (color == "") {
+        return(FALSE)
+      } # Cancel
 
       .tkplot.update.edge.color(tkp.id, eids, color)
     }
@@ -316,14 +328,18 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     command = function() {
       tkp <- .tkplot.get(tkp.id)
       eids <- .tkplot.get.selected.edges(tkp.id)
-      if (length(eids) == 0) return(FALSE)
+      if (length(eids) == 0) {
+        return(FALSE)
+      }
 
       initialwidth <- ifelse(length(tkp$params$edge.width) > 1,
         tkp$params$edge.width[eids[1]],
         tkp$params$edge.width
       )
       width <- .tkplot.select.number("Edge width", initialwidth, 1, 10)
-      if (is.na(width)) return(FALSE) # Cancel
+      if (is.na(width)) {
+        return(FALSE)
+      } # Cancel
 
       .tkplot.update.edge.width(tkp.id, eids, width)
     }
@@ -482,8 +498,11 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
     y <- as.integer(y) + as.integer(tcltk::tkwinfo("rooty", canvas))
     tcltk::.Tcl(paste("tk_popup", tcltk::.Tcl.args(menu, x, y)))
   })
-  if (tkp$params$label.dist == 0) tobind <- "vertex||label"
-  else tobind <- "vertex"
+  if (tkp$params$label.dist == 0) {
+    tobind <- "vertex||label"
+  } else {
+    tobind <- "vertex"
+  }
   tcltk::tkitembind(canvas, tobind, "<B1-Motion>", function(x, y) {
     tkp <- .tkplot.get(tkp.id)
     x <- as.numeric(x)
@@ -1270,7 +1289,9 @@ tk_canvas <- function(tkp.id) {
 
 .tkplot.get.numeric.vector <- function(...) {
   labels <- list(...)
-  if (length(labels) == 0) return(FALSE)
+  if (length(labels) == 0) {
+    return(FALSE)
+  }
 
   answers <- as.list(rep("", length(labels)))
   dialog <- tcltk::tktoplevel()

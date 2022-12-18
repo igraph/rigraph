@@ -2204,11 +2204,17 @@ tkigraph <- function() {
   tcltk::tkconfigure(txt, height = 15)
   tcltk::tkinsert(txt, "end", "Parameters were:\n")
   tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
-  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
-    "  Weights were used.\n")
+  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) {
+    "  Weights were not used.\n"
+  } else {
+    "  Weights were used.\n"
+  })
   tcltk::tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
-  tcltk::tkinsert(txt, "end", if (read$parupdate) "  Parallel updating.\n" else
-    "  Sequential updating.\n")
+  tcltk::tkinsert(txt, "end", if (read$parupdate) {
+    "  Parallel updating.\n"
+  } else {
+    "  Sequential updating.\n"
+  })
   tcltk::tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Start temperature was", read$start.temp, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Stop temperaure was", read$stop.temp, "\n"))
@@ -2386,8 +2392,11 @@ tkigraph <- function() {
   tcltk::tkinsert(txt, "end", "Parameters were:\n")
   tcltk::tkinsert(txt, "end", paste("  Vertex:", read$vertex, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
-  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
-    "  Weights were used.\n")
+  tcltk::tkinsert(txt, "end", if (is.null(read$weights)) {
+    "  Weights were not used.\n"
+  } else {
+    "  Weights were used.\n"
+  })
   tcltk::tkinsert(txt, "end", paste("  Number of spins=", read$spins, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
 
@@ -2600,8 +2609,9 @@ tkigraph <- function() {
     }
 
     if (is.numeric(rownumbers) &&
-      length(rownumbers) != nrow(dataframe))
+      length(rownumbers) != nrow(dataframe)) {
       stop("rownumbers argument must be TRUE, FALSE or have length nrow(dataframe)")
+    }
     oldwidth <- unlist(options("width"))
     options(width = 10000)
     conn <- textConnection(NULL, open = "w", local = TRUE)
@@ -2611,27 +2621,33 @@ tkigraph <- function() {
     sink()
     zz <- strsplit(textConnectionValue(conn), "\n", fixed = TRUE)
     close(conn)
-    if (length(zz) > 1 + nrow(dataframe)) stop(
-      "data frame too wide"
-    )
+    if (length(zz) > 1 + nrow(dataframe)) {
+      stop(
+        "data frame too wide"
+      )
+    }
     options(width = oldwidth)
     if (is.null(inthis)) {
       base <- tcltk::tktoplevel()
       tcltk::tkwm.geometry(base, placement)
       tcltk::tkwm.title(base, {
-        if (is.null(title))
+        if (is.null(title)) {
           object.name
-        else title
+        } else {
+          title
+        }
       })
     } else {
       base <- inthis
     }
     nrows <- length(zz) - 1
-    if (is.numeric(rownumbers))
+    if (is.numeric(rownumbers)) {
       rowname.text <- paste(rownumbers, row.names(dataframe))
-    else if (rownumbers)
+    } else if (rownumbers) {
       rowname.text <- paste(1:nrows, row.names(dataframe))
-    else rowname.text <- row.names(dataframe)
+    } else {
+      rowname.text <- row.names(dataframe)
+    }
     namewidth <- max(nchar(rowname.text))
     yy <- substring(zz, 2 + max(nchar(row.names(dataframe))))
     datawidth <- max(nchar(yy))
@@ -2969,9 +2985,11 @@ tkigraph <- function() {
           label <- paste(colnames(dataframe)[n], "decreasing", sep = ", ")
           tcltk::tkadd(sortMenu, "command",
             label = label,
-            command = function() sortColumn(colnames(dataframe)[n],
-              decreasing = TRUE
-            )
+            command = function() {
+              sortColumn(colnames(dataframe)[n],
+                decreasing = TRUE
+              )
+            }
           )
         }
       )

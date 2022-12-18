@@ -165,7 +165,9 @@ igraph_options <- function(...) {
 }
 
 igraph_i_options <- function(..., .in = parent.frame()) {
-  if (nargs() == 0) return(get_all_options())
+  if (nargs() == 0) {
+    return(get_all_options())
+  }
 
   ## Short notation
   temp <- list(...)
@@ -177,7 +179,9 @@ igraph_i_options <- function(..., .in = parent.frame()) {
       stop("invalid argument: ", sQuote(arg))
     )
   }
-  if (length(temp) == 0) return(get_all_options())
+  if (length(temp) == 0) {
+    return(get_all_options())
+  }
 
   ## Callbacks
   n <- names(temp)

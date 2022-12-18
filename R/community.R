@@ -349,8 +349,9 @@ make_clusters <- function(graph, membership = NULL, algorithm = NULL,
 }
 
 #' @export
-modularity <- function(x, ...)
+modularity <- function(x, ...) {
   UseMethod("modularity")
+}
 
 #' Modularity of a community structure of a graph
 #'
@@ -604,16 +605,18 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
     object$height <- cumsum(object$height - min(object$height))
   }
   nMerge <- length(oHgt <- object$height)
-  if (nMerge != nrow(merges))
+  if (nMerge != nrow(merges)) {
     stop("'merge' and 'height' do not fit!")
+  }
   hMax <- oHgt[nMerge]
   one <- 1L
   two <- 2L
   leafs <- nrow(merges) + 1
   for (k in 1:nMerge) {
     x <- merges[k, ] # no sort() anymore!
-    if (any(neg <- x < leafs + 1))
+    if (any(neg <- x < leafs + 1)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
+    }
     if (all(neg)) { # two leaves
       zk <- as.list(x)
       attr(zk, "members") <- two
@@ -632,8 +635,11 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       ## don't want to assume this
       isL <- x[1] < leafs + 1 ## is leaf left?
       zk <-
-        if (isL) list(x[1], z[[X[2]]])
-        else list(z[[X[1]]], x[2])
+        if (isL) {
+          list(x[1], z[[X[2]]])
+        } else {
+          list(z[[X[1]]], x[2])
+        }
       attr(zk, "members") <- attr(z[[X[1 + isL]]], "members") + one
       attr(zk, "midpoint") <-
         (.memberDend(zk[[1]]) + attr(z[[X[1 + isL]]], "midpoint")) / 2
@@ -671,8 +677,9 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
 
 #' @rdname communities
 #' @export
-as_phylo <- function(x, ...)
+as_phylo <- function(x, ...) {
   UseMethod("as_phylo")
+}
 
 #' @rdname communities
 #' @method as_phylo communities
@@ -2058,8 +2065,9 @@ plot.communities <- function(x, y,
 #' @rdname plot_dendrogram.communities
 #' @aliases dendPlot
 #' @export
-plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...)
+plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
   UseMethod("plot_dendrogram")
+}
 
 
 
@@ -2295,8 +2303,9 @@ compare <- function(comm1, comm2, method = c(
                       "vi", "nmi",
                       "split.join", "rand",
                       "adjusted.rand"
-                    ))
+                    )) {
   UseMethod("compare")
+}
 
 #' @method compare communities
 #' @export
@@ -2423,8 +2432,9 @@ split_join_distance <- function(comm1, comm2) {
 #' g2 <- make_ring(10) + make_full_graph(5)
 #' groups(components(g2))
 #' @export
-groups <- function(x)
+groups <- function(x) {
   UseMethod("groups")
+}
 
 #' @method groups default
 #' @export

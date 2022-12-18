@@ -608,8 +608,9 @@ scg <- function(X, ev, nt, groups = NULL,
                 evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                 sparse = igraph_opt("sparsematrices"),
                 output = c("default", "matrix", "graph"), semproj = FALSE,
-                epairs = FALSE, stat.prob = FALSE)
+                epairs = FALSE, stat.prob = FALSE) {
   UseMethod("scg")
+}
 
 #' @method scg igraph
 #' @export

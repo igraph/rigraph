@@ -6,8 +6,9 @@ test_that("largest_ivs works", {
     equals(ivs_size(g))
   )
 
-  ec <- sapply(seq_along(livs), function(x)
-    ecount(induced_subgraph(g, livs[[x]])))
+  ec <- sapply(seq_along(livs), function(x) {
+    ecount(induced_subgraph(g, livs[[x]]))
+  })
   expect_that(unique(ec), equals(0))
 
   ## TODO: check that they are largest

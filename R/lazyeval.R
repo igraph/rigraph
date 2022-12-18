@@ -167,11 +167,15 @@ make_call <- function(fun, args) {
 }
 common_env <- function(dots) {
   if (!is.list(dots)) stop("dots must be a list", call. = FALSE)
-  if (length(dots) == 0) return(baseenv())
+  if (length(dots) == 0) {
+    return(baseenv())
+  }
 
   dots <- as.lazy_dots(dots)
   env <- dots[[1]]$env
-  if (length(dots) == 1) return(env)
+  if (length(dots) == 1) {
+    return(env)
+  }
 
   for (i in 2:length(dots)) {
     if (!identical(env, dots[[i]]$env)) {
@@ -225,7 +229,9 @@ deparse_trunc <- function(x, width = getOption("width")) {
   }
 
   text <- deparse(x, width.cutoff = width)
-  if (length(text) == 1 && nchar(text) < width) return(text)
+  if (length(text) == 1 && nchar(text) < width) {
+    return(text)
+  }
 
   paste0(substr(text[1], 1, width - 3), "...")
 }

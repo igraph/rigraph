@@ -870,13 +870,16 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   dx <- diff(values)
   nx <- length(dx)
   twopi <- 2 * pi
-  if (is.null(col))
-    col <- if (is.null(density))
+  if (is.null(col)) {
+    col <- if (is.null(density)) {
       c(
         "white", "lightblue", "mistyrose", "lightcyan",
         "lavender", "cornsilk"
       )
-    else par("fg")
+    } else {
+      par("fg")
+    }
+  }
   col <- rep(col, length.out = nx)
   border <- rep(border, length.out = nx)
   lty <- rep(lty, length.out = nx)

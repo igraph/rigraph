@@ -328,8 +328,9 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
 #' hrg <- fit_hrg(g)
 #' as.igraph(hrg)
 #'
-as.igraph <- function(x, ...)
+as.igraph <- function(x, ...) {
   UseMethod("as.igraph")
+}
 
 #' @method as.igraph igraphHRG
 #' @export

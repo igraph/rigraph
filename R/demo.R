@@ -163,10 +163,12 @@ igraph_demo <- function(which) {
   tcltk::tktitle(top) <- paste("igraph demo:", which)
 
   main.menu <- tcltk::tkmenu(top)
-  tcltk::tkadd(main.menu, "command", label = "Close", command = function()
-    .igraphdemo.close(top))
-  tcltk::tkadd(main.menu, "command", label = "Reset", command = function()
-    .igraphdemo.reset(top, txt, which))
+  tcltk::tkadd(main.menu, "command", label = "Close", command = function() {
+    .igraphdemo.close(top)
+  })
+  tcltk::tkadd(main.menu, "command", label = "Reset", command = function() {
+    .igraphdemo.reset(top, txt, which)
+  })
   tcltk::tkconfigure(top, "-menu", main.menu)
 
   scr <- tcltk::tkscrollbar(top,
@@ -177,8 +179,9 @@ igraph_demo <- function(which) {
     yscrollcommand = function(...) tcltk::tkset(scr, ...),
     width = 80, height = 40
   )
-  but <- tcltk::tkbutton(top, text = "Next", command = function()
-    .igraphdemo.next(top, txt))
+  but <- tcltk::tkbutton(top, text = "Next", command = function() {
+    .igraphdemo.next(top, txt)
+  })
 
   tcltk::tkpack(but, side = "bottom", fill = "x", expand = 0)
   tcltk::tkpack(scr, side = "right", fill = "y", expand = 0)
