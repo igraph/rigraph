@@ -151,7 +151,7 @@ plot(ring.size, rr.pl.0.1, type="b")
 
 pause()
 
-### Logarithmic 'x' axis 
+### Logarithmic 'x' axis
 plot(ring.size, rr.pl.0.1, type="b", log="x")
 
 pause()

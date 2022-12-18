@@ -88,7 +88,7 @@ plot.igraph <- function(x,
                        mark.groups=list(), mark.shape=1/2,
                        mark.col=rainbow(length(mark.groups), alpha=0.3),
                        mark.border=rainbow(length(mark.groups), alpha=1),
-                       mark.expand=15, loop.size=1, 
+                       mark.expand=15, loop.size=1,
                        ...) {
 
   graph <- x
@@ -285,7 +285,7 @@ plot.igraph <- function(x,
 
       rad <- angle
       center <- c(cx,cy)
-      cp <- matrix( c(x0,y0, x0+.4*loopSize,y0+.2*loopSize, 
+      cp <- matrix( c(x0,y0, x0+.4*loopSize,y0+.2*loopSize,
                    x0+.4*loopSize,y0-.2*loopSize, x0,y0),
                    ncol=2, byrow=TRUE)
       phi <- atan2(cp[,2]-center[2], cp[,1]-center[1])

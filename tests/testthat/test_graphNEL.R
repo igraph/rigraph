@@ -42,7 +42,7 @@ test_that("graphNEL does not duplicate loop edges", {
 
   igr <- graph_from_adjacency_matrix(mat, mode = "undirected", weighted = T)
 
-  grNEL <- as_graphnel(igr) 
+  grNEL <- as_graphnel(igr)
   expect_that(graph::edgeL(grNEL)$A$edges, equals(c(1, 2)))
 
   suppressWarnings(unloadNamespace("graph"))

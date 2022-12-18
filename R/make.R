@@ -1708,7 +1708,7 @@ graph_from_lcf <- graph_from_lcf
 #' @return The new graph object.
 #' @seealso \code{\link{sample_degseq}} for a randomized variant that samples
 #' from graphs with the given degree sequence.
-#' @references V. Havel, 
+#' @references V. Havel,
 #' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 #' Časopis pro pěstování matematiky 80, 477-480 (1955).
 #' http://eudml.org/doc/19050
@@ -1722,7 +1722,7 @@ graph_from_lcf <- graph_from_lcf
 #' Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 #' Discrete Mathematics 6, 1 (1973).
 #' https://doi.org/10.1016/0012-365X%2873%2990037-X
-#' 
+#'
 #' Sz. Horvát and C. D. Modes,
 #' Connectedness matters: construction and exact random sampling of connected networks (2021).
 #' https://doi.org/10.1088/2632-072X/abced5
