@@ -22,5 +22,4 @@ test_that("spectrum works for symmetric matrices", {
   e2 <- spectrum(g, which = list(howmany = 4, pos = "SA"))
   expect_that(e0$values[50:47], equals(e2$values))
   expect_that(std(e0$vectors[, 50:47]), equals(std(e2$vectors)))
-
 })

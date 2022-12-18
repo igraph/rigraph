@@ -1,5 +1,4 @@
 test_that("Prefix sum tree works", {
-
   set.seed(42)
   mysample <- function(x, size, prob = NULL) {
     if (!is.null(prob)) {
@@ -13,5 +12,4 @@ test_that("Prefix sum tree works", {
   S2 <- mysample(100, 10000, rep(1:2, each = 50))
   expect_that(range(table(S2)[1:50]), equals(c(45, 85)))
   expect_that(range(table(S2)[51:100]), equals(c(103, 160)))
-
 })

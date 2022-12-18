@@ -131,8 +131,10 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
       tmpfile <- FALSE
     }
     on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_maximal_cliques_file, graph, subset, file,
-      as.numeric(min), as.numeric(max))
+    res <- .Call(
+      C_R_igraph_maximal_cliques_file, graph, subset, file,
+      as.numeric(min), as.numeric(max)
+    )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
@@ -140,8 +142,10 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
     invisible(NULL)
   } else {
     on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_maximal_cliques, graph, subset,
-      as.numeric(min), as.numeric(max))
+    res <- .Call(
+      C_R_igraph_maximal_cliques, graph, subset,
+      as.numeric(min), as.numeric(max)
+    )
     res <- lapply(res, function(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
@@ -325,8 +329,10 @@ ivs <- function(graph, min = NULL, max = NULL) {
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
-    as.numeric(max))
+  res <- .Call(
+    C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
+    as.numeric(max)
+  )
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {

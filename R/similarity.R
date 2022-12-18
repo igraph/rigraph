@@ -49,10 +49,13 @@
 #' g <- make_ring(5)
 #' similarity(g, method = "dice")
 #' similarity(g, method = "jaccard")
-similarity <- function(graph, vids = V(graph), mode = c("all", "out", "in",
-                         "total"), loops = FALSE, method = c("jaccard",
-                         "dice", "invlogweighted")) {
-
+similarity <- function(graph, vids = V(graph), mode = c(
+                         "all", "out", "in",
+                         "total"
+                       ), loops = FALSE, method = c(
+                         "jaccard",
+                         "dice", "invlogweighted"
+                       )) {
   method <- igraph.match.arg(method)
   if (method == "jaccard") {
     similarity.jaccard(graph, vids, mode, loops)

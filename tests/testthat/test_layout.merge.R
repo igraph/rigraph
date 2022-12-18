@@ -1,5 +1,4 @@
 test_that("merge_coords works", {
-
   set.seed(42)
 
   g <- list(make_ring(10), make_ring(5))
@@ -19,5 +18,4 @@ test_that("merge_coords works", {
     l <- layout_with_mds(g)
     expect_that(dim(l), equals(c(vcount(g), 2)))
   }
-
 })

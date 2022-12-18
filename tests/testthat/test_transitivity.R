@@ -11,18 +11,19 @@ test_that("transitivity works", {
   t3 <- transitivity(g, type = "local", vids = V(g))
   t33 <- transitivity(g, type = "local")
   est3 <- structure(c(0, 0.06667, 0.1028, 0.1016, 0.1333, 0.2222),
-    .Names = c("Min.", "1st Qu.", "Median", "Mean",
-      "3rd Qu.", "Max."),
-    class = c("summaryDefault", "table"))
+    .Names = c(
+      "Min.", "1st Qu.", "Median", "Mean",
+      "3rd Qu.", "Max."
+    ),
+    class = c("summaryDefault", "table")
+  )
   expect_that(summary(t3), equals(est3, tolerance = 0.001))
   expect_that(summary(t33), equals(est3, tolerance = 0.001))
 })
 
 test_that("no integer overflow", {
-
   set.seed(42)
   g <- graph.star(80000, mode = "undirected") + edges(sample(2:1000), 100)
   mtr <- min(transitivity(g, type = "local"), na.rm = TRUE)
   expect_true(mtr > 0)
-
 })

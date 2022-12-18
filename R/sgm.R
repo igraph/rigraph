@@ -130,8 +130,10 @@ match_vertices <- function(A, B, m, start, iteration) {
   D <- P
   corr <- matrix(solve_LSAP(as.matrix(P), maximum = TRUE))
   P = Matrix::diag(n)
-  P = rbind(cbind(Matrix::diag(m), matrix(0, m, n)),
-    cbind(matrix(0, n, m), P[corr, ]))
+  P = rbind(
+    cbind(Matrix::diag(m), matrix(0, m, n)),
+    cbind(matrix(0, n, m), P[corr, ])
+  )
   corr <- cbind(matrix((m + 1):totv, n), matrix(m + corr, n))
   list(corr = corr, P = P, D = D)
 }

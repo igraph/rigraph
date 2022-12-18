@@ -1,5 +1,4 @@
 test_that("compose works", {
-
   g1 <- sample_gnp(50, 3 / 50, directed = TRUE)
   gi <- graph(rep(1:vcount(g1), each = 2), directed = TRUE)
 
@@ -8,5 +7,4 @@ test_that("compose works", {
 
   expect_true(graph.isomorphic(g1, g2))
   expect_true(graph.isomorphic(g1, g3))
-
 })

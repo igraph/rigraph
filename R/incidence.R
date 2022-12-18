@@ -30,7 +30,6 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
   el[, 2] <- el[, 2] + n1
 
   if (!is.null(weighted)) {
-
     if (is.logical(weighted) && weighted) {
       weighted <- "weight"
     }
@@ -52,9 +51,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
     weight <- list(el[, 3])
     names(weight) <- weighted
     res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
-
   } else {
-
     if (multiple) {
       el[, 3] <- ceiling(el[, 3])
       el[, 3][el[, 3] < 0] <- 0
@@ -79,7 +76,6 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
 
 graph.incidence.dense <- function(incidence, directed, mode, multiple,
                                   weighted) {
-
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
       weighted <- "weight"
@@ -128,16 +124,14 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     names(weight) <- weighted
     res <- add_edges(res, edges, attr = weight)
     res <- set_vertex_attr(res, "type",
-      value = c(rep(FALSE, n1), rep(TRUE, n2)))
-
+      value = c(rep(FALSE, n1), rep(TRUE, n2))
+    )
   } else {
-
     mode(incidence) <- "double"
     on.exit(.Call(C_R_igraph_finalizer))
     ## Function call
     res <- .Call(C_R_igraph_incidence, incidence, directed, mode, multiple)
     res <- set_vertex_attr(res$graph, "type", value = res$types)
-
   }
 
   res
@@ -206,17 +200,26 @@ graph_from_incidence_matrix <- function(incidence, directed = FALSE,
                                         add.names = NULL) {
   # Argument checks
   directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   multiple <- as.logical(multiple)
 
   if (inherits(incidence, "Matrix")) {
-    res <- graph.incidence.sparse(incidence, directed = directed,
+    res <- graph.incidence.sparse(incidence,
+      directed = directed,
       mode = mode, multiple = multiple,
-      weighted = weighted)
+      weighted = weighted
+    )
   } else {
     incidence <- as.matrix(incidence)
-    res <- graph.incidence.dense(incidence, directed = directed, mode = mode,
-      multiple = multiple, weighted = weighted)
+    res <- graph.incidence.dense(incidence,
+      directed = directed, mode = mode,
+      multiple = multiple, weighted = weighted
+    )
   }
 
   ## Add names
@@ -234,7 +237,8 @@ graph_from_incidence_matrix <- function(incidence, directed = FALSE,
   }
   if (!is.na(add.names)) {
     res <- set_vertex_attr(res, add.names,
-      value = c(rownames(incidence), colnames(incidence)))
+      value = c(rownames(incidence), colnames(incidence))
+    )
   }
   res
 }

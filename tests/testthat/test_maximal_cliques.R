@@ -8,7 +8,6 @@ mysort <- function(x) {
 unvs <- function(x) lapply(x, as.vector)
 
 bk4 <- function(graph, min = 0, max = Inf) {
-
   Gamma <- function(v) {
     neighbors(graph, v)
   }
@@ -37,7 +36,6 @@ bk4 <- function(graph, min = 0, max = Inf) {
 
       pres <- list()
       for (v in setdiff(P, Gamma(u))) {
-
         p0 <- if (PX$PS > 1) {
           PX$PX[1:(PX$PS - 1)]
         } else {
@@ -53,11 +51,13 @@ bk4 <- function(graph, min = 0, max = Inf) {
           numeric()
         }
 
-        newPX <- list(PX = c(p0, p1, p2, x1, x2, x0),
+        newPX <- list(
+          PX = c(p0, p1, p2, x1, x2, x0),
           PS = length(p0) + length(p1) + 1,
           PE = length(p0) + length(p1) + length(p2),
           XS = length(p0) + length(p1) + length(p2) + 1,
-          XE = length(p0) + length(p1) + length(p2) + length(x1))
+          XE = length(p0) + length(p1) + length(p2) + length(x1)
+        )
 
         pres <- c(pres, bkpivot(newPX, c(R, v)))
 
@@ -98,8 +98,10 @@ bk4 <- function(graph, min = 0, max = Inf) {
     } else {
       X <- numeric()
     }
-    PX <- list(PX = c(P, X), PS = 1, PE = length(P),
-      XS = length(P) + 1, XE = length(P) + length(X))
+    PX <- list(
+      PX = c(P, X), PS = 1, PE = length(P),
+      XS = length(P) + 1, XE = length(P) + length(X)
+    )
     res <- c(res, bkpivot(PX, cord[v]))
   }
   lapply(res, as.integer)

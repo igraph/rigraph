@@ -13,10 +13,16 @@ test_that("degree works", {
   expect_that(as.numeric(table(el2[, 1])), equals(dout[dout != 0]))
   expect_that(as.numeric(table(el2[, 2])), equals(din[din != 0]))
 
-  expect_that(degree(g2, mode = "in") / (vcount(g2) - 1),
-    equals(degree(g2, mode = "in", normalized = TRUE)))
-  expect_that(degree(g2, mode = "out") / (vcount(g2) - 1),
-    equals(degree(g2, mode = "out", normalized = TRUE)))
-  expect_that(degree(g2, mode = "all") / (vcount(g2) - 1),
-    equals(degree(g2, mode = "all", normalized = TRUE)))
+  expect_that(
+    degree(g2, mode = "in") / (vcount(g2) - 1),
+    equals(degree(g2, mode = "in", normalized = TRUE))
+  )
+  expect_that(
+    degree(g2, mode = "out") / (vcount(g2) - 1),
+    equals(degree(g2, mode = "out", normalized = TRUE))
+  )
+  expect_that(
+    degree(g2, mode = "all") / (vcount(g2) - 1),
+    equals(degree(g2, mode = "all", normalized = TRUE))
+  )
 })

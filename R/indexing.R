@@ -280,7 +280,6 @@
 #' @export
 `[[.igraph` <- function(x, i, j, from, to, ..., directed = TRUE,
                         edges = FALSE, exact = TRUE) {
-
   getfun <- if (edges) as_adj_edge_list else as_adj_list
 
   if (!missing(i) && !missing(from)) stop("Cannot give both 'i' and 'from'")
@@ -319,7 +318,6 @@
         other <- ifelse(el[, 1] == from, el[, 2], el[, 1])
         ee[[yy]][other %in% j]
       })
-
     }
   }
 }

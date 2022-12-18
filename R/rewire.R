@@ -82,7 +82,6 @@ keeping_degseq <- function(loops = FALSE, niter = 100) {
 }
 
 rewire_keeping_degseq <- function(graph, loops, niter) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -130,7 +129,12 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' g2 <- g %>% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 #' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   multiple <- as.logical(multiple)
   if (mode != 3) {
     if (!multiple) {
@@ -154,8 +158,10 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
     stop("Not a graph object")
   }
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
-    as.logical(multiple))
+  .Call(
+    C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
+    as.logical(multiple)
+  )
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
@@ -163,6 +169,8 @@ rewire_each_directed_edge <- function(graph, prob, loops, mode) {
     stop("Not a graph object")
   }
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
-    as.numeric(mode))
+  .Call(
+    C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
+    as.numeric(mode)
+  )
 }

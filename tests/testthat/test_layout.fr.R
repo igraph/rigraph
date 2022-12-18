@@ -1,5 +1,4 @@
 test_that("", {
-
   skip_on_os("solaris")
 
   set.seed(42)
@@ -15,5 +14,4 @@ test_that("", {
   expect_true(
     isTRUE(all.equal(sum(l), -170.9312, tolerance = 0.1))
   )
-
 })

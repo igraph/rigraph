@@ -115,10 +115,11 @@
 #'
 sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
                       out.pref = FALSE, zero.appeal = 1,
-                      directed = TRUE, algorithm = c("psumtree",
-                        "psumtree-multiple", "bag"),
+                      directed = TRUE, algorithm = c(
+                        "psumtree",
+                        "psumtree-multiple", "bag"
+                      ),
                       start.graph = NULL) {
-
   if (!is.null(start.graph) && !is_igraph(start.graph)) {
     stop("`start.graph' not an `igraph' object")
   }
@@ -156,7 +157,8 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
   if (!is.null(out.dist)) {
     nn <- if (is.null(start.graph)) n else n - vcount(start.graph)
     out.seq <- as.numeric(sample(0:(length(out.dist) - 1), nn,
-      replace = TRUE, prob = out.dist))
+      replace = TRUE, prob = out.dist
+    ))
   }
 
   if (is.null(out.seq)) {
@@ -165,12 +167,16 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
   algorithm <- igraph.match.arg(algorithm)
   algorithm1 <- switch(algorithm,
-    "psumtree" = 1, "psumtree-multiple" = 2,
-    "bag" = 0)
+    "psumtree" = 1,
+    "psumtree-multiple" = 2,
+    "bag" = 0
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_barabasi_game, n, power, m, out.seq, out.pref,
-    zero.appeal, directed, algorithm1, start.graph)
+  res <- .Call(
+    C_R_igraph_barabasi_game, n, power, m, out.seq, out.pref,
+    zero.appeal, directed, algorithm1, start.graph
+  )
 
   if (igraph_opt("add.params")) {
     res$name <- "Barabasi graph"
@@ -219,13 +225,17 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' g <- sample_gnp(1000, 1 / 1000)
 #' degree_distribution(g)
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
-
   type <- "gnp"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
+  type1 <- switch(type,
+    "gnp" = 0,
+    "gnm" = 1
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
-    as.numeric(p), as.logical(directed), as.logical(loops))
+  res <- .Call(
+    C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    as.numeric(p), as.logical(directed), as.logical(loops)
+  )
 
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)
@@ -272,13 +282,17 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' g <- sample_gnm(1000, 1000)
 #' degree_distribution(g)
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
-
   type <- "gnm"
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
+  type1 <- switch(type,
+    "gnp" = 0,
+    "gnm" = 1
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
-    as.numeric(m), as.logical(directed), as.logical(loops))
+  res <- .Call(
+    C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    as.numeric(m), as.logical(directed), as.logical(loops)
+  )
 
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)
@@ -341,13 +355,17 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #'
 erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
                              directed = FALSE, loops = FALSE) {
-
   type <- igraph.match.arg(type)
-  type1 <- switch(type, "gnp" = 0, "gnm" = 1)
+  type1 <- switch(type,
+    "gnp" = 0,
+    "gnm" = 1
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
-    as.numeric(p.or.m), as.logical(directed), as.logical(loops))
+  res <- .Call(
+    C_R_igraph_erdos_renyi_game, as.numeric(n), as.numeric(type1),
+    as.numeric(p.or.m), as.logical(directed), as.logical(loops)
+  )
 
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)
@@ -454,16 +472,22 @@ random.graph.game <- erdos.renyi.game
 #' all(degree(g5) == degs)
 sample_degseq <- function(out.deg, in.deg = NULL,
                           method = c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
-
   method <- igraph.match.arg(method)
-  method1 <- switch(method, "simple" = 0, "vl" = 1, "simple.no.multiple" = 2, "simple.no.multiple.uniform" = 3)
+  method1 <- switch(method,
+    "simple" = 0,
+    "vl" = 1,
+    "simple.no.multiple" = 2,
+    "simple.no.multiple.uniform" = 3
+  )
   if (!is.null(in.deg)) {
     in.deg <- as.numeric(in.deg)
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_degree_sequence_game, as.numeric(out.deg),
-    in.deg, as.numeric(method1))
+  res <- .Call(
+    C_R_igraph_degree_sequence_game, as.numeric(out.deg),
+    in.deg, as.numeric(method1)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Degree sequence random graph"
     res$method <- method
@@ -510,8 +534,10 @@ degseq <- function(..., deterministic = FALSE) constructor_spec(
 #'
 sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_growing_random_game, as.numeric(n), as.numeric(m),
-    as.logical(directed), as.logical(citation))
+  res <- .Call(
+    C_R_igraph_growing_random_game, as.numeric(n), as.numeric(m),
+    as.logical(directed), as.logical(citation)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Growing random graph"
     res$m <- m
@@ -678,7 +704,8 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 
   if (!is.null(out.dist)) {
     out.seq <- as.numeric(sample(0:(length(out.dist) - 1), n,
-      replace = TRUE, prob = out.dist))
+      replace = TRUE, prob = out.dist
+    ))
   }
 
   if (is.null(out.seq)) {
@@ -687,16 +714,20 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- if (is.null(time.window)) {
-    .Call(C_R_igraph_barabasi_aging_game, as.numeric(n),
+    .Call(
+      C_R_igraph_barabasi_aging_game, as.numeric(n),
       as.numeric(pa.exp), as.numeric(aging.exp),
       as.numeric(aging.bin), m, out.seq,
       out.pref, as.numeric(zero.deg.appeal), as.numeric(zero.age.appeal),
-      as.numeric(deg.coef), as.numeric(age.coef), directed)
+      as.numeric(deg.coef), as.numeric(age.coef), directed
+    )
   } else {
-    .Call(C_R_igraph_recent_degree_aging_game, as.numeric(n),
+    .Call(
+      C_R_igraph_recent_degree_aging_game, as.numeric(n),
       as.numeric(pa.exp), as.numeric(aging.exp),
       as.numeric(aging.bin), m, out.seq, out.pref, as.numeric(zero.deg.appeal),
-      directed, time.window)
+      directed, time.window
+    )
   }
   if (igraph_opt("add.params")) {
     res$name <- "Aging Barabasi graph"
@@ -764,13 +795,16 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
                                    type.dist = rep(1, types),
                                    pref.matrix = matrix(1, types, types),
                                    directed = FALSE) {
-
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_callaway_traits_game, as.double(nodes),
+  res <- .Call(
+    C_R_igraph_callaway_traits_game, as.double(nodes),
     as.double(types), as.double(edge.per.step),
-    as.double(type.dist), matrix(as.double(pref.matrix), types,
-      types),
-    as.logical(directed))
+    as.double(type.dist), matrix(
+      as.double(pref.matrix), types,
+      types
+    ),
+    as.logical(directed)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based Callaway graph"
     res$types <- types
@@ -792,12 +826,13 @@ traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
                           pref.matrix = matrix(1, types, types),
                           directed = FALSE) {
-
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_establishment_game, as.double(nodes),
+  res <- .Call(
+    C_R_igraph_establishment_game, as.double(nodes),
     as.double(types), as.double(k), as.double(type.dist),
     matrix(as.double(pref.matrix), types, types),
-    as.logical(directed))
+    as.logical(directed)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Trait-based growing graph"
     res$types <- types
@@ -846,8 +881,10 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #'
 sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_grg_game, as.double(nodes), as.double(radius),
-    as.logical(torus), as.logical(coords))
+  res <- .Call(
+    C_R_igraph_grg_game, as.double(nodes), as.double(radius),
+    as.logical(torus), as.logical(coords)
+  )
   if (coords) {
     V(res[[1]])$x <- res[[2]]
     V(res[[1]])$y <- res[[3]]
@@ -930,7 +967,6 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         fixed.sizes = FALSE,
                         pref.matrix = matrix(1, types, types),
                         directed = FALSE, loops = FALSE) {
-
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     stop("Invalid size for preference matrix")
   }
@@ -941,10 +977,12 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_preference_game, as.integer(nodes), as.integer(types),
+  res <- .Call(
+    C_R_igraph_preference_game, as.integer(nodes), as.integer(types),
     as.double(type.dist), as.logical(fixed.sizes),
     matrix(as.double(pref.matrix), types, types),
-    as.logical(directed), as.logical(loops))
+    as.logical(directed), as.logical(loops)
+  )
   V(res[[1]])$type <- res[[2]] + 1
   if (igraph_opt("add.params")) {
     res[[1]]$name <- "Preference random graph"
@@ -969,7 +1007,6 @@ sample_asym_pref <- function(nodes, types,
                              type.dist.matrix = matrix(1, types, types),
                              pref.matrix = matrix(1, types, types),
                              loops = FALSE) {
-
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     stop("Invalid size for preference matrix")
   }
@@ -978,11 +1015,13 @@ sample_asym_pref <- function(nodes, types,
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_asymmetric_preference_game,
+  res <- .Call(
+    C_R_igraph_asymmetric_preference_game,
     as.integer(nodes), as.integer(types), as.integer(types),
     matrix(as.double(type.dist.matrix), types, types),
     matrix(as.double(pref.matrix), types, types),
-    as.logical(loops))
+    as.logical(loops)
+  )
   V(res[[1]])$outtype <- res[[2]] + 1
   V(res[[1]])$intype <- res[[3]] + 1
   if (igraph_opt("add.params")) {
@@ -1010,11 +1049,18 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  mode <- switch(mode,
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_connect_neighborhood, graph, as.numeric(order),
-    as.numeric(mode))
+  .Call(
+    C_R_igraph_connect_neighborhood, graph, as.numeric(order),
+    as.numeric(mode)
+  )
 }
 
 
@@ -1054,11 +1100,12 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #'
 sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
                               multiple = FALSE) {
-
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_watts_strogatz_game, as.numeric(dim),
+  res <- .Call(
+    C_R_igraph_watts_strogatz_game, as.numeric(dim),
     as.numeric(size), as.numeric(nei), as.numeric(p),
-    as.logical(loops), as.logical(multiple))
+    as.logical(loops), as.logical(multiple)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Watts-Strogatz random graph"
     res$dim <- dim
@@ -1111,9 +1158,11 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins + 1))^-3,
                             directed = TRUE) {
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_lastcit_game, as.numeric(n), as.numeric(edges),
+  res <- .Call(
+    C_R_igraph_lastcit_game, as.numeric(n), as.numeric(edges),
     as.numeric(agebins),
-    as.numeric(pref), as.logical(directed))
+    as.numeric(pref), as.logical(directed)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Random citation graph based on last citation"
     res$edges <- edges
@@ -1133,8 +1182,10 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
                              pref = rep(1, length(types)),
                              directed = TRUE, attr = TRUE) {
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_cited_type_game, as.numeric(n), as.numeric(edges),
-    as.numeric(types), as.numeric(pref), as.logical(directed))
+  res <- .Call(
+    C_R_igraph_cited_type_game, as.numeric(n), as.numeric(edges),
+    as.numeric(types), as.numeric(pref), as.logical(directed)
+  )
   if (attr) {
     V(res)$type <- types
   }
@@ -1152,14 +1203,18 @@ cit_types <- function(...) constructor_spec(sample_cit_types, ...)
 #' @rdname sample_last_cit
 #' @export
 sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
-                                 pref = matrix(1, nrow = length(types),
-                                   ncol = length(types)),
+                                 pref = matrix(1,
+                                   nrow = length(types),
+                                   ncol = length(types)
+                                 ),
                                  directed = TRUE, attr = TRUE) {
   pref <- structure(as.numeric(pref), dim = dim(pref))
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_citing_cited_type_game, as.numeric(n),
+  res <- .Call(
+    C_R_igraph_citing_cited_type_game, as.numeric(n),
     as.numeric(types), pref, as.numeric(edges),
-    as.logical(directed))
+    as.logical(directed)
+  )
   if (attr) {
     V(res)$type <- types
   }
@@ -1226,7 +1281,6 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'
 sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
                              directed = FALSE, mode = c("out", "in", "all")) {
-
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
   type <- igraph.match.arg(type)
@@ -1237,7 +1291,11 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
     m <- as.integer(m)
   }
   directed <- as.logical(directed)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3
+  )
 
   if (type == "gnp" && missing(p)) {
     stop("Connection probability `p' is not given for Gnp graph")
@@ -1346,9 +1404,11 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' @examples
 #'
 #' ## Ten blocks with three clusters each
-#' C <- matrix(c(1, 3 / 4, 0,
+#' C <- matrix(c(
+#'   1, 3 / 4, 0,
 #'   3 / 4, 0, 3 / 4,
-#'   0, 3 / 4, 3 / 4), nrow = 3)
+#'   0, 3 / 4, 3 / 4
+#' ), nrow = 3)
 #' g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 #' g
 #' if (require(Matrix)) {
@@ -1356,7 +1416,6 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' }
 #' @export
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
-
   mlen <- length(m)
   rholen <- if (is.list(rho)) length(rho) else 1
   Clen <- if (is.list(C)) length(C) else 1
@@ -1753,8 +1812,10 @@ sample_correlated_gnp <- sample_correlated_gnp
 #' \url{https://arxiv.org/abs/1304.7844}
 #' @keywords graphs
 #' @examples
-#' gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
-#'   directed = FALSE)
+#' gg <- sample_correlated_gnp_pair(
+#'   n = 10, corr = .8, p = .5,
+#'   directed = FALSE
+#' )
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 sample_correlated_gnp_pair <- sample_correlated_gnp_pair

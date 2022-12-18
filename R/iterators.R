@@ -318,12 +318,16 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
     res <- seq_len(ec)
   } else if (!is.null(P)) {
     on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
-      as.logical(directed)) + 1
+    res <- .Call(
+      C_R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
+      as.logical(directed)
+    ) + 1
   } else {
     on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
-      as.logical(directed)) + 1
+    res <- .Call(
+      C_R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
+      as.logical(directed)
+    ) + 1
   }
 
   if ("name" %in% edge_attr_names(graph)) {
@@ -441,7 +445,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 2 / 100),
+#' g <- sample_(
+#'   gnp(100, 2 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -477,7 +482,6 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' V(g)[.env$x]
 #'
 `[.igraph.vs` <- function(x, ..., na_ok = FALSE) {
-
   args <- lazy_dots(..., .follow_symbols = FALSE)
 
   ## If indexing has no argument at all, then we still get one,
@@ -510,14 +514,21 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the vertex is a neighbor (any type)
     ## of at least one vertex in v
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+    mode <- switch(mode,
+      "out" = 1,
+      "in" = 2,
+      "all" = 3,
+      "total" = 3
+    )
 
     if (is.logical(v)) {
       v <- which(v)
     }
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
-      as.numeric(mode))
+    tmp <- .Call(
+      C_R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
+      as.numeric(mode)
+    )
     tmp[as.numeric(x)]
   }
   nei <- function(...) {
@@ -542,8 +553,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
-      as.numeric(3))
+    tmp <- .Call(
+      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      as.numeric(3)
+    )
     tmp[as.numeric(x)]
   }
   inc <- function(...) {
@@ -558,8 +571,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
-      as.numeric(1))
+    tmp <- .Call(
+      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      as.numeric(1)
+    )
     tmp[as.numeric(x)]
   }
   from <- function(...) {
@@ -571,8 +586,10 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
       e <- which(e)
     }
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
-      as.numeric(2))
+    tmp <- .Call(
+      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      as.numeric(2)
+    )
     tmp[as.numeric(x)]
   }
   to <- function(...) {
@@ -583,9 +600,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 
   if (is.null(graph)) {
     res <- lapply(lazy_eval(args), simple_vs_index, x = x, na_ok = na_ok)
-
   } else {
-
     attrs <- vertex_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
@@ -693,9 +708,11 @@ set_single_index <- function(x, value = TRUE) {
 #' @family vertex and edge sequence operations
 #' @export
 #' @examples
-#' g <- make_(ring(10),
+#' g <- make_(
+#'   ring(10),
 #'   with_vertex_(name = LETTERS[1:10]),
-#'   with_edge_(weight = 1:10, color = "green"))
+#'   with_edge_(weight = 1:10, color = "green")
+#' )
 #' E(g)
 #' E(g)[[]]
 #' E(g)[[.inc('A')]]
@@ -833,7 +850,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' E(g)[.env$x]
 #'
 `[.igraph.es` <- function(x, ...) {
-
   args <- lazy_dots(..., .follow_symbols = TRUE)
 
   ## If indexing has no argument at all, then we still get one,
@@ -848,8 +864,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .inc <- function(v) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
-      as.numeric(3))
+    tmp <- .Call(
+      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      as.numeric(3)
+    )
     tmp[as.numeric(x)]
   }
   adj <- function(...) {
@@ -861,8 +879,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
-      as.numeric(1))
+    tmp <- .Call(
+      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      as.numeric(1)
+    )
     tmp[as.numeric(x)]
   }
   from <- function(...) {
@@ -871,8 +891,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(C_R_igraph_finalizer))
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
-      as.numeric(2))
+    tmp <- .Call(
+      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      as.numeric(2)
+    )
     tmp[as.numeric(x)]
   }
   to <- function(...) {
@@ -883,9 +905,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
   if (is.null(graph)) {
     res <- lapply(lazy_eval(args), simple_es_index, x = x)
-
   } else {
-
     attrs <- edge_attr(graph)
     xvec <- as.vector(x)
     for (i in seq_along(attrs)) attrs[[i]] <- attrs[[i]][xvec]
@@ -1029,7 +1049,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @family vertex and edge sequences
 #' @family graph attributes
 #' @examples
-#' g <- make_(ring(10),
+#' g <- make_(
+#'   ring(10),
 #'   with_vertex_(
 #'     name = LETTERS[1:10],
 #'     color = sample(1:2, 10, replace = TRUE)
@@ -1044,7 +1065,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 2 / 100),
+#' g <- sample_(
+#'   gnp(100, 2 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -1095,7 +1117,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 1 / 100),
+#' g <- sample_(
+#'   gnp(100, 1 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -1150,8 +1173,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  i_set_vertex_attr(x, attr(value, "name"), index = value,
-    value = attr(value, "value"), check = FALSE)
+  i_set_vertex_attr(x, attr(value, "name"),
+    index = value,
+    value = attr(value, "value"), check = FALSE
+  )
 }
 
 #' @param path Select edges along a path, given by a vertex sequence See
@@ -1169,8 +1194,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  i_set_edge_attr(x, attr(value, "name"), index = value,
-    value = attr(value, "value"), check = FALSE)
+  i_set_edge_attr(x, attr(value, "name"),
+    index = value,
+    value = attr(value, "value"), check = FALSE
+  )
 }
 
 #' Show a vertex sequence on the screen
@@ -1218,7 +1245,6 @@ print.igraph.vs <- function(x,
                             full = igraph_opt("print.full"),
                             id = igraph_opt("print.id"),
                             ...) {
-
   graph <- get_vs_graph(x)
   len <- length(x)
   gid <- graph_id(x)
@@ -1236,12 +1262,13 @@ print.igraph.vs <- function(x,
     ## Double bracket
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
-      print(as.data.frame(va, stringsAsFactors =
-        FALSE)[as.vector(x), , drop = FALSE])
+      print(as.data.frame(va,
+        stringsAsFactors =
+          FALSE
+      )[as.vector(x), , drop = FALSE])
     } else {
       print(lapply(va, "[", as.vector(x)))
     }
-
   } else {
     ## Single bracket
 
@@ -1250,8 +1277,10 @@ print.igraph.vs <- function(x,
       if (is.logical(full) && full) {
         print(x2, quote = FALSE)
       } else {
-        head_print(x2, omitted_footer = "+ ... omitted several vertices\n",
-          quote = FALSE, max_lines = igraph_opt("auto.print.lines"))
+        head_print(x2,
+          omitted_footer = "+ ... omitted several vertices\n",
+          quote = FALSE, max_lines = igraph_opt("auto.print.lines")
+        )
       }
     }
   }
@@ -1308,8 +1337,10 @@ print.igraph.es <- function(x,
                             ...) {
   graph <- get_es_graph(x)
   ml <- if (identical(full, TRUE)) NULL else igraph_opt("auto.print.lines")
-  .print.edges.compressed(x = graph, edges = x, max.lines = ml, names = TRUE,
-    num = TRUE, id = id)
+  .print.edges.compressed(
+    x = graph, edges = x, max.lines = ml, names = TRUE,
+    num = TRUE, id = id
+  )
   invisible(x)
 }
 
@@ -1346,7 +1377,7 @@ as.igraph.vs <- function(graph, v, na.ok = FALSE) {
 }
 
 as.igraph.es <- function(graph, e) {
-  if (inherits(e, "igraph.es") && !is.null(graph)  &&
+  if (inherits(e, "igraph.es") && !is.null(graph) &&
     !warn_version(graph)) {
     if (get_graph_id(graph) != get_es_graph_id(e)) {
       stop("Cannot use an edge sequence from another graph.")
@@ -1381,7 +1412,6 @@ as.igraph.es <- function(graph, e) {
         res[Names] <- as.numeric(e[Names])
       }
     }
-
   } else {
     res <- as.numeric(e)
   }
@@ -1403,7 +1433,6 @@ is_igraph_es <- function(x) {
 
 
 parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
-
   args <- list(...)
 
   if (any(!sapply(args, is_fun))) stop("Not ", what, " sequence")
@@ -1413,8 +1442,10 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (length(graph_id) != 1) {
-    warning("Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions")
+    warning(
+      "Combining vertex/edge sequences from different graphs.\n",
+      "This will not work in future igraph versions"
+    )
   }
 
   graphs <- args %>%
@@ -1426,8 +1457,10 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
     unique()
 
   if (check_graph && length(addresses) >= 2) {
-    warning("Combining vertex/edge sequences from different graphs.\n",
-      "This will not work in future igraph versions")
+    warning(
+      "Combining vertex/edge sequences from different graphs.\n",
+      "This will not work in future igraph versions"
+    )
   }
 
   graph <- if (length(graphs)) graphs[[1]] else NULL
@@ -1439,14 +1472,18 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
 
 
 parse_vs_op_args <- function(...) {
-  parse_op_args(..., what = "a vertex", is_fun = is_igraph_vs,
-    as_fun = as.igraph.vs)
+  parse_op_args(...,
+    what = "a vertex", is_fun = is_igraph_vs,
+    as_fun = as.igraph.vs
+  )
 }
 
 
 parse_es_op_args <- function(...) {
-  parse_op_args(..., what = "an edge", is_fun = is_igraph_es,
-    as_fun = as.igraph.es)
+  parse_op_args(...,
+    what = "an edge", is_fun = is_igraph_es,
+    as_fun = as.igraph.es
+  )
 }
 
 

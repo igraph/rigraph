@@ -45,7 +45,6 @@ all_dots <- function(.dots, ..., all_named = FALSE) {
   }
 
   dots
-
 }
 lazy_eval <- function(x, data = NULL) {
   if (is.lazy_dots(x)) {
@@ -182,7 +181,6 @@ common_env <- function(dots) {
   env
 }
 eval_call <- function(fun, dots, env = parent.frame()) {
-
   vars <- paste0("x", seq_along(dots))
   names(vars) <- names(dots)
 
@@ -214,8 +212,10 @@ auto_names <- function(x, max_width = 40) {
 
   missing <- nms == ""
   expr <- lapply(x[missing], `[[`, "expr")
-  nms[missing] <- vapply(expr, deparse_trunc, width = max_width,
-    FUN.VALUE = character(1), USE.NAMES = FALSE)
+  nms[missing] <- vapply(expr, deparse_trunc,
+    width = max_width,
+    FUN.VALUE = character(1), USE.NAMES = FALSE
+  )
 
   nms
 }

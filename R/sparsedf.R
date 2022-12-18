@@ -25,7 +25,6 @@
 # stores that column more economically.
 
 sdf <- function(..., row.names = NULL, NROW = NULL) {
-
   cols <- list(...)
 
   if (is.null(names(cols)) || any(names(cols) == "") ||

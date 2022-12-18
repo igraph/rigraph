@@ -105,16 +105,21 @@ bipartite_projection <- function(graph, types = NULL,
   } else {
     probe1 <- -1
   }
-  which <- switch(igraph.match.arg(which), "both" = 0L, "false" = 1L,
-    "true" = 2L)
+  which <- switch(igraph.match.arg(which),
+    "both" = 0L,
+    "false" = 1L,
+    "true" = 2L
+  )
   if (which != "both" && probe1 != -1) {
     warning("`probe1' ignored if only one projection is requested")
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_bipartite_projection, graph, types,
-    as.integer(probe1), which)
+  res <- .Call(
+    C_R_igraph_bipartite_projection, graph, types,
+    as.integer(probe1), which
+  )
   if (remove.type) {
     if (is_igraph(res[[1]])) {
       res[[1]] <- delete_vertex_attr(res[[1]], "type")

@@ -1,5 +1,4 @@
 test_that("graphNEL conversion works", {
-
   if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
 
   library(graph, warn.conflicts = FALSE)
@@ -32,7 +31,6 @@ test_that("graphNEL conversion works", {
 })
 
 test_that("graphNEL does not duplicate loop edges", {
-
   if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
 
   library(graph, warn.conflicts = FALSE)

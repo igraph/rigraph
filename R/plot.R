@@ -90,7 +90,6 @@ plot.igraph <- function(x,
                         mark.border = rainbow(length(mark.groups), alpha = 1),
                         mark.expand = 15, loop.size = 1,
                         ...) {
-
   graph <- x
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -160,8 +159,10 @@ plot.igraph <- function(x,
     ylim <- c(ylim[1] - margin[1] - maxv, ylim[2] + margin[3] + maxv)
   }
   if (!add) {
-    plot(0, 0, type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim,
-      axes = axes, frame = frame, asp = asp, main = main, sub = sub)
+    plot(0, 0,
+      type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim,
+      axes = axes, frame = frame, asp = asp, main = main, sub = sub
+    )
   }
 
   ################################################################
@@ -191,7 +192,8 @@ plot.igraph <- function(x,
       expand.by = mark.expand[g] / 200,
       shape = mark.shape[g],
       col = mark.col[g],
-      border = mark.border[g])
+      border = mark.border[g]
+    )
   }
 
   ################################################################
@@ -224,7 +226,8 @@ plot.igraph <- function(x,
   if (length(unique(shape)) == 1) {
     ## same vertex shape for all vertices
     ec <- .igraph.shapes[[shape[1]]]$clip(edge.coords, el,
-      params = params, end = "both")
+      params = params, end = "both"
+    )
   } else {
     ## different vertex shapes, do it by "endpoint"
     shape <- rep(shape, length.out = vcount(graph))
@@ -232,12 +235,14 @@ plot.igraph <- function(x,
     ec[, 1:2] <- t(sapply(seq(length.out = nrow(el)), function(x) {
       .igraph.shapes[[shape[el[x, 1]]]]$clip(edge.coords[x, , drop = FALSE],
         el[x, , drop = FALSE],
-        params = params, end = "from")
+        params = params, end = "from"
+      )
     }))
     ec[, 3:4] <- t(sapply(seq(length.out = nrow(el)), function(x) {
       .igraph.shapes[[shape[el[x, 2]]]]$clip(edge.coords[x, , drop = FALSE],
         el[x, , drop = FALSE],
-        params = params, end = "to")
+        params = params, end = "to"
+      )
     }))
   }
 
@@ -252,7 +257,6 @@ plot.igraph <- function(x,
     }
 
     point.on.cubic.bezier <- function(cp, t) {
-
       c <- 3 * (cp[2, ] - cp[1, ])
       b <- 3 * (cp[3, ] - cp[2, ]) - c
       a <- cp[4, ] - cp[1, ] - c - b
@@ -274,24 +278,29 @@ plot.igraph <- function(x,
       if (arr == 1 || arr == 3) {
         igraph.Arrows(p[1, ncol(p) - 1], p[2, ncol(p) - 1], p[1, ncol(p)], p[2, ncol(p)],
           sh.col = color, h.col = color, size = arrow.size,
-          sh.lwd = width, h.lwd = width, open = FALSE, code = 2, width = arr.w)
+          sh.lwd = width, h.lwd = width, open = FALSE, code = 2, width = arr.w
+        )
       }
       if (arr == 2 || arr == 3) {
         igraph.Arrows(p[1, 2], p[2, 2], p[1, 1], p[2, 1],
           sh.col = color, h.col = color, size = arrow.size,
-          sh.lwd = width, h.lwd = width, open = FALSE, code = 2, width = arr.w)
+          sh.lwd = width, h.lwd = width, open = FALSE, code = 2, width = arr.w
+        )
       }
     }
 
     loop <- function(x0, y0, cx = x0, cy = y0, color, angle = 0, label = NA,
                      width = 1, arr = 2, lty = 1, arrow.size = arrow.size,
                      arr.w = arr.w, lab.x, lab.y, loopSize = loop.size) {
-
       rad <- angle
       center <- c(cx, cy)
-      cp <- matrix(c(x0, y0, x0 + .4 * loopSize, y0 + .2 * loopSize,
-        x0 + .4 * loopSize, y0 - .2 * loopSize, x0, y0),
-      ncol = 2, byrow = TRUE)
+      cp <- matrix(
+        c(
+          x0, y0, x0 + .4 * loopSize, y0 + .2 * loopSize,
+          x0 + .4 * loopSize, y0 - .2 * loopSize, x0, y0
+        ),
+        ncol = 2, byrow = TRUE
+      )
       phi <- atan2(cp[, 2] - center[2], cp[, 1] - center[1])
       r <- sqrt((cp[, 1] - center[1])**2 + (cp[, 2] - center[2])**2)
 
@@ -324,8 +333,10 @@ plot.igraph <- function(x,
           ly <- lab.y
         }
 
-        text(lx, ly, label, col = edge.label.color, font = edge.label.font,
-          family = edge.label.family, cex = edge.label.cex)
+        text(lx, ly, label,
+          col = edge.label.color, font = edge.label.font,
+          family = edge.label.family, cex = edge.label.cex
+        )
       }
     }
 
@@ -362,7 +373,8 @@ plot.igraph <- function(x,
     mapply(loop, xx0, yy0,
       color = ec, angle = -la, label = loop.labels, lty = lty,
       width = ew, arr = arr, arrow.size = asize, arr.w = arrow.width,
-      lab.x = loop.labx, lab.y = loop.laby)
+      lab.x = loop.labx, lab.y = loop.laby
+    )
   }
 
   ################################################################
@@ -387,10 +399,12 @@ plot.igraph <- function(x,
       curved <- curved[nonloops.e]
     }
     if (length(unique(arrow.mode)) == 1) {
-      lc <- igraph.Arrows(x0, y0, x1, y1, h.col = edge.color, sh.col = edge.color,
+      lc <- igraph.Arrows(x0, y0, x1, y1,
+        h.col = edge.color, sh.col = edge.color,
         sh.lwd = edge.width, h.lwd = 1, open = FALSE, code = arrow.mode[1],
         sh.lty = edge.lty, h.lty = 1, size = arrow.size,
-        width = arrow.width, curved = curved)
+        width = arrow.width, curved = curved
+      )
       lc.x <- lc$lab.x
       lc.y <- lc$lab.y
     } else {
@@ -415,7 +429,8 @@ plot.igraph <- function(x,
         lc <- igraph.Arrows(x0[valid], y0[valid], x1[valid], y1[valid],
           code = code, sh.col = ec, h.col = ec, sh.lwd = ew, h.lwd = 1,
           h.lty = 1, sh.lty = el, open = FALSE, size = arrow.size,
-          width = arrow.width, curved = curved[valid])
+          width = arrow.width, curved = curved[valid]
+        )
         lc.x[valid] <- lc$lab.x
         lc.y[valid] <- lc$lab.y
       }
@@ -426,8 +441,10 @@ plot.igraph <- function(x,
     if (!is.null(elab.y)) {
       lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
     }
-    text(lc.x, lc.y, labels = edge.labels, col = edge.label.color,
-      family = edge.label.family, font = edge.label.font, cex = edge.label.cex)
+    text(lc.x, lc.y,
+      labels = edge.labels, col = edge.label.color,
+      family = edge.label.family, font = edge.label.font, cex = edge.label.cex
+    )
   }
 
   rm(x0, y0, x1, y1)
@@ -439,8 +456,10 @@ plot.igraph <- function(x,
       .igraph.shapes[[shape[1]]]$plot(layout, params = params)
     } else {
       sapply(seq(length.out = vcount(graph)), function(x) {
-        .igraph.shapes[[shape[x]]]$plot(layout[x, , drop = FALSE], v = x,
-          params = params)
+        .igraph.shapes[[shape[x]]]$plot(layout[x, , drop = FALSE],
+          v = x,
+          params = params
+        )
       })
     }
   }
@@ -455,14 +474,18 @@ plot.igraph <- function(x,
     (vertex.size + 6 * 8 * log10(2)) / 200
   if (vc > 0) {
     if (length(label.family) == 1) {
-      text(x, y, labels = labels, col = label.color, family = label.family,
-        font = label.font, cex = label.cex)
+      text(x, y,
+        labels = labels, col = label.color, family = label.family,
+        font = label.font, cex = label.cex
+      )
     } else {
       if1 <- function(vect, idx) if (length(vect) == 1) vect else vect[idx]
       sapply(seq_len(vcount(graph)), function(v) {
-        text(x[v], y[v], labels = if1(labels, v), col = if1(label.color, v),
+        text(x[v], y[v],
+          labels = if1(labels, v), col = if1(label.color, v),
           family = if1(label.family, v), font = if1(label.font, v),
-          cex = if1(label.cex, v))
+          cex = if1(label.cex, v)
+        )
       })
     }
   }
@@ -507,7 +530,6 @@ rglplot <- function(x, ...)
 #' @method rglplot igraph
 #' @export
 rglplot.igraph <- function(x, ...) {
-
   graph <- x
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -521,45 +543,67 @@ rglplot.igraph <- function(x, ...) {
     dist <- sqrt(sum((v2 - v1)^2)) # distance of the centers
 
     if (am == 0) {
-      edge <- rgl::qmesh3d(c(-ew / 2, -ew / 2, dist, 1, ew / 2, -ew / 2, dist, 1, ew / 2, ew / 2, dist, 1,
-        -ew / 2, ew / 2, dist, 1, -ew / 2, -ew / 2, 0, 1, ew / 2, -ew / 2, 0, 1,
-        ew / 2, ew / 2, 0, 1, -ew / 2, ew / 2, 0, 1),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8))
+      edge <- rgl::qmesh3d(
+        c(
+          -ew / 2, -ew / 2, dist, 1, ew / 2, -ew / 2, dist, 1, ew / 2, ew / 2, dist, 1,
+          -ew / 2, ew / 2, dist, 1, -ew / 2, -ew / 2, 0, 1, ew / 2, -ew / 2, 0, 1,
+          ew / 2, ew / 2, 0, 1, -ew / 2, ew / 2, 0, 1
+        ),
+        c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8)
+      )
     } else if (am == 1) {
-      edge <- rgl::qmesh3d(c(-ew / 2, -ew / 2, dist, 1, ew / 2, -ew / 2, dist, 1,
-        ew / 2, ew / 2, dist, 1, -ew / 2, ew / 2, dist, 1,
-        -ew / 2, -ew / 2, al + r1, 1, ew / 2, -ew / 2, al + r1, 1,
-        ew / 2, ew / 2, al + r1, 1, -ew / 2, ew / 2, al + r1, 1,
-        -aw / 2, -aw / 2, al + r1, 1, aw / 2, -aw / 2, al + r1, 1,
-        aw / 2, aw / 2, al + r1, 1, -aw / 2, aw / 2, al + r1, 1, 0, 0, r1, 1),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
-        9, 10, 11, 12, 9, 12, 13, 13, 9, 10, 13, 13, 10, 11, 13, 13,
-        11, 12, 13, 13))
+      edge <- rgl::qmesh3d(
+        c(
+          -ew / 2, -ew / 2, dist, 1, ew / 2, -ew / 2, dist, 1,
+          ew / 2, ew / 2, dist, 1, -ew / 2, ew / 2, dist, 1,
+          -ew / 2, -ew / 2, al + r1, 1, ew / 2, -ew / 2, al + r1, 1,
+          ew / 2, ew / 2, al + r1, 1, -ew / 2, ew / 2, al + r1, 1,
+          -aw / 2, -aw / 2, al + r1, 1, aw / 2, -aw / 2, al + r1, 1,
+          aw / 2, aw / 2, al + r1, 1, -aw / 2, aw / 2, al + r1, 1, 0, 0, r1, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
+          9, 10, 11, 12, 9, 12, 13, 13, 9, 10, 13, 13, 10, 11, 13, 13,
+          11, 12, 13, 13
+        )
+      )
     } else if (am == 2) {
       box <- dist - r2 - al
-      edge <- rgl::qmesh3d(c(-ew / 2, -ew / 2, box, 1, ew / 2, -ew / 2, box, 1, ew / 2, ew / 2, box, 1,
-        -ew / 2, ew / 2, box, 1, -ew / 2, -ew / 2, 0, 1, ew / 2, -ew / 2, 0, 1,
-        ew / 2, ew / 2, 0, 1, -ew / 2, ew / 2, 0, 1,
-        -aw / 2, -aw / 2, box, 1, aw / 2, -aw / 2, box, 1, aw / 2, aw / 2, box, 1,
-        -aw / 2, aw / 2, box, 1, 0, 0, box + al, 1),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
-        9, 10, 11, 12, 9, 12, 13, 13, 9, 10, 13, 13, 10, 11, 13, 13,
-        11, 12, 13, 13))
+      edge <- rgl::qmesh3d(
+        c(
+          -ew / 2, -ew / 2, box, 1, ew / 2, -ew / 2, box, 1, ew / 2, ew / 2, box, 1,
+          -ew / 2, ew / 2, box, 1, -ew / 2, -ew / 2, 0, 1, ew / 2, -ew / 2, 0, 1,
+          ew / 2, ew / 2, 0, 1, -ew / 2, ew / 2, 0, 1,
+          -aw / 2, -aw / 2, box, 1, aw / 2, -aw / 2, box, 1, aw / 2, aw / 2, box, 1,
+          -aw / 2, aw / 2, box, 1, 0, 0, box + al, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
+          9, 10, 11, 12, 9, 12, 13, 13, 9, 10, 13, 13, 10, 11, 13, 13,
+          11, 12, 13, 13
+        )
+      )
     } else {
-      edge <- rgl::qmesh3d(c(-ew / 2, -ew / 2, dist - al - r2, 1, ew / 2, -ew / 2, dist - al - r2, 1,
-        ew / 2, ew / 2, dist - al - r2, 1, -ew / 2, ew / 2, dist - al - r2, 1,
-        -ew / 2, -ew / 2, r1 + al, 1, ew / 2, -ew / 2, r1 + al, 1,
-        ew / 2, ew / 2, r1 + al, 1, -ew / 2, ew / 2, r1 + al, 1,
-        -aw / 2, -aw / 2, dist - al - r2, 1, aw / 2, -aw / 2, dist - al - r2, 1,
-        aw / 2, aw / 2, dist - al - r2, 1, -aw / 2, aw / 2, dist - al - r2, 1,
-        -aw / 2, -aw / 2, r1 + al, 1, aw / 2, -aw / 2, r1 + al, 1,
-        aw / 2, aw / 2, r1 + al, 1, -aw / 2, aw / 2, r1 + al, 1,
-        0, 0, dist - r2, 1, 0, 0, r1, 1),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
-        9, 10, 11, 12, 9, 12, 17, 17, 9, 10, 17, 17, 10, 11, 17, 17,
-        11, 12, 17, 17,
-        13, 14, 15, 16, 13, 16, 18, 18, 13, 14, 18, 18, 14, 15, 18, 18,
-        15, 16, 18, 18))
+      edge <- rgl::qmesh3d(
+        c(
+          -ew / 2, -ew / 2, dist - al - r2, 1, ew / 2, -ew / 2, dist - al - r2, 1,
+          ew / 2, ew / 2, dist - al - r2, 1, -ew / 2, ew / 2, dist - al - r2, 1,
+          -ew / 2, -ew / 2, r1 + al, 1, ew / 2, -ew / 2, r1 + al, 1,
+          ew / 2, ew / 2, r1 + al, 1, -ew / 2, ew / 2, r1 + al, 1,
+          -aw / 2, -aw / 2, dist - al - r2, 1, aw / 2, -aw / 2, dist - al - r2, 1,
+          aw / 2, aw / 2, dist - al - r2, 1, -aw / 2, aw / 2, dist - al - r2, 1,
+          -aw / 2, -aw / 2, r1 + al, 1, aw / 2, -aw / 2, r1 + al, 1,
+          aw / 2, aw / 2, r1 + al, 1, -aw / 2, aw / 2, r1 + al, 1,
+          0, 0, dist - r2, 1, 0, 0, r1, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7, 4, 1, 5, 8,
+          9, 10, 11, 12, 9, 12, 17, 17, 9, 10, 17, 17, 10, 11, 17, 17,
+          11, 12, 17, 17,
+          13, 14, 15, 16, 13, 16, 18, 18, 13, 14, 18, 18, 14, 15, 18, 18,
+          15, 16, 18, 18
+        )
+      )
     }
 
 
@@ -585,78 +629,90 @@ rglplot.igraph <- function(x, ...) {
     gap <- wi - 2 * ew
 
     if (am == 0) {
-      edge <- rgl::qmesh3d(c(-wi / 2, -ew / 2, 0, 1, -gap / 2, -ew / 2, 0, 1,
-        -gap / 2, ew / 2, 0, 1, -wi / 2, ew / 2, 0, 1,
-        -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
-        -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
-        wi / 2, -ew / 2, 0, 1, gap / 2, -ew / 2, 0, 1,
-        gap / 2, ew / 2, 0, 1, wi / 2, ew / 2, 0, 1,
-        wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
-        gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
-        -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
-        wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1
-      ),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
-        1, 4, 18, 17,
-        9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
-        11, 12, 16, 15, 9, 12, 20, 19,
-        5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14
-      ))
+      edge <- rgl::qmesh3d(
+        c(
+          -wi / 2, -ew / 2, 0, 1, -gap / 2, -ew / 2, 0, 1,
+          -gap / 2, ew / 2, 0, 1, -wi / 2, ew / 2, 0, 1,
+          -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
+          -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
+          wi / 2, -ew / 2, 0, 1, gap / 2, -ew / 2, 0, 1,
+          gap / 2, ew / 2, 0, 1, wi / 2, ew / 2, 0, 1,
+          wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
+          gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
+          -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
+          wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
+          1, 4, 18, 17,
+          9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
+          11, 12, 16, 15, 9, 12, 20, 19,
+          5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14
+        )
+      )
     } else if (am == 1 || am == 2) {
-      edge <- rgl::qmesh3d(c(-wi / 2, -ew / 2, r + al, 1, -gap / 2, -ew / 2, r + al, 1,
-        -gap / 2, ew / 2, r + al, 1, -wi / 2, ew / 2, r + al, 1,
-        -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
-        -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
-        wi / 2, -ew / 2, 0, 1, gap / 2, -ew / 2, 0, 1,
-        gap / 2, ew / 2, 0, 1, wi / 2, ew / 2, 0, 1,
-        wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
-        gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
-        -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
-        wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1,
-        # the arrow
-        -wi2 / 2, -aw / 2, r + al, 1, -wi2 / 2 + aw, -aw / 2, r + al, 1,
-        -wi2 / 2 + aw, aw / 2, r + al, 1, -wi2 / 2, aw / 2, r + al, 1,
-        -wi2 / 2 + aw / 2, 0, r, 1
-      ),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
-        1, 4, 18, 17,
-        9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
-        11, 12, 16, 15, 9, 12, 20, 19,
-        5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14,
-        # the arrow
-        21, 22, 23, 24, 21, 22, 25, 25, 22, 23, 25, 25, 23, 24, 25, 25,
-        21, 24, 25, 25
-      ))
+      edge <- rgl::qmesh3d(
+        c(
+          -wi / 2, -ew / 2, r + al, 1, -gap / 2, -ew / 2, r + al, 1,
+          -gap / 2, ew / 2, r + al, 1, -wi / 2, ew / 2, r + al, 1,
+          -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
+          -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
+          wi / 2, -ew / 2, 0, 1, gap / 2, -ew / 2, 0, 1,
+          gap / 2, ew / 2, 0, 1, wi / 2, ew / 2, 0, 1,
+          wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
+          gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
+          -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
+          wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1,
+          # the arrow
+          -wi2 / 2, -aw / 2, r + al, 1, -wi2 / 2 + aw, -aw / 2, r + al, 1,
+          -wi2 / 2 + aw, aw / 2, r + al, 1, -wi2 / 2, aw / 2, r + al, 1,
+          -wi2 / 2 + aw / 2, 0, r, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
+          1, 4, 18, 17,
+          9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
+          11, 12, 16, 15, 9, 12, 20, 19,
+          5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14,
+          # the arrow
+          21, 22, 23, 24, 21, 22, 25, 25, 22, 23, 25, 25, 23, 24, 25, 25,
+          21, 24, 25, 25
+        )
+      )
     } else if (am == 3) {
-      edge <- rgl::qmesh3d(c(-wi / 2, -ew / 2, r + al, 1, -gap / 2, -ew / 2, r + al, 1,
-        -gap / 2, ew / 2, r + al, 1, -wi / 2, ew / 2, r + al, 1,
-        -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
-        -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
-        wi / 2, -ew / 2, r + al, 1, gap / 2, -ew / 2, r + al, 1,
-        gap / 2, ew / 2, r + al, 1, wi / 2, ew / 2, r + al, 1,
-        wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
-        gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
-        -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
-        wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1,
-        # the arrows
-        -wi2 / 2, -aw / 2, r + al, 1, -wi2 / 2 + aw, -aw / 2, r + al, 1,
-        -wi2 / 2 + aw, aw / 2, r + al, 1, -wi2 / 2, aw / 2, r + al, 1,
-        -wi2 / 2 + aw / 2, 0, r, 1,
-        wi2 / 2, -aw / 2, r + al, 1, wi2 / 2 - aw, -aw / 2, r + al, 1,
-        wi2 / 2 - aw, aw / 2, r + al, 1, wi2 / 2, aw / 2, r + al, 1,
-        wi2 / 2 - aw / 2, 0, r, 1
-      ),
-      c(1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
-        1, 4, 18, 17,
-        9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
-        11, 12, 16, 15, 9, 12, 20, 19,
-        5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14,
-        # the arrows
-        21, 22, 23, 24, 21, 22, 25, 25, 22, 23, 25, 25, 23, 24, 25, 25,
-        21, 24, 25, 25,
-        26, 27, 28, 29, 26, 27, 30, 30, 27, 28, 30, 30, 28, 29, 30, 30,
-        26, 29, 30, 30
-      ))
+      edge <- rgl::qmesh3d(
+        c(
+          -wi / 2, -ew / 2, r + al, 1, -gap / 2, -ew / 2, r + al, 1,
+          -gap / 2, ew / 2, r + al, 1, -wi / 2, ew / 2, r + al, 1,
+          -wi / 2, -ew / 2, hi - ew + r, 1, -gap / 2, -ew / 2, hi - ew + r, 1,
+          -gap / 2, ew / 2, hi - ew + r, 1, -wi / 2, ew / 2, hi - ew + r, 1,
+          wi / 2, -ew / 2, r + al, 1, gap / 2, -ew / 2, r + al, 1,
+          gap / 2, ew / 2, r + al, 1, wi / 2, ew / 2, r + al, 1,
+          wi / 2, -ew / 2, hi - ew + r, 1, gap / 2, -ew / 2, hi - ew + r, 1,
+          gap / 2, ew / 2, hi - ew + r, 1, wi / 2, ew / 2, hi - ew + r, 1,
+          -wi / 2, -ew / 2, hi + r, 1, -wi / 2, ew / 2, hi + r, 1,
+          wi / 2, -ew / 2, hi + r, 1, wi / 2, ew / 2, hi + r, 1,
+          # the arrows
+          -wi2 / 2, -aw / 2, r + al, 1, -wi2 / 2 + aw, -aw / 2, r + al, 1,
+          -wi2 / 2 + aw, aw / 2, r + al, 1, -wi2 / 2, aw / 2, r + al, 1,
+          -wi2 / 2 + aw / 2, 0, r, 1,
+          wi2 / 2, -aw / 2, r + al, 1, wi2 / 2 - aw, -aw / 2, r + al, 1,
+          wi2 / 2 - aw, aw / 2, r + al, 1, wi2 / 2, aw / 2, r + al, 1,
+          wi2 / 2 - aw / 2, 0, r, 1
+        ),
+        c(
+          1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 6, 5, 2, 3, 7, 6, 3, 4, 8, 7,
+          1, 4, 18, 17,
+          9, 10, 11, 12, 13, 14, 15, 16, 9, 10, 14, 13, 10, 11, 15, 14,
+          11, 12, 16, 15, 9, 12, 20, 19,
+          5, 13, 19, 17, 17, 18, 20, 19, 8, 16, 20, 18, 6, 7, 15, 14,
+          # the arrows
+          21, 22, 23, 24, 21, 22, 25, 25, 22, 23, 25, 25, 23, 24, 25, 25,
+          21, 24, 25, 25,
+          26, 27, 28, 29, 26, 27, 30, 30, 27, 28, 30, 30, 28, 29, 30, 30,
+          26, 29, 30, 30
+        )
+      )
     }
 
     # rotate and shift to its position
@@ -741,15 +797,16 @@ rglplot.igraph <- function(x, ...) {
       }
       create.loop(v1, r1, ec, ew, am, la, la2, arrow.size)
     }
-
   }
 
   # add the vertices
   if (length(vertex.size) == 1) {
     vertex.size <- rep(vertex.size, nrow(layout))
   }
-  rgl::rgl.spheres(layout[, 1], layout[, 2], layout[, 3], radius = vertex.size,
-    col = vertex.color)
+  rgl::rgl.spheres(layout[, 1], layout[, 2], layout[, 3],
+    radius = vertex.size,
+    col = vertex.color
+  )
 
   # add the labels, 'l1' is a stupid workaround of a mysterious rgl bug
   labels[is.na(labels)] <- ""
@@ -762,7 +819,9 @@ rglplot.igraph <- function(x, ...) {
   labels[1] <- ""
   rgl::rgl.texts(x, y, z, labels, col = label.color, adj = 0)
   rgl::rgl.texts(c(0, x[1]), c(0, y[1]), c(0, z[1]),
-    c("", l1), col = c(label.color[1], label.color[1]), adj = 0)
+    c("", l1),
+    col = c(label.color[1], label.color[1]), adj = 0
+  )
 
   edge.labels[is.na(edge.labels)] <- ""
   if (any(edge.labels != "")) {
@@ -773,7 +832,8 @@ rglplot.igraph <- function(x, ...) {
     z0 <- layout[, 3][el[, 1]]
     z1 <- layout[, 4][el[, 2]]
     rgl::rgl.texts((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, edge.labels,
-      col = label.color)
+      col = label.color
+    )
   }
 
   # draw everything
@@ -838,13 +898,11 @@ igraph.Arrows <-
     }
     if (is.logical(curved) && all(!curved) ||
       is.numeric(curved) && all(!curved)) {
-
       segments(x1 + x1d, y1 + y1d, x2 + x2d, y2 + y2d, lwd = sh.lwd, col = sh.col, lty = sh.lty)
       phi <- atan2(y1 - y2, x1 - x2)
       r <- sqrt((x1 - x2)^2 + (y1 - y2)^2)
       lc.x <- x2 + 2 / 3 * r * cos(phi)
       lc.y <- y2 + 2 / 3 * r * sin(phi)
-
     } else {
       if (is.numeric(curved)) {
         lambda <- curved
@@ -870,15 +928,17 @@ igraph.Arrows <-
         ## Straight line?
         if (lambda[i] == 0) {
           segments(c.x1[i], c.y1[i], c.x2[i], c.y2[i],
-            lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
+            lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i]
+          )
           phi <- atan2(y1[i] - y2[i], x1[i] - x2[i])
           r <- sqrt((x1[i] - x2[i])^2 + (y1[i] - y2[i])^2)
           lc.x[i] <- x2[i] + 2 / 3 * r * cos(phi)
           lc.y[i] <- y2[i] + 2 / 3 * r * sin(phi)
-
         } else {
-          spl <- xspline(x = c(c.x1[i], spx[i], c.x2[i]),
-            y = c(c.y1[i], spy[i], c.y2[i]), shape = 1, draw = FALSE)
+          spl <- xspline(
+            x = c(c.x1[i], spx[i], c.x2[i]),
+            y = c(c.y1[i], spy[i], c.y2[i]), shape = 1, draw = FALSE
+          )
           lines(spl, lwd = sh.lwd[i], col = sh.col[i], lty = sh.lty[i])
           if (code %in% c(2, 3)) {
             x1[i] <- spl$x[3 * length(spl$x) / 4]
@@ -904,10 +964,12 @@ igraph.Arrows <-
       r.arr <- rep(r.arr, lx)
       if (open) lines((p.x2 + r.arr * cos(ttheta) / uin[1]),
         (p.y2 + r.arr * sin(ttheta) / uin[2]),
-        lwd = h.lwd, col = h.col.bo, lty = h.lty) else
+        lwd = h.lwd, col = h.col.bo, lty = h.lty
+      ) else
         polygon(p.x2 + r.arr * cos(ttheta) / uin[1], p.y2 + r.arr * sin(ttheta) / uin[2],
           col = h.col, lwd = h.lwd,
-          border = h.col.bo, lty = h.lty)
+          border = h.col.bo, lty = h.lty
+        )
     }
 
     ## backward arrow head
@@ -925,26 +987,28 @@ igraph.Arrows <-
 
       if (open) lines((p.x2 + r.arr * cos(ttheta) / uin[1]),
         (p.y2 + r.arr * sin(ttheta) / uin[2]),
-        lwd = h.lwd, col = h.col.bo, lty = h.lty) else
+        lwd = h.lwd, col = h.col.bo, lty = h.lty
+      ) else
         polygon(p.x2 + r.arr * cos(ttheta) / uin[1], p.y2 + r.arr * sin(ttheta) / uin[2],
           col = h.col, lwd = h.lwd,
-          border = h.col.bo, lty = h.lty)
+          border = h.col.bo, lty = h.lty
+        )
     }
 
     list(lab.x = lc.x, lab.y = lc.y)
-
   } # Arrows
 
 #' @importFrom graphics xspline
 igraph.polygon <- function(points, vertex.size = 15 / 200, expand.by = 15 / 200,
                            shape = 1 / 2, col = "#ff000033", border = NA) {
-
   by <- expand.by
-  pp <- rbind(points,
+  pp <- rbind(
+    points,
     cbind(points[, 1] - vertex.size - by, points[, 2]),
     cbind(points[, 1] + vertex.size + by, points[, 2]),
     cbind(points[, 1], points[, 2] - vertex.size - by),
-    cbind(points[, 1], points[, 2] + vertex.size + by))
+    cbind(points[, 1], points[, 2] + vertex.size + by)
+  )
 
   cl <- convex_hull(pp)
   xspline(cl$rescoords, shape = shape, open = FALSE, col = col, border = border)

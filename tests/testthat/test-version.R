@@ -12,5 +12,4 @@ test_that("igraph_version returns a version string", {
   )
 
   expect_true(grepl(regex, igraph_version()))
-
 })

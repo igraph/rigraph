@@ -157,7 +157,12 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
     stop("Not a graph object")
   }
   nodes <- as.integer(nodes)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   loops <- as.logical(loops)
 
   on.exit(.Call(C_R_igraph_finalizer))

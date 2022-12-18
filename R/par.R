@@ -20,7 +20,8 @@
 #
 ###################################################################
 
-.igraph.pars <- list("print.vertex.attributes" = FALSE,
+.igraph.pars <- list(
+  "print.vertex.attributes" = FALSE,
   "print.edge.attributes" = FALSE,
   "print.graph.attributes" = FALSE,
   "verbose" = FALSE,
@@ -173,7 +174,8 @@ igraph_i_options <- function(..., .in = parent.frame()) {
     switch(mode(arg),
       list = temp <- arg,
       character = return(.igraph.pars[arg]),
-      stop("invalid argument: ", sQuote(arg)))
+      stop("invalid argument: ", sQuote(arg))
+    )
   }
   if (length(temp) == 0) return(get_all_options())
 

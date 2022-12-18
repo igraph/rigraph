@@ -1,5 +1,4 @@
 test_that("I can index a vs twice", {
-
   edges <- data.frame(
     stringsAsFactors = TRUE,
     from = c("BOS", "JFK", "DEN", "BOS", "JFK", "DEN"),
@@ -21,7 +20,6 @@ test_that("I can index a vs twice", {
 })
 
 test_that("I can index an es twice", {
-
   edges <- data.frame(
     stringsAsFactors = TRUE,
     from = c("BOS", "JFK", "DEN", "BOS", "JFK", "DEN"),

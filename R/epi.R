@@ -152,7 +152,6 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
                      median_color = NULL, quantile_color = NULL,
                      lwd.median = 2, lwd.quantile = 2, lty.quantile = 3,
                      xlim = NULL, ylim = NULL, xlab = "Time", ylab = NULL, ...) {
-
   sir <- x
 
   if (!inherits(sir, "sir")) {
@@ -208,13 +207,17 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
     time.bin <- time_bins(sir, middle = TRUE)
   }
   if (median) {
-    lines(time.bin, median(sir)[[comp]], type = "l",
-      lwd = lwd.median, col = median_color)
+    lines(time.bin, median(sir)[[comp]],
+      type = "l",
+      lwd = lwd.median, col = median_color
+    )
   }
   for (i in seq_along(quantiles)) {
     my.ql <- quantile(sir, comp, quantiles[i])
-    lines(time.bin, my.ql, type = "l", lty = lty.quantile,
-      lwd = lwd.quantile, col = quantile_color[i])
+    lines(time.bin, my.ql,
+      type = "l", lty = lty.quantile,
+      lwd = lwd.quantile, col = quantile_color[i]
+    )
   }
 
   invisible()

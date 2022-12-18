@@ -1,5 +1,4 @@
 test_that("Kamada-Kawai layout generator works", {
-
   set.seed(42)
 
   get_radii <- function(layout) {
@@ -47,11 +46,9 @@ test_that("Kamada-Kawai layout generator works", {
     Sys.info()["machine"] == "i686") {
     expect_that(sum(l), equals(0.0631144692360025))
   }
-
 })
 
 test_that("3D Kamada-Kawai layout generator works", {
-
   skip_on_cran()
   skip_on_ci()
 
@@ -60,5 +57,4 @@ test_that("3D Kamada-Kawai layout generator works", {
   g <- make_star(30)
   l <- layout_with_kk(g, maxiter = 5000, dim = 3)
   expect_that(sum(l), equals(-54.8841976017082))
-
 })

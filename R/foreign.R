@@ -44,7 +44,6 @@ read.graph.toraw <- function(filename) {
 }
 
 write.graph.fromraw <- function(buffer, file) {
-
   closeit <- FALSE
   if (is.character(file)) {
     file <- file(file, open = "w+b")
@@ -101,10 +100,11 @@ write.graph.fromraw <- function(buffer, file) {
 #' @seealso \code{\link{write_graph}}
 #' @keywords graphs
 #' @export
-read_graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl",
-                         "graphml", "dimacs", "graphdb", "gml", "dl"),
+read_graph <- function(file, format = c(
+                         "edgelist", "pajek", "ncol", "lgl",
+                         "graphml", "dimacs", "graphdb", "gml", "dl"
+                       ),
                        ...) {
-
   if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
     length(grep("~", file, fixed = TRUE)) > 0) {
     buffer <- read.graph.toraw(file)
@@ -165,9 +165,10 @@ read_graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl",
 #'   unlink(file)
 #' }
 #'
-write_graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lgl",
-                          "graphml", "dimacs", "gml", "dot", "leda"), ...) {
-
+write_graph <- function(graph, file, format = c(
+                          "edgelist", "pajek", "ncol", "lgl",
+                          "graphml", "dimacs", "gml", "dot", "leda"
+                        ), ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -208,17 +209,17 @@ write_graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lg
 
 read.graph.edgelist <- function(file, n = 0,
                                 directed = TRUE, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (edgelist format)")
   }
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_read_graph_edgelist, file,
-    as.numeric(n), as.logical(directed))
+  .Call(
+    C_R_igraph_read_graph_edgelist, file,
+    as.numeric(n), as.logical(directed)
+  )
 }
 
 write.graph.edgelist <- function(graph, file, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (edgelist format)")
   }
@@ -233,14 +234,19 @@ write.graph.edgelist <- function(graph, file, ...) {
 read.graph.ncol <- function(file, predef = character(0), names = TRUE,
                             weights = c("auto", "yes", "no"),
                             directed = FALSE, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (NCOL format)")
   }
-  weights <- switch(igraph.match.arg(weights), "no" = 0, "yes" = 1, "auto" = 2)
+  weights <- switch(igraph.match.arg(weights),
+    "no" = 0,
+    "yes" = 1,
+    "auto" = 2
+  )
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_read_graph_ncol, file, as.character(predef),
-    as.logical(names), as.numeric(weights), as.logical(directed))
+  .Call(
+    C_R_igraph_read_graph_ncol, file, as.character(predef),
+    as.logical(names), as.numeric(weights), as.logical(directed)
+  )
 }
 
 write.graph.ncol <- function(graph, file,
@@ -258,22 +264,29 @@ write.graph.ncol <- function(graph, file,
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_write_graph_ncol, graph, file,
-    names, weights)
+  .Call(
+    C_R_igraph_write_graph_ncol, graph, file,
+    names, weights
+  )
 }
 
 read.graph.lgl <- function(file, names = TRUE,
                            weights = c("auto", "yes", "no"),
                            directed = FALSE,
                            ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (LGL format)")
   }
-  weights <- switch(igraph.match.arg(weights), "no" = 0, "yes" = 1, "auto" = 2)
+  weights <- switch(igraph.match.arg(weights),
+    "no" = 0,
+    "yes" = 1,
+    "auto" = 2
+  )
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_read_graph_lgl, file,
-    as.logical(names), as.numeric(weights), as.logical(directed))
+  .Call(
+    C_R_igraph_read_graph_lgl, file,
+    as.logical(names), as.numeric(weights), as.logical(directed)
+  )
 }
 
 write.graph.lgl <- function(graph, file,
@@ -292,12 +305,13 @@ write.graph.lgl <- function(graph, file,
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_write_graph_lgl, graph, file,
-    names, weights, as.logical(isolates))
+  .Call(
+    C_R_igraph_write_graph_lgl, graph, file,
+    names, weights, as.logical(isolates)
+  )
 }
 
 read.graph.pajek <- function(file, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (Pajek format)")
   }
@@ -312,7 +326,6 @@ read.graph.pajek <- function(file, ...) {
 }
 
 write.graph.pajek <- function(graph, file, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (Pajek format)")
   }
@@ -321,7 +334,6 @@ write.graph.pajek <- function(graph, file, ...) {
 }
 
 read.graph.dimacs <- function(file, directed = TRUE, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (DIMACS format)")
   }
@@ -343,7 +355,6 @@ read.graph.dimacs <- function(file, directed = TRUE, ...) {
 
 write.graph.dimacs <- function(graph, file,
                                source = NULL, target = NULL, capacity = NULL, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (DIMACS format)")
   }
@@ -358,8 +369,10 @@ write.graph.dimacs <- function(graph, file,
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_write_graph_dimacs, graph, file, as.numeric(source),
-    as.numeric(target), as.numeric(capacity))
+  .Call(
+    C_R_igraph_write_graph_dimacs, graph, file, as.numeric(source),
+    as.numeric(target), as.numeric(capacity)
+  )
 }
 
 ################################################################
@@ -367,7 +380,6 @@ write.graph.dimacs <- function(graph, file,
 ################################################################
 
 read.graph.graphml <- function(file, index = 0, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (GraphML format)")
   }
@@ -376,7 +388,6 @@ read.graph.graphml <- function(file, index = 0, ...) {
 }
 
 write.graph.graphml <- function(graph, file, prefixAttr = TRUE, ...) {
-
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (GraphML format)")
   }
@@ -508,23 +519,25 @@ graph_from_graphdb <- function(url = NULL,
                                prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
                                base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
                                compressed = TRUE, directed = TRUE) {
-
   if (is.null(nodes) && is.null(url)) {
     stop("The `nodes' or the `url' argument must be non-null")
   }
 
   if (is.null(url)) {
-
     prefixes <- c("iso", "si6", "mcs10", "mcs30", "mcs50", "mcs70", "mcs90")
-    types <- c("r001", "r005", "r01", "r02", "m2D", "m2Dr2", "m2Dr4", "m2Dr6",
+    types <- c(
+      "r001", "r005", "r01", "r02", "m2D", "m2Dr2", "m2Dr4", "m2Dr6",
       "m3D", "m3Dr2", "m3Dr4", "m3Dr6", "m4D", "m4Dr2", "m4Dr4",
-      "m4Dr6", "b03", "b03m", "b06", "b06m", "b09", "b09m")
+      "m4Dr6", "b03", "b03m", "b06", "b06m", "b09", "b09m"
+    )
     sizecode <- if (nodes <= 100) "s" else if (nodes < 2000) "m" else "l" # "l" ????
-    typegroups <- c("rand", "rand", "rand", "rand",
+    typegroups <- c(
+      "rand", "rand", "rand", "rand",
       "m2D", "m2D", "m2D", "m2D",
       "m2D", "m3D", "m3D", "m3D",
       "m4D", "m4D", "m4D", "m4D",
-      "bvg", "bvg", "bvg", "bvg", "bvg", "bvg")
+      "bvg", "bvg", "bvg", "bvg", "bvg", "bvg"
+    )
     typegroup <- typegroups[which(types == type)]
 
     if (!prefix %in% prefixes) {
@@ -534,9 +547,11 @@ graph_from_graphdb <- function(url = NULL,
       stop("Invalid graph type!")
     }
     suff <- if (compressed) ".gz" else ""
-    filename <- paste(sep = "", base, "/", prefix, "/", typegroup, "/", type, "/",
+    filename <- paste(
+      sep = "", base, "/", prefix, "/", typegroup, "/", type, "/",
       prefix, "_", type, "_", sizecode, nodes,
-      ".", pair, formatC(which, width = 2, flag = "0"), suff)
+      ".", pair, formatC(which, width = 2, flag = "0"), suff
+    )
   } else {
     filename <- url
   }

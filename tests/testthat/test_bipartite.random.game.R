@@ -1,5 +1,4 @@
 test_that("sample_bipartite works", {
-
   set.seed(42)
   g1 <- sample_bipartite(10, 5, type = "gnp", p = .1)
   expect_that(g1$name, equals("Bipartite Gnp random graph"))
@@ -40,12 +39,15 @@ test_that("sample_bipartite works", {
 
   #####
 
-  g7 <- sample_bipartite(10, 5, type = "gnp", p = 0.9999, directed = TRUE,
-    mode = "all")
+  g7 <- sample_bipartite(10, 5,
+    type = "gnp", p = 0.9999, directed = TRUE,
+    mode = "all"
+  )
   expect_that(ecount(g7), equals(100))
 
-  g8 <- sample_bipartite(10, 5, type = "gnm", m = 99, directed = TRUE,
-    mode = "all")
+  g8 <- sample_bipartite(10, 5,
+    type = "gnm", m = 99, directed = TRUE,
+    mode = "all"
+  )
   expect_that(ecount(g8), equals(99))
-
 })

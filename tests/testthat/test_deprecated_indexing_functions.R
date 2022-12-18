@@ -1,5 +1,4 @@
 test_that("deprecated indexing functions are indeed deprecated", {
-
   g <- make_ring(10)
 
   expect_warning(V(g)[nei(1)], "is deprecated")
@@ -14,5 +13,4 @@ test_that("deprecated indexing functions are indeed deprecated", {
   expect_warning(E(g)[inc(1)], "is deprecated")
   expect_warning(E(g)[from(1)], "is deprecated")
   expect_warning(E(g)[to(1)], "is deprecated")
-
 })

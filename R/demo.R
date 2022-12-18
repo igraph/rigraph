@@ -49,7 +49,6 @@
 #' }
 #'
 igraph_demo <- function(which) {
-
   if (missing(which)) {
     demodir <- system.file("demo", package = "igraph")
     if (demodir == "") {
@@ -141,16 +140,20 @@ igraph_demo <- function(which) {
     tcltk::tktag.configure(txt, "chunk", "-borderwidth", "1")
     tcltk::tktag.configure(txt, "chunk", "-relief", "sunken")
     if (length(ch) >= 2) {
-      tcltk::tktag.add(txt, "active", paste(sep = "", ch[1], ".0"),
-        paste(sep = "", ch[2] - 1, ".0"))
+      tcltk::tktag.add(
+        txt, "active", paste(sep = "", ch[1], ".0"),
+        paste(sep = "", ch[2] - 1, ".0")
+      )
       tcltk::tktag.configure(txt, "active", "-foreground", "red")
       tcltk::tktag.configure(txt, "active", "-background", "lightgrey")
     }
 
     comm <- grep("^#", demolines)
     for (i in comm) {
-      tcltk::tktag.add(txt, "comment", paste(sep = "", i, ".0"),
-        paste(sep = "", i, ".end"))
+      tcltk::tktag.add(
+        txt, "comment", paste(sep = "", i, ".0"),
+        paste(sep = "", i, ".end")
+      )
     }
     tcltk::tktag.configure(txt, "comment", "-font", "bold")
     tcltk::tktag.configure(txt, "comment", "-foreground", "darkolivegreen")
@@ -166,10 +169,14 @@ igraph_demo <- function(which) {
     .igraphdemo.reset(top, txt, which))
   tcltk::tkconfigure(top, "-menu", main.menu)
 
-  scr <- tcltk::tkscrollbar(top, repeatinterval = 5,
-    command = function(...) tcltk::tkyview(txt, ...))
-  txt <- tcltk::tktext(top, yscrollcommand = function(...) tcltk::tkset(scr, ...),
-    width = 80, height = 40)
+  scr <- tcltk::tkscrollbar(top,
+    repeatinterval = 5,
+    command = function(...) tcltk::tkyview(txt, ...)
+  )
+  txt <- tcltk::tktext(top,
+    yscrollcommand = function(...) tcltk::tkset(scr, ...),
+    width = 80, height = 40
+  )
   but <- tcltk::tkbutton(top, text = "Next", command = function()
     .igraphdemo.next(top, txt))
 

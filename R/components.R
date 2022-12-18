@@ -29,7 +29,10 @@ count_components <- function(graph, mode = c("weak", "strong")) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak" = 1, "strong" = 2)
+  mode <- switch(mode,
+    "weak" = 1,
+    "strong" = 2
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_no_clusters, graph, as.numeric(mode))
@@ -101,14 +104,19 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak" = 1, "strong" = 2)
+  mode <- switch(mode,
+    "weak" = 1,
+    "strong" = 2
+  )
 
   if (is.na(max.comps)) {
     max.comps = -1
   }
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_decompose, graph, as.numeric(mode),
-    as.numeric(max.comps), as.numeric(min.vertices))
+  .Call(
+    C_R_igraph_decompose, graph, as.numeric(mode),
+    as.numeric(max.comps), as.numeric(min.vertices)
+  )
 }
 
 

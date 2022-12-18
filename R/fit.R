@@ -124,7 +124,6 @@
 #'
 fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
                           implementation = c("plfit", "R.mle"), ...) {
-
   implementation <- igraph.match.arg(implementation)
 
   if (implementation == "r.mle") {
@@ -136,7 +135,6 @@ fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
 }
 
 power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
-
   if (length(x) == 0) {
     stop("zero length vector")
   }

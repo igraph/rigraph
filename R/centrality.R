@@ -115,7 +115,6 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #'
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         nobigint = TRUE, normalized = FALSE, cutoff = -1) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -262,7 +261,12 @@ closeness <- function(graph, vids = V(graph),
     stop("Not a graph object")
   }
   vids <- as.igraph.vs(graph, vids)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -294,9 +298,11 @@ estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "al
 
 #' @rdname arpack
 #' @export
-arpack_defaults <- list(bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
+arpack_defaults <- list(
+  bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
   ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
-  mode = 1, start = 0, sigma = 0.0, sigmai = 0.0)
+  mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
+)
 
 #' ARPACK eigenvector calculation
 #'
@@ -478,13 +484,14 @@ arpack_defaults <- list(bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
 #'   f2 <- function(x, extra = NULL) {
 #'     cat("."); as.vector(M %*% x)
 #'   }
-#'   baev <- arpack(f2, sym = TRUE, options = list(n = vcount(g), nev = 3, ncv = 8,
-#'     which = "LM", maxiter = 2000))
+#'   baev <- arpack(f2, sym = TRUE, options = list(
+#'     n = vcount(g), nev = 3, ncv = 8,
+#'     which = "LM", maxiter = 2000
+#'   ))
 #' }
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
                    env = parent.frame(), complex = !sym) {
-
   if (!is.list(options) ||
     (is.null(names(options)) && length(options) != 0)) {
     stop("options must be a named list")
@@ -493,9 +500,12 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
     stop("all options must be named")
   }
   if (any(!names(options) %in% names(arpack_defaults))) {
-    stop("unkown ARPACK option(s): ",
+    stop(
+      "unkown ARPACK option(s): ",
       paste(setdiff(names(options), names(arpack_defaults)),
-        collapse = ", "))
+        collapse = ", "
+      )
+    )
   }
 
   options.tmp <- arpack_defaults
@@ -511,8 +521,10 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
   res <- .Call(C_R_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
-    rew <- arpack.unpack.complex(res$vectors, res$values,
-      min(res$options$nev, res$options$nconv))
+    rew <- arpack.unpack.complex(
+      res$vectors, res$values,
+      min(res$options$nev, res$options$nconv)
+    )
     res$vectors <- rew$vectors
     res$values <- rew$values
 
@@ -658,9 +670,11 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @export
 spectrum <- spectrum
 
-eigen_defaults <- list(pos = "LM", howmany = 1L, il = -1L, iu = -1L,
+eigen_defaults <- list(
+  pos = "LM", howmany = 1L, il = -1L, iu = -1L,
   vl = -Inf, vu = Inf, vestimate = 0L,
-  balance = "none")
+  balance = "none"
+)
 
 #' Find Eigenvector Centrality Scores of Network Positions
 #'
@@ -1066,7 +1080,6 @@ harmonic_centrality <- harmonic_centrality
 bonpow.dense <- function(graph, nodes = V(graph),
                          loops = FALSE, exponent = 1,
                          rescale = FALSE, tol = 1e-7) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -1224,7 +1237,6 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 power_centrality <- function(graph, nodes = V(graph),
                              loops = FALSE, exponent = 1,
                              rescale = FALSE, tol = 1e-7, sparse = TRUE) {
-
   nodes <- as.igraph.vs(graph, nodes)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
@@ -1391,14 +1403,17 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
                              loops = FALSE, exo = 1, weights = NULL,
                              tol = 1e-7, sparse = TRUE) {
-
   nodes <- as.igraph.vs(graph, nodes)
   if (sparse) {
-    res <- alpha.centrality.sparse(graph, nodes, alpha, loops,
-      exo, weights, tol)
+    res <- alpha.centrality.sparse(
+      graph, nodes, alpha, loops,
+      exo, weights, tol
+    )
   } else {
-    res <- alpha.centrality.dense(graph, nodes, alpha, loops,
-      exo, weights, tol)
+    res <- alpha.centrality.dense(
+      graph, nodes, alpha, loops,
+      exo, weights, tol
+    )
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", nodes)

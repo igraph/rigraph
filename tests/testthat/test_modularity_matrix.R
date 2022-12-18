@@ -1,5 +1,4 @@
 test_that("modularity_matrix works", {
-
   kar <- make_graph("zachary")
 
   fc <- cluster_fast_greedy(kar)
@@ -12,11 +11,9 @@ test_that("modularity_matrix works", {
   B2 <- modularity_matrix(kar, weights = rep(1, ecount(kar)))
 
   expect_that(B1, equals(B2))
-
 })
 
 test_that("modularity_matrix still accepts a membership argument for compatibility", {
-
   kar <- make_graph("zachary")
   expect_warning(
     modularity_matrix(kar, membership = rep(1, vcount(kar))),

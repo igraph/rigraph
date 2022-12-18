@@ -123,11 +123,15 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 
   on.exit(.Call(C_R_igraph_finalizer))
   if (dim == 2) {
-    res <- .Call(C_R_igraph_layout_drl, graph, seed, use.seed, options,
-      weights, fixed)
+    res <- .Call(
+      C_R_igraph_layout_drl, graph, seed, use.seed, options,
+      weights, fixed
+    )
   } else {
-    res <- .Call(C_R_igraph_layout_drl_3d, graph, seed, use.seed, options,
-      weights, fixed)
+    res <- .Call(
+      C_R_igraph_layout_drl_3d, graph, seed, use.seed, options,
+      weights, fixed
+    )
   }
   res
 }
@@ -140,7 +144,8 @@ with_drl <- function(...) layout_spec(layout_with_drl, ...)
 
 
 #' @export
-igraph.drl.default <- list(edge.cut = 32 / 40,
+igraph.drl.default <- list(
+  edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 2000,
   init.attraction = 10,
@@ -164,10 +169,12 @@ igraph.drl.default <- list(edge.cut = 32 / 40,
   simmer.iterations = 100,
   simmer.temperature = 250,
   simmer.attraction = .5,
-  simmer.damping.mult = 0)
+  simmer.damping.mult = 0
+)
 
 #' @export
-igraph.drl.coarsen <- list(edge.cut = 32 / 40,
+igraph.drl.coarsen <- list(
+  edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 2000,
   init.attraction = 10,
@@ -191,10 +198,12 @@ igraph.drl.coarsen <- list(edge.cut = 32 / 40,
   simmer.iterations = 100,
   simmer.temperature = 250,
   simmer.attraction = .5,
-  simmer.damping.mult = 0)
+  simmer.damping.mult = 0
+)
 
 #' @export
-igraph.drl.coarsest <- list(edge.cut = 32 / 40,
+igraph.drl.coarsest <- list(
+  edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 2000,
   init.attraction = 10,
@@ -218,10 +227,12 @@ igraph.drl.coarsest <- list(edge.cut = 32 / 40,
   simmer.iterations = 100,
   simmer.temperature = 250,
   simmer.attraction = .5,
-  simmer.damping.mult = 0)
+  simmer.damping.mult = 0
+)
 
 #' @export
-igraph.drl.refine <- list(edge.cut = 32 / 40,
+igraph.drl.refine <- list(
+  edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
   init.attraction = .5,
@@ -245,10 +256,12 @@ igraph.drl.refine <- list(edge.cut = 32 / 40,
   simmer.iterations = 0,
   simmer.temperature = 250,
   simmer.attraction = .5,
-  simmer.damping.mult = 0)
+  simmer.damping.mult = 0
+)
 
 #' @export
-igraph.drl.final <- list(edge.cut = 32 / 40,
+igraph.drl.final <- list(
+  edge.cut = 32 / 40,
   init.iterations = 0,
   init.temperature = 50,
   init.attraction = .5,
@@ -272,7 +285,8 @@ igraph.drl.final <- list(edge.cut = 32 / 40,
   simmer.iterations = 25,
   simmer.temperature = 250,
   simmer.attraction = .5,
-  simmer.damping.mult = 0)
+  simmer.damping.mult = 0
+)
 
 #' @export
 drl_defaults <- list(

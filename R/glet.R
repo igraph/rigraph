@@ -49,7 +49,8 @@
 #' D3[2:5, 2:5] <- 1
 #'
 #' g <- simplify(graph_from_adjacency_matrix(D1 + D2 + D3,
-#'   mode = "undirected", weighted = TRUE))
+#'   mode = "undirected", weighted = TRUE
+#' ))
 #' V(g)$color <- "white"
 #' E(g)$label <- E(g)$weight
 #' E(g)$label.cex <- 2
@@ -175,5 +176,4 @@ function() {
   g2 <- set_edge_attr(g, "weight", value = sample(E(g)$weight))
   gl2 <- graphlet_proj(g2, gl$Bc, 1000)
   fitandplot(g2, gl2)
-
 }

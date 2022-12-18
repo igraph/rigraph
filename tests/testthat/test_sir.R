@@ -1,5 +1,4 @@
 test_that("SIR works", {
-
   skip_on_os("solaris")
 
   set.seed(42)

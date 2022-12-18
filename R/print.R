@@ -30,27 +30,32 @@
   ga <- va <- ea <- ""
   gal <- graph_attr_names(object)
   if (length(gal) != 0) {
-    ga <- paste(sep = "", gal, " (g/",
+    ga <- paste(
+      sep = "", gal, " (g/",
       .Call(C_R_igraph_get_attr_mode, object, 2L),
-      ")")
+      ")"
+    )
   }
   val <- vertex_attr_names(object)
   if (length(val) != 0) {
-    va <- paste(sep = "", val, " (v/",
+    va <- paste(
+      sep = "", val, " (v/",
       .Call(C_R_igraph_get_attr_mode, object, 3L),
-      ")")
+      ")"
+    )
   }
   eal <- edge_attr_names(object)
   if (length(eal) != 0) {
-    ea <- paste(sep = "", edge_attr_names(object), " (e/",
+    ea <- paste(
+      sep = "", edge_attr_names(object), " (e/",
       .Call(C_R_igraph_get_attr_mode, object, 4L),
-      ")")
+      ")"
+    )
   }
   c(ga, va, ea)
 }
 
 .print.header <- function(object, id = igraph_opt("print.id")) {
-
   if (!is_igraph(object)) {
     stop("Not a graph object")
   }
@@ -70,16 +75,20 @@
   )
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
-    title <- substring(paste(sep = "", title,
-      as.character(object$name)[1]), 1, w - 1)
+    title <- substring(paste(
+      sep = "", title,
+      as.character(object$name)[1]
+    ), 1, w - 1)
   }
   cat(title, "\n", sep = "")
 
   atxt <- .get.attr.codes(object)
   atxt <- paste(atxt[atxt != ""], collapse = ", ")
   if (atxt != "") {
-    atxt <- strwrap(paste(sep = "", "+ attr: ", atxt), prefix = "| ",
-      initial = "")
+    atxt <- strwrap(paste(sep = "", "+ attr: ", atxt),
+      prefix = "| ",
+      initial = ""
+    )
     cat(atxt, sep = "\n")
   }
   1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
@@ -170,8 +179,10 @@
     }
     options(max.print = mp)
     if (omitted.vertices != 0) {
-      cat(paste('[ reached getOption("max.print") -- omitted',
-        omitted.vertices, "vertices ]\n\n"))
+      cat(paste(
+        '[ reached getOption("max.print") -- omitted',
+        omitted.vertices, "vertices ]\n\n"
+      ))
     }
   }
 }
@@ -224,8 +235,10 @@
     } else {
       w <- max(nchar(el))
     }
-    tab["edge"] <- paste(sep = "", format(el[, 1], width = w),
-      arrow, format(el[, 2], width = w))
+    tab["edge"] <- paste(
+      sep = "", format(el[, 1], width = w),
+      arrow, format(el[, 2], width = w)
+    )
     for (i in list) {
       tab[i] <- edge_attr(x, i)
     }
@@ -243,8 +256,10 @@
     })
   }
   if (omitted.edges != 0) {
-    cat(paste('[ reached getOption("max.print") -- omitted', omitted.edges,
-      'edges ]\n\n'))
+    cat(paste(
+      '[ reached getOption("max.print") -- omitted', omitted.edges,
+      'edges ]\n\n'
+    ))
   }
 }
 
@@ -254,7 +269,6 @@
                                     num = FALSE,
                                     max.lines = igraph_opt("auto.print.lines"),
                                     id = igraph_opt("print.id")) {
-
   len <- length(edges)
   gid <- graph_id(edges)
 
@@ -286,21 +300,17 @@
         df <- cbind(df, ea[as.vector(edges), , drop = FALSE])
       }
       print(df)
-
     } else {
       print(lapply(ea, "[", as.vector(edges)))
     }
-
   } else if (is.null(max.lines)) {
     .print.edges.compressed.all(x, edges, names)
-
   } else {
     .print.edges.compressed.limit(x, edges, names, max.lines)
   }
 }
 
 .print.edges.compressed.all <- function(x, edges, names) {
-
   if (!is.null(x)) {
     arrow <- c("--", "->")[is_directed(x) + 1]
 
@@ -316,14 +326,11 @@
       print(as.vector(edges))
     }
   }
-
 }
 
 #' @importFrom utils capture.output
 .print.edges.compressed.limit <- function(x, edges, names, max.lines) {
-
   if (!is.null(x)) {
-
     arrow <- c("--", "->")[is_directed(x) + 1]
 
     can_max <- NA
@@ -510,7 +517,6 @@ print.igraph <- function(x, full = igraph_opt("print.full"),
                          names = TRUE, max.lines = igraph_opt("auto.print.lines"),
                          id = igraph_opt("print.id"),
                          ...) {
-
   if (!is_igraph(x)) {
     stop("Not a graph object")
   }

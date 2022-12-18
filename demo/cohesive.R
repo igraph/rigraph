@@ -36,8 +36,10 @@ plot_hierarchy(cbKarate)
 
 ## Plot the first level, blocks 1 & 2
 
-plot(cbKarate, karate, mark.groups = blocks(cbKarate)[1:2 + 1],
-  col = "cyan")
+plot(cbKarate, karate,
+  mark.groups = blocks(cbKarate)[1:2 + 1],
+  col = "cyan"
+)
 
 pause()
 

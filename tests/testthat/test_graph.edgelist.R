@@ -1,5 +1,4 @@
 test_that("graph_from_edgelist works", {
-
   g <- sample_gnp(50, 5 / 50)
   el <- as_edgelist(g)
   g2 <- graph_from_edgelist(el, directed = FALSE)
@@ -22,5 +21,4 @@ test_that("graph_from_edgelist works", {
   el[] <- n[el]
   g2 <- graph_from_edgelist(el, directed = TRUE)
   expect_true(graph.isomorphic(g, g2))
-
 })

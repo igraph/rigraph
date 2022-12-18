@@ -26,7 +26,6 @@ test_that("realize_degseq works", {
   expect_that(degree(nG, mode = "out"), equals(degree(g2, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g2, mode = "in")))
   expect_true(is_simple(nG))
-
 })
 
 test_that("realize_degseq supports the make_(...) syntax", {
@@ -67,19 +66,22 @@ test_that("sample_degseq works", {
 
   nG2 <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "simple")
+    method = "simple"
+  )
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 
   nG3 <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "simple.no.multiple")
+    method = "simple.no.multiple"
+  )
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 
   nG4 <- sample_degseq(degree(g, mode = "out"),
     degree(g, mode = "in"),
-    method = "simple.no.multiple.uniform")
+    method = "simple.no.multiple.uniform"
+  )
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 })

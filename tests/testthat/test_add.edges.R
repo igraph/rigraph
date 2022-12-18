@@ -11,7 +11,8 @@ test_that("add_edges keeps edge id order", {
 test_that("add_edges adds attributes", {
   g <- make_empty_graph(10)
   g3 <- add_edges(g, (edges <- c(1, 5, 2, 6, 3, 10, 4, 5)),
-    attr = list(weight = (weights <- c(1, 2, 1, -1))))
+    attr = list(weight = (weights <- c(1, 2, 1, -1)))
+  )
   expect_that(ecount(g3), equals(length(edges) / 2))
   expect_that(get.edge.ids(g3, edges), equals(seq_len(length(edges) / 2)))
   expect_that(E(g3)$weight, equals(weights))
@@ -27,14 +28,18 @@ test_that("add_edges unknown attributes to NA", {
 test_that("add_edges appends attributes properly", {
   g <- make_empty_graph(10)
   g3 <- add_edges(g, (edges1 <- c(1, 5, 2, 6, 3, 10, 4, 5)),
-    attr = list(weight = (weights1 <- c(1, 2, 1, -1))))
+    attr = list(weight = (weights1 <- c(1, 2, 1, -1)))
+  )
   g5 <- add_edges(g3, (edges2 <- c(10, 9, 10, 10, 1, 1)),
-    attr = list(weight = (weights2 <- c(100, 100, 100))))
+    attr = list(weight = (weights2 <- c(100, 100, 100)))
+  )
   expect_that(E(g5)$weight, equals(c(weights1, weights2)))
 })
 
 test_that("add_edges signals error for zero vertex ids", {
   g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
-  expect_that(add_edges(g, c(0, 5, 0, 10, 5, 10)),
-    throws_error("Invalid vertex id"))
+  expect_that(
+    add_edges(g, c(0, 5, 0, 10, 5, 10)),
+    throws_error("Invalid vertex id")
+  )
 })

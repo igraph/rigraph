@@ -1,5 +1,4 @@
 test_that("ego works", {
-
   neig <- function(graph, order, vertices) {
     sp <- distances(graph)
     v <- unique(unlist(lapply(vertices, function(x) {
@@ -33,11 +32,9 @@ test_that("ego works", {
 
   s <- ego_size(g, 2, v)[[1]]
   expect_that(s, equals(length(v1)))
-
 })
 
 test_that("mindist works", {
-
   g <- make_ring(10)
   expect_that(ego_size(g, order = 2, mindist = 0), equals(rep(5, 10)))
   expect_that(ego_size(g, order = 2, mindist = 1), equals(rep(4, 10)))
@@ -64,5 +61,4 @@ test_that("mindist works", {
   expect_that(sapply(ng0, ecount), equals(c(4, 4)))
   expect_that(sapply(ng1, ecount), equals(c(2, 2)))
   expect_that(sapply(ng2, ecount), equals(c(0, 0)))
-
 })

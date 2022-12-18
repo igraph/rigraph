@@ -1,5 +1,4 @@
 test_that("Sampling from a Dirichlet works", {
-
   set.seed(42)
   sd <- sample_dirichlet(100, alpha = c(1, 1, 1))
   expect_that(dim(sd), equals(c(3, 100)))
@@ -14,12 +13,20 @@ test_that("Sampling from a Dirichlet works", {
   expect_that(dim(sd0), equals(c(3, 0)))
 
   ## Errors
-  expect_that(sample_dirichlet(-1, alpha = c(1, 1, 1, 1)),
-    throws_error("should be non-negative"))
-  expect_that(sample_dirichlet(5, alpha = c(1)),
-    throws_error("must have at least two entries"))
-  expect_that(sample_dirichlet(5, alpha = c(0, 1, 1)),
-    throws_error("must be positive"))
-  expect_that(sample_dirichlet(5, alpha = c(1, -1, -1)),
-    throws_error("must be positive"))
+  expect_that(
+    sample_dirichlet(-1, alpha = c(1, 1, 1, 1)),
+    throws_error("should be non-negative")
+  )
+  expect_that(
+    sample_dirichlet(5, alpha = c(1)),
+    throws_error("must have at least two entries")
+  )
+  expect_that(
+    sample_dirichlet(5, alpha = c(0, 1, 1)),
+    throws_error("must be positive")
+  )
+  expect_that(
+    sample_dirichlet(5, alpha = c(1, -1, -1)),
+    throws_error("must be positive")
+  )
 })

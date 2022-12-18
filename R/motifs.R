@@ -52,19 +52,22 @@
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   cut.prob <- as.numeric(cut.prob)
   if (length(cut.prob) != size) {
-    cut.prob <- c(cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1))
+    cut.prob <- c(
+      cut.prob[-length(cut.prob)],
+      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
+    )
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_motifs_randesu, graph, as.integer(size),
-    as.numeric(cut.prob))
+  res <- .Call(
+    C_R_igraph_motifs_randesu, graph, as.integer(size),
+    as.numeric(cut.prob)
+  )
   res[is.nan(res)] <- NA
   res
 }
@@ -95,19 +98,22 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
 count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   cut.prob <- as.numeric(cut.prob)
   if (length(cut.prob) != size) {
-    cut.prob <- c(cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1))
+    cut.prob <- c(
+      cut.prob[-length(cut.prob)],
+      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
+    )
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_motifs_randesu_no, graph, as.integer(size),
-    as.numeric(cut.prob))
+  .Call(
+    C_R_igraph_motifs_randesu_no, graph, as.integer(size),
+    as.numeric(cut.prob)
+  )
 }
 
 #' Graph motifs
@@ -143,19 +149,22 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' sample_motifs(g, 3)
 sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
                           sample.size = vcount(graph) / 10, sample = NULL) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   cut.prob <- as.numeric(cut.prob)
   if (length(cut.prob) != size) {
-    cut.prob <- c(cut.prob[-length(cut.prob)],
-      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1))
+    cut.prob <- c(
+      cut.prob[-length(cut.prob)],
+      rep(cut.prob[-length(cut.prob)], length(cut.prob) - 1)
+    )
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_motifs_randesu_estimate, graph, as.integer(size),
-    as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample))
+  .Call(
+    C_R_igraph_motifs_randesu_estimate, graph, as.integer(size),
+    as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample)
+  )
 }
 
 

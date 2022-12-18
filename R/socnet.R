@@ -45,7 +45,6 @@
 #' @keywords graphs
 #' @export
 tkigraph <- function() {
-
   requireNamespace("tcltk", quietly = TRUE) ||
     stop("tcl/tk library not available")
 
@@ -64,8 +63,10 @@ tkigraph <- function() {
   top <- tcltk::tktoplevel(background = "lightgrey", width = 700, height = 400)
   tcltk::tktitle(top) <- "iGraph GUI (Social Network Basics)"
   topframe <- tcltk::tkframe(top, relief = "sunken", borderwidth = 1)
-  scr <- tcltk::tkscrollbar(top, repeatinterval = 5,
-    command = function(...) tcltk::tkyview(topframe))
+  scr <- tcltk::tkscrollbar(top,
+    repeatinterval = 5,
+    command = function(...) tcltk::tkyview(topframe)
+  )
   tcltk::tkplace(topframe, x = 0, y = 0, relwidth = 1.0)
 
   # Store myself in the environment if needed
@@ -114,26 +115,36 @@ tkigraph <- function() {
   })
 
   tcltk::tkadd(create.menu, "separator")
-  tcltk::tkadd(create.menu, "command", label = "Random (Erdos-Renyi G(n,p))",
+  tcltk::tkadd(create.menu, "command",
+    label = "Random (Erdos-Renyi G(n,p))",
     command = function() {
       .tkigraph.erdos.renyi.game()
-    })
-  tcltk::tkadd(create.menu, "command", label = "Random (Erdos-Renyi G(n,m))",
+    }
+  )
+  tcltk::tkadd(create.menu, "command",
+    label = "Random (Erdos-Renyi G(n,m))",
     command = function() {
       .tkigraph.erdos.renyi.gnm.game()
-    })
-  tcltk::tkadd(create.menu, "command", label = "Random (Barabasi-Albert)",
+    }
+  )
+  tcltk::tkadd(create.menu, "command",
+    label = "Random (Barabasi-Albert)",
     command = function() {
       .tkigraph.barabasi.game()
-    })
-  tcltk::tkadd(create.menu, "command", label = "Random (Configuration model)",
+    }
+  )
+  tcltk::tkadd(create.menu, "command",
+    label = "Random (Configuration model)",
     command = function() {
       .tkigraph.degree.sequence.game()
-    })
-  tcltk::tkadd(create.menu, "command", label = "Watts-Strogatz random graph",
+    }
+  )
+  tcltk::tkadd(create.menu, "command",
+    label = "Watts-Strogatz random graph",
     command = function() {
       .tkigraph.watts.strogatz()
-    })
+    }
+  )
   tcltk::tkadd(create.menu, "separator")
   tcltk::tkadd(create.menu, "command", label = "Simplify", command = function() {
     .tkigraph.simplify()
@@ -143,14 +154,18 @@ tkigraph <- function() {
     .tkigraph.delete()
   })
   tcltk::tkadd(graph.menu, "separator")
-  tcltk::tkadd(graph.menu, "command", label = "Show graph",
+  tcltk::tkadd(graph.menu, "command",
+    label = "Show graph",
     command = function() {
       .tkigraph.show()
-    })
-  tcltk::tkadd(graph.menu, "command", label = "Basic statistics",
+    }
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Basic statistics",
     command = function() {
       .tkigraph.stat()
-    })
+    }
+  )
   tcltk::tkadd(graph.menu, "separator")
   tcltk::tkadd(graph.menu, "command", label = "Import session", command = function() {
     .tkigraph.load()
@@ -162,18 +177,30 @@ tkigraph <- function() {
     .tkigraph.save()
   })
   tcltk::tkadd(graph.menu, "separator")
-  tcltk::tkadd(graph.menu, "command", label = "Import adjacency matrix",
-    command = function() .tkigraph.import.adjacency())
-  tcltk::tkadd(graph.menu, "command", label = "Import edge list",
-    command = function() .tkigraph.import.edgelist())
-  tcltk::tkadd(graph.menu, "command", label = "Import Pajek file",
-    command = function() .tkigraph.import.pajek())
-  tcltk::tkadd(graph.menu, "command", label = "Export adjacency matrix",
-    command = function() .tkigraph.export.adjacency())
-  tcltk::tkadd(graph.menu, "command", label = "Export edge list",
-    command = function() .tkigraph.export.edgelist())
-  tcltk::tkadd(graph.menu, "command", label = "Export Pajek file",
-    command = function() .tkigraph.export.pajek())
+  tcltk::tkadd(graph.menu, "command",
+    label = "Import adjacency matrix",
+    command = function() .tkigraph.import.adjacency()
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Import edge list",
+    command = function() .tkigraph.import.edgelist()
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Import Pajek file",
+    command = function() .tkigraph.import.pajek()
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Export adjacency matrix",
+    command = function() .tkigraph.export.adjacency()
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Export edge list",
+    command = function() .tkigraph.export.edgelist()
+  )
+  tcltk::tkadd(graph.menu, "command",
+    label = "Export Pajek file",
+    command = function() .tkigraph.export.pajek()
+  )
   tcltk::tkadd(main.menu, "cascade", label = "Graph", menu = graph.menu)
 
   plot.menu <- tcltk::tkmenu(main.menu)
@@ -192,18 +219,24 @@ tkigraph <- function() {
   tcltk::tkadd(centrality.menu, "command", label = "Degree (in)", command = function() {
     .tkigraph.degree("in")
   })
-  tcltk::tkadd(centrality.menu, "command", label = "Degree (total)",
+  tcltk::tkadd(centrality.menu, "command",
+    label = "Degree (total)",
     command = function() {
       .tkigraph.degree("total")
-    })
-  tcltk::tkadd(centrality.menu, "command", label = "Plot log-log degree distribution",
+    }
+  )
+  tcltk::tkadd(centrality.menu, "command",
+    label = "Plot log-log degree distribution",
     command = function() {
       .tkigraph.degree.dist(power = FALSE)
-    })
-  tcltk::tkadd(centrality.menu, "command", label = "Fit a power-law to degree distribution",
+    }
+  )
+  tcltk::tkadd(centrality.menu, "command",
+    label = "Fit a power-law to degree distribution",
     command = function() {
       .tkigraph.degree.dist(power = TRUE)
-    })
+    }
+  )
   tcltk::tkadd(centrality.menu, "separator")
   tcltk::tkadd(centrality.menu, "command", label = "Closeness", command = function() {
     .tkigraph.closeness()
@@ -218,80 +251,112 @@ tkigraph <- function() {
     .tkigraph.page.rank()
   })
   tcltk::tkadd(centrality.menu, "separator")
-  tcltk::tkadd(centrality.menu, "command", label = "Edge betweenness",
+  tcltk::tkadd(centrality.menu, "command",
+    label = "Edge betweenness",
     command = function() {
       .tkigraph.edge.betweenness()
-    })
+    }
+  )
   tcltk::tkadd(main.menu, "cascade", label = "Centrality", menu = centrality.menu)
 
   distances.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(distances.menu, "command", label = "Distance matrix",
+  tcltk::tkadd(distances.menu, "command",
+    label = "Distance matrix",
     command = function() {
       .tkigraph.dist.matrix()
-    })
-  tcltk::tkadd(distances.menu, "command", label = "Distances from/to vertex",
+    }
+  )
+  tcltk::tkadd(distances.menu, "command",
+    label = "Distances from/to vertex",
     command = function() {
       .tkigraph.distance.tofrom()
-    })
-  tcltk::tkadd(distances.menu, "command", label = "Diameter (undirected)",
+    }
+  )
+  tcltk::tkadd(distances.menu, "command",
+    label = "Diameter (undirected)",
     command = function() {
       .tkigraph.diameter()
-    })
-  tcltk::tkadd(distances.menu, "command", label = "Draw diameter",
+    }
+  )
+  tcltk::tkadd(distances.menu, "command",
+    label = "Draw diameter",
     command = function() {
       .tkigraph.plot.diameter(simple = FALSE)
-    })
-  tcltk::tkadd(distances.menu, "command", label = "Average path length (undirected)",
+    }
+  )
+  tcltk::tkadd(distances.menu, "command",
+    label = "Average path length (undirected)",
     command = function() {
       .tkigraph.diameter(mode = "path")
-    })
+    }
+  )
   tcltk::tkadd(main.menu, "cascade", label = "Distances", menu = distances.menu)
 
   component.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(component.menu, "command", label = "Show components",
+  tcltk::tkadd(component.menu, "command",
+    label = "Show components",
     command = function() {
       .tkigraph.clusters()
-    })
-  tcltk::tkadd(component.menu, "command", label = "Show membership",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Show membership",
     command = function() {
       .tkigraph.clusters.membership()
-    })
-  tcltk::tkadd(component.menu, "command", label = "Calculate component sizes",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Calculate component sizes",
     command = function() {
       .tkigraph.calculate.clusters()
-    })
-  tcltk::tkadd(component.menu, "command", label = "Draw components",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Draw components",
     command = function() {
       .tkigraph.plot.comp(simple = FALSE)
-    })
-  tcltk::tkadd(component.menu, "command", label = "Create graph from giant component",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Create graph from giant component",
     command = function() {
       .tkigraph.create.giantcomp()
-    })
-  tcltk::tkadd(component.menu, "command", label = "Create graph from component of a vertex",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Create graph from component of a vertex",
     command = function() {
       .tkigraph.create.mycomp()
-    })
-  tcltk::tkadd(component.menu, "command", label = "Create graph from a component",
+    }
+  )
+  tcltk::tkadd(component.menu, "command",
+    label = "Create graph from a component",
     command = function() {
       .tkigraph.create.comp()
-    })
+    }
+  )
 
   community.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(community.menu, "command", label = "Spinglass algorithm",
+  tcltk::tkadd(community.menu, "command",
+    label = "Spinglass algorithm",
     command = function() {
       .tkigraph.spinglass()
-    })
-  tcltk::tkadd(community.menu, "command", label = "Spinglass algorithm, single vertex",
+    }
+  )
+  tcltk::tkadd(community.menu, "command",
+    label = "Spinglass algorithm, single vertex",
     command = function() {
       .tkigraph.my.spinglass()
-    })
+    }
+  )
 
   cohesion.menu <- tcltk::tkmenu(main.menu)
-  tcltk::tkadd(cohesion.menu, "command", label = "Cohesion of all components",
+  tcltk::tkadd(cohesion.menu, "command",
+    label = "Cohesion of all components",
     command = function() {
       .tkigraph.cohesion()
-    })
+    }
+  )
 
   subgraph.menu <- tcltk::tkmenu(main.menu)
   tcltk::tkadd(subgraph.menu, "cascade", label = "Components", menu = component.menu)
@@ -313,10 +378,12 @@ tkigraph <- function() {
   tcltk::tkadd(help.menu, "command", label = "Contents", command = function() {
     .tkigraph.help()
   })
-  tcltk::tkadd(help.menu, "command", label = "In external browser",
+  tcltk::tkadd(help.menu, "command",
+    label = "In external browser",
     command = function() {
       .tkigraph.help.external()
-    })
+    }
+  )
   tcltk::tkadd(help.menu, "separator")
   tcltk::tkadd(help.menu, "command", label = "About", command = function() {
     .tkigraph.about()
@@ -330,15 +397,24 @@ tkigraph <- function() {
   # Set up the main area
   tcltk::tkgrid(tcltk::tklabel(top, text = ""),
     tcltk::tklabel(top, text = "#", justify = "center", relief = "raised"),
-    tcltk::tklabel(top, text = "Name", width = 50, relief = "raised",
-      justify = "left"),
-    tcltk::tklabel(top, text = "|V|", width = 6, relief = "raised",
-      justify = "left"),
-    tcltk::tklabel(top, text = "|E|", width = 6, relief = "raised",
-      justify = "left"),
-    tcltk::tklabel(top, text = "Dir.", width = 6, relief = "raised",
-      justify = "left"),
-    sticky = "nsew", "in" = topframe)
+    tcltk::tklabel(top,
+      text = "Name", width = 50, relief = "raised",
+      justify = "left"
+    ),
+    tcltk::tklabel(top,
+      text = "|V|", width = 6, relief = "raised",
+      justify = "left"
+    ),
+    tcltk::tklabel(top,
+      text = "|E|", width = 6, relief = "raised",
+      justify = "left"
+    ),
+    tcltk::tklabel(top,
+      text = "Dir.", width = 6, relief = "raised",
+      justify = "left"
+    ),
+    sticky = "nsew", "in" = topframe
+  )
   tcltk::tkgrid.columnconfigure(topframe, 2, weight = 1)
 
   invisible(NULL)
@@ -346,8 +422,10 @@ tkigraph <- function() {
 
 .tkigraph.close <- function() {
   message <- "Are you sure?"
-  yesno <- tcltk::tkmessageBox(message = message, icon = "question", type = "yesno",
-    default = "yes")
+  yesno <- tcltk::tkmessageBox(
+    message = message, icon = "question", type = "yesno",
+    default = "yes"
+  )
   if (as.character(yesno) == "no") {
     return()
   }
@@ -371,7 +449,6 @@ tkigraph <- function() {
 }
 
 .tkigraph.dialogbox <- function(TITLE = "Setup parameters", ...) {
-
   params <- list(...)
   answers <- lapply(params, "[[", "default")
   dialog <- tcltk::tktoplevel()
@@ -392,21 +469,28 @@ tkigraph <- function() {
     tcltk::tkdestroy(dialog)
   }
 
-  tcltk::tkgrid(tcltk::tklabel(dialog, text = TITLE,
-    font = tcltk::tkfont.create(family = "times", size = "16", weight = "bold")),
-  columnspan = 2, sticky = "nsew", "in" = frame, padx = 10, pady = 10)
+  tcltk::tkgrid(
+    tcltk::tklabel(dialog,
+      text = TITLE,
+      font = tcltk::tkfont.create(family = "times", size = "16", weight = "bold")
+    ),
+    columnspan = 2, sticky = "nsew", "in" = frame, padx = 10, pady = 10
+  )
 
   OK.but <- tcltk::tkbutton(dialog, text = "   OK    ", command = OnOK)
   for (i in seq(along.with = params)) {
     tcltk::tkgrid(tcltk::tklabel(dialog, text = params[[i]]$name),
-      column = 0, row = i, sticky = "nw", padx = 10, "in" = frame)
+      column = 0, row = i, sticky = "nw", padx = 10, "in" = frame
+    )
     if (params[[i]]$type == "numeric" || params[[i]]$type == "text") {
       tmp <- tcltk::tkentry(dialog, width = "10", textvariable = vars[[i]])
       tcltk::tkgrid(tmp, column = 1, row = i, sticky = "nsew", padx = 10, "in" = frame)
       tcltk::tkbind(tmp, "<Return>", OnOK)
     } else if (params[[i]]$type == "boolean") {
-      b <- tcltk::tkcheckbutton(dialog, onvalue = "TRUE", offvalue = "FALSE",
-        variable = vars[[i]])
+      b <- tcltk::tkcheckbutton(dialog,
+        onvalue = "TRUE", offvalue = "FALSE",
+        variable = vars[[i]]
+      )
       if (params[[i]]$default == "TRUE") {
         tcltk::tkselect(b)
       }
@@ -415,12 +499,18 @@ tkigraph <- function() {
       f <- tcltk::tkframe(dialog)
       tcltk::tkgrid(f, "in" = frame, padx = 10, sticky = "nsew", column = 1, row = i)
       scr <- tcltk::tkscrollbar(f, repeatinterval = 5)
-      fun <- eval(eval(substitute(expression(function(...) tcltk::tkset(scr, ...)),
-        list(scr = scr))))
-      lb <- tcltk::tklistbox(f, selectmode = "single", exportselection = FALSE,
-        height = 3, yscrollcommand = fun)
-      fun <- eval(eval(substitute(expression(function(...) tcltk::tkyview(lb, ...)),
-        list(lb = lb))))
+      fun <- eval(eval(substitute(
+        expression(function(...) tcltk::tkset(scr, ...)),
+        list(scr = scr)
+      )))
+      lb <- tcltk::tklistbox(f,
+        selectmode = "single", exportselection = FALSE,
+        height = 3, yscrollcommand = fun
+      )
+      fun <- eval(eval(substitute(
+        expression(function(...) tcltk::tkyview(lb, ...)),
+        list(lb = lb)
+      )))
       tcltk::tkconfigure(scr, "-command", fun)
       tcltk::tkselection.set(lb, as.numeric(params[[i]]$default) + 1)
       lapply(params[[i]]$values, function(l) tcltk::tkinsert(lb, "end", l))
@@ -431,8 +521,10 @@ tkigraph <- function() {
       widgets[[i]] <- lb
     }
   }
-  tcltk::tkgrid(OK.but, column = 0, columnspan = 2, sticky = "nsew", "in" = frame, pady = 10,
-    padx = 10)
+  tcltk::tkgrid(OK.but,
+    column = 0, columnspan = 2, sticky = "nsew", "in" = frame, pady = 10,
+    padx = 10
+  )
   tcltk::tkgrid.columnconfigure(frame, 1, weight = 1)
   tcltk::tkwait.window(dialog)
 
@@ -477,14 +569,20 @@ tkigraph <- function() {
 
   name <- graph_attr(g, "name")
   tmpvar <- tcltk::tclVar(as.character(name))
-  but <- tcltk::tkcheckbutton(top, onvalue = "TRUE", offvalue = "FALSE",
-    variable = selected[[no]])
+  but <- tcltk::tkcheckbutton(top,
+    onvalue = "TRUE", offvalue = "FALSE",
+    variable = selected[[no]]
+  )
   lab <- tcltk::tklabel(top, text = as.character(no), width = 2)
   ent <- tcltk::tkentry(top, width = 30, textvariable = tmpvar)
-  lab2 <- tcltk::tklabel(top, text = as.character(vcount(g)),
-    justify = "right", padx = 2)
-  lab3 <- tcltk::tklabel(top, text = as.character(ecount(g)), justify = "right",
-    padx = 2)
+  lab2 <- tcltk::tklabel(top,
+    text = as.character(vcount(g)),
+    justify = "right", padx = 2
+  )
+  lab3 <- tcltk::tklabel(top,
+    text = as.character(ecount(g)), justify = "right",
+    padx = 2
+  )
   lab4 <- tcltk::tklabel(top, text = if (is_directed(g)) "YES" else "NO")
   tcltk::tkgrid(but, lab, ent, lab2, lab3, lab4, "in" = topframe, sticky = "nsew")
 
@@ -504,8 +602,10 @@ tkigraph <- function() {
   } else {
     message <- paste("Are you sure to delete graph #", gnos, "?")
   }
-  yesno <- tcltk::tkmessageBox(message = message, icon = "question", type = "yesno",
-    default = "yes")
+  yesno <- tcltk::tkmessageBox(
+    message = message, icon = "question", type = "yesno",
+    default = "yes"
+  )
   if (as.character(yesno) == "no") {
     return()
   }
@@ -529,8 +629,10 @@ tkigraph <- function() {
 }
 
 .tkigraph.load <- function() {
-  filename <- tcltk::tkgetOpenFile(defaultextension = "Rdata",
-    title = "Load graphs")
+  filename <- tcltk::tkgetOpenFile(
+    defaultextension = "Rdata",
+    title = "Load graphs"
+  )
   env <- new.env()
   load(paste(as.character(filename), collapse = " "), envir = env)
   .tkigraph.graphs <- get("graphs", envir = env)
@@ -554,20 +656,26 @@ tkigraph <- function() {
       next
     }
     entry <- tcltk::tkgrid.slaves(topframe, row = i, col = 2)
-    graphs[[i]] <- set_graph_attr(graphs[[i]], "name",
-      as.character(tcltk::tcl(entry, "get")))
+    graphs[[i]] <- set_graph_attr(
+      graphs[[i]], "name",
+      as.character(tcltk::tcl(entry, "get"))
+    )
   }
   graphs <- graphs[!is.na(graphs)]
-  filename <- tcltk::tkgetSaveFile(initialfile = "graphs.Rdata",
+  filename <- tcltk::tkgetSaveFile(
+    initialfile = "graphs.Rdata",
     defaultextension = "Rdata",
-    title = "Save graphs")
+    title = "Save graphs"
+  )
   save(graphs, file = paste(as.character(filename), collapse = " "))
 }
 
 #' @importFrom utils read.table
 .tkigraph.import.adjacency <- function() {
-  filename <- tcltk::tkgetOpenFile(defaultextension = "adj",
-    title = "Import adjacency matrix")
+  filename <- tcltk::tkgetOpenFile(
+    defaultextension = "adj",
+    title = "Import adjacency matrix"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
@@ -604,30 +712,39 @@ tkigraph <- function() {
 
 #' @importFrom utils read.table
 .tkigraph.import.edgelist <- function() {
-  filename <- tcltk::tkgetOpenFile(defaultextension = "el",
-    title = "Import edge list")
+  filename <- tcltk::tkgetOpenFile(
+    defaultextension = "el",
+    title = "Import edge list"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
   }
   tab <- read.table(filename,
-    colClasses = "character")
+    colClasses = "character"
+  )
   cn <- rep("", ncol(tab))
   if (ncol(tab) >= 3) {
     cn[3] <- "weight"
   }
   colnames(tab) <- cn
-  read <- .tkigraph.dialogbox(TITLE = "Importing an edge list",
-    directed = list(name = "Directed", type = "boolean",
-      default = "FALSE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Importing an edge list",
+    directed = list(
+      name = "Directed", type = "boolean",
+      default = "FALSE"
+    )
+  )
   g <- graph_from_data_frame(tab, directed = read$directed)
   g <- set_graph_attr(g, "name", "Imported edge list")
   .tkigraph.add.graph(g)
 }
 
 .tkigraph.import.pajek <- function() {
-  filename <- tcltk::tkgetOpenFile(defaultextension = "net",
-    title = "Import Pajek file")
+  filename <- tcltk::tkgetOpenFile(
+    defaultextension = "net",
+    title = "Import Pajek file"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
@@ -657,9 +774,11 @@ tkigraph <- function() {
   } else {
     tab <- as_adj(graph, names = FALSE, sparse = FALSE)
   }
-  filename <- tcltk::tkgetSaveFile(initialfile = "graph.adj",
+  filename <- tcltk::tkgetSaveFile(
+    initialfile = "graph.adj",
     defaultextension = "adj",
-    title = "Export adjacency matrix")
+    title = "Export adjacency matrix"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
@@ -679,15 +798,19 @@ tkigraph <- function() {
   if ("weight" %in% edge_attr_names(graph)) {
     el <- cbind(el, E(graph)$weight)
   }
-  filename <- tcltk::tkgetSaveFile(initialfile = "graph.el",
+  filename <- tcltk::tkgetSaveFile(
+    initialfile = "graph.el",
     defaultextension = "el",
-    title = "Export edge list")
+    title = "Export edge list"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
   }
-  write.table(el, file = filename,
-    row.names = FALSE, col.names = FALSE)
+  write.table(el,
+    file = filename,
+    row.names = FALSE, col.names = FALSE
+  )
 }
 
 .tkigraph.export.pajek <- function() {
@@ -697,9 +820,11 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  filename <- tcltk::tkgetSaveFile(initialfile = "pajek.net",
+  filename <- tcltk::tkgetSaveFile(
+    initialfile = "pajek.net",
     defaultextension = "net",
-    title = "Export Pajek file")
+    title = "Export Pajek file"
+  )
   filename <- paste(as.character(filename), collapse = " ")
   if (filename == "") {
     return()
@@ -735,33 +860,60 @@ tkigraph <- function() {
     return()
   }
 
-  read <- .tkigraph.dialogbox(TITLE = "Choose statistics",
-    vertices = list(name = "Vertices", type = "boolean",
-      default = "FALSE"),
-    edges = list(name = "Edges", type = "boolean",
-      default = "FALSE"),
-    recip = list(name = "Reciprocity", type = "boolean",
-      default = "FALSE"),
-    dens = list(name = "Density", type = "boolean",
-      default = "FALSE"),
-    trans = list(name = "Transitivity (global)",
-      type = "boolean", default = "FALSE"),
-    ltrans = list(name = "Mean local transitivity",
-      type = "boolean", default = "FALSE"),
-    deg = list(name = "Average degree",
-      type = "boolean", default = "FALSE"),
-    maxdeg = list(name = "Maximum degree (total)",
-      type = "boolean", default = "FALSE"),
-    maxindeg = list(name = "Maximum degree (in)",
-      type = "boolean", default = "FALSE"),
-    maxoutdeg = list(name = "Maximum degree (out)",
-      type = "boolean", default = "FALSE"),
-    mindeg = list(name = "Minimum degree (total)",
-      type = "boolean", default = "FALSE"),
-    minindeg = list(name = "Minimum degree (in)",
-      type = "boolean", default = "FALSE"),
-    minoutdeg = list(name = "Minimum degree (out)",
-      type = "boolean", default = "FALSE")
+  read <- .tkigraph.dialogbox(
+    TITLE = "Choose statistics",
+    vertices = list(
+      name = "Vertices", type = "boolean",
+      default = "FALSE"
+    ),
+    edges = list(
+      name = "Edges", type = "boolean",
+      default = "FALSE"
+    ),
+    recip = list(
+      name = "Reciprocity", type = "boolean",
+      default = "FALSE"
+    ),
+    dens = list(
+      name = "Density", type = "boolean",
+      default = "FALSE"
+    ),
+    trans = list(
+      name = "Transitivity (global)",
+      type = "boolean", default = "FALSE"
+    ),
+    ltrans = list(
+      name = "Mean local transitivity",
+      type = "boolean", default = "FALSE"
+    ),
+    deg = list(
+      name = "Average degree",
+      type = "boolean", default = "FALSE"
+    ),
+    maxdeg = list(
+      name = "Maximum degree (total)",
+      type = "boolean", default = "FALSE"
+    ),
+    maxindeg = list(
+      name = "Maximum degree (in)",
+      type = "boolean", default = "FALSE"
+    ),
+    maxoutdeg = list(
+      name = "Maximum degree (out)",
+      type = "boolean", default = "FALSE"
+    ),
+    mindeg = list(
+      name = "Minimum degree (total)",
+      type = "boolean", default = "FALSE"
+    ),
+    minindeg = list(
+      name = "Minimum degree (in)",
+      type = "boolean", default = "FALSE"
+    ),
+    minoutdeg = list(
+      name = "Minimum degree (out)",
+      type = "boolean", default = "FALSE"
+    )
   )
 
   graphs <- get("graphs", .tkigraph.env)[gnos]
@@ -874,7 +1026,6 @@ tkigraph <- function() {
 
 #' @importFrom grDevices dev.new
 .tkigraph.plot <- function(simple = TRUE, gnos = NULL, ...) {
-
   if (is.null(gnos)) {
     gnos <- .tkigraph.get.selected()
   }
@@ -894,28 +1045,48 @@ tkigraph <- function() {
   }
 
   if (!simple) {
-    read <- .tkigraph.dialogbox(TITLE = "Drawing graphs",
-      interactive = list(name = "Interactive",
-        type = "boolean", default = "FALSE"),
-      vertex.size = list(name = "Vertex size",
-        type = "numeric", default = vertex.size),
-      labels = list(name = "Vertex labels", type = "listbox",
-        default = "3", values = c("None", "IDs", "Names",
-          "Labels")),
-      elabels = list(name = "Edge labels", type = "listbox",
-        default = "0", values = c("None", "IDs", "Names",
-          "Values")),
-      layout = list(name = "Layout",
+    read <- .tkigraph.dialogbox(
+      TITLE = "Drawing graphs",
+      interactive = list(
+        name = "Interactive",
+        type = "boolean", default = "FALSE"
+      ),
+      vertex.size = list(
+        name = "Vertex size",
+        type = "numeric", default = vertex.size
+      ),
+      labels = list(
+        name = "Vertex labels", type = "listbox",
+        default = "3", values = c(
+          "None", "IDs", "Names",
+          "Labels"
+        )
+      ),
+      elabels = list(
+        name = "Edge labels", type = "listbox",
+        default = "0", values = c(
+          "None", "IDs", "Names",
+          "Values"
+        )
+      ),
+      layout = list(
+        name = "Layout",
         type = "listbox", default = "0",
-        values = c("Default", "Force-based (KK)",
+        values = c(
+          "Default", "Force-based (KK)",
           "Force-based (FR)", "Tree (RT)",
-          "Circle", "Random")))
+          "Circle", "Random"
+        )
+      )
+    )
   } else {
-    read <- list(interactive = FALSE,
+    read <- list(
+      interactive = FALSE,
       vertex.size = vertex.size,
       labels = 3, # labels
       elabels = 0, # none
-      layout = 0)
+      layout = 0
+    )
   }
 
   if (!read$interactive) {
@@ -946,9 +1117,11 @@ tkigraph <- function() {
     }
   }
 
-  layouts <- list(layout.default, layout_with_kk,
+  layouts <- list(
+    layout.default, layout_with_kk,
     layout_with_fr,
-    layout_as_tree, layout_in_circle, layout_randomly)
+    layout_as_tree, layout_in_circle, layout_randomly
+  )
 
   if (read$vertex.size < 10) {
     label.dist <- 0.4
@@ -957,7 +1130,6 @@ tkigraph <- function() {
   }
 
   for (i in gnos) {
-
     if (read$labels == "0") {
       labels <- NA
     } else if (read$labels == "1") {
@@ -995,11 +1167,13 @@ tkigraph <- function() {
 
     g <- graphs[[i]]
     g <- delete_vertex_attr(g, "name")
-    fun(g, layout = layouts[[read$layout + 1]],
+    fun(g,
+      layout = layouts[[read$layout + 1]],
       vertex.size = read$vertex.size, ## vertex.color=read$vertex.color,
       vertex.label = labels, vertex.label.dist = label.dist,
       edge.label = elabels, edge.arrow.size = eas,
-      ...)
+      ...
+    )
   }
 }
 
@@ -1016,9 +1190,13 @@ tkigraph <- function() {
     if (ncol(newdf) > 2) {
       colnames(newdf) <- c("from", "to", "weight")
     }
-    read <- .tkigraph.dialogbox(TITLE = "Creating a graph by hand",
-      directed = list(name = "Directed", type = "boolean",
-        default = "FALSE"))
+    read <- .tkigraph.dialogbox(
+      TITLE = "Creating a graph by hand",
+      directed = list(
+        name = "Directed", type = "boolean",
+        default = "FALSE"
+      )
+    )
     g <- graph_from_data_frame(newdf, directed = read$directed)
     g <- set_graph_attr(g, "name", "New graph")
     .tkigraph.add.graph(g)
@@ -1044,14 +1222,24 @@ tkigraph <- function() {
 }
 
 .tkigraph.tree <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Regular tree",
-    n = list(name = "Vertices", type = "numeric",
-      default = 63, min = 0),
-    b = list(name = "Branches", type = "numeric",
-      default = 2, min = 1),
-    mode = list(name = "Mode", type = "listbox",
-      values = c("Directed (out)", "Directed (in)",
-        "Undirected"), default = "2"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Regular tree",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 63, min = 0
+    ),
+    b = list(
+      name = "Branches", type = "numeric",
+      default = 2, min = 1
+    ),
+    mode = list(
+      name = "Mode", type = "listbox",
+      values = c(
+        "Directed (out)", "Directed (in)",
+        "Undirected"
+      ), default = "2"
+    )
+  )
   read$mode <- c("out", "in", "undirected")[read$mode + 1]
   g <- make_tree(n = read$n, children = read$b, mode = read$mode)
   lay <- layout_as_tree(g, root = 1, mode = "all")
@@ -1061,9 +1249,13 @@ tkigraph <- function() {
 }
 
 .tkigraph.ring <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Regular ring",
-    n = list(name = "Vertices", type = "numeric",
-      default = 100, min = 0))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Regular ring",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 100, min = 0
+    )
+  )
   g <- make_ring(n = read$n)
   g <- set_graph_attr(g, "layout", layout_in_circle)
   g <- set_graph_attr(g, "name", "Regular ring")
@@ -1071,19 +1263,33 @@ tkigraph <- function() {
 }
 
 .tkigraph.lattice <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Regular lattice",
-    dim = list(name = "Dimensions", type = "numeric",
-      default = 2, min = 1, max = 5),
-    s1 = list(name = "Size 1", type = "numeric",
-      default = 10, min = 1),
-    s2 = list(name = "Size 2", type = "numeric",
-      default = 10, min = 1),
-    s3 = list(name = "Size 3", type = "numeric",
-      default = 10, min = 1),
-    s4 = list(name = "Size 4", type = "numeric",
-      default = 10, min = 1),
-    s5 = list(name = "Size 5", type = "numeric",
-      default = 10, min = 1))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Regular lattice",
+    dim = list(
+      name = "Dimensions", type = "numeric",
+      default = 2, min = 1, max = 5
+    ),
+    s1 = list(
+      name = "Size 1", type = "numeric",
+      default = 10, min = 1
+    ),
+    s2 = list(
+      name = "Size 2", type = "numeric",
+      default = 10, min = 1
+    ),
+    s3 = list(
+      name = "Size 3", type = "numeric",
+      default = 10, min = 1
+    ),
+    s4 = list(
+      name = "Size 4", type = "numeric",
+      default = 10, min = 1
+    ),
+    s5 = list(
+      name = "Size 5", type = "numeric",
+      default = 10, min = 1
+    )
+  )
   if (read$dim > 5) {
     read$dim <- 5
   }
@@ -1094,12 +1300,20 @@ tkigraph <- function() {
 }
 
 .tkigraph.star <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Star graph",
-    n = list(name = "Vertices", type = "numeric",
-      default = 100, min = 0),
-    mode = list(name = "Mode", type = "listbox",
-      values = c("Directed (out)", "Directed (in)",
-        "Undirected"), default = "2"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Star graph",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 100, min = 0
+    ),
+    mode = list(
+      name = "Mode", type = "listbox",
+      values = c(
+        "Directed (out)", "Directed (in)",
+        "Undirected"
+      ), default = "2"
+    )
+  )
   read$mode <- c("out", "in", "undirected")[read$mode + 1]
   g <- make_star(read$n, mode = read$mode)
   g <- set_graph_attr(g, "name", "Star graph")
@@ -1107,36 +1321,58 @@ tkigraph <- function() {
 }
 
 .tkigraph.full <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Full graph",
-    n = list(name = "Vertices", type = "numeric",
-      default = 30, min = 0),
-    directed = list(name = "Directed", type = "boolean",
-      default = "FALSE"),
-    loops = list(name = "Loops", type = "boolean",
-      default = "FALSE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Full graph",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 30, min = 0
+    ),
+    directed = list(
+      name = "Directed", type = "boolean",
+      default = "FALSE"
+    ),
+    loops = list(
+      name = "Loops", type = "boolean",
+      default = "FALSE"
+    )
+  )
   g <- make_full_graph(read$n, read$directed, read$loops)
   g <- set_graph_attr(g, "name", "Full graph")
   .tkigraph.add.graph(g)
 }
 
 .tkigraph.atlas <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Graph Atlas",
-    n = list(name = "Number", type = "numeric",
-      default = sample(0:1252, 1), min = 0, max = 1252))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Graph Atlas",
+    n = list(
+      name = "Number", type = "numeric",
+      default = sample(0:1252, 1), min = 0, max = 1252
+    )
+  )
   g <- graph.atlas(read$n)
-  g <- set_graph_attr(g, "name",
-    paste("Graph Atlas #", read$n))
+  g <- set_graph_attr(
+    g, "name",
+    paste("Graph Atlas #", read$n)
+  )
   .tkigraph.add.graph(g)
 }
 
 .tkigraph.erdos.renyi.game <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Erdos-Renyi random graph, G(n,p)",
-    n = list(name = "Vertices", type = "numeric",
-      default = 100, min = 0),
-    p = list(name = "Connection probability",
-      type = "numeric", default = 0.02, min = 0, max = 1),
-    directed = list(name = "Directed",
-      type = "boolean", default = "FALSE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Erdos-Renyi random graph, G(n,p)",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 100, min = 0
+    ),
+    p = list(
+      name = "Connection probability",
+      type = "numeric", default = 0.02, min = 0, max = 1
+    ),
+    directed = list(
+      name = "Directed",
+      type = "boolean", default = "FALSE"
+    )
+  )
 
   g <- sample_gnp(read$n, read$p, directed = read$directed)
   g <- set_graph_attr(g, "name", "Random graph (Erdos-Renyi G(n,p))")
@@ -1144,13 +1380,21 @@ tkigraph <- function() {
 }
 
 .tkigraph.erdos.renyi.gnm.game <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Erdos-Renyi random graph, G(n,m)",
-    n = list(name = "Vertices", type = "numeric",
-      default = 100, min = 0),
-    m = list(name = "Edges", type = "numeric",
-      default = 200, min = 0),
-    directed = list(name = "Directed",
-      type = "boolean", default = "FALSE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Erdos-Renyi random graph, G(n,m)",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 100, min = 0
+    ),
+    m = list(
+      name = "Edges", type = "numeric",
+      default = 200, min = 0
+    ),
+    directed = list(
+      name = "Directed",
+      type = "boolean", default = "FALSE"
+    )
+  )
 
   g <- sample_gnm(read$n, read$m, directed = read$directed)
   g <- set_graph_attr(g, "name", "Random graph (Erdos-Renyi G(n,m))")
@@ -1158,13 +1402,21 @@ tkigraph <- function() {
 }
 
 .tkigraph.barabasi.game <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Scale Free graph",
-    n = list(name = "Vertices", type = "numeric",
-      default = 100, min = 0),
-    m = list(name = "Edges per time step",
-      type = "numeric", default = 1, min = 0),
-    directed = list(name = "Directed",
-      type = "boolean", default = "TRUE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Scale Free graph",
+    n = list(
+      name = "Vertices", type = "numeric",
+      default = 100, min = 0
+    ),
+    m = list(
+      name = "Edges per time step",
+      type = "numeric", default = 1, min = 0
+    ),
+    directed = list(
+      name = "Directed",
+      type = "boolean", default = "TRUE"
+    )
+  )
   g <- barabasi.game(n = read$n, m = read$m, directed = read$directed)
   g <- set_graph_attr(g, "name", "Scale-free random graph")
   .tkigraph.add.graph(g)
@@ -1189,24 +1441,38 @@ tkigraph <- function() {
       deg <- degree(graphs[[i]])
       g <- sample_degseq(deg)
     }
-    g <- set_graph_attr(g, "name",
-      paste(sep = "", "Configuration model (#", i, ")"))
+    g <- set_graph_attr(
+      g, "name",
+      paste(sep = "", "Configuration model (#", i, ")")
+    )
     .tkigraph.add.graph(g)
   }
 }
 
 .tkigraph.watts.strogatz <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Watts-Strogatz graph",
-    dim = list(name = "Dimensions", type = "numeric",
-      default = 1, min = 1),
-    size = list(name = "Lattice size", type = "numeric",
-      default = 1000, min = 1),
-    nei = list(name = "Neighborhood", type = "numeric",
-      default = 5, min = 1),
-    p = list(name = "Rewiring probability",
-      type = "numeric", default = 0.01, min = 0, max = 1))
-  g <- sample_smallworld(dim = read$dim, size = read$size, nei = read$nei,
-    p = read$p)
+  read <- .tkigraph.dialogbox(
+    TITLE = "Watts-Strogatz graph",
+    dim = list(
+      name = "Dimensions", type = "numeric",
+      default = 1, min = 1
+    ),
+    size = list(
+      name = "Lattice size", type = "numeric",
+      default = 1000, min = 1
+    ),
+    nei = list(
+      name = "Neighborhood", type = "numeric",
+      default = 5, min = 1
+    ),
+    p = list(
+      name = "Rewiring probability",
+      type = "numeric", default = 0.01, min = 0, max = 1
+    )
+  )
+  g <- sample_smallworld(
+    dim = read$dim, size = read$size, nei = read$nei,
+    p = read$p
+  )
   g <- set_graph_attr(g, "name", "Watts-Strogatz small-world graph")
   if (read$dim == 1) {
     g <- set_graph_attr(g, "layout", layout_in_circle)
@@ -1220,8 +1486,10 @@ tkigraph <- function() {
 
   for (i in gnos) {
     g <- simplify(graphs[[i]])
-    g <- set_graph_attr(g, "name",
-      paste(sep = "", "Simplification of #", i))
+    g <- set_graph_attr(
+      g, "name",
+      paste(sep = "", "Simplification of #", i)
+    )
     .tkigraph.add.graph(g)
   }
 }
@@ -1239,13 +1507,21 @@ tkigraph <- function() {
   value <- data.frame(Vertex = V(graphs[[gnos]])$name, deg)
   colnames(value) <- c("Vertex", paste(sep = "", "Degree (", mode, ")"))
   plot.command <- function() {
-    read <- .tkigraph.dialogbox(TITLE = "Plot degree distribution",
-      logx = list(name = "Logarithmic `X' axis",
-        type = "boolean", default = "FALSE"),
-      logy = list(name = "Logarithmic `Y' axis",
-        type = "boolean", default = "FALSE"),
-      hist = list(name = "Histogram",
-        type = "boolean", default = "FALSE"))
+    read <- .tkigraph.dialogbox(
+      TITLE = "Plot degree distribution",
+      logx = list(
+        name = "Logarithmic `X' axis",
+        type = "boolean", default = "FALSE"
+      ),
+      logy = list(
+        name = "Logarithmic `Y' axis",
+        type = "boolean", default = "FALSE"
+      ),
+      hist = list(
+        name = "Histogram",
+        type = "boolean", default = "FALSE"
+      )
+    )
 
     if (!read$hist) {
       h <- hist(value[, 2], -1:max(value[, 2]), plot = FALSE)$density
@@ -1257,8 +1533,10 @@ tkigraph <- function() {
         log <- paste(sep = "", log, "y")
       }
       dev.new()
-      plot(0:max(value[, 2]), h, xlab = "Degree", ylab = "Relative frequency",
-        type = "b", main = "Degree distribution", log = log)
+      plot(0:max(value[, 2]), h,
+        xlab = "Degree", ylab = "Relative frequency",
+        type = "b", main = "Degree distribution", log = log
+      )
     } else {
       dev.new()
       hist(value[, 2], main = "Degree distribution", xlab = "Degree")
@@ -1270,7 +1548,8 @@ tkigraph <- function() {
     title = paste(sep = "", "Degree for graph #", gnos),
     plot.text = "Plot distribution",
     plot.command = plot.command,
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 #' @importFrom grDevices dev.new
@@ -1283,16 +1562,22 @@ tkigraph <- function() {
     return()
   }
   graphs <- get("graphs", .tkigraph.env)
-  read <- .tkigraph.dialogbox(TITLE = "Choose degree type",
-    type = list(name = "Degree type",
+  read <- .tkigraph.dialogbox(
+    TITLE = "Choose degree type",
+    type = list(
+      name = "Degree type",
       type = "listbox", default = "0",
-      values = c("Out", "In", "Total")))
+      values = c("Out", "In", "Total")
+    )
+  )
   mode <- c("out", "in", "all")[read$type + 1]
   deg <- degree(graphs[[gnos]], mode = mode)
   dev.new()
   h <- hist(deg, -1:max(deg), plot = FALSE)$density
-  plot(0:max(deg), h, xlab = "Degree", ylab = "Relative frequency",
-    type = "b", main = "Degree distribution", log = "xy")
+  plot(0:max(deg), h,
+    xlab = "Degree", ylab = "Relative frequency",
+    type = "b", main = "Degree distribution", log = "xy"
+  )
 
   if (power) {
     if (max(deg) < 10) {
@@ -1301,9 +1586,12 @@ tkigraph <- function() {
     }
     fit <- fit_power_law(deg, xmin = 10)
     lines(0:max(deg), (0:max(deg))^(-coef(fit)), col = "red")
-    legend("topright", c(paste("exponent:", round(coef(fit), 2)),
-      paste("standard error:", round(sqrt(vcov(fit)), 2))),
-    bty = "n", cex = 1.5)
+    legend("topright", c(
+      paste("exponent:", round(coef(fit), 2)),
+      paste("standard error:", round(sqrt(vcov(fit)), 2))
+    ),
+    bty = "n", cex = 1.5
+    )
   }
 }
 
@@ -1320,7 +1608,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(cl), 2))
   .tkigraph.showData(value,
     title = paste(sep = "", "Closeness for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 .tkigraph.betweenness <- function() {
@@ -1340,7 +1629,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(btw), 2), "&", round(mean(nbtw), 5))
   .tkigraph.showData(value,
     title = paste(sep = "", "Betweenness for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 .tkigraph.constraints <- function() {
@@ -1357,7 +1647,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(const), 2))
   .tkigraph.showData(value,
     title = paste(sep = "", "Constraint for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 .tkigraph.power.centrality <- function() {
@@ -1374,7 +1665,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(bp), 2))
   .tkigraph.showData(value,
     title = paste(sep = "", "Power centrality for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 .tkigraph.page.rank <- function() {
@@ -1391,7 +1683,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(bp), 2))
   .tkigraph.showData(value,
     title = paste(sep = "", "Page rank centrality for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 .tkigraph.edge.betweenness <- function() {
@@ -1409,7 +1702,8 @@ tkigraph <- function() {
   mv <- paste("Mean value:", round(mean(ebtw), 2))
   .tkigraph.showData(value,
     title = paste(sep = "", "Edge betweenness for graph #", gnos),
-    showmean = mv)
+    showmean = mv
+  )
 }
 
 #####################################################
@@ -1429,8 +1723,10 @@ tkigraph <- function() {
 
   value <- distances(graph, mode = "out")
   rownames(value) <- colnames(value) <- V(graph)$name
-  .tkigraph.showData(value, sort.button = FALSE,
-    title = paste(sep = "", "Distance matrix for graph #", gnos))
+  .tkigraph.showData(value,
+    sort.button = FALSE,
+    title = paste(sep = "", "Distance matrix for graph #", gnos)
+  )
 }
 
 .tkigraph.distance.tofrom <- function() {
@@ -1441,9 +1737,13 @@ tkigraph <- function() {
   }
 
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  read <- .tkigraph.dialogbox(TITLE = "Distance from a vertex",
-    v = list(name = "Vertex ID", type = "numeric",
-      default = 1, min = 1, max = vcount(graph)))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Distance from a vertex",
+    v = list(
+      name = "Vertex ID", type = "numeric",
+      default = 1, min = 1, max = vcount(graph)
+    )
+  )
   if (read$v < 1 || read$v > vcount(graph)) {
     .tkigraph.error("Invalid vertex ID")
     return()
@@ -1455,8 +1755,11 @@ tkigraph <- function() {
   colnames(value) <- c("Vertex", "Distance")
   mv <- paste("Mean distance:", round(mean(value[, 2]), 2))
   .tkigraph.showData(value,
-    title = paste("Distance from vertex", read$v, "in graph #",
-      gnos), showmean = mv)
+    title = paste(
+      "Distance from vertex", read$v, "in graph #",
+      gnos
+    ), showmean = mv
+  )
 }
 
 .tkigraph.diameter <- function(mode = "dia") {
@@ -1491,7 +1794,6 @@ tkigraph <- function() {
     title <- paste(sep = "", title, "s")
   }
   .tkigraph.showData(value, title = title)
-
 }
 
 .tkigraph.plot.diameter <- function(simple = FALSE) {
@@ -1518,12 +1820,19 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   comm <- components(graph)
-  members <- sapply(sapply(seq(along.with = comm$csize),
-    function(i) which(comm$membership == i)),
-  paste, collapse = ", ")
+  members <- sapply(
+    sapply(
+      seq(along.with = comm$csize),
+      function(i) which(comm$membership == i)
+    ),
+    paste,
+    collapse = ", "
+  )
   value <- data.frame("Component" = seq(along.with = comm$csize), "Members" = members)
-  .tkigraph.showData(value, title = paste("Components of graph #",
-    gnos), right = FALSE)
+  .tkigraph.showData(value, title = paste(
+    "Components of graph #",
+    gnos
+  ), right = FALSE)
 }
 
 .tkigraph.clusters.membership <- function() {
@@ -1534,8 +1843,10 @@ tkigraph <- function() {
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
   comm <- components(graph)
-  value <- data.frame("Vertex" = seq(along.with = comm$membership),
-    "Component" = comm$membership)
+  value <- data.frame(
+    "Vertex" = seq(along.with = comm$membership),
+    "Component" = comm$membership
+  )
   .tkigraph.showData(value, title = paste("Components of graph #", gnos))
 }
 
@@ -1553,13 +1864,21 @@ tkigraph <- function() {
   colnames(value) <- c("Cluster #", "Size")
 
   plot.command <- function() {
-    read <- .tkigraph.dialogbox(TITLE = "Plot degree distribution",
-      logx = list(name = "Logarithmic `X' axis",
-        type = "boolean", default = "FALSE"),
-      logy = list(name = "Logarithmic `Y' axis",
-        type = "boolean", default = "FALSE"),
-      hist = list(name = "Histogram",
-        type = "boolean", default = "FALSE"))
+    read <- .tkigraph.dialogbox(
+      TITLE = "Plot degree distribution",
+      logx = list(
+        name = "Logarithmic `X' axis",
+        type = "boolean", default = "FALSE"
+      ),
+      logy = list(
+        name = "Logarithmic `Y' axis",
+        type = "boolean", default = "FALSE"
+      ),
+      hist = list(
+        name = "Histogram",
+        type = "boolean", default = "FALSE"
+      )
+    )
 
     if (!read$hist) {
       h <- hist(value[, 2], 0:max(value[, 2]), plot = FALSE)$density
@@ -1571,9 +1890,11 @@ tkigraph <- function() {
         log <- paste(sep = "", log, "y")
       }
       dev.new()
-      plot(1:max(value[, 2]), h, xlab = "Component size",
+      plot(1:max(value[, 2]), h,
+        xlab = "Component size",
         ylab = "Relative frequency",
-        type = "b", main = "Component size distribution", log = log)
+        type = "b", main = "Component size distribution", log = log
+      )
     } else {
       dev.new()
       hist(value[, 2], main = "Component size distribution", xlab = "Degree")
@@ -1584,7 +1905,8 @@ tkigraph <- function() {
   .tkigraph.showData(value,
     title = paste(sep = "", "Component sizes, graph #", gnos),
     plot.text = "Plot distribution",
-    plot.command = plot.command, showmean = mv)
+    plot.command = plot.command, showmean = mv
+  )
 }
 
 #' @importFrom grDevices rainbow
@@ -1621,9 +1943,13 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  read <- .tkigraph.dialogbox(TITLE = "Component of a vertex",
-    vertex = list(name = "Vertex", type = "numeric",
-      default = 1, min = 1, max = vcount(graph)))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Component of a vertex",
+    vertex = list(
+      name = "Vertex", type = "numeric",
+      default = 1, min = 1, max = vcount(graph)
+    )
+  )
   if (read$vertex < 1 || read$vertex > vcount(graph)) {
     .tkigraph.error("Invalid vertex id")
     return()
@@ -1640,9 +1966,13 @@ tkigraph <- function() {
     return()
   }
   graph <- get("graphs", .tkigraph.env)[[gnos]]
-  read <- .tkigraph.dialogbox(TITLE = "Graph from component",
-    comp = list(name = "Component id", type = "numeric",
-      default = 1, min = 1))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Graph from component",
+    comp = list(
+      name = "Component id", type = "numeric",
+      default = 1, min = 1
+    )
+  )
   clu <- components(graph)
   if (read$comp < 1 || read$comp > length(clu$csize)) {
     .tkigraph.error("Invalid component id")
@@ -1657,11 +1987,17 @@ tkigraph <- function() {
 #' @importFrom grDevices dev.new
 #' @importFrom graphics layout layout.show par plot text
 .tkigraph.motifs.draw <- function() {
-  read <- .tkigraph.dialogbox(TITLE = "Draw all motifs",
-    size = list(name = "Size", type = "numeric",
-      default = 3, min = 3, max = 4),
-    directed = list(name = "Directed", type = "boolean",
-      default = "FALSE"))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Draw all motifs",
+    size = list(
+      name = "Size", type = "numeric",
+      default = 3, min = 3, max = 4
+    ),
+    directed = list(
+      name = "Directed", type = "boolean",
+      default = "FALSE"
+    )
+  )
 
   if (read$size < 3 || read$size > 4) {
     .tkigraph.error("Invalid motif size, should be 3 or 4")
@@ -1696,26 +2032,30 @@ tkigraph <- function() {
     g <- graph_from_isomorphism_class(read$size, i - 1, directed = read$dir)
     par(mai = c(0, 0, 0, 0), mar = c(0, 0, 0, 0))
     par(cex = 2)
-    plot(g, layout = co, vertex.color = "red", vertex.label = NA, frame = TRUE,
-      edge.color = "black", margin = 0.1, edge.arrow.size = .5)
+    plot(g,
+      layout = co, vertex.color = "red", vertex.label = NA, frame = TRUE,
+      edge.color = "black", margin = 0.1, edge.arrow.size = .5
+    )
     text(0, 0, names[i], col = "blue", cex = .5)
   }
-
 }
 
 #' @importFrom grDevices dev.new
 #' @importFrom graphics barplot layout layout.show par plot text
 .tkigraph.motifs.find <- function() {
-
   gnos <- .tkigraph.get.selected()
   if (length(gnos) != 1) {
     .tkigraph.error("Please select exactly one graph")
     return()
   }
 
-  read <- .tkigraph.dialogbox(TITLE = "Find motifs",
-    size = list(name = "Size", type = "numeric",
-      default = 3, min = 3, max = 4))
+  read <- .tkigraph.dialogbox(
+    TITLE = "Find motifs",
+    size = list(
+      name = "Size", type = "numeric",
+      default = 3, min = 3, max = 4
+    )
+  )
   if (read$size < 3 || read$size > 4) {
     .tkigraph.error("Invalid motif size, should be 3 or 4")
     return()
@@ -1754,14 +2094,16 @@ tkigraph <- function() {
   layout.show(rows * cols)
   for (i in seq(no)) {
     g <- graph_from_isomorphism_class(read$size, i - 1,
-      directed = is_directed(graphs[[gnos]]))
+      directed = is_directed(graphs[[gnos]])
+    )
     par(mai = c(0, 0, 0, 0), mar = c(0, 0, 0, 0))
     par(cex = 2)
-    plot(g, layout = co, vertex.color = "red", vertex.label = NA, frame = TRUE,
-      edge.color = "black", margin = 0.1)
+    plot(g,
+      layout = co, vertex.color = "red", vertex.label = NA, frame = TRUE,
+      edge.color = "black", margin = 0.1
+    )
     text(0, 0, motifs[i], col = "green")
   }
-
 }
 
 .tkigraph.spinglass <- function() {
@@ -1778,24 +2120,42 @@ tkigraph <- function() {
   }
 
   weights <- if ("weight" %in% edge_attr_names(graph)) "TRUE" else "FALSE"
-  read <- .tkigraph.dialogbox(TITLE = "Spinglass community structure",
-    gamma = list(name = "Gamma parameter",
-      type = "numeric", default = 1),
-    weights = list(name = "Use edge weights",
-      type = "boolean", default = weights),
-    spins = list(name = "Number of spins",
-      type = "numeric", default = 25),
-    parupdate = list(name = "Parallel update",
-      type = "boolean", default = "FALSE"),
-    update.rule = list(name = "Update rule",
+  read <- .tkigraph.dialogbox(
+    TITLE = "Spinglass community structure",
+    gamma = list(
+      name = "Gamma parameter",
+      type = "numeric", default = 1
+    ),
+    weights = list(
+      name = "Use edge weights",
+      type = "boolean", default = weights
+    ),
+    spins = list(
+      name = "Number of spins",
+      type = "numeric", default = 25
+    ),
+    parupdate = list(
+      name = "Parallel update",
+      type = "boolean", default = "FALSE"
+    ),
+    update.rule = list(
+      name = "Update rule",
       type = "listbox", default = "1",
-      values = c("Simple", "Configuration model")),
-    start.temp = list(name = "Start temperature",
-      type = "numeric", default = 1),
-    stop.temp = list(name = "Stop temperature",
-      type = "numeric", default = 0.1),
-    cool.fact = list(name = "Cooling factor",
-      type = "numeric", default = 0.99))
+      values = c("Simple", "Configuration model")
+    ),
+    start.temp = list(
+      name = "Start temperature",
+      type = "numeric", default = 1
+    ),
+    stop.temp = list(
+      name = "Stop temperature",
+      type = "numeric", default = 0.1
+    ),
+    cool.fact = list(
+      name = "Cooling factor",
+      type = "numeric", default = 0.99
+    )
+  )
 
   read$update.rule <- c("simple", "config")[read$update.rule + 1]
   if (read$weights) {
@@ -1808,10 +2168,12 @@ tkigraph <- function() {
   } else {
     read$weights <- NULL
   }
-  comm <- cluster_spinglass(graph, weights = read$weights, spins = read$spins,
+  comm <- cluster_spinglass(graph,
+    weights = read$weights, spins = read$spins,
     parupdate = read$parupdate, start.temp = read$start.temp,
     stop.temp = read$stop.temp, cool.fact = read$cool.fact,
-    update.rule = read$update.rule, gamma = read$gamma)
+    update.rule = read$update.rule, gamma = read$gamma
+  )
 
   .tkigraph.spinglass.community.dialog(comm, read, gnos)
 }
@@ -1824,11 +2186,17 @@ tkigraph <- function() {
   tcltk::tktitle(dialog) <- "Spinglass community structure algorithm results"
 
   read$update.rule <- if (read$update.rule == "simple") "Simple" else "Configuration model"
-  tcltk::tkgrid(tcltk::tklabel(dialog, text = "Spinglass community structure algorithm results",
-    font = tcltk::tkfont.create(family = "times", size = 16, weight = "bold")),
-  columnspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10)
-  tcltk::tkgrid(txt <- tcltk::tktext(dialog), columnspan = 1, rowspan = 5, sticky = "nsew",
-    "in" = frame, padx = 10, pady = 10)
+  tcltk::tkgrid(
+    tcltk::tklabel(dialog,
+      text = "Spinglass community structure algorithm results",
+      font = tcltk::tkfont.create(family = "times", size = 16, weight = "bold")
+    ),
+    columnspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10
+  )
+  tcltk::tkgrid(txt <- tcltk::tktext(dialog),
+    columnspan = 1, rowspan = 5, sticky = "nsew",
+    "in" = frame, padx = 10, pady = 10
+  )
   tcltk::tkconfigure(txt, height = 15)
   tcltk::tkinsert(txt, "end", "Parameters were:\n")
   tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
@@ -1843,34 +2211,52 @@ tkigraph <- function() {
   tcltk::tkinsert(txt, "end", paste("  Cooling factor was", read$cool.fact, "\n"))
 
   tcltk::tkinsert(txt, "end", "\nResults:\n")
-  tcltk::tkinsert(txt, "end", paste("  Number of communities found:", length(comm$csize),
-    "\n"))
+  tcltk::tkinsert(txt, "end", paste(
+    "  Number of communities found:", length(comm$csize),
+    "\n"
+  ))
   tcltk::tkinsert(txt, "end", paste("  Modularity of the result:", comm$modularity, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Stopped at temperature:", comm$temperature, "\n"))
   tcltk::tkconfigure(txt, state = "disabled")
 
   show.communities <- function() {
-    members <- sapply(sapply(seq(along.with = comm$csize),
-      function(i) which(comm$membership == i)),
-    paste, collapse = ", ")
+    members <- sapply(
+      sapply(
+        seq(along.with = comm$csize),
+        function(i) which(comm$membership == i)
+      ),
+      paste,
+      collapse = ", "
+    )
     value <- data.frame("Community" = seq(along.with = comm$csize), "Members" = members)
     .tkigraph.showData(value,
-      title = paste("Communities, spinglass algorithm on graph #",
-        gnos), right = FALSE)
+      title = paste(
+        "Communities, spinglass algorithm on graph #",
+        gnos
+      ), right = FALSE
+    )
   }
   show.membership <- function() {
-    value <- data.frame("Vertex" = seq(along.with = comm$membership),
-      "Community" = comm$membership)
+    value <- data.frame(
+      "Vertex" = seq(along.with = comm$membership),
+      "Community" = comm$membership
+    )
     .tkigraph.showData(value,
-      title = paste("Communities, spinglass algorithm on graph #",
-        gnos))
+      title = paste(
+        "Communities, spinglass algorithm on graph #",
+        gnos
+      )
+    )
   }
   show.csize <- function() {
     value <- data.frame("Comm. #" = seq(along.with = comm$csize), "Size" = comm$csize)
     value <- value[order(value[, 2], decreasing = TRUE), ]
     .tkigraph.showData(value,
-      title = paste("Communities, spinglass algorithm on graph #",
-        gnos))
+      title = paste(
+        "Communities, spinglass algorithm on graph #",
+        gnos
+      )
+    )
   }
   plot.communities <- function(simple = FALSE) {
     colbar <- rainbow(length(comm$csize) * 2)
@@ -1882,19 +2268,27 @@ tkigraph <- function() {
   }
 
   tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Show communities", command = show.communities),
-    "in" = frame, sticky = "ew", column = 1, row = 1, padx = 10, pady = 10)
+    "in" = frame, sticky = "ew", column = 1, row = 1, padx = 10, pady = 10
+  )
   tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Show membership", command = show.membership),
-    "in" = frame, sticky = "ew", column = 1, row = 2, padx = 10, pady = 10)
+    "in" = frame, sticky = "ew", column = 1, row = 2, padx = 10, pady = 10
+  )
   tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Show community sizes", command = show.csize),
-    "in" = frame, sticky = "ew", column = 1, row = 3, padx = 10, pady = 10)
-  tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Draw communities",
-    command = function() plot.communities(simple = FALSE)),
-  "in" = frame, sticky = "ew", column = 1, row = 4, padx = 10, pady = 10)
+    "in" = frame, sticky = "ew", column = 1, row = 3, padx = 10, pady = 10
+  )
+  tcltk::tkgrid(
+    tcltk::tkbutton(dialog,
+      text = "Draw communities",
+      command = function() plot.communities(simple = FALSE)
+    ),
+    "in" = frame, sticky = "ew", column = 1, row = 4, padx = 10, pady = 10
+  )
   ##   tcltk::tkgrid(tcltk::tkbutton(dialog, text="Create subgraph", command=create.subgraph),
   ##          "in"=frame, sticky="nsew", column=1, row=6, padx=10, pady=10)
 
   tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Close", command = function() tcltk::tkdestroy(dialog)),
-    "in" = frame, sticky = "nsew", columnspan = 2, padx = 10, pady = 10)
+    "in" = frame, sticky = "nsew", columnspan = 2, padx = 10, pady = 10
+  )
 }
 
 .tkigraph.my.spinglass <- function() {
@@ -1911,18 +2305,30 @@ tkigraph <- function() {
   }
 
   weights <- if ("weight" %in% edge_attr_names(graph)) "TRUE" else "FALSE"
-  read <- .tkigraph.dialogbox(TITLE = "Spinglass community of a vertex",
-    vertex = list(name = "Vertex", type = "numeric",
-      default = 1, min = 1, max = vcount(graph)),
-    gamma = list(name = "Gamma parameter",
-      type = "numeric", default = 1),
-    weights = list(name = "Use edge weights",
-      type = "boolean", default = weights),
-    spins = list(name = "Number of spins",
-      type = "numeric", default = 25),
-    update.rule = list(name = "Update rule",
+  read <- .tkigraph.dialogbox(
+    TITLE = "Spinglass community of a vertex",
+    vertex = list(
+      name = "Vertex", type = "numeric",
+      default = 1, min = 1, max = vcount(graph)
+    ),
+    gamma = list(
+      name = "Gamma parameter",
+      type = "numeric", default = 1
+    ),
+    weights = list(
+      name = "Use edge weights",
+      type = "boolean", default = weights
+    ),
+    spins = list(
+      name = "Number of spins",
+      type = "numeric", default = 25
+    ),
+    update.rule = list(
+      name = "Update rule",
       type = "listbox", default = "1",
-      values = c("Simple", "Configuration model")))
+      values = c("Simple", "Configuration model")
+    )
+  )
 
   if (read$vertex < 1 || read$vertex > vcount(graph)) {
     .tkigraph.error("Invalid vertex id")
@@ -1940,9 +2346,11 @@ tkigraph <- function() {
   } else {
     read$weights <- NULL
   }
-  comm <- cluster_spinglass(graph, vertex = read$vertex,
+  comm <- cluster_spinglass(graph,
+    vertex = read$vertex,
     weights = read$weights, spins = read$spins,
-    update.rule = read$update.rule, gamma = read$gamma)
+    update.rule = read$update.rule, gamma = read$gamma
+  )
   .tkigraph.spinglass.mycommunity.dialog(comm, read, gnos)
 }
 
@@ -1952,15 +2360,22 @@ tkigraph <- function() {
   tcltk::tkgrid(frame)
   tcltk::tktitle(dialog) <- "Spinglass community of a single vertex"
 
-  scr <- tcltk::tkscrollbar(dialog, repeatinterval = 5,
-    command = function(...) tcltk::tkyview(txt, ...))
+  scr <- tcltk::tkscrollbar(dialog,
+    repeatinterval = 5,
+    command = function(...) tcltk::tkyview(txt, ...)
+  )
 
   read$update.rule <- if (read$update.rule == "simple") "Simple" else "Configuration model"
-  tcltk::tkgrid(tcltk::tklabel(dialog, text = "Spinglass community of a single vertex",
-    font = tcltk::tkfont.create(family = "times", size = 16, weight = "bold")),
-  columnspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10)
+  tcltk::tkgrid(
+    tcltk::tklabel(dialog,
+      text = "Spinglass community of a single vertex",
+      font = tcltk::tkfont.create(family = "times", size = 16, weight = "bold")
+    ),
+    columnspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10
+  )
   tcltk::tkgrid(txt <- tcltk::tktext(dialog, yscrollcommand = function(...) tcltk::tkset(scr, ...)),
-    columnspan = 1, rowspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10)
+    columnspan = 1, rowspan = 3, sticky = "nsew", "in" = frame, padx = 10, pady = 10
+  )
   tcltk::tkconfigure(txt, height = 17)
   tcltk::tkgrid(scr, row = 1, column = 1, rowspan = 3, sticky = "ns", "in" = frame, pady = 10)
   tcltk::tkinsert(txt, "end", "Parameters were:\n")
@@ -1972,8 +2387,10 @@ tkigraph <- function() {
   tcltk::tkinsert(txt, "end", paste("  Update rule:", read$update.rule, "\n"))
 
   tcltk::tkinsert(txt, "end", "\nResults:\n")
-  tcltk::tkinsert(txt, "end", paste("  Size of the community:", length(comm$community),
-    "\n"))
+  tcltk::tkinsert(txt, "end", paste(
+    "  Size of the community:", length(comm$community),
+    "\n"
+  ))
   tcltk::tkinsert(txt, "end", paste("  Cohesion:", comm$cohesion, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Adhesion:", comm$adhesion, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Inner links:", comm$inner.links, "\n"))
@@ -1999,15 +2416,24 @@ tkigraph <- function() {
     .tkigraph.add.graph(g)
   }
 
-  tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Draw community",
-    command = function() plot.communities(simple = FALSE)),
-  "in" = frame, sticky = "ew", column = 2, row = 1, padx = 10, pady = 10)
-  tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Create graph from community",
-    command = create.graph),
-  "in" = frame, sticky = "ew", column = 2, row = 2, padx = 10, pady = 10)
+  tcltk::tkgrid(
+    tcltk::tkbutton(dialog,
+      text = "Draw community",
+      command = function() plot.communities(simple = FALSE)
+    ),
+    "in" = frame, sticky = "ew", column = 2, row = 1, padx = 10, pady = 10
+  )
+  tcltk::tkgrid(
+    tcltk::tkbutton(dialog,
+      text = "Create graph from community",
+      command = create.graph
+    ),
+    "in" = frame, sticky = "ew", column = 2, row = 2, padx = 10, pady = 10
+  )
 
   tcltk::tkgrid(tcltk::tkbutton(dialog, text = "Close", command = function() tcltk::tkdestroy(dialog)),
-    "in" = frame, sticky = "nsew", columnspan = 3, padx = 10, pady = 10)
+    "in" = frame, sticky = "nsew", columnspan = 3, padx = 10, pady = 10
+  )
 }
 
 .tkigraph.cohesion <- function() {
@@ -2019,8 +2445,10 @@ tkigraph <- function() {
   graphs <- decompose(get("graphs", .tkigraph.env)[[gnos]])
   coh <- sapply(graphs, cohesion)
   value <- data.frame("Component" = seq(length.out = length(graphs)), "Cohesion" = coh)
-  .tkigraph.showData(value, title = paste("Cohesion of components in graph #",
-    gnos), right = FALSE)
+  .tkigraph.showData(value, title = paste(
+    "Cohesion of components in graph #",
+    gnos
+  ), right = FALSE)
 }
 
 #' @importFrom utils browseURL
@@ -2032,10 +2460,14 @@ tkigraph <- function() {
     tcltk::tkdestroy(dialog)
   }
 
-  scr <- tcltk::tkscrollbar(dialog, repeatinterval = 5,
-    command = function(...) tcltk::tkyview(txt, ...))
-  txt <- tcltk::tktext(dialog, yscrollcommand = function(...) tcltk::tkset(scr, ...),
-    width = 80, height = 40)
+  scr <- tcltk::tkscrollbar(dialog,
+    repeatinterval = 5,
+    command = function(...) tcltk::tkyview(txt, ...)
+  )
+  txt <- tcltk::tktext(dialog,
+    yscrollcommand = function(...) tcltk::tkset(scr, ...),
+    width = 80, height = 40
+  )
 
   main.menu <- tcltk::tkmenu(dialog)
   tcltk::tkadd(main.menu, "command", label = "Back", command = function() {
@@ -2059,10 +2491,14 @@ tkigraph <- function() {
     browseURL(tcltk::tclvalue("browser_url"))
   })
 
-  tcltk::tcl("global", "tkigraph_help_root", "tkigraph_help_history",
-    "tkigraph_help_history_pos", "browser_button", "browser_url")
-  tcltk::tcl("set", "tkigraph_help_root",
-    system.file("tkigraph_help", package = "igraph"))
+  tcltk::tcl(
+    "global", "tkigraph_help_root", "tkigraph_help_history",
+    "tkigraph_help_history_pos", "browser_button", "browser_url"
+  )
+  tcltk::tcl(
+    "set", "tkigraph_help_root",
+    system.file("tkigraph_help", package = "igraph")
+  )
   tcltk::tcl("set", "browser_button", browser.button)
 
   tcltk::tcl("source", system.file("html_library.tcl", package = "igraph"))
@@ -2084,15 +2520,21 @@ tkigraph <- function() {
 .tkigraph.about <- function() {
   dialog <- tcltk::tktoplevel()
   tcltk::tktitle(dialog) <- "About tkigraph"
-  image <- tcltk::tkimage.create("photo", "img", format = "gif",
-    file = system.file("igraph.gif", package = "igraph"))
+  image <- tcltk::tkimage.create("photo", "img",
+    format = "gif",
+    file = system.file("igraph.gif", package = "igraph")
+  )
   logo <- tcltk::tklabel(dialog, relief = "flat", padx = 10, pady = 10, image = image)
-  label <- tcltk::tklabel(dialog, padx = 30, pady = 10,
-    text = paste(sep = "", "tkigraph (c) 2009 Gabor Csardi\n",
+  label <- tcltk::tklabel(dialog,
+    padx = 30, pady = 10,
+    text = paste(
+      sep = "", "tkigraph (c) 2009 Gabor Csardi\n",
       "igraph (c) 2003-2009 Gabor Csardi and Tamas Nepusz\n\n",
       "This is igraph version ",
       packageDescription("igraph")$Version, " and\n",
-      R.version$version.string))
+      R.version$version.string
+    )
+  )
   close <- tcltk::tkbutton(dialog, text = "Close", command = function() {
     tcltk::tkdestroy(dialog); return()
   })
@@ -2130,8 +2572,10 @@ tkigraph <- function() {
            sort.button = TRUE,
            inthis = NULL) {
     if (suppress.X11.warnings) { ## as in John Fox's Rcmdr package
-      messages.connection <- textConnection(".messages", open = "w",
-        local = TRUE)
+      messages.connection <- textConnection(".messages",
+        open = "w",
+        local = TRUE
+      )
       sink(messages.connection, type = "message")
       on.exit({
         sink(type = "message")
@@ -2160,7 +2604,8 @@ tkigraph <- function() {
     zz <- strsplit(textConnectionValue(conn), "\n", fixed = TRUE)
     close(conn)
     if (length(zz) > 1 + nrow(dataframe)) stop(
-      "data frame too wide")
+      "data frame too wide"
+    )
     options(width = oldwidth)
     if (is.null(inthis)) {
       base <- tcltk::tktoplevel()
@@ -2189,14 +2634,16 @@ tkigraph <- function() {
       font = font,
       height = 1,
       width = winwidth,
-      takefocus = TRUE)
+      takefocus = TRUE
+    )
     ftr <- tcltk::tktext(base,
       bg = colname.bgcolor,
       fg = colname.textcolor,
       font = font,
       height = 1,
       width = winwidth,
-      takefocus = TRUE)
+      takefocus = TRUE
+    )
     textheight <- min(maxheight, nrows)
     txt <- tcltk::tktext(base,
       bg = body.bgcolor,
@@ -2205,21 +2652,24 @@ tkigraph <- function() {
       height = textheight,
       width = winwidth,
       setgrid = 1,
-      takefocus = TRUE)
+      takefocus = TRUE
+    )
     lnames <- tcltk::tktext(base,
       bg = rowname.bgcolor,
       fg = rowname.textcolor,
       font = font,
       height = textheight,
       width = namewidth,
-      takefocus = TRUE)
+      takefocus = TRUE
+    )
     rnames <- tcltk::tktext(base,
       bg = rowname.bgcolor,
       fg = rowname.textcolor,
       font = font,
       height = textheight,
       width = namewidth,
-      takefocus = TRUE)
+      takefocus = TRUE
+    )
     xscroll <- tcltk::tkscrollbar(base,
       orient = "horizontal",
       repeatinterval = 1,
@@ -2227,7 +2677,8 @@ tkigraph <- function() {
         tcltk::tkxview(txt, ...)
         tcltk::tkxview(hdr, ...)
         tcltk::tkxview(ftr, ...)
-      })
+      }
+    )
     string.to.vector <- function(string.of.indices) {
       string.of.indices <- tcltk::tclvalue(string.of.indices)
       as.numeric(strsplit(string.of.indices, split = " ")[[1]])
@@ -2257,7 +2708,8 @@ tkigraph <- function() {
         tcltk::tkyview(txt, ...)
         tcltk::tkyview(lnames, ...)
         tcltk::tkyview(rnames, ...)
-      })
+      }
+    )
     tcltk::tkconfigure(txt, yscrollcommand = function(...) {
       tcltk::tkset(yscroll, ...)
       xy <- string.to.vector(tcltk::tkget(yscroll))
@@ -2282,14 +2734,18 @@ tkigraph <- function() {
     ## The next block just enables copying from the text boxes
     {
       copyText.hdr <- function() {
-        tcltk::tcl("event", "generate",
+        tcltk::tcl(
+          "event", "generate",
           tcltk::.Tk.ID(hdr),
-          "<<Copy>>")
+          "<<Copy>>"
+        )
       }
       tcltk::tkbind(hdr, "<Button-1>", function() tcltk::tkfocus(hdr))
       editPopupMenu.hdr <- tcltk::tkmenu(hdr, tearoff = FALSE)
-      tcltk::tkadd(editPopupMenu.hdr, "command", label = "Copy <Ctrl-C>",
-        command = copyText.hdr)
+      tcltk::tkadd(editPopupMenu.hdr, "command",
+        label = "Copy <Ctrl-C>",
+        command = copyText.hdr
+      )
       RightClick.hdr <- function(x, y) # x and y are the mouse coordinates
       {
         rootx <- as.integer(tcltk::tkwinfo("rootx", hdr))
@@ -2302,14 +2758,18 @@ tkigraph <- function() {
       tcltk::tkbind(hdr, "<Control-KeyPress-c>", copyText.hdr)
       ##
       copyText.ftr <- function() {
-        tcltk::tcl("event", "generate",
+        tcltk::tcl(
+          "event", "generate",
           tcltk::.Tk.ID(ftr),
-          "<<Copy>>")
+          "<<Copy>>"
+        )
       }
       tcltk::tkbind(ftr, "<Button-1>", function() tcltk::tkfocus(ftr))
       editPopupMenu.ftr <- tcltk::tkmenu(ftr, tearoff = FALSE)
-      tcltk::tkadd(editPopupMenu.ftr, "command", label = "Copy <Ctrl-C>",
-        command = copyText.ftr)
+      tcltk::tkadd(editPopupMenu.ftr, "command",
+        label = "Copy <Ctrl-C>",
+        command = copyText.ftr
+      )
       RightClick.ftr <- function(x, y) # x and y are the mouse coordinates
       {
         rootx <- as.integer(tcltk::tkwinfo("rootx", ftr))
@@ -2322,14 +2782,18 @@ tkigraph <- function() {
       tcltk::tkbind(ftr, "<Control-KeyPress-c>", copyText.ftr)
       ##
       copyText.txt <- function() {
-        tcltk::tcl("event", "generate",
+        tcltk::tcl(
+          "event", "generate",
           tcltk::.Tk.ID(txt),
-          "<<Copy>>")
+          "<<Copy>>"
+        )
       }
       tcltk::tkbind(txt, "<Button-1>", function() tcltk::tkfocus(txt))
       editPopupMenu.txt <- tcltk::tkmenu(txt, tearoff = FALSE)
-      tcltk::tkadd(editPopupMenu.txt, "command", label = "Copy <Ctrl-C>",
-        command = copyText.txt)
+      tcltk::tkadd(editPopupMenu.txt, "command",
+        label = "Copy <Ctrl-C>",
+        command = copyText.txt
+      )
       RightClick.txt <- function(x, y) # x and y are the mouse coordinates
       {
         rootx <- as.integer(tcltk::tkwinfo("rootx", txt))
@@ -2342,14 +2806,18 @@ tkigraph <- function() {
       tcltk::tkbind(txt, "<Control-KeyPress-c>", copyText.txt)
       ##
       copyText.lnames <- function() {
-        tcltk::tcl("event", "generate",
+        tcltk::tcl(
+          "event", "generate",
           tcltk::.Tk.ID(lnames),
-          "<<Copy>>")
+          "<<Copy>>"
+        )
       }
       tcltk::tkbind(lnames, "<Button-1>", function() tcltk::tkfocus(lnames))
       editPopupMenu.lnames <- tcltk::tkmenu(lnames, tearoff = FALSE)
-      tcltk::tkadd(editPopupMenu.lnames, "command", label = "Copy <Ctrl-C>",
-        command = copyText.lnames)
+      tcltk::tkadd(editPopupMenu.lnames, "command",
+        label = "Copy <Ctrl-C>",
+        command = copyText.lnames
+      )
       RightClick.lnames <- function(x, y) # x and y are the mouse coordinates
       {
         rootx <- as.integer(tcltk::tkwinfo("rootx", lnames))
@@ -2362,14 +2830,18 @@ tkigraph <- function() {
       tcltk::tkbind(lnames, "<Control-KeyPress-c>", copyText.lnames)
       ##
       copyText.rnames <- function() {
-        tcltk::tcl("event", "generate",
+        tcltk::tcl(
+          "event", "generate",
           tcltk::.Tk.ID(rnames),
-          "<<Copy>>")
+          "<<Copy>>"
+        )
       }
       tcltk::tkbind(rnames, "<Button-1>", function() tcltk::tkfocus(rnames))
       editPopupMenu.rnames <- tcltk::tkmenu(rnames, tearoff = FALSE)
-      tcltk::tkadd(editPopupMenu.rnames, "command", label = "Copy <Ctrl-C>",
-        command = copyText.rnames)
+      tcltk::tkadd(editPopupMenu.rnames, "command",
+        label = "Copy <Ctrl-C>",
+        command = copyText.rnames
+      )
       RightClick.rnames <- function(x, y) # x and y are the mouse coordinates
       {
         rootx <- as.integer(tcltk::tkwinfo("rootx", rnames))
@@ -2388,7 +2860,8 @@ tkigraph <- function() {
     tcltk::tktag.configure(lnames, "notwrapped", wrap = "none")
     tcltk::tktag.configure(rnames, "notwrapped", wrap = "none")
     tcltk::tkinsert(txt, "end", paste(paste(yy[-1], collapse = "\n"),
-      sep = ""), "notwrapped")
+      sep = ""
+    ), "notwrapped")
 
     tcltk::tkgrid(txt, row = 1, column = 1, sticky = "nsew")
     if ("top" %in% colname.bar) {
@@ -2400,15 +2873,19 @@ tkigraph <- function() {
       tcltk::tkgrid(ftr, row = 2, column = 1, sticky = "ew")
     }
     if ("left" %in% rowname.bar) {
-      tcltk::tkinsert(lnames, "end",
+      tcltk::tkinsert(
+        lnames, "end",
         paste(rowname.text, collapse = "\n"),
-        "notwrapped")
+        "notwrapped"
+      )
       tcltk::tkgrid(lnames, row = 1, column = 0, sticky = "ns")
     }
     if ("right" %in% rowname.bar) {
-      tcltk::tkinsert(rnames, "end",
+      tcltk::tkinsert(
+        rnames, "end",
         paste(rowname.text, collapse = "\n"),
-        "notwrapped")
+        "notwrapped"
+      )
       tcltk::tkgrid(rnames, row = 1, column = 2, sticky = "ns")
     }
     tcltk::tkconfigure(hdr, state = "disabled")
@@ -2447,7 +2924,8 @@ tkigraph <- function() {
         right = right,
         showmean = showmean,
         sort.button = sort.button,
-        inthis = base)
+        inthis = base
+      )
     }
 
     pf <- tcltk::tkframe(base)
@@ -2457,8 +2935,10 @@ tkigraph <- function() {
 
     if (!is.null(showmean) && is.null(inthis)) {
       for (i in seq(along.with = showmean)) {
-        tcltk::tkgrid(tcltk::tklabel(base, text = showmean[1]), sticky = "nsew",
-          column = 0, padx = 1, pady = 1, columnspan = 4)
+        tcltk::tkgrid(tcltk::tklabel(base, text = showmean[1]),
+          sticky = "nsew",
+          column = 0, padx = 1, pady = 1, columnspan = 4
+        )
       }
     }
 
@@ -2466,15 +2946,22 @@ tkigraph <- function() {
 
     sortPopup <- function() {
       sortMenu <- tcltk::tkmenu(base, tearoff = FALSE)
-      sapply(seq(along.with = colnames(dataframe)),
+      sapply(
+        seq(along.with = colnames(dataframe)),
         function(n) {
-          tcltk::tkadd(sortMenu, "command", label = colnames(dataframe)[n],
-            command = function() sortColumn(colnames(dataframe)[n]))
+          tcltk::tkadd(sortMenu, "command",
+            label = colnames(dataframe)[n],
+            command = function() sortColumn(colnames(dataframe)[n])
+          )
           label <- paste(colnames(dataframe)[n], "decreasing", sep = ", ")
-          tcltk::tkadd(sortMenu, "command", label = label,
+          tcltk::tkadd(sortMenu, "command",
+            label = label,
             command = function() sortColumn(colnames(dataframe)[n],
-              decreasing = TRUE))
-        })
+              decreasing = TRUE
+            )
+          )
+        }
+      )
       rootx <- as.integer(tcltk::tkwinfo("rootx", sortBut))
       rooty <- as.integer(tcltk::tkwinfo("rooty", sortBut))
       tcltk::tkpopup(sortMenu, rootx, rooty)
@@ -2486,15 +2973,19 @@ tkigraph <- function() {
     }
 
     if (sort.button) {
-      tcltk::tkgrid(sortBut, "in" = pf, sticky = "ew", column = 10, row = 2,
-        padx = 1, pady = 1)
+      tcltk::tkgrid(sortBut,
+        "in" = pf, sticky = "ew", column = 10, row = 2,
+        padx = 1, pady = 1
+      )
     }
     tcltk::tkconfigure(sortBut, command = sortPopup)
 
     savebut <- tcltk::tkbutton(base, text = "Export table to file", command = function() {
-      filename <- tcltk::tkgetSaveFile(initialfile = "data.txt",
+      filename <- tcltk::tkgetSaveFile(
+        initialfile = "data.txt",
         defaultextension = "txt",
-        title = "Export as table")
+        title = "Export as table"
+      )
       filename <- paste(as.character(filename), collapse = " ")
       write.table(dataframe, file = filename, row.names = FALSE, col.names = FALSE)
     })
@@ -2512,7 +3003,8 @@ tkigraph <- function() {
   }
 
 .tkigraph.net.moody.white <-
-  matrix(c(0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  matrix(c(
+    0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -2534,4 +3026,5 @@ tkigraph <- function() {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0,
     0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0), nrow = 23, ncol = 23)
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0
+  ), nrow = 23, ncol = 23)

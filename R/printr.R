@@ -26,7 +26,6 @@
 #' @export
 
 printer_callback <- function(fun) {
-
   if (!is.function(fun)) warning("'fun' is not a function")
   add_class(fun, "printer_callback")
 }
@@ -84,7 +83,6 @@ head_print <- function(x, max_lines = 20, header = "", footer = "",
 
 head_print_object <- function(x, max_lines, header, footer, omitted_footer,
                               print_fun = print, ...) {
-
   print_header(header)
 
   cout <- capture.output(print_fun(x, ...))
@@ -129,12 +127,15 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## Format them, and print
   out_lines <- head_print_object(
-    x("print", no = no, ...), print_fun = cat_pern, max_lines = max_lines,
+    x("print", no = no, ...),
+    print_fun = cat_pern, max_lines = max_lines,
     header = "", footer = "", omitted_footer = ""
   )
 
-  done_stat <- c(tried_items = no, tried_lines = out_lines[["lines"]],
-    printed_lines = out_lines[["printed"]])
+  done_stat <- c(
+    tried_items = no, tried_lines = out_lines[["lines"]],
+    printed_lines = out_lines[["printed"]]
+  )
 
   if (done_stat["tried_items"] < len ||
     done_stat["printed_lines"] < done_stat["tried_lines"]) {
@@ -157,7 +158,6 @@ head_print_callback <- function(x, max_lines, header, footer,
 #' @export
 
 indent_print <- function(..., .indent = " ", .printer = print) {
-
   if (length(.indent) != 1) stop(".indent must be a scalar")
 
   opt <- options(width = getOption("width") - nchar(.indent))
@@ -181,7 +181,6 @@ indent_print <- function(..., .indent = " ", .printer = print) {
 NULL
 
 add_class <- function(x, class) {
-
   if (!inherits(x, class)) {
     class(x) <- c(class(x), class)
   }

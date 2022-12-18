@@ -84,14 +84,12 @@ i.parse.plot.params <- function(graph, params) {
         return(ret())
       }
     }
-
   }
 
   return(func)
 }
 
 i.get.edge.labels <- function(graph, edge.labels = NULL) {
-
   if (is.null(edge.labels)) {
     edge.labels <- rep(NA, ecount(graph))
   }
@@ -100,7 +98,6 @@ i.get.edge.labels <- function(graph, edge.labels = NULL) {
 }
 
 i.get.labels <- function(graph, labels = NULL) {
-
   if (is.null(labels)) {
     if ("name" %in% vertex_attr_names(graph)) {
       labels <- vertex_attr(graph, "name")
@@ -112,7 +109,6 @@ i.get.labels <- function(graph, labels = NULL) {
 }
 
 i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
-
   if (is.character(arrow.mode) &&
     length(arrow.mode) == 1 && substr(arrow.mode, 1, 2) == "a:") {
     arrow.mode <- vertex_attr(graph, substring(arrow.mode, 3))
@@ -200,8 +196,10 @@ i.postprocess.layout <- function(maybe_layout) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph(c(0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
-#'   2, 3, 2, 3, 2, 3, 2, 3, 0, 1) + 1)
+#' g <- graph(c(
+#'   0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
+#'   2, 3, 2, 3, 2, 3, 2, 3, 0, 1
+#' ) + 1)
 #'
 #' curve_multiple(g)
 #'
@@ -220,7 +218,8 @@ curve_multiple <- function(graph, start = 0.5) {
 }
 
 .igraph.logo.raster <-
-  structure(c(16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
+  structure(c(
+    16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
@@ -907,9 +906,11 @@ curve_multiple <- function(graph, start = 0.5) {
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
-    16777215L, 16777215L, 16777215L), .Dim = c(64L, 64L), class = "nativeRaster", channels = 4L)
+    16777215L, 16777215L, 16777215L
+  ), .Dim = c(64L, 64L), class = "nativeRaster", channels = 4L)
 
-i.vertex.default <- list(color = 1,
+i.vertex.default <- list(
+  color = 1,
   size = 15,
   size2 = 15,
   label = i.get.labels,
@@ -923,14 +924,18 @@ i.vertex.default <- list(color = 1,
   frame.width = 1,
   shape = "circle",
   pie = 1,
-  pie.color = list(c("white", "lightblue", "mistyrose",
-    "lightcyan", "lavender", "cornsilk")),
+  pie.color = list(c(
+    "white", "lightblue", "mistyrose",
+    "lightcyan", "lavender", "cornsilk"
+  )),
   pie.angle = 45,
   pie.density = -1,
   pie.lty = 1,
-  raster = .igraph.logo.raster)
+  raster = .igraph.logo.raster
+)
 
-i.edge.default <- list(color = "darkgrey",
+i.edge.default <- list(
+  color = "darkgrey",
   label = i.get.edge.labels,
   lty = 1,
   width = 1,
@@ -945,9 +950,11 @@ i.edge.default <- list(color = "darkgrey",
   arrow.size = 1,
   arrow.mode = i.get.arrow.mode,
   curved = curve_multiple,
-  arrow.width = 1)
+  arrow.width = 1
+)
 
-i.plot.default <- list(palette = categorical_pal(8),
+i.plot.default <- list(
+  palette = categorical_pal(8),
   layout = layout_nicely,
   margin = c(0, 0, 0, 0),
   rescale = TRUE,
@@ -956,7 +963,8 @@ i.plot.default <- list(palette = categorical_pal(8),
   main = i.get.main,
   sub = "",
   xlab = i.get.xlab,
-  ylab = "")
+  ylab = ""
+)
 
 i.default.values <- new.env()
 

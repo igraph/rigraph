@@ -23,9 +23,11 @@ test_that("Graphlets work for some simple graphs", {
 })
 
 test_that("Graphlets filtering works", {
-  gt <- data.frame(from = c("A", "A", "B", "B", "B", "C", "C", "D"),
+  gt <- data.frame(
+    from = c("A", "A", "B", "B", "B", "C", "C", "D"),
     to = c("B", "C", "C", "D", "E", "D", "E", "E"),
-    weight = c(8, 8, 8, 5, 5, 5, 5, 5))
+    weight = c(8, 8, 8, 5, 5, 5, 5, 5)
+  )
 
   g <- graph_from_data_frame(gt, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
   gl <- sortgl(graphlet_basis(g))
@@ -48,7 +50,6 @@ threshold.net <- function(graph, level) {
 }
 
 graphlets.old <- function(graph) {
-
   if (!is_weighted(graph)) {
     stop("Graph not weighted")
   }
@@ -91,7 +92,6 @@ test_that("Graphlets work for a bigger graph", {
 })
 
 graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
-
   if (!is_weighted(graph)) {
     stop("Graph not weighted")
   }

@@ -1,5 +1,4 @@
 test_that("dyad_census works", {
-
   g1 <- make_ring(10)
   expect_that(dc1 <- dyad_census(g1), gives_warning("undirected"))
   expect_that(dc1, equals(list(mut = 10, asym = 0, null = 35)))
@@ -15,5 +14,4 @@ test_that("dyad_census works", {
   g4 <- make_empty_graph(2000000)
   expect_that(dc4 <- dyad_census(g4), gives_warning("Integer overflow"))
   expect_that(dc4, equals(list(mut = 0, asym = 0, null = 0)))
-
 })

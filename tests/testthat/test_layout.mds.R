@@ -30,5 +30,4 @@ test_that("layout_with_mds works", {
     l <- layout_with_mds(g)
     expect_that(ncol(l), equals(2))
   }
-
 })
