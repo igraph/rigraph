@@ -164,7 +164,8 @@
         cat(sep = "", "[[", i, "]]\n")
         lapply(list, function(n) {
           cat(sep = "", "[[", i, "]][[", n, "]]\n")
-          print(vertex_attr(x, n, i))})
+          print(vertex_attr(x, n, i))
+        })
       }
     }
     options(max.print = mp)
@@ -203,7 +204,9 @@
   } else {
     omitted.edges <- ec - mp
     el <- ends(x, ends[seq_len(mp)])
-    if (names) { el[] <- V(x)$name[el] }
+    if (names) {
+      el[] <- V(x)$name[el]
+    }
   }
   ename <- if ("name" %in% edge_attr_names(x)) {
     paste(sep = "", "'", E(x)$name, "'")
@@ -216,7 +219,11 @@
       is.logical(edge_attr(x, v))))) {
     ## create a table
     tab <- data.frame(row.names = paste(sep = "", "[", ename, "]"))
-    if (is.numeric(el)) { w <- nchar(max(el)) } else { w <- max(nchar(el)) }
+    if (is.numeric(el)) {
+      w <- nchar(max(el))
+    } else {
+      w <- max(nchar(el))
+    }
     tab["edge"] <- paste(sep = "", format(el[, 1], width = w),
       arrow, format(el[, 2], width = w))
     for (i in list) {
@@ -229,7 +236,8 @@
       cat(sep = "", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2]);
       lapply(list, function(n) {
         cat(sep = "", "\n[[", i, "]][[", n, "]]\n")
-        print(edge_attr(x, n, i))})
+        print(edge_attr(x, n, i))
+      })
       cat("\n")
       i <<- i + 1
     })
@@ -403,7 +411,9 @@
   vn <- V(x)$name
 
   al <- as_adj_list(x, mode = "out")
-  alstr <- sapply(al, function(x) { paste(collapse = ", ", vn[x]) })
+  alstr <- sapply(al, function(x) {
+    paste(collapse = ", ", vn[x])
+  })
   alstr <- paste(sep = "", format(vn), arrow, alstr)
   alstr <- strwrap(alstr, exdent = max(nchar(vn)) + nchar(arrow))
   cat(alstr, sep = "\n")

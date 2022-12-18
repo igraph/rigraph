@@ -4,7 +4,11 @@ test_that("make_bipartite_graph works", {
 
   edges <- unlist(sapply(seq_len(nrow(I)), function(x) {
     w <- which(I[x, ] != 0) + nrow(I)
-    if (length(w) != 0) { as.vector(rbind(x, w)) } else { numeric() }
+    if (length(w) != 0) {
+      as.vector(rbind(x, w))
+    } else {
+      numeric()
+    }
   }))
   g2 <- make_bipartite_graph(seq_len(nrow(I) + ncol(I)) > nrow(I), edges)
   I2 <- as_incidence_matrix(g2)

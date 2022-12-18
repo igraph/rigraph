@@ -153,7 +153,9 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
     warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
   }
   # Argument checks
-  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  if (!is.null(graph) && !is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   nodes <- as.integer(nodes)
   mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   loops <- as.logical(loops)
@@ -200,7 +202,9 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #' centr_eigen(g, directed = FALSE)$centralization
 centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 

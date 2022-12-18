@@ -83,7 +83,9 @@
 #'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
-#' lpvs <- apply(lpvs, 2, function(x) { return(abs(x) / sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   return(abs(x) / sqrt(sum(x^2)))
+#' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @export
@@ -130,7 +132,9 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' # Sample random vectors with multivariate normal distribution
 #' # and normalize to unit length
 #' lpvs <- matrix(rnorm(200), 10, 20)
-#' lpvs <- apply(lpvs, 2, function(x) { (abs(x) / sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   (abs(x) / sqrt(sum(x^2)))
+#' })
 #' RDP.graph <- sample_dot_product(lpvs)
 #' dim_select(embed_adjacency_matrix(RDP.graph, 10)$D)
 #'
@@ -217,7 +221,9 @@ dim_select <- dim_select
 #'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
-#' lpvs <- apply(lpvs, 2, function(x) { return(abs(x) / sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   return(abs(x) / sqrt(sum(x^2)))
+#' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 embed_laplacian_matrix <- embed_laplacian_matrix
@@ -247,7 +253,9 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' @examples
 #' lpvs.sph <- sample_sphere_surface(dim = 10, n = 20, radius = 1)
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
-#' vec.norm <- apply(lpvs.sph, 2, function(x) { sum(x^2) })
+#' vec.norm <- apply(lpvs.sph, 2, function(x) {
+#'   sum(x^2)
+#' })
 #' vec.norm
 sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks
@@ -287,7 +295,9 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' @examples
 #' lpvs.sph.vol <- sample_sphere_volume(dim = 10, n = 20, radius = 1)
 #' RDP.graph.4 <- sample_dot_product(lpvs.sph.vol)
-#' vec.norm <- apply(lpvs.sph.vol, 2, function(x) { sum(x^2) })
+#' vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
+#'   sum(x^2)
+#' })
 #' vec.norm
 sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks

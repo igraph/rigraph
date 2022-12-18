@@ -49,7 +49,9 @@ threshold.net <- function(graph, level) {
 
 graphlets.old <- function(graph) {
 
-  if (!is_weighted(graph)) { stop("Graph not weighted") }
+  if (!is_weighted(graph)) {
+    stop("Graph not weighted")
+  }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
@@ -90,7 +92,9 @@ test_that("Graphlets work for a bigger graph", {
 
 graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 
-  if (!is_weighted(graph)) { stop("Graph not weighted") }
+  if (!is_weighted(graph)) {
+    stop("Graph not weighted")
+  }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
@@ -129,7 +133,9 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   })
 
   ## OK, we are ready to do the projection now
-  if (is.null(Mu)) { Mu <- rep(1, length(clf)) }
+  if (is.null(Mu)) {
+    Mu <- rep(1, length(clf))
+  }
   origw <- E(graph)$weight
   w <- numeric(length(ecl))
   a <- sapply(clf, function(x) length(x) * (length(x) + 1) / 2)

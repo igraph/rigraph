@@ -11,7 +11,6 @@ am <- function(x) {
 g <- make_tree(20)
 
 test_that("[ indexing works", {
-
   ## Are these vertices connected?
   expect_that(g[1, 2], equals(1))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(1, 1, 0, 1, 1, 0, 0, 0, 1)))
@@ -24,7 +23,6 @@ test_that("[ indexing works", {
 V(g)$name <- letters[1:vcount(g)]
 
 test_that("[ indexing works with symbolic names", {
-
   ## The same with symbolic names
   expect_that(g['a', 'b'], equals(1))
   expect_that(am(g[c('a', 'a', 'g'), c('b', 'c', 'n')]),
@@ -37,7 +35,6 @@ test_that("[ indexing works with symbolic names", {
 })
 
 test_that("[ indexing works with logical vectors", {
-
   ## Logical vectors
   lres <- structure(c(0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -50,7 +47,6 @@ test_that("[ indexing works with logical vectors", {
 })
 
 test_that("[ indexing works with negative indices", {
-
   ## Negative indices
   nres <- structure(c(0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -66,7 +62,6 @@ el <- as_edgelist(g, names = FALSE)
 E(g)$weight <- el[, 1] * el[, 2]
 
 test_that("[ indexing works with weighted graphs", {
-
   ## Weighted graphs
   expect_that(g[1, 2], equals(2))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
@@ -76,24 +71,21 @@ test_that("[ indexing works with weighted graphs", {
   expect_that(am(g[c(8, 17), c(17, 8)]), equals(mm(136, 0, 0, 0)))
 })
 
-test_that("[ indexing works with weighted graphs and symbolic names",
-  {
-
-    ## Weighted graph, with symbolic names
-    expect_that(g['a', 'b'], equals(2))
-    expect_that(am(g[c('a', 'a', 'g'), c('b', 'c', 'n')]),
-      equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
-    expect_that(am(g[c('a', 'a', 'g'), c('e', 'c', 'l')]),
-      equals(mm(0, 0, 0, 3, 3, 0, 0, 0, 0)))
-    expect_that(am(g[c('a', 'a', 'a', 'a'), c('b', 'c', 'b', 'b')]),
-      equals(mm(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2)))
-    expect_that(am(g[c('h', 'q'), c('q', 'h')]), equals(mm(136, 0, 0, 0)))
+test_that("[ indexing works with weighted graphs and symbolic names",  {
+  ## Weighted graph, with symbolic names
+  expect_that(g['a', 'b'], equals(2))
+  expect_that(am(g[c('a', 'a', 'g'), c('b', 'c', 'n')]),
+    equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
+  expect_that(am(g[c('a', 'a', 'g'), c('e', 'c', 'l')]),
+    equals(mm(0, 0, 0, 3, 3, 0, 0, 0, 0)))
+  expect_that(am(g[c('a', 'a', 'a', 'a'), c('b', 'c', 'b', 'b')]),
+    equals(mm(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2)))
+  expect_that(am(g[c('h', 'q'), c('q', 'h')]), equals(mm(136, 0, 0, 0)))
 })
 
 ################################################################
 
 test_that("[[ indexing works", {
-
   ## Adjacent vertices
   expect_that(g[[1, ]], is_equivalent_to(list(a = V(g)[2:3])))
   expect_that(g[[, 2]], is_equivalent_to(list(b = V(g)[1])))
@@ -109,7 +101,6 @@ test_that("[[ indexing works", {
 })
 
 test_that("[[ indexing works with symbolic names", {
-
   ## Same with vertex names
   expect_that(g[['a', ]], is_equivalent_to(list(a = V(g)[2:3])))
   expect_that(g[[, 'b']], is_equivalent_to(list(b = V(g)[1])))
@@ -125,14 +116,12 @@ test_that("[[ indexing works with symbolic names", {
 })
 
 test_that("[[ indexing works with logical vectors", {
-
   ## Logical vectors
   expect_that(g[[degree(g, mode = "in") == 0, ]],
     is_equivalent_to(list(a = V(g)[2:3])))
 })
 
 test_that("[[ indexing works with filtering on both ends", {
-
   ## Filtering on both ends
   expect_that(g[[1:10, 1:10]],
     is_equivalent_to(list(a = V(g)[2:3], b = V(g)[4:5], c = V(g)[6:7], d = V(g)[8:9],
@@ -147,7 +136,6 @@ test_that("[[ indexing is consistent with length()", {
 ################################################################
 
 test_that("[ can query edge ids", {
-
   ## Query edge ids
   expect_that(g[1, 2, edges = TRUE], equals(1))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14), edges = TRUE]),
@@ -161,7 +149,6 @@ test_that("[ can query edge ids", {
 })
 
 test_that("[ can query edge ids with symbolic names", {
-
   ## The same with symbolic names
   expect_that(g['a', 'b', edges = TRUE], equals(1))
   expect_that(am(g[c('a', 'a', 'g'), c('b', 'c', 'n'), edges = TRUE]),
@@ -177,7 +164,6 @@ test_that("[ can query edge ids with symbolic names", {
 ################################################################
 
 test_that("[[ can query incident edges", {
-
   ## Incident edges of vertices
   expect_that(g[[1, , edges = TRUE]], is_equivalent_to(list(a = E(g)[1:2])))
   expect_that(g[[, 2, edges = TRUE]], is_equivalent_to(list(b = E(g)[1])))
@@ -193,7 +179,6 @@ test_that("[[ can query incident edges", {
 })
 
 test_that("[[ queries edges with vertex names", {
-
   ## Same with vertex names
   expect_that(g[['a', , edges = TRUE]],
     is_equivalent_to(list(a = E(g)[1:2])))
@@ -219,7 +204,6 @@ test_that("[[ queries edges with vertex names", {
 #################################################################
 
 test_that("[ handles from and to properly", {
-
   ## from & to
   g <- make_tree(20)
   expect_that(g[from = c(1, 2, 2, 3), to = c(3, 4, 8, 7)], equals(c(1, 1, 0, 1)))
@@ -261,7 +245,6 @@ test_that("[[ returns vertex and edges sequences", {
 })
 
 test_that("[[ handles from and to properly even if the graph has conflicting vertex attributes", {
-
   ## from & to
   g <- make_tree(20)
   V(g)$i <- 200:219

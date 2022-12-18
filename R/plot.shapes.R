@@ -281,7 +281,6 @@ shape_noplot <- function(coords, v = NULL, params) {
 add_shape <- function(shape, clip = shape_noclip,
                       plot = shape_noplot,
                       parameters = list()) {
-
   ## TODO
   ## checkScalarString(shape)
   ## checkFunction(clip)
@@ -300,7 +299,9 @@ add_shape <- function(shape, clip = shape_noclip,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
 
@@ -386,7 +387,9 @@ add_shape <- function(shape, clip = shape_noclip,
                                       end = c("both", "from", "to")) {
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
 
@@ -486,7 +489,9 @@ add_shape <- function(shape, clip = shape_noclip,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
 
@@ -540,7 +545,9 @@ add_shape <- function(shape, clip = shape_noclip,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
   vertex.size2 <- 1 / 200 * params("vertex", "size2")
@@ -656,7 +663,9 @@ add_shape <- function(shape, clip = shape_noclip,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
   vertex.size2 <- 1 / 200 * params("vertex", "size2")
@@ -721,7 +730,9 @@ add_shape <- function(shape, clip = shape_noclip,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
   vertex.size2 <- 1 / 200 * params("vertex", "size2")
@@ -817,7 +828,9 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
 
   end <- match.arg(end)
 
-  if (length(coords) == 0) { return(coords) }
+  if (length(coords) == 0) {
+    return(coords)
+  }
 
   vertex.size <- 1 / 200 * params("vertex", "size")
 

@@ -1,5 +1,4 @@
 test_that("edge names work", {
-
   ## named edges
   igraph_options(print.edge.attributes = TRUE)
   g <- make_ring(10)

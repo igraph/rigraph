@@ -167,7 +167,6 @@ test_that("bug #554 is fixed", {
 })
 
 test_that("graph_from_adjacency_matrix works for sparse matrices without values", {
-
   # https://github.com/igraph/rigraph/issues/269
   M <- Matrix::sparseMatrix(i = c(1, 3), j = c(3, 4), dims = c(5, 5))
   g <- graph_from_adjacency_matrix(M)

@@ -638,20 +638,29 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
                   sparse = igraph_opt("sparsematrices"),
                   output = c("default", "matrix", "graph"), semproj = FALSE,
                   epairs = FALSE, stat.prob = FALSE) {
-
   ## Argument checks
-  if (!is.null(graph)) { stopifnot(is_igraph(graph)) }
-  if (!is.null(matrix)) { stopifnot(is.matrix(matrix)) }
-  if (!is.null(sparsemat)) { stopifnot(inherits(sparsemat, "Matrix")) }
+  if (!is.null(graph)) {
+    stopifnot(is_igraph(graph))
+  }
+  if (!is.null(matrix)) {
+    stopifnot(is.matrix(matrix))
+  }
+  if (!is.null(sparsemat)) {
+    stopifnot(inherits(sparsemat, "Matrix"))
+  }
 
-  if (!is.null(sparsemat)) { sparsemat <- as(as(as(sparsemat, "dMatrix"), "generalMatrix"), "CsparseMatrix") }
+  if (!is.null(sparsemat)) {
+    sparsemat <- as(as(as(sparsemat, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  }
   ev <- as.numeric(as.integer(ev))
   nt <- as.numeric(as.integer(nt))
   if (!is.null(groups)) groups <- as.numeric(groups)
   mtype <- igraph.match.arg(mtype)
   algo <- switch(igraph.match.arg(algo), "optimum" = 1,
     "interv_km" = 2, "interv" = 3, "exact_scg" = 4)
-  if (!is.null(groups)) { storage.mode(groups) <- "double" }
+  if (!is.null(groups)) {
+    storage.mode(groups) <- "double"
+  }
   use.arpack <- as.logical(use.arpack)
   maxiter <- as.integer(maxiter)
   sparse <- as.logical(sparse)
@@ -663,14 +672,18 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
   on.exit(.Call(C_R_igraph_finalizer))
 
   if (mtype == "symmetric") {
-    if (!is.null(evec)) { storage.mode(evec) <- "double" }
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "double"
+    }
     res <- .Call(C_R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
       nt, algo, evec, groups,
       use.arpack, maxiter, sparse, output, semproj, epairs)
 
   } else if (mtype == "laplacian") {
     norm <- switch(igraph.match.arg(norm), "row" = 1, "col" = 2)
-    if (!is.null(evec)) { storage.mode(evec) <- "complex" }
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "complex"
+    }
     direction <- switch(igraph.match.arg(direction), "default" = 1, "left" = 2,
       "right" = 3)
     res <- .Call(C_R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
@@ -680,8 +693,12 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 
   } else if (mtype == "stochastic") {
     norm <- switch(igraph.match.arg(norm), "row" = 1, "col" = 2)
-    if (!is.null(evec)) { storage.mode(evec) <- "complex" }
-    if (!is.null(p)) { storage.mode(p) <- "double" }
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "complex"
+    }
+    if (!is.null(p)) {
+      storage.mode(p) <- "double"
+    }
     stat.prob <- as.logical(stat.prob)
     res <- .Call(C_R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
       nt, algo, norm, evec, groups, p, use.arpack,

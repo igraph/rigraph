@@ -24,7 +24,6 @@
 ###################################################################
 
 i.parse.plot.params <- function(graph, params) {
-
   ## store the arguments
   p <- list(vertex = list(), edge = list(), plot = list())
   for (n in names(params)) {

@@ -93,7 +93,9 @@ bipartite_projection <- function(graph, types = NULL,
                                  which = c("both", "true", "false"),
                                  remove.type = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   types <- handle_vertex_type_arg(types, graph)
   if (!is.null(probe1)) {
     probe1 <- as.igraph.vs(graph, probe1) - 1
@@ -128,10 +130,14 @@ bipartite_projection <- function(graph, types = NULL,
     }
     res[1:2]
   } else if (which == 1L) {
-    if (multiplicity) { E(res[[1]])$weight <- res[[3]] }
+    if (multiplicity) {
+      E(res[[1]])$weight <- res[[3]]
+    }
     res[[1]]
   } else {
-    if (multiplicity) { E(res[[2]])$weight <- res[[4]] }
+    if (multiplicity) {
+      E(res[[2]])$weight <- res[[4]]
+    }
     res[[2]]
   }
 }

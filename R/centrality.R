@@ -159,7 +159,9 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 edge_betweenness <- function(graph, e = E(graph),
                              directed = TRUE, weights = NULL, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -256,7 +258,9 @@ closeness <- function(graph, vids = V(graph),
                       mode = c("out", "in", "all", "total"), weights = NULL,
                       normalized = FALSE, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -471,7 +475,9 @@ arpack_defaults <- list(bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
 #'   set.seed(42)
 #'   g <- sample_gnp(1000, 5 / 1000)
 #'   M <- as_adj(g, sparse = TRUE)
-#'   f2 <- function(x, extra = NULL) { cat("."); as.vector(M %*% x) }
+#'   f2 <- function(x, extra = NULL) {
+#'     cat("."); as.vector(M %*% x)
+#'   }
 #'   baev <- arpack(f2, sym = TRUE, options = list(n = vcount(g), nev = 3, ncv = 8,
 #'     which = "LM", maxiter = 2000))
 #' }
@@ -579,7 +585,9 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #'
 subgraph_centrality <- function(graph, diag = FALSE) {
   A <- as_adj(graph)
-  if (!diag) { diag(A) <- 0 }
+  if (!diag) {
+    diag(A) <- 0
+  }
   eig <- eigen(A)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -1083,7 +1091,6 @@ bonpow.dense <- function(graph, nodes = V(graph),
 
 bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
                           exponent = 1, rescale = FALSE, tol = 1e-07) {
-
   ## remove loops if requested
   if (!loops) {
     graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)

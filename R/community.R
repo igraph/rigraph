@@ -429,7 +429,9 @@ modularity <- function(x, ...)
 #'
 modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...) {
   # Argument checks
-  if (!is_igraph(x)) { stop("Not a graph object") }
+  if (!is_igraph(x)) {
+    stop("Not a graph object")
+  }
   if (is.null(membership) || (!is.numeric(membership) && !is.factor(membership))) {
     stop("Membership is not a numerical vector")
   }
@@ -460,7 +462,9 @@ modularity.communities <- function(x, ...) {
 #' @export
 modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (!missing(membership)) {
     warning("The membership argument is deprecated; modularity_matrix does not need it")
   }
@@ -615,8 +619,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk[[1]], "members") <- attr(zk[[2]], "members") <- one
       attr(zk[[1]], "height") <- attr(zk[[2]], "height") <- h0
       attr(zk[[1]], "leaf") <- attr(zk[[2]], "leaf") <- TRUE
-    }
-    else if (any(neg)) { # one leaf, one node
+    } else if (any(neg)) { # one leaf, one node
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
       X <- format(x, scientific = FALSE, trim = TRUE)
@@ -633,8 +636,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk[[2 - isL]], "height") <- h0
       attr(zk[[2 - isL]], "label") <- object$names[x[2 - isL]]
       attr(zk[[2 - isL]], "leaf") <- TRUE
-    }
-    else { # two nodes
+    } else { # two nodes
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
       x <- format(x, scientific = FALSE, trim = TRUE)
@@ -1075,8 +1077,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            weights = NULL, resolution_parameter = 1, beta = 0.01,
-                           initial_membership = NULL, n_iterations = 2, vertex_weights = NULL)
-{
+                           initial_membership = NULL, n_iterations = 2, vertex_weights = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -1188,7 +1189,9 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #' comms <- cluster_fluid_communities(g, 2)
 cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   no.of.communities <- as.integer(no.of.communities)
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -1601,9 +1604,10 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   options = arpack_defaults,
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
-
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   steps <- as.integer(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1613,7 +1617,9 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   } else {
     weights <- NULL
   }
-  if (!is.null(start)) { start <- as.numeric(start) - 1 }
+  if (!is.null(start)) {
+    start <- as.numeric(start) - 1
+  }
   options.tmp <- arpack_defaults; options.tmp[names(options)] <- options ; options <- options.tmp
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -1691,7 +1697,9 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'
 cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1782,7 +1790,9 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #'
 cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1872,7 +1882,9 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' @keywords graphs
 cluster_optimal <- function(graph, weights = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1947,9 +1959,10 @@ cluster_optimal <- function(graph, weights = NULL) {
 #'
 cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
                             nb.trials = 10, modularity = TRUE) {
-
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
     e.weights <- E(graph)$weight
   }
@@ -2150,7 +2163,9 @@ dendPlotPhylo <- function(communities, colbar = palette(),
   getedges <- function(tip) {
     repeat {
       ee <- which(!phy$edge[, 1] %in% tip & phy$edge[, 2] %in% tip)
-      if (length(ee) <= 1) { break }
+      if (length(ee) <= 1) {
+        break
+      }
       tip <- c(tip, unique(phy$edge[ee, 1]))
     }
     ed <- which(phy$edge[, 1] %in% tip & phy$edge[, 2] %in% tip)

@@ -114,7 +114,8 @@ match_vertices <- function(A, B, m, start, iteration) {
     if (c - d + e == 0 && d - 2 * e + u - v == 0) {
       alpha <- 0
     } else {
-      alpha <- -(d - 2 * e + u - v) / (2 * (c - d + e))}
+      alpha <- -(d - 2 * e + u - v) / (2 * (c - d + e))
+    }
     f0 <- 0
     f1 <- c - e + u - v
     falpha <- (c - d + e) * alpha^2 + (d - 2 * e + u - v) * alpha

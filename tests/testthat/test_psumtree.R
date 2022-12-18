@@ -2,7 +2,9 @@ test_that("Prefix sum tree works", {
 
   set.seed(42)
   mysample <- function(x, size, prob = NULL) {
-    if (!is.null(prob)) { prob <- as.numeric(prob) }
+    if (!is.null(prob)) {
+      prob <- as.numeric(prob)
+    }
     .Call(C_R_igraph_psumtree_draw, as.integer(x), as.integer(size), prob)
   }
   S <- mysample(100, 10000)

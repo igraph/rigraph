@@ -109,8 +109,12 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
     stop("Not a graph object");
   }
 
-  if (is.null(min)) { min <- 0 }
-  if (is.null(max)) { max <- 0 }
+  if (is.null(min)) {
+    min <- 0
+  }
+  if (is.null(max)) {
+    max <- 0
+  }
 
   if (!is.null(subset)) {
     subset <- as.integer(as.igraph.vs(graph, subset) - 1)
@@ -152,10 +156,16 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 count_max_cliques <- function(graph, min = NULL, max = NULL,
                               subset = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
 
-  if (is.null(min)) { min <- 0 }
-  if (is.null(max)) { max <- 0 }
+  if (is.null(min)) {
+    min <- 0
+  }
+  if (is.null(max)) {
+    max <- 0
+  }
   min <- as.integer(min)
   max <- as.integer(max)
 

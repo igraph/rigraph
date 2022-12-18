@@ -25,7 +25,9 @@
 #' @export
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
-    if (!is.null(.igraph.pb)) { close(.igraph.pb) }
+    if (!is.null(.igraph.pb)) {
+      close(.igraph.pb)
+    }
     return(invisible())
   }
   type <- igraph_opt("verbose")
@@ -57,7 +59,9 @@
 .igraph.progress.txt <- function(percent, message) {
   pb <- get(".igraph.pb", asNamespace("igraph"))
   if (percent == 0) {
-    if (!is.null(pb)) { close(pb) }
+    if (!is.null(pb)) {
+      close(pb)
+    }
     cat(sep = "", "  ", message, "\n")
     pb <- txtProgressBar(min = 0, max = 100, style = 3)
   }
@@ -73,7 +77,9 @@
 .igraph.progress.tk <- function(percent, message) {
   pb <- get(".igraph.pb", asNamespace("igraph"))
   if (percent == 0) {
-    if (!is.null(pb)) { close(pb) }
+    if (!is.null(pb)) {
+      close(pb)
+    }
     pb <- tcltk::tkProgressBar(min = 0, max = 100, title = message, label = "0 %")
   }
   tcltk::setTkProgressBar(pb, percent, label = paste(percent, "%"))
@@ -134,7 +140,8 @@
     if (!is.na(oldverb) && igraph_opt("verbose") == "tkconsole") {
       igraph_options(verbose = oldverb)
     }
-    tcltk::tkdestroy(console) })
+    tcltk::tkdestroy(console)
+  })
 
   tcltk::tkpack(logo, side = "top", fill = "none", expand = 0, anchor = "n",
     ipadx = 10, ipady = 10)
@@ -173,7 +180,9 @@
   tcltk::tkconfigure(txt, state = "normal")
   now <- paste(sep = "", substr(date(), 5, 19), ": ")
   s1 <- grepl("^ ", message)
-  if (!s1) { tcltk::tkinsert(txt, "insert", now) }
+  if (!s1) {
+    tcltk::tkinsert(txt, "insert", now)
+  }
   tcltk::tkinsert(txt, "insert", message)
   tcltk::tksee(txt, "end")
   tcltk::tkconfigure(txt, state = "disabled")
@@ -213,8 +222,12 @@ close.igraphconsole <- function(con, ...) {
     }
     tcltk::tkpack(pBar, side = "bottom", anchor = "w", padx = 5)
   }
-  get <- function(w) { return(tcltk::tclvalue(.val)); }
-  set <- function(w, val) { tcltk::tclvalue(.val) <<- val }
+  get <- function(w) {
+    return(tcltk::tclvalue(.val));
+  }
+  set <- function(w, val) {
+    tcltk::tclvalue(.val) <<- val
+  }
   pb <- list(widget = pBar, get = get, set = set, label = .lab)
   list(frame = frame, pb = pb)
 }

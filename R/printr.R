@@ -102,7 +102,6 @@ head_print_object <- function(x, max_lines, header, footer, omitted_footer,
 
 head_print_callback <- function(x, max_lines, header, footer,
                                 omitted_footer, ...) {
-
   ## Header
   print_header(header)
 
@@ -112,7 +111,9 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## Max number of items we can print. This is an upper bound.
   can_max <- min(floor(ow / minw) * max_lines, len)
-  if (can_max == 0) { return() }
+  if (can_max == 0) {
+    return()
+  }
 
   ## Width of item if we print up to this
   cm <- x("width", no = can_max)

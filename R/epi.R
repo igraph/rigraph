@@ -39,7 +39,9 @@ time_bins.sir <- function(x, middle = TRUE) {
   w <- 2 * IQR(big.time) / (medlen^(1 / 3))
   minbt <- min(big.time) ; maxbt <- max(big.time)
   res <- seq(minbt, maxbt, length.out = ceiling((maxbt - minbt) / w))
-  if (middle) { res <- (res[-1] + res[-length(res)]) / 2 }
+  if (middle) {
+    res <- (res[-1] + res[-length(res)]) / 2
+  }
   res
 }
 
@@ -74,10 +76,14 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   }
   comp <- toupper(igraph.match.arg(comp))
   times <- unlist(sapply(sir, "[[", "times"))
-  big.N <- unlist(sapply(sir, function(x) { x[[comp]] }))
+  big.N <- unlist(sapply(sir, function(x) {
+    x[[comp]]
+  }))
   time.bin <- cut(times, time_bins(sir, middle = FALSE), include.lowest = TRUE)
   res <- lapply(prob, function(pp) {
-    tapply(big.N, time.bin, function(x) { quantile(x, prob = pp) })
+    tapply(big.N, time.bin, function(x) {
+      quantile(x, prob = pp)
+    })
   })
   if (length(res) == 1) {
     res <- res[[1]]
@@ -180,9 +186,15 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
   ## adding median and quantile curves.
 
   if (is.null(ylab)) {
-    if (comp == "NI") { ylab <- expression(N[I](t)) }
-    if (comp == "NR") { ylab <- expression(N[R](t)) }
-    if (comp == "NS") { ylab <- expression(N[S](t)) }
+    if (comp == "NI") {
+      ylab <- expression(N[I](t))
+    }
+    if (comp == "NR") {
+      ylab <- expression(N[R](t))
+    }
+    if (comp == "NS") {
+      ylab <- expression(N[S](t))
+    }
   }
 
   # Plot the stochastic curves individually.

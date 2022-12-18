@@ -142,9 +142,15 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
   n <- as.numeric(n)
   power <- as.numeric(power)
-  if (!is.null(m)) { m <- as.numeric(m) }
-  if (!is.null(out.dist)) { out.dist <- as.numeric(out.dist) }
-  if (!is.null(out.seq)) { out.seq <- as.numeric(out.seq) }
+  if (!is.null(m)) {
+    m <- as.numeric(m)
+  }
+  if (!is.null(out.dist)) {
+    out.dist <- as.numeric(out.dist)
+  }
+  if (!is.null(out.seq)) {
+    out.seq <- as.numeric(out.seq)
+  }
   out.pref <- as.logical(out.pref)
 
   if (!is.null(out.dist)) {
@@ -347,8 +353,12 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
     res$name <- sprintf("Erdos-Renyi (%s) graph", type)
     res$type <- type
     res$loops <- loops
-    if (type == "gnp") { res$p <- p.or.m }
-    if (type == "gnm") { res$m <- p.or.m }
+    if (type == "gnp") {
+      res$p <- p.or.m
+    }
+    if (type == "gnm") {
+      res$m <- p.or.m
+    }
   }
   res
 }
@@ -428,14 +438,18 @@ random.graph.game <- erdos.renyi.game
 #' ## Exponential degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
 #' degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
-#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
 #' g4 <- sample_degseq(degs, method = "vl")
 #' all(degree(g4) == degs)
 #'
 #' ## Power-law degree distribution
 #' ## Note, that we correct the degree sequence if its sum is odd
 #' degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
-#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
 #' g5 <- sample_degseq(degs, method = "vl")
 #' all(degree(g5) == degs)
 sample_degseq <- function(out.deg, in.deg = NULL,
@@ -443,7 +457,9 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 
   method <- igraph.match.arg(method)
   method1 <- switch(method, "simple" = 0, "vl" = 1, "simple.no.multiple" = 2, "simple.no.multiple.uniform" = 3)
-  if (!is.null(in.deg)) { in.deg <- as.numeric(in.deg) }
+  if (!is.null(in.deg)) {
+    in.deg <- as.numeric(in.deg)
+  }
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_degree_sequence_game, as.numeric(out.deg),
@@ -649,9 +665,15 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
   }
 
   n <- as.numeric(n)
-  if (!is.null(m)) { m <- as.numeric(m) }
-  if (!is.null(out.dist)) { out.dist <- as.numeric(out.dist) }
-  if (!is.null(out.seq)) { out.seq <- as.numeric(out.seq) }
+  if (!is.null(m)) {
+    m <- as.numeric(m)
+  }
+  if (!is.null(out.dist)) {
+    out.dist <- as.numeric(out.dist)
+  }
+  if (!is.null(out.seq)) {
+    out.seq <- as.numeric(out.seq)
+  }
   out.pref <- as.logical(out.pref)
 
   if (!is.null(out.dist)) {
@@ -1208,8 +1230,12 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
   type <- igraph.match.arg(type)
-  if (!missing(p)) { p <- as.numeric(p) }
-  if (!missing(m)) { m <- as.integer(m) }
+  if (!missing(p)) {
+    p <- as.numeric(p)
+  }
+  if (!missing(m)) {
+    m <- as.integer(m)
+  }
   directed <- as.logical(directed)
   mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3)
 
@@ -1325,7 +1351,9 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #'   0, 3 / 4, 3 / 4), nrow = 3)
 #' g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 #' g
-#' if (require(Matrix)) { image(g[]) }
+#' if (require(Matrix)) {
+#'   image(g[])
+#' }
 #' @export
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 
@@ -1394,7 +1422,9 @@ hierarchical_sbm <- function(...)
 #'
 #' ## A randomly generated  graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
-#' lpvs <- apply(lpvs, 2, function(x) { return(abs(x) / sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   return(abs(x) / sqrt(sum(x^2)))
+#' })
 #' g <- sample_dot_product(lpvs)
 #' g
 #'

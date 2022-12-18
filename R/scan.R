@@ -99,7 +99,6 @@
 local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
                        weighted = FALSE, mode = c("out", "in", "all"),
                        neighborhoods = NULL, ...) {
-
   ## Must be igraph object
   stopifnot(is.igraph(graph.us))
 
@@ -139,7 +138,9 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
 
   sumweights <- function(g) sum(E(g)$weight)
 
-  if (is.null(FUN)) { FUN <- if (weighted) "sumweights" else "ecount" }
+  if (is.null(FUN)) {
+    FUN <- if (weighted) "sumweights" else "ecount"
+  }
 
   res <- if (is.null(graph.them)) {
 
@@ -200,7 +201,6 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
           FUN, ...)
       }
     } else {
-
       ## scan-0
       if (k == 0) {
         on.exit(.Call(C_R_igraph_finalizer))
@@ -228,7 +228,9 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
       } else {
         sapply(V(graph.us), function(x) {
           vei <- neighborhood(graph.us, order = k, nodes = x, mode = mode)[[1]]
-          if (!is.function(FUN)) { FUN <- getFunction(FUN, where = environment()) }
+          if (!is.function(FUN)) {
+            FUN <- getFunction(FUN, where = environment())
+          }
           FUN(induced.subgraph(graph.them, vei), ...)
         })
       }
@@ -294,7 +296,6 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
 #' scan_stat(graphs = tsg, locality = "them", k = 1, tau = 4, ell = 2)
 scan_stat <- function(graphs, tau = 1, ell = 0,
                       locality = c("us", "them"), ...) {
-
   ## List of igraph graphs, all have same directedness and
   ## weightedness
   stopifnot(is.list(graphs),

@@ -89,8 +89,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
                             options = drl_defaults$default,
                             weights = NULL,
                             fixed = NULL,
-                            dim = 2)
-{
+                            dim = 2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }

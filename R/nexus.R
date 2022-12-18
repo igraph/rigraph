@@ -130,7 +130,9 @@ summary.nexusDatasetInfoList <- function(object, ...) {
 }
 
 parseVE <- function(ve) {
-  if (length(ve) == 0) { return(character(0)) }
+  if (length(ve) == 0) {
+    return(character(0))
+  }
   ve <- strsplit(unname(ve), " ")
   ve <- lapply(ve, strsplit, "/")
   v <- lapply(ve, function(x) sapply(x, "[", 1))
@@ -152,7 +154,9 @@ parseVE <- function(ve) {
 print.nexusDatasetInfoList <- function(x, ...) {
   summary(x)
 
-  if (length(x) == 0) { return(invisible(x)) }
+  if (length(x) == 0) {
+    return(invisible(x))
+  }
 
   ve <- parseVE(unname(sapply(x, "[[", "vertices/edges")))
   nets <- sapply(x, function(y) length(strsplit(y$networks, " ")[[1]]))

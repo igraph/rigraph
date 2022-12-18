@@ -91,7 +91,9 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     n1 <- nrow(incidence)
     n2 <- ncol(incidence)
     no.edges <- sum(incidence != 0)
-    if (directed && mode == 3) { no.edges <- no.edges * 2 }
+    if (directed && mode == 3) {
+      no.edges <- no.edges * 2
+    }
     edges <- numeric(2 * no.edges)
     weight <- numeric(no.edges)
     ptr <- 1

@@ -1,7 +1,11 @@
 std <- function(x) {
   x <- zapsmall(x)
   apply(x, 2, function(col) {
-    if (any(col < 0) && col[which(col != 0)[1]] < 0) { -col } else { col }
+    if (any(col < 0) && col[which(col != 0)[1]] < 0) {
+      -col
+    } else {
+      col
+    }
   })
 }
 

@@ -1,5 +1,4 @@
 test_that("as_incidence_matrix works", {
-
   ## Dense
   I <- matrix(sample(0:1, 35, replace = TRUE, prob = c(3, 1)), ncol = 5)
   g <- graph_from_incidence_matrix(I)

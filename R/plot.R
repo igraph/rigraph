@@ -126,7 +126,9 @@ plot.igraph <- function(x,
   arrow.size <- params("edge", "arrow.size")[1]
   arrow.width <- params("edge", "arrow.width")[1]
   curved <- params("edge", "curved")
-  if (is.function(curved)) { curved <- curved(graph) }
+  if (is.function(curved)) {
+    curved <- curved(graph)
+  }
 
   layout <- i.postprocess.layout(params("plot", "layout"))
   margin <- params("plot", "margin")
@@ -245,7 +247,9 @@ plot.igraph <- function(x,
   ## add the loop edges
   if (length(loops.e) > 0) {
     ec <- edge.color
-    if (length(ec) > 1) { ec <- ec[loops.e] }
+    if (length(ec) > 1) {
+      ec <- ec[loops.e]
+    }
 
     point.on.cubic.bezier <- function(cp, t) {
 
@@ -296,7 +300,9 @@ plot.igraph <- function(x,
       cp[, 1] <- cx + r * cos(phi)
       cp[, 2] <- cy + r * sin(phi)
 
-      if (is.na(width)) { width <- 1 }
+      if (is.na(width)) {
+        width <- 1
+      }
 
       plot.bezier(cp, 50, color, width, arr = arr, lty = lty, arrow.size = arrow.size, arr.w = arr.w)
 
@@ -311,8 +317,12 @@ plot.igraph <- function(x,
         lx <- cx + r * cos(phi)
         ly <- cy + r * sin(phi)
 
-        if (!is.na(lab.x)) { lx <- lab.x }
-        if (!is.na(lab.y)) { ly <- lab.y }
+        if (!is.na(lab.x)) {
+          lx <- lab.x
+        }
+        if (!is.na(lab.y)) {
+          ly <- lab.y
+        }
 
         text(lx, ly, label, col = edge.label.color, font = edge.label.font,
           family = edge.label.family, cex = edge.label.cex)
@@ -320,19 +330,33 @@ plot.igraph <- function(x,
     }
 
     ec <- edge.color
-    if (length(ec) > 1) { ec <- ec[loops.e] }
+    if (length(ec) > 1) {
+      ec <- ec[loops.e]
+    }
     vs <- vertex.size
-    if (length(vertex.size) > 1) { vs <- vs[loops.v] }
+    if (length(vertex.size) > 1) {
+      vs <- vs[loops.v]
+    }
     ew <- edge.width
-    if (length(edge.width) > 1) { ew <- ew[loops.e] }
+    if (length(edge.width) > 1) {
+      ew <- ew[loops.e]
+    }
     la <- loop.angle
-    if (length(loop.angle) > 1) { la <- la[loops.e] }
+    if (length(loop.angle) > 1) {
+      la <- la[loops.e]
+    }
     lty <- edge.lty
-    if (length(edge.lty) > 1) { lty <- lty[loops.e] }
+    if (length(edge.lty) > 1) {
+      lty <- lty[loops.e]
+    }
     arr <- arrow.mode
-    if (length(arrow.mode) > 1) { arr <- arrow.mode[loops.e] }
+    if (length(arrow.mode) > 1) {
+      arr <- arrow.mode[loops.e]
+    }
     asize <- arrow.size
-    if (length(arrow.size) > 1) { asize <- arrow.size[loops.e] }
+    if (length(arrow.size) > 1) {
+      asize <- arrow.size[loops.e]
+    }
     xx0 <- layout[loops.v, 1] + cos(la) * vs
     yy0 <- layout[loops.v, 2] - sin(la) * vs
     mapply(loop, xx0, yy0,
@@ -344,12 +368,24 @@ plot.igraph <- function(x,
   ################################################################
   ## non-loop edges
   if (length(x0) != 0) {
-    if (length(edge.color) > 1) { edge.color <- edge.color[nonloops.e] }
-    if (length(edge.width) > 1) { edge.width <- edge.width[nonloops.e] }
-    if (length(edge.lty) > 1) { edge.lty <- edge.lty[nonloops.e] }
-    if (length(arrow.mode) > 1) { arrow.mode <- arrow.mode[nonloops.e] }
-    if (length(arrow.size) > 1) { arrow.size <- arrow.size[nonloops.e] }
-    if (length(curved) > 1) { curved <- curved[nonloops.e] }
+    if (length(edge.color) > 1) {
+      edge.color <- edge.color[nonloops.e]
+    }
+    if (length(edge.width) > 1) {
+      edge.width <- edge.width[nonloops.e]
+    }
+    if (length(edge.lty) > 1) {
+      edge.lty <- edge.lty[nonloops.e]
+    }
+    if (length(arrow.mode) > 1) {
+      arrow.mode <- arrow.mode[nonloops.e]
+    }
+    if (length(arrow.size) > 1) {
+      arrow.size <- arrow.size[nonloops.e]
+    }
+    if (length(curved) > 1) {
+      curved <- curved[nonloops.e]
+    }
     if (length(unique(arrow.mode)) == 1) {
       lc <- igraph.Arrows(x0, y0, x1, y1, h.col = edge.color, sh.col = edge.color,
         sh.lwd = edge.width, h.lwd = 1, open = FALSE, code = arrow.mode[1],
@@ -364,10 +400,18 @@ plot.igraph <- function(x,
       lc.x <- lc.y <- numeric(length(curved))
       for (code in 0:3) {
         valid <- arrow.mode == code
-        if (!any(valid)) { next }
-        ec <- edge.color ; if (length(ec) > 1) { ec <- ec[valid] }
-        ew <- edge.width ; if (length(ew) > 1) { ew <- ew[valid] }
-        el <- edge.lty   ; if (length(el) > 1) { el <- el[valid] }
+        if (!any(valid)) {
+          next
+        }
+        ec <- edge.color ; if (length(ec) > 1) {
+          ec <- ec[valid]
+        }
+        ew <- edge.width ; if (length(ew) > 1) {
+          ew <- ew[valid]
+        }
+        el <- edge.lty   ; if (length(el) > 1) {
+          el <- el[valid]
+        }
         lc <- igraph.Arrows(x0[valid], y0[valid], x1[valid], y1[valid],
           code = code, sh.col = ec, h.col = ec, sh.lwd = ew, h.lwd = 1,
           h.lty = 1, sh.lty = el, open = FALSE, size = arrow.size,
@@ -376,8 +420,12 @@ plot.igraph <- function(x,
         lc.y[valid] <- lc$lab.y
       }
     }
-    if (!is.null(elab.x)) { lc.x <- ifelse(is.na(elab.x), lc.x, elab.x) }
-    if (!is.null(elab.y)) { lc.y <- ifelse(is.na(elab.y), lc.y, elab.y) }
+    if (!is.null(elab.x)) {
+      lc.x <- ifelse(is.na(elab.x), lc.x, elab.x)
+    }
+    if (!is.null(elab.y)) {
+      lc.y <- ifelse(is.na(elab.y), lc.y, elab.y)
+    }
     text(lc.x, lc.y, labels = edge.labels, col = edge.label.color,
       family = edge.label.family, font = edge.label.font, cex = edge.label.cex)
   }
@@ -647,7 +695,9 @@ rglplot.igraph <- function(x, ...) {
   arrow.mode <- i.get.arrow.mode(graph, arrow.mode)
 
   # norm layout to (-1, 1)
-  if (ncol(layout) == 2) { layout <- cbind(layout, 0) }
+  if (ncol(layout) == 2) {
+    layout <- cbind(layout, 0)
+  }
   if (rescale) {
     layout <- norm_coords(layout, -1, 1, -1, 1, -1, 1)
   }
@@ -664,24 +714,40 @@ rglplot.igraph <- function(x, ...) {
     to <- el[i, 2]
     v1 <- layout[from, ]
     v2 <- layout[to, ]
-    am <- arrow.mode; if (length(am) > 1) { am <- am[i] }
-    ew <- edge.width; if (length(ew) > 1) { ew <- ew[i] }
-    ec <- edge.color; if (length(ec) > 1) { ec <- ec[i] }
-    r1 <- vertex.size; if (length(r1) > 1) { r1 <- r1[from] }
-    r2 <- vertex.size; if (length(r2) > 1) { r2 <- r2[to] }
+    am <- arrow.mode; if (length(am) > 1) {
+      am <- am[i]
+    }
+    ew <- edge.width; if (length(ew) > 1) {
+      ew <- ew[i]
+    }
+    ec <- edge.color; if (length(ec) > 1) {
+      ec <- ec[i]
+    }
+    r1 <- vertex.size; if (length(r1) > 1) {
+      r1 <- r1[from]
+    }
+    r2 <- vertex.size; if (length(r2) > 1) {
+      r2 <- r2[to]
+    }
 
     if (from != to) {
       create.edge(v1, v2, r1, r2, ec, ew, am, arrow.size)
     } else {
-      la <- loop.angle; if (length(la) > 1) { la <- la[i] }
-      la2 <- loop.angle2; if (length(la2) > 1) { la2 <- la2[i] }
+      la <- loop.angle; if (length(la) > 1) {
+        la <- la[i]
+      }
+      la2 <- loop.angle2; if (length(la2) > 1) {
+        la2 <- la2[i]
+      }
       create.loop(v1, r1, ec, ew, am, la, la2, arrow.size)
     }
 
   }
 
   # add the vertices
-  if (length(vertex.size) == 1) { vertex.size <- rep(vertex.size, nrow(layout)) }
+  if (length(vertex.size) == 1) {
+    vertex.size <- rep(vertex.size, nrow(layout))
+  }
   rgl::rgl.spheres(layout[, 1], layout[, 2], layout[, 3], radius = vertex.size,
     col = vertex.color)
 

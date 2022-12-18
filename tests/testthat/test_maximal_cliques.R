@@ -9,13 +9,27 @@ unvs <- function(x) lapply(x, as.vector)
 
 bk4 <- function(graph, min = 0, max = Inf) {
 
-  Gamma <- function(v) { neighbors(graph, v) }
+  Gamma <- function(v) {
+    neighbors(graph, v)
+  }
 
   bkpivot <- function(PX, R) {
-    P <- if (PX$PE >= PX$PS) { PX$PX[PX$PS:PX$PE] } else { numeric() }
-    X <- if (PX$XE >= PX$XS) { PX$PX[PX$XS:PX$XE] } else { numeric() }
+    P <- if (PX$PE >= PX$PS) {
+      PX$PX[PX$PS:PX$PE]
+    } else {
+      numeric()
+    }
+    X <- if (PX$XE >= PX$XS) {
+      PX$PX[PX$XS:PX$XE]
+    } else {
+      numeric()
+    }
     if (length(P) == 0 && length(X) == 0) {
-      if (length(R) >= min && length(R) <= max) { list(R) } else { list() }
+      if (length(R) >= min && length(R) <= max) {
+        list(R)
+      } else {
+        list()
+      }
     } else if (length(P) != 0) {
       psize <- sapply(c(P, X), function(u)
         length(intersect(P, Gamma(u))))
@@ -24,7 +38,11 @@ bk4 <- function(graph, min = 0, max = Inf) {
       pres <- list()
       for (v in setdiff(P, Gamma(u))) {
 
-        p0 <- if (PX$PS > 1) { PX$PX[1:(PX$PS - 1)] } else { numeric() }
+        p0 <- if (PX$PS > 1) {
+          PX$PX[1:(PX$PS - 1)]
+        } else {
+          numeric()
+        }
         p1 <- setdiff(P, Gamma(v))
         p2 <- intersect(P, Gamma(v))
         x1 <- intersect(X, Gamma(v))
@@ -49,9 +67,19 @@ bk4 <- function(graph, min = 0, max = Inf) {
         PX$PX[vpos] <- tmp
         PX$PE <- PX$PE - 1
         PX$XS <- PX$XS - 1
-        P <- if (PX$PE >= PX$PS) { PX$PX[PX$PS:PX$PE] } else { numeric() }
-        X <- if (PX$XE >= PX$XS) { PX$PX[PX$XS:PX$XE] } else { numeric() }
-        if (any(duplicated(PX$PX))) { stop("foo2") }
+        P <- if (PX$PE >= PX$PS) {
+          PX$PX[PX$PS:PX$PE]
+        } else {
+          numeric()
+        }
+        X <- if (PX$XE >= PX$XS) {
+          PX$PX[PX$XS:PX$XE]
+        } else {
+          numeric()
+        }
+        if (any(duplicated(PX$PX))) {
+          stop("foo2")
+        }
       }
       pres
     }

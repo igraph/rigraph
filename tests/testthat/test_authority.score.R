@@ -1,8 +1,12 @@
 test_that("authority score works", {
   ashs <- function(graph, as = TRUE) {
     mscale <- function(x) {
-      if (sd(x) != 0) { x <- scale(x) }
-      if (x[1] < 0) { x <- -x       }
+      if (sd(x) != 0) {
+        x <- scale(x)
+      }
+      if (x[1] < 0) {
+        x <- -x
+      }
       x
     }
     A <- as_adj(graph, sparse = FALSE)

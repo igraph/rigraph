@@ -342,7 +342,9 @@ as.directed <- as.directed
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   mode <- switch(igraph.match.arg(mode), "collapse" = 1, "each" = 0, "mutual" = 2)
   edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
 
@@ -525,19 +527,25 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
   v.n <- names(graph::nodeDataDefaults(graphNEL))
   for (n in v.n) {
     val <- unname(graph::nodeData(graphNEL, attr = n))
-    if (unlist.attrs && all(sapply(val, length) == 1)) { val <- unlist(val) }
+    if (unlist.attrs && all(sapply(val, length) == 1)) {
+      val <- unlist(val)
+    }
     g <- set_vertex_attr(g, n, value = val)
   }
 
   ## Edge attributes
   e.n <- names(graph::edgeDataDefaults(graphNEL))
-  if (!weight) { e.n <- e.n[e.n != "weight"] }
+  if (!weight) {
+    e.n <- e.n[e.n != "weight"]
+  }
   if (length(e.n) > 0) {
     el <- as_edgelist(g)
     el <- paste(sep = "|", el[, 1], el[, 2])
     for (n in e.n) {
       val <- unname(graph::edgeData(graphNEL, attr = n)[el])
-      if (unlist.attrs && all(sapply(val, length) == 1)) { val <- unlist(val) }
+      if (unlist.attrs && all(sapply(val, length) == 1)) {
+        val <- unlist(val)
+      }
       g <- set_edge_attr(g, n, value = val)
     }
   }
@@ -648,7 +656,8 @@ as_graphnel <- function(graph) {
     for (n in e.n) {
       graph::edgeDataDefaults(res, attr = n) <- NA
       res@edgeData@data[el] <- mapply(function(x, y) {
-        xx <- c(x, y); names(xx)[length(xx)] <- n; xx },
+        xx <- c(x, y); names(xx)[length(xx)] <- n; xx
+      },
       res@edgeData@data[el],
       edge_attr(graph, n),
       SIMPLIFY = FALSE)
@@ -803,7 +812,9 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
                                 names = TRUE, sparse = FALSE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   types <- handle_vertex_type_arg(types, graph)
 
   names <- as.logical(names)
@@ -823,13 +834,19 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 
-  if (!is_igraph(x)) { stop("Not a graph object") }
+  if (!is_igraph(x)) {
+    stop("Not a graph object")
+  }
   what <- igraph.match.arg(what)
 
   if (what %in% c("vertices", "both")) {
     ver <- .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_vertex)
     class(ver) <- "data.frame"
-    rn <- if (is_named(x)) { V(x)$name } else { seq_len(vcount(x)) }
+    rn <- if (is_named(x)) {
+      V(x)$name
+    } else {
+      seq_len(vcount(x))
+    }
     rownames(ver) <- rn
   }
 
@@ -927,11 +944,17 @@ graph_from_adj_list <- graph_from_adj_list
 #' as_long_data_frame(g)
 as_long_data_frame <- function(graph) {
 
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
 
   ver <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
   class(ver) <- "data.frame"
-  rn <- if (is_named(graph)) { V(graph)$name } else { seq_len(vcount(graph)) }
+  rn <- if (is_named(graph)) {
+    V(graph)$name
+  } else {
+    seq_len(vcount(graph))
+  }
   rownames(ver) <- rn
 
   el <- as_edgelist(graph, names = FALSE)

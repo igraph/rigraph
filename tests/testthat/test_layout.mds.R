@@ -1,5 +1,4 @@
 test_that("layout_with_mds works", {
-
   ## A tree
 
   g <- make_tree(10, 2, "undirected")

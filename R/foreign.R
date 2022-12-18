@@ -250,8 +250,12 @@ write.graph.ncol <- function(graph, file,
   }
   names <- as.character(names)
   weights <- as.character(weights)
-  if (length(names) == 0 || !names %in% vertex_attr_names(graph)) { names <- NULL }
-  if (length(weights) == 0 || !weights %in% edge_attr_names(graph)) { weights <- NULL }
+  if (length(names) == 0 || !names %in% vertex_attr_names(graph)) {
+    names <- NULL
+  }
+  if (length(weights) == 0 || !weights %in% edge_attr_names(graph)) {
+    weights <- NULL
+  }
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_ncol, graph, file,
@@ -280,8 +284,12 @@ write.graph.lgl <- function(graph, file,
   }
   names <- as.character(names)
   weights <- as.character(weights)
-  if (length(names) == 0 || !names %in% vertex_attr_names(graph)) { names <- NULL }
-  if (length(weights) == 0 || !weights %in% edge_attr_names(graph)) { weights <- NULL }
+  if (length(names) == 0 || !names %in% vertex_attr_names(graph)) {
+    names <- NULL
+  }
+  if (length(weights) == 0 || !weights %in% edge_attr_names(graph)) {
+    weights <- NULL
+  }
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_lgl, graph, file,
@@ -560,8 +568,12 @@ write.graph.leda <- function(graph, file, vertex.attr = NULL, edge.attr = NULL,
   if (length(list(...)) > 0) {
     stop("Unknown arguments to write_graph (LEDA format)")
   }
-  if (!is.null(vertex.attr)) { vertex.attr <- as.character(vertex.attr) }
-  if (!is.null(edge.attr)) { edge.attr <- as.character(edge.attr)   }
+  if (!is.null(vertex.attr)) {
+    vertex.attr <- as.character(vertex.attr)
+  }
+  if (!is.null(edge.attr)) {
+    edge.attr <- as.character(edge.attr)
+  }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_leda, graph, file, vertex.attr, edge.attr)
 }

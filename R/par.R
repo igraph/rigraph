@@ -46,7 +46,9 @@ igraph.pars.set.verbose <- function(verbose) {
       stop("Unknown 'verbose' value")
     }
     if (verbose %in% c("tk", "tkconsole")) {
-      if (!capabilities()[["X11"]]) { stop("X11 not available")           }
+      if (!capabilities()[["X11"]]) {
+        stop("X11 not available")
+      }
       if (!requireNamespace("tcltk", quietly = TRUE)) {
         stop("tcltk package not available")
       }

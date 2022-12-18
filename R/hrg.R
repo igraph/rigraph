@@ -110,7 +110,9 @@ NULL
 #' @family hierarchical random graph functions
 fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(hrg)) {
     hrg <- list(left = c(), right = c(), prob = c(), edges = c(),
       vertices = c())
@@ -269,9 +271,10 @@ sample_hrg <- sample_hrg
 #' @family hierarchical random graph functions
 predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
                           num.bins = 25) {
-
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (is.null(hrg)) {
     hrg <- list(left = c(), right = c(), prob = c(), edges = c(),
       vertices = c())
@@ -336,7 +339,6 @@ as.igraph.igraphHRG <- function(x, ...) {
 }
 
 buildMerges <- function(object) {
-
   ## Build a merge matrix. This is done by a post-order
   ## traversal of the tree.
 
@@ -353,7 +355,9 @@ buildMerges <- function(object) {
     if (is.null(prev) ||
       (prev < 0 && object$left[-prev] == curr) ||
       (prev < 0 && object$right[-prev] == curr)) {
-      if (curr < 0) { S <- c(S, object$left[-curr]) }
+      if (curr < 0) {
+        S <- c(S, object$left[-curr])
+      }
       ## coming from left child? going right
     } else if (curr < 0 && object$left[-curr] == prev) {
       S <- c(S, object$right[-curr])
@@ -614,7 +618,9 @@ hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
   phy <- as_phylo(x)
   br <- seq(0, 1, length.out = length(colbar)) ; br[1] <- -1
   cc <- as.integer(cut(x$prob[phy$edge[, 1] - vc], breaks = br))
-  if (is.null(edge.color)) { edge.color <- colbar[cc] }
+  if (is.null(edge.color)) {
+    edge.color <- colbar[cc]
+  }
   plot(phy, edge.color = edge.color, use.edge.length = use.edge.length, ...)
 }
 
@@ -682,14 +688,20 @@ print1.igraphHRG <- function(x, level = 3, ...) {
   ## Depth of printed top of the dendrogram
   .depth <- function(b, l) {
     l[2] <- max(l[2], nchar(format(x$prob[b], digits = 2)))
-    if (l[1] == level) { return(l) }
+    if (l[1] == level) {
+      return(l)
+    }
     if (x$left[b] < 0 && x$right[b] < 0) {
       l1 <- .depth(-x$left[b], c(l[1] + 1, l[2]))
       l2 <- .depth(-x$right[b], c(l[1] + 1, l[2]))
       return(pmax(l1, l2))
     }
-    if (x$left[b] < 0) { return(.depth(-x$left[b], c(l[1] + 1, l[2]))) }
-    if (x$right[b] < 0) { return(.depth(-x$right[b], c(l[1] + 1, l[2]))) }
+    if (x$left[b] < 0) {
+      return(.depth(-x$left[b], c(l[1] + 1, l[2])))
+    }
+    if (x$right[b] < 0) {
+      return(.depth(-x$right[b], c(l[1] + 1, l[2])))
+    }
     return(l)
   }
   cs <- .depth(1, c(1, 0))
@@ -737,12 +749,20 @@ print1.igraphHRG <- function(x, level = 3, ...) {
     }
     ch2 <- numeric()
     if (!gol) {
-      if (x$left[b] < 0) { ch2 <- c(ch2, .children(-x$left[b])) }
-      if (x$left[b] >= 0) { ch2 <- c(ch2, x$left[b] + 1) }
+      if (x$left[b] < 0) {
+        ch2 <- c(ch2, .children(-x$left[b]))
+      }
+      if (x$left[b] >= 0) {
+        ch2 <- c(ch2, x$left[b] + 1)
+      }
     }
     if (!gor) {
-      if (x$right[b] < 0) { ch2 <- c(ch2, .children(-x$right[b])) }
-      if (x$right[b] >= 0) { ch2 <- c(ch2, x$right[b] + 1) }
+      if (x$right[b] < 0) {
+        ch2 <- c(ch2, .children(-x$right[b]))
+      }
+      if (x$right[b] >= 0) {
+        ch2 <- c(ch2, x$right[b] + 1)
+      }
     }
 
     ## print this line
