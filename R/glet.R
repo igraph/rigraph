@@ -49,7 +49,7 @@
 #' D3[2:5, 2:5] <- 1
 #'
 #' g <- simplify(graph_from_adjacency_matrix(D1 + D2 + D3,
-#'       mode = "undirected", weighted = TRUE))
+#'   mode = "undirected", weighted = TRUE))
 #' V(g)$color <- "white"
 #' E(g)$label <- E(g)$weight
 #' E(g)$label.cex <- 2
@@ -102,7 +102,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 #' @rdname graphlet_basis
 #' @export
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
-                              Mu = rep(1, length(cliques))) {
+                          Mu = rep(1, length(cliques))) {
   # Argument checks
   if (!is.igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {

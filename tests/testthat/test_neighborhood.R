@@ -15,7 +15,7 @@ test_that("ego works", {
   g2 <- neig(g, 2, v)
   expect_true(graph.isomorphic(g1, g2))
 
-#########
+  #########
 
   nei <- function(graph, order, vertices) {
     sp <- distances(graph)
@@ -29,7 +29,7 @@ test_that("ego works", {
   v2 <- nei(g, 2, v)
   expect_that(as.vector(sort(v1)), equals(sort(v2)))
 
-#########
+  #########
 
   s <- ego_size(g, 2, v)[[1]]
   expect_that(s, equals(length(v1)))

@@ -4,7 +4,7 @@ test_that("undirected random_walk works", {
   g <- make_ring(10)
   w <- random_walk(g, start = 1, steps = 10)
   expect_equal(ignore_attr = TRUE, w, structure(c(1L, 10L, 9L, 8L, 9L, 10L, 9L, 10L,
-                                   1L, 10L), class = "igraph.vs"))
+    1L, 10L), class = "igraph.vs"))
 
 })
 
@@ -35,7 +35,7 @@ test_that("undirected random_edge_walk works", {
   g <- make_star(11, mode = "undirected")
   w <- random_edge_walk(g, start = 1, steps = 10)
   expect_equal(ignore_attr = TRUE, w, structure(c(10L, 10L, 3L, 3L, 7L, 7L, 8L, 8L,
-                                   7L, 7L), class = "igraph.es"))
+    7L, 7L), class = "igraph.es"))
 
   set.seed(42)
   g <- make_ring(10)

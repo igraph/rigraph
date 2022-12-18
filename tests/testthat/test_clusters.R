@@ -34,14 +34,14 @@ test_that("groups works", {
   gr <- groups(components(g))
 
   expect_that(gr, equals(structure(list(`1` = 1:10, `2` = 11:15), .Dim = 2L,
-                                   .Dimnames = list(c("1", "2")))))
+    .Dimnames = list(c("1", "2")))))
 
   V(g)$name <- letters[1:15]
   gr <- groups(components(g))
 
   expect_that(gr, equals(structure(list(`1` = letters[1:10],
-                                        `2` = letters[11:15]), .Dim = 2L,
-                                        .Dimnames = list(c("1", "2")))))
+    `2` = letters[11:15]), .Dim = 2L,
+  .Dimnames = list(c("1", "2")))))
 })
 
 test_that("is_connected works", {

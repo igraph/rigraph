@@ -118,8 +118,8 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 
   if (!is.null(file)) {
     if (!is.character(file) ||
-        length(grep("://", file, fixed = TRUE)) > 0 ||
-        length(grep("~", file, fixed = TRUE)) > 0) {
+      length(grep("://", file, fixed = TRUE)) > 0 ||
+      length(grep("~", file, fixed = TRUE)) > 0) {
       tmpfile <- TRUE
       origfile <- file
       file <- tempfile()
@@ -128,7 +128,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
     }
     on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(C_R_igraph_maximal_cliques_file, graph, subset, file,
-                 as.numeric(min), as.numeric(max))
+      as.numeric(min), as.numeric(max))
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
@@ -137,7 +137,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   } else {
     on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(C_R_igraph_maximal_cliques, graph, subset,
-                 as.numeric(min), as.numeric(max))
+      as.numeric(min), as.numeric(max))
     res <- lapply(res, function(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
@@ -150,7 +150,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 
 #' @export
 count_max_cliques <- function(graph, min = NULL, max = NULL,
-                                  subset = NULL) {
+                              subset = NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -316,7 +316,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
-               as.numeric(max))
+    as.numeric(max))
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {

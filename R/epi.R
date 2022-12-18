@@ -197,12 +197,12 @@ plot.sir <- function(x, comp = c("NI", "NS", "NR"),
   }
   if (median) {
     lines(time.bin, median(sir)[[comp]], type = "l",
-          lwd = lwd.median, col = median_color)
+      lwd = lwd.median, col = median_color)
   }
   for (i in seq_along(quantiles)) {
     my.ql <- quantile(sir, comp, quantiles[i])
     lines(time.bin, my.ql, type = "l", lty = lty.quantile,
-          lwd = lwd.quantile, col = quantile_color[i])
+      lwd = lwd.quantile, col = quantile_color[i])
   }
 
   invisible()

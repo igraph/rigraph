@@ -36,10 +36,10 @@ makeNexusDatasetInfo <- function(entries) {
     attrdat <- lapply(myattr, function(x) strsplit(x[1], " ")[[1]])
     myattr <- sapply(myattr, "[", 2)
     dsi$attributes <- mapply(attrdat, myattr, SIMPLIFY = FALSE,
-                             FUN = function(dat, desc) {
-                               list(type = dat[1], datatype = dat[2], name = dat[3],
-                                    description = desc)
-                             })
+      FUN = function(dat, desc) {
+        list(type = dat[1], datatype = dat[2], name = dat[3],
+          description = desc)
+      })
   }
 
   dsi$id <- as.numeric(dsi$id)
@@ -61,7 +61,7 @@ print.nexusDatasetInfo <- function(x, ...) {
   if (is.null(x$attributes)) {
     nc[2] <- "?"
   } else if (any(sapply(x$attributes,
-                        function(X) X$name == "name" && X$type == "vertex"))) {
+    function(X) X$name == "name" && X$type == "vertex"))) {
     nc[2] <- "N"
   }
   if ("weighted" %in% x$tags) {
@@ -72,25 +72,25 @@ print.nexusDatasetInfo <- function(x, ...) {
   }
   nc <- paste(nc, collapse = "")
   head <- paste(sep = "", "NEXUS ", nc, " ", ve[1], " ", ve[2], " #",
-                x$id, " ", x$sid, " -- ", x$name)
+    x$id, " ", x$sid, " -- ", x$name)
   if (nchar(head) > getOption("width")) {
     head <- paste(sep = "", substr(head, 1, getOption("width") - 1), "+")
   }
   cat(head, sep = "", "\n")
   if (length(x$tags) != 0) {
     tt <- strwrap(paste(sep = "", "+ tags: ", paste(x$tags, collapse = "; ")),
-                  initial = "", prefix = "  ")
+      initial = "", prefix = "  ")
     cat(tt, sep = "\n")
   }
   if ("networks" %in% names(x)) {
     nets <- strsplit(x$networks, " ")[[1]]
     nn <- strwrap(paste(sep = "", "+ nets: ", paste(nets, collapse = "; ")),
-                  initial = "", prefix = "  ")
+      initial = "", prefix = "  ")
     cat(nn, sep = "\n")
   }
   attr <- x[["attributes"]]
   printed <- c("id", "sid", "vertices/edges", "name", "tags", "networks",
-               "attributes")
+    "attributes")
   x <- x[setdiff(names(x), printed)]
   if (length(attr) > 0) {
     dcode <- function(d) {
@@ -101,14 +101,14 @@ print.nexusDatasetInfo <- function(x, ...) {
     cat("+ attr: ")
     astr <- sapply(attr, function(a) {
       paste(sep = "", a$name, " (", substr(a$type, 1, 1), "/",
-            dcode(a$datatype), ")")
+        dcode(a$datatype), ")")
     })
     cat(strwrap(paste(astr, collapse = ", "), exdent = 2), "\n")
   }
   for (i in names(x)) {
     xx <- strsplit(x[[i]], "\n")[[1]]
     ff <- strwrap(paste(sep = "", "+ ", i, ": ", xx[1]), initial = "",
-                  prefix = "  ")
+      prefix = "  ")
     xx <- unlist(sapply(xx[-1], strwrap, prefix = "  "))
     cat(ff, sep = "\n")
     if (length(xx) > 0) {
@@ -161,14 +161,14 @@ print.nexusDatasetInfoList <- function(x, ...) {
     sid[nets > 1] <- paste(sep = "", sid[nets > 1], ".", nets[nets > 1])
   }
   df <- data.frame(no = paste(sep = "", "[", format(seq_along(x)), "] "),
-                   sid = format(sid),
-                   size = paste(sep = "", " ", format(ve)),
-                   id = paste(sep = "", " #", format(sapply(x, "[[", "id")), " "),
-                   name = sapply(x, "[[", "name"))
+    sid = format(sid),
+    size = paste(sep = "", " ", format(ve)),
+    id = paste(sep = "", " #", format(sapply(x, "[[", "id")), " "),
+    name = sapply(x, "[[", "name"))
   out <- do.call(paste, c(as.list(df), sep = ""))
   long <- nchar(out) > getOption("width")
   out <- paste(sep = "", substr(out, 1, getOption("width") - 1),
-               ifelse(long, "+", ""))
+    ifelse(long, "+", ""))
   cat(out, sep = "\n")
   invisible(x)
 }
@@ -182,14 +182,14 @@ nexus.format.result <- function(l, name = "") {
   }
 
   l <- lapply(l, function(x) c(sub("[ ]*:[^:]*$", "", x),
-                               sub("^[^:]*:[ ]*", "", x)))
+    sub("^[^:]*:[ ]*", "", x)))
   spos <- which(sapply(l, function(x) x[1] == "id"))
   epos <- c((spos - 1), length(l))
   ehead <- epos[1]
   epos <- epos[-1]
 
   res <- mapply(spos, epos, SIMPLIFY = FALSE, FUN = function(s, e)
-                makeNexusDatasetInfo(l[s:e]))
+    makeNexusDatasetInfo(l[s:e]))
   class(res) <- "nexusDatasetInfoList"
 
   for (h in 1:ehead) {
@@ -367,25 +367,25 @@ nexus_list <- function(tags = NULL, offset = 0, limit = 10,
 
   stop("The Nexus graph repository is not online any more")
 
-#  operator=igraph.match.arg(operator)
-#  order=igraph.match.arg(order)
-#
-#  if (is.null(tags)) {
-#    u <- paste(sep="", nexus.url, "/api/dataset_info?format=text",
-#               "&offset=", offset, "&limit=", limit, "&order=", order)
-#    name <- "data set list"
-#  } else {
-#    tags <- paste(tags, collapse="|")
-#    u <- paste(sep="", nexus.url, "/api/dataset_info?tag=", tags,
-#               "&operator=", operator, "&format=text",
-#               "&offset=", offset, "&limit=", limit, "&order=", order)
-#    name <- paste("tags:", gsub("|", "; ", tags, fixed=TRUE))
-#  }
-#  f <- url(URLencode(u))
-#  l <- readLines(f)
-#  close(f)
-#
-#  nexus.format.result(l, name)
+  #  operator=igraph.match.arg(operator)
+  #  order=igraph.match.arg(order)
+  #
+  #  if (is.null(tags)) {
+  #    u <- paste(sep="", nexus.url, "/api/dataset_info?format=text",
+  #               "&offset=", offset, "&limit=", limit, "&order=", order)
+  #    name <- "data set list"
+  #  } else {
+  #    tags <- paste(tags, collapse="|")
+  #    u <- paste(sep="", nexus.url, "/api/dataset_info?tag=", tags,
+  #               "&operator=", operator, "&format=text",
+  #               "&offset=", offset, "&limit=", limit, "&order=", order)
+  #    name <- paste("tags:", gsub("|", "; ", tags, fixed=TRUE))
+  #  }
+  #  f <- url(URLencode(u))
+  #  l <- readLines(f)
+  #  close(f)
+  #
+  #  nexus.format.result(l, name)
 }
 
 #' @export
@@ -395,34 +395,34 @@ nexus_info <- function(id, nexus.url = igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
 
-#  if (inherits(id, "nexusDatasetInfo")) {
-#    id <- id$id
-#  } else if (inherits(id, "nexusDatasetInfoList")) {
-#    rid <- sapply(id, "[[", "id")
-#    res <- lapply(rid, nexus_info, nexus.url=nexus.url)
-#    class(res) <- class(id)
-#    attributes(res) <- attributes(id)
-#    return(res)
-#  }
-#
-#  u <- paste(sep="", nexus.url, "/api/dataset_info?format=text&id=", id)
-#  f <- url(URLencode(u))
-#  l <- readLines(f)
-#  close(f)
-#  l2 <- character()
-#  for (i in seq_along(l)) {
-#    if (!grepl("^  ", l[i])) {
-#      l2 <- c(l2, l[i])
-#    } else {
-#      l2[length(l2)] <- paste(sep="\n", l2[length(l2)],
-#                              sub("  ", "", l[i], fixed=TRUE))
-#    }
-#  }
-#  l2 <- lapply(l2, function(x)
-#               c(sub("[ ]*:.*$", "", x), sub("^[^:]*:[ ]*", "", x)))
-#  res <- makeNexusDatasetInfo(l2)
-#  if (! "attributes" %in% names(res)) { res$attributes <- list() }
-#  return(res)
+  #  if (inherits(id, "nexusDatasetInfo")) {
+  #    id <- id$id
+  #  } else if (inherits(id, "nexusDatasetInfoList")) {
+  #    rid <- sapply(id, "[[", "id")
+  #    res <- lapply(rid, nexus_info, nexus.url=nexus.url)
+  #    class(res) <- class(id)
+  #    attributes(res) <- attributes(id)
+  #    return(res)
+  #  }
+  #
+  #  u <- paste(sep="", nexus.url, "/api/dataset_info?format=text&id=", id)
+  #  f <- url(URLencode(u))
+  #  l <- readLines(f)
+  #  close(f)
+  #  l2 <- character()
+  #  for (i in seq_along(l)) {
+  #    if (!grepl("^  ", l[i])) {
+  #      l2 <- c(l2, l[i])
+  #    } else {
+  #      l2[length(l2)] <- paste(sep="\n", l2[length(l2)],
+  #                              sub("  ", "", l[i], fixed=TRUE))
+  #    }
+  #  }
+  #  l2 <- lapply(l2, function(x)
+  #               c(sub("[ ]*:.*$", "", x), sub("^[^:]*:[ ]*", "", x)))
+  #  res <- makeNexusDatasetInfo(l2)
+  #  if (! "attributes" %in% names(res)) { res$attributes <- list() }
+  #  return(res)
 }
 
 #' @export
@@ -434,31 +434,31 @@ nexus_get <- function(id, offset = 0,
 
   stop("The Nexus graph repository is not online any more")
 
-#  order=igraph.match.arg(order)
-#
-#  if (inherits(id, "nexusDatasetInfo")) {
-#    id <- id$id
-#  } else if (inherits(id, "nexusDatasetInfoList")) {
-#    id <- sapply(id, "[[", "id")
-#    return(lapply(id, nexus_get, nexus.url=nexus.url))
-#  }
-#
-#  u <- paste(sep="", nexus.url, "/api/dataset?id=", id, "&format=R-igraph")
-#  env <- new.env()
-#  rdata <- url(URLencode(u))
-#  load(rdata, envir=env)
-#  close(rdata)
-#  res <- get(ls(env)[1], env)
-#
-#  upgrade_if_igraph <- function(x) if (is_igraph(x)) upgrade_graph(x) else x
-#
-#  if (is_igraph(res)) {
-#    upgrade_if_igraph(res)
-#  } else if (is.list(res)) {
-#    res2 <- lapply(res, upgrade_if_igraph)
-#    attributes(res2) <- attributes(res)
-#    res2
-# }
+  #  order=igraph.match.arg(order)
+  #
+  #  if (inherits(id, "nexusDatasetInfo")) {
+  #    id <- id$id
+  #  } else if (inherits(id, "nexusDatasetInfoList")) {
+  #    id <- sapply(id, "[[", "id")
+  #    return(lapply(id, nexus_get, nexus.url=nexus.url))
+  #  }
+  #
+  #  u <- paste(sep="", nexus.url, "/api/dataset?id=", id, "&format=R-igraph")
+  #  env <- new.env()
+  #  rdata <- url(URLencode(u))
+  #  load(rdata, envir=env)
+  #  close(rdata)
+  #  res <- get(ls(env)[1], env)
+  #
+  #  upgrade_if_igraph <- function(x) if (is_igraph(x)) upgrade_graph(x) else x
+  #
+  #  if (is_igraph(res)) {
+  #    upgrade_if_igraph(res)
+  #  } else if (is.list(res)) {
+  #    res2 <- lapply(res, upgrade_if_igraph)
+  #    attributes(res2) <- attributes(res)
+  #    res2
+  # }
 }
 
 #' @export
@@ -470,22 +470,22 @@ nexus_search <- function(q, offset = 0, limit = 10,
 
   stop("The Nexus graph repository is not online any more")
 
-#  order=igraph.match.arg(order)
-#
-#  u <- paste(sep="", nexus.url, "/api/search?q=", q,
-#             "&format=text","&offset=", offset, "&limit=", limit,
-#             "&order=", order)
-#  f <- url(URLencode(u))
-#  l <- readLines(f)
-#  close(f)
-#
-#  if (length(l)==0) {
-#    res <- list()
-#    class(res) <- "nexusDatasetInfoList"
-#    return(res)
-#  }
-#
-#  nexus.format.result(l, name=paste("q:", q))
+  #  order=igraph.match.arg(order)
+  #
+  #  u <- paste(sep="", nexus.url, "/api/search?q=", q,
+  #             "&format=text","&offset=", offset, "&limit=", limit,
+  #             "&order=", order)
+  #  f <- url(URLencode(u))
+  #  l <- readLines(f)
+  #  close(f)
+  #
+  #  if (length(l)==0) {
+  #    res <- list()
+  #    class(res) <- "nexusDatasetInfoList"
+  #    return(res)
+  #  }
+  #
+  #  nexus.format.result(l, name=paste("q:", q))
 }
 
 #' @param i Index.

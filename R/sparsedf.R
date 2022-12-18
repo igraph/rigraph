@@ -29,7 +29,7 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
   cols <- list(...)
 
   if (is.null(names(cols)) || any(names(cols) == "") ||
-      any(duplicated(names(cols)))) {
+    any(duplicated(names(cols)))) {
     stop("Columns must be have (unique) names")
   }
 

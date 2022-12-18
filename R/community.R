@@ -221,9 +221,9 @@ membership <- function(communities) {
   if (!is.null(communities$membership)) {
     res <- communities$membership
   } else if (!is.null(communities$merges) &&
-             !is.null(communities$modularity)) {
+    !is.null(communities$modularity)) {
     res <- community.to.membership2(communities$merges, communities$vcount,
-                                    which.max(communities$modularity))
+      which.max(communities$modularity))
   } else {
     stop("Cannot calculate community membership")
   }
@@ -277,7 +277,7 @@ print.communities <- function(x, ...) {
     cat("+ groups:\n")
     hp <- function(o) {
       head_print(o, max_lines = igraph_opt("auto.print.lines"),
-                 omitted_footer = "+ ... omitted several groups/vertices\n", )
+        omitted_footer = "+ ... omitted several groups/vertices\n", )
     }
     indent_print(grp, .printer = hp, .indent = "  ")
 
@@ -314,13 +314,13 @@ make_clusters <- function(graph, membership = NULL, algorithm = NULL,
 
   stopifnot(is.null(membership) || is.numeric(membership))
   stopifnot(is.null(algorithm) ||
-            (is.character(algorithm) && length(algorithm) == 1))
+    (is.character(algorithm) && length(algorithm) == 1))
   stopifnot(is.null(merges) ||
-              (is.matrix(merges) && is.numeric(merges) && ncol(merges) == 2))
+    (is.matrix(merges) && is.numeric(merges) && ncol(merges) == 2))
   stopifnot(is.null(modularity) ||
-            (is.logical(modularity) && length(modularity) == 1) ||
-            (is.numeric(modularity) &&
-             length(modularity) %in% c(1, length(membership))))
+    (is.logical(modularity) && length(modularity) == 1) ||
+    (is.numeric(modularity) &&
+      length(modularity) %in% c(1, length(membership))))
 
   if (is.logical(modularity)) {
     if (modularity && !is.null(membership)) {
@@ -331,8 +331,8 @@ make_clusters <- function(graph, membership = NULL, algorithm = NULL,
   }
 
   res <- list(membership = membership,
-              algorithm = if (is.null(algorithm)) "unknown" else algorithm,
-              modularity = modularity)
+    algorithm = if (is.null(algorithm)) "unknown" else algorithm,
+    modularity = modularity)
   if (!is.null(merges)) {
     res$merges <- merges
   }
@@ -546,7 +546,7 @@ complete.dend <- function(comm, use.modularity) {
   if (nrow(merges) < comm$vcount - 1) {
     if (use.modularity) {
       stop(paste("`use.modularity' requires a full dendrogram,",
-                 "i.e. a connected graph"))
+        "i.e. a connected graph"))
     }
     miss <- seq_len(comm$vcount + nrow(merges))[-as.vector(merges)]
     miss <- c(miss, seq_len(length(miss) - 2) + comm$vcount + nrow(merges))
@@ -633,7 +633,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk[[2 - isL]], "height") <- h0
       attr(zk[[2 - isL]], "label") <- object$names[x[2 - isL]]
       attr(zk[[2 - isL]], "leaf") <- TRUE
-      }
+    }
     else { # two nodes
       # as.character(x) is not okay as it starts converting values >= 100000
       # to scientific notation
@@ -642,8 +642,8 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
       attr(zk, "members") <- attr(z[[x[1]]], "members") +
         attr(z[[x[2]]], "members")
       attr(zk, "midpoint") <- (attr(z[[x[1]]], "members") +
-                               attr(z[[x[1]]], "midpoint") +
-                               attr(z[[x[2]]], "midpoint")) / 2
+        attr(z[[x[1]]], "midpoint") +
+        attr(z[[x[2]]], "midpoint")) / 2
     }
     attr(zk, "height") <- oHgt[k]
     z[[k <- format(k + leafs, scientific = FALSE)]] <- zk
@@ -717,7 +717,7 @@ as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
   }
 
   obj <- list(edge = edge, edge.length = edge.length / 2, tip.label = labels,
-              Nnode = N)
+    Nnode = N)
   class(obj) <- "phylo"
   ape::reorder.phylo(obj)
 }
@@ -734,7 +734,7 @@ cut_at <- function(communities, no, steps) {
   }
 
   if ((!missing(no) && !missing(steps)) ||
-      (missing(no) && missing(steps))) {
+    (missing(no) && missing(steps))) {
     stop("Please give either `no' or `steps' (but not both)")
   }
 
@@ -773,18 +773,18 @@ show_trace <- function(communities) {
   while (i <= length(communities$history)) {
     if (communities$history[i] == 2) { # IGRAPH_LEVC_HIST_SPLIT
       resnew <- paste("Splitting community", communities$history[i + 1],
-                      "into two.")
+        "into two.")
       i <- i + 2
     } else if (communities$history[i] == 3) { # IGRAPH_LEVC_HIST_FAILED
       resnew <- paste("Failed splitting community",
-                      communities$history[i + 1], "into two.")
+        communities$history[i + 1], "into two.")
       i <- i + 2
     } else if (communities$history[i] == 4) { # IGRAPH_LEVC_START_FULL
       resnew <- "Starting with the whole graph as a community."
       i <- i + 1
     } else if (communities$history[i] == 5) { # IGRAPH_LEVC_START_GIVEN
       resnew <- paste("Starting from the", communities$history[i + 1],
-                      "given communities.")
+        "given communities.")
       i <- i + 2
     }
 
@@ -923,11 +923,11 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' cluster_spinglass(g, vertex = 1)
 #'
 cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
-                                parupdate = FALSE, start.temp = 1,
-                                stop.temp = 0.01, cool.fact = 0.99,
-                                update.rule = c("config", "random", "simple"),
-                                gamma = 1.0, implementation = c("orig", "neg"),
-                                gamma.minus = 1.0) {
+                              parupdate = FALSE, start.temp = 1,
+                              stop.temp = 0.01, cool.fact = 0.99,
+                              update.rule = c("config", "random", "simple"),
+                              gamma = 1.0, implementation = c("orig", "neg"),
+                              gamma.minus = 1.0) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -945,16 +945,16 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
   update.rule <- igraph.match.arg(update.rule)
   update.rule <- switch(update.rule, "simple" = 0, "random" = 0, "config" = 1)
   implementation <- switch(igraph.match.arg(implementation),
-                                            "orig" = 0, "neg" = 1)
+    "orig" = 0, "neg" = 1)
 
   on.exit(.Call(C_R_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(C_R_igraph_spinglass_community, graph, weights,
-                 as.numeric(spins), as.logical(parupdate),
-                 as.numeric(start.temp),
-                 as.numeric(stop.temp), as.numeric(cool.fact),
-                 as.numeric(update.rule), as.numeric(gamma),
-                 as.numeric(implementation), as.numeric(gamma.minus))
+      as.numeric(spins), as.logical(parupdate),
+      as.numeric(start.temp),
+      as.numeric(stop.temp), as.numeric(cool.fact),
+      as.numeric(update.rule), as.numeric(gamma),
+      as.numeric(implementation), as.numeric(gamma.minus))
     res$algorithm <- "spinglass"
     res$vcount <- vcount(graph)
     res$membership <- res$membership + 1
@@ -964,8 +964,8 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
     class(res) <- "communities"
   } else {
     res <- .Call(C_R_igraph_spinglass_my_community, graph, weights,
-                 as.igraph.vs(graph, vertex) - 1, as.numeric(spins),
-                 as.numeric(update.rule), as.numeric(gamma))
+      as.igraph.vs(graph, vertex) - 1, as.numeric(spins),
+      as.numeric(update.rule), as.numeric(gamma))
     res$community <- res$community + 1
   }
   res
@@ -1122,9 +1122,9 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   if (n_iterations > 0) {
     for (i in 1:n_iterations) {
       res <- .Call(C_R_igraph_community_leiden, graph, weights,
-                    vertex_weights, as.numeric(resolution_parameter),
-                    as.numeric(beta), !is.null(membership),
-                    membership)
+        vertex_weights, as.numeric(resolution_parameter),
+        as.numeric(beta), !is.null(membership),
+        membership)
       membership <- res$membership
     }
   } else {
@@ -1133,9 +1133,9 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     while (prev_quality < quality) {
       prev_quality <- quality;
       res <- .Call(C_R_igraph_community_leiden, graph, weights,
-                    vertex_weights, as.numeric(resolution_parameter),
-                    as.numeric(beta), !is.null(membership),
-                    membership)
+        vertex_weights, as.numeric(resolution_parameter),
+        as.numeric(beta), !is.null(membership),
+        membership)
       membership <- res$membership
       quality <- res$quality
     }
@@ -1279,7 +1279,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_walktrap_community, graph, weights, as.numeric(steps),
-        as.logical(merges), as.logical(modularity), as.logical(membership))
+    as.logical(merges), as.logical(modularity), as.logical(membership))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1401,10 +1401,10 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_community_edge_betweenness, graph, weights,
-               as.logical(directed),
-               as.logical(edge.betweenness),
-               as.logical(merges), as.logical(bridges),
-               as.logical(modularity), as.logical(membership))
+    as.logical(directed),
+    as.logical(edge.betweenness),
+    as.logical(merges), as.logical(bridges),
+    as.logical(modularity), as.logical(membership))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1483,7 +1483,7 @@ cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_community_fastgreedy, graph, as.logical(merges),
-               as.logical(modularity), as.logical(membership), weights)
+    as.logical(modularity), as.logical(membership), weights)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1597,10 +1597,10 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' cluster_leading_eigen(g, start = membership(lec))
 #'
 cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
-                                          start = NULL,
-                                          options = arpack_defaults,
-                                          callback = NULL, extra = NULL,
-                                          env = parent.frame()) {
+                                  start = NULL,
+                                  options = arpack_defaults,
+                                  callback = NULL, extra = NULL,
+                                  env = parent.frame()) {
 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1619,8 +1619,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_community_leading_eigenvector, graph, steps,
-               weights, options, start, callback, extra, env,
-               environment(igraph.i.levc.arp))
+    weights, options, start, callback, extra, env,
+    environment(igraph.i.levc.arp))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1946,7 +1946,7 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' communities(imc)
 #'
 cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
-                              nb.trials = 10, modularity = TRUE) {
+                            nb.trials = 10, modularity = TRUE) {
 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1971,7 +1971,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_community_infomap, graph, e.weights,
-               v.weights, nb.trials)
+    v.weights, nb.trials)
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -1997,8 +1997,8 @@ plot.communities <- function(x, y,
                              ...) {
 
   plot(y, vertex.color = col, mark.groups = mark.groups,
-       edge.color = edge.color,
-       ...)
+    edge.color = edge.color,
+    ...)
 }
 
 
@@ -2091,9 +2091,9 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...)
 #' plot_dendrogram(fc)
 #'
 plot_dendrogram.communities <- function(x,
-                                 mode = igraph_opt("dend.plot.type"), ...,
-                                 use.modularity = FALSE,
-                                 palette = categorical_pal(8)) {
+                                        mode = igraph_opt("dend.plot.type"), ...,
+                                        use.modularity = FALSE,
+                                        palette = categorical_pal(8)) {
   mode <- igraph.match.arg(mode, c("auto", "phylo", "hclust", "dendrogram"))
 
   old_palette <- palette(palette)
@@ -2122,7 +2122,7 @@ dendPlotHclust <- function(communities, rect = length(communities),
                            use.modularity = FALSE) {
   hc <- as.hclust(communities, hang = hang, use.modularity = use.modularity)
   ret <- plot(hc, hang = hang, ann = ann, main = main, sub = sub, xlab = xlab,
-              ylab = ylab, ...)
+    ylab = ylab, ...)
   if (rect > 0) {
     rect.hclust(hc, k = rect, border = colbar)
   }
@@ -2133,7 +2133,7 @@ dendPlotHclust <- function(communities, rect = length(communities),
 dendPlotDendrogram <- function(communities, hang = -1, ...,
                                use.modularity = FALSE) {
   plot(as.dendrogram(communities, hang = hang, use.modularity = use.modularity),
-       ...)
+    ...)
 }
 
 #' @importFrom grDevices palette
@@ -2235,8 +2235,8 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #' compare(membership(sg), membership(le))
 #'
 compare <- function(comm1, comm2, method = c("vi", "nmi",
-                                    "split.join", "rand",
-                                    "adjusted.rand"))
+                      "split.join", "rand",
+                      "adjusted.rand"))
   UseMethod("compare")
 
 #' @method compare communities
@@ -2251,8 +2251,8 @@ compare.communities <- function(comm1, comm2,
 #' @method compare membership
 #' @export
 compare.membership <- function(comm1, comm2,
-                                method = c("vi", "nmi", "split.join", "rand",
-                                  "adjusted.rand")) {
+                               method = c("vi", "nmi", "split.join", "rand",
+                                 "adjusted.rand")) {
 
   i_compare(comm1, comm2, method)
 }
@@ -2262,7 +2262,7 @@ compare.membership <- function(comm1, comm2,
 compare.default <- compare.membership
 
 i_compare <- function(comm1, comm2, method = c("vi", "nmi", "split.join",
-                                       "rand", "adjusted.rand")) {
+                        "rand", "adjusted.rand")) {
 
   comm1 <- if (inherits(comm1, "communities")) {
     as.numeric(membership(comm1))
@@ -2275,7 +2275,7 @@ i_compare <- function(comm1, comm2, method = c("vi", "nmi", "split.join",
     as.numeric(as.factor(comm2))
   }
   method <- switch(igraph.match.arg(method), vi = 0, nmi = 1,
-                   split.join = 2, rand = 3, adjusted.rand = 4)
+    split.join = 2, rand = 3, adjusted.rand = 4)
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_compare_communities, comm1, comm2, method)
   res
@@ -2417,7 +2417,7 @@ communities <- groups.communities
 #' E(g)$weight <- runif(ecount(g))
 #'
 #' g2 <- contract(g, rep(1:5, each = 2),
-#'                         vertex.attr.comb = toString)
+#'   vertex.attr.comb = toString)
 #'
 #' ## graph and edge attributes are kept, vertex attributes are
 #' ## combined using the 'toString' function.

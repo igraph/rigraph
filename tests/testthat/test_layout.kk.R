@@ -27,7 +27,7 @@ test_that("Kamada-Kawai layout generator works", {
   g <- make_star(30)
   l <- layout_with_kk(g, maxiter = 500, coords = layout_in_circle(g))
   if (Sys.info()["sysname"] == "Darwin" &&
-          Sys.info()["machine"] == "arm64") {
+    Sys.info()["machine"] == "arm64") {
     expect_that(sum(l), equals(-85.0114155988244562, tolerance = 0.5))
   } else if (Sys.info()["sysname"] == "Darwin") {
     expect_that(sum(l), equals(-85.6883999492408, tolerance = 0.5))
@@ -41,10 +41,10 @@ test_that("Kamada-Kawai layout generator works", {
   if (Sys.info()["sysname"] == "Darwin") {
     expect_that(sum(l), equals(1.61069099387368))
   } else if (Sys.info()["sysname"] == "Linux" &&
-             Sys.info()["machine"] == "x86_64") {
+    Sys.info()["machine"] == "x86_64") {
     expect_that(sum(l), equals(-1.83036635516248))
   } else if (Sys.info()["sysname"] == "Linux" &&
-             Sys.info()["machine"] == "i686") {
+    Sys.info()["machine"] == "i686") {
     expect_that(sum(l), equals(0.0631144692360025))
   }
 

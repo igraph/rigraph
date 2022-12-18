@@ -21,22 +21,22 @@
 ###################################################################
 
 .igraph.pars <- list("print.vertex.attributes" = FALSE,
-                     "print.edge.attributes" = FALSE,
-                     "print.graph.attributes" = FALSE,
-                     "verbose" = FALSE,
-                     "vertex.attr.comb" = list(name = "concat", "ignore"),
-                     "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
-                     "sparsematrices" = TRUE,
-                     "nexus.url" = "http://nexus.igraph.org",
-                     "add.params" = TRUE,
-                     "add.vertex.names" = TRUE,
-                     "dend.plot.type" = "auto",
-                     "print.full" = "auto",
-                     "annotate.plot" = FALSE,
-                     "auto.print.lines" = 10,
-                     "return.vs.es" = TRUE,
-                     "print.id" = TRUE
-                    )
+  "print.edge.attributes" = FALSE,
+  "print.graph.attributes" = FALSE,
+  "verbose" = FALSE,
+  "vertex.attr.comb" = list(name = "concat", "ignore"),
+  "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
+  "sparsematrices" = TRUE,
+  "nexus.url" = "http://nexus.igraph.org",
+  "add.params" = TRUE,
+  "add.vertex.names" = TRUE,
+  "dend.plot.type" = "auto",
+  "print.full" = "auto",
+  "annotate.plot" = FALSE,
+  "auto.print.lines" = 10,
+  "return.vs.es" = TRUE,
+  "print.id" = TRUE
+)
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
@@ -169,9 +169,9 @@ igraph_i_options <- function(..., .in = parent.frame()) {
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
     switch(mode(arg),
-           list = temp <- arg,
-           character = return(.igraph.pars[arg]),
-           stop("invalid argument: ", sQuote(arg)))
+      list = temp <- arg,
+      character = return(.igraph.pars[arg]),
+      stop("invalid argument: ", sQuote(arg)))
   }
   if (length(temp) == 0) return(get_all_options())
 

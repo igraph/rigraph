@@ -11,7 +11,7 @@ test_that("merge_coords works", {
   expect_that(ncol(lm), equals(2))
   expect_that(nrow(lm), equals(sum(sapply(g, vcount))))
 
-##########
+  ##########
 
   ## Stress test
   for (i in 1:10) {

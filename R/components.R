@@ -43,7 +43,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' @export
 #' @importFrom graphics hist
 component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
-                                 ...) {
+                                   ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -108,7 +108,7 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
   }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_decompose, graph, as.numeric(mode),
-        as.numeric(max.comps), as.numeric(min.vertices))
+    as.numeric(max.comps), as.numeric(min.vertices))
 }
 
 

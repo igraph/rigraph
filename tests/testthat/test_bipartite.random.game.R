@@ -38,14 +38,14 @@ test_that("sample_bipartite works", {
   expect_true(is_directed(g6))
   expect_that(print_all(g6), prints_text("12->10"))
 
-#####
+  #####
 
   g7 <- sample_bipartite(10, 5, type = "gnp", p = 0.9999, directed = TRUE,
-                              mode = "all")
+    mode = "all")
   expect_that(ecount(g7), equals(100))
 
   g8 <- sample_bipartite(10, 5, type = "gnm", m = 99, directed = TRUE,
-                              mode = "all")
+    mode = "all")
   expect_that(ecount(g8), equals(99))
 
 })

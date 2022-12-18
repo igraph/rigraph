@@ -5,7 +5,7 @@ test_that("diameter works", {
     induced_subgraph(graph, which(clu$membership == which.max(clu$csize)))
   }
 
-#### Undirected
+  #### Undirected
 
   g <- gc(sample_gnp(30, 3 / 30))
   sp <- distances(g)
@@ -16,21 +16,21 @@ test_that("diameter works", {
   sp[sp == Inf] <- NA
   expect_that(max(sp, na.rm = TRUE), equals(diameter(g)))
 
-#### Directed
+  #### Directed
 
   g <- sample_gnp(30, 3 / 30, directed = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
   expect_that(max(sp, na.rm = TRUE), equals(diameter(g, unconnected = TRUE)))
 
-#### Weighted
+  #### Weighted
 
   E(g)$weight <- sample(1:10, ecount(g), replace = TRUE)
   sp <- distances(g, mode = "out")
   sp[sp == Inf] <- NA
   expect_that(max(sp, na.rm = TRUE), equals(diameter(g, unconnected = TRUE)))
 
-#### Bug #680538
+  #### Bug #680538
 
   g <- make_tree(30, mode = "undirected")
   E(g)$weight <- 2

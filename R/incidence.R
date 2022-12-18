@@ -126,7 +126,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     names(weight) <- weighted
     res <- add_edges(res, edges, attr = weight)
     res <- set_vertex_attr(res, "type",
-                                value = c(rep(FALSE, n1), rep(TRUE, n2)))
+      value = c(rep(FALSE, n1), rep(TRUE, n2)))
 
   } else {
 
@@ -199,9 +199,9 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' graph_from_incidence_matrix(inc)
 #'
 graph_from_incidence_matrix <- function(incidence, directed = FALSE,
-                            mode = c("all", "out", "in", "total"),
-                            multiple = FALSE, weighted = NULL,
-                            add.names = NULL) {
+                                        mode = c("all", "out", "in", "total"),
+                                        multiple = FALSE, weighted = NULL,
+                                        add.names = NULL) {
   # Argument checks
   directed <- as.logical(directed)
   mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
@@ -209,12 +209,12 @@ graph_from_incidence_matrix <- function(incidence, directed = FALSE,
 
   if (inherits(incidence, "Matrix")) {
     res <- graph.incidence.sparse(incidence, directed = directed,
-                                  mode = mode, multiple = multiple,
-                                  weighted = weighted)
+      mode = mode, multiple = multiple,
+      weighted = weighted)
   } else {
     incidence <- as.matrix(incidence)
     res <- graph.incidence.dense(incidence, directed = directed, mode = mode,
-                                 multiple = multiple, weighted = weighted)
+      multiple = multiple, weighted = weighted)
   }
 
   ## Add names
@@ -232,7 +232,7 @@ graph_from_incidence_matrix <- function(incidence, directed = FALSE,
   }
   if (!is.na(add.names)) {
     res <- set_vertex_attr(res, add.names,
-                                value = c(rownames(incidence), colnames(incidence)))
+      value = c(rownames(incidence), colnames(incidence)))
   }
   res
 }

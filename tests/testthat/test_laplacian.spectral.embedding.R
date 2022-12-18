@@ -29,9 +29,9 @@ test_that("Undirected, unweighted, D-A case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(D[1:no]))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -41,9 +41,9 @@ test_that("Undirected, unweighted, D-A case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -53,9 +53,9 @@ test_that("Undirected, unweighted, D-A case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
@@ -81,9 +81,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(abs(D[1:no])))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -93,9 +93,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -105,9 +105,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
@@ -132,9 +132,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(abs(D[1:no])))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -144,9 +144,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -156,9 +156,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
@@ -183,9 +183,9 @@ test_that("Undirected, weighted, D-A case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(abs(D[1:no])))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -195,9 +195,9 @@ test_that("Undirected, weighted, D-A case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -207,13 +207,13 @@ test_that("Undirected, weighted, D-A case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "D-A",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "D-A",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(X[, vcount(g) - 1:no + 1],
-                                   tolerance = .Machine$double.eps^0.25))
+    tolerance = .Machine$double.eps^0.25))
   expect_that(as_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
 
@@ -237,9 +237,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(abs(D[1:no])))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -249,9 +249,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -261,9 +261,9 @@ test_that("Undirected, unweighted, DAD case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
@@ -289,9 +289,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## LA
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(abs(D[1:no])))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -301,9 +301,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## LM
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(mag_sort(D)[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, mag_order(D)][, 1:no])))
@@ -313,9 +313,9 @@ test_that("Undirected, unweighted, I-DAD case works", {
   ## SA
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "I-DAD",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "I-DAD",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
@@ -341,9 +341,9 @@ test_that("Directed, unweighted, OAP case works", {
   Y <- std(ss$v %*% sqrt(diag(ss$d)))
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(D[1:no]))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -353,9 +353,9 @@ test_that("Directed, unweighted, OAP case works", {
   expect_that(std(as_la$Y), equals(std(V[, 1:no])))
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(D[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, 1:no])))
@@ -365,14 +365,14 @@ test_that("Directed, unweighted, OAP case works", {
   expect_that(std(as_lm$Y), equals(std(V[, 1:no])))
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
   expect_that(std(au_sa$Y), equals(std(Y[, vcount(g) - 1:no + 1]),
-                            tolerance = sqrt(sqrt(.Machine$double.eps))))
+    tolerance = sqrt(sqrt(.Machine$double.eps))))
   expect_that(as_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
   expect_that(std(as_sa$Y), equals(std(V[, vcount(g) - 1:no + 1])))
@@ -397,9 +397,9 @@ test_that("Directed, weighted case works", {
   Y <- std(ss$v %*% sqrt(diag(ss$d)))
 
   au_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_la <- embed_laplacian_matrix(g, no = no, which = "la", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_la$D, equals(D[1:no]))
   expect_that(std(au_la$X), equals(std(X[, 1:no])))
@@ -409,9 +409,9 @@ test_that("Directed, weighted case works", {
   expect_that(std(as_la$Y), equals(std(V[, 1:no])))
 
   au_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_lm <- embed_laplacian_matrix(g, no = no, which = "lm", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_lm$D, equals(D[1:no]))
   expect_that(std(au_lm$X), equals(std(X[, 1:no])))
@@ -421,14 +421,14 @@ test_that("Directed, weighted case works", {
   expect_that(std(as_lm$Y), equals(std(V[, 1:no])))
 
   au_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "OAP",
-                                        scaled = TRUE)
+    scaled = TRUE)
   as_sa <- embed_laplacian_matrix(g, no = no, which = "sa", type = "OAP",
-                                        scaled = FALSE)
+    scaled = FALSE)
 
   expect_that(au_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(au_sa$X), equals(std(X[, vcount(g) - 1:no + 1])))
   expect_that(std(au_sa$Y), equals(std(Y[, vcount(g) - 1:no + 1]),
-                            tolerance = sqrt(sqrt(.Machine$double.eps))))
+    tolerance = sqrt(sqrt(.Machine$double.eps))))
   expect_that(as_sa$D, equals(D[vcount(g) - 1:no + 1]))
   expect_that(std(as_sa$X), equals(std(U[, vcount(g) - 1:no + 1])))
   expect_that(std(as_sa$Y), equals(std(V[, vcount(g) - 1:no + 1])))

@@ -161,11 +161,11 @@
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
-      (!missing(i) || !missing(j))) {
+    (!missing(i) || !missing(j))) {
     stop("Cannot give 'from'/'to' together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
-      (missing(from) && !missing(to))) {
+    (missing(from) && !missing(to))) {
     stop("Cannot give 'from'/'to' without the other")
   }
   if (!missing(from)) {
@@ -342,15 +342,15 @@ length.igraph <- function(x) {
   ################################################################
   ## Argument checks
   if ((!missing(from) || !missing(to)) &&
-      (!missing(i) || !missing(j))) {
+    (!missing(i) || !missing(j))) {
     stop("Cannot give 'from'/'to' together with regular indices")
   }
   if ((!missing(from) && missing(to)) ||
-      (missing(from) && !missing(to))) {
+    (missing(from) && !missing(to))) {
     stop("Cannot give 'from'/'to' without the other")
   }
   if (is.null(attr) &&
-      (!is.null(value) && !is.numeric(value) && !is.logical(value))) {
+    (!is.null(value) && !is.numeric(value) && !is.logical(value))) {
     stop("New value should be NULL, numeric or logical")
   }
   if (is.null(attr) && !is.null(value) && length(value) != 1) {
@@ -372,8 +372,8 @@ length.igraph <- function(x) {
 
   if (!missing(from)) {
     if (is.null(value) ||
-        (is.logical(value) && !value) ||
-        (is.null(attr) && is.numeric(value) && value == 0)) {
+      (is.logical(value) && !value) ||
+      (is.null(attr) && is.numeric(value) && value == 0)) {
       ## Delete edges
       todel <- x[from = from, to = to, ..., edges = TRUE]
       x <- delete_edges(x, todel)
@@ -389,8 +389,8 @@ length.igraph <- function(x) {
       }
     }
   } else if (is.null(value) ||
-      (is.logical(value) && !value) ||
-      (is.null(attr) && is.numeric(value) && value == 0)) {
+    (is.logical(value) && !value) ||
+    (is.null(attr) && is.numeric(value) && value == 0)) {
     ## Delete edges
     if (missing(i) && missing(j)) {
       todel <- unlist(x[[, , ..., edges = TRUE]])

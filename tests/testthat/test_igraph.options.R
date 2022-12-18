@@ -14,7 +14,7 @@ test_that("we can restore old options", {
   old_2 <- igraph_opt("annotate.plot")
 
   old <- igraph_options(sparsematrices = FALSE,
-                        annotate.plot = TRUE)
+    annotate.plot = TRUE)
 
   expect_equal(igraph_opt("sparsematrices"), FALSE)
   expect_equal(igraph_opt("annotate.plot"), TRUE)
@@ -32,7 +32,7 @@ test_that("with_igraph_opt works", {
   old <- igraph_options(sparsematrices = TRUE)
 
   res <- with_igraph_opt(list(sparsematrices = FALSE),
-                         make_ring(3)[])
+    make_ring(3)[])
 
   expect_equal(igraph_opt("sparsematrices"), TRUE)
   expect_true(inherits(res, "matrix"))

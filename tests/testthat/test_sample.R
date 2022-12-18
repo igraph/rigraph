@@ -15,11 +15,11 @@ test_that("Sampling from a Dirichlet works", {
 
   ## Errors
   expect_that(sample_dirichlet(-1, alpha = c(1, 1, 1, 1)),
-              throws_error("should be non-negative"))
+    throws_error("should be non-negative"))
   expect_that(sample_dirichlet(5, alpha = c(1)),
-              throws_error("must have at least two entries"))
+    throws_error("must have at least two entries"))
   expect_that(sample_dirichlet(5, alpha = c(0, 1, 1)),
-              throws_error("must be positive"))
+    throws_error("must be positive"))
   expect_that(sample_dirichlet(5, alpha = c(1, -1, -1)),
-              throws_error("must be positive"))
+    throws_error("must be positive"))
 })

@@ -7,7 +7,7 @@ test_that("sdf works", {
 
   sdf <- sdf(id = 1:10, color = "black")
   expect_that(as.data.frame(sdf),
-              equals(data.frame(id = 1:10, color = "black")))
+    equals(data.frame(id = 1:10, color = "black")))
 
   ## access
 
@@ -24,28 +24,28 @@ test_that("sdf works", {
   sdf2 <- sdf
   sdf2[5, "id"] <- 100
   expect_that(as.data.frame(sdf2),
-              equals(data.frame(id = c(1:4, 100, 6:10), color = "black")))
+    equals(data.frame(id = c(1:4, 100, 6:10), color = "black")))
 
   sdf2 <- sdf
   sdf2[, "id"] <- 0
   expect_that(as.data.frame(sdf2),
-              equals(data.frame(id = rep(0, 10), color = "black")))
+    equals(data.frame(id = rep(0, 10), color = "black")))
 
   sdf2 <- sdf
   sdf2[2:10, "id"] <- 1
   expect_that(as.data.frame(sdf2),
-              equals(data.frame(id = rep(1, 10), color = "black")))
+    equals(data.frame(id = rep(1, 10), color = "black")))
 
   sdf2 <- sdf
   sdf2[, "color"] <- "white"
   expect_that(as.data.frame(sdf2),
-              equals(data.frame(id = 1:10, color = "white")))
+    equals(data.frame(id = 1:10, color = "white")))
 
   sdf2 <- sdf
   sdf2[5:6, "color"] <- "white"
   expect_that(as.data.frame(sdf2),
-              equals(data.frame(id = 1:10, color = c(rep("black", 4),
-                                           rep("white", 2),
-                                           rep("black", 4)))))
+    equals(data.frame(id = 1:10, color = c(rep("black", 4),
+      rep("white", 2),
+      rep("black", 4)))))
 
 })

@@ -24,8 +24,8 @@ test_that("Graphlets work for some simple graphs", {
 
 test_that("Graphlets filtering works", {
   gt <- data.frame(from = c("A", "A", "B", "B", "B", "C", "C", "D"),
-                   to = c("B", "C", "C", "D", "E", "D", "E", "E"),
-                   weight = c(8, 8, 8, 5, 5, 5, 5, 5))
+    to = c("B", "C", "C", "D", "E", "D", "E", "E"),
+    weight = c(8, 8, 8, 5, 5, 5, 5, 5))
 
   g <- graph_from_data_frame(gt, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
   gl <- sortgl(graphlet_basis(g))
@@ -95,7 +95,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
     stop("Edge weights must be non-negative and finite")
   }
   if (length(iter) != 1 || !is.numeric(iter) ||
-      !is.finite(iter) || iter != as.integer(iter)) {
+    !is.finite(iter) || iter != as.integer(iter)) {
     stop("`iter' must be a non-negative finite integer scalar")
   }
 

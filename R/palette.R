@@ -56,7 +56,7 @@ categorical_pal <- function(n) {
   stopifnot(n > 0)
 
   x <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
-         "#D55E00", "#CC79A7", "#999999")
+    "#D55E00", "#CC79A7", "#999999")
 
   if (n > length(x)) warning("Cannot make ", n, " categorical colors")
 

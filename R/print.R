@@ -31,20 +31,20 @@
   gal <- graph_attr_names(object)
   if (length(gal) != 0) {
     ga <- paste(sep = "", gal, " (g/",
-                .Call(C_R_igraph_get_attr_mode, object, 2L),
-                ")")
+      .Call(C_R_igraph_get_attr_mode, object, 2L),
+      ")")
   }
   val <- vertex_attr_names(object)
   if (length(val) != 0) {
     va <- paste(sep = "", val, " (v/",
-                .Call(C_R_igraph_get_attr_mode, object, 3L),
-                ")")
+      .Call(C_R_igraph_get_attr_mode, object, 3L),
+      ")")
   }
   eal <- edge_attr_names(object)
   if (length(eal) != 0) {
     ea <- paste(sep = "", edge_attr_names(object), " (e/",
-                .Call(C_R_igraph_get_attr_mode, object, 4L),
-                ")")
+      .Call(C_R_igraph_get_attr_mode, object, 4L),
+      ")")
   }
   c(ga, va, ea)
 }
@@ -71,7 +71,7 @@
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
     title <- substring(paste(sep = "", title,
-                             as.character(object$name)[1]), 1, w - 1)
+      as.character(object$name)[1]), 1, w - 1)
   }
   cat(title, "\n", sep = "")
 
@@ -79,7 +79,7 @@
   atxt <- paste(atxt[atxt != ""], collapse = ", ")
   if (atxt != "") {
     atxt <- strwrap(paste(sep = "", "+ attr: ", atxt), prefix = "| ",
-                    initial = "")
+      initial = "")
     cat(atxt, sep = "\n")
   }
   1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
@@ -149,10 +149,10 @@
       ind <- seq(length.out = mp)
     }
     if (vc == 0 ||
-        all(sapply(list, function(v)
-                   is.numeric(vertex_attr(x, v)) ||
-                   is.character(vertex_attr(x, v)) ||
-                   is.logical(vertex_attr(x, v))))) {
+      all(sapply(list, function(v)
+        is.numeric(vertex_attr(x, v)) ||
+          is.character(vertex_attr(x, v)) ||
+          is.logical(vertex_attr(x, v))))) {
       ## create a table
       tab <- data.frame(v = paste(sep = "", "[", ind, "]"), row.names = "v")
       for (i in list) {
@@ -170,7 +170,7 @@
     options(max.print = mp)
     if (omitted.vertices != 0) {
       cat(paste('[ reached getOption("max.print") -- omitted',
-                omitted.vertices, "vertices ]\n\n"))
+        omitted.vertices, "vertices ]\n\n"))
     }
   }
 }
@@ -189,9 +189,9 @@
     names <- FALSE
   }
   if (names && "name" %in% vertex_attr_names(x) &&
-      !is.numeric(vertex_attr(x, "name")) &&
-      !is.character(vertex_attr(x, "name")) &&
-      !is.logical(vertex_attr(x, "name"))) {
+    !is.numeric(vertex_attr(x, "name")) &&
+    !is.character(vertex_attr(x, "name")) &&
+    !is.logical(vertex_attr(x, "name"))) {
     warning("Can't print vertex names, complex `name' vertex attribute")
     names <- FALSE
   }
@@ -211,14 +211,14 @@
     seq(length.out = nrow(el))
   }
   if (ec == 0 ||
-      all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
-                 is.character(edge_attr(x, v)) |
-                 is.logical(edge_attr(x, v))))) {
+    all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
+      is.character(edge_attr(x, v)) |
+      is.logical(edge_attr(x, v))))) {
     ## create a table
     tab <- data.frame(row.names = paste(sep = "", "[", ename, "]"))
     if (is.numeric(el)) { w <- nchar(max(el)) } else { w <- max(nchar(el)) }
     tab["edge"] <- paste(sep = "", format(el[, 1], width = w),
-                         arrow, format(el[, 2], width = w))
+      arrow, format(el[, 2], width = w))
     for (i in list) {
       tab[i] <- edge_attr(x, i)
     }
@@ -236,7 +236,7 @@
   }
   if (omitted.edges != 0) {
     cat(paste('[ reached getOption("max.print") -- omitted', omitted.edges,
-              'edges ]\n\n'))
+      'edges ]\n\n'))
   }
 }
 
@@ -252,7 +252,7 @@
 
   title <- "+" %+%
     (if (num) " " %+% chr(len) %+% "/" %+%
-       (if (is.null(x)) "?" else chr(gsize(x))) else "") %+%
+      (if (is.null(x)) "?" else chr(gsize(x))) else "") %+%
     (if (len == 1) " edge" else " edges") %+%
     (if (isTRUE(id) && !is.na(gid)) paste(" from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(x)) " (deleted)" else "") %+%
@@ -337,7 +337,7 @@
         can_max <<- no
       } else if (q == "done") {
         if (no["tried_items"] < length(edges) ||
-            no["printed_lines"] < no["tried_lines"]) {
+          no["printed_lines"] < no["tried_lines"]) {
           cat("+ ... omitted several edges\n")
         }
       }
@@ -494,12 +494,12 @@ print_all <- function(object, ...) {
 #' summary(g)
 #'
 print.igraph <- function(x, full = igraph_opt("print.full"),
-                graph.attributes = igraph_opt("print.graph.attributes"),
-                vertex.attributes = igraph_opt("print.vertex.attributes"),
-                edge.attributes = igraph_opt("print.edge.attributes"),
-                names = TRUE, max.lines = igraph_opt("auto.print.lines"),
-                id = igraph_opt("print.id"),
-                ...) {
+                         graph.attributes = igraph_opt("print.graph.attributes"),
+                         vertex.attributes = igraph_opt("print.vertex.attributes"),
+                         edge.attributes = igraph_opt("print.edge.attributes"),
+                         names = TRUE, max.lines = igraph_opt("auto.print.lines"),
+                         id = igraph_opt("print.id"),
+                         ...) {
 
   if (!is_igraph(x)) {
     stop("Not a graph object")

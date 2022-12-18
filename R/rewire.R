@@ -155,7 +155,7 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
   }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
-        as.logical(multiple))
+    as.logical(multiple))
 }
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
@@ -164,5 +164,5 @@ rewire_each_directed_edge <- function(graph, prob, loops, mode) {
   }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
-        as.numeric(mode))
+    as.numeric(mode))
 }

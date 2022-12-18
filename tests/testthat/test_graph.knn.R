@@ -7,7 +7,7 @@ test_that("knn works", {
 
   g2 <- make_star(10)
   expect_that(knn(g2), equals(list(knn = c(1, rep(9, 9)),
-                                         knnk = c(9, rep(NaN, 7), 1))))
+    knnk = c(9, rep(NaN, 7), 1))))
 
   ## A scale-free one, try to plot 'knnk'
   g3 <- simplify(sample_pa(1000, m = 5))
@@ -29,8 +29,8 @@ test_that("knn works", {
   E(g5)$weight <- seq(ecount(g5))
   r5 <- knn(g5)
   expect_that(r5, equals(structure(list(knn = c(1, rep(9, 9)), knnk =
-                                        c(9, NaN, NaN,
-                                          NaN, NaN, NaN, NaN, NaN,
-                                          1)), .Names = c("knn",
-                                                 "knnk"))))
+    c(9, NaN, NaN,
+      NaN, NaN, NaN, NaN, NaN,
+      1)), .Names = c("knn",
+    "knnk"))))
 })

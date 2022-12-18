@@ -89,7 +89,7 @@ sample_seq <- function(low, high, length) {
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_random_sample, as.numeric(low), as.numeric(high),
-        as.numeric(length))
+    as.numeric(length))
 }
 
 #' Common handler for vertex type arguments in igraph functions
@@ -146,7 +146,7 @@ igraph.i.spMatrix <- function(M) {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
   } else {
     new("dgCMatrix", Dim = M$dim, Dimnames = list(NULL, NULL),
-        factors = list(), i = M$i, p = M$p, x = M$x)
+      factors = list(), i = M$i, p = M$p, x = M$x)
   }
 }
 
@@ -159,8 +159,8 @@ igraph.i.spMatrix <- function(M) {
 #' @export
 srand <- function(seed) {
   warning("This function does nothing, as calling srand from R packages\n",
-          "is now not allowed. If you want to reproduce your past\n",
-          "results, use an older version of igraph, e.g. 0.7.1")
+    "is now not allowed. If you want to reproduce your past\n",
+    "results, use an older version of igraph, e.g. 0.7.1")
 }
 
 

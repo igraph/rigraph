@@ -5,9 +5,9 @@ test_that("as_adj_list works", {
   g2 <- graph_from_adj_list(al, mode = "all")
   expect_true(graph.isomorphic(g, g2))
   expect_true(graph.isomorphic.vf2(g, g2, vertex.color1 = 1:vcount(g),
-                                   vertex.color2 = 1:vcount(g2))$iso)
+    vertex.color2 = 1:vcount(g2))$iso)
 
-####
+  ####
 
   el <- as_adj_edge_list(g)
   for (i in 1:vcount(g)) {

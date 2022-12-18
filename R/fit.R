@@ -152,18 +152,18 @@ power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
     n <- length(x)
   }
 
-#  mlogl <- function(alpha) {
-#    if (xmin > 1) {
-#      C <- 1/(1/(alpha-1)-sum(beta(1:(xmin-1), alpha)))
-#    } else {
-#      C <- alpha-1
-#    }
-#    -n*log(C)-sum(lbeta(x, alpha))
-#  }
+  #  mlogl <- function(alpha) {
+  #    if (xmin > 1) {
+  #      C <- 1/(1/(alpha-1)-sum(beta(1:(xmin-1), alpha)))
+  #    } else {
+  #      C <- alpha-1
+  #    }
+  #    -n*log(C)-sum(lbeta(x, alpha))
+  #  }
 
   mlogl <- function(alpha) {
-     C <- 1 / sum((xmin:10000)^-alpha)
-     -n * log(C) + alpha * sum(log(x))
+    C <- 1 / sum((xmin:10000)^-alpha)
+    -n * log(C) + alpha * sum(log(x))
   }
 
   alpha <- stats4::mle(mlogl, start = list(alpha = start), ...)

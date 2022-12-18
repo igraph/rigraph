@@ -102,7 +102,7 @@ NULL
 #' max(abs(rowSums(W)) - 1)
 #'
 stochastic_matrix <- function(graph, column.wise = FALSE,
-                           sparse = igraph_opt("sparsematrices")) {
+                              sparse = igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -223,13 +223,13 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' gr.km <- kmeans(V, centers = max(gr), iter.max = 100, nstart = 100)$cluster
 #' op <- par(mfrow = c(1, 2))
 #' plot(V[, 1], V[, 2], col=col[gr],
-#'         main = "SCG grouping",
-#'         xlab = "1st eigenvector",
-#'         ylab = "2nd eigenvector")
+#'   main = "SCG grouping",
+#'   xlab = "1st eigenvector",
+#'   ylab = "2nd eigenvector")
 #' plot(V[, 1], V[, 2], col=col[gr.km],
-#'         main = "K-means grouping",
-#'         xlab = "1st eigenvector",
-#'         ylab = "2nd eigenvector")
+#'   main = "K-means grouping",
+#'   xlab = "1st eigenvector",
+#'   ylab = "2nd eigenvector")
 #' par(op)
 #' ## kmeans disregards the first eigenvector as it
 #' ## spreads a much smaller range of values than the second one
@@ -243,27 +243,27 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' scg_eps(cbind(x), gr.km)
 #'
 scg_group <- function(V, nt,
-                         mtype = c("symmetric", "laplacian",
-                           "stochastic"),
-                         algo = c("optimum", "interv_km", "interv",
-                           "exact_scg"),
-                         p = NULL, maxiter = 100) {
+                      mtype = c("symmetric", "laplacian",
+                        "stochastic"),
+                      algo = c("optimum", "interv_km", "interv",
+                        "exact_scg"),
+                      p = NULL, maxiter = 100) {
 
   V <- as.matrix(structure(as.double(V), dim = dim(V)))
   groups <- as.numeric(nt)
 
   mtype <- switch(igraph.match.arg(mtype), "symmetric" = 1,
-                        "laplacian" = 2, "stochastic" = 3)
+    "laplacian" = 2, "stochastic" = 3)
   algo <- switch(igraph.match.arg(algo), "optimum" = 1,
-                      "interv_km" = 2, "interv" = 3, "exact_scg" = 4)
+    "interv_km" = 2, "interv" = 3, "exact_scg" = 4)
   if (!is.null(p)) p <- as.numeric(p)
   maxiter <- as.integer(maxiter)
 
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_scg_grouping, V, as.integer(nt[1]),
-               if (length(nt) == 1) NULL else nt,
-               mtype, algo, p, maxiter)
+    if (length(nt) == 1) NULL else nt,
+    mtype, algo, p, maxiter)
   res
 }
 
@@ -348,14 +348,14 @@ scg_group <- function(V, nt,
 #' rowSums(Lt)
 #'
 scg_semi_proj <- function(groups,
-                               mtype = c("symmetric", "laplacian",
-                                 "stochastic"), p = NULL,
-                               norm = c("row", "col"),
-                               sparse = igraph_opt("sparsematrices")) {
+                          mtype = c("symmetric", "laplacian",
+                            "stochastic"), p = NULL,
+                          norm = c("row", "col"),
+                          sparse = igraph_opt("sparsematrices")) {
   # Argument checks
   groups <- as.numeric(groups) - 1
   mtype <- switch(igraph.match.arg(mtype), "symmetric" = 1,
-  "laplacian" = 2, "stochastic" = 3)
+    "laplacian" = 2, "stochastic" = 3)
   if (!is.null(p)) p <- as.numeric(p)
   norm <- switch(igraph.match.arg(norm), "row" = 1, "col" = 2)
   sparse <- as.logical(sparse)
@@ -363,7 +363,7 @@ scg_semi_proj <- function(groups,
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_scg_semiprojectors, groups, mtype, p, norm,
-               sparse)
+    sparse)
 
   if (sparse) {
     res$L <- igraph.i.spMatrix(res$L)
@@ -511,10 +511,10 @@ scg_semi_proj <- function(groups,
 #'
 #' op <- par(mfrow = c(1, 2))
 #' plot(g, vertex.color = col[cg$groups], vertex.size = 20,
-#'                 vertex.label = NA, layout = layout)
+#'   vertex.label = NA, layout = layout)
 #' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
-#'         vertex.color = col, vertex.size = 20 * vsize / max(vsize),
-#'         vertex.label = NA, layout = layout_with_kk)
+#'   vertex.color = col, vertex.size = 20 * vsize / max(vsize),
+#'   vertex.label = NA, layout = layout_with_kk)
 #' par(op)
 #'
 #' ## SCG of real-world network
@@ -524,7 +524,7 @@ scg_semi_proj <- function(groups,
 #' n <- vcount(immuno)
 #' interv <- c(100, 100, 50, 25, 12, 6, 3, 2, 2)
 #' cg <- scg(immuno, ev = n - (1:9), nt = interv, mtype = "laplacian",
-#'                         algo = "interv", epairs = TRUE)
+#'   algo = "interv", epairs = TRUE)
 #'
 #' ## are the eigenvalues well-preserved?
 #' gt <- cg$Xt
@@ -543,7 +543,7 @@ scg_semi_proj <- function(groups,
 #' layout <- layout_nicely(immuno)
 #'
 #' plot(immuno, layout = layout, vertex.size = 3, vertex.color = col[com],
-#'                 vertex.label = NA)
+#'   vertex.label = NA)
 #'
 #' ## display the coarse-grained graph
 #' gt <- simplify(as.undirected(gt))
@@ -553,9 +553,9 @@ scg_semi_proj <- function(groups,
 #'
 #' op <- par(mfrow = c(1, 2))
 #' plot(immuno, layout = layout, vertex.size = 3, vertex.color = col[com],
-#'                 vertex.label = NA)
+#'   vertex.label = NA)
 #' plot(gt, layout = layout.cg, vertex.size = 15 * vsize / max(vsize),
-#'                 vertex.color = col[com.cg], vertex.label = NA)
+#'   vertex.color = col[com.cg], vertex.label = NA)
 #' par(op)
 #'
 scg <- function(X, ev, nt, groups = NULL,
@@ -582,11 +582,11 @@ scg.igraph <- function(X, ev, nt, groups = NULL,
                        epairs = FALSE, stat.prob = FALSE) {
 
   myscg(graph = X, matrix = NULL, sparsemat = NULL, ev = ev, nt = nt,
-        groups = groups, mtype = mtype, algo = algo,
-        norm = norm, direction = direction, evec = evec, p = p,
-        use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
-        output = output, semproj = semproj, epairs = epairs,
-        stat.prob = stat.prob)
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob)
 }
 
 #' @method scg matrix
@@ -602,11 +602,11 @@ scg.matrix <- function(X, ev, nt, groups = NULL,
                        epairs = FALSE, stat.prob = FALSE) {
 
   myscg(graph = NULL, matrix = X, sparsemat = NULL, ev = ev, nt = nt,
-        groups = groups, mtype = mtype, algo = algo,
-        norm = norm, direction = direction, evec = evec, p = p,
-        use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
-        output = output, semproj = semproj, epairs = epairs,
-        stat.prob = stat.prob)
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob)
 }
 
 #' @method scg Matrix
@@ -622,11 +622,11 @@ scg.Matrix <- function(X, ev, nt, groups = NULL,
                        epairs = FALSE, stat.prob = FALSE) {
 
   myscg(graph = NULL, matrix = NULL, sparsemat = X, ev = ev, nt = nt,
-        groups = groups, mtype = mtype, algo = algo,
-        norm = norm, direction = direction, evec = evec, p = p,
-        use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
-        output = output, semproj = semproj, epairs = epairs,
-        stat.prob = stat.prob)
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob)
 }
 
 myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
@@ -650,13 +650,13 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
   if (!is.null(groups)) groups <- as.numeric(groups)
   mtype <- igraph.match.arg(mtype)
   algo <- switch(igraph.match.arg(algo), "optimum" = 1,
-                      "interv_km" = 2, "interv" = 3, "exact_scg" = 4)
+    "interv_km" = 2, "interv" = 3, "exact_scg" = 4)
   if (!is.null(groups)) { storage.mode(groups) <- "double" }
   use.arpack <- as.logical(use.arpack)
   maxiter <- as.integer(maxiter)
   sparse <- as.logical(sparse)
   output <- switch(igraph.match.arg(output), "default" = 1, "matrix" = 2,
-                   "graph" = 3)
+    "graph" = 3)
   semproj <- as.logical(semproj)
   epairs <- as.logical(epairs)
 
@@ -665,18 +665,18 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
   if (mtype == "symmetric") {
     if (!is.null(evec)) { storage.mode(evec) <- "double" }
     res <- .Call(C_R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
-                 nt, algo, evec, groups,
-                 use.arpack, maxiter, sparse, output, semproj, epairs)
+      nt, algo, evec, groups,
+      use.arpack, maxiter, sparse, output, semproj, epairs)
 
   } else if (mtype == "laplacian") {
     norm <- switch(igraph.match.arg(norm), "row" = 1, "col" = 2)
     if (!is.null(evec)) { storage.mode(evec) <- "complex" }
     direction <- switch(igraph.match.arg(direction), "default" = 1, "left" = 2,
-                        "right" = 3)
+      "right" = 3)
     res <- .Call(C_R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
-                 nt, algo, norm, direction,
-                 evec, groups, use.arpack, maxiter, sparse, output,
-                 semproj, epairs)
+      nt, algo, norm, direction,
+      evec, groups, use.arpack, maxiter, sparse, output,
+      semproj, epairs)
 
   } else if (mtype == "stochastic") {
     norm <- switch(igraph.match.arg(norm), "row" = 1, "col" = 2)
@@ -684,12 +684,12 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
     if (!is.null(p)) { storage.mode(p) <- "double" }
     stat.prob <- as.logical(stat.prob)
     res <- .Call(C_R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
-                 nt, algo, norm, evec, groups, p, use.arpack,
-                 maxiter, sparse, output, semproj, epairs, stat.prob)
+      nt, algo, norm, evec, groups, p, use.arpack,
+      maxiter, sparse, output, semproj, epairs, stat.prob)
   }
 
   if (!is.null(res$Xt) &&
-      inherits(res$Xt, "igraph.tmp.sparse")) {
+    inherits(res$Xt, "igraph.tmp.sparse")) {
     res$Xt <- igraph.i.spMatrix(res$Xt)
   }
   if (!is.null(res$L) && inherits(res$L, "igraph.tmp.sparse")) {

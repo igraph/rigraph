@@ -2,8 +2,8 @@ test_that("community detection functions work", {
   set.seed(42)
 
   F <- list("cluster_edge_betweenness", "cluster_fast_greedy",
-            "cluster_label_prop", "cluster_leading_eigen",
-            "cluster_louvain", "cluster_spinglass", "cluster_walktrap")
+    "cluster_label_prop", "cluster_leading_eigen",
+    "cluster_louvain", "cluster_spinglass", "cluster_walktrap")
   if (has_glpk()) F <- c(F, list("cluster_optimal"))
 
   karate <- make_graph("Zachary")
@@ -13,7 +13,7 @@ test_that("community detection functions work", {
     comm <- f(karate)
 
     expect_that(modularity(comm),
-                equals(modularity(karate, membership(comm))))
+      equals(modularity(karate, membership(comm))))
 
     cc <- communities(comm)
     expect_true(all(!duplicated(unlist(cc))))
@@ -33,18 +33,18 @@ test_that("community detection functions work", {
 
   cr <- crossing(fc, karate)
   expect_that(cr, equals(c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE,
-                           TRUE, FALSE, FALSE, TRUE, TRUE, TRUE,
-                           FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, TRUE, FALSE, TRUE, FALSE, FALSE,
-                           TRUE, TRUE, TRUE, FALSE, TRUE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           TRUE, TRUE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, TRUE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE)))
+    TRUE, FALSE, FALSE, TRUE, TRUE, TRUE,
+    FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, TRUE, FALSE, TRUE, FALSE, FALSE,
+    TRUE, TRUE, TRUE, FALSE, TRUE, FALSE,
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    TRUE, TRUE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, TRUE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, FALSE, FALSE, FALSE)))
 })
 
 test_that("creating communities objects works", {
@@ -55,7 +55,7 @@ test_that("creating communities objects works", {
   membership <- sample(1:2, vcount(karate), replace = TRUE)
   mod <- modularity(karate, membership)
   comm <- make_clusters(algorithm = "random", membership = membership,
-                             modularity = mod)
+    modularity = mod)
 
   expect_that(as.vector(membership(comm)), equals(membership))
   expect_that(modularity(comm), equals(mod))
@@ -69,18 +69,18 @@ test_that("communities function works", {
   oc <- cluster_optimal(g)
   gr <- communities(oc)
   expect_that(gr, equals
-    (structure(list(`1` = c(1L, 2L, 3L, 4L, 8L, 12L, 13L, 14L, 18L,
-     20L, 22L), `2` = c(5L, 6L, 7L, 11L, 17L), `3` = c(9L, 10L, 15L,
-     16L, 19L, 21L, 23L, 27L, 30L, 31L, 33L, 34L), `4` = c(24L, 25L,
-     26L, 28L, 29L, 32L)), .Dim = 4L, .Dimnames = list(c("1", "2",
-     "3", "4")))))
+  (structure(list(`1` = c(1L, 2L, 3L, 4L, 8L, 12L, 13L, 14L, 18L,
+      20L, 22L), `2` = c(5L, 6L, 7L, 11L, 17L), `3` = c(9L, 10L, 15L,
+      16L, 19L, 21L, 23L, 27L, 30L, 31L, 33L, 34L), `4` = c(24L, 25L,
+      26L, 28L, 29L, 32L)), .Dim = 4L, .Dimnames = list(c("1", "2",
+      "3", "4")))))
 
   g <- make_ring(5) + make_ring(5)
   V(g)$name <- letters[1:10]
   oc <- cluster_optimal(g)
   gr <- communities(oc)
   expect_that(gr, equals(structure(list(`1` = letters[1:5],
-                                        `2` = letters[6:10]),
-                                        .Dim = 2L,
-                                        .Dimnames = list(c("1", "2")))))
+    `2` = letters[6:10]),
+  .Dim = 2L,
+  .Dimnames = list(c("1", "2")))))
 })

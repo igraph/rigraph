@@ -45,8 +45,8 @@ vc <- ifelse(is.na(V(ihrg)$prob), colbar[V(karate)$comm], "darkblue")
 V(ihrg)$label <- ifelse(is.na(V(ihrg)$prob), vn, round(V(ihrg)$prob, 2))
 par(mar = c(0, 0, 3, 0))
 plot(ihrg, vertex.size = 10, edge.arrow.size = 0.2,
-     vertex.shape = "none", vertex.label.color = vc,
-     main = "Hierarchical network model of the Karate Club")
+  vertex.shape = "none", vertex.label.color = vc,
+  main = "Hierarchical network model of the Karate Club")
 
 pause()
 

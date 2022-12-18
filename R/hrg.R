@@ -113,10 +113,10 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) {
     hrg <- list(left = c(), right = c(), prob = c(), edges = c(),
-                vertices = c())
+      vertices = c())
   }
   hrg <- lapply(hrg[c("left", "right", "prob", "edges", "vertices")],
-                as.numeric)
+    as.numeric)
   start <- as.logical(start)
   steps <- as.integer(steps)
 
@@ -268,16 +268,16 @@ sample_hrg <- sample_hrg
 #' @export
 #' @family hierarchical random graph functions
 predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
-                        num.bins = 25) {
+                          num.bins = 25) {
 
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) {
     hrg <- list(left = c(), right = c(), prob = c(), edges = c(),
-                vertices = c())
+      vertices = c())
   }
   hrg <- lapply(hrg[c("left", "right", "prob", "edges", "vertices")],
-                as.numeric)
+    as.numeric)
   start <- as.logical(start)
   num.samples <- as.integer(num.samples)
   num.bins <- as.integer(num.bins)
@@ -285,7 +285,7 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_hrg_predict, graph, hrg, start, num.samples,
-               num.bins)
+    num.bins)
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"
   res
@@ -329,7 +329,7 @@ as.igraph.igraphHRG <- function(x, ...) {
   res <- graph(edges)
 
   V(res)$name <- c(if (!is.null(x$names)) x$names else as.character(1:ovc),
-                   paste0("g", 1:ivc))
+    paste0("g", 1:ivc))
   V(res)$prob <- c(rep(NA, ovc), x$prob)
   res$name <- "Fitted HRG"
   res
@@ -351,13 +351,13 @@ buildMerges <- function(object) {
     curr <- S[length(S)]
     ## coming from parent? going left if possible.
     if (is.null(prev) ||
-        (prev < 0 && object$left[-prev] == curr) ||
-        (prev < 0 && object$right[-prev] == curr)) {
+      (prev < 0 && object$left[-prev] == curr) ||
+      (prev < 0 && object$right[-prev] == curr)) {
       if (curr < 0) { S <- c(S, object$left[-curr]) }
-    ## coming from left child? going right
+      ## coming from left child? going right
     } else if (curr < 0 && object$left[-curr] == prev) {
       S <- c(S, object$right[-curr])
-    ## coming from right child? going up
+      ## coming from right child? going up
     } else {
       if (curr < 0) {
         merges[mptr, ] <- c(object$left[-curr], object$right[-curr], curr)
@@ -422,8 +422,8 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
       attr(zk, "members") <- attr(z[[X[1]]], "members") +
         attr(z[[X[2]]], "members")
       attr(zk, "midpoint") <- (attr(z[[X[1]]], "members") +
-                               attr(z[[X[1]]], "midpoint") +
-                               attr(z[[X[2]]], "midpoint")) / 2
+        attr(z[[X[1]]], "midpoint") +
+        attr(z[[X[2]]], "midpoint")) / 2
     }
     attr(zk, "height") <- oHgt[k]
     z[[k <- paste0("g", -merges[k, 3])]] <- zk
@@ -460,14 +460,14 @@ as.hclust.igraphHRG <- function(x, ...) {
   }
   n <- nrow(merge) + 1
   hcass <- .C("igraphhcass2", n = as.integer(n),
-              ia = as.integer(mergeInto[, 1]),
-              ib = as.integer(mergeInto[, 2]),
-              order = integer(n), iia = integer(n), iib = integer(n))
+    ia = as.integer(mergeInto[, 1]),
+    ib = as.integer(mergeInto[, 2]),
+    order = integer(n), iia = integer(n), iib = integer(n))
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(merge = merge, height = 1:nrow(merge), order = hcass$order,
-              labels = mynames, method = NA_character_,
-              dist.method = NA_character_)
+    labels = mynames, method = NA_character_,
+    dist.method = NA_character_)
   class(res) <- "hclust"
   res
 }
@@ -481,12 +481,12 @@ as_phylo.igraphHRG <- function(x, ...) {
   ll <- ifelse(x$left < 0, -x$left + ovc, x$left + 1)
   rr <- ifelse(x$right < 0, -x$right + ovc, x$right + 1)
   edge <- matrix(rbind(seq_len(ivc) + ovc, ll, seq_len(ivc) + ovc, rr),
-                 ncol = 2, byrow = TRUE)
+    ncol = 2, byrow = TRUE)
 
   edge.length <- rep(0.5, nrow(edge))
   labels <- if (is.null(x$names)) 1:ovc else x$names
   obj <- list(edge = edge, edge.length = edge.length / 2, tip.label = labels,
-              Nnode = ivc)
+    Nnode = ivc)
   class(obj) <- "phylo"
   reorder(obj)
 }
@@ -594,7 +594,7 @@ hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = .01,
                           ...) {
   hc <- as.hclust(x)
   ret <- plot(hc, hang = hang, ann = ann, main = main, sub = sub, xlab = xlab,
-              ylab = ylab, ...)
+    ylab = ylab, ...)
   if (rect > 0) {
     rect.hclust(hc, k = rect, border = colbar)
   }
@@ -756,8 +756,8 @@ print1.igraphHRG <- function(x, level = 3, ...) {
       lf <- paste(collapse = "\n", lf)
     }
     op <- paste(sep = "", format(he, width = cs),
-                " p=", format(x$prob[b], digits = 2, width = pw, justify = "left"),
-                "  ", paste(collapse = " ", lf))
+      " p=", format(x$prob[b], digits = 2, width = pw, justify = "left"),
+      "  ", paste(collapse = " ", lf))
     cat(op, fill = TRUE)
 
     ## recursive call
@@ -789,8 +789,8 @@ print2.igraphHRG <- function(x, ...) {
       nn[x$right[i] + 1]
     }
     paste(sep = "", format(paste(sep = "", "g", i), width = bw),
-          format(paste(sep = "", " p=", p[i]), width = pw),
-          "-> ", lc, " ", rc)
+      format(paste(sep = "", " p=", p[i]), width = pw),
+      "-> ", lc, " ", rc)
   })
   op <- format(op, justify = "left")
   cat(op, sep = "   ", fill = TRUE)
@@ -832,7 +832,7 @@ print.igraphHRGConsensus <- function(x, ...) {
       mych <- paste(collapse = " ", mych)
       pref <- paste(collapse = "", rep(" ", bw + 5))
       mych <- strwrap(mych, width = getOption("width") - bw - 4,
-                      initial = "", prefix = pref)
+        initial = "", prefix = pref)
       mych <- gsub("x", " ", mych, fixed = TRUE)
       mych <- paste(collapse = "\n", mych)
     } else {

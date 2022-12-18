@@ -32,7 +32,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   if (edges || is.null(attr)) {
     on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(C_R_igraph_get_adjacency, graph, as.numeric(type),
-                 as.logical(edges))
+      as.logical(edges))
   } else {
     attr <- as.character(attr)
     if (!attr %in% edge_attr_names(graph)) {
@@ -47,7 +47,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
       res <- matrix(0, nrow = vcount(graph), ncol = vcount(graph))
     } else {
       stop("Sparse matrices must be either numeric or logical,",
-           "and the edge attribute is not")
+        "and the edge attribute is not")
     }
     if (is_directed(graph)) {
       for (i in seq(length.out = ecount(graph))) {
@@ -112,7 +112,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
     value <- edge_attr(graph, name = attr)
     if (!is.numeric(value) && !is.logical(value)) {
       stop("Sparse matrices must be either numeric or logical,",
-           "and the edge attribute is not")
+        "and the edge attribute is not")
     }
   } else {
     value <- rep(1, nrow(el))
@@ -124,15 +124,15 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
     if (type == "upper") {
       ## upper
       res <- Matrix::sparseMatrix(dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-                          j = pmax(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij)
+        j = pmax(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij)
     } else if (type == "lower") {
       ## lower
       res <- Matrix::sparseMatrix(dims = c(vc, vc), i = pmax(el[, 1], el[, 2]),
-                          j = pmin(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij)
+        j = pmin(el[, 1], el[, 2]), x = value, use.last.ij = use.last.ij)
     } else if (type == "both") {
       ## both
       res <- Matrix::sparseMatrix(dims = c(vc, vc), i = pmin(el[, 1], el[, 2]),
-                          j = pmax(el[, 1], el[, 2]), x = value, symmetric = TRUE, use.last.ij = use.last.ij)
+        j = pmax(el[, 1], el[, 2]), x = value, symmetric = TRUE, use.last.ij = use.last.ij)
       res <- as(res, "generalMatrix")
     }
   }
@@ -246,7 +246,7 @@ as_edgelist <- function(graph, names = TRUE) {
   }
   on.exit(.Call(C_R_igraph_finalizer))
   res <- matrix(.Call(C_R_igraph_get_edgelist, graph, TRUE),
-                ncol = 2)
+    ncol = 2)
   res <- res + 1
   if (names && "name" %in% vertex_attr_names(graph)) {
     res <- matrix(V(graph)$name[res], ncol = 2)
@@ -324,11 +324,11 @@ as_edgelist <- function(graph, names = TRUE) {
 #' }
 #'
 #' g4 <- graph(c(1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 4,
-#'               6, 7, 7, 6, 7, 8, 7, 8, 8, 7, 8, 9, 8, 9,
-#'               9, 8, 9, 8, 9, 9, 10, 10, 10, 10))
+#'   6, 7, 7, 6, 7, 8, 7, 8, 8, 7, 8, 9, 8, 9,
+#'   9, 8, 9, 8, 9, 9, 10, 10, 10, 10))
 #' E(g4)$weight <- seq_len(ecount(g4))
 #' ug4 <- as.undirected(g4, mode = "mutual",
-#'               edge.attr.comb = list(weight = length))
+#'   edge.attr.comb = list(weight = length))
 #' print(ug4, e = TRUE)
 #'
 as.directed <- as.directed
@@ -496,7 +496,7 @@ as_adj_edge_list <- function(graph,
 #' }
 #' @export
 graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
-                                 unlist.attrs = TRUE) {
+                                unlist.attrs = TRUE) {
 
   if (!inherits(graphNEL, "graphNEL")) {
     stop("Not a graphNEL graph")
@@ -591,7 +591,7 @@ as_graphnel <- function(graph) {
   }
 
   if ("name" %in% vertex_attr_names(graph) &&
-      is.character(V(graph)$name)) {
+    is.character(V(graph)$name)) {
     name <- V(graph)$name
   } else {
     name <- as.character(seq(vcount(graph)))
@@ -600,7 +600,7 @@ as_graphnel <- function(graph) {
   edgemode <- if (is_directed(graph)) "directed" else "undirected"
 
   if ("weight" %in% edge_attr_names(graph) &&
-      is.numeric(E(graph)$weight)) {
+    is.numeric(E(graph)$weight)) {
     al <- lapply(as_adj_edge_list(graph, "out", loops = "once"), as.vector)
     for (i in seq(along.with = al)) {
       edges <- ends(graph, al[[i]], names = FALSE)
@@ -649,9 +649,9 @@ as_graphnel <- function(graph) {
       graph::edgeDataDefaults(res, attr = n) <- NA
       res@edgeData@data[el] <- mapply(function(x, y) {
         xx <- c(x, y); names(xx)[length(xx)] <- n; xx },
-                                      res@edgeData@data[el],
-                                      edge_attr(graph, n),
-                                      SIMPLIFY = FALSE)
+      res@edgeData@data[el],
+      edge_attr(graph, n),
+      SIMPLIFY = FALSE)
     }
   }
 
@@ -801,7 +801,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' as_incidence_matrix(g)
 #'
 as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
-                          names = TRUE, sparse = FALSE) {
+                                names = TRUE, sparse = FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   types <- handle_vertex_type_arg(types, graph)
@@ -836,7 +836,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   if (what %in% c("edges", "both")) {
     el <- as_edgelist(x)
     edg <- c(list(from = el[, 1]), list(to = el[, 2]),
-             .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge))
+      .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge))
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
   }
@@ -921,9 +921,9 @@ graph_from_adj_list <- graph_from_adj_list
 #' @export
 #' @examples
 #' g <- make_(ring(10),
-#'         with_vertex_(name = letters[1:10], color = "red"),
-#'         with_edge_(weight = 1:10, color = "green")
-#'       )
+#'   with_vertex_(name = letters[1:10], color = "red"),
+#'   with_edge_(weight = 1:10, color = "green")
+#' )
 #' as_long_data_frame(g)
 as_long_data_frame <- function(graph) {
 
@@ -936,7 +936,7 @@ as_long_data_frame <- function(graph) {
 
   el <- as_edgelist(graph, names = FALSE)
   edg <- c(list(from = el[, 1]), list(to = el[, 2]),
-           .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge))
+    .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge))
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))
 
@@ -987,7 +987,7 @@ as_long_data_frame <- function(graph) {
 as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
   mt <- match.arg(matrix.type)
   switch(mt,
-      adjacency = as_adjacency_matrix(graph = x, ...),
-      edgelist = as_edgelist(graph = x, ...)
+    adjacency = as_adjacency_matrix(graph = x, ...),
+    edgelist = as_edgelist(graph = x, ...)
   )
 }

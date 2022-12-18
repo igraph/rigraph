@@ -22,16 +22,16 @@ test_that("cluster_leading_eigen works", {
 
   expect_that(lc$modularity, equals(modularity(g, lc$membership)))
   expect_that(as.vector(membership(lc)),
-              equals(c(1, 3, 3, 3, 1, 1, 1, 3, 2, 2, 1, 1, 3, 3, 2, 2,
-                       1, 3, 2, 3, 2, 3, 2, 4, 4, 4, 2, 4, 4, 2, 2, 4,
-                       2, 2)))
+    equals(c(1, 3, 3, 3, 1, 1, 1, 3, 2, 2, 1, 1, 3, 3, 2, 2,
+      1, 3, 2, 3, 2, 3, 2, 4, 4, 4, 2, 4, 4, 2, 2, 4,
+      2, 2)))
   expect_that(length(lc), equals(4))
   expect_that(sizes(lc),
-              equals(structure(c(7L, 12L, 9L, 6L), .Dim = 4L, .Dimnames =
-                               structure(list(`Community sizes` =
-                                              c("1", "2", "3", "4")),
-                                         .Names = "Community sizes"),
-                               class = "table")))
+    equals(structure(c(7L, 12L, 9L, 6L), .Dim = 4L, .Dimnames =
+      structure(list(`Community sizes` =
+        c("1", "2", "3", "4")),
+      .Names = "Community sizes"),
+    class = "table")))
 
   ## Check that the modularity matrix is correct
 
@@ -64,6 +64,6 @@ test_that("cluster_leading_eigen works", {
     lec1 <- cluster_leading_eigen(g)
     lec2 <- cluster_leading_eigen(g)
     expect_that(as.vector(membership(lec1)),
-                equals(as.vector(membership(lec2))))
+      equals(as.vector(membership(lec2))))
   }
 })

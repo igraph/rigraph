@@ -27,16 +27,16 @@ test_that("sample_pa can start from a graph", {
   expect_true(graph.isomorphic(g6, make_star(10)))
 
   g7 <- sample_pa(10, m = 3, algorithm = "psumtree-multiple",
-                start.graph = make_empty_graph(5))
+    start.graph = make_empty_graph(5))
   expect_that(degree(g7, mode = "out"), equals(c(0, 0, 0, 0, 0, 3, 3, 3, 3, 3)))
 
   g8 <- sample_pa(10, m = 3, algorithm = "psumtree-multiple",
-                start.graph = make_star(5))
+    start.graph = make_star(5))
   expect_that(degree(g8, mode = "out"), equals(c(0, 1, 1, 1, 1, 3, 3, 3, 3, 3)))
   expect_true(graph.isomorphic(induced_subgraph(g8, 1:5), make_star(5)))
 
   g9 <- sample_pa(10, m = 3, algorithm = "psumtree-multiple",
-                start.graph = make_star(10))
+    start.graph = make_star(10))
   expect_true(graph.isomorphic(g9, make_star(10)))
 
   g10 <- sample_pa(10, m = 3, start.graph = make_empty_graph(5))

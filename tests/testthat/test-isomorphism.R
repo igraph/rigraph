@@ -60,13 +60,13 @@ test_that("isomorphisms", {
   g2 <- graph_(from_literal(W - X - Y - Z - W))
 
   res <- list(V(g2)[1, 2, 3, 4],
-              V(g2)[1, 4, 3, 2],
-              V(g2)[2, 1, 4, 3],
-              V(g2)[2, 3, 4, 1],
-              V(g2)[3, 2, 1, 4],
-              V(g2)[3, 4, 1, 2],
-              V(g2)[4, 1, 2, 3],
-              V(g2)[4, 3, 2, 1])
+    V(g2)[1, 4, 3, 2],
+    V(g2)[2, 1, 4, 3],
+    V(g2)[2, 3, 4, 1],
+    V(g2)[3, 2, 1, 4],
+    V(g2)[3, 4, 1, 2],
+    V(g2)[4, 1, 2, 3],
+    V(g2)[4, 3, 2, 1])
 
   expect_equal(ignore_attr = TRUE, isomorphisms(g, g2), res)
 
@@ -81,13 +81,13 @@ test_that("subgraph_isomorphisms, lad", {
   g2 <- graph_(from_literal(Z - X - Y))
 
   res <- list(V(g)[1, 4, 3],
-              V(g)[1, 2, 3],
-              V(g)[2, 1, 4],
-              V(g)[2, 3, 4],
-              V(g)[3, 2, 1],
-              V(g)[3, 4, 1],
-              V(g)[4, 3, 2],
-              V(g)[4, 1, 2])
+    V(g)[1, 2, 3],
+    V(g)[2, 1, 4],
+    V(g)[2, 3, 4],
+    V(g)[3, 2, 1],
+    V(g)[3, 4, 1],
+    V(g)[4, 3, 2],
+    V(g)[4, 1, 2])
 
   expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g, method = "lad"), res)
 
@@ -102,13 +102,13 @@ test_that("subgraph_isomorphisms, vf2", {
   g2 <- graph_(from_literal(Z - X - Y))
 
   res <- list(V(g)[1, 2, 3],
-              V(g)[1, 4, 3],
-              V(g)[2, 1, 4],
-              V(g)[2, 3, 4],
-              V(g)[3, 2, 1],
-              V(g)[3, 4, 1],
-              V(g)[4, 1, 2],
-              V(g)[4, 3, 2])
+    V(g)[1, 4, 3],
+    V(g)[2, 1, 4],
+    V(g)[2, 3, 4],
+    V(g)[3, 2, 1],
+    V(g)[3, 4, 1],
+    V(g)[4, 1, 2],
+    V(g)[4, 3, 2])
 
   expect_equal(ignore_attr = TRUE, subgraph_isomorphisms(g2, g, method = "vf2"), res)
 

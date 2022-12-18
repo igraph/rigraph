@@ -43,7 +43,7 @@ is_igraph <- function(graph) {
 get.edge <- function(graph, id) {
 
   .Deprecated("ends", msg = paste("'get.edge' is deperecated, please use",
-                        "'ends' instead."))
+    "'ends' instead."))
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")

@@ -66,20 +66,20 @@ test_that("sample_degseq works", {
   g2 <- sample_gnp(1000, 2 / 1000, directed = TRUE)
 
   nG2 <- sample_degseq(degree(g, mode = "out"),
-                              degree(g, mode = "in"),
-                              method = "simple")
+    degree(g, mode = "in"),
+    method = "simple")
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 
   nG3 <- sample_degseq(degree(g, mode = "out"),
-                              degree(g, mode = "in"),
-                              method = "simple.no.multiple")
+    degree(g, mode = "in"),
+    method = "simple.no.multiple")
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 
   nG4 <- sample_degseq(degree(g, mode = "out"),
-                              degree(g, mode = "in"),
-                              method = "simple.no.multiple.uniform")
+    degree(g, mode = "in"),
+    method = "simple.no.multiple.uniform")
   expect_that(degree(nG, mode = "out"), equals(degree(g, mode = "out")))
   expect_that(degree(nG, mode = "in"), equals(degree(g, mode = "in")))
 })

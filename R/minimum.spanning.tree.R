@@ -59,7 +59,7 @@
 #' g_mst <- mst(g)
 #'
 mst <- function(graph, weights = NULL,
-                                  algorithm = NULL, ...) {
+                algorithm = NULL, ...) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")

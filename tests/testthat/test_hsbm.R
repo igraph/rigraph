@@ -2,8 +2,8 @@ test_that("HSBM works", {
   set.seed(42)
 
   C <- matrix(c(1, 1 / 2, 0,
-                1 / 2, 0, 1 / 2,
-                0, 1 / 2, 1 / 2), nrow = 3)
+    1 / 2, 0, 1 / 2,
+    0, 1 / 2, 1 / 2), nrow = 3)
 
   g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 0)
   expect_that(ecount(g), equals(172))
@@ -43,8 +43,8 @@ test_that("HSBM with 1 cluster per block works", {
 test_that("HSBM with list arguments works", {
   b <- 5
   C <- matrix(c(1, 1 / 2, 0,
-                1 / 2, 0, 1 / 2,
-                0, 1 / 2, 1 / 2), nrow = 3)
+    1 / 2, 0, 1 / 2,
+    0, 1 / 2, 1 / 2), nrow = 3)
   m <- 10
   rho <- c(3, 3, 4) / 10
 
@@ -64,7 +64,7 @@ test_that("HSBM with list arguments works", {
   expect_that(g[], equals(g4[]))
 
   expect_that(sample_hierarchical_sbm(b * m, rep(m, b), rho = list(rho, rho), C = C, p = 0),
-              throws_error("Lengths of `m', `rho' and `C' must match"))
+    throws_error("Lengths of `m', `rho' and `C' must match"))
 
   ###
 
@@ -80,12 +80,12 @@ test_that("HSBM with list arguments works", {
   C4 <- matrix(0, nrow = 2, ncol = 2)
 
   gg1 <- sample_hierarchical_sbm(21, m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-                   C = list(C1, C2, C3, C4), p = 1)
+    C = list(C1, C2, C3, C4), p = 1)
   expect_true(is.simple(gg1))
 
   set.seed(42)
   gg11 <- sample_hierarchical_sbm(21, m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-                    C = list(C1, C2, C3, C4), p = 1 - 1e-10)
+    C = list(C1, C2, C3, C4), p = 1 - 1e-10)
   expect_that(gg1[], equals(gg11[]))
 
   rho1 <- n(c(1, 2))
@@ -97,10 +97,10 @@ test_that("HSBM with list arguments works", {
   rho4 <- n(c(2, 1))
   C4 <- matrix(1, nrow = 2, ncol = 2)
   gg2 <- sample_hierarchical_sbm(21, m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-                   C = list(C1, C2, C3, C4), p = 0)
+    C = list(C1, C2, C3, C4), p = 0)
   expect_true(is.simple(gg2))
 
   gg22 <- sample_hierarchical_sbm(21, m = c(3, 10, 5, 3), rho = list(rho1, rho2, rho3, rho4),
-                   C = list(C1, C2, C3, C4), p = 1)
+    C = list(C1, C2, C3, C4), p = 1)
   expect_that(gg1[] + gg2[], equals(gg22[]))
 })

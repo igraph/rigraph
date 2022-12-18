@@ -9,12 +9,12 @@ test_that("SGM works", {
   randperm <- c(1:nos, nos + sample(vc - nos))
   g2 <- sample_correlated_gnp(g1, corr = .7, p = g1$p, permutation = randperm)
   P <- match_vertices(g1[], g2[], m = nos, start = matrix(1 / (vc - nos), vc - nos, vc - nos),
-            iteration = 20)
+    iteration = 20)
 
   expect_that(c(1:nos, P$corr[, 2]), equals(randperm))
   expect_that(apply(P$P != 0, 1, which), equals(randperm))
   expect_that(apply(P$D != 0, 1, which),
-              equals(randperm[(nos + 1):vc] - nos))
+    equals(randperm[(nos + 1):vc] - nos))
 
   ## Slightly bigger
   set.seed(42)
@@ -27,12 +27,12 @@ test_that("SGM works", {
   g2 <- sample_correlated_gnp(g1, corr = 1, p = g1$p, permutation = perm)
 
   P <- match_vertices(g1[], g2[], m = nos, start = matrix(1 / (vc - nos), vc - nos, vc - nos),
-           iteration = 20)
+    iteration = 20)
 
   expect_that(P$corr[, 2], equals(perm[(nos + 1):vc]))
   expect_that(apply(P$P != 0, 1, which), equals(perm))
   expect_that(apply(P$D != 0, 1, which),
-              equals(perm[(nos + 1):vc] - nos))
+    equals(perm[(nos + 1):vc] - nos))
 })
 
 test_that("LSAP does not change input matrix", {

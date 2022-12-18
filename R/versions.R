@@ -102,15 +102,15 @@ upgrade_graph <- function(graph) {
 check_version <- function(graph) {
   if (graph_version() != graph_version(graph)) {
     stop("This graph was created by an old(er) igraph version.\n",
-         "  Call upgrade_graph() on it to use with the current igraph version")
+      "  Call upgrade_graph() on it to use with the current igraph version")
   }
 }
 
 warn_version <- function(graph) {
   if (graph_version() != graph_version(graph)) {
     message("This graph was created by an old(er) igraph version.\n",
-            "  Call upgrade_graph() on it to use with the current igraph version\n",
-            "  For now we convert it on the fly...")
+      "  Call upgrade_graph() on it to use with the current igraph version\n",
+      "  For now we convert it on the fly...")
     TRUE
   } else {
     FALSE

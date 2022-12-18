@@ -145,7 +145,7 @@ centr_degree <- centr_degree
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_degree(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_degree_tmax(g, loops = FALSE))
+#'   `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
 centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "in", "total"), loops = FALSE) {
   # Compatibility check with pre-igraph 1.3.0
@@ -238,7 +238,7 @@ centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRU
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_betw(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_betw_tmax(g))
+#'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
 centr_betw_tmax <- centr_betw_tmax
 
@@ -296,7 +296,7 @@ centr_clo <- centr_clo
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_clo(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_clo_tmax(g))
+#'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
 centr_clo_tmax <- centr_clo_tmax
 
@@ -367,6 +367,6 @@ centr_eigen <- centr_eigen
 #' # A BA graph is quite centralized
 #' g <- sample_pa(1000, m = 4)
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
-#'  `/`(centr_eigen_tmax(g))
+#'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
 centr_eigen_tmax <- centr_eigen_tmax

@@ -133,10 +133,10 @@ head_print_callback <- function(x, max_lines, header, footer,
   )
 
   done_stat <- c(tried_items = no, tried_lines = out_lines[["lines"]],
-                 printed_lines = out_lines[["printed"]])
+    printed_lines = out_lines[["printed"]])
 
   if (done_stat["tried_items"] < len ||
-      done_stat["printed_lines"] < done_stat["tried_lines"]) {
+    done_stat["printed_lines"] < done_stat["tried_lines"]) {
     print_footer(omitted_footer)
   }
 

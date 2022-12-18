@@ -73,13 +73,13 @@ test_that("[ and the from-to notation", {
   g[from = c('a', 'c', 'h'), to = c('a', 'b', 'c')] <- 1
   A['a', 'a'] <- A['c', 'b'] <- A['h', 'c'] <- 1
   expect_that(g[from = c('a', 'c', 'h', 'd'), to = c('a', 'b', 'c', 'e')],
-              equals(c(1, 1, 1, 0)))
+    equals(c(1, 1, 1, 0)))
   expect_that(am(g[]), equals(am(A)))
 
   g[from = c('a', 'c', 'h', 'a'), to = c('a', 'a', 'a', 'e'), attr = "weight"] <- 3
   A[A != 0] <- NA ; A['a', 'a'] <- A['c', 'a'] <- A['h', 'a'] <- A['a', 'e'] <- 3
   expect_that(g[from = c('a', 'c', 'h', 'a', 'c', 'c'),
-                to = c('a', 'a', 'a', 'e', 'f', 'b')], equals(c(3, 3, 3, 3, 0, NA)))
+    to = c('a', 'a', 'a', 'e', 'f', 'b')], equals(c(3, 3, 3, 3, 0, NA)))
   expect_that(am(g[]), equals(am(A)))
 })
 
@@ -95,6 +95,6 @@ test_that("[ and from-to with multiple values", {
   A[A != 0] <- NA ; A['a', 'a'] <- 5 ; A['c', 'a'] <- 6 ; A['h', 'a'] <- 7
   A['a', 'e'] <- 8
   expect_that(g[from = c('a', 'c', 'h', 'a', 'c', 'c'),
-                to = c('a', 'a', 'a', 'e', 'f', 'b')], equals(c(5:8, 0, NA)))
+    to = c('a', 'a', 'a', 'e', 'f', 'b')], equals(c(5:8, 0, NA)))
   expect_that(am(g[]), equals(am(A)))
 })

@@ -102,11 +102,11 @@ write.graph.fromraw <- function(buffer, file) {
 #' @keywords graphs
 #' @export
 read_graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl",
-                               "graphml", "dimacs", "graphdb", "gml", "dl"),
+                         "graphml", "dimacs", "graphdb", "gml", "dl"),
                        ...) {
 
   if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
-      length(grep("~", file, fixed = TRUE)) > 0) {
+    length(grep("~", file, fixed = TRUE)) > 0) {
     buffer <- read.graph.toraw(file)
     file <- tempfile()
     write.graph.fromraw(buffer, file)
@@ -114,17 +114,17 @@ read_graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl",
 
   format <- igraph.match.arg(format)
   res <- switch(format,
-                "pajek" = read.graph.pajek(file, ...),
-                "ncol" = read.graph.ncol(file, ...),
-                "edgelist" = read.graph.edgelist(file, ...),
-                "lgl" = read.graph.lgl(file, ...),
-                "graphml" = read.graph.graphml(file, ...),
-                "dimacs" = read.graph.dimacs(file, ...),
-                "graphdb" = read.graph.graphdb(file, ...),
-                "gml" = read.graph.gml(file, ...),
-                "dl" = read.graph.dl(file, ...),
-                stop(paste("Unknown file format:", format))
-                )
+    "pajek" = read.graph.pajek(file, ...),
+    "ncol" = read.graph.ncol(file, ...),
+    "edgelist" = read.graph.edgelist(file, ...),
+    "lgl" = read.graph.lgl(file, ...),
+    "graphml" = read.graph.graphml(file, ...),
+    "dimacs" = read.graph.dimacs(file, ...),
+    "graphdb" = read.graph.graphdb(file, ...),
+    "gml" = read.graph.gml(file, ...),
+    "dl" = read.graph.dl(file, ...),
+    stop(paste("Unknown file format:", format))
+  )
   res
 }
 
@@ -166,13 +166,13 @@ read_graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl",
 #' }
 #'
 write_graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lgl",
-                                       "graphml", "dimacs", "gml", "dot", "leda"), ...) {
+                          "graphml", "dimacs", "gml", "dot", "leda"), ...) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
-      length(grep("~", file, fixed = TRUE)) > 0) {
+    length(grep("~", file, fixed = TRUE)) > 0) {
     tmpfile <- TRUE
     origfile <- file
     file <- tempfile()
@@ -182,17 +182,17 @@ write_graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lg
 
   format <- igraph.match.arg(format)
   res <- switch(format,
-                "pajek" = write.graph.pajek(graph, file, ...),
-                "edgelist" = write.graph.edgelist(graph, file, ...),
-                "ncol" = write.graph.ncol(graph, file, ...),
-                "lgl" = write.graph.lgl(graph, file, ...),
-                "graphml" = write.graph.graphml(graph, file, ...),
-                "dimacs" = write.graph.dimacs(graph, file, ...),
-                "gml" = write.graph.gml(graph, file, ...),
-                "dot" = write.graph.dot(graph, file, ...),
-                "leda" = write.graph.leda(graph, file, ...),
-                stop(paste("Unknown file format:", format))
-                )
+    "pajek" = write.graph.pajek(graph, file, ...),
+    "edgelist" = write.graph.edgelist(graph, file, ...),
+    "ncol" = write.graph.ncol(graph, file, ...),
+    "lgl" = write.graph.lgl(graph, file, ...),
+    "graphml" = write.graph.graphml(graph, file, ...),
+    "dimacs" = write.graph.dimacs(graph, file, ...),
+    "gml" = write.graph.gml(graph, file, ...),
+    "dot" = write.graph.dot(graph, file, ...),
+    "leda" = write.graph.leda(graph, file, ...),
+    stop(paste("Unknown file format:", format))
+  )
 
   if (tmpfile) {
     buffer <- read.graph.toraw(file)
@@ -214,7 +214,7 @@ read.graph.edgelist <- function(file, n = 0,
   }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_read_graph_edgelist, file,
-        as.numeric(n), as.logical(directed))
+    as.numeric(n), as.logical(directed))
 }
 
 write.graph.edgelist <- function(graph, file, ...) {
@@ -240,7 +240,7 @@ read.graph.ncol <- function(file, predef = character(0), names = TRUE,
   weights <- switch(igraph.match.arg(weights), "no" = 0, "yes" = 1, "auto" = 2)
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_read_graph_ncol, file, as.character(predef),
-        as.logical(names), as.numeric(weights), as.logical(directed))
+    as.logical(names), as.numeric(weights), as.logical(directed))
 }
 
 write.graph.ncol <- function(graph, file,
@@ -255,13 +255,13 @@ write.graph.ncol <- function(graph, file,
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_ncol, graph, file,
-        names, weights)
+    names, weights)
 }
 
 read.graph.lgl <- function(file, names = TRUE,
                            weights = c("auto", "yes", "no"),
                            directed = FALSE,
-                            ...) {
+                           ...) {
 
   if (length(list(...)) > 0) {
     stop("Unknown arguments to read_graph (LGL format)")
@@ -269,7 +269,7 @@ read.graph.lgl <- function(file, names = TRUE,
   weights <- switch(igraph.match.arg(weights), "no" = 0, "yes" = 1, "auto" = 2)
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_read_graph_lgl, file,
-        as.logical(names), as.numeric(weights), as.logical(directed))
+    as.logical(names), as.numeric(weights), as.logical(directed))
 }
 
 write.graph.lgl <- function(graph, file,
@@ -285,7 +285,7 @@ write.graph.lgl <- function(graph, file,
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_lgl, graph, file,
-        names, weights, as.logical(isolates))
+    names, weights, as.logical(isolates))
 }
 
 read.graph.pajek <- function(file, ...) {
@@ -351,7 +351,7 @@ write.graph.dimacs <- function(graph, file,
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_write_graph_dimacs, graph, file, as.numeric(source),
-        as.numeric(target), as.numeric(capacity))
+    as.numeric(target), as.numeric(capacity))
 }
 
 ################################################################
@@ -497,9 +497,9 @@ write.graph.dot <- function(graph, file, ...) {
 #'                               "iso_b06m_m200.A09.gz"))
 #' }
 graph_from_graphdb <- function(url = NULL,
-                          prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
-                          base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
-                          compressed = TRUE, directed = TRUE) {
+                               prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0,
+                               base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip",
+                               compressed = TRUE, directed = TRUE) {
 
   if (is.null(nodes) && is.null(url)) {
     stop("The `nodes' or the `url' argument must be non-null")
@@ -509,14 +509,14 @@ graph_from_graphdb <- function(url = NULL,
 
     prefixes <- c("iso", "si6", "mcs10", "mcs30", "mcs50", "mcs70", "mcs90")
     types <- c("r001", "r005", "r01", "r02", "m2D", "m2Dr2", "m2Dr4", "m2Dr6",
-               "m3D", "m3Dr2", "m3Dr4", "m3Dr6", "m4D", "m4Dr2", "m4Dr4",
-               "m4Dr6", "b03", "b03m", "b06", "b06m", "b09", "b09m")
+      "m3D", "m3Dr2", "m3Dr4", "m3Dr6", "m4D", "m4Dr2", "m4Dr4",
+      "m4Dr6", "b03", "b03m", "b06", "b06m", "b09", "b09m")
     sizecode <- if (nodes <= 100) "s" else if (nodes < 2000) "m" else "l" # "l" ????
     typegroups <- c("rand", "rand", "rand", "rand",
-                    "m2D", "m2D", "m2D", "m2D",
-                    "m2D", "m3D", "m3D", "m3D",
-                    "m4D", "m4D", "m4D", "m4D",
-                    "bvg", "bvg", "bvg", "bvg", "bvg", "bvg")
+      "m2D", "m2D", "m2D", "m2D",
+      "m2D", "m3D", "m3D", "m3D",
+      "m4D", "m4D", "m4D", "m4D",
+      "bvg", "bvg", "bvg", "bvg", "bvg", "bvg")
     typegroup <- typegroups[which(types == type)]
 
     if (!prefix %in% prefixes) {
@@ -527,8 +527,8 @@ graph_from_graphdb <- function(url = NULL,
     }
     suff <- if (compressed) ".gz" else ""
     filename <- paste(sep = "", base, "/", prefix, "/", typegroup, "/", type, "/",
-                      prefix, "_", type, "_", sizecode, nodes,
-                      ".", pair, formatC(which, width = 2, flag = "0"), suff)
+      prefix, "_", type, "_", sizecode, nodes,
+      ".", pair, formatC(which, width = 2, flag = "0"), suff)
   } else {
     filename <- url
   }

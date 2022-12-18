@@ -33,9 +33,9 @@
     .igraph.progress.txt(percent, message)
   } else {
     switch(type,
-            "tk" = .igraph.progress.tk(percent, message),
-            "tkconsole" = .igraph.progress.tkconsole(percent, message),
-            stop("Cannot interpret 'verbose' option, this should not happen"))
+      "tk" = .igraph.progress.tk(percent, message),
+      "tkconsole" = .igraph.progress.tkconsole(percent, message),
+      stop("Cannot interpret 'verbose' option, this should not happen"))
   }
 }
 
@@ -46,9 +46,9 @@
     message(message, appendLF = FALSE)
   } else {
     switch(type,
-           "tk" = message(message, appendLF = FALSE),
-           "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
-           stop("Cannot interpret 'verbose' option, this should not happen"))
+      "tk" = message(message, appendLF = FALSE),
+      "tkconsole" = .igraph.progress.tkconsole.message(message, start = TRUE),
+      stop("Cannot interpret 'verbose' option, this should not happen"))
   }
   0L
 }
@@ -114,13 +114,13 @@
 
   lfr <- tcltk::tkframe(console)
   image <- tcltk::tkimage.create("photo", "img", format = "gif",
-                          file = system.file("igraph2.gif", package = "igraph"))
+    file = system.file("igraph2.gif", package = "igraph"))
   logo <- tcltk::tklabel(lfr, relief = "flat", padx = 10, pady = 10, image = image)
 
   scr <- tcltk::tkscrollbar(console, repeatinterval = 5,
-                     command = function(...) tcltk::tkyview(txt, ...))
+    command = function(...) tcltk::tkyview(txt, ...))
   txt <- tcltk::tktext(console, yscrollcommand = function(...) tcltk::tkset(scr, ...),
-                width = 60, height = 7, font = fn)
+    width = 60, height = 7, font = fn)
   tcltk::tkconfigure(txt, state = "disabled")
   pbar <- .igraph.progress.tkconsole.pbar(console)
 
@@ -137,7 +137,7 @@
     tcltk::tkdestroy(console) })
 
   tcltk::tkpack(logo, side = "top", fill = "none", expand = 0, anchor = "n",
-         ipadx = 10, ipady = 10)
+    ipadx = 10, ipady = 10)
   tcltk::tkpack(bclear, side = "top", fill = "x", expand = 0, padx = 10)
   ## tcltk::tkpack(bstop, side="top", fill="x", expand=0, padx=10)
   tcltk::tkpack(bclose, side = "top", fill = "x", expand = 0, padx = 10)
@@ -195,14 +195,14 @@ close.igraphconsole <- function(con, ...) {
   frame <- tcltk::tkframe(top)
   if (useText) {
     .lab <- tcltk::tklabel(frame, text = " ", font = fn, anchor = "w",
-                    padx = 20)
+      padx = 20)
     tcltk::tkpack(.lab, side = "left", anchor = "w", padx = 5)
     fn2 <- tcltk::tkfont.create(family = "helvetica", size = 12)
     .vlab <- tcltk::tklabel(frame, text = "0%", font = fn2, padx = 20)
     tcltk::tkpack(.vlab, side = "right")
   } else {
     .lab <- tcltk::tklabel(frame, text = " ", font = fn, anchor = "w",
-                    pady = 5)
+      pady = 5)
     tcltk::tkpack(.lab, side = "top", anchor = "w", padx = 5)
     tcltk::tkpack(tcltk::tklabel(frame, text = "", font = fn), side = "bottom")
     .val <- tcltk::tclVar()

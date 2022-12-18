@@ -18,7 +18,7 @@ bk4 <- function(graph, min = 0, max = Inf) {
       if (length(R) >= min && length(R) <= max) { list(R) } else { list() }
     } else if (length(P) != 0) {
       psize <- sapply(c(P, X), function(u)
-                      length(intersect(P, Gamma(u))))
+        length(intersect(P, Gamma(u))))
       u <- c(P, X)[which.max(psize)]
 
       pres <- list()
@@ -36,10 +36,10 @@ bk4 <- function(graph, min = 0, max = Inf) {
         }
 
         newPX <- list(PX = c(p0, p1, p2, x1, x2, x0),
-                      PS = length(p0) + length(p1) + 1,
-                      PE = length(p0) + length(p1) + length(p2),
-                      XS = length(p0) + length(p1) + length(p2) + 1,
-                      XE = length(p0) + length(p1) + length(p2) + length(x1))
+          PS = length(p0) + length(p1) + 1,
+          PE = length(p0) + length(p1) + length(p2),
+          XS = length(p0) + length(p1) + length(p2) + 1,
+          XE = length(p0) + length(p1) + length(p2) + length(x1))
 
         pres <- c(pres, bkpivot(newPX, c(R, v)))
 
@@ -71,7 +71,7 @@ bk4 <- function(graph, min = 0, max = Inf) {
       X <- numeric()
     }
     PX <- list(PX = c(P, X), PS = 1, PE = length(P),
-               XS = length(P) + 1, XE = length(P) + length(X))
+      XS = length(P) + 1, XE = length(P) + length(X))
     res <- c(res, bkpivot(PX, cord[v]))
   }
   lapply(res, as.integer)

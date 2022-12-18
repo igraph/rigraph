@@ -80,7 +80,7 @@ test_that("embed myself, and weak ref as attribute", {
   fin <- function(env) hello <<- "world"
   z <- "footoo"
   attr(z, "env") <- make_weak_ref(key = g[[1]], value = value,
-                                  finalizer = fin)
+    finalizer = fin)
 
   rm(g)
   gc()
