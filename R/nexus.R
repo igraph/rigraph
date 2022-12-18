@@ -50,7 +50,6 @@ makeNexusDatasetInfo <- function(entries) {
 
 #' @method print nexusDatasetInfo
 #' @rdname nexus
-
 print.nexusDatasetInfo <- function(x, ...) {
   ve <- strsplit(parseVE(x$`vertices/edges`), "/")[[1]]
   nc <- c("U", "-", "-", "-")
@@ -121,7 +120,6 @@ print.nexusDatasetInfo <- function(x, ...) {
 
 #' @method summary nexusDatasetInfoList
 #' @rdname nexus
-
 summary.nexusDatasetInfoList <- function(object, ...) {
   o <- as.numeric(attr(object, "offset"))
   s <- as.numeric(attr(object, "size"))
@@ -151,7 +149,6 @@ parseVE <- function(ve) {
 
 #' @method print nexusDatasetInfoList
 #' @rdname nexus
-
 print.nexusDatasetInfoList <- function(x, ...) {
   summary(x)
 
@@ -363,7 +360,6 @@ nexus.format.result <- function(l, name="") {
 #' }
 #' @export
 #' @importFrom utils URLencode
-
 nexus_list <- function(tags=NULL, offset=0, limit=10,
                        operator=c("or", "and"),
                        order=c("date", "name", "popularity"),
@@ -395,7 +391,6 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-
 nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
@@ -433,7 +428,6 @@ nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-
 nexus_get <- function(id, offset=0,
                       order=c("date", "name", "popularity"),
                       nexus.url=igraph_opt("nexus.url")) {
@@ -470,7 +464,6 @@ nexus_get <- function(id, offset=0,
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-
 nexus_search <- function(q, offset=0, limit=10,
                          order=c("date", "name", "popularity"),
                          nexus.url=igraph_opt("nexus.url")) {
@@ -498,7 +491,6 @@ nexus_search <- function(q, offset=0, limit=10,
 #' @param i Index.
 #' @method [ nexusDatasetInfoList
 #' @rdname nexus
-
 `[.nexusDatasetInfoList` <- function(x, i) {
   res <- unclass(x)[i]
   class(res) <- class(x)

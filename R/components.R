@@ -24,7 +24,6 @@
 ###################################################################
 
 #' @export
-
 count_components <- function(graph, mode=c("weak", "strong")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -43,7 +42,6 @@ count_components <- function(graph, mode=c("weak", "strong")) {
 #' by the cluster sizes.
 #' @export
 #' @importFrom graphics hist
-
 component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
                                  ...) {
   if (!is_igraph(graph)) {
@@ -150,12 +148,10 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' bridges(g)
 #'
 #' @export
-
 articulation_points <- articulation_points
 
 #' @rdname articulation_points
 #' @export
-
 bridges <- bridges
 
 
@@ -195,5 +191,4 @@ bridges <- bridges
 #' g <- add_edges(g, c(which(clu==1), which(clu==2)))
 #' bc <- biconnected_components(g)
 #' @export
-
 biconnected_components <- biconnected_components

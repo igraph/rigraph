@@ -45,7 +45,6 @@
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
-
 are_adjacent <- function(graph, v1, v2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")

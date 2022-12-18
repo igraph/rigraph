@@ -44,7 +44,6 @@
 #' @seealso \code{\link{tkplot}} for interactive plotting of graphs.
 #' @keywords graphs
 #' @export
-
 tkigraph <- function() {
 
   requireNamespace("tcltk", quietly = TRUE) ||
@@ -513,7 +512,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils read.table
-
 .tkigraph.import.adjacency <- function() {
   filename <- tcltk::tkgetOpenFile(defaultextension="adj",
                             title="Import adjacency matrix")
@@ -550,7 +548,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils read.table
-
 .tkigraph.import.edgelist <- function() {
   filename <- tcltk::tkgetOpenFile(defaultextension="el",
                             title="Import edge list")
@@ -583,7 +580,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils write.table
-
 .tkigraph.export.adjacency <- function() {
   gnos <- .tkigraph.get.selected()
   if (length(gnos)!=1) {
@@ -605,7 +601,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils write.table
-
 .tkigraph.export.edgelist <- function() {
   gnos <- .tkigraph.get.selected()
   if (length(gnos)!=1) {
@@ -807,7 +802,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices dev.new
-
 .tkigraph.plot <- function(simple=TRUE, gnos=NULL, ...) {
 
   if (is.null(gnos)) {
@@ -937,7 +931,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils edit
-
 .tkigraph.by.hand <- function() {
   gnos <- .tkigraph.get.selected()
   if (length(gnos) > 1) {
@@ -1104,7 +1097,6 @@ tkigraph <- function() {
 
 #' @importFrom graphics hist plot
 #' @importFrom grDevices dev.new
-
 .tkigraph.degree.sequence.game <- function() {
   gnos <- .tkigraph.get.selected()
   if (length(gnos) == 0) {
@@ -1205,7 +1197,6 @@ tkigraph <- function() {
 #' @importFrom grDevices dev.new
 #' @importFrom graphics plot hist lines legend
 #' @importFrom stats coef vcov
-
 .tkigraph.degree.dist <- function(power=FALSE) {
   gnos <- .tkigraph.get.selected()
   if (length(gnos)!=1) {
@@ -1470,7 +1461,6 @@ tkigraph <- function() {
 
 #' @importFrom graphics hist plot
 #' @importFrom grDevices dev.new
-
 .tkigraph.calculate.clusters <- function() {
   gnos <- .tkigraph.get.selected()
   if (length(gnos) != 1) {
@@ -1514,7 +1504,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices rainbow
-
 .tkigraph.plot.comp <- function(simple=FALSE) {
   gnos <- .tkigraph.get.selected()
   if (length(gnos) != 1) {
@@ -1583,7 +1572,6 @@ tkigraph <- function() {
 
 #' @importFrom grDevices dev.new
 #' @importFrom graphics layout layout.show par plot text
-
 .tkigraph.motifs.draw <- function() {
   read <- .tkigraph.dialogbox(TITLE="Draw all motifs",
                               size=list(name="Size", type="numeric",
@@ -1633,7 +1621,6 @@ tkigraph <- function() {
 
 #' @importFrom grDevices dev.new
 #' @importFrom graphics barplot layout layout.show par plot text
-
 .tkigraph.motifs.find <- function() {
 
   gnos <- .tkigraph.get.selected()
@@ -1746,7 +1733,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom grDevices rainbow
-
 .tkigraph.spinglass.community.dialog <- function(comm, read, gnos) {
   dialog <- tcltk::tktoplevel()
   frame <- tcltk::tkframe(dialog)
@@ -1954,7 +1940,6 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils browseURL
-
 .tkigraph.help <- function(page="index.html") {
   dialog <- tcltk::tktoplevel()
   tcltk::tktitle(dialog) <- "Help (main page)"
@@ -2006,14 +1991,12 @@ tkigraph <- function() {
 }
 
 #' @importFrom utils browseURL
-
 .tkigraph.help.external <- function(page="index.html") {
   f <- system.file("tkigraph_help/index.html", package="igraph")
   browseURL(f)
 }
 
 #' @importFrom utils packageDescription
-
 .tkigraph.about <- function() {
   dialog <- tcltk::tktoplevel()
   tcltk::tktitle(dialog) <- "About tkigraph"
@@ -2039,7 +2022,6 @@ tkigraph <- function() {
 # This is from the 'relimp' package by David Firth, thanks
 
 #' @importFrom utils write.table
-
 .tkigraph.showData <-
     function (dataframe,
               colname.bgcolor = "grey50",

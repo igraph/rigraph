@@ -87,7 +87,6 @@
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @export
-
 embed_adjacency_matrix <- embed_adjacency_matrix
 
 
@@ -146,7 +145,6 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' dim_select( embed_adjacency_matrix(RDP.graph.3, 10)$D )
 #'
 #' @export
-
 dim_select <- dim_select
 
 
@@ -222,7 +220,6 @@ dim_select <- dim_select
 #' lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
-
 embed_laplacian_matrix <- embed_laplacian_matrix
 
 
@@ -252,7 +249,6 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
 #' vec.norm    <- apply(lpvs.sph, 2, function(x) { sum(x^2) })
 #' vec.norm
-
 sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
   # Argument checks
   dim <- as.integer(dim)
@@ -293,7 +289,6 @@ sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
 #' RDP.graph.4  <- sample_dot_product(lpvs.sph.vol)
 #' vec.norm     <- apply(lpvs.sph.vol, 2, function(x) { sum(x^2) })
 #' vec.norm
-
 sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
   # Argument checks
   dim <- as.integer(dim)
@@ -331,7 +326,6 @@ sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
 #' lpvs.dir    <- sample_dirichlet(n=20, alpha=rep(1, 10))
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
-
 sample_dirichlet <- function(n, alpha) {
   # Argument checks
   n <- as.integer(n)

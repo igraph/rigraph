@@ -75,7 +75,6 @@
 #' g <- make_ring(10) + make_full_graph(5)
 #' coords <- layout_(g, as_star())
 #' plot(g, layout = coords)
-
 layout_ <- function(graph, layout, ...) {
 
   modifiers <- list(...)
@@ -130,7 +129,6 @@ layout_ <- function(graph, layout, ...) {
 #' (make_star(11) + make_star(11)) %>%
 #'   add_layout_(as_star(), component_wise()) %>%
 #'   plot()
-
 add_layout_ <- function(graph, ..., overwrite = TRUE) {
   if (overwrite && 'layout' %in% graph_attr_names(graph)) {
     graph <- delete_graph_attr(graph, 'layout')
@@ -158,7 +156,6 @@ layout_spec <- function(fun, ...) {
 #' @param x The layout specification
 #' @method print igraph_layout_spec
 #' @export
-
 print.igraph_layout_spec <- function(x, ...) {
   cat(paste(
     sep = "",
@@ -179,7 +176,6 @@ layout_modifier <- function(...) {
 #' @rdname layout_
 #' @method print igraph_layout_modifier
 #' @export
-
 print.igraph_layout_modifier <- function(x, ...) {
   cat(sep = "", "igraph layout modifier: ", x$id, ".\n")
 }
@@ -202,7 +198,6 @@ print.igraph_layout_modifier <- function(x, ...) {
 #' g %>%
 #'   add_layout_(in_circle(), component_wise()) %>%
 #'   plot()
-
 component_wise <- function(merge_method = "dla") {
 
   args <- grab_args()
@@ -227,7 +222,6 @@ component_wise <- function(merge_method = "dla") {
 #' @export
 #' @examples
 #' layout_(make_ring(10), with_fr(), normalize())
-
 normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
                       zmin = xmin, zmax = xmax) {
 
@@ -285,7 +279,6 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' g %>%
 #'   add_layout_(as_bipartite()) %>%
 #'   plot()
-
 layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
                                 maxiter = 100) {
 
@@ -308,7 +301,6 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
 #' @rdname layout_as_bipartite
 #' @param ... Arguments to pass to \code{layout_as_bipartite}.
 #' @export
-
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
 
@@ -345,7 +337,6 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #'
 #' ## Alternative form
 #' layout_(g, as_star())
-
 layout_as_star <- function(graph, center=V(graph)[1], order=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -371,7 +362,6 @@ layout_as_star <- function(graph, center=V(graph)[1], order=NULL) {
 #' @rdname layout_as_star
 #' @param ... Arguments to pass to \code{layout_as_star}.
 #' @export
-
 as_star <- function(...) layout_spec(layout_as_star, ...)
 
 
@@ -432,7 +422,6 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' plot(tree2, layout=layout_as_tree)
 #' plot(tree2, layout=layout_as_tree(tree2, root=c(1,11),
 #'                                            rootlevel=c(2,1)))
-
 layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
                            rootlevel=numeric(), mode=c("out", "in", "all"),
                            flip.y=TRUE) {
@@ -458,12 +447,10 @@ layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
 #' @rdname layout_as_tree
 #' @param ... Passed to \code{layout_as_tree}.
 #' @export
-
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.reingold.tilford <- function(..., params = list()) {
   do_call(layout_as_tree, .args = c(list(...), params))
 }
@@ -500,7 +487,6 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
-
 layout_in_circle <- function(graph, order=V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -513,12 +499,10 @@ layout_in_circle <- function(graph, order=V(graph)) {
 #' @rdname layout_in_circle
 #' @param ... Passed to \code{layout_in_circle}.
 #' @export
-
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.circle <- function(..., params = list()) {
   do_call(layout_in_circle, .args = c(list(...), params))
 }
@@ -569,7 +553,6 @@ layout.circle <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-
 layout_nicely <- function(graph, dim=2, ...) {
 
   ## 1. If there is a 'layout' graph attribute, we just use that.
@@ -627,7 +610,6 @@ layout_nicely <- function(graph, dim=2, ...) {
 
 #' @rdname layout_nicely
 #' @export
-
 nicely <- function(...) layout_spec(layout_nicely, ...)
 
 
@@ -671,7 +653,6 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' if (interactive()) {
 #'   rglplot(g, layout=layout_on_grid(g, dim = 3))
 #' }
-
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -695,13 +676,11 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 #' @rdname layout_on_grid
 #' @param ... Passed to \code{layout_on_grid}.
 #' @export
-
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
 
 #' @rdname layout_on_grid
 #' @export
-
 layout.grid.3d <- function(graph, width=0, height=0) {
   .Deprecated("layout_on_grid", msg = paste0("layout.grid.3d is deprecated from\n",
       "igraph 0.8.0, please use layout_on_grid instead"))
@@ -738,7 +717,6 @@ layout.grid.3d <- function(graph, width=0, height=0) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-
 layout_on_sphere <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -751,12 +729,10 @@ layout_on_sphere <- function(graph) {
 #' @rdname layout_on_sphere
 #' @param ... Passed to \code{layout_on_sphere}.
 #' @export
-
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.sphere <- function(..., params = list()) {
   do_call(layout_on_sphere, .args = c(list(...), params))
 }
@@ -781,7 +757,6 @@ layout.sphere <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-
 layout_randomly <- function(graph, dim=2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -800,7 +775,6 @@ layout_randomly <- function(graph, dim=2) {
 #' @rdname layout_randomly
 #' @param ... Parameters to pass to \code{layout_randomly}.
 #' @export
-
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
 #' Deprecated layout functions
@@ -811,7 +785,6 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 #' @param params Passed to the new layout functions as arguments.
 #' @export
 #' @rdname layout.deprecated
-
 layout.random <- function(..., params = list()) {
   do_call(layout_randomly, .args = c(list(...), params))
 }
@@ -922,7 +895,6 @@ layout.random <- function(..., params = list()) {
 #'   path(4,9,20,30,36) + path(1,7,12,14,19,24,26,30,37) +
 #'   path(5,9,13,15,19,23,25,28,33) + path(3,12,16,25,35,26,22,13,3)
 #' plot(g_12,  layout=layout_with_dh, vertex.size=5, vertex.label=NA)
-
 layout_with_dh <- function(graph, coords=NULL, maxiter=10,
            fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
            weight.node.dist=1.0, weight.border=0.0,
@@ -962,7 +934,6 @@ layout_with_dh <- function(graph, coords=NULL, maxiter=10,
 #' @rdname layout_with_dh
 #' @param ... Passed to \code{layout_with_dh}.
 #' @export
-
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
 
@@ -1111,12 +1082,10 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
 #' @rdname layout_with_fr
 #' @param ... Passed to \code{layout_with_fr}.
 #' @export
-
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.fruchterman.reingold <- function(..., params = list()) {
   do_call(layout_with_fr, .args = c(list(...), params))
 }
@@ -1194,7 +1163,6 @@ layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
 #' @rdname layout_with_gem
 #' @param ... Passed to \code{layout_with_gem}.
 #' @export
-
 with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
 
@@ -1244,7 +1212,6 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-
 layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
                             mass=30, spring.length=0, spring.constant=1,
                             max.sa.movement=5) {
@@ -1271,7 +1238,6 @@ layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
 #' @rdname layout_with_graphopt
 #' @param ... Passed to \code{layout_with_graphopt}.
 #' @export
-
 with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
 
@@ -1413,7 +1379,6 @@ with_kk <- function(...) layout_spec(layout_with_kk, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.kamada.kawai <- function(..., params = list()) {
   do_call(layout_with_kk, .args = c(list(...), params))
 }
@@ -1449,7 +1414,6 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-
 layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
                        area=vcount(graph)^2, coolexp=1.5,
                        repulserad=area * vcount(graph),
@@ -1474,12 +1438,10 @@ layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
 #' @rdname layout_with_lgl
 #' @param ... Passed to \code{layout_with_lgl}.
 #' @export
-
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
 #' @export
 #' @rdname layout.deprecated
-
 layout.lgl <- function(..., params = list()) {
   do_call(layout_with_lgl, .args = c(list(...), params))
 }
@@ -1528,7 +1490,6 @@ layout.lgl <- function(..., params = list()) {
 #' g <- sample_gnp(100, 2/100)
 #' l <- layout_with_mds(g)
 #' plot(g, layout=l, vertex.label=NA, vertex.size=3)
-
 layout_with_mds <- function(graph, dist=NULL, dim=2,
                        options=arpack_defaults) {
 
@@ -1548,7 +1509,6 @@ layout_with_mds <- function(graph, dist=NULL, dim=2,
 #' @rdname layout_with_mds
 #' @param ... Passed to \code{layout_with_mds}.
 #' @export
-
 with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
 
@@ -1850,7 +1810,6 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' @rdname layout_with_sugiyama
 #' @param ... Passed to \code{layout_with_sugiyama}.
 #' @export
-
 with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
 
@@ -1904,7 +1863,6 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' lay <- merge_coords(graphs, layouts)
 #' g <- disjoint_union(graphs)
 #' plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")
-
 merge_coords <- function(graphs, layouts, method="dla") {
 
   if (!all(sapply(graphs, is_igraph))) {
@@ -1943,7 +1901,6 @@ merge_coords <- function(graphs, layouts, method="dla") {
 #' @export
 #' @family graph layouts
 #' @keywords graphs
-
 norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
                           zmin=-1, zmax=1) {
 
@@ -1985,7 +1942,6 @@ norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
 #' @aliases piecewise.layout
 #' @param graph The input graph.
 #' @export
-
 layout_components <- function(graph, layout=layout_with_kk, ...) {
 
   if (!is_igraph(graph)) {
@@ -2010,7 +1966,6 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
 #' @return Layout coordinates, a two column matrix.
 #'
 #' @export
-
 layout.spring <- function(graph, ...) {
   warning("Spring layout was removed, we use Fruchterman-Reingold instead.")
   layout_with_fr(graph)
@@ -2025,7 +1980,6 @@ layout.spring <- function(graph, ...) {
 #' @return Layout coordinates, a two column matrix.
 #'
 #' @export
-
 layout.svd <- function(graph, ...) {
   warning("SVD layout was removed, we use Fruchterman-Reingold instead.")
   layout_with_fr(graph)
@@ -2040,7 +1994,6 @@ layout.svd <- function(graph, ...) {
 #' @return Layout coordinates, a two column matrix.
 #'
 #' @export
-
 layout.fruchterman.reingold.grid <- function(graph, ...) {
   warning("Grid Fruchterman-Reingold layout was removed,\n",
           "we use Fruchterman-Reingold instead.")

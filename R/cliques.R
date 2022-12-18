@@ -149,7 +149,6 @@ max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
 }
 
 #' @export
-
 count_max_cliques <- function(graph, min=NULL, max=NULL,
                                   subset=NULL) {
   # Argument checks
@@ -302,7 +301,6 @@ weighted_clique_num <- weighted_clique_num
 #' induced_subgraph(g, largest_ivs(g)[[1]])
 #'
 #' length(maximal_ivs(g))
-
 ivs <- function(graph, min=NULL, max=NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
@@ -329,7 +327,6 @@ ivs <- function(graph, min=NULL, max=NULL) {
 }
 
 #' @export
-
 largest_ivs <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
@@ -347,7 +344,6 @@ largest_ivs <- function(graph) {
 }
 
 #' @export
-
 maximal_ivs <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
@@ -365,7 +361,6 @@ maximal_ivs <- function(graph) {
 }
 
 #' @export
-
 ivs_size <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object");
@@ -376,7 +371,6 @@ ivs_size <- function(graph) {
 }
 
 #' @export
-
 clique_size_counts <- function(graph, min=0, max=0, maximal=FALSE, ...) {
   if (maximal) {
     maximal_clique_size_counts(graph, min, max, ...)

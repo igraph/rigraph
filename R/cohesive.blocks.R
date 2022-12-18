@@ -261,48 +261,41 @@ cohesive_blocks <- function(graph, labels=TRUE) {
 #' @rdname cohesive_blocks
 #' @method length cohesiveBlocks
 #' @export
-
 length.cohesiveBlocks <- function(x) {
   length(x$blocks)
 }
 
 #' @rdname cohesive_blocks
 #' @export
-
 blocks <- function(blocks) {
   blocks$blocks
 }
 
 #' @rdname cohesive_blocks
 #' @export
-
 graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph=graph)
 }
 
 #' @export
-
 cohesion <- function(x, ...)
   UseMethod("cohesion")
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks
 #' @export
-
 cohesion.cohesiveBlocks <- function(x, ...) {
   x$cohesion
 }
 
 #' @rdname cohesive_blocks
 #' @export
-
 hierarchy <- function(blocks) {
   blocks$blockTree
 }
 
 #' @rdname cohesive_blocks
 #' @export
-
 parent <- function(blocks) {
   blocks$parent
 }
@@ -310,7 +303,6 @@ parent <- function(blocks) {
 #' @rdname cohesive_blocks
 #' @method print cohesiveBlocks
 #' @export
-
 print.cohesiveBlocks <- function(x, ...) {
   cat("Cohesive block structure:\n")
   myb <- blocks(x)
@@ -356,7 +348,6 @@ print.cohesiveBlocks <- function(x, ...) {
 #' @rdname cohesive_blocks
 #' @method summary cohesiveBlocks
 #' @export
-
 summary.cohesiveBlocks <- function(object, ...) {
   cat("Structurally cohesive block structure, with",
       length(blocks(object)), "blocks.\n")
@@ -368,7 +359,6 @@ summary.cohesiveBlocks <- function(object, ...) {
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
-
 plot.cohesiveBlocks <- function(x, y,
                                 colbar=rainbow(max(cohesion(x))+1),
                                 col=colbar[max_cohesion(x)+1],
@@ -381,7 +371,6 @@ plot.cohesiveBlocks <- function(x, y,
 #' @rdname cohesive_blocks
 #' @export
 #' @importFrom graphics plot
-
 plot_hierarchy <- function(blocks,
                           layout=layout_as_tree(hierarchy(blocks),
                             root=1), ...) {
@@ -447,7 +436,6 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 
 #' @rdname cohesive_blocks
 #' @export
-
 export_pajek <- function(blocks, graph, file,
                         project.file=TRUE) {
 
@@ -465,7 +453,6 @@ export_pajek <- function(blocks, graph, file,
 
 #' @rdname cohesive_blocks
 #' @export
-
 max_cohesion <- function(blocks) {
   res <- numeric(blocks$vcount)
   myb <- blocks(blocks)

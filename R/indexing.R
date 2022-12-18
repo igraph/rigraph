@@ -152,7 +152,6 @@
 #'
 #' @method [ igraph
 #' @export
-
 `[.igraph` <- function(x, i, j, ..., from, to,
                        sparse=igraph_opt("sparsematrices"),
                        edges=FALSE, drop=TRUE,
@@ -279,7 +278,6 @@
 #'
 #' @method [[ igraph
 #' @export
-
 `[[.igraph` <- function(x, i, j, from, to, ..., directed=TRUE,
                         edges=FALSE, exact=TRUE) {
 
@@ -329,7 +327,6 @@
 #' @method length igraph
 #' @family structural queries
 #' @export
-
 length.igraph <- function(x) {
   vcount(x)
 }
@@ -337,7 +334,6 @@ length.igraph <- function(x) {
 #' @method [<- igraph
 #' @family functions for manipulating graph structure
 #' @export
-
 `[<-.igraph` <- function(x, i, j, ..., from, to,
                          attr=if (is_weighted(x)) "weight" else NULL,
                          value) {

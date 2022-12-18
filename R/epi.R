@@ -20,7 +20,6 @@
 ###################################################################
 
 #' @export
-
 time_bins <- function(x, middle=TRUE)
   UseMethod("time_bins")
 
@@ -28,7 +27,6 @@ time_bins <- function(x, middle=TRUE)
 #' @rdname sir
 #' @export
 #' @importFrom stats IQR
-
 time_bins.sir <- function(x, middle=TRUE) {
   sir <- x
   if (!inherits(sir, "sir")) {
@@ -49,7 +47,6 @@ time_bins.sir <- function(x, middle=TRUE) {
 #' @method median sir
 #' @rdname sir
 #' @export
-
 median.sir <- function(x, na.rm=FALSE, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {
@@ -70,7 +67,6 @@ median.sir <- function(x, na.rm=FALSE, ...) {
 #' @method quantile sir
 #' @rdname sir
 #' @export
-
 quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {

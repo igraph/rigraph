@@ -458,7 +458,6 @@ rglplot        <- function(x, ...)
 
 #' @method rglplot igraph
 #' @export
-
 rglplot.igraph <- function(x, ...) {
 
   graph <- x
@@ -721,7 +720,6 @@ rglplot.igraph <- function(x, ...) {
 # slightly modified: code argument added
 
 #' @importFrom graphics par xyinch segments xspline lines polygon
-
 igraph.Arrows <-
 function (x1, y1, x2, y2,
                     code=2,
@@ -872,7 +870,6 @@ function (x1, y1, x2, y2,
 } # Arrows
 
 #' @importFrom graphics xspline
-
 igraph.polygon <- function(points, vertex.size=15/200, expand.by=15/200,
                            shape=1/2, col="#ff000033", border=NA) {
 

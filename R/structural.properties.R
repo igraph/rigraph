@@ -97,7 +97,6 @@ diameter <- function(graph, directed=TRUE, unconnected=TRUE, weights=NULL) {
 }
 
 #' @export
-
 get_diameter <- function(graph, directed=TRUE, unconnected=TRUE,
                          weights=NULL) {
 
@@ -126,7 +125,6 @@ get_diameter <- function(graph, directed=TRUE, unconnected=TRUE,
 }
 
 #' @export
-
 farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
                            weights=NULL) {
 
@@ -157,7 +155,6 @@ farthest_vertices <- function(graph, directed=TRUE, unconnected=TRUE,
 
 #' @export
 #' @rdname distances
-
 mean_distance <- mean_distance
 
 
@@ -222,7 +219,6 @@ degree <- function(graph, v=V(graph),
 #' be calculated.
 #' @export
 #' @importFrom graphics hist
-
 degree_distribution <- function(graph, cumulative=FALSE, ...) {
 
   if (!is_igraph(graph)) {
@@ -463,7 +459,6 @@ distances <- function(graph, v=V(graph), to=V(graph),
 #' the vector. Note that the search terminates if all the vertices in \code{to}
 #' are reached.
 #' @export
-
 shortest_paths <- function(graph, from, to=V(graph),
                            mode=c("out", "all", "in"),
                            weights=NULL,
@@ -542,7 +537,6 @@ shortest_paths <- function(graph, from, to=V(graph),
 
 #' @export
 #' @rdname distances
-
 all_shortest_paths <- function(graph, from,
                                    to=V(graph),
                                    mode=c("out", "all", "in"),
@@ -611,7 +605,6 @@ all_shortest_paths <- function(graph, from,
 #' subcomponent(g, 1, "in")
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
-
 subcomponent <- function(graph, v, mode=c("all", "out", "in")) {
 
   if (!is_igraph(graph)) {
@@ -677,7 +670,6 @@ subgraph <- function(graph, vids) {
 #' automatically, using heuristics based on the size of the original and the
 #' result graph.
 #' @export
-
 induced_subgraph <- function(graph, vids, impl=c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -696,7 +688,6 @@ induced_subgraph <- function(graph, vids, impl=c("auto", "copy_and_delete", "cre
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #' not have any adjacent edges in \code{eids}.
 #' @export
-
 subgraph.edges <- function(graph, eids, delete.vertices=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1017,7 +1008,6 @@ edge_density <- function(graph, loops=FALSE) {
 
 #' @rdname ego
 #' @export
-
 ego_size <- function(graph, order = 1, nodes=V(graph),
                               mode=c("all", "out", "in"), mindist=0) {
 
@@ -1128,7 +1118,6 @@ ego <- function(graph, order = 1, nodes=V(graph),
 
 #' @rdname ego
 #' @export
-
 make_ego_graph <- function(graph, order = 1, nodes=V(graph),
                   mode=c("all", "out", "in"), mindist=0) {
 
@@ -1282,7 +1271,6 @@ topo_sort <- function(graph, mode=c("out", "all", "in")) {
 #' g <- sample_gnm(20, 40, directed=TRUE)
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo="approx")
-
 feedback_arc_set <- feedback_arc_set
 
 #' Girth of a graph
@@ -1974,7 +1962,6 @@ laplacian_matrix <- function(graph, normalized=FALSE, weights=NULL,
 #' max_bipartite_match(g2)
 #' #' @keywords graphs
 #' @export
-
 is_matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1991,7 +1978,6 @@ is_matching <- function(graph, matching, types=NULL) {
 
 #' @export
 #' @rdname matching
-
 is_max_matching <- function(graph, matching, types=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -2008,7 +1994,6 @@ is_max_matching <- function(graph, matching, types=NULL) {
 
 #' @export
 #' @rdname matching
-
 max_bipartite_match <- function(graph, types=NULL, weights=NULL,
                                        eps=.Machine$double.eps) {
   # Argument checks
@@ -2068,7 +2053,6 @@ max_bipartite_match <- function(graph, types=NULL, weights=NULL,
 #' which_mutual(g)
 #' sum(which_mutual(g))/2 == dyad_census(g)$mut
 #' @export
-
 which_mutual <- which_mutual
 
 
@@ -2141,5 +2125,4 @@ which_mutual <- which_mutual
 #' E(g5)$weight <- seq(ecount(g5))
 #' knn(g5)
 #' @export
-
 knn <- knn

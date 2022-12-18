@@ -62,7 +62,6 @@
 #' Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
 #' \url{https://arxiv.org/abs/0706.0812}
 #' @keywords graphs
-
 NULL
 
 #' Stochastic matrix of a graph
@@ -573,7 +572,6 @@ scg <- function(X, ev, nt, groups=NULL,
 
 #' @method scg igraph
 #' @export
-
 scg.igraph <- function(X, ev, nt, groups=NULL,
                        mtype=c("symmetric", "laplacian", "stochastic"),
                        algo=c("optimum", "interv_km", "interv",
@@ -594,7 +592,6 @@ scg.igraph <- function(X, ev, nt, groups=NULL,
 
 #' @method scg matrix
 #' @export
-
 scg.matrix <- function(X, ev, nt, groups=NULL,
                        mtype=c("symmetric", "laplacian", "stochastic"),
                        algo=c("optimum", "interv_km", "interv",
@@ -615,7 +612,6 @@ scg.matrix <- function(X, ev, nt, groups=NULL,
 
 #' @method scg Matrix
 #' @export
-
 scg.Matrix <- function(X, ev, nt, groups=NULL,
                        mtype=c("symmetric", "laplacian", "stochastic"),
                        algo=c("optimum", "interv_km", "interv",
@@ -744,5 +740,4 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 #' km <- kmeans(v,5)
 #' sum(km$withinss)
 #' scg_eps(cbind(v), km$cluster)^2
-
 scg_eps <- scg_eps

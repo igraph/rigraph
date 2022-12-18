@@ -70,17 +70,14 @@
 #' is_simple(simplify(g, remove.multiple=FALSE))
 #' is_simple(simplify(g))
 #' @export
-
 simplify <- simplify
 
 #' @export
 #' @rdname simplify
-
 is_simple <- is_simple
 
 #' @export
 #' @rdname simplify
-
 simplify_and_colorize <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }

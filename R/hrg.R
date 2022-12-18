@@ -108,7 +108,6 @@ NULL
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-
 fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -163,10 +162,8 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 #'   \item{weights}{Numeric vector, counts the number of times a given tree
 #'     split occurred in the generated network samples, for each internal
 #'     vertices. The order is the same as in the \code{parents} vector.}
-
 #' @family hierarchical random graph functions
 #' @export
-
 consensus_tree <- consensus_tree
 
 
@@ -185,7 +182,6 @@ consensus_tree <- consensus_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 hrg <- hrg
 
 
@@ -199,7 +195,6 @@ hrg <- hrg
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 hrg_tree <- hrg_tree
 
 
@@ -214,7 +209,6 @@ hrg_tree <- hrg_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 sample_hrg <- sample_hrg
 
 #' Predict edges based on a hierarchical random graph model
@@ -273,7 +267,6 @@ sample_hrg <- sample_hrg
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-
 predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
                         num.bins=25) {
 
@@ -327,7 +320,6 @@ as.igraph <- function(x, ...)
 
 #' @method as.igraph igraphHRG
 #' @export
-
 as.igraph.igraphHRG <- function(x, ...) {
   ovc <- length(x$left)+1L
   ivc <- ovc-1L
@@ -379,7 +371,6 @@ buildMerges <- function(object) {
 }
 
 #' @method as.dendrogram igraphHRG
-
 as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
 
   nMerge <- length(object$left)
@@ -444,7 +435,6 @@ as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
 
 #' @importFrom stats as.hclust
 #' @method as.hclust igraphHRG
-
 as.hclust.igraphHRG <- function(x, ...) {
   merge3 <- buildMerges(x)
 
@@ -484,7 +474,6 @@ as.hclust.igraphHRG <- function(x, ...) {
 
 #' @method as_phylo igraphHRG
 #' @importFrom stats reorder
-
 as_phylo.igraphHRG <- function(x, ...) {
 
   ovc <- length(x$left)+1L
@@ -600,7 +589,6 @@ plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...)
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
-
 hrgPlotHclust <- function(x, rect=0, colbar=rainbow(rect), hang=.01,
                           ann=FALSE, main="", sub="", xlab="", ylab="",
                           ...) {
@@ -614,14 +602,12 @@ hrgPlotHclust <- function(x, rect=0, colbar=rainbow(rect), hang=.01,
 }
 
 #' @importFrom graphics plot
-
 hrgPlotDendrogram <- function(x, ...) {
   plot(as.dendrogram(x), ...)
 }
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
-
 hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
                          edge.color=NULL, use.edge.length=FALSE, ...) {
   vc <- length(x$left)+1
@@ -676,7 +662,6 @@ hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
 #' @method print igraphHRG
 #' @export
 #' @family hierarchical random graph functions
-
 print.igraphHRG <- function(x, type=c("auto", "tree", "plain"),
                             level=3, ...) {
 
@@ -832,7 +817,6 @@ print2.igraphHRG <- function(x, ...) {
 #' @method print igraphHRGConsensus
 #' @export
 #' @family hierarchical random graph functions
-
 print.igraphHRGConsensus <- function(x, ...) {
   cat("HRG consensus tree:\n")
   n <- length(x$parents) - length(x$weights)

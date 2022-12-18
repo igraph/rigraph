@@ -157,7 +157,6 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @export
 #' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
-
 igraph_options <- function(...) {
   igraph_i_options(...)
 }
@@ -201,7 +200,6 @@ local_igraph_options <- function(..., .in = parent.frame()) {
 }
 
 #' @importFrom pkgconfig set_config get_config
-
 get_all_options <- function() {
   res <- lapply(names(.igraph.pars), function(n) {
     nn <- paste0("igraph::", n)
@@ -214,7 +212,6 @@ get_all_options <- function() {
 
 #' @rdname igraph_options
 #' @export
-
 igraph_opt <- function(x, default = NULL) {
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
@@ -238,7 +235,6 @@ igraph_opt <- function(x, default = NULL) {
 #'   make_ring(10)[]
 #' )
 #' igraph_opt("sparsematrices")
-
 with_igraph_opt <- function(options, code) {
   on.exit(igraph_options(old))
   old <- igraph_options(options)

@@ -51,7 +51,6 @@
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-
 motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 
   if (!is_igraph(graph)) {
@@ -95,7 +94,6 @@ motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-
 count_motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 
   if (!is_igraph(graph)) {
@@ -143,7 +141,6 @@ count_motifs <- function(graph, size=3, cut.prob=rep(0, size)) {
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
-
 sample_motifs <- function(graph, size=3, cut.prob=rep(0, size),
                              sample.size=vcount(graph)/10, sample=NULL) {
 
@@ -190,7 +187,6 @@ sample_motifs <- function(graph, size=3, cut.prob=rep(0, size),
 #' g <- sample_pa(100)
 #' dyad_census(g)
 #' @export
-
 dyad_census <- dyad_census
 
 
@@ -231,5 +227,4 @@ dyad_census <- dyad_census
 #' g <- sample_gnm(15, 45, directed = TRUE)
 #' triad_census(g)
 #' @export
-
 triad_census <- triad_census

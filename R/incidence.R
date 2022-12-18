@@ -240,5 +240,4 @@ graph_from_incidence_matrix <- function(incidence, directed=FALSE,
 #' @rdname graph_from_incidence_matrix
 #' @param ... Passed to \code{graph_from_incidence_matrix}.
 #' @export
-
 from_incidence_matrix <- function(...) constructor_spec(graph_from_incidence_matrix, ...)

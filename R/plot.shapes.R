@@ -246,7 +246,6 @@
 #' plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
 #'      vertex.size=seq(10,20,length.out=vcount(g)),
 #'      vertex.norays=rep(4:8, length.out=vcount(g)))
-
 shapes <- function(shape=NULL) {
   if (is.null(shape)) {
     ls(.igraph.shapes)
@@ -258,7 +257,6 @@ shapes <- function(shape=NULL) {
 
 #' @rdname shapes
 #' @export
-
 shape_noclip <- function(coords, el, params,
                                 end=c("both", "from", "to")) {
   end <- igraph.match.arg(end)
@@ -274,14 +272,12 @@ shape_noclip <- function(coords, el, params,
 
 #' @rdname shapes
 #' @export
-
 shape_noplot <- function(coords, v=NULL, params) {
   invisible(NULL)
 }
 
 #' @rdname shapes
 #' @export
-
 add_shape <- function(shape, clip=shape_noclip,
                       plot=shape_noplot,
                       parameters=list()) {
@@ -349,7 +345,6 @@ add_shape <- function(shape, clip=shape_noclip,
 }
 
 #' @importFrom graphics symbols
-
 .igraph.shape.circle.plot <- function(coords, v=NULL, params) {
 
   vertex.color       <- params("vertex", "color")
@@ -449,7 +444,6 @@ add_shape <- function(shape, clip=shape_noclip,
 }
 
 #' @importFrom graphics symbols
-
 .igraph.shape.square.plot <- function(coords, v=NULL, params) {
 
   vertex.color       <- params("vertex", "color")
@@ -615,7 +609,6 @@ add_shape <- function(shape, clip=shape_noclip,
 }
 
 #' @importFrom graphics symbols
-
 .igraph.shape.rectangle.plot <- function(coords, v=NULL, params) {
 
   vertex.color       <- params("vertex", "color")
@@ -791,7 +784,6 @@ add_shape <- function(shape, clip=shape_noclip,
 }
 
 #' @importFrom graphics par polygon
-
 mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
                   density=NULL, border=NULL, lty=NULL, init.angle=90, ...) {
   values <- c(0, cumsum(values)/sum(values))
@@ -871,7 +863,6 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
 }
 
 #' @importFrom stats na.omit
-
 .igraph.shape.pie.plot <- function(coords, v=NULL, params) {
 
   getparam <- function(pname) {
@@ -914,7 +905,6 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
 
 #' @importFrom graphics rasterImage
 #' @importFrom grDevices col2rgb as.raster
-
 .igraph.shape.sphere.plot <- function(coords, v=NULL, params) {
 
   getparam <- function(pname) {
@@ -949,7 +939,6 @@ mypie <- function(x, y, values, radius, edges=200, col=NULL, angle=45,
 .igraph.shape.raster.clip <- .igraph.shape.rectangle.clip
 
 #' @importFrom graphics rasterImage
-
 .igraph.shape.raster.plot <- function(coords, v=NULL, params) {
 
   getparam <- function(pname) {

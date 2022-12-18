@@ -113,7 +113,6 @@
 #' g <- sample_pa(10000)
 #' degree_distribution(g)
 #'
-
 sample_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
                     out.pref=FALSE, zero.appeal=1,
                     directed=TRUE, algorithm=c("psumtree",
@@ -181,7 +180,6 @@ sample_pa <- function(n, power=1, m=NULL, out.dist=NULL, out.seq=NULL,
 #' @rdname sample_pa
 #' @param ... Passed to \code{sample_pa}.
 #' @export
-
 pa <- function(...) constructor_spec(sample_pa, ...)
 
 
@@ -214,7 +212,6 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #'
 #' g <- sample_gnp(1000, 1/1000)
 #' degree_distribution(g)
-
 sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
   type <- "gnp"
@@ -236,7 +233,6 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 #' @rdname sample_gnp
 #' @param ... Passed to \code{sample_gnp}.
 #' @export
-
 gnp <- function(...) constructor_spec(sample_gnp, ...)
 
 ## -----------------------------------------------------------------
@@ -269,7 +265,6 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #'
 #' g <- sample_gnm(1000, 1000)
 #' degree_distribution(g)
-
 sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
   type <- "gnm"
@@ -291,7 +286,6 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 #' @rdname sample_gnm
 #' @param ... Passed to \code{sample_gnm}.
 #' @export
-
 gnm <- function(...) constructor_spec(sample_gnm, ...)
 
 ## -----------------------------------------------------------------
@@ -360,7 +354,6 @@ erdos.renyi.game <- function(n, p.or.m, type=c("gnp", "gnm"),
 }
 
 #' @export
-
 random.graph.game <- erdos.renyi.game
 
 ## -----------------------------------------------------------------
@@ -445,7 +438,6 @@ random.graph.game <- erdos.renyi.game
 #' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
 #' g5 <- sample_degseq(degs, method="vl")
 #' all(degree(g5) == degs)
-
 sample_degseq <- function(out.deg, in.deg=NULL,
                           method=c("simple", "vl", "simple.no.multiple", "simple.no.multiple.uniform")) {
 
@@ -468,7 +460,6 @@ sample_degseq <- function(out.deg, in.deg=NULL,
 #' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
 #' or to \code{sample_degseq} otherwise.
 #' @export
-
 degseq <- function(..., deterministic=FALSE) constructor_spec(
   if (deterministic) realize_degseq else sample_degseq, ...
 )
@@ -516,7 +507,6 @@ sample_growing <- function(n, m=1, directed=TRUE, citation=FALSE) {
 #' @rdname sample_growing
 #' @param ... Passed to \code{sample_growing}.
 #' @export
-
 growing <- function(...) constructor_spec(sample_growing, ...)
 
 ## -----------------------------------------------------------------
@@ -617,7 +607,6 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' max(degree(g1))
 #' max(degree(g2))
 #' max(degree(g3))
-
 sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
                                out.dist=NULL, out.seq=NULL,
                                out.pref=FALSE, directed=TRUE,
@@ -706,7 +695,6 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m=NULL, aging.bin=300,
 #' @rdname sample_pa_age
 #' @param ... Passed to \code{sample_pa_age}.
 #' @export
-
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 
 ## -----------------------------------------------------------------
@@ -750,7 +738,6 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' # two types of vertices, they like only themselves
 #' g1 <- sample_traits_callaway(1000, 2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
 #' g2 <- sample_traits(1000, 2, k=2, pref.matrix=matrix( c(1,0,0,1), ncol=2))
-
 sample_traits_callaway <- function(nodes, types, edge.per.step=1,
                                  type.dist=rep(1, types),
                                  pref.matrix=matrix(1, types, types),
@@ -776,12 +763,10 @@ sample_traits_callaway <- function(nodes, types, edge.per.step=1,
 #' @param ... Passed to the constructor, \code{sample_traits} or
 #'   \code{sample_traits_callaway}.
 #' @export
-
 traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 
 #' @rdname sample_traits_callaway
 #' @export
-
 sample_traits <- function(nodes, types, k=1, type.dist=rep(1, types),
                                pref.matrix=matrix(1, types, types),
                                directed=FALSE) {
@@ -803,7 +788,6 @@ sample_traits <- function(nodes, types, k=1, type.dist=rep(1, types),
 
 #' @rdname sample_traits_callaway
 #' @export
-
 traits <- function(...) constructor_spec(sample_traits, ...)
 
 ## -----------------------------------------------------------------
@@ -857,7 +841,6 @@ sample_grg <- function(nodes, radius, torus=FALSE, coords=FALSE) {
 #' @rdname sample_grg
 #' @param ... Passed to \code{sample_grg}.
 #' @export
-
 grg <- function(...) constructor_spec(sample_grg, ...)
 
 ## -----------------------------------------------------------------
@@ -952,12 +935,10 @@ sample_pref <- function(nodes, types, type.dist=rep(1, types),
 #' @param ... Passed to the constructor, \code{sample_pref} or
 #'   \code{sample_asym_pref}.
 #' @export
-
 pref <- function(...) constructor_spec(sample_pref, ...)
 
 #' @rdname sample_pref
 #' @export
-
 sample_asym_pref <- function(nodes, types,
                         type.dist.matrix=matrix(1, types,types),
                         pref.matrix=matrix(1, types, types),
@@ -991,7 +972,6 @@ sample_asym_pref <- function(nodes, types,
 
 #' @rdname sample_pref
 #' @export
-
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
 ## -----------------------------------------------------------------
@@ -999,7 +979,6 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
 #' @rdname ego
 #' @export
-
 connect <- function(graph, order, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1069,7 +1048,6 @@ sample_smallworld <- function(dim, size, nei, p, loops=FALSE,
 #' @rdname sample_smallworld
 #' @param ... Passed to \code{sample_smallworld}.
 #' @export
-
 smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 
 ## -----------------------------------------------------------------
@@ -1104,7 +1082,6 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
-
 sample_last_cit <- function(n, edges=1, agebins=n/7100, pref=(1:(agebins+1))^-3,
                        directed=TRUE) {
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1122,12 +1099,10 @@ sample_last_cit <- function(n, edges=1, agebins=n/7100, pref=(1:(agebins+1))^-3,
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
 #' @export
-
 last_cit <- function(...) constructor_spec(sample_last_cit, ...)
 
 #' @rdname sample_last_cit
 #' @export
-
 sample_cit_types <- function(n, edges=1, types=rep(0, n),
                             pref=rep(1, length(types)),
                             directed=TRUE, attr=TRUE) {
@@ -1146,12 +1121,10 @@ sample_cit_types <- function(n, edges=1, types=rep(0, n),
 
 #' @rdname sample_last_cit
 #' @export
-
 cit_types <- function(...) constructor_spec(sample_cit_types, ...)
 
 #' @rdname sample_last_cit
 #' @export
-
 sample_cit_cit_types <- function(n, edges=1, types=rep(0, n),
                                    pref=matrix(1, nrow=length(types),
                                      ncol=length(types)),
@@ -1173,7 +1146,6 @@ sample_cit_cit_types <- function(n, edges=1, types=rep(0, n),
 
 #' @rdname sample_last_cit
 #' @export
-
 cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
 ## -----------------------------------------------------------------
@@ -1269,7 +1241,6 @@ sample_bipartite <- function(n1, n2, type=c("gnp", "gnm"), p, m,
 #' @rdname sample_bipartite
 #' @param ... Passed to \code{sample_bipartite}.
 #' @export
-
 bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
 
@@ -1307,13 +1278,11 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' g <- sample_sbm(1000, pref.matrix=pm, block.sizes=c(300,700))
 #' g
 #' @export
-
 sample_sbm <- sample_sbm
 
 #' @rdname sample_sbm
 #' @param ... Passed to \code{sample_sbm}.
 #' @export
-
 sbm <- function(...) constructor_spec(sample_sbm, ...)
 
 ## -----------------------------------------------------------------
@@ -1354,7 +1323,6 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' g
 #' if (require(Matrix)) { image(g[]) }
 #' @export
-
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 
   mlen <- length(m)
@@ -1388,7 +1356,6 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 #' @rdname sample_hierarchical_sbm
 #' @param ... Passed to \code{sample_hierarchical_sbm}.
 #' @export
-
 hierarchical_sbm <- function(...)
   constructor_spec(sample_hierarchical_sbm, ...)
 
@@ -1432,13 +1399,11 @@ hierarchical_sbm <- function(...)
 #' g2 <- sample_dot_product(lpvs2)
 #' g2
 #' @export
-
 sample_dot_product <- sample_dot_product
 
 #' @rdname sample_dot_product
 #' @param ... Passed to \code{sample_dot_product}.
 #' @export
-
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 
 
@@ -1465,7 +1430,6 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @seealso \code{\link{sample_gnp}}
 #' @keywords graphs
 #' @export
-
 sample_islands <- sample_islands
 
 
@@ -1504,7 +1468,6 @@ sample_islands <- sample_islands
 #' layout(matrix(1:9, nrow=3, byrow=TRUE))
 #' sapply(k10, plot, vertex.label=NA)
 #' @export
-
 sample_k_regular <- sample_k_regular
 
 
@@ -1565,7 +1528,6 @@ sample_k_regular <- sample_k_regular
 #' g <- sample_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative=TRUE), log="xy")
-
 sample_fitness <- sample_fitness
 
 
@@ -1631,7 +1593,6 @@ sample_fitness <- sample_fitness
 #'
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative=TRUE, mode="out"), log="xy")
-
 sample_fitness_pl <- sample_fitness_pl
 
 
@@ -1688,7 +1649,6 @@ sample_fitness_pl <- sample_fitness_pl
 #' dd2 <- degree_distribution(g, mode="out")
 #' plot(seq(along.with=dd1)-1, dd1, log="xy")
 #' points(seq(along.with=dd2)-1, dd2, col=2, pch=2)
-
 sample_forestfire <- sample_forestfire
 
 
@@ -1728,7 +1688,6 @@ sample_forestfire <- sample_forestfire
 #' cor(as.vector(g[]), as.vector(g2[]))
 #' g
 #' g2
-
 sample_correlated_gnp <- sample_correlated_gnp
 
 
@@ -1764,5 +1723,4 @@ sample_correlated_gnp <- sample_correlated_gnp
 #'            directed = FALSE)
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
-
 sample_correlated_gnp_pair <- sample_correlated_gnp_pair

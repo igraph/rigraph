@@ -23,7 +23,6 @@
 .igraph.pb <- NULL
 
 #' @export
-
 .igraph.progress <- function(percent, message, clean=FALSE) {
   if (clean) {
     if (!is.null(.igraph.pb)) { close(.igraph.pb) }
@@ -41,7 +40,6 @@
 }
 
 #' @export
-
 .igraph.status <- function(message) {
   type <- igraph_opt("verbose")
   if (is.logical(type) && type) {
@@ -56,7 +54,6 @@
 }
 
 #' @importFrom utils txtProgressBar setTxtProgressBar
-
 .igraph.progress.txt <- function(percent, message) {
   pb <- get(".igraph.pb", asNamespace("igraph"))
   if (percent==0) {
@@ -243,7 +240,6 @@ close.igraphconsole <- function(con, ...) {
 #' @seealso \code{\link{igraph_options}} and the \code{verbose} option.
 #' @keywords graphs
 #' @export
-
 console <- function() {
   oldverb <- igraph_opt("verbose")
   igraph_options(verbose="tkconsole")

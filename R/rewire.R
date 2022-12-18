@@ -40,7 +40,6 @@
 #'   rewire(each_edge(p = .1, loops = FALSE)) %>%
 #'   plot(layout=layout_in_circle)
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-
 rewire <- function(graph, with) {
   if (! is(with, "igraph_rewiring_method")) {
     stop("'with' is not an igraph rewiring method")
@@ -74,7 +73,6 @@ rewire <- function(graph, with) {
 #'   rewire(keeping_degseq(niter = 20)) %>%
 #'   degree()
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
-
 keeping_degseq <- function(loops = FALSE, niter = 100) {
   method <- list(
     fun = rewire_keeping_degseq,
@@ -131,7 +129,6 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' g <- barabasi.game(1000)
 #' g2 <- g %>% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
 #' degree(g, mode="in") == degree(g2, mode="in")
-
 each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   multiple <- as.logical(multiple)

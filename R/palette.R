@@ -51,7 +51,6 @@
 #'
 #' @family palettes
 #' @export
-
 categorical_pal <- function(n) {
 
   stopifnot(n > 0)
@@ -91,7 +90,6 @@ categorical_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), sequential_pal)
 #' plot(karate)
-
 sequential_pal <- function(n) {
 
   stopifnot(n >= 0)
@@ -155,7 +153,6 @@ sequential_pal <- function(n) {
 #'
 #' V(karate)$color <- scales::dscale(degree(karate) %>% cut(5), diverging_pal)
 #' plot(karate)
-
 diverging_pal <- function(n) {
 
   stopifnot(n > 0)
@@ -199,7 +196,6 @@ diverging_pal <- function(n) {
 #' @family palettes
 #' @export
 #' @importFrom grDevices palette
-
 r_pal <- function(n) {
   x <- palette()
   if (n > length(x)) warning("Cannot make ", n, " divergent colors")

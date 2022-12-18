@@ -41,7 +41,6 @@
 #'
 #' @seealso upgrade_graph to convert the data format of a graph.
 #' @export
-
 graph_version <- function(graph) {
   if (missing(graph)) {
     "0.8.0"
@@ -71,7 +70,6 @@ graph_version <- function(graph) {
 #' @seealso graph_version to check the current data format version
 #' or the version of a graph.
 #' @export
-
 upgrade_graph <- function(graph) {
 
   stopifnot(is_igraph(graph))

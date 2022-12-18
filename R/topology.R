@@ -21,7 +21,6 @@
 ###################################################################
 
 #' @export
-
 graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                        vertex.color2, edge.color1,
                                        edge.color2) {
@@ -78,7 +77,6 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 }
 
 #' @export
-
 graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                           vertex.color2, edge.color1,
                                           edge.color2) {
@@ -135,7 +133,6 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 }
 
 #' @export
-
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -148,7 +145,6 @@ graph.isoclass.subgraph <- function(graph, vids) {
 }
 
 #' @export
-
 graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
                                     induced=FALSE, map=TRUE, all.maps=FALSE,
                                     time.limit=Inf) {
@@ -293,7 +289,6 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
 #' # ignore colors
 #' count_isomorphisms(g1, g2, vertex.color1 = NULL,
 #'     vertex.color2 = NULL)
-
 isomorphic <- function(graph1, graph2, method = c("auto", "direct",
                  "vf2", "bliss"), ...) {
 
@@ -320,7 +315,6 @@ isomorphic <- function(graph1, graph2, method = c("auto", "direct",
 
 #' @export
 #' @rdname isomorphic
-
 is_isomorphic_to <- isomorphic
 
 
@@ -406,7 +400,6 @@ is_isomorphic_to <- isomorphic
 #' pattern <- make_graph(~ 1:2:3, 1 -+ 2:3)
 #' dring <- make_ring(10, directed = TRUE)
 #' subgraph_isomorphic(pattern, dring)
-
 subgraph_isomorphic <- function(pattern, target,
                                 method = c("auto", "lad", "vf2"), ...) {
 
@@ -427,7 +420,6 @@ subgraph_isomorphic <- function(pattern, target,
 
 #' @export
 #' @rdname subgraph_isomorphic
-
 is_subgraph_isomorphic_to <- subgraph_isomorphic
 
 
@@ -462,7 +454,6 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #' # ignore colors
 #' count_isomorphisms(g1, g2, vertex.color1 = NULL,
 #'     vertex.color2 = NULL)
-
 count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 
   method <- igraph.match.arg(method)
@@ -535,7 +526,6 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #'
 #' @export
 #' @family graph isomorphism
-
 count_subgraph_isomorphisms <- function(pattern, target,
                                         method = c("lad", "vf2"), ...) {
 
@@ -565,7 +555,6 @@ count_subgraph_isomorphisms <- function(pattern, target,
 #'
 #' @export
 #' @family graph isomorphism
-
 isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 
   method <- igraph.match.arg(method)
@@ -629,7 +618,6 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #'
 #' @export
 #' @family graph isomorphism
-
 subgraph_isomorphisms <- function(pattern, target,
                                   method = c("lad", "vf2"), ...) {
 
@@ -669,7 +657,6 @@ subgraph_isomorphisms <- function(pattern, target,
 #' isomorphism_class(g1)
 #' isomorphism_class(g2)
 #' isomorphic(g1, g2)
-
 isomorphism_class <- function(graph, v) {
 
   if (missing(v)) {
@@ -699,7 +686,6 @@ isomorphism_class <- function(graph, v) {
 #' @aliases graph.isocreate
 #'
 #' @family graph isomorphism
-
 graph_from_isomorphism_class <- graph_from_isomorphism_class
 
 
@@ -776,7 +762,6 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' el2 <- el2[ order(el2[,1], el2[,2]), ]
 #' all(el1 == el2)
 #' @export
-
 canonical_permutation <- canonical_permutation
 
 
@@ -818,7 +803,6 @@ canonical_permutation <- canonical_permutation
 #' E(g2)$weight
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
-
 permute <- permute
 
 
@@ -881,7 +865,6 @@ permute <- permute
 #' g <- make_full_graph(4)
 #' count_automorphisms(g, colors=c(1,2,1,2))
 #' @export
-
 count_automorphisms <- count_automorphisms
 
 
@@ -940,5 +923,4 @@ count_automorphisms <- count_automorphisms
 #' g <- make_ring(10)
 #' automorphism_group(g)
 #' @export
-
 automorphism_group <- automorphism_group

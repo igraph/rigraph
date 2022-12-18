@@ -71,7 +71,6 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #'  P  <- match_vertices(A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
 #'  P
 #' @export
-
 match_vertices <- function(A, B, m, start, iteration) {
   ## Seeds are assumed to be vertices 1:m in both graphs
   totv <- ncol(A)

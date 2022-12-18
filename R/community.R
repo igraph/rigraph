@@ -217,7 +217,6 @@
 #' membership(wc)
 #' plot(wc, karate)
 #'
-
 membership <- function(communities) {
   if (!is.null(communities$membership)) {
     res <- communities$membership
@@ -237,7 +236,6 @@ membership <- function(communities) {
 
 #' @method print membership
 #' @export
-
 print.membership <- function(x, ...) print(unclass(x), ...)
 
 #' Declare a numeric vector as a membership vector
@@ -257,13 +255,11 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 #' fc <- cluster_fast_greedy(g)
 #' compare(correct, fc)
 #' compare(correct, membership(fc))
-
 as_membership <- function(x) add_class(x, "membership")
 
 #' @rdname communities
 #' @method print communities
 #' @export
-
 print.communities <- function(x, ...) {
 
   noc <- if (!is.null(x$membership)) max(membership(x), 0) else NA
@@ -313,7 +309,6 @@ print.communities <- function(x, ...) {
 #' @aliases create.communities
 #'
 #' @export
-
 make_clusters <- function(graph, membership = NULL, algorithm = NULL,
                           merges = NULL, modularity = TRUE) {
 
@@ -351,7 +346,6 @@ make_clusters <- function(graph, membership = NULL, algorithm = NULL,
 }
 
 #' @export
-
 modularity <- function(x, ...)
   UseMethod("modularity")
 
@@ -433,7 +427,6 @@ modularity <- function(x, ...)
 #' modularity(wtc)
 #' modularity(g, membership(wtc))
 #'
-
 modularity.igraph <- function(x, membership, weights=NULL, resolution=1, directed=TRUE, ...) {
   # Argument checks
   if (!is_igraph(x)) { stop("Not a graph object") }
@@ -454,7 +447,6 @@ modularity.igraph <- function(x, membership, weights=NULL, resolution=1, directe
 #' @rdname communities
 #' @method modularity communities
 #' @export
-
 modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
     max(x$modularity)
@@ -466,7 +458,6 @@ modularity.communities <- function(x, ...) {
 #' @rdname modularity.igraph
 #' @aliases mod.matrix
 #' @export
-
 modularity_matrix <- function(graph, membership, weights=NULL, resolution=1, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -496,7 +487,6 @@ modularity_matrix <- function(graph, membership, weights=NULL, resolution=1, dir
 #' @rdname communities
 #' @method length communities
 #' @export
-
 length.communities <- function(x) {
   m <- membership(x)
   max(m, 0)
@@ -504,7 +494,6 @@ length.communities <- function(x) {
 
 #' @rdname communities
 #' @export
-
 sizes <- function(communities) {
   m <- membership(communities)
   table(`Community sizes`=m)
@@ -512,14 +501,12 @@ sizes <- function(communities) {
 
 #' @rdname communities
 #' @export
-
 algorithm <- function(communities) {
   communities$algorithm
 }
 
 #' @rdname communities
 #' @export
-
 merges <- function(communities) {
   if (!is.null(communities$merges)) {
     communities$merges
@@ -530,7 +517,6 @@ merges <- function(communities) {
 
 #' @rdname communities
 #' @export
-
 crossing <- function(communities, graph) {
   m <- membership(communities)
   el <- as_edgelist(graph, names=FALSE)
@@ -545,14 +531,12 @@ crossing <- function(communities, graph) {
 
 #' @rdname communities
 #' @export
-
 code_len <- function(communities) {
   communities$codelength
 }
 
 #' @rdname communities
 #' @export
-
 is_hierarchical <- function(communities) {
   ! is.null(communities$merges)
 }
@@ -580,7 +564,6 @@ complete.dend <- function(comm, use.modularity) {
 #' @importFrom stats as.dendrogram
 #' @method as.dendrogram communities
 #' @export
-
 as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
                                       ...) {
   if (!is_hierarchical(object)) {
@@ -674,7 +657,6 @@ as.dendrogram.communities <- function(object, hang=-1, use.modularity=FALSE,
 #' @importFrom stats as.hclust
 #' @method as.hclust communities
 #' @export
-
 as.hclust.communities <- function(x, hang=-1, use.modularity=FALSE,
                                   ...) {
   as.hclust(as.dendrogram(x, hang=hang, use.modularity=use.modularity))
@@ -682,14 +664,12 @@ as.hclust.communities <- function(x, hang=-1, use.modularity=FALSE,
 
 #' @rdname communities
 #' @export
-
 as_phylo <- function(x, ...)
   UseMethod("as_phylo")
 
 #' @rdname communities
 #' @method as_phylo communities
 #' @export
-
 as_phylo.communities <- function(x, use.modularity=FALSE, ...) {
 
   if (!is_hierarchical(x)) {
@@ -744,7 +724,6 @@ as_phylo.communities <- function(x, use.modularity=FALSE, ...) {
 
 #' @rdname communities
 #' @export
-
 cut_at <- function(communities, no, steps) {
 
   if (!inherits(communities, "communities")) {
@@ -780,7 +759,6 @@ cut_at <- function(communities, no, steps) {
 
 #' @rdname communities
 #' @export
-
 show_trace <- function(communities) {
 
   if (!inherits(communities, "communities")) {
@@ -1208,7 +1186,6 @@ cluster_leiden <- function(graph, objective_function=c("CPM", "modularity"),
 #' @examples
 #' g <- graph.famous("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
-
 cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1893,7 +1870,6 @@ cluster_louvain <- function(graph, weights=NULL, resolution=1) {
 #' 2008.
 #' @export
 #' @keywords graphs
-
 cluster_optimal <- function(graph, weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -2014,7 +1990,6 @@ cluster_infomap <- function(graph, e.weights=NULL, v.weights=NULL,
 #' @method plot communities
 #' @export
 #' @importFrom graphics plot
-
 plot.communities <- function(x, y,
                              col=membership(x),
                              mark.groups=communities(x),
@@ -2031,7 +2006,6 @@ plot.communities <- function(x, y,
 #' @rdname plot_dendrogram.communities
 #' @aliases dendPlot
 #' @export
-
 plot_dendrogram <- function(x, mode=igraph_opt("dend.plot.type"), ...)
   UseMethod("plot_dendrogram")
 
@@ -2142,7 +2116,6 @@ plot_dendrogram.communities <- function(x,
 #' @importFrom grDevices palette
 #' @importFrom graphics plot
 #' @importFrom stats rect.hclust
-
 dendPlotHclust <- function(communities, rect=length(communities),
                            colbar=palette(), hang=-1, ann=FALSE,
                            main="", sub="", xlab="", ylab="", ...,
@@ -2157,7 +2130,6 @@ dendPlotHclust <- function(communities, rect=length(communities),
 }
 
 #' @importFrom graphics plot
-
 dendPlotDendrogram <- function(communities, hang=-1, ...,
                                use.modularity=FALSE) {
   plot(as.dendrogram(communities, hang=hang, use.modularity=use.modularity),
@@ -2166,7 +2138,6 @@ dendPlotDendrogram <- function(communities, hang=-1, ...,
 
 #' @importFrom grDevices palette
 #' @importFrom graphics plot
-
 dendPlotPhylo <- function(communities, colbar=palette(),
                           col=colbar[membership(communities)],
                           mark.groups=communities(communities),
@@ -2270,7 +2241,6 @@ compare <- function(comm1, comm2, method=c("vi", "nmi",
 
 #' @method compare communities
 #' @export
-
 compare.communities <- function(comm1, comm2,
                                 method=c("vi", "nmi", "split.join", "rand",
                                   "adjusted.rand")) {
@@ -2280,7 +2250,6 @@ compare.communities <- function(comm1, comm2,
 
 #' @method compare membership
 #' @export
-
 compare.membership <- function(comm1, comm2,
                                 method=c("vi", "nmi", "split.join", "rand",
                                   "adjusted.rand")) {
@@ -2290,7 +2259,6 @@ compare.membership <- function(comm1, comm2,
 
 #' @method compare default
 #' @export
-
 compare.default <- compare.membership
 
 i_compare <- function (comm1, comm2, method=c("vi", "nmi", "split.join",
@@ -2345,7 +2313,6 @@ i_compare <- function (comm1, comm2, method=c("vi", "nmi", "split.join",
 #' Amsterdam, May 2000.
 #'
 #' @export
-
 split_join_distance <- function(comm1, comm2) {
   comm1 <- if (inherits(comm1, "communities")) {
     as.numeric(membership(comm1))
@@ -2389,13 +2356,11 @@ split_join_distance <- function(comm1, comm2) {
 #' g2 <- make_ring(10) + make_full_graph(5)
 #' groups(components(g2))
 #' @export
-
 groups <- function(x)
   UseMethod("groups")
 
 #' @method groups default
 #' @export
-
 groups.default <- function(x) {
   vids <- names(x$membership)
   if (is.null(vids)) vids <- seq_along(x$membership)
@@ -2404,26 +2369,22 @@ groups.default <- function(x) {
 
 #' @method groups communities
 #' @export
-
 groups.communities <- function(x) {
   m <- membership(x)
   groups.default(list(membership = m))
 }
 
 #' @export
-
 communities <- groups.communities
 
 #' @method "[" communities
 #' @export
-
 `[.communities` <- function(x, i) {
   groups(x)[i]
 }
 
 #' @method "[[" communities
 #' @export
-
 `[[.communities` <- function(x, i) {
   groups(x)[[i]]
 }
@@ -2463,5 +2424,4 @@ communities <- groups.communities
 #' print(g2, g=TRUE, v=TRUE, e=TRUE)
 #'
 #' @export
-
 contract <- contract

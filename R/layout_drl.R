@@ -137,12 +137,10 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 #' @rdname layout_with_drl
 #' @param ... Passed to \code{layout_with_drl}.
 #' @export
-
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 
 
 #' @export
-
 igraph.drl.default <- list(edge.cut=32/40,
                            init.iterations=0,
                            init.temperature=2000,
@@ -170,7 +168,6 @@ igraph.drl.default <- list(edge.cut=32/40,
                            simmer.damping.mult=0)
 
 #' @export
-
 igraph.drl.coarsen <- list(edge.cut=32/40,
                            init.iterations=0,
                            init.temperature=2000,
@@ -198,7 +195,6 @@ igraph.drl.coarsen <- list(edge.cut=32/40,
                            simmer.damping.mult=0)
 
 #' @export
-
 igraph.drl.coarsest <- list(edge.cut=32/40,
                             init.iterations=0,
                             init.temperature=2000,
@@ -226,7 +222,6 @@ igraph.drl.coarsest <- list(edge.cut=32/40,
                             simmer.damping.mult=0)
 
 #' @export
-
 igraph.drl.refine <- list(edge.cut=32/40,
                           init.iterations=0,
                           init.temperature=50,
@@ -254,7 +249,6 @@ igraph.drl.refine <- list(edge.cut=32/40,
                           simmer.damping.mult=0)
 
 #' @export
-
 igraph.drl.final <- list(edge.cut=32/40,
                          init.iterations=0,
                          init.temperature=50,
@@ -282,7 +276,6 @@ igraph.drl.final <- list(edge.cut=32/40,
                          simmer.damping.mult=0)
 
 #' @export
-
 drl_defaults <- list(
   coarsen = igraph.drl.coarsen,
   coarsest = igraph.drl.coarsest,

@@ -195,7 +195,6 @@ graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
 #' @rdname graph_from_data_frame
 #' @param ... Passed to \code{graph_from_data_frame}.
 #' @export
-
 from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
 ## -----------------------------------------------------------------
@@ -223,7 +222,6 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #'
 #' # Create a ring by hand
 #' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-
 graph_from_edgelist <- function(el, directed=TRUE) {
 
   if (!is.matrix(el) || ncol(el) != 2) {
@@ -253,5 +251,4 @@ graph_from_edgelist <- function(el, directed=TRUE) {
 #' @rdname graph_from_edgelist
 #' @param ... Passed to \code{graph_from_edgelist}.
 #' @export
-
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)

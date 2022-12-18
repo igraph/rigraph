@@ -86,7 +86,6 @@
 }
 
 #' @importFrom utils capture.output
-
 .print.graph.attributes <- function(x, full, max.lines) {
   list <- graph_attr_names(x)
   if (length(list)!=0) {
@@ -313,7 +312,6 @@
 }
 
 #' @importFrom utils capture.output
-
 .print.edges.compressed.limit <- function(x, edges, names, max.lines) {
 
   if (!is.null(x)) {
@@ -412,7 +410,6 @@
 }
 
 #' @export
-
 print_all <- function(object, ...) {
   print.igraph(object, full=TRUE, ...)
 }
@@ -537,7 +534,6 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
 #' @rdname print.igraph
 #' @method summary igraph
 #' @export
-
 summary.igraph <- function(object, ...) {
   .print.header(object)
   invisible(object)

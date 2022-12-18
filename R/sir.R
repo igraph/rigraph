@@ -99,5 +99,4 @@
 #' sm <- sir(g, beta=5, gamma=1)
 #' plot(sm)
 #' @export
-
 sir <- sir

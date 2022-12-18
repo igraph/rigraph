@@ -96,7 +96,6 @@
 #' local_1_them_nhood <- local_scan(graph.us = pair$graph1,
 #'                                  graph.them = pair$graph2,
 #'                                  neighborhoods = Neigh_1)
-
 local_scan <- function(graph.us, graph.them=NULL, k=1, FUN=NULL,
                        weighted=FALSE, mode=c("out", "in", "all"),
                        neighborhoods=NULL, ...) {
@@ -293,7 +292,6 @@ local_scan <- function(graph.us, graph.them=NULL, k=1, FUN=NULL,
 #'
 #' scan_stat(graphs = tsg, k = 1, tau = 4, ell = 2)
 #' scan_stat(graphs = tsg, locality = "them", k = 1, tau = 4, ell = 2)
-
 scan_stat <- function(graphs, tau = 1, ell = 0,
                       locality = c("us", "them"), ...) {
 
@@ -356,7 +354,6 @@ scan_stat <- function(graphs, tau = 1, ell = 0,
 }
 
 #' @importFrom stats sd
-
 scan_vertex_norm <-function (input_stat, tau) {
   if (is.matrix(input_stat)) {
     n <- nrow(input_stat)
@@ -396,7 +393,6 @@ scan_vertex_norm <-function (input_stat, tau) {
 }
 
 #' @importFrom stats sd
-
 scan_temp_norm <- function (stat, tau, ell) {
   maxTime <- ncol(stat)
   Mtilde <- apply(stat, 2, max)

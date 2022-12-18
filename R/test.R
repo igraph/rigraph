@@ -38,7 +38,6 @@
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
-
 igraph_test <- function() {
   do.call(require, list("testthat"))
   tdir <- system.file("tests", package="igraph")
@@ -63,7 +62,6 @@ igraph_test <- function() {
 #' ## Compare to the package version
 #' packageDescription("igraph")$Version
 #' igraph_version()
-
 # R_igraph_vers -----------------------------------------------------------------------
 
 

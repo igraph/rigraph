@@ -71,7 +71,6 @@ cocitation <- function(graph, v=V(graph)) {
 }
 
 #' @export
-
 bibcoupling <- function(graph, v=V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")

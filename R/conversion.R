@@ -194,7 +194,6 @@ get.adjacency.sparse <- function(graph, type=c("both", "upper", "lower"),
 #' E(g)$weight <- runif(ecount(g))
 #' as_adjacency_matrix(g, attr="weight")
 #' @export
-
 as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
                                 attr=NULL, edges=FALSE, names=TRUE,
                                 sparse=igraph_opt("sparsematrices")) {
@@ -215,7 +214,6 @@ as_adjacency_matrix <- function(graph, type=c("both", "upper", "lower"),
 
 #' @export
 #' @rdname as_adjacency_matrix
-
 as_adj <- as_adjacency_matrix
 
 #' Convert a graph to an edge list
@@ -242,7 +240,6 @@ as_adj <- as_adjacency_matrix
 #' as_edgelist(g)
 #'
 #' @export
-
 as_edgelist <- function(graph, names=TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -343,7 +340,6 @@ as.directed <- as.directed
 #' combined. Please see \code{\link{attribute.combination}} for details on
 #' this.
 #' @export
-
 as.undirected <- function(graph, mode=c("collapse", "each", "mutual"), edge.attr.comb=igraph_opt("edge.attr.comb")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -429,7 +425,6 @@ as_adj_list <- function(graph,
 #' @rdname as_adj_list
 #' @aliases get.adjlist
 #' @export
-
 as_adj_edge_list <- function(graph,
                              mode=c("all", "out", "in", "total"),
                              loops=c("twice", "once", "ignore")) {
@@ -500,7 +495,6 @@ as_adj_edge_list <- function(graph,
 #' g4
 #' }
 #' @export
-
 graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
                                  unlist.attrs=TRUE) {
 
@@ -587,7 +581,6 @@ graph_from_graphnel <- function(graphNEL, name=TRUE, weight=TRUE,
 #' g4
 #' }
 #' @export
-
 as_graphnel <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not an igraph graph")
@@ -828,7 +821,6 @@ as_incidence_matrix <- function(graph, types=NULL, attr=NULL,
 #' @param what Character constant, whether to return info about vertices,
 #' edges, or both. The default is \sQuote{edges}.
 #' @export
-
 as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 
   if (!is_igraph(x)) { stop("Not a graph object") }
@@ -909,7 +901,6 @@ as_data_frame <- function(x, what=c("edges", "vertices", "both")) {
 #' ecount(g3)
 #' which_multiple(g3)
 #' @export
-
 graph_from_adj_list <- graph_from_adj_list
 
 
@@ -934,7 +925,6 @@ graph_from_adj_list <- graph_from_adj_list
 #'         with_edge_(weight = 1:10, color = "green")
 #'       )
 #' as_long_data_frame(g)
-
 as_long_data_frame <- function(graph) {
 
   if (!is_igraph(graph)) { stop("Not a graph object") }

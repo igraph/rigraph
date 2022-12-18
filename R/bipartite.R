@@ -180,5 +180,4 @@ bipartite_projection <- function(graph, types=NULL,
 #' g3 <- add_edges(g3, c(1,3))
 #' bipartite_mapping(g3)
 #' @export
-
 bipartite_mapping <- bipartite_mapping

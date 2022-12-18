@@ -103,7 +103,6 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' V(g2)$name <- letters[11:20]
 #' print_all(g1 %du% g2)
 #' @export
-
 disjoint_union <- function(...) {
 
   graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
@@ -170,7 +169,6 @@ disjoint_union <- function(...) {
 
 #' @export
 #' @rdname disjoint_union
-
 "%du%" <- function(x,y) {
   disjoint_union(x,y)
 }
@@ -289,13 +287,11 @@ disjoint_union <- function(...) {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-
 union <- function(...)
   UseMethod("union")
 
 #' @method union default
 #' @export
-
 union.default <- function(...) {
   base::union(...)
 }
@@ -344,14 +340,12 @@ union.default <- function(...) {
 #'                   H-F:G, H-I-J)
 #' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
 #' print_all(net1 %u% net2)
-
 union.igraph <- function(..., byname="auto") {
   .igraph.graph.union.or.intersection("union", ..., byname=byname,
                                       keep.all.vertices=TRUE)
 }
 
 #' @export
-
 "%u%" <- function(x,y) {
   union(x,y)
 }
@@ -370,7 +364,6 @@ union.igraph <- function(..., byname="auto") {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-
 intersection <- function(...)
   UseMethod("intersection")
 
@@ -420,7 +413,6 @@ intersection <- function(...)
 #'                   H-F:G, H-I-J)
 #' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
 #' print_all(net1 %s% net2)
-
 intersection.igraph <- function(..., byname="auto",
                                 keep.all.vertices=TRUE) {
   .igraph.graph.union.or.intersection("intersection", ...,
@@ -429,7 +421,6 @@ intersection.igraph <- function(..., byname="auto",
 }
 
 #' @export
-
 "%s%" <- function(x,y) {
   intersection(x,y)
 }
@@ -448,7 +439,6 @@ intersection.igraph <- function(..., byname="auto",
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-
 difference <- function(...)
   UseMethod("difference")
 
@@ -500,7 +490,6 @@ difference <- function(...)
 #' G <- wheel %m% sstar
 #' print_all(G)
 #' plot(G, layout=layout_nicely(wheel))
-
 difference.igraph <- function(big, small, byname="auto", ...) {
 
   if (!is_igraph(big) || !is_igraph(small)) {
@@ -543,7 +532,6 @@ difference.igraph <- function(big, small, byname="auto", ...) {
 }
 
 #' @export
-
 "%m%" <- function(x,y) {
   difference(x,y)
 }
@@ -718,7 +706,6 @@ compose <- function(g1, g2, byname="auto") {
 }
 
 #' @export
-
 "%c%" <- function(x,y) {
   compose(x,y)
 }
@@ -764,14 +751,12 @@ compose <- function(g1, g2, byname="auto") {
 #'
 #' g <- make_ring(10) + edges(1:10)
 #' plot(g)
-
 edge <- function(...) {
   structure(list(...), class="igraph.edge")
 }
 
 #' @export
 #' @rdname edge
-
 edges <- edge
 
 #' Helper function for adding and deleting vertices
@@ -802,14 +787,12 @@ edges <- edge
 #'   vertices('X', 'Y')
 #' g
 #' plot(g)
-
 vertex <- function(...) {
   structure(list(...), class="igraph.vertex")
 }
 
 #' @export
 #' @rdname vertex
-
 vertices <- vertex
 
 #' Helper function to add or delete edges along a path
@@ -850,7 +833,6 @@ vertices <- vertex
 #'
 #' g4 <- g3 + path(c("f", "c", "j", "d"), width=1:3, color="green")
 #' E(g4)[[]]
-
 path <- function(...) {
   structure(list(...), class="igraph.path")
 }
@@ -952,7 +934,6 @@ path <- function(...) {
 #' g <- g + edges(sample(V(g), 10, replace = TRUE), color = "red")
 #' g$layout <- layout_in_circle
 #' plot(g)
-
 `+.igraph` <- function(e1, e2) {
   if (!is_igraph(e1) && is_igraph(e2)) {
     tmp <- e1
@@ -1082,7 +1063,6 @@ path <- function(...) {
 #'
 #' @method - igraph
 #' @export
-
 `-.igraph` <- function(e1, e2) {
   if (missing(e2)) {
     stop("Non-numeric argument to negation operator")
@@ -1132,7 +1112,6 @@ path <- function(...) {
 #'
 #' @examples
 #' rings <- make_ring(5) * 5
-
 rep.igraph <- function(x, n, mark = TRUE, ...) {
 
   if (n < 0) stop("Number of replications must be positive")
@@ -1148,7 +1127,6 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @rdname rep.igraph
 #' @method * igraph
 #' @export
-
 `*.igraph` <- function(x, n) {
 
   if (!is_igraph(x) && is_igraph(n)) {
@@ -1182,12 +1160,10 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
 #' reverse_edges(g, 2)
 #' @export
-
 reverse_edges <- reverse_edges
 
 #' @rdname reverse_edges
 #' @param x The input graph.
 #' @method t igraph
 #' @export
-
 t.igraph <- function(x) reverse_edges(x)

@@ -57,7 +57,6 @@
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-
 is_degseq <- function(out.deg, in.deg=NULL) {
   is_graphical(out.deg, in.deg, allowed.edge.types="all")
 }
@@ -98,5 +97,4 @@ is_degseq <- function(out.deg, in.deg=NULL) {
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-
 is_graphical <- is_graphical

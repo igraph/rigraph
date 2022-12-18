@@ -83,7 +83,6 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
-
 identical_graphs <- function(g1, g2, attrs=TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
   .Call(C_R_igraph_identical_graphs, g1, g2, as.logical(attrs))
@@ -124,27 +123,23 @@ add_vses_graph_ref <- function(vses, graph) {
 #'
 #' g2 <- g + 1
 #' graph_id(g2)
-
 graph_id <- function(x, ...)
   UseMethod("graph_id")
 
 #' @method graph_id igraph
 #' @export
-
 graph_id.igraph <- function(x, ...) {
   get_graph_id(x)
 }
 
 #' @method graph_id igraph.vs
 #' @export
-
 graph_id.igraph.vs <- function(x, ...) {
   get_vs_graph_id(x) %||% NA_character_
 }
 
 #' @method graph_id igraph.es
 #' @export
-
 graph_id.igraph.es <- function(x, ...) {
   get_es_graph_id(x) %||% NA_character_
 }
@@ -208,7 +203,6 @@ set_complete_iterator <- function(x, value = TRUE) {
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' V(g2)
-
 V <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -308,7 +302,6 @@ unsafe_create_es <- function(graph, idx, es = NULL){
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
-
 E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -483,7 +476,6 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' x <- 2
 #' V(g)[.env$x]
 #'
-
 `[.igraph.vs` <- function(x, ..., na_ok = FALSE) {
 
   args <- lazy_dots(..., .follow_symbols = FALSE)
@@ -658,7 +650,6 @@ set_single_index <- function(x, value = TRUE) {
 #' V(g)[[]]
 #' V(g)[1:5]
 #' V(g)[[1:5]]
-
 `[[.igraph.vs` <- function(x, ...) {
   res <- x[...]
   set_single_index(res)
@@ -694,7 +685,6 @@ set_single_index <- function(x, value = TRUE) {
 #' E(g)
 #' E(g)[[]]
 #' E(g)[[.inc('A')]]
-
 `[[.igraph.es` <- function(x, ...) {
   res <- x[...]
   set_single_index(res)
@@ -828,7 +818,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' x <- 2
 #' E(g)[.env$x]
 #'
-
 `[.igraph.es` <- function(x, ...) {
 
   args <- lazy_dots(..., .follow_symbols = TRUE)
@@ -917,7 +906,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 }
 
 #' @export
-
 `%--%` <- function(f, t) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
@@ -928,7 +916,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 }
 
 #' @export
-
 `%->%` <- function(f, t) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
@@ -943,7 +930,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 }
 
 #' @export
-
 `%<-%` <- function(t, value) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
@@ -961,7 +947,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method [[<- igraph.vs
 #' @name igraph-vs-attributes
 #' @export
-
 `[[<-.igraph.vs` <- function(x, i, value) {
   if (! "name"  %in% names(attributes(value)) ||
       ! "value" %in% names(attributes(value))) {
@@ -974,14 +959,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method [<- igraph.vs
 #' @name igraph-vs-attributes
 #' @export
-
 `[<-.igraph.vs` <-  `[[<-.igraph.vs`
 
 #' @param i Index.
 #' @method [[<- igraph.es
 #' @name igraph-es-attributes
 #' @export
-
 `[[<-.igraph.es` <- function(x, i, value) {
   if (! "name"  %in% names(attributes(value)) ||
       ! "value" %in% names(attributes(value))) {
@@ -994,7 +977,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method [<- igraph.es
 #' @name igraph-es-attributes
 #' @export
-
 `[<-.igraph.es` <-  `[[<-.igraph.es`
 
 #' Query or set attributes of the vertices in a vertex sequence
@@ -1048,7 +1030,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' V(g)$color <- "blue"
 #' V(g)[giant_v]$color <- "orange"
 #' plot(g)
-
 `$.igraph.vs` <- function(x, name) {
   graph <- get_vs_graph(x)
   if (is.null(graph)) stop("Graph is unknown")
@@ -1100,7 +1081,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' E(g)$color <- "orange"
 #' E(g)[giant_v %--% giant_v]$color <- "blue"
 #' plot(g)
-
 `$.igraph.es` <- function(x, name) {
   graph <- get_es_graph(x)
   if (is.null(graph)) stop("Graph is unknown")
@@ -1118,7 +1098,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method $<- igraph.vs
 #' @name igraph-vs-attributes
 #' @export
-
 `$<-.igraph.vs` <- function(x, name, value) {
   if (is.null(get_vs_graph(x))) stop("Graph is unknown")
   attr(x, "name") <- name
@@ -1132,7 +1111,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 #' @family vertex and edge sequences
-
 `$<-.igraph.es` <- function(x, name, value) {
   if (is.null(get_es_graph(x))) stop("Graph is unknown")
   attr(x, "name") <- name
@@ -1142,7 +1120,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
 #' @name igraph-vs-attributes
 #' @export
-
 `V<-` <- function(x, value) {
   if (!is_igraph(x)) {
     stop("Not a graph object")
@@ -1162,7 +1139,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   \code{P} arguments.
 #' @name igraph-es-attributes
 #' @export
-
 `E<-` <- function(x, path=NULL, P=NULL, directed=NULL, value) {
   if (!is_igraph(x)) {
     stop("Not a graph object")
@@ -1216,7 +1192,6 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   set_vertex_attr("color", value = "red")
 #' V(g4)[[]]
 #' V(g4)[[2:5, 7:8]]
-
 print.igraph.vs <- function(x,
                             full = igraph_opt("print.full"),
                             id = igraph_opt("print.id"),
@@ -1305,7 +1280,6 @@ print.igraph.vs <- function(x,
 #' E(g4)
 #' E(g4)[[]]
 #' E(g4)[[1:5]]
-
 print.igraph.es <- function(x,
                             full = igraph_opt("print.full"),
                             id = igraph_opt("print.id"),
@@ -1481,7 +1455,6 @@ create_op_result <- function(parsed, result, class, args) {
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' V(g)[1, 1:5, 1:10, 5:10]
 #' V(g)[1, 1:5, 1:10, 5:10] %>% unique()
-
 unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
@@ -1502,7 +1475,6 @@ unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' E(g)[1, 1:5, 1:10, 5:10]
 #' E(g)[1, 1:5, 1:10, 5:10] %>% unique()
-
 unique.igraph.es <- function(x, incomparables = FALSE, ...) {
   x[!duplicated(x, incomparables = incomparables, ...)]
 }
@@ -1522,7 +1494,6 @@ unique.igraph.es <- function(x, incomparables = FALSE, ...) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' c(V(g)[1], V(g)['A'], V(g)[1:4])
-
 c.igraph.vs <- function(..., recursive = FALSE) {
   parsed <- parse_vs_op_args(...)
   res <- do_call(c, .args = parsed$args)
@@ -1544,7 +1515,6 @@ c.igraph.vs <- function(..., recursive = FALSE) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' c(E(g)[1], E(g)['A|B'], E(g)[1:4])
-
 c.igraph.es <- function(..., recursive = FALSE) {
   parsed <- parse_es_op_args(...)
   res <- do_call(c, .args = parsed$args)
@@ -1572,7 +1542,6 @@ c.igraph.es <- function(..., recursive = FALSE) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' union(V(g)[1:6], V(g)[5:10])
-
 union.igraph.vs <- function(...) {
   unique(c(...))
 }
@@ -1596,7 +1565,6 @@ union.igraph.vs <- function(...) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' union(E(g)[1:6], E(g)[5:9], E(g)['A|J'])
-
 union.igraph.es <- union.igraph.vs
 
 
@@ -1617,7 +1585,6 @@ union.igraph.es <- union.igraph.vs
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' intersection(E(g)[1:6], E(g)[5:9])
-
 intersection.igraph.vs <- function(...) {
   ifun <- function(x, y) {
     unique(y[match(as.vector(x), y, 0L)])
@@ -1643,7 +1610,6 @@ intersection.igraph.vs <- function(...) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' intersection(E(g)[1:6], E(g)[5:9])
-
 intersection.igraph.es <- intersection.igraph.vs
 
 
@@ -1666,7 +1632,6 @@ intersection.igraph.es <- intersection.igraph.vs
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' difference(V(g), V(g)[6:10])
-
 difference.igraph.vs <- function(big, small, ...) {
   if (!length(big)) {
     big
@@ -1695,7 +1660,6 @@ difference.igraph.vs <- function(big, small, ...) {
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' difference(V(g), V(g)[6:10])
-
 difference.igraph.es <- difference.igraph.vs
 
 
@@ -1710,7 +1674,6 @@ difference.igraph.es <- difference.igraph.vs
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' V(g) %>% rev()
-
 rev.igraph.vs <- function(x) {
   x[rev(seq_along(x))]
 }
@@ -1728,7 +1691,6 @@ rev.igraph.vs <- function(x) {
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
 #' E(g)
 #' E(g) %>% rev()
-
 rev.igraph.es <- rev.igraph.vs
 
 #' Convert a vertex or edge sequence to an ordinary vector
@@ -1756,14 +1718,12 @@ rev.igraph.es <- rev.igraph.vs
 #' V(g)$name <- letters[1:10]
 #' as_ids(V(g))
 #' as_ids(E(g))
-
 as_ids <- function(seq)
   UseMethod("as_ids")
 
 #' @method as_ids igraph.vs
 #' @rdname as_ids
 #' @export
-
 as_ids.igraph.vs <- function(seq) {
   names(seq) %||% as.vector(seq)
 }
@@ -1771,7 +1731,6 @@ as_ids.igraph.vs <- function(seq) {
 #' @method as_ids igraph.es
 #' @rdname as_ids
 #' @export
-
 as_ids.igraph.es <- function(seq) {
   attr(seq, "vnames") %||% as.vector(seq)
 }

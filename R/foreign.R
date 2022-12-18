@@ -101,7 +101,6 @@ write.graph.fromraw <- function(buffer, file) {
 #' @seealso \code{\link{write_graph}}
 #' @keywords graphs
 #' @export
-
 read_graph <- function(file, format=c("edgelist", "pajek", "ncol", "lgl",
                                "graphml", "dimacs", "graphdb", "gml", "dl"),
                        ...) {

@@ -25,7 +25,6 @@
 #' @param cutoff The maximum path length to consider when calculating the
 #' betweenness. If zero or negative then there is no such limit.
 #' @export
-
 estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
@@ -157,7 +156,6 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
 #' @export
-
 edge_betweenness <- function(graph, e=E(graph),
                              directed=TRUE, weights=NULL, cutoff=-1) {
   # Argument checks
@@ -185,7 +183,6 @@ edge_betweenness <- function(graph, e=E(graph),
 }
 
 #' @export
-
 estimate_edge_betweenness <- function(graph, e=E(graph),
                                       directed=TRUE, cutoff, weights=NULL) {
   edge_betweenness(graph, e, directed=directed, cutoff=cutoff, weights=weights)
@@ -293,7 +290,6 @@ estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", 
 
 #' @rdname arpack
 #' @export
-
 arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
                               ncv=3, ldv=0, ishift=1, maxiter=3000, nb=1,
                               mode=1, start=0, sigma=0.0, sigmai=0.0)
@@ -480,7 +476,6 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #'                                   which="LM", maxiter=2000))
 #' }
 #' @export
-
 arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
                    env=parent.frame(), complex=!sym) {
 
@@ -653,7 +648,6 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' spectrum(kite, which=list(pos="SM", howmany=2))$values
 #'
 #' @export
-
 spectrum <- spectrum
 
 eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
@@ -744,7 +738,6 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' #Compute eigenvector centrality scores
 #' eigen_centrality(g)
 #' @export
-
 eigen_centrality <- eigen_centrality
 
 
@@ -783,7 +776,6 @@ eigen_centrality <- eigen_centrality
 #' g <- make_ring(10)
 #' strength(g)
 #' @export
-
 strength <- strength
 
 
@@ -827,7 +819,6 @@ strength <- strength
 #' diversity(g2)
 #' diversity(g3)
 #' @export
-
 diversity <- diversity
 
 
@@ -877,7 +868,6 @@ diversity <- diversity
 #' ## A ring
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
-
 hub_score <- hub_score
 
 
@@ -929,7 +919,6 @@ hub_score <- hub_score
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
-
 authority_score <- authority_score
 
 
@@ -1016,7 +1005,6 @@ authority_score <- authority_score
 #' reset <- seq(vcount(g3))
 #' page_rank(g3, personalized=reset)$vector
 #' @export
-
 page_rank <- page_rank
 
 #' Harmonic centrality of vertices
@@ -1063,7 +1051,6 @@ page_rank <- page_rank
 #' harmonic_centrality(g2, mode="out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode="all")
 #'
-
 harmonic_centrality <- harmonic_centrality
 
 

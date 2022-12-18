@@ -157,7 +157,6 @@ igraph.i.spMatrix <- function(M) {
 #' @param seed Ignored.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
-
 srand <- function(seed) {
   warning("This function does nothing, as calling srand from R packages\n",
           "is now not allowed. If you want to reproduce your past\n",
@@ -187,5 +186,4 @@ srand <- function(seed) {
 #' M <- cbind( runif(100), runif(100) )
 #' convex_hull(M)
 #' @export
-
 convex_hull <- convex_hull

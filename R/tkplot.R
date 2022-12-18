@@ -575,7 +575,6 @@ tkplot <- function(graph, canvas.width=450, canvas.height=450, ...) {
 
 #' @rdname tkplot
 #' @export
-
 tk_close <- function(tkp.id, window.close=TRUE) {
   if (window.close) {
     cmd <- paste(sep="", "tkp.", tkp.id, "$top")
@@ -590,7 +589,6 @@ tk_close <- function(tkp.id, window.close=TRUE) {
 
 #' @rdname tkplot
 #' @export
-
 tk_off <- function() {
   eapply(.tkplot.env, function(tkp) { tcltk::tkdestroy(tkp$top) })
   rm(list=ls(.tkplot.env), envir=.tkplot.env)
@@ -599,7 +597,6 @@ tk_off <- function() {
 
 #' @rdname tkplot
 #' @export
-
 tk_fit <- function(tkp.id, width=NULL, height=NULL) {
   tkp <- .tkplot.get(tkp.id)
   if (is.null(width)) {
@@ -629,7 +626,6 @@ tk_fit <- function(tkp.id, width=NULL, height=NULL) {
 
 #' @rdname tkplot
 #' @export
-
 tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
   width  <- as.numeric(tcltk::tkwinfo("width", tkp$canvas))
@@ -655,7 +651,6 @@ tk_center <- function(tkp.id) {
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
 #' @export
-
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
   new_coords <- do_call(newlayout, .args=c(list(tkp$graph), list(...), params))
@@ -667,7 +662,6 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
 
 #' @rdname tkplot
 #' @export
-
 tk_postscript <- function(tkp.id) {
 
   tkp <- .tkplot.get(tkp.id)
@@ -681,7 +675,6 @@ tk_postscript <- function(tkp.id) {
 
 #' @rdname tkplot
 #' @export
-
 tk_coords <- function(tkp.id, norm=FALSE) {
   coords <- .tkplot.get(tkp.id, "coords")
   coords[,2] <- max(coords[,2]) - coords[,2]
@@ -698,7 +691,6 @@ tk_coords <- function(tkp.id, norm=FALSE) {
 
 #' @rdname tkplot
 #' @export
-
 tk_set_coords <- function(tkp.id, coords) {
   stopifnot(is.matrix(coords), ncol(coords)==2)
   .tkplot.set(tkp.id, "coords", coords)
@@ -708,7 +700,6 @@ tk_set_coords <- function(tkp.id, coords) {
 
 #' @rdname tkplot
 #' @export
-
 tk_rotate <- function(tkp.id, degree=NULL, rad=NULL) {
   coords <- .tkplot.get(tkp.id, "coords")
 
@@ -734,7 +725,6 @@ tk_rotate <- function(tkp.id, degree=NULL, rad=NULL) {
 
 #' @rdname tkplot
 #' @export
-
 tk_canvas <- function(tkp.id) {
   .tkplot.get(tkp.id)$canvas
 }
@@ -1537,7 +1527,6 @@ tk_canvas <- function(tkp.id) {
 ###################################################################
 
 #' @importFrom grDevices palette
-
 .tkplot.convert.color <- function(col) {
   if (is.numeric(col)) {
     ## convert numeric color based on current palette

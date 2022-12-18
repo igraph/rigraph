@@ -49,7 +49,6 @@
 #' g <- make_ring(10)
 #' graph_attr(g)
 #' graph_attr(g, "name")
-
 graph_attr <- function(graph, name) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -83,7 +82,6 @@ graph_attr <- function(graph, name) {
 #' graph_attr(g) <- list(layout = layout_with_fr(g),
 #'                        name = "4-star layed out")
 #' plot(g)
-
 `graph_attr<-` <- function(graph, name, value) {
   if (missing(name)) {
     `graph.attributes<-`(graph, value)
@@ -110,7 +108,6 @@ graph_attr <- function(graph, name) {
 #'   set_graph_attr("layout", layout_with_fr)
 #' g
 #' plot(g)
-
 set_graph_attr <- function(graph, name, value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -120,7 +117,6 @@ set_graph_attr <- function(graph, name, value) {
 }
 
 #' @export
-
 graph.attributes <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -129,7 +125,6 @@ graph.attributes <- function(graph) {
 }
 
 #' @export
-
 "graph.attributes<-" <- function(graph, value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -165,7 +160,6 @@ graph.attributes <- function(graph) {
 #' vertex_attr(g, "label")
 #' vertex_attr(g)
 #' plot(g)
-
 vertex_attr <- function(graph, name, index = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -207,7 +201,6 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' vertex_attr(g, "label") <- V(g)$name
 #' g
 #' plot(g)
-
 `vertex_attr<-` <- function(graph, name, index = NULL, value) {
   if (missing(name)) {
     `vertex.attributes<-`(graph, index = index, value = value)
@@ -236,7 +229,6 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'   set_vertex_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
   i_set_vertex_attr(graph = graph, name = name, index = index,
                     value = value)
@@ -270,7 +262,6 @@ i_set_vertex_attr <- function(graph, name, index = NULL, value,
 }
 
 #' @export
-
 vertex.attributes <- function(graph, index = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -290,7 +281,6 @@ vertex.attributes <- function(graph, index = NULL) {
 }
 
 #' @export
-
 "vertex.attributes<-" <- function(graph, index = NULL, value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -348,7 +338,6 @@ vertex.attributes <- function(graph, index = NULL) {
 #'   set_edge_attr("color", value = "red")
 #' g
 #' plot(g, edge.width = E(g)$weight)
-
 edge_attr <- function(graph, name, index = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -387,7 +376,6 @@ edge_attr <- function(graph, name, index = NULL) {
 #' edge_attr(g, "label") <- E(g)$name
 #' g
 #' plot(g)
-
 `edge_attr<-` <- function(graph, name, index = NULL, value) {
   if (missing(name)) {
     `edge.attributes<-`(graph, index = index, value = value)
@@ -416,7 +404,6 @@ edge_attr <- function(graph, name, index = NULL) {
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-
 set_edge_attr <- function(graph, name, index = NULL, value) {
   i_set_edge_attr(graph = graph, name = name, index = index, value = value)
 }
@@ -449,7 +436,6 @@ i_set_edge_attr <- function(graph, name, index = NULL, value,
 }
 
 #' @export
-
 edge.attributes <- function(graph, index = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -471,7 +457,6 @@ edge.attributes <- function(graph, index = NULL) {
 }
 
 #' @export
-
 "edge.attributes<-" <- function(graph, index = NULL, value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -520,7 +505,6 @@ edge.attributes <- function(graph, index = NULL) {
 #' @examples
 #' g <- make_ring(10)
 #' graph_attr_names(g)
-
 graph_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -545,7 +529,6 @@ graph_attr_names <- function(graph) {
 #'   set_vertex_attr("color", value = rep("green", 10))
 #' vertex_attr_names(g)
 #' plot(g)
-
 vertex_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -570,7 +553,6 @@ vertex_attr_names <- function(graph) {
 #'   set_edge_attr("label", value = letters[1:10])
 #' edge_attr_names(g)
 #' plot(g)
-
 edge_attr_names <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -595,7 +577,6 @@ edge_attr_names <- function(graph) {
 #' graph_attr_names(g)
 #' g2 <- delete_graph_attr(g, "name")
 #' graph_attr_names(g2)
-
 delete_graph_attr <- function(graph, name) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -627,7 +608,6 @@ delete_graph_attr <- function(graph, name) {
 #' vertex_attr_names(g)
 #' g2 <- delete_vertex_attr(g, "name")
 #' vertex_attr_names(g2)
-
 delete_vertex_attr <- function(graph, name) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -659,7 +639,6 @@ delete_vertex_attr <- function(graph, name) {
 #' edge_attr_names(g)
 #' g2 <- delete_edge_attr(g, "name")
 #' edge_attr_names(g2)
-
 delete_edge_attr <- function(graph, name) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -757,7 +736,6 @@ is_weighted <- function(graph) {
 
 #' @rdname make_bipartite_graph
 #' @export
-
 is_bipartite <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -898,7 +876,6 @@ igraph.i.attribute.combination <- function(comb) {
 #' ## harmonic average of weights, names are dropped
 #' simplify(g, edge.attr.comb=list(weight=function(x) length(x)/sum(1/x),
 #'                                 name="ignore"))
-
 NULL
 
 #' Getting and setting graph attributes, shortcut
@@ -919,7 +896,6 @@ NULL
 #' g$name
 #' g$name <- "10-ring"
 #' g$name
-
 `$.igraph` <- function(x, name) {
   graph_attr(x, name)
 }
@@ -929,7 +905,6 @@ NULL
 #' @method $<- igraph
 #' @name igraph-dollar
 #' @export
-
 `$<-.igraph` <- function(x, name, value) {
   set_graph_attr(x, name, value)
 }
