@@ -30,19 +30,19 @@
   ga <- va <- ea <- ""
   gal <- graph_attr_names(object)
   if (length(gal) != 0) {
-    ga <- paste(sep="", gal, " (g/",
+    ga <- paste(sep = "", gal, " (g/",
                 .Call(C_R_igraph_get_attr_mode, object, 2L),
                 ")")
   }
   val <- vertex_attr_names(object)
   if (length(val) != 0) {
-    va <- paste(sep="", val, " (v/",
+    va <- paste(sep = "", val, " (v/",
                 .Call(C_R_igraph_get_attr_mode, object, 3L),
                 ")")
   }
   eal <- edge_attr_names(object)
   if (length(eal) != 0) {
-    ea <- paste(sep="", edge_attr_names(object), " (e/",
+    ea <- paste(sep = "", edge_attr_names(object), " (e/",
                 .Call(C_R_igraph_get_attr_mode, object, 4L),
                 ")")
   }
@@ -58,10 +58,10 @@
   title <- paste0(
     "IGRAPH ",
     if (id) paste0(substr(graph_id(object), 1, 7), " "),
-    c("U","D")[is_directed(object)+1],
-    c("-","N")[is_named(object)+1],
-    c("-","W")[is_weighted(object)+1],
-    c("-","B")[is_bipartite(object)+1],
+    c("U", "D")[is_directed(object) + 1],
+    c("-", "N")[is_named(object) + 1],
+    c("-", "W")[is_weighted(object) + 1],
+    c("-", "B")[is_bipartite(object) + 1],
     " ",
     vcount(object),
     " ",
@@ -70,17 +70,17 @@
   )
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
-    title <- substring(paste(sep="", title,
-                             as.character(object$name)[1]), 1, w-1)
+    title <- substring(paste(sep = "", title,
+                             as.character(object$name)[1]), 1, w - 1)
   }
-  cat(title, "\n", sep="")
+  cat(title, "\n", sep = "")
 
   atxt <- .get.attr.codes(object)
-  atxt <- paste(atxt[atxt!=""], collapse=", ")
+  atxt <- paste(atxt[atxt != ""], collapse = ", ")
   if (atxt != "") {
-    atxt <- strwrap(paste(sep="", "+ attr: ", atxt), prefix = "| ",
+    atxt <- strwrap(paste(sep = "", "+ attr: ", atxt), prefix = "| ",
                     initial = "")
-    cat(atxt, sep="\n")
+    cat(atxt, sep = "\n")
   }
   1 + if (length(atxt) == 1 && atxt == "") 0 else length(atxt)
 }
@@ -88,11 +88,11 @@
 #' @importFrom utils capture.output
 .print.graph.attributes <- function(x, full, max.lines) {
   list <- graph_attr_names(x)
-  if (length(list)!=0) {
+  if (length(list) != 0) {
     cat("+ graph attributes:\n")
     out <- capture.output({
       lapply(list, function(n) {
-        cat(sep="", "+ ", n, ":\n")
+        cat(sep = "", "+ ", n, ":\n")
         indent_print(graph_attr(x, n), .indent = "  ")
       })
       invisible(NULL)
@@ -140,34 +140,34 @@
   list <- vertex_attr_names(x)
   if (length(list) != 0) {
     mp <- getOption("max.print")
-    options(max.print=1000000000)
+    options(max.print = 1000000000)
     if (vc <= mp) {
       omitted.vertices <- 0
       ind <- as.numeric(V(x))
     } else {
-      omitted.vertices <- vc-mp
-      ind <- seq(length.out=mp)
+      omitted.vertices <- vc - mp
+      ind <- seq(length.out = mp)
     }
-    if (vc==0 ||
+    if (vc == 0 ||
         all(sapply(list, function(v)
                    is.numeric(vertex_attr(x, v)) ||
                    is.character(vertex_attr(x, v)) ||
                    is.logical(vertex_attr(x, v))))) {
       ## create a table
-      tab <- data.frame(v=paste(sep="", "[", ind, "]"), row.names="v")
+      tab <- data.frame(v = paste(sep = "", "[", ind, "]"), row.names = "v")
       for (i in list) {
         tab[i] <- vertex_attr(x, i, ind)
       }
       print(tab)
     } else {
       for (i in ind) {
-        cat(sep="", "[[", i, "]]\n")
+        cat(sep = "", "[[", i, "]]\n")
         lapply(list, function(n) {
-          cat(sep="", "[[", i, "]][[", n, "]]\n")
+          cat(sep = "", "[[", i, "]][[", n, "]]\n")
           print(vertex_attr(x, n, i))})
       }
     }
-    options(max.print=mp)
+    options(max.print = mp)
     if (omitted.vertices != 0) {
       cat(paste('[ reached getOption("max.print") -- omitted',
                 omitted.vertices, "vertices ]\n\n"))
@@ -178,14 +178,14 @@
 .print.edges.edgelist <- function(x, edges = E(x), names) {
   ec <- length(edges)
   list <- edge_attr_names(x)
-  list <- list[list!="name"]
+  list <- list[list != "name"]
   arrow <- ifelse(is_directed(x), "->", "--")
   if (is_named(x)) {
     cat("+ edges (vertex names) and their attributes:\n")
   } else {
     cat("+ edges and their attributes:\n")
   }
-  if (names && ! "name" %in% vertex_attr_names(x)) {
+  if (names && !"name" %in% vertex_attr_names(x)) {
     names <- FALSE
   }
   if (names && "name" %in% vertex_attr_names(x) &&
@@ -199,26 +199,26 @@
   mp <- getOption("max.print")
   if (mp >= ec) {
     omitted.edges <- 0
-    el <- ends(x, edges, names=names)
+    el <- ends(x, edges, names = names)
   } else {
-    omitted.edges <- ec-mp
+    omitted.edges <- ec - mp
     el <- ends(x, ends[seq_len(mp)])
     if (names) { el[] <- V(x)$name[el] }
   }
   ename <- if ("name" %in% edge_attr_names(x)) {
-    paste(sep="", "'", E(x)$name, "'")
+    paste(sep = "", "'", E(x)$name, "'")
   } else {
-    seq(length.out=nrow(el))
+    seq(length.out = nrow(el))
   }
-  if (ec==0 ||
+  if (ec == 0 ||
       all(sapply(list, function(v) is.numeric(edge_attr(x, v)) |
-                 is.character(edge_attr(x,v)) |
+                 is.character(edge_attr(x, v)) |
                  is.logical(edge_attr(x, v))))) {
     ## create a table
-    tab <- data.frame(row.names=paste(sep="", "[", ename, "]"))
+    tab <- data.frame(row.names = paste(sep = "", "[", ename, "]"))
     if (is.numeric(el)) { w <- nchar(max(el)) } else { w <- max(nchar(el)) }
-    tab["edge"] <- paste(sep="", format(el[,1], width=w),
-                         arrow, format(el[,2], width=w))
+    tab["edge"] <- paste(sep = "", format(el[, 1], width = w),
+                         arrow, format(el[, 2], width = w))
     for (i in list) {
       tab[i] <- edge_attr(x, i)
     }
@@ -226,12 +226,12 @@
   } else {
     i <- 1
     apply(el, 1, function(v) {
-      cat(sep="", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2]);
+      cat(sep = "", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2]);
       lapply(list, function(n) {
-        cat(sep="", "\n[[", i, "]][[", n, "]]\n")
+        cat(sep = "", "\n[[", i, "]][[", n, "]]\n")
         print(edge_attr(x, n, i))})
       cat("\n")
-      i <<- i+1
+      i <<- i + 1
     })
   }
   if (omitted.edges != 0) {
@@ -270,8 +270,8 @@
         stringsAsFactors = FALSE,
         tail = as_ids(etail),
         head = as_ids(ehead),
-        tid  = as.vector(etail),
-        hid  = as.vector(ehead)
+        tid = as.vector(etail),
+        hid = as.vector(ehead)
       )
       if (length(ea)) {
         ea <- do_call(data.frame, .args = ea, stringsAsFactors = FALSE)
@@ -294,11 +294,11 @@
 .print.edges.compressed.all <- function(x, edges, names) {
 
   if (!is.null(x)) {
-    arrow <- c("--", "->")[is_directed(x)+1]
+    arrow <- c("--", "->")[is_directed(x) + 1]
 
-    el <- ends(x, edges, names=names)
-    pr <- paste(sep="", format(el[,1]), arrow, format(el[,2]))
-    print(pr, quote=FALSE)
+    el <- ends(x, edges, names = names)
+    pr <- paste(sep = "", format(el[, 1]), arrow, format(el[, 2]))
+    print(pr, quote = FALSE)
   } else {
     if (!is.null(attr(edges, "vnames"))) {
       print(as.vector(attr(edges, "vnames")), quote = FALSE)
@@ -316,7 +316,7 @@
 
   if (!is.null(x)) {
 
-    arrow <- c("--", "->")[is_directed(x)+1]
+    arrow <- c("--", "->")[is_directed(x) + 1]
 
     can_max <- NA
     el <- NA
@@ -328,10 +328,10 @@
         5
       } else if (q == "width") {
         el <<- ends(x, edges[seq_len(no)], names = names)
-        cummax(nchar(el[,1])) + nchar(arrow) + cummax(nchar(el[,2])) + 1
+        cummax(nchar(el[, 1])) + nchar(arrow) + cummax(nchar(el[, 2])) + 1
       } else if (q == "print") {
         el <<- el[seq_len(no), , drop = FALSE]
-        out <- paste(sep="", format(el[,1]), arrow, format(el[,2]))
+        out <- paste(sep = "", format(el[, 1]), arrow, format(el[, 2]))
         capture.output(print(out, quote = FALSE))
       } else if (q == "max") {
         can_max <<- no
@@ -360,38 +360,38 @@
   ## TODO: getOption("max.print")
   cat("+ edges:\n")
   vc <- vcount(x)
-  arrow <- c(" -- ", " -> ")[is_directed(x)+1]
-  al <- as_adj_list(x, mode="out")
-  w <- nchar(max(which(degree(x, mode="in") != 0)))
-  mpl <- trunc((getOption("width")-nchar(arrow)-nchar(vc)) / (w+1))
+  arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
+  al <- as_adj_list(x, mode = "out")
+  w <- nchar(max(which(degree(x, mode = "in") != 0)))
+  mpl <- trunc((getOption("width") - nchar(arrow) - nchar(vc)) / (w + 1))
   if (any(sapply(al, length) > mpl)) {
     ## Wrapping needed
     mw <- nchar(vcount(x))
-    sm <- paste(collapse="", rep(" ", mw+4))
+    sm <- paste(collapse = "", rep(" ", mw + 4))
     alstr <- lapply(seq_along(al), function(x) {
       len <- length(al[[x]])
-      fac <- rep(1:(len/mpl+1), each=mpl, length.out=len)
-      nei <- tapply(format(al[[x]], width=mw), fac, paste, collapse=" ")
-      mark <- paste(sep="", format(x, width=mw), arrow)
-      mark <- c(mark, rep(sm, max(0, length(nei)-1)))
-      paste(sep="", mark, nei)
+      fac <- rep(1:(len / mpl + 1), each = mpl, length.out = len)
+      nei <- tapply(format(al[[x]], width = mw), fac, paste, collapse = " ")
+      mark <- paste(sep = "", format(x, width = mw), arrow)
+      mark <- c(mark, rep(sm, max(0, length(nei) - 1)))
+      paste(sep = "", mark, nei)
     })
-    cat(unlist(alstr), sep="\n")
+    cat(unlist(alstr), sep = "\n")
   } else {
     alstr <- sapply(al, function(x) {
-      paste(format(x, width=w), collapse=" ")
+      paste(format(x, width = w), collapse = " ")
     })
-    mark <- paste(sep="", format(seq_len(vc)), arrow)
-    alstr <- paste(sep="", mark, alstr)
+    mark <- paste(sep = "", format(seq_len(vc)), arrow)
+    alstr <- paste(sep = "", mark, alstr)
     maxw <- max(nchar(alstr))
     sep <- "   "
-    ncol <- trunc((getOption("width")-1+nchar(sep)) / (maxw+nchar(sep)))
+    ncol <- trunc((getOption("width") - 1 + nchar(sep)) / (maxw + nchar(sep)))
     if (ncol > 1) {
-      alstr <- format(alstr, width=maxw, justify="left")
-      fac <- rep(1:(vc/ncol+1), each=ncol, length.out=vc)
-      alstr <- tapply(alstr, fac, paste, collapse=sep)
+      alstr <- format(alstr, width = maxw, justify = "left")
+      fac <- rep(1:(vc / ncol + 1), each = ncol, length.out = vc)
+      alstr <- tapply(alstr, fac, paste, collapse = sep)
     }
-    cat(alstr, sep="\n")
+    cat(alstr, sep = "\n")
   }
 }
 
@@ -399,19 +399,19 @@
   ## TODO getOption("max.print")
   cat("+ edges (vertex names):\n")
 
-  arrow <- c(" -- ", " -> ")[is_directed(x)+1]
+  arrow <- c(" -- ", " -> ")[is_directed(x) + 1]
   vn <- V(x)$name
 
-  al <- as_adj_list(x, mode="out")
-  alstr <- sapply(al, function(x) { paste(collapse=", ", vn[x]) })
-  alstr <- paste(sep="", format(vn), arrow, alstr)
-  alstr <- strwrap(alstr, exdent=max(nchar(vn))+nchar(arrow))
-  cat(alstr, sep="\n")
+  al <- as_adj_list(x, mode = "out")
+  alstr <- sapply(al, function(x) { paste(collapse = ", ", vn[x]) })
+  alstr <- paste(sep = "", format(vn), arrow, alstr)
+  alstr <- strwrap(alstr, exdent = max(nchar(vn)) + nchar(arrow))
+  cat(alstr, sep = "\n")
 }
 
 #' @export
 print_all <- function(object, ...) {
-  print.igraph(object, full=TRUE, ...)
+  print.igraph(object, full = TRUE, ...)
 }
 
 
@@ -493,11 +493,11 @@ print_all <- function(object, ...) {
 #' g
 #' summary(g)
 #'
-print.igraph <- function(x, full=igraph_opt("print.full"),
-                graph.attributes=igraph_opt("print.graph.attributes"),
-                vertex.attributes=igraph_opt("print.vertex.attributes"),
-                edge.attributes=igraph_opt("print.edge.attributes"),
-                names=TRUE, max.lines = igraph_opt("auto.print.lines"),
+print.igraph <- function(x, full = igraph_opt("print.full"),
+                graph.attributes = igraph_opt("print.graph.attributes"),
+                vertex.attributes = igraph_opt("print.vertex.attributes"),
+                edge.attributes = igraph_opt("print.edge.attributes"),
+                names = TRUE, max.lines = igraph_opt("auto.print.lines"),
                 id = igraph_opt("print.id"),
                 ...) {
 
@@ -513,11 +513,11 @@ print.igraph <- function(x, full=igraph_opt("print.full"),
     if (vertex.attributes) {
       head_lines <- head_lines + .print.vertex.attributes(x, full, max.lines)
     }
-    if (ecount(x)==0) {
+    if (ecount(x) == 0) {
       ## Do nothing
-    } else if (edge.attributes && length(edge_attr_names(x)) != 0 ) {
+    } else if (edge.attributes && length(edge_attr_names(x)) != 0) {
       .print.edges.edgelist(x, names = names)
-    } else if (median(degree(x, mode="out")) < 3) {
+    } else if (median(degree(x, mode = "out")) < 3) {
       .print.edges.compressed(x, names = names, max.lines = NULL)
     } else if (is_named(x)) {
       .print.edges.adjlist.named(x)

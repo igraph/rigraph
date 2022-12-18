@@ -17,7 +17,7 @@ test_that("cluster_edge_betweenness works", {
               prints_text("2 branches.*15 members.*height 31"))
   expect_that(print(d[[2]]),
               prints_text("2 branches.*19 members.*height 32"))
-  m2 <- cut_at(ebc, no=3)
+  m2 <- cut_at(ebc, no = 3)
   expect_that(modularity(g, m2),
-              equals(ebc$modularity[length(ebc$modularity)-2]))
+              equals(ebc$modularity[length(ebc$modularity) - 2]))
 })

@@ -55,11 +55,11 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(100, 3/100)
+#' g <- sample_gnp(100, 3 / 100)
 #' g_mst <- mst(g)
 #'
-mst <- function(graph, weights=NULL,
-                                  algorithm=NULL, ...) {
+mst <- function(graph, weights = NULL,
+                                  algorithm = NULL, ...) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -73,16 +73,16 @@ mst <- function(graph, weights=NULL,
     }
   }
 
-  if (algorithm=="unweighted") {
-    on.exit( .Call(C_R_igraph_finalizer) )
+  if (algorithm == "unweighted") {
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_minimum_spanning_tree_unweighted, graph)
-  } else if (algorithm=="prim") {
-    if (is.null(weights) && ! "weight" %in% edge_attr_names(graph)) {
+  } else if (algorithm == "prim") {
+    if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
       stop("edges weights must be supplied for Prim's algorithm")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
   } else {
     stop("Invalid algorithm")

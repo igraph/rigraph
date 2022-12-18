@@ -26,12 +26,12 @@
 i.parse.plot.params <- function(graph, params) {
 
   ## store the arguments
-  p <- list(vertex=list(), edge=list(), plot=list())
+  p <- list(vertex = list(), edge = list(), plot = list())
   for (n in names(params)) {
-    if (substr(n, 1, 7)=="vertex.") {
+    if (substr(n, 1, 7) == "vertex.") {
       nn <- substring(n, 8)
       p[["vertex"]][[nn]] <- params[[n]]
-    } else if (substr(n, 1, 5)=="edge.") {
+    } else if (substr(n, 1, 5) == "edge.") {
       nn <- substring(n, 6)
       p[["edge"]][[nn]] <- params[[n]]
     } else {
@@ -39,8 +39,8 @@ i.parse.plot.params <- function(graph, params) {
     }
   }
 
-  func <- function(type, name, range=NULL, dontcall=FALSE) {
-    if (! type %in% names(p)) {
+  func <- function(type, name, range = NULL, dontcall = FALSE) {
+    if (!type %in% names(p)) {
       stop("Invalid plot option type")
     }
     ret <- function() {
@@ -49,12 +49,12 @@ i.parse.plot.params <- function(graph, params) {
         v <- v(graph)
       }
       if (is.null(range)) {
-        return (v)
+        return(v)
       } else {
-        if (length(v)==1) {
+        if (length(v) == 1) {
           return(rep(v, length(range)))
         } else {
-          return (rep(v, length.out=max(range)+1)[[range+1]])
+          return(rep(v, length.out = max(range) + 1)[[range + 1]])
         }
       }
     }
@@ -63,18 +63,18 @@ i.parse.plot.params <- function(graph, params) {
       return(ret())
     } else {
       ## we don't have the parameter, check attributes first
-      if (type=="vertex" && name %in% vertex_attr_names(graph)) {
+      if (type == "vertex" && name %in% vertex_attr_names(graph)) {
         p[[type]][[name]] <- vertex_attr(graph, name)
         return(ret())
-      } else if (type=="edge" && name %in% edge_attr_names(graph)) {
+      } else if (type == "edge" && name %in% edge_attr_names(graph)) {
         p[[type]][[name]] <- edge_attr(graph, name)
         return(ret())
-      } else if (type=="plot" && name %in% graph_attr_names(graph)) {
+      } else if (type == "plot" && name %in% graph_attr_names(graph)) {
         p[[type]][[name]] <- graph_attr(graph, name)
         return(ret())
       } else {
         ## no attributes either, check igraph parameters
-        n <- paste(sep="", type, ".", name)
+        n <- paste(sep = "", type, ".", name)
         v <- igraph_opt(n)
         if (!is.null(v)) {
           p[[type]][[name]] <- v
@@ -88,10 +88,10 @@ i.parse.plot.params <- function(graph, params) {
 
   }
 
-  return (func)
+  return(func)
 }
 
-i.get.edge.labels <- function(graph, edge.labels=NULL) {
+i.get.edge.labels <- function(graph, edge.labels = NULL) {
 
   if (is.null(edge.labels)) {
     edge.labels <- rep(NA, ecount(graph))
@@ -100,7 +100,7 @@ i.get.edge.labels <- function(graph, edge.labels=NULL) {
   edge.labels
 }
 
-i.get.labels <- function(graph, labels=NULL) {
+i.get.labels <- function(graph, labels = NULL) {
 
   if (is.null(labels)) {
     if ("name" %in% vertex_attr_names(graph)) {
@@ -112,18 +112,18 @@ i.get.labels <- function(graph, labels=NULL) {
   labels
 }
 
-i.get.arrow.mode <- function(graph, arrow.mode=NULL) {
+i.get.arrow.mode <- function(graph, arrow.mode = NULL) {
 
   if (is.character(arrow.mode) &&
-      length(arrow.mode)==1 && substr(arrow.mode, 1, 2)=="a:") {
-    arrow.mode <- vertex_attr(graph, substring(arrow.mode,3))
+      length(arrow.mode) == 1 && substr(arrow.mode, 1, 2) == "a:") {
+    arrow.mode <- vertex_attr(graph, substring(arrow.mode, 3))
   }
 
   if (is.character(arrow.mode)) {
     tmp <- numeric(length(arrow.mode))
-    tmp[ arrow.mode %in% c("<", "<-") ] <- 1
-    tmp[ arrow.mode %in% c(">", "->") ] <- 2
-    tmp[ arrow.mode %in% c("<>", "<->") ] <- 3
+    tmp[arrow.mode %in% c("<", "<-")] <- 1
+    tmp[arrow.mode %in% c(">", "->")] <- 2
+    tmp[arrow.mode %in% c("<>", "<->")] <- 3
     arrow.mode <- tmp
   }
 
@@ -157,9 +157,9 @@ i.get.xlab <- function(graph) {
 
 igraph.check.shapes <- function(x) {
   xx <- unique(x)
-  bad.shapes <- ! xx %in% ls(.igraph.shapes)
+  bad.shapes <- !xx %in% ls(.igraph.shapes)
   if (any(bad.shapes)) {
-    bs <- paste(xx[bad.shapes], collapse=", ")
+    bs <- paste(xx[bad.shapes], collapse = ", ")
     stop("Bad vertex shape(s): ", bs, ".")
   }
   x
@@ -201,21 +201,21 @@ i.postprocess.layout <- function(maybe_layout) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph( c(0,1,1,0,1,2,1,3,1,3,1,3,
-#'               2,3,2,3,2,3,2,3,0,1)+1 )
+#' g <- graph(c(0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
+#'               2, 3, 2, 3, 2, 3, 2, 3, 0, 1) + 1)
 #'
 #' curve_multiple(g)
 #'
 #' set.seed(42)
 #' plot(g)
 #'
-curve_multiple <- function(graph, start=0.5) {
-  el <- apply(as_edgelist(graph, names=FALSE), 1, paste, collapse=":")
-  ave(rep(NA, length(el)), el, FUN=function(x) {
+curve_multiple <- function(graph, start = 0.5) {
+  el <- apply(as_edgelist(graph, names = FALSE), 1, paste, collapse = ":")
+  ave(rep(NA, length(el)), el, FUN = function(x) {
     if (length(x) == 1) {
       return(0)
     } else {
-      return(seq(-start, start, length.out=length(x)))
+      return(seq(-start, start, length.out = length(x)))
     }
   })
 }
@@ -910,57 +910,57 @@ structure(c(16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
 16777215L, 16777215L, 16777215L, 16777215L, 16777215L, 16777215L,
 16777215L, 16777215L, 16777215L), .Dim = c(64L, 64L), class = "nativeRaster", channels = 4L)
 
-i.vertex.default <- list(color=1,
-                         size=15,
-                         size2=15,
-                         label=i.get.labels,
-                         label.degree=-pi/4,
-                         label.color="darkblue",
-                         label.dist=0,
-                         label.family="serif",
-                         label.font=1,
-                         label.cex=1,
-                         frame.color="black",
-                         frame.width=1,
-                         shape="circle",
-                         pie=1,
-                         pie.color=list(c("white", "lightblue", "mistyrose",
+i.vertex.default <- list(color = 1,
+                         size = 15,
+                         size2 = 15,
+                         label = i.get.labels,
+                         label.degree = -pi / 4,
+                         label.color = "darkblue",
+                         label.dist = 0,
+                         label.family = "serif",
+                         label.font = 1,
+                         label.cex = 1,
+                         frame.color = "black",
+                         frame.width = 1,
+                         shape = "circle",
+                         pie = 1,
+                         pie.color = list(c("white", "lightblue", "mistyrose",
                            "lightcyan", "lavender", "cornsilk")),
-                         pie.angle=45,
-                         pie.density=-1,
-                         pie.lty=1,
-                         raster=.igraph.logo.raster)
+                         pie.angle = 45,
+                         pie.density = -1,
+                         pie.lty = 1,
+                         raster = .igraph.logo.raster)
 
-i.edge.default <- list(color="darkgrey",
-                       label=i.get.edge.labels,
-                       lty=1,
-                       width=1,
-                       loop.angle=0,
-                       loop.angle2=0,
-                       label.family="serif",
-                       label.font=1,
-                       label.cex=1,
-                       label.color="darkblue",
-                       label.x=NULL,
-                       label.y=NULL,
-                       arrow.size=1,
-                       arrow.mode=i.get.arrow.mode,
-                       curved=curve_multiple,
-                       arrow.width=1)
+i.edge.default <- list(color = "darkgrey",
+                       label = i.get.edge.labels,
+                       lty = 1,
+                       width = 1,
+                       loop.angle = 0,
+                       loop.angle2 = 0,
+                       label.family = "serif",
+                       label.font = 1,
+                       label.cex = 1,
+                       label.color = "darkblue",
+                       label.x = NULL,
+                       label.y = NULL,
+                       arrow.size = 1,
+                       arrow.mode = i.get.arrow.mode,
+                       curved = curve_multiple,
+                       arrow.width = 1)
 
-i.plot.default <- list(palette=categorical_pal(8),
-                       layout=layout_nicely,
-                       margin=c(0,0,0,0),
-                       rescale=TRUE,
-                       asp=1,
-                       frame=FALSE,
-                       main=i.get.main,
-                       sub="",
-                       xlab=i.get.xlab,
-                       ylab="")
+i.plot.default <- list(palette = categorical_pal(8),
+                       layout = layout_nicely,
+                       margin = c(0, 0, 0, 0),
+                       rescale = TRUE,
+                       asp = 1,
+                       frame = FALSE,
+                       main = i.get.main,
+                       sub = "",
+                       xlab = i.get.xlab,
+                       ylab = "")
 
 i.default.values <- new.env()
 
 i.default.values[["vertex"]] <- i.vertex.default
-i.default.values[["edge"]]   <- i.edge.default
-i.default.values[["plot"]]   <- i.plot.default
+i.default.values[["edge"]] <- i.edge.default
+i.default.values[["plot"]] <- i.plot.default

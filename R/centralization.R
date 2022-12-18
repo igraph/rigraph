@@ -71,19 +71,19 @@ NULL
 #'
 #' @examples
 #' # A BA graph is quite centralized
-#' g <- sample_pa(1000, m=4)
+#' g <- sample_pa(1000, m = 4)
 #' centr_degree(g)$centralization
-#' centr_clo(g, mode="all")$centralization
-#' centr_eigen(g, directed=FALSE)$centralization
+#' centr_clo(g, mode = "all")$centralization
+#' centr_eigen(g, directed = FALSE)$centralization
 #'
 #' # Calculate centralization from pre-computed scores
 #' deg <- degree(g)
-#' tmax <- centr_degree_tmax(g, loops=FALSE)
+#' tmax <- centr_degree_tmax(g, loops = FALSE)
 #' centralize(deg, tmax)
 #'
 #' # The most centralized graph according to eigenvector centrality
-#' g0 <- graph( c(2,1), n=10, dir=FALSE )
-#' g1 <- make_star(10, mode="undirected")
+#' g0 <- graph(c(2, 1), n = 10, dir = FALSE)
+#' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
 centralize <- centralize
@@ -147,7 +147,7 @@ centr_degree <- centr_degree
 #' centr_degree(g, normalized = FALSE)$centralization %>%
 #'  `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
-centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "total"), loops=FALSE) {
+centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "in", "total"), loops = FALSE) {
   # Compatibility check with pre-igraph 1.3.0
   if (missing(loops)) {
     warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
@@ -155,10 +155,10 @@ centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "t
   # Argument checks
   if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
   nodes <- as.integer(nodes)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   loops <- as.logical(loops)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
 
@@ -198,7 +198,7 @@ centr_degree_tmax <- function(graph=NULL, nodes=0, mode=c("all", "out", "in", "t
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-centr_betw <- function(graph, directed=TRUE, nobigint=TRUE, normalized=TRUE) {
+centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   directed <- as.logical(directed)
@@ -208,7 +208,7 @@ centr_betw <- function(graph, directed=TRUE, nobigint=TRUE, normalized=TRUE) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_centralization_betweenness, graph, directed, normalized)
 
@@ -336,7 +336,7 @@ centr_clo_tmax <- centr_clo_tmax
 #' centr_eigen(g, directed = FALSE)$centralization
 #'
 #' # The most centralized graph according to eigenvector centrality
-#' g0 <- make_graph(c(2,1), n = 10, dir = FALSE)
+#' g0 <- make_graph(c(2, 1), n = 10, dir = FALSE)
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization

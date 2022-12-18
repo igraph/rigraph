@@ -1,13 +1,13 @@
 mysort <- function(x) {
   xl <- sapply(x, length)
   x <- lapply(x, sort)
-  xc <- sapply(x, paste, collapse="-")
+  xc <- sapply(x, paste, collapse = "-")
   x[order(xl, xc)]
 }
 
 unvs <- function(x) lapply(x, as.vector)
 
-bk4 <- function(graph, min=0, max=Inf) {
+bk4 <- function(graph, min = 0, max = Inf) {
 
   Gamma <- function(v) { neighbors(graph, v) }
 
@@ -24,26 +24,26 @@ bk4 <- function(graph, min=0, max=Inf) {
       pres <- list()
       for (v in setdiff(P, Gamma(u))) {
 
-        p0 <- if (PX$PS > 1) { PX$PX[1:(PX$PS-1)] } else { numeric() }
+        p0 <- if (PX$PS > 1) { PX$PX[1:(PX$PS - 1)] } else { numeric() }
         p1 <- setdiff(P, Gamma(v))
         p2 <- intersect(P, Gamma(v))
         x1 <- intersect(X, Gamma(v))
         x2 <- setdiff(X, Gamma(v))
         x0 <- if (PX$XE < length(PX$PX)) {
-          PX$PX[(PX$XE+1):length(PX$PX)]
+          PX$PX[(PX$XE + 1):length(PX$PX)]
         } else {
           numeric()
         }
 
-        newPX <- list(PX=c(p0, p1, p2, x1, x2, x0),
-                      PS=length(p0) + length(p1) + 1,
-                      PE=length(p0) + length(p1) + length(p2),
-                      XS=length(p0) + length(p1) + length(p2) + 1,
-                      XE=length(p0) + length(p1) + length(p2) + length(x1))
+        newPX <- list(PX = c(p0, p1, p2, x1, x2, x0),
+                      PS = length(p0) + length(p1) + 1,
+                      PE = length(p0) + length(p1) + length(p2),
+                      XS = length(p0) + length(p1) + length(p2) + 1,
+                      XE = length(p0) + length(p1) + length(p2) + length(x1))
 
         pres <- c(pres, bkpivot(newPX, c(R, v)))
 
-        vpos <- which(PX$PX==v)
+        vpos <- which(PX$PX == v)
         tmp <- PX$PX[PX$PE]
         PX$PX[PX$PE] <- v
         PX$PX[vpos] <- tmp
@@ -61,17 +61,17 @@ bk4 <- function(graph, min=0, max=Inf) {
   cord <- order(coreness(graph))
   for (v in seq_along(cord)) {
     if (v != length(cord)) {
-      P <- intersect(Gamma(cord[v]), cord[(v+1):length(cord)])
+      P <- intersect(Gamma(cord[v]), cord[(v + 1):length(cord)])
     } else {
       P <- numeric()
     }
     if (v != 1) {
-      X <- intersect(Gamma(cord[v]), cord[1:(v-1)])
+      X <- intersect(Gamma(cord[v]), cord[1:(v - 1)])
     } else {
       X <- numeric()
     }
-    PX <- list(PX=c(P, X), PS=1, PE=length(P),
-               XS=length(P)+1, XE=length(P)+length(X))
+    PX <- list(PX = c(P, X), PS = 1, PE = length(P),
+               XS = length(P) + 1, XE = length(P) + length(X))
     res <- c(res, bkpivot(PX, cord[v]))
   }
   lapply(res, as.integer)
@@ -89,8 +89,8 @@ test_that("Maximal cliques work", {
   }
   G <- simplify(G)
 
-  cl1 <- mysort(bk4(G, min=3))
-  cl2 <- mysort(unvs(max_cliques(G, min=3)))
+  cl1 <- mysort(bk4(G, min = 3))
+  cl2 <- mysort(unvs(max_cliques(G, min = 3)))
 
   expect_that(cl1, is_identical_to(cl2))
 })
@@ -99,10 +99,10 @@ test_that("Maximal cliques work for subsets", {
   set.seed(42)
   G <- sample_gnp(100, .5)
 
-  cl1  <- mysort(unvs(max_cliques(G, min=8)))
+  cl1 <- mysort(unvs(max_cliques(G, min = 8)))
 
-  c1 <- unvs(max_cliques(G, min=8, subset=1:13))
-  c2 <- unvs(max_cliques(G, min=8, subset=14:100))
+  c1 <- unvs(max_cliques(G, min = 8, subset = 1:13))
+  c2 <- unvs(max_cliques(G, min = 8, subset = 14:100))
   cl2 <- mysort(c(c1, c2))
 
   expect_that(cl1, is_identical_to(cl2))
@@ -112,11 +112,11 @@ test_that("Counting maximal cliques works", {
   set.seed(42)
   G <- sample_gnp(100, .5)
 
-  cl1  <- count_max_cliques(G, min=8)
+  cl1 <- count_max_cliques(G, min = 8)
 
-  c1 <- count_max_cliques(G, min=8, subset=1:13)
-  c2 <- count_max_cliques(G, min=8, subset=14:100)
-  cl2 <- c1+c2
+  c1 <- count_max_cliques(G, min = 8, subset = 1:13)
+  c2 <- count_max_cliques(G, min = 8, subset = 14:100)
+  cl2 <- c1 + c2
 
   expect_that(cl1, is_identical_to(cl2))
 })

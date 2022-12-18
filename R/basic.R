@@ -35,7 +35,7 @@
 #' g <- make_ring(10)
 #' is_igraph(g)
 #' is_igraph(numeric(10))
-is_igraph <- function(graph){
+is_igraph <- function(graph) {
   "igraph" %in% class(graph)
 }
 
@@ -56,9 +56,9 @@ get.edge <- function(graph, id) {
     stop("No such edge")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_get_edge, graph, as.numeric(id)-1)
-  res+1
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(C_R_igraph_get_edge, graph, as.numeric(id) - 1)
+  res + 1
 }
 
 
@@ -76,7 +76,7 @@ get.edge <- function(graph, id) {
 #'
 #' @export
 head_of <- function(graph, es) {
-  create_vs(graph,  ends(graph, es, names = FALSE)[,2])
+  create_vs(graph, ends(graph, es, names = FALSE)[, 2])
 }
 
 #' Tails of the edge(s) in a graph
@@ -93,5 +93,5 @@ head_of <- function(graph, es) {
 #'
 #' @export
 tail_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[,1])
+  create_vs(graph, ends(graph, es, names = FALSE)[, 1])
 }

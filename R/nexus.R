@@ -24,7 +24,7 @@ makeNexusDatasetInfo <- function(entries) {
   dsi <- lapply(entries, "[", 2)
   nam <- sapply(entries, "[", 1)
 
-  attr <- nam=="attribute"
+  attr <- nam == "attribute"
   myattr <- unlist(dsi[attr])
   dsi <- dsi[!attr]
   nam <- nam[!attr]
@@ -32,18 +32,18 @@ makeNexusDatasetInfo <- function(entries) {
   class(dsi) <- "nexusDatasetInfo"
 
   if (length(myattr) != 0) {
-    myattr <- strsplit(myattr, "\n", fixed=TRUE)
+    myattr <- strsplit(myattr, "\n", fixed = TRUE)
     attrdat <- lapply(myattr, function(x) strsplit(x[1], " ")[[1]])
     myattr <- sapply(myattr, "[", 2)
-    dsi$attributes <- mapply(attrdat, myattr, SIMPLIFY=FALSE,
-                             FUN=function(dat, desc) {
-                               list(type=dat[1], datatype=dat[2], name=dat[3],
-                                    description=desc)
+    dsi$attributes <- mapply(attrdat, myattr, SIMPLIFY = FALSE,
+                             FUN = function(dat, desc) {
+                               list(type = dat[1], datatype = dat[2], name = dat[3],
+                                    description = desc)
                              })
   }
 
   dsi$id <- as.numeric(dsi$id)
-  dsi$tags <- strsplit(dsi$tags, ";", fixed=TRUE)[[1]]
+  dsi$tags <- strsplit(dsi$tags, ";", fixed = TRUE)[[1]]
 
   dsi
 }
@@ -61,7 +61,7 @@ print.nexusDatasetInfo <- function(x, ...) {
   if (is.null(x$attributes)) {
     nc[2] <- "?"
   } else if (any(sapply(x$attributes,
-                        function(X) X$name=="name" && X$type=="vertex"))) {
+                        function(X) X$name == "name" && X$type == "vertex"))) {
     nc[2] <- "N"
   }
   if ("weighted" %in% x$tags) {
@@ -70,49 +70,49 @@ print.nexusDatasetInfo <- function(x, ...) {
   if ("bipartite" %in% x$tags) {
     nc[4] <- "B"
   }
-  nc <- paste(nc, collapse="")
-  head <- paste(sep="", "NEXUS ", nc, " ", ve[1], " ", ve[2], " #",
+  nc <- paste(nc, collapse = "")
+  head <- paste(sep = "", "NEXUS ", nc, " ", ve[1], " ", ve[2], " #",
                 x$id, " ", x$sid, " -- ", x$name)
   if (nchar(head) > getOption("width")) {
-    head <- paste(sep="", substr(head, 1, getOption("width")-1), "+")
+    head <- paste(sep = "", substr(head, 1, getOption("width") - 1), "+")
   }
-  cat(head, sep="", "\n")
+  cat(head, sep = "", "\n")
   if (length(x$tags) != 0) {
-    tt <- strwrap(paste(sep="", "+ tags: ", paste(x$tags, collapse="; ")),
-                  initial="", prefix="  ")
-    cat(tt, sep="\n")
+    tt <- strwrap(paste(sep = "", "+ tags: ", paste(x$tags, collapse = "; ")),
+                  initial = "", prefix = "  ")
+    cat(tt, sep = "\n")
   }
   if ("networks" %in% names(x)) {
     nets <- strsplit(x$networks, " ")[[1]]
-    nn <- strwrap(paste(sep="", "+ nets: ", paste(nets, collapse="; ")),
-                  initial="", prefix="  ")
-    cat(nn, sep="\n")
+    nn <- strwrap(paste(sep = "", "+ nets: ", paste(nets, collapse = "; ")),
+                  initial = "", prefix = "  ")
+    cat(nn, sep = "\n")
   }
   attr <- x[["attributes"]]
   printed <- c("id", "sid", "vertices/edges", "name", "tags", "networks",
                "attributes")
-  x <- x[ setdiff(names(x), printed) ]
-  if (length(attr)>0) {
+  x <- x[setdiff(names(x), printed)]
+  if (length(attr) > 0) {
     dcode <- function(d) {
-      if (d=="numeric") return("n")
-      if (d=="string") return("c")
+      if (d == "numeric") return("n")
+      if (d == "string") return("c")
       "x"
     }
     cat("+ attr: ")
     astr <- sapply(attr, function(a) {
-      paste(sep="", a$name, " (", substr(a$type, 1, 1), "/",
+      paste(sep = "", a$name, " (", substr(a$type, 1, 1), "/",
             dcode(a$datatype), ")")
     })
-    cat(strwrap(paste(astr, collapse=", "), exdent=2), "\n")
+    cat(strwrap(paste(astr, collapse = ", "), exdent = 2), "\n")
   }
   for (i in names(x)) {
     xx <- strsplit(x[[i]], "\n")[[1]]
-    ff <- strwrap(paste(sep="", "+ ", i, ": ", xx[1]), initial="",
-                  prefix="  ")
-    xx <- unlist(sapply(xx[-1], strwrap, prefix="  "))
-    cat(ff, sep="\n")
-    if (length(xx)>0) {
-      cat(xx, sep="\n")
+    ff <- strwrap(paste(sep = "", "+ ", i, ": ", xx[1]), initial = "",
+                  prefix = "  ")
+    xx <- unlist(sapply(xx[-1], strwrap, prefix = "  "))
+    cat(ff, sep = "\n")
+    if (length(xx) > 0) {
+      cat(xx, sep = "\n")
     }
   }
   invisible(x)
@@ -125,26 +125,26 @@ summary.nexusDatasetInfoList <- function(object, ...) {
   s <- as.numeric(attr(object, "size"))
   t <- as.numeric(attr(object, "totalsize"))
   n <- attr(object, "name")
-  cat(sep="", "NEXUS ", o+1, "-", o+s, "/", t, " -- ", n, "\n")
+  cat(sep = "", "NEXUS ", o + 1, "-", o + s, "/", t, " -- ", n, "\n")
   invisible(object)
 }
 
 parseVE <- function(ve) {
-  if (length(ve)==0) { return(character(0)) }
+  if (length(ve) == 0) { return(character(0)) }
   ve <- strsplit(unname(ve), " ")
   ve <- lapply(ve, strsplit, "/")
   v <- lapply(ve, function(x) sapply(x, "[", 1))
   e <- lapply(ve, function(x) sapply(x, "[", 2))
   int <- function(x) {
-    if (length(unique(x))==1) {
+    if (length(unique(x)) == 1) {
       as.character(x[1])
     } else {
-      paste(sep="", min(x), "-", max(x))
+      paste(sep = "", min(x), "-", max(x))
     }
   }
   v <- sapply(v, int)
   e <- sapply(e, int)
-  paste(v, sep="/", e)
+  paste(v, sep = "/", e)
 }
 
 #' @method print nexusDatasetInfoList
@@ -152,30 +152,30 @@ parseVE <- function(ve) {
 print.nexusDatasetInfoList <- function(x, ...) {
   summary(x)
 
-  if (length(x)==0) { return(invisible(x)) }
+  if (length(x) == 0) { return(invisible(x)) }
 
   ve <- parseVE(unname(sapply(x, "[[", "vertices/edges")))
   nets <- sapply(x, function(y) length(strsplit(y$networks, " ")[[1]]))
   sid <- sapply(x, "[[", "sid")
-  if (any(nets>1)) {
-    sid[nets > 1] <- paste(sep="", sid[nets>1], ".", nets[nets>1])
+  if (any(nets > 1)) {
+    sid[nets > 1] <- paste(sep = "", sid[nets > 1], ".", nets[nets > 1])
   }
-  df <- data.frame(no=paste(sep="", "[", format(seq_along(x)), "] "),
-                   sid=format(sid),
-                   size=paste(sep="", " ", format(ve)),
-                   id=paste(sep="", " #", format(sapply(x, "[[", "id")), " "),
-                   name=sapply(x, "[[", "name"))
-  out <- do.call(paste, c(as.list(df), sep=""))
+  df <- data.frame(no = paste(sep = "", "[", format(seq_along(x)), "] "),
+                   sid = format(sid),
+                   size = paste(sep = "", " ", format(ve)),
+                   id = paste(sep = "", " #", format(sapply(x, "[[", "id")), " "),
+                   name = sapply(x, "[[", "name"))
+  out <- do.call(paste, c(as.list(df), sep = ""))
   long <- nchar(out) > getOption("width")
-  out <- paste(sep="", substr(out, 1, getOption("width")-1),
+  out <- paste(sep = "", substr(out, 1, getOption("width") - 1),
                ifelse(long, "+", ""))
-  cat(out, sep="\n")
+  cat(out, sep = "\n")
   invisible(x)
 }
 
-nexus.format.result <- function(l, name="") {
+nexus.format.result <- function(l, name = "") {
 
-  if (length(l)==0) {
+  if (length(l) == 0) {
     res <- list()
     class(res) <- "nexusDatasetInfoList"
     return(res)
@@ -183,12 +183,12 @@ nexus.format.result <- function(l, name="") {
 
   l <- lapply(l, function(x) c(sub("[ ]*:[^:]*$", "", x),
                                sub("^[^:]*:[ ]*", "", x)))
-  spos <- which(sapply(l, function(x) x[1]=="id"))
-  epos <- c((spos-1), length(l))
+  spos <- which(sapply(l, function(x) x[1] == "id"))
+  epos <- c((spos - 1), length(l))
   ehead <- epos[1]
   epos <- epos[-1]
 
-  res <- mapply(spos, epos, SIMPLIFY=FALSE, FUN=function(s, e)
+  res <- mapply(spos, epos, SIMPLIFY = FALSE, FUN = function(s, e)
                 makeNexusDatasetInfo(l[s:e]))
   class(res) <- "nexusDatasetInfoList"
 
@@ -360,10 +360,10 @@ nexus.format.result <- function(l, name="") {
 #' }
 #' @export
 #' @importFrom utils URLencode
-nexus_list <- function(tags=NULL, offset=0, limit=10,
-                       operator=c("or", "and"),
-                       order=c("date", "name", "popularity"),
-                       nexus.url=igraph_opt("nexus.url")) {
+nexus_list <- function(tags = NULL, offset = 0, limit = 10,
+                       operator = c("or", "and"),
+                       order = c("date", "name", "popularity"),
+                       nexus.url = igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
 
@@ -391,7 +391,7 @@ nexus_list <- function(tags=NULL, offset=0, limit=10,
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
+nexus_info <- function(id, nexus.url = igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
 
@@ -428,9 +428,9 @@ nexus_info <- function(id, nexus.url=igraph_opt("nexus.url")) {
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-nexus_get <- function(id, offset=0,
-                      order=c("date", "name", "popularity"),
-                      nexus.url=igraph_opt("nexus.url")) {
+nexus_get <- function(id, offset = 0,
+                      order = c("date", "name", "popularity"),
+                      nexus.url = igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
 
@@ -464,9 +464,9 @@ nexus_get <- function(id, offset=0,
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
-nexus_search <- function(q, offset=0, limit=10,
-                         order=c("date", "name", "popularity"),
-                         nexus.url=igraph_opt("nexus.url")) {
+nexus_search <- function(q, offset = 0, limit = 10,
+                         order = c("date", "name", "popularity"),
+                         nexus.url = igraph_opt("nexus.url")) {
 
   stop("The Nexus graph repository is not online any more")
 

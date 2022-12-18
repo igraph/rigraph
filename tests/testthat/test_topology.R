@@ -9,11 +9,11 @@ test_that("automorphisms works", {
 
 test_that("automorphisms works with colored graphs", {
   g <- make_full_graph(4)
-  expect_that(count_automorphisms(g, colors=c(1,2,1,2))$group_size, equals("4"))
+  expect_that(count_automorphisms(g, colors = c(1, 2, 1, 2))$group_size, equals("4"))
 
-  V(g)$color <- c(1,2,1,2)
+  V(g)$color <- c(1, 2, 1, 2)
   expect_that(count_automorphisms(g)$group_size, equals("4"))
-  expect_that(count_automorphisms(g, colors=NULL)$group_size, equals("24"))
+  expect_that(count_automorphisms(g, colors = NULL)$group_size, equals("24"))
 })
 
 
@@ -32,11 +32,11 @@ test_that("automorphism_group works", {
 
 test_that("automorphism_group works with colored graphs", {
   g <- make_full_graph(4)
-  aut <- lapply(automorphism_group(g, colors=c(1,2,1,2)), as.vector)
+  aut <- lapply(automorphism_group(g, colors = c(1, 2, 1, 2)), as.vector)
   aut <- aut[order(sapply(aut, '[[', 1))]
   expect_that(aut, equals(list(c(1, 4, 3, 2), c(3, 2, 1, 4))))
 
-  V(g)$color <- c(1,2,1,2)
+  V(g)$color <- c(1, 2, 1, 2)
   aut <- lapply(automorphism_group(g), as.vector)
   aut <- aut[order(sapply(aut, '[[', 1))]
   expect_that(aut, equals(list(c(1, 4, 3, 2), c(3, 2, 1, 4))))

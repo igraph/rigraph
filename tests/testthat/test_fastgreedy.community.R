@@ -20,7 +20,7 @@ test_that("cluster_fast_greedy works", {
               prints_text("2 branches.*17 members.*height 32"))
   expect_that(print(d[[2]]),
               prints_text("2 branches.*17 members.*height 30"))
-  m2 <- cut_at(fc, no=3)
+  m2 <- cut_at(fc, no = 3)
   expect_that(modularity(g, m2),
-              equals(fc$modularity[length(fc$modularity)-2]))
+              equals(fc$modularity[length(fc$modularity) - 2]))
 })

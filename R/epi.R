@@ -20,14 +20,14 @@
 ###################################################################
 
 #' @export
-time_bins <- function(x, middle=TRUE)
+time_bins <- function(x, middle = TRUE)
   UseMethod("time_bins")
 
 #' @method time_bins sir
 #' @rdname sir
 #' @export
 #' @importFrom stats IQR
-time_bins.sir <- function(x, middle=TRUE) {
+time_bins.sir <- function(x, middle = TRUE) {
   sir <- x
   if (!inherits(sir, "sir")) {
     stop("This is not an SIR model output")
@@ -36,9 +36,9 @@ time_bins.sir <- function(x, middle=TRUE) {
   big.time <- unlist(sapply(sir, "[[", "times"))
   medlen <- median(sapply(lapply(sir, "[[", "times"), length))
   ## Adhoc use of Freedman-Diaconis binwidth; rescale time accordingly.
-  w <- 2 * IQR(big.time) / (medlen^(1/3))
+  w <- 2 * IQR(big.time) / (medlen^(1 / 3))
   minbt <- min(big.time) ; maxbt <- max(big.time)
-  res <- seq(minbt, maxbt, length.out=ceiling((maxbt - minbt)/w))
+  res <- seq(minbt, maxbt, length.out = ceiling((maxbt - minbt) / w))
   if (middle) { res <- (res[-1] + res[-length(res)]) / 2 }
   res
 }
@@ -47,7 +47,7 @@ time_bins.sir <- function(x, middle=TRUE) {
 #' @method median sir
 #' @rdname sir
 #' @export
-median.sir <- function(x, na.rm=FALSE, ...) {
+median.sir <- function(x, na.rm = FALSE, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {
     stop("This is not an SIR model output")
@@ -56,18 +56,18 @@ median.sir <- function(x, na.rm=FALSE, ...) {
   big.N.NS <- unlist(sapply(sir, "[[", "NS"))
   big.N.NI <- unlist(sapply(sir, "[[", "NI"))
   big.N.NR <- unlist(sapply(sir, "[[", "NR"))
-  time.bin <- cut(times, time_bins(sir, middle=FALSE), include.lowest=TRUE)
-  NS <- tapply(big.N.NS, time.bin, median, na.rm=na.rm)
-  NI <- tapply(big.N.NI, time.bin, median, na.rm=na.rm)
-  NR <- tapply(big.N.NR, time.bin, median, na.rm=na.rm)
-  list(NS=NS, NI=NI, NR=NR)
+  time.bin <- cut(times, time_bins(sir, middle = FALSE), include.lowest = TRUE)
+  NS <- tapply(big.N.NS, time.bin, median, na.rm = na.rm)
+  NI <- tapply(big.N.NI, time.bin, median, na.rm = na.rm)
+  NR <- tapply(big.N.NR, time.bin, median, na.rm = na.rm)
+  list(NS = NS, NI = NI, NR = NR)
 }
 
 #' @importFrom stats quantile
 #' @method quantile sir
 #' @rdname sir
 #' @export
-quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
+quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
   if (!inherits(sir, "sir")) {
     stop("This is not an SIR model output")
@@ -75,9 +75,9 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
   comp <- toupper(igraph.match.arg(comp))
   times <- unlist(sapply(sir, "[[", "times"))
   big.N <- unlist(sapply(sir, function(x) { x[[comp]] }))
-  time.bin <- cut(times, time_bins(sir, middle=FALSE), include.lowest=TRUE)
+  time.bin <- cut(times, time_bins(sir, middle = FALSE), include.lowest = TRUE)
   res <- lapply(prob, function(pp) {
-    tapply(big.N, time.bin, function(x) { quantile(x, prob=pp) })
+    tapply(big.N, time.bin, function(x) { quantile(x, prob = pp) })
   })
   if (length(res) == 1) {
     res <- res[[1]]
@@ -138,14 +138,14 @@ quantile.sir <- function(x, comp=c("NI", "NS", "NR"), prob, ...) {
 #' @examples
 #'
 #' g <- sample_gnm(100, 100)
-#' sm <- sir(g, beta=5, gamma=1)
+#' sm <- sir(g, beta = 5, gamma = 1)
 #' plot(sm)
 #'
-plot.sir <- function(x, comp=c("NI", "NS", "NR"),
-                     median=TRUE, quantiles=c(0.1, 0.9), color=NULL,
-                     median_color=NULL, quantile_color=NULL,
-                     lwd.median=2, lwd.quantile=2, lty.quantile=3,
-                     xlim=NULL, ylim=NULL, xlab="Time", ylab=NULL, ...) {
+plot.sir <- function(x, comp = c("NI", "NS", "NR"),
+                     median = TRUE, quantiles = c(0.1, 0.9), color = NULL,
+                     median_color = NULL, quantile_color = NULL,
+                     lwd.median = 2, lwd.quantile = 2, lty.quantile = 3,
+                     xlim = NULL, ylim = NULL, xlab = "Time", ylab = NULL, ...) {
 
   sir <- x
 
@@ -158,15 +158,15 @@ plot.sir <- function(x, comp=c("NI", "NS", "NR"),
   }
 
   if (is.null(color)) {
-    color <- c(NI="skyblue", NS="pink", NR="palegoldenrod")[comp]
+    color <- c(NI = "skyblue", NS = "pink", NR = "palegoldenrod")[comp]
   }
   if (is.null(median_color)) {
-    median_color <- c(NI="blue", NS="red", NR="gold")[comp]
+    median_color <- c(NI = "blue", NS = "red", NR = "gold")[comp]
   }
   if (is.null(quantile_color)) {
-    quantile_color <- c(NI="blue", NS="red", NR="gold")[comp]
+    quantile_color <- c(NI = "blue", NS = "red", NR = "gold")[comp]
   }
-  quantile_color <- rep(quantile_color, length.out=length(quantiles))
+  quantile_color <- rep(quantile_color, length.out = length(quantiles))
 
   ns <- length(sir)
   if (is.null(xlim)) {
@@ -186,23 +186,23 @@ plot.sir <- function(x, comp=c("NI", "NS", "NR"),
   }
 
   # Plot the stochastic curves individually.
-  plot(0, 0, type="n", xlim=xlim, ylim=ylim, xlab=xlab, ylab=ylab, ...)
+  plot(0, 0, type = "n", xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, ...)
   lapply(seq_along(sir), function(i) {
-    lines(sir[[i]]$times, sir[[i]][[comp]], col=color[1])
+    lines(sir[[i]]$times, sir[[i]][[comp]], col = color[1])
   })
 
   # Plot the median and quantiles.
   if (median || length(quantiles) > 0) {
-    time.bin <- time_bins(sir, middle=TRUE)
+    time.bin <- time_bins(sir, middle = TRUE)
   }
   if (median) {
-    lines(time.bin, median(sir)[[comp]], type="l",
-          lwd=lwd.median, col=median_color)
+    lines(time.bin, median(sir)[[comp]], type = "l",
+          lwd = lwd.median, col = median_color)
   }
   for (i in seq_along(quantiles)) {
     my.ql <- quantile(sir, comp, quantiles[i])
-    lines(time.bin, my.ql, type="l", lty=lty.quantile,
-          lwd=lwd.quantile, col=quantile_color[i])
+    lines(time.bin, my.ql, type = "l", lty = lty.quantile,
+          lwd = lwd.quantile, col = quantile_color[i])
   }
 
   invisible()

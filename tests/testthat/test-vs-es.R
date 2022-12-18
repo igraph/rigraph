@@ -124,7 +124,7 @@ test_that("both edge and vertex names", {
   expect_equal(as.vector(es), 1:10)
   expect_equal(names(es), LETTERS[1:10])
   el <- as_edgelist(g)
-  expect_equal(attr(es, "vnames"), paste(el[,1], el[,2], sep = "|"))
+  expect_equal(attr(es, "vnames"), paste(el[, 1], el[, 2], sep = "|"))
 
   x1 <- es[LETTERS[4:7]]
   x2 <- E(g)[4:7]
@@ -133,7 +133,7 @@ test_that("both edge and vertex names", {
   expect_equal(attr(x1, "vnames"), attr(x2, "vnames"))
 
   y1 <- es[c('a|b', 'd|e')]
-  y2 <- E(g)[c(1,4)]
+  y2 <- E(g)[c(1, 4)]
   expect_equal(as.vector(y1), as.vector(y2))
   expect_equal(names(y1), names(y2))
   expect_equal(attr(y1, "vnames"), attr(y2, "vnames"))

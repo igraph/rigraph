@@ -1,9 +1,9 @@
 test_that("igraph_options works", {
 
-  igraph_options(verbose=TRUE)
+  igraph_options(verbose = TRUE)
   expect_true(igraph_opt("verbose"))
 
-  igraph_options(verbose=FALSE)
+  igraph_options(verbose = FALSE)
   expect_false(igraph_opt("verbose"))
 
 })

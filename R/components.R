@@ -24,14 +24,14 @@
 ###################################################################
 
 #' @export
-count_components <- function(graph, mode=c("weak", "strong")) {
+count_components <- function(graph, mode = c("weak", "strong")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak"=1, "strong"=2)
+  mode <- switch(mode, "weak" = 1, "strong" = 2)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_no_clusters, graph, as.numeric(mode))
 }
 
@@ -42,17 +42,17 @@ count_components <- function(graph, mode=c("weak", "strong")) {
 #' by the cluster sizes.
 #' @export
 #' @importFrom graphics hist
-component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
+component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
                                  ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
   cs <- components(graph, ...)$csize;
-  hi <- hist(cs, -1:max(cs), plot=FALSE)$density
+  hi <- hist(cs, -1:max(cs), plot = FALSE)$density
   if (mul.size) {
-    hi <- hi*1:max(cs)
-    hi <- hi/sum(hi)
+    hi <- hi * 1:max(cs)
+    hi <- hi / sum(hi)
   }
   if (!cumulative) {
     res <- hi
@@ -91,22 +91,22 @@ component_distribution <- function(graph, cumulative=FALSE, mul.size=FALSE,
 #' @examples
 #'
 #' # the diameter of each component in a random graph
-#' g <- sample_gnp(1000, 1/1000)
-#' components <- decompose(g, min.vertices=2)
+#' g <- sample_gnp(1000, 1 / 1000)
+#' components <- decompose(g, min.vertices = 2)
 #' sapply(components, diameter)
 #'
-decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
-                      min.vertices=0) {
+decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
+                      min.vertices = 0) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   mode <- igraph.match.arg(mode)
-  mode <- switch(mode, "weak"=1, "strong"=2)
+  mode <- switch(mode, "weak" = 1, "strong" = 2)
 
   if (is.na(max.comps)) {
-    max.comps=-1
+    max.comps = -1
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_decompose, graph, as.numeric(mode),
         as.numeric(max.comps), as.numeric(min.vertices))
 }
@@ -115,7 +115,7 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' Articulation points and bridges of a graph
 #'
 #' \code{articulation_points} finds the articulation points (or cut vertices)
-#" of a graph, while \code{bridges} finds the bridges (or cut-edges) of a graph.
+# " of a graph, while \code{bridges} finds the bridges (or cut-edges) of a graph.
 #'
 #' Articulation points or cut vertices are vertices whose removal increases the
 #' number of connected components in a graph. Similarly, bridges or cut-edges
@@ -123,7 +123,7 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' graph. If the original graph was connected, then the removal of a single
 #' articulation point or a single bridge makes it undirected. If a graph
 #' contains no articulation points, then its vertex connectivity is at least
-#" two. If a graph contains no bridges, then its edge connectivity is at least
+# " two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
 #'
 #' @aliases articulation.points articulation_points
@@ -139,9 +139,9 @@ decompose <- function(graph, mode=c("weak", "strong"), max.comps=NA,
 #' @keywords graphs
 #' @examples
 #'
-#' g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
+#' g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 #' clu <- components(g)$membership
-#' g <- add_edges(g, c(match(1, clu), match(2, clu)) )
+#' g <- add_edges(g, c(match(1, clu), match(2, clu)))
 #' articulation_points(g)
 #'
 #' g <- make_graph("krackhardt_kite")
@@ -186,9 +186,9 @@ bridges <- bridges
 #' @keywords graphs
 #' @examples
 #'
-#' g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
+#' g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 #' clu <- components(g)$membership
-#' g <- add_edges(g, c(which(clu==1), which(clu==2)))
+#' g <- add_edges(g, c(which(clu == 1), which(clu == 2)))
 #' bc <- biconnected_components(g)
 #' @export
 biconnected_components <- biconnected_components

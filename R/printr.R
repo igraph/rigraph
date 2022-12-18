@@ -118,7 +118,7 @@ head_print_callback <- function(x, max_lines, header, footer,
   cm <- x("width", no = can_max)
 
   ## How many rows we need if we print up to a certain point
-  no_rows <- ceiling(cm * seq_along(cm) /(ow - 4) )
+  no_rows <- ceiling(cm * seq_along(cm) / (ow - 4))
 
   ## So how many items should we print?
   no <- tail(which(no_rows <= max_lines), 1)

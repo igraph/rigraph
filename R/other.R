@@ -51,7 +51,7 @@ running_mean <- function(v, binwidth) {
     stop("Vector too short for this binwidth.")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_running_mean, v, binwidth)
 }
 
@@ -83,11 +83,11 @@ running_mean <- function(v, binwidth) {
 #' rs
 #'
 sample_seq <- function(low, high, length) {
-  if (length>high-low+1) {
+  if (length > high - low + 1) {
     stop("length too big for this interval")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_random_sample, as.numeric(low), as.numeric(high),
         as.numeric(length))
 }
@@ -129,7 +129,7 @@ handle_vertex_type_arg <- function(types, graph, required = T) {
   return(types)
 }
 
-igraph.match.arg <- function(arg, choices, several.ok=FALSE) {
+igraph.match.arg <- function(arg, choices, several.ok = FALSE) {
   if (missing(choices)) {
     formal.args <- formals(sys.function(sys.parent()))
     choices <- eval(formal.args[[deparse(substitute(arg))]])
@@ -138,15 +138,15 @@ igraph.match.arg <- function(arg, choices, several.ok=FALSE) {
   arg <- tolower(arg)
   choices <- tolower(choices)
 
-  match.arg(arg=arg, choices=choices, several.ok=several.ok)
+  match.arg(arg = arg, choices = choices, several.ok = several.ok)
 }
 
 igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
-    Matrix::sparseMatrix(dims=M$dim, i=M$i+1L, j=M$p+1L, x=M$x)
+    Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
   } else {
-    new("dgCMatrix", Dim=M$dim, Dimnames=list(NULL, NULL),
-        factors=list(), i=M$i, p=M$p, x=M$x)
+    new("dgCMatrix", Dim = M$dim, Dimnames = list(NULL, NULL),
+        factors = list(), i = M$i, p = M$p, x = M$x)
   }
 }
 
@@ -183,7 +183,7 @@ srand <- function(seed) {
 #' @keywords graphs
 #' @examples
 #'
-#' M <- cbind( runif(100), runif(100) )
+#' M <- cbind(runif(100), runif(100))
 #' convex_hull(M)
 #' @export
 convex_hull <- convex_hull

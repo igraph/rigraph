@@ -22,10 +22,10 @@ test_that("community detection functions work", {
   }
 
   fc <- cluster_fast_greedy(karate)
-  m1 <- modularity(karate, cut_at(fc, no=1))
-  m2 <- modularity(karate, cut_at(fc, no=2))
-  m3 <- modularity(karate, cut_at(fc, no=3))
-  m4 <- modularity(karate, cut_at(fc, no=4))
+  m1 <- modularity(karate, cut_at(fc, no = 1))
+  m2 <- modularity(karate, cut_at(fc, no = 2))
+  m3 <- modularity(karate, cut_at(fc, no = 3))
+  m4 <- modularity(karate, cut_at(fc, no = 4))
   expect_that(m1, equals(0))
   expect_that(m2, equals(0.3717948718))
   expect_that(m3, equals(0.3806706114))
@@ -44,7 +44,7 @@ test_that("community detection functions work", {
                            FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
                            FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
                            FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-                           FALSE, FALSE, FALSE, FALSE) ))
+                           FALSE, FALSE, FALSE, FALSE)))
 })
 
 test_that("creating communities objects works", {
@@ -52,9 +52,9 @@ test_that("creating communities objects works", {
 
   karate <- make_graph("Zachary")
 
-  membership <- sample(1:2, vcount(karate), replace=TRUE)
+  membership <- sample(1:2, vcount(karate), replace = TRUE)
   mod <- modularity(karate, membership)
-  comm <- make_clusters(algorithm="random", membership=membership,
+  comm <- make_clusters(algorithm = "random", membership = membership,
                              modularity = mod)
 
   expect_that(as.vector(membership(comm)), equals(membership))

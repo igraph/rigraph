@@ -18,5 +18,5 @@ test_that("identical_graphs considers attributes", {
     g2$m <- 2
 
     expect_false(identical_graphs(g, g2))
-    expect_true(identical_graphs(g, g2, attrs=FALSE))
+    expect_true(identical_graphs(g, g2, attrs = FALSE))
 })

@@ -113,17 +113,17 @@
 #'
 #' # This should approximately yield the correct exponent 3
 #' g <- barabasi.game(1000) # increase this number to have a better estimate
-#' d <- degree(g, mode="in")
-#' fit1 <- fit_power_law(d+1, 10)
-#' fit2 <- fit_power_law(d+1, 10, implementation="R.mle")
+#' d <- degree(g, mode = "in")
+#' fit1 <- fit_power_law(d + 1, 10)
+#' fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
 #'
 #' fit1$alpha
 #' stats4::coef(fit2)
 #' fit1$logLik
 #' stats4::logLik(fit2)
 #'
-fit_power_law <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
-                          implementation=c("plfit", "R.mle"), ...) {
+fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
+                          implementation = c("plfit", "R.mle"), ...) {
 
   implementation <- igraph.match.arg(implementation)
 
@@ -131,11 +131,11 @@ fit_power_law <- function(x, xmin=NULL, start=2, force.continuous=FALSE,
     power.law.fit.old(x, xmin, start, ...)
   } else if (implementation == "plfit") {
     if (is.null(xmin)) xmin <- -1
-    power.law.fit.new(x, xmin=xmin, force.continuous=force.continuous)
+    power.law.fit.new(x, xmin = xmin, force.continuous = force.continuous)
   }
 }
 
-power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
+power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
 
   if (length(x) == 0) {
     stop("zero length vector")
@@ -147,7 +147,7 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
   if (is.null(xmin)) { xmin <- min(x) }
 
   n <- length(x)
-  x <- x[ x >= xmin]
+  x <- x[x >= xmin]
   if (length(x) != n) {
     n <- length(x)
   }
@@ -162,22 +162,22 @@ power.law.fit.old <- function(x, xmin=NULL, start=2, ...) {
 #  }
 
   mlogl <- function(alpha) {
-     C <- 1/sum( (xmin:10000)^-alpha )
-     -n*log(C)+alpha*sum(log(x))
+     C <- 1 / sum((xmin:10000)^-alpha)
+     -n * log(C) + alpha * sum(log(x))
   }
 
-  alpha <- stats4::mle(mlogl, start=list(alpha=start), ...)
+  alpha <- stats4::mle(mlogl, start = list(alpha = start), ...)
 
   alpha
 }
 
-power.law.fit.new <- function(data, xmin=-1, force.continuous=FALSE) {
+power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
   # Argument checks
   data <- as.numeric(data)
   xmin <- as.numeric(xmin)
   force.continuous <- as.logical(force.continuous)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_power_law_fit, data, xmin, force.continuous)
 

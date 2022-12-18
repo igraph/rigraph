@@ -3,11 +3,11 @@ test_that("ids change when updating the graph", {
   g <- make_ring(10)
 
   g2 <- g + 1
-  g3 <- g + edge(1,5)
+  g3 <- g + edge(1, 5)
   g4 <- set_vertex_attr(g, "color", value = "red")
 
-  expect_false( graph_id(g) == graph_id(g2) )
-  expect_false( graph_id(g) == graph_id(g3) )
+  expect_false(graph_id(g) == graph_id(g2))
+  expect_false(graph_id(g) == graph_id(g3))
 
 })
 

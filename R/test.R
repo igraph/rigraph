@@ -40,7 +40,7 @@
 #' @export
 igraph_test <- function() {
   do.call(require, list("testthat"))
-  tdir <- system.file("tests", package="igraph")
+  tdir <- system.file("tests", package = "igraph")
   do.call("test_dir", list(tdir))
 }
 
@@ -68,7 +68,7 @@ igraph_version <- function() {
   unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }
 
-checkpkg <- function(package_file, args=character()) {
+checkpkg <- function(package_file, args = character()) {
   package_file <- as.character(package_file)
   args <- as.character(args)
   do.call(":::", list("tools", ".check_packages"))(c(package_file, args))

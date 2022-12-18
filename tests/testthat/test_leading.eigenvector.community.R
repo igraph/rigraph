@@ -10,15 +10,15 @@ test_that("cluster_leading_eigen works", {
     ev <- eigen(M)
     ret <- 0
     expect_that(ev$values[1], equals(value))
-    if (sign(ev$vectors[1,1]) != sign(vector[1])) {
+    if (sign(ev$vectors[1, 1]) != sign(vector[1])) {
       ev$vectors <- -ev$vectors
     }
-    expect_that(ev$vectors[,1], equals(vector))
+    expect_that(ev$vectors[, 1], equals(vector))
     0
   }
 
   g <- make_graph("Zachary")
-  lc <- cluster_leading_eigen(g, callback=f)
+  lc <- cluster_leading_eigen(g, callback = f)
 
   expect_that(lc$modularity, equals(modularity(g, lc$membership)))
   expect_that(as.vector(membership(lc)),
@@ -41,19 +41,19 @@ test_that("cluster_leading_eigen works", {
       v[x] <- 1
       multiplier(v)
     })
-    myc <- membership==community
-    B <- A[myc,myc] - (deg[myc] %*% t(deg[myc]))/2/ec
-    BG <- B-diag(rowSums(B))
+    myc <- membership == community
+    B <- A[myc, myc] - (deg[myc] %*% t(deg[myc])) / 2 / ec
+    BG <- B - diag(rowSums(B))
 
     expect_that(M, equals(BG))
     0
   }
 
   g <- make_graph("Zachary")
-  A <- as_adj(g, sparse=FALSE)
+  A <- as_adj(g, sparse = FALSE)
   ec <- ecount(g)
   deg <- degree(g)
-  lc <- cluster_leading_eigen(g, callback=f)
+  lc <- cluster_leading_eigen(g, callback = f)
 
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.

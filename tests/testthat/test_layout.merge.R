@@ -15,7 +15,7 @@ test_that("merge_coords works", {
 
   ## Stress test
   for (i in 1:10) {
-    g <- sample_gnp(100, 2/100)
+    g <- sample_gnp(100, 2 / 100)
     l <- layout_with_mds(g)
     expect_that(dim(l), equals(c(vcount(g), 2)))
   }

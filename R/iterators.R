@@ -83,7 +83,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @param attrs Whether to compare the attributes of the graphs
 #' @return Logical scalar
 #' @export
-identical_graphs <- function(g1, g2, attrs=TRUE) {
+identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
   .Call(C_R_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
@@ -227,7 +227,7 @@ create_vs <- function(graph, idx, na_ok = FALSE) {
 # for use after C code, when NA and bounds checking is unnecessary.
 # Also allows us to construct V(graph) outside the function call in
 # lapply() so it's created only once.
-unsafe_create_vs <- function(graph, idx, verts = NULL){
+unsafe_create_vs <- function(graph, idx, verts = NULL) {
   if (is.null(verts)) {
     verts <- V(graph)
   }
@@ -239,7 +239,7 @@ unsafe_create_vs <- function(graph, idx, verts = NULL){
 # for use after C code, when NA and bounds checking is unnecessary
 # Also allows us to construct V(graph) outside the function call in
 # lapply() so it's created only once.
-unsafe_create_es <- function(graph, idx, es = NULL){
+unsafe_create_es <- function(graph, idx, es = NULL) {
   if (is.null(es)) {
     es <- E(graph)
   }
@@ -302,7 +302,7 @@ unsafe_create_es <- function(graph, idx, es = NULL){
 #' g2 <- make_ring(10) %>%
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
-E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
+E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -317,12 +317,12 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
     ec <- ecount(graph)
     res <- seq_len(ec)
   } else if (!is.null(P)) {
-    on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_es_pairs, graph, as.igraph.vs(graph, P)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(C_R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
                  as.logical(directed)) + 1
   } else {
-    on.exit(.Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_es_path, graph, as.igraph.vs(graph, path)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(C_R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
                  as.logical(directed)) + 1
   }
 
@@ -331,7 +331,7 @@ E <- function(graph, P=NULL, path=NULL, directed=TRUE) {
   }
   if (is.named(graph)) {
     el <- ends(graph, es = res)
-    attr(res, "vnames") <- paste(el[,1], el[,2], sep = "|")
+    attr(res, "vnames") <- paste(el[, 1], el[, 2], sep = "|")
   }
 
   class(res) <- "igraph.es"
@@ -441,7 +441,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 2/100),
+#' g <- sample_(gnp(100, 2 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -452,23 +452,23 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'
 #' # -----------------------------------------------------------------
 #' # nei() special function
-#' g <- graph( c(1,2, 2,3, 2,4, 4,2) )
-#' V(g)[ .nei( c(2,4) ) ]
-#' V(g)[ .nei( c(2,4), "in") ]
-#' V(g)[ .nei( c(2,4), "out") ]
+#' g <- graph(c(1, 2, 2, 3, 2, 4, 4, 2))
+#' V(g)[.nei(c(2, 4))]
+#' V(g)[.nei(c(2, 4), "in")]
+#' V(g)[.nei(c(2, 4), "out")]
 #'
 #' # -----------------------------------------------------------------
 #' # The same with vertex names
-#' g <- graph(~ A -+ B, B -+ C:D, D -+ B)
-#' V(g)[ .nei( c('B', 'D') ) ]
-#' V(g)[ .nei( c('B', 'D'), "in" ) ]
-#' V(g)[ .nei( c('B', 'D'), "out" ) ]
+#' g <- graph(~ A - +B, B - +C:D, D - +B)
+#' V(g)[.nei(c('B', 'D'))]
+#' V(g)[.nei(c('B', 'D'), "in")]
+#' V(g)[.nei(c('B', 'D'), "out")]
 #'
 #' # -----------------------------------------------------------------
 #' # Resolving attributes
-#' g <- graph(~ A -+ B, B -+ C:D, D -+ B)
+#' g <- graph(~ A - +B, B - +C:D, D - +B)
 #' V(g)$color <- c("red", "red", "green", "green")
-#' V(g)[ color == "red" ]
+#' V(g)[color == "red"]
 #'
 #' # Indexing with a variable whose name matches the name of an attribute
 #' # may fail; use .env to force the name lookup in the parent environment
@@ -494,38 +494,38 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
   ## Special case: single numeric argument
   if (length(args) == 1 && inherits(args[[1]]$expr, "numeric")) {
     res <- simple_vs_index(x, args[[1]]$expr, na_ok)
-    return (add_vses_graph_ref(res, get_vs_graph(x)))
+    return(add_vses_graph_ref(res, get_vs_graph(x)))
   }
 
   ## Special case: single symbol argument, no such attribute
   if (length(args) == 1 && inherits(args[[1]]$expr, "name")) {
     graph <- get_vs_graph(x)
-    if (! (as.character(args[[1]]$expr) %in% vertex_attr_names(graph))) {
+    if (!(as.character(args[[1]]$expr) %in% vertex_attr_names(graph))) {
       res <- simple_vs_index(x, lazy_eval(args[[1]]), na_ok)
-      return (add_vses_graph_ref(res, graph))
+      return(add_vses_graph_ref(res, graph))
     }
   }
 
-  .nei <- function(v, mode=c("all", "in", "out", "total")) {
+  .nei <- function(v, mode = c("all", "in", "out", "total")) {
     ## TRUE iff the vertex is a neighbor (any type)
     ## of at least one vertex in v
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode, "out"=1, "in"=2, "all"=3, "total"=3)
+    mode <- switch(mode, "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
     if (is.logical(v)) {
       v <- which(v)
     }
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
                  as.numeric(mode))
     tmp[as.numeric(x)]
   }
   nei <- function(...) { .Deprecated(".nei") ; .nei(...) }
-  .innei <- function(v, mode=c("in", "all", "out", "total")) {
+  .innei <- function(v, mode = c("in", "all", "out", "total")) {
     .nei(v, mode = mode[1])
   }
   innei <- function(...) { .Deprecated(".innei") ; .innei(...) }
-  .outnei <- function(v, mode=c("out", "all", "in", "total")) {
+  .outnei <- function(v, mode = c("out", "all", "in", "total")) {
     .nei(v, mode = mode[1])
   }
   outnei <- function(...) { .Deprecated(".outnei") ; .outnei(...) }
@@ -535,8 +535,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
                  as.numeric(3))
     tmp[as.numeric(x)]
   }
@@ -547,8 +547,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
                  as.numeric(1))
     tmp[as.numeric(x)]
   }
@@ -558,8 +558,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
                  as.numeric(2))
     tmp[as.numeric(x)]
   }
@@ -796,9 +796,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' # -----------------------------------------------------------------
 #' # Special operators for indexing based on graph structure
 #' g <- sample_pa(100, power = 0.3)
-#' E(g) [ 1:3 %--% 2:6 ]
-#' E(g) [ 1:5 %->% 1:6 ]
-#' E(g) [ 1:3 %<-% 2:6 ]
+#' E(g)[1:3 %--% 2:6]
+#' E(g)[1:5 %->% 1:6]
+#' E(g)[1:3 %<-% 2:6]
 #'
 #' # -----------------------------------------------------------------
 #' # The edges along the diameter
@@ -808,9 +808,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'
 #' # -----------------------------------------------------------------
 #' # Select edges based on attributes
-#' g <- sample_gnp(20, 3/20) %>%
+#' g <- sample_gnp(20, 3 / 20) %>%
 #'   set_edge_attr("weight", value = rnorm(gsize(.)))
-#' E(g)[[ weight < 0 ]]
+#' E(g)[[weight < 0]]
 #'
 #' # Indexing with a variable whose name matches the name of an attribute
 #' # may fail; use .env to force the name lookup in the parent environment
@@ -833,27 +833,27 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
   .inc <- function(v) {
     ## TRUE iff the edge is incident to at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
                  as.numeric(3))
-    tmp[ as.numeric(x) ]
+    tmp[as.numeric(x)]
   }
   adj <- function(...) { .Deprecated(".inc") ; .inc(...) }
   inc <- function(...) { .Deprecated(".inc") ; .inc(...) }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
                  as.numeric(1))
-    tmp[ as.numeric(x) ]
+    tmp[as.numeric(x)]
   }
   from <- function(...) { .Deprecated(".from") ; .from(...) }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer) )
-    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v)-1,
+    on.exit(.Call(C_R_igraph_finalizer))
+    tmp <- .Call(C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
                  as.numeric(2))
-    tmp[ as.numeric(x) ]
+    tmp[as.numeric(x)]
   }
   to <- function(...) { .Deprecated(".to") ; .to(...) }
 
@@ -876,10 +876,10 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
         .to = .to, to = to,
-        .igraph.from = list(.Call(C_R_igraph_mybracket, graph, igraph_t_idx_from)[ as.numeric(x) ]),
+        .igraph.from = list(.Call(C_R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
         .igraph.to = list(.Call(C_R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
         .igraph.graph = list(graph),
-        `%--%`=`%--%`, `%->%`=`%->%`, `%<-%`=`%<-%`,
+        `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
         .env = env,
         .data = list(attrs)
       )
@@ -910,8 +910,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  f <- as.igraph.vs(graph, f)-1
-  t <- as.igraph.vs(graph, t)-1
+  f <- as.igraph.vs(graph, f) - 1
+  t <- as.igraph.vs(graph, t) - 1
   (from %in% f & to %in% t) | (to %in% f & from %in% t)
 }
 
@@ -920,8 +920,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  f <- as.igraph.vs(graph, f)-1
-  t <- as.igraph.vs(graph, t)-1
+  f <- as.igraph.vs(graph, f) - 1
+  t <- as.igraph.vs(graph, t) - 1
   if (is_directed(graph)) {
     from %in% f & to %in% t
   } else {
@@ -934,8 +934,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  value <- as.igraph.vs(graph, value)-1
-  t <- as.igraph.vs(graph, t)-1
+  value <- as.igraph.vs(graph, value) - 1
+  t <- as.igraph.vs(graph, t) - 1
   if (is_directed(graph)) {
     from %in% value & to %in% t
   } else {
@@ -948,8 +948,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `[[<-.igraph.vs` <- function(x, i, value) {
-  if (! "name"  %in% names(attributes(value)) ||
-      ! "value" %in% names(attributes(value))) {
+  if (!"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
   if (is.null(get_vs_graph(x))) stop("Graph is unknown")
@@ -959,15 +959,15 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method [<- igraph.vs
 #' @name igraph-vs-attributes
 #' @export
-`[<-.igraph.vs` <-  `[[<-.igraph.vs`
+`[<-.igraph.vs` <- `[[<-.igraph.vs`
 
 #' @param i Index.
 #' @method [[<- igraph.es
 #' @name igraph-es-attributes
 #' @export
 `[[<-.igraph.es` <- function(x, i, value) {
-  if (! "name"  %in% names(attributes(value)) ||
-      ! "value" %in% names(attributes(value))) {
+  if (!"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
   if (is.null(get_es_graph(x))) stop("Graph is unknown")
@@ -977,7 +977,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @method [<- igraph.es
 #' @name igraph-es-attributes
 #' @export
-`[<-.igraph.es` <-  `[[<-.igraph.es`
+`[<-.igraph.es` <- `[[<-.igraph.es`
 
 #' Query or set attributes of the vertices in a vertex sequence
 #'
@@ -1010,7 +1010,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' g <- make_(ring(10),
 #'   with_vertex_(
 #'     name = LETTERS[1:10],
-#'     color = sample(1:2, 10, replace=TRUE)
+#'     color = sample(1:2, 10, replace = TRUE)
 #'   )
 #' )
 #' V(g)$name
@@ -1022,7 +1022,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 2/100),
+#' g <- sample_(gnp(100, 2 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -1073,7 +1073,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   cl <- components(graph)
 #'   V(graph)[which.max(cl$csize) == cl$membership]
 #' }
-#' g <- sample_(gnp(100, 1/100),
+#' g <- sample_(gnp(100, 1 / 100),
 #'   with_vertex_(size = 3, label = ""),
 #'   with_graph_(layout = layout_with_fr)
 #' )
@@ -1124,12 +1124,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   if (!is_igraph(x)) {
     stop("Not a graph object")
   }
-  if (! "name"  %in% names(attributes(value)) ||
-      ! "value" %in% names(attributes(value))) {
+  if (!"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  i_set_vertex_attr(x, attr(value, "name"), index=value,
-                    value=attr(value, "value"), check = FALSE)
+  i_set_vertex_attr(x, attr(value, "name"), index = value,
+                    value = attr(value, "value"), check = FALSE)
 }
 
 #' @param path Select edges along a path, given by a vertex sequence See
@@ -1139,16 +1139,16 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'   \code{P} arguments.
 #' @name igraph-es-attributes
 #' @export
-`E<-` <- function(x, path=NULL, P=NULL, directed=NULL, value) {
+`E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
   if (!is_igraph(x)) {
     stop("Not a graph object")
   }
-  if (! "name"  %in% names(attributes(value)) ||
-      ! "value" %in% names(attributes(value))) {
+  if (!"name" %in% names(attributes(value)) ||
+      !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
   }
-  i_set_edge_attr(x, attr(value, "name"), index=value,
-                  value=attr(value, "value"), check = FALSE)
+  i_set_edge_attr(x, attr(value, "name"), index = value,
+                  value = attr(value, "value"), check = FALSE)
 }
 
 #' Show a vertex sequence on the screen
@@ -1215,7 +1215,7 @@ print.igraph.vs <- function(x,
     va <- vertex_attr(graph)
     if (all(sapply(va, is.atomic))) {
       print(as.data.frame(va, stringsAsFactors =
-                            FALSE)[as.vector(x),, drop = FALSE])
+                            FALSE)[as.vector(x), , drop = FALSE])
     } else {
       print(lapply(va, "[", as.vector(x)))
     }
@@ -1227,7 +1227,7 @@ print.igraph.vs <- function(x,
     if (length(x2)) {
       if (is.logical(full) && full) {
         print(x2, quote = FALSE)
-      }  else {
+      } else {
         head_print(x2, omitted_footer = "+ ... omitted several vertices\n",
                    quote = FALSE, max_lines = igraph_opt("auto.print.lines"))
       }
@@ -1293,7 +1293,7 @@ print.igraph.es <- function(x,
 
 # these are internal
 
-as.igraph.vs <- function(graph, v, na.ok=FALSE) {
+as.igraph.vs <- function(graph, v, na.ok = FALSE) {
   if (inherits(v, "igraph.vs") && !is.null(graph) &&
       !warn_version(graph)) {
     if (get_graph_id(graph) != get_vs_graph_id(v)) {
@@ -1311,7 +1311,7 @@ as.igraph.vs <- function(graph, v, na.ok=FALSE) {
   } else {
     if (is.logical(v)) {
       res <- as.vector(V(graph))[v]
-    } else if (is.numeric(v) && any(v<0, na.rm=TRUE)){
+    } else if (is.numeric(v) && any(v < 0, na.rm = TRUE)) {
       res <- as.vector(V(graph))[v]
     } else {
       res <- as.numeric(v)
@@ -1333,19 +1333,19 @@ as.igraph.es <- function(graph, e) {
   if (is.null(e)) {
     res <- E(graph)
   } else if (is.character(e)) {
-    Pairs <- grep("|", e, fixed=TRUE)
-    Names <- if (length(Pairs)==0) seq_along(e) else -Pairs
+    Pairs <- grep("|", e, fixed = TRUE)
+    Names <- if (length(Pairs) == 0) seq_along(e) else -Pairs
     res <- numeric(length(e))
 
     ## Based on vertex ids/names
-    if (length(Pairs)!=0) {
-      vv <- strsplit(e[Pairs], "|", fixed=TRUE)
+    if (length(Pairs) != 0) {
+      vv <- strsplit(e[Pairs], "|", fixed = TRUE)
       vl <- sapply(vv, length)
       if (any(vl != 2)) {
-        stop("Invalid edge name: ", e[Pairs][vl!=2][1])
+        stop("Invalid edge name: ", e[Pairs][vl != 2][1])
       }
       vp <- unlist(vv)
-      if (! "name" %in% vertex_attr_names(graph)) {
+      if (!"name" %in% vertex_attr_names(graph)) {
         vp <- as.numeric(vp)
       }
       res[Pairs] <- get.edge.ids(graph, vp)
@@ -1384,7 +1384,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
 
   args <- list(...)
 
-  if (any(! sapply(args, is_fun))) stop("Not ", what, " sequence")
+  if (any(!sapply(args, is_fun))) stop("Not ", what, " sequence")
 
   ## get the ids of all graphs
   graph_id <- sapply(args, get_vs_graph_id) %>%
@@ -1432,7 +1432,7 @@ create_op_result <- function(parsed, result, class, args) {
   result <- add_vses_graph_ref(result, parsed$graph)
   class(result) <- class
   ## c() drops names for zero length vectors. Why???
-  if (! length(result) &&
+  if (!length(result) &&
       any(sapply(args, function(x) !is.null(names(x))))) {
     names(result) <- character()
   }
@@ -1636,7 +1636,7 @@ difference.igraph.vs <- function(big, small, ...) {
   if (!length(big)) {
     big
   } else {
-    big[ match(big, small, 0L) == 0L ]
+    big[match(big, small, 0L) == 0L]
   }
 }
 

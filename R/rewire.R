@@ -38,10 +38,10 @@
 #' g <- make_ring(10)
 #' g %>%
 #'   rewire(each_edge(p = .1, loops = FALSE)) %>%
-#'   plot(layout=layout_in_circle)
+#'   plot(layout = layout_in_circle)
 #' print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 rewire <- function(graph, with) {
-  if (! is(with, "igraph_rewiring_method")) {
+  if (!is(with, "igraph_rewiring_method")) {
     stop("'with' is not an igraph rewiring method")
   }
   do_call(with$fun, list(graph), .args = with$args)
@@ -90,7 +90,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
   loops <- as.logical(loops)
   mode <- if (loops) 1 else 0
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
 }
 
@@ -127,10 +127,10 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #' # Rewiring the start of each directed edge preserves the in-degree distribution
 #' # but not the out-degree distribution
 #' g <- barabasi.game(1000)
-#' g2 <- g %>% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
-#' degree(g, mode="in") == degree(g2, mode="in")
+#' g2 <- g %>% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
+#' degree(g, mode = "in") == degree(g2, mode = "in")
 each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "out", "in", "total")) {
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
   multiple <- as.logical(multiple)
   if (mode != 3) {
     if (!multiple) {
@@ -153,7 +153,7 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
         as.logical(multiple))
 }
@@ -162,7 +162,7 @@ rewire_each_directed_edge <- function(graph, prob, loops, mode) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
         as.numeric(mode))
 }

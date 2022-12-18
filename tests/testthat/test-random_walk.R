@@ -26,13 +26,13 @@ test_that("directed random_walk works", {
 
 test_that("directed random_walk can return wtih an error when stuck", {
   set.seed(42)
-  g <- make_star(11, mode="out")
-  expect_error(random_walk(g, start = 7, steps = 10, stuck="error"), "Random walk got stuck")
+  g <- make_star(11, mode = "out")
+  expect_error(random_walk(g, start = 7, steps = 10, stuck = "error"), "Random walk got stuck")
 })
 
 test_that("undirected random_edge_walk works", {
   set.seed(42)
-  g <- make_star(11, mode="undirected")
+  g <- make_star(11, mode = "undirected")
   w <- random_edge_walk(g, start = 1, steps = 10)
   expect_equal(ignore_attr = TRUE, w, structure(c(10L, 10L, 3L, 3L, 7L, 7L, 8L, 8L,
                                    7L, 7L), class = "igraph.es"))
@@ -44,7 +44,7 @@ test_that("undirected random_edge_walk works", {
 })
 
 test_that("directed random_edge_walk works", {
-  g <- make_star(11, mode="out")
+  g <- make_star(11, mode = "out")
 
   set.seed(42)
   w <- random_edge_walk(g, start = 1, steps = 10)
@@ -72,5 +72,5 @@ test_that("directed random_edge_walk works", {
 test_that("directed random_edge_walk can return wtih an error when stuck", {
   set.seed(42)
   g <- make_star(11, mode = "out")
-  expect_error(random_edge_walk(g, start = 7, steps = 10, stuck="error"), "Random walk got stuck")
+  expect_error(random_edge_walk(g, start = 7, steps = 10, stuck = "error"), "Random walk got stuck")
 })

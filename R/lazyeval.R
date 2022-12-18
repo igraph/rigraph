@@ -82,7 +82,7 @@ interp.formula <- function(`_obj`, ..., .values) {
 interp.lazy <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
-  `_obj`$expr <-  substitute_(`_obj`$expr, values)
+  `_obj`$expr <- substitute_(`_obj`$expr, values)
   `_obj`
 }
 interp.character <- function(`_obj`, ..., .values) {
@@ -115,7 +115,7 @@ missing_arg <- function() {
   quote(expr = )
 }
 lazy_dots <- function(..., .follow_symbols = FALSE) {
-  if (nargs() == 0 || (nargs() == 1 &&  ! missing(.follow_symbols))) {
+  if (nargs() == 0 || (nargs() == 1 && !missing(.follow_symbols))) {
     return(structure(list(), class = "lazy_dots"))
   }
 
@@ -188,7 +188,7 @@ eval_call <- function(fun, dots, env = parent.frame()) {
 
   # Create environment containing promises
   env <- new.env(parent = env)
-  for(i in seq_along(dots)) {
+  for (i in seq_along(dots)) {
     dot <- dots[[i]]
 
     assign_call <- substitute(
@@ -239,4 +239,4 @@ promise_env <- function(prom) {
 as.lazy.promise <- function(x, ...) {
   lazy_(promise_expr(x), promise_env(x))
 }
-"%||%" <- function(x, y) if(is.null(x)) y else x
+"%||%" <- function(x, y) if (is.null(x)) y else x

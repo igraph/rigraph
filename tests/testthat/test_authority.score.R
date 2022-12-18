@@ -1,28 +1,28 @@
 test_that("authority score works", {
-  ashs <- function(graph, as=TRUE) {
+  ashs <- function(graph, as = TRUE) {
     mscale <- function(x) {
-      if (sd(x)!=0) { x <- scale(x) }
+      if (sd(x) != 0) { x <- scale(x) }
       if (x[1] < 0) { x <- -x       }
       x
     }
-    A <- as_adj(graph, sparse=FALSE)
+    A <- as_adj(graph, sparse = FALSE)
     if (as) {
-      s1 <- eigen(t(A) %*% A)$vectors[,1]
+      s1 <- eigen(t(A) %*% A)$vectors[, 1]
       s2 <- authority_score(graph)$vector
     } else {
-      s1 <- eigen(A %*% t(A))$vectors[,1]
+      s1 <- eigen(A %*% t(A))$vectors[, 1]
       s2 <- hub_score(graph)$vector
     }
     expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
   }
 
-  g1 <- sample_pa(100, m=10)
+  g1 <- sample_pa(100, m = 10)
   ashs(g1)
-  ashs(g1, as=FALSE)
+  ashs(g1, as = FALSE)
 
-  g2 <- sample_gnp(100, 2/100)
+  g2 <- sample_gnp(100, 2 / 100)
   ashs(g2)
-  ashs(g2, as=FALSE)
+  ashs(g2, as = FALSE)
 })
 
 test_that("authority scores of a ring are all one", {

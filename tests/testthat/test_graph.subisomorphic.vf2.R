@@ -2,8 +2,8 @@ test_that("graph.subisomorphic.vf2 works", {
 
   set.seed(42)
 
-  g1 <- sample_gnp(20,6/20)
-  g2 <- sample_gnp(20,6/20)
+  g1 <- sample_gnp(20, 6 / 20)
+  g2 <- sample_gnp(20, 6 / 20)
   g <- g1 %du% g2
 
   ig1 <- graph.subisomorphic.vf2(g, g1)

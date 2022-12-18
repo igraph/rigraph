@@ -1,7 +1,7 @@
 test_that("any_multiple, count_multiple, which_multiple works", {
   set.seed(42)
 
-  g <- barabasi.game(10, m=3, algorithm="bag")
+  g <- barabasi.game(10, m = 3, algorithm = "bag")
   im <- which_multiple(g)
   cm <- count_multiple(g)
   expect_true(any_multiple(g))
@@ -17,13 +17,13 @@ test_that("any_multiple, count_multiple, which_multiple works", {
 
 
   ## Direction of the edge is important
-  expect_false(any_multiple(graph( c(1,2, 2,1) )))
-  expect_that(which_multiple(graph( c(1,2, 2,1) )), equals(c(FALSE, FALSE)))
-  expect_that(which_multiple(graph( c(1,2, 2,1), dir=FALSE )),
+  expect_false(any_multiple(graph(c(1, 2, 2, 1))))
+  expect_that(which_multiple(graph(c(1, 2, 2, 1))), equals(c(FALSE, FALSE)))
+  expect_that(which_multiple(graph(c(1, 2, 2, 1), dir = FALSE)),
               equals(c(FALSE, TRUE)))
 
   ## Remove multiple edges but keep multiplicity
-  g <- barabasi.game(10, m=3, algorithm="bag")
+  g <- barabasi.game(10, m = 3, algorithm = "bag")
   E(g)$weight <- 1
   g <- simplify(g)
   expect_false(any_multiple(g))

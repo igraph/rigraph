@@ -20,19 +20,19 @@
 #
 ###################################################################
 
-.igraph.pars <- list("print.vertex.attributes"=FALSE,
-                     "print.edge.attributes"=FALSE,
-                     "print.graph.attributes"=FALSE,
-                     "verbose"=FALSE,
-                     "vertex.attr.comb"=list(name="concat", "ignore"),
-                     "edge.attr.comb"=list(weight="sum", name="concat", "ignore"),
-                     "sparsematrices"=TRUE,
-                     "nexus.url"="http://nexus.igraph.org",
-                     "add.params"=TRUE,
-                     "add.vertex.names"=TRUE,
-                     "dend.plot.type"="auto",
-                     "print.full"="auto",
-                     "annotate.plot"=FALSE,
+.igraph.pars <- list("print.vertex.attributes" = FALSE,
+                     "print.edge.attributes" = FALSE,
+                     "print.graph.attributes" = FALSE,
+                     "verbose" = FALSE,
+                     "vertex.attr.comb" = list(name = "concat", "ignore"),
+                     "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
+                     "sparsematrices" = TRUE,
+                     "nexus.url" = "http://nexus.igraph.org",
+                     "add.params" = TRUE,
+                     "add.vertex.names" = TRUE,
+                     "dend.plot.type" = "auto",
+                     "print.full" = "auto",
+                     "annotate.plot" = FALSE,
                      "auto.print.lines" = 10,
                      "return.vs.es" = TRUE,
                      "print.id" = TRUE
@@ -58,7 +58,7 @@ igraph.pars.set.verbose <- function(verbose) {
   verbose
 }
 
-igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
+igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 
 ## This is based on 'sm.options' in the 'sm' package
 

@@ -34,7 +34,7 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
   }
 
   lens <- sapply(cols, length)
-  n1lens <- lens[ lens != 1 ]
+  n1lens <- lens[lens != 1]
 
   if (length(unique(n1lens)) > 1) {
     stop("Columns must be constants or have the same length")
@@ -60,11 +60,11 @@ sdf <- function(..., row.names = NULL, NROW = NULL) {
 
 #' @method as.data.frame igraphSDF
 as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
-  as.data.frame(lapply(x, rep, length.out=attr(x, "NROW")))
+  as.data.frame(lapply(x, rep, length.out = attr(x, "NROW")))
 }
 
 #' @method "[" igraphSDF
-`[.igraphSDF` <- function(x, i, j, ..., drop=TRUE) {
+`[.igraphSDF` <- function(x, i, j, ..., drop = TRUE) {
   if (!is.character(j)) {
     stop("The column index must be character")
   }
@@ -72,9 +72,9 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     stop("The row index must be numeric")
   }
   if (missing(i)) {
-    rep(x[[j]], length.out=attr(x, "NROW"))
+    rep(x[[j]], length.out = attr(x, "NROW"))
   } else {
-    if (length(x[[j]])==1) {
+    if (length(x[[j]]) == 1) {
       rep(x[[j]], length(i))
     } else {
       x[[j]][i]
@@ -99,7 +99,7 @@ as.data.frame.igraphSDF <- function(x, row.names, optional, ...) {
     if (length(value) != length(i) && length(value) != 1) {
       stop("Replacement value has the wrong length")
     }
-    tmp <- rep(x[[j]], length.out=attr(x, "NROW"))
+    tmp <- rep(x[[j]], length.out = attr(x, "NROW"))
     tmp[i] <- value
     if (length(unique(tmp)) == 1) {
       tmp <- tmp[1]

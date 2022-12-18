@@ -1,25 +1,25 @@
 test_that("arpack works for identity matrix", {
-  f <- function(x, extra=NULL) x
-  res <- arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
-  expect_that(res$values, equals(c(1,1)))
+  f <- function(x, extra = NULL) x
+  res <- arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
+  expect_that(res$values, equals(c(1, 1)))
 })
 
 test_that("arpack works on the Laplacian of a star", {
-  f <- function(x, extra=NULL) {
+  f <- function(x, extra = NULL) {
     y <- x
-    y[1] <- (length(x)-1)*x[1] - sum(x[-1])
+    y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
     for (i in 2:length(x)) {
       y[i] <- x[i] - x[1]
     }
     y
   }
 
-  r1 <- arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
-  r2 <- eigen(laplacian_matrix(make_star(10, mode="undirected")))
+  r1 <- arpack(f, options = list(n = 10, nev = 1, ncv = 3), sym = TRUE)
+  r2 <- eigen(laplacian_matrix(make_star(10, mode = "undirected")))
 
-  correctSign <- function(x) { if (x[1]<0) { -x } else { x } }
+  correctSign <- function(x) { if (x[1] < 0) { -x } else { x } }
   expect_that(r1$values, equals(r2$values[1]))
-  expect_that(correctSign(r1$vectors), equals(correctSign(r2$vectors[,1])))
+  expect_that(correctSign(r1$vectors), equals(correctSign(r2$vectors[, 1])))
 })
 
 ####
@@ -34,28 +34,28 @@ test_that("arpack works for non-symmetric matrices", {
                    -3, -8, -7, -8, 10, 8, 7, 0, 6, -7, -8, 10, 10, 1, 0, -2, 6),
                  .Dim = c(10L, 10L))
 
-  f <- function(x, extra=NULL) A %*% x
-  res <- arpack(f, options=list(n=10, nev=3, ncv=7, which="LM"), sym=FALSE)
+  f <- function(x, extra = NULL) A %*% x
+  res <- arpack(f, options = list(n = 10, nev = 3, ncv = 7, which = "LM"), sym = FALSE)
   ## This is needed because they might return a different complex conjugate
-  expect_that(abs(res$values/eigen(A)$values[1:3]), equals(c(1,1,1)))
-  expect_that((res$values[1] * res$vectors[,1]) / (A %*% res$vectors[,1]),
-              equals(cbind(rep(1+0i, nrow(A)))))
-  expect_that((res$values[2] * res$vectors[,2]) / (A %*% res$vectors[,2]),
-              equals(cbind(rep(1+0i, nrow(A)))))
-  expect_that(abs((res$values[3] * res$vectors[,3]) / (A %*% res$vectors[,3])),
+  expect_that(abs(res$values / eigen(A)$values[1:3]), equals(c(1, 1, 1)))
+  expect_that((res$values[1] * res$vectors[, 1]) / (A %*% res$vectors[, 1]),
+              equals(cbind(rep(1 + 0i, nrow(A)))))
+  expect_that((res$values[2] * res$vectors[, 2]) / (A %*% res$vectors[, 2]),
+              equals(cbind(rep(1 + 0i, nrow(A)))))
+  expect_that(abs((res$values[3] * res$vectors[, 3]) / (A %*% res$vectors[, 3])),
               equals(cbind(rep(1, nrow(A)))))
 
-  f <- function(x, extra=NULL) A %*% x
-  res <- arpack(f, options=list(n=10, nev=4, ncv=9, which="LM"), sym=FALSE)
+  f <- function(x, extra = NULL) A %*% x
+  res <- arpack(f, options = list(n = 10, nev = 4, ncv = 9, which = "LM"), sym = FALSE)
   ## This is needed because they might return a different complex conjugate
-  expect_that(abs(res$values/eigen(A)$values[1:4]), equals(rep(1, 4)))
-  expect_that((res$values[1] * res$vectors[,1]) / (A %*% res$vectors[,1]),
-              equals(cbind(rep(1+0i, nrow(A)))))
-  expect_that((res$values[2] * res$vectors[,2]) / (A %*% res$vectors[,2]),
-              equals(cbind(rep(1+0i, nrow(A)))))
-  expect_that(abs((res$values[3] * res$vectors[,3]) / (A %*% res$vectors[,3])),
+  expect_that(abs(res$values / eigen(A)$values[1:4]), equals(rep(1, 4)))
+  expect_that((res$values[1] * res$vectors[, 1]) / (A %*% res$vectors[, 1]),
+              equals(cbind(rep(1 + 0i, nrow(A)))))
+  expect_that((res$values[2] * res$vectors[, 2]) / (A %*% res$vectors[, 2]),
+              equals(cbind(rep(1 + 0i, nrow(A)))))
+  expect_that(abs((res$values[3] * res$vectors[, 3]) / (A %*% res$vectors[, 3])),
               equals(cbind(rep(1, nrow(A)))))
-  expect_that(abs((res$values[4] * res$vectors[,4]) / (A %*% res$vectors[,4])),
+  expect_that(abs((res$values[4] * res$vectors[, 4]) / (A %*% res$vectors[, 4])),
               equals(cbind(rep(1, nrow(A)))))
 })
 
