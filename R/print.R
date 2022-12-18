@@ -75,10 +75,7 @@
   )
   w <- getOption("width")
   if (nchar(title) < w && "name" %in% graph_attr_names(object)) {
-    title <- substring(paste(
-      sep = "", title,
-      as.character(object$name)[1]
-    ), 1, w - 1)
+    title <- substring(paste(sep = "", title, as.character(object$name)[1]), 1, w - 1)
   }
   cat(title, "\n", sep = "")
 

@@ -14,12 +14,17 @@ test_that("cluster_walktrap works", {
     ))
   )
   expect_that(length(wc), equals(5))
-  expect_that(sizes(wc), equals(structure(c(9L, 7L, 9L, 4L, 5L),
+  expect_that(sizes(wc), equals(structure(
+    c(9L, 7L, 9L, 4L, 5L),
     .Dim = 5L,
-    .Dimnames = structure(list(`Community sizes` = c(
-      "1", "2", "3", "4",
-      "5"
-    )), .Names = "Community sizes"), class = "table"
+    .Dimnames = structure(
+      list(`Community sizes` = c(
+        "1", "2", "3", "4",
+        "5"
+      )),
+      .Names = "Community sizes"
+    ),
+    class = "table"
   )))
 
   d <- as.dendrogram(wc)

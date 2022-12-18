@@ -15,13 +15,18 @@ test_that("cluster_louvain works", {
   expect_that(length(mc), equals(4))
   expect_that(
     sizes(mc),
-    equals(structure(c(11L, 6L, 11L, 6L),
-      .Dim = 4L,
-      .Dimnames = structure(list(`Community sizes` = c(
-        "1",
-        "2", "3", "4"
-      )), .Names = "Community sizes"),
-      class = "table"
-    ))
+    equals(
+      structure(c(11L, 6L, 11L, 6L),
+        .Dim = 4L,
+        .Dimnames = structure(
+          list(`Community sizes` = c(
+            "1",
+            "2", "3", "4"
+          )),
+          .Names = "Community sizes"
+        ),
+        class = "table"
+      )
+    )
   )
 })

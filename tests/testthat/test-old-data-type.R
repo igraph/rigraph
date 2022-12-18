@@ -46,35 +46,45 @@ test_that("VS/ES work with old data type", {
           69, 71, 73, 75, 77, 78, 78
         ),
         list(
-          c(1, 0, 1), structure(list(
-            name = "Zachary's karate club network",
-            Citation = "Wayne W. Zachary. An Information Flow Model for Conflict and Fission in Small Groups. Journal of Anthropological Research Vol. 33, No. 4 452-473",
-            Author = "Wayne W. Zachary"
-          ), .Names = c("name", "Citation", "Author")),
-          structure(list(
-            Faction = c(
-              1, 1, 1, 1, 1, 1, 1, 1,
-              2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2,
-              2, 2, 2, 2, 2
+          c(1, 0, 1),
+          structure(
+            list(
+              name = "Zachary's karate club network",
+              Citation = "Wayne W. Zachary. An Information Flow Model for Conflict and Fission in Small Groups. Journal of Anthropological Research Vol. 33, No. 4 452-473",
+              Author = "Wayne W. Zachary"
             ),
-            name = c(
-              "Mr Hi", "Actor 2", "Actor 3", "Actor 4",
-              "Actor 5", "Actor 6", "Actor 7", "Actor 8", "Actor 9", "Actor 10",
-              "Actor 11", "Actor 12", "Actor 13", "Actor 14", "Actor 15", "Actor 16",
-              "Actor 17", "Actor 18", "Actor 19", "Actor 20", "Actor 21", "Actor 22",
-              "Actor 23", "Actor 24", "Actor 25", "Actor 26", "Actor 27", "Actor 28",
-              "Actor 29", "Actor 30", "Actor 31", "Actor 32", "Actor 33", "John A"
-            )
-          ), .Names = c("Faction", "name")),
-          structure(list(
-            weight = c(
-              4,
-              5, 3, 3, 3, 3, 2, 2, 2, 3, 1, 3, 2, 2, 2, 2, 6, 3, 4, 5, 1, 2,
-              2, 2, 3, 4, 5, 1, 3, 2, 2, 2, 3, 3, 3, 2, 3, 5, 3, 3, 3, 3, 3,
-              4, 2, 3, 3, 2, 3, 4, 1, 2, 1, 3, 1, 2, 3, 5, 4, 3, 5, 4, 2, 3,
-              2, 7, 4, 2, 4, 2, 2, 4, 2, 3, 3, 4, 4, 5
-            )
-          ), .Names = "weight")
+            .Names = c("name", "Citation", "Author")
+          ),
+          structure(
+            list(
+              Faction = c(
+                1, 1, 1, 1, 1, 1, 1, 1,
+                2, 2, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2,
+                2, 2, 2, 2, 2
+              ),
+              name = c(
+                "Mr Hi", "Actor 2", "Actor 3", "Actor 4",
+                "Actor 5", "Actor 6", "Actor 7", "Actor 8", "Actor 9", "Actor 10",
+                "Actor 11", "Actor 12", "Actor 13", "Actor 14", "Actor 15", "Actor 16",
+                "Actor 17", "Actor 18", "Actor 19", "Actor 20", "Actor 21", "Actor 22",
+                "Actor 23", "Actor 24", "Actor 25", "Actor 26", "Actor 27", "Actor 28",
+                "Actor 29", "Actor 30", "Actor 31", "Actor 32", "Actor 33", "John A"
+              )
+            ),
+            .Names = c("Faction", "name")
+          ),
+          structure(
+            list(
+              weight = c(
+                4,
+                5, 3, 3, 3, 3, 2, 2, 2, 3, 1, 3, 2, 2, 2, 2, 6, 3, 4, 5, 1, 2,
+                2, 2, 3, 4, 5, 1, 3, 2, 2, 2, 3, 3, 3, 2, 3, 5, 3, 3, 3, 3, 3,
+                4, 2, 3, 3, 2, 3, 4, 1, 2, 1, 3, 1, 2, 3, 5, 4, 3, 5, 4, 2, 3,
+                2, 7, 4, 2, 4, 2, 2, 4, 2, 3, 3, 4, 4, 5
+              )
+            ),
+            .Names = "weight"
+          )
         )
       ),
       class = "igraph"

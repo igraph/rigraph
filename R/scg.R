@@ -367,7 +367,8 @@ scg_semi_proj <- function(groups,
                           mtype = c(
                             "symmetric", "laplacian",
                             "stochastic"
-                          ), p = NULL,
+                          ),
+                          p = NULL,
                           norm = c("row", "col"),
                           sparse = igraph_opt("sparsematrices")) {
   # Argument checks
@@ -601,7 +602,8 @@ scg <- function(X, ev, nt, groups = NULL,
                 algo = c(
                   "optimum", "interv_km", "interv",
                   "exact_scg"
-                ), norm = c("row", "col"),
+                ),
+                norm = c("row", "col"),
                 direction = c("default", "left", "right"),
                 evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                 sparse = igraph_opt("sparsematrices"),
@@ -616,7 +618,8 @@ scg.igraph <- function(X, ev, nt, groups = NULL,
                        algo = c(
                          "optimum", "interv_km", "interv",
                          "exact_scg"
-                       ), norm = c("row", "col"),
+                       ),
+                       norm = c("row", "col"),
                        direction = c("default", "left", "right"),
                        evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                        sparse = igraph_opt("sparsematrices"),
@@ -639,7 +642,8 @@ scg.matrix <- function(X, ev, nt, groups = NULL,
                        algo = c(
                          "optimum", "interv_km", "interv",
                          "exact_scg"
-                       ), norm = c("row", "col"),
+                       ),
+                       norm = c("row", "col"),
                        direction = c("default", "left", "right"),
                        evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                        sparse = igraph_opt("sparsematrices"),
@@ -662,7 +666,8 @@ scg.Matrix <- function(X, ev, nt, groups = NULL,
                        algo = c(
                          "optimum", "interv_km", "interv",
                          "exact_scg"
-                       ), norm = c("row", "col"),
+                       ),
+                       norm = c("row", "col"),
                        direction = c("default", "left", "right"),
                        evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                        sparse = igraph_opt("sparsematrices"),
@@ -683,7 +688,8 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
                   algo = c(
                     "optimum", "interv_km", "interv",
                     "exact_scg"
-                  ), norm = c("row", "col"),
+                  ),
+                  norm = c("row", "col"),
                   direction = c("default", "left", "right"),
                   evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
                   sparse = igraph_opt("sparsematrices"),

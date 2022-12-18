@@ -165,10 +165,12 @@ read_graph <- function(file, format = c(
 #'   unlink(file)
 #' }
 #'
-write_graph <- function(graph, file, format = c(
+write_graph <- function(graph, file,
+                        format = c(
                           "edgelist", "pajek", "ncol", "lgl",
                           "graphml", "dimacs", "gml", "dot", "leda"
-                        ), ...) {
+                        ),
+                        ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }

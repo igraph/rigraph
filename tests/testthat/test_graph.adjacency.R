@@ -9,10 +9,15 @@ test_that("graph_from_adjacency_matrix works", {
   el1 <- as_edgelist(g1)
   expect_that(
     el1[order(el1[, 1], el1[, 2]), ],
-    equals(structure(c(
-      1, 1, 2, 3, 3, 4, 4, 3, 4, 1, 2, 4,
-      1, 4
-    ), .Dim = c(7L, 2L)))
+    equals(
+      structure(
+        c(
+          1, 1, 2, 3, 3, 4, 4, 3, 4, 1, 2, 4,
+          1, 4
+        ),
+        .Dim = c(7L, 2L)
+      )
+    )
   )
 
   M2 <- rbind(
@@ -53,10 +58,15 @@ test_that("graph_from_adjacency_matrix works", {
   el4 <- as_edgelist(g4)
   expect_that(
     el4[order(el4[, 1], el4[, 2]), ],
-    equals(structure(c(
-      1, 1, 1, 1, 3,
-      2, 3, 4, 4, 4
-    ), .Dim = c(5L, 2L)))
+    equals(
+      structure(
+        c(
+          1, 1, 1, 1, 3,
+          2, 3, 4, 4, 4
+        ),
+        .Dim = c(5L, 2L)
+      )
+    )
   )
 
   M5 <- rbind(
@@ -95,10 +105,15 @@ test_that("graph_from_adjacency_matrix works", {
   el7 <- as_edgelist(g7)
   expect_that(
     el7[order(el7[, 1], el7[, 2]), ],
-    equals(structure(c(
-      1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 3, 3,
-      4, 4, 4, 4
-    ), .Dim = c(8L, 2L)))
+    equals(
+      structure(
+        c(
+          1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 3, 3,
+          4, 4, 4, 4
+        ),
+        .Dim = c(8L, 2L)
+      )
+    )
   )
 
   M8 <- rbind(
@@ -208,10 +223,15 @@ test_that("graph_from_adjacency_matrix works", {
   el14 <- cbind(as_edgelist(g14), E(g14)$weight)
   expect_that(
     el14[order(el14[, 1], el14[, 2]), ],
-    equals(structure(c(
-      1, 1, 1, 3, 2, 3, 4, 4, 2, 2, 1.5,
-      2
-    ), .Dim = c(4L, 3L)))
+    equals(
+      structure(
+        c(
+          1, 1, 1, 3, 2, 3, 4, 4, 2, 2, 1.5,
+          2
+        ),
+        .Dim = c(4L, 3L)
+      )
+    )
   )
 })
 

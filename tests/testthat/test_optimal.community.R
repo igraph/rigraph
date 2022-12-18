@@ -18,10 +18,14 @@ test_that("cluster_optimal works", {
     sizes(oc),
     equals(structure(c(11L, 5L, 12L, 6L),
       .Dim = 4L,
-      .Dimnames = structure(list(`Community sizes` = c(
-        "1", "2",
-        "3", "4"
-      )), .Names = "Community sizes"), class = "table"
+      .Dimnames = structure(
+        list(`Community sizes` = c(
+          "1", "2",
+          "3", "4"
+        )),
+        .Names = "Community sizes"
+      ),
+      class = "table"
     ))
   )
 })

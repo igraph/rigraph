@@ -1237,7 +1237,8 @@ tkigraph <- function() {
       values = c(
         "Directed (out)", "Directed (in)",
         "Undirected"
-      ), default = "2"
+      ),
+      default = "2"
     )
   )
   read$mode <- c("out", "in", "undirected")[read$mode + 1]
@@ -1311,7 +1312,8 @@ tkigraph <- function() {
       values = c(
         "Directed (out)", "Directed (in)",
         "Undirected"
-      ), default = "2"
+      ),
+      default = "2"
     )
   )
   read$mode <- c("out", "in", "undirected")[read$mode + 1]
@@ -1758,7 +1760,8 @@ tkigraph <- function() {
     title = paste(
       "Distance from vertex", read$v, "in graph #",
       gnos
-    ), showmean = mv
+    ),
+    showmean = mv
   )
 }
 
@@ -2233,7 +2236,8 @@ tkigraph <- function() {
       title = paste(
         "Communities, spinglass algorithm on graph #",
         gnos
-      ), right = FALSE
+      ),
+      right = FALSE
     )
   }
   show.membership <- function() {
@@ -2859,9 +2863,14 @@ tkigraph <- function() {
     tcltk::tktag.configure(txt, "notwrapped", wrap = "none")
     tcltk::tktag.configure(lnames, "notwrapped", wrap = "none")
     tcltk::tktag.configure(rnames, "notwrapped", wrap = "none")
-    tcltk::tkinsert(txt, "end", paste(paste(yy[-1], collapse = "\n"),
-      sep = ""
-    ), "notwrapped")
+    tcltk::tkinsert(
+      txt,
+      "end",
+      paste(paste(yy[-1], collapse = "\n"),
+        sep = ""
+      ),
+      "notwrapped"
+    )
 
     tcltk::tkgrid(txt, row = 1, column = 1, sticky = "nsew")
     if ("top" %in% colname.bar) {

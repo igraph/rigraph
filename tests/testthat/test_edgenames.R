@@ -6,10 +6,7 @@ test_that("edge names work", {
   g2 <- delete_edges(g, c("b", "d", "e"))
   expect_that(
     as_edgelist(g2),
-    equals(structure(c(
-      1, 3, 6, 7, 8, 9, 1, 2, 4, 7, 8, 9,
-      10, 10
-    ), .Dim = c(7L, 2L)))
+    equals(structure(c(1, 3, 6, 7, 8, 9, 1, 2, 4, 7, 8, 9, 10, 10), .Dim = c(7L, 2L)))
   )
 
   ## named vertices
@@ -33,10 +30,7 @@ test_that("edge names work", {
   g4 <- delete_edges(g, c("1|2", "8|7", "1|10"))
   expect_that(
     as_edgelist(g4),
-    equals(structure(c(
-      2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7,
-      9, 10
-    ), .Dim = c(7L, 2L)))
+    equals(structure(c(2, 3, 4, 5, 6, 8, 9, 3, 4, 5, 6, 7, 9, 10), .Dim = c(7L, 2L)))
   )
 
 
