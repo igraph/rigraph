@@ -1697,7 +1697,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'      vertex.label=ifelse(origvert, V(ex)$name, ""),
 #'      edge.arrow.mode=ifelse(realedge, 2, 0))
 #'
- layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
+layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
                             maxiter=100, weights=NULL,
                             attributes=c("default", "all", "none")) {
   # Argument checks

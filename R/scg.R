@@ -223,13 +223,13 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' gr.km <- kmeans(V,centers=max(gr), iter.max=100, nstart=100)$cluster
 #' op <- par(mfrow=c(1,2))
 #' plot(V[,1], V[,2], col=col[gr],
-#' 	main = "SCG grouping",
-#' 	xlab = "1st eigenvector",
-#' 	ylab = "2nd eigenvector")
+#'         main = "SCG grouping",
+#'         xlab = "1st eigenvector",
+#'         ylab = "2nd eigenvector")
 #' plot(V[,1], V[,2], col=col[gr.km],
-#' 	main = "K-means grouping",
-#' 	xlab = "1st eigenvector",
-#' 	ylab = "2nd eigenvector")
+#'         main = "K-means grouping",
+#'         xlab = "1st eigenvector",
+#'         ylab = "2nd eigenvector")
 #' par(op)
 #' ## kmeans disregards the first eigenvector as it
 #' ## spreads a much smaller range of values than the second one
@@ -511,10 +511,10 @@ scg_semi_proj <- function(groups,
 #'
 #' op <- par(mfrow=c(1,2))
 #' plot(g, vertex.color = col[cg$groups], vertex.size = 20,
-#' 		vertex.label = NA, layout = layout)
+#'                 vertex.label = NA, layout = layout)
 #' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
-#' 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
-#' 	vertex.label=NA, layout = layout_with_kk)
+#'         vertex.color = col, vertex.size = 20*vsize/max(vsize),
+#'         vertex.label=NA, layout = layout_with_kk)
 #' par(op)
 #'
 #' ## SCG of real-world network
@@ -557,7 +557,6 @@ scg_semi_proj <- function(groups,
 #' plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
 #'                 vertex.color=col[com.cg],vertex.label=NA)
 #' par(op)
-#'
 #'
 scg <- function(X, ev, nt, groups=NULL,
                 mtype=c("symmetric", "laplacian", "stochastic"),

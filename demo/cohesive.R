@@ -54,4 +54,3 @@ sub1
 plot(cbKarate, karate, mark.groups=sub1)
 
 pause()
-

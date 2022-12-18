@@ -71,9 +71,9 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
   to <- c(4, 3, 6, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)
   edges <- cbind(from, to)
   edges.dists <- c(1.9617537, 0.9060834, 2.2165446, 1.6251956,
-	               2.4473929, 0.5913490, 8.7093236, 2.8387330,
-	               6.1225042, 20.7217776, 6.8027218, 16.3147479,
-	               5.2605598, 6.6816853, 4.9482123, 1.8989790)
+                       2.4473929, 0.5913490, 8.7093236, 2.8387330,
+                       6.1225042, 20.7217776, 6.8027218, 16.3147479,
+                       5.2605598, 6.6816853, 4.9482123, 1.8989790)
 
   g <- graph.data.frame(edges, directed = FALSE)
   result <- betweenness(g, weights = edges.dists)

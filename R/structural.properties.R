@@ -540,7 +540,7 @@ shortest_paths <- function(graph, from, to=V(graph),
 all_shortest_paths <- function(graph, from,
                                    to=V(graph),
                                    mode=c("out", "all", "in"),
-				   weights=NULL) {
+                                   weights=NULL) {
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1170,7 +1170,7 @@ make_ego_graph <- function(graph, order = 1, nodes=V(graph),
 #'
 #' g <- make_ring(10)
 #' g <- add_edges(g, c(1,2, 2,3, 1,3))
-#' coreness(g) 		# small core triangle in a ring
+#' coreness(g)             # small core triangle in a ring
 #'
 coreness <- function(graph, mode=c("all", "out", "in")) {
 
@@ -1486,7 +1486,6 @@ any_loop <- any_loop
 #' }
 #' bfs(make_ring(10) %du% make_ring(10), root=1, callback=f)
 #'
-#'
 bfs <- function(graph, root, mode=c("out", "in", "all", "total"),
                       unreachable=TRUE, restricted=NULL,
                       order=TRUE, rank=FALSE, father=FALSE,
@@ -1636,7 +1635,6 @@ bfs <- function(graph, root, mode=c("out", "in", "all", "total"),
 #' }
 #' tmp <- dfs(make_tree(10) %du% make_tree(10), root=1,
 #'                  out.callback=f.out)
-#'
 #'
 dfs <- function(graph, root, mode=c("out", "in", "all", "total"),
                       unreachable=TRUE,

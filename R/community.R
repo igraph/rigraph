@@ -916,11 +916,11 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' @keywords graphs
 #' @examples
 #'
-#'   g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
-#'   g <- add_edges(g, c(1, 12))
-#'   g <- induced_subgraph(g, subcomponent(g, 1))
-#'   cluster_spinglass(g, spins=2)
-#'   cluster_spinglass(g, vertex=1)
+#' g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
+#' g <- add_edges(g, c(1, 12))
+#' g <- induced_subgraph(g, subcomponent(g, 1))
+#' cluster_spinglass(g, spins=2)
+#' cluster_spinglass(g, vertex=1)
 #'
 cluster_spinglass <- function(graph, weights=NULL, vertex=NULL, spins=25,
                                 parupdate=FALSE, start.temp=1,
@@ -1685,9 +1685,9 @@ cluster_leading_eigen <- function(graph, steps=-1, weights=NULL,
 #' @keywords graphs
 #' @examples
 #'
-#'   g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
-#'   g <- add_edges(g, c(1, 12))
-#'   cluster_label_prop(g)
+#' g <- sample_gnp(10, 5/10) %du% sample_gnp(9, 5/9)
+#' g <- add_edges(g, c(1, 12))
+#' cluster_label_prop(g)
 #'
 cluster_label_prop <- function(graph, weights=NULL, initial=NULL, fixed=NULL) {
   # Argument checks

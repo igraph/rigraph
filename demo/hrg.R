@@ -102,4 +102,3 @@ pause()
 
 g3 <- add_edges(g2, t(pred$edges[6:9,]), color="orange")
 plot(g3, layout=lay)
-

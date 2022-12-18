@@ -45,6 +45,7 @@ igraph_test <- function() {
 }
 
 
+# R_igraph_vers -----------------------------------------------------------------------
 
 #' Query igraph's version string
 #'
@@ -62,9 +63,7 @@ igraph_test <- function() {
 #' ## Compare to the package version
 #' packageDescription("igraph")$Version
 #' igraph_version()
-# R_igraph_vers -----------------------------------------------------------------------
-
-
+#'
 igraph_version <- function() {
   unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }

@@ -334,4 +334,3 @@ pause()
 
 ### Edges along a path
 E(g2, path=c(1,4,5))
-

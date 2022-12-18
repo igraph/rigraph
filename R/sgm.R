@@ -62,14 +62,14 @@ solve_LSAP <- function (x, maximum = FALSE) {
 #' @keywords graphs
 #' @examples
 #'
-#'  #require(Matrix)
-#'  g1 <- sample_gnp(10, 0.1)
-#'  randperm <- c(1:3, 3+sample(7))
-#'  g2 <- sample_correlated_gnp(g1, corr=1, p=g1$p, permutation=randperm)
-#'  A  <- as.matrix(get.adjacency(g1))
-#'  B  <- as.matrix(get.adjacency(g2))
-#'  P  <- match_vertices(A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
-#'  P
+#' #require(Matrix)
+#' g1 <- sample_gnp(10, 0.1)
+#' randperm <- c(1:3, 3+sample(7))
+#' g2 <- sample_correlated_gnp(g1, corr=1, p=g1$p, permutation=randperm)
+#' A  <- as.matrix(get.adjacency(g1))
+#' B  <- as.matrix(get.adjacency(g2))
+#' P  <- match_vertices(A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
+#' P
 #' @export
 match_vertices <- function(A, B, m, start, iteration) {
   ## Seeds are assumed to be vertices 1:m in both graphs

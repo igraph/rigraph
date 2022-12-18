@@ -317,10 +317,10 @@ as_edgelist <- function(graph, names=TRUE) {
 #' ug3 <- as.undirected(g3)
 #' print(ug3, e=TRUE)
 #' \dontrun{
-#'   x11(width=10, height=5)
-#'   layout(rbind(1:2))
-#'   plot( g3, layout=layout_in_circle, edge.label=E(g3)$weight)
-#'   plot(ug3, layout=layout_in_circle, edge.label=E(ug3)$weight)
+#' x11(width=10, height=5)
+#' layout(rbind(1:2))
+#' plot( g3, layout=layout_in_circle, edge.label=E(g3)$weight)
+#' plot(ug3, layout=layout_in_circle, edge.label=E(ug3)$weight)
 #' }
 #'
 #' g4 <- graph(c(1,2, 3,2,3,4,3,4, 5,4,5,4,

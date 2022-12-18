@@ -225,4 +225,3 @@ pause()
 
 ### Plot with the new colors
 plot(g, layout=lay, vertex.label=V(g)$name)
-

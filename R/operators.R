@@ -994,7 +994,7 @@ path <- function(...) {
     if (lt > 2) {
       toadd <- c(toadd[1], rep(toadd[2:(lt-1)], each=2), toadd[lt])
       res <- add_edges(e1, toadd, attr=attr)
-	  } else if (lt == 2) {
+          } else if (lt == 2) {
       res <- add_edges(e1, toadd, attr=attr)
     } else {
       res <- e1

@@ -86,7 +86,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' @param normalized Logical scalar, whether to normalize the betweenness
 #' scores. If \code{TRUE}, then the results are normalized by the number of ordered
 #' or unordered vertex pairs in directed and undirected graphs, respectively.
-#' In an undirected graph,			
+#' In an undirected graph,
 #' \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
 #' \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 #' is the number of vertices in the graph.

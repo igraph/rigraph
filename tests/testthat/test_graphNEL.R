@@ -47,4 +47,3 @@ test_that("graphNEL does not duplicate loop edges", {
 
   suppressWarnings(unloadNamespace("graph"))
 })
-
