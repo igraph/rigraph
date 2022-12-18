@@ -3,9 +3,9 @@ set.seed(12345)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p)
-E(g)$weight = sample(ecount(g))
+E(g)$weight <- sample(ecount(g))
 gp <- erdos.renyi.game(n, p)
-E(gp)$weight = sample(ecount(gp))
+E(gp)$weight <- sample(ecount(gp))
 
 test_that("General scan-stat works, US, scan-0, unweighted", {
   s1 <- local_scan(g, k = 0)
@@ -100,9 +100,9 @@ set.seed(42)
 n <- 10^3
 p <- 0.1
 g <- erdos.renyi.game(n, p, directed = TRUE)
-E(g)$weight = sample(ecount(g))
+E(g)$weight <- sample(ecount(g))
 gp <- erdos.renyi.game(n, p)
-E(gp)$weight = sample(ecount(gp))
+E(gp)$weight <- sample(ecount(gp))
 
 ## US, scan-0, unweighted, directed
 ## TODO

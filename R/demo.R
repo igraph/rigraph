@@ -78,7 +78,7 @@ igraph_demo <- function(which) {
     options(keep.source = TRUE)
 
     text <- tcltk::tclvalue(tcltk::tkget(txt, act[1], act[2]))
-    cat("=======================================================\n");
+    cat("=======================================================\n")
 
     expr <- parse(text = text)
     for (i in seq_along(expr)) {
@@ -93,7 +93,7 @@ igraph_demo <- function(which) {
         print(res$value)
       }
     }
-    cat("> -------------------------------------------------------\n");
+    cat("> -------------------------------------------------------\n")
     cat(options()$prompt)
 
     tcltk::tktag.remove(txt, "activechunk", act[1], act[2])

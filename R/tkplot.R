@@ -571,7 +571,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
   for (i in seq(along.with = defaults)) {
     cmd <- paste(
       sep = "", '.layouts[["', name, '"]]$params[[', i,
-      ']]$default <- tmp[[', i, ']]'
+      "]]$default <- tmp[[", i, "]]"
     )
     eval(parse(text = cmd), .tkplot.env)
   }
@@ -1701,7 +1701,8 @@ tk_canvas <- function(tkp.id) {
     tcltk::tkbutton(dialog,
       text = "Cancel",
       command = function() {
-        tcltk::tkdestroy(dialog); invisible(TRUE)
+        tcltk::tkdestroy(dialog)
+        invisible(TRUE)
       }
     ),
     row = row, column = 1
@@ -1713,7 +1714,7 @@ tk_canvas <- function(tkp.id) {
     initialcolor = initialcolor,
     title = "Choose a color"
   ))
-  return(color);
+  return(color)
 }
 
 ###################################################################

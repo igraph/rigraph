@@ -14,9 +14,9 @@ test_that("I can index a vs twice", {
 
   g <- graph_from_data_frame(edges, vertices = vertices)
 
-  x <- V(g)[3:4][state == 'NM']
+  x <- V(g)[3:4][state == "NM"]
 
-  expect_equal(ignore_attr = TRUE, x, V(g)['ABQ'])
+  expect_equal(ignore_attr = TRUE, x, V(g)["ABQ"])
 })
 
 test_that("I can index an es twice", {
@@ -29,7 +29,7 @@ test_that("I can index an es twice", {
 
   g <- graph_from_data_frame(edges)
 
-  x <- E(g)['BOS' %->% 'JFK'][carrier == 'foo']
+  x <- E(g)["BOS" %->% "JFK"][carrier == "foo"]
 
-  expect_equal(ignore_attr = TRUE, x, E(g)[carrier == 'foo' & .from('BOS') & .to('JFK')])
+  expect_equal(ignore_attr = TRUE, x, E(g)[carrier == "foo" & .from("BOS") & .to("JFK")])
 })

@@ -69,7 +69,7 @@
   }
   setTxtProgressBar(pb, percent)
   if (percent == 100) {
-    close(pb);
+    close(pb)
     pb <- NULL
   }
   assign(".igraph.pb", pb, envir = asNamespace("igraph"))
@@ -86,7 +86,7 @@
   }
   tcltk::setTkProgressBar(pb, percent, label = paste(percent, "%"))
   if (percent == 100) {
-    close(pb);
+    close(pb)
     pb <- NULL
   }
   assign(".igraph.pb", pb, envir = asNamespace("igraph"))
@@ -237,7 +237,7 @@ close.igraphconsole <- function(con, ...) {
     tcltk::tkpack(pBar, side = "bottom", anchor = "w", padx = 5)
   }
   get <- function(w) {
-    return(tcltk::tclvalue(.val));
+    return(tcltk::tclvalue(.val))
   }
   set <- function(w, val) {
     tcltk::tclvalue(.val) <<- val

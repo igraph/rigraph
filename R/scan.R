@@ -345,10 +345,10 @@ scan_stat <- function(graphs, tau = 1, ell = 0,
   locality <- igraph.match.arg(locality)
 
   ## number of time steps and number of vertices
-  maxTime = length(graphs)
-  nVertex = vcount(graphs[[1]])
+  maxTime <- length(graphs)
+  nVertex <- vcount(graphs[[1]])
 
-  if (locality == 'us') {
+  if (locality == "us") {
     ## Underlying locality stat is us
     lstatPsi <- matrix(0, nrow = nVertex, ncol = maxTime)
     for (i in 1:maxTime) {
@@ -356,7 +356,7 @@ scan_stat <- function(graphs, tau = 1, ell = 0,
       lstatPsi[, i] <- local_scan(graphs[[i]], ...)
     }
     lstat <- lstatPsi
-  } else if (locality == 'them') {
+  } else if (locality == "them") {
     ## Underlying locality stat is \Phi
 
     lstatPhi <- array(0, dim = c(nVertex, (tau + 1), maxTime))

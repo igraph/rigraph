@@ -23,20 +23,20 @@ V(g)$name <- letters[1:vcount(g)]
 
 test_that("[ indexing works with symbolic names", {
   ## The same with symbolic names
-  expect_that(g['a', 'b'], equals(1))
+  expect_that(g["a", "b"], equals(1))
   expect_that(
-    am(g[c('a', 'a', 'g'), c('b', 'c', 'n')]),
+    am(g[c("a", "a", "g"), c("b", "c", "n")]),
     equals(mm(1, 1, 0, 1, 1, 0, 0, 0, 1))
   )
   expect_that(
-    am(g[c('a', 'a', 'g'), c('e', 'c', 'l')]),
+    am(g[c("a", "a", "g"), c("e", "c", "l")]),
     equals(mm(0, 0, 0, 1, 1, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c('a', 'a', 'a', 'a'), c('b', 'c', 'b', 'b')]),
+    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
     equals(matrix(1, 4, 4))
   )
-  expect_that(am(g[c('h', 'q'), c('q', 'h')]), equals(mm(1, 0, 0, 0)))
+  expect_that(am(g[c("h", "q"), c("q", "h")]), equals(mm(1, 0, 0, 0)))
 })
 
 test_that("[ indexing works with logical vectors", {
@@ -96,20 +96,20 @@ test_that("[ indexing works with weighted graphs", {
 
 test_that("[ indexing works with weighted graphs and symbolic names", {
   ## Weighted graph, with symbolic names
-  expect_that(g['a', 'b'], equals(2))
+  expect_that(g["a", "b"], equals(2))
   expect_that(
-    am(g[c('a', 'a', 'g'), c('b', 'c', 'n')]),
+    am(g[c("a", "a", "g"), c("b", "c", "n")]),
     equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98))
   )
   expect_that(
-    am(g[c('a', 'a', 'g'), c('e', 'c', 'l')]),
+    am(g[c("a", "a", "g"), c("e", "c", "l")]),
     equals(mm(0, 0, 0, 3, 3, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c('a', 'a', 'a', 'a'), c('b', 'c', 'b', 'b')]),
+    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
     equals(mm(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2))
   )
-  expect_that(am(g[c('h', 'q'), c('q', 'h')]), equals(mm(136, 0, 0, 0)))
+  expect_that(am(g[c("h", "q"), c("q", "h")]), equals(mm(136, 0, 0, 0)))
 })
 
 ################################################################
@@ -139,14 +139,14 @@ test_that("[[ indexing works", {
 
 test_that("[[ indexing works with symbolic names", {
   ## Same with vertex names
-  expect_that(g[['a', ]], is_equivalent_to(list(a = V(g)[2:3])))
-  expect_that(g[[, 'b']], is_equivalent_to(list(b = V(g)[1])))
+  expect_that(g[["a", ]], is_equivalent_to(list(a = V(g)[2:3])))
+  expect_that(g[[, "b"]], is_equivalent_to(list(b = V(g)[1])))
   expect_that(
-    g[[, 'b', directed = FALSE]],
+    g[[, "b", directed = FALSE]],
     is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
   )
   expect_that(
-    g[['b', directed = FALSE]],
+    g[["b", directed = FALSE]],
     is_equivalent_to(list(b = V(g)[c(1, 4, 5)]))
   )
 
@@ -209,21 +209,21 @@ test_that("[ can query edge ids", {
 
 test_that("[ can query edge ids with symbolic names", {
   ## The same with symbolic names
-  expect_that(g['a', 'b', edges = TRUE], equals(1))
+  expect_that(g["a", "b", edges = TRUE], equals(1))
   expect_that(
-    am(g[c('a', 'a', 'g'), c('b', 'c', 'n'), edges = TRUE]),
+    am(g[c("a", "a", "g"), c("b", "c", "n"), edges = TRUE]),
     equals(mm(1, 1, 0, 2, 2, 0, 0, 0, 13))
   )
   expect_that(
-    am(g[c('a', 'a', 'g'), c('e', 'c', 'l'), edges = TRUE]),
+    am(g[c("a", "a", "g"), c("e", "c", "l"), edges = TRUE]),
     equals(mm(0, 0, 0, 2, 2, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c('a', 'a', 'a', 'a'), c('b', 'c', 'b', 'b'), edges = TRUE]),
+    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b"), edges = TRUE]),
     equals(mm(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
   )
   expect_that(
-    am(g[c('h', 'q'), c('q', 'h'), edges = TRUE]),
+    am(g[c("h", "q"), c("q", "h"), edges = TRUE]),
     equals(mm(16, 0, 0, 0))
   )
 })
@@ -256,19 +256,19 @@ test_that("[[ can query incident edges", {
 test_that("[[ queries edges with vertex names", {
   ## Same with vertex names
   expect_that(
-    g[['a', , edges = TRUE]],
+    g[["a", , edges = TRUE]],
     is_equivalent_to(list(a = E(g)[1:2]))
   )
   expect_that(
-    g[[, 'b', edges = TRUE]],
+    g[[, "b", edges = TRUE]],
     is_equivalent_to(list(b = E(g)[1]))
   )
   expect_that(
-    g[[, 'b', directed = FALSE, edges = TRUE]],
+    g[[, "b", directed = FALSE, edges = TRUE]],
     is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
   )
   expect_that(
-    g[['b', directed = FALSE, edges = TRUE]],
+    g[["b", directed = FALSE, edges = TRUE]],
     is_equivalent_to(list(b = E(g)[c(1, 3, 4)]))
   )
 

@@ -562,7 +562,7 @@ graph_from_graphdb <- function(url = NULL,
 
   f <- try(gzcon(file(filename, open = "rb")))
   if (inherits(f, "try-error")) {
-    stop(paste("Cannot open URL:", filename));
+    stop(paste("Cannot open URL:", filename))
   }
 
   buffer <- read.graph.toraw(f)

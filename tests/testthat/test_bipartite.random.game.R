@@ -12,10 +12,10 @@ test_that("sample_bipartite works", {
   expect_that(ecount(g2), equals(6))
   expect_true(bipartite_mapping(g2)$res)
   expect_true(is_directed(g2))
-  expect_that(print_all(g2), prints_text("5->11"));
+  expect_that(print_all(g2), prints_text("5->11"))
 
   g3 <- sample_bipartite(10, 5, type = "gnp", p = .1, directed = TRUE, mode = "in")
-  expect_that(print_all(g3), prints_text("11->3"));
+  expect_that(print_all(g3), prints_text("11->3"))
 
   g4 <- sample_bipartite(10, 5, type = "gnm", m = 8)
   expect_that(vcount(g4), equals(15))

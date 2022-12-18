@@ -253,7 +253,7 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 #' ## Compare to the correct clustering
 #' g <- (make_full_graph(10) + make_full_graph(10)) %>%
 #'   rewire(each_edge(p = 0.2))
-#' correct <- rep(1:2, each = 10) %>% as_membership
+#' correct <- rep(1:2, each = 10) %>% as_membership()
 #' fc <- cluster_fast_greedy(g)
 #' compare(correct, fc)
 #' compare(correct, membership(fc))
@@ -757,7 +757,7 @@ cut_at <- function(communities, no, steps) {
     noc <- communities$vcount - nrow(mm) # final number of communities
     if (no < noc) {
       warning("Cannot have that few communities")
-      no = noc
+      no <- noc
     }
     steps <- communities$vcount - no
     community.to.membership2(mm, communities$vcount, steps)
@@ -1156,7 +1156,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     prev_quality <- -Inf
     quality <- 0.0
     while (prev_quality < quality) {
-      prev_quality <- quality;
+      prev_quality <- quality
       res <- .Call(
         C_R_igraph_community_leiden, graph, weights,
         vertex_weights, as.numeric(resolution_parameter),
@@ -1652,7 +1652,9 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
-  options.tmp <- arpack_defaults; options.tmp[names(options)] <- options ; options <- options.tmp
+  options.tmp <- arpack_defaults
+  options.tmp[names(options)] <- options
+  options <- options.tmp
 
   on.exit(.Call(C_R_igraph_finalizer))
   # Function call

@@ -51,7 +51,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
     stop("Not a graph object")
   }
 
-  cs <- components(graph, ...)$csize;
+  cs <- components(graph, ...)$csize
   hi <- hist(cs, -1:max(cs), plot = FALSE)$density
   if (mul.size) {
     hi <- hi * 1:max(cs)
@@ -60,7 +60,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
   if (!cumulative) {
     res <- hi
   } else {
-    res <- rev(cumsum(rev(hi)));
+    res <- rev(cumsum(rev(hi)))
   }
 
   res
@@ -110,7 +110,7 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
   )
 
   if (is.na(max.comps)) {
-    max.comps = -1
+    max.comps <- -1
   }
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(

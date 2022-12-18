@@ -697,7 +697,9 @@ as_graphnel <- function(graph) {
       graph::edgeDataDefaults(res, attr = n) <- NA
       res@edgeData@data[el] <- mapply(
         function(x, y) {
-          xx <- c(x, y); names(xx)[length(xx)] <- n; xx
+          xx <- c(x, y)
+          names(xx)[length(xx)] <- n
+          xx
         },
         res@edgeData@data[el],
         edge_attr(graph, n),

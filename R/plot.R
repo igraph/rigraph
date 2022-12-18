@@ -246,7 +246,10 @@ plot.igraph <- function(x,
     }))
   }
 
-  x0 <- ec[, 1] ; y0 <- ec[, 2] ; x1 <- ec[, 3] ; y1 <- ec[, 4]
+  x0 <- ec[, 1]
+  y0 <- ec[, 2]
+  x1 <- ec[, 3]
+  y1 <- ec[, 4]
 
   ################################################################
   ## add the loop edges
@@ -261,7 +264,7 @@ plot.igraph <- function(x,
       b <- 3 * (cp[3, ] - cp[2, ]) - c
       a <- cp[4, ] - cp[1, ] - c - b
 
-      t2 <- t * t;
+      t2 <- t * t
       t3 <- t * t * t
 
       a * t3 + b * t2 + c * t + cp[1, ]
@@ -417,13 +420,16 @@ plot.igraph <- function(x,
         if (!any(valid)) {
           next
         }
-        ec <- edge.color ; if (length(ec) > 1) {
+        ec <- edge.color
+        if (length(ec) > 1) {
           ec <- ec[valid]
         }
-        ew <- edge.width ; if (length(ew) > 1) {
+        ew <- edge.width
+        if (length(ew) > 1) {
           ew <- ew[valid]
         }
-        el <- edge.lty   ; if (length(el) > 1) {
+        el <- edge.lty
+        if (length(el) > 1) {
           el <- el[valid]
         }
         lc <- igraph.Arrows(x0[valid], y0[valid], x1[valid], y1[valid],
@@ -770,29 +776,36 @@ rglplot.igraph <- function(x, ...) {
     to <- el[i, 2]
     v1 <- layout[from, ]
     v2 <- layout[to, ]
-    am <- arrow.mode; if (length(am) > 1) {
+    am <- arrow.mode
+    if (length(am) > 1) {
       am <- am[i]
     }
-    ew <- edge.width; if (length(ew) > 1) {
+    ew <- edge.width
+    if (length(ew) > 1) {
       ew <- ew[i]
     }
-    ec <- edge.color; if (length(ec) > 1) {
+    ec <- edge.color
+    if (length(ec) > 1) {
       ec <- ec[i]
     }
-    r1 <- vertex.size; if (length(r1) > 1) {
+    r1 <- vertex.size
+    if (length(r1) > 1) {
       r1 <- r1[from]
     }
-    r2 <- vertex.size; if (length(r2) > 1) {
+    r2 <- vertex.size
+    if (length(r2) > 1) {
       r2 <- r2[to]
     }
 
     if (from != to) {
       create.edge(v1, v2, r1, r2, ec, ew, am, arrow.size)
     } else {
-      la <- loop.angle; if (length(la) > 1) {
+      la <- loop.angle
+      if (length(la) > 1) {
         la <- la[i]
       }
-      la2 <- loop.angle2; if (length(la2) > 1) {
+      la2 <- loop.angle2
+      if (length(la2) > 1) {
         la2 <- la2[i]
       }
       create.loop(v1, r1, ec, ew, am, la, la2, arrow.size)
@@ -878,7 +891,10 @@ igraph.Arrows <-
     r.arr <- c(sqrt(x.arr^2 + y.arr^2), NA)
 
     ## backup
-    bx1 <- x1 ; bx2 <- x2 ; by1 <- y1 ; by2 <- y2
+    bx1 <- x1
+    bx2 <- x2
+    by1 <- y1
+    by2 <- y2
 
     ## shaft
     lx <- length(x1)
@@ -974,9 +990,14 @@ igraph.Arrows <-
 
     ## backward arrow head
     if (code %in% c(1, 3)) {
-      x1 <- bx1; y1 <- by1
-      tmp <- x1 ; x1 <- x2 ; x2 <- tmp
-      tmp <- y1 ; y1 <- y2 ; y2 <- tmp
+      x1 <- bx1
+      y1 <- by1
+      tmp <- x1
+      x1 <- x2
+      x2 <- tmp
+      tmp <- y1
+      y1 <- y2
+      y2 <- tmp
       theta <- atan2((y2 - y1) * uin[2], (x2 - x1) * uin[1])
       lx <- length(x1)
       Rep <- rep(length(deg.arr), lx)

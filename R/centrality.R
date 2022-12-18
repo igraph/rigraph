@@ -482,7 +482,8 @@ arpack_defaults <- list(
 #'   g <- sample_gnp(1000, 5 / 1000)
 #'   M <- as_adj(g, sparse = TRUE)
 #'   f2 <- function(x, extra = NULL) {
-#'     cat("."); as.vector(M %*% x)
+#'     cat(".")
+#'     as.vector(M %*% x)
 #'   }
 #'   baev <- arpack(f2, sym = TRUE, options = list(
 #'     n = vcount(g), nev = 3, ncv = 8,

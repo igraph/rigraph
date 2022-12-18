@@ -350,7 +350,7 @@ create_es <- function(graph, idx, na_ok = FALSE) {
 
 simple_vs_index <- function(x, i, na_ok = FALSE) {
   res <- unclass(x)[i]
-  if (!na_ok && any(is.na(res))) stop('Unknown vertex selected')
+  if (!na_ok && any(is.na(res))) stop("Unknown vertex selected")
   class(res) <- "igraph.vs"
   res
 }
@@ -465,9 +465,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' # -----------------------------------------------------------------
 #' # The same with vertex names
 #' g <- graph(~ A - +B, B - +C:D, D - +B)
-#' V(g)[.nei(c('B', 'D'))]
-#' V(g)[.nei(c('B', 'D'), "in")]
-#' V(g)[.nei(c('B', 'D'), "out")]
+#' V(g)[.nei(c("B", "D"))]
+#' V(g)[.nei(c("B", "D"), "in")]
+#' V(g)[.nei(c("B", "D"), "out")]
 #'
 #' # -----------------------------------------------------------------
 #' # Resolving attributes
@@ -532,19 +532,22 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   nei <- function(...) {
-    .Deprecated(".nei") ; .nei(...)
+    .Deprecated(".nei")
+    .nei(...)
   }
   .innei <- function(v, mode = c("in", "all", "out", "total")) {
     .nei(v, mode = mode[1])
   }
   innei <- function(...) {
-    .Deprecated(".innei") ; .innei(...)
+    .Deprecated(".innei")
+    .innei(...)
   }
   .outnei <- function(v, mode = c("out", "all", "in", "total")) {
     .nei(v, mode = mode[1])
   }
   outnei <- function(...) {
-    .Deprecated(".outnei") ; .outnei(...)
+    .Deprecated(".outnei")
+    .outnei(...)
   }
   .inc <- function(e) {
     ## TRUE iff the vertex (in the vs) is incident
@@ -560,10 +563,12 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   inc <- function(...) {
-    .Deprecated(".inc") ; .inc(...)
+    .Deprecated(".inc")
+    .inc(...)
   }
   adj <- function(...) {
-    .Deprecated(".inc") ; .inc(...)
+    .Deprecated(".inc")
+    .inc(...)
   }
   .from <- function(e) {
     ## TRUE iff the vertex is the source of at least one edge in e
@@ -578,7 +583,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    .Deprecated(".from") ; .from(...)
+    .Deprecated(".from")
+    .from(...)
   }
   .to <- function(e) {
     ## TRUE iff the vertex is the target of at least one edge in e
@@ -593,7 +599,8 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    .Deprecated(".to") ; .to(...)
+    .Deprecated(".to")
+    .to(...)
   }
 
   graph <- get_vs_graph(x)
@@ -715,7 +722,7 @@ set_single_index <- function(x, value = TRUE) {
 #' )
 #' E(g)
 #' E(g)[[]]
-#' E(g)[[.inc('A')]]
+#' E(g)[[.inc("A")]]
 `[[.igraph.es` <- function(x, ...) {
   res <- x[...]
   set_single_index(res)
@@ -732,7 +739,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   } else {
     res <- unclass(x)[i]
   }
-  if (!na_ok && any(is.na(res))) stop('Unknown edge selected')
+  if (!na_ok && any(is.na(res))) stop("Unknown edge selected")
   attr(res, "env") <- attr(x, "env")
   attr(res, "graph") <- attr(x, "graph")
   class(res) <- "igraph.es"
@@ -871,10 +878,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   adj <- function(...) {
-    .Deprecated(".inc") ; .inc(...)
+    .Deprecated(".inc")
+    .inc(...)
   }
   inc <- function(...) {
-    .Deprecated(".inc") ; .inc(...)
+    .Deprecated(".inc")
+    .inc(...)
   }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
@@ -886,7 +895,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   from <- function(...) {
-    .Deprecated(".from") ; .from(...)
+    .Deprecated(".from")
+    .from(...)
   }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
@@ -898,7 +908,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     tmp[as.numeric(x)]
   }
   to <- function(...) {
-    .Deprecated(".to") ; .to(...)
+    .Deprecated(".to")
+    .to(...)
   }
 
   graph <- get_es_graph(x)
@@ -1552,7 +1563,7 @@ unique.igraph.es <- function(x, incomparables = FALSE, ...) {
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-#' c(V(g)[1], V(g)['A'], V(g)[1:4])
+#' c(V(g)[1], V(g)["A"], V(g)[1:4])
 c.igraph.vs <- function(..., recursive = FALSE) {
   parsed <- parse_vs_op_args(...)
   res <- do_call(c, .args = parsed$args)
@@ -1573,7 +1584,7 @@ c.igraph.vs <- function(..., recursive = FALSE) {
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-#' c(E(g)[1], E(g)['A|B'], E(g)[1:4])
+#' c(E(g)[1], E(g)["A|B"], E(g)[1:4])
 c.igraph.es <- function(..., recursive = FALSE) {
   parsed <- parse_es_op_args(...)
   res <- do_call(c, .args = parsed$args)
@@ -1623,7 +1634,7 @@ union.igraph.vs <- function(...) {
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-#' union(E(g)[1:6], E(g)[5:9], E(g)['A|J'])
+#' union(E(g)[1:6], E(g)[5:9], E(g)["A|J"])
 union.igraph.es <- union.igraph.vs
 
 

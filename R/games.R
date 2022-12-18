@@ -668,7 +668,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
     stop("`out.seq' should be of length `n'")
   }
   if (!is.null(out.seq) && min(out.seq) < 0) {
-    stop("negative elements in `out.seq'");
+    stop("negative elements in `out.seq'")
   }
   if (!is.null(m) && m < 0) {
     stop("`m' is negative")

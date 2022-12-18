@@ -106,7 +106,7 @@ largest_cliques <- largest_cliques
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   if (is.null(min)) {
@@ -317,7 +317,7 @@ weighted_clique_num <- weighted_clique_num
 #' length(maximal_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   if (is.null(min)) {
@@ -345,7 +345,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
 #' @export
 largest_ivs <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -362,7 +362,7 @@ largest_ivs <- function(graph) {
 #' @export
 maximal_ivs <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -379,7 +379,7 @@ maximal_ivs <- function(graph) {
 #' @export
 ivs_size <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   on.exit(.Call(C_R_igraph_finalizer))

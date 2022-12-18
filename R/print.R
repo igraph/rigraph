@@ -243,7 +243,7 @@
   } else {
     i <- 1
     apply(el, 1, function(v) {
-      cat(sep = "", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2]);
+      cat(sep = "", "[", ename[i], "] ", v[1], " ", arrow, " ", v[2])
       lapply(list, function(n) {
         cat(sep = "", "\n[[", i, "]][[", n, "]]\n")
         print(edge_attr(x, n, i))
@@ -255,7 +255,7 @@
   if (omitted.edges != 0) {
     cat(paste(
       '[ reached getOption("max.print") -- omitted', omitted.edges,
-      'edges ]\n\n'
+      "edges ]\n\n"
     ))
   }
 }

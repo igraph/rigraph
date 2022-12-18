@@ -1091,7 +1091,8 @@ tkigraph <- function() {
 
   if (!read$interactive) {
     fun <- function(...) {
-      dev.new() ; plot.igraph(...)
+      dev.new()
+      plot.igraph(...)
     }
   } else {
     fun <- tkplot
@@ -1154,7 +1155,7 @@ tkigraph <- function() {
       if ("weight" %in% edge_attr_names(graphs[[i]])) {
         elabels <- E(graphs[[i]])$weight
       } else {
-        .tkigraph.warning("No edge weights, not a valued graph");
+        .tkigraph.warning("No edge weights, not a valued graph")
         elabels <- NA
       }
     }
@@ -2264,7 +2265,7 @@ tkigraph <- function() {
   }
   plot.communities <- function(simple = FALSE) {
     colbar <- rainbow(length(comm$csize) * 2)
-    vertex.color = colbar[comm$membership]
+    vertex.color <- colbar[comm$membership]
     .tkigraph.plot(gnos = gnos, simple = simple, vertex.color = vertex.color)
   }
   create.subgraph <- function() {
@@ -2383,7 +2384,7 @@ tkigraph <- function() {
   tcltk::tkconfigure(txt, height = 17)
   tcltk::tkgrid(scr, row = 1, column = 1, rowspan = 3, sticky = "ns", "in" = frame, pady = 10)
   tcltk::tkinsert(txt, "end", "Parameters were:\n")
-  tcltk::tkinsert(txt, "end", paste("  Vertex:", read$vertex, "\n"));
+  tcltk::tkinsert(txt, "end", paste("  Vertex:", read$vertex, "\n"))
   tcltk::tkinsert(txt, "end", paste("  Gamma=", read$gamma, "\n"))
   tcltk::tkinsert(txt, "end", if (is.null(read$weights)) "  Weights were not used.\n" else
     "  Weights were used.\n")
@@ -2481,10 +2482,12 @@ tkigraph <- function() {
     tcltk::tcl("render_forw", txt)
   })
   tcltk::tkadd(main.menu, "command", label = "Home", command = function() {
-    tcltk::tcl("render", txt, "index.html"); return()
+    tcltk::tcl("render", txt, "index.html")
+    return()
   })
   tcltk::tkadd(main.menu, "command", label = "Close", command = function() {
-    tcltk::tkdestroy(dialog); return()
+    tcltk::tkdestroy(dialog)
+    return()
   })
   tcltk::tkconfigure(dialog, "-menu", main.menu)
 
@@ -2540,7 +2543,8 @@ tkigraph <- function() {
     )
   )
   close <- tcltk::tkbutton(dialog, text = "Close", command = function() {
-    tcltk::tkdestroy(dialog); return()
+    tcltk::tkdestroy(dialog)
+    return()
   })
 
   tcltk::tkpack(logo, side = "top", anchor = "c", expand = 0)
@@ -2628,7 +2632,7 @@ tkigraph <- function() {
     else if (rownumbers)
       rowname.text <- paste(1:nrows, row.names(dataframe))
     else rowname.text <- row.names(dataframe)
-    namewidth = max(nchar(rowname.text))
+    namewidth <- max(nchar(rowname.text))
     yy <- substring(zz, 2 + max(nchar(row.names(dataframe))))
     datawidth <- max(nchar(yy))
     winwidth <- min(1 + datawidth, maxwidth)
