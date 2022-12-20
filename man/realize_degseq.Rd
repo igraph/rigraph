@@ -83,7 +83,7 @@ g5 <- realize_degseq(degs, allowed.edge.types="multi")
 all(degree(g5) == degs)
 }
 \references{
-V. Havel, 
+V. Havel,
 Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 Časopis pro pěstování matematiky 80, 477-480 (1955).
 http://eudml.org/doc/19050

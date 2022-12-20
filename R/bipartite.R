@@ -71,48 +71,55 @@
 #' @examples
 #'
 #' ## Projection of a full bipartite graph is a full graph
-#' g <- make_full_bipartite_graph(10,5)
+#' g <- make_full_bipartite_graph(10, 5)
 #' proj <- bipartite_projection(g)
 #' graph.isomorphic(proj[[1]], make_full_graph(10))
 #' graph.isomorphic(proj[[2]], make_full_graph(5))
 #'
 #' ## The projection keeps the vertex attributes
-#' M <- matrix(0, nrow=5, ncol=3)
+#' M <- matrix(0, nrow = 5, ncol = 3)
 #' rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
 #' colnames(M) <- c("Party", "Skiing", "Badminton")
-#' M[] <- sample(0:1, length(M), replace=TRUE)
+#' M[] <- sample(0:1, length(M), replace = TRUE)
 #' M
 #' g2 <- graph_from_incidence_matrix(M)
 #' g2$name <- "Event network"
 #' proj2 <- bipartite_projection(g2)
-#' print(proj2[[1]], g=TRUE, e=TRUE)
-#' print(proj2[[2]], g=TRUE, e=TRUE)
+#' print(proj2[[1]], g = TRUE, e = TRUE)
+#' print(proj2[[2]], g = TRUE, e = TRUE)
 #'
-bipartite_projection <- function(graph, types=NULL,
-                                 multiplicity=TRUE, probe1=NULL,
-                                 which=c("both", "true", "false"),
-                                 remove.type=TRUE) {
+bipartite_projection <- function(graph, types = NULL,
+                                 multiplicity = TRUE, probe1 = NULL,
+                                 which = c("both", "true", "false"),
+                                 remove.type = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   types <- handle_vertex_type_arg(types, graph)
   if (!is.null(probe1)) {
-    probe1 <- as.igraph.vs(graph, probe1)-1
+    probe1 <- as.igraph.vs(graph, probe1) - 1
     if (length(probe1) < 1) {
       probe1 <- -1
     }
   } else {
     probe1 <- -1
   }
-  which <- switch(igraph.match.arg(which), "both"=0L, "false"=1L,
-                  "true"=2L)
+  which <- switch(igraph.match.arg(which),
+    "both" = 0L,
+    "false" = 1L,
+    "true" = 2L
+  )
   if (which != "both" && probe1 != -1) {
     warning("`probe1' ignored if only one projection is requested")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_bipartite_projection, graph, types,
-               as.integer(probe1), which)
+  res <- .Call(
+    C_R_igraph_bipartite_projection, graph, types,
+    as.integer(probe1), which
+  )
   if (remove.type) {
     if (is_igraph(res[[1]])) {
       res[[1]] <- delete_vertex_attr(res[[1]], "type")
@@ -128,10 +135,14 @@ bipartite_projection <- function(graph, types=NULL,
     }
     res[1:2]
   } else if (which == 1L) {
-    if (multiplicity) { E(res[[1]])$weight <- res[[3]] }
+    if (multiplicity) {
+      E(res[[1]])$weight <- res[[3]]
+    }
     res[[1]]
   } else {
-    if (multiplicity) { E(res[[2]])$weight <- res[[4]] }
+    if (multiplicity) {
+      E(res[[2]])$weight <- res[[4]]
+    }
     res[[2]]
   }
 }
@@ -177,8 +188,7 @@ bipartite_projection <- function(graph, types=NULL,
 #'
 #' ## A graph containing a triangle is not bipartite
 #' g3 <- make_ring(10)
-#' g3 <- add_edges(g3, c(1,3))
+#' g3 <- add_edges(g3, c(1, 3))
 #' bipartite_mapping(g3)
 #' @export
-
 bipartite_mapping <- bipartite_mapping

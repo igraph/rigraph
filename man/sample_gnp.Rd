@@ -35,7 +35,7 @@ probability that it is present in the graph is \sQuote{p}.
 }
 \examples{
 
-g <- sample_gnp(1000, 1/1000)
+g <- sample_gnp(1000, 1 / 1000)
 degree_distribution(g)
 }
 \references{

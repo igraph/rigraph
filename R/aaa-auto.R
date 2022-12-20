@@ -1,3 +1,5 @@
+# styler: off
+
 #' @export
 gorder <- function(graph) {
   # Argument checks

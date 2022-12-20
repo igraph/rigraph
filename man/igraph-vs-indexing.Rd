@@ -103,7 +103,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 2/100),
+g <- sample_(
+  gnp(100, 2 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )
@@ -114,23 +115,23 @@ plot(g)
 
 # -----------------------------------------------------------------
 # nei() special function
-g <- graph( c(1,2, 2,3, 2,4, 4,2) )
-V(g)[ .nei( c(2,4) ) ]
-V(g)[ .nei( c(2,4), "in") ]
-V(g)[ .nei( c(2,4), "out") ]
+g <- graph(c(1, 2, 2, 3, 2, 4, 4, 2))
+V(g)[.nei(c(2, 4))]
+V(g)[.nei(c(2, 4), "in")]
+V(g)[.nei(c(2, 4), "out")]
 
 # -----------------------------------------------------------------
 # The same with vertex names
-g <- graph(~ A -+ B, B -+ C:D, D -+ B)
-V(g)[ .nei( c('B', 'D') ) ]
-V(g)[ .nei( c('B', 'D'), "in" ) ]
-V(g)[ .nei( c('B', 'D'), "out" ) ]
+g <- graph(~ A - +B, B - +C:D, D - +B)
+V(g)[.nei(c("B", "D"))]
+V(g)[.nei(c("B", "D"), "in")]
+V(g)[.nei(c("B", "D"), "out")]
 
 # -----------------------------------------------------------------
 # Resolving attributes
-g <- graph(~ A -+ B, B -+ C:D, D -+ B)
+g <- graph(~ A - +B, B - +C:D, D - +B)
 V(g)$color <- c("red", "red", "green", "green")
-V(g)[ color == "red" ]
+V(g)[color == "red"]
 
 # Indexing with a variable whose name matches the name of an attribute
 # may fail; use .env to force the name lookup in the parent environment

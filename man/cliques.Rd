@@ -83,7 +83,7 @@ of clique sizes, between the given minimum and maximum clique size.
 # this usually contains cliques of size six
 g <- sample_gnp(100, 0.3)
 clique_num(g)
-cliques(g, min=6)
+cliques(g, min = 6)
 largest_cliques(g)
 
 # To have a bit less maximal cliques, about 100-200 usually

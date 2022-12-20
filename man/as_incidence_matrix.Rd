@@ -51,7 +51,7 @@ for vertices of the second kind.
 }
 \examples{
 
-g <- make_bipartite_graph( c(0,1,0,1,0,0), c(1,2,2,3,3,4) )
+g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
 as_incidence_matrix(g)
 
 }

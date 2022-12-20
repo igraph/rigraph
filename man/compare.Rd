@@ -41,7 +41,7 @@ This function assesses the distance between two community structures.
 g <- make_graph("Zachary")
 sg <- cluster_spinglass(g)
 le <- cluster_leading_eigen(g)
-compare(sg, le, method="rand")
+compare(sg, le, method = "rand")
 compare(membership(sg), membership(le))
 
 }

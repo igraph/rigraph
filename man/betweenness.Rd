@@ -62,7 +62,7 @@ calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.}
 \item{normalized}{Logical scalar, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
 or unordered vertex pairs in directed and undirected graphs, respectively.
-In an undirected graph,            
+In an undirected graph,
 \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
 \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 is the number of vertices in the graph.}
@@ -118,7 +118,7 @@ multiple edges.
 }
 \examples{
 
-g <- sample_gnp(10, 3/10)
+g <- sample_gnp(10, 3 / 10)
 betweenness(g)
 edge_betweenness(g)
 

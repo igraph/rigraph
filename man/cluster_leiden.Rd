@@ -105,7 +105,7 @@ g <- make_graph("Zachary")
 r <- quantile(strength(g))[2] / (gorder(g) - 1)
 # Set seed for sake of reproducibility
 set.seed(1)
-ldc <- cluster_leiden(g, resolution_parameter=r)
+ldc <- cluster_leiden(g, resolution_parameter = r)
 print(ldc)
 plot(ldc, g)
 }

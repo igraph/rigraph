@@ -125,11 +125,11 @@ community of the the given vertex. See also the examples below.
 }
 \examples{
 
-  g <- sample_gnp(10, 5/10) \%du\% sample_gnp(9, 5/9)
-  g <- add_edges(g, c(1, 12))
-  g <- induced_subgraph(g, subcomponent(g, 1))
-  cluster_spinglass(g, spins=2)
-  cluster_spinglass(g, vertex=1)
+g <- sample_gnp(10, 5 / 10) \%du\% sample_gnp(9, 5 / 9)
+g <- add_edges(g, c(1, 12))
+g <- induced_subgraph(g, subcomponent(g, 1))
+cluster_spinglass(g, spins = 2)
+cluster_spinglass(g, vertex = 1)
 
 }
 \references{

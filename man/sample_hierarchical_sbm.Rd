@@ -44,12 +44,16 @@ stochastic block model.
 \examples{
 
 ## Ten blocks with three clusters each
-C <- matrix(c(1  , 3/4,   0,
-              3/4,   0, 3/4,
-              0  , 3/4, 3/4), nrow=3)
-g <- sample_hierarchical_sbm(100, 10, rho=c(3, 3, 4)/10, C=C, p=1/20)
+C <- matrix(c(
+  1, 3 / 4, 0,
+  3 / 4, 0, 3 / 4,
+  0, 3 / 4, 3 / 4
+), nrow = 3)
+g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-if (require(Matrix)) { image(g[]) }
+if (require(Matrix)) {
+  image(g[])
+}
 }
 \seealso{
 \code{\link{sbm.game}}

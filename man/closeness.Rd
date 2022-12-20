@@ -76,9 +76,9 @@ graphs, consider using the harmonic centrality with
 g <- make_ring(10)
 g2 <- make_star(10)
 closeness(g)
-closeness(g2, mode="in")
-closeness(g2, mode="out")
-closeness(g2, mode="all")
+closeness(g2, mode = "in")
+closeness(g2, mode = "out")
+closeness(g2, mode = "all")
 
 }
 \references{

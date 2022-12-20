@@ -31,9 +31,11 @@ random dot product graphs
 norm of the samples equal \code{radius}.
 }
 \examples{
-lpvs.sph    <- sample_sphere_surface(dim=10, n=20, radius=1)
+lpvs.sph <- sample_sphere_surface(dim = 10, n = 20, radius = 1)
 RDP.graph.3 <- sample_dot_product(lpvs.sph)
-vec.norm    <- apply(lpvs.sph, 2, function(x) { sum(x^2) })
+vec.norm <- apply(lpvs.sph, 2, function(x) {
+  sum(x^2)
+})
 vec.norm
 }
 \seealso{

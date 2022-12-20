@@ -53,13 +53,12 @@
 #'
 #' @family graphical degree sequences
 #' @examples
-#' g <- sample_gnp(100, 2/100)
+#' g <- sample_gnp(100, 2 / 100)
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-
-is_degseq <- function(out.deg, in.deg=NULL) {
-  is_graphical(out.deg, in.deg, allowed.edge.types="all")
+is_degseq <- function(out.deg, in.deg = NULL) {
+  is_graphical(out.deg, in.deg, allowed.edge.types = "all")
 }
 
 #' Is a degree sequence graphical?
@@ -94,9 +93,8 @@ is_degseq <- function(out.deg, in.deg=NULL) {
 #'
 #' @family graphical degree sequences
 #' @examples
-#' g <- sample_gnp(100, 2/100)
+#' g <- sample_gnp(100, 2 / 100)
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-
 is_graphical <- is_graphical

@@ -151,7 +151,7 @@ plot(ring.size, rr.pl.0.1, type="b")
 
 pause()
 
-### Logarithmic 'x' axis 
+### Logarithmic 'x' axis
 plot(ring.size, rr.pl.0.1, type="b", log="x")
 
 pause()
@@ -179,4 +179,3 @@ plot(rewire.prob, ws.result[1,]/ws.result[1,1], log="x", pch=22,
 points(rewire.prob, ws.result[2,]/ws.result[2,1], pch=20)
 legend("bottomleft", c(expression(C(p)/C(0)), expression(L(p)/L(0))),
        pch=c(22, 20))
-

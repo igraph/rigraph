@@ -93,9 +93,9 @@ computation, see \code{\link{arpack}} for more about ARPACK in igraph.
 }
 \examples{
 
-#Generate some test data
-g <- make_ring(10, directed=FALSE)
-#Compute eigenvector centrality scores
+# Generate some test data
+g <- make_ring(10, directed = FALSE)
+# Compute eigenvector centrality scores
 eigen_centrality(g)
 }
 \references{

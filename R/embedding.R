@@ -83,11 +83,12 @@
 #'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
-#' lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   return(abs(x) / sqrt(sum(x^2)))
+#' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @export
-
 embed_adjacency_matrix <- embed_adjacency_matrix
 
 
@@ -124,29 +125,30 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #'
 #' # Generate the two groups of singular values with
 #' # Gaussian mixture of two components that have different means
-#' sing.vals  <- c( rnorm (10, mean=1, sd=1), rnorm(10, mean=3, sd=1) )
+#' sing.vals <- c(rnorm(10, mean = 1, sd = 1), rnorm(10, mean = 3, sd = 1))
 #' dim.chosen <- dim_select(sing.vals)
 #' dim.chosen
 #'
 #' # Sample random vectors with multivariate normal distribution
 #' # and normalize to unit length
 #' lpvs <- matrix(rnorm(200), 10, 20)
-#' lpvs <- apply(lpvs, 2, function(x) { (abs(x) / sqrt(sum(x^2))) })
-#' RDP.graph  <- sample_dot_product(lpvs)
-#' dim_select( embed_adjacency_matrix(RDP.graph, 10)$D )
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   (abs(x) / sqrt(sum(x^2)))
+#' })
+#' RDP.graph <- sample_dot_product(lpvs)
+#' dim_select(embed_adjacency_matrix(RDP.graph, 10)$D)
 #'
 #' # Sample random vectors with the Dirichlet distribution
-#' lpvs.dir    <- sample_dirichlet(n=20, rep(1, 10))
+#' lpvs.dir <- sample_dirichlet(n = 20, rep(1, 10))
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
-#' dim_select( embed_adjacency_matrix(RDP.graph.2, 10)$D )
+#' dim_select(embed_adjacency_matrix(RDP.graph.2, 10)$D)
 #'
 #' # Sample random vectors from hypersphere with radius 1.
-#' lpvs.sph    <- sample_sphere_surface(dim=10, n=20, radius=1)
+#' lpvs.sph <- sample_sphere_surface(dim = 10, n = 20, radius = 1)
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
-#' dim_select( embed_adjacency_matrix(RDP.graph.3, 10)$D )
+#' dim_select(embed_adjacency_matrix(RDP.graph.3, 10)$D)
 #'
 #' @export
-
 dim_select <- dim_select
 
 
@@ -219,10 +221,11 @@ dim_select <- dim_select
 #'
 #' ## A small graph
 #' lpvs <- matrix(rnorm(200), 20, 10)
-#' lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+#' lpvs <- apply(lpvs, 2, function(x) {
+#'   return(abs(x) / sqrt(sum(x^2)))
+#' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
-
 embed_laplacian_matrix <- embed_laplacian_matrix
 
 
@@ -248,19 +251,20 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #'
 #' @export
 #' @examples
-#' lpvs.sph    <- sample_sphere_surface(dim=10, n=20, radius=1)
+#' lpvs.sph <- sample_sphere_surface(dim = 10, n = 20, radius = 1)
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
-#' vec.norm    <- apply(lpvs.sph, 2, function(x) { sum(x^2) })
+#' vec.norm <- apply(lpvs.sph, 2, function(x) {
+#'   sum(x^2)
+#' })
 #' vec.norm
-
-sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
+sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks
   dim <- as.integer(dim)
   n <- as.integer(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_sample_sphere_surface, dim, n, radius, positive)
 
@@ -289,19 +293,20 @@ sample_sphere_surface <- function(dim, n=1, radius=1, positive=TRUE) {
 #'
 #' @export
 #' @examples
-#' lpvs.sph.vol <- sample_sphere_volume(dim=10, n=20, radius=1)
-#' RDP.graph.4  <- sample_dot_product(lpvs.sph.vol)
-#' vec.norm     <- apply(lpvs.sph.vol, 2, function(x) { sum(x^2) })
+#' lpvs.sph.vol <- sample_sphere_volume(dim = 10, n = 20, radius = 1)
+#' RDP.graph.4 <- sample_dot_product(lpvs.sph.vol)
+#' vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
+#'   sum(x^2)
+#' })
 #' vec.norm
-
-sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
+sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks
   dim <- as.integer(dim)
   n <- as.integer(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_sample_sphere_volume, dim, n, radius, positive)
 
@@ -328,16 +333,15 @@ sample_sphere_volume <- function(dim, n=1, radius=1, positive=TRUE) {
 #'
 #' @export
 #' @examples
-#' lpvs.dir    <- sample_dirichlet(n=20, alpha=rep(1, 10))
+#' lpvs.dir <- sample_dirichlet(n = 20, alpha = rep(1, 10))
 #' RDP.graph.2 <- sample_dot_product(lpvs.dir)
 #' colSums(lpvs.dir)
-
 sample_dirichlet <- function(n, alpha) {
   # Argument checks
   n <- as.integer(n)
   alpha <- as.numeric(alpha)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_sample_dirichlet, n, alpha)
 

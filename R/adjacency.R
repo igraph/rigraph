@@ -406,5 +406,4 @@ graph_from_adjacency_matrix <- function(adjmatrix, mode=c("directed", "undirecte
 #' @rdname graph_from_adjacency_matrix
 #' @param ... Passed to \code{graph_from_adjacency_matrix}.
 #' @export
-
 from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)

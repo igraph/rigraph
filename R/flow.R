@@ -78,7 +78,6 @@
 #' E(g2)$capacity <- c(3,1,2, 10,1,3, 2)
 #' min_cut(g2, value.only=FALSE)
 #' @export
-
 min_cut <- function(graph, source=NULL, target=NULL, capacity=NULL, value.only=TRUE) {
 
   if (!is_igraph(graph)) {
@@ -334,7 +333,6 @@ edge_connectivity <- function(graph, source=NULL, target=NULL, checks=TRUE) {
 }
 
 #' @export
-
 edge_disjoint_paths <- function(graph, source, target) {
 
   if (!is_igraph(graph)) {
@@ -354,7 +352,6 @@ edge_disjoint_paths <- function(graph, source, target) {
 }
 
 #' @export
-
 vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
 
   if (!is_igraph(graph)) {
@@ -374,7 +371,6 @@ vertex_disjoint_paths <- function(graph, source=NULL, target=NULL) {
 }
 
 #' @export
-
 adhesion <- function(graph, checks=TRUE) {
 
   if (!is_igraph(graph)) {
@@ -388,7 +384,6 @@ adhesion <- function(graph, checks=TRUE) {
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
 #' @export
-
 cohesion.igraph <- function(x, checks=TRUE, ...) {
 
   if (!is_igraph(x)) {
@@ -435,7 +430,6 @@ cohesion.igraph <- function(x, checks=TRUE, ...) {
 #'                    a --+ 1:2:3, 1:2:3 --+ b)
 #' st_cuts(g2, source="s", target="t")
 #' @export
-
 st_cuts <- st_cuts
 
 
@@ -484,7 +478,6 @@ st_cuts <- st_cuts
 #'                a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
 #' st_min_cuts(g, source="s", target="t")
 #' @export
-
 st_min_cuts <- st_min_cuts
 
 
@@ -539,7 +532,6 @@ st_min_cuts <- st_min_cuts
 #' layout[,2] <- -layout[,2]
 #' plot(dtree$domtree, layout=layout, vertex.label=V(dtree$domtree)$name)
 #' @export
-
 dominator_tree <- function(graph, root, mode=c("out", "in", "all", "total")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -594,7 +586,6 @@ dominator_tree <- function(graph, root, mode=c("out", "in", "all", "total")) {
 #'
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
-
 min_st_separators <- min_st_separators
 
 
@@ -657,7 +648,6 @@ min_st_separators <- min_st_separators
 #' g1 <- graph_from_data_frame(as.data.frame(E))
 #' max_flow(g1, source=V(g1)["1"], target=V(g1)["2"])
 #' @export
-
 max_flow <- max_flow
 
 
@@ -682,7 +672,6 @@ max_flow <- max_flow
 #' @seealso \code{\link{is_min_separator}}, \code{\link{min_separators}}
 #'   lists all vertex separator of minimum size.
 #' @export
-
 is_separator <- is_separator
 
 
@@ -734,7 +723,6 @@ is_separator <- is_separator
 #' check.sep(mw5)
 #'
 #' @export
-
 is_min_separator <- is_min_separator
 
 
@@ -802,5 +790,4 @@ is_min_separator <- is_min_separator
 #'                       Russ    - Steve:Bert:Gery:John,
 #'                       John    - Gery:Russ:Michael)
 #' min_separators(camp)
-
 min_separators <- min_separators

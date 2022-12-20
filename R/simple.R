@@ -64,28 +64,27 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph( c(1,2,1,2,3,3) )
+#' g <- graph(c(1, 2, 1, 2, 3, 3))
 #' is_simple(g)
-#' is_simple(simplify(g, remove.loops=FALSE))
-#' is_simple(simplify(g, remove.multiple=FALSE))
+#' is_simple(simplify(g, remove.loops = FALSE))
+#' is_simple(simplify(g, remove.multiple = FALSE))
 #' is_simple(simplify(g))
 #' @export
-
 simplify <- simplify
 
 #' @export
 #' @rdname simplify
-
 is_simple <- is_simple
 
 #' @export
 #' @rdname simplify
-
 simplify_and_colorize <- function(graph) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_simplify_and_colorize, graph)
 

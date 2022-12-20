@@ -29,12 +29,14 @@ attributes of the edges in the sequence are printed as well.
 See \code{\link{[.igraph.es}} for more about indexing edge sequences.
 }
 \examples{
-g <- make_(ring(10),
+g <- make_(
+  ring(10),
   with_vertex_(name = LETTERS[1:10]),
-  with_edge_(weight = 1:10, color = "green"))
+  with_edge_(weight = 1:10, color = "green")
+)
 E(g)
 E(g)[[]]
-E(g)[[.inc('A')]]
+E(g)[[.inc("A")]]
 }
 \seealso{
 Other vertex and edge sequences: 

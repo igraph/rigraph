@@ -57,9 +57,9 @@ default), then the function calculates the exact harmonic centrality scores.
 g <- make_ring(10)
 g2 <- make_star(10)
 harmonic_centrality(g)
-harmonic_centrality(g2, mode="in")
-harmonic_centrality(g2, mode="out")
-harmonic_centrality(g \%du\% make_full_graph(5), mode="all")
+harmonic_centrality(g2, mode = "in")
+harmonic_centrality(g2, mode = "out")
+harmonic_centrality(g \%du\% make_full_graph(5), mode = "all")
 
 }
 \references{

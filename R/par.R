@@ -20,23 +20,24 @@
 #
 ###################################################################
 
-.igraph.pars <- list("print.vertex.attributes"=FALSE,
-                     "print.edge.attributes"=FALSE,
-                     "print.graph.attributes"=FALSE,
-                     "verbose"=FALSE,
-                     "vertex.attr.comb"=list(name="concat", "ignore"),
-                     "edge.attr.comb"=list(weight="sum", name="concat", "ignore"),
-                     "sparsematrices"=TRUE,
-                     "nexus.url"="http://nexus.igraph.org",
-                     "add.params"=TRUE,
-                     "add.vertex.names"=TRUE,
-                     "dend.plot.type"="auto",
-                     "print.full"="auto",
-                     "annotate.plot"=FALSE,
-                     "auto.print.lines" = 10,
-                     "return.vs.es" = TRUE,
-                     "print.id" = TRUE
-                    )
+.igraph.pars <- list(
+  "print.vertex.attributes" = FALSE,
+  "print.edge.attributes" = FALSE,
+  "print.graph.attributes" = FALSE,
+  "verbose" = FALSE,
+  "vertex.attr.comb" = list(name = "concat", "ignore"),
+  "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
+  "sparsematrices" = TRUE,
+  "nexus.url" = "http://nexus.igraph.org",
+  "add.params" = TRUE,
+  "add.vertex.names" = TRUE,
+  "dend.plot.type" = "auto",
+  "print.full" = "auto",
+  "annotate.plot" = FALSE,
+  "auto.print.lines" = 10,
+  "return.vs.es" = TRUE,
+  "print.id" = TRUE
+)
 
 igraph.pars.set.verbose <- function(verbose) {
   if (is.logical(verbose)) {
@@ -46,7 +47,9 @@ igraph.pars.set.verbose <- function(verbose) {
       stop("Unknown 'verbose' value")
     }
     if (verbose %in% c("tk", "tkconsole")) {
-      if (!capabilities()[["X11"]]) { stop("X11 not available")           }
+      if (!capabilities()[["X11"]]) {
+        stop("X11 not available")
+      }
       if (!requireNamespace("tcltk", quietly = TRUE)) {
         stop("tcltk package not available")
       }
@@ -58,7 +61,7 @@ igraph.pars.set.verbose <- function(verbose) {
   verbose
 }
 
-igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
+igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 
 ## This is based on 'sm.options' in the 'sm' package
 
@@ -157,24 +160,28 @@ igraph.pars.callbacks <- list("verbose"=igraph.pars.set.verbose)
 #' @export
 #' @family igraph options
 #' @importFrom pkgconfig set_config_in get_config
-
 igraph_options <- function(...) {
   igraph_i_options(...)
 }
 
 igraph_i_options <- function(..., .in = parent.frame()) {
-  if (nargs() == 0) return(get_all_options())
+  if (nargs() == 0) {
+    return(get_all_options())
+  }
 
   ## Short notation
   temp <- list(...)
   if (length(temp) == 1 && is.null(names(temp))) {
     arg <- temp[[1]]
     switch(mode(arg),
-           list = temp <- arg,
-           character = return(.igraph.pars[arg]),
-           stop("invalid argument: ", sQuote(arg)))
+      list = temp <- arg,
+      character = return(.igraph.pars[arg]),
+      stop("invalid argument: ", sQuote(arg))
+    )
   }
-  if (length(temp) == 0) return(get_all_options())
+  if (length(temp) == 0) {
+    return(get_all_options())
+  }
 
   ## Callbacks
   n <- names(temp)
@@ -201,7 +208,6 @@ local_igraph_options <- function(..., .in = parent.frame()) {
 }
 
 #' @importFrom pkgconfig set_config get_config
-
 get_all_options <- function() {
   res <- lapply(names(.igraph.pars), function(n) {
     nn <- paste0("igraph::", n)
@@ -214,7 +220,6 @@ get_all_options <- function() {
 
 #' @rdname igraph_options
 #' @export
-
 igraph_opt <- function(x, default = NULL) {
   if (missing(default)) {
     get_config(paste0("igraph::", x), .igraph.pars[[x]])
@@ -238,7 +243,6 @@ igraph_opt <- function(x, default = NULL) {
 #'   make_ring(10)[]
 #' )
 #' igraph_opt("sparsematrices")
-
 with_igraph_opt <- function(options, code) {
   on.exit(igraph_options(old))
   old <- igraph_options(options)

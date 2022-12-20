@@ -96,17 +96,14 @@
 #' @examples
 #'
 #' # random network, close to zero
-#' assortativity_degree(sample_gnp(10000, 3/10000))
+#' assortativity_degree(sample_gnp(10000, 3 / 10000))
 #'
 #' # BA model, tends to be dissortative
-#' assortativity_degree(sample_pa(10000, m=4))
-
+#' assortativity_degree(sample_pa(10000, m = 4))
 assortativity <- assortativity
 
 #' @rdname assortativity
-
 assortativity_nominal <- assortativity_nominal
 
 #' @rdname assortativity
-
 assortativity_degree <- assortativity_degree

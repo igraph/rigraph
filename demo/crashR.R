@@ -250,7 +250,7 @@ print(g, v=T)
 pause()
 
 ### Create undirected example graph
-g2 <- graph_from_literal(Alice-Bob:Cecil:Daniel, 
+g2 <- graph_from_literal(Alice-Bob:Cecil:Daniel,
                 Cecil:Daniel-Eugene:Gordon )
 print(g2, v=T)
 
@@ -264,10 +264,10 @@ pause()
 ### Add three new vertices
 g4 <- add_vertices(g3, 3)
 print(g4, v=T)
-igraph_options(print.vertex.attributes=TRUE, 
+igraph_options(print.vertex.attributes=TRUE,
                plot.layout=layout_with_fr)
 g4
-plot(g4)                      
+plot(g4)
 
 pause()
 
@@ -284,7 +284,7 @@ g4
 pause()
 
 ### Edge sequences, first create a directed example graph
-g2 <- graph_from_literal(Alice -+ Bob:Cecil:Daniel, 
+g2 <- graph_from_literal(Alice -+ Bob:Cecil:Daniel,
                 Cecil:Daniel +-+ Eugene:Gordon )
 print(g2, v=T)
 plot(g2, layout=layout_with_kk, vertex.label=V(g2)$name)
@@ -334,4 +334,3 @@ pause()
 
 ### Edges along a path
 E(g2, path=c(1,4,5))
-
