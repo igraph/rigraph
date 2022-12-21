@@ -1,5 +1,4 @@
 test_that("we can create vertex/edge seqs", {
-
   g <- make_ring(10)
   V(g) %&&% expect_true(TRUE)
   E(g) %&&% expect_true(TRUE)
@@ -11,11 +10,9 @@ test_that("we can create vertex/edge seqs", {
   g <- make_ring(10)
   E(g)$name <- LETTERS[1:10]
   E(g) %&&% expect_true(TRUE)
-
 })
 
 test_that("vs/es keeps names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -35,18 +32,15 @@ test_that("vs/es keeps names", {
 })
 
 test_that("vs/es refers to the graph", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
 
   expect_identical(get_vs_graph(vs), g)
   expect_identical(get_es_graph(es), g)
-
 })
 
 test_that("vs/es refers to the original graph", {
-
   g <- g2 <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -55,11 +49,9 @@ test_that("vs/es refers to the original graph", {
 
   expect_identical(get_vs_graph(vs), g2)
   expect_identical(get_es_graph(es), g2)
-
 })
 
 test_that("vs/es references are weak", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -69,11 +61,9 @@ test_that("vs/es references are weak", {
 
   expect_null(get_vs_graph(vs))
   expect_null(get_es_graph(es))
-
 })
 
 test_that("save/load breaks references", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)
@@ -88,11 +78,9 @@ test_that("save/load breaks references", {
   load(tmp)
   expect_null(get_vs_graph(vs))
   expect_null(get_es_graph(es))
-
 })
 
 test_that("vs/es keeps names after graph is deleted", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
@@ -115,7 +103,6 @@ test_that("vs/es keeps names after graph is deleted", {
 })
 
 test_that("both edge and vertex names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   E(g)$name <- LETTERS[1:10]
@@ -124,7 +111,7 @@ test_that("both edge and vertex names", {
   expect_equal(as.vector(es), 1:10)
   expect_equal(names(es), LETTERS[1:10])
   el <- as_edgelist(g)
-  expect_equal(attr(es, "vnames"), paste(el[,1], el[,2], sep = "|"))
+  expect_equal(attr(es, "vnames"), paste(el[, 1], el[, 2], sep = "|"))
 
   x1 <- es[LETTERS[4:7]]
   x2 <- E(g)[4:7]
@@ -132,16 +119,14 @@ test_that("both edge and vertex names", {
   expect_equal(names(x1), names(x2))
   expect_equal(attr(x1, "vnames"), attr(x2, "vnames"))
 
-  y1 <- es[c('a|b', 'd|e')]
-  y2 <- E(g)[c(1,4)]
+  y1 <- es[c("a|b", "d|e")]
+  y2 <- E(g)[c(1, 4)]
   expect_equal(as.vector(y1), as.vector(y2))
   expect_equal(names(y1), names(y2))
   expect_equal(attr(y1, "vnames"), attr(y2, "vnames"))
-
 })
 
 test_that("printing connected vs/es works", {
-
   local_igraph_options(print.id = FALSE)
 
   g <- make_ring(10)
@@ -172,7 +157,6 @@ test_that("printing connected vs/es works", {
 })
 
 test_that("printing unconnected vs/es works", {
-
   local_igraph_options(print.id = FALSE)
 
   g <- make_ring(10)
@@ -199,11 +183,9 @@ test_that("printing unconnected vs/es works", {
     vs
     es
   })
-
 })
 
 test_that("unconnected vs/es can be reused with the same graph", {
-
   g <- make_ring(10)
   vs <- V(g)
   es <- E(g)[1:5]
@@ -225,7 +207,6 @@ test_that("unconnected vs/es can be reused with the same graph", {
 })
 
 test_that("indexing without arguments", {
-
   g <- make_ring(10)
 
   x <- V(g)[]

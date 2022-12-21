@@ -38,7 +38,7 @@ pause()
 fc <- cluster_fast_greedy(karate)
 memb <- membership(fc)
 plot(karate, vertex.color=memb)
-  
+
 pause()
 
 ### Greedy algorithm, easier plotting
@@ -155,17 +155,17 @@ clique.community <- function(graph, k) {
   edges <- c()
   for (i in seq(along.with=clq)) {
     for (j in seq(along.with=clq)) {
-      if ( length(unique(c(clq[[i]], 
+      if ( length(unique(c(clq[[i]],
              clq[[j]]))) == k+1 ) {
         edges <- c(edges, c(i,j))
       }
     }
   }
   clq.graph <- simplify(graph(edges))
-  V(clq.graph)$name <- 
+  V(clq.graph)$name <-
     seq(length.out=vcount(clq.graph))
   comps <- decompose(clq.graph)
-  
+
   lapply(comps, function(x) {
     unique(unlist(clq[ V(x)$name ]))
   })
@@ -186,13 +186,13 @@ g <- graph_from_literal(A-B:F:C:E:D, B-A:D:C:E:F:G, C-A:B:F:E:D, D-A:B:C:F:E,
 pause()
 
 ### Hand-made layout to make it look like the original in the paper
-lay <- c(387.0763, 306.6947, 354.0305, 421.0153, 483.5344, 512.1145, 
-         148.6107, 392.4351, 524.6183, 541.5878, 240.6031, 20, 
-         65.54962, 228.0992, 61.9771, 152.1832, 334.3817, 371.8931, 
-         421.9084, 265.6107, 106.6336, 57.51145, 605, 20, 124.8780, 
-         273.6585, 160.2439, 241.9512, 132.1951, 123.6585, 343.1707, 
-         465.1220, 317.561, 216.3415, 226.0976, 343.1707, 306.5854, 
-         123.6585, 360.2439, 444.3902, 532.1951, 720, 571.2195, 
+lay <- c(387.0763, 306.6947, 354.0305, 421.0153, 483.5344, 512.1145,
+         148.6107, 392.4351, 524.6183, 541.5878, 240.6031, 20,
+         65.54962, 228.0992, 61.9771, 152.1832, 334.3817, 371.8931,
+         421.9084, 265.6107, 106.6336, 57.51145, 605, 20, 124.8780,
+         273.6585, 160.2439, 241.9512, 132.1951, 123.6585, 343.1707,
+         465.1220, 317.561, 216.3415, 226.0976, 343.1707, 306.5854,
+         123.6585, 360.2439, 444.3902, 532.1951, 720, 571.2195,
          639.5122, 505.3659, 644.3902)
 lay <- matrix(lay, ncol=2)
 lay[,2] <- max(lay[,2])-lay[,2]
@@ -225,4 +225,3 @@ pause()
 
 ### Plot with the new colors
 plot(g, layout=lay, vertex.label=V(g)$name)
-

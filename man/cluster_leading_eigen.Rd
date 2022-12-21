@@ -106,11 +106,11 @@ following arguments are supplied to this function: \describe{
 \examples{
 
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)
-g <- add_edges(g, c(1,6, 1,11, 6, 11))
+g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 lec <- cluster_leading_eigen(g)
 lec
 
-cluster_leading_eigen(g, start=membership(lec))
+cluster_leading_eigen(g, start = membership(lec))
 
 }
 \references{

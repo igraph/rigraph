@@ -38,7 +38,7 @@ can perform the check also when self-loops, multi-edges, or both are allowed
 in the graph.
 }
 \examples{
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))
 is_graphical(degree(g))
 }

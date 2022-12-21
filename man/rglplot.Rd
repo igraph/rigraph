@@ -28,10 +28,10 @@ arguments.
 }
 \examples{
 
-g <- make_lattice( c(5,5,5) )
-coords <- layout_with_fr(g, dim=3)
+g <- make_lattice(c(5, 5, 5))
+coords <- layout_with_fr(g, dim = 3)
 if (interactive()) {
-  rglplot(g, layout=coords)
+  rglplot(g, layout = coords)
 }
 
 }

@@ -81,7 +81,7 @@
 #' # this usually contains cliques of size six
 #' g <- sample_gnp(100, 0.3)
 #' clique_num(g)
-#' cliques(g, min=6)
+#' cliques(g, min = 6)
 #' largest_cliques(g)
 #'
 #' # To have a bit less maximal cliques, about 100-200 usually
@@ -104,41 +104,49 @@ largest_cliques <- largest_cliques
 #' in the file, given with the numeric ids of its vertices, separated by
 #' whitespace.
 #' @export
-max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
+max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
-  if (is.null(min)) { min <- 0 }
-  if (is.null(max)) { max <- 0 }
+  if (is.null(min)) {
+    min <- 0
+  }
+  if (is.null(max)) {
+    max <- 0
+  }
 
   if (!is.null(subset)) {
-    subset <- as.integer(as.igraph.vs(graph, subset)-1)
+    subset <- as.integer(as.igraph.vs(graph, subset) - 1)
   }
 
   if (!is.null(file)) {
     if (!is.character(file) ||
-        length(grep("://", file, fixed=TRUE)) > 0 ||
-        length(grep("~", file, fixed=TRUE)) > 0) {
+      length(grep("://", file, fixed = TRUE)) > 0 ||
+      length(grep("~", file, fixed = TRUE)) > 0) {
       tmpfile <- TRUE
       origfile <- file
       file <- tempfile()
     } else {
       tmpfile <- FALSE
     }
-    on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_maximal_cliques_file, graph, subset, file,
-                 as.numeric(min), as.numeric(max))
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(
+      C_R_igraph_maximal_cliques_file, graph, subset, file,
+      as.numeric(min), as.numeric(max)
+    )
     if (tmpfile) {
       buffer <- read.graph.toraw(file)
       write.graph.fromraw(buffer, origfile)
     }
     invisible(NULL)
   } else {
-    on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_maximal_cliques, graph, subset,
-                 as.numeric(min), as.numeric(max))
-    res <- lapply(res, function(x) x+1)
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(
+      C_R_igraph_maximal_cliques, graph, subset,
+      as.numeric(min), as.numeric(max)
+    )
+    res <- lapply(res, function(x) x + 1)
 
     if (igraph_opt("return.vs.es")) {
       res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -149,22 +157,27 @@ max_cliques <- function(graph, min=NULL, max=NULL, subset=NULL, file=NULL) {
 }
 
 #' @export
-
-count_max_cliques <- function(graph, min=NULL, max=NULL,
-                                  subset=NULL) {
+count_max_cliques <- function(graph, min = NULL, max = NULL,
+                              subset = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
 
-  if (is.null(min)) { min <- 0 }
-  if (is.null(max)) { max <- 0 }
+  if (is.null(min)) {
+    min <- 0
+  }
+  if (is.null(max)) {
+    max <- 0
+  }
   min <- as.integer(min)
   max <- as.integer(max)
 
   if (!is.null(subset)) {
-    subset <- as.integer(as.igraph.vs(graph, subset)-1)
+    subset <- as.integer(as.igraph.vs(graph, subset) - 1)
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_maximal_cliques_count, graph, subset, min, max)
 
@@ -229,9 +242,9 @@ clique_num <- clique_num
 #'
 #' g <- make_graph("zachary")
 #' V(g)$weight <- 1
-#' V(g)[c(1,2,3,4,14)]$weight <- 3
+#' V(g)[c(1, 2, 3, 4, 14)]$weight <- 3
 #' weighted_cliques(g)
-#' weighted_cliques(g, maximal=TRUE)
+#' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
 weighted_cliques <- weighted_cliques
@@ -296,16 +309,15 @@ weighted_clique_num <- weighted_clique_num
 #' set.seed(42)
 #' g <- sample_gnp(100, 0.9)
 #' ivs_size(g)
-#' ivs(g, min=ivs_size(g))
+#' ivs(g, min = ivs_size(g))
 #' largest_ivs(g)
 #' # Empty graph
 #' induced_subgraph(g, largest_ivs(g)[[1]])
 #'
 #' length(maximal_ivs(g))
-
-ivs <- function(graph, min=NULL, max=NULL) {
+ivs <- function(graph, min = NULL, max = NULL) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   if (is.null(min)) {
@@ -316,9 +328,11 @@ ivs <- function(graph, min=NULL, max=NULL) {
     max <- 0
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
-               as.numeric(max))
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_independent_vertex_sets, graph, as.numeric(min),
+    as.numeric(max)
+  )
   res <- lapply(res, `+`, 1)
 
   if (igraph_opt("return.vs.es")) {
@@ -329,13 +343,12 @@ ivs <- function(graph, min=NULL, max=NULL) {
 }
 
 #' @export
-
 largest_ivs <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_largest_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
@@ -347,13 +360,12 @@ largest_ivs <- function(graph) {
 }
 
 #' @export
-
 maximal_ivs <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_maximal_independent_vertex_sets, graph)
   res <- lapply(res, `+`, 1)
 
@@ -365,19 +377,17 @@ maximal_ivs <- function(graph) {
 }
 
 #' @export
-
 ivs_size <- function(graph) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_independence_number, graph)
 }
 
 #' @export
-
-clique_size_counts <- function(graph, min=0, max=0, maximal=FALSE, ...) {
+clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
     maximal_clique_size_counts(graph, min, max, ...)
   } else {

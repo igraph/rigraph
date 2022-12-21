@@ -49,10 +49,11 @@ The assignment form of \code{$} is a shortcut for
 equivalent to \code{g <- set_vertex_attr(g, attr, V(g)[idx], value)}.
 }
 \examples{
-g <- make_(ring(10),
+g <- make_(
+  ring(10),
   with_vertex_(
     name = LETTERS[1:10],
-    color = sample(1:2, 10, replace=TRUE)
+    color = sample(1:2, 10, replace = TRUE)
   )
 )
 V(g)$name
@@ -64,7 +65,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 2/100),
+g <- sample_(
+  gnp(100, 2 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )

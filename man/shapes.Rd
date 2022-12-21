@@ -77,7 +77,7 @@ The clipping function has the following arguments:
     second is a character string giving the name of the
     parameter. E.g.
     \preformatted{
-params("vertex", "size")
+	params("vertex", "size")
     }
   }
   \item{end}{Character string, it gives which end points will be
@@ -132,45 +132,53 @@ useful) plotting function, that does not plot anything.
 shapes <- setdiff(shapes(), "")
 g <- make_ring(length(shapes))
 set.seed(42)
-plot(g, vertex.shape=shapes, vertex.label=shapes, vertex.label.dist=1,
-     vertex.size=15, vertex.size2=15,
-     vertex.pie=lapply(shapes, function(x) if (x=="pie") 2:6 else 0),
-     vertex.pie.color=list(heat.colors(5)))
+plot(g,
+  vertex.shape = shapes, vertex.label = shapes, vertex.label.dist = 1,
+  vertex.size = 15, vertex.size2 = 15,
+  vertex.pie = lapply(shapes, function(x) if (x == "pie") 2:6 else 0),
+  vertex.pie.color = list(heat.colors(5))
+)
 
 # add new vertex shape, plot nothing with no clipping
 add_shape("nil")
-plot(g, vertex.shape="nil")
+plot(g, vertex.shape = "nil")
 
 #################################################################
 # triangle vertex shape
-mytriangle <- function(coords, v=NULL, params) {
+mytriangle <- function(coords, v = NULL, params) {
   vertex.color <- params("vertex", "color")
   if (length(vertex.color) != 1 && !is.null(v)) {
     vertex.color <- vertex.color[v]
   }
-  vertex.size <- 1/200 * params("vertex", "size")
+  vertex.size <- 1 / 200 * params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
 
-  symbols(x=coords[,1], y=coords[,2], bg=vertex.color,
-          stars=cbind(vertex.size, vertex.size, vertex.size),
-          add=TRUE, inches=FALSE)
+  symbols(
+    x = coords[, 1], y = coords[, 2], bg = vertex.color,
+    stars = cbind(vertex.size, vertex.size, vertex.size),
+    add = TRUE, inches = FALSE
+  )
 }
 # clips as a circle
-add_shape("triangle", clip=shapes("circle")$clip,
-                 plot=mytriangle)
-plot(g, vertex.shape="triangle", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length.out=vcount(g)))
+add_shape("triangle",
+  clip = shapes("circle")$clip,
+  plot = mytriangle
+)
+plot(g,
+  vertex.shape = "triangle", vertex.color = rainbow(vcount(g)),
+  vertex.size = seq(10, 20, length.out = vcount(g))
+)
 
 #################################################################
 # generic star vertex shape, with a parameter for number of rays
-mystar <- function(coords, v=NULL, params) {
+mystar <- function(coords, v = NULL, params) {
   vertex.color <- params("vertex", "color")
   if (length(vertex.color) != 1 && !is.null(v)) {
     vertex.color <- vertex.color[v]
   }
-  vertex.size  <- 1/200 * params("vertex", "size")
+  vertex.size <- 1 / 200 * params("vertex", "size")
   if (length(vertex.size) != 1 && !is.null(v)) {
     vertex.size <- vertex.size[v]
   }
@@ -179,19 +187,28 @@ mystar <- function(coords, v=NULL, params) {
     norays <- norays[v]
   }
 
-  mapply(coords[,1], coords[,2], vertex.color, vertex.size, norays,
-         FUN=function(x, y, bg, size, nor) {
-           symbols(x=x, y=y, bg=bg,
-                   stars=matrix(c(size,size/2), nrow=1, ncol=nor*2),
-                   add=TRUE, inches=FALSE)
-         })
+  mapply(coords[, 1], coords[, 2], vertex.color, vertex.size, norays,
+    FUN = function(x, y, bg, size, nor) {
+      symbols(
+        x = x, y = y, bg = bg,
+        stars = matrix(c(size, size / 2), nrow = 1, ncol = nor * 2),
+        add = TRUE, inches = FALSE
+      )
+    }
+  )
 }
 # no clipping, edges will be below the vertices anyway
-add_shape("star", clip=shape_noclip,
-                 plot=mystar, parameters=list(vertex.norays=5))
-plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length.out=vcount(g)))
-plot(g, vertex.shape="star", vertex.color=rainbow(vcount(g)),
-     vertex.size=seq(10,20,length.out=vcount(g)),
-     vertex.norays=rep(4:8, length.out=vcount(g)))
+add_shape("star",
+  clip = shape_noclip,
+  plot = mystar, parameters = list(vertex.norays = 5)
+)
+plot(g,
+  vertex.shape = "star", vertex.color = rainbow(vcount(g)),
+  vertex.size = seq(10, 20, length.out = vcount(g))
+)
+plot(g,
+  vertex.shape = "star", vertex.color = rainbow(vcount(g)),
+  vertex.size = seq(10, 20, length.out = vcount(g)),
+  vertex.norays = rep(4:8, length.out = vcount(g))
+)
 }

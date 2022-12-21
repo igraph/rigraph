@@ -26,7 +26,7 @@ graph, like an edge list.
 }
 \examples{
 
-g <- sample_gnp(10, 2/10)
+g <- sample_gnp(10, 2 / 10)
 as_edgelist(g)
 
 V(g)$name <- LETTERS[seq_len(gorder(g))]

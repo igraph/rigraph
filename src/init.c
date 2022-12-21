@@ -49,8 +49,8 @@ extern SEXP R_igraph_es_pairs(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_es_path(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_farthest_points(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_finalizer(void);
-extern SEXP R_igraph_get_adjedgelist(SEXP, SEXP);
-extern SEXP R_igraph_get_adjlist(SEXP, SEXP);
+extern SEXP R_igraph_get_adjedgelist(SEXP, SEXP, SEXP);
+extern SEXP R_igraph_get_adjlist(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_get_all_simple_paths_pp(SEXP);
 extern SEXP R_igraph_get_attr_mode(SEXP, SEXP);
 extern SEXP R_igraph_get_diameter(SEXP, SEXP, SEXP, SEXP);
@@ -443,8 +443,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_es_path",                                    (DL_FUNC) &R_igraph_es_path,                                     3},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
     {"R_igraph_finalizer",                                  (DL_FUNC) &R_igraph_finalizer,                                   0},
-    {"R_igraph_get_adjedgelist",                            (DL_FUNC) &R_igraph_get_adjedgelist,                             2},
-    {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 2},
+    {"R_igraph_get_adjedgelist",                            (DL_FUNC) &R_igraph_get_adjedgelist,                             3},
+    {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 4},
     {"R_igraph_get_all_simple_paths_pp",                    (DL_FUNC) &R_igraph_get_all_simple_paths_pp,                     1},
     {"R_igraph_get_attr_mode",                              (DL_FUNC) &R_igraph_get_attr_mode,                               2},
     {"R_igraph_get_diameter",                               (DL_FUNC) &R_igraph_get_diameter,                                4},

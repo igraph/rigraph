@@ -88,7 +88,7 @@ increase at all.
 }
 \examples{
 
-g <- sample_gnp(20, 5/20, directed=TRUE)
+g <- sample_gnp(20, 5 / 20, directed = TRUE)
 page_rank(g)$vector
 
 g2 <- make_star(10)
@@ -98,7 +98,7 @@ page_rank(g2)$vector
 g3 <- make_ring(10)
 page_rank(g3)$vector
 reset <- seq(vcount(g3))
-page_rank(g3, personalized=reset)$vector
+page_rank(g3, personalized = reset)$vector
 }
 \references{
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale

@@ -56,7 +56,6 @@
 #'   add_edges(c(5,1), color = "green")
 #' E(g)[[]]
 #' plot(g)
-
 add_edges <- function(graph, edges, ..., attr = list()) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -114,7 +113,6 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #' g
 #' V(g)[[]]
 #' plot(g)
-
 add_vertices <- function(graph, nv, ..., attr=list()) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -169,7 +167,6 @@ add_vertices <- function(graph, nv, ..., attr=list()) {
 #' g <- make_ring(5)
 #' g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 #' g
-
 delete_edges <- function(graph, edges) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -198,7 +195,6 @@ delete_edges <- function(graph, edges) {
 #'   delete_vertices("B")
 #' g2
 #' V(g2)
-
 delete_vertices <- function(graph, v) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -231,7 +227,6 @@ delete_vertices <- function(graph, v) {
 #' replicate(100, sample_gnp(10, 1/2), simplify = FALSE) %>%
 #'   vapply(gsize, 0) %>%
 #'   hist()
-
 gsize <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -260,7 +255,6 @@ gsize <- function(graph) {
 #' n1 <- neighbors(g, 1)
 #' n34 <- neighbors(g, 34)
 #' intersection(n1, n34)
-
 neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -298,7 +292,6 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' g <- make_graph("Zachary")
 #' incident(g, 1)
 #' incident(g, 34)
-
 incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -336,7 +329,6 @@ incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
 #'
 #' g2 <- make_ring(10, directed = TRUE)
 #' is_directed(g2)
-
 is_directed <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -361,7 +353,6 @@ is_directed <- function(graph) {
 #' @examples
 #' g <- make_ring(5)
 #' ends(g, E(g))
-
 ends <- function(graph, es, names = TRUE) {
 
   if (!is_igraph(graph)) {
@@ -388,7 +379,6 @@ ends <- function(graph, es, names = TRUE) {
 }
 
 #' @export
-
 get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
@@ -450,7 +440,6 @@ get.edges <- function(graph, es) {
 #' eim
 #' E(g)[eim]
 #'
-
 get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -476,7 +465,6 @@ get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
-
 gorder <- gorder
 
 #' Adjacent vertices of multiple vertices in a graph
@@ -496,7 +484,6 @@ gorder <- gorder
 #' @examples
 #' g <- make_graph("Zachary")
 #' adjacent_vertices(g, c(1, 34))
-
 adjacent_vertices <- function(graph, v,
                                mode = c("out", "in", "all", "total")) {
 
@@ -536,7 +523,6 @@ adjacent_vertices <- function(graph, v,
 #' @examples
 #' g <- make_graph("Zachary")
 #' incident_edges(g, c(1, 34))
-
 incident_edges <- function(graph, v,
                            mode = c("out", "in", "all", "total")) {
 

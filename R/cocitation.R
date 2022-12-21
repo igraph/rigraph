@@ -51,18 +51,17 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_kautz_graph(2,3)
+#' g <- make_kautz_graph(2, 3)
 #' cocitation(g)
 #' bibcoupling(g)
 #'
-cocitation <- function(graph, v=V(graph)) {
-
+cocitation <- function(graph, v = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   v <- as.igraph.vs(graph, v)
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_cocitation, graph, v-1)
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(C_R_igraph_cocitation, graph, v - 1)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     rownames(res) <- vertex_attr(graph, "name", v)
     colnames(res) <- vertex_attr(graph, "name")
@@ -71,14 +70,13 @@ cocitation <- function(graph, v=V(graph)) {
 }
 
 #' @export
-
-bibcoupling <- function(graph, v=V(graph)) {
+bibcoupling <- function(graph, v = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   v <- as.igraph.vs(graph, v)
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_bibcoupling, graph, v-1)
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(C_R_igraph_bibcoupling, graph, v - 1)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     rownames(res) <- vertex_attr(graph, "name", v)
     colnames(res) <- vertex_attr(graph, "name")

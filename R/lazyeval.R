@@ -45,7 +45,6 @@ all_dots <- function(.dots, ..., all_named = FALSE) {
   }
 
   dots
-
 }
 lazy_eval <- function(x, data = NULL) {
   if (is.lazy_dots(x)) {
@@ -82,7 +81,7 @@ interp.formula <- function(`_obj`, ..., .values) {
 interp.lazy <- function(`_obj`, ..., .values) {
   values <- all_values(.values, ...)
 
-  `_obj`$expr <-  substitute_(`_obj`$expr, values)
+  `_obj`$expr <- substitute_(`_obj`$expr, values)
   `_obj`
 }
 interp.character <- function(`_obj`, ..., .values) {
@@ -115,7 +114,7 @@ missing_arg <- function() {
   quote(expr = )
 }
 lazy_dots <- function(..., .follow_symbols = FALSE) {
-  if (nargs() == 0 || (nargs() == 1 &&  ! missing(.follow_symbols))) {
+  if (nargs() == 0 || (nargs() == 1 && !missing(.follow_symbols))) {
     return(structure(list(), class = "lazy_dots"))
   }
 
@@ -168,11 +167,15 @@ make_call <- function(fun, args) {
 }
 common_env <- function(dots) {
   if (!is.list(dots)) stop("dots must be a list", call. = FALSE)
-  if (length(dots) == 0) return(baseenv())
+  if (length(dots) == 0) {
+    return(baseenv())
+  }
 
   dots <- as.lazy_dots(dots)
   env <- dots[[1]]$env
-  if (length(dots) == 1) return(env)
+  if (length(dots) == 1) {
+    return(env)
+  }
 
   for (i in 2:length(dots)) {
     if (!identical(env, dots[[i]]$env)) {
@@ -182,13 +185,12 @@ common_env <- function(dots) {
   env
 }
 eval_call <- function(fun, dots, env = parent.frame()) {
-
   vars <- paste0("x", seq_along(dots))
   names(vars) <- names(dots)
 
   # Create environment containing promises
   env <- new.env(parent = env)
-  for(i in seq_along(dots)) {
+  for (i in seq_along(dots)) {
     dot <- dots[[i]]
 
     assign_call <- substitute(
@@ -214,8 +216,10 @@ auto_names <- function(x, max_width = 40) {
 
   missing <- nms == ""
   expr <- lapply(x[missing], `[[`, "expr")
-  nms[missing] <- vapply(expr, deparse_trunc, width = max_width,
-    FUN.VALUE = character(1), USE.NAMES = FALSE)
+  nms[missing] <- vapply(expr, deparse_trunc,
+    width = max_width,
+    FUN.VALUE = character(1), USE.NAMES = FALSE
+  )
 
   nms
 }
@@ -225,7 +229,9 @@ deparse_trunc <- function(x, width = getOption("width")) {
   }
 
   text <- deparse(x, width.cutoff = width)
-  if (length(text) == 1 && nchar(text) < width) return(text)
+  if (length(text) == 1 && nchar(text) < width) {
+    return(text)
+  }
 
   paste0(substr(text[1], 1, width - 3), "...")
 }
@@ -239,4 +245,4 @@ promise_env <- function(prom) {
 as.lazy.promise <- function(x, ...) {
   lazy_(promise_expr(x), promise_env(x))
 }
-"%||%" <- function(x, y) if(is.null(x)) y else x
+"%||%" <- function(x, y) if (is.null(x)) y else x

@@ -27,7 +27,7 @@ degree vectors are equal and whether their sums are also equal. These are
 known sufficient and necessary conditions for a degree sequence to be valid.
 }
 \examples{
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))
 is_graphical(degree(g))
 }

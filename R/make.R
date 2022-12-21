@@ -177,7 +177,6 @@
 #' ran <- sample_(degseq(c(3,3,3,3,3,3), method = "simple"), simplified())
 #' degree(ran)
 #' is_simple(ran)
-
 make_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "make")
@@ -208,7 +207,6 @@ make_ <- function(...) {
 #' ## Arguments are passed on from sample_ to sample_sbm
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
-
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
@@ -232,7 +230,6 @@ sample_ <- function(...) {
 #' ## These are equivalent
 #' graph_(cbind(1:5,2:6), from_edgelist(directed = FALSE))
 #' graph_(cbind(1:5,2:6), from_edgelist(), directed = FALSE)
-
 graph_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
@@ -280,7 +277,6 @@ constructor_modifier <- function(...) {
 #'
 #' g2 <- make_(ring(10), without_attr())
 #' g2
-
 without_attr <- function() {
   constructor_modifier(
     id = "without_attr"
@@ -297,7 +293,6 @@ without_attr <- function() {
 #' # An artificial example
 #' make_(full_graph(5, loops = TRUE))
 #' make_(full_graph(5, loops = TRUE), without_loops())
-
 without_loops <- function() {
   constructor_modifier(
     id = "without_loops"
@@ -313,7 +308,6 @@ without_loops <- function() {
 #' @examples
 #' sample_(pa(10, m = 3, algorithm = "bag"))
 #' sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
-
 without_multiples <- function() {
   constructor_modifier(
     id = "without_multiples"
@@ -329,7 +323,6 @@ without_multiples <- function() {
 #' @examples
 #' sample_(pa(10, m = 3, algorithm = "bag"))
 #' sample_(pa(10, m = 3, algorithm = "bag"), simplified())
-
 simplified <- function() {
   constructor_modifier(
     id = "simplified"
@@ -351,7 +344,6 @@ simplified <- function() {
 #'     frame.color = "#7fcdbb",
 #'     name = LETTERS[1:10])) %>%
 #'   plot()
-
 with_vertex_ <- function(...) {
 
   args <- grab_args()
@@ -376,7 +368,6 @@ with_vertex_ <- function(...) {
 #'     color = "red",
 #'     weight = rep(1:2, 5))) %>%
 #'   plot()
-
 with_edge_ <- function(...) {
 
   args <- grab_args()
@@ -397,7 +388,6 @@ with_edge_ <- function(...) {
 #' @export
 #' @examples
 #' make_(ring(10), with_graph_(name = "10-ring"))
-
 with_graph_ <- function(...) {
 
   args <- grab_args()
@@ -564,8 +554,6 @@ with_graph_ <- function(...) {
 #'                       P-Q-R-S-P, T-P:Q:R:S,
 #'                       B-F, E-J, C-I, L-T, O-T, M-S,
 #'                       C-P, C-L, I-L, I-P)
-
-
 make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
                        directed = TRUE, dir = directed, simplify = TRUE) {
 
@@ -667,7 +655,6 @@ make_famous_graph <- function(name) {
 
 #' @rdname make_graph
 #' @export
-
 make_directed_graph <- function(edges, n = max(edges)) {
   if (missing(n)) {
     make_graph(edges, directed = TRUE)
@@ -678,7 +665,6 @@ make_directed_graph <- function(edges, n = max(edges)) {
 
 #' @rdname make_graph
 #' @export
-
 make_undirected_graph <- function(edges, n = max(edges)) {
   if (missing(n)) {
     make_graph(edges, directed = FALSE)
@@ -689,12 +675,10 @@ make_undirected_graph <- function(edges, n = max(edges)) {
 
 #' @rdname make_graph
 #' @export
-
 directed_graph <- function(...) constructor_spec(make_directed_graph, ...)
 
 #' @rdname make_graph
 #' @export
-
 undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -712,7 +696,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-
 make_empty_graph <- function(n=0, directed=TRUE) {
   # Argument checks
   if (is.null(n)) {
@@ -736,7 +719,6 @@ make_empty_graph <- function(n=0, directed=TRUE) {
 #' @rdname make_empty_graph
 #' @param ... Passed to \code{make_graph_empty}.
 #' @export
-
 empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -852,7 +834,6 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' g6 <- graph_from_literal( "+" -- "-", "*" -- "/", "%%" -- "%/%" )
 #' g6
 #'
-
 graph_from_literal <- function(..., simplify=TRUE) {
   mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
@@ -957,7 +938,6 @@ graph_from_literal_i <- function(mf) {
 
 #' @rdname graph_from_literal
 #' @export
-
 from_literal <- function(...)
   constructor_spec(graph_from_literal, ..., .lazy = TRUE)
 
@@ -984,7 +964,6 @@ from_literal <- function(...)
 #' @examples
 #' make_star(10, mode = "out")
 #' make_star(5, mode = "undirected")
-
 make_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
                    center=1 ) {
 
@@ -1005,7 +984,6 @@ make_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
 #' @rdname make_star
 #' @param ... Passed to \code{make_star}.
 #' @export
-
 star <- function(...) constructor_spec(make_star, ...)
 
 ## -----------------------------------------------------------------
@@ -1024,7 +1002,6 @@ star <- function(...) constructor_spec(make_star, ...)
 #' @examples
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
-
 make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_full, as.numeric(n), as.logical(directed),
@@ -1039,7 +1016,6 @@ make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
 #' @rdname make_full_graph
 #' @param ... Passed to \code{make_full_graph}.
 #' @export
-
 full_graph <- function(...) constructor_spec(make_full_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1073,7 +1049,6 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' @examples
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
-
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
                           nei = 1, directed = FALSE, mutual = FALSE,
                           circular=FALSE) {
@@ -1104,7 +1079,6 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 #' @rdname make_lattice
 #' @param ... Passed to \code{make_lattice}.
 #' @export
-
 lattice <- function(...) constructor_spec(make_lattice, ...)
 
 ## -----------------------------------------------------------------
@@ -1129,7 +1103,6 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' @examples
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-
 make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
   on.exit( .Call(C_R_igraph_finalizer) )
   res <- .Call(C_R_igraph_ring, as.numeric(n), as.logical(directed),
@@ -1145,7 +1118,6 @@ make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
 #' @rdname make_ring
 #' @param ... Passed to \code{make_ring}.
 #' @export
-
 ring <- function(...) constructor_spec(make_ring, ...)
 
 ## -----------------------------------------------------------------
@@ -1172,7 +1144,6 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' @examples
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
-
 make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
 
   mode <- igraph.match.arg(mode)
@@ -1219,7 +1190,6 @@ sample_tree <- sample_tree
 #' @rdname make_tree
 #' @param ... Passed to \code{make_tree} or \code{sample_tree}.
 #' @export
-
 tree <- function(...) constructor_spec(list(make=make_tree, sample=sample_tree), ...)
 
 
@@ -1284,8 +1254,6 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' ## Some randomly picked graphs from the atlas
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
-
-
 graph_from_atlas <- function(n) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1300,7 +1268,6 @@ graph_from_atlas <- function(n) {
 #' @rdname graph_from_atlas
 #' @param ... Passed to \code{graph_from_atlas}.
 #' @export
-
 atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 
 ## -----------------------------------------------------------------
@@ -1331,7 +1298,6 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' @examples
 #' chord <- make_chordal_ring(15,
 #'     matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
-
 make_chordal_ring <- function(n, w, directed=FALSE) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1347,7 +1313,6 @@ make_chordal_ring <- function(n, w, directed=FALSE) {
 #' @rdname make_chordal_ring
 #' @param ... Passed to \code{make_chordal_ring}.
 #' @export
-
 chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
 ## -----------------------------------------------------------------
@@ -1398,7 +1363,6 @@ make_line_graph <- function(graph) {
 #' @rdname make_line_graph
 #' @param ... Passed to \code{make_line_graph}.
 #' @export
-
 line_graph <- function(...) constructor_spec(make_line_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1435,7 +1399,6 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' g <- make_de_bruijn_graph(2,1)
 #' make_de_bruijn_graph(2,2)
 #' make_line_graph(g)
-
 make_de_bruijn_graph <- function(m, n) {
 
   on.exit( .Call(C_R_igraph_finalizer) )
@@ -1451,7 +1414,6 @@ make_de_bruijn_graph <- function(m, n) {
 #' @rdname make_de_bruijn_graph
 #' @param ... Passed to \code{make_de_bruijn_graph}.
 #' @export
-
 de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1499,7 +1461,6 @@ make_kautz_graph <- function(m, n) {
 #' @rdname make_kautz_graph
 #' @param ... Passed to \code{make_kautz_graph}.
 #' @export
-
 kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1555,7 +1516,6 @@ make_full_bipartite_graph <- function(n1, n2, directed=FALSE,
 #' @rdname make_full_bipartite_graph
 #' @param ... Passed to \code{make_full_bipartite_graph}.
 #' @export
-
 full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1635,7 +1595,6 @@ make_bipartite_graph <- function(types, edges, directed=FALSE) {
 #' @rdname make_bipartite_graph
 #' @param ... Passed to \code{make_bipartite_graph}.
 #' @export
-
 bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1655,7 +1614,6 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' @export
 #' @examples
 #' print_all(make_full_citation_graph(10))
-
 make_full_citation_graph <- function(n, directed=TRUE) {
   # Argument checks
   n <- as.integer(n)
@@ -1672,7 +1630,6 @@ make_full_citation_graph <- function(n, directed=TRUE) {
 #' @rdname make_full_citation_graph
 #' @param ... Passed to \code{make_full_citation_graph}.
 #' @export
-
 full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, ...)
 
 ## -----------------------------------------------------------------
@@ -1703,7 +1660,6 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-
 graph_from_lcf <- graph_from_lcf
 
 ## -----------------------------------------------------------------
@@ -1752,7 +1708,7 @@ graph_from_lcf <- graph_from_lcf
 #' @return The new graph object.
 #' @seealso \code{\link{sample_degseq}} for a randomized variant that samples
 #' from graphs with the given degree sequence.
-#' @references V. Havel, 
+#' @references V. Havel,
 #' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 #' Časopis pro pěstování matematiky 80, 477-480 (1955).
 #' http://eudml.org/doc/19050
@@ -1766,7 +1722,7 @@ graph_from_lcf <- graph_from_lcf
 #' Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 #' Discrete Mathematics 6, 1 (1973).
 #' https://doi.org/10.1016/0012-365X%2873%2990037-X
-#' 
+#'
 #' Sz. Horvát and C. D. Modes,
 #' Connectedness matters: construction and exact random sampling of connected networks (2021).
 #' https://doi.org/10.1088/2632-072X/abced5
@@ -1793,5 +1749,4 @@ graph_from_lcf <- graph_from_lcf
 #' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
 #' g5 <- realize_degseq(degs, allowed.edge.types="multi")
 #' all(degree(g5) == degs)
-
 realize_degseq <- realize_degseq

@@ -81,7 +81,7 @@ plot the graph to any R device.
 \examples{
 
 g <- make_ring(10)
-plot(g, layout=layout_with_kk, vertex.color="green")
+plot(g, layout = layout_with_kk, vertex.color = "green")
 
 }
 \seealso{

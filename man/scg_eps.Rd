@@ -44,7 +44,7 @@ projector corresponding to the \code{mtype} argument.
 \examples{
 
 v <- rexp(20)
-km <- kmeans(v,5)
+km <- kmeans(v, 5)
 sum(km$withinss)
 scg_eps(cbind(v), km$cluster)^2
 }

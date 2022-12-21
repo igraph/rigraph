@@ -54,7 +54,6 @@
 #' all_simple_paths(g, 1, c(3,5))
 #'
 #' @export
-
 all_simple_paths <- function(graph, from, to = V(graph),
                              mode = c("out", "in", "all", "total"),
                              cutoff = -1) {
@@ -101,7 +100,6 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' g2 <- g + edge(5,1)
 #' is_dag(g2)
 #' @export
-
 is_dag <- is_dag
 
 
@@ -147,7 +145,6 @@ is_dag <- is_dag
 #'                 I-G:H:J, J-H:I)
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin=TRUE)
-
 max_cardinality <- max_cardinality
 
 
@@ -181,7 +178,6 @@ max_cardinality <- max_cardinality
 #' g <- make_star(10, mode="undirected")
 #' eccentricity(g)
 #' @export
-
 eccentricity <- eccentricity
 
 
@@ -216,12 +212,10 @@ eccentricity <- eccentricity
 #' eccentricity(g)
 #' radius(g)
 #' @export
-
 radius <- radius
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-
 distance_table <- distance_table

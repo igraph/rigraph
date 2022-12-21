@@ -32,7 +32,7 @@ See \code{\link{centralize}} for a summary of graph centralization.
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
 centr_eigen(g, normalized = FALSE)$centralization \%>\%
- `/`(centr_eigen_tmax(g))
+  `/`(centr_eigen_tmax(g))
 centr_eigen(g, normalized = TRUE)$centralization
 }
 \seealso{

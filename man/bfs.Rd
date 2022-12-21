@@ -125,7 +125,6 @@ f <- function(graph, data, extra) {
 }
 bfs(make_ring(10) \%du\% make_ring(10), root=1, callback=f)
 
-
 }
 \seealso{
 \code{\link{dfs}} for depth-first search.

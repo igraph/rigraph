@@ -96,32 +96,37 @@ NULL
 #' ## you want to run them.
 #'
 #' ## A graph with two dense groups
-#' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
+#' g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 #' hrg <- fit_hrg(g)
 #' hrg
 #'
 #' ## The consensus tree for it
-#' consensus_tree(g, hrg=hrg, start=TRUE)
+#' consensus_tree(g, hrg = hrg, start = TRUE)
 #'
 #' ## Prediction of missing edges
-#' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
+#' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-
-fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
+fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(),
-                vertices=c())
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
   }
-  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")],
-                as.numeric)
+  if (is.null(hrg)) {
+    hrg <- list(
+      left = c(), right = c(), prob = c(), edges = c(),
+      vertices = c()
+    )
+  }
+  hrg <- lapply(
+    hrg[c("left", "right", "prob", "edges", "vertices")],
+    as.numeric
+  )
   start <- as.logical(start)
   steps <- as.integer(steps)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_hrg_fit, graph, hrg, start, steps)
 
@@ -163,10 +168,8 @@ fit_hrg <- function(graph, hrg=NULL, start=FALSE, steps=0) {
 #'   \item{weights}{Numeric vector, counts the number of times a given tree
 #'     split occurred in the generated network samples, for each internal
 #'     vertices. The order is the same as in the \code{parents} vector.}
-
 #' @family hierarchical random graph functions
 #' @export
-
 consensus_tree <- consensus_tree
 
 
@@ -185,7 +188,6 @@ consensus_tree <- consensus_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 hrg <- hrg
 
 
@@ -199,7 +201,6 @@ hrg <- hrg
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 hrg_tree <- hrg_tree
 
 
@@ -214,7 +215,6 @@ hrg_tree <- hrg_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-
 sample_hrg <- sample_hrg
 
 #' Predict edges based on a hierarchical random graph model
@@ -261,39 +261,45 @@ sample_hrg <- sample_hrg
 #' ## you want to run them.
 #'
 #' ## A graph with two dense groups
-#' g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
+#' g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 #' hrg <- fit_hrg(g)
 #' hrg
 #'
 #' ## The consensus tree for it
-#' consensus_tree(g, hrg=hrg, start=TRUE)
+#' consensus_tree(g, hrg = hrg, start = TRUE)
 #'
 #' ## Prediction of missing edges
-#' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
+#' g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 #' predict_edges(g2)
 #' @export
 #' @family hierarchical random graph functions
-
-predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
-                        num.bins=25) {
-
+predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
+                          num.bins = 25) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(),
-                vertices=c())
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
   }
-  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")],
-                as.numeric)
+  if (is.null(hrg)) {
+    hrg <- list(
+      left = c(), right = c(), prob = c(), edges = c(),
+      vertices = c()
+    )
+  }
+  hrg <- lapply(
+    hrg[c("left", "right", "prob", "edges", "vertices")],
+    as.numeric
+  )
   start <- as.logical(start)
   num.samples <- as.integer(num.samples)
   num.bins <- as.integer(num.bins)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_hrg_predict, graph, hrg, start, num.samples,
-               num.bins)
-  res$edges <- matrix(res$edges, ncol=2, byrow=TRUE)
+  res <- .Call(
+    C_R_igraph_hrg_predict, graph, hrg, start, num.samples,
+    num.bins
+  )
+  res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"
   res
 }
@@ -322,53 +328,56 @@ predict_edges <- function(graph, hrg=NULL, start=FALSE, num.samples=10000,
 #' hrg <- fit_hrg(g)
 #' as.igraph(hrg)
 #'
-as.igraph <- function(x, ...)
+as.igraph <- function(x, ...) {
   UseMethod("as.igraph")
+}
 
 #' @method as.igraph igraphHRG
 #' @export
-
 as.igraph.igraphHRG <- function(x, ...) {
-  ovc <- length(x$left)+1L
-  ivc <- ovc-1L
-  ll <- ifelse(x$left  < 0, -x$left  + ovc, x$left  + 1)
+  ovc <- length(x$left) + 1L
+  ivc <- ovc - 1L
+  ll <- ifelse(x$left < 0, -x$left + ovc, x$left + 1)
   rr <- ifelse(x$right < 0, -x$right + ovc, x$right + 1)
-  edges <- c(rbind(seq_len(ivc)+ovc, ll), rbind(seq_len(ivc)+ovc, rr))
+  edges <- c(rbind(seq_len(ivc) + ovc, ll), rbind(seq_len(ivc) + ovc, rr))
   res <- graph(edges)
 
-  V(res)$name <- c(if (!is.null(x$names)) x$names else as.character(1:ovc),
-                   paste0("g", 1:ivc))
+  V(res)$name <- c(
+    if (!is.null(x$names)) x$names else as.character(1:ovc),
+    paste0("g", 1:ivc)
+  )
   V(res)$prob <- c(rep(NA, ovc), x$prob)
   res$name <- "Fitted HRG"
   res
 }
 
 buildMerges <- function(object) {
-
   ## Build a merge matrix. This is done by a post-order
   ## traversal of the tree.
 
   S <- numeric()
-  vcount <- length(object$left)+1
-  nMerge <- vcount-1
-  merges <- matrix(0, nrow=vcount-1, ncol=3)
+  vcount <- length(object$left) + 1
+  nMerge <- vcount - 1
+  merges <- matrix(0, nrow = vcount - 1, ncol = 3)
   mptr <- 1
-  S[length(S)+1] <- -1
+  S[length(S) + 1] <- -1
   prev <- NULL
   while (length(S) != 0) {
     curr <- S[length(S)]
     ## coming from parent? going left if possible.
     if (is.null(prev) ||
-        (prev < 0 && object$left[-prev] == curr) ||
-        (prev < 0 && object$right[-prev] == curr)) {
-      if (curr < 0) { S <- c(S, object$left[-curr]) }
-    ## coming from left child? going right
+      (prev < 0 && object$left[-prev] == curr) ||
+      (prev < 0 && object$right[-prev] == curr)) {
+      if (curr < 0) {
+        S <- c(S, object$left[-curr])
+      }
+      ## coming from left child? going right
     } else if (curr < 0 && object$left[-curr] == prev) {
       S <- c(S, object$right[-curr])
-    ## coming from right child? going up
+      ## coming from right child? going up
     } else {
       if (curr < 0) {
-        merges[mptr,] <- c(object$left[-curr], object$right[-curr], curr)
+        merges[mptr, ] <- c(object$left[-curr], object$right[-curr], curr)
         mptr <- mptr + 1
       }
       S <- S[-length(S)]
@@ -379,63 +388,61 @@ buildMerges <- function(object) {
 }
 
 #' @method as.dendrogram igraphHRG
-
-as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
-
+as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
   nMerge <- length(object$left)
   merges <- buildMerges(object)
 
   .memberDend <- function(x) {
-    r <- attr(x,"x.member")
-    if(is.null(r)) {
-      r <- attr(x,"members")
-      if(is.null(r)) r <- 1:1
+    r <- attr(x, "x.member")
+    if (is.null(r)) {
+      r <- attr(x, "members")
+      if (is.null(r)) r <- 1:1
     }
     r
   }
 
   oHgt <- 1:nrow(merges)
   hMax <- oHgt[length(oHgt)]
-  mynames <- if (is.null(object$names)) 1:(nMerge+1) else object$names
+  mynames <- if (is.null(object$names)) 1:(nMerge + 1) else object$names
   z <- list()
 
   for (k in 1:nMerge) {
-    x <- merges[k,1:2]
+    x <- merges[k, 1:2]
     if (any(neg <- x >= 0)) {
       h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
     }
-    if (all(neg)) {                     # two leaves
-      zk <- as.list(x+1)
+    if (all(neg)) { # two leaves
+      zk <- as.list(x + 1)
       attr(zk, "members") <- 2L
-      attr(zk, "midpoint") <- 1/2       # mean( c(0,1) )
-      objlabels <- mynames[x+1]
+      attr(zk, "midpoint") <- 1 / 2 # mean( c(0,1) )
+      objlabels <- mynames[x + 1]
       attr(zk[[1]], "label") <- objlabels[1]
       attr(zk[[2]], "label") <- objlabels[2]
       attr(zk[[1]], "members") <- attr(zk[[2]], "members") <- 1L
       attr(zk[[1]], "height") <- attr(zk[[2]], "height") <- h0
       attr(zk[[1]], "leaf") <- attr(zk[[2]], "leaf") <- TRUE
-    } else if (any(neg)) {              # one leaf, one node
+    } else if (any(neg)) { # one leaf, one node
       X <- paste0("g", -x)
       isL <- x[1] >= 0
-      zk <- if (isL) list(x[1]+1, z[[X[2]]]) else list(z[[X[1]]], x[2]+1)
-      attr(zk, "members") <- attr(z[[X[1+isL]]], "members") + 1L
+      zk <- if (isL) list(x[1] + 1, z[[X[2]]]) else list(z[[X[1]]], x[2] + 1)
+      attr(zk, "members") <- attr(z[[X[1 + isL]]], "members") + 1L
       attr(zk, "midpoint") <-
-        (.memberDend(zk[[1]]) + attr(z[[X[1+isL]]], "midpoint"))/2
+        (.memberDend(zk[[1]]) + attr(z[[X[1 + isL]]], "midpoint")) / 2
       attr(zk[[2 - isL]], "members") <- 1L
       attr(zk[[2 - isL]], "height") <- h0
-      attr(zk[[2 - isL]], "label") <- mynames[x[2 - isL]+1]
+      attr(zk[[2 - isL]], "label") <- mynames[x[2 - isL] + 1]
       attr(zk[[2 - isL]], "leaf") <- TRUE
-    } else {                            #two nodes
+    } else { # two nodes
       X <- paste0("g", -x)
       zk <- list(z[[X[1]]], z[[X[2]]])
       attr(zk, "members") <- attr(z[[X[1]]], "members") +
         attr(z[[X[2]]], "members")
       attr(zk, "midpoint") <- (attr(z[[X[1]]], "members") +
-                               attr(z[[X[1]]], "midpoint") +
-                               attr(z[[X[2]]], "midpoint"))/2
+        attr(z[[X[1]]], "midpoint") +
+        attr(z[[X[2]]], "midpoint")) / 2
     }
     attr(zk, "height") <- oHgt[k]
-    z[[k <- paste0("g", -merges[k,3])]] <- zk
+    z[[k <- paste0("g", -merges[k, 3])]] <- zk
   }
   z <- z[[k]]
   class(z) <- "dendrogram"
@@ -444,18 +451,17 @@ as.dendrogram.igraphHRG <- function(object, hang=0.01, ...) {
 
 #' @importFrom stats as.hclust
 #' @method as.hclust igraphHRG
-
 as.hclust.igraphHRG <- function(x, ...) {
   merge3 <- buildMerges(x)
 
   ## We need to rewrite the merge matrix, because hclust assumes
   ## that group ids are assigned in the order of the merges
-  map <- order(-merge3[,3])
+  map <- order(-merge3[, 3])
 
-  merge <- merge3[,1:2]
+  merge <- merge3[, 1:2]
   gs <- which(merge < 0)
-  merge[ gs] <- map[ -merge[gs] ]
-  merge[-gs] <- -merge[-gs]-1
+  merge[gs] <- map[-merge[gs]]
+  merge[-gs] <- -merge[-gs] - 1
 
   ## To get the ordering, we need to recode the merge matrix again,
   ## without using group ids. Here the right node is merged _into_
@@ -463,41 +469,46 @@ as.hclust.igraphHRG <- function(x, ...) {
   map2 <- numeric(nrow(merge))
   mergeInto <- merge
   for (i in 1:nrow(merge)) {
-    mr <- mergeInto[i,]
-    mr[mr > 0] <- -map2[mr[mr>0]]
-    mergeInto[i,] <- -mr
+    mr <- mergeInto[i, ]
+    mr[mr > 0] <- -map2[mr[mr > 0]]
+    mergeInto[i, ] <- -mr
     map2[i] <- -mr[1]
   }
-  n <- nrow(merge)+1
-  hcass <- .C("igraphhcass2", n=as.integer(n),
-              ia=as.integer(mergeInto[,1]),
-              ib=as.integer(mergeInto[,2]),
-              order=integer(n), iia=integer(n), iib=integer(n))
+  n <- nrow(merge) + 1
+  hcass <- .C("igraphhcass2",
+    n = as.integer(n),
+    ia = as.integer(mergeInto[, 1]),
+    ib = as.integer(mergeInto[, 2]),
+    order = integer(n), iia = integer(n), iib = integer(n)
+  )
 
   mynames <- if (is.null(x$names)) 1:n else x$names
-  res <- list(merge=merge, height=1:nrow(merge), order=hcass$order,
-              labels=mynames, method=NA_character_,
-              dist.method=NA_character_)
+  res <- list(
+    merge = merge, height = 1:nrow(merge), order = hcass$order,
+    labels = mynames, method = NA_character_,
+    dist.method = NA_character_
+  )
   class(res) <- "hclust"
   res
 }
 
 #' @method as_phylo igraphHRG
 #' @importFrom stats reorder
-
 as_phylo.igraphHRG <- function(x, ...) {
-
-  ovc <- length(x$left)+1L
-  ivc <- ovc-1L
-  ll <- ifelse(x$left  < 0, -x$left  + ovc, x$left  + 1)
+  ovc <- length(x$left) + 1L
+  ivc <- ovc - 1L
+  ll <- ifelse(x$left < 0, -x$left + ovc, x$left + 1)
   rr <- ifelse(x$right < 0, -x$right + ovc, x$right + 1)
-  edge <- matrix(rbind(seq_len(ivc)+ovc, ll, seq_len(ivc)+ovc, rr),
-                 ncol=2, byrow=TRUE)
+  edge <- matrix(rbind(seq_len(ivc) + ovc, ll, seq_len(ivc) + ovc, rr),
+    ncol = 2, byrow = TRUE
+  )
 
   edge.length <- rep(0.5, nrow(edge))
   labels <- if (is.null(x$names)) 1:ovc else x$names
-  obj <- list(edge=edge, edge.length=edge.length/2, tip.label=labels,
-              Nnode=ivc)
+  obj <- list(
+    edge = edge, edge.length = edge.length / 2, tip.label = labels,
+    Nnode = ivc
+  )
   class(obj) <- "phylo"
   reorder(obj)
 }
@@ -581,18 +592,17 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' hrg <- fit_hrg(g)
 #' plot_dendrogram(hrg)
 #'
-plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...) {
-
-  if (mode=="auto") {
+plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
+  if (mode == "auto") {
     have_ape <- requireNamespace("ape", quietly = TRUE)
     mode <- if (have_ape) "phylo" else "hclust"
   }
 
-  if (mode=="hclust") {
+  if (mode == "hclust") {
     hrgPlotHclust(x, ...)
-  } else if (mode=="dendrogram") {
+  } else if (mode == "dendrogram") {
     hrgPlotDendrogram(x, ...)
-  } else if (mode=="phylo") {
+  } else if (mode == "phylo") {
     hrgPlotPhylo(x, ...)
   }
 }
@@ -600,36 +610,38 @@ plot_dendrogram.igraphHRG <- function(x, mode=igraph_opt("dend.plot.type"), ...)
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
-
-hrgPlotHclust <- function(x, rect=0, colbar=rainbow(rect), hang=.01,
-                          ann=FALSE, main="", sub="", xlab="", ylab="",
+hrgPlotHclust <- function(x, rect = 0, colbar = rainbow(rect), hang = .01,
+                          ann = FALSE, main = "", sub = "", xlab = "", ylab = "",
                           ...) {
   hc <- as.hclust(x)
-  ret <- plot(hc, hang=hang, ann=ann, main=main, sub=sub, xlab=xlab,
-              ylab=ylab, ...)
+  ret <- plot(hc,
+    hang = hang, ann = ann, main = main, sub = sub, xlab = xlab,
+    ylab = ylab, ...
+  )
   if (rect > 0) {
-    rect.hclust(hc, k=rect, border=colbar)
+    rect.hclust(hc, k = rect, border = colbar)
   }
   invisible(ret)
 }
 
 #' @importFrom graphics plot
-
 hrgPlotDendrogram <- function(x, ...) {
   plot(as.dendrogram(x), ...)
 }
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
-
-hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
-                         edge.color=NULL, use.edge.length=FALSE, ...) {
-  vc <- length(x$left)+1
+hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
+                         edge.color = NULL, use.edge.length = FALSE, ...) {
+  vc <- length(x$left) + 1
   phy <- as_phylo(x)
-  br <- seq(0,1,length.out=length(colbar)) ; br[1] <- -1
-  cc <- as.integer(cut(x$prob[phy$edge[,1] - vc], breaks=br))
-  if (is.null(edge.color)) { edge.color <- colbar[cc] }
-  plot(phy, edge.color=edge.color, use.edge.length=use.edge.length, ...)
+  br <- seq(0, 1, length.out = length(colbar))
+  br[1] <- -1
+  cc <- as.integer(cut(x$prob[phy$edge[, 1] - vc], breaks = br))
+  if (is.null(edge.color)) {
+    edge.color <- colbar[cc]
+  }
+  plot(phy, edge.color = edge.color, use.edge.length = use.edge.length, ...)
 }
 
 #' Print a hierarchical random graph model to the screen
@@ -676,56 +688,60 @@ hrgPlotPhylo <- function(x, colbar=rainbow(11, start=.7, end=.1),
 #' @method print igraphHRG
 #' @export
 #' @family hierarchical random graph functions
-
-print.igraphHRG <- function(x, type=c("auto", "tree", "plain"),
-                            level=3, ...) {
-
+print.igraphHRG <- function(x, type = c("auto", "tree", "plain"),
+                            level = 3, ...) {
   type <- igraph.match.arg(type)
-  if (type=="auto") {
+  if (type == "auto") {
     type <- if (length(x$left <= 100)) "tree" else "plain"
   }
-  if (type=="tree") {
-    return(print1.igraphHRG(x, level=level, ...))
+  if (type == "tree") {
+    return(print1.igraphHRG(x, level = level, ...))
   } else {
     return(print2.igraphHRG(x, ...))
   }
 }
 
-print1.igraphHRG <- function(x, level=3, ...) {
-  cat(sep="", "Hierarchical random graph, at level ", level, ":\n")
+print1.igraphHRG <- function(x, level = 3, ...) {
+  cat(sep = "", "Hierarchical random graph, at level ", level, ":\n")
 
   ## Depth of printed top of the dendrogram
   .depth <- function(b, l) {
-    l[2] <- max(l[2], nchar(format(x$prob[b], digits=2)))
-    if (l[1]==level) { return(l) }
-    if (x$left[b] < 0 && x$right[b] < 0) {
-      l1 <- .depth(-x$left[b], c(l[1]+1, l[2]))
-      l2 <- .depth(-x$right[b], c(l[1]+1, l[2]))
-      return(pmax(l1,l2))
+    l[2] <- max(l[2], nchar(format(x$prob[b], digits = 2)))
+    if (l[1] == level) {
+      return(l)
     }
-    if (x$left[b] < 0)  { return(.depth(-x$left[b],  c(l[1]+1, l[2]))) }
-    if (x$right[b] < 0) { return(.depth(-x$right[b], c(l[1]+1, l[2]))) }
+    if (x$left[b] < 0 && x$right[b] < 0) {
+      l1 <- .depth(-x$left[b], c(l[1] + 1, l[2]))
+      l2 <- .depth(-x$right[b], c(l[1] + 1, l[2]))
+      return(pmax(l1, l2))
+    }
+    if (x$left[b] < 0) {
+      return(.depth(-x$left[b], c(l[1] + 1, l[2])))
+    }
+    if (x$right[b] < 0) {
+      return(.depth(-x$right[b], c(l[1] + 1, l[2])))
+    }
     return(l)
   }
   cs <- .depth(1, c(1, 0))
   pw <- cs[2]
   cs <- cs[1] * 3
-  vw <- nchar(as.character(length(x$left)+1))
-  sp <- paste(collapse="", rep(" ", cs+pw+2+2))
-  nn <- if (is.null(x$names)) seq_len(length(x$left)+1) else x$names
+  vw <- nchar(as.character(length(x$left) + 1))
+  sp <- paste(collapse = "", rep(" ", cs + pw + 2 + 2))
+  nn <- if (is.null(x$names)) seq_len(length(x$left) + 1) else x$names
 
   ## Function to collect all individual vertex children
   .children <- function(b) {
     res <- c()
-    if (x$left[b]  < 0) {
+    if (x$left[b] < 0) {
       res <- c(res, .children(-x$left[b]))
     } else {
-      res <- c(x$left[b]+1, res)
+      res <- c(x$left[b] + 1, res)
     }
     if (x$right[b] < 0) {
       res <- c(res, .children(-x$right[b]))
     } else {
-      res <- c(x$right[b]+1, res)
+      res <- c(x$right[b] + 1, res)
     }
     return(res)
   }
@@ -733,82 +749,94 @@ print1.igraphHRG <- function(x, level=3, ...) {
   ## Recursive printing
   .plot <- function(b, l, ind = "") {
     if (b != 1) {
-      he <- format(paste(sep="", ind, "'- g", b), width=cs)
+      he <- format(paste(sep = "", ind, "'- g", b), width = cs)
       ind <- paste("  ", ind)
     } else {
-      he <- format(paste(sep="", ind, "g", b), width=cs)
+      he <- format(paste(sep = "", ind, "g", b), width = cs)
     }
     ## whether to go left and/or right
-    gol <- x$left[b]  < 0 && l < level
+    gol <- x$left[b] < 0 && l < level
     gor <- x$right[b] < 0 && l < level
 
     ## the children to print
     ch1 <- character()
     if (!gol && x$left[b] < 0) {
-      ch1 <- c(ch1, paste(sep="", "g", -x$left[b]))
+      ch1 <- c(ch1, paste(sep = "", "g", -x$left[b]))
     }
     if (!gor && x$right[b] < 0) {
-      ch1 <- c(ch1, paste(sep="", "g", -x$right[b]))
+      ch1 <- c(ch1, paste(sep = "", "g", -x$right[b]))
     }
     ch2 <- numeric()
     if (!gol) {
-      if (x$left[b]  <  0) { ch2 <- c(ch2, .children(-x$left[b])) }
-      if (x$left[b]  >= 0) { ch2 <- c(ch2, x$left[b] + 1) }
+      if (x$left[b] < 0) {
+        ch2 <- c(ch2, .children(-x$left[b]))
+      }
+      if (x$left[b] >= 0) {
+        ch2 <- c(ch2, x$left[b] + 1)
+      }
     }
     if (!gor) {
-      if (x$right[b] <  0) { ch2 <- c(ch2, .children(-x$right[b])) }
-      if (x$right[b] >= 0) { ch2 <- c(ch2, x$right[b] + 1) }
+      if (x$right[b] < 0) {
+        ch2 <- c(ch2, .children(-x$right[b]))
+      }
+      if (x$right[b] >= 0) {
+        ch2 <- c(ch2, x$right[b] + 1)
+      }
     }
 
     ## print this line
     ch2 <- as.character(nn[ch2])
-    lf <- gsub(" ", "x", format(ch2, width=vw), fixed=TRUE)
-    lf <- paste(collapse=" ", lf)
-    lf <- strwrap(lf, width=getOption("width") - cs - pw - 3 - 2)
-    lf <- gsub("x", " ", lf, fixed=TRUE)
+    lf <- gsub(" ", "x", format(ch2, width = vw), fixed = TRUE)
+    lf <- paste(collapse = " ", lf)
+    lf <- strwrap(lf, width = getOption("width") - cs - pw - 3 - 2)
+    lf <- gsub("x", " ", lf, fixed = TRUE)
     if (length(lf) > 1) {
       lf <- c(lf[1], paste(sp, lf[-1]))
-      lf <- paste(collapse="\n", lf)
+      lf <- paste(collapse = "\n", lf)
     }
-    op <- paste(sep="", format(he, width=cs),
-                " p=", format(x$prob[b], digits=2, width=pw, justify="left"),
-                "  ", paste(collapse=" ", lf))
-    cat(op, fill=TRUE)
+    op <- paste(
+      sep = "", format(he, width = cs),
+      " p=", format(x$prob[b], digits = 2, width = pw, justify = "left"),
+      "  ", paste(collapse = " ", lf)
+    )
+    cat(op, fill = TRUE)
 
     ## recursive call
-    if (x$left[b]  < 0 && l < level) .plot(-x$left[b],  l+1, ind)
-    if (x$right[b] < 0 && l < level) .plot(-x$right[b], l+1, ind)
+    if (x$left[b] < 0 && l < level) .plot(-x$left[b], l + 1, ind)
+    if (x$right[b] < 0 && l < level) .plot(-x$right[b], l + 1, ind)
   }
 
   ## Do it
-  if (length(x$left) > 0) .plot(b=1, l=1)
+  if (length(x$left) > 0) .plot(b = 1, l = 1)
 
   invisible(x)
 }
 
 print2.igraphHRG <- function(x, ...) {
   cat("Hierarchical random graph:\n")
-  bw <- ceiling(log10(length(x$left)+1))+1
-  p <- format(x$prob, digits=1)
+  bw <- ceiling(log10(length(x$left) + 1)) + 1
+  p <- format(x$prob, digits = 1)
   pw <- 4 + max(nchar(p))
-  nn <- if (is.null(x$names)) seq_len(length(x$left)+1) else x$names
+  nn <- if (is.null(x$names)) seq_len(length(x$left) + 1) else x$names
   op <- sapply(seq_along(x$left), function(i) {
     lc <- if (x$left[i] < 0) {
-      paste(sep="", "g", -x$left[i])
+      paste(sep = "", "g", -x$left[i])
     } else {
-      nn[x$left[i]+1]
+      nn[x$left[i] + 1]
     }
     rc <- if (x$right[i] < 0) {
-      paste(sep="", "g", -x$right[i])
+      paste(sep = "", "g", -x$right[i])
     } else {
-      nn[x$right[i]+1]
+      nn[x$right[i] + 1]
     }
-    paste(sep="", format(paste(sep="", "g", i), width=bw),
-          format(paste(sep="", " p=", p[i]), width=pw),
-          "-> ", lc, " ", rc)
+    paste(
+      sep = "", format(paste(sep = "", "g", i), width = bw),
+      format(paste(sep = "", " p=", p[i]), width = pw),
+      "-> ", lc, " ", rc
+    )
   })
-  op <- format(op, justify="left")
-  cat(op, sep="   ", fill=TRUE)
+  op <- format(op, justify = "left")
+  cat(op, sep = "   ", fill = TRUE)
   invisible(x)
 }
 
@@ -832,35 +860,36 @@ print2.igraphHRG <- function(x, ...) {
 #' @method print igraphHRGConsensus
 #' @export
 #' @family hierarchical random graph functions
-
 print.igraphHRGConsensus <- function(x, ...) {
   cat("HRG consensus tree:\n")
   n <- length(x$parents) - length(x$weights)
   mn <- if (is.null(x$names)) seq_len(n) else x$names
-  id <- c(mn, paste(sep="", "g", seq_along(x$weights)))
-  ch <- tapply(id, x$parents, c)[-1]   # first is zero
+  id <- c(mn, paste(sep = "", "g", seq_along(x$weights)))
+  ch <- tapply(id, x$parents, c)[-1] # first is zero
   bw <- nchar(as.character(length(x$weights)))
   vw <- max(nchar(id))
   op <- sapply(seq_along(x$weights), function(i) {
-    mych <- format(ch[[i]], width=vw)
-    if (length(ch[[i]])*(vw+1) + bw + 4 > getOption("width")) {
-      mych <- gsub(" ", "x", mych, fixed=TRUE)
-      mych <- paste(collapse=" ", mych)
-      pref <- paste(collapse="", rep(" ", bw+5))
-      mych <- strwrap(mych, width=getOption("width") - bw - 4,
-                      initial="", prefix=pref)
-      mych <- gsub("x", " ", mych, fixed=TRUE)
-      mych <- paste(collapse="\n", mych)
+    mych <- format(ch[[i]], width = vw)
+    if (length(ch[[i]]) * (vw + 1) + bw + 4 > getOption("width")) {
+      mych <- gsub(" ", "x", mych, fixed = TRUE)
+      mych <- paste(collapse = " ", mych)
+      pref <- paste(collapse = "", rep(" ", bw + 5))
+      mych <- strwrap(mych,
+        width = getOption("width") - bw - 4,
+        initial = "", prefix = pref
+      )
+      mych <- gsub("x", " ", mych, fixed = TRUE)
+      mych <- paste(collapse = "\n", mych)
     } else {
-      mych <- paste(collapse=" ", mych)
+      mych <- paste(collapse = " ", mych)
     }
-    paste(sep="", "g", format(i, width=bw), " -> ", mych)
+    paste(sep = "", "g", format(i, width = bw), " -> ", mych)
   })
-  if (max(nchar(op)) < (getOption("width")-4)/2) {
-    op <- format(op, justify="left")
-    cat(op, sep="   ", fill=TRUE)
+  if (max(nchar(op)) < (getOption("width") - 4) / 2) {
+    op <- format(op, justify = "left")
+    cat(op, sep = "   ", fill = TRUE)
   } else {
-    cat(op, sep="\n")
+    cat(op, sep = "\n")
   }
 
   invisible(x)

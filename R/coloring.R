@@ -23,6 +23,6 @@
 #'
 #' g <- make_graph("petersen")
 #' col <- greedy_vertex_coloring(g)
-#' plot(g, vertex.color=col)
+#' plot(g, vertex.color = col)
 #'
 greedy_vertex_coloring <- greedy_vertex_coloring

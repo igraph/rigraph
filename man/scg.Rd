@@ -157,22 +157,26 @@ linear running time and memory load.
 
 # SCG of a toy network
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)
-g <- add_edges(g, c(1,6, 1,11, 6, 11))
-cg <- scg(g, 1, 3, algo="exact_scg")
+g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+cg <- scg(g, 1, 3, algo = "exact_scg")
 
-#plot the result
+# plot the result
 layout <- layout_with_kk(g)
 nt <- vcount(cg$Xt)
 col <- rainbow(nt)
 vsize <- table(cg$groups)
-ewidth <- round(E(cg$Xt)$weight,2)
+ewidth <- round(E(cg$Xt)$weight, 2)
 
-op <- par(mfrow=c(1,2))
-plot(g, vertex.color = col[cg$groups], vertex.size = 20,
-		vertex.label = NA, layout = layout)
-plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
-	vertex.color = col, vertex.size = 20*vsize/max(vsize),
-	vertex.label=NA, layout = layout_with_kk)
+op <- par(mfrow = c(1, 2))
+plot(g,
+  vertex.color = col[cg$groups], vertex.size = 20,
+  vertex.label = NA, layout = layout
+)
+plot(cg$Xt,
+  edge.width = ewidth, edge.label = ewidth,
+  vertex.color = col, vertex.size = 20 * vsize / max(vsize),
+  vertex.label = NA, layout = layout_with_kk
+)
 par(op)
 
 ## SCG of real-world network
@@ -180,42 +184,49 @@ library(igraphdata)
 data(immuno)
 summary(immuno)
 n <- vcount(immuno)
-interv <- c(100,100,50,25,12,6,3,2,2)
-cg <- scg(immuno, ev= n-(1:9), nt=interv, mtype="laplacian",
-                        algo="interv", epairs=TRUE)
+interv <- c(100, 100, 50, 25, 12, 6, 3, 2, 2)
+cg <- scg(immuno,
+  ev = n - (1:9), nt = interv, mtype = "laplacian",
+  algo = "interv", epairs = TRUE
+)
 
 ## are the eigenvalues well-preserved?
 gt <- cg$Xt
 nt <- vcount(gt)
 Lt <- laplacian_matrix(gt)
-evalt <- eigen(Lt, only.values=TRUE)$values[nt-(1:9)]
+evalt <- eigen(Lt, only.values = TRUE)$values[nt - (1:9)]
 res <- cbind(interv, cg$values, evalt)
-res <- round(res,5)
-colnames(res) <- c("interv","lambda_i","lambda_tilde_i")
-rownames(res) <- c("N-1","N-2","N-3","N-4","N-5","N-6","N-7","N-8","N-9")
+res <- round(res, 5)
+colnames(res) <- c("interv", "lambda_i", "lambda_tilde_i")
+rownames(res) <- c("N-1", "N-2", "N-3", "N-4", "N-5", "N-6", "N-7", "N-8", "N-9")
 print(res)
 
 ## use SCG to get the communities
-com <- scg(laplacian_matrix(immuno), ev=n-c(1,2), nt=2)$groups
+com <- scg(laplacian_matrix(immuno), ev = n - c(1, 2), nt = 2)$groups
 col <- rainbow(max(com))
 layout <- layout_nicely(immuno)
 
-plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
-                vertex.label=NA)
+plot(immuno,
+  layout = layout, vertex.size = 3, vertex.color = col[com],
+  vertex.label = NA
+)
 
 ## display the coarse-grained graph
 gt <- simplify(as.undirected(gt))
 layout.cg <- layout_with_kk(gt)
-com.cg <- scg(laplacian_matrix(gt), nt-c(1,2), 2)$groups
+com.cg <- scg(laplacian_matrix(gt), nt - c(1, 2), 2)$groups
 vsize <- sqrt(as.vector(table(cg$groups)))
 
-op <- par(mfrow=c(1,2))
-plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
-                vertex.label=NA)
-plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
-                vertex.color=col[com.cg],vertex.label=NA)
+op <- par(mfrow = c(1, 2))
+plot(immuno,
+  layout = layout, vertex.size = 3, vertex.color = col[com],
+  vertex.label = NA
+)
+plot(gt,
+  layout = layout.cg, vertex.size = 15 * vsize / max(vsize),
+  vertex.color = col[com.cg], vertex.label = NA
+)
 par(op)
-
 
 }
 \references{

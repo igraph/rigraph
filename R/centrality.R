@@ -25,12 +25,11 @@
 #' @param cutoff The maximum path length to consider when calculating the
 #' betweenness. If zero or negative then there is no such limit.
 #' @export
-
-estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, weights=NULL, nobigint=TRUE) {
+estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL, nobigint = TRUE) {
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-  betweenness(graph, v=vids, directed=directed, cutoff=cutoff, weights=weights)
+  betweenness(graph, v = vids, directed = directed, cutoff = cutoff, weights = weights)
 }
 
 
@@ -87,7 +86,7 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' @param normalized Logical scalar, whether to normalize the betweenness
 #' scores. If \code{TRUE}, then the results are normalized by the number of ordered
 #' or unordered vertex pairs in directed and undirected graphs, respectively.
-#' In an undirected graph,			
+#' In an undirected graph,
 #' \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
 #' \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 #' is the number of vertices in the graph.
@@ -110,13 +109,12 @@ estimate_betweenness <- function(graph, vids=V(graph), directed=TRUE, cutoff, we
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(10, 3/10)
+#' g <- sample_gnp(10, 3 / 10)
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
-betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
-                        nobigint=TRUE, normalized=FALSE, cutoff=-1) {
-
+betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
+                        nobigint = TRUE, normalized = FALSE, cutoff = -1) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -138,14 +136,14 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v-1, directed, weights, cutoff)
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
-      res <- res / ( vc*vc-3*vc+2)
+      res <- res / (vc * vc - 3 * vc + 2)
     } else {
-      res <- 2*res / ( vc*vc-3*vc+2)
+      res <- 2 * res / (vc * vc - 3 * vc + 2)
     }
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -157,11 +155,12 @@ betweenness <- function(graph, v=V(graph), directed=TRUE, weights=NULL,
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
 #' @export
-
-edge_betweenness <- function(graph, e=E(graph),
-                             directed=TRUE, weights=NULL, cutoff=-1) {
+edge_betweenness <- function(graph, e = E(graph),
+                             directed = TRUE, weights = NULL, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -178,17 +177,16 @@ edge_betweenness <- function(graph, e=E(graph),
     cutoff <- -1
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
   res[as.numeric(e)]
 }
 
 #' @export
-
-estimate_edge_betweenness <- function(graph, e=E(graph),
-                                      directed=TRUE, cutoff, weights=NULL) {
-  edge_betweenness(graph, e, directed=directed, cutoff=cutoff, weights=weights)
+estimate_edge_betweenness <- function(graph, e = E(graph),
+                                      directed = TRUE, cutoff, weights = NULL) {
+  edge_betweenness(graph, e, directed = directed, cutoff = cutoff, weights = weights)
 }
 
 #' Closeness centrality of vertices
@@ -205,7 +203,7 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 #' \code{i} is omitted from the calculation. If no other vertices are reachable
 #' from \code{v}, then its closeness is returned as NaN.
 #'
-#" You may use the \code{cutoff} argument to consider only paths of length
+# " You may use the \code{cutoff} argument to consider only paths of length
 #' \code{cutoff} or smaller. This can be run for larger graphs, as the running
 #' time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is zero
 #' or negative (which is the default), then the function calculates the exact
@@ -251,17 +249,24 @@ estimate_edge_betweenness <- function(graph, e=E(graph),
 #' g <- make_ring(10)
 #' g2 <- make_star(10)
 #' closeness(g)
-#' closeness(g2, mode="in")
-#' closeness(g2, mode="out")
-#' closeness(g2, mode="all")
+#' closeness(g2, mode = "in")
+#' closeness(g2, mode = "out")
+#' closeness(g2, mode = "all")
 #'
-closeness <- function(graph, vids=V(graph),
-                      mode=c("out", "in", "all", "total"), weights=NULL,
-                      normalized=FALSE, cutoff=-1) {
+closeness <- function(graph, vids = V(graph),
+                      mode = c("out", "in", "all", "total"), weights = NULL,
+                      normalized = FALSE, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   vids <- as.igraph.vs(graph, vids)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -277,9 +282,9 @@ closeness <- function(graph, vids=V(graph),
     cutoff <- -1
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids-1, mode, weights, normalized, cutoff)$res
+  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
@@ -287,16 +292,17 @@ closeness <- function(graph, vids=V(graph),
 }
 
 #' @export
-estimate_closeness <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), cutoff, weights=NULL, normalized=FALSE) {
-  closeness(graph, vids, mode=mode, weights=weights, normalized=normalized, cutoff=cutoff)
+estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
+  closeness(graph, vids, mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }
 
 #' @rdname arpack
 #' @export
-
-arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
-                              ncv=3, ldv=0, ishift=1, maxiter=3000, nb=1,
-                              mode=1, start=0, sigma=0.0, sigmai=0.0)
+arpack_defaults <- list(
+  bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
+  ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
+  mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
+)
 
 #' ARPACK eigenvector calculation
 #'
@@ -450,55 +456,61 @@ arpack_defaults <- list(bmat="I", n=0, which="XX", nev=1, tol=0.0,
 #' @examples
 #'
 #' # Identity matrix
-#' f <- function(x, extra=NULL) x
-#' arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
+#' f <- function(x, extra = NULL) x
+#' arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
 #'
 #' # Graph laplacian of a star graph (undirected), n>=2
 #' # Note that this is a linear operation
-#' f <- function(x, extra=NULL) {
+#' f <- function(x, extra = NULL) {
 #'   y <- x
-#'   y[1] <- (length(x)-1)*x[1] - sum(x[-1])
+#'   y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
 #'   for (i in 2:length(x)) {
 #'     y[i] <- x[i] - x[1]
 #'   }
 #'   y
 #' }
 #'
-#' arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
+#' arpack(f, options = list(n = 10, nev = 1, ncv = 3), sym = TRUE)
 #'
 #' # double check
-#' eigen(laplacian_matrix(make_star(10, mode="undirected")))
+#' eigen(laplacian_matrix(make_star(10, mode = "undirected")))
 #'
 #' ## First three eigenvalues of the adjacency matrix of a graph
 #' ## We need the 'Matrix' package for this
 #' if (require(Matrix)) {
 #'   set.seed(42)
-#'   g <- sample_gnp(1000, 5/1000)
-#'   M <- as_adj(g, sparse=TRUE)
-#'   f2 <- function(x, extra=NULL) { cat("."); as.vector(M %*% x) }
-#'   baev <- arpack(f2, sym=TRUE, options=list(n=vcount(g), nev=3, ncv=8,
-#'                                   which="LM", maxiter=2000))
+#'   g <- sample_gnp(1000, 5 / 1000)
+#'   M <- as_adj(g, sparse = TRUE)
+#'   f2 <- function(x, extra = NULL) {
+#'     cat(".")
+#'     as.vector(M %*% x)
+#'   }
+#'   baev <- arpack(f2, sym = TRUE, options = list(
+#'     n = vcount(g), nev = 3, ncv = 8,
+#'     which = "LM", maxiter = 2000
+#'   ))
 #' }
 #' @export
-
-arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
-                   env=parent.frame(), complex=!sym) {
-
+arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
+                   env = parent.frame(), complex = !sym) {
   if (!is.list(options) ||
-      (is.null(names(options)) && length(options) != 0)) {
+    (is.null(names(options)) && length(options) != 0)) {
     stop("options must be a named list")
   }
   if (any(names(options) == "")) {
     stop("all options must be named")
   }
-  if (any(! names(options) %in% names(arpack_defaults))) {
-    stop("unkown ARPACK option(s): ",
-         paste(setdiff(names(options), names(arpack_defaults)),
-                       collapse=", "))
+  if (any(!names(options) %in% names(arpack_defaults))) {
+    stop(
+      "unkown ARPACK option(s): ",
+      paste(setdiff(names(options), names(arpack_defaults)),
+        collapse = ", "
+      )
+    )
   }
 
   options.tmp <- arpack_defaults
-  options.tmp[ names(options) ] <- options
+  options.tmp[names(options)] <- options
   options <- options.tmp
 
   if (sym && complex) {
@@ -506,29 +518,31 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
     warning("Symmetric matrix, setting `complex' to FALSE")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
-    rew <- arpack.unpack.complex(res$vectors, res$values,
-                                 min(res$options$nev, res$options$nconv))
+    rew <- arpack.unpack.complex(
+      res$vectors, res$values,
+      min(res$options$nev, res$options$nconv)
+    )
     res$vectors <- rew$vectors
     res$values <- rew$values
 
-    res$values <- apply(res$values, 1, function(x) x[1]+x[2]*1i)
-    dim(res$vectors) <- c(nrow(res$vectors)*2, ncol(res$vectors)/2)
+    res$values <- apply(res$values, 1, function(x) x[1] + x[2] * 1i)
+    dim(res$vectors) <- c(nrow(res$vectors) * 2, ncol(res$vectors) / 2)
     res$vectors <- apply(res$vectors, 2, function(x) {
-      l <- length(x)/2
-      x[1:l] + x[(l+1):length(x)]*1i
+      l <- length(x) / 2
+      x[1:l] + x[(l + 1):length(x)] * 1i
     })
   } else {
     if (is.matrix(res$values)) {
-      if (!all(res$values[,2]==0)) {
+      if (!all(res$values[, 2] == 0)) {
         warning("Dropping imaginary parts of eigenvalues")
       }
-      res$values <- res$values[,1]
+      res$values <- res$values[, 1]
     }
-    res$vectors <- res$vectors[,1:length(res$values)]
+    res$vectors <- res$vectors[, 1:length(res$values)]
   }
 
   res
@@ -536,11 +550,11 @@ arpack <- function(func, extra=NULL, sym=FALSE, options=arpack_defaults,
 
 arpack.unpack.complex <- function(vectors, values, nev) {
   # Argument checks
-  vectors <- as.matrix(structure(as.double(vectors), dim=dim(vectors)))
-  values <- as.matrix(structure(as.double(values), dim=dim(values)))
+  vectors <- as.matrix(structure(as.double(vectors), dim = dim(vectors)))
+  values <- as.matrix(structure(as.double(values), dim = dim(values)))
   nev <- as.integer(nev)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_arpack_unpack_complex, vectors, values, nev)
 
@@ -578,13 +592,15 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_pa(100, m=4, dir=FALSE)
+#' g <- sample_pa(100, m = 4, dir = FALSE)
 #' sc <- subgraph_centrality(g)
 #' cor(degree(g), sc)
 #'
-subgraph_centrality <- function(graph, diag=FALSE) {
+subgraph_centrality <- function(graph, diag = FALSE) {
   A <- as_adj(graph)
-  if (!diag) { diag(A) <- 0 }
+  if (!diag) {
+    diag(A) <- 0
+  }
   eig <- eigen(A)
   res <- as.vector(eig$vectors^2 %*% exp(eig$values))
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -644,21 +660,22 @@ subgraph_centrality <- function(graph, diag=FALSE) {
 #' spectrum(kite)[c("values", "vectors")]
 #'
 #' ## Double check
-#' eigen(as_adj(kite, sparse=FALSE))$vectors[,1]
+#' eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
 #'
 #' ## Should be the same as 'eigen_centrality' (but rescaled)
 #' cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
 #'
 #' ## Smallest eigenvalues
-#' spectrum(kite, which=list(pos="SM", howmany=2))$values
+#' spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 #'
 #' @export
-
 spectrum <- spectrum
 
-eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
-                             vl=-Inf, vu=Inf, vestimate=0L,
-                             balance="none")
+eigen_defaults <- list(
+  pos = "LM", howmany = 1L, il = -1L, iu = -1L,
+  vl = -Inf, vu = Inf, vestimate = 0L,
+  balance = "none"
+)
 
 #' Find Eigenvector Centrality Scores of Network Positions
 #'
@@ -739,12 +756,11 @@ eigen_defaults <- list(pos="LM", howmany=1L, il=-1L, iu=-1L,
 #' @keywords graphs
 #' @examples
 #'
-#' #Generate some test data
-#' g <- make_ring(10, directed=FALSE)
-#' #Compute eigenvector centrality scores
+#' # Generate some test data
+#' g <- make_ring(10, directed = FALSE)
+#' # Compute eigenvector centrality scores
 #' eigen_centrality(g)
 #' @export
-
 eigen_centrality <- eigen_centrality
 
 
@@ -776,14 +792,13 @@ eigen_centrality <- eigen_centrality
 #' g <- make_star(10)
 #' E(g)$weight <- seq(ecount(g))
 #' strength(g)
-#' strength(g, mode="out")
-#' strength(g, mode="in")
+#' strength(g, mode = "out")
+#' strength(g, mode = "in")
 #'
 #' # No weights, a warning is given
 #' g <- make_ring(10)
 #' strength(g)
 #' @export
-
 strength <- strength
 
 
@@ -817,9 +832,9 @@ strength <- strength
 #' @keywords graphs
 #' @examples
 #'
-#' g1 <- sample_gnp(20, 2/20)
-#' g2 <- sample_gnp(20, 2/20)
-#' g3 <- sample_gnp(20, 5/20)
+#' g1 <- sample_gnp(20, 2 / 20)
+#' g2 <- sample_gnp(20, 2 / 20)
+#' g3 <- sample_gnp(20, 5 / 20)
 #' E(g1)$weight <- 1
 #' E(g2)$weight <- runif(ecount(g2))
 #' E(g3)$weight <- runif(ecount(g3))
@@ -827,7 +842,6 @@ strength <- strength
 #' diversity(g2)
 #' diversity(g3)
 #' @export
-
 diversity <- diversity
 
 
@@ -877,7 +891,6 @@ diversity <- diversity
 #' ## A ring
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
-
 hub_score <- hub_score
 
 
@@ -929,7 +942,6 @@ hub_score <- hub_score
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
-
 authority_score <- authority_score
 
 
@@ -1004,7 +1016,7 @@ authority_score <- authority_score
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(20, 5/20, directed=TRUE)
+#' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' page_rank(g)$vector
 #'
 #' g2 <- make_star(10)
@@ -1014,9 +1026,8 @@ authority_score <- authority_score
 #' g3 <- make_ring(10)
 #' page_rank(g3)$vector
 #' reset <- seq(vcount(g3))
-#' page_rank(g3, personalized=reset)$vector
+#' page_rank(g3, personalized = reset)$vector
 #' @export
-
 page_rank <- page_rank
 
 #' Harmonic centrality of vertices
@@ -1059,19 +1070,17 @@ page_rank <- page_rank
 #' g <- make_ring(10)
 #' g2 <- make_star(10)
 #' harmonic_centrality(g)
-#' harmonic_centrality(g2, mode="in")
-#' harmonic_centrality(g2, mode="out")
-#' harmonic_centrality(g %du% make_full_graph(5), mode="all")
+#' harmonic_centrality(g2, mode = "in")
+#' harmonic_centrality(g2, mode = "out")
+#' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-
 harmonic_centrality <- harmonic_centrality
 
 
 
-bonpow.dense <- function(graph, nodes=V(graph),
-                         loops=FALSE, exponent=1,
-                         rescale=FALSE, tol=1e-7){
-
+bonpow.dense <- function(graph, nodes = V(graph),
+                         loops = FALSE, exponent = 1,
+                         rescale = FALSE, tol = 1e-7) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -1081,42 +1090,41 @@ bonpow.dense <- function(graph, nodes=V(graph),
     diag(d) <- 0
   }
   n <- vcount(graph)
-  id <- matrix(0,nrow=n,ncol=n)
+  id <- matrix(0, nrow = n, ncol = n)
   diag(id) <- 1
 
-#  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
-  ev <- solve(id-exponent*d, tol=tol) %*% apply(d,1,sum)
-  if(rescale) {
-    ev <- ev/sum(ev)
+  #  ev <- apply(solve(id-exponent*d,tol=tol)%*%d,1,sum)
+  ev <- solve(id - exponent * d, tol = tol) %*% apply(d, 1, sum)
+  if (rescale) {
+    ev <- ev / sum(ev)
   } else {
-    ev <- ev*sqrt(n/sum((ev)^2))
+    ev <- ev * sqrt(n / sum((ev)^2))
   }
   ev[as.numeric(nodes)]
 }
 
-bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
-                          exponent=1, rescale=FALSE, tol=1e-07) {
-
+bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
+                          exponent = 1, rescale = FALSE, tol = 1e-07) {
   ## remove loops if requested
   if (!loops) {
-    graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
+    graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
   }
 
   vg <- vcount(graph)
 
   ## sparse adjacency matrix
-  d <- as_adj(graph, sparse=TRUE)
+  d <- as_adj(graph, sparse = TRUE)
 
   ## sparse identity matrix
-  id <- as(Matrix::Matrix(diag(vg), doDiag=FALSE), "generalMatrix")
+  id <- as(Matrix::Matrix(diag(vg), doDiag = FALSE), "generalMatrix")
 
   ## solve it
-  ev <- Matrix::solve(id - exponent * d, degree(graph, mode="out"), tol=tol)
+  ev <- Matrix::solve(id - exponent * d, degree(graph, mode = "out"), tol = tol)
 
   if (rescale) {
-    ev <- ev/sum(ev)
+    ev <- ev / sum(ev)
   } else {
-    ev <- ev * sqrt(vcount(graph)/sum((ev)^2))
+    ev <- ev * sqrt(vcount(graph) / sum((ev)^2))
   }
 
   ev[as.numeric(nodes)]
@@ -1206,35 +1214,34 @@ bonpow.sparse <- function(graph, nodes=V(graph), loops=FALSE,
 #' @examples
 #'
 #' # Generate some test data from Bonacich, 1987:
-#' g.c <- graph( c(1,2,1,3,2,4,3,5), dir=FALSE)
-#' g.d <- graph( c(1,2,1,3,1,4,2,5,3,6,4,7), dir=FALSE)
-#' g.e <- graph( c(1,2,1,3,1,4,2,5,2,6,3,7,3,8,4,9,4,10), dir=FALSE)
-#' g.f <- graph( c(1,2,1,3,1,4,2,5,2,6,2,7,3,8,3,9,3,10,4,11,4,12,4,13), dir=FALSE)
+#' g.c <- graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
+#' g.d <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
+#' g.e <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
+#' g.f <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13), dir = FALSE)
 #' # Compute power centrality scores
-#' for (e in seq(-0.5,.5, by=0.1)) {
-#'   print(round(power_centrality(g.c, exp=e)[c(1,2,4)], 2))
+#' for (e in seq(-0.5, .5, by = 0.1)) {
+#'   print(round(power_centrality(g.c, exp = e)[c(1, 2, 4)], 2))
 #' }
 #'
-#' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(power_centrality(g.d, exp=e)[c(1,2,5)], 2))
+#' for (e in seq(-0.4, .4, by = 0.1)) {
+#'   print(round(power_centrality(g.d, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(power_centrality(g.e, exp=e)[c(1,2,5)], 2))
+#' for (e in seq(-0.4, .4, by = 0.1)) {
+#'   print(round(power_centrality(g.e, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-#' for (e in seq(-0.4,.4, by=0.1)) {
-#'   print(round(power_centrality(g.f, exp=e)[c(1,2,5)], 2))
+#' for (e in seq(-0.4, .4, by = 0.1)) {
+#'   print(round(power_centrality(g.f, exp = e)[c(1, 2, 5)], 2))
 #' }
 #'
-power_centrality <- function(graph, nodes=V(graph),
-                   loops=FALSE, exponent=1,
-                   rescale=FALSE, tol=1e-7, sparse=TRUE){
-
+power_centrality <- function(graph, nodes = V(graph),
+                             loops = FALSE, exponent = 1,
+                             rescale = FALSE, tol = 1e-7, sparse = TRUE) {
   nodes <- as.igraph.vs(graph, nodes)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
-  }  else {
+  } else {
     res <- bonpow.dense(graph, nodes, loops, exponent, rescale, tol)
   }
 
@@ -1245,15 +1252,15 @@ power_centrality <- function(graph, nodes=V(graph),
   res
 }
 
-alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
-                                   loops=FALSE, exo=1, weights=NULL,
-                                   tol=1e-7) {
+alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
+                                   loops = FALSE, exo = 1, weights = NULL,
+                                   tol = 1e-7) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
-  exo <- rep(exo, length.out=vcount(graph))
-  exo <- matrix(exo, ncol=1)
+  exo <- rep(exo, length.out = vcount(graph))
+  exo <- matrix(exo, ncol = 1)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     ## weights == NULL and there is a "weight" edge attribute
@@ -1261,33 +1268,33 @@ alpha.centrality.dense <- function(graph, nodes=V(graph), alpha=1,
   } else if (is.null(weights)) {
     ## weights == NULL, but there is no "weight" edge attribute
     attr <- NULL
-  } else if (is.character(weights) && length(weights)==1) {
+  } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- "weight"
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
+    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
   } else {
     ## weights != NULL, but weights == rep(NA, x)
     attr <- NULL
   }
 
-  d <- t(as_adj(graph, attr=attr, sparse=FALSE))
+  d <- t(as_adj(graph, attr = attr, sparse = FALSE))
   if (!loops) {
     diag(d) <- 0
   }
   n <- vcount(graph)
-  id <- matrix(0, nrow=n, ncol=n)
+  id <- matrix(0, nrow = n, ncol = n)
   diag(id) <- 1
 
-  ev <- solve(id-alpha*d, tol=tol) %*% exo
+  ev <- solve(id - alpha * d, tol = tol) %*% exo
   ev[as.numeric(nodes)]
 }
 
-alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
-                                   loops=FALSE, exo=1, weights=NULL,
-                                   tol=1e-7) {
+alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
+                                    loops = FALSE, exo = 1, weights = NULL,
+                                    tol = 1e-7) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -1295,7 +1302,7 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   vc <- vcount(graph)
 
   if (!loops) {
-    graph <- simplify(graph, remove.multiple=FALSE, remove.loops=TRUE)
+    graph <- simplify(graph, remove.multiple = FALSE, remove.loops = TRUE)
   }
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1304,12 +1311,12 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   } else if (is.null(weights)) {
     ## weights == NULL, but there is no "weight" edge attribute
     attr <- NULL
-  } else if (is.character(weights) && length(weights)==1) {
+  } else if (is.character(weights) && length(weights) == 1) {
     ## name of an edge attribute, nothing to do
     attr <- "weight"
   } else if (any(!is.na(weights))) {
     ## weights != NULL and weights != rep(NA, x)
-    graph <- set_edge_attr(graph, "weight", value=as.numeric(weights))
+    graph <- set_edge_attr(graph, "weight", value = as.numeric(weights))
     attr <- "weight"
   } else {
     ## weights != NULL, but weights == rep(NA, x)
@@ -1319,16 +1326,16 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
   M <- Matrix::t(as_adj(graph, attr = attr, sparse = TRUE))
 
   ## Create an identity matrix
-  M2 <- Matrix::sparseMatrix(dims=c(vc, vc), i=1:vc, j=1:vc, x=rep(1, vc))
+  M2 <- Matrix::sparseMatrix(dims = c(vc, vc), i = 1:vc, j = 1:vc, x = rep(1, vc))
 
   ## exo
-  exo <- cbind(rep(exo, length.out=vc))
+  exo <- cbind(rep(exo, length.out = vc))
 
   ## Solve the equation
-  M3 <- M2-alpha*M
-  r <- Matrix::solve(M3, tol=tol, exo)
+  M3 <- M2 - alpha * M
+  r <- Matrix::solve(M3, tol = tol, exo)
 
-  r[ as.numeric(nodes)]
+  r[as.numeric(nodes)]
 }
 
 
@@ -1387,24 +1394,27 @@ alpha.centrality.sparse <- function(graph, nodes=V(graph), alpha=1,
 #' @examples
 #'
 #' # The examples from Bonacich's paper
-#' g.1 <- graph( c(1,3,2,3,3,4,4,5) )
-#' g.2 <- graph( c(2,1,3,1,4,1,5,1) )
-#' g.3 <- graph( c(1,2,2,3,3,4,4,1,5,1) )
+#' g.1 <- graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+#' g.2 <- graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+#' g.3 <- graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
 #' alpha_centrality(g.1)
 #' alpha_centrality(g.2)
-#' alpha_centrality(g.3,alpha=0.5)
+#' alpha_centrality(g.3, alpha = 0.5)
 #'
-alpha_centrality <- function(graph, nodes=V(graph), alpha=1,
-                             loops=FALSE, exo=1, weights=NULL,
-                             tol=1e-7, sparse=TRUE) {
-
+alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
+                             loops = FALSE, exo = 1, weights = NULL,
+                             tol = 1e-7, sparse = TRUE) {
   nodes <- as.igraph.vs(graph, nodes)
   if (sparse) {
-    res <- alpha.centrality.sparse(graph, nodes, alpha, loops,
-                                   exo, weights, tol)
+    res <- alpha.centrality.sparse(
+      graph, nodes, alpha, loops,
+      exo, weights, tol
+    )
   } else {
-    res <- alpha.centrality.dense(graph, nodes, alpha, loops,
-                                  exo, weights, tol)
+    res <- alpha.centrality.dense(
+      graph, nodes, alpha, loops,
+      exo, weights, tol
+    )
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", nodes)

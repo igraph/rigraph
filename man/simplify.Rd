@@ -61,10 +61,10 @@ to facilitate the usage of multigraphs with the VF2 algorithm.
 }
 \examples{
 
-g <- graph( c(1,2,1,2,3,3) )
+g <- graph(c(1, 2, 1, 2, 3, 3))
 is_simple(g)
-is_simple(simplify(g, remove.loops=FALSE))
-is_simple(simplify(g, remove.multiple=FALSE))
+is_simple(simplify(g, remove.loops = FALSE))
+is_simple(simplify(g, remove.multiple = FALSE))
 is_simple(simplify(g))
 }
 \seealso{

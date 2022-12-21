@@ -102,9 +102,9 @@ examples below.
 # -----------------------------------------------------------------
 # Special operators for indexing based on graph structure
 g <- sample_pa(100, power = 0.3)
-E(g) [ 1:3 \%--\% 2:6 ]
-E(g) [ 1:5 \%->\% 1:6 ]
-E(g) [ 1:3 \%<-\% 2:6 ]
+E(g)[1:3 \%--\% 2:6]
+E(g)[1:5 \%->\% 1:6]
+E(g)[1:3 \%<-\% 2:6]
 
 # -----------------------------------------------------------------
 # The edges along the diameter
@@ -114,9 +114,9 @@ E(g, path = d)
 
 # -----------------------------------------------------------------
 # Select edges based on attributes
-g <- sample_gnp(20, 3/20) \%>\%
+g <- sample_gnp(20, 3 / 20) \%>\%
   set_edge_attr("weight", value = rnorm(gsize(.)))
-E(g)[[ weight < 0 ]]
+E(g)[[weight < 0]]
 
 # Indexing with a variable whose name matches the name of an attribute
 # may fail; use .env to force the name lookup in the parent environment

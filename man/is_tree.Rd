@@ -42,7 +42,7 @@ not to be a tree.
 
 g <- make_tree(7, 2)
 is_tree(g)
-is_tree(g, details=TRUE)
+is_tree(g, details = TRUE)
 
 }
 \keyword{graphs}

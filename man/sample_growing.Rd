@@ -37,8 +37,8 @@ randomly chosen old vertices.
 }
 \examples{
 
-g <- sample_growing(500, citation=FALSE)
-g2 <- sample_growing(500, citation=TRUE)
+g <- sample_growing(500, citation = FALSE)
+g2 <- sample_growing(500, citation = TRUE)
 
 }
 \seealso{

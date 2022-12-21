@@ -49,7 +49,7 @@ g2 <- graph_from_graphnel(GNEL)
 g2
 
 ## Directed
-g3 <- make_star(10, mode="in")
+g3 <- make_star(10, mode = "in")
 V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
