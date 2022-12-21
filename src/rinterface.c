@@ -16535,7 +16535,7 @@ SEXP R_igraph_convex_hull(SEXP data) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(resverts=R_igraph_vector_to_SEXP(&c_resverts));
+  PROTECT(resverts=R_igraph_vector_to_SEXPp1(&c_resverts));
   igraph_vector_destroy(&c_resverts);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(rescoords=R_igraph_matrix_to_SEXP(&c_rescoords));

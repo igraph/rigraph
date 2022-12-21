@@ -18,6 +18,7 @@ Fixed:
  - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
+ - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
 
 Deprecated:
 
