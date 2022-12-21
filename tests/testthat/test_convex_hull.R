@@ -1,7 +1,7 @@
 test_that("convex_hull works", {
   xy <- cbind(c(0, 1, 2, 3, 4, 0, 1, 2, 3, 1, 2), c(0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2))
   vp <- convex_hull(xy)
-  expect_that(vp$resverts, equals(c(1, 6, 10, 11, 5))
+  expect_that(vp$resverts, equals(c(1, 6, 10, 11, 5)))
   expect_that(vp$rescoords, equals(xy[vp$resverts, ]))
 })
 
