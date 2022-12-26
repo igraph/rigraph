@@ -50,11 +50,6 @@ jobs:
           path: .venv
           key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
-      - name: Create DESCRIPTION
-        run: |
-          make DESCRIPTION
-        shell: bash
-
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
