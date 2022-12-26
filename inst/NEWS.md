@@ -1,11 +1,11 @@
-# Unreleased
+# igraph 1.3.5.9089
 
-Added:
+## Added
 
  - `tkplot()` gained a `palette` argument and it is now using the same palette as `plot()` by default, for sake of consistency.
  - `plot.igraph()` gained a `loop.size` argument that can be used to scale the common radius of the loop edges.
 
-Fixed:
+## Fixed
 
  - The default maximum number of iterations for ARPACK has been increased to 3000 to match that of the igraph C core.
  - Rare convergence problems have been corrected in `cluster_leading_eigen()`.
@@ -20,11 +20,11 @@ Fixed:
  - `as_graphnel()` does not duplicate loop edges any more.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
 
-Deprecated:
+## Deprecated
 
  - `automorphisms()` was renamed to `count_automorphisms()`; the old name is still available, but it is deprecated.
 
-Other:
+## Other
 
  - Documentation improvements.
 
