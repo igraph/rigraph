@@ -111,9 +111,9 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 
   ## to remove non-redundancies that can persist in a dgtMatrix
   if (inherits(adjmatrix, "dgTMatrix")) {
-    adjmatrix = as(adjmatrix, "CsparseMatrix")
+    adjmatrix <- as(adjmatrix, "CsparseMatrix")
   } else if (inherits(adjmatrix, "ddiMatrix")) {
-    adjmatrix = as(adjmatrix, "CsparseMatrix")
+    adjmatrix <- as(adjmatrix, "CsparseMatrix")
   }
 
   if (is.null(weighted) && mode == "undirected") {
@@ -360,7 +360,8 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 #'
 #' g8 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus")
 #' d2 <- function(x) {
-#'   diag(x) <- diag(x) / 2; x
+#'   diag(x) <- diag(x) / 2
+#'   x
 #' }
 #' all(nzs((d2(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
 #'

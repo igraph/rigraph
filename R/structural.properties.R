@@ -1050,8 +1050,8 @@ reciprocity <- function(graph, ignore.loops = TRUE,
     stop("Not a graph object")
   }
   mode <- switch(igraph.match.arg(mode),
-    'default' = 0,
-    'ratio' = 1
+    "default" = 0,
+    "ratio" = 1
   )
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -1608,7 +1608,7 @@ any_loop <- any_loop
 #' ## How to use a callback to stop the search
 #' ## We stop after visiting all vertices in the initial component
 #' f <- function(graph, data, extra) {
-#'   data['succ'] == -1
+#'   data["succ"] == -1
 #' }
 #' bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #'
@@ -1619,7 +1619,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 callback = NULL, extra = NULL, rho = parent.frame(),
                 neimode) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   if (!missing(neimode)) {
@@ -1770,7 +1770,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'
 #' ## Terminate after the first component, using a callback
 #' f.out <- function(graph, data, extra) {
-#'   data['vid'] == 1
+#'   data["vid"] == 1
 #' }
 #' tmp <- dfs(make_tree(10) %du% make_tree(10),
 #'   root = 1,
@@ -1783,7 +1783,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 in.callback = NULL, out.callback = NULL, extra = NULL,
                 rho = parent.frame(), neimode) {
   if (!is_igraph(graph)) {
-    stop("Not a graph object");
+    stop("Not a graph object")
   }
 
   if (!missing(neimode)) {

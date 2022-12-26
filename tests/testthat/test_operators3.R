@@ -28,12 +28,12 @@ test_that("infix operators work", {
   expect_true(graph.isomorphic(g, make_lattice(8) + 2))
 
   expect_true(graph.isomorphic(
-    g - V(g)[c('d', 'g')],
+    g - V(g)[c("d", "g")],
     make_lattice(4) + make_lattice(2) + 2
   ))
 
   expect_true(graph.isomorphic(
-    g - E(g)['f' %--% 'g'],
+    g - E(g)["f" %--% "g"],
     make_lattice(5) + make_lattice(3) + 2
   ))
 })

@@ -324,7 +324,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
       "total" = 3
     )
   } else {
-    mode = 1
+    mode <- 1
   }
   v <- as.igraph.vs(graph, v)
   if (length(v) == 0) {

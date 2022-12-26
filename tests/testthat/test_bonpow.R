@@ -1,8 +1,9 @@
 test_that("Power centrality works", {
   ## Generate some test data from Bonacich, 1987:
   fig1 <- graph_from_literal(A -+ B -+ C:D)
-  fig1.bp <- lapply(seq(0, 0.8, by = 0.2), function(x)
-    round(power_centrality(fig1, exponent = x), 2))
+  fig1.bp <- lapply(seq(0, 0.8, by = 0.2), function(x) {
+    round(power_centrality(fig1, exponent = x), 2)
+  })
   expect_that(fig1.bp, equals(list(
     c(A = 0.89, B = 1.79, C = 0, D = 0),
     c(A = 1.15, B = 1.64, C = 0, D = 0),
@@ -12,8 +13,9 @@ test_that("Power centrality works", {
   )))
 
   g.c <- graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-  bp.c <- lapply(seq(-.5, .5, by = 0.1), function(x)
-    round(power_centrality(g.c, exponent = x), 2)[c(1, 2, 4)])
+  bp.c <- lapply(seq(-.5, .5, by = 0.1), function(x) {
+    round(power_centrality(g.c, exponent = x), 2)[c(1, 2, 4)]
+  })
 
   expect_that(bp.c, equals(list(
     c(0.00, 1.58, 0.00), c(0.73, 1.45, 0.36),
@@ -25,8 +27,9 @@ test_that("Power centrality works", {
   )))
 
   g.d <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
-  bp.d <- lapply(seq(-.4, .4, by = 0.1), function(x)
-    round(power_centrality(g.d, exponent = x), 2)[c(1, 2, 5)])
+  bp.d <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+    round(power_centrality(g.d, exponent = x), 2)[c(1, 2, 5)]
+  })
   expect_that(bp.d, equals(list(
     c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54),
     c(1.62, 1.08, 0.54), c(1.62, 1.08, 0.54),
@@ -36,8 +39,9 @@ test_that("Power centrality works", {
   )))
 
   g.e <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
-  bp.e <- lapply(seq(-.4, .4, by = 0.1), function(x)
-    round(power_centrality(g.e, exponent = x), 2)[c(1, 2, 5)])
+  bp.e <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+    round(power_centrality(g.e, exponent = x), 2)[c(1, 2, 5)]
+  })
   expect_that(bp.e, equals(list(
     c(-1.00, 1.67, -0.33), c(0.36, 1.81, 0.12),
     c(1.00, 1.67, 0.33), c(1.30, 1.55, 0.43),
@@ -49,8 +53,9 @@ test_that("Power centrality works", {
   g.f <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13),
     dir = FALSE
   )
-  bp.f <- lapply(seq(-.4, .4, by = 0.1), function(x)
-    round(power_centrality(g.f, exponent = x), 2)[c(1, 2, 5)])
+  bp.f <- lapply(seq(-.4, .4, by = 0.1), function(x) {
+    round(power_centrality(g.f, exponent = x), 2)[c(1, 2, 5)]
+  })
   expect_that(
     bp.f,
     equals(list(

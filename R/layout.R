@@ -131,8 +131,8 @@ layout_ <- function(graph, layout, ...) {
 #'   add_layout_(as_star(), component_wise()) %>%
 #'   plot()
 add_layout_ <- function(graph, ..., overwrite = TRUE) {
-  if (overwrite && 'layout' %in% graph_attr_names(graph)) {
-    graph <- delete_graph_attr(graph, 'layout')
+  if (overwrite && "layout" %in% graph_attr_names(graph)) {
+    graph <- delete_graph_attr(graph, "layout")
   }
   graph$layout <- layout_(graph, ...)
   graph
@@ -787,7 +787,7 @@ layout_randomly <- function(graph, dim = 2) {
     on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_layout_random_3d, graph)
   } else {
-    stop("Invalid `dim' value");
+    stop("Invalid `dim' value")
   }
 }
 
@@ -1679,8 +1679,9 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' V(DC)$shape <- "rectangle"
 #' V(DC)$size <- 20
 #' V(DC)$size2 <- 10
-#' V(DC)$label <- lapply(V(DC)$name, function(x)
-#'   paste(strwrap(x, 12), collapse = "\n"))
+#' V(DC)$label <- lapply(V(DC)$name, function(x) {
+#'   paste(strwrap(x, 12), collapse = "\n")
+#' })
 #' E(DC)$arrow.size <- 0.5
 #'
 #' ## Create a similar layout using the predefined layers

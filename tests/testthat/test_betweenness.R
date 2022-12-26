@@ -62,15 +62,15 @@ test_that("normalization works well", {
   g1 <- graph_from_literal(0 +-+ 1 +-+ 2)
 
   b11 <- betweenness(g1, normalized = TRUE, directed = FALSE)
-  expect_that(b11, equals(c('0' = 0, '1' = 1, '2' = 0)))
+  expect_that(b11, equals(c("0" = 0, "1" = 1, "2" = 0)))
 
   b12 <- betweenness(g1, normalized = TRUE, directed = TRUE)
-  expect_that(b12, equals(c('0' = 0, '1' = 1, '2' = 0)))
+  expect_that(b12, equals(c("0" = 0, "1" = 1, "2" = 0)))
 
   g2 <- graph_from_literal(0 --- 1 --- 2)
 
   b2 <- betweenness(g2, normalized = TRUE)
-  expect_that(b2, equals(c('0' = 0, '1' = 1, '2' = 0)))
+  expect_that(b2, equals(c("0" = 0, "1" = 1, "2" = 0)))
 })
 
 test_that("shortest paths are compared with tolerance when calculating betweenness", {
@@ -94,5 +94,5 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
   g <- graph.data.frame(edges, directed = FALSE)
   result <- betweenness(g, weights = edges.dists)
 
-  expect_that(result[1:5], equals(c('1' = 0, '2' = 44, '3' = 71, '4' = 36.5, '6' = 44)))
+  expect_that(result[1:5], equals(c("1" = 0, "2" = 44, "3" = 71, "4" = 36.5, "6" = 44)))
 })

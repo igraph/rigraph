@@ -136,11 +136,11 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   ## Handle if some elements are 'NA'
   if (any(is.na(d[, 1:2]))) {
     warning("In `d' `NA' elements were replaced with string \"NA\"")
-    d[, 1:2][is.na(d[, 1:2])] <- 'NA'
+    d[, 1:2][is.na(d[, 1:2])] <- "NA"
   }
   if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
     warning("In `vertices[,1]' `NA' elements were replaced with string \"NA\"")
-    vertices[, 1][is.na(vertices[, 1])] <- 'NA'
+    vertices[, 1][is.na(vertices[, 1])] <- "NA"
   }
 
   names <- unique(c(as.character(d[, 1]), as.character(d[, 2])))

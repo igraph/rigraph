@@ -46,7 +46,7 @@ test_that("selecting edges using vertex names works", {
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
-  e1 <- E(g)[c('a|b', 'c|d')]
+  e1 <- E(g)[c("a|b", "c|d")]
   expect_equal(as.vector(e1), c(1, 3))
 })
 
@@ -59,9 +59,9 @@ test_that("indexing with characters work as expected", {
   expect_equal(as.vector(E(g)[LETTERS[4:7]]), 4:7)
   ## expect_equal(as.vector(E(g)[c('a|b', 'c|d')]), c(1,3))
 
-  expect_error(V(g)[1:5]['h'], 'Unknown vertex selected')
-  expect_error(E(g)[1:5]['H'], 'Unknown edge selected')
-  expect_error(E(g)[6:9]['a|b'], 'Unknown edge selected')
+  expect_error(V(g)[1:5]["h"], "Unknown vertex selected")
+  expect_error(E(g)[1:5]["H"], "Unknown edge selected")
+  expect_error(E(g)[6:9]["a|b"], "Unknown edge selected")
 })
 
 test_that("variable lookup in environment works", {
@@ -74,7 +74,7 @@ test_that("variable lookup in environment works", {
 
   # attribute names take precedence over local variables by default...
   expect_equal(as.vector(V(g)[name]), 1:10)
-  expect_error(E(g)[index], 'Unknown edge selected')
+  expect_error(E(g)[index], "Unknown edge selected")
 
   # ...but you can use .env to get access to the variables
   expect_equal(as.vector(V(g)[.env$name]), c(4, 5))

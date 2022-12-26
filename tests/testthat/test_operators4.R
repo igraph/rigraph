@@ -40,8 +40,10 @@ test_that("disjoint union works for named graphs", {
 })
 
 test_that("disjoint union gives warning for non-unique vertex names", {
-  g1 <- make_ring(5); V(g1)$name <- letters[1:5]
-  g2 <- make_ring(5); V(g2)$name <- letters[5:9]
+  g1 <- make_ring(5)
+  V(g1)$name <- letters[1:5]
+  g2 <- make_ring(5)
+  V(g2)$name <- letters[5:9]
 
   expect_that(
     disjoint_union(g1, g2),

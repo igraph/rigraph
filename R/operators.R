@@ -298,8 +298,9 @@ disjoint_union <- function(...) {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-union <- function(...)
+union <- function(...) {
   UseMethod("union")
+}
 
 #' @method union default
 #' @export
@@ -379,8 +380,9 @@ union.igraph <- function(..., byname = "auto") {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-intersection <- function(...)
+intersection <- function(...) {
   UseMethod("intersection")
+}
 
 #' Intersection of graphs
 #'
@@ -457,8 +459,9 @@ intersection.igraph <- function(..., byname = "auto",
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-difference <- function(...)
+difference <- function(...) {
   UseMethod("difference")
+}
 
 
 #' Difference of graphs
@@ -803,7 +806,7 @@ edges <- edge
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
-#'   vertices('X', 'Y')
+#'   vertices("X", "Y")
 #' g
 #' plot(g)
 vertex <- function(...) {

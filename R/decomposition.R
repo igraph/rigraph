@@ -89,10 +89,12 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  if (!is.null(alpha))
+  if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1
-  if (!is.null(alpham1))
+  }
+  if (!is.null(alpham1)) {
     alpham1 <- as.numeric(alpham1) - 1
+  }
   fillin <- as.logical(fillin)
   newgraph <- as.logical(newgraph)
   on.exit(.Call(C_R_igraph_finalizer))

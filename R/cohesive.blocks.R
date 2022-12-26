@@ -285,8 +285,9 @@ graphs_from_cohesive_blocks <- function(blocks, graph) {
 }
 
 #' @export
-cohesion <- function(x, ...)
+cohesion <- function(x, ...) {
   UseMethod("cohesion")
+}
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks

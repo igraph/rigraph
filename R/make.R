@@ -844,8 +844,8 @@ graph_from_literal <- function(..., simplify = TRUE) {
 graph_from_literal_i <- function(mf) {
   ## In case 'simplify' is given
   simplify <- TRUE
-  if ('simplify' %in% names(mf)) {
-    w <- which(names(mf) == 'simplify')
+  if ("simplify" %in% names(mf)) {
+    w <- which(names(mf) == "simplify")
     if (length(w) > 1) {
       stop("'simplify' specified multiple times")
     }
@@ -943,8 +943,9 @@ graph_from_literal_i <- function(mf) {
 
 #' @rdname graph_from_literal
 #' @export
-from_literal <- function(...)
+from_literal <- function(...) {
   constructor_spec(graph_from_literal, ..., .lazy = TRUE)
+}
 
 ## -----------------------------------------------------------------
 
@@ -1170,7 +1171,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
     "out" = 0,
     "in" = 1,
     "undirected" = 2
-  );
+  )
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(
@@ -1651,7 +1652,7 @@ make_full_citation_graph <- function(n, directed = TRUE) {
   # Function call
   res <- .Call(C_R_igraph_full_citation, n, directed)
 
-  res <- set_graph_attr(res, 'name', 'Full citation graph')
+  res <- set_graph_attr(res, "name", "Full citation graph")
   res
 }
 
