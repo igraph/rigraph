@@ -97,8 +97,8 @@ follows truthfully the original publication by Kamada and Kawai now.
 \examples{
 
 g <- make_ring(10)
-E(g)$weight <- rep(1:2, length.out=ecount(g))
-plot(g, layout=layout_with_kk, edge.label=E(g)$weight)
+E(g)$weight <- rep(1:2, length.out = ecount(g))
+plot(g, layout = layout_with_kk, edge.label = E(g)$weight)
 
 }
 \references{

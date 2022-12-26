@@ -31,7 +31,7 @@ NULL
 #' @rdname pipe
 #' @examples
 #' make_ring(10) %>%
-#'   add_edges(c(1,6)) %>%
+#'   add_edges(c(1, 6)) %>%
 #'   plot()
 NULL
 

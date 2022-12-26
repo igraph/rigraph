@@ -36,8 +36,10 @@ If you want to order the vertices differently, then permute them using the
 library(igraphdata)
 data(karate)
 karate_groups <- cluster_optimal(karate)
-coords <- layout_in_circle(karate, order =
-          order(membership(karate_groups)))
+coords <- layout_in_circle(karate,
+  order =
+    order(membership(karate_groups))
+)
 V(karate)$label <- sub("Actor ", "", V(karate)$name)
 V(karate)$label.color <- membership(karate_groups)
 V(karate)$shape <- "none"

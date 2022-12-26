@@ -49,9 +49,11 @@ An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 \examples{
 
 # A difficult graph, from the Provan-Shier paper
-g <- graph_from_literal(s --+ a:b, a:b --+ t,
-               a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
-st_min_cuts(g, source="s", target="t")
+g <- graph_from_literal(
+  s --+ a:b, a:b --+ t,
+  a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
+)
+st_min_cuts(g, source = "s", target = "t")
 }
 \references{
 JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in

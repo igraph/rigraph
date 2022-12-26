@@ -55,12 +55,14 @@ for each component separately. Finally it merges the layouts via calling
 \examples{
 
 # create 20 scale-free graphs and place them in a common layout
-graphs <- lapply(sample(5:20, 20, replace=TRUE),
-          barabasi.game, directed=FALSE)
+graphs <- lapply(sample(5:20, 20, replace = TRUE),
+  barabasi.game,
+  directed = FALSE
+)
 layouts <- lapply(graphs, layout_with_kk)
 lay <- merge_coords(graphs, layouts)
 g <- disjoint_union(graphs)
-plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")
+plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 }
 \seealso{
 \code{\link{plot.igraph}}, \code{\link{tkplot}},

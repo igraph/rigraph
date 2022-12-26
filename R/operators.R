@@ -19,13 +19,20 @@
 #
 ###################################################################
 
-rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
-                                  maps2=NULL, ignore=character()) {
-  listfun <- switch(type, "g"=graph_attr_names,
-                    "v"=vertex_attr_names, "e"=edge_attr_names,
-                    stop("Internal igraph error"))
-  getfun <- switch(type, "g"=graph_attr, "v"=vertex_attr,
-                   "e"=edge_attr, stop("Internal igraph error"))
+rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
+                                  maps2 = NULL, ignore = character()) {
+  listfun <- switch(type,
+    "g" = graph_attr_names,
+    "v" = vertex_attr_names,
+    "e" = edge_attr_names,
+    stop("Internal igraph error")
+  )
+  getfun <- switch(type,
+    "g" = graph_attr,
+    "v" = vertex_attr,
+    "e" = edge_attr,
+    stop("Internal igraph error")
+  )
   alist <- lapply(graphs, listfun)
   an <- unique(unlist(alist))
   an <- setdiff(an, ignore)
@@ -33,28 +40,30 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
   getval <- function(which, name) {
     newval <- getfun(graphs[[which]], name)
     if (!is.null(maps)) {
-      tmpval <- newval[ maps[[which]] >= 0 ]
-      mm <- maps[[which]][ maps[[which]] >= 0 ] + 1
+      tmpval <- newval[maps[[which]] >= 0]
+      mm <- maps[[which]][maps[[which]] >= 0] + 1
       newval <- rep(NA, newsize)
       newval[mm] <- tmpval
     }
     if (!is.null(maps2)) {
-      newval <- newval[ maps2[[which]] + 1 ]
+      newval <- newval[maps2[[which]] + 1]
     }
-    if (!is.null(newsize)) { length(newval) <- newsize }
+    if (!is.null(newsize)) {
+      length(newval) <- newsize
+    }
     newval
   }
 
   attr <- list()
   for (name in an) {
     w <- which(sapply(alist, function(x) name %in% x))
-    if (length(w)==1) {
+    if (length(w) == 1) {
       attr[[name]] <- getval(w, name)
     } else {
       for (w2 in w) {
-        nname <- paste(name, sep="_", w2)
+        nname <- paste(name, sep = "_", w2)
         newval <- getval(w2, name)
-        attr[[nname]] <-newval
+        attr[[nname]] <- newval
       }
     }
   }
@@ -97,22 +106,21 @@ rename.attr.if.needed <- function(type, graphs, newsize=NULL, maps=NULL,
 #' @examples
 #'
 #' ## A star and a ring
-#' g1 <- make_star(10, mode="undirected")
+#' g1 <- make_star(10, mode = "undirected")
 #' V(g1)$name <- letters[1:10]
 #' g2 <- make_ring(10)
 #' V(g2)$name <- letters[11:20]
 #' print_all(g1 %du% g2)
 #' @export
 disjoint_union <- function(...) {
-
-  graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
+  graphs <- unlist(recursive = FALSE, lapply(list(...), function(l) {
     if (is_igraph(l)) list(l) else l
-  } ))
+  }))
   if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_disjoint_union, graphs)
 
   ## Graph attributes
@@ -124,17 +132,17 @@ disjoint_union <- function(...) {
   cumvc <- c(0, cumsum(vc))
   for (i in seq_along(graphs)) {
     va <- vertex.attributes(graphs[[i]])
-    exattr <- intersect(names(va), names(attr))   # existing and present
-    noattr <- setdiff(names(attr), names(va))     # existint and missing
-    newattr <- setdiff(names(va), names(attr))    # new
+    exattr <- intersect(names(va), names(attr)) # existing and present
+    noattr <- setdiff(names(attr), names(va)) # existint and missing
+    newattr <- setdiff(names(va), names(attr)) # new
     for (a in seq_along(exattr)) {
-      attr[[ exattr[a] ]] <- c(attr[[ exattr[a] ]], va[[ exattr[a] ]])
+      attr[[exattr[a]]] <- c(attr[[exattr[a]]], va[[exattr[a]]])
     }
     for (a in seq_along(noattr)) {
-      attr[[ noattr[a] ]] <- c(attr[[ noattr[a] ]], rep(NA, vc[i]))
+      attr[[noattr[a]]] <- c(attr[[noattr[a]]], rep(NA, vc[i]))
     }
     for (a in seq_along(newattr)) {
-      attr[[ newattr[a] ]] <- c(rep(NA, cumvc[i]), va[[ newattr[a] ]])
+      attr[[newattr[a]]] <- c(rep(NA, cumvc[i]), va[[newattr[a]]])
     }
   }
   vertex.attributes(res) <- attr
@@ -149,17 +157,17 @@ disjoint_union <- function(...) {
   cumec <- c(0, cumsum(ec))
   for (i in seq_along(graphs)) {
     ea <- edge.attributes(graphs[[i]])
-    exattr <- intersect(names(ea), names(attr))   # existing and present
-    noattr <- setdiff(names(attr), names(ea))     # existint and missing
-    newattr <- setdiff(names(ea), names(attr))    # new
+    exattr <- intersect(names(ea), names(attr)) # existing and present
+    noattr <- setdiff(names(attr), names(ea)) # existint and missing
+    newattr <- setdiff(names(ea), names(attr)) # new
     for (a in seq_along(exattr)) {
-      attr[[ exattr[a] ]] <- c(attr[[ exattr[a] ]], ea[[ exattr[a] ]])
+      attr[[exattr[a]]] <- c(attr[[exattr[a]]], ea[[exattr[a]]])
     }
     for (a in seq_along(noattr)) {
-      attr[[ noattr[a] ]] <- c(attr[[ noattr[a] ]], rep(NA, ec[i]))
+      attr[[noattr[a]]] <- c(attr[[noattr[a]]], rep(NA, ec[i]))
     }
     for (a in seq_along(newattr)) {
-      attr[[ newattr[a] ]] <- c(rep(NA, cumec[i]), ea[[ newattr[a] ]])
+      attr[[newattr[a]]] <- c(rep(NA, cumec[i]), ea[[newattr[a]]])
     }
   }
   edge.attributes(res) <- attr
@@ -169,16 +177,15 @@ disjoint_union <- function(...) {
 
 #' @export
 #' @rdname disjoint_union
-"%du%" <- function(x,y) {
-  disjoint_union(x,y)
+"%du%" <- function(x, y) {
+  disjoint_union(x, y)
 }
 
 .igraph.graph.union.or.intersection <- function(call, ..., byname,
                                                 keep.all.vertices) {
-
-  graphs <- unlist(recursive=FALSE, lapply(list(...), function(l) {
+  graphs <- unlist(recursive = FALSE, lapply(list(...), function(l) {
     if (is_igraph(l)) list(l) else l
-  } ))
+  }))
   if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
@@ -213,7 +220,7 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     if (call == "union") {
       res <- .Call(C_R_igraph_union, newgraphs, edgemaps)
     } else {
@@ -225,30 +232,31 @@ disjoint_union <- function(...) {
     ## We might need to rename all attributes
     graph.attributes(res) <- rename.attr.if.needed("g", newgraphs)
     vertex.attributes(res) <- rename.attr.if.needed("v", newgraphs,
-                                                    vcount(res),
-                                                    ignore="name")
+      vcount(res),
+      ignore = "name"
+    )
     V(res)$name <- uninames
 
     ## Edges are a bit more difficult, we need a mapping
     if (edgemaps) {
       edge.attributes(res) <- rename.attr.if.needed("e", newgraphs,
-                                                    ecount(res),
-                                                    maps=maps)
+        ecount(res),
+        maps = maps
+      )
     }
   } else {
-
     if (!keep.all.vertices) {
       minsize <- min(sapply(graphs, vcount))
       graphs <- lapply(graphs, function(g) {
         vc <- vcount(g)
         if (vc > minsize) {
-          g <- g - (minsize+1):vc
+          g <- g - (minsize + 1):vc
         }
         g
       })
     }
 
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     if (call == "union") {
       res <- .Call(C_R_igraph_union, graphs, edgemaps)
     } else {
@@ -259,14 +267,17 @@ disjoint_union <- function(...) {
 
     ## We might need to rename all attributes
     graph.attributes(res) <- rename.attr.if.needed("g", graphs)
-    vertex.attributes(res) <- rename.attr.if.needed("v", graphs,
-                                                    vcount(res))
+    vertex.attributes(res) <- rename.attr.if.needed(
+      "v", graphs,
+      vcount(res)
+    )
 
     ## Edges are a bit more difficult, we need a mapping
     if (edgemaps) {
       edge.attributes(res) <- rename.attr.if.needed("e", graphs,
-                                                    ecount(res),
-                                                    maps=maps)
+        ecount(res),
+        maps = maps
+      )
     }
   }
 
@@ -287,8 +298,9 @@ disjoint_union <- function(...) {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-union <- function(...)
+union <- function(...) {
   UseMethod("union")
+}
 
 #' @method union default
 #' @export
@@ -336,18 +348,22 @@ union.default <- function(...) {
 #' @examples
 #'
 #' ## Union of two social networks with overlapping sets of actors
-#' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-#'                   H-F:G, H-I-J)
-#' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+#' net1 <- graph_from_literal(
+#'   D - A:B:F:G, A - C - F - A, B - E - G - B, A - B, F - G,
+#'   H - F:G, H - I - J
+#' )
+#' net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 #' print_all(net1 %u% net2)
-union.igraph <- function(..., byname="auto") {
-  .igraph.graph.union.or.intersection("union", ..., byname=byname,
-                                      keep.all.vertices=TRUE)
+union.igraph <- function(..., byname = "auto") {
+  .igraph.graph.union.or.intersection("union", ...,
+    byname = byname,
+    keep.all.vertices = TRUE
+  )
 }
 
 #' @export
-"%u%" <- function(x,y) {
-  union(x,y)
+"%u%" <- function(x, y) {
+  union(x, y)
 }
 
 #' Intersection of two or more sets
@@ -364,8 +380,9 @@ union.igraph <- function(..., byname="auto") {
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-intersection <- function(...)
+intersection <- function(...) {
   UseMethod("intersection")
+}
 
 #' Intersection of graphs
 #'
@@ -409,20 +426,23 @@ intersection <- function(...)
 #' @examples
 #'
 #' ## Common part of two social networks
-#' net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-#'                   H-F:G, H-I-J)
-#' net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+#' net1 <- graph_from_literal(
+#'   D - A:B:F:G, A - C - F - A, B - E - G - B, A - B, F - G,
+#'   H - F:G, H - I - J
+#' )
+#' net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 #' print_all(net1 %s% net2)
-intersection.igraph <- function(..., byname="auto",
-                                keep.all.vertices=TRUE) {
+intersection.igraph <- function(..., byname = "auto",
+                                keep.all.vertices = TRUE) {
   .igraph.graph.union.or.intersection("intersection", ...,
-                                      byname=byname,
-                                      keep.all.vertices=keep.all.vertices)
+    byname = byname,
+    keep.all.vertices = keep.all.vertices
+  )
 }
 
 #' @export
-"%s%" <- function(x,y) {
-  intersection(x,y)
+"%s%" <- function(x, y) {
+  intersection(x, y)
 }
 
 #' Difference of two sets
@@ -439,8 +459,9 @@ intersection.igraph <- function(..., byname="auto",
 #' @return Depends on the function that implements this method.
 #'
 #' @export
-difference <- function(...)
+difference <- function(...) {
   UseMethod("difference")
+}
 
 
 #' Difference of graphs
@@ -480,18 +501,19 @@ difference <- function(...)
 #' @examples
 #'
 #' ## Create a wheel graph
-#' wheel <- union(make_ring(10),
-#'                      make_star(11, center=11, mode="undirected"))
+#' wheel <- union(
+#'   make_ring(10),
+#'   make_star(11, center = 11, mode = "undirected")
+#' )
 #' V(wheel)$name <- letters[seq_len(vcount(wheel))]
 #'
 #' ## Subtract a star graph from it
-#' sstar <- make_star(6, center=6, mode="undirected")
-#' V(sstar)$name <- letters[c(1,3,5,7,9,11)]
+#' sstar <- make_star(6, center = 6, mode = "undirected")
+#' V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 #' G <- wheel %m% sstar
 #' print_all(G)
-#' plot(G, layout=layout_nicely(wheel))
-difference.igraph <- function(big, small, byname="auto", ...) {
-
+#' plot(G, layout = layout_nicely(wheel))
+difference.igraph <- function(big, small, byname = "auto", ...) {
   if (!is_igraph(big) || !is_igraph(small)) {
     stop("argument is not a graph")
   }
@@ -511,29 +533,28 @@ difference.igraph <- function(big, small, byname="auto", ...) {
   if (byname) {
     bnames <- V(big)$name
     snames <- V(small)$name
-    if (any(! snames %in% bnames)) {
+    if (any(!snames %in% bnames)) {
       small <- small - setdiff(snames, bnames)
       snames <- V(small)$name
     }
     perm <- match(bnames, snames)
     if (any(is.na(perm))) {
-      perm[is.na(perm)] <- seq(from=vcount(small)+1, to=vcount(big))
+      perm[is.na(perm)] <- seq(from = vcount(small) + 1, to = vcount(big))
     }
     big <- permute(big, perm)
 
     on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(C_R_igraph_difference, big, small)
     permute(res, match(V(res)$name, bnames))
-
   } else {
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_difference, big, small)
   }
 }
 
 #' @export
-"%m%" <- function(x,y) {
-  difference(x,y)
+"%m%" <- function(x, y) {
+  difference(x, y)
 }
 
 
@@ -570,12 +591,11 @@ difference.igraph <- function(big, small, byname="auto", ...) {
 #' gu
 #' graph.isomorphic(gu, make_full_graph(vcount(g)))
 #'
-complementer <- function(graph, loops=FALSE) {
-
+complementer <- function(graph, loops = FALSE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_complementer, graph, as.logical(loops))
 }
 
@@ -636,13 +656,12 @@ complementer <- function(graph, loops=FALSE) {
 #' @examples
 #'
 #' g1 <- make_ring(10)
-#' g2 <- make_star(10, mode="undirected")
+#' g2 <- make_star(10, mode = "undirected")
 #' gc <- compose(g1, g2)
 #' print_all(gc)
 #' print_all(simplify(gc))
 #'
-compose <- function(g1, g2, byname="auto") {
-
+compose <- function(g1, g2, byname = "auto") {
   if (!is_igraph(g1) || !is_igraph(g2)) {
     stop("Not a graph object")
   }
@@ -677,9 +696,9 @@ compose <- function(g1, g2, byname="auto") {
   }
 
   edgemaps <- (length(edge_attr_names(g1)) != 0 ||
-               length(edge_attr_names(g2)) != 0)
+    length(edge_attr_names(g2)) != 0)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
@@ -690,24 +709,27 @@ compose <- function(g1, g2, byname="auto") {
 
   if (byname) {
     vertex.attributes(res) <-
-      rename.attr.if.needed("v", graphs, vcount(res), ignore="name")
+      rename.attr.if.needed("v", graphs, vcount(res), ignore = "name")
     V(res)$name <- uninames
   } else {
-    vertex.attributes(res) <- rename.attr.if.needed("v", graphs,
-                                                    vcount(res))
+    vertex.attributes(res) <- rename.attr.if.needed(
+      "v", graphs,
+      vcount(res)
+    )
   }
 
   if (edgemaps) {
     edge.attributes(res) <- rename.attr.if.needed("e", graphs, ecount(res),
-                                                  maps2=maps)
+      maps2 = maps
+    )
   }
 
   res
 }
 
 #' @export
-"%c%" <- function(x,y) {
-  compose(x,y)
+"%c%" <- function(x, y) {
+  compose(x, y)
 }
 
 #' Helper function for adding and deleting edges
@@ -752,7 +774,7 @@ compose <- function(g1, g2, byname="auto") {
 #' g <- make_ring(10) + edges(1:10)
 #' plot(g)
 edge <- function(...) {
-  structure(list(...), class="igraph.edge")
+  structure(list(...), class = "igraph.edge")
 }
 
 #' @export
@@ -784,11 +806,11 @@ edges <- edge
 #' @export
 #' @examples
 #' g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
-#'   vertices('X', 'Y')
+#'   vertices("X", "Y")
 #' g
 #' plot(g)
 vertex <- function(...) {
-  structure(list(...), class="igraph.vertex")
+  structure(list(...), class = "igraph.vertex")
 }
 
 #' @export
@@ -828,13 +850,13 @@ vertices <- vertex
 #' g2 <- g + path("a", "b", "c", "d")
 #' plot(g2)
 #'
-#' g3 <- g2 + path("e", "f", "g", weight=1:2, color="red")
+#' g3 <- g2 + path("e", "f", "g", weight = 1:2, color = "red")
 #' E(g3)[[]]
 #'
-#' g4 <- g3 + path(c("f", "c", "j", "d"), width=1:3, color="green")
+#' g4 <- g3 + path(c("f", "c", "j", "d"), width = 1:3, color = "green")
 #' E(g4)[[]]
 path <- function(...) {
-  structure(list(...), class="igraph.path")
+  structure(list(...), class = "igraph.path")
 }
 
 #' Add vertices, edges or another graph to a graph
@@ -945,69 +967,63 @@ path <- function(...) {
     res <- union(e1, e2)
   } else if (is_igraph(e2)) {
     ## Disjoint union of graphs
-    res <- disjoint_union(e1,e2)
-
+    res <- disjoint_union(e1, e2)
   } else if ("igraph.edge" %in% class(e2)) {
     ## Adding edges, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
-      toadd <- unlist(e2, recursive=FALSE)
+      toadd <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2)==""])
-      attr <- e2[names(e2)!=""]
+      toadd <- unlist(e2[names(e2) == ""])
+      attr <- e2[names(e2) != ""]
     }
-    res <- add_edges(e1, as.igraph.vs(e1, toadd), attr=attr)
-
+    res <- add_edges(e1, as.igraph.vs(e1, toadd), attr = attr)
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
-    wn <- which(names(e2)=="")
-    if (length(wn)==1) {
+    wn <- which(names(e2) == "")
+    if (length(wn) == 1) {
       names(e2)[wn] <- "name"
     } else if (is.null(names(e2))) {
-    ## No names at all, everything is a vertex name
-      e2 <- list(name=unlist(e2, recursive=FALSE))
-    } else if (length(wn)==0) {
-    ## If there are no non-named arguments, we are fine
+      ## No names at all, everything is a vertex name
+      e2 <- list(name = unlist(e2, recursive = FALSE))
+    } else if (length(wn) == 0) {
+      ## If there are no non-named arguments, we are fine
     } else {
-    ## Otherwise, all unnamed arguments are collected and used as
-    ## vertex names
-      nn <- unlist(e2[wn], recursive=FALSE)
-      e2 <- c(list(name=nn), e2[names(e2)!=""])
+      ## Otherwise, all unnamed arguments are collected and used as
+      ## vertex names
+      nn <- unlist(e2[wn], recursive = FALSE)
+      e2 <- c(list(name = nn), e2[names(e2) != ""])
     }
     la <- unique(sapply(e2, length))
-    res <- add_vertices(e1, la, attr=e2)
-
+    res <- add_vertices(e1, la, attr = e2)
   } else if ("igraph.path" %in% class(e2)) {
     ## Adding edges along a path, possibly with attributes
     ## Non-named arguments define the edges
     if (is.null(names(e2))) {
-      toadd <- unlist(e2, recursive=FALSE)
+      toadd <- unlist(e2, recursive = FALSE)
       attr <- list()
     } else {
-      toadd <- unlist(e2[names(e2)==""])
-      attr <- e2[names(e2)!=""]
+      toadd <- unlist(e2[names(e2) == ""])
+      attr <- e2[names(e2) != ""]
     }
     toadd <- as.igraph.vs(e1, toadd)
     lt <- length(toadd)
     if (lt > 2) {
-      toadd <- c(toadd[1], rep(toadd[2:(lt-1)], each=2), toadd[lt])
-      res <- add_edges(e1, toadd, attr=attr)
-          } else if (lt == 2) {
-      res <- add_edges(e1, toadd, attr=attr)
+      toadd <- c(toadd[1], rep(toadd[2:(lt - 1)], each = 2), toadd[lt])
+      res <- add_edges(e1, toadd, attr = attr)
+    } else if (lt == 2) {
+      res <- add_edges(e1, toadd, attr = attr)
     } else {
       res <- e1
     }
-
-  } else if (is.numeric(e2) && length(e2)==1) {
+  } else if (is.numeric(e2) && length(e2) == 1) {
     ## Adding some isolate vertices
     res <- add_vertices(e1, e2)
-
   } else if (is.character(e2)) {
     ## Adding named vertices
-    res <- add_vertices(e1, length(e2), name=e2)
-
+    res <- add_vertices(e1, length(e2), name = e2)
   } else {
     stop("Cannot add unknown type to igraph graph")
   }
@@ -1070,14 +1086,14 @@ path <- function(...) {
   if (is_igraph(e2)) {
     res <- difference(e1, e2)
   } else if ("igraph.vertex" %in% class(e2)) {
-    res <- delete_vertices(e1, unlist(e2, recursive=FALSE))
+    res <- delete_vertices(e1, unlist(e2, recursive = FALSE))
   } else if ("igraph.edge" %in% class(e2)) {
-    res <- delete_edges(e1, unlist(e2, recursive=FALSE))
+    res <- delete_edges(e1, unlist(e2, recursive = FALSE))
   } else if ("igraph.path" %in% class(e2)) {
-    todel <- unlist(e2, recursive=FALSE)
+    todel <- unlist(e2, recursive = FALSE)
     lt <- length(todel)
     if (lt >= 2) {
-      todel <- paste(todel[-lt], todel[-1], sep="|")
+      todel <- paste(todel[-lt], todel[-1], sep = "|")
       res <- delete_edges(e1, todel)
     } else {
       res <- e1
@@ -1113,11 +1129,12 @@ path <- function(...) {
 #' @examples
 #' rings <- make_ring(5) * 5
 rep.igraph <- function(x, n, mark = TRUE, ...) {
-
   if (n < 0) stop("Number of replications must be positive")
 
-  res <- do_call(disjoint_union, .args =
-                   replicate(n, x, simplify = FALSE))
+  res <- do_call(disjoint_union,
+    .args =
+      replicate(n, x, simplify = FALSE)
+  )
 
   if (mark) V(res)$which <- rep(seq_len(n), each = gorder(x))
 
@@ -1128,7 +1145,6 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #' @method * igraph
 #' @export
 `*.igraph` <- function(x, n) {
-
   if (!is_igraph(x) && is_igraph(n)) {
     tmp <- x
     x <- n
@@ -1137,7 +1153,6 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 
   if (is.numeric(n) && length(n) == 1) {
     rep.igraph(x, n)
-
   } else {
     stop("Cannot multiply igraph graph with this type")
   }
@@ -1157,7 +1172,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' @examples
 #'
-#' g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
+#' g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 #' reverse_edges(g, 2)
 #' @export
 reverse_edges <- reverse_edges

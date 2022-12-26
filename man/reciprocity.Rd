@@ -38,7 +38,7 @@ The result is the size of group (3), divided by the sum of group sizes
 }
 \examples{
 
-g <- sample_gnp(20, 5/20, directed=TRUE)
+g <- sample_gnp(20, 5 / 20, directed = TRUE)
 reciprocity(g)
 
 }

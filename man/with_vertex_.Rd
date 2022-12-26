@@ -13,11 +13,14 @@ with_vertex_(...)
 Constructor modifier to add vertex attributes
 }
 \examples{
-make_(ring(10),
+make_(
+  ring(10),
   with_vertex_(
     color = "#7fcdbb",
     frame.color = "#7fcdbb",
-    name = LETTERS[1:10])) \%>\%
+    name = LETTERS[1:10]
+  )
+) \%>\%
   plot()
 }
 \seealso{

@@ -65,7 +65,7 @@ g1 and g2, respectively, then (a,a) is included in the result. See
 \examples{
 
 g1 <- make_ring(10)
-g2 <- make_star(10, mode="undirected")
+g2 <- make_star(10, mode = "undirected")
 gc <- compose(g1, g2)
 print_all(gc)
 print_all(simplify(gc))

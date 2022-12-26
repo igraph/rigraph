@@ -50,9 +50,9 @@ connected by the diameter path.
 \examples{
 
 g <- make_ring(10)
-g2 <- delete_edges(g, c(1,2,1,10))
-diameter(g2, unconnected=TRUE)
-diameter(g2, unconnected=FALSE)
+g2 <- delete_edges(g, c(1, 2, 1, 10))
+diameter(g2, unconnected = TRUE)
+diameter(g2, unconnected = FALSE)
 
 ## Weighted diameter
 set.seed(1)
@@ -60,8 +60,8 @@ g <- make_ring(10)
 E(g)$weight <- sample(seq_len(ecount(g)))
 diameter(g)
 get_diameter(g)
-diameter(g, weights=NA)
-get_diameter(g, weights=NA)
+diameter(g, weights = NA)
+get_diameter(g, weights = NA)
 
 }
 \seealso{

@@ -36,8 +36,8 @@ details.
 }
 \examples{
 
-make_line_graph(make_kautz_graph(2,1))
-make_kautz_graph(2,2)
+make_line_graph(make_kautz_graph(2, 1))
+make_kautz_graph(2, 2)
 
 }
 \seealso{

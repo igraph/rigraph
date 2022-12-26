@@ -53,7 +53,7 @@ its adjacent edges.
 
 g <- make_ring(10)
 degree(g)
-g2 <- sample_gnp(1000, 10/1000)
+g2 <- sample_gnp(1000, 10 / 1000)
 degree_distribution(g2)
 
 }
