@@ -806,7 +806,8 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' @examples
 #' # A simple undirected graph
 #' g <- graph_from_literal(
-#'   Alice - Bob - Cecil - Alice, Daniel - Cecil - Eugene,
+#'   Alice - Bob - Cecil - Alice,
+#'   Daniel - Cecil - Eugene,
 #'   Cecil - Gordon
 #' )
 #' g

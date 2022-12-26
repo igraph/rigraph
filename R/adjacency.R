@@ -22,7 +22,8 @@
 ##
 ## -----------------------------------------------------------------
 
-graph.adjacency.dense <- function(adjmatrix, mode = c(
+graph.adjacency.dense <- function(adjmatrix,
+                                  mode = c(
                                     "directed", "undirected", "max",
                                     "min", "upper", "lower", "plus"
                                   ),
@@ -375,7 +376,8 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 #' g10 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, add.rownames = "code")
 #' summary(g10)
 #'
-graph_from_adjacency_matrix <- function(adjmatrix, mode = c(
+graph_from_adjacency_matrix <- function(adjmatrix,
+                                        mode = c(
                                           "directed", "undirected", "max",
                                           "min", "upper", "lower", "plus"
                                         ),

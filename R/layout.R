@@ -1630,8 +1630,7 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'
 #' ## Data taken from http://tehnick-8.narod.ru/dc_clients/
 #' DC <- graph_from_literal(
-#'   "DC++" -+
-#'     "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
+#'   "DC++" -+ "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
 #'   "LinuxDC++" -+ "FreeDC++", "BCDC++" -+ "StrongDC++",
 #'   "FreeDC++" -+ "BMDC++":"EiskaltDC++",
 #'   "StrongDC++" -+ "AirDC++":"zK++":"ApexDC++":"TkDC++",

@@ -51,7 +51,12 @@
 #'
 #' @examples
 #' g <- make_empty_graph(n = 5) %>%
-#'   add_edges(c(1, 2, 2, 3, 3, 4, 4, 5)) %>%
+#'   add_edges(c(
+#'     1, 2,
+#'     2, 3,
+#'     3, 4,
+#'     4, 5
+#'   )) %>%
 #'   set_edge_attr("color", value = "red") %>%
 #'   add_edges(c(5, 1), color = "green")
 #' E(g)[[]]
@@ -111,7 +116,12 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #' g <- make_empty_graph() %>%
 #'   add_vertices(3, color = "red") %>%
 #'   add_vertices(2, color = "green") %>%
-#'   add_edges(c(1, 2, 2, 3, 3, 4, 4, 5))
+#'   add_edges(c(
+#'     1, 2,
+#'     2, 3,
+#'     3, 4,
+#'     4, 5
+#'   ))
 #' g
 #' V(g)[[]]
 #' plot(g)
