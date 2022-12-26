@@ -22,19 +22,21 @@
 ##
 ## -----------------------------------------------------------------
 
-graph.adjacency.dense <- function(adjmatrix, mode=c("directed", "undirected", "max",
-                                               "min", "upper", "lower", "plus"),
-                                  weighted=NULL, diag=TRUE) {
-
+graph.adjacency.dense <- function(adjmatrix, mode = c(
+                                    "directed", "undirected", "max",
+                                    "min", "upper", "lower", "plus"
+                                  ),
+                                  weighted = NULL, diag = TRUE) {
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-                 "directed"=0,
-                 "undirected"=1,
-                 "max"=1,
-                 "upper"=2,
-                 "lower"=3,
-                 "min"=4,
-                 "plus"=5)
+    "directed" = 0,
+    "undirected" = 1,
+    "max" = 1,
+    "upper" = 2,
+    "lower" = 3,
+    "min" = 4,
+    "plus" = 5
+  )
 
   mode(adjmatrix) <- "double"
 
@@ -50,19 +52,22 @@ graph.adjacency.dense <- function(adjmatrix, mode=c("directed", "undirected", "m
       stop("not a square matrix")
     }
 
-    on.exit( .Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_weighted_adjacency, adjmatrix,
-                 as.numeric(mode), weighted, diag)
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(
+      C_R_igraph_weighted_adjacency, adjmatrix,
+      as.numeric(mode), weighted, diag
+    )
   } else {
-
     adjmatrix <- as.matrix(adjmatrix)
     attrs <- attributes(adjmatrix)
     adjmatrix <- as.numeric(adjmatrix)
     attributes(adjmatrix) <- attrs
 
-    if (!diag) { diag(adjmatrix) <- 0 }
+    if (!diag) {
+      diag(adjmatrix) <- 0
+    }
 
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(C_R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
   }
 
@@ -81,10 +86,11 @@ mysummary <- function(x) {
 }
 
 
-graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "max",
-                                                "min", "upper", "lower", "plus"),
-                                   weighted=NULL, diag=TRUE) {
-
+graph.adjacency.sparse <- function(adjmatrix, mode = c(
+                                     "directed", "undirected", "max",
+                                     "min", "upper", "lower", "plus"
+                                   ),
+                                   weighted = NULL, diag = TRUE) {
   mode <- igraph.match.arg(mode)
 
   if (!is.null(weighted)) {
@@ -103,18 +109,22 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
   vc <- nrow(adjmatrix)
 
   ## to remove non-redundancies that can persist in a dgtMatrix
-  if(inherits(adjmatrix, "dgTMatrix")) {
+  if (inherits(adjmatrix, "dgTMatrix")) {
     adjmatrix = as(adjmatrix, "CsparseMatrix")
   } else if (inherits(adjmatrix, "ddiMatrix")) {
     adjmatrix = as(adjmatrix, "CsparseMatrix")
   }
 
-  if (is.null(weighted) && mode=="undirected") { mode <- "max" }
+  if (is.null(weighted) && mode == "undirected") {
+    mode <- "max"
+  }
 
   if (mode == "directed") {
     ## DIRECTED
     el <- mysummary(adjmatrix)
-    if (!diag) { el <- el[ el[,1] != el[,2], ] }
+    if (!diag) {
+      el <- el[el[, 1] != el[, 2], ]
+    }
   } else if (mode == "undirected") {
     ## UNDIRECTED, must be symmetric if weighted
     if (!is.null(weighted) && !Matrix::isSymmetric(adjmatrix)) {
@@ -126,32 +136,34 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
       adjmatrix <- Matrix::tril(adjmatrix, -1)
     }
     el <- mysummary(adjmatrix)
-  } else if (mode=="max") {
+  } else if (mode == "max") {
     ## MAXIMUM
     el <- mysummary(adjmatrix)
     rm(adjmatrix)
-    if (!diag) { el <- el[ el[,1] != el[,2], ] }
-    el <- el[ el[,3] != 0, ]
-    w <- el[,3]
-    el <- el[,1:2]
-    el <- cbind( pmin(el[,1],el[,2]), pmax(el[,1], el[,2]) )
-    o <- order(el[,1], el[,2])
-    el <- el[o,,drop=FALSE]
+    if (!diag) {
+      el <- el[el[, 1] != el[, 2], ]
+    }
+    el <- el[el[, 3] != 0, ]
+    w <- el[, 3]
+    el <- el[, 1:2]
+    el <- cbind(pmin(el[, 1], el[, 2]), pmax(el[, 1], el[, 2]))
+    o <- order(el[, 1], el[, 2])
+    el <- el[o, , drop = FALSE]
     w <- w[o]
     if (nrow(el) > 1) {
-      dd <- el[2:nrow(el),1] == el[1:(nrow(el)-1),1] &
-        el[2:nrow(el),2] == el[1:(nrow(el)-1),2]
+      dd <- el[2:nrow(el), 1] == el[1:(nrow(el) - 1), 1] &
+        el[2:nrow(el), 2] == el[1:(nrow(el) - 1), 2]
       dd <- which(dd)
-      if (length(dd)>0) {
-        mw <- pmax(w[dd], w[dd+1])
+      if (length(dd) > 0) {
+        mw <- pmax(w[dd], w[dd + 1])
         w[dd] <- mw
-        w[dd+1] <- mw
-        el <- el[-dd,,drop=FALSE]
+        w[dd + 1] <- mw
+        el <- el[-dd, , drop = FALSE]
         w <- w[-dd]
       }
     }
     el <- cbind(el, w)
-  } else if (mode=="upper") {
+  } else if (mode == "upper") {
     ## UPPER
     if (diag) {
       adjmatrix <- Matrix::triu(adjmatrix)
@@ -160,8 +172,10 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
     }
     el <- mysummary(adjmatrix)
     rm(adjmatrix)
-    if (!diag) { el <- el[ el[,1] != el[,2], ] }
-  } else if (mode=="lower") {
+    if (!diag) {
+      el <- el[el[, 1] != el[, 2], ]
+    }
+  } else if (mode == "lower") {
     ## LOWER
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
@@ -170,33 +184,37 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
     }
     el <- mysummary(adjmatrix)
     rm(adjmatrix)
-    if (!diag) { el <- el[ el[,1] != el[,2], ] }
-  } else if (mode=="min") {
+    if (!diag) {
+      el <- el[el[, 1] != el[, 2], ]
+    }
+  } else if (mode == "min") {
     ## MINIMUM
     adjmatrix <- sign(adjmatrix) * sign(Matrix::t(adjmatrix)) * adjmatrix
     el <- mysummary(adjmatrix)
-    if (!diag) { el <- el[ el[,1] != el[,2], ] }
-    el <- el[ el[,3] != 0, ]
-    w <- el[,3]
-    el <- el[,1:2]
-    el <- cbind( pmin(el[,1],el[,2]), pmax(el[,1], el[,2]) )
-    o <- order(el[,1], el[,2])
-    el <- el[o,]
+    if (!diag) {
+      el <- el[el[, 1] != el[, 2], ]
+    }
+    el <- el[el[, 3] != 0, ]
+    w <- el[, 3]
+    el <- el[, 1:2]
+    el <- cbind(pmin(el[, 1], el[, 2]), pmax(el[, 1], el[, 2]))
+    o <- order(el[, 1], el[, 2])
+    el <- el[o, ]
     w <- w[o]
     if (nrow(el) > 1) {
-      dd <- el[2:nrow(el),1] == el[1:(nrow(el)-1),1] &
-        el[2:nrow(el),2] == el[1:(nrow(el)-1),2]
+      dd <- el[2:nrow(el), 1] == el[1:(nrow(el) - 1), 1] &
+        el[2:nrow(el), 2] == el[1:(nrow(el) - 1), 2]
       dd <- which(dd)
-      if (length(dd)>0) {
-        mw <- pmin(w[dd], w[dd+1])
+      if (length(dd) > 0) {
+        mw <- pmin(w[dd], w[dd + 1])
         w[dd] <- mw
-        w[dd+1] <- mw
-        el <- el[-dd,]
+        w[dd + 1] <- mw
+        el <- el[-dd, ]
         w <- w[-dd]
       }
     }
     el <- cbind(el, w)
-  } else if (mode=="plus") {
+  } else if (mode == "plus") {
     ## PLUS
     adjmatrix <- adjmatrix + Matrix::t(adjmatrix)
     if (diag) {
@@ -206,21 +224,21 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
     }
     el <- mysummary(adjmatrix)
     if (diag) {
-      loop <- el[,1] == el[,2]
-      el[loop,3] <- el[loop,3] / 2
+      loop <- el[, 1] == el[, 2]
+      el[loop, 3] <- el[loop, 3] / 2
     }
-    el <- el[ el[,3] != 0, ]
+    el <- el[el[, 3] != 0, ]
     rm(adjmatrix)
   }
 
   if (!is.null(weighted)) {
-    res <- make_empty_graph(n=vc, directed=(mode=="directed"))
-    weight <- list(el[,3])
+    res <- make_empty_graph(n = vc, directed = (mode == "directed"))
+    weight <- list(el[, 3])
     names(weight) <- weighted
-    res <- add_edges(res, edges=t(as.matrix(el[,1:2])), attr=weight)
+    res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
   } else {
     edges <- unlist(apply(el, 1, function(x) rep(unname(x[1:2]), x[3])))
-    res <- graph(n=vc, edges, directed=(mode=="directed"))
+    res <- graph(n = vc, edges, directed = (mode == "directed"))
   }
   res
 }
@@ -309,55 +327,64 @@ graph.adjacency.sparse <- function(adjmatrix, mode=c("directed", "undirected", "
 #' @keywords graphs
 #' @examples
 #'
-#' adjm <- matrix(sample(0:1, 100, replace=TRUE, prob=c(0.9,0.1)), ncol=10)
-#' g1 <- graph_from_adjacency_matrix( adjm )
-#' adjm <- matrix(sample(0:5, 100, replace=TRUE,
-#'                       prob=c(0.9,0.02,0.02,0.02,0.02,0.02)), ncol=10)
-#' g2 <- graph_from_adjacency_matrix(adjm, weighted=TRUE)
+#' adjm <- matrix(sample(0:1, 100, replace = TRUE, prob = c(0.9, 0.1)), ncol = 10)
+#' g1 <- graph_from_adjacency_matrix(adjm)
+#' adjm <- matrix(sample(0:5, 100,
+#'   replace = TRUE,
+#'   prob = c(0.9, 0.02, 0.02, 0.02, 0.02, 0.02)
+#' ), ncol = 10)
+#' g2 <- graph_from_adjacency_matrix(adjm, weighted = TRUE)
 #' E(g2)$weight
 #'
 #' ## various modes for weighted graphs, with some tests
-#' nzs <- function(x) sort(x [x!=0])
+#' nzs <- function(x) sort(x[x != 0])
 #' adjm <- matrix(runif(100), 10)
-#' adjm[ adjm<0.5 ] <- 0
-#' g3 <- graph_from_adjacency_matrix((adjm + t(adjm))/2, weighted=TRUE,
-#'                       mode="undirected")
+#' adjm[adjm < 0.5] <- 0
+#' g3 <- graph_from_adjacency_matrix((adjm + t(adjm)) / 2,
+#'   weighted = TRUE,
+#'   mode = "undirected"
+#' )
 #'
-#' g4 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="max")
+#' g4 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "max")
 #' all(nzs(pmax(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g4)$weight))
 #'
-#' g5 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="min")
+#' g5 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "min")
 #' all(nzs(pmin(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g5)$weight))
 #'
-#' g6 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="upper")
+#' g6 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "upper")
 #' all(nzs(adjm[upper.tri(adjm)]) == sort(E(g6)$weight))
 #'
-#' g7 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="lower")
+#' g7 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "lower")
 #' all(nzs(adjm[lower.tri(adjm)]) == sort(E(g7)$weight))
 #'
-#' g8 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="plus")
-#' d2 <- function(x) { diag(x) <- diag(x)/2; x }
-#' all(nzs((d2(adjm+t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
+#' g8 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus")
+#' d2 <- function(x) {
+#'   diag(x) <- diag(x) / 2; x
+#' }
+#' all(nzs((d2(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
 #'
-#' g9 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, mode="plus", diag=FALSE)
-#' d0 <- function(x) { diag(x) <- 0 }
-#' all(nzs((d0(adjm+t(adjm)))[lower.tri(adjm)]) == sort(E(g9)$weight))
+#' g9 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus", diag = FALSE)
+#' d0 <- function(x) {
+#'   diag(x) <- 0
+#' }
+#' all(nzs((d0(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g9)$weight))
 #'
 #' ## row/column names
 #' rownames(adjm) <- sample(letters, nrow(adjm))
 #' colnames(adjm) <- seq(ncol(adjm))
-#' g10 <- graph_from_adjacency_matrix(adjm, weighted=TRUE, add.rownames="code")
+#' g10 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, add.rownames = "code")
 #' summary(g10)
 #'
-graph_from_adjacency_matrix <- function(adjmatrix, mode=c("directed", "undirected", "max",
-                                         "min", "upper", "lower", "plus"),
-                            weighted=NULL, diag=TRUE,
-                            add.colnames=NULL, add.rownames=NA) {
-
+graph_from_adjacency_matrix <- function(adjmatrix, mode = c(
+                                          "directed", "undirected", "max",
+                                          "min", "upper", "lower", "plus"
+                                        ),
+                                        weighted = NULL, diag = TRUE,
+                                        add.colnames = NULL, add.rownames = NA) {
   if (inherits(adjmatrix, "Matrix")) {
-    res <- graph.adjacency.sparse(adjmatrix, mode=mode, weighted=weighted, diag=diag)
+    res <- graph.adjacency.sparse(adjmatrix, mode = mode, weighted = weighted, diag = diag)
   } else {
-    res <- graph.adjacency.dense(adjmatrix, mode=mode, weighted=weighted, diag=diag)
+    res <- graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted, diag = diag)
   }
 
   ## Add columns and row names as attributes
@@ -388,16 +415,16 @@ graph_from_adjacency_matrix <- function(adjmatrix, mode=c("directed", "undirecte
   }
 
   if (!is.na(add.rownames) && !is.na(add.colnames) &&
-      add.rownames == add.colnames ) {
+    add.rownames == add.colnames) {
     warning("Same attribute for columns and rows, row names are ignored")
     add.rownames <- NA
   }
 
   if (!is.na(add.colnames)) {
-    res <- set_vertex_attr(res, add.colnames, value=colnames(adjmatrix))
+    res <- set_vertex_attr(res, add.colnames, value = colnames(adjmatrix))
   }
   if (!is.na(add.rownames)) {
-    res <- set_vertex_attr(res, add.rownames, value=rownames(adjmatrix))
+    res <- set_vertex_attr(res, add.rownames, value = rownames(adjmatrix))
   }
 
   res

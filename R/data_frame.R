@@ -99,96 +99,105 @@
 #'
 #' ## A simple example with a couple of actors
 #' ## The typical case is that these tables are read in from files....
-#' actors <- data.frame(name=c("Alice", "Bob", "Cecil", "David",
-#'                             "Esmeralda"),
-#'                      age=c(48,33,45,34,21),
-#'                      gender=c("F","M","F","M","F"))
-#' relations <- data.frame(from=c("Bob", "Cecil", "Cecil", "David",
-#'                                "David", "Esmeralda"),
-#'                         to=c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"),
-#'                         same.dept=c(FALSE,FALSE,TRUE,FALSE,FALSE,TRUE),
-#'                         friendship=c(4,5,5,2,1,1), advice=c(4,5,5,4,2,3))
-#' g <- graph_from_data_frame(relations, directed=TRUE, vertices=actors)
-#' print(g, e=TRUE, v=TRUE)
+#' actors <- data.frame(
+#'   name = c(
+#'     "Alice", "Bob", "Cecil", "David",
+#'     "Esmeralda"
+#'   ),
+#'   age = c(48, 33, 45, 34, 21),
+#'   gender = c("F", "M", "F", "M", "F")
+#' )
+#' relations <- data.frame(
+#'   from = c(
+#'     "Bob", "Cecil", "Cecil", "David",
+#'     "David", "Esmeralda"
+#'   ),
+#'   to = c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"),
+#'   same.dept = c(FALSE, FALSE, TRUE, FALSE, FALSE, TRUE),
+#'   friendship = c(4, 5, 5, 2, 1, 1), advice = c(4, 5, 5, 4, 2, 3)
+#' )
+#' g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
+#' print(g, e = TRUE, v = TRUE)
 #'
 #' ## The opposite operation
-#' as_data_frame(g, what="vertices")
-#' as_data_frame(g, what="edges")
+#' as_data_frame(g, what = "vertices")
+#' as_data_frame(g, what = "edges")
 #'
-graph_from_data_frame <- function(d, directed=TRUE, vertices=NULL) {
-
+graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   d <- as.data.frame(d)
-  if (!is.null(vertices)) { vertices <- as.data.frame(vertices) }
+  if (!is.null(vertices)) {
+    vertices <- as.data.frame(vertices)
+  }
 
   if (ncol(d) < 2) {
     stop("the data frame should contain at least two columns")
   }
 
   ## Handle if some elements are 'NA'
-  if (any(is.na(d[,1:2]))) {
+  if (any(is.na(d[, 1:2]))) {
     warning("In `d' `NA' elements were replaced with string \"NA\"")
-    d[,1:2][ is.na(d[,1:2]) ] <- 'NA'
+    d[, 1:2][is.na(d[, 1:2])] <- 'NA'
   }
-  if (!is.null(vertices) && any(is.na(vertices[,1]))) {
+  if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
     warning("In `vertices[,1]' `NA' elements were replaced with string \"NA\"")
-    vertices[,1][is.na(vertices[,1])] <- 'NA'
+    vertices[, 1][is.na(vertices[, 1])] <- 'NA'
   }
 
-  names <- unique( c(as.character(d[,1]), as.character(d[,2])) )
+  names <- unique(c(as.character(d[, 1]), as.character(d[, 2])))
   if (!is.null(vertices)) {
     names2 <- names
     vertices <- as.data.frame(vertices)
     if (ncol(vertices) < 1) {
       stop("Vertex data frame contains no rows")
     }
-    names <- as.character(vertices[,1])
+    names <- as.character(vertices[, 1])
     if (any(duplicated(names))) {
       stop("Duplicate vertex names")
     }
-    if (any(! names2 %in% names)) {
+    if (any(!names2 %in% names)) {
       stop("Some vertex names in edge list are not listed in vertex data frame")
     }
   }
 
   # create graph
-  g <- make_empty_graph(n=0, directed=directed)
+  g <- make_empty_graph(n = 0, directed = directed)
 
   # vertex attributes
-  attrs <- list(name=names)
+  attrs <- list(name = names)
   if (!is.null(vertices)) {
     if (ncol(vertices) > 1) {
       for (i in 2:ncol(vertices)) {
-        newval <- vertices[,i]
+        newval <- vertices[, i]
         if (inherits(newval, "factor")) {
           newval <- as.character(newval)
         }
-        attrs[[ names(vertices)[i] ]] <- newval
+        attrs[[names(vertices)[i]]] <- newval
       }
     }
   }
 
   # add vertices
-  g <- add_vertices(g, length(names), attr=attrs)
+  g <- add_vertices(g, length(names), attr = attrs)
 
   # create edge list
-  from <- as.character(d[,1])
-  to <- as.character(d[,2])
-  edges <- rbind(match(from, names), match(to,names))
+  from <- as.character(d[, 1])
+  to <- as.character(d[, 2])
+  edges <- rbind(match(from, names), match(to, names))
 
   # edge attributes
   attrs <- list()
   if (ncol(d) > 2) {
     for (i in 3:ncol(d)) {
-      newval <- d[,i]
+      newval <- d[, i]
       if (inherits(newval, "factor")) {
         newval <- as.character(newval)
       }
-      attrs[[ names(d)[i] ]] <- newval
+      attrs[[names(d)[i]]] <- newval
     }
   }
 
   # add the edges
-  g <- add_edges(g, edges, attr=attrs)
+  g <- add_edges(g, edges, attr = attrs)
   g
 }
 
@@ -217,31 +226,30 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' @family deterministic constructors
 #' @export
 #' @examples
-#' el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
+#' el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 #' graph_from_edgelist(el)
 #'
 #' # Create a ring by hand
 #' graph_from_edgelist(cbind(1:10, c(2:10, 1)))
-graph_from_edgelist <- function(el, directed=TRUE) {
-
+graph_from_edgelist <- function(el, directed = TRUE) {
   if (!is.matrix(el) || ncol(el) != 2) {
     stop("graph_from_edgelist expects a matrix with two columns")
   }
 
   if (nrow(el) == 0) {
-    res <- make_empty_graph(directed=directed)
+    res <- make_empty_graph(directed = directed)
   } else {
     if (is.character(el)) {
       ## symbolic edge list
       names <- unique(as.character(t(el)))
       ids <- seq(names)
       names(ids) <- names
-      res <- graph( unname(ids[t(el)]), directed=directed)
+      res <- graph(unname(ids[t(el)]), directed = directed)
       rm(ids)
       V(res)$name <- names
     } else {
       ## normal edge list
-      res <- graph( t(el), directed=directed )
+      res <- graph(t(el), directed = directed)
     }
   }
 

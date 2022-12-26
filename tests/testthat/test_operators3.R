@@ -1,5 +1,4 @@
 test_that("infix operators work", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   E(g)$name <- LETTERS[1:10]
@@ -13,12 +12,12 @@ test_that("infix operators work", {
   expect_true(graph.isomorphic(g, make_lattice(5) + make_lattice(3)))
 
   g <- g - edge("H")
-  expect_true(graph.isomorphic(g, graph_from_literal(a-b-c, d-e-f, g-h)))
+  expect_true(graph.isomorphic(g, graph_from_literal(a - b - c, d - e - f, g - h)))
 
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
   g <- g - path("a", "b")
-  expect_true(graph.isomorphic(g, graph_from_literal(a, b-c-d-e-f-g-h-i-j-a)))
+  expect_true(graph.isomorphic(g, graph_from_literal(a, b - c - d - e - f - g - h - i - j - a)))
   g <- g + path("a", "b")
   expect_true(graph.isomorphic(g, make_ring(10)))
 
@@ -28,10 +27,13 @@ test_that("infix operators work", {
   g <- g - path("a", "b", "c", "d")
   expect_true(graph.isomorphic(g, make_lattice(8) + 2))
 
-  expect_true(graph.isomorphic(g - V(g)[c('d', 'g')],
-                               make_lattice(4) + make_lattice(2) + 2))
+  expect_true(graph.isomorphic(
+    g - V(g)[c('d', 'g')],
+    make_lattice(4) + make_lattice(2) + 2
+  ))
 
-  expect_true(graph.isomorphic(g - E(g)['f' %--% 'g'],
-                               make_lattice(5) + make_lattice(3) + 2))
-
+  expect_true(graph.isomorphic(
+    g - E(g)['f' %--% 'g'],
+    make_lattice(5) + make_lattice(3) + 2
+  ))
 })

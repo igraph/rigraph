@@ -195,11 +195,13 @@
 #' @examples
 #'
 #' ## The graph from the Moody-White paper
-#' mw <- graph_from_literal(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
-#'                 5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
-#'                 10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
-#'                 17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
-#'                 21-22:23, 22-23)
+#' mw <- graph_from_literal(
+#'   1 - 2:3:4:5:6, 2 - 3:4:5:7, 3 - 4:6:7, 4 - 5:6:7,
+#'   5 - 6:7:21, 6 - 7, 7 - 8:11:14:19, 8 - 9:11:14, 9 - 10,
+#'   10 - 12:13, 11 - 12:14, 12 - 16, 13 - 16, 14 - 15, 15 - 16,
+#'   17 - 18:19:20, 18 - 20:21, 19 - 20:22:23, 20 - 21,
+#'   21 - 22:23, 22 - 23
+#' )
 #'
 #' mwBlocks <- cohesive_blocks(mw)
 #'
@@ -219,31 +221,36 @@
 #' plot(mwBlocks, mw)
 #'
 #' ## The science camp network
-#' camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
-#'                   Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
-#'                   Holly   - Carol:Pat:Pam:Jennie:Bill,
-#'                   Bill    - Pauline:Michael:Lee:Holly,
-#'                   Pauline - Bill:Jennie:Ann,
-#'                   Jennie  - Holly:Michael:Lee:Ann:Pauline,
-#'                   Michael - Bill:Jennie:Ann:Lee:John,
-#'                   Ann     - Michael:Jennie:Pauline,
-#'                   Lee     - Michael:Bill:Jennie,
-#'                   Gery    - Pat:Steve:Russ:John,
-#'                   Russ    - Steve:Bert:Gery:John,
-#'                   John    - Gery:Russ:Michael)
+#' camp <- graph_from_literal(
+#'   Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
+#'   Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
+#'   Holly - Carol:Pat:Pam:Jennie:Bill,
+#'   Bill - Pauline:Michael:Lee:Holly,
+#'   Pauline - Bill:Jennie:Ann,
+#'   Jennie - Holly:Michael:Lee:Ann:Pauline,
+#'   Michael - Bill:Jennie:Ann:Lee:John,
+#'   Ann - Michael:Jennie:Pauline,
+#'   Lee - Michael:Bill:Jennie,
+#'   Gery - Pat:Steve:Russ:John,
+#'   Russ - Steve:Bert:Gery:John,
+#'   John - Gery:Russ:Michael
+#' )
 #' campBlocks <- cohesive_blocks(camp)
 #' campBlocks
 #'
-#' plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
-#'      vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
-#'      mark.border=1, colbar=c(NA, NA,"cyan","orange") )
+#' plot(campBlocks, camp,
+#'   vertex.label = V(camp)$name, margin = -0.2,
+#'   vertex.shape = "rectangle", vertex.size = 24, vertex.size2 = 8,
+#'   mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
+#' )
 #'
-cohesive_blocks <- function(graph, labels=TRUE) {
-
+cohesive_blocks <- function(graph, labels = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_cohesive_blocks, graph)
   class(res) <- "cohesiveBlocks"
@@ -274,7 +281,7 @@ blocks <- function(blocks) {
 #' @rdname cohesive_blocks
 #' @export
 graphs_from_cohesive_blocks <- function(blocks, graph) {
-  lapply(blocks(blocks), induced_subgraph, graph=graph)
+  lapply(blocks(blocks), induced_subgraph, graph = graph)
 }
 
 #' @export
@@ -311,36 +318,40 @@ print.cohesiveBlocks <- function(x, ...) {
   si <- sapply(myb, length)
 
   cs <- 3 + 2 + nchar(length(x)) +
-    max(distances(hierarchy(x), mode="out", v=1)) * 3
+    max(distances(hierarchy(x), mode = "out", v = 1)) * 3
 
-  .plot <- function(b, ind="") {
-    if (b!=1) {
-      he <- format(paste(sep="", ind, "'- B-", b), width=cs)
+  .plot <- function(b, ind = "") {
+    if (b != 1) {
+      he <- format(paste(sep = "", ind, "'- B-", b), width = cs)
       ind <- paste("  ", ind)
     } else {
-      he <- format(paste(sep="", "B-", b), width=cs)
+      he <- format(paste(sep = "", "B-", b), width = cs)
     }
-    cat(sep="", he,
-        "c ", format(ch[b], width=nchar(max(ch)), justify="right"),
-        ", n ", format(si[b], width=nchar(x$vcount), justify="right"))
+    cat(
+      sep = "", he,
+      "c ", format(ch[b], width = nchar(max(ch)), justify = "right"),
+      ", n ", format(si[b], width = nchar(x$vcount), justify = "right")
+    )
 
-    if (x$vcount <= options("width")$width-40 && b != 1) {
+    if (x$vcount <= options("width")$width - 40 && b != 1) {
       o <- rep(".", x$vcount)
-      o[ myb[[b]] ] <- "o"
+      o[myb[[b]]] <- "o"
       oo <- character()
-      for (i in 1:floor(x$vcount/10)) {
-        oo <- c(oo, o[((i-1)*10+1):(i*10)], " ")
+      for (i in 1:floor(x$vcount / 10)) {
+        oo <- c(oo, o[((i - 1) * 10 + 1):(i * 10)], " ")
       }
-      if (x$vcount %% 10) { oo <- c(oo, o[(i*10+1):length(o)]) }
-      cat("  ", paste(oo, collapse=""), "\n")
+      if (x$vcount %% 10) {
+        oo <- c(oo, o[(i * 10 + 1):length(o)])
+      }
+      cat("  ", paste(oo, collapse = ""), "\n")
     } else {
       cat("\n")
     }
 
-    wc <- which(pp==b)
-    sapply(wc, .plot, ind=ind)
+    wc <- which(pp == b)
+    sapply(wc, .plot, ind = ind)
   }
-  if (length(x) >0) .plot(1) else cat("No cohesive blocks found.")
+  if (length(x) > 0) .plot(1) else cat("No cohesive blocks found.")
 
   invisible(x)
 }
@@ -349,8 +360,10 @@ print.cohesiveBlocks <- function(x, ...) {
 #' @method summary cohesiveBlocks
 #' @export
 summary.cohesiveBlocks <- function(object, ...) {
-  cat("Structurally cohesive block structure, with",
-      length(blocks(object)), "blocks.\n")
+  cat(
+    "Structurally cohesive block structure, with",
+    length(blocks(object)), "blocks.\n"
+  )
   invisible(object)
 }
 
@@ -360,25 +373,27 @@ summary.cohesiveBlocks <- function(object, ...) {
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
 plot.cohesiveBlocks <- function(x, y,
-                                colbar=rainbow(max(cohesion(x))+1),
-                                col=colbar[max_cohesion(x)+1],
-                                mark.groups=blocks(x)[-1],
+                                colbar = rainbow(max(cohesion(x)) + 1),
+                                col = colbar[max_cohesion(x) + 1],
+                                mark.groups = blocks(x)[-1],
                                 ...) {
-  plot(y, mark.groups=mark.groups,
-       vertex.color=col, ...)
+  plot(y,
+    mark.groups = mark.groups,
+    vertex.color = col, ...
+  )
 }
 
 #' @rdname cohesive_blocks
 #' @export
 #' @importFrom graphics plot
 plot_hierarchy <- function(blocks,
-                          layout=layout_as_tree(hierarchy(blocks),
-                            root=1), ...) {
-  plot(hierarchy(blocks), layout=layout, ...)
+                           layout = layout_as_tree(hierarchy(blocks),
+                             root = 1
+                           ), ...) {
+  plot(hierarchy(blocks), layout = layout, ...)
 }
 
 exportPajek.cohesiveblocks.pf <- function(blocks, graph, file) {
-
   closeit <- FALSE
   if (is.character(file)) {
     file <- file(file, open = "w+b")
@@ -390,21 +405,23 @@ exportPajek.cohesiveblocks.pf <- function(blocks, graph, file) {
   }
 
   ## The original graph
-  cat(file=file, sep="", "*Network cohesive_blocks_input.net\r\n")
-  write_graph(graph, file=file, format="pajek")
+  cat(file = file, sep = "", "*Network cohesive_blocks_input.net\r\n")
+  write_graph(graph, file = file, format = "pajek")
 
   ## The hierarchy graph
-  cat(file=file, sep="", "\r\n*Network hierarchy.net\r\n")
-  write_graph(hierarchy(blocks), file=file, format="pajek")
+  cat(file = file, sep = "", "\r\n*Network hierarchy.net\r\n")
+  write_graph(hierarchy(blocks), file = file, format = "pajek")
 
   ## The blocks
   myb <- blocks(blocks)
   for (b in seq_along(myb)) {
     thisb <- rep(0, vcount(graph))
-    thisb[ myb[[b]] ] <- 1
-    cat(file=file, sep="", "\r\n*Partition block_", b, ".clu\r\n",
-        "*Vertices ", vcount(graph), "\r\n   ")
-    cat(thisb, sep="\r\n   ", file=file)
+    thisb[myb[[b]]] <- 1
+    cat(
+      file = file, sep = "", "\r\n*Partition block_", b, ".clu\r\n",
+      "*Vertices ", vcount(graph), "\r\n   "
+    )
+    cat(thisb, sep = "\r\n   ", file = file)
   }
 
   if (closeit) {
@@ -414,21 +431,24 @@ exportPajek.cohesiveblocks.pf <- function(blocks, graph, file) {
 }
 
 exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
-
   ## The original graph
-  write_graph(graph, file=paste(sep="", file, ".net"), format="pajek")
+  write_graph(graph, file = paste(sep = "", file, ".net"), format = "pajek")
 
   ## The hierarchy graph
-  write_graph(hierarchy(blocks), file=paste(sep="", file, "_hierarchy.net"),
-              format="pajek")
+  write_graph(hierarchy(blocks),
+    file = paste(sep = "", file, "_hierarchy.net"),
+    format = "pajek"
+  )
 
   ## The blocks
   myb <- blocks(blocks)
   for (b in seq_along(myb)) {
     thisb <- rep(0, vcount(graph))
-    thisb[ myb[[b]] ] <- 1
-    cat(file=paste(sep="", file, "_block_", b, ".clu"), sep="\r\n",
-        paste("*Vertices", vcount(graph)), thisb)
+    thisb[myb[[b]]] <- 1
+    cat(
+      file = paste(sep = "", file, "_block_", b, ".clu"), sep = "\r\n",
+      paste("*Vertices", vcount(graph)), thisb
+    )
   }
 
   invisible(NULL)
@@ -437,11 +457,12 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 #' @rdname cohesive_blocks
 #' @export
 export_pajek <- function(blocks, graph, file,
-                        project.file=TRUE) {
-
+                         project.file = TRUE) {
   if (!project.file && !is.character(file)) {
-    stop(paste("`file' must be a filename (without extension) when writing",
-               "to separate files"))
+    stop(paste(
+      "`file' must be a filename (without extension) when writing",
+      "to separate files"
+    ))
   }
 
   if (project.file) {
@@ -461,7 +482,7 @@ max_cohesion <- function(blocks) {
   myb <- myb[oo]
   coh <- coh[oo]
   for (b in seq_along(myb)) {
-    res[ myb[[b]] ] <- coh[b]
+    res[myb[[b]]] <- coh[b]
   }
   res
 }

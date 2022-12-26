@@ -46,7 +46,7 @@
   if (sum(cidx) > 1) {
     stop("Don't know how to ", .operation, ", multiple constructors given")
   }
-  cons <- args[ cidx][[1]]
+  cons <- args[cidx][[1]]
   args <- args[!cidx]
 
   ## Modifiers
@@ -73,7 +73,7 @@
     }
   }
 
-  list(cons=cons, mods=mods, args=args)
+  list(cons = cons, mods = mods, args = args)
 }
 
 #' Applies a set of constructor modifiers to an already constructed graph.
@@ -94,46 +94,39 @@
       for (g in ga) graph <- delete_graph_attr(graph, g)
       for (v in va) graph <- delete_vertex_attr(graph, v)
       for (e in ea) graph <- delete_edge_attr(graph, e)
-
     } else if (m$id == "without_loops") {
       graph <- simplify(graph, remove.loops = TRUE, remove.multiple = FALSE)
-
     } else if (m$id == "without_multiples") {
       graph <- simplify(graph, remove.loops = FALSE, remove.multiple = TRUE)
-
     } else if (m$id == "simplified") {
       graph <- simplify(graph)
-
     } else if (m$id == "with_vertex_") {
       m$args <- lapply(m$args, eval)
       ## TODO speed this up
       for (a in seq_along(m$args)) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
-        stopifnot(! is.null(n))
+        stopifnot(!is.null(n))
         graph <- set_vertex_attr(graph, n, value = v)
       }
-
     } else if (m$id == "with_edge_") {
       m$args <- lapply(m$args, eval)
       ## TODO speed this up
       for (a in seq_along(m$args)) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
-        stopifnot(! is.null(n))
+        stopifnot(!is.null(n))
         graph <- set_edge_attr(graph, n, value = v)
       }
-
     } else if (m$id == "with_graph_") {
       m$args <- lapply(m$args, eval)
       ## TODO speed this up
       for (a in seq_along(m$args)) {
         n <- names(m$args)[a]
         v <- m$args[[a]]
-        stopifnot(! is.null(n))
+        stopifnot(!is.null(n))
         graph <- set_graph_attr(graph, n, value = v)
       }
-
     }
   }
 
@@ -174,7 +167,7 @@
 #' r2 <- make_(ring(10), with_vertex_(color = "red", name = LETTERS[1:10]))
 #' l2 <- make_(lattice(c(3, 3, 3)), with_edge_(weight = 2))
 #'
-#' ran <- sample_(degseq(c(3,3,3,3,3,3), method = "simple"), simplified())
+#' ran <- sample_(degseq(c(3, 3, 3, 3, 3, 3), method = "simple"), simplified())
 #' degree(ran)
 #' is_simple(ran)
 make_ <- function(...) {
@@ -198,8 +191,10 @@ make_ <- function(...) {
 #' @export
 #' @examples
 #' pref_matrix <- cbind(c(0.8, 0.1), c(0.1, 0.7))
-#' blocky <- sample_(sbm(n = 20, pref.matrix = pref_matrix,
-#'   block.sizes = c(10, 10)))
+#' blocky <- sample_(sbm(
+#'   n = 20, pref.matrix = pref_matrix,
+#'   block.sizes = c(10, 10)
+#' ))
 #'
 #' blocky2 <- pref_matrix %>%
 #'   sample_sbm(n = 20, block.sizes = c(10, 10))
@@ -228,8 +223,8 @@ sample_ <- function(...) {
 #' @export
 #' @examples
 #' ## These are equivalent
-#' graph_(cbind(1:5,2:6), from_edgelist(directed = FALSE))
-#' graph_(cbind(1:5,2:6), from_edgelist(), directed = FALSE)
+#' graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
+#' graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 graph_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "graph")
@@ -338,14 +333,16 @@ simplified <- function() {
 #'
 #' @export
 #' @examples
-#' make_(ring(10),
+#' make_(
+#'   ring(10),
 #'   with_vertex_(
 #'     color = "#7fcdbb",
 #'     frame.color = "#7fcdbb",
-#'     name = LETTERS[1:10])) %>%
+#'     name = LETTERS[1:10]
+#'   )
+#' ) %>%
 #'   plot()
 with_vertex_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -363,13 +360,15 @@ with_vertex_ <- function(...) {
 #'
 #' @export
 #' @examples
-#' make_(ring(10),
+#' make_(
+#'   ring(10),
 #'   with_edge_(
 #'     color = "red",
-#'     weight = rep(1:2, 5))) %>%
+#'     weight = rep(1:2, 5)
+#'   )
+#' ) %>%
 #'   plot()
 with_edge_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -389,7 +388,6 @@ with_edge_ <- function(...) {
 #' @examples
 #' make_(ring(10), with_graph_(name = "10-ring"))
 with_graph_ <- function(...) {
-
   args <- grab_args()
 
   constructor_modifier(
@@ -542,21 +540,24 @@ with_graph_ <- function(...) {
 #' make_graph(c(1, 2, 2, 3, 3, 4, 5, 6), directed = FALSE)
 #' make_graph(c("A", "B", "B", "C", "C", "D"), directed = FALSE)
 #'
-#' solids <- list(make_graph("Tetrahedron"),
-#'                make_graph("Cubical"),
-#'                make_graph("Octahedron"),
-#'                make_graph("Dodecahedron"),
-#'                make_graph("Icosahedron"))
+#' solids <- list(
+#'   make_graph("Tetrahedron"),
+#'   make_graph("Cubical"),
+#'   make_graph("Octahedron"),
+#'   make_graph("Dodecahedron"),
+#'   make_graph("Icosahedron")
+#' )
 #'
-#' graph <- make_graph( ~ A-B-C-D-A, E-A:B:C:D,
-#'                       F-G-H-I-F, J-F:G:H:I,
-#'                       K-L-M-N-K, O-K:L:M:N,
-#'                       P-Q-R-S-P, T-P:Q:R:S,
-#'                       B-F, E-J, C-I, L-T, O-T, M-S,
-#'                       C-P, C-L, I-L, I-P)
+#' graph <- make_graph(
+#'   ~ A - B - C - D - A, E - A:B:C:D,
+#'   F - G - H - I - F, J - F:G:H:I,
+#'   K - L - M - N - K, O - K:L:M:N,
+#'   P - Q - R - S - P, T - P:Q:R:S,
+#'   B - F, E - J, C - I, L - T, O - T, M - S,
+#'   C - P, C - L, I - L, I - P
+#' )
 make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
                        directed = TRUE, dir = directed, simplify = TRUE) {
-
   if (inherits(edges, "formula")) {
     if (!missing(n)) stop("'n' should not be given for graph literals")
     if (!missing(isolates)) {
@@ -569,9 +570,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     mf <- as.list(match.call())[-1]
     mf[[1]] <- mf[[1]][[2]]
     graph_from_literal_i(mf)
-
   } else {
-
     if (!missing(simplify)) {
       stop("'simplify' should not be given for graph literals")
     }
@@ -599,20 +598,21 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 
       ## NULL and empty logical vector is allowed for compatibility
     } else if (is.numeric(edges) || is.null(edges) ||
-               (is.logical(edges) && length(edges) == 0)) {
-
+      (is.logical(edges) && length(edges) == 0)) {
       if (is.null(edges) || is.logical(edges)) edges <- as.numeric(edges)
       if (!is.null(isolates)) {
         warning("'isolates' ignored for numeric edge list")
       }
 
       old_graph <- function(edges, n = max(edges), directed = TRUE) {
-        on.exit( .Call(C_R_igraph_finalizer) )
+        on.exit(.Call(C_R_igraph_finalizer))
         if (missing(n) && (is.null(edges) || length(edges) == 0)) {
           n <- 0
         }
-        .Call(C_R_igraph_create, as.numeric(edges)-1, as.numeric(n),
-              as.logical(directed))
+        .Call(
+          C_R_igraph_create, as.numeric(edges) - 1, as.numeric(n),
+          as.logical(directed)
+        )
       }
 
       args <- list(edges, ...)
@@ -620,7 +620,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
       if (!missing(directed)) args <- c(args, list(directed = directed))
 
       do.call(old_graph, args)
-
     } else if (is.character(edges)) {
       if (!missing(n)) {
         warning("'n' is ignored for edge list with vertex names")
@@ -634,7 +633,6 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
         res <- res + vertices(isolates)
       }
       res
-
     } else {
       stop("'edges' must be numeric or character")
     }
@@ -642,10 +640,9 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 }
 
 make_famous_graph <- function(name) {
-
   name <- gsub("\\s", "_", name)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_famous, as.character(name))
   if (igraph_opt("add.params")) {
     res$name <- capitalize(name)
@@ -696,7 +693,7 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-make_empty_graph <- function(n=0, directed=TRUE) {
+make_empty_graph <- function(n = 0, directed = TRUE) {
   # Argument checks
   if (is.null(n)) {
     stop("number of vertices must be an integer")
@@ -709,7 +706,7 @@ make_empty_graph <- function(n=0, directed=TRUE) {
 
   directed <- as.logical(directed)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_empty, n, directed)
 
@@ -808,44 +805,49 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' @export
 #' @examples
 #' # A simple undirected graph
-#' g <- graph_from_literal( Alice-Bob-Cecil-Alice, Daniel-Cecil-Eugene,
-#'                      Cecil-Gordon )
+#' g <- graph_from_literal(
+#'   Alice - Bob - Cecil - Alice, Daniel - Cecil - Eugene,
+#'   Cecil - Gordon
+#' )
 #' g
 #'
 #' # Another undirected graph, ":" notation
-#' g2 <- graph_from_literal( Alice-Bob:Cecil:Daniel, Cecil:Daniel-Eugene:Gordon )
+#' g2 <- graph_from_literal(Alice - Bob:Cecil:Daniel, Cecil:Daniel - Eugene:Gordon)
 #' g2
 #'
 #' # A directed graph
-#' g3 <- graph_from_literal( Alice +-+ Bob --+ Cecil +-- Daniel,
-#'                      Eugene --+ Gordon:Helen )
+#' g3 <- graph_from_literal(
+#'   Alice +-+ Bob --+ Cecil +-- Daniel,
+#'   Eugene --+ Gordon:Helen
+#' )
 #' g3
 #'
 #' # A graph with isolate vertices
-#' g4 <- graph_from_literal( Alice -- Bob -- Daniel, Cecil:Gordon, Helen )
+#' g4 <- graph_from_literal(Alice -- Bob -- Daniel, Cecil:Gordon, Helen)
 #' g4
 #' V(g4)$name
 #'
 #' # "Arrows" can be arbitrarily long
-#' g5 <- graph_from_literal( Alice +---------+ Bob )
+#' g5 <- graph_from_literal(Alice +---------+ Bob)
 #' g5
 #'
 #' # Special vertex names
-#' g6 <- graph_from_literal( "+" -- "-", "*" -- "/", "%%" -- "%/%" )
+#' g6 <- graph_from_literal("+" -- "-", "*" -- "/", "%%" -- "%/%")
 #' g6
 #'
-graph_from_literal <- function(..., simplify=TRUE) {
+graph_from_literal <- function(..., simplify = TRUE) {
   mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
 }
 
 graph_from_literal_i <- function(mf) {
-
   ## In case 'simplify' is given
   simplify <- TRUE
   if ('simplify' %in% names(mf)) {
-    w <- which(names(mf)=='simplify')
-    if (length(w) > 1) { stop("'simplify' specified multiple times") }
+    w <- which(names(mf) == 'simplify')
+    if (length(w) > 1) {
+      stop("'simplify' specified multiple times")
+    }
     simplify <- eval(mf[[w]])
     mf <- mf[-w]
   }
@@ -853,9 +855,9 @@ graph_from_literal_i <- function(mf) {
   ## Operators first
   f <- function(x) {
     if (is.call(x)) {
-      return (list(as.character(x[[1]]), lapply(x[-1], f)))
+      return(list(as.character(x[[1]]), lapply(x[-1], f)))
     } else {
-      return (NULL)
+      return(NULL)
     }
   }
   ops <- unlist(lapply(mf, f))
@@ -869,27 +871,29 @@ graph_from_literal_i <- function(mf) {
 
   f <- function(x) {
     if (is.call(x)) {
-      if (length(x)==3) {
-        return( list(f(x[[2]]), op=as.character(x[[1]]), f(x[[3]])) )
+      if (length(x) == 3) {
+        return(list(f(x[[2]]), op = as.character(x[[1]]), f(x[[3]])))
       } else {
-        return( list(op=as.character(x[[1]]), f(x[[2]])) )
+        return(list(op = as.character(x[[1]]), f(x[[2]])))
       }
     } else {
-      return( c(sym=as.character(x)) )
+      return(c(sym = as.character(x)))
     }
   }
 
   ret <- lapply(mf, function(x) unlist(f(x)))
 
-  v <- unique(unlist(lapply(ret, function(x) { x[ names(x)=="sym" ] })))
+  v <- unique(unlist(lapply(ret, function(x) {
+    x[names(x) == "sym"]
+  })))
 
   ## Merge symbols for ":"
   ret <- lapply(ret, function(x) {
     res <- list()
-    for (i in seq(along.with=x)) {
-      if (x[i]==":" && names(x)[i]=="op") {
+    for (i in seq(along.with = x)) {
+      if (x[i] == ":" && names(x)[i] == "op") {
         ## SKIP
-      } else if (i>1 && x[i-1]==":" && names(x)[i-1]=="op") {
+      } else if (i > 1 && x[i - 1] == ":" && names(x)[i - 1] == "op") {
         res[[length(res)]] <- c(res[[length(res)]], unname(x[i]))
       } else {
         res <- c(res, x[i])
@@ -900,24 +904,24 @@ graph_from_literal_i <- function(mf) {
 
   ## Ok, create the edges
   edges <- numeric()
-  for (i in seq(along.with=ret)) {
+  for (i in seq(along.with = ret)) {
     prev.sym <- character()
     lhead <- rhead <- character()
-    for (j in seq(along.with=ret[[i]])) {
+    for (j in seq(along.with = ret[[i]])) {
       act <- ret[[i]][[j]]
-      if (names(ret[[i]])[j]=="op") {
-        if (length(lhead)==0) {
+      if (names(ret[[i]])[j] == "op") {
+        if (length(lhead) == 0) {
           lhead <- rhead <- act
         } else {
           rhead <- act
         }
-      } else if (names(ret[[i]])[j]=="sym") {
+      } else if (names(ret[[i]])[j] == "sym") {
         for (ps in prev.sym) {
           for (ps2 in act) {
-            if (lhead=="+") {
+            if (lhead == "+") {
               edges <- c(edges, unname(c(ps2, ps)))
             }
-            if (!directed || rhead=="+") {
+            if (!directed || rhead == "+") {
               edges <- c(edges, unname(c(ps, ps2)))
             }
           }
@@ -928,11 +932,11 @@ graph_from_literal_i <- function(mf) {
     }
   }
 
-  ids <- seq(along.with=v)
+  ids <- seq(along.with = v)
   names(ids) <- v
-  res <- graph( unname(ids[edges]), n=length(v), directed=directed)
+  res <- graph(unname(ids[edges]), n = length(v), directed = directed)
   if (simplify) res <- simplify(res)
-  res <- set_vertex_attr(res, "name", value=v)
+  res <- set_vertex_attr(res, "name", value = v)
   res
 }
 
@@ -964,17 +968,27 @@ from_literal <- function(...)
 #' @examples
 #' make_star(10, mode = "out")
 #' make_star(5, mode = "undirected")
-make_star <- function(n, mode=c("in", "out", "mutual", "undirected"),
-                   center=1 ) {
-
+make_star <- function(n, mode = c("in", "out", "mutual", "undirected"),
+                      center = 1) {
   mode <- igraph.match.arg(mode)
-  mode1 <- switch(mode, "out"=0, "in"=1, "undirected"=2, "mutual"=3)
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2,
+    "mutual" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_star, as.numeric(n), as.numeric(mode1),
-               as.numeric(center)-1)
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_star, as.numeric(n), as.numeric(mode1),
+    as.numeric(center) - 1
+  )
   if (igraph_opt("add.params")) {
-    res$name <- switch(mode, "in"="In-star", "out"="Out-star", "Star")
+    res$name <- switch(mode,
+      "in" = "In-star",
+      "out" = "Out-star",
+      "Star"
+    )
     res$mode <- mode
     res$center <- center
   }
@@ -1002,10 +1016,12 @@ star <- function(...) constructor_spec(make_star, ...)
 #' @examples
 #' make_full_graph(5)
 #' print_all(make_full_graph(4, directed = TRUE))
-make_full_graph <- function(n, directed=FALSE, loops=FALSE) {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_full, as.numeric(n), as.logical(directed),
-               as.logical(loops))
+make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_full, as.numeric(n), as.logical(directed),
+    as.logical(loops)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Full graph"
     res$loops <- loops
@@ -1050,9 +1066,8 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' make_lattice(c(5, 5, 5))
 #' make_lattice(length = 5, dim = 3)
 make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
-                          nei = 1, directed = FALSE, mutual = FALSE,
-                          circular=FALSE) {
-
+                         nei = 1, directed = FALSE, mutual = FALSE,
+                         circular = FALSE) {
   if (is.numeric(length) && length != floor(length)) {
     warning("length was rounded to the nearest integer")
     length <- round(length)
@@ -1062,10 +1077,12 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
     dimvector <- rep(length, dim)
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
-               as.logical(directed), as.logical(mutual),
-               as.logical(circular))
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_lattice, as.numeric(dimvector), as.numeric(nei),
+    as.logical(directed), as.logical(mutual),
+    as.logical(circular)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Lattice graph"
     res$dimvector <- dimvector
@@ -1103,10 +1120,12 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' @examples
 #' print_all(make_ring(10))
 #' print_all(make_ring(10, directed = TRUE, mutual = TRUE))
-make_ring <- function(n, directed=FALSE, mutual=FALSE, circular=TRUE) {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_ring, as.numeric(n), as.logical(directed),
-               as.logical(mutual), as.logical(circular))
+make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_ring, as.numeric(n), as.logical(directed),
+    as.logical(mutual), as.logical(circular)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Ring graph"
     res$mutual <- mutual
@@ -1144,14 +1163,19 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' @examples
 #' make_tree(10, 2)
 #' make_tree(10, 3, mode = "undirected")
-make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
-
+make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   mode <- igraph.match.arg(mode)
-  mode1 <- switch(mode, "out"=0, "in"=1, "undirected"=2);
+  mode1 <- switch(mode,
+    "out" = 0,
+    "in" = 1,
+    "undirected" = 2
+  );
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_tree, as.numeric(n), as.numeric(children),
-               as.numeric(mode1))
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_tree, as.numeric(n), as.numeric(children),
+    as.numeric(mode1)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Tree"
     res$children <- children
@@ -1182,7 +1206,7 @@ make_tree <- function(n, children=2, mode=c("out", "in", "undirected")) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_tree(100, method="lerw")
+#' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
 sample_tree <- sample_tree
@@ -1190,7 +1214,7 @@ sample_tree <- sample_tree
 #' @rdname make_tree
 #' @param ... Passed to \code{make_tree} or \code{sample_tree}.
 #' @export
-tree <- function(...) constructor_spec(list(make=make_tree, sample=sample_tree), ...)
+tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tree), ...)
 
 
 ## -----------------------------------------------------------------
@@ -1255,8 +1279,7 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #' graph_from_atlas(sample(0:1252, 1))
 #' graph_from_atlas(sample(0:1252, 1))
 graph_from_atlas <- function(n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_atlas, as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Graph from the Atlas #%i", n)
@@ -1296,13 +1319,16 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' @family deterministic constructors
 #' @export
 #' @examples
-#' chord <- make_chordal_ring(15,
-#'     matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
-make_chordal_ring <- function(n, w, directed=FALSE) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_extended_chordal_ring, as.integer(n),
-               as.matrix(w), as.logical(directed))
+#' chord <- make_chordal_ring(
+#'   15,
+#'   matrix(c(3, 12, 4, 7, 8, 11), nr = 2)
+#' )
+make_chordal_ring <- function(n, w, directed = FALSE) {
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_extended_chordal_ring, as.integer(n),
+    as.matrix(w), as.logical(directed)
+  )
   if (igraph_opt("add.params")) {
     res$name <- "Extended chordal ring"
     res$w <- w
@@ -1341,18 +1367,17 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' @examples
 #'
 #' # generate the first De-Bruijn graphs
-#' g <- make_full_graph(2, directed=TRUE, loops=TRUE)
+#' g <- make_full_graph(2, directed = TRUE, loops = TRUE)
 #' make_line_graph(g)
 #' make_line_graph(make_line_graph(g))
 #' make_line_graph(make_line_graph(make_line_graph(g)))
 #'
 make_line_graph <- function(graph) {
-
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_linegraph, graph)
   if (igraph_opt("add.params")) {
     res$name <- "Line graph"
@@ -1396,12 +1421,11 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' @examples
 #'
 #' # de Bruijn graphs can be created recursively by line graphs as well
-#' g <- make_de_bruijn_graph(2,1)
-#' make_de_bruijn_graph(2,2)
+#' g <- make_de_bruijn_graph(2, 1)
+#' make_de_bruijn_graph(2, 2)
 #' make_line_graph(g)
 make_de_bruijn_graph <- function(m, n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_de_bruijn, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("De-Bruijn graph %i-%i", m, n)
@@ -1443,12 +1467,11 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' @export
 #' @examples
 #'
-#' make_line_graph(make_kautz_graph(2,1))
-#' make_kautz_graph(2,2)
+#' make_line_graph(make_kautz_graph(2, 1))
+#' make_kautz_graph(2, 2)
 #'
 make_kautz_graph <- function(m, n) {
-
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_kautz, as.numeric(m), as.numeric(n))
   if (igraph_opt("add.params")) {
     res$name <- sprintf("Kautz graph %i-%i", m, n)
@@ -1490,19 +1513,23 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' @examples
 #'
 #' g <- make_full_bipartite_graph(2, 3)
-#' g2 <- make_full_bipartite_graph(2, 3, directed=TRUE)
-#' g3 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="in")
-#' g4 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="all")
+#' g2 <- make_full_bipartite_graph(2, 3, directed = TRUE)
+#' g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
+#' g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 #'
-make_full_bipartite_graph <- function(n1, n2, directed=FALSE,
-                       mode=c("all", "out", "in")) {
-
+make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
+                                      mode = c("all", "out", "in")) {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
   directed <- as.logical(directed)
-  mode1 <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+  mode1 <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_full_bipartite, n1, n2, as.logical(directed), mode1)
   if (igraph_opt("add.params")) {
     res$graph$name <- "Full bipartite graph"
@@ -1510,7 +1537,7 @@ make_full_bipartite_graph <- function(n1, n2, directed=FALSE,
     res$n2 <- n2
     res$mode <- mode
   }
-  set_vertex_attr(res$graph, "type", value=res$types)
+  set_vertex_attr(res$graph, "type", value = res$types)
 }
 
 #' @rdname make_full_bipartite_graph
@@ -1561,10 +1588,10 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_bipartite_graph(rep(0:1, length.out=10), c(1:10))
-#' print(g, v=TRUE)
+#' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
+#' print(g, v = TRUE)
 #'
-make_bipartite_graph <- function(types, edges, directed=FALSE) {
+make_bipartite_graph <- function(types, edges, directed = FALSE) {
   vertex.names <- names(types)
 
   if (is.character(edges)) {
@@ -1578,15 +1605,15 @@ make_bipartite_graph <- function(types, edges, directed=FALSE) {
   }
 
   types <- as.logical(types)
-  edges <- as.numeric(edges)-1
+  edges <- as.numeric(edges) - 1
   directed <- as.logical(directed)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_create_bipartite, types, edges, directed)
-  res <- set_vertex_attr(res, "type", value=types)
+  res <- set_vertex_attr(res, "type", value = types)
 
   if (!is.null(vertex.names)) {
-    res <- set_vertex_attr(res, "name", value=vertex.names)
+    res <- set_vertex_attr(res, "name", value = vertex.names)
   }
 
   res
@@ -1614,12 +1641,12 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' @export
 #' @examples
 #' print_all(make_full_citation_graph(10))
-make_full_citation_graph <- function(n, directed=TRUE) {
+make_full_citation_graph <- function(n, directed = TRUE) {
   # Argument checks
   n <- as.integer(n)
   directed <- as.logical(directed)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_full_citation, n, directed)
 
@@ -1656,7 +1683,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' @examples
 #'
 #' # This is the Franklin graph:
-#' g1 <- graph_from_lcf(12, c(5,-5), 6)
+#' g1 <- graph_from_lcf(12, c(5, -5), 6)
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
@@ -1730,23 +1757,27 @@ graph_from_lcf <- graph_from_lcf
 #' @keywords graphs
 #' @examples
 #'
-#' g <- realize_degseq(rep(2,100))
+#' g <- realize_degseq(rep(2, 100))
 #' degree(g)
 #' is_simple(g)
 #'
 #' ## Exponential degree distribution, with high positive assortativity.
 #' ## Loop and multiple edges are explicitly allowed.
 #' ## Note that we correct the degree sequence if its sum is odd.
-#' degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
-#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
-#' g4 <- realize_degseq(degs, method="largest", allowed.edge.types="all")
+#' degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
+#' g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
 #' all(degree(g4) == degs)
 #'
 #' ## Power-law degree distribution, no loops allowed but multiple edges
 #' ## are okay.
 #' ## Note that we correct the degree sequence if its sum is odd.
-#' degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
-#' if (sum(degs) %% 2 != 0) { degs[1] <- degs[1] + 1 }
-#' g5 <- realize_degseq(degs, allowed.edge.types="multi")
+#' degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+#' if (sum(degs) %% 2 != 0) {
+#'   degs[1] <- degs[1] + 1
+#' }
+#' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
 realize_degseq <- realize_degseq

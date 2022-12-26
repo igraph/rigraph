@@ -25,8 +25,12 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                        vertex.color2, edge.color1,
                                        edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  if (!is_igraph(graph1)) {
+    stop("Not a graph object")
+  }
+  if (!is_igraph(graph2)) {
+    stop("Not a graph object")
+  }
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -35,7 +39,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.integer(vertex.color1) - 1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -45,7 +49,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.integer(vertex.color2) - 1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -55,7 +59,7 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.integer(edge.color1) - 1L
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -65,13 +69,15 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.integer(edge.color2) - 1L
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
-               vertex.color2, edge.color1, edge.color2)
+  res <- .Call(
+    C_R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
+    vertex.color2, edge.color1, edge.color2
+  )
 
   lapply(res, function(.x) V(graph2)[.x + 1])
 }
@@ -81,8 +87,12 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                           vertex.color2, edge.color1,
                                           edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  if (!is_igraph(graph1)) {
+    stop("Not a graph object")
+  }
+  if (!is_igraph(graph2)) {
+    stop("Not a graph object")
+  }
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -91,7 +101,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.integer(vertex.color1) - 1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -101,7 +111,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.integer(vertex.color2) - 1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -111,7 +121,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.integer(edge.color1) - 1L
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -121,13 +131,15 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.integer(edge.color2) - 1L
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_get_subisomorphisms_vf2, graph1, graph2,
-               vertex.color1, vertex.color2, edge.color1, edge.color2)
+  res <- .Call(
+    C_R_igraph_get_subisomorphisms_vf2, graph1, graph2,
+    vertex.color1, vertex.color2, edge.color1, edge.color2
+  )
 
   lapply(res, function(.x) V(graph1)[.x + 1])
 }
@@ -135,24 +147,30 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 #' @export
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  vids <- as.igraph.vs(graph, vids)-1
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  vids <- as.igraph.vs(graph, vids) - 1
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_isoclass_subgraph, graph, vids)
   res
 }
 
 #' @export
-graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
-                                    induced=FALSE, map=TRUE, all.maps=FALSE,
-                                    time.limit=Inf) {
+graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
+                                    induced = FALSE, map = TRUE, all.maps = FALSE,
+                                    time.limit = Inf) {
   # Argument checks
-  if (!is_igraph(pattern)) { stop("Not a graph object") }
-  if (!is_igraph(target)) { stop("Not a graph object") }
+  if (!is_igraph(pattern)) {
+    stop("Not a graph object")
+  }
+  if (!is_igraph(target)) {
+    stop("Not a graph object")
+  }
   induced <- as.logical(induced)
-  if (time.limit==Inf) {
+  if (time.limit == Inf) {
     time.limit <- 0L
   } else {
     time.limit <- as.integer(time.limit)
@@ -166,13 +184,15 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
     if (length(domains) != vcount(pattern)) {
       stop("`domains' length and `pattern' number of vertices must match")
     }
-    domains <- lapply(domains, function(x) as.igraph.vs(target, x)-1)
+    domains <- lapply(domains, function(x) as.igraph.vs(target, x) - 1)
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_subisomorphic_lad, pattern, target, domains,
-               induced, time.limit, map, all.maps)
+  res <- .Call(
+    C_R_igraph_subisomorphic_lad, pattern, target, domains,
+    induced, time.limit, map, all.maps
+  )
 
   if (map) {
     res$map <- res$map + 1
@@ -180,7 +200,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
       names(res$map) <- V(target)$name[res$map]
     }
   }
-  if (all.maps) res$maps <- lapply(res$maps, function(.x) V(target)[.x+1])
+  if (all.maps) res$maps <- lapply(res$maps, function(.x) V(target)[.x + 1])
 
   res
 }
@@ -270,7 +290,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
 #' isomorphic(g1, g2)
 #'
 #' # create two isomorphic graphs, by permuting the vertices of the first
-#' g1 <- barabasi.game(30, m=2, directed=FALSE)
+#' g1 <- barabasi.game(30, m = 2, directed = FALSE)
 #' g2 <- permute(g1, sample(vcount(g1)))
 #' # should be TRUE
 #' isomorphic(g1, g2)
@@ -287,29 +307,32 @@ graph.subisomorphic.lad <- function(pattern, target, domains=NULL,
 #' # consider colors by default
 #' count_isomorphisms(g1, g2)
 #' # ignore colors
-#' count_isomorphisms(g1, g2, vertex.color1 = NULL,
-#'     vertex.color2 = NULL)
-isomorphic <- function(graph1, graph2, method = c("auto", "direct",
-                 "vf2", "bliss"), ...) {
-
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+#' count_isomorphisms(g1, g2,
+#'   vertex.color1 = NULL,
+#'   vertex.color2 = NULL
+#' )
+isomorphic <- function(graph1, graph2, method = c(
+                         "auto", "direct",
+                         "vf2", "bliss"
+                       ), ...) {
+  if (!is_igraph(graph1)) {
+    stop("Not a graph object")
+  }
+  if (!is_igraph(graph2)) {
+    stop("Not a graph object")
+  }
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
-    on.exit( .Call(C_R_igraph_finalizer) )
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_isomorphic, graph1, graph2)
-
   } else if (method == "direct") {
     on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_isomorphic_34, graph1, graph2)
-
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
-
   } else if (method == "bliss") {
     graph.isomorphic.bliss(graph1, graph2, ...)$iso
-
   }
 }
 
@@ -384,14 +407,20 @@ is_isomorphic_to <- isomorphic
 #' @family graph isomorphism
 #' @examples
 #' # A LAD example
-#' pattern <- make_graph(~ 1:2:3:4:5,
-#'                       1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
-#' target <- make_graph(~ 1:2:3:4:5:6:7:8:9,
-#'                     1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
-#'                     5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
-#'                     8 - 4:9, 9 - 6:4:8)
-#' domains <- list(`1` = c(1,3,9), `2` = c(5,6,7,8), `3` = c(2,4,6,7,8,9),
-#'                 `4` = c(1,3,9), `5` = c(2,4,8,9))
+#' pattern <- make_graph(
+#'   ~ 1:2:3:4:5,
+#'   1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1
+#' )
+#' target <- make_graph(
+#'   ~ 1:2:3:4:5:6:7:8:9,
+#'   1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
+#'   5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
+#'   8 - 4:9, 9 - 6:4:8
+#' )
+#' domains <- list(
+#'   `1` = c(1, 3, 9), `2` = c(5, 6, 7, 8), `3` = c(2, 4, 6, 7, 8, 9),
+#'   `4` = c(1, 3, 9), `5` = c(2, 4, 8, 9)
+#' )
 #' subgraph_isomorphisms(pattern, target)
 #' subgraph_isomorphisms(pattern, target, induced = TRUE)
 #' subgraph_isomorphisms(pattern, target, domains = domains)
@@ -402,18 +431,17 @@ is_isomorphic_to <- isomorphic
 #' subgraph_isomorphic(pattern, dring)
 subgraph_isomorphic <- function(pattern, target,
                                 method = c("auto", "lad", "vf2"), ...) {
-
   method <- igraph.match.arg(method)
 
   if (method == "auto") method <- "lad"
 
   if (method == "lad") {
-    graph.subisomorphic.lad(pattern, target, map = FALSE, all.maps = FALSE,
-                            ...)$iso
-
+    graph.subisomorphic.lad(pattern, target,
+      map = FALSE, all.maps = FALSE,
+      ...
+    )$iso
   } else if (method == "vf2") {
     graph.subisomorphic.vf2(target, pattern, ...)$iso
-
   }
 }
 
@@ -452,16 +480,16 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #' # consider colors by default
 #' count_isomorphisms(g1, g2)
 #' # ignore colors
-#' count_isomorphisms(g1, g2, vertex.color1 = NULL,
-#'     vertex.color2 = NULL)
+#' count_isomorphisms(g1, g2,
+#'   vertex.color1 = NULL,
+#'   vertex.color2 = NULL
+#' )
 count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-
   method <- igraph.match.arg(method)
 
   if (method == "vf2") {
     graph.count.isomorphisms.vf2(graph1, graph2, ...)
   }
-
 }
 
 
@@ -528,16 +556,13 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' @family graph isomorphism
 count_subgraph_isomorphisms <- function(pattern, target,
                                         method = c("lad", "vf2"), ...) {
-
   method <- igraph.match.arg(method)
 
   if (method == "lad") {
     length(graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps)
-
   } else if (method == "vf2") {
     graph.count.subisomorphisms.vf2(target, pattern, ...)
   }
-
 }
 
 
@@ -556,13 +581,11 @@ count_subgraph_isomorphisms <- function(pattern, target,
 #' @export
 #' @family graph isomorphism
 isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
-
   method <- igraph.match.arg(method)
 
   if (method == "vf2") {
     graph.get.isomorphisms.vf2(graph1, graph2, ...)
   }
-
 }
 
 
@@ -620,16 +643,13 @@ isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 #' @family graph isomorphism
 subgraph_isomorphisms <- function(pattern, target,
                                   method = c("lad", "vf2"), ...) {
-
   method <- igraph.match.arg(method)
 
   if (method == "lad") {
     graph.subisomorphic.lad(pattern, target, all.maps = TRUE, ...)$maps
-
   } else if (method == "vf2") {
     graph.get.subisomorphisms.vf2(target, pattern, ...)
   }
-
 }
 
 
@@ -658,14 +678,11 @@ subgraph_isomorphisms <- function(pattern, target,
 #' isomorphism_class(g2)
 #' isomorphic(g1, g2)
 isomorphism_class <- function(graph, v) {
-
   if (missing(v)) {
     graph.isoclass(graph)
-
   } else {
     graph.isoclass.subgraph(graph, v)
   }
-
 }
 
 
@@ -758,8 +775,8 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' ## Check that they are the same
 #' el1 <- as_edgelist(cf1)
 #' el2 <- as_edgelist(cf2)
-#' el1 <- el1[ order(el1[,1], el1[,2]), ]
-#' el2 <- el2[ order(el2[,1], el2[,2]), ]
+#' el1 <- el1[order(el1[, 1], el1[, 2]), ]
+#' el2 <- el2[order(el2[, 1], el2[, 2]), ]
 #' all(el1 == el2)
 #' @export
 canonical_permutation <- canonical_permutation
@@ -795,7 +812,7 @@ canonical_permutation <- canonical_permutation
 #' # Permutation keeps all attributes
 #' g$name <- "Random graph, Gnm, 20, 50"
 #' V(g)$name <- letters[1:vcount(g)]
-#' E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
+#' E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
 #' g2 <- permute(g, sample(vcount(g)))
 #' graph.isomorphic(g, g2)
 #' g2$name
@@ -863,7 +880,7 @@ permute <- permute
 #' ## A full graph has n! automorphisms; however, we restrict the vertex
 #' ## matching by colors, leading to only 4 automorphisms
 #' g <- make_full_graph(4)
-#' count_automorphisms(g, colors=c(1,2,1,2))
+#' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @export
 count_automorphisms <- count_automorphisms
 

@@ -79,8 +79,10 @@ graph_attr <- function(graph, name) {
 #' graph_attr(g, "name") <- "4-star"
 #' g
 #'
-#' graph_attr(g) <- list(layout = layout_with_fr(g),
-#'                        name = "4-star layed out")
+#' graph_attr(g) <- list(
+#'   layout = layout_with_fr(g),
+#'   name = "4-star layed out"
+#' )
 #' plot(g)
 `graph_attr<-` <- function(graph, name, value) {
   if (missing(name)) {
@@ -130,7 +132,7 @@ graph.attributes <- function(graph) {
     stop("Not a graph object")
   }
   if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-      any(names(value) == "") || any(duplicated(names(value)))) {
+    any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
 
@@ -196,8 +198,10 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' @export
 #' @examples
 #' g <- make_ring(10)
-#' vertex_attr(g) <- list(name = LETTERS[1:10],
-#'                         color = rep("yellow", gorder(g)))
+#' vertex_attr(g) <- list(
+#'   name = LETTERS[1:10],
+#'   color = rep("yellow", gorder(g))
+#' )
 #' vertex_attr(g, "label") <- V(g)$name
 #' g
 #' plot(g)
@@ -230,8 +234,10 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' g
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
-  i_set_vertex_attr(graph = graph, name = name, index = index,
-                    value = value)
+  i_set_vertex_attr(
+    graph = graph, name = name, index = index,
+    value = value
+  )
 }
 
 i_set_vertex_attr <- function(graph, name, index = NULL, value,
@@ -240,7 +246,9 @@ i_set_vertex_attr <- function(graph, name, index = NULL, value,
     stop("Not a graph object")
   }
   single <- is_single_index(index)
-  if (!is.null(index) && check) { index <- as.igraph.vs(graph, index) }
+  if (!is.null(index) && check) {
+    index <- as.igraph.vs(graph, index)
+  }
   name <- as.character(name)
   vc <- vcount(graph)
 
@@ -286,14 +294,14 @@ vertex.attributes <- function(graph, index = NULL) {
     stop("Not a graph object")
   }
   if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-      any(names(value) == "") || any(duplicated(names(value)))) {
+    any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
 
   if (!is.null(index)) {
     index <- as.igraph.vs(graph, index)
 
-    if ( any(sapply(value, length) != length(index)) ) {
+    if (any(sapply(value, length) != length(index))) {
       stop("Invalid attribute value length, must match number of vertices")
     }
 
@@ -371,8 +379,10 @@ edge_attr <- function(graph, name, index = NULL) {
 #' @export
 #' @examples
 #' g <- make_ring(10)
-#' edge_attr(g) <- list(name = LETTERS[1:10],
-#'                       color = rep("green", gsize(g)))
+#' edge_attr(g) <- list(
+#'   name = LETTERS[1:10],
+#'   color = rep("green", gsize(g))
+#' )
 #' edge_attr(g, "label") <- E(g)$name
 #' g
 #' plot(g)
@@ -409,7 +419,7 @@ set_edge_attr <- function(graph, name, index = NULL, value) {
 }
 
 i_set_edge_attr <- function(graph, name, index = NULL, value,
-                              check = TRUE) {
+                            check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -463,12 +473,12 @@ edge.attributes <- function(graph, index = NULL) {
   }
 
   if (!is.list(value) || (length(value) > 0 && is.null(names(value))) ||
-      any(names(value) == "") || any(duplicated(names(value)))) {
+    any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
 
   if (!is.null(index)) {
-    if ( any(sapply(value, length) != length(index)) ) {
+    if (any(sapply(value, length) != length(index))) {
       stop("Invalid attribute value length, must match number of edges")
     }
 
@@ -510,7 +520,9 @@ graph_attr_names <- function(graph) {
     stop("Not a graph object")
   }
   res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
-  if (is.null(res)) { res <- character() }
+  if (is.null(res)) {
+    res <- character()
+  }
   res
 }
 
@@ -535,7 +547,9 @@ vertex_attr_names <- function(graph) {
   }
   res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (is.null(res)) { res <- character() }
+  if (is.null(res)) {
+    res <- character()
+  }
   res
 }
 
@@ -558,7 +572,9 @@ edge_attr_names <- function(graph) {
     stop("Not a graph object")
   }
   res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-  if (is.null(res)) { res <- character() }
+  if (is.null(res)) {
+    res <- character()
+  }
   res
 }
 
@@ -751,7 +767,7 @@ igraph.i.attribute.combination <- function(comb) {
   }
   comb <- as.list(comb)
   if (any(!sapply(comb, function(x)
-                  is.function(x) || (is.character(x) && length(x)==1)))) {
+    is.function(x) || (is.character(x) && length(x) == 1)))) {
     stop("Attribute combination element must be a function or character scalar")
   }
   if (is.null(names(comb))) {
@@ -764,14 +780,18 @@ igraph.i.attribute.combination <- function(comb) {
     if (!is.character(x)) {
       x
     } else {
-      known <- data.frame(n=c("ignore", "sum", "prod", "min", "max", "random",
-                            "first", "last", "mean", "median", "concat"),
-                          i=c(0,3,4,5,6,7,8,9,10,11,12), stringsAsFactors=FALSE)
-      x <- pmatch(tolower(x), known[,1])
+      known <- data.frame(
+        n = c(
+          "ignore", "sum", "prod", "min", "max", "random",
+          "first", "last", "mean", "median", "concat"
+        ),
+        i = c(0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), stringsAsFactors = FALSE
+      )
+      x <- pmatch(tolower(x), known[, 1])
       if (is.na(x)) {
         stop("Unknown/unambigous attribute combination specification")
       }
-      known[,2][x]
+      known[, 2][x]
     }
   })
 
@@ -850,32 +870,34 @@ igraph.i.attribute.combination <- function(comb) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph( c(1,2, 1,2, 1,2, 2,3, 3,4) )
+#' g <- graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
 #' E(g)$weight <- 1:5
 #'
 #' ## print attribute values with the graph
-#' igraph_options(print.graph.attributes=TRUE)
-#' igraph_options(print.vertex.attributes=TRUE)
-#' igraph_options(print.edge.attributes=TRUE)
+#' igraph_options(print.graph.attributes = TRUE)
+#' igraph_options(print.vertex.attributes = TRUE)
+#' igraph_options(print.edge.attributes = TRUE)
 #'
 #' ## new attribute is the sum of the old ones
-#' simplify(g, edge.attr.comb="sum")
+#' simplify(g, edge.attr.comb = "sum")
 #'
 #' ## collect attributes into a string
-#' simplify(g, edge.attr.comb=toString)
+#' simplify(g, edge.attr.comb = toString)
 #'
 #' ## concatenate them into a vector, this creates a complex
 #' ## attribute
-#' simplify(g, edge.attr.comb="concat")
+#' simplify(g, edge.attr.comb = "concat")
 #'
 #' E(g)$name <- letters[seq_len(ecount(g))]
 #'
 #' ## both attributes are collected into strings
-#' simplify(g, edge.attr.comb=toString)
+#' simplify(g, edge.attr.comb = toString)
 #'
 #' ## harmonic average of weights, names are dropped
-#' simplify(g, edge.attr.comb=list(weight=function(x) length(x)/sum(1/x),
-#'                                 name="ignore"))
+#' simplify(g, edge.attr.comb = list(
+#'   weight = function(x) length(x) / sum(1 / x),
+#'   name = "ignore"
+#' ))
 NULL
 
 #' Getting and setting graph attributes, shortcut
