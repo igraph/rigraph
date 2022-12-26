@@ -72,11 +72,11 @@ g2 <- make_star(10)
 knn(g2)
 
 # A scale-free one, try to plot 'knnk'
-g3 <- sample_pa(1000, m=5)
+g3 <- sample_pa(1000, m = 5)
 knn(g3)
 
 # A random graph
-g4 <- sample_gnp(1000, p=5/1000)
+g4 <- sample_gnp(1000, p = 5 / 1000)
 knn(g4)
 
 # A weighted graph

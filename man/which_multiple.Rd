@@ -54,12 +54,12 @@ original multiplicity as an edge attribute.
 \examples{
 
 # Loops
-g <- graph( c(1,1,2,2,3,3,4,5) )
+g <- graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 any_loop(g)
 which_loop(g)
 
 # Multiple edges
-g <- barabasi.game(10, m=3, algorithm="bag")
+g <- barabasi.game(10, m = 3, algorithm = "bag")
 any_multiple(g)
 which_multiple(g)
 count_multiple(g)
@@ -67,13 +67,13 @@ which_multiple(simplify(g))
 all(count_multiple(simplify(g)) == 1)
 
 # Direction of the edge is important
-which_multiple(graph( c(1,2, 2,1) ))
-which_multiple(graph( c(1,2, 2,1), dir=FALSE ))
+which_multiple(graph(c(1, 2, 2, 1)))
+which_multiple(graph(c(1, 2, 2, 1), dir = FALSE))
 
 # Remove multiple edges but keep multiplicity
-g <- barabasi.game(10, m=3, algorithm="bag")
+g <- barabasi.game(10, m = 3, algorithm = "bag")
 E(g)$weight <- count_multiple(g)
-g <- simplify(g, edge.attr.comb=list(weight = "min"))
+g <- simplify(g, edge.attr.comb = list(weight = "min"))
 any(which_multiple(g))
 E(g)$weight
 

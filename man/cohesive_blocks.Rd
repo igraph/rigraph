@@ -234,11 +234,13 @@ cohesive blocks in it.
 \examples{
 
 ## The graph from the Moody-White paper
-mw <- graph_from_literal(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
-                5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
-                10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
-                17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
-                21-22:23, 22-23)
+mw <- graph_from_literal(
+  1 - 2:3:4:5:6, 2 - 3:4:5:7, 3 - 4:6:7, 4 - 5:6:7,
+  5 - 6:7:21, 6 - 7, 7 - 8:11:14:19, 8 - 9:11:14, 9 - 10,
+  10 - 12:13, 11 - 12:14, 12 - 16, 13 - 16, 14 - 15, 15 - 16,
+  17 - 18:19:20, 18 - 20:21, 19 - 20:22:23, 20 - 21,
+  21 - 22:23, 22 - 23
+)
 
 mwBlocks <- cohesive_blocks(mw)
 
@@ -258,24 +260,28 @@ if (!interactive()) {
 plot(mwBlocks, mw)
 
 ## The science camp network
-camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
-                  Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
-                  Holly   - Carol:Pat:Pam:Jennie:Bill,
-                  Bill    - Pauline:Michael:Lee:Holly,
-                  Pauline - Bill:Jennie:Ann,
-                  Jennie  - Holly:Michael:Lee:Ann:Pauline,
-                  Michael - Bill:Jennie:Ann:Lee:John,
-                  Ann     - Michael:Jennie:Pauline,
-                  Lee     - Michael:Bill:Jennie,
-                  Gery    - Pat:Steve:Russ:John,
-                  Russ    - Steve:Bert:Gery:John,
-                  John    - Gery:Russ:Michael)
+camp <- graph_from_literal(
+  Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
+  Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
+  Holly - Carol:Pat:Pam:Jennie:Bill,
+  Bill - Pauline:Michael:Lee:Holly,
+  Pauline - Bill:Jennie:Ann,
+  Jennie - Holly:Michael:Lee:Ann:Pauline,
+  Michael - Bill:Jennie:Ann:Lee:John,
+  Ann - Michael:Jennie:Pauline,
+  Lee - Michael:Bill:Jennie,
+  Gery - Pat:Steve:Russ:John,
+  Russ - Steve:Bert:Gery:John,
+  John - Gery:Russ:Michael
+)
 campBlocks <- cohesive_blocks(camp)
 campBlocks
 
-plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
-     vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
-     mark.border=1, colbar=c(NA, NA,"cyan","orange") )
+plot(campBlocks, camp,
+  vertex.label = V(camp)$name, margin = -0.2,
+  vertex.shape = "rectangle", vertex.size = 24, vertex.size2 = 8,
+  mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
+)
 
 }
 \references{

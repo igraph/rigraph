@@ -55,7 +55,7 @@ See the referenced paper below for the details of the algorithm.
 
 set.seed(42)
 g <- make_ring(10)
-plot(g, layout=layout_with_gem)
+plot(g, layout = layout_with_gem)
 
 }
 \references{

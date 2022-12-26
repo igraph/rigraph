@@ -53,8 +53,8 @@ of the weights of its adjacent edges.
 
 g <- make_ring(10)
 laplacian_matrix(g)
-laplacian_matrix(g, norm=TRUE)
-laplacian_matrix(g, norm=TRUE, sparse=FALSE)
+laplacian_matrix(g, norm = TRUE)
+laplacian_matrix(g, norm = TRUE, sparse = FALSE)
 
 }
 \author{

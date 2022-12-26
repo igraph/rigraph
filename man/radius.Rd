@@ -33,7 +33,7 @@ This implementation ignores vertex pairs that are in different
 components.  Isolate vertices have eccentricity zero.
 }
 \examples{
-g <- make_star(10, mode="undirected")
+g <- make_star(10, mode = "undirected")
 eccentricity(g)
 radius(g)
 }

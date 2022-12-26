@@ -19,6 +19,6 @@ we find it very useful. Please see the documentation in the
 }
 \examples{
 make_ring(10) \%>\%
-  add_edges(c(1,6)) \%>\%
+  add_edges(c(1, 6)) \%>\%
   plot()
 }

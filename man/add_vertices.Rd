@@ -32,7 +32,12 @@ their values for the original vertices of the graph are set to
 g <- make_empty_graph() \%>\%
   add_vertices(3, color = "red") \%>\%
   add_vertices(2, color = "green") \%>\%
-  add_edges(c(1,2, 2,3, 3,4, 4,5))
+  add_edges(c(
+    1, 2,
+    2, 3,
+    3, 4,
+    4, 5
+  ))
 g
 V(g)[[]]
 plot(g)

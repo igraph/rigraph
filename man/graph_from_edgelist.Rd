@@ -29,7 +29,7 @@ names and a vertex id will be assigned to each name, and also a
 \code{name} vertex attribute will be added.
 }
 \examples{
-el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
+el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
 
 # Create a ring by hand

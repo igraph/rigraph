@@ -34,7 +34,7 @@ When deleting vertices via \code{-}, all arguments of \code{vertex} (or
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +
-  vertices('X', 'Y')
+  vertices("X", "Y")
 g
 plot(g)
 }
