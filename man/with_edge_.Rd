@@ -13,10 +13,13 @@ with_edge_(...)
 Constructor modifier to add edge attributes
 }
 \examples{
-make_(ring(10),
+make_(
+  ring(10),
   with_edge_(
     color = "red",
-    weight = rep(1:2, 5))) \%>\%
+    weight = rep(1:2, 5)
+  )
+) \%>\%
   plot()
 }
 \seealso{

@@ -47,9 +47,9 @@ then merges them via \code{\link{merge_coords}}.
 }
 \examples{
 
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 l <- layout_with_mds(g)
-plot(g, layout=l, vertex.label=NA, vertex.size=3)
+plot(g, layout = l, vertex.label = NA, vertex.size = 3)
 }
 \references{
 Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional

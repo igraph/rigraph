@@ -76,10 +76,10 @@
 #' coords <- layout_(g, as_star())
 #' plot(g, layout = coords)
 layout_ <- function(graph, layout, ...) {
-
   modifiers <- list(...)
   stopifnot(all(sapply(modifiers, inherits,
-                       what = "igraph_layout_modifier")))
+    what = "igraph_layout_modifier"
+  )))
 
   ids <- sapply(modifiers, "[[", "id")
   stopifnot(all(ids %in% c("component_wise", "normalize")))
@@ -98,16 +98,17 @@ layout_ <- function(graph, layout, ...) {
       coords,
       method = modifiers[["component_wise"]]$args$merge_method
     )
-    all_coords[ unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
+    all_coords[unlist(sapply(comps, vertex_attr, "id")), ] <- all_coords[]
     result <- all_coords
-
   } else {
     result <- do_call(layout$fun, list(graph = graph), layout$args)
   }
 
   if ("normalize" %in% ids) {
-    result <- do_call(norm_coords, list(result),
-                      modifiers[["normalize"]]$args)
+    result <- do_call(
+      norm_coords, list(result),
+      modifiers[["normalize"]]$args
+    )
   }
 
   result
@@ -130,8 +131,8 @@ layout_ <- function(graph, layout, ...) {
 #'   add_layout_(as_star(), component_wise()) %>%
 #'   plot()
 add_layout_ <- function(graph, ..., overwrite = TRUE) {
-  if (overwrite && 'layout' %in% graph_attr_names(graph)) {
-    graph <- delete_graph_attr(graph, 'layout')
+  if (overwrite && "layout" %in% graph_attr_names(graph)) {
+    graph <- delete_graph_attr(graph, "layout")
   }
   graph$layout <- layout_(graph, ...)
   graph
@@ -199,7 +200,6 @@ print.igraph_layout_modifier <- function(x, ...) {
 #'   add_layout_(in_circle(), component_wise()) %>%
 #'   plot()
 component_wise <- function(merge_method = "dla") {
-
   args <- grab_args()
 
   layout_modifier(
@@ -224,7 +224,6 @@ component_wise <- function(merge_method = "dla") {
 #' layout_(make_ring(10), with_fr(), normalize())
 normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
                       zmin = xmin, zmax = xmax) {
-
   args <- grab_args()
 
   layout_modifier(
@@ -270,10 +269,12 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' @family graph layouts
 #' @examples
 #' # Random bipartite graph
-#' inc <- matrix(sample(0:1, 50, replace = TRUE, prob=c(2,1)), 10, 5)
+#' inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)
 #' g <- graph_from_incidence_matrix(inc)
-#' plot(g, layout = layout_as_bipartite,
-#'      vertex.color=c("green","cyan")[V(g)$type+1])
+#' plot(g,
+#'   layout = layout_as_bipartite,
+#'   vertex.color = c("green", "cyan")[V(g)$type + 1]
+#' )
 #'
 #' # Two columns
 #' g %>%
@@ -281,15 +282,16 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #'   plot()
 layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
                                 maxiter = 100) {
-
   ## Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   types <- handle_vertex_type_arg(types, graph)
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
   maxiter <- as.integer(maxiter)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
 
   ## Function call
   res <- .Call(C_R_igraph_layout_bipartite, graph, types, hgap, vgap, maxiter)
@@ -337,23 +339,25 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #'
 #' ## Alternative form
 #' layout_(g, as_star())
-layout_as_star <- function(graph, center=V(graph)[1], order=NULL) {
+layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (vcount(graph) == 0) {
     # Any other layout will do so just pick one that supports graphs with no
     # vertices
     return(layout_in_circle(graph))
   }
   center <- as.igraph.vs(graph, center)
-  if (length(center)==0) {
+  if (length(center) == 0) {
     center <- 1
   }
-  if (!is.null(order)) order <- as.numeric(order)-1
+  if (!is.null(order)) order <- as.numeric(order) - 1
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_star, graph, center-1, order)
+  res <- .Call(C_R_igraph_layout_star, graph, center - 1, order)
 
   res
 }
@@ -414,32 +418,41 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #' @examples
 #'
 #' tree <- make_tree(20, 3)
-#' plot(tree, layout=layout_as_tree)
-#' plot(tree, layout=layout_as_tree(tree, flip.y=FALSE))
-#' plot(tree, layout=layout_as_tree(tree, circular=TRUE))
+#' plot(tree, layout = layout_as_tree)
+#' plot(tree, layout = layout_as_tree(tree, flip.y = FALSE))
+#' plot(tree, layout = layout_as_tree(tree, circular = TRUE))
 #'
 #' tree2 <- make_tree(10, 3) + make_tree(10, 2)
-#' plot(tree2, layout=layout_as_tree)
-#' plot(tree2, layout=layout_as_tree(tree2, root=c(1,11),
-#'                                            rootlevel=c(2,1)))
-layout_as_tree <- function(graph, root=numeric(), circular=FALSE,
-                           rootlevel=numeric(), mode=c("out", "in", "all"),
-                           flip.y=TRUE) {
-
+#' plot(tree2, layout = layout_as_tree)
+#' plot(tree2, layout = layout_as_tree(tree2,
+#'   root = c(1, 11),
+#'   rootlevel = c(2, 1)
+#' ))
+layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
+                           rootlevel = numeric(), mode = c("out", "in", "all"),
+                           flip.y = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  root <- as.igraph.vs(graph, root)-1
+  root <- as.igraph.vs(graph, root) - 1
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3,
-                 "total"=3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
   flip.y <- as.logical(flip.y)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_layout_reingold_tilford, graph, root, mode,
-               rootlevel, circular)
-  if (flip.y && vcount(graph) > 0) { res[,2] <- max(res[,2])-res[,2] }
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(
+    C_R_igraph_layout_reingold_tilford, graph, root, mode,
+    rootlevel, circular
+  )
+  if (flip.y && vcount(graph) > 0) {
+    res[, 2] <- max(res[, 2]) - res[, 2]
+  }
   res
 }
 
@@ -481,18 +494,20 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' library(igraphdata)
 #' data(karate)
 #' karate_groups <- cluster_optimal(karate)
-#' coords <- layout_in_circle(karate, order =
-#'           order(membership(karate_groups)))
+#' coords <- layout_in_circle(karate,
+#'   order =
+#'     order(membership(karate_groups))
+#' )
 #' V(karate)$label <- sub("Actor ", "", V(karate)$name)
 #' V(karate)$label.color <- membership(karate_groups)
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
-layout_in_circle <- function(graph, order=V(graph)) {
+layout_in_circle <- function(graph, order = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   order <- as.igraph.vs(graph, order) - 1L
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_layout_circle, graph, order)
 }
 
@@ -553,8 +568,7 @@ layout.circle <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_nicely <- function(graph, dim=2, ...) {
-
+layout_nicely <- function(graph, dim = 2, ...) {
   ## 1. If there is a 'layout' graph attribute, we just use that.
   ## 2. Otherwise, if there are vertex attributes called 'x' and 'y',
   ##    we use those (and the 'z' vertex attribute as well, if present).
@@ -575,20 +589,18 @@ layout_nicely <- function(graph, dim=2, ...) {
     }
   }
 
-  if ( all(c("x", "y") %in% vertex_attr_names(graph)) ) {
+  if (all(c("x", "y") %in% vertex_attr_names(graph))) {
     if ("z" %in% vertex_attr_names(graph)) {
       cbind(V(graph)$x, V(graph)$y, V(graph)$z)
     } else {
       cbind(V(graph)$x, V(graph)$y)
     }
-
   } else {
-
     args <- list(...)
     if (!("weights" %in% names(args)) || is.null(args$weights)) {
       if ("weight" %in% edge_attr_names(graph)) {
         weights <- E(graph)$weight
-        if (any(weights <= 0, na.rm=TRUE)) {
+        if (any(weights <= 0, na.rm = TRUE)) {
           warning("Non-positive edge weight found, ignoring all weights during graph layout.")
           args$weights <- NA
         }
@@ -604,7 +616,6 @@ layout_nicely <- function(graph, dim=2, ...) {
       do.call(layout_with_drl, args)
     }
   }
-
 }
 
 
@@ -643,25 +654,29 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @family graph layouts
 #' @examples
 #'
-#' g <- make_lattice( c(3,3) )
+#' g <- make_lattice(c(3, 3))
 #' layout_on_grid(g)
 #'
-#' g2 <- make_lattice( c(3,3,3) )
+#' g2 <- make_lattice(c(3, 3, 3))
 #' layout_on_grid(g2, dim = 3)
 #'
-#' plot(g, layout=layout_on_grid)
+#' plot(g, layout = layout_on_grid)
 #' if (interactive()) {
-#'   rglplot(g, layout=layout_on_grid(g, dim = 3))
+#'   rglplot(g, layout = layout_on_grid(g, dim = 3))
 #' }
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   width <- as.integer(width)
   dim <- as.integer(dim)
   stopifnot(dim == 2 || dim == 3)
-  if (dim == 3) { height <- as.integer(height) }
+  if (dim == 3) {
+    height <- as.integer(height)
+  }
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   if (dim == 2) {
     res <- .Call(C_R_igraph_layout_grid, graph, width)
@@ -681,15 +696,19 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
 #' @rdname layout_on_grid
 #' @export
-layout.grid.3d <- function(graph, width=0, height=0) {
-  .Deprecated("layout_on_grid", msg = paste0("layout.grid.3d is deprecated from\n",
-      "igraph 0.8.0, please use layout_on_grid instead"))
+layout.grid.3d <- function(graph, width = 0, height = 0) {
+  .Deprecated("layout_on_grid", msg = paste0(
+    "layout.grid.3d is deprecated from\n",
+    "igraph 0.8.0, please use layout_on_grid instead"
+  ))
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   width <- as.integer(width)
   height <- as.integer(height)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_layout_grid_3d, graph, width, height)
 
@@ -721,7 +740,7 @@ layout_on_sphere <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_layout_sphere, graph)
 }
 
@@ -757,18 +776,18 @@ layout.sphere <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_randomly <- function(graph, dim=2) {
+layout_randomly <- function(graph, dim = 2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  if (dim==2) {
-    on.exit(.Call(C_R_igraph_finalizer) )
+  if (dim == 2) {
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_layout_random, graph)
-  } else if (dim==3) {
-    on.exit(.Call(C_R_igraph_finalizer) )
+  } else if (dim == 3) {
+    on.exit(.Call(C_R_igraph_finalizer))
     .Call(C_R_igraph_layout_random_3d, graph)
   } else {
-    stop("Invalid `dim' value");
+    stop("Invalid `dim' value")
   }
 }
 
@@ -847,68 +866,71 @@ layout.random <- function(..., params = list()) {
 #'
 #' set.seed(42)
 #' ## Figures from the paper
-#' g_1b <- make_star(19, mode="undirected") + path(c(2:19, 2)) +
-#'   path(c(seq(2, 18, by=2), 2))
-#' plot(g_1b, layout=layout_with_dh)
+#' g_1b <- make_star(19, mode = "undirected") + path(c(2:19, 2)) +
+#'   path(c(seq(2, 18, by = 2), 2))
+#' plot(g_1b, layout = layout_with_dh)
 #'
-#' g_2 <- make_lattice(c(8, 3)) + edges(1,8, 9,16, 17,24)
-#' plot(g_2, layout=layout_with_dh)
+#' g_2 <- make_lattice(c(8, 3)) + edges(1, 8, 9, 16, 17, 24)
+#' plot(g_2, layout = layout_with_dh)
 #'
-#' g_3 <- make_empty_graph(n=70)
-#' plot(g_3, layout=layout_with_dh)
+#' g_3 <- make_empty_graph(n = 70)
+#' plot(g_3, layout = layout_with_dh)
 #'
-#' g_4 <- make_empty_graph(n=70, directed=FALSE) + edges(1:70)
-#' plot(g_4, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' g_4 <- make_empty_graph(n = 70, directed = FALSE) + edges(1:70)
+#' plot(g_4, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
 #' g_5a <- make_ring(24)
-#' plot(g_5a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_5a, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
 #' g_5b <- make_ring(40)
-#' plot(g_5b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' plot(g_5b, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_6 <- make_lattice(c(2,2,2))
-#' plot(g_6, layout=layout_with_dh)
+#' g_6 <- make_lattice(c(2, 2, 2))
+#' plot(g_6, layout = layout_with_dh)
 #'
 #' g_7 <- graph_from_literal(1:3:5 -- 2:4:6)
-#' plot(g_7, layout=layout_with_dh, vertex.label=V(g_7)$name)
+#' plot(g_7, layout = layout_with_dh, vertex.label = V(g_7)$name)
 #'
 #' g_8 <- make_ring(5) + make_ring(10) + make_ring(5) +
-#'   edges(1,6, 2,8, 3, 10, 4,12, 5,14,
-#'         7,16, 9,17, 11,18, 13,19, 15,20)
-#' plot(g_8, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#'   edges(
+#'     1, 6, 2, 8, 3, 10, 4, 12, 5, 14,
+#'     7, 16, 9, 17, 11, 18, 13, 19, 15, 20
+#'   )
+#' plot(g_8, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_9 <- make_lattice(c(3,2,2))
-#' plot(g_9, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' g_9 <- make_lattice(c(3, 2, 2))
+#' plot(g_9, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_10 <- make_lattice(c(6,6))
-#' plot(g_10, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' g_10 <- make_lattice(c(6, 6))
+#' plot(g_10, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_11a <- make_tree(31, 2, mode="undirected")
-#' plot(g_11a, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' g_11a <- make_tree(31, 2, mode = "undirected")
+#' plot(g_11a, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_11b <- make_tree(21, 4, mode="undirected")
-#' plot(g_11b, layout=layout_with_dh, vertex.size=5, vertex.label=NA)
+#' g_11b <- make_tree(21, 4, mode = "undirected")
+#' plot(g_11b, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
 #'
-#' g_12 <- make_empty_graph(n=37, directed=FALSE) +
-#'   path(1:5,10,22,31,37:33,27,16,6,1) + path(6,7,11,9,10) + path(16:22) +
-#'   path(27:31) + path(2,7,18,28,34) + path(3,8,11,19,29,32,35) +
-#'   path(4,9,20,30,36) + path(1,7,12,14,19,24,26,30,37) +
-#'   path(5,9,13,15,19,23,25,28,33) + path(3,12,16,25,35,26,22,13,3)
-#' plot(g_12,  layout=layout_with_dh, vertex.size=5, vertex.label=NA)
-layout_with_dh <- function(graph, coords=NULL, maxiter=10,
-           fineiter=max(10, log2(vcount(graph))), cool.fact=0.75,
-           weight.node.dist=1.0, weight.border=0.0,
-           weight.edge.lengths=edge_density(graph) / 10,
-           weight.edge.crossings=1.0 - sqrt(edge_density(graph)),
-           weight.node.edge.dist=0.2 * (1-edge_density(graph))) {
-
+#' g_12 <- make_empty_graph(n = 37, directed = FALSE) +
+#'   path(1:5, 10, 22, 31, 37:33, 27, 16, 6, 1) + path(6, 7, 11, 9, 10) + path(16:22) +
+#'   path(27:31) + path(2, 7, 18, 28, 34) + path(3, 8, 11, 19, 29, 32, 35) +
+#'   path(4, 9, 20, 30, 36) + path(1, 7, 12, 14, 19, 24, 26, 30, 37) +
+#'   path(5, 9, 13, 15, 19, 23, 25, 28, 33) + path(3, 12, 16, 25, 35, 26, 22, 13, 3)
+#' plot(g_12, layout = layout_with_dh, vertex.size = 5, vertex.label = NA)
+layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
+                           fineiter = max(10, log2(vcount(graph))), cool.fact = 0.75,
+                           weight.node.dist = 1.0, weight.border = 0.0,
+                           weight.edge.lengths = edge_density(graph) / 10,
+                           weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
+                           weight.node.edge.dist = 0.2 * (1 - edge_density(graph))) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
+    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
     use.seed <- TRUE
   } else {
-    coords <- matrix(NA_real_, ncol=2, nrow=0)
+    coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
   }
   maxiter <- as.integer(maxiter)
@@ -920,12 +942,14 @@ layout_with_dh <- function(graph, coords=NULL, maxiter=10,
   weight.edge.crossings <- as.numeric(weight.edge.crossings)
   weight.node.edge.dist <- as.numeric(weight.node.edge.dist)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_davidson_harel, graph, coords, use.seed,
-               maxiter, fineiter, cool.fact, weight.node.dist,
-               weight.border, weight.edge.lengths, weight.edge.crossings,
-               weight.node.edge.dist)
+  res <- .Call(
+    C_R_igraph_layout_davidson_harel, graph, coords, use.seed,
+    maxiter, fineiter, cool.fact, weight.node.dist,
+    weight.border, weight.edge.lengths, weight.edge.crossings,
+    weight.node.edge.dist
+  )
 
   res
 }
@@ -999,31 +1023,36 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @examples
 #'
 #' # Fixing ego
-#' g <- sample_pa(20, m=2)
+#' g <- sample_pa(20, m = 2)
 #' minC <- rep(-Inf, vcount(g))
 #' maxC <- rep(Inf, vcount(g))
 #' minC[1] <- maxC[1] <- 0
-#' co <- layout_with_fr(g, minx=minC, maxx=maxC,
-#'                                   miny=minC, maxy=maxC)
-#' co[1,]
-#' plot(g, layout=co, vertex.size=30, edge.arrow.size=0.2,
-#'      vertex.label=c("ego", rep("", vcount(g)-1)), rescale=FALSE,
-#'      xlim=range(co[,1]), ylim=range(co[,2]), vertex.label.dist=0,
-#'      vertex.label.color="red")
+#' co <- layout_with_fr(g,
+#'   minx = minC, maxx = maxC,
+#'   miny = minC, maxy = maxC
+#' )
+#' co[1, ]
+#' plot(g,
+#'   layout = co, vertex.size = 30, edge.arrow.size = 0.2,
+#'   vertex.label = c("ego", rep("", vcount(g) - 1)), rescale = FALSE,
+#'   xlim = range(co[, 1]), ylim = range(co[, 2]), vertex.label.dist = 0,
+#'   vertex.label.color = "red"
+#' )
 #' axis(1)
 #' axis(2)
 #'
-layout_with_fr <- function(graph, coords=NULL, dim=2,
-                            niter=500, start.temp=sqrt(vcount(graph)),
-                            grid=c("auto", "grid", "nogrid"), weights=NULL,
-                            minx=NULL, maxx=NULL, miny=NULL, maxy=NULL,
-                            minz=NULL, maxz=NULL,
-                            coolexp, maxdelta, area, repulserad, maxiter) {
-
-                                        # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+layout_with_fr <- function(graph, coords = NULL, dim = 2,
+                           niter = 500, start.temp = sqrt(vcount(graph)),
+                           grid = c("auto", "grid", "nogrid"), weights = NULL,
+                           minx = NULL, maxx = NULL, miny = NULL, maxy = NULL,
+                           minz = NULL, maxz = NULL,
+                           coolexp, maxdelta, area, repulserad, maxiter) {
+  # Argument checks
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
+    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
   dim <- as.integer(dim)
   if (dim != 2L && dim != 3L) {
@@ -1037,7 +1066,11 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
   start.temp <- as.numeric(start.temp)
 
   grid <- igraph.match.arg(grid)
-  grid <- switch(grid, "grid"=0L, "nogrid"=1L, "auto"=2L)
+  grid <- switch(grid,
+    "grid" = 0L,
+    "nogrid" = 1L,
+    "auto" = 2L
+  )
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1066,14 +1099,18 @@ layout_with_fr <- function(graph, coords=NULL, dim=2,
     warning("Argument `repulserad' is deprecated and has no effect")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer) )
-  if (dim==2) {
-    res <- .Call(C_R_igraph_layout_fruchterman_reingold, graph, coords,
-                 niter, start.temp, weights, minx, maxx, miny, maxy, grid)
+  on.exit(.Call(C_R_igraph_finalizer))
+  if (dim == 2) {
+    res <- .Call(
+      C_R_igraph_layout_fruchterman_reingold, graph, coords,
+      niter, start.temp, weights, minx, maxx, miny, maxy, grid
+    )
   } else {
-    res <- .Call(C_R_igraph_layout_fruchterman_reingold_3d, graph, coords,
-                 niter, start.temp, weights, minx, maxx, miny, maxy,
-                 minz, maxz)
+    res <- .Call(
+      C_R_igraph_layout_fruchterman_reingold_3d, graph, coords,
+      niter, start.temp, weights, minx, maxx, miny, maxy,
+      minz, maxz
+    )
   }
   res
 }
@@ -1130,19 +1167,20 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'
 #' set.seed(42)
 #' g <- make_ring(10)
-#' plot(g, layout=layout_with_gem)
+#' plot(g, layout = layout_with_gem)
 #'
-layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
-                       temp.max=max(vcount(graph), 1), temp.min=1/10,
-                       temp.init=sqrt(max(vcount(graph), 1))) {
-
+layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2,
+                            temp.max = max(vcount(graph), 1), temp.min = 1 / 10,
+                            temp.init = sqrt(max(vcount(graph), 1))) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
+    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
     use.seed <- TRUE
   } else {
-    coords <- matrix(NA_real_, ncol=2, nrow=0)
+    coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
   }
 
@@ -1151,10 +1189,12 @@ layout_with_gem <- function(graph, coords=NULL, maxiter=40*vcount(graph)^2,
   temp.min <- as.numeric(temp.min)
   temp.init <- as.numeric(temp.init)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_gem, graph, coords, use.seed, maxiter,
-               temp.max, temp.min, temp.init)
+  res <- .Call(
+    C_R_igraph_layout_gem, graph, coords, use.seed, maxiter,
+    temp.max, temp.min, temp.init
+  )
 
   res
 }
@@ -1212,15 +1252,14 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
-                            mass=30, spring.length=0, spring.constant=1,
-                            max.sa.movement=5) {
-
+layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001,
+                                 mass = 30, spring.length = 0, spring.constant = 1,
+                                 max.sa.movement = 5) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (!is.null(start)) {
-    start <- structure(as.numeric(start), dim=dim(start))
+    start <- structure(as.numeric(start), dim = dim(start))
   }
   niter <- as.double(niter)
   charge <- as.double(charge)
@@ -1229,9 +1268,11 @@ layout_with_graphopt <- function(graph, start=NULL, niter=500, charge=0.001,
   spring.constant <- as.double(spring.constant)
   max.sa.movement <- as.double(max.sa.movement)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_layout_graphopt, graph, niter, charge, mass,
-        spring.length, spring.constant, max.sa.movement, start)
+  on.exit(.Call(C_R_igraph_finalizer))
+  .Call(
+    C_R_igraph_layout_graphopt, graph, niter, charge, mass,
+    spring.length, spring.constant, max.sa.movement, start
+  )
 }
 
 
@@ -1301,24 +1342,26 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @examples
 #'
 #' g <- make_ring(10)
-#' E(g)$weight <- rep(1:2, length.out=ecount(g))
-#' plot(g, layout=layout_with_kk, edge.label=E(g)$weight)
+#' E(g)$weight <- rep(1:2, length.out = ecount(g))
+#' plot(g, layout = layout_with_kk, edge.label = E(g)$weight)
 #'
-layout_with_kk <- function(graph, coords=NULL, dim=2,
-                                maxiter=50*vcount(graph),
-                                epsilon=0.0, kkconst=max(vcount(graph), 1),
-                                weights=NULL, minx=NULL, maxx=NULL,
-                                miny=NULL, maxy=NULL, minz=NULL, maxz=NULL,
-                                niter, sigma, initemp, coolexp, start) {
+layout_with_kk <- function(graph, coords = NULL, dim = 2,
+                           maxiter = 50 * vcount(graph),
+                           epsilon = 0.0, kkconst = max(vcount(graph), 1),
+                           weights = NULL, minx = NULL, maxx = NULL,
+                           miny = NULL, maxy = NULL, minz = NULL, maxz = NULL,
+                           niter, sigma, initemp, coolexp, start) {
   # Argument checks
   if (!missing(coords) && !missing(start)) {
     stop("Both `coords' and `start' are given, give only one of them.")
   }
   if (!missing(start)) coords <- start
 
-  if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim=dim(coords)))
+    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
   dim <- as.integer(dim)
   if (dim != 2L && dim != 3L) {
@@ -1356,15 +1399,19 @@ layout_with_kk <- function(graph, coords=NULL, dim=2,
     warning("Argument `coolexp' is deprecated and has no effect")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call(C_R_igraph_layout_kamada_kawai, graph, coords, maxiter,
-                 epsilon, kkconst, weights, minx, maxx, miny, maxy)
+    res <- .Call(
+      C_R_igraph_layout_kamada_kawai, graph, coords, maxiter,
+      epsilon, kkconst, weights, minx, maxx, miny, maxy
+    )
   } else {
-    res <- .Call(C_R_igraph_layout_kamada_kawai_3d, graph, coords, maxiter,
-                 epsilon, kkconst, weights, minx, maxx, miny, maxy, minz,
-                 maxz)
+    res <- .Call(
+      C_R_igraph_layout_kamada_kawai_3d, graph, coords, maxiter,
+      epsilon, kkconst, weights, minx, maxx, miny, maxy, minz,
+      maxz
+    )
   }
 
   res
@@ -1392,7 +1439,7 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'
 #' \code{layout_with_lgl} is for large connected graphs, it is similar to the layout
 #' generator of the Large Graph Layout software
-#' (\url{http://lgl.sourceforge.net/}).
+#' (\url{https://lgl.sourceforge.net/}).
 #'
 #' @param graph The input graph
 #' @param maxiter The maximum number of iterations to perform (150).
@@ -1414,24 +1461,25 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @keywords graphs
 #' @export
 #' @family graph layouts
-layout_with_lgl <- function(graph, maxiter=150, maxdelta=vcount(graph),
-                       area=vcount(graph)^2, coolexp=1.5,
-                       repulserad=area * vcount(graph),
-                       cellsize=sqrt(sqrt(area)), root=NULL) {
-
+layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
+                            area = vcount(graph)^2, coolexp = 1.5,
+                            repulserad = area * vcount(graph),
+                            cellsize = sqrt(sqrt(area)), root = NULL) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (is.null(root)) {
     root <- -1
   } else {
-    root <- as.igraph.vs(graph, root)-1
+    root <- as.igraph.vs(graph, root) - 1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_layout_lgl, graph, as.double(maxiter),
-        as.double(maxdelta), as.double(area), as.double(coolexp),
-        as.double(repulserad), as.double(cellsize), root)
+  on.exit(.Call(C_R_igraph_finalizer))
+  .Call(
+    C_R_igraph_layout_lgl, graph, as.double(maxiter),
+    as.double(maxdelta), as.double(area), as.double(coolexp),
+    as.double(repulserad), as.double(cellsize), root
+  )
 }
 
 
@@ -1487,18 +1535,19 @@ layout.lgl <- function(..., params = list()) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(100, 2/100)
+#' g <- sample_gnp(100, 2 / 100)
 #' l <- layout_with_mds(g)
-#' plot(g, layout=l, vertex.label=NA, vertex.size=3)
-layout_with_mds <- function(graph, dist=NULL, dim=2,
-                       options=arpack_defaults) {
-
+#' plot(g, layout = l, vertex.label = NA, vertex.size = 3)
+layout_with_mds <- function(graph, dist = NULL, dim = 2,
+                            options = arpack_defaults) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (!is.null(dist)) dist <- structure(as.double(dist), dim=dim(dist))
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
   dim <- as.integer(dim)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
   res <- .Call(C_R_igraph_layout_mds, graph, dist, dim)
 
@@ -1580,20 +1629,21 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' @examples
 #'
 #' ## Data taken from http://tehnick-8.narod.ru/dc_clients/
-#' DC <- graph_from_literal("DC++" -+
-#'                 "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
-#'                 "LinuxDC++" -+ "FreeDC++", "BCDC++" -+ "StrongDC++",
-#'                 "FreeDC++" -+ "BMDC++":"EiskaltDC++",
-#'                 "StrongDC++" -+ "AirDC++":"zK++":"ApexDC++":"TkDC++",
-#'                 "StrongDC++" -+ "StrongDC++ SQLite":"RSX++",
-#'                 "ApexDC++" -+ "FlylinkDC++ ver <= 4xx",
-#'                 "ApexDC++" -+ "ApexDC++ Speed-Mod":"DiCe!++",
-#'                 "StrongDC++ SQLite" -+ "FlylinkDC++ ver >= 5xx",
-#'                 "ApexDC++ Speed-Mod" -+ "FlylinkDC++ ver <= 4xx",
-#'                 "ApexDC++ Speed-Mod" -+ "GreylinkDC++",
-#'                 "FlylinkDC++ ver <= 4xx" -+ "FlylinkDC++ ver >= 5xx",
-#'                 "FlylinkDC++ ver <= 4xx" -+ AvaLink,
-#'                 "GreylinkDC++" -+ AvaLink:"RayLinkDC++":"SparkDC++":PeLink)
+#' DC <- graph_from_literal(
+#'   "DC++" -+ "LinuxDC++":"BCDC++":"EiskaltDC++":"StrongDC++":"DiCe!++",
+#'   "LinuxDC++" -+ "FreeDC++", "BCDC++" -+ "StrongDC++",
+#'   "FreeDC++" -+ "BMDC++":"EiskaltDC++",
+#'   "StrongDC++" -+ "AirDC++":"zK++":"ApexDC++":"TkDC++",
+#'   "StrongDC++" -+ "StrongDC++ SQLite":"RSX++",
+#'   "ApexDC++" -+ "FlylinkDC++ ver <= 4xx",
+#'   "ApexDC++" -+ "ApexDC++ Speed-Mod":"DiCe!++",
+#'   "StrongDC++ SQLite" -+ "FlylinkDC++ ver >= 5xx",
+#'   "ApexDC++ Speed-Mod" -+ "FlylinkDC++ ver <= 4xx",
+#'   "ApexDC++ Speed-Mod" -+ "GreylinkDC++",
+#'   "FlylinkDC++ ver <= 4xx" -+ "FlylinkDC++ ver >= 5xx",
+#'   "FlylinkDC++ ver <= 4xx" -+ AvaLink,
+#'   "GreylinkDC++" -+ AvaLink:"RayLinkDC++":"SparkDC++":PeLink
+#' )
 #'
 #' ## Use edge types
 #' E(DC)$lty <- 1
@@ -1605,15 +1655,21 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' E(DC)["GreylinkDC++" %->% "AvaLink"]$lty <- 2
 #'
 #' ## Layers, as on the plot
-#' layers <- list(c("DC++"),
-#'                c("LinuxDC++", "BCDC++"),
-#'                c("FreeDC++", "StrongDC++"),
-#'                c("BMDC++", "EiskaltDC++", "AirDC++", "zK++", "ApexDC++",
-#'                  "TkDC++", "RSX++"),
-#'                c("StrongDC++ SQLite", "ApexDC++ Speed-Mod", "DiCe!++"),
-#'                c("FlylinkDC++ ver <= 4xx", "GreylinkDC++"),
-#'                c("FlylinkDC++ ver >= 5xx", "AvaLink", "RayLinkDC++",
-#'                  "SparkDC++", "PeLink"))
+#' layers <- list(
+#'   c("DC++"),
+#'   c("LinuxDC++", "BCDC++"),
+#'   c("FreeDC++", "StrongDC++"),
+#'   c(
+#'     "BMDC++", "EiskaltDC++", "AirDC++", "zK++", "ApexDC++",
+#'     "TkDC++", "RSX++"
+#'   ),
+#'   c("StrongDC++ SQLite", "ApexDC++ Speed-Mod", "DiCe!++"),
+#'   c("FlylinkDC++ ver <= 4xx", "GreylinkDC++"),
+#'   c(
+#'     "FlylinkDC++ ver >= 5xx", "AvaLink", "RayLinkDC++",
+#'     "SparkDC++", "PeLink"
+#'   )
+#' )
 #'
 #' ## Check that we have all nodes
 #' all(sort(unlist(layers)) == sort(V(DC)$name))
@@ -1623,25 +1679,28 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' V(DC)$shape <- "rectangle"
 #' V(DC)$size <- 20
 #' V(DC)$size2 <- 10
-#' V(DC)$label <- lapply(V(DC)$name, function(x)
-#'                       paste(strwrap(x, 12), collapse="\n"))
+#' V(DC)$label <- lapply(V(DC)$name, function(x) {
+#'   paste(strwrap(x, 12), collapse = "\n")
+#' })
 #' E(DC)$arrow.size <- 0.5
 #'
 #' ## Create a similar layout using the predefined layers
-#' lay1 <-  layout_with_sugiyama(DC, layers=apply(sapply(layers,
-#'                         function(x) V(DC)$name %in% x), 1, which))
+#' lay1 <- layout_with_sugiyama(DC, layers = apply(sapply(
+#'   layers,
+#'   function(x) V(DC)$name %in% x
+#' ), 1, which))
 #'
 #' ## Simple plot, not very nice
-#' par(mar=rep(.1, 4))
-#' plot(DC, layout=lay1$layout, vertex.label.cex=0.5)
+#' par(mar = rep(.1, 4))
+#' plot(DC, layout = lay1$layout, vertex.label.cex = 0.5)
 #'
 #' ## Sugiyama plot
-#' plot(lay1$extd_graph, vertex.label.cex=0.5)
+#' plot(lay1$extd_graph, vertex.label.cex = 0.5)
 #'
 #' ## The same with automatic layer calculation
 #' ## Keep vertex/edge attributes in the extended graph
-#' lay2 <-  layout_with_sugiyama(DC, attributes="all")
-#' plot(lay2$extd_graph, vertex.label.cex=0.5)
+#' lay2 <- layout_with_sugiyama(DC, attributes = "all")
+#' plot(lay2$extd_graph, vertex.label.cex = 0.5)
 #'
 #' ## Another example, from the following paper:
 #' ## Markus Eiglsperger, Martin Siebenhaller, Michael Kaufmann:
@@ -1649,60 +1708,72 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' ## Layered Graph Drawing, Journal of Graph Algorithms and
 #' ## Applications 9, 305--325 (2005).
 #'
-#' ex <- graph_from_literal( 0 -+ 29: 6: 5:20: 4,
-#'                  1 -+ 12,
-#'                  2 -+ 23: 8,
-#'                  3 -+  4,
-#'                  4,
-#'                  5 -+  2:10:14:26: 4: 3,
-#'                  6 -+  9:29:25:21:13,
-#'                  7,
-#'                  8 -+ 20:16,
-#'                  9 -+ 28: 4,
-#'                 10 -+ 27,
-#'                 11 -+  9:16,
-#'                 12 -+  9:19,
-#'                 13 -+ 20,
-#'                 14 -+ 10,
-#'                 15 -+ 16:27,
-#'                 16 -+ 27,
-#'                 17 -+  3,
-#'                 18 -+ 13,
-#'                 19 -+  9,
-#'                 20 -+  4,
-#'                 21 -+ 22,
-#'                 22 -+  8: 9,
-#'                 23 -+  9:24,
-#'                 24 -+ 12:15:28,
-#'                 25 -+ 11,
-#'                 26 -+ 18,
-#'                 27 -+ 13:19,
-#'                 28 -+  7,
-#'                 29 -+ 25                    )
+#' ex <- graph_from_literal(
+#'   0 -+ 29:6:5:20:4,
+#'   1 -+ 12,
+#'   2 -+ 23:8,
+#'   3 -+ 4,
+#'   4,
+#'   5 -+ 2:10:14:26:4:3,
+#'   6 -+ 9:29:25:21:13,
+#'   7,
+#'   8 -+ 20:16,
+#'   9 -+ 28:4,
+#'   10 -+ 27,
+#'   11 -+ 9:16,
+#'   12 -+ 9:19,
+#'   13 -+ 20,
+#'   14 -+ 10,
+#'   15 -+ 16:27,
+#'   16 -+ 27,
+#'   17 -+ 3,
+#'   18 -+ 13,
+#'   19 -+ 9,
+#'   20 -+ 4,
+#'   21 -+ 22,
+#'   22 -+ 8:9,
+#'   23 -+ 9:24,
+#'   24 -+ 12:15:28,
+#'   25 -+ 11,
+#'   26 -+ 18,
+#'   27 -+ 13:19,
+#'   28 -+ 7,
+#'   29 -+ 25
+#' )
 #'
-#' layers <- list( 0, c(5, 17), c(2, 14, 26, 3), c(23, 10, 18), c(1, 24),
-#'                 12, 6, c(29,21), c(25,22), c(11,8,15), 16, 27, c(13,19),
-#'                 c(9, 20), c(4, 28), 7 )
+#' layers <- list(
+#'   0, c(5, 17), c(2, 14, 26, 3), c(23, 10, 18), c(1, 24),
+#'   12, 6, c(29, 21), c(25, 22), c(11, 8, 15), 16, 27, c(13, 19),
+#'   c(9, 20), c(4, 28), 7
+#' )
 #'
-#' layex <-  layout_with_sugiyama(ex, layers=apply(sapply(layers,
-#'                         function(x) V(ex)$name %in% as.character(x)),
-#'                         1, which))
+#' layex <- layout_with_sugiyama(ex, layers = apply(
+#'   sapply(
+#'     layers,
+#'     function(x) V(ex)$name %in% as.character(x)
+#'   ),
+#'   1, which
+#' ))
 #'
 #' origvert <- c(rep(TRUE, vcount(ex)), rep(FALSE, nrow(layex$layout.dummy)))
-#' realedge <- as_edgelist(layex$extd_graph)[,2] <= vcount(ex)
-#' plot(layex$extd_graph, vertex.label.cex=0.5,
-#'      edge.arrow.size=.5,
-#'      vertex.size=ifelse(origvert, 5, 0),
-#'      vertex.shape=ifelse(origvert, "square", "none"),
-#'      vertex.label=ifelse(origvert, V(ex)$name, ""),
-#'      edge.arrow.mode=ifelse(realedge, 2, 0))
+#' realedge <- as_edgelist(layex$extd_graph)[, 2] <= vcount(ex)
+#' plot(layex$extd_graph,
+#'   vertex.label.cex = 0.5,
+#'   edge.arrow.size = .5,
+#'   vertex.size = ifelse(origvert, 5, 0),
+#'   vertex.shape = ifelse(origvert, "square", "none"),
+#'   vertex.label = ifelse(origvert, V(ex)$name, ""),
+#'   edge.arrow.mode = ifelse(realedge, 2, 0)
+#' )
 #'
-layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
-                            maxiter=100, weights=NULL,
-                            attributes=c("default", "all", "none")) {
+layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
+                                 maxiter = 100, weights = NULL,
+                                 attributes = c("default", "all", "none")) {
   # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (!is.null(layers)) layers <- as.numeric(layers)-1
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  if (!is.null(layers)) layers <- as.numeric(layers) - 1
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
   maxiter <- as.integer(maxiter)
@@ -1716,24 +1787,26 @@ layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
   }
   attributes <- igraph.match.arg(attributes)
 
-  on.exit(.Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_sugiyama, graph, layers, hgap,
-               vgap, maxiter, weights)
+  res <- .Call(
+    C_R_igraph_layout_sugiyama, graph, layers, hgap,
+    vgap, maxiter, weights
+  )
 
   # Flip the y coordinates, more natural this way
   vc <- vcount(graph)
   if (vc > 0) {
-    res$res[,2] <- max(res$res[,2]) - res$res[,2] + 1
+    res$res[, 2] <- max(res$res[, 2]) - res$res[, 2] + 1
   }
 
   # Separate real and dummy vertices
-  if (nrow(res$res)==vc) {
+  if (nrow(res$res) == vc) {
     res$layout <- res$res
-    res$layout.dummy <- matrix(NA_real_, nrow=0, ncol=2)
+    res$layout.dummy <- matrix(NA_real_, nrow = 0, ncol = 2)
   } else {
-    res$layout <- res$res[seq_len(vc),]
-    res$layout.dummy <- res$res[(vc+1):nrow(res$res),, drop=FALSE]
+    res$layout <- res$res[seq_len(vc), ]
+    res$layout.dummy <- res$res[(vc + 1):nrow(res$res), , drop = FALSE]
   }
 
   # Add some attributes to the extended graph
@@ -1741,64 +1814,75 @@ layout_with_sugiyama <- function(graph, layers=NULL, hgap=1, vgap=1,
   res$extd_to_orig_eids <- NULL
 
   res$extd_graph <- set_vertex_attr(res$extd_graph, "dummy",
-                                         value=c(rep(FALSE, vc),
-                                           rep(TRUE, nrow(res$res)-vc)))
+    value = c(
+      rep(FALSE, vc),
+      rep(TRUE, nrow(res$res) - vc)
+    )
+  )
 
   res$extd_graph$layout <- rbind(res$layout, res$layout.dummy)
 
-  if (attributes=="default" || attributes=="all") {
+  if (attributes == "default" || attributes == "all") {
     if ("size" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size <- 0
-      V(res$extd_graph)$size[ !V(res$extd_graph)$dummy ] <- V(graph)$size
+      V(res$extd_graph)$size[!V(res$extd_graph)$dummy] <- V(graph)$size
     }
     if ("size2" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$size2 <- 0
-      V(res$extd_graph)$size2[ !V(res$extd_graph)$dummy ] <- V(graph)$size2
+      V(res$extd_graph)$size2[!V(res$extd_graph)$dummy] <- V(graph)$size2
     }
     if ("shape" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$shape <- "none"
-      V(res$extd_graph)$shape[ !V(res$extd_graph)$dummy ] <- V(graph)$shape
+      V(res$extd_graph)$shape[!V(res$extd_graph)$dummy] <- V(graph)$shape
     }
     if ("label" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$label <- ""
-      V(res$extd_graph)$label[ !V(res$extd_graph)$dummy ] <- V(graph)$label
+      V(res$extd_graph)$label[!V(res$extd_graph)$dummy] <- V(graph)$label
     }
     if ("color" %in% vertex_attr_names(graph)) {
       V(res$extd_graph)$color <- head(V(graph)$color, 1)
-      V(res$extd_graph)$color[ !V(res$extd_graph)$dummy ] <- V(graph)$color
+      V(res$extd_graph)$color[!V(res$extd_graph)$dummy] <- V(graph)$color
     }
-    eetar <- as_edgelist(res$extd_graph, names=FALSE)[,2]
+    eetar <- as_edgelist(res$extd_graph, names = FALSE)[, 2]
     E(res$extd_graph)$arrow.mode <- 0
     if ("arrow.mode" %in% edge_attr_names(graph)) {
-      E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- E(graph)$arrow.mode
+      E(res$extd_graph)$arrow.mode[eetar <= vc] <- E(graph)$arrow.mode
     } else {
-      E(res$extd_graph)$arrow.mode[ eetar <= vc ] <- is_directed(graph) * 2
+      E(res$extd_graph)$arrow.mode[eetar <= vc] <- is_directed(graph) * 2
     }
     if ("arrow.size" %in% edge_attr_names(graph)) {
       E(res$extd_graph)$arrow.size <- 0
-      E(res$extd_graph)$arrow.size[ eetar <= vc ] <- E(graph)$arrow.size
+      E(res$extd_graph)$arrow.size[eetar <= vc] <- E(graph)$arrow.size
     }
   }
 
-  if (attributes=="all") {
+  if (attributes == "all") {
     gatt <- setdiff(graph_attr_names(graph), "layout")
-    vatt <- setdiff(vertex_attr_names(graph),
-                    c("size", "size2", "shape", "label", "color"))
-    eatt <- setdiff(edge_attr_names(graph),
-                    c("arrow.mode", "arrow.size"))
+    vatt <- setdiff(
+      vertex_attr_names(graph),
+      c("size", "size2", "shape", "label", "color")
+    )
+    eatt <- setdiff(
+      edge_attr_names(graph),
+      c("arrow.mode", "arrow.size")
+    )
     for (ga in gatt) {
-      res$extd_graph <- set_graph_attr(res$extd_graph, ga,
-                                            graph_attr(graph, ga))
+      res$extd_graph <- set_graph_attr(
+        res$extd_graph, ga,
+        graph_attr(graph, ga)
+      )
     }
     for (va in vatt) {
       notdummy <- which(!V(res$extd_graph)$dummy)
-      res$extd_graph <- set_vertex_attr(res$extd_graph, va,
-                                             notdummy,
-                                             vertex_attr(graph, va))
+      res$extd_graph <- set_vertex_attr(
+        res$extd_graph, va,
+        notdummy,
+        vertex_attr(graph, va)
+      )
     }
     for (ea in eatt) {
       eanew <- edge_attr(graph, ea)[E(res$extd_graph)$orig]
-      res$extd_graph <- set_edge_attr(res$extd_graph, ea, value=eanew)
+      res$extd_graph <- set_edge_attr(res$extd_graph, ea, value = eanew)
     }
   }
 
@@ -1857,21 +1941,24 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @examples
 #'
 #' # create 20 scale-free graphs and place them in a common layout
-#' graphs <- lapply(sample(5:20, 20, replace=TRUE),
-#'           barabasi.game, directed=FALSE)
+#' graphs <- lapply(sample(5:20, 20, replace = TRUE),
+#'   barabasi.game,
+#'   directed = FALSE
+#' )
 #' layouts <- lapply(graphs, layout_with_kk)
 #' lay <- merge_coords(graphs, layouts)
 #' g <- disjoint_union(graphs)
-#' plot(g, layout=lay, vertex.size=3, labels=NA, edge.color="black")
-merge_coords <- function(graphs, layouts, method="dla") {
-
+#' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
+merge_coords <- function(graphs, layouts, method = "dla") {
   if (!all(sapply(graphs, is_igraph))) {
     stop("Not a graph object")
   }
   if (method == "dla") {
-    on.exit(.Call(C_R_igraph_finalizer) )
-    res <- .Call(C_R_igraph_layout_merge_dla,
-                 graphs, layouts)
+    on.exit(.Call(C_R_igraph_finalizer))
+    res <- .Call(
+      C_R_igraph_layout_merge_dla,
+      graphs, layouts
+    )
   } else {
     stop("Invalid `method'.")
   }
@@ -1901,9 +1988,8 @@ merge_coords <- function(graphs, layouts, method="dla") {
 #' @export
 #' @family graph layouts
 #' @keywords graphs
-norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
-                          zmin=-1, zmax=1) {
-
+norm_coords <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1,
+                        zmin = -1, zmax = 1) {
   if (!is.matrix(layout)) {
     stop("`layout' must be a matrix")
   }
@@ -1912,38 +1998,36 @@ norm_coords <- function(layout, xmin=-1, xmax=1, ymin=-1, ymax=1,
   }
 
   if (!is.null(xmin) && !is.null(xmax)) {
-    layout[,1] <- .layout.norm.col(layout[,1], xmin, xmax)
+    layout[, 1] <- .layout.norm.col(layout[, 1], xmin, xmax)
   }
 
   if (!is.null(ymin) && !is.null(ymax)) {
-    layout[,2] <- .layout.norm.col(layout[,2], ymin, ymax)
+    layout[, 2] <- .layout.norm.col(layout[, 2], ymin, ymax)
   }
 
-  if (ncol(layout)==3 && !is.null(zmin) && !is.null(zmax)) {
-    layout[,3] <- .layout.norm.col(layout[,3], zmin, zmax)
+  if (ncol(layout) == 3 && !is.null(zmin) && !is.null(zmax)) {
+    layout[, 3] <- .layout.norm.col(layout[, 3], zmin, zmax)
   }
 
   layout
 }
 
 .layout.norm.col <- function(v, min, max) {
-
   vr <- range(v)
-  if (vr[1]==vr[2]) {
+  if (vr[1] == vr[2]) {
     fac <- 1
   } else {
-    fac <- (max-min)/(vr[2]-vr[1])
+    fac <- (max - min) / (vr[2] - vr[1])
   }
 
-  (v-vr[1]) * fac + min
+  (v - vr[1]) * fac + min
 }
 
 #' @rdname merge_coords
 #' @aliases piecewise.layout
 #' @param graph The input graph.
 #' @export
-layout_components <- function(graph, layout=layout_with_kk, ...) {
-
+layout_components <- function(graph, layout = layout_with_kk, ...) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -1953,7 +2037,7 @@ layout_components <- function(graph, layout=layout_with_kk, ...) {
   ll <- lapply(gl, layout, ...)
 
   l <- merge_coords(gl, ll)
-  l[ unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
+  l[unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
 }
 
@@ -1995,7 +2079,9 @@ layout.svd <- function(graph, ...) {
 #'
 #' @export
 layout.fruchterman.reingold.grid <- function(graph, ...) {
-  warning("Grid Fruchterman-Reingold layout was removed,\n",
-          "we use Fruchterman-Reingold instead.")
+  warning(
+    "Grid Fruchterman-Reingold layout was removed,\n",
+    "we use Fruchterman-Reingold instead."
+  )
   layout_with_fr(graph)
 }

@@ -62,24 +62,28 @@ The \dQuote{index} method selects the vertices in order of their index.
 }
 \examples{
 
-g <- realize_degseq(rep(2,100))
+g <- realize_degseq(rep(2, 100))
 degree(g)
 is_simple(g)
 
 ## Exponential degree distribution, with high positive assortativity.
 ## Loop and multiple edges are explicitly allowed.
 ## Note that we correct the degree sequence if its sum is odd.
-degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
-if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
-g4 <- realize_degseq(degs, method="largest", allowed.edge.types="all")
+degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+if (sum(degs) \%\% 2 != 0) {
+  degs[1] <- degs[1] + 1
+}
+g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
 all(degree(g4) == degs)
 
 ## Power-law degree distribution, no loops allowed but multiple edges
 ## are okay.
 ## Note that we correct the degree sequence if its sum is odd.
-degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
-if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
-g5 <- realize_degseq(degs, allowed.edge.types="multi")
+degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+if (sum(degs) \%\% 2 != 0) {
+  degs[1] <- degs[1] + 1
+}
+g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 all(degree(g5) == degs)
 }
 \references{

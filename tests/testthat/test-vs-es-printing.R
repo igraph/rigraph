@@ -1,12 +1,11 @@
 test_that("vs printing", {
-
   local_igraph_options(print.id = FALSE)
 
   local_rng_version("3.5.0")
   set.seed(42)
   g <- make_graph(~ A - A:B:C, B - A:B:C) %>%
     set_vertex_attr("color", value = "red") %>%
-      set_vertex_attr("weight", value = sample(1:10, 3))
+    set_vertex_attr("weight", value = sample(1:10, 3))
 
   expect_snapshot({
     V(g)[[1]]
@@ -17,7 +16,6 @@ test_that("vs printing", {
 })
 
 test_that("vs printing, complex attributes", {
-
   local_igraph_options(print.id = FALSE)
 
   local_rng_version("3.5.0")
@@ -31,11 +29,9 @@ test_that("vs printing, complex attributes", {
     V(g)[[1]]
     V(g)[[2:3]]
   })
-
 })
 
 test_that("es printing", {
-
   local_igraph_options(print.id = FALSE)
 
   local_rng_version("3.5.0")
@@ -48,11 +44,9 @@ test_that("es printing", {
     E(g)[[1]]
     E(g)[[2:3]]
   })
-
 })
 
 test_that("es printing, complex attributes", {
-
   local_igraph_options(print.id = FALSE)
 
   local_rng_version("3.5.0")
@@ -66,5 +60,4 @@ test_that("es printing, complex attributes", {
     E(g)[[1]]
     E(g)[[2:3]]
   })
-
 })

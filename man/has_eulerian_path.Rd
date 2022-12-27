@@ -47,7 +47,7 @@ with its edge and vertex sequence, or throws an error if no such cycle exists.
 }
 \examples{
 
-g <- make_graph( ~ A-B-C-D-E-A-F-D-B-F-E )
+g <- make_graph(~ A - B - C - D - E - A - F - D - B - F - E)
 
 has_eulerian_path(g)
 eulerian_path(g)

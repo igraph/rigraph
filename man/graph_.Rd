@@ -17,6 +17,6 @@ TODO
 }
 \examples{
 ## These are equivalent
-graph_(cbind(1:5,2:6), from_edgelist(directed = FALSE))
-graph_(cbind(1:5,2:6), from_edgelist(), directed = FALSE)
+graph_(cbind(1:5, 2:6), from_edgelist(directed = FALSE))
+graph_(cbind(1:5, 2:6), from_edgelist(), directed = FALSE)
 }

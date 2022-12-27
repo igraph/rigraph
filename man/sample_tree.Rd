@@ -32,7 +32,7 @@ given number of nodes with the same probability.
 }
 \examples{
 
-g <- sample_tree(100, method="lerw")
+g <- sample_tree(100, method = "lerw")
 
 }
 \keyword{graphs}

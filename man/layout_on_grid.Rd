@@ -43,15 +43,15 @@ other. If you want to change the order of the vertices, then see the
 }
 \examples{
 
-g <- make_lattice( c(3,3) )
+g <- make_lattice(c(3, 3))
 layout_on_grid(g)
 
-g2 <- make_lattice( c(3,3,3) )
+g2 <- make_lattice(c(3, 3, 3))
 layout_on_grid(g2, dim = 3)
 
-plot(g, layout=layout_on_grid)
+plot(g, layout = layout_on_grid)
 if (interactive()) {
-  rglplot(g, layout=layout_on_grid(g, dim = 3))
+  rglplot(g, layout = layout_on_grid(g, dim = 3))
 }
 }
 \seealso{

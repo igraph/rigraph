@@ -17,12 +17,12 @@ Numeric scalar, the number of edges.
 \code{ecount} is an alias of this function.
 }
 \examples{
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 gsize(g)
 ecount(g)
 
 # Number of edges in a G(n,p) graph
-replicate(100, sample_gnp(10, 1/2), simplify = FALSE) \%>\%
+replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) \%>\%
   vapply(gsize, 0) \%>\%
   hist()
 }

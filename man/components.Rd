@@ -72,7 +72,7 @@ depth-first searches.
 }
 \examples{
 
-g <- sample_gnp(20, 1/20)
+g <- sample_gnp(20, 1 / 20)
 clu <- components(g)
 groups(clu)
 

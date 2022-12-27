@@ -37,8 +37,10 @@ of total nodes. See also Kotsis, G: Interconnection Topologies for
 Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
 \examples{
-chord <- make_chordal_ring(15,
-    matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
+chord <- make_chordal_ring(
+  15,
+  matrix(c(3, 12, 4, 7, 8, 11), nr = 2)
+)
 }
 \seealso{
 Other deterministic constructors: 

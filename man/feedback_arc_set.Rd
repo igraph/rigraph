@@ -40,9 +40,9 @@ component is a tree).
 }
 \examples{
 
-g <- sample_gnm(20, 40, directed=TRUE)
+g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-feedback_arc_set(g, algo="approx")
+feedback_arc_set(g, algo = "approx")
 }
 \references{
 Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective

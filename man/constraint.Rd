@@ -43,7 +43,7 @@ graph adjacency matrix. For isolated vertices, constraint is undefined.
 }
 \examples{
 
-g <- sample_gnp(20, 5/20)
+g <- sample_gnp(20, 5 / 20)
 constraint(g)
 
 }

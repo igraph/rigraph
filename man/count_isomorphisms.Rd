@@ -34,8 +34,10 @@ V(g2)$color <- rep(2:1, length = vcount(g2))
 # consider colors by default
 count_isomorphisms(g1, g2)
 # ignore colors
-count_isomorphisms(g1, g2, vertex.color1 = NULL,
-    vertex.color2 = NULL)
+count_isomorphisms(g1, g2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL
+)
 }
 \references{
 LP Cordella,  P Foggia, C Sansone, and M Vento: An improved algorithm

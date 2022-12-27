@@ -53,7 +53,7 @@ A layout generator for larger graphs.
 \details{
 \code{layout_with_lgl} is for large connected graphs, it is similar to the layout
 generator of the Large Graph Layout software
-(\url{http://lgl.sourceforge.net/}).
+(\url{https://lgl.sourceforge.net/}).
 }
 \seealso{
 Other graph layouts: 

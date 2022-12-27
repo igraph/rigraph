@@ -28,6 +28,6 @@ all edges, this operation is also known as graph transpose.
 }
 \examples{
 
-g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
+g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
 }

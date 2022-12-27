@@ -51,7 +51,7 @@
 #'
 #' g <- make_ring(10)
 #' all_simple_paths(g, 1, 5)
-#' all_simple_paths(g, 1, c(3,5))
+#' all_simple_paths(g, 1, c(3, 5))
 #'
 #' @export
 all_simple_paths <- function(graph, from, to = V(graph),
@@ -61,14 +61,20 @@ all_simple_paths <- function(graph, from, to = V(graph),
   if (!is_igraph(graph)) stop("Not a graph object")
   from <- as.igraph.vs(graph, from)
   to <- as.igraph.vs(graph, to)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3,
-                 "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-               as.integer(cutoff), mode)
+  res <- .Call(
+    C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
+    as.integer(cutoff), mode
+  )
   res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
@@ -97,7 +103,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #'
 #' g <- make_tree(10)
 #' is_dag(g)
-#' g2 <- g + edge(5,1)
+#' g2 <- g + edge(5, 1)
 #' is_dag(g2)
 #' @export
 is_dag <- is_dag
@@ -134,17 +140,21 @@ is_dag <- is_dag
 #' @examples
 #'
 #' ## The examples from the Tarjan-Yannakakis paper
-#' g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
-#'                 E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
-#'                 I-A:H)
+#' g1 <- graph_from_literal(
+#'   A - B:C:I, B - A:C:D, C - A:B:E:H, D - B:E:F,
+#'   E - C:D:F:H, F - D:E:G, G - F:H, H - C:E:G:I,
+#'   I - A:H
+#' )
 #' max_cardinality(g1)
-#' is_chordal(g1, fillin=TRUE)
+#' is_chordal(g1, fillin = TRUE)
 #'
-#' g2 <- graph_from_literal(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
-#'                 E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
-#'                 I-G:H:J, J-H:I)
+#' g2 <- graph_from_literal(
+#'   A - B:E, B - A:E:F:D, C - E:D:G, D - B:F:E:C:G,
+#'   E - A:B:C:D:F, F - B:D:E, G - C:D:H:I, H - G:I:J,
+#'   I - G:H:J, J - H:I
+#' )
 #' max_cardinality(g2)
-#' is_chordal(g2, fillin=TRUE)
+#' is_chordal(g2, fillin = TRUE)
 max_cardinality <- max_cardinality
 
 
@@ -175,7 +185,7 @@ max_cardinality <- max_cardinality
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
-#' g <- make_star(10, mode="undirected")
+#' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
 #' @export
 eccentricity <- eccentricity
@@ -208,7 +218,7 @@ eccentricity <- eccentricity
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
-#' g <- make_star(10, mode="undirected")
+#' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
 #' radius(g)
 #' @export

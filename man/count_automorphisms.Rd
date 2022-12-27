@@ -59,7 +59,7 @@ count_automorphisms(g)
 ## A full graph has n! automorphisms; however, we restrict the vertex
 ## matching by colors, leading to only 4 automorphisms
 g <- make_full_graph(4)
-count_automorphisms(g, colors=c(1,2,1,2))
+count_automorphisms(g, colors = c(1, 2, 1, 2))
 }
 \references{
 Tommi Junttila and Petteri Kaski: Engineering an Efficient
