@@ -1439,7 +1439,7 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'
 #' \code{layout_with_lgl} is for large connected graphs, it is similar to the layout
 #' generator of the Large Graph Layout software
-#' (\url{http://lgl.sourceforge.net/}).
+#' (\url{https://lgl.sourceforge.net/}).
 #'
 #' @param graph The input graph
 #' @param maxiter The maximum number of iterations to perform (150).
