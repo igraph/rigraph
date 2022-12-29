@@ -218,7 +218,8 @@ src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
 	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
 	printf "%s" "OBJECTS=" >> $@
-	sed 's/ / \\\n/g' object_files >> $@
+	# Can't insert newlines, not all make variants accept them
+	cat object_files >> $@
 
 pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	$(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
