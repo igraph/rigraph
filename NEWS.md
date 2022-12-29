@@ -1,3 +1,28 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# igraph 1.3.5.9090
+
+## Bug fixes
+
+- Fix syntax error in new unit test.
+
+- Fixed indexing of result vertices in convex_hull(), closes #613.
+
+## Chore
+
+- Add fledge workflow.
+
+- Prepare for using fledge for managing NEWS.md (#615).
+
+- Style remaining files (#614).
+
+- Clarify changelog item [skip ci].
+
+## doc
+
+- Switch to https in a URL that CRAN check was complaining about.
+
+
 # igraph 1.3.5.9089
 
 ## Added
