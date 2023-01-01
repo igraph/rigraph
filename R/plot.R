@@ -817,7 +817,7 @@ rglplot.igraph <- function(x, ...) {
   if (length(vertex.size) == 1) {
     vertex.size <- rep(vertex.size, nrow(layout))
   }
-  rgl::rgl.spheres(layout[, 1], layout[, 2], layout[, 3],
+  rgl::spheres3d(layout[, 1], layout[, 2], layout[, 3],
     radius = vertex.size,
     col = vertex.color
   )
@@ -831,8 +831,8 @@ rglplot.igraph <- function(x, ...) {
   z <- layout[, 3]
   l1 <- labels[1]
   labels[1] <- ""
-  rgl::rgl.texts(x, y, z, labels, col = label.color, adj = 0)
-  rgl::rgl.texts(c(0, x[1]), c(0, y[1]), c(0, z[1]),
+  rgl::text3d(x, y, z, labels, col = label.color, adj = 0)
+  rgl::text3d(c(0, x[1]), c(0, y[1]), c(0, z[1]),
     c("", l1),
     col = c(label.color[1], label.color[1]), adj = 0
   )
@@ -845,7 +845,7 @@ rglplot.igraph <- function(x, ...) {
     y1 <- layout[, 2][el[, 2]]
     z0 <- layout[, 3][el[, 1]]
     z1 <- layout[, 4][el[, 2]]
-    rgl::rgl.texts((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, edge.labels,
+    rgl::text3d((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2, edge.labels,
       col = label.color
     )
   }
