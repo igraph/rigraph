@@ -822,20 +822,14 @@ rglplot.igraph <- function(x, ...) {
     col = vertex.color
   )
 
-  # add the labels, 'l1' is a stupid workaround of a mysterious rgl bug
+  # add the labels
   labels[is.na(labels)] <- ""
   x <- layout[, 1] + label.dist * cos(-label.degree) *
     (vertex.size + 6 * 10 * log10(2)) / 200
   y <- layout[, 2] + label.dist * sin(-label.degree) *
     (vertex.size + 6 * 10 * log10(2)) / 200
   z <- layout[, 3]
-  l1 <- labels[1]
-  labels[1] <- ""
   rgl::text3d(x, y, z, labels, col = label.color, adj = 0)
-  rgl::text3d(c(0, x[1]), c(0, y[1]), c(0, z[1]),
-    c("", l1),
-    col = c(label.color[1], label.color[1]), adj = 0
-  )
 
   edge.labels[is.na(edge.labels)] <- ""
   if (any(edge.labels != "")) {
