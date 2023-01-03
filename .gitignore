@@ -8,7 +8,6 @@
 /object_files
 /revdep/
 /version_number
-/configure.ac
 igraph.Rcheck/
 .venv/
 .vscode/

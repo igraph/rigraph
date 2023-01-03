@@ -204,9 +204,6 @@ OBJECTS := $(shell echo $(CORESRC) $(VENDORSRC) $(ARPACK) $(RAY) $(UUID) | \
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@
 
-configure.ac: %: tools/stimulus/%
-	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
-
 src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
 	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
@@ -267,7 +264,6 @@ clean:
 	@rm -f  igraph_*.tgz
 	@rm -f  object_files
 	@rm -rf version_number
-	@rm -f  configure.ac
 	@rm -rf src/*.o
 	@rm -rf src/*.so
 	@cd $(top_srcdir) && git reset --hard
