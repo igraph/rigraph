@@ -206,7 +206,7 @@ object_files: force
 
 src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
-	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
+	cp $< $@
 	printf "%s" "OBJECTS=" >> $@
 	# Can't insert newlines, not all make variants accept them
 	cat object_files >> $@
