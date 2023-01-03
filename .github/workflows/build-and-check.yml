@@ -63,6 +63,7 @@ jobs:
 
       - name: Package validation
         run: |
+          git status --porcelain
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git diff --cached
