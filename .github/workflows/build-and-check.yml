@@ -61,7 +61,18 @@ jobs:
           make igraph
         shell: bash
 
+      - name: Commit changes
+        if: ${{ env.GITHUB_ACTOR = env.GITHUB_REPOSITORY_OWNER }}
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Automated changes"
+            git push
+          fi
+        shell: bash
+
       - name: Package validation
+        if: ${{ env.GITHUB_ACTOR != env.GITHUB_REPOSITORY_OWNER }}
         run: |
           git status --porcelain
           if [ -n "$(git status --porcelain)" ]; then
