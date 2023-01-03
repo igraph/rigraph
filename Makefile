@@ -261,7 +261,6 @@ test:
 
 clean:
 	@rm -rf autom4te.cache/
-	@rm -f  configure
 	@rm -f  config.log
 	@rm -f  config.status
 	@rm -f  igraph_*.tar.gz
@@ -271,11 +270,6 @@ clean:
 	@rm -f  configure.ac
 	@rm -rf src/*.o
 	@rm -rf src/*.so
-	@rm -rf src/Makevars*
-	@rm -f  src/config.*
-	@rm -rf src/core
-	@rm -rf src/include
-	@rm -rf src/vendor
 	@cd $(top_srcdir) && git reset --hard
 
 distclean: clean

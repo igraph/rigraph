@@ -3,7 +3,6 @@
 /autom4te.cache/
 /config.log
 /config.status
-/configure
 /igraph_*.tar.gz
 /igraph_*.tgz
 /object_files
@@ -14,3 +13,4 @@ igraph.Rcheck/
 .venv/
 .vscode/
 .Rproj.user
+/configure~
