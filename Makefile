@@ -226,9 +226,6 @@ docs: pre_build
 igraph: igraph_$(VERSION).tar.gz
 
 igraph_$(VERSION).tar.gz: docs
-	rm -f src/config.h
-	rm -f src/Makevars
-	touch src/config.h
 	Rscript -e 'devtools::build(path = ".")'
 
 #############
