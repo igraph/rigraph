@@ -62,7 +62,7 @@ jobs:
         shell: bash
 
       - name: Commit changes
-        if: ${{ env.GITHUB_ACTOR = env.GITHUB_REPOSITORY_OWNER }}
+        if: ${{ env.GITHUB_ACTOR == env.GITHUB_REPOSITORY_OWNER }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git add .
