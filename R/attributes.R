@@ -174,7 +174,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   } else {
     myattr <-
       .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (! missing(index)) {
+    if (!missing(index)) {
       index <- as.igraph.vs(graph, index)
       myattr <- myattr[index]
     }
@@ -277,7 +277,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   res <- .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
   if (!missing(index) &&
-      (length(index) != vcount(graph) || any(index != V(graph)))) {
+    (length(index) != vcount(graph) || any(index != V(graph)))) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
     }
@@ -307,7 +307,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   }
 
   if (!missing(index) &&
-      (length(index) != vcount(graph) || any(index != V(graph)))) {
+    (length(index) != vcount(graph) || any(index != V(graph)))) {
     vs <- V(graph)
     for (i in seq_along(value)) {
       tmp <- value[[i]]
@@ -454,7 +454,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   res <- .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
 
   if (!missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))) {
+    (length(index) != ecount(graph) || any(index != E(graph)))) {
     for (i in seq_along(res)) {
       res[[i]] <- res[[i]][index]
     }
@@ -484,7 +484,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   }
 
   if (!missing(index) &&
-      (length(index) != ecount(graph) || any(index != E(graph)))) {
+    (length(index) != ecount(graph) || any(index != E(graph)))) {
     es <- E(graph)
     for (i in seq_along(value)) {
       tmp <- value[[i]]
