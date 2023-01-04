@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9091
+
+## Bug fixes
+
+- Fix builds with some `make` variants (#617).
+
+
 # igraph 1.3.5.9090
 
 ## Bug fixes
