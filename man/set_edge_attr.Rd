@@ -5,7 +5,7 @@
 \alias{set.edge.attribute}
 \title{Set edge attributes}
 \usage{
-set_edge_attr(graph, name, index = NULL, value)
+set_edge_attr(graph, name, index = E(graph), value)
 }
 \arguments{
 \item{graph}{The graph}
@@ -13,8 +13,7 @@ set_edge_attr(graph, name, index = NULL, value)
 \item{name}{The name of the attribute to set.}
 
 \item{index}{An optional edge sequence to set the attributes of
-a subset of edges.
-If `NULL`, the default, the attribute is set for all edges.}
+a subset of edges.}
 
 \item{value}{The new value of the attribute for all (or \code{index})
 edges.}

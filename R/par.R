@@ -202,7 +202,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
 }
 
 local_igraph_options <- function(..., .in = parent.frame()) {
-  old <- igraph_i_options(..., .in = .in)
+  old <- igraph_options(..., .in = .in)
   withr::defer(rlang::inject(igraph_options(!!!old)), envir = .in)
   invisible()
 }
