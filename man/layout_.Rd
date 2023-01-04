@@ -20,7 +20,7 @@ layout_(graph, layout, ...)
 to a layout specification function.}
 
 \item{...}{Further modifiers, see a complete list below.
-For the \code{print} methods, it is ignored.}
+For the \code{\link[=print]{print()}} methods, it is ignored.}
 
 \item{x}{The layout specification}
 }

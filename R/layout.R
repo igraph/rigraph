@@ -63,7 +63,7 @@
 #' @param layout The layout specification. It must be a call
 #'   to a layout specification function.
 #' @param ... Further modifiers, see a complete list below.
-#'   For the \code{print} methods, it is ignored.
+#'   For the [print()] methods, it is ignored.
 #' @return The return value of the layout function, usually a
 #'   two column matrix. For 3D layouts a three column matrix.
 #'

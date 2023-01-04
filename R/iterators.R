@@ -1219,7 +1219,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' Show a vertex sequence on the screen
 #'
 #' For long vertex sequences, the printing is truncated to fit to the
-#' screen. Use \code{print} explicitly and the \code{full} argument to
+#' screen. Use [print()] explicitly and the \code{full} argument to
 #' see the full sequence.
 #'
 #' Vertex sequence created with the double bracket operator are
@@ -1307,7 +1307,7 @@ print.igraph.vs <- function(x,
 #' Print an edge sequence to the screen
 #'
 #' For long edge sequences, the printing is truncated to fit to the
-#' screen. Use \code{print} explicitly and the code{full} argument to
+#' screen. Use [print()] explicitly and the code{full} argument to
 #' see the full sequence.
 #'
 #' Edge sequences created with the double bracket operator are printed

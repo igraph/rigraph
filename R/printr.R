@@ -152,7 +152,7 @@ head_print_callback <- function(x, max_lines, header, footer,
 #'
 #' @param ... Passed to the printing function.
 #' @param .indent Character scalar, indent the printout with this.
-#' @param .printer The printing function, defaults to \code{print}.
+#' @param .printer The printing function, defaults to [print].
 #' @return The first element in \code{...}, invisibly.
 #'
 #' @export

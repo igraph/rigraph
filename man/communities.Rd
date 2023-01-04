@@ -123,7 +123,7 @@ community structure. It can also be \code{NULL}, if the modularity of the
 (best) split is not available.}
 }
 \value{
-\code{print} returns the \code{communities} object itself,
+\code{\link[=print]{print()}} returns the \code{communities} object itself,
 invisibly.
 
 \code{length} returns an integer scalar.
@@ -173,7 +173,7 @@ community structure detection algorithms are different, \code{communities}
 objects do not always have the same structure. Nevertheless, they have some
 common operations, these are documented here.
 
-The \code{print} generic function is defined for \code{communities}, it
+The \code{\link[=print]{print()}} generic function is defined for \code{communities}, it
 prints a short summary.
 
 The \code{length} generic function call be called on \code{communities} and

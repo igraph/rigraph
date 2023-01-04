@@ -88,7 +88,7 @@
 #' The generic function \code{summary} works on \code{cohesiveBlocks} objects
 #' and it prints a one line summary to the terminal.
 #'
-#' The generic function \code{print} is also defined on \code{cohesiveBlocks}
+#' The generic function [print()] is also defined on \code{cohesiveBlocks}
 #' objects and it is invoked automatically if the name of the
 #' \code{cohesiveBlocks} object is typed in. It produces an output like this:
 #' \preformatted{ Cohesive block structure:
@@ -156,7 +156,7 @@
 #'   \code{plot.igraph()}, see the possible formats there. By default the
 #'   Reingold-Tilford layout generator is used.
 #' @param \dots Additional arguments. \code{plot_hierarchy()} and \code{plot} pass
-#'   them to \code{plot.igraph()}.  \code{print} and \code{summary} ignore them.
+#'   them to \code{plot.igraph()}.  [print()] and \code{summary} ignore them.
 #' @return \code{cohesive_blocks()} returns a \code{cohesiveBlocks} object.
 #'
 #'   \code{blocks()} returns a list of numeric vectors, containing vertex ids.
@@ -179,7 +179,7 @@
 #'   \code{max_cohesion()} returns a numeric vector with one entry for each vertex,
 #'   giving the cohesion of its most cohesive block.
 #'
-#'   \code{print} and \code{summary} return the \code{cohesiveBlocks} object
+#'   [print()] and \code{summary} return the \code{cohesiveBlocks} object
 #'   itself, invisibly.
 #'
 #'   \code{length} returns a numeric scalar, the number of blocks.
