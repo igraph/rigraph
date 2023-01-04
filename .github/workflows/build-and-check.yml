@@ -131,14 +131,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -175,14 +170,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
