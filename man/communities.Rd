@@ -153,7 +153,7 @@ vertices.
 \code{code_len()} returns a numeric scalar for communities found with the
 InfoMAP method and \code{NULL} for other methods.
 
-\code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
+\code{\link[=plot]{plot()}} for \code{communities} objects returns \code{NULL}, invisibly.
 
 #' @author Gabor Csardi \email{csardi.gabor@gmail.com}
 }
@@ -242,7 +242,7 @@ while finding the communities.
 (\code{\link{cluster_infomap}} and returns the code length of the
 partition.
 
-It is possibly to call the \code{plot} function on \code{communities}
+It is possibly to call the \code{\link[=plot]{plot()}} function on \code{communities}
 objects. This will plot the graph (and uses \code{\link{plot.igraph}}
 internally), with the communities shown. By default it colores the vertices
 according to their communities, and also marks the vertex groups

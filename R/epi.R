@@ -131,7 +131,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' @param xlab The x label.
 #' @param ylab The y label. If \code{NULL} then it is automatically added based
 #'   on the \code{comp} argument.
-#' @param \dots Additional arguments are passed to \code{plot}, that is run
+#' @param \dots Additional arguments are passed to [plot()], that is run
 #'   before any of the curves are added, to create the figure.
 #' @return Nothing.
 #' @author Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor

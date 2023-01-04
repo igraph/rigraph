@@ -105,7 +105,7 @@
 #' \sQuote{o} means that the vertex is included, a dot means that it is not,
 #' and the vertices are shown in groups of ten.
 #'
-#' The generic function \code{plot} plots the graph, showing one or more
+#' The generic function [plot()] plots the graph, showing one or more
 #' cohesive blocks in it.
 #'
 #' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
@@ -155,7 +155,7 @@
 #' @param layout The layout of a plot, it is simply passed on to
 #'   \code{plot.igraph()}, see the possible formats there. By default the
 #'   Reingold-Tilford layout generator is used.
-#' @param \dots Additional arguments. \code{plot_hierarchy()} and \code{plot} pass
+#' @param \dots Additional arguments. \code{plot_hierarchy()} and [plot()] pass
 #'   them to \code{plot.igraph()}.  [print()] and \code{summary} ignore them.
 #' @return \code{cohesive_blocks()} returns a \code{cohesiveBlocks} object.
 #'
@@ -173,7 +173,7 @@
 #'   cohesive block, in the block hierarchy. The block at the root of the
 #'   hierarchy has no parent and \code{0} is returned for it.
 #'
-#'   \code{plot_hierarchy()}, \code{plot} and \code{export_pajek()} return \code{NULL},
+#'   \code{plot_hierarchy()}, [plot()] and \code{export_pajek()} return \code{NULL},
 #'   invisibly.
 #'
 #'   \code{max_cohesion()} returns a numeric vector with one entry for each vertex,

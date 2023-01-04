@@ -137,7 +137,7 @@ graphs.
 
 igraph provides three different ways for visualization. The first is
 the \code{\link{plot.igraph}} function. (Actually you don't need to
-write \code{plot.igraph()}, \code{plot} is enough. This function uses
+write \code{plot.igraph()}, \code{\link[=plot]{plot()}} is enough. This function uses
 regular R graphics and can be used with any R device.
 
 The second function is \code{\link{tkplot}}, which uses a Tk GUI for

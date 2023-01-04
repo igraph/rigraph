@@ -75,7 +75,7 @@ cohesive blocks.}
 \item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
 \code{cohesive_blocks()} function.}
 
-\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{plot} pass
+\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
 them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{summary} ignore them.}
 
 \item{y}{The graph whose cohesive blocks are supplied in the \code{x}
@@ -133,7 +133,7 @@ block hierarchy.
 cohesive block, in the block hierarchy. The block at the root of the
 hierarchy has no parent and \code{0} is returned for it.
 
-\code{plot_hierarchy()}, \code{plot} and \code{export_pajek()} return \code{NULL},
+\code{plot_hierarchy()}, \code{\link[=plot]{plot()}} and \code{export_pajek()} return \code{NULL},
 invisibly.
 
 \code{max_cohesion()} returns a numeric vector with one entry for each vertex,
@@ -228,7 +228,7 @@ enough and shows the vertices in the blocks, ordered by vertex ids.
 \sQuote{o} means that the vertex is included, a dot means that it is not,
 and the vertices are shown in groups of ten.
 
-The generic function \code{plot} plots the graph, showing one or more
+The generic function \code{\link[=plot]{plot()}} plots the graph, showing one or more
 cohesive blocks in it.
 }
 \examples{

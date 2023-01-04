@@ -57,7 +57,7 @@ it is calculated from the data.}
 \item{ylab}{The y label. If \code{NULL} then it is automatically added based
 on the \code{comp} argument.}
 
-\item{\dots}{Additional arguments are passed to \code{plot}, that is run
+\item{\dots}{Additional arguments are passed to \code{\link[=plot]{plot()}}, that is run
 before any of the curves are added, to create the figure.}
 }
 \value{

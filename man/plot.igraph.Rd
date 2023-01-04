@@ -75,7 +75,7 @@ non-interactive companion of the \code{tkplot()} function.
 \details{
 One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 first, handtune the placement of the vertices, query the coordinates by the
-\code{\link{tk_coords}} function and use them with \code{plot} to
+\code{\link{tk_coords}} function and use them with \code{\link[=plot]{plot()}} to
 plot the graph to any R device.
 }
 \examples{

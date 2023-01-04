@@ -28,7 +28,7 @@
 #'
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
-#' \code{\link{tk_coords}} function and use them with \code{plot} to
+#' \code{\link{tk_coords}} function and use them with [plot()] to
 #' plot the graph to any R device.
 #'
 #' @aliases plot.graph
