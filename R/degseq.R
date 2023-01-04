@@ -34,9 +34,9 @@
 #'
 #' @aliases is.degree.sequence is_degseq
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
-#' the out-degree sequence for directed graphs.
+#'   the out-degree sequence for directed graphs.
 #' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
-#' should be \code{NULL}. For directed graphs it specifies the in-degrees.
+#'   should be \code{NULL}. For directed graphs it specifies the in-degrees.
 #' @return A logical scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Szabolcs Horvat \email{szhorvat@gmail.com}
 #' @references Z Kiraly, Recognizing graphic degree sequences and generating
@@ -72,15 +72,15 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #'
 #' @aliases is.graphical.degree.sequence
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
-#' the out-degree sequence for directed graphs.
+#'   the out-degree sequence for directed graphs.
 #' @param in.deg \code{NULL} or an integer vector. For undirected graphs, it
-#' should be \code{NULL}. For directed graphs it specifies the in-degrees.
+#'   should be \code{NULL}. For directed graphs it specifies the in-degrees.
 #' @param allowed.edge.types The allowed edge types in the graph. \sQuote{simple}
-#' means that neither loop nor multiple edges are allowed (i.e. the graph must be
-#' simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
-#' are not. \sQuote{multi} means that multiple edges are allowed but loop edges
-#' are not. \sQuote{all} means that both loop edges and multiple edges are
-#' allowed.
+#'   means that neither loop nor multiple edges are allowed (i.e. the graph must be
+#'   simple). \sQuote{loops} means that loop edges are allowed but mutiple edges
+#'   are not. \sQuote{multi} means that multiple edges are allowed but loop edges
+#'   are not. \sQuote{all} means that both loop edges and multiple edges are
+#'   allowed.
 #' @return A logical scalar.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Hakimi SL: On the realizability of a set of integers as degrees

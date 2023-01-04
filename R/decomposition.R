@@ -42,21 +42,21 @@
 #'
 #' @aliases is.chordal
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored, as the algorithm is defined for undirected graphs.
+#'   ignored, as the algorithm is defined for undirected graphs.
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
-#' vertices. If it is \code{NULL}, then it is automatically calculated by
-#' calling \code{\link{max_cardinality}}, or from \code{alpham1} if
-#' that is given..
+#'   vertices. If it is \code{NULL}, then it is automatically calculated by
+#'   calling \code{\link{max_cardinality}}, or from \code{alpham1} if
+#'   that is given..
 #' @param alpham1 Numeric vector, the inverse of \code{alpha}. If it is
-#' \code{NULL}, then it is automatically calculated by calling
-#' \code{\link{max_cardinality}}, or from \code{alpha}.
+#'   \code{NULL}, then it is automatically calculated by calling
+#'   \code{\link{max_cardinality}}, or from \code{alpha}.
 #' @param fillin Logical scalar, whether to calculate the fill-in edges.
 #' @param newgraph Logical scalar, whether to calculate the triangulated graph.
 #' @return A list with three members: \item{chordal}{Logical scalar, it is
-#' \code{TRUE} iff the input graph is chordal.} \item{fillin}{If requested,
-#' then a numeric vector giving the fill-in edges. \code{NULL} otherwise.}
-#' \item{newgraph}{If requested, then the triangulated graph, an \code{igraph}
-#' object. \code{NULL} otherwise.}
+#'   \code{TRUE} iff the input graph is chordal.} \item{fillin}{If requested,
+#'   then a numeric vector giving the fill-in edges. \code{NULL} otherwise.}
+#'   \item{newgraph}{If requested, then the triangulated graph, an \code{igraph}
+#'   object. \code{NULL} otherwise.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{max_cardinality}}
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple

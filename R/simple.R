@@ -51,11 +51,11 @@
 #' @param graph The graph to work on.
 #' @param remove.loops Logical, whether the loop edges are to be removed.
 #' @param remove.multiple Logical, whether the multiple edges are to be
-#' removed.
+#'   removed.
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
-#' \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
-#' single one in the new graph, and their attributes are combined. Please see
-#' \code{\link{attribute.combination}} for details on this.
+#'   \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
+#'   single one in the new graph, and their attributes are combined. Please see
+#'   \code{\link{attribute.combination}} for details on this.
 #' @return a new graph object with the edges deleted.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{which_loop}}, \code{\link{which_multiple}} and

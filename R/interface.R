@@ -160,9 +160,9 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #'
 #' @param graph The input graph.
 #' @param edges The edges to remove, specified as an edge sequence. Typically
-#' this is either a numeric vector containing edge IDs, or a character vector
-#' containing the IDs or names of the source and target vertices, separated by
-#' \code{|}
+#'   this is either a numeric vector containing edge IDs, or a character vector
+#'   containing the IDs or names of the source and target vertices, separated by
+#'   \code{|}
 #' @return The graph, with the edges removed.
 #'
 #' @aliases delete.edges
@@ -421,20 +421,20 @@ get.edges <- function(graph, es) {
 #'
 #' @param graph The input graph.
 #' @param vp The incident vertices, given as vertex ids or symbolic vertex
-#' names. They are interpreted pairwise, i.e. the first and second are used for
-#' the first edge, the third and fourth for the second, etc.
+#'   names. They are interpreted pairwise, i.e. the first and second are used for
+#'   the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in
-#' directed graphs. This argument is ignored for undirected graphs.
+#'   directed graphs. This argument is ignored for undirected graphs.
 #' @param error Logical scalar, whether to report an error if an edge is not
-#' found in the graph. If \code{FALSE}, then no error is reported, and zero is
-#' returned for the non-existant edge(s).
+#'   found in the graph. If \code{FALSE}, then no error is reported, and zero is
+#'   returned for the non-existant edge(s).
 #' @param multi Logical scalar, whether to handle multiple edges properly. If
-#' \code{FALSE}, and a pair of vertices are given twice (or more), then always
-#' the same edge id is reported back for them. If \code{TRUE}, then the edge
-#' ids of multiple edges are correctly reported.
+#'   \code{FALSE}, and a pair of vertices are given twice (or more), then always
+#'   the same edge id is reported back for them. If \code{TRUE}, then the edge
+#'   ids of multiple edges are correctly reported.
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
-#' If there is no edge in the input graph for a given pair of vertices, then
-#' zero is reported. (If the \code{error} argument is \code{FALSE}.)
+#'   If there is no edge in the input graph for a given pair of vertices, then
+#'   zero is reported. (If the \code{error} argument is \code{FALSE}.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @family structural queries

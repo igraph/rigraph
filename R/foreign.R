@@ -78,13 +78,13 @@ write.graph.fromraw <- function(buffer, file) {
 #'
 #' @aliases read.graph LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
-#' \code{http} or \code{ftp} connection. It can also be a character string with
-#' the file name or URI.
+#'   \code{http} or \code{ftp} connection. It can also be a character string with
+#'   the file name or URI.
 #' @param format Character constant giving the file format. Right now
-#' \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
-#' \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported,
-#' the default is \code{edgelist}. As of igraph 0.4 this argument is case
-#' insensitive.
+#'   \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
+#'   \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported,
+#'   the default is \code{edgelist}. As of igraph 0.4 this argument is case
+#'   insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
 #' @section Edge list format: This format is a simple text file with numeric
@@ -138,11 +138,11 @@ read_graph <- function(file, format = c(
 #' @aliases write.graph
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
-#' to.
+#'   to.
 #' @param format Character string giving the file format. Right now
-#' \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-#' \code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
-#' this argument is case insensitive.
+#'   \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
+#'   \code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
+#'   this argument is case insensitive.
 #' @param \dots Other, format specific arguments, see below.
 #' @return A NULL, invisibly.
 #' @section Edge list format: The \code{edgelist} format is a simple text file,
@@ -478,24 +478,24 @@ write.graph.dot <- function(graph, file, ...) {
 #' @aliases graph.graphdb
 #' @param url If not \code{NULL} it is a complete URL with the file to import.
 #' @param prefix Gives the prefix. See details below. Possible values:
-#' \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
-#' \code{mcs50}, \code{mcs70}, \code{mcs90}.
+#'   \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
+#'   \code{mcs50}, \code{mcs70}, \code{mcs90}.
 #' @param type Gives the graph type identifier. See details below. Possible
-#' values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
-#' \code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2},
-#' \code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2}, \code{m4Dr4},
-#' \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
-#' \code{b09m}.
+#'   values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
+#'   \code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2},
+#'   \code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2}, \code{m4Dr4},
+#'   \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
+#'   \code{b09m}.
 #' @param nodes The number of vertices in the graph.
 #' @param pair Specifies which graph of the pair to read. Possible values:
-#' \code{A} and \code{B}.
+#'   \code{A} and \code{B}.
 #' @param which Gives the number of the graph to read. For every graph type
-#' there are a number of actual graphs in the database. This argument specifies
-#' which one to read.
+#'   there are a number of actual graphs in the database. This argument specifies
+#'   which one to read.
 #' @param base The base address of the database. See details below.
 #' @param compressed Logical constant, if TRUE than the file is expected to be
-#' compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
-#' suffix is added to the filename.
+#'   compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
+#'   suffix is added to the filename.
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

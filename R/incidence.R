@@ -155,34 +155,34 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #'
 #' @aliases graph.incidence
 #' @param incidence The input incidence matrix. It can also be a sparse matrix
-#' from the \code{Matrix} package.
+#'   from the \code{Matrix} package.
 #' @param directed Logical scalar, whether to create a directed graph.
 #' @param mode A character constant, defines the direction of the edges in
-#' directed graphs, ignored for undirected graphs. If \sQuote{\code{out}}, then
-#' edges go from vertices of the first kind (corresponding to rows in the
-#' incidence matrix) to vertices of the second kind (columns in the incidence
-#' matrix). If \sQuote{\code{in}}, then the opposite direction is used. If
-#' \sQuote{\code{all}} or \sQuote{\code{total}}, then mutual edges are created.
+#'   directed graphs, ignored for undirected graphs. If \sQuote{\code{out}}, then
+#'   edges go from vertices of the first kind (corresponding to rows in the
+#'   incidence matrix) to vertices of the second kind (columns in the incidence
+#'   matrix). If \sQuote{\code{in}}, then the opposite direction is used. If
+#'   \sQuote{\code{all}} or \sQuote{\code{total}}, then mutual edges are created.
 #' @param multiple Logical scalar, specifies how to interpret the matrix
-#' elements. See details below.
+#'   elements. See details below.
 #' @param weighted This argument specifies whether to create a weighted graph
-#' from the incidence matrix. If it is \code{NULL} then an unweighted graph is
-#' created and the \code{multiple} argument is used to determine the edges of
-#' the graph. If it is a character constant then for every non-zero matrix
-#' entry an edge is created and the value of the entry is added as an edge
-#' attribute named by the \code{weighted} argument. If it is \code{TRUE} then a
-#' weighted graph is created and the name of the edge attribute will be
-#' \sQuote{\code{weight}}.
+#'   from the incidence matrix. If it is \code{NULL} then an unweighted graph is
+#'   created and the \code{multiple} argument is used to determine the edges of
+#'   the graph. If it is a character constant then for every non-zero matrix
+#'   entry an edge is created and the value of the entry is added as an edge
+#'   attribute named by the \code{weighted} argument. If it is \code{TRUE} then a
+#'   weighted graph is created and the name of the edge attribute will be
+#'   \sQuote{\code{weight}}.
 #' @param add.names A character constant, \code{NA} or \code{NULL}.
-#' \code{graph_from_incidence_matrix} can add the row and column names of the incidence
-#' matrix as vertex attributes. If this argument is \code{NULL} (the default)
-#' and the incidence matrix has both row and column names, then these are added
-#' as the \sQuote{\code{name}} vertex attribute. If you want a different vertex
-#' attribute for this, then give the name of the attributes as a character
-#' string. If this argument is \code{NA}, then no vertex attributes (other than
-#' type) will be added.
+#'   \code{graph_from_incidence_matrix} can add the row and column names of the incidence
+#'   matrix as vertex attributes. If this argument is \code{NULL} (the default)
+#'   and the incidence matrix has both row and column names, then these are added
+#'   as the \sQuote{\code{name}} vertex attribute. If you want a different vertex
+#'   attribute for this, then give the name of the attributes as a character
+#'   string. If this argument is \code{NA}, then no vertex attributes (other than
+#'   type) will be added.
 #' @return A bipartite igraph graph. In other words, an igraph graph that has a
-#' vertex attribute \code{type}.
+#'   vertex attribute \code{type}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{make_bipartite_graph}} for another way to create bipartite
 #' graphs

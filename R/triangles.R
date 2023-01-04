@@ -36,15 +36,15 @@
 #'
 #' @aliases count_triangles adjacent.triangles triangles
 #' @param graph The input graph. It might be directed, but edge directions are
-#' ignored.
+#'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a
-#' vector of numeric ids, or a character vector of symbolic vertex names for
-#' named graphs.
+#'   vector of numeric ids, or a character vector of symbolic vertex names for
+#'   named graphs.
 #' @return For \code{triangles} a numeric vector of vertex ids, the first three
-#' vertices belong to the first triangle found, etc.
+#'   vertices belong to the first triangle found, etc.
 #'
-#' For \code{count_triangles} a numeric vector, the number of triangles for all
-#' vertices queried.
+#'   For \code{count_triangles} a numeric vector, the number of triangles for all
+#'   vertices queried.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{transitivity}}
 #' @keywords graphs

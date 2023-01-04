@@ -43,12 +43,12 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #' @param A a numeric matrix, the adjacency matrix of the first graph
 #' @param B a numeric matrix, the adjacency matrix of the second graph
 #' @param m The number of seeds. The first \code{m} vertices of both graphs are
-#' matched.
+#'   matched.
 #' @param start a numeric matrix, the permutation matrix estimate is
-#' initialized with \code{start}
+#'   initialized with \code{start}
 #' @param iteration The number of iterations for the Frank-Wolfe algorithm
 #' @return A numeric matrix which is the permutation matrix that determines the
-#' bijection between the graphs of \code{A} and \code{B}
+#'   bijection between the graphs of \code{A} and \code{B}
 #' @author Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}
 #' @seealso
 #' \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}

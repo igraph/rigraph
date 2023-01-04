@@ -185,7 +185,7 @@ i.postprocess.layout <- function(maybe_layout) {
 #' @aliases autocurve.edges
 #' @param graph The input graph.
 #' @param start The curvature at the two extreme edges. All edges will have a
-#' curvature between \code{-start} and \code{start}, spaced equally.
+#'   curvature between \code{-start} and \code{start}, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{igraph.plotting}} for all plotting parameters,

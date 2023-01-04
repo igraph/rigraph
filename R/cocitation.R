@@ -41,11 +41,11 @@
 #' @aliases cocitation bibcoupling
 #' @param graph The graph object to analyze
 #' @param v Vertex sequence or numeric vector, the vertex ids for which the
-#' cocitation or bibliographic coupling values we want to calculate. The
-#' default is all vertices.
+#'   cocitation or bibliographic coupling values we want to calculate. The
+#'   default is all vertices.
 #' @return A numeric matrix with \code{length(v)} lines and
-#' \code{vcount(graph)} columns. Element \code{(i,j)} contains the cocitation
-#' or bibliographic coupling for vertices \code{v[i]} and \code{j}.
+#'   \code{vcount(graph)} columns. Element \code{(i,j)} contains the cocitation
+#'   or bibliographic coupling for vertices \code{v[i]} and \code{j}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs

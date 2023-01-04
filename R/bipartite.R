@@ -43,27 +43,27 @@
 #'
 #' @aliases bipartite.projection bipartite.projection.size bipartite_projection_size bipartite_projection
 #' @param graph The input graph. It can be directed, but edge directions are
-#' ignored during the computation.
+#'   ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
-#' \sQuote{\code{type}} vertex attribute. You must supply this argument if the
-#' graph has no \sQuote{\code{type}} vertex attribute.
+#'   \sQuote{\code{type}} vertex attribute. You must supply this argument if the
+#'   graph has no \sQuote{\code{type}} vertex attribute.
 #' @param multiplicity If \code{TRUE}, then igraph keeps the multiplicity of
-#' the edges as an edge attribute called \sQuote{weight}.
-#' E.g. if there is an A-C-B and also an A-D-B
-#' triple in the bipartite graph (but no more X, such that A-X-B is also in the
-#' graph), then the multiplicity of the A-B edge in the projection will be 2.
+#'   the edges as an edge attribute called \sQuote{weight}.
+#'   E.g. if there is an A-C-B and also an A-D-B
+#'   triple in the bipartite graph (but no more X, such that A-X-B is also in the
+#'   graph), then the multiplicity of the A-B edge in the projection will be 2.
 #' @param probe1 This argument can be used to specify the order of the
-#' projections in the resulting list. If given, then it is considered as a
-#' vertex id (or a symbolic vertex name); the projection containing this vertex
-#' will be the first one in the result list.  This argument is ignored if only
-#' one projection is requested in argument \code{which}.
+#'   projections in the resulting list. If given, then it is considered as a
+#'   vertex id (or a symbolic vertex name); the projection containing this vertex
+#'   will be the first one in the result list.  This argument is ignored if only
+#'   one projection is requested in argument \code{which}.
 #' @param which A character scalar to specify which projection(s) to calculate.
-#' The default is to calculate both.
+#'   The default is to calculate both.
 #' @param remove.type Logical scalar, whether to remove the \code{type} vertex
-#' attribute from the projections. This makes sense because these graphs are
-#' not bipartite any more. However if you want to combine them with each other
-#' (or other bipartite graphs), then it is worth keeping this attribute. By
-#' default it will be removed.
+#'   attribute from the projections. This makes sense because these graphs are
+#'   not bipartite any more. However if you want to combine them with each other
+#'   (or other bipartite graphs), then it is worth keeping this attribute. By
+#'   default it will be removed.
 #' @return A list of two undirected graphs. See details above.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -171,9 +171,9 @@ bipartite_projection <- function(graph, types = NULL,
 #' @aliases bipartite.mapping bipartite_mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
-#' \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
-#' possible vertex type mapping, a logical vector. If no such mapping exists,
-#' then an empty vector.}
+#'   \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
+#'   possible vertex type mapping, a logical vector. If no such mapping exists,
+#'   then an empty vector.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @examples

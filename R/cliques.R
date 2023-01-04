@@ -48,25 +48,25 @@
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
 #' clique_size_counts
 #' @param graph The input graph, directed graphs will be considered as
-#' undirected ones, multiple edges and loops are ignored.
+#'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
-#' \code{NULL} means no limit, ie. it is the same as 0.
+#'   \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
-#' \code{NULL} means no limit.
+#'   \code{NULL} means no limit.
 #' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
-#' return a list containing numeric vectors of vertex ids. Each list element is
-#' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   return a list containing numeric vectors of vertex ids. Each list element is
+#'   a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
 #'
-#' \code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
-#' argument is not \code{NULL}. The output is written to the specified file in
-#' this case.
+#'   \code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
+#'   argument is not \code{NULL}. The output is written to the specified file in
+#'   this case.
 #'
-#' \code{clique_num} and \code{count_max_cliques} return an integer
-#' scalar.
+#'   \code{clique_num} and \code{count_max_cliques} return an integer
+#'   scalar.
 #'
-#' \code{clique_size_counts} returns a numeric vector with the clique sizes such that
-#' the i-th item belongs to cliques of size i. Trailing zeros are currently
-#' truncated, but this might change in future versions.
+#'   \code{clique_size_counts} returns a numeric vector with the clique sizes such that
+#'   the i-th item belongs to cliques of size i. Trailing zeros are currently
+#'   truncated, but this might change in future versions.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -94,15 +94,15 @@ largest_cliques <- largest_cliques
 
 #' @rdname cliques
 #' @param subset If not \code{NULL}, then it must be a vector of vertex ids,
-#' numeric or symbolic if the graph is named. The algorithm is run from these
-#' vertices only, so only a subset of all maximal cliques is returned. See the
-#' Eppstein paper for details. This argument makes it possible to easily
-#' parallelize the finding of maximal cliques.
+#'   numeric or symbolic if the graph is named. The algorithm is run from these
+#'   vertices only, so only a subset of all maximal cliques is returned. See the
+#'   Eppstein paper for details. This argument makes it possible to easily
+#'   parallelize the finding of maximal cliques.
 #' @param file If not \code{NULL}, then it must be a file name, i.e. a
-#' character scalar. The output of the algorithm is written to this file. (If
-#' it exists, then it will be overwritten.) Each clique will be a separate line
-#' in the file, given with the numeric ids of its vertices, separated by
-#' whitespace.
+#'   character scalar. The output of the algorithm is written to this file. (If
+#'   it exists, then it will be overwritten.) Each clique will be a separate line
+#'   in the file, given with the numeric ids of its vertices, separated by
+#'   whitespace.
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   if (!is_igraph(graph)) {
@@ -214,24 +214,24 @@ clique_num <- clique_num
 #' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
 #' count_max_weighted_cliques weighted_clique_num
 #' @param graph The input graph, directed graphs will be considered as
-#' undirected ones, multiple edges and loops are ignored.
+#'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
-#' \code{NULL} means no limit, ie. it is the same as 0.
+#'   \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
-#' \code{NULL} means no limit.
+#'   \code{NULL} means no limit.
 #' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
-#' vertex attribute, then this is used by default. If the graph does not have a
-#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
-#' vertex is assumed to have a weight of 1. Note that the current implementation
-#' of the weighted clique finder supports positive integer weights only.
+#'   vertex attribute, then this is used by default. If the graph does not have a
+#'   \code{weight} vertex attribute and this argument is \code{NULL}, then every
+#'   vertex is assumed to have a weight of 1. Note that the current implementation
+#'   of the weighted clique finder supports positive integer weights only.
 #' @param maximal Specifies whether to look for all weighted cliques (\code{FALSE})
-#' or only the maximal ones (\code{TRUE}).
+#'   or only the maximal ones (\code{TRUE}).
 #' @return \code{weighted_cliques} and \code{largest_weighted_cliques} return a
-#' list containing numeric vectors of vertex IDs. Each list element is a weighted
-#' clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   list containing numeric vectors of vertex IDs. Each list element is a weighted
+#'   clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
 #'
-#' \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
-#' scalar.
+#'   \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
+#'   scalar.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -280,17 +280,17 @@ weighted_clique_num <- weighted_clique_num
 #' maximal.independent.vertex.sets independence.number ivs_size ivs
 #' largest_ivs maximal_ivs
 #' @param graph The input graph, directed graphs are considered as undirected,
-#' loop edges and multiple edges are ignored.
+#'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
-#' vertex sets to find. \code{NULL} means no limit.
+#'   vertex sets to find. \code{NULL} means no limit.
 #' @param max Numeric constant, limit for the maximum size of the independent
-#' vertex sets to find. \code{NULL} means no limit.
+#'   vertex sets to find. \code{NULL} means no limit.
 #' @return \code{ivs},
-#' \code{largest_ivs} and
-#' \code{maximal_ivs} return a list containing numeric
-#' vertex ids, each list element is an independent vertex set.
+#'   \code{largest_ivs} and
+#'   \code{maximal_ivs} return a list containing numeric
+#'   vertex ids, each list element is an independent vertex set.
 #'
-#' \code{ivs_size} returns an integer constant.
+#'   \code{ivs_size} returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty
 #' Graph Library by Keith Briggs (\url{http://keithbriggs.info/}) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual

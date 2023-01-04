@@ -123,76 +123,76 @@
 #' asPhylo asPhylo.communities showtrace code.length
 #' as_phylo as_phylo.communities show_trace is_hierarchical
 #' @param communities,x,object A \code{communities} object, the result of an
-#' igraph community detection function.
+#'   igraph community detection function.
 #' @param graph An igraph graph object, corresponding to \code{communities}.
 #' @param y An igraph graph object, corresponding to the communities in
-#' \code{x}.
+#'   \code{x}.
 #' @param no Integer scalar, the desired number of communities. If too low or
-#' two high, then an error message is given. Exactly one of \code{no} and
-#' \code{steps} must be supplied.
+#'   two high, then an error message is given. Exactly one of \code{no} and
+#'   \code{steps} must be supplied.
 #' @param steps The number of merge operations to perform to produce the
-#' communities. Exactly one of \code{no} and \code{steps} must be supplied.
+#'   communities. Exactly one of \code{no} and \code{steps} must be supplied.
 #' @param col A vector of colors, in any format that is accepted by the regular
-#' R plotting methods. This vector gives the colors of the vertices explicitly.
+#'   R plotting methods. This vector gives the colors of the vertices explicitly.
 #' @param mark.groups A list of numeric vectors. The communities can be
-#' highlighted using colored polygons. The groups for which the polygons are
-#' drawn are given here. The default is to use the groups given by the
-#' communities. Supply \code{NULL} here if you do not want to highlight any
-#' groups.
+#'   highlighted using colored polygons. The groups for which the polygons are
+#'   drawn are given here. The default is to use the groups given by the
+#'   communities. Supply \code{NULL} here if you do not want to highlight any
+#'   groups.
 #' @param edge.color The colors of the edges. By default the edges within
-#' communities are colored green and other edges are red.
+#'   communities are colored green and other edges are red.
 #' @param hang Numeric scalar indicating how the height of leaves should be
-#' computed from the heights of their parents; see \code{\link{plot.hclust}}.
+#'   computed from the heights of their parents; see \code{\link{plot.hclust}}.
 #' @param use.modularity Logical scalar, whether to use the modularity values
-#' to define the height of the branches.
+#'   to define the height of the branches.
 #' @param \dots Additional arguments. \code{plot.communities} passes these to
-#' \code{\link{plot.igraph}}. The other functions silently ignore
-#' them.
+#'   \code{\link{plot.igraph}}. The other functions silently ignore
+#'   them.
 #' @param membership Numeric vector, one value for each vertex, the membership
-#' vector of the community structure. Might also be \code{NULL} if the
-#' community structure is given in another way, e.g. by a merge matrix.
+#'   vector of the community structure. Might also be \code{NULL} if the
+#'   community structure is given in another way, e.g. by a merge matrix.
 #' @param algorithm If not \code{NULL} (meaning an unknown algorithm), then a
-#' character scalar, the name of the algorithm that produced the community
-#' structure.
+#'   character scalar, the name of the algorithm that produced the community
+#'   structure.
 #' @param merges If not \code{NULL}, then the merge matrix of the hierarchical
-#' community structure. See \code{merges} below for more information on its
-#' format.
+#'   community structure. See \code{merges} below for more information on its
+#'   format.
 #' @param modularity Numeric scalar or vector, the modularity value of the
-#' community structure. It can also be \code{NULL}, if the modularity of the
-#' (best) split is not available.
+#'   community structure. It can also be \code{NULL}, if the modularity of the
+#'   (best) split is not available.
 #' @return \code{print} returns the \code{communities} object itself,
-#' invisibly.
+#'   invisibly.
 #'
-#' \code{length} returns an integer scalar.
+#'   \code{length} returns an integer scalar.
 #'
-#' \code{sizes} returns a numeric vector.
+#'   \code{sizes} returns a numeric vector.
 #'
-#' \code{membership} returns a numeric vector, one number for each vertex in
-#' the graph that was the input of the community detection.
+#'   \code{membership} returns a numeric vector, one number for each vertex in
+#'   the graph that was the input of the community detection.
 #'
-#' \code{modularity} returns a numeric scalar.
+#'   \code{modularity} returns a numeric scalar.
 #'
-#' \code{algorithm} returns a character scalar.
+#'   \code{algorithm} returns a character scalar.
 #'
-#' \code{crossing} returns a logical vector.
+#'   \code{crossing} returns a logical vector.
 #'
-#' \code{is_hierarchical} returns a logical scalar.
+#'   \code{is_hierarchical} returns a logical scalar.
 #'
-#' \code{merges} returns a two-column numeric matrix.
+#'   \code{merges} returns a two-column numeric matrix.
 #'
-#' \code{cut_at} returns a numeric vector, the membership vector of the
-#' vertices.
+#'   \code{cut_at} returns a numeric vector, the membership vector of the
+#'   vertices.
 #'
-#' \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
+#'   \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
 #'
-#' \code{show_trace} returns a character vector.
+#'   \code{show_trace} returns a character vector.
 #'
-#' \code{code_len} returns a numeric scalar for communities found with the
-#' InfoMAP method and \code{NULL} for other methods.
+#'   \code{code_len} returns a numeric scalar for communities found with the
+#'   InfoMAP method and \code{NULL} for other methods.
 #'
-#' \code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
+#'   \code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
 #'
-#' #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#'   #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso See \code{\link{plot_dendrogram}} for plotting community structure
 #' dendrograms.
 #'
@@ -400,18 +400,18 @@ modularity <- function(x, ...) {
 #' @aliases modularity
 #' @param x,graph The input graph.
 #' @param membership Numeric vector, one value for each vertex, the membership
-#' vector of the community structure.
+#'   vector of the community structure.
 #' @param weights If not \code{NULL} then a numeric vector giving edge weights.
 #' @param resolution The resolution parameter. Must be greater than or equal to
-#' 0. Set it to 1 to use the classical definition of modularity.
+#'   0. Set it to 1 to use the classical definition of modularity.
 #' @param directed Whether to use the directed or undirected version of
-#' modularity. Ignored for undirected graphs.
+#'   modularity. Ignored for undirected graphs.
 #' @param \dots Additional arguments, none currently.
 #' @return For \code{modularity} a numeric scalar, the modularity score of the
-#' given configuration.
+#'   given configuration.
 #'
-#' For \code{modularity_matrix} a numeric square matrix, its order is the number of
-#' vertices in the graph.
+#'   For \code{modularity_matrix} a numeric square matrix, its order is the number of
+#'   vertices in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{cluster_walktrap}},
 #' \code{\link{cluster_edge_betweenness}},
@@ -852,70 +852,70 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'
 #' @aliases spinglass.community
 #' @param graph The input graph, can be directed but the direction of the edges
-#' is neglected.
+#'   is neglected.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @param vertex This parameter can be used to calculate the community of a
-#' given vertex without calculating all communities. Note that if this argument
-#' is present then some other arguments are ignored.
+#'   given vertex without calculating all communities. Note that if this argument
+#'   is present then some other arguments are ignored.
 #' @param spins Integer constant, the number of spins to use. This is the upper
-#' limit for the number of communities. It is not a problem to supply a
-#' (reasonably) big number here, in which case some spin states will be
-#' unpopulated.
+#'   limit for the number of communities. It is not a problem to supply a
+#'   (reasonably) big number here, in which case some spin states will be
+#'   unpopulated.
 #' @param parupdate Logical constant, whether to update the spins of the
-#' vertices in parallel (synchronously) or not. This argument is ignored if the
-#' second form of the function is used (ie. the \sQuote{\code{vertex}} argument
-#' is present). It is also not implemented in the \dQuote{neg} implementation.
+#'   vertices in parallel (synchronously) or not. This argument is ignored if the
+#'   second form of the function is used (ie. the \sQuote{\code{vertex}} argument
+#'   is present). It is also not implemented in the \dQuote{neg} implementation.
 #' @param start.temp Real constant, the start temperature.  This argument is
-#' ignored if the second form of the function is used (ie. the
-#' \sQuote{\code{vertex}} argument is present).
+#'   ignored if the second form of the function is used (ie. the
+#'   \sQuote{\code{vertex}} argument is present).
 #' @param stop.temp Real constant, the stop temperature. The simulation
-#' terminates if the temperature lowers below this level.  This argument is
-#' ignored if the second form of the function is used (ie. the
-#' \sQuote{\code{vertex}} argument is present).
+#'   terminates if the temperature lowers below this level.  This argument is
+#'   ignored if the second form of the function is used (ie. the
+#'   \sQuote{\code{vertex}} argument is present).
 #' @param cool.fact Cooling factor for the simulated annealing.  This argument
-#' is ignored if the second form of the function is used (ie. the
-#' \sQuote{\code{vertex}} argument is present).
+#'   is ignored if the second form of the function is used (ie. the
+#'   \sQuote{\code{vertex}} argument is present).
 #' @param update.rule Character constant giving the \sQuote{null-model} of the
-#' simulation. Possible values: \dQuote{simple} and \dQuote{config}.
-#' \dQuote{simple} uses a random graph with the same number of edges as the
-#' baseline probability and \dQuote{config} uses a random graph with the same
-#' vertex degrees as the input graph.
+#'   simulation. Possible values: \dQuote{simple} and \dQuote{config}.
+#'   \dQuote{simple} uses a random graph with the same number of edges as the
+#'   baseline probability and \dQuote{config} uses a random graph with the same
+#'   vertex degrees as the input graph.
 #' @param gamma Real constant, the gamma argument of the algorithm. This
-#' specifies the balance between the importance of present and non-present
-#' edges in a community. Roughly, a comunity is a set of vertices having many
-#' edges inside the community and few edges outside the community. The default
-#' 1.0 value makes existing and non-existing links equally important. Smaller
-#' values make the existing links, greater values the missing links more
-#' important.
+#'   specifies the balance between the importance of present and non-present
+#'   edges in a community. Roughly, a comunity is a set of vertices having many
+#'   edges inside the community and few edges outside the community. The default
+#'   1.0 value makes existing and non-existing links equally important. Smaller
+#'   values make the existing links, greater values the missing links more
+#'   important.
 #' @param implementation Character scalar. Currently igraph contains two
-#' implementations for the Spin-glass community finding algorithm. The faster
-#' original implementation is the default. The other implementation, that takes
-#' into account negative weights, can be chosen by supplying \sQuote{neg} here.
+#'   implementations for the Spin-glass community finding algorithm. The faster
+#'   original implementation is the default. The other implementation, that takes
+#'   into account negative weights, can be chosen by supplying \sQuote{neg} here.
 #' @param gamma.minus Real constant, the gamma.minus parameter of the
-#' algorithm. This specifies the balance between the importance of present and
-#' non-present negative weighted edges in a community. Smaller values of
-#' gamma.minus, leads to communities with lesser negative intra-connectivity.
-#' If this argument is set to zero, the algorithm reduces to a graph coloring
-#' algorithm, using the number of spins as the number of colors. This argument
-#' is ignored if the \sQuote{orig} implementation is chosen.
+#'   algorithm. This specifies the balance between the importance of present and
+#'   non-present negative weighted edges in a community. Smaller values of
+#'   gamma.minus, leads to communities with lesser negative intra-connectivity.
+#'   If this argument is set to zero, the algorithm reduces to a graph coloring
+#'   algorithm, using the number of spins as the number of colors. This argument
+#'   is ignored if the \sQuote{orig} implementation is chosen.
 #' @return If the \code{vertex} argument is not given, ie. the first form is
-#' used then a \code{\link{cluster_spinglass}} returns a
-#' \code{\link{communities}} object.
+#'   used then a \code{\link{cluster_spinglass}} returns a
+#'   \code{\link{communities}} object.
 #'
-#' If the \code{vertex} argument is present, ie. the second form is used then a
-#' named list is returned with the following components:
-#' \item{community}{Numeric vector giving the ids of the vertices in the same
-#' community as \code{vertex}.} \item{cohesion}{The cohesion score of the
-#' result, see references.} \item{adhesion}{The adhesion score of the result,
-#' see references.} \item{inner.links}{The number of edges within the community
-#' of \code{vertex}.} \item{outer.links}{The number of edges between the
-#' community of \code{vertex} and the rest of the graph. }
+#'   If the \code{vertex} argument is present, ie. the second form is used then a
+#'   named list is returned with the following components:
+#'   \item{community}{Numeric vector giving the ids of the vertices in the same
+#'   community as \code{vertex}.} \item{cohesion}{The cohesion score of the
+#'   result, see references.} \item{adhesion}{The adhesion score of the result,
+#'   see references.} \item{inner.links}{The number of edges within the community
+#'   of \code{vertex}.} \item{outer.links}{The number of edges between the
+#'   community of \code{vertex} and the rest of the graph. }
 #' @author Jorg Reichardt for the original code and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph glue code.
 #'
@@ -1071,7 +1071,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   of the \code{objective_function}. Please see the details of this function
 #'   how to interpret the vertex weights.
 #' @return \code{cluster_leiden} returns a \code{\link{communities}}
-#' object, please see the \code{\link{communities}} manual page for details.
+#'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Vincent Traag
 #' @seealso See \code{\link{communities}} for extracting the membership,
 #' modularity scores, etc. from the results.
@@ -1197,7 +1197,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #' @param no.of.communities The number of communities to be found. Must be
 #'   greater than 0 and fewer than number of vertices in the graph.
 #' @return \code{cluster_fluid_communities} returns a \code{\link{communities}}
-#' object, please see the \code{\link{communities}} manual page for details.
+#'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Ferran Parés
 #' @seealso See \code{\link{communities}} for extracting the membership,
 #' modularity scores, etc. from the results.
@@ -1253,25 +1253,25 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'
 #' @aliases walktrap.community
 #' @param graph The input graph, edge directions are ignored in directed
-#' graphs.
+#'   graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. Larger edge
-#' weights increase the probability that an edge is selected by the random
-#' walker. In other words, larger edge weights correspond to stronger connections.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. Larger edge
+#'   weights increase the probability that an edge is selected by the random
+#'   walker. In other words, larger edge weights correspond to stronger connections.
 #' @param steps The length of the random walks to perform.
 #' @param merges Logical scalar, whether to include the merge matrix in the
-#' result.
+#'   result.
 #' @param modularity Logical scalar, whether to include the vector of the
-#' modularity scores in the result. If the \code{membership} argument is true,
-#' then it will always be calculated.
+#'   modularity scores in the result. If the \code{membership} argument is true,
+#'   then it will always be calculated.
 #' @param membership Logical scalar, whether to calculate the membership vector
-#' for the split corresponding to the highest modularity value.
+#'   for the split corresponding to the highest modularity value.
 #' @return \code{cluster_walktrap} returns a \code{\link{communities}}
-#' object, please see the \code{\link{communities}} manual page for details.
+#'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Pascal Pons (\url{http://psl.pons.free.fr/}) and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R and igraph interface
 #' @seealso See \code{\link{communities}} on getting the actual membership
@@ -1362,39 +1362,39 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' @aliases edge.betweenness.community cluster_edge_betweenness
 #' @param graph The graph to analyze.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. Edge weights
-#' are used to calculate weighted edge betweenness. This means that edges are
-#' interpreted as distances, not as connection strengths.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. Edge weights
+#'   are used to calculate weighted edge betweenness. This means that edges are
+#'   interpreted as distances, not as connection strengths.
 #' @param directed Logical constant, whether to calculate directed edge
-#' betweenness for directed graphs. It is ignored for undirected graphs.
+#'   betweenness for directed graphs. It is ignored for undirected graphs.
 #' @param edge.betweenness Logical constant, whether to return the edge
-#' betweenness of the edges at the time of their removal.
+#'   betweenness of the edges at the time of their removal.
 #' @param merges Logical constant, whether to return the merge matrix
-#' representing the hierarchical community structure of the network.  This
-#' argument is called \code{merges}, even if the community structure algorithm
-#' itself is divisive and not agglomerative: it builds the tree from top to
-#' bottom. There is one line for each merge (i.e. split) in matrix, the first
-#' line is the first merge (last split). The communities are identified by
-#' integer number starting from one. Community ids smaller than or equal to
-#' \eqn{N}, the number of vertices in the graph, belong to singleton
-#' communities, ie. individual vertices. Before the first merge we have \eqn{N}
-#' communities numbered from one to \eqn{N}. The first merge, the first line of
-#' the matrix creates community \eqn{N+1}, the second merge creates community
-#' \eqn{N+2}, etc.
+#'   representing the hierarchical community structure of the network.  This
+#'   argument is called \code{merges}, even if the community structure algorithm
+#'   itself is divisive and not agglomerative: it builds the tree from top to
+#'   bottom. There is one line for each merge (i.e. split) in matrix, the first
+#'   line is the first merge (last split). The communities are identified by
+#'   integer number starting from one. Community ids smaller than or equal to
+#'   \eqn{N}, the number of vertices in the graph, belong to singleton
+#'   communities, ie. individual vertices. Before the first merge we have \eqn{N}
+#'   communities numbered from one to \eqn{N}. The first merge, the first line of
+#'   the matrix creates community \eqn{N+1}, the second merge creates community
+#'   \eqn{N+2}, etc.
 #' @param bridges Logical constant, whether to return a list the edge removals
-#' which actually splitted a component of the graph.
+#'   which actually splitted a component of the graph.
 #' @param modularity Logical constant, whether to calculate the maximum
-#' modularity score, considering all possibly community structures along the
-#' edge-betweenness based edge removals.
+#'   modularity score, considering all possibly community structures along the
+#'   edge-betweenness based edge removals.
 #' @param membership Logical constant, whether to calculate the membership
-#' vector corresponding to the highest possible modularity score.
+#'   vector corresponding to the highest possible modularity score.
 #' @return \code{cluster_edge_betweenness} returns a
-#' \code{\link{communities}} object, please see the \code{\link{communities}}
-#' manual page for details.
+#'   \code{\link{communities}} object, please see the \code{\link{communities}}
+#'   manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{edge_betweenness}} for the definition and calculation
 #' of the edge betweenness, \code{\link{cluster_walktrap}},
@@ -1472,19 +1472,19 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #' @param graph The input graph
 #' @param merges Logical scalar, whether to return the merge matrix.
 #' @param modularity Logical scalar, whether to return a vector containing the
-#' modularity after each merge.
+#'   modularity after each merge.
 #' @param membership Logical scalar, whether to calculate the membership vector
-#' corresponding to the maximum modularity score, considering all possible
-#' community structures along the merges.
+#'   corresponding to the maximum modularity score, considering all possible
+#'   community structures along the merges.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @return \code{cluster_fast_greedy} returns a \code{\link{communities}}
-#' object, please see the \code{\link{communities}} manual page for details.
+#'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso \code{\link{communities}} for extracting the results.
@@ -1575,34 +1575,34 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'
 #' @aliases leading.eigenvector.community
 #' @param graph The input graph. Should be undirected as the method needs a
-#' symmetric matrix.
+#'   symmetric matrix.
 #' @param steps The number of steps to take, this is actually the number of
-#' tries to make a step. It is not a particularly useful parameter.
+#'   tries to make a step. It is not a particularly useful parameter.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @param start \code{NULL}, or a numeric membership vector, giving the start
-#' configuration of the algorithm.
+#'   configuration of the algorithm.
 #' @param options A named list to override some ARPACK options.
 #' @param callback If not \code{NULL}, then it must be callback function. This
-#' is called after each iteration, after calculating the leading eigenvector of
-#' the modularity matrix. See details below.
+#'   is called after each iteration, after calculating the leading eigenvector of
+#'   the modularity matrix. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
 #' @return \code{cluster_leading_eigen} returns a named list with the
-#' following members: \item{membership}{The membership vector at the end of the
-#' algorithm, when no more splits are possible.} \item{merges}{The merges
-#' matrix starting from the state described by the \code{membership} member.
-#' This is a two-column matrix and each line describes a merge of two
-#' communities, the first line is the first merge and it creates community
-#' \sQuote{\code{N}}, \code{N} is the number of initial communities in the
-#' graph, the second line creates community \code{N+1}, etc.  }
-#' \item{options}{Information about the underlying ARPACK computation, see
-#' \code{\link{arpack}} for details.  }
+#'   following members: \item{membership}{The membership vector at the end of the
+#'   algorithm, when no more splits are possible.} \item{merges}{The merges
+#'   matrix starting from the state described by the \code{membership} member.
+#'   This is a two-column matrix and each line describes a merge of two
+#'   communities, the first line is the first merge and it creates community
+#'   \sQuote{\code{N}}, \code{N} is the number of initial communities in the
+#'   graph, the second line creates community \code{N+1}, etc.  }
+#'   \item{options}{Information about the underlying ARPACK computation, see
+#'   \code{\link{arpack}} for details.  }
 #' @section Callback functions: The \code{callback} argument can be used to
 #' supply a function that is called after each eigenvector calculation. The
 #' following arguments are supplied to this function: \describe{
@@ -1704,22 +1704,22 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' @aliases label.propagation.community
 #' @param graph The input graph, should be undirected to make sense.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @param initial The initial state. If \code{NULL}, every vertex will have a
-#' different label at the beginning. Otherwise it must be a vector with an
-#' entry for each vertex. Non-negative values denote different labels, negative
-#' entries denote vertices without labels.
+#'   different label at the beginning. Otherwise it must be a vector with an
+#'   entry for each vertex. Non-negative values denote different labels, negative
+#'   entries denote vertices without labels.
 #' @param fixed Logical vector denoting which labels are fixed. Of course this
-#' makes sense only if you provided an initial state, otherwise this element
-#' will be ignored. Also note that vertices without labels cannot be fixed.
+#'   makes sense only if you provided an initial state, otherwise this element
+#'   will be ignored. Also note that vertices without labels cannot be fixed.
 #' @return \code{cluster_label_prop} returns a
-#' \code{\link{communities}} object, please see the \code{\link{communities}}
-#' manual page for details.
+#'   \code{\link{communities}} object, please see the \code{\link{communities}}
+#'   manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C implementation,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for this manual page.
 #' @seealso \code{\link{communities}} for extracting the actual results.
@@ -1795,19 +1795,19 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #' @aliases multilevel.community
 #' @param graph The input graph.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @param resolution Optional resolution parameter that allows the user to
-#' adjust the resolution parameter of the modularity function that the algorithm
-#' uses internally. Lower values typically yield fewer, larger clusters. The
-#' original definition of modularity is recovered when the resolution parameter
-#' is set to 1.
+#'   adjust the resolution parameter of the modularity function that the algorithm
+#'   uses internally. Lower values typically yield fewer, larger clusters. The
+#'   original definition of modularity is recovered when the resolution parameter
+#'   is set to 1.
 #' @return \code{cluster_louvain} returns a \code{\link{communities}}
-#' object, please see the \code{\link{communities}} manual page for details.
+#'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso See \code{\link{communities}} for extracting the membership,
 #' modularity scores, etc. from the results.
@@ -1903,16 +1903,16 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #'
 #' @aliases optimal.community
 #' @param graph The input graph. Edge directions are ignored for directed
-#' graphs.
+#'   graphs.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for community detection. A larger
-#' edge weight means a stronger connection for this function.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for community detection. A larger
+#'   edge weight means a stronger connection for this function.
 #' @return \code{cluster_optimal} returns a \code{\link{communities}} object,
-#' please see the \code{\link{communities}} manual page for details.
+#'   please see the \code{\link{communities}} manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{communities}} for the documentation of the result,
 #' \code{\link{modularity}}. See also \code{\link{cluster_fast_greedy}} for a
@@ -1962,22 +1962,22 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' @aliases infomap.community
 #' @param graph The input graph.
 #' @param e.weights If not \code{NULL}, then a numeric vector of edge weights.
-#' The length must match the number of edges in the graph.  By default the
-#' \sQuote{\code{weight}} edge attribute is used as weights. If it is not
-#' present, then all edges are considered to have the same weight.
-#' Larger edge weights correspond to stronger connections.
+#'   The length must match the number of edges in the graph.  By default the
+#'   \sQuote{\code{weight}} edge attribute is used as weights. If it is not
+#'   present, then all edges are considered to have the same weight.
+#'   Larger edge weights correspond to stronger connections.
 #' @param v.weights If not \code{NULL}, then a numeric vector of vertex
-#' weights. The length must match the number of vertices in the graph.  By
-#' default the \sQuote{\code{weight}} vertex attribute is used as weights. If
-#' it is not present, then all vertices are considered to have the same weight.
-#' A larger vertex weight means a larger probability that the random surfer
-#' jumps to that vertex.
+#'   weights. The length must match the number of vertices in the graph.  By
+#'   default the \sQuote{\code{weight}} vertex attribute is used as weights. If
+#'   it is not present, then all vertices are considered to have the same weight.
+#'   A larger vertex weight means a larger probability that the random surfer
+#'   jumps to that vertex.
 #' @param nb.trials The number of attempts to partition the network (can be any
-#' integer value equal or larger than 1).
+#'   integer value equal or larger than 1).
 #' @param modularity Logical scalar, whether to calculate the modularity score
-#' of the detected community structure.
+#'   of the detected community structure.
 #' @return \code{cluster_infomap} returns a \code{\link{communities}} object,
-#' please see the \code{\link{communities}} manual page for details.
+#'   please see the \code{\link{communities}} manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
 #' be more igraph-like by Emmanuel Navarro.  The R interface and
 #' some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
@@ -2131,15 +2131,15 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' } The extra arguments are simply passed to \code{as.dendrogram}.
 #'
 #' @param x An object containing the community structure of a graph. See
-#' \code{\link{communities}} for details.
+#'   \code{\link{communities}} for details.
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
-#' function.
+#'   function.
 #' @param use.modularity Logical scalar, whether to use the modularity values
-#' to define the height of the branches.
+#'   to define the height of the branches.
 #' @param palette The color palette to use for colored plots.
 #' @return Returns whatever the return value was from the plotting function,
-#' \code{plot.phylo}, \code{plot.dendrogram} or \code{plot.hclust}.
+#'   \code{plot.phylo}, \code{plot.dendrogram} or \code{plot.hclust}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method plot_dendrogram communities
 #' @export
@@ -2247,19 +2247,19 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #'
 #' @aliases compare.communities compare.membership compare
 #' @param comm1 A \code{\link{communities}} object containing a community
-#' structure; or a numeric vector, the membership vector of the first community
-#' structure. The membership vector should contain the community id of each
-#' vertex, the numbering of the communities starts with one.
+#'   structure; or a numeric vector, the membership vector of the first community
+#'   structure. The membership vector should contain the community id of each
+#'   vertex, the numbering of the communities starts with one.
 #' @param comm2 A \code{\link{communities}} object containing a community
-#' structure; or a numeric vector, the membership vector of the second
-#' community structure, in the same format as for the previous argument.
+#'   structure; or a numeric vector, the membership vector of the second
+#'   community structure, in the same format as for the previous argument.
 #' @param method Character scalar, the comparison method to use. Possible
-#' values: \sQuote{vi} is the variation of information (VI) metric of Meila
-#' (2003), \sQuote{nmi} is the normalized mutual information measure proposed
-#' by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
-#' can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
-#' \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
-#' (1985).
+#'   values: \sQuote{vi} is the variation of information (VI) metric of Meila
+#'   (2003), \sQuote{nmi} is the normalized mutual information measure proposed
+#'   by Danon et al. (2005), \sQuote{split.join} is the split-join distance of
+#'   can Dongen (2000), \sQuote{rand} is the Rand index of Rand (1971),
+#'   \sQuote{adjusted.rand} is the adjusted Rand index by Hubert and Arabie
+#'   (1985).
 #' @return A real number.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso See \code{\link{cluster_walktrap}},
@@ -2418,10 +2418,10 @@ split_join_distance <- function(comm1, comm2) {
 #'
 #' @aliases groups groups.default groups.communities
 #' @param x Some object that represents a grouping of the vertices. See details
-#' below.
+#'   below.
 #' @return A named list of numeric or character vectors. The names are just
-#' numbers that refer to the groups. The vectors themselves are numeric or
-#' symbolic vertex ids.
+#'   numbers that refer to the groups. The vectors themselves are numeric or
+#'   symbolic vertex ids.
 #' @seealso \code{\link{components}} and the various community finding
 #' functions.
 #' @examples
@@ -2479,10 +2479,10 @@ communities <- groups.communities
 #' @aliases contract.vertices contract
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
-#' correspond to the vertices, and for each element the id in the new graph is
-#' given.
+#'   correspond to the vertices, and for each element the id in the new graph is
+#'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#' the new graph. Please see \code{\link{attribute.combination}} for details.
+#'   the new graph. Please see \code{\link{attribute.combination}} for details.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs

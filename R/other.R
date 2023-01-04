@@ -34,7 +34,7 @@
 #' @aliases running.mean
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
-#' ie. smaller than the length of \code{v}.
+#'   ie. smaller than the length of \code{v}.
 #' @return A numeric vector of length \code{length(v)-binwidth+1}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -107,7 +107,7 @@ sample_seq <- function(low, high, length) {
 #' @param graph the graph
 #' @param required whether the graph has to be bipartite
 #' @return A logical vector representing the resolved vertex type for each
-#' vertex in the graph
+#'   vertex in the graph
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @keywords internal
 #'
@@ -178,8 +178,8 @@ srand <- function(seed) {
 #' @aliases convex.hull convex_hull
 #' @param data The data points, a numeric matrix with two columns.
 #' @return A named list with components: \item{resverts}{The indices of the
-#' input vertices that constritute the convex hull.} \item{rescoords}{The
-#' coordinates of the corners of the convex hull.}
+#'   input vertices that constritute the convex hull.} \item{rescoords}{The
+#'   coordinates of the corners of the convex hull.}
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
 #' Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and

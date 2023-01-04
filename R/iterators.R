@@ -112,7 +112,7 @@ add_vses_graph_ref <- function(vses, graph) {
 #' @param x A graph or a vertex sequence or an edge sequence.
 #' @param ... Not used currently.
 #' @return The id of the graph, a character scalar. For
-#' vertex and edge sequences the id of the graph they were created from.
+#'   vertex and edge sequences the id of the graph they were created from.
 #'
 #' @export
 #' @examples
@@ -710,7 +710,7 @@ set_single_index <- function(x, value = TRUE) {
 #' @param x An edge sequence.
 #' @param ... Additional arguments, passed to \code{[}.
 #' @return Another edge sequence, with metadata printing turned on.
-#' See details below.
+#'   See details below.
 #'
 #' @method [[ igraph.es
 #' @name igraph-es-indexing2
@@ -1609,7 +1609,7 @@ c.igraph.es <- function(..., recursive = FALSE) {
 #'
 #' @param ... The vertex sequences to take the union of.
 #' @return A vertex sequence that contains all vertices in the given
-#' sequences, exactly once.
+#'   sequences, exactly once.
 #'
 #' @method union igraph.vs
 #' @family vertex and edge sequence operations
@@ -1632,7 +1632,7 @@ union.igraph.vs <- function(...) {
 #'
 #' @param ... The edge sequences to take the union of.
 #' @return An edge sequence that contains all edges in the given
-#' sequences, exactly once.
+#'   sequences, exactly once.
 #'
 #' @method union igraph.es
 #' @family vertex and edge sequence operations
@@ -1652,7 +1652,7 @@ union.igraph.es <- union.igraph.vs
 #'
 #' @param ... The vertex sequences to take the intersection of.
 #' @return A vertex sequence that contains vertices that appear in all
-#' given sequences, each vertex exactly once.
+#'   given sequences, each vertex exactly once.
 #'
 #' @method intersection igraph.vs
 #' @family vertex and edge sequence operations
@@ -1677,7 +1677,7 @@ intersection.igraph.vs <- function(...) {
 #'
 #' @param ... The edge sequences to take the intersection of.
 #' @return An edge sequence that contains edges that appear in all
-#' given sequences, each edge exactly once.
+#'   given sequences, each edge exactly once.
 #'
 #' @method intersection igraph.es
 #' @family vertex and edge sequence operations
@@ -1699,7 +1699,7 @@ intersection.igraph.es <- intersection.igraph.vs
 #' @param small The \sQuote{small} vertex sequence.
 #' @param ... Ignored, included for S3 signature compatibility.
 #' @return A vertex sequence that contains only vertices that are part of
-#' \code{big}, but not part of \code{small}.
+#'   \code{big}, but not part of \code{small}.
 #'
 #' @method difference igraph.vs
 #' @family vertex and edge sequence operations
@@ -1727,7 +1727,7 @@ difference.igraph.vs <- function(big, small, ...) {
 #' @param small The \sQuote{small} edge sequence.
 #' @param ... Ignored, included for S3 signature compatibility.
 #' @return An edge sequence that contains only edges that are part of
-#' \code{big}, but not part of \code{small}.
+#'   \code{big}, but not part of \code{small}.
 #'
 #' @method difference igraph.es
 #' @family vertex and edge sequence operations

@@ -35,7 +35,7 @@
 #'
 #' @aliases igraphdemo
 #' @param which If not given, then the names of the available demos are listed.
-#' Otherwise it should be either a filename or the name of an igraph demo.
+#'   Otherwise it should be either a filename or the name of an igraph demo.
 #' @return Returns \code{NULL}, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{demo}}

@@ -18,26 +18,26 @@
 #' @aliases graphlets graphlets.project graphlet_proj graphlet_basis
 #' graphlets.candidate.basis
 #' @param graph The input graph, edge directions are ignored. Only simple graph
-#' (i.e. graphs without self-loops and multiple edges) are supported.
+#'   (i.e. graphs without self-loops and multiple edges) are supported.
 #' @param weights Edge weights. If the graph has a \code{weight} edge attribute
-#' and this argument is \code{NULL} (the default), then the \code{weight} edge
-#' attribute is used.
+#'   and this argument is \code{NULL} (the default), then the \code{weight} edge
+#'   attribute is used.
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param cliques A list of vertex ids, the graphlet basis to use for the
-#' projection.
+#'   projection.
 #' @param Mu Starting weights for the projection.
 #' @return \code{graphlets} returns a list with two members: \item{cliques}{A
-#' list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#' vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
-#' basis.}
+#'   list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
+#'   vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
+#'   basis.}
 #'
-#' \code{graphlet_basis} returns a list of two elements: \item{cliques}{A list
-#' of subgraphs, the candidate graphlet basis. Each subgraph is give by a
-#' vector of vertex ids.} \item{thresholds}{The weight thresholds used for
-#' finding the subgraphs.}
+#'   \code{graphlet_basis} returns a list of two elements: \item{cliques}{A list
+#'   of subgraphs, the candidate graphlet basis. Each subgraph is give by a
+#'   vector of vertex ids.} \item{thresholds}{The weight thresholds used for
+#'   finding the subgraphs.}
 #'
-#' \code{graphlet_proj} return a numeric vector, the weights of the graphlet
-#' basis subgraphs.
+#'   \code{graphlet_proj} return a numeric vector, the weights of the graphlet
+#'   basis subgraphs.
 #' @examples
 #'
 #' ## Create an example graph first

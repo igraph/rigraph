@@ -47,13 +47,13 @@
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
-#' \code{NULL} (the default) then the \code{capacity} edge attribute is used.
+#'   \code{NULL} (the default) then the \code{capacity} edge attribute is used.
 #' @param value.only Logical scalar, if \code{TRUE} only the minimum cut value
-#' is returned, if \code{FALSE} the edges in the cut and a the two (or more)
-#' partitions are also returned.
+#'   is returned, if \code{FALSE} the edges in the cut and a the two (or more)
+#'   partitions are also returned.
 #' @return For \code{min_cut} a nuieric constant, the value of the minimum
-#' cut, except if \code{value.only = FALSE}. In this case a named list with
-#' components:
+#'   cut, except if \code{value.only = FALSE}. In this case a named list with
+#'   components:
 #'   \item{value}{Numeric scalar, the cut value.}
 #'   \item{cut}{Numeric vector, the edges in the cut.}
 #'   \item{partition1}{The vertices in the first partition after the cut
@@ -185,16 +185,16 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #'   vertex_disjoint_paths graph.cohesion
 #' @param graph,x The input graph.
 #' @param source The id of the source vertex, for \code{vertex_connectivity} it
-#' can be \code{NULL}, see details below.
+#'   can be \code{NULL}, see details below.
 #' @param target The id of the target vertex, for \code{vertex_connectivity} it
-#' can be \code{NULL}, see details below.
+#'   can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
-#' and also the degree of the vertices. If the graph is not (strongly)
-#' connected then the connectivity is obviously zero. Otherwise if the minimum
-#' degree is one then the vertex connectivity is also one. It is a good idea to
-#' perform these checks, as they can be done quickly compared to the
-#' connectivity calculation itself.  They were suggested by Peter McMahan,
-#' thanks Peter.
+#'   and also the degree of the vertices. If the graph is not (strongly)
+#'   connected then the connectivity is obviously zero. Otherwise if the minimum
+#'   degree is one then the vertex connectivity is also one. It is a good idea to
+#'   perform these checks, as they can be done quickly compared to the
+#'   connectivity calculation itself.  They were suggested by Peter McMahan,
+#'   thanks Peter.
 #' @param ... Ignored.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -280,16 +280,16 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #'   edge_connectivity edge.disjoint.paths
 #' @param graph The input graph.
 #' @param source The id of the source vertex, for \code{edge_connectivity} it
-#' can be \code{NULL}, see details below.
+#'   can be \code{NULL}, see details below.
 #' @param target The id of the target vertex, for \code{edge_connectivity} it
-#' can be \code{NULL}, see details below.
+#'   can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
-#' and also the degree of the vertices. If the graph is not (strongly)
-#' connected then the connectivity is obviously zero. Otherwise if the minimum
-#' degree is one then the edge connectivity is also one. It is a good idea to
-#' perform these checks, as they can be done quickly compared to the
-#' connectivity calculation itself.  They were suggested by Peter McMahan,
-#' thanks Peter.
+#'   and also the degree of the vertices. If the graph is not (strongly)
+#'   connected then the connectivity is obviously zero. Otherwise if the minimum
+#'   degree is one then the edge connectivity is also one. It is a good idea to
+#'   perform these checks, as they can be done quickly compared to the
+#'   connectivity calculation itself.  They were suggested by Peter McMahan,
+#'   thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{max_flow}}, \code{\link{vertex_connectivity}},
@@ -413,12 +413,12 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' @param source The source vertex.
 #' @param target The target vertex.
 #' @return A list with entries: \item{cuts}{A list of numeric vectors
-#' containing edge ids. Each vector is an \eqn{(s,t)}-cut.}
-#' \item{partition1s}{A list of numeric vectors containing vertex ids, they
-#' correspond to the edge cuts. Each vertex set is a generator of the
-#' corresponding cut, i.e. in the graph \eqn{G=(V,E)}, the vertex set \eqn{X}
-#' and its complementer \eqn{V-X}, generates the cut that contains exactly the
-#' edges that go from \eqn{X} to \eqn{V-X}.}
+#'   containing edge ids. Each vector is an \eqn{(s,t)}-cut.}
+#'   \item{partition1s}{A list of numeric vectors containing vertex ids, they
+#'   correspond to the edge cuts. Each vertex set is a generator of the
+#'   corresponding cut, i.e. in the graph \eqn{G=(V,E)}, the vertex set \eqn{X}
+#'   and its complementer \eqn{V-X}, generates the cut that contains exactly the
+#'   edges that go from \eqn{X} to \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{st_min_cuts}} to list all minimum cuts.
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
@@ -461,18 +461,18 @@ st_cuts <- st_cuts
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex.
 #' @param capacity Numeric vector giving the edge capacities. If this is
-#' \code{NULL} and the graph has a \code{weight} edge attribute, then this
-#' attribute defines the edge capacities. For forcing unit edge capacities,
-#' even for graphs that have a \code{weight} edge attribute, supply \code{NA}
-#' here.
+#'   \code{NULL} and the graph has a \code{weight} edge attribute, then this
+#'   attribute defines the edge capacities. For forcing unit edge capacities,
+#'   even for graphs that have a \code{weight} edge attribute, supply \code{NA}
+#'   here.
 #' @return A list with entries: \item{value}{Numeric scalar, the size of the
-#' minimum cut(s).} \item{cuts}{A list of numeric vectors containing edge ids.
-#' Each vector is a minimum \eqn{(s,t)}-cut.} \item{partition1s}{A list of
-#' numeric vectors containing vertex ids, they correspond to the edge cuts.
-#' Each vertex set is a generator of the corresponding cut, i.e. in the graph
-#' \eqn{G=(V,E)}, the vertex set \eqn{X} and its complementer \eqn{V-X},
-#' generates the cut that contains exactly the edges that go from \eqn{X} to
-#' \eqn{V-X}.}
+#'   minimum cut(s).} \item{cuts}{A list of numeric vectors containing edge ids.
+#'   Each vector is a minimum \eqn{(s,t)}-cut.} \item{partition1s}{A list of
+#'   numeric vectors containing vertex ids, they correspond to the edge cuts.
+#'   Each vertex set is a generator of the corresponding cut, i.e. in the graph
+#'   \eqn{G=(V,E)}, the vertex set \eqn{X} and its complementer \eqn{V-X},
+#'   generates the cut that contains exactly the edges that go from \eqn{X} to
+#'   \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{st_cuts}}, \code{\link{min_separators}}
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
@@ -511,20 +511,20 @@ st_min_cuts <- st_min_cuts
 #'
 #' @aliases dominator.tree dominator_tree
 #' @param graph A directed graph. If it is not a flowgraph, and it contains
-#' some vertices not reachable from the root vertex, then these vertices will
-#' be collected and returned as part of the result.
+#'   some vertices not reachable from the root vertex, then these vertices will
+#'   be collected and returned as part of the result.
 #' @param root The id of the root (or source) vertex, this will be the root of
-#' the tree.
+#'   the tree.
 #' @param mode Constant, must be \sQuote{\code{in}} or \sQuote{\code{out}}. If
-#' it is \sQuote{\code{in}}, then all directions are considered as opposite to
-#' the original one in the input graph.
+#'   it is \sQuote{\code{in}}, then all directions are considered as opposite to
+#'   the original one in the input graph.
 #' @return A list with components: \item{dom}{ A numeric vector giving the
-#' immediate dominators for each vertex. For vertices that are unreachable from
-#' the root, it contains \code{NaN}. For the root vertex itself it contains
-#' minus one.  } \item{domtree}{ A graph object, the dominator tree. Its vertex
-#' ids are the as the vertex ids of the input graph. Isolate vertices are the
-#' ones that are unreachable from the root.  } \item{leftout}{ A numeric vector
-#' containing the vertex ids that are unreachable from the root.  }
+#'   immediate dominators for each vertex. For vertices that are unreachable from
+#'   the root, it contains \code{NaN}. For the root vertex itself it contains
+#'   minus one.  } \item{domtree}{ A graph object, the dominator tree. Its vertex
+#'   ids are the as the vertex ids of the input graph. Isolate vertices are the
+#'   ones that are unreachable from the root.  } \item{leftout}{ A numeric vector
+#'   containing the vertex ids that are unreachable from the root.  }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Thomas Lengauer, Robert Endre Tarjan: A fast algorithm for
 #' finding dominators in a flowgraph, \emph{ACM Transactions on Programming
@@ -587,10 +587,10 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'
 #' @aliases minimal.st.separators min_st_separators
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored.
+#'   ignored.
 #' @return A list of numeric vectors. Each vector contains a vertex set
-#' (defined by vertex ids), each vector is an (s,t) separator of the input
-#' graph, for some \eqn{s} and \eqn{t}.
+#'   (defined by vertex ids), each vector is an (s,t) separator of the input
+#'   graph, for some \eqn{s} and \eqn{t}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Anne Berry, Jean-Paul Bordat and Olivier Cogis: Generating All
 #' the Minimal Separators of a Graph, In: Peter Widmayer, Gabriele Neyer and
@@ -627,8 +627,8 @@ min_st_separators <- min_st_separators
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex (sometimes also called sink).
 #' @param capacity Vector giving the capacity of the edges. If this is
-#' \code{NULL} (the default) then the \code{capacity} edge attribute is used.
-#' Note that the \code{weight} edge attribute is not used by this function.
+#'   \code{NULL} (the default) then the \code{capacity} edge attribute is used.
+#'   Note that the \code{weight} edge attribute is not used by this function.
 #' @return A named list with components:
 #'   \item{value}{A numeric scalar, the value of the maximum flow.}
 #'   \item{flow}{A numeric vector, the flow itself, one entry for each
@@ -706,11 +706,11 @@ is_separator <- is_separator
 #'
 #' @aliases is.minimal.separator
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored.
+#'   ignored.
 #' @param candidate A numeric vector giving the vertex ids of the candidate
-#' separator.
+#'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
-#' vertex separator or not.
+#'   vertex separator or not.
 #' @seealso \code{\link{min_separators}} lists all vertex separator of minimum
 #' size.
 #' @examples
@@ -760,9 +760,9 @@ is_min_separator <- is_min_separator
 #'
 #' @aliases minimum.size.separators
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored.
+#'   ignored.
 #' @return A list of numeric vectors. Each numeric vector is a vertex
-#' separator.
+#'   separator.
 #' @seealso \code{\link{is.separator}}
 #' @references Arkady Kanevsky: Finding all minimum-size separating vertex sets
 #' in a graph. \emph{Networks} 23 533--541, 1993.

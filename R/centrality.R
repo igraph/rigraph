@@ -21,9 +21,9 @@
 
 #' @rdname betweenness
 #' @param vids The vertices for which the vertex betweenness estimation will be
-#' calculated.
+#'   calculated.
 #' @param cutoff The maximum path length to consider when calculating the
-#' betweenness. If zero or negative then there is no such limit.
+#'   betweenness. If zero or negative then there is no such limit.
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL, nobigint = TRUE) {
   if (!missing(nobigint)) {
@@ -76,25 +76,25 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
-#' determining the shortest paths.
+#'   determining the shortest paths.
 #' @param weights Optional positive weight vector for calculating weighted
-#' betweenness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default. Weights are used to calculate weighted shortest paths,
-#' so they are interpreted as distances.
+#'   betweenness. If the graph has a \code{weight} edge attribute, then this is
+#'   used by default. Weights are used to calculate weighted shortest paths,
+#'   so they are interpreted as distances.
 #' @param nobigint Logical scalar, whether to use big integers during the
-#' calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.
+#'   calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.
 #' @param normalized Logical scalar, whether to normalize the betweenness
-#' scores. If \code{TRUE}, then the results are normalized by the number of ordered
-#' or unordered vertex pairs in directed and undirected graphs, respectively.
-#' In an undirected graph,
-#' \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
-#' \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
-#' is the number of vertices in the graph.
+#'   scores. If \code{TRUE}, then the results are normalized by the number of ordered
+#'   or unordered vertex pairs in directed and undirected graphs, respectively.
+#'   In an undirected graph,
+#'   \deqn{B^n=\frac{2B}{(n-1)(n-2)},}{Bnorm=2*B/((n-1)*(n-2)),} where
+#'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
+#'   is the number of vertices in the graph.
 #' @return A numeric vector with the betweenness score for each vertex in
-#' \code{v} for \code{betweenness}.
+#'   \code{v} for \code{betweenness}.
 #'
-#' A numeric vector with the edge betweenness score for each edge in \code{e}
-#' for \code{edge_betweenness}.
+#'   A numeric vector with the edge betweenness score for each edge in \code{e}
+#'   for \code{edge_betweenness}.
 #'
 #' @note \code{edge_betweenness} might give false values for graphs with
 #' multiple edges.
@@ -222,22 +222,22 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
-#' measuring the distance in directed graphs. \dQuote{in} measures the paths
-#' \emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex,
-#' \emph{all} uses undirected paths. This argument is ignored for undirected
-#' graphs.
+#'   measuring the distance in directed graphs. \dQuote{in} measures the paths
+#'   \emph{to} a vertex, \dQuote{out} measures paths \emph{from} a vertex,
+#'   \emph{all} uses undirected paths. This argument is ignored for undirected
+#'   graphs.
 #' @param normalized Logical scalar, whether to calculate the normalized
-#' closeness, i.e. the inverse average distance to all reachable vertices.
-#' The non-normalized closeness is the inverse of the sum of distances to
-#' all reachable vertices.
+#'   closeness, i.e. the inverse average distance to all reachable vertices.
+#'   The non-normalized closeness is the inverse of the sum of distances to
+#'   all reachable vertices.
 #' @param weights Optional positive weight vector for calculating weighted
-#' closeness. If the graph has a \code{weight} edge attribute, then this is
-#' used by default. Weights are used for calculating weighted shortest
-#' paths, so they are interpreted as distances.
+#'   closeness. If the graph has a \code{weight} edge attribute, then this is
+#'   used by default. Weights are used for calculating weighted shortest
+#'   paths, so they are interpreted as distances.
 #' @param cutoff The maximum path length to consider when calculating the
-#' closeness. If zero or negative then there is no such limit.
+#'   closeness. If zero or negative then there is no such limit.
 #' @return Numeric vector with the closeness values of all the vertices in
-#' \code{v}.
+#'   \code{v}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{betweenness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
@@ -414,28 +414,28 @@ arpack_defaults <- list(
 #' @aliases arpack arpack-options igraph.arpack.default arpack.unpack.complex
 #' arpack_defaults
 #' @param func The function to perform the matrix-vector multiplication. ARPACK
-#' requires to perform these by the user. The function gets the vector \eqn{x}
-#' as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
-#' \dQuote{input matrix}. (The input matrix is never given explicitly.) The
-#' second argument is \code{extra}.
+#'   requires to perform these by the user. The function gets the vector \eqn{x}
+#'   as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
+#'   \dQuote{input matrix}. (The input matrix is never given explicitly.) The
+#'   second argument is \code{extra}.
 #' @param extra Extra argument to supply to \code{func}.
 #' @param sym Logical scalar, whether the input matrix is symmetric. Always
-#' supply \code{TRUE} here if it is, since it can speed up the computation.
+#'   supply \code{TRUE} here if it is, since it can speed up the computation.
 #' @param options Options to ARPACK, a named list to overwrite some of the
-#' default option values. See details below.
+#'   default option values. See details below.
 #' @param env The environment in which \code{func} will be evaluated.
 #' @param complex Whether to convert the eigenvectors returned by ARPACK into R
-#' complex vectors. By default this is not done for symmetric problems (these
-#' only have real eigenvectors/values), but only non-symmetric ones. If you
-#' have a non-symmetric problem, but you're sure that the results will be real,
-#' then supply \code{FALSE} here.
+#'   complex vectors. By default this is not done for symmetric problems (these
+#'   only have real eigenvectors/values), but only non-symmetric ones. If you
+#'   have a non-symmetric problem, but you're sure that the results will be real,
+#'   then supply \code{FALSE} here.
 #' @return A named list with the following members: \item{values}{Numeric
-#' vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
-#' eigenvectors as columns. If \code{complex=TRUE} (the default for
-#' non-symmetric problems), then the matrix is complex.} \item{options}{A named
-#' list with the supplied \code{options} and some information about the
-#' performed calculation, including an ARPACK exit code. See the details above.
-#' }
+#'   vector, the desired eigenvalues.} \item{vectors}{Numeric matrix, the desired
+#'   eigenvectors as columns. If \code{complex=TRUE} (the default for
+#'   non-symmetric problems), then the matrix is complex.} \item{options}{A named
+#'   list with the supplied \code{options} and some information about the
+#'   performed calculation, including an ARPACK exit code. See the details above.
+#'   }
 #' @author Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
 #' @seealso \code{\link{eigen_centrality}}, \code{\link{page_rank}},
@@ -578,10 +578,10 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #'
 #' @aliases subgraph.centrality
 #' @param graph The input graph, it should be undirected, but the
-#' implementation does not check this currently.
+#'   implementation does not check this currently.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
-#' matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
-#' loops edges from the graph before the calculation.
+#'   matrix in the analysis. Giving \code{FALSE} here effectively eliminates the
+#'   loops edges from the graph before the calculation.
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} based on the Matlab
 #' code by Ernesto Estrada
@@ -638,18 +638,18 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @aliases graph.eigen spectrum igraph.eigen.default
 #' @param graph The input graph, can be directed or undirected.
 #' @param algorithm The algorithm to use. Currently only \code{arpack} is
-#' implemented, which uses the ARPACK solver. See also \code{\link{arpack}}.
+#'   implemented, which uses the ARPACK solver. See also \code{\link{arpack}}.
 #' @param which A list to specify which eigenvalues and eigenvectors to
-#' calculate. By default the leading (i.e. largest magnitude) eigenvalue and
-#' the corresponding eigenvector is calculated.
+#'   calculate. By default the leading (i.e. largest magnitude) eigenvalue and
+#'   the corresponding eigenvector is calculated.
 #' @param options Options for the ARPACK solver. See
-#' \code{\link{arpack_defaults}}.
+#'   \code{\link{arpack_defaults}}.
 #' @return Depends on the algorithm used.
 #'
-#' For \code{arpack} a list with three entries is returned: \item{options}{See
-#' the return value for \code{arpack} for a complete description.}
-#' \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
-#' matrix, with the eigenvectors as columns.}
+#'   For \code{arpack} a list with three entries is returned: \item{options}{See
+#'   the return value for \code{arpack} for a complete description.}
+#'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
+#'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_adj}} to create a (sparse) adjacency matrix.
 #' @keywords graphs
@@ -726,28 +726,28 @@ eigen_defaults <- list(
 #' @aliases evcent eigen_centrality
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
-#' in directed graphs. It is ignored for undirected graphs.
+#'   in directed graphs. It is ignored for undirected graphs.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
-#' score of one. If no scaling is used then the result vector has unit length
-#' in the Euclidean norm.
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
 #' @param weights A numerical vector or \code{NULL}. This argument can be used
-#' to give edge weights for calculating the weighted eigenvector centrality of
-#' vertices. If this is \code{NULL} and the graph has a \code{weight} edge
-#' attribute then that is used. If \code{weights} is a numerical vector then it
-#' used, even if the graph has a \code{weight} edge attribute. If this is
-#' \code{NA}, then no edge weights are used (even if the graph has a
-#' \code{weight} edge attribute. Note that if there are negative edge weights
-#' and the direction of the edges is considered, then the eigenvector might be
-#' complex. In this case only the real part is reported.
-#' This function interprets weights as connection strength. Higher
-#' weights spread the centrality better.
+#'   to give edge weights for calculating the weighted eigenvector centrality of
+#'   vertices. If this is \code{NULL} and the graph has a \code{weight} edge
+#'   attribute then that is used. If \code{weights} is a numerical vector then it
+#'   used, even if the graph has a \code{weight} edge attribute. If this is
+#'   \code{NA}, then no edge weights are used (even if the graph has a
+#'   \code{weight} edge attribute. Note that if there are negative edge weights
+#'   and the direction of the edges is considered, then the eigenvector might be
+#'   complex. In this case only the real part is reported.
+#'   This function interprets weights as connection strength. Higher
+#'   weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
-#' \code{\link{arpack}} for details.
+#'   \code{\link{arpack}} for details.
 #' @return A named list with components: \item{vector}{A vector containing the
-#' centrality scores.} \item{value}{The eigenvalue corresponding to the
-#' calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
-#' list, information about the underlying ARPACK computation. See
-#' \code{\link{arpack}} for the details.}
+#'   centrality scores.} \item{value}{The eigenvalue corresponding to the
+#'   calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
+#'   list, information about the underlying ARPACK computation. See
+#'   \code{\link{arpack}} for the details.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} and Carter T. Butts
 #' (\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}) for the
 #' manual page.
@@ -773,13 +773,13 @@ eigen_centrality <- eigen_centrality
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
-#' in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
-#' argument is ignored.
+#'   in-degree or \dQuote{all} for the sum of the two. For undirected graphs this
+#'   argument is ignored.
 #' @param loops Logical; whether the loop edges are also counted.
 #' @param weights Weight vector. If the graph has a \code{weight} edge
-#' attribute, then this is used by default. If the graph does not have a
-#' \code{weight} edge attribute and this argument is \code{NULL}, then a
-#' warning is given and \code{\link{degree}} is called.
+#'   attribute, then this is used by default. If the graph does not have a
+#'   \code{weight} edge attribute and this argument is \code{NULL}, then a
+#'   warning is given and \code{\link{degree}} is called.
 #' @return A numeric vector giving the strength of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{degree}} for the unweighted version.
@@ -822,8 +822,8 @@ strength <- strength
 #' @aliases graph.diversity diversity
 #' @param graph The input graph. Edge directions are ignored.
 #' @param weights \code{NULL}, or the vector of edge weights to use for the
-#' computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
-#' that this measure is not defined for unweighted graphs.
+#'   computation. If \code{NULL}, then the \sQuote{weight} attibute is used. Note
+#'   that this measure is not defined for unweighted graphs.
 #' @param vids The vertex ids for which to calculate the measure.
 #' @return A numeric vector, its length is the number of vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -858,16 +858,16 @@ diversity <- diversity
 #' @aliases hub.score
 #' @param graph The input graph.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
-#' score of one. If no scaling is used then the result vector has unit length
-#' in the Euclidean norm.
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
-#' scores. If the graph has a \code{weight} edge attribute, then this is used
-#' by default.
-#' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weight is more likely to be
-#' selected by the surfer.
+#'   scores. If the graph has a \code{weight} edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#' \code{\link{arpack}} for details.
+#'   \code{\link{arpack}} for details.
 #' @return A named list with members:
 #'   \item{vector}{The authority/hub scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
@@ -907,16 +907,16 @@ hub_score <- hub_score
 #' @aliases authority.score
 #' @param graph The input graph.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
-#' score of one. If no scaling is used then the result vector has unit length
-#' in the Euclidean norm.
+#'   score of one. If no scaling is used then the result vector has unit length
+#'   in the Euclidean norm.
 #' @param weights Optional positive weight vector for calculating weighted
-#' scores. If the graph has a \code{weight} edge attribute, then this is used
-#' by default.
-#' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weight is more likely to be
-#' selected by the surfer.
+#'   scores. If the graph has a \code{weight} edge attribute, then this is used
+#'   by default.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#' \code{\link{arpack}} for details.
+#'   \code{\link{arpack}} for details.
 #' @return A named list with members:
 #'   \item{vector}{The authority/hub scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
@@ -969,42 +969,42 @@ authority_score <- authority_score
 #' @aliases page.rank page_rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
-#' calculation. The default is \code{"prpack"}, which uses the PRPACK library
-#' (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
-#' by solving a set of linear equations. This is a new implementation in igraph
-#' version 0.7, and the suggested one, as it is the most stable and the fastest
-#' for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
-#' default implementation from igraph version 0.5 until version 0.7. It computes
-#' PageRank scores by solving an eingevalue problem.
+#'   calculation. The default is \code{"prpack"}, which uses the PRPACK library
+#'   (\url{https://github.com/dgleich/prpack}) to calculate PageRank scores
+#'   by solving a set of linear equations. This is a new implementation in igraph
+#'   version 0.7, and the suggested one, as it is the most stable and the fastest
+#'   for all but small graphs.  \code{"arpack"} uses the ARPACK library, the
+#'   default implementation from igraph version 0.5 until version 0.7. It computes
+#'   PageRank scores by solving an eingevalue problem.
 #' @param vids The vertices of interest.
 #' @param directed Logical, if true directed paths will be considered for
-#' directed graphs. It is ignored for undirected graphs.
+#'   directed graphs. It is ignored for undirected graphs.
 #' @param damping The damping factor (\sQuote{d} in the original paper).
 #' @param personalized Optional vector giving a probability distribution to
-#' calculate personalized PageRank. For personalized PageRank, the probability
-#' of jumping to a node when abandoning the random walk is not uniform, but it
-#' is given by this vector. The vector should contains an entry for each vertex
-#' and it will be rescaled to sum up to one.
+#'   calculate personalized PageRank. For personalized PageRank, the probability
+#'   of jumping to a node when abandoning the random walk is not uniform, but it
+#'   is given by this vector. The vector should contains an entry for each vertex
+#'   and it will be rescaled to sum up to one.
 #' @param weights A numerical vector or \code{NULL}. This argument can be used
-#' to give edge weights for calculating the weighted PageRank of vertices. If
-#' this is \code{NULL} and the graph has a \code{weight} edge attribute then
-#' that is used. If \code{weights} is a numerical vector then it used, even if
-#' the graph has a \code{weights} edge attribute. If this is \code{NA}, then no
-#' edge weights are used (even if the graph has a \code{weight} edge attribute.
-#' This function interprets edge weights as connection strengths. In the
-#' random surfer model, an edge with a larger weight is more likely to be
-#' selected by the surfer.
+#'   to give edge weights for calculating the weighted PageRank of vertices. If
+#'   this is \code{NULL} and the graph has a \code{weight} edge attribute then
+#'   that is used. If \code{weights} is a numerical vector then it used, even if
+#'   the graph has a \code{weights} edge attribute. If this is \code{NA}, then no
+#'   edge weights are used (even if the graph has a \code{weight} edge attribute.
+#'   This function interprets edge weights as connection strengths. In the
+#'   random surfer model, an edge with a larger weight is more likely to be
+#'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#' \code{\link{arpack}} for details. This argument is ignored if the PRPACK
-#' implementation is used.
+#'   \code{\link{arpack}} for details. This argument is ignored if the PRPACK
+#'   implementation is used.
 #' @return A named list with entries: \item{vector}{A
-#' numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
-#' method, the eigenvalue corresponding to the eigenvector with the PageRank scores
-#' is returned here. It is expected to be exactly one, and can be used to check
-#' that ARPACK has successfully converged to the expected eingevector. When using
-#' the PRPACK method, it is always set to 1.0.} \item{options}{Some information
-#' about the underlying ARPACK calculation. See \code{\link{arpack}} for details.
-#' This entry is \code{NULL} if not the ARPACK implementation was used.}
+#'   numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
+#'   method, the eigenvalue corresponding to the eigenvector with the PageRank scores
+#'   is returned here. It is expected to be exactly one, and can be used to check
+#'   that ARPACK has successfully converged to the expected eingevector. When using
+#'   the PRPACK method, it is always set to 1.0.} \item{options}{Some information
+#'   about the underlying ARPACK calculation. See \code{\link{arpack}} for details.
+#'   This entry is \code{NULL} if not the ARPACK implementation was used.}
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -1043,23 +1043,23 @@ page_rank <- page_rank
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which harmonic centrality will be calculated.
 #' @param mode Character string, defining the types of the paths used for
-#' measuring the distance in directed graphs. \dQuote{out} follows paths along
-#' the edge directions only, \dQuote{in} traverses the edges in reverse, while
-#' \dQuote{all} ignores edge directions. This argument is ignored for undirected
-#' graphs.
+#'   measuring the distance in directed graphs. \dQuote{out} follows paths along
+#'   the edge directions only, \dQuote{in} traverses the edges in reverse, while
+#'   \dQuote{all} ignores edge directions. This argument is ignored for undirected
+#'   graphs.
 #' @param normalized Logical scalar, whether to calculate the normalized
-#' harmonic centrality. If true, the result is the mean inverse path length to
-#' other vertices, i.e. it is normalized by the number of vertices minus one.
-#' If false, the result is the sum of inverse path lengths to other vertices.
+#'   harmonic centrality. If true, the result is the mean inverse path length to
+#'   other vertices, i.e. it is normalized by the number of vertices minus one.
+#'   If false, the result is the sum of inverse path lengths to other vertices.
 #' @param weights Optional positive weight vector for calculating weighted
-#' harmonic centrality. If the graph has a \code{weight} edge attribute, then
-#' this is used by default. Weights are used for calculating weighted shortest
-#' paths, so they are interpreted as distances.
+#'   harmonic centrality. If the graph has a \code{weight} edge attribute, then
+#'   this is used by default. Weights are used for calculating weighted shortest
+#'   paths, so they are interpreted as distances.
 #' @param cutoff The maximum path length to consider when calculating the
-#' harmonic centrality. There is no such limit when the cutoff is negative. Note that
-#' zero cutoff means that only paths of at most length 0 are considered.
+#'   harmonic centrality. There is no such limit when the cutoff is negative. Note that
+#'   zero cutoff means that only paths of at most length 0 are considered.
 #' @return Numeric vector with the harmonic centrality scores of all the vertices in
-#' \code{v}.
+#'   \code{v}.
 #' @seealso \code{\link{betweenness}}, \code{\link{closeness}}
 #' @references M. Marchiori and V. Latora, Harmony in the small-world,
 #' \emph{Physica A} 285, pp. 539-546 (2000).
@@ -1179,19 +1179,19 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @aliases bonpow
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
-#' the calculation.  By default, all vertices are included.
+#'   the calculation.  By default, all vertices are included.
 #' @param loops boolean indicating whether or not the diagonal should be
-#' treated as valid data.  Set this true if and only if the data can contain
-#' loops.  \code{loops} is \code{FALSE} by default.
+#'   treated as valid data.  Set this true if and only if the data can contain
+#'   loops.  \code{loops} is \code{FALSE} by default.
 #' @param exponent exponent (decay rate) for the Bonacich power centrality
-#' score; can be negative
+#'   score; can be negative
 #' @param rescale if true, centrality scores are rescaled such that they sum to
-#' 1.
+#'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
-#' \code{\link{solve}})
+#'   \code{\link{solve}})
 #' @param sparse Logical scalar, whether to use sparse matrices for the
-#' calculation. The \sQuote{Matrix} package is required for sparse matrix
-#' support
+#'   calculation. The \sQuote{Matrix} package is required for sparse matrix
+#'   support
 #' @return A vector, containing the centrality scores.
 #' @note This function was ported (ie. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
@@ -1359,29 +1359,29 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' @aliases alpha.centrality
 #' @param graph The input graph, can be directed or undirected
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
-#' values are returned. (For technical reasons they will be calculated for all
-#' vertices, anyway.)
+#'   values are returned. (For technical reasons they will be calculated for all
+#'   vertices, anyway.)
 #' @param alpha Parameter specifying the relative importance of endogenous
-#' versus exogenous factors in the determination of centrality. See details
-#' below.
+#'   versus exogenous factors in the determination of centrality. See details
+#'   below.
 #' @param loops Whether to eliminate loop edges from the graph before the
-#' calculation.
+#'   calculation.
 #' @param exo The exogenous factors, in most cases this is either a constant --
-#' the same factor for every node, or a vector giving the factor for every
-#' vertex. Note that too long vectors will be truncated and too short vectors
-#' will be replicated to match the number of vertices.
+#'   the same factor for every node, or a vector giving the factor for every
+#'   vertex. Note that too long vectors will be truncated and too short vectors
+#'   will be replicated to match the number of vertices.
 #' @param weights A character scalar that gives the name of the edge attribute
-#' to use in the adjacency matrix. If it is \code{NULL}, then the
-#' \sQuote{weight} edge attribute of the graph is used, if there is one.
-#' Otherwise, or if it is \code{NA}, then the calculation uses the standard
-#' adjacency matrix.
+#'   to use in the adjacency matrix. If it is \code{NULL}, then the
+#'   \sQuote{weight} edge attribute of the graph is used, if there is one.
+#'   Otherwise, or if it is \code{NA}, then the calculation uses the standard
+#'   adjacency matrix.
 #' @param tol Tolerance for near-singularities during matrix inversion, see
-#' \code{\link{solve}}.
+#'   \code{\link{solve}}.
 #' @param sparse Logical scalar, whether to use sparse matrices for the
-#' calculation. The \sQuote{Matrix} package is required for sparse matrix
-#' support
+#'   calculation. The \sQuote{Matrix} package is required for sparse matrix
+#'   support
 #' @return A numeric vector contaning the centrality scores for the selected
-#' vertices.
+#'   vertices.
 #' @section Warning: Singular adjacency matrices cause problems for this
 #' algorithm, the routine may fail is certain cases.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

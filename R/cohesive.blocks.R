@@ -113,76 +113,76 @@
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' plot_hierarchy max_cohesion exportPajek
 #' @param graph For \code{cohesive_blocks} a graph object of class
-#' \code{igraph}. It must be undirected and simple. (See
-#' \code{\link{is_simple}}.)
+#'   \code{igraph}. It must be undirected and simple. (See
+#'   \code{\link{is_simple}}.)
 #'
-#' For \code{graphs_from_cohesive_blocks} and \code{export_pajek} the same graph must be
-#' supplied whose cohesive block structure is given in the \code{blocks}
-#' argument.
+#'   For \code{graphs_from_cohesive_blocks} and \code{export_pajek} the same graph must be
+#'   supplied whose cohesive block structure is given in the \code{blocks}
+#'   argument.
 #' @param labels Logical scalar, whether to add the vertex labels to the result
-#' object. These labels can be then used when reporting and plotting the
-#' cohesive blocks.
+#'   object. These labels can be then used when reporting and plotting the
+#'   cohesive blocks.
 #' @param blocks,x,object A \code{cohesiveBlocks} object, created with the
-#' \code{cohesive_blocks} function.
+#'   \code{cohesive_blocks} function.
 #' @param file Defines the file (or connection) the Pajek file is written to.
 #'
-#' If the \code{project.file} argument is \code{TRUE}, then it can be a
-#' filename (with extension), a file object, or in general any king of
-#' connection object. The file/connection will be opened if it wasn't already.
+#'   If the \code{project.file} argument is \code{TRUE}, then it can be a
+#'   filename (with extension), a file object, or in general any king of
+#'   connection object. The file/connection will be opened if it wasn't already.
 #'
-#' If the \code{project.file} argument is \code{FALSE}, then several files are
-#' created and \code{file} must be a character scalar containing the base name
-#' of the files, without extension. (But it can contain the path to the files.)
+#'   If the \code{project.file} argument is \code{FALSE}, then several files are
+#'   created and \code{file} must be a character scalar containing the base name
+#'   of the files, without extension. (But it can contain the path to the files.)
 #'
-#' See also details below.
+#'   See also details below.
 #' @param project.file Logical scalar, whether to create a single Pajek project
-#' file containing all the data, or to create separated files for each item.
-#' See details below.
+#'   file containing all the data, or to create separated files for each item.
+#'   See details below.
 #' @param y The graph whose cohesive blocks are supplied in the \code{x}
-#' argument.
+#'   argument.
 #' @param colbar Color bar for the vertex colors. Its length should be at least
-#' \eqn{m+1}, where \eqn{m} is the maximum cohesion in the graph.
-#' Alternatively, the vertex colors can also be directly specified via the
-#' \code{col} argument.
+#'   \eqn{m+1}, where \eqn{m} is the maximum cohesion in the graph.
+#'   Alternatively, the vertex colors can also be directly specified via the
+#'   \code{col} argument.
 #' @param col A vector of vertex colors, in any of the usual formats. (Symbolic
-#' color names (e.g. \sQuote{red}, \sQuote{blue}, etc.) , RGB colors (e.g.
-#' \sQuote{#FF9900FF}), integer numbers referring to the current palette. By
-#' default the given \code{colbar} is used and vertices with the same maximal
-#' cohesion will have the same color.
+#'   color names (e.g. \sQuote{red}, \sQuote{blue}, etc.) , RGB colors (e.g.
+#'   \sQuote{#FF9900FF}), integer numbers referring to the current palette. By
+#'   default the given \code{colbar} is used and vertices with the same maximal
+#'   cohesion will have the same color.
 #' @param mark.groups A list of vertex sets to mark on the plot by circling
-#' them. By default all cohesive blocks are marked, except the one
-#' corresponding to the all vertices.
+#'   them. By default all cohesive blocks are marked, except the one
+#'   corresponding to the all vertices.
 #' @param layout The layout of a plot, it is simply passed on to
-#' \code{plot.igraph}, see the possible formats there. By default the
-#' Reingold-Tilford layout generator is used.
+#'   \code{plot.igraph}, see the possible formats there. By default the
+#'   Reingold-Tilford layout generator is used.
 #' @param \dots Additional arguments. \code{plot_hierarchy} and \code{plot} pass
-#' them to \code{plot.igraph}.  \code{print} and \code{summary} ignore them.
+#'   them to \code{plot.igraph}.  \code{print} and \code{summary} ignore them.
 #' @return \code{cohesive_blocks} returns a \code{cohesiveBlocks} object.
 #'
-#' \code{blocks} returns a list of numeric vectors, containing vertex ids.
+#'   \code{blocks} returns a list of numeric vectors, containing vertex ids.
 #'
-#' \code{graphs_from_cohesive_blocks} returns a list of igraph graphs, corresponding to the
-#' cohesive blocks.
+#'   \code{graphs_from_cohesive_blocks} returns a list of igraph graphs, corresponding to the
+#'   cohesive blocks.
 #'
-#' \code{cohesion} returns a numeric vector, the cohesion of each block.
+#'   \code{cohesion} returns a numeric vector, the cohesion of each block.
 #'
-#' \code{hierarchy} returns an igraph graph, the representation of the cohesive
-#' block hierarchy.
+#'   \code{hierarchy} returns an igraph graph, the representation of the cohesive
+#'   block hierarchy.
 #'
-#' \code{parent} returns a numeric vector giving the parent block of each
-#' cohesive block, in the block hierarchy. The block at the root of the
-#' hierarchy has no parent and \code{0} is returned for it.
+#'   \code{parent} returns a numeric vector giving the parent block of each
+#'   cohesive block, in the block hierarchy. The block at the root of the
+#'   hierarchy has no parent and \code{0} is returned for it.
 #'
-#' \code{plot_hierarchy}, \code{plot} and \code{export_pajek} return \code{NULL},
-#' invisibly.
+#'   \code{plot_hierarchy}, \code{plot} and \code{export_pajek} return \code{NULL},
+#'   invisibly.
 #'
-#' \code{max_cohesion} returns a numeric vector with one entry for each vertex,
-#' giving the cohesion of its most cohesive block.
+#'   \code{max_cohesion} returns a numeric vector with one entry for each vertex,
+#'   giving the cohesion of its most cohesive block.
 #'
-#' \code{print} and \code{summary} return the \code{cohesiveBlocks} object
-#' itself, invisibly.
+#'   \code{print} and \code{summary} return the \code{cohesiveBlocks} object
+#'   itself, invisibly.
 #'
-#' \code{length} returns a numeric scalar, the number of blocks.
+#'   \code{length} returns a numeric scalar, the number of blocks.
 #' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
 #' implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
 #' wrote the first version in R.

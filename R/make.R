@@ -30,13 +30,13 @@
 #'
 #' @param ... Parameters to extract from
 #' @param .operation Human-readable description of the operation that this
-#' helper is a part of
+#'   helper is a part of
 #' @param .variant Constructor variant; must be one of \sQuote{make},
-#' \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
-#' specification has deterministic and random variants.
+#'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
+#'   specification has deterministic and random variants.
 #' @return A named list with three items: \sQuote{cons} for the constructor
-#' function, \sQuote{mods} for the modifiers and \sQuote{args} for the
-#' remaining, unparsed arguments.
+#'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
+#'   remaining, unparsed arguments.
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -76,10 +76,10 @@
   list(cons = cons, mods = mods, args = args)
 }
 
-#' Applies a set of constructor modifiers to an already constructed graph.
+#'   Applies a set of constructor modifiers to an already constructed graph.
 #'
-#' This is a helper function for the common parts of \code{make_} and
-#' \code{sample_}.
+#'   This is a helper function for the common parts of \code{make_} and
+#'   \code{sample_}.
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
@@ -133,9 +133,9 @@
   graph
 }
 
-#' Make a new graph
+#'   Make a new graph
 #'
-#' This is a generic function for creating graphs.
+#'   This is a generic function for creating graphs.
 #'
 #' @details
 #' \code{make_} is a generic function for creating graphs.
@@ -1196,13 +1196,13 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #'
 #' @param n The number of nodes in the tree
 #' @param directed Whether to create a directed tree. The edges of the tree are
-#' oriented away from the root.
+#'   oriented away from the root.
 #' @param method The algorithm to use to generate the tree. \sQuote{prufer}
-#' samples Prufer sequences uniformly and then converts the sampled sequence to
-#' a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
-#' graph to uniformly sampleits spanning trees. (This is also known as Wilson's
-#' algorithm). The default is \sQuote{lerw}. Note that the method based on
-#' Prufer sequences does not support directed trees at the moment.
+#'   samples Prufer sequences uniformly and then converts the sampled sequence to
+#'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
+#'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
+#'   algorithm). The default is \sQuote{lerw}. Note that the method based on
+#'   Prufer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
 #' @keywords graphs
@@ -1504,10 +1504,10 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' @param n2 The number of vertices of the second kind.
 #' @param directed Logical scalar, whether the graphs is directed.
 #' @param mode Scalar giving the kind of edges to create for directed graphs.
-#' If this is \sQuote{\code{out}} then all vertices of the first kind are
-#' connected to the others; \sQuote{\code{in}} specifies the opposite
-#' direction; \sQuote{\code{all}} creates mutual edges. This argument is
-#' ignored for undirected graphs.x
+#'   If this is \sQuote{\code{out}} then all vertices of the first kind are
+#'   connected to the others; \sQuote{\code{in}} specifies the opposite
+#'   direction; \sQuote{\code{all}} creates mutual edges. This argument is
+#'   ignored for undirected graphs.x
 #' @return An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{make_full_graph}} for creating one-mode full graphs
@@ -1570,21 +1570,21 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'
 #' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
-#' boolean. The length of the vector gives the number of vertices in the graph.
-#' When the vector is a named vector, the names will be attached to the graph
-#' as the \code{name} vertex attribute.
+#'   boolean. The length of the vector gives the number of vertices in the graph.
+#'   When the vector is a named vector, the names will be attached to the graph
+#'   as the \code{name} vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
-#' regular \code{\link{graph}} function. It is checked that the edges indeed
-#' connect vertices of different kind, according to the supplied \code{types}
-#' vector. The vector may be a string vector if \code{types} is a named vector.
+#'   regular \code{\link{graph}} function. It is checked that the edges indeed
+#'   connect vertices of different kind, according to the supplied \code{types}
+#'   vector. The vector may be a string vector if \code{types} is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
-#' that by default undirected graphs are created, as this is more common for
-#' bipartite graphs.
+#'   that by default undirected graphs are created, as this is more common for
+#'   bipartite graphs.
 #' @param graph The input graph.
 #' @return \code{make_bipartite_graph} returns a bipartite igraph graph. In other
-#' words, an igraph graph that has a vertex attribute named \code{type}.
+#'   words, an igraph graph that has a vertex attribute named \code{type}.
 #'
-#' \code{is_bipartite} returns a logical scalar.
+#'   \code{is_bipartite} returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph}} to create one-mode networks
 #' @keywords graphs
@@ -1722,18 +1722,18 @@ graph_from_lcf <- graph_from_lcf
 #' The \dQuote{index} method selects the vertices in order of their index.
 #'
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
-#' graphs) or out-degrees (for directed graphs). For undirected graphs its sum
-#' should be even. For directed graphs its sum should be the same as the sum of
-#' \code{in.deg}.
+#'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
+#'   should be even. For directed graphs its sum should be the same as the sum of
+#'   \code{in.deg}.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
-#' \code{NULL} and an undirected graph is created.
+#'   \code{NULL} and an undirected graph is created.
 #' @param method Character, the method for generating the graph; see above.
 #' @param allowed.edge.types Character, specifies the types of allowed edges.
-#' \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
-#' \dQuote{multiple} allows multiple edges but disallows loop.
-#' \dQuote{loops} allows loop edges but disallows multiple edges (currently
-#' unimplemented). \dQuote{all} allows all types of edges. The default is
-#' \dQuote{simple}.
+#'   \dQuote{simple} allows simple graphs only (no loops, no multiple edges).
+#'   \dQuote{multiple} allows multiple edges but disallows loop.
+#'   \dQuote{loops} allows loop edges but disallows multiple edges (currently
+#'   unimplemented). \dQuote{all} allows all types of edges. The default is
+#'   \dQuote{simple}.
 #' @return The new graph object.
 #' @seealso \code{\link{sample_degseq}} for a randomized variant that samples
 #' from graphs with the given degree sequence.

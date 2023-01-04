@@ -47,7 +47,7 @@ is_tree <- is_tree
 #'
 #' @param graph The graph to convert to a Prufer sequence
 #' @return The Prufer sequence of the graph, represented as a numeric vector of
-#' vertex IDs in the sequence.
+#'   vertex IDs in the sequence.
 #'
 #' @seealso \code{\link{make_from_prufer}} to construct a graph from its
 #' Prufer sequence
@@ -66,15 +66,15 @@ to_prufer <- to_prufer
 #' randomly and uniformly, using loop-erased random walks.
 #'
 #' @param graph The input graph to sample from. Edge directions are ignored if
-#' the graph is directed.
+#'   the graph is directed.
 #' @param vid When the graph is disconnected, this argument specifies how to
-#' handle the situation. When the argument is zero (the default), the sampling
-#' will be performed component-wise, and the result will be a spanning forest.
-#' When the argument contains a vertex ID, only the component containing the
-#' given vertex will be processed, and the result will be a spanning tree of the
-#' component of the graph.
+#'   handle the situation. When the argument is zero (the default), the sampling
+#'   will be performed component-wise, and the result will be a spanning forest.
+#'   When the argument contains a vertex ID, only the component containing the
+#'   given vertex will be processed, and the result will be a spanning tree of the
+#'   component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#' \code{\link{subgraph.edges}} to extract the corresponding subgraph.
+#'   \code{\link{subgraph.edges}} to extract the corresponding subgraph.
 #'
 #' @keywords graph
 #' @seealso \code{\link{subgraph.edges}} to extract the tree itself

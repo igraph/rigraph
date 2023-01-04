@@ -34,7 +34,7 @@
 #'
 #' @aliases igraphtest
 #' @return Whatever is returned by \code{test_dir} from the \code{testthat}
-#' package.
+#'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export

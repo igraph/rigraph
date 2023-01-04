@@ -56,16 +56,16 @@ NULL
 #'
 #' @aliases hrg.fit
 #' @param graph The graph to fit the model to. Edge directions are ignored in
-#' directed graphs.
+#'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
-#' \code{igraphHRG} object. \code{fit_hrg} allows this to be \code{NULL}, in
-#' which case a random starting point is used for the fitting.
+#'   \code{igraphHRG} object. \code{fit_hrg} allows this to be \code{NULL}, in
+#'   which case a random starting point is used for the fitting.
 #' @param start Logical, whether to start the fitting/sampling from the
-#' supplied \code{igraphHRG} object, or from a random starting point.
+#'   supplied \code{igraphHRG} object, or from a random starting point.
 #' @param steps The number of MCMC steps to make. If this is zero, then the
-#' MCMC procedure is performed until convergence.
+#'   MCMC procedure is performed until convergence.
 #' @return \code{fit_hrg} returns an \code{igraphHRG} object. This is a list
-#' with the following members:
+#'   with the following members:
 #'   \item{left}{Vector that contains the left children of the internal
 #'     tree vertices. The first vertex is always the root vertex, so the
 #'     first element of the vector is the left child of the root
@@ -156,11 +156,11 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied \code{igraphHRG} object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or
-#' missing edge prediction.
+#'   missing edge prediction.
 #' @return \code{consensus_tree} returns a list of two objects. The first
-#' is an \code{igraphHRGConsensus} object, the second is an
-#' \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the
-#' following members:
+#'   is an \code{igraphHRGConsensus} object, the second is an
+#'   \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the
+#'   following members:
 #'   \item{parents}{For each vertex, the id of its parent vertex is stored,
 #'     or zero, if the vertex is the root vertex in the tree. The first n
 #'     vertex ids (from 0) refer to the original vertices of the graph, the
@@ -228,17 +228,17 @@ sample_hrg <- sample_hrg
 #'
 #' @aliases hrg.predict
 #' @param graph The graph to fit the model to. Edge directions are ignored in
-#' directed graphs.
+#'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
-#' \code{igraphHRG} object. \code{predict_edges}s allow this to be
-#' \code{NULL} as well, then a HRG is fitted to the graph first, from a
-#' random starting point.
+#'   \code{igraphHRG} object. \code{predict_edges}s allow this to be
+#'   \code{NULL} as well, then a HRG is fitted to the graph first, from a
+#'   random starting point.
 #' @param start Logical, whether to start the fitting/sampling from the
-#' supplied \code{igraphHRG} object, or from a random starting point.
+#'   supplied \code{igraphHRG} object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or
-#' missing edge prediction.
+#'   missing edge prediction.
 #' @param num.bins Number of bins for the edge probabilities. Give a higher
-#' number for a more accurate prediction.
+#'   number for a more accurate prediction.
 #' @return A list with entries:
 #'   \item{edges}{The predicted edges, in a two-column matrix of vertex
 #'     ids.}
@@ -576,12 +576,12 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'
 #' @aliases hrg.dendrogram
 #' @param x An \code{igraphHRG}, a hierarchical random graph, as returned by
-#' the \code{\link{fit_hrg}} function.
+#'   the \code{\link{fit_hrg}} function.
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
-#' function.
+#'   function.
 #' @return Returns whatever the return value was from the plotting function,
-#' \code{plot.phylo}, \code{plot.dendrogram} or \code{plot.hclust}.
+#'   \code{plot.phylo}, \code{plot.dendrogram} or \code{plot.hclust}.
 #' @method plot_dendrogram igraphHRG
 #' @export
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

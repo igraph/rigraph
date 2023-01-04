@@ -294,7 +294,7 @@ disjoint_union <- function(...) {
 #' \code{\link{union.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#' the function that implements \code{union}.
+#'   the function that implements \code{union}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -336,10 +336,10 @@ union.default <- function(...) {
 #' @aliases graph.union %u%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
-#' to perform the operation based on symbolic vertex names. If it is
-#' \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
-#' otherwise. A warning is generated if \code{auto} and some (but not all)
-#' graphs are named.
+#'   to perform the operation based on symbolic vertex names. If it is
+#'   \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
+#'   otherwise. A warning is generated if \code{auto} and some (but not all)
+#'   graphs are named.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method union igraph
@@ -376,7 +376,7 @@ union.igraph <- function(..., byname = "auto") {
 #' \code{\link{intersection.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#' the function that implements \code{intersection}.
+#'   the function that implements \code{intersection}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -412,12 +412,12 @@ intersection <- function(...) {
 #' @aliases graph.intersection %s%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
-#' to perform the operation based on symbolic vertex names. If it is
-#' \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
-#' otherwise. A warning is generated if \code{auto} and some (but not all)
-#' graphs are named.
+#'   to perform the operation based on symbolic vertex names. If it is
+#'   \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
+#'   otherwise. A warning is generated if \code{auto} and some (but not all)
+#'   graphs are named.
 #' @param keep.all.vertices Logical scalar, whether to keep vertices that only
-#' appear in a subset of the input graphs.
+#'   appear in a subset of the input graphs.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method intersection igraph
@@ -455,7 +455,7 @@ intersection.igraph <- function(..., byname = "auto",
 #' \code{\link{difference.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#' the function that implements \code{difference}.
+#'   the function that implements \code{difference}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -484,14 +484,14 @@ difference <- function(...) {
 #'
 #' @aliases graph.difference %m%
 #' @param big The left hand side argument of the minus operator. A directed or
-#' undirected graph.
+#'   undirected graph.
 #' @param small The right hand side argument of the minus operator. A directed
-#' ot undirected graph.
+#'   ot undirected graph.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
-#' to perform the operation based on symbolic vertex names. If it is
-#' \code{auto}, that means \code{TRUE} if both graphs are named and
-#' \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
-#' but not both graphs are named.
+#'   to perform the operation based on symbolic vertex names. If it is
+#'   \code{auto}, that means \code{TRUE} if both graphs are named and
+#'   \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
+#'   but not both graphs are named.
 #' @param ... Ignored, included for S3 compatibility.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -645,10 +645,10 @@ complementer <- function(graph, loops = FALSE) {
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
 #' @param byname A logical scalar, or the character scalar \code{auto}. Whether
-#' to perform the operation based on symbolic vertex names. If it is
-#' \code{auto}, that means \code{TRUE} if both graphs are named and
-#' \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
-#' but not both graphs are named.
+#'   to perform the operation based on symbolic vertex names. If it is
+#'   \code{auto}, that means \code{TRUE} if both graphs are named and
+#'   \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
+#'   but not both graphs are named.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export

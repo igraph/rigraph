@@ -41,21 +41,21 @@
 #' @aliases diameter get.diameter farthest.nodes farthest_vertices get_diameter
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
-#' considered. This is ignored for undirected graphs.
+#'   considered. This is ignored for undirected graphs.
 #' @param unconnected Logical, what to do if the graph is unconnected. If
-#' FALSE, the function will return a number that is one larger the largest
-#' possible diameter, which is always the number of vertices. If TRUE, the
-#' diameters of the connected components will be calculated and the largest one
-#' will be returned.
+#'   FALSE, the function will return a number that is one larger the largest
+#'   possible diameter, which is always the number of vertices. If TRUE, the
+#'   diameters of the connected components will be calculated and the largest one
+#'   will be returned.
 #' @param weights Optional positive weight vector for calculating weighted
-#' distances. If the graph has a \code{weight} edge attribute, then this is
-#' used by default.
+#'   distances. If the graph has a \code{weight} edge attribute, then this is
+#'   used by default.
 #' @return A numeric constant for \code{diameter}, a numeric vector for
-#' \code{get_diameter}. \code{farthest_vertices} returns a list with two
-#' entries: \itemize{
+#'   \code{get_diameter}. \code{farthest_vertices} returns a list with two
+#'   entries: \itemize{
 #'   \item \code{vertices} The two vertices that are the farthest.
 #'   \item \code{distance} Their distance.
-#' }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{distances}}
 #' @export
@@ -172,20 +172,20 @@ mean_distance <- mean_distance
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
-#' in-degree or \dQuote{total} for the sum of the two. For undirected graphs
-#' this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
+#'   in-degree or \dQuote{total} for the sum of the two. For undirected graphs
+#'   this argument is ignored. \dQuote{all} is a synonym of \dQuote{total}.
 #' @param loops Logical; whether the loop edges are also counted.
 #' @param normalized Logical scalar, whether to normalize the degree.  If
-#' \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
-#' number of vertices in the graph.
+#'   \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
+#'   number of vertices in the graph.
 #' @param \dots Additional arguments to pass to \code{degree}, eg. \code{mode}
-#' is useful but also \code{v} and \code{loops} make sense.
+#'   is useful but also \code{v} and \code{loops} make sense.
 #' @return For \code{degree} a numeric vector of the same length as argument
-#' \code{v}.
+#'   \code{v}.
 #'
-#' For \code{degree_distribution} a numeric vector of the same length as the
-#' maximum degree plus one. The first element is the relative frequency zero
-#' degree vertices, the second vertices with degree one, etc.
+#'   For \code{degree_distribution} a numeric vector of the same length as the
+#'   maximum degree plus one. The first element is the relative frequency zero
+#'   degree vertices, the second vertices with degree one, etc.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
@@ -227,7 +227,7 @@ degree <- function(graph, v = V(graph),
 
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
-#' be calculated.
+#'   be calculated.
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -303,76 +303,76 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' all_shortest_paths shortest_paths
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
-#' calculated.
+#'   calculated.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
-#' calculated. By default it includes all vertices. Note that for
-#' \code{distances} every vertex must be included here at most once. (This
-#' is not required for \code{shortest_paths}.
+#'   calculated. By default it includes all vertices. Note that for
+#'   \code{distances} every vertex must be included here at most once. (This
+#'   is not required for \code{shortest_paths}.
 #' @param mode Character constant, gives whether the shortest paths to or from
-#' the given vertices should be calculated for directed graphs. If \code{out}
-#' then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
-#' it will be considered. If \code{all}, the default, then the corresponding
-#' undirected graph will be used, ie. not directed paths are searched. This
-#' argument is ignored for undirected graphs.
+#'   the given vertices should be calculated for directed graphs. If \code{out}
+#'   then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
+#'   it will be considered. If \code{all}, the default, then the corresponding
+#'   undirected graph will be used, ie. not directed paths are searched. This
+#'   argument is ignored for undirected graphs.
 #' @param weights Possibly a numeric vector giving edge weights. If this is
-#' \code{NULL} and the graph has a \code{weight} edge attribute, then the
-#' attribute is used. If this is \code{NA} then no weights are used (even if
-#' the graph has a \code{weight} attribute).
+#'   \code{NULL} and the graph has a \code{weight} edge attribute, then the
+#'   attribute is used. If this is \code{NA} then no weights are used (even if
+#'   the graph has a \code{weight} attribute).
 #' @param algorithm Which algorithm to use for the calculation. By default
-#' igraph tries to select the fastest suitable algorithm. If there are no
-#' weights, then an unweighted breadth-first search is used, otherwise if all
-#' weights are positive, then Dijkstra's algorithm is used. If there are
-#' negative weights and we do the calculation for more than 100 sources, then
-#' Johnson's algorithm is used. Otherwise the Bellman-Ford algorithm is used.
-#' You can override igraph's choice by explicitly giving this parameter. Note
-#' that the igraph C core might still override your choice in obvious cases,
-#' i.e. if there are no edge weights, then the unweighted algorithm will be
-#' used, regardless of this argument.
+#'   igraph tries to select the fastest suitable algorithm. If there are no
+#'   weights, then an unweighted breadth-first search is used, otherwise if all
+#'   weights are positive, then Dijkstra's algorithm is used. If there are
+#'   negative weights and we do the calculation for more than 100 sources, then
+#'   Johnson's algorithm is used. Otherwise the Bellman-Ford algorithm is used.
+#'   You can override igraph's choice by explicitly giving this parameter. Note
+#'   that the igraph C core might still override your choice in obvious cases,
+#'   i.e. if there are no edge weights, then the unweighted algorithm will be
+#'   used, regardless of this argument.
 #' @param details Whether to provide additional details in the result.
-#' Functions accepting this argument (like \code{mean_distance}) return
-#' additional information like the number of disconnected vertex pairs in
-#' the result when this parameter is set to \code{TRUE}.
+#'   Functions accepting this argument (like \code{mean_distance}) return
+#'   additional information like the number of disconnected vertex pairs in
+#'   the result when this parameter is set to \code{TRUE}.
 #' @param unconnected What to do if the graph is unconnected (not
-#' strongly connected if directed paths are considered). If TRUE, only
-#' the lengths of the existing paths are considered and averaged; if
-#' FALSE, the length of the missing paths are considered as having infinite
-#' length, making the mean distance infinite as well.
+#'   strongly connected if directed paths are considered). If TRUE, only
+#'   the lengths of the existing paths are considered and averaged; if
+#'   FALSE, the length of the missing paths are considered as having infinite
+#'   length, making the mean distance infinite as well.
 #' @return For \code{distances} a numeric matrix with \code{length(to)}
-#' columns and \code{length(v)} rows. The shortest path length from a vertex to
-#' itself is always zero. For unreachable vertices \code{Inf} is included.
+#'   columns and \code{length(v)} rows. The shortest path length from a vertex to
+#'   itself is always zero. For unreachable vertices \code{Inf} is included.
 #'
-#' For \code{shortest_paths} a named list with four entries is returned:
-#' \item{vpath}{This itself is a list, of length \code{length(to)}; list
-#' element \code{i} contains the vertex ids on the path from vertex \code{from}
-#' to vertex \code{to[i]} (or the other way for directed graphs depending on
-#' the \code{mode} argument). The vector also contains \code{from} and \code{i}
-#' as the first and last elements. If \code{from} is the same as \code{i} then
-#' it is only included once. If there is no path between two vertices then a
-#' numeric vector of length zero is returned as the list element. If this
-#' output is not requested in the \code{output} argument, then it will be
-#' \code{NULL}.} \item{epath}{This is a list similar to \code{vpath}, but the
-#' vectors of the list contain the edge ids along the shortest paths, instead
-#' of the vertex ids. This entry is set to \code{NULL} if it is not requested
-#' in the \code{output} argument.} \item{predecessors}{Numeric vector, the
-#' predecessor of each vertex in the \code{to} argument, or \code{NULL} if it
-#' was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
-#' for each vertex, or \code{NULL}, if it was not requested.}
+#'   For \code{shortest_paths} a named list with four entries is returned:
+#'   \item{vpath}{This itself is a list, of length \code{length(to)}; list
+#'   element \code{i} contains the vertex ids on the path from vertex \code{from}
+#'   to vertex \code{to[i]} (or the other way for directed graphs depending on
+#'   the \code{mode} argument). The vector also contains \code{from} and \code{i}
+#'   as the first and last elements. If \code{from} is the same as \code{i} then
+#'   it is only included once. If there is no path between two vertices then a
+#'   numeric vector of length zero is returned as the list element. If this
+#'   output is not requested in the \code{output} argument, then it will be
+#'   \code{NULL}.} \item{epath}{This is a list similar to \code{vpath}, but the
+#'   vectors of the list contain the edge ids along the shortest paths, instead
+#'   of the vertex ids. This entry is set to \code{NULL} if it is not requested
+#'   in the \code{output} argument.} \item{predecessors}{Numeric vector, the
+#'   predecessor of each vertex in the \code{to} argument, or \code{NULL} if it
+#'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
+#'   for each vertex, or \code{NULL}, if it was not requested.}
 #'
-#' For \code{all_shortest_paths} a list is returned, each list element
-#' contains a shortest path from \code{from} to a vertex in \code{to}. The
-#' shortest paths to the same vertex are collected into consecutive elements of
-#' the list.
+#'   For \code{all_shortest_paths} a list is returned, each list element
+#'   contains a shortest path from \code{from} to a vertex in \code{to}. The
+#'   shortest paths to the same vertex are collected into consecutive elements of
+#'   the list.
 #'
-#' For \code{mean_distance} a single number is returned if \code{details=FALSE},
-#' or a named list with two entries: \code{res} is the mean distance as a numeric
-#' scalar and \code{unconnected} is the number of unconnected vertex pairs,
-#' also as a numeric scalar.
+#'   For \code{mean_distance} a single number is returned if \code{details=FALSE},
+#'   or a named list with two entries: \code{res} is the mean distance as a numeric
+#'   scalar and \code{unconnected} is the number of unconnected vertex pairs,
+#'   also as a numeric scalar.
 #'
-#' \code{distance_table} returns a named list with two entries: \code{res} is
-#' a numeric vector, the histogram of distances, \code{unconnected} is a
-#' numeric scalar, the number of pairs for which the first vertex is not
-#' reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
-#' for directed graphs and \eqn{n(n-1)/2} for undirected graphs.
+#'   \code{distance_table} returns a named list with two entries: \code{res} is
+#'   a numeric vector, the histogram of distances, \code{unconnected} is a
+#'   numeric scalar, the number of pairs for which the first vertex is not
+#'   reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
+#'   for directed graphs and \eqn{n(n-1)/2} for undirected graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references West, D.B. (1996). \emph{Introduction to Graph Theory.} Upper
 #' Saddle River, N.J.: Prentice Hall.
@@ -481,26 +481,26 @@ distances <- function(graph, v = V(graph), to = V(graph),
 
 #' @rdname distances
 #' @param from Numeric constant, the vertex from or to the shortest paths will
-#' be calculated. Note that right now this is not a vector of vertex ids, but
-#' only a single vertex.
+#'   be calculated. Note that right now this is not a vector of vertex ids, but
+#'   only a single vertex.
 #' @param output Character scalar, defines how to report the shortest paths.
-#' \dQuote{vpath} means that the vertices along the paths are reported, this
-#' form was used prior to igraph version 0.6. \dQuote{epath} means that the
-#' edges along the paths are reported. \dQuote{both} means that both forms are
-#' returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.
+#'   \dQuote{vpath} means that the vertices along the paths are reported, this
+#'   form was used prior to igraph version 0.6. \dQuote{epath} means that the
+#'   edges along the paths are reported. \dQuote{both} means that both forms are
+#'   returned, in a named list with components \dQuote{vpath} and \dQuote{epath}.
 #' @param predecessors Logical scalar, whether to return the predecessor vertex
-#' for each vertex. The predecessor of vertex \code{i} in the tree is the
-#' vertex from which vertex \code{i} was reached. The predecessor of the start
-#' vertex (in the \code{from} argument) is itself by definition. If the
-#' predecessor is zero, it means that the given vertex was not reached from the
-#' source during the search. Note that the search terminates if all the
-#' vertices in \code{to} are reached.
+#'   for each vertex. The predecessor of vertex \code{i} in the tree is the
+#'   vertex from which vertex \code{i} was reached. The predecessor of the start
+#'   vertex (in the \code{from} argument) is itself by definition. If the
+#'   predecessor is zero, it means that the given vertex was not reached from the
+#'   source during the search. Note that the search terminates if all the
+#'   vertices in \code{to} are reached.
 #' @param inbound.edges Logical scalar, whether to return the inbound edge for
-#' each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
-#' which vertex \code{i} was reached. The start vertex and vertices that were
-#' not reached during the search will have zero in the corresponding entry of
-#' the vector. Note that the search terminates if all the vertices in \code{to}
-#' are reached.
+#'   each vertex. The inbound edge of vertex \code{i} in the tree is the edge via
+#'   which vertex \code{i} was reached. The start vertex and vertices that were
+#'   not reached during the search will have zero in the corresponding entry of
+#'   the vector. Note that the search terminates if all the vertices in \code{to}
+#'   are reached.
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -656,12 +656,12 @@ all_shortest_paths <- function(graph, from,
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
-#' \dQuote{all}. If \dQuote{in} all vertices from which \code{v} is reachable
-#' are listed. If \dQuote{out} all vertices reachable from \code{v} are
-#' returned. If \dQuote{all} returns the union of these. It is ignored for
-#' undirected graphs.
+#'   \dQuote{all}. If \dQuote{in} all vertices from which \code{v} is reachable
+#'   are listed. If \dQuote{out} all vertices reachable from \code{v} are
+#'   returned. If \dQuote{all} returns the union of these. It is ignored for
+#'   undirected graphs.
 #' @return Numeric vector, the ids of the vertices in the same component as
-#' \code{v}.
+#'   \code{v}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{components}}
 #' @export
@@ -732,15 +732,15 @@ subgraph <- function(graph, vids) {
 
 #' @rdname subgraph
 #' @param vids Numeric vector, the vertices of the original graph which will
-#' form the subgraph.
+#'   form the subgraph.
 #' @param impl Character scalar, to choose between two implementation of the
-#' subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
-#' first, and then deletes the vertices and edges that are not included in the
-#' result graph. \sQuote{\code{create_from_scratch}} searches for all vertices
-#' and edges that must be kept and then uses them to create the graph from
-#' scratch. \sQuote{\code{auto}} chooses between the two implementations
-#' automatically, using heuristics based on the size of the original and the
-#' result graph.
+#'   subgraph calculation. \sQuote{\code{copy_and_delete}} copies the graph
+#'   first, and then deletes the vertices and edges that are not included in the
+#'   result graph. \sQuote{\code{create_from_scratch}} searches for all vertices
+#'   and edges that must be kept and then uses them to create the graph from
+#'   scratch. \sQuote{\code{auto}} chooses between the two implementations
+#'   automatically, using heuristics based on the size of the original and the
+#'   result graph.
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -764,7 +764,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @rdname subgraph
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
-#' not have any adjacent edges in \code{eids}.
+#'   not have any adjacent edges in \code{eids}.
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -810,39 +810,39 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'
 #' @param graph The graph to analyze.
 #' @param type The type of the transitivity to calculate. Possible values:
-#' \describe{ \item{"global"}{The global transitivity of an undirected
-#' graph. This is simply the ratio of the count of triangles and connected triples
-#' in the graph. In directed graphs, edge directions are ignored.}
-#' \item{"local"}{The local transitivity of an undirected graph. It is
-#' calculated for each vertex given in the \code{vids} argument. The local
-#' transitivity of a vertex is the ratio of the count of triangles connected to the
-#' vertex and the triples centered on the vertex. In directed graphs, edge
-#' directions are ignored.}
-#' \item{"undirected"}{This is the same as \code{global}.}
-#' \item{"globalundirected"}{This is the same as \code{global}.}
-#' \item{"localundirected"}{This is the same as \code{local}.}
-#' \item{"barrat"}{The weighted transitivity as defined by A.
-#' Barrat. See details below.}
-#' \item{"weighted"}{The same as \code{barrat}.} }
+#'   \describe{ \item{"global"}{The global transitivity of an undirected
+#'   graph. This is simply the ratio of the count of triangles and connected triples
+#'   in the graph. In directed graphs, edge directions are ignored.}
+#'   \item{"local"}{The local transitivity of an undirected graph. It is
+#'   calculated for each vertex given in the \code{vids} argument. The local
+#'   transitivity of a vertex is the ratio of the count of triangles connected to the
+#'   vertex and the triples centered on the vertex. In directed graphs, edge
+#'   directions are ignored.}
+#'   \item{"undirected"}{This is the same as \code{global}.}
+#'   \item{"globalundirected"}{This is the same as \code{global}.}
+#'   \item{"localundirected"}{This is the same as \code{local}.}
+#'   \item{"barrat"}{The weighted transitivity as defined by A.
+#'   Barrat. See details below.}
+#'   \item{"weighted"}{The same as \code{barrat}.} }
 #' @param vids The vertex ids for the local transitivity will be calculated.
-#' This will be ignored for global transitivity types.  The default value is
-#' \code{NULL}, in this case all vertices are considered. It is slightly faster
-#' to supply \code{NULL} here than \code{V(graph)}.
+#'   This will be ignored for global transitivity types.  The default value is
+#'   \code{NULL}, in this case all vertices are considered. It is slightly faster
+#'   to supply \code{NULL} here than \code{V(graph)}.
 #' @param weights Optional weights for weighted transitivity. It is ignored for
-#' other transitivity measures. If it is \code{NULL} (the default) and the
-#' graph has a \code{weight} edge attribute, then it is used automatically.
+#'   other transitivity measures. If it is \code{NULL} (the default) and the
+#'   graph has a \code{weight} edge attribute, then it is used automatically.
 #' @param isolates Character scalar, defines how to treat vertices with degree
-#' zero and one. If it is \sQuote{\code{NaN}} then they local transitivity is
-#' reported as \code{NaN} and they are not included in the averaging, for the
-#' transitivity types that calculate an average. If there are no vertices with
-#' degree two or higher, then the averaging will still result \code{NaN}. If it
-#' is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they
-#' are included in the averaging, if an average is calculated.
+#'   zero and one. If it is \sQuote{\code{NaN}} then they local transitivity is
+#'   reported as \code{NaN} and they are not included in the averaging, for the
+#'   transitivity types that calculate an average. If there are no vertices with
+#'   degree two or higher, then the averaging will still result \code{NaN}. If it
+#'   is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they
+#'   are included in the averaging, if an average is calculated.
 #' @return For \sQuote{\code{global}} a single number, or \code{NaN} if there
-#' are no connected triples in the graph.
+#'   are no connected triples in the graph.
 #'
-#' For \sQuote{\code{local}} a vector of transitivity scores, one for each
-#' vertex in \sQuote{\code{vids}}.
+#'   For \sQuote{\code{local}} a vector of transitivity scores, one for each
+#'   vertex in \sQuote{\code{vids}}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Wasserman, S., and Faust, K. (1994). \emph{Social Network
 #' Analysis: Methods and Applications.} Cambridge: Cambridge University Press.
@@ -972,10 +972,10 @@ transitivity <- function(graph, type = c(
 #'
 #' @param graph A graph object, the input graph.
 #' @param nodes The vertices for which the constraint will be calculated.
-#' Defaults to all vertices.
+#'   Defaults to all vertices.
 #' @param weights The weights of the edges. If this is \code{NULL} and there is
-#' a \code{weight} edge attribute this is used. If there is no such edge
-#' attribute all edges will have the same weight.
+#'   a \code{weight} edge attribute this is used. If there is no such edge
+#'   attribute all edges will have the same weight.
 #' @return A numeric vector of constraint scores
 #' @author Jeroen Bruggeman
 #' (\url{https://sites.google.com/site/jebrug/jeroen-bruggeman-social-science})
@@ -1075,11 +1075,11 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' @aliases graph.density
 #' @param graph The input graph.
 #' @param loops Logical constant, whether loop edges may exist in the graph.
-#' This affects the calculation of the largest possible number of edges in the
-#' graph. If this parameter is set to FALSE yet the graph contains self-loops,
-#' the result will not be meaningful.
+#'   This affects the calculation of the largest possible number of edges in the
+#'   graph. If this parameter is set to FALSE yet the graph contains self-loops,
+#'   the result will not be meaningful.
 #' @return A real constant. This function returns \code{NaN} (=0.0/0.0) for an
-#' empty graph with zero vertices.
+#'   empty graph with zero vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{vcount}}, \code{\link{ecount}}, \code{\link{simplify}}
 #' to get rid of the multiple and/or loop edges.
@@ -1162,22 +1162,22 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @param order Integer giving the order of the neighborhood.
 #' @param nodes The vertices for which the calculation is performed.
 #' @param mode Character constant, it specifies how to use the direction of
-#' the edges if a directed graph is analyzed. For \sQuote{out} only the
-#' outgoing edges are followed, so all vertices reachable from the source
-#' vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
-#' vertices from which the source vertex is reachable in at most \code{order}
-#' steps are counted. \sQuote{"all"} ignores the direction of the edges. This
-#' argument is ignored for undirected graphs.
+#'   the edges if a directed graph is analyzed. For \sQuote{out} only the
+#'   outgoing edges are followed, so all vertices reachable from the source
+#'   vertex in at most \code{order} steps are counted. For \sQuote{"in"} all
+#'   vertices from which the source vertex is reachable in at most \code{order}
+#'   steps are counted. \sQuote{"all"} ignores the direction of the edges. This
+#'   argument is ignored for undirected graphs.
 #' @param mindist The minimum distance to include the vertex in the result.
 #' @return
-#' \itemize{
+#'   \itemize{
 #'   \item{\code{ego_size} returns with an integer vector.}
 #'   \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
 #'         vectors depending on the value of \code{igraph_opt("return.vs.es")},
 #'         see details for performance characteristics.}
 #'   \item{\code{make_ego_graph} returns with a list of graphs.}
 #'   \item{\code{connect} returns with a new graph object.}
-#' }
+#'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
 #' @export
@@ -1269,11 +1269,11 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
 #' @aliases graph.coreness
 #' @param graph The input graph, it can be directed or undirected
 #' @param mode The type of the core in directed graphs. Character constant,
-#' possible values: \code{in}: in-cores are computed, \code{out}: out-cores are
-#' computed, \code{all}: the corresponding undirected graph is considered. This
-#' argument is ignored for undirected graphs.
+#'   possible values: \code{in}: in-cores are computed, \code{out}: out-cores are
+#'   computed, \code{all}: the corresponding undirected graph is considered. This
+#'   argument is ignored for undirected graphs.
 #' @return Numeric vector of integer numbers giving the coreness of each
-#' vertex.
+#'   vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{degree}}
 #' @references Vladimir Batagelj, Matjaz Zaversnik: An O(m) Algorithm for Cores
@@ -1323,13 +1323,13 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' @aliases topological.sort
 #' @param graph The input graph, should be directed
 #' @param mode Specifies how to use the direction of the edges.  For
-#' \dQuote{\code{out}}, the sorting order ensures that each node comes before
-#' all nodes to which it has edges, so nodes with no incoming edges go first.
-#' For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
-#' nodes from which it receives edges. Nodes with no outgoing edges go first.
+#'   \dQuote{\code{out}}, the sorting order ensures that each node comes before
+#'   all nodes to which it has edges, so nodes with no incoming edges go first.
+#'   For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
+#'   nodes from which it receives edges. Nodes with no outgoing edges go first.
 #' @return A vertex sequence (by default, but see the \code{return.vs.es}
-#' option of \code{\link{igraph_options}}) containing vertices in
-#' topologically sorted order.
+#'   option of \code{\link{igraph_options}}) containing vertices in
+#'   topologically sorted order.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @keywords graphs
@@ -1371,19 +1371,19 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #'
 #' @param graph The input graph
 #' @param weights Potential edge weights. If the graph has an edge
-#' attribute called \sQuote{\code{weight}}, and this argument is
-#' \code{NULL}, then the edge attribute is used automatically. The goal of
-#' the feedback arc set problem is to find a feedback arc set with the smallest
-#' total weight.
+#'   attribute called \sQuote{\code{weight}}, and this argument is
+#'   \code{NULL}, then the edge attribute is used automatically. The goal of
+#'   the feedback arc set problem is to find a feedback arc set with the smallest
+#'   total weight.
 #' @param algo Specifies the algorithm to use. \dQuote{\code{exact_ip}} solves
-#' the feedback arc set problem with an exact integer programming algorithm that
-#' guarantees that the total weight of the removed edges is as small as possible.
-#' \dQuote{\code{approx_eades}} uses a fast (linear-time) approximation
-#' algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
-#' \dQuote{\code{exact_ip}} while \dQuote{\code{approx}} is an alias to
-#' \dQuote{\code{approx_eades}}.
+#'   the feedback arc set problem with an exact integer programming algorithm that
+#'   guarantees that the total weight of the removed edges is as small as possible.
+#'   \dQuote{\code{approx_eades}} uses a fast (linear-time) approximation
+#'   algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
+#'   \dQuote{\code{exact_ip}} while \dQuote{\code{approx}} is an alias to
+#'   \dQuote{\code{approx_eades}}.
 #' @return An edge sequence (by default, but see the \code{return.vs.es} option
-#' of \code{\link{igraph_options}}) containing the feedback arc set.
+#'   of \code{\link{igraph_options}}) containing the feedback arc set.
 #' @references Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
 #' heuristic for the feedback arc set problem. \emph{Information Processing Letters}
 #' 47:6, pp. 319-323, 1993
@@ -1410,11 +1410,11 @@ feedback_arc_set <- feedback_arc_set
 #' this function was done by Keith Briggs, thanks Keith.
 #'
 #' @param graph The input graph. It may be directed, but the algorithm searches
-#' for undirected circles anyway.
+#'   for undirected circles anyway.
 #' @param circle Logical scalar, whether to return the shortest circle itself.
 #' @return A named list with two components: \item{girth}{Integer constant, the
-#' girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
-#' vector with the vertex ids in the shortest circle.}
+#'   girth of the graph, or 0 if the graph is acyclic.} \item{circle}{Numeric
+#'   vector with the vertex ids in the shortest circle.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Alon Itai and Michael Rodeh: Finding a minimum circuit in a
 #' graph \emph{Proceedings of the ninth annual ACM symposium on Theory of
@@ -1477,10 +1477,10 @@ girth <- function(graph, circle = TRUE) {
 #'   any_loop any_multiple which_loop
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
-#' all edges in the graph.
+#'   all edges in the graph.
 #' @return \code{any_loop} and \code{any_multiple} return a logical scalar.
-#' \code{which_loop} and \code{which_multiple} return a logical vector.
-#' \code{count_multiple} returns a numeric vector.
+#'   \code{which_loop} and \code{which_multiple} return a logical vector.
+#'   \code{count_multiple} returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} to eliminate loop and multiple edges.
 #' @export
@@ -1538,50 +1538,50 @@ any_loop <- any_loop
 #' @aliases graph.bfs
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
-#' vertices to start the search from.
+#'   vertices to start the search from.
 #' @param mode For directed graphs specifies the type of edges to follow.
-#' \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
-#' ignores edge directions completely. \sQuote{total} is a synonym for
-#' \sQuote{all}. This argument is ignored for undirected graphs.
+#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
+#'   ignores edge directions completely. \sQuote{total} is a synonym for
+#'   \sQuote{all}. This argument is ignored for undirected graphs.
 #' @param unreachable Logical scalar, whether the search should visit the
-#' vertices that are unreachable from the given root vertex (or vertices). If
-#' \code{TRUE}, then additional searches are performed until all vertices are
-#' visited.
+#'   vertices that are unreachable from the given root vertex (or vertices). If
+#'   \code{TRUE}, then additional searches are performed until all vertices are
+#'   visited.
 #' @param restricted \code{NULL} (=no restriction), or a vector of vertices
-#' (ids or symbolic names). In the latter case, the search is restricted to the
-#' given vertices.
+#'   (ids or symbolic names). In the latter case, the search is restricted to the
+#'   given vertices.
 #' @param order Logical scalar, whether to return the ordering of the vertices.
 #' @param rank Logical scalar, whether to return the rank of the vertices.
 #' @param father Logical scalar, whether to return the father of the vertices.
 #' @param pred Logical scalar, whether to return the predecessors of the
-#' vertices.
+#'   vertices.
 #' @param succ Logical scalar, whether to return the successors of the
-#' vertices.
+#'   vertices.
 #' @param dist Logical scalar, whether to return the distance from the root of
-#' the search tree.
+#'   the search tree.
 #' @param callback If not \code{NULL}, then it must be callback function. This
-#' is called whenever a vertex is visited. See details below.
+#'   is called whenever a vertex is visited. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode This argument is deprecated from igraph 1.3.0; use
-#' \code{mode} instead.
+#'   \code{mode} instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
-#' The root vertex that was used as the starting point of the search.}
-#' \item{neimode}{Character scalar. The \code{mode} argument of the function
-#' call. Note that for undirected graphs this is always \sQuote{all},
-#' irrespectively of the supplied value.} \item{order}{Numeric vector. The
-#' vertex ids, in the order in which they were visited by the search.}
-#' \item{rank}{Numeric vector. The rank for each vertex.} \item{father}{Numeric
-#' vector. The father of each vertex, i.e. the vertex it was discovered from.}
-#' \item{pred}{Numeric vector. The previously visited vertex for each vertex,
-#' or 0 if there was no such vertex.} \item{succ}{Numeric vector. The next
-#' vertex that was visited after the current one, or 0 if there was no such
-#' vertex.} \item{dist}{Numeric vector, for each vertex its distance from the
-#' root of the search tree.}
+#'   The root vertex that was used as the starting point of the search.}
+#'   \item{neimode}{Character scalar. The \code{mode} argument of the function
+#'   call. Note that for undirected graphs this is always \sQuote{all},
+#'   irrespectively of the supplied value.} \item{order}{Numeric vector. The
+#'   vertex ids, in the order in which they were visited by the search.}
+#'   \item{rank}{Numeric vector. The rank for each vertex.} \item{father}{Numeric
+#'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
+#'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
+#'   or 0 if there was no such vertex.} \item{succ}{Numeric vector. The next
+#'   vertex that was visited after the current one, or 0 if there was no such
+#'   vertex.} \item{dist}{Numeric vector, for each vertex its distance from the
+#'   root of the search tree.}
 #'
-#' Note that \code{order}, \code{rank}, \code{father}, \code{pred}, \code{succ}
-#' and \code{dist} might be \code{NULL} if their corresponding argument is
-#' \code{FALSE}, i.e. if their calculation is not requested.
+#'   Note that \code{order}, \code{rank}, \code{father}, \code{pred}, \code{succ}
+#'   and \code{dist} might be \code{NULL} if their corresponding argument is
+#'   \code{FALSE}, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{dfs}} for depth-first search.
 #' @export
@@ -1705,43 +1705,43 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' @param graph The input graph.
 #' @param root The single root vertex to start the search from.
 #' @param mode For directed graphs specifies the type of edges to follow.
-#' \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
-#' ignores edge directions completely. \sQuote{total} is a synonym for
-#' \sQuote{all}. This argument is ignored for undirected graphs.
+#'   \sQuote{out} follows outgoing, \sQuote{in} incoming edges. \sQuote{all}
+#'   ignores edge directions completely. \sQuote{total} is a synonym for
+#'   \sQuote{all}. This argument is ignored for undirected graphs.
 #' @param unreachable Logical scalar, whether the search should visit the
-#' vertices that are unreachable from the given root vertex (or vertices). If
-#' \code{TRUE}, then additional searches are performed until all vertices are
-#' visited.
+#'   vertices that are unreachable from the given root vertex (or vertices). If
+#'   \code{TRUE}, then additional searches are performed until all vertices are
+#'   visited.
 #' @param order Logical scalar, whether to return the DFS ordering of the
-#' vertices.
+#'   vertices.
 #' @param order.out Logical scalar, whether to return the ordering based on
-#' leaving the subtree of the vertex.
+#'   leaving the subtree of the vertex.
 #' @param father Logical scalar, whether to return the father of the vertices.
 #' @param dist Logical scalar, whether to return the distance from the root of
-#' the search tree.
+#'   the search tree.
 #' @param in.callback If not \code{NULL}, then it must be callback function.
-#' This is called whenever a vertex is visited. See details below.
+#'   This is called whenever a vertex is visited. See details below.
 #' @param out.callback If not \code{NULL}, then it must be callback function.
-#' This is called whenever the subtree of a vertex is completed by the
-#' algorithm. See details below.
+#'   This is called whenever the subtree of a vertex is completed by the
+#'   algorithm. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode This argument is deprecated from igraph 1.3.0; use
-#' \code{mode} instead.
+#'   \code{mode} instead.
 #' @return A named list with the following entries: \item{root}{Numeric scalar.
-#' The root vertex that was used as the starting point of the search.}
-#' \item{neimode}{Character scalar. The \code{mode} argument of the function
-#' call. Note that for undirected graphs this is always \sQuote{all},
-#' irrespectively of the supplied value.} \item{order}{Numeric vector. The
-#' vertex ids, in the order in which they were visited by the search.}
-#' \item{order.out}{Numeric vector, the vertex ids, in the order of the
-#' completion of their subtree.} \item{father}{Numeric vector. The father of
-#' each vertex, i.e. the vertex it was discovered from.} \item{dist}{Numeric
-#' vector, for each vertex its distance from the root of the search tree.}
+#'   The root vertex that was used as the starting point of the search.}
+#'   \item{neimode}{Character scalar. The \code{mode} argument of the function
+#'   call. Note that for undirected graphs this is always \sQuote{all},
+#'   irrespectively of the supplied value.} \item{order}{Numeric vector. The
+#'   vertex ids, in the order in which they were visited by the search.}
+#'   \item{order.out}{Numeric vector, the vertex ids, in the order of the
+#'   completion of their subtree.} \item{father}{Numeric vector. The father of
+#'   each vertex, i.e. the vertex it was discovered from.} \item{dist}{Numeric
+#'   vector, for each vertex its distance from the root of the search tree.}
 #'
-#' Note that \code{order}, \code{order.out}, \code{father}, and \code{dist}
-#' might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
-#' if their calculation is not requested.
+#'   Note that \code{order}, \code{order.out}, \code{father}, and \code{dist}
+#'   might be \code{NULL} if their corresponding argument is \code{FALSE}, i.e.
+#'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{bfs}} for breadth-first search.
 #' @export
@@ -1859,23 +1859,23 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' @aliases no.clusters clusters is.connected cluster.distribution components
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
-#' directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
-#' connected components to search. It is ignored for undirected graphs.
+#'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
+#'   connected components to search. It is ignored for undirected graphs.
 #' @param \dots Additional attributes to pass to \code{cluster}, right now only
-#' \code{mode} makes sense.
+#'   \code{mode} makes sense.
 #' @return For \code{is_connected} a logical constant.
 #'
-#' For \code{components} a named list with three components:
-#' \item{membership}{numeric vector giving the cluster id to which each vertex
-#' belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
-#' \item{no}{numeric constant, the number of clusters.}
+#'   For \code{components} a named list with three components:
+#'   \item{membership}{numeric vector giving the cluster id to which each vertex
+#'   belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
+#'   \item{no}{numeric constant, the number of clusters.}
 #'
-#' For \code{count_components} an integer constant is returned.
+#'   For \code{count_components} an integer constant is returned.
 #'
-#' For \code{component_distribution} a numeric vector with the relative
-#' frequencies. The length of the vector is the size of the largest component
-#' plus one. Note that (for currently unknown reasons) the first element of the
-#' vector is the number of clusters of size zero, so this is always zero.
+#'   For \code{component_distribution} a numeric vector with the relative
+#'   frequencies. The length of the vector is the size of the largest component
+#'   plus one. Note that (for currently unknown reasons) the first element of the
+#'   vector is the number of clusters of size zero, so this is always zero.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{decompose}}, \code{\link{subcomponent}}, \code{\link{groups}}
 #' @export
@@ -1926,15 +1926,15 @@ count_components <- count_components
 #' @aliases unfold.tree
 #' @param graph The input graph, it can be either directed or undirected.
 #' @param mode Character string, defined the types of the paths used for the
-#' breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
-#' incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
-#' is ignored for undirected graphs.
+#'   breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
+#'   incoming edges, \dQuote{all} and \dQuote{total} both of them. This argument
+#'   is ignored for undirected graphs.
 #' @param roots A vector giving the vertices from which the breadth-first
-#' search is performed. Typically it contains one vertex per component.
+#'   search is performed. Typically it contains one vertex per component.
 #' @return A list with two components: \item{tree}{The result, an \code{igraph}
-#' object, a tree or a forest.} \item{vertex_index}{A numeric vector, it gives
-#' a mapping from the vertices of the new graph to the vertices of the old
-#' graph.}
+#'   object, a tree or a forest.} \item{vertex_index}{A numeric vector, it gives
+#'   a mapping from the vertices of the new graph to the vertices of the old
+#'   graph.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
@@ -1988,14 +1988,14 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' @aliases graph.laplacian
 #' @param graph The input graph.
 #' @param normalized Whether to calculate the normalized Laplacian. See
-#' definitions below.
+#'   definitions below.
 #' @param weights An optional vector giving edge weights for weighted Laplacian
-#' matrix. If this is \code{NULL} and the graph has an edge attribute called
-#' \code{weight}, then it will be used automatically. Set this to \code{NA} if
-#' you want the unweighted Laplacian on a graph that has a \code{weight} edge
-#' attribute.
+#'   matrix. If this is \code{NULL} and the graph has an edge attribute called
+#'   \code{weight}, then it will be used automatically. Set this to \code{NA} if
+#'   you want the unweighted Laplacian on a graph that has a \code{weight} edge
+#'   attribute.
 #' @param sparse Logical scalar, whether to return the result as a sparse
-#' matrix. The \code{Matrix} package is required for sparse matrices.
+#'   matrix. The \code{Matrix} package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
@@ -2072,28 +2072,28 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' @aliases is.matching is_matching is.maximal.matching is_max_matching
 #' maximum.bipartite.matching max_bipartite_match
 #' @param graph The input graph. It might be directed, but edge directions will
-#' be ignored.
+#'   be ignored.
 #' @param types Vertex types, if the graph is bipartite. By default they
-#' are taken from the \sQuote{\code{type}} vertex attribute, if present.
+#'   are taken from the \sQuote{\code{type}} vertex attribute, if present.
 #' @param matching A potential matching. An integer vector that gives the
-#' pair in the matching for each vertex. For vertices without a pair,
-#' supply \code{NA} here.
+#'   pair in the matching for each vertex. For vertices without a pair,
+#'   supply \code{NA} here.
 #' @param weights Potential edge weights. If the graph has an edge
-#' attribute called \sQuote{\code{weight}}, and this argument is
-#' \code{NULL}, then the edge attribute is used automatically.
-#' In weighted matching, the weights of the edges must match as
-#' much as possible.
+#'   attribute called \sQuote{\code{weight}}, and this argument is
+#'   \code{NULL}, then the edge attribute is used automatically.
+#'   In weighted matching, the weights of the edges must match as
+#'   much as possible.
 #' @param eps A small real number used in equality tests in the weighted
-#' bipartite matching algorithm. Two real numbers are considered equal in
-#' the algorithm if their difference is smaller than \code{eps}. This is
-#' required to avoid the accumulation of numerical errors. By default it is
-#' set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
-#' holds. If you are running the algorithm with no weights, this argument
-#' is ignored.
+#'   bipartite matching algorithm. Two real numbers are considered equal in
+#'   the algorithm if their difference is smaller than \code{eps}. This is
+#'   required to avoid the accumulation of numerical errors. By default it is
+#'   set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
+#'   holds. If you are running the algorithm with no weights, this argument
+#'   is ignored.
 #' @return \code{is_matching} and \code{is_max_matching} return a logical
-#' scalar.
+#'   scalar.
 #'
-#' \code{max_bipartite_match} returns a list with components:
+#'   \code{max_bipartite_match} returns a list with components:
 #'   \item{matching_size}{The size of the matching, i.e. the number of edges
 #'     connecting the matched vertices.}
 #'   \item{matching_weight}{The weights of the matching, if the graph was
@@ -2210,7 +2210,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' @aliases is.mutual which_mutual
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
-#' includes all edges in the order of their ids.
+#'   includes all edges in the order of their ids.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{reciprocity}}, \code{\link{dyad_census}} if you just
@@ -2249,27 +2249,27 @@ which_mutual <- which_mutual
 #' @aliases knn graph.knn
 #' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
-#' includes all vertices. Note, that if not all vertices are given here, then
-#' both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
-#' on the given vertices only.
+#'   includes all vertices. Note, that if not all vertices are given here, then
+#'   both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
+#'   on the given vertices only.
 #' @param mode Character constant to indicate the type of neighbors to consider
-#' in directed graphs. \code{out} considers out-neighbors, \code{in} considers
-#' in-neighbors and \code{all} ignores edge directions.
+#'   in directed graphs. \code{out} considers out-neighbors, \code{in} considers
+#'   in-neighbors and \code{all} ignores edge directions.
 #' @param neighbor.degree.mode The type of degree to average in directed graphs.
-#' \code{out} averages out-degrees, \code{in} averages in-degrees and \code{all}
-#' ignores edge directions for the degree calculation.
+#'   \code{out} averages out-degrees, \code{in} averages in-degrees and \code{all}
+#'   ignores edge directions for the degree calculation.
 #' @param weights Weight vector. If the graph has a \code{weight} edge
-#' attribute, then this is used by default. If this argument is given, then
-#' vertex strength (see \code{\link{strength}}) is used instead of vertex
-#' degree. But note that \code{knnk} is still given in the function of the
-#' normal vertex degree.
-#' Weights are are used to calculate a weighted degree (also called
-#' \code{\link{strength}}) instead of the degree.
+#'   attribute, then this is used by default. If this argument is given, then
+#'   vertex strength (see \code{\link{strength}}) is used instead of vertex
+#'   degree. But note that \code{knnk} is still given in the function of the
+#'   normal vertex degree.
+#'   Weights are are used to calculate a weighted degree (also called
+#'   \code{\link{strength}}) instead of the degree.
 #' @return A list with two members: \item{knn}{A numeric vector giving the
-#' average nearest neighbor degree for all vertices in \code{vids}.}
-#' \item{knnk}{A numeric vector, its length is the maximum (total) vertex
-#' degree in the graph. The first element is the average nearest neighbor
-#' degree of vertices with degree one, etc.  }
+#'   average nearest neighbor degree for all vertices in \code{vids}.}
+#'   \item{knnk}{A numeric vector, its length is the maximum (total) vertex
+#'   degree in the graph. The first element is the average nearest neighbor
+#'   degree of vertices with degree one, etc.  }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras,
 #' Alessandro Vespignani: The architecture of complex weighted networks, Proc.

@@ -12,10 +12,10 @@
 #'
 #' @param graph The graph object to color
 #' @param heuristic The selection heuristic for the next vertex to consider.
-#' Currently only one heuristic is supported: \dQuote{colored_neighbors}
-#' selects the vertex with the largest number of already colored neighbors.
+#'   Currently only one heuristic is supported: \dQuote{colored_neighbors}
+#'   selects the vertex with the largest number of already colored neighbors.
 #' @return A numeric vector where item \code{i} contains the color index
-#' associated to vertex \code{i}
+#'   associated to vertex \code{i}
 #'
 #' @export
 #' @keywords graphs

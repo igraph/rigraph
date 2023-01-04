@@ -730,26 +730,26 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' @aliases canonical.permutation canonical_permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
-#' vertices having the same color are allowed to match each other in an
-#' automorphism. When omitted, igraph uses the \code{color} attribute of the
-#' vertices, or, if there is no such vertex attribute, it simply assumes that
-#' all vertices have the same color. Pass NULL explicitly if the graph has a
-#' \code{color} vertex attribute but you do not want to use it.
+#'   vertices having the same color are allowed to match each other in an
+#'   automorphism. When omitted, igraph uses the \code{color} attribute of the
+#'   vertices, or, if there is no such vertex attribute, it simply assumes that
+#'   all vertices have the same color. Pass NULL explicitly if the graph has a
+#'   \code{color} vertex attribute but you do not want to use it.
 #' @param sh Type of the heuristics to use for the BLISS algorithm. See details
-#' for possible values.
+#'   for possible values.
 #' @return A list with the following members: \item{labeling}{The canonical
-#' permutation which takes the input graph into canonical form. A numeric
-#' vector, the first element is the new label of vertex 0, the second element
-#' for vertex 1, etc. } \item{info}{Some information about the BLISS
-#' computation. A named list with the following members: \describe{
-#' \item{"nof_nodes"}{The number of nodes in the search tree.}
-#' \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
-#' \item{"nof_bad_nodes"}{Number of bad nodes.}
-#' \item{"nof_canupdates"}{Number of canrep updates.}
-#' \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
-#' of the automorphism group of the input graph, as a string. The string
-#' representation is necessary because the group size can easily exceed
-#' values that are exactly representable in floating point.} } }
+#'   permutation which takes the input graph into canonical form. A numeric
+#'   vector, the first element is the new label of vertex 0, the second element
+#'   for vertex 1, etc. } \item{info}{Some information about the BLISS
+#'   computation. A named list with the following members: \describe{
+#'   \item{"nof_nodes"}{The number of nodes in the search tree.}
+#'   \item{"nof_leaf_nodes"}{The number of leaf nodes in the search tree.}
+#'   \item{"nof_bad_nodes"}{Number of bad nodes.}
+#'   \item{"nof_canupdates"}{Number of canrep updates.}
+#'   \item{"max_level"}{Maximum level.} \item{"group_size"}{The size
+#'   of the automorphism group of the input graph, as a string. The string
+#'   representation is necessary because the group size can easily exceed
+#'   values that are exactly representable in floating point.} } }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
 #' @seealso \code{\link{permute}} to apply a permutation to a graph,
@@ -796,8 +796,8 @@ canonical_permutation <- canonical_permutation
 #' @aliases permute.vertices permute
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
-#' first element is the new id of vertex 1, etc. Every number between one and
-#' \code{vcount(graph)} must appear exactly once.
+#'   first element is the new id of vertex 1, etc. Every number between one and
+#'   \code{vcount(graph)} must appear exactly once.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{canonical_permutation}}
@@ -840,25 +840,25 @@ permute <- permute
 #' @aliases graph.automorphisms automorphisms count_automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
-#' vertices having the same color are allowed to match each other in an
-#' automorphism. When omitted, igraph uses the \code{color} attribute of the
-#' vertices, or, if there is no such vertex attribute, it simply assumes that
-#' all vertices have the same color. Pass NULL explicitly if the graph has a
-#' \code{color} vertex attribute but you do not want to use it.
+#'   vertices having the same color are allowed to match each other in an
+#'   automorphism. When omitted, igraph uses the \code{color} attribute of the
+#'   vertices, or, if there is no such vertex attribute, it simply assumes that
+#'   all vertices have the same color. Pass NULL explicitly if the graph has a
+#'   \code{color} vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#' are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
-#' largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
-#' cell, \sQuote{\code{fm}}: first maximally non-trivially connected
-#' non-singleton cell, \sQuote{\code{flm}}: first largest maximally
-#' non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
-#' smallest maximally non-trivially connected non-singleton cell.
+#'   are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
+#'   largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
+#'   cell, \sQuote{\code{fm}}: first maximally non-trivially connected
+#'   non-singleton cell, \sQuote{\code{flm}}: first largest maximally
+#'   non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
+#'   smallest maximally non-trivially connected non-singleton cell.
 #' @return A named list with the following members: \item{group_size}{The size
-#' of the automorphism group of the input graph, as a string. This number is
-#' exact if igraph was compiled with the GMP library, and approximate
-#' otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
-#' \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
-#' \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
-#' canrep updates.} \item{max_level}{Maximum level.}
+#'   of the automorphism group of the input graph, as a string. This number is
+#'   exact if igraph was compiled with the GMP library, and approximate
+#'   otherwise.} \item{nof_nodes}{The number of nodes in the search tree.}
+#'   \item{nof_leaf_nodes}{The number of leaf nodes in the search tree.}
+#'   \item{nof_bad_nodes}{Number of bad nodes.} \item{nof_canupdates}{Number of
+#'   canrep updates.} \item{max_level}{Maximum level.}
 #' @author Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
@@ -903,26 +903,26 @@ count_automorphisms <- count_automorphisms
 #'
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
-#' vertices having the same color are allowed to match each other in an
-#' automorphism. When omitted, igraph uses the \code{color} attribute of the
-#' vertices, or, if there is no such vertex attribute, it simply assumes that
-#' all vertices have the same color. Pass NULL explicitly if the graph has a
-#' \code{color} vertex attribute but you do not want to use it.
+#'   vertices having the same color are allowed to match each other in an
+#'   automorphism. When omitted, igraph uses the \code{color} attribute of the
+#'   vertices, or, if there is no such vertex attribute, it simply assumes that
+#'   all vertices have the same color. Pass NULL explicitly if the graph has a
+#'   \code{color} vertex attribute but you do not want to use it.
 #' @param sh The splitting heuristics for the BLISS algorithm. Possible values
-#' are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
-#' largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
-#' cell, \sQuote{\code{fm}}: first maximally non-trivially connected
-#' non-singleton cell, \sQuote{\code{flm}}: first largest maximally
-#' non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
-#' smallest maximally non-trivially connected non-singleton cell.
+#'   are: \sQuote{\code{f}}: first non-singleton cell, \sQuote{\code{fl}}: first
+#'   largest non-singleton cell, \sQuote{\code{fs}}: first smallest non-singleton
+#'   cell, \sQuote{\code{fm}}: first maximally non-trivially connected
+#'   non-singleton cell, \sQuote{\code{flm}}: first largest maximally
+#'   non-trivially connected non-singleton cell, \sQuote{\code{fsm}}: first
+#'   smallest maximally non-trivially connected non-singleton cell.
 #' @param details Specifies whether to provide additional details about the
-#' BLISS internals in the result.
+#'   BLISS internals in the result.
 #' @return When \code{details} is \code{FALSE}, a list of vertex permutations
-#' that form a generating set of the automorphism group of the input graph.
-#' When \code{details} is \code{TRUE}, a named list with two members:
-#' \item{generators}{Returns the generators themselves} \item{info}{Additional
-#' information about the BLISS internals. See \code{\link{count_automorphisms}} for
-#' more details.}
+#'   that form a generating set of the automorphism group of the input graph.
+#'   When \code{details} is \code{TRUE}, a named list with two members:
+#'   \item{generators}{Returns the generators themselves} \item{info}{Additional
+#'   information about the BLISS internals. See \code{\link{count_automorphisms}} for
+#'   more details.}
 #' @author Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.

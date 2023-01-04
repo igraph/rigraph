@@ -26,7 +26,7 @@
 #' @aliases is.igraph
 #' @param graph An R object.
 #' @return A logical constant, \code{TRUE} if argument \code{graph} is a graph
-#' object.
+#'   object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs

@@ -71,16 +71,16 @@
 #'
 #' @aliases graph_from_data_frame graph.data.frame as_data_frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
-#' columns. Additional columns are considered as edge attributes.  Since
-#' version 0.7 this argument is coerced to a data frame with
-#' \code{as.data.frame}.
+#'   columns. Additional columns are considered as edge attributes.  Since
+#'   version 0.7 this argument is coerced to a data frame with
+#'   \code{as.data.frame}.
 #' @param directed Logical scalar, whether or not to create a directed graph.
 #' @param vertices A data frame with vertex metadata, or \code{NULL}. See
-#' details below. Since version 0.7 this argument is coerced to a data frame
-#' with \code{as.data.frame}, if not \code{NULL}.
+#'   details below. Since version 0.7 this argument is coerced to a data frame
+#'   with \code{as.data.frame}, if not \code{NULL}.
 #' @return An igraph graph object for \code{graph_from_data_frame}, and either a
-#' data frame or a list of two data frames named \code{edges} and
-#' \code{vertices} for \code{as.data.frame}.
+#'   data frame or a list of two data frames named \code{edges} and
+#'   \code{vertices} for \code{as.data.frame}.
 #' @note For \code{graph_from_data_frame} \code{NA} elements in the first two
 #' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 #' the graph. This means that all \code{NA}s will correspond to a single

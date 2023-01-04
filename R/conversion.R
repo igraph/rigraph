@@ -171,32 +171,32 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' @aliases get.adjacency
 #' @param graph The graph to convert.
 #' @param type Gives how to create the adjacency matrix for undirected graphs.
-#' It is ignored for directed graphs. Possible values: \code{upper}: the upper
-#' right triangle of the matrix is used, \code{lower}: the lower left triangle
-#' of the matrix is used. \code{both}: the whole matrix is used, a symmetric
-#' matrix is returned.
+#'   It is ignored for directed graphs. Possible values: \code{upper}: the upper
+#'   right triangle of the matrix is used, \code{lower}: the lower left triangle
+#'   of the matrix is used. \code{both}: the whole matrix is used, a symmetric
+#'   matrix is returned.
 #' @param attr Either \code{NULL} or a character string giving an edge
-#' attribute name. If \code{NULL} a traditional adjacency matrix is returned.
-#' If not \code{NULL} then the values of the given edge attribute are included
-#' in the adjacency matrix. If the graph has multiple edges, the edge attribute
-#' of an arbitrarily chosen edge (for the multiple edges) is included. This
-#' argument is ignored if \code{edges} is \code{TRUE}.
+#'   attribute name. If \code{NULL} a traditional adjacency matrix is returned.
+#'   If not \code{NULL} then the values of the given edge attribute are included
+#'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
+#'   of an arbitrarily chosen edge (for the multiple edges) is included. This
+#'   argument is ignored if \code{edges} is \code{TRUE}.
 #'
-#' Note that this works only for certain attribute types. If the \code{sparse}
-#' argumen is \code{TRUE}, then the attribute must be either logical or
-#' numeric. If the \code{sparse} argument is \code{FALSE}, then character is
-#' also allowed. The reason for the difference is that the \code{Matrix}
-#' package does not support character sparse matrices yet.
+#'   Note that this works only for certain attribute types. If the \code{sparse}
+#'   argumen is \code{TRUE}, then the attribute must be either logical or
+#'   numeric. If the \code{sparse} argument is \code{FALSE}, then character is
+#'   also allowed. The reason for the difference is that the \code{Matrix}
+#'   package does not support character sparse matrices yet.
 #' @param edges Logical scalar, whether to return the edge ids in the matrix.
-#' For non-existant edges zero is returned.
+#'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
-#' to the matrix. These are only assigned if the \code{name} vertex attribute
-#' is present in the graph.
+#'   to the matrix. These are only assigned if the \code{name} vertex attribute
+#'   is present in the graph.
 #' @param sparse Logical scalar, whether to create a sparse matrix. The
-#' \sQuote{\code{Matrix}} package must be installed for creating sparse
-#' matrices.
+#'   \sQuote{\code{Matrix}} package must be installed for creating sparse
+#'   matrices.
 #' @return A \code{vcount(graph)} by \code{vcount(graph)} (usually) numeric
-#' matrix.
+#'   matrix.
 #'
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
 #' @examples
@@ -240,8 +240,8 @@ as_adj <- as_adjacency_matrix
 #' @aliases get.edgelist
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
-#' names (ie. the \code{name} vertex attribute) if they exist or numeric
-#' vertex ids.
+#'   names (ie. the \code{name} vertex attribute) if they exist or numeric
+#'   vertex ids.
 #' @return A \code{gsize(graph)} by 2 numeric matrix.
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
 #' @keywords graphs
@@ -310,9 +310,9 @@ as_edgelist <- function(graph, names = TRUE) {
 #' @aliases as.directed as.undirected
 #' @param graph The graph to convert.
 #' @param mode Character constant, defines the conversion algorithm. For
-#' \code{as.directed} it can be \code{mutual} or \code{arbitrary}. For
-#' \code{as.undirected} it can be \code{each}, \code{collapse} or
-#' \code{mutual}. See details below.
+#'   \code{as.directed} it can be \code{mutual} or \code{arbitrary}. For
+#'   \code{as.undirected} it can be \code{each}, \code{collapse} or
+#'   \code{mutual}. See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} for removing multiple and/or loop edges from
@@ -354,10 +354,10 @@ as.directed <- as.directed
 
 #' @rdname as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
-#' \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
-#' might be mapped to a single one in the new graph, and their attributes are
-#' combined. Please see \code{\link{attribute.combination}} for details on
-#' this.
+#'   \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
+#'   might be mapped to a single one in the new graph, and their attributes are
+#'   combined. Please see \code{\link{attribute.combination}} for details on
+#'   this.
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
   # Argument checks
@@ -395,17 +395,17 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' @aliases as_adj_list get.adjedgelist
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
-#' to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
-#' \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
-#' for both. This argument is ignored for undirected graphs.
+#'   to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
+#'   \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
+#'   for both. This argument is ignored for undirected graphs.
 #' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
 #'   (to include loop edges twice) and `"once"` (to include them once). `"twice"`
 #'   is not allowed for directed graphs and will be replaced with `"once"`.
 #' @param multiple Logical scalar, set to `FALSE` to use only one representative
 #'   of each set of parallel edges.
 #' @return A list of \code{igraph.vs} or a list of numeric vectors depending on
-#' the value of \code{igraph_opt("return.vs.es")}, see details for performance
-#' characteristics.
+#'   the value of \code{igraph_opt("return.vs.es")}, see details for performance
+#'   characteristics.
 #' @details If \code{igraph_opt("return.vs.es")} is true (default), the numeric
 #' vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
 #' a very expensive operation on large graphs.
@@ -508,14 +508,14 @@ as_adj_edge_list <- function(graph,
 #' @aliases igraph.from.graphNEL
 #' @param graphNEL The graphNEL graph.
 #' @param name Logical scalar, whether to add graphNEL vertex names as an
-#' igraph vertex attribute called \sQuote{\code{name}}.
+#'   igraph vertex attribute called \sQuote{\code{name}}.
 #' @param weight Logical scalar, whether to add graphNEL edge weights as an
-#' igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
-#' always weighted.)
+#'   igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
+#'   always weighted.)
 #' @param unlist.attrs Logical scalar. graphNEL attribute query functions
-#' return the values of the attributes in R lists, if this argument is
-#' \code{TRUE} (the default) these will be converted to atomic vectors,
-#' whenever possible, before adding them to the igraph graph.
+#'   return the values of the attributes in R lists, if this argument is
+#'   \code{TRUE} (the default) these will be converted to atomic vectors,
+#'   whenever possible, before adding them to the igraph graph.
 #' @return \code{graph_from_graphnel} returns an igraph graph object.
 #' @seealso \code{\link{as_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
@@ -823,22 +823,22 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #'
 #' @aliases get.incidence
 #' @param graph The input graph. The direction of the edges is ignored in
-#' directed graphs.
+#'   directed graphs.
 #' @param types An optional vertex type vector to use instead of the
-#' \code{type} vertex attribute. You must supply this argument if the graph has
-#' no \code{type} vertex attribute.
+#'   \code{type} vertex attribute. You must supply this argument if the graph has
+#'   no \code{type} vertex attribute.
 #' @param attr Either \code{NULL} or a character string giving an edge
-#' attribute name. If \code{NULL}, then a traditional incidence matrix is
-#' returned. If not \code{NULL} then the values of the given edge attribute are
-#' included in the incidence matrix. If the graph has multiple edges, the edge
-#' attribute of an arbitrarily chosen edge (for the multiple edges) is
-#' included.
+#'   attribute name. If \code{NULL}, then a traditional incidence matrix is
+#'   returned. If not \code{NULL} then the values of the given edge attribute are
+#'   included in the incidence matrix. If the graph has multiple edges, the edge
+#'   attribute of an arbitrarily chosen edge (for the multiple edges) is
+#'   included.
 #' @param names Logical scalar, if \code{TRUE} and the vertices in the graph
-#' are named (i.e. the graph has a vertex attribute called \code{name}), then
-#' vertex names will be added to the result as row and column names. Otherwise
-#' the ids of the vertices are used as row and column names.
+#'   are named (i.e. the graph has a vertex attribute called \code{name}), then
+#'   vertex names will be added to the result as row and column names. Otherwise
+#'   the ids of the vertices are used as row and column names.
 #' @param sparse Logical scalar, if it is \code{TRUE} then a sparse matrix is
-#' created, you will need the \code{Matrix} package for this.
+#'   created, you will need the \code{Matrix} package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph_from_incidence_matrix}} for the opposite operation.
@@ -870,7 +870,7 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
 #' @rdname graph_from_data_frame
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
-#' edges, or both. The default is \sQuote{edges}.
+#'   edges, or both. The default is \sQuote{edges}.
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   if (!is_igraph(x)) {
@@ -924,19 +924,19 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'
 #' @aliases graph.adjlist graph_from_adj_list
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
-#' throughout all vectors in the list must be less than the number of vectors
-#' (=the number of vertices in the graph).
+#'   throughout all vectors in the list must be less than the number of vectors
+#'   (=the number of vertices in the graph).
 #' @param mode Character scalar, it specifies whether the graph to create is
-#' undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
-#' case, whether it contains the outgoing (\sQuote{out}) or the incoming
-#' (\sQuote{in}) neighbors of the vertices.
+#'   undirected (\sQuote{all} or \sQuote{total}) or directed; and in the latter
+#'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
+#'   (\sQuote{in}) neighbors of the vertices.
 #' @param duplicate Logical scalar. For undirected graphs it gives whether
-#' edges are included in the list twice. E.g. if it is \code{TRUE} then for an
-#' undirected \code{{A,B}} edge \code{graph_from_adj_list} expects \code{A}
-#' included in the neighbors of \code{B} and \code{B} to be included in the
-#' neighbors of \code{A}.
+#'   edges are included in the list twice. E.g. if it is \code{TRUE} then for an
+#'   undirected \code{{A,B}} edge \code{graph_from_adj_list} expects \code{A}
+#'   included in the neighbors of \code{B} and \code{B} to be included in the
+#'   neighbors of \code{A}.
 #'
-#' This argument is ignored if \code{mode} is \code{out} or \code{in}.
+#'   This argument is ignored if \code{mode} is \code{out} or \code{in}.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_edgelist}}
@@ -1034,10 +1034,10 @@ as_long_data_frame <- function(graph) {
 #'
 #' @param x object of class igraph, the network
 #' @param matrix.type character, type of matrix to return, currently "adjacency"
-#' or "edgelist" are supported
+#'   or "edgelist" are supported
 #' @param \dots other arguments to/from other methods
 #' @return Depending on the value of \code{matrix.type} either a square
-#' adjacency matrix or a two-column numeric matrix representing the edgelist.
+#'   adjacency matrix or a two-column numeric matrix representing the edgelist.
 #' @author Michal Bojanowski, originally from the \code{intergraph} package
 #' @seealso \code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
 #' @export

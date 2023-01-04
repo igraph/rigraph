@@ -129,18 +129,18 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'
 #' @aliases igraph.options igraph_options getIgraphOpt igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of
-#' arguments may be in the \code{name=value} form, or no argument at all may be
-#' given. See the Value and Details sections for explanation.
+#'   arguments may be in the \code{name=value} form, or no argument at all may be
+#'   given. See the Value and Details sections for explanation.
 #' @param x A character string holding an option name.
 #' @param default If the specified option is not set in the options list, this
-#' value is returned. This facilitates retrieving an option and checking
-#' whether it is set and setting it separately if not.
+#'   value is returned. This facilitates retrieving an option and checking
+#'   whether it is set and setting it separately if not.
 #' @return \code{igraph_options} returns a list with the old values of the
-#' updated parameters, invisibly. Without any arguments, it returns the
-#' values of all options.
+#'   updated parameters, invisibly. Without any arguments, it returns the
+#'   values of all options.
 #'
-#' For \code{igraph_opt}, the current value set for option \code{x}, or
-#' \code{NULL} if the option is unset.
+#'   For \code{igraph_opt}, the current value set for option \code{x}, or
+#'   \code{NULL} if the option is unset.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{igraph_options} is similar to \code{\link{options}} and
 #' \code{igraph_opt} is similar to \code{\link{getOption}}.

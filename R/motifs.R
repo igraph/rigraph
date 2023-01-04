@@ -33,14 +33,14 @@
 #' @aliases graph.motifs
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently sizes 3 and 4 are supported in
-#' directed graphs and sizes 3-6 in undirected graphs.
+#'   directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
-#' graph is cut at a certain level. Its length should be the same as the size
-#' of the motif (the \code{size} argument). By default no cuts are made.
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the \code{size} argument). By default no cuts are made.
 #' @return \code{motifs} returns a numeric vector, the number of occurrences of
-#' each motif in the graph. The motifs are ordered by their isomorphism
-#' classes. Note that for unconnected subgraphs, which are not considered to be
-#' motifs, the result will be \code{NA}.
+#'   each motif in the graph. The motifs are ordered by their isomorphism
+#'   classes. Note that for unconnected subgraphs, which are not considered to be
+#'   motifs, the result will be \code{NA}.
 #' @seealso \code{\link{isomorphism_class}}
 #'
 #' @export
@@ -84,8 +84,8 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif.
 #' @param cut.prob Numeric vector giving the probabilities that the search
-#' graph is cut at a certain level. Its length should be the same as the size
-#' of the motif (the \code{size} argument). By default no cuts are made.
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the \code{size} argument). By default no cuts are made.
 #' @return \code{count_motifs} returns  a numeric scalar.
 #' @seealso \code{\link{isomorphism_class}}
 #'
@@ -127,14 +127,14 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @aliases graph.motifs.est
 #' @param graph Graph object, the input graph.
 #' @param size The size of the motif, currently size 3 and 4 are supported
-#' in directed graphs and sizes 3-6 in undirected graphs.
+#'   in directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
-#' graph is cut at a certain level. Its length should be the same as the size
-#' of the motif (the \code{size} argument). By default no cuts are made.
+#'   graph is cut at a certain level. Its length should be the same as the size
+#'   of the motif (the \code{size} argument). By default no cuts are made.
 #' @param sample.size The number of vertices to use as a starting point for
-#' finding motifs. Only used if the \code{sample} argument is \code{NULL}.
+#'   finding motifs. Only used if the \code{sample} argument is \code{NULL}.
 #' @param sample If not \code{NULL} then it specifies the vertices to use as a
-#' starting point for finding motifs.
+#'   starting point for finding motifs.
 #' @return A numeric scalar, an estimate for the total number of motifs in
 #'   the graph.
 #' @seealso \code{\link{isomorphism_class}}
@@ -178,9 +178,9 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' @aliases dyad.census dyad_census
 #' @param graph The input graph. A warning is given if it is not directed.
 #' @return A named numeric vector with three elements: \item{mut}{The number of
-#' pairs with mutual connections.} \item{asym}{The number of pairs with
-#' non-mutual connections.} \item{null}{The number of pairs with no connection
-#' between them.}
+#'   pairs with mutual connections.} \item{asym}{The number of pairs with
+#'   non-mutual connections.} \item{null}{The number of pairs with no connection
+#'   between them.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{triad_census}} for the same classification, but with
 #' triples.
@@ -220,9 +220,9 @@ dyad_census <- dyad_census
 #'
 #' @aliases triad.census triad_census
 #' @param graph The input graph, it should be directed. An undirected graph
-#' results a warning, and undefined results.
+#'   results a warning, and undefined results.
 #' @return A numeric vector, the subgraph counts, in the order given in the
-#' above description.
+#'   above description.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{dyad_census}} for classifying binary relationships,
 #' \code{\link{motifs}} for the underlying implementation.

@@ -31,7 +31,7 @@
 #' mark categories, e.g. community membership.
 #'
 #' @param n The number of colors in the palette. We simply take the first
-#' \code{n} colors from the total 8.
+#'   \code{n} colors from the total 8.
 #' @return A character vector of RGB color codes.
 #'
 #' @section Examples:
@@ -77,7 +77,7 @@ categorical_pal <- function(n) {
 #' people, or their seniority level.
 #'
 #' @param n The number of colors in the palette. The maximum is nine
-#' currently.
+#'   currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes
@@ -134,7 +134,7 @@ sequential_pal <- function(n) {
 #' colors.
 #'
 #' @param n The number of colors in the palette. The maximum is eleven
-#' currently.
+#'   currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes

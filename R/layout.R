@@ -249,19 +249,19 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #'
 #' @aliases layout_as_bipartite layout.bipartite
 #' @param graph The bipartite input graph. It should have a logical
-#' \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be
-#' given.
+#'   \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be
+#'   given.
 #' @param types A logical vector, the vertex types. If this argument is
-#' \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
-#' used.
+#'   \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
+#'   used.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
-#' same layer.
+#'   same layer.
 #' @param vgap Real scalar, the distance between the two layers.
 #' @param maxiter Integer scalar, the maximum number of iterations in the
-#' crossing minimization stage. 100 is a reasonable default; if you feel that
-#' you have too many edge crossings, increase this.
+#'   crossing minimization stage. 100 is a reasonable default; if you feel that
+#'   you have too many edge crossings, increase this.
 #' @return A matrix with two columns and as many rows as the number of vertices
-#' in the input graph.
+#'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_sugiyama}}
 #' @keywords graphs
@@ -320,11 +320,11 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' @aliases layout_as_star layout.star
 #' @param graph The graph to layout.
 #' @param center The id of the vertex to put in the center. By default it is
-#' the first vertex.
+#'   the first vertex.
 #' @param order Numeric vector, the order of the vertices along the perimeter.
-#' The default ordering is given by the vertex ids.
+#'   The default ordering is given by the vertex ids.
 #' @return A matrix with two columns and as many rows as the number of vertices
-#' in the input graph.
+#'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout}} and \code{\link{layout.drl}} for other layout
 #' algorithms, \code{\link{plot.igraph}} and \code{\link{tkplot}} on how to
@@ -386,27 +386,27 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'
 #' @param graph The input graph.
 #' @param root The index of the root vertex or root vertices.  If this is a
-#' non-empty vector then the supplied vertex ids are used as the roots of the
-#' trees (or a single tree if the graph is connected).  If it is an empty
-#' vector, then the root vertices are automatically calculated based on
-#' topological sorting, performed with the opposite mode than the \code{mode}
-#' argument. After the vertices have been sorted, one is selected from each
-#' component.
+#'   non-empty vector then the supplied vertex ids are used as the roots of the
+#'   trees (or a single tree if the graph is connected).  If it is an empty
+#'   vector, then the root vertices are automatically calculated based on
+#'   topological sorting, performed with the opposite mode than the \code{mode}
+#'   argument. After the vertices have been sorted, one is selected from each
+#'   component.
 #' @param circular Logical scalar, whether to plot the tree in a circular
-#' fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
-#' (or top-down, see the \code{flip.y} argument.
+#'   fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
+#'   (or top-down, see the \code{flip.y} argument.
 #' @param rootlevel This argument can be useful when drawing forests which are
-#' not trees (i.e. they are unconnected and have tree components). It specifies
-#' the level of the root vertices for every tree in the forest. It is only
-#' considered if the \code{roots} argument is not an empty vector.
+#'   not trees (i.e. they are unconnected and have tree components). It specifies
+#'   the level of the root vertices for every tree in the forest. It is only
+#'   considered if the \code{roots} argument is not an empty vector.
 #' @param mode Specifies which edges to consider when building the tree.  If it
-#' is \sQuote{out}, then only the outgoing, if it is \sQuote{in}, then only the
-#' incoming edges of a parent are considered. If it is \sQuote{all} then all
-#' edges are used (this was the behavior in igraph 0.5 and before). This
-#' parameter also influences how the root vertices are calculated, if they are
-#' not given. See the \code{roots} parameter.
+#'   is \sQuote{out}, then only the outgoing, if it is \sQuote{in}, then only the
+#'   incoming edges of a parent are considered. If it is \sQuote{all} then all
+#'   edges are used (this was the behavior in igraph 0.5 and before). This
+#'   parameter also influences how the root vertices are calculated, if they are
+#'   not given. See the \code{roots} parameter.
 #' @param flip.y Logical scalar, whether to flip the \sQuote{y} coordinates.
-#' The default is flipping because that puts the root vertex on the top.
+#'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -480,8 +480,8 @@ layout.reingold.tilford <- function(..., params = list()) {
 #'
 #' @param graph The input graph.
 #' @param order The vertices to place on the circle, in the order of their
-#' desired placement. Vertices that are not included here will be placed at
-#' (0,0).
+#'   desired placement. Vertices that are not included here will be placed at
+#'   (0,0).
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -639,12 +639,12 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @aliases layout_on_grid layout.grid layout.grid.3d
 #' @param graph The input graph.
 #' @param width The number of vertices in a single row of the grid. If this is
-#' zero or negative, then for 2d layouts the width of the grid will be the
-#' square root of the number of vertices in the graph, rounded up to the next
-#' integer. Similarly, it will be the cube root for 3d layouts.
+#'   zero or negative, then for 2d layouts the width of the grid will be the
+#'   square root of the number of vertices in the graph, rounded up to the next
+#'   integer. Similarly, it will be the cube root for 3d layouts.
 #' @param height The number of vertices in a single column of the grid, for
-#' three dimensional layouts. If this is zero or negative, then it is
-#' determinted automatically.
+#'   three dimensional layouts. If this is zero or negative, then it is
+#'   determinted automatically.
 #' @param dim Two or three. Whether to make 2d or a 3d layout.
 #' @return A two-column or three-column matrix.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
@@ -770,7 +770,7 @@ layout.sphere <- function(..., params = list()) {
 #'
 #' @param graph The input graph.
 #' @param dim Integer scalar, the dimension of the space to use. It must be 2
-#' or 3.
+#'   or 3.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -837,24 +837,24 @@ layout.random <- function(..., params = list()) {
 #' @aliases layout.davidson.harel
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
-#' is not \code{NULL} then it should be an appropriate matrix of starting
-#' coordinates.
+#'   is not \code{NULL} then it should be an appropriate matrix of starting
+#'   coordinates.
 #' @param maxiter Number of iterations to perform in the first phase.
 #' @param fineiter Number of iterations in the fine tuning phase.
 #' @param cool.fact Cooling factor.
 #' @param weight.node.dist Weight for the node-node distances component of the
-#' energy function.
+#'   energy function.
 #' @param weight.border Weight for the distance from the border component of
-#' the energy function. It can be set to zero, if vertices are allowed to sit
-#' on the border.
+#'   the energy function. It can be set to zero, if vertices are allowed to sit
+#'   on the border.
 #' @param weight.edge.lengths Weight for the edge length component of the
-#' energy function.
+#'   energy function.
 #' @param weight.edge.crossings Weight for the edge crossing component of the
-#' energy function.
+#'   energy function.
 #' @param weight.node.edge.dist Weight for the node-edge distance component of
-#' the energy function.
+#'   the energy function.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
-#' vertex, according to the ids of the vertex ids.
+#'   vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_fr}},
 #' \code{\link{layout_with_kk}} for other layout algorithms.
@@ -976,41 +976,41 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
-#' is not \code{NULL} then it should be an appropriate matrix of starting
-#' coordinates.
+#'   is not \code{NULL} then it should be an appropriate matrix of starting
+#'   coordinates.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
-#' dimensional layouts are places on a plane, three dimensional ones in the 3d
-#' space.
+#'   dimensional layouts are places on a plane, three dimensional ones in the 3d
+#'   space.
 #' @param niter Integer scalar, the number of iterations to perform.
 #' @param start.temp Real scalar, the start temperature. This is the maximum
-#' amount of movement alloved along one axis, within one step, for a vertex.
-#' Currently it is decreased linearly to zero during the iteration.
+#'   amount of movement alloved along one axis, within one step, for a vertex.
+#'   Currently it is decreased linearly to zero during the iteration.
 #' @param grid Character scalar, whether to use the faster, but less accurate
-#' grid based implementation of the algorithm. By default (\dQuote{auto}), the
-#' grid-based implementation is used if the graph has more than one thousand
-#' vertices.
+#'   grid based implementation of the algorithm. By default (\dQuote{auto}), the
+#'   grid-based implementation is used if the graph has more than one thousand
+#'   vertices.
 #' @param weights A vector giving edge weights. The \code{weight} edge
-#' attribute is used by default, if present. If weights are given, then the
-#' attraction along the edges will be multiplied by the given edge weights.
-#' This places vertices connected with a highly weighted edge closer to
-#' each other. Weights must be positive.
+#'   attribute is used by default, if present. If weights are given, then the
+#'   attraction along the edges will be multiplied by the given edge weights.
+#'   This places vertices connected with a highly weighted edge closer to
+#'   each other. Weights must be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
-#' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#' of the vector must match the number of vertices in the graph.
+#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
+#'   of the vector must match the number of vertices in the graph.
 #' @param maxx Similar to \code{minx}, but gives the upper boundaries.
 #' @param miny Similar to \code{minx}, but gives the lower boundaries of the
-#' \sQuote{y} coordinates.
+#'   \sQuote{y} coordinates.
 #' @param maxy Similar to \code{minx}, but gives the upper boundaries of the
-#' \sQuote{y} coordinates.
+#'   \sQuote{y} coordinates.
 #' @param minz Similar to \code{minx}, but gives the lower boundaries of the
-#' \sQuote{z} coordinates.
+#'   \sQuote{z} coordinates.
 #' @param maxz Similar to \code{minx}, but gives the upper boundaries of the
-#' \sQuote{z} coordinates.
+#'   \sQuote{z} coordinates.
 #' @param coolexp,maxdelta,area,repulserad These arguments are not supported
-#' from igraph version 0.8.0 and are ignored (with a warning).
+#'   from igraph version 0.8.0 and are ignored (with a warning).
 #' @param maxiter A deprecated synonym of \code{niter}, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
-#' vertex, according to the ids of the vertex ids.
+#'   vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
 #' other layout algorithms.
@@ -1139,21 +1139,21 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' @aliases layout.gem
 #' @param graph The input graph. Edge directions are ignored.
 #' @param coords If not \code{NULL}, then the starting coordinates should be
-#' given here, in a two or three column matrix, depending on the \code{dim}
-#' argument.
+#'   given here, in a two or three column matrix, depending on the \code{dim}
+#'   argument.
 #' @param maxiter The maximum number of iterations to perform. Updating a
-#' single vertex counts as an iteration.  A reasonable default is 40 * n * n,
-#' where n is the number of vertices. The original paper suggests 4 * n * n,
-#' but this usually only works if the other parameters are set up carefully.
+#'   single vertex counts as an iteration.  A reasonable default is 40 * n * n,
+#'   where n is the number of vertices. The original paper suggests 4 * n * n,
+#'   but this usually only works if the other parameters are set up carefully.
 #' @param temp.max The maximum allowed local temperature. A reasonable default
-#' is the number of vertices.
+#'   is the number of vertices.
 #' @param temp.min The global temperature at which the algorithm terminates
-#' (even before reaching \code{maxiter} iterations). A reasonable default is
-#' 1/10.
+#'   (even before reaching \code{maxiter} iterations). A reasonable default is
+#'   1/10.
 #' @param temp.init Initial local temperature of all vertices. A reasonable
-#' default is the square root of the number of vertices.
+#'   default is the square root of the number of vertices.
 #' @return A numeric matrix with two columns, and as many rows as the number of
-#' vertices.
+#'   vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_fr}},
 #' \code{\link{plot.igraph}}, \code{\link{tkplot}}
@@ -1229,23 +1229,23 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @aliases layout.graphopt
 #' @param graph The input graph.
 #' @param start If given, then it should be a matrix with two columns and one
-#' line for each vertex. This matrix will be used as starting positions for the
-#' algorithm. If not given, then a random starting matrix is used.
+#'   line for each vertex. This matrix will be used as starting positions for the
+#'   algorithm. If not given, then a random starting matrix is used.
 #' @param niter Integer scalar, the number of iterations to perform.  Should be
-#' a couple of hundred in general. If you have a large graph then you might
-#' want to only do a few iterations and then check the result. If it is not
-#' good enough you can feed it in again in the \code{start} argument. The
-#' default value is 500.
+#'   a couple of hundred in general. If you have a large graph then you might
+#'   want to only do a few iterations and then check the result. If it is not
+#'   good enough you can feed it in again in the \code{start} argument. The
+#'   default value is 500.
 #' @param charge The charge of the vertices, used to calculate electric
-#' repulsion. The default is 0.001.
+#'   repulsion. The default is 0.001.
 #' @param mass The mass of the vertices, used for the spring forces. The
-#' default is 30.
+#'   default is 30.
 #' @param spring.length The length of the springs, an integer number. The
-#' default value is zero.
+#'   default value is zero.
 #' @param spring.constant The spring constant, the default value is one.
 #' @param max.sa.movement Real constant, it gives the maximum amount of
-#' movement allowed in a single step along a single axis. The default value is
-#' 5.
+#'   movement allowed in a single step along a single axis. The default value is
+#'   5.
 #' @return A numeric matrix with two columns, and a row for each vertex.
 #' @author Michael Schmuhl for the original graphopt code, rewritten and
 #' wrapped by Gabor Csardi \email{csardi.gabor@@gmail.com}.
@@ -1297,40 +1297,40 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'
 #' @param graph The input graph. Edge directions are ignored.
 #' @param coords If not \code{NULL}, then the starting coordinates should be
-#' given here, in a two or three column matrix, depending on the \code{dim}
-#' argument.
+#'   given here, in a two or three column matrix, depending on the \code{dim}
+#'   argument.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
-#' dimensional layouts are places on a plane, three dimensional ones in the 3d
-#' space.
+#'   dimensional layouts are places on a plane, three dimensional ones in the 3d
+#'   space.
 #' @param maxiter The maximum number of iterations to perform. The algorithm
-#' might terminate earlier, see the \code{epsilon} argument.
+#'   might terminate earlier, see the \code{epsilon} argument.
 #' @param epsilon Numeric scalar, the algorithm terminates, if the maximal
-#' delta is less than this. (See the reference below for what delta means.) If
-#' you set this to zero, then the function always performs \code{maxiter}
-#' iterations.
+#'   delta is less than this. (See the reference below for what delta means.) If
+#'   you set this to zero, then the function always performs \code{maxiter}
+#'   iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
-#' Typical (and default) value is the number of vertices.
+#'   Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
-#' Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
-#' be positive.
+#'   Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+#'   be positive.
 #' @param minx If not \code{NULL}, then it must be a numeric vector that gives
-#' lower boundaries for the \sQuote{x} coordinates of the vertices. The length
-#' of the vector must match the number of vertices in the graph.
+#'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
+#'   of the vector must match the number of vertices in the graph.
 #' @param maxx Similar to \code{minx}, but gives the upper boundaries.
 #' @param miny Similar to \code{minx}, but gives the lower boundaries of the
-#' \sQuote{y} coordinates.
+#'   \sQuote{y} coordinates.
 #' @param maxy Similar to \code{minx}, but gives the upper boundaries of the
-#' \sQuote{y} coordinates.
+#'   \sQuote{y} coordinates.
 #' @param minz Similar to \code{minx}, but gives the lower boundaries of the
-#' \sQuote{z} coordinates.
+#'   \sQuote{z} coordinates.
 #' @param maxz Similar to \code{minx}, but gives the upper boundaries of the
-#' \sQuote{z} coordinates.
+#'   \sQuote{z} coordinates.
 #' @param niter,sigma,initemp,coolexp These arguments are not supported from
-#' igraph version 0.8.0 and are ignored (with a warning).
+#'   igraph version 0.8.0 and are ignored (with a warning).
 #' @param start Deprecated synonym for \code{coords}, for compatibility.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
-#' many rows as the number of vertices, the x, y and potentially z coordinates
-#' of the vertices.
+#'   many rows as the number of vertices, the x, y and potentially z coordinates
+#'   of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_drl}}, \code{\link{plot.igraph}},
 #' \code{\link{tkplot}}
@@ -1444,18 +1444,18 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @param graph The input graph
 #' @param maxiter The maximum number of iterations to perform (150).
 #' @param maxdelta The maximum change for a vertex during an iteration (the
-#' number of vertices).
+#'   number of vertices).
 #' @param area The area of the surface on which the vertices are placed (square
-#' of the number of vertices).
+#'   of the number of vertices).
 #' @param coolexp The cooling exponent of the simulated annealing (1.5).
 #' @param repulserad Cancellation radius for the repulsion (the \code{area}
-#' times the number of vertices).
+#'   times the number of vertices).
 #' @param cellsize The size of the cells for the grid. When calculating the
-#' repulsion forces between vertices only vertices in the same or neighboring
-#' grid cells are taken into account (the fourth root of the number of
-#' \code{area}.
+#'   repulsion forces between vertices only vertices in the same or neighboring
+#'   grid cells are taken into account (the fourth root of the number of
+#'   \code{area}.
 #' @param root The id of the vertex to place at the middle of the layout. The
-#' default value is -1 which means that a random vertex is selected.
+#'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -1517,13 +1517,13 @@ layout.lgl <- function(..., params = list()) {
 #' @aliases layout.mds
 #' @param graph The input graph.
 #' @param dist The distance matrix for the multidimensional scaling.  If
-#' \code{NULL} (the default), then the unweighted shortest path matrix is used.
+#'   \code{NULL} (the default), then the unweighted shortest path matrix is used.
 #' @param dim \code{layout_with_mds} supports dimensions up to the number of nodes
-#' minus one, but only if the graph is connected; for unconnected graphs, the
-#' only possible values is 2. This is because \code{merge_coords} only works in
-#' 2D.
+#'   minus one, but only if the graph is connected; for unconnected graphs, the
+#'   only possible values is 2. This is because \code{merge_coords} only works in
+#'   2D.
 #' @param options This is currently ignored, as ARPACK is not used any more for
-#' solving the eigenproblem
+#'   solving the eigenproblem
 #' @return A numeric matrix with \code{dim} columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
@@ -1592,32 +1592,32 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #' @aliases layout.sugiyama
 #' @param graph The input graph.
 #' @param layers A numeric vector or \code{NULL}. If not \code{NULL}, then it
-#' should specify the layer index of the vertices. Layers are numbered from
-#' one. If \code{NULL}, then igraph calculates the layers automatically.
+#'   should specify the layer index of the vertices. Layers are numbered from
+#'   one. If \code{NULL}, then igraph calculates the layers automatically.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
-#' same layer.
+#'   same layer.
 #' @param vgap Real scalar, the distance between layers.
 #' @param maxiter Integer scalar, the maximum number of iterations in the
-#' crossing minimization stage. 100 is a reasonable default; if you feel that
-#' you have too many edge crossings, increase this.
+#'   crossing minimization stage. 100 is a reasonable default; if you feel that
+#'   you have too many edge crossings, increase this.
 #' @param weights Optional edge weight vector. If \code{NULL}, then the
-#' 'weight' edge attribute is used, if there is one. Supply \code{NA} here and
-#' igraph ignores the edge weights. These are used only if the graph
-#' contains cycles; igraph will tend to reverse edges with smaller weights
-#' when breaking the cycles.
+#'   'weight' edge attribute is used, if there is one. Supply \code{NA} here and
+#'   igraph ignores the edge weights. These are used only if the graph
+#'   contains cycles; igraph will tend to reverse edges with smaller weights
+#'   when breaking the cycles.
 #' @param attributes Which graph/vertex/edge attributes to keep in the extended
-#' graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
-#' \sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
-#' \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
-#' keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
-#' them.
+#'   graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
+#'   \sQuote{shape}, \sQuote{label} and \sQuote{color} vertex attributes and the
+#'   \sQuote{arrow.mode} and \sQuote{arrow.size} edge attributes. \sQuote{all}
+#'   keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
+#'   them.
 #' @return A list with the components: \item{layout}{The layout, a two-column
-#' matrix, for the original graph vertices.} \item{layout.dummy}{The layout for
-#' the dummy vertices, a two column matrix.} \item{extd_graph}{The original
-#' graph, extended with dummy vertices.  The \sQuote{dummy} vertex attribute is
-#' set on this graph, it is a logical attributes, and it tells you whether the
-#' vertex is a dummy vertex. The \sQuote{layout} graph attribute is also set,
-#' and it is the layout matrix for all (original and dummy) vertices.}
+#'   matrix, for the original graph vertices.} \item{layout.dummy}{The layout for
+#'   the dummy vertices, a two column matrix.} \item{extd_graph}{The original
+#'   graph, extended with dummy vertices.  The \sQuote{dummy} vertex attribute is
+#'   set on this graph, it is a logical attributes, and it tells you whether the
+#'   vertex is a dummy vertex. The \sQuote{layout} graph attribute is also set,
+#'   and it is the layout matrix for all (original and dummy) vertices.}
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references K. Sugiyama, S. Tagawa and M. Toda, "Methods for Visual
 #' Understanding of Hierarchical Systems". IEEE Transactions on Systems, Man
@@ -1926,12 +1926,12 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
 #' @param method Character constant giving the method to use. Right now only
-#' \code{dla} is implemented.
+#'   \code{dla} is implemented.
 #' @param layout A function object, the layout function to use.
 #' @param \dots Additional arguments to pass to the \code{layout} layout
-#' function.
+#'   function.
 #' @return A matrix with two columns and as many lines as the total number of
-#' vertices in the graphs.
+#'   vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}, \code{\link{tkplot}},
 #' \code{\link{layout}}, \code{\link{disjoint_union}}
@@ -1977,12 +1977,12 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #' @aliases layout.norm
 #' @param layout A matrix with two or three columns, the layout to normalize.
 #' @param xmin,xmax The limits for the first coordinate, if one of them or both
-#' are \code{NULL} then no normalization is performed along this direction.
+#'   are \code{NULL} then no normalization is performed along this direction.
 #' @param ymin,ymax The limits for the second coordinate, if one of them or
-#' both are \code{NULL} then no normalization is performed along this
-#' direction.
+#'   both are \code{NULL} then no normalization is performed along this
+#'   direction.
 #' @param zmin,zmax The limits for the third coordinate, if one of them or both
-#' are \code{NULL} then no normalization is performed along this direction.
+#'   are \code{NULL} then no normalization is performed along this direction.
 #' @return A numeric matrix with at the same dimension as \code{layout}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export

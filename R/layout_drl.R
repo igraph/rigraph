@@ -47,26 +47,26 @@
 #'  igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
-#' \code{seed} argument as a starting point.
+#'   \code{seed} argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
-#' vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.
+#'   vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.
 #' @param options Options for the layout generator, a named list. See details
-#' below.
+#'   below.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#' \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
-#' \sQuote{weight} edge attribute, then that attribute will be used. If
-#' \code{NULL} and no such attribute is present, then the edges will have equal
-#' weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
-#' attribute, but you don't want to use it for the layout. Larger edge weights
-#' correspond to stronger connections.
+#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   \sQuote{weight} edge attribute, then that attribute will be used. If
+#'   \code{NULL} and no such attribute is present, then the edges will have equal
+#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   attribute, but you don't want to use it for the layout. Larger edge weights
+#'   correspond to stronger connections.
 #' @param fixed Logical vector, it can be used to fix some vertices. Unfortunately
-#' this has never been implemented in the C core of the igraph library and thus
-#' it never worked. The argument is now deprecated and will be removed in
-#' igraph 1.4.0.
+#'   this has never been implemented in the C core of the igraph library and thus
+#'   it never worked. The argument is now deprecated and will be removed in
+#'   igraph 1.4.0.
 #' @param dim Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
-#' two dimensional or a three dimensional layout. Note that because of the
-#' nature of the DrL algorithm, the three dimensional layout takes
-#' significantly longer to compute.
+#'   two dimensional or a three dimensional layout. Note that because of the
+#'   nature of the DrL algorithm, the three dimensional layout takes
+#'   significantly longer to compute.
 #' @return A numeric matrix with two columns.
 #' @author Shawn Martin (\url{http://www.cs.otago.ac.nz/homepages/smartin/})
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface

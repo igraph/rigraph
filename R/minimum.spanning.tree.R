@@ -33,20 +33,20 @@
 #' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
 #' @param weights Numeric algorithm giving the weights of the edges in the
-#' graph. The order is determined by the edge ids. This is ignored if the
-#' \code{unweighted} algorithm is chosen. Edge weights are interpreted as
-#' distances.
+#'   graph. The order is determined by the edge ids. This is ignored if the
+#'   \code{unweighted} algorithm is chosen. Edge weights are interpreted as
+#'   distances.
 #' @param algorithm The algorithm to use for calculation. \code{unweighted} can
-#' be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
-#' weighted graphs.  If this is \code{NULL} then igraph tries to select the
-#' algorithm automatically: if the graph has an edge attribute called
-#' \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
-#' algorithm is chosen, otherwise the unweighted algorithm is performed.
+#'   be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
+#'   weighted graphs.  If this is \code{NULL} then igraph tries to select the
+#'   algorithm automatically: if the graph has an edge attribute called
+#'   \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
+#'   algorithm is chosen, otherwise the unweighted algorithm is performed.
 #' @param \dots Additional arguments, unused.
 #' @return A graph object with the minimum spanning forest. (To check that it
-#' is a tree check that the number of its edges is \code{vcount(graph)-1}.)
-#' The edge and vertex attributes of the original graph are preserved in the
-#' result.
+#'   is a tree check that the number of its edges is \code{vcount(graph)-1}.)
+#'   The edge and vertex attributes of the original graph are preserved in the
+#'   result.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{components}}
 #' @references Prim, R.C. 1957. Shortest connection networks and some

@@ -46,34 +46,34 @@
 #'
 #' @param graph The input graph, directed or undirected.
 #' @param no An integer scalar. This value is the embedding dimension of the
-#' spectral embedding. Should be smaller than the number of vertices. The
-#' largest \code{no}-dimensional non-zero singular values are used for the
-#' spectral embedding.
+#'   spectral embedding. Should be smaller than the number of vertices. The
+#'   largest \code{no}-dimensional non-zero singular values are used for the
+#'   spectral embedding.
 #' @param weights Optional positive weight vector for calculating a weighted
-#' embedding. If the graph has a \code{weight} edge attribute, then this is
-#' used by default. In a weighted embedding, the edge weights are used instead
-#' of the binary adjacencny matrix.
+#'   embedding. If the graph has a \code{weight} edge attribute, then this is
+#'   used by default. In a weighted embedding, the edge weights are used instead
+#'   of the binary adjacencny matrix.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
-#' use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
-#' the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
-#' eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
-#' \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
-#' are used for the ordering.
+#'   use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
+#'   the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
+#'   eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
+#'   \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
+#'   are used for the ordering.
 #' @param scaled Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
-#' returned instead of \eqn{X} and \eqn{Y}.
+#'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param cvec A numeric vector, its length is the number vertices in the
-#' graph. This vector is added to the diagonal of the adjacency matrix.
+#'   graph. This vector is added to the diagonal of the adjacency matrix.
 #' @param options A named list containing the parameters for the SVD
-#' computation algorithm in ARPACK. By default, the list of values is assigned
-#' the values given by \code{\link{igraph.arpack.default}}.
+#'   computation algorithm in ARPACK. By default, the list of values is assigned
+#'   the values given by \code{\link{igraph.arpack.default}}.
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
-#' an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
-#' \item{Y}{\code{NULL} for undirected graphs, the second half of the latent
-#' positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
-#' is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
-#' or the singular values (for directed graphs) calculated by the algorithm.}
-#' \item{options}{A named list, information about the underlying ARPACK
-#' computation. See \code{\link{arpack}} for the details.}
+#'   an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
+#'   \item{Y}{\code{NULL} for undirected graphs, the second half of the latent
+#'   positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
+#'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
+#'   or the singular values (for directed graphs) calculated by the algorithm.}
+#'   \item{options}{A named list, information about the underlying ARPACK
+#'   computation. See \code{\link{arpack}} for the details.}
 #' @seealso \code{\link{sample_dot_product}}
 #' @references Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E.  A
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
@@ -165,51 +165,51 @@ dim_select <- dim_select
 #'
 #' @param graph The input graph, directed or undirected.
 #' @param no An integer scalar. This value is the embedding dimension of the
-#' spectral embedding. Should be smaller than the number of vertices. The
-#' largest \code{no}-dimensional non-zero singular values are used for the
-#' spectral embedding.
+#'   spectral embedding. Should be smaller than the number of vertices. The
+#'   largest \code{no}-dimensional non-zero singular values are used for the
+#'   spectral embedding.
 #' @param weights Optional positive weight vector for calculating a weighted
-#' embedding. If the graph has a \code{weight} edge attribute, then this is
-#' used by default. For weighted embedding, edge weights are used instead
-#' of the binary adjacency matrix, and vertex strength (see
-#' \code{\link{strength}}) is used instead of the degrees.
+#'   embedding. If the graph has a \code{weight} edge attribute, then this is
+#'   used by default. For weighted embedding, edge weights are used instead
+#'   of the binary adjacency matrix, and vertex strength (see
+#'   \code{\link{strength}}) is used instead of the degrees.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
-#' use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
-#' the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
-#' eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
-#' \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
-#' are used for the ordering.
+#'   use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
+#'   the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
+#'   eigenvalues. The default is \sQuote{lm}. Note that for directed graphs
+#'   \sQuote{la} and \sQuote{lm} are the equivalent, because the singular values
+#'   are used for the ordering.
 #' @param type The type of the Laplacian to use. Various definitions exist for
-#' the Laplacian of a graph, and one can choose between them with this
-#' argument.
+#'   the Laplacian of a graph, and one can choose between them with this
+#'   argument.
 #'
-#' Possible values: \code{D-A} means \eqn{D-A} where \eqn{D} is the degree
-#' matrix and \eqn{A} is the adjacency matrix; \code{DAD} means
-#' \eqn{D^{1/2}}{D^1/2} times \eqn{A} times \eqn{D^{1/2}{D^1/2}},
-#' \eqn{D^{1/2}}{D^1/2} is the inverse of the square root of the degree matrix;
-#' \code{I-DAD} means \eqn{I-D^{1/2}}{I-D^1/2}, where \eqn{I} is the identity
-#' matrix.  \code{OAP} is \eqn{O^{1/2}AP^{1/2}}{O^1/2 A P^1/2}, where
-#' \eqn{O^{1/2}}{O^1/2} is the inverse of the square root of the out-degree
-#' matrix and \eqn{P^{1/2}}{P^1/2} is the same for the in-degree matrix.
+#'   Possible values: \code{D-A} means \eqn{D-A} where \eqn{D} is the degree
+#'   matrix and \eqn{A} is the adjacency matrix; \code{DAD} means
+#'   \eqn{D^{1/2}}{D^1/2} times \eqn{A} times \eqn{D^{1/2}{D^1/2}},
+#'   \eqn{D^{1/2}}{D^1/2} is the inverse of the square root of the degree matrix;
+#'   \code{I-DAD} means \eqn{I-D^{1/2}}{I-D^1/2}, where \eqn{I} is the identity
+#'   matrix.  \code{OAP} is \eqn{O^{1/2}AP^{1/2}}{O^1/2 A P^1/2}, where
+#'   \eqn{O^{1/2}}{O^1/2} is the inverse of the square root of the out-degree
+#'   matrix and \eqn{P^{1/2}}{P^1/2} is the same for the in-degree matrix.
 #'
-#' \code{OAP} is not defined for undirected graphs, and is the only defined type
-#' for directed graphs.
+#'   \code{OAP} is not defined for undirected graphs, and is the only defined type
+#'   for directed graphs.
 #'
-#' The default (i.e. type \code{default}) is to use \code{D-A} for undirected
-#' graphs and \code{OAP} for directed graphs.
+#'   The default (i.e. type \code{default}) is to use \code{D-A} for undirected
+#'   graphs and \code{OAP} for directed graphs.
 #' @param scaled Logical scalar, if \code{FALSE}, then \eqn{U} and \eqn{V} are
-#' returned instead of \eqn{X} and \eqn{Y}.
+#'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
-#' computation algorithm in ARPACK. By default, the list of values is assigned
-#' the values given by \code{\link{igraph.arpack.default}}.
+#'   computation algorithm in ARPACK. By default, the list of values is assigned
+#'   the values given by \code{\link{igraph.arpack.default}}.
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
-#' an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
-#' \item{Y}{\code{NULL} for undirected graphs, the second half of the latent
-#' positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
-#' is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
-#' or the singular values (for directed graphs) calculated by the algorithm.}
-#' \item{options}{A named list, information about the underlying ARPACK
-#' computation. See \code{\link{arpack}} for the details.}
+#'   an \code{n} times \code{no} matrix, \code{n} is the number of vertices.}
+#'   \item{Y}{\code{NULL} for undirected graphs, the second half of the latent
+#'   positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
+#'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
+#'   or the singular values (for directed graphs) calculated by the algorithm.}
+#'   \item{options}{A named list, information about the underlying ARPACK
+#'   computation. See \code{\link{arpack}} for the details.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{embed_adjacency_matrix}},
 #' \code{\link{sample_dot_product}}
@@ -244,8 +244,8 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' @param positive Logical scalar, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#' \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
-#' vectors.
+#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   vectors.
 #'
 #' @family latent position vector samplers
 #'
@@ -286,8 +286,8 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' @param positive Logical scalar, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#' \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
-#' vectors.
+#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   vectors.
 #'
 #' @family latent position vector samplers
 #'
@@ -324,10 +324,10 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #'
 #' @param n Integer scalar, the sample size.
 #' @param alpha Numeric vector, the vector of \eqn{\alpha}{alpha} parameter for
-#' the Dirichlet distribution.
+#'   the Dirichlet distribution.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#' \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
-#' vectors.
+#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   vectors.
 #'
 #' @family latent position vector samplers
 #'

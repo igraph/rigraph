@@ -114,21 +114,21 @@ assign(".next", 1, .tkplot.env)
 #' @param newlayout The new layout, see the \code{layout} parameter of tkplot.
 #' @param norm Logical, should we norm the coordinates.
 #' @param coords Two-column numeric matrix, the new coordinates of the
-#' vertices, in absolute coordinates.
+#'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
 #' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
-#' the complete list.
+#'   the complete list.
 #' @return \code{tkplot} returns an integer, the id of the plot, this can be
-#' used to manipulate it from the command line.
+#'   used to manipulate it from the command line.
 #'
-#' \code{tk_canvas} returns \code{tkwin} object, the Tk canvas.
+#'   \code{tk_canvas} returns \code{tkwin} object, the Tk canvas.
 #'
-#' \code{tk_coords} returns a matrix with the coordinates.
+#'   \code{tk_coords} returns a matrix with the coordinates.
 #'
-#' \code{tk_close}, \code{tk_off}, \code{tk_fit},
-#' \code{tk_reshape}, \code{tk_postscript}, \code{tk_center}
-#' and \code{tk_rotate} return \code{NULL} invisibly.
+#'   \code{tk_close}, \code{tk_off}, \code{tk_fit},
+#'   \code{tk_reshape}, \code{tk_postscript}, \code{tk_center}
+#'   and \code{tk_rotate} return \code{NULL} invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}, \code{\link{layout}}
 #' @export

@@ -64,40 +64,40 @@
 #' @aliases sample_pa barabasi.game ba.game
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
-#' ie. linear preferential attachment.
+#'   ie. linear preferential attachment.
 #' @param m Numeric constant, the number of edges to add in each time step This
-#' argument is only used if both \code{out.dist} and \code{out.seq} are omitted
-#' or NULL.
+#'   argument is only used if both \code{out.dist} and \code{out.seq} are omitted
+#'   or NULL.
 #' @param out.dist Numeric vector, the distribution of the number of edges to
-#' add in each time step. This argument is only used if the \code{out.seq}
-#' argument is omitted or NULL.
+#'   add in each time step. This argument is only used if the \code{out.seq}
+#'   argument is omitted or NULL.
 #' @param out.seq Numeric vector giving the number of edges to add in each time
-#' step. Its first element is ignored as no edges are added in the first time
-#' step.
+#'   step. Its first element is ignored as no edges are added in the first time
+#'   step.
 #' @param out.pref Logical, if true the total degree is used for calculating
-#' the citation probability, otherwise the in-degree is used.
+#'   the citation probability, otherwise the in-degree is used.
 #' @param zero.appeal The \sQuote{attractiveness} of the vertices with no
-#' adjacent edges. See details below.
+#'   adjacent edges. See details below.
 #' @param directed Whether to create a directed graph.
 #' @param algorithm The algorithm to use for the graph generation.
-#' \code{psumtree} uses a partial prefix-sum tree to generate the graph, this
-#' algorithm can handle any \code{power} and \code{zero.appeal} values and
-#' never generates multiple edges.  \code{psumtree-multiple} also uses a
-#' partial prefix-sum tree, but the generation of multiple edges is allowed.
-#' Before the 0.6 version igraph used this algorithm if \code{power} was not
-#' one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
-#' was previously (before version 0.6) used if \code{power} was one and
-#' \code{zero.appeal} was one as well. It works by putting the ids of the
-#' vertices into a bag (multiset, really), exactly as many times as their
-#' (in-)degree, plus once more. Then the required number of cited vertices are
-#' drawn from the bag, with replacement. This method might generate multiple
-#' edges. It only works if \code{power} and \code{zero.appeal} are equal one.
+#'   \code{psumtree} uses a partial prefix-sum tree to generate the graph, this
+#'   algorithm can handle any \code{power} and \code{zero.appeal} values and
+#'   never generates multiple edges.  \code{psumtree-multiple} also uses a
+#'   partial prefix-sum tree, but the generation of multiple edges is allowed.
+#'   Before the 0.6 version igraph used this algorithm if \code{power} was not
+#'   one, or \code{zero.appeal} was not one.  \code{bag} is the algorithm that
+#'   was previously (before version 0.6) used if \code{power} was one and
+#'   \code{zero.appeal} was one as well. It works by putting the ids of the
+#'   vertices into a bag (multiset, really), exactly as many times as their
+#'   (in-)degree, plus once more. Then the required number of cited vertices are
+#'   drawn from the bag, with replacement. This method might generate multiple
+#'   edges. It only works if \code{power} and \code{zero.appeal} are equal one.
 #' @param start.graph \code{NULL} or an igraph graph. If a graph, then the
-#' supplied graph is used as a starting graph for the preferential attachment
-#' algorithm. The graph should have at least one vertex. If a graph is supplied
-#' here and the \code{out.seq} argument is not \code{NULL}, then it should
-#' contain the out degrees of the new vertices only, not the ones in the
-#' \code{start.graph}.
+#'   supplied graph is used as a starting graph for the preferential attachment
+#'   algorithm. The graph should have at least one vertex. If a graph is supplied
+#'   here and the \code{out.seq} argument is not \code{NULL}, then it should
+#'   contain the out degrees of the new vertices only, not the ones in the
+#'   \code{start.graph}.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}}
@@ -268,7 +268,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
 #' @param directed Logical, whether the graph will be directed, defaults to
-#' FALSE.
+#'   FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -334,12 +334,12 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
 #' @param p.or.m Either the probability for drawing an edge between two
-#' arbitrary vertices (G(n,p) graph), or the number of edges in the graph (for
-#' G(n,m) graphs).
+#'   arbitrary vertices (G(n,p) graph), or the number of edges in the graph (for
+#'   G(n,m) graphs).
 #' @param type The type of the random graph to create, either \code{gnp}
-#' (G(n,p) graph) or \code{gnm} (G(n,m) graph).
+#'   (G(n,p) graph) or \code{gnm} (G(n,m) graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
-#' FALSE.
+#'   FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -423,14 +423,14 @@ random.graph.game <- erdos.renyi.game
 #'
 #' @aliases degree.sequence.game
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
-#' graphs) or out-degrees (for directed graphs). For undirected graphs its sum
-#' should be even. For directed graphs its sum should be the same as the sum of
-#' \code{in.deg}.
+#'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
+#'   should be even. For directed graphs its sum should be the same as the sum of
+#'   \code{in.deg}.
 #' @param in.deg For directed graph, the in-degree sequence. By default this is
-#' \code{NULL} and an undirected graph is created.
+#'   \code{NULL} and an undirected graph is created.
 #' @param method Character, the method for generating the graph. Right now the
-#' \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
-#' implemented.
+#'   \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
+#'   implemented.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}},
@@ -498,7 +498,7 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 #' @rdname sample_degseq
 #' @param deterministic  Whether the construction should be deterministic
 #' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
-#' or to \code{sample_degseq} otherwise.
+#'   or to \code{sample_degseq} otherwise.
 #' @export
 degseq <- function(..., deterministic = FALSE) {
   constructor_spec(
@@ -523,7 +523,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' @param m Numeric constant, number of edges added in each time step.
 #' @param directed Logical, whether to create a directed graph.
 #' @param citation Logical. If \code{TRUE} a citation graph is created, ie. in
-#' each time step the added edges are originating from the new vertex.
+#'   each time step the added edges are originating from the new vertex.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
@@ -611,32 +611,32 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' @param n The number of vertices in the graph.
 #' @param pa.exp The preferential attachment exponent, see the details below.
 #' @param aging.exp The exponent of the aging, usually a non-positive number,
-#' see details below.
+#'   see details below.
 #' @param m The number of edges each new vertex creates (except the very first
-#' vertex). This argument is used only if both the \code{out.dist} and
-#' \code{out.seq} arguments are NULL.
+#'   vertex). This argument is used only if both the \code{out.dist} and
+#'   \code{out.seq} arguments are NULL.
 #' @param aging.bin The number of bins to use for measuring the age of
-#' vertices, see details below.
+#'   vertices, see details below.
 #' @param out.dist The discrete distribution to generate the number of edges to
-#' add in each time step if \code{out.seq} is NULL. See details below.
+#'   add in each time step if \code{out.seq} is NULL. See details below.
 #' @param out.seq The number of edges to add in each time step, a vector
-#' containing as many elements as the number of vertices. See details below.
+#'   containing as many elements as the number of vertices. See details below.
 #' @param out.pref Logical constant, whether to include edges not initiated by
-#' the vertex as a basis of preferential attachment. See details below.
+#'   the vertex as a basis of preferential attachment. See details below.
 #' @param directed Logical constant, whether to generate a directed graph. See
-#' details below.
+#'   details below.
 #' @param zero.deg.appeal The degree-dependent part of the
-#' \sQuote{attractiveness} of the vertices with no adjacent edges. See also
-#' details below.
+#'   \sQuote{attractiveness} of the vertices with no adjacent edges. See also
+#'   details below.
 #' @param zero.age.appeal The age-dependent part of the \sQuote{attrativeness}
-#' of the vertices with age zero. It is usually zero, see details below.
+#'   of the vertices with age zero. It is usually zero, see details below.
 #' @param deg.coef The coefficient of the degree-dependent
-#' \sQuote{attractiveness}. See details below.
+#'   \sQuote{attractiveness}. See details below.
 #' @param age.coef The coefficient of the age-dependent part of the
-#' \sQuote{attractiveness}. See details below.
+#'   \sQuote{attractiveness}. See details below.
 #' @param time.window Integer constant, if NULL only adjacent added in the last
-#' \code{time.windows} time steps are counted as a basis of the preferential
-#' attachment. See also details below.
+#'   \code{time.windows} time steps are counted as a basis of the preferential
+#'   attachment. See also details below.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
@@ -779,9 +779,9 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' @param types The number of different vertex types.
 #' @param edge.per.step The number of edges to add to the graph per time step.
 #' @param type.dist The distribution of the vertex types. This is assumed to be
-#' stationary in time.
+#'   stationary in time.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
-#' types. These should be probabilities, ie. numbers between zero and one.
+#'   types. These should be probabilities, ie. numbers between zero and one.
 #' @param directed Logical constant, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
@@ -865,12 +865,12 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' @aliases grg.game
 #' @param nodes The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
-#' edge.
+#'   edge.
 #' @param torus Logical constant, whether to use a torus instead of a square.
 #' @param coords Logical scalar, whether to add the positions of the vertices
-#' as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.
+#'   as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.
 #' @return A graph object. If \code{coords} is \code{TRUE} then with vertex
-#' attributes \sQuote{\code{x}} and \sQuote{\code{y}}.
+#'   attributes \sQuote{\code{x}} and \sQuote{\code{y}}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
 #' written by Keith Briggs (\url{http://keithbriggs.info/}).
 #' @seealso \code{\link{sample_gnp}}
@@ -933,15 +933,15 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.
 #' @param type.dist The distribution of the vertex types, a numeric vector of
-#' length \sQuote{types} containing non-negative numbers. The vector will be
-#' normed to obtain probabilities.
+#'   length \sQuote{types} containing non-negative numbers. The vector will be
+#'   normed to obtain probabilities.
 #' @param fixed.sizes Fix the number of vertices with a given vertex type
-#' label. The \code{type.dist} argument gives the group sizes (i.e. number of
-#' vertices with the different labels) in this case.
+#'   label. The \code{type.dist} argument gives the group sizes (i.e. number of
+#'   vertices with the different labels) in this case.
 #' @param type.dist.matrix The joint distribution of the in- and out-vertex
-#' types.
+#'   types.
 #' @param pref.matrix A square matrix giving the preferences of the vertex
-#' types. The matrix has \sQuote{types} rows and columns.
+#'   types. The matrix has \sQuote{types} rows and columns.
 #' @param directed Logical constant, whether to create a directed graph.
 #' @param loops Logical constant, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
@@ -1081,12 +1081,12 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' @param dim Integer constant, the dimension of the starting lattice.
 #' @param size Integer constant, the size of the lattice along each dimension.
 #' @param nei Integer constant, the neighborhood within which the vertices of
-#' the lattice will be connected.
+#'   the lattice will be connected.
 #' @param p Real constant between zero and one, the rewiring probability.
 #' @param loops Logical scalar, whether loops edges are allowed in the
-#' generated graph.
+#'   generated graph.
 #' @param multiple Logical scalar, whether multiple edges are allowed int the
-#' generated graph.
+#'   generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{make_lattice}}, \code{\link{rewire}}
@@ -1146,13 +1146,13 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @param edges Number of edges per step.
 #' @param agebins Number of aging bins.
 #' @param pref Vector (\code{sample_last_cit} and \code{sample_cit_types} or
-#' matrix (\code{sample_cit_cit_types}) giving the (unnormalized) citation
-#' probabilities for the different vertex types.
+#'   matrix (\code{sample_cit_cit_types}) giving the (unnormalized) citation
+#'   probabilities for the different vertex types.
 #' @param directed Logical scalar, whether to generate directed networks.
 #' @param types Vector of length \sQuote{\code{n}}, the types of the vertices.
-#' Types are numbered from zero.
+#'   Types are numbered from zero.
 #' @param attr Logical scalar, whether to add the vertex types to the generated
-#' graph as a vertex attribute called \sQuote{\code{type}}.
+#'   graph as a vertex attribute called \sQuote{\code{type}}.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -1248,20 +1248,20 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' @param n1 Integer scalar, the number of bottom vertices.
 #' @param n2 Integer scalar, the number of top vertices.
 #' @param type Character scalar, the type of the graph, \sQuote{gnp} creates a
-#' \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
+#'   \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
-#' be given for \eqn{G(n,m)} graphs.
+#'   be given for \eqn{G(n,m)} graphs.
 #' @param m Integer scalar, the number of edges for \eqn{G(n,p)} graphs. Should not
-#' be given for \eqn{G(n,p)} graphs.
+#'   be given for \eqn{G(n,p)} graphs.
 #' @param directed Logical scalar, whether to create a directed graph. See also
-#' the \code{mode} argument.
+#'   the \code{mode} argument.
 #' @param mode Character scalar, specifies how to direct the edges in directed
-#' graphs. If it is \sQuote{out}, then directed edges point from bottom
-#' vertices to top vertices. If it is \sQuote{in}, edges point from top
-#' vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
-#' mutual edges. If this argument is \sQuote{all}, then each edge direction is
-#' considered independently and mutual edges might be generated. This argument
-#' is ignored for undirected graphs.
+#'   graphs. If it is \sQuote{out}, then directed edges point from bottom
+#'   vertices to top vertices. If it is \sQuote{in}, edges point from top
+#'   vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
+#'   mutual edges. If this argument is \sQuote{all}, then each edge direction is
+#'   considered independently and mutual edges might be generated. This argument
+#'   is ignored for undirected graphs.
 #' @return A bipartite igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_gnp}} for the unipartite version.
@@ -1347,12 +1347,12 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' @aliases sample_sbm sbm.game sbm
 #' @param n Number of vertices in the graph.
 #' @param pref.matrix The matrix giving the Bernoulli rates.  This is a
-#' \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
-#' probability of creating an edge between vertices from groups \eqn{i} and
-#' \eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
-#' must be symmetric.
+#'   \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
+#'   probability of creating an edge between vertices from groups \eqn{i} and
+#'   \eqn{j} is given by element \eqn{(i,j)}. For undirected graphs, this matrix
+#'   must be symmetric.
 #' @param block.sizes Numeric vector giving the number of vertices in each
-#' group. The sum of the vector must match the number of vertices.
+#'   group. The sum of the vector must match the number of vertices.
 #' @param directed Logical scalar, whether to generate a directed graph.
 #' @param loops Logical scalar, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
@@ -1387,18 +1387,18 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' @aliases sample_hierarchical_sbm hierarchical_sbm
 #' @param n Integer scalar, the number of vertices.
 #' @param m Integer scalar, the number of vertices per block. \code{n / m} must
-#' be integer. Alternatively, an integer vector of block sizes, if not all the
-#' blocks have equal sizes.
+#'   be integer. Alternatively, an integer vector of block sizes, if not all the
+#'   blocks have equal sizes.
 #' @param rho Numeric vector, the fraction of vertices per cluster, within a
-#' block. Must sum up to 1, and \code{rho * m} must be integer for all elements
-#' of rho. Alternatively a list of rho vectors, one for each block, if they are
-#' not the same for all blocks.
+#'   block. Must sum up to 1, and \code{rho * m} must be integer for all elements
+#'   of rho. Alternatively a list of rho vectors, one for each block, if they are
+#'   not the same for all blocks.
 #' @param C A square, symmetric numeric matrix, the Bernoulli rates for the
-#' clusters within a block. Its size must mach the size of the \code{rho}
-#' vector. Alternatively, a list of square matrices, if the Bernoulli rates
-#' differ in different blocks.
+#'   clusters within a block. Its size must mach the size of the \code{rho}
+#'   vector. Alternatively, a list of square matrices, if the Bernoulli rates
+#'   differ in different blocks.
 #' @param p Numeric scalar, the Bernoulli rate of connections between vertices
-#' in different blocks.
+#'   in different blocks.
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sbm.game}}
@@ -1468,11 +1468,11 @@ hierarchical_sbm <- function(...) {
 #'
 #' @aliases sample_dot_product dot_product
 #' @param vecs A numeric matrix in which each latent position vector is a
-#' column.
+#'   column.
 #' @param directed A logical scalar, TRUE if the generated graph should be
-#' directed.
+#'   directed.
 #' @return An igraph graph object which is the generated random dot product
-#' graph.
+#'   graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{sample_dirichlet}}, \code{\link{sample_sphere_surface}}
 #' and \code{\link{sample_sphere_volume}} for sampling position vectors.
@@ -1519,7 +1519,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @param islands.n The number of islands in the graph.
 #' @param islands.size The size of islands in the graph.
 #' @param islands.pin The probability to create each possible edge into each
-#' island.
+#'   island.
 #' @param n.inter The number of edges to create between two islands.
 #' @return An igraph graph.
 #' @author Samuel Thiriot
@@ -1542,9 +1542,9 @@ sample_islands <- sample_islands
 #'
 #' @aliases sample_k_regular k.regular.game
 #' @param no.of.nodes Integer scalar, the number of vertices in the generated
-#' graph.
+#'   graph.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
-#' out-degree and in-degree in a directed graph.
+#'   out-degree and in-degree in a directed graph.
 #' @param directed Logical scalar, whether to create a directed graph.
 #' @param multiple Logical scalar, whether multiple edges are allowed.
 #' @return An igraph graph.
@@ -1602,16 +1602,16 @@ sample_k_regular <- sample_k_regular
 #' @aliases sample_fitness static.fitness.game
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param fitness.out A numeric vector containing the fitness of each vertex.
-#' For directed graphs, this specifies the out-fitness of each vertex.
+#'   For directed graphs, this specifies the out-fitness of each vertex.
 #' @param fitness.in If \code{NULL} (the default), the generated graph will be
-#' undirected. If not \code{NULL}, then it should be a numeric vector and it
-#' specifies the in-fitness of each vertex.
+#'   undirected. If not \code{NULL}, then it should be a numeric vector and it
+#'   specifies the in-fitness of each vertex.
 #'
-#' If this argument is not \code{NULL}, then a directed graph is generated,
-#' otherwise an undirected one.
+#'   If this argument is not \code{NULL}, then a directed graph is generated,
+#'   otherwise an undirected one.
 #' @param loops Logical scalar, whether to allow loop edges in the graph.
 #' @param multiple Logical scalar, whether to allow multiple edges in the
-#' graph.
+#'   graph.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Goh K-I, Kahng B, Kim D: Universal behaviour of load
@@ -1659,19 +1659,19 @@ sample_fitness <- sample_fitness
 #' @param no.of.nodes The number of vertices in the generated graph.
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param exponent.out Numeric scalar, the power law exponent of the degree
-#' distribution. For directed graphs, this specifies the exponent of the
-#' out-degree distribution. It must be greater than or equal to 2. If you pass
-#' \code{Inf} here, you will get back an Erdos-Renyi random network.
+#'   distribution. For directed graphs, this specifies the exponent of the
+#'   out-degree distribution. It must be greater than or equal to 2. If you pass
+#'   \code{Inf} here, you will get back an Erdos-Renyi random network.
 #' @param exponent.in Numeric scalar. If negative, the generated graph will be
-#' undirected. If greater than or equal to 2, this argument specifies the
-#' exponent of the in-degree distribution. If non-negative but less than 2, an
-#' error will be generated.
+#'   undirected. If greater than or equal to 2, this argument specifies the
+#'   exponent of the in-degree distribution. If non-negative but less than 2, an
+#'   error will be generated.
 #' @param loops Logical scalar, whether to allow loop edges in the generated
-#' graph.
+#'   graph.
 #' @param multiple Logical scalar, whether to allow multiple edges in the
-#' generated graph.
+#'   generated graph.
 #' @param finite.size.correction Logical scalar, whether to use the proposed
-#' finite size correction of Cho et al., see references below.
+#'   finite size correction of Cho et al., see references below.
 #' @return An igraph graph, directed or undirected.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
 #' @references Goh K-I, Kahng B, Kim D: Universal behaviour of load
@@ -1720,11 +1720,11 @@ sample_fitness_pl <- sample_fitness_pl
 #' @param nodes The number of vertices in the graph.
 #' @param fw.prob The forward burning probability, see details below.
 #' @param bw.factor The backward burning ratio. The backward burning
-#' probability is calculated as \code{bw.factor*fw.prob}.
+#'   probability is calculated as \code{bw.factor*fw.prob}.
 #' @param ambs The number of ambassador vertices.
 #' @param directed Logical scalar, whether to create a directed graph.
 #' @return A simple graph, possibly directed if the \code{directed} argument is
-#' \code{TRUE}.
+#'   \code{TRUE}.
 #' @note The version of the model in the published paper is incorrect in the
 #' sense that it cannot generate the kind of graphs the authors claim. A
 #' corrected version is available from
@@ -1758,20 +1758,20 @@ sample_forestfire <- sample_forestfire
 #'
 #' @param old.graph The original graph.
 #' @param corr A scalar in the unit interval, the target Pearson
-#' correlation between the adjacency matrices of the original and the generated
-#' graph (the adjacency matrix being used as a vector).
+#'   correlation between the adjacency matrices of the original and the generated
+#'   graph (the adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two
-#' vertices, it must in the open (0,1) interval. The default is the empirical
-#' edge density of the graph. If you are resampling an Erdos-Renyi graph and
-#' you know the original edge probability of the Erdos-Renyi model, you should
-#' supply that explicitly.
+#'   vertices, it must in the open (0,1) interval. The default is the empirical
+#'   edge density of the graph. If you are resampling an Erdos-Renyi graph and
+#'   you know the original edge probability of the Erdos-Renyi model, you should
+#'   supply that explicitly.
 #' @param permutation A numeric vector, a permutation vector that is
-#' applied on the vertices of the first graph, to get the second graph.  If
-#' \code{NULL}, the vertices are not permuted.
+#'   applied on the vertices of the first graph, to get the second graph.  If
+#'   \code{NULL}, the vertices are not permuted.
 #' @return An unweighted graph of the same size as \code{old.graph} such
-#' that the correlation coefficient between the entries of the two
-#' adjacency matrices is \code{corr}.  Note each pair of corresponding
-#' matrix entries is a pair of correlated Bernoulli random variables.
+#'   that the correlation coefficient between the entries of the two
+#'   adjacency matrices is \code{corr}.  Note each pair of corresponding
+#'   matrix entries is a pair of correlated Bernoulli random variables.
 #'
 #' @seealso \code{\link{sample_correlated_gnp_pair}},
 #'   \code{\link{sample_gnp}}
@@ -1796,17 +1796,17 @@ sample_correlated_gnp <- sample_correlated_gnp
 #'
 #' @param n Numeric scalar, the number of vertices for the sampled graphs.
 #' @param corr A scalar in the unit interval, the target Pearson correlation
-#' between the adjacency matrices of the original the generated graph (the
-#' adjacency matrix being used as a vector).
+#'   between the adjacency matrices of the original the generated graph (the
+#'   adjacency matrix being used as a vector).
 #' @param p A numeric scalar, the probability of an edge between two vertices,
-#' it must in the open (0,1) interval.
+#'   it must in the open (0,1) interval.
 #' @param directed Logical scalar, whether to generate directed graphs.
 #' @param permutation A numeric vector, a permutation vector that is applied on
-#' the vertices of the first graph, to get the second graph.  If \code{NULL},
-#' the vertices are not permuted.
+#'   the vertices of the first graph, to get the second graph.  If \code{NULL},
+#'   the vertices are not permuted.
 #' @return A list of two igraph objects, named \code{graph1} and
-#' \code{graph2}, which are two graphs whose adjacency matrix entries are
-#' correlated with \code{corr}.
+#'   \code{graph2}, which are two graphs whose adjacency matrix entries are
+#'   correlated with \code{corr}.
 #'
 #' @seealso \code{\link{sample_correlated_gnp}},
 #'   \code{\link{sample_gnp}}.

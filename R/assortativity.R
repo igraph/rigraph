@@ -72,19 +72,19 @@
 #' assortativity.nominal assortativity_nominal
 #' @param graph The input graph, it can be directed or undirected.
 #' @param types Vector giving the vertex types. They as assumed to be integer
-#' numbers, starting with one. Non-integer values are converted to integers
-#' with \code{\link{as.integer}}.
+#'   numbers, starting with one. Non-integer values are converted to integers
+#'   with \code{\link{as.integer}}.
 #' @param types1 The vertex values, these can be arbitrary numeric values.
 #' @param types2 A second value vector to be using for the incoming edges when
-#' calculating assortativity for a directed graph.  Supply \code{NULL} here if
-#' you want to use the same values for outgoing and incoming edges. This
-#' argument is ignored (with a warning) if it is not \code{NULL} and undirected
-#' assortativity coefficient is being calculated.
+#'   calculating assortativity for a directed graph.  Supply \code{NULL} here if
+#'   you want to use the same values for outgoing and incoming edges. This
+#'   argument is ignored (with a warning) if it is not \code{NULL} and undirected
+#'   assortativity coefficient is being calculated.
 #' @param directed Logical scalar, whether to consider edge directions for
-#' directed graphs. This argument is ignored for undirected graphs. Supply
-#' \code{TRUE} here to do the natural thing, i.e. use directed version of the
-#' measure for directed graphs and the undirected version for undirected
-#' graphs.
+#'   directed graphs. This argument is ignored for undirected graphs. Supply
+#'   \code{TRUE} here to do the natural thing, i.e. use directed version of the
+#'   measure for directed graphs and the undirected version for undirected
+#'   graphs.
 #' @return A single real number.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references M. E. J. Newman: Mixing patterns in networks, \emph{Phys. Rev.

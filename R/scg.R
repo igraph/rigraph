@@ -79,11 +79,11 @@ NULL
 #' @aliases get.stochastic
 #' @param graph The input graph. Must be of class \code{igraph}.
 #' @param column.wise If \code{FALSE}, then the rows of the stochastic matrix
-#' sum up to one; otherwise it is the columns.
+#'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical scalar, whether to return a sparse matrix. The
-#' \code{Matrix} package is needed for sparse matrices.
+#'   \code{Matrix} package is needed for sparse matrices.
 #' @return A regular matrix or a matrix of class \code{Matrix} if a
-#' \code{sparse} argument was \code{TRUE}.
+#'   \code{sparse} argument was \code{TRUE}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_adj}}
 #' @export
@@ -166,29 +166,29 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #'
 #' @aliases scgGrouping
 #' @param V A numeric matrix of (eigen)vectors to be preserved by the coarse
-#' graining (the vectors are to be stored column-wise in \code{V}).
+#'   graining (the vectors are to be stored column-wise in \code{V}).
 #' @param nt A vector of positive integers of length one or equal to
-#' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
-#' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
-#' contains the number of intervals used to partition each eigenvector. The
-#' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
-#' parameter is ignored.
+#'   \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
+#'   the number of groups used to partition each eigenvector separately. When
+#'   \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
+#'   contains the number of intervals used to partition each eigenvector. The
+#'   same partition size or number of intervals is used for each eigenvector if
+#'   \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
+#'   parameter is ignored.
 #' @param mtype The type of semi-projectors used in the SCG. For now
-#' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
-#' available.
+#'   \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
+#'   available.
 #' @param algo The algorithm used to solve the SCG problem. Possible values are
-#' \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv} and
-#' \dQuote{exact_scg}.
+#'   \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv} and
+#'   \dQuote{exact_scg}.
 #' @param p A probability vector of length equal to \code{nrow(V)}. \code{p} is
-#' the stationary probability distribution of a Markov chain when \code{mtype}
-#' = \dQuote{stochastic}. This parameter is ignored in all other cases.
+#'   the stationary probability distribution of a Markov chain when \code{mtype}
+#'   = \dQuote{stochastic}. This parameter is ignored in all other cases.
 #' @param maxiter A positive integer giving the maximum number of iterations of
-#' the k-means algorithm when \code{algo} = \dQuote{interv_km}. This parameter
-#' is ignored in all other cases.
+#'   the k-means algorithm when \code{algo} = \dQuote{interv_km}. This parameter
+#'   is ignored in all other cases.
 #' @return A vector of \code{nrow(V)} integers giving the group label of each
-#' object (vertex) in the partition.
+#'   object (vertex) in the partition.
 #' @author David Morton de Lachapelle \email{david.morton@@epfl.ch},
 #' \email{david.mortondelachapelle@@swissquote.ch}
 #' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
@@ -318,18 +318,18 @@ scg_group <- function(V, nt,
 #'
 #' @aliases scgSemiProjectors
 #' @param groups A vector of \code{nrow(X)} or \code{vcount(X)} integers giving
-#' the group label of every vertex in the partition.
+#'   the group label of every vertex in the partition.
 #' @param mtype The type of semi-projectors. For now \dQuote{symmetric},
-#' \dQuote{laplacian} and \dQuote{stochastic} are available.
+#'   \dQuote{laplacian} and \dQuote{stochastic} are available.
 #' @param p A probability vector of length \code{length(gr)}. \code{p} is the
-#' stationary probability distribution of a Markov chain when \code{mtype} =
-#' \dQuote{stochastic}. This parameter is ignored in all other cases.
+#'   stationary probability distribution of a Markov chain when \code{mtype} =
+#'   \dQuote{stochastic}. This parameter is ignored in all other cases.
 #' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
-#' rows of the Laplacian matrix sum up to zero and the rows of the stochastic
-#' sum up to one; otherwise it is the columns.
+#'   rows of the Laplacian matrix sum up to zero and the rows of the stochastic
+#'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical scalar, whether to return sparse matrices.
 #' @return \item{L}{The semi-projector \eqn{L}.} \item{R}{The semi-projector
-#' \eqn{R}.}
+#'   \eqn{R}.}
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.
 #' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
@@ -439,72 +439,72 @@ scg_semi_proj <- function(groups,
 #' linear running time and memory load.
 #'
 #' @param X The input graph or square matrix. Can be of class \code{igraph},
-#' \code{matrix} or \code{Matrix}.
+#'   \code{matrix} or \code{Matrix}.
 #' @param ev A vector of positive integers giving the indexes of the eigenpairs
-#' to be preserved. For real eigenpairs, 1 designates the eigenvalue with
-#' largest algebraic value, 2 the one with second largest algebraic value, etc.
-#' In the complex case, it is the magnitude that matters.
+#'   to be preserved. For real eigenpairs, 1 designates the eigenvalue with
+#'   largest algebraic value, 2 the one with second largest algebraic value, etc.
+#'   In the complex case, it is the magnitude that matters.
 #' @param nt A vector of positive integers of length one or equal to
-#' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
-#' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
-#' contains the number of intervals used to partition each eigenvector. The
-#' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
-#' parameter is ignored.
+#'   \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
+#'   the number of groups used to partition each eigenvector separately. When
+#'   \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
+#'   contains the number of intervals used to partition each eigenvector. The
+#'   same partition size or number of intervals is used for each eigenvector if
+#'   \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
+#'   parameter is ignored.
 #' @param groups A vector of \code{nrow(X)} or \code{vcount(X)} integers
-#' labeling each group vertex in the partition. If this parameter is supplied
-#' most part of the function is bypassed.
+#'   labeling each group vertex in the partition. If this parameter is supplied
+#'   most part of the function is bypassed.
 #' @param mtype Character scalar. The type of semi-projector to be used for the
-#' SCG. For now \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic}
-#' are available.
+#'   SCG. For now \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic}
+#'   are available.
 #' @param algo Character scalar. The algorithm used to solve the SCG problem.
-#' Possible values are \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv}
-#' and \dQuote{exact_scg}.
+#'   Possible values are \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv}
+#'   and \dQuote{exact_scg}.
 #' @param norm Character scalar. Either \dQuote{row} or \dQuote{col}. If set to
-#' \dQuote{row} the rows of the Laplacian matrix sum up to zero and the rows of
-#' the stochastic matrix sum up to one; otherwise it is the columns.
+#'   \dQuote{row} the rows of the Laplacian matrix sum up to zero and the rows of
+#'   the stochastic matrix sum up to one; otherwise it is the columns.
 #' @param direction Character scalar. When set to \dQuote{right}, resp.
-#' \dQuote{left}, the parameters \code{ev} and \code{evec} refer to right,
-#' resp. left eigenvectors. When passed \dQuote{default} it is the SCG
-#' described in the reference below that is applied (common usage). This
-#' argument is currently not implemented, and right eigenvectors are always
-#' used.
+#'   \dQuote{left}, the parameters \code{ev} and \code{evec} refer to right,
+#'   resp. left eigenvectors. When passed \dQuote{default} it is the SCG
+#'   described in the reference below that is applied (common usage). This
+#'   argument is currently not implemented, and right eigenvectors are always
+#'   used.
 #' @param evec A numeric matrix of (eigen)vectors to be preserved by the coarse
-#' graining (the vectors are to be stored column-wise in \code{evec}). If
-#' supplied, the eigenvectors should correspond to the indexes in \code{ev} as
-#' no cross-check will be done.
+#'   graining (the vectors are to be stored column-wise in \code{evec}). If
+#'   supplied, the eigenvectors should correspond to the indexes in \code{ev} as
+#'   no cross-check will be done.
 #' @param p A probability vector of length \code{nrow(X)} (or
-#' \code{vcount(X)}). \code{p} is the stationary probability distribution of a
-#' Markov chain when \code{mtype} = \dQuote{stochastic}. This parameter is
-#' ignored in all other cases.
+#'   \code{vcount(X)}). \code{p} is the stationary probability distribution of a
+#'   Markov chain when \code{mtype} = \dQuote{stochastic}. This parameter is
+#'   ignored in all other cases.
 #' @param use.arpack Logical scalar. When set to \code{TRUE} uses the function
-#' \code{\link{arpack}} to compute eigenpairs. This parameter should be set to
-#' \code{TRUE} if one deals with large (over a few thousands) AND sparse graphs
-#' or matrices. This argument is not implemented currently and LAPACK is used
-#' for solving the eigenproblems.
+#'   \code{\link{arpack}} to compute eigenpairs. This parameter should be set to
+#'   \code{TRUE} if one deals with large (over a few thousands) AND sparse graphs
+#'   or matrices. This argument is not implemented currently and LAPACK is used
+#'   for solving the eigenproblems.
 #' @param maxiter A positive integer giving the maximum number of iterations
-#' for the k-means algorithm when \code{algo} = \dQuote{interv_km}. This
-#' parameter is ignored in all other cases.
+#'   for the k-means algorithm when \code{algo} = \dQuote{interv_km}. This
+#'   parameter is ignored in all other cases.
 #' @param sparse Logical scalar. Whether to return sparse matrices in the
-#' result, if matrices are requested.
+#'   result, if matrices are requested.
 #' @param output Character scalar. Set this parameter to \dQuote{default} to
-#' retrieve a coarse-grained object of the same class as \code{X}.
+#'   retrieve a coarse-grained object of the same class as \code{X}.
 #' @param semproj Logical scalar. Set this parameter to \code{TRUE} to retrieve
-#' the semi-projectors of the SCG.
+#'   the semi-projectors of the SCG.
 #' @param epairs Logical scalar. Set this to \code{TRUE} to collect the
-#' eigenpairs computed by \code{scg}.
+#'   eigenpairs computed by \code{scg}.
 #' @param stat.prob Logical scalar. This is to collect the stationary
-#' probability \code{p} when dealing with stochastic matrices.
+#'   probability \code{p} when dealing with stochastic matrices.
 #' @return \item{Xt}{The coarse-grained graph, or matrix, possibly a sparse
-#' matrix.} \item{groups}{A vector of \code{nrow(X)} or \code{vcount(X)}
-#' integers giving the group label of each object (vertex) in the partition.}
-#' \item{L}{The semi-projector \eqn{L} if \code{semproj = TRUE}.} \item{R}{The
-#' semi-projector \eqn{R} if \code{semproj = TRUE}.} \item{values}{The computed
-#' eigenvalues if \code{epairs = TRUE}.} \item{vectors}{The computed or
-#' supplied eigenvectors if \code{epairs = TRUE}.} \item{p}{The stationary
-#' probability vector if \code{mtype = stochastic} and \code{stat.prob = TRUE}.
-#' For other matrix types this is missing.}
+#'   matrix.} \item{groups}{A vector of \code{nrow(X)} or \code{vcount(X)}
+#'   integers giving the group label of each object (vertex) in the partition.}
+#'   \item{L}{The semi-projector \eqn{L} if \code{semproj = TRUE}.} \item{R}{The
+#'   semi-projector \eqn{R} if \code{semproj = TRUE}.} \item{values}{The computed
+#'   eigenvalues if \code{epairs = TRUE}.} \item{vectors}{The computed or
+#'   supplied eigenvectors if \code{epairs = TRUE}.} \item{p}{The stationary
+#'   probability vector if \code{mtype = stochastic} and \code{stat.prob = TRUE}.
+#'   For other matrix types this is missing.}
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.
 #' @seealso \link{scg-method} for an introduction.  \code{\link{scg_eps}},
@@ -806,20 +806,20 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #'
 #' @aliases scg_eps scgNormEps
 #' @param V A numeric matrix of (eigen)vectors assumed normalized.  The vectors
-#' are to be stored column-wise in \code{V}).
+#'   are to be stored column-wise in \code{V}).
 #' @param groups A vector of \code{nrow(V)} integers labeling each group vertex
-#' in the partition.
+#'   in the partition.
 #' @param mtype The type of semi-projector used for the SCG. For now
-#' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
-#' available.
+#'   \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
+#'   available.
 #' @param p A probability vector of length \code{nrow(V)}.  \code{p} is the
-#' stationary probability distribution of a Markov chain when \code{mtype} =
-#' \dQuote{stochastic}. This parameter is ignored otherwise.
+#'   stationary probability distribution of a Markov chain when \code{mtype} =
+#'   \dQuote{stochastic}. This parameter is ignored otherwise.
 #' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
-#' rows of the Laplacian matrix sum to zero and the rows of the stochastic
-#' matrix sum to one; otherwise it is the columns.
+#'   rows of the Laplacian matrix sum to zero and the rows of the stochastic
+#'   matrix sum to one; otherwise it is the columns.
 #' @return \code{scg_eps} returns with a numeric vector whose \eqn{i}th
-#' component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
+#'   component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.
 #' @seealso \link{scg-method} and \code{\link{scg}}.

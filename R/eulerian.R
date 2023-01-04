@@ -42,11 +42,11 @@
 #'
 #' @param graph An igraph graph object
 #' @return For \code{has_eulerian_path} and \code{has_eulerian_cycle}, a logical
-#' value that indicates whether the graph contains an Eulerian path or cycle.
-#' For \code{eulerian_path} and \code{eulerian_cycle}, a named list with two
-#' entries: \item{epath}{A vector containing the edge ids along the Eulerian
-#' path or cycle.} \item{vpath}{A vector containing the vertex ids along the
-#' Eulerian path or cycle.}
+#'   value that indicates whether the graph contains an Eulerian path or cycle.
+#'   For \code{eulerian_path} and \code{eulerian_cycle}, a named list with two
+#'   entries: \item{epath}{A vector containing the edge ids along the Eulerian
+#'   path or cycle.} \item{vpath}{A vector containing the vertex ids along the
+#'   Eulerian path or cycle.}
 #'
 #' @keywords graphs
 #' @examples

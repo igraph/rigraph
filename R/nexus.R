@@ -343,35 +343,35 @@ nexus.format.result <- function(l, name = "") {
 #' nexus_info nexus_get nexus_search nexusDatasetInfo print.nexusDatasetInfo
 #' print.nexusDatasetInfoList summary.nexusDatasetInfoList
 #' @param tags A character vector, the tags that are searched. If not given (or
-#' \code{NULL}), then all datasets are listed.
+#'   \code{NULL}), then all datasets are listed.
 #' @param offset An offset to select part of the results. Results are listed
-#' from \code{offset}+1.
+#'   from \code{offset}+1.
 #' @param limit The maximum number of results to return.
 #' @param operator A character scalar. If \sQuote{or} (the default), then all
-#' datasets that have at least one of the given tags, are returned. If it if
-#' \sQuote{and}, then only datasets that have all the given tags, are returned.
+#'   datasets that have at least one of the given tags, are returned. If it if
+#'   \sQuote{and}, then only datasets that have all the given tags, are returned.
 #' @param order The ordering of the results, possible values are:
-#' \sQuote{date}, \sQuote{name}, \sQuote{popularity}.
+#'   \sQuote{date}, \sQuote{name}, \sQuote{popularity}.
 #' @param id The numeric or character id of the data set to query or download.
-#' Instead of the data set ids, it is possible to supply a
-#' \code{nexusDatasetInfo} or \code{nexusDatasetInfoList} object here directly
-#' and then the query is done on the corresponding data set(s).
+#'   Instead of the data set ids, it is possible to supply a
+#'   \code{nexusDatasetInfo} or \code{nexusDatasetInfoList} object here directly
+#'   and then the query is done on the corresponding data set(s).
 #' @param q Nexus search string. See examples below.
 #' @param nexus.url The URL of the Nexus server. Don't change this from the
-#' default, unless you set up your own Nexus server.
+#'   default, unless you set up your own Nexus server.
 #' @param x,object The \code{nexusDatasetInfo} object to print.
 #' @param \dots Currently ignored.
 #' @return \code{nexus_list} and \code{nexus_search} return a list of
-#' \code{nexusDatasetInfo} objects. The list also has these attributes:
-#' \describe{ \item{size}{The number of data sets returned by the query.}
-#' \item{totalsize}{The total number of data sets found for the query.}
-#' \item{offset}{The offset parameter of the query.} \item{limit}{The limit
-#' parameter of the query.} }
+#'   \code{nexusDatasetInfo} objects. The list also has these attributes:
+#'   \describe{ \item{size}{The number of data sets returned by the query.}
+#'   \item{totalsize}{The total number of data sets found for the query.}
+#'   \item{offset}{The offset parameter of the query.} \item{limit}{The limit
+#'   parameter of the query.} }
 #'
-#' \code{nexus_info} returns a single \code{nexusDatasetInfo} object.
+#'   \code{nexus_info} returns a single \code{nexusDatasetInfo} object.
 #'
-#' \code{nexus_get} returns an igraph graph object, or a list of graph objects,
-#' if the data set consists of multiple networks.
+#'   \code{nexus_get} returns an igraph graph object, or a list of graph objects,
+#'   if the data set consists of multiple networks.
 #' @section Examples:
 #' \preformatted{
 #' nexus_list(tag="weighted")
