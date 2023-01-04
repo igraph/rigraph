@@ -38,7 +38,7 @@ Graph motifs are small connected subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{
-\code{sample_motifs} estimates the total number of motifs of a given
+\code{sample_motifs()} estimates the total number of motifs of a given
 size in a graph based on a sample.
 }
 \examples{

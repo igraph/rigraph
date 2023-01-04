@@ -25,7 +25,7 @@ original definition of modularity is recovered when the resolution parameter
 is set to 1.}
 }
 \value{
-\code{cluster_louvain} returns a \code{\link{communities}}
+\code{cluster_louvain()} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{

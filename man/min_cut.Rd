@@ -28,7 +28,7 @@ is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
 \value{
-For \code{min_cut} a nuieric constant, the value of the minimum
+For \code{min_cut()} a nuieric constant, the value of the minimum
 cut, except if \code{value.only = FALSE}. In this case a named list with
 components:
 \item{value}{Numeric scalar, the cut value.}
@@ -43,7 +43,7 @@ actually in different components (after the cut edges are removed), as
 the graph may fall apart into more than two components.}
 }
 \description{
-\code{min_cut} calculates the minimum st-cut between two vertices in a graph
+\code{min_cut()} calculates the minimum st-cut between two vertices in a graph
 (if the \code{source} and \code{target} arguments are given) or the minimum
 cut of the graph (if both \code{source} and \code{target} are \code{NULL}).
 }
@@ -57,8 +57,8 @@ to remove to separate the graph into (at least) two components. (Which is to
 make the graph \emph{not} strongly connected in the directed case.)
 
 The maximum flow between two vertices in a graph is the same as the minimum
-st-cut, so \code{max_flow} and \code{min_cut} essentially calculate the same
-quantity, the only difference is that \code{min_cut} can be invoked without
+st-cut, so \code{max_flow()} and \code{min_cut()} essentially calculate the same
+quantity, the only difference is that \code{min_cut()} can be invoked without
 giving the \code{source} and \code{target} arguments and then minimum of all
 possible minimum cuts is calculated.
 

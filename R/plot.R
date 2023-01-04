@@ -23,8 +23,8 @@
 
 #' Plotting of graphs
 #'
-#' \code{plot.igraph} is able to plot graphs to any R device. It is the
-#' non-interactive companion of the \code{tkplot} function.
+#' \code{plot.igraph()} is able to plot graphs to any R device. It is the
+#' non-interactive companion of the \code{tkplot()} function.
 #'
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
@@ -503,11 +503,11 @@ plot.igraph <- function(x,
 
 #' 3D plotting of graphs with OpenGL
 #'
-#' Using the \code{rgl} package, \code{rglplot} plots a graph in 3D. The plot
+#' Using the \code{rgl} package, \code{rglplot()} plots a graph in 3D. The plot
 #' can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
 #' fixed.
 #'
-#' Note that \code{rglplot} is considered to be highly experimental. It is not
+#' Note that \code{rglplot()} is considered to be highly experimental. It is not
 #' very useful either. See \code{\link{igraph.plotting}} for the possible
 #' arguments.
 #'

@@ -21,7 +21,7 @@
 
 #' Minimum cut in a graph
 #'
-#' \code{min_cut} calculates the minimum st-cut between two vertices in a graph
+#' \code{min_cut()} calculates the minimum st-cut between two vertices in a graph
 #' (if the \code{source} and \code{target} arguments are given) or the minimum
 #' cut of the graph (if both \code{source} and \code{target} are \code{NULL}).
 #'
@@ -34,8 +34,8 @@
 #' make the graph \emph{not} strongly connected in the directed case.)
 #'
 #' The maximum flow between two vertices in a graph is the same as the minimum
-#' st-cut, so \code{max_flow} and \code{min_cut} essentially calculate the same
-#' quantity, the only difference is that \code{min_cut} can be invoked without
+#' st-cut, so \code{max_flow()} and \code{min_cut()} essentially calculate the same
+#' quantity, the only difference is that \code{min_cut()} can be invoked without
 #' giving the \code{source} and \code{target} arguments and then minimum of all
 #' possible minimum cuts is calculated.
 #'
@@ -51,7 +51,7 @@
 #' @param value.only Logical scalar, if \code{TRUE} only the minimum cut value
 #'   is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 #'   partitions are also returned.
-#' @return For \code{min_cut} a nuieric constant, the value of the minimum
+#' @return For \code{min_cut()} a nuieric constant, the value of the minimum
 #'   cut, except if \code{value.only = FALSE}. In this case a named list with
 #'   components:
 #'   \item{value}{Numeric scalar, the cut value.}
@@ -154,7 +154,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' The vertex connectivity of two vertices (\code{source} and \code{target}) in
 #' a directed graph is the minimum number of vertices needed to remove from the
 #' graph to eliminate all (directed) paths from \code{source} to \code{target}.
-#' \code{vertex_connectivity} calculates this quantity if both the
+#' \code{vertex_connectivity()} calculates this quantity if both the
 #' \code{source} and \code{target} arguments are given and they're not
 #' \code{NULL}.
 #'
@@ -162,7 +162,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' (ordered) pairs of vertices in the graph. In other words this is the minimum
 #' number of vertices needed to remove to make the graph not strongly
 #' connected. (If the graph is not strongly connected then this is zero.)
-#' \code{vertex_connectivity} calculates this quantity if neither the
+#' \code{vertex_connectivity()} calculates this quantity if neither the
 #' \code{source} nor \code{target} arguments are given. (Ie. they are both
 #' \code{NULL}.)
 #'
@@ -175,18 +175,18 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #'
 #' The cohesion of a graph (as defined by White and Harary, see references), is
 #' the vertex connectivity of the graph. This is calculated by
-#' \code{cohesion}.
+#' \code{cohesion()}.
 #'
 #' These three functions essentially calculate the same measure(s), more
-#' precisely \code{vertex_connectivity} is the most general, the other two are
+#' precisely \code{vertex_connectivity()} is the most general, the other two are
 #' included only for the ease of using more descriptive function names.
 #'
 #' @aliases vertex.connectivity vertex.disjoint.paths cohesion vertex_connectivity
 #'   vertex_disjoint_paths graph.cohesion
 #' @param graph,x The input graph.
-#' @param source The id of the source vertex, for \code{vertex_connectivity} it
+#' @param source The id of the source vertex, for \code{vertex_connectivity()} it
 #'   can be \code{NULL}, see details below.
-#' @param target The id of the target vertex, for \code{vertex_connectivity} it
+#' @param target The id of the target vertex, for \code{vertex_connectivity()} it
 #'   can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
@@ -256,11 +256,11 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' The edge connectivity of a pair of vertices (\code{source} and
 #' \code{target}) is the minimum number of edges needed to remove to eliminate
 #' all (directed) paths from \code{source} to \code{target}.
-#' \code{edge_connectivity} calculates this quantity if both the \code{source}
+#' \code{edge_connectivity()} calculates this quantity if both the \code{source}
 #' and \code{target} arguments are given (and not \code{NULL}).
 #'
 #' The edge connectivity of a graph is the minimum of the edge connectivity of
-#' every (ordered) pair of vertices in the graph.  \code{edge_connectivity}
+#' every (ordered) pair of vertices in the graph.  \code{edge_connectivity()}
 #' calculates this quantity if neither the \code{source} nor the \code{target}
 #' arguments are given (ie. they are both \code{NULL}).
 #'
@@ -273,15 +273,15 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' connectivity of the graph.
 #'
 #' The three functions documented on this page calculate similar properties,
-#' more precisely the most general is \code{edge_connectivity}, the others are
+#' more precisely the most general is \code{edge_connectivity()}, the others are
 #' included only for having more descriptive function names.
 #'
 #' @aliases edge.connectivity edge_disjoint_paths graph.adhesion adhesion
 #'   edge_connectivity edge.disjoint.paths
 #' @param graph The input graph.
-#' @param source The id of the source vertex, for \code{edge_connectivity} it
+#' @param source The id of the source vertex, for \code{edge_connectivity()} it
 #'   can be \code{NULL}, see details below.
-#' @param target The id of the target vertex, for \code{edge_connectivity} it
+#' @param target The id of the target vertex, for \code{edge_connectivity()} it
 #'   can be \code{NULL}, see details below.
 #' @param checks Logical constant. Whether to check that the graph is connected
 #'   and also the degree of the vertices. If the graph is not (strongly)
@@ -612,7 +612,7 @@ min_st_separators <- min_st_separators
 #' In a graph where each edge has a given flow capacity the maximal flow
 #' between two vertices is calculated.
 #'
-#' \code{max_flow} calculates the maximum flow between two vertices in a
+#' \code{max_flow()} calculates the maximum flow between two vertices in a
 #' weighted (ie. valued) graph. A flow from \code{source} to \code{target} is
 #' an assignment of non-negative real numbers to the edges of the graph,
 #' satisfying two properties: (1) for each edge the flow (ie. the assigned
@@ -673,7 +673,7 @@ max_flow <- max_flow
 #'
 #' Check whether a given set of vertices is a vertex separator.
 #'
-#' \code{is_separator} decides whether the supplied vertex set is a vertex
+#' \code{is_separator()} decides whether the supplied vertex set is a vertex
 #' separator. A vertex set is a vertex separator if its removal results a
 #' disconnected graph.
 #'
@@ -697,7 +697,7 @@ is_separator <- is_separator
 #'
 #' Check whether a given set of vertices is a minimal vertex separator.
 #'
-#' \code{is_min_separator} decides whether the supplied vertex set is a minimal
+#' \code{is_min_separator()} decides whether the supplied vertex set is a minimal
 #' vertex separator. A minimal vertex separator is a vertex separator, such
 #' that none of its subsets is a vertex separator.
 #'

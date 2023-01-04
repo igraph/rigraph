@@ -33,11 +33,11 @@
 #' Please see references below for more about hierarchical random graphs.
 #'
 #' igraph contains functions for fitting HRG models to a given network
-#' (\code{fit_hrg}, for generating networks from a given HRG ensemble
-#' (\code{sample_hrg}), converting an igraph graph to a HRG and back
-#' (\code{hrg}, \code{hrg_tree}), for calculating a consensus tree from a set
-#' of sampled HRGs (\code{consensus_tree}) and for predicting missing edges in
-#' a network based on its HRG models (\code{predict_edges}).
+#' (\code{fit_hrg()}, for generating networks from a given HRG ensemble
+#' (\code{sample_hrg()}), converting an igraph graph to a HRG and back
+#' (\code{hrg()}, \code{hrg_tree()}), for calculating a consensus tree from a set
+#' of sampled HRGs (\code{consensus_tree()}) and for predicting missing edges in
+#' a network based on its HRG models (\code{predict_edges()}).
 #'
 #' The igraph HRG implementation is heavily based on the code published by
 #' Aaron Clauset, at his website (not functional any more).
@@ -48,23 +48,23 @@ NULL
 
 #' Fit a hierarchical random graph model
 #'
-#' \code{fit_hrg} fits a HRG to a given graph. It takes the specified
+#' \code{fit_hrg()} fits a HRG to a given graph. It takes the specified
 #' \code{steps} number of MCMC steps to perform the fitting, or a convergence
-#' criteria if the specified number of steps is zero. \code{fit_hrg} can start
-#' from a given HRG, if this is given in the \code{hrg} argument and the
+#' criteria if the specified number of steps is zero. \code{fit_hrg()} can start
+#' from a given HRG, if this is given in the \code{hrg()} argument and the
 #' \code{start} argument is \code{TRUE}.
 #'
 #' @aliases hrg.fit
 #' @param graph The graph to fit the model to. Edge directions are ignored in
 #'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
-#'   \code{igraphHRG} object. \code{fit_hrg} allows this to be \code{NULL}, in
+#'   \code{igraphHRG} object. \code{fit_hrg()} allows this to be \code{NULL}, in
 #'   which case a random starting point is used for the fitting.
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied \code{igraphHRG} object, or from a random starting point.
 #' @param steps The number of MCMC steps to make. If this is zero, then the
 #'   MCMC procedure is performed until convergence.
-#' @return \code{fit_hrg} returns an \code{igraphHRG} object. This is a list
+#' @return \code{fit_hrg()} returns an \code{igraphHRG} object. This is a list
 #'   with the following members:
 #'   \item{left}{Vector that contains the left children of the internal
 #'     tree vertices. The first vertex is always the root vertex, so the
@@ -141,8 +141,8 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 
 #' Create a consensus tree from several hierarchical random graph models
 #'
-#' \code{consensus_tree} creates a consensus tree from several fitted
-#' hierarchical random graph models, using phylogeny methods. If the \code{hrg}
+#' \code{consensus_tree()} creates a consensus tree from several fitted
+#' hierarchical random graph models, using phylogeny methods. If the \code{hrg()}
 #' argument is given and \code{start} is set to \code{TRUE}, then it starts
 #' sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
 #' first, and then samples starting from the optimum.
@@ -150,14 +150,14 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' @aliases hrg.consensus
 #' @param graph The graph the models were fitted to.
 #' @param hrg A hierarchical random graph model, in the form of an
-#'   \code{igraphHRG} object. \code{consensus_tree} allows this to be
+#'   \code{igraphHRG} object. \code{consensus_tree()} allows this to be
 #'   \code{NULL} as well, then a HRG is fitted to the graph first, from a
 #'   random starting point.
 #' @param start Logical, whether to start the fitting/sampling from the
 #'   supplied \code{igraphHRG} object, or from a random starting point.
 #' @param num.samples Number of samples to use for consensus generation or
 #'   missing edge prediction.
-#' @return \code{consensus_tree} returns a list of two objects. The first
+#' @return \code{consensus_tree()} returns a list of two objects. The first
 #'   is an \code{igraphHRGConsensus} object, the second is an
 #'   \code{igraphHRG} object.  The \code{igraphHRGConsensus} object has the
 #'   following members:
@@ -175,7 +175,7 @@ consensus_tree <- consensus_tree
 
 #' Create a hierarchical random graph from an igraph graph
 #'
-#' \code{hrg} creates a HRG from an igraph graph. The igraph graph must be
+#' \code{hrg()} creates a HRG from an igraph graph. The igraph graph must be
 #' a directed binary tree, with \eqn{n-1} internal and \eqn{n} leaf
 #' vertices. The \code{prob} argument contains the HRG probability labels
 #' for each vertex; these are ignored for leaf vertices.
@@ -184,7 +184,7 @@ consensus_tree <- consensus_tree
 #' @param graph The igraph graph to create the HRG from.
 #' @param prob A vector of probabilities, one for each vertex, in the order of
 #'   vertex ids.
-#' @return \code{hrg} returns an \code{igraphHRG} object.
+#' @return \code{hrg()} returns an \code{igraphHRG} object.
 #'
 #' @family hierarchical random graph functions
 #' @export
@@ -193,7 +193,7 @@ hrg <- hrg
 
 #' Create an igraph graph from a hierarchical random graph model
 #'
-#' \code{hrg_tree} creates the corresponsing igraph tree of a hierarchical
+#' \code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
 #' random graph model.
 #'
 #' @param hrg A hierarchical random graph model.
@@ -206,7 +206,7 @@ hrg_tree <- hrg_tree
 
 #' Sample from a hierarchical random graph model
 #'
-#' \code{sample_hrg} samples a graph from a given hierarchical random graph
+#' \code{sample_hrg()} samples a graph from a given hierarchical random graph
 #' model.
 #'
 #' @aliases hrg.game
@@ -219,10 +219,10 @@ sample_hrg <- sample_hrg
 
 #' Predict edges based on a hierarchical random graph model
 #'
-#' \code{predict_edges} uses a hierarchical random graph model to predict
+#' \code{predict_edges()} uses a hierarchical random graph model to predict
 #' missing edges from a network. This is done by sampling hierarchical models
 #' around the optimum model, proportionally to their likelihood. The MCMC
-#' sampling is stated from \code{hrg}, if it is given and the \code{start}
+#' sampling is stated from \code{hrg()}, if it is given and the \code{start}
 #' argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 #' first.
 #'
@@ -230,7 +230,7 @@ sample_hrg <- sample_hrg
 #' @param graph The graph to fit the model to. Edge directions are ignored in
 #'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
-#'   \code{igraphHRG} object. \code{predict_edges}s allow this to be
+#'   \code{igraphHRG} object. \code{predict_edges()} allow this to be
 #'   \code{NULL} as well, then a HRG is fitted to the graph first, from a
 #'   random starting point.
 #' @param start Logical, whether to start the fitting/sampling from the
@@ -310,7 +310,7 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
 #'
 #' These functions convert various objects to igraph graphs.
 #'
-#' You can use \code{as.igraph} to convert various objects to igraph graphs.
+#' You can use \code{as.igraph()} to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
 #' These objects are created by the \code{\link{fit_hrg}} and
 #' \code{\link{consensus_tree}} functions.  }
@@ -519,7 +519,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'
 #' Plot a hierarchical random graph as a dendrogram.
 #'
-#' \code{plot_dendrogram} supports three different plotting functions, selected via
+#' \code{plot_dendrogram()} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
 #' \itemize{ \item \code{auto} Choose automatically between the plotting

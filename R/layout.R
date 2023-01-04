@@ -35,17 +35,17 @@
 #'
 #' There are two ways to calculate graph layouts in igraph.
 #' The first way is to call a layout function (they all have
-#' prefix \code{layout_} on a graph, to get the vertex coordinates.
+#' prefix \code{layout_()} on a graph, to get the vertex coordinates.
 #'
 #' The second way (new in igraph 0.8.0), has two steps, and it
 #' is more flexible. First you call a layout specification
-#' function (the one without the \code{layout_} prefix, and
-#' then \code{layout_} (or \code{\link{add_layout_}}) to
+#' function (the one without the \code{layout_()} prefix, and
+#' then \code{layout_()} (or \code{\link{add_layout_}}) to
 #' perform the layouting.
 #'
 #' The second way is preferred, as it is more flexible. It allows
 #' operations before and after the layouting. E.g. using the
-#' \code{component_wise} argument, the layout can be calculated
+#' \code{component_wise()} argument, the layout can be calculated
 #' separately for each component, and then merged to get the
 #' final results.
 #'
@@ -53,10 +53,10 @@
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
 #' Currently implemented modifiers: \itemize{
-#'   \item \code{component_wise} calculates the layout separately
+#'   \item \code{component_wise()} calculates the layout separately
 #'     for each component of the graph, and then merges
 #'     them.
-#'   \item \code{normalize} scales the layout to a square.
+#'   \item \code{normalize()} scales the layout to a square.
 #' }
 #'
 #' @param graph The input graph.
@@ -301,7 +301,7 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
 
 
 #' @rdname layout_as_bipartite
-#' @param ... Arguments to pass to \code{layout_as_bipartite}.
+#' @param ... Arguments to pass to \code{layout_as_bipartite()}.
 #' @export
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
@@ -364,7 +364,7 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
 
 
 #' @rdname layout_as_star
-#' @param ... Arguments to pass to \code{layout_as_star}.
+#' @param ... Arguments to pass to \code{layout_as_star()}.
 #' @export
 as_star <- function(...) layout_spec(layout_as_star, ...)
 
@@ -458,7 +458,7 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
 
 
 #' @rdname layout_as_tree
-#' @param ... Passed to \code{layout_as_tree}.
+#' @param ... Passed to \code{layout_as_tree()}.
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
@@ -512,7 +512,7 @@ layout_in_circle <- function(graph, order = V(graph)) {
 }
 
 #' @rdname layout_in_circle
-#' @param ... Passed to \code{layout_in_circle}.
+#' @param ... Passed to \code{layout_in_circle()}.
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
@@ -530,7 +530,7 @@ layout.circle <- function(..., params = list()) {
 #' This function tries to choose an appropriate graph layout algorithm for the
 #' graph, automatically, based on a simple algorithm. See details below.
 #'
-#' \code{layout_nicely} tries to choose an appropriate layout function for the
+#' \code{layout_nicely()} tries to choose an appropriate layout function for the
 #' supplied graph, and uses that to generate the layout. The current
 #' implementation works like this: \enumerate{ \item If the graph has a graph
 #' attribute called \sQuote{layout}, then this is used. If this attribute is an
@@ -539,29 +539,29 @@ layout.circle <- function(..., params = list()) {
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
 #' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
 #' if the graph is connected and has less than 1000 vertices, the
-#' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
-#' \item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
+#' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr()}.
+#' \item Otherwise the DrL layout is used, \code{layout_with_drl()} is called.  }
 #'
 #' In layout algorithm implementations, an argument named \sQuote{weights} is
 #' typically used to specify the weights of the edges if the layout algorithm
 #' supports them. In this case, omitting \sQuote{weights} or setting it to
 #' \code{NULL} will make igraph use the 'weight' edge attribute from the graph
 #' if it is present. However, most layout algorithms do not support non-positive
-#' weights, so \code{layout_nicely} would fail if you simply called it on
+#' weights, so \code{layout_nicely()} would fail if you simply called it on
 #' your graph without specifying explicit weights and the weights happened to
-#' include non-positive numbers. We strive to ensure that \code{layout_nicely}
+#' include non-positive numbers. We strive to ensure that \code{layout_nicely()}
 #' works out-of-the-box for most graphs, so the rule is that if you omit
-#' \sQuote{weights} or set it to \code{NULL} and \code{layout_nicely} would
-#' end up calling \code{layout_with_fr} or \code{layout_with_drl}, we do not
+#' \sQuote{weights} or set it to \code{NULL} and \code{layout_nicely()} would
+#' end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
 #' forward the weights to these functions and issue a warning about this. You
 #' can use \code{weights = NA} to silence the warning.
 #'
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param \dots For \code{layout_nicely} the extra arguments are passed to
-#'   the real layout function. For \code{nicely} all argument are passed to
-#'   \code{layout_nicely}.
+#' @param \dots For \code{layout_nicely()} the extra arguments are passed to
+#'   the real layout function. For \code{nicely()} all argument are passed to
+#'   \code{layout_nicely()}.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}
@@ -689,7 +689,7 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 
 
 #' @rdname layout_on_grid
-#' @param ... Passed to \code{layout_on_grid}.
+#' @param ... Passed to \code{layout_on_grid()}.
 #' @export
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
@@ -723,7 +723,7 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' Place vertices on a sphere, approximately uniformly, in the order of their
 #' vertex ids.
 #'
-#' \code{layout_on_sphere} places the vertices (approximately) uniformly on the
+#' \code{layout_on_sphere()} places the vertices (approximately) uniformly on the
 #' surface of a sphere, this is thus a 3d layout. It is not clear however what
 #' \dQuote{uniformly on a sphere} means.
 #'
@@ -746,7 +746,7 @@ layout_on_sphere <- function(graph) {
 
 
 #' @rdname layout_on_sphere
-#' @param ... Passed to \code{layout_on_sphere}.
+#' @param ... Passed to \code{layout_on_sphere()}.
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
@@ -792,7 +792,7 @@ layout_randomly <- function(graph, dim = 2) {
 }
 
 #' @rdname layout_randomly
-#' @param ... Parameters to pass to \code{layout_randomly}.
+#' @param ... Parameters to pass to \code{layout_randomly()}.
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
@@ -956,7 +956,7 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
 
 
 #' @rdname layout_with_dh
-#' @param ... Passed to \code{layout_with_dh}.
+#' @param ... Passed to \code{layout_with_dh()}.
 #' @export
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
@@ -1117,7 +1117,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
 
 
 #' @rdname layout_with_fr
-#' @param ... Passed to \code{layout_with_fr}.
+#' @param ... Passed to \code{layout_with_fr()}.
 #' @export
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
@@ -1201,7 +1201,7 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
 
 
 #' @rdname layout_with_gem
-#' @param ... Passed to \code{layout_with_gem}.
+#' @param ... Passed to \code{layout_with_gem()}.
 #' @export
 with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
@@ -1214,7 +1214,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' A force-directed layout algorithm, that scales relatively well to large
 #' graphs.
 #'
-#' \code{layout_with_graphopt} is a port of the graphopt layout algorithm by Michael
+#' \code{layout_with_graphopt()} is a port of the graphopt layout algorithm by Michael
 #' Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 #' layers was removed (might be added later) and a code was a bit reorganized
 #' to avoid some unnecessary steps is the node charge (see below) is zero.
@@ -1277,7 +1277,7 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
 
 
 #' @rdname layout_with_graphopt
-#' @param ... Passed to \code{layout_with_graphopt}.
+#' @param ... Passed to \code{layout_with_graphopt()}.
 #' @export
 with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
@@ -1419,7 +1419,7 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
 
 
 #' @rdname layout_with_kk
-#' @param ... Passed to \code{layout_with_kk}.
+#' @param ... Passed to \code{layout_with_kk()}.
 #' @export
 #'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
@@ -1437,7 +1437,7 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'
 #' A layout generator for larger graphs.
 #'
-#' \code{layout_with_lgl} is for large connected graphs, it is similar to the layout
+#' \code{layout_with_lgl()} is for large connected graphs, it is similar to the layout
 #' generator of the Large Graph Layout software
 #' (\url{https://lgl.sourceforge.net/}).
 #'
@@ -1484,7 +1484,7 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
 
 
 #' @rdname layout_with_lgl
-#' @param ... Passed to \code{layout_with_lgl}.
+#' @param ... Passed to \code{layout_with_lgl()}.
 #' @export
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
@@ -1503,7 +1503,7 @@ layout.lgl <- function(..., params = list()) {
 #' Multidimensional scaling of some distance matrix defined on the vertices of
 #' a graph.
 #'
-#' \code{layout_with_mds} uses metric multidimensional scaling for generating the
+#' \code{layout_with_mds()} uses metric multidimensional scaling for generating the
 #' coordinates. Multidimensional scaling aims to place points from a higher
 #' dimensional space in a (typically) 2 dimensional plane, so that the distance
 #' between the points are kept as much as this is possible.
@@ -1518,9 +1518,9 @@ layout.lgl <- function(..., params = list()) {
 #' @param graph The input graph.
 #' @param dist The distance matrix for the multidimensional scaling.  If
 #'   \code{NULL} (the default), then the unweighted shortest path matrix is used.
-#' @param dim \code{layout_with_mds} supports dimensions up to the number of nodes
+#' @param dim \code{layout_with_mds()} supports dimensions up to the number of nodes
 #'   minus one, but only if the graph is connected; for unconnected graphs, the
-#'   only possible values is 2. This is because \code{merge_coords} only works in
+#'   only possible values is 2. This is because \code{merge_coords()} only works in
 #'   2D.
 #' @param options This is currently ignored, as ARPACK is not used any more for
 #'   solving the eigenproblem
@@ -1556,7 +1556,7 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
 
 
 #' @rdname layout_with_mds
-#' @param ... Passed to \code{layout_with_mds}.
+#' @param ... Passed to \code{layout_with_mds()}.
 #' @export
 with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
@@ -1892,7 +1892,7 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
 
 
 #' @rdname layout_with_sugiyama
-#' @param ... Passed to \code{layout_with_sugiyama}.
+#' @param ... Passed to \code{layout_with_sugiyama()}.
 #' @export
 with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
@@ -1904,7 +1904,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' Place several graphs on the same layout
 #'
-#' \code{merge_coords} takes a list of graphs and a list of coordinates and
+#' \code{merge_coords()} takes a list of graphs and a list of coordinates and
 #' places the graphs in a common layout. The method to use is chosen via the
 #' \code{method} parameter, although right now only the \code{dla} method is
 #' implemented.
@@ -1917,10 +1917,10 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' conducted until the graph walks into the larger graphs already placed or
 #' walks too far from the center of the layout.
 #'
-#' The \code{layout_components} function disassembles the graph first into
+#' The \code{layout_components()} function disassembles the graph first into
 #' maximal connected components and calls the supplied \code{layout} function
 #' for each component separately. Finally it merges the layouts via calling
-#' \code{merge_coords}.
+#' \code{merge_coords()}.
 #'
 #' @aliases layout.merge piecewise.layout
 #' @param graphs A list of graph objects.
@@ -1971,7 +1971,7 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #'
 #' Rescale coordinates linearly to be within given bounds.
 #'
-#' \code{norm_coords} normalizes a layout, it linearly transforms each
+#' \code{norm_coords()} normalizes a layout, it linearly transforms each
 #' coordinate separately to fit into the given limits.
 #'
 #' @aliases layout.norm

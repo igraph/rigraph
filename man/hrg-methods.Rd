@@ -17,11 +17,11 @@ ancestor.
 Please see references below for more about hierarchical random graphs.
 
 igraph contains functions for fitting HRG models to a given network
-(\code{fit_hrg}, for generating networks from a given HRG ensemble
-(\code{sample_hrg}), converting an igraph graph to a HRG and back
-(\code{hrg}, \code{hrg_tree}), for calculating a consensus tree from a set
-of sampled HRGs (\code{consensus_tree}) and for predicting missing edges in
-a network based on its HRG models (\code{predict_edges}).
+(\code{fit_hrg()}, for generating networks from a given HRG ensemble
+(\code{sample_hrg()}), converting an igraph graph to a HRG and back
+(\code{hrg()}, \code{hrg_tree()}), for calculating a consensus tree from a set
+of sampled HRGs (\code{consensus_tree()}) and for predicting missing edges in
+a network based on its HRG models (\code{predict_edges()}).
 
 The igraph HRG implementation is heavily based on the code published by
 Aaron Clauset, at his website (not functional any more).

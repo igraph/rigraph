@@ -54,7 +54,7 @@
 #' will be used, it should be a positive integer constant and \code{m} edges
 #' will be added in each time step.
 #'
-#' \code{sample_pa} generates a directed graph by default, set
+#' \code{sample_pa()} generates a directed graph by default, set
 #' \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 #' even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
 #' of adjacent edges not initiated by the vertex itself and not the total
@@ -190,7 +190,7 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 }
 
 #' @rdname sample_pa
-#' @param ... Passed to \code{sample_pa}.
+#' @param ... Passed to \code{sample_pa()}.
 #' @export
 pa <- function(...) constructor_spec(sample_pa, ...)
 
@@ -247,7 +247,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnp
-#' @param ... Passed to \code{sample_gnp}.
+#' @param ... Passed to \code{sample_gnp()}.
 #' @export
 gnp <- function(...) constructor_spec(sample_gnp, ...)
 
@@ -304,7 +304,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname sample_gnm
-#' @param ... Passed to \code{sample_gnm}.
+#' @param ... Passed to \code{sample_gnm()}.
 #' @export
 gnm <- function(...) constructor_spec(sample_gnm, ...)
 
@@ -323,12 +323,12 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' possible edges. This set includes loop edges as well if the \code{loops}
 #' parameter is TRUE.
 #'
-#' \code{random.graph.game} is an alias to this function.
+#' \code{random.graph.game()} is an alias to this function.
 #'
 #' @section Deprecated:
 #'
-#' Since igraph version 0.8.0, both \code{erdos.renyi.game} and
-#' \code{random.graph.game} are deprecated, and \code{\link{sample_gnp}} and
+#' Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
+#' \code{random.graph.game()} are deprecated, and \code{\link{sample_gnp}} and
 #' \code{\link{sample_gnm}} should be used instead.
 #'
 #' @aliases erdos.renyi.game random.graph.game
@@ -336,8 +336,8 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @param p.or.m Either the probability for drawing an edge between two
 #'   arbitrary vertices (G(n,p) graph), or the number of edges in the graph (for
 #'   G(n,m) graphs).
-#' @param type The type of the random graph to create, either \code{gnp}
-#'   (G(n,p) graph) or \code{gnm} (G(n,m) graph).
+#' @param type The type of the random graph to create, either \code{gnp()}
+#'   (G(n,p) graph) or \code{gnm()} (G(n,m) graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
 #'   FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
@@ -497,8 +497,8 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 
 #' @rdname sample_degseq
 #' @param deterministic  Whether the construction should be deterministic
-#' @param ... Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
-#'   or to \code{sample_degseq} otherwise.
+#' @param ... Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
+#'   or to \code{sample_degseq()} otherwise.
 #' @export
 degseq <- function(..., deterministic = FALSE) {
   constructor_spec(
@@ -549,7 +549,7 @@ sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
 }
 
 #' @rdname sample_growing
-#' @param ... Passed to \code{sample_growing}.
+#' @param ... Passed to \code{sample_growing()}.
 #' @export
 growing <- function(...) constructor_spec(sample_growing, ...)
 
@@ -748,7 +748,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 }
 
 #' @rdname sample_pa_age
-#' @param ... Passed to \code{sample_pa_age}.
+#' @param ... Passed to \code{sample_pa_age()}.
 #' @export
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 
@@ -759,7 +759,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' These functions implement evolving network models based on different vertex
 #' types.
 #'
-#' For \code{sample_traits_callaway} the simulation goes like this: in each
+#' For \code{sample_traits_callaway()} the simulation goes like this: in each
 #' discrete time step a new vertex is added to the graph. The type of this
 #' vertex is generated based on \code{type.dist}. Then two vertices are
 #' selected uniformly randomly from the graph. The probability that they will
@@ -767,7 +767,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' \code{pref.matrix}. Then another two vertices are selected and this is
 #' repeated \code{edges.per.step} times in each time step.
 #'
-#' For \code{sample_traits} the simulation goes like this: a single vertex is
+#' For \code{sample_traits()} the simulation goes like this: a single vertex is
 #' added at each time step. This new vertex tries to connect to \code{k}
 #' vertices in the graph. The probability that such a connection is realized
 #' depends on the types of the vertices involved and is taken from
@@ -818,8 +818,8 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
 }
 
 #' @rdname sample_traits_callaway
-#' @param ... Passed to the constructor, \code{sample_traits} or
-#'   \code{sample_traits_callaway}.
+#' @param ... Passed to the constructor, \code{sample_traits()} or
+#'   \code{sample_traits_callaway()}.
 #' @export
 traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 
@@ -900,7 +900,7 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 }
 
 #' @rdname sample_grg
-#' @param ... Passed to \code{sample_grg}.
+#' @param ... Passed to \code{sample_grg()}.
 #' @export
 grg <- function(...) constructor_spec(sample_grg, ...)
 
@@ -912,13 +912,13 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' Generation of random graphs based on different vertex types.
 #'
 #' Both models generate random graphs with given vertex types. For
-#' \code{sample_pref} the probability that two vertices will be connected
+#' \code{sample_pref()} the probability that two vertices will be connected
 #' depends on their type and is given by the \sQuote{pref.matrix} argument.
 #' This matrix should be symmetric to make sense but this is not checked. The
 #' distribution of the different vertex types is given by the
 #' \sQuote{type.dist} vector.
 #'
-#' For \code{sample_asym_pref} each vertex has an in-type and an
+#' For \code{sample_asym_pref()} each vertex has an in-type and an
 #' out-type and a directed graph is created. The probability that a directed
 #' edge is realized from a vertex with a given out-type to a vertex with a
 #' given in-type is given in the \sQuote{pref.matrix} argument, which can be
@@ -926,8 +926,8 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' \sQuote{type.dist.matrix} argument.
 #'
 #' The types of the generated vertices can be retrieved from the
-#' \code{type} vertex attribute for \code{sample_pref} and from the
-#' \code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref}.
+#' \code{type} vertex attribute for \code{sample_pref()} and from the
+#' \code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref()}.
 #'
 #' @aliases sample_pref sample_asym_pref preference.game asymmetric.preference.game
 #' @param nodes The number of vertices in the graphs.
@@ -998,8 +998,8 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
 }
 
 #' @rdname sample_pref
-#' @param ... Passed to the constructor, \code{sample_pref} or
-#'   \code{sample_asym_pref}.
+#' @param ... Passed to the constructor, \code{sample_pref()} or
+#'   \code{sample_asym_pref()}.
 #' @export
 pref <- function(...) constructor_spec(sample_pref, ...)
 
@@ -1121,7 +1121,7 @@ sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
 }
 
 #' @rdname sample_smallworld
-#' @param ... Passed to \code{sample_smallworld}.
+#' @param ... Passed to \code{sample_smallworld()}.
 #' @export
 smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 
@@ -1129,14 +1129,14 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 
 #' Random citation graphs
 #'
-#' \code{sample_last_cit} creates a graph, where vertices age, and
+#' \code{sample_last_cit()} creates a graph, where vertices age, and
 #' gain new connections based on how long ago their last citation
 #' happened.
 #'
-#' \code{sample_cit_cit_types} is a stochastic block model where the
+#' \code{sample_cit_cit_types()} is a stochastic block model where the
 #' graph is growing.
 #'
-#' \code{sample_cit_types} is similarly a growing stochastic block model,
+#' \code{sample_cit_types()} is similarly a growing stochastic block model,
 #' but the probability of an edge depends on the (potentially) cited
 #' vertex only.
 #'
@@ -1145,8 +1145,8 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
 #' @param agebins Number of aging bins.
-#' @param pref Vector (\code{sample_last_cit} and \code{sample_cit_types} or
-#'   matrix (\code{sample_cit_cit_types}) giving the (unnormalized) citation
+#' @param pref Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
+#'   matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
 #'   probabilities for the different vertex types.
 #' @param directed Logical scalar, whether to generate directed networks.
 #' @param types Vector of length \sQuote{\code{n}}, the types of the vertices.
@@ -1329,7 +1329,7 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 }
 
 #' @rdname sample_bipartite
-#' @param ... Passed to \code{sample_bipartite}.
+#' @param ... Passed to \code{sample_bipartite()}.
 #' @export
 bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
@@ -1371,7 +1371,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 sample_sbm <- sample_sbm
 
 #' @rdname sample_sbm
-#' @param ... Passed to \code{sample_sbm}.
+#' @param ... Passed to \code{sample_sbm()}.
 #' @export
 sbm <- function(...) constructor_spec(sample_sbm, ...)
 
@@ -1447,7 +1447,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 }
 
 #' @rdname sample_hierarchical_sbm
-#' @param ... Passed to \code{sample_hierarchical_sbm}.
+#' @param ... Passed to \code{sample_hierarchical_sbm()}.
 #' @export
 hierarchical_sbm <- function(...) {
   constructor_spec(sample_hierarchical_sbm, ...)
@@ -1498,7 +1498,7 @@ hierarchical_sbm <- function(...) {
 sample_dot_product <- sample_dot_product
 
 #' @rdname sample_dot_product
-#' @param ... Passed to \code{sample_dot_product}.
+#' @param ... Passed to \code{sample_dot_product()}.
 #' @export
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 

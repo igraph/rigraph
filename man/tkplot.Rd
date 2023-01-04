@@ -76,25 +76,25 @@ vertices, in absolute coordinates.}
 \item{rad}{The degree to rotate the plot, in radian.}
 }
 \value{
-\code{tkplot} returns an integer, the id of the plot, this can be
+\code{tkplot()} returns an integer, the id of the plot, this can be
 used to manipulate it from the command line.
 
-\code{tk_canvas} returns \code{tkwin} object, the Tk canvas.
+\code{tk_canvas()} returns \code{tkwin} object, the Tk canvas.
 
-\code{tk_coords} returns a matrix with the coordinates.
+\code{tk_coords()} returns a matrix with the coordinates.
 
-\code{tk_close}, \code{tk_off}, \code{tk_fit},
-\code{tk_reshape}, \code{tk_postscript}, \code{tk_center}
-and \code{tk_rotate} return \code{NULL} invisibly.
+\code{tk_close()}, \code{tk_off()}, \code{tk_fit()},
+\code{tk_reshape()}, \code{tk_postscript()}, \code{tk_center()}
+and \code{tk_rotate()} return \code{NULL} invisibly.
 }
 \description{
-\code{tkplot} and its companion functions serve as an interactive graph
+\code{tkplot()} and its companion functions serve as an interactive graph
 drawing facility. Not all parameters of the plot can be changed
 interactively right now though, eg. the colors of vertices, edges, and also
 others have to be pre-defined.
 }
 \details{
-\code{tkplot} is an interactive graph drawing facility. It is not very well
+\code{tkplot()} is an interactive graph drawing facility. It is not very well
 developed at this stage, but it should be still useful.
 
 It's handling should be quite straightforward most of the time, here are
@@ -120,39 +120,39 @@ in the first list to one in the second list will be selected.
 In the color dialog a color name like 'orange' or RGB notation can also be
 used.
 
-The \code{tkplot} command creates a new Tk window with the graphical
+The \code{tkplot()} command creates a new Tk window with the graphical
 representation of \code{graph}. The command returns an integer number, the
 tkplot id. The other commands utilize this id to be able to query or
 manipulate the plot.
 
-\code{tk_close} closes the Tk plot with id \code{tkp.id}.
+\code{tk_close()} closes the Tk plot with id \code{tkp.id}.
 
-\code{tk_off} closes all Tk plots.
+\code{tk_off()} closes all Tk plots.
 
-\code{tk_fit} fits the plot to the given rectangle
+\code{tk_fit()} fits the plot to the given rectangle
 (\code{width} and \code{height}), if some of these are \code{NULL} the
 actual physical width od height of the plot window is used.
 
-\code{tk_reshape} applies a new layout to the plot, its optional
+\code{tk_reshape()} applies a new layout to the plot, its optional
 parameters will be collected to a list analogous to \code{layout.par}.
 
-\code{tk_postscript} creates a dialog window for saving the plot
+\code{tk_postscript()} creates a dialog window for saving the plot
 in postscript format.
 
-\code{tk_canvas} returns the Tk canvas object that belongs to a graph
+\code{tk_canvas()} returns the Tk canvas object that belongs to a graph
 plot. The canvas can be directly manipulated then, eg. labels can be added,
 it could be saved to a file programmatically, etc. See an example below.
 
-\code{tk_coords} returns the coordinates of the vertices in a matrix.
+\code{tk_coords()} returns the coordinates of the vertices in a matrix.
 Each row corresponds to one vertex.
 
-\code{tk_set_coords} sets the coordinates of the vertices. A two-column
+\code{tk_set_coords()} sets the coordinates of the vertices. A two-column
 matrix specifies the new positions, with each row corresponding to a single
 vertex.
 
-\code{tk_center} shifts the figure to the center of its plot window.
+\code{tk_center()} shifts the figure to the center of its plot window.
 
-\code{tk_rotate} rotates the figure, its parameter can be given either
+\code{tk_rotate()} rotates the figure, its parameter can be given either
 in degrees or in radians.
 }
 \section{Examples}{

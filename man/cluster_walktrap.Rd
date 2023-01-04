@@ -40,7 +40,7 @@ then it will always be calculated.}
 for the split corresponding to the highest modularity value.}
 }
 \value{
-\code{cluster_walktrap} returns a \code{\link{communities}}
+\code{cluster_walktrap()} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{

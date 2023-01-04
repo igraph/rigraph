@@ -46,7 +46,7 @@ the modularity matrix. See details below.}
 \item{env}{The environment in which the callback function is evaluated.}
 }
 \value{
-\code{cluster_leading_eigen} returns a named list with the
+\code{cluster_leading_eigen()} returns a named list with the
 following members: \item{membership}{The membership vector at the end of the
 algorithm, when no more splits are possible.} \item{merges}{The merges
 matrix starting from the state described by the \code{membership} member.
@@ -97,7 +97,7 @@ modularity matrix with an arbitrary vector. Supply the vector as an
 argument to perform this multiplication. This function can be used
 with ARPACK.}
 \item{extra}{The \code{extra} argument that was passed to
-\code{cluster_leading_eigen}. }
+\code{cluster_leading_eigen()}. }
 The callback function should return a scalar number. If this number
 is non-zero, then the clustering is terminated.
 }

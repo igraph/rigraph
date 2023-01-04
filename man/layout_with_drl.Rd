@@ -54,7 +54,7 @@ two dimensional or a three dimensional layout. Note that because of the
 nature of the DrL algorithm, the three dimensional layout takes
 significantly longer to compute.}
 
-\item{...}{Passed to \code{layout_with_drl}.}
+\item{...}{Passed to \code{layout_with_drl()}.}
 }
 \value{
 A numeric matrix with two columns.

@@ -25,7 +25,7 @@
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{motifs} searches a graph for motifs of a given size and returns a
+#' \code{motifs()} searches a graph for motifs of a given size and returns a
 #' numeric vector containing the number of different motifs. The order of
 #' the motifs is defined by their isomorphism class, see
 #' \code{\link{isomorphism_class}}.
@@ -37,7 +37,7 @@
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the \code{size} argument). By default no cuts are made.
-#' @return \code{motifs} returns a numeric vector, the number of occurrences of
+#' @return \code{motifs()} returns a numeric vector, the number of occurrences of
 #'   each motif in the graph. The motifs are ordered by their isomorphism
 #'   classes. Note that for unconnected subgraphs, which are not considered to be
 #'   motifs, the result will be \code{NA}.
@@ -77,7 +77,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{count_motifs} calculates the total number of motifs of a given
+#' \code{count_motifs()} calculates the total number of motifs of a given
 #' size in graph.
 #'
 #' @aliases graph.motifs.no
@@ -86,7 +86,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
 #'   of the motif (the \code{size} argument). By default no cuts are made.
-#' @return \code{count_motifs} returns  a numeric scalar.
+#' @return \code{count_motifs()} returns  a numeric scalar.
 #' @seealso \code{\link{isomorphism_class}}
 #'
 #' @export
@@ -121,7 +121,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{sample_motifs} estimates the total number of motifs of a given
+#' \code{sample_motifs()} estimates the total number of motifs of a given
 #' size in a graph based on a sample.
 #'
 #' @aliases graph.motifs.est

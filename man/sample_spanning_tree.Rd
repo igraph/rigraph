@@ -22,7 +22,7 @@ An edge sequence containing the edges of the spanning tree. Use
 \code{\link{subgraph.edges}} to extract the corresponding subgraph.
 }
 \description{
-\code{sample_spanning_tree} picks a spanning tree of an undirected graph
+\code{sample_spanning_tree()} picks a spanning tree of an undirected graph
 randomly and uniformly, using loop-erased random walks.
 }
 \examples{

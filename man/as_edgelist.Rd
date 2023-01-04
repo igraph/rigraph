@@ -22,7 +22,7 @@ Sometimes it is useful to work with a standard representation of a
 graph, like an edge list.
 }
 \details{
-\code{as_edgelist} returns the list of edges in a graph.
+\code{as_edgelist()} returns the list of edges in a graph.
 }
 \examples{
 

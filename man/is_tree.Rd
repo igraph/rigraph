@@ -25,7 +25,7 @@ graph is a tree.} \item{root}{The root vertex of the tree; undefined if
 the graph is not a tree.}
 }
 \description{
-\code{is_tree} decides whether a graph is a tree, and optionally returns a
+\code{is_tree()} decides whether a graph is a tree, and optionally returns a
 possible root vertex if the graph is a tree.
 }
 \details{

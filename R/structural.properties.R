@@ -31,11 +31,11 @@
 #'
 #' The diameter is calculated by using a breadth-first search like method.
 #'
-#' \code{get_diameter} returns a path with the actual diameter. If there are
+#' \code{get_diameter()} returns a path with the actual diameter. If there are
 #' many shortest paths of the length of the diameter, then it returns the first
 #' one found.
 #'
-#' \code{farthest_vertices} returns two vertex ids, the vertices which are
+#' \code{farthest_vertices()} returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #'
 #' @aliases diameter get.diameter farthest.nodes farthest_vertices get_diameter
@@ -50,8 +50,8 @@
 #' @param weights Optional positive weight vector for calculating weighted
 #'   distances. If the graph has a \code{weight} edge attribute, then this is
 #'   used by default.
-#' @return A numeric constant for \code{diameter}, a numeric vector for
-#'   \code{get_diameter}. \code{farthest_vertices} returns a list with two
+#' @return A numeric constant for \code{diameter()}, a numeric vector for
+#'   \code{get_diameter()}. \code{farthest_vertices()} returns a list with two
 #'   entries: \itemize{
 #'   \item \code{vertices} The two vertices that are the farthest.
 #'   \item \code{distance} Their distance.
@@ -178,12 +178,12 @@ mean_distance <- mean_distance
 #' @param normalized Logical scalar, whether to normalize the degree.  If
 #'   \code{TRUE} then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
-#' @param \dots Additional arguments to pass to \code{degree}, eg. \code{mode}
+#' @param \dots Additional arguments to pass to \code{degree()}, eg. \code{mode}
 #'   is useful but also \code{v} and \code{loops} make sense.
-#' @return For \code{degree} a numeric vector of the same length as argument
+#' @return For \code{degree()} a numeric vector of the same length as argument
 #'   \code{v}.
 #'
-#'   For \code{degree_distribution} a numeric vector of the same length as the
+#'   For \code{degree_distribution()} a numeric vector of the same length as the
 #'   maximum degree plus one. The first element is the relative frequency zero
 #'   degree vertices, the second vertices with degree one, etc.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -249,8 +249,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 
 #' Shortest (directed or undirected) paths between vertices
 #'
-#' \code{distances} calculates the length of all the shortest paths from
-#' or to the vertices in the network. \code{shortest_paths} calculates one
+#' \code{distances()} calculates the length of all the shortest paths from
+#' or to the vertices in the network. \code{shortest_paths()} calculates one
 #' shortest path (the path itself, and not just its length) from or to the
 #' given vertex.
 #'
@@ -258,7 +258,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' the minimal number of vertices. The functions documented in this manual page
 #' all calculate shortest paths between vertex pairs.
 #'
-#' \code{distances} calculates the lengths of pairwise shortest paths from
+#' \code{distances()} calculates the lengths of pairwise shortest paths from
 #' a set of vertices (\code{from}) to another set of vertices (\code{to}). It
 #' uses different algorithms, depending on the \code{algorithm} argument and
 #' the \code{weight} edge attribute of the graph. The implemented algorithms
@@ -275,25 +275,25 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' automatic algorithm selection, supply \sQuote{\code{automatic}} as the
 #' \code{algorithm} argument. (This is also the default.)
 #'
-#' \code{shortest_paths} calculates a single shortest path (i.e. the path
+#' \code{shortest_paths()} calculates a single shortest path (i.e. the path
 #' itself, not just its length) between the source vertex given in \code{from},
-#' to the target vertices given in \code{to}. \code{shortest_paths} uses
+#' to the target vertices given in \code{to}. \code{shortest_paths()} uses
 #' breadth-first search for unweighted graphs and Dijkstra's algorithm for
 #' weighted graphs. The latter only works if the edge weights are non-negative.
 #'
-#' \code{all_shortest_paths} calculates \emph{all} shortest paths between
+#' \code{all_shortest_paths()} calculates \emph{all} shortest paths between
 #' pairs of vertices. More precisely, between the \code{from} vertex to the
 #' vertices given in \code{to}. It uses a breadth-first search for unweighted
 #' graphs and Dijkstra's algorithm for weighted ones. The latter only supports
 #' non-negative edge weights.
 #'
-#' \code{mean_distance} calculates the average path length in a graph, by
+#' \code{mean_distance()} calculates the average path length in a graph, by
 #' calculating the shortest paths between all pairs of vertices (both ways for
 #' directed graphs). It uses a breadth-=first search for unweighted graphs and
 #' Dijkstra's algorithm for weighted ones. The latter only supports non-negative
 #' edge weights.
 #'
-#' \code{distance_table} calculates a histogram, by calculating the shortest
+#' \code{distance_table()} calculates a histogram, by calculating the shortest
 #' path length between each pair of vertices. For directed graphs both
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
@@ -306,8 +306,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   calculated.
 #' @param to Numeric vector, the vertices to which the shortest paths will be
 #'   calculated. By default it includes all vertices. Note that for
-#'   \code{distances} every vertex must be included here at most once. (This
-#'   is not required for \code{shortest_paths}.
+#'   \code{distances()} every vertex must be included here at most once. (This
+#'   is not required for \code{shortest_paths()}.
 #' @param mode Character constant, gives whether the shortest paths to or from
 #'   the given vertices should be calculated for directed graphs. If \code{out}
 #'   then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
@@ -329,7 +329,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   i.e. if there are no edge weights, then the unweighted algorithm will be
 #'   used, regardless of this argument.
 #' @param details Whether to provide additional details in the result.
-#'   Functions accepting this argument (like \code{mean_distance}) return
+#'   Functions accepting this argument (like \code{mean_distance()}) return
 #'   additional information like the number of disconnected vertex pairs in
 #'   the result when this parameter is set to \code{TRUE}.
 #' @param unconnected What to do if the graph is unconnected (not
@@ -337,11 +337,11 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   the lengths of the existing paths are considered and averaged; if
 #'   FALSE, the length of the missing paths are considered as having infinite
 #'   length, making the mean distance infinite as well.
-#' @return For \code{distances} a numeric matrix with \code{length(to)}
+#' @return For \code{distances()} a numeric matrix with \code{length(to)}
 #'   columns and \code{length(v)} rows. The shortest path length from a vertex to
 #'   itself is always zero. For unreachable vertices \code{Inf} is included.
 #'
-#'   For \code{shortest_paths} a named list with four entries is returned:
+#'   For \code{shortest_paths()} a named list with four entries is returned:
 #'   \item{vpath}{This itself is a list, of length \code{length(to)}; list
 #'   element \code{i} contains the vertex ids on the path from vertex \code{from}
 #'   to vertex \code{to[i]} (or the other way for directed graphs depending on
@@ -358,17 +358,17 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
 #'   for each vertex, or \code{NULL}, if it was not requested.}
 #'
-#'   For \code{all_shortest_paths} a list is returned, each list element
+#'   For \code{all_shortest_paths()} a list is returned, each list element
 #'   contains a shortest path from \code{from} to a vertex in \code{to}. The
 #'   shortest paths to the same vertex are collected into consecutive elements of
 #'   the list.
 #'
-#'   For \code{mean_distance} a single number is returned if \code{details=FALSE},
+#'   For \code{mean_distance()} a single number is returned if \code{details=FALSE},
 #'   or a named list with two entries: \code{res} is the mean distance as a numeric
 #'   scalar and \code{unconnected} is the number of unconnected vertex pairs,
 #'   also as a numeric scalar.
 #'
-#'   \code{distance_table} returns a named list with two entries: \code{res} is
+#'   \code{distance_table()} returns a named list with two entries: \code{res} is
 #'   a numeric vector, the histogram of distances, \code{unconnected} is a
 #'   numeric scalar, the number of pairs for which the first vertex is not
 #'   reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
@@ -698,21 +698,21 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 
 #' Subgraph of a graph
 #'
-#' \code{subgraph} creates a subgraph of a graph, containing only the specified
+#' \code{subgraph()} creates a subgraph of a graph, containing only the specified
 #' vertices and all the edges among them.
 #'
-#' \code{induced_subgraph} calculates the induced subgraph of a set of vertices
+#' \code{induced_subgraph()} calculates the induced subgraph of a set of vertices
 #' in a graph. This means that exactly the specified vertices and all the edges
 #' between them will be kept in the result graph.
 #'
-#' \code{subgraph.edges} calculates the subgraph of a graph. For this function
+#' \code{subgraph.edges()} calculates the subgraph of a graph. For this function
 #' one can specify the vertices and edges to keep. This function will be
-#' renamed to \code{subgraph} in the next major version of igraph.
+#' renamed to \code{subgraph()} in the next major version of igraph.
 #'
-#' The \code{subgraph} function currently does the same as \code{induced_subgraph}
+#' The \code{subgraph()} function currently does the same as \code{induced_subgraph()}
 #' (assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
-#' is deprecated. In the next major version, \code{subgraph} will overtake the
-#' functionality of \code{subgraph.edges}.
+#' is deprecated. In the next major version, \code{subgraph()} will overtake the
+#' functionality of \code{subgraph.edges()}.
 #'
 #' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
 #' @param graph The original graph.
@@ -950,7 +950,7 @@ transitivity <- function(graph, type = c(
 
 #' Burt's constraint
 #'
-#' Given a graph, \code{constraint} calculates Burt's constraint for each
+#' Given a graph, \code{constraint()} calculates Burt's constraint for each
 #' vertex.
 #'
 #' Burt's constraint is higher if ego has less, or mutually
@@ -1143,17 +1143,17 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' \code{ego_size} calculates the size of the neighborhoods for the
+#' \code{ego_size()} calculates the size of the neighborhoods for the
 #' given vertices with the given order.
 #'
-#' \code{ego} calculates the neighborhoods of the given vertices with
+#' \code{ego()} calculates the neighborhoods of the given vertices with
 #' the given order parameter.
 #'
-#' \code{make_ego_graph} is creates (sub)graphs from all neighborhoods of
+#' \code{make_ego_graph()} is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #'
-#' \code{connect} creates a new graph by connecting each vertex to
+#' \code{connect()} creates a new graph by connecting each vertex to
 #' all other vertices in its neighborhood.
 #'
 #' @aliases neighborhood neighborhood.size graph.neighborhood ego_graph
@@ -1171,12 +1171,12 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @param mindist The minimum distance to include the vertex in the result.
 #' @return
 #'   \itemize{
-#'   \item{\code{ego_size} returns with an integer vector.}
-#'   \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
+#'   \item{\code{ego_size()} returns with an integer vector.}
+#'   \item{\code{ego()} returns A list of \code{igraph.vs} or a list of numeric
 #'         vectors depending on the value of \code{igraph_opt("return.vs.es")},
 #'         see details for performance characteristics.}
-#'   \item{\code{make_ego_graph} returns with a list of graphs.}
-#'   \item{\code{connect} returns with a new graph object.}
+#'   \item{\code{make_ego_graph()} returns with a list of graphs.}
+#'   \item{\code{connect()} returns with a new graph object.}
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
@@ -1453,22 +1453,22 @@ girth <- function(graph, circle = TRUE) {
 #' if it has exactly the same head and tail vertices as another edge. A graph
 #' without multiple and loop edges is called a simple graph.
 #'
-#' \code{any_loop} decides whether the graph has any loop edges.
+#' \code{any_loop()} decides whether the graph has any loop edges.
 #'
-#' \code{which_loop} decides whether the edges of the graph are loop edges.
+#' \code{which_loop()} decides whether the edges of the graph are loop edges.
 #'
-#' \code{any_multiple} decides whether the graph has any multiple edges.
+#' \code{any_multiple()} decides whether the graph has any multiple edges.
 #'
-#' \code{which_multiple} decides whether the edges of the graph are multiple
+#' \code{which_multiple()} decides whether the edges of the graph are multiple
 #' edges.
 #'
-#' \code{count_multiple} counts the multiplicity of each edge of a graph.
+#' \code{count_multiple()} counts the multiplicity of each edge of a graph.
 #'
-#' Note that the semantics for \code{which_multiple} and \code{count_multiple} is
-#' different. \code{which_multiple} gives \code{TRUE} for all occurrences of a
+#' Note that the semantics for \code{which_multiple()} and \code{count_multiple()} is
+#' different. \code{which_multiple()} gives \code{TRUE} for all occurrences of a
 #' multiple edge except for one. Ie. if there are three \code{i-j} edges in the
-#' graph then \code{which_multiple} returns \code{TRUE} for only two of them while
-#' \code{count_multiple} returns \sQuote{3} for all three.
+#' graph then \code{which_multiple()} returns \code{TRUE} for only two of them while
+#' \code{count_multiple()} returns \sQuote{3} for all three.
 #'
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
@@ -1478,9 +1478,9 @@ girth <- function(graph, circle = TRUE) {
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
-#' @return \code{any_loop} and \code{any_multiple} return a logical scalar.
-#'   \code{which_loop} and \code{which_multiple} return a logical vector.
-#'   \code{count_multiple} returns a numeric vector.
+#' @return \code{any_loop()} and \code{any_multiple()} return a logical scalar.
+#'   \code{which_loop()} and \code{which_multiple()} return a logical vector.
+#'   \code{count_multiple()} returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} to eliminate loop and multiple edges.
 #' @export
@@ -1840,16 +1840,16 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'
 #' Calculate the maximal (weakly or strongly) connected components of a graph
 #'
-#' \code{is_connected} decides whether the graph is weakly or strongly
+#' \code{is_connected()} decides whether the graph is weakly or strongly
 #' connected. The null graph is considered disconnected.
 #'
-#' \code{components} finds the maximal (weakly or strongly) connected components
+#' \code{components()} finds the maximal (weakly or strongly) connected components
 #' of a graph.
 #'
-#' \code{count_components} does almost the same as \code{components} but returns only
+#' \code{count_components()} does almost the same as \code{components()} but returns only
 #' the number of clusters found instead of returning the actual clusters.
 #'
-#' \code{component_distribution} creates a histogram for the maximal connected
+#' \code{component_distribution()} creates a histogram for the maximal connected
 #' component sizes.
 #'
 #' The weakly connected components are found by a simple breadth-first search.
@@ -1863,16 +1863,16 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   connected components to search. It is ignored for undirected graphs.
 #' @param \dots Additional attributes to pass to \code{cluster}, right now only
 #'   \code{mode} makes sense.
-#' @return For \code{is_connected} a logical constant.
+#' @return For \code{is_connected()} a logical constant.
 #'
-#'   For \code{components} a named list with three components:
+#'   For \code{components()} a named list with three components:
 #'   \item{membership}{numeric vector giving the cluster id to which each vertex
 #'   belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
 #'   \item{no}{numeric constant, the number of clusters.}
 #'
-#'   For \code{count_components} an integer constant is returned.
+#'   For \code{count_components()} an integer constant is returned.
 #'
-#'   For \code{component_distribution} a numeric vector with the relative
+#'   For \code{component_distribution()} a numeric vector with the relative
 #'   frequencies. The length of the vector is the size of the largest component
 #'   plus one. Note that (for currently unknown reasons) the first element of the
 #'   vector is the number of clusters of size zero, so this is always zero.
@@ -2042,18 +2042,18 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' pairwise non-adjacent, i.e. they have no common incident vertices. A
 #' matching is maximal if it is not a proper subset of any other matching.
 #'
-#' \code{is_matching} checks a matching vector and verifies whether its
+#' \code{is_matching()} checks a matching vector and verifies whether its
 #' length matches the number of vertices in the given graph, its values are
 #' between zero (inclusive) and the number of vertices (inclusive), and
 #' whether there exists a corresponding edge in the graph for every matched
 #' vertex pair. For bipartite graphs, it also verifies whether the matched
 #' vertices are in different parts of the graph.
 #'
-#' \code{is_max_matching} checks whether a matching is maximal.  A matching
+#' \code{is_max_matching()} checks whether a matching is maximal.  A matching
 #' is maximal if and only if there exists no unmatched vertex in a graph
 #' such that one of its neighbors is also unmatched.
 #'
-#' \code{max_bipartite_match} calculates a maximum matching in a bipartite
+#' \code{max_bipartite_match()} calculates a maximum matching in a bipartite
 #' graph. A matching in a bipartite graph is a partial assignment of
 #' vertices of the first kind to vertices of the second kind such that each
 #' vertex of the first kind is matched to at most one vertex of the second
@@ -2090,10 +2090,10 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #'   set to the smallest \eqn{x}, such that \eqn{1+x \ne 1}{1+x != 1}
 #'   holds. If you are running the algorithm with no weights, this argument
 #'   is ignored.
-#' @return \code{is_matching} and \code{is_max_matching} return a logical
+#' @return \code{is_matching()} and \code{is_max_matching()} return a logical
 #'   scalar.
 #'
-#'   \code{max_bipartite_match} returns a list with components:
+#'   \code{max_bipartite_match()} returns a list with components:
 #'   \item{matching_size}{The size of the matching, i.e. the number of edges
 #'     connecting the matched vertices.}
 #'   \item{matching_weight}{The weights of the matching, if the graph was

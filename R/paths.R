@@ -89,7 +89,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' This function tests whether the given graph is a DAG, a directed acyclic
 #' graph.
 #'
-#' \code{is_dag} checks whether there is a directed cycle in the graph. If not,
+#' \code{is_dag()} checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
 #' @aliases is.dag is_dag
@@ -178,7 +178,7 @@ max_cardinality <- max_cardinality
 #'   it will be considered. If \code{all}, the default, then the corresponding
 #'   undirected graph will be used, edge directions will be ignored. This
 #'   argument is ignored for undirected graphs.
-#' @return \code{eccentricity} returns a numeric vector, containing the
+#' @return \code{eccentricity()} returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
 #' @seealso \code{\link{radius}} for a related concept,
 #'   \code{\link{distances}} for general shortest path calculations.

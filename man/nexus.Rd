@@ -84,16 +84,16 @@ and then the query is done on the corresponding data set(s).}
 \item{i}{Index.}
 }
 \value{
-\code{nexus_list} and \code{nexus_search} return a list of
+\code{nexus_list()} and \code{nexus_search()} return a list of
 \code{nexusDatasetInfo} objects. The list also has these attributes:
 \describe{ \item{size}{The number of data sets returned by the query.}
 \item{totalsize}{The total number of data sets found for the query.}
 \item{offset}{The offset parameter of the query.} \item{limit}{The limit
 parameter of the query.} }
 
-\code{nexus_info} returns a single \code{nexusDatasetInfo} object.
+\code{nexus_info()} returns a single \code{nexusDatasetInfo} object.
 
-\code{nexus_get} returns an igraph graph object, or a list of graph objects,
+\code{nexus_get()} returns an igraph graph object, or a list of graph objects,
 if the data set consists of multiple networks.
 }
 \description{
@@ -105,19 +105,19 @@ as an igraph graph.
 Nexus is an online repository of networks, with an API that allow
 programmatic queries against it, and programmatic data download as well.
 
-The \code{nexus_list} and \code{nexus_info} functions query the online
+The \code{nexus_list()} and \code{nexus_info()} functions query the online
 database. They both return \code{nexusDatasetInfo} objects.
-\code{nexus_info} returns more information than \code{nexus_list}.
+\code{nexus_info()} returns more information than \code{nexus_list()}.
 
-\code{nexus_search} searches Nexus, and returns a list of data sets, as
+\code{nexus_search()} searches Nexus, and returns a list of data sets, as
 \code{nexusDatasetInfo} objects. See below for some search examples.
 
-\code{nexus_get} downloads a data set from Nexus, based on its numeric id,
+\code{nexus_get()} downloads a data set from Nexus, based on its numeric id,
 or based on a Nexus search string. For search strings, only the first search
 hit is downloaded, but see also the \code{offset} argument. (If there are
 not data sets found, then the function returns an error.)
 
-The \code{nexusDatasetInfo} objects returned by \code{nexus_list} have the
+The \code{nexusDatasetInfo} objects returned by \code{nexus_list()} have the
 following fields: \describe{
 \item{id}{The numeric id of the dataset.}
 \item{sid}{The character id of the dataset.}
@@ -135,7 +135,7 @@ numeric and character id are separated by a slash, and multiple networks
 are separated by spaces.}
 }
 
-\code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
+\code{nexusDatasetInfo} objects returned by \code{nexus_info()} have the
 following additional fields: \describe{
 \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
 the dataset was added to the database.}
@@ -166,7 +166,7 @@ attribute.}
 
 The results of the Nexus queries are printed to the screen in a consise
 format, similar to the format of igraph graphs. A data set list (typically
-the result of \code{nexus_list} and \code{nexus_search}) looks like this:
+the result of \code{nexus_list()} and \code{nexus_search()}) looks like this:
 \preformatted{NEXUS 1-5/18 -- data set list
 [1] kaptail.4         39/109-223   #18 Kapferer tailor shop
 [2] condmatcollab2003 31163/120029 #17 Condensed matter collaborations+

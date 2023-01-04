@@ -24,7 +24,7 @@
 
 #' Check if a degree sequence is valid for a multi-graph
 #'
-#' \code{is_degseq} checks whether the given vertex degrees (in- and
+#' \code{is_degseq()} checks whether the given vertex degrees (in- and
 #' out-degrees for directed graphs) can be realized by a graph. Note that the
 #' graph does not have to be simple, it may contain loop and multiple edges.
 #' For undirected graphs, it also checks whether the sum of degrees is even.

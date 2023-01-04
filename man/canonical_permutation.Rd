@@ -44,7 +44,7 @@ The canonical permutation brings every isomorphic graphs into the same
 (labeled) graph.
 }
 \details{
-\code{canonical_permutation} computes a permutation which brings the graph
+\code{canonical_permutation()} computes a permutation which brings the graph
 into canonical form, as defined by the BLISS algorithm.  All isomorphic
 graphs have the same canonical form.
 

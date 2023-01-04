@@ -16,7 +16,7 @@ centr_degree(
 \item{graph}{The input graph.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{degree}.}
+\code{degree()}.}
 
 \item{loops}{Logical scalar, whether to consider loops edges when
 calculating the degree.}

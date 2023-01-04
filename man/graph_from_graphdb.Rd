@@ -56,7 +56,7 @@ This function downloads a graph from a database created for the evaluation
 of graph isomorphism testing algothitms.
 }
 \details{
-\code{graph_from_graphdb} reads a graph from the graph database from an FTP or
+\code{graph_from_graphdb()} reads a graph from the graph database from an FTP or
 HTTP server or from a local copy. It has two modes of operation:
 
 If the \code{url} argument is specified then it should the complete path to

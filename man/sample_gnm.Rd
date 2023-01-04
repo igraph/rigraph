@@ -19,7 +19,7 @@ FALSE.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to FALSE.}
 
-\item{...}{Passed to \code{sample_gnm}.}
+\item{...}{Passed to \code{sample_gnm()}.}
 }
 \value{
 A graph object.

@@ -711,7 +711,7 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' The canonical permutation brings every isomorphic graphs into the same
 #' (labeled) graph.
 #'
-#' \code{canonical_permutation} computes a permutation which brings the graph
+#' \code{canonical_permutation()} computes a permutation which brings the graph
 #' into canonical form, as defined by the BLISS algorithm.  All isomorphic
 #' graphs have the same canonical form.
 #'
@@ -791,7 +791,7 @@ canonical_permutation <- canonical_permutation
 #' output of \code{\link{canonical_permutation}} to create the canonical form
 #' of a graph.
 #'
-#' \code{permute} keeps all graph, vertex and edge attributes of the graph.
+#' \code{permute()} keeps all graph, vertex and edge attributes of the graph.
 #'
 #' @aliases permute.vertices permute
 #' @param graph The input graph, it can directed or undirected.

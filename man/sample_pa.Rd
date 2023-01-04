@@ -69,7 +69,7 @@ here and the \code{out.seq} argument is not \code{NULL}, then it should
 contain the out degrees of the new vertices only, not the ones in the
 \code{start.graph}.}
 
-\item{...}{Passed to \code{sample_pa}.}
+\item{...}{Passed to \code{sample_pa()}.}
 }
 \value{
 A graph object.
@@ -107,7 +107,7 @@ If both \code{out.seq} and \code{out.dist} are omitted or NULL then \code{m}
 will be used, it should be a positive integer constant and \code{m} edges
 will be added in each time step.
 
-\code{sample_pa} generates a directed graph by default, set
+\code{sample_pa()} generates a directed graph by default, set
 \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
 of adjacent edges not initiated by the vertex itself and not the total

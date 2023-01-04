@@ -27,7 +27,7 @@
 #' This function creates an igraph graph from one or two data frames containing
 #' the (symbolic) edge list and edge/vertex attributes.
 #'
-#' \code{graph_from_data_frame} creates igraph graphs from one or two data frames.
+#' \code{graph_from_data_frame()} creates igraph graphs from one or two data frames.
 #' It has two modes of operation, depending whether the \code{vertices}
 #' argument is \code{NULL} or not.
 #'
@@ -50,7 +50,7 @@
 #' All edges in the data frame are included in the graph, which may include
 #' multiple parallel edges and loops.
 #'
-#' \code{as_data_frame} converts the igraph graph into one or more data
+#' \code{as_data_frame()} converts the igraph graph into one or more data
 #' frames, depending on the \code{what} argument.
 #'
 #' If the \code{what} argument is \code{edges} (the default), then the edges of
@@ -78,10 +78,10 @@
 #' @param vertices A data frame with vertex metadata, or \code{NULL}. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
 #'   with \code{as.data.frame}, if not \code{NULL}.
-#' @return An igraph graph object for \code{graph_from_data_frame}, and either a
+#' @return An igraph graph object for \code{graph_from_data_frame()}, and either a
 #'   data frame or a list of two data frames named \code{edges} and
 #'   \code{vertices} for \code{as.data.frame}.
-#' @note For \code{graph_from_data_frame} \code{NA} elements in the first two
+#' @note For \code{graph_from_data_frame()} \code{NA} elements in the first two
 #' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 #' the graph. This means that all \code{NA}s will correspond to a single
 #' vertex.
@@ -202,7 +202,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
 }
 
 #' @rdname graph_from_data_frame
-#' @param ... Passed to \code{graph_from_data_frame}.
+#' @param ... Passed to \code{graph_from_data_frame()}.
 #' @export
 from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
@@ -210,7 +210,7 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
 #' Create a graph from an edge list matrix
 #'
-#' \code{graph_from_edgelist} creates a graph from an edge list. Its argument
+#' \code{graph_from_edgelist()} creates a graph from an edge list. Its argument
 #' is a two-column matrix, each row defines one edge. If it is
 #' a numeric matrix then its elements are interpreted as vertex ids. If
 #' it is a character matrix then it is interpreted as symbolic vertex
@@ -257,6 +257,6 @@ graph_from_edgelist <- function(el, directed = TRUE) {
 }
 
 #' @rdname graph_from_edgelist
-#' @param ... Passed to \code{graph_from_edgelist}.
+#' @param ... Passed to \code{graph_from_edgelist()}.
 #' @export
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)

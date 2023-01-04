@@ -22,7 +22,7 @@ vertex separator or not.
 Check whether a given set of vertices is a vertex separator.
 }
 \details{
-\code{is_separator} decides whether the supplied vertex set is a vertex
+\code{is_separator()} decides whether the supplied vertex set is a vertex
 separator. A vertex set is a vertex separator if its removal results a
 disconnected graph.
 

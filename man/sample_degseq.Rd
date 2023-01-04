@@ -27,8 +27,8 @@ should be even. For directed graphs its sum should be the same as the sum of
 \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
 implemented.}
 
-\item{...}{Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
-or to \code{sample_degseq} otherwise.}
+\item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
+or to \code{sample_degseq()} otherwise.}
 
 \item{deterministic}{Whether the construction should be deterministic}
 }

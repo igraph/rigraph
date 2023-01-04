@@ -21,7 +21,7 @@ edge.}
 \item{coords}{Logical scalar, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 
-\item{...}{Passed to \code{sample_grg}.}
+\item{...}{Passed to \code{sample_grg()}.}
 }
 \value{
 A graph object. If \code{coords} is \code{TRUE} then with vertex

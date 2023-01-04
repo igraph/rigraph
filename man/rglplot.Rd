@@ -17,12 +17,12 @@ details}
 \code{NULL}, invisibly.
 }
 \description{
-Using the \code{rgl} package, \code{rglplot} plots a graph in 3D. The plot
+Using the \code{rgl} package, \code{rglplot()} plots a graph in 3D. The plot
 can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
 fixed.
 }
 \details{
-Note that \code{rglplot} is considered to be highly experimental. It is not
+Note that \code{rglplot()} is considered to be highly experimental. It is not
 very useful either. See \code{\link{igraph.plotting}} for the possible
 arguments.
 }

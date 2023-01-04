@@ -53,7 +53,7 @@ A numeric vector contaning the centrality scores for the selected
 vertices.
 }
 \description{
-\code{alpha_centrality} calculates the alpha centrality of some (or all)
+\code{alpha_centrality()} calculates the alpha centrality of some (or all)
 vertices in a graph.
 }
 \details{

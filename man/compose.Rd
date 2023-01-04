@@ -26,7 +26,7 @@ A new graph object.
 Relational composition of two graph.
 }
 \details{
-\code{compose} creates the relational composition of two graphs. The
+\code{compose()} creates the relational composition of two graphs. The
 new graph will contain an (a,b) edge only if there is a vertex c, such that
 edge (a,c) is included in the first graph and (c,b) is included in the
 second graph. The corresponding operator is \verb{\%c\%}.
@@ -38,7 +38,7 @@ If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
 names. Otherwise numeric vertex ids are used.
 
-\code{compose} keeps the attributes of both graphs. All graph, vertex
+\code{compose()} keeps the attributes of both graphs. All graph, vertex
 and edge attributes are copied to the result. If an attribute is present in
 multiple graphs and would result a name clash, then this attribute is
 renamed by adding suffixes: _1, _2, etc.

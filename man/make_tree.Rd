@@ -22,7 +22,7 @@ the children, \code{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
 
-\item{...}{Passed to \code{make_tree} or \code{sample_tree}.}
+\item{...}{Passed to \code{make_tree()} or \code{sample_tree()}.}
 }
 \value{
 An igraph graph

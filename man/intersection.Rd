@@ -8,7 +8,7 @@ intersection(...)
 }
 \arguments{
 \item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{intersection}.}
+the function that implements \code{intersection()}.}
 }
 \value{
 Depends on the function that implements this method.

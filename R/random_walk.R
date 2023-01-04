@@ -1,8 +1,8 @@
 
 #' Random walk on a graph
 #'
-#' \code{random_walk} performs a random walk on the graph and returns the
-#' vertices that the random walk passed through. \code{random_edge_walk}
+#' \code{random_walk()} performs a random walk on the graph and returns the
+#' vertices that the random walk passed through. \code{random_edge_walk()}
 #' is the same but returns the edges that that random walk passed through.
 #'
 #' Do a random walk. From the given start vertex, take the given number of
@@ -24,8 +24,8 @@
 #'   edge directions. This argument is ignored for undirected graphs.
 #' @param stuck What to do if the random walk gets stuck. \code{"return"}
 #'   returns the partial walk, \code{"error"} raises an error.
-#' @return For \code{random_walk}, a vertex sequence containing the vertices
-#'   along the walk. For \code{random_edge_walk}, an edge sequence containing
+#' @return For \code{random_walk()}, a vertex sequence containing the vertices
+#'   along the walk. For \code{random_edge_walk()}, an edge sequence containing
 #'   the edges along the walk.
 #' @export
 #' @examples

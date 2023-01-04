@@ -28,7 +28,7 @@ makes sense only if you provided an initial state, otherwise this element
 will be ignored. Also note that vertices without labels cannot be fixed.}
 }
 \value{
-\code{cluster_label_prop} returns a
+\code{cluster_label_prop()} returns a
 \code{\link{communities}} object, please see the \code{\link{communities}}
 manual page for details.
 }

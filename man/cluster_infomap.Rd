@@ -36,7 +36,7 @@ integer value equal or larger than 1).}
 of the detected community structure.}
 }
 \value{
-\code{cluster_infomap} returns a \code{\link{communities}} object,
+\code{cluster_infomap()} returns a \code{\link{communities}} object,
 please see the \code{\link{communities}} manual page for details.
 }
 \description{

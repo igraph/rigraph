@@ -11,9 +11,9 @@ graph_from_literal(..., simplify = TRUE)
 from_literal(...)
 }
 \arguments{
-\item{...}{For \code{graph_from_literal} the formulae giving the
-structure of the graph, see details below. For \code{from_literal}
-all arguments are passed to \code{graph_from_literal}.}
+\item{...}{For \code{graph_from_literal()} the formulae giving the
+structure of the graph, see details below. For \code{from_literal()}
+all arguments are passed to \code{graph_from_literal()}.}
 
 \item{simplify}{Logical scalar, whether to call \code{\link{simplify}}
 on the created graph. By default the graph is simplified, loop and
@@ -27,7 +27,7 @@ This function is useful if you want to create a small (named) graph
 quickly, it works for both directed and undirected graphs.
 }
 \details{
-\code{graph_from_literal} is very handy for creating small graphs quickly.
+\code{graph_from_literal()} is very handy for creating small graphs quickly.
 You need to supply one or more R expressions giving the structure of
 the graph. The expressions consist of vertex names and edge
 operators. An edge operator is a sequence of \sQuote{\code{-}} and

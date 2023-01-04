@@ -17,7 +17,7 @@
 sir(graph, beta, gamma, no.sim = 100)
 }
 \arguments{
-\item{x}{A \code{sir} object, returned by the \code{sir} function.}
+\item{x}{A \code{sir} object, returned by the \code{sir()} function.}
 
 \item{middle}{Logical scalar, whether to return the middle of the time bins,
 or the boundaries.}
@@ -50,7 +50,7 @@ distribution.}
 \item{no.sim}{Integer scalar, the number simulation runs to perform.}
 }
 \value{
-For \code{sir} the results are returned in an object of class
+For \code{sir()} the results are returned in an object of class
 \sQuote{\code{sir}}, which is a list, with one element for each simulation.
 Each simulation is itself a list with the following elements. They are all
 numeric vectors, with equal length: \describe{
@@ -62,7 +62,7 @@ time.}
 time.}
 }
 
-Function \code{time_bins} returns a numeric vector, the middle or the
+Function \code{time_bins()} returns a numeric vector, the middle or the
 boundaries of the time bins, depending on the \code{middle} argument.
 
 \code{median} returns a list of three named numeric vectors, \code{NS},
@@ -84,14 +84,14 @@ Recovered people are assumed to be immune to the disease. Susceptibles
 become infected with a rate that depends on their number of infected
 neighbors. Infected people become recovered with a constant rate.
 
-The function \code{sir} simulates the model.
+The function \code{sir()} simulates the model.
 
-Function \code{time_bins} bins the simulation steps, using the
+Function \code{time_bins()} bins the simulation steps, using the
 Freedman-Diaconis heuristics to determine the bin width.
 
 Function \code{median} and \code{quantile} calculate the median and
 quantiles of the results, respectively, in bins calculated with
-\code{time_bins}.
+\code{time_bins()}.
 }
 \examples{
 

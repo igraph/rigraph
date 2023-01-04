@@ -28,7 +28,7 @@ same layer.}
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.}
 
-\item{...}{Arguments to pass to \code{layout_as_bipartite}.}
+\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices

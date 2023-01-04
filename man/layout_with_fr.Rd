@@ -79,7 +79,7 @@ from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
 
-\item{...}{Passed to \code{layout_with_fr}.}
+\item{...}{Passed to \code{layout_with_fr()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a

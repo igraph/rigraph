@@ -20,7 +20,7 @@ attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 }
 \value{
-\code{cluster_optimal} returns a \code{\link{communities}} object,
+\code{cluster_optimal()} returns a \code{\link{communities}} object,
 please see the \code{\link{communities}} manual page for details.
 }
 \description{

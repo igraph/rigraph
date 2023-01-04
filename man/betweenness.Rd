@@ -71,10 +71,10 @@ is the number of vertices in the graph.}
 }
 \value{
 A numeric vector with the betweenness score for each vertex in
-\code{v} for \code{betweenness}.
+\code{v} for \code{betweenness()}.
 
 A numeric vector with the edge betweenness score for each edge in \code{e}
-for \code{edge_betweenness}.
+for \code{edge_betweenness()}.
 }
 \description{
 The vertex and edge betweenness are (roughly) defined by the number of
@@ -90,7 +90,7 @@ The edge betweenness of edge \code{e} is defined by
 
 \deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 
-\code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
+\code{betweenness()} calculates vertex betweenness, \code{edge_betweenness()}
 calculates edge betweenness.
 
 Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
@@ -105,15 +105,15 @@ cutoff is \emph{deprecated} and future versions (from 1.4.0) will treat zero
 cutoff literally (i.e. no paths considered at all). If you want no cutoff,
 use a negative number.
 
-\code{estimate_betweenness} and \code{estimate_edge_betweenness} are
-aliases for \code{betweenness} and \code{edge_betweenness}, with a different
+\code{estimate_betweenness()} and \code{estimate_edge_betweenness()} are
+aliases for \code{betweenness()} and \code{edge_betweenness()}, with a different
 argument order, for sake of compatibility with older versions of igraph.
 
 For calculating the betweenness a similar algorithm to the one proposed by
 Brandes (see References) is used.
 }
 \note{
-\code{edge_betweenness} might give false values for graphs with
+\code{edge_betweenness()} might give false values for graphs with
 multiple edges.
 }
 \examples{

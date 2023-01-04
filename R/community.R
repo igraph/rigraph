@@ -45,10 +45,10 @@
 #' The \code{length} generic function call be called on \code{communities} and
 #' returns the number of communities.
 #'
-#' The \code{sizes} function returns the community sizes, in the order of their
+#' The \code{sizes()} function returns the community sizes, in the order of their
 #' ids.
 #'
-#' \code{membership} gives the division of the vertices, into communities. It
+#' \code{membership()} gives the division of the vertices, into communities. It
 #' returns a numeric vector, one value for each vertex, the id of its
 #' community. Community ids start from one. Note that some algorithms calculate
 #' the complete (or incomplete) hierarchical structure of the communities, and
@@ -56,34 +56,34 @@
 #' membership for the highest modularity value is returned, but see also the
 #' manual pages of the individual algorithms.
 #'
-#' \code{communities} is also the name of a function, that returns a list of
+#' \code{communities()} is also the name of a function, that returns a list of
 #' communities, each identified by their vertices. The vertices will have
 #' symbolic names if the \code{add.vertex.names} igraph option is set, and the
 #' graph itself was named. Otherwise numeric vertex ids are used.
 #'
-#' \code{modularity} gives the modularity score of the partitioning. (See
+#' \code{modularity()} gives the modularity score of the partitioning. (See
 #' \code{\link{modularity.igraph}} for details. For algorithms that do not
 #' result a single partitioning, the highest modularity value is returned.
 #'
-#' \code{algorithm} gives the name of the algorithm that was used to calculate
+#' \code{algorithm()} gives the name of the algorithm that was used to calculate
 #' the community structure.
 #'
-#' \code{crossing} returns a logical vector, with one value for each edge,
+#' \code{crossing()} returns a logical vector, with one value for each edge,
 #' ordered according to the edge ids. The value is \code{TRUE} iff the edge
 #' connects two different communities, according to the (best) membership
 #' vector, as returned by \code{membership()}.
 #'
-#' \code{is_hierarchical} checks whether a hierarchical algorithm was used to
+#' \code{is_hierarchical()} checks whether a hierarchical algorithm was used to
 #' find the community structure. Some functions only make sense for
-#' hierarchical methods (e.g. \code{merges}, \code{cut_at} and
+#' hierarchical methods (e.g. \code{merges()}, \code{cut_at()} and
 #' \code{as.dendrogram}).
 #'
-#' \code{merges} returns the merge matrix for hierarchical methods. An error
+#' \code{merges()} returns the merge matrix for hierarchical methods. An error
 #' message is given, if a non-hierarchical method was used to find the
-#' community structure. You can check this by calling \code{is_hierarchical} on
+#' community structure. You can check this by calling \code{is_hierarchical()} on
 #' the \code{communities} object.
 #'
-#' \code{cut_at} cuts the merge tree of a hierarchical community finding method,
+#' \code{cut_at()} cuts the merge tree of a hierarchical community finding method,
 #' at the desired place and returns a membership vector. The desired place can
 #' be expressed as the desired number of communities or as the number of merge
 #' steps to make. The function gives an error message, if called with a
@@ -96,15 +96,15 @@
 #' \code{as.hclust} is similar to \code{as.dendrogram}, but converts a
 #' hierarchical community structure to a \code{hclust} object.
 #'
-#' \code{as_phylo} converts a hierarchical community structure to a \code{phylo}
+#' \code{as_phylo()} converts a hierarchical community structure to a \code{phylo}
 #' object, you will need the \code{ape} package for this.
 #'
-#' \code{show_trace} works (currently) only for communities found by the leading
+#' \code{show_trace()} works (currently) only for communities found by the leading
 #' eigenvector method (\code{\link{cluster_leading_eigen}}), and
 #' returns a character vector that gives the steps performed by the algorithm
 #' while finding the communities.
 #'
-#' \code{code_len} is defined for the InfoMAP method
+#' \code{code_len()} is defined for the InfoMAP method
 #' (\code{\link{cluster_infomap}} and returns the code length of the
 #' partition.
 #'
@@ -155,7 +155,7 @@
 #'   character scalar, the name of the algorithm that produced the community
 #'   structure.
 #' @param merges If not \code{NULL}, then the merge matrix of the hierarchical
-#'   community structure. See \code{merges} below for more information on its
+#'   community structure. See \code{merges()} below for more information on its
 #'   format.
 #' @param modularity Numeric scalar or vector, the modularity value of the
 #'   community structure. It can also be \code{NULL}, if the modularity of the
@@ -165,29 +165,29 @@
 #'
 #'   \code{length} returns an integer scalar.
 #'
-#'   \code{sizes} returns a numeric vector.
+#'   \code{sizes()} returns a numeric vector.
 #'
-#'   \code{membership} returns a numeric vector, one number for each vertex in
+#'   \code{membership()} returns a numeric vector, one number for each vertex in
 #'   the graph that was the input of the community detection.
 #'
-#'   \code{modularity} returns a numeric scalar.
+#'   \code{modularity()} returns a numeric scalar.
 #'
-#'   \code{algorithm} returns a character scalar.
+#'   \code{algorithm()} returns a character scalar.
 #'
-#'   \code{crossing} returns a logical vector.
+#'   \code{crossing()} returns a logical vector.
 #'
-#'   \code{is_hierarchical} returns a logical scalar.
+#'   \code{is_hierarchical()} returns a logical scalar.
 #'
-#'   \code{merges} returns a two-column numeric matrix.
+#'   \code{merges()} returns a two-column numeric matrix.
 #'
-#'   \code{cut_at} returns a numeric vector, the membership vector of the
+#'   \code{cut_at()} returns a numeric vector, the membership vector of the
 #'   vertices.
 #'
 #'   \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
 #'
-#'   \code{show_trace} returns a character vector.
+#'   \code{show_trace()} returns a character vector.
 #'
-#'   \code{code_len} returns a numeric scalar for communities found with the
+#'   \code{code_len()} returns a numeric scalar for communities found with the
 #'   InfoMAP method and \code{NULL} for other methods.
 #'
 #'   \code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
@@ -358,7 +358,7 @@ modularity <- function(x, ...) {
 #' This function calculates how modular is a given division of a graph into
 #' subgraphs.
 #'
-#' \code{modularity} calculates the modularity of a graph with respect to the
+#' \code{modularity()} calculates the modularity of a graph with respect to the
 #' given \code{membership} vector.
 #'
 #' The modularity of a graph with respect to some division (or vertex types)
@@ -388,7 +388,7 @@ modularity <- function(x, ...) {
 #' \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
 #' adjacent edges for vertex \eqn{i}.
 #'
-#' \code{modularity_matrix} calculates the modularity matrix. This is a dense matrix,
+#' \code{modularity_matrix()} calculates the modularity matrix. This is a dense matrix,
 #' and it is defined as the difference of the adjacency matrix and the
 #' configuration model null model matrix. In other words element
 #' \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i
@@ -407,10 +407,10 @@ modularity <- function(x, ...) {
 #' @param directed Whether to use the directed or undirected version of
 #'   modularity. Ignored for undirected graphs.
 #' @param \dots Additional arguments, none currently.
-#' @return For \code{modularity} a numeric scalar, the modularity score of the
+#' @return For \code{modularity()} a numeric scalar, the modularity score of the
 #'   given configuration.
 #'
-#'   For \code{modularity_matrix} a numeric square matrix, its order is the number of
+#'   For \code{modularity_matrix()} a numeric square matrix, its order is the number of
 #'   vertices in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{cluster_walktrap}},
@@ -1070,7 +1070,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   If this is not provided, it will be automatically determined on the basis
 #'   of the \code{objective_function}. Please see the details of this function
 #'   how to interpret the vertex weights.
-#' @return \code{cluster_leiden} returns a \code{\link{communities}}
+#' @return \code{cluster_leiden()} returns a \code{\link{communities}}
 #'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Vincent Traag
 #' @seealso See \code{\link{communities}} for extracting the membership,
@@ -1196,7 +1196,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #'   Edge directions are ignored. Weights are not considered.
 #' @param no.of.communities The number of communities to be found. Must be
 #'   greater than 0 and fewer than number of vertices in the graph.
-#' @return \code{cluster_fluid_communities} returns a \code{\link{communities}}
+#' @return \code{cluster_fluid_communities()} returns a \code{\link{communities}}
 #'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Ferran Parés
 #' @seealso See \code{\link{communities}} for extracting the membership,
@@ -1270,7 +1270,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'   then it will always be calculated.
 #' @param membership Logical scalar, whether to calculate the membership vector
 #'   for the split corresponding to the highest modularity value.
-#' @return \code{cluster_walktrap} returns a \code{\link{communities}}
+#' @return \code{cluster_walktrap()} returns a \code{\link{communities}}
 #'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Pascal Pons (\url{http://psl.pons.free.fr/}) and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R and igraph interface
@@ -1351,7 +1351,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' leafs of the tree are the individual vertices and the root of the tree
 #' represents the whole graph.
 #'
-#' \code{cluster_edge_betweenness} performs this algorithm by calculating the
+#' \code{cluster_edge_betweenness()} performs this algorithm by calculating the
 #' edge betweenness of the graph, removing the edge with the highest edge
 #' betweenness score, then recalculating edge betweenness of the edges and
 #' again removing the one with the highest score, etc.
@@ -1392,7 +1392,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #'   edge-betweenness based edge removals.
 #' @param membership Logical constant, whether to calculate the membership
 #'   vector corresponding to the highest possible modularity score.
-#' @return \code{cluster_edge_betweenness} returns a
+#' @return \code{cluster_edge_betweenness()} returns a
 #'   \code{\link{communities}} object, please see the \code{\link{communities}}
 #'   manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1483,7 +1483,7 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @return \code{cluster_fast_greedy} returns a \code{\link{communities}}
+#' @return \code{cluster_fast_greedy()} returns a \code{\link{communities}}
 #'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
@@ -1593,7 +1593,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'   the modularity matrix. See details below.
 #' @param extra Additional argument to supply to the callback function.
 #' @param env The environment in which the callback function is evaluated.
-#' @return \code{cluster_leading_eigen} returns a named list with the
+#' @return \code{cluster_leading_eigen()} returns a named list with the
 #'   following members: \item{membership}{The membership vector at the end of the
 #'   algorithm, when no more splits are possible.} \item{merges}{The merges
 #'   matrix starting from the state described by the \code{membership} member.
@@ -1617,7 +1617,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'     argument to perform this multiplication. This function can be used
 #'     with ARPACK.}
 #'   \item{extra}{The \code{extra} argument that was passed to
-#'     \code{cluster_leading_eigen}. }
+#'     \code{cluster_leading_eigen()}. }
 #'   The callback function should return a scalar number. If this number
 #'   is non-zero, then the clustering is terminated.
 #' }
@@ -1717,7 +1717,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' @param fixed Logical vector denoting which labels are fixed. Of course this
 #'   makes sense only if you provided an initial state, otherwise this element
 #'   will be ignored. Also note that vertices without labels cannot be fixed.
-#' @return \code{cluster_label_prop} returns a
+#' @return \code{cluster_label_prop()} returns a
 #'   \code{\link{communities}} object, please see the \code{\link{communities}}
 #'   manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C implementation,
@@ -1806,7 +1806,7 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #'   uses internally. Lower values typically yield fewer, larger clusters. The
 #'   original definition of modularity is recovered when the resolution parameter
 #'   is set to 1.
-#' @return \code{cluster_louvain} returns a \code{\link{communities}}
+#' @return \code{cluster_louvain()} returns a \code{\link{communities}}
 #'   object, please see the \code{\link{communities}} manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
 #' @seealso See \code{\link{communities}} for extracting the membership,
@@ -1911,7 +1911,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @return \code{cluster_optimal} returns a \code{\link{communities}} object,
+#' @return \code{cluster_optimal()} returns a \code{\link{communities}} object,
 #'   please see the \code{\link{communities}} manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{communities}} for the documentation of the result,
@@ -1976,7 +1976,7 @@ cluster_optimal <- function(graph, weights = NULL) {
 #'   integer value equal or larger than 1).
 #' @param modularity Logical scalar, whether to calculate the modularity score
 #'   of the detected community structure.
-#' @return \code{cluster_infomap} returns a \code{\link{communities}} object,
+#' @return \code{cluster_infomap()} returns a \code{\link{communities}} object,
 #'   please see the \code{\link{communities}} manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
 #' be more igraph-like by Emmanuel Navarro.  The R interface and
@@ -2075,7 +2075,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #'
 #' Plot a hierarchical community structure as a dendrogram.
 #'
-#' \code{plot_dendrogram} supports three different plotting functions, selected via
+#' \code{plot_dendrogram()} supports three different plotting functions, selected via
 #' the \code{mode} argument. By default the plotting function is taken from the
 #' \code{dend.plot.type} igraph option, and it has for possible values:
 #' \itemize{ \item \code{auto} Choose automatically between the plotting

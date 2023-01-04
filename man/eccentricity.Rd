@@ -19,7 +19,7 @@ undirected graph will be used, edge directions will be ignored. This
 argument is ignored for undirected graphs.}
 }
 \value{
-\code{eccentricity} returns a numeric vector, containing the
+\code{eccentricity()} returns a numeric vector, containing the
 eccentricity score of each given vertex.
 }
 \description{

@@ -26,7 +26,7 @@ vertices according to the specified mapping. Call this function with the
 output of \code{\link{canonical_permutation}} to create the canonical form
 of a graph.
 
-\code{permute} keeps all graph, vertex and edge attributes of the graph.
+\code{permute()} keeps all graph, vertex and edge attributes of the graph.
 }
 \examples{
 

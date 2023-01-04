@@ -22,7 +22,7 @@ igraph version.
 \code{\link{graph_version}} queries the current data format,
 or the data format of a possibly older igraph graph.
 
-\code{upgrade_graph} can convert an older data format
+\code{upgrade_graph()} can convert an older data format
 to the current one.
 }
 \seealso{

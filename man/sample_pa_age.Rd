@@ -71,7 +71,7 @@ of the vertices with age zero. It is usually zero, see details below.}
 \code{time.windows} time steps are counted as a basis of the preferential
 attachment. See also details below.}
 
-\item{...}{Passed to \code{sample_pa_age}.}
+\item{...}{Passed to \code{sample_pa_age()}.}
 }
 \value{
 A new graph.

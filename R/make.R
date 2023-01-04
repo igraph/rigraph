@@ -25,8 +25,8 @@
 #' Takes an argument list and extracts the constructor specification and
 #' constructor modifiers from it.
 #'
-#' This is a helper function for the common parts of \code{make_} and
-#' \code{sample_}.
+#' This is a helper function for the common parts of \code{make_()} and
+#' \code{sample_()}.
 #'
 #' @param ... Parameters to extract from
 #' @param .operation Human-readable description of the operation that this
@@ -78,8 +78,8 @@
 
 #'   Applies a set of constructor modifiers to an already constructed graph.
 #'
-#'   This is a helper function for the common parts of \code{make_} and
-#'   \code{sample_}.
+#'   This is a helper function for the common parts of \code{make_()} and
+#'   \code{sample_()}.
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
@@ -138,7 +138,7 @@
 #'   This is a generic function for creating graphs.
 #'
 #' @details
-#' \code{make_} is a generic function for creating graphs.
+#' \code{make_()} is a generic function for creating graphs.
 #' For every graph constructor in igraph that has a \code{make_} prefix,
 #' there is a corresponding function without the prefix: e.g.
 #' for \code{\link{make_ring}} there is also \code{\link{ring}}, etc.
@@ -147,7 +147,7 @@
 #' constructor with a \code{sample_} prefix, there is a corresponding
 #' function without that prefix.
 #'
-#' These shorter forms can be used together with \code{make_}.
+#' These shorter forms can be used together with \code{make_()}.
 #' The advantage of this form is that the user can specify constructor
 #' modifiers which work with all constructors. E.g. the
 #' \code{\link{with_vertex_}} modifier adds vertex attributes
@@ -404,12 +404,12 @@ with_graph_ <- function(...) {
 #'
 #' @section Notable graphs:
 #'
-#' \code{make_graph} can create some notable graphs. The name of the
+#' \code{make_graph()} can create some notable graphs. The name of the
 #' graph (case insensitive), a character scalar must be supplied as
 #' the \code{edges} argument, and other arguments are ignored. (A warning
 #' is given is they are specified.)
 #'
-#' \code{make_graph} knows the following graphs: \describe{
+#' \code{make_graph()} knows the following graphs: \describe{
 #'   \item{Bull}{The bull graph, 5 vertices, 5 edges, resembles to the head
 #'     of a bull if drawn properly.}
 #'   \item{Chvatal}{This is the smallest triangle-free graph that is
@@ -517,10 +517,10 @@ with_graph_ <- function(...) {
 #'   In this case, the first term of the formula has to start with
 #'   a \sQuote{\code{~}} character, just like regular formulae in R.
 #'   See examples below.
-#' @param ... For \code{make_graph}: extra arguments for the case when the
+#' @param ... For \code{make_graph()}: extra arguments for the case when the
 #'   graph is given via a literal, see \code{\link{graph_from_literal}}.
-#'   For \code{directed_graph} and \code{undirected_graph}:
-#'   Passed to \code{make_directed_graph} or \code{make_undirected_graph}.
+#'   For \code{directed_graph()} and \code{undirected_graph()}:
+#'   Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.
 #' @param n The number of vertices in the graph. This argument is
 #'   ignored (with a warning) if \code{edges} are symbolic vertex names. It
 #'   is also ignored if there is a bigger vertex id in \code{edges}. This
@@ -727,7 +727,7 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' quickly, it works for both directed and undirected graphs.
 #'
 #' @details
-#' \code{graph_from_literal} is very handy for creating small graphs quickly.
+#' \code{graph_from_literal()} is very handy for creating small graphs quickly.
 #' You need to supply one or more R expressions giving the structure of
 #' the graph. The expressions consist of vertex names and edge
 #' operators. An edge operator is a sequence of \sQuote{\code{-}} and
@@ -793,9 +793,9 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' See more examples below.
 #'
 #' @aliases graph.formula
-#' @param ... For \code{graph_from_literal} the formulae giving the
-#'   structure of the graph, see details below. For \code{from_literal}
-#'   all arguments are passed to \code{graph_from_literal}.
+#' @param ... For \code{graph_from_literal()} the formulae giving the
+#'   structure of the graph, see details below. For \code{from_literal()}
+#'   all arguments are passed to \code{graph_from_literal()}.
 #' @param simplify Logical scalar, whether to call \code{\link{simplify}}
 #'   on the created graph. By default the graph is simplified, loop and
 #'   multiple edges are removed.
@@ -951,7 +951,7 @@ from_literal <- function(...) {
 
 #' Create a star graph, a tree with n vertices and n - 1 leaves
 #'
-#' \code{star} creates a star graph, in this every single vertex is
+#' \code{star()} creates a star graph, in this every single vertex is
 #' connected to the center vertex and nobody else.
 #'
 #' @aliases graph.star
@@ -998,7 +998,7 @@ make_star <- function(n, mode = c("in", "out", "mutual", "undirected"),
 }
 
 #' @rdname make_star
-#' @param ... Passed to \code{make_star}.
+#' @param ... Passed to \code{make_star()}.
 #' @export
 star <- function(...) constructor_spec(make_star, ...)
 
@@ -1032,7 +1032,7 @@ make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
 }
 
 #' @rdname make_full_graph
-#' @param ... Passed to \code{make_full_graph}.
+#' @param ... Passed to \code{make_full_graph()}.
 #' @export
 full_graph <- function(...) constructor_spec(make_full_graph, ...)
 
@@ -1040,7 +1040,7 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 
 #' Create a lattice graph
 #'
-#' \code{make_lattice} is a flexible function, it can create lattices of
+#' \code{make_lattice()} is a flexible function, it can create lattices of
 #' arbitrary dimensions, periodic or aperiodic ones. It has two
 #' forms. In the first form you only supply \code{dimvector}, but not
 #' \code{length} and \code{dim}. In the second form you omit
@@ -1096,7 +1096,7 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
 }
 
 #' @rdname make_lattice
-#' @param ... Passed to \code{make_lattice}.
+#' @param ... Passed to \code{make_lattice()}.
 #' @export
 lattice <- function(...) constructor_spec(make_lattice, ...)
 
@@ -1137,7 +1137,7 @@ make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
 }
 
 #' @rdname make_ring
-#' @param ... Passed to \code{make_ring}.
+#' @param ... Passed to \code{make_ring()}.
 #' @export
 ring <- function(...) constructor_spec(make_ring, ...)
 
@@ -1188,7 +1188,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 
 #' Sample trees randomly and uniformly
 #'
-#' \code{sample_tree} generates a random with a given number of nodes uniform
+#' \code{sample_tree()} generates a random with a given number of nodes uniform
 #' at random from the set of labelled trees.
 #'
 #' In other words, the function generates each possible labelled tree with the
@@ -1214,7 +1214,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 sample_tree <- sample_tree
 
 #' @rdname make_tree
-#' @param ... Passed to \code{make_tree} or \code{sample_tree}.
+#' @param ... Passed to \code{make_tree()} or \code{sample_tree()}.
 #' @export
 tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tree), ...)
 
@@ -1223,7 +1223,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 
 #' Create an undirected tree graph from its Prufer sequence
 #'
-#' \code{make_from_prufer} creates an undirected tree graph from its Prufer
+#' \code{make_from_prufer()} creates an undirected tree graph from its Prufer
 #' sequence.
 #'
 #' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
@@ -1246,7 +1246,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 make_from_prufer <- make_from_prufer
 
 #' @rdname make_from_prufer
-#' @param ... Passed to \code{make_from_prufer}
+#' @param ... Passed to \code{make_from_prufer()}
 #' @export
 from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 
@@ -1254,7 +1254,7 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 
 #' Create a graph from the Graph Atlas
 #'
-#' \code{graph_from_atlas} creates graphs from the book
+#' \code{graph_from_atlas()} creates graphs from the book
 #' \sQuote{An Atlas of Graphs} by
 #' Roland C. Read and Robin J. Wilson. The atlas contains all undirected
 #' graphs with up to seven vertices, numbered from 0 up to 1252. The
@@ -1291,7 +1291,7 @@ graph_from_atlas <- function(n) {
 }
 
 #' @rdname graph_from_atlas
-#' @param ... Passed to \code{graph_from_atlas}.
+#' @param ... Passed to \code{graph_from_atlas()}.
 #' @export
 atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 
@@ -1299,7 +1299,7 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 
 #' Create an extended chordal ring graph
 #'
-#' \code{make_chordal_ring} creates an extended chordal ring.
+#' \code{make_chordal_ring()} creates an extended chordal ring.
 #' An extended chordal ring is regular graph, each node has the same
 #' degree. It can be obtained from a simple ring by adding some extra
 #' edges specified by a matrix. Let p denote the number of columns in
@@ -1339,7 +1339,7 @@ make_chordal_ring <- function(n, w, directed = FALSE) {
 }
 
 #' @rdname make_chordal_ring
-#' @param ... Passed to \code{make_chordal_ring}.
+#' @param ... Passed to \code{make_chordal_ring()}.
 #' @export
 chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 
@@ -1388,7 +1388,7 @@ make_line_graph <- function(graph) {
 }
 
 #' @rdname make_line_graph
-#' @param ... Passed to \code{make_line_graph}.
+#' @param ... Passed to \code{make_line_graph()}.
 #' @export
 line_graph <- function(...) constructor_spec(make_line_graph, ...)
 
@@ -1438,7 +1438,7 @@ make_de_bruijn_graph <- function(m, n) {
 }
 
 #' @rdname make_de_bruijn_graph
-#' @param ... Passed to \code{make_de_bruijn_graph}.
+#' @param ... Passed to \code{make_de_bruijn_graph()}.
 #' @export
 de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 
@@ -1484,7 +1484,7 @@ make_kautz_graph <- function(m, n) {
 }
 
 #' @rdname make_kautz_graph
-#' @param ... Passed to \code{make_kautz_graph}.
+#' @param ... Passed to \code{make_kautz_graph()}.
 #' @export
 kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 
@@ -1543,7 +1543,7 @@ make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
 }
 
 #' @rdname make_full_bipartite_graph
-#' @param ... Passed to \code{make_full_bipartite_graph}.
+#' @param ... Passed to \code{make_full_bipartite_graph()}.
 #' @export
 full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph, ...)
 
@@ -1558,14 +1558,14 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 #' for vertices of the second kind.
 #'
-#' \code{make_bipartite_graph} basically does three things. First it checks the
+#' \code{make_bipartite_graph()} basically does three things. First it checks the
 #' \code{edges} vector against the vertex \code{types}. Then it creates a graph
 #' using the \code{edges} vector and finally it adds the \code{types} vector as
 #' a vertex attribute called \code{type}. \code{edges} may contain strings as
 #' vertex names; in this case, \code{types} must be a named vector that specifies
 #' the type for each vertex name that occurs in \code{edges}.
 #'
-#' \code{is_bipartite} checks whether the graph is bipartite or not. It just
+#' \code{is_bipartite()} checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called \code{type}.
 #'
 #' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
@@ -1581,10 +1581,10 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'   that by default undirected graphs are created, as this is more common for
 #'   bipartite graphs.
 #' @param graph The input graph.
-#' @return \code{make_bipartite_graph} returns a bipartite igraph graph. In other
+#' @return \code{make_bipartite_graph()} returns a bipartite igraph graph. In other
 #'   words, an igraph graph that has a vertex attribute named \code{type}.
 #'
-#'   \code{is_bipartite} returns a logical scalar.
+#'   \code{is_bipartite()} returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph}} to create one-mode networks
 #' @keywords graphs
@@ -1622,7 +1622,7 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
 }
 
 #' @rdname make_bipartite_graph
-#' @param ... Passed to \code{make_bipartite_graph}.
+#' @param ... Passed to \code{make_bipartite_graph()}.
 #' @export
 bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
@@ -1630,7 +1630,7 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 
 #' Create a complete (full) citation graph
 #'
-#' \code{make_full_citation_graph} creates a full citation graph. This is a
+#' \code{make_full_citation_graph()} creates a full citation graph. This is a
 #' directed graph, where every \code{i->j} edge is present if and only if
 #' \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
 #'
@@ -1657,7 +1657,7 @@ make_full_citation_graph <- function(n, directed = TRUE) {
 }
 
 #' @rdname make_full_citation_graph
-#' @param ... Passed to \code{make_full_citation_graph}.
+#' @param ... Passed to \code{make_full_citation_graph()}.
 #' @export
 full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, ...)
 

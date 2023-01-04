@@ -23,7 +23,7 @@ solution is to bend the edges, with diffenent curvature, so that all of them
 are visible.
 }
 \details{
-\code{curve_multiple} calculates the optimal \code{edge.curved} vector for
+\code{curve_multiple()} calculates the optimal \code{edge.curved} vector for
 plotting a graph with multiple edges, so that all edges are visible.
 }
 \examples{

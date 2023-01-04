@@ -8,7 +8,7 @@ union(...)
 }
 \arguments{
 \item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{union}.}
+the function that implements \code{union()}.}
 }
 \value{
 Depends on the function that implements this method.

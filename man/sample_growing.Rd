@@ -20,7 +20,7 @@ growing(...)
 \item{citation}{Logical. If \code{TRUE} a citation graph is created, ie. in
 each time step the added edges are originating from the new vertex.}
 
-\item{...}{Passed to \code{sample_growing}.}
+\item{...}{Passed to \code{sample_growing()}.}
 }
 \value{
 A new graph object.

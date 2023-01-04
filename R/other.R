@@ -23,7 +23,7 @@
 
 #' Running mean of a time series
 #'
-#' \code{running_mean} calculates the running mean in a vector with the given
+#' \code{running_mean()} calculates the running mean in a vector with the given
 #' bin width.
 #'
 #' The running mean of \code{v} is a \code{w} vector of length

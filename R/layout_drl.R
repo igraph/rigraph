@@ -138,7 +138,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 
 
 #' @rdname layout_with_drl
-#' @param ... Passed to \code{layout_with_drl}.
+#' @param ... Passed to \code{layout_with_drl()}.
 #' @export
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 

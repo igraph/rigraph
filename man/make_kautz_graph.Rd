@@ -15,7 +15,7 @@ kautz_graph(...)
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
 
-\item{...}{Passed to \code{make_kautz_graph}.}
+\item{...}{Passed to \code{make_kautz_graph()}.}
 }
 \value{
 A graph object.

@@ -9,11 +9,11 @@
 #' coefficient for each clique in the candidate basis.
 #'
 #' igraph contains three functions for performing the graph decomponsition of a
-#' graph. The first is \code{graphlets}, which performed both steps on the
+#' graph. The first is \code{graphlets()}, which performed both steps on the
 #' method and returns a list of subgraphs, with their corresponding weights.
 #' The second and third functions correspond to the first and second steps of
 #' the algorithm, and they are useful if the user wishes to perform them
-#' individually: \code{graphlet_basis} and \code{graphlet_proj}.
+#' individually: \code{graphlet_basis()} and \code{graphlet_proj()}.
 #'
 #' @aliases graphlets graphlets.project graphlet_proj graphlet_basis
 #' graphlets.candidate.basis
@@ -26,17 +26,17 @@
 #' @param cliques A list of vertex ids, the graphlet basis to use for the
 #'   projection.
 #' @param Mu Starting weights for the projection.
-#' @return \code{graphlets} returns a list with two members: \item{cliques}{A
+#' @return \code{graphlets()} returns a list with two members: \item{cliques}{A
 #'   list of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 #'   vector of vertex ids.} \item{Mu}{The weights of the subgraphs in graphlet
 #'   basis.}
 #'
-#'   \code{graphlet_basis} returns a list of two elements: \item{cliques}{A list
+#'   \code{graphlet_basis()} returns a list of two elements: \item{cliques}{A list
 #'   of subgraphs, the candidate graphlet basis. Each subgraph is give by a
 #'   vector of vertex ids.} \item{thresholds}{The weight thresholds used for
 #'   finding the subgraphs.}
 #'
-#'   \code{graphlet_proj} return a numeric vector, the weights of the graphlet
+#'   \code{graphlet_proj()} return a numeric vector, the weights of the graphlet
 #'   basis subgraphs.
 #' @examples
 #'

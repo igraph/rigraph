@@ -14,7 +14,7 @@ The Prufer sequence of the graph, represented as a numeric vector of
 vertex IDs in the sequence.
 }
 \description{
-\code{to_prufer} converts a tree graph into its Prufer sequence.
+\code{to_prufer()} converts a tree graph into its Prufer sequence.
 }
 \details{
 The Prufer sequence of a tree graph with n labeled vertices is a sequence of

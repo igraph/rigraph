@@ -43,13 +43,13 @@ vertex. Two edges are multiple edges if they have exactly the same two
 endpoints (for directed graphs order does matter). A graph is simple is
 it does not contain loop edges and multiple edges.
 
-\code{is_simple} checks whether a graph is simple.
+\code{is_simple()} checks whether a graph is simple.
 
-\code{simplify} removes the loop and/or multiple edges from a graph.  If
+\code{simplify()} removes the loop and/or multiple edges from a graph.  If
 both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
 function returns a simple graph.
 
-\code{simplify_and_colorize} constructs a new, simple graph from a graph and
+\code{simplify_and_colorize()} constructs a new, simple graph from a graph and
 also sets a \code{color} attribute on both the vertices and the edges.
 The colors of the vertices represent the number of self-loops that were
 originally incident on them, while the colors of the edges represent the

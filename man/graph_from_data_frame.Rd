@@ -31,10 +31,10 @@ version 0.7 this argument is coerced to a data frame with
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
 
-\item{...}{Passed to \code{graph_from_data_frame}.}
+\item{...}{Passed to \code{graph_from_data_frame()}.}
 }
 \value{
-An igraph graph object for \code{graph_from_data_frame}, and either a
+An igraph graph object for \code{graph_from_data_frame()}, and either a
 data frame or a list of two data frames named \code{edges} and
 \code{vertices} for \code{as.data.frame}.
 }
@@ -43,7 +43,7 @@ This function creates an igraph graph from one or two data frames containing
 the (symbolic) edge list and edge/vertex attributes.
 }
 \details{
-\code{graph_from_data_frame} creates igraph graphs from one or two data frames.
+\code{graph_from_data_frame()} creates igraph graphs from one or two data frames.
 It has two modes of operation, depending whether the \code{vertices}
 argument is \code{NULL} or not.
 
@@ -66,7 +66,7 @@ Excel and are imported into R via \code{\link{read.table}},
 All edges in the data frame are included in the graph, which may include
 multiple parallel edges and loops.
 
-\code{as_data_frame} converts the igraph graph into one or more data
+\code{as_data_frame()} converts the igraph graph into one or more data
 frames, depending on the \code{what} argument.
 
 If the \code{what} argument is \code{edges} (the default), then the edges of
@@ -86,7 +86,7 @@ If the \code{what} argument is \code{both}, then both vertex and edge data
 is returned, in a list with named entries \code{vertices} and \code{edges}.
 }
 \note{
-For \code{graph_from_data_frame} \code{NA} elements in the first two
+For \code{graph_from_data_frame()} \code{NA} elements in the first two
 columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 the graph. This means that all \code{NA}s will correspond to a single
 vertex.

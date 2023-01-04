@@ -26,7 +26,7 @@ generated graph.}
 \item{multiple}{Logical scalar, whether multiple edges are allowed int the
 generated graph.}
 
-\item{...}{Passed to \code{sample_smallworld}.}
+\item{...}{Passed to \code{sample_smallworld()}.}
 }
 \value{
 A graph object.

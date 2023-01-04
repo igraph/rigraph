@@ -15,7 +15,7 @@ de_bruijn_graph(...)
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
 
-\item{...}{Passed to \code{make_de_bruijn_graph}.}
+\item{...}{Passed to \code{make_de_bruijn_graph()}.}
 }
 \value{
 A graph object.

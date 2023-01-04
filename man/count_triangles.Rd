@@ -17,10 +17,10 @@ vector of numeric ids, or a character vector of symbolic vertex names for
 named graphs.}
 }
 \value{
-For \code{triangles} a numeric vector of vertex ids, the first three
+For \code{triangles()} a numeric vector of vertex ids, the first three
 vertices belong to the first triangle found, etc.
 
-For \code{count_triangles} a numeric vector, the number of triangles for all
+For \code{count_triangles()} a numeric vector, the number of triangles for all
 vertices queried.
 }
 \description{
@@ -28,11 +28,11 @@ Count how many triangles a vertex is part of, in a graph, or just list the
 triangles of a graph.
 }
 \details{
-\code{triangles} lists all triangles of a graph. For efficiency, all
+\code{triangles()} lists all triangles of a graph. For efficiency, all
 triangles are returned in a single vector. The first three vertices belong
 to the first triangle, etc.
 
-\code{count_triangles} counts how many triangles a vertex is part of.
+\code{count_triangles()} counts how many triangles a vertex is part of.
 }
 \examples{
 

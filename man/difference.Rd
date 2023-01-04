@@ -8,7 +8,7 @@ difference(...)
 }
 \arguments{
 \item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{difference}.}
+the function that implements \code{difference()}.}
 }
 \value{
 Depends on the function that implements this method.

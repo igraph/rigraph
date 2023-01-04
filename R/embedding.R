@@ -234,7 +234,7 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' Sample finite-dimensional vectors to use as latent position vectors in
 #' random dot product graphs
 #'
-#' \code{sample_sphere_surface} generates uniform samples from \eqn{S^{dim-1}}
+#' \code{sample_sphere_surface()} generates uniform samples from \eqn{S^{dim-1}}
 #' (the \code{(dim-1)}-sphere) with radius \code{radius}, i.e. the Euclidean
 #' norm of the samples equal \code{radius}.
 #'
@@ -244,7 +244,7 @@ embed_laplacian_matrix <- embed_laplacian_matrix
 #' @param positive Logical scalar, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   \code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample
 #'   vectors.
 #'
 #' @family latent position vector samplers
@@ -276,7 +276,7 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' Sample finite-dimensional vectors to use as latent position vectors in
 #' random dot product graphs
 #'
-#' \code{sample_sphere_volume} generates uniform samples from \eqn{S^{dim-1}}
+#' \code{sample_sphere_volume()} generates uniform samples from \eqn{S^{dim-1}}
 #' (the \code{(dim-1)}-sphere) i.e. the Euclidean norm of the samples is
 #' smaller or equal to \code{radius}.
 #'
@@ -286,7 +286,7 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' @param positive Logical scalar, whether to sample from the positive orthant
 #'   of the sphere.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   \code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample
 #'   vectors.
 #'
 #' @family latent position vector samplers
@@ -318,7 +318,7 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' Sample finite-dimensional vectors to use as latent position vectors in
 #' random dot product graphs
 #'
-#' \code{sample_dirichlet} generates samples from the Dirichlet distribution
+#' \code{sample_dirichlet()} generates samples from the Dirichlet distribution
 #' with given \eqn{\alpha}{alpha} parameter. The sample is drawn from
 #' \code{length(alpha)-1}-simplex.
 #'
@@ -326,7 +326,7 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' @param alpha Numeric vector, the vector of \eqn{\alpha}{alpha} parameter for
 #'   the Dirichlet distribution.
 #' @return A \code{dim} (length of the \code{alpha} vector for
-#'   \code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+#'   \code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample
 #'   vectors.
 #'
 #' @family latent position vector samplers

@@ -25,15 +25,15 @@
 #'
 #' The scan statistic is a summary of the locality statistics that is
 #' computed from the local neighborhood of each vertex. The
-#' \code{local_scan} function computes the local statistics for each vertex
+#' \code{local_scan()} function computes the local statistics for each vertex
 #' for a given neighborhood size and the statistic function.
 #'
 #' See the given reference below for the details on the local scan
 #' statistics.
 #'
-#' \code{local_scan} calculates exact local scan statistics.
+#' \code{local_scan()} calculates exact local scan statistics.
 #'
-#' If \code{graph.them} is \code{NULL}, then \code{local_scan} computes the
+#' If \code{graph.them} is \code{NULL}, then \code{local_scan()} computes the
 #' \sQuote{us} variant of the scan statistics.  Otherwise,
 #' \code{graph.them} should be an igraph object and the \sQuote{them}
 #' variant is computed using \code{graph.us} to extract the neighborhood
@@ -49,7 +49,7 @@
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for
 #'   computing the local statistic in each neighborhood. If \code{NULL}(the
-#'   default value), \code{ecount} is used for unweighted graphs (if
+#'   default value), \code{ecount()} is used for unweighted graphs (if
 #'   \code{weighted=FALSE}) and a function that computes the sum of edge
 #'   weights is used for weighted graphs (if \code{weighted=TRUE}). This
 #'   argument is ignored if \code{k} is zero.
@@ -72,7 +72,7 @@
 #'   multiple times.
 #' @param \dots Arguments passed to \code{FUN}, the function that computes
 #'   the local statistics.
-#' @return For \code{local_scan} typically a numeric vector containing the
+#' @return For \code{local_scan()} typically a numeric vector containing the
 #'   computed local statistics for each vertex. In general a list or vector
 #'   of objects, as returned by \code{FUN}.
 #'

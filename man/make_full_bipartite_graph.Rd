@@ -28,7 +28,7 @@ connected to the others; \sQuote{\code{in}} specifies the opposite
 direction; \sQuote{\code{all}} creates mutual edges. This argument is
 ignored for undirected graphs.x}
 
-\item{...}{Passed to \code{make_full_bipartite_graph}.}
+\item{...}{Passed to \code{make_full_bipartite_graph()}.}
 }
 \value{
 An igraph graph, with the \sQuote{\code{type}} vertex attribute set.

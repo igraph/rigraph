@@ -19,7 +19,7 @@ centr_degree_tmax(
 \item{nodes}{The number of vertices. This is ignored if the graph is given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{degree}.}
+\code{degree()}.}
 
 \item{loops}{Logical scalar, whether to consider loops edges when
 calculating the degree. Currently the default value is \code{FALSE},

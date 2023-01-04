@@ -39,7 +39,7 @@ is the number of vertices.}
 \item{temp.init}{Initial local temperature of all vertices. A reasonable
 default is the square root of the number of vertices.}
 
-\item{...}{Passed to \code{layout_with_gem}.}
+\item{...}{Passed to \code{layout_with_gem()}.}
 }
 \value{
 A numeric matrix with two columns, and as many rows as the number of

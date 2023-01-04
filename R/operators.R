@@ -77,7 +77,7 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' The union of two or more graphs are created. The graphs are assumed to have
 #' disjoint vertex sets.
 #'
-#' \code{disjoint_union} creates a union of two or more disjoint graphs.
+#' \code{disjoint_union()} creates a union of two or more disjoint graphs.
 #' Thus first the vertices in the second, third, etc. graphs are relabeled to
 #' have completely disjoint graphs. Then a simple union is created. This
 #' function can also be used via the `%du%` operator.
@@ -294,7 +294,7 @@ disjoint_union <- function(...) {
 #' \code{\link{union.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{union}.
+#'   the function that implements \code{union()}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -313,7 +313,7 @@ union.default <- function(...) {
 #' The union of two or more graphs are created. The graphs may have identical
 #' or overlapping vertex sets.
 #'
-#' \code{union} creates the union of two or more graphs.  Edges which are
+#' \code{union()} creates the union of two or more graphs.  Edges which are
 #' included in at least one graph will be part of the new graph. This function
 #' can be also used via the `%u%` operator.
 #'
@@ -321,7 +321,7 @@ union.default <- function(...) {
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
 #'
-#' \code{union} keeps the attributes of all graphs. All graph, vertex and
+#' \code{union()} keeps the attributes of all graphs. All graph, vertex and
 #' edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
@@ -376,7 +376,7 @@ union.igraph <- function(..., byname = "auto") {
 #' \code{\link{intersection.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{intersection}.
+#'   the function that implements \code{intersection()}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -389,7 +389,7 @@ intersection <- function(...) {
 #' The intersection of two or more graphs are created.  The graphs may have
 #' identical or overlapping vertex sets.
 #'
-#' \code{intersection} creates the intersection of two or more graphs:
+#' \code{intersection()} creates the intersection of two or more graphs:
 #' only edges present in all graphs will be included.  The corresponding
 #' operator is `%s%`.
 #'
@@ -397,7 +397,7 @@ intersection <- function(...) {
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
 #'
-#' \code{intersection} keeps the attributes of all graphs. All graph,
+#' \code{intersection()} keeps the attributes of all graphs. All graph,
 #' vertex and edge attributes are copied to the result. If an attribute is
 #' present in multiple graphs and would result a name clash, then this
 #' attribute is renamed by adding suffixes: _1, _2, etc.
@@ -455,7 +455,7 @@ intersection.igraph <- function(..., byname = "auto",
 #' \code{\link{difference.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{difference}.
+#'   the function that implements \code{difference()}.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -468,7 +468,7 @@ difference <- function(...) {
 #'
 #' The difference of two graphs are created.
 #'
-#' \code{difference} creates the difference of two graphs. Only edges
+#' \code{difference()} creates the difference of two graphs. Only edges
 #' present in the first graph but not in the second will be be included in the
 #' new graph. The corresponding operator is `%m%`.
 #'
@@ -476,7 +476,7 @@ difference <- function(...) {
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
 #'
-#' \code{difference} keeps all attributes (graph, vertex and edge) of the
+#' \code{difference()} keeps all attributes (graph, vertex and edge) of the
 #' first graph.
 #'
 #' Note that \code{big} and \code{small} must both be directed or both be
@@ -564,11 +564,11 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' A complementer graph contains all edges that were not present in the input
 #' graph.
 #'
-#' \code{complementer} creates the complementer of a graph. Only edges
+#' \code{complementer()} creates the complementer of a graph. Only edges
 #' which are \emph{not} present in the original graph will be included in the
 #' new graph.
 #'
-#' \code{complementer} keeps graph and vertex attriubutes, edge
+#' \code{complementer()} keeps graph and vertex attriubutes, edge
 #' attributes are lost.
 #'
 #' @aliases graph.complementer
@@ -605,7 +605,7 @@ complementer <- function(graph, loops = FALSE) {
 #'
 #' Relational composition of two graph.
 #'
-#' \code{compose} creates the relational composition of two graphs. The
+#' \code{compose()} creates the relational composition of two graphs. The
 #' new graph will contain an (a,b) edge only if there is a vertex c, such that
 #' edge (a,c) is included in the first graph and (c,b) is included in the
 #' second graph. The corresponding operator is `%c%`.
@@ -617,7 +617,7 @@ complementer <- function(graph, loops = FALSE) {
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
 #'
-#' \code{compose} keeps the attributes of both graphs. All graph, vertex
+#' \code{compose()} keeps the attributes of both graphs. All graph, vertex
 #' and edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
@@ -737,17 +737,17 @@ compose <- function(g1, g2, byname = "auto") {
 #' This is a helper function that simplifies adding and deleting
 #' edges to/from graphs.
 #'
-#' \code{edges} is an alias for \code{edge}.
+#' \code{edges()} is an alias for \code{edge()}.
 #'
 #' @details
 #' When adding edges via \code{+}, all unnamed arguments of
-#' \code{edge} (or \code{edges}) are concatenated, and then passed to
+#' \code{edge()} (or \code{edges()}) are concatenated, and then passed to
 #' \code{\link{add_edges}}. They are interpreted as pairs of vertex ids,
 #' and an edge will added between each pair. Named arguments will be
 #' used as edge attributes for the new edges.
 #'
-#' When deleting edges via \code{-}, all arguments of \code{edge} (or
-#' \code{edges}) are concatenated via \code{c()} and passed to
+#' When deleting edges via \code{-}, all arguments of \code{edge()} (or
+#' \code{edges()}) are concatenated via \code{c()} and passed to
 #' \code{\link{delete_edges}}.
 #'
 #' @param ... See details below.
@@ -786,15 +786,15 @@ edges <- edge
 #' This is a helper function that simplifies adding and deleting
 #' vertices to/from graphs.
 #'
-#' \code{vertices} is an alias for \code{vertex}.
+#' \code{vertices()} is an alias for \code{vertex()}.
 #'
 #' @details
 #' When adding vertices via \code{+}, all unnamed arguments are interpreted
 #' as vertex names of the new vertices. Named arguments are interpreted as
 #' vertex attributes for the new vertices.
 #'
-#' When deleting vertices via \code{-}, all arguments of \code{vertex} (or
-#' \code{vertices}) are concatenated via \code{c()} and passed to
+#' When deleting vertices via \code{-}, all arguments of \code{vertex()} (or
+#' \code{vertices()}) are concatenated via \code{c()} and passed to
 #' \code{\link{delete_vertices}}.
 #'
 #' @param ... See details below.
@@ -879,11 +879,11 @@ path <- function(...) {
 #'   - If it is an object created with the \code{\link{vertex}} or
 #'     \code{\link{vertices}} function, then new vertices are added to the
 #'     graph. This form is appropriate when one wants to add some vertex
-#'     attributes as well. The operands of the \code{vertices} function
+#'     attributes as well. The operands of the \code{vertices()} function
 #'     specifies the number of vertices to add and their attributes as
 #'     well.
 #'
-#'     The unnamed arguments of \code{vertices} are concatenated and
+#'     The unnamed arguments of \code{vertices()} are concatenated and
 #'     used as the \sQuote{\code{name}} vertex attribute (i.e. vertex
 #'     names), the named arguments will be added as additional vertex
 #'     attributes. Examples: \preformatted{  g <- g +
@@ -892,16 +892,16 @@ path <- function(...) {
 #'   g <- g + vertex("bar", "foobar")
 #'   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
 #'
-#'     \code{vertex} is just an alias to \code{vertices}, and it is
+#'     \code{vertex()} is just an alias to \code{vertices()}, and it is
 #'     provided for readability. The user should use it if a single vertex
 #'     is added to the graph.
 #'
 #'   - If it is an object created with the \code{\link{edge}} or
 #'     \code{\link{edges}} function, then new edges will be added to the
 #'     graph. The new edges and possibly their attributes can be specified as
-#'     the arguments of the \code{edges} function.
+#'     the arguments of the \code{edges()} function.
 #'
-#'     The unnamed arguments of \code{edges} are concatenated and used
+#'     The unnamed arguments of \code{edges()} are concatenated and used
 #'     as vertex ids of the end points of the new edges. The named
 #'     arguments will be added as edge attributes.
 #'
@@ -913,13 +913,13 @@ path <- function(...) {
 #'   g <- g + edges(c("bar", "foo", "foobar2", "bar2"), color="red", weight=1:2)}
 #'     See more examples below.
 #'
-#'     \code{edge} is just an alias to \code{edges} and it is provided
+#'     \code{edge()} is just an alias to \code{edges()} and it is provided
 #'     for readability. The user should use it if a single edge is added to
 #'     the graph.
 #'
 #'   - If it is an object created with the \code{\link{path}} function, then
 #'     new edges that form a path are added. The edges and possibly their
-#'     attributes are specified as the arguments to the \code{path}
+#'     attributes are specified as the arguments to the \code{path()}
 #'     function. The non-named arguments are concatenated and interpreted
 #'     as the vertex ids along the path. The remaining arguments are added
 #'     as edge attributes.

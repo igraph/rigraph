@@ -18,7 +18,7 @@ should be \code{NULL}. For directed graphs it specifies the in-degrees.}
 A logical scalar.
 }
 \description{
-\code{is_degseq} checks whether the given vertex degrees (in- and
+\code{is_degseq()} checks whether the given vertex degrees (in- and
 out-degrees for directed graphs) can be realized by a graph. Note that the
 graph does not have to be simple, it may contain loop and multiple edges.
 For undirected graphs, it also checks whether the sum of degrees is even.

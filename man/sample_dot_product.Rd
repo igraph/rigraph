@@ -16,7 +16,7 @@ column.}
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
 
-\item{...}{Passed to \code{sample_dot_product}.}
+\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product

@@ -58,7 +58,7 @@ edge-betweenness based edge removals.}
 vector corresponding to the highest possible modularity score.}
 }
 \value{
-\code{cluster_edge_betweenness} returns a
+\code{cluster_edge_betweenness()} returns a
 \code{\link{communities}} object, please see the \code{\link{communities}}
 manual page for details.
 }
@@ -77,7 +77,7 @@ get a hierarchical map, a rooted tree, called a dendrogram of the graph. The
 leafs of the tree are the individual vertices and the root of the tree
 represents the whole graph.
 
-\code{cluster_edge_betweenness} performs this algorithm by calculating the
+\code{cluster_edge_betweenness()} performs this algorithm by calculating the
 edge betweenness of the graph, removing the edge with the highest edge
 betweenness score, then recalculating edge betweenness of the edges and
 again removing the one with the highest score, etc.

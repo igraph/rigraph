@@ -21,13 +21,13 @@ are undirected.}
 
 \item{center}{ID of the center vertex.}
 
-\item{...}{Passed to \code{make_star}.}
+\item{...}{Passed to \code{make_star()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{star} creates a star graph, in this every single vertex is
+\code{star()} creates a star graph, in this every single vertex is
 connected to the center vertex and nobody else.
 }
 \examples{

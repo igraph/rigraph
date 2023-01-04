@@ -46,10 +46,10 @@ In this case, the first term of the formula has to start with
 a \sQuote{\code{~}} character, just like regular formulae in R.
 See examples below.}
 
-\item{...}{For \code{make_graph}: extra arguments for the case when the
+\item{...}{For \code{make_graph()}: extra arguments for the case when the
 graph is given via a literal, see \code{\link{graph_from_literal}}.
-For \code{directed_graph} and \code{undirected_graph}:
-Passed to \code{make_directed_graph} or \code{make_undirected_graph}.}
+For \code{directed_graph()} and \code{undirected_graph()}:
+Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 
 \item{n}{The number of vertices in the graph. This argument is
 ignored (with a warning) if \code{edges} are symbolic vertex names. It
@@ -76,12 +76,12 @@ Create an igraph graph from a list of edges, or a notable graph
 \section{Notable graphs}{
 
 
-\code{make_graph} can create some notable graphs. The name of the
+\code{make_graph()} can create some notable graphs. The name of the
 graph (case insensitive), a character scalar must be supplied as
 the \code{edges} argument, and other arguments are ignored. (A warning
 is given is they are specified.)
 
-\code{make_graph} knows the following graphs: \describe{
+\code{make_graph()} knows the following graphs: \describe{
 \item{Bull}{The bull graph, 5 vertices, 5 edges, resembles to the head
 of a bull if drawn properly.}
 \item{Chvatal}{This is the smallest triangle-free graph that is

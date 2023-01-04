@@ -18,13 +18,13 @@ details below.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
 
-\item{...}{Passed to \code{make_chordal_ring}.}
+\item{...}{Passed to \code{make_chordal_ring()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{make_chordal_ring} creates an extended chordal ring.
+\code{make_chordal_ring()} creates an extended chordal ring.
 An extended chordal ring is regular graph, each node has the same
 degree. It can be obtained from a simple ring by adding some extra
 edges specified by a matrix. Let p denote the number of columns in

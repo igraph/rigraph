@@ -1,6 +1,6 @@
 #' Greedy vertex coloring
 #'
-#' \code{greedy_vertex_coloring} finds a coloring for the vertices of a graph
+#' \code{greedy_vertex_coloring()} finds a coloring for the vertices of a graph
 #' based on a simple greedy algorithm.
 #'
 #' The goal of vertex coloring is to assign a "color" (i.e. a positive integer

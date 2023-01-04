@@ -26,7 +26,7 @@ group. The sum of the vector must match the number of vertices.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 
-\item{...}{Passed to \code{sample_sbm}.}
+\item{...}{Passed to \code{sample_sbm()}.}
 }
 \value{
 An igraph graph.

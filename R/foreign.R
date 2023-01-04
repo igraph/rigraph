@@ -68,11 +68,11 @@ write.graph.fromraw <- function(buffer, file) {
 
 #' Reading foreign file formats
 #'
-#' The \code{read_graph} function is able to read graphs in various
+#' The \code{read_graph()} function is able to read graphs in various
 #' representations from a file, or from a http connection. Various formats
 #' are supported.
 #'
-#' The \code{read_graph} function may have additional arguments depending on
+#' The \code{read_graph()} function may have additional arguments depending on
 #' the file format (the \code{format} argument). See the details separately for
 #' each file format, below.
 #'
@@ -132,7 +132,7 @@ read_graph <- function(file, format = c(
 
 #' Writing the graph to a file in some format
 #'
-#' \code{write_graph} is a general function for exporting graphs to foreign
+#' \code{write_graph()} is a general function for exporting graphs to foreign
 #' file formats, however not many formats are implemented right now.
 #'
 #' @aliases write.graph
@@ -459,7 +459,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' This function downloads a graph from a database created for the evaluation
 #' of graph isomorphism testing algothitms.
 #'
-#' \code{graph_from_graphdb} reads a graph from the graph database from an FTP or
+#' \code{graph_from_graphdb()} reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
 #'
 #' If the \code{url} argument is specified then it should the complete path to

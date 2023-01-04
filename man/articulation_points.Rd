@@ -15,12 +15,12 @@ bridges(graph)
 it is directed.}
 }
 \value{
-For \code{articulation_points}, a numeric vector giving the vertex
-IDs of the articulation points of the input graph. For \code{bridges}, a
+For \code{articulation_points()}, a numeric vector giving the vertex
+IDs of the articulation points of the input graph. For \code{bridges()}, a
 numeric vector giving the edge IDs of the bridges of the input graph.
 }
 \description{
-\code{articulation_points} finds the articulation points (or cut vertices)
+\code{articulation_points()} finds the articulation points (or cut vertices)
 }
 \details{
 Articulation points or cut vertices are vertices whose removal increases the

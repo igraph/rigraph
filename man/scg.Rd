@@ -95,7 +95,7 @@ retrieve a coarse-grained object of the same class as \code{X}.}
 the semi-projectors of the SCG.}
 
 \item{epairs}{Logical scalar. Set this to \code{TRUE} to collect the
-eigenpairs computed by \code{scg}.}
+eigenpairs computed by \code{scg()}.}
 
 \item{stat.prob}{Logical scalar. This is to collect the stationary
 probability \code{p} when dealing with stochastic matrices.}

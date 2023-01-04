@@ -122,8 +122,8 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 
 #' Articulation points and bridges of a graph
 #'
-#' \code{articulation_points} finds the articulation points (or cut vertices)
-# " of a graph, while \code{bridges} finds the bridges (or cut-edges) of a graph.
+#' \code{articulation_points()} finds the articulation points (or cut vertices)
+# " of a graph, while \code{bridges()} finds the bridges (or cut-edges) of a graph.
 #'
 #' Articulation points or cut vertices are vertices whose removal increases the
 #' number of connected components in a graph. Similarly, bridges or cut-edges
@@ -137,8 +137,8 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #' @aliases articulation.points articulation_points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
-#' @return For \code{articulation_points}, a numeric vector giving the vertex
-#'   IDs of the articulation points of the input graph. For \code{bridges}, a
+#' @return For \code{articulation_points()}, a numeric vector giving the vertex
+#'   IDs of the articulation points of the input graph. For \code{bridges()}, a
 #'   numeric vector giving the edge IDs of the bridges of the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{biconnected_components}}, \code{\link{components}},

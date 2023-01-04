@@ -45,11 +45,11 @@ Create adjacency lists from a graph, either for adjacent edges or for
 neighboring vertices
 }
 \details{
-\code{as_adj_list} returns a list of numeric vectors, which include the ids
+\code{as_adj_list()} returns a list of numeric vectors, which include the ids
 of neighbor vertices (according to the \code{mode} argument) of all
 vertices.
 
-\code{as_adj_edge_list} returns a list of numeric vectors, which include the
+\code{as_adj_edge_list()} returns a list of numeric vectors, which include the
 ids of adjacent edges (according to the \code{mode} argument) of all
 vertices.
 

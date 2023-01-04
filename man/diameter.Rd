@@ -27,8 +27,8 @@ distances. If the graph has a \code{weight} edge attribute, then this is
 used by default.}
 }
 \value{
-A numeric constant for \code{diameter}, a numeric vector for
-\code{get_diameter}. \code{farthest_vertices} returns a list with two
+A numeric constant for \code{diameter()}, a numeric vector for
+\code{get_diameter()}. \code{farthest_vertices()} returns a list with two
 entries: \itemize{
 \item \code{vertices} The two vertices that are the farthest.
 \item \code{distance} Their distance.
@@ -40,11 +40,11 @@ The diameter of a graph is the length of the longest geodesic.
 \details{
 The diameter is calculated by using a breadth-first search like method.
 
-\code{get_diameter} returns a path with the actual diameter. If there are
+\code{get_diameter()} returns a path with the actual diameter. If there are
 many shortest paths of the length of the diameter, then it returns the first
 one found.
 
-\code{farthest_vertices} returns two vertex ids, the vertices which are
+\code{farthest_vertices()} returns two vertex ids, the vertices which are
 connected by the diameter path.
 }
 \examples{

@@ -34,7 +34,7 @@ attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 }
 \value{
-\code{cluster_fast_greedy} returns a \code{\link{communities}}
+\code{cluster_fast_greedy()} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{

@@ -66,7 +66,7 @@ hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}
 }
 \description{
-\code{fit_power_law} fits a power-law distribution to a data set.
+\code{fit_power_law()} fits a power-law distribution to a data set.
 }
 \details{
 This function fits a power-law distribution to a vector containing samples
@@ -79,7 +79,7 @@ the power-law behaviour kicks in only above a threshold value
 \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 
-\code{fit_power_law} provides two maximum likelihood implementations.  If
+\code{fit_power_law()} provides two maximum likelihood implementations.  If
 the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
 optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the

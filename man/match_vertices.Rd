@@ -44,7 +44,7 @@ columns) of \code{A} and \code{B} correspond to the same vertices in both
 graphs. That is, the \eqn{n \times n}{n*n} permutation matrix that defines
 the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
-identity matrix \eqn{I_{m}}. The function \code{match_vertices} estimates
+identity matrix \eqn{I_{m}}. The function \code{match_vertices()} estimates
 the permutation matrix \eqn{P} via an optimization algorithm based on the
 Frank-Wolfe algorithm.
 

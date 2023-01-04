@@ -20,8 +20,8 @@ erdos.renyi.game(
 arbitrary vertices (G(n,p) graph), or the number of edges in the graph (for
 G(n,m) graphs).}
 
-\item{type}{The type of the random graph to create, either \code{gnp}
-(G(n,p) graph) or \code{gnm} (G(n,m) graph).}
+\item{type}{The type of the random graph to create, either \code{gnp()}
+(G(n,p) graph) or \code{gnm()} (G(n,m) graph).}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
 FALSE.}
@@ -44,13 +44,13 @@ and the \sQuote{m} edges are chosen uniformly randomly from the set of all
 possible edges. This set includes loop edges as well if the \code{loops}
 parameter is TRUE.
 
-\code{random.graph.game} is an alias to this function.
+\code{random.graph.game()} is an alias to this function.
 }
 \section{Deprecated}{
 
 
-Since igraph version 0.8.0, both \code{erdos.renyi.game} and
-\code{random.graph.game} are deprecated, and \code{\link{sample_gnp}} and
+Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
+\code{random.graph.game()} are deprecated, and \code{\link{sample_gnp}} and
 \code{\link{sample_gnm}} should be used instead.
 }
 

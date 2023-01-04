@@ -17,8 +17,8 @@ as.undirected(
 \item{graph}{The graph to convert.}
 
 \item{mode}{Character constant, defines the conversion algorithm. For
-\code{as.directed} it can be \code{mutual} or \code{arbitrary}. For
-\code{as.undirected} it can be \code{each}, \code{collapse} or
+\code{as.directed()} it can be \code{mutual} or \code{arbitrary}. For
+\code{as.undirected()} it can be \code{each}, \code{collapse} or
 \code{mutual}. See details below.}
 
 \item{edge.attr.comb}{Specifies what to do with edge attributes, if
@@ -31,12 +31,12 @@ this.}
 A new graph object.
 }
 \description{
-\code{as.directed} converts an undirected graph to directed,
-\code{as.undirected} does the opposite, it converts a directed graph to
+\code{as.directed()} converts an undirected graph to directed,
+\code{as.undirected()} does the opposite, it converts a directed graph to
 undirected.
 }
 \details{
-Conversion algorithms for \code{as.directed}: \describe{
+Conversion algorithms for \code{as.directed()}: \describe{
 \item{"arbitrary"}{The number of edges in the graph stays the same, an
 arbitrarily directed edge is created for each undirected edge, but the
 direction of the edge is deterministic (i.e. it always points the same
@@ -55,7 +55,7 @@ Note that the graph may include cycles of length 1 if the original
 graph contained loop edges.}
 }
 
-Conversion algorithms for \code{as.undirected}: \describe{
+Conversion algorithms for \code{as.undirected()}: \describe{
 \item{"each"}{The number of edges remains constant, an undirected edge
 is created for each directed one, this version might create graphs with
 multiple edges.} \item{"collapse"}{One undirected edge will be created

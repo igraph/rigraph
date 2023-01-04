@@ -50,7 +50,7 @@ of the \code{objective_function}. Please see the details of this function
 how to interpret the vertex weights.}
 }
 \value{
-\code{cluster_leiden} returns a \code{\link{communities}}
+\code{cluster_leiden()} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{

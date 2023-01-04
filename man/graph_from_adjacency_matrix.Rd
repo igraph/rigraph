@@ -52,20 +52,20 @@ row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
 
-\item{...}{Passed to \code{graph_from_adjacency_matrix}.}
+\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.
 }
 \description{
-\code{graph_from_adjacency_matrix} is a flexible function for creating \code{igraph}
+\code{graph_from_adjacency_matrix()} is a flexible function for creating \code{igraph}
 graphs from adjacency matrices.
 }
 \details{
 The order of the vertices are preserved, i.e. the vertex corresponding to
 the first row will be vertex 0 in the graph, etc.
 
-\code{graph_from_adjacency_matrix} operates in two main modes, depending on the
+\code{graph_from_adjacency_matrix()} operates in two main modes, depending on the
 \code{weighted} argument.
 
 If this argument is \code{NULL} then an unweighted graph is created and an

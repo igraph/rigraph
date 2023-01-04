@@ -15,7 +15,7 @@ centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{closeness}.}
+\code{closeness()}.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph

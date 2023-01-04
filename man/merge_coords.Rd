@@ -34,7 +34,7 @@ vertices in the graphs.
 Place several graphs on the same layout
 }
 \details{
-\code{merge_coords} takes a list of graphs and a list of coordinates and
+\code{merge_coords()} takes a list of graphs and a list of coordinates and
 places the graphs in a common layout. The method to use is chosen via the
 \code{method} parameter, although right now only the \code{dla} method is
 implemented.
@@ -47,10 +47,10 @@ placed randomly on a circle far away from the center and a random walk is
 conducted until the graph walks into the larger graphs already placed or
 walks too far from the center of the layout.
 
-The \code{layout_components} function disassembles the graph first into
+The \code{layout_components()} function disassembles the graph first into
 maximal connected components and calls the supplied \code{layout} function
 for each component separately. Finally it merges the layouts via calling
-\code{merge_coords}.
+\code{merge_coords()}.
 }
 \examples{
 

@@ -66,7 +66,7 @@ Sometimes it is useful to work with a standard representation of a
 graph, like an adjacency matrix.
 }
 \details{
-\code{as_adjacency_matrix} returns the adjacency matrix of a graph, a
+\code{as_adjacency_matrix()} returns the adjacency matrix of a graph, a
 regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
 defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 \code{TRUE}.

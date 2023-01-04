@@ -43,7 +43,7 @@ weighted graph is created and the name of the edge attribute will be
 \sQuote{\code{weight}}.}
 
 \item{add.names}{A character constant, \code{NA} or \code{NULL}.
-\code{graph_from_incidence_matrix} can add the row and column names of the incidence
+\code{graph_from_incidence_matrix()} can add the row and column names of the incidence
 matrix as vertex attributes. If this argument is \code{NULL} (the default)
 and the incidence matrix has both row and column names, then these are added
 as the \sQuote{\code{name}} vertex attribute. If you want a different vertex
@@ -51,14 +51,14 @@ attribute for this, then give the name of the attributes as a character
 string. If this argument is \code{NA}, then no vertex attributes (other than
 type) will be added.}
 
-\item{...}{Passed to \code{graph_from_incidence_matrix}.}
+\item{...}{Passed to \code{graph_from_incidence_matrix()}.}
 }
 \value{
 A bipartite igraph graph. In other words, an igraph graph that has a
 vertex attribute \code{type}.
 }
 \description{
-\code{graph_from_incidence_matrix} creates a bipartite igraph graph from an incidence
+\code{graph_from_incidence_matrix()} creates a bipartite igraph graph from an incidence
 matrix.
 }
 \details{
@@ -66,7 +66,7 @@ Bipartite graphs have a \sQuote{\code{type}} vertex attribute in igraph,
 this is boolean and \code{FALSE} for the vertices of the first kind and
 \code{TRUE} for vertices of the second kind.
 
-\code{graph_from_incidence_matrix} can operate in two modes, depending on the
+\code{graph_from_incidence_matrix()} can operate in two modes, depending on the
 \code{multiple} argument. If it is \code{FALSE} then a single edge is
 created for every non-zero element in the incidence matrix. If
 \code{multiple} is \code{TRUE}, then the matrix elements are rounded up to

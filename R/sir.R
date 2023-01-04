@@ -33,14 +33,14 @@
 #' become infected with a rate that depends on their number of infected
 #' neighbors. Infected people become recovered with a constant rate.
 #'
-#' The function \code{sir} simulates the model.
+#' The function \code{sir()} simulates the model.
 #'
-#' Function \code{time_bins} bins the simulation steps, using the
+#' Function \code{time_bins()} bins the simulation steps, using the
 #' Freedman-Diaconis heuristics to determine the bin width.
 #'
 #' Function \code{median} and \code{quantile} calculate the median and
 #' quantiles of the results, respectively, in bins calculated with
-#' \code{time_bins}.
+#' \code{time_bins()}.
 #'
 #' @aliases median.sir quantile.sir time_bins time_bins.sir sir
 #' @param graph The graph to run the model on. If directed, then edge
@@ -53,7 +53,7 @@
 #'   individual. Formally, this is the rate parameter of an exponential
 #'   distribution.
 #' @param no.sim Integer scalar, the number simulation runs to perform.
-#' @param x A \code{sir} object, returned by the \code{sir} function.
+#' @param x A \code{sir} object, returned by the \code{sir()} function.
 #' @param middle Logical scalar, whether to return the middle of the time bins,
 #'   or the boundaries.
 #' @param na.rm Logical scalar, whether to ignore \code{NA} values.  \code{sir}
@@ -65,7 +65,7 @@
 #' @param prob Numeric vector of probabilities, in \[0,1\], they specify the
 #'   quantiles to calculate.
 #' @param \dots Additional arguments, ignored currently.
-#' @return For \code{sir} the results are returned in an object of class
+#' @return For \code{sir()} the results are returned in an object of class
 #'   \sQuote{\code{sir}}, which is a list, with one element for each simulation.
 #'   Each simulation is itself a list with the following elements. They are all
 #'   numeric vectors, with equal length: \describe{
@@ -77,7 +77,7 @@
 #'     time.}
 #'   }
 #'
-#'   Function \code{time_bins} returns a numeric vector, the middle or the
+#'   Function \code{time_bins()} returns a numeric vector, the middle or the
 #'   boundaries of the time bins, depending on the \code{middle} argument.
 #'
 #'   \code{median} returns a list of three named numeric vectors, \code{NS},

@@ -11,7 +11,7 @@ as_graphnel(graph)
 \item{graph}{An igraph graph object.}
 }
 \value{
-\code{as_graphnel} returns a graphNEL graph object.
+\code{as_graphnel()} returns a graphNEL graph object.
 }
 \description{
 The graphNEL class is defined in the \code{graph} package, it is another
@@ -19,7 +19,7 @@ way to represent graphs. These functions are provided to convert between
 the igraph and the graphNEL objects.
 }
 \details{
-\code{as_graphnel} converts an igraph graph to a graphNEL graph. It
+\code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
 converts all graph/vertex/edge attributes. If the igraph graph has a
 vertex attribute \sQuote{\code{name}}, then it will be used to assign
 vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids

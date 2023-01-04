@@ -15,7 +15,7 @@ Edge directions are ignored. Weights are not considered.}
 greater than 0 and fewer than number of vertices in the graph.}
 }
 \value{
-\code{cluster_fluid_communities} returns a \code{\link{communities}}
+\code{cluster_fluid_communities()} returns a \code{\link{communities}}
 object, please see the \code{\link{communities}} manual page for details.
 }
 \description{

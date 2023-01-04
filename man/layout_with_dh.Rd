@@ -50,7 +50,7 @@ energy function.}
 \item{weight.node.edge.dist}{Weight for the node-edge distance component of
 the energy function.}
 
-\item{...}{Passed to \code{layout_with_dh}.}
+\item{...}{Passed to \code{layout_with_dh()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a

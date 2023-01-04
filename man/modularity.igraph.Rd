@@ -34,10 +34,10 @@ modularity. Ignored for undirected graphs.}
 \item{\dots}{Additional arguments, none currently.}
 }
 \value{
-For \code{modularity} a numeric scalar, the modularity score of the
+For \code{modularity()} a numeric scalar, the modularity score of the
 given configuration.
 
-For \code{modularity_matrix} a numeric square matrix, its order is the number of
+For \code{modularity_matrix()} a numeric square matrix, its order is the number of
 vertices in the graph.
 }
 \description{
@@ -45,7 +45,7 @@ This function calculates how modular is a given division of a graph into
 subgraphs.
 }
 \details{
-\code{modularity} calculates the modularity of a graph with respect to the
+\code{modularity()} calculates the modularity of a graph with respect to the
 given \code{membership} vector.
 
 The modularity of a graph with respect to some division (or vertex types)
@@ -75,7 +75,7 @@ If edge weights are given, then these are considered as the element of the
 \eqn{A} adjacency matrix, and \eqn{k_i}{ki} is the sum of weights of
 adjacent edges for vertex \eqn{i}.
 
-\code{modularity_matrix} calculates the modularity matrix. This is a dense matrix,
+\code{modularity_matrix()} calculates the modularity matrix. This is a dense matrix,
 and it is defined as the difference of the adjacency matrix and the
 configuration model null model matrix. In other words element
 \eqn{M_{ij}}{M[i,j]} is given as \eqn{A_{ij}-d_i

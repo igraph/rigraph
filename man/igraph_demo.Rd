@@ -21,10 +21,10 @@ window.
 \details{
 This function provides a somewhat nicer interface to igraph demos that come
 with the package, than the standard \code{\link{demo}} function. igraph
-demos are divided into chunks and \code{igraph_demo} runs them chunk by
+demos are divided into chunks and \code{igraph_demo()} runs them chunk by
 chunk, with the possibility of inspecting the workspace between two chunks.
 
-The \code{tcltk} package is needed for \code{igraph_demo}.
+The \code{tcltk} package is needed for \code{igraph_demo()}.
 }
 \examples{
 

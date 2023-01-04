@@ -115,7 +115,7 @@ character scalar, the name of the algorithm that produced the community
 structure.}
 
 \item{merges}{If not \code{NULL}, then the merge matrix of the hierarchical
-community structure. See \code{merges} below for more information on its
+community structure. See \code{merges()} below for more information on its
 format.}
 
 \item{modularity}{Numeric scalar or vector, the modularity value of the
@@ -128,29 +128,29 @@ invisibly.
 
 \code{length} returns an integer scalar.
 
-\code{sizes} returns a numeric vector.
+\code{sizes()} returns a numeric vector.
 
-\code{membership} returns a numeric vector, one number for each vertex in
+\code{membership()} returns a numeric vector, one number for each vertex in
 the graph that was the input of the community detection.
 
-\code{modularity} returns a numeric scalar.
+\code{modularity()} returns a numeric scalar.
 
-\code{algorithm} returns a character scalar.
+\code{algorithm()} returns a character scalar.
 
-\code{crossing} returns a logical vector.
+\code{crossing()} returns a logical vector.
 
-\code{is_hierarchical} returns a logical scalar.
+\code{is_hierarchical()} returns a logical scalar.
 
-\code{merges} returns a two-column numeric matrix.
+\code{merges()} returns a two-column numeric matrix.
 
-\code{cut_at} returns a numeric vector, the membership vector of the
+\code{cut_at()} returns a numeric vector, the membership vector of the
 vertices.
 
 \code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
 
-\code{show_trace} returns a character vector.
+\code{show_trace()} returns a character vector.
 
-\code{code_len} returns a numeric scalar for communities found with the
+\code{code_len()} returns a numeric scalar for communities found with the
 InfoMAP method and \code{NULL} for other methods.
 
 \code{plot} for \code{communities} objects returns \code{NULL}, invisibly.
@@ -179,10 +179,10 @@ prints a short summary.
 The \code{length} generic function call be called on \code{communities} and
 returns the number of communities.
 
-The \code{sizes} function returns the community sizes, in the order of their
+The \code{sizes()} function returns the community sizes, in the order of their
 ids.
 
-\code{membership} gives the division of the vertices, into communities. It
+\code{membership()} gives the division of the vertices, into communities. It
 returns a numeric vector, one value for each vertex, the id of its
 community. Community ids start from one. Note that some algorithms calculate
 the complete (or incomplete) hierarchical structure of the communities, and
@@ -190,34 +190,34 @@ not just a single partitioning. For these algorithms typically the
 membership for the highest modularity value is returned, but see also the
 manual pages of the individual algorithms.
 
-\code{communities} is also the name of a function, that returns a list of
+\code{communities()} is also the name of a function, that returns a list of
 communities, each identified by their vertices. The vertices will have
 symbolic names if the \code{add.vertex.names} igraph option is set, and the
 graph itself was named. Otherwise numeric vertex ids are used.
 
-\code{modularity} gives the modularity score of the partitioning. (See
+\code{modularity()} gives the modularity score of the partitioning. (See
 \code{\link{modularity.igraph}} for details. For algorithms that do not
 result a single partitioning, the highest modularity value is returned.
 
-\code{algorithm} gives the name of the algorithm that was used to calculate
+\code{algorithm()} gives the name of the algorithm that was used to calculate
 the community structure.
 
-\code{crossing} returns a logical vector, with one value for each edge,
+\code{crossing()} returns a logical vector, with one value for each edge,
 ordered according to the edge ids. The value is \code{TRUE} iff the edge
 connects two different communities, according to the (best) membership
 vector, as returned by \code{membership()}.
 
-\code{is_hierarchical} checks whether a hierarchical algorithm was used to
+\code{is_hierarchical()} checks whether a hierarchical algorithm was used to
 find the community structure. Some functions only make sense for
-hierarchical methods (e.g. \code{merges}, \code{cut_at} and
+hierarchical methods (e.g. \code{merges()}, \code{cut_at()} and
 \code{as.dendrogram}).
 
-\code{merges} returns the merge matrix for hierarchical methods. An error
+\code{merges()} returns the merge matrix for hierarchical methods. An error
 message is given, if a non-hierarchical method was used to find the
-community structure. You can check this by calling \code{is_hierarchical} on
+community structure. You can check this by calling \code{is_hierarchical()} on
 the \code{communities} object.
 
-\code{cut_at} cuts the merge tree of a hierarchical community finding method,
+\code{cut_at()} cuts the merge tree of a hierarchical community finding method,
 at the desired place and returns a membership vector. The desired place can
 be expressed as the desired number of communities or as the number of merge
 steps to make. The function gives an error message, if called with a
@@ -230,15 +230,15 @@ an error message to others. See \code{\link[stats]{dendrogram}} for details.
 \code{as.hclust} is similar to \code{as.dendrogram}, but converts a
 hierarchical community structure to a \code{hclust} object.
 
-\code{as_phylo} converts a hierarchical community structure to a \code{phylo}
+\code{as_phylo()} converts a hierarchical community structure to a \code{phylo}
 object, you will need the \code{ape} package for this.
 
-\code{show_trace} works (currently) only for communities found by the leading
+\code{show_trace()} works (currently) only for communities found by the leading
 eigenvector method (\code{\link{cluster_leading_eigen}}), and
 returns a character vector that gives the steps performed by the algorithm
 while finding the communities.
 
-\code{code_len} is defined for the InfoMAP method
+\code{code_len()} is defined for the InfoMAP method
 (\code{\link{cluster_infomap}} and returns the code length of the
 partition.
 

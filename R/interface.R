@@ -223,7 +223,7 @@ delete_vertices <- function(graph, v) {
 
 #' The size of the graph (number of edges)
 #'
-#' \code{ecount} is an alias of this function.
+#' \code{ecount()} is an alias of this function.
 #'
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
@@ -476,7 +476,7 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 
 #' Order (number of vertices) of a graph
 #'
-#' \code{vcount} is an alias of this function.
+#' \code{vcount()} is an alias of this function.
 #'
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.

@@ -493,7 +493,7 @@ scg_semi_proj <- function(groups,
 #' @param semproj Logical scalar. Set this parameter to \code{TRUE} to retrieve
 #'   the semi-projectors of the SCG.
 #' @param epairs Logical scalar. Set this to \code{TRUE} to collect the
-#'   eigenpairs computed by \code{scg}.
+#'   eigenpairs computed by \code{scg()}.
 #' @param stat.prob Logical scalar. This is to collect the stationary
 #'   probability \code{p} when dealing with stochastic matrices.
 #' @return \item{Xt}{The coarse-grained graph, or matrix, possibly a sparse
@@ -800,7 +800,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 
 #' Error of the spectral coarse graining (SCG) approximation
 #'
-#' \code{scg_eps} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
+#' \code{scg_eps()} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
 #' \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in \code{V} and \eqn{P} is the
 #' projector corresponding to the \code{mtype} argument.
 #'
@@ -818,7 +818,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
 #'   rows of the Laplacian matrix sum to zero and the rows of the stochastic
 #'   matrix sum to one; otherwise it is the columns.
-#' @return \code{scg_eps} returns with a numeric vector whose \eqn{i}th
+#' @return \code{scg_eps()} returns with a numeric vector whose \eqn{i}th
 #'   component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
 #' @author David Morton de Lachapelle,
 #' \url{http://people.epfl.ch/david.morton}.

@@ -33,11 +33,11 @@ rows of the Laplacian matrix sum to zero and the rows of the stochastic
 matrix sum to one; otherwise it is the columns.}
 }
 \value{
-\code{scg_eps} returns with a numeric vector whose \eqn{i}th
+\code{scg_eps()} returns with a numeric vector whose \eqn{i}th
 component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
 }
 \description{
-\code{scg_eps} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
+\code{scg_eps()} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
 \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in \code{V} and \eqn{P} is the
 projector corresponding to the \code{mtype} argument.
 }

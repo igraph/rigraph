@@ -46,7 +46,7 @@ NULL
 #' For eigenvector centrality the most centralized structure is the graph
 #' with a single edge (and potentially many isolates).
 #'
-#' \code{centralize} implements general centralization formula to calculate
+#' \code{centralize()} implements general centralization formula to calculate
 #' a graph-level score from vertex-level scores.
 #'
 #' @param scores The vertex level centrality scores.
@@ -94,7 +94,7 @@ centralize <- centralize
 #'
 #' @param graph The input graph.
 #' @param mode This is the same as the \code{mode} argument of
-#'   \code{degree}.
+#'   \code{degree()}.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree.
 #' @param normalized Logical scalar. Whether to normalize the graph level
@@ -129,7 +129,7 @@ centr_degree <- centr_degree
 #'   \code{nodes}, \code{mode} and \code{loops} are all given.
 #' @param nodes The number of vertices. This is ignored if the graph is given.
 #' @param mode This is the same as the \code{mode} argument of
-#'   \code{degree}.
+#'   \code{degree()}.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree. Currently the default value is \code{FALSE},
 #'   but this argument will be required from igraph 1.4.0.
@@ -257,7 +257,7 @@ centr_betw_tmax <- centr_betw_tmax
 #'
 #' @param graph The input graph.
 #' @param mode This is the same as the \code{mode} argument of
-#'   \code{closeness}.
+#'   \code{closeness()}.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -291,7 +291,7 @@ centr_clo <- centr_clo
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
 #' @param mode This is the same as the \code{mode} argument of
-#'   \code{closeness}.
+#'   \code{closeness()}.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.

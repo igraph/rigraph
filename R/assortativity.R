@@ -34,7 +34,7 @@
 #' same labels or similar assigned values.
 #'
 #' M.E.J. Newman defined two kinds of assortativity coefficients, the first one
-#' is for categorical labels of vertices. \code{assortativity_nominal}
+#' is for categorical labels of vertices. \code{assortativity_nominal()}
 #' calculates this measure. It is defines as
 #'
 #' \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
@@ -45,7 +45,7 @@
 #' \eqn{b_j=\sum_i e_{ij}}{b(j)=sum(e(i,j), i)}.
 #'
 #' The second assortativity variant is based on values assigned to the
-#' vertices. \code{assortativity} calculates this measure. It is defined as
+#' vertices. \code{assortativity()} calculates this measure. It is defined as
 #'
 #' \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
 #' sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
@@ -65,8 +65,8 @@
 #' is not symmetric, so it is possible to assign different values to the
 #' outgoing and the incoming end of the edges.
 #'
-#' \code{assortativity_degree} uses vertex degree (minus one) as vertex values
-#' and calls \code{assortativity}.
+#' \code{assortativity_degree()} uses vertex degree (minus one) as vertex values
+#' and calls \code{assortativity()}.
 #'
 #' @aliases assortativity assortativity.degree assortativity_degree
 #' assortativity.nominal assortativity_nominal

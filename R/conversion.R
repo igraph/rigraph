@@ -163,7 +163,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an adjacency matrix.
 #'
-#' \code{as_adjacency_matrix} returns the adjacency matrix of a graph, a
+#' \code{as_adjacency_matrix()} returns the adjacency matrix of a graph, a
 #' regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
 #' defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
 #' \code{TRUE}.
@@ -235,7 +235,7 @@ as_adj <- as_adjacency_matrix
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an edge list.
 #'
-#' \code{as_edgelist} returns the list of edges in a graph.
+#' \code{as_edgelist()} returns the list of edges in a graph.
 #'
 #' @aliases get.edgelist
 #' @param graph The graph to convert.
@@ -274,11 +274,11 @@ as_edgelist <- function(graph, names = TRUE) {
 
 #' Convert between directed and undirected graphs
 #'
-#' \code{as.directed} converts an undirected graph to directed,
-#' \code{as.undirected} does the opposite, it converts a directed graph to
+#' \code{as.directed()} converts an undirected graph to directed,
+#' \code{as.undirected()} does the opposite, it converts a directed graph to
 #' undirected.
 #'
-#' Conversion algorithms for \code{as.directed}: \describe{
+#' Conversion algorithms for \code{as.directed()}: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
 #' arbitrarily directed edge is created for each undirected edge, but the
 #' direction of the edge is deterministic (i.e. it always points the same
@@ -297,7 +297,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' graph contained loop edges.}
 #' }
 #'
-#' Conversion algorithms for \code{as.undirected}: \describe{
+#' Conversion algorithms for \code{as.undirected()}: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
 #' is created for each directed one, this version might create graphs with
 #' multiple edges.} \item{"collapse"}{One undirected edge will be created
@@ -310,8 +310,8 @@ as_edgelist <- function(graph, names = TRUE) {
 #' @aliases as.directed as.undirected
 #' @param graph The graph to convert.
 #' @param mode Character constant, defines the conversion algorithm. For
-#'   \code{as.directed} it can be \code{mutual} or \code{arbitrary}. For
-#'   \code{as.undirected} it can be \code{each}, \code{collapse} or
+#'   \code{as.directed()} it can be \code{mutual} or \code{arbitrary}. For
+#'   \code{as.undirected()} it can be \code{each}, \code{collapse} or
 #'   \code{mutual}. See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -384,11 +384,11 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' Create adjacency lists from a graph, either for adjacent edges or for
 #' neighboring vertices
 #'
-#' \code{as_adj_list} returns a list of numeric vectors, which include the ids
+#' \code{as_adj_list()} returns a list of numeric vectors, which include the ids
 #' of neighbor vertices (according to the \code{mode} argument) of all
 #' vertices.
 #'
-#' \code{as_adj_edge_list} returns a list of numeric vectors, which include the
+#' \code{as_adj_edge_list()} returns a list of numeric vectors, which include the
 #' ids of adjacent edges (according to the \code{mode} argument) of all
 #' vertices.
 #'
@@ -494,7 +494,7 @@ as_adj_edge_list <- function(graph,
 #' Convert graphNEL objects from the graph package to igraph
 #'
 #' The graphNEL class is defined in the \code{graph} package, it is another
-#' way to represent graphs. \code{graph_from_graphnel} takes a graphNEL
+#' way to represent graphs. \code{graph_from_graphnel()} takes a graphNEL
 #' graph and converts it to an igraph graph. It handles all
 #' graph/vertex/edge attributes. If the graphNEL graph has a vertex
 #' attribute called \sQuote{\code{name}} it will be used as igraph vertex
@@ -516,7 +516,7 @@ as_adj_edge_list <- function(graph,
 #'   return the values of the attributes in R lists, if this argument is
 #'   \code{TRUE} (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
-#' @return \code{graph_from_graphnel} returns an igraph graph object.
+#' @return \code{graph_from_graphnel()} returns an igraph graph object.
 #' @seealso \code{\link{as_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
 #' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
@@ -599,7 +599,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' way to represent graphs. These functions are provided to convert between
 #' the igraph and the graphNEL objects.
 #'
-#' \code{as_graphnel} converts an igraph graph to a graphNEL graph. It
+#' \code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
 #' vertex attribute \sQuote{\code{name}}, then it will be used to assign
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
@@ -607,7 +607,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #'
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
-#' @return \code{as_graphnel} returns a graphNEL graph object.
+#' @return \code{as_graphnel()} returns a graphNEL graph object.
 #' @seealso \code{\link{graph_from_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
 #' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for
@@ -920,7 +920,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'
 #' The idea is that you convert your graph to an adjacency list by
 #' \code{\link{as_adj_list}}, do your modifications to the graphs and finally
-#' create again an igraph graph by calling \code{graph_from_adj_list}.
+#' create again an igraph graph by calling \code{graph_from_adj_list()}.
 #'
 #' @aliases graph.adjlist graph_from_adj_list
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
@@ -932,7 +932,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'   (\sQuote{in}) neighbors of the vertices.
 #' @param duplicate Logical scalar. For undirected graphs it gives whether
 #'   edges are included in the list twice. E.g. if it is \code{TRUE} then for an
-#'   undirected \code{{A,B}} edge \code{graph_from_adj_list} expects \code{A}
+#'   undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
 #'   included in the neighbors of \code{B} and \code{B} to be included in the
 #'   neighbors of \code{A}.
 #'

@@ -38,7 +38,7 @@ Returns whatever the return value was from the plotting function,
 Plot a hierarchical community structure as a dendrogram.
 }
 \details{
-\code{plot_dendrogram} supports three different plotting functions, selected via
+\code{plot_dendrogram()} supports three different plotting functions, selected via
 the \code{mode} argument. By default the plotting function is taken from the
 \code{dend.plot.type} igraph option, and it has for possible values:
 \itemize{ \item \code{auto} Choose automatically between the plotting

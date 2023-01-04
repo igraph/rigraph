@@ -69,8 +69,8 @@ the complete list.}
 Returns \code{NULL}, invisibly.
 }
 \description{
-\code{plot.igraph} is able to plot graphs to any R device. It is the
-non-interactive companion of the \code{tkplot} function.
+\code{plot.igraph()} is able to plot graphs to any R device. It is the
+non-interactive companion of the \code{tkplot()} function.
 }
 \details{
 One convenient way to plot graphs is to plot with \code{\link{tkplot}}

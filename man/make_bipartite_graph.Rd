@@ -31,13 +31,13 @@ vector. The vector may be a string vector if \code{types} is a named vector.}
 that by default undirected graphs are created, as this is more common for
 bipartite graphs.}
 
-\item{...}{Passed to \code{make_bipartite_graph}.}
+\item{...}{Passed to \code{make_bipartite_graph()}.}
 }
 \value{
-\code{make_bipartite_graph} returns a bipartite igraph graph. In other
+\code{make_bipartite_graph()} returns a bipartite igraph graph. In other
 words, an igraph graph that has a vertex attribute named \code{type}.
 
-\code{is_bipartite} returns a logical scalar.
+\code{is_bipartite()} returns a logical scalar.
 }
 \description{
 A bipartite graph has two kinds of vertices and connections are only allowed
@@ -48,14 +48,14 @@ Bipartite graphs have a \code{type} vertex attribute in igraph, this is
 boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 for vertices of the second kind.
 
-\code{make_bipartite_graph} basically does three things. First it checks the
+\code{make_bipartite_graph()} basically does three things. First it checks the
 \code{edges} vector against the vertex \code{types}. Then it creates a graph
 using the \code{edges} vector and finally it adds the \code{types} vector as
 a vertex attribute called \code{type}. \code{edges} may contain strings as
 vertex names; in this case, \code{types} must be a named vector that specifies
 the type for each vertex name that occurs in \code{edges}.
 
-\code{is_bipartite} checks whether the graph is bipartite or not. It just
+\code{is_bipartite()} checks whether the graph is bipartite or not. It just
 checks whether the graph has a vertex attribute called \code{type}.
 }
 \examples{

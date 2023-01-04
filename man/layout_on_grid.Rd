@@ -27,7 +27,7 @@ determinted automatically.}
 
 \item{dim}{Two or three. Whether to make 2d or a 3d layout.}
 
-\item{...}{Passed to \code{layout_on_grid}.}
+\item{...}{Passed to \code{layout_on_grid()}.}
 }
 \value{
 A two-column or three-column matrix.

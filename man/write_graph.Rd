@@ -30,7 +30,7 @@ this argument is case insensitive.}
 A NULL, invisibly.
 }
 \description{
-\code{write_graph} is a general function for exporting graphs to foreign
+\code{write_graph()} is a general function for exporting graphs to foreign
 file formats, however not many formats are implemented right now.
 }
 \section{Edge list format}{

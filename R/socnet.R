@@ -36,7 +36,7 @@
 #' This functions starts an experimental GUI to some igraph functions. The GUI
 #' was written in Tcl/Tk, so it is cross platform.
 #'
-#' \code{tkigraph} has its own online help system, please see that for the
+#' \code{tkigraph()} has its own online help system, please see that for the
 #' details about how to use it.
 #'
 #' @return Returns \code{NULL}, invisibly.

@@ -75,7 +75,7 @@ The eigenvalue calculation in ARPACK (in the simplest case) involves the
 calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
 and \eqn{v} is an arbitrary vector. The function supplied in the \code{fun}
 argument is expected to perform this product. If the product can be done
-efficiently, e.g. if the matrix is sparse, then \code{arpack} is usually
+efficiently, e.g. if the matrix is sparse, then \code{arpack()} is usually
 able to calculate the eigenvalues very quickly.
 
 The \code{options} argument specifies what kind of calculation to perform.

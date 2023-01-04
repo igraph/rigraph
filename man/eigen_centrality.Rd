@@ -46,7 +46,7 @@ list, information about the underlying ARPACK computation. See
 \code{\link{arpack}} for the details.}
 }
 \description{
-\code{eigen_centrality} takes a graph (\code{graph}) and returns the
+\code{eigen_centrality()} takes a graph (\code{graph}) and returns the
 eigenvector centralities of positions \code{v} within it
 }
 \details{

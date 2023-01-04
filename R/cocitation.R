@@ -24,14 +24,14 @@
 #' Cocitation coupling
 #'
 #' Two vertices are cocited if there is another vertex citing both of them.
-#' \code{cocitation} simply counts how many types two vertices are cocited. The
+#' \code{cocitation()} simply counts how many types two vertices are cocited. The
 #' bibliographic coupling of two vertices is the number of other vertices they
-#' both cite, \code{bibcoupling} calculates this.
+#' both cite, \code{bibcoupling()} calculates this.
 #'
-#' \code{cocitation} calculates the cocitation counts for the vertices in the
+#' \code{cocitation()} calculates the cocitation counts for the vertices in the
 #' \code{v} argument and all vertices in the graph.
 #'
-#' \code{bibcoupling} calculates the bibliographic coupling for vertices in
+#' \code{bibcoupling()} calculates the bibliographic coupling for vertices in
 #' \code{v} and all vertices in the graph.
 #'
 #' Calculating the cocitation or bibliographic coupling for only one vertex

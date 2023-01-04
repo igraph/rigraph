@@ -42,7 +42,7 @@ support}
 A vector, containing the centrality scores.
 }
 \description{
-\code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
+\code{power_centrality()} takes a graph (\code{dat}) and returns the Boncich power
 centralities of positions (selected by \code{nodes}).  The decay rate for
 power contributions is specified by \code{exponent} (1 by default).
 }
@@ -91,7 +91,7 @@ This function was ported (ie. copied) from the SNA package.
 \section{Warning }{
  Singular adjacency matrices cause no end of headaches for
 this algorithm; thus, the routine may fail in certain cases.  This will be
-fixed when I get a better algorithm.  \code{power_centrality} will not symmetrize your
+fixed when I get a better algorithm.  \code{power_centrality()} will not symmetrize your
 data before extracting eigenvectors; don't send this routine asymmetric
 matrices unless you really mean to do so.
 }

@@ -21,16 +21,16 @@ This is a helper function that simplifies adding and deleting
 edges to/from graphs.
 }
 \details{
-\code{edges} is an alias for \code{edge}.
+\code{edges()} is an alias for \code{edge()}.
 
 When adding edges via \code{+}, all unnamed arguments of
-\code{edge} (or \code{edges}) are concatenated, and then passed to
+\code{edge()} (or \code{edges()}) are concatenated, and then passed to
 \code{\link{add_edges}}. They are interpreted as pairs of vertex ids,
 and an edge will added between each pair. Named arguments will be
 used as edge attributes for the new edges.
 
-When deleting edges via \code{-}, all arguments of \code{edge} (or
-\code{edges}) are concatenated via \code{c()} and passed to
+When deleting edges via \code{-}, all arguments of \code{edge()} (or
+\code{edges()}) are concatenated via \code{c()} and passed to
 \code{\link{delete_edges}}.
 }
 \examples{

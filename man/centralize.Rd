@@ -45,7 +45,7 @@ some version of the star graph, in-star, out-star or undirected star.
 For eigenvector centrality the most centralized structure is the graph
 with a single edge (and potentially many isolates).
 
-\code{centralize} implements general centralization formula to calculate
+\code{centralize()} implements general centralization formula to calculate
 a graph-level score from vertex-level scores.
 }
 \examples{

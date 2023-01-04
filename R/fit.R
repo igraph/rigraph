@@ -28,7 +28,7 @@
 
 #' Fitting a power-law distribution function to discrete data
 #'
-#' \code{fit_power_law} fits a power-law distribution to a data set.
+#' \code{fit_power_law()} fits a power-law distribution to a data set.
 #'
 #' This function fits a power-law distribution to a vector containing samples
 #' from a distribution (that is assumed to follow a power-law of course). In a
@@ -40,7 +40,7 @@
 #' \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 #' \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
-#' \code{fit_power_law} provides two maximum likelihood implementations.  If
+#' \code{fit_power_law()} provides two maximum likelihood implementations.  If
 #' the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
 #' optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the

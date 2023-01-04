@@ -19,7 +19,7 @@ the first vertex.}
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex ids.}
 
-\item{...}{Arguments to pass to \code{layout_as_star}.}
+\item{...}{Arguments to pass to \code{layout_as_star()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices

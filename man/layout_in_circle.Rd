@@ -16,7 +16,7 @@ in_circle(...)
 desired placement. Vertices that are not included here will be placed at
 (0,0).}
 
-\item{...}{Passed to \code{layout_in_circle}.}
+\item{...}{Passed to \code{layout_in_circle()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.

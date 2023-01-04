@@ -48,7 +48,7 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #'
 #' \deqn{\sum_{i\ne j} g_{iej}/g_{ij}.}{sum( g_iej / g_ij, i!=j).}
 #'
-#' \code{betweenness} calculates vertex betweenness, \code{edge_betweenness}
+#' \code{betweenness()} calculates vertex betweenness, \code{edge_betweenness()}
 #' calculates edge betweenness.
 #'
 #' Here \eqn{g_{ij}}{g_ij} is the total number of shortest paths between vertices
@@ -63,8 +63,8 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #' cutoff literally (i.e. no paths considered at all). If you want no cutoff,
 #' use a negative number.
 #'
-#' \code{estimate_betweenness} and \code{estimate_edge_betweenness} are
-#' aliases for \code{betweenness} and \code{edge_betweenness}, with a different
+#' \code{estimate_betweenness()} and \code{estimate_edge_betweenness()} are
+#' aliases for \code{betweenness()} and \code{edge_betweenness()}, with a different
 #' argument order, for sake of compatibility with older versions of igraph.
 #'
 #' For calculating the betweenness a similar algorithm to the one proposed by
@@ -91,12 +91,12 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #'   \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 #'   is the number of vertices in the graph.
 #' @return A numeric vector with the betweenness score for each vertex in
-#'   \code{v} for \code{betweenness}.
+#'   \code{v} for \code{betweenness()}.
 #'
 #'   A numeric vector with the edge betweenness score for each edge in \code{e}
-#'   for \code{edge_betweenness}.
+#'   for \code{edge_betweenness()}.
 #'
-#' @note \code{edge_betweenness} might give false values for graphs with
+#' @note \code{edge_betweenness()} might give false values for graphs with
 #' multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
@@ -211,7 +211,7 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 #' considered at all). If you want no cutoff, use a negative number.
 #'
-#' \code{estimate_closeness} is an alias for \code{closeness} with a different
+#' \code{estimate_closeness()} is an alias for \code{closeness()} with a different
 #' argument order, for sake of compatibility with older versions of igraph.
 #'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected
@@ -324,7 +324,7 @@ arpack_defaults <- list(
 #' calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
 #' and \eqn{v} is an arbitrary vector. The function supplied in the \code{fun}
 #' argument is expected to perform this product. If the product can be done
-#' efficiently, e.g. if the matrix is sparse, then \code{arpack} is usually
+#' efficiently, e.g. if the matrix is sparse, then \code{arpack()} is usually
 #' able to calculate the eigenvalues very quickly.
 #'
 #' The \code{options} argument specifies what kind of calculation to perform.
@@ -647,7 +647,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @return Depends on the algorithm used.
 #'
 #'   For \code{arpack} a list with three entries is returned: \item{options}{See
-#'   the return value for \code{arpack} for a complete description.}
+#'   the return value for \code{arpack()} for a complete description.}
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 #'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -679,7 +679,7 @@ eigen_defaults <- list(
 
 #' Find Eigenvector Centrality Scores of Network Positions
 #'
-#' \code{eigen_centrality} takes a graph (\code{graph}) and returns the
+#' \code{eigen_centrality()} takes a graph (\code{graph}) and returns the
 #' eigenvector centralities of positions \code{v} within it
 #'
 #' Eigenvector centrality scores correspond to the values of the first
@@ -957,7 +957,7 @@ authority_score <- authority_score
 #' Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
 #' Australia, April 1998.
 #'
-#' The \code{page_rank} function can use either the PRPACK library or ARPACK
+#' The \code{page_rank()} function can use either the PRPACK library or ARPACK
 #' (see \code{\link{arpack}}) to perform the calculation.
 #'
 #' Please note that the PageRank of a given vertex depends on the PageRank of
@@ -1134,7 +1134,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 
 #' Find Bonacich Power Centrality Scores of Network Positions
 #'
-#' \code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
+#' \code{power_centrality()} takes a graph (\code{dat}) and returns the Boncich power
 #' centralities of positions (selected by \code{nodes}).  The decay rate for
 #' power contributions is specified by \code{exponent} (1 by default).
 #'
@@ -1196,7 +1196,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @note This function was ported (ie. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
-#' fixed when I get a better algorithm.  \code{power_centrality} will not symmetrize your
+#' fixed when I get a better algorithm.  \code{power_centrality()} will not symmetrize your
 #' data before extracting eigenvectors; don't send this routine asymmetric
 #' matrices unless you really mean to do so.
 #' @author Carter T. Butts
@@ -1342,7 +1342,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 
 #' Find Bonacich alpha centrality scores of network positions
 #'
-#' \code{alpha_centrality} calculates the alpha centrality of some (or all)
+#' \code{alpha_centrality()} calculates the alpha centrality of some (or all)
 #' vertices in a graph.
 #'
 #' The alpha centrality measure can be considered as a generalization of

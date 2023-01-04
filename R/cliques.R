@@ -26,22 +26,22 @@
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
 #'
-#' \code{cliques} find all complete subgraphs in the input graph, obeying the
+#' \code{cliques()} find all complete subgraphs in the input graph, obeying the
 #' size limitations given in the \code{min} and \code{max} arguments.
 #'
-#' \code{largest_cliques} finds all largest cliques in the input graph. A
+#' \code{largest_cliques()} finds all largest cliques in the input graph. A
 #' clique is largest if there is no other clique including more vertices.
 #'
-#' \code{max_cliques} finds all maximal cliques in the input graph.  A
+#' \code{max_cliques()} finds all maximal cliques in the input graph.  A
 #' clique is maximal if it cannot be extended to a larger clique. The largest
 #' cliques are always maximal, but a maximal clique is not necessarily the
 #' largest.
 #'
-#' \code{count_max_cliques} counts the maximal cliques.
+#' \code{count_max_cliques()} counts the maximal cliques.
 #'
-#' \code{clique_num} calculates the size of the largest clique(s).
+#' \code{clique_num()} calculates the size of the largest clique(s).
 #'
-#' \code{clique_size_counts} returns a numeric vector representing a histogram
+#' \code{clique_size_counts()} returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
@@ -53,18 +53,18 @@
 #'   \code{NULL} means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   \code{NULL} means no limit.
-#' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
+#' @return \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
 #'   return a list containing numeric vectors of vertex ids. Each list element is
 #'   a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
 #'
-#'   \code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
+#'   \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}
 #'   argument is not \code{NULL}. The output is written to the specified file in
 #'   this case.
 #'
-#'   \code{clique_num} and \code{count_max_cliques} return an integer
+#'   \code{clique_num()} and \code{count_max_cliques()} return an integer
 #'   scalar.
 #'
-#'   \code{clique_size_counts} returns a numeric vector with the clique sizes such that
+#'   \code{clique_size_counts()} returns a numeric vector with the clique sizes such that
 #'   the i-th item belongs to cliques of size i. Trailing zeros are currently
 #'   truncated, but this might change in future versions.
 #'
@@ -194,11 +194,11 @@ clique_num <- clique_num
 #' an undirected graph. The weight of a clique is the sum of the weights of its
 #' edges.
 #'
-#' \code{weighted_cliques} find all complete subgraphs in the input graph,
+#' \code{weighted_cliques()} find all complete subgraphs in the input graph,
 #' obeying the weight limitations given in the \code{min} and \code{max}
 #' arguments.
 #'
-#' \code{largest_weighted_cliques} finds all largest weighted cliques in the
+#' \code{largest_weighted_cliques()} finds all largest weighted cliques in the
 #' input graph. A clique is largest if there is no other clique whose total
 #' weight is larger than the weight of this clique.
 #'
@@ -209,7 +209,7 @@ clique_num <- clique_num
 #'
 #' \code{count_max_weighted_cliques} counts the maximal weighted cliques.
 #'
-#' \code{weighted_clique_num} calculates the weight of the largest weighted clique(s).
+#' \code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 #'
 #' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
 #' count_max_weighted_cliques weighted_clique_num
@@ -226,11 +226,11 @@ clique_num <- clique_num
 #'   of the weighted clique finder supports positive integer weights only.
 #' @param maximal Specifies whether to look for all weighted cliques (\code{FALSE})
 #'   or only the maximal ones (\code{TRUE}).
-#' @return \code{weighted_cliques} and \code{largest_weighted_cliques} return a
+#' @return \code{weighted_cliques()} and \code{largest_weighted_cliques()} return a
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
 #'   clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
 #'
-#'   \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
+#'   \code{weighted_clique_num()} and \code{count_max_weighted_cliques} return an integer
 #'   scalar.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
@@ -257,15 +257,15 @@ weighted_clique_num <- weighted_clique_num
 #' vertices in it. These functions find independent vertex sets in undirected
 #' graphs
 #'
-#' \code{ivs} finds all independent vertex sets in the
+#' \code{ivs()} finds all independent vertex sets in the
 #' network, obeying the size limitations given in the \code{min} and \code{max}
 #' arguments.
 #'
-#' \code{largest_ivs} finds the largest independent vertex
+#' \code{largest_ivs()} finds the largest independent vertex
 #' sets in the graph. An independent vertex set is largest if there is no
 #' independent vertex set with more vertices.
 #'
-#' \code{maximal_ivs} finds the maximal independent vertex
+#' \code{maximal_ivs()} finds the maximal independent vertex
 #' sets in the graph. An independent vertex set is maximal if it cannot be
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
@@ -285,12 +285,12 @@ weighted_clique_num <- weighted_clique_num
 #'   vertex sets to find. \code{NULL} means no limit.
 #' @param max Numeric constant, limit for the maximum size of the independent
 #'   vertex sets to find. \code{NULL} means no limit.
-#' @return \code{ivs},
-#'   \code{largest_ivs} and
-#'   \code{maximal_ivs} return a list containing numeric
+#' @return \code{ivs()},
+#'   \code{largest_ivs()} and
+#'   \code{maximal_ivs()} return a list containing numeric
 #'   vertex ids, each list element is an independent vertex set.
 #'
-#'   \code{ivs_size} returns an integer constant.
+#'   \code{ivs_size()} returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty
 #' Graph Library by Keith Briggs (\url{http://keithbriggs.info/}) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual

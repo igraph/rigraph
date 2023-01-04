@@ -30,7 +30,7 @@ the corresponding eigenvector is calculated.}
 Depends on the algorithm used.
 
 For \code{arpack} a list with three entries is returned: \item{options}{See
-the return value for \code{arpack} for a complete description.}
+the return value for \code{arpack()} for a complete description.}
 \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 matrix, with the eigenvectors as columns.}
 }
