@@ -65,6 +65,8 @@ jobs:
         if: ${{ env.GITHUB_ACTOR == env.GITHUB_REPOSITORY_OWNER }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
             git add .
             git commit -m "Automated changes"
             git push
