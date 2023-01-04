@@ -17,7 +17,7 @@ NULL
 
 #' Magrittr's pipes
 #'
-#' igraph re-exports the \code{\%>\%} operator of magrittr, because
+#' igraph re-exports the `%>%` operator of magrittr, because
 #' we find it very useful. Please see the documentation in the
 #' \code{magrittr} package.
 #'
