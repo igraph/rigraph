@@ -467,10 +467,19 @@ distances <- function(graph, v = V(graph), to = V(graph),
   }
 
   on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(
-    C_R_igraph_shortest_paths, graph, v - 1, to - 1,
-    as.numeric(mode), weights, as.numeric(algorithm)
-  )
+
+  if (algorithm == 4 && mode == 2) {
+    # Swap "from" and "to", transpose the result
+    res <- t(.Call(
+      C_R_igraph_shortest_paths, graph, to - 1, v - 1,
+      1, weights, as.numeric(algorithm)
+    ))
+  } else {
+    res <- .Call(
+      C_R_igraph_shortest_paths, graph, v - 1, to - 1,
+      as.numeric(mode), weights, as.numeric(algorithm)
+    )
+  }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     rownames(res) <- V(graph)$name[v]
