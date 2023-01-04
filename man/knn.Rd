@@ -22,11 +22,11 @@ both \sQuote{\code{knn}} and \sQuote{\code{knnk}} will be calculated based
 on the given vertices only.}
 
 \item{mode}{Character constant to indicate the type of neighbors to consider
-in directed graphs. \code{out} considers out-neighbors, \code{in} considers
+in directed graphs. \code{out} considers out-neighbors, \verb{in} considers
 in-neighbors and \code{all} ignores edge directions.}
 
 \item{neighbor.degree.mode}{The type of degree to average in directed graphs.
-\code{out} averages out-degrees, \code{in} averages in-degrees and \code{all}
+\code{out} averages out-degrees, \verb{in} averages in-degrees and \code{all}
 ignores edge directions for the degree calculation.}
 
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
@@ -55,9 +55,9 @@ if a given degree never appears in the network.
 
 The weighted version computes a weighted average of the neighbor degrees as
 
-\code{k_nn_u = 1/s_u sum_v w_uv k_v},
+\verb{k_nn_u = 1/s_u sum_v w_uv k_v},
 
-where \code{s_u = sum_v w_uv} is the sum of the incident edge weights
+where \verb{s_u = sum_v w_uv} is the sum of the incident edge weights
 of vertex \code{u}, i.e. its strength.
 The sum runs over the neighbors \code{v} of vertex \code{u}
 as indicated by \code{mode}. \code{w_uv} denotes the weighted adjacency matrix

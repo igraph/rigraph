@@ -16,7 +16,7 @@ default is all vertices.}
 }
 \value{
 A numeric matrix with \code{length(v)} lines and
-\code{vcount(graph)} columns. Element \code{(i,j)} contains the cocitation
+\code{vcount(graph)} columns. Element \verb{(i,j)} contains the cocitation
 or bibliographic coupling for vertices \code{v[i]} and \code{j}.
 }
 \description{

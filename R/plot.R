@@ -23,8 +23,8 @@
 
 #' Plotting of graphs
 #'
-#' \code{plot.igraph()} is able to plot graphs to any R device. It is the
-#' non-interactive companion of the \code{tkplot()} function.
+#' `plot.igraph()` is able to plot graphs to any R device. It is the
+#' non-interactive companion of the `tkplot()` function.
 #'
 #' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
 #' first, handtune the placement of the vertices, query the coordinates by the
@@ -53,7 +53,7 @@
 #'   polygons, in any format accepted by \code{\link[graphics]{xspline}}; e.g.
 #'   numeric color ids, symbolic color names, or colors in RGB.
 #' @param mark.border A scalar or vector giving the colors of the borders of
-#'   the vertex group marking polygons. If it is \code{NA}, then no border is
+#'   the vertex group marking polygons. If it is `NA`, then no border is
 #'   drawn.
 #' @param mark.expand A numeric scalar or vector, the size of the border around
 #'   the marked vertex groups. It is in the same units as the vertex sizes. If a
@@ -64,7 +64,7 @@
 #'   loops.
 #' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
 #'   the complete list.
-#' @return Returns \code{NULL}, invisibly.
+#' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout}} for different layouts,
 #' \code{\link{igraph.plotting}} for the detailed description of the plotting
@@ -503,11 +503,11 @@ plot.igraph <- function(x,
 
 #' 3D plotting of graphs with OpenGL
 #'
-#' Using the \code{rgl} package, \code{rglplot()} plots a graph in 3D. The plot
+#' Using the `rgl` package, `rglplot()` plots a graph in 3D. The plot
 #' can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
 #' fixed.
 #'
-#' Note that \code{rglplot()} is considered to be highly experimental. It is not
+#' Note that `rglplot()` is considered to be highly experimental. It is not
 #' very useful either. See \code{\link{igraph.plotting}} for the possible
 #' arguments.
 #'
@@ -515,7 +515,7 @@ plot.igraph <- function(x,
 #' @param x The graph to plot.
 #' @param \dots Additional arguments, see \code{\link{igraph.plotting}} for the
 #'   details
-#' @return \code{NULL}, invisibly.
+#' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{igraph.plotting}}, \code{\link{plot.igraph}} for the 2D
 #' version, \code{\link{tkplot}} for interactive graph drawing in 2D.

@@ -19,7 +19,7 @@ NULL
 #'
 #' igraph re-exports the `%>%` operator of magrittr, because
 #' we find it very useful. Please see the documentation in the
-#' \code{magrittr} package.
+#' `magrittr` package.
 #'
 #' @param lhs Left hand side of the pipe.
 #' @param rhs Right hand side of the pipe.
@@ -51,28 +51,28 @@ NULL
 #' allowing rapid prototyping via high level languages like R.
 #'
 #' @section igraph graphs:
-#'   igraph graphs have a class \sQuote{\code{igraph}}. They are printed to
+#'   igraph graphs have a class \sQuote{`igraph`}. They are printed to
 #'   the screen in a special format, here is an example, a ring graph
 #'   created using \code{\link{make_ring}}: \preformatted{
 #'     IGRAPH U--- 10 10 -- Ring graph
 #'     + attr: name (g/c), mutual (g/x), circular (g/x)  }
-#'   \sQuote{\code{IGRAPH}} denotes that this is an igraph graph. Then
+#'   \sQuote{`IGRAPH`} denotes that this is an igraph graph. Then
 #'   come four bits that denote the kind of the graph: the first is
-#'   \sQuote{\code{U}} for undirected and \sQuote{\code{D}} for directed
-#'   graphs. The second is \sQuote{\code{N}} for named graph (i.e. if the
-#'   graph has the \sQuote{\code{name}} vertex attribute set). The third is
-#'   \sQuote{\code{W}} for weighted graphs (i.e. if the
-#'   \sQuote{\code{weight}} edge attribute is set). The fourth is
-#'   \sQuote{\code{B}} for bipartite graphs (i.e. if the
-#'   \sQuote{\code{type}} vertex attribute is set).
+#'   \sQuote{`U`} for undirected and \sQuote{`D`} for directed
+#'   graphs. The second is \sQuote{`N`} for named graph (i.e. if the
+#'   graph has the \sQuote{`name`} vertex attribute set). The third is
+#'   \sQuote{`W`} for weighted graphs (i.e. if the
+#'   \sQuote{`weight`} edge attribute is set). The fourth is
+#'   \sQuote{`B`} for bipartite graphs (i.e. if the
+#'   \sQuote{`type`} vertex attribute is set).
 #'
 #'   Then come two numbers, the number of vertices and the number of edges
 #'   in the graph, and after a double dash, the name of the graph (the
-#'   \sQuote{\code{name}} graph attribute) is printed if present. The
+#'   \sQuote{`name`} graph attribute) is printed if present. The
 #'   second line is optional and it contains all the attributes of the
-#'   graph. This graph has a \sQuote{\code{name}} graph attribute, of type
+#'   graph. This graph has a \sQuote{`name`} graph attribute, of type
 #'   character, and two other graph attributes called
-#'   \sQuote{\code{mutual}} and \sQuote{\code{circular}}, of a complex
+#'   \sQuote{`mutual`} and \sQuote{`circular`}, of a complex
 #'   type. A complex type is simply anything that is not numeric or
 #'   character. See the documentation of \code{\link{print.igraph}} for
 #'   details.
@@ -134,7 +134,7 @@ NULL
 #'   is the \sQuote{name} attribute. This is used for printing the graph
 #'   instead of the numerical ids, if it exists. Vertex names can also be
 #'   used to specify a vector or set of vertices, in all igraph
-#'   functions. E.g. \code{\link{degree}} has a \code{v} argument
+#'   functions. E.g. \code{\link{degree}} has a `v` argument
 #'   that gives the vertices for which the degree is calculated. This
 #'   argument can be given as a character vector of vertex names.
 #'
@@ -144,10 +144,10 @@ NULL
 #'   other functions.
 #'
 #'   We note here, that vertex names can also be used to select edges.
-#'   The form \sQuote{\code{from|to}}, where \sQuote{\code{from}} and
-#'   \sQuote{\code{to}} are vertex names, select a single, possibly
-#'   directed, edge going from \sQuote{\code{from}} to
-#'   \sQuote{\code{to}}. The two forms can also be mixed in the same edge
+#'   The form \sQuote{`from|to`}, where \sQuote{`from`} and
+#'   \sQuote{`to`} are vertex names, select a single, possibly
+#'   directed, edge going from \sQuote{`from`} to
+#'   \sQuote{`to`}. The two forms can also be mixed in the same edge
 #'   selector.
 #'
 #'   Other attributes define visualization parameters, see
@@ -162,14 +162,14 @@ NULL
 #' @section Visualization:
 #'   igraph provides three different ways for visualization. The first is
 #'   the \code{\link{plot.igraph}} function. (Actually you don't need to
-#'   write \code{plot.igraph()}, [plot()] is enough. This function uses
+#'   write `plot.igraph()`, [plot()] is enough. This function uses
 #'   regular R graphics and can be used with any R device.
 #'
 #'   The second function is \code{\link{tkplot}}, which uses a Tk GUI for
 #'   basic interactive graph manipulation. (Tk is quite resource hungry, so
 #'   don't try this for very large graphs.)
 #'
-#'   The third way requires the \code{rgl} package and uses OpenGL. See the
+#'   The third way requires the `rgl` package and uses OpenGL. See the
 #'   \code{\link{rglplot}} function for the details.
 #'
 #'   Make sure you read \code{\link{igraph.plotting}} before you start
@@ -183,7 +183,7 @@ NULL
 #'   \code{\link{write_graph}} for details.
 #'
 #' @section Further information:
-#'   The igraph homepage is at \url{https://igraph.org}.
+#'   The igraph homepage is at <https://igraph.org>.
 #'   See especially the documentation section. Join the discussion forum at
-#'   \url{https://igraph.discourse.group} if you have questions or comments.
+#'   <https://igraph.discourse.group> if you have questions or comments.
 NULL

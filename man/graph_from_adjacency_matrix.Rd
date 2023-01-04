@@ -81,8 +81,7 @@ symmetric.} \item{"max"}{An undirected graph will be created and
 right triangle (including the diagonal) is used for the number of edges.}
 \item{"lower"}{An undirected graph will be created, only the lower
 left triangle (including the diagonal) is used for creating the edges.}
-\item{"min"}{undirected graph will be created with \code{min(A(i,j),
-A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
+\item{"min"}{undirected graph will be created with \code{min(A(i,j), A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
 undirected graph will be created with \code{A(i,j)+A(j,i)} edges between
 vertex \code{i} and \code{j}.} }
 

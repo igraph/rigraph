@@ -11,7 +11,7 @@ coreness(graph, mode = c("all", "out", "in"))
 \item{graph}{The input graph, it can be directed or undirected}
 
 \item{mode}{The type of the core in directed graphs. Character constant,
-possible values: \code{in}: in-cores are computed, \code{out}: out-cores are
+possible values: \verb{in}: in-cores are computed, \code{out}: out-cores are
 computed, \code{all}: the corresponding undirected graph is considered. This
 argument is ignored for undirected graphs.}
 }

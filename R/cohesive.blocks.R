@@ -23,7 +23,7 @@
 
 #' Calculate Cohesive Blocks
 #'
-#' Calculates cohesive blocks for objects of class \code{igraph}.
+#' Calculates cohesive blocks for objects of class `igraph`.
 #'
 #' Cohesive blocking is a method of determining hierarchical subsets of graph
 #' vertices based on their structural cohesion (or vertex connectivity). For a
@@ -35,62 +35,62 @@
 #' hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
 #' root.
 #'
-#' The function \code{cohesive_blocks()} implements cohesive blocking.  It
-#' returns a \code{cohesiveBlocks} object. \code{cohesiveBlocks} should be
+#' The function `cohesive_blocks()` implements cohesive blocking.  It
+#' returns a `cohesiveBlocks` object. `cohesiveBlocks` should be
 #' handled as an opaque class, i.e. its internal structure should not be
 #' accessed directly, but through the functions listed here.
 #'
-#' The function \code{length} can be used on \code{cohesiveBlocks} objects and
+#' The function `length` can be used on `cohesiveBlocks` objects and
 #' it gives the number of blocks.
 #'
-#' The function \code{blocks()} returns the actual blocks stored in the
-#' \code{cohesiveBlocks} object. They are returned in a list of numeric
+#' The function `blocks()` returns the actual blocks stored in the
+#' `cohesiveBlocks` object. They are returned in a list of numeric
 #' vectors, each containing vertex ids.
 #'
-#' The function \code{graphs_from_cohesive_blocks()} is similar, but returns the blocks as
+#' The function `graphs_from_cohesive_blocks()` is similar, but returns the blocks as
 #' (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 #' attributes are kept in the subgraph.
 #'
-#' The function \code{cohesion()} returns a numeric vector, the cohesion of the
+#' The function `cohesion()` returns a numeric vector, the cohesion of the
 #' different blocks. The order of the blocks is the same as for the
-#' \code{blocks()} and \code{graphs_from_cohesive_blocks()} functions.
+#' `blocks()` and `graphs_from_cohesive_blocks()` functions.
 #'
-#' The block hierarchy can be queried using the \code{hierarchy()} function. It
+#' The block hierarchy can be queried using the `hierarchy()` function. It
 #' returns an igraph graph, its vertex ids are ordered according the order of
-#' the blocks in the \code{blocks()} and \code{graphs_from_cohesive_blocks()}, \code{cohesion()},
+#' the blocks in the `blocks()` and `graphs_from_cohesive_blocks()`, `cohesion()`,
 #' etc. functions.
 #'
-#' \code{parent()} gives the parent vertex of each block, in the block hierarchy,
+#' `parent()` gives the parent vertex of each block, in the block hierarchy,
 #' for the root vertex it gives 0.
 #'
-#' \code{plot_hierarchy()} plots the hierarchy tree of the cohesive blocks on the
-#' active graphics device, by calling \code{igraph.plot}.
+#' `plot_hierarchy()` plots the hierarchy tree of the cohesive blocks on the
+#' active graphics device, by calling `igraph.plot`.
 #'
-#' The \code{export_pajek()} function can be used to export the graph and its
+#' The `export_pajek()` function can be used to export the graph and its
 #' cohesive blocks in Pajek format. It can either export a single Pajek project
 #' file with all the information, or a set of files, depending on its
-#' \code{project.file} argument. If \code{project.file} is \code{TRUE}, then
+#' `project.file` argument. If `project.file` is `TRUE`, then
 #' the following information is written to the file (or connection) given in
-#' the \code{file} argument: (1) the input graph, together with its attributes,
+#' the `file` argument: (1) the input graph, together with its attributes,
 #' see \code{\link{write_graph}} for details; (2) the hierarchy graph; and (3)
-#' one binary partition for each cohesive block. If \code{project.file} is
-#' \code{FALSE}, then the \code{file} argument must be a character scalar and
-#' it is used as the base name for the generated files. If \code{file} is
+#' one binary partition for each cohesive block. If `project.file` is
+#' `FALSE`, then the `file` argument must be a character scalar and
+#' it is used as the base name for the generated files. If `file` is
 #' \sQuote{basename}, then the following files are created: (1)
 #' \sQuote{basename.net} for the original graph; (2)
 #' \sQuote{basename_hierarchy.net} for the hierarchy graph; (3)
 #' \sQuote{basename_block_x.net} for each cohesive block, where \sQuote{x} is
 #' the number of the block, starting with one.
 #'
-#' \code{max_cohesion()} returns the maximal cohesion of each vertex, i.e. the
+#' `max_cohesion()` returns the maximal cohesion of each vertex, i.e. the
 #' cohesion of the most cohesive block of the vertex.
 #'
-#' The generic function [summary()] works on \code{cohesiveBlocks} objects
+#' The generic function [summary()] works on `cohesiveBlocks` objects
 #' and it prints a one line summary to the terminal.
 #'
-#' The generic function [print()] is also defined on \code{cohesiveBlocks}
+#' The generic function [print()] is also defined on `cohesiveBlocks`
 #' objects and it is invoked automatically if the name of the
-#' \code{cohesiveBlocks} object is typed in. It produces an output like this:
+#' `cohesiveBlocks` object is typed in. It produces an output like this:
 #' \preformatted{ Cohesive block structure:
 #' B-1 c 1, n 23
 #' '- B-2 c 2, n 14 oooooooo.. .o......oo ooo
@@ -112,84 +112,84 @@
 #' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' plot_hierarchy max_cohesion exportPajek
-#' @param graph For \code{cohesive_blocks()} a graph object of class
-#'   \code{igraph}. It must be undirected and simple. (See
+#' @param graph For `cohesive_blocks()` a graph object of class
+#'   `igraph`. It must be undirected and simple. (See
 #'   \code{\link{is_simple}}.)
 #'
-#'   For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
-#'   supplied whose cohesive block structure is given in the \code{blocks()}
+#'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
+#'   supplied whose cohesive block structure is given in the `blocks()`
 #'   argument.
 #' @param labels Logical scalar, whether to add the vertex labels to the result
 #'   object. These labels can be then used when reporting and plotting the
 #'   cohesive blocks.
-#' @param blocks,x,object A \code{cohesiveBlocks} object, created with the
-#'   \code{cohesive_blocks()} function.
+#' @param blocks,x,object A `cohesiveBlocks` object, created with the
+#'   `cohesive_blocks()` function.
 #' @param file Defines the file (or connection) the Pajek file is written to.
 #'
-#'   If the \code{project.file} argument is \code{TRUE}, then it can be a
+#'   If the `project.file` argument is `TRUE`, then it can be a
 #'   filename (with extension), a file object, or in general any king of
 #'   connection object. The file/connection will be opened if it wasn't already.
 #'
-#'   If the \code{project.file} argument is \code{FALSE}, then several files are
-#'   created and \code{file} must be a character scalar containing the base name
+#'   If the `project.file` argument is `FALSE`, then several files are
+#'   created and `file` must be a character scalar containing the base name
 #'   of the files, without extension. (But it can contain the path to the files.)
 #'
 #'   See also details below.
 #' @param project.file Logical scalar, whether to create a single Pajek project
 #'   file containing all the data, or to create separated files for each item.
 #'   See details below.
-#' @param y The graph whose cohesive blocks are supplied in the \code{x}
+#' @param y The graph whose cohesive blocks are supplied in the `x`
 #'   argument.
 #' @param colbar Color bar for the vertex colors. Its length should be at least
 #'   \eqn{m+1}, where \eqn{m} is the maximum cohesion in the graph.
 #'   Alternatively, the vertex colors can also be directly specified via the
-#'   \code{col} argument.
+#'   `col` argument.
 #' @param col A vector of vertex colors, in any of the usual formats. (Symbolic
 #'   color names (e.g. \sQuote{red}, \sQuote{blue}, etc.) , RGB colors (e.g.
 #'   \sQuote{#FF9900FF}), integer numbers referring to the current palette. By
-#'   default the given \code{colbar} is used and vertices with the same maximal
+#'   default the given `colbar` is used and vertices with the same maximal
 #'   cohesion will have the same color.
 #' @param mark.groups A list of vertex sets to mark on the plot by circling
 #'   them. By default all cohesive blocks are marked, except the one
 #'   corresponding to the all vertices.
 #' @param layout The layout of a plot, it is simply passed on to
-#'   \code{plot.igraph()}, see the possible formats there. By default the
+#'   `plot.igraph()`, see the possible formats there. By default the
 #'   Reingold-Tilford layout generator is used.
-#' @param \dots Additional arguments. \code{plot_hierarchy()} and [plot()] pass
-#'   them to \code{plot.igraph()}.  [print()] and [summary()] ignore them.
-#' @return \code{cohesive_blocks()} returns a \code{cohesiveBlocks} object.
+#' @param \dots Additional arguments. `plot_hierarchy()` and [plot()] pass
+#'   them to `plot.igraph()`.  [print()] and [summary()] ignore them.
+#' @return `cohesive_blocks()` returns a `cohesiveBlocks` object.
 #'
-#'   \code{blocks()} returns a list of numeric vectors, containing vertex ids.
+#'   `blocks()` returns a list of numeric vectors, containing vertex ids.
 #'
-#'   \code{graphs_from_cohesive_blocks()} returns a list of igraph graphs, corresponding to the
+#'   `graphs_from_cohesive_blocks()` returns a list of igraph graphs, corresponding to the
 #'   cohesive blocks.
 #'
-#'   \code{cohesion()} returns a numeric vector, the cohesion of each block.
+#'   `cohesion()` returns a numeric vector, the cohesion of each block.
 #'
-#'   \code{hierarchy()} returns an igraph graph, the representation of the cohesive
+#'   `hierarchy()` returns an igraph graph, the representation of the cohesive
 #'   block hierarchy.
 #'
-#'   \code{parent()} returns a numeric vector giving the parent block of each
+#'   `parent()` returns a numeric vector giving the parent block of each
 #'   cohesive block, in the block hierarchy. The block at the root of the
-#'   hierarchy has no parent and \code{0} is returned for it.
+#'   hierarchy has no parent and `0` is returned for it.
 #'
-#'   \code{plot_hierarchy()}, [plot()] and \code{export_pajek()} return \code{NULL},
+#'   `plot_hierarchy()`, [plot()] and `export_pajek()` return `NULL`,
 #'   invisibly.
 #'
-#'   \code{max_cohesion()} returns a numeric vector with one entry for each vertex,
+#'   `max_cohesion()` returns a numeric vector with one entry for each vertex,
 #'   giving the cohesion of its most cohesive block.
 #'
-#'   [print()] and [summary()] return the \code{cohesiveBlocks} object
+#'   [print()] and [summary()] return the `cohesiveBlocks` object
 #'   itself, invisibly.
 #'
-#'   \code{length} returns a numeric scalar, the number of blocks.
+#'   `length` returns a numeric scalar, the number of blocks.
 #' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
-#' implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
+#' implementation, Peter McMahan (<https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology>)
 #' wrote the first version in R.
 #' @seealso \code{\link{cohesion}}
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:
-#' A hierarchical concept of social groups. \emph{American Sociological
-#' Review}, 68(1):103--127, Feb 2003.
+#' A hierarchical concept of social groups. *American Sociological
+#' Review*, 68(1):103--127, Feb 2003.
 #' @export
 #' @keywords graphs
 #' @examples

@@ -27,7 +27,7 @@ undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
 included in the neighbors of \code{B} and \code{B} to be included in the
 neighbors of \code{A}.
 
-This argument is ignored if \code{mode} is \code{out} or \code{in}.}
+This argument is ignored if \code{mode} is \code{out} or \verb{in}.}
 }
 \value{
 An igraph graph object.

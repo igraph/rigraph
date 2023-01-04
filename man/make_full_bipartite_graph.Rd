@@ -24,7 +24,7 @@ full_bipartite_graph(...)
 
 \item{mode}{Scalar giving the kind of edges to create for directed graphs.
 If this is \sQuote{\code{out}} then all vertices of the first kind are
-connected to the others; \sQuote{\code{in}} specifies the opposite
+connected to the others; \sQuote{\verb{in}} specifies the opposite
 direction; \sQuote{\code{all}} creates mutual edges. This argument is
 ignored for undirected graphs.x}
 

@@ -35,17 +35,17 @@
 #'
 #' There are two ways to calculate graph layouts in igraph.
 #' The first way is to call a layout function (they all have
-#' prefix \code{layout_()} on a graph, to get the vertex coordinates.
+#' prefix `layout_()` on a graph, to get the vertex coordinates.
 #'
 #' The second way (new in igraph 0.8.0), has two steps, and it
 #' is more flexible. First you call a layout specification
-#' function (the one without the \code{layout_()} prefix, and
-#' then \code{layout_()} (or \code{\link{add_layout_}}) to
+#' function (the one without the `layout_()` prefix, and
+#' then `layout_()` (or \code{\link{add_layout_}}) to
 #' perform the layouting.
 #'
 #' The second way is preferred, as it is more flexible. It allows
 #' operations before and after the layouting. E.g. using the
-#' \code{component_wise()} argument, the layout can be calculated
+#' `component_wise()` argument, the layout can be calculated
 #' separately for each component, and then merged to get the
 #' final results.
 #'
@@ -53,10 +53,10 @@
 #' @section Modifiers:
 #' Modifiers modify how a layout calculation is performed.
 #' Currently implemented modifiers: \itemize{
-#'   \item \code{component_wise()} calculates the layout separately
+#'   \item `component_wise()` calculates the layout separately
 #'     for each component of the graph, and then merges
 #'     them.
-#'   \item \code{normalize()} scales the layout to a square.
+#'   \item `normalize()` scales the layout to a square.
 #' }
 #'
 #' @param graph The input graph.
@@ -187,7 +187,7 @@ print.igraph_layout_modifier <- function(x, ...) {
 #' to calculate the layout separately for each component
 #' of the graph.
 #'
-#' @param merge_method Merging algorithm, the \code{method}
+#' @param merge_method Merging algorithm, the `method`
 #'   argument of \code{\link{merge_coords}}.
 #'
 #' @family layout modifiers
@@ -249,10 +249,10 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #'
 #' @aliases layout_as_bipartite layout.bipartite
 #' @param graph The bipartite input graph. It should have a logical
-#'   \sQuote{\code{type}} vertex attribute, or the \code{types} argument must be
+#'   \sQuote{`type`} vertex attribute, or the `types` argument must be
 #'   given.
 #' @param types A logical vector, the vertex types. If this argument is
-#'   \code{NULL} (the default), then the \sQuote{\code{type}} vertex attribute is
+#'   `NULL` (the default), then the \sQuote{`type`} vertex attribute is
 #'   used.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
 #'   same layer.
@@ -301,7 +301,7 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
 
 
 #' @rdname layout_as_bipartite
-#' @param ... Arguments to pass to \code{layout_as_bipartite()}.
+#' @param ... Arguments to pass to `layout_as_bipartite()`.
 #' @export
 as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 
@@ -364,7 +364,7 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
 
 
 #' @rdname layout_as_star
-#' @param ... Arguments to pass to \code{layout_as_star()}.
+#' @param ... Arguments to pass to `layout_as_star()`.
 #' @export
 as_star <- function(...) layout_spec(layout_as_star, ...)
 
@@ -389,29 +389,29 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 #'   non-empty vector then the supplied vertex ids are used as the roots of the
 #'   trees (or a single tree if the graph is connected).  If it is an empty
 #'   vector, then the root vertices are automatically calculated based on
-#'   topological sorting, performed with the opposite mode than the \code{mode}
+#'   topological sorting, performed with the opposite mode than the `mode`
 #'   argument. After the vertices have been sorted, one is selected from each
 #'   component.
 #' @param circular Logical scalar, whether to plot the tree in a circular
-#'   fashion. Defaults to \code{FALSE}, so the tree branches are going bottom-up
-#'   (or top-down, see the \code{flip.y} argument.
+#'   fashion. Defaults to `FALSE`, so the tree branches are going bottom-up
+#'   (or top-down, see the `flip.y` argument.
 #' @param rootlevel This argument can be useful when drawing forests which are
 #'   not trees (i.e. they are unconnected and have tree components). It specifies
 #'   the level of the root vertices for every tree in the forest. It is only
-#'   considered if the \code{roots} argument is not an empty vector.
+#'   considered if the `roots` argument is not an empty vector.
 #' @param mode Specifies which edges to consider when building the tree.  If it
 #'   is \sQuote{out}, then only the outgoing, if it is \sQuote{in}, then only the
 #'   incoming edges of a parent are considered. If it is \sQuote{all} then all
 #'   edges are used (this was the behavior in igraph 0.5 and before). This
 #'   parameter also influences how the root vertices are calculated, if they are
-#'   not given. See the \code{roots} parameter.
+#'   not given. See the `roots` parameter.
 #' @param flip.y Logical scalar, whether to flip the \sQuote{y} coordinates.
 #'   The default is flipping because that puts the root vertex on the top.
 #' @return A numeric matrix with two columns, and one row for each vertex.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @references Reingold, E and Tilford, J (1981). Tidier drawing of trees.
-#' \emph{IEEE Trans. on Softw. Eng.}, SE-7(2):223--228.
+#' *IEEE Trans. on Softw. Eng.*, SE-7(2):223--228.
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -458,7 +458,7 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
 
 
 #' @rdname layout_as_tree
-#' @param ... Passed to \code{layout_as_tree()}.
+#' @param ... Passed to `layout_as_tree()`.
 #' @export
 as_tree <- function(...) layout_spec(layout_as_tree, ...)
 
@@ -512,7 +512,7 @@ layout_in_circle <- function(graph, order = V(graph)) {
 }
 
 #' @rdname layout_in_circle
-#' @param ... Passed to \code{layout_in_circle()}.
+#' @param ... Passed to `layout_in_circle()`.
 #' @export
 in_circle <- function(...) layout_spec(layout_in_circle, ...)
 
@@ -530,7 +530,7 @@ layout.circle <- function(..., params = list()) {
 #' This function tries to choose an appropriate graph layout algorithm for the
 #' graph, automatically, based on a simple algorithm. See details below.
 #'
-#' \code{layout_nicely()} tries to choose an appropriate layout function for the
+#' `layout_nicely()` tries to choose an appropriate layout function for the
 #' supplied graph, and uses that to generate the layout. The current
 #' implementation works like this: \enumerate{ \item If the graph has a graph
 #' attribute called \sQuote{layout}, then this is used. If this attribute is an
@@ -539,29 +539,29 @@ layout.circle <- function(..., params = list()) {
 #' \sQuote{y}, then these are used as coordinates. If the graph has an
 #' additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
 #' if the graph is connected and has less than 1000 vertices, the
-#' Fruchterman-Reingold layout is used, by calling \code{layout_with_fr()}.
-#' \item Otherwise the DrL layout is used, \code{layout_with_drl()} is called.  }
+#' Fruchterman-Reingold layout is used, by calling `layout_with_fr()`.
+#' \item Otherwise the DrL layout is used, `layout_with_drl()` is called.  }
 #'
 #' In layout algorithm implementations, an argument named \sQuote{weights} is
 #' typically used to specify the weights of the edges if the layout algorithm
 #' supports them. In this case, omitting \sQuote{weights} or setting it to
-#' \code{NULL} will make igraph use the 'weight' edge attribute from the graph
+#' `NULL` will make igraph use the 'weight' edge attribute from the graph
 #' if it is present. However, most layout algorithms do not support non-positive
-#' weights, so \code{layout_nicely()} would fail if you simply called it on
+#' weights, so `layout_nicely()` would fail if you simply called it on
 #' your graph without specifying explicit weights and the weights happened to
-#' include non-positive numbers. We strive to ensure that \code{layout_nicely()}
+#' include non-positive numbers. We strive to ensure that `layout_nicely()`
 #' works out-of-the-box for most graphs, so the rule is that if you omit
-#' \sQuote{weights} or set it to \code{NULL} and \code{layout_nicely()} would
-#' end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
+#' \sQuote{weights} or set it to `NULL` and `layout_nicely()` would
+#' end up calling `layout_with_fr()` or `layout_with_drl()`, we do not
 #' forward the weights to these functions and issue a warning about this. You
-#' can use \code{weights = NA} to silence the warning.
+#' can use `weights = NA` to silence the warning.
 #'
 #' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
-#' @param \dots For \code{layout_nicely()} the extra arguments are passed to
-#'   the real layout function. For \code{nicely()} all argument are passed to
-#'   \code{layout_nicely()}.
+#' @param \dots For `layout_nicely()` the extra arguments are passed to
+#'   the real layout function. For `nicely()` all argument are passed to
+#'   `layout_nicely()`.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}
@@ -689,7 +689,7 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
 
 
 #' @rdname layout_on_grid
-#' @param ... Passed to \code{layout_on_grid()}.
+#' @param ... Passed to `layout_on_grid()`.
 #' @export
 on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
@@ -723,7 +723,7 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' Place vertices on a sphere, approximately uniformly, in the order of their
 #' vertex ids.
 #'
-#' \code{layout_on_sphere()} places the vertices (approximately) uniformly on the
+#' `layout_on_sphere()` places the vertices (approximately) uniformly on the
 #' surface of a sphere, this is thus a 3d layout. It is not clear however what
 #' \dQuote{uniformly on a sphere} means.
 #'
@@ -746,7 +746,7 @@ layout_on_sphere <- function(graph) {
 
 
 #' @rdname layout_on_sphere
-#' @param ... Passed to \code{layout_on_sphere()}.
+#' @param ... Passed to `layout_on_sphere()`.
 #' @export
 on_sphere <- function(...) layout_spec(layout_on_sphere, ...)
 
@@ -792,7 +792,7 @@ layout_randomly <- function(graph, dim = 2) {
 }
 
 #' @rdname layout_randomly
-#' @param ... Parameters to pass to \code{layout_randomly()}.
+#' @param ... Parameters to pass to `layout_randomly()`.
 #' @export
 randomly <- function(...) layout_spec(layout_randomly, ...)
 
@@ -837,7 +837,7 @@ layout.random <- function(..., params = list()) {
 #' @aliases layout.davidson.harel
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
-#'   is not \code{NULL} then it should be an appropriate matrix of starting
+#'   is not `NULL` then it should be an appropriate matrix of starting
 #'   coordinates.
 #' @param maxiter Number of iterations to perform in the first phase.
 #' @param fineiter Number of iterations in the fine tuning phase.
@@ -859,7 +859,7 @@ layout.random <- function(..., params = list()) {
 #' @seealso \code{\link{layout_with_fr}},
 #' \code{\link{layout_with_kk}} for other layout algorithms.
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
-#' Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
+#' Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 #' @export
 #' @family graph layouts
 #' @examples
@@ -956,7 +956,7 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
 
 
 #' @rdname layout_with_dh
-#' @param ... Passed to \code{layout_with_dh()}.
+#' @param ... Passed to `layout_with_dh()`.
 #' @export
 with_dh <- function(...) layout_spec(layout_with_dh, ...)
 
@@ -976,7 +976,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
-#'   is not \code{NULL} then it should be an appropriate matrix of starting
+#'   is not `NULL` then it should be an appropriate matrix of starting
 #'   coordinates.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
@@ -989,33 +989,33 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #'   grid based implementation of the algorithm. By default (\dQuote{auto}), the
 #'   grid-based implementation is used if the graph has more than one thousand
 #'   vertices.
-#' @param weights A vector giving edge weights. The \code{weight} edge
+#' @param weights A vector giving edge weights. The `weight` edge
 #'   attribute is used by default, if present. If weights are given, then the
 #'   attraction along the edges will be multiplied by the given edge weights.
 #'   This places vertices connected with a highly weighted edge closer to
 #'   each other. Weights must be positive.
-#' @param minx If not \code{NULL}, then it must be a numeric vector that gives
+#' @param minx If not `NULL`, then it must be a numeric vector that gives
 #'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #'   of the vector must match the number of vertices in the graph.
-#' @param maxx Similar to \code{minx}, but gives the upper boundaries.
-#' @param miny Similar to \code{minx}, but gives the lower boundaries of the
+#' @param maxx Similar to `minx`, but gives the upper boundaries.
+#' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
-#' @param maxy Similar to \code{minx}, but gives the upper boundaries of the
+#' @param maxy Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{y} coordinates.
-#' @param minz Similar to \code{minx}, but gives the lower boundaries of the
+#' @param minz Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{z} coordinates.
-#' @param maxz Similar to \code{minx}, but gives the upper boundaries of the
+#' @param maxz Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{z} coordinates.
 #' @param coolexp,maxdelta,area,repulserad These arguments are not supported
 #'   from igraph version 0.8.0 and are ignored (with a warning).
-#' @param maxiter A deprecated synonym of \code{niter}, for compatibility.
+#' @param maxiter A deprecated synonym of `niter`, for compatibility.
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #'   vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
 #' other layout algorithms.
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
-#' Force-directed Placement. \emph{Software - Practice and Experience},
+#' Force-directed Placement. *Software - Practice and Experience*,
 #' 21(11):1129-1164.
 #' @export
 #' @family graph layouts
@@ -1117,7 +1117,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
 
 
 #' @rdname layout_with_fr
-#' @param ... Passed to \code{layout_with_fr()}.
+#' @param ... Passed to `layout_with_fr()`.
 #' @export
 with_fr <- function(...) layout_spec(layout_with_fr, ...)
 
@@ -1138,8 +1138,8 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'
 #' @aliases layout.gem
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not \code{NULL}, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the \code{dim}
+#' @param coords If not `NULL`, then the starting coordinates should be
+#'   given here, in a two or three column matrix, depending on the `dim`
 #'   argument.
 #' @param maxiter The maximum number of iterations to perform. Updating a
 #'   single vertex counts as an iteration.  A reasonable default is 40 * n * n,
@@ -1148,7 +1148,7 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' @param temp.max The maximum allowed local temperature. A reasonable default
 #'   is the number of vertices.
 #' @param temp.min The global temperature at which the algorithm terminates
-#'   (even before reaching \code{maxiter} iterations). A reasonable default is
+#'   (even before reaching `maxiter` iterations). A reasonable default is
 #'   1/10.
 #' @param temp.init Initial local temperature of all vertices. A reasonable
 #'   default is the square root of the number of vertices.
@@ -1158,7 +1158,7 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' @seealso \code{\link{layout_with_fr}},
 #' \code{\link{plot.igraph}}, \code{\link{tkplot}}
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
-#' Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
+#' Layout Algorithm for Undirected Graphs, *Proc. Graph Drawing 1994*,
 #' LNCS 894, pp. 388-403, 1995.
 #' @export
 #' @family graph layouts
@@ -1201,7 +1201,7 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
 
 
 #' @rdname layout_with_gem
-#' @param ... Passed to \code{layout_with_gem()}.
+#' @param ... Passed to `layout_with_gem()`.
 #' @export
 with_gem <- function(...) layout_spec(layout_with_gem, ...)
 
@@ -1214,7 +1214,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' A force-directed layout algorithm, that scales relatively well to large
 #' graphs.
 #'
-#' \code{layout_with_graphopt()} is a port of the graphopt layout algorithm by Michael
+#' `layout_with_graphopt()` is a port of the graphopt layout algorithm by Michael
 #' Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 #' layers was removed (might be added later) and a code was a bit reorganized
 #' to avoid some unnecessary steps is the node charge (see below) is zero.
@@ -1224,7 +1224,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' reaches an equilibrium. (There is no simulated annealing or anything like
 #' that, so a stable fixed point is not guaranteed.)
 #'
-#' See also \url{http://www.schmuhl.org/graphopt/} for the original graphopt.
+#' See also <http://www.schmuhl.org/graphopt/> for the original graphopt.
 #'
 #' @aliases layout.graphopt
 #' @param graph The input graph.
@@ -1234,7 +1234,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #' @param niter Integer scalar, the number of iterations to perform.  Should be
 #'   a couple of hundred in general. If you have a large graph then you might
 #'   want to only do a few iterations and then check the result. If it is not
-#'   good enough you can feed it in again in the \code{start} argument. The
+#'   good enough you can feed it in again in the `start` argument. The
 #'   default value is 500.
 #' @param charge The charge of the vertices, used to calculate electric
 #'   repulsion. The default is 0.001.
@@ -1277,7 +1277,7 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
 
 
 #' @rdname layout_with_graphopt
-#' @param ... Passed to \code{layout_with_graphopt()}.
+#' @param ... Passed to `layout_with_graphopt()`.
 #' @export
 with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 
@@ -1296,38 +1296,38 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' follows truthfully the original publication by Kamada and Kawai now.
 #'
 #' @param graph The input graph. Edge directions are ignored.
-#' @param coords If not \code{NULL}, then the starting coordinates should be
-#'   given here, in a two or three column matrix, depending on the \code{dim}
+#' @param coords If not `NULL`, then the starting coordinates should be
+#'   given here, in a two or three column matrix, depending on the `dim`
 #'   argument.
 #' @param dim Integer scalar, 2 or 3, the dimension of the layout.  Two
 #'   dimensional layouts are places on a plane, three dimensional ones in the 3d
 #'   space.
 #' @param maxiter The maximum number of iterations to perform. The algorithm
-#'   might terminate earlier, see the \code{epsilon} argument.
+#'   might terminate earlier, see the `epsilon` argument.
 #' @param epsilon Numeric scalar, the algorithm terminates, if the maximal
 #'   delta is less than this. (See the reference below for what delta means.) If
-#'   you set this to zero, then the function always performs \code{maxiter}
+#'   you set this to zero, then the function always performs `maxiter`
 #'   iterations.
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #'   Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
 #'   Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
 #'   be positive.
-#' @param minx If not \code{NULL}, then it must be a numeric vector that gives
+#' @param minx If not `NULL`, then it must be a numeric vector that gives
 #'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
 #'   of the vector must match the number of vertices in the graph.
-#' @param maxx Similar to \code{minx}, but gives the upper boundaries.
-#' @param miny Similar to \code{minx}, but gives the lower boundaries of the
+#' @param maxx Similar to `minx`, but gives the upper boundaries.
+#' @param miny Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{y} coordinates.
-#' @param maxy Similar to \code{minx}, but gives the upper boundaries of the
+#' @param maxy Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{y} coordinates.
-#' @param minz Similar to \code{minx}, but gives the lower boundaries of the
+#' @param minz Similar to `minx`, but gives the lower boundaries of the
 #'   \sQuote{z} coordinates.
-#' @param maxz Similar to \code{minx}, but gives the upper boundaries of the
+#' @param maxz Similar to `minx`, but gives the upper boundaries of the
 #'   \sQuote{z} coordinates.
 #' @param niter,sigma,initemp,coolexp These arguments are not supported from
 #'   igraph version 0.8.0 and are ignored (with a warning).
-#' @param start Deprecated synonym for \code{coords}, for compatibility.
+#' @param start Deprecated synonym for `coords`, for compatibility.
 #' @return A numeric matrix with two (dim=2) or three (dim=3) columns, and as
 #'   many rows as the number of vertices, the x, y and potentially z coordinates
 #'   of the vertices.
@@ -1335,7 +1335,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @seealso \code{\link{layout_with_drl}}, \code{\link{plot.igraph}},
 #' \code{\link{tkplot}}
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
-#' Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
+#' Undirected Graphs. *Information Processing Letters*, 31/1, 7--15, 1989.
 #' @export
 #' @family graph layouts
 #' @keywords graphs
@@ -1419,7 +1419,7 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
 
 
 #' @rdname layout_with_kk
-#' @param ... Passed to \code{layout_with_kk()}.
+#' @param ... Passed to `layout_with_kk()`.
 #' @export
 #'
 with_kk <- function(...) layout_spec(layout_with_kk, ...)
@@ -1437,9 +1437,9 @@ layout.kamada.kawai <- function(..., params = list()) {
 #'
 #' A layout generator for larger graphs.
 #'
-#' \code{layout_with_lgl()} is for large connected graphs, it is similar to the layout
+#' `layout_with_lgl()` is for large connected graphs, it is similar to the layout
 #' generator of the Large Graph Layout software
-#' (\url{https://lgl.sourceforge.net/}).
+#' (<https://lgl.sourceforge.net/>).
 #'
 #' @param graph The input graph
 #' @param maxiter The maximum number of iterations to perform (150).
@@ -1448,12 +1448,12 @@ layout.kamada.kawai <- function(..., params = list()) {
 #' @param area The area of the surface on which the vertices are placed (square
 #'   of the number of vertices).
 #' @param coolexp The cooling exponent of the simulated annealing (1.5).
-#' @param repulserad Cancellation radius for the repulsion (the \code{area}
+#' @param repulserad Cancellation radius for the repulsion (the `area`
 #'   times the number of vertices).
 #' @param cellsize The size of the cells for the grid. When calculating the
 #'   repulsion forces between vertices only vertices in the same or neighboring
 #'   grid cells are taken into account (the fourth root of the number of
-#'   \code{area}.
+#'   `area`.
 #' @param root The id of the vertex to place at the middle of the layout. The
 #'   default value is -1 which means that a random vertex is selected.
 #' @return A numeric matrix with two columns and as many rows as vertices.
@@ -1484,7 +1484,7 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
 
 
 #' @rdname layout_with_lgl
-#' @param ... Passed to \code{layout_with_lgl()}.
+#' @param ... Passed to `layout_with_lgl()`.
 #' @export
 with_lgl <- function(...) layout_spec(layout_with_lgl, ...)
 
@@ -1503,13 +1503,13 @@ layout.lgl <- function(..., params = list()) {
 #' Multidimensional scaling of some distance matrix defined on the vertices of
 #' a graph.
 #'
-#' \code{layout_with_mds()} uses metric multidimensional scaling for generating the
+#' `layout_with_mds()` uses metric multidimensional scaling for generating the
 #' coordinates. Multidimensional scaling aims to place points from a higher
 #' dimensional space in a (typically) 2 dimensional plane, so that the distance
 #' between the points are kept as much as this is possible.
 #'
 #' By default igraph uses the shortest path matrix as the distances between the
-#' nodes, but the user can override this via the \code{dist} argument.
+#' nodes, but the user can override this via the `dist` argument.
 #'
 #' This function generates the layout separately for each graph component and
 #' then merges them via \code{\link{merge_coords}}.
@@ -1517,19 +1517,19 @@ layout.lgl <- function(..., params = list()) {
 #' @aliases layout.mds
 #' @param graph The input graph.
 #' @param dist The distance matrix for the multidimensional scaling.  If
-#'   \code{NULL} (the default), then the unweighted shortest path matrix is used.
-#' @param dim \code{layout_with_mds()} supports dimensions up to the number of nodes
+#'   `NULL` (the default), then the unweighted shortest path matrix is used.
+#' @param dim `layout_with_mds()` supports dimensions up to the number of nodes
 #'   minus one, but only if the graph is connected; for unconnected graphs, the
-#'   only possible values is 2. This is because \code{merge_coords()} only works in
+#'   only possible values is 2. This is because `merge_coords()` only works in
 #'   2D.
 #' @param options This is currently ignored, as ARPACK is not used any more for
 #'   solving the eigenproblem
-#' @return A numeric matrix with \code{dim} columns.
+#' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{layout}}, \code{\link{plot.igraph}}
-#' @references Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional
-#' Scaling}.  Second edition. Chapman and Hall.
+#' @references Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional
+#' Scaling*.  Second edition. Chapman and Hall.
 #' @export
 #' @family graph layouts
 #' @keywords graphs
@@ -1556,7 +1556,7 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
 
 
 #' @rdname layout_with_mds
-#' @param ... Passed to \code{layout_with_mds()}.
+#' @param ... Passed to `layout_with_mds()`.
 #' @export
 with_mds <- function(...) layout_spec(layout_with_mds, ...)
 
@@ -1591,17 +1591,17 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'
 #' @aliases layout.sugiyama
 #' @param graph The input graph.
-#' @param layers A numeric vector or \code{NULL}. If not \code{NULL}, then it
+#' @param layers A numeric vector or `NULL`. If not `NULL`, then it
 #'   should specify the layer index of the vertices. Layers are numbered from
-#'   one. If \code{NULL}, then igraph calculates the layers automatically.
+#'   one. If `NULL`, then igraph calculates the layers automatically.
 #' @param hgap Real scalar, the minimum horizontal gap between vertices in the
 #'   same layer.
 #' @param vgap Real scalar, the distance between layers.
 #' @param maxiter Integer scalar, the maximum number of iterations in the
 #'   crossing minimization stage. 100 is a reasonable default; if you feel that
 #'   you have too many edge crossings, increase this.
-#' @param weights Optional edge weight vector. If \code{NULL}, then the
-#'   'weight' edge attribute is used, if there is one. Supply \code{NA} here and
+#' @param weights Optional edge weight vector. If `NULL`, then the
+#'   'weight' edge attribute is used, if there is one. Supply `NA` here and
 #'   igraph ignores the edge weights. These are used only if the graph
 #'   contains cycles; igraph will tend to reverse edges with smaller weights
 #'   when breaking the cycles.
@@ -1892,7 +1892,7 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
 
 
 #' @rdname layout_with_sugiyama
-#' @param ... Passed to \code{layout_with_sugiyama()}.
+#' @param ... Passed to `layout_with_sugiyama()`.
 #' @export
 with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 
@@ -1904,12 +1904,12 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #'
 #' Place several graphs on the same layout
 #'
-#' \code{merge_coords()} takes a list of graphs and a list of coordinates and
+#' `merge_coords()` takes a list of graphs and a list of coordinates and
 #' places the graphs in a common layout. The method to use is chosen via the
-#' \code{method} parameter, although right now only the \code{dla} method is
+#' `method` parameter, although right now only the `dla` method is
 #' implemented.
 #'
-#' The \code{dla} method covers the graph with circles.  Then it sorts the
+#' The `dla` method covers the graph with circles.  Then it sorts the
 #' graphs based on the number of vertices first and places the largest graph at
 #' the center of the layout. Then the other graphs are placed in decreasing
 #' order via a DLA (diffision limited aggregation) algorithm: the graph is
@@ -1917,18 +1917,18 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' conducted until the graph walks into the larger graphs already placed or
 #' walks too far from the center of the layout.
 #'
-#' The \code{layout_components()} function disassembles the graph first into
-#' maximal connected components and calls the supplied \code{layout} function
+#' The `layout_components()` function disassembles the graph first into
+#' maximal connected components and calls the supplied `layout` function
 #' for each component separately. Finally it merges the layouts via calling
-#' \code{merge_coords()}.
+#' `merge_coords()`.
 #'
 #' @aliases layout.merge piecewise.layout
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
 #' @param method Character constant giving the method to use. Right now only
-#'   \code{dla} is implemented.
+#'   `dla` is implemented.
 #' @param layout A function object, the layout function to use.
-#' @param \dots Additional arguments to pass to the \code{layout} layout
+#' @param \dots Additional arguments to pass to the `layout` layout
 #'   function.
 #' @return A matrix with two columns and as many lines as the total number of
 #'   vertices in the graphs.
@@ -1971,19 +1971,19 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #'
 #' Rescale coordinates linearly to be within given bounds.
 #'
-#' \code{norm_coords()} normalizes a layout, it linearly transforms each
+#' `norm_coords()` normalizes a layout, it linearly transforms each
 #' coordinate separately to fit into the given limits.
 #'
 #' @aliases layout.norm
 #' @param layout A matrix with two or three columns, the layout to normalize.
 #' @param xmin,xmax The limits for the first coordinate, if one of them or both
-#'   are \code{NULL} then no normalization is performed along this direction.
+#'   are `NULL` then no normalization is performed along this direction.
 #' @param ymin,ymax The limits for the second coordinate, if one of them or
-#'   both are \code{NULL} then no normalization is performed along this
+#'   both are `NULL` then no normalization is performed along this
 #'   direction.
 #' @param zmin,zmax The limits for the third coordinate, if one of them or both
-#'   are \code{NULL} then no normalization is performed along this direction.
-#' @return A numeric matrix with at the same dimension as \code{layout}.
+#'   are `NULL` then no normalization is performed along this direction.
+#' @return A numeric matrix with at the same dimension as `layout`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @family graph layouts

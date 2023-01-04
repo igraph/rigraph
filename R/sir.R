@@ -33,14 +33,14 @@
 #' become infected with a rate that depends on their number of infected
 #' neighbors. Infected people become recovered with a constant rate.
 #'
-#' The function \code{sir()} simulates the model.
+#' The function `sir()` simulates the model.
 #'
-#' Function \code{time_bins()} bins the simulation steps, using the
+#' Function `time_bins()` bins the simulation steps, using the
 #' Freedman-Diaconis heuristics to determine the bin width.
 #'
-#' Function \code{median} and \code{quantile} calculate the median and
+#' Function `median` and `quantile` calculate the median and
 #' quantiles of the results, respectively, in bins calculated with
-#' \code{time_bins()}.
+#' `time_bins()`.
 #'
 #' @aliases median.sir quantile.sir time_bins time_bins.sir sir
 #' @param graph The graph to run the model on. If directed, then edge
@@ -53,20 +53,20 @@
 #'   individual. Formally, this is the rate parameter of an exponential
 #'   distribution.
 #' @param no.sim Integer scalar, the number simulation runs to perform.
-#' @param x A \code{sir} object, returned by the \code{sir()} function.
+#' @param x A `sir` object, returned by the `sir()` function.
 #' @param middle Logical scalar, whether to return the middle of the time bins,
 #'   or the boundaries.
-#' @param na.rm Logical scalar, whether to ignore \code{NA} values.  \code{sir}
-#'   objects do not contain any \code{NA} values currently, so this argument is
+#' @param na.rm Logical scalar, whether to ignore `NA` values.  `sir`
+#'   objects do not contain any `NA` values currently, so this argument is
 #'   effectively ignored.
 #' @param comp Character scalar. The component to calculate the quantile of.
-#'   \code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands
+#'   `NI` is infected agents, `NS` is susceptibles, `NR` stands
 #'   for recovered.
 #' @param prob Numeric vector of probabilities, in \[0,1\], they specify the
 #'   quantiles to calculate.
 #' @param \dots Additional arguments, ignored currently.
-#' @return For \code{sir()} the results are returned in an object of class
-#'   \sQuote{\code{sir}}, which is a list, with one element for each simulation.
+#' @return For `sir()` the results are returned in an object of class
+#'   \sQuote{`sir`}, which is a list, with one element for each simulation.
 #'   Each simulation is itself a list with the following elements. They are all
 #'   numeric vectors, with equal length: \describe{
 #'   \item{times}{The times of the events.}
@@ -77,18 +77,18 @@
 #'     time.}
 #'   }
 #'
-#'   Function \code{time_bins()} returns a numeric vector, the middle or the
-#'   boundaries of the time bins, depending on the \code{middle} argument.
+#'   Function `time_bins()` returns a numeric vector, the middle or the
+#'   boundaries of the time bins, depending on the `middle` argument.
 #'
-#'   \code{median} returns a list of three named numeric vectors, \code{NS},
-#'   \code{NI} and \code{NR}. The names within the vectors are created from the
+#'   `median` returns a list of three named numeric vectors, `NS`,
+#'   `NI` and `NR`. The names within the vectors are created from the
 #'   time bins.
 #'
-#'   \code{quantile} returns the same vector as \code{median} (but only one, the
+#'   `quantile` returns the same vector as `median` (but only one, the
 #'   one requested) if only one quantile is requested. If multiple quantiles are
 #'   requested, then a list of these vectors is returned, one for each quantile.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}. Eric Kolaczyk
-#' (\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
+#' (<http://math.bu.edu/people/kolaczyk/>) wrote the initial version in R.
 #' @seealso \code{\link{plot.sir}} to conveniently plot the results
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.

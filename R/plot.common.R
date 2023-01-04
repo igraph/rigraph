@@ -179,13 +179,13 @@ i.postprocess.layout <- function(maybe_layout) {
 #' solution is to bend the edges, with diffenent curvature, so that all of them
 #' are visible.
 #'
-#' \code{curve_multiple()} calculates the optimal \code{edge.curved} vector for
+#' `curve_multiple()` calculates the optimal `edge.curved` vector for
 #' plotting a graph with multiple edges, so that all edges are visible.
 #'
 #' @aliases autocurve.edges
 #' @param graph The input graph.
 #' @param start The curvature at the two extreme edges. All edges will have a
-#'   curvature between \code{-start} and \code{start}, spaced equally.
+#'   curvature between `-start` and `start`, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{igraph.plotting}} for all plotting parameters,

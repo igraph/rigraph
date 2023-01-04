@@ -442,50 +442,50 @@ print_all <- function(object, ...) {
 #' These functions attempt to print a graph to the terminal in a human readable
 #' form.
 #'
-#' \code{summary.igraph} prints the number of vertices, edges and whether the
+#' `summary.igraph` prints the number of vertices, edges and whether the
 #' graph is directed.
 #'
-#' \code{print_all()} prints the same information, and also lists the edges, and
+#' `print_all()` prints the same information, and also lists the edges, and
 #' optionally graph, vertex and/or edge attributes.
 #'
-#' \code{print.igraph()} behaves either as \code{summary.igraph} or
-#' \code{print_all()} depending on the \code{full} argument. See also the
+#' `print.igraph()` behaves either as `summary.igraph` or
+#' `print_all()` depending on the `full` argument. See also the
 #' \sQuote{print.full} igraph option and \code{\link{igraph_opt}}.
 #'
-#' The graph summary printed by \code{summary.igraph} (and \code{print.igraph()}
-#' and \code{print_all()}) consists one or more lines. The first line contains
+#' The graph summary printed by `summary.igraph` (and `print.igraph()`
+#' and `print_all()`) consists one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
 #' Here is an example, a small star graph with weighted directed edges and named
 #' vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 #'     + attr: name (g/c), mode (g/c), center (g/n), name (v/c),
 #'       weight (e/n) }
 #' The first line always
-#' starts with \code{IGRAPH}, showing you that the object is an igraph graph.
+#' starts with `IGRAPH`, showing you that the object is an igraph graph.
 #' Then a seven character code is printed, this the first seven characters
 #' of the unique id of the graph. See \code{\link{graph_id}} for more.
 #' Then a four letter long code string is printed. The first letter
-#' distinguishes between directed (\sQuote{\code{D}}) and undirected
-#' (\sQuote{\code{U}}) graphs. The second letter is \sQuote{\code{N}} for named
-#' graphs, i.e. graphs with the \code{name} vertex attribute set. The third
-#' letter is \sQuote{\code{W}} for weighted graphs, i.e. graphs with the
-#' \code{weight} edge attribute set. The fourth letter is \sQuote{\code{B}} for
-#' bipartite graphs, i.e. for graphs with the \code{type} vertex attribute set.
+#' distinguishes between directed (\sQuote{`D`}) and undirected
+#' (\sQuote{`U`}) graphs. The second letter is \sQuote{`N`} for named
+#' graphs, i.e. graphs with the `name` vertex attribute set. The third
+#' letter is \sQuote{`W`} for weighted graphs, i.e. graphs with the
+#' `weight` edge attribute set. The fourth letter is \sQuote{`B`} for
+#' bipartite graphs, i.e. for graphs with the `type` vertex attribute set.
 #'
 #' Then, after two dashes, the name of the graph is printed, if it has one,
-#' i.e. if the \code{name} graph attribute is set.
+#' i.e. if the `name` graph attribute is set.
 #'
 #' From the second line, the attributes of the graph are listed, separated by a
 #' comma. After the attribute names, the kind of the attribute -- graph
-#' (\sQuote{\code{g}}), vertex (\sQuote{\code{v}}) or edge (\sQuote{\code{e}})
+#' (\sQuote{`g`}), vertex (\sQuote{`v`}) or edge (\sQuote{`e`})
 #' -- is denoted, and the type of the attribute as well, character
-#' (\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical
-#' (\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
+#' (\sQuote{`c`}), numeric (\sQuote{`n`}), logical
+#' (\sQuote{`l`}), or other (\sQuote{`x`}).
 #'
-#' As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
-#' \code{max.print} option, see \code{\link[base]{options}} for details.
+#' As of igraph 0.4 `print_all()` and `print.igraph()` use the
+#' `max.print` option, see \code{\link[base]{options}} for details.
 #'
-#' As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
-#' \code{print_all()}.
+#' As of igraph 1.1.1, the `str.igraph` function is defunct, use
+#' `print_all()`.
 #'
 #' @aliases print.igraph print_all summary.igraph str.igraph
 #' @param x The graph to print.
@@ -496,7 +496,7 @@ print_all <- function(object, ...) {
 #'   attributes.
 #' @param edge.attributes Logical constant, whether to print edge attributes.
 #' @param names Logical constant, whether to print symbolic vertex names (ie.
-#'   the \code{name} vertex attribute) or vertex ids.
+#'   the `name` vertex attribute) or vertex ids.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.
 #' @param id Whether to print the graph ID.

@@ -23,19 +23,19 @@
 
 #' Running mean of a time series
 #'
-#' \code{running_mean()} calculates the running mean in a vector with the given
+#' `running_mean()` calculates the running mean in a vector with the given
 #' bin width.
 #'
-#' The running mean of \code{v} is a \code{w} vector of length
-#' \code{length(v)-binwidth+1}. The first element of \code{w} id the average of
-#' the first \code{binwidth} elements of \code{v}, the second element of
-#' \code{w} is the average of elements \code{2:(binwidth+1)}, etc.
+#' The running mean of `v` is a `w` vector of length
+#' `length(v)-binwidth+1`. The first element of `w` id the average of
+#' the first `binwidth` elements of `v`, the second element of
+#' `w` is the average of elements `2:(binwidth+1)`, etc.
 #'
 #' @aliases running.mean
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
-#'   ie. smaller than the length of \code{v}.
-#' @return A numeric vector of length \code{length(v)-binwidth+1}
+#'   ie. smaller than the length of `v`.
+#' @return A numeric vector of length `length(v)-binwidth+1`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords manip
@@ -61,9 +61,9 @@ running_mean <- function(v, binwidth) {
 #' This function provides a very efficient way to pull an integer random sample
 #' sequence from an integer interval.
 #'
-#' The algorithm runs in \code{O(length)} expected time, even if
-#' \code{high-low} is big. It is much faster (but of course less general) than
-#' the builtin \code{sample} function of R.
+#' The algorithm runs in `O(length)` expected time, even if
+#' `high-low` is big. It is much faster (but of course less general) than
+#' the builtin `sample` function of R.
 #'
 #' @aliases igraph.sample
 #' @param low The lower limit of the interval (inclusive).
@@ -72,7 +72,7 @@ running_mean <- function(v, binwidth) {
 #' @return An increasing numeric vector containing integers, the sample.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Jeffrey Scott Vitter: An Efficient Algorithm for Sequential
-#' Random Sampling, \emph{ACM Transactions on Mathematical Software}, 13/1,
+#' Random Sampling, *ACM Transactions on Mathematical Software*, 13/1,
 #' 58--67.
 #' @export
 #' @keywords datagen
@@ -95,10 +95,10 @@ sample_seq <- function(low, high, length) {
 
 #' Common handler for vertex type arguments in igraph functions
 #'
-#' This function takes the \code{types} and \code{graph} arguments from a
+#' This function takes the `types` and `graph` arguments from a
 #' public igraph function call and validates the vertex type vector.
 #'
-#' When the provided vertex types are NULL and the graph has a \code{types}
+#' When the provided vertex types are NULL and the graph has a `types`
 #' vertex attribute, then the value of this vertex attribute will be used as
 #' vertex types. Non-logical vertex type vectors are coerced into logical
 #' vectors after printing a warning.

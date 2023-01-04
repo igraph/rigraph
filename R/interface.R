@@ -27,11 +27,11 @@
 #'
 #' The new edges are given as a vertex sequence, e.g. internal
 #' numeric vertex ids, or vertex names. The first edge points from
-#' \code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]}
-#' to \code{edges[4]}, etc.
+#' `edges[1]` to `edges[2]`, the second from `edges[3]`
+#' to `edges[4]`, etc.
 #'
 #' If attributes are supplied, and they are not present in the graph,
-#' their values for the original edges of the graph are set to \code{NA}.
+#' their values for the original edges of the graph are set to `NA`.
 #'
 #' @param graph The input graph
 #' @param edges The edges to add, a vertex sequence with even number
@@ -96,7 +96,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #'
 #' If attributes are supplied, and they are not present in the graph,
 #' their values for the original vertices of the graph are set to
-#' \code{NA}.
+#' `NA`.
 #'
 #' @param graph The input graph.
 #' @param nv The number of vertices to add.
@@ -162,7 +162,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' @param edges The edges to remove, specified as an edge sequence. Typically
 #'   this is either a numeric vector containing edge IDs, or a character vector
 #'   containing the IDs or names of the source and target vertices, separated by
-#'   \code{|}
+#'   `|`
 #' @return The graph, with the edges removed.
 #'
 #' @aliases delete.edges
@@ -223,7 +223,7 @@ delete_vertices <- function(graph, v) {
 
 #' The size of the graph (number of edges)
 #'
-#' \code{ecount()} is an alias of this function.
+#' `ecount()` is an alias of this function.
 #'
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
@@ -426,15 +426,15 @@ get.edges <- function(graph, es) {
 #' @param directed Logical scalar, whether to consider edge directions in
 #'   directed graphs. This argument is ignored for undirected graphs.
 #' @param error Logical scalar, whether to report an error if an edge is not
-#'   found in the graph. If \code{FALSE}, then no error is reported, and zero is
+#'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
 #' @param multi Logical scalar, whether to handle multiple edges properly. If
-#'   \code{FALSE}, and a pair of vertices are given twice (or more), then always
-#'   the same edge id is reported back for them. If \code{TRUE}, then the edge
+#'   `FALSE`, and a pair of vertices are given twice (or more), then always
+#'   the same edge id is reported back for them. If `TRUE`, then the edge
 #'   ids of multiple edges are correctly reported.
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
-#'   zero is reported. (If the \code{error} argument is \code{FALSE}.)
+#'   zero is reported. (If the `error` argument is `FALSE`.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @family structural queries
@@ -476,7 +476,7 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 
 #' Order (number of vertices) of a graph
 #'
-#' \code{vcount()} is an alias of this function.
+#' `vcount()` is an alias of this function.
 #'
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.

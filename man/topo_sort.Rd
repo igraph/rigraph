@@ -13,7 +13,7 @@ topo_sort(graph, mode = c("out", "all", "in"))
 \item{mode}{Specifies how to use the direction of the edges.  For
 \dQuote{\code{out}}, the sorting order ensures that each node comes before
 all nodes to which it has edges, so nodes with no incoming edges go first.
-For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
+For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all
 nodes from which it receives edges. Nodes with no outgoing edges go first.}
 }
 \value{

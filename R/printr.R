@@ -3,22 +3,22 @@
 #'
 #' A printer callback function is a function can performs the actual
 #' printing. It has a number of subcommands, that are called by
-#' the \code{printer} package, in a form \preformatted{
+#' the `printer` package, in a form \preformatted{
 #'     printer_callback("subcommand", argument1, argument2, ...)
 #' } See the examples below.
 #'
 #' The subcommands:
 #'
 #' \describe{
-#'   \item{\code{length}}{The length of the data to print, the number of
+#'   \item{`length`}{The length of the data to print, the number of
 #'     items, in natural units. E.g. for a list of objects, it is the
 #'     number of objects.}
-#'   \item{\code{min_width}}{TODO}
-#'   \item{\code{width}}{Width of one item, if \code{no} items will be
+#'   \item{`min_width`}{TODO}
+#'   \item{`width`}{Width of one item, if `no` items will be
 #'     printed. TODO}
-#'   \item{\code{print}}{Argument: \code{no}. Do the actual printing,
-#'     print \code{no} items.}
-#'   \item{\code{done}}{TODO}
+#'   \item{`print`}{Argument: `no`. Do the actual printing,
+#'     print `no` items.}
+#'   \item{`done`}{TODO}
 #' }
 #'
 #' @param fun The function to use as a printer callback function.
@@ -57,17 +57,17 @@ print_head_foot <- function(head_foot) {
 #'
 #' @param x The object to print, or a callback function. See
 #'   \code{\link{printer_callback}} for details.
-#' @param max_lines Maximum number of lines to print, \emph{not}
+#' @param max_lines Maximum number of lines to print, *not*
 #'   including the header and the footer.
 #' @param header The header, if a function, then it will be called,
-#'   otherwise printed using \code{cat}.
+#'   otherwise printed using `cat`.
 #' @param footer The footer, if a function, then it will be called,
-#'   otherwise printed using \code{cat}.
+#'   otherwise printed using `cat`.
 #' @param omitted_footer Footer that is only printed if anything
 #'   is omitted from the printout. If a function, then it will be called,
-#'   otherwise printed using \code{cat}.
-#' @param ... Extra arguments to pass to \code{print()}.
-#' @return \code{x}, invisibly.
+#'   otherwise printed using `cat`.
+#' @param ... Extra arguments to pass to `print()`.
+#' @return `x`, invisibly.
 #'
 #' @export
 
@@ -153,7 +153,7 @@ head_print_callback <- function(x, max_lines, header, footer,
 #' @param ... Passed to the printing function.
 #' @param .indent Character scalar, indent the printout with this.
 #' @param .printer The printing function, defaults to [print].
-#' @return The first element in \code{...}, invisibly.
+#' @return The first element in `...`, invisibly.
 #'
 #' @export
 

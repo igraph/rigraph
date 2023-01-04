@@ -25,15 +25,15 @@
 #'
 #' Runs all package tests.
 #'
-#' The \code{testthat} package is needed to run all tests. The location tests
-#' themselves can be extracted from the package via \code{system.file("tests",
-#' package="igraph")}.
+#' The `testthat` package is needed to run all tests. The location tests
+#' themselves can be extracted from the package via `system.file("tests",
+#' package="igraph")`.
 #'
-#' This function simply calls the \code{test_dir} function from the
-#' \code{testthat} package on the test directory.
+#' This function simply calls the `test_dir` function from the
+#' `testthat` package on the test directory.
 #'
 #' @aliases igraphtest
-#' @return Whatever is returned by \code{test_dir} from the \code{testthat}
+#' @return Whatever is returned by `test_dir` from the `testthat`
 #'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs

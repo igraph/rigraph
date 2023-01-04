@@ -15,9 +15,9 @@ solve_LSAP <- function(x, maximum = FALSE) {
 
 #' Match Graphs given a seeding of vertex correspondences
 #'
-#' Given two adjacency matrices \code{A} and \code{B} of the same size, match
-#' the two graphs with the help of \code{m} seed vertex pairs which correspond
-#' to the first \code{m} rows (and columns) of the adjacency matrices.
+#' Given two adjacency matrices `A` and `B` of the same size, match
+#' the two graphs with the help of `m` seed vertex pairs which correspond
+#' to the first `m` rows (and columns) of the adjacency matrices.
 #'
 #' The approximate graph matching problem is to find a bijection between the
 #' vertices of two graphs , such that the number of edge disagreements between
@@ -27,13 +27,13 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #' permutation matrix that permutes the rows and columns of the adjacency
 #' matrix of the second graph.
 #'
-#' It is assumed that for the two supplied adjacency matrices \code{A} and
-#' \code{B}, both of size \eqn{n\times n}{n*n}, the first \eqn{m} rows(and
-#' columns) of \code{A} and \code{B} correspond to the same vertices in both
+#' It is assumed that for the two supplied adjacency matrices `A` and
+#' `B`, both of size \eqn{n\times n}{n*n}, the first \eqn{m} rows(and
+#' columns) of `A` and `B` correspond to the same vertices in both
 #' graphs. That is, the \eqn{n \times n}{n*n} permutation matrix that defines
 #' the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 #' (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
-#' identity matrix \eqn{I_{m}}. The function \code{match_vertices()} estimates
+#' identity matrix \eqn{I_{m}}. The function `match_vertices()` estimates
 #' the permutation matrix \eqn{P} via an optimization algorithm based on the
 #' Frank-Wolfe algorithm.
 #'
@@ -42,23 +42,23 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #' @aliases match_vertices seeded.graph.match
 #' @param A a numeric matrix, the adjacency matrix of the first graph
 #' @param B a numeric matrix, the adjacency matrix of the second graph
-#' @param m The number of seeds. The first \code{m} vertices of both graphs are
+#' @param m The number of seeds. The first `m` vertices of both graphs are
 #'   matched.
 #' @param start a numeric matrix, the permutation matrix estimate is
-#'   initialized with \code{start}
+#'   initialized with `start`
 #' @param iteration The number of iterations for the Frank-Wolfe algorithm
 #' @return A numeric matrix which is the permutation matrix that determines the
-#'   bijection between the graphs of \code{A} and \code{B}
-#' @author Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}
+#'   bijection between the graphs of `A` and `B`
+#' @author Vince Lyzinski <https://www.ams.jhu.edu/~lyzinski/>
 #' @seealso
 #' \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
 #' @references Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
 #' G., Harley, E. T., Fishkind, D. E.,Vogelstein, R. J., Priebe, C. E. (2011).
 #' Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.
-#' Online: \url{https://arxiv.org/abs/1112.5507}
+#' Online: <https://arxiv.org/abs/1112.5507>
 #'
 #' Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
-#' Online: \url{https://arxiv.org/abs/1209.0367}
+#' Online: <https://arxiv.org/abs/1209.0367>
 #' @keywords graphs
 #' @examples
 #'

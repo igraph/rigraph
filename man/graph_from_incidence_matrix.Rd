@@ -27,7 +27,7 @@ from the \code{Matrix} package.}
 directed graphs, ignored for undirected graphs. If \sQuote{\code{out}}, then
 edges go from vertices of the first kind (corresponding to rows in the
 incidence matrix) to vertices of the second kind (columns in the incidence
-matrix). If \sQuote{\code{in}}, then the opposite direction is used. If
+matrix). If \sQuote{\verb{in}}, then the opposite direction is used. If
 \sQuote{\code{all}} or \sQuote{\code{total}}, then mutual edges are created.}
 
 \item{multiple}{Logical scalar, specifies how to interpret the matrix

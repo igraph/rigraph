@@ -72,11 +72,11 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' directedness, and the two graphs must also have identical graph, vertex and
 #' edge attributes.
 #'
-#' This is similar to \code{identical} in the \code{base} package,
+#' This is similar to `identical` in the `base` package,
 #' but it ignores the mutable piece of igraph objects; those might be
 #' different even if the two graphs are identical.
 #'
-#' Attribute comparison can be turned off with the \code{attrs} parameter if
+#' Attribute comparison can be turned off with the `attrs` parameter if
 #' the attributes of the two graphs are allowed to be different.
 #'
 #' @param g1,g2 The two graphs
@@ -173,7 +173,7 @@ set_complete_iterator <- function(x, value = TRUE) {
 #' selecting a subset of the vertices based on graph structure, or vertex
 #' attributes.
 #'
-#' A vertex sequence is most often created by the \code{V()} function. The
+#' A vertex sequence is most often created by the `V()` function. The
 #' result of this includes all vertices in increasing vertex id order. A
 #' vertex sequence can be indexed by a numeric vector, just like a regular
 #' R vector. See \code{\link{[.igraph.vs}} and additional links to other
@@ -264,9 +264,9 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #' the specific edges of that graph, and cannot be used together with
 #' another graph.
 #'
-#' An edge sequence is most often created by the \code{E()} function. The
+#' An edge sequence is most often created by the `E()` function. The
 #' result includes edges in increasing edge id order by default (if. none
-#' of the \code{P} and \code{path} arguments are used). An edge
+#' of the `P` and `path` arguments are used). An edge
 #' sequence can be indexed by a numeric vector, just like a regular R
 #' vector. See links to other edge sequence operations below.
 #'
@@ -288,7 +288,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #'   Note that this only works reliable for simple graphs. If the graph
 #'   has multiple edges, one of them will be chosen arbitrarily to
 #'   be included in the edge sequence.
-#' @param directed Whether to consider edge directions in the \code{P}
+#' @param directed Whether to consider edge directions in the `P`
 #'   argument, for directed graphs.
 #' @return An edge sequence of the graph.
 #'
@@ -370,9 +370,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #' @section Multiple indices:
 #' When using multiple indices within the bracket, all of them
 #' are evaluated independently, and then the results are concatenated
-#' using the \code{c()} function (except for the \code{na_ok} argument,
-#' which is special an must be named. E.g. \code{V(g)[1, 2, .nei(1)]}
-#' is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
+#' using the `c()` function (except for the `na_ok` argument,
+#' which is special an must be named. E.g. `V(g)[1, 2, .nei(1)]`
+#' is equivalent to `c(V(g)[1], V(g)[2], V(g)[.nei(1)])`.
 #'
 #' @section Index types:
 #' Vertex sequences can be indexed with positive numeric vectors,
@@ -386,41 +386,41 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'     as indexing a regular R atomic vector.
 #'   \item When indexed with a logical vector, the lengths of the vertex
 #'     sequence and the index must match, and the vertices for which the
-#'     index is \code{TRUE} are selected.
+#'     index is `TRUE` are selected.
 #'   \item Named graphs can be indexed with character vectors,
 #'     to select vertices with the given names.
 #' }
 #'
 #' @section Vertex attributes:
 #' When indexing vertex sequences, vertex attributes can be referred
-#' to simply by using their names. E.g. if a graph has a \code{name} vertex
-#' attribute, then \code{V(g)[name == "foo"]} is equivalent to
-#' \code{V(g)[V(g)$name == "foo"]}. See more examples below. Note that attribute
+#' to simply by using their names. E.g. if a graph has a `name` vertex
+#' attribute, then `V(g)[name == "foo"]` is equivalent to
+#' `V(g)[V(g)$name == "foo"]`. See more examples below. Note that attribute
 #' names mask the names of variables present in the calling environment; if
 #' you need to look up a variable and you do not want a similarly named
-#' vertex attribute to mask it, use the \code{.env} pronoun to perform the
+#' vertex attribute to mask it, use the `.env` pronoun to perform the
 #' name lookup in the calling environment. In other words, use
-#' \code{V(g)[.env$name == "foo"]} to make sure that \code{name} is looked up
+#' `V(g)[.env$name == "foo"]` to make sure that `name` is looked up
 #' from the calling environment even if there is a vertex attribute with the
-#' same name. Similarly, you can use \code{.data} to match attribute names only.
+#' same name. Similarly, you can use `.data` to match attribute names only.
 #'
 #' @section Special functions:
 #' There are some special igraph functions that can be used only
 #' in expressions indexing vertex sequences: \describe{
-#'   \item{\code{.nei}}{takes a vertex sequence as its argument
-#'     and selects neighbors of these vertices. An optional \code{mode}
-#'     argument can be used to select successors (\code{mode="out"}), or
-#'     predecessors (\code{mode="in"}) in directed graphs.}
-#'   \item{\code{.inc}}{Takes an edge sequence as an argument, and
+#'   \item{`.nei`}{takes a vertex sequence as its argument
+#'     and selects neighbors of these vertices. An optional `mode`
+#'     argument can be used to select successors (`mode="out"`), or
+#'     predecessors (`mode="in"`) in directed graphs.}
+#'   \item{`.inc`}{Takes an edge sequence as an argument, and
 #'     selects vertices that have at least one incident edge in this
 #'     edge sequence.}
-#'   \item{\code{.from}}{Similar to \code{.inc}, but only considers the
+#'   \item{`.from`}{Similar to `.inc`, but only considers the
 #'     tails of the edges.}
-#'   \item{\code{.to}}{Similar to \code{.inc}, but only considers the
+#'   \item{`.to`}{Similar to `.inc`, but only considers the
 #'     heads of the edges.}
-#'   \item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
-#'     \code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
-#'     \code{.nei(v, mode = "out")}.
+#'   \item{`.innei`, `.outnei`}{`.innei(v)` is a shorthand for
+#'     `.nei(v, mode = "in")`, and `.outnei(v)` is a shorthand for
+#'     `.nei(v, mode = "out")`.
 #'   }
 #' }
 #' Note that multiple special functions can be used together, or with
@@ -429,7 +429,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
 #'
 #' @param x A vertex sequence.
 #' @param ... Indices, see details below.
-#' @param na_ok Whether it is OK to have \code{NA}s in the vertex
+#' @param na_ok Whether it is OK to have `NA`s in the vertex
 #'   sequence.
 #' @return Another vertex sequence, referring to the same graph.
 #'
@@ -672,7 +672,7 @@ set_single_index <- function(x, value = TRUE) {
 #' See \code{\link{[.igraph.vs}} for more about indexing vertex sequences.
 #'
 #' @param x A vertex sequence.
-#' @param ... Additional arguments, passed to \code{[}.
+#' @param ... Additional arguments, passed to `[`.
 #' @return The double bracket operator returns another vertex sequence,
 #'   with meta-data (attribute) printing turned on. See details below.
 #'
@@ -708,7 +708,7 @@ set_single_index <- function(x, value = TRUE) {
 #' See \code{\link{[.igraph.es}} for more about indexing edge sequences.
 #'
 #' @param x An edge sequence.
-#' @param ... Additional arguments, passed to \code{[}.
+#' @param ... Additional arguments, passed to `[`.
 #' @return Another edge sequence, with metadata printing turned on.
 #'   See details below.
 #'
@@ -757,8 +757,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @section Multiple indices:
 #' When using multiple indices within the bracket, all of them
 #' are evaluated independently, and then the results are concatenated
-#' using the \code{c()} function. E.g. \code{E(g)[1, 2, .inc(1)]}
-#' is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
+#' using the `c()` function. E.g. `E(g)[1, 2, .inc(1)]`
+#' is equivalent to `c(E(g)[1], E(g)[2], E(g)[.inc(1)])`.
 #'
 #' @section Index types:
 #' Edge sequences can be indexed with positive numeric vectors,
@@ -772,50 +772,50 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'     as indexing a regular R atomic vector.
 #'   \item When indexed with a logical vector, the lengths of the edge
 #'     sequence and the index must match, and the edges for which the
-#'     index is \code{TRUE} are selected.
+#'     index is `TRUE` are selected.
 #'   \item Named graphs can be indexed with character vectors,
 #'     to select edges with the given names. Note that a graph may
 #'     have edge names and vertex names, and both can be used to select
 #'     edges. Edge names are simply used as names of the numeric
 #'     edge id vector. Vertex names effectively only work in graphs without
-#'     multiple edges, and must be separated with a \code{|} bar character
+#'     multiple edges, and must be separated with a `|` bar character
 #'     to select an edges that incident to the two given vertices. See
 #'     examples below.
 #' }
 #'
 #' @section Edge attributes:
 #' When indexing edge sequences, edge attributes can be referred
-#' to simply by using their names. E.g. if a graph has a \code{weight} edge
-#' attribute, then \code{E(G)[weight > 1]} selects all edges with a weight
+#' to simply by using their names. E.g. if a graph has a `weight` edge
+#' attribute, then `E(G)[weight > 1]` selects all edges with a weight
 #' larger than one. See more examples below. Note that attribute names mask the
 #' names of variables present in the calling environment; if you need to look up
 #' a variable and you do not want a similarly named edge attribute to mask it,
-#' use the \code{.env} pronoun to perform the name lookup in the calling
-#' environment. In other words, use \code{E(g)[.env$weight > 1]} to make sure
-#' that \code{weight} is looked up from the calling environment even if there is
-#' an edge attribute with the same name. Similarly, you can use \code{.data} to
+#' use the `.env` pronoun to perform the name lookup in the calling
+#' environment. In other words, use `E(g)[.env$weight > 1]` to make sure
+#' that `weight` is looked up from the calling environment even if there is
+#' an edge attribute with the same name. Similarly, you can use `.data` to
 #' match attribute names only.
 #'
 #' @section Special functions:
 #' There are some special igraph functions that can be used
 #' only in expressions indexing edge sequences: \describe{
-#'   \item{\code{.inc}}{takes a vertex sequence, and selects
+#'   \item{`.inc`}{takes a vertex sequence, and selects
 #'     all edges that have at least one incident vertex in the vertex
 #'     sequence.}
-#'   \item{\code{.from}}{similar to \code{.inc()}, but only
+#'   \item{`.from`}{similar to `.inc()`, but only
 #'     the tails of the edges are considered.}
-#'   \item{\code{.to}}{is similar to \code{.inc()}, but only
+#'   \item{`.to`}{is similar to `.inc()`, but only
 #'     the heads of the edges are considered.}
-#'   \item{\code{\%--\%}}{a special operator that can be
+#'   \item{`\%--\%`}{a special operator that can be
 #'     used to select all edges between two sets of vertices. It ignores
 #'     the edge directions in directed graphs.}
-#'   \item{\code{\%->\%}}{similar to \code{\%--\%},
-#'     but edges \emph{from} the left hand side argument, pointing
-#'     \emph{to} the right hand side argument, are selected, in directed
+#'   \item{`\%->\%`}{similar to `\%--\%`,
+#'     but edges *from* the left hand side argument, pointing
+#'     *to* the right hand side argument, are selected, in directed
 #'     graphs.}
-#'   \item{\code{\%<-\%}}{similar to \code{\%--\%},
-#'     but edges \emph{to} the left hand side argument, pointing
-#'     \emph{from} the right hand side argument, are selected, in directed
+#'   \item{`\%<-\%`}{similar to `\%--\%`,
+#'     but edges *to* the left hand side argument, pointing
+#'     *from* the right hand side argument, are selected, in directed
 #'     graphs.}
 #' }
 #' Note that multiple special functions can be used together, or with
@@ -1039,22 +1039,22 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
 #' Query or set attributes of the vertices in a vertex sequence
 #'
-#' The \code{$} operator is a syntactic sugar to query and set the
+#' The `$` operator is a syntactic sugar to query and set the
 #' attributes of the vertices in a vertex sequence.
 #'
 #' @details
-#' The query form of \code{$} is a shortcut for
-#' \code{\link{vertex_attr}}, e.g. \code{V(g)[idx]$attr} is equivalent
-#' to \code{vertex_attr(g, attr, V(g)[idx])}.
+#' The query form of `$` is a shortcut for
+#' \code{\link{vertex_attr}}, e.g. `V(g)[idx]$attr` is equivalent
+#' to `vertex_attr(g, attr, V(g)[idx])`.
 #'
-#' The assignment form of \code{$} is a shortcut for
-#' \code{\link{set_vertex_attr}}, e.g. \code{V(g)[idx]$attr <- value} is
-#' equivalent to \code{g <- set_vertex_attr(g, attr, V(g)[idx], value)}.
+#' The assignment form of `$` is a shortcut for
+#' \code{\link{set_vertex_attr}}, e.g. `V(g)[idx]$attr <- value` is
+#' equivalent to `g <- set_vertex_attr(g, attr, V(g)[idx], value)`.
 #'
-#' @param x A vertex sequence. For \code{V<-} it is a graph.
+#' @param x A vertex sequence. For `V<-` it is a graph.
 #' @param name Name of the vertex attribute to query or set.
 #' @return A vector or list, containing the values of
-#'   attribute \code{name} for the vertices in the vertex sequence.
+#'   attribute `name` for the vertices in the vertex sequence.
 #'   For numeric, character or logical attributes, it is a vector of the
 #'   appropriate type, otherwise it is a list.
 #'
@@ -1103,22 +1103,22 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
 #' Query or set attributes of the edges in an edge sequence
 #'
-#' The \code{$} operator is a syntactic sugar to query and set
+#' The `$` operator is a syntactic sugar to query and set
 #' edge attributes, for edges in an edge sequence.
 #'
 #' @details
-#' The query form of \code{$} is a shortcut for \code{\link{edge_attr}},
-#' e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr,
-#' E(g)[idx])}.
+#' The query form of `$` is a shortcut for \code{\link{edge_attr}},
+#' e.g. `E(g)[idx]$attr` is equivalent to `edge_attr(g, attr,
+#' E(g)[idx])`.
 #'
-#' The assignment form of \code{$} is a shortcut for
-#' \code{\link{set_edge_attr}}, e.g. \code{E(g)[idx]$attr <- value} is
-#' equivalent to \code{g <- set_edge_attr(g, attr, E(g)[idx], value)}.
+#' The assignment form of `$` is a shortcut for
+#' \code{\link{set_edge_attr}}, e.g. `E(g)[idx]$attr <- value` is
+#' equivalent to `g <- set_edge_attr(g, attr, E(g)[idx], value)`.
 #'
-#' @param x An edge sequence. For \code{E<-} it is a graph.
+#' @param x An edge sequence. For `E<-` it is a graph.
 #' @param name Name of the edge attribute to query or set.
 #' @return A vector or list, containing the values of the attribute
-#'   \code{name} for the edges in the sequence. For numeric, character or
+#'   `name` for the edges in the sequence. For numeric, character or
 #'   logical attributes, it is a vector of the appropriate type, otherwise
 #'   it is a list.
 #'
@@ -1198,8 +1198,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @param path Select edges along a path, given by a vertex sequence See
 #'   \code{\link{E}}.
 #' @param P Select edges via pairs of vertices. See \code{\link{E}}.
-#' @param directed Whether to use edge directions for the \code{path} or
-#'   \code{P} arguments.
+#' @param directed Whether to use edge directions for the `path` or
+#'   `P` arguments.
 #' @name igraph-es-attributes
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
@@ -1219,7 +1219,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' Show a vertex sequence on the screen
 #'
 #' For long vertex sequences, the printing is truncated to fit to the
-#' screen. Use [print()] explicitly and the \code{full} argument to
+#' screen. Use [print()] explicitly and the `full` argument to
 #' see the full sequence.
 #'
 #' Vertex sequence created with the double bracket operator are
@@ -1519,8 +1519,8 @@ create_op_result <- function(parsed, result, class, args) {
 #'
 #' @param x A vertex sequence.
 #' @param incomparables a vector of values that cannot be compared.
-#'   Passed to base function \code{duplicated}. See details there.
-#' @param ... Passed to base function \code{duplicated()}.
+#'   Passed to base function `duplicated`. See details there.
+#' @param ... Passed to base function `duplicated()`.
 #' @return A vertex sequence with the duplicate vertices removed.
 #'
 #' @method unique igraph.vs
@@ -1539,8 +1539,8 @@ unique.igraph.vs <- function(x, incomparables = FALSE, ...) {
 #'
 #' @param x An edge sequence.
 #' @param incomparables a vector of values that cannot be compared.
-#'   Passed to base function \code{duplicated}. See details there.
-#' @param ... Passed to base function \code{duplicated()}.
+#'   Passed to base function `duplicated`. See details there.
+#' @param ... Passed to base function `duplicated()`.
 #' @return An edge sequence with the duplicate vertices removed.
 #'
 #' @method unique igraph.es
@@ -1560,7 +1560,7 @@ unique.igraph.es <- function(x, incomparables = FALSE, ...) {
 #' @param ... The vertex sequences to concatenate. They must
 #'   refer to the same graph.
 #' @param recursive Ignored, included for S3 compatibility with
-#'   the base \code{c} function.
+#'   the base `c` function.
 #' @return A vertex sequence, the input sequences concatenated.
 #'
 #' @method c igraph.vs
@@ -1581,7 +1581,7 @@ c.igraph.vs <- function(..., recursive = FALSE) {
 #' @param ... The edge sequences to concatenate. They must
 #'   all refer to the same graph.
 #' @param recursive Ignored, included for S3 compatibility with the
-#'   base \code{c} function.
+#'   base `c` function.
 #' @return An edge sequence, the input sequences concatenated.
 #'
 #' @method c igraph.es
@@ -1604,7 +1604,7 @@ c.igraph.es <- function(..., recursive = FALSE) {
 #' @details
 #' They must belong to the same graph. Note that this function has
 #' \sQuote{set} semantics and the multiplicity of vertices is lost in the
-#' result. (This is to match the behavior of the based \code{unique}
+#' result. (This is to match the behavior of the based `unique`
 #' function.)
 #'
 #' @param ... The vertex sequences to take the union of.
@@ -1627,7 +1627,7 @@ union.igraph.vs <- function(...) {
 #' @details
 #' They must belong to the same graph. Note that this function has
 #' \sQuote{set} semantics and the multiplicity of edges is lost in the
-#' result. (This is to match the behavior of the based \code{unique}
+#' result. (This is to match the behavior of the based `unique`
 #' function.)
 #'
 #' @param ... The edge sequences to take the union of.
@@ -1699,7 +1699,7 @@ intersection.igraph.es <- intersection.igraph.vs
 #' @param small The \sQuote{small} vertex sequence.
 #' @param ... Ignored, included for S3 signature compatibility.
 #' @return A vertex sequence that contains only vertices that are part of
-#'   \code{big}, but not part of \code{small}.
+#'   `big`, but not part of `small`.
 #'
 #' @method difference igraph.vs
 #' @family vertex and edge sequence operations
@@ -1727,7 +1727,7 @@ difference.igraph.vs <- function(big, small, ...) {
 #' @param small The \sQuote{small} edge sequence.
 #' @param ... Ignored, included for S3 signature compatibility.
 #' @return An edge sequence that contains only edges that are part of
-#'   \code{big}, but not part of \code{small}.
+#'   `big`, but not part of `small`.
 #'
 #' @method difference igraph.es
 #' @family vertex and edge sequence operations
@@ -1778,8 +1778,8 @@ rev.igraph.es <- rev.igraph.vs
 #' returned in a character vector.
 #'
 #' For graphs with names and edge sequences, a character vector is
-#' returned, with the \sQuote{bar} notation: \code{a|b} means an edge from
-#' vertex \code{a} to vertex \code{b}.
+#' returned, with the \sQuote{bar} notation: `a|b` means an edge from
+#' vertex `a` to vertex `b`.
 #'
 #' @param seq The vertex or edge sequence.
 #' @return A character or numeric vector, see details below.

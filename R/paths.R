@@ -38,8 +38,8 @@
 #' @param to The target vertex of vertices. Defaults to all vertices.
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
-#'   \code{out} then the shortest paths \emph{from} the vertex, if \code{in}
-#'   then \emph{to} it will be considered. If \code{all}, the default, then
+#'   `out` then the shortest paths *from* the vertex, if `in`
+#'   then *to* it will be considered. If `all`, the default, then
 #'   the corresponding undirected graph will be used, ie. not directed paths
 #'   are searched. This argument is ignored for undirected graphs.
 #' @param cutoff Maximum length of path that is considered. If negative, paths of all lengths are considered.
@@ -89,12 +89,12 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' This function tests whether the given graph is a DAG, a directed acyclic
 #' graph.
 #'
-#' \code{is_dag()} checks whether there is a directed cycle in the graph. If not,
+#' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
 #' @aliases is.dag is_dag
 #' @param graph The input graph. It may be undirected, in which case
-#'   \code{FALSE} is reported.
+#'   `FALSE` is reported.
 #' @return A logical vector of length one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C code, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
@@ -127,15 +127,15 @@ is_dag <- is_dag
 #' @return A list with two components: \item{alpha}{Numeric vector. The
 #'   1-based rank of each vertex in the graph such that the vertex with rank 1
 #'   is visited first, the vertex with rank 2 is visited second and so on.}
-#'   \item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
+#'   \item{alpham1}{Numeric vector. The inverse of `alpha`. In other words,
 #'   the elements of this vector are the vertices in reverse maximum cardinality
 #'   search order.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{is_chordal}}
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
 #' linear-time algorithms to test chordality of graphs, test acyclicity of
-#' hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
-#' of Computation} 13, 566--579.
+#' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal
+#' of Computation* 13, 566--579.
 #' @keywords graphs
 #' @examples
 #'
@@ -173,12 +173,12 @@ max_cardinality <- max_cardinality
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
 #' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If \code{out}
-#'   then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
-#'   it will be considered. If \code{all}, the default, then the corresponding
+#'   the given vertices should be calculated for directed graphs. If `out`
+#'   then the shortest paths *from* the vertex, if `in` then *to*
+#'   it will be considered. If `all`, the default, then the corresponding
 #'   undirected graph will be used, edge directions will be ignored. This
 #'   argument is ignored for undirected graphs.
-#' @return \code{eccentricity()} returns a numeric vector, containing the
+#' @return `eccentricity()` returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
 #' @seealso \code{\link{radius}} for a related concept,
 #'   \code{\link{distances}} for general shortest path calculations.
@@ -206,9 +206,9 @@ eccentricity <- eccentricity
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mode Character constant, gives whether the shortest paths to or from
-#'   the given vertices should be calculated for directed graphs. If \code{out}
-#'   then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
-#'   it will be considered. If \code{all}, the default, then the corresponding
+#'   the given vertices should be calculated for directed graphs. If `out`
+#'   then the shortest paths *from* the vertex, if `in` then *to*
+#'   it will be considered. If `all`, the default, then the corresponding
 #'   undirected graph will be used, edge directions will be ignored. This
 #'   argument is ignored for undirected graphs.
 #' @return A numeric scalar, the radius of the graph.

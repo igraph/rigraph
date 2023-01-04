@@ -27,21 +27,21 @@
 #' This function creates an igraph graph from one or two data frames containing
 #' the (symbolic) edge list and edge/vertex attributes.
 #'
-#' \code{graph_from_data_frame()} creates igraph graphs from one or two data frames.
-#' It has two modes of operation, depending whether the \code{vertices}
-#' argument is \code{NULL} or not.
+#' `graph_from_data_frame()` creates igraph graphs from one or two data frames.
+#' It has two modes of operation, depending whether the `vertices`
+#' argument is `NULL` or not.
 #'
-#' If \code{vertices} is \code{NULL}, then the first two columns of \code{d}
+#' If `vertices` is `NULL`, then the first two columns of `d`
 #' are used as a symbolic edge list and additional columns as edge attributes.
 #' The names of the attributes are taken from the names of the columns.
 #'
-#' If \code{vertices} is not \code{NULL}, then it must be a data frame giving
-#' vertex metadata. The first column of \code{vertices} is assumed to contain
+#' If `vertices` is not `NULL`, then it must be a data frame giving
+#' vertex metadata. The first column of `vertices` is assumed to contain
 #' symbolic vertex names, this will be added to the graphs as the
-#' \sQuote{\code{name}} vertex attribute. Other columns will be added as
-#' additional vertex attributes. If \code{vertices} is not \code{NULL} then the
-#' symbolic edge list given in \code{d} is checked to contain only vertex names
-#' listed in \code{vertices}.
+#' \sQuote{`name`} vertex attribute. Other columns will be added as
+#' additional vertex attributes. If `vertices` is not `NULL` then the
+#' symbolic edge list given in `d` is checked to contain only vertex names
+#' listed in `vertices`.
 #'
 #' Typically, the data frames are exported from some spreadsheet software like
 #' Excel and are imported into R via \code{\link{read.table}},
@@ -50,46 +50,46 @@
 #' All edges in the data frame are included in the graph, which may include
 #' multiple parallel edges and loops.
 #'
-#' \code{as_data_frame()} converts the igraph graph into one or more data
-#' frames, depending on the \code{what} argument.
+#' `as_data_frame()` converts the igraph graph into one or more data
+#' frames, depending on the `what` argument.
 #'
-#' If the \code{what} argument is \code{edges} (the default), then the edges of
+#' If the `what` argument is `edges` (the default), then the edges of
 #' the graph and also the edge attributes are returned. The edges will be in
-#' the first two columns, named \code{from} and \code{to}. (This also denotes
+#' the first two columns, named `from` and `to`. (This also denotes
 #' edge direction for directed graphs.)  For named graphs, the vertex names
 #' will be included in these columns, for other graphs, the numeric vertex ids.
 #' The edge attributes will be in the other columns. It is not a good idea to
-#' have an edge attribute named \code{from} or \code{to}, because then the
+#' have an edge attribute named `from` or `to`, because then the
 #' column named in the data frame will not be unique. The edges are listed in
 #' the order of their numeric ids.
 #'
-#' If the \code{what} argument is \code{vertices}, then vertex attributes are
+#' If the `what` argument is `vertices`, then vertex attributes are
 #' returned. Vertices are listed in the order of their numeric vertex ids.
 #'
-#' If the \code{what} argument is \code{both}, then both vertex and edge data
-#' is returned, in a list with named entries \code{vertices} and \code{edges}.
+#' If the `what` argument is `both`, then both vertex and edge data
+#' is returned, in a list with named entries `vertices` and `edges`.
 #'
 #' @aliases graph_from_data_frame graph.data.frame as_data_frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
 #'   columns. Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with
-#'   \code{as.data.frame}.
+#'   `as.data.frame`.
 #' @param directed Logical scalar, whether or not to create a directed graph.
-#' @param vertices A data frame with vertex metadata, or \code{NULL}. See
+#' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
-#'   with \code{as.data.frame}, if not \code{NULL}.
-#' @return An igraph graph object for \code{graph_from_data_frame()}, and either a
-#'   data frame or a list of two data frames named \code{edges} and
-#'   \code{vertices} for \code{as.data.frame}.
-#' @note For \code{graph_from_data_frame()} \code{NA} elements in the first two
+#'   with `as.data.frame`, if not `NULL`.
+#' @return An igraph graph object for `graph_from_data_frame()`, and either a
+#'   data frame or a list of two data frames named `edges` and
+#'   `vertices` for `as.data.frame`.
+#' @note For `graph_from_data_frame()` `NA` elements in the first two
 #' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
-#' the graph. This means that all \code{NA}s will correspond to a single
+#' the graph. This means that all `NA`s will correspond to a single
 #' vertex.
 #'
-#' \code{NA} elements in the first column of \sQuote{vertices} are also
+#' `NA` elements in the first column of \sQuote{vertices} are also
 #' replaced by the string \dQuote{NA}, but the rest of \sQuote{vertices} is not
 #' touched. In other words, vertex names (=the first column) cannot be
-#' \code{NA}, but other vertex attributes can.
+#' `NA`, but other vertex attributes can.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph_from_literal}}
 #' for another way to create graphs, \code{\link{read.table}} to read in tables
@@ -202,7 +202,7 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
 }
 
 #' @rdname graph_from_data_frame
-#' @param ... Passed to \code{graph_from_data_frame()}.
+#' @param ... Passed to `graph_from_data_frame()`.
 #' @export
 from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
@@ -210,12 +210,12 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 
 #' Create a graph from an edge list matrix
 #'
-#' \code{graph_from_edgelist()} creates a graph from an edge list. Its argument
+#' `graph_from_edgelist()` creates a graph from an edge list. Its argument
 #' is a two-column matrix, each row defines one edge. If it is
 #' a numeric matrix then its elements are interpreted as vertex ids. If
 #' it is a character matrix then it is interpreted as symbolic vertex
 #' names and a vertex id will be assigned to each name, and also a
-#' \code{name} vertex attribute will be added.
+#' `name` vertex attribute will be added.
 #'
 #' @aliases graph.edgelist
 #' @concept Edge list
@@ -257,6 +257,6 @@ graph_from_edgelist <- function(el, directed = TRUE) {
 }
 
 #' @rdname graph_from_edgelist
-#' @param ... Passed to \code{graph_from_edgelist()}.
+#' @param ... Passed to `graph_from_edgelist()`.
 #' @export
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)

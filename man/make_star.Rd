@@ -14,7 +14,7 @@ star(...)
 \item{n}{Number of vertices.}
 
 \item{mode}{It defines the direction of the
-edges, \code{in}: the edges point \emph{to} the center, \code{out}:
+edges, \verb{in}: the edges point \emph{to} the center, \code{out}:
 the edges point \emph{from} the center, \code{mutual}: a directed
 star is created with mutual edges, \code{undirected}: the edges
 are undirected.}

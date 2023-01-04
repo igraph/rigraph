@@ -38,11 +38,11 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 
 D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
-in Oscillator Networks. \emph{Physical Review Letters}, \bold{100}(17),
+in Oscillator Networks. \emph{Physical Review Letters}, \strong{100}(17),
 2008.  \url{https://arxiv.org/abs/0708.2055}
 
 D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
-Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
+Networks, \emph{Physical Review Letters}, \strong{99}(3), 2007.
 \url{https://arxiv.org/abs/0706.0812}
 }
 \author{

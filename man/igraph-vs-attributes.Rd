@@ -20,7 +20,7 @@
 V(x) <- value
 }
 \arguments{
-\item{x}{A vertex sequence. For \code{V<-} it is a graph.}
+\item{x}{A vertex sequence. For \verb{V<-} it is a graph.}
 
 \item{i}{Index.}
 

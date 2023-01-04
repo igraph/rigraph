@@ -1,6 +1,6 @@
 #' Decide whether a graph is a tree.
 #'
-#' \code{is_tree()} decides whether a graph is a tree, and optionally returns a
+#' `is_tree()` decides whether a graph is a tree, and optionally returns a
 #' possible root vertex if the graph is a tree.
 #'
 #' An undirected graph is a tree if it is connected and has no cycles.
@@ -17,10 +17,10 @@
 #'   \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
 #'   oriented outwards from the root, \sQuote{in} requires edges to be oriented
 #'   towards the root.
-#' @param details Whether to return only whether the graph is a tree (\code{FALSE})
-#'   or also a possible root (\code{TRUE})
-#' @return When \code{details} is \code{FALSE}, a logical value that indicates
-#'   whether the graph is a tree. When \code{details} is \code{TRUE}, a named
+#' @param details Whether to return only whether the graph is a tree (`FALSE`)
+#'   or also a possible root (`TRUE`)
+#' @return When `details` is `FALSE`, a logical value that indicates
+#'   whether the graph is a tree. When `details` is `TRUE`, a named
 #'   list with two entries: \item{res}{Logical value that indicates whether the
 #'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
 #'   the graph is not a tree.}
@@ -37,7 +37,7 @@ is_tree <- is_tree
 
 #' Convert a tree graph to its Prufer sequence
 #'
-#' \code{to_prufer()} converts a tree graph into its Prufer sequence.
+#' `to_prufer()` converts a tree graph into its Prufer sequence.
 #'
 #' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
 #' n-2 numbers, constructed as follows. If the graph has more than two vertices,
@@ -62,7 +62,7 @@ to_prufer <- to_prufer
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
-#' \code{sample_spanning_tree()} picks a spanning tree of an undirected graph
+#' `sample_spanning_tree()` picks a spanning tree of an undirected graph
 #' randomly and uniformly, using loop-erased random walks.
 #'
 #' @param graph The input graph to sample from. Edge directions are ignored if

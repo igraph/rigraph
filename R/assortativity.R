@@ -34,7 +34,7 @@
 #' same labels or similar assigned values.
 #'
 #' M.E.J. Newman defined two kinds of assortativity coefficients, the first one
-#' is for categorical labels of vertices. \code{assortativity_nominal()}
+#' is for categorical labels of vertices. `assortativity_nominal()`
 #' calculates this measure. It is defines as
 #'
 #' \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
@@ -45,7 +45,7 @@
 #' \eqn{b_j=\sum_i e_{ij}}{b(j)=sum(e(i,j), i)}.
 #'
 #' The second assortativity variant is based on values assigned to the
-#' vertices. \code{assortativity()} calculates this measure. It is defined as
+#' vertices. `assortativity()` calculates this measure. It is defined as
 #'
 #' \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
 #' sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
@@ -65,8 +65,8 @@
 #' is not symmetric, so it is possible to assign different values to the
 #' outgoing and the incoming end of the edges.
 #'
-#' \code{assortativity_degree()} uses vertex degree (minus one) as vertex values
-#' and calls \code{assortativity()}.
+#' `assortativity_degree()` uses vertex degree (minus one) as vertex values
+#' and calls `assortativity()`.
 #'
 #' @aliases assortativity assortativity.degree assortativity_degree
 #' assortativity.nominal assortativity_nominal
@@ -76,22 +76,22 @@
 #'   with \code{\link{as.integer}}.
 #' @param types1 The vertex values, these can be arbitrary numeric values.
 #' @param types2 A second value vector to be using for the incoming edges when
-#'   calculating assortativity for a directed graph.  Supply \code{NULL} here if
+#'   calculating assortativity for a directed graph.  Supply `NULL` here if
 #'   you want to use the same values for outgoing and incoming edges. This
-#'   argument is ignored (with a warning) if it is not \code{NULL} and undirected
+#'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
 #' @param directed Logical scalar, whether to consider edge directions for
 #'   directed graphs. This argument is ignored for undirected graphs. Supply
-#'   \code{TRUE} here to do the natural thing, i.e. use directed version of the
+#'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
 #' @return A single real number.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @references M. E. J. Newman: Mixing patterns in networks, \emph{Phys. Rev.
-#' E} 67, 026126 (2003) \url{https://arxiv.org/abs/cond-mat/0209450}
+#' @references M. E. J. Newman: Mixing patterns in networks, *Phys. Rev.
+#' E* 67, 026126 (2003) <https://arxiv.org/abs/cond-mat/0209450>
 #'
-#' M. E. J. Newman: Assortative mixing in networks, \emph{Phys. Rev. Lett.} 89,
-#' 208701 (2002) \url{https://arxiv.org/abs/cond-mat/0205405}
+#' M. E. J. Newman: Assortative mixing in networks, *Phys. Rev. Lett.* 89,
+#' 208701 (2002) <https://arxiv.org/abs/cond-mat/0205405>
 #' @keywords graphs
 #' @examples
 #'

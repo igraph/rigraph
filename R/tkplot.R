@@ -35,12 +35,12 @@ assign(".next", 1, .tkplot.env)
 
 #' Interactive plotting of graphs
 #'
-#' \code{tkplot()} and its companion functions serve as an interactive graph
+#' `tkplot()` and its companion functions serve as an interactive graph
 #' drawing facility. Not all parameters of the plot can be changed
 #' interactively right now though, eg. the colors of vertices, edges, and also
 #' others have to be pre-defined.
 #'
-#' \code{tkplot()} is an interactive graph drawing facility. It is not very well
+#' `tkplot()` is an interactive graph drawing facility. It is not very well
 #' developed at this stage, but it should be still useful.
 #'
 #' It's handling should be quite straightforward most of the time, here are
@@ -52,7 +52,7 @@ assign(".next", 1, .tkplot.env)
 #' under the cursor if it is not.
 #'
 #' One selection can be active at a time, either a vertex or an edge selection.
-#' A vertex/edge can be added to a selection by holding the \code{control} key
+#' A vertex/edge can be added to a selection by holding the `control` key
 #' while clicking on it with the left mouse button. Doing this again deselect
 #' the vertex/edge.
 #'
@@ -66,52 +66,52 @@ assign(".next", 1, .tkplot.env)
 #' In the color dialog a color name like 'orange' or RGB notation can also be
 #' used.
 #'
-#' The \code{tkplot()} command creates a new Tk window with the graphical
-#' representation of \code{graph}. The command returns an integer number, the
+#' The `tkplot()` command creates a new Tk window with the graphical
+#' representation of `graph`. The command returns an integer number, the
 #' tkplot id. The other commands utilize this id to be able to query or
 #' manipulate the plot.
 #'
-#' \code{tk_close()} closes the Tk plot with id \code{tkp.id}.
+#' `tk_close()` closes the Tk plot with id `tkp.id`.
 #'
-#' \code{tk_off()} closes all Tk plots.
+#' `tk_off()` closes all Tk plots.
 #'
-#' \code{tk_fit()} fits the plot to the given rectangle
-#' (\code{width} and \code{height}), if some of these are \code{NULL} the
+#' `tk_fit()` fits the plot to the given rectangle
+#' (`width` and `height`), if some of these are `NULL` the
 #' actual physical width od height of the plot window is used.
 #'
-#' \code{tk_reshape()} applies a new layout to the plot, its optional
-#' parameters will be collected to a list analogous to \code{layout.par}.
+#' `tk_reshape()` applies a new layout to the plot, its optional
+#' parameters will be collected to a list analogous to `layout.par`.
 #'
-#' \code{tk_postscript()} creates a dialog window for saving the plot
+#' `tk_postscript()` creates a dialog window for saving the plot
 #' in postscript format.
 #'
-#' \code{tk_canvas()} returns the Tk canvas object that belongs to a graph
+#' `tk_canvas()` returns the Tk canvas object that belongs to a graph
 #' plot. The canvas can be directly manipulated then, eg. labels can be added,
 #' it could be saved to a file programmatically, etc. See an example below.
 #'
-#' \code{tk_coords()} returns the coordinates of the vertices in a matrix.
+#' `tk_coords()` returns the coordinates of the vertices in a matrix.
 #' Each row corresponds to one vertex.
 #'
-#' \code{tk_set_coords()} sets the coordinates of the vertices. A two-column
+#' `tk_set_coords()` sets the coordinates of the vertices. A two-column
 #' matrix specifies the new positions, with each row corresponding to a single
 #' vertex.
 #'
-#' \code{tk_center()} shifts the figure to the center of its plot window.
+#' `tk_center()` shifts the figure to the center of its plot window.
 #'
-#' \code{tk_rotate()} rotates the figure, its parameter can be given either
+#' `tk_rotate()` rotates the figure, its parameter can be given either
 #' in degrees or in radians.
 #'
 #' @aliases tkplot tkplot.close tkplot.off tkplot.fit.to.screen tkplot.reshape
 #' tkplot.export.postscript tkplot.canvas tkplot.getcoords tkplot.setcoords
 #' tkplot.center tkplot.rotate tk_canvas tk_center tk_close tk_postscript
 #' tk_fit tk_coords tk_off tk_reshape tk_rotate tk_set_coords
-#' @param graph The \code{graph} to plot.
+#' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
 #' @param tkp.id The id of the tkplot window to close/reshape/etc.
 #' @param window.close Leave this on the default value.
 #' @param width The width of the rectangle for generating new coordinates.
 #' @param height The height of the rectangle for generating new coordinates.
-#' @param newlayout The new layout, see the \code{layout} parameter of tkplot.
+#' @param newlayout The new layout, see the `layout` parameter of tkplot.
 #' @param norm Logical, should we norm the coordinates.
 #' @param coords Two-column numeric matrix, the new coordinates of the
 #'   vertices, in absolute coordinates.
@@ -119,16 +119,16 @@ assign(".next", 1, .tkplot.env)
 #' @param rad The degree to rotate the plot, in radian.
 #' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
 #'   the complete list.
-#' @return \code{tkplot()} returns an integer, the id of the plot, this can be
+#' @return `tkplot()` returns an integer, the id of the plot, this can be
 #'   used to manipulate it from the command line.
 #'
-#'   \code{tk_canvas()} returns \code{tkwin} object, the Tk canvas.
+#'   `tk_canvas()` returns `tkwin` object, the Tk canvas.
 #'
-#'   \code{tk_coords()} returns a matrix with the coordinates.
+#'   `tk_coords()` returns a matrix with the coordinates.
 #'
-#'   \code{tk_close()}, \code{tk_off()}, \code{tk_fit()},
-#'   \code{tk_reshape()}, \code{tk_postscript()}, \code{tk_center()}
-#'   and \code{tk_rotate()} return \code{NULL} invisibly.
+#'   `tk_close()`, `tk_off()`, `tk_fit()`,
+#'   `tk_reshape()`, `tk_postscript()`, `tk_center()`
+#'   and `tk_rotate()` return `NULL` invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{plot.igraph}}, \code{\link{layout}}
 #' @export

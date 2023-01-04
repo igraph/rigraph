@@ -25,7 +25,7 @@
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{motifs()} searches a graph for motifs of a given size and returns a
+#' `motifs()` searches a graph for motifs of a given size and returns a
 #' numeric vector containing the number of different motifs. The order of
 #' the motifs is defined by their isomorphism class, see
 #' \code{\link{isomorphism_class}}.
@@ -36,11 +36,11 @@
 #'   directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the \code{size} argument). By default no cuts are made.
-#' @return \code{motifs()} returns a numeric vector, the number of occurrences of
+#'   of the motif (the `size` argument). By default no cuts are made.
+#' @return `motifs()` returns a numeric vector, the number of occurrences of
 #'   each motif in the graph. The motifs are ordered by their isomorphism
 #'   classes. Note that for unconnected subgraphs, which are not considered to be
-#'   motifs, the result will be \code{NA}.
+#'   motifs, the result will be `NA`.
 #' @seealso \code{\link{isomorphism_class}}
 #'
 #' @export
@@ -77,7 +77,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{count_motifs()} calculates the total number of motifs of a given
+#' `count_motifs()` calculates the total number of motifs of a given
 #' size in graph.
 #'
 #' @aliases graph.motifs.no
@@ -85,8 +85,8 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @param size The size of the motif.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the \code{size} argument). By default no cuts are made.
-#' @return \code{count_motifs()} returns  a numeric scalar.
+#'   of the motif (the `size` argument). By default no cuts are made.
+#' @return `count_motifs()` returns  a numeric scalar.
 #' @seealso \code{\link{isomorphism_class}}
 #'
 #' @export
@@ -121,7 +121,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' Graph motifs are small connected subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
-#' \code{sample_motifs()} estimates the total number of motifs of a given
+#' `sample_motifs()` estimates the total number of motifs of a given
 #' size in a graph based on a sample.
 #'
 #' @aliases graph.motifs.est
@@ -130,10 +130,10 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #'   in directed graphs and sizes 3-6 in undirected graphs.
 #' @param cut.prob Numeric vector giving the probabilities that the search
 #'   graph is cut at a certain level. Its length should be the same as the size
-#'   of the motif (the \code{size} argument). By default no cuts are made.
+#'   of the motif (the `size` argument). By default no cuts are made.
 #' @param sample.size The number of vertices to use as a starting point for
-#'   finding motifs. Only used if the \code{sample} argument is \code{NULL}.
-#' @param sample If not \code{NULL} then it specifies the vertices to use as a
+#'   finding motifs. Only used if the `sample` argument is `NULL`.
+#' @param sample If not `NULL` then it specifies the vertices to use as a
 #'   starting point for finding motifs.
 #' @return A numeric scalar, an estimate for the total number of motifs in
 #'   the graph.
@@ -185,11 +185,11 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' @seealso \code{\link{triad_census}} for the same classification, but with
 #' triples.
 #' @references Holland, P.W. and Leinhardt, S. A Method for Detecting Structure
-#' in Sociometric Data. \emph{American Journal of Sociology}, 76, 492--513.
+#' in Sociometric Data. *American Journal of Sociology*, 76, 492--513.
 #' 1970.
 #'
-#' Wasserman, S., and Faust, K. \emph{Social Network Analysis: Methods and
-#' Applications.} Cambridge: Cambridge University Press. 1994.
+#' Wasserman, S., and Faust, K. *Social Network Analysis: Methods and
+#' Applications.* Cambridge: Cambridge University Press. 1994.
 #' @keywords graphs
 #' @examples
 #'

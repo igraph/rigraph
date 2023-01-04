@@ -163,39 +163,39 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an adjacency matrix.
 #'
-#' \code{as_adjacency_matrix()} returns the adjacency matrix of a graph, a
-#' regular matrix if \code{sparse} is \code{FALSE}, or a sparse matrix, as
-#' defined in the \sQuote{\code{Matrix}} package, if \code{sparse} if
-#' \code{TRUE}.
+#' `as_adjacency_matrix()` returns the adjacency matrix of a graph, a
+#' regular matrix if `sparse` is `FALSE`, or a sparse matrix, as
+#' defined in the \sQuote{`Matrix`} package, if `sparse` if
+#' `TRUE`.
 #'
 #' @aliases get.adjacency
 #' @param graph The graph to convert.
 #' @param type Gives how to create the adjacency matrix for undirected graphs.
-#'   It is ignored for directed graphs. Possible values: \code{upper}: the upper
-#'   right triangle of the matrix is used, \code{lower}: the lower left triangle
-#'   of the matrix is used. \code{both}: the whole matrix is used, a symmetric
+#'   It is ignored for directed graphs. Possible values: `upper`: the upper
+#'   right triangle of the matrix is used, `lower`: the lower left triangle
+#'   of the matrix is used. `both`: the whole matrix is used, a symmetric
 #'   matrix is returned.
-#' @param attr Either \code{NULL} or a character string giving an edge
-#'   attribute name. If \code{NULL} a traditional adjacency matrix is returned.
-#'   If not \code{NULL} then the values of the given edge attribute are included
+#' @param attr Either `NULL` or a character string giving an edge
+#'   attribute name. If `NULL` a traditional adjacency matrix is returned.
+#'   If not `NULL` then the values of the given edge attribute are included
 #'   in the adjacency matrix. If the graph has multiple edges, the edge attribute
 #'   of an arbitrarily chosen edge (for the multiple edges) is included. This
-#'   argument is ignored if \code{edges} is \code{TRUE}.
+#'   argument is ignored if `edges` is `TRUE`.
 #'
-#'   Note that this works only for certain attribute types. If the \code{sparse}
-#'   argumen is \code{TRUE}, then the attribute must be either logical or
-#'   numeric. If the \code{sparse} argument is \code{FALSE}, then character is
-#'   also allowed. The reason for the difference is that the \code{Matrix}
+#'   Note that this works only for certain attribute types. If the `sparse`
+#'   argumen is `TRUE`, then the attribute must be either logical or
+#'   numeric. If the `sparse` argument is `FALSE`, then character is
+#'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
 #' @param edges Logical scalar, whether to return the edge ids in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
-#'   to the matrix. These are only assigned if the \code{name} vertex attribute
+#'   to the matrix. These are only assigned if the `name` vertex attribute
 #'   is present in the graph.
 #' @param sparse Logical scalar, whether to create a sparse matrix. The
-#'   \sQuote{\code{Matrix}} package must be installed for creating sparse
+#'   \sQuote{`Matrix`} package must be installed for creating sparse
 #'   matrices.
-#' @return A \code{vcount(graph)} by \code{vcount(graph)} (usually) numeric
+#' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
 #'   matrix.
 #'
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
@@ -235,14 +235,14 @@ as_adj <- as_adjacency_matrix
 #' Sometimes it is useful to work with a standard representation of a
 #' graph, like an edge list.
 #'
-#' \code{as_edgelist()} returns the list of edges in a graph.
+#' `as_edgelist()` returns the list of edges in a graph.
 #'
 #' @aliases get.edgelist
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
-#'   names (ie. the \code{name} vertex attribute) if they exist or numeric
+#'   names (ie. the `name` vertex attribute) if they exist or numeric
 #'   vertex ids.
-#' @return A \code{gsize(graph)} by 2 numeric matrix.
+#' @return A `gsize(graph)` by 2 numeric matrix.
 #' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
 #' @keywords graphs
 #' @examples
@@ -274,11 +274,11 @@ as_edgelist <- function(graph, names = TRUE) {
 
 #' Convert between directed and undirected graphs
 #'
-#' \code{as.directed()} converts an undirected graph to directed,
-#' \code{as.undirected()} does the opposite, it converts a directed graph to
+#' `as.directed()` converts an undirected graph to directed,
+#' `as.undirected()` does the opposite, it converts a directed graph to
 #' undirected.
 #'
-#' Conversion algorithms for \code{as.directed()}: \describe{
+#' Conversion algorithms for `as.directed()`: \describe{
 #' \item{"arbitrary"}{The number of edges in the graph stays the same, an
 #' arbitrarily directed edge is created for each undirected edge, but the
 #' direction of the edge is deterministic (i.e. it always points the same
@@ -297,7 +297,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' graph contained loop edges.}
 #' }
 #'
-#' Conversion algorithms for \code{as.undirected()}: \describe{
+#' Conversion algorithms for `as.undirected()`: \describe{
 #' \item{"each"}{The number of edges remains constant, an undirected edge
 #' is created for each directed one, this version might create graphs with
 #' multiple edges.} \item{"collapse"}{One undirected edge will be created
@@ -310,9 +310,9 @@ as_edgelist <- function(graph, names = TRUE) {
 #' @aliases as.directed as.undirected
 #' @param graph The graph to convert.
 #' @param mode Character constant, defines the conversion algorithm. For
-#'   \code{as.directed()} it can be \code{mutual} or \code{arbitrary}. For
-#'   \code{as.undirected()} it can be \code{each}, \code{collapse} or
-#'   \code{mutual}. See details below.
+#'   `as.directed()` it can be `mutual` or `arbitrary`. For
+#'   `as.undirected()` it can be `each`, `collapse` or
+#'   `mutual`. See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{simplify}} for removing multiple and/or loop edges from
@@ -354,7 +354,7 @@ as.directed <- as.directed
 
 #' @rdname as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
-#'   \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
+#'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see \code{\link{attribute.combination}} for details on
 #'   this.
@@ -384,30 +384,30 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' Create adjacency lists from a graph, either for adjacent edges or for
 #' neighboring vertices
 #'
-#' \code{as_adj_list()} returns a list of numeric vectors, which include the ids
-#' of neighbor vertices (according to the \code{mode} argument) of all
+#' `as_adj_list()` returns a list of numeric vectors, which include the ids
+#' of neighbor vertices (according to the `mode` argument) of all
 #' vertices.
 #'
-#' \code{as_adj_edge_list()} returns a list of numeric vectors, which include the
-#' ids of adjacent edges (according to the \code{mode} argument) of all
+#' `as_adj_edge_list()` returns a list of numeric vectors, which include the
+#' ids of adjacent edges (according to the `mode` argument) of all
 #' vertices.
 #'
 #' @aliases as_adj_list get.adjedgelist
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
-#'   to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
-#'   \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
+#'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
+#'   \sQuote{`in`} is for incoming edges/vertices, \sQuote{`all`} is
 #'   for both. This argument is ignored for undirected graphs.
 #' @param loops Character scalar, one of `"ignore"` (to omit loops), `"twice"`
 #'   (to include loop edges twice) and `"once"` (to include them once). `"twice"`
 #'   is not allowed for directed graphs and will be replaced with `"once"`.
 #' @param multiple Logical scalar, set to `FALSE` to use only one representative
 #'   of each set of parallel edges.
-#' @return A list of \code{igraph.vs} or a list of numeric vectors depending on
-#'   the value of \code{igraph_opt("return.vs.es")}, see details for performance
+#' @return A list of `igraph.vs` or a list of numeric vectors depending on
+#'   the value of `igraph_opt("return.vs.es")`, see details for performance
 #'   characteristics.
-#' @details If \code{igraph_opt("return.vs.es")} is true (default), the numeric
-#' vectors of the adjacency lists are coerced to \code{igraph.vs}, this can be
+#' @details If `igraph_opt("return.vs.es")` is true (default), the numeric
+#' vectors of the adjacency lists are coerced to `igraph.vs`, this can be
 #' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_edgelist}}, \code{\link{as_adj}}
@@ -493,12 +493,12 @@ as_adj_edge_list <- function(graph,
 
 #' Convert graphNEL objects from the graph package to igraph
 #'
-#' The graphNEL class is defined in the \code{graph} package, it is another
-#' way to represent graphs. \code{graph_from_graphnel()} takes a graphNEL
+#' The graphNEL class is defined in the `graph` package, it is another
+#' way to represent graphs. `graph_from_graphnel()` takes a graphNEL
 #' graph and converts it to an igraph graph. It handles all
 #' graph/vertex/edge attributes. If the graphNEL graph has a vertex
-#' attribute called \sQuote{\code{name}} it will be used as igraph vertex
-#' attribute \sQuote{\code{name}} and the graphNEL vertex names will be
+#' attribute called \sQuote{`name`} it will be used as igraph vertex
+#' attribute \sQuote{`name`} and the graphNEL vertex names will be
 #' ignored.
 #'
 #' Because graphNEL graphs poorly support multiple edges, the edge
@@ -508,15 +508,15 @@ as_adj_edge_list <- function(graph,
 #' @aliases igraph.from.graphNEL
 #' @param graphNEL The graphNEL graph.
 #' @param name Logical scalar, whether to add graphNEL vertex names as an
-#'   igraph vertex attribute called \sQuote{\code{name}}.
+#'   igraph vertex attribute called \sQuote{`name`}.
 #' @param weight Logical scalar, whether to add graphNEL edge weights as an
-#'   igraph edge attribute called \sQuote{\code{weight}}. (graphNEL graphs are
+#'   igraph edge attribute called \sQuote{`weight`}. (graphNEL graphs are
 #'   always weighted.)
 #' @param unlist.attrs Logical scalar. graphNEL attribute query functions
 #'   return the values of the attributes in R lists, if this argument is
-#'   \code{TRUE} (the default) these will be converted to atomic vectors,
+#'   `TRUE` (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
-#' @return \code{graph_from_graphnel()} returns an igraph graph object.
+#' @return `graph_from_graphnel()` returns an igraph graph object.
 #' @seealso \code{\link{as_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
 #' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
@@ -595,19 +595,19 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 
 #' Convert igraph graphs to graphNEL objects from the graph package
 #'
-#' The graphNEL class is defined in the \code{graph} package, it is another
+#' The graphNEL class is defined in the `graph` package, it is another
 #' way to represent graphs. These functions are provided to convert between
 #' the igraph and the graphNEL objects.
 #'
-#' \code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
+#' `as_graphnel()` converts an igraph graph to a graphNEL graph. It
 #' converts all graph/vertex/edge attributes. If the igraph graph has a
-#' vertex attribute \sQuote{\code{name}}, then it will be used to assign
+#' vertex attribute \sQuote{`name`}, then it will be used to assign
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 #' will be used for this purpose.
 #'
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
-#' @return \code{as_graphnel()} returns a graphNEL graph object.
+#' @return `as_graphnel()` returns a graphNEL graph object.
 #' @seealso \code{\link{graph_from_graphnel}} for the other direction,
 #' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
 #' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for
@@ -817,28 +817,28 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' network. The incidence matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n}
 #' and \eqn{m} are the number of vertices of the two kinds.
 #'
-#' Bipartite graphs have a \code{type} vertex attribute in igraph, this is
-#' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
+#' Bipartite graphs have a `type` vertex attribute in igraph, this is
+#' boolean and `FALSE` for the vertices of the first kind and `TRUE`
 #' for vertices of the second kind.
 #'
 #' @aliases get.incidence
 #' @param graph The input graph. The direction of the edges is ignored in
 #'   directed graphs.
 #' @param types An optional vertex type vector to use instead of the
-#'   \code{type} vertex attribute. You must supply this argument if the graph has
-#'   no \code{type} vertex attribute.
-#' @param attr Either \code{NULL} or a character string giving an edge
-#'   attribute name. If \code{NULL}, then a traditional incidence matrix is
-#'   returned. If not \code{NULL} then the values of the given edge attribute are
+#'   `type` vertex attribute. You must supply this argument if the graph has
+#'   no `type` vertex attribute.
+#' @param attr Either `NULL` or a character string giving an edge
+#'   attribute name. If `NULL`, then a traditional incidence matrix is
+#'   returned. If not `NULL` then the values of the given edge attribute are
 #'   included in the incidence matrix. If the graph has multiple edges, the edge
 #'   attribute of an arbitrarily chosen edge (for the multiple edges) is
 #'   included.
-#' @param names Logical scalar, if \code{TRUE} and the vertices in the graph
-#'   are named (i.e. the graph has a vertex attribute called \code{name}), then
+#' @param names Logical scalar, if `TRUE` and the vertices in the graph
+#'   are named (i.e. the graph has a vertex attribute called `name`), then
 #'   vertex names will be added to the result as row and column names. Otherwise
 #'   the ids of the vertices are used as row and column names.
-#' @param sparse Logical scalar, if it is \code{TRUE} then a sparse matrix is
-#'   created, you will need the \code{Matrix} package for this.
+#' @param sparse Logical scalar, if it is `TRUE` then a sparse matrix is
+#'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph_from_incidence_matrix}} for the opposite operation.
@@ -920,7 +920,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'
 #' The idea is that you convert your graph to an adjacency list by
 #' \code{\link{as_adj_list}}, do your modifications to the graphs and finally
-#' create again an igraph graph by calling \code{graph_from_adj_list()}.
+#' create again an igraph graph by calling `graph_from_adj_list()`.
 #'
 #' @aliases graph.adjlist graph_from_adj_list
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
@@ -931,12 +931,12 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'   case, whether it contains the outgoing (\sQuote{out}) or the incoming
 #'   (\sQuote{in}) neighbors of the vertices.
 #' @param duplicate Logical scalar. For undirected graphs it gives whether
-#'   edges are included in the list twice. E.g. if it is \code{TRUE} then for an
-#'   undirected \code{{A,B}} edge \code{graph_from_adj_list()} expects \code{A}
-#'   included in the neighbors of \code{B} and \code{B} to be included in the
-#'   neighbors of \code{A}.
+#'   edges are included in the list twice. E.g. if it is `TRUE` then for an
+#'   undirected \code{{A,B}} edge `graph_from_adj_list()` expects `A`
+#'   included in the neighbors of `B` and `B` to be included in the
+#'   neighbors of `A`.
 #'
-#'   This argument is ignored if \code{mode} is \code{out} or \code{in}.
+#'   This argument is ignored if `mode` is `out` or `in`.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{as_edgelist}}
@@ -968,8 +968,8 @@ graph_from_adj_list <- graph_from_adj_list
 #' and edges of the graph. It contains one row for each edge, and
 #' all metadata about that edge and its incident vertices are included
 #' in that row. The names of the columns that contain the metadata
-#' of the incident vertices are prefixed with \code{from_} and \code{to_}.
-#' The first two columns are always named \code{from} and \code{to} and
+#' of the incident vertices are prefixed with `from_` and `to_`.
+#' The first two columns are always named `from` and `to` and
 #' they contain the numeric ids of the incident vertices. The rows are
 #' listed in the order of numeric vertex ids.
 #'
@@ -1018,27 +1018,27 @@ as_long_data_frame <- function(graph) {
 #' Convert igraph objects to adjacency or edge list matrices
 #'
 #' Get adjacency or edgelist representation of the network stored as an
-#' \code{igraph} object.
+#' `igraph` object.
 #'
-#' If \code{matrix.type} is \code{"edgelist"}, then a two-column numeric edge list
-#' matrix is returned.  The value of \code{attrname} is ignored.
+#' If `matrix.type` is `"edgelist"`, then a two-column numeric edge list
+#' matrix is returned.  The value of `attrname` is ignored.
 #'
-#' If \code{matrix.type} is \code{"adjacency"}, then a square adjacency matrix is
-#' returned. For adjacency matrices, you can use the \code{attr} keyword argument
+#' If `matrix.type` is `"adjacency"`, then a square adjacency matrix is
+#' returned. For adjacency matrices, you can use the `attr` keyword argument
 #' to use the values of an edge attribute in the matrix cells. See the
 #' documentation of \link{as_adjacency_matrix} for more details.
 #'
-#' Other arguments passed through \code{...} are passed to either
+#' Other arguments passed through `...` are passed to either
 #' \code{\link{as_adjacency_matrix}} or \code{\link{as_edgelist}}
-#' depending on the value of \code{matrix.type}.
+#' depending on the value of `matrix.type`.
 #'
 #' @param x object of class igraph, the network
 #' @param matrix.type character, type of matrix to return, currently "adjacency"
 #'   or "edgelist" are supported
 #' @param \dots other arguments to/from other methods
-#' @return Depending on the value of \code{matrix.type} either a square
+#' @return Depending on the value of `matrix.type` either a square
 #'   adjacency matrix or a two-column numeric matrix representing the edgelist.
-#' @author Michal Bojanowski, originally from the \code{intergraph} package
+#' @author Michal Bojanowski, originally from the `intergraph` package
 #' @seealso \code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
 #' @export
 #' @examples

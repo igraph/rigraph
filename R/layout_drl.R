@@ -38,25 +38,25 @@
 #' \item{simmer.damping.mult}{Damping, simmer phase.}
 #'
 #' There are five pre-defined parameter settings as well, these are called
-#' \code{drl_defaults$default}, \code{drl_defaults$coarsen},
-#' \code{drl_defaults$coarsest}, \code{drl_defaults$refine} and
-#' \code{drl_defaults$final}.  }
+#' `drl_defaults$default`, `drl_defaults$coarsen`,
+#' `drl_defaults$coarsest`, `drl_defaults$refine` and
+#' `drl_defaults$final`.  }
 #'
 #' @aliases layout.drl drl_defaults igraph.drl.coarsen
 #'  igraph.drl.coarsest igraph.drl.default igraph.drl.final
 #'  igraph.drl.refine
 #' @param graph The input graph, in can be directed or undirected.
 #' @param use.seed Logical scalar, whether to use the coordinates given in the
-#'   \code{seed} argument as a starting point.
+#'   `seed` argument as a starting point.
 #' @param seed A matrix with two columns, the starting coordinates for the
-#'   vertices is \code{use.seed} is \code{TRUE}. It is ignored otherwise.
+#'   vertices is `use.seed` is `TRUE`. It is ignored otherwise.
 #' @param options Options for the layout generator, a named list. See details
 #'   below.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
-#'   \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
+#'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
-#'   \code{NULL} and no such attribute is present, then the edges will have equal
-#'   weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
+#'   `NULL` and no such attribute is present, then the edges will have equal
+#'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for the layout. Larger edge weights
 #'   correspond to stronger connections.
 #' @param fixed Logical vector, it can be used to fix some vertices. Unfortunately
@@ -68,7 +68,7 @@
 #'   nature of the DrL algorithm, the three dimensional layout takes
 #'   significantly longer to compute.
 #' @return A numeric matrix with two columns.
-#' @author Shawn Martin (\url{http://www.cs.otago.ac.nz/homepages/smartin/})
+#' @author Shawn Martin (<http://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
 #' @seealso \code{\link{layout}} for other layout generators.
@@ -138,7 +138,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 
 
 #' @rdname layout_with_drl
-#' @param ... Passed to \code{layout_with_drl()}.
+#' @param ... Passed to `layout_with_drl()`.
 #' @export
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 

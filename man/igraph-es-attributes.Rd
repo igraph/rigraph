@@ -20,7 +20,7 @@
 E(x, path = NULL, P = NULL, directed = NULL) <- value
 }
 \arguments{
-\item{x}{An edge sequence. For \code{E<-} it is a graph.}
+\item{x}{An edge sequence. For \verb{E<-} it is a graph.}
 
 \item{i}{Index.}
 
@@ -49,8 +49,7 @@ edge attributes, for edges in an edge sequence.
 }
 \details{
 The query form of \code{$} is a shortcut for \code{\link{edge_attr}},
-e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr,
-E(g)[idx])}.
+e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr, E(g)[idx])}.
 
 The assignment form of \code{$} is a shortcut for
 \code{\link{set_edge_attr}}, e.g. \code{E(g)[idx]$attr <- value} is

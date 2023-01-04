@@ -39,7 +39,7 @@ weighted.  Note that this argument is ignored if \code{FUN} is not
 \code{NULL}, \code{"ecount"} and \code{"sumweights"}.}
 
 \item{mode}{Character scalar, the kind of neighborhoods to use for the
-calculation. One of \sQuote{\code{out}}, \sQuote{\code{in}},
+calculation. One of \sQuote{\code{out}}, \sQuote{\verb{in}},
 \sQuote{\code{all}} or \sQuote{\code{total}}. This argument is ignored
 for undirected graphs.}
 

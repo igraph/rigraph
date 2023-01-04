@@ -21,7 +21,7 @@ similarity(
 \item{vids}{The vertex ids for which the similarity is calculated.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
-possible values: \sQuote{\code{out}}, \sQuote{\code{in}},
+possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 \sQuote{\code{all}}.}
 
 \item{loops}{Whether to include vertices themselves in the neighbor

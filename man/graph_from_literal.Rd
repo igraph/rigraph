@@ -80,7 +80,7 @@ Mutual edges can be also created with a simple edge operator:
 \preformatted{  graph_from_literal( A +-+ B +---+ C ++ D + E)
 }
 Note again that the length of the edge operators is arbitrary,
-\sQuote{\code{+}}, \sQuote{\code{++}} and \sQuote{\code{+-----+}} have
+\sQuote{\code{+}}, \sQuote{\verb{++}} and \sQuote{\verb{+-----+}} have
 exactly the same meaning.
 
 If the vertex names include spaces or other special characters then

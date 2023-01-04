@@ -18,7 +18,7 @@ tree(...)
 
 \item{mode}{Defines the direction of the
 edges. \code{out} indicates that the edges point from the parent to
-the children, \code{in} indicates that they point from the children
+the children, \verb{in} indicates that they point from the children
 to their parents, while \code{undirected} creates an undirected
 graph.}
 

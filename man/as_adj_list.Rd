@@ -25,7 +25,7 @@ as_adj_edge_list(
 
 \item{mode}{Character scalar, it gives what kind of adjacent edges/vertices
 to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
-\sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
+\sQuote{\verb{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 for both. This argument is ignored for undirected graphs.}
 
 \item{loops}{Character scalar, one of \code{"ignore"} (to omit loops), \code{"twice"}

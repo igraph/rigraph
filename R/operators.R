@@ -77,19 +77,19 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' The union of two or more graphs are created. The graphs are assumed to have
 #' disjoint vertex sets.
 #'
-#' \code{disjoint_union()} creates a union of two or more disjoint graphs.
+#' `disjoint_union()` creates a union of two or more disjoint graphs.
 #' Thus first the vertices in the second, third, etc. graphs are relabeled to
 #' have completely disjoint graphs. Then a simple union is created. This
 #' function can also be used via the `%du%` operator.
 #'
-#' \code{graph.disjont.union} handles graph, vertex and edge attributes.  In
-#' particular, it merges vertex and edge attributes using the basic \code{c()}
+#' `graph.disjont.union` handles graph, vertex and edge attributes.  In
+#' particular, it merges vertex and edge attributes using the basic `c()`
 #' function. For graphs that lack some vertex/edge attribute, the corresponding
-#' values in the new graph are set to \code{NA}. Graph attributes are simply
+#' values in the new graph are set to `NA`. Graph attributes are simply
 #' copied to the result. If this would result a name clash, then they are
 #' renamed by adding suffixes: _1, _2, etc.
 #'
-#' Note that if both graphs have vertex names (ie. a \code{name} vertex
+#' Note that if both graphs have vertex names (ie. a `name` vertex
 #' attribute), then the concatenated vertex names might be non-unique in the
 #' result. A warning is given if this happens.
 #'
@@ -286,7 +286,7 @@ disjoint_union <- function(...) {
 
 #' Union of two or more sets
 #'
-#' This is an S3 generic function. See \code{methods("union")}
+#' This is an S3 generic function. See `methods("union")`
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs and igraph vertex and edge
 #' sequences. See
@@ -294,7 +294,7 @@ disjoint_union <- function(...) {
 #' \code{\link{union.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{union()}.
+#'   the function that implements `union()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -313,21 +313,21 @@ union.default <- function(...) {
 #' The union of two or more graphs are created. The graphs may have identical
 #' or overlapping vertex sets.
 #'
-#' \code{union()} creates the union of two or more graphs.  Edges which are
+#' `union()` creates the union of two or more graphs.  Edges which are
 #' included in at least one graph will be part of the new graph. This function
 #' can be also used via the `%u%` operator.
 #'
-#' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
+#' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
 #'
-#' \code{union()} keeps the attributes of all graphs. All graph, vertex and
+#' `union()` keeps the attributes of all graphs. All graph, vertex and
 #' edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
 #'
-#' The \code{name} vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case \code{name} must be
+#' The `name` vertex attribute is treated specially if the operation is
+#' performed based on symbolic vertex names. In this case `name` must be
 #' present in all graphs, and it is not renamed in the result graph.
 #'
 #' An error is generated if some input graphs are directed and others are
@@ -335,10 +335,10 @@ union.default <- function(...) {
 #'
 #' @aliases graph.union %u%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar \code{auto}. Whether
+#' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
-#'   \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
-#'   otherwise. A warning is generated if \code{auto} and some (but not all)
+#'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
+#'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -368,7 +368,7 @@ union.igraph <- function(..., byname = "auto") {
 
 #' Intersection of two or more sets
 #'
-#' This is an S3 generic function. See \code{methods("intersection")}
+#' This is an S3 generic function. See `methods("intersection")`
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs and igraph vertex and edge
 #' sequences. See
@@ -376,7 +376,7 @@ union.igraph <- function(..., byname = "auto") {
 #' \code{\link{intersection.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{intersection()}.
+#'   the function that implements `intersection()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -389,21 +389,21 @@ intersection <- function(...) {
 #' The intersection of two or more graphs are created.  The graphs may have
 #' identical or overlapping vertex sets.
 #'
-#' \code{intersection()} creates the intersection of two or more graphs:
+#' `intersection()` creates the intersection of two or more graphs:
 #' only edges present in all graphs will be included.  The corresponding
 #' operator is `%s%`.
 #'
-#' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
+#' If the `byname` argument is `TRUE` (or `auto` and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
 #' of the internal numeric vertex ids.
 #'
-#' \code{intersection()} keeps the attributes of all graphs. All graph,
+#' `intersection()` keeps the attributes of all graphs. All graph,
 #' vertex and edge attributes are copied to the result. If an attribute is
 #' present in multiple graphs and would result a name clash, then this
 #' attribute is renamed by adding suffixes: _1, _2, etc.
 #'
-#' The \code{name} vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case \code{name} must be
+#' The `name` vertex attribute is treated specially if the operation is
+#' performed based on symbolic vertex names. In this case `name` must be
 #' present in all graphs, and it is not renamed in the result graph.
 #'
 #' An error is generated if some input graphs are directed and others are
@@ -411,10 +411,10 @@ intersection <- function(...) {
 #'
 #' @aliases graph.intersection %s%
 #' @param \dots Graph objects or lists of graph objects.
-#' @param byname A logical scalar, or the character scalar \code{auto}. Whether
+#' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
-#'   \code{auto}, that means \code{TRUE} if all graphs are named and \code{FALSE}
-#'   otherwise. A warning is generated if \code{auto} and some (but not all)
+#'   `auto`, that means `TRUE` if all graphs are named and `FALSE`
+#'   otherwise. A warning is generated if `auto` and some (but not all)
 #'   graphs are named.
 #' @param keep.all.vertices Logical scalar, whether to keep vertices that only
 #'   appear in a subset of the input graphs.
@@ -447,7 +447,7 @@ intersection.igraph <- function(..., byname = "auto",
 
 #' Difference of two sets
 #'
-#' This is an S3 generic function. See \code{methods("difference")}
+#' This is an S3 generic function. See `methods("difference")`
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs (difference of edges in two graphs),
 #' and igraph vertex and edge sequences. See
@@ -455,7 +455,7 @@ intersection.igraph <- function(..., byname = "auto",
 #' \code{\link{difference.igraph.vs}}.
 #'
 #' @param ... Arguments, their number and interpretation depends on
-#'   the function that implements \code{difference()}.
+#'   the function that implements `difference()`.
 #' @return Depends on the function that implements this method.
 #'
 #' @export
@@ -468,18 +468,18 @@ difference <- function(...) {
 #'
 #' The difference of two graphs are created.
 #'
-#' \code{difference()} creates the difference of two graphs. Only edges
+#' `difference()` creates the difference of two graphs. Only edges
 #' present in the first graph but not in the second will be be included in the
 #' new graph. The corresponding operator is `%m%`.
 #'
-#' If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
+#' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
 #'
-#' \code{difference()} keeps all attributes (graph, vertex and edge) of the
+#' `difference()` keeps all attributes (graph, vertex and edge) of the
 #' first graph.
 #'
-#' Note that \code{big} and \code{small} must both be directed or both be
+#' Note that `big` and `small` must both be directed or both be
 #' undirected, otherwise an error message is given.
 #'
 #' @aliases graph.difference %m%
@@ -487,10 +487,10 @@ difference <- function(...) {
 #'   undirected graph.
 #' @param small The right hand side argument of the minus operator. A directed
 #'   ot undirected graph.
-#' @param byname A logical scalar, or the character scalar \code{auto}. Whether
+#' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
-#'   \code{auto}, that means \code{TRUE} if both graphs are named and
-#'   \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
+#'   `auto`, that means `TRUE` if both graphs are named and
+#'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
 #'   but not both graphs are named.
 #' @param ... Ignored, included for S3 compatibility.
 #' @return A new graph object.
@@ -564,11 +564,11 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' A complementer graph contains all edges that were not present in the input
 #' graph.
 #'
-#' \code{complementer()} creates the complementer of a graph. Only edges
-#' which are \emph{not} present in the original graph will be included in the
+#' `complementer()` creates the complementer of a graph. Only edges
+#' which are *not* present in the original graph will be included in the
 #' new graph.
 #'
-#' \code{complementer()} keeps graph and vertex attriubutes, edge
+#' `complementer()` keeps graph and vertex attriubutes, edge
 #' attributes are lost.
 #'
 #' @aliases graph.complementer
@@ -605,7 +605,7 @@ complementer <- function(graph, loops = FALSE) {
 #'
 #' Relational composition of two graph.
 #'
-#' \code{compose()} creates the relational composition of two graphs. The
+#' `compose()` creates the relational composition of two graphs. The
 #' new graph will contain an (a,b) edge only if there is a vertex c, such that
 #' edge (a,c) is included in the first graph and (c,b) is included in the
 #' second graph. The corresponding operator is `%c%`.
@@ -613,17 +613,17 @@ complementer <- function(graph, loops = FALSE) {
 #' The function gives an error if one of the input graphs is directed and the
 #' other is undirected.
 #'
-#' If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
+#' If the `byname` argument is `TRUE` (or `auto` and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
 #' names. Otherwise numeric vertex ids are used.
 #'
-#' \code{compose()} keeps the attributes of both graphs. All graph, vertex
+#' `compose()` keeps the attributes of both graphs. All graph, vertex
 #' and edge attributes are copied to the result. If an attribute is present in
 #' multiple graphs and would result a name clash, then this attribute is
 #' renamed by adding suffixes: _1, _2, etc.
 #'
-#' The \code{name} vertex attribute is treated specially if the operation is
-#' performed based on symbolic vertex names. In this case \code{name} must be
+#' The `name` vertex attribute is treated specially if the operation is
+#' performed based on symbolic vertex names. In this case `name` must be
 #' present in both graphs, and it is not renamed in the result graph.
 #'
 #' Note that an edge in the result graph corresponds to two edges in the input,
@@ -644,10 +644,10 @@ complementer <- function(graph, loops = FALSE) {
 #' @aliases graph.compose %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
-#' @param byname A logical scalar, or the character scalar \code{auto}. Whether
+#' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
-#'   \code{auto}, that means \code{TRUE} if both graphs are named and
-#'   \code{FALSE} otherwise. A warning is generated if \code{auto} and one graph,
+#'   `auto`, that means `TRUE` if both graphs are named and
+#'   `FALSE` otherwise. A warning is generated if `auto` and one graph,
 #'   but not both graphs are named.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -737,17 +737,17 @@ compose <- function(g1, g2, byname = "auto") {
 #' This is a helper function that simplifies adding and deleting
 #' edges to/from graphs.
 #'
-#' \code{edges()} is an alias for \code{edge()}.
+#' `edges()` is an alias for `edge()`.
 #'
 #' @details
-#' When adding edges via \code{+}, all unnamed arguments of
-#' \code{edge()} (or \code{edges()}) are concatenated, and then passed to
+#' When adding edges via `+`, all unnamed arguments of
+#' `edge()` (or `edges()`) are concatenated, and then passed to
 #' \code{\link{add_edges}}. They are interpreted as pairs of vertex ids,
 #' and an edge will added between each pair. Named arguments will be
 #' used as edge attributes for the new edges.
 #'
-#' When deleting edges via \code{-}, all arguments of \code{edge()} (or
-#' \code{edges()}) are concatenated via \code{c()} and passed to
+#' When deleting edges via `-`, all arguments of `edge()` (or
+#' `edges()`) are concatenated via `c()` and passed to
 #' \code{\link{delete_edges}}.
 #'
 #' @param ... See details below.
@@ -786,15 +786,15 @@ edges <- edge
 #' This is a helper function that simplifies adding and deleting
 #' vertices to/from graphs.
 #'
-#' \code{vertices()} is an alias for \code{vertex()}.
+#' `vertices()` is an alias for `vertex()`.
 #'
 #' @details
-#' When adding vertices via \code{+}, all unnamed arguments are interpreted
+#' When adding vertices via `+`, all unnamed arguments are interpreted
 #' as vertex names of the new vertices. Named arguments are interpreted as
 #' vertex attributes for the new vertices.
 #'
-#' When deleting vertices via \code{-}, all arguments of \code{vertex()} (or
-#' \code{vertices()}) are concatenated via \code{c()} and passed to
+#' When deleting vertices via `-`, all arguments of `vertex()` (or
+#' `vertices()`) are concatenated via `c()` and passed to
 #' \code{\link{delete_vertices}}.
 #'
 #' @param ... See details below.
@@ -822,7 +822,7 @@ vertices <- vertex
 #' This function can be used to add or delete edges that form a path.
 #'
 #' @details
-#' When adding edges via \code{+}, all unnamed arguments are
+#' When adding edges via `+`, all unnamed arguments are
 #' concatenated, and each element of a final vector is interpreted
 #' as a vertex in the graph. For a vector of length \eqn{n+1}, \eqn{n}
 #' edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
@@ -879,12 +879,12 @@ path <- function(...) {
 #'   - If it is an object created with the \code{\link{vertex}} or
 #'     \code{\link{vertices}} function, then new vertices are added to the
 #'     graph. This form is appropriate when one wants to add some vertex
-#'     attributes as well. The operands of the \code{vertices()} function
+#'     attributes as well. The operands of the `vertices()` function
 #'     specifies the number of vertices to add and their attributes as
 #'     well.
 #'
-#'     The unnamed arguments of \code{vertices()} are concatenated and
-#'     used as the \sQuote{\code{name}} vertex attribute (i.e. vertex
+#'     The unnamed arguments of `vertices()` are concatenated and
+#'     used as the \sQuote{`name`} vertex attribute (i.e. vertex
 #'     names), the named arguments will be added as additional vertex
 #'     attributes. Examples: \preformatted{  g <- g +
 #'         vertex(shape="circle", color= "red")
@@ -892,16 +892,16 @@ path <- function(...) {
 #'   g <- g + vertex("bar", "foobar")
 #'   g <- g + vertices("bar2", "foobar2", color=1:2, shape="rectangle")}
 #'
-#'     \code{vertex()} is just an alias to \code{vertices()}, and it is
+#'     `vertex()` is just an alias to `vertices()`, and it is
 #'     provided for readability. The user should use it if a single vertex
 #'     is added to the graph.
 #'
 #'   - If it is an object created with the \code{\link{edge}} or
 #'     \code{\link{edges}} function, then new edges will be added to the
 #'     graph. The new edges and possibly their attributes can be specified as
-#'     the arguments of the \code{edges()} function.
+#'     the arguments of the `edges()` function.
 #'
-#'     The unnamed arguments of \code{edges()} are concatenated and used
+#'     The unnamed arguments of `edges()` are concatenated and used
 #'     as vertex ids of the end points of the new edges. The named
 #'     arguments will be added as edge attributes.
 #'
@@ -913,13 +913,13 @@ path <- function(...) {
 #'   g <- g + edges(c("bar", "foo", "foobar2", "bar2"), color="red", weight=1:2)}
 #'     See more examples below.
 #'
-#'     \code{edge()} is just an alias to \code{edges()} and it is provided
+#'     `edge()` is just an alias to `edges()` and it is provided
 #'     for readability. The user should use it if a single edge is added to
 #'     the graph.
 #'
 #'   - If it is an object created with the \code{\link{path}} function, then
 #'     new edges that form a path are added. The edges and possibly their
-#'     attributes are specified as the arguments to the \code{path()}
+#'     attributes are specified as the arguments to the `path()`
 #'     function. The non-named arguments are concatenated and interpreted
 #'     as the vertex ids along the path. The remaining arguments are added
 #'     as edge attributes.
@@ -1032,7 +1032,7 @@ path <- function(...) {
 #' Delete vertices or edges from a graph
 #'
 #' @details
-#' The minus operator (\sQuote{\code{-}}) can be used to remove vertices
+#' The minus operator (\sQuote{`-`}) can be used to remove vertices
 #' or edges from the graph. The operation performed is selected based on
 #' the type of the right hand side argument:
 #' \itemize{
@@ -1043,7 +1043,7 @@ path <- function(...) {
 #'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' g <- g - c("a", "b")}
-#' \item If \code{e2} is a vertex sequence (e.g. created by the
+#' \item If `e2` is a vertex sequence (e.g. created by the
 #'   \code{\link{V}} function), then these vertices will be deleted from
 #'   the graph.
 #' \item If it is an edge sequence (e.g. created by the \code{\link{E}}
@@ -1116,7 +1116,7 @@ path <- function(...) {
 #'
 #' @param x The input graph.
 #' @param n Number of times to replicate it.
-#' @param mark Whether to mark the vertices with a \code{which} attribute,
+#' @param mark Whether to mark the vertices with a `which` attribute,
 #'   an integer number denoting which replication the vertex is coming
 #'   from.
 #' @param ... Additional arguments to satisfy S3 requirements,
@@ -1161,7 +1161,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' The new graph will contain the same vertices, edges and attributes as
 #' the original graph, except that the direction of the edges selected by
-#' their edge IDs in the \code{eids} argument will be reversed. When reversing
+#' their edge IDs in the `eids` argument will be reversed. When reversing
 #' all edges, this operation is also known as graph transpose.
 #'
 #' @param graph The input graph.

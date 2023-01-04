@@ -81,14 +81,14 @@ sequence.}
 the tails of the edges are considered.}
 \item{\code{.to}}{is similar to \code{.inc()}, but only
 the heads of the edges are considered.}
-\item{\code{\%--\%}}{a special operator that can be
+\item{\verb{\\\%--\\\%}}{a special operator that can be
 used to select all edges between two sets of vertices. It ignores
 the edge directions in directed graphs.}
-\item{\code{\%->\%}}{similar to \code{\%--\%},
+\item{\verb{\\\%->\\\%}}{similar to \verb{\\\%--\\\%},
 but edges \emph{from} the left hand side argument, pointing
 \emph{to} the right hand side argument, are selected, in directed
 graphs.}
-\item{\code{\%<-\%}}{similar to \code{\%--\%},
+\item{\verb{\\\%<-\\\%}}{similar to \verb{\\\%--\\\%},
 but edges \emph{to} the left hand side argument, pointing
 \emph{from} the right hand side argument, are selected, in directed
 graphs.}

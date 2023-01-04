@@ -124,17 +124,17 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' @param lwd.median Line width of the median.
 #' @param lwd.quantile Line width of the quantile curves.
 #' @param lty.quantile Line type of the quantile curves.
-#' @param xlim The x limits, a two-element numeric vector. If \code{NULL}, then
+#' @param xlim The x limits, a two-element numeric vector. If `NULL`, then
 #'   it is calculated from the data.
-#' @param ylim The y limits, a two-element numeric vector. If \code{NULL}, then
+#' @param ylim The y limits, a two-element numeric vector. If `NULL`, then
 #'   it is calculated from the data.
 #' @param xlab The x label.
-#' @param ylab The y label. If \code{NULL} then it is automatically added based
-#'   on the \code{comp} argument.
+#' @param ylab The y label. If `NULL` then it is automatically added based
+#'   on the `comp` argument.
 #' @param \dots Additional arguments are passed to [plot()], that is run
 #'   before any of the curves are added, to create the figure.
 #' @return Nothing.
-#' @author Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
+#' @author Eric Kolaczyk (<http://math.bu.edu/people/kolaczyk/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com}.
 #' @seealso \code{\link{sir}} for running the actual simulation.
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of

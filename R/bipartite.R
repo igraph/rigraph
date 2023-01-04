@@ -25,29 +25,29 @@
 #'
 #' A bipartite graph is projected into two one-mode networks
 #'
-#' Bipartite graphs have a \code{type} vertex attribute in igraph, this is
-#' boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
+#' Bipartite graphs have a `type` vertex attribute in igraph, this is
+#' boolean and `FALSE` for the vertices of the first kind and `TRUE`
 #' for vertices of the second kind.
 #'
-#' \code{bipartite_projection_size()} calculates the number of vertices and edges
+#' `bipartite_projection_size()` calculates the number of vertices and edges
 #' in the two projections of the bipartite graphs, without calculating the
 #' projections themselves. This is useful to check how much memory the
 #' projections would need if you have a large bipartite graph.
 #'
-#' \code{bipartite_projection()} calculates the actual projections.  You can use
-#' the \code{probe1} argument to specify the order of the projections in the
-#' result. By default vertex type \code{FALSE} is the first and \code{TRUE} is
+#' `bipartite_projection()` calculates the actual projections.  You can use
+#' the `probe1` argument to specify the order of the projections in the
+#' result. By default vertex type `FALSE` is the first and `TRUE` is
 #' the second.
 #'
-#' \code{bipartite_projection()} keeps vertex attributes.
+#' `bipartite_projection()` keeps vertex attributes.
 #'
 #' @aliases bipartite.projection bipartite.projection.size bipartite_projection_size bipartite_projection
 #' @param graph The input graph. It can be directed, but edge directions are
 #'   ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
-#'   \sQuote{\code{type}} vertex attribute. You must supply this argument if the
-#'   graph has no \sQuote{\code{type}} vertex attribute.
-#' @param multiplicity If \code{TRUE}, then igraph keeps the multiplicity of
+#'   \sQuote{`type`} vertex attribute. You must supply this argument if the
+#'   graph has no \sQuote{`type`} vertex attribute.
+#' @param multiplicity If `TRUE`, then igraph keeps the multiplicity of
 #'   the edges as an edge attribute called \sQuote{weight}.
 #'   E.g. if there is an A-C-B and also an A-D-B
 #'   triple in the bipartite graph (but no more X, such that A-X-B is also in the
@@ -56,10 +56,10 @@
 #'   projections in the resulting list. If given, then it is considered as a
 #'   vertex id (or a symbolic vertex name); the projection containing this vertex
 #'   will be the first one in the result list.  This argument is ignored if only
-#'   one projection is requested in argument \code{which}.
+#'   one projection is requested in argument `which`.
 #' @param which A character scalar to specify which projection(s) to calculate.
 #'   The default is to calculate both.
-#' @param remove.type Logical scalar, whether to remove the \code{type} vertex
+#' @param remove.type Logical scalar, whether to remove the `type` vertex
 #'   attribute from the projections. This makes sense because these graphs are
 #'   not bipartite any more. However if you want to combine them with each other
 #'   (or other bipartite graphs), then it is worth keeping this attribute. By
@@ -153,10 +153,10 @@ bipartite_projection <- function(graph, types = NULL,
 #' This function decides whether the vertices of a network can be mapped to two
 #' vertex types in a way that no vertices of the same type are connected.
 #'
-#' A bipartite graph in igraph has a \sQuote{\code{type}} vertex attribute
+#' A bipartite graph in igraph has a \sQuote{`type`} vertex attribute
 #' giving the two vertex types.
 #'
-#' This function simply checks whether a graph \emph{could} be bipartite. It
+#' This function simply checks whether a graph *could* be bipartite. It
 #' tries to find a mapping that gives a possible division of the vertices into
 #' two classes, such that no two vertices of the same class are connected by an
 #' edge.
@@ -171,7 +171,7 @@ bipartite_projection <- function(graph, types = NULL,
 #' @aliases bipartite.mapping bipartite_mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
-#'   \code{TRUE} if the can be bipartite, \code{FALSE} otherwise.} \item{type}{A
+#'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A
 #'   possible vertex type mapping, a logical vector. If no such mapping exists,
 #'   then an empty vector.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

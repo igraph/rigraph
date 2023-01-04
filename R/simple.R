@@ -31,14 +31,14 @@
 #' endpoints (for directed graphs order does matter). A graph is simple is
 #' it does not contain loop edges and multiple edges.
 #'
-#' \code{is_simple()} checks whether a graph is simple.
+#' `is_simple()` checks whether a graph is simple.
 #'
-#' \code{simplify()} removes the loop and/or multiple edges from a graph.  If
-#' both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
+#' `simplify()` removes the loop and/or multiple edges from a graph.  If
+#' both `remove.loops` and `remove.multiple` are `TRUE` the
 #' function returns a simple graph.
 #'
-#' \code{simplify_and_colorize()} constructs a new, simple graph from a graph and
-#' also sets a \code{color} attribute on both the vertices and the edges.
+#' `simplify_and_colorize()` constructs a new, simple graph from a graph and
+#' also sets a `color` attribute on both the vertices and the edges.
 #' The colors of the vertices represent the number of self-loops that were
 #' originally incident on them, while the colors of the edges represent the
 #' multiplicities of the same edges in the original graph. This allows one to
@@ -53,7 +53,7 @@
 #' @param remove.multiple Logical, whether the multiple edges are to be
 #'   removed.
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
-#'   \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
+#'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
 #'   \code{\link{attribute.combination}} for details on this.
 #' @return a new graph object with the edges deleted.

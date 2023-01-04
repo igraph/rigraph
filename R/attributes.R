@@ -65,7 +65,7 @@ graph_attr <- function(graph, name) {
 #'
 #' @param graph The graph.
 #' @param name The name of the attribute to set. If missing, then
-#'   \code{value} should be a named list, and all list members
+#'   `value` should be a named list, and all list members
 #'   are set as attributes.
 #' @param value The value of the attribute to set
 #' @return The graph, with the attribute(s) added.
@@ -149,7 +149,7 @@ graph.attributes <- function(graph) {
 #'   for these vertices.
 #'   If `NULL`, the default, the attribute is queried for all vertices.
 #' @return The value of the vertex attribute, or the list of
-#'   all vertex attributes, if \code{name} is missing.
+#'   all vertex attributes, if `name` is missing.
 #'
 #' @aliases get.vertex.attribute vertex.attributes
 #' @family graph attributes
@@ -183,13 +183,13 @@ vertex_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph.
 #' @param name The name of the vertex attribute to set. If missing,
-#'   then \code{value} must be a named list, and its entries are
+#'   then `value` must be a named list, and its entries are
 #'   set as vertex attributes.
 #'   If `NULL`, the default, the attribute is set for all vertices.
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
 #' @param value The new value of the attribute(s) for all
-#'   (or \code{index}) vertices.
+#'   (or `index`) vertices.
 #' @return The graph, with the vertex attribute(s) added or set.
 #'
 #' @aliases vertex.attributes<-
@@ -220,7 +220,7 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
 #'   If `NULL`, the default, the attribute is set for all vertices.
-#' @param value The new value of the attribute for all (or \code{index})
+#' @param value The new value of the attribute for all (or `index`)
 #'   vertices.
 #' @return The graph, with the vertex attribute added or set.
 #'
@@ -334,7 +334,7 @@ vertex.attributes <- function(graph, index = NULL) {
 #'   for a subset of edges.
 #'   If `NULL`, the default, the attribute is queried for all edges.
 #' @return The value of the edge attribute, or the list of all
-#'   edge attributes if \code{name} is missing.
+#'   edge attributes if `name` is missing.
 #'
 #' @aliases get.edge.attribute edge.attributes
 #' @family graph attributes
@@ -364,13 +364,13 @@ edge_attr <- function(graph, name, index = NULL) {
 #'
 #' @param graph The graph.
 #' @param name The name of the edge attribute to set. If missing,
-#'   then \code{value} must be a named list, and its entries are
+#'   then `value` must be a named list, and its entries are
 #'   set as edge attributes.
 #' @param index An optional edge sequence to set the attributes
 #'   of a subset of edges.
 #'   If `NULL`, the default, the attribute is set for all edges.
 #' @param value The new value of the attribute(s) for all
-#'   (or \code{index}) edges.
+#'   (or `index`) edges.
 #' @return The graph, with the edge attribute(s) added or set.
 #'
 #' @aliases edge.attributes<-
@@ -401,7 +401,7 @@ edge_attr <- function(graph, name, index = NULL) {
 #' @param index An optional edge sequence to set the attributes of
 #'   a subset of edges.
 #'   If `NULL`, the default, the attribute is set for all edges.
-#' @param value The new value of the attribute for all (or \code{index})
+#' @param value The new value of the attribute for all (or `index`)
 #'   edges.
 #' @return The graph, with the edge attribute added or set.
 #'
@@ -720,7 +720,7 @@ is_named <- function(graph) {
 #' undirected) edge.
 #'
 #' In igraph edge weights are represented via an edge attribute, called
-#' \sQuote{weight}. The \code{is_weighted()} function only checks that such an
+#' \sQuote{weight}. The `is_weighted()` function only checks that such an
 #' attribute exists. (It does not even checks that it is a numeric edge
 #' attribute.)
 #'
@@ -808,7 +808,7 @@ igraph.i.attribute.combination <- function(comb) {
 #' vertex/edge attributes in these cases.
 #'
 #' The functions that support the combination of attributes have one or two
-#' extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
+#' extra arguments called `vertex.attr.comb` and/or `edge.attr.comb`
 #' that specify how to perform the mapping of the attributes. E.g.
 #' \code{\link{contract}} contracts many vertices into a single one, the
 #' attributes of the vertices can be combined and stores as the vertex
@@ -843,26 +843,26 @@ igraph.i.attribute.combination <- function(comb) {
 #' behaviors are predefined: \describe{ \item{"ignore"}{The attribute is
 #' ignored and dropped.} \item{"sum"}{The sum of the attributes is
 #' calculated. This does not work for character attributes and works for
-#' complex attributes only if they have a \code{sum} generic defined. (E.g. it
-#' works for sparse matrices from the \code{Matrix} package, because they have
-#' a \code{sum} method.)} \item{"prod"}{The product of the attributes is
+#' complex attributes only if they have a `sum` generic defined. (E.g. it
+#' works for sparse matrices from the `Matrix` package, because they have
+#' a `sum` method.)} \item{"prod"}{The product of the attributes is
 #' calculated. This does not work for character attributes and works for
-#' complex attributes only if they have a \code{prod} function defined.}
+#' complex attributes only if they have a `prod` function defined.}
 #' \item{"min"}{The minimum of the attributes is calculated and returned.
-#' For character and complex attributes the standard R \code{min} function is
+#' For character and complex attributes the standard R `min` function is
 #' used.} \item{"max"}{The maximum of the attributes is calculated and
-#' returned. For character and complex attributes the standard R \code{max}
+#' returned. For character and complex attributes the standard R `max`
 #' function is used.} \item{"random"}{Chooses one of the supplied
 #' attribute values, uniformly randomly. For character and complex attributes
-#' this is implemented by calling \code{sample}.} \item{"first"}{Always
+#' this is implemented by calling `sample`.} \item{"first"}{Always
 #' chooses the first attribute value. It is implemented by calling the
-#' \code{head} function.} \item{"last"}{Always chooses the last attribute
-#' value. It is implemented by calling the \code{tail} function.}
+#' `head` function.} \item{"last"}{Always chooses the last attribute
+#' value. It is implemented by calling the `tail` function.}
 #' \item{"mean"}{The mean of the attributes is calculated and returned.
-#' For character and complex attributes this simply calls the \code{mean}
+#' For character and complex attributes this simply calls the `mean`
 #' function.} \item{"median"}{The median of the attributes is selected.
-#' Calls the R \code{median} function for all attribute types.}
-#' \item{"concat"}{Concatenate the attributes, using the \code{c}
+#' Calls the R `median` function for all attribute types.}
+#' \item{"concat"}{Concatenate the attributes, using the `c`
 #' function. This results almost always a complex attribute.} }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso \code{\link{graph_attr}}, \code{\link{vertex_attr}},
@@ -903,7 +903,7 @@ NULL
 
 #' Getting and setting graph attributes, shortcut
 #'
-#' The \code{$} operator is a shortcut to get and and set
+#' The `$` operator is a shortcut to get and and set
 #' graph attributes. It is shorter and just as readable as
 #' \code{\link{graph_attr}} and \code{\link{set_graph_attr}}.
 #'
