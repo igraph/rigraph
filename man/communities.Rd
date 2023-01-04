@@ -146,7 +146,7 @@ the graph that was the input of the community detection.
 \code{cut_at()} returns a numeric vector, the membership vector of the
 vertices.
 
-\code{as.dendrogram} returns a \code{\link[stats]{dendrogram}} object.
+\code{\link[=as.dendrogram]{as.dendrogram()}} returns a \code{\link[stats]{dendrogram}} object.
 
 \code{show_trace()} returns a character vector.
 
@@ -210,7 +210,7 @@ vector, as returned by \code{membership()}.
 \code{is_hierarchical()} checks whether a hierarchical algorithm was used to
 find the community structure. Some functions only make sense for
 hierarchical methods (e.g. \code{merges()}, \code{cut_at()} and
-\code{as.dendrogram}).
+\code{\link[=as.dendrogram]{as.dendrogram()}}).
 
 \code{merges()} returns the merge matrix for hierarchical methods. An error
 message is given, if a non-hierarchical method was used to find the
@@ -223,11 +223,11 @@ be expressed as the desired number of communities or as the number of merge
 steps to make. The function gives an error message, if called with a
 non-hierarchical method.
 
-\code{as.dendrogram} converts a hierarchical community structure to a
+\code{\link[=as.dendrogram]{as.dendrogram()}} converts a hierarchical community structure to a
 \code{dendrogram} object. It only works for hierarchical methods, and gives
 an error message to others. See \code{\link[stats]{dendrogram}} for details.
 
-\code{as.hclust} is similar to \code{as.dendrogram}, but converts a
+\code{as.hclust} is similar to \code{\link[=as.dendrogram]{as.dendrogram()}}, but converts a
 hierarchical community structure to a \code{hclust} object.
 
 \code{as_phylo()} converts a hierarchical community structure to a \code{phylo}

@@ -77,7 +77,7 @@ of \code{plot.hclust}.
 The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
 \preformatted{
     plot_dendrogram(x, \dots)
-} The extra arguments are simply passed to \code{as.dendrogram}.
+} The extra arguments are simply passed to \code{\link[=as.dendrogram]{as.dendrogram()}}.
 }
 \examples{
 

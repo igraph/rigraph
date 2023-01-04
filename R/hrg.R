@@ -572,7 +572,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #' The syntax for \code{plot.dendrogram} (\code{mode="dendrogram"}):
 #' \preformatted{
 #'     plot_dendrogram(x, \dots)
-#' } The extra arguments are simply passed to \code{as.dendrogram}.
+#' } The extra arguments are simply passed to [as.dendrogram()].
 #'
 #' @aliases hrg.dendrogram
 #' @param x An \code{igraphHRG}, a hierarchical random graph, as returned by

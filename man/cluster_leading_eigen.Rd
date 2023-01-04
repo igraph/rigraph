@@ -120,7 +120,7 @@ of matrices, Physical Review E 74 036104, 2006.
 \seealso{
 \code{\link{modularity}}, \code{\link{cluster_walktrap}},
 \code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}}, \code{\link[stats]{as.dendrogram}}
+\code{\link{cluster_fast_greedy}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
