@@ -803,14 +803,14 @@ igraph.i.attribute.combination <- function(comb) {
 #'
 #' Many times, when the structure of a graph is modified, vertices/edges map of
 #' the original graph map to vertices/edges in the newly created (modified)
-#' graph. For example \code{\link{simplify}} maps multiple edges to single
+#' graph. For example [simplify()] maps multiple edges to single
 #' edges. igraph provides a flexible mechanism to specify what to do with the
 #' vertex/edge attributes in these cases.
 #'
 #' The functions that support the combination of attributes have one or two
 #' extra arguments called `vertex.attr.comb` and/or `edge.attr.comb`
 #' that specify how to perform the mapping of the attributes. E.g.
-#' \code{\link{contract}} contracts many vertices into a single one, the
+#' [contract()] contracts many vertices into a single one, the
 #' attributes of the vertices can be combined and stores as the vertex
 #' attributes of the new graph.
 #'
@@ -865,9 +865,9 @@ igraph.i.attribute.combination <- function(comb) {
 #' \item{"concat"}{Concatenate the attributes, using the `c`
 #' function. This results almost always a complex attribute.} }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph_attr}}, \code{\link{vertex_attr}},
-#'   \code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
-#'   general. \code{\link{igraph_options}} on igraph parameters.
+#' @seealso [graph_attr()], [vertex_attr()],
+#'   [edge_attr()] on how to use graph/vertex/edge attributes in
+#'   general. [igraph_options()] on igraph parameters.
 #' @keywords graphs
 #' @examples
 #'
@@ -905,7 +905,7 @@ NULL
 #'
 #' The `$` operator is a shortcut to get and and set
 #' graph attributes. It is shorter and just as readable as
-#' \code{\link{graph_attr}} and \code{\link{set_graph_attr}}.
+#' [graph_attr()] and [set_graph_attr()].
 #'
 #' @param x An igraph graph
 #' @param name Name of the attribute to get/set.

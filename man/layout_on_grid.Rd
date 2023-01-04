@@ -39,7 +39,7 @@ dimensions.
 \details{
 The function places the vertices on a simple rectangular grid, one after the
 other. If you want to change the order of the vertices, then see the
-\code{\link{permute}} function.
+\code{\link[=permute]{permute()}} function.
 }
 \examples{
 
@@ -55,7 +55,7 @@ if (interactive()) {
 }
 }
 \seealso{
-\code{\link{layout}} for other layout generators
+\code{\link[=layout]{layout()}} for other layout generators
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

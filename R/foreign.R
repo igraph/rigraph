@@ -97,7 +97,7 @@ write.graph.fromraw <- function(buffer, file) {
 #' \item{directed}{Logical scalar, whether to create a directed graph. The
 #' default value is `TRUE`.} }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{write_graph}}
+#' @seealso [write_graph()]
 #' @keywords graphs
 #' @export
 read_graph <- function(file, format = c(
@@ -150,7 +150,7 @@ read_graph <- function(file, format = c(
 #' The file is sorted by the first and the second column. This format has no
 #' additional arguments.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{read_graph}}
+#' @seealso [read_graph()]
 #' @references Adai AT, Date SV, Wieland S, Marcotte EM. LGL: creating a map of
 #' protein function with an algorithm for visualizing very large biological
 #' networks. *J Mol Biol.* 2004 Jun 25;340(1):179-90.
@@ -464,7 +464,7 @@ write.graph.dot <- function(graph, file, ...) {
 #'
 #' If the `url` argument is specified then it should the complete path to
 #' a local or remote graph database file. In this case we simply call
-#' \code{\link{read_graph}} with the proper arguments to read the file.
+#' [read_graph()] with the proper arguments to read the file.
 #'
 #' If `url` is `NULL`, and this is the default, then the filename is
 #' assembled from the `base`, `prefix`, `type`, `nodes`,
@@ -499,7 +499,7 @@ write.graph.dot <- function(graph, file, ...) {
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{read_graph}}, \code{\link{graph.isomorphic.vf2}}
+#' @seealso [read_graph()], [graph.isomorphic.vf2()]
 #' @references M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 #' of graphs and its use for benchmarking graph isomorphism algorithms,
 #' *Pattern Recognition Letters*, Volume 24, Issue 8 (May 2003)

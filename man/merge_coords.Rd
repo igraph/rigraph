@@ -65,8 +65,8 @@ g <- disjoint_union(graphs)
 plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 }
 \seealso{
-\code{\link{plot.igraph}}, \code{\link{tkplot}},
-\code{\link{layout}}, \code{\link{disjoint_union}}
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}},
+\code{\link[=layout]{layout()}}, \code{\link[=disjoint_union]{disjoint_union()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

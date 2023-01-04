@@ -65,7 +65,7 @@
 #'   graph. This vector is added to the diagonal of the adjacency matrix.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by \code{\link{igraph.arpack.default}}.
+#'   the values given by [igraph.arpack.default].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
@@ -73,8 +73,8 @@
 #'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
 #'   or the singular values (for directed graphs) calculated by the algorithm.}
 #'   \item{options}{A named list, information about the underlying ARPACK
-#'   computation. See \code{\link{arpack}} for the details.}
-#' @seealso \code{\link{sample_dot_product}}
+#'   computation. See [arpack()] for the details.}
+#' @seealso [sample_dot_product()]
 #' @references Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E.  A
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 #' *Journal of the American Statistical Association*, Vol. 107(499), 2012
@@ -116,7 +116,7 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' @param sv A numeric vector, the ordered singular values.
 #' @return A numeric scalar, the estimate of \eqn{d}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{embed_adjacency_matrix}}
+#' @seealso [embed_adjacency_matrix()]
 #' @references M. Zhu, and A. Ghodsi (2006). Automatic dimensionality selection
 #' from the scree plot via the use of profile likelihood. *Computational
 #' Statistics and Data Analysis*, Vol. 51, 918--930.
@@ -160,7 +160,7 @@ dim_select <- dim_select
 #' the graph based on its Laplacian matrix, \eqn{L}. This representation is
 #' computed via the singular value decomposition of the Laplacian matrix.
 #'
-#' They are essentially doing the same as \code{\link{embed_adjacency_matrix}},
+#' They are essentially doing the same as [embed_adjacency_matrix()],
 #' but work on the Laplacian matrix, instead of the adjacency matrix.
 #'
 #' @param graph The input graph, directed or undirected.
@@ -172,7 +172,7 @@ dim_select <- dim_select
 #'   embedding. If the graph has a `weight` edge attribute, then this is
 #'   used by default. For weighted embedding, edge weights are used instead
 #'   of the binary adjacency matrix, and vertex strength (see
-#'   \code{\link{strength}}) is used instead of the degrees.
+#'   [strength()]) is used instead of the degrees.
 #' @param which Which eigenvalues (or singular values, for directed graphs) to
 #'   use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
 #'   the ones (algebraic) largest, and \sQuote{sa} is the (algebraic) smallest
@@ -201,7 +201,7 @@ dim_select <- dim_select
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by \code{\link{igraph.arpack.default}}.
+#'   the values given by [igraph.arpack.default].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
@@ -209,10 +209,10 @@ dim_select <- dim_select
 #'   is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
 #'   or the singular values (for directed graphs) calculated by the algorithm.}
 #'   \item{options}{A named list, information about the underlying ARPACK
-#'   computation. See \code{\link{arpack}} for the details.}
+#'   computation. See [arpack()] for the details.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{embed_adjacency_matrix}},
-#' \code{\link{sample_dot_product}}
+#' @seealso [embed_adjacency_matrix()],
+#' [sample_dot_product()]
 #' @references Sussman, D.L., Tang, M., Fishkind, D.E., Priebe, C.E.  A
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 #' *Journal of the American Statistical Association*, Vol. 107(499), 2012

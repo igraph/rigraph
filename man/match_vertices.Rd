@@ -71,7 +71,7 @@ Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
 Online: \url{https://arxiv.org/abs/1209.0367}
 }
 \seealso{
-\code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}}
 }
 \author{
 Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}

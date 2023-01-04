@@ -74,7 +74,7 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link{sample_gnp}} for the unipartite version.
+\code{\link[=sample_gnp]{sample_gnp()}} for the unipartite version.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -137,8 +137,8 @@ Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 }
 \seealso{
-\code{\link{layout_with_fr}},
-\code{\link{layout_with_kk}} for other layout algorithms.
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

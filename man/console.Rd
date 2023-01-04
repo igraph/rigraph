@@ -26,7 +26,7 @@ each time an igraph function supporting it starts; to close it, set the
 The console is written in Tcl/Tk and required the \code{tcltk} package.
 }
 \seealso{
-\code{\link{igraph_options}} and the \code{verbose} option.
+\code{\link[=igraph_options]{igraph_options()}} and the \code{verbose} option.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -73,7 +73,7 @@
 #' @param graph The input graph, it can be directed or undirected.
 #' @param types Vector giving the vertex types. They as assumed to be integer
 #'   numbers, starting with one. Non-integer values are converted to integers
-#'   with \code{\link{as.integer}}.
+#'   with [as.integer()].
 #' @param types1 The vertex values, these can be arbitrary numeric values.
 #' @param types2 A second value vector to be using for the incoming edges when
 #'   calculating assortativity for a directed graph.  Supply `NULL` here if

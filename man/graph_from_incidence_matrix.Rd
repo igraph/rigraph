@@ -82,7 +82,7 @@ graph_from_incidence_matrix(inc)
 
 }
 \seealso{
-\code{\link{make_bipartite_graph}} for another way to create bipartite
+\code{\link[=make_bipartite_graph]{make_bipartite_graph()}} for another way to create bipartite
 graphs
 }
 \author{

@@ -55,7 +55,7 @@ communities, the first line is the first merge and it creates community
 \sQuote{\code{N}}, \code{N} is the number of initial communities in the
 graph, the second line creates community \code{N+1}, etc.  }
 \item{options}{Information about the underlying ARPACK computation, see
-\code{\link{arpack}} for details.  }
+\code{\link[=arpack]{arpack()}} for details.  }
 }
 \description{
 This function tries to find densely connected subgraphs in a graph by
@@ -118,9 +118,9 @@ MEJ Newman: Finding community structure using the eigenvectors
 of matrices, Physical Review E 74 036104, 2006.
 }
 \seealso{
-\code{\link{modularity}}, \code{\link{cluster_walktrap}},
-\code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
+\code{\link[=modularity]{modularity()}}, \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -19,7 +19,7 @@ ignored for undirected graphs.}
 A list of edge sequences.
 }
 \description{
-This function is similar to \code{\link{incident}}, but it
+This function is similar to \code{\link[=incident]{incident()}}, but it
 queries multiple vertices at once.
 }
 \examples{

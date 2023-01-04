@@ -64,9 +64,9 @@
 #'     after the cut edges are removed. Note that these vertices might be
 #'     actually in different components (after the cut edges are removed), as
 #'     the graph may fall apart into more than two components.}
-#' @seealso \code{\link{max_flow}} for the related maximum flow
-#'   problem, \code{\link{distances}}, \code{\link{edge_connectivity}},
-#'   \code{\link{vertex_connectivity}}
+#' @seealso [max_flow()] for the related maximum flow
+#'   problem, [distances()], [edge_connectivity()],
+#'   [vertex_connectivity()]
 #' @references M. Stoer and F. Wagner: A simple min-cut algorithm,
 #' *Journal of the ACM*, 44 585-591, 1997.
 #' @examples
@@ -198,8 +198,8 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' @param ... Ignored.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_flow}}, \code{\link{edge_connectivity}},
-#' \code{\link{edge_disjoint_paths}}, \code{\link{adhesion}}
+#' @seealso [max_flow()], [edge_connectivity()],
+#' [edge_disjoint_paths()], [adhesion()]
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
 #' Blocks In Social Networks: Node Connectivity and Conditional Density.
 #' *Sociological Methodology* 31 (1) : 305-359.
@@ -292,8 +292,8 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #'   thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_flow}}, \code{\link{vertex_connectivity}},
-#' \code{\link{vertex_disjoint_paths}}, \code{\link{cohesion}}
+#' @seealso [max_flow()], [vertex_connectivity()],
+#' [vertex_disjoint_paths()], [cohesion()]
 #' @references Douglas R. White and Frank Harary: The cohesiveness of blocks in
 #' social networks: node connectivity and conditional density, TODO: citation
 #' @export
@@ -420,7 +420,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #'   and its complementer \eqn{V-X}, generates the cut that contains exactly the
 #'   edges that go from \eqn{X} to \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{st_min_cuts}} to list all minimum cuts.
+#' @seealso [st_min_cuts()] to list all minimum cuts.
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
 #' @keywords graphs
@@ -474,7 +474,7 @@ st_cuts <- st_cuts
 #'   generates the cut that contains exactly the edges that go from \eqn{X} to
 #'   \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{st_cuts}}, \code{\link{min_separators}}
+#' @seealso [st_cuts()], [min_separators()]
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
 #' @keywords graphs
@@ -654,9 +654,9 @@ min_st_separators <- min_st_separators
 #'     because of the gap heuristics and `nobfs` is the number of
 #'     times a global breadth-first-search update was performed to assign
 #'     better height (=distance) values to the vertices.}
-#' @seealso \code{\link{min_cut}} for minimum cut calculations,
-#'   \code{\link{distances}}, \code{\link{edge_connectivity}},
-#'   \code{\link{vertex_connectivity}}
+#' @seealso [min_cut()] for minimum cut calculations,
+#'   [distances()], [edge_connectivity()],
+#'   [vertex_connectivity()]
 #' @references A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 #' Flow Problem *Journal of the ACM* 35:921-940, 1988.
 #' @examples
@@ -687,7 +687,7 @@ max_flow <- max_flow
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
-#' @seealso \code{\link{is_min_separator}}, \code{\link{min_separators}}
+#' @seealso [is_min_separator()], [min_separators()]
 #'   lists all vertex separator of minimum size.
 #' @export
 is_separator <- is_separator
@@ -711,7 +711,7 @@ is_separator <- is_separator
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
-#' @seealso \code{\link{min_separators}} lists all vertex separator of minimum
+#' @seealso [min_separators()] lists all vertex separator of minimum
 #' size.
 #' @examples
 #' # The graph from the Moody-White paper
@@ -763,7 +763,7 @@ is_min_separator <- is_min_separator
 #'   ignored.
 #' @return A list of numeric vectors. Each numeric vector is a vertex
 #'   separator.
-#' @seealso \code{\link{is.separator}}
+#' @seealso [is.separator()]
 #' @references Arkady Kanevsky: Finding all minimum-size separating vertex sets
 #' in a graph. *Networks* 23 533--541, 1993.
 #'

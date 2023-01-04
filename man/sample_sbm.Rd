@@ -53,7 +53,7 @@ Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
 and evaluation. \emph{Social Networks}, 14, 5--61.
 }
 \seealso{
-\code{\link{sample_gnp}}, \code{\link{sample_gnm}}
+\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_gnm]{sample_gnm()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

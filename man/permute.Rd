@@ -23,7 +23,7 @@ Create a new graph, by permuting vertex ids.
 \details{
 This function creates a new graph from the input graph by permuting its
 vertices according to the specified mapping. Call this function with the
-output of \code{\link{canonical_permutation}} to create the canonical form
+output of \code{\link[=canonical_permutation]{canonical_permutation()}} to create the canonical form
 of a graph.
 
 \code{permute()} keeps all graph, vertex and edge attributes of the graph.
@@ -47,7 +47,7 @@ E(g2)$weight
 all(sort(E(g2)$weight) == sort(E(g)$weight))
 }
 \seealso{
-\code{\link{canonical_permutation}}
+\code{\link[=canonical_permutation]{canonical_permutation()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

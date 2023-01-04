@@ -104,7 +104,7 @@ Bailey, Norman T. J. (1975). The mathematical theory of
 infectious diseases and its applications (2nd ed.). London: Griffin.
 }
 \seealso{
-\code{\link{plot.sir}} to conveniently plot the results
+\code{\link[=plot.sir]{plot.sir()}} to conveniently plot the results
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk

@@ -115,7 +115,7 @@ Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 Reports, 2008. 2936: p. 1-10.
 }
 \seealso{
-\code{\link{layout}} for other layout generators.
+\code{\link[=layout]{layout()}} for other layout generators.
 }
 \author{
 Shawn Martin (\url{http://www.cs.otago.ac.nz/homepages/smartin/})

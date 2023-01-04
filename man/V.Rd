@@ -48,7 +48,7 @@ attributes. See \code{\link{[.igraph.vs}} for details.
 \section{Querying or setting attributes}{
 
 Vertex sequences can be used to query or set attributes for the
-vertices in the sequence. See \code{\link{$.igraph.vs}} for details.
+vertices in the sequence. See \code{\link[=$.igraph.vs]{$.igraph.vs()}} for details.
 }
 
 \examples{

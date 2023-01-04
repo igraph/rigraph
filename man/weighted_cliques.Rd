@@ -38,7 +38,7 @@ or only the maximal ones (\code{TRUE}).}
 \value{
 \code{weighted_cliques()} and \code{largest_weighted_cliques()} return a
 list containing numeric vectors of vertex IDs. Each list element is a weighted
-clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs()}}.
 
 \code{weighted_clique_num()} and \code{count_max_weighted_cliques} return an integer
 scalar.
@@ -77,7 +77,7 @@ largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-\code{\link{ivs}}
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

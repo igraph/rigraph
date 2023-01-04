@@ -188,8 +188,8 @@ i.postprocess.layout <- function(maybe_layout) {
 #'   curvature between `-start` and `start`, spaced equally.
 #' @return A numeric vector, its length is the number of edges in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{igraph.plotting}} for all plotting parameters,
-#' \code{\link{plot.igraph}}, \code{\link{tkplot}} and \code{\link{rglplot}}
+#' @seealso [igraph.plotting] for all plotting parameters,
+#' [plot.igraph()], [tkplot()] and [rglplot()]
 #' for plotting functions.
 #' @export
 #' @importFrom stats ave

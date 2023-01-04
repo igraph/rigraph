@@ -107,7 +107,7 @@ Connectedness matters: construction and exact random sampling of connected netwo
 \url{https://doi.org/10.1088/2632-072X/abced5}
 }
 \seealso{
-\code{\link{sample_degseq}} for a randomized variant that samples
+\code{\link[=sample_degseq]{sample_degseq()}} for a randomized variant that samples
 from graphs with the given degree sequence.
 }
 \keyword{graphs}

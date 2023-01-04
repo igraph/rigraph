@@ -48,7 +48,7 @@
 #'   The edge and vertex attributes of the original graph are preserved in the
 #'   result.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{components}}
+#' @seealso [components()]
 #' @references Prim, R.C. 1957. Shortest connection networks and some
 #' generalizations *Bell System Technical Journal*, 37 1389--1401.
 #' @export

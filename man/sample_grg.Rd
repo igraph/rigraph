@@ -45,7 +45,7 @@ g2 <- sample_grg(1000, 0.05, torus = TRUE)
 
 }
 \seealso{
-\code{\link{sample_gnp}}
+\code{\link[=sample_gnp]{sample_gnp()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}, first version was

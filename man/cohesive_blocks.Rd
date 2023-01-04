@@ -62,7 +62,7 @@ max_cohesion(blocks)
 \arguments{
 \item{graph}{For \code{cohesive_blocks()} a graph object of class
 \code{igraph}. It must be undirected and simple. (See
-\code{\link{is_simple}}.)
+\code{\link[=is_simple]{is_simple()}}.)
 
 For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
 supplied whose cohesive block structure is given in the \code{blocks()}
@@ -195,7 +195,7 @@ file with all the information, or a set of files, depending on its
 \code{project.file} argument. If \code{project.file} is \code{TRUE}, then
 the following information is written to the file (or connection) given in
 the \code{file} argument: (1) the input graph, together with its attributes,
-see \code{\link{write_graph}} for details; (2) the hierarchy graph; and (3)
+see \code{\link[=write_graph]{write_graph()}} for details; (2) the hierarchy graph; and (3)
 one binary partition for each cohesive block. If \code{project.file} is
 \code{FALSE}, then the \code{file} argument must be a character scalar and
 it is used as the base name for the generated files. If \code{file} is
@@ -290,7 +290,7 @@ A hierarchical concept of social groups. \emph{American Sociological
 Review}, 68(1):103--127, Feb 2003.
 }
 \seealso{
-\code{\link{cohesion}}
+\code{\link[=cohesion]{cohesion()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} for the current

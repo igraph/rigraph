@@ -18,6 +18,6 @@ This is an S3 generic function. See \code{methods("difference")}
 for the actual implementations for various S3 classes. Initially
 it is implemented for igraph graphs (difference of edges in two graphs),
 and igraph vertex and edge sequences. See
-\code{\link{difference.igraph}}, and
-\code{\link{difference.igraph.vs}}.
+\code{\link[=difference.igraph]{difference.igraph()}}, and
+\code{\link[=difference.igraph.vs]{difference.igraph.vs()}}.
 }

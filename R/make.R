@@ -141,7 +141,7 @@
 #' `make_()` is a generic function for creating graphs.
 #' For every graph constructor in igraph that has a `make_` prefix,
 #' there is a corresponding function without the prefix: e.g.
-#' for \code{\link{make_ring}} there is also \code{\link{ring}}, etc.
+#' for [make_ring()] there is also [ring()], etc.
 #'
 #' The same is true for the random graph samplers, i.e. for each
 #' constructor with a `sample_` prefix, there is a corresponding
@@ -150,7 +150,7 @@
 #' These shorter forms can be used together with `make_()`.
 #' The advantage of this form is that the user can specify constructor
 #' modifiers which work with all constructors. E.g. the
-#' \code{\link{with_vertex_}} modifier adds vertex attributes
+#' [with_vertex_()] modifier adds vertex attributes
 #' to the newly created graphs.
 #'
 #' See the examples and the various constructor modifiers below.
@@ -513,12 +513,12 @@ with_graph_ <- function(...) {
 #'   insensitive.
 #'
 #'   Starting from igraph 0.8.0, you can also include literals here,
-#'   via igraph's formula notation (see \code{\link{graph_from_literal}}).
+#'   via igraph's formula notation (see [graph_from_literal()]).
 #'   In this case, the first term of the formula has to start with
 #'   a \sQuote{`~`} character, just like regular formulae in R.
 #'   See examples below.
 #' @param ... For `make_graph()`: extra arguments for the case when the
-#'   graph is given via a literal, see \code{\link{graph_from_literal}}.
+#'   graph is given via a literal, see [graph_from_literal()].
 #'   For `directed_graph()` and `undirected_graph()`:
 #'   Passed to `make_directed_graph()` or `make_undirected_graph()`.
 #' @param n The number of vertices in the graph. This argument is
@@ -796,7 +796,7 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' @param ... For `graph_from_literal()` the formulae giving the
 #'   structure of the graph, see details below. For `from_literal()`
 #'   all arguments are passed to `graph_from_literal()`.
-#' @param simplify Logical scalar, whether to call \code{\link{simplify}}
+#' @param simplify Logical scalar, whether to call [simplify()]
 #'   on the created graph. By default the graph is simplified, loop and
 #'   multiple edges are removed.
 #' @return An igraph graph
@@ -1105,7 +1105,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' Create a ring graph
 #'
 #' A ring is a one-dimensional lattice and this function is a special case
-#' of \code{\link{make_lattice}}.
+#' of [make_lattice()].
 #'
 #' @aliases make_ring graph.ring
 #' @param n Number of vertices.
@@ -1235,7 +1235,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #' @param prufer The Prufer sequence to convert into a graph
 #' @return A graph object.
 #'
-#' @seealso \code{\link{to_prufer}} to convert a graph into its Prufer sequence
+#' @seealso [to_prufer()] to convert a graph into its Prufer sequence
 #' @keywords graphs
 #' @examples
 #'
@@ -1417,7 +1417,7 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>
-#' @seealso \code{\link{make_kautz_graph}}, \code{\link{make_line_graph}}
+#' @seealso [make_kautz_graph()], [make_line_graph()]
 #' @keywords graphs
 #' @export
 #' @examples
@@ -1464,7 +1464,7 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' @return A graph object.
 #' @author Gabor Csardi <csardi.gabor@@gmail.com>, the first version in R was
 #' written by Vincent Matossian.
-#' @seealso \code{\link{make_de_bruijn_graph}}, \code{\link{make_line_graph}}
+#' @seealso [make_de_bruijn_graph()], [make_line_graph()]
 #' @keywords graphs
 #' @export
 #' @examples
@@ -1510,7 +1510,7 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #'   ignored for undirected graphs.x
 #' @return An igraph graph, with the \sQuote{`type`} vertex attribute set.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{make_full_graph}} for creating one-mode full graphs
+#' @seealso [make_full_graph()] for creating one-mode full graphs
 #' @keywords graphs
 #' @examples
 #'
@@ -1574,7 +1574,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'   When the vector is a named vector, the names will be attached to the graph
 #'   as the `name` vertex attribute.
 #' @param edges A vector giving the edges of the graph, the same way as for the
-#'   regular \code{\link{graph}} function. It is checked that the edges indeed
+#'   regular [graph()] function. It is checked that the edges indeed
 #'   connect vertices of different kind, according to the supplied `types`
 #'   vector. The vector may be a string vector if `types` is a named vector.
 #' @param directed Whether to create a directed graph, boolean constant. Note
@@ -1586,7 +1586,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #'
 #'   `is_bipartite()` returns a logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph}} to create one-mode networks
+#' @seealso [graph()] to create one-mode networks
 #' @keywords graphs
 #' @examples
 #'
@@ -1679,7 +1679,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' @param repeats Integer constant, how many times to repeat the shifts.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph}} can create arbitrary graphs, see also the other
+#' @seealso [graph()] can create arbitrary graphs, see also the other
 #' functions on the its manual page for creating special graphs.
 #' @keywords graphs
 #' @examples
@@ -1735,7 +1735,7 @@ graph_from_lcf <- graph_from_lcf
 #'   unimplemented). \dQuote{all} allows all types of edges. The default is
 #'   \dQuote{simple}.
 #' @return The new graph object.
-#' @seealso \code{\link{sample_degseq}} for a randomized variant that samples
+#' @seealso [sample_degseq()] for a randomized variant that samples
 #' from graphs with the given degree sequence.
 #' @references V. Havel,
 #' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),

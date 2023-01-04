@@ -119,7 +119,7 @@ is_dag <- is_dag
 #' broken randomly.
 #'
 #' The algorithm provides a simple basis for deciding whether a graph is
-#' chordal, see References below, and also \code{\link{is_chordal}}.
+#' chordal, see References below, and also [is_chordal()].
 #'
 #' @aliases maximum.cardinality.search max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
@@ -131,7 +131,7 @@ is_dag <- is_dag
 #'   the elements of this vector are the vertices in reverse maximum cardinality
 #'   search order.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{is_chordal}}
+#' @seealso [is_chordal()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
 #' linear-time algorithms to test chordality of graphs, test acyclicity of
 #' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal
@@ -180,8 +180,8 @@ max_cardinality <- max_cardinality
 #'   argument is ignored for undirected graphs.
 #' @return `eccentricity()` returns a numeric vector, containing the
 #'   eccentricity score of each given vertex.
-#' @seealso \code{\link{radius}} for a related concept,
-#'   \code{\link{distances}} for general shortest path calculations.
+#' @seealso [radius()] for a related concept,
+#'   [distances()] for general shortest path calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
@@ -212,8 +212,8 @@ eccentricity <- eccentricity
 #'   undirected graph will be used, edge directions will be ignored. This
 #'   argument is ignored for undirected graphs.
 #' @return A numeric scalar, the radius of the graph.
-#' @seealso \code{\link{eccentricity}} for the underlying
-#'   calculations, code{\link{distances}} for general shortest path
+#' @seealso [eccentricity()] for the underlying
+#'   calculations, code{[distances]} for general shortest path
 #'   calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.

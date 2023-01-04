@@ -131,7 +131,7 @@ Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. \emph{Journal
 of Mathematical Sociology} 25(2):163-177, 2001.
 }
 \seealso{
-\code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+\code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

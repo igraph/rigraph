@@ -43,7 +43,7 @@ Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
-\code{\link{sample_gnm}}, \code{\link{sample_pa}}
+\code{\link[=sample_gnm]{sample_gnm()}}, \code{\link[=sample_pa]{sample_pa()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

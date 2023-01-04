@@ -41,11 +41,11 @@ attributes of the vertices in a vertex sequence.
 }
 \details{
 The query form of \code{$} is a shortcut for
-\code{\link{vertex_attr}}, e.g. \code{V(g)[idx]$attr} is equivalent
+\code{\link[=vertex_attr]{vertex_attr()}}, e.g. \code{V(g)[idx]$attr} is equivalent
 to \code{vertex_attr(g, attr, V(g)[idx])}.
 
 The assignment form of \code{$} is a shortcut for
-\code{\link{set_vertex_attr}}, e.g. \code{V(g)[idx]$attr <- value} is
+\code{\link[=set_vertex_attr]{set_vertex_attr()}}, e.g. \code{V(g)[idx]$attr <- value} is
 equivalent to \code{g <- set_vertex_attr(g, attr, V(g)[idx], value)}.
 }
 \examples{

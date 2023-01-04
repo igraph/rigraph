@@ -296,7 +296,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
 #'   parameter.
 #' @param locality Whether to calculate the \sQuote{us} or \sQuote{them}
 #'   statistics.
-#' @param ... Extra arguments are passed to \code{\link{local_scan}}.
+#' @param ... Extra arguments are passed to [local_scan()].
 #' @return A list with entries:
 #'   \item{stat}{The scan statistics in each time step. It is `NA`
 #'     for the initial `tau + ell` time steps.}

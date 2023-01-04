@@ -9,7 +9,7 @@
 }
 \arguments{
 \item{x}{An \code{igraphHRG}, a hierarchical random graph, as returned by
-the \code{\link{fit_hrg}} function.}
+the \code{\link[=fit_hrg]{fit_hrg()}} function.}
 
 \item{mode}{Which dendrogram plotting function to use. See details below.}
 

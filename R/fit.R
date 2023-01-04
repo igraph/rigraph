@@ -42,7 +42,7 @@
 #'
 #' `fit_power_law()` provides two maximum likelihood implementations.  If
 #' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
-#' optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
+#' optimization (see [mle][stats4::mle]) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
 #' optimization method and/or its parameters.  This implementation can
 #' *not* to fit the \eqn{x_{min}}{xmin} argument, so use the
@@ -77,13 +77,13 @@
 #' @param implementation Character scalar. Which implementation to use. See
 #'   details below.
 #' @param \dots Additional arguments, passed to the maximum likelihood
-#'   optimizing function, \code{\link[stats4]{mle}}, if the \sQuote{`R.mle`}
+#'   optimizing function, [stats4::mle()], if the \sQuote{`R.mle`}
 #'   implementation is chosen. It is ignored by the \sQuote{`plfit`}
 #'   implementation.
 #' @return Depends on the `implementation` argument. If it is
 #'   \sQuote{`R.mle`}, then an object with class \sQuote{`mle`}. It can
 #'   be used to calculate confidence intervals and log-likelihood. See
-#'   \code{\link[stats4]{mle-class}} for details.
+#'   [stats4::mle-class()] for details.
 #'
 #'   If `implementation` is \sQuote{`plfit`}, then the result is a
 #'   named list with entries: \item{continuous}{Logical scalar, whether the
@@ -101,7 +101,7 @@
 #'   power-law distribution.}
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link[stats4]{mle}}
+#' @seealso [stats4::mle()]
 #' @references Power laws, Pareto distributions and Zipf's law, M. E. J.
 #' Newman, *Contemporary Physics*, 46, 323-351, 2005.
 #'

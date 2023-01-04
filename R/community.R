@@ -62,7 +62,7 @@
 #' graph itself was named. Otherwise numeric vertex ids are used.
 #'
 #' `modularity()` gives the modularity score of the partitioning. (See
-#' \code{\link{modularity.igraph}} for details. For algorithms that do not
+#' [modularity.igraph()] for details. For algorithms that do not
 #' result a single partitioning, the highest modularity value is returned.
 #'
 #' `algorithm()` gives the name of the algorithm that was used to calculate
@@ -91,7 +91,7 @@
 #'
 #' [as.dendrogram()] converts a hierarchical community structure to a
 #' `dendrogram` object. It only works for hierarchical methods, and gives
-#' an error message to others. See \code{\link[stats]{dendrogram}} for details.
+#' an error message to others. See [stats::dendrogram()] for details.
 #'
 #' `as.hclust` is similar to [as.dendrogram()], but converts a
 #' hierarchical community structure to a `hclust` object.
@@ -100,21 +100,21 @@
 #' object, you will need the `ape` package for this.
 #'
 #' `show_trace()` works (currently) only for communities found by the leading
-#' eigenvector method (\code{\link{cluster_leading_eigen}}), and
+#' eigenvector method ([cluster_leading_eigen()]), and
 #' returns a character vector that gives the steps performed by the algorithm
 #' while finding the communities.
 #'
 #' `code_len()` is defined for the InfoMAP method
-#' (\code{\link{cluster_infomap}} and returns the code length of the
+#' ([cluster_infomap()] and returns the code length of the
 #' partition.
 #'
 #' It is possibly to call the [plot()] function on `communities`
-#' objects. This will plot the graph (and uses \code{\link{plot.igraph}}
+#' objects. This will plot the graph (and uses [plot.igraph()]
 #' internally), with the communities shown. By default it colores the vertices
 #' according to their communities, and also marks the vertex groups
 #' corresponding to the communities. It passes additional arguments to
-#' \code{\link{plot.igraph}}, please see that and also
-#' \code{\link{igraph.plotting}} on how to change the plot.
+#' [plot.igraph()], please see that and also
+#' [igraph.plotting] on how to change the plot.
 #'
 #' @rdname communities
 #' @aliases communities membership algorithm crossing cutat merges sizes cut_at
@@ -142,11 +142,11 @@
 #' @param edge.color The colors of the edges. By default the edges within
 #'   communities are colored green and other edges are red.
 #' @param hang Numeric scalar indicating how the height of leaves should be
-#'   computed from the heights of their parents; see \code{\link{plot.hclust}}.
+#'   computed from the heights of their parents; see [plot.hclust()].
 #' @param use.modularity Logical scalar, whether to use the modularity values
 #'   to define the height of the branches.
 #' @param \dots Additional arguments. `plot.communities` passes these to
-#'   \code{\link{plot.igraph}}. The other functions silently ignore
+#'   [plot.igraph()]. The other functions silently ignore
 #'   them.
 #' @param membership Numeric vector, one value for each vertex, the membership
 #'   vector of the community structure. Might also be `NULL` if the
@@ -183,7 +183,7 @@
 #'   `cut_at()` returns a numeric vector, the membership vector of the
 #'   vertices.
 #'
-#'   [as.dendrogram()] returns a \code{\link[stats]{dendrogram}} object.
+#'   [as.dendrogram()] returns a [dendrogram] object.
 #'
 #'   `show_trace()` returns a character vector.
 #'
@@ -193,20 +193,20 @@
 #'   [plot()] for `communities` objects returns `NULL`, invisibly.
 #'
 #'   #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso See \code{\link{plot_dendrogram}} for plotting community structure
+#' @seealso See [plot_dendrogram()] for plotting community structure
 #' dendrograms.
 #'
-#' See \code{\link{compare}} for comparing two community structures
+#' See [compare()] for comparing two community structures
 #' on the same graph.
 #'
 #' The different methods for finding communities, they all return a
-#' `communities` object: \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_label_prop}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_louvain}}, \code{\link{cluster_leiden}},
-#' \code{\link{cluster_optimal}}, \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_walktrap}}.
+#' `communities` object: [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()],
+#' [cluster_label_prop()],
+#' [cluster_leading_eigen()],
+#' [cluster_louvain()], [cluster_leiden()],
+#' [cluster_optimal()], [cluster_spinglass()],
+#' [cluster_walktrap()].
 #' @keywords graphs
 #' @export
 #' @examples
@@ -413,10 +413,10 @@ modularity <- function(x, ...) {
 #'   For `modularity_matrix()` a numeric square matrix, its order is the number of
 #'   vertices in the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_louvain}} and \code{\link{cluster_leiden}} for
+#' @seealso [cluster_walktrap()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()], [cluster_spinglass()],
+#' [cluster_louvain()] and [cluster_leiden()] for
 #' various community detection methods.
 #' @references Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 #' structure in very large networks, *Physical Review E* 2004, 70, 066111
@@ -905,8 +905,8 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   algorithm, using the number of spins as the number of colors. This argument
 #'   is ignored if the \sQuote{orig} implementation is chosen.
 #' @return If the `vertex` argument is not given, ie. the first form is
-#'   used then a \code{\link{cluster_spinglass}} returns a
-#'   \code{\link{communities}} object.
+#'   used then a [cluster_spinglass()] returns a
+#'   [communities()] object.
 #'
 #'   If the `vertex` argument is present, ie. the second form is used then a
 #'   named list is returned with the following components:
@@ -921,7 +921,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'
 #' Changes to the original function for including the possibility of negative
 #' ties were implemented by Vincent Traag (<http://www.traag.net/>).
-#' @seealso \code{\link{communities}}, \code{\link{components}}
+#' @seealso [communities()], [components()]
 #' @references J. Reichardt and S. Bornholdt: Statistical Mechanics of
 #' Community Detection, *Phys. Rev. E*, 74, 016110 (2006),
 #' <https://arxiv.org/abs/cond-mat/0603718>
@@ -1003,7 +1003,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' van Eck & Waltman.
 #'
 #' The Leiden algorithm is similar to the Louvain algorithm,
-#' \code{\link{cluster_louvain}}, but it is faster and yields higher quality
+#' [cluster_louvain()], but it is faster and yields higher quality
 #' solutions. It can optimize both modularity and the Constant Potts Model,
 #' which does not suffer from the resolution-limit (see preprint
 #' http://arxiv.org/abs/1104.3083).
@@ -1070,23 +1070,23 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #'   If this is not provided, it will be automatically determined on the basis
 #'   of the `objective_function`. Please see the details of this function
 #'   how to interpret the vertex weights.
-#' @return `cluster_leiden()` returns a \code{\link{communities}}
-#'   object, please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_leiden()` returns a [communities()]
+#'   object, please see the [communities()] manual page for details.
 #' @author Vincent Traag
-#' @seealso See \code{\link{communities}} for extracting the membership,
+#' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_label_prop}}
-#' \code{\link{cluster_louvain}}
-#' \code{\link{cluster_fluid_communities}}
-#' \code{\link{cluster_infomap}}
-#' \code{\link{cluster_optimal}}
-#' \code{\link{cluster_walktrap}}
+#' Other community detection algorithms: [cluster_walktrap()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()],
+#' [cluster_label_prop()]
+#' [cluster_louvain()]
+#' [cluster_fluid_communities()]
+#' [cluster_infomap()]
+#' [cluster_optimal()]
+#' [cluster_walktrap()]
 #' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 \[cs.SI\]
@@ -1196,20 +1196,20 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #'   Edge directions are ignored. Weights are not considered.
 #' @param no.of.communities The number of communities to be found. Must be
 #'   greater than 0 and fewer than number of vertices in the graph.
-#' @return `cluster_fluid_communities()` returns a \code{\link{communities}}
-#'   object, please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_fluid_communities()` returns a [communities()]
+#'   object, please see the [communities()] manual page for details.
 #' @author Ferran Parés
-#' @seealso See \code{\link{communities}} for extracting the membership,
+#' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_label_prop}}
-#' \code{\link{cluster_louvain}},
-#' \code{\link{cluster_leiden}}
+#' Other community detection algorithms: [cluster_walktrap()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()],
+#' [cluster_label_prop()]
+#' [cluster_louvain()],
+#' [cluster_leiden()]
 #' @references Parés F, Gasulla DG, et. al. (2018) Fluid Communities: A Competitive,
 #' Scalable and Diverse Community Detection Algorithm. In: Complex Networks
 #' &amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
@@ -1270,18 +1270,18 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #'   then it will always be calculated.
 #' @param membership Logical scalar, whether to calculate the membership vector
 #'   for the split corresponding to the highest modularity value.
-#' @return `cluster_walktrap()` returns a \code{\link{communities}}
-#'   object, please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_walktrap()` returns a [communities()]
+#'   object, please see the [communities()] manual page for details.
 #' @author Pascal Pons (<http://psl.pons.free.fr/>) and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R and igraph interface
-#' @seealso See \code{\link{communities}} on getting the actual membership
+#' @seealso See [communities()] on getting the actual membership
 #' vector, merge matrix, modularity score, etc.
 #'
-#' \code{\link{modularity}} and \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}},
-#' and \code{\link{cluster_leiden}} for other community detection
+#' [modularity()] and [cluster_fast_greedy()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()], [cluster_louvain()],
+#' and [cluster_leiden()] for other community detection
 #' methods.
 #' @references Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, https://arxiv.org/abs/physics/0512106
@@ -1342,7 +1342,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' sparsely connected to other modules.
 #'
 #' The edge betweenness score of an edge measures the number of shortest paths
-#' through it, see \code{\link{edge_betweenness}} for details. The idea of the
+#' through it, see [edge_betweenness()] for details. The idea of the
 #' edge betweenness based community structure detection is that it is likely
 #' that edges connecting separate modules have high edge betweenness as all the
 #' shortest paths from one module to another must traverse through them. So if
@@ -1393,16 +1393,16 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' @param membership Logical constant, whether to calculate the membership
 #'   vector corresponding to the highest possible modularity score.
 #' @return `cluster_edge_betweenness()` returns a
-#'   \code{\link{communities}} object, please see the \code{\link{communities}}
+#'   [communities()] object, please see the [communities()]
 #'   manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{edge_betweenness}} for the definition and calculation
-#' of the edge betweenness, \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_leading_eigen}} for other community detection
+#' @seealso [edge_betweenness()] for the definition and calculation
+#' of the edge betweenness, [cluster_walktrap()],
+#' [cluster_fast_greedy()],
+#' [cluster_leading_eigen()] for other community detection
 #' methods.
 #'
-#' See \code{\link{communities}} for extracting the results of the community
+#' See [communities()] for extracting the results of the community
 #' detection.
 #' @references M Newman and M Girvan: Finding and evaluating community
 #' structure in networks, *Physical Review E* 69, 026113 (2004)
@@ -1483,17 +1483,17 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @return `cluster_fast_greedy()` returns a \code{\link{communities}}
-#'   object, please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_fast_greedy()` returns a [communities()]
+#'   object, please see the [communities()] manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
-#' @seealso \code{\link{communities}} for extracting the results.
+#' @seealso [communities()] for extracting the results.
 #'
-#' See also \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}} and
-#' \code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}}
-#' \code{\link{cluster_leiden}} for other methods.
+#' See also [cluster_walktrap()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()] and
+#' [cluster_edge_betweenness()], [cluster_louvain()]
+#' [cluster_leiden()] for other methods.
 #' @references A Clauset, MEJ Newman, C Moore: Finding community structure in
 #' very large networks, http://www.arxiv.org/abs/cond-mat/0408187
 #' @export
@@ -1602,7 +1602,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'   \sQuote{`N`}, `N` is the number of initial communities in the
 #'   graph, the second line creates community `N+1`, etc.  }
 #'   \item{options}{Information about the underlying ARPACK computation, see
-#'   \code{\link{arpack}} for details.  }
+#'   [arpack()] for details.  }
 #' @section Callback functions: The `callback` argument can be used to
 #' supply a function that is called after each eigenvector calculation. The
 #' following arguments are supplied to this function: \describe{
@@ -1622,9 +1622,9 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'   is non-zero, then the clustering is terminated.
 #' }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{modularity}}, \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}}, [as.dendrogram()]
+#' @seealso [modularity()], [cluster_walktrap()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()], [as.dendrogram()]
 #' @references MEJ Newman: Finding community structure using the eigenvectors
 #' of matrices, Physical Review E 74 036104, 2006.
 #' @export
@@ -1718,15 +1718,15 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'   makes sense only if you provided an initial state, otherwise this element
 #'   will be ignored. Also note that vertices without labels cannot be fixed.
 #' @return `cluster_label_prop()` returns a
-#'   \code{\link{communities}} object, please see the \code{\link{communities}}
+#'   [communities()] object, please see the [communities()]
 #'   manual page for details.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C implementation,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for this manual page.
-#' @seealso \code{\link{communities}} for extracting the actual results.
+#' @seealso [communities()] for extracting the actual results.
 #'
-#' \code{\link{cluster_fast_greedy}}, \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}}, \code{\link{cluster_louvain}} and
-#' \code{\link{cluster_leiden}} for other community detection methods.
+#' [cluster_fast_greedy()], [cluster_walktrap()],
+#' [cluster_spinglass()], [cluster_louvain()] and
+#' [cluster_leiden()] for other community detection methods.
 #' @references Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time
 #' algorithm to detect community structures in large-scale networks. *Phys
 #' Rev E* 76, 036106. (2007)
@@ -1806,19 +1806,19 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #'   uses internally. Lower values typically yield fewer, larger clusters. The
 #'   original definition of modularity is recovered when the resolution parameter
 #'   is set to 1.
-#' @return `cluster_louvain()` returns a \code{\link{communities}}
-#'   object, please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_louvain()` returns a [communities()]
+#'   object, please see the [communities()] manual page for details.
 #' @author Tom Gregorovic, Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso See \code{\link{communities}} for extracting the membership,
+#' @seealso See [communities()] for extracting the membership,
 #' modularity scores, etc. from the results.
 #'
-#' Other community detection algorithms: \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_label_prop}}
-#' \code{\link{cluster_leiden}}
+#' Other community detection algorithms: [cluster_walktrap()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()],
+#' [cluster_label_prop()]
+#' [cluster_leiden()]
 #' @references Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte,
 #' Etienne Lefebvre: Fast unfolding of communities in large networks. J. Stat.
 #' Mech. (2008) P10008
@@ -1911,11 +1911,11 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
-#' @return `cluster_optimal()` returns a \code{\link{communities}} object,
-#'   please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_optimal()` returns a [communities()] object,
+#'   please see the [communities()] manual page for details.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{communities}} for the documentation of the result,
-#' \code{\link{modularity}}. See also \code{\link{cluster_fast_greedy}} for a
+#' @seealso [communities()] for the documentation of the result,
+#' [modularity()]. See also [cluster_fast_greedy()] for a
 #' fast greedy optimizer.
 #' @references Ulrik Brandes, Daniel Delling, Marco Gaertler, Robert Gorke,
 #' Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
@@ -1976,12 +1976,12 @@ cluster_optimal <- function(graph, weights = NULL) {
 #'   integer value equal or larger than 1).
 #' @param modularity Logical scalar, whether to calculate the modularity score
 #'   of the detected community structure.
-#' @return `cluster_infomap()` returns a \code{\link{communities}} object,
-#'   please see the \code{\link{communities}} manual page for details.
+#' @return `cluster_infomap()` returns a [communities()] object,
+#'   please see the [communities()] manual page for details.
 #' @author Martin Rosvall wrote the original C++ code. This was ported to
 #' be more igraph-like by Emmanuel Navarro.  The R interface and
 #' some cosmetics was done by Gabor Csardi \email{csardi.gabor@@gmail.com}.
-#' @seealso Other community finding methods and \code{\link{communities}}.
+#' @seealso Other community finding methods and [communities()].
 #' @references The original paper: M. Rosvall and C. T. Bergstrom, Maps of
 #' information flow reveal community structure in complex networks, *PNAS*
 #' 105, 1118 (2008) \doi{10.1073/pnas.0706851105}, <https://arxiv.org/abs/0707.0609>
@@ -2131,7 +2131,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #' } The extra arguments are simply passed to [as.dendrogram()].
 #'
 #' @param x An object containing the community structure of a graph. See
-#'   \code{\link{communities}} for details.
+#'   [communities()] for details.
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.
@@ -2246,11 +2246,11 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #'
 #'
 #' @aliases compare.communities compare.membership compare
-#' @param comm1 A \code{\link{communities}} object containing a community
+#' @param comm1 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the first community
 #'   structure. The membership vector should contain the community id of each
 #'   vertex, the numbering of the communities starts with one.
-#' @param comm2 A \code{\link{communities}} object containing a community
+#' @param comm2 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the second
 #'   community structure, in the same format as for the previous argument.
 #' @param method Character scalar, the comparison method to use. Possible
@@ -2262,14 +2262,14 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #'   (1985).
 #' @return A real number.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso See \code{\link{cluster_walktrap}},
-#' \code{\link{cluster_spinglass}},
-#' \code{\link{cluster_leading_eigen}},
-#' \code{\link{cluster_edge_betweenness}},
-#' \code{\link{cluster_fast_greedy}},
-#' \code{\link{cluster_label_prop}}
-#' \code{\link{cluster_louvain}}
-#' \code{\link{cluster_leiden}}
+#' @seealso See [cluster_walktrap()],
+#' [cluster_spinglass()],
+#' [cluster_leading_eigen()],
+#' [cluster_edge_betweenness()],
+#' [cluster_fast_greedy()],
+#' [cluster_label_prop()]
+#' [cluster_louvain()]
+#' [cluster_leiden()]
 #' for various community detection methods.
 #' @references Meila M: Comparing clusterings by the variation of information.
 #' In: Scholkopf B, Warmuth MK (eds.). *Learning Theory and Kernel
@@ -2411,10 +2411,10 @@ split_join_distance <- function(comm1, comm2) {
 #' structure.
 #'
 #' Currently two methods are defined for this function. The default method
-#' works on the output of \code{\link{components}}. (In fact it works on any
+#' works on the output of [components()]. (In fact it works on any
 #' object that is a list with an entry called `membership`.)
 #'
-#' The second method works on \code{\link{communities}} objects.
+#' The second method works on [communities()] objects.
 #'
 #' @aliases groups groups.default groups.communities
 #' @param x Some object that represents a grouping of the vertices. See details
@@ -2422,7 +2422,7 @@ split_join_distance <- function(comm1, comm2) {
 #' @return A named list of numeric or character vectors. The names are just
 #'   numbers that refer to the groups. The vectors themselves are numeric or
 #'   symbolic vertex ids.
-#' @seealso \code{\link{components}} and the various community finding
+#' @seealso [components()] and the various community finding
 #' functions.
 #' @examples
 #' g <- make_graph("Zachary")
@@ -2482,7 +2482,7 @@ communities <- groups.communities
 #'   correspond to the vertices, and for each element the id in the new graph is
 #'   given.
 #' @param vertex.attr.comb Specifies how to combine the vertex attributes in
-#'   the new graph. Please see \code{\link{attribute.combination}} for details.
+#'   the new graph. Please see [attribute.combination()] for details.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs

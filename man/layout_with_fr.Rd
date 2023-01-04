@@ -122,7 +122,7 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 21(11):1129-1164.
 }
 \seealso{
-\code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
+\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for
 other layout algorithms.
 
 Other graph layouts: 

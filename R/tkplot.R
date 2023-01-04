@@ -117,7 +117,7 @@ assign(".next", 1, .tkplot.env)
 #'   vertices, in absolute coordinates.
 #' @param degree The degree to rotate the plot.
 #' @param rad The degree to rotate the plot, in radian.
-#' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
+#' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
 #' @return `tkplot()` returns an integer, the id of the plot, this can be
 #'   used to manipulate it from the command line.
@@ -130,7 +130,7 @@ assign(".next", 1, .tkplot.env)
 #'   `tk_reshape()`, `tk_postscript()`, `tk_center()`
 #'   and `tk_rotate()` return `NULL` invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{plot.igraph}}, \code{\link{layout}}
+#' @seealso [plot.igraph()], [layout()]
 #' @export
 #' @keywords graphs
 #' @section Examples:

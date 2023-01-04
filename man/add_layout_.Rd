@@ -9,7 +9,7 @@ add_layout_(graph, ..., overwrite = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Additional arguments are passed to \code{\link{layout_}}.}
+\item{...}{Additional arguments are passed to \code{\link[=layout_]{layout_()}}.}
 
 \item{overwrite}{Whether to overwrite the layout of the graph,
 if it already has one.}
@@ -26,7 +26,7 @@ Add layout to graph
   plot()
 }
 \seealso{
-\code{\link{layout_}} for a description of the layout API.
+\code{\link[=layout_]{layout_()}} for a description of the layout API.
 
 Other graph layouts: 
 \code{\link{component_wise}()},

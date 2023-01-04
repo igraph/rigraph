@@ -60,8 +60,8 @@ symbolic edge list given in \code{d} is checked to contain only vertex names
 listed in \code{vertices}.
 
 Typically, the data frames are exported from some spreadsheet software like
-Excel and are imported into R via \code{\link{read.table}},
-\code{\link{read.delim}} or \code{\link{read.csv}}.
+Excel and are imported into R via \code{\link[=read.table]{read.table()}},
+\code{\link[=read.delim]{read.delim()}} or \code{\link[=read.csv]{read.csv()}}.
 
 All edges in the data frame are included in the graph, which may include
 multiple parallel edges and loops.
@@ -126,8 +126,8 @@ as_data_frame(g, what = "edges")
 
 }
 \seealso{
-\code{\link{graph_from_literal}}
-for another way to create graphs, \code{\link{read.table}} to read in tables
+\code{\link[=graph_from_literal]{graph_from_literal()}}
+for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables
 from files.
 }
 \author{

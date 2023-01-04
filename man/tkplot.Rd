@@ -190,7 +190,7 @@ tkcreate(canvas, "text", width/2, 25, text="My title",
 }
 
 \seealso{
-\code{\link{plot.igraph}}, \code{\link{layout}}
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=layout]{layout()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

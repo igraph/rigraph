@@ -30,7 +30,7 @@ to_prufer(g)
 
 }
 \seealso{
-\code{\link{make_from_prufer}} to construct a graph from its
+\code{\link[=make_from_prufer]{make_from_prufer()}} to construct a graph from its
 Prufer sequence
 }
 \keyword{graphs}

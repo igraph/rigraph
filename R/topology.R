@@ -249,14 +249,14 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' @section \sQuote{bliss} method:
 #' Uses the BLISS algorithm by Junttila and Kaski, and it works for
 #' undirected graphs. For both graphs the
-#' \code{\link{canonical_permutation}} and then the \code{\link{permute}}
+#' [canonical_permutation()] and then the [permute()]
 #' function is called to transfer them into canonical form; finally the
 #' canonical forms are compared.
 #' Extra arguments:
 #' \describe{
 #'   \item{sh}{Character constant, the heuristics to use in the BLISS
 #'     algorithm for `graph1` and `graph2`. See the `sh` argument of
-#'     \code{\link{canonical_permutation}} for possible values.}
+#'     [canonical_permutation()] for possible values.}
 #' }
 #' `sh` defaults to \sQuote{fm}.
 #'
@@ -456,7 +456,7 @@ is_subgraph_isomorphic_to <- subgraph_isomorphic
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
 #' @param method Currently only \sQuote{vf2} is supported, see
-#'   \code{\link{isomorphic}} for details about it and extra arguments.
+#'   [isomorphic()] for details about it and extra arguments.
 #' @param ... Passed to the individual methods.
 #' @return Number of isomorphic mappings between the two graphs.
 #'
@@ -571,7 +571,7 @@ count_subgraph_isomorphisms <- function(pattern, target,
 #' @param graph1 The first graph.
 #' @param graph2 The second graph.
 #' @param method Currently only \sQuote{vf2} is supported, see
-#'   \code{\link{isomorphic}} for details about it and extra arguments.
+#'   [isomorphic()] for details about it and extra arguments.
 #' @param ... Extra arguments, passed to the various methods.
 #' @return A list of vertex sequences, corresponding to all
 #'   mappings from the first graph to the second.
@@ -752,8 +752,8 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #'   values that are exactly representable in floating point.} } }
 #' @author Tommi Junttila for BLISS, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the igraph and R interfaces.
-#' @seealso \code{\link{permute}} to apply a permutation to a graph,
-#' \code{\link{graph.isomorphic}} for deciding graph isomorphism, possibly
+#' @seealso [permute()] to apply a permutation to a graph,
+#' [graph.isomorphic()] for deciding graph isomorphism, possibly
 #' based on canonical labels.
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
@@ -788,7 +788,7 @@ canonical_permutation <- canonical_permutation
 #'
 #' This function creates a new graph from the input graph by permuting its
 #' vertices according to the specified mapping. Call this function with the
-#' output of \code{\link{canonical_permutation}} to create the canonical form
+#' output of [canonical_permutation()] to create the canonical form
 #' of a graph.
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
@@ -800,7 +800,7 @@ canonical_permutation <- canonical_permutation
 #'   `vcount(graph)` must appear exactly once.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{canonical_permutation}}
+#' @seealso [canonical_permutation()]
 #' @keywords graphs
 #' @examples
 #'
@@ -834,7 +834,7 @@ permute <- permute
 #' This function calculates the number of automorphism of a graph using the
 #' BLISS algorithm. See also the BLISS homepage at
 #' <http://www.tcs.hut.fi/Software/bliss/index.html>. If you need the
-#' automorphisms themselves, use \code{\link{automorphism_group}} to obtain
+#' automorphisms themselves, use [automorphism_group()] to obtain
 #' a compact representation of the automorphism group.
 #'
 #' @aliases graph.automorphisms automorphisms count_automorphisms
@@ -862,8 +862,8 @@ permute <- permute
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code
 #' and this manual page.
-#' @seealso \code{\link{canonical_permutation}}, \code{\link{permute}},
-#' and \code{\link{automorphism_group}} for a compact representation of all
+#' @seealso [canonical_permutation()], [permute()],
+#' and [automorphism_group()] for a compact representation of all
 #' automorphisms
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
@@ -921,13 +921,13 @@ count_automorphisms <- count_automorphisms
 #'   that form a generating set of the automorphism group of the input graph.
 #'   When `details` is `TRUE`, a named list with two members:
 #'   \item{generators}{Returns the generators themselves} \item{info}{Additional
-#'   information about the BLISS internals. See \code{\link{count_automorphisms}} for
+#'   information about the BLISS internals. See [count_automorphisms()] for
 #'   more details.}
 #' @author Tommi Junttila (<http://users.ics.aalto.fi/tjunttil/>) for BLISS,
 #' Gabor Csardi \email{csardi.gabor@@gmail.com} for the igraph glue code and
 #' Tamas Nepusz \email{ntamas@@gmail.com} for this manual page.
-#' @seealso \code{\link{canonical_permutation}}, \code{\link{permute}},
-#' \code{\link{count_automorphisms}}
+#' @seealso [canonical_permutation()], [permute()],
+#' [count_automorphisms()]
 #' @references Tommi Junttila and Petteri Kaski: Engineering an Efficient
 #' Canonical Labeling Tool for Large and Sparse Graphs, *Proceedings of
 #' the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth

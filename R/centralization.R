@@ -90,7 +90,7 @@ centralize <- centralize
 
 #' Centralize a graph according to the degrees of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
@@ -123,7 +123,7 @@ centr_degree <- centr_degree
 
 #' Theoretical maximum for degree centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL`, if
 #'   `nodes`, `mode` and `loops` are all given.
@@ -175,7 +175,7 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 
 #' Centralize a graph according to the betweenness of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
@@ -226,7 +226,7 @@ centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRU
 
 #' Theoretical maximum for betweenness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL`, if
 #'   `nodes` is given.
@@ -253,7 +253,7 @@ centr_betw_tmax <- centr_betw_tmax
 
 #' Centralize a graph according to the closeness of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param mode This is the same as the `mode` argument of
@@ -284,7 +284,7 @@ centr_clo <- centr_clo
 
 #' Theoretical maximum for closeness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL`, if
 #'   `nodes` is given.
@@ -311,14 +311,14 @@ centr_clo_tmax <- centr_clo_tmax
 
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
 #' @param scale Whether to rescale the eigenvector centrality scores, such that
 #'   the maximum score is one.
-#' @param options This is passed to \code{\link{eigen_centrality}}, the options
+#' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
@@ -326,7 +326,7 @@ centr_clo_tmax <- centr_clo_tmax
 #'   \item{vector}{The node-level centrality scores.}
 #'   \item{value}{The corresponding eigenvalue.}
 #'   \item{options}{ARPACK options, see the return value of
-#'     \code{\link{eigen_centrality}} for details.}
+#'     [eigen_centrality()] for details.}
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The same as above, the theoretical maximum
 #'     centralization score for a graph with the same number of vertices.}
@@ -353,7 +353,7 @@ centr_eigen <- centr_eigen
 
 #' Theoretical maximum for betweenness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph. It can also be `NULL`, if
 #'   `nodes` is given.

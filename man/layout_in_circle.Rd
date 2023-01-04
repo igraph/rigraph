@@ -26,7 +26,7 @@ Place vertices on a circle, in the order of their vertex ids.
 }
 \details{
 If you want to order the vertices differently, then permute them using the
-\code{\link{permute}} function.
+\code{\link[=permute]{permute()}} function.
 }
 \examples{
 \dontshow{if (igraph:::has_glpk()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

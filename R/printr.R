@@ -56,7 +56,7 @@ print_head_foot <- function(head_foot) {
 #' Print the only the head of an R object
 #'
 #' @param x The object to print, or a callback function. See
-#'   \code{\link{printer_callback}} for details.
+#'   [printer_callback()] for details.
 #' @param max_lines Maximum number of lines to print, *not*
 #'   including the header and the footer.
 #' @param header The header, if a function, then it will be called,

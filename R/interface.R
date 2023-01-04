@@ -493,7 +493,7 @@ gorder <- gorder
 
 #' Adjacent vertices of multiple vertices in a graph
 #'
-#' This function is similar to \code{\link{neighbors}}, but it queries
+#' This function is similar to [neighbors()], but it queries
 #' the adjacent vertices for multiple vertices at once.
 #'
 #' @param graph Input graph.
@@ -536,7 +536,7 @@ adjacent_vertices <- function(graph, v,
 
 #' Incident edges of multiple vertices in a graph
 #'
-#' This function is similar to \code{\link{incident}}, but it
+#' This function is similar to [incident()], but it
 #' queries multiple vertices at once.
 #'
 #' @param graph Input graph.

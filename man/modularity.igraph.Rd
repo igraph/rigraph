@@ -98,10 +98,10 @@ Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 }
 \seealso{
-\code{\link{cluster_walktrap}},
-\code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}}, \code{\link{cluster_spinglass}},
-\code{\link{cluster_louvain}} and \code{\link{cluster_leiden}} for
+\code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for
 various community detection methods.
 }
 \author{

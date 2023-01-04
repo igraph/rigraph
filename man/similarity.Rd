@@ -71,7 +71,7 @@ Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 \emph{Social Networks}, 25(3):211-230, 2003.
 }
 \seealso{
-\code{\link{cocitation}} and \code{\link{bibcoupling}}
+\code{\link[=cocitation]{cocitation()}} and \code{\link[=bibcoupling]{bibcoupling()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

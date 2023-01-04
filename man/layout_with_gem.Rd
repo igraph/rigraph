@@ -64,8 +64,8 @@ Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
 LNCS 894, pp. 388-403, 1995.
 }
 \seealso{
-\code{\link{layout_with_fr}},
-\code{\link{plot.igraph}}, \code{\link{tkplot}}
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

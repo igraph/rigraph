@@ -77,7 +77,7 @@ algorithm for generating all the maximal independent sets. \emph{SIAM J
 Computing}, 6:505--517, 1977.
 }
 \seealso{
-\code{\link{cliques}}
+\code{\link[=cliques]{cliques()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty

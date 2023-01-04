@@ -56,7 +56,7 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{scg-method} and \code{\link{scg}}.
+\link{scg-method} and \code{\link[=scg]{scg()}}.
 }
 \author{
 David Morton de Lachapelle,

@@ -21,8 +21,8 @@ These functions convert various objects to igraph graphs.
 \details{
 You can use \code{as.igraph()} to convert various objects to igraph graphs.
 Right now the following objects are supported: \itemize{ \item codeigraphHRG
-These objects are created by the \code{\link{fit_hrg}} and
-\code{\link{consensus_tree}} functions.  }
+These objects are created by the \code{\link[=fit_hrg]{fit_hrg()}} and
+\code{\link[=consensus_tree]{consensus_tree()}} functions.  }
 }
 \examples{
 

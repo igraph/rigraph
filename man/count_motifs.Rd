@@ -34,7 +34,7 @@ count_motifs(g, 3)
 sample_motifs(g, 3)
 }
 \seealso{
-\code{\link{isomorphism_class}}
+\code{\link[=isomorphism_class]{isomorphism_class()}}
 
 Other graph motifs: 
 \code{\link{motifs}()},

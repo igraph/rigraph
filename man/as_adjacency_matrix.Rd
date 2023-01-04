@@ -81,5 +81,5 @@ E(g)$weight <- runif(ecount(g))
 as_adjacency_matrix(g, attr = "weight")
 }
 \seealso{
-\code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+\code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
 }

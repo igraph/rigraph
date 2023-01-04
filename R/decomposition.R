@@ -45,11 +45,11 @@
 #'   ignored, as the algorithm is defined for undirected graphs.
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
 #'   vertices. If it is `NULL`, then it is automatically calculated by
-#'   calling \code{\link{max_cardinality}}, or from `alpham1` if
+#'   calling [max_cardinality()], or from `alpham1` if
 #'   that is given..
 #' @param alpham1 Numeric vector, the inverse of `alpha`. If it is
 #'   `NULL`, then it is automatically calculated by calling
-#'   \code{\link{max_cardinality}}, or from `alpha`.
+#'   [max_cardinality()], or from `alpha`.
 #' @param fillin Logical scalar, whether to calculate the fill-in edges.
 #' @param newgraph Logical scalar, whether to calculate the triangulated graph.
 #' @return A list with three members: \item{chordal}{Logical scalar, it is
@@ -58,7 +58,7 @@
 #'   \item{newgraph}{If requested, then the triangulated graph, an `igraph`
 #'   object. `NULL` otherwise.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_cardinality}}
+#' @seealso [max_cardinality()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
 #' linear-time algorithms to test chordality of graphs, test acyclicity of
 #' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal

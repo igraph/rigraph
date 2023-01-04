@@ -312,8 +312,8 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
 #'
 #' You can use `as.igraph()` to convert various objects to igraph graphs.
 #' Right now the following objects are supported: \itemize{ \item codeigraphHRG
-#' These objects are created by the \code{\link{fit_hrg}} and
-#' \code{\link{consensus_tree}} functions.  }
+#' These objects are created by the [fit_hrg()] and
+#' [consensus_tree()] functions.  }
 #'
 #' @aliases as.igraph as.igraph.igraphHRG
 #' @param x The object to convert.
@@ -576,7 +576,7 @@ as_phylo.igraphHRG <- function(x, ...) {
 #'
 #' @aliases hrg.dendrogram
 #' @param x An `igraphHRG`, a hierarchical random graph, as returned by
-#'   the \code{\link{fit_hrg}} function.
+#'   the [fit_hrg()] function.
 #' @param mode Which dendrogram plotting function to use. See details below.
 #' @param \dots Additional arguments to supply to the dendrogram plotting
 #'   function.

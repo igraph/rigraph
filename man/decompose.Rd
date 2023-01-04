@@ -39,8 +39,8 @@ sapply(components, diameter)
 
 }
 \seealso{
-\code{\link{is_connected}} to decide whether a graph is connected,
-\code{\link{components}} to calculate the connected components of a graph.
+\code{\link[=is_connected]{is_connected()}} to decide whether a graph is connected,
+\code{\link[=components]{components()}} to calculate the connected components of a graph.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

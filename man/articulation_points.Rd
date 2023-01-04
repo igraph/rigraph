@@ -43,9 +43,9 @@ bridges(g)
 
 }
 \seealso{
-\code{\link{biconnected_components}}, \code{\link{components}},
-\code{\link{is_connected}}, \code{\link{vertex_connectivity}},
-\code{\link{edge_connectivity}}
+\code{\link[=biconnected_components]{biconnected_components()}}, \code{\link[=components]{components()}},
+\code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
+\code{\link[=edge_connectivity]{edge_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -39,7 +39,7 @@
 #'   `invlogweighted` method.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #'   \email{csardi.gabor@@gmail.com} for the manual page.
-#' @seealso \code{\link{cocitation}} and \code{\link{bibcoupling}}
+#' @seealso [cocitation()] and [bibcoupling()]
 #' @references Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 #'   *Social Networks*, 25(3):211-230, 2003.
 #' @keywords graphs

@@ -26,9 +26,9 @@
 #' `plot.igraph()` is able to plot graphs to any R device. It is the
 #' non-interactive companion of the `tkplot()` function.
 #'
-#' One convenient way to plot graphs is to plot with \code{\link{tkplot}}
+#' One convenient way to plot graphs is to plot with [tkplot()]
 #' first, handtune the placement of the vertices, query the coordinates by the
-#' \code{\link{tk_coords}} function and use them with [plot()] to
+#' [tk_coords()] function and use them with [plot()] to
 #' plot the graph to any R device.
 #'
 #' @aliases plot.graph
@@ -46,11 +46,11 @@
 #'   control the look of the polygons.
 #' @param mark.shape A numeric scalar or vector. Controls the smoothness of the
 #'   vertex group marking polygons. This is basically the \sQuote{shape}
-#'   parameter of the \code{\link[graphics]{xspline}} function, its possible
+#'   parameter of the [graphics::xspline()] function, its possible
 #'   values are between -1 and 1. If it is a vector, then a different value is
 #'   used for the different vertex groups.
 #' @param mark.col A scalar or vector giving the colors of marking the
-#'   polygons, in any format accepted by \code{\link[graphics]{xspline}}; e.g.
+#'   polygons, in any format accepted by [graphics::xspline()]; e.g.
 #'   numeric color ids, symbolic color names, or colors in RGB.
 #' @param mark.border A scalar or vector giving the colors of the borders of
 #'   the vertex group marking polygons. If it is `NA`, then no border is
@@ -62,13 +62,13 @@
 #' @param loop.size A numeric scalar that allows the user to scale the loop edges
 #'   of the network. The default loop size is 1. Larger values will produce larger
 #'   loops.
-#' @param \dots Additional plotting parameters. See \link{igraph.plotting} for
+#' @param \dots Additional plotting parameters. See [igraph.plotting] for
 #'   the complete list.
 #' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout}} for different layouts,
-#' \code{\link{igraph.plotting}} for the detailed description of the plotting
-#' parameters and \code{\link{tkplot}} and \code{\link{rglplot}} for other
+#' @seealso [layout()] for different layouts,
+#' [igraph.plotting] for the detailed description of the plotting
+#' parameters and [tkplot()] and [rglplot()] for other
 #' graph plotting functions.
 #' @method plot igraph
 #' @export
@@ -508,17 +508,17 @@ plot.igraph <- function(x,
 #' fixed.
 #'
 #' Note that `rglplot()` is considered to be highly experimental. It is not
-#' very useful either. See \code{\link{igraph.plotting}} for the possible
+#' very useful either. See [igraph.plotting] for the possible
 #' arguments.
 #'
 #' @aliases rglplot rglplot.igraph
 #' @param x The graph to plot.
-#' @param \dots Additional arguments, see \code{\link{igraph.plotting}} for the
+#' @param \dots Additional arguments, see [igraph.plotting] for the
 #'   details
 #' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{igraph.plotting}}, \code{\link{plot.igraph}} for the 2D
-#' version, \code{\link{tkplot}} for interactive graph drawing in 2D.
+#' @seealso [igraph.plotting], [plot.igraph()] for the 2D
+#' version, [tkplot()] for interactive graph drawing in 2D.
 #' @export
 #' @keywords graphs
 #' @export

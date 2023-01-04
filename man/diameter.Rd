@@ -65,7 +65,7 @@ get_diameter(g, weights = NA)
 
 }
 \seealso{
-\code{\link{distances}}
+\code{\link[=distances]{distances()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

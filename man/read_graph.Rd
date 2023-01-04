@@ -57,7 +57,7 @@ default value is \code{TRUE}.} }
 }
 
 \seealso{
-\code{\link{write_graph}}
+\code{\link[=write_graph]{write_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

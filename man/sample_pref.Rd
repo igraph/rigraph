@@ -98,8 +98,8 @@ tkplot(g, layout = layout_in_circle)
 
 }
 \seealso{
-\code{\link{sample_traits}}.
-\code{\link{sample_traits_callaway}}
+\code{\link[=sample_traits]{sample_traits()}}.
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

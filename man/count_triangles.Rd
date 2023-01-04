@@ -55,7 +55,7 @@ transitivity(kite, type = "local")
 count_triangles(kite) / (degree(kite) * (degree(kite) - 1) / 2)
 }
 \seealso{
-\code{\link{transitivity}}
+\code{\link[=transitivity]{transitivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

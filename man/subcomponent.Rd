@@ -36,7 +36,7 @@ subcomponent(g, 1, "out")
 subcomponent(g, 1, "all")
 }
 \seealso{
-\code{\link{components}}
+\code{\link[=components]{components()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

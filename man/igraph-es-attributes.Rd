@@ -30,9 +30,9 @@ sequence.}
 \item{name}{Name of the edge attribute to query or set.}
 
 \item{path}{Select edges along a path, given by a vertex sequence See
-\code{\link{E}}.}
+\code{\link[=E]{E()}}.}
 
-\item{P}{Select edges via pairs of vertices. See \code{\link{E}}.}
+\item{P}{Select edges via pairs of vertices. See \code{\link[=E]{E()}}.}
 
 \item{directed}{Whether to use edge directions for the \code{path} or
 \code{P} arguments.}
@@ -48,11 +48,11 @@ The \code{$} operator is a syntactic sugar to query and set
 edge attributes, for edges in an edge sequence.
 }
 \details{
-The query form of \code{$} is a shortcut for \code{\link{edge_attr}},
+The query form of \code{$} is a shortcut for \code{\link[=edge_attr]{edge_attr()}},
 e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr, E(g)[idx])}.
 
 The assignment form of \code{$} is a shortcut for
-\code{\link{set_edge_attr}}, e.g. \code{E(g)[idx]$attr <- value} is
+\code{\link[=set_edge_attr]{set_edge_attr()}}, e.g. \code{E(g)[idx]$attr <- value} is
 equivalent to \code{g <- set_edge_attr(g, attr, E(g)[idx], value)}.
 }
 \examples{

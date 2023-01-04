@@ -55,12 +55,12 @@ updated accordingly.
 
 Also note that the function may generate multigraphs, if there are more than
 one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the
-result. See \code{\link{simplify}} if you want to get rid of the multiple
+result. See \code{\link[=simplify]{simplify()}} if you want to get rid of the multiple
 edges.
 
 The function may create loop edges, if edges (a,b) and (b,a) are present in
 g1 and g2, respectively, then (a,a) is included in the result. See
-\code{\link{simplify}} if you want to get rid of the self-loops.
+\code{\link[=simplify]{simplify()}} if you want to get rid of the self-loops.
 }
 \examples{
 

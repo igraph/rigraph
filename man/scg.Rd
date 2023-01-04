@@ -76,7 +76,7 @@ Markov chain when \code{mtype} = \dQuote{stochastic}. This parameter is
 ignored in all other cases.}
 
 \item{use.arpack}{Logical scalar. When set to \code{TRUE} uses the function
-\code{\link{arpack}} to compute eigenpairs. This parameter should be set to
+\code{\link[=arpack]{arpack()}} to compute eigenpairs. This parameter should be set to
 \code{TRUE} if one deals with large (over a few thousands) AND sparse graphs
 or matrices. This argument is not implemented currently and LAPACK is used
 for solving the eigenproblems.}
@@ -237,8 +237,8 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{scg-method} for an introduction.  \code{\link{scg_eps}},
-\code{\link{scg_group}} and \code{\link{scg_semi_proj}}.
+\link{scg-method} for an introduction.  \code{\link[=scg_eps]{scg_eps()}},
+\code{\link[=scg_group]{scg_group()}} and \code{\link[=scg_semi_proj]{scg_semi_proj()}}.
 }
 \author{
 David Morton de Lachapelle,

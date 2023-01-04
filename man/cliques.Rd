@@ -42,7 +42,7 @@ whitespace.}
 \value{
 \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
 return a list containing numeric vectors of vertex ids. Each list element is
-a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs()}}.
 
 \code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}
 argument is not \code{NULL}. The output is written to the specified file in
@@ -96,7 +96,7 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-\code{\link{ivs}}
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

@@ -41,13 +41,13 @@ notable graph. See Notable graphs below. The name is case
 insensitive.
 
 Starting from igraph 0.8.0, you can also include literals here,
-via igraph's formula notation (see \code{\link{graph_from_literal}}).
+via igraph's formula notation (see \code{\link[=graph_from_literal]{graph_from_literal()}}).
 In this case, the first term of the formula has to start with
 a \sQuote{\code{~}} character, just like regular formulae in R.
 See examples below.}
 
 \item{...}{For \code{make_graph()}: extra arguments for the case when the
-graph is given via a literal, see \code{\link{graph_from_literal}}.
+graph is given via a literal, see \code{\link[=graph_from_literal]{graph_from_literal()}}.
 For \code{directed_graph()} and \code{undirected_graph()}:
 Passed to \code{make_directed_graph()} or \code{make_undirected_graph()}.}
 

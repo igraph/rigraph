@@ -290,8 +290,8 @@ disjoint_union <- function(...) {
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs and igraph vertex and edge
 #' sequences. See
-#' \code{\link{union.igraph}}, and
-#' \code{\link{union.igraph.vs}}.
+#' [union.igraph()], and
+#' [union.igraph.vs()].
 #'
 #' @param ... Arguments, their number and interpretation depends on
 #'   the function that implements `union()`.
@@ -372,8 +372,8 @@ union.igraph <- function(..., byname = "auto") {
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs and igraph vertex and edge
 #' sequences. See
-#' \code{\link{intersection.igraph}}, and
-#' \code{\link{intersection.igraph.vs}}.
+#' [intersection.igraph()], and
+#' [intersection.igraph.vs()].
 #'
 #' @param ... Arguments, their number and interpretation depends on
 #'   the function that implements `intersection()`.
@@ -451,8 +451,8 @@ intersection.igraph <- function(..., byname = "auto",
 #' for the actual implementations for various S3 classes. Initially
 #' it is implemented for igraph graphs (difference of edges in two graphs),
 #' and igraph vertex and edge sequences. See
-#' \code{\link{difference.igraph}}, and
-#' \code{\link{difference.igraph.vs}}.
+#' [difference.igraph()], and
+#' [difference.igraph.vs()].
 #'
 #' @param ... Arguments, their number and interpretation depends on
 #'   the function that implements `difference()`.
@@ -634,12 +634,12 @@ complementer <- function(graph, loops = FALSE) {
 #'
 #' Also note that the function may generate multigraphs, if there are more than
 #' one way to find edges (a,b) in g1 and (b,c) in g2 for an edge (a,c) in the
-#' result. See \code{\link{simplify}} if you want to get rid of the multiple
+#' result. See [simplify()] if you want to get rid of the multiple
 #' edges.
 #'
 #' The function may create loop edges, if edges (a,b) and (b,a) are present in
 #' g1 and g2, respectively, then (a,a) is included in the result. See
-#' \code{\link{simplify}} if you want to get rid of the self-loops.
+#' [simplify()] if you want to get rid of the self-loops.
 #'
 #' @aliases graph.compose %c%
 #' @param g1 The first input graph.
@@ -742,13 +742,13 @@ compose <- function(g1, g2, byname = "auto") {
 #' @details
 #' When adding edges via `+`, all unnamed arguments of
 #' `edge()` (or `edges()`) are concatenated, and then passed to
-#' \code{\link{add_edges}}. They are interpreted as pairs of vertex ids,
+#' [add_edges()]. They are interpreted as pairs of vertex ids,
 #' and an edge will added between each pair. Named arguments will be
 #' used as edge attributes for the new edges.
 #'
 #' When deleting edges via `-`, all arguments of `edge()` (or
 #' `edges()`) are concatenated via `c()` and passed to
-#' \code{\link{delete_edges}}.
+#' [delete_edges()].
 #'
 #' @param ... See details below.
 #' @return A special object that can be used with together with
@@ -795,7 +795,7 @@ edges <- edge
 #'
 #' When deleting vertices via `-`, all arguments of `vertex()` (or
 #' `vertices()`) are concatenated via `c()` and passed to
-#' \code{\link{delete_vertices}}.
+#' [delete_vertices()].
 #'
 #' @param ... See details below.
 #' @return A special object that can be used with together with
@@ -830,7 +830,7 @@ vertices <- vertex
 #' edges.
 #'
 #' When deleting edges, all attributes are concatenated and then passed
-#' to \code{\link{delete_edges}}.
+#' to [delete_edges()].
 #'
 #' @param ... See details below.
 #' @return A special object that can be used together with igraph
@@ -868,16 +868,16 @@ path <- function(...) {
 #'
 #'   - If is is another igraph graph object and they are both
 #'     named graphs, then the union of the two graphs are calculated,
-#'     see \code{\link{union}}.
+#'     see [union()].
 #'   - If it is another igraph graph object, but either of the two
 #'     are not named, then the disjoint union of
-#'     the two graphs is calculated, see \code{\link{disjoint_union}}.
+#'     the two graphs is calculated, see [disjoint_union()].
 #'   - If it is a numeric scalar, then the specified number of vertices
 #'     are added to the graph.
 #'   - If it is a character scalar or vector, then it is interpreted as
 #'     the names of the vertices to add to the graph.
-#'   - If it is an object created with the \code{\link{vertex}} or
-#'     \code{\link{vertices}} function, then new vertices are added to the
+#'   - If it is an object created with the [vertex()] or
+#'     [vertices()] function, then new vertices are added to the
 #'     graph. This form is appropriate when one wants to add some vertex
 #'     attributes as well. The operands of the `vertices()` function
 #'     specifies the number of vertices to add and their attributes as
@@ -896,8 +896,8 @@ path <- function(...) {
 #'     provided for readability. The user should use it if a single vertex
 #'     is added to the graph.
 #'
-#'   - If it is an object created with the \code{\link{edge}} or
-#'     \code{\link{edges}} function, then new edges will be added to the
+#'   - If it is an object created with the [edge()] or
+#'     [edges()] function, then new edges will be added to the
 #'     graph. The new edges and possibly their attributes can be specified as
 #'     the arguments of the `edges()` function.
 #'
@@ -917,7 +917,7 @@ path <- function(...) {
 #'     for readability. The user should use it if a single edge is added to
 #'     the graph.
 #'
-#'   - If it is an object created with the \code{\link{path}} function, then
+#'   - If it is an object created with the [path()] function, then
 #'     new edges that form a path are added. The edges and possibly their
 #'     attributes are specified as the arguments to the `path()`
 #'     function. The non-named arguments are concatenated and interpreted
@@ -1037,23 +1037,23 @@ path <- function(...) {
 #' the type of the right hand side argument:
 #' \itemize{
 #' \item If it is an igraph graph object, then the difference of the
-#'   two graphs is calculated, see \code{\link{difference}}.
+#'   two graphs is calculated, see [difference()].
 #' \item If it is a numeric or character vector, then it is interpreted
 #'   as a vector of vertex ids and the specified vertices will be
 #'   deleted from the graph. Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]
 #' g <- g - c("a", "b")}
 #' \item If `e2` is a vertex sequence (e.g. created by the
-#'   \code{\link{V}} function), then these vertices will be deleted from
+#'   [V()] function), then these vertices will be deleted from
 #'   the graph.
-#' \item If it is an edge sequence (e.g. created by the \code{\link{E}}
+#' \item If it is an edge sequence (e.g. created by the [E()]
 #'   function), then these edges will be deleted from the graph.
-#' \item If it is an object created with the \code{\link{vertex}} (or the
-#'   \code{\link{vertices}}) function, then all arguments of \code{\link{vertices}} are
+#' \item If it is an object created with the [vertex()] (or the
+#'   [vertices()]) function, then all arguments of [vertices()] are
 #'   concatenated and the result is interpreted as a vector of vertex
 #'   ids. These vertices will be removed from the graph.
-#' \item If it is an object created with the \code{\link{edge}} (or the
-#'   \code{\link{edges}}) function, then all arguments of \code{\link{edges}} are
+#' \item If it is an object created with the [edge()] (or the
+#'   [edges()]) function, then all arguments of [edges()] are
 #'   concatenated and then interpreted as edges to be removed from the
 #'   graph.
 #'   Example: \preformatted{  g <- make_ring(10)
@@ -1061,8 +1061,8 @@ path <- function(...) {
 #' E(g)$name <- LETTERS[1:10]
 #' g <- g - edge("e|f")
 #' g <- g - edge("H")}
-#' \item If it is an object created with the \code{\link{path}} function,
-#'   then all \code{\link{path}} arguments are concatenated and then interpreted
+#' \item If it is an object created with the [path()] function,
+#'   then all [path()] arguments are concatenated and then interpreted
 #'   as a path along which edges will be removed from the graph.
 #'   Example: \preformatted{  g <- make_ring(10)
 #' V(g)$name <- letters[1:10]

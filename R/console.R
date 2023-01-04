@@ -265,7 +265,7 @@ close.igraphconsole <- function(con, ...) {
 #' @aliases igraph.console
 #' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{igraph_options}} and the `verbose` option.
+#' @seealso [igraph_options()] and the `verbose` option.
 #' @keywords graphs
 #' @export
 console <- function() {

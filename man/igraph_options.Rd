@@ -58,16 +58,16 @@ present) as \code{main}, and with the number of vertices and edges
 as \code{xlab}. Defaults to \code{FALSE}.}
 \item{dend.plot.type}{The plotting function to use when plotting
 community structure dendrograms via
-\code{\link{plot_dendrogram}}}. Possible values are \sQuote{auto} (the
+\code{\link[=plot_dendrogram]{plot_dendrogram()}}}. Possible values are \sQuote{auto} (the
 default), \sQuote{phylo}, \sQuote{hclust} and
-\sQuote{dendrogram}. See \code{\link{plot_dendrogram}} for details.
+\sQuote{dendrogram}. See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for details.
 \item{edge.attr.comb}{Specifies what to do with the edge
 attributes if the graph is modified. The default value is
 \code{list(weight="sum", name="concat", "ignore")}. See
-\code{\link{attribute.combination}} for details on this.}
+\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
 \item{print.edge.attributes}{Logical constant, whether to print edge
 attributes when printing graphs. Defaults to \code{FALSE}.}
-\item{print.full}{Logical scalar, whether \code{\link{print.igraph}}
+\item{print.full}{Logical scalar, whether \code{\link[=print.igraph]{print.igraph()}}
 should show the graph structure as well, or only a summary of the
 graph.}
 \item{print.graph.attributes}{Logical constant, whether to print
@@ -89,7 +89,7 @@ will use progress bars while computing. Defaults to \code{FALSE}.}
 \item{vertex.attr.comb}{Specifies what to do with the vertex
 attributes if the graph is modified. The default value is
 \code{list(name="concat", "ignore")} See
-\code{\link{attribute.combination}} for details on this.}
+\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
 }
 }
 \examples{
@@ -106,8 +106,8 @@ igraph_opt("verbose")
 
 }
 \seealso{
-\code{igraph_options()} is similar to \code{\link{options}} and
-\code{igraph_opt()} is similar to \code{\link{getOption}}.
+\code{igraph_options()} is similar to \code{\link[=options]{options()}} and
+\code{igraph_opt()} is similar to \code{\link[=getOption]{getOption()}}.
 
 Other igraph options: 
 \code{\link{with_igraph_opt}()}

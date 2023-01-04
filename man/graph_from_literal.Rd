@@ -15,7 +15,7 @@ from_literal(...)
 structure of the graph, see details below. For \code{from_literal()}
 all arguments are passed to \code{graph_from_literal()}.}
 
-\item{simplify}{Logical scalar, whether to call \code{\link{simplify}}
+\item{simplify}{Logical scalar, whether to call \code{\link[=simplify]{simplify()}}
 on the created graph. By default the graph is simplified, loop and
 multiple edges are removed.}
 }

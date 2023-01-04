@@ -46,7 +46,7 @@ make_de_bruijn_graph(2, 2)
 make_line_graph(g)
 }
 \seealso{
-\code{\link{make_kautz_graph}}, \code{\link{make_line_graph}}
+\code{\link[=make_kautz_graph]{make_kautz_graph()}}, \code{\link[=make_line_graph]{make_line_graph()}}
 }
 \author{
 Gabor Csardi \href{mailto:csardi.gabor@gmail.com}{csardi.gabor@gmail.com}

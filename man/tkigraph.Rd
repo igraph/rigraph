@@ -18,7 +18,7 @@ was written in Tcl/Tk, so it is cross platform.
 details about how to use it.
 }
 \seealso{
-\code{\link{tkplot}} for interactive plotting of graphs.
+\code{\link[=tkplot]{tkplot()}} for interactive plotting of graphs.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

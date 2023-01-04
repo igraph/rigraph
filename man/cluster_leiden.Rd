@@ -50,12 +50,12 @@ of the \code{objective_function}. Please see the details of this function
 how to interpret the vertex weights.}
 }
 \value{
-\code{cluster_leiden()} returns a \code{\link{communities}}
-object, please see the \code{\link{communities}} manual page for details.
+\code{cluster_leiden()} returns a \code{\link[=communities]{communities()}}
+object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
 The Leiden algorithm is similar to the Louvain algorithm,
-\code{\link{cluster_louvain}}, but it is faster and yields higher quality
+\code{\link[=cluster_louvain]{cluster_louvain()}}, but it is faster and yields higher quality
 solutions. It can optimize both modularity and the Constant Potts Model,
 which does not suffer from the resolution-limit (see preprint
 http://arxiv.org/abs/1104.3083).
@@ -115,20 +115,20 @@ to Leiden: guaranteeing well-connected communities. Scientific
 reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 [cs.SI]
 }
 \seealso{
-See \code{\link{communities}} for extracting the membership,
+See \code{\link[=communities]{communities()}} for extracting the membership,
 modularity scores, etc. from the results.
 
-Other community detection algorithms: \code{\link{cluster_walktrap}},
-\code{\link{cluster_spinglass}},
-\code{\link{cluster_leading_eigen}},
-\code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}},
-\code{\link{cluster_label_prop}}
-\code{\link{cluster_louvain}}
-\code{\link{cluster_fluid_communities}}
-\code{\link{cluster_infomap}}
-\code{\link{cluster_optimal}}
-\code{\link{cluster_walktrap}}
+Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}}
+\code{\link[=cluster_louvain]{cluster_louvain()}}
+\code{\link[=cluster_fluid_communities]{cluster_fluid_communities()}}
+\code{\link[=cluster_infomap]{cluster_infomap()}}
+\code{\link[=cluster_optimal]{cluster_optimal()}}
+\code{\link[=cluster_walktrap]{cluster_walktrap()}}
 }
 \author{
 Vincent Traag

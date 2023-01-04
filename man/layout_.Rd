@@ -40,7 +40,7 @@ prefix \code{layout_()} on a graph, to get the vertex coordinates.
 The second way (new in igraph 0.8.0), has two steps, and it
 is more flexible. First you call a layout specification
 function (the one without the \code{layout_()} prefix, and
-then \code{layout_()} (or \code{\link{add_layout_}}) to
+then \code{layout_()} (or \code{\link[=add_layout_]{add_layout_()}}) to
 perform the layouting.
 
 The second way is preferred, as it is more flexible. It allows
@@ -66,7 +66,7 @@ coords <- layout_(g, as_star())
 plot(g, layout = coords)
 }
 \seealso{
-\code{\link{add_layout_}} to add the layout to the
+\code{\link[=add_layout_]{add_layout_()}} to add the layout to the
 graph as an attribute.
 
 Other graph layouts: 

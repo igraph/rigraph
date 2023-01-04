@@ -23,7 +23,7 @@ parameter.}
 \item{locality}{Whether to calculate the \sQuote{us} or \sQuote{them}
 statistics.}
 
-\item{...}{Extra arguments are passed to \code{\link{local_scan}}.}
+\item{...}{Extra arguments are passed to \code{\link[=local_scan]{local_scan()}}.}
 }
 \value{
 A list with entries:

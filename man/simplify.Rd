@@ -29,7 +29,7 @@ removed.}
 \item{edge.attr.comb}{Specifies what to do with edge attributes, if
 \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
-\code{\link{attribute.combination}} for details on this.}
+\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
 }
 \value{
 a new graph object with the edges deleted.
@@ -68,9 +68,9 @@ is_simple(simplify(g, remove.multiple = FALSE))
 is_simple(simplify(g))
 }
 \seealso{
-\code{\link{which_loop}}, \code{\link{which_multiple}} and
-\code{\link{count_multiple}}, \code{\link{delete_edges}},
-\code{\link{delete_vertices}}
+\code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and
+\code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}},
+\code{\link[=delete_vertices]{delete_vertices()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

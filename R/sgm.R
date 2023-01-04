@@ -51,7 +51,7 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #'   bijection between the graphs of `A` and `B`
 #' @author Vince Lyzinski <https://www.ams.jhu.edu/~lyzinski/>
 #' @seealso
-#' \code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
+#' [sample_correlated_gnp()],[sample_correlated_gnp_pair()]
 #' @references Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
 #' G., Harley, E. T., Fishkind, D. E.,Vogelstein, R. J., Priebe, C. E. (2011).
 #' Fast Approximate Quadratic Programming for Large (Brain) Graph Matching.

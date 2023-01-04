@@ -87,8 +87,8 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'   isolate vertices.
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{is_connected}} to decide whether a graph is connected,
-#' \code{\link{components}} to calculate the connected components of a graph.
+#' @seealso [is_connected()] to decide whether a graph is connected,
+#' [components()] to calculate the connected components of a graph.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -141,9 +141,9 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #'   IDs of the articulation points of the input graph. For `bridges()`, a
 #'   numeric vector giving the edge IDs of the bridges of the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{biconnected_components}}, \code{\link{components}},
-#' \code{\link{is_connected}}, \code{\link{vertex_connectivity}},
-#' \code{\link{edge_connectivity}}
+#' @seealso [biconnected_components()], [components()],
+#' [is_connected()], [vertex_connectivity()],
+#' [edge_connectivity()]
 #' @keywords graphs
 #' @examples
 #'
@@ -187,10 +187,10 @@ bridges <- bridges
 #'   \item{component_edges}{A list of numeric vectors. It gives all edges in the
 #'   components.} \item{components}{A list of numeric vectors, the vertices of
 #'   the components.} \item{articulation_points}{The articulation points of the
-#'   graph. See \code{\link{articulation_points}}.}
+#'   graph. See [articulation_points()].}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{articulation_points}}, \code{\link{components}},
-#' \code{\link{is_connected}}, \code{\link{vertex_connectivity}}
+#' @seealso [articulation_points()], [components()],
+#' [is_connected()], [vertex_connectivity()]
 #' @keywords graphs
 #' @examples
 #'

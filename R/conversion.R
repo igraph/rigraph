@@ -198,7 +198,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' @return A `vcount(graph)` by `vcount(graph)` (usually) numeric
 #'   matrix.
 #'
-#' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+#' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @examples
 #'
 #' g <- sample_gnp(10, 2 / 10)
@@ -243,7 +243,7 @@ as_adj <- as_adjacency_matrix
 #'   names (ie. the `name` vertex attribute) if they exist or numeric
 #'   vertex ids.
 #' @return A `gsize(graph)` by 2 numeric matrix.
-#' @seealso \code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+#' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @keywords graphs
 #' @examples
 #'
@@ -315,7 +315,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #'   `mutual`. See details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{simplify}} for removing multiple and/or loop edges from
+#' @seealso [simplify()] for removing multiple and/or loop edges from
 #' a graph.
 #' @export
 #' @keywords graphs
@@ -356,7 +356,7 @@ as.directed <- as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
 #'   `mode="collapse"` or `mode="mutual"`.  In these cases many edges
 #'   might be mapped to a single one in the new graph, and their attributes are
-#'   combined. Please see \code{\link{attribute.combination}} for details on
+#'   combined. Please see [attribute.combination()] for details on
 #'   this.
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
@@ -410,7 +410,7 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' vectors of the adjacency lists are coerced to `igraph.vs`, this can be
 #' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{as_edgelist}}, \code{\link{as_adj}}
+#' @seealso [as_edgelist()], [as_adj()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -517,9 +517,9 @@ as_adj_edge_list <- function(graph,
 #'   `TRUE` (the default) these will be converted to atomic vectors,
 #'   whenever possible, before adding them to the igraph graph.
 #' @return `graph_from_graphnel()` returns an igraph graph object.
-#' @seealso \code{\link{as_graphnel}} for the other direction,
-#' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
-#' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
+#' @seealso [as_graphnel()] for the other direction,
+#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adj_list()] and [graph.adjlist()] for other
 #' graph representations.
 #' @examples
 #' \dontrun{
@@ -608,9 +608,9 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
 #' @return `as_graphnel()` returns a graphNEL graph object.
-#' @seealso \code{\link{graph_from_graphnel}} for the other direction,
-#' \code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
-#' \code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for
+#' @seealso [graph_from_graphnel()] for the other direction,
+#' [as_adj()], [graph_from_adjacency_matrix()],
+#' [as_adj_list()] and [graph.adjlist()] for
 #' other graph representations.
 #' @examples
 #' ## Undirected
@@ -841,7 +841,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph_from_incidence_matrix}} for the opposite operation.
+#' @seealso [graph_from_incidence_matrix()] for the opposite operation.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -919,7 +919,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' a graph. In this case adjacency lists are more efficient than igraph graphs.
 #'
 #' The idea is that you convert your graph to an adjacency list by
-#' \code{\link{as_adj_list}}, do your modifications to the graphs and finally
+#' [as_adj_list()], do your modifications to the graphs and finally
 #' create again an igraph graph by calling `graph_from_adj_list()`.
 #'
 #' @aliases graph.adjlist graph_from_adj_list
@@ -939,7 +939,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #'   This argument is ignored if `mode` is `out` or `in`.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{as_edgelist}}
+#' @seealso [as_edgelist()]
 #' @keywords graphs
 #' @examples
 #'
@@ -1026,10 +1026,10 @@ as_long_data_frame <- function(graph) {
 #' If `matrix.type` is `"adjacency"`, then a square adjacency matrix is
 #' returned. For adjacency matrices, you can use the `attr` keyword argument
 #' to use the values of an edge attribute in the matrix cells. See the
-#' documentation of \link{as_adjacency_matrix} for more details.
+#' documentation of [as_adjacency_matrix] for more details.
 #'
 #' Other arguments passed through `...` are passed to either
-#' \code{\link{as_adjacency_matrix}} or \code{\link{as_edgelist}}
+#' [as_adjacency_matrix()] or [as_edgelist()]
 #' depending on the value of `matrix.type`.
 #'
 #' @param x object of class igraph, the network
@@ -1039,7 +1039,7 @@ as_long_data_frame <- function(graph) {
 #' @return Depending on the value of `matrix.type` either a square
 #'   adjacency matrix or a two-column numeric matrix representing the edgelist.
 #' @author Michal Bojanowski, originally from the `intergraph` package
-#' @seealso \code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
+#' @seealso [as_adjacency_matrix()], [as_edgelist()]
 #' @export
 #' @examples
 #'

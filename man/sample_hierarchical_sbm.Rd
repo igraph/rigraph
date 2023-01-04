@@ -56,7 +56,7 @@ if (require(Matrix)) {
 }
 }
 \seealso{
-\code{\link{sbm.game}}
+\code{\link[=sbm.game]{sbm.game()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

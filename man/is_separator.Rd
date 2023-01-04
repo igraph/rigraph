@@ -30,6 +30,6 @@ In the special case of a fully connected graph with \eqn{n} vertices, each
 set of \eqn{n-1} vertices is considered to be a vertex separator.
 }
 \seealso{
-\code{\link{is_min_separator}}, \code{\link{min_separators}}
+\code{\link[=is_min_separator]{is_min_separator()}}, \code{\link[=min_separators]{min_separators()}}
 lists all vertex separator of minimum size.
 }

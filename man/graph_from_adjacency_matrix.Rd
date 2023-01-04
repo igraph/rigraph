@@ -155,7 +155,7 @@ summary(g10)
 
 }
 \seealso{
-\link{graph} and \code{\link{graph_from_literal}} for other ways to
+\code{\link[=graph]{graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
 create graphs.
 }
 \author{

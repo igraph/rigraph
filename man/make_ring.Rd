@@ -29,7 +29,7 @@ An igraph graph.
 }
 \description{
 A ring is a one-dimensional lattice and this function is a special case
-of \code{\link{make_lattice}}.
+of \code{\link[=make_lattice]{make_lattice()}}.
 }
 \examples{
 print_all(make_ring(10))

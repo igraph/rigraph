@@ -86,8 +86,8 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link{permute}} to apply a permutation to a graph,
-\code{\link{graph.isomorphic}} for deciding graph isomorphism, possibly
+\code{\link[=permute]{permute()}} to apply a permutation to a graph,
+\code{\link[=graph.isomorphic]{graph.isomorphic()}} for deciding graph isomorphism, possibly
 based on canonical labels.
 }
 \author{

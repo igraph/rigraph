@@ -34,7 +34,7 @@ using the same parameters. If the \code{normalized} argument was
 \code{TRUE}, then the result was divided by this number.}
 }
 \description{
-See \code{\link{centralize}} for a summary of graph centralization.
+See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized

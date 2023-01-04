@@ -42,7 +42,7 @@ Adjacency lists are handy if you intend to do many (small) modifications to
 a graph. In this case adjacency lists are more efficient than igraph graphs.
 
 The idea is that you convert your graph to an adjacency list by
-\code{\link{as_adj_list}}, do your modifications to the graphs and finally
+\code{\link[=as_adj_list]{as_adj_list()}}, do your modifications to the graphs and finally
 create again an igraph graph by calling \code{graph_from_adj_list()}.
 }
 \examples{
@@ -64,7 +64,7 @@ ecount(g3)
 which_multiple(g3)
 }
 \seealso{
-\code{\link{as_edgelist}}
+\code{\link[=as_edgelist]{as_edgelist()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

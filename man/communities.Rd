@@ -73,13 +73,13 @@ show_trace(communities)
 igraph community detection function.}
 
 \item{\dots}{Additional arguments. \code{plot.communities} passes these to
-\code{\link{plot.igraph}}. The other functions silently ignore
+\code{\link[=plot.igraph]{plot.igraph()}}. The other functions silently ignore
 them.}
 
 \item{graph}{An igraph graph object, corresponding to \code{communities}.}
 
 \item{hang}{Numeric scalar indicating how the height of leaves should be
-computed from the heights of their parents; see \code{\link{plot.hclust}}.}
+computed from the heights of their parents; see \code{\link[=plot.hclust]{plot.hclust()}}.}
 
 \item{use.modularity}{Logical scalar, whether to use the modularity values
 to define the height of the branches.}
@@ -146,7 +146,7 @@ the graph that was the input of the community detection.
 \code{cut_at()} returns a numeric vector, the membership vector of the
 vertices.
 
-\code{\link[=as.dendrogram]{as.dendrogram()}} returns a \code{\link[stats]{dendrogram}} object.
+\code{\link[=as.dendrogram]{as.dendrogram()}} returns a \link{dendrogram} object.
 
 \code{show_trace()} returns a character vector.
 
@@ -196,7 +196,7 @@ symbolic names if the \code{add.vertex.names} igraph option is set, and the
 graph itself was named. Otherwise numeric vertex ids are used.
 
 \code{modularity()} gives the modularity score of the partitioning. (See
-\code{\link{modularity.igraph}} for details. For algorithms that do not
+\code{\link[=modularity.igraph]{modularity.igraph()}} for details. For algorithms that do not
 result a single partitioning, the highest modularity value is returned.
 
 \code{algorithm()} gives the name of the algorithm that was used to calculate
@@ -225,7 +225,7 @@ non-hierarchical method.
 
 \code{\link[=as.dendrogram]{as.dendrogram()}} converts a hierarchical community structure to a
 \code{dendrogram} object. It only works for hierarchical methods, and gives
-an error message to others. See \code{\link[stats]{dendrogram}} for details.
+an error message to others. See \code{\link[stats:dendrogram]{stats::dendrogram()}} for details.
 
 \code{as.hclust} is similar to \code{\link[=as.dendrogram]{as.dendrogram()}}, but converts a
 hierarchical community structure to a \code{hclust} object.
@@ -234,21 +234,21 @@ hierarchical community structure to a \code{hclust} object.
 object, you will need the \code{ape} package for this.
 
 \code{show_trace()} works (currently) only for communities found by the leading
-eigenvector method (\code{\link{cluster_leading_eigen}}), and
+eigenvector method (\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}}), and
 returns a character vector that gives the steps performed by the algorithm
 while finding the communities.
 
 \code{code_len()} is defined for the InfoMAP method
-(\code{\link{cluster_infomap}} and returns the code length of the
+(\code{\link[=cluster_infomap]{cluster_infomap()}} and returns the code length of the
 partition.
 
 It is possibly to call the \code{\link[=plot]{plot()}} function on \code{communities}
-objects. This will plot the graph (and uses \code{\link{plot.igraph}}
+objects. This will plot the graph (and uses \code{\link[=plot.igraph]{plot.igraph()}}
 internally), with the communities shown. By default it colores the vertices
 according to their communities, and also marks the vertex groups
 corresponding to the communities. It passes additional arguments to
-\code{\link{plot.igraph}}, please see that and also
-\code{\link{igraph.plotting}} on how to change the plot.
+\code{\link[=plot.igraph]{plot.igraph()}}, please see that and also
+\link{igraph.plotting} on how to change the plot.
 }
 \examples{
 
@@ -260,19 +260,19 @@ plot(wc, karate)
 
 }
 \seealso{
-See \code{\link{plot_dendrogram}} for plotting community structure
+See \code{\link[=plot_dendrogram]{plot_dendrogram()}} for plotting community structure
 dendrograms.
 
-See \code{\link{compare}} for comparing two community structures
+See \code{\link[=compare]{compare()}} for comparing two community structures
 on the same graph.
 
 The different methods for finding communities, they all return a
-\code{communities} object: \code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}},
-\code{\link{cluster_label_prop}},
-\code{\link{cluster_leading_eigen}},
-\code{\link{cluster_louvain}}, \code{\link{cluster_leiden}},
-\code{\link{cluster_optimal}}, \code{\link{cluster_spinglass}},
-\code{\link{cluster_walktrap}}.
+\code{communities} object: \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_louvain]{cluster_louvain()}}, \code{\link[=cluster_leiden]{cluster_leiden()}},
+\code{\link[=cluster_optimal]{cluster_optimal()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_walktrap]{cluster_walktrap()}}.
 }
 \keyword{graphs}

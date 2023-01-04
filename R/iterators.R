@@ -187,7 +187,7 @@ set_complete_iterator <- function(x, value = TRUE) {
 #'
 #' @section Querying or setting attributes:
 #' Vertex sequences can be used to query or set attributes for the
-#' vertices in the sequence. See \code{\link{$.igraph.vs}} for details.
+#' vertices in the sequence. See [$.igraph.vs()] for details.
 #'
 #' @param graph The graph
 #' @return A vertex sequence containing all vertices, in the order
@@ -278,7 +278,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #'
 #' @section Querying or setting attributes:
 #' Edge sequences can be used to query or set attributes for the
-#' edges in the sequence. See \code{\link{$.igraph.es}} for details.
+#' edges in the sequence. See [$.igraph.es()] for details.
 #'
 #' @param graph The graph.
 #' @param P A list of vertices to select edges via pairs of vertices.
@@ -1044,11 +1044,11 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'
 #' @details
 #' The query form of `$` is a shortcut for
-#' \code{\link{vertex_attr}}, e.g. `V(g)[idx]$attr` is equivalent
+#' [vertex_attr()], e.g. `V(g)[idx]$attr` is equivalent
 #' to `vertex_attr(g, attr, V(g)[idx])`.
 #'
 #' The assignment form of `$` is a shortcut for
-#' \code{\link{set_vertex_attr}}, e.g. `V(g)[idx]$attr <- value` is
+#' [set_vertex_attr()], e.g. `V(g)[idx]$attr <- value` is
 #' equivalent to `g <- set_vertex_attr(g, attr, V(g)[idx], value)`.
 #'
 #' @param x A vertex sequence. For `V<-` it is a graph.
@@ -1107,12 +1107,12 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' edge attributes, for edges in an edge sequence.
 #'
 #' @details
-#' The query form of `$` is a shortcut for \code{\link{edge_attr}},
+#' The query form of `$` is a shortcut for [edge_attr()],
 #' e.g. `E(g)[idx]$attr` is equivalent to `edge_attr(g, attr,
 #' E(g)[idx])`.
 #'
 #' The assignment form of `$` is a shortcut for
-#' \code{\link{set_edge_attr}}, e.g. `E(g)[idx]$attr <- value` is
+#' [set_edge_attr()], e.g. `E(g)[idx]$attr <- value` is
 #' equivalent to `g <- set_edge_attr(g, attr, E(g)[idx], value)`.
 #'
 #' @param x An edge sequence. For `E<-` it is a graph.
@@ -1196,8 +1196,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 }
 
 #' @param path Select edges along a path, given by a vertex sequence See
-#'   \code{\link{E}}.
-#' @param P Select edges via pairs of vertices. See \code{\link{E}}.
+#'   [E()].
+#' @param P Select edges via pairs of vertices. See [E()].
 #' @param directed Whether to use edge directions for the `path` or
 #'   `P` arguments.
 #' @name igraph-es-attributes

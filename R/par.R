@@ -93,16 +93,16 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     as `xlab`. Defaults to `FALSE`.}
 #'   \item{dend.plot.type}{The plotting function to use when plotting
 #'     community structure dendrograms via
-#'     \code{\link{plot_dendrogram}}}. Possible values are \sQuote{auto} (the
+#'     [plot_dendrogram()]}. Possible values are \sQuote{auto} (the
 #'     default), \sQuote{phylo}, \sQuote{hclust} and
-#'     \sQuote{dendrogram}. See \code{\link{plot_dendrogram}} for details.
+#'     \sQuote{dendrogram}. See [plot_dendrogram()] for details.
 #'   \item{edge.attr.comb}{Specifies what to do with the edge
 #'     attributes if the graph is modified. The default value is
 #'     `list(weight="sum", name="concat", "ignore")`. See
-#'     \code{\link{attribute.combination}} for details on this.}
+#'     [attribute.combination()] for details on this.}
 #'   \item{print.edge.attributes}{Logical constant, whether to print edge
 #'     attributes when printing graphs. Defaults to `FALSE`.}
-#'   \item{print.full}{Logical scalar, whether \code{\link{print.igraph}}
+#'   \item{print.full}{Logical scalar, whether [print.igraph()]
 #'     should show the graph structure as well, or only a summary of the
 #'     graph.}
 #'   \item{print.graph.attributes}{Logical constant, whether to print
@@ -124,7 +124,7 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'   \item{vertex.attr.comb}{Specifies what to do with the vertex
 #'     attributes if the graph is modified. The default value is
 #'     `list(name="concat", "ignore")` See
-#'     \code{\link{attribute.combination}} for details on this.}
+#'     [attribute.combination()] for details on this.}
 #' }
 #'
 #' @aliases igraph.options igraph_options getIgraphOpt igraph_opt
@@ -142,8 +142,8 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'   For `igraph_opt()`, the current value set for option `x`, or
 #'   `NULL` if the option is unset.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso `igraph_options()` is similar to \code{\link{options}} and
-#' `igraph_opt()` is similar to \code{\link{getOption}}.
+#' @seealso `igraph_options()` is similar to [options()] and
+#' `igraph_opt()` is similar to [getOption()].
 #' @keywords graphs
 #' @examples
 #'

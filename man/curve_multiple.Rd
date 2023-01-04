@@ -40,8 +40,8 @@ plot(g)
 
 }
 \seealso{
-\code{\link{igraph.plotting}} for all plotting parameters,
-\code{\link{plot.igraph}}, \code{\link{tkplot}} and \code{\link{rglplot}}
+\link{igraph.plotting} for all plotting parameters,
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}}
 for plotting functions.
 }
 \author{

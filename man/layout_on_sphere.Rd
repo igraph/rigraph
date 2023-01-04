@@ -27,7 +27,7 @@ surface of a sphere, this is thus a 3d layout. It is not clear however what
 \dQuote{uniformly on a sphere} means.
 
 If you want to order the vertices differently, then permute them using the
-\code{\link{permute}} function.
+\code{\link[=permute]{permute()}} function.
 }
 \seealso{
 Other graph layouts: 

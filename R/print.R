@@ -450,7 +450,7 @@ print_all <- function(object, ...) {
 #'
 #' `print.igraph()` behaves either as `summary.igraph` or
 #' `print_all()` depending on the `full` argument. See also the
-#' \sQuote{print.full} igraph option and \code{\link{igraph_opt}}.
+#' \sQuote{print.full} igraph option and [igraph_opt()].
 #'
 #' The graph summary printed by `summary.igraph` (and `print.igraph()`
 #' and `print_all()`) consists one or more lines. The first line contains
@@ -462,7 +462,7 @@ print_all <- function(object, ...) {
 #' The first line always
 #' starts with `IGRAPH`, showing you that the object is an igraph graph.
 #' Then a seven character code is printed, this the first seven characters
-#' of the unique id of the graph. See \code{\link{graph_id}} for more.
+#' of the unique id of the graph. See [graph_id()] for more.
 #' Then a four letter long code string is printed. The first letter
 #' distinguishes between directed (\sQuote{`D`}) and undirected
 #' (\sQuote{`U`}) graphs. The second letter is \sQuote{`N`} for named
@@ -482,7 +482,7 @@ print_all <- function(object, ...) {
 #' (\sQuote{`l`}), or other (\sQuote{`x`}).
 #'
 #' As of igraph 0.4 `print_all()` and `print.igraph()` use the
-#' `max.print` option, see \code{\link[base]{options}} for details.
+#' `max.print` option, see [base::options()] for details.
 #'
 #' As of igraph 1.1.1, the `str.igraph` function is defunct, use
 #' `print_all()`.

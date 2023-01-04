@@ -35,6 +35,6 @@ to_prufer(g)
 
 }
 \seealso{
-\code{\link{to_prufer}} to convert a graph into its Prufer sequence
+\code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prufer sequence
 }
 \keyword{graphs}

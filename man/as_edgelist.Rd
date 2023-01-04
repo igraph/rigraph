@@ -34,6 +34,6 @@ as_edgelist(g)
 
 }
 \seealso{
-\code{\link{graph_from_adjacency_matrix}}, \code{\link{read_graph}}
+\code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
 }
 \keyword{graphs}

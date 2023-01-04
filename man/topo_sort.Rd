@@ -18,7 +18,7 @@ nodes from which it receives edges. Nodes with no outgoing edges go first.}
 }
 \value{
 A vertex sequence (by default, but see the \code{return.vs.es}
-option of \code{\link{igraph_options}}) containing vertices in
+option of \code{\link[=igraph_options]{igraph_options()}}) containing vertices in
 topologically sorted order.
 }
 \description{

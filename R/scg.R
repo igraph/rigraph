@@ -85,7 +85,7 @@ NULL
 #' @return A regular matrix or a matrix of class `Matrix` if a
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{as_adj}}
+#' @seealso [as_adj()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -191,8 +191,8 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #'   object (vertex) in the partition.
 #' @author David Morton de Lachapelle \email{david.morton@@epfl.ch},
 #' \email{david.mortondelachapelle@@swissquote.ch}
-#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
-#' \code{\link{scg_eps}}
+#' @seealso [scg-method] for a detailed introduction. [scg()],
+#' [scg_eps()]
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
@@ -332,8 +332,8 @@ scg_group <- function(V, nt,
 #'   \eqn{R}.}
 #' @author David Morton de Lachapelle,
 #' <http://people.epfl.ch/david.morton>.
-#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
-#' \code{\link{scg_eps}}, \code{\link{scg_group}}
+#' @seealso [scg-method] for a detailed introduction. [scg()],
+#' [scg_eps()], [scg_group()]
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
@@ -407,7 +407,7 @@ scg_semi_proj <- function(groups,
 #' This function handles all the steps involved in the Spectral Coarse Graining
 #' (SCG) of some matrices and graphs as described in the reference below.
 #'
-#' Please see \link{scg-method} for an introduction.
+#' Please see [scg-method] for an introduction.
 #'
 #' In the following \eqn{V} is the matrix of eigenvectors for which the SCG is
 #' solved. \eqn{V} is calculated from `X`, if it is not given in the
@@ -479,7 +479,7 @@ scg_semi_proj <- function(groups,
 #'   Markov chain when `mtype` = \dQuote{stochastic}. This parameter is
 #'   ignored in all other cases.
 #' @param use.arpack Logical scalar. When set to `TRUE` uses the function
-#'   \code{\link{arpack}} to compute eigenpairs. This parameter should be set to
+#'   [arpack()] to compute eigenpairs. This parameter should be set to
 #'   `TRUE` if one deals with large (over a few thousands) AND sparse graphs
 #'   or matrices. This argument is not implemented currently and LAPACK is used
 #'   for solving the eigenproblems.
@@ -507,8 +507,8 @@ scg_semi_proj <- function(groups,
 #'   For other matrix types this is missing.}
 #' @author David Morton de Lachapelle,
 #' <http://people.epfl.ch/david.morton>.
-#' @seealso \link{scg-method} for an introduction.  \code{\link{scg_eps}},
-#' \code{\link{scg_group}} and \code{\link{scg_semi_proj}}.
+#' @seealso [scg-method] for an introduction.  [scg_eps()],
+#' [scg_group()] and [scg_semi_proj()].
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
@@ -822,7 +822,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #'   component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
 #' @author David Morton de Lachapelle,
 #' <http://people.epfl.ch/david.morton>.
-#' @seealso \link{scg-method} and \code{\link{scg}}.
+#' @seealso [scg-method] and [scg()].
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on

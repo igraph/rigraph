@@ -41,7 +41,7 @@
 #'
 #' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{tkplot}} for interactive plotting of graphs.
+#' @seealso [tkplot()] for interactive plotting of graphs.
 #' @keywords graphs
 #' @export
 tkigraph <- function() {

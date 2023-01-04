@@ -7,7 +7,7 @@
 \description{
 Many times, when the structure of a graph is modified, vertices/edges map of
 the original graph map to vertices/edges in the newly created (modified)
-graph. For example \code{\link{simplify}} maps multiple edges to single
+graph. For example \code{\link[=simplify]{simplify()}} maps multiple edges to single
 edges. igraph provides a flexible mechanism to specify what to do with the
 vertex/edge attributes in these cases.
 }
@@ -15,7 +15,7 @@ vertex/edge attributes in these cases.
 The functions that support the combination of attributes have one or two
 extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
 that specify how to perform the mapping of the attributes. E.g.
-\code{\link{contract}} contracts many vertices into a single one, the
+\code{\link[=contract]{contract()}} contracts many vertices into a single one, the
 attributes of the vertices can be combined and stores as the vertex
 attributes of the new graph.
 
@@ -102,9 +102,9 @@ simplify(g, edge.attr.comb = list(
 ))
 }
 \seealso{
-\code{\link{graph_attr}}, \code{\link{vertex_attr}},
-\code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
-general. \code{\link{igraph_options}} on igraph parameters.
+\code{\link[=graph_attr]{graph_attr()}}, \code{\link[=vertex_attr]{vertex_attr()}},
+\code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in
+general. \code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

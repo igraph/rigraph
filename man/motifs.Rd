@@ -31,7 +31,7 @@ structure.  These functions search a graph for various motifs.
 \code{motifs()} searches a graph for motifs of a given size and returns a
 numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
-\code{\link{isomorphism_class}}.
+\code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \examples{
 g <- barabasi.game(100)
@@ -40,7 +40,7 @@ count_motifs(g, 3)
 sample_motifs(g, 3)
 }
 \seealso{
-\code{\link{isomorphism_class}}
+\code{\link[=isomorphism_class]{isomorphism_class()}}
 
 Other graph motifs: 
 \code{\link{count_motifs}()},

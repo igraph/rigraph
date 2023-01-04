@@ -40,7 +40,7 @@
 #' The second way (new in igraph 0.8.0), has two steps, and it
 #' is more flexible. First you call a layout specification
 #' function (the one without the `layout_()` prefix, and
-#' then `layout_()` (or \code{\link{add_layout_}}) to
+#' then `layout_()` (or [add_layout_()]) to
 #' perform the layouting.
 #'
 #' The second way is preferred, as it is more flexible. It allows
@@ -67,7 +67,7 @@
 #' @return The return value of the layout function, usually a
 #'   two column matrix. For 3D layouts a three column matrix.
 #'
-#' @seealso \code{\link{add_layout_}} to add the layout to the
+#' @seealso [add_layout_()] to add the layout to the
 #'   graph as an attribute.
 #' @export
 #' @family graph layouts
@@ -118,12 +118,12 @@ layout_ <- function(graph, layout, ...) {
 #' Add layout to graph
 #'
 #' @param graph The input graph.
-#' @param ... Additional arguments are passed to \code{\link{layout_}}.
+#' @param ... Additional arguments are passed to [layout_()].
 #' @param overwrite Whether to overwrite the layout of the graph,
 #'    if it already has one.
 #' @return The input graph, with the layout added.
 #'
-#' @seealso \code{\link{layout_}} for a description of the layout API.
+#' @seealso [layout_()] for a description of the layout API.
 #' @export
 #' @family graph layouts
 #' @examples
@@ -188,11 +188,11 @@ print.igraph_layout_modifier <- function(x, ...) {
 #' of the graph.
 #'
 #' @param merge_method Merging algorithm, the `method`
-#'   argument of \code{\link{merge_coords}}.
+#'   argument of [merge_coords()].
 #'
 #' @family layout modifiers
 #' @family graph layouts
-#' @seealso \code{\link{merge_coords}}, \code{\link{layout_}}.
+#' @seealso [merge_coords()], [layout_()].
 #' @export
 #' @examples
 #' g <- make_ring(10) + make_ring(10)
@@ -218,7 +218,7 @@ component_wise <- function(merge_method = "dla") {
 #'
 #' @family layout modifiers
 #' @family graph layouts
-#' @seealso \code{\link{merge_coords}}, \code{\link{layout_}}.
+#' @seealso [merge_coords()], [layout_()].
 #' @export
 #' @examples
 #' layout_(make_ring(10), with_fr(), normalize())
@@ -245,7 +245,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' The layout is created by first placing the vertices in two rows, according
 #' to their types. Then the positions within the rows are optimized to minimize
 #' edge crossings, using the Sugiyama algorithm (see
-#' \code{\link{layout_with_sugiyama}}).
+#' [layout_with_sugiyama()]).
 #'
 #' @aliases layout_as_bipartite layout.bipartite
 #' @param graph The bipartite input graph. It should have a logical
@@ -263,7 +263,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout_with_sugiyama}}
+#' @seealso [layout_with_sugiyama()]
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -326,9 +326,9 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' @return A matrix with two columns and as many rows as the number of vertices
 #'   in the input graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout}} and \code{\link{layout.drl}} for other layout
-#' algorithms, \code{\link{plot.igraph}} and \code{\link{tkplot}} on how to
-#' plot graphs and \code{\link{star}} on how to create ring graphs.
+#' @seealso [layout()] and [layout.drl()] for other layout
+#' algorithms, [plot.igraph()] and [tkplot()] on how to
+#' plot graphs and [star()] on how to create ring graphs.
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -476,7 +476,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' Place vertices on a circle, in the order of their vertex ids.
 #'
 #' If you want to order the vertices differently, then permute them using the
-#' \code{\link{permute}} function.
+#' [permute()] function.
 #'
 #' @param graph The input graph.
 #' @param order The vertices to place on the circle, in the order of their
@@ -564,7 +564,7 @@ layout.circle <- function(..., params = list()) {
 #'   `layout_nicely()`.
 #' @return A numeric matrix with two or three columns.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{plot.igraph}}
+#' @seealso [plot.igraph()]
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -634,7 +634,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #'
 #' The function places the vertices on a simple rectangular grid, one after the
 #' other. If you want to change the order of the vertices, then see the
-#' \code{\link{permute}} function.
+#' [permute()] function.
 #'
 #' @aliases layout_on_grid layout.grid layout.grid.3d
 #' @param graph The input graph.
@@ -648,7 +648,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' @param dim Two or three. Whether to make 2d or a 3d layout.
 #' @return A two-column or three-column matrix.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso \code{\link{layout}} for other layout generators
+#' @seealso [layout()] for other layout generators
 #' @keywords graphs
 #' @export
 #' @family graph layouts
@@ -728,7 +728,7 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' \dQuote{uniformly on a sphere} means.
 #'
 #' If you want to order the vertices differently, then permute them using the
-#' \code{\link{permute}} function.
+#' [permute()] function.
 #'
 #' @param graph The input graph.
 #' @return A numeric matrix with three columns, and one row for each vertex.
@@ -798,7 +798,7 @@ randomly <- function(...) layout_spec(layout_randomly, ...)
 
 #' Deprecated layout functions
 #'
-#' Please use the new names, see \code{\link{layout_}}.
+#' Please use the new names, see [layout_()].
 #'
 #' @param ... Passed to the new layout functions.
 #' @param params Passed to the new layout functions as arguments.
@@ -856,8 +856,8 @@ layout.random <- function(..., params = list()) {
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #'   vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout_with_fr}},
-#' \code{\link{layout_with_kk}} for other layout algorithms.
+#' @seealso [layout_with_fr()],
+#' [layout_with_kk()] for other layout algorithms.
 #' @references Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 #' Annealing. *ACM Transactions on Graphics* 15(4), pp. 301-331, 1996.
 #' @export
@@ -1012,7 +1012,7 @@ with_dh <- function(...) layout_spec(layout_with_dh, ...)
 #' @return A two- or three-column matrix, each row giving the coordinates of a
 #'   vertex, according to the ids of the vertex ids.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
+#' @seealso [layout_with_drl()], [layout_with_kk()] for
 #' other layout algorithms.
 #' @references Fruchterman, T.M.J. and Reingold, E.M. (1991). Graph Drawing by
 #' Force-directed Placement. *Software - Practice and Experience*,
@@ -1155,8 +1155,8 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #' @return A numeric matrix with two columns, and as many rows as the number of
 #'   vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout_with_fr}},
-#' \code{\link{plot.igraph}}, \code{\link{tkplot}}
+#' @seealso [layout_with_fr()],
+#' [plot.igraph()], [tkplot()]
 #' @references Arne Frick, Andreas Ludwig, Heiko Mehldau: A Fast Adaptive
 #' Layout Algorithm for Undirected Graphs, *Proc. Graph Drawing 1994*,
 #' LNCS 894, pp. 388-403, 1995.
@@ -1311,7 +1311,7 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #' @param kkconst Numeric scalar, the Kamada-Kawai vertex attraction constant.
 #'   Typical (and default) value is the number of vertices.
 #' @param weights Edge weights, larger values will result longer edges.
-#'   Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+#'   Note that this is opposite to [layout_with_fr()]. Weights must
 #'   be positive.
 #' @param minx If not `NULL`, then it must be a numeric vector that gives
 #'   lower boundaries for the \sQuote{x} coordinates of the vertices. The length
@@ -1332,8 +1332,8 @@ with_graphopt <- function(...) layout_spec(layout_with_graphopt, ...)
 #'   many rows as the number of vertices, the x, y and potentially z coordinates
 #'   of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout_with_drl}}, \code{\link{plot.igraph}},
-#' \code{\link{tkplot}}
+#' @seealso [layout_with_drl()], [plot.igraph()],
+#' [tkplot()]
 #' @references Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 #' Undirected Graphs. *Information Processing Letters*, 31/1, 7--15, 1989.
 #' @export
@@ -1512,7 +1512,7 @@ layout.lgl <- function(..., params = list()) {
 #' nodes, but the user can override this via the `dist` argument.
 #'
 #' This function generates the layout separately for each graph component and
-#' then merges them via \code{\link{merge_coords}}.
+#' then merges them via [merge_coords()].
 #'
 #' @aliases layout.mds
 #' @param graph The input graph.
@@ -1527,7 +1527,7 @@ layout.lgl <- function(..., params = list()) {
 #' @return A numeric matrix with `dim` columns.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{layout}}, \code{\link{plot.igraph}}
+#' @seealso [layout()], [plot.igraph()]
 #' @references Cox, T. F. and Cox, M. A. A. (2001) *Multidimensional
 #' Scaling*.  Second edition. Chapman and Hall.
 #' @export
@@ -1933,8 +1933,8 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' @return A matrix with two columns and as many lines as the total number of
 #'   vertices in the graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{plot.igraph}}, \code{\link{tkplot}},
-#' \code{\link{layout}}, \code{\link{disjoint_union}}
+#' @seealso [plot.igraph()], [tkplot()],
+#' [layout()], [disjoint_union()]
 #' @export
 #' @family graph layouts
 #' @keywords graphs

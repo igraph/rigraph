@@ -71,7 +71,7 @@
 #' @author Shawn Martin (<http://www.cs.otago.ac.nz/homepages/smartin/>)
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com} for the R/igraph interface
 #' and the three dimensional version.
-#' @seealso \code{\link{layout}} for other layout generators.
+#' @seealso [layout()] for other layout generators.
 #' @references See the following technical report: Martin, S., Brown, W.M.,
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.

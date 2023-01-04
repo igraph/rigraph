@@ -128,7 +128,7 @@ de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
 149 510--515.
 }
 \seealso{
-\code{\link{sample_gnp}}
+\code{\link[=sample_gnp]{sample_gnp()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

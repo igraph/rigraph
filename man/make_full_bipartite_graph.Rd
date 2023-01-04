@@ -51,7 +51,7 @@ g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link{make_full_graph}} for creating one-mode full graphs
+\code{\link[=make_full_graph]{make_full_graph()}} for creating one-mode full graphs
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

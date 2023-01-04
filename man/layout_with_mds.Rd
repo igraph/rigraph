@@ -43,7 +43,7 @@ By default igraph uses the shortest path matrix as the distances between the
 nodes, but the user can override this via the \code{dist} argument.
 
 This function generates the layout separately for each graph component and
-then merges them via \code{\link{merge_coords}}.
+then merges them via \code{\link[=merge_coords]{merge_coords()}}.
 }
 \examples{
 
@@ -56,7 +56,7 @@ Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional
 Scaling}.  Second edition. Chapman and Hall.
 }
 \seealso{
-\code{\link{layout}}, \code{\link{plot.igraph}}
+\code{\link[=layout]{layout()}}, \code{\link[=plot.igraph]{plot.igraph()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

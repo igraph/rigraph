@@ -81,14 +81,14 @@ supply \code{NULL} for both of these arguments.}
 
 Uses the BLISS algorithm by Junttila and Kaski, and it works for
 undirected graphs. For both graphs the
-\code{\link{canonical_permutation}} and then the \code{\link{permute}}
+\code{\link[=canonical_permutation]{canonical_permutation()}} and then the \code{\link[=permute]{permute()}}
 function is called to transfer them into canonical form; finally the
 canonical forms are compared.
 Extra arguments:
 \describe{
 \item{sh}{Character constant, the heuristics to use in the BLISS
 algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of
-\code{\link{canonical_permutation}} for possible values.}
+\code{\link[=canonical_permutation]{canonical_permutation()}} for possible values.}
 }
 \code{sh} defaults to \sQuote{fm}.
 }

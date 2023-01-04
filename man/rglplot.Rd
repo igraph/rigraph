@@ -10,7 +10,7 @@ rglplot(x, ...)
 \arguments{
 \item{x}{The graph to plot.}
 
-\item{\dots}{Additional arguments, see \code{\link{igraph.plotting}} for the
+\item{\dots}{Additional arguments, see \link{igraph.plotting} for the
 details}
 }
 \value{
@@ -23,7 +23,7 @@ fixed.
 }
 \details{
 Note that \code{rglplot()} is considered to be highly experimental. It is not
-very useful either. See \code{\link{igraph.plotting}} for the possible
+very useful either. See \link{igraph.plotting} for the possible
 arguments.
 }
 \examples{
@@ -36,8 +36,8 @@ if (interactive()) {
 
 }
 \seealso{
-\code{\link{igraph.plotting}}, \code{\link{plot.igraph}} for the 2D
-version, \code{\link{tkplot}} for interactive graph drawing in 2D.
+\link{igraph.plotting}, \code{\link[=plot.igraph]{plot.igraph()}} for the 2D
+version, \code{\link[=tkplot]{tkplot()}} for interactive graph drawing in 2D.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

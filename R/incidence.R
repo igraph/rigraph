@@ -184,7 +184,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' @return A bipartite igraph graph. In other words, an igraph graph that has a
 #'   vertex attribute `type`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{make_bipartite_graph}} for another way to create bipartite
+#' @seealso [make_bipartite_graph()] for another way to create bipartite
 #' graphs
 #' @keywords graphs
 #' @examples

@@ -29,7 +29,7 @@ vertex attributes for the new vertices.
 
 When deleting vertices via \code{-}, all arguments of \code{vertex()} (or
 \code{vertices()}) are concatenated via \code{c()} and passed to
-\code{\link{delete_vertices}}.
+\code{\link[=delete_vertices]{delete_vertices()}}.
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10])) +

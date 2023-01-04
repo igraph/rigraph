@@ -35,7 +35,7 @@ Wasserman, S., and Faust, K. \emph{Social Network Analysis: Methods and
 Applications.} Cambridge: Cambridge University Press. 1994.
 }
 \seealso{
-\code{\link{triad_census}} for the same classification, but with
+\code{\link[=triad_census]{triad_census()}} for the same classification, but with
 triples.
 }
 \author{

@@ -18,7 +18,7 @@ plot_dendrogram(x, mode = igraph_opt("dend.plot.type"), ...)
 }
 \arguments{
 \item{x}{An object containing the community structure of a graph. See
-\code{\link{communities}} for details.}
+\code{\link[=communities]{communities()}} for details.}
 
 \item{mode}{Which dendrogram plotting function to use. See details below.}
 

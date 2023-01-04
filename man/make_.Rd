@@ -16,7 +16,7 @@ This is a generic function for creating graphs.
 \code{make_()} is a generic function for creating graphs.
 For every graph constructor in igraph that has a \code{make_} prefix,
 there is a corresponding function without the prefix: e.g.
-for \code{\link{make_ring}} there is also \code{\link{ring}}, etc.
+for \code{\link[=make_ring]{make_ring()}} there is also \code{\link[=ring]{ring()}}, etc.
 
 The same is true for the random graph samplers, i.e. for each
 constructor with a \code{sample_} prefix, there is a corresponding
@@ -25,7 +25,7 @@ function without that prefix.
 These shorter forms can be used together with \code{make_()}.
 The advantage of this form is that the user can specify constructor
 modifiers which work with all constructors. E.g. the
-\code{\link{with_vertex_}} modifier adds vertex attributes
+\code{\link[=with_vertex_]{with_vertex_()}} modifier adds vertex attributes
 to the newly created graphs.
 
 See the examples and the various constructor modifiers below.

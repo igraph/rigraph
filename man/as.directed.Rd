@@ -24,7 +24,7 @@ as.undirected(
 \item{edge.attr.comb}{Specifies what to do with edge attributes, if
 \code{mode="collapse"} or \code{mode="mutual"}.  In these cases many edges
 might be mapped to a single one in the new graph, and their attributes are
-combined. Please see \code{\link{attribute.combination}} for details on
+combined. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details on
 this.}
 }
 \value{
@@ -98,7 +98,7 @@ print(ug4, e = TRUE)
 
 }
 \seealso{
-\code{\link{simplify}} for removing multiple and/or loop edges from
+\code{\link[=simplify]{simplify()}} for removing multiple and/or loop edges from
 a graph.
 }
 \author{

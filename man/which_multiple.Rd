@@ -79,7 +79,7 @@ E(g)$weight
 
 }
 \seealso{
-\code{\link{simplify}} to eliminate loop and multiple edges.
+\code{\link[=simplify]{simplify()}} to eliminate loop and multiple edges.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

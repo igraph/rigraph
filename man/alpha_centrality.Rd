@@ -42,7 +42,7 @@ Otherwise, or if it is \code{NA}, then the calculation uses the standard
 adjacency matrix.}
 
 \item{tol}{Tolerance for near-singularities during matrix inversion, see
-\code{\link{solve}}.}
+\code{\link[=solve]{solve()}}.}
 
 \item{sparse}{Logical scalar, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
@@ -90,7 +90,7 @@ measures of centrality for asymmetric relations'' \emph{Social Networks},
 23, 191-201.
 }
 \seealso{
-\code{\link{eigen_centrality}} and \code{\link{power_centrality}}
+\code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=power_centrality]{power_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

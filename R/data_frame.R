@@ -44,8 +44,8 @@
 #' listed in `vertices`.
 #'
 #' Typically, the data frames are exported from some spreadsheet software like
-#' Excel and are imported into R via \code{\link{read.table}},
-#' \code{\link{read.delim}} or \code{\link{read.csv}}.
+#' Excel and are imported into R via [read.table()],
+#' [read.delim()] or [read.csv()].
 #'
 #' All edges in the data frame are included in the graph, which may include
 #' multiple parallel edges and loops.
@@ -91,8 +91,8 @@
 #' touched. In other words, vertex names (=the first column) cannot be
 #' `NA`, but other vertex attributes can.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{graph_from_literal}}
-#' for another way to create graphs, \code{\link{read.table}} to read in tables
+#' @seealso [graph_from_literal()]
+#' for another way to create graphs, [read.table()] to read in tables
 #' from files.
 #' @keywords graphs
 #' @examples

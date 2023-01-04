@@ -55,7 +55,7 @@
 #'   `NULL` means no limit.
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
 #'   return a list containing numeric vectors of vertex ids. Each list element is
-#'   a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   a clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
 #'
 #'   `max_cliques()` returns `NULL`, invisibly, if its `file`
 #'   argument is not `NULL`. The output is written to the specified file in
@@ -70,7 +70,7 @@
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{ivs}}
+#' @seealso [ivs()]
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 #' in Sparse Graphs in Near-optimal Time.  <https://arxiv.org/abs/1006.5440>
@@ -228,14 +228,14 @@ clique_num <- clique_num
 #'   or only the maximal ones (`TRUE`).
 #' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
-#'   clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
 #'
 #'   `weighted_clique_num()` and `count_max_weighted_cliques` return an integer
 #'   scalar.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{ivs}}
+#' @seealso [ivs()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -295,7 +295,7 @@ weighted_clique_num <- weighted_clique_num
 #' Graph Library by Keith Briggs (<http://keithbriggs.info/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual
 #' page.
-#' @seealso \code{\link{cliques}}
+#' @seealso [cliques()]
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
 #' algorithm for generating all the maximal independent sets. *SIAM J
 #' Computing*, 6:505--517, 1977.

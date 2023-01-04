@@ -42,7 +42,7 @@ g2 <- sample_growing(500, citation = TRUE)
 
 }
 \seealso{
-\code{\link{sample_pa}}, \code{\link{sample_gnp}}
+\code{\link[=sample_pa]{sample_pa()}}, \code{\link[=sample_gnp]{sample_gnp()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

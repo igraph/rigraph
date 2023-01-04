@@ -13,7 +13,7 @@ count_isomorphisms(graph1, graph2, method = "vf2", ...)
 \item{graph2}{The second graph.}
 
 \item{method}{Currently only \sQuote{vf2} is supported, see
-\code{\link{isomorphic}} for details about it and extra arguments.}
+\code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Passed to the individual methods.}
 }

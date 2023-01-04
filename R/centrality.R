@@ -99,7 +99,7 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #' @note `edge_betweenness()` might give false values for graphs with
 #' multiple edges.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{closeness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+#' @seealso [closeness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
 #'
@@ -216,7 +216,7 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected
 #' graphs, consider using the harmonic centrality with
-#' \code{\link{harmonic_centrality}}
+#' [harmonic_centrality()]
 #'
 #' @aliases closeness closeness.estimate estimate_closeness
 #' @param graph The graph to analyze.
@@ -239,7 +239,7 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #' @return Numeric vector with the closeness values of all the vertices in
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{betweenness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+#' @seealso [betweenness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
 #' @export
@@ -335,8 +335,8 @@ arpack_defaults <- list(
 #' generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
 #' Currently only \sQuote{`I`} is supported.} \item{n}{Numeric scalar. The
 #' dimension of the eigenproblem. You only need to set this if you call
-#' \code{\link{arpack}} directly. (I.e. not needed for
-#' \code{\link{eigen_centrality}}, \code{\link{page_rank}}, etc.)}
+#' [arpack()] directly. (I.e. not needed for
+#' [eigen_centrality()], [page_rank()], etc.)}
 #' \item{which}{Specify which eigenvalues/vectors to compute, character
 #' constant with exactly two characters.
 #'
@@ -360,7 +360,7 @@ arpack_defaults <- list(
 #' part.} }
 #'
 #' This parameter is sometimes overwritten by the various functions, e.g.
-#' \code{\link{page_rank}} always sets \sQuote{`LM`}.  }
+#' [page_rank()] always sets \sQuote{`LM`}.  }
 #' \item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
 #' \item{tol}{Numeric scalar. Stopping criterion: the relative accuracy of the
 #' Ritz value is considered acceptable if its error is less than `tol`
@@ -438,8 +438,8 @@ arpack_defaults <- list(
 #'   }
 #' @author Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 #' ARPACK, Gabor Csardi \email{csardi.gabor@@gmail.com} for the R interface.
-#' @seealso \code{\link{eigen_centrality}}, \code{\link{page_rank}},
-#' \code{\link{hub_score}}, \code{\link{cluster_leading_eigen}} are some of the
+#' @seealso [eigen_centrality()], [page_rank()],
+#' [hub_score()], [cluster_leading_eigen()] are some of the
 #' functions in igraph that use ARPACK.
 #' @references D.C. Sorensen, Implicit Application of Polynomial Filters in a
 #' k-Step Arnoldi Method. *SIAM J. Matr. Anal. Apps.*, 13 (1992), pp
@@ -585,7 +585,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' @return A numeric vector, the subgraph centrality scores of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} based on the Matlab
 #' code by Ernesto Estrada
-#' @seealso \code{\link{eigen_centrality}}, \code{\link{page_rank}}
+#' @seealso [eigen_centrality()], [page_rank()]
 #' @references Ernesto Estrada, Juan A. Rodriguez-Velazquez: Subgraph
 #' centrality in Complex Networks. *Physical Review E* 71, 056103 (2005).
 #' @export
@@ -638,12 +638,12 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @aliases graph.eigen spectrum igraph.eigen.default
 #' @param graph The input graph, can be directed or undirected.
 #' @param algorithm The algorithm to use. Currently only `arpack` is
-#'   implemented, which uses the ARPACK solver. See also \code{\link{arpack}}.
+#'   implemented, which uses the ARPACK solver. See also [arpack()].
 #' @param which A list to specify which eigenvalues and eigenvectors to
 #'   calculate. By default the leading (i.e. largest magnitude) eigenvalue and
 #'   the corresponding eigenvector is calculated.
 #' @param options Options for the ARPACK solver. See
-#'   \code{\link{arpack_defaults}}.
+#'   [arpack_defaults()].
 #' @return Depends on the algorithm used.
 #'
 #'   For `arpack` a list with three entries is returned: \item{options}{See
@@ -651,7 +651,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'   \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 #'   matrix, with the eigenvectors as columns.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{as_adj}} to create a (sparse) adjacency matrix.
+#' @seealso [as_adj()] to create a (sparse) adjacency matrix.
 #' @keywords graphs
 #' @examples
 #'
@@ -721,7 +721,7 @@ eigen_defaults <- list(
 #' whether the eigenvalue is very close to zero.
 #'
 #' From igraph version 0.5 this function uses ARPACK for the underlying
-#' computation, see \code{\link{arpack}} for more about ARPACK in igraph.
+#' computation, see [arpack()] for more about ARPACK in igraph.
 #'
 #' @aliases evcent eigen_centrality
 #' @param graph Graph to be analyzed.
@@ -742,12 +742,12 @@ eigen_defaults <- list(
 #'   This function interprets weights as connection strength. Higher
 #'   weights spread the centrality better.
 #' @param options A named list, to override some ARPACK options. See
-#'   \code{\link{arpack}} for details.
+#'   [arpack()] for details.
 #' @return A named list with components: \item{vector}{A vector containing the
 #'   centrality scores.} \item{value}{The eigenvalue corresponding to the
 #'   calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
 #'   list, information about the underlying ARPACK computation. See
-#'   \code{\link{arpack}} for the details.}
+#'   [arpack()] for the details.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com} and Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>) for the
 #' manual page.
@@ -779,10 +779,10 @@ eigen_centrality <- eigen_centrality
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a
-#'   warning is given and \code{\link{degree}} is called.
+#'   warning is given and [degree()] is called.
 #' @return A numeric vector giving the strength of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{degree}} for the unweighted version.
+#' @seealso [degree()] for the unweighted version.
 #' @references Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras,
 #' Alessandro Vespignani: The architecture of complex weighted networks, Proc.
 #' Natl. Acad. Sci. USA 101, 3747 (2004)
@@ -853,7 +853,7 @@ diversity <- diversity
 #'
 #' For undirected matrices the adjacency matrix is symmetric and the hub
 #' scores are the same as authority scores, see
-#' \code{\link{authority_score}}.
+#' [authority_score()].
 #'
 #' @aliases hub.score
 #' @param graph The input graph.
@@ -867,17 +867,17 @@ diversity <- diversity
 #'   random surfer model, an edge with a larger weight is more likely to be
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#'   \code{\link{arpack}} for details.
+#'   [arpack()] for details.
 #' @return A named list with members:
 #'   \item{vector}{The authority/hub scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
 #'     the same members as the `options` member returned
-#'     by \code{\link{arpack}}, see that for documentation.}
-#' @seealso \code{\link{authority_score}},
-#' \code{\link{eigen_centrality}} for eigenvector centrality,
-#' \code{\link{page_rank}} for the Page Rank scores. \code{\link{arpack}} for
+#'     by [arpack()], see that for documentation.}
+#' @seealso [authority_score()],
+#' [eigen_centrality()] for eigenvector centrality,
+#' [page_rank()] for the Page Rank scores. [arpack()] for
 #' the underlining machinery of the computation.
 #' @references J. Kleinberg. Authoritative sources in a hyperlinked
 #' environment. *Proc. 9th ACM-SIAM Symposium on Discrete Algorithms*,
@@ -902,7 +902,7 @@ hub_score <- hub_score
 #'
 #' For undirected matrices the adjacency matrix is symmetric and the
 #' authority scores are the same as hub scores, see
-#' \code{\link{hub_score}}.
+#' [hub_score()].
 #'
 #' @aliases authority.score
 #' @param graph The input graph.
@@ -916,17 +916,17 @@ hub_score <- hub_score
 #'   random surfer model, an edge with a larger weight is more likely to be
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#'   \code{\link{arpack}} for details.
+#'   [arpack()] for details.
 #' @return A named list with members:
 #'   \item{vector}{The authority/hub scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
 #'     the same members as the `options` member returned
-#'     by \code{\link{arpack}}, see that for documentation.}
-#' @seealso \code{\link{hub_score}}, \code{\link{eigen_centrality}} for
-#' eigenvector centrality, \code{\link{page_rank}} for the Page Rank
-#' scores. \code{\link{arpack}} for the underlining machinery of the
+#'     by [arpack()], see that for documentation.}
+#' @seealso [hub_score()], [eigen_centrality()] for
+#' eigenvector centrality, [page_rank()] for the Page Rank
+#' scores. [arpack()] for the underlining machinery of the
 #' computation.
 #' @references J. Kleinberg. Authoritative sources in a hyperlinked
 #' environment. *Proc. 9th ACM-SIAM Symposium on Discrete Algorithms*,
@@ -958,7 +958,7 @@ authority_score <- authority_score
 #' Australia, April 1998.
 #'
 #' The `page_rank()` function can use either the PRPACK library or ARPACK
-#' (see \code{\link{arpack}}) to perform the calculation.
+#' (see [arpack()]) to perform the calculation.
 #'
 #' Please note that the PageRank of a given vertex depends on the PageRank of
 #' all other vertices, so even if you want to calculate the PageRank for only
@@ -995,7 +995,7 @@ authority_score <- authority_score
 #'   random surfer model, an edge with a larger weight is more likely to be
 #'   selected by the surfer.
 #' @param options A named list, to override some ARPACK options. See
-#'   \code{\link{arpack}} for details. This argument is ignored if the PRPACK
+#'   [arpack()] for details. This argument is ignored if the PRPACK
 #'   implementation is used.
 #' @return A named list with entries: \item{vector}{A
 #'   numeric vector with the PageRank scores.} \item{value}{When using the ARPACK
@@ -1003,13 +1003,13 @@ authority_score <- authority_score
 #'   is returned here. It is expected to be exactly one, and can be used to check
 #'   that ARPACK has successfully converged to the expected eingevector. When using
 #'   the PRPACK method, it is always set to 1.0.} \item{options}{Some information
-#'   about the underlying ARPACK calculation. See \code{\link{arpack}} for details.
+#'   about the underlying ARPACK calculation. See [arpack()] for details.
 #'   This entry is `NULL` if not the ARPACK implementation was used.}
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso Other centrality scores: \code{\link{closeness}},
-#' \code{\link{betweenness}}, \code{\link{degree}}
+#' @seealso Other centrality scores: [closeness()],
+#' [betweenness()], [degree()]
 #' @references Sergey Brin and Larry Page: The Anatomy of a Large-Scale
 #' Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
 #' Conference, Brisbane, Australia, April 1998.
@@ -1060,7 +1060,7 @@ page_rank <- page_rank
 #'   zero cutoff means that only paths of at most length 0 are considered.
 #' @return Numeric vector with the harmonic centrality scores of all the vertices in
 #'   `v`.
-#' @seealso \code{\link{betweenness}}, \code{\link{closeness}}
+#' @seealso [betweenness()], [closeness()]
 #' @references M. Marchiori and V. Latora, Harmony in the small-world,
 #' *Physica A* 285, pp. 539-546 (2000).
 #' @export
@@ -1188,7 +1188,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @param rescale if true, centrality scores are rescaled such that they sum to
 #'   1.
 #' @param tol tolerance for near-singularities during matrix inversion (see
-#'   \code{\link{solve}})
+#'   [solve()])
 #' @param sparse Logical scalar, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
@@ -1202,7 +1202,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @author Carter T. Butts
 #' (<http://www.faculty.uci.edu/profile.cfm?faculty_id=5057>), ported to
 #' igraph by Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{eigen_centrality}} and \code{\link{alpha_centrality}}
+#' @seealso [eigen_centrality()] and [alpha_centrality()]
 #' @references Bonacich, P.  (1972).  ``Factoring and Weighting Approaches to
 #' Status Scores and Clique Identification.'' *Journal of Mathematical
 #' Sociology*, 2, 113-120.
@@ -1376,7 +1376,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #'   Otherwise, or if it is `NA`, then the calculation uses the standard
 #'   adjacency matrix.
 #' @param tol Tolerance for near-singularities during matrix inversion, see
-#'   \code{\link{solve}}.
+#'   [solve()].
 #' @param sparse Logical scalar, whether to use sparse matrices for the
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
@@ -1385,7 +1385,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' @section Warning: Singular adjacency matrices cause problems for this
 #' algorithm, the routine may fail is certain cases.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{eigen_centrality}} and \code{\link{power_centrality}}
+#' @seealso [eigen_centrality()] and [power_centrality()]
 #' @references Bonacich, P. and Lloyd, P. (2001). ``Eigenvector-like
 #' measures of centrality for asymmetric relations'' *Social Networks*,
 #' 23, 191-201.

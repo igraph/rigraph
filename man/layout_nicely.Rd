@@ -54,7 +54,7 @@ forward the weights to these functions and issue a warning about this. You
 can use \code{weights = NA} to silence the warning.
 }
 \seealso{
-\code{\link{plot.igraph}}
+\code{\link[=plot.igraph]{plot.igraph()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

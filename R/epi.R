@@ -111,7 +111,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' The number of susceptible/infected/recovered individuals is plotted over
 #' time, for multiple simulations.
 #'
-#' @param x The output of the SIR simulation, coming from the \code{\link{sir}}
+#' @param x The output of the SIR simulation, coming from the [sir()]
 #'   function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
 #'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
@@ -136,7 +136,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' @return Nothing.
 #' @author Eric Kolaczyk (<http://math.bu.edu/people/kolaczyk/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com}.
-#' @seealso \code{\link{sir}} for running the actual simulation.
+#' @seealso [sir()] for running the actual simulation.
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
 #' @method plot sir

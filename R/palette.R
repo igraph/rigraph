@@ -128,7 +128,7 @@ sequential_pal <- function(n) {
 #' This is the \sQuote{PuOr} palette from <https://colorbrewer2.org/>.
 #' It has at most eleven colors.
 #'
-#' This is similar to \code{\link{sequential_pal}}, but it also puts
+#' This is similar to [sequential_pal()], but it also puts
 #' emphasis on the mid-range values, plus the the two extreme ends.
 #' Use this palette, if you have such a quantity to mark with vertex
 #' colors.

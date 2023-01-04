@@ -23,7 +23,7 @@
 )
 }
 \arguments{
-\item{x}{The output of the SIR simulation, coming from the \code{\link{sir}}
+\item{x}{The output of the SIR simulation, coming from the \code{\link[=sir]{sir()}}
 function.}
 
 \item{comp}{Character scalar, which component to plot. Either \sQuote{NI}
@@ -83,7 +83,7 @@ Bailey, Norman T. J. (1975). The mathematical theory of
 infectious diseases and its applications (2nd ed.). London: Griffin.
 }
 \seealso{
-\code{\link{sir}} for running the actual simulation.
+\code{\link[=sir]{sir()}} for running the actual simulation.
 }
 \author{
 Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor

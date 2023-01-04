@@ -55,12 +55,12 @@
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
 #'   `remove.multiple=TRUE`. In this case many edges might be mapped to a
 #'   single one in the new graph, and their attributes are combined. Please see
-#'   \code{\link{attribute.combination}} for details on this.
+#'   [attribute.combination()] for details on this.
 #' @return a new graph object with the edges deleted.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{which_loop}}, \code{\link{which_multiple}} and
-#' \code{\link{count_multiple}}, \code{\link{delete_edges}},
-#' \code{\link{delete_vertices}}
+#' @seealso [which_loop()], [which_multiple()] and
+#' [count_multiple()], [delete_edges()],
+#' [delete_vertices()]
 #' @keywords graphs
 #' @examples
 #'

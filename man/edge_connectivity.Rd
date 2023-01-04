@@ -78,8 +78,8 @@ Douglas R. White and Frank Harary: The cohesiveness of blocks in
 social networks: node connectivity and conditional density, TODO: citation
 }
 \seealso{
-\code{\link{max_flow}}, \code{\link{vertex_connectivity}},
-\code{\link{vertex_disjoint_paths}}, \code{\link{cohesion}}
+\code{\link[=max_flow]{max_flow()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
+\code{\link[=vertex_disjoint_paths]{vertex_disjoint_paths()}}, \code{\link[=cohesion]{cohesion()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

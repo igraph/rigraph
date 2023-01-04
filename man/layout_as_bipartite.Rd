@@ -42,7 +42,7 @@ graphs.
 The layout is created by first placing the vertices in two rows, according
 to their types. Then the positions within the rows are optimized to minimize
 edge crossings, using the Sugiyama algorithm (see
-\code{\link{layout_with_sugiyama}}).
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
 }
 \examples{
 # Random bipartite graph
@@ -59,7 +59,7 @@ g \%>\%
   plot()
 }
 \seealso{
-\code{\link{layout_with_sugiyama}}
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

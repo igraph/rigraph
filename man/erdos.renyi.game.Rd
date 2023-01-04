@@ -50,8 +50,8 @@ parameter is TRUE.
 
 
 Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
-\code{random.graph.game()} are deprecated, and \code{\link{sample_gnp}} and
-\code{\link{sample_gnm}} should be used instead.
+\code{random.graph.game()} are deprecated, and \code{\link[=sample_gnp]{sample_gnp()}} and
+\code{\link[=sample_gnm]{sample_gnm()}} should be used instead.
 }
 
 \examples{
@@ -65,7 +65,7 @@ Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
-\code{\link{sample_pa}}
+\code{\link[=sample_pa]{sample_pa()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

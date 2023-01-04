@@ -72,7 +72,7 @@
 #' `project.file` argument. If `project.file` is `TRUE`, then
 #' the following information is written to the file (or connection) given in
 #' the `file` argument: (1) the input graph, together with its attributes,
-#' see \code{\link{write_graph}} for details; (2) the hierarchy graph; and (3)
+#' see [write_graph()] for details; (2) the hierarchy graph; and (3)
 #' one binary partition for each cohesive block. If `project.file` is
 #' `FALSE`, then the `file` argument must be a character scalar and
 #' it is used as the base name for the generated files. If `file` is
@@ -114,7 +114,7 @@
 #' plot_hierarchy max_cohesion exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
-#'   \code{\link{is_simple}}.)
+#'   [is_simple()].)
 #'
 #'   For `graphs_from_cohesive_blocks()` and `export_pajek()` the same graph must be
 #'   supplied whose cohesive block structure is given in the `blocks()`
@@ -186,7 +186,7 @@
 #' @author Gabor Csardi \email{csardi.gabor@gmail.com} for the current
 #' implementation, Peter McMahan (<https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology>)
 #' wrote the first version in R.
-#' @seealso \code{\link{cohesion}}
+#' @seealso [cohesion()]
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:
 #' A hierarchical concept of social groups. *American Sociological
 #' Review*, 68(1):103--127, Feb 2003.

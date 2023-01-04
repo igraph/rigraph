@@ -65,7 +65,7 @@ as_adj_edge_list(g)
 
 }
 \seealso{
-\code{\link{as_edgelist}}, \code{\link{as_adj}}
+\code{\link[=as_edgelist]{as_edgelist()}}, \code{\link[=as_adj]{as_adj()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

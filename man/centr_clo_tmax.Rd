@@ -23,7 +23,7 @@ closeness centrality score for graphs with given order and other
 parameters.
 }
 \description{
-See \code{\link{centralize}} for a summary of graph centralization.
+See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized

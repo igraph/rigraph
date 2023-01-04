@@ -100,7 +100,7 @@
 #'   `start.graph`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnp}}
+#' @seealso [sample_gnp()]
 #' @references Barabasi, A.-L. and Albert R. 1999. Emergence of scaling in
 #' random networks *Science*, 286 509--512.
 #'
@@ -215,7 +215,7 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnm}}, \code{\link{sample_pa}}
+#' @seealso [sample_gnm()], [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @export
@@ -272,7 +272,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}}
+#' @seealso [sample_gnp()], [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @export
@@ -328,8 +328,8 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @section Deprecated:
 #'
 #' Since igraph version 0.8.0, both `erdos.renyi.game()` and
-#' `random.graph.game()` are deprecated, and \code{\link{sample_gnp}} and
-#' \code{\link{sample_gnm}} should be used instead.
+#' `random.graph.game()` are deprecated, and [sample_gnp()] and
+#' [sample_gnm()] should be used instead.
 #'
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
@@ -343,7 +343,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_pa}}
+#' @seealso [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @export
@@ -433,9 +433,9 @@ random.graph.game <- erdos.renyi.game
 #'   implemented.
 #' @return The new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnp}}, \code{\link{sample_pa}},
-#' \code{\link{simplify}} to get rid of the multiple and/or loops edges,
-#' \code{\link{realize_degseq}} for a deterministic variant.
+#' @seealso [sample_gnp()], [sample_pa()],
+#' [simplify()] to get rid of the multiple and/or loops edges,
+#' [realize_degseq()] for a deterministic variant.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -526,7 +526,7 @@ degseq <- function(..., deterministic = FALSE) {
 #'   each time step the added edges are originating from the new vertex.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
+#' @seealso [sample_pa()], [sample_gnp()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -639,7 +639,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #'   attachment. See also details below.
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_pa}}, \code{\link{sample_gnp}}
+#' @seealso [sample_pa()], [sample_gnp()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -873,7 +873,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #'   attributes \sQuote{`x`} and \sQuote{`y`}.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
 #' written by Keith Briggs (<http://keithbriggs.info/>).
-#' @seealso \code{\link{sample_gnp}}
+#' @seealso [sample_gnp()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -947,8 +947,8 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
-#' @seealso \code{\link{sample_traits}}.
-#' \code{\link{sample_traits_callaway}}
+#' @seealso [sample_traits()].
+#' [sample_traits_callaway()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1075,7 +1075,7 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' randomly with probability `p`.
 #'
 #' Note that this function might create graphs with loops and/or multiple
-#' edges. You can use \code{\link{simplify}} to get rid of these.
+#' edges. You can use [simplify()] to get rid of these.
 #'
 #' @aliases watts.strogatz.game
 #' @param dim Integer constant, the dimension of the starting lattice.
@@ -1089,7 +1089,7 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #'   generated graph.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{make_lattice}}, \code{\link{rewire}}
+#' @seealso [make_lattice()], [rewire()]
 #' @references Duncan J Watts and Steven H Strogatz: Collective dynamics of
 #' \sQuote{small world} networks, Nature 393, 440-442, 1998.
 #' @export
@@ -1264,7 +1264,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'   is ignored for undirected graphs.
 #' @return A bipartite igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnp}} for the unipartite version.
+#' @seealso [sample_gnp()] for the unipartite version.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1357,7 +1357,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' @param loops Logical scalar, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_gnp}}, \code{\link{sample_gnm}}
+#' @seealso [sample_gnp()], [sample_gnm()]
 #' @references Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
 #' and evaluation. *Social Networks*, 14, 5--61.
 #' @keywords graphs
@@ -1401,7 +1401,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #'   in different blocks.
 #' @return An igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sbm.game}}
+#' @seealso [sbm.game()]
 #' @keywords graphs
 #' @examples
 #'
@@ -1474,8 +1474,8 @@ hierarchical_sbm <- function(...) {
 #' @return An igraph graph object which is the generated random dot product
 #'   graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{sample_dirichlet}}, \code{\link{sample_sphere_surface}}
-#' and \code{\link{sample_sphere_volume}} for sampling position vectors.
+#' @seealso [sample_dirichlet()], [sample_sphere_surface()]
+#' and [sample_sphere_volume()] for sampling position vectors.
 #' @references Christine Leigh Myers Nickel: Random dot product graphs, a model
 #' for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 #' 2006.
@@ -1523,7 +1523,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @param n.inter The number of edges to create between two islands.
 #' @return An igraph graph.
 #' @author Samuel Thiriot
-#' @seealso \code{\link{sample_gnp}}
+#' @seealso [sample_gnp()]
 #' @keywords graphs
 #' @export
 sample_islands <- sample_islands
@@ -1537,7 +1537,7 @@ sample_islands <- sample_islands
 #' of vertices are equal to a predefined constant k. For undirected graphs, at
 #' least one of k and the number of vertices must be even.
 #'
-#' The game simply uses \code{\link{sample_degseq}} with appropriately
+#' The game simply uses [sample_degseq()] with appropriately
 #' constructed degree sequences.
 #'
 #' @aliases sample_k_regular k.regular.game
@@ -1549,7 +1549,7 @@ sample_islands <- sample_islands
 #' @param multiple Logical scalar, whether multiple edges are allowed.
 #' @return An igraph graph.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com}
-#' @seealso \code{\link{sample_degseq}} for a generator with prescribed degree
+#' @seealso [sample_degseq()] for a generator with prescribed degree
 #' sequence.
 #' @keywords graphs
 #' @examples
@@ -1592,11 +1592,11 @@ sample_k_regular <- sample_k_regular
 #' It can be shown that the *expected* degree of each vertex will be
 #' proportional to its fitness, although the actual, observed degree will not
 #' be. If you need to generate a graph with an exact degree sequence, consider
-#' \code{\link{sample_degseq}} instead.
+#' [sample_degseq()] instead.
 #'
 #' This model is commonly used to generate static scale-free networks. To
 #' achieve this, you have to draw the fitness scores from the desired power-law
-#' distribution. Alternatively, you may use \code{\link{sample_fitness_pl}}
+#' distribution. Alternatively, you may use [sample_fitness_pl()]
 #' which generates the fitnesses for you with a given exponent.
 #'
 #' @aliases sample_fitness static.fitness.game
@@ -1637,14 +1637,14 @@ sample_fitness <- sample_fitness
 #' directed graphs, the exponents of the in- and out-degree distributions may
 #' be specified separately.
 #'
-#' The game simply uses \code{\link{sample_fitness}} with appropriately
+#' The game simply uses [sample_fitness()] with appropriately
 #' constructed fitness vectors. In particular, the fitness of vertex \eqn{i} is
 #' \eqn{i^{-alpha}}{i^(-alpha)}, where \eqn{alpha = 1/(gamma-1)} and gamma is
 #' the exponent given in the arguments.
 #'
 #' To remove correlations between in- and out-degrees in case of directed
 #' graphs, the in-fitness vector will be shuffled after it has been set up and
-#' before \code{\link{sample_fitness}} is called.
+#' before [sample_fitness()] is called.
 #'
 #' Note that significant finite size effects may be observed for exponents
 #' smaller than 3 in the original formulation of the game. This function
@@ -1731,7 +1731,7 @@ sample_fitness_pl <- sample_fitness_pl
 #' <http://www.cs.cmu.edu/~jure/pubs/powergrowth-tkdd.pdf>, our
 #' implementation is based on this.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{barabasi.game}} for the basic preferential attachment
+#' @seealso [barabasi.game()] for the basic preferential attachment
 #' model.
 #' @references Jure Leskovec, Jon Kleinberg and Christos Faloutsos. Graphs over
 #' time: densification laws, shrinking diameters and possible explanations.
@@ -1773,8 +1773,8 @@ sample_forestfire <- sample_forestfire
 #'   adjacency matrices is `corr`.  Note each pair of corresponding
 #'   matrix entries is a pair of correlated Bernoulli random variables.
 #'
-#' @seealso \code{\link{sample_correlated_gnp_pair}},
-#'   \code{\link{sample_gnp}}
+#' @seealso [sample_correlated_gnp_pair()],
+#'   [sample_gnp()]
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
 #' <https://arxiv.org/abs/1304.7844>
@@ -1808,8 +1808,8 @@ sample_correlated_gnp <- sample_correlated_gnp
 #'   `graph2`, which are two graphs whose adjacency matrix entries are
 #'   correlated with `corr`.
 #'
-#' @seealso \code{\link{sample_correlated_gnp}},
-#'   \code{\link{sample_gnp}}.
+#' @seealso [sample_correlated_gnp()],
+#'   [sample_gnp()].
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
 #' <https://arxiv.org/abs/1304.7844>

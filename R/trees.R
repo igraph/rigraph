@@ -49,7 +49,7 @@ is_tree <- is_tree
 #' @return The Prufer sequence of the graph, represented as a numeric vector of
 #'   vertex IDs in the sequence.
 #'
-#' @seealso \code{\link{make_from_prufer}} to construct a graph from its
+#' @seealso [make_from_prufer()] to construct a graph from its
 #' Prufer sequence
 #' @keywords graphs
 #' @examples
@@ -74,10 +74,10 @@ to_prufer <- to_prufer
 #'   given vertex will be processed, and the result will be a spanning tree of the
 #'   component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#'   \code{\link{subgraph.edges}} to extract the corresponding subgraph.
+#'   [subgraph.edges()] to extract the corresponding subgraph.
 #'
 #' @keywords graph
-#' @seealso \code{\link{subgraph.edges}} to extract the tree itself
+#' @seealso [subgraph.edges()] to extract the tree itself
 #' @examples
 #'
 #' g <- make_full_graph(10) %du% make_full_graph(5)

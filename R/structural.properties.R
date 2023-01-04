@@ -57,7 +57,7 @@
 #'   \item `distance` Their distance.
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{distances}}
+#' @seealso [distances()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -663,7 +663,7 @@ all_shortest_paths <- function(graph, from,
 #' @return Numeric vector, the ids of the vertices in the same component as
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{components}}
+#' @seealso [components()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -797,7 +797,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 #'
 #' \eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see
-#' \code{\link{strength}}, \eqn{a_{ij}}{a_ij} are elements of the
+#' [strength()], \eqn{a_{ij}}{a_ij} are elements of the
 #' adjacency matrix, \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij}
 #' are the weights.
 #'
@@ -806,7 +806,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #'
 #' The `barrat` type of transitivity does not work for graphs with
 #' multiple and/or loop edges. If you want to calculate it for a directed
-#' graph, call \code{\link{as.undirected}} with the `collapse` mode first.
+#' graph, call [as.undirected()] with the `collapse` mode first.
 #'
 #' @param graph The graph to analyze.
 #' @param type The type of the transitivity to calculate. Possible values:
@@ -1081,7 +1081,7 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' @return A real constant. This function returns `NaN` (=0.0/0.0) for an
 #'   empty graph with zero vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{vcount}}, \code{\link{ecount}}, \code{\link{simplify}}
+#' @seealso [vcount()], [ecount()], [simplify()]
 #' to get rid of the multiple and/or loop edges.
 #' @references Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 #' Methods and Applications.  Cambridge: Cambridge University Press.
@@ -1275,7 +1275,7 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
 #' @return Numeric vector of integer numbers giving the coreness of each
 #'   vertex.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{degree}}
+#' @seealso [degree()]
 #' @references Vladimir Batagelj, Matjaz Zaversnik: An O(m) Algorithm for Cores
 #' Decomposition of Networks, 2002
 #'
@@ -1328,7 +1328,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #'   For \dQuote{`in`}, it is quite the opposite: each node comes before all
 #'   nodes from which it receives edges. Nodes with no outgoing edges go first.
 #' @return A vertex sequence (by default, but see the `return.vs.es`
-#'   option of \code{\link{igraph_options}}) containing vertices in
+#'   option of [igraph_options()]) containing vertices in
 #'   topologically sorted order.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
@@ -1383,7 +1383,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #'   \dQuote{`exact_ip`} while \dQuote{`approx`} is an alias to
 #'   \dQuote{`approx_eades`}.
 #' @return An edge sequence (by default, but see the `return.vs.es` option
-#'   of \code{\link{igraph_options}}) containing the feedback arc set.
+#'   of [igraph_options()]) containing the feedback arc set.
 #' @references Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective
 #' heuristic for the feedback arc set problem. *Information Processing Letters*
 #' 47:6, pp. 319-323, 1993
@@ -1482,7 +1482,7 @@ girth <- function(graph, circle = TRUE) {
 #'   `which_loop()` and `which_multiple()` return a logical vector.
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{simplify}} to eliminate loop and multiple edges.
+#' @seealso [simplify()] to eliminate loop and multiple edges.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1583,7 +1583,7 @@ any_loop <- any_loop
 #'   and `dist` might be `NULL` if their corresponding argument is
 #'   `FALSE`, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{dfs}} for depth-first search.
+#' @seealso [dfs()] for depth-first search.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1743,7 +1743,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   might be `NULL` if their corresponding argument is `FALSE`, i.e.
 #'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{bfs}} for breadth-first search.
+#' @seealso [bfs()] for breadth-first search.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1877,7 +1877,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   plus one. Note that (for currently unknown reasons) the first element of the
 #'   vector is the number of clusters of size zero, so this is always zero.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{decompose}}, \code{\link{subcomponent}}, \code{\link{groups}}
+#' @seealso [decompose()], [subcomponent()], [groups()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2213,7 +2213,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #'   includes all edges in the order of their ids.
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{reciprocity}}, \code{\link{dyad_census}} if you just
+#' @seealso [reciprocity()], [dyad_census()] if you just
 #' want some statistics about mutual edges.
 #' @keywords graphs
 #' @examples
@@ -2260,11 +2260,11 @@ which_mutual <- which_mutual
 #'   ignores edge directions for the degree calculation.
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If this argument is given, then
-#'   vertex strength (see \code{\link{strength}}) is used instead of vertex
+#'   vertex strength (see [strength()]) is used instead of vertex
 #'   degree. But note that `knnk` is still given in the function of the
 #'   normal vertex degree.
 #'   Weights are are used to calculate a weighted degree (also called
-#'   \code{\link{strength}}) instead of the degree.
+#'   [strength()]) instead of the degree.
 #' @return A list with two members: \item{knn}{A numeric vector giving the
 #'   average nearest neighbor degree for all vertices in `vids`.}
 #'   \item{knnk}{A numeric vector, its length is the maximum (total) vertex

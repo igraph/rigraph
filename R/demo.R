@@ -27,7 +27,7 @@
 #' window.
 #'
 #' This function provides a somewhat nicer interface to igraph demos that come
-#' with the package, than the standard \code{\link{demo}} function. igraph
+#' with the package, than the standard [demo()] function. igraph
 #' demos are divided into chunks and `igraph_demo()` runs them chunk by
 #' chunk, with the possibility of inspecting the workspace between two chunks.
 #'
@@ -38,7 +38,7 @@
 #'   Otherwise it should be either a filename or the name of an igraph demo.
 #' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{demo}}
+#' @seealso [demo()]
 #' @export
 #' @keywords graphs
 #' @examples

@@ -46,7 +46,7 @@
 #'   For `count_triangles()` a numeric vector, the number of triangles for all
 #'   vertices queried.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{transitivity}}
+#' @seealso [transitivity()]
 #' @keywords graphs
 #' @examples
 #'

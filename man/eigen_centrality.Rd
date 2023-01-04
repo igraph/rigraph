@@ -36,14 +36,14 @@ This function interprets weights as connection strength. Higher
 weights spread the centrality better.}
 
 \item{options}{A named list, to override some ARPACK options. See
-\code{\link{arpack}} for details.}
+\code{\link[=arpack]{arpack()}} for details.}
 }
 \value{
 A named list with components: \item{vector}{A vector containing the
 centrality scores.} \item{value}{The eigenvalue corresponding to the
 calculated eigenvector, i.e. the centrality scores.} \item{options}{A named
 list, information about the underlying ARPACK computation. See
-\code{\link{arpack}} for the details.}
+\code{\link[=arpack]{arpack()}} for the details.}
 }
 \description{
 \code{eigen_centrality()} takes a graph (\code{graph}) and returns the
@@ -89,7 +89,7 @@ a directed acyclic graph. Such pathological cases can be detected by checking
 whether the eigenvalue is very close to zero.
 
 From igraph version 0.5 this function uses ARPACK for the underlying
-computation, see \code{\link{arpack}} for more about ARPACK in igraph.
+computation, see \code{\link[=arpack]{arpack()}} for more about ARPACK in igraph.
 }
 \examples{
 

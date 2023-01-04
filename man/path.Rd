@@ -25,7 +25,7 @@ edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
 edges.
 
 When deleting edges, all attributes are concatenated and then passed
-to \code{\link{delete_edges}}.
+to \code{\link[=delete_edges]{delete_edges()}}.
 }
 \examples{
 # Create a (directed) wheel

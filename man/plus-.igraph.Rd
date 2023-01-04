@@ -22,16 +22,16 @@ right hand side argument.
 \itemize{
 \item If is is another igraph graph object and they are both
 named graphs, then the union of the two graphs are calculated,
-see \code{\link{union}}.
+see \code{\link[=union]{union()}}.
 \item If it is another igraph graph object, but either of the two
 are not named, then the disjoint union of
-the two graphs is calculated, see \code{\link{disjoint_union}}.
+the two graphs is calculated, see \code{\link[=disjoint_union]{disjoint_union()}}.
 \item If it is a numeric scalar, then the specified number of vertices
 are added to the graph.
 \item If it is a character scalar or vector, then it is interpreted as
 the names of the vertices to add to the graph.
-\item If it is an object created with the \code{\link{vertex}} or
-\code{\link{vertices}} function, then new vertices are added to the
+\item If it is an object created with the \code{\link[=vertex]{vertex()}} or
+\code{\link[=vertices]{vertices()}} function, then new vertices are added to the
 graph. This form is appropriate when one wants to add some vertex
 attributes as well. The operands of the \code{vertices()} function
 specifies the number of vertices to add and their attributes as
@@ -49,8 +49,8 @@ attributes. Examples: \preformatted{  g <- g +
 \code{vertex()} is just an alias to \code{vertices()}, and it is
 provided for readability. The user should use it if a single vertex
 is added to the graph.
-\item If it is an object created with the \code{\link{edge}} or
-\code{\link{edges}} function, then new edges will be added to the
+\item If it is an object created with the \code{\link[=edge]{edge()}} or
+\code{\link[=edges]{edges()}} function, then new edges will be added to the
 graph. The new edges and possibly their attributes can be specified as
 the arguments of the \code{edges()} function.
 
@@ -69,7 +69,7 @@ See more examples below.
 \code{edge()} is just an alias to \code{edges()} and it is provided
 for readability. The user should use it if a single edge is added to
 the graph.
-\item If it is an object created with the \code{\link{path}} function, then
+\item If it is an object created with the \code{\link[=path]{path()}} function, then
 new edges that form a path are added. The edges and possibly their
 attributes are specified as the arguments to the \code{path()}
 function. The non-named arguments are concatenated and interpreted
