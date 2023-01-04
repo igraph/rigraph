@@ -354,9 +354,13 @@ edge_attr <- function(graph, name, index = NULL) {
     edge.attributes(graph, index = index)
   } else {
     name <- as.character(name)
-    index <- as.igraph.es(graph, index)
     myattr <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)[[name]]
-    myattr[index]
+    if (is.null(index)) {
+      myattr
+    } else {
+      index <- as.igraph.es(graph, index)
+      myattr[index]
+    }
   }
 }
 
