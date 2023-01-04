@@ -43,5 +43,5 @@ is_simple(ran)
 }
 \seealso{
 simplified with_edge_ with_graph_ with_vertex_
-  without_loops without_multiples
+without_loops without_multiples
 }

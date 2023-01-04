@@ -1740,21 +1740,21 @@ graph_from_lcf <- graph_from_lcf
 #' @references V. Havel,
 #' Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 #' Časopis pro pěstování matematiky 80, 477-480 (1955).
-#' http://eudml.org/doc/19050
+#' <https://eudml.org/doc/19050>
 #'
 #' S. L. Hakimi,
 #' On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
 #' Journal of the SIAM 10, 3 (1962).
-#' https://www.jstor.org/stable/2098770
+#' <https://www.jstor.org/stable/2098770>
 #'
 #' D. J. Kleitman and D. L. Wang,
 #' Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 #' Discrete Mathematics 6, 1 (1973).
-#' https://doi.org/10.1016/0012-365X%2873%2990037-X
+#' <https://doi.org/10.1016/0012-365X%2873%2990037-X>
 #'
 #' Sz. Horvát and C. D. Modes,
 #' Connectedness matters: construction and exact random sampling of connected networks (2021).
-#' https://doi.org/10.1088/2632-072X/abced5
+#' <https://doi.org/10.1088/2632-072X/abced5>
 #' @export
 #' @keywords graphs
 #' @examples

@@ -39,7 +39,7 @@
 #'
 #' SCG differs from traditional clustering schemes by producing a
 #' \emph{coarse-grained graph} (not just a partition of the vertices),
-#' representative of the original one. As shown in [1], Principal Component
+#' representative of the original one. As shown in \[1\], Principal Component
 #' Analysis can be viewed as a particular SCG, called \emph{exact SCG}, where
 #' the matrix to be coarse-grained is the covariance matrix of some data set.
 #'

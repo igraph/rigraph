@@ -57,8 +57,8 @@
 #' \code{sample_pa} generates a directed graph by default, set
 #' \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 #' even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
-#' of adjacent edges not initiated by the vertex itself and not the total (in-
-#' + out-) degree of the vertex, unless the \code{out.pref} argument is set to
+#' of adjacent edges not initiated by the vertex itself and not the total
+#' (in- + out-) degree of the vertex, unless the \code{out.pref} argument is set to
 #' \code{TRUE}.
 #'
 #' @aliases sample_pa barabasi.game ba.game
@@ -1462,7 +1462,7 @@ hierarchical_sbm <- function(...) {
 #' Probability of an edge between two vertices are given by the dot product of
 #' their latent position vectors.
 #'
-#' The dot product of the latent position vectors should be in the [0,1]
+#' The dot product of the latent position vectors should be in the \[0,1\]
 #' interval, otherwise a warning is given. For negative dot products, no edges
 #' are added; dot products that are larger than one always add an edge.
 #'

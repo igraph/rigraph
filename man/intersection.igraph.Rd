@@ -30,7 +30,7 @@ identical or overlapping vertex sets.
 \details{
 \code{intersection} creates the intersection of two or more graphs:
 only edges present in all graphs will be included.  The corresponding
-operator is \%s\%.
+operator is \verb{\%s\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead

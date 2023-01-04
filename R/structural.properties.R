@@ -1972,15 +1972,15 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'
 #' The Laplacian Matrix of a graph is a symmetric matrix having the same number
 #' of rows and columns as the number of vertices in the graph and element (i,j)
-#' is d[i], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
+#' is d\[i\], the degree of vertex i if if i==j, -1 if i!=j and there is an edge
 #' between vertices i and j and 0 otherwise.
 #'
 #' A normalized version of the Laplacian Matrix is similar: element (i,j) is 1
-#' if i==j, -1/sqrt(d[i] d[j]) if i!=j and there is an edge between vertices i
+#' if i==j, -1/sqrt(d\[i\] d\[j\]) if i!=j and there is an edge between vertices i
 #' and j and 0 otherwise.
 #'
 #' The weighted version of the Laplacian simply works with the weighted degree
-#' instead of the plain degree. I.e. (i,j) is d[i], the weighted degree of
+#' instead of the plain degree. I.e. (i,j) is d\[i\], the weighted degree of
 #' vertex i if if i==j, -w if i!=j and there is an edge between vertices i and
 #' j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
 #' of the weights of its adjacent edges.

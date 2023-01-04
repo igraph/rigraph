@@ -42,14 +42,14 @@ a prefix \sQuote{\code{plot.}}. See Details below.}
 }
 \value{
 \code{shapes} returns a character vector if the
-   \code{shape} argument is \code{NULL}. It returns a named list with
-   entries named \sQuote{clip} and \sQuote{plot}, both of them R
-   functions.
+\code{shape} argument is \code{NULL}. It returns a named list with
+entries named \sQuote{clip} and \sQuote{plot}, both of them R
+functions.
 
-   \code{add_shape} returns \code{TRUE}, invisibly.
+\code{add_shape} returns \code{TRUE}, invisibly.
 
-   \code{shape_noclip} returns the appropriate columns of its
-   \code{coords} argument.
+\code{shape_noclip} returns the appropriate columns of its
+\code{coords} argument.
 }
 \description{
 Starting from version 0.5.1 igraph supports different
@@ -59,33 +59,33 @@ vertex shapes when plotting graphs.
 In igraph a vertex shape is defined by two functions: 1) provides
 information about the size of the shape for clipping the edges and 2)
 plots the shape if requested. These functions are called \dQuote{shape
-  functions} in the rest of this manual page. The first one is the
+functions} in the rest of this manual page. The first one is the
 clipping function and the second is the plotting function.
 
 The clipping function has the following arguments:
 \describe{
-  \item{coords}{A matrix with four columns, it contains the
-    coordinates of the vertices for the edge list supplied in the
-    \code{el} argument.}
-  \item{el}{A matrix with two columns, the edges of which some end
-    points will be clipped. It should have the same number of rows as
-    \code{coords}.}
-  \item{params}{This is a function object that can be called to query
-    vertex/edge/plot graphical parameters. The first argument of the
-    function is \dQuote{\code{vertex}}, \dQuote{\code{edge}} or
-    \dQuote{\code{plot}} to decide the type of the parameter, the
-    second is a character string giving the name of the
-    parameter. E.g.
-    \preformatted{
+\item{coords}{A matrix with four columns, it contains the
+coordinates of the vertices for the edge list supplied in the
+\code{el} argument.}
+\item{el}{A matrix with two columns, the edges of which some end
+points will be clipped. It should have the same number of rows as
+\code{coords}.}
+\item{params}{This is a function object that can be called to query
+vertex/edge/plot graphical parameters. The first argument of the
+function is \dQuote{\code{vertex}}, \dQuote{\code{edge}} or
+\dQuote{\code{plot}} to decide the type of the parameter, the
+second is a character string giving the name of the
+parameter. E.g.
+\preformatted{
 	params("vertex", "size")
     }
-  }
-  \item{end}{Character string, it gives which end points will be
-    used. Possible values are \dQuote{\code{both}},
-    \dQuote{\code{from}} and \dQuote{\code{to}}. If
-    \dQuote{\code{from}} the function is expected to clip the
-    first column in the \code{el} edge list, \dQuote{\code{to}}
-    selects the second column, \dQuote{\code{both}} selects both.}
+}
+\item{end}{Character string, it gives which end points will be
+used. Possible values are \dQuote{\code{both}},
+\dQuote{\code{from}} and \dQuote{\code{to}}. If
+\dQuote{\code{from}} the function is expected to clip the
+first column in the \code{el} edge list, \dQuote{\code{to}}
+selects the second column, \dQuote{\code{both}} selects both.}
 }
 
 The clipping function should return a matrix
@@ -96,11 +96,11 @@ with the clipping applied.
 
 The plotting function has the following arguments:
 \describe{
-  \item{coords}{The coordinates of the vertices, a matrix with two
-    columns.}
-  \item{v}{The ids of the vertices to plot. It should match the number
-    of rows in the \code{coords} argument.}
-  \item{params}{The same as for the clipping function, see above.}
+\item{coords}{The coordinates of the vertices, a matrix with two
+columns.}
+\item{v}{The ids of the vertices to plot. It should match the number
+of rows in the \code{coords} argument.}
+\item{params}{The same as for the clipping function, see above.}
 }
 
 The return value of the plotting function is not used.

@@ -32,7 +32,7 @@ The difference of two graphs are created.
 \details{
 \code{difference} creates the difference of two graphs. Only edges
 present in the first graph but not in the second will be be included in the
-new graph. The corresponding operator is \%m\%.
+new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex

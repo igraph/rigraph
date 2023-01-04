@@ -10,7 +10,7 @@
 }
 \value{
 Result of applying the right hand side to the
-  result of the left hand side.
+result of the left hand side.
 }
 \description{
 igraph re-exports the \code{\%>\%} operator of magrittr, because

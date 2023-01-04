@@ -31,9 +31,9 @@ vertex sequence.}
 }
 \value{
 A vector or list, containing the values of
-  attribute \code{name} for the vertices in the vertex sequence.
-  For numeric, character or logical attributes, it is a vector of the
-  appropriate type, otherwise it is a list.
+attribute \code{name} for the vertices in the vertex sequence.
+For numeric, character or logical attributes, it is a vector of the
+appropriate type, otherwise it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set the

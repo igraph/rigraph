@@ -111,8 +111,8 @@ plot(ldc, g)
 }
 \references{
 Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
-  to Leiden: guaranteeing well-connected communities. Scientific
-  reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 [cs.SI]
+to Leiden: guaranteeing well-connected communities. Scientific
+reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 [cs.SI]
 }
 \seealso{
 See \code{\link{communities}} for extracting the membership,

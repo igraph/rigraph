@@ -44,7 +44,7 @@ make_kautz_graph(2, 2)
 \code{\link{make_de_bruijn_graph}}, \code{\link{make_line_graph}}
 }
 \author{
-Gabor Csardi <csardi.gabor@gmail.com>, the first version in R was
+Gabor Csardi \href{mailto:csardi.gabor@gmail.com}{csardi.gabor@gmail.com}, the first version in R was
 written by Vincent Matossian.
 }
 \keyword{graphs}

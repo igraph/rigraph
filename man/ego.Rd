@@ -57,12 +57,12 @@ argument is ignored for undirected graphs.}
 }
 \value{
 \itemize{
-  \item{\code{ego_size} returns with an integer vector.}
-  \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
-        vectors depending on the value of \code{igraph_opt("return.vs.es")},
-        see details for performance characteristics.}
-  \item{\code{make_ego_graph} returns with a list of graphs.}
-  \item{\code{connect} returns with a new graph object.}
+\item{\code{ego_size} returns with an integer vector.}
+\item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
+vectors depending on the value of \code{igraph_opt("return.vs.es")},
+see details for performance characteristics.}
+\item{\code{make_ego_graph} returns with a list of graphs.}
+\item{\code{connect} returns with a new graph object.}
 }
 }
 \description{

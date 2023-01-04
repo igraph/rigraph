@@ -21,9 +21,9 @@ attributes of the new graph.
 
 The specification of the combination of (vertex or edge) attributes can be
 given as \enumerate{
-  \item a character scalar,
-  \item a function object or
-  \item a list of character scalars and/or function objects.
+\item a character scalar,
+\item a function object or
+\item a list of character scalars and/or function objects.
 }
 
 If it is a character scalar, then it refers to one of the predefined
@@ -103,8 +103,8 @@ simplify(g, edge.attr.comb = list(
 }
 \seealso{
 \code{\link{graph_attr}}, \code{\link{vertex_attr}},
-  \code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
-  general. \code{\link{igraph_options}} on igraph parameters.
+\code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
+general. \code{\link{igraph_options}} on igraph parameters.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -11,7 +11,7 @@ path(...)
 }
 \value{
 A special object that can be used together with igraph
-  graphs and the plus and minus operators.
+graphs and the plus and minus operators.
 }
 \description{
 This function can be used to add or delete edges that form a path.

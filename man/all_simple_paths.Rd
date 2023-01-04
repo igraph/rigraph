@@ -30,8 +30,8 @@ are searched. This argument is ignored for undirected graphs.}
 }
 \value{
 A list of integer vectors, each integer vector is a path from
-  the source vertex to one of the target vertices. A path is given by its
-  vertex ids.
+the source vertex to one of the target vertices. A path is given by its
+vertex ids.
 }
 \description{
 This function lists are simple paths from one source vertex to another

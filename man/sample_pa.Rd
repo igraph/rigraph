@@ -110,8 +110,8 @@ will be added in each time step.
 \code{sample_pa} generates a directed graph by default, set
 \code{directed} to \code{FALSE} to generate an undirected graph. Note that
 even if an undirected graph is generated \eqn{k_i}{k[i]} denotes the number
-of adjacent edges not initiated by the vertex itself and not the total (in-
-+ out-) degree of the vertex, unless the \code{out.pref} argument is set to
+of adjacent edges not initiated by the vertex itself and not the total
+(in- + out-) degree of the vertex, unless the \code{out.pref} argument is set to
 \code{TRUE}.
 }
 \examples{

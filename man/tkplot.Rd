@@ -110,11 +110,11 @@ A vertex/edge can be added to a selection by holding the \code{control} key
 while clicking on it with the left mouse button. Doing this again deselect
 the vertex/edge.
 
-Selections can be made also from the \code{Select} menu. The `Select some
-vertices' dialog allows to give an expression for the vertices to be
+Selections can be made also from the "Select" menu. The "Select some
+vertices" dialog allows to give an expression for the vertices to be
 selected: this can be a list of numeric R expessions separated by commas,
-like `\code{1,2:10,12,14,15}' for example. Similarly in the `Select some
-edges' dialog two such lists can be given and all edges connecting a vertex
+like \verb{1,2:10,12,14,15} for example. Similarly in the "Select some
+edges" dialog two such lists can be given and all edges connecting a vertex
 in the first list to one in the second list will be selected.
 
 In the color dialog a color name like 'orange' or RGB notation can also be

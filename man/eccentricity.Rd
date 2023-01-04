@@ -44,5 +44,5 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 }
 \seealso{
 \code{\link{radius}} for a related concept,
-  \code{\link{distances}} for general shortest path calculations.
+\code{\link{distances}} for general shortest path calculations.
 }

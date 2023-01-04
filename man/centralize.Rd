@@ -21,7 +21,7 @@ centrality score by dividing by the supplied theoretical maximum.}
 }
 \value{
 A real scalar, the centralization of the graph from which
-  \code{scores} were derived.
+\code{scores} were derived.
 }
 \description{
 Centralization is a method for creating a graph level centralization

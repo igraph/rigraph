@@ -16,11 +16,11 @@ all edge attributes are returned in a list.}
 
 \item{index}{An optional edge sequence to query edge attributes
 for a subset of edges.
-If `NULL`, the default, the attribute is queried for all edges.}
+If \code{NULL}, the default, the attribute is queried for all edges.}
 }
 \value{
 The value of the edge attribute, or the list of all
-  edge attributes if \code{name} is missing.
+edge attributes if \code{name} is missing.
 }
 \description{
 Query edge attributes of a graph

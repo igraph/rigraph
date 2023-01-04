@@ -14,7 +14,7 @@ edges(...)
 }
 \value{
 A special object that can be used with together with
-  igraph graphs and the plus and minus operators.
+igraph graphs and the plus and minus operators.
 }
 \description{
 This is a helper function that simplifies adding and deleting
@@ -22,7 +22,6 @@ edges to/from graphs.
 }
 \details{
 \code{edges} is an alias for \code{edge}.
-
 
 When adding edges via \code{+}, all unnamed arguments of
 \code{edge} (or \code{edges}) are concatenated, and then passed to

@@ -54,12 +54,12 @@ For \code{sir} the results are returned in an object of class
 \sQuote{\code{sir}}, which is a list, with one element for each simulation.
 Each simulation is itself a list with the following elements. They are all
 numeric vectors, with equal length: \describe{
-  \item{times}{The times of the events.}
-  \item{NS}{The number of susceptibles in the population, over time.}
-  \item{NI}{The number of infected individuals in the population, over
-    time.}
-  \item{NR}{The number of recovered individuals in the population, over
-    time.}
+\item{times}{The times of the events.}
+\item{NS}{The number of susceptibles in the population, over time.}
+\item{NI}{The number of infected individuals in the population, over
+time.}
+\item{NR}{The number of recovered individuals in the population, over
+time.}
 }
 
 Function \code{time_bins} returns a numeric vector, the middle or the

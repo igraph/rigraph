@@ -16,7 +16,7 @@ are_adjacent(graph, v1, v2)
 }
 \value{
 A logical scalar, \code{TRUE} is a \code{(v1, v2)} exists in the
-  graph.
+graph.
 }
 \description{
 The order of the vertices only matters in directed graphs,

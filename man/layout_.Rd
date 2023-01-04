@@ -26,7 +26,7 @@ For the \code{print} methods, it is ignored.}
 }
 \value{
 The return value of the layout function, usually a
-  two column matrix. For 3D layouts a three column matrix.
+two column matrix. For 3D layouts a three column matrix.
 }
 \description{
 This is a generic function to apply a layout function to
@@ -53,10 +53,10 @@ final results.
 
 Modifiers modify how a layout calculation is performed.
 Currently implemented modifiers: \itemize{
-  \item \code{component_wise} calculates the layout separately
-    for each component of the graph, and then merges
-    them.
-  \item \code{normalize} scales the layout to a square.
+\item \code{component_wise} calculates the layout separately
+for each component of the graph, and then merges
+them.
+\item \code{normalize} scales the layout to a square.
 }
 }
 
@@ -67,7 +67,7 @@ plot(g, layout = coords)
 }
 \seealso{
 \code{\link{add_layout_}} to add the layout to the
-  graph as an attribute.
+graph as an attribute.
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

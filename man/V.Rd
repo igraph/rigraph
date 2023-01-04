@@ -11,7 +11,7 @@ V(graph)
 }
 \value{
 A vertex sequence containing all vertices, in the order
-  of their numeric vertex ids.
+of their numeric vertex ids.
 }
 \description{
 Create a vertex sequence (vs) containing all vertices of a graph.

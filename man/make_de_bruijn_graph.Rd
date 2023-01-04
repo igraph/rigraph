@@ -49,6 +49,6 @@ make_line_graph(g)
 \code{\link{make_kautz_graph}}, \code{\link{make_line_graph}}
 }
 \author{
-Gabor Csardi <csardi.gabor@gmail.com>
+Gabor Csardi \href{mailto:csardi.gabor@gmail.com}{csardi.gabor@gmail.com}
 }
 \keyword{graphs}

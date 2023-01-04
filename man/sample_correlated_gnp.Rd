@@ -56,5 +56,5 @@ graph matching for correlated Erdos-Renyi graphs.
 }
 \seealso{
 \code{\link{sample_correlated_gnp_pair}},
-  \code{\link{sample_gnp}}
+\code{\link{sample_gnp}}
 }

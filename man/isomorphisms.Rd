@@ -19,7 +19,7 @@ isomorphisms(graph1, graph2, method = "vf2", ...)
 }
 \value{
 A list of vertex sequences, corresponding to all
-  mappings from the first graph to the second.
+mappings from the first graph to the second.
 }
 \description{
 Calculate all isomorphic mappings between the vertices of two graphs

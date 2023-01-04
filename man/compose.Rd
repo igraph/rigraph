@@ -29,7 +29,7 @@ Relational composition of two graph.
 \code{compose} creates the relational composition of two graphs. The
 new graph will contain an (a,b) edge only if there is a vertex c, such that
 edge (a,c) is included in the first graph and (c,b) is included in the
-second graph. The corresponding operator is \%c\%.
+second graph. The corresponding operator is \verb{\%c\%}.
 
 The function gives an error if one of the input graphs is directed and the
 other is undirected.

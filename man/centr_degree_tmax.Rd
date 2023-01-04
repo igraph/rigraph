@@ -27,7 +27,7 @@ but this argument will be required from igraph 1.4.0.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph degree
-  centrality score for graphs with given order and other parameters.
+centrality score for graphs with given order and other parameters.
 }
 \description{
 See \code{\link{centralize}} for a summary of graph centralization.

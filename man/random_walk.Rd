@@ -45,8 +45,8 @@ attribute.}
 }
 \value{
 For \code{random_walk}, a vertex sequence containing the vertices
-  along the walk. For \code{random_edge_walk}, an edge sequence containing
-  the edges along the walk.
+along the walk. For \code{random_edge_walk}, an edge sequence containing
+the edges along the walk.
 }
 \description{
 \code{random_walk} performs a random walk on the graph and returns the

@@ -62,7 +62,7 @@
 #' @param comp Character scalar. The component to calculate the quantile of.
 #' \code{NI} is infected agents, \code{NS} is susceptibles, \code{NR} stands
 #' for recovered.
-#' @param prob Numeric vector of probabilities, in [0,1], they specify the
+#' @param prob Numeric vector of probabilities, in \[0,1\], they specify the
 #' quantiles to calculate.
 #' @param \dots Additional arguments, ignored currently.
 #' @return For \code{sir} the results are returned in an object of class

@@ -19,10 +19,10 @@ or also a possible root (\code{TRUE})}
 }
 \value{
 When \code{details} is \code{FALSE}, a logical value that indicates
-  whether the graph is a tree. When \code{details} is \code{TRUE}, a named
-  list with two entries: \item{res}{Logical value that indicates whether the
-  graph is a tree.} \item{root}{The root vertex of the tree; undefined if
-  the graph is not a tree.}
+whether the graph is a tree. When \code{details} is \code{TRUE}, a named
+list with two entries: \item{res}{Logical value that indicates whether the
+graph is a tree.} \item{root}{The root vertex of the tree; undefined if
+the graph is not a tree.}
 }
 \description{
 \code{is_tree} decides whether a graph is a tree, and optionally returns a

@@ -39,9 +39,9 @@ sequence.}
 }
 \value{
 A vector or list, containing the values of the attribute
-  \code{name} for the edges in the sequence. For numeric, character or
-  logical attributes, it is a vector of the appropriate type, otherwise
-  it is a list.
+\code{name} for the edges in the sequence. For numeric, character or
+logical attributes, it is a vector of the appropriate type, otherwise
+it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set

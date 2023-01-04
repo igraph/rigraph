@@ -44,22 +44,22 @@ calculation. One of \sQuote{\code{out}}, \sQuote{\code{in}},
 for undirected graphs.}
 
 \item{neighborhoods}{A list of neighborhoods, one for each vertex, or
-  \code{NULL}. If it is not \code{NULL}, then the function is evaluated on
-  the induced subgraphs specified by these neighborhoods.
+\code{NULL}. If it is not \code{NULL}, then the function is evaluated on
+the induced subgraphs specified by these neighborhoods.
 
-  In theory this could be useful if the same \code{graph.us} graph is used
-  for multiple \code{graph.them} arguments. Then the neighborhoods can be
-  calculated on \code{graph.us} and used with multiple graphs. In
-  practice, this is currently slower than simply using \code{graph.them}
-  multiple times.}
+In theory this could be useful if the same \code{graph.us} graph is used
+for multiple \code{graph.them} arguments. Then the neighborhoods can be
+calculated on \code{graph.us} and used with multiple graphs. In
+practice, this is currently slower than simply using \code{graph.them}
+multiple times.}
 
 \item{\dots}{Arguments passed to \code{FUN}, the function that computes
 the local statistics.}
 }
 \value{
 For \code{local_scan} typically a numeric vector containing the
-  computed local statistics for each vertex. In general a list or vector
-  of objects, as returned by \code{FUN}.
+computed local statistics for each vertex. In general a list or vector
+of objects, as returned by \code{FUN}.
 }
 \description{
 The scan statistic is a summary of the locality statistics that is
@@ -103,8 +103,8 @@ local_1_them_nhood <- local_scan(
 }
 \references{
 Priebe, C. E., Conroy, J. M., Marchette, D. J., Park,
-  Y. (2005).  Scan Statistics on Enron Graphs. \emph{Computational and
-  Mathematical Organization Theory}.
+Y. (2005).  Scan Statistics on Enron Graphs. \emph{Computational and
+Mathematical Organization Theory}.
 }
 \seealso{
 Other scan statistics: 

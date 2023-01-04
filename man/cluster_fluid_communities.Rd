@@ -31,7 +31,7 @@ comms <- cluster_fluid_communities(g, 2)
 \references{
 Parés F, Gasulla DG, et. al. (2018) Fluid Communities: A Competitive,
 Scalable and Diverse Community Detection Algorithm. In: Complex Networks
-&amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
+& Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
 International Conference on Complex Networks and Their Applications),
 Springer, vol 689, p 229, doi: 10.1007/978-3-319-72150-7_19
 }

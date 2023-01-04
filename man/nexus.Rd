@@ -119,49 +119,49 @@ not data sets found, then the function returns an error.)
 
 The \code{nexusDatasetInfo} objects returned by \code{nexus_list} have the
 following fields: \describe{
-  \item{id}{The numeric id of the dataset.}
-  \item{sid}{The character id of the dataset.}
-  \item{name}{Character scalar, the name of the dataset.}
-  \item{vertices/edges}{Character, the number of vertices and edges in
-    the graph(s). Vertices and edges are separated by a  slash, and if
-    the data set consists of multiple networks, then they are separated
-    by spaces.}
-  \item{tags}{Character vector, the tags of the dataset. Directed graph
-    have the tags \sQuote{directed}. Undirected graphs are tagged
-    as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
-    \sQuote{bipartite}, \sQuote{social network}, etc.}
-  \item{networks}{The ids and names of the networks in the data set. The
-    numeric and character id are separated by a slash, and multiple networks
-    are separated by spaces.}
+\item{id}{The numeric id of the dataset.}
+\item{sid}{The character id of the dataset.}
+\item{name}{Character scalar, the name of the dataset.}
+\item{vertices/edges}{Character, the number of vertices and edges in
+the graph(s). Vertices and edges are separated by a  slash, and if
+the data set consists of multiple networks, then they are separated
+by spaces.}
+\item{tags}{Character vector, the tags of the dataset. Directed graph
+have the tags \sQuote{directed}. Undirected graphs are tagged
+as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
+\sQuote{bipartite}, \sQuote{social network}, etc.}
+\item{networks}{The ids and names of the networks in the data set. The
+numeric and character id are separated by a slash, and multiple networks
+are separated by spaces.}
 }
 
 \code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
 following additional fields: \describe{
-  \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
-    the dataset was added to the database.}
-  \item{formats}{Character vector, the data formats in which the data set is
-    available. The various formats are separated by semicolons.}
-  \item{licence}{Character scalar, the licence of the dataset.}
-  \item{licence url}{Character scalar, the URL of the licence of the
-    dataset. Please make sure you consult this before using a dataset.}
-  \item{summary}{Character scalar, the short description of the dataset,
-    this is usually a single sentence.}
-  \item{description}{Character scalar, the full description of the
-    dataset.}
-  \item{citation}{Character scalar, the paper(s) describing the
-    dataset. Please cite these papers if you are using the dataset in your
-    research, the licence of most datasets requires this.}
-  \item{attributes}{A list of lists, each list entry is a graph, vertex
-    or edge attribute and has the following entries: \describe{
-      \item{type}{Type of the attribute, either \sQuote{graph},
-        \sQuote{vertex} or \sQuote{edge}.}
-      \item{datatype}{Data type of the attribute, currently it can be
-        \sQuote{numeric} and \sQuote{string}.}
-      \item{name}{Character scalar, the name of the attribute.}
-      \item{description}{Character scalar, the description of the
-        attribute.}
-    }
-  }
+\item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
+the dataset was added to the database.}
+\item{formats}{Character vector, the data formats in which the data set is
+available. The various formats are separated by semicolons.}
+\item{licence}{Character scalar, the licence of the dataset.}
+\item{licence url}{Character scalar, the URL of the licence of the
+dataset. Please make sure you consult this before using a dataset.}
+\item{summary}{Character scalar, the short description of the dataset,
+this is usually a single sentence.}
+\item{description}{Character scalar, the full description of the
+dataset.}
+\item{citation}{Character scalar, the paper(s) describing the
+dataset. Please cite these papers if you are using the dataset in your
+research, the licence of most datasets requires this.}
+\item{attributes}{A list of lists, each list entry is a graph, vertex
+or edge attribute and has the following entries: \describe{
+\item{type}{Type of the attribute, either \sQuote{graph},
+\sQuote{vertex} or \sQuote{edge}.}
+\item{datatype}{Data type of the attribute, currently it can be
+\sQuote{numeric} and \sQuote{string}.}
+\item{name}{Character scalar, the name of the attribute.}
+\item{description}{Character scalar, the description of the
+attribute.}
+}
+}
 }
 
 The results of the Nexus queries are printed to the screen in a consise

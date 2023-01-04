@@ -27,7 +27,7 @@ or overlapping vertex sets.
 \details{
 \code{union} creates the union of two or more graphs.  Edges which are
 included in at least one graph will be part of the new graph. This function
-can be also used via the \%u\% operator.
+can be also used via the \verb{\%u\%} operator.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead

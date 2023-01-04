@@ -33,11 +33,11 @@ number for a more accurate prediction.}
 }
 \value{
 A list with entries:
-  \item{edges}{The predicted edges, in a two-column matrix of vertex
-    ids.}
-  \item{prob}{Probabilities of these edges, according to the fitted
-    model.}
-  \item{hrg}{The (supplied or fitted) hierarchical random graph model.}
+\item{edges}{The predicted edges, in a two-column matrix of vertex
+ids.}
+\item{prob}{Probabilities of these edges, according to the fitted
+model.}
+\item{hrg}{The (supplied or fitted) hierarchical random graph model.}
 }
 \description{
 \code{predict_edges} uses a hierarchical random graph model to predict

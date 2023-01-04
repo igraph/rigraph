@@ -43,20 +43,20 @@ Query and manipulate a graph as it were an adjacency list
 The double bracket operator indexes the (imaginary) adjacency list
 of the graph. This can used for the following operations:
 \enumerate{
-  \item Querying the adjacent vertices for one or more
-    vertices: \preformatted{  graph[[1:3,]]
+\item Querying the adjacent vertices for one or more
+vertices: \preformatted{  graph[[1:3,]]
 graph[[,1:3]]}
-    The first form gives the successors, the second the predecessors
-    or the 1:3 vertices. (For undirected graphs they are equivalent.)
-  \item Querying the incident edges for one or more vertices,
-    if the \code{edges} argument is set to
-    \code{TRUE}: \preformatted{  graph[[1:3, , edges=TRUE]]
+The first form gives the successors, the second the predecessors
+or the 1:3 vertices. (For undirected graphs they are equivalent.)
+\item Querying the incident edges for one or more vertices,
+if the \code{edges} argument is set to
+\code{TRUE}: \preformatted{  graph[[1:3, , edges=TRUE]]
 graph[[, 1:3, edges=TRUE]]}
-  \item Querying the edge ids between two sets or vertices,
-    if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
-    gives the edge ids of all the edges that exist from vertices
-    \eqn{v} to vertices \eqn{w}.
- }
+\item Querying the edge ids between two sets or vertices,
+if both indices are used. E.g. \preformatted{  graph[[v, w, edges=TRUE]]}
+gives the edge ids of all the edges that exist from vertices
+\eqn{v} to vertices \eqn{w}.
+}
 
 The alternative argument names \code{from} and \code{to} can be used
 instead of the usual \code{i} and \code{j}, to make the code more

@@ -31,7 +31,7 @@ starting point for finding motifs.}
 }
 \value{
 A numeric scalar, an estimate for the total number of motifs in
-  the graph.
+the graph.
 }
 \description{
 Graph motifs are small connected subgraphs with a well-defined

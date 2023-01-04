@@ -16,7 +16,7 @@ separator.}
 }
 \value{
 A logical scalar, whether the supplied vertex set is a (minimal)
-  vertex separator or not.
+vertex separator or not.
 }
 \description{
 Check whether a given set of vertices is a vertex separator.
@@ -31,5 +31,5 @@ set of \eqn{n-1} vertices is considered to be a vertex separator.
 }
 \seealso{
 \code{\link{is_min_separator}}, \code{\link{min_separators}}
-  lists all vertex separator of minimum size.
+lists all vertex separator of minimum size.
 }

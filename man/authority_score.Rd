@@ -26,12 +26,12 @@ selected by the surfer.}
 }
 \value{
 A named list with members:
-  \item{vector}{The authority/hub scores of the vertices.}
-  \item{value}{The corresponding eigenvalue of the calculated
-    principal eigenvector.}
-  \item{options}{Some information about the ARPACK computation, it has
-    the same members as the \code{options} member returned
-    by \code{\link{arpack}}, see that for documentation.}
+\item{vector}{The authority/hub scores of the vertices.}
+\item{value}{The corresponding eigenvalue of the calculated
+principal eigenvector.}
+\item{options}{Some information about the ARPACK computation, it has
+the same members as the \code{options} member returned
+by \code{\link{arpack}}, see that for documentation.}
 }
 \description{
 The authority scores of the vertices are defined as the principal

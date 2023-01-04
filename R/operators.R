@@ -80,7 +80,7 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' \code{disjoint_union} creates a union of two or more disjoint graphs.
 #' Thus first the vertices in the second, third, etc. graphs are relabeled to
 #' have completely disjoint graphs. Then a simple union is created. This
-#' function can also be used via the \%du\% operator.
+#' function can also be used via the `%du%` operator.
 #'
 #' \code{graph.disjont.union} handles graph, vertex and edge attributes.  In
 #' particular, it merges vertex and edge attributes using the basic \code{c()}
@@ -315,7 +315,7 @@ union.default <- function(...) {
 #'
 #' \code{union} creates the union of two or more graphs.  Edges which are
 #' included in at least one graph will be part of the new graph. This function
-#' can be also used via the \%u\% operator.
+#' can be also used via the `%u%` operator.
 #'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
@@ -391,7 +391,7 @@ intersection <- function(...) {
 #'
 #' \code{intersection} creates the intersection of two or more graphs:
 #' only edges present in all graphs will be included.  The corresponding
-#' operator is \%s\%.
+#' operator is `%s%`.
 #'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 #' are named), then the operation is performed on symbolic vertex names instead
@@ -470,7 +470,7 @@ difference <- function(...) {
 #'
 #' \code{difference} creates the difference of two graphs. Only edges
 #' present in the first graph but not in the second will be be included in the
-#' new graph. The corresponding operator is \%m\%.
+#' new graph. The corresponding operator is `%m%`.
 #'
 #' If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 #' are all named), then the operation is performed based on symbolic vertex
@@ -608,7 +608,7 @@ complementer <- function(graph, loops = FALSE) {
 #' \code{compose} creates the relational composition of two graphs. The
 #' new graph will contain an (a,b) edge only if there is a vertex c, such that
 #' edge (a,c) is included in the first graph and (c,b) is included in the
-#' second graph. The corresponding operator is \%c\%.
+#' second graph. The corresponding operator is `%c%`.
 #'
 #' The function gives an error if one of the input graphs is directed and the
 #' other is undirected.
@@ -865,18 +865,18 @@ path <- function(...) {
 #'   The plus operator can be used to add vertices or edges to graph.
 #'   The actual operation that is performed depends on the type of the
 #'   right hand side argument.
-#'   \itemize{
-#'   \item If is is another igraph graph object and they are both
+#'
+#'   - If is is another igraph graph object and they are both
 #'     named graphs, then the union of the two graphs are calculated,
 #'     see \code{\link{union}}.
-#'   \item If it is another igraph graph object, but either of the two
+#'   - If it is another igraph graph object, but either of the two
 #'     are not named, then the disjoint union of
 #'     the two graphs is calculated, see \code{\link{disjoint_union}}.
-#'   \item If it is a numeric scalar, then the specified number of vertices
+#'   - If it is a numeric scalar, then the specified number of vertices
 #'     are added to the graph.
-#'   \item If it is a character scalar or vector, then it is interpreted as
+#'   - If it is a character scalar or vector, then it is interpreted as
 #'     the names of the vertices to add to the graph.
-#'   \item If it is an object created with the \code{\link{vertex}} or
+#'   - If it is an object created with the \code{\link{vertex}} or
 #'     \code{\link{vertices}} function, then new vertices are added to the
 #'     graph. This form is appropriate when one wants to add some vertex
 #'     attributes as well. The operands of the \code{vertices} function
@@ -896,7 +896,7 @@ path <- function(...) {
 #'     provided for readability. The user should use it if a single vertex
 #'     is added to the graph.
 #'
-#'   \item If it is an object created with the \code{\link{edge}} or
+#'   - If it is an object created with the \code{\link{edge}} or
 #'     \code{\link{edges}} function, then new edges will be added to the
 #'     graph. The new edges and possibly their attributes can be specified as
 #'     the arguments of the \code{edges} function.
@@ -917,7 +917,7 @@ path <- function(...) {
 #'     for readability. The user should use it if a single edge is added to
 #'     the graph.
 #'
-#'   \item If it is an object created with the \code{\link{path}} function, then
+#'   - If it is an object created with the \code{\link{path}} function, then
 #'     new edges that form a path are added. The edges and possibly their
 #'     attributes are specified as the arguments to the \code{path}
 #'     function. The non-named arguments are concatenated and interpreted
@@ -928,7 +928,6 @@ path <- function(...) {
 #'   g <- g + path("a", "b", "c", "d")
 #'   g <- g + path("e", "f", "g", weight=1:2, color="red")
 #'   g <- g + path(c("f", "c", "j", "d"), width=1:3, color="green")}
-#'   }
 #'
 #'   It is important to note that, although the plus operator is
 #'   commutative, i.e. is possible to write \preformatted{  graph <- "foo" + make_empty_graph()}

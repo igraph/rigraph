@@ -26,7 +26,7 @@ disjoint vertex sets.
 \code{disjoint_union} creates a union of two or more disjoint graphs.
 Thus first the vertices in the second, third, etc. graphs are relabeled to
 have completely disjoint graphs. Then a simple union is created. This
-function can also be used via the \%du\% operator.
+function can also be used via the \verb{\%du\%} operator.
 
 \code{graph.disjont.union} handles graph, vertex and edge attributes.  In
 particular, it merges vertex and edge attributes using the basic \code{c()}

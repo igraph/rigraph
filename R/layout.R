@@ -764,7 +764,7 @@ layout.sphere <- function(..., params = list()) {
 #' This function uniformly randomly places the vertices of the graph in two or
 #' three dimensions.
 #'
-#' Randomly places vertices on a [-1,1] square (in 2d) or in a cube (in 3d). It
+#' Randomly places vertices on a \[-1,1\] square (in 2d) or in a cube (in 3d). It
 #' is probably a useless layout, but it can use as a starting point for other
 #' layout generators.
 #'

@@ -28,11 +28,11 @@ to include in the lists. \sQuote{\code{out}} is for outgoing edges/vertices,
 \sQuote{\code{in}} is for incoming edges/vertices, \sQuote{\code{all}} is
 for both. This argument is ignored for undirected graphs.}
 
-\item{loops}{Character scalar, one of `"ignore"` (to omit loops), `"twice"`
-(to include loop edges twice) and `"once"` (to include them once). `"twice"`
-is not allowed for directed graphs and will be replaced with `"once"`.}
+\item{loops}{Character scalar, one of \code{"ignore"} (to omit loops), \code{"twice"}
+(to include loop edges twice) and \code{"once"} (to include them once). \code{"twice"}
+is not allowed for directed graphs and will be replaced with \code{"once"}.}
 
-\item{multiple}{Logical scalar, set to `FALSE` to use only one representative
+\item{multiple}{Logical scalar, set to \code{FALSE} to use only one representative
 of each set of parallel edges.}
 }
 \value{
