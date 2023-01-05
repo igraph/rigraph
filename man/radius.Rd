@@ -11,7 +11,7 @@ radius(graph, mode = c("all", "out", "in", "total"))
 
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
+then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
 it will be considered. If \code{all}, the default, then the corresponding
 undirected graph will be used, edge directions will be ignored. This
 argument is ignored for undirected graphs.}
@@ -42,7 +42,7 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 1994.
 }
 \seealso{
-\code{\link{eccentricity}} for the underlying
-  calculations, code{\link{distances}} for general shortest path
-  calculations.
+\code{\link[=eccentricity]{eccentricity()}} for the underlying
+calculations, code{\link{distances}} for general shortest path
+calculations.
 }

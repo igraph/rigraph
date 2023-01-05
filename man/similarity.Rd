@@ -21,7 +21,7 @@ similarity(
 \item{vids}{The vertex ids for which the similarity is calculated.}
 
 \item{mode}{The type of neighboring vertices to use for the calculation,
-possible values: \sQuote{\code{out}}, \sQuote{\code{in}},
+possible values: \sQuote{\code{out}}, \sQuote{\verb{in}},
 \sQuote{\code{all}}.}
 
 \item{loops}{Whether to include vertices themselves in the neighbor
@@ -31,8 +31,8 @@ sets.}
 }
 \value{
 A \code{length(vids)} by \code{length(vids)} numeric matrix
-  containing the similarity scores. This argument is ignored by the
-  \code{invlogweighted} method.
+containing the similarity scores. This argument is ignored by the
+\code{invlogweighted} method.
 }
 \description{
 These functions calculates similarity scores for vertices based on their
@@ -68,13 +68,13 @@ similarity(g, method = "jaccard")
 }
 \references{
 Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
-  \emph{Social Networks}, 25(3):211-230, 2003.
+\emph{Social Networks}, 25(3):211-230, 2003.
 }
 \seealso{
-\code{\link{cocitation}} and \code{\link{bibcoupling}}
+\code{\link[=cocitation]{cocitation()}} and \code{\link[=bibcoupling]{bibcoupling()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
-  \email{csardi.gabor@gmail.com} for the manual page.
+\email{csardi.gabor@gmail.com} for the manual page.
 }
 \keyword{graphs}

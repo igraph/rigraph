@@ -16,8 +16,8 @@ A vertex sequence with the head(s) of the edge(s).
 }
 \description{
 For undirected graphs, head and tail is not defined.  In this case
-\code{head_of} returns vertices incident to the supplied edges, and
-\code{tail_of} returns the other end(s) of the edge(s).
+\code{head_of()} returns vertices incident to the supplied edges, and
+\code{tail_of()} returns the other end(s) of the edge(s).
 }
 \seealso{
 Other structural queries: 

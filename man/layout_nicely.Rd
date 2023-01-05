@@ -15,9 +15,9 @@ nicely(...)
 
 \item{dim}{Dimensions, should be 2 or 3.}
 
-\item{\dots}{For \code{layout_nicely} the extra arguments are passed to
-the real layout function. For \code{nicely} all argument are passed to
-\code{layout_nicely}.}
+\item{\dots}{For \code{layout_nicely()} the extra arguments are passed to
+the real layout function. For \code{nicely()} all argument are passed to
+\code{layout_nicely()}.}
 }
 \value{
 A numeric matrix with two or three columns.
@@ -27,7 +27,7 @@ This function tries to choose an appropriate graph layout algorithm for the
 graph, automatically, based on a simple algorithm. See details below.
 }
 \details{
-\code{layout_nicely} tries to choose an appropriate layout function for the
+\code{layout_nicely()} tries to choose an appropriate layout function for the
 supplied graph, and uses that to generate the layout. The current
 implementation works like this: \enumerate{ \item If the graph has a graph
 attribute called \sQuote{layout}, then this is used. If this attribute is an
@@ -36,25 +36,25 @@ R function, then it is called, with the graph and any other extra arguments.
 \sQuote{y}, then these are used as coordinates. If the graph has an
 additional \sQuote{z} vertex attribute, that is also used.  \item Otherwise,
 if the graph is connected and has less than 1000 vertices, the
-Fruchterman-Reingold layout is used, by calling \code{layout_with_fr}.
-\item Otherwise the DrL layout is used, \code{layout_with_drl} is called.  }
+Fruchterman-Reingold layout is used, by calling \code{layout_with_fr()}.
+\item Otherwise the DrL layout is used, \code{layout_with_drl()} is called.  }
 
 In layout algorithm implementations, an argument named \sQuote{weights} is
 typically used to specify the weights of the edges if the layout algorithm
 supports them. In this case, omitting \sQuote{weights} or setting it to
 \code{NULL} will make igraph use the 'weight' edge attribute from the graph
 if it is present. However, most layout algorithms do not support non-positive
-weights, so \code{layout_nicely} would fail if you simply called it on
+weights, so \code{layout_nicely()} would fail if you simply called it on
 your graph without specifying explicit weights and the weights happened to
-include non-positive numbers. We strive to ensure that \code{layout_nicely}
+include non-positive numbers. We strive to ensure that \code{layout_nicely()}
 works out-of-the-box for most graphs, so the rule is that if you omit
-\sQuote{weights} or set it to \code{NULL} and \code{layout_nicely} would
-end up calling \code{layout_with_fr} or \code{layout_with_drl}, we do not
+\sQuote{weights} or set it to \code{NULL} and \code{layout_nicely()} would
+end up calling \code{layout_with_fr()} or \code{layout_with_drl()}, we do not
 forward the weights to these functions and issue a warning about this. You
 can use \code{weights = NA} to silence the warning.
 }
 \seealso{
-\code{\link{plot.igraph}}
+\code{\link[=plot.igraph]{plot.igraph()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

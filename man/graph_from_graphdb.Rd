@@ -56,12 +56,12 @@ This function downloads a graph from a database created for the evaluation
 of graph isomorphism testing algothitms.
 }
 \details{
-\code{graph_from_graphdb} reads a graph from the graph database from an FTP or
+\code{graph_from_graphdb()} reads a graph from the graph database from an FTP or
 HTTP server or from a local copy. It has two modes of operation:
 
 If the \code{url} argument is specified then it should the complete path to
 a local or remote graph database file. In this case we simply call
-\code{\link{read_graph}} with the proper arguments to read the file.
+\code{\link[=read_graph]{read_graph()}} with the proper arguments to read the file.
 
 If \code{url} is \code{NULL}, and this is the default, then the filename is
 assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
@@ -93,7 +93,7 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
 \emph{Pattern Recognition Letters}, Volume 24, Issue 8 (May 2003)
 }
 \seealso{
-\code{\link{read_graph}}, \code{\link{graph.isomorphic.vf2}}
+\code{\link[=read_graph]{read_graph()}}, \code{\link[=graph.isomorphic.vf2]{graph.isomorphic.vf2()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

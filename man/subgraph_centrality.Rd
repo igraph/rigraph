@@ -43,7 +43,7 @@ Ernesto Estrada, Juan A. Rodriguez-Velazquez: Subgraph
 centrality in Complex Networks. \emph{Physical Review E} 71, 056103 (2005).
 }
 \seealso{
-\code{\link{eigen_centrality}}, \code{\link{page_rank}}
+\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} based on the Matlab

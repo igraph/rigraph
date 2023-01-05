@@ -26,7 +26,7 @@ generated graph.}
 \item{multiple}{Logical scalar, whether multiple edges are allowed int the
 generated graph.}
 
-\item{...}{Passed to \code{sample_smallworld}.}
+\item{...}{Passed to \code{sample_smallworld()}.}
 }
 \value{
 A graph object.
@@ -40,7 +40,7 @@ First a lattice is created with the given \code{dim}, \code{size} and
 randomly with probability \code{p}.
 
 Note that this function might create graphs with loops and/or multiple
-edges. You can use \code{\link{simplify}} to get rid of these.
+edges. You can use \code{\link[=simplify]{simplify()}} to get rid of these.
 }
 \examples{
 
@@ -54,7 +54,7 @@ Duncan J Watts and Steven H Strogatz: Collective dynamics of
 \sQuote{small world} networks, Nature 393, 440-442, 1998.
 }
 \seealso{
-\code{\link{make_lattice}}, \code{\link{rewire}}
+\code{\link[=make_lattice]{make_lattice()}}, \code{\link[=rewire]{rewire()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

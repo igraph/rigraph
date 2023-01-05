@@ -50,7 +50,7 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-\code{\link{st_min_cuts}} to list all minimum cuts.
+\code{\link[=st_min_cuts]{st_min_cuts()}} to list all minimum cuts.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

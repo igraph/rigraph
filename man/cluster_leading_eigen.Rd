@@ -46,7 +46,7 @@ the modularity matrix. See details below.}
 \item{env}{The environment in which the callback function is evaluated.}
 }
 \value{
-\code{cluster_leading_eigen} returns a named list with the
+\code{cluster_leading_eigen()} returns a named list with the
 following members: \item{membership}{The membership vector at the end of the
 algorithm, when no more splits are possible.} \item{merges}{The merges
 matrix starting from the state described by the \code{membership} member.
@@ -55,7 +55,7 @@ communities, the first line is the first merge and it creates community
 \sQuote{\code{N}}, \code{N} is the number of initial communities in the
 graph, the second line creates community \code{N+1}, etc.  }
 \item{options}{Information about the underlying ARPACK computation, see
-\code{\link{arpack}} for details.  }
+\code{\link[=arpack]{arpack()}} for details.  }
 }
 \description{
 This function tries to find densely connected subgraphs in a graph by
@@ -86,20 +86,20 @@ community structure.
  The \code{callback} argument can be used to
 supply a function that is called after each eigenvector calculation. The
 following arguments are supplied to this function: \describe{
-  \item{membership}{The actual membership vector, with zero-based indexing.}
-  \item{community}{The community that the algorithm just tried to split,
-    community numbering starts with zero here.}
-  \item{value}{The eigenvalue belonging to the leading eigenvector the
-    algorithm just found.}
-  \item{vector}{The leading eigenvector the algorithm just found.}
-  \item{multiplier}{An R function that can be used to multiple the actual
-    modularity matrix with an arbitrary vector. Supply the vector as an
-    argument to perform this multiplication. This function can be used
-    with ARPACK.}
-  \item{extra}{The \code{extra} argument that was passed to
-    \code{cluster_leading_eigen}. }
-  The callback function should return a scalar number. If this number
-  is non-zero, then the clustering is terminated.
+\item{membership}{The actual membership vector, with zero-based indexing.}
+\item{community}{The community that the algorithm just tried to split,
+community numbering starts with zero here.}
+\item{value}{The eigenvalue belonging to the leading eigenvector the
+algorithm just found.}
+\item{vector}{The leading eigenvector the algorithm just found.}
+\item{multiplier}{An R function that can be used to multiple the actual
+modularity matrix with an arbitrary vector. Supply the vector as an
+argument to perform this multiplication. This function can be used
+with ARPACK.}
+\item{extra}{The \code{extra} argument that was passed to
+\code{cluster_leading_eigen()}. }
+The callback function should return a scalar number. If this number
+is non-zero, then the clustering is terminated.
 }
 }
 
@@ -118,9 +118,9 @@ MEJ Newman: Finding community structure using the eigenvectors
 of matrices, Physical Review E 74 036104, 2006.
 }
 \seealso{
-\code{\link{modularity}}, \code{\link{cluster_walktrap}},
-\code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}}, \code{\link[stats]{as.dendrogram}}
+\code{\link[=modularity]{modularity()}}, \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

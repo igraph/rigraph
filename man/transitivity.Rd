@@ -72,7 +72,7 @@ its formula is
 weighted C_i = 1/s_i 1/(k_i-1) sum( (w_ij+w_ih)/2 a_ij a_ih a_jh, j, h)}
 
 \eqn{s_i}{s_i} is the strength of vertex \eqn{i}{i}, see
-\code{\link{strength}}, \eqn{a_{ij}}{a_ij} are elements of the
+\code{\link[=strength]{strength()}}, \eqn{a_{ij}}{a_ij} are elements of the
 adjacency matrix, \eqn{k_i}{k_i} is the vertex degree, \eqn{w_{ij}}{w_ij}
 are the weights.
 
@@ -81,7 +81,7 @@ the edge weights are the same.
 
 The \code{barrat} type of transitivity does not work for graphs with
 multiple and/or loop edges. If you want to calculate it for a directed
-graph, call \code{\link{as.undirected}} with the \code{collapse} mode first.
+graph, call \code{\link[=as.undirected]{as.undirected()}} with the \code{collapse} mode first.
 }
 \examples{
 

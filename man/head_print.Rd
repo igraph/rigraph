@@ -15,7 +15,7 @@ head_print(
 }
 \arguments{
 \item{x}{The object to print, or a callback function. See
-\code{\link{printer_callback}} for details.}
+\code{\link[=printer_callback]{printer_callback()}} for details.}
 
 \item{max_lines}{Maximum number of lines to print, \emph{not}
 including the header and the footer.}

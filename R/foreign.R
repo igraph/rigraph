@@ -68,23 +68,23 @@ write.graph.fromraw <- function(buffer, file) {
 
 #' Reading foreign file formats
 #'
-#' The \code{read_graph} function is able to read graphs in various
+#' The `read_graph()` function is able to read graphs in various
 #' representations from a file, or from a http connection. Various formats
 #' are supported.
 #'
-#' The \code{read_graph} function may have additional arguments depending on
-#' the file format (the \code{format} argument). See the details separately for
+#' The `read_graph()` function may have additional arguments depending on
+#' the file format (the `format` argument). See the details separately for
 #' each file format, below.
 #'
 #' @aliases read.graph LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
-#' \code{http} or \code{ftp} connection. It can also be a character string with
-#' the file name or URI.
+#'   `http` or `ftp` connection. It can also be a character string with
+#'   the file name or URI.
 #' @param format Character constant giving the file format. Right now
-#' \code{edgelist}, \code{pajek}, \code{ncol}, \code{lgl}, \code{graphml},
-#' \code{dimacs}, \code{graphdb}, \code{gml} and \code{dl} are supported,
-#' the default is \code{edgelist}. As of igraph 0.4 this argument is case
-#' insensitive.
+#'   `edgelist`, `pajek`, `ncol`, `lgl`, `graphml`,
+#'   `dimacs`, `graphdb`, `gml` and `dl` are supported,
+#'   the default is `edgelist`. As of igraph 0.4 this argument is case
+#'   insensitive.
 #' @param \dots Additional arguments, see below.
 #' @return A graph object.
 #' @section Edge list format: This format is a simple text file with numeric
@@ -95,9 +95,9 @@ write.graph.fromraw <- function(buffer, file) {
 #' graph. If it is smaller than or equal to the largest integer in the file,
 #' then it is ignored; so it is safe to set it to zero (the default).}
 #' \item{directed}{Logical scalar, whether to create a directed graph. The
-#' default value is \code{TRUE}.} }
+#' default value is `TRUE`.} }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{write_graph}}
+#' @seealso [write_graph()]
 #' @keywords graphs
 #' @export
 read_graph <- function(file, format = c(
@@ -132,28 +132,28 @@ read_graph <- function(file, format = c(
 
 #' Writing the graph to a file in some format
 #'
-#' \code{write_graph} is a general function for exporting graphs to foreign
+#' `write_graph()` is a general function for exporting graphs to foreign
 #' file formats, however not many formats are implemented right now.
 #'
 #' @aliases write.graph
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
-#' to.
+#'   to.
 #' @param format Character string giving the file format. Right now
-#' \code{pajek}, \code{graphml}, \code{dot}, \code{gml}, \code{edgelist},
-#' \code{lgl}, \code{ncol} and \code{dimacs} are implemented. As of igraph 0.4
-#' this argument is case insensitive.
+#'   `pajek`, `graphml`, `dot`, `gml`, `edgelist`,
+#'   `lgl`, `ncol` and `dimacs` are implemented. As of igraph 0.4
+#'   this argument is case insensitive.
 #' @param \dots Other, format specific arguments, see below.
 #' @return A NULL, invisibly.
-#' @section Edge list format: The \code{edgelist} format is a simple text file,
+#' @section Edge list format: The `edgelist` format is a simple text file,
 #' with one edge in a line, the two vertex ids separated by a space character.
 #' The file is sorted by the first and the second column. This format has no
 #' additional arguments.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{read_graph}}
+#' @seealso [read_graph()]
 #' @references Adai AT, Date SV, Wieland S, Marcotte EM. LGL: creating a map of
 #' protein function with an algorithm for visualizing very large biological
-#' networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
+#' networks. *J Mol Biol.* 2004 Jun 25;340(1):179-90.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -459,50 +459,50 @@ write.graph.dot <- function(graph, file, ...) {
 #' This function downloads a graph from a database created for the evaluation
 #' of graph isomorphism testing algothitms.
 #'
-#' \code{graph_from_graphdb} reads a graph from the graph database from an FTP or
+#' `graph_from_graphdb()` reads a graph from the graph database from an FTP or
 #' HTTP server or from a local copy. It has two modes of operation:
 #'
-#' If the \code{url} argument is specified then it should the complete path to
+#' If the `url` argument is specified then it should the complete path to
 #' a local or remote graph database file. In this case we simply call
-#' \code{\link{read_graph}} with the proper arguments to read the file.
+#' [read_graph()] with the proper arguments to read the file.
 #'
-#' If \code{url} is \code{NULL}, and this is the default, then the filename is
-#' assembled from the \code{base}, \code{prefix}, \code{type}, \code{nodes},
-#' \code{pair} and \code{which} arguments.
+#' If `url` is `NULL`, and this is the default, then the filename is
+#' assembled from the `base`, `prefix`, `type`, `nodes`,
+#' `pair` and `which` arguments.
 #'
 #' Unfortunately the original graph database homepage is now defunct, but see
 #' its old version at
-#' \url{http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html}
+#' <http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 #' for the actual format of a graph database file and other information.
 #'
 #' @aliases graph.graphdb
-#' @param url If not \code{NULL} it is a complete URL with the file to import.
+#' @param url If not `NULL` it is a complete URL with the file to import.
 #' @param prefix Gives the prefix. See details below. Possible values:
-#' \code{iso}, \code{i2}, \code{si4}, \code{si6}, \code{mcs10}, \code{mcs30},
-#' \code{mcs50}, \code{mcs70}, \code{mcs90}.
+#'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
+#'   `mcs50`, `mcs70`, `mcs90`.
 #' @param type Gives the graph type identifier. See details below. Possible
-#' values: \code{r001}, \code{r005}, \code{r01}, \code{r02}, \code{m2D},
-#' \code{m2Dr2}, \code{m2Dr4}, \code{m2Dr6} \code{m3D}, \code{m3Dr2},
-#' \code{m3Dr4}, \code{m3Dr6}, \code{m4D}, \code{m4Dr2}, \code{m4Dr4},
-#' \code{m4Dr6}, \code{b03}, \code{b03m}, \code{b06}, \code{b06m}, \code{b09},
-#' \code{b09m}.
+#'   values: `r001`, `r005`, `r01`, `r02`, `m2D`,
+#'   `m2Dr2`, `m2Dr4`, `m2Dr6` `m3D`, `m3Dr2`,
+#'   `m3Dr4`, `m3Dr6`, `m4D`, `m4Dr2`, `m4Dr4`,
+#'   `m4Dr6`, `b03`, `b03m`, `b06`, `b06m`, `b09`,
+#'   `b09m`.
 #' @param nodes The number of vertices in the graph.
 #' @param pair Specifies which graph of the pair to read. Possible values:
-#' \code{A} and \code{B}.
+#'   `A` and `B`.
 #' @param which Gives the number of the graph to read. For every graph type
-#' there are a number of actual graphs in the database. This argument specifies
-#' which one to read.
+#'   there are a number of actual graphs in the database. This argument specifies
+#'   which one to read.
 #' @param base The base address of the database. See details below.
 #' @param compressed Logical constant, if TRUE than the file is expected to be
-#' compressed by gzip. If \code{url} is \code{NULL} then a \sQuote{\code{.gz}}
-#' suffix is added to the filename.
+#'   compressed by gzip. If `url` is `NULL` then a \sQuote{`.gz`}
+#'   suffix is added to the filename.
 #' @param directed Logical constant, whether to create a directed graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{read_graph}}, \code{\link{graph.isomorphic.vf2}}
+#' @seealso [read_graph()], [graph.isomorphic.vf2()]
 #' @references M. De Santo, P. Foggia, C. Sansone, M. Vento: A large database
 #' of graphs and its use for benchmarking graph isomorphism algorithms,
-#' \emph{Pattern Recognition Letters}, Volume 24, Issue 8 (May 2003)
+#' *Pattern Recognition Letters*, Volume 24, Issue 8 (May 2003)
 #' @export
 #' @keywords graphs
 #' @section Examples:

@@ -12,13 +12,13 @@ from_prufer(...)
 \arguments{
 \item{prufer}{The Prufer sequence to convert into a graph}
 
-\item{...}{Passed to \code{make_from_prufer}}
+\item{...}{Passed to \code{make_from_prufer()}}
 }
 \value{
 A graph object.
 }
 \description{
-\code{make_from_prufer} creates an undirected tree graph from its Prufer
+\code{make_from_prufer()} creates an undirected tree graph from its Prufer
 sequence.
 }
 \details{
@@ -35,6 +35,6 @@ to_prufer(g)
 
 }
 \seealso{
-\code{\link{to_prufer}} to convert a graph into its Prufer sequence
+\code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prufer sequence
 }
 \keyword{graphs}

@@ -52,20 +52,20 @@ row names are not added. If \sQuote{\code{add.rownames}} and
 \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
 former is ignored.}
 
-\item{...}{Passed to \code{graph_from_adjacency_matrix}.}
+\item{...}{Passed to \code{graph_from_adjacency_matrix()}.}
 }
 \value{
 An igraph graph object.
 }
 \description{
-\code{graph_from_adjacency_matrix} is a flexible function for creating \code{igraph}
+\code{graph_from_adjacency_matrix()} is a flexible function for creating \code{igraph}
 graphs from adjacency matrices.
 }
 \details{
 The order of the vertices are preserved, i.e. the vertex corresponding to
 the first row will be vertex 0 in the graph, etc.
 
-\code{graph_from_adjacency_matrix} operates in two main modes, depending on the
+\code{graph_from_adjacency_matrix()} operates in two main modes, depending on the
 \code{weighted} argument.
 
 If this argument is \code{NULL} then an unweighted graph is created and an
@@ -81,8 +81,7 @@ symmetric.} \item{"max"}{An undirected graph will be created and
 right triangle (including the diagonal) is used for the number of edges.}
 \item{"lower"}{An undirected graph will be created, only the lower
 left triangle (including the diagonal) is used for creating the edges.}
-\item{"min"}{undirected graph will be created with \code{min(A(i,j),
-A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
+\item{"min"}{undirected graph will be created with \code{min(A(i,j), A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
 undirected graph will be created with \code{A(i,j)+A(j,i)} edges between
 vertex \code{i} and \code{j}.} }
 
@@ -156,7 +155,7 @@ summary(g10)
 
 }
 \seealso{
-\link{graph} and \code{\link{graph_from_literal}} for other ways to
+\code{\link[=graph]{graph()}} and \code{\link[=graph_from_literal]{graph_from_literal()}} for other ways to
 create graphs.
 }
 \author{

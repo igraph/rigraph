@@ -15,6 +15,6 @@
 The modified graph
 }
 \description{
-This is a helper function for the common parts of \code{make_} and
-\code{sample_}.
+This is a helper function for the common parts of \code{make_()} and
+\code{sample_()}.
 }

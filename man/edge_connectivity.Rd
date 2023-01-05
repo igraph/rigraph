@@ -14,10 +14,10 @@ edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{source}{The id of the source vertex, for \code{edge_connectivity} it
+\item{source}{The id of the source vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{edge_connectivity} it
+\item{target}{The id of the target vertex, for \code{edge_connectivity()} it
 can be \code{NULL}, see details below.}
 
 \item{checks}{Logical constant. Whether to check that the graph is connected
@@ -39,11 +39,11 @@ called group adhesion.
 The edge connectivity of a pair of vertices (\code{source} and
 \code{target}) is the minimum number of edges needed to remove to eliminate
 all (directed) paths from \code{source} to \code{target}.
-\code{edge_connectivity} calculates this quantity if both the \code{source}
+\code{edge_connectivity()} calculates this quantity if both the \code{source}
 and \code{target} arguments are given (and not \code{NULL}).
 
 The edge connectivity of a graph is the minimum of the edge connectivity of
-every (ordered) pair of vertices in the graph.  \code{edge_connectivity}
+every (ordered) pair of vertices in the graph.  \code{edge_connectivity()}
 calculates this quantity if neither the \code{source} nor the \code{target}
 arguments are given (ie. they are both \code{NULL}).
 
@@ -56,7 +56,7 @@ obtain a graph which is not strongly connected. This is the same as the edge
 connectivity of the graph.
 
 The three functions documented on this page calculate similar properties,
-more precisely the most general is \code{edge_connectivity}, the others are
+more precisely the most general is \code{edge_connectivity()}, the others are
 included only for having more descriptive function names.
 }
 \examples{
@@ -78,8 +78,8 @@ Douglas R. White and Frank Harary: The cohesiveness of blocks in
 social networks: node connectivity and conditional density, TODO: citation
 }
 \seealso{
-\code{\link{max_flow}}, \code{\link{vertex_connectivity}},
-\code{\link{vertex_disjoint_paths}}, \code{\link{cohesion}}
+\code{\link[=max_flow]{max_flow()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
+\code{\link[=vertex_disjoint_paths]{vertex_disjoint_paths()}}, \code{\link[=cohesion]{cohesion()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

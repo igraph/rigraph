@@ -46,8 +46,8 @@ types. These should be probabilities, ie. numbers between zero and one.}
 
 \item{directed}{Logical constant, whether to generate directed graphs.}
 
-\item{...}{Passed to the constructor, \code{sample_traits} or
-\code{sample_traits_callaway}.}
+\item{...}{Passed to the constructor, \code{sample_traits()} or
+\code{sample_traits_callaway()}.}
 
 \item{k}{The number of trials per time step, see details below.}
 }
@@ -59,7 +59,7 @@ These functions implement evolving network models based on different vertex
 types.
 }
 \details{
-For \code{sample_traits_callaway} the simulation goes like this: in each
+For \code{sample_traits_callaway()} the simulation goes like this: in each
 discrete time step a new vertex is added to the graph. The type of this
 vertex is generated based on \code{type.dist}. Then two vertices are
 selected uniformly randomly from the graph. The probability that they will
@@ -67,7 +67,7 @@ be connected depends on the types of these vertices and is taken from
 \code{pref.matrix}. Then another two vertices are selected and this is
 repeated \code{edges.per.step} times in each time step.
 
-For \code{sample_traits} the simulation goes like this: a single vertex is
+For \code{sample_traits()} the simulation goes like this: a single vertex is
 added at each time step. This new vertex tries to connect to \code{k}
 vertices in the graph. The probability that such a connection is realized
 depends on the types of the vertices involved and is taken from

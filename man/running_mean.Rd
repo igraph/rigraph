@@ -17,7 +17,7 @@ ie. smaller than the length of \code{v}.}
 A numeric vector of length \code{length(v)-binwidth+1}
 }
 \description{
-\code{running_mean} calculates the running mean in a vector with the given
+\code{running_mean()} calculates the running mean in a vector with the given
 bin width.
 }
 \details{

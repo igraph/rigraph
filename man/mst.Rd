@@ -50,7 +50,7 @@ Prim, R.C. 1957. Shortest connection networks and some
 generalizations \emph{Bell System Technical Journal}, 37 1389--1401.
 }
 \seealso{
-\code{\link{components}}
+\code{\link[=components]{components()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

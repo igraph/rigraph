@@ -46,18 +46,18 @@ holds. If you are running the algorithm with no weights, this argument
 is ignored.}
 }
 \value{
-\code{is_matching} and \code{is_max_matching} return a logical
+\code{is_matching()} and \code{is_max_matching()} return a logical
 scalar.
 
-\code{max_bipartite_match} returns a list with components:
-  \item{matching_size}{The size of the matching, i.e. the number of edges
-    connecting the matched vertices.}
-  \item{matching_weight}{The weights of the matching, if the graph was
-    weighted. For unweighted graphs this is the same as the size of the
-    matching.}
-  \item{matching}{The matching itself. Numeric vertex id, or vertex
-    names if the graph was named. Non-matched vertices are denoted by
-    \code{NA}.}
+\code{max_bipartite_match()} returns a list with components:
+\item{matching_size}{The size of the matching, i.e. the number of edges
+connecting the matched vertices.}
+\item{matching_weight}{The weights of the matching, if the graph was
+weighted. For unweighted graphs this is the same as the size of the
+matching.}
+\item{matching}{The matching itself. Numeric vertex id, or vertex
+names if the graph was named. Non-matched vertices are denoted by
+\code{NA}.}
 }
 \description{
 A matching in a graph means the selection of a set of edges that are
@@ -65,18 +65,18 @@ pairwise non-adjacent, i.e. they have no common incident vertices. A
 matching is maximal if it is not a proper subset of any other matching.
 }
 \details{
-\code{is_matching} checks a matching vector and verifies whether its
+\code{is_matching()} checks a matching vector and verifies whether its
 length matches the number of vertices in the given graph, its values are
 between zero (inclusive) and the number of vertices (inclusive), and
 whether there exists a corresponding edge in the graph for every matched
 vertex pair. For bipartite graphs, it also verifies whether the matched
 vertices are in different parts of the graph.
 
-\code{is_max_matching} checks whether a matching is maximal.  A matching
+\code{is_max_matching()} checks whether a matching is maximal.  A matching
 is maximal if and only if there exists no unmatched vertex in a graph
 such that one of its neighbors is also unmatched.
 
-\code{max_bipartite_match} calculates a maximum matching in a bipartite
+\code{max_bipartite_match()} calculates a maximum matching in a bipartite
 graph. A matching in a bipartite graph is a partial assignment of
 vertices of the first kind to vertices of the second kind such that each
 vertex of the first kind is matched to at most one vertex of the second

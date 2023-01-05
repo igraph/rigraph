@@ -29,7 +29,7 @@ time the vertex with the most already visited neighbors is visited. Ties are
 broken randomly.
 
 The algorithm provides a simple basis for deciding whether a graph is
-chordal, see References below, and also \code{\link{is_chordal}}.
+chordal, see References below, and also \code{\link[=is_chordal]{is_chordal()}}.
 }
 \examples{
 
@@ -57,7 +57,7 @@ hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
 of Computation} 13, 566--579.
 }
 \seealso{
-\code{\link{is_chordal}}
+\code{\link[=is_chordal]{is_chordal()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

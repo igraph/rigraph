@@ -16,7 +16,7 @@ set as edge attributes.}
 
 \item{index}{An optional edge sequence to set the attributes
 of a subset of edges.
-If `NULL`, the default, the attribute is set for all edges.}
+If \code{NULL}, the default, the attribute is set for all edges.}
 
 \item{value}{The new value of the attribute(s) for all
 (or \code{index}) edges.}

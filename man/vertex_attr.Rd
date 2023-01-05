@@ -16,11 +16,11 @@ all vertex attributes are returned in a list.}
 
 \item{index}{An optional vertex sequence to query the attribute only
 for these vertices.
-If `NULL`, the default, the attribute is queried for all vertices.}
+If \code{NULL}, the default, the attribute is queried for all vertices.}
 }
 \value{
 The value of the vertex attribute, or the list of
-  all vertex attributes, if \code{name} is missing.
+all vertex attributes, if \code{name} is missing.
 }
 \description{
 Query vertex attributes of a graph

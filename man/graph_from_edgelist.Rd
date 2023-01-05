@@ -15,13 +15,13 @@ from_edgelist(...)
 
 \item{directed}{Whether to create a directed graph.}
 
-\item{...}{Passed to \code{graph_from_edgelist}.}
+\item{...}{Passed to \code{graph_from_edgelist()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{graph_from_edgelist} creates a graph from an edge list. Its argument
+\code{graph_from_edgelist()} creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is
 a numeric matrix then its elements are interpreted as vertex ids. If
 it is a character matrix then it is interpreted as symbolic vertex

@@ -13,7 +13,7 @@ vertex_attr(graph, name, index = NULL) <- value
 \item{name}{The name of the vertex attribute to set. If missing,
 then \code{value} must be a named list, and its entries are
 set as vertex attributes.
-If `NULL`, the default, the attribute is set for all vertices.}
+If \code{NULL}, the default, the attribute is set for all vertices.}
 
 \item{index}{An optional vertex sequence to set the attributes
 of a subset of vertices.}

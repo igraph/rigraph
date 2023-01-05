@@ -23,7 +23,7 @@
 )
 }
 \arguments{
-\item{x}{The output of the SIR simulation, coming from the \code{\link{sir}}
+\item{x}{The output of the SIR simulation, coming from the \code{\link[=sir]{sir()}}
 function.}
 
 \item{comp}{Character scalar, which component to plot. Either \sQuote{NI}
@@ -57,7 +57,7 @@ it is calculated from the data.}
 \item{ylab}{The y label. If \code{NULL} then it is automatically added based
 on the \code{comp} argument.}
 
-\item{\dots}{Additional arguments are passed to \code{plot}, that is run
+\item{\dots}{Additional arguments are passed to \code{\link[=plot]{plot()}}, that is run
 before any of the curves are added, to create the figure.}
 }
 \value{
@@ -83,7 +83,7 @@ Bailey, Norman T. J. (1975). The mathematical theory of
 infectious diseases and its applications (2nd ed.). London: Griffin.
 }
 \seealso{
-\code{\link{sir}} for running the actual simulation.
+\code{\link[=sir]{sir()}} for running the actual simulation.
 }
 \author{
 Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
