@@ -145,7 +145,7 @@ graph.attributes <- function(graph) {
 #' @param graph The graph.
 #' @param name Name of the attribute to query. If missing, then
 #'   all vertex attributes are returned in a list.
-#' @param index A vertex sequence, to query the attribute only
+#' @param index An optional vertex sequence to query the attribute only
 #'   for these vertices.
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
@@ -327,7 +327,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 #' @param graph The graph
 #' @param name The name of the attribute to query. If missing, then
 #'   all edge attributes are returned in a list.
-#' @param index An optional edge sequence, to query edge attributes
+#' @param index An optional edge sequence to query edge attributes
 #'   for a subset of edges.
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
