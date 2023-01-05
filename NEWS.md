@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9092
+
+- Merge pull request #619 from dmurdoch/rgl.
+
+Use *3d functions rather than rgl.* functions
+
+
 # igraph 1.3.5.9091
 
 ## Bug fixes
