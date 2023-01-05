@@ -20,8 +20,8 @@ attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 }
 \value{
-\code{cluster_optimal()} returns a \code{\link[=communities]{communities()}} object,
-please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_optimal} returns a \code{\link{communities}} object,
+please see the \code{\link{communities}} manual page for details.
 }
 \description{
 This function calculates the optimal community structure of a graph, by
@@ -71,8 +71,8 @@ Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
 2008.
 }
 \seealso{
-\code{\link[=communities]{communities()}} for the documentation of the result,
-\code{\link[=modularity]{modularity()}}. See also \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} for a
+\code{\link{communities}} for the documentation of the result,
+\code{\link{modularity}}. See also \code{\link{cluster_fast_greedy}} for a
 fast greedy optimizer.
 }
 \author{

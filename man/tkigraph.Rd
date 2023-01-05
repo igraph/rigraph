@@ -14,11 +14,11 @@ This functions starts an experimental GUI to some igraph functions. The GUI
 was written in Tcl/Tk, so it is cross platform.
 }
 \details{
-\code{tkigraph()} has its own online help system, please see that for the
+\code{tkigraph} has its own online help system, please see that for the
 details about how to use it.
 }
 \seealso{
-\code{\link[=tkplot]{tkplot()}} for interactive plotting of graphs.
+\code{\link{tkplot}} for interactive plotting of graphs.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -1,6 +1,6 @@
 #' Decide whether a graph is a tree.
 #'
-#' `is_tree()` decides whether a graph is a tree, and optionally returns a
+#' \code{is_tree} decides whether a graph is a tree, and optionally returns a
 #' possible root vertex if the graph is a tree.
 #'
 #' An undirected graph is a tree if it is connected and has no cycles.
@@ -17,10 +17,10 @@
 #'   \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
 #'   oriented outwards from the root, \sQuote{in} requires edges to be oriented
 #'   towards the root.
-#' @param details Whether to return only whether the graph is a tree (`FALSE`)
-#'   or also a possible root (`TRUE`)
-#' @return When `details` is `FALSE`, a logical value that indicates
-#'   whether the graph is a tree. When `details` is `TRUE`, a named
+#' @param details Whether to return only whether the graph is a tree (\code{FALSE})
+#'   or also a possible root (\code{TRUE})
+#' @return When \code{details} is \code{FALSE}, a logical value that indicates
+#'   whether the graph is a tree. When \code{details} is \code{TRUE}, a named
 #'   list with two entries: \item{res}{Logical value that indicates whether the
 #'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
 #'   the graph is not a tree.}
@@ -30,14 +30,14 @@
 #'
 #' g <- make_tree(7, 2)
 #' is_tree(g)
-#' is_tree(g, details = TRUE)
+#' is_tree(g, details=TRUE)
 #'
 #' @export
 is_tree <- is_tree
 
 #' Convert a tree graph to its Prufer sequence
 #'
-#' `to_prufer()` converts a tree graph into its Prufer sequence.
+#' \code{to_prufer} converts a tree graph into its Prufer sequence.
 #'
 #' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
 #' n-2 numbers, constructed as follows. If the graph has more than two vertices,
@@ -47,9 +47,9 @@ is_tree <- is_tree
 #'
 #' @param graph The graph to convert to a Prufer sequence
 #' @return The Prufer sequence of the graph, represented as a numeric vector of
-#'   vertex IDs in the sequence.
+#' vertex IDs in the sequence.
 #'
-#' @seealso [make_from_prufer()] to construct a graph from its
+#' @seealso \code{\link{make_from_prufer}} to construct a graph from its
 #' Prufer sequence
 #' @keywords graphs
 #' @examples
@@ -62,22 +62,22 @@ to_prufer <- to_prufer
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
-#' `sample_spanning_tree()` picks a spanning tree of an undirected graph
+#' \code{sample_spanning_tree} picks a spanning tree of an undirected graph
 #' randomly and uniformly, using loop-erased random walks.
 #'
 #' @param graph The input graph to sample from. Edge directions are ignored if
-#'   the graph is directed.
+#' the graph is directed.
 #' @param vid When the graph is disconnected, this argument specifies how to
-#'   handle the situation. When the argument is zero (the default), the sampling
-#'   will be performed component-wise, and the result will be a spanning forest.
-#'   When the argument contains a vertex ID, only the component containing the
-#'   given vertex will be processed, and the result will be a spanning tree of the
-#'   component of the graph.
+#' handle the situation. When the argument is zero (the default), the sampling
+#' will be performed component-wise, and the result will be a spanning forest.
+#' When the argument contains a vertex ID, only the component containing the
+#' given vertex will be processed, and the result will be a spanning tree of the
+#' component of the graph.
 #' @return An edge sequence containing the edges of the spanning tree. Use
-#'   [subgraph.edges()] to extract the corresponding subgraph.
+#' \code{\link{subgraph.edges}} to extract the corresponding subgraph.
 #'
 #' @keywords graph
-#' @seealso [subgraph.edges()] to extract the tree itself
+#' @seealso \code{\link{subgraph.edges}} to extract the tree itself
 #' @examples
 #'
 #' g <- make_full_graph(10) %du% make_full_graph(5)

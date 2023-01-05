@@ -19,12 +19,12 @@ ignored, as the algorithm is defined for undirected graphs.}
 
 \item{alpha}{Numeric vector, the maximal chardinality ordering of the
 vertices. If it is \code{NULL}, then it is automatically calculated by
-calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if
+calling \code{\link{max_cardinality}}, or from \code{alpham1} if
 that is given..}
 
 \item{alpham1}{Numeric vector, the inverse of \code{alpha}. If it is
 \code{NULL}, then it is automatically calculated by calling
-\code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
+\code{\link{max_cardinality}}, or from \code{alpha}.}
 
 \item{fillin}{Logical scalar, whether to calculate the fill-in edges.}
 
@@ -55,21 +55,17 @@ It is also true that adding the fill-in edges to the graph makes it chordal.
 \examples{
 
 ## The examples from the Tarjan-Yannakakis paper
-g1 <- graph_from_literal(
-  A - B:C:I, B - A:C:D, C - A:B:E:H, D - B:E:F,
-  E - C:D:F:H, F - D:E:G, G - F:H, H - C:E:G:I,
-  I - A:H
-)
+g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
+                E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
+                I-A:H)
 max_cardinality(g1)
-is_chordal(g1, fillin = TRUE)
+is_chordal(g1, fillin=TRUE)
 
-g2 <- graph_from_literal(
-  A - B:E, B - A:E:F:D, C - E:D:G, D - B:F:E:C:G,
-  E - A:B:C:D:F, F - B:D:E, G - C:D:H:I, H - G:I:J,
-  I - G:H:J, J - H:I
-)
+g2 <- graph_from_literal(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
+                E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
+                I-G:H:J, J-H:I)
 max_cardinality(g2)
-is_chordal(g2, fillin = TRUE)
+is_chordal(g2, fillin=TRUE)
 
 }
 \references{
@@ -79,7 +75,7 @@ hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
 of Computation} 13, 566--579.
 }
 \seealso{
-\code{\link[=max_cardinality]{max_cardinality()}}
+\code{\link{max_cardinality}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

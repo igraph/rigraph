@@ -84,16 +84,16 @@ and then the query is done on the corresponding data set(s).}
 \item{i}{Index.}
 }
 \value{
-\code{nexus_list()} and \code{nexus_search()} return a list of
+\code{nexus_list} and \code{nexus_search} return a list of
 \code{nexusDatasetInfo} objects. The list also has these attributes:
 \describe{ \item{size}{The number of data sets returned by the query.}
 \item{totalsize}{The total number of data sets found for the query.}
 \item{offset}{The offset parameter of the query.} \item{limit}{The limit
 parameter of the query.} }
 
-\code{nexus_info()} returns a single \code{nexusDatasetInfo} object.
+\code{nexus_info} returns a single \code{nexusDatasetInfo} object.
 
-\code{nexus_get()} returns an igraph graph object, or a list of graph objects,
+\code{nexus_get} returns an igraph graph object, or a list of graph objects,
 if the data set consists of multiple networks.
 }
 \description{
@@ -105,68 +105,68 @@ as an igraph graph.
 Nexus is an online repository of networks, with an API that allow
 programmatic queries against it, and programmatic data download as well.
 
-The \code{nexus_list()} and \code{nexus_info()} functions query the online
+The \code{nexus_list} and \code{nexus_info} functions query the online
 database. They both return \code{nexusDatasetInfo} objects.
-\code{nexus_info()} returns more information than \code{nexus_list()}.
+\code{nexus_info} returns more information than \code{nexus_list}.
 
-\code{nexus_search()} searches Nexus, and returns a list of data sets, as
+\code{nexus_search} searches Nexus, and returns a list of data sets, as
 \code{nexusDatasetInfo} objects. See below for some search examples.
 
-\code{nexus_get()} downloads a data set from Nexus, based on its numeric id,
+\code{nexus_get} downloads a data set from Nexus, based on its numeric id,
 or based on a Nexus search string. For search strings, only the first search
 hit is downloaded, but see also the \code{offset} argument. (If there are
 not data sets found, then the function returns an error.)
 
-The \code{nexusDatasetInfo} objects returned by \code{nexus_list()} have the
+The \code{nexusDatasetInfo} objects returned by \code{nexus_list} have the
 following fields: \describe{
-\item{id}{The numeric id of the dataset.}
-\item{sid}{The character id of the dataset.}
-\item{name}{Character scalar, the name of the dataset.}
-\item{vertices/edges}{Character, the number of vertices and edges in
-the graph(s). Vertices and edges are separated by a  slash, and if
-the data set consists of multiple networks, then they are separated
-by spaces.}
-\item{tags}{Character vector, the tags of the dataset. Directed graph
-have the tags \sQuote{directed}. Undirected graphs are tagged
-as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
-\sQuote{bipartite}, \sQuote{social network}, etc.}
-\item{networks}{The ids and names of the networks in the data set. The
-numeric and character id are separated by a slash, and multiple networks
-are separated by spaces.}
+  \item{id}{The numeric id of the dataset.}
+  \item{sid}{The character id of the dataset.}
+  \item{name}{Character scalar, the name of the dataset.}
+  \item{vertices/edges}{Character, the number of vertices and edges in
+    the graph(s). Vertices and edges are separated by a  slash, and if
+    the data set consists of multiple networks, then they are separated
+    by spaces.}
+  \item{tags}{Character vector, the tags of the dataset. Directed graph
+    have the tags \sQuote{directed}. Undirected graphs are tagged
+    as \sQuote{undirected}. Other common tags are: \sQuote{weighted},
+    \sQuote{bipartite}, \sQuote{social network}, etc.}
+  \item{networks}{The ids and names of the networks in the data set. The
+    numeric and character id are separated by a slash, and multiple networks
+    are separated by spaces.}
 }
 
-\code{nexusDatasetInfo} objects returned by \code{nexus_info()} have the
+\code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
 following additional fields: \describe{
-\item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
-the dataset was added to the database.}
-\item{formats}{Character vector, the data formats in which the data set is
-available. The various formats are separated by semicolons.}
-\item{licence}{Character scalar, the licence of the dataset.}
-\item{licence url}{Character scalar, the URL of the licence of the
-dataset. Please make sure you consult this before using a dataset.}
-\item{summary}{Character scalar, the short description of the dataset,
-this is usually a single sentence.}
-\item{description}{Character scalar, the full description of the
-dataset.}
-\item{citation}{Character scalar, the paper(s) describing the
-dataset. Please cite these papers if you are using the dataset in your
-research, the licence of most datasets requires this.}
-\item{attributes}{A list of lists, each list entry is a graph, vertex
-or edge attribute and has the following entries: \describe{
-\item{type}{Type of the attribute, either \sQuote{graph},
-\sQuote{vertex} or \sQuote{edge}.}
-\item{datatype}{Data type of the attribute, currently it can be
-\sQuote{numeric} and \sQuote{string}.}
-\item{name}{Character scalar, the name of the attribute.}
-\item{description}{Character scalar, the description of the
-attribute.}
-}
-}
+  \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
+    the dataset was added to the database.}
+  \item{formats}{Character vector, the data formats in which the data set is
+    available. The various formats are separated by semicolons.}
+  \item{licence}{Character scalar, the licence of the dataset.}
+  \item{licence url}{Character scalar, the URL of the licence of the
+    dataset. Please make sure you consult this before using a dataset.}
+  \item{summary}{Character scalar, the short description of the dataset,
+    this is usually a single sentence.}
+  \item{description}{Character scalar, the full description of the
+    dataset.}
+  \item{citation}{Character scalar, the paper(s) describing the
+    dataset. Please cite these papers if you are using the dataset in your
+    research, the licence of most datasets requires this.}
+  \item{attributes}{A list of lists, each list entry is a graph, vertex
+    or edge attribute and has the following entries: \describe{
+      \item{type}{Type of the attribute, either \sQuote{graph},
+        \sQuote{vertex} or \sQuote{edge}.}
+      \item{datatype}{Data type of the attribute, currently it can be
+        \sQuote{numeric} and \sQuote{string}.}
+      \item{name}{Character scalar, the name of the attribute.}
+      \item{description}{Character scalar, the description of the
+        attribute.}
+    }
+  }
 }
 
 The results of the Nexus queries are printed to the screen in a consise
 format, similar to the format of igraph graphs. A data set list (typically
-the result of \code{nexus_list()} and \code{nexus_search()}) looks like this:
+the result of \code{nexus_list} and \code{nexus_search}) looks like this:
 \preformatted{NEXUS 1-5/18 -- data set list
 [1] kaptail.4         39/109-223   #18 Kapferer tailor shop
 [2] condmatcollab2003 31163/120029 #17 Condensed matter collaborations+

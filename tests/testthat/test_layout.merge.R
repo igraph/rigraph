@@ -1,4 +1,5 @@
 test_that("merge_coords works", {
+
   set.seed(42)
 
   g <- list(make_ring(10), make_ring(5))
@@ -10,12 +11,13 @@ test_that("merge_coords works", {
   expect_that(ncol(lm), equals(2))
   expect_that(nrow(lm), equals(sum(sapply(g, vcount))))
 
-  ##########
+##########
 
   ## Stress test
   for (i in 1:10) {
-    g <- sample_gnp(100, 2 / 100)
+    g <- sample_gnp(100, 2/100)
     l <- layout_with_mds(g)
     expect_that(dim(l), equals(c(vcount(g), 2)))
   }
+
 })

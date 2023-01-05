@@ -44,7 +44,7 @@ columns) of \code{A} and \code{B} correspond to the same vertices in both
 graphs. That is, the \eqn{n \times n}{n*n} permutation matrix that defines
 the bijection is \eqn{I_{m} \bigoplus P} for a \eqn{(n-m)\times
 (n-m)}{(n-m)*(n-m)} permutation matrix \eqn{P} and \eqn{m} times \eqn{m}
-identity matrix \eqn{I_{m}}. The function \code{match_vertices()} estimates
+identity matrix \eqn{I_{m}}. The function \code{match_vertices} estimates
 the permutation matrix \eqn{P} via an optimization algorithm based on the
 Frank-Wolfe algorithm.
 
@@ -52,14 +52,14 @@ See references for further details.
 }
 \examples{
 
-# require(Matrix)
-g1 <- sample_gnp(10, 0.1)
-randperm <- c(1:3, 3 + sample(7))
-g2 <- sample_correlated_gnp(g1, corr = 1, p = g1$p, permutation = randperm)
-A <- as.matrix(get.adjacency(g1))
-B <- as.matrix(get.adjacency(g2))
-P <- match_vertices(A, B, m = 3, start = diag(rep(1, nrow(A) - 3)), 20)
-P
+ #require(Matrix)
+ g1 <- sample_gnp(10, 0.1)
+ randperm <- c(1:3, 3+sample(7))
+ g2 <- sample_correlated_gnp(g1, corr=1, p=g1$p, permutation=randperm)
+ A  <- as.matrix(get.adjacency(g1))
+ B  <- as.matrix(get.adjacency(g2))
+ P  <- match_vertices(A, B, m=3, start=diag(rep(1, nrow(A)-3)), 20)
+ P
 }
 \references{
 Vogelstein, J. T., Conroy, J. M., Podrazik, L. J., Kratzer, S.
@@ -71,7 +71,7 @@ Fishkind, D. E., Adali, S., Priebe, C. E. (2012). Seeded Graph Matching
 Online: \url{https://arxiv.org/abs/1209.0367}
 }
 \seealso{
-\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},\code{\link[=sample_correlated_gnp_pair]{sample_correlated_gnp_pair()}}
+\code{\link{sample_correlated_gnp}},\code{\link{sample_correlated_gnp_pair}}
 }
 \author{
 Vince Lyzinski \url{https://www.ams.jhu.edu/~lyzinski/}

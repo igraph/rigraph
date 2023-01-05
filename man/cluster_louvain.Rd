@@ -25,8 +25,8 @@ original definition of modularity is recovered when the resolution parameter
 is set to 1.}
 }
 \value{
-\code{cluster_louvain()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_louvain} returns a \code{\link{communities}}
+object, please see the \code{\link{communities}} manual page for details.
 }
 \description{
 This function implements the multi-level modularity optimization algorithm
@@ -55,7 +55,7 @@ This function was contributed by Tom Gregorovic.
 
 # This is so simple that we will have only one level
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)
-g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+g <- add_edges(g, c(1,6, 1,11, 6, 11))
 cluster_louvain(g)
 
 }
@@ -65,16 +65,16 @@ Etienne Lefebvre: Fast unfolding of communities in large networks. J. Stat.
 Mech. (2008) P10008
 }
 \seealso{
-See \code{\link[=communities]{communities()}} for extracting the membership,
+See \code{\link{communities}} for extracting the membership,
 modularity scores, etc. from the results.
 
-Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
-\code{\link[=cluster_label_prop]{cluster_label_prop()}}
-\code{\link[=cluster_leiden]{cluster_leiden()}}
+Other community detection algorithms: \code{\link{cluster_walktrap}},
+\code{\link{cluster_spinglass}},
+\code{\link{cluster_leading_eigen}},
+\code{\link{cluster_edge_betweenness}},
+\code{\link{cluster_fast_greedy}},
+\code{\link{cluster_label_prop}}
+\code{\link{cluster_leiden}}
 }
 \author{
 Tom Gregorovic, Tamas Nepusz \email{ntamas@gmail.com}

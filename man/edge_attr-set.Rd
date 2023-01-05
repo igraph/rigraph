@@ -5,7 +5,7 @@
 \alias{edge.attributes<-}
 \title{Set one or more edge attributes}
 \usage{
-edge_attr(graph, name, index = NULL) <- value
+edge_attr(graph, name, index = E(graph)) <- value
 }
 \arguments{
 \item{graph}{The graph.}
@@ -15,8 +15,7 @@ then \code{value} must be a named list, and its entries are
 set as edge attributes.}
 
 \item{index}{An optional edge sequence to set the attributes
-of a subset of edges.
-If \code{NULL}, the default, the attribute is set for all edges.}
+of a subset of edges.}
 
 \item{value}{The new value of the attribute(s) for all
 (or \code{index}) edges.}
@@ -29,10 +28,8 @@ Set one or more edge attributes
 }
 \examples{
 g <- make_ring(10)
-edge_attr(g) <- list(
-  name = LETTERS[1:10],
-  color = rep("green", gsize(g))
-)
+edge_attr(g) <- list(name = LETTERS[1:10],
+                      color = rep("green", gsize(g)))
 edge_attr(g, "label") <- E(g)$name
 g
 plot(g)

@@ -34,14 +34,14 @@ number of vertices in the graph.}
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
 
-\item{\dots}{Additional arguments to pass to \code{degree()}, eg. \code{mode}
+\item{\dots}{Additional arguments to pass to \code{degree}, eg. \code{mode}
 is useful but also \code{v} and \code{loops} make sense.}
 }
 \value{
-For \code{degree()} a numeric vector of the same length as argument
+For \code{degree} a numeric vector of the same length as argument
 \code{v}.
 
-For \code{degree_distribution()} a numeric vector of the same length as the
+For \code{degree_distribution} a numeric vector of the same length as the
 maximum degree plus one. The first element is the relative frequency zero
 degree vertices, the second vertices with degree one, etc.
 }
@@ -53,7 +53,7 @@ its adjacent edges.
 
 g <- make_ring(10)
 degree(g)
-g2 <- sample_gnp(1000, 10 / 1000)
+g2 <- sample_gnp(1000, 10/1000)
 degree_distribution(g2)
 
 }

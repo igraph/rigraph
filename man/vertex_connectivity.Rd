@@ -17,10 +17,10 @@ vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 \arguments{
 \item{graph, x}{The input graph.}
 
-\item{source}{The id of the source vertex, for \code{vertex_connectivity()} it
+\item{source}{The id of the source vertex, for \code{vertex_connectivity} it
 can be \code{NULL}, see details below.}
 
-\item{target}{The id of the target vertex, for \code{vertex_connectivity()} it
+\item{target}{The id of the target vertex, for \code{vertex_connectivity} it
 can be \code{NULL}, see details below.}
 
 \item{checks}{Logical constant. Whether to check that the graph is connected
@@ -44,7 +44,7 @@ called group cohesion.
 The vertex connectivity of two vertices (\code{source} and \code{target}) in
 a directed graph is the minimum number of vertices needed to remove from the
 graph to eliminate all (directed) paths from \code{source} to \code{target}.
-\code{vertex_connectivity()} calculates this quantity if both the
+\code{vertex_connectivity} calculates this quantity if both the
 \code{source} and \code{target} arguments are given and they're not
 \code{NULL}.
 
@@ -52,7 +52,7 @@ The vertex connectivity of a graph is the minimum vertex connectivity of all
 (ordered) pairs of vertices in the graph. In other words this is the minimum
 number of vertices needed to remove to make the graph not strongly
 connected. (If the graph is not strongly connected then this is zero.)
-\code{vertex_connectivity()} calculates this quantity if neither the
+\code{vertex_connectivity} calculates this quantity if neither the
 \code{source} nor \code{target} arguments are given. (Ie. they are both
 \code{NULL}.)
 
@@ -65,23 +65,23 @@ edge).
 
 The cohesion of a graph (as defined by White and Harary, see references), is
 the vertex connectivity of the graph. This is calculated by
-\code{cohesion()}.
+\code{cohesion}.
 
 These three functions essentially calculate the same measure(s), more
-precisely \code{vertex_connectivity()} is the most general, the other two are
+precisely \code{vertex_connectivity} is the most general, the other two are
 included only for the ease of using more descriptive function names.
 }
 \examples{
 
-g <- barabasi.game(100, m = 1)
-g <- delete_edges(g, E(g)[100 \%--\% 1])
-g2 <- barabasi.game(100, m = 5)
-g2 <- delete_edges(g2, E(g2)[100 \%--\% 1])
+g <- barabasi.game(100, m=1)
+g <- delete_edges(g, E(g)[ 100 \%--\% 1 ])
+g2 <- barabasi.game(100, m=5)
+g2 <- delete_edges(g2, E(g2)[ 100 \%--\% 1])
 vertex_connectivity(g, 100, 1)
 vertex_connectivity(g2, 100, 1)
 vertex_disjoint_paths(g2, 100, 1)
 
-g <- sample_gnp(50, 5 / 50)
+g <- sample_gnp(50, 5/50)
 g <- as.directed(g)
 g <- induced_subgraph(g, subcomponent(g, 1))
 cohesion(g)
@@ -93,8 +93,8 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
 \emph{Sociological Methodology} 31 (1) : 305-359.
 }
 \seealso{
-\code{\link[=max_flow]{max_flow()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=edge_disjoint_paths]{edge_disjoint_paths()}}, \code{\link[=adhesion]{adhesion()}}
+\code{\link{max_flow}}, \code{\link{edge_connectivity}},
+\code{\link{edge_disjoint_paths}}, \code{\link{adhesion}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

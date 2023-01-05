@@ -74,15 +74,15 @@ g <- sample_pa(20, m = 1.5, directed = FALSE)
 eb <- cluster_edge_betweenness(g)
 memb <- membership(eb)
 lr <- scg_semi_proj(memb)
-# In the symmetric case L = R
-tcrossprod(lr$R) # same as lr$R \%*\% t(lr$R)
-P <- crossprod(lr$R) # same as t(lr$R) \%*\% lr$R
-# P is an orthogonal projector
+#In the symmetric case L = R
+tcrossprod(lr$R)  # same as lr$R \%*\% t(lr$R)
+P <- crossprod(lr$R)  # same as t(lr$R) \%*\% lr$R
+#P is an orthogonal projector
 isSymmetric(P)
-sum((P \%*\% P - P)^2)
+sum( (P \%*\% P-P)^2 )
 
 ## use L and R to coarse-grain the graph Laplacian
-lr <- scg_semi_proj(memb, mtype = "laplacian")
+lr <- scg_semi_proj(memb, mtype="laplacian")
 L <- laplacian_matrix(g)
 Lt <- lr$L \%*\% L \%*\% t(lr$R)
 ## or better lr$L \%*\% tcrossprod(L,lr$R)
@@ -97,8 +97,8 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{scg-method} for a detailed introduction. \code{\link[=scg]{scg()}},
-\code{\link[=scg_eps]{scg_eps()}}, \code{\link[=scg_group]{scg_group()}}
+\link{scg-method} for a detailed introduction. \code{\link{scg}},
+\code{\link{scg_eps}}, \code{\link{scg_group}}
 }
 \author{
 David Morton de Lachapelle,

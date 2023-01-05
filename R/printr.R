@@ -3,22 +3,22 @@
 #'
 #' A printer callback function is a function can performs the actual
 #' printing. It has a number of subcommands, that are called by
-#' the `printer` package, in a form \preformatted{
+#' the \code{printer} package, in a form \preformatted{
 #'     printer_callback("subcommand", argument1, argument2, ...)
 #' } See the examples below.
 #'
 #' The subcommands:
 #'
 #' \describe{
-#'   \item{`length`}{The length of the data to print, the number of
+#'   \item{\code{length}}{The length of the data to print, the number of
 #'     items, in natural units. E.g. for a list of objects, it is the
 #'     number of objects.}
-#'   \item{`min_width`}{TODO}
-#'   \item{`width`}{Width of one item, if `no` items will be
+#'   \item{\code{min_width}}{TODO}
+#'   \item{\code{width}}{Width of one item, if \code{no} items will be
 #'     printed. TODO}
-#'   \item{`print`}{Argument: `no`. Do the actual printing,
-#'     print `no` items.}
-#'   \item{`done`}{TODO}
+#'   \item{\code{print}}{Argument: \code{no}. Do the actual printing,
+#'     print \code{no} items.}
+#'   \item{\code{done}}{TODO}
 #' }
 #'
 #' @param fun The function to use as a printer callback function.
@@ -26,6 +26,7 @@
 #' @export
 
 printer_callback <- function(fun) {
+
   if (!is.function(fun)) warning("'fun' is not a function")
   add_class(fun, "printer_callback")
 }
@@ -56,18 +57,18 @@ print_head_foot <- function(head_foot) {
 #' Print the only the head of an R object
 #'
 #' @param x The object to print, or a callback function. See
-#'   [printer_callback()] for details.
-#' @param max_lines Maximum number of lines to print, *not*
+#'   \code{\link{printer_callback}} for details.
+#' @param max_lines Maximum number of lines to print, \emph{not}
 #'   including the header and the footer.
 #' @param header The header, if a function, then it will be called,
-#'   otherwise printed using `cat`.
+#'   otherwise printed using \code{cat}.
 #' @param footer The footer, if a function, then it will be called,
-#'   otherwise printed using `cat`.
+#'   otherwise printed using \code{cat}.
 #' @param omitted_footer Footer that is only printed if anything
 #'   is omitted from the printout. If a function, then it will be called,
-#'   otherwise printed using `cat`.
-#' @param ... Extra arguments to pass to `print()`.
-#' @return `x`, invisibly.
+#'   otherwise printed using \code{cat}.
+#' @param ... Extra arguments to pass to \code{print()}.
+#' @return \code{x}, invisibly.
 #'
 #' @export
 
@@ -83,6 +84,7 @@ head_print <- function(x, max_lines = 20, header = "", footer = "",
 
 head_print_object <- function(x, max_lines, header, footer, omitted_footer,
                               print_fun = print, ...) {
+
   print_header(header)
 
   cout <- capture.output(print_fun(x, ...))
@@ -100,6 +102,7 @@ head_print_object <- function(x, max_lines, header, footer, omitted_footer,
 
 head_print_callback <- function(x, max_lines, header, footer,
                                 omitted_footer, ...) {
+
   ## Header
   print_header(header)
 
@@ -109,15 +112,13 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## Max number of items we can print. This is an upper bound.
   can_max <- min(floor(ow / minw) * max_lines, len)
-  if (can_max == 0) {
-    return()
-  }
+  if (can_max == 0) { return() }
 
   ## Width of item if we print up to this
   cm <- x("width", no = can_max)
 
   ## How many rows we need if we print up to a certain point
-  no_rows <- ceiling(cm * seq_along(cm) / (ow - 4))
+  no_rows <- ceiling(cm * seq_along(cm) /(ow - 4) )
 
   ## So how many items should we print?
   no <- tail(which(no_rows <= max_lines), 1)
@@ -127,18 +128,15 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## Format them, and print
   out_lines <- head_print_object(
-    x("print", no = no, ...),
-    print_fun = cat_pern, max_lines = max_lines,
+    x("print", no = no, ...), print_fun = cat_pern, max_lines = max_lines,
     header = "", footer = "", omitted_footer = ""
   )
 
-  done_stat <- c(
-    tried_items = no, tried_lines = out_lines[["lines"]],
-    printed_lines = out_lines[["printed"]]
-  )
+  done_stat <- c(tried_items = no, tried_lines = out_lines[["lines"]],
+                 printed_lines = out_lines[["printed"]])
 
   if (done_stat["tried_items"] < len ||
-    done_stat["printed_lines"] < done_stat["tried_lines"]) {
+      done_stat["printed_lines"] < done_stat["tried_lines"]) {
     print_footer(omitted_footer)
   }
 
@@ -152,12 +150,13 @@ head_print_callback <- function(x, max_lines, header, footer,
 #'
 #' @param ... Passed to the printing function.
 #' @param .indent Character scalar, indent the printout with this.
-#' @param .printer The printing function, defaults to [print].
-#' @return The first element in `...`, invisibly.
+#' @param .printer The printing function, defaults to \code{print}.
+#' @return The first element in \code{...}, invisibly.
 #'
 #' @export
 
 indent_print <- function(..., .indent = " ", .printer = print) {
+
   if (length(.indent) != 1) stop(".indent must be a scalar")
 
   opt <- options(width = getOption("width") - nchar(.indent))
@@ -181,6 +180,7 @@ indent_print <- function(..., .indent = " ", .printer = print) {
 NULL
 
 add_class <- function(x, class) {
+
   if (!inherits(x, class)) {
     class(x) <- c(class(x), class)
   }

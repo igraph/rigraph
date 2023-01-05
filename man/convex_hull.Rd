@@ -21,7 +21,7 @@ has the smallest area.
 }
 \examples{
 
-M <- cbind(runif(100), runif(100))
+M <- cbind( runif(100), runif(100) )
 convex_hull(M)
 }
 \references{

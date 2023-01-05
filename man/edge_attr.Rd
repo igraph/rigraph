@@ -6,7 +6,7 @@
 \alias{edge.attributes}
 \title{Query edge attributes of a graph}
 \usage{
-edge_attr(graph, name, index = NULL)
+edge_attr(graph, name, index = E(graph))
 }
 \arguments{
 \item{graph}{The graph}
@@ -14,13 +14,12 @@ edge_attr(graph, name, index = NULL)
 \item{name}{The name of the attribute to query. If missing, then
 all edge attributes are returned in a list.}
 
-\item{index}{An optional edge sequence to query edge attributes
-for a subset of edges.
-If \code{NULL}, the default, the attribute is queried for all edges.}
+\item{index}{An optional edge sequence, to query edge attributes
+for a subset of edges.}
 }
 \value{
 The value of the edge attribute, or the list of all
-edge attributes if \code{name} is missing.
+  edge attributes if \code{name} is missing.
 }
 \description{
 Query edge attributes of a graph

@@ -13,12 +13,12 @@ topo_sort(graph, mode = c("out", "all", "in"))
 \item{mode}{Specifies how to use the direction of the edges.  For
 \dQuote{\code{out}}, the sorting order ensures that each node comes before
 all nodes to which it has edges, so nodes with no incoming edges go first.
-For \dQuote{\verb{in}}, it is quite the opposite: each node comes before all
+For \dQuote{\code{in}}, it is quite the opposite: each node comes before all
 nodes from which it receives edges. Nodes with no outgoing edges go first.}
 }
 \value{
 A vertex sequence (by default, but see the \code{return.vs.es}
-option of \code{\link[=igraph_options]{igraph_options()}}) containing vertices in
+option of \code{\link{igraph_options}}) containing vertices in
 topologically sorted order.
 }
 \description{

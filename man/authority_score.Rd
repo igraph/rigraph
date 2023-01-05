@@ -22,16 +22,16 @@ random surfer model, an edge with a larger weight is more likely to be
 selected by the surfer.}
 
 \item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details.}
+\code{\link{arpack}} for details.}
 }
 \value{
 A named list with members:
-\item{vector}{The authority/hub scores of the vertices.}
-\item{value}{The corresponding eigenvalue of the calculated
-principal eigenvector.}
-\item{options}{Some information about the ARPACK computation, it has
-the same members as the \code{options} member returned
-by \code{\link[=arpack]{arpack()}}, see that for documentation.}
+  \item{vector}{The authority/hub scores of the vertices.}
+  \item{value}{The corresponding eigenvalue of the calculated
+    principal eigenvector.}
+  \item{options}{Some information about the ARPACK computation, it has
+    the same members as the \code{options} member returned
+    by \code{\link{arpack}}, see that for documentation.}
 }
 \description{
 The authority scores of the vertices are defined as the principal
@@ -41,7 +41,7 @@ matrix of the graph.
 \details{
 For undirected matrices the adjacency matrix is symmetric and the
 authority scores are the same as hub scores, see
-\code{\link[=hub_score]{hub_score()}}.
+\code{\link{hub_score}}.
 }
 \examples{
 ## An in-star
@@ -61,8 +61,8 @@ environment. \emph{Proc. 9th ACM-SIAM Symposium on Discrete Algorithms},
 as IBM Research Report RJ 10076, May 1997.
 }
 \seealso{
-\code{\link[=hub_score]{hub_score()}}, \code{\link[=eigen_centrality]{eigen_centrality()}} for
-eigenvector centrality, \code{\link[=page_rank]{page_rank()}} for the Page Rank
-scores. \code{\link[=arpack]{arpack()}} for the underlining machinery of the
+\code{\link{hub_score}}, \code{\link{eigen_centrality}} for
+eigenvector centrality, \code{\link{page_rank}} for the Page Rank
+scores. \code{\link{arpack}} for the underlining machinery of the
 computation.
 }

@@ -25,27 +25,27 @@
 #'
 #' Runs all package tests.
 #'
-#' The `testthat` package is needed to run all tests. The location tests
-#' themselves can be extracted from the package via `system.file("tests",
-#' package="igraph")`.
+#' The \code{testthat} package is needed to run all tests. The location tests
+#' themselves can be extracted from the package via \code{system.file("tests",
+#' package="igraph")}.
 #'
-#' This function simply calls the `test_dir` function from the
-#' `testthat` package on the test directory.
+#' This function simply calls the \code{test_dir} function from the
+#' \code{testthat} package on the test directory.
 #'
 #' @aliases igraphtest
-#' @return Whatever is returned by `test_dir` from the `testthat`
-#'   package.
+#' @return Whatever is returned by \code{test_dir} from the \code{testthat}
+#' package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
+
 igraph_test <- function() {
   do.call(require, list("testthat"))
-  tdir <- system.file("tests", package = "igraph")
+  tdir <- system.file("tests", package="igraph")
   do.call("test_dir", list(tdir))
 }
 
 
-# R_igraph_vers -----------------------------------------------------------------------
 
 #' Query igraph's version string
 #'
@@ -63,12 +63,15 @@ igraph_test <- function() {
 #' ## Compare to the package version
 #' packageDescription("igraph")$Version
 #' igraph_version()
-#'
+
+# R_igraph_vers -----------------------------------------------------------------------
+
+
 igraph_version <- function() {
   unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }
 
-checkpkg <- function(package_file, args = character()) {
+checkpkg <- function(package_file, args=character()) {
   package_file <- as.character(package_file)
   args <- as.character(args)
   do.call(":::", list("tools", ".check_packages"))(c(package_file, args))

@@ -49,18 +49,16 @@ An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 \examples{
 
 # A difficult graph, from the Provan-Shier paper
-g <- graph_from_literal(
-  s --+ a:b, a:b --+ t,
-  a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
-)
-st_min_cuts(g, source = "s", target = "t")
+g <- graph_from_literal(s --+ a:b, a:b --+ t,
+               a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b)
+st_min_cuts(g, source="s", target="t")
 }
 \references{
 JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-\code{\link[=st_cuts]{st_cuts()}}, \code{\link[=min_separators]{min_separators()}}
+\code{\link{st_cuts}}, \code{\link{min_separators}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

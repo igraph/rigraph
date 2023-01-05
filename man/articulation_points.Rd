@@ -15,12 +15,12 @@ bridges(graph)
 it is directed.}
 }
 \value{
-For \code{articulation_points()}, a numeric vector giving the vertex
-IDs of the articulation points of the input graph. For \code{bridges()}, a
+For \code{articulation_points}, a numeric vector giving the vertex
+IDs of the articulation points of the input graph. For \code{bridges}, a
 numeric vector giving the edge IDs of the bridges of the input graph.
 }
 \description{
-\code{articulation_points()} finds the articulation points (or cut vertices)
+\code{articulation_points} finds the articulation points (or cut vertices)
 }
 \details{
 Articulation points or cut vertices are vertices whose removal increases the
@@ -33,9 +33,9 @@ two.
 }
 \examples{
 
-g <- disjoint_union(make_full_graph(5), make_full_graph(5))
+g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
 clu <- components(g)$membership
-g <- add_edges(g, c(match(1, clu), match(2, clu)))
+g <- add_edges(g, c(match(1, clu), match(2, clu)) )
 articulation_points(g)
 
 g <- make_graph("krackhardt_kite")
@@ -43,9 +43,9 @@ bridges(g)
 
 }
 \seealso{
-\code{\link[=biconnected_components]{biconnected_components()}}, \code{\link[=components]{components()}},
-\code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
-\code{\link[=edge_connectivity]{edge_connectivity()}}
+\code{\link{biconnected_components}}, \code{\link{components}},
+\code{\link{is_connected}}, \code{\link{vertex_connectivity}},
+\code{\link{edge_connectivity}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

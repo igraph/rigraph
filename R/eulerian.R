@@ -23,35 +23,35 @@
 
 #' Find Eulerian paths or cycles in a graph
 #'
-#' `has_eulerian_path()` and `has_eulerian_cycle()` checks whether there
-#' is an Eulerian path or cycle in the input graph. `eulerian_path()` and
-#' `eulerian_cycle()` return such a path or cycle if it exists, and throws
+#' \code{has_eulerian_path} and \code{has_eulerian_cycle} checks whether there
+#' is an Eulerian path or cycle in the input graph. \code{eulerian_path} and
+#' \code{eulerian_cycle} return such a path or cycle if it exists, and throws
 #' an error otherwise.
 #'
-#' `has_eulerian_path()` decides whether the input graph has an Eulerian
-#' *path*, i.e. a path that passes through every edge of the graph exactly
-#' once, and returns a logical value as a result. `eulerian_path()` returns
+#' \code{has_eulerian_path} decides whether the input graph has an Eulerian
+#' \emph{path}, i.e. a path that passes through every edge of the graph exactly
+#' once, and returns a logical value as a result. \code{eulerian_path} returns
 #' a possible Eulerian path, described with its edge and vertex sequence, or
 #' throws an error if no such path exists.
 #'
-#' `has_eulerian_cycle()` decides whether the input graph has an Eulerian
-#' *cycle*, i.e. a path that passes through every edge of the graph exactly
+#' \code{has_eulerian_cycle} decides whether the input graph has an Eulerian
+#' \emph{cycle}, i.e. a path that passes through every edge of the graph exactly
 #' once and that returns to its starting point, and returns a logical value as
-#' a result. `eulerian_cycle()` returns a possible Eulerian cycle, described
+#' a result. \code{eulerian_cycle} returns a possible Eulerian cycle, described
 #' with its edge and vertex sequence, or throws an error if no such cycle exists.
 #'
 #' @param graph An igraph graph object
-#' @return For `has_eulerian_path()` and `has_eulerian_cycle()`, a logical
-#'   value that indicates whether the graph contains an Eulerian path or cycle.
-#'   For `eulerian_path()` and `eulerian_cycle()`, a named list with two
-#'   entries: \item{epath}{A vector containing the edge ids along the Eulerian
-#'   path or cycle.} \item{vpath}{A vector containing the vertex ids along the
-#'   Eulerian path or cycle.}
+#' @return For \code{has_eulerian_path} and \code{has_eulerian_cycle}, a logical
+#' value that indicates whether the graph contains an Eulerian path or cycle.
+#' For \code{eulerian_path} and \code{eulerian_cycle}, a named list with two
+#' entries: \item{epath}{A vector containing the edge ids along the Eulerian
+#' path or cycle.} \item{vpath}{A vector containing the vertex ids along the
+#' Eulerian path or cycle.}
 #'
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_graph(~ A - B - C - D - E - A - F - D - B - F - E)
+#' g <- make_graph( ~ A-B-C-D-E-A-F-D-B-F-E )
 #'
 #' has_eulerian_path(g)
 #' eulerian_path(g)

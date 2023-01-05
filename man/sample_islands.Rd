@@ -34,7 +34,7 @@ oc
 }
 
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}
+\code{\link{sample_gnp}}
 }
 \author{
 Samuel Thiriot

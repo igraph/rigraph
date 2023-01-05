@@ -20,7 +20,7 @@ attribute all edges will have the same weight.}
 A numeric vector of constraint scores
 }
 \description{
-Given a graph, \code{constraint()} calculates Burt's constraint for each
+Given a graph, \code{constraint} calculates Burt's constraint for each
 vertex.
 }
 \details{
@@ -43,7 +43,7 @@ graph adjacency matrix. For isolated vertices, constraint is undefined.
 }
 \examples{
 
-g <- sample_gnp(20, 5 / 20)
+g <- sample_gnp(20, 5/20)
 constraint(g)
 
 }

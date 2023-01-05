@@ -22,7 +22,7 @@ calculating eigenvector centrality.}
 \item{scale}{Whether to rescale the eigenvector centrality scores, such that
 the maximum score is one.}
 
-\item{options}{This is passed to \code{\link[=eigen_centrality]{eigen_centrality()}}, the options
+\item{options}{This is passed to \code{\link{eigen_centrality}}, the options
 for the ARPACK eigensolver.}
 
 \item{normalized}{Logical scalar. Whether to normalize the graph level
@@ -30,16 +30,16 @@ centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
-\item{vector}{The node-level centrality scores.}
-\item{value}{The corresponding eigenvalue.}
-\item{options}{ARPACK options, see the return value of
-\code{\link[=eigen_centrality]{eigen_centrality()}} for details.}
-\item{centralization}{The graph level centrality index.}
-\item{theoretical_max}{The same as above, the theoretical maximum
-centralization score for a graph with the same number of vertices.}
+  \item{vector}{The node-level centrality scores.}
+  \item{value}{The corresponding eigenvalue.}
+  \item{options}{ARPACK options, see the return value of
+    \code{\link{eigen_centrality}} for details.}
+  \item{centralization}{The graph level centrality index.}
+  \item{theoretical_max}{The same as above, the theoretical maximum
+    centralization score for a graph with the same number of vertices.}
 }
 \description{
-See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
+See \code{\link{centralize}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized
@@ -50,7 +50,7 @@ centr_betw(g, directed = FALSE)$centralization
 centr_eigen(g, directed = FALSE)$centralization
 
 # The most centralized graph according to eigenvector centrality
-g0 <- make_graph(c(2, 1), n = 10, dir = FALSE)
+g0 <- make_graph(c(2,1), n = 10, dir = FALSE)
 g1 <- make_star(10, mode = "undirected")
 centr_eigen(g0)$centralization
 centr_eigen(g1)$centralization

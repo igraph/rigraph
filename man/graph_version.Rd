@@ -20,10 +20,10 @@ that were created (and possibly saved to a file) with an older
 igraph version.
 }
 \details{
-\code{graph_version()} queries the current data format,
+\code{graph_version} queries the current data format,
 or the data format of a possibly older igraph graph.
 
-\code{\link[=upgrade_graph]{upgrade_graph()}} can convert an older data format
+\code{\link{upgrade_graph}} can convert an older data format
 to the current one.
 }
 \seealso{

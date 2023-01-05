@@ -52,7 +52,7 @@ random surfer model, an edge with a larger weight is more likely to be
 selected by the surfer.}
 
 \item{options}{A named list, to override some ARPACK options. See
-\code{\link[=arpack]{arpack()}} for details. This argument is ignored if the PRPACK
+\code{\link{arpack}} for details. This argument is ignored if the PRPACK
 implementation is used.}
 }
 \value{
@@ -62,7 +62,7 @@ method, the eigenvalue corresponding to the eigenvector with the PageRank scores
 is returned here. It is expected to be exactly one, and can be used to check
 that ARPACK has successfully converged to the expected eingevector. When using
 the PRPACK method, it is always set to 1.0.} \item{options}{Some information
-about the underlying ARPACK calculation. See \code{\link[=arpack]{arpack()}} for details.
+about the underlying ARPACK calculation. See \code{\link{arpack}} for details.
 This entry is \code{NULL} if not the ARPACK implementation was used.}
 }
 \description{
@@ -77,8 +77,8 @@ Sergey Brin and Larry Page: The Anatomy of a Large-Scale Hypertextual Web
 Search Engine. Proceedings of the 7th World-Wide Web Conference, Brisbane,
 Australia, April 1998.
 
-The \code{page_rank()} function can use either the PRPACK library or ARPACK
-(see \code{\link[=arpack]{arpack()}}) to perform the calculation.
+The \code{page_rank} function can use either the PRPACK library or ARPACK
+(see \code{\link{arpack}}) to perform the calculation.
 
 Please note that the PageRank of a given vertex depends on the PageRank of
 all other vertices, so even if you want to calculate the PageRank for only
@@ -88,7 +88,7 @@ increase at all.
 }
 \examples{
 
-g <- sample_gnp(20, 5 / 20, directed = TRUE)
+g <- sample_gnp(20, 5/20, directed=TRUE)
 page_rank(g)$vector
 
 g2 <- make_star(10)
@@ -98,7 +98,7 @@ page_rank(g2)$vector
 g3 <- make_ring(10)
 page_rank(g3)$vector
 reset <- seq(vcount(g3))
-page_rank(g3, personalized = reset)$vector
+page_rank(g3, personalized=reset)$vector
 }
 \references{
 Sergey Brin and Larry Page: The Anatomy of a Large-Scale
@@ -106,8 +106,8 @@ Hypertextual Web Search Engine. Proceedings of the 7th World-Wide Web
 Conference, Brisbane, Australia, April 1998.
 }
 \seealso{
-Other centrality scores: \code{\link[=closeness]{closeness()}},
-\code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}
+Other centrality scores: \code{\link{closeness}},
+\code{\link{betweenness}}, \code{\link{degree}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

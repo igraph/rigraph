@@ -31,10 +31,10 @@ version 0.7 this argument is coerced to a data frame with
 details below. Since version 0.7 this argument is coerced to a data frame
 with \code{as.data.frame}, if not \code{NULL}.}
 
-\item{...}{Passed to \code{graph_from_data_frame()}.}
+\item{...}{Passed to \code{graph_from_data_frame}.}
 }
 \value{
-An igraph graph object for \code{graph_from_data_frame()}, and either a
+An igraph graph object for \code{graph_from_data_frame}, and either a
 data frame or a list of two data frames named \code{edges} and
 \code{vertices} for \code{as.data.frame}.
 }
@@ -43,7 +43,7 @@ This function creates an igraph graph from one or two data frames containing
 the (symbolic) edge list and edge/vertex attributes.
 }
 \details{
-\code{graph_from_data_frame()} creates igraph graphs from one or two data frames.
+\code{graph_from_data_frame} creates igraph graphs from one or two data frames.
 It has two modes of operation, depending whether the \code{vertices}
 argument is \code{NULL} or not.
 
@@ -60,13 +60,13 @@ symbolic edge list given in \code{d} is checked to contain only vertex names
 listed in \code{vertices}.
 
 Typically, the data frames are exported from some spreadsheet software like
-Excel and are imported into R via \code{\link[=read.table]{read.table()}},
-\code{\link[=read.delim]{read.delim()}} or \code{\link[=read.csv]{read.csv()}}.
+Excel and are imported into R via \code{\link{read.table}},
+\code{\link{read.delim}} or \code{\link{read.csv}}.
 
 All edges in the data frame are included in the graph, which may include
 multiple parallel edges and loops.
 
-\code{as_data_frame()} converts the igraph graph into one or more data
+\code{as_data_frame} converts the igraph graph into one or more data
 frames, depending on the \code{what} argument.
 
 If the \code{what} argument is \code{edges} (the default), then the edges of
@@ -86,7 +86,7 @@ If the \code{what} argument is \code{both}, then both vertex and edge data
 is returned, in a list with named entries \code{vertices} and \code{edges}.
 }
 \note{
-For \code{graph_from_data_frame()} \code{NA} elements in the first two
+For \code{graph_from_data_frame} \code{NA} elements in the first two
 columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 the graph. This means that all \code{NA}s will correspond to a single
 vertex.
@@ -100,34 +100,26 @@ touched. In other words, vertex names (=the first column) cannot be
 
 ## A simple example with a couple of actors
 ## The typical case is that these tables are read in from files....
-actors <- data.frame(
-  name = c(
-    "Alice", "Bob", "Cecil", "David",
-    "Esmeralda"
-  ),
-  age = c(48, 33, 45, 34, 21),
-  gender = c("F", "M", "F", "M", "F")
-)
-relations <- data.frame(
-  from = c(
-    "Bob", "Cecil", "Cecil", "David",
-    "David", "Esmeralda"
-  ),
-  to = c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"),
-  same.dept = c(FALSE, FALSE, TRUE, FALSE, FALSE, TRUE),
-  friendship = c(4, 5, 5, 2, 1, 1), advice = c(4, 5, 5, 4, 2, 3)
-)
-g <- graph_from_data_frame(relations, directed = TRUE, vertices = actors)
-print(g, e = TRUE, v = TRUE)
+actors <- data.frame(name=c("Alice", "Bob", "Cecil", "David",
+                            "Esmeralda"),
+                     age=c(48,33,45,34,21),
+                     gender=c("F","M","F","M","F"))
+relations <- data.frame(from=c("Bob", "Cecil", "Cecil", "David",
+                               "David", "Esmeralda"),
+                        to=c("Alice", "Bob", "Alice", "Alice", "Bob", "Alice"),
+                        same.dept=c(FALSE,FALSE,TRUE,FALSE,FALSE,TRUE),
+                        friendship=c(4,5,5,2,1,1), advice=c(4,5,5,4,2,3))
+g <- graph_from_data_frame(relations, directed=TRUE, vertices=actors)
+print(g, e=TRUE, v=TRUE)
 
 ## The opposite operation
-as_data_frame(g, what = "vertices")
-as_data_frame(g, what = "edges")
+as_data_frame(g, what="vertices")
+as_data_frame(g, what="edges")
 
 }
 \seealso{
-\code{\link[=graph_from_literal]{graph_from_literal()}}
-for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables
+\code{\link{graph_from_literal}}
+for another way to create graphs, \code{\link{read.table}} to read in tables
 from files.
 }
 \author{

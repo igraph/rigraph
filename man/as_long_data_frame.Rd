@@ -23,10 +23,9 @@ they contain the numeric ids of the incident vertices. The rows are
 listed in the order of numeric vertex ids.
 }
 \examples{
-g <- make_(
-  ring(10),
-  with_vertex_(name = letters[1:10], color = "red"),
-  with_edge_(weight = 1:10, color = "green")
-)
+g <- make_(ring(10),
+        with_vertex_(name = letters[1:10], color = "red"),
+        with_edge_(weight = 1:10, color = "green")
+      )
 as_long_data_frame(g)
 }

@@ -27,11 +27,11 @@
 #'
 #' The new edges are given as a vertex sequence, e.g. internal
 #' numeric vertex ids, or vertex names. The first edge points from
-#' `edges[1]` to `edges[2]`, the second from `edges[3]`
-#' to `edges[4]`, etc.
+#' \code{edges[1]} to \code{edges[2]}, the second from \code{edges[3]}
+#' to \code{edges[4]}, etc.
 #'
 #' If attributes are supplied, and they are not present in the graph,
-#' their values for the original edges of the graph are set to `NA`.
+#' their values for the original edges of the graph are set to \code{NA}.
 #'
 #' @param graph The input graph
 #' @param edges The edges to add, a vertex sequence with even number
@@ -51,16 +51,12 @@
 #'
 #' @examples
 #' g <- make_empty_graph(n = 5) %>%
-#'   add_edges(c(
-#'     1, 2,
-#'     2, 3,
-#'     3, 4,
-#'     4, 5
-#'   )) %>%
+#'   add_edges(c(1,2, 2,3, 3,4, 4,5)) %>%
 #'   set_edge_attr("color", value = "red") %>%
-#'   add_edges(c(5, 1), color = "green")
+#'   add_edges(c(5,1), color = "green")
 #' E(g)[[]]
 #' plot(g)
+
 add_edges <- function(graph, edges, ..., attr = list()) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -69,25 +65,23 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
+  if (length(attrs) != 0 && (is.null(nam) || any(nam==""))) {
     stop("please supply names for attributes")
   }
 
   edges.orig <- ecount(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  graph <- .Call(C_R_igraph_add_edges, graph, as.igraph.vs(graph, edges) - 1)
+  on.exit( .Call(C_R_igraph_finalizer) )
+  graph <- .Call(C_R_igraph_add_edges, graph, as.igraph.vs(graph, edges)-1)
   edges.new <- ecount(graph)
 
-  if (edges.new - edges.orig != 0) {
-    idx <- seq(edges.orig + 1, edges.new)
+  if (edges.new-edges.orig != 0) {
+    idx <- seq(edges.orig+1, edges.new)
   } else {
     idx <- numeric()
   }
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-  for (i in seq(attrs)) {
-    eattrs[[nam[i]]][idx] <- attrs[[nam[i]]]
-  }
+  for (i in seq(attrs)) { eattrs[[nam[i]]][idx] <- attrs[[nam[i]]] }
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattrs)
 }
@@ -96,7 +90,7 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #'
 #' If attributes are supplied, and they are not present in the graph,
 #' their values for the original vertices of the graph are set to
-#' `NA`.
+#' \code{NA}.
 #'
 #' @param graph The input graph.
 #' @param nv The number of vertices to add.
@@ -116,16 +110,12 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #' g <- make_empty_graph() %>%
 #'   add_vertices(3, color = "red") %>%
 #'   add_vertices(2, color = "green") %>%
-#'   add_edges(c(
-#'     1, 2,
-#'     2, 3,
-#'     3, 4,
-#'     4, 5
-#'   ))
+#'   add_edges(c(1,2, 2,3, 3,4, 4,5))
 #' g
 #' V(g)[[]]
 #' plot(g)
-add_vertices <- function(graph, nv, ..., attr = list()) {
+
+add_vertices <- function(graph, nv, ..., attr=list()) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -133,25 +123,23 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   attrs <- list(...)
   attrs <- append(attrs, attr)
   nam <- names(attrs)
-  if (length(attrs) != 0 && (is.null(nam) || any(nam == ""))) {
+  if (length(attrs) != 0 && (is.null(nam) || any(nam==""))) {
     stop("please supply names for attributes")
   }
 
   vertices.orig <- vcount(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit( .Call(C_R_igraph_finalizer) )
   graph <- .Call(C_R_igraph_add_vertices, graph, as.numeric(nv))
   vertices.new <- vcount(graph)
 
-  if (vertices.new - vertices.orig != 0) {
-    idx <- seq(vertices.orig + 1, vertices.new)
+  if (vertices.new-vertices.orig != 0) {
+    idx <- seq(vertices.orig+1, vertices.new)
   } else {
     idx <- numeric()
   }
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
-  for (i in seq(attrs)) {
-    vattrs[[nam[i]]][idx] <- attrs[[nam[i]]]
-  }
+  for (i in seq(attrs)) { vattrs[[nam[i]]][idx] <- attrs[[nam[i]]] }
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattrs)
 }
@@ -160,9 +148,9 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #'
 #' @param graph The input graph.
 #' @param edges The edges to remove, specified as an edge sequence. Typically
-#'   this is either a numeric vector containing edge IDs, or a character vector
-#'   containing the IDs or names of the source and target vertices, separated by
-#'   `|`
+#' this is either a numeric vector containing edge IDs, or a character vector
+#' containing the IDs or names of the source and target vertices, separated by
+#' \code{|}
 #' @return The graph, with the edges removed.
 #'
 #' @aliases delete.edges
@@ -179,14 +167,15 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g
 #'
 #' g <- make_ring(5)
-#' g <- delete_edges(g, get.edge.ids(g, c(1, 5, 4, 5)))
+#' g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 #' g
+
 delete_edges <- function(graph, edges) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_delete_edges, graph, as.igraph.es(graph, edges) - 1)
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_delete_edges, graph, as.igraph.es(graph, edges)-1)
 }
 
 #' Delete vertices from a graph
@@ -205,16 +194,17 @@ delete_edges <- function(graph, edges) {
 #' g
 #' V(g)
 #'
-#' g2 <- delete_vertices(g, c(1, 5)) %>%
+#' g2 <- delete_vertices(g, c(1,5)) %>%
 #'   delete_vertices("B")
 #' g2
 #' V(g2)
+
 delete_vertices <- function(graph, v) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_delete_vertices, graph, as.igraph.vs(graph, v) - 1)
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_delete_vertices, graph, as.igraph.vs(graph, v)-1)
 }
 
 ###################################################################
@@ -223,7 +213,7 @@ delete_vertices <- function(graph, v) {
 
 #' The size of the graph (number of edges)
 #'
-#' `ecount()` is an alias of this function.
+#' \code{ecount} is an alias of this function.
 #'
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
@@ -233,19 +223,20 @@ delete_vertices <- function(graph, v) {
 #'
 #' @export
 #' @examples
-#' g <- sample_gnp(100, 2 / 100)
+#' g <- sample_gnp(100, 2/100)
 #' gsize(g)
 #' ecount(g)
 #'
 #' # Number of edges in a G(n,p) graph
-#' replicate(100, sample_gnp(10, 1 / 2), simplify = FALSE) %>%
+#' replicate(100, sample_gnp(10, 1/2), simplify = FALSE) %>%
 #'   vapply(gsize, 0) %>%
 #'   hist()
+
 gsize <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_ecount, graph)
 }
 
@@ -269,25 +260,21 @@ gsize <- function(graph) {
 #' n1 <- neighbors(g, 1)
 #' n34 <- neighbors(g, 34)
 #' intersection(n1, n34)
+
 neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (is.character(mode)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out"=1, "in"=2, "all"=3, "total"=3)
   }
   v <- as.igraph.vs(graph, v)
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_neighbors, graph, v - 1, as.numeric(mode)) + 1L
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- .Call(C_R_igraph_neighbors, graph, v-1, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) res <- create_vs(graph, res)
 
@@ -311,27 +298,23 @@ neighbors <- function(graph, v, mode = c("out", "in", "all", "total")) {
 #' g <- make_graph("Zachary")
 #' incident(g, 1)
 #' incident(g, 34)
-incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
+
+incident <- function(graph, v, mode=c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (is_directed(graph)) {
     mode <- igraph.match.arg(mode)
-    mode <- switch(mode,
-      "out" = 1,
-      "in" = 2,
-      "all" = 3,
-      "total" = 3
-    )
+    mode <- switch(mode, "out"=1, "in"=2, "all"=3, "total"=3)
   } else {
-    mode <- 1
+    mode=1
   }
   v <- as.igraph.vs(graph, v)
   if (length(v) == 0) {
     stop("No vertex was specified")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_incident, graph, v - 1, as.numeric(mode)) + 1L
+  on.exit( .Call(C_R_igraph_finalizer) )
+  res <- .Call(C_R_igraph_incident, graph, v-1, as.numeric(mode)) + 1L
 
   if (igraph_opt("return.vs.es")) res <- create_es(graph, res)
 
@@ -353,11 +336,12 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #'
 #' g2 <- make_ring(10, directed = TRUE)
 #' is_directed(g2)
+
 is_directed <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit( .Call(C_R_igraph_finalizer) )
   .Call(C_R_igraph_is_directed, graph)
 }
 
@@ -377,7 +361,9 @@ is_directed <- function(graph) {
 #' @examples
 #' g <- make_ring(5)
 #' ends(g, E(g))
+
 ends <- function(graph, es, names = TRUE) {
+
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -385,11 +371,12 @@ ends <- function(graph, es, names = TRUE) {
   es2 <- as.igraph.es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit( .Call(C_R_igraph_finalizer) )
 
   if (length(es) == 1) {
     res[, !is.na(es)] <- .Call(C_R_igraph_get_edge, graph, es2) + 1
-  } else {
+
+  } else  {
     res[, !is.na(es)] <- .Call(C_R_igraph_edges, graph, es2) + 1
   }
 
@@ -401,6 +388,7 @@ ends <- function(graph, es, names = TRUE) {
 }
 
 #' @export
+
 get.edges <- function(graph, es) {
   ends(graph, es, names = FALSE)
 }
@@ -421,20 +409,20 @@ get.edges <- function(graph, es) {
 #'
 #' @param graph The input graph.
 #' @param vp The incident vertices, given as vertex ids or symbolic vertex
-#'   names. They are interpreted pairwise, i.e. the first and second are used for
-#'   the first edge, the third and fourth for the second, etc.
+#' names. They are interpreted pairwise, i.e. the first and second are used for
+#' the first edge, the third and fourth for the second, etc.
 #' @param directed Logical scalar, whether to consider edge directions in
-#'   directed graphs. This argument is ignored for undirected graphs.
+#' directed graphs. This argument is ignored for undirected graphs.
 #' @param error Logical scalar, whether to report an error if an edge is not
-#'   found in the graph. If `FALSE`, then no error is reported, and zero is
-#'   returned for the non-existant edge(s).
+#' found in the graph. If \code{FALSE}, then no error is reported, and zero is
+#' returned for the non-existant edge(s).
 #' @param multi Logical scalar, whether to handle multiple edges properly. If
-#'   `FALSE`, and a pair of vertices are given twice (or more), then always
-#'   the same edge id is reported back for them. If `TRUE`, then the edge
-#'   ids of multiple edges are correctly reported.
+#' \code{FALSE}, and a pair of vertices are given twice (or more), then always
+#' the same edge id is reported back for them. If \code{TRUE}, then the edge
+#' ids of multiple edges are correctly reported.
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
-#'   If there is no edge in the input graph for a given pair of vertices, then
-#'   zero is reported. (If the `error` argument is `FALSE`.)
+#' If there is no edge in the input graph for a given pair of vertices, then
+#' zero is reported. (If the \code{error} argument is \code{FALSE}.)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @family structural queries
@@ -442,41 +430,40 @@ get.edges <- function(graph, es) {
 #' @examples
 #'
 #' g <- make_ring(10)
-#' ei <- get.edge.ids(g, c(1, 2, 4, 5))
+#' ei <- get.edge.ids(g, c(1,2, 4,5))
 #' E(g)[ei]
 #'
 #' ## non-existant edge
-#' get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
+#' get.edge.ids(g, c(2,1, 1,4, 5,4))
 #'
 #' ## multiple edges
 #' ## multi = FALSE, a single edge id is returned,
 #' ## as many times as corresponding pairs in the vertex series.
-#' g <- make_graph(rep(c(1, 2), 5))
-#' eis <- get.edge.ids(g, c(1, 2, 1, 2), multi = FALSE)
+#' g <-  make_graph(rep(c(1,2), 5))
+#' eis <- get.edge.ids(g, c(1,2, 1,2), multi=FALSE)
 #' eis
 #' E(g)[eis]
 #'
 #' ## multi = TRUE, as many different edges, if any,
 #' ## are returned as pairs in the vertex series.
-#' eim <- get.edge.ids(g, c(1, 2, 1, 2, 1, 2), multi = TRUE)
+#' eim <- get.edge.ids(g, c(1,2, 1,2, 1,2), multi=TRUE)
 #' eim
 #' E(g)[eim]
 #'
-get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALSE) {
+
+get.edge.ids <- function(graph, vp, directed=TRUE, error=FALSE, multi=FALSE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(
-    C_R_igraph_get_eids, graph, as.igraph.vs(graph, vp) - 1,
-    as.logical(directed), as.logical(error), as.logical(multi)
-  ) + 1
+  on.exit( .Call(C_R_igraph_finalizer) )
+  .Call(C_R_igraph_get_eids, graph, as.igraph.vs(graph, vp)-1,
+        as.logical(directed), as.logical(error), as.logical(multi)) + 1
 }
 
 
 #' Order (number of vertices) of a graph
 #'
-#' `vcount()` is an alias of this function.
+#' \code{vcount} is an alias of this function.
 #'
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
@@ -489,11 +476,12 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
+
 gorder <- gorder
 
 #' Adjacent vertices of multiple vertices in a graph
 #'
-#' This function is similar to [neighbors()], but it queries
+#' This function is similar to \code{\link{neighbors}}, but it queries
 #' the adjacent vertices for multiple vertices at once.
 #'
 #' @param graph Input graph.
@@ -508,19 +496,16 @@ gorder <- gorder
 #' @examples
 #' g <- make_graph("Zachary")
 #' adjacent_vertices(g, c(1, 34))
+
 adjacent_vertices <- function(graph, v,
-                              mode = c("out", "in", "all", "total")) {
+                               mode = c("out", "in", "all", "total")) {
+
   if (!is_igraph(graph)) stop("Not a graph object")
 
   vv <- as.igraph.vs(graph, v) - 1
-  mode <- switch(match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(C_R_igraph_finalizer) )
 
   res <- .Call(C_R_igraph_adjacent_vertices, graph, vv, mode)
 
@@ -536,7 +521,7 @@ adjacent_vertices <- function(graph, v,
 
 #' Incident edges of multiple vertices in a graph
 #'
-#' This function is similar to [incident()], but it
+#' This function is similar to \code{\link{incident}}, but it
 #' queries multiple vertices at once.
 #'
 #' @param graph Input graph.
@@ -551,19 +536,16 @@ adjacent_vertices <- function(graph, v,
 #' @examples
 #' g <- make_graph("Zachary")
 #' incident_edges(g, c(1, 34))
+
 incident_edges <- function(graph, v,
                            mode = c("out", "in", "all", "total")) {
+
   if (!is_igraph(graph)) stop("Not a graph object")
 
   vv <- as.igraph.vs(graph, v) - 1
-  mode <- switch(match.arg(mode),
-    "out" = 1,
-    "in" = 2,
-    "all" = 3,
-    "total" = 3
-  )
+  mode <- switch(match.arg(mode), "out" = 1, "in" = 2, "all" = 3, "total" = 3)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(C_R_igraph_finalizer) )
 
   res <- .Call(C_R_igraph_incident_edges, graph, vv, mode)
 

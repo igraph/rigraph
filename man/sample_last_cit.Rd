@@ -51,8 +51,8 @@ cit_cit_types(...)
 
 \item{agebins}{Number of aging bins.}
 
-\item{pref}{Vector (\code{sample_last_cit()} and \code{sample_cit_types()} or
-matrix (\code{sample_cit_cit_types()}) giving the (unnormalized) citation
+\item{pref}{Vector (\code{sample_last_cit} and \code{sample_cit_types} or
+matrix (\code{sample_cit_cit_types}) giving the (unnormalized) citation
 probabilities for the different vertex types.}
 
 \item{directed}{Logical scalar, whether to generate directed networks.}
@@ -69,15 +69,15 @@ graph as a vertex attribute called \sQuote{\code{type}}.}
 A new graph.
 }
 \description{
-\code{sample_last_cit()} creates a graph, where vertices age, and
+\code{sample_last_cit} creates a graph, where vertices age, and
 gain new connections based on how long ago their last citation
 happened.
 }
 \details{
-\code{sample_cit_cit_types()} is a stochastic block model where the
+\code{sample_cit_cit_types} is a stochastic block model where the
 graph is growing.
 
-\code{sample_cit_types()} is similarly a growing stochastic block model,
+\code{sample_cit_types} is similarly a growing stochastic block model,
 but the probability of an edge depends on the (potentially) cited
 vertex only.
 }

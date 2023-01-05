@@ -23,10 +23,10 @@ structure.
 }
 \details{
 Currently two methods are defined for this function. The default method
-works on the output of \code{\link[=components]{components()}}. (In fact it works on any
+works on the output of \code{\link{components}}. (In fact it works on any
 object that is a list with an entry called \code{membership}.)
 
-The second method works on \code{\link[=communities]{communities()}} objects.
+The second method works on \code{\link{communities}} objects.
 }
 \examples{
 g <- make_graph("Zachary")
@@ -37,6 +37,6 @@ g2 <- make_ring(10) + make_full_graph(5)
 groups(components(g2))
 }
 \seealso{
-\code{\link[=components]{components()}} and the various community finding
+\code{\link{components}} and the various community finding
 functions.
 }

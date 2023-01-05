@@ -88,8 +88,8 @@ is ignored if the \sQuote{orig} implementation is chosen.}
 }
 \value{
 If the \code{vertex} argument is not given, ie. the first form is
-used then a \code{\link[=cluster_spinglass]{cluster_spinglass()}} returns a
-\code{\link[=communities]{communities()}} object.
+used then a \code{\link{cluster_spinglass}} returns a
+\code{\link{communities}} object.
 
 If the \code{vertex} argument is present, ie. the second form is used then a
 named list is returned with the following components:
@@ -125,11 +125,11 @@ community of the the given vertex. See also the examples below.
 }
 \examples{
 
-g <- sample_gnp(10, 5 / 10) \%du\% sample_gnp(9, 5 / 9)
-g <- add_edges(g, c(1, 12))
-g <- induced_subgraph(g, subcomponent(g, 1))
-cluster_spinglass(g, spins = 2)
-cluster_spinglass(g, vertex = 1)
+  g <- sample_gnp(10, 5/10) \%du\% sample_gnp(9, 5/9)
+  g <- add_edges(g, c(1, 12))
+  g <- induced_subgraph(g, subcomponent(g, 1))
+  cluster_spinglass(g, spins=2)
+  cluster_spinglass(g, vertex=1)
 
 }
 \references{
@@ -144,7 +144,7 @@ V.A. Traag and Jeroen Bruggeman: Community detection in networks with
 positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 }
 \seealso{
-\code{\link[=communities]{communities()}}, \code{\link[=components]{components()}}
+\code{\link{communities}}, \code{\link{components}}
 }
 \author{
 Jorg Reichardt for the original code and Gabor Csardi

@@ -57,15 +57,15 @@ form.
 \code{summary.igraph} prints the number of vertices, edges and whether the
 graph is directed.
 
-\code{print_all()} prints the same information, and also lists the edges, and
+\code{print_all} prints the same information, and also lists the edges, and
 optionally graph, vertex and/or edge attributes.
 
-\code{print.igraph()} behaves either as \code{summary.igraph} or
-\code{print_all()} depending on the \code{full} argument. See also the
-\sQuote{print.full} igraph option and \code{\link[=igraph_opt]{igraph_opt()}}.
+\code{print.igraph} behaves either as \code{summary.igraph} or
+\code{print_all} depending on the \code{full} argument. See also the
+\sQuote{print.full} igraph option and \code{\link{igraph_opt}}.
 
-The graph summary printed by \code{summary.igraph} (and \code{print.igraph()}
-and \code{print_all()}) consists one or more lines. The first line contains
+The graph summary printed by \code{summary.igraph} (and \code{print.igraph}
+and \code{print_all}) consists one or more lines. The first line contains
 the basic properties of the graph, and the rest contains its attributes.
 Here is an example, a small star graph with weighted directed edges and named
 vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
@@ -74,7 +74,7 @@ vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
 The first line always
 starts with \code{IGRAPH}, showing you that the object is an igraph graph.
 Then a seven character code is printed, this the first seven characters
-of the unique id of the graph. See \code{\link[=graph_id]{graph_id()}} for more.
+of the unique id of the graph. See \code{\link{graph_id}} for more.
 Then a four letter long code string is printed. The first letter
 distinguishes between directed (\sQuote{\code{D}}) and undirected
 (\sQuote{\code{U}}) graphs. The second letter is \sQuote{\code{N}} for named
@@ -93,8 +93,8 @@ comma. After the attribute names, the kind of the attribute -- graph
 (\sQuote{\code{c}}), numeric (\sQuote{\code{n}}), logical
 (\sQuote{\code{l}}), or other (\sQuote{\code{x}}).
 
-As of igraph 0.4 \code{print_all()} and \code{print.igraph()} use the
-\code{max.print} option, see \code{\link[base:options]{base::options()}} for details.
+As of igraph 0.4 \code{print_all} and \code{print.igraph} use the
+\code{max.print} option, see \code{\link[base]{options}} for details.
 
 As of igraph 1.1.1, the \code{str.igraph} function is defunct, use
 \code{print_all()}.

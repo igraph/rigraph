@@ -11,7 +11,7 @@ as_graphnel(graph)
 \item{graph}{An igraph graph object.}
 }
 \value{
-\code{as_graphnel()} returns a graphNEL graph object.
+\code{as_graphnel} returns a graphNEL graph object.
 }
 \description{
 The graphNEL class is defined in the \code{graph} package, it is another
@@ -19,7 +19,7 @@ way to represent graphs. These functions are provided to convert between
 the igraph and the graphNEL objects.
 }
 \details{
-\code{as_graphnel()} converts an igraph graph to a graphNEL graph. It
+\code{as_graphnel} converts an igraph graph to a graphNEL graph. It
 converts all graph/vertex/edge attributes. If the igraph graph has a
 vertex attribute \sQuote{\code{name}}, then it will be used to assign
 vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
@@ -35,7 +35,7 @@ g2 <- graph_from_graphnel(GNEL)
 g2
 
 ## Directed
-g3 <- make_star(10, mode = "in")
+g3 <- make_star(10, mode="in")
 V(g3)$name <- letters[1:10]
 GNEL2 <- as_graphnel(g3)
 g4 <- graph_from_graphnel(GNEL2)
@@ -43,8 +43,8 @@ g4
 }
 }
 \seealso{
-\code{\link[=graph_from_graphnel]{graph_from_graphnel()}} for the other direction,
-\code{\link[=as_adj]{as_adj()}}, \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}},
-\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph.adjlist]{graph.adjlist()}} for
+\code{\link{graph_from_graphnel}} for the other direction,
+\code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
+\code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for
 other graph representations.
 }

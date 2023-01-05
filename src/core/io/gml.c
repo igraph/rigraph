@@ -611,8 +611,8 @@ int igraph_write_graph_gml(const igraph_t *graph, FILE *outstream,
     timestr[strlen(timestr) - 1] = '\0'; /* nicely remove \n */
 
     CHECK(fprintf(outstream,
-                  "Creator \"igraph %s\"\nVersion 1\ngraph\n[\n",
-                  creator ? creator : timestr));
+                  "Creator \"igraph version %s %s\"\nVersion 1\ngraph\n[\n",
+                  IGRAPH_VERSION, creator ? creator : timestr));
 
     IGRAPH_STRVECTOR_INIT_FINALLY(&gnames, 0);
     IGRAPH_STRVECTOR_INIT_FINALLY(&vnames, 0);

@@ -15,7 +15,7 @@ correspond to the vertices, and for each element the id in the new graph is
 given.}
 
 \item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
-the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.}
+the new graph. Please see \code{\link{attribute.combination}} for details.}
 }
 \value{
 A new graph object.
@@ -36,13 +36,12 @@ g$name <- "Ring"
 V(g)$name <- letters[1:vcount(g)]
 E(g)$weight <- runif(ecount(g))
 
-g2 <- contract(g, rep(1:5, each = 2),
-  vertex.attr.comb = toString
-)
+g2 <- contract(g, rep(1:5, each=2),
+                        vertex.attr.comb=toString)
 
 ## graph and edge attributes are kept, vertex attributes are
 ## combined using the 'toString' function.
-print(g2, g = TRUE, v = TRUE, e = TRUE)
+print(g2, g=TRUE, v=TRUE, e=TRUE)
 
 }
 \author{

@@ -28,22 +28,22 @@ is returned, if \code{FALSE} the edges in the cut and a the two (or more)
 partitions are also returned.}
 }
 \value{
-For \code{min_cut()} a nuieric constant, the value of the minimum
+For \code{min_cut} a nuieric constant, the value of the minimum
 cut, except if \code{value.only = FALSE}. In this case a named list with
 components:
-\item{value}{Numeric scalar, the cut value.}
-\item{cut}{Numeric vector, the edges in the cut.}
-\item{partition1}{The vertices in the first partition after the cut
-edges are removed. Note that these vertices might be actually in
-different components (after the cut edges are removed), as the graph
-may fall apart into more than two components.}
-\item{partition2}{The vertices in the second partition
-after the cut edges are removed. Note that these vertices might be
-actually in different components (after the cut edges are removed), as
-the graph may fall apart into more than two components.}
+  \item{value}{Numeric scalar, the cut value.}
+  \item{cut}{Numeric vector, the edges in the cut.}
+  \item{partition1}{The vertices in the first partition after the cut
+    edges are removed. Note that these vertices might be actually in
+    different components (after the cut edges are removed), as the graph
+    may fall apart into more than two components.}
+  \item{partition2}{The vertices in the second partition
+    after the cut edges are removed. Note that these vertices might be
+    actually in different components (after the cut edges are removed), as
+    the graph may fall apart into more than two components.}
 }
 \description{
-\code{min_cut()} calculates the minimum st-cut between two vertices in a graph
+\code{min_cut} calculates the minimum st-cut between two vertices in a graph
 (if the \code{source} and \code{target} arguments are given) or the minimum
 cut of the graph (if both \code{source} and \code{target} are \code{NULL}).
 }
@@ -57,8 +57,8 @@ to remove to separate the graph into (at least) two components. (Which is to
 make the graph \emph{not} strongly connected in the directed case.)
 
 The maximum flow between two vertices in a graph is the same as the minimum
-st-cut, so \code{max_flow()} and \code{min_cut()} essentially calculate the same
-quantity, the only difference is that \code{min_cut()} can be invoked without
+st-cut, so \code{max_flow} and \code{min_cut} essentially calculate the same
+quantity, the only difference is that \code{min_cut} can be invoked without
 giving the \code{source} and \code{target} arguments and then minimum of all
 possible minimum cuts is calculated.
 
@@ -67,19 +67,19 @@ used to calculate the minimum cut.
 }
 \examples{
 g <- make_ring(100)
-min_cut(g, capacity = rep(1, vcount(g)))
-min_cut(g, value.only = FALSE, capacity = rep(1, vcount(g)))
+min_cut(g, capacity=rep(1,vcount(g)))
+min_cut(g, value.only=FALSE, capacity=rep(1,vcount(g)))
 
-g2 <- graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
-E(g2)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
-min_cut(g2, value.only = FALSE)
+g2 <- graph( c(1,2,2,3,3,4, 1,6,6,5,5,4, 4,1) )
+E(g2)$capacity <- c(3,1,2, 10,1,3, 2)
+min_cut(g2, value.only=FALSE)
 }
 \references{
 M. Stoer and F. Wagner: A simple min-cut algorithm,
 \emph{Journal of the ACM}, 44 585-591, 1997.
 }
 \seealso{
-\code{\link[=max_flow]{max_flow()}} for the related maximum flow
-problem, \code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=vertex_connectivity]{vertex_connectivity()}}
+\code{\link{max_flow}} for the related maximum flow
+  problem, \code{\link{distances}}, \code{\link{edge_connectivity}},
+  \code{\link{vertex_connectivity}}
 }

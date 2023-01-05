@@ -1,13 +1,13 @@
 
 #' Random walk on a graph
 #'
-#' `random_walk()` performs a random walk on the graph and returns the
-#' vertices that the random walk passed through. `random_edge_walk()`
+#' \code{random_walk} performs a random walk on the graph and returns the
+#' vertices that the random walk passed through. \code{random_edge_walk}
 #' is the same but returns the edges that that random walk passed through.
 #'
 #' Do a random walk. From the given start vertex, take the given number of
 #' steps, choosing an edge from the actual vertex uniformly randomly. Edge
-#' directions are observed in directed graphs (see the `mode` argument
+#' directions are observed in directed graphs (see the \code{mode} argument
 #' as well). Multiple and loop edges are also observed.
 #'
 #' @param graph The input graph, might be undirected or directed.
@@ -17,15 +17,15 @@
 #'   probability that an edge is selected by the random walker. In other
 #'   words, larger edge weights correspond to stronger connections. The
 #'   \sQuote{weight} edge attribute is used if present. Supply
-#'   \sQuote{`NA`} here if you want to ignore the \sQuote{weight} edge
+#'   \sQuote{\code{NA}} here if you want to ignore the \sQuote{weight} edge
 #'   attribute.
-#' @param mode How to follow directed edges. `"out"` steps along the
-#'   edge direction, `"in"` is opposite to that. `"all"` ignores
+#' @param mode How to follow directed edges. \code{"out"} steps along the
+#'   edge direction, \code{"in"} is opposite to that. \code{"all"} ignores
 #'   edge directions. This argument is ignored for undirected graphs.
-#' @param stuck What to do if the random walk gets stuck. `"return"`
-#'   returns the partial walk, `"error"` raises an error.
-#' @return For `random_walk()`, a vertex sequence containing the vertices
-#'   along the walk. For `random_edge_walk()`, an edge sequence containing
+#' @param stuck What to do if the random walk gets stuck. \code{"return"}
+#'   returns the partial walk, \code{"error"} raises an error.
+#' @return For \code{random_walk}, a vertex sequence containing the vertices
+#'   along the walk. For \code{random_edge_walk}, an edge sequence containing
 #'   the edges along the walk.
 #' @export
 #' @examples

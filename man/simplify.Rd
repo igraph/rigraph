@@ -29,7 +29,7 @@ removed.}
 \item{edge.attr.comb}{Specifies what to do with edge attributes, if
 \code{remove.multiple=TRUE}. In this case many edges might be mapped to a
 single one in the new graph, and their attributes are combined. Please see
-\code{\link[=attribute.combination]{attribute.combination()}} for details on this.}
+\code{\link{attribute.combination}} for details on this.}
 }
 \value{
 a new graph object with the edges deleted.
@@ -43,13 +43,13 @@ vertex. Two edges are multiple edges if they have exactly the same two
 endpoints (for directed graphs order does matter). A graph is simple is
 it does not contain loop edges and multiple edges.
 
-\code{is_simple()} checks whether a graph is simple.
+\code{is_simple} checks whether a graph is simple.
 
-\code{simplify()} removes the loop and/or multiple edges from a graph.  If
+\code{simplify} removes the loop and/or multiple edges from a graph.  If
 both \code{remove.loops} and \code{remove.multiple} are \code{TRUE} the
 function returns a simple graph.
 
-\code{simplify_and_colorize()} constructs a new, simple graph from a graph and
+\code{simplify_and_colorize} constructs a new, simple graph from a graph and
 also sets a \code{color} attribute on both the vertices and the edges.
 The colors of the vertices represent the number of self-loops that were
 originally incident on them, while the colors of the edges represent the
@@ -61,16 +61,16 @@ to facilitate the usage of multigraphs with the VF2 algorithm.
 }
 \examples{
 
-g <- graph(c(1, 2, 1, 2, 3, 3))
+g <- graph( c(1,2,1,2,3,3) )
 is_simple(g)
-is_simple(simplify(g, remove.loops = FALSE))
-is_simple(simplify(g, remove.multiple = FALSE))
+is_simple(simplify(g, remove.loops=FALSE))
+is_simple(simplify(g, remove.multiple=FALSE))
 is_simple(simplify(g))
 }
 \seealso{
-\code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and
-\code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}},
-\code{\link[=delete_vertices]{delete_vertices()}}
+\code{\link{which_loop}}, \code{\link{which_multiple}} and
+\code{\link{count_multiple}}, \code{\link{delete_edges}},
+\code{\link{delete_vertices}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

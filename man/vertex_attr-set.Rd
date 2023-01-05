@@ -5,15 +5,14 @@
 \alias{vertex.attributes<-}
 \title{Set one or more vertex attributes}
 \usage{
-vertex_attr(graph, name, index = NULL) <- value
+vertex_attr(graph, name, index = V(graph)) <- value
 }
 \arguments{
 \item{graph}{The graph.}
 
 \item{name}{The name of the vertex attribute to set. If missing,
 then \code{value} must be a named list, and its entries are
-set as vertex attributes.
-If \code{NULL}, the default, the attribute is set for all vertices.}
+set as vertex attributes.}
 
 \item{index}{An optional vertex sequence to set the attributes
 of a subset of vertices.}
@@ -29,10 +28,8 @@ Set one or more vertex attributes
 }
 \examples{
 g <- make_ring(10)
-vertex_attr(g) <- list(
-  name = LETTERS[1:10],
-  color = rep("yellow", gorder(g))
-)
+vertex_attr(g) <- list(name = LETTERS[1:10],
+                        color = rep("yellow", gorder(g)))
 vertex_attr(g, "label") <- V(g)$name
 g
 plot(g)

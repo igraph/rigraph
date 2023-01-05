@@ -54,7 +54,7 @@ two dimensional or a three dimensional layout. Note that because of the
 nature of the DrL algorithm, the three dimensional layout takes
 significantly longer to compute.}
 
-\item{...}{Passed to \code{layout_with_drl()}.}
+\item{...}{Passed to \code{layout_with_drl}.}
 }
 \value{
 A numeric matrix with two columns.
@@ -104,9 +104,9 @@ There are five pre-defined parameter settings as well, these are called
 }
 \examples{
 
-g <- as.undirected(sample_pa(100, m = 1))
-l <- layout_with_drl(g, options = list(simmer.attraction = 0))
-plot(g, layout = l, vertex.size = 3, vertex.label = NA)
+g <- as.undirected(sample_pa(100, m=1))
+l <- layout_with_drl(g, options=list(simmer.attraction=0))
+plot(g, layout=l, vertex.size=3, vertex.label=NA)
 
 }
 \references{
@@ -115,7 +115,7 @@ Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 Reports, 2008. 2936: p. 1-10.
 }
 \seealso{
-\code{\link[=layout]{layout()}} for other layout generators.
+\code{\link{layout}} for other layout generators.
 }
 \author{
 Shawn Martin (\url{http://www.cs.otago.ac.nz/homepages/smartin/})

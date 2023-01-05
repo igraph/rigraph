@@ -21,7 +21,7 @@ all_simple_paths(
 
 \item{mode}{Character constant, gives whether the shortest paths to or
 from the given vertices should be calculated for directed graphs. If
-\code{out} then the shortest paths \emph{from} the vertex, if \verb{in}
+\code{out} then the shortest paths \emph{from} the vertex, if \code{in}
 then \emph{to} it will be considered. If \code{all}, the default, then
 the corresponding undirected graph will be used, ie. not directed paths
 are searched. This argument is ignored for undirected graphs.}
@@ -30,8 +30,8 @@ are searched. This argument is ignored for undirected graphs.}
 }
 \value{
 A list of integer vectors, each integer vector is a path from
-the source vertex to one of the target vertices. A path is given by its
-vertex ids.
+  the source vertex to one of the target vertices. A path is given by its
+  vertex ids.
 }
 \description{
 This function lists are simple paths from one source vertex to another
@@ -49,7 +49,7 @@ This function currently ignored multiple and loop edges.
 
 g <- make_ring(10)
 all_simple_paths(g, 1, 5)
-all_simple_paths(g, 1, c(3, 5))
+all_simple_paths(g, 1, c(3,5))
 
 }
 \keyword{graphs}

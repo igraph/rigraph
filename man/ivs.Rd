@@ -24,12 +24,12 @@ vertex sets to find. \code{NULL} means no limit.}
 vertex sets to find. \code{NULL} means no limit.}
 }
 \value{
-\code{ivs()},
-\code{largest_ivs()} and
-\code{maximal_ivs()} return a list containing numeric
+\code{ivs},
+\code{largest_ivs} and
+\code{maximal_ivs} return a list containing numeric
 vertex ids, each list element is an independent vertex set.
 
-\code{ivs_size()} returns an integer constant.
+\code{ivs_size} returns an integer constant.
 }
 \description{
 A vertex set is called independent if there no edges between any two
@@ -37,15 +37,15 @@ vertices in it. These functions find independent vertex sets in undirected
 graphs
 }
 \details{
-\code{ivs()} finds all independent vertex sets in the
+\code{ivs} finds all independent vertex sets in the
 network, obeying the size limitations given in the \code{min} and \code{max}
 arguments.
 
-\code{largest_ivs()} finds the largest independent vertex
+\code{largest_ivs} finds the largest independent vertex
 sets in the graph. An independent vertex set is largest if there is no
 independent vertex set with more vertices.
 
-\code{maximal_ivs()} finds the maximal independent vertex
+\code{maximal_ivs} finds the maximal independent vertex
 sets in the graph. An independent vertex set is maximal if it cannot be
 extended to a larger independent vertex set. The largest independent vertex
 sets are maximal, but the opposite is not always true.
@@ -64,7 +64,7 @@ reference below.
 set.seed(42)
 g <- sample_gnp(100, 0.9)
 ivs_size(g)
-ivs(g, min = ivs_size(g))
+ivs(g, min=ivs_size(g))
 largest_ivs(g)
 # Empty graph
 induced_subgraph(g, largest_ivs(g)[[1]])
@@ -77,7 +77,7 @@ algorithm for generating all the maximal independent sets. \emph{SIAM J
 Computing}, 6:505--517, 1977.
 }
 \seealso{
-\code{\link[=cliques]{cliques()}}
+\code{\link{cliques}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty

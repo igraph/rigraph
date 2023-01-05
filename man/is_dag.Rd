@@ -19,14 +19,14 @@ This function tests whether the given graph is a DAG, a directed acyclic
 graph.
 }
 \details{
-\code{is_dag()} checks whether there is a directed cycle in the graph. If not,
+\code{is_dag} checks whether there is a directed cycle in the graph. If not,
 the graph is a DAG.
 }
 \examples{
 
 g <- make_tree(10)
 is_dag(g)
-g2 <- g + edge(5, 1)
+g2 <- g + edge(5,1)
 is_dag(g2)
 }
 \author{

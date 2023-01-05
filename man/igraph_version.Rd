@@ -21,7 +21,6 @@ The igraph version string is always the same as the version of the R package.
 ## Compare to the package version
 packageDescription("igraph")$Version
 igraph_version()
-
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

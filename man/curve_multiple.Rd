@@ -23,15 +23,13 @@ solution is to bend the edges, with diffenent curvature, so that all of them
 are visible.
 }
 \details{
-\code{curve_multiple()} calculates the optimal \code{edge.curved} vector for
+\code{curve_multiple} calculates the optimal \code{edge.curved} vector for
 plotting a graph with multiple edges, so that all edges are visible.
 }
 \examples{
 
-g <- graph(c(
-  0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
-  2, 3, 2, 3, 2, 3, 2, 3, 0, 1
-) + 1)
+g <- graph( c(0,1,1,0,1,2,1,3,1,3,1,3,
+              2,3,2,3,2,3,2,3,0,1)+1 )
 
 curve_multiple(g)
 
@@ -40,8 +38,8 @@ plot(g)
 
 }
 \seealso{
-\link{igraph.plotting} for all plotting parameters,
-\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}}
+\code{\link{igraph.plotting}} for all plotting parameters,
+\code{\link{plot.igraph}}, \code{\link{tkplot}} and \code{\link{rglplot}}
 for plotting functions.
 }
 \author{

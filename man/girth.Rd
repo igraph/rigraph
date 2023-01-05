@@ -41,7 +41,7 @@ g <- make_ring(100)
 girth(g)
 
 # What about a random graph?
-g <- sample_gnp(1000, 1 / 1000)
+g <- sample_gnp(1000, 1/1000)
 girth(g)
 
 }

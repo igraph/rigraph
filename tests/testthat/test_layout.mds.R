@@ -1,4 +1,5 @@
 test_that("layout_with_mds works", {
+
   ## A tree
 
   g <- make_tree(10, 2, "undirected")
@@ -6,11 +7,11 @@ test_that("layout_with_mds works", {
   mymds <- function(g) {
     sp <- distances(g)
     sp <- sp * sp
-    sp <- sp - rowMeans(sp) - rep(rowMeans(sp), each = nrow(sp)) + mean(sp)
+    sp <- sp - rowMeans(sp) - rep(rowMeans(sp), each=nrow(sp)) + mean(sp)
     sp <- sp / -2
     ei <- eigen(sp)
     va <- sqrt(abs(ei$values[1:2]))
-    ei$vectors[, 1:2] * rep(va, each = nrow(sp))
+    ei$vectors[,1:2] * rep(va, each=nrow(sp))
   }
 
   expect_that(mymds(g), equals(layout_with_mds(g)))
@@ -26,8 +27,9 @@ test_that("layout_with_mds works", {
   ## Small stress test
 
   for (i in 1:10) {
-    g <- sample_gnp(100, 2 / 100)
+    g <- sample_gnp(100, 2/100)
     l <- layout_with_mds(g)
     expect_that(ncol(l), equals(2))
   }
+
 })

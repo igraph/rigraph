@@ -1,7 +1,7 @@
 sortgl <- function(x) {
   cl <- lapply(x$cliques, sort)
   n <- sapply(cl, length)
-  list(cliques = cl[order(n)], thresholds = x$thresholds[order(n)])
+  list(cliques=cl[order(n)], thresholds=x$thresholds[order(n)])
 }
 
 test_that("Graphlets work for some simple graphs", {
@@ -16,20 +16,18 @@ test_that("Graphlets work for some simple graphs", {
 
   g2 <- make_full_graph(5)
   E(g2)$weight <- 1
-  E(g2)[1 %--% 2]$weight <- 2
+  E(g2)[1%--%2]$weight <- 2
   gl2 <- sortgl(graphlet_basis(g2))
 
-  expect_that(gl2, equals(list(cliques = list(1:2, 1:5), thresholds = c(2, 1))))
+  expect_that(gl2, equals(list(cliques=list(1:2, 1:5), thresholds=c(2,1))))
 })
 
 test_that("Graphlets filtering works", {
-  gt <- data.frame(
-    from = c("A", "A", "B", "B", "B", "C", "C", "D"),
-    to = c("B", "C", "C", "D", "E", "D", "E", "E"),
-    weight = c(8, 8, 8, 5, 5, 5, 5, 5)
-  )
+  gt <- data.frame(from  =c("A", "A", "B", "B", "B", "C", "C", "D"),
+                   to    =c("B", "C", "C", "D", "E", "D", "E", "E"),
+                   weight=c( 8 ,  8 ,  8 ,  5 ,  5 ,  5 ,  5 ,  5 ))
 
-  g <- graph_from_data_frame(gt, directed = FALSE, vertices = data.frame(LETTERS[1:5]))
+  g <- graph_from_data_frame(gt, directed=FALSE, vertices=data.frame(LETTERS[1:5]))
   gl <- sortgl(graphlet_basis(g))
 
   expect_that(gl$cliques, equals(list(1:3, 2:5)))
@@ -46,13 +44,12 @@ threshold.net <- function(graph, level) {
 
   clqt <- unvs(max_cliques(graph.t))
   clqt <- lapply(clqt, sort)
-  clqt[order(sapply(clqt, length), decreasing = TRUE)]
+  clqt[order(sapply(clqt, length), decreasing=TRUE)]
 }
 
 graphlets.old <- function(graph) {
-  if (!is_weighted(graph)) {
-    stop("Graph not weighted")
-  }
+
+  if (!is_weighted(graph)) { stop("Graph not weighted") }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
@@ -63,7 +60,7 @@ graphlets.old <- function(graph) {
   })
 
   ## Put the cliques in one long list
-  clv <- unlist(cl, recursive = FALSE)
+  clv <- unlist(cl, recursive=FALSE)
 
   ## Sort the vertices within the cliques
   cls <- lapply(clv, sort)
@@ -80,33 +77,32 @@ graphlets.old <- function(graph) {
 test_that("Graphlets work for a bigger graph", {
   set.seed(42)
   g <- make_graph("zachary")
-  E(g)$weight <- sample(1:5, ecount(g), replace = TRUE)
+  E(g)$weight <- sample(1:5, ecount(g), replace=TRUE)
 
   gl <- graphlet_basis(g)
   gl2 <- graphlets.old(g)
 
-  glo <- sort(sapply(unvs(gl$cliques), paste, collapse = "-"))
-  gl2o <- sort(sapply(gl2, paste, collapse = "-"))
+  glo <- sort(sapply(unvs(gl$cliques), paste, collapse="-"))
+  gl2o <- sort(sapply(gl2, paste, collapse="-"))
 
   expect_that(glo, equals(gl2o))
 })
 
-graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
-  if (!is_weighted(graph)) {
-    stop("Graph not weighted")
-  }
+graphlets.project.old <- function(graph, cliques, iter, Mu=NULL) {
+
+  if (!is_weighted(graph)) { stop("Graph not weighted") }
   if (min(E(graph)$weight) <= 0 || any(!is.finite(E(graph)$weight))) {
     stop("Edge weights must be non-negative and finite")
   }
   if (length(iter) != 1 || !is.numeric(iter) ||
-    !is.finite(iter) || iter != as.integer(iter)) {
+      !is.finite(iter) || iter != as.integer(iter)) {
     stop("`iter' must be a non-negative finite integer scalar")
   }
 
   clf <- cliques
 
   ## Create vertex-clique list first
-  vcl <- vector(length = vcount(graph), mode = "list")
+  vcl <- vector(length=vcount(graph), mode="list")
   for (i in 1:length(clf)) {
     for (j in clf[[i]]) {
       vcl[[j]] <- c(vcl[[j]], i)
@@ -115,16 +111,16 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 
   ## Create edge-clique list from this, it is useful to have the edge list
   ## of the graph at hand
-  el <- as_edgelist(graph, names = FALSE)
-  ecl <- vector(length = ecount(graph), mode = "list")
+  el <- as_edgelist(graph, names=FALSE)
+  ecl <- vector(length=ecount(graph), mode="list")
   for (i in 1:ecount(graph)) {
-    edge <- el[i, ]
+    edge <- el[i,]
     ecl[[i]] <- intersect(vcl[[edge[1]]], vcl[[edge[2]]])
   }
 
   ## We will also need a clique-edge list, the edges in the cliques
   system.time({
-    cel <- vector(length = length(clf), mode = "list")
+    cel <- vector(length=length(clf), mode="list")
     for (i in 1:length(ecl)) {
       for (j in ecl[[i]]) {
         cel[[j]] <- c(cel[[j]], i)
@@ -133,15 +129,13 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   })
 
   ## OK, we are ready to do the projection now
-  if (is.null(Mu)) {
-    Mu <- rep(1, length(clf))
-  }
+  if (is.null(Mu)) { Mu <- rep(1, length(clf)) }
   origw <- E(graph)$weight
   w <- numeric(length(ecl))
   a <- sapply(clf, function(x) length(x) * (length(x) + 1) / 2)
   for (i in 1:iter) {
     for (j in 1:length(ecl)) {
-      w[j] <- sum(Mu[ecl[[j]]])
+      w[j] <- sum(Mu[ ecl[[j]] ])
     }
     for (j in 1:length(clf)) {
       Mu[j] <- Mu[j] * sum(origw[cel[[j]]] / (w[cel[[j]]] + .0001)) / a[j]
@@ -149,8 +143,8 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
   }
 
   ## Sort the cliques according to their weights
-  Smb <- sort(Mu, decreasing = TRUE, index.return = TRUE)
-  list(cliques = clf[Smb$ix], Mu = Mu[Smb$ix])
+  Smb <- sort(Mu, decreasing=TRUE, index.return=TRUE)
+  list(cliques=clf[Smb$ix], Mu=Mu[Smb$ix])
 }
 
 test_that("Graphlet projection works", {
@@ -160,12 +154,12 @@ test_that("Graphlet projection works", {
   D1[1:3, 1:3] <- 2
   D2[3:5, 3:5] <- 3
   D3[2:5, 2:5] <- 1
-  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode = "undirected", weighted = TRUE)
+  g <- graph_from_adjacency_matrix(D1 + D2 + D3, mode="undirected", weighted=TRUE)
   g <- simplify(g)
 
   gl <- graphlet_basis(g)
   glp <- graphlets(g)
-  glp2 <- graphlets.project.old(g, cliques = gl$cliques, iter = 1000)
+  glp2 <- graphlets.project.old(g, cliques=gl$cliques, iter=1000)
 
   glp$cliques <- unvs(glp$cliques)
   expect_that(glp, equals(glp2))

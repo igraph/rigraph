@@ -29,10 +29,10 @@
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
 #'
-#' `graph_version()` queries the current data format,
+#' \code{graph_version} queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' [upgrade_graph()] can convert an older data format
+#' \code{\link{upgrade_graph}} can convert an older data format
 #' to the current one.
 #'
 #' @param graph The input graph. If it is missing, then
@@ -41,9 +41,11 @@
 #'
 #' @seealso upgrade_graph to convert the data format of a graph.
 #' @export
+
 graph_version <- function(graph) {
   if (missing(graph)) {
     "0.8.0"
+
   } else {
     stopifnot(is_igraph(graph))
     .Call(C_R_igraph_graph_version, graph)
@@ -57,10 +59,10 @@ graph_version <- function(graph) {
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
 #'
-#' [graph_version()] queries the current data format,
+#' \code{\link{graph_version}} queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' `upgrade_graph()` can convert an older data format
+#' \code{upgrade_graph} can convert an older data format
 #' to the current one.
 #'
 #' @param graph The input graph.
@@ -69,22 +71,29 @@ graph_version <- function(graph) {
 #' @seealso graph_version to check the current data format version
 #' or the version of a graph.
 #' @export
+
 upgrade_graph <- function(graph) {
+
   stopifnot(is_igraph(graph))
 
   g_ver <- graph_version(graph)
   p_ver <- graph_version()
 
   if (g_ver < p_ver) {
+
     if ((g_ver == "0.4.0" && p_ver == "0.8.0")) {
       .Call(C_R_igraph_add_env, graph)
+
     } else if (g_ver == "0.7.999" && p_ver == "0.8.0") {
       .Call(C_R_igraph_add_version_to_env, graph)
+
     } else {
       stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
     }
+
   } else if (g_ver > p_ver) {
     stop("Don't know how to downgrade graph from ", g_ver, " to ", p_ver)
+
   } else {
     graph
   }
@@ -94,20 +103,16 @@ upgrade_graph <- function(graph) {
 
 check_version <- function(graph) {
   if (graph_version() != graph_version(graph)) {
-    stop(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version"
-    )
+    stop("This graph was created by an old(er) igraph version.\n",
+         "  Call upgrade_graph() on it to use with the current igraph version")
   }
 }
 
 warn_version <- function(graph) {
   if (graph_version() != graph_version(graph)) {
-    message(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version\n",
-      "  For now we convert it on the fly..."
-    )
+    message("This graph was created by an old(er) igraph version.\n",
+            "  Call upgrade_graph() on it to use with the current igraph version\n",
+            "  For now we convert it on the fly...")
     TRUE
   } else {
     FALSE

@@ -15,21 +15,21 @@ centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
 given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{closeness()}.}
+\code{closeness}.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
-closeness centrality score for graphs with given order and other
-parameters.
+  closeness centrality score for graphs with given order and other
+  parameters.
 }
 \description{
-See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
+See \code{\link{centralize}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
 centr_clo(g, normalized = FALSE)$centralization \%>\%
-  `/`(centr_clo_tmax(g))
+ `/`(centr_clo_tmax(g))
 centr_clo(g, normalized = TRUE)$centralization
 }
 \seealso{

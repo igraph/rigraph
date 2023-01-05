@@ -23,7 +23,7 @@
 
 #' Minimum spanning tree
 #'
-#' A subgraph of a connected graph is a *minimum spanning tree* if it is
+#' A subgraph of a connected graph is a \emph{minimum spanning tree} if it is
 #' tree, and the sum of its edge weights are the minimal among all tree
 #' subgraphs of the graph. A minimum spanning forest of a graph is the graph
 #' consisting of the minimum spanning trees of its components.
@@ -33,33 +33,34 @@
 #' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
 #' @param weights Numeric algorithm giving the weights of the edges in the
-#'   graph. The order is determined by the edge ids. This is ignored if the
-#'   `unweighted` algorithm is chosen. Edge weights are interpreted as
-#'   distances.
-#' @param algorithm The algorithm to use for calculation. `unweighted` can
-#'   be used for unweighted graphs, and `prim` runs Prim's algorithm for
-#'   weighted graphs.  If this is `NULL` then igraph tries to select the
-#'   algorithm automatically: if the graph has an edge attribute called
-#'   `weight` or the `weights` argument is not `NULL` then Prim's
-#'   algorithm is chosen, otherwise the unweighted algorithm is performed.
+#' graph. The order is determined by the edge ids. This is ignored if the
+#' \code{unweighted} algorithm is chosen. Edge weights are interpreted as
+#' distances.
+#' @param algorithm The algorithm to use for calculation. \code{unweighted} can
+#' be used for unweighted graphs, and \code{prim} runs Prim's algorithm for
+#' weighted graphs.  If this is \code{NULL} then igraph tries to select the
+#' algorithm automatically: if the graph has an edge attribute called
+#' \code{weight} or the \code{weights} argument is not \code{NULL} then Prim's
+#' algorithm is chosen, otherwise the unweighted algorithm is performed.
 #' @param \dots Additional arguments, unused.
 #' @return A graph object with the minimum spanning forest. (To check that it
-#'   is a tree check that the number of its edges is `vcount(graph)-1`.)
-#'   The edge and vertex attributes of the original graph are preserved in the
-#'   result.
+#' is a tree check that the number of its edges is \code{vcount(graph)-1}.)
+#' The edge and vertex attributes of the original graph are preserved in the
+#' result.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [components()]
+#' @seealso \code{\link{components}}
 #' @references Prim, R.C. 1957. Shortest connection networks and some
-#' generalizations *Bell System Technical Journal*, 37 1389--1401.
+#' generalizations \emph{Bell System Technical Journal}, 37 1389--1401.
 #' @export
 #' @keywords graphs
 #' @examples
 #'
-#' g <- sample_gnp(100, 3 / 100)
+#' g <- sample_gnp(100, 3/100)
 #' g_mst <- mst(g)
 #'
-mst <- function(graph, weights = NULL,
-                algorithm = NULL, ...) {
+mst <- function(graph, weights=NULL,
+                                  algorithm=NULL, ...) {
+
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -72,16 +73,16 @@ mst <- function(graph, weights = NULL,
     }
   }
 
-  if (algorithm == "unweighted") {
-    on.exit(.Call(C_R_igraph_finalizer))
+  if (algorithm=="unweighted") {
+    on.exit( .Call(C_R_igraph_finalizer) )
     .Call(C_R_igraph_minimum_spanning_tree_unweighted, graph)
-  } else if (algorithm == "prim") {
-    if (is.null(weights) && !"weight" %in% edge_attr_names(graph)) {
+  } else if (algorithm=="prim") {
+    if (is.null(weights) && ! "weight" %in% edge_attr_names(graph)) {
       stop("edges weights must be supplied for Prim's algorithm")
     } else if (is.null(weights)) {
       weights <- E(graph)$weight
     }
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit( .Call(C_R_igraph_finalizer) )
     .Call(C_R_igraph_minimum_spanning_tree_prim, graph, as.numeric(weights))
   } else {
     stop("Invalid algorithm")

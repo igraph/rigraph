@@ -33,14 +33,14 @@ Creates a separate graph for each component of a graph.
 \examples{
 
 # the diameter of each component in a random graph
-g <- sample_gnp(1000, 1 / 1000)
-components <- decompose(g, min.vertices = 2)
+g <- sample_gnp(1000, 1/1000)
+components <- decompose(g, min.vertices=2)
 sapply(components, diameter)
 
 }
 \seealso{
-\code{\link[=is_connected]{is_connected()}} to decide whether a graph is connected,
-\code{\link[=components]{components()}} to calculate the connected components of a graph.
+\code{\link{is_connected}} to decide whether a graph is connected,
+\code{\link{components}} to calculate the connected components of a graph.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

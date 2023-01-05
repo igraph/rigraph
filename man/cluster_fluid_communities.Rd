@@ -15,8 +15,8 @@ Edge directions are ignored. Weights are not considered.}
 greater than 0 and fewer than number of vertices in the graph.}
 }
 \value{
-\code{cluster_fluid_communities()} returns a \code{\link[=communities]{communities()}}
-object, please see the \code{\link[=communities]{communities()}} manual page for details.
+\code{cluster_fluid_communities} returns a \code{\link{communities}}
+object, please see the \code{\link{communities}} manual page for details.
 }
 \description{
 The algorithm detects communities based on the simple idea of
@@ -31,22 +31,22 @@ comms <- cluster_fluid_communities(g, 2)
 \references{
 Parés F, Gasulla DG, et. al. (2018) Fluid Communities: A Competitive,
 Scalable and Diverse Community Detection Algorithm. In: Complex Networks
-& Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
+&amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
 International Conference on Complex Networks and Their Applications),
 Springer, vol 689, p 229, doi: 10.1007/978-3-319-72150-7_19
 }
 \seealso{
-See \code{\link[=communities]{communities()}} for extracting the membership,
+See \code{\link{communities}} for extracting the membership,
 modularity scores, etc. from the results.
 
-Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_walktrap()}},
-\code{\link[=cluster_spinglass]{cluster_spinglass()}},
-\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
-\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
-\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
-\code{\link[=cluster_label_prop]{cluster_label_prop()}}
-\code{\link[=cluster_louvain]{cluster_louvain()}},
-\code{\link[=cluster_leiden]{cluster_leiden()}}
+Other community detection algorithms: \code{\link{cluster_walktrap}},
+\code{\link{cluster_spinglass}},
+\code{\link{cluster_leading_eigen}},
+\code{\link{cluster_edge_betweenness}},
+\code{\link{cluster_fast_greedy}},
+\code{\link{cluster_label_prop}}
+\code{\link{cluster_louvain}},
+\code{\link{cluster_leiden}}
 }
 \author{
 Ferran Parés

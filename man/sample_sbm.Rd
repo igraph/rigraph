@@ -26,7 +26,7 @@ group. The sum of the vector must match the number of vertices.}
 
 \item{loops}{Logical scalar, whether self-loops are allowed in the graph.}
 
-\item{...}{Passed to \code{sample_sbm()}.}
+\item{...}{Passed to \code{sample_sbm}.}
 }
 \value{
 An igraph graph.
@@ -44,8 +44,8 @@ The order of the vertices in the generated graph corresponds to the
 \examples{
 
 ## Two groups with not only few connection between groups
-pm <- cbind(c(.1, .001), c(.001, .05))
-g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
+pm <- cbind( c(.1, .001), c(.001, .05) )
+g <- sample_sbm(1000, pref.matrix=pm, block.sizes=c(300,700))
 g
 }
 \references{
@@ -53,7 +53,7 @@ Faust, K., & Wasserman, S. (1992a). Blockmodels: Interpretation
 and evaluation. \emph{Social Networks}, 14, 5--61.
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_gnm]{sample_gnm()}}
+\code{\link{sample_gnp}}, \code{\link{sample_gnm}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

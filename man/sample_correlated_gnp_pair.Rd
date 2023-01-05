@@ -35,10 +35,8 @@ shuffling its vertices.
 Please see the reference given below.
 }
 \examples{
-gg <- sample_correlated_gnp_pair(
-  n = 10, corr = .8, p = .5,
-  directed = FALSE
-)
+gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
+           directed = FALSE)
 gg
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 }
@@ -48,7 +46,7 @@ graph matching for correlated Erdos-Renyi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
-\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
-\code{\link[=sample_gnp]{sample_gnp()}}.
+\code{\link{sample_correlated_gnp}},
+  \code{\link{sample_gnp}}.
 }
 \keyword{graphs}

@@ -20,37 +20,37 @@ Note that the \code{weight} edge attribute is not used by this function.}
 }
 \value{
 A named list with components:
-\item{value}{A numeric scalar, the value of the maximum flow.}
-\item{flow}{A numeric vector, the flow itself, one entry for each
-edge. For undirected graphs this entry is bit trickier, since for
-these the flow direction is not predetermined by the edge
-direction. For these graphs the elements of the this vector can be
-negative, this means that the flow goes from the bigger vertex id to
-the smaller one. Positive values mean that the flow goes from
-the smaller vertex id to the bigger one.}
-\item{cut}{A numeric vector of edge ids, the minimum cut corresponding
-to the maximum flow.}
-\item{partition1}{A numeric vector of vertex ids, the vertices in the
-first partition of the minimum cut corresponding to the maximum
-flow.}
-\item{partition2}{A numeric vector of vertex ids, the vertices in the
-second partition of the minimum cut corresponding to the maximum
-flow.}
-\item{stats}{A list with some statistics from the push-relabel
-algorithm. Five integer values currently: \code{nopush} is the
-number of push operations, \code{norelabel} the number of
-relabelings, \code{nogap} is the number of times the gap heuristics
-was used, \code{nogapnodes} is the total number of gap nodes omitted
-because of the gap heuristics and \code{nobfs} is the number of
-times a global breadth-first-search update was performed to assign
-better height (=distance) values to the vertices.}
+  \item{value}{A numeric scalar, the value of the maximum flow.}
+  \item{flow}{A numeric vector, the flow itself, one entry for each
+    edge. For undirected graphs this entry is bit trickier, since for
+    these the flow direction is not predetermined by the edge
+    direction. For these graphs the elements of the this vector can be
+    negative, this means that the flow goes from the bigger vertex id to
+    the smaller one. Positive values mean that the flow goes from
+    the smaller vertex id to the bigger one.}
+  \item{cut}{A numeric vector of edge ids, the minimum cut corresponding
+    to the maximum flow.}
+  \item{partition1}{A numeric vector of vertex ids, the vertices in the
+    first partition of the minimum cut corresponding to the maximum
+    flow.}
+  \item{partition2}{A numeric vector of vertex ids, the vertices in the
+    second partition of the minimum cut corresponding to the maximum
+    flow.}
+  \item{stats}{A list with some statistics from the push-relabel
+    algorithm. Five integer values currently: \code{nopush} is the
+    number of push operations, \code{norelabel} the number of
+    relabelings, \code{nogap} is the number of times the gap heuristics
+    was used, \code{nogapnodes} is the total number of gap nodes omitted
+    because of the gap heuristics and \code{nobfs} is the number of
+    times a global breadth-first-search update was performed to assign
+    better height (=distance) values to the vertices.}
 }
 \description{
 In a graph where each edge has a given flow capacity the maximal flow
 between two vertices is calculated.
 }
 \details{
-\code{max_flow()} calculates the maximum flow between two vertices in a
+\code{max_flow} calculates the maximum flow between two vertices in a
 weighted (ie. valued) graph. A flow from \code{source} to \code{target} is
 an assignment of non-negative real numbers to the edges of the graph,
 satisfying two properties: (1) for each edge the flow (ie. the assigned
@@ -62,17 +62,17 @@ is the flow of maximum value.
 }
 \examples{
 
-E <- rbind(c(1, 3, 3), c(3, 4, 1), c(4, 2, 2), c(1, 5, 1), c(5, 6, 2), c(6, 2, 10))
+E <- rbind( c(1,3,3), c(3,4,1), c(4,2,2), c(1,5,1), c(5,6,2), c(6,2,10))
 colnames(E) <- c("from", "to", "capacity")
 g1 <- graph_from_data_frame(as.data.frame(E))
-max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
+max_flow(g1, source=V(g1)["1"], target=V(g1)["2"])
 }
 \references{
 A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 Flow Problem \emph{Journal of the ACM} 35:921-940, 1988.
 }
 \seealso{
-\code{\link[=min_cut]{min_cut()}} for minimum cut calculations,
-\code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=vertex_connectivity]{vertex_connectivity()}}
+\code{\link{min_cut}} for minimum cut calculations,
+  \code{\link{distances}}, \code{\link{edge_connectivity}},
+  \code{\link{vertex_connectivity}}
 }

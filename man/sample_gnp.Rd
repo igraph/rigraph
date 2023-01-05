@@ -20,7 +20,7 @@ FALSE.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to FALSE.}
 
-\item{...}{Passed to \code{sample_gnp()}.}
+\item{...}{Passed to \code{sample_gnp}.}
 }
 \value{
 A graph object.
@@ -35,7 +35,7 @@ probability that it is present in the graph is \sQuote{p}.
 }
 \examples{
 
-g <- sample_gnp(1000, 1 / 1000)
+g <- sample_gnp(1000, 1/1000)
 degree_distribution(g)
 }
 \references{
@@ -43,7 +43,7 @@ Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
-\code{\link[=sample_gnm]{sample_gnm()}}, \code{\link[=sample_pa]{sample_pa()}}
+\code{\link{sample_gnm}}, \code{\link{sample_pa}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -27,8 +27,8 @@ should be even. For directed graphs its sum should be the same as the sum of
 \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
 implemented.}
 
-\item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
-or to \code{sample_degseq()} otherwise.}
+\item{...}{Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
+or to \code{sample_degseq} otherwise.}
 
 \item{deterministic}{Whether the construction should be deterministic}
 }
@@ -73,40 +73,36 @@ undirected, connected simple graphs uniformly.
 \examples{
 
 ## The simple generator
-g <- sample_degseq(rep(2, 100))
+g <- sample_degseq(rep(2,100))
 degree(g)
-is_simple(g) # sometimes TRUE, but can be FALSE
+is_simple(g)   # sometimes TRUE, but can be FALSE
 g2 <- sample_degseq(1:10, 10:1)
-degree(g2, mode = "out")
-degree(g2, mode = "in")
+degree(g2, mode="out")
+degree(g2, mode="in")
 
 ## The vl generator
-g3 <- sample_degseq(rep(2, 100), method = "vl")
+g3 <- sample_degseq(rep(2,100), method="vl")
 degree(g3)
-is_simple(g3) # always TRUE
+is_simple(g3)  # always TRUE
 
 ## Exponential degree distribution
 ## Note, that we correct the degree sequence if its sum is odd
-degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
-if (sum(degs) \%\% 2 != 0) {
-  degs[1] <- degs[1] + 1
-}
-g4 <- sample_degseq(degs, method = "vl")
+degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
+if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
+g4 <- sample_degseq(degs, method="vl")
 all(degree(g4) == degs)
 
 ## Power-law degree distribution
 ## Note, that we correct the degree sequence if its sum is odd
-degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
-if (sum(degs) \%\% 2 != 0) {
-  degs[1] <- degs[1] + 1
-}
-g5 <- sample_degseq(degs, method = "vl")
+degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
+if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
+g5 <- sample_degseq(degs, method="vl")
 all(degree(g5) == degs)
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_pa]{sample_pa()}},
-\code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
-\code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
+\code{\link{sample_gnp}}, \code{\link{sample_pa}},
+\code{\link{simplify}} to get rid of the multiple and/or loops edges,
+\code{\link{realize_degseq}} for a deterministic variant.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
