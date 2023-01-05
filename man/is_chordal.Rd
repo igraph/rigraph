@@ -19,12 +19,12 @@ ignored, as the algorithm is defined for undirected graphs.}
 
 \item{alpha}{Numeric vector, the maximal chardinality ordering of the
 vertices. If it is \code{NULL}, then it is automatically calculated by
-calling \code{\link{max_cardinality}}, or from \code{alpham1} if
+calling \code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpham1} if
 that is given..}
 
 \item{alpham1}{Numeric vector, the inverse of \code{alpha}. If it is
 \code{NULL}, then it is automatically calculated by calling
-\code{\link{max_cardinality}}, or from \code{alpha}.}
+\code{\link[=max_cardinality]{max_cardinality()}}, or from \code{alpha}.}
 
 \item{fillin}{Logical scalar, whether to calculate the fill-in edges.}
 
@@ -79,7 +79,7 @@ hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
 of Computation} 13, 566--579.
 }
 \seealso{
-\code{\link{max_cardinality}}
+\code{\link[=max_cardinality]{max_cardinality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

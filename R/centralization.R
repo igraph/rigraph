@@ -46,28 +46,28 @@ NULL
 #' For eigenvector centrality the most centralized structure is the graph
 #' with a single edge (and potentially many isolates).
 #'
-#' \code{centralize} implements general centralization formula to calculate
+#' `centralize()` implements general centralization formula to calculate
 #' a graph-level score from vertex-level scores.
 #'
 #' @param scores The vertex level centrality scores.
 #' @param theoretical.max Real scalar. The graph-level centralization measure of
 #'   the most centralized graph with the same number of vertices as the graph
-#'   under study. This is only used if the \code{normalized} argument is set
-#'   to \code{TRUE}.
+#'   under study. This is only used if the `normalized` argument is set
+#'   to `TRUE`.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the supplied theoretical maximum.
 #' @return A real scalar, the centralization of the graph from which
-#'   \code{scores} were derived.
+#'   `scores` were derived.
 #'
 #' @aliases centralization centralize.scores
 #' @family centralization related
 #'
 #' @export
 #' @references Freeman, L.C.  (1979).  Centrality in Social Networks I:
-#' Conceptual Clarification. \emph{Social Networks} 1, 215--239.
+#' Conceptual Clarification. *Social Networks* 1, 215--239.
 #'
-#' Wasserman, S., and Faust, K.  (1994).  \emph{Social Network Analysis:
-#' Methods and Applications.} Cambridge University Press.
+#' Wasserman, S., and Faust, K.  (1994).  *Social Network Analysis:
+#' Methods and Applications.* Cambridge University Press.
 #'
 #' @examples
 #' # A BA graph is quite centralized
@@ -90,11 +90,11 @@ centralize <- centralize
 
 #' Centralize a graph according to the degrees of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param mode This is the same as the \code{mode} argument of
-#'   \code{degree}.
+#' @param mode This is the same as the `mode` argument of
+#'   `degree()`.
 #' @param loops Logical scalar, whether to consider loops edges when
 #'   calculating the degree.
 #' @param normalized Logical scalar. Whether to normalize the graph level
@@ -104,8 +104,8 @@ centralize <- centralize
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The maximum theoretical graph level
 #'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the \code{normalized} argument was
-#'     \code{TRUE}, then the result was divided by this number.}
+#'     using the same parameters. If the `normalized` argument was
+#'     `TRUE`, then the result was divided by this number.}
 #'
 #' @aliases centralization.degree
 #' @family centralization related
@@ -123,15 +123,15 @@ centr_degree <- centr_degree
 
 #' Theoretical maximum for degree centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be \code{NULL}, if
-#'   \code{nodes}, \code{mode} and \code{loops} are all given.
+#' @param graph The input graph. It can also be `NULL`, if
+#'   `nodes`, `mode` and `loops` are all given.
 #' @param nodes The number of vertices. This is ignored if the graph is given.
-#' @param mode This is the same as the \code{mode} argument of
-#'   \code{degree}.
+#' @param mode This is the same as the `mode` argument of
+#'   `degree()`.
 #' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree. Currently the default value is \code{FALSE},
+#'   calculating the degree. Currently the default value is `FALSE`,
 #'   but this argument will be required from igraph 1.4.0.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
@@ -175,7 +175,7 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 
 #' Centralize a graph according to the betweenness of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
@@ -190,8 +190,8 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The maximum theoretical graph level
 #'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the \code{normalized} argument was
-#'     \code{TRUE}, then the result was divided by this number.}
+#'     using the same parameters. If the `normalized` argument was
+#'     `TRUE`, then the result was divided by this number.}
 #'
 #' @aliases centralization.betweenness
 #' @family centralization related
@@ -226,10 +226,10 @@ centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRU
 
 #' Theoretical maximum for betweenness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be \code{NULL}, if
-#'   \code{nodes} is given.
+#' @param graph The input graph. It can also be `NULL`, if
+#'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
 #' @param directed logical scalar, whether to use directed shortest paths
@@ -253,11 +253,11 @@ centr_betw_tmax <- centr_betw_tmax
 
 #' Centralize a graph according to the closeness of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
-#' @param mode This is the same as the \code{mode} argument of
-#'   \code{closeness}.
+#' @param mode This is the same as the `mode` argument of
+#'   `closeness()`.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -265,8 +265,8 @@ centr_betw_tmax <- centr_betw_tmax
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The maximum theoretical graph level
 #'     centralization score for a graph with the given number of vertices,
-#'     using the same parameters. If the \code{normalized} argument was
-#'     \code{TRUE}, then the result was divided by this number.}
+#'     using the same parameters. If the `normalized` argument was
+#'     `TRUE`, then the result was divided by this number.}
 #'
 #' @aliases centralization.closeness
 #' @family centralization related
@@ -284,14 +284,14 @@ centr_clo <- centr_clo
 
 #' Theoretical maximum for closeness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be \code{NULL}, if
-#'   \code{nodes} is given.
+#' @param graph The input graph. It can also be `NULL`, if
+#'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
-#' @param mode This is the same as the \code{mode} argument of
-#'   \code{closeness}.
+#' @param mode This is the same as the `mode` argument of
+#'   `closeness()`.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
@@ -311,14 +311,14 @@ centr_clo_tmax <- centr_clo_tmax
 
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating eigenvector centrality.
 #' @param scale Whether to rescale the eigenvector centrality scores, such that
 #'   the maximum score is one.
-#' @param options This is passed to \code{\link{eigen_centrality}}, the options
+#' @param options This is passed to [eigen_centrality()], the options
 #'   for the ARPACK eigensolver.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
@@ -326,7 +326,7 @@ centr_clo_tmax <- centr_clo_tmax
 #'   \item{vector}{The node-level centrality scores.}
 #'   \item{value}{The corresponding eigenvalue.}
 #'   \item{options}{ARPACK options, see the return value of
-#'     \code{\link{eigen_centrality}} for details.}
+#'     [eigen_centrality()] for details.}
 #'   \item{centralization}{The graph level centrality index.}
 #'   \item{theoretical_max}{The same as above, the theoretical maximum
 #'     centralization score for a graph with the same number of vertices.}
@@ -353,10 +353,10 @@ centr_eigen <- centr_eigen
 
 #' Theoretical maximum for betweenness centralization
 #'
-#' See \code{\link{centralize}} for a summary of graph centralization.
+#' See [centralize()] for a summary of graph centralization.
 #'
-#' @param graph The input graph. It can also be \code{NULL}, if
-#'   \code{nodes} is given.
+#' @param graph The input graph. It can also be `NULL`, if
+#'   `nodes` is given.
 #' @param nodes The number of vertices. This is ignored if the graph is
 #'   given.
 #' @param directed logical scalar, whether to use directed shortest paths

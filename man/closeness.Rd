@@ -64,12 +64,12 @@ closeness scores. Using zero as a cutoff is \emph{deprecated} and future
 versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 considered at all). If you want no cutoff, use a negative number.
 
-\code{estimate_closeness} is an alias for \code{closeness} with a different
+\code{estimate_closeness()} is an alias for \code{closeness()} with a different
 argument order, for sake of compatibility with older versions of igraph.
 
 Closeness centrality is meaningful only for connected graphs. In disconnected
 graphs, consider using the harmonic centrality with
-\code{\link{harmonic_centrality}}
+\code{\link[=harmonic_centrality]{harmonic_centrality()}}
 }
 \examples{
 
@@ -86,7 +86,7 @@ Freeman, L.C. (1979). Centrality in Social Networks I:
 Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 }
 \seealso{
-\code{\link{betweenness}}, \code{\link{degree}}, \code{\link{harmonic_centrality}}
+\code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -19,7 +19,7 @@ undirected) edge.
 }
 \details{
 In igraph edge weights are represented via an edge attribute, called
-\sQuote{weight}. The \code{is_weighted} function only checks that such an
+\sQuote{weight}. The \code{is_weighted()} function only checks that such an
 attribute exists. (It does not even checks that it is a numeric edge
 attribute.)
 

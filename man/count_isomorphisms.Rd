@@ -13,7 +13,7 @@ count_isomorphisms(graph1, graph2, method = "vf2", ...)
 \item{graph2}{The second graph.}
 
 \item{method}{Currently only \sQuote{vf2} is supported, see
-\code{\link{isomorphic}} for details about it and extra arguments.}
+\code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Passed to the individual methods.}
 }
@@ -41,8 +41,8 @@ count_isomorphisms(g1, g2,
 }
 \references{
 LP Cordella,  P Foggia, C Sansone, and M Vento: An improved algorithm
- for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
- on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
+for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
+on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
 }
 \seealso{
 Other graph isomorphism: 

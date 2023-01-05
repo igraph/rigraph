@@ -67,6 +67,6 @@ M. Marchiori and V. Latora, Harmony in the small-world,
 \emph{Physica A} 285, pp. 539-546 (2000).
 }
 \seealso{
-\code{\link{betweenness}}, \code{\link{closeness}}
+\code{\link[=betweenness]{betweenness()}}, \code{\link[=closeness]{closeness()}}
 }
 \keyword{graphs}

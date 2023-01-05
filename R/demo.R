@@ -27,18 +27,18 @@
 #' window.
 #'
 #' This function provides a somewhat nicer interface to igraph demos that come
-#' with the package, than the standard \code{\link{demo}} function. igraph
-#' demos are divided into chunks and \code{igraph_demo} runs them chunk by
+#' with the package, than the standard [demo()] function. igraph
+#' demos are divided into chunks and `igraph_demo()` runs them chunk by
 #' chunk, with the possibility of inspecting the workspace between two chunks.
 #'
-#' The \code{tcltk} package is needed for \code{igraph_demo}.
+#' The `tcltk` package is needed for `igraph_demo()`.
 #'
 #' @aliases igraphdemo
 #' @param which If not given, then the names of the available demos are listed.
-#' Otherwise it should be either a filename or the name of an igraph demo.
-#' @return Returns \code{NULL}, invisibly.
+#'   Otherwise it should be either a filename or the name of an igraph demo.
+#' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{demo}}
+#' @seealso [demo()]
 #' @export
 #' @keywords graphs
 #' @examples

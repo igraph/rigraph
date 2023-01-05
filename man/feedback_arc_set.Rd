@@ -25,7 +25,7 @@ algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
 }
 \value{
 An edge sequence (by default, but see the \code{return.vs.es} option
-of \code{\link{igraph_options}}) containing the feedback arc set.
+of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback arc set.
 }
 \description{
 A feedback arc set of a graph is a subset of edges whose removal breaks all

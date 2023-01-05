@@ -19,7 +19,7 @@ This function tests whether the given graph is a DAG, a directed acyclic
 graph.
 }
 \details{
-\code{is_dag} checks whether there is a directed cycle in the graph. If not,
+\code{is_dag()} checks whether there is a directed cycle in the graph. If not,
 the graph is a DAG.
 }
 \examples{

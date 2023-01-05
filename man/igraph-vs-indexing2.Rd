@@ -14,7 +14,7 @@
 }
 \value{
 The double bracket operator returns another vertex sequence,
-  with meta-data (attribute) printing turned on. See details below.
+with meta-data (attribute) printing turned on. See details below.
 }
 \description{
 The double bracket operator can be used on vertex sequences, to print

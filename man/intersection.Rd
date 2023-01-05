@@ -8,7 +8,7 @@ intersection(...)
 }
 \arguments{
 \item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{intersection}.}
+the function that implements \code{intersection()}.}
 }
 \value{
 Depends on the function that implements this method.
@@ -18,6 +18,6 @@ This is an S3 generic function. See \code{methods("intersection")}
 for the actual implementations for various S3 classes. Initially
 it is implemented for igraph graphs and igraph vertex and edge
 sequences. See
-\code{\link{intersection.igraph}}, and
-\code{\link{intersection.igraph.vs}}.
+\code{\link[=intersection.igraph]{intersection.igraph()}}, and
+\code{\link[=intersection.igraph.vs]{intersection.igraph.vs()}}.
 }

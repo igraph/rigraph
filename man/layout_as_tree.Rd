@@ -46,7 +46,7 @@ not given. See the \code{roots} parameter.}
 \item{flip.y}{Logical scalar, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
 
-\item{...}{Passed to \code{layout_as_tree}.}
+\item{...}{Passed to \code{layout_as_tree()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.

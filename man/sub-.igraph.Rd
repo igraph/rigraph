@@ -63,53 +63,53 @@ the graph. Here is what you can do with it:
 
 \enumerate{
 \item Check whether there is an edge between two vertices (\eqn{v}
-  and \eqn{w}) in the graph: \preformatted{  graph[v, w]}
-   A numeric scalar is returned, one if the edge exists, zero
-    otherwise.
-  \item Extract the (sparse) adjacency matrix of the graph, or part of
-    it: \preformatted{  graph[]
+and \eqn{w}) in the graph: \preformatted{  graph[v, w]}
+A numeric scalar is returned, one if the edge exists, zero
+otherwise.
+\item Extract the (sparse) adjacency matrix of the graph, or part of
+it: \preformatted{  graph[]
 graph[1:3,5:6]
 graph[c(1,3,5),]}
-    The first variants returns the full adjacency matrix, the other
-    two return part of it.
-  \item The \code{from} and \code{to} arguments can be used to check
-    the existence of many edges. In this case, both \code{from} and
-    \code{to} must be present and they must have the same length. They
-    must contain vertex ids or names. A numeric vector is returned, of
-    the same length as \code{from} and \code{to}, it contains ones
-    for existing edges edges and zeros for non-existing ones.
-    Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
-  \item For weighted graphs, the \code{[} operator returns the edge
-    weights. For non-esistent edges zero weights are returned. Other
-    edge attributes can be queried as well, by giving the \code{attr}
-    argument.
-  \item Querying edge ids instead of the existance of edges or edge
-    attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
-    returns the id of the edge between vertices 1 and 2, or zero if
-    there is no such edge.
-  \item Adding one or more edges to a graph. For this the element(s) of
-    the imaginary adjacency matrix must be set to a non-zero numeric
-    value (or \code{TRUE}): \preformatted{  graph[1, 2] <- 1
+The first variants returns the full adjacency matrix, the other
+two return part of it.
+\item The \code{from} and \code{to} arguments can be used to check
+the existence of many edges. In this case, both \code{from} and
+\code{to} must be present and they must have the same length. They
+must contain vertex ids or names. A numeric vector is returned, of
+the same length as \code{from} and \code{to}, it contains ones
+for existing edges edges and zeros for non-existing ones.
+Example: \preformatted{  graph[from=1:3, to=c(2,3,5)]}.
+\item For weighted graphs, the \code{[} operator returns the edge
+weights. For non-esistent edges zero weights are returned. Other
+edge attributes can be queried as well, by giving the \code{attr}
+argument.
+\item Querying edge ids instead of the existance of edges or edge
+attributes. E.g. \preformatted{  graph[1, 2, edges=TRUE]}
+returns the id of the edge between vertices 1 and 2, or zero if
+there is no such edge.
+\item Adding one or more edges to a graph. For this the element(s) of
+the imaginary adjacency matrix must be set to a non-zero numeric
+value (or \code{TRUE}): \preformatted{  graph[1, 2] <- 1
 graph[1:3,1] <- 1
 graph[from=1:3, to=c(2,3,5)] <- TRUE}
-    This does not affect edges that are already present in the graph,
-    i.e. no multiple edges are created.
-  \item Adding weighted edges to a graph. The \code{attr} argument
-    contains the name of the edge attribute to set, so it does not
-    have to be \sQuote{weight}: \preformatted{  graph[1, 2, attr="weight"]<- 5
+This does not affect edges that are already present in the graph,
+i.e. no multiple edges are created.
+\item Adding weighted edges to a graph. The \code{attr} argument
+contains the name of the edge attribute to set, so it does not
+have to be \sQuote{weight}: \preformatted{  graph[1, 2, attr="weight"]<- 5
 graph[from=1:3, to=c(2,3,5)] <- c(1,-1,4)}
-    If an edge is already present in the network, then only its
-    weights or other attribute are updated. If the graph is already
-    weighted, then the \code{attr="weight"} setting is implicit, and
-    one does not need to give it explicitly.
-  \item Deleting edges. The replacement syntax allow the deletion of
-    edges, by specifying \code{FALSE} or \code{NULL} as the
-    replacement value: \preformatted{  graph[v, w] <- FALSE}
-    removes the edge from vertex \eqn{v} to vertex \eqn{w}.
-    As this can be used to delete edges between two sets of vertices,
-    either pairwise: \preformatted{  graph[from=v, to=w] <- FALSE}
-    or not: \preformatted{  graph[v, w] <- FALSE }
-    if \eqn{v} and \eqn{w} are vectors of edge ids or names.
+If an edge is already present in the network, then only its
+weights or other attribute are updated. If the graph is already
+weighted, then the \code{attr="weight"} setting is implicit, and
+one does not need to give it explicitly.
+\item Deleting edges. The replacement syntax allow the deletion of
+edges, by specifying \code{FALSE} or \code{NULL} as the
+replacement value: \preformatted{  graph[v, w] <- FALSE}
+removes the edge from vertex \eqn{v} to vertex \eqn{w}.
+As this can be used to delete edges between two sets of vertices,
+either pairwise: \preformatted{  graph[from=v, to=w] <- FALSE}
+or not: \preformatted{  graph[v, w] <- FALSE }
+if \eqn{v} and \eqn{w} are vectors of edge ids or names.
 }
 
 \sQuote{\code{[}} allows logical indices and negative indices as well,
@@ -117,7 +117,7 @@ with the usual R semantics. E.g. \preformatted{  graph[degree(graph)==0, 1] <- 1
 adds an edge from every isolate vertex to vertex one,
 and \preformatted{  G <- make_empty_graph(10)
 G[-1,1] <- TRUE}
- creates a star graph.
+creates a star graph.
 
 Of course, the indexing operators support vertex names,
 so instead of a numeric vertex id a vertex can also be given to

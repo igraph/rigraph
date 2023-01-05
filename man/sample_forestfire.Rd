@@ -69,7 +69,7 @@ time: densification laws, shrinking diameters and possible explanations.
 conference on Knowledge discovery in data mining}, 177--187, 2005.
 }
 \seealso{
-\code{\link{barabasi.game}} for the basic preferential attachment
+\code{\link[=barabasi.game]{barabasi.game()}} for the basic preferential attachment
 model.
 }
 \author{

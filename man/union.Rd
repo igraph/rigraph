@@ -8,7 +8,7 @@ union(...)
 }
 \arguments{
 \item{...}{Arguments, their number and interpretation depends on
-the function that implements \code{union}.}
+the function that implements \code{union()}.}
 }
 \value{
 Depends on the function that implements this method.
@@ -18,6 +18,6 @@ This is an S3 generic function. See \code{methods("union")}
 for the actual implementations for various S3 classes. Initially
 it is implemented for igraph graphs and igraph vertex and edge
 sequences. See
-\code{\link{union.igraph}}, and
-\code{\link{union.igraph.vs}}.
+\code{\link[=union.igraph]{union.igraph()}}, and
+\code{\link[=union.igraph.vs]{union.igraph.vs()}}.
 }

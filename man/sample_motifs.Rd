@@ -31,14 +31,14 @@ starting point for finding motifs.}
 }
 \value{
 A numeric scalar, an estimate for the total number of motifs in
-  the graph.
+the graph.
 }
 \description{
 Graph motifs are small connected subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{
-\code{sample_motifs} estimates the total number of motifs of a given
+\code{sample_motifs()} estimates the total number of motifs of a given
 size in a graph based on a sample.
 }
 \examples{
@@ -48,7 +48,7 @@ count_motifs(g, 3)
 sample_motifs(g, 3)
 }
 \seealso{
-\code{\link{isomorphism_class}}
+\code{\link[=isomorphism_class]{isomorphism_class()}}
 
 Other graph motifs: 
 \code{\link{count_motifs}()},

@@ -12,7 +12,7 @@ keeping_degseq(loops = FALSE, niter = 100)
 \item{niter}{Number of rewiring trials to perform.}
 }
 \description{
-This function can be used together with \code{\link{rewire}} to
+This function can be used together with \code{\link[=rewire]{rewire()}} to
 randomly rewire the edges while preserving the original graph's degree
 distribution.
 }
@@ -30,7 +30,7 @@ g \%>\%
 print_all(rewire(g, with = keeping_degseq(niter = vcount(g) * 10)))
 }
 \seealso{
-\code{\link{sample_degseq}}
+\code{\link[=sample_degseq]{sample_degseq()}}
 
 Other rewiring functions: 
 \code{\link{each_edge}()},

@@ -90,14 +90,14 @@
 #' \describe{
 #'   \item{coords}{A matrix with four columns, it contains the
 #'     coordinates of the vertices for the edge list supplied in the
-#'     \code{el} argument.}
+#'     `el` argument.}
 #'   \item{el}{A matrix with two columns, the edges of which some end
 #'     points will be clipped. It should have the same number of rows as
-#'     \code{coords}.}
+#'     `coords`.}
 #'   \item{params}{This is a function object that can be called to query
 #'     vertex/edge/plot graphical parameters. The first argument of the
-#'     function is \dQuote{\code{vertex}}, \dQuote{\code{edge}} or
-#'     \dQuote{\code{plot}} to decide the type of the parameter, the
+#'     function is \dQuote{`vertex`}, \dQuote{`edge`} or
+#'     \dQuote{`plot`} to decide the type of the parameter, the
 #'     second is a character string giving the name of the
 #'     parameter. E.g.
 #'     \preformatted{
@@ -105,16 +105,16 @@
 #'     }
 #'   }
 #'   \item{end}{Character string, it gives which end points will be
-#'     used. Possible values are \dQuote{\code{both}},
-#'     \dQuote{\code{from}} and \dQuote{\code{to}}. If
-#'     \dQuote{\code{from}} the function is expected to clip the
-#'     first column in the \code{el} edge list, \dQuote{\code{to}}
-#'     selects the second column, \dQuote{\code{both}} selects both.}
+#'     used. Possible values are \dQuote{`both`},
+#'     \dQuote{`from`} and \dQuote{`to`}. If
+#'     \dQuote{`from`} the function is expected to clip the
+#'     first column in the `el` edge list, \dQuote{`to`}
+#'     selects the second column, \dQuote{`both`} selects both.}
 #' }
 #'
 #' The clipping function should return a matrix
-#' with the same number of rows as the \code{el} arguments.
-#' If \code{end} is \code{both} then the matrix must have four
+#' with the same number of rows as the `el` arguments.
+#' If `end` is `both` then the matrix must have four
 #' columns, otherwise two. The matrix contains the modified coordinates,
 #' with the clipping applied.
 #'
@@ -123,39 +123,39 @@
 #'   \item{coords}{The coordinates of the vertices, a matrix with two
 #'     columns.}
 #'   \item{v}{The ids of the vertices to plot. It should match the number
-#'     of rows in the \code{coords} argument.}
+#'     of rows in the `coords` argument.}
 #'   \item{params}{The same as for the clipping function, see above.}
 #' }
 #'
 #' The return value of the plotting function is not used.
 #'
-#' \code{shapes} can be used to list the names of all installed
+#' `shapes()` can be used to list the names of all installed
 #' vertex shapes, by calling it without arguments, or setting the
-#' \code{shape} argument to \code{NULL}. If a shape name is given, then
+#' `shape` argument to `NULL`. If a shape name is given, then
 #' the clipping and plotting functions of that shape are returned in a
 #' named list.
 #'
-#' \code{add_shape} can be used to add new vertex shapes to
+#' `add_shape()` can be used to add new vertex shapes to
 #' igraph. For this one must give the clipping and plotting functions of
 #' the new shape. It is also possible to list the plot/vertex/edge
-#' parameters, in the \code{parameters} argument, that the clipping
+#' parameters, in the `parameters` argument, that the clipping
 #' and/or plotting functions can make use of. An example would be a
 #' generic regular polygon shape, which can have a parameter for the
 #' number of sides.
 #'
-#' \code{shape_noclip} is a very simple clipping function that the
+#' `shape_noclip()` is a very simple clipping function that the
 #' user can use in their own shape definitions. It does no clipping, the
 #' edges will be drawn exactly until the listed vertex position
 #' coordinates.
 #'
-#' \code{shape_noplot} is a very simple (and probably not very
+#' `shape_noplot()` is a very simple (and probably not very
 #' useful) plotting function, that does not plot anything.
 #'
 #' @aliases add.vertex.shape igraph.shape.noclip igraph.shape.noplot
 #'   vertex.shapes igraph.vertex.shapes
 #'
 #' @param shape Character scalar, name of a vertex shape. If it is
-#'    \code{NULL} for \code{shapes}, then the names of all defined
+#'    `NULL` for `shapes()`, then the names of all defined
 #'    vertex shapes are returned.
 #' @param clip An R function object, the clipping function.
 #' @param plot An R function object, the plotting function.
@@ -163,20 +163,20 @@
 #'    parameters. The element named define the new parameters, and the
 #'    elements themselves define their default values.
 #'    Vertex parameters should have a prefix
-#'    \sQuote{\code{vertex.}}, edge parameters a prefix
-#'    \sQuote{\code{edge.}}. Other general plotting parameters should have
-#'    a prefix \sQuote{\code{plot.}}. See Details below.
+#'    \sQuote{`vertex.`}, edge parameters a prefix
+#'    \sQuote{`edge.`}. Other general plotting parameters should have
+#'    a prefix \sQuote{`plot.`}. See Details below.
 #' @param coords,el,params,end,v See parameters of the clipping/plotting
 #'    functions below.
-#' @return \code{shapes} returns a character vector if the
-#'    \code{shape} argument is \code{NULL}. It returns a named list with
+#' @return `shapes()` returns a character vector if the
+#'    `shape` argument is `NULL`. It returns a named list with
 #'    entries named \sQuote{clip} and \sQuote{plot}, both of them R
 #'    functions.
 #'
-#'    \code{add_shape} returns \code{TRUE}, invisibly.
+#'    `add_shape()` returns `TRUE`, invisibly.
 #'
-#'    \code{shape_noclip} returns the appropriate columns of its
-#'    \code{coords} argument.
+#'    `shape_noclip()` returns the appropriate columns of its
+#'    `coords` argument.
 #' @export
 #'
 #' @examples

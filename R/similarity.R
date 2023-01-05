@@ -6,13 +6,13 @@
 #' @details
 #' The Jaccard similarity coefficient of two vertices is the number of common
 #' neighbors divided by the number of vertices that are neighbors of at least
-#' one of the two vertices being considered. The \code{jaccard} method
+#' one of the two vertices being considered. The `jaccard` method
 #' calculates the pairwise Jaccard similarities for some (or all) of the
 #' vertices.
 #'
 #' The Dice similarity coefficient of two vertices is twice the number of
 #' common neighbors divided by the sum of the degrees of the vertices.
-#' Methof \code{dice} calculates the pairwise Dice similarities for some
+#' Methof `dice` calculates the pairwise Dice similarities for some
 #' (or all) of the vertices.
 #'
 #' The inverse log-weighted similarity of two vertices is the number of their
@@ -29,19 +29,19 @@
 #' @param graph The input graph.
 #' @param vids The vertex ids for which the similarity is calculated.
 #' @param mode The type of neighboring vertices to use for the calculation,
-#'   possible values: \sQuote{\code{out}}, \sQuote{\code{in}},
-#'   \sQuote{\code{all}}.
+#'   possible values: \sQuote{`out`}, \sQuote{`in`},
+#'   \sQuote{`all`}.
 #' @param loops Whether to include vertices themselves in the neighbor
 #'   sets.
 #' @param method The method to use.
-#' @return A \code{length(vids)} by \code{length(vids)} numeric matrix
+#' @return A `length(vids)` by `length(vids)` numeric matrix
 #'   containing the similarity scores. This argument is ignored by the
-#'   \code{invlogweighted} method.
+#'   `invlogweighted` method.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #'   \email{csardi.gabor@@gmail.com} for the manual page.
-#' @seealso \code{\link{cocitation}} and \code{\link{bibcoupling}}
+#' @seealso [cocitation()] and [bibcoupling()]
 #' @references Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
-#'   \emph{Social Networks}, 25(3):211-230, 2003.
+#'   *Social Networks*, 25(3):211-230, 2003.
 #' @keywords graphs
 #' @export
 #' @examples

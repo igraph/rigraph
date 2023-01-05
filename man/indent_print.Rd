@@ -11,7 +11,7 @@ indent_print(..., .indent = " ", .printer = print)
 
 \item{.indent}{Character scalar, indent the printout with this.}
 
-\item{.printer}{The printing function, defaults to \code{print}.}
+\item{.printer}{The printing function, defaults to \link{print}.}
 }
 \value{
 The first element in \code{...}, invisibly.

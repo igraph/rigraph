@@ -15,8 +15,8 @@ be collected and returned as part of the result.}
 \item{root}{The id of the root (or source) vertex, this will be the root of
 the tree.}
 
-\item{mode}{Constant, must be \sQuote{\code{in}} or \sQuote{\code{out}}. If
-it is \sQuote{\code{in}}, then all directions are considered as opposite to
+\item{mode}{Constant, must be \sQuote{\verb{in}} or \sQuote{\code{out}}. If
+it is \sQuote{\verb{in}}, then all directions are considered as opposite to
 the original one in the input graph.}
 }
 \value{

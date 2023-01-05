@@ -13,25 +13,25 @@ atlas(...)
 \arguments{
 \item{n}{The id of the graph to create.}
 
-\item{...}{Passed to \code{graph_from_atlas}.}
+\item{...}{Passed to \code{graph_from_atlas()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{graph_from_atlas} creates graphs from the book
+\code{graph_from_atlas()} creates graphs from the book
 \sQuote{An Atlas of Graphs} by
 Roland C. Read and Robin J. Wilson. The atlas contains all undirected
 graphs with up to seven vertices, numbered from 0 up to 1252. The
 graphs are listed:
 \enumerate{
-   \item in increasing order of number of nodes;
-   \item for a fixed number of nodes, in increasing order of the number
-     of edges;
-   \item for fixed numbers of nodes and edges, in increasing order of
-     the degree sequence, for example 111223 < 112222;
-   \item for fixed degree sequence, in increasing number of
-     automorphisms.
+\item in increasing order of number of nodes;
+\item for a fixed number of nodes, in increasing order of the number
+of edges;
+\item for fixed numbers of nodes and edges, in increasing order of
+the degree sequence, for example 111223 < 112222;
+\item for fixed degree sequence, in increasing number of
+automorphisms.
 }
 }
 \examples{

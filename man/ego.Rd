@@ -57,12 +57,12 @@ argument is ignored for undirected graphs.}
 }
 \value{
 \itemize{
-  \item{\code{ego_size} returns with an integer vector.}
-  \item{\code{ego} returns A list of \code{igraph.vs} or a list of numeric
-        vectors depending on the value of \code{igraph_opt("return.vs.es")},
-        see details for performance characteristics.}
-  \item{\code{make_ego_graph} returns with a list of graphs.}
-  \item{\code{connect} returns with a new graph object.}
+\item{\code{ego_size()} returns with an integer vector.}
+\item{\code{ego()} returns A list of \code{igraph.vs} or a list of numeric
+vectors depending on the value of \code{igraph_opt("return.vs.es")},
+see details for performance characteristics.}
+\item{\code{make_ego_graph()} returns with a list of graphs.}
+\item{\code{connect()} returns with a new graph object.}
 }
 }
 \description{
@@ -75,17 +75,17 @@ vertices which are closer to \code{v} than the order. Ie. order 0 is always
 \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 
-\code{ego_size} calculates the size of the neighborhoods for the
+\code{ego_size()} calculates the size of the neighborhoods for the
 given vertices with the given order.
 
-\code{ego} calculates the neighborhoods of the given vertices with
+\code{ego()} calculates the neighborhoods of the given vertices with
 the given order parameter.
 
-\code{make_ego_graph} is creates (sub)graphs from all neighborhoods of
+\code{make_ego_graph()} is creates (sub)graphs from all neighborhoods of
 the given vertices with the given order parameter. This function preserves
 the vertex, edge and graph attributes.
 
-\code{connect} creates a new graph by connecting each vertex to
+\code{connect()} creates a new graph by connecting each vertex to
 all other vertices in its neighborhood.
 }
 \examples{

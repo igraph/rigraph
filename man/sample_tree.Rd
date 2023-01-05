@@ -23,7 +23,7 @@ Prufer sequences does not support directed trees at the moment.}
 A graph object.
 }
 \description{
-\code{sample_tree} generates a random with a given number of nodes uniform
+\code{sample_tree()} generates a random with a given number of nodes uniform
 at random from the set of labelled trees.
 }
 \details{

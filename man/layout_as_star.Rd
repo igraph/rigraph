@@ -19,7 +19,7 @@ the first vertex.}
 \item{order}{Numeric vector, the order of the vertices along the perimeter.
 The default ordering is given by the vertex ids.}
 
-\item{...}{Arguments to pass to \code{layout_as_star}.}
+\item{...}{Arguments to pass to \code{layout_as_star()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices
@@ -42,9 +42,9 @@ layout_as_star(g)
 layout_(g, as_star())
 }
 \seealso{
-\code{\link{layout}} and \code{\link{layout.drl}} for other layout
-algorithms, \code{\link{plot.igraph}} and \code{\link{tkplot}} on how to
-plot graphs and \code{\link{star}} on how to create ring graphs.
+\code{\link[=layout]{layout()}} and \code{\link[=layout.drl]{layout.drl()}} for other layout
+algorithms, \code{\link[=plot.igraph]{plot.igraph()}} and \code{\link[=tkplot]{tkplot()}} on how to
+plot graphs and \code{\link[=star]{star()}} on how to create ring graphs.
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

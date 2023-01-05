@@ -27,8 +27,8 @@ should be even. For directed graphs its sum should be the same as the sum of
 \dQuote{simple}, \dQuote{simple.no.multiple} and \dQuote{vl} methods are
 implemented.}
 
-\item{...}{Passed to \code{realize_degseq} if \sQuote{deterministic} is true,
-or to \code{sample_degseq} otherwise.}
+\item{...}{Passed to \code{realize_degseq()} if \sQuote{deterministic} is true,
+or to \code{sample_degseq()} otherwise.}
 
 \item{deterministic}{Whether the construction should be deterministic}
 }
@@ -104,9 +104,9 @@ g5 <- sample_degseq(degs, method = "vl")
 all(degree(g5) == degs)
 }
 \seealso{
-\code{\link{sample_gnp}}, \code{\link{sample_pa}},
-\code{\link{simplify}} to get rid of the multiple and/or loops edges,
-\code{\link{realize_degseq}} for a deterministic variant.
+\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_pa]{sample_pa()}},
+\code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
+\code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

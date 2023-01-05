@@ -38,13 +38,13 @@ mutually connected.}
 \item{circular}{Logical, if \code{TRUE} the lattice or ring will be
 circular.}
 
-\item{...}{Passed to \code{make_lattice}.}
+\item{...}{Passed to \code{make_lattice()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{make_lattice} is a flexible function, it can create lattices of
+\code{make_lattice()} is a flexible function, it can create lattices of
 arbitrary dimensions, periodic or aperiodic ones. It has two
 forms. In the first form you only supply \code{dimvector}, but not
 \code{length} and \code{dim}. In the second form you omit

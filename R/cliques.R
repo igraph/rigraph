@@ -26,54 +26,54 @@
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
 #'
-#' \code{cliques} find all complete subgraphs in the input graph, obeying the
-#' size limitations given in the \code{min} and \code{max} arguments.
+#' `cliques()` find all complete subgraphs in the input graph, obeying the
+#' size limitations given in the `min` and `max` arguments.
 #'
-#' \code{largest_cliques} finds all largest cliques in the input graph. A
+#' `largest_cliques()` finds all largest cliques in the input graph. A
 #' clique is largest if there is no other clique including more vertices.
 #'
-#' \code{max_cliques} finds all maximal cliques in the input graph.  A
+#' `max_cliques()` finds all maximal cliques in the input graph.  A
 #' clique is maximal if it cannot be extended to a larger clique. The largest
 #' cliques are always maximal, but a maximal clique is not necessarily the
 #' largest.
 #'
-#' \code{count_max_cliques} counts the maximal cliques.
+#' `count_max_cliques()` counts the maximal cliques.
 #'
-#' \code{clique_num} calculates the size of the largest clique(s).
+#' `clique_num()` calculates the size of the largest clique(s).
 #'
-#' \code{clique_size_counts} returns a numeric vector representing a histogram
+#' `clique_size_counts()` returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
 #' clique.number clique_num largest.cliques count_max_cliques max_cliques
 #' clique_size_counts
 #' @param graph The input graph, directed graphs will be considered as
-#' undirected ones, multiple edges and loops are ignored.
+#'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
-#' \code{NULL} means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, ie. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
-#' \code{NULL} means no limit.
-#' @return \code{cliques}, \code{largest_cliques} and \code{clique_num}
-#' return a list containing numeric vectors of vertex ids. Each list element is
-#' a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   `NULL` means no limit.
+#' @return `cliques()`, `largest_cliques()` and `clique_num()`
+#'   return a list containing numeric vectors of vertex ids. Each list element is
+#'   a clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
 #'
-#' \code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
-#' argument is not \code{NULL}. The output is written to the specified file in
-#' this case.
+#'   `max_cliques()` returns `NULL`, invisibly, if its `file`
+#'   argument is not `NULL`. The output is written to the specified file in
+#'   this case.
 #'
-#' \code{clique_num} and \code{count_max_cliques} return an integer
-#' scalar.
+#'   `clique_num()` and `count_max_cliques()` return an integer
+#'   scalar.
 #'
-#' \code{clique_size_counts} returns a numeric vector with the clique sizes such that
-#' the i-th item belongs to cliques of size i. Trailing zeros are currently
-#' truncated, but this might change in future versions.
+#'   `clique_size_counts()` returns a numeric vector with the clique sizes such that
+#'   the i-th item belongs to cliques of size i. Trailing zeros are currently
+#'   truncated, but this might change in future versions.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{ivs}}
+#' @seealso [ivs()]
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
-#' in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
+#' in Sparse Graphs in Near-optimal Time.  <https://arxiv.org/abs/1006.5440>
 #' @export
 #' @keywords graphs
 #' @examples
@@ -93,16 +93,16 @@ cliques <- cliques
 largest_cliques <- largest_cliques
 
 #' @rdname cliques
-#' @param subset If not \code{NULL}, then it must be a vector of vertex ids,
-#' numeric or symbolic if the graph is named. The algorithm is run from these
-#' vertices only, so only a subset of all maximal cliques is returned. See the
-#' Eppstein paper for details. This argument makes it possible to easily
-#' parallelize the finding of maximal cliques.
-#' @param file If not \code{NULL}, then it must be a file name, i.e. a
-#' character scalar. The output of the algorithm is written to this file. (If
-#' it exists, then it will be overwritten.) Each clique will be a separate line
-#' in the file, given with the numeric ids of its vertices, separated by
-#' whitespace.
+#' @param subset If not `NULL`, then it must be a vector of vertex ids,
+#'   numeric or symbolic if the graph is named. The algorithm is run from these
+#'   vertices only, so only a subset of all maximal cliques is returned. See the
+#'   Eppstein paper for details. This argument makes it possible to easily
+#'   parallelize the finding of maximal cliques.
+#' @param file If not `NULL`, then it must be a file name, i.e. a
+#'   character scalar. The output of the algorithm is written to this file. (If
+#'   it exists, then it will be overwritten.) Each clique will be a separate line
+#'   in the file, given with the numeric ids of its vertices, separated by
+#'   whitespace.
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   if (!is_igraph(graph)) {
@@ -194,48 +194,48 @@ clique_num <- clique_num
 #' an undirected graph. The weight of a clique is the sum of the weights of its
 #' edges.
 #'
-#' \code{weighted_cliques} find all complete subgraphs in the input graph,
-#' obeying the weight limitations given in the \code{min} and \code{max}
+#' `weighted_cliques()` find all complete subgraphs in the input graph,
+#' obeying the weight limitations given in the `min` and `max`
 #' arguments.
 #'
-#' \code{largest_weighted_cliques} finds all largest weighted cliques in the
+#' `largest_weighted_cliques()` finds all largest weighted cliques in the
 #' input graph. A clique is largest if there is no other clique whose total
 #' weight is larger than the weight of this clique.
 #'
-#' \code{max_weighted_cliques} finds all maximal weighted cliques in the input graph.
+#' `max_weighted_cliques` finds all maximal weighted cliques in the input graph.
 #' A weighted clique is maximal if it cannot be extended to a clique with larger
 #' total weight. The largest weighted cliques are always maximal, but a maximal
 #' weighted clique is not necessarily the largest.
 #'
-#' \code{count_max_weighted_cliques} counts the maximal weighted cliques.
+#' `count_max_weighted_cliques` counts the maximal weighted cliques.
 #'
-#' \code{weighted_clique_num} calculates the weight of the largest weighted clique(s).
+#' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
 #' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
 #' count_max_weighted_cliques weighted_clique_num
 #' @param graph The input graph, directed graphs will be considered as
-#' undirected ones, multiple edges and loops are ignored.
+#'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
-#' \code{NULL} means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, ie. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
-#' \code{NULL} means no limit.
-#' @param vertex.weights Vertex weight vector. If the graph has a \code{weight}
-#' vertex attribute, then this is used by default. If the graph does not have a
-#' \code{weight} vertex attribute and this argument is \code{NULL}, then every
-#' vertex is assumed to have a weight of 1. Note that the current implementation
-#' of the weighted clique finder supports positive integer weights only.
-#' @param maximal Specifies whether to look for all weighted cliques (\code{FALSE})
-#' or only the maximal ones (\code{TRUE}).
-#' @return \code{weighted_cliques} and \code{largest_weighted_cliques} return a
-#' list containing numeric vectors of vertex IDs. Each list element is a weighted
-#' clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+#'   `NULL` means no limit.
+#' @param vertex.weights Vertex weight vector. If the graph has a `weight`
+#'   vertex attribute, then this is used by default. If the graph does not have a
+#'   `weight` vertex attribute and this argument is `NULL`, then every
+#'   vertex is assumed to have a weight of 1. Note that the current implementation
+#'   of the weighted clique finder supports positive integer weights only.
+#' @param maximal Specifies whether to look for all weighted cliques (`FALSE`)
+#'   or only the maximal ones (`TRUE`).
+#' @return `weighted_cliques()` and `largest_weighted_cliques()` return a
+#'   list containing numeric vectors of vertex IDs. Each list element is a weighted
+#'   clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
 #'
-#' \code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
-#' scalar.
+#'   `weighted_clique_num()` and `count_max_weighted_cliques` return an integer
+#'   scalar.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{ivs}}
+#' @seealso [ivs()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -257,20 +257,20 @@ weighted_clique_num <- weighted_clique_num
 #' vertices in it. These functions find independent vertex sets in undirected
 #' graphs
 #'
-#' \code{ivs} finds all independent vertex sets in the
-#' network, obeying the size limitations given in the \code{min} and \code{max}
+#' `ivs()` finds all independent vertex sets in the
+#' network, obeying the size limitations given in the `min` and `max`
 #' arguments.
 #'
-#' \code{largest_ivs} finds the largest independent vertex
+#' `largest_ivs()` finds the largest independent vertex
 #' sets in the graph. An independent vertex set is largest if there is no
 #' independent vertex set with more vertices.
 #'
-#' \code{maximal_ivs} finds the maximal independent vertex
+#' `maximal_ivs()` finds the maximal independent vertex
 #' sets in the graph. An independent vertex set is maximal if it cannot be
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
 #'
-#' \code{independece.number} calculate the size of the largest independent
+#' `independece.number` calculate the size of the largest independent
 #' vertex set(s).
 #'
 #' These functions use the algorithm described by Tsukiyama et al., see
@@ -280,25 +280,25 @@ weighted_clique_num <- weighted_clique_num
 #' maximal.independent.vertex.sets independence.number ivs_size ivs
 #' largest_ivs maximal_ivs
 #' @param graph The input graph, directed graphs are considered as undirected,
-#' loop edges and multiple edges are ignored.
+#'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
-#' vertex sets to find. \code{NULL} means no limit.
+#'   vertex sets to find. `NULL` means no limit.
 #' @param max Numeric constant, limit for the maximum size of the independent
-#' vertex sets to find. \code{NULL} means no limit.
-#' @return \code{ivs},
-#' \code{largest_ivs} and
-#' \code{maximal_ivs} return a list containing numeric
-#' vertex ids, each list element is an independent vertex set.
+#'   vertex sets to find. `NULL` means no limit.
+#' @return `ivs()`,
+#'   `largest_ivs()` and
+#'   `maximal_ivs()` return a list containing numeric
+#'   vertex ids, each list element is an independent vertex set.
 #'
-#' \code{ivs_size} returns an integer constant.
+#'   `ivs_size()` returns an integer constant.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} ported it from the Very Nauty
-#' Graph Library by Keith Briggs (\url{http://keithbriggs.info/}) and Gabor
+#' Graph Library by Keith Briggs (<http://keithbriggs.info/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual
 #' page.
-#' @seealso \code{\link{cliques}}
+#' @seealso [cliques()]
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
-#' algorithm for generating all the maximal independent sets. \emph{SIAM J
-#' Computing}, 6:505--517, 1977.
+#' algorithm for generating all the maximal independent sets. *SIAM J
+#' Computing*, 6:505--517, 1977.
 #' @export
 #' @keywords graphs
 #' @examples

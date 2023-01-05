@@ -23,11 +23,11 @@ return the values of the attributes in R lists, if this argument is
 whenever possible, before adding them to the igraph graph.}
 }
 \value{
-\code{graph_from_graphnel} returns an igraph graph object.
+\code{graph_from_graphnel()} returns an igraph graph object.
 }
 \description{
 The graphNEL class is defined in the \code{graph} package, it is another
-way to represent graphs. \code{graph_from_graphnel} takes a graphNEL
+way to represent graphs. \code{graph_from_graphnel()} takes a graphNEL
 graph and converts it to an igraph graph. It handles all
 graph/vertex/edge attributes. If the graphNEL graph has a vertex
 attribute called \sQuote{\code{name}} it will be used as igraph vertex
@@ -57,8 +57,8 @@ g4
 }
 }
 \seealso{
-\code{\link{as_graphnel}} for the other direction,
-\code{\link{as_adj}}, \code{\link{graph_from_adjacency_matrix}},
-\code{\link{as_adj_list}} and \code{\link{graph.adjlist}} for other
+\code{\link[=as_graphnel]{as_graphnel()}} for the other direction,
+\code{\link[=as_adj]{as_adj()}}, \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}},
+\code{\link[=as_adj_list]{as_adj_list()}} and \code{\link[=graph.adjlist]{graph.adjlist()}} for other
 graph representations.
 }

@@ -14,7 +14,7 @@ gsize(graph)
 Numeric scalar, the number of edges.
 }
 \description{
-\code{ecount} is an alias of this function.
+\code{ecount()} is an alias of this function.
 }
 \examples{
 g <- sample_gnp(100, 2 / 100)

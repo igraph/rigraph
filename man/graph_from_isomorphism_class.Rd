@@ -16,7 +16,7 @@ graph_from_isomorphism_class(size, number, directed = TRUE)
 }
 \value{
 An igraph object, the graph of the given size, directedness
-  and isomorphism class.
+and isomorphism class.
 }
 \description{
 The isomorphism class is a non-negative integer number.

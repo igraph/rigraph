@@ -41,22 +41,22 @@ not have any adjacent edges in \code{eids}.}
 A new graph object.
 }
 \description{
-\code{subgraph} creates a subgraph of a graph, containing only the specified
+\code{subgraph()} creates a subgraph of a graph, containing only the specified
 vertices and all the edges among them.
 }
 \details{
-\code{induced_subgraph} calculates the induced subgraph of a set of vertices
+\code{induced_subgraph()} calculates the induced subgraph of a set of vertices
 in a graph. This means that exactly the specified vertices and all the edges
 between them will be kept in the result graph.
 
-\code{subgraph.edges} calculates the subgraph of a graph. For this function
+\code{subgraph.edges()} calculates the subgraph of a graph. For this function
 one can specify the vertices and edges to keep. This function will be
-renamed to \code{subgraph} in the next major version of igraph.
+renamed to \code{subgraph()} in the next major version of igraph.
 
-The \code{subgraph} function currently does the same as \code{induced_subgraph}
+The \code{subgraph()} function currently does the same as \code{induced_subgraph()}
 (assuming \sQuote{\code{auto}} as the \code{impl} argument), but this behaviour
-is deprecated. In the next major version, \code{subgraph} will overtake the
-functionality of \code{subgraph.edges}.
+is deprecated. In the next major version, \code{subgraph()} will overtake the
+functionality of \code{subgraph.edges()}.
 }
 \examples{
 

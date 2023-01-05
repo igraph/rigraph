@@ -42,17 +42,17 @@ is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
 Vertex sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-  \item When indexed with positive numeric vectors, the vertices at the
-    given positions in the sequence are selected. This is the same as
-    indexing a regular R atomic vector with positive numeric vectors.
-  \item When indexed with negative numeric vectors, the vertices at the
-    given positions in the sequence are omitted. Again, this is the same
-    as indexing a regular R atomic vector.
-  \item When indexed with a logical vector, the lengths of the vertex
-    sequence and the index must match, and the vertices for which the
-    index is \code{TRUE} are selected.
-  \item Named graphs can be indexed with character vectors,
-    to select vertices with the given names.
+\item When indexed with positive numeric vectors, the vertices at the
+given positions in the sequence are selected. This is the same as
+indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the vertices at the
+given positions in the sequence are omitted. Again, this is the same
+as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the vertex
+sequence and the index must match, and the vertices for which the
+index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors,
+to select vertices with the given names.
 }
 }
 
@@ -75,21 +75,21 @@ same name. Similarly, you can use \code{.data} to match attribute names only.
 
 There are some special igraph functions that can be used only
 in expressions indexing vertex sequences: \describe{
-  \item{\code{.nei}}{takes a vertex sequence as its argument
-    and selects neighbors of these vertices. An optional \code{mode}
-    argument can be used to select successors (\code{mode="out"}), or
-    predecessors (\code{mode="in"}) in directed graphs.}
-  \item{\code{.inc}}{Takes an edge sequence as an argument, and
-    selects vertices that have at least one incident edge in this
-    edge sequence.}
-  \item{\code{.from}}{Similar to \code{.inc}, but only considers the
-    tails of the edges.}
-  \item{\code{.to}}{Similar to \code{.inc}, but only considers the
-    heads of the edges.}
-  \item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
-    \code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
-    \code{.nei(v, mode = "out")}.
-  }
+\item{\code{.nei}}{takes a vertex sequence as its argument
+and selects neighbors of these vertices. An optional \code{mode}
+argument can be used to select successors (\code{mode="out"}), or
+predecessors (\code{mode="in"}) in directed graphs.}
+\item{\code{.inc}}{Takes an edge sequence as an argument, and
+selects vertices that have at least one incident edge in this
+edge sequence.}
+\item{\code{.from}}{Similar to \code{.inc}, but only considers the
+tails of the edges.}
+\item{\code{.to}}{Similar to \code{.inc}, but only considers the
+heads of the edges.}
+\item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
+\code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
+\code{.nei(v, mode = "out")}.
+}
 }
 Note that multiple special functions can be used together, or with
 regular indices, and then their results are concatenated. See more

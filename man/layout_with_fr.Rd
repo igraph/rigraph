@@ -79,7 +79,7 @@ from igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{maxiter}{A deprecated synonym of \code{niter}, for compatibility.}
 
-\item{...}{Passed to \code{layout_with_fr}.}
+\item{...}{Passed to \code{layout_with_fr()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
@@ -122,7 +122,7 @@ Force-directed Placement. \emph{Software - Practice and Experience},
 21(11):1129-1164.
 }
 \seealso{
-\code{\link{layout_with_drl}}, \code{\link{layout_with_kk}} for
+\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=layout_with_kk]{layout_with_kk()}} for
 other layout algorithms.
 
 Other graph layouts: 

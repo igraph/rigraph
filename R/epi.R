@@ -111,32 +111,32 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' The number of susceptible/infected/recovered individuals is plotted over
 #' time, for multiple simulations.
 #'
-#' @param x The output of the SIR simulation, coming from the \code{\link{sir}}
-#' function.
+#' @param x The output of the SIR simulation, coming from the [sir()]
+#'   function.
 #' @param comp Character scalar, which component to plot. Either \sQuote{NI}
-#' (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
+#'   (infected, default), \sQuote{NS} (susceptible) or \sQuote{NR} (recovered).
 #' @param median Logical scalar, whether to plot the (binned) median.
 #' @param quantiles A vector of (binned) quantiles to plot.
 #' @param color Color of the individual simulation curves.
 #' @param median_color Color of the median curve.
 #' @param quantile_color Color(s) of the quantile curves. (It is recycled if
-#' needed and non-needed entries are ignored if too long.)
+#'   needed and non-needed entries are ignored if too long.)
 #' @param lwd.median Line width of the median.
 #' @param lwd.quantile Line width of the quantile curves.
 #' @param lty.quantile Line type of the quantile curves.
-#' @param xlim The x limits, a two-element numeric vector. If \code{NULL}, then
-#' it is calculated from the data.
-#' @param ylim The y limits, a two-element numeric vector. If \code{NULL}, then
-#' it is calculated from the data.
+#' @param xlim The x limits, a two-element numeric vector. If `NULL`, then
+#'   it is calculated from the data.
+#' @param ylim The y limits, a two-element numeric vector. If `NULL`, then
+#'   it is calculated from the data.
 #' @param xlab The x label.
-#' @param ylab The y label. If \code{NULL} then it is automatically added based
-#' on the \code{comp} argument.
-#' @param \dots Additional arguments are passed to \code{plot}, that is run
-#' before any of the curves are added, to create the figure.
+#' @param ylab The y label. If `NULL` then it is automatically added based
+#'   on the `comp` argument.
+#' @param \dots Additional arguments are passed to [plot()], that is run
+#'   before any of the curves are added, to create the figure.
 #' @return Nothing.
-#' @author Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
+#' @author Eric Kolaczyk (<http://math.bu.edu/people/kolaczyk/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com}.
-#' @seealso \code{\link{sir}} for running the actual simulation.
+#' @seealso [sir()] for running the actual simulation.
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
 #' @method plot sir

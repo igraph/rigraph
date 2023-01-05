@@ -13,13 +13,13 @@ isomorphisms(graph1, graph2, method = "vf2", ...)
 \item{graph2}{The second graph.}
 
 \item{method}{Currently only \sQuote{vf2} is supported, see
-\code{\link{isomorphic}} for details about it and extra arguments.}
+\code{\link[=isomorphic]{isomorphic()}} for details about it and extra arguments.}
 
 \item{...}{Extra arguments, passed to the various methods.}
 }
 \value{
 A list of vertex sequences, corresponding to all
-  mappings from the first graph to the second.
+mappings from the first graph to the second.
 }
 \description{
 Calculate all isomorphic mappings between the vertices of two graphs
