@@ -150,12 +150,9 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          working-directory: igraph
 
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
-        with:
-          working-directory: igraph
 
   coverage:
     runs-on: ubuntu-20.04
@@ -189,7 +186,6 @@ jobs:
         with:
           needs: coverage
           pak-version: devel
-          working-directory: igraph
 
       - name: Run coverage
         run: |
