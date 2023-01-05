@@ -147,7 +147,6 @@ graph.attributes <- function(graph) {
 #'   all vertex attributes are returned in a list.
 #' @param index An optional vertex sequence to query the attribute only
 #'   for these vertices.
-#'   If `NULL`, the default, the attribute is queried for all vertices.
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
 #'
@@ -162,16 +161,20 @@ graph.attributes <- function(graph) {
 #' vertex_attr(g, "label")
 #' vertex_attr(g)
 #' plot(g)
-vertex_attr <- function(graph, name, index = NULL) {
+vertex_attr <- function(graph, name, index = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (missing(name)) {
-    vertex.attributes(graph, index = index)
+    if (missing(index)) {
+      vertex.attributes(graph)
+    } else {
+      vertex.attributes(graph, index = index)
+    }
   } else {
     myattr <-
       .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (!is.null(index)) {
+    if (!missing(index)) {
       index <- as.igraph.vs(graph, index)
       myattr <- myattr[index]
     }
@@ -185,7 +188,6 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' @param name The name of the vertex attribute to set. If missing,
 #'   then `value` must be a named list, and its entries are
 #'   set as vertex attributes.
-#'   If `NULL`, the default, the attribute is set for all vertices.
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
 #' @param value The new value of the attribute(s) for all
@@ -205,7 +207,7 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' vertex_attr(g, "label") <- V(g)$name
 #' g
 #' plot(g)
-`vertex_attr<-` <- function(graph, name, index = NULL, value) {
+`vertex_attr<-` <- function(graph, name, index = V(graph), value) {
   if (missing(name)) {
     `vertex.attributes<-`(graph, index = index, value = value)
   } else {
@@ -219,7 +221,6 @@ vertex_attr <- function(graph, name, index = NULL) {
 #' @param name  The name of the attribute to set.
 #' @param index An optional vertex sequence to set the attributes
 #'   of a subset of vertices.
-#'   If `NULL`, the default, the attribute is set for all vertices.
 #' @param value The new value of the attribute for all (or `index`)
 #'   vertices.
 #' @return The graph, with the vertex attribute added or set.
@@ -240,25 +241,19 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
   )
 }
 
-i_set_vertex_attr <- function(graph, name, index = NULL, value,
+i_set_vertex_attr <- function(graph, name, index = V(graph), value,
                               check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   single <- is_single_index(index)
-  if (!is.null(index) && check) {
+  if (!missing(index) && check) {
     index <- as.igraph.vs(graph, index)
   }
   name <- as.character(name)
   vc <- vcount(graph)
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
-
-  # FIXME: optimize
-  if (is.null(index)) {
-    index <- V(graph)
-  }
-
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
@@ -270,26 +265,28 @@ i_set_vertex_attr <- function(graph, name, index = NULL, value,
 }
 
 #' @export
-vertex.attributes <- function(graph, index = NULL) {
+vertex.attributes <- function(graph, index = V(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
+  if (!missing(index)) {
+    index <- as.igraph.vs(graph, index)
+  }
+
   res <- .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!is.null(index)) {
-    index <- as.igraph.vs(graph, index)
-    if (length(index) != vcount(graph) || any(index != V(graph))) {
-      for (i in seq_along(res)) {
-        res[[i]] <- res[[i]][index]
-      }
+  if (!missing(index) &&
+    (length(index) != vcount(graph) || any(index != V(graph)))) {
+    for (i in seq_along(res)) {
+      res[[i]] <- res[[i]][index]
     }
   }
   res
 }
 
 #' @export
-"vertex.attributes<-" <- function(graph, index = NULL, value) {
+"vertex.attributes<-" <- function(graph, index = V(graph), value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -297,27 +294,27 @@ vertex.attributes <- function(graph, index = NULL) {
     any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
+  if (any(sapply(value, length) != length(index))) {
+    stop("Invalid attribute value length, must match number of vertices")
+  }
 
-  if (!is.null(index)) {
+  if (!missing(index)) {
     index <- as.igraph.vs(graph, index)
-
-    if (any(sapply(value, length) != length(index))) {
-      stop("Invalid attribute value length, must match number of vertices")
-    }
 
     if (any(duplicated(index)) || any(is.na(index))) {
       stop("Invalid vertices in index")
     }
+  }
 
-    if (length(index) != vcount(graph) || any(index != V(graph))) {
-      vs <- V(graph)
-      for (i in seq_along(value)) {
-        tmp <- value[[i]]
-        length(tmp) <- 0
-        length(tmp) <- length(vs)
-        tmp[index] <- value[[i]]
-        value[[i]] <- tmp
-      }
+  if (!missing(index) &&
+    (length(index) != vcount(graph) || any(index != V(graph)))) {
+    vs <- V(graph)
+    for (i in seq_along(value)) {
+      tmp <- value[[i]]
+      length(tmp) <- 0
+      length(tmp) <- length(vs)
+      tmp[index] <- value[[i]]
+      value[[i]] <- tmp
     }
   }
 
@@ -332,7 +329,6 @@ vertex.attributes <- function(graph, index = NULL) {
 #'   all edge attributes are returned in a list.
 #' @param index An optional edge sequence to query edge attributes
 #'   for a subset of edges.
-#'   If `NULL`, the default, the attribute is queried for all edges.
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
 #'
@@ -346,17 +342,25 @@ vertex.attributes <- function(graph, index = NULL) {
 #'   set_edge_attr("color", value = "red")
 #' g
 #' plot(g, edge.width = E(g)$weight)
-edge_attr <- function(graph, name, index = NULL) {
+edge_attr <- function(graph, name, index = E(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   if (missing(name)) {
-    edge.attributes(graph, index = index)
+    if (missing(index)) {
+      edge.attributes(graph)
+    } else {
+      edge.attributes(graph, index = index)
+    }
   } else {
     name <- as.character(name)
-    index <- as.igraph.es(graph, index)
     myattr <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)[[name]]
-    myattr[index]
+    if (is.null(index)) {
+      myattr
+    } else {
+      index <- as.igraph.es(graph, index)
+      myattr[index]
+    }
   }
 }
 
@@ -368,7 +372,6 @@ edge_attr <- function(graph, name, index = NULL) {
 #'   set as edge attributes.
 #' @param index An optional edge sequence to set the attributes
 #'   of a subset of edges.
-#'   If `NULL`, the default, the attribute is set for all edges.
 #' @param value The new value of the attribute(s) for all
 #'   (or `index`) edges.
 #' @return The graph, with the edge attribute(s) added or set.
@@ -386,7 +389,7 @@ edge_attr <- function(graph, name, index = NULL) {
 #' edge_attr(g, "label") <- E(g)$name
 #' g
 #' plot(g)
-`edge_attr<-` <- function(graph, name, index = NULL, value) {
+`edge_attr<-` <- function(graph, name, index = E(graph), value) {
   if (missing(name)) {
     `edge.attributes<-`(graph, index = index, value = value)
   } else {
@@ -400,7 +403,6 @@ edge_attr <- function(graph, name, index = NULL) {
 #' @param name  The name of the attribute to set.
 #' @param index An optional edge sequence to set the attributes of
 #'   a subset of edges.
-#'   If `NULL`, the default, the attribute is set for all edges.
 #' @param value The new value of the attribute for all (or `index`)
 #'   edges.
 #' @return The graph, with the edge attribute added or set.
@@ -414,27 +416,21 @@ edge_attr <- function(graph, name, index = NULL) {
 #'   set_edge_attr("label", value = LETTERS[1:10])
 #' g
 #' plot(g)
-set_edge_attr <- function(graph, name, index = NULL, value) {
+set_edge_attr <- function(graph, name, index = E(graph), value) {
   i_set_edge_attr(graph = graph, name = name, index = index, value = value)
 }
 
-i_set_edge_attr <- function(graph, name, index = NULL, value,
+i_set_edge_attr <- function(graph, name, index = E(graph), value,
                             check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   single <- is_single_index(index)
   name <- as.character(name)
-  if (!is.null(index) && check) index <- as.igraph.es(graph, index)
+  if (!missing(index) && check) index <- as.igraph.es(graph, index)
   ec <- ecount(graph)
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-
-  # FIXME: optimize
-  if (is.null(index)) {
-    index <- E(graph)
-  }
-
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
@@ -446,28 +442,28 @@ i_set_edge_attr <- function(graph, name, index = NULL, value,
 }
 
 #' @export
-edge.attributes <- function(graph, index = NULL) {
+edge.attributes <- function(graph, index = E(graph)) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
 
-  res <- .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-
-  if (!is.null(index)) {
+  if (!missing(index)) {
     index <- as.igraph.es(graph, index)
-
-    if (length(index) != ecount(graph) || any(index != E(graph))) {
-      for (i in seq_along(res)) {
-        res[[i]] <- res[[i]][index]
-      }
-    }
   }
 
+  res <- .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+
+  if (!missing(index) &&
+    (length(index) != ecount(graph) || any(index != E(graph)))) {
+    for (i in seq_along(res)) {
+      res[[i]] <- res[[i]][index]
+    }
+  }
   res
 }
 
 #' @export
-"edge.attributes<-" <- function(graph, index = NULL, value) {
+"edge.attributes<-" <- function(graph, index = E(graph), value) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -476,27 +472,26 @@ edge.attributes <- function(graph, index = NULL) {
     any(names(value) == "") || any(duplicated(names(value)))) {
     stop("Value must be a named list with unique names")
   }
+  if (any(sapply(value, length) != length(index))) {
+    stop("Invalid attribute value length, must match number of edges")
+  }
 
-  if (!is.null(index)) {
-    if (any(sapply(value, length) != length(index))) {
-      stop("Invalid attribute value length, must match number of edges")
-    }
-
+  if (!missing(index)) {
     index <- as.igraph.es(graph, index)
-
     if (any(duplicated(index)) || any(is.na(index))) {
       stop("Invalid edges in index")
     }
+  }
 
-    if (length(index) != ecount(graph) || any(index != E(graph))) {
-      es <- E(graph)
-      for (i in seq_along(value)) {
-        tmp <- value[[i]]
-        length(tmp) <- 0
-        length(tmp) <- length(es)
-        tmp[index] <- value[[i]]
-        value[[i]] <- tmp
-      }
+  if (!missing(index) &&
+    (length(index) != ecount(graph) || any(index != E(graph)))) {
+    es <- E(graph)
+    for (i in seq_along(value)) {
+      tmp <- value[[i]]
+      length(tmp) <- 0
+      length(tmp) <- length(es)
+      tmp[index] <- value[[i]]
+      value[[i]] <- tmp
     }
   }
 
