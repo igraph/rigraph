@@ -4167,6 +4167,36 @@ SEXP R_igraph_growing_random_game(SEXP pn, SEXP pm, SEXP pdirected,
   return result;
 }
 
+/* igraph_shortest_paths_johnson() does not have a 'mode' argument in C/igraph 0.9 and 0.10.
+ * This function fills in this functionality. It should be removed when C/igraph is updated, 
+ * to version 0.11 where igraph_distances_johnson() does support 'mode'. */
+static int distances_johnson(const igraph_t *graph, 
+                             igraph_matrix_t *res, 
+                             igraph_vs_t from, igraph_vs_t to, 
+                             const igraph_vector_t *weights,
+                             igraph_neimode_t mode,
+                             igraph_bool_t negw /* should be set to true if there are negative weights */) {
+  if (! igraph_is_directed(graph)) {
+    mode = IGRAPH_ALL;
+  }
+  if (mode == IGRAPH_ALL && negw) {
+    /* Reject undirected grahs with negative weights, just like igraph_shortest_paths_johnson() would. */
+    IGRAPH_ERROR("Undirected graph with negative weight.", IGRAPH_ENEGLOOP);
+  }
+  if (! negw) {
+    /* Fall back to Dijstra when there are no negative weights, just like igraph_shortest_paths_johnson() would. */
+    return igraph_shortest_paths_dijkstra(graph, res, from, to, weights, mode);
+  }
+  /* We simulate mode=IN by swapping to/from and transposing the result matrix. */
+  if (mode == IGRAPH_IN) {
+    IGRAPH_CHECK(igraph_shortest_paths_johnson(graph, res, to, from, weights));
+    IGRAPH_CHECK(igraph_matrix_transpose(res));
+  } else {
+    IGRAPH_CHECK(igraph_shortest_paths_johnson(graph, res, from, to, weights));
+  }
+  return IGRAPH_SUCCESS;
+}
+
 SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
                              SEXP pmode, SEXP weights,
                              SEXP palgo) {
@@ -4192,8 +4222,8 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   igraph_matrix_init(&res, 0, 0);
   switch (algo) {
   case 0:                       /* automatic */
-    if (negw && mode == IGRAPH_OUT && GET_LENGTH(pvids)>100) {
-      igraph_shortest_paths_johnson(&g, &res, vs, to, pw);
+    if (negw && mode != IGRAPH_ALL && GET_LENGTH(pvids)>100) {
+      distances_johnson(&g, &res, vs, to, pw, (igraph_neimode_t) mode, negw);
     } else if (negw) {
       igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw,
                                          (igraph_neimode_t) mode);
@@ -4215,14 +4245,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
                                        (igraph_neimode_t) mode);
     break;
   case 4:                       /* johnson */
-    if (mode != IGRAPH_OUT) {
-      if (igraph_is_directed(&g)) {
-        Rf_error("Johnson's algorithm works with mode=\"out\" only for directed graphs");
-      } else {
-        Rf_error("Johnson's algorithm works with mode=\"all\" or mode=\"out\" only for undirected graphs");
-      }
-    }
-    igraph_shortest_paths_johnson(&g, &res, vs, to, pw);
+    distances_johnson(&g, &res, vs, to, pw, mode, negw);
     break;
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));

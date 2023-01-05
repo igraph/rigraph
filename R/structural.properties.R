@@ -266,9 +266,12 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' unweighted graphs; the Dijkstra algorithm (\sQuote{`dijkstra`}), this
 #' works for graphs with non-negative edge weights; the Bellman-Ford algorithm
 #' (\sQuote{`bellman-ford`}), and Johnson's algorithm
-#' (\sQuote{`"johnson"`}). The latter two algorithms work with arbitrary
+#' (\sQuote{`johnson`}). The latter two algorithms work with arbitrary
 #' edge weights, but (naturally) only for graphs that don't have a negative
-#' cycle.
+#' cycle. Note that a negative-weight edge in an undirected graph implies
+#' such a cycle. Johnson's algorithm performs better than the Bellman-Ford
+#' one when many source (and target) vertices are given, with all-pairs
+#' shortest path length calculations being the typical use case.
 #'
 #' igraph can choose automatically between algorithms, and chooses the most
 #' efficient one that is appropriate for the supplied weights (if any). For
