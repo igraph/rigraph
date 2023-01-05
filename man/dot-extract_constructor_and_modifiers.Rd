@@ -23,6 +23,6 @@ function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 remaining, unparsed arguments.
 }
 \description{
-This is a helper function for the common parts of \code{make_} and
-\code{sample_}.
+This is a helper function for the common parts of \code{make_()} and
+\code{sample_()}.
 }

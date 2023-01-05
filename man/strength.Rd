@@ -27,7 +27,7 @@ argument is ignored.}
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If the graph does not have a
 \code{weight} edge attribute and this argument is \code{NULL}, then a
-warning is given and \code{\link{degree}} is called.}
+warning is given and \code{\link[=degree]{degree()}} is called.}
 }
 \value{
 A numeric vector giving the strength of the vertices.
@@ -53,7 +53,7 @@ Alessandro Vespignani: The architecture of complex weighted networks, Proc.
 Natl. Acad. Sci. USA 101, 3747 (2004)
 }
 \seealso{
-\code{\link{degree}} for the unweighted version.
+\code{\link[=degree]{degree()}} for the unweighted version.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

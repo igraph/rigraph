@@ -60,7 +60,7 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-\code{\link{st_cuts}}, \code{\link{min_separators}}
+\code{\link[=st_cuts]{st_cuts()}}, \code{\link[=min_separators]{min_separators()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

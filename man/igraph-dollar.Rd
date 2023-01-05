@@ -20,7 +20,7 @@
 \description{
 The \code{$} operator is a shortcut to get and and set
 graph attributes. It is shorter and just as readable as
-\code{\link{graph_attr}} and \code{\link{set_graph_attr}}.
+\code{\link[=graph_attr]{graph_attr()}} and \code{\link[=set_graph_attr]{set_graph_attr()}}.
 }
 \examples{
 g <- make_ring(10)

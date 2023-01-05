@@ -15,7 +15,7 @@ correspond to the vertices, and for each element the id in the new graph is
 given.}
 
 \item{vertex.attr.comb}{Specifies how to combine the vertex attributes in
-the new graph. Please see \code{\link{attribute.combination}} for details.}
+the new graph. Please see \code{\link[=attribute.combination]{attribute.combination()}} for details.}
 }
 \value{
 A new graph object.

@@ -55,7 +55,7 @@ attributes. See \code{\link{[.igraph.es}} for details.
 \section{Querying or setting attributes}{
 
 Edge sequences can be used to query or set attributes for the
-edges in the sequence. See \code{\link{$.igraph.es}} for details.
+edges in the sequence. See \code{\link[=$.igraph.es]{$.igraph.es()}} for details.
 }
 
 \examples{

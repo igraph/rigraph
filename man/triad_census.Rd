@@ -32,7 +32,7 @@ A->C.} \item{030C}{A<-B<-C, A->C.} \item{201}{A<->B<->C.}
 \item{300}{A<->B<->C, A<->C, the complete graph.} }
 
 This functions uses the RANDESU motif finder algorithm to find and count the
-subgraphs, see \code{\link{motifs}}.
+subgraphs, see \code{\link[=motifs]{motifs()}}.
 }
 \examples{
 
@@ -46,8 +46,8 @@ Sociological Theories in Progress, Volume 2, 218-251.  Boston: Houghton
 Mifflin.
 }
 \seealso{
-\code{\link{dyad_census}} for classifying binary relationships,
-\code{\link{motifs}} for the underlying implementation.
+\code{\link[=dyad_census]{dyad_census()}} for classifying binary relationships,
+\code{\link[=motifs]{motifs()}} for the underlying implementation.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

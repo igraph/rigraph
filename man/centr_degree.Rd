@@ -16,7 +16,7 @@ centr_degree(
 \item{graph}{The input graph.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{degree}.}
+\code{degree()}.}
 
 \item{loops}{Logical scalar, whether to consider loops edges when
 calculating the degree.}
@@ -26,15 +26,15 @@ centrality score by dividing by the theoretical maximum.}
 }
 \value{
 A named list with the following components:
-  \item{res}{The node-level centrality scores.}
-  \item{centralization}{The graph level centrality index.}
-  \item{theoretical_max}{The maximum theoretical graph level
-    centralization score for a graph with the given number of vertices,
-    using the same parameters. If the \code{normalized} argument was
-    \code{TRUE}, then the result was divided by this number.}
+\item{res}{The node-level centrality scores.}
+\item{centralization}{The graph level centrality index.}
+\item{theoretical_max}{The maximum theoretical graph level
+centralization score for a graph with the given number of vertices,
+using the same parameters. If the \code{normalized} argument was
+\code{TRUE}, then the result was divided by this number.}
 }
 \description{
-See \code{\link{centralize}} for a summary of graph centralization.
+See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized

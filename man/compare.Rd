@@ -13,12 +13,12 @@ compare(
 )
 }
 \arguments{
-\item{comm1}{A \code{\link{communities}} object containing a community
+\item{comm1}{A \code{\link[=communities]{communities()}} object containing a community
 structure; or a numeric vector, the membership vector of the first community
 structure. The membership vector should contain the community id of each
 vertex, the numbering of the communities starts with one.}
 
-\item{comm2}{A \code{\link{communities}} object containing a community
+\item{comm2}{A \code{\link[=communities]{communities()}} object containing a community
 structure; or a numeric vector, the membership vector of the second
 community structure, in the same format as for the previous argument.}
 
@@ -66,14 +66,14 @@ Hubert L and Arabie P: Comparing partitions. \emph{Journal of
 Classification} 2:193-218, 1985.
 }
 \seealso{
-See \code{\link{cluster_walktrap}},
-\code{\link{cluster_spinglass}},
-\code{\link{cluster_leading_eigen}},
-\code{\link{cluster_edge_betweenness}},
-\code{\link{cluster_fast_greedy}},
-\code{\link{cluster_label_prop}}
-\code{\link{cluster_louvain}}
-\code{\link{cluster_leiden}}
+See \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_label_prop]{cluster_label_prop()}}
+\code{\link[=cluster_louvain]{cluster_louvain()}}
+\code{\link[=cluster_leiden]{cluster_leiden()}}
 for various community detection methods.
 }
 \author{

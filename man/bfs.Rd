@@ -131,7 +131,7 @@ bfs(make_ring(10) \%du\% make_ring(10), root = 1, callback = f)
 
 }
 \seealso{
-\code{\link{dfs}} for depth-first search.
+\code{\link[=dfs]{dfs()}} for depth-first search.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

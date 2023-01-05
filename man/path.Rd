@@ -11,7 +11,7 @@ path(...)
 }
 \value{
 A special object that can be used together with igraph
-  graphs and the plus and minus operators.
+graphs and the plus and minus operators.
 }
 \description{
 This function can be used to add or delete edges that form a path.
@@ -25,7 +25,7 @@ edges are then added, from vertex 1 to vertex 2, from vertex 2 to vertex
 edges.
 
 When deleting edges, all attributes are concatenated and then passed
-to \code{\link{delete_edges}}.
+to \code{\link[=delete_edges]{delete_edges()}}.
 }
 \examples{
 # Create a (directed) wheel

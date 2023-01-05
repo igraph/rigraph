@@ -41,9 +41,9 @@ directed graphs. \dQuote{out} considers out-neighbors only, \dQuote{in}
 considers in-neighbors only, \dQuote{all} considers both.}
 }
 \value{
-For \code{global_efficiency}, the global efficiency of the graph as a
-single number. For \code{average_local_efficiency}, the average local
-efficiency of the graph as a single number. For \code{local_efficiency}, the
+For \code{global_efficiency()}, the global efficiency of the graph as a
+single number. For \code{average_local_efficiency()}, the average local
+efficiency of the graph as a single number. For \code{local_efficiency()}, the
 local efficiency of each vertex in a vector.
 }
 \description{

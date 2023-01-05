@@ -51,8 +51,8 @@ types. The matrix has \sQuote{types} rows and columns.}
 
 \item{loops}{Logical constant, whether self-loops are allowed in the graph.}
 
-\item{...}{Passed to the constructor, \code{sample_pref} or
-\code{sample_asym_pref}.}
+\item{...}{Passed to the constructor, \code{sample_pref()} or
+\code{sample_asym_pref()}.}
 
 \item{type.dist.matrix}{The joint distribution of the in- and out-vertex
 types.}
@@ -65,13 +65,13 @@ Generation of random graphs based on different vertex types.
 }
 \details{
 Both models generate random graphs with given vertex types. For
-\code{sample_pref} the probability that two vertices will be connected
+\code{sample_pref()} the probability that two vertices will be connected
 depends on their type and is given by the \sQuote{pref.matrix} argument.
 This matrix should be symmetric to make sense but this is not checked. The
 distribution of the different vertex types is given by the
 \sQuote{type.dist} vector.
 
-For \code{sample_asym_pref} each vertex has an in-type and an
+For \code{sample_asym_pref()} each vertex has an in-type and an
 out-type and a directed graph is created. The probability that a directed
 edge is realized from a vertex with a given out-type to a vertex with a
 given in-type is given in the \sQuote{pref.matrix} argument, which can be
@@ -79,8 +79,8 @@ asymmetric. The joint distribution for the in- and out-types is given in the
 \sQuote{type.dist.matrix} argument.
 
 The types of the generated vertices can be retrieved from the
-\code{type} vertex attribute for \code{sample_pref} and from the
-\code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref}.
+\code{type} vertex attribute for \code{sample_pref()} and from the
+\code{intype} and \code{outtype} vertex attribute for \code{sample_asym_pref()}.
 }
 \examples{
 
@@ -98,8 +98,8 @@ tkplot(g, layout = layout_in_circle)
 
 }
 \seealso{
-\code{\link{sample_traits}}.
-\code{\link{sample_traits_callaway}}
+\code{\link[=sample_traits]{sample_traits()}}.
+\code{\link[=sample_traits_callaway]{sample_traits_callaway()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

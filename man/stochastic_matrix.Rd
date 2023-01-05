@@ -51,7 +51,7 @@ max(abs(rowSums(W)) - 1)
 
 }
 \seealso{
-\code{\link{as_adj}}
+\code{\link[=as_adj]{as_adj()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

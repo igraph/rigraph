@@ -15,13 +15,13 @@ full_citation_graph(...)
 
 \item{directed}{Whether to create a directed graph.}
 
-\item{...}{Passed to \code{make_full_citation_graph}.}
+\item{...}{Passed to \code{make_full_citation_graph()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{make_full_citation_graph} creates a full citation graph. This is a
+\code{make_full_citation_graph()} creates a full citation graph. This is a
 directed graph, where every \code{i->j} edge is present if and only if
 \eqn{j<i}. If \code{directed=FALSE} then the graph is just a full graph.
 }

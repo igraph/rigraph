@@ -97,8 +97,8 @@ Matrix Analysis and Applications}, 2008.
 \url{http://people.epfl.ch/david.morton}
 }
 \seealso{
-\link{scg-method} for a detailed introduction. \code{\link{scg}},
-\code{\link{scg_eps}}, \code{\link{scg_group}}
+\link{scg-method} for a detailed introduction. \code{\link[=scg]{scg()}},
+\code{\link[=scg_eps]{scg_eps()}}, \code{\link[=scg_group]{scg_group()}}
 }
 \author{
 David Morton de Lachapelle,

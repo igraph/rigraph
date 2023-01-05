@@ -67,7 +67,7 @@ from the scree plot via the use of profile likelihood. \emph{Computational
 Statistics and Data Analysis}, Vol. 51, 918--930.
 }
 \seealso{
-\code{\link{embed_adjacency_matrix}}
+\code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

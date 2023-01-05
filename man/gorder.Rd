@@ -14,7 +14,7 @@ gorder(graph)
 Number of vertices, numeric scalar.
 }
 \description{
-\code{vcount} is an alias of this function.
+\code{vcount()} is an alias of this function.
 }
 \examples{
 g <- make_ring(10)

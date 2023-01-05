@@ -16,7 +16,7 @@ column.}
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
 
-\item{...}{Passed to \code{sample_dot_product}.}
+\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product
@@ -53,8 +53,8 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 2006.
 }
 \seealso{
-\code{\link{sample_dirichlet}}, \code{\link{sample_sphere_surface}}
-and \code{\link{sample_sphere_volume}} for sampling position vectors.
+\code{\link[=sample_dirichlet]{sample_dirichlet()}}, \code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
+and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

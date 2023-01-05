@@ -11,11 +11,11 @@ graph_from_literal(..., simplify = TRUE)
 from_literal(...)
 }
 \arguments{
-\item{...}{For \code{graph_from_literal} the formulae giving the
-structure of the graph, see details below. For \code{from_literal}
-all arguments are passed to \code{graph_from_literal}.}
+\item{...}{For \code{graph_from_literal()} the formulae giving the
+structure of the graph, see details below. For \code{from_literal()}
+all arguments are passed to \code{graph_from_literal()}.}
 
-\item{simplify}{Logical scalar, whether to call \code{\link{simplify}}
+\item{simplify}{Logical scalar, whether to call \code{\link[=simplify]{simplify()}}
 on the created graph. By default the graph is simplified, loop and
 multiple edges are removed.}
 }
@@ -27,7 +27,7 @@ This function is useful if you want to create a small (named) graph
 quickly, it works for both directed and undirected graphs.
 }
 \details{
-\code{graph_from_literal} is very handy for creating small graphs quickly.
+\code{graph_from_literal()} is very handy for creating small graphs quickly.
 You need to supply one or more R expressions giving the structure of
 the graph. The expressions consist of vertex names and edge
 operators. An edge operator is a sequence of \sQuote{\code{-}} and
@@ -80,7 +80,7 @@ Mutual edges can be also created with a simple edge operator:
 \preformatted{  graph_from_literal( A +-+ B +---+ C ++ D + E)
 }
 Note again that the length of the edge operators is arbitrary,
-\sQuote{\code{+}}, \sQuote{\code{++}} and \sQuote{\code{+-----+}} have
+\sQuote{\code{+}}, \sQuote{\verb{++}} and \sQuote{\verb{+-----+}} have
 exactly the same meaning.
 
 If the vertex names include spaces or other special characters then

@@ -123,7 +123,7 @@ tmp <- dfs(make_tree(10) \%du\% make_tree(10),
 
 }
 \seealso{
-\code{\link{bfs}} for breadth-first search.
+\code{\link[=bfs]{bfs()}} for breadth-first search.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -34,8 +34,8 @@ attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 }
 \value{
-\code{cluster_fast_greedy} returns a \code{\link{communities}}
-object, please see the \code{\link{communities}} manual page for details.
+\code{cluster_fast_greedy()} returns a \code{\link[=communities]{communities()}}
+object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
 This function tries to find dense subgraph, also called communities in
@@ -61,13 +61,13 @@ A Clauset, MEJ Newman, C Moore: Finding community structure in
 very large networks, http://www.arxiv.org/abs/cond-mat/0408187
 }
 \seealso{
-\code{\link{communities}} for extracting the results.
+\code{\link[=communities]{communities()}} for extracting the results.
 
-See also \code{\link{cluster_walktrap}},
-\code{\link{cluster_spinglass}},
-\code{\link{cluster_leading_eigen}} and
-\code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}}
-\code{\link{cluster_leiden}} for other methods.
+See also \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} and
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}}
+\code{\link[=cluster_leiden]{cluster_leiden()}} for other methods.
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

@@ -47,7 +47,7 @@ Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 Methods and Applications.  Cambridge: Cambridge University Press.
 }
 \seealso{
-\code{\link{vcount}}, \code{\link{ecount}}, \code{\link{simplify}}
+\code{\link[=vcount]{vcount()}}, \code{\link[=ecount]{ecount()}}, \code{\link[=simplify]{simplify()}}
 to get rid of the multiple and/or loop edges.
 }
 \author{

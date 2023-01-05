@@ -47,7 +47,7 @@ graph. \sQuote{default} keeps the \sQuote{size}, \sQuote{size2},
 keep all graph, vertex and edge attributes, \sQuote{none} keeps none of
 them.}
 
-\item{...}{Passed to \code{layout_with_sugiyama}.}
+\item{...}{Passed to \code{layout_with_sugiyama()}.}
 }
 \value{
 A list with the components: \item{layout}{The layout, a two-column

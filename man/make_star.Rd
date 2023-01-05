@@ -14,20 +14,20 @@ star(...)
 \item{n}{Number of vertices.}
 
 \item{mode}{It defines the direction of the
-edges, \code{in}: the edges point \emph{to} the center, \code{out}:
+edges, \verb{in}: the edges point \emph{to} the center, \code{out}:
 the edges point \emph{from} the center, \code{mutual}: a directed
 star is created with mutual edges, \code{undirected}: the edges
 are undirected.}
 
 \item{center}{ID of the center vertex.}
 
-\item{...}{Passed to \code{make_star}.}
+\item{...}{Passed to \code{make_star()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{star} creates a star graph, in this every single vertex is
+\code{star()} creates a star graph, in this every single vertex is
 connected to the center vertex and nobody else.
 }
 \examples{

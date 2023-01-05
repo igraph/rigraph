@@ -25,13 +25,13 @@
 #' Palette for categories
 #'
 #' This is a color blind friendly palette from
-#' \url{https://jfly.uni-koeln.de/color/}. It has 8 colors.
+#' <https://jfly.uni-koeln.de/color/>. It has 8 colors.
 #'
 #' This is the suggested palette for visualizations where vertex colors
 #' mark categories, e.g. community membership.
 #'
 #' @param n The number of colors in the palette. We simply take the first
-#' \code{n} colors from the total 8.
+#'   `n` colors from the total 8.
 #' @return A character vector of RGB color codes.
 #'
 #' @section Examples:
@@ -69,7 +69,7 @@ categorical_pal <- function(n) {
 
 #' Sequential palette
 #'
-#' This is the \sQuote{OrRd} palette from \url{https://colorbrewer2.org/}.
+#' This is the \sQuote{OrRd} palette from <https://colorbrewer2.org/>.
 #' It has at most nine colors.
 #'
 #' Use this palette, if vertex colors mark some ordinal quantity, e.g. some
@@ -77,7 +77,7 @@ categorical_pal <- function(n) {
 #' people, or their seniority level.
 #'
 #' @param n The number of colors in the palette. The maximum is nine
-#' currently.
+#'   currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes
@@ -125,16 +125,16 @@ sequential_pal <- function(n) {
 
 #' Diverging palette
 #'
-#' This is the \sQuote{PuOr} palette from \url{https://colorbrewer2.org/}.
+#' This is the \sQuote{PuOr} palette from <https://colorbrewer2.org/>.
 #' It has at most eleven colors.
 #'
-#' This is similar to \code{\link{sequential_pal}}, but it also puts
+#' This is similar to [sequential_pal()], but it also puts
 #' emphasis on the mid-range values, plus the the two extreme ends.
 #' Use this palette, if you have such a quantity to mark with vertex
 #' colors.
 #'
 #' @param n The number of colors in the palette. The maximum is eleven
-#' currently.
+#'   currently.
 #' @return A character vector of RGB color codes.
 #'
 #' @family palettes

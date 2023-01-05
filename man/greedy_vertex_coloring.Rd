@@ -18,7 +18,7 @@ A numeric vector where item \code{i} contains the color index
 associated to vertex \code{i}
 }
 \description{
-\code{greedy_vertex_coloring} finds a coloring for the vertices of a graph
+\code{greedy_vertex_coloring()} finds a coloring for the vertices of a graph
 based on a simple greedy algorithm.
 }
 \details{
