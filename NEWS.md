@@ -1,5 +1,54 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9093
+
+## Bug fixes
+
+- `NULL` means empty vertex or edge list again in all functions (#625).
+
+* NULL remains an alias for an empty vertex or edge list
+
+Reverts d05ac3140bde37d53365da464e23b22fe89e1b90.
+
+* Special case
+
+* Revert #608
+
+* Style
+
+* doc: fix docs
+
+## Documentation
+
+- Use Markdown in documentation (#624).
+
+* Enable Markdown, mostly whitespace changes
+
+* Indent
+
+* Parentheses
+
+* as.dendrogram()
+
+* print()
+
+* plot()
+
+* summary()
+
+* Pipe
+
+* simple
+
+* full
+
+## Uncategorized
+
+- Fix: distances() with algorithm='johnson' now handles all mode parameter values correctly.
+
+- Docs: better explain use cases of Johnson's shortest path length algorithm.
+
+
 # igraph 1.3.5.9092
 
 - Merge pull request #619 from dmurdoch/rgl.
