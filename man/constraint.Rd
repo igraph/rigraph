@@ -20,7 +20,7 @@ attribute all edges will have the same weight.}
 A numeric vector of constraint scores
 }
 \description{
-Given a graph, \code{constraint} calculates Burt's constraint for each
+Given a graph, \code{constraint()} calculates Burt's constraint for each
 vertex.
 }
 \details{

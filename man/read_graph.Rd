@@ -35,12 +35,12 @@ insensitive.}
 A graph object.
 }
 \description{
-The \code{read_graph} function is able to read graphs in various
+The \code{read_graph()} function is able to read graphs in various
 representations from a file, or from a http connection. Various formats
 are supported.
 }
 \details{
-The \code{read_graph} function may have additional arguments depending on
+The \code{read_graph()} function may have additional arguments depending on
 the file format (the \code{format} argument). See the details separately for
 each file format, below.
 }
@@ -57,7 +57,7 @@ default value is \code{TRUE}.} }
 }
 
 \seealso{
-\code{\link{write_graph}}
+\code{\link[=write_graph]{write_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

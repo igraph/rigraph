@@ -5,15 +5,14 @@
 \alias{vertex.attributes<-}
 \title{Set one or more vertex attributes}
 \usage{
-vertex_attr(graph, name, index = NULL) <- value
+vertex_attr(graph, name, index = V(graph)) <- value
 }
 \arguments{
 \item{graph}{The graph.}
 
 \item{name}{The name of the vertex attribute to set. If missing,
 then \code{value} must be a named list, and its entries are
-set as vertex attributes.
-If `NULL`, the default, the attribute is set for all vertices.}
+set as vertex attributes.}
 
 \item{index}{An optional vertex sequence to set the attributes
 of a subset of vertices.}

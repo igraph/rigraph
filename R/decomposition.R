@@ -33,8 +33,8 @@
 #' most three nodes.
 #'
 #' The chordality of the graph is decided by first performing maximum
-#' cardinality search on it (if the \code{alpha} and \code{alpham1} arguments
-#' are \code{NULL}), and then calculating the set of fill-in edges.
+#' cardinality search on it (if the `alpha` and `alpham1` arguments
+#' are `NULL`), and then calculating the set of fill-in edges.
 #'
 #' The set of fill-in edges is empty if and only if the graph is chordal.
 #'
@@ -42,27 +42,27 @@
 #'
 #' @aliases is.chordal
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored, as the algorithm is defined for undirected graphs.
+#'   ignored, as the algorithm is defined for undirected graphs.
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
-#' vertices. If it is \code{NULL}, then it is automatically calculated by
-#' calling \code{\link{max_cardinality}}, or from \code{alpham1} if
-#' that is given..
-#' @param alpham1 Numeric vector, the inverse of \code{alpha}. If it is
-#' \code{NULL}, then it is automatically calculated by calling
-#' \code{\link{max_cardinality}}, or from \code{alpha}.
+#'   vertices. If it is `NULL`, then it is automatically calculated by
+#'   calling [max_cardinality()], or from `alpham1` if
+#'   that is given..
+#' @param alpham1 Numeric vector, the inverse of `alpha`. If it is
+#'   `NULL`, then it is automatically calculated by calling
+#'   [max_cardinality()], or from `alpha`.
 #' @param fillin Logical scalar, whether to calculate the fill-in edges.
 #' @param newgraph Logical scalar, whether to calculate the triangulated graph.
 #' @return A list with three members: \item{chordal}{Logical scalar, it is
-#' \code{TRUE} iff the input graph is chordal.} \item{fillin}{If requested,
-#' then a numeric vector giving the fill-in edges. \code{NULL} otherwise.}
-#' \item{newgraph}{If requested, then the triangulated graph, an \code{igraph}
-#' object. \code{NULL} otherwise.}
+#'   `TRUE` iff the input graph is chordal.} \item{fillin}{If requested,
+#'   then a numeric vector giving the fill-in edges. `NULL` otherwise.}
+#'   \item{newgraph}{If requested, then the triangulated graph, an `igraph`
+#'   object. `NULL` otherwise.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{max_cardinality}}
+#' @seealso [max_cardinality()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
 #' linear-time algorithms to test chordality of graphs, test acyclicity of
-#' hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
-#' of Computation} 13, 566--579.
+#' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal
+#' of Computation* 13, 566--579.
 #' @export
 #' @keywords graphs
 #' @examples

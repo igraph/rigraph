@@ -13,7 +13,7 @@ line_graph(...)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{...}{Passed to \code{make_line_graph}.}
+\item{...}{Passed to \code{make_line_graph()}.}
 }
 \value{
 A new graph object.

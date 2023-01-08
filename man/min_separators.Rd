@@ -80,5 +80,5 @@ hierarchical concept of social groups. \emph{American Sociological Review},
 68 103--127, Feb 2003.
 }
 \seealso{
-\code{\link{is.separator}}
+\code{\link[=is.separator]{is.separator()}}
 }

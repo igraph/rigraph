@@ -56,17 +56,17 @@ Bipartite graphs have a \code{type} vertex attribute in igraph, this is
 boolean and \code{FALSE} for the vertices of the first kind and \code{TRUE}
 for vertices of the second kind.
 
-\code{bipartite_projection_size} calculates the number of vertices and edges
+\code{bipartite_projection_size()} calculates the number of vertices and edges
 in the two projections of the bipartite graphs, without calculating the
 projections themselves. This is useful to check how much memory the
 projections would need if you have a large bipartite graph.
 
-\code{bipartite_projection} calculates the actual projections.  You can use
+\code{bipartite_projection()} calculates the actual projections.  You can use
 the \code{probe1} argument to specify the order of the projections in the
 result. By default vertex type \code{FALSE} is the first and \code{TRUE} is
 the second.
 
-\code{bipartite_projection} keeps vertex attributes.
+\code{bipartite_projection()} keeps vertex attributes.
 }
 \examples{
 

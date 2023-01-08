@@ -32,7 +32,7 @@ to use the values of an edge attribute in the matrix cells. See the
 documentation of \link{as_adjacency_matrix} for more details.
 
 Other arguments passed through \code{...} are passed to either
-\code{\link{as_adjacency_matrix}} or \code{\link{as_edgelist}}
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}} or \code{\link[=as_edgelist]{as_edgelist()}}
 depending on the value of \code{matrix.type}.
 }
 \examples{
@@ -46,7 +46,7 @@ as.matrix(g, "adjacency", sparse = FALSE, attr = "weight")
 
 }
 \seealso{
-\code{\link{as_adjacency_matrix}}, \code{\link{as_edgelist}}
+\code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}, \code{\link[=as_edgelist]{as_edgelist()}}
 }
 \author{
 Michal Bojanowski, originally from the \code{intergraph} package

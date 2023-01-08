@@ -50,7 +50,7 @@ energy function.}
 \item{weight.node.edge.dist}{Weight for the node-edge distance component of
 the energy function.}
 
-\item{...}{Passed to \code{layout_with_dh}.}
+\item{...}{Passed to \code{layout_with_dh()}.}
 }
 \value{
 A two- or three-column matrix, each row giving the coordinates of a
@@ -137,8 +137,8 @@ Ron Davidson, David Harel: Drawing Graphs Nicely Using Simulated
 Annealing. \emph{ACM Transactions on Graphics} 15(4), pp. 301-331, 1996.
 }
 \seealso{
-\code{\link{layout_with_fr}},
-\code{\link{layout_with_kk}} for other layout algorithms.
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=layout_with_kk]{layout_with_kk()}} for other layout algorithms.
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

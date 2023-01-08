@@ -47,7 +47,7 @@ default value is zero.}
 movement allowed in a single step along a single axis. The default value is
 5.}
 
-\item{...}{Passed to \code{layout_with_graphopt}.}
+\item{...}{Passed to \code{layout_with_graphopt()}.}
 }
 \value{
 A numeric matrix with two columns, and a row for each vertex.
@@ -57,7 +57,7 @@ A force-directed layout algorithm, that scales relatively well to large
 graphs.
 }
 \details{
-\code{layout_with_graphopt} is a port of the graphopt layout algorithm by Michael
+\code{layout_with_graphopt()} is a port of the graphopt layout algorithm by Michael
 Schmuhl. graphopt version 0.4.1 was rewritten in C and the support for
 layers was removed (might be added later) and a code was a bit reorganized
 to avoid some unnecessary steps is the node charge (see below) is zero.

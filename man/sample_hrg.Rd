@@ -14,7 +14,7 @@ sample_hrg(hrg)
 An igraph graph.
 }
 \description{
-\code{sample_hrg} samples a graph from a given hierarchical random graph
+\code{sample_hrg()} samples a graph from a given hierarchical random graph
 model.
 }
 \seealso{

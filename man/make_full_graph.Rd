@@ -17,7 +17,7 @@ full_graph(...)
 
 \item{loops}{Whether to add self-loops to the graph.}
 
-\item{...}{Passed to \code{make_full_graph}.}
+\item{...}{Passed to \code{make_full_graph()}.}
 }
 \value{
 An igraph graph

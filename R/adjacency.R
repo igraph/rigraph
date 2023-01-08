@@ -248,82 +248,82 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 
 #' Create graphs from adjacency matrices
 #'
-#' \code{graph_from_adjacency_matrix} is a flexible function for creating \code{igraph}
+#' `graph_from_adjacency_matrix()` is a flexible function for creating `igraph`
 #' graphs from adjacency matrices.
 #'
 #' The order of the vertices are preserved, i.e. the vertex corresponding to
 #' the first row will be vertex 0 in the graph, etc.
 #'
-#' \code{graph_from_adjacency_matrix} operates in two main modes, depending on the
-#' \code{weighted} argument.
+#' `graph_from_adjacency_matrix()` operates in two main modes, depending on the
+#' `weighted` argument.
 #'
-#' If this argument is \code{NULL} then an unweighted graph is created and an
+#' If this argument is `NULL` then an unweighted graph is created and an
 #' element of the adjacency matrix gives the number of edges to create between
 #' the two corresponding vertices.  The details depend on the value of the
-#' \code{mode} argument: \describe{ \item{"directed"}{The graph will be
+#' `mode` argument: \describe{ \item{"directed"}{The graph will be
 #' directed and a matrix element gives the number of edges between two
-#' vertices.} \item{"undirected"}{This is exactly the same as \code{max},
-#' for convenience. Note that it is \emph{not} checked whether the matrix is
+#' vertices.} \item{"undirected"}{This is exactly the same as `max`,
+#' for convenience. Note that it is *not* checked whether the matrix is
 #' symmetric.} \item{"max"}{An undirected graph will be created and
-#' \code{max(A(i,j), A(j,i))} gives the number of edges.}
+#' `max(A(i,j), A(j,i))` gives the number of edges.}
 #' \item{"upper"}{An undirected graph will be created, only the upper
 #' right triangle (including the diagonal) is used for the number of edges.}
 #' \item{"lower"}{An undirected graph will be created, only the lower
 #' left triangle (including the diagonal) is used for creating the edges.}
-#' \item{"min"}{undirected graph will be created with \code{min(A(i,j),
-#' A(j,i))} edges between vertex \code{i} and \code{j}.} \item{"plus"}{
-#' undirected graph will be created with \code{A(i,j)+A(j,i)} edges between
-#' vertex \code{i} and \code{j}.} }
+#' \item{"min"}{undirected graph will be created with `min(A(i,j),
+#' A(j,i))` edges between vertex `i` and `j`.} \item{"plus"}{
+#' undirected graph will be created with `A(i,j)+A(j,i)` edges between
+#' vertex `i` and `j`.} }
 #'
-#' If the \code{weighted} argument is not \code{NULL} then the elements of the
+#' If the `weighted` argument is not `NULL` then the elements of the
 #' matrix give the weights of the edges (if they are not zero).  The details
-#' depend on the value of the \code{mode} argument: \describe{
+#' depend on the value of the `mode` argument: \describe{
 #' \item{"directed"}{The graph will be directed and a matrix element
 #' gives the edge weights.} \item{"undirected"}{First we check that the
 #' matrix is symmetric. It is an error if not. Then only the upper triangle is
 #' used to create a weighted undirected graph.} \item{"max"}{An
-#' undirected graph will be created and \code{max(A(i,j), A(j,i))} gives the
+#' undirected graph will be created and `max(A(i,j), A(j,i))` gives the
 #' edge weights.} \item{"upper"}{An undirected graph will be created,
 #' only the upper right triangle (including the diagonal) is used (for the edge
 #' weights).} \item{"lower"}{An undirected graph will be created, only
 #' the lower left triangle (including the diagonal) is used for creating the
 #' edges.} \item{"min"}{An undirected graph will be created,
-#' \code{min(A(i,j), A(j,i))} gives the edge weights.} \item{"plus"}{An
-#' undirected graph will be created, \code{A(i,j)+A(j,i)} gives the edge
+#' `min(A(i,j), A(j,i))` gives the edge weights.} \item{"plus"}{An
+#' undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
 #' weights.} }
 #'
 #' @aliases graph.adjacency
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
-#' can be a sparse matrix created with the \code{Matrix} package.
+#'   can be a sparse matrix created with the `Matrix` package.
 #' @param mode Character scalar, specifies how igraph should interpret the
-#' supplied matrix. See also the \code{weighted} argument, the interpretation
-#' depends on that too. Possible values are: \code{directed},
-#' \code{undirected}, \code{upper}, \code{lower}, \code{max}, \code{min},
-#' \code{plus}. See details below.
+#'   supplied matrix. See also the `weighted` argument, the interpretation
+#'   depends on that too. Possible values are: `directed`,
+#'   `undirected`, `upper`, `lower`, `max`, `min`,
+#'   `plus`. See details below.
 #' @param weighted This argument specifies whether to create a weighted graph
-#' from an adjacency matrix. If it is \code{NULL} then an unweighted graph is
-#' created and the elements of the adjacency matrix gives the number of edges
-#' between the vertices. If it is a character constant then for every non-zero
-#' matrix entry an edge is created and the value of the entry is added as an
-#' edge attribute named by the \code{weighted} argument. If it is \code{TRUE}
-#' then a weighted graph is created and the name of the edge attribute will be
-#' \code{weight}. See also details below.
+#'   from an adjacency matrix. If it is `NULL` then an unweighted graph is
+#'   created and the elements of the adjacency matrix gives the number of edges
+#'   between the vertices. If it is a character constant then for every non-zero
+#'   matrix entry an edge is created and the value of the entry is added as an
+#'   edge attribute named by the `weighted` argument. If it is `TRUE`
+#'   then a weighted graph is created and the name of the edge attribute will be
+#'   `weight`. See also details below.
 #' @param diag Logical scalar, whether to include the diagonal of the matrix in
-#' the calculation. If this is \code{FALSE} then the diagonal is zerod out
-#' first.
+#'   the calculation. If this is `FALSE` then the diagonal is zerod out
+#'   first.
 #' @param add.colnames Character scalar, whether to add the column names as
-#' vertex attributes. If it is \sQuote{\code{NULL}} (the default) then, if
-#' present, column names are added as vertex attribute \sQuote{name}. If
-#' \sQuote{\code{NA}} then they will not be added.  If a character constant,
-#' then it gives the name of the vertex attribute to add.
+#'   vertex attributes. If it is \sQuote{`NULL`} (the default) then, if
+#'   present, column names are added as vertex attribute \sQuote{name}. If
+#'   \sQuote{`NA`} then they will not be added.  If a character constant,
+#'   then it gives the name of the vertex attribute to add.
 #' @param add.rownames Character scalar, whether to add the row names as vertex
-#' attributes. Possible values the same as the previous argument. By default
-#' row names are not added. If \sQuote{\code{add.rownames}} and
-#' \sQuote{\code{add.colnames}} specify the same vertex attribute, then the
-#' former is ignored.
+#'   attributes. Possible values the same as the previous argument. By default
+#'   row names are not added. If \sQuote{`add.rownames`} and
+#'   \sQuote{`add.colnames`} specify the same vertex attribute, then the
+#'   former is ignored.
 #' @return An igraph graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \link{graph} and \code{\link{graph_from_literal}} for other ways to
+#' @seealso [graph()] and [graph_from_literal()] for other ways to
 #' create graphs.
 #' @keywords graphs
 #' @examples
@@ -434,6 +434,6 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 }
 
 #' @rdname graph_from_adjacency_matrix
-#' @param ... Passed to \code{graph_from_adjacency_matrix}.
+#' @param ... Passed to `graph_from_adjacency_matrix()`.
 #' @export
 from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)

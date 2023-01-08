@@ -49,7 +49,7 @@ rewire <- function(graph, with) {
 
 #' Graph rewiring while preserving the degree distribution
 #'
-#' This function can be used together with \code{\link{rewire}} to
+#' This function can be used together with [rewire()] to
 #' randomly rewire the edges while preserving the original graph's degree
 #' distribution.
 #'
@@ -64,7 +64,7 @@ rewire <- function(graph, with) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @family rewiring functions
-#' @seealso \code{\link{sample_degseq}}
+#' @seealso [sample_degseq()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -95,7 +95,7 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 
 #' Rewires the endpoints of the edges of a graph to a random vertex
 #'
-#' This function can be used together with \code{\link{rewire}}.
+#' This function can be used together with [rewire()].
 #' This method rewires the endpoints of the edges with a constant probability
 #' uniformly randomly to a new vertex in a graph.
 #'
@@ -103,13 +103,13 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
 #'
 #' @param prob The rewiring probability, a real number between zero and one.
 #' @param loops Logical scalar, whether loop edges are allowed in the rewired
-#' graph.
+#'   graph.
 #' @param multiple Logical scalar, whether multiple edges are allowed in the
-#' generated graph.
+#'   generated graph.
 #' @param mode Character string, specifies which endpoint of the edges to rewire
-#' in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
-#' the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
-#' of each directed edge. Ignored for undirected graphs.
+#'   in directed graphs. \sQuote{all} rewires both endpoints, \sQuote{in} rewires
+#'   the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
+#'   of each directed edge. Ignored for undirected graphs.
 #'
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family rewiring functions

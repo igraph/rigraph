@@ -68,82 +68,82 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #' Parameters for the igraph package
 #'
 #' igraph has some parameters which (usually) affect the behavior of many
-#' functions. These can be set for the whole session via \code{igraph_options}.
+#' functions. These can be set for the whole session via `igraph_options()`.
 #'
-#' The parameter values set via a call to the \code{igraph_options} function
+#' The parameter values set via a call to the `igraph_options()` function
 #' will remain in effect for the rest of the session, affecting the subsequent
-#' behaviour of the other functions of the \code{igraph} package for which the
+#' behaviour of the other functions of the `igraph` package for which the
 #' given parameters are relevant.
 #'
 #' This offers the possibility of customizing the functioning of the
-#' \code{igraph} package, for instance by insertions of appropriate calls to
-#' \code{igraph_options} in a load hook for package \pkg{igraph}.
+#' `igraph` package, for instance by insertions of appropriate calls to
+#' `igraph_options()` in a load hook for package \pkg{igraph}.
 #'
 #' The currently used parameters in alphabetical order:
 #' \describe{
 #'   \item{add.params}{Logical scalar, whether to add model
 #'     parameter to the graphs that are created by the various
-#'     graph constructors. By default it is \code{TRUE}.}
+#'     graph constructors. By default it is `TRUE`.}
 #'   \item{add.vertex.names}{Logical scalar, whether to add
 #'     vertex names to node level indices, like degree, betweenness
-#'     scores, etc. By default it is \code{TRUE}.}
+#'     scores, etc. By default it is `TRUE`.}
 #'   \item{annotate.plot}{Logical scalar, whether to annotate igraph
-#'     plots with the graph's name (\code{name} graph attribute, if
-#'     present) as \code{main}, and with the number of vertices and edges
-#'     as \code{xlab}. Defaults to \code{FALSE}.}
+#'     plots with the graph's name (`name` graph attribute, if
+#'     present) as `main`, and with the number of vertices and edges
+#'     as `xlab`. Defaults to `FALSE`.}
 #'   \item{dend.plot.type}{The plotting function to use when plotting
 #'     community structure dendrograms via
-#'     \code{\link{plot_dendrogram}}}. Possible values are \sQuote{auto} (the
+#'     [plot_dendrogram()]}. Possible values are \sQuote{auto} (the
 #'     default), \sQuote{phylo}, \sQuote{hclust} and
-#'     \sQuote{dendrogram}. See \code{\link{plot_dendrogram}} for details.
+#'     \sQuote{dendrogram}. See [plot_dendrogram()] for details.
 #'   \item{edge.attr.comb}{Specifies what to do with the edge
 #'     attributes if the graph is modified. The default value is
-#'     \code{list(weight="sum", name="concat", "ignore")}. See
-#'     \code{\link{attribute.combination}} for details on this.}
+#'     `list(weight="sum", name="concat", "ignore")`. See
+#'     [attribute.combination()] for details on this.}
 #'   \item{print.edge.attributes}{Logical constant, whether to print edge
-#'     attributes when printing graphs. Defaults to \code{FALSE}.}
-#'   \item{print.full}{Logical scalar, whether \code{\link{print.igraph}}
+#'     attributes when printing graphs. Defaults to `FALSE`.}
+#'   \item{print.full}{Logical scalar, whether [print.igraph()]
 #'     should show the graph structure as well, or only a summary of the
 #'     graph.}
 #'   \item{print.graph.attributes}{Logical constant, whether to print
-#'     graph attributes when printing graphs. Defaults to \code{FALSE}.}
+#'     graph attributes when printing graphs. Defaults to `FALSE`.}
 #'   \item{print.vertex.attributes}{Logical constant, whether to print
-#'     vertex attributes when printing graphs. Defaults to \code{FALSE}.}
+#'     vertex attributes when printing graphs. Defaults to `FALSE`.}
 #'   \item{return.vs.es}{Whether functions that return a set or sequence
 #'     of vertices/edges should return formal vertex/edge sequence
 #'     objects. This option was introduced in igraph version 1.0.0 and
 #'     defaults to TRUE. If your package requires the old behavior,
-#'     you can set it to FALSE in the \code{.onLoad} function of
+#'     you can set it to FALSE in the `.onLoad` function of
 #'     your package, without affecting other packages.}
-#'   \item{sparsematrices}{Whether to use the \code{Matrix} package for
+#'   \item{sparsematrices}{Whether to use the `Matrix` package for
 #'     (sparse) matrices. It is recommended, if the user works with
 #'     larger graphs.}
 #'   \item{verbose}{Logical constant, whether igraph functions should
-#'     talk more than minimal. Eg. if \code{TRUE} then some functions
-#'     will use progress bars while computing. Defaults to \code{FALSE}.}
+#'     talk more than minimal. Eg. if `TRUE` then some functions
+#'     will use progress bars while computing. Defaults to `FALSE`.}
 #'   \item{vertex.attr.comb}{Specifies what to do with the vertex
 #'     attributes if the graph is modified. The default value is
-#'     \code{list(name="concat", "ignore")} See
-#'     \code{\link{attribute.combination}} for details on this.}
+#'     `list(name="concat", "ignore")` See
+#'     [attribute.combination()] for details on this.}
 #' }
 #'
 #' @aliases igraph.options igraph_options getIgraphOpt igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of
-#' arguments may be in the \code{name=value} form, or no argument at all may be
-#' given. See the Value and Details sections for explanation.
+#'   arguments may be in the `name=value` form, or no argument at all may be
+#'   given. See the Value and Details sections for explanation.
 #' @param x A character string holding an option name.
 #' @param default If the specified option is not set in the options list, this
-#' value is returned. This facilitates retrieving an option and checking
-#' whether it is set and setting it separately if not.
-#' @return \code{igraph_options} returns a list with the old values of the
-#' updated parameters, invisibly. Without any arguments, it returns the
-#' values of all options.
+#'   value is returned. This facilitates retrieving an option and checking
+#'   whether it is set and setting it separately if not.
+#' @return `igraph_options()` returns a list with the old values of the
+#'   updated parameters, invisibly. Without any arguments, it returns the
+#'   values of all options.
 #'
-#' For \code{igraph_opt}, the current value set for option \code{x}, or
-#' \code{NULL} if the option is unset.
+#'   For `igraph_opt()`, the current value set for option `x`, or
+#'   `NULL` if the option is unset.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{igraph_options} is similar to \code{\link{options}} and
-#' \code{igraph_opt} is similar to \code{\link{getOption}}.
+#' @seealso `igraph_options()` is similar to [options()] and
+#' `igraph_opt()` is similar to [getOption()].
 #' @keywords graphs
 #' @examples
 #'
@@ -202,7 +202,7 @@ igraph_i_options <- function(..., .in = parent.frame()) {
 }
 
 local_igraph_options <- function(..., .in = parent.frame()) {
-  old <- igraph_i_options(..., .in = .in)
+  old <- igraph_options(..., .in = .in)
   withr::defer(rlang::inject(igraph_options(!!!old)), envir = .in)
   invisible()
 }
@@ -233,7 +233,7 @@ igraph_opt <- function(x, default = NULL) {
 #'
 #' @param options A named list of the options to change.
 #' @param code The code to run.
-#' @return The result of the \code{code}.
+#' @return The result of the `code`.
 #'
 #' @export
 #' @family igraph options

@@ -30,15 +30,15 @@ A new graph object.
 The difference of two graphs are created.
 }
 \details{
-\code{difference} creates the difference of two graphs. Only edges
+\code{difference()} creates the difference of two graphs. Only edges
 present in the first graph but not in the second will be be included in the
-new graph. The corresponding operator is \%m\%.
+new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
 names. Otherwise numeric vertex ids are used.
 
-\code{difference} keeps all attributes (graph, vertex and edge) of the
+\code{difference()} keeps all attributes (graph, vertex and edge) of the
 first graph.
 
 Note that \code{big} and \code{small} must both be directed or both be

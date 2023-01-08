@@ -38,7 +38,7 @@ which_mutual(g)
 sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 }
 \seealso{
-\code{\link{reciprocity}}, \code{\link{dyad_census}} if you just
+\code{\link[=reciprocity]{reciprocity()}}, \code{\link[=dyad_census]{dyad_census()}} if you just
 want some statistics about mutual edges.
 }
 \author{

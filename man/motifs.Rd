@@ -18,7 +18,7 @@ graph is cut at a certain level. Its length should be the same as the size
 of the motif (the \code{size} argument). By default no cuts are made.}
 }
 \value{
-\code{motifs} returns a numeric vector, the number of occurrences of
+\code{motifs()} returns a numeric vector, the number of occurrences of
 each motif in the graph. The motifs are ordered by their isomorphism
 classes. Note that for unconnected subgraphs, which are not considered to be
 motifs, the result will be \code{NA}.
@@ -28,10 +28,10 @@ Graph motifs are small connected subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{
-\code{motifs} searches a graph for motifs of a given size and returns a
+\code{motifs()} searches a graph for motifs of a given size and returns a
 numeric vector containing the number of different motifs. The order of
 the motifs is defined by their isomorphism class, see
-\code{\link{isomorphism_class}}.
+\code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \examples{
 g <- barabasi.game(100)
@@ -40,7 +40,7 @@ count_motifs(g, 3)
 sample_motifs(g, 3)
 }
 \seealso{
-\code{\link{isomorphism_class}}
+\code{\link[=isomorphism_class]{isomorphism_class()}}
 
 Other graph motifs: 
 \code{\link{count_motifs}()},

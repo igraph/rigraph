@@ -17,7 +17,7 @@ ignored for undirected graphs.}
 }
 \value{
 An edge sequence containing the incident edges of
-  the input vertex.
+the input vertex.
 }
 \description{
 Incident edges of a vertex in a graph

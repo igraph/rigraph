@@ -8,7 +8,7 @@ component_wise(merge_method = "dla")
 }
 \arguments{
 \item{merge_method}{Merging algorithm, the \code{method}
-argument of \code{\link{merge_coords}}.}
+argument of \code{\link[=merge_coords]{merge_coords()}}.}
 }
 \description{
 This is a layout modifier function, and it can be used
@@ -22,7 +22,7 @@ g \%>\%
   plot()
 }
 \seealso{
-\code{\link{merge_coords}}, \code{\link{layout_}}.
+\code{\link[=merge_coords]{merge_coords()}}, \code{\link[=layout_]{layout_()}}.
 
 Other layout modifiers: 
 \code{\link{normalize}()}

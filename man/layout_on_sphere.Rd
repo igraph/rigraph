@@ -12,7 +12,7 @@ on_sphere(...)
 \arguments{
 \item{graph}{The input graph.}
 
-\item{...}{Passed to \code{layout_on_sphere}.}
+\item{...}{Passed to \code{layout_on_sphere()}.}
 }
 \value{
 A numeric matrix with three columns, and one row for each vertex.
@@ -22,12 +22,12 @@ Place vertices on a sphere, approximately uniformly, in the order of their
 vertex ids.
 }
 \details{
-\code{layout_on_sphere} places the vertices (approximately) uniformly on the
+\code{layout_on_sphere()} places the vertices (approximately) uniformly on the
 surface of a sphere, this is thus a 3d layout. It is not clear however what
 \dQuote{uniformly on a sphere} means.
 
 If you want to order the vertices differently, then permute them using the
-\code{\link{permute}} function.
+\code{\link[=permute]{permute()}} function.
 }
 \seealso{
 Other graph layouts: 

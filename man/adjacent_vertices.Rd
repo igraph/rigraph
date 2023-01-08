@@ -19,7 +19,7 @@ ignored for undirected graphs.}
 A list of vertex sequences.
 }
 \description{
-This function is similar to \code{\link{neighbors}}, but it queries
+This function is similar to \code{\link[=neighbors]{neighbors()}}, but it queries
 the adjacent vertices for multiple vertices at once.
 }
 \examples{

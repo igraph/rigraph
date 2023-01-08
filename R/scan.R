@@ -25,60 +25,60 @@
 #'
 #' The scan statistic is a summary of the locality statistics that is
 #' computed from the local neighborhood of each vertex. The
-#' \code{local_scan} function computes the local statistics for each vertex
+#' `local_scan()` function computes the local statistics for each vertex
 #' for a given neighborhood size and the statistic function.
 #'
 #' See the given reference below for the details on the local scan
 #' statistics.
 #'
-#' \code{local_scan} calculates exact local scan statistics.
+#' `local_scan()` calculates exact local scan statistics.
 #'
-#' If \code{graph.them} is \code{NULL}, then \code{local_scan} computes the
+#' If `graph.them` is `NULL`, then `local_scan()` computes the
 #' \sQuote{us} variant of the scan statistics.  Otherwise,
-#' \code{graph.them} should be an igraph object and the \sQuote{them}
-#' variant is computed using \code{graph.us} to extract the neighborhood
-#' information, and applying \code{FUN} on these neighborhoods in
-#' \code{graph.them}.
+#' `graph.them` should be an igraph object and the \sQuote{them}
+#' variant is computed using `graph.us` to extract the neighborhood
+#' information, and applying `FUN` on these neighborhoods in
+#' `graph.them`.
 #'
 #' @param graph.us,graph An igraph object, the graph for which the scan
 #'   statistics will be computed
-#' @param graph.them An igraph object or \code{NULL}, if not \code{NULL},
+#' @param graph.them An igraph object or `NULL`, if not `NULL`,
 #'   then the \sQuote{them} statistics is computed, i.e. the neighborhoods
-#'   calculated from \code{graph.us} are evaluated on \code{graph.them}.
+#'   calculated from `graph.us` are evaluated on `graph.them`.
 #' @param k An integer scalar, the size of the local neighborhood for each
 #'   vertex. Should be non-negative.
 #' @param FUN Character, a function name, or a function object itself, for
-#'   computing the local statistic in each neighborhood. If \code{NULL}(the
-#'   default value), \code{ecount} is used for unweighted graphs (if
-#'   \code{weighted=FALSE}) and a function that computes the sum of edge
-#'   weights is used for weighted graphs (if \code{weighted=TRUE}). This
-#'   argument is ignored if \code{k} is zero.
+#'   computing the local statistic in each neighborhood. If `NULL`(the
+#'   default value), `ecount()` is used for unweighted graphs (if
+#'   `weighted=FALSE`) and a function that computes the sum of edge
+#'   weights is used for weighted graphs (if `weighted=TRUE`). This
+#'   argument is ignored if `k` is zero.
 #' @param weighted Logical scalar, TRUE if the edge weights should be used
 #'   for computation of the scan statistic. If TRUE, the graph should be
-#'   weighted.  Note that this argument is ignored if \code{FUN} is not
-#'   \code{NULL}, \code{"ecount"} and \code{"sumweights"}.
+#'   weighted.  Note that this argument is ignored if `FUN` is not
+#'   `NULL`, `"ecount"` and `"sumweights"`.
 #' @param mode Character scalar, the kind of neighborhoods to use for the
-#'   calculation. One of \sQuote{\code{out}}, \sQuote{\code{in}},
-#'   \sQuote{\code{all}} or \sQuote{\code{total}}. This argument is ignored
+#'   calculation. One of \sQuote{`out`}, \sQuote{`in`},
+#'   \sQuote{`all`} or \sQuote{`total`}. This argument is ignored
 #'   for undirected graphs.
 #' @param neighborhoods A list of neighborhoods, one for each vertex, or
-#'   \code{NULL}. If it is not \code{NULL}, then the function is evaluated on
+#'   `NULL`. If it is not `NULL`, then the function is evaluated on
 #'   the induced subgraphs specified by these neighborhoods.
 #'
-#'   In theory this could be useful if the same \code{graph.us} graph is used
-#'   for multiple \code{graph.them} arguments. Then the neighborhoods can be
-#'   calculated on \code{graph.us} and used with multiple graphs. In
-#'   practice, this is currently slower than simply using \code{graph.them}
+#'   In theory this could be useful if the same `graph.us` graph is used
+#'   for multiple `graph.them` arguments. Then the neighborhoods can be
+#'   calculated on `graph.us` and used with multiple graphs. In
+#'   practice, this is currently slower than simply using `graph.them`
 #'   multiple times.
-#' @param \dots Arguments passed to \code{FUN}, the function that computes
+#' @param \dots Arguments passed to `FUN`, the function that computes
 #'   the local statistics.
-#' @return For \code{local_scan} typically a numeric vector containing the
+#' @return For `local_scan()` typically a numeric vector containing the
 #'   computed local statistics for each vertex. In general a list or vector
-#'   of objects, as returned by \code{FUN}.
+#'   of objects, as returned by `FUN`.
 #'
 #' @references Priebe, C. E., Conroy, J. M., Marchette, D. J., Park,
-#'   Y. (2005).  Scan Statistics on Enron Graphs. \emph{Computational and
-#'   Mathematical Organization Theory}.
+#'   Y. (2005).  Scan Statistics on Enron Graphs. *Computational and
+#'   Mathematical Organization Theory*.
 #'
 #' @family scan statistics
 #' @export
@@ -296,13 +296,13 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
 #'   parameter.
 #' @param locality Whether to calculate the \sQuote{us} or \sQuote{them}
 #'   statistics.
-#' @param ... Extra arguments are passed to \code{\link{local_scan}}.
+#' @param ... Extra arguments are passed to [local_scan()].
 #' @return A list with entries:
-#'   \item{stat}{The scan statistics in each time step. It is \code{NA}
-#'     for the initial \code{tau + ell} time steps.}
+#'   \item{stat}{The scan statistics in each time step. It is `NA`
+#'     for the initial `tau + ell` time steps.}
 #'   \item{arg_max_v}{The (numeric) vertex ids for the vertex with
-#'     the largest locality statistics, at each time step. It is \code{NA}
-#'     for the initial \code{tau + ell} time steps.}
+#'     the largest locality statistics, at each time step. It is `NA`
+#'     for the initial `tau + ell` time steps.}
 #'
 #' @family scan statistics
 #' @export

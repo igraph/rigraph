@@ -241,19 +241,19 @@ nexus.format.result <- function(l, name = "") {
 #' Nexus is an online repository of networks, with an API that allow
 #' programmatic queries against it, and programmatic data download as well.
 #'
-#' The \code{nexus_list} and \code{nexus_info} functions query the online
-#' database. They both return \code{nexusDatasetInfo} objects.
-#' \code{nexus_info} returns more information than \code{nexus_list}.
+#' The `nexus_list()` and `nexus_info()` functions query the online
+#' database. They both return `nexusDatasetInfo` objects.
+#' `nexus_info()` returns more information than `nexus_list()`.
 #'
-#' \code{nexus_search} searches Nexus, and returns a list of data sets, as
-#' \code{nexusDatasetInfo} objects. See below for some search examples.
+#' `nexus_search()` searches Nexus, and returns a list of data sets, as
+#' `nexusDatasetInfo` objects. See below for some search examples.
 #'
-#' \code{nexus_get} downloads a data set from Nexus, based on its numeric id,
+#' `nexus_get()` downloads a data set from Nexus, based on its numeric id,
 #' or based on a Nexus search string. For search strings, only the first search
-#' hit is downloaded, but see also the \code{offset} argument. (If there are
+#' hit is downloaded, but see also the `offset` argument. (If there are
 #' not data sets found, then the function returns an error.)
 #'
-#' The \code{nexusDatasetInfo} objects returned by \code{nexus_list} have the
+#' The `nexusDatasetInfo` objects returned by `nexus_list()` have the
 #' following fields: \describe{
 #'   \item{id}{The numeric id of the dataset.}
 #'   \item{sid}{The character id of the dataset.}
@@ -271,7 +271,7 @@ nexus.format.result <- function(l, name = "") {
 #'     are separated by spaces.}
 #' }
 #'
-#' \code{nexusDatasetInfo} objects returned by \code{nexus_info} have the
+#' `nexusDatasetInfo` objects returned by `nexus_info()` have the
 #' following additional fields: \describe{
 #'   \item{date}{Character scalar, e.g. \sQuote{2011-01-09}, the date when
 #'     the dataset was added to the database.}
@@ -302,7 +302,7 @@ nexus.format.result <- function(l, name = "") {
 #'
 #' The results of the Nexus queries are printed to the screen in a consise
 #' format, similar to the format of igraph graphs. A data set list (typically
-#' the result of \code{nexus_list} and \code{nexus_search}) looks like this:
+#' the result of `nexus_list()` and `nexus_search()`) looks like this:
 #' \preformatted{NEXUS 1-5/18 -- data set list
 #' [1] kaptail.4         39/109-223   #18 Kapferer tailor shop
 #' [2] condmatcollab2003 31163/120029 #17 Condensed matter collaborations+
@@ -310,8 +310,8 @@ nexus.format.result <- function(l, name = "") {
 #' [4] powergrid         4941/6594    #15 Western US power grid
 #' [5] celegansneural    297/2359     #14 C. Elegans neural network }
 #' Each line here represents a data set, and the following information is
-#' given about them: the character id of the data set (e.g. \code{kaptail}
-#' or \code{powergrid}), the number of vertices and number of edges in the
+#' given about them: the character id of the data set (e.g. `kaptail`
+#' or `powergrid`), the number of vertices and number of edges in the
 #' graph of the data sets.  For data sets with multiple graphs, intervals
 #' are given here. Then the numeric id of the data set and the remaining
 #' space is filled with the name of the data set.
@@ -322,12 +322,12 @@ nexus.format.result <- function(l, name = "") {
 #' + nets: 1/KAPFTI2; 2/KAPFTS2; 3/KAPFTI1; 4/KAPFTS1}
 #' This is very similar to the header that is used for printing igraph
 #' graphs, but there are some differences as well. The four characters
-#' after the \code{NEXUS} word give the most important properties of the
-#' graph(s): the first is \sQuote{\code{U}} for undirected and
-#' \sQuote{\code{D}} for directed graphs, and \sQuote{\code{B}} if the data
+#' after the `NEXUS` word give the most important properties of the
+#' graph(s): the first is \sQuote{`U`} for undirected and
+#' \sQuote{`D`} for directed graphs, and \sQuote{`B`} if the data
 #' set contains both directed and undirected graphs. The second is
-#' \sQuote{\code{N}} named graphs. The third character is \sQuote{\code{W}}
-#' for weighted graphs, the fourth is \sQuote{\code{B}} if the data set
+#' \sQuote{`N`} named graphs. The third character is \sQuote{`W`}
+#' for weighted graphs, the fourth is \sQuote{`B`} if the data set
 #' contains bipartite graphs. Then the number of vertices and number of
 #' edges are printed, for data sets with multiple graphs, the smallest and
 #' the largest values are given. Then comes the numeric id, and the string
@@ -343,35 +343,35 @@ nexus.format.result <- function(l, name = "") {
 #' nexus_info nexus_get nexus_search nexusDatasetInfo print.nexusDatasetInfo
 #' print.nexusDatasetInfoList summary.nexusDatasetInfoList
 #' @param tags A character vector, the tags that are searched. If not given (or
-#' \code{NULL}), then all datasets are listed.
+#'   `NULL`), then all datasets are listed.
 #' @param offset An offset to select part of the results. Results are listed
-#' from \code{offset}+1.
+#'   from `offset`+1.
 #' @param limit The maximum number of results to return.
 #' @param operator A character scalar. If \sQuote{or} (the default), then all
-#' datasets that have at least one of the given tags, are returned. If it if
-#' \sQuote{and}, then only datasets that have all the given tags, are returned.
+#'   datasets that have at least one of the given tags, are returned. If it if
+#'   \sQuote{and}, then only datasets that have all the given tags, are returned.
 #' @param order The ordering of the results, possible values are:
-#' \sQuote{date}, \sQuote{name}, \sQuote{popularity}.
+#'   \sQuote{date}, \sQuote{name}, \sQuote{popularity}.
 #' @param id The numeric or character id of the data set to query or download.
-#' Instead of the data set ids, it is possible to supply a
-#' \code{nexusDatasetInfo} or \code{nexusDatasetInfoList} object here directly
-#' and then the query is done on the corresponding data set(s).
+#'   Instead of the data set ids, it is possible to supply a
+#'   `nexusDatasetInfo` or `nexusDatasetInfoList` object here directly
+#'   and then the query is done on the corresponding data set(s).
 #' @param q Nexus search string. See examples below.
 #' @param nexus.url The URL of the Nexus server. Don't change this from the
-#' default, unless you set up your own Nexus server.
-#' @param x,object The \code{nexusDatasetInfo} object to print.
+#'   default, unless you set up your own Nexus server.
+#' @param x,object The `nexusDatasetInfo` object to print.
 #' @param \dots Currently ignored.
-#' @return \code{nexus_list} and \code{nexus_search} return a list of
-#' \code{nexusDatasetInfo} objects. The list also has these attributes:
-#' \describe{ \item{size}{The number of data sets returned by the query.}
-#' \item{totalsize}{The total number of data sets found for the query.}
-#' \item{offset}{The offset parameter of the query.} \item{limit}{The limit
-#' parameter of the query.} }
+#' @return `nexus_list()` and `nexus_search()` return a list of
+#'   `nexusDatasetInfo` objects. The list also has these attributes:
+#'   \describe{ \item{size}{The number of data sets returned by the query.}
+#'   \item{totalsize}{The total number of data sets found for the query.}
+#'   \item{offset}{The offset parameter of the query.} \item{limit}{The limit
+#'   parameter of the query.} }
 #'
-#' \code{nexus_info} returns a single \code{nexusDatasetInfo} object.
+#'   `nexus_info()` returns a single `nexusDatasetInfo` object.
 #'
-#' \code{nexus_get} returns an igraph graph object, or a list of graph objects,
-#' if the data set consists of multiple networks.
+#'   `nexus_get()` returns an igraph graph object, or a list of graph objects,
+#'   if the data set consists of multiple networks.
 #' @section Examples:
 #' \preformatted{
 #' nexus_list(tag="weighted")

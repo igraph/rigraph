@@ -32,7 +32,7 @@ score; can be negative}
 1.}
 
 \item{tol}{tolerance for near-singularities during matrix inversion (see
-\code{\link{solve}})}
+\code{\link[=solve]{solve()}})}
 
 \item{sparse}{Logical scalar, whether to use sparse matrices for the
 calculation. The \sQuote{Matrix} package is required for sparse matrix
@@ -42,7 +42,7 @@ support}
 A vector, containing the centrality scores.
 }
 \description{
-\code{power_centrality} takes a graph (\code{dat}) and returns the Boncich power
+\code{power_centrality()} takes a graph (\code{dat}) and returns the Boncich power
 centralities of positions (selected by \code{nodes}).  The decay rate for
 power contributions is specified by \code{exponent} (1 by default).
 }
@@ -91,7 +91,7 @@ This function was ported (ie. copied) from the SNA package.
 \section{Warning }{
  Singular adjacency matrices cause no end of headaches for
 this algorithm; thus, the routine may fail in certain cases.  This will be
-fixed when I get a better algorithm.  \code{power_centrality} will not symmetrize your
+fixed when I get a better algorithm.  \code{power_centrality()} will not symmetrize your
 data before extracting eigenvectors; don't send this routine asymmetric
 matrices unless you really mean to do so.
 }
@@ -130,7 +130,7 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 \emph{American Journal of Sociology}, 92, 1170-1182.
 }
 \seealso{
-\code{\link{eigen_centrality}} and \code{\link{alpha_centrality}}
+\code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
 }
 \author{
 Carter T. Butts

@@ -56,7 +56,7 @@ as_incidence_matrix(g)
 
 }
 \seealso{
-\code{\link{graph_from_incidence_matrix}} for the opposite operation.
+\code{\link[=graph_from_incidence_matrix]{graph_from_incidence_matrix()}} for the opposite operation.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

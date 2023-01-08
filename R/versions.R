@@ -29,10 +29,10 @@
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
 #'
-#' \code{graph_version} queries the current data format,
+#' `graph_version()` queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' \code{\link{upgrade_graph}} can convert an older data format
+#' [upgrade_graph()] can convert an older data format
 #' to the current one.
 #'
 #' @param graph The input graph. If it is missing, then
@@ -57,10 +57,10 @@ graph_version <- function(graph) {
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
 #'
-#' \code{\link{graph_version}} queries the current data format,
+#' [graph_version()] queries the current data format,
 #' or the data format of a possibly older igraph graph.
 #'
-#' \code{upgrade_graph} can convert an older data format
+#' `upgrade_graph()` can convert an older data format
 #' to the current one.
 #'
 #' @param graph The input graph.

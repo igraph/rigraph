@@ -58,8 +58,8 @@ edge-betweenness based edge removals.}
 vector corresponding to the highest possible modularity score.}
 }
 \value{
-\code{cluster_edge_betweenness} returns a
-\code{\link{communities}} object, please see the \code{\link{communities}}
+\code{cluster_edge_betweenness()} returns a
+\code{\link[=communities]{communities()}} object, please see the \code{\link[=communities]{communities()}}
 manual page for details.
 }
 \description{
@@ -68,7 +68,7 @@ sparsely connected to other modules.
 }
 \details{
 The edge betweenness score of an edge measures the number of shortest paths
-through it, see \code{\link{edge_betweenness}} for details. The idea of the
+through it, see \code{\link[=edge_betweenness]{edge_betweenness()}} for details. The idea of the
 edge betweenness based community structure detection is that it is likely
 that edges connecting separate modules have high edge betweenness as all the
 shortest paths from one module to another must traverse through them. So if
@@ -77,7 +77,7 @@ get a hierarchical map, a rooted tree, called a dendrogram of the graph. The
 leafs of the tree are the individual vertices and the root of the tree
 represents the whole graph.
 
-\code{cluster_edge_betweenness} performs this algorithm by calculating the
+\code{cluster_edge_betweenness()} performs this algorithm by calculating the
 edge betweenness of the graph, removing the edge with the highest edge
 betweenness score, then recalculating edge betweenness of the edges and
 again removing the one with the highest score, etc.
@@ -101,13 +101,13 @@ M Newman and M Girvan: Finding and evaluating community
 structure in networks, \emph{Physical Review E} 69, 026113 (2004)
 }
 \seealso{
-\code{\link{edge_betweenness}} for the definition and calculation
-of the edge betweenness, \code{\link{cluster_walktrap}},
-\code{\link{cluster_fast_greedy}},
-\code{\link{cluster_leading_eigen}} for other community detection
+\code{\link[=edge_betweenness]{edge_betweenness()}} for the definition and calculation
+of the edge betweenness, \code{\link[=cluster_walktrap]{cluster_walktrap()}},
+\code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} for other community detection
 methods.
 
-See \code{\link{communities}} for extracting the results of the community
+See \code{\link[=communities]{communities()}} for extracting the results of the community
 detection.
 }
 \author{

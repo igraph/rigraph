@@ -29,7 +29,7 @@ differ in different blocks.}
 \item{p}{Numeric scalar, the Bernoulli rate of connections between vertices
 in different blocks.}
 
-\item{...}{Passed to \code{sample_hierarchical_sbm}.}
+\item{...}{Passed to \code{sample_hierarchical_sbm()}.}
 }
 \value{
 An igraph graph.
@@ -56,7 +56,7 @@ if (require(Matrix)) {
 }
 }
 \seealso{
-\code{\link{sbm.game}}
+\code{\link[=sbm.game]{sbm.game()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

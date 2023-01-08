@@ -19,11 +19,11 @@ for calculating betweenness.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph
-  betweenness centrality score for graphs with given order and other
-  parameters.
+betweenness centrality score for graphs with given order and other
+parameters.
 }
 \description{
-See \code{\link{centralize}} for a summary of graph centralization.
+See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized

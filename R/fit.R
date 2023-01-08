@@ -28,7 +28,7 @@
 
 #' Fitting a power-law distribution function to discrete data
 #'
-#' \code{fit_power_law} fits a power-law distribution to a data set.
+#' `fit_power_law()` fits a power-law distribution to a data set.
 #'
 #' This function fits a power-law distribution to a vector containing samples
 #' from a distribution (that is assumed to follow a power-law of course). In a
@@ -40,15 +40,15 @@
 #' \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 #' \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 #'
-#' \code{fit_power_law} provides two maximum likelihood implementations.  If
-#' the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
-#' optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
+#' `fit_power_law()` provides two maximum likelihood implementations.  If
+#' the `implementation` argument is \sQuote{`R.mle`}, then the BFGS
+#' optimization (see [mle][stats4::mle]) algorithm is applied.  The additional
 #' arguments are passed to the mle function, so it is possible to change the
 #' optimization method and/or its parameters.  This implementation can
-#' \emph{not} to fit the \eqn{x_{min}}{xmin} argument, so use the
-#' \sQuote{\code{plfit}} implementation if you want to do that.
+#' *not* to fit the \eqn{x_{min}}{xmin} argument, so use the
+#' \sQuote{`plfit`} implementation if you want to do that.
 #'
-#' The \sQuote{\code{plfit}} implementation also uses the maximum likelihood
+#' The \sQuote{`plfit`} implementation also uses the maximum likelihood
 #' principle to determine \eqn{\alpha}{alpha} for a given \eqn{x_{min}}{xmin};
 #' When \eqn{x_{min}}{xmin} is not given in advance, the algorithm will attempt
 #' to find itsoptimal value for which the \eqn{p}-value of a Kolmogorov-Smirnov
@@ -58,52 +58,52 @@
 #'
 #' @aliases power.law.fit
 #' @param x The data to fit, a numeric vector. For implementation
-#' \sQuote{\code{R.mle}} the data must be integer values. For the
-#' \sQuote{\code{plfit}} implementation non-integer values might be present and
-#' then a continuous power-law distribution is fitted.
-#' @param xmin Numeric scalar, or \code{NULL}. The lower bound for fitting the
-#' power-law. If \code{NULL}, the smallest value in \code{x} will be used for
-#' the \sQuote{\code{R.mle}} implementation, and its value will be
-#' automatically determined for the \sQuote{\code{plfit}} implementation. This
-#' argument makes it possible to fit only the tail of the distribution.
+#'   \sQuote{`R.mle`} the data must be integer values. For the
+#'   \sQuote{`plfit`} implementation non-integer values might be present and
+#'   then a continuous power-law distribution is fitted.
+#' @param xmin Numeric scalar, or `NULL`. The lower bound for fitting the
+#'   power-law. If `NULL`, the smallest value in `x` will be used for
+#'   the \sQuote{`R.mle`} implementation, and its value will be
+#'   automatically determined for the \sQuote{`plfit`} implementation. This
+#'   argument makes it possible to fit only the tail of the distribution.
 #' @param start Numeric scalar. The initial value of the exponent for the
-#' minimizing function, for the \sQuote{\code{R.mle}} implementation. Usually
-#' it is safe to leave this untouched.
+#'   minimizing function, for the \sQuote{`R.mle`} implementation. Usually
+#'   it is safe to leave this untouched.
 #' @param force.continuous Logical scalar. Whether to force a continuous
-#' distribution for the \sQuote{\code{plfit}} implementation, even if the
-#' sample vector contains integer values only (by chance). If this argument is
-#' false, igraph will assume a continuous distribution if at least one sample
-#' is non-integer and assume a discrete distribution otherwise.
+#'   distribution for the \sQuote{`plfit`} implementation, even if the
+#'   sample vector contains integer values only (by chance). If this argument is
+#'   false, igraph will assume a continuous distribution if at least one sample
+#'   is non-integer and assume a discrete distribution otherwise.
 #' @param implementation Character scalar. Which implementation to use. See
-#' details below.
+#'   details below.
 #' @param \dots Additional arguments, passed to the maximum likelihood
-#' optimizing function, \code{\link[stats4]{mle}}, if the \sQuote{\code{R.mle}}
-#' implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
-#' implementation.
-#' @return Depends on the \code{implementation} argument. If it is
-#' \sQuote{\code{R.mle}}, then an object with class \sQuote{\code{mle}}. It can
-#' be used to calculate confidence intervals and log-likelihood. See
-#' \code{\link[stats4]{mle-class}} for details.
+#'   optimizing function, [stats4::mle()], if the \sQuote{`R.mle`}
+#'   implementation is chosen. It is ignored by the \sQuote{`plfit`}
+#'   implementation.
+#' @return Depends on the `implementation` argument. If it is
+#'   \sQuote{`R.mle`}, then an object with class \sQuote{`mle`}. It can
+#'   be used to calculate confidence intervals and log-likelihood. See
+#'   [stats4::mle-class()] for details.
 #'
-#' If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
-#' named list with entries: \item{continuous}{Logical scalar, whether the
-#' fitted power-law distribution was continuous or discrete.}
-#' \item{alpha}{Numeric scalar, the exponent of the fitted power-law
-#' distribution.} \item{xmin}{Numeric scalar, the minimum value from which the
-#' power-law distribution was fitted. In other words, only the values larger
-#' than \code{xmin} were used from the input vector.} \item{logLik}{Numeric
-#' scalar, the log-likelihood of the fitted parameters.} \item{KS.stat}{Numeric
-#' scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
-#' fitted distribution with the input vector. Smaller scores denote better
-#' fit.} \item{KS.p}{Numeric scalar, the p-value of the Kolmogorov-Smirnov
-#' test. Small p-values (less than 0.05) indicate that the test rejected the
-#' hypothesis that the original data could have been drawn from the fitted
-#' power-law distribution.}
+#'   If `implementation` is \sQuote{`plfit`}, then the result is a
+#'   named list with entries: \item{continuous}{Logical scalar, whether the
+#'   fitted power-law distribution was continuous or discrete.}
+#'   \item{alpha}{Numeric scalar, the exponent of the fitted power-law
+#'   distribution.} \item{xmin}{Numeric scalar, the minimum value from which the
+#'   power-law distribution was fitted. In other words, only the values larger
+#'   than `xmin` were used from the input vector.} \item{logLik}{Numeric
+#'   scalar, the log-likelihood of the fitted parameters.} \item{KS.stat}{Numeric
+#'   scalar, the test statistic of a Kolmogorov-Smirnov test that compares the
+#'   fitted distribution with the input vector. Smaller scores denote better
+#'   fit.} \item{KS.p}{Numeric scalar, the p-value of the Kolmogorov-Smirnov
+#'   test. Small p-values (less than 0.05) indicate that the test rejected the
+#'   hypothesis that the original data could have been drawn from the fitted
+#'   power-law distribution.}
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link[stats4]{mle}}
+#' @seealso [stats4::mle()]
 #' @references Power laws, Pareto distributions and Zipf's law, M. E. J.
-#' Newman, \emph{Contemporary Physics}, 46, 323-351, 2005.
+#' Newman, *Contemporary Physics*, 46, 323-351, 2005.
 #'
 #' Aaron Clauset, Cosma R .Shalizi and Mark E.J. Newman: Power-law
 #' distributions in empirical data. SIAM Review 51(4):661-703, 2009.

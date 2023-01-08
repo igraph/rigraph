@@ -13,8 +13,7 @@ set_vertex_attr(graph, name, index = V(graph), value)
 \item{name}{The name of the attribute to set.}
 
 \item{index}{An optional vertex sequence to set the attributes
-of a subset of vertices.
-If `NULL`, the default, the attribute is set for all vertices.}
+of a subset of vertices.}
 
 \item{value}{The new value of the attribute for all (or \code{index})
 vertices.}

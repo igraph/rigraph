@@ -23,7 +23,7 @@ solution is to bend the edges, with diffenent curvature, so that all of them
 are visible.
 }
 \details{
-\code{curve_multiple} calculates the optimal \code{edge.curved} vector for
+\code{curve_multiple()} calculates the optimal \code{edge.curved} vector for
 plotting a graph with multiple edges, so that all edges are visible.
 }
 \examples{
@@ -40,8 +40,8 @@ plot(g)
 
 }
 \seealso{
-\code{\link{igraph.plotting}} for all plotting parameters,
-\code{\link{plot.igraph}}, \code{\link{tkplot}} and \code{\link{rglplot}}
+\link{igraph.plotting} for all plotting parameters,
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}}
 for plotting functions.
 }
 \author{

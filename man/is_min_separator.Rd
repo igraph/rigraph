@@ -22,7 +22,7 @@ vertex separator or not.
 Check whether a given set of vertices is a minimal vertex separator.
 }
 \details{
-\code{is_min_separator} decides whether the supplied vertex set is a minimal
+\code{is_min_separator()} decides whether the supplied vertex set is a minimal
 vertex separator. A minimal vertex separator is a vertex separator, such
 that none of its subsets is a vertex separator.
 
@@ -60,6 +60,6 @@ check.sep(mw5)
 
 }
 \seealso{
-\code{\link{min_separators}} lists all vertex separator of minimum
+\code{\link[=min_separators]{min_separators()}} lists all vertex separator of minimum
 size.
 }

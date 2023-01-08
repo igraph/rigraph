@@ -21,7 +21,7 @@ edge.}
 \item{coords}{Logical scalar, whether to add the positions of the vertices
 as vertex attributes called \sQuote{\code{x}} and \sQuote{\code{y}}.}
 
-\item{...}{Passed to \code{sample_grg}.}
+\item{...}{Passed to \code{sample_grg()}.}
 }
 \value{
 A graph object. If \code{coords} is \code{TRUE} then with vertex
@@ -45,7 +45,7 @@ g2 <- sample_grg(1000, 0.05, torus = TRUE)
 
 }
 \seealso{
-\code{\link{sample_gnp}}
+\code{\link[=sample_gnp]{sample_gnp()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}, first version was

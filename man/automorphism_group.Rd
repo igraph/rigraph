@@ -37,7 +37,7 @@ When \code{details} is \code{FALSE}, a list of vertex permutations
 that form a generating set of the automorphism group of the input graph.
 When \code{details} is \code{TRUE}, a named list with two members:
 \item{generators}{Returns the generators themselves} \item{info}{Additional
-information about the BLISS internals. See \code{\link{count_automorphisms}} for
+information about the BLISS internals. See \code{\link[=count_automorphisms]{count_automorphisms()}} for
 more details.}
 }
 \description{
@@ -70,8 +70,8 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link{canonical_permutation}}, \code{\link{permute}},
-\code{\link{count_automorphisms}}
+\code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
+\code{\link[=count_automorphisms]{count_automorphisms()}}
 }
 \author{
 Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
