@@ -17,7 +17,8 @@ alpha_centrality(
 )
 }
 \arguments{
-\item{graph}{The input graph, can be directed or undirected}
+\item{graph}{The input graph, can be directed or undirected. In undirected
+graphs, edges are treated as if they were reciprocal directed ones.}
 
 \item{nodes}{Vertex sequence, the vertices for which the alpha centrality
 values are returned. (For technical reasons they will be calculated for all
@@ -58,7 +59,7 @@ vertices in a graph.
 }
 \details{
 The alpha centrality measure can be considered as a generalization of
-eigenvector centerality to directed graphs. It was proposed by Bonacich in
+eigenvector centrality to directed graphs. It was proposed by Bonacich in
 2001 (see reference below).
 
 The alpha centrality of the vertices in a graph is defined as the solution
