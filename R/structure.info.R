@@ -23,13 +23,13 @@
 #' Are two vertices adjacent?
 #'
 #' The order of the vertices only matters in directed graphs,
-#' where the existence of a directed \code{(v1, v2)} edge is queried.
+#' where the existence of a directed `(v1, v2)` edge is queried.
 #'
 #' @aliases are.connected
 #' @param graph The graph.
 #' @param v1 The first vertex, tail in directed graphs.
 #' @param v2 The second vertex, head in directed graphs.
-#' @return A logical scalar, \code{TRUE} is a \code{(v1, v2)} exists in the
+#' @return A logical scalar, `TRUE` is a `(v1, v2)` exists in the
 #'   graph.
 #'
 #' @family structural queries
@@ -45,12 +45,13 @@
 #' dg
 #' are_adjacent(ug, 1, 2)
 #' are_adjacent(ug, 2, 1)
-
 are_adjacent <- function(graph, v1, v2) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_are_connected, graph, as.igraph.vs(graph, v1)-1,
-        as.igraph.vs(graph, v2)-1)
+  on.exit(.Call(C_R_igraph_finalizer))
+  .Call(
+    C_R_igraph_are_connected, graph, as.igraph.vs(graph, v1) - 1,
+    as.igraph.vs(graph, v2) - 1
+  )
 }

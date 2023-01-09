@@ -1,13 +1,101 @@
-# Unreleased
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-Added:
+# igraph 1.3.5.9093
+
+## Bug fixes
+
+- `NULL` means empty vertex or edge list again in all functions (#625).
+
+* NULL remains an alias for an empty vertex or edge list
+
+Reverts d05ac3140bde37d53365da464e23b22fe89e1b90.
+
+* Special case
+
+* Revert #608
+
+* Style
+
+* doc: fix docs
+
+## Documentation
+
+- Use Markdown in documentation (#624).
+
+* Enable Markdown, mostly whitespace changes
+
+* Indent
+
+* Parentheses
+
+* as.dendrogram()
+
+* print()
+
+* plot()
+
+* summary()
+
+* Pipe
+
+* simple
+
+* full
+
+## Uncategorized
+
+- Fix: distances() with algorithm='johnson' now handles all mode parameter values correctly.
+
+- Docs: better explain use cases of Johnson's shortest path length algorithm.
+
+
+# igraph 1.3.5.9092
+
+- Merge pull request #619 from dmurdoch/rgl.
+
+Use *3d functions rather than rgl.* functions
+
+
+# igraph 1.3.5.9091
+
+## Bug fixes
+
+- Fix builds with some `make` variants (#617).
+
+
+# igraph 1.3.5.9090
+
+## Bug fixes
+
+- Fix syntax error in new unit test.
+
+- Fixed indexing of result vertices in convex_hull(), closes #613.
+
+## Chore
+
+- Add fledge workflow.
+
+- Prepare for using fledge for managing NEWS.md (#615).
+
+- Style remaining files (#614).
+
+- Clarify changelog item [skip ci].
+
+## doc
+
+- Switch to https in a URL that CRAN check was complaining about.
+
+
+# igraph 1.3.5.9089
+
+## Added
 
  - `tkplot()` gained a `palette` argument and it is now using the same palette as `plot()` by default, for sake of consistency.
  - `plot.igraph()` gained a `loop.size` argument that can be used to scale the common radius of the loop edges.
 
-Fixed:
+## Fixed
 
- - The default maximum number of iterations has been increased to 3000 to match that of the igraph C core.
+ - The default maximum number of iterations for ARPACK has been increased to 3000 to match that of the igraph C core.
  - Rare convergence problems have been corrected in `cluster_leading_eigen()`.
  - All ARPACK-based functions now respect random seeds set in R when generating a random starting vector.
  - `distances(algorithm='johnson')` now throws an error if `mode != 'out'` for directed graphs, as no other `mode` is currently supported.
@@ -17,12 +105,14 @@ Fixed:
    to @pkharchenko (see PR #292).
  - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
+ - `as_graphnel()` does not duplicate loop edges any more.
+ - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
 
-Deprecated:
+## Deprecated
 
  - `automorphisms()` was renamed to `count_automorphisms()`; the old name is still available, but it is deprecated.
 
-Other:
+## Other
 
  - Documentation improvements.
 

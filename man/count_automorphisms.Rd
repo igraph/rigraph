@@ -46,7 +46,7 @@ graph into itself.
 This function calculates the number of automorphism of a graph using the
 BLISS algorithm. See also the BLISS homepage at
 \url{http://www.tcs.hut.fi/Software/bliss/index.html}. If you need the
-automorphisms themselves, use \code{\link{automorphism_group}} to obtain
+automorphisms themselves, use \code{\link[=automorphism_group]{automorphism_group()}} to obtain
 a compact representation of the automorphism group.
 }
 \examples{
@@ -59,7 +59,7 @@ count_automorphisms(g)
 ## A full graph has n! automorphisms; however, we restrict the vertex
 ## matching by colors, leading to only 4 automorphisms
 g <- make_full_graph(4)
-count_automorphisms(g, colors=c(1,2,1,2))
+count_automorphisms(g, colors = c(1, 2, 1, 2))
 }
 \references{
 Tommi Junttila and Petteri Kaski: Engineering an Efficient
@@ -68,8 +68,8 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link{canonical_permutation}}, \code{\link{permute}},
-and \code{\link{automorphism_group}} for a compact representation of all
+\code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
+and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all
 automorphisms
 }
 \author{

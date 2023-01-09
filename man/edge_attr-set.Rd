@@ -28,8 +28,10 @@ Set one or more edge attributes
 }
 \examples{
 g <- make_ring(10)
-edge_attr(g) <- list(name = LETTERS[1:10],
-                      color = rep("green", gsize(g)))
+edge_attr(g) <- list(
+  name = LETTERS[1:10],
+  color = rep("green", gsize(g))
+)
 edge_attr(g, "label") <- E(g)$name
 g
 plot(g)

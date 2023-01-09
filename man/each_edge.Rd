@@ -26,7 +26,7 @@ the start (tail) of each directed edge, \sQuote{out} rewires the end (head)
 of each directed edge. Ignored for undirected graphs.}
 }
 \description{
-This function can be used together with \code{\link{rewire}}.
+This function can be used together with \code{\link[=rewire]{rewire()}}.
 This method rewires the endpoints of the edges with a constant probability
 uniformly randomly to a new vertex in a graph.
 }
@@ -44,8 +44,8 @@ mean_distance(g)
 # Rewiring the start of each directed edge preserves the in-degree distribution
 # but not the out-degree distribution
 g <- barabasi.game(1000)
-g2 <- g \%>\% rewire(each_edge(mode="in", multiple=TRUE, prob=0.2))
-degree(g, mode="in") == degree(g2, mode="in")
+g2 <- g \%>\% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
+degree(g, mode = "in") == degree(g2, mode = "in")
 }
 \seealso{
 Other rewiring functions: 

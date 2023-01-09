@@ -30,5 +30,5 @@ layout.lgl(..., params = list())
 \item{params}{Passed to the new layout functions as arguments.}
 }
 \description{
-Please use the new names, see \code{\link{layout_}}.
+Please use the new names, see \code{\link[=layout_]{layout_()}}.
 }

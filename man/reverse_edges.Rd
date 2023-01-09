@@ -18,7 +18,7 @@ reverse_edges(graph, eids = E(graph))
 }
 \value{
 The result graph where the direction of the edges with the given
-  IDs are reversed
+IDs are reversed
 }
 \description{
 The new graph will contain the same vertices, edges and attributes as
@@ -28,6 +28,6 @@ all edges, this operation is also known as graph transpose.
 }
 \examples{
 
-g <- make_graph( ~ 1-+2, 2-+3, 3-+4 )
+g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 reverse_edges(g, 2)
 }

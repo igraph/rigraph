@@ -41,17 +41,17 @@ matrices are defined in a symmetric way.
 library(Matrix)
 ## g is a large sparse graph
 g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
-W <- stochastic_matrix(g, sparse=TRUE)
+W <- stochastic_matrix(g, sparse = TRUE)
 
 ## a dense matrix here would probably not fit in the memory
 class(W)
 
 ## may not be exactly 1, due to numerical errors
-max(abs(rowSums(W))-1)
+max(abs(rowSums(W)) - 1)
 
 }
 \seealso{
-\code{\link{as_adj}}
+\code{\link[=as_adj]{as_adj()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -32,7 +32,7 @@ mutual edges.}
 }
 \value{
 Logical scalar, \code{TRUE} if the \code{pattern} is
-  isomorphic to a (possibly induced) subgraph of \code{target}.
+isomorphic to a (possibly induced) subgraph of \code{target}.
 }
 \description{
 Decide if a graph is subgraph isomorphic to another one
@@ -48,16 +48,16 @@ to be superior on most graphs.
 This is the LAD algorithm by Solnon, see the reference below. It has
 the following extra arguments:
 \describe{
-  \item{domains}{If not \code{NULL}, then it specifies matching
-    restrictions. It must be a list of \code{target} vertex sets, given
-    as numeric vertex ids or symbolic vertex names. The length of the
-    list must be \code{vcount(pattern)} and for each vertex in
-    \code{pattern} it gives the allowed matching vertices in
-    \code{target}. Defaults to \code{NULL}.}
-  \item{induced}{Logical scalar, whether to search for an induced
-    subgraph. It is \code{FALSE} by default.}
-  \item{time.limit}{The processor time limit for the computation, in
-    seconds. It defaults to \code{Inf}, which means no limit.}
+\item{domains}{If not \code{NULL}, then it specifies matching
+restrictions. It must be a list of \code{target} vertex sets, given
+as numeric vertex ids or symbolic vertex names. The length of the
+list must be \code{vcount(pattern)} and for each vertex in
+\code{pattern} it gives the allowed matching vertices in
+\code{target}. Defaults to \code{NULL}.}
+\item{induced}{Logical scalar, whether to search for an induced
+subgraph. It is \code{FALSE} by default.}
+\item{time.limit}{The processor time limit for the computation, in
+seconds. It defaults to \code{Inf}, which means no limit.}
 }
 }
 
@@ -67,30 +67,36 @@ This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:
 \describe{
-  \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-    colors of the vertices for colored graph isomorphism. If they
-    are not given, but the graph has a \dQuote{color} vertex attribute,
-    then it will be used. If you want to ignore these attributes, then
-    supply \code{NULL} for both of these arguments. See also examples
-    below.}
-  \item{edge.color1, edge.color2}{Optional integer vectors giving the
-    colors of the edges for edge-colored (sub)graph isomorphism. If they
-    are not given, but the graph has a \dQuote{color} edge attribute,
-    then it will be used. If you want to ignore these attributes, then
-    supply \code{NULL} for both of these arguments.}
+\item{vertex.color1, vertex.color2}{Optional integer vectors giving the
+colors of the vertices for colored graph isomorphism. If they
+are not given, but the graph has a \dQuote{color} vertex attribute,
+then it will be used. If you want to ignore these attributes, then
+supply \code{NULL} for both of these arguments. See also examples
+below.}
+\item{edge.color1, edge.color2}{Optional integer vectors giving the
+colors of the edges for edge-colored (sub)graph isomorphism. If they
+are not given, but the graph has a \dQuote{color} edge attribute,
+then it will be used. If you want to ignore these attributes, then
+supply \code{NULL} for both of these arguments.}
 }
 }
 
 \examples{
 # A LAD example
-pattern <- make_graph(~ 1:2:3:4:5,
-                      1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1)
-target <- make_graph(~ 1:2:3:4:5:6:7:8:9,
-                    1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
-                    5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
-                    8 - 4:9, 9 - 6:4:8)
-domains <- list(`1` = c(1,3,9), `2` = c(5,6,7,8), `3` = c(2,4,6,7,8,9),
-                `4` = c(1,3,9), `5` = c(2,4,8,9))
+pattern <- make_graph(
+  ~ 1:2:3:4:5,
+  1 - 2:5, 2 - 1:5:3, 3 - 2:4, 4 - 3:5, 5 - 4:2:1
+)
+target <- make_graph(
+  ~ 1:2:3:4:5:6:7:8:9,
+  1 - 2:5:7, 2 - 1:5:3, 3 - 2:4, 4 - 3:5:6:8:9,
+  5 - 1:2:4:6:7, 6 - 7:5:4:9, 7 - 1:5:6,
+  8 - 4:9, 9 - 6:4:8
+)
+domains <- list(
+  `1` = c(1, 3, 9), `2` = c(5, 6, 7, 8), `3` = c(2, 4, 6, 7, 8, 9),
+  `4` = c(1, 3, 9), `5` = c(2, 4, 8, 9)
+)
 subgraph_isomorphisms(pattern, target)
 subgraph_isomorphisms(pattern, target, induced = TRUE)
 subgraph_isomorphisms(pattern, target, domains = domains)
@@ -102,11 +108,11 @@ subgraph_isomorphic(pattern, dring)
 }
 \references{
 LP Cordella,  P Foggia, C Sansone, and M Vento: An improved algorithm
- for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
- on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
+for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
+on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
 
- C. Solnon: AllDifferent-based Filtering for Subgraph Isomorphism,
- \emph{Artificial Intelligence} 174(12-13):850--864, 2010.
+C. Solnon: AllDifferent-based Filtering for Subgraph Isomorphism,
+\emph{Artificial Intelligence} 174(12-13):850--864, 2010.
 }
 \seealso{
 Other graph isomorphism: 

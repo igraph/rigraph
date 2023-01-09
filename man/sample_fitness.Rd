@@ -59,19 +59,19 @@ pair. This is repeated until the desired number of links are created.
 It can be shown that the \emph{expected} degree of each vertex will be
 proportional to its fitness, although the actual, observed degree will not
 be. If you need to generate a graph with an exact degree sequence, consider
-\code{\link{sample_degseq}} instead.
+\code{\link[=sample_degseq]{sample_degseq()}} instead.
 
 This model is commonly used to generate static scale-free networks. To
 achieve this, you have to draw the fitness scores from the desired power-law
-distribution. Alternatively, you may use \code{\link{sample_fitness_pl}}
+distribution. Alternatively, you may use \code{\link[=sample_fitness_pl]{sample_fitness_pl()}}
 which generates the fitnesses for you with a given exponent.
 }
 \examples{
 
 N <- 10000
-g <- sample_fitness(5*N, sample((1:50)^-2, N, replace=TRUE))
+g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 degree_distribution(g)
-plot(degree_distribution(g, cumulative=TRUE), log="xy")
+plot(degree_distribution(g, cumulative = TRUE), log = "xy")
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load

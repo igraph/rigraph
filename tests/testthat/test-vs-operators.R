@@ -11,8 +11,8 @@ test_that("c on attached vs", {
   expect_equal(ignore_attr = TRUE, c(vg, vg2), V(g))
   expect_equal(ignore_attr = TRUE, c(vg2, vg), V(g))
 
-  vg <- V(g)[c(2,5,6,8)]
-  expect_equal(ignore_attr = TRUE, c(vg, vg), V(g)[c(2,5,6,8,2,5,6,8)])
+  vg <- V(g)[c(2, 5, 6, 8)]
+  expect_equal(ignore_attr = TRUE, c(vg, vg), V(g)[c(2, 5, 6, 8, 2, 5, 6, 8)])
 })
 
 test_that("c on detached vs", {
@@ -24,8 +24,8 @@ test_that("c on detached vs", {
   vg3 <- V(g)
   vg4 <- V(g)[FALSE]
 
-  vg5 <- V(g)[c(2,5,6,8)]
-  vg6 <- V(g)[c(2,5,6,8,2,5,6,8)]
+  vg5 <- V(g)[c(2, 5, 6, 8)]
+  vg6 <- V(g)[c(2, 5, 6, 8, 2, 5, 6, 8)]
 
   rm(g)
   gc()
@@ -52,9 +52,9 @@ test_that("c on attached vs, names", {
   expect_equal(ignore_attr = TRUE, c(vg2, vg), V(g))
   expect_equal(names(c(vg2, vg)), names(V(g)))
 
-  vg <- V(g)[c(2,5,6,8)]
-  expect_equal(ignore_attr = TRUE, c(vg, vg), V(g)[c(2,5,6,8,2,5,6,8)])
-  expect_equal(names(c(vg, vg)), names(V(g)[c(2,5,6,8,2,5,6,8)]))
+  vg <- V(g)[c(2, 5, 6, 8)]
+  expect_equal(ignore_attr = TRUE, c(vg, vg), V(g)[c(2, 5, 6, 8, 2, 5, 6, 8)])
+  expect_equal(names(c(vg, vg)), names(V(g)[c(2, 5, 6, 8, 2, 5, 6, 8)]))
 })
 
 test_that("c on detached vs, names", {
@@ -66,8 +66,8 @@ test_that("c on detached vs, names", {
   vg3 <- V(g)
   vg4 <- V(g)[FALSE]
 
-  vg5 <- V(g)[c(2,5,6,8)]
-  vg6 <- V(g)[c(2,5,6,8,2,5,6,8)]
+  vg5 <- V(g)[c(2, 5, 6, 8)]
+  vg6 <- V(g)[c(2, 5, 6, 8, 2, 5, 6, 8)]
 
   rm(g)
   gc()
@@ -85,7 +85,6 @@ test_that("c on detached vs, names", {
 
 
 test_that("union on attached vs", {
-
   g <- make_ring(10)
 
   v1 <- V(g)[1:7]
@@ -104,7 +103,6 @@ test_that("union on attached vs", {
 })
 
 test_that("union on detached vs", {
-
   g <- make_ring(10)
 
   vg <- V(g)
@@ -125,11 +123,9 @@ test_that("union on detached vs", {
   expect_equal(ignore_attr = TRUE, union(v3), v3)
   expect_equal(ignore_attr = TRUE, union(v3, v3, v3), v3)
   expect_equal(ignore_attr = TRUE, union(v3, v3), v3)
-
 })
 
 test_that("union on attached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -157,11 +153,9 @@ test_that("union on attached vs, names", {
 
   expect_equal(ignore_attr = TRUE, union(v3, v3), v3)
   expect_equal(names(union(v3, v3)), names(v3))
-
 })
 
 test_that("union on detached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -194,13 +188,11 @@ test_that("union on detached vs, names", {
 
   expect_equal(ignore_attr = TRUE, union(v3, v3), v3)
   expect_equal(names(union(v3, v3)), names(v3))
-
 })
 
 
 
 test_that("intersection on attached vs", {
-
   g <- make_ring(10)
 
   vg <- V(g)
@@ -231,11 +223,9 @@ test_that("intersection on attached vs", {
 
   vi6 <- intersection(v3, vg)
   expect_equal(ignore_attr = TRUE, vi6, v3)
-
 })
 
 test_that("intersection on detached vs", {
-
   g <- make_ring(10)
 
   vg <- V(g)
@@ -269,11 +259,9 @@ test_that("intersection on detached vs", {
 
   vi6 <- intersection(v3, vg)
   expect_equal(ignore_attr = TRUE, vi6, v3)
-
 })
 
 test_that("intersection on attached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -311,11 +299,9 @@ test_that("intersection on attached vs, names", {
   vi6 <- intersection(v3, vg)
   expect_equal(ignore_attr = TRUE, vi6, v3)
   expect_equal(names(vi6), names(v3))
-
 })
 
 test_that("intersection on detached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -356,13 +342,11 @@ test_that("intersection on detached vs, names", {
   vi6 <- intersection(v3, vg)
   expect_equal(ignore_attr = TRUE, vi6, v3)
   expect_equal(names(vi6), names(v3))
-
 })
 
 
 
 test_that("difference on attached vs", {
-
   g <- make_ring(10)
 
   vg <- V(g)
@@ -391,11 +375,9 @@ test_that("difference on attached vs", {
   expect_equal(ignore_attr = TRUE, vd4, vr4)
   expect_equal(ignore_attr = TRUE, vd5, vr5)
   expect_equal(ignore_attr = TRUE, vd6, vr6)
-
 })
 
 test_that("difference on detached vs", {
-
   g <- make_ring(10)
 
   vg <- V(g)
@@ -427,11 +409,9 @@ test_that("difference on detached vs", {
   expect_equal(ignore_attr = TRUE, vd4, vr4)
   expect_equal(ignore_attr = TRUE, vd5, vr5)
   expect_equal(ignore_attr = TRUE, vd6, vr6)
-
 })
 
 test_that("difference on attached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -472,11 +452,9 @@ test_that("difference on attached vs, names", {
 
   expect_equal(ignore_attr = TRUE, vd6, vr6)
   expect_equal(names(vd6), names(vr6))
-
 })
 
 test_that("difference on detached vs, names", {
-
   g <- make_ring(10)
   V(g)$name <- letters[1:10]
 
@@ -520,13 +498,11 @@ test_that("difference on detached vs, names", {
 
   expect_equal(ignore_attr = TRUE, vd6, vr6)
   expect_equal(names(vd6), names(vr6))
-
 })
 
 
 
 test_that("rev on attached vs", {
-
   for (i in 1:10) {
     g <- make_ring(10)
     idx <- seq_len(i)
@@ -535,11 +511,9 @@ test_that("rev on attached vs", {
     vg2 <- rev(vg)
     expect_equal(ignore_attr = TRUE, vg2, vgr)
   }
-
 })
 
 test_that("rev on detached vs", {
-
   for (i in 1:10) {
     g <- make_ring(10)
     idx <- seq_len(i)
@@ -550,11 +524,9 @@ test_that("rev on detached vs", {
     vg2 <- rev(vg)
     expect_equal(ignore_attr = TRUE, vg2, vgr)
   }
-
 })
 
 test_that("rev on attached vs, names", {
-
   for (i in 1:10) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
@@ -565,11 +537,9 @@ test_that("rev on attached vs, names", {
     expect_equal(ignore_attr = TRUE, vg2, vgr)
     expect_equal(names(vg2), names(vgr))
   }
-
 })
 
 test_that("rev on detached vs, names", {
-
   for (i in 1:10) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
@@ -582,67 +552,58 @@ test_that("rev on detached vs, names", {
     expect_equal(ignore_attr = TRUE, vg2, vgr)
     expect_equal(names(vg2), names(vgr))
   }
-
 })
 
 unique_tests <- list(
-  list(1:5,        1:5),
-  list(c(1,1,2:5), 1:5),
-  list(c(1,1,1,1), 1),
-  list(c(1,2,2,2), 1:2),
-  list(c(2,2,1,1), 2:1),
-  list(c(1,2,1,2), 1:2),
-  list(c(),        c())
+  list(1:5, 1:5),
+  list(c(1, 1, 2:5), 1:5),
+  list(c(1, 1, 1, 1), 1),
+  list(c(1, 2, 2, 2), 1:2),
+  list(c(2, 2, 1, 1), 2:1),
+  list(c(1, 2, 1, 2), 1:2),
+  list(c(), c())
 )
 
 test_that("unique on attached vs", {
-
   sapply(unique_tests, function(d) {
     g <- make_ring(10)
-    vg <- unique(V(g)[ d[[1]] ])
-    vr <- V(g)[ d[[2]] ]
+    vg <- unique(V(g)[d[[1]]])
+    vr <- V(g)[d[[2]]]
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
-
 })
 
 test_that("unique on detached vs", {
-
   sapply(unique_tests, function(d) {
     g <- make_ring(10)
-    vg <- V(g)[ d[[1]] ]
-    vr <- V(g)[ d[[2]] ]
+    vg <- V(g)[d[[1]]]
+    vr <- V(g)[d[[2]]]
     rm(g)
     gc()
     vg <- unique(vg)
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
-
 })
 
 test_that("unique on attached vs, names", {
-
   sapply(unique_tests, function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
-    vg <- unique(V(g)[ d[[1]] ])
-    vr <- V(g)[ d[[2]] ]
+    vg <- unique(V(g)[d[[1]]])
+    vr <- V(g)[d[[2]]]
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
-
 })
 
 test_that("unique on detached vs, names", {
-
   sapply(unique_tests, function(d) {
     g <- make_ring(10)
     V(g)$name <- letters[1:10]
-    vg <- V(g)[ d[[1]] ]
-    vr <- V(g)[ d[[2]] ]
+    vg <- V(g)[d[[1]]]
+    vr <- V(g)[d[[2]]]
     rm(g)
     gc()
     vg <- unique(vg)
     expect_equal(ignore_attr = TRUE, vg, vr)
   })
-
 })

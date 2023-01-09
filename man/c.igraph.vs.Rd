@@ -21,7 +21,7 @@ Concatenate vertex sequences
 }
 \examples{
 g <- make_(ring(10), with_vertex_(name = LETTERS[1:10]))
-c(V(g)[1], V(g)['A'], V(g)[1:4])
+c(V(g)[1], V(g)["A"], V(g)[1:4])
 }
 \seealso{
 Other vertex and edge sequence operations: 

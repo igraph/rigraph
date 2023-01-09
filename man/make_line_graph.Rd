@@ -13,7 +13,7 @@ line_graph(...)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{...}{Passed to \code{make_line_graph}.}
+\item{...}{Passed to \code{make_line_graph()}.}
 }
 \value{
 A new graph object.
@@ -36,7 +36,7 @@ second vertex's corresponding edge.
 \examples{
 
 # generate the first De-Bruijn graphs
-g <- make_full_graph(2, directed=TRUE, loops=TRUE)
+g <- make_full_graph(2, directed = TRUE, loops = TRUE)
 make_line_graph(g)
 make_line_graph(make_line_graph(g))
 make_line_graph(make_line_graph(make_line_graph(g)))

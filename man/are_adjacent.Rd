@@ -15,12 +15,12 @@ are_adjacent(graph, v1, v2)
 \item{v2}{The second vertex, head in directed graphs.}
 }
 \value{
-A logical scalar, \code{TRUE} is a \code{(v1, v2)} exists in the
-  graph.
+A logical scalar, \code{TRUE} is a \verb{(v1, v2)} exists in the
+graph.
 }
 \description{
 The order of the vertices only matters in directed graphs,
-where the existence of a directed \code{(v1, v2)} edge is queried.
+where the existence of a directed \verb{(v1, v2)} edge is queried.
 }
 \examples{
 ug <- make_ring(10)

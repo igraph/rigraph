@@ -71,7 +71,7 @@ of the vertices with age zero. It is usually zero, see details below.}
 \code{time.windows} time steps are counted as a basis of the preferential
 attachment. See also details below.}
 
-\item{...}{Passed to \code{sample_pa_age}.}
+\item{...}{Passed to \code{sample_pa_age()}.}
 }
 \value{
 A new graph.
@@ -130,15 +130,15 @@ This function might generate graphs with multiple edges.
 \examples{
 
 # The maximum degree for graph with different aging exponents
-g1 <- sample_pa_age(10000, pa.exp=1, aging.exp=0, aging.bin=1000)
-g2 <- sample_pa_age(10000, pa.exp=1, aging.exp=-1,   aging.bin=1000)
-g3 <- sample_pa_age(10000, pa.exp=1, aging.exp=-3,   aging.bin=1000)
+g1 <- sample_pa_age(10000, pa.exp = 1, aging.exp = 0, aging.bin = 1000)
+g2 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -1, aging.bin = 1000)
+g3 <- sample_pa_age(10000, pa.exp = 1, aging.exp = -3, aging.bin = 1000)
 max(degree(g1))
 max(degree(g2))
 max(degree(g3))
 }
 \seealso{
-\code{\link{sample_pa}}, \code{\link{sample_gnp}}
+\code{\link[=sample_pa]{sample_pa()}}, \code{\link[=sample_gnp]{sample_gnp()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

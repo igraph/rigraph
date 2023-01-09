@@ -40,8 +40,8 @@ then it will always be calculated.}
 for the split corresponding to the highest modularity value.}
 }
 \value{
-\code{cluster_walktrap} returns a \code{\link{communities}}
-object, please see the \code{\link{communities}} manual page for details.
+\code{cluster_walktrap()} returns a \code{\link[=communities]{communities()}}
+object, please see the \code{\link[=communities]{communities()}} manual page for details.
 }
 \description{
 This function tries to find densely connected subgraphs, also called
@@ -56,7 +56,7 @@ networks using random walks, https://arxiv.org/abs/physics/0512106
 \examples{
 
 g <- make_full_graph(5) \%du\% make_full_graph(5) \%du\% make_full_graph(5)
-g <- add_edges(g, c(1,6, 1,11, 6, 11))
+g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
 cluster_walktrap(g)
 
 }
@@ -65,14 +65,14 @@ Pascal Pons, Matthieu Latapy: Computing communities in large
 networks using random walks, https://arxiv.org/abs/physics/0512106
 }
 \seealso{
-See \code{\link{communities}} on getting the actual membership
+See \code{\link[=communities]{communities()}} on getting the actual membership
 vector, merge matrix, modularity score, etc.
 
-\code{\link{modularity}} and \code{\link{cluster_fast_greedy}},
-\code{\link{cluster_spinglass}},
-\code{\link{cluster_leading_eigen}},
-\code{\link{cluster_edge_betweenness}}, \code{\link{cluster_louvain}},
-and \code{\link{cluster_leiden}} for other community detection
+\code{\link[=modularity]{modularity()}} and \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}},
+\code{\link[=cluster_spinglass]{cluster_spinglass()}},
+\code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}},
+\code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}},
+and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection
 methods.
 }
 \author{

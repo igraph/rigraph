@@ -20,7 +20,7 @@
 E(x, path = NULL, P = NULL, directed = NULL) <- value
 }
 \arguments{
-\item{x}{An edge sequence. For \code{E<-} it is a graph.}
+\item{x}{An edge sequence. For \verb{E<-} it is a graph.}
 
 \item{i}{Index.}
 
@@ -30,30 +30,29 @@ sequence.}
 \item{name}{Name of the edge attribute to query or set.}
 
 \item{path}{Select edges along a path, given by a vertex sequence See
-\code{\link{E}}.}
+\code{\link[=E]{E()}}.}
 
-\item{P}{Select edges via pairs of vertices. See \code{\link{E}}.}
+\item{P}{Select edges via pairs of vertices. See \code{\link[=E]{E()}}.}
 
 \item{directed}{Whether to use edge directions for the \code{path} or
 \code{P} arguments.}
 }
 \value{
 A vector or list, containing the values of the attribute
-  \code{name} for the edges in the sequence. For numeric, character or
-  logical attributes, it is a vector of the appropriate type, otherwise
-  it is a list.
+\code{name} for the edges in the sequence. For numeric, character or
+logical attributes, it is a vector of the appropriate type, otherwise
+it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set
 edge attributes, for edges in an edge sequence.
 }
 \details{
-The query form of \code{$} is a shortcut for \code{\link{edge_attr}},
-e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr,
-E(g)[idx])}.
+The query form of \code{$} is a shortcut for \code{\link[=edge_attr]{edge_attr()}},
+e.g. \code{E(g)[idx]$attr} is equivalent to \code{edge_attr(g, attr, E(g)[idx])}.
 
 The assignment form of \code{$} is a shortcut for
-\code{\link{set_edge_attr}}, e.g. \code{E(g)[idx]$attr <- value} is
+\code{\link[=set_edge_attr]{set_edge_attr()}}, e.g. \code{E(g)[idx]$attr <- value} is
 equivalent to \code{g <- set_edge_attr(g, attr, E(g)[idx], value)}.
 }
 \examples{
@@ -62,7 +61,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 1/100),
+g <- sample_(
+  gnp(100, 1 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )

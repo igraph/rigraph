@@ -31,14 +31,14 @@ Undirected graphs contain only mutual edges by definition.
 }
 \examples{
 
-g <- sample_gnm(10, 50, directed=TRUE)
+g <- sample_gnm(10, 50, directed = TRUE)
 reciprocity(g)
 dyad_census(g)
 which_mutual(g)
-sum(which_mutual(g))/2 == dyad_census(g)$mut
+sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 }
 \seealso{
-\code{\link{reciprocity}}, \code{\link{dyad_census}} if you just
+\code{\link[=reciprocity]{reciprocity()}}, \code{\link[=dyad_census]{dyad_census()}} if you just
 want some statistics about mutual edges.
 }
 \author{

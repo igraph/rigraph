@@ -18,18 +18,18 @@ details below.}
 
 \item{directed}{Logical scalar, whether or not to create a directed graph.}
 
-\item{...}{Passed to \code{make_chordal_ring}.}
+\item{...}{Passed to \code{make_chordal_ring()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{make_chordal_ring} creates an extended chordal ring.
+\code{make_chordal_ring()} creates an extended chordal ring.
 An extended chordal ring is regular graph, each node has the same
 degree. It can be obtained from a simple ring by adding some extra
 edges specified by a matrix. Let p denote the number of columns in
 the \sQuote{\code{W}} matrix. The extra edges of vertex \code{i}
-are added according to column \code{i mod p} in
+are added according to column \verb{i mod p} in
 \sQuote{\code{W}}. The number of extra edges is the number
 of rows in \sQuote{\code{W}}: for each row \code{j} an edge
 \code{i->i+w[ij]} is added if \code{i+w[ij]} is less than the number
@@ -37,8 +37,10 @@ of total nodes. See also Kotsis, G: Interconnection Topologies for
 Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 }
 \examples{
-chord <- make_chordal_ring(15,
-    matrix(c(3, 12, 4, 7, 8, 11), nr = 2))
+chord <- make_chordal_ring(
+  15,
+  matrix(c(3, 12, 4, 7, 8, 11), nr = 2)
+)
 }
 \seealso{
 Other deterministic constructors: 

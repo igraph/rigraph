@@ -28,12 +28,12 @@ details.
 \examples{
 
 # This is the Franklin graph:
-g1 <- graph_from_lcf(12, c(5,-5), 6)
+g1 <- graph_from_lcf(12, c(5, -5), 6)
 g2 <- make_graph("Franklin")
 isomorphic(g1, g2)
 }
 \seealso{
-\code{\link{graph}} can create arbitrary graphs, see also the other
+\code{\link[=graph]{graph()}} can create arbitrary graphs, see also the other
 functions on the its manual page for creating special graphs.
 }
 \author{

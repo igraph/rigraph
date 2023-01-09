@@ -28,7 +28,7 @@ same layer.}
 crossing minimization stage. 100 is a reasonable default; if you feel that
 you have too many edge crossings, increase this.}
 
-\item{...}{Arguments to pass to \code{layout_as_bipartite}.}
+\item{...}{Arguments to pass to \code{layout_as_bipartite()}.}
 }
 \value{
 A matrix with two columns and as many rows as the number of vertices
@@ -42,14 +42,16 @@ graphs.
 The layout is created by first placing the vertices in two rows, according
 to their types. Then the positions within the rows are optimized to minimize
 edge crossings, using the Sugiyama algorithm (see
-\code{\link{layout_with_sugiyama}}).
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}).
 }
 \examples{
 # Random bipartite graph
-inc <- matrix(sample(0:1, 50, replace = TRUE, prob=c(2,1)), 10, 5)
+inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)
 g <- graph_from_incidence_matrix(inc)
-plot(g, layout = layout_as_bipartite,
-     vertex.color=c("green","cyan")[V(g)$type+1])
+plot(g,
+  layout = layout_as_bipartite,
+  vertex.color = c("green", "cyan")[V(g)$type + 1]
+)
 
 # Two columns
 g \%>\%
@@ -57,7 +59,7 @@ g \%>\%
   plot()
 }
 \seealso{
-\code{\link{layout_with_sugiyama}}
+\code{\link[=layout_with_sugiyama]{layout_with_sugiyama()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

@@ -70,7 +70,7 @@ FALSE, the length of the missing paths are considered as having infinite
 length, making the mean distance infinite as well.}
 
 \item{details}{Whether to provide additional details in the result.
-Functions accepting this argument (like \code{mean_distance}) return
+Functions accepting this argument (like \code{mean_distance()}) return
 additional information like the number of disconnected vertex pairs in
 the result when this parameter is set to \code{TRUE}.}
 
@@ -79,12 +79,12 @@ calculated.}
 
 \item{to}{Numeric vector, the vertices to which the shortest paths will be
 calculated. By default it includes all vertices. Note that for
-\code{distances} every vertex must be included here at most once. (This
-is not required for \code{shortest_paths}.}
+\code{distances()} every vertex must be included here at most once. (This
+is not required for \code{shortest_paths()}.}
 
 \item{mode}{Character constant, gives whether the shortest paths to or from
 the given vertices should be calculated for directed graphs. If \code{out}
-then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
+then the shortest paths \emph{from} the vertex, if \verb{in} then \emph{to}
 it will be considered. If \code{all}, the default, then the corresponding
 undirected graph will be used, ie. not directed paths are searched. This
 argument is ignored for undirected graphs.}
@@ -126,11 +126,11 @@ the vector. Note that the search terminates if all the vertices in \code{to}
 are reached.}
 }
 \value{
-For \code{distances} a numeric matrix with \code{length(to)}
+For \code{distances()} a numeric matrix with \code{length(to)}
 columns and \code{length(v)} rows. The shortest path length from a vertex to
 itself is always zero. For unreachable vertices \code{Inf} is included.
 
-For \code{shortest_paths} a named list with four entries is returned:
+For \code{shortest_paths()} a named list with four entries is returned:
 \item{vpath}{This itself is a list, of length \code{length(to)}; list
 element \code{i} contains the vertex ids on the path from vertex \code{from}
 to vertex \code{to[i]} (or the other way for directed graphs depending on
@@ -147,25 +147,25 @@ predecessor of each vertex in the \code{to} argument, or \code{NULL} if it
 was not requested.} \item{inbound_edges}{Numeric vector, the inbound edge
 for each vertex, or \code{NULL}, if it was not requested.}
 
-For \code{all_shortest_paths} a list is returned, each list element
+For \code{all_shortest_paths()} a list is returned, each list element
 contains a shortest path from \code{from} to a vertex in \code{to}. The
 shortest paths to the same vertex are collected into consecutive elements of
 the list.
 
-For \code{mean_distance} a single number is returned if \code{details=FALSE},
+For \code{mean_distance()} a single number is returned if \code{details=FALSE},
 or a named list with two entries: \code{res} is the mean distance as a numeric
 scalar and \code{unconnected} is the number of unconnected vertex pairs,
 also as a numeric scalar.
 
-\code{distance_table} returns a named list with two entries: \code{res} is
+\code{distance_table()} returns a named list with two entries: \code{res} is
 a numeric vector, the histogram of distances, \code{unconnected} is a
 numeric scalar, the number of pairs for which the first vertex is not
 reachable from the second. The sum of the two entries is always \eqn{n(n-1)}
 for directed graphs and \eqn{n(n-1)/2} for undirected graphs.
 }
 \description{
-\code{distances} calculates the length of all the shortest paths from
-or to the vertices in the network. \code{shortest_paths} calculates one
+\code{distances()} calculates the length of all the shortest paths from
+or to the vertices in the network. \code{shortest_paths()} calculates one
 shortest path (the path itself, and not just its length) from or to the
 given vertex.
 }
@@ -174,7 +174,7 @@ The shortest path, or geodesic between two pair of vertices is a path with
 the minimal number of vertices. The functions documented in this manual page
 all calculate shortest paths between vertex pairs.
 
-\code{distances} calculates the lengths of pairwise shortest paths from
+\code{distances()} calculates the lengths of pairwise shortest paths from
 a set of vertices (\code{from}) to another set of vertices (\code{to}). It
 uses different algorithms, depending on the \code{algorithm} argument and
 the \code{weight} edge attribute of the graph. The implemented algorithms
@@ -182,34 +182,37 @@ are breadth-first search (\sQuote{\code{unweighted}}), this only works for
 unweighted graphs; the Dijkstra algorithm (\sQuote{\code{dijkstra}}), this
 works for graphs with non-negative edge weights; the Bellman-Ford algorithm
 (\sQuote{\code{bellman-ford}}), and Johnson's algorithm
-(\sQuote{\code{"johnson"}}). The latter two algorithms work with arbitrary
+(\sQuote{\code{johnson}}). The latter two algorithms work with arbitrary
 edge weights, but (naturally) only for graphs that don't have a negative
-cycle.
+cycle. Note that a negative-weight edge in an undirected graph implies
+such a cycle. Johnson's algorithm performs better than the Bellman-Ford
+one when many source (and target) vertices are given, with all-pairs
+shortest path length calculations being the typical use case.
 
 igraph can choose automatically between algorithms, and chooses the most
 efficient one that is appropriate for the supplied weights (if any). For
 automatic algorithm selection, supply \sQuote{\code{automatic}} as the
 \code{algorithm} argument. (This is also the default.)
 
-\code{shortest_paths} calculates a single shortest path (i.e. the path
+\code{shortest_paths()} calculates a single shortest path (i.e. the path
 itself, not just its length) between the source vertex given in \code{from},
-to the target vertices given in \code{to}. \code{shortest_paths} uses
+to the target vertices given in \code{to}. \code{shortest_paths()} uses
 breadth-first search for unweighted graphs and Dijkstra's algorithm for
 weighted graphs. The latter only works if the edge weights are non-negative.
 
-\code{all_shortest_paths} calculates \emph{all} shortest paths between
+\code{all_shortest_paths()} calculates \emph{all} shortest paths between
 pairs of vertices. More precisely, between the \code{from} vertex to the
 vertices given in \code{to}. It uses a breadth-first search for unweighted
 graphs and Dijkstra's algorithm for weighted ones. The latter only supports
 non-negative edge weights.
 
-\code{mean_distance} calculates the average path length in a graph, by
+\code{mean_distance()} calculates the average path length in a graph, by
 calculating the shortest paths between all pairs of vertices (both ways for
 directed graphs). It uses a breadth-=first search for unweighted graphs and
 Dijkstra's algorithm for weighted ones. The latter only supports non-negative
 edge weights.
 
-\code{distance_table} calculates a histogram, by calculating the shortest
+\code{distance_table()} calculates a histogram, by calculating the shortest
 path length between each pair of vertices. For directed graphs both
 directions are considered, so every pair of vertices appears twice in the
 histogram.
@@ -222,12 +225,33 @@ shortest_paths(g, 5)
 all_shortest_paths(g, 1, 6:8)
 mean_distance(g)
 ## Weighted shortest paths
-el <- matrix(ncol=3, byrow=TRUE,
-             c(1,2,0, 1,3,2, 1,4,1, 2,3,0, 2,5,5, 2,6,2, 3,2,1, 3,4,1,
-               3,7,1, 4,3,0, 4,7,2, 5,6,2, 5,8,8, 6,3,2, 6,7,1, 6,9,1,
-               6,10,3, 8,6,1, 8,9,1, 9,10,4) )
-g2 <- add_edges(make_empty_graph(10), t(el[,1:2]), weight=el[,3])
-distances(g2, mode="out")
+el <- matrix(
+  ncol = 3, byrow = TRUE,
+  c(
+    1, 2, 0,
+    1, 3, 2,
+    1, 4, 1,
+    2, 3, 0,
+    2, 5, 5,
+    2, 6, 2,
+    3, 2, 1,
+    3, 4, 1,
+    3, 7, 1,
+    4, 3, 0,
+    4, 7, 2,
+    5, 6, 2,
+    5, 8, 8,
+    6, 3, 2,
+    6, 7, 1,
+    6, 9, 1,
+    6, 10, 3,
+    8, 6, 1,
+    8, 9, 1,
+    9, 10, 4
+  )
+)
+g2 <- add_edges(make_empty_graph(10), t(el[, 1:2]), weight = el[, 3])
+distances(g2, mode = "out")
 
 }
 \references{

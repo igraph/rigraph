@@ -20,7 +20,7 @@ These edges define a spanning tree of the component.}
 \item{component_edges}{A list of numeric vectors. It gives all edges in the
 components.} \item{components}{A list of numeric vectors, the vertices of
 the components.} \item{articulation_points}{The articulation points of the
-graph. See \code{\link{articulation_points}}.}
+graph. See \code{\link[=articulation_points]{articulation_points()}}.}
 }
 \description{
 Finding the biconnected components of a graph
@@ -37,14 +37,14 @@ biconnected components.
 }
 \examples{
 
-g <- disjoint_union( make_full_graph(5), make_full_graph(5) )
+g <- disjoint_union(make_full_graph(5), make_full_graph(5))
 clu <- components(g)$membership
-g <- add_edges(g, c(which(clu==1), which(clu==2)))
+g <- add_edges(g, c(which(clu == 1), which(clu == 2)))
 bc <- biconnected_components(g)
 }
 \seealso{
-\code{\link{articulation_points}}, \code{\link{components}},
-\code{\link{is_connected}}, \code{\link{vertex_connectivity}}
+\code{\link[=articulation_points]{articulation_points()}}, \code{\link[=components]{components()}},
+\code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

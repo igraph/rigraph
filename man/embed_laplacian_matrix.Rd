@@ -26,7 +26,7 @@ spectral embedding.}
 embedding. If the graph has a \code{weight} edge attribute, then this is
 used by default. For weighted embedding, edge weights are used instead
 of the binary adjacency matrix, and vertex strength (see
-\code{\link{strength}}) is used instead of the degrees.}
+\code{\link[=strength]{strength()}}) is used instead of the degrees.}
 
 \item{which}{Which eigenvalues (or singular values, for directed graphs) to
 use. \sQuote{lm} means the ones with the largest magnitude, \sQuote{la} is
@@ -59,7 +59,7 @@ returned instead of \eqn{X} and \eqn{Y}.}
 
 \item{options}{A named list containing the parameters for the SVD
 computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by \code{\link{igraph.arpack.default}}.}
+the values given by \link{igraph.arpack.default}.}
 }
 \value{
 A list containing with entries: \item{X}{Estimated latent positions,
@@ -69,7 +69,7 @@ positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
 is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
 or the singular values (for directed graphs) calculated by the algorithm.}
 \item{options}{A named list, information about the underlying ARPACK
-computation. See \code{\link{arpack}} for the details.}
+computation. See \code{\link[=arpack]{arpack()}} for the details.}
 }
 \description{
 Spectral decomposition of Laplacian matrices of graphs.
@@ -79,14 +79,16 @@ This function computes a \code{no}-dimensional Euclidean representation of
 the graph based on its Laplacian matrix, \eqn{L}. This representation is
 computed via the singular value decomposition of the Laplacian matrix.
 
-They are essentially doing the same as \code{\link{embed_adjacency_matrix}},
+They are essentially doing the same as \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
 but work on the Laplacian matrix, instead of the adjacency matrix.
 }
 \examples{
 
 ## A small graph
 lpvs <- matrix(rnorm(200), 20, 10)
-lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+lpvs <- apply(lpvs, 2, function(x) {
+  return(abs(x) / sqrt(sum(x^2)))
+})
 RDP <- sample_dot_product(lpvs)
 embed <- embed_laplacian_matrix(RDP, 5)
 }
@@ -96,8 +98,8 @@ Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 \emph{Journal of the American Statistical Association}, Vol. 107(499), 2012
 }
 \seealso{
-\code{\link{embed_adjacency_matrix}},
-\code{\link{sample_dot_product}}
+\code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
+\code{\link[=sample_dot_product]{sample_dot_product()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -44,7 +44,7 @@ The canonical permutation brings every isomorphic graphs into the same
 (labeled) graph.
 }
 \details{
-\code{canonical_permutation} computes a permutation which brings the graph
+\code{canonical_permutation()} computes a permutation which brings the graph
 into canonical form, as defined by the BLISS algorithm.  All isomorphic
 graphs have the same canonical form.
 
@@ -75,8 +75,8 @@ cf2 <- permute(g2, cp2$labeling)
 ## Check that they are the same
 el1 <- as_edgelist(cf1)
 el2 <- as_edgelist(cf2)
-el1 <- el1[ order(el1[,1], el1[,2]), ]
-el2 <- el2[ order(el2[,1], el2[,2]), ]
+el1 <- el1[order(el1[, 1], el1[, 2]), ]
+el2 <- el2[order(el2[, 1], el2[, 2]), ]
 all(el1 == el2)
 }
 \references{
@@ -86,8 +86,8 @@ the Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
 Workshop on Analytic Algorithms and Combinatorics.} 2007.
 }
 \seealso{
-\code{\link{permute}} to apply a permutation to a graph,
-\code{\link{graph.isomorphic}} for deciding graph isomorphism, possibly
+\code{\link[=permute]{permute()}} to apply a permutation to a graph,
+\code{\link[=graph.isomorphic]{graph.isomorphic()}} for deciding graph isomorphism, possibly
 based on canonical labels.
 }
 \author{

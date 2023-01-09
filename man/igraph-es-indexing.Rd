@@ -35,23 +35,23 @@ is equivalent to \code{c(E(g)[1], E(g)[2], E(g)[.inc(1)])}.
 Edge sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-  \item When indexed with positive numeric vectors, the edges at the
-    given positions in the sequence are selected. This is the same as
-    indexing a regular R atomic vector with positive numeric vectors.
-  \item When indexed with negative numeric vectors, the edges at the
-    given positions in the sequence are omitted. Again, this is the same
-    as indexing a regular R atomic vector.
-  \item When indexed with a logical vector, the lengths of the edge
-    sequence and the index must match, and the edges for which the
-    index is \code{TRUE} are selected.
-  \item Named graphs can be indexed with character vectors,
-    to select edges with the given names. Note that a graph may
-    have edge names and vertex names, and both can be used to select
-    edges. Edge names are simply used as names of the numeric
-    edge id vector. Vertex names effectively only work in graphs without
-    multiple edges, and must be separated with a \code{|} bar character
-    to select an edges that incident to the two given vertices. See
-    examples below.
+\item When indexed with positive numeric vectors, the edges at the
+given positions in the sequence are selected. This is the same as
+indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the edges at the
+given positions in the sequence are omitted. Again, this is the same
+as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the edge
+sequence and the index must match, and the edges for which the
+index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors,
+to select edges with the given names. Note that a graph may
+have edge names and vertex names, and both can be used to select
+edges. Edge names are simply used as names of the numeric
+edge id vector. Vertex names effectively only work in graphs without
+multiple edges, and must be separated with a \code{|} bar character
+to select an edges that incident to the two given vertices. See
+examples below.
 }
 }
 
@@ -74,24 +74,24 @@ match attribute names only.
 
 There are some special igraph functions that can be used
 only in expressions indexing edge sequences: \describe{
-  \item{\code{.inc}}{takes a vertex sequence, and selects
-    all edges that have at least one incident vertex in the vertex
-    sequence.}
-  \item{\code{.from}}{similar to \code{.inc()}, but only
-    the tails of the edges are considered.}
-  \item{\code{.to}}{is similar to \code{.inc()}, but only
-    the heads of the edges are considered.}
-  \item{\code{\%--\%}}{a special operator that can be
-    used to select all edges between two sets of vertices. It ignores
-    the edge directions in directed graphs.}
-  \item{\code{\%->\%}}{similar to \code{\%--\%},
-    but edges \emph{from} the left hand side argument, pointing
-    \emph{to} the right hand side argument, are selected, in directed
-    graphs.}
-  \item{\code{\%<-\%}}{similar to \code{\%--\%},
-    but edges \emph{to} the left hand side argument, pointing
-    \emph{from} the right hand side argument, are selected, in directed
-    graphs.}
+\item{\code{.inc}}{takes a vertex sequence, and selects
+all edges that have at least one incident vertex in the vertex
+sequence.}
+\item{\code{.from}}{similar to \code{.inc()}, but only
+the tails of the edges are considered.}
+\item{\code{.to}}{is similar to \code{.inc()}, but only
+the heads of the edges are considered.}
+\item{\verb{\\\%--\\\%}}{a special operator that can be
+used to select all edges between two sets of vertices. It ignores
+the edge directions in directed graphs.}
+\item{\verb{\\\%->\\\%}}{similar to \verb{\\\%--\\\%},
+but edges \emph{from} the left hand side argument, pointing
+\emph{to} the right hand side argument, are selected, in directed
+graphs.}
+\item{\verb{\\\%<-\\\%}}{similar to \verb{\\\%--\\\%},
+but edges \emph{to} the left hand side argument, pointing
+\emph{from} the right hand side argument, are selected, in directed
+graphs.}
 }
 Note that multiple special functions can be used together, or with
 regular indices, and then their results are concatenated. See more
@@ -102,9 +102,9 @@ examples below.
 # -----------------------------------------------------------------
 # Special operators for indexing based on graph structure
 g <- sample_pa(100, power = 0.3)
-E(g) [ 1:3 \%--\% 2:6 ]
-E(g) [ 1:5 \%->\% 1:6 ]
-E(g) [ 1:3 \%<-\% 2:6 ]
+E(g)[1:3 \%--\% 2:6]
+E(g)[1:5 \%->\% 1:6]
+E(g)[1:3 \%<-\% 2:6]
 
 # -----------------------------------------------------------------
 # The edges along the diameter
@@ -114,9 +114,9 @@ E(g, path = d)
 
 # -----------------------------------------------------------------
 # Select edges based on attributes
-g <- sample_gnp(20, 3/20) \%>\%
+g <- sample_gnp(20, 3 / 20) \%>\%
   set_edge_attr("weight", value = rnorm(gsize(.)))
-E(g)[[ weight < 0 ]]
+E(g)[[weight < 0]]
 
 # Indexing with a variable whose name matches the name of an attribute
 # may fail; use .env to force the name lookup in the parent environment

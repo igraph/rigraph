@@ -29,7 +29,7 @@ differ in different blocks.}
 \item{p}{Numeric scalar, the Bernoulli rate of connections between vertices
 in different blocks.}
 
-\item{...}{Passed to \code{sample_hierarchical_sbm}.}
+\item{...}{Passed to \code{sample_hierarchical_sbm()}.}
 }
 \value{
 An igraph graph.
@@ -44,15 +44,19 @@ stochastic block model.
 \examples{
 
 ## Ten blocks with three clusters each
-C <- matrix(c(1  , 3/4,   0,
-              3/4,   0, 3/4,
-              0  , 3/4, 3/4), nrow=3)
-g <- sample_hierarchical_sbm(100, 10, rho=c(3, 3, 4)/10, C=C, p=1/20)
+C <- matrix(c(
+  1, 3 / 4, 0,
+  3 / 4, 0, 3 / 4,
+  0, 3 / 4, 3 / 4
+), nrow = 3)
+g <- sample_hierarchical_sbm(100, 10, rho = c(3, 3, 4) / 10, C = C, p = 1 / 20)
 g
-if (require(Matrix)) { image(g[]) }
+if (require(Matrix)) {
+  image(g[])
+}
 }
 \seealso{
-\code{\link{sbm.game}}
+\code{\link[=sbm.game]{sbm.game()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

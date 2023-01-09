@@ -42,7 +42,7 @@ graph. This vector is added to the diagonal of the adjacency matrix.}
 
 \item{options}{A named list containing the parameters for the SVD
 computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by \code{\link{igraph.arpack.default}}.}
+the values given by \link{igraph.arpack.default}.}
 }
 \value{
 A list containing with entries: \item{X}{Estimated latent positions,
@@ -52,7 +52,7 @@ positions for directed graphs, an \code{n} times \code{no} matrix, \code{n}
 is the number of vertices.} \item{D}{The eigenvalues (for undirected graphs)
 or the singular values (for directed graphs) calculated by the algorithm.}
 \item{options}{A named list, information about the underlying ARPACK
-computation. See \code{\link{arpack}} for the details.}
+computation. See \code{\link[=arpack]{arpack()}} for the details.}
 }
 \description{
 Spectral decomposition of the adjacency matrices of graphs.
@@ -80,7 +80,9 @@ of them.)
 
 ## A small graph
 lpvs <- matrix(rnorm(200), 20, 10)
-lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+lpvs <- apply(lpvs, 2, function(x) {
+  return(abs(x) / sqrt(sum(x^2)))
+})
 RDP <- sample_dot_product(lpvs)
 embed <- embed_adjacency_matrix(RDP, 5)
 }
@@ -90,6 +92,6 @@ Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 \emph{Journal of the American Statistical Association}, Vol. 107(499), 2012
 }
 \seealso{
-\code{\link{sample_dot_product}}
+\code{\link[=sample_dot_product]{sample_dot_product()}}
 }
 \keyword{graphs}

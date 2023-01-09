@@ -30,15 +30,15 @@ A new graph object.
 The difference of two graphs are created.
 }
 \details{
-\code{difference} creates the difference of two graphs. Only edges
+\code{difference()} creates the difference of two graphs. Only edges
 present in the first graph but not in the second will be be included in the
-new graph. The corresponding operator is \%m\%.
+new graph. The corresponding operator is \verb{\%m\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and the graphs
 are all named), then the operation is performed based on symbolic vertex
 names. Otherwise numeric vertex ids are used.
 
-\code{difference} keeps all attributes (graph, vertex and edge) of the
+\code{difference()} keeps all attributes (graph, vertex and edge) of the
 first graph.
 
 Note that \code{big} and \code{small} must both be directed or both be
@@ -47,16 +47,18 @@ undirected, otherwise an error message is given.
 \examples{
 
 ## Create a wheel graph
-wheel <- union(make_ring(10),
-                     make_star(11, center=11, mode="undirected"))
+wheel <- union(
+  make_ring(10),
+  make_star(11, center = 11, mode = "undirected")
+)
 V(wheel)$name <- letters[seq_len(vcount(wheel))]
 
 ## Subtract a star graph from it
-sstar <- make_star(6, center=6, mode="undirected")
-V(sstar)$name <- letters[c(1,3,5,7,9,11)]
+sstar <- make_star(6, center = 6, mode = "undirected")
+V(sstar)$name <- letters[c(1, 3, 5, 7, 9, 11)]
 G <- wheel \%m\% sstar
 print_all(G)
-plot(G, layout=layout_nicely(wheel))
+plot(G, layout = layout_nicely(wheel))
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

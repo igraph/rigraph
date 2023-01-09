@@ -30,13 +30,13 @@ A breadth-first search is conducted starting from vertex \code{v}.
 }
 \examples{
 
-g <- sample_gnp(100, 1/200)
+g <- sample_gnp(100, 1 / 200)
 subcomponent(g, 1, "in")
 subcomponent(g, 1, "out")
 subcomponent(g, 1, "all")
 }
 \seealso{
-\code{\link{components}}
+\code{\link[=components]{components()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

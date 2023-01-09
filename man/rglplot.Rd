@@ -10,34 +10,34 @@ rglplot(x, ...)
 \arguments{
 \item{x}{The graph to plot.}
 
-\item{\dots}{Additional arguments, see \code{\link{igraph.plotting}} for the
+\item{\dots}{Additional arguments, see \link{igraph.plotting} for the
 details}
 }
 \value{
 \code{NULL}, invisibly.
 }
 \description{
-Using the \code{rgl} package, \code{rglplot} plots a graph in 3D. The plot
+Using the \code{rgl} package, \code{rglplot()} plots a graph in 3D. The plot
 can be zoomed, rotated, shifted, etc. but the coordinates of the vertices is
 fixed.
 }
 \details{
-Note that \code{rglplot} is considered to be highly experimental. It is not
-very useful either. See \code{\link{igraph.plotting}} for the possible
+Note that \code{rglplot()} is considered to be highly experimental. It is not
+very useful either. See \link{igraph.plotting} for the possible
 arguments.
 }
 \examples{
 
-g <- make_lattice( c(5,5,5) )
-coords <- layout_with_fr(g, dim=3)
+g <- make_lattice(c(5, 5, 5))
+coords <- layout_with_fr(g, dim = 3)
 if (interactive()) {
-  rglplot(g, layout=coords)
+  rglplot(g, layout = coords)
 }
 
 }
 \seealso{
-\code{\link{igraph.plotting}}, \code{\link{plot.igraph}} for the 2D
-version, \code{\link{tkplot}} for interactive graph drawing in 2D.
+\link{igraph.plotting}, \code{\link[=plot.igraph]{plot.igraph()}} for the 2D
+version, \code{\link[=tkplot]{tkplot()}} for interactive graph drawing in 2D.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

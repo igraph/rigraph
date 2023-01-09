@@ -3,7 +3,7 @@
 \name{sample_gnp}
 \alias{sample_gnp}
 \alias{gnp}
-\title{Generate random graphs according to the G(n,p) Erdos-Renyi model}
+\title{Generate random graphs according to the \eqn{G(n,p)} Erdős-Rényi model}
 \usage{
 sample_gnp(n, p, directed = FALSE, loops = FALSE)
 
@@ -13,14 +13,14 @@ gnp(...)
 \item{n}{The number of vertices in the graph.}
 
 \item{p}{The probability for drawing an edge between two
-arbitrary vertices (G(n,p) graph).}
+arbitrary vertices (\eqn{G(n,p)} graph).}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
 FALSE.}
 
 \item{loops}{Logical, whether to add loop edges, defaults to FALSE.}
 
-\item{...}{Passed to \code{sample_gnp}.}
+\item{...}{Passed to \code{sample_gnp()}.}
 }
 \value{
 A graph object.
@@ -35,7 +35,7 @@ probability that it is present in the graph is \sQuote{p}.
 }
 \examples{
 
-g <- sample_gnp(1000, 1/1000)
+g <- sample_gnp(1000, 1 / 1000)
 degree_distribution(g)
 }
 \references{
@@ -43,7 +43,7 @@ Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
-\code{\link{sample_gnm}}, \code{\link{sample_pa}}
+\code{\link[=sample_gnm]{sample_gnm()}}, \code{\link[=sample_pa]{sample_pa()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

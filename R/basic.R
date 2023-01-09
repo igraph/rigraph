@@ -25,8 +25,8 @@
 #'
 #' @aliases is.igraph
 #' @param graph An R object.
-#' @return A logical constant, \code{TRUE} if argument \code{graph} is a graph
-#' object.
+#' @return A logical constant, `TRUE` if argument `graph` is a graph
+#'   object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @keywords graphs
@@ -35,17 +35,16 @@
 #' g <- make_ring(10)
 #' is_igraph(g)
 #' is_igraph(numeric(10))
-
-is_igraph <- function(graph){
+is_igraph <- function(graph) {
   "igraph" %in% class(graph)
 }
 
 #' @export
-
 get.edge <- function(graph, id) {
-
-  .Deprecated("ends", msg = paste("'get.edge' is deperecated, please use",
-                        "'ends' instead."))
+  .Deprecated("ends", msg = paste(
+    "'get.edge' is deperecated, please use",
+    "'ends' instead."
+  ))
 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -58,17 +57,17 @@ get.edge <- function(graph, id) {
     stop("No such edge")
   }
 
-  on.exit( .Call(C_R_igraph_finalizer) )
-  res <- .Call(C_R_igraph_get_edge, graph, as.numeric(id)-1)
-  res+1
+  on.exit(.Call(C_R_igraph_finalizer))
+  res <- .Call(C_R_igraph_get_edge, graph, as.numeric(id) - 1)
+  res + 1
 }
 
 
 #' Head of the edge(s) in a graph
 #'
 #' For undirected graphs, head and tail is not defined.  In this case
-#' \code{head_of} returns vertices incident to the supplied edges, and
-#' \code{tail_of} returns the other end(s) of the edge(s).
+#' `head_of()` returns vertices incident to the supplied edges, and
+#' `tail_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.
@@ -77,16 +76,15 @@ get.edge <- function(graph, id) {
 #' @family structural queries
 #'
 #' @export
-
 head_of <- function(graph, es) {
-  create_vs(graph,  ends(graph, es, names = FALSE)[,2])
+  create_vs(graph, ends(graph, es, names = FALSE)[, 2])
 }
 
 #' Tails of the edge(s) in a graph
 #'
 #' For undirected graphs, head and tail is not defined.  In this case
-#' \code{tail_of} returns vertices incident to the supplied edges, and
-#' \code{head_of} returns the other end(s) of the edge(s).
+#' `tail_of()` returns vertices incident to the supplied edges, and
+#' `head_of()` returns the other end(s) of the edge(s).
 #'
 #' @param graph The input graph.
 #' @param es The edges to query.
@@ -95,7 +93,6 @@ head_of <- function(graph, es) {
 #' @family structural queries
 #'
 #' @export
-
 tail_of <- function(graph, es) {
-  create_vs(graph, ends(graph, es, names = FALSE)[,1])
+  create_vs(graph, ends(graph, es, names = FALSE)[, 1])
 }

@@ -21,7 +21,7 @@ centrality score by dividing by the supplied theoretical maximum.}
 }
 \value{
 A real scalar, the centralization of the graph from which
-  \code{scores} were derived.
+\code{scores} were derived.
 }
 \description{
 Centralization is a method for creating a graph level centralization
@@ -45,24 +45,24 @@ some version of the star graph, in-star, out-star or undirected star.
 For eigenvector centrality the most centralized structure is the graph
 with a single edge (and potentially many isolates).
 
-\code{centralize} implements general centralization formula to calculate
+\code{centralize()} implements general centralization formula to calculate
 a graph-level score from vertex-level scores.
 }
 \examples{
 # A BA graph is quite centralized
-g <- sample_pa(1000, m=4)
+g <- sample_pa(1000, m = 4)
 centr_degree(g)$centralization
-centr_clo(g, mode="all")$centralization
-centr_eigen(g, directed=FALSE)$centralization
+centr_clo(g, mode = "all")$centralization
+centr_eigen(g, directed = FALSE)$centralization
 
 # Calculate centralization from pre-computed scores
 deg <- degree(g)
-tmax <- centr_degree_tmax(g, loops=FALSE)
+tmax <- centr_degree_tmax(g, loops = FALSE)
 centralize(deg, tmax)
 
 # The most centralized graph according to eigenvector centrality
-g0 <- graph( c(2,1), n=10, dir=FALSE )
-g1 <- make_star(10, mode="undirected")
+g0 <- graph(c(2, 1), n = 10, dir = FALSE)
+g1 <- make_star(10, mode = "undirected")
 centr_eigen(g0)$centralization
 centr_eigen(g1)$centralization
 }

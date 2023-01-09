@@ -18,7 +18,7 @@ of the sphere.}
 }
 \value{
 A \code{dim} (length of the \code{alpha} vector for
-\code{sample_dirichlet}) times \code{n} matrix, whose columns are the sample
+\code{sample_dirichlet()}) times \code{n} matrix, whose columns are the sample
 vectors.
 }
 \description{
@@ -26,14 +26,16 @@ Sample finite-dimensional vectors to use as latent position vectors in
 random dot product graphs
 }
 \details{
-\code{sample_sphere_volume} generates uniform samples from \eqn{S^{dim-1}}
+\code{sample_sphere_volume()} generates uniform samples from \eqn{S^{dim-1}}
 (the \code{(dim-1)}-sphere) i.e. the Euclidean norm of the samples is
 smaller or equal to \code{radius}.
 }
 \examples{
-lpvs.sph.vol <- sample_sphere_volume(dim=10, n=20, radius=1)
-RDP.graph.4  <- sample_dot_product(lpvs.sph.vol)
-vec.norm     <- apply(lpvs.sph.vol, 2, function(x) { sum(x^2) })
+lpvs.sph.vol <- sample_sphere_volume(dim = 10, n = 20, radius = 1)
+RDP.graph.4 <- sample_dot_product(lpvs.sph.vol)
+vec.norm <- apply(lpvs.sph.vol, 2, function(x) {
+  sum(x^2)
+})
 vec.norm
 }
 \seealso{

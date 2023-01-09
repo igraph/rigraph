@@ -40,18 +40,18 @@ in the file, given with the numeric ids of its vertices, separated by
 whitespace.}
 }
 \value{
-\code{cliques}, \code{largest_cliques} and \code{clique_num}
+\code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
 return a list containing numeric vectors of vertex ids. Each list element is
-a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+a clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs()}}.
 
-\code{max_cliques} returns \code{NULL}, invisibly, if its \code{file}
+\code{max_cliques()} returns \code{NULL}, invisibly, if its \code{file}
 argument is not \code{NULL}. The output is written to the specified file in
 this case.
 
-\code{clique_num} and \code{count_max_cliques} return an integer
+\code{clique_num()} and \code{count_max_cliques()} return an integer
 scalar.
 
-\code{clique_size_counts} returns a numeric vector with the clique sizes such that
+\code{clique_size_counts()} returns a numeric vector with the clique sizes such that
 the i-th item belongs to cliques of size i. Trailing zeros are currently
 truncated, but this might change in future versions.
 }
@@ -60,22 +60,22 @@ These functions find all, the largest or all the maximal cliques in an
 undirected graph. The size of the largest clique can also be calculated.
 }
 \details{
-\code{cliques} find all complete subgraphs in the input graph, obeying the
+\code{cliques()} find all complete subgraphs in the input graph, obeying the
 size limitations given in the \code{min} and \code{max} arguments.
 
-\code{largest_cliques} finds all largest cliques in the input graph. A
+\code{largest_cliques()} finds all largest cliques in the input graph. A
 clique is largest if there is no other clique including more vertices.
 
-\code{max_cliques} finds all maximal cliques in the input graph.  A
+\code{max_cliques()} finds all maximal cliques in the input graph.  A
 clique is maximal if it cannot be extended to a larger clique. The largest
 cliques are always maximal, but a maximal clique is not necessarily the
 largest.
 
-\code{count_max_cliques} counts the maximal cliques.
+\code{count_max_cliques()} counts the maximal cliques.
 
-\code{clique_num} calculates the size of the largest clique(s).
+\code{clique_num()} calculates the size of the largest clique(s).
 
-\code{clique_size_counts} returns a numeric vector representing a histogram
+\code{clique_size_counts()} returns a numeric vector representing a histogram
 of clique sizes, between the given minimum and maximum clique size.
 }
 \examples{
@@ -83,7 +83,7 @@ of clique sizes, between the given minimum and maximum clique size.
 # this usually contains cliques of size six
 g <- sample_gnp(100, 0.3)
 clique_num(g)
-cliques(g, min=6)
+cliques(g, min = 6)
 largest_cliques(g)
 
 # To have a bit less maximal cliques, about 100-200 usually
@@ -96,7 +96,7 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-\code{\link{ivs}}
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

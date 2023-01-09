@@ -46,7 +46,7 @@ not given. See the \code{roots} parameter.}
 \item{flip.y}{Logical scalar, whether to flip the \sQuote{y} coordinates.
 The default is flipping because that puts the root vertex on the top.}
 
-\item{...}{Passed to \code{layout_as_tree}.}
+\item{...}{Passed to \code{layout_as_tree()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -66,14 +66,16 @@ to obtain a possible spanning tree.
 \examples{
 
 tree <- make_tree(20, 3)
-plot(tree, layout=layout_as_tree)
-plot(tree, layout=layout_as_tree(tree, flip.y=FALSE))
-plot(tree, layout=layout_as_tree(tree, circular=TRUE))
+plot(tree, layout = layout_as_tree)
+plot(tree, layout = layout_as_tree(tree, flip.y = FALSE))
+plot(tree, layout = layout_as_tree(tree, circular = TRUE))
 
 tree2 <- make_tree(10, 3) + make_tree(10, 2)
-plot(tree2, layout=layout_as_tree)
-plot(tree2, layout=layout_as_tree(tree2, root=c(1,11),
-                                           rootlevel=c(2,1)))
+plot(tree2, layout = layout_as_tree)
+plot(tree2, layout = layout_as_tree(tree2,
+  root = c(1, 11),
+  rootlevel = c(2, 1)
+))
 }
 \references{
 Reingold, E and Tilford, J (1981). Tidier drawing of trees.

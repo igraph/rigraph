@@ -10,15 +10,15 @@
 }
 \value{
 Result of applying the right hand side to the
-  result of the left hand side.
+result of the left hand side.
 }
 \description{
-igraph re-exports the \code{\%>\%} operator of magrittr, because
+igraph re-exports the \verb{\%>\%} operator of magrittr, because
 we find it very useful. Please see the documentation in the
 \code{magrittr} package.
 }
 \examples{
 make_ring(10) \%>\%
-  add_edges(c(1,6)) \%>\%
+  add_edges(c(1, 6)) \%>\%
   plot()
 }

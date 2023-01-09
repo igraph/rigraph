@@ -17,20 +17,20 @@ spectrum(
 \item{graph}{The input graph, can be directed or undirected.}
 
 \item{algorithm}{The algorithm to use. Currently only \code{arpack} is
-implemented, which uses the ARPACK solver. See also \code{\link{arpack}}.}
+implemented, which uses the ARPACK solver. See also \code{\link[=arpack]{arpack()}}.}
 
 \item{which}{A list to specify which eigenvalues and eigenvectors to
 calculate. By default the leading (i.e. largest magnitude) eigenvalue and
 the corresponding eigenvector is calculated.}
 
 \item{options}{Options for the ARPACK solver. See
-\code{\link{arpack_defaults}}.}
+\code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 Depends on the algorithm used.
 
 For \code{arpack} a list with three entries is returned: \item{options}{See
-the return value for \code{arpack} for a complete description.}
+the return value for \code{arpack()} for a complete description.}
 \item{values}{Numeric vector, the eigenvalues.} \item{vectors}{Numeric
 matrix, with the eigenvectors as columns.}
 }
@@ -66,17 +66,17 @@ kite <- make_graph("Krackhardt_kite")
 spectrum(kite)[c("values", "vectors")]
 
 ## Double check
-eigen(as_adj(kite, sparse=FALSE))$vectors[,1]
+eigen(as_adj(kite, sparse = FALSE))$vectors[, 1]
 
 ## Should be the same as 'eigen_centrality' (but rescaled)
 cor(eigen_centrality(kite)$vector, spectrum(kite)$vectors)
 
 ## Smallest eigenvalues
-spectrum(kite, which=list(pos="SM", howmany=2))$values
+spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 
 }
 \seealso{
-\code{\link{as_adj}} to create a (sparse) adjacency matrix.
+\code{\link[=as_adj]{as_adj()}} to create a (sparse) adjacency matrix.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

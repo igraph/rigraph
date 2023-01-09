@@ -24,11 +24,11 @@ full_bipartite_graph(...)
 
 \item{mode}{Scalar giving the kind of edges to create for directed graphs.
 If this is \sQuote{\code{out}} then all vertices of the first kind are
-connected to the others; \sQuote{\code{in}} specifies the opposite
+connected to the others; \sQuote{\verb{in}} specifies the opposite
 direction; \sQuote{\code{all}} creates mutual edges. This argument is
 ignored for undirected graphs.x}
 
-\item{...}{Passed to \code{make_full_bipartite_graph}.}
+\item{...}{Passed to \code{make_full_bipartite_graph()}.}
 }
 \value{
 An igraph graph, with the \sQuote{\code{type}} vertex attribute set.
@@ -45,13 +45,13 @@ this is boolean and \code{FALSE} for the vertices of the first kind and
 \examples{
 
 g <- make_full_bipartite_graph(2, 3)
-g2 <- make_full_bipartite_graph(2, 3, directed=TRUE)
-g3 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="in")
-g4 <- make_full_bipartite_graph(2, 3, directed=TRUE, mode="all")
+g2 <- make_full_bipartite_graph(2, 3, directed = TRUE)
+g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
+g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link{make_full_graph}} for creating one-mode full graphs
+\code{\link[=make_full_graph]{make_full_graph()}} for creating one-mode full graphs
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

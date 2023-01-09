@@ -42,7 +42,7 @@ grid cells are taken into account (the fourth root of the number of
 \item{root}{The id of the vertex to place at the middle of the layout. The
 default value is -1 which means that a random vertex is selected.}
 
-\item{...}{Passed to \code{layout_with_lgl}.}
+\item{...}{Passed to \code{layout_with_lgl()}.}
 }
 \value{
 A numeric matrix with two columns and as many rows as vertices.
@@ -51,9 +51,9 @@ A numeric matrix with two columns and as many rows as vertices.
 A layout generator for larger graphs.
 }
 \details{
-\code{layout_with_lgl} is for large connected graphs, it is similar to the layout
+\code{layout_with_lgl()} is for large connected graphs, it is similar to the layout
 generator of the Large Graph Layout software
-(\url{http://lgl.sourceforge.net/}).
+(\url{https://lgl.sourceforge.net/}).
 }
 \seealso{
 Other graph layouts: 

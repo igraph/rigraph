@@ -44,13 +44,13 @@ words, larger edge weights correspond to stronger connections. The
 attribute.}
 }
 \value{
-For \code{random_walk}, a vertex sequence containing the vertices
-  along the walk. For \code{random_edge_walk}, an edge sequence containing
-  the edges along the walk.
+For \code{random_walk()}, a vertex sequence containing the vertices
+along the walk. For \code{random_edge_walk()}, an edge sequence containing
+the edges along the walk.
 }
 \description{
-\code{random_walk} performs a random walk on the graph and returns the
-vertices that the random walk passed through. \code{random_edge_walk}
+\code{random_walk()} performs a random walk on the graph and returns the
+vertices that the random walk passed through. \code{random_edge_walk()}
 is the same but returns the edges that that random walk passed through.
 }
 \details{

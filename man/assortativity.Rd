@@ -33,7 +33,7 @@ graphs.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
-with \code{\link{as.integer}}.}
+with \code{\link[=as.integer]{as.integer()}}.}
 }
 \value{
 A single real number.
@@ -49,7 +49,7 @@ coefficient is high, that means that connected vertices tend to have the
 same labels or similar assigned values.
 
 M.E.J. Newman defined two kinds of assortativity coefficients, the first one
-is for categorical labels of vertices. \code{assortativity_nominal}
+is for categorical labels of vertices. \code{assortativity_nominal()}
 calculates this measure. It is defines as
 
 \deqn{r=\frac{\sum_i e_{ii}-\sum_i a_i b_i}{1-\sum_i a_i b_i}}{
@@ -60,7 +60,7 @@ type \eqn{i} and \eqn{j}, \eqn{a_i=\sum_j e_{ij}}{a(i)=sum(e(i,j), j)} and
 \eqn{b_j=\sum_i e_{ij}}{b(j)=sum(e(i,j), i)}.
 
 The second assortativity variant is based on values assigned to the
-vertices. \code{assortativity} calculates this measure. It is defined as
+vertices. \code{assortativity()} calculates this measure. It is defined as
 
 \deqn{r=\frac1{\sigma_q^2}\sum_{jk} jk(e_{jk}-q_j q_k)}{
 sum(jk(e(j,k)-q(j)q(k)), j, k) / sigma(q)^2}
@@ -80,16 +80,16 @@ The reason of the difference is that in directed networks the relationship
 is not symmetric, so it is possible to assign different values to the
 outgoing and the incoming end of the edges.
 
-\code{assortativity_degree} uses vertex degree (minus one) as vertex values
-and calls \code{assortativity}.
+\code{assortativity_degree()} uses vertex degree (minus one) as vertex values
+and calls \code{assortativity()}.
 }
 \examples{
 
 # random network, close to zero
-assortativity_degree(sample_gnp(10000, 3/10000))
+assortativity_degree(sample_gnp(10000, 3 / 10000))
 
 # BA model, tends to be dissortative
-assortativity_degree(sample_pa(10000, m=4))
+assortativity_degree(sample_pa(10000, m = 4))
 }
 \references{
 M. E. J. Newman: Mixing patterns in networks, \emph{Phys. Rev.

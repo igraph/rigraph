@@ -75,7 +75,7 @@ The eigenvalue calculation in ARPACK (in the simplest case) involves the
 calculation of the \eqn{Av} product where \eqn{A} is the matrix we work with
 and \eqn{v} is an arbitrary vector. The function supplied in the \code{fun}
 argument is expected to perform this product. If the product can be done
-efficiently, e.g. if the matrix is sparse, then \code{arpack} is usually
+efficiently, e.g. if the matrix is sparse, then \code{arpack()} is usually
 able to calculate the eigenvalues very quickly.
 
 The \code{options} argument specifies what kind of calculation to perform.
@@ -86,8 +86,8 @@ eigenvalue problem, \eqn{Ax=\lambda x}{A*x=lambda*x}; and \sQuote{\code{G}},
 generalized eigenvalue problem, \eqn{Ax=\lambda B x}{A*x=lambda B*x}.
 Currently only \sQuote{\code{I}} is supported.} \item{n}{Numeric scalar. The
 dimension of the eigenproblem. You only need to set this if you call
-\code{\link{arpack}} directly. (I.e. not needed for
-\code{\link{eigen_centrality}}, \code{\link{page_rank}}, etc.)}
+\code{\link[=arpack]{arpack()}} directly. (I.e. not needed for
+\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}}, etc.)}
 \item{which}{Specify which eigenvalues/vectors to compute, character
 constant with exactly two characters.
 
@@ -111,7 +111,7 @@ eigenvalues of smallest real part.} \item{"LI"}{Compute
 part.} }
 
 This parameter is sometimes overwritten by the various functions, e.g.
-\code{\link{page_rank}} always sets \sQuote{\code{LM}}.  }
+\code{\link[=page_rank]{page_rank()}} always sets \sQuote{\code{LM}}.  }
 \item{nev}{Numeric scalar. The number of eigenvalues to be computed.}
 \item{tol}{Numeric scalar. Stopping criterion: the relative accuracy of the
 Ritz value is considered acceptable if its error is less than \code{tol}
@@ -165,34 +165,39 @@ additional details.
 \examples{
 
 # Identity matrix
-f <- function(x, extra=NULL) x
-arpack(f, options=list(n=10, nev=2, ncv=4), sym=TRUE)
+f <- function(x, extra = NULL) x
+arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)
 
 # Graph laplacian of a star graph (undirected), n>=2
 # Note that this is a linear operation
-f <- function(x, extra=NULL) {
+f <- function(x, extra = NULL) {
   y <- x
-  y[1] <- (length(x)-1)*x[1] - sum(x[-1])
+  y[1] <- (length(x) - 1) * x[1] - sum(x[-1])
   for (i in 2:length(x)) {
     y[i] <- x[i] - x[1]
   }
   y
 }
 
-arpack(f, options=list(n=10, nev=1, ncv=3), sym=TRUE)
+arpack(f, options = list(n = 10, nev = 1, ncv = 3), sym = TRUE)
 
 # double check
-eigen(laplacian_matrix(make_star(10, mode="undirected")))
+eigen(laplacian_matrix(make_star(10, mode = "undirected")))
 
 ## First three eigenvalues of the adjacency matrix of a graph
 ## We need the 'Matrix' package for this
 if (require(Matrix)) {
   set.seed(42)
-  g <- sample_gnp(1000, 5/1000)
-  M <- as_adj(g, sparse=TRUE)
-  f2 <- function(x, extra=NULL) { cat("."); as.vector(M \%*\% x) }
-  baev <- arpack(f2, sym=TRUE, options=list(n=vcount(g), nev=3, ncv=8,
-                                  which="LM", maxiter=2000))
+  g <- sample_gnp(1000, 5 / 1000)
+  M <- as_adj(g, sparse = TRUE)
+  f2 <- function(x, extra = NULL) {
+    cat(".")
+    as.vector(M \%*\% x)
+  }
+  baev <- arpack(f2, sym = TRUE, options = list(
+    n = vcount(g), nev = 3, ncv = 8,
+    which = "LM", maxiter = 2000
+  ))
 }
 }
 \references{
@@ -209,8 +214,8 @@ Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 (1987).
 }
 \seealso{
-\code{\link{eigen_centrality}}, \code{\link{page_rank}},
-\code{\link{hub_score}}, \code{\link{cluster_leading_eigen}} are some of the
+\code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}},
+\code{\link[=hub_score]{hub_score()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} are some of the
 functions in igraph that use ARPACK.
 }
 \author{

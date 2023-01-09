@@ -25,15 +25,15 @@ The union of two or more graphs are created. The graphs may have identical
 or overlapping vertex sets.
 }
 \details{
-\code{union} creates the union of two or more graphs.  Edges which are
+\code{union()} creates the union of two or more graphs.  Edges which are
 included in at least one graph will be part of the new graph. This function
-can be also used via the \%u\% operator.
+can be also used via the \verb{\%u\%} operator.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead
 of the internal numeric vertex ids.
 
-\code{union} keeps the attributes of all graphs. All graph, vertex and
+\code{union()} keeps the attributes of all graphs. All graph, vertex and
 edge attributes are copied to the result. If an attribute is present in
 multiple graphs and would result a name clash, then this attribute is
 renamed by adding suffixes: _1, _2, etc.
@@ -48,9 +48,11 @@ undirected.
 \examples{
 
 ## Union of two social networks with overlapping sets of actors
-net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-                  H-F:G, H-I-J)
-net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+net1 <- graph_from_literal(
+  D - A:B:F:G, A - C - F - A, B - E - G - B, A - B, F - G,
+  H - F:G, H - I - J
+)
+net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 \%u\% net2)
 }
 \author{

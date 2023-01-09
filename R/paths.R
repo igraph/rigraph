@@ -38,8 +38,8 @@
 #' @param to The target vertex of vertices. Defaults to all vertices.
 #' @param mode Character constant, gives whether the shortest paths to or
 #'   from the given vertices should be calculated for directed graphs. If
-#'   \code{out} then the shortest paths \emph{from} the vertex, if \code{in}
-#'   then \emph{to} it will be considered. If \code{all}, the default, then
+#'   `out` then the shortest paths *from* the vertex, if `in`
+#'   then *to* it will be considered. If `all`, the default, then
 #'   the corresponding undirected graph will be used, ie. not directed paths
 #'   are searched. This argument is ignored for undirected graphs.
 #' @param cutoff Maximum length of path that is considered. If negative, paths of all lengths are considered.
@@ -51,10 +51,9 @@
 #'
 #' g <- make_ring(10)
 #' all_simple_paths(g, 1, 5)
-#' all_simple_paths(g, 1, c(3,5))
+#' all_simple_paths(g, 1, c(3, 5))
 #'
 #' @export
-
 all_simple_paths <- function(graph, from, to = V(graph),
                              mode = c("out", "in", "all", "total"),
                              cutoff = -1) {
@@ -62,14 +61,20 @@ all_simple_paths <- function(graph, from, to = V(graph),
   if (!is_igraph(graph)) stop("Not a graph object")
   from <- as.igraph.vs(graph, from)
   to <- as.igraph.vs(graph, to)
-  mode <- switch(igraph.match.arg(mode), "out" = 1, "in" = 2, "all" = 3,
-                 "total" = 3)
+  mode <- switch(igraph.match.arg(mode),
+    "out" = 1,
+    "in" = 2,
+    "all" = 3,
+    "total" = 3
+  )
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-               as.integer(cutoff), mode)
+  res <- .Call(
+    C_R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
+    as.integer(cutoff), mode
+  )
   res <- get.all.simple.paths.pp(res)
 
   if (igraph_opt("return.vs.es")) {
@@ -84,12 +89,12 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' This function tests whether the given graph is a DAG, a directed acyclic
 #' graph.
 #'
-#' \code{is_dag} checks whether there is a directed cycle in the graph. If not,
+#' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
 #' @aliases is.dag is_dag
 #' @param graph The input graph. It may be undirected, in which case
-#' \code{FALSE} is reported.
+#'   `FALSE` is reported.
 #' @return A logical vector of length one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} for the C code, Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface.
@@ -98,10 +103,9 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #'
 #' g <- make_tree(10)
 #' is_dag(g)
-#' g2 <- g + edge(5,1)
+#' g2 <- g + edge(5, 1)
 #' is_dag(g2)
 #' @export
-
 is_dag <- is_dag
 
 
@@ -115,39 +119,42 @@ is_dag <- is_dag
 #' broken randomly.
 #'
 #' The algorithm provides a simple basis for deciding whether a graph is
-#' chordal, see References below, and also \code{\link{is_chordal}}.
+#' chordal, see References below, and also [is_chordal()].
 #'
 #' @aliases maximum.cardinality.search max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
-#' ignored, as the algorithm is defined for undirected graphs.
+#'   ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The
-#' 1-based rank of each vertex in the graph such that the vertex with rank 1
-#' is visited first, the vertex with rank 2 is visited second and so on.}
-#' \item{alpham1}{Numeric vector. The inverse of \code{alpha}. In other words,
-#' the elements of this vector are the vertices in reverse maximum cardinality
-#' search order.}
+#'   1-based rank of each vertex in the graph such that the vertex with rank 1
+#'   is visited first, the vertex with rank 2 is visited second and so on.}
+#'   \item{alpham1}{Numeric vector. The inverse of `alpha`. In other words,
+#'   the elements of this vector are the vertices in reverse maximum cardinality
+#'   search order.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{is_chordal}}
+#' @seealso [is_chordal()]
 #' @references Robert E Tarjan and Mihalis Yannakakis. (1984). Simple
 #' linear-time algorithms to test chordality of graphs, test acyclicity of
-#' hypergraphs, and selectively reduce acyclic hypergraphs.  \emph{SIAM Journal
-#' of Computation} 13, 566--579.
+#' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal
+#' of Computation* 13, 566--579.
 #' @keywords graphs
 #' @examples
 #'
 #' ## The examples from the Tarjan-Yannakakis paper
-#' g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
-#'                 E-C:D:F:H, F-D:E:G, G-F:H, H-C:E:G:I,
-#'                 I-A:H)
+#' g1 <- graph_from_literal(
+#'   A - B:C:I, B - A:C:D, C - A:B:E:H, D - B:E:F,
+#'   E - C:D:F:H, F - D:E:G, G - F:H, H - C:E:G:I,
+#'   I - A:H
+#' )
 #' max_cardinality(g1)
-#' is_chordal(g1, fillin=TRUE)
+#' is_chordal(g1, fillin = TRUE)
 #'
-#' g2 <- graph_from_literal(A-B:E, B-A:E:F:D, C-E:D:G, D-B:F:E:C:G,
-#'                 E-A:B:C:D:F, F-B:D:E, G-C:D:H:I, H-G:I:J,
-#'                 I-G:H:J, J-H:I)
+#' g2 <- graph_from_literal(
+#'   A - B:E, B - A:E:F:D, C - E:D:G, D - B:F:E:C:G,
+#'   E - A:B:C:D:F, F - B:D:E, G - C:D:H:I, H - G:I:J,
+#'   I - G:H:J, J - H:I
+#' )
 #' max_cardinality(g2)
-#' is_chordal(g2, fillin=TRUE)
-
+#' is_chordal(g2, fillin = TRUE)
 max_cardinality <- max_cardinality
 
 
@@ -166,22 +173,21 @@ max_cardinality <- max_cardinality
 #' @param graph The input graph, it can be directed or undirected.
 #' @param vids The vertices for which the eccentricity is calculated.
 #' @param mode Character constant, gives whether the shortest paths to or from
-#' the given vertices should be calculated for directed graphs. If \code{out}
-#' then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
-#' it will be considered. If \code{all}, the default, then the corresponding
-#' undirected graph will be used, edge directions will be ignored. This
-#' argument is ignored for undirected graphs.
-#' @return \code{eccentricity} returns a numeric vector, containing the
-#' eccentricity score of each given vertex.
-#' @seealso \code{\link{radius}} for a related concept,
-#'   \code{\link{distances}} for general shortest path calculations.
+#'   the given vertices should be calculated for directed graphs. If `out`
+#'   then the shortest paths *from* the vertex, if `in` then *to*
+#'   it will be considered. If `all`, the default, then the corresponding
+#'   undirected graph will be used, edge directions will be ignored. This
+#'   argument is ignored for undirected graphs.
+#' @return `eccentricity()` returns a numeric vector, containing the
+#'   eccentricity score of each given vertex.
+#' @seealso [radius()] for a related concept,
+#'   [distances()] for general shortest path calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
-#' g <- make_star(10, mode="undirected")
+#' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
 #' @export
-
 eccentricity <- eccentricity
 
 
@@ -200,28 +206,26 @@ eccentricity <- eccentricity
 #'
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mode Character constant, gives whether the shortest paths to or from
-#' the given vertices should be calculated for directed graphs. If \code{out}
-#' then the shortest paths \emph{from} the vertex, if \code{in} then \emph{to}
-#' it will be considered. If \code{all}, the default, then the corresponding
-#' undirected graph will be used, edge directions will be ignored. This
-#' argument is ignored for undirected graphs.
+#'   the given vertices should be calculated for directed graphs. If `out`
+#'   then the shortest paths *from* the vertex, if `in` then *to*
+#'   it will be considered. If `all`, the default, then the corresponding
+#'   undirected graph will be used, edge directions will be ignored. This
+#'   argument is ignored for undirected graphs.
 #' @return A numeric scalar, the radius of the graph.
-#' @seealso \code{\link{eccentricity}} for the underlying
-#'   calculations, code{\link{distances}} for general shortest path
+#' @seealso [eccentricity()] for the underlying
+#'   calculations, code{[distances]} for general shortest path
 #'   calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.
 #' @examples
-#' g <- make_star(10, mode="undirected")
+#' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
 #' radius(g)
 #' @export
-
 radius <- radius
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @export
-
 distance_table <- distance_table

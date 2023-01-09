@@ -1,9 +1,8 @@
 test_that("graph.subisomorphic.vf2 works", {
-
   set.seed(42)
 
-  g1 <- sample_gnp(20,6/20)
-  g2 <- sample_gnp(20,6/20)
+  g1 <- sample_gnp(20, 6 / 20)
+  g2 <- sample_gnp(20, 6 / 20)
   g <- g1 %du% g2
 
   ig1 <- graph.subisomorphic.vf2(g, g1)
@@ -16,5 +15,4 @@ test_that("graph.subisomorphic.vf2 works", {
   expect_true(ig2$iso)
   expect_that(ig2$map12, equals(c(rep(0, vcount(g1)), 1:vcount(g2))))
   expect_that(ig2$map21, equals(1:vcount(g2) + vcount(g1)))
-
 })

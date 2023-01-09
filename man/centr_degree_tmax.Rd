@@ -19,7 +19,7 @@ centr_degree_tmax(
 \item{nodes}{The number of vertices. This is ignored if the graph is given.}
 
 \item{mode}{This is the same as the \code{mode} argument of
-\code{degree}.}
+\code{degree()}.}
 
 \item{loops}{Logical scalar, whether to consider loops edges when
 calculating the degree. Currently the default value is \code{FALSE},
@@ -27,16 +27,16 @@ but this argument will be required from igraph 1.4.0.}
 }
 \value{
 Real scalar, the theoretical maximum (unnormalized) graph degree
-  centrality score for graphs with given order and other parameters.
+centrality score for graphs with given order and other parameters.
 }
 \description{
-See \code{\link{centralize}} for a summary of graph centralization.
+See \code{\link[=centralize]{centralize()}} for a summary of graph centralization.
 }
 \examples{
 # A BA graph is quite centralized
 g <- sample_pa(1000, m = 4)
 centr_degree(g, normalized = FALSE)$centralization \%>\%
- `/`(centr_degree_tmax(g, loops = FALSE))
+  `/`(centr_degree_tmax(g, loops = FALSE))
 centr_degree(g, normalized = TRUE)$centralization
 }
 \seealso{

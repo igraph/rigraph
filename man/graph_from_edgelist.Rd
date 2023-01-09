@@ -15,13 +15,13 @@ from_edgelist(...)
 
 \item{directed}{Whether to create a directed graph.}
 
-\item{...}{Passed to \code{graph_from_edgelist}.}
+\item{...}{Passed to \code{graph_from_edgelist()}.}
 }
 \value{
 An igraph graph.
 }
 \description{
-\code{graph_from_edgelist} creates a graph from an edge list. Its argument
+\code{graph_from_edgelist()} creates a graph from an edge list. Its argument
 is a two-column matrix, each row defines one edge. If it is
 a numeric matrix then its elements are interpreted as vertex ids. If
 it is a character matrix then it is interpreted as symbolic vertex
@@ -29,7 +29,7 @@ names and a vertex id will be assigned to each name, and also a
 \code{name} vertex attribute will be added.
 }
 \examples{
-el <- matrix( c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
+el <- matrix(c("foo", "bar", "bar", "foobar"), nc = 2, byrow = TRUE)
 graph_from_edgelist(el)
 
 # Create a ring by hand

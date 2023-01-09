@@ -60,12 +60,12 @@ export_pajek(blocks, graph, file, project.file = TRUE)
 max_cohesion(blocks)
 }
 \arguments{
-\item{graph}{For \code{cohesive_blocks} a graph object of class
+\item{graph}{For \code{cohesive_blocks()} a graph object of class
 \code{igraph}. It must be undirected and simple. (See
-\code{\link{is_simple}}.)
+\code{\link[=is_simple]{is_simple()}}.)
 
-For \code{graphs_from_cohesive_blocks} and \code{export_pajek} the same graph must be
-supplied whose cohesive block structure is given in the \code{blocks}
+For \code{graphs_from_cohesive_blocks()} and \code{export_pajek()} the same graph must be
+supplied whose cohesive block structure is given in the \code{blocks()}
 argument.}
 
 \item{labels}{Logical scalar, whether to add the vertex labels to the result
@@ -73,10 +73,10 @@ object. These labels can be then used when reporting and plotting the
 cohesive blocks.}
 
 \item{blocks, x, object}{A \code{cohesiveBlocks} object, created with the
-\code{cohesive_blocks} function.}
+\code{cohesive_blocks()} function.}
 
-\item{\dots}{Additional arguments. \code{plot_hierarchy} and \code{plot} pass
-them to \code{plot.igraph}.  \code{print} and \code{summary} ignore them.}
+\item{\dots}{Additional arguments. \code{plot_hierarchy()} and \code{\link[=plot]{plot()}} pass
+them to \code{plot.igraph()}.  \code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} ignore them.}
 
 \item{y}{The graph whose cohesive blocks are supplied in the \code{x}
 argument.}
@@ -97,7 +97,7 @@ them. By default all cohesive blocks are marked, except the one
 corresponding to the all vertices.}
 
 \item{layout}{The layout of a plot, it is simply passed on to
-\code{plot.igraph}, see the possible formats there. By default the
+\code{plot.igraph()}, see the possible formats there. By default the
 Reingold-Tilford layout generator is used.}
 
 \item{file}{Defines the file (or connection) the Pajek file is written to.
@@ -117,29 +117,29 @@ file containing all the data, or to create separated files for each item.
 See details below.}
 }
 \value{
-\code{cohesive_blocks} returns a \code{cohesiveBlocks} object.
+\code{cohesive_blocks()} returns a \code{cohesiveBlocks} object.
 
-\code{blocks} returns a list of numeric vectors, containing vertex ids.
+\code{blocks()} returns a list of numeric vectors, containing vertex ids.
 
-\code{graphs_from_cohesive_blocks} returns a list of igraph graphs, corresponding to the
+\code{graphs_from_cohesive_blocks()} returns a list of igraph graphs, corresponding to the
 cohesive blocks.
 
-\code{cohesion} returns a numeric vector, the cohesion of each block.
+\code{cohesion()} returns a numeric vector, the cohesion of each block.
 
-\code{hierarchy} returns an igraph graph, the representation of the cohesive
+\code{hierarchy()} returns an igraph graph, the representation of the cohesive
 block hierarchy.
 
-\code{parent} returns a numeric vector giving the parent block of each
+\code{parent()} returns a numeric vector giving the parent block of each
 cohesive block, in the block hierarchy. The block at the root of the
 hierarchy has no parent and \code{0} is returned for it.
 
-\code{plot_hierarchy}, \code{plot} and \code{export_pajek} return \code{NULL},
+\code{plot_hierarchy()}, \code{\link[=plot]{plot()}} and \code{export_pajek()} return \code{NULL},
 invisibly.
 
-\code{max_cohesion} returns a numeric vector with one entry for each vertex,
+\code{max_cohesion()} returns a numeric vector with one entry for each vertex,
 giving the cohesion of its most cohesive block.
 
-\code{print} and \code{summary} return the \code{cohesiveBlocks} object
+\code{\link[=print]{print()}} and \code{\link[=summary]{summary()}} return the \code{cohesiveBlocks} object
 itself, invisibly.
 
 \code{length} returns a numeric scalar, the number of blocks.
@@ -158,7 +158,7 @@ process through which, given a \eqn{k}-cohesive set of vertices, maximally
 hierarchy of vertex subsets is found, with the entire graph \eqn{G} at its
 root.
 
-The function \code{cohesive_blocks} implements cohesive blocking.  It
+The function \code{cohesive_blocks()} implements cohesive blocking.  It
 returns a \code{cohesiveBlocks} object. \code{cohesiveBlocks} should be
 handled as an opaque class, i.e. its internal structure should not be
 accessed directly, but through the functions listed here.
@@ -166,36 +166,36 @@ accessed directly, but through the functions listed here.
 The function \code{length} can be used on \code{cohesiveBlocks} objects and
 it gives the number of blocks.
 
-The function \code{blocks} returns the actual blocks stored in the
+The function \code{blocks()} returns the actual blocks stored in the
 \code{cohesiveBlocks} object. They are returned in a list of numeric
 vectors, each containing vertex ids.
 
-The function \code{graphs_from_cohesive_blocks} is similar, but returns the blocks as
+The function \code{graphs_from_cohesive_blocks()} is similar, but returns the blocks as
 (induced) subgraphs of the input graph. The various (graph, vertex and edge)
 attributes are kept in the subgraph.
 
-The function \code{cohesion} returns a numeric vector, the cohesion of the
+The function \code{cohesion()} returns a numeric vector, the cohesion of the
 different blocks. The order of the blocks is the same as for the
-\code{blocks} and \code{graphs_from_cohesive_blocks} functions.
+\code{blocks()} and \code{graphs_from_cohesive_blocks()} functions.
 
-The block hierarchy can be queried using the \code{hierarchy} function. It
+The block hierarchy can be queried using the \code{hierarchy()} function. It
 returns an igraph graph, its vertex ids are ordered according the order of
-the blocks in the \code{blocks} and \code{graphs_from_cohesive_blocks}, \code{cohesion},
+the blocks in the \code{blocks()} and \code{graphs_from_cohesive_blocks()}, \code{cohesion()},
 etc. functions.
 
-\code{parent} gives the parent vertex of each block, in the block hierarchy,
+\code{parent()} gives the parent vertex of each block, in the block hierarchy,
 for the root vertex it gives 0.
 
-\code{plot_hierarchy} plots the hierarchy tree of the cohesive blocks on the
+\code{plot_hierarchy()} plots the hierarchy tree of the cohesive blocks on the
 active graphics device, by calling \code{igraph.plot}.
 
-The \code{export_pajek} function can be used to export the graph and its
+The \code{export_pajek()} function can be used to export the graph and its
 cohesive blocks in Pajek format. It can either export a single Pajek project
 file with all the information, or a set of files, depending on its
 \code{project.file} argument. If \code{project.file} is \code{TRUE}, then
 the following information is written to the file (or connection) given in
 the \code{file} argument: (1) the input graph, together with its attributes,
-see \code{\link{write_graph}} for details; (2) the hierarchy graph; and (3)
+see \code{\link[=write_graph]{write_graph()}} for details; (2) the hierarchy graph; and (3)
 one binary partition for each cohesive block. If \code{project.file} is
 \code{FALSE}, then the \code{file} argument must be a character scalar and
 it is used as the base name for the generated files. If \code{file} is
@@ -205,13 +205,13 @@ it is used as the base name for the generated files. If \code{file} is
 \sQuote{basename_block_x.net} for each cohesive block, where \sQuote{x} is
 the number of the block, starting with one.
 
-\code{max_cohesion} returns the maximal cohesion of each vertex, i.e. the
+\code{max_cohesion()} returns the maximal cohesion of each vertex, i.e. the
 cohesion of the most cohesive block of the vertex.
 
-The generic function \code{summary} works on \code{cohesiveBlocks} objects
+The generic function \code{\link[=summary]{summary()}} works on \code{cohesiveBlocks} objects
 and it prints a one line summary to the terminal.
 
-The generic function \code{print} is also defined on \code{cohesiveBlocks}
+The generic function \code{\link[=print]{print()}} is also defined on \code{cohesiveBlocks}
 objects and it is invoked automatically if the name of the
 \code{cohesiveBlocks} object is typed in. It produces an output like this:
 \preformatted{ Cohesive block structure:
@@ -228,17 +228,19 @@ enough and shows the vertices in the blocks, ordered by vertex ids.
 \sQuote{o} means that the vertex is included, a dot means that it is not,
 and the vertices are shown in groups of ten.
 
-The generic function \code{plot} plots the graph, showing one or more
+The generic function \code{\link[=plot]{plot()}} plots the graph, showing one or more
 cohesive blocks in it.
 }
 \examples{
 
 ## The graph from the Moody-White paper
-mw <- graph_from_literal(1-2:3:4:5:6, 2-3:4:5:7, 3-4:6:7, 4-5:6:7,
-                5-6:7:21, 6-7, 7-8:11:14:19, 8-9:11:14, 9-10,
-                10-12:13, 11-12:14, 12-16, 13-16, 14-15, 15-16,
-                17-18:19:20, 18-20:21, 19-20:22:23, 20-21,
-                21-22:23, 22-23)
+mw <- graph_from_literal(
+  1 - 2:3:4:5:6, 2 - 3:4:5:7, 3 - 4:6:7, 4 - 5:6:7,
+  5 - 6:7:21, 6 - 7, 7 - 8:11:14:19, 8 - 9:11:14, 9 - 10,
+  10 - 12:13, 11 - 12:14, 12 - 16, 13 - 16, 14 - 15, 15 - 16,
+  17 - 18:19:20, 18 - 20:21, 19 - 20:22:23, 20 - 21,
+  21 - 22:23, 22 - 23
+)
 
 mwBlocks <- cohesive_blocks(mw)
 
@@ -258,24 +260,28 @@ if (!interactive()) {
 plot(mwBlocks, mw)
 
 ## The science camp network
-camp <- graph_from_literal(Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
-                  Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
-                  Holly   - Carol:Pat:Pam:Jennie:Bill,
-                  Bill    - Pauline:Michael:Lee:Holly,
-                  Pauline - Bill:Jennie:Ann,
-                  Jennie  - Holly:Michael:Lee:Ann:Pauline,
-                  Michael - Bill:Jennie:Ann:Lee:John,
-                  Ann     - Michael:Jennie:Pauline,
-                  Lee     - Michael:Bill:Jennie,
-                  Gery    - Pat:Steve:Russ:John,
-                  Russ    - Steve:Bert:Gery:John,
-                  John    - Gery:Russ:Michael)
+camp <- graph_from_literal(
+  Harry:Steve:Don:Bert - Harry:Steve:Don:Bert,
+  Pam:Brazey:Carol:Pat - Pam:Brazey:Carol:Pat,
+  Holly - Carol:Pat:Pam:Jennie:Bill,
+  Bill - Pauline:Michael:Lee:Holly,
+  Pauline - Bill:Jennie:Ann,
+  Jennie - Holly:Michael:Lee:Ann:Pauline,
+  Michael - Bill:Jennie:Ann:Lee:John,
+  Ann - Michael:Jennie:Pauline,
+  Lee - Michael:Bill:Jennie,
+  Gery - Pat:Steve:Russ:John,
+  Russ - Steve:Bert:Gery:John,
+  John - Gery:Russ:Michael
+)
 campBlocks <- cohesive_blocks(camp)
 campBlocks
 
-plot(campBlocks, camp, vertex.label=V(camp)$name, margin=-0.2,
-     vertex.shape="rectangle", vertex.size=24, vertex.size2=8,
-     mark.border=1, colbar=c(NA, NA,"cyan","orange") )
+plot(campBlocks, camp,
+  vertex.label = V(camp)$name, margin = -0.2,
+  vertex.shape = "rectangle", vertex.size = 24, vertex.size2 = 8,
+  mark.border = 1, colbar = c(NA, NA, "cyan", "orange")
+)
 
 }
 \references{
@@ -284,7 +290,7 @@ A hierarchical concept of social groups. \emph{American Sociological
 Review}, 68(1):103--127, Feb 2003.
 }
 \seealso{
-\code{\link{cohesion}}
+\code{\link[=cohesion]{cohesion()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com} for the current

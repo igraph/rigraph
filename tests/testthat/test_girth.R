@@ -1,5 +1,4 @@
 test_that("girth works", {
-
   ## No circle in a tree
   g <- make_tree(1000, 3)
   gi <- girth(g)

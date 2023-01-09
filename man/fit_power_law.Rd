@@ -40,7 +40,7 @@ is non-integer and assume a discrete distribution otherwise.}
 details below.}
 
 \item{\dots}{Additional arguments, passed to the maximum likelihood
-optimizing function, \code{\link[stats4]{mle}}, if the \sQuote{\code{R.mle}}
+optimizing function, \code{\link[stats4:mle]{stats4::mle()}}, if the \sQuote{\code{R.mle}}
 implementation is chosen. It is ignored by the \sQuote{\code{plfit}}
 implementation.}
 }
@@ -48,7 +48,7 @@ implementation.}
 Depends on the \code{implementation} argument. If it is
 \sQuote{\code{R.mle}}, then an object with class \sQuote{\code{mle}}. It can
 be used to calculate confidence intervals and log-likelihood. See
-\code{\link[stats4]{mle-class}} for details.
+\code{\link[stats4:mle-class]{stats4::mle-class()}} for details.
 
 If \code{implementation} is \sQuote{\code{plfit}}, then the result is a
 named list with entries: \item{continuous}{Logical scalar, whether the
@@ -66,7 +66,7 @@ hypothesis that the original data could have been drawn from the fitted
 power-law distribution.}
 }
 \description{
-\code{fit_power_law} fits a power-law distribution to a data set.
+\code{fit_power_law()} fits a power-law distribution to a data set.
 }
 \details{
 This function fits a power-law distribution to a vector containing samples
@@ -79,9 +79,9 @@ the power-law behaviour kicks in only above a threshold value
 \eqn{\alpha}{alpha} if \eqn{x_{min}}{xmin} is given, or to determine
 \eqn{x_{min}}{xmin} and the corresponding value of \eqn{\alpha}{alpha}.
 
-\code{fit_power_law} provides two maximum likelihood implementations.  If
+\code{fit_power_law()} provides two maximum likelihood implementations.  If
 the \code{implementation} argument is \sQuote{\code{R.mle}}, then the BFGS
-optimization (see \link[stats4]{mle}) algorithm is applied.  The additional
+optimization (see \link[stats4:mle]{mle}) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
 \emph{not} to fit the \eqn{x_{min}}{xmin} argument, so use the
@@ -99,9 +99,9 @@ parameters of the fitted distribution. See references below for the details.
 
 # This should approximately yield the correct exponent 3
 g <- barabasi.game(1000) # increase this number to have a better estimate
-d <- degree(g, mode="in")
-fit1 <- fit_power_law(d+1, 10)
-fit2 <- fit_power_law(d+1, 10, implementation="R.mle")
+d <- degree(g, mode = "in")
+fit1 <- fit_power_law(d + 1, 10)
+fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
 
 fit1$alpha
 stats4::coef(fit2)
@@ -117,7 +117,7 @@ Aaron Clauset, Cosma R .Shalizi and Mark E.J. Newman: Power-law
 distributions in empirical data. SIAM Review 51(4):661-703, 2009.
 }
 \seealso{
-\code{\link[stats4]{mle}}
+\code{\link[stats4:mle]{stats4::mle()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

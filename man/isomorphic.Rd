@@ -40,13 +40,13 @@ Decide if two graphs are isomorphic
 It tries to select the appropriate method based on the two graphs.
 This is the algorithm it uses:
 \enumerate{
-  \item If the two graphs do not agree on their order and size
-    (i.e. number of vertices and edges), then return \code{FALSE}.
-  \item If the graphs have three or four vertices, then the
-    \sQuote{direct} method is used.
-  \item If the graphs are directed, then the \sQuote{vf2} method is
-    used.
-  \item Otherwise the \sQuote{bliss} method is used.
+\item If the two graphs do not agree on their order and size
+(i.e. number of vertices and edges), then return \code{FALSE}.
+\item If the graphs have three or four vertices, then the
+\sQuote{direct} method is used.
+\item If the graphs are directed, then the \sQuote{vf2} method is
+used.
+\item Otherwise the \sQuote{bliss} method is used.
 }
 }
 
@@ -63,17 +63,17 @@ This method uses the VF2 algorithm by Cordella, Foggia et al., see
 references below. It supports vertex and edge colors and have the
 following extra arguments:
 \describe{
-  \item{vertex.color1, vertex.color2}{Optional integer vectors giving the
-    colors of the vertices for colored graph isomorphism. If they
-    are not given, but the graph has a \dQuote{color} vertex attribute,
-    then it will be used. If you want to ignore these attributes, then
-    supply \code{NULL} for both of these arguments. See also examples
-    below.}
-  \item{edge.color1, edge.color2}{Optional integer vectors giving the
-    colors of the edges for edge-colored (sub)graph isomorphism. If they
-    are not given, but the graph has a \dQuote{color} edge attribute,
-    then it will be used. If you want to ignore these attributes, then
-    supply \code{NULL} for both of these arguments.}
+\item{vertex.color1, vertex.color2}{Optional integer vectors giving the
+colors of the vertices for colored graph isomorphism. If they
+are not given, but the graph has a \dQuote{color} vertex attribute,
+then it will be used. If you want to ignore these attributes, then
+supply \code{NULL} for both of these arguments. See also examples
+below.}
+\item{edge.color1, edge.color2}{Optional integer vectors giving the
+colors of the edges for edge-colored (sub)graph isomorphism. If they
+are not given, but the graph has a \dQuote{color} edge attribute,
+then it will be used. If you want to ignore these attributes, then
+supply \code{NULL} for both of these arguments.}
 }
 }
 
@@ -81,14 +81,14 @@ following extra arguments:
 
 Uses the BLISS algorithm by Junttila and Kaski, and it works for
 undirected graphs. For both graphs the
-\code{\link{canonical_permutation}} and then the \code{\link{permute}}
+\code{\link[=canonical_permutation]{canonical_permutation()}} and then the \code{\link[=permute]{permute()}}
 function is called to transfer them into canonical form; finally the
 canonical forms are compared.
 Extra arguments:
 \describe{
-  \item{sh}{Character constant, the heuristics to use in the BLISS
-    algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of
-    \code{\link{canonical_permutation}} for possible values.}
+\item{sh}{Character constant, the heuristics to use in the BLISS
+algorithm for \code{graph1} and \code{graph2}. See the \code{sh} argument of
+\code{\link[=canonical_permutation]{canonical_permutation()}} for possible values.}
 }
 \code{sh} defaults to \sQuote{fm}.
 }
@@ -100,7 +100,7 @@ g2 <- graph_from_isomorphism_class(3, 11)
 isomorphic(g1, g2)
 
 # create two isomorphic graphs, by permuting the vertices of the first
-g1 <- barabasi.game(30, m=2, directed=FALSE)
+g1 <- barabasi.game(30, m = 2, directed = FALSE)
 g2 <- permute(g1, sample(vcount(g1)))
 # should be TRUE
 isomorphic(g1, g2)
@@ -117,18 +117,20 @@ V(g2)$color <- rep(2:1, length = vcount(g2))
 # consider colors by default
 count_isomorphisms(g1, g2)
 # ignore colors
-count_isomorphisms(g1, g2, vertex.color1 = NULL,
-    vertex.color2 = NULL)
+count_isomorphisms(g1, g2,
+  vertex.color1 = NULL,
+  vertex.color2 = NULL
+)
 }
 \references{
 Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
- Labeling Tool for Large and Sparse Graphs, \emph{Proceedings of the
- Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
- Workshop on Analytic Algorithms and Combinatorics.} 2007.
+Labeling Tool for Large and Sparse Graphs, \emph{Proceedings of the
+Ninth Workshop on Algorithm Engineering and Experiments and the Fourth
+Workshop on Analytic Algorithms and Combinatorics.} 2007.
 
- LP Cordella,  P Foggia, C Sansone, and M Vento: An improved algorithm
- for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
- on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
+LP Cordella,  P Foggia, C Sansone, and M Vento: An improved algorithm
+for matching large graphs, \emph{Proc. of the 3rd IAPR TC-15 Workshop
+on Graphbased Representations in Pattern Recognition}, 149--159, 2001.
 }
 \seealso{
 Other graph isomorphism: 

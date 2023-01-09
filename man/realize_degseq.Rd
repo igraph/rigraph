@@ -62,48 +62,52 @@ The \dQuote{index} method selects the vertices in order of their index.
 }
 \examples{
 
-g <- realize_degseq(rep(2,100))
+g <- realize_degseq(rep(2, 100))
 degree(g)
 is_simple(g)
 
 ## Exponential degree distribution, with high positive assortativity.
 ## Loop and multiple edges are explicitly allowed.
 ## Note that we correct the degree sequence if its sum is odd.
-degs <- sample(1:100, 100, replace=TRUE, prob=exp(-0.5*(1:100)))
-if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
-g4 <- realize_degseq(degs, method="largest", allowed.edge.types="all")
+degs <- sample(1:100, 100, replace = TRUE, prob = exp(-0.5 * (1:100)))
+if (sum(degs) \%\% 2 != 0) {
+  degs[1] <- degs[1] + 1
+}
+g4 <- realize_degseq(degs, method = "largest", allowed.edge.types = "all")
 all(degree(g4) == degs)
 
 ## Power-law degree distribution, no loops allowed but multiple edges
 ## are okay.
 ## Note that we correct the degree sequence if its sum is odd.
-degs <- sample(1:100, 100, replace=TRUE, prob=(1:100)^-2)
-if (sum(degs) \%\% 2 != 0) { degs[1] <- degs[1] + 1 }
-g5 <- realize_degseq(degs, allowed.edge.types="multi")
+degs <- sample(1:100, 100, replace = TRUE, prob = (1:100)^-2)
+if (sum(degs) \%\% 2 != 0) {
+  degs[1] <- degs[1] + 1
+}
+g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 all(degree(g5) == degs)
 }
 \references{
-V. Havel, 
+V. Havel,
 Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 Časopis pro pěstování matematiky 80, 477-480 (1955).
-http://eudml.org/doc/19050
+\url{https://eudml.org/doc/19050}
 
 S. L. Hakimi,
 On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
 Journal of the SIAM 10, 3 (1962).
-https://www.jstor.org/stable/2098770
+\url{https://www.jstor.org/stable/2098770}
 
 D. J. Kleitman and D. L. Wang,
 Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 Discrete Mathematics 6, 1 (1973).
-https://doi.org/10.1016/0012-365X%2873%2990037-X
+\url{https://doi.org/10.1016/0012-365X\%2873\%2990037-X}
 
 Sz. Horvát and C. D. Modes,
 Connectedness matters: construction and exact random sampling of connected networks (2021).
-https://doi.org/10.1088/2632-072X/abced5
+\url{https://doi.org/10.1088/2632-072X/abced5}
 }
 \seealso{
-\code{\link{sample_degseq}} for a randomized variant that samples
+\code{\link[=sample_degseq]{sample_degseq()}} for a randomized variant that samples
 from graphs with the given degree sequence.
 }
 \keyword{graphs}

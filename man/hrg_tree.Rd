@@ -13,7 +13,7 @@ hrg_tree(hrg)
 An igraph graph.
 }
 \description{
-\code{hrg_tree} creates the corresponsing igraph tree of a hierarchical
+\code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
 random graph model.
 }
 \seealso{

@@ -20,7 +20,7 @@
 V(x) <- value
 }
 \arguments{
-\item{x}{A vertex sequence. For \code{V<-} it is a graph.}
+\item{x}{A vertex sequence. For \verb{V<-} it is a graph.}
 
 \item{i}{Index.}
 
@@ -31,9 +31,9 @@ vertex sequence.}
 }
 \value{
 A vector or list, containing the values of
-  attribute \code{name} for the vertices in the vertex sequence.
-  For numeric, character or logical attributes, it is a vector of the
-  appropriate type, otherwise it is a list.
+attribute \code{name} for the vertices in the vertex sequence.
+For numeric, character or logical attributes, it is a vector of the
+appropriate type, otherwise it is a list.
 }
 \description{
 The \code{$} operator is a syntactic sugar to query and set the
@@ -41,18 +41,19 @@ attributes of the vertices in a vertex sequence.
 }
 \details{
 The query form of \code{$} is a shortcut for
-\code{\link{vertex_attr}}, e.g. \code{V(g)[idx]$attr} is equivalent
+\code{\link[=vertex_attr]{vertex_attr()}}, e.g. \code{V(g)[idx]$attr} is equivalent
 to \code{vertex_attr(g, attr, V(g)[idx])}.
 
 The assignment form of \code{$} is a shortcut for
-\code{\link{set_vertex_attr}}, e.g. \code{V(g)[idx]$attr <- value} is
+\code{\link[=set_vertex_attr]{set_vertex_attr()}}, e.g. \code{V(g)[idx]$attr <- value} is
 equivalent to \code{g <- set_vertex_attr(g, attr, V(g)[idx], value)}.
 }
 \examples{
-g <- make_(ring(10),
+g <- make_(
+  ring(10),
   with_vertex_(
     name = LETTERS[1:10],
-    color = sample(1:2, 10, replace=TRUE)
+    color = sample(1:2, 10, replace = TRUE)
   )
 )
 V(g)$name
@@ -64,7 +65,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 2/100),
+g <- sample_(
+  gnp(100, 2 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )

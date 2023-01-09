@@ -1,6 +1,6 @@
 #' Greedy vertex coloring
 #'
-#' \code{greedy_vertex_coloring} finds a coloring for the vertices of a graph
+#' `greedy_vertex_coloring()` finds a coloring for the vertices of a graph
 #' based on a simple greedy algorithm.
 #'
 #' The goal of vertex coloring is to assign a "color" (i.e. a positive integer
@@ -12,10 +12,10 @@
 #'
 #' @param graph The graph object to color
 #' @param heuristic The selection heuristic for the next vertex to consider.
-#' Currently only one heuristic is supported: \dQuote{colored_neighbors}
-#' selects the vertex with the largest number of already colored neighbors.
-#' @return A numeric vector where item \code{i} contains the color index
-#' associated to vertex \code{i}
+#'   Currently only one heuristic is supported: \dQuote{colored_neighbors}
+#'   selects the vertex with the largest number of already colored neighbors.
+#' @return A numeric vector where item `i` contains the color index
+#'   associated to vertex `i`
 #'
 #' @export
 #' @keywords graphs
@@ -23,6 +23,6 @@
 #'
 #' g <- make_graph("petersen")
 #' col <- greedy_vertex_coloring(g)
-#' plot(g, vertex.color=col)
+#' plot(g, vertex.color = col)
 #'
 greedy_vertex_coloring <- greedy_vertex_coloring

@@ -51,7 +51,7 @@ iterations.}
 Typical (and default) value is the number of vertices.}
 
 \item{weights}{Edge weights, larger values will result longer edges.
-Note that this is opposite to \code{\link{layout_with_fr}}. Weights must
+Note that this is opposite to \code{\link[=layout_with_fr]{layout_with_fr()}}. Weights must
 be positive.}
 
 \item{minx}{If not \code{NULL}, then it must be a numeric vector that gives
@@ -77,7 +77,7 @@ igraph version 0.8.0 and are ignored (with a warning).}
 
 \item{start}{Deprecated synonym for \code{coords}, for compatibility.}
 
-\item{...}{Passed to \code{layout_with_kk}.}
+\item{...}{Passed to \code{layout_with_kk()}.}
 }
 \value{
 A numeric matrix with two (dim=2) or three (dim=3) columns, and as
@@ -97,8 +97,8 @@ follows truthfully the original publication by Kamada and Kawai now.
 \examples{
 
 g <- make_ring(10)
-E(g)$weight <- rep(1:2, length.out=ecount(g))
-plot(g, layout=layout_with_kk, edge.label=E(g)$weight)
+E(g)$weight <- rep(1:2, length.out = ecount(g))
+plot(g, layout = layout_with_kk, edge.label = E(g)$weight)
 
 }
 \references{
@@ -106,8 +106,8 @@ Kamada, T. and Kawai, S.: An Algorithm for Drawing General
 Undirected Graphs. \emph{Information Processing Letters}, 31/1, 7--15, 1989.
 }
 \seealso{
-\code{\link{layout_with_drl}}, \code{\link{plot.igraph}},
-\code{\link{tkplot}}
+\code{\link[=layout_with_drl]{layout_with_drl()}}, \code{\link[=plot.igraph]{plot.igraph()}},
+\code{\link[=tkplot]{tkplot()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

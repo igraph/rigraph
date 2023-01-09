@@ -29,7 +29,7 @@ bipartite(...)
 \item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
 be given for \eqn{G(n,m)} graphs.}
 
-\item{m}{Integer scalar, the number of edges for \eqn{G(n,p)} graphs. Should not
+\item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
 \item{directed}{Logical scalar, whether to create a directed graph. See also
@@ -43,7 +43,7 @@ mutual edges. If this argument is \sQuote{all}, then each edge direction is
 considered independently and mutual edges might be generated. This argument
 is ignored for undirected graphs.}
 
-\item{...}{Passed to \code{sample_bipartite}.}
+\item{...}{Passed to \code{sample_bipartite()}.}
 }
 \value{
 A bipartite igraph graph.
@@ -61,20 +61,20 @@ uniformly choose \eqn{m} edges to realize.
 \examples{
 
 ## empty graph
-sample_bipartite(10, 5, p=0)
+sample_bipartite(10, 5, p = 0)
 
 ## full graph
-sample_bipartite(10, 5, p=1)
+sample_bipartite(10, 5, p = 1)
 
 ## random bipartite graph
-sample_bipartite(10, 5, p=.1)
+sample_bipartite(10, 5, p = .1)
 
 ## directed bipartite graph, G(n,m)
-sample_bipartite(10, 5, type="Gnm", m=20, directed=TRUE, mode="all")
+sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link{sample_gnp}} for the unipartite version.
+\code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} for the unipartite version.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

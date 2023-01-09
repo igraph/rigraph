@@ -28,15 +28,15 @@ The intersection of two or more graphs are created.  The graphs may have
 identical or overlapping vertex sets.
 }
 \details{
-\code{intersection} creates the intersection of two or more graphs:
+\code{intersection()} creates the intersection of two or more graphs:
 only edges present in all graphs will be included.  The corresponding
-operator is \%s\%.
+operator is \verb{\%s\%}.
 
 If the \code{byname} argument is \code{TRUE} (or \code{auto} and all graphs
 are named), then the operation is performed on symbolic vertex names instead
 of the internal numeric vertex ids.
 
-\code{intersection} keeps the attributes of all graphs. All graph,
+\code{intersection()} keeps the attributes of all graphs. All graph,
 vertex and edge attributes are copied to the result. If an attribute is
 present in multiple graphs and would result a name clash, then this
 attribute is renamed by adding suffixes: _1, _2, etc.
@@ -51,9 +51,11 @@ undirected.
 \examples{
 
 ## Common part of two social networks
-net1 <- graph_from_literal(D-A:B:F:G, A-C-F-A, B-E-G-B, A-B, F-G,
-                  H-F:G, H-I-J)
-net2 <- graph_from_literal(D-A:F:Y, B-A-X-F-H-Z, F-Y)
+net1 <- graph_from_literal(
+  D - A:B:F:G, A - C - F - A, B - E - G - B, A - B, F - G,
+  H - F:G, H - I - J
+)
+net2 <- graph_from_literal(D - A:F:Y, B - A - X - F - H - Z, F - Y)
 print_all(net1 \%s\% net2)
 }
 \author{

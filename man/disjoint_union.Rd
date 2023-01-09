@@ -23,10 +23,10 @@ The union of two or more graphs are created. The graphs are assumed to have
 disjoint vertex sets.
 }
 \details{
-\code{disjoint_union} creates a union of two or more disjoint graphs.
+\code{disjoint_union()} creates a union of two or more disjoint graphs.
 Thus first the vertices in the second, third, etc. graphs are relabeled to
 have completely disjoint graphs. Then a simple union is created. This
-function can also be used via the \%du\% operator.
+function can also be used via the \verb{\%du\%} operator.
 
 \code{graph.disjont.union} handles graph, vertex and edge attributes.  In
 particular, it merges vertex and edge attributes using the basic \code{c()}
@@ -45,7 +45,7 @@ undirected.
 \examples{
 
 ## A star and a ring
-g1 <- make_star(10, mode="undirected")
+g1 <- make_star(10, mode = "undirected")
 V(g1)$name <- letters[1:10]
 g2 <- make_ring(10)
 V(g2)$name <- letters[11:20]

@@ -15,7 +15,7 @@ kautz_graph(...)
 
 \item{n}{Integer scalar, the length of the labels. See details below.}
 
-\item{...}{Passed to \code{make_kautz_graph}.}
+\item{...}{Passed to \code{make_kautz_graph()}.}
 }
 \value{
 A graph object.
@@ -36,15 +36,15 @@ details.
 }
 \examples{
 
-make_line_graph(make_kautz_graph(2,1))
-make_kautz_graph(2,2)
+make_line_graph(make_kautz_graph(2, 1))
+make_kautz_graph(2, 2)
 
 }
 \seealso{
-\code{\link{make_de_bruijn_graph}}, \code{\link{make_line_graph}}
+\code{\link[=make_de_bruijn_graph]{make_de_bruijn_graph()}}, \code{\link[=make_line_graph]{make_line_graph()}}
 }
 \author{
-Gabor Csardi <csardi.gabor@gmail.com>, the first version in R was
+Gabor Csardi \href{mailto:csardi.gabor@gmail.com}{csardi.gabor@gmail.com}, the first version in R was
 written by Vincent Matossian.
 }
 \keyword{graphs}

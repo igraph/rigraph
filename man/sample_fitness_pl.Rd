@@ -52,14 +52,14 @@ of vertices follow power-law distributions with prescribed exponents. For
 directed graphs, the exponents of the in- and out-degree distributions may
 be specified separately.
 
-The game simply uses \code{\link{sample_fitness}} with appropriately
+The game simply uses \code{\link[=sample_fitness]{sample_fitness()}} with appropriately
 constructed fitness vectors. In particular, the fitness of vertex \eqn{i} is
 \eqn{i^{-alpha}}{i^(-alpha)}, where \eqn{alpha = 1/(gamma-1)} and gamma is
 the exponent given in the arguments.
 
 To remove correlations between in- and out-degrees in case of directed
 graphs, the in-fitness vector will be shuffled after it has been set up and
-before \code{\link{sample_fitness}} is called.
+before \code{\link[=sample_fitness]{sample_fitness()}} is called.
 
 Note that significant finite size effects may be observed for exponents
 smaller than 3 in the original formulation of the game. This function
@@ -73,7 +73,7 @@ paper of Chung and Lu, and Cho et al for more details.
 \examples{
 
 g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
-plot(degree_distribution(g, cumulative=TRUE, mode="out"), log="xy")
+plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
 }
 \references{
 Goh K-I, Kahng B, Kim D: Universal behaviour of load

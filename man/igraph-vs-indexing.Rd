@@ -42,17 +42,17 @@ is equivalent to \code{c(V(g)[1], V(g)[2], V(g)[.nei(1)])}.
 Vertex sequences can be indexed with positive numeric vectors,
 negative numeric vectors, logical vectors, character vectors:
 \itemize{
-  \item When indexed with positive numeric vectors, the vertices at the
-    given positions in the sequence are selected. This is the same as
-    indexing a regular R atomic vector with positive numeric vectors.
-  \item When indexed with negative numeric vectors, the vertices at the
-    given positions in the sequence are omitted. Again, this is the same
-    as indexing a regular R atomic vector.
-  \item When indexed with a logical vector, the lengths of the vertex
-    sequence and the index must match, and the vertices for which the
-    index is \code{TRUE} are selected.
-  \item Named graphs can be indexed with character vectors,
-    to select vertices with the given names.
+\item When indexed with positive numeric vectors, the vertices at the
+given positions in the sequence are selected. This is the same as
+indexing a regular R atomic vector with positive numeric vectors.
+\item When indexed with negative numeric vectors, the vertices at the
+given positions in the sequence are omitted. Again, this is the same
+as indexing a regular R atomic vector.
+\item When indexed with a logical vector, the lengths of the vertex
+sequence and the index must match, and the vertices for which the
+index is \code{TRUE} are selected.
+\item Named graphs can be indexed with character vectors,
+to select vertices with the given names.
 }
 }
 
@@ -75,21 +75,21 @@ same name. Similarly, you can use \code{.data} to match attribute names only.
 
 There are some special igraph functions that can be used only
 in expressions indexing vertex sequences: \describe{
-  \item{\code{.nei}}{takes a vertex sequence as its argument
-    and selects neighbors of these vertices. An optional \code{mode}
-    argument can be used to select successors (\code{mode="out"}), or
-    predecessors (\code{mode="in"}) in directed graphs.}
-  \item{\code{.inc}}{Takes an edge sequence as an argument, and
-    selects vertices that have at least one incident edge in this
-    edge sequence.}
-  \item{\code{.from}}{Similar to \code{.inc}, but only considers the
-    tails of the edges.}
-  \item{\code{.to}}{Similar to \code{.inc}, but only considers the
-    heads of the edges.}
-  \item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
-    \code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
-    \code{.nei(v, mode = "out")}.
-  }
+\item{\code{.nei}}{takes a vertex sequence as its argument
+and selects neighbors of these vertices. An optional \code{mode}
+argument can be used to select successors (\code{mode="out"}), or
+predecessors (\code{mode="in"}) in directed graphs.}
+\item{\code{.inc}}{Takes an edge sequence as an argument, and
+selects vertices that have at least one incident edge in this
+edge sequence.}
+\item{\code{.from}}{Similar to \code{.inc}, but only considers the
+tails of the edges.}
+\item{\code{.to}}{Similar to \code{.inc}, but only considers the
+heads of the edges.}
+\item{\code{.innei}, \code{.outnei}}{\code{.innei(v)} is a shorthand for
+\code{.nei(v, mode = "in")}, and \code{.outnei(v)} is a shorthand for
+\code{.nei(v, mode = "out")}.
+}
 }
 Note that multiple special functions can be used together, or with
 regular indices, and then their results are concatenated. See more
@@ -103,7 +103,8 @@ largest_comp <- function(graph) {
   cl <- components(graph)
   V(graph)[which.max(cl$csize) == cl$membership]
 }
-g <- sample_(gnp(100, 2/100),
+g <- sample_(
+  gnp(100, 2 / 100),
   with_vertex_(size = 3, label = ""),
   with_graph_(layout = layout_with_fr)
 )
@@ -114,23 +115,23 @@ plot(g)
 
 # -----------------------------------------------------------------
 # nei() special function
-g <- graph( c(1,2, 2,3, 2,4, 4,2) )
-V(g)[ .nei( c(2,4) ) ]
-V(g)[ .nei( c(2,4), "in") ]
-V(g)[ .nei( c(2,4), "out") ]
+g <- graph(c(1, 2, 2, 3, 2, 4, 4, 2))
+V(g)[.nei(c(2, 4))]
+V(g)[.nei(c(2, 4), "in")]
+V(g)[.nei(c(2, 4), "out")]
 
 # -----------------------------------------------------------------
 # The same with vertex names
 g <- graph(~ A -+ B, B -+ C:D, D -+ B)
-V(g)[ .nei( c('B', 'D') ) ]
-V(g)[ .nei( c('B', 'D'), "in" ) ]
-V(g)[ .nei( c('B', 'D'), "out" ) ]
+V(g)[.nei(c("B", "D"))]
+V(g)[.nei(c("B", "D"), "in")]
+V(g)[.nei(c("B", "D"), "out")]
 
 # -----------------------------------------------------------------
 # Resolving attributes
 g <- graph(~ A -+ B, B -+ C:D, D -+ B)
 V(g)$color <- c("red", "red", "green", "green")
-V(g)[ color == "red" ]
+V(g)[color == "red"]
 
 # Indexing with a variable whose name matches the name of an attribute
 # may fail; use .env to force the name lookup in the parent environment

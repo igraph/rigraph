@@ -41,7 +41,7 @@ If the graph is unconnected a minimum spanning forest is returned.
 }
 \examples{
 
-g <- sample_gnp(100, 3/100)
+g <- sample_gnp(100, 3 / 100)
 g_mst <- mst(g)
 
 }
@@ -50,7 +50,7 @@ Prim, R.C. 1957. Shortest connection networks and some
 generalizations \emph{Bell System Technical Journal}, 37 1389--1401.
 }
 \seealso{
-\code{\link{components}}
+\code{\link[=components]{components()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

@@ -24,7 +24,7 @@ a tree or as a list, depending on the \code{type} argument of the
 print function. By default the \code{auto} type is used, which selects
 \code{tree} for small graphs and \code{simple} (=list) for bigger
 ones. The \code{tree} format looks like
- this: \preformatted{Hierarchical random graph, at level 3:
+this: \preformatted{Hierarchical random graph, at level 3:
 g1        p=   0
 '- g15    p=0.33  1
    '- g13 p=0.88  6  3  9  4  2  10 7  5  8

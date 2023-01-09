@@ -2,7 +2,7 @@
 % Please edit documentation in R/games.R
 \name{sample_correlated_gnp_pair}
 \alias{sample_correlated_gnp_pair}
-\title{Sample a pair of correlated G(n,p) random graphs}
+\title{Sample a pair of correlated \eqn{G(n,p)} random graphs}
 \usage{
 sample_correlated_gnp_pair(n, corr, p, directed = FALSE, permutation = NULL)
 }
@@ -35,8 +35,10 @@ shuffling its vertices.
 Please see the reference given below.
 }
 \examples{
-gg <- sample_correlated_gnp_pair(n = 10, corr = .8, p = .5,
-           directed = FALSE)
+gg <- sample_correlated_gnp_pair(
+  n = 10, corr = .8, p = .5,
+  directed = FALSE
+)
 gg
 cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 }
@@ -46,7 +48,7 @@ graph matching for correlated Erdos-Renyi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
-\code{\link{sample_correlated_gnp}},
-  \code{\link{sample_gnp}}.
+\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
+\code{\link[=sample_gnp]{sample_gnp()}}.
 }
 \keyword{graphs}

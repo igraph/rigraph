@@ -25,7 +25,7 @@ algorithm from Eades, Lin and Smyth. \dQuote{\code{exact}} is an alias to
 }
 \value{
 An edge sequence (by default, but see the \code{return.vs.es} option
-of \code{\link{igraph_options}}) containing the feedback arc set.
+of \code{\link[=igraph_options]{igraph_options()}}) containing the feedback arc set.
 }
 \description{
 A feedback arc set of a graph is a subset of edges whose removal breaks all
@@ -40,9 +40,9 @@ component is a tree).
 }
 \examples{
 
-g <- sample_gnm(20, 40, directed=TRUE)
+g <- sample_gnm(20, 40, directed = TRUE)
 feedback_arc_set(g)
-feedback_arc_set(g, algo="approx")
+feedback_arc_set(g, algo = "approx")
 }
 \references{
 Peter Eades, Xuemin Lin and W.F.Smyth: A fast and effective

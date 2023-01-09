@@ -30,7 +30,7 @@ this argument is case insensitive.}
 A NULL, invisibly.
 }
 \description{
-\code{write_graph} is a general function for exporting graphs to foreign
+\code{write_graph()} is a general function for exporting graphs to foreign
 file formats, however not many formats are implemented right now.
 }
 \section{Edge list format}{
@@ -56,7 +56,7 @@ protein function with an algorithm for visualizing very large biological
 networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
 }
 \seealso{
-\code{\link{read_graph}}
+\code{\link[=read_graph]{read_graph()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

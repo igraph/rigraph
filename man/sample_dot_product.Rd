@@ -16,7 +16,7 @@ column.}
 \item{directed}{A logical scalar, TRUE if the generated graph should be
 directed.}
 
-\item{...}{Passed to \code{sample_dot_product}.}
+\item{...}{Passed to \code{sample_dot_product()}.}
 }
 \value{
 An igraph graph object which is the generated random dot product
@@ -36,12 +36,14 @@ are added; dot products that are larger than one always add an edge.
 
 ## A randomly generated  graph
 lpvs <- matrix(rnorm(200), 20, 10)
-lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
+lpvs <- apply(lpvs, 2, function(x) {
+  return(abs(x) / sqrt(sum(x^2)))
+})
 g <- sample_dot_product(lpvs)
 g
 
 ## Sample latent vectors from the surface of the unit sphere
-lpvs2 <- sample_sphere_surface(dim=5, n=20)
+lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 g2 <- sample_dot_product(lpvs2)
 g2
 }
@@ -51,8 +53,8 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 2006.
 }
 \seealso{
-\code{\link{sample_dirichlet}}, \code{\link{sample_sphere_surface}}
-and \code{\link{sample_sphere_volume}} for sampling position vectors.
+\code{\link[=sample_dirichlet]{sample_dirichlet()}}, \code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
+and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

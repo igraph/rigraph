@@ -36,16 +36,16 @@ directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
 connected components to search. It is ignored for undirected graphs.}
 }
 \value{
-For \code{is_connected} a logical constant.
+For \code{is_connected()} a logical constant.
 
-For \code{components} a named list with three components:
+For \code{components()} a named list with three components:
 \item{membership}{numeric vector giving the cluster id to which each vertex
 belongs.} \item{csize}{numeric vector giving the sizes of the clusters.}
 \item{no}{numeric constant, the number of clusters.}
 
-For \code{count_components} an integer constant is returned.
+For \code{count_components()} an integer constant is returned.
 
-For \code{component_distribution} a numeric vector with the relative
+For \code{component_distribution()} a numeric vector with the relative
 frequencies. The length of the vector is the size of the largest component
 plus one. Note that (for currently unknown reasons) the first element of the
 vector is the number of clusters of size zero, so this is always zero.
@@ -54,16 +54,16 @@ vector is the number of clusters of size zero, so this is always zero.
 Calculate the maximal (weakly or strongly) connected components of a graph
 }
 \details{
-\code{is_connected} decides whether the graph is weakly or strongly
+\code{is_connected()} decides whether the graph is weakly or strongly
 connected. The null graph is considered disconnected.
 
-\code{components} finds the maximal (weakly or strongly) connected components
+\code{components()} finds the maximal (weakly or strongly) connected components
 of a graph.
 
-\code{count_components} does almost the same as \code{components} but returns only
+\code{count_components()} does almost the same as \code{components()} but returns only
 the number of clusters found instead of returning the actual clusters.
 
-\code{component_distribution} creates a histogram for the maximal connected
+\code{component_distribution()} creates a histogram for the maximal connected
 component sizes.
 
 The weakly connected components are found by a simple breadth-first search.
@@ -72,13 +72,13 @@ depth-first searches.
 }
 \examples{
 
-g <- sample_gnp(20, 1/20)
+g <- sample_gnp(20, 1 / 20)
 clu <- components(g)
 groups(clu)
 
 }
 \seealso{
-\code{\link{decompose}}, \code{\link{subcomponent}}, \code{\link{groups}}
+\code{\link[=decompose]{decompose()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=groups]{groups()}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

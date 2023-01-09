@@ -36,11 +36,11 @@ of the weighted clique finder supports positive integer weights only.}
 or only the maximal ones (\code{TRUE}).}
 }
 \value{
-\code{weighted_cliques} and \code{largest_weighted_cliques} return a
+\code{weighted_cliques()} and \code{largest_weighted_cliques()} return a
 list containing numeric vectors of vertex IDs. Each list element is a weighted
-clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs}}.
+clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs()}}.
 
-\code{weighted_clique_num} and \code{count_max_weighted_cliques} return an integer
+\code{weighted_clique_num()} and \code{count_max_weighted_cliques} return an integer
 scalar.
 }
 \description{
@@ -49,11 +49,11 @@ an undirected graph. The weight of a clique is the sum of the weights of its
 edges.
 }
 \details{
-\code{weighted_cliques} find all complete subgraphs in the input graph,
+\code{weighted_cliques()} find all complete subgraphs in the input graph,
 obeying the weight limitations given in the \code{min} and \code{max}
 arguments.
 
-\code{largest_weighted_cliques} finds all largest weighted cliques in the
+\code{largest_weighted_cliques()} finds all largest weighted cliques in the
 input graph. A clique is largest if there is no other clique whose total
 weight is larger than the weight of this clique.
 
@@ -64,20 +64,20 @@ weighted clique is not necessarily the largest.
 
 \code{count_max_weighted_cliques} counts the maximal weighted cliques.
 
-\code{weighted_clique_num} calculates the weight of the largest weighted clique(s).
+\code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 }
 \examples{
 
 g <- make_graph("zachary")
 V(g)$weight <- 1
-V(g)[c(1,2,3,4,14)]$weight <- 3
+V(g)[c(1, 2, 3, 4, 14)]$weight <- 3
 weighted_cliques(g)
-weighted_cliques(g, maximal=TRUE)
+weighted_cliques(g, maximal = TRUE)
 largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-\code{\link{ivs}}
+\code{\link[=ivs]{ivs()}}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi

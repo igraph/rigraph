@@ -7,7 +7,7 @@
 \description{
 Many times, when the structure of a graph is modified, vertices/edges map of
 the original graph map to vertices/edges in the newly created (modified)
-graph. For example \code{\link{simplify}} maps multiple edges to single
+graph. For example \code{\link[=simplify]{simplify()}} maps multiple edges to single
 edges. igraph provides a flexible mechanism to specify what to do with the
 vertex/edge attributes in these cases.
 }
@@ -15,15 +15,15 @@ vertex/edge attributes in these cases.
 The functions that support the combination of attributes have one or two
 extra arguments called \code{vertex.attr.comb} and/or \code{edge.attr.comb}
 that specify how to perform the mapping of the attributes. E.g.
-\code{\link{contract}} contracts many vertices into a single one, the
+\code{\link[=contract]{contract()}} contracts many vertices into a single one, the
 attributes of the vertices can be combined and stores as the vertex
 attributes of the new graph.
 
 The specification of the combination of (vertex or edge) attributes can be
 given as \enumerate{
-  \item a character scalar,
-  \item a function object or
-  \item a list of character scalars and/or function objects.
+\item a character scalar,
+\item a function object or
+\item a list of character scalars and/or function objects.
 }
 
 If it is a character scalar, then it refers to one of the predefined
@@ -72,37 +72,39 @@ function. This results almost always a complex attribute.} }
 
 \examples{
 
-g <- graph( c(1,2, 1,2, 1,2, 2,3, 3,4) )
+g <- graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
 E(g)$weight <- 1:5
 
 ## print attribute values with the graph
-igraph_options(print.graph.attributes=TRUE)
-igraph_options(print.vertex.attributes=TRUE)
-igraph_options(print.edge.attributes=TRUE)
+igraph_options(print.graph.attributes = TRUE)
+igraph_options(print.vertex.attributes = TRUE)
+igraph_options(print.edge.attributes = TRUE)
 
 ## new attribute is the sum of the old ones
-simplify(g, edge.attr.comb="sum")
+simplify(g, edge.attr.comb = "sum")
 
 ## collect attributes into a string
-simplify(g, edge.attr.comb=toString)
+simplify(g, edge.attr.comb = toString)
 
 ## concatenate them into a vector, this creates a complex
 ## attribute
-simplify(g, edge.attr.comb="concat")
+simplify(g, edge.attr.comb = "concat")
 
 E(g)$name <- letters[seq_len(ecount(g))]
 
 ## both attributes are collected into strings
-simplify(g, edge.attr.comb=toString)
+simplify(g, edge.attr.comb = toString)
 
 ## harmonic average of weights, names are dropped
-simplify(g, edge.attr.comb=list(weight=function(x) length(x)/sum(1/x),
-                                name="ignore"))
+simplify(g, edge.attr.comb = list(
+  weight = function(x) length(x) / sum(1 / x),
+  name = "ignore"
+))
 }
 \seealso{
-\code{\link{graph_attr}}, \code{\link{vertex_attr}},
-  \code{\link{edge_attr}} on how to use graph/vertex/edge attributes in
-  general. \code{\link{igraph_options}} on igraph parameters.
+\code{\link[=graph_attr]{graph_attr()}}, \code{\link[=vertex_attr]{vertex_attr()}},
+\code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in
+general. \code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

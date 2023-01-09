@@ -28,7 +28,7 @@
 #' @name scg-method
 #' @section Introduction: The SCG functions provide a framework, called
 #' Spectral Coarse Graining (SCG), for reducing large graphs while preserving
-#' their \emph{spectral-related features}, that is features closely related
+#' their *spectral-related features*, that is features closely related
 #' with the eigenvalues and eigenvectors of a graph matrix (which for now can
 #' be the adjacency, the stochastic, or the Laplacian matrix).
 #'
@@ -38,36 +38,35 @@
 #' epidemic network models (SIR and SIS models).
 #'
 #' SCG differs from traditional clustering schemes by producing a
-#' \emph{coarse-grained graph} (not just a partition of the vertices),
-#' representative of the original one. As shown in [1], Principal Component
-#' Analysis can be viewed as a particular SCG, called \emph{exact SCG}, where
+#' *coarse-grained graph* (not just a partition of the vertices),
+#' representative of the original one. As shown in \[1\], Principal Component
+#' Analysis can be viewed as a particular SCG, called *exact SCG*, where
 #' the matrix to be coarse-grained is the covariance matrix of some data set.
 #'
 #' SCG should be of interest to practitioners of various fields dealing with
 #' problems where matrix eigenpairs play an important role, as for instance is
 #' the case of dynamical processes on networks.
 #' @author David Morton de Lachapelle,
-#' \url{http://people.epfl.ch/david.morton}.
+#' <http://people.epfl.ch/david.morton>.
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
-#' Matrix Analysis and Applications}, 2008.
-#' \url{http://people.epfl.ch/david.morton}
+#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
+#' Matrix Analysis and Applications*, 2008.
+#' <http://people.epfl.ch/david.morton>
 #'
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
-#' in Oscillator Networks. \emph{Physical Review Letters}, \bold{100}(17),
-#' 2008.  \url{https://arxiv.org/abs/0708.2055}
+#' in Oscillator Networks. *Physical Review Letters*, **100**(17),
+#' 2008.  <https://arxiv.org/abs/0708.2055>
 #'
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
-#' Networks, \emph{Physical Review Letters}, \bold{99}(3), 2007.
-#' \url{https://arxiv.org/abs/0706.0812}
+#' Networks, *Physical Review Letters*, **99**(3), 2007.
+#' <https://arxiv.org/abs/0706.0812>
 #' @keywords graphs
-
 NULL
 
 #' Stochastic matrix of a graph
 #'
-#' Retrieves the stochastic matrix of a graph of class \code{igraph}.
+#' Retrieves the stochastic matrix of a graph of class `igraph`.
 #'
 #' Let \eqn{M} be an \eqn{n \times n}{n x n} adjacency matrix with real
 #' non-negative entries. Let us define \eqn{D = \textrm{diag}(\sum_{i}M_{1i},
@@ -78,15 +77,15 @@ NULL
 #' matrices are defined in a symmetric way.
 #'
 #' @aliases get.stochastic
-#' @param graph The input graph. Must be of class \code{igraph}.
-#' @param column.wise If \code{FALSE}, then the rows of the stochastic matrix
-#' sum up to one; otherwise it is the columns.
+#' @param graph The input graph. Must be of class `igraph`.
+#' @param column.wise If `FALSE`, then the rows of the stochastic matrix
+#'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical scalar, whether to return a sparse matrix. The
-#' \code{Matrix} package is needed for sparse matrices.
-#' @return A regular matrix or a matrix of class \code{Matrix} if a
-#' \code{sparse} argument was \code{TRUE}.
+#'   `Matrix` package is needed for sparse matrices.
+#' @return A regular matrix or a matrix of class `Matrix` if a
+#'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso \code{\link{as_adj}}
+#' @seealso [as_adj()]
 #' @export
 #' @keywords graphs
 #' @examples
@@ -94,16 +93,16 @@ NULL
 #' library(Matrix)
 #' ## g is a large sparse graph
 #' g <- sample_pa(n = 10^5, power = 2, directed = FALSE)
-#' W <- stochastic_matrix(g, sparse=TRUE)
+#' W <- stochastic_matrix(g, sparse = TRUE)
 #'
 #' ## a dense matrix here would probably not fit in the memory
 #' class(W)
 #'
 #' ## may not be exactly 1, due to numerical errors
-#' max(abs(rowSums(W))-1)
+#' max(abs(rowSums(W)) - 1)
 #'
-stochastic_matrix <- function(graph, column.wise=FALSE,
-                           sparse=igraph_opt("sparsematrices")) {
+stochastic_matrix <- function(graph, column.wise = FALSE,
+                              sparse = igraph_opt("sparsematrices")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
@@ -141,17 +140,17 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' exactly, or approximately but faster.
 #'
 #' The algorithm \dQuote{optimum} solves exactly the SCG problem for each
-#' eigenvector in \code{V}. The running time of this algorithm is \eqn{O(\max
+#' eigenvector in `V`. The running time of this algorithm is \eqn{O(\max
 #' nt \cdot m^2)}{O(max(nt) m^2)} for the symmetric and laplacian matrix
-#' problems (i.e. when \code{mtype} is \dQuote{symmetric} or
+#' problems (i.e. when `mtype` is \dQuote{symmetric} or
 #' \dQuote{laplacian}. It is \eqn{O(m^3)} for the stochastic problem. Here
-#' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
+#' \eqn{m} is the number of rows in `V`.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
 #'
 #' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
-#' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
-#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
+#' of the eigenvectors, that is `nt[i]` constant-size bins are used to
+#' partition `V[,i]`. When `algo` = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
 #'
@@ -159,7 +158,7 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' each eigenvector, the final grouping is worked out as follows: two vertices
 #' are grouped together in the final partition if they are grouped together in
 #' each minimizing partition. In general the size of the final partition is not
-#' known in advance when \code{ncol(V)}>1.
+#' known in advance when `ncol(V)`>1.
 #'
 #' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
@@ -167,38 +166,38 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #'
 #' @aliases scgGrouping
 #' @param V A numeric matrix of (eigen)vectors to be preserved by the coarse
-#' graining (the vectors are to be stored column-wise in \code{V}).
+#'   graining (the vectors are to be stored column-wise in `V`).
 #' @param nt A vector of positive integers of length one or equal to
-#' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
-#' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
-#' contains the number of intervals used to partition each eigenvector. The
-#' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
-#' parameter is ignored.
+#'   `length(ev)`. When `algo` = \dQuote{optimum}, `nt` contains
+#'   the number of groups used to partition each eigenvector separately. When
+#'   `algo` is equal to \dQuote{interv_km} or \dQuote{interv}, `nt`
+#'   contains the number of intervals used to partition each eigenvector. The
+#'   same partition size or number of intervals is used for each eigenvector if
+#'   `nt` is a single integer. When `algo` = \dQuote{exact_cg} this
+#'   parameter is ignored.
 #' @param mtype The type of semi-projectors used in the SCG. For now
-#' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
-#' available.
+#'   \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
+#'   available.
 #' @param algo The algorithm used to solve the SCG problem. Possible values are
-#' \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv} and
-#' \dQuote{exact_scg}.
-#' @param p A probability vector of length equal to \code{nrow(V)}. \code{p} is
-#' the stationary probability distribution of a Markov chain when \code{mtype}
-#' = \dQuote{stochastic}. This parameter is ignored in all other cases.
+#'   \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv} and
+#'   \dQuote{exact_scg}.
+#' @param p A probability vector of length equal to `nrow(V)`. `p` is
+#'   the stationary probability distribution of a Markov chain when `mtype`
+#'   = \dQuote{stochastic}. This parameter is ignored in all other cases.
 #' @param maxiter A positive integer giving the maximum number of iterations of
-#' the k-means algorithm when \code{algo} = \dQuote{interv_km}. This parameter
-#' is ignored in all other cases.
-#' @return A vector of \code{nrow(V)} integers giving the group label of each
-#' object (vertex) in the partition.
+#'   the k-means algorithm when `algo` = \dQuote{interv_km}. This parameter
+#'   is ignored in all other cases.
+#' @return A vector of `nrow(V)` integers giving the group label of each
+#'   object (vertex) in the partition.
 #' @author David Morton de Lachapelle \email{david.morton@@epfl.ch},
 #' \email{david.mortondelachapelle@@swissquote.ch}
-#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
-#' \code{\link{scg_eps}}
+#' @seealso [scg-method] for a detailed introduction. [scg()],
+#' [scg_eps()]
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
-#' Matrix Analysis and Applications}, 2008.
-#' \url{http://people.epfl.ch/david.morton}
+#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
+#' Matrix Analysis and Applications*, 2008.
+#' <http://people.epfl.ch/david.morton>
 #' @export
 #' @keywords graphs
 #' @examples
@@ -211,26 +210,30 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #'
 #' # eigenvectors of a random symmetric matrix
 #' M <- matrix(rexp(10^6), 10^3, 10^3)
-#' M <- (M + t(M))/2
-#' V <- eigen(M, symmetric=TRUE)$vectors[,c(1,2)]
+#' M <- (M + t(M)) / 2
+#' V <- eigen(M, symmetric = TRUE)$vectors[, c(1, 2)]
 #'
 #' # displays size of the groups in the final partition
-#' gr <- scg_group(V, nt=c(2,3))
+#' gr <- scg_group(V, nt = c(2, 3))
 #' col <- rainbow(max(gr))
-#' plot(table(gr), col=col, main="Group size", xlab="group", ylab="size")
+#' plot(table(gr), col = col, main = "Group size", xlab = "group", ylab = "size")
 #'
 #' ## comparison with the grouping obtained by kmeans
 #' ## for a partition of same size
-#' gr.km <- kmeans(V,centers=max(gr), iter.max=100, nstart=100)$cluster
-#' op <- par(mfrow=c(1,2))
-#' plot(V[,1], V[,2], col=col[gr],
-#' 	main = "SCG grouping",
-#' 	xlab = "1st eigenvector",
-#' 	ylab = "2nd eigenvector")
-#' plot(V[,1], V[,2], col=col[gr.km],
-#' 	main = "K-means grouping",
-#' 	xlab = "1st eigenvector",
-#' 	ylab = "2nd eigenvector")
+#' gr.km <- kmeans(V, centers = max(gr), iter.max = 100, nstart = 100)$cluster
+#' op <- par(mfrow = c(1, 2))
+#' plot(V[, 1], V[, 2],
+#'   col = col[gr],
+#'   main = "SCG grouping",
+#'   xlab = "1st eigenvector",
+#'   ylab = "2nd eigenvector"
+#' )
+#' plot(V[, 1], V[, 2],
+#'   col = col[gr.km],
+#'   main = "K-means grouping",
+#'   xlab = "1st eigenvector",
+#'   ylab = "2nd eigenvector"
+#' )
 #' par(op)
 #' ## kmeans disregards the first eigenvector as it
 #' ## spreads a much smaller range of values than the second one
@@ -244,27 +247,39 @@ stochastic_matrix <- function(graph, column.wise=FALSE,
 #' scg_eps(cbind(x), gr.km)
 #'
 scg_group <- function(V, nt,
-                         mtype=c("symmetric", "laplacian",
-                           "stochastic"),
-                         algo=c("optimum", "interv_km", "interv",
-                           "exact_scg"),
-                         p=NULL, maxiter=100) {
-
-  V <- as.matrix(structure(as.double(V), dim=dim(V)))
+                      mtype = c(
+                        "symmetric", "laplacian",
+                        "stochastic"
+                      ),
+                      algo = c(
+                        "optimum", "interv_km", "interv",
+                        "exact_scg"
+                      ),
+                      p = NULL, maxiter = 100) {
+  V <- as.matrix(structure(as.double(V), dim = dim(V)))
   groups <- as.numeric(nt)
 
-  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1,
-                        "laplacian"=2, "stochastic"=3)
-  algo <- switch(igraph.match.arg(algo), "optimum"=1,
-                      "interv_km"=2, "interv"=3, "exact_scg"=4)
+  mtype <- switch(igraph.match.arg(mtype),
+    "symmetric" = 1,
+    "laplacian" = 2,
+    "stochastic" = 3
+  )
+  algo <- switch(igraph.match.arg(algo),
+    "optimum" = 1,
+    "interv_km" = 2,
+    "interv" = 3,
+    "exact_scg" = 4
+  )
   if (!is.null(p)) p <- as.numeric(p)
   maxiter <- as.integer(maxiter)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_scg_grouping, V, as.integer(nt[1]),
-               if (length(nt)==1) NULL else nt,
-               mtype, algo, p, maxiter)
+  res <- .Call(
+    C_R_igraph_scg_grouping, V, as.integer(nt[1]),
+    if (length(nt) == 1) NULL else nt,
+    mtype, algo, p, maxiter
+  )
   res
 }
 
@@ -298,32 +313,32 @@ scg_group <- function(V, nt,
 #' / sum(p[1][k]; k in gamma(j)) delta[alpha,gamma(j)] and R[alpha,j] =
 #' delta[alpha,gamma(j)],} where \eqn{p_1}{p[1]} is the (left) eigenvector
 #' associated with the one-eigenvalue of the stochastic matrix. \eqn{L} and
-#' \eqn{R} are defined in a symmetric way when \code{norm = col}. All these
+#' \eqn{R} are defined in a symmetric way when `norm = col`. All these
 #' semi-projectors verify various properties described in the reference.
 #'
 #' @aliases scgSemiProjectors
-#' @param groups A vector of \code{nrow(X)} or \code{vcount(X)} integers giving
-#' the group label of every vertex in the partition.
+#' @param groups A vector of `nrow(X)` or `vcount(X)` integers giving
+#'   the group label of every vertex in the partition.
 #' @param mtype The type of semi-projectors. For now \dQuote{symmetric},
-#' \dQuote{laplacian} and \dQuote{stochastic} are available.
-#' @param p A probability vector of length \code{length(gr)}. \code{p} is the
-#' stationary probability distribution of a Markov chain when \code{mtype} =
-#' \dQuote{stochastic}. This parameter is ignored in all other cases.
+#'   \dQuote{laplacian} and \dQuote{stochastic} are available.
+#' @param p A probability vector of length `length(gr)`. `p` is the
+#'   stationary probability distribution of a Markov chain when `mtype` =
+#'   \dQuote{stochastic}. This parameter is ignored in all other cases.
 #' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
-#' rows of the Laplacian matrix sum up to zero and the rows of the stochastic
-#' sum up to one; otherwise it is the columns.
+#'   rows of the Laplacian matrix sum up to zero and the rows of the stochastic
+#'   sum up to one; otherwise it is the columns.
 #' @param sparse Logical scalar, whether to return sparse matrices.
 #' @return \item{L}{The semi-projector \eqn{L}.} \item{R}{The semi-projector
-#' \eqn{R}.}
+#'   \eqn{R}.}
 #' @author David Morton de Lachapelle,
-#' \url{http://people.epfl.ch/david.morton}.
-#' @seealso \link{scg-method} for a detailed introduction. \code{\link{scg}},
-#' \code{\link{scg_eps}}, \code{\link{scg_group}}
+#' <http://people.epfl.ch/david.morton>.
+#' @seealso [scg-method] for a detailed introduction. [scg()],
+#' [scg_eps()], [scg_group()]
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
-#' Matrix Analysis and Applications}, 2008.
-#' \url{http://people.epfl.ch/david.morton}
+#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
+#' Matrix Analysis and Applications*, 2008.
+#' <http://people.epfl.ch/david.morton>
 #' @export
 #' @examples
 #'
@@ -334,37 +349,48 @@ scg_group <- function(V, nt,
 #' eb <- cluster_edge_betweenness(g)
 #' memb <- membership(eb)
 #' lr <- scg_semi_proj(memb)
-#' #In the symmetric case L = R
-#' tcrossprod(lr$R)  # same as lr$R %*% t(lr$R)
-#' P <- crossprod(lr$R)  # same as t(lr$R) %*% lr$R
-#' #P is an orthogonal projector
+#' # In the symmetric case L = R
+#' tcrossprod(lr$R) # same as lr$R %*% t(lr$R)
+#' P <- crossprod(lr$R) # same as t(lr$R) %*% lr$R
+#' # P is an orthogonal projector
 #' isSymmetric(P)
-#' sum( (P %*% P-P)^2 )
+#' sum((P %*% P - P)^2)
 #'
 #' ## use L and R to coarse-grain the graph Laplacian
-#' lr <- scg_semi_proj(memb, mtype="laplacian")
+#' lr <- scg_semi_proj(memb, mtype = "laplacian")
 #' L <- laplacian_matrix(g)
 #' Lt <- lr$L %*% L %*% t(lr$R)
 #' ## or better lr$L %*% tcrossprod(L,lr$R)
 #' rowSums(Lt)
 #'
 scg_semi_proj <- function(groups,
-                               mtype=c("symmetric", "laplacian",
-                                 "stochastic"), p=NULL,
-                               norm=c("row", "col"),
-                               sparse=igraph_opt("sparsematrices")) {
+                          mtype = c(
+                            "symmetric", "laplacian",
+                            "stochastic"
+                          ),
+                          p = NULL,
+                          norm = c("row", "col"),
+                          sparse = igraph_opt("sparsematrices")) {
   # Argument checks
-  groups <- as.numeric(groups)-1
-  mtype <- switch(igraph.match.arg(mtype), "symmetric"=1,
-  "laplacian"=2, "stochastic"=3)
+  groups <- as.numeric(groups) - 1
+  mtype <- switch(igraph.match.arg(mtype),
+    "symmetric" = 1,
+    "laplacian" = 2,
+    "stochastic" = 3
+  )
   if (!is.null(p)) p <- as.numeric(p)
-  norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
+  norm <- switch(igraph.match.arg(norm),
+    "row" = 1,
+    "col" = 2
+  )
   sparse <- as.logical(sparse)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_scg_semiprojectors, groups, mtype, p, norm,
-               sparse)
+  res <- .Call(
+    C_R_igraph_scg_semiprojectors, groups, mtype, p, norm,
+    sparse
+  )
 
   if (sparse) {
     res$L <- igraph.i.spMatrix(res$L)
@@ -381,24 +407,24 @@ scg_semi_proj <- function(groups,
 #' This function handles all the steps involved in the Spectral Coarse Graining
 #' (SCG) of some matrices and graphs as described in the reference below.
 #'
-#' Please see \link{scg-method} for an introduction.
+#' Please see [scg-method] for an introduction.
 #'
 #' In the following \eqn{V} is the matrix of eigenvectors for which the SCG is
-#' solved. \eqn{V} is calculated from \code{X}, if it is not given in the
-#' \code{evec} argument.
+#' solved. \eqn{V} is calculated from `X`, if it is not given in the
+#' `evec` argument.
 #'
 #' The algorithm \dQuote{optimum} solves exactly the SCG problem for each
-#' eigenvector in \code{V}. The running time of this algorithm is \eqn{O(\max
+#' eigenvector in `V`. The running time of this algorithm is \eqn{O(\max
 #' nt \cdot m^2)}{O(max(nt) m^2)} for the symmetric and laplacian matrix
-#' problems (i.e. when \code{mtype} is \dQuote{symmetric} or
+#' problems (i.e. when `mtype` is \dQuote{symmetric} or
 #' \dQuote{laplacian}. It is \eqn{O(m^3)} for the stochastic problem. Here
-#' \eqn{m} is the number of rows in \code{V}.  In all three cases, the memory
+#' \eqn{m} is the number of rows in `V`.  In all three cases, the memory
 #' usage is \eqn{O(m^2)}.
 #'
 #' The algorithms \dQuote{interv} and \dQuote{interv_km} solve approximately
 #' the SCG problem by performing a (for now) constant binning of the components
-#' of the eigenvectors, that is \code{nt[i]} constant-size bins are used to
-#' partition \code{V[,i]}. When \code{algo} = \dQuote{interv_km}, the (Lloyd)
+#' of the eigenvectors, that is `nt[i]` constant-size bins are used to
+#' partition `V[,i]`. When `algo` = \dQuote{interv_km}, the (Lloyd)
 #' k-means algorithm is run on each partition obtained by \dQuote{interv} to
 #' improve accuracy.
 #'
@@ -406,88 +432,88 @@ scg_semi_proj <- function(groups,
 #' each eigenvector, the final grouping is worked out as follows: two vertices
 #' are grouped together in the final partition if they are grouped together in
 #' each minimizing partition. In general the size of the final partition is not
-#' known in advance when \code{ncol(V)}>1.
+#' known in advance when `ncol(V)`>1.
 #'
 #' Finally, the algorithm \dQuote{exact_scg} groups the vertices with equal
 #' components in each eigenvector. The last three algorithms essentially have
 #' linear running time and memory load.
 #'
-#' @param X The input graph or square matrix. Can be of class \code{igraph},
-#' \code{matrix} or \code{Matrix}.
+#' @param X The input graph or square matrix. Can be of class `igraph`,
+#'   `matrix` or `Matrix`.
 #' @param ev A vector of positive integers giving the indexes of the eigenpairs
-#' to be preserved. For real eigenpairs, 1 designates the eigenvalue with
-#' largest algebraic value, 2 the one with second largest algebraic value, etc.
-#' In the complex case, it is the magnitude that matters.
+#'   to be preserved. For real eigenpairs, 1 designates the eigenvalue with
+#'   largest algebraic value, 2 the one with second largest algebraic value, etc.
+#'   In the complex case, it is the magnitude that matters.
 #' @param nt A vector of positive integers of length one or equal to
-#' \code{length(ev)}. When \code{algo} = \dQuote{optimum}, \code{nt} contains
-#' the number of groups used to partition each eigenvector separately. When
-#' \code{algo} is equal to \dQuote{interv_km} or \dQuote{interv}, \code{nt}
-#' contains the number of intervals used to partition each eigenvector. The
-#' same partition size or number of intervals is used for each eigenvector if
-#' \code{nt} is a single integer. When \code{algo} = \dQuote{exact_cg} this
-#' parameter is ignored.
-#' @param groups A vector of \code{nrow(X)} or \code{vcount(X)} integers
-#' labeling each group vertex in the partition. If this parameter is supplied
-#' most part of the function is bypassed.
+#'   `length(ev)`. When `algo` = \dQuote{optimum}, `nt` contains
+#'   the number of groups used to partition each eigenvector separately. When
+#'   `algo` is equal to \dQuote{interv_km} or \dQuote{interv}, `nt`
+#'   contains the number of intervals used to partition each eigenvector. The
+#'   same partition size or number of intervals is used for each eigenvector if
+#'   `nt` is a single integer. When `algo` = \dQuote{exact_cg} this
+#'   parameter is ignored.
+#' @param groups A vector of `nrow(X)` or `vcount(X)` integers
+#'   labeling each group vertex in the partition. If this parameter is supplied
+#'   most part of the function is bypassed.
 #' @param mtype Character scalar. The type of semi-projector to be used for the
-#' SCG. For now \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic}
-#' are available.
+#'   SCG. For now \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic}
+#'   are available.
 #' @param algo Character scalar. The algorithm used to solve the SCG problem.
-#' Possible values are \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv}
-#' and \dQuote{exact_scg}.
+#'   Possible values are \dQuote{optimum}, \dQuote{interv_km}, \dQuote{interv}
+#'   and \dQuote{exact_scg}.
 #' @param norm Character scalar. Either \dQuote{row} or \dQuote{col}. If set to
-#' \dQuote{row} the rows of the Laplacian matrix sum up to zero and the rows of
-#' the stochastic matrix sum up to one; otherwise it is the columns.
+#'   \dQuote{row} the rows of the Laplacian matrix sum up to zero and the rows of
+#'   the stochastic matrix sum up to one; otherwise it is the columns.
 #' @param direction Character scalar. When set to \dQuote{right}, resp.
-#' \dQuote{left}, the parameters \code{ev} and \code{evec} refer to right,
-#' resp. left eigenvectors. When passed \dQuote{default} it is the SCG
-#' described in the reference below that is applied (common usage). This
-#' argument is currently not implemented, and right eigenvectors are always
-#' used.
+#'   \dQuote{left}, the parameters `ev` and `evec` refer to right,
+#'   resp. left eigenvectors. When passed \dQuote{default} it is the SCG
+#'   described in the reference below that is applied (common usage). This
+#'   argument is currently not implemented, and right eigenvectors are always
+#'   used.
 #' @param evec A numeric matrix of (eigen)vectors to be preserved by the coarse
-#' graining (the vectors are to be stored column-wise in \code{evec}). If
-#' supplied, the eigenvectors should correspond to the indexes in \code{ev} as
-#' no cross-check will be done.
-#' @param p A probability vector of length \code{nrow(X)} (or
-#' \code{vcount(X)}). \code{p} is the stationary probability distribution of a
-#' Markov chain when \code{mtype} = \dQuote{stochastic}. This parameter is
-#' ignored in all other cases.
-#' @param use.arpack Logical scalar. When set to \code{TRUE} uses the function
-#' \code{\link{arpack}} to compute eigenpairs. This parameter should be set to
-#' \code{TRUE} if one deals with large (over a few thousands) AND sparse graphs
-#' or matrices. This argument is not implemented currently and LAPACK is used
-#' for solving the eigenproblems.
+#'   graining (the vectors are to be stored column-wise in `evec`). If
+#'   supplied, the eigenvectors should correspond to the indexes in `ev` as
+#'   no cross-check will be done.
+#' @param p A probability vector of length `nrow(X)` (or
+#'   `vcount(X)`). `p` is the stationary probability distribution of a
+#'   Markov chain when `mtype` = \dQuote{stochastic}. This parameter is
+#'   ignored in all other cases.
+#' @param use.arpack Logical scalar. When set to `TRUE` uses the function
+#'   [arpack()] to compute eigenpairs. This parameter should be set to
+#'   `TRUE` if one deals with large (over a few thousands) AND sparse graphs
+#'   or matrices. This argument is not implemented currently and LAPACK is used
+#'   for solving the eigenproblems.
 #' @param maxiter A positive integer giving the maximum number of iterations
-#' for the k-means algorithm when \code{algo} = \dQuote{interv_km}. This
-#' parameter is ignored in all other cases.
+#'   for the k-means algorithm when `algo` = \dQuote{interv_km}. This
+#'   parameter is ignored in all other cases.
 #' @param sparse Logical scalar. Whether to return sparse matrices in the
-#' result, if matrices are requested.
+#'   result, if matrices are requested.
 #' @param output Character scalar. Set this parameter to \dQuote{default} to
-#' retrieve a coarse-grained object of the same class as \code{X}.
-#' @param semproj Logical scalar. Set this parameter to \code{TRUE} to retrieve
-#' the semi-projectors of the SCG.
-#' @param epairs Logical scalar. Set this to \code{TRUE} to collect the
-#' eigenpairs computed by \code{scg}.
+#'   retrieve a coarse-grained object of the same class as `X`.
+#' @param semproj Logical scalar. Set this parameter to `TRUE` to retrieve
+#'   the semi-projectors of the SCG.
+#' @param epairs Logical scalar. Set this to `TRUE` to collect the
+#'   eigenpairs computed by `scg()`.
 #' @param stat.prob Logical scalar. This is to collect the stationary
-#' probability \code{p} when dealing with stochastic matrices.
+#'   probability `p` when dealing with stochastic matrices.
 #' @return \item{Xt}{The coarse-grained graph, or matrix, possibly a sparse
-#' matrix.} \item{groups}{A vector of \code{nrow(X)} or \code{vcount(X)}
-#' integers giving the group label of each object (vertex) in the partition.}
-#' \item{L}{The semi-projector \eqn{L} if \code{semproj = TRUE}.} \item{R}{The
-#' semi-projector \eqn{R} if \code{semproj = TRUE}.} \item{values}{The computed
-#' eigenvalues if \code{epairs = TRUE}.} \item{vectors}{The computed or
-#' supplied eigenvectors if \code{epairs = TRUE}.} \item{p}{The stationary
-#' probability vector if \code{mtype = stochastic} and \code{stat.prob = TRUE}.
-#' For other matrix types this is missing.}
+#'   matrix.} \item{groups}{A vector of `nrow(X)` or `vcount(X)`
+#'   integers giving the group label of each object (vertex) in the partition.}
+#'   \item{L}{The semi-projector \eqn{L} if `semproj = TRUE`.} \item{R}{The
+#'   semi-projector \eqn{R} if `semproj = TRUE`.} \item{values}{The computed
+#'   eigenvalues if `epairs = TRUE`.} \item{vectors}{The computed or
+#'   supplied eigenvectors if `epairs = TRUE`.} \item{p}{The stationary
+#'   probability vector if `mtype = stochastic` and `stat.prob = TRUE`.
+#'   For other matrix types this is missing.}
 #' @author David Morton de Lachapelle,
-#' \url{http://people.epfl.ch/david.morton}.
-#' @seealso \link{scg-method} for an introduction.  \code{\link{scg_eps}},
-#' \code{\link{scg_group}} and \code{\link{scg_semi_proj}}.
+#' <http://people.epfl.ch/david.morton>.
+#' @seealso [scg-method] for an introduction.  [scg_eps()],
+#' [scg_group()] and [scg_semi_proj()].
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
-#' Matrix Analysis and Applications}, 2008.
-#' \url{http://people.epfl.ch/david.morton}
+#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
+#' Matrix Analysis and Applications*, 2008.
+#' <http://people.epfl.ch/david.morton>
 #' @export
 #' @keywords graphs
 #' @examples
@@ -500,22 +526,26 @@ scg_semi_proj <- function(groups,
 #'
 #' # SCG of a toy network
 #' g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
-#' g <- add_edges(g, c(1,6, 1,11, 6, 11))
-#' cg <- scg(g, 1, 3, algo="exact_scg")
+#' g <- add_edges(g, c(1, 6, 1, 11, 6, 11))
+#' cg <- scg(g, 1, 3, algo = "exact_scg")
 #'
-#' #plot the result
+#' # plot the result
 #' layout <- layout_with_kk(g)
 #' nt <- vcount(cg$Xt)
 #' col <- rainbow(nt)
 #' vsize <- table(cg$groups)
-#' ewidth <- round(E(cg$Xt)$weight,2)
+#' ewidth <- round(E(cg$Xt)$weight, 2)
 #'
-#' op <- par(mfrow=c(1,2))
-#' plot(g, vertex.color = col[cg$groups], vertex.size = 20,
-#' 		vertex.label = NA, layout = layout)
-#' plot(cg$Xt, edge.width = ewidth, edge.label = ewidth,
-#' 	vertex.color = col, vertex.size = 20*vsize/max(vsize),
-#' 	vertex.label=NA, layout = layout_with_kk)
+#' op <- par(mfrow = c(1, 2))
+#' plot(g,
+#'   vertex.color = col[cg$groups], vertex.size = 20,
+#'   vertex.label = NA, layout = layout
+#' )
+#' plot(cg$Xt,
+#'   edge.width = ewidth, edge.label = ewidth,
+#'   vertex.color = col, vertex.size = 20 * vsize / max(vsize),
+#'   vertex.label = NA, layout = layout_with_kk
+#' )
 #' par(op)
 #'
 #' ## SCG of real-world network
@@ -523,178 +553,238 @@ scg_semi_proj <- function(groups,
 #' data(immuno)
 #' summary(immuno)
 #' n <- vcount(immuno)
-#' interv <- c(100,100,50,25,12,6,3,2,2)
-#' cg <- scg(immuno, ev= n-(1:9), nt=interv, mtype="laplacian",
-#'                         algo="interv", epairs=TRUE)
+#' interv <- c(100, 100, 50, 25, 12, 6, 3, 2, 2)
+#' cg <- scg(immuno,
+#'   ev = n - (1:9), nt = interv, mtype = "laplacian",
+#'   algo = "interv", epairs = TRUE
+#' )
 #'
 #' ## are the eigenvalues well-preserved?
 #' gt <- cg$Xt
 #' nt <- vcount(gt)
 #' Lt <- laplacian_matrix(gt)
-#' evalt <- eigen(Lt, only.values=TRUE)$values[nt-(1:9)]
+#' evalt <- eigen(Lt, only.values = TRUE)$values[nt - (1:9)]
 #' res <- cbind(interv, cg$values, evalt)
-#' res <- round(res,5)
-#' colnames(res) <- c("interv","lambda_i","lambda_tilde_i")
-#' rownames(res) <- c("N-1","N-2","N-3","N-4","N-5","N-6","N-7","N-8","N-9")
+#' res <- round(res, 5)
+#' colnames(res) <- c("interv", "lambda_i", "lambda_tilde_i")
+#' rownames(res) <- c("N-1", "N-2", "N-3", "N-4", "N-5", "N-6", "N-7", "N-8", "N-9")
 #' print(res)
 #'
 #' ## use SCG to get the communities
-#' com <- scg(laplacian_matrix(immuno), ev=n-c(1,2), nt=2)$groups
+#' com <- scg(laplacian_matrix(immuno), ev = n - c(1, 2), nt = 2)$groups
 #' col <- rainbow(max(com))
 #' layout <- layout_nicely(immuno)
 #'
-#' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
-#'                 vertex.label=NA)
+#' plot(immuno,
+#'   layout = layout, vertex.size = 3, vertex.color = col[com],
+#'   vertex.label = NA
+#' )
 #'
 #' ## display the coarse-grained graph
 #' gt <- simplify(as.undirected(gt))
 #' layout.cg <- layout_with_kk(gt)
-#' com.cg <- scg(laplacian_matrix(gt), nt-c(1,2), 2)$groups
+#' com.cg <- scg(laplacian_matrix(gt), nt - c(1, 2), 2)$groups
 #' vsize <- sqrt(as.vector(table(cg$groups)))
 #'
-#' op <- par(mfrow=c(1,2))
-#' plot(immuno, layout=layout, vertex.size=3, vertex.color=col[com],
-#'                 vertex.label=NA)
-#' plot(gt, layout=layout.cg, vertex.size=15*vsize/max(vsize),
-#'                 vertex.color=col[com.cg],vertex.label=NA)
+#' op <- par(mfrow = c(1, 2))
+#' plot(immuno,
+#'   layout = layout, vertex.size = 3, vertex.color = col[com],
+#'   vertex.label = NA
+#' )
+#' plot(gt,
+#'   layout = layout.cg, vertex.size = 15 * vsize / max(vsize),
+#'   vertex.color = col[com.cg], vertex.label = NA
+#' )
 #' par(op)
 #'
-#'
-scg <- function(X, ev, nt, groups=NULL,
-                mtype=c("symmetric", "laplacian", "stochastic"),
-                algo=c("optimum", "interv_km", "interv",
-                  "exact_scg"), norm=c("row", "col"),
-                direction=c("default", "left", "right"),
-                evec=NULL, p=NULL, use.arpack=FALSE, maxiter=300,
-                sparse=igraph_opt("sparsematrices"),
-                output=c("default", "matrix", "graph"), semproj=FALSE,
-                epairs=FALSE, stat.prob=FALSE)
+scg <- function(X, ev, nt, groups = NULL,
+                mtype = c("symmetric", "laplacian", "stochastic"),
+                algo = c(
+                  "optimum", "interv_km", "interv",
+                  "exact_scg"
+                ),
+                norm = c("row", "col"),
+                direction = c("default", "left", "right"),
+                evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
+                sparse = igraph_opt("sparsematrices"),
+                output = c("default", "matrix", "graph"), semproj = FALSE,
+                epairs = FALSE, stat.prob = FALSE) {
   UseMethod("scg")
+}
 
 #' @method scg igraph
 #' @export
-
-scg.igraph <- function(X, ev, nt, groups=NULL,
-                       mtype=c("symmetric", "laplacian", "stochastic"),
-                       algo=c("optimum", "interv_km", "interv",
-                         "exact_scg"), norm=c("row", "col"),
-                       direction=c("default", "left", "right"),
-                       evec=NULL, p=NULL, use.arpack=FALSE, maxiter=300,
-                       sparse=igraph_opt("sparsematrices"),
-                       output=c("default", "matrix", "graph"), semproj=FALSE,
-                       epairs=FALSE, stat.prob=FALSE) {
-
-  myscg(graph=X, matrix=NULL, sparsemat=NULL, ev=ev, nt=nt,
-        groups=groups, mtype=mtype, algo=algo,
-        norm=norm, direction=direction, evec=evec, p=p,
-        use.arpack=use.arpack, maxiter=maxiter, sparse=sparse,
-        output=output, semproj=semproj, epairs=epairs,
-        stat.prob=stat.prob)
+scg.igraph <- function(X, ev, nt, groups = NULL,
+                       mtype = c("symmetric", "laplacian", "stochastic"),
+                       algo = c(
+                         "optimum", "interv_km", "interv",
+                         "exact_scg"
+                       ),
+                       norm = c("row", "col"),
+                       direction = c("default", "left", "right"),
+                       evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
+                       sparse = igraph_opt("sparsematrices"),
+                       output = c("default", "matrix", "graph"), semproj = FALSE,
+                       epairs = FALSE, stat.prob = FALSE) {
+  myscg(
+    graph = X, matrix = NULL, sparsemat = NULL, ev = ev, nt = nt,
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob
+  )
 }
 
 #' @method scg matrix
 #' @export
-
-scg.matrix <- function(X, ev, nt, groups=NULL,
-                       mtype=c("symmetric", "laplacian", "stochastic"),
-                       algo=c("optimum", "interv_km", "interv",
-                         "exact_scg"), norm=c("row", "col"),
-                       direction=c("default", "left", "right"),
-                       evec=NULL, p=NULL, use.arpack=FALSE, maxiter=300,
-                       sparse=igraph_opt("sparsematrices"),
-                       output=c("default", "matrix", "graph"), semproj=FALSE,
-                       epairs=FALSE, stat.prob=FALSE) {
-
-  myscg(graph=NULL, matrix=X, sparsemat=NULL, ev=ev, nt=nt,
-        groups=groups, mtype=mtype, algo=algo,
-        norm=norm, direction=direction, evec=evec, p=p,
-        use.arpack=use.arpack, maxiter=maxiter, sparse=sparse,
-        output=output, semproj=semproj, epairs=epairs,
-        stat.prob=stat.prob)
+scg.matrix <- function(X, ev, nt, groups = NULL,
+                       mtype = c("symmetric", "laplacian", "stochastic"),
+                       algo = c(
+                         "optimum", "interv_km", "interv",
+                         "exact_scg"
+                       ),
+                       norm = c("row", "col"),
+                       direction = c("default", "left", "right"),
+                       evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
+                       sparse = igraph_opt("sparsematrices"),
+                       output = c("default", "matrix", "graph"), semproj = FALSE,
+                       epairs = FALSE, stat.prob = FALSE) {
+  myscg(
+    graph = NULL, matrix = X, sparsemat = NULL, ev = ev, nt = nt,
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob
+  )
 }
 
 #' @method scg Matrix
 #' @export
-
-scg.Matrix <- function(X, ev, nt, groups=NULL,
-                       mtype=c("symmetric", "laplacian", "stochastic"),
-                       algo=c("optimum", "interv_km", "interv",
-                         "exact_scg"), norm=c("row", "col"),
-                       direction=c("default", "left", "right"),
-                       evec=NULL, p=NULL, use.arpack=FALSE, maxiter=300,
-                       sparse=igraph_opt("sparsematrices"),
-                       output=c("default", "matrix", "graph"), semproj=FALSE,
-                       epairs=FALSE, stat.prob=FALSE) {
-
-  myscg(graph=NULL, matrix=NULL, sparsemat=X, ev=ev, nt=nt,
-        groups=groups, mtype=mtype, algo=algo,
-        norm=norm, direction=direction, evec=evec, p=p,
-        use.arpack=use.arpack, maxiter=maxiter, sparse=sparse,
-        output=output, semproj=semproj, epairs=epairs,
-        stat.prob=stat.prob)
+scg.Matrix <- function(X, ev, nt, groups = NULL,
+                       mtype = c("symmetric", "laplacian", "stochastic"),
+                       algo = c(
+                         "optimum", "interv_km", "interv",
+                         "exact_scg"
+                       ),
+                       norm = c("row", "col"),
+                       direction = c("default", "left", "right"),
+                       evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
+                       sparse = igraph_opt("sparsematrices"),
+                       output = c("default", "matrix", "graph"), semproj = FALSE,
+                       epairs = FALSE, stat.prob = FALSE) {
+  myscg(
+    graph = NULL, matrix = NULL, sparsemat = X, ev = ev, nt = nt,
+    groups = groups, mtype = mtype, algo = algo,
+    norm = norm, direction = direction, evec = evec, p = p,
+    use.arpack = use.arpack, maxiter = maxiter, sparse = sparse,
+    output = output, semproj = semproj, epairs = epairs,
+    stat.prob = stat.prob
+  )
 }
 
-myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
-                  mtype=c("symmetric", "laplacian", "stochastic"),
-                  algo=c("optimum", "interv_km", "interv",
-                    "exact_scg"), norm=c("row", "col"),
-                  direction=c("default", "left", "right"),
-                  evec=NULL, p=NULL, use.arpack=FALSE, maxiter=300,
-                  sparse=igraph_opt("sparsematrices"),
-                  output=c("default", "matrix", "graph"), semproj=FALSE,
-                  epairs=FALSE, stat.prob=FALSE) {
-
+myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
+                  mtype = c("symmetric", "laplacian", "stochastic"),
+                  algo = c(
+                    "optimum", "interv_km", "interv",
+                    "exact_scg"
+                  ),
+                  norm = c("row", "col"),
+                  direction = c("default", "left", "right"),
+                  evec = NULL, p = NULL, use.arpack = FALSE, maxiter = 300,
+                  sparse = igraph_opt("sparsematrices"),
+                  output = c("default", "matrix", "graph"), semproj = FALSE,
+                  epairs = FALSE, stat.prob = FALSE) {
   ## Argument checks
-  if (!is.null(graph))  { stopifnot(is_igraph(graph)) }
-  if (!is.null(matrix)) { stopifnot(is.matrix(matrix)) }
-  if (!is.null(sparsemat)) { stopifnot(inherits(sparsemat, "Matrix")) }
+  if (!is.null(graph)) {
+    stopifnot(is_igraph(graph))
+  }
+  if (!is.null(matrix)) {
+    stopifnot(is.matrix(matrix))
+  }
+  if (!is.null(sparsemat)) {
+    stopifnot(inherits(sparsemat, "Matrix"))
+  }
 
-  if (!is.null(sparsemat)) { sparsemat <- as(as(as(sparsemat, "dMatrix"), "generalMatrix"), "CsparseMatrix") }
+  if (!is.null(sparsemat)) {
+    sparsemat <- as(as(as(sparsemat, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  }
   ev <- as.numeric(as.integer(ev))
   nt <- as.numeric(as.integer(nt))
   if (!is.null(groups)) groups <- as.numeric(groups)
   mtype <- igraph.match.arg(mtype)
-  algo <- switch(igraph.match.arg(algo), "optimum"=1,
-                      "interv_km"=2, "interv"=3, "exact_scg"=4)
-  if (!is.null(groups)) { storage.mode(groups) <- "double" }
+  algo <- switch(igraph.match.arg(algo),
+    "optimum" = 1,
+    "interv_km" = 2,
+    "interv" = 3,
+    "exact_scg" = 4
+  )
+  if (!is.null(groups)) {
+    storage.mode(groups) <- "double"
+  }
   use.arpack <- as.logical(use.arpack)
   maxiter <- as.integer(maxiter)
   sparse <- as.logical(sparse)
-  output <- switch(igraph.match.arg(output), "default"=1, "matrix"=2,
-                   "graph"=3)
+  output <- switch(igraph.match.arg(output),
+    "default" = 1,
+    "matrix" = 2,
+    "graph" = 3
+  )
   semproj <- as.logical(semproj)
   epairs <- as.logical(epairs)
 
-  on.exit( .Call(C_R_igraph_finalizer) )
+  on.exit(.Call(C_R_igraph_finalizer))
 
-  if (mtype=="symmetric") {
-    if (!is.null(evec)) { storage.mode(evec) <- "double" }
-    res <- .Call(C_R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
-                 nt, algo, evec, groups,
-                 use.arpack, maxiter, sparse, output, semproj, epairs)
-
-  } else if (mtype=="laplacian") {
-    norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
-    if (!is.null(evec)) { storage.mode(evec) <- "complex" }
-    direction <- switch(igraph.match.arg(direction), "default"=1, "left"=2,
-                        "right"=3)
-    res <- .Call(C_R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
-                 nt, algo, norm, direction,
-                 evec, groups, use.arpack, maxiter, sparse, output,
-                 semproj, epairs)
-
-  } else if (mtype=="stochastic") {
-    norm <- switch(igraph.match.arg(norm), "row"=1, "col"=2)
-    if (!is.null(evec)) { storage.mode(evec) <- "complex" }
-    if (!is.null(p)) { storage.mode(p) <- "double" }
+  if (mtype == "symmetric") {
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "double"
+    }
+    res <- .Call(
+      C_R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
+      nt, algo, evec, groups,
+      use.arpack, maxiter, sparse, output, semproj, epairs
+    )
+  } else if (mtype == "laplacian") {
+    norm <- switch(igraph.match.arg(norm),
+      "row" = 1,
+      "col" = 2
+    )
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "complex"
+    }
+    direction <- switch(igraph.match.arg(direction),
+      "default" = 1,
+      "left" = 2,
+      "right" = 3
+    )
+    res <- .Call(
+      C_R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
+      nt, algo, norm, direction,
+      evec, groups, use.arpack, maxiter, sparse, output,
+      semproj, epairs
+    )
+  } else if (mtype == "stochastic") {
+    norm <- switch(igraph.match.arg(norm),
+      "row" = 1,
+      "col" = 2
+    )
+    if (!is.null(evec)) {
+      storage.mode(evec) <- "complex"
+    }
+    if (!is.null(p)) {
+      storage.mode(p) <- "double"
+    }
     stat.prob <- as.logical(stat.prob)
-    res <- .Call(C_R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
-                 nt, algo, norm, evec, groups, p, use.arpack,
-                 maxiter, sparse, output, semproj, epairs, stat.prob)
+    res <- .Call(
+      C_R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
+      nt, algo, norm, evec, groups, p, use.arpack,
+      maxiter, sparse, output, semproj, epairs, stat.prob
+    )
   }
 
   if (!is.null(res$Xt) &&
-      inherits(res$Xt, "igraph.tmp.sparse")) {
+    inherits(res$Xt, "igraph.tmp.sparse")) {
     res$Xt <- igraph.i.spMatrix(res$Xt)
   }
   if (!is.null(res$L) && inherits(res$L, "igraph.tmp.sparse")) {
@@ -710,39 +800,38 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups=NULL,
 
 #' Error of the spectral coarse graining (SCG) approximation
 #'
-#' \code{scg_eps} computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
-#' \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in \code{V} and \eqn{P} is the
-#' projector corresponding to the \code{mtype} argument.
+#' `scg_eps()` computes \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|}, where
+#' \eqn{v_i}{v[i]} is the \eqn{i}th eigenvector in `V` and \eqn{P} is the
+#' projector corresponding to the `mtype` argument.
 #'
 #' @aliases scg_eps scgNormEps
 #' @param V A numeric matrix of (eigen)vectors assumed normalized.  The vectors
-#' are to be stored column-wise in \code{V}).
-#' @param groups A vector of \code{nrow(V)} integers labeling each group vertex
-#' in the partition.
+#'   are to be stored column-wise in `V`).
+#' @param groups A vector of `nrow(V)` integers labeling each group vertex
+#'   in the partition.
 #' @param mtype The type of semi-projector used for the SCG. For now
-#' \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
-#' available.
-#' @param p A probability vector of length \code{nrow(V)}.  \code{p} is the
-#' stationary probability distribution of a Markov chain when \code{mtype} =
-#' \dQuote{stochastic}. This parameter is ignored otherwise.
+#'   \dQuote{symmetric}, \dQuote{laplacian} and \dQuote{stochastic} are
+#'   available.
+#' @param p A probability vector of length `nrow(V)`.  `p` is the
+#'   stationary probability distribution of a Markov chain when `mtype` =
+#'   \dQuote{stochastic}. This parameter is ignored otherwise.
 #' @param norm Either \dQuote{row} or \dQuote{col}. If set to \dQuote{row} the
-#' rows of the Laplacian matrix sum to zero and the rows of the stochastic
-#' matrix sum to one; otherwise it is the columns.
-#' @return \code{scg_eps} returns with a numeric vector whose \eqn{i}th
-#' component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
+#'   rows of the Laplacian matrix sum to zero and the rows of the stochastic
+#'   matrix sum to one; otherwise it is the columns.
+#' @return `scg_eps()` returns with a numeric vector whose \eqn{i}th
+#'   component is \eqn{\Vert v_i-Pv_i\Vert}{|v[i]-Pv[i]|} (see Details).
 #' @author David Morton de Lachapelle,
-#' \url{http://people.epfl.ch/david.morton}.
-#' @seealso \link{scg-method} and \code{\link{scg}}.
+#' <http://people.epfl.ch/david.morton>.
+#' @seealso [scg-method] and [scg()].
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
-#' Matrix Analysis and Applications}, 2008.
-#' \url{http://people.epfl.ch/david.morton}
+#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
+#' Matrix Analysis and Applications*, 2008.
+#' <http://people.epfl.ch/david.morton>
 #' @examples
 #'
 #' v <- rexp(20)
-#' km <- kmeans(v,5)
+#' km <- kmeans(v, 5)
 #' sum(km$withinss)
 #' scg_eps(cbind(v), km$cluster)^2
-
 scg_eps <- scg_eps

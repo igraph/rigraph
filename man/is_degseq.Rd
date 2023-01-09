@@ -18,7 +18,7 @@ should be \code{NULL}. For directed graphs it specifies the in-degrees.}
 A logical scalar.
 }
 \description{
-\code{is_degseq} checks whether the given vertex degrees (in- and
+\code{is_degseq()} checks whether the given vertex degrees (in- and
 out-degrees for directed graphs) can be realized by a graph. Note that the
 graph does not have to be simple, it may contain loop and multiple edges.
 For undirected graphs, it also checks whether the sum of degrees is even.
@@ -27,7 +27,7 @@ degree vectors are equal and whether their sums are also equal. These are
 known sufficient and necessary conditions for a degree sequence to be valid.
 }
 \examples{
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 is_degseq(degree(g))
 is_graphical(degree(g))
 }

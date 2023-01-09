@@ -39,7 +39,7 @@ is the number of vertices.}
 \item{temp.init}{Initial local temperature of all vertices. A reasonable
 default is the square root of the number of vertices.}
 
-\item{...}{Passed to \code{layout_with_gem}.}
+\item{...}{Passed to \code{layout_with_gem()}.}
 }
 \value{
 A numeric matrix with two columns, and as many rows as the number of
@@ -55,7 +55,7 @@ See the referenced paper below for the details of the algorithm.
 
 set.seed(42)
 g <- make_ring(10)
-plot(g, layout=layout_with_gem)
+plot(g, layout = layout_with_gem)
 
 }
 \references{
@@ -64,8 +64,8 @@ Layout Algorithm for Undirected Graphs, \emph{Proc. Graph Drawing 1994},
 LNCS 894, pp. 388-403, 1995.
 }
 \seealso{
-\code{\link{layout_with_fr}},
-\code{\link{plot.igraph}}, \code{\link{tkplot}}
+\code{\link[=layout_with_fr]{layout_with_fr()}},
+\code{\link[=plot.igraph]{plot.igraph()}}, \code{\link[=tkplot]{tkplot()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

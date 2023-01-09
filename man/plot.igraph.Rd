@@ -41,12 +41,12 @@ control the look of the polygons.}
 
 \item{mark.shape}{A numeric scalar or vector. Controls the smoothness of the
 vertex group marking polygons. This is basically the \sQuote{shape}
-parameter of the \code{\link[graphics]{xspline}} function, its possible
+parameter of the \code{\link[graphics:xspline]{graphics::xspline()}} function, its possible
 values are between -1 and 1. If it is a vector, then a different value is
 used for the different vertex groups.}
 
 \item{mark.col}{A scalar or vector giving the colors of marking the
-polygons, in any format accepted by \code{\link[graphics]{xspline}}; e.g.
+polygons, in any format accepted by \code{\link[graphics:xspline]{graphics::xspline()}}; e.g.
 numeric color ids, symbolic color names, or colors in RGB.}
 
 \item{mark.border}{A scalar or vector giving the colors of the borders of
@@ -69,25 +69,25 @@ the complete list.}
 Returns \code{NULL}, invisibly.
 }
 \description{
-\code{plot.igraph} is able to plot graphs to any R device. It is the
-non-interactive companion of the \code{tkplot} function.
+\code{plot.igraph()} is able to plot graphs to any R device. It is the
+non-interactive companion of the \code{tkplot()} function.
 }
 \details{
-One convenient way to plot graphs is to plot with \code{\link{tkplot}}
+One convenient way to plot graphs is to plot with \code{\link[=tkplot]{tkplot()}}
 first, handtune the placement of the vertices, query the coordinates by the
-\code{\link{tk_coords}} function and use them with \code{plot} to
+\code{\link[=tk_coords]{tk_coords()}} function and use them with \code{\link[=plot]{plot()}} to
 plot the graph to any R device.
 }
 \examples{
 
 g <- make_ring(10)
-plot(g, layout=layout_with_kk, vertex.color="green")
+plot(g, layout = layout_with_kk, vertex.color = "green")
 
 }
 \seealso{
-\code{\link{layout}} for different layouts,
-\code{\link{igraph.plotting}} for the detailed description of the plotting
-parameters and \code{\link{tkplot}} and \code{\link{rglplot}} for other
+\code{\link[=layout]{layout()}} for different layouts,
+\link{igraph.plotting} for the detailed description of the plotting
+parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other
 graph plotting functions.
 }
 \author{

@@ -16,15 +16,15 @@ with_mds(...)
 \item{dist}{The distance matrix for the multidimensional scaling.  If
 \code{NULL} (the default), then the unweighted shortest path matrix is used.}
 
-\item{dim}{\code{layout_with_mds} supports dimensions up to the number of nodes
+\item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes
 minus one, but only if the graph is connected; for unconnected graphs, the
-only possible values is 2. This is because \code{merge_coords} only works in
+only possible values is 2. This is because \code{merge_coords()} only works in
 2D.}
 
 \item{options}{This is currently ignored, as ARPACK is not used any more for
 solving the eigenproblem}
 
-\item{...}{Passed to \code{layout_with_mds}.}
+\item{...}{Passed to \code{layout_with_mds()}.}
 }
 \value{
 A numeric matrix with \code{dim} columns.
@@ -34,7 +34,7 @@ Multidimensional scaling of some distance matrix defined on the vertices of
 a graph.
 }
 \details{
-\code{layout_with_mds} uses metric multidimensional scaling for generating the
+\code{layout_with_mds()} uses metric multidimensional scaling for generating the
 coordinates. Multidimensional scaling aims to place points from a higher
 dimensional space in a (typically) 2 dimensional plane, so that the distance
 between the points are kept as much as this is possible.
@@ -43,20 +43,20 @@ By default igraph uses the shortest path matrix as the distances between the
 nodes, but the user can override this via the \code{dist} argument.
 
 This function generates the layout separately for each graph component and
-then merges them via \code{\link{merge_coords}}.
+then merges them via \code{\link[=merge_coords]{merge_coords()}}.
 }
 \examples{
 
-g <- sample_gnp(100, 2/100)
+g <- sample_gnp(100, 2 / 100)
 l <- layout_with_mds(g)
-plot(g, layout=l, vertex.label=NA, vertex.size=3)
+plot(g, layout = l, vertex.label = NA, vertex.size = 3)
 }
 \references{
 Cox, T. F. and Cox, M. A. A. (2001) \emph{Multidimensional
 Scaling}.  Second edition. Chapman and Hall.
 }
 \seealso{
-\code{\link{layout}}, \code{\link{plot.igraph}}
+\code{\link[=layout]{layout()}}, \code{\link[=plot.igraph]{plot.igraph()}}
 
 Other graph layouts: 
 \code{\link{add_layout_}()},

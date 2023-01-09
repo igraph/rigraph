@@ -16,7 +16,7 @@ in_circle(...)
 desired placement. Vertices that are not included here will be placed at
 (0,0).}
 
-\item{...}{Passed to \code{layout_in_circle}.}
+\item{...}{Passed to \code{layout_in_circle()}.}
 }
 \value{
 A numeric matrix with two columns, and one row for each vertex.
@@ -26,7 +26,7 @@ Place vertices on a circle, in the order of their vertex ids.
 }
 \details{
 If you want to order the vertices differently, then permute them using the
-\code{\link{permute}} function.
+\code{\link[=permute]{permute()}} function.
 }
 \examples{
 \dontshow{if (igraph:::has_glpk()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -36,8 +36,10 @@ If you want to order the vertices differently, then permute them using the
 library(igraphdata)
 data(karate)
 karate_groups <- cluster_optimal(karate)
-coords <- layout_in_circle(karate, order =
-          order(membership(karate_groups)))
+coords <- layout_in_circle(karate,
+  order =
+    order(membership(karate_groups))
+)
 V(karate)$label <- sub("Actor ", "", V(karate)$name)
 V(karate)$label.color <- membership(karate_groups)
 V(karate)$shape <- "none"

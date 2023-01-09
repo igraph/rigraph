@@ -31,15 +31,15 @@ results for such graphs.
 }
 \examples{
 
-g1 <- make_empty_graph(n=10)
-g2 <- make_full_graph(n=10)
-g3 <- sample_gnp(n=10, 0.4)
+g1 <- make_empty_graph(n = 10)
+g2 <- make_full_graph(n = 10)
+g3 <- sample_gnp(n = 10, 0.4)
 
 # loop edges
-g <- graph( c(1,2, 2,2, 2,3) )            # graph with a self-loop
-edge_density(g, loops=FALSE)              # this is wrong!!!
-edge_density(g, loops=TRUE)               # this is right!!!
-edge_density(simplify(g), loops=FALSE)    # this is also right, but different
+g <- graph(c(1, 2, 2, 2, 2, 3)) # graph with a self-loop
+edge_density(g, loops = FALSE) # this is wrong!!!
+edge_density(g, loops = TRUE) # this is right!!!
+edge_density(simplify(g), loops = FALSE) # this is also right, but different
 
 }
 \references{
@@ -47,7 +47,7 @@ Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 Methods and Applications.  Cambridge: Cambridge University Press.
 }
 \seealso{
-\code{\link{vcount}}, \code{\link{ecount}}, \code{\link{simplify}}
+\code{\link[=vcount]{vcount()}}, \code{\link[=ecount]{ecount()}}, \code{\link[=simplify]{simplify()}}
 to get rid of the multiple and/or loop edges.
 }
 \author{

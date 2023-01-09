@@ -18,7 +18,7 @@ predict_edges(
 directed graphs.}
 
 \item{hrg}{A hierarchical random graph model, in the form of an
-\code{igraphHRG} object. \code{predict_edges}s allow this to be
+\code{igraphHRG} object. \code{predict_edges()} allow this to be
 \code{NULL} as well, then a HRG is fitted to the graph first, from a
 random starting point.}
 
@@ -33,17 +33,17 @@ number for a more accurate prediction.}
 }
 \value{
 A list with entries:
-  \item{edges}{The predicted edges, in a two-column matrix of vertex
-    ids.}
-  \item{prob}{Probabilities of these edges, according to the fitted
-    model.}
-  \item{hrg}{The (supplied or fitted) hierarchical random graph model.}
+\item{edges}{The predicted edges, in a two-column matrix of vertex
+ids.}
+\item{prob}{Probabilities of these edges, according to the fitted
+model.}
+\item{hrg}{The (supplied or fitted) hierarchical random graph model.}
 }
 \description{
-\code{predict_edges} uses a hierarchical random graph model to predict
+\code{predict_edges()} uses a hierarchical random graph model to predict
 missing edges from a network. This is done by sampling hierarchical models
 around the optimum model, proportionally to their likelihood. The MCMC
-sampling is stated from \code{hrg}, if it is given and the \code{start}
+sampling is stated from \code{hrg()}, if it is given and the \code{start}
 argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 first.
 }
@@ -54,15 +54,15 @@ first.
 ## you want to run them.
 
 ## A graph with two dense groups
-g <- sample_gnp(10, p=1/2) + sample_gnp(10, p=1/2)
+g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 hrg <- fit_hrg(g)
 hrg
 
 ## The consensus tree for it
-consensus_tree(g, hrg=hrg, start=TRUE)
+consensus_tree(g, hrg = hrg, start = TRUE)
 
 ## Prediction of missing edges
-g2 <- make_full_graph(4) + (make_full_graph(4) - path(1,2))
+g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 predict_edges(g2)
 }
 \references{
