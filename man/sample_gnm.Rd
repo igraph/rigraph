@@ -3,7 +3,7 @@
 \name{sample_gnm}
 \alias{sample_gnm}
 \alias{gnm}
-\title{Generate random graphs according to the G(n,m) Erdos-Renyi model}
+\title{Generate random graphs according to the \eqn{G(n,m)} Erdős-Rényi model}
 \usage{
 sample_gnm(n, m, directed = FALSE, loops = FALSE)
 

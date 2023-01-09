@@ -2,7 +2,7 @@
 % Please edit documentation in R/games.R
 \name{sample_correlated_gnp_pair}
 \alias{sample_correlated_gnp_pair}
-\title{Sample a pair of correlated G(n,p) random graphs}
+\title{Sample a pair of correlated \eqn{G(n,p)} random graphs}
 \usage{
 sample_correlated_gnp_pair(n, corr, p, directed = FALSE, permutation = NULL)
 }

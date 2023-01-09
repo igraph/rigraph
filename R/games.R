@@ -198,7 +198,7 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 ## -----------------------------------------------------------------
 
 
-#' Generate random graphs according to the G(n,p) Erdos-Renyi model
+#' Generate random graphs according to the \eqn{G(n,p)} Erdős-Rényi model
 #'
 #' This model is very simple, every possible edge is created with the same
 #' constant probability.
@@ -209,7 +209,7 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #'
 #' @param n The number of vertices in the graph.
 #' @param p The probability for drawing an edge between two
-#'   arbitrary vertices (G(n,p) graph).
+#'   arbitrary vertices (\eqn{G(n,p)} graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
 #'   FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
@@ -255,7 +255,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 
 
 
-#' Generate random graphs according to the G(n,m) Erdos-Renyi model
+#' Generate random graphs according to the \eqn{G(n,m)} Erdős-Rényi model
 #'
 #' This model is very simple, every possible edge is created with the same
 #' constant probability.
@@ -310,15 +310,15 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 
 ## -----------------------------------------------------------------
 
-#' Generate random graphs according to the Erdos-Renyi model
+#' Generate random graphs according to the Erdős-Rényi model
 #'
 #' This model is very simple, every possible edge is created with the same
 #' constant probability.
 #'
-#' In G(n,p) graphs, the graph has \sQuote{n} vertices and for each edge the
+#' In \eqn{G(n,p)} graphs, the graph has \sQuote{n} vertices and for each edge the
 #' probability that it is present in the graph is \sQuote{p}.
 #'
-#' In G(n,m) graphs, the graph has \sQuote{n} vertices and \sQuote{m} edges,
+#' In \eqn{G(n,m)} graphs, the graph has \sQuote{n} vertices and \sQuote{m} edges,
 #' and the \sQuote{m} edges are chosen uniformly randomly from the set of all
 #' possible edges. This set includes loop edges as well if the `loops`
 #' parameter is TRUE.
@@ -334,10 +334,10 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
 #' @param p.or.m Either the probability for drawing an edge between two
-#'   arbitrary vertices (G(n,p) graph), or the number of edges in the graph (for
-#'   G(n,m) graphs).
+#'   arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in the graph (for
+#'   \eqn{G(n,m)} graphs).
 #' @param type The type of the random graph to create, either `gnp()`
-#'   (G(n,p) graph) or `gnm()` (G(n,m) graph).
+#'   (\eqn{G(n,p)} graph) or `gnm()` (\eqn{G(n,m)} graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
 #'   FALSE.
 #' @param loops Logical, whether to add loop edges, defaults to FALSE.
@@ -1251,7 +1251,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'   \eqn{G(n,p)} graph, \sQuote{gnm} creates a \eqn{G(n,m)} graph. See details below.
 #' @param p Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
 #'   be given for \eqn{G(n,m)} graphs.
-#' @param m Integer scalar, the number of edges for \eqn{G(n,p)} graphs. Should not
+#' @param m Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 #'   be given for \eqn{G(n,p)} graphs.
 #' @param directed Logical scalar, whether to create a directed graph. See also
 #'   the `mode` argument.
@@ -1264,7 +1264,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'   is ignored for undirected graphs.
 #' @return A bipartite igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [sample_gnp()] for the unipartite version.
+#' @seealso [sample_gnp()] and [sample_gnm()] for the unipartite version.
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1787,7 +1787,7 @@ sample_forestfire <- sample_forestfire
 sample_correlated_gnp <- sample_correlated_gnp
 
 
-#' Sample a pair of correlated G(n,p) random graphs
+#' Sample a pair of correlated \eqn{G(n,p)} random graphs
 #'
 #' Sample a new graph by perturbing the adjacency matrix of a given graph and
 #' shuffling its vertices.
