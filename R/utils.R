@@ -41,7 +41,7 @@ add_class <- function(x, class) {
   x
 }
 
-`%||%` <- function (lhs, rhs) {
+`%||%` <- function(lhs, rhs) {
   lres <- withVisible(eval(lhs, envir = parent.frame()))
   if (is.null(lres$value)) {
     eval(rhs, envir = parent.frame())
@@ -73,7 +73,7 @@ grab_args <- function() {
   envir <- parent.frame()
   func <- sys.function(-1)
   call <- sys.call(-1)
-  dots <- match.call(func, call, expand.dots=FALSE)$...
+  dots <- match.call(func, call, expand.dots = FALSE)$...
   c(as.list(envir), dots)
 }
 
@@ -95,5 +95,5 @@ address <- function(x) {
 chr <- as.character
 
 drop_null <- function(x) {
-  x [!sapply(x, is.null)]
+  x[!sapply(x, is.null)]
 }

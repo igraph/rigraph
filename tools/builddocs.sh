@@ -12,11 +12,9 @@ rsync -avq \
 (
     cd ${tempdir}
     rm -rf src
-    Rscript -e 'roxygen2::update_collate(".")'
-    Rscript -e 'library(devtools) ; document()'
+    Rscript -e 'devtools::document()'
 )
 
 cp doc/*.Rd man/
-cp ${tempdir}/DESCRIPTION .
 cp ${tempdir}/NAMESPACE .
 cp ${tempdir}/man/* man/

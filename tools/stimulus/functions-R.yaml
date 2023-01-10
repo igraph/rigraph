@@ -1268,6 +1268,10 @@ igraph_running_mean:
 igraph_random_sample:
     IGNORE: RR, RC
 
+igraph_convex_hull:
+    # Fixing incorrect typing in 0.9, can be removed once we update to 0.10
+    PARAMS: MATRIX data, OUT VECTORM1 resverts, OUT MATRIX rescoords
+
 #######################################
 # Eulerian functions
 #######################################

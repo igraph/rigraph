@@ -11,8 +11,8 @@ test_that("canonical_permutation works", {
   ## Check that they are the same
   el1 <- as_edgelist(cf1)
   el2 <- as_edgelist(cf2)
-  el1 <- el1[ order(el1[,1], el1[,2]), ]
-  el2 <- el2[ order(el2[,1], el2[,2]), ]
+  el1 <- el1[order(el1[, 1], el1[, 2]), ]
+  el2 <- el2[order(el2[, 1], el2[, 2]), ]
 
   expect_that(el1, equals(el2))
 })

@@ -25,39 +25,33 @@
 #'
 #' Runs all package tests.
 #'
-#' The \code{testthat} package is needed to run all tests. The location tests
-#' themselves can be extracted from the package via \code{system.file("tests",
-#' package="igraph")}.
+#' The `testthat` package is needed to run all tests. The location tests
+#' themselves can be extracted from the package via `system.file("tests",
+#' package="igraph")`.
 #'
-#' This function simply calls the \code{test_dir} function from the
-#' \code{testthat} package on the test directory.
+#' This function simply calls the `test_dir` function from the
+#' `testthat` package on the test directory.
 #'
 #' @aliases igraphtest
-#' @return Whatever is returned by \code{test_dir} from the \code{testthat}
-#' package.
+#' @return Whatever is returned by `test_dir` from the `testthat`
+#'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
 #' @export
-
 igraph_test <- function() {
   do.call(require, list("testthat"))
-  tdir <- system.file("tests", package="igraph")
+  tdir <- system.file("tests", package = "igraph")
   do.call("test_dir", list(tdir))
 }
 
 
+# R_igraph_vers -----------------------------------------------------------------------
 
 #' Query igraph's version string
 #'
-#' Queries igraph's original version string. See details below.
+#' Returns the package version.
 #'
-#' The igraph version string is the same as the version of the R package for
-#' all released igraph versions. For development versions and nightly builds,
-#' they might differ however.
-#'
-#' The reason for this is, that R package version numbers are not flexible
-#' enough to cover in-between releases versions, e.g. alpha and beta versions,
-#' release candidates, etc.
+#' The igraph version string is always the same as the version of the R package.
 #'
 #' @aliases igraph.version
 #' @return A character scalar, the igraph version string.
@@ -69,13 +63,12 @@ igraph_test <- function() {
 #' ## Compare to the package version
 #' packageDescription("igraph")$Version
 #' igraph_version()
-
+#'
 igraph_version <- function() {
-  on.exit( .Call(C_R_igraph_finalizer) )
-  .Call(C_R_igraph_version)
+  unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }
 
-checkpkg <- function(package_file, args=character()) {
+checkpkg <- function(package_file, args = character()) {
   package_file <- as.character(package_file)
   args <- as.character(args)
   do.call(":::", list("tools", ".check_packages"))(c(package_file, args))

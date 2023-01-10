@@ -1,0 +1,45 @@
+Package: igraph
+Version: 1.3.5.9094
+Title: Network Analysis and Visualization
+Author: See AUTHORS file.
+Maintainer: Tamás Nepusz <ntamas@gmail.com>
+Description: Routines for simple graphs and network analysis. It can
+  handle large graphs very well and provides functions for generating random
+  and regular graphs, graph visualization, centrality methods and much more.
+Depends: methods
+Imports:
+    graphics,
+    grDevices,
+    magrittr,
+    Matrix,
+    pkgconfig (>= 2.0.0),
+    rlang,
+    stats,
+    utils
+Suggests:
+    ape,
+    digest,
+    graph,
+    igraphdata,
+    rgl,
+    scales,
+    stats4,
+    tcltk,
+    testthat,
+    withr,
+    vdiffr
+License: GPL (>= 2)
+URL: https://igraph.org, https://igraph.discourse.group/
+SystemRequirements:
+    gmp (optional),
+    libxml2 (optional),
+    glpk (>= 4.57, optional),
+    C++11
+BugReports: https://github.com/igraph/rigraph/issues
+Encoding: UTF-8
+Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
+Config/Needs/coverage: covr
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)
