@@ -1,5 +1,100 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9095
+
+## Bug fixes
+
+- Fix a bug in graph_from_incidence_matrix() for directed=T, mode='all' from sparse matrices, fixes #354.
+
+- Fix a bug in graph_from_incidence_matrix() for directed=T, mode='all' when the graph also had weights, fixes #353.
+
+- Trivial speedup in get.adjacency.dense() when using attributes.
+
+- Fix typon in previous commit.
+
+- Fix as.dendrogram.communities() for large dendrograms, closes #292.
+
+- Fix documentation of graph_from_adj_list, closes #170.
+
+- Use on.exit() to restore par(xpd=...).
+
+- Remove unimplemented pie.border from docs, refs #132.
+
+- Restore par(xpd=...) after plotting.
+
+- Eliminate Clang 15 warnings.
+
+- Bump max iteration count of eigenvector centrality to 3000.
+
+- Defer resolution of IGRAPH_VERSION in igraph_version.h to make it harder to publish igraph on CRAN with an invalid version number.
+
+- Fix typo in name of test file.
+
+- Distances(algorithm='johnson') now throws an error if mode != 'out' for directed graphs.
+
+- Removed ARPACK homepage reference now that the homepage is gone.
+
+## Features
+
+- Tkplot() now has a palette, also fixes #159.
+
+## Chore
+
+- Update vendored igraph.
+
+- Updated changelog.
+
+- Update issue template.
+
+- Updated vendored igraph.
+
+- Update vendored igraph.
+
+- Update vendored igraph.
+
+- Correct misstatement in NEWS.
+
+- Updated vendored igraph.
+
+- Update NEWS [skip ci].
+
+- Updated vendored igraph.
+
+## Documentation
+
+- Improve PageRank docs.
+
+- Clarify edge_density docs.
+
+- Add references to realize_degseq() docs.
+
+## Refactoring
+
+- Renamed automorphisms() to count_automorphisms().
+
+## Uncategorized
+
+- Merge branch 'dev' into dev.
+
+- Merge pull request #1 from adriandiazlab/R-vignette.
+
+Added igraph extended tutorial as R vignette
+
+- Remove more library(igraph) and library(Matrix).
+
+- Avoid require(digest).
+
+- Avoid require(Matrix) in tests.
+
+- PLACEHOLDER https://github.com/adriandiazlab/rigraph/pull/580 (#580).
+
+- PLACEHOLDER https://github.com/adriandiazlab/rigraph/pull/576 (#576).
+
+- Remove spaces at EOL.
+
+- Remove blank lines at EOF.
+
+
 # igraph 1.3.5.9094
 
 ## Documentation
