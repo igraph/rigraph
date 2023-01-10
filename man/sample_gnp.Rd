@@ -3,7 +3,7 @@
 \name{sample_gnp}
 \alias{sample_gnp}
 \alias{gnp}
-\title{Generate random graphs according to the G(n,p) Erdos-Renyi model}
+\title{Generate random graphs according to the \eqn{G(n,p)} Erdős-Rényi model}
 \usage{
 sample_gnp(n, p, directed = FALSE, loops = FALSE)
 
@@ -13,7 +13,7 @@ gnp(...)
 \item{n}{The number of vertices in the graph.}
 
 \item{p}{The probability for drawing an edge between two
-arbitrary vertices (G(n,p) graph).}
+arbitrary vertices (\eqn{G(n,p)} graph).}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
 FALSE.}

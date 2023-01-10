@@ -29,7 +29,7 @@ bipartite(...)
 \item{p}{Real scalar, connection probability for \eqn{G(n,p)} graphs. Should not
 be given for \eqn{G(n,m)} graphs.}
 
-\item{m}{Integer scalar, the number of edges for \eqn{G(n,p)} graphs. Should not
+\item{m}{Integer scalar, the number of edges for \eqn{G(n,m)} graphs. Should not
 be given for \eqn{G(n,p)} graphs.}
 
 \item{directed}{Logical scalar, whether to create a directed graph. See also
@@ -74,7 +74,7 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}} for the unipartite version.
+\code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} for the unipartite version.
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

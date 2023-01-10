@@ -1346,7 +1346,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' vertices in a graph.
 #'
 #' The alpha centrality measure can be considered as a generalization of
-#' eigenvector centerality to directed graphs. It was proposed by Bonacich in
+#' eigenvector centrality to directed graphs. It was proposed by Bonacich in
 #' 2001 (see reference below).
 #'
 #' The alpha centrality of the vertices in a graph is defined as the solution
@@ -1357,7 +1357,8 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' endogenous versus exogenous factors.
 #'
 #' @aliases alpha.centrality
-#' @param graph The input graph, can be directed or undirected
+#' @param graph The input graph, can be directed or undirected. In undirected
+#'   graphs, edges are treated as if they were reciprocal directed ones.
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
 #'   values are returned. (For technical reasons they will be calculated for all
 #'   vertices, anyway.)
