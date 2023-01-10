@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9094
+
+## Documentation
+
+- Clarify documentation of alpha_centrality.
+
+- Update Erdős-Rényi sampler docs, change an incorrect G(n,p) to G(n,m) in sample_bipartite().
+
+
 # igraph 1.3.5.9093
 
 ## Bug fixes
