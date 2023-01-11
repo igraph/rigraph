@@ -183,6 +183,7 @@ jobs:
         run: |
           setwd("igraph")
           line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
+          Sys.setenv("_R_CHECK_TESTS_NLINES_" = 0)
 
           cov <- covr::package_coverage(
             type = c("tests", "examples"),
