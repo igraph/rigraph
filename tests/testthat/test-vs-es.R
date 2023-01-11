@@ -162,6 +162,10 @@ test_that("printing named connected vs/es works", {
     vs[1:5]
     es[1:5]
     vs[numeric()]
+  })
+
+  skip_if(identical(Sys.getenv("R_COVR"), "true"))
+  expect_snapshot({
     es[numeric()]
   })
 })
