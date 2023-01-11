@@ -24,12 +24,15 @@
       vs[numeric()]
     Output
       + 0/10 vertices:
+
+---
+
     Code
       es[numeric()]
     Output
       + 0/10 edges:
 
----
+# printing named connected vs/es works
 
     Code
       vs

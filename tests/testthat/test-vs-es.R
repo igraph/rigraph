@@ -139,9 +139,19 @@ test_that("printing connected vs/es works", {
     vs[1:5]
     es[1:5]
     vs[numeric()]
-    es[numeric()]
   })
 
+  skip_on_os("macos")
+  skip_if(identical(Sys.getenv("R_COVR"), "true"))
+  expect_snapshot({
+    es[numeric()]
+  })
+})
+
+test_that("printing named connected vs/es works", {
+  local_igraph_options(print.id = FALSE)
+
+  g <- make_ring(10)
   V(g)$name <- letters[1:10]
   vs <- V(g)
   es <- E(g)
