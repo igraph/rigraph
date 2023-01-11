@@ -58,6 +58,9 @@
       vs[numeric()]
     Output
       + 0/10 vertices, named:
+
+---
+
     Code
       es[numeric()]
     Output
