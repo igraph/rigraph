@@ -272,12 +272,12 @@ V(g)$gender
 If I understood the comment correctly, the instruction would be: 
 
 
-If you want to save a graph in R with all the attributes use the R's standard `dput()` method and retrieve it later with dget(). You can also just save the R workspace and restore it later.
+If you want to save a graph in R with all the attributes use the R's standard `dput()` function and retrieve it later with dget(). You can also just save the R workspace and restore it later.
 -->
 ```
 ## Structural properties of graphs
 
-Besides the simple graph and attribute manipulation routines described above, igraph provides a large set of methods to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network we built in the previous section.
+Besides the simple graph and attribute manipulation routines described above, igraph provides a large set of functions to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network we built in the previous section.
 
 Probably the simplest property one can think of is the `degree`. The degree of a vertex equals the number of edges adjacent to it. In case of directed networks, we can also define `in-degree` (the number of edges pointing towards the vertex) and `out-degree` (the number of edges originating from the vertex). igraph is able to calculate all of them using a simple syntax:
 
@@ -295,11 +295,11 @@ degree(g,7)
 degree(g, v = c(3,4,5))
 ```
 
-This calling convention applies to most of the structural properties igraph can calculate. For vertex properties, the methods accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the methods accept a single edge ID or a list of edge IDs. Later in the `next chapter <querying_vertices_and_edges>`, you will learn how to restrict them to exactly the vertices or edges you want.
+This calling convention applies to most of the structural properties igraph can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs. Later in the `next chapter <querying_vertices_and_edges>`, you will learn how to restrict them to exactly the vertices or edges you want.
 
 Note
 
-For some measures, it does not make sense to calculate them only for a few vertices or edges instead of the whole graph, as it would take the same time anyway. In this case, the methods won't accept vertex or edge IDs, but you can still restrict the resulting list later using standard list indexing and slicing operators. One such example is eigenvector centrality (`evcent()`).
+For some measures, it does not make sense to calculate them only for a few vertices or edges instead of the whole graph, as it would take the same time anyway. In this case, the functions won't accept vertex or edge IDs, but you can still restrict the resulting list later using standard list indexing and slicing operators. One such example is eigenvector centrality (`evcent()`).
 
 Besides degree, igraph includes built-in routines to calculate many other centrality properties, including vertex and edge betweenness (`edge_betweenness`) or Google's PageRank (`page_rank`) just to name a few. Here we just illustrate edge betweenness:
 
@@ -314,7 +314,7 @@ ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
 ```
 
-Most structural properties can also be retrieved for a subset of vertices or edges or for a single vertex or edge by calling the appropriate method on `Vertex` or `Edge` object of interest:
+Most structural properties can also be retrieved for a subset of vertices or edges or for a single vertex or edge by calling the appropriate function on `Vertex` or `Edge` object of interest:
 
 ```{r echo = TRUE}
 degree(g)
@@ -344,7 +344,7 @@ Another way to do it is:
 But this solution was obtained from stackoverflow 
 -->
 ```
-If the first positional argument is a callable object (i.e., a function, a bound method or anything that behaves like a function), the object will be called for every vertex that's currently in the sequence. If the function returns `True`, the vertex will be included, otherwise it will be excluded:
+If the first positional argument is a callable object (i.e., a function or anything that behaves like a function), the object will be called for every vertex that's currently in the sequence. If the function returns `True`, the vertex will be included, otherwise it will be excluded:
 
 ```{r echo = TRUE}
 graph <- graph.full(n=10)
@@ -481,7 +481,7 @@ A graph is an abstract mathematical object without a specific representation in 
 
 ### Layout algorithms
 
-The layout methods in igraph are to be found in the `Graph` object, and they always start with `layout`. The following table summarises them:
+The layout functions in igraph always start with `layout`. The following table summarises them:
 
 | Method name                            | Algorithm description                                                                                         |
 |------------------------------------|------------------------------------|
@@ -516,7 +516,7 @@ layout <- layout.reingold.tilford(g, root= 2)
 layout <- layout_as_tree(g, root = 2)
 ```
 
-Layout methods return a `Layout` object which behaves mostly like a list of lists. Each list entry in a `Layout` object corresponds to a vertex in the original graph and contains the vertex coordinates in the 2D or 3D space. `Layout` objects also contain some useful methods to translate, scale or rotate the coordinates in a batch. However, the primary utility of `Layout` objects is that you can pass them to the `plot` function along with the graph to obtain a 2D drawing.
+Layout functions return a `Layout` object which behaves mostly like a list of lists. Each list entry in a `Layout` object corresponds to a vertex in the original graph and contains the vertex coordinates in the 2D or 3D space. `Layout` objects also contain some useful functions to translate, scale or rotate the coordinates in a batch. However, the primary utility of `Layout` objects is that you can pass them to the `plot` function along with the graph to obtain a 2D drawing.
 
 ### Drawing a graph using a layout
 
@@ -639,9 +639,9 @@ dev.off()
 
 ## igraph and the outside world
 
-No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. igraph is no exception: it provides functions to read the most common graph formats and to save `Graph` objects into files obeying these format specifications. The following table summarises the formats igraph can read or write:
+No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. igraph is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The following table summarises the formats igraph can read or write:
 
-| Format                                                                    | Short name  | Reader method                                                                                                                                                                             | Writer method                                      |
+| Format                                                                    | Short name  | Read function                                                                                                                                                                             | Write function                                      |
 |------------------|------------------|------------------|------------------|
 | Adjacency list (a.k.a. [LGL](https://lgl.sourceforge.net/#FileFormat))    | `lgl`       | `read_graph(file, format = c("lgl"))`                                                                                                                                                     | `write_graph(graph, file, format = c("lgl"))`      |
 | Adjacency matrix                                                          | `adjacency` | `graph_from_adjacency_matrix(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper","lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA)` | `as.matrix(graph, "adjacency")`                    |
@@ -655,7 +655,7 @@ No graph module would be complete without some kind of import/export functionali
 | Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat)) | `ncol`      | `read_graph(file, format = c("ncol"))`                                                                                                                                                    | `write_graph(graph, file, format = c("ncol"))`     |
 | [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format                         | `pajek`     | `read_graph(file, format = c("pajek"))`                                                                                                                                                   | `write_graph(graph, file, format = c("pajek"))`    |
 
-As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must use the GraphML reader method from the table above (make sure you use the appropriate path to the downloaded file):
+As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must use the GraphML read function from the table above (make sure you use the appropriate path to the downloaded file):
 
 ```{=html}
 <!---
@@ -671,7 +671,7 @@ Note
 
 Most of the formats have their own limitations; for instance, not all of them can store attributes. Your best bet is probably GraphML or GML if you want to save igraph graphs in a format that can be read from an external package and you want to preserve numeric and string attributes. Edge list and NCOL is also fine if you don't have attributes (NCOL supports vertex names and edge weights, though).
 
-There are two helper methods as well: `read` is a generic entry point for reader methods which tries to infer the appropriate format from the file extension. `write` is the opposite of `read`: it lets you save a graph where the preferred format is again inferred from the extension. The format detection of `read` and `write` can be overridden by the `format` keyword argument which accepts the short names of the formats from the above table:
+There are two helper functions as well: `read` is a generic entry point for read functions which tries to infer the appropriate format from the file extension. `write` is the opposite of `read`: it lets you save a graph where the preferred format is again inferred from the extension. The format detection of `read` and `write` can be overridden by the `format` keyword argument which accepts the short names of the formats from the above table:
 
 ## Where to go next
 
