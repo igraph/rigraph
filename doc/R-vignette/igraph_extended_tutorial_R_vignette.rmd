@@ -629,7 +629,7 @@ igraph can be used to create publication-quality plots. The preferred format is 
 
 ```{r echo=FALSE,eval=FALSE}
 png("social_network.png", 600, 600) 
-plot(g, layout =layout, vertex.size = 20, margin = 0.5,
+plot(g, layout = layout_with_kk(g), vertex.size = 20, margin = 0.5,
             vertex.color=c( "red", "yellow")[1+(V(g)$gender == "m")],
             vertex.label.dist=3.5, 
             edge.width=c(1,3)[1+(E(g)$is_formal == TRUE)]
