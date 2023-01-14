@@ -152,7 +152,7 @@ is_chordal(g1, fillin=TRUE)
 ```
 
 ```{r echo = TRUE}
-chordal_graph <- add_edges(g1, c(2,6, 8,7, 5,7, 2,7, 6,1, 7,1))
+chordal_graph <- add_edges(g1, is_chordal(g1, fillin=TRUE)$fillin)
 plot(chordal_graph)
 ```
 
