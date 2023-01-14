@@ -16,14 +16,15 @@ The main goals of the igraph library is to provide a set of data types and funct
 I take this introducction from the R tutorial in https://igraph.org/r/html/latest/aaa-igraph-package.html
 -->
 ```
-
 ## Creating a graph
 
-The simplest way to create a graph is the `graph` constructor. To make an empty graph:
+There are many functions in igraph for creating graphs, for example to create a graph without edges you can use the function `make_empty_graph`:
+
+```{r echo = FALSE}
+library("igraph")
+```
 
 ```{r}
-library("igraph")
-
 g <- make_empty_graph()
 ```
 
@@ -32,6 +33,10 @@ To make a graph with 10 nodes (numbered `1` to `10`) and two edges connecting no
 ```{r}
 g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
 ```
+
+Starting from igraph 0.8.0, you can also include literal here, via igraph's formula notation. In this case, the first term of the formula has to start with a "\~" character, just like regular formulae in R. The expressions consist of vertex names and edge operators. An edge operator is a sequence of '-' and '+' characters, the former is for the edges and the latter is used for arrow heads. The edges can be arbitrarily long, ie. you may use as many '-' characters to "draw" them as you like. If all edge operators consist of only '-' characters then the graph will be undirected, whereas a single '+' character implies a directed graph: i.e to create the same graph as above:
+
+g \<- make_graph(\~ 1 - 2, 1 - 5, 3, 4, 5, 6, 7, 8, 9, 10)
 
 We can print the graph to get a summary of its nodes and edges:
 
@@ -49,23 +54,16 @@ Note
 summary(g)
 ```
 
-`make_graph` can create some notable graphs. For example you can create a Frucht graph, who is the smallest cubical graph whose automorphism group consists only of the identity element. It has 12 vertices and 18 edges:
+`make_graph` can create some notable graphs. For example you can create the graph that represents the social network of Zachary's karate club, that shows the friendship between 34 members of a karate club at a US university in the 1970s:
 
 ```{r echo = TRUE}
-g <- make_graph('Frucht')
+g <- make_graph('Zachary')
 ```
 
 To visualize a graph you can use `plot`:
 
 ```{r}
 plot(g)
-```
-
-You can also include literals here. In this case, the first term of the formula has to start with a '~' character, just like regular formulae in R. The expressions consist of vertex names and edge operators. An edge operator is a sequence of ‘-’ and ‘+’ characters, the former is for the edges and the latter is used for arrow heads. The edges can be arbitrarily long, ie. you may use as many ‘-’ characters to “draw” them as you like. If all edge operators consist of only ‘-’ characters then the graph will be undirected, whereas a single ‘+’ character implies a directed graph:
-
-```{r echo = TRUE}
-g <- make_graph( ~ A-B, C-D, E-F, G-H, I, J, K)
-g
 ```
 
 ## Vertex and edge IDs
@@ -76,50 +74,53 @@ The same is true for the edges as well, edge IDs are always between one and m, t
 
 It is often desirable to follow vertices along a number of graph operations, and vertex IDs don't allow this because of the renumbering. The solution is to assign attributes to the vertices. These are kept by all operations, if possible.
 
-
 ## Adding/deleting vertices and edges
 
-Let's start from the empty graph again. To add vertices to an existing graph, use `add_vertices`:
+Let's continue working with the Karate club, to add to add one or more vertices to an existing graph, use `add_vertices`:
 
 ```{r}
-g <- make_empty_graph()
-
 g <- add_vertices(g,3)
 ```
 
 Similarly, to add vertices use `add_edges`:
 
 ```{r}
-g <- add_edges(g, edges = c(1,2, 1,3))
+g <- add_edges(g, edges = c(1,35, 1,36, 34,37))
 ```
 
-Edges are added by specifying the source and target vertex for each edge. This call added two edges, one connecting vertices `1` and `2`, and one connecting vertices `1` and `3`. Edges are also numbered up from one (the *edge ID*) and have an optional name.
+Edges are added by specifying the source and target vertex for each edge. This call added three edges, one connecting vertices `1` and `35`, one connecting vertices `1` and `36`, and one connecting vertices `34` and `37` . Edges are also numbered up from one (the *edge ID*) and have an optional name.
+
+In addition to the `add_vertices` and `add_edges` functions, the plus operator can be used to add vertices or edges to graph. The actual operation that is performed depends on the type of the right hand side argument:
+
+```{r echo = TRUE, eval=FALSE}
+g <- g + edges(c(1,35, 1,36, 34,37))
+```
 
 **Warning**
 
-Creating an empty graph and adding vertices and edges as shown here can be much slower than creating a graph with its vertices and edges as demonstrated earlier. If speed is of concern, you should especially avoid adding vertices and edges *one at a time*. If you need to do it anyway, you can use `add_vertex` and `add_edge`.
+When constructing a graph, adding one vertex/edge at a time can be slow, that is why we usually create a graph with all its vertices and edges using a function like `make_graph`. Otherwise, if the speed is not important (small graphs, etc.) you can add a single vertex/edge at a time using `add_vertex` and `add_edge`.
 
-If you try to add edges to vertices with invalid IDs (i.e., you try to add an edge to vertex `5` when the graph has only three vertices), you get an error:
+If you try to add edges to vertices with invalid IDs (i.e., you try to add an edge to vertex `38` when the graph has only 37 vertices), you get an error:
 
 ```{r echo = TRUE, eval = FALSE}
-g <- add_edges(g, edges = c(5,4))
+g <- add_edges(g, edges = c(38,37))
 ```
 
-Let us add some more vertices and edges to our graph, in igraph we can usea the `magrittr` package who provides a mechanism for chasing commands with the operator %>%:
+Let us add some more vertices and edges to our graph, in igraph we can usea the `magrittr` package who provides a mechanism for chasing commands with the operator %\>%:
 
 ```{r echo = TRUE}
-g <- g %>% add_edges(edges=c(3,1)) %>% add_vertices(3) %>% add_edges(edges=c(3,4, 4,5, 5,6, 6,4))
+g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>% add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
 g
 ```
 
-We now have an directed graph with 6 vertices and 7 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will. Use `delete_vertices` and `delete_edges` to perform these operations. For instance, to delete the edge connecting vertices `3-4`, get its ID and then delete it:
+We now have an undirected graph with 40 vertices and 86 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will. Use `delete_vertices` and `delete_edges` to perform these operations. For instance, to delete the edge connecting vertices `1-34`, get its ID and then delete it:
 
 ```{r echo = TRUE}
-get.edge.ids(g, c(3,4))
+get.edge.ids(g, c(1,34))
 ```
 
 ```{r}
-g <- delete_edges(g, 4)
+g <- delete_edges(g, 82)
 ```
 
 Another forms to delete edges:
@@ -135,8 +136,7 @@ g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 plot(g)
 ```
 
-Let's elaborate another example. We have the task of elaborating a chordal graph. A graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord, which
-is an edge joining two nodes that are not adjacent in the cycle. Our initial graph is:
+Let's elaborate another example. We have the task of elaborating a chordal graph. A graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord, which is an edge joining two nodes that are not adjacent in the cycle. Our initial graph is:
 
 ```{r}
 g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
@@ -145,7 +145,7 @@ g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
 plot(g1)
 ```
 
-The ‘:’ operator can be used to define vertex sets. If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set. Then we use `is_chordal` to evaluate if our graph is chordal and to search what edges are missing to fill-in the graph:
+The ':' operator can be used to define vertex sets. If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set. Then we use `is_chordal` to evaluate if our graph is chordal and to search what edges are missing to fill-in the graph:
 
 ```{r echo = TRUE}
 is_chordal(g1, fillin=TRUE)
@@ -207,7 +207,7 @@ To demonstrate the use of attributes, let us create a simple social network:
 g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, George-Dennis:Frank, Dennis-Esther)
 ```
 
-Each vertex represents a person, so we want to store ages, genders and type of connection. The $ operator is a shortcut to get and and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
+Each vertex represents a person, so we want to store ages, genders and type of connection (is_formal refers to whether a connection between one person or another is formal or informal, i.e. colleagues or friends). The \$ operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
@@ -216,7 +216,7 @@ E(g)$is_formal <- c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
 summary(g)
 ```
 
-`V` and `E` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr` and `set_edge_attr` and the operator %>%:
+`V` and `E` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr` and `set_edge_attr` and the operator %\>%:
 
 ```{r echo = TRUE, eval=FALSE}
 g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, George-Dennis:Frank, Dennis-Esther) %>%
@@ -241,7 +241,6 @@ E(g)$is_formal
 ```
 
 Attribute values can be set to any R object, but note that storing the graph in some file formats might result the loss of complex attribute values. Both vertices, edges and the graph itself can all be keyed like a dictionary to set attributes, e.g. to add a date to the graph:
-
 
 ```{r echo = TRUE}
 g$date <- c("2022-02-11")
@@ -276,9 +275,6 @@ If I understood the comment correctly, the instruction would be:
 If you want to save a graph in R with all the attributes use the R's standard `dput()` method and retrieve it later with dget(). You can also just save the R workspace and restore it later.
 -->
 ```
-
-
-
 ## Structural properties of graphs
 
 Besides the simple graph and attribute manipulation routines described above, igraph provides a large set of methods to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network we built in the previous section.
@@ -310,6 +306,7 @@ Besides degree, igraph includes built-in routines to calculate many other centra
 ```{r echo = TRUE}
 edge_betweenness(g)
 ```
+
 Now we can also figure out which connections have the highest betweenness centrality:
 
 ```{r echo = TRUE}
@@ -347,8 +344,6 @@ Another way to do it is:
 But this solution was obtained from stackoverflow 
 -->
 ```
-
-
 If the first positional argument is a callable object (i.e., a function, a bound method or anything that behaves like a function), the object will be called for every vertex that's currently in the sequence. If the function returns `True`, the vertex will be included, otherwise it will be excluded:
 
 ```{r echo = TRUE}
@@ -545,28 +540,28 @@ So we can simply create these attributes and re-plot the graph:
 V(g)$gender_num <- c(1,2,1,2,1,2,2)
 colors <- c("yellow", "red")
 V(g)$color <- colors[V(g)$gender_num]
-plot(g, layout = layout, main = "Our social network - with names as labels and genders as colors")
+plot(g, layout = layout, vertex.label.dist=3.5, main = "Our social network - with names as labels and genders as colors")
 ```
 
 Anothers ways to approach this example:
 
 ```{r}
 V(g)$color <- ifelse(V(g)$gender == "m", "red","yellow")
-plot(g, layout = layout)
+plot(g, layout = layout, vertex.label.dist=3.5)
 ```
 
 ```{r}
-plot(g, layout= layout, vertex.color=as.factor(V(g)$gender))
+plot(g, layout= layout, vertex.label.dist=3.5, vertex.color=as.factor(V(g)$gender))
 ```
 
 ```{r}
-plot(g, layout= layout, vertex.color=c( "yellow", "red")[1+(V(g)$gender == "f")])
+plot(g, layout= layout, vertex.label.dist=3.5, vertex.color=c( "yellow", "red")[1+(V(g)$gender == "f")])
 ```
 
 Instead of specifying the visual properties as vertex and edge attributes, you can also give them as arguments to `plot`. The final plot shows the formal ties with thick lines while informal ones with thin lines:
 
 ```{r}
-plot(g, layout =layout, vertex.size = 20, margin = 0.5,
+plot(g, layout =layout, vertex.label.dist=3.5, vertex.size = 20, margin = 0.5,
            vertex.color=c( "red", "yellow")[1+(V(g)$gender == "m")], 
            edge.width=c(1,3)[1+(E(g)$is_formal == TRUE)],
            )
@@ -635,7 +630,8 @@ igraph can be used to create publication-quality plots. The preferred format is 
 ```{r echo=FALSE,eval=FALSE}
 png("social_network.png", 600, 600) 
 plot(g, layout =layout, vertex.size = 20, margin = 0.5,
-            vertex.color=c( "red", "yellow")[1+(V(g)$gender == "m")], 
+            vertex.color=c( "red", "yellow")[1+(V(g)$gender == "m")],
+            vertex.label.dist=3.5, 
             edge.width=c(1,3)[1+(E(g)$is_formal == TRUE)]
         )
 dev.off()
@@ -664,11 +660,11 @@ As an exercise, download the graph representation of the well-known [Zachary kar
 ```{=html}
 <!---
 This document (</assets/zachary.zip>) must be added in order to be able to carry out the example.
--->
 ```
 ```{r echo=FALSE,eval=FALSE, error=FALSE}
 #karate <- read_graph("zachary.graphml", format =c("graphml"))
-summary(karate)
+#summary(karate)
+-->
 ```
 
 Note
