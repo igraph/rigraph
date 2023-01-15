@@ -1,6 +1,6 @@
 test_that("writing Pajek files works", {
   g <- make_ring(9)
-  V(g)$color <- c("red", "green", "yellow")
+  V(g)$color <- rep(c("red", "green", "yellow"), 3)
 
   tc <- rawConnection(raw(0), "w")
   write_graph(g, format = "pajek", file = tc)

@@ -35,7 +35,7 @@
 
 
 
-ATTRIBUTE_STRICT_RECYCLING <- FALSE
+ATTRIBUTE_STRICT_RECYCLING <- TRUE
 
 #' Graph attributes of a graph
 #'
@@ -268,9 +268,9 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   } else {
     if (ATTRIBUTE_STRICT_RECYCLING) {
       if (length(value) == 1) {
-        value_in <- rep(value, length(index))
+        value_in <- rep(unname(value), length(index))
       } else if (length(value) == length(index)) {
-        value_in <- value
+        value_in <- unname(value)
       } else {
         stop("strict recycling (1)")
       }
@@ -472,9 +472,9 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
   } else {
     if (ATTRIBUTE_STRICT_RECYCLING) {
       if (length(value) == 1) {
-        value_in <- rep(value, length(index))
+        value_in <- rep(unname(value), length(index))
       } else if (length(value) == length(index)) {
-        value_in <- value
+        value_in <- unname(value)
       } else {
         stop("strict recycling (2)")
       }
