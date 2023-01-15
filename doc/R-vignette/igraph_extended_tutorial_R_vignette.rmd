@@ -8,17 +8,12 @@ vignette: >
 ---
 
 # Tutorial
+`igraph` is a fast and open source library for the analysis of graphs or networks. The library consists of a core written in C and bindings in a few high-level languages including R. This vignette aims to give you an overview of the functions available in the R interface of `igraph`. For detailed function by function API documentation, check out [https://igraph.org/r/html/latest/](https://igraph.org/r/html/latest/).
 
-The main goals of the igraph library is to provide a set of data types and functions for 1) pain-free implementation of graph algorithms, 2) fast handling of large graphs, with millions of vertices and edges, 3) allowing rapid prototyping via high level languages like R.
+Throughout this tutorial, we will use words `graph` and `network` as synonyms, and also `vertex` or `node` as synonyms.
 
-```{=html}
-<!---
-I take this introducction from the R tutorial in https://igraph.org/r/html/latest/aaa-igraph-package.html
--->
-```
 ## Creating a graph
-
-There are many functions in igraph for creating graphs, for example to create a graph without edges you can use the function `make_empty_graph`:
+`igraph` offers many ways to create a graph. The simplest one is the function `make_empty_graph`:
 
 ```{r echo = FALSE}
 library("igraph")
@@ -28,7 +23,7 @@ library("igraph")
 g <- make_empty_graph()
 ```
 
-To make a graph with 10 nodes (numbered `1` to `10`) and two edges connecting nodes `1-2` and `1-5`:
+The most common way to create a graph is `make_graph`, which constructs a network based on specified edges. For example, to make a graph with 10 nodes (numbered `1` to `10`) and two edges connecting nodes `1-2` and `1-5`:
 
 ```{r}
 g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
@@ -36,7 +31,9 @@ g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
 
 Starting from igraph 0.8.0, you can also include literal here, via igraph's formula notation. In this case, the first term of the formula has to start with a "\~" character, just like regular formulae in R. The expressions consist of vertex names and edge operators. An edge operator is a sequence of '-' and '+' characters, the former is for the edges and the latter is used for arrow heads. The edges can be arbitrarily long, ie. you may use as many '-' characters to "draw" them as you like. If all edge operators consist of only '-' characters then the graph will be undirected, whereas a single '+' character implies a directed graph: i.e to create the same graph as above:
 
-g \<- make_graph(\~ 1 - 2, 1 - 5, 3, 4, 5, 6, 7, 8, 9, 10)
+```{r echo = TRUE}
+g <- make_graph(~ 1 - 2, 1 - 5, 3, 4, 5, 6, 7, 8, 9, 10)
+```
 
 We can print the graph to get a summary of its nodes and edges:
 
@@ -44,17 +41,15 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-This means: **U** ndirected graph with **10** vertices and **2** edges, with the exact edges listed out. If the graph has a [name] attribute, it is printed as well.
+This means: **U** ndirected graph with **10** vertices and **2** edges, with the exact edges listed out. If the graph has a `[name]` attribute, it is printed as well.
 
-Note
-
-`summary` does not list the edges, which is convenient for large graphs with millions of edges:
+**Note**: `summary` does not list the edges, which is convenient for large graphs with millions of edges:
 
 ```{r echo = TRUE}
 summary(g)
 ```
 
-`make_graph` can create some notable graphs. For example you can create the graph that represents the social network of Zachary's karate club, that shows the friendship between 34 members of a karate club at a US university in the 1970s:
+The same function `make_graph` can create some notable graphs by just specifying their name. For example you can create the graph that represents the social network of Zachary's karate club, that shows the friendship between 34 members of a karate club at a US university in the 1970s:
 
 ```{r echo = TRUE}
 g <- make_graph('Zachary')
@@ -66,29 +61,33 @@ To visualize a graph you can use `plot`:
 plot(g)
 ```
 
+A more detailed description of plotting options is provided later on in this tutorial.
+
 ## Vertex and edge IDs
 
-Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always consecutive and they start with one. I.e. for a graph with n vertices the vertex IDs are between 1 and n. If some operation changes the number of vertices in the graphs, e.g. a subgraph is created via induced_subgraph, then the vertices are renumbered to satisfy this criteria.
+Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always consecutive and they start with 1 (one). For a graph with n vertices the vertex IDs are always between 1 and n. If some operation changes the number of vertices in the graphs, e.g. a subgraph is created via induced_subgraph, then the vertices are renumbered to satisfy this criterion.
 
-The same is true for the edges as well, edge IDs are always between one and m, the total number of edges in the graph.
+The same is true for the edges as well: edge IDs are always between 1 and m, the total number of edges in the graph.
 
-It is often desirable to follow vertices along a number of graph operations, and vertex IDs don't allow this because of the renumbering. The solution is to assign attributes to the vertices. These are kept by all operations, if possible.
+**Note**: If you are familiar with the C core or the [Python](https://igraph.readthedocs.io/en/stable/) interface of `igraph`, you might have noticed that in those languages vertex and edge IDs start from 0. In the R interface, both start from 1 instead, to keep consistent with the convention in each language.
+
+In addition to IDs, vertices and edges can be assigned a name and other attributes. That makes it easier to track them whenever the graph is altered. Examples of this pattern are shown later on in this tutorial.
 
 ## Adding/deleting vertices and edges
 
-Let's continue working with the Karate club, to add to add one or more vertices to an existing graph, use `add_vertices`:
+Let's continue working with the Karate club graph. To add to add one or more vertices to an existing graph, use `add_vertices`:
 
 ```{r}
 g <- add_vertices(g,3)
 ```
 
-Similarly, to add vertices use `add_edges`:
+Similarly, to add edges you can use `add_edges`:
 
 ```{r}
 g <- add_edges(g, edges = c(1,35, 1,36, 34,37))
 ```
 
-Edges are added by specifying the source and target vertex for each edge. This call added three edges, one connecting vertices `1` and `35`, one connecting vertices `1` and `36`, and one connecting vertices `34` and `37` . Edges are also numbered up from one (the *edge ID*) and have an optional name.
+Edges are added by specifying the source and target vertex IDs for each edge. This call added three edges, one connecting vertices `1` and `35`, one connecting vertices `1` and `36`, and one connecting vertices `34` and `37`.
 
 In addition to the `add_vertices` and `add_edges` functions, the plus operator can be used to add vertices or edges to graph. The actual operation that is performed depends on the type of the right hand side argument:
 
@@ -96,17 +95,17 @@ In addition to the `add_vertices` and `add_edges` functions, the plus operator c
 g <- g + edges(c(1,35, 1,36, 34,37))
 ```
 
-**Warning**
+You can add a single vertex/edge at a time using `add_vertex` and `add_edge`.
 
-When constructing a graph, adding one vertex/edge at a time can be slow, that is why we usually create a graph with all its vertices and edges using a function like `make_graph`. Otherwise, if the speed is not important (small graphs, etc.) you can add a single vertex/edge at a time using `add_vertex` and `add_edge`.
+**Warning**: If you need to add multiple edges to a graph, it is much more efficient to call `add_edges` once rather than repeatedly calling `add_edge` with a single new edge. The same applies when deleting edges and vertices.
 
-If you try to add edges to vertices with invalid IDs (i.e., you try to add an edge to vertex `38` when the graph has only 37 vertices), you get an error:
+If you try to add edges to vertices with invalid IDs (i.e., you try to add an edge to vertex `38` when the graph has only 37 vertices), `igraph` shows an error:
 
 ```{r echo = TRUE, eval = FALSE}
 g <- add_edges(g, edges = c(38,37))
 ```
 
-Let us add some more vertices and edges to our graph, in igraph we can usea the `magrittr` package who provides a mechanism for chasing commands with the operator %\>%:
+Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package who provides a mechanism for chasing commands with the operator %\>%:
 
 ```{r echo = TRUE}
 g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>% add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
@@ -123,7 +122,7 @@ get.edge.ids(g, c(1,34))
 g <- delete_edges(g, 82)
 ```
 
-Another forms to delete edges:
+As an example, to create a broken ring:
 
 ```{r echo = TRUE}
 g <- make_ring(10) %>% delete_edges("10|1")
@@ -136,7 +135,7 @@ g <- delete_edges(g, get.edge.ids(g, c(1,5, 4,5)))
 plot(g)
 ```
 
-Let's elaborate another example. We have the task of elaborating a chordal graph. A graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord, which is an edge joining two nodes that are not adjacent in the cycle. Our initial graph is:
+As another example, let's make a chordal graph. Remember that a graph is chordal (or triangulated) if each of its cycles of four or more nodes has a chord, which is an edge joining two nodes that are not adjacent in the cycle. First, let's create the initial graph using `graph_from_literal`:
 
 ```{r}
 g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
@@ -151,21 +150,22 @@ The ':' operator can be used to define vertex sets. If an edge operator connects
 is_chordal(g1, fillin=TRUE)
 ```
 
+We can then add the edges required to make the initial graph chordal in a single line:
+
 ```{r echo = TRUE}
 chordal_graph <- add_edges(g1, is_chordal(g1, fillin=TRUE)$fillin)
 plot(chordal_graph)
 ```
 
 ## Generating graphs
-
-igraph includes both deterministic and stochastic graph generators. *Deterministic* generators produce the same graph every time you call the fuction, e.g.:
+In addition to `make_empty_graph`, `make_graph`, and `make_graph_from_literal`, `igraph` includes many other function to construct a graph. Some are *deterministic*, i.e. they produce the same graph each single time, e.g. `make_tree`:
 
 ```{r echo = TRUE}
 graph1 <- make_tree(127, 2, mode = "undirected")
 summary(g)
 ```
 
-Uses `make_tree` to generate a regular tree graph with 127 vertices, each vertex having two children (and one parent, of course). No matter how many times you call `make_tree`, the generated graph will always be the same if you use the same parameters:
+This generates a regular tree graph with 127 vertices, each vertex having two children. No matter how many times you call `make_tree`, the generated graph will always be the same if you use the same parameters:
 
 ```{r}
 graph2 <- make_tree(127, 2, mode = "undirected")
@@ -175,7 +175,7 @@ graph2 <- make_tree(127, 2, mode = "undirected")
 identical_graphs(graph1,graph2)
 ```
 
-*Stochastic* generators produce a different graph each time, e.g. `sample_grg`:
+Other function generate graphs *stochastically*, i.e. they produce a different graph each time. For instance `sample_grg`:
 
 ```{r echo = TRUE}
 graph1 <- sample_grg(100, 0.2)
@@ -189,13 +189,13 @@ graph2 <- sample_grg(100, 0.2)
 identical_graphs(graph1,graph2)
 ```
 
-A slightly looser way to check if the graphs are equivalent is via `isomorphic()`. Two graphs are said to be isomorphic if they have the same number of components (vertices and edges) and maintain a one-to-one correspondence between vertices and edges, i.e., they are connected in the same way.
+A slightly looser way to check if the graphs are equivalent is via `isomorphic`. Two graphs are said to be isomorphic if they have the same number of components (vertices and edges) and maintain a one-to-one correspondence between vertices and edges, i.e., they are connected in the same way.
 
 ```{r echo = TRUE}
 isomorphic(graph1,graph2)
 ```
 
-Checking for isomorphism can take a while for large graphs (in this case, the answer can quickly be given by checking the degree sequence of the two graphs). When using `identical_graph`, the two graphs must have the same list of vertices and edges, in exactly the same order, with same directedness, and the two graphs must also have identical graph, vertex and edge attributes.
+Checking for isomorphism can take a while for large graphs (in this case, the answer can quickly be given by checking the degree sequence of the two graphs). `identical_graph` is a stricter criterion than `isomorphic`: the two graphs must have the same list of vertices and edges, in exactly the same order, with same directedness, and the two graphs must also have identical graph, vertex and edge attributes.
 
 ## Setting and retrieving attributes
 
@@ -207,7 +207,7 @@ To demonstrate the use of attributes, let us create a simple social network:
 g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, George-Dennis:Frank, Dennis-Esther)
 ```
 
-Each vertex represents a person, so we want to store ages, genders and type of connection (is_formal refers to whether a connection between one person or another is formal or informal, i.e. colleagues or friends). The \$ operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
+Each vertex represents a person, so we want to store ages, genders and type of connection between two people (`is_formal` refers to whether a connection between one person or another is formal or informal, i.e. colleagues or friends). The `\$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
@@ -226,7 +226,7 @@ g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, Geor
 summary(g)
 ```
 
-To assign or modify an attribute for a single vertex/edge, you can use indexing:
+To assign or modify an attribute for a single vertex/edge:
 
 ```{r echo = TRUE}
 E(g)$is_formal
@@ -253,7 +253,7 @@ To retrieve a dictionary of attributes, you can use `graph_attr`, `vertex_attr`,
 match(c("George"),V(g)$name)
 ```
 
-To assign attributes to a subset of vertices or edges, you can use slicing:
+To assign attributes to a subset of vertices or edges, you can use:
 
 ```{r echo = TRUE}
 V(g)$name[1:3] <- c("Alejandra", "Bruno", "Carmina")
@@ -267,19 +267,13 @@ g <- delete_vertex_attr(g,"gender")
 V(g)$gender
 ```
 
-```{=html}
-<!---
-If I understood the comment correctly, the instruction would be: 
+If you want to save a graph in R with all the attributes use the R's standard function `dput` function and retrieve it later with `dget`. You can also just save the R workspace and restore it later.
 
-
-If you want to save a graph in R with all the attributes use the R's standard `dput()` function and retrieve it later with dget(). You can also just save the R workspace and restore it later.
--->
-```
 ## Structural properties of graphs
 
-Besides the simple graph and attribute manipulation routines described above, igraph provides a large set of functions to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network we built in the previous section.
+`igraph` provides a large set of functions to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network constructed in the previous section.
 
-Probably the simplest property one can think of is the `degree`. The degree of a vertex equals the number of edges adjacent to it. In case of directed networks, we can also define `in-degree` (the number of edges pointing towards the vertex) and `out-degree` (the number of edges originating from the vertex). igraph is able to calculate all of them using a simple syntax:
+Perhaps the simplest property one can think of is the `degree`. The degree of a vertex equals the number of edges adjacent to it. In case of directed networks, we can also define `in-degree` (the number of edges pointing towards the vertex) and `out-degree` (the number of edges originating from the vertex). `igraph` is able to calculate all of them using a simple syntax:
 
 ```{r echo = TRUE}
 degree(g)
@@ -295,11 +289,9 @@ degree(g,7)
 degree(g, v = c(3,4,5))
 ```
 
-This calling convention applies to most of the structural properties igraph can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs. Later in the `next chapter <querying_vertices_and_edges>`, you will learn how to restrict them to exactly the vertices or edges you want.
+A similar syntax is used for most of the structural properties `igraph` can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs. Later in the `next chapter <querying_vertices_and_edges>`, you will learn how to restrict them to exactly the vertices or edges you want.
 
-Note
-
-For some measures, it does not make sense to calculate them only for a few vertices or edges instead of the whole graph, as it would take the same time anyway. In this case, the functions won't accept vertex or edge IDs, but you can still restrict the resulting list later using standard list indexing and slicing operators. One such example is eigenvector centrality (`evcent()`).
+**Note:** For some measures, it does not make sense to calculate them only for a few vertices or edges instead of the whole graph, as it would take the same time anyway. In this case, the functions won't accept vertex or edge IDs, but you can still restrict the resulting list later using standard operations. One such example is eigenvector centrality (`evcent()`).
 
 Besides degree, igraph includes built-in routines to calculate many other centrality properties, including vertex and edge betweenness (`edge_betweenness`) or Google's PageRank (`page_rank`) just to name a few. Here we just illustrate edge betweenness:
 
@@ -334,16 +326,6 @@ Imagine that in a given social network, you would like to find out who has the l
 which.max(degree(g))
 ```
 
-```{=html}
-<!---
-Another way to do it is:
-
-    > V(g)$name[degree(g)==max(degree(g))]
-    [1] "Claire"  
-    
-But this solution was obtained from stackoverflow 
--->
-```
 If the first positional argument is a callable object (i.e., a function or anything that behaves like a function), the object will be called for every vertex that's currently in the sequence. If the function returns `True`, the vertex will be included, otherwise it will be excluded:
 
 ```{r echo = TRUE}
@@ -352,7 +334,7 @@ only_odd_vertices <- which(V(graph)%%2==1)
 length(only_odd_vertices)
 ```
 
-If the first positional argument is an iterable (i.e., a list, a generator or anything that can be iterated over), it *must* return integers and these integers will be considered as indices into the current vertex set (which is *not* necessarily the whole graph). Only those vertices that match the given indices will be included in the filtered vertex set. Floats, strings, invalid vertex IDs will display an error message:
+If the first positional argument is an iterable (i.e., a list), it *must* return integers and these integers will be considered as indices into the current vertex set (which is *not* necessarily the whole graph). Only those vertices that match the given indices will be included in the filtered vertex set. Floats, strings, invalid vertex IDs will display an error message:
 
 ```{r echo = TRUE}
 seq <- V(graph)[2,3,7]
@@ -402,9 +384,9 @@ V(g)$degree[degree(g) == 3]
     V(g)$name[degree(g) == 3]
 ```
 
-There are also a few special structural properties for selecting edges:
+There are also a few special structural properties for selecting edges.
 
--Using `from` or `to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
+Using `from` or `to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
 
 ```{r echo = TRUE, warning = FALSE}
 E(g)[from(3)]
@@ -442,7 +424,7 @@ E(g)[men %--% women]
 
 In many cases we are looking for a single vertex or edge of a graph with some properties, and either we do not care which one of the matches is returned if there are multiple matches, or we know in advance that there will be only one match. A typical example is looking up vertices by their names in the `name` property.
 
-For instance, to look up the vertex corresponding to Claire, one can do this:
+For instance, to look up the vertex corresponding to Carmina, one can do the following:
 
 ```{r echo = TRUE}
 Carmina <- match(c("Carmina"),V(g)$name)
@@ -477,7 +459,7 @@ For example, Carmina (`1, 0, 0, 1, 1, 1, 0`) is directly connected to Alejandra 
 
 ## Layouts and plotting
 
-A graph is an abstract mathematical object without a specific representation in 2D or 3D space. This means that whenever we want to visualise a graph, we have to find a mapping from vertices to coordinates in two- or three-dimensional space first, preferably in a way that is pleasing for the eye. A separate branch of graph theory, namely graph drawing, tries to solve this problem via several graph layout algorithms. igraph implements quite a few layout algorithms and is also able to draw them onto the screen or to a PDF, PNG or SVG file using the [Cairo library](https://www.cairographics.org).
+A graph is an abstract mathematical object without a specific representation in 2D, 3D or any other geometric space. This means that whenever we want to visualise a graph, we have to find a mapping from vertices to coordinates in two- or three-dimensional space first, preferably in a way that is useful and/or pleasing for the eye. A separate branch of graph theory, namely graph drawing, tries to solve this problem via several graph layout algorithms. igraph implements quite a few layout algorithms and is also able to draw them onto the screen or to a PDF, PNG or SVG file using the [Cairo library](https://www.cairographics.org).
 
 ### Layout algorithms
 
@@ -532,9 +514,9 @@ plot(g, layout = layout, main = "Our social network with the Kamada-Kawai layout
 
 This should open an external image viewer showing a visual representation of the network. Remember that the exact placement of nodes may be different on your machine since the layout is not deterministic.
 
-Hmm, this is not too pretty so far. A trivial addition would be to use the names as the vertex labels and to color the vertices according to the gender. Vertex labels are taken from the `label` attribute by default and vertex colors are determined by the `color` attribute. For the first example, it is important to take into account that the attributes that we select as a condition (i.e gender) to select a color are integers and not strings.
+To improve the visuals, a trivial addition would be to use the names as the vertex labels and to color the vertices according to the gender. Vertex labels are taken from the `label` attribute by default and vertex colors are determined by the `color` attribute. For the first example, it is important to take into account that the attributes that we select as a condition (i.e. gender) to select a color are integers and not strings.
 
-So we can simply create these attributes and re-plot the graph:
+So we can simply create these attributes and replot the graph:
 
 ```{r}
 V(g)$gender_num <- c(1,2,1,2,1,2,2)
@@ -543,7 +525,7 @@ V(g)$color <- colors[V(g)$gender_num]
 plot(g, layout = layout, vertex.label.dist=3.5, main = "Our social network - with names as labels and genders as colors")
 ```
 
-Anothers ways to approach this example:
+Another way to approach this example would be the following:
 
 ```{r}
 V(g)$color <- ifelse(V(g)$gender == "m", "red","yellow")
@@ -558,7 +540,7 @@ plot(g, layout= layout, vertex.label.dist=3.5, vertex.color=as.factor(V(g)$gende
 plot(g, layout= layout, vertex.label.dist=3.5, vertex.color=c( "yellow", "red")[1+(V(g)$gender == "f")])
 ```
 
-Instead of specifying the visual properties as vertex and edge attributes, you can also give them as arguments to `plot`. The final plot shows the formal ties with thick lines while informal ones with thin lines:
+Instead of specifying the visual properties as vertex and edge attributes, you can also give them as arguments to `plot`. The following plot shows the formal ties with thick lines while informal ones with thin lines:
 
 ```{r}
 plot(g, layout =layout, vertex.label.dist=3.5, vertex.size = 20, margin = 0.5,
@@ -569,7 +551,7 @@ plot(g, layout =layout, vertex.label.dist=3.5, vertex.size = 20, margin = 0.5,
 
 This latter approach is preferred if you want to keep the properties of the visual representation of your graph separate from the graph itself.
 
-To sum it all up: there are special vertex and edge properties that correspond to the visual representation of the graph. These attributes override the default settings of igraph (i.e color, weight, name, shape,layout,etc.). The following two tables summarise the most frequently used visual attributes for vertices and edges, respectively:
+In summary, there are special vertex and edge properties that correspond to the visual representation of the graph. These attributes override the default settings of igraph (i.e color, weight, name, shape,layout,etc.). The following two tables summarise the most frequently used visual attributes for vertices and edges, respectively:
 
 ### Vertex attributes controlling graph plots
 
@@ -625,7 +607,7 @@ This is a string according to one of the following formats (where *R*, *G* and *
 
 ### Saving plots
 
-igraph can be used to create publication-quality plots. The preferred format is inferred from the extension. igraph can save to anything that is supported by Cairo, including SVG, PDF and PNG files. SVG or PDF files can then later be converted to PostScript (`.ps`) or Encapsulated PostScript (`.eps`) format if you prefer that, while PNG files can be converted to TIF (`.tif`):
+`igraph` can be used to create publication-quality plots. The preferred format is inferred from the file name extension. `igraph` can save to anything that is supported by Cairo, including SVG, PDF and PNG files. SVG or PDF files can then later be converted to PostScript (`.ps`) or Encapsulated PostScript (`.eps`) format if you prefer that, while PNG files can be converted to TIF (`.tif`):
 
 ```{r echo=FALSE,eval=FALSE}
 png("social_network.png", 600, 600) 
@@ -638,8 +620,7 @@ dev.off()
 ```
 
 ## igraph and the outside world
-
-No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. igraph is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The following table summarises the formats igraph can read or write:
+No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. `igraph` is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The following table summarises the formats igraph can read or write:
 
 | Format                                                                    | Short name  | Read function                                                                                                                                                                             | Write function                                      |
 |------------------|------------------|------------------|------------------|
@@ -655,24 +636,19 @@ No graph module would be complete without some kind of import/export functionali
 | Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat)) | `ncol`      | `read_graph(file, format = c("ncol"))`                                                                                                                                                    | `write_graph(graph, file, format = c("ncol"))`     |
 | [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format                         | `pajek`     | `read_graph(file, format = c("pajek"))`                                                                                                                                                   | `write_graph(graph, file, format = c("pajek"))`    |
 
-As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must use the GraphML read function from the table above (make sure you use the appropriate path to the downloaded file):
+As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must use the GraphML read function from the table above (make sure you use the appropriate path to the downloaded file).
 
-```{=html}
-<!---
-This document (</assets/zachary.zip>) must be added in order to be able to carry out the example.
-```
-```{r echo=FALSE,eval=FALSE, error=FALSE}
-#karate <- read_graph("zachary.graphml", format =c("graphml"))
-#summary(karate)
--->
+```{r echo=TRUE,eval=FALSE, error=FALSE}
+karate <- read_graph("zachary.graphml", format =c("graphml"))
+summary(karate)
 ```
 
-Note
-
-Most of the formats have their own limitations; for instance, not all of them can store attributes. Your best bet is probably GraphML or GML if you want to save igraph graphs in a format that can be read from an external package and you want to preserve numeric and string attributes. Edge list and NCOL is also fine if you don't have attributes (NCOL supports vertex names and edge weights, though).
+**Note:** Each file format has its own limitations. For instance, not all of them can store attributes. Your best bet is probably GraphML or GML if you want to save igraph graphs in a format that can be read from an external package and you want to preserve numeric and string attributes. Edge list and NCOL is also fine if you don't have attributes (NCOL supports vertex names and edge weights, though).
 
 There are two helper functions as well: `read` is a generic entry point for read functions which tries to infer the appropriate format from the file extension. `write` is the opposite of `read`: it lets you save a graph where the preferred format is again inferred from the extension. The format detection of `read` and `write` can be overridden by the `format` keyword argument which accepts the short names of the formats from the above table:
 
 ## Where to go next
 
-This tutorial was only scratching the surface of what igraph can do. My long-term plans are to extend this tutorial into a proper manual-style documentation to igraph in the next chapters. Should you get stuck, try asking in our [Discourse group](https://igraph.discourse.group) first - maybe there is someone out there who can help you out immediately.
+This tutorial is a brief introduction to `igraph` in R. We sincerely hope you enjoyed reading it and that it will be useful for your own network analyses.
+
+For a detailed description of specific functions, see [https://igraph.org/r/html/latest/](https://igraph.org/r/html/latest/). For questions on how to use `igraph`, please visit our [Forum](https://igraph.discourse.group). To report a bug, open a [Github issue](https://github.com/igraph/rigraph/issues). Please do not ask usage questions on Github directly as it's meant for developers rather than users.
