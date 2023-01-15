@@ -2,7 +2,7 @@
 
 We checked 755 reverse dependencies (753 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 19 new problems
+ * We saw 10 new problems
  * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
@@ -10,43 +10,16 @@ Issues with CRAN packages are summarised below.
 ### New problems
 (This reports the first line of each new failure)
 
-* backbone
-  checking tests ... ERROR
-
-* clustAnalytics
-  checking re-building of vignette outputs ... WARNING
-
-* deepdep
-  checking tests ... ERROR
-
-* Diderot
-  checking examples ... ERROR
-
 * egor
-  checking tests ... ERROR
-
-* gemtc
-  checking examples ... ERROR
   checking tests ... ERROR
 
 * gRbase
   checking examples ... ERROR
 
-* GREMLINS
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
-
-* incidentally
-  checking re-building of vignette outputs ... WARNING
-
 * metanetwork
   checking tests ... ERROR
 
-* mstknnclust
-  checking re-building of vignette outputs ... WARNING
-
 * nat
-  checking examples ... ERROR
   checking tests ... ERROR
 
 * netmeta
@@ -68,9 +41,6 @@ Issues with CRAN packages are summarised below.
 
 * sfnetworks
   checking tests ... ERROR
-
-* signnet
-  checking examples ... ERROR
 
 ### Failed to check
 
