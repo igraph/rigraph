@@ -174,11 +174,12 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   } else {
     myattr <-
       .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (!missing(index)) {
+    if (is_complete_iterator(index)) {
+      myattr
+    } else {
       index <- as.igraph.vs(graph, index)
-      myattr <- myattr[index]
+      myattr[index]
     }
-    myattr
   }
 }
 
