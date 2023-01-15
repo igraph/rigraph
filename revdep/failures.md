@@ -204,11 +204,11 @@ Status: 1 ERROR
 
 <details>
 
-* Version: 1.1.0
+* Version: 1.2.1
 * GitHub: https://github.com/kharchenkolab/numbat
 * Source code: https://github.com/cran/numbat
-* Date/Publication: 2022-11-29 18:30:02 UTC
-* Number of recursive dependencies: 183
+* Date/Publication: 2023-01-11 00:20:02 UTC
+* Number of recursive dependencies: 132
 
 Run `revdepcheck::cloud_details(, "numbat")` for more info
 
@@ -225,7 +225,7 @@ Run `revdepcheck::cloud_details(, "numbat")` for more info
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘numbat/DESCRIPTION’ ... OK
-* this is package ‘numbat’ version ‘1.1.0’
+* this is package ‘numbat’ version ‘1.2.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -250,7 +250,7 @@ Status: 1 ERROR
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘numbat/DESCRIPTION’ ... OK
-* this is package ‘numbat’ version ‘1.1.0’
+* this is package ‘numbat’ version ‘1.2.1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
