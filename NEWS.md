@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9096
+
+- Merge remote-tracking branch 'origin/dev' into adrian.
+
+
+
 # igraph 1.3.5.9095
 
 ## Chore
