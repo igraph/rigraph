@@ -211,3 +211,21 @@ test_that("attribute combinations handle errors correctly", {
   expect_error(as.undirected(g, edge.attr.comb = list(weight = "sum")), "invalid 'type'")
   expect_error(as.undirected(g, edge.attr.comb = list(weight = sum)), "invalid 'type'")
 })
+
+test_that("can change type of attributes (#466)", {
+  g <- make_ring(10)
+
+  V(g)$foo <- 1
+  expect_equal(V(g)$foo, rep(1, 10))
+  V(g)$foo <- "a"
+  expect_equal(V(g)$foo, rep("a", 10))
+  V(g)$foo <- 2
+  expect_equal(V(g)$foo, rep(2, 10))
+
+  E(g)$foo <- 1
+  expect_equal(E(g)$foo, rep(1, 10))
+  E(g)$foo <- "a"
+  expect_equal(E(g)$foo, rep("a", 10))
+  E(g)$foo <- 2
+  expect_equal(E(g)$foo, rep(2, 10))
+})
