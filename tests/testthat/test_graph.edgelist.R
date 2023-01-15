@@ -1,4 +1,6 @@
 test_that("graph_from_edgelist works", {
+  set.seed(20230115)
+
   g <- sample_gnp(50, 5 / 50)
   el <- as_edgelist(g)
   g2 <- graph_from_edgelist(el, directed = FALSE)
