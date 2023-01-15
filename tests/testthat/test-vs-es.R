@@ -141,8 +141,6 @@ test_that("printing connected vs/es works", {
     vs[numeric()]
   })
 
-  skip_on_os("mac")
-  skip_if(identical(Sys.getenv("R_COVR"), "true"))
   expect_snapshot({
     es[numeric()]
   })
@@ -164,7 +162,6 @@ test_that("printing named connected vs/es works", {
     vs[numeric()]
   })
 
-  skip_if(identical(Sys.getenv("R_COVR"), "true"))
   expect_snapshot({
     es[numeric()]
   })
