@@ -275,7 +275,7 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
         stop("strict recycling (1)")
       }
     } else {
-      value_in <- rep(value, length.out = length(index))
+      value_in <- unname(rep(value, length.out = length(index)))
       # Trigger recycling warning
       value_in[seq_along(value_in)] <- value
     }
@@ -479,7 +479,7 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
         stop("strict recycling (2)")
       }
     } else {
-      value_in <- rep(value, length.out = length(index))
+      value_in <- unname(rep(value, length.out = length(index)))
       # Trigger recycling warning
       value_in[seq_along(value_in)] <- value
     }
