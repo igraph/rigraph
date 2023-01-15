@@ -35,7 +35,7 @@
 
 
 
-ATTRIBUTE_STRICT_RECYCLING <- TRUE
+ATTRIBUTE_STRICT_RECYCLING <- FALSE
 
 #' Graph attributes of a graph
 #'
