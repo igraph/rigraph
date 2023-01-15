@@ -443,26 +443,53 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' g
 #' plot(g)
 set_edge_attr <- function(graph, name, index = E(graph), value) {
-  i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+  if (is_complete_iterator(index)) {
+    i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE)
+  } else {
+    i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+  }
 }
 
-i_set_edge_attr <- function(graph, name, index = E(graph), value,
-                            check = TRUE) {
+i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+  complete <- is_complete_iterator(index)
   single <- is_single_index(index)
   name <- as.character(name)
-  if (!missing(index) && check) index <- as.igraph.es(graph, index)
-  ec <- ecount(graph)
+  if (!missing(index) && check) {
+    index <- as.igraph.es(graph, index)
+  }
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+
+  if (!(name %in% names(eattrs))) {
+    eattrs[[name]] <- value[rep.int(NA_integer_, ecount(graph))]
+  }
+
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
-    eattrs[[name]][index] <- value
+    if (ATTRIBUTE_STRICT_RECYCLING) {
+      if (length(value) == 1) {
+        value_in <- rep(value, length(index))
+      } else if (length(value) == length(index)) {
+        value_in <- value
+      } else {
+        stop("strict recycling (2)")
+      }
+    } else {
+      value_in <- rep(value, length.out = length(index))
+      # Trigger recycling warning
+      value_in[seq_along(value_in)] <- value
+    }
+
+    if (complete) {
+      eattrs[[name]] <- value_in
+    } else {
+      eattrs[[name]][index] <- value_in
+    }
   }
-  length(eattrs[[name]]) <- ec
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattrs)
 }
