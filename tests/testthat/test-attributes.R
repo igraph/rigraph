@@ -229,3 +229,19 @@ test_that("can change type of attributes (#466)", {
   E(g)$foo <- 2
   expect_equal(E(g)$foo, rep(2, 10))
 })
+
+test_that("setting attributes strips names (#466)", {
+  g <- make_ring(10)
+
+  V(g)$foo <- stats::setNames(1:10, letters[1:10])
+  expect_identical(V(g)$foo, 1:10)
+
+  E(g)$foo <- stats::setNames(1:10, letters[1:10])
+  expect_identical(E(g)$foo, 1:10)
+
+  V(g)$bar <- c(a = 1)
+  expect_identical(V(g)$bar, rep(1, 10))
+
+  E(g)$bar <- c(a = 1)
+  expect_identical(E(g)$bar, rep(1, 10))
+})
