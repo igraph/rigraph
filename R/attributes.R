@@ -259,7 +259,7 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
-  if (!(name %in% names(vattrs))) {
+  if (!complete && !(name %in% names(vattrs))) {
     vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
   }
 
@@ -463,7 +463,7 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
 
-  if (!(name %in% names(eattrs))) {
+  if (!complete && !(name %in% names(eattrs))) {
     eattrs[[name]] <- value[rep.int(NA_integer_, ecount(graph))]
   }
 
