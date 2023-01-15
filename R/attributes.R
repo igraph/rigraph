@@ -355,7 +355,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
   } else {
     name <- as.character(name)
     myattr <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)[[name]]
-    if (is.null(index)) {
+    if (is_complete_iterator(index)) {
       myattr
     } else {
       index <- as.igraph.es(graph, index)
