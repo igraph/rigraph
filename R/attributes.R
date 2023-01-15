@@ -34,6 +34,9 @@
 ##
 
 
+
+ATTRIBUTE_STRICT_RECYCLING <- FALSE
+
 #' Graph attributes of a graph
 #'
 #' @param graph Input graph.
@@ -236,31 +239,53 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' g
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
-  i_set_vertex_attr(
-    graph = graph, name = name, index = index,
-    value = value
-  )
+  if (is_complete_iterator(index)) {
+    i_set_vertex_attr(graph = graph, name = name, value = value, check = FALSE)
+  } else {
+    i_set_vertex_attr(graph = graph, name = name, index = index, value = value)
+  }
 }
 
-i_set_vertex_attr <- function(graph, name, index = V(graph), value,
-                              check = TRUE) {
+i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
   single <- is_single_index(index)
+  complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
     index <- as.igraph.vs(graph, index)
   }
   name <- as.character(name)
-  vc <- vcount(graph)
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
+
+  if (!(name %in% names(vattrs))) {
+    vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
+  }
+
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
-    vattrs[[name]][index] <- value
+    if (ATTRIBUTE_STRICT_RECYCLING) {
+      if (length(value) == 1) {
+        value_in <- rep(value, length(index))
+      } else if (length(value) == length(index)) {
+        value_in <- value
+      } else {
+        stop("strict recycling (1)")
+      }
+    } else {
+      value_in <- rep(value, length.out = length(index))
+      # Trigger recycling warning
+      value_in[seq_along(value_in)] <- value
+    }
+
+    if (complete) {
+      vattrs[[name]] <- value_in
+    } else {
+      vattrs[[name]][index] <- value_in
+    }
   }
-  length(vattrs[[name]]) <- vc
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattrs)
 }
