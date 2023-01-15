@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9095
+
+## Chore
+
+- Stabilize vs-es tests (#631).
+
+
 # igraph 1.3.5.9094
 
 ## Documentation
