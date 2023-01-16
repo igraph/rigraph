@@ -161,7 +161,8 @@ plot.igraph <- function(x,
   if (!add) {
     plot(0, 0,
       type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim,
-      axes = axes, frame.plot = frame.plot, asp = asp, main = main, sub = sub
+      axes = axes, frame.plot = ifelse(is.null(frame.plot), axes, frame.plot),
+      asp = asp, main = main, sub = sub
     )
   }
 
