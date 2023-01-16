@@ -58,8 +58,13 @@ default value is \code{TRUE}.} }
 
 \seealso{
 \code{\link[=write_graph]{write_graph()}}
+
+Other foreign: 
+\code{\link{graph_from_graphdb}()},
+\code{\link{write_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{foreign}
 \keyword{graphs}

@@ -88,4 +88,5 @@ graphs
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{incidence}
 \keyword{graphs}

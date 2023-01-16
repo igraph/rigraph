@@ -62,4 +62,16 @@ check.sep(mw5)
 \seealso{
 \code{\link[=min_separators]{min_separators()}} lists all vertex separator of minimum
 size.
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
 }
+\concept{flow}

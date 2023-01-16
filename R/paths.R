@@ -53,6 +53,7 @@
 #' all_simple_paths(g, 1, 5)
 #' all_simple_paths(g, 1, c(3, 5))
 #'
+#' @family paths
 #' @export
 all_simple_paths <- function(graph, from, to = V(graph),
                              mode = c("out", "in", "all", "total"),
@@ -105,6 +106,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' is_dag(g)
 #' g2 <- g + edge(5, 1)
 #' is_dag(g2)
+#' @family paths
 #' @export
 is_dag <- is_dag
 
@@ -187,6 +189,7 @@ max_cardinality <- max_cardinality
 #' @examples
 #' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
+#' @family paths
 #' @export
 eccentricity <- eccentricity
 
@@ -221,11 +224,13 @@ eccentricity <- eccentricity
 #' g <- make_star(10, mode = "undirected")
 #' eccentricity(g)
 #' radius(g)
+#' @family paths
 #' @export
 radius <- radius
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
+#' @family paths
 #' @export
 distance_table <- distance_table

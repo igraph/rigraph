@@ -40,4 +40,5 @@ if (interactive()) {
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{demo}
 \keyword{graphs}

@@ -45,4 +45,11 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 \code{\link[=eccentricity]{eccentricity()}} for the underlying
 calculations, code{\link{distances}} for general shortest path
 calculations.
+
+Other paths: 
+\code{\link{all_simple_paths}()},
+\code{\link{distance_table}()},
+\code{\link{eccentricity}()},
+\code{\link{is_dag}()}
 }
+\concept{paths}

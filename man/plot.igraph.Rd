@@ -89,8 +89,15 @@ plot(g, layout = layout_with_kk, vertex.color = "green")
 \link{igraph.plotting} for the detailed description of the plotting
 parameters and \code{\link[=tkplot]{tkplot()}} and \code{\link[=rglplot]{rglplot()}} for other
 graph plotting functions.
+
+Other plot: 
+\code{\link{rglplot}()}
+
+Other plot: 
+\code{\link{rglplot}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{plot}
 \keyword{graphs}

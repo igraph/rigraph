@@ -129,8 +129,30 @@ Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_wal
 \code{\link[=cluster_infomap]{cluster_infomap()}}
 \code{\link[=cluster_optimal]{cluster_optimal()}}
 \code{\link[=cluster_walktrap]{cluster_walktrap()}}
+
+Other community: 
+\code{\link{as_membership}()},
+\code{\link{cluster_edge_betweenness}()},
+\code{\link{cluster_fast_greedy}()},
+\code{\link{cluster_fluid_communities}()},
+\code{\link{cluster_infomap}()},
+\code{\link{cluster_label_prop}()},
+\code{\link{cluster_leading_eigen}()},
+\code{\link{cluster_louvain}()},
+\code{\link{cluster_optimal}()},
+\code{\link{cluster_spinglass}()},
+\code{\link{cluster_walktrap}()},
+\code{\link{compare}()},
+\code{\link{contract}()},
+\code{\link{groups}()},
+\code{\link{make_clusters}()},
+\code{\link{membership}()},
+\code{\link{modularity.igraph}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{split_join_distance}()}
 }
 \author{
 Vincent Traag
 }
+\concept{community}
 \keyword{graphs}

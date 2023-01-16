@@ -65,7 +65,20 @@ Thomas Lengauer, Robert Endre Tarjan: A fast algorithm for
 finding dominators in a flowgraph, \emph{ACM Transactions on Programming
 Languages and Systems (TOPLAS)} I/1, 121--141, 1979.
 }
+\seealso{
+Other flow: 
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

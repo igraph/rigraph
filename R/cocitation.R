@@ -47,6 +47,7 @@
 #'   `vcount(graph)` columns. Element `(i,j)` contains the cocitation
 #'   or bibliographic coupling for vertices `v[i]` and `j`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family cocitation
 #' @export
 #' @keywords graphs
 #' @examples
@@ -69,6 +70,7 @@ cocitation <- function(graph, v = V(graph)) {
   res
 }
 
+#' @family cocitation
 #' @export
 bibcoupling <- function(graph, v = V(graph)) {
   if (!is_igraph(graph)) {

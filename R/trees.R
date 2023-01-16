@@ -32,6 +32,7 @@
 #' is_tree(g)
 #' is_tree(g, details = TRUE)
 #'
+#' @family trees
 #' @export
 is_tree <- is_tree
 
@@ -57,6 +58,7 @@ is_tree <- is_tree
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
 #'
+#' @family trees
 #' @export
 to_prufer <- to_prufer
 
@@ -84,5 +86,6 @@ to_prufer <- to_prufer
 #' edges <- sample_spanning_tree(g)
 #' forest <- subgraph.edges(g, edges)
 #'
+#' @family trees
 #' @export
 sample_spanning_tree <- sample_spanning_tree

@@ -107,6 +107,7 @@
 #'
 #' Aaron Clauset, Cosma R .Shalizi and Mark E.J. Newman: Power-law
 #' distributions in empirical data. SIAM Review 51(4):661-703, 2009.
+#' @family fit
 #' @export
 #' @keywords graphs
 #' @examples

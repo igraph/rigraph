@@ -40,6 +40,7 @@
 #' @return A character scalar.
 #'
 #' @seealso upgrade_graph to convert the data format of a graph.
+#' @family versions
 #' @export
 graph_version <- function(graph) {
   if (missing(graph)) {
@@ -68,6 +69,7 @@ graph_version <- function(graph) {
 #'
 #' @seealso graph_version to check the current data format version
 #' or the version of a graph.
+#' @family versions
 #' @export
 upgrade_graph <- function(graph) {
   stopifnot(is_igraph(graph))

@@ -43,6 +43,7 @@
 #' @references Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 #'   *Social Networks*, 25(3):211-230, 2003.
 #' @keywords graphs
+#' @family similarity
 #' @export
 #' @examples
 #'

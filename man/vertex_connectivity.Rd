@@ -95,8 +95,31 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
 \seealso{
 \code{\link[=max_flow]{max_flow()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
 \code{\link[=edge_disjoint_paths]{edge_disjoint_paths()}}, \code{\link[=adhesion]{adhesion()}}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

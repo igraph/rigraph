@@ -106,6 +106,7 @@
 #'
 #' de Solla Price, D. J. 1965. Networks of Scientific Papers *Science*,
 #' 149 510--515.
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -191,6 +192,7 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
 #' @rdname sample_pa
 #' @param ... Passed to `sample_pa()`.
+#' @family games
 #' @export
 pa <- function(...) constructor_spec(sample_pa, ...)
 
@@ -218,6 +220,7 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 #' @seealso [sample_gnm()], [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -248,6 +251,7 @@ sample_gnp <- function(n, p, directed = FALSE, loops = FALSE) {
 
 #' @rdname sample_gnp
 #' @param ... Passed to `sample_gnp()`.
+#' @family games
 #' @export
 gnp <- function(...) constructor_spec(sample_gnp, ...)
 
@@ -275,6 +279,7 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 #' @seealso [sample_gnp()], [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -305,6 +310,7 @@ sample_gnm <- function(n, m, directed = FALSE, loops = FALSE) {
 
 #' @rdname sample_gnm
 #' @param ... Passed to `sample_gnm()`.
+#' @family games
 #' @export
 gnm <- function(...) constructor_spec(sample_gnm, ...)
 
@@ -346,6 +352,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @seealso [sample_pa()]
 #' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -381,6 +388,7 @@ erdos.renyi.game <- function(n, p.or.m, type = c("gnp", "gnm"),
   res
 }
 
+#' @family games
 #' @export
 random.graph.game <- erdos.renyi.game
 
@@ -436,6 +444,7 @@ random.graph.game <- erdos.renyi.game
 #' @seealso [sample_gnp()], [sample_pa()],
 #' [simplify()] to get rid of the multiple and/or loops edges,
 #' [realize_degseq()] for a deterministic variant.
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -499,6 +508,7 @@ sample_degseq <- function(out.deg, in.deg = NULL,
 #' @param deterministic  Whether the construction should be deterministic
 #' @param ... Passed to `realize_degseq()` if \sQuote{deterministic} is true,
 #'   or to `sample_degseq()` otherwise.
+#' @family games
 #' @export
 degseq <- function(..., deterministic = FALSE) {
   constructor_spec(
@@ -527,6 +537,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_pa()], [sample_gnp()]
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -550,6 +561,7 @@ sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
 
 #' @rdname sample_growing
 #' @param ... Passed to `sample_growing()`.
+#' @family games
 #' @export
 growing <- function(...) constructor_spec(sample_growing, ...)
 
@@ -640,6 +652,7 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_pa()], [sample_gnp()]
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -749,6 +762,7 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
 
 #' @rdname sample_pa_age
 #' @param ... Passed to `sample_pa_age()`.
+#' @family games
 #' @export
 pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 
@@ -786,6 +800,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -820,10 +835,12 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
 #' @rdname sample_traits_callaway
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
+#' @family games
 #' @export
 traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 
 #' @rdname sample_traits_callaway
+#' @family games
 #' @export
 sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
                           pref.matrix = matrix(1, types, types),
@@ -846,6 +863,7 @@ sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
 }
 
 #' @rdname sample_traits_callaway
+#' @family games
 #' @export
 traits <- function(...) constructor_spec(sample_traits, ...)
 
@@ -874,6 +892,7 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, first version was
 #' written by Keith Briggs (<http://keithbriggs.info/>).
 #' @seealso [sample_gnp()]
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -901,6 +920,7 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
 
 #' @rdname sample_grg
 #' @param ... Passed to `sample_grg()`.
+#' @family games
 #' @export
 grg <- function(...) constructor_spec(sample_grg, ...)
 
@@ -949,6 +969,7 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @seealso [sample_traits()].
 #' [sample_traits_callaway()]
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1000,10 +1021,12 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
 #' @rdname sample_pref
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
+#' @family games
 #' @export
 pref <- function(...) constructor_spec(sample_pref, ...)
 
 #' @rdname sample_pref
+#' @family games
 #' @export
 sample_asym_pref <- function(nodes, types,
                              type.dist.matrix = matrix(1, types, types),
@@ -1038,6 +1061,7 @@ sample_asym_pref <- function(nodes, types,
 }
 
 #' @rdname sample_pref
+#' @family games
 #' @export
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
@@ -1045,6 +1069,7 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
 
 #' @rdname ego
+#' @family games
 #' @export
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
@@ -1092,6 +1117,7 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' @seealso [make_lattice()], [rewire()]
 #' @references Duncan J Watts and Steven H Strogatz: Collective dynamics of
 #' \sQuote{small world} networks, Nature 393, 440-442, 1998.
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1122,6 +1148,7 @@ sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
 
 #' @rdname sample_smallworld
 #' @param ... Passed to `sample_smallworld()`.
+#' @family games
 #' @export
 smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 
@@ -1156,6 +1183,7 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' @return A new graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
+#' @family games
 #' @export
 sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins + 1))^-3,
                             directed = TRUE) {
@@ -1175,10 +1203,12 @@ sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins
 
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
+#' @family games
 #' @export
 last_cit <- function(...) constructor_spec(sample_last_cit, ...)
 
 #' @rdname sample_last_cit
+#' @family games
 #' @export
 sample_cit_types <- function(n, edges = 1, types = rep(0, n),
                              pref = rep(1, length(types)),
@@ -1199,10 +1229,12 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
+#' @family games
 #' @export
 cit_types <- function(...) constructor_spec(sample_cit_types, ...)
 
 #' @rdname sample_last_cit
+#' @family games
 #' @export
 sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
                                  pref = matrix(1,
@@ -1228,6 +1260,7 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
+#' @family games
 #' @export
 cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
@@ -1265,6 +1298,7 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' @return A bipartite igraph graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_gnp()] and [sample_gnm()] for the unipartite version.
+#' @family games
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1330,6 +1364,7 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
 
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
+#' @family games
 #' @export
 bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 
@@ -1367,11 +1402,13 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' pm <- cbind(c(.1, .001), c(.001, .05))
 #' g <- sample_sbm(1000, pref.matrix = pm, block.sizes = c(300, 700))
 #' g
+#' @family games
 #' @export
 sample_sbm <- sample_sbm
 
 #' @rdname sample_sbm
 #' @param ... Passed to `sample_sbm()`.
+#' @family games
 #' @export
 sbm <- function(...) constructor_spec(sample_sbm, ...)
 
@@ -1416,6 +1453,7 @@ sbm <- function(...) constructor_spec(sample_sbm, ...)
 #' if (require(Matrix)) {
 #'   image(g[])
 #' }
+#' @family games
 #' @export
 sample_hierarchical_sbm <- function(n, m, rho, C, p) {
   mlen <- length(m)
@@ -1448,6 +1486,7 @@ sample_hierarchical_sbm <- function(n, m, rho, C, p) {
 
 #' @rdname sample_hierarchical_sbm
 #' @param ... Passed to `sample_hierarchical_sbm()`.
+#' @family games
 #' @export
 hierarchical_sbm <- function(...) {
   constructor_spec(sample_hierarchical_sbm, ...)
@@ -1494,11 +1533,13 @@ hierarchical_sbm <- function(...) {
 #' lpvs2 <- sample_sphere_surface(dim = 5, n = 20)
 #' g2 <- sample_dot_product(lpvs2)
 #' g2
+#' @family games
 #' @export
 sample_dot_product <- sample_dot_product
 
 #' @rdname sample_dot_product
 #' @param ... Passed to `sample_dot_product()`.
+#' @family games
 #' @export
 dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 
@@ -1525,6 +1566,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @author Samuel Thiriot
 #' @seealso [sample_gnp()]
 #' @keywords graphs
+#' @family games
 #' @export
 sample_islands <- sample_islands
 
@@ -1563,6 +1605,7 @@ sample_islands <- sample_islands
 #'
 #' layout(matrix(1:9, nrow = 3, byrow = TRUE))
 #' sapply(k10, plot, vertex.label = NA)
+#' @family games
 #' @export
 sample_k_regular <- sample_k_regular
 

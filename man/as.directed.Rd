@@ -100,8 +100,33 @@ print(ug4, e = TRUE)
 \seealso{
 \code{\link[=simplify]{simplify()}} for removing multiple and/or loop edges from
 a graph.
+
+Other conversion: 
+\code{\link{as.matrix.igraph}()},
+\code{\link{as_adj_list}()},
+\code{\link{as_adjacency_matrix}()},
+\code{\link{as_data_frame}()},
+\code{\link{as_edgelist}()},
+\code{\link{as_graphnel}()},
+\code{\link{as_incidence_matrix}()},
+\code{\link{as_long_data_frame}()},
+\code{\link{graph_from_adj_list}()},
+\code{\link{graph_from_graphnel}()}
+
+Other conversion: 
+\code{\link{as.matrix.igraph}()},
+\code{\link{as_adj_list}()},
+\code{\link{as_adjacency_matrix}()},
+\code{\link{as_data_frame}()},
+\code{\link{as_edgelist}()},
+\code{\link{as_graphnel}()},
+\code{\link{as_incidence_matrix}()},
+\code{\link{as_long_data_frame}()},
+\code{\link{graph_from_adj_list}()},
+\code{\link{graph_from_graphnel}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{conversion}
 \keyword{graphs}

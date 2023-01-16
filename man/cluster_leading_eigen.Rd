@@ -121,8 +121,30 @@ of matrices, Physical Review E 74 036104, 2006.
 \code{\link[=modularity]{modularity()}}, \code{\link[=cluster_walktrap]{cluster_walktrap()}},
 \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
 \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
+
+Other community: 
+\code{\link{as_membership}()},
+\code{\link{cluster_edge_betweenness}()},
+\code{\link{cluster_fast_greedy}()},
+\code{\link{cluster_fluid_communities}()},
+\code{\link{cluster_infomap}()},
+\code{\link{cluster_label_prop}()},
+\code{\link{cluster_leiden}()},
+\code{\link{cluster_louvain}()},
+\code{\link{cluster_optimal}()},
+\code{\link{cluster_spinglass}()},
+\code{\link{cluster_walktrap}()},
+\code{\link{compare}()},
+\code{\link{contract}()},
+\code{\link{groups}()},
+\code{\link{make_clusters}()},
+\code{\link{membership}()},
+\code{\link{modularity.igraph}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{split_join_distance}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{community}
 \keyword{graphs}
