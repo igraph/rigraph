@@ -1,4 +1,4 @@
-AC_INIT(igraph, v1.3.5.9095.9004, ntamas@gmail.com)
+AC_INIT(igraph)
 AC_CONFIG_SRCDIR(src/rinterface.c)
 AC_CONFIG_HEADERS(src/config.h)
 
@@ -178,4 +178,3 @@ echo "    CXX=${CXX}"
 echo "    CXXFLAGS=${CXXFLAGS}"
 echo "    LDFLAGS=${LDFLAGS}"
 echo "    LIBS=${LIBS}"
-

@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9096
+
+- Merge pull request #634 from igraph/b-test-order.
+
+Fix test order
+
+- Merge pull request #632 from igraph/b-brittle-eigen-test.
+
+Fix brittle test
+
+
 # igraph 1.3.5.9095
 
 ## Chore
