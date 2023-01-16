@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -34,6 +34,10 @@
 /* C LALR(1) parser skeleton written by Richard Stallman, by
    simplifying the original so-called "semantic" parser.  */
 
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
 /* All symbols defined below should begin with yy or YY, to avoid
    infringing on user name space.  This should be done even for local
    variables, as they might otherwise be expanded by user macros.
@@ -41,14 +45,11 @@
    define necessary library symbols; they are noted "INFRINGES ON
    USER NAME SPACE" below.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* Identify Bison output, and Bison version.  */
+#define YYBISON 30802
 
-/* Identify Bison output.  */
-#define YYBISON 1
-
-/* Bison version.  */
-#define YYBISON_VERSION "3.5.1"
+/* Bison version string.  */
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -153,7 +154,7 @@ extern long int igraph_i_pajek_actedge;
 #define scanner context->scanner
 
 
-#line 157 "yy.tab.c"
+#line 158 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -176,124 +177,132 @@ extern long int igraph_i_pajek_actedge;
 #  endif
 # endif
 
-/* Enabling verbose error messages.  */
-#ifdef YYERROR_VERBOSE
-# undef YYERROR_VERBOSE
-# define YYERROR_VERBOSE 1
-#else
-# define YYERROR_VERBOSE 1
-#endif
-
-/* Use api.header.include to #include this header
-   instead of duplicating it here.  */
-#ifndef YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
-# define YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int igraph_pajek_yydebug;
-#endif
-
-/* Token type.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    END = 0,
-    NEWLINE = 258,
-    NUM = 259,
-    ALNUM = 260,
-    QSTR = 261,
-    PSTR = 262,
-    NETWORKLINE = 263,
-    VERTICESLINE = 264,
-    ARCSLINE = 265,
-    EDGESLINE = 266,
-    ARCSLISTLINE = 267,
-    EDGESLISTLINE = 268,
-    MATRIXLINE = 269,
-    ERROR = 270,
-    VP_X_FACT = 271,
-    VP_Y_FACT = 272,
-    VP_IC = 273,
-    VP_BC = 274,
-    VP_LC = 275,
-    VP_LR = 276,
-    VP_LPHI = 277,
-    VP_BW = 278,
-    VP_FOS = 279,
-    VP_PHI = 280,
-    VP_R = 281,
-    VP_Q = 282,
-    VP_LA = 283,
-    VP_FONT = 284,
-    VP_URL = 285,
-    VP_SIZE = 286,
-    EP_C = 287,
-    EP_S = 288,
-    EP_A = 289,
-    EP_W = 290,
-    EP_H1 = 291,
-    EP_H2 = 292,
-    EP_A1 = 293,
-    EP_A2 = 294,
-    EP_K1 = 295,
-    EP_K2 = 296,
-    EP_AP = 297,
-    EP_P = 298,
-    EP_L = 299,
-    EP_LP = 300,
-    EP_LR = 301,
-    EP_LPHI = 302,
-    EP_LC = 303,
-    EP_LA = 304,
-    EP_SIZE = 305,
-    EP_FOS = 306
-  };
-#endif
-
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
+#include "io/pajek-parser.h"
+/* Symbol kind.  */
+enum yysymbol_kind_t
 {
-#line 115 "src/core/io/pajek-parser.y"
-
-  long int intnum;
-  double   realnum;
-  struct {
-    char *str;
-    int len;
-  } string;
-
-#line 271 "yy.tab.c"
-
+  YYSYMBOL_YYEMPTY = -2,
+  YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
+  YYSYMBOL_YYerror = 1,                    /* error  */
+  YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
+  YYSYMBOL_NEWLINE = 3,                    /* NEWLINE  */
+  YYSYMBOL_NUM = 4,                        /* NUM  */
+  YYSYMBOL_ALNUM = 5,                      /* ALNUM  */
+  YYSYMBOL_QSTR = 6,                       /* QSTR  */
+  YYSYMBOL_PSTR = 7,                       /* PSTR  */
+  YYSYMBOL_NETWORKLINE = 8,                /* NETWORKLINE  */
+  YYSYMBOL_VERTICESLINE = 9,               /* VERTICESLINE  */
+  YYSYMBOL_ARCSLINE = 10,                  /* ARCSLINE  */
+  YYSYMBOL_EDGESLINE = 11,                 /* EDGESLINE  */
+  YYSYMBOL_ARCSLISTLINE = 12,              /* ARCSLISTLINE  */
+  YYSYMBOL_EDGESLISTLINE = 13,             /* EDGESLISTLINE  */
+  YYSYMBOL_MATRIXLINE = 14,                /* MATRIXLINE  */
+  YYSYMBOL_ERROR = 15,                     /* ERROR  */
+  YYSYMBOL_VP_X_FACT = 16,                 /* VP_X_FACT  */
+  YYSYMBOL_VP_Y_FACT = 17,                 /* VP_Y_FACT  */
+  YYSYMBOL_VP_IC = 18,                     /* VP_IC  */
+  YYSYMBOL_VP_BC = 19,                     /* VP_BC  */
+  YYSYMBOL_VP_LC = 20,                     /* VP_LC  */
+  YYSYMBOL_VP_LR = 21,                     /* VP_LR  */
+  YYSYMBOL_VP_LPHI = 22,                   /* VP_LPHI  */
+  YYSYMBOL_VP_BW = 23,                     /* VP_BW  */
+  YYSYMBOL_VP_FOS = 24,                    /* VP_FOS  */
+  YYSYMBOL_VP_PHI = 25,                    /* VP_PHI  */
+  YYSYMBOL_VP_R = 26,                      /* VP_R  */
+  YYSYMBOL_VP_Q = 27,                      /* VP_Q  */
+  YYSYMBOL_VP_LA = 28,                     /* VP_LA  */
+  YYSYMBOL_VP_FONT = 29,                   /* VP_FONT  */
+  YYSYMBOL_VP_URL = 30,                    /* VP_URL  */
+  YYSYMBOL_VP_SIZE = 31,                   /* VP_SIZE  */
+  YYSYMBOL_EP_C = 32,                      /* EP_C  */
+  YYSYMBOL_EP_S = 33,                      /* EP_S  */
+  YYSYMBOL_EP_A = 34,                      /* EP_A  */
+  YYSYMBOL_EP_W = 35,                      /* EP_W  */
+  YYSYMBOL_EP_H1 = 36,                     /* EP_H1  */
+  YYSYMBOL_EP_H2 = 37,                     /* EP_H2  */
+  YYSYMBOL_EP_A1 = 38,                     /* EP_A1  */
+  YYSYMBOL_EP_A2 = 39,                     /* EP_A2  */
+  YYSYMBOL_EP_K1 = 40,                     /* EP_K1  */
+  YYSYMBOL_EP_K2 = 41,                     /* EP_K2  */
+  YYSYMBOL_EP_AP = 42,                     /* EP_AP  */
+  YYSYMBOL_EP_P = 43,                      /* EP_P  */
+  YYSYMBOL_EP_L = 44,                      /* EP_L  */
+  YYSYMBOL_EP_LP = 45,                     /* EP_LP  */
+  YYSYMBOL_EP_LR = 46,                     /* EP_LR  */
+  YYSYMBOL_EP_LPHI = 47,                   /* EP_LPHI  */
+  YYSYMBOL_EP_LC = 48,                     /* EP_LC  */
+  YYSYMBOL_EP_LA = 49,                     /* EP_LA  */
+  YYSYMBOL_EP_SIZE = 50,                   /* EP_SIZE  */
+  YYSYMBOL_EP_FOS = 51,                    /* EP_FOS  */
+  YYSYMBOL_YYACCEPT = 52,                  /* $accept  */
+  YYSYMBOL_input = 53,                     /* input  */
+  YYSYMBOL_nethead = 54,                   /* nethead  */
+  YYSYMBOL_vertices = 55,                  /* vertices  */
+  YYSYMBOL_verticeshead = 56,              /* verticeshead  */
+  YYSYMBOL_vertdefs = 57,                  /* vertdefs  */
+  YYSYMBOL_vertexline = 58,                /* vertexline  */
+  YYSYMBOL_59_1 = 59,                      /* $@1  */
+  YYSYMBOL_vertex = 60,                    /* vertex  */
+  YYSYMBOL_vertexid = 61,                  /* vertexid  */
+  YYSYMBOL_vertexcoords = 62,              /* vertexcoords  */
+  YYSYMBOL_shape = 63,                     /* shape  */
+  YYSYMBOL_params = 64,                    /* params  */
+  YYSYMBOL_param = 65,                     /* param  */
+  YYSYMBOL_vpword = 66,                    /* vpword  */
+  YYSYMBOL_67_2 = 67,                      /* $@2  */
+  YYSYMBOL_68_3 = 68,                      /* $@3  */
+  YYSYMBOL_69_4 = 69,                      /* $@4  */
+  YYSYMBOL_70_5 = 70,                      /* $@5  */
+  YYSYMBOL_71_6 = 71,                      /* $@6  */
+  YYSYMBOL_vpwordpar = 72,                 /* vpwordpar  */
+  YYSYMBOL_edgeblock = 73,                 /* edgeblock  */
+  YYSYMBOL_arcs = 74,                      /* arcs  */
+  YYSYMBOL_arcsdefs = 75,                  /* arcsdefs  */
+  YYSYMBOL_arcsline = 76,                  /* arcsline  */
+  YYSYMBOL_77_7 = 77,                      /* $@7  */
+  YYSYMBOL_arcfrom = 78,                   /* arcfrom  */
+  YYSYMBOL_arcto = 79,                     /* arcto  */
+  YYSYMBOL_edges = 80,                     /* edges  */
+  YYSYMBOL_edgesdefs = 81,                 /* edgesdefs  */
+  YYSYMBOL_edgesline = 82,                 /* edgesline  */
+  YYSYMBOL_83_8 = 83,                      /* $@8  */
+  YYSYMBOL_edgefrom = 84,                  /* edgefrom  */
+  YYSYMBOL_edgeto = 85,                    /* edgeto  */
+  YYSYMBOL_weight = 86,                    /* weight  */
+  YYSYMBOL_edgeparams = 87,                /* edgeparams  */
+  YYSYMBOL_edgeparam = 88,                 /* edgeparam  */
+  YYSYMBOL_epword = 89,                    /* epword  */
+  YYSYMBOL_90_9 = 90,                      /* $@9  */
+  YYSYMBOL_91_10 = 91,                     /* $@10  */
+  YYSYMBOL_92_11 = 92,                     /* $@11  */
+  YYSYMBOL_93_12 = 93,                     /* $@12  */
+  YYSYMBOL_94_13 = 94,                     /* $@13  */
+  YYSYMBOL_epwordpar = 95,                 /* epwordpar  */
+  YYSYMBOL_arcslist = 96,                  /* arcslist  */
+  YYSYMBOL_arcslistlines = 97,             /* arcslistlines  */
+  YYSYMBOL_arclistline = 98,               /* arclistline  */
+  YYSYMBOL_arctolist = 99,                 /* arctolist  */
+  YYSYMBOL_arclistfrom = 100,              /* arclistfrom  */
+  YYSYMBOL_arclistto = 101,                /* arclistto  */
+  YYSYMBOL_edgeslist = 102,                /* edgeslist  */
+  YYSYMBOL_edgelistlines = 103,            /* edgelistlines  */
+  YYSYMBOL_edgelistline = 104,             /* edgelistline  */
+  YYSYMBOL_edgetolist = 105,               /* edgetolist  */
+  YYSYMBOL_edgelistfrom = 106,             /* edgelistfrom  */
+  YYSYMBOL_edgelistto = 107,               /* edgelistto  */
+  YYSYMBOL_adjmatrix = 108,                /* adjmatrix  */
+  YYSYMBOL_matrixline = 109,               /* matrixline  */
+  YYSYMBOL_adjmatrixlines = 110,           /* adjmatrixlines  */
+  YYSYMBOL_adjmatrixline = 111,            /* adjmatrixline  */
+  YYSYMBOL_adjmatrixnumbers = 112,         /* adjmatrixnumbers  */
+  YYSYMBOL_adjmatrixentry = 113,           /* adjmatrixentry  */
+  YYSYMBOL_longint = 114,                  /* longint  */
+  YYSYMBOL_number = 115,                   /* number  */
+  YYSYMBOL_words = 116,                    /* words  */
+  YYSYMBOL_word = 117                      /* word  */
 };
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
-#endif
+typedef enum yysymbol_kind_t yysymbol_kind_t;
 
-/* Location type.  */
-#if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
-typedef struct YYLTYPE YYLTYPE;
-struct YYLTYPE
-{
-  int first_line;
-  int first_column;
-  int last_line;
-  int last_column;
-};
-# define YYLTYPE_IS_DECLARED 1
-# define YYLTYPE_IS_TRIVIAL 1
-#endif
-
-
-
-int igraph_pajek_yyparse (igraph_i_pajek_parsedata_t* context);
-
-#endif /* !YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED  */
 
 
 
@@ -332,6 +341,18 @@ typedef __INT_LEAST16_TYPE__ yytype_int16;
 typedef int_least16_t yytype_int16;
 #else
 typedef short yytype_int16;
+#endif
+
+/* Work around bug in HP-UX 11.23, which defines these macros
+   incorrectly for preprocessor constants.  This workaround can likely
+   be removed in 2023, as HPE has promised support for HP-UX 11.23
+   (aka HP-UX 11i v2) only through the end of 2022; see Table 2 of
+   <https://h20195.www2.hpe.com/V2/getpdf.aspx/4AA4-7673ENW.pdf>.  */
+#ifdef __hpux
+# undef UINT_LEAST8_MAX
+# undef UINT_LEAST16_MAX
+# define UINT_LEAST8_MAX 255
+# define UINT_LEAST16_MAX 65535
 #endif
 
 #if defined __UINT_LEAST8_MAX__ && __UINT_LEAST8_MAX__ <= __INT_MAX__
@@ -393,6 +414,7 @@ typedef int yytype_uint16;
 
 #define YYSIZEOF(X) YY_CAST (YYPTRDIFF_T, sizeof (X))
 
+
 /* Stored state numbers (used for stacks). */
 typedef yytype_uint8 yy_state_t;
 
@@ -410,6 +432,7 @@ typedef int yy_state_fast_t;
 #  define YY_(Msgid) Msgid
 # endif
 #endif
+
 
 #ifndef YY_ATTRIBUTE_PURE
 # if defined __GNUC__ && 2 < __GNUC__ + (96 <= __GNUC_MINOR__)
@@ -429,17 +452,23 @@ typedef int yy_state_fast_t;
 
 /* Suppress unused-variable warnings by "using" E.  */
 #if ! defined lint || defined __GNUC__
-# define YYUSE(E) ((void) (E))
+# define YY_USE(E) ((void) (E))
 #else
-# define YYUSE(E) /* empty */
+# define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -468,7 +497,7 @@ typedef int yy_state_fast_t;
 
 #define YY_ASSERT(E) ((void) (0 && (E)))
 
-#if ! defined yyoverflow || YYERROR_VERBOSE
+#if 1
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
@@ -533,8 +562,7 @@ void free (void *); /* INFRINGES ON USER NAME SPACE */
 #   endif
 #  endif
 # endif
-#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
-
+#endif /* 1 */
 
 #if (! defined yyoverflow \
      && (! defined __cplusplus \
@@ -613,14 +641,16 @@ union yyalloc
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  207
 
-#define YYUNDEFTOK  2
+/* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   306
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex, with out-of-bounds checking.  */
-#define YYTRANSLATE(YYX)                                                \
-  (0 <= (YYX) && (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
+#define YYTRANSLATE(YYX)                                \
+  (0 <= (YYX) && (YYX) <= YYMAXUTOK                     \
+   ? YY_CAST (yysymbol_kind_t, yytranslate[YYX])        \
+   : YYSYMBOL_YYUNDEF)
 
 /* YYTRANSLATE[TOKEN-NUM] -- Symbol number corresponding to TOKEN-NUM
    as returned by yylex.  */
@@ -660,7 +690,7 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
        0,   190,   190,   194,   194,   196,   198,   202,   208,   208,
@@ -680,21 +710,28 @@ static const yytype_int16 yyrline[] =
 };
 #endif
 
-#if YYDEBUG || YYERROR_VERBOSE || 1
+/** Accessing symbol of state STATE.  */
+#define YY_ACCESSING_SYMBOL(State) YY_CAST (yysymbol_kind_t, yystos[State])
+
+#if 1
+/* The user-facing name of the symbol whose (internal) number is
+   YYSYMBOL.  No bounds checking.  */
+static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
+
 /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "$undefined", "NEWLINE", "NUM", "ALNUM",
-  "QSTR", "PSTR", "NETWORKLINE", "VERTICESLINE", "ARCSLINE", "EDGESLINE",
-  "ARCSLISTLINE", "EDGESLISTLINE", "MATRIXLINE", "ERROR", "VP_X_FACT",
-  "VP_Y_FACT", "VP_IC", "VP_BC", "VP_LC", "VP_LR", "VP_LPHI", "VP_BW",
-  "VP_FOS", "VP_PHI", "VP_R", "VP_Q", "VP_LA", "VP_FONT", "VP_URL",
-  "VP_SIZE", "EP_C", "EP_S", "EP_A", "EP_W", "EP_H1", "EP_H2", "EP_A1",
-  "EP_A2", "EP_K1", "EP_K2", "EP_AP", "EP_P", "EP_L", "EP_LP", "EP_LR",
-  "EP_LPHI", "EP_LC", "EP_LA", "EP_SIZE", "EP_FOS", "$accept", "input",
-  "nethead", "vertices", "verticeshead", "vertdefs", "vertexline", "$@1",
-  "vertex", "vertexid", "vertexcoords", "shape", "params", "param",
+  "\"end of file\"", "error", "\"invalid token\"", "NEWLINE", "NUM",
+  "ALNUM", "QSTR", "PSTR", "NETWORKLINE", "VERTICESLINE", "ARCSLINE",
+  "EDGESLINE", "ARCSLISTLINE", "EDGESLISTLINE", "MATRIXLINE", "ERROR",
+  "VP_X_FACT", "VP_Y_FACT", "VP_IC", "VP_BC", "VP_LC", "VP_LR", "VP_LPHI",
+  "VP_BW", "VP_FOS", "VP_PHI", "VP_R", "VP_Q", "VP_LA", "VP_FONT",
+  "VP_URL", "VP_SIZE", "EP_C", "EP_S", "EP_A", "EP_W", "EP_H1", "EP_H2",
+  "EP_A1", "EP_A2", "EP_K1", "EP_K2", "EP_AP", "EP_P", "EP_L", "EP_LP",
+  "EP_LR", "EP_LPHI", "EP_LC", "EP_LA", "EP_SIZE", "EP_FOS", "$accept",
+  "input", "nethead", "vertices", "verticeshead", "vertdefs", "vertexline",
+  "$@1", "vertex", "vertexid", "vertexcoords", "shape", "params", "param",
   "vpword", "$@2", "$@3", "$@4", "$@5", "$@6", "vpwordpar", "edgeblock",
   "arcs", "arcsdefs", "arcsline", "$@7", "arcfrom", "arcto", "edges",
   "edgesdefs", "edgesline", "$@8", "edgefrom", "edgeto", "weight",
@@ -705,21 +742,13 @@ static const char *const yytname[] =
   "matrixline", "adjmatrixlines", "adjmatrixline", "adjmatrixnumbers",
   "adjmatrixentry", "longint", "number", "words", "word", YY_NULLPTR
 };
-#endif
 
-# ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
+static const char *
+yysymbol_name (yysymbol_kind_t yysymbol)
 {
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
-     305,   306
-};
-# endif
+  return yytname[yysymbol];
+}
+#endif
 
 #define YYPACT_NINF (-167)
 
@@ -731,8 +760,8 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
       -4,  -167,     7,    36,    22,  -167,    44,  -167,    49,  -167,
@@ -758,9 +787,9 @@ static const yytype_int16 yypact[] =
     -167,  -167,  -167,  -167,  -167,  -167,  -167
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
        3,   133,     0,     0,     0,     1,     0,    49,     0,     4,
@@ -786,7 +815,7 @@ static const yytype_uint8 yydefact[] =
       97,    99,   101,    26,    27,    28,    78
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
     -167,  -167,  -167,  -167,  -167,  -167,  -167,  -167,  -167,  -167,
@@ -798,10 +827,10 @@ static const yytype_int16 yypgoto[] =
        2,  -167,    -1,   -19,  -167,    -2
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int16 yydefgoto[] =
+/* YYDEFGOTO[NTERM-NUM].  */
+static const yytype_uint8 yydefgoto[] =
 {
-      -1,     2,     3,     7,     8,    30,    40,    51,    41,    74,
+       0,     2,     3,     7,     8,    30,    40,    51,    41,    74,
       84,    94,   100,   121,   122,   163,   164,   149,   151,   153,
      187,    16,    24,    43,    53,    86,    54,    76,    25,    45,
       58,    87,    59,    78,    97,   102,   144,   145,   169,   178,
@@ -810,9 +839,9 @@ static const yytype_int16 yydefgoto[] =
       71,    72,    55,    73,     4,   188
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
       33,    35,    13,   199,     1,    15,   190,     5,   192,    10,
@@ -873,8 +902,8 @@ static const yytype_int16 yycheck[] =
       31
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
        0,     8,    53,    54,   116,     0,     9,    55,    56,     3,
@@ -900,7 +929,7 @@ static const yytype_int8 yystos[] =
       95,    95,    95,   115,   115,   115,   115
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    52,    53,    54,    54,    55,    56,    56,    57,    57,
@@ -919,7 +948,7 @@ static const yytype_int8 yyr1[] =
      113,   114,   115,   116,   116,   117,   117,   117
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     3,     0,     3,     3,     2,     3,     0,     2,
@@ -939,14 +968,15 @@ static const yytype_int8 yyr2[] =
 };
 
 
+enum { YYENOMEM = -2 };
+
 #define yyerrok         (yyerrstatus = 0)
 #define yyclearin       (yychar = YYEMPTY)
-#define YYEMPTY         (-2)
-#define YYEOF           0
 
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -968,10 +998,9 @@ static const yytype_int8 yyr2[] =
       }                                                           \
   while (0)
 
-/* Error token number */
-#define YYTERROR        1
-#define YYERRCODE       256
-
+/* Backward compatibility with an undocumented macro.
+   Use YYerror or YYUNDEF. */
+#define YYERRCODE YYUNDEF
 
 /* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
    If N is 0, then set CURRENT to the empty location which ends
@@ -1015,12 +1044,19 @@ do {                                            \
 } while (0)
 
 
-/* YY_LOCATION_PRINT -- Print the location on the stream.
+/* YYLOCATION_PRINT -- Print the location on the stream.
    This macro was not mandated originally: define only if we know
    we won't break user code: when these are the locations we know.  */
 
-#ifndef YY_LOCATION_PRINT
-# if defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
+# ifndef YYLOCATION_PRINT
+
+#  if defined YY_LOCATION_PRINT
+
+   /* Temporary convenience wrapper in case some people defined the
+      undocumented and private YY_LOCATION_PRINT macros.  */
+#   define YYLOCATION_PRINT(File, Loc)  YY_LOCATION_PRINT(File, *(Loc))
+
+#  elif defined YYLTYPE_IS_TRIVIAL && YYLTYPE_IS_TRIVIAL
 
 /* Print *YYLOCP on YYO.  Private, do not rely on its existence. */
 
@@ -1048,24 +1084,32 @@ yy_location_print_ (FILE *yyo, YYLTYPE const * const yylocp)
         res += YYFPRINTF (yyo, "-%d", end_col);
     }
   return res;
- }
+}
 
-#  define YY_LOCATION_PRINT(File, Loc)          \
-  yy_location_print_ (File, &(Loc))
+#   define YYLOCATION_PRINT  yy_location_print_
 
-# else
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
-#endif
+    /* Temporary convenience wrapper in case some people defined the
+       undocumented and private YY_LOCATION_PRINT macros.  */
+#   define YY_LOCATION_PRINT(File, Loc)  YYLOCATION_PRINT(File, &(Loc))
+
+#  else
+
+#   define YYLOCATION_PRINT(File, Loc) ((void) 0)
+    /* Temporary convenience wrapper in case some people defined the
+       undocumented and private YY_LOCATION_PRINT macros.  */
+#   define YY_LOCATION_PRINT  YYLOCATION_PRINT
+
+#  endif
+# endif /* !defined YYLOCATION_PRINT */
 
 
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)                    \
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
 do {                                                                      \
   if (yydebug)                                                            \
     {                                                                     \
       YYFPRINTF (stderr, "%s ", Title);                                   \
       yy_symbol_print (stderr,                                            \
-                  Type, Value, Location, context); \
+                  Kind, Value, Location, context); \
       YYFPRINTF (stderr, "\n");                                           \
     }                                                                     \
 } while (0)
@@ -1076,20 +1120,17 @@ do {                                                                      \
 `-----------------------------------*/
 
 static void
-yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_pajek_parsedata_t* context)
+yy_symbol_value_print (FILE *yyo,
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_pajek_parsedata_t* context)
 {
   FILE *yyoutput = yyo;
-  YYUSE (yyoutput);
-  YYUSE (yylocationp);
-  YYUSE (context);
+  YY_USE (yyoutput);
+  YY_USE (yylocationp);
+  YY_USE (context);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yytype < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yytype], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
 
@@ -1099,14 +1140,15 @@ yy_symbol_value_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YY
 `---------------------------*/
 
 static void
-yy_symbol_print (FILE *yyo, int yytype, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_pajek_parsedata_t* context)
+yy_symbol_print (FILE *yyo,
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_pajek_parsedata_t* context)
 {
   YYFPRINTF (yyo, "%s %s (",
-             yytype < YYNTOKENS ? "token" : "nterm", yytname[yytype]);
+             yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
 
-  YY_LOCATION_PRINT (yyo, *yylocationp);
+  YYLOCATION_PRINT (yyo, yylocationp);
   YYFPRINTF (yyo, ": ");
-  yy_symbol_value_print (yyo, yytype, yyvaluep, yylocationp, context);
+  yy_symbol_value_print (yyo, yykind, yyvaluep, yylocationp, context);
   YYFPRINTF (yyo, ")");
 }
 
@@ -1139,7 +1181,8 @@ do {                                                            \
 `------------------------------------------------*/
 
 static void
-yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, igraph_i_pajek_parsedata_t* context)
+yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp,
+                 int yyrule, igraph_i_pajek_parsedata_t* context)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1151,9 +1194,9 @@ yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp, int yyrule, 
     {
       YYFPRINTF (stderr, "   $%d = ", yyi + 1);
       yy_symbol_print (stderr,
-                       yystos[+yyssp[yyi + 1 - yynrhs]],
-                       &yyvsp[(yyi + 1) - (yynrhs)]
-                       , &(yylsp[(yyi + 1) - (yynrhs)])                       , context);
+                       YY_ACCESSING_SYMBOL (+yyssp[yyi + 1 - yynrhs]),
+                       &yyvsp[(yyi + 1) - (yynrhs)],
+                       &(yylsp[(yyi + 1) - (yynrhs)]), context);
       YYFPRINTF (stderr, "\n");
     }
 }
@@ -1168,8 +1211,8 @@ do {                                    \
    multiple parsers can coexist.  */
 int yydebug;
 #else /* !YYDEBUG */
-# define YYDPRINTF(Args)
-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
+# define YYDPRINTF(Args) ((void) 0)
+# define YY_SYMBOL_PRINT(Title, Kind, Value, Location)
 # define YY_STACK_PRINT(Bottom, Top)
 # define YY_REDUCE_PRINT(Rule)
 #endif /* !YYDEBUG */
@@ -1192,12 +1235,61 @@ int yydebug;
 #endif
 
 
-#if YYERROR_VERBOSE
+/* Context of a parse error.  */
+typedef struct
+{
+  yy_state_t *yyssp;
+  yysymbol_kind_t yytoken;
+  YYLTYPE *yylloc;
+} yypcontext_t;
 
-# ifndef yystrlen
-#  if defined __GLIBC__ && defined _STRING_H
-#   define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
-#  else
+/* Put in YYARG at most YYARGN of the expected tokens given the
+   current YYCTX, and return the number of tokens stored in YYARG.  If
+   YYARG is null, return the number of expected tokens (guaranteed to
+   be less than YYNTOKENS).  Return YYENOMEM on memory exhaustion.
+   Return 0 if there are more than YYARGN expected tokens, yet fill
+   YYARG up to YYARGN. */
+static int
+yypcontext_expected_tokens (const yypcontext_t *yyctx,
+                            yysymbol_kind_t yyarg[], int yyargn)
+{
+  /* Actual size of YYARG. */
+  int yycount = 0;
+  int yyn = yypact[+*yyctx->yyssp];
+  if (!yypact_value_is_default (yyn))
+    {
+      /* Start YYX at -YYN if negative to avoid negative indexes in
+         YYCHECK.  In other words, skip the first -YYN actions for
+         this state because they are default actions.  */
+      int yyxbegin = yyn < 0 ? -yyn : 0;
+      /* Stay within bounds of both yycheck and yytname.  */
+      int yychecklim = YYLAST - yyn + 1;
+      int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
+      int yyx;
+      for (yyx = yyxbegin; yyx < yyxend; ++yyx)
+        if (yycheck[yyx + yyn] == yyx && yyx != YYSYMBOL_YYerror
+            && !yytable_value_is_error (yytable[yyx + yyn]))
+          {
+            if (!yyarg)
+              ++yycount;
+            else if (yycount == yyargn)
+              return 0;
+            else
+              yyarg[yycount++] = YY_CAST (yysymbol_kind_t, yyx);
+          }
+    }
+  if (yyarg && yycount == 0 && 0 < yyargn)
+    yyarg[0] = YYSYMBOL_YYEMPTY;
+  return yycount;
+}
+
+
+
+
+#ifndef yystrlen
+# if defined __GLIBC__ && defined _STRING_H
+#  define yystrlen(S) (YY_CAST (YYPTRDIFF_T, strlen (S)))
+# else
 /* Return the length of YYSTR.  */
 static YYPTRDIFF_T
 yystrlen (const char *yystr)
@@ -1207,13 +1299,13 @@ yystrlen (const char *yystr)
     continue;
   return yylen;
 }
-#  endif
 # endif
+#endif
 
-# ifndef yystpcpy
-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
-#   define yystpcpy stpcpy
-#  else
+#ifndef yystpcpy
+# if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
+#  define yystpcpy stpcpy
+# else
 /* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
    YYDEST.  */
 static char *
@@ -1227,10 +1319,10 @@ yystpcpy (char *yydest, const char *yysrc)
 
   return yyd - 1;
 }
-#  endif
 # endif
+#endif
 
-# ifndef yytnamerr
+#ifndef yytnamerr
 /* Copy to YYRES the contents of YYSTR after stripping away unnecessary
    quotes and backslashes, so that it's suitable for yyerror.  The
    heuristic is that double-quoting is unnecessary unless the string
@@ -1245,7 +1337,6 @@ yytnamerr (char *yyres, const char *yystr)
     {
       YYPTRDIFF_T yyn = 0;
       char const *yyp = yystr;
-
       for (;;)
         switch (*++yyp)
           {
@@ -1279,31 +1370,15 @@ yytnamerr (char *yyres, const char *yystr)
   else
     return yystrlen (yystr);
 }
-# endif
+#endif
 
-/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
-   about the unexpected token YYTOKEN for the state stack whose top is
-   YYSSP.
 
-   Return 0 if *YYMSG was successfully written.  Return 1 if *YYMSG is
-   not large enough to hold the message.  In that case, also set
-   *YYMSG_ALLOC to the required number of bytes.  Return 2 if the
-   required number of bytes is too large to store.  */
 static int
-yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
-                yy_state_t *yyssp, int yytoken)
+yy_syntax_error_arguments (const yypcontext_t *yyctx,
+                           yysymbol_kind_t yyarg[], int yyargn)
 {
-  enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
-  /* Internationalized format string. */
-  const char *yyformat = YY_NULLPTR;
-  /* Arguments of yyformat: reported tokens (one for the "unexpected",
-     one per "expected"). */
-  char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
   /* Actual size of YYARG. */
   int yycount = 0;
-  /* Cumulated lengths of YYARG.  */
-  YYPTRDIFF_T yysize = 0;
-
   /* There are many possibilities here to consider:
      - If this state is a consistent state with a default action, then
        the only way this function was invoked is if the default action
@@ -1327,52 +1402,54 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
        one exception: it will still contain any token that will not be
        accepted due to an error action in a later state.
   */
-  if (yytoken != YYEMPTY)
+  if (yyctx->yytoken != YYSYMBOL_YYEMPTY)
     {
-      int yyn = yypact[+*yyssp];
-      YYPTRDIFF_T yysize0 = yytnamerr (YY_NULLPTR, yytname[yytoken]);
-      yysize = yysize0;
-      yyarg[yycount++] = yytname[yytoken];
-      if (!yypact_value_is_default (yyn))
-        {
-          /* Start YYX at -YYN if negative to avoid negative indexes in
-             YYCHECK.  In other words, skip the first -YYN actions for
-             this state because they are default actions.  */
-          int yyxbegin = yyn < 0 ? -yyn : 0;
-          /* Stay within bounds of both yycheck and yytname.  */
-          int yychecklim = YYLAST - yyn + 1;
-          int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-          int yyx;
-
-          for (yyx = yyxbegin; yyx < yyxend; ++yyx)
-            if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR
-                && !yytable_value_is_error (yytable[yyx + yyn]))
-              {
-                if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
-                  {
-                    yycount = 1;
-                    yysize = yysize0;
-                    break;
-                  }
-                yyarg[yycount++] = yytname[yyx];
-                {
-                  YYPTRDIFF_T yysize1
-                    = yysize + yytnamerr (YY_NULLPTR, yytname[yyx]);
-                  if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-                    yysize = yysize1;
-                  else
-                    return 2;
-                }
-              }
-        }
+      int yyn;
+      if (yyarg)
+        yyarg[yycount] = yyctx->yytoken;
+      ++yycount;
+      yyn = yypcontext_expected_tokens (yyctx,
+                                        yyarg ? yyarg + 1 : yyarg, yyargn - 1);
+      if (yyn == YYENOMEM)
+        return YYENOMEM;
+      else
+        yycount += yyn;
     }
+  return yycount;
+}
+
+/* Copy into *YYMSG, which is of size *YYMSG_ALLOC, an error message
+   about the unexpected token YYTOKEN for the state stack whose top is
+   YYSSP.
+
+   Return 0 if *YYMSG was successfully written.  Return -1 if *YYMSG is
+   not large enough to hold the message.  In that case, also set
+   *YYMSG_ALLOC to the required number of bytes.  Return YYENOMEM if the
+   required number of bytes is too large to store.  */
+static int
+yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
+                const yypcontext_t *yyctx)
+{
+  enum { YYARGS_MAX = 5 };
+  /* Internationalized format string. */
+  const char *yyformat = YY_NULLPTR;
+  /* Arguments of yyformat: reported tokens (one for the "unexpected",
+     one per "expected"). */
+  yysymbol_kind_t yyarg[YYARGS_MAX];
+  /* Cumulated lengths of YYARG.  */
+  YYPTRDIFF_T yysize = 0;
+
+  /* Actual size of YYARG. */
+  int yycount = yy_syntax_error_arguments (yyctx, yyarg, YYARGS_MAX);
+  if (yycount == YYENOMEM)
+    return YYENOMEM;
 
   switch (yycount)
     {
-# define YYCASE_(N, S)                      \
+#define YYCASE_(N, S)                       \
       case N:                               \
         yyformat = S;                       \
-      break
+        break
     default: /* Avoid compiler warnings. */
       YYCASE_(0, YY_("syntax error"));
       YYCASE_(1, YY_("syntax error, unexpected %s"));
@@ -1380,17 +1457,23 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
       YYCASE_(3, YY_("syntax error, unexpected %s, expecting %s or %s"));
       YYCASE_(4, YY_("syntax error, unexpected %s, expecting %s or %s or %s"));
       YYCASE_(5, YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s"));
-# undef YYCASE_
+#undef YYCASE_
     }
 
+  /* Compute error message size.  Don't count the "%s"s, but reserve
+     room for the terminator.  */
+  yysize = yystrlen (yyformat) - 2 * yycount + 1;
   {
-    /* Don't count the "%s"s in the final size, but reserve room for
-       the terminator.  */
-    YYPTRDIFF_T yysize1 = yysize + (yystrlen (yyformat) - 2 * yycount) + 1;
-    if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
-      yysize = yysize1;
-    else
-      return 2;
+    int yyi;
+    for (yyi = 0; yyi < yycount; ++yyi)
+      {
+        YYPTRDIFF_T yysize1
+          = yysize + yytnamerr (YY_NULLPTR, yytname[yyarg[yyi]]);
+        if (yysize <= yysize1 && yysize1 <= YYSTACK_ALLOC_MAXIMUM)
+          yysize = yysize1;
+        else
+          return YYENOMEM;
+      }
   }
 
   if (*yymsg_alloc < yysize)
@@ -1399,7 +1482,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
       if (! (yysize <= *yymsg_alloc
              && *yymsg_alloc <= YYSTACK_ALLOC_MAXIMUM))
         *yymsg_alloc = YYSTACK_ALLOC_MAXIMUM;
-      return 1;
+      return -1;
     }
 
   /* Avoid sprintf, as that infringes on the user's name space.
@@ -1411,7 +1494,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
     while ((*yyp = *yyformat) != '\0')
       if (*yyp == '%' && yyformat[1] == 's' && yyi < yycount)
         {
-          yyp += yytnamerr (yyp, yyarg[yyi++]);
+          yyp += yytnamerr (yyp, yytname[yyarg[yyi++]]);
           yyformat += 2;
         }
       else
@@ -1422,26 +1505,29 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
   }
   return 0;
 }
-#endif /* YYERROR_VERBOSE */
+
 
 /*-----------------------------------------------.
 | Release the memory associated to this symbol.  |
 `-----------------------------------------------*/
 
 static void
-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_pajek_parsedata_t* context)
+yydestruct (const char *yymsg,
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_pajek_parsedata_t* context)
 {
-  YYUSE (yyvaluep);
-  YYUSE (yylocationp);
-  YYUSE (context);
+  YY_USE (yyvaluep);
+  YY_USE (yylocationp);
+  YY_USE (context);
   if (!yymsg)
     yymsg = "Deleting";
-  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
+  YY_SYMBOL_PRINT (yymsg, yykind, yyvaluep, yylocationp);
 
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
-  YYUSE (yytype);
+  YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 }
+
+
 
 
 
@@ -1453,7 +1539,7 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep, YYLTYPE *yylocatio
 int
 yyparse (igraph_i_pajek_parsedata_t* context)
 {
-/* The lookahead symbol.  */
+/* Lookahead token kind.  */
 int yychar;
 
 
@@ -1472,55 +1558,50 @@ static YYLTYPE yyloc_default
 YYLTYPE yylloc = yyloc_default;
 
     /* Number of syntax errors so far.  */
-    int yynerrs;
+    int yynerrs = 0;
 
-    yy_state_fast_t yystate;
+    yy_state_fast_t yystate = 0;
     /* Number of tokens to shift before error messages enabled.  */
-    int yyerrstatus;
+    int yyerrstatus = 0;
 
-    /* The stacks and their tools:
-       'yyss': related to states.
-       'yyvs': related to semantic values.
-       'yyls': related to locations.
-
-       Refer to the stacks through separate pointers, to allow yyoverflow
+    /* Refer to the stacks through separate pointers, to allow yyoverflow
        to reallocate them elsewhere.  */
 
-    /* The state stack.  */
+    /* Their size.  */
+    YYPTRDIFF_T yystacksize = YYINITDEPTH;
+
+    /* The state stack: array, bottom, top.  */
     yy_state_t yyssa[YYINITDEPTH];
-    yy_state_t *yyss;
-    yy_state_t *yyssp;
+    yy_state_t *yyss = yyssa;
+    yy_state_t *yyssp = yyss;
 
-    /* The semantic value stack.  */
+    /* The semantic value stack: array, bottom, top.  */
     YYSTYPE yyvsa[YYINITDEPTH];
-    YYSTYPE *yyvs;
-    YYSTYPE *yyvsp;
+    YYSTYPE *yyvs = yyvsa;
+    YYSTYPE *yyvsp = yyvs;
 
-    /* The location stack.  */
+    /* The location stack: array, bottom, top.  */
     YYLTYPE yylsa[YYINITDEPTH];
-    YYLTYPE *yyls;
-    YYLTYPE *yylsp;
-
-    /* The locations where the error started and ended.  */
-    YYLTYPE yyerror_range[3];
-
-    YYPTRDIFF_T yystacksize;
+    YYLTYPE *yyls = yylsa;
+    YYLTYPE *yylsp = yyls;
 
   int yyn;
+  /* The return value of yyparse.  */
   int yyresult;
-  /* Lookahead token as an internal (translated) token number.  */
-  int yytoken = 0;
+  /* Lookahead symbol kind.  */
+  yysymbol_kind_t yytoken = YYSYMBOL_YYEMPTY;
   /* The variables used to return semantic value and location from the
      action routines.  */
   YYSTYPE yyval;
   YYLTYPE yyloc;
 
-#if YYERROR_VERBOSE
+  /* The locations where the error started and ended.  */
+  YYLTYPE yyerror_range[3];
+
   /* Buffer for error messages, and its allocated size.  */
   char yymsgbuf[128];
   char *yymsg = yymsgbuf;
   YYPTRDIFF_T yymsg_alloc = sizeof yymsgbuf;
-#endif
 
 #define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N), yylsp -= (N))
 
@@ -1528,17 +1609,10 @@ YYLTYPE yylloc = yyloc_default;
      Keep to zero when no symbol should be popped.  */
   int yylen = 0;
 
-  yyssp = yyss = yyssa;
-  yyvsp = yyvs = yyvsa;
-  yylsp = yyls = yylsa;
-  yystacksize = YYINITDEPTH;
-
   YYDPRINTF ((stderr, "Starting parse\n"));
 
-  yystate = 0;
-  yyerrstatus = 0;
-  yynerrs = 0;
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   yylsp[0] = yylloc;
   goto yysetstate;
 
@@ -1561,10 +1635,11 @@ yysetstate:
   YY_IGNORE_USELESS_CAST_BEGIN
   *yyssp = YY_CAST (yy_state_t, yystate);
   YY_IGNORE_USELESS_CAST_END
+  YY_STACK_PRINT (yyss, yyssp);
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1595,7 +1670,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1606,11 +1681,11 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
         YYSTACK_RELOCATE (yyls_alloc, yyls);
-# undef YYSTACK_RELOCATE
+#  undef YYSTACK_RELOCATE
         if (yyss1 != yyssa)
           YYSTACK_FREE (yyss1);
       }
@@ -1629,6 +1704,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1650,17 +1726,29 @@ yybackup:
 
   /* Not known => get a lookahead token if don't already have one.  */
 
-  /* YYCHAR is either YYEMPTY or YYEOF or a valid lookahead symbol.  */
+  /* YYCHAR is either empty, or end-of-input, or a valid lookahead.  */
   if (yychar == YYEMPTY)
     {
-      YYDPRINTF ((stderr, "Reading a token: "));
+      YYDPRINTF ((stderr, "Reading a token\n"));
       yychar = yylex (&yylval, &yylloc, scanner);
     }
 
-  if (yychar <= YYEOF)
+  if (yychar <= END)
     {
-      yychar = yytoken = YYEOF;
+      yychar = END;
+      yytoken = YYSYMBOL_YYEOF;
       YYDPRINTF ((stderr, "Now at end of input.\n"));
+    }
+  else if (yychar == YYerror)
+    {
+      /* The scanner already issued an error message, process directly
+         to error recovery.  But do not keep the error token as
+         lookahead, it is too special and may lead us to an endless
+         loop in error recovery. */
+      yychar = YYUNDEF;
+      yytoken = YYSYMBOL_YYerror;
+      yyerror_range[1] = yylloc;
+      goto yyerrlab1;
     }
   else
     {
@@ -1733,619 +1821,619 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2:
+  case 2: /* input: nethead vertices edgeblock  */
 #line 190 "src/core/io/pajek-parser.y"
                                   {
   if (context->vcount2 > 0) { igraph_i_pajek_check_bipartite(context); }
  }
-#line 1742 "yy.tab.c"
+#line 1830 "yy.tab.c"
     break;
 
-  case 6:
+  case 6: /* verticeshead: VERTICESLINE longint  */
 #line 198 "src/core/io/pajek-parser.y"
                                    {
   context->vcount=(yyvsp[0].intnum);
   context->vcount2=0;
             }
-#line 1751 "yy.tab.c"
+#line 1839 "yy.tab.c"
     break;
 
-  case 7:
+  case 7: /* verticeshead: VERTICESLINE longint longint  */
 #line 202 "src/core/io/pajek-parser.y"
                                            {
   context->vcount=(yyvsp[-1].intnum);
   context->vcount2=(yyvsp[0].intnum);
   igraph_i_pajek_add_bipartite_type(context);
 }
-#line 1761 "yy.tab.c"
+#line 1849 "yy.tab.c"
     break;
 
-  case 12:
+  case 12: /* $@1: %empty  */
 #line 212 "src/core/io/pajek-parser.y"
                    { context->actvertex=(yyvsp[0].intnum); }
-#line 1767 "yy.tab.c"
+#line 1855 "yy.tab.c"
     break;
 
-  case 13:
+  case 13: /* vertexline: vertex $@1 vertexid vertexcoords shape params NEWLINE  */
 #line 212 "src/core/io/pajek-parser.y"
                                                                                          { }
-#line 1773 "yy.tab.c"
+#line 1861 "yy.tab.c"
     break;
 
-  case 14:
+  case 14: /* vertex: longint  */
 #line 215 "src/core/io/pajek-parser.y"
                 { (yyval.intnum)=(yyvsp[0].intnum); context->mode=1; }
-#line 1779 "yy.tab.c"
+#line 1867 "yy.tab.c"
     break;
 
-  case 15:
+  case 15: /* vertexid: word  */
 #line 217 "src/core/io/pajek-parser.y"
                {
   igraph_i_pajek_add_string_vertex_attribute("id", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
   igraph_i_pajek_add_string_vertex_attribute("name", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
 }
-#line 1788 "yy.tab.c"
+#line 1876 "yy.tab.c"
     break;
 
-  case 17:
+  case 17: /* vertexcoords: number number  */
 #line 223 "src/core/io/pajek-parser.y"
                             {
   igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-1].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[0].realnum), context);
             }
-#line 1797 "yy.tab.c"
+#line 1885 "yy.tab.c"
     break;
 
-  case 18:
+  case 18: /* vertexcoords: number number number  */
 #line 227 "src/core/io/pajek-parser.y"
                                    {
   igraph_i_pajek_add_numeric_vertex_attribute("x", (yyvsp[-2].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("y", (yyvsp[-1].realnum), context);
   igraph_i_pajek_add_numeric_vertex_attribute("z", (yyvsp[0].realnum), context);
             }
-#line 1807 "yy.tab.c"
+#line 1895 "yy.tab.c"
     break;
 
-  case 20:
+  case 20: /* shape: word  */
 #line 233 "src/core/io/pajek-parser.y"
                           {
   igraph_i_pajek_add_string_vertex_attribute("shape", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
 }
-#line 1815 "yy.tab.c"
+#line 1903 "yy.tab.c"
     break;
 
-  case 24:
+  case 24: /* param: VP_X_FACT number  */
 #line 241 "src/core/io/pajek-parser.y"
                         {
          igraph_i_pajek_add_numeric_vertex_attribute("xfact", (yyvsp[0].realnum), context);
        }
-#line 1823 "yy.tab.c"
+#line 1911 "yy.tab.c"
     break;
 
-  case 25:
+  case 25: /* param: VP_Y_FACT number  */
 #line 244 "src/core/io/pajek-parser.y"
                         {
          igraph_i_pajek_add_numeric_vertex_attribute("yfact", (yyvsp[0].realnum), context);
        }
-#line 1831 "yy.tab.c"
+#line 1919 "yy.tab.c"
     break;
 
-  case 26:
+  case 26: /* param: VP_IC number number number  */
 #line 247 "src/core/io/pajek-parser.y"
                                   { /* RGB color */
          igraph_i_pajek_add_numeric_vertex_attribute("color-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("color-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("color-blue", (yyvsp[0].realnum), context);
        }
-#line 1841 "yy.tab.c"
+#line 1929 "yy.tab.c"
     break;
 
-  case 27:
+  case 27: /* param: VP_BC number number number  */
 #line 252 "src/core/io/pajek-parser.y"
                                   {
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("framecolor-blue", (yyvsp[0].realnum), context);
        }
-#line 1851 "yy.tab.c"
+#line 1939 "yy.tab.c"
     break;
 
-  case 28:
+  case 28: /* param: VP_LC number number number  */
 #line 257 "src/core/io/pajek-parser.y"
                                   {
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-red", (yyvsp[-2].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-green", (yyvsp[-1].realnum), context);
          igraph_i_pajek_add_numeric_vertex_attribute("labelcolor-blue", (yyvsp[0].realnum), context);
        }
-#line 1861 "yy.tab.c"
+#line 1949 "yy.tab.c"
     break;
 
-  case 29:
+  case 29: /* param: VP_LR number  */
 #line 262 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldist", (yyvsp[0].realnum), context);
      }
-#line 1869 "yy.tab.c"
+#line 1957 "yy.tab.c"
     break;
 
-  case 30:
+  case 30: /* param: VP_LPHI number  */
 #line 265 "src/core/io/pajek-parser.y"
                       {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldegree2", (yyvsp[0].realnum), context);
      }
-#line 1877 "yy.tab.c"
+#line 1965 "yy.tab.c"
     break;
 
-  case 31:
+  case 31: /* param: VP_BW number  */
 #line 268 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("framewidth", (yyvsp[0].realnum), context);
      }
-#line 1885 "yy.tab.c"
+#line 1973 "yy.tab.c"
     break;
 
-  case 32:
+  case 32: /* param: VP_FOS number  */
 #line 271 "src/core/io/pajek-parser.y"
                      {
          igraph_i_pajek_add_numeric_vertex_attribute("fontsize", (yyvsp[0].realnum), context);
      }
-#line 1893 "yy.tab.c"
+#line 1981 "yy.tab.c"
     break;
 
-  case 33:
+  case 33: /* param: VP_PHI number  */
 #line 274 "src/core/io/pajek-parser.y"
                      {
          igraph_i_pajek_add_numeric_vertex_attribute("rotation", (yyvsp[0].realnum), context);
      }
-#line 1901 "yy.tab.c"
+#line 1989 "yy.tab.c"
     break;
 
-  case 34:
+  case 34: /* param: VP_R number  */
 #line 277 "src/core/io/pajek-parser.y"
                    {
          igraph_i_pajek_add_numeric_vertex_attribute("radius", (yyvsp[0].realnum), context);
      }
-#line 1909 "yy.tab.c"
+#line 1997 "yy.tab.c"
     break;
 
-  case 35:
+  case 35: /* param: VP_Q number  */
 #line 280 "src/core/io/pajek-parser.y"
                    {
          igraph_i_pajek_add_numeric_vertex_attribute("diamondratio", (yyvsp[0].realnum), context);
      }
-#line 1917 "yy.tab.c"
+#line 2005 "yy.tab.c"
     break;
 
-  case 36:
+  case 36: /* param: VP_LA number  */
 #line 283 "src/core/io/pajek-parser.y"
                     {
          igraph_i_pajek_add_numeric_vertex_attribute("labeldegree", (yyvsp[0].realnum), context);
      }
-#line 1925 "yy.tab.c"
+#line 2013 "yy.tab.c"
     break;
 
-  case 37:
+  case 37: /* param: VP_SIZE number  */
 #line 286 "src/core/io/pajek-parser.y"
                       {
          igraph_i_pajek_add_numeric_vertex_attribute("vertexsize", (yyvsp[0].realnum), context);
      }
-#line 1933 "yy.tab.c"
+#line 2021 "yy.tab.c"
     break;
 
-  case 38:
+  case 38: /* $@2: %empty  */
 #line 291 "src/core/io/pajek-parser.y"
                 { context->mode=3; }
-#line 1939 "yy.tab.c"
+#line 2027 "yy.tab.c"
     break;
 
-  case 39:
+  case 39: /* vpword: VP_FONT $@2 vpwordpar  */
 #line 291 "src/core/io/pajek-parser.y"
                                                {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("font", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1948 "yy.tab.c"
+#line 2036 "yy.tab.c"
     break;
 
-  case 40:
+  case 40: /* $@3: %empty  */
 #line 295 "src/core/io/pajek-parser.y"
               { context->mode=3; }
-#line 1954 "yy.tab.c"
+#line 2042 "yy.tab.c"
     break;
 
-  case 41:
+  case 41: /* vpword: VP_URL $@3 vpwordpar  */
 #line 295 "src/core/io/pajek-parser.y"
                                              {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("url", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1963 "yy.tab.c"
+#line 2051 "yy.tab.c"
     break;
 
-  case 42:
+  case 42: /* $@4: %empty  */
 #line 299 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 1969 "yy.tab.c"
+#line 2057 "yy.tab.c"
     break;
 
-  case 43:
+  case 43: /* vpword: VP_IC $@4 vpwordpar  */
 #line 299 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1978 "yy.tab.c"
+#line 2066 "yy.tab.c"
     break;
 
-  case 44:
+  case 44: /* $@5: %empty  */
 #line 303 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 1984 "yy.tab.c"
+#line 2072 "yy.tab.c"
     break;
 
-  case 45:
+  case 45: /* vpword: VP_BC $@5 vpwordpar  */
 #line 303 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("framecolor",
                                                     (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 1994 "yy.tab.c"
+#line 2082 "yy.tab.c"
     break;
 
-  case 46:
+  case 46: /* $@6: %empty  */
 #line 308 "src/core/io/pajek-parser.y"
              { context->mode=3; }
-#line 2000 "yy.tab.c"
+#line 2088 "yy.tab.c"
     break;
 
-  case 47:
+  case 47: /* vpword: VP_LC $@6 vpwordpar  */
 #line 308 "src/core/io/pajek-parser.y"
                                             {
          context->mode=1;
          igraph_i_pajek_add_string_vertex_attribute("labelcolor",
                                                     (yyvsp[0].string).str, (yyvsp[0].string).len, context);
      }
-#line 2010 "yy.tab.c"
+#line 2098 "yy.tab.c"
     break;
 
-  case 48:
+  case 48: /* vpwordpar: word  */
 #line 315 "src/core/io/pajek-parser.y"
                 { (yyval.string)=(yyvsp[0].string); }
-#line 2016 "yy.tab.c"
+#line 2104 "yy.tab.c"
     break;
 
-  case 55:
+  case 55: /* arcs: ARCSLINE NEWLINE arcsdefs  */
 #line 319 "src/core/io/pajek-parser.y"
                                          { context->directed=1; }
-#line 2022 "yy.tab.c"
+#line 2110 "yy.tab.c"
     break;
 
-  case 56:
+  case 56: /* arcs: ARCSLINE number NEWLINE arcsdefs  */
 #line 320 "src/core/io/pajek-parser.y"
                                          { context->directed=1; }
-#line 2028 "yy.tab.c"
+#line 2116 "yy.tab.c"
     break;
 
-  case 60:
+  case 60: /* $@7: %empty  */
 #line 325 "src/core/io/pajek-parser.y"
                         { context->actedge++;
                           context->mode=2; }
-#line 2035 "yy.tab.c"
+#line 2123 "yy.tab.c"
     break;
 
-  case 61:
+  case 61: /* arcsline: arcfrom arcto $@7 weight edgeparams NEWLINE  */
 #line 326 "src/core/io/pajek-parser.y"
                                                                         {
   igraph_vector_push_back(context->vector, (yyvsp[-5].intnum)-1);
   igraph_vector_push_back(context->vector, (yyvsp[-4].intnum)-1); }
-#line 2043 "yy.tab.c"
+#line 2131 "yy.tab.c"
     break;
 
-  case 64:
+  case 64: /* edges: EDGESLINE NEWLINE edgesdefs  */
 #line 335 "src/core/io/pajek-parser.y"
                                      { context->directed=0; }
-#line 2049 "yy.tab.c"
+#line 2137 "yy.tab.c"
     break;
 
-  case 65:
+  case 65: /* edges: EDGESLINE number NEWLINE edgesdefs  */
 #line 336 "src/core/io/pajek-parser.y"
                                             { context->directed=0; }
-#line 2055 "yy.tab.c"
+#line 2143 "yy.tab.c"
     break;
 
-  case 69:
+  case 69: /* $@8: %empty  */
 #line 341 "src/core/io/pajek-parser.y"
                           { context->actedge++;
                             context->mode=2; }
-#line 2062 "yy.tab.c"
+#line 2150 "yy.tab.c"
     break;
 
-  case 70:
+  case 70: /* edgesline: edgefrom edgeto $@8 weight edgeparams NEWLINE  */
 #line 342 "src/core/io/pajek-parser.y"
                                                                          {
   igraph_vector_push_back(context->vector, (yyvsp[-5].intnum)-1);
   igraph_vector_push_back(context->vector, (yyvsp[-4].intnum)-1); }
-#line 2070 "yy.tab.c"
+#line 2158 "yy.tab.c"
     break;
 
-  case 74:
+  case 74: /* weight: number  */
 #line 351 "src/core/io/pajek-parser.y"
                              {
   igraph_i_pajek_add_numeric_edge_attribute("weight", (yyvsp[0].realnum), context);
 }
-#line 2078 "yy.tab.c"
+#line 2166 "yy.tab.c"
     break;
 
-  case 78:
+  case 78: /* edgeparam: EP_C number number number  */
 #line 359 "src/core/io/pajek-parser.y"
                                {
        igraph_i_pajek_add_numeric_edge_attribute("color-red", (yyvsp[-2].realnum), context);
        igraph_i_pajek_add_numeric_edge_attribute("color-green", (yyvsp[-1].realnum), context);
        igraph_i_pajek_add_numeric_edge_attribute("color-blue", (yyvsp[0].realnum), context);
    }
-#line 2088 "yy.tab.c"
+#line 2176 "yy.tab.c"
     break;
 
-  case 79:
+  case 79: /* edgeparam: EP_S number  */
 #line 364 "src/core/io/pajek-parser.y"
                  {
        igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context);
    }
-#line 2096 "yy.tab.c"
+#line 2184 "yy.tab.c"
     break;
 
-  case 80:
+  case 80: /* edgeparam: EP_W number  */
 #line 367 "src/core/io/pajek-parser.y"
                  {
        igraph_i_pajek_add_numeric_edge_attribute("edgewidth", (yyvsp[0].realnum), context);
    }
-#line 2104 "yy.tab.c"
+#line 2192 "yy.tab.c"
     break;
 
-  case 81:
+  case 81: /* edgeparam: EP_H1 number  */
 #line 370 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("hook1", (yyvsp[0].realnum), context);
    }
-#line 2112 "yy.tab.c"
+#line 2200 "yy.tab.c"
     break;
 
-  case 82:
+  case 82: /* edgeparam: EP_H2 number  */
 #line 373 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("hook2", (yyvsp[0].realnum), context);
    }
-#line 2120 "yy.tab.c"
+#line 2208 "yy.tab.c"
     break;
 
-  case 83:
+  case 83: /* edgeparam: EP_A1 number  */
 #line 376 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("angle1", (yyvsp[0].realnum), context);
    }
-#line 2128 "yy.tab.c"
+#line 2216 "yy.tab.c"
     break;
 
-  case 84:
+  case 84: /* edgeparam: EP_A2 number  */
 #line 379 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("angle2", (yyvsp[0].realnum), context);
    }
-#line 2136 "yy.tab.c"
+#line 2224 "yy.tab.c"
     break;
 
-  case 85:
+  case 85: /* edgeparam: EP_K1 number  */
 #line 382 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("velocity1", (yyvsp[0].realnum), context);
    }
-#line 2144 "yy.tab.c"
+#line 2232 "yy.tab.c"
     break;
 
-  case 86:
+  case 86: /* edgeparam: EP_K2 number  */
 #line 385 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("velocity2", (yyvsp[0].realnum), context);
    }
-#line 2152 "yy.tab.c"
+#line 2240 "yy.tab.c"
     break;
 
-  case 87:
+  case 87: /* edgeparam: EP_AP number  */
 #line 388 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("arrowpos", (yyvsp[0].realnum), context);
    }
-#line 2160 "yy.tab.c"
+#line 2248 "yy.tab.c"
     break;
 
-  case 88:
+  case 88: /* edgeparam: EP_LP number  */
 #line 391 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labelpos", (yyvsp[0].realnum), context);
    }
-#line 2168 "yy.tab.c"
+#line 2256 "yy.tab.c"
     break;
 
-  case 89:
+  case 89: /* edgeparam: EP_LR number  */
 #line 394 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labelangle", (yyvsp[0].realnum), context);
    }
-#line 2176 "yy.tab.c"
+#line 2264 "yy.tab.c"
     break;
 
-  case 90:
+  case 90: /* edgeparam: EP_LPHI number  */
 #line 397 "src/core/io/pajek-parser.y"
                     {
        igraph_i_pajek_add_numeric_edge_attribute("labelangle2", (yyvsp[0].realnum), context);
    }
-#line 2184 "yy.tab.c"
+#line 2272 "yy.tab.c"
     break;
 
-  case 91:
+  case 91: /* edgeparam: EP_LA number  */
 #line 400 "src/core/io/pajek-parser.y"
                   {
        igraph_i_pajek_add_numeric_edge_attribute("labeldegree", (yyvsp[0].realnum), context);
    }
-#line 2192 "yy.tab.c"
+#line 2280 "yy.tab.c"
     break;
 
-  case 92:
+  case 92: /* edgeparam: EP_SIZE number  */
 #line 403 "src/core/io/pajek-parser.y"
                     { /* what is this??? */
        igraph_i_pajek_add_numeric_edge_attribute("arrowsize", (yyvsp[0].realnum), context);
    }
-#line 2200 "yy.tab.c"
+#line 2288 "yy.tab.c"
     break;
 
-  case 93:
+  case 93: /* edgeparam: EP_FOS number  */
 #line 406 "src/core/io/pajek-parser.y"
                    {
        igraph_i_pajek_add_numeric_edge_attribute("fontsize", (yyvsp[0].realnum), context);
    }
-#line 2208 "yy.tab.c"
+#line 2296 "yy.tab.c"
     break;
 
-  case 94:
+  case 94: /* $@9: %empty  */
 #line 411 "src/core/io/pajek-parser.y"
              { context->mode=4; }
-#line 2214 "yy.tab.c"
+#line 2302 "yy.tab.c"
     break;
 
-  case 95:
+  case 95: /* epword: EP_A $@9 epwordpar  */
 #line 411 "src/core/io/pajek-parser.y"
                                             {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("arrowtype", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2223 "yy.tab.c"
+#line 2311 "yy.tab.c"
     break;
 
-  case 96:
+  case 96: /* $@10: %empty  */
 #line 415 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2229 "yy.tab.c"
+#line 2317 "yy.tab.c"
     break;
 
-  case 97:
+  case 97: /* epword: EP_P $@10 epwordpar  */
 #line 415 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("linepattern", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2238 "yy.tab.c"
+#line 2326 "yy.tab.c"
     break;
 
-  case 98:
+  case 98: /* $@11: %empty  */
 #line 419 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2244 "yy.tab.c"
+#line 2332 "yy.tab.c"
     break;
 
-  case 99:
+  case 99: /* epword: EP_L $@11 epwordpar  */
 #line 419 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("label", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2253 "yy.tab.c"
+#line 2341 "yy.tab.c"
     break;
 
-  case 100:
+  case 100: /* $@12: %empty  */
 #line 423 "src/core/io/pajek-parser.y"
             { context->mode=4; }
-#line 2259 "yy.tab.c"
+#line 2347 "yy.tab.c"
     break;
 
-  case 101:
+  case 101: /* epword: EP_LC $@12 epwordpar  */
 #line 423 "src/core/io/pajek-parser.y"
                                            {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("labelcolor", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2268 "yy.tab.c"
+#line 2356 "yy.tab.c"
     break;
 
-  case 102:
+  case 102: /* $@13: %empty  */
 #line 427 "src/core/io/pajek-parser.y"
            { context->mode=4; }
-#line 2274 "yy.tab.c"
+#line 2362 "yy.tab.c"
     break;
 
-  case 103:
+  case 103: /* epword: EP_C $@13 epwordpar  */
 #line 427 "src/core/io/pajek-parser.y"
                                           {
       context->mode=2;
       igraph_i_pajek_add_string_edge_attribute("color", (yyvsp[0].string).str, (yyvsp[0].string).len, context);
     }
-#line 2283 "yy.tab.c"
+#line 2371 "yy.tab.c"
     break;
 
-  case 104:
+  case 104: /* epwordpar: word  */
 #line 433 "src/core/io/pajek-parser.y"
                 { context->mode=2; (yyval.string)=(yyvsp[0].string); }
-#line 2289 "yy.tab.c"
+#line 2377 "yy.tab.c"
     break;
 
-  case 105:
+  case 105: /* arcslist: ARCSLISTLINE NEWLINE arcslistlines  */
 #line 435 "src/core/io/pajek-parser.y"
                                              { context->directed=1; }
-#line 2295 "yy.tab.c"
+#line 2383 "yy.tab.c"
     break;
 
-  case 112:
+  case 112: /* arclistfrom: longint  */
 #line 443 "src/core/io/pajek-parser.y"
                      { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2301 "yy.tab.c"
+#line 2389 "yy.tab.c"
     break;
 
-  case 113:
+  case 113: /* arclistto: longint  */
 #line 445 "src/core/io/pajek-parser.y"
                    {
   igraph_vector_push_back(context->vector, context->actfrom);
   igraph_vector_push_back(context->vector, labs((yyvsp[0].intnum))-1);
 }
-#line 2310 "yy.tab.c"
+#line 2398 "yy.tab.c"
     break;
 
-  case 114:
+  case 114: /* edgeslist: EDGESLISTLINE NEWLINE edgelistlines  */
 #line 450 "src/core/io/pajek-parser.y"
                                                { context->directed=0; }
-#line 2316 "yy.tab.c"
+#line 2404 "yy.tab.c"
     break;
 
-  case 121:
+  case 121: /* edgelistfrom: longint  */
 #line 458 "src/core/io/pajek-parser.y"
                       { context->mode=0; context->actfrom=labs((yyvsp[0].intnum))-1; }
-#line 2322 "yy.tab.c"
+#line 2410 "yy.tab.c"
     break;
 
-  case 122:
+  case 122: /* edgelistto: longint  */
 #line 460 "src/core/io/pajek-parser.y"
                     {
   igraph_vector_push_back(context->vector, context->actfrom);
   igraph_vector_push_back(context->vector, labs((yyvsp[0].intnum))-1);
 }
-#line 2331 "yy.tab.c"
+#line 2419 "yy.tab.c"
     break;
 
-  case 124:
+  case 124: /* matrixline: MATRIXLINE  */
 #line 469 "src/core/io/pajek-parser.y"
                        { context->actfrom=0;
                          context->actto=0;
                          context->directed=(context->vcount2==0);
                        }
-#line 2340 "yy.tab.c"
+#line 2428 "yy.tab.c"
     break;
 
-  case 127:
+  case 127: /* adjmatrixline: adjmatrixnumbers NEWLINE  */
 #line 476 "src/core/io/pajek-parser.y"
                                         { context->actfrom++; context->actto=0; }
-#line 2346 "yy.tab.c"
+#line 2434 "yy.tab.c"
     break;
 
-  case 130:
+  case 130: /* adjmatrixentry: number  */
 #line 480 "src/core/io/pajek-parser.y"
                        {
   if ((yyvsp[0].realnum) != 0) {
@@ -2364,46 +2452,46 @@ yyreduce:
   }
   context->actto++;
 }
-#line 2368 "yy.tab.c"
+#line 2456 "yy.tab.c"
     break;
 
-  case 131:
+  case 131: /* longint: NUM  */
 #line 500 "src/core/io/pajek-parser.y"
              { (yyval.intnum)=igraph_pajek_get_number(igraph_pajek_yyget_text(scanner),
                                           igraph_pajek_yyget_leng(scanner)); }
-#line 2375 "yy.tab.c"
+#line 2463 "yy.tab.c"
     break;
 
-  case 132:
+  case 132: /* number: NUM  */
 #line 503 "src/core/io/pajek-parser.y"
              { (yyval.realnum)=igraph_pajek_get_number(igraph_pajek_yyget_text(scanner),
                                           igraph_pajek_yyget_leng(scanner)); }
-#line 2382 "yy.tab.c"
+#line 2470 "yy.tab.c"
     break;
 
-  case 135:
+  case 135: /* word: ALNUM  */
 #line 508 "src/core/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2389 "yy.tab.c"
+#line 2477 "yy.tab.c"
     break;
 
-  case 136:
+  case 136: /* word: NUM  */
 #line 510 "src/core/io/pajek-parser.y"
             { (yyval.string).str=igraph_pajek_yyget_text(scanner);
               (yyval.string).len=igraph_pajek_yyget_leng(scanner); }
-#line 2396 "yy.tab.c"
+#line 2484 "yy.tab.c"
     break;
 
-  case 137:
+  case 137: /* word: QSTR  */
 #line 512 "src/core/io/pajek-parser.y"
              { (yyval.string).str=igraph_pajek_yyget_text(scanner)+1;
                (yyval.string).len=igraph_pajek_yyget_leng(scanner)-2; }
-#line 2403 "yy.tab.c"
+#line 2491 "yy.tab.c"
     break;
 
 
-#line 2407 "yy.tab.c"
+#line 2495 "yy.tab.c"
 
       default: break;
     }
@@ -2418,11 +2506,10 @@ yyreduce:
      case of YYERROR or YYBACKUP, subsequent parser actions might lead
      to an incorrect destructor call or verbose syntax error message
      before the lookahead is translated.  */
-  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
+  YY_SYMBOL_PRINT ("-> $$ =", YY_CAST (yysymbol_kind_t, yyr1[yyn]), &yyval, &yyloc);
 
   YYPOPSTACK (yylen);
   yylen = 0;
-  YY_STACK_PRINT (yyss, yyssp);
 
   *++yyvsp = yyval;
   *++yylsp = yyloc;
@@ -2447,59 +2534,54 @@ yyreduce:
 yyerrlab:
   /* Make sure we have latest lookahead translation.  See comments at
      user semantic actions for why this is necessary.  */
-  yytoken = yychar == YYEMPTY ? YYEMPTY : YYTRANSLATE (yychar);
-
+  yytoken = yychar == YYEMPTY ? YYSYMBOL_YYEMPTY : YYTRANSLATE (yychar);
   /* If not already recovering from an error, report this error.  */
   if (!yyerrstatus)
     {
       ++yynerrs;
-#if ! YYERROR_VERBOSE
-      yyerror (&yylloc, context, YY_("syntax error"));
-#else
-# define YYSYNTAX_ERROR yysyntax_error (&yymsg_alloc, &yymsg, \
-                                        yyssp, yytoken)
       {
+        yypcontext_t yyctx
+          = {yyssp, yytoken, &yylloc};
         char const *yymsgp = YY_("syntax error");
         int yysyntax_error_status;
-        yysyntax_error_status = YYSYNTAX_ERROR;
+        yysyntax_error_status = yysyntax_error (&yymsg_alloc, &yymsg, &yyctx);
         if (yysyntax_error_status == 0)
           yymsgp = yymsg;
-        else if (yysyntax_error_status == 1)
+        else if (yysyntax_error_status == -1)
           {
             if (yymsg != yymsgbuf)
               YYSTACK_FREE (yymsg);
-            yymsg = YY_CAST (char *, YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
-            if (!yymsg)
+            yymsg = YY_CAST (char *,
+                             YYSTACK_ALLOC (YY_CAST (YYSIZE_T, yymsg_alloc)));
+            if (yymsg)
               {
-                yymsg = yymsgbuf;
-                yymsg_alloc = sizeof yymsgbuf;
-                yysyntax_error_status = 2;
+                yysyntax_error_status
+                  = yysyntax_error (&yymsg_alloc, &yymsg, &yyctx);
+                yymsgp = yymsg;
               }
             else
               {
-                yysyntax_error_status = YYSYNTAX_ERROR;
-                yymsgp = yymsg;
+                yymsg = yymsgbuf;
+                yymsg_alloc = sizeof yymsgbuf;
+                yysyntax_error_status = YYENOMEM;
               }
           }
         yyerror (&yylloc, context, yymsgp);
-        if (yysyntax_error_status == 2)
-          goto yyexhaustedlab;
+        if (yysyntax_error_status == YYENOMEM)
+          YYNOMEM;
       }
-# undef YYSYNTAX_ERROR
-#endif
     }
 
   yyerror_range[1] = yylloc;
-
   if (yyerrstatus == 3)
     {
       /* If just tried and failed to reuse lookahead token after an
          error, discard it.  */
 
-      if (yychar <= YYEOF)
+      if (yychar <= END)
         {
           /* Return failure if at end of input.  */
-          if (yychar == YYEOF)
+          if (yychar == END)
             YYABORT;
         }
       else
@@ -2523,6 +2605,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -2539,13 +2622,14 @@ yyerrorlab:
 yyerrlab1:
   yyerrstatus = 3;      /* Each real token shifted decrements this.  */
 
+  /* Pop stack until we find a state that shifts the error token.  */
   for (;;)
     {
       yyn = yypact[yystate];
       if (!yypact_value_is_default (yyn))
         {
-          yyn += YYTERROR;
-          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
+          yyn += YYSYMBOL_YYerror;
+          if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYSYMBOL_YYerror)
             {
               yyn = yytable[yyn];
               if (0 < yyn)
@@ -2559,7 +2643,7 @@ yyerrlab1:
 
       yyerror_range[1] = *yylsp;
       yydestruct ("Error: popping",
-                  yystos[yystate], yyvsp, yylsp, context);
+                  YY_ACCESSING_SYMBOL (yystate), yyvsp, yylsp, context);
       YYPOPSTACK (1);
       yystate = *yyssp;
       YY_STACK_PRINT (yyss, yyssp);
@@ -2570,13 +2654,11 @@ yyerrlab1:
   YY_IGNORE_MAYBE_UNINITIALIZED_END
 
   yyerror_range[2] = yylloc;
-  /* Using YYLLOC is tempting, but would change the location of
-     the lookahead.  YYLOC is available though.  */
-  YYLLOC_DEFAULT (yyloc, yyerror_range, 2);
-  *++yylsp = yyloc;
+  ++yylsp;
+  YYLLOC_DEFAULT (*yylsp, yyerror_range, 2);
 
   /* Shift the error token.  */
-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
+  YY_SYMBOL_PRINT ("Shifting", YY_ACCESSING_SYMBOL (yyn), yyvsp, yylsp);
 
   yystate = yyn;
   goto yynewstate;
@@ -2587,7 +2669,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -2595,24 +2677,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if !defined yyoverflow || YYERROR_VERBOSE
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (&yylloc, context, YY_("memory exhausted"));
   yyresult = 2;
-  /* Fall through.  */
-#endif
+  goto yyreturnlab;
 
 
-/*-----------------------------------------------------.
-| yyreturn -- parsing is finished, return the result.  |
-`-----------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
@@ -2628,19 +2708,18 @@ yyreturn:
   while (yyssp != yyss)
     {
       yydestruct ("Cleanup: popping",
-                  yystos[+*yyssp], yyvsp, yylsp, context);
+                  YY_ACCESSING_SYMBOL (+*yyssp), yyvsp, yylsp, context);
       YYPOPSTACK (1);
     }
 #ifndef yyoverflow
   if (yyss != yyssa)
     YYSTACK_FREE (yyss);
 #endif
-#if YYERROR_VERBOSE
   if (yymsg != yymsgbuf)
     YYSTACK_FREE (yymsg);
-#endif
   return yyresult;
 }
+
 #line 515 "src/core/io/pajek-parser.y"
 
 

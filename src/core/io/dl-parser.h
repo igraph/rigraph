@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.5.1.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
 
    This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,8 +31,9 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Undocumented macros, especially those whose name start with YY_,
-   are private implementation details.  Do not rely on them.  */
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
 
 #ifndef YY_IGRAPH_DL_YY_YY_TAB_H_INCLUDED
 # define YY_IGRAPH_DL_YY_YY_TAB_H_INCLUDED
@@ -44,27 +45,31 @@
 extern int igraph_dl_yydebug;
 #endif
 
-/* Token type.  */
+/* Token kinds.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
-    END = 0,
-    NUM = 258,
-    NEWLINE = 259,
-    DL = 260,
-    NEQ = 261,
-    DATA = 262,
-    LABELS = 263,
-    LABELSEMBEDDED = 264,
-    FORMATFULLMATRIX = 265,
-    FORMATEDGELIST1 = 266,
-    FORMATNODELIST1 = 267,
-    DIGIT = 268,
-    LABEL = 269,
-    EOFF = 270,
-    ERROR = 271
+    YYEMPTY = -2,
+    END = 0,                       /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    NUM = 258,                     /* NUM  */
+    NEWLINE = 259,                 /* NEWLINE  */
+    DL = 260,                      /* DL  */
+    NEQ = 261,                     /* NEQ  */
+    DATA = 262,                    /* DATA  */
+    LABELS = 263,                  /* LABELS  */
+    LABELSEMBEDDED = 264,          /* LABELSEMBEDDED  */
+    FORMATFULLMATRIX = 265,        /* FORMATFULLMATRIX  */
+    FORMATEDGELIST1 = 266,         /* FORMATEDGELIST1  */
+    FORMATNODELIST1 = 267,         /* FORMATNODELIST1  */
+    DIGIT = 268,                   /* DIGIT  */
+    LABEL = 269,                   /* LABEL  */
+    EOFF = 270,                    /* EOFF  */
+    ERROR = 271                    /* ERROR  */
   };
+  typedef enum yytokentype yytoken_kind_t;
 #endif
 
 /* Value type.  */
@@ -76,7 +81,7 @@ union YYSTYPE
   long int integer;
   igraph_real_t real;
 
-#line 80 "yy.tab.h"
+#line 85 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -100,6 +105,8 @@ struct YYLTYPE
 
 
 
+
 int igraph_dl_yyparse (igraph_i_dl_parsedata_t* context);
+
 
 #endif /* !YY_IGRAPH_DL_YY_YY_TAB_H_INCLUDED  */
