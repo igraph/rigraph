@@ -21,19 +21,17 @@ of the C library: https://github.com/igraph/igraph.
 
 ## Development and Compilation
 
-All development is being done on the `dev` branch. The actual R package is being
-generated using `make igraph`, which can then be installed. We automatically push the
-generated R package to the `master` branch, so that it can be automatically
-installed using `remotes::install_github("igraph/igraph@master")`.
+All development is being done on the default branch, so that it can be
+automatically installed using `remotes::install_github("igraph/rigraph")`
+or `pak::pak("igraph/rigraph")` . Some parts of the code (sources for the
+C library, `.Rd` documentation files, ...) are stored redundantly
+and updated by running `make` or `make igraph`.
 
-If you clone the repository and checkout the `dev` branch, you can locally build
-and test the `igraph` package using the `devtools` package as follows:
+If you clone the repository, you can locally build and test the `igraph`
+package using the `testthat` package as follows:
 
 ```R
-  system("git submodule init")
-  system("git submodule update")
-  system("make")
-  testthat::test_local()
+testthat::test_local()
 ```
 
 When building from source on Windows, you need to have
@@ -46,11 +44,19 @@ two from an RTools terminal using
 pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2
 ```
 
+To update the files stored redundantly, run
+
+```sh
+make igraph
+```
+
+. This is done automatically on CI/CD, in some cases changes are committed
+directly to the branch that is being tested.
+
 ## Making Trivial Changes
 
-- Please always use the `dev` branch. Choose this branch in your fork.
 - Then look for the file you want to modify.
-- Clique on the edit symbol (pen) on the upper right corner of the file
+- Click on the edit symbol (pen) on the upper right corner of the file
   view.
 - Make your edits.
 - Write a short commit message, less than 65 characters. E.g. "Fix manual
@@ -75,7 +81,7 @@ pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2
 ## Making More Involved Changes
 
 This is mostly the same as for trivial changes, but you probably want to
-edit the sources on your computer, instead of online on Github.
+edit the sources on your computer, instead of online on GitHub.
 
 - Open an issue in the issue tracker about the proposed changes. This is
   not required for smaller things, but I suggest you do it for others. Just
@@ -97,13 +103,15 @@ which case please tell us.)
 
 ### Code Formatting
 
+We follow the [tidyverse style guide](https://style.tidyverse.org/) for
+formatting. The styler package helps apply this style to the code.
 Look at the style (indentation, braces, etc.) of some recently committed
-bigger change, and try to mimic that. The code style within igraph is not
-stricly the same, but we want to keep it reasonably similar.
+bigger change, and try to mimic that.
 
 ### Documentation
 
-Please document your new functions using `roxygen`.
+Please document your new functions using `roxygen2`, and run `devtools::document()`
+or `make igraph` to update the `.Rd` files.
 
 ### Test Cases
 
