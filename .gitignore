@@ -13,4 +13,4 @@ igraph.Rcheck/
 .vscode/
 .Rproj.user
 /configure~
-build
+/build/
