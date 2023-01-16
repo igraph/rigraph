@@ -620,7 +620,7 @@ dev.off()
 ```
 
 ## igraph and the outside world
-No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. `igraph` is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The following table summarises the formats igraph can read or write:
+No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. `igraph` is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The main functions for reading and writing from/to file are `read_graph` and `write_graph`, respectively. The following table summarises the formats igraph can read or write:
 
 | Format                                                                    | Short name  | Read function                                                                                                                                                                             | Write function                                      |
 |------------------|------------------|------------------|------------------|
@@ -636,7 +636,7 @@ No graph module would be complete without some kind of import/export functionali
 | Labeled edgelist (a.k.a. [NCOL](https://lgl.sourceforge.net/#FileFormat)) | `ncol`      | `read_graph(file, format = c("ncol"))`                                                                                                                                                    | `write_graph(graph, file, format = c("ncol"))`     |
 | [Pajek](http://mrvar.fdv.uni-lj.si/pajek/) format                         | `pajek`     | `read_graph(file, format = c("pajek"))`                                                                                                                                                   | `write_graph(graph, file, format = c("pajek"))`    |
 
-As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must use the GraphML read function from the table above (make sure you use the appropriate path to the downloaded file).
+As an exercise, download the graph representation of the well-known [Zachary karate club study](https://en.wikipedia.org/wiki/Zachary%27s_karate_club) from `this file </assets/zachary.zip>`, unzip it and try to load it into igraph. Since it is a GraphML file, you must specify this format in the `read_graph` function (make sure you use the appropriate path to the downloaded file).
 
 ```{r echo=TRUE,eval=FALSE, error=FALSE}
 karate <- read_graph("zachary.graphml", format =c("graphml"))
@@ -644,8 +644,6 @@ summary(karate)
 ```
 
 **Note:** Each file format has its own limitations. For instance, not all of them can store attributes. Your best bet is probably GraphML or GML if you want to save igraph graphs in a format that can be read from an external package and you want to preserve numeric and string attributes. Edge list and NCOL is also fine if you don't have attributes (NCOL supports vertex names and edge weights, though).
-
-There are two helper functions as well: `read` is a generic entry point for read functions which tries to infer the appropriate format from the file extension. `write` is the opposite of `read`: it lets you save a graph where the preferred format is again inferred from the extension. The format detection of `read` and `write` can be overridden by the `format` keyword argument which accepts the short names of the formats from the above table:
 
 ## Where to go next
 
