@@ -1,10 +1,5 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# igraph 1.3.5.9097
-
-- Merge remote-tracking branch 'adrian/dev' into adrian.
-
-
 # igraph 1.3.5.9096
 
 - Merge pull request #634 from igraph/b-test-order.
