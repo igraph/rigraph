@@ -14,12 +14,12 @@ name: R-CMD-check
 
 jobs:
   build_src_package:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     name: Build source R package
 
     env:
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -48,7 +48,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .venv
-          key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
+          key: Python-venv-jammy-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
