@@ -16,6 +16,10 @@ Throughout this tutorial, we will use words `graph` and `network` as synonyms, a
 `igraph` offers many ways to create a graph. The simplest one is the function `make_empty_graph`:
 
 ```{r echo = FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=6)
+```
+
+```{r setup}
 library("igraph")
 ```
 
@@ -32,7 +36,7 @@ g <- make_graph(edges = c(1,2, 1,5), n=10, directed = FALSE)
 Starting from igraph 0.8.0, you can also include literal here, via igraph's formula notation. In this case, the first term of the formula has to start with a "\~" character, just like regular formulae in R. The expressions consist of vertex names and edge operators. An edge operator is a sequence of '-' and '+' characters, the former is for the edges and the latter is used for arrow heads. The edges can be arbitrarily long, ie. you may use as many '-' characters to "draw" them as you like. If all edge operators consist of only '-' characters then the graph will be undirected, whereas a single '+' character implies a directed graph: i.e to create the same graph as above:
 
 ```{r echo = TRUE}
-g <- make_graph(~ 1 - 2, 1 - 5, 3, 4, 5, 6, 7, 8, 9, 10)
+g <- make_graph(~ 1--2, 1--5, 3, 4, 5, 6, 7, 8, 9, 10)
 ```
 
 We can print the graph to get a summary of its nodes and edges:
@@ -41,7 +45,7 @@ We can print the graph to get a summary of its nodes and edges:
 g
 ```
 
-This means: **U** ndirected graph with **10** vertices and **2** edges, with the exact edges listed out. If the graph has a `[name]` attribute, it is printed as well.
+This means: **U**ndirected **N**amed graph with **10** vertices and **2** edges, with the exact edges listed out. If the graph has a `[name]` attribute, it is printed as well.
 
 **Note**: `summary` does not list the edges, which is convenient for large graphs with millions of edges:
 
@@ -78,7 +82,7 @@ In addition to IDs, vertices and edges can be assigned a name and other attribut
 Let's continue working with the Karate club graph. To add to add one or more vertices to an existing graph, use `add_vertices`:
 
 ```{r}
-g <- add_vertices(g,3)
+g <- add_vertices(g, 3)
 ```
 
 Similarly, to add edges you can use `add_edges`:
@@ -105,14 +109,15 @@ If you try to add edges to vertices with invalid IDs (i.e., you try to add an ed
 g <- add_edges(g, edges = c(38,37))
 ```
 
-Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package who provides a mechanism for chasing commands with the operator %\>%:
+Let us add some more vertices and edges to our graph. In `igraph` we can use the `magrittr` package, which provides a mechanism for chaining commands with the operator %\>%:
 
 ```{r echo = TRUE}
-g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>% add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
+g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>%
+	 add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
 g
 ```
 
-We now have an undirected graph with 40 vertices and 86 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will. Use `delete_vertices` and `delete_edges` to perform these operations. For instance, to delete the edge connecting vertices `1-34`, get its ID and then delete it:
+We now have an undirected graph with 40 vertices and 86 edges. Vertex and edge IDs are always *contiguous*, so if you delete a vertex all subsequent vertices will be renumbered. When a vertex is renumbered, edges are **not** renumbered, but their source and target vertices will be. Use `delete_vertices` and `delete_edges` to perform these operations. For instance, to delete the edge connecting vertices `1-34`, get its ID and then delete it:
 
 ```{r echo = TRUE}
 get.edge.ids(g, c(1,34))
@@ -144,7 +149,7 @@ g1 <- graph_from_literal(A-B:C:I, B-A:C:D, C-A:B:E:H, D-B:E:F,
 plot(g1)
 ```
 
-The ':' operator can be used to define vertex sets. If an edge operator connects two vertex sets then every vertex from the first set will be connected to every vertex in the second set. Then we use `is_chordal` to evaluate if our graph is chordal and to search what edges are missing to fill-in the graph:
+In the example above, the ':' operator was used to define vertex sets. If an edge operator connects two vertex sets, then every vertex from the first set will be connected to every vertex in the second set. Then we use `is_chordal` to evaluate if our graph is chordal and to search what edges are missing to fill-in the graph:
 
 ```{r echo = TRUE}
 is_chordal(g1, fillin=TRUE)
