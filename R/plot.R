@@ -72,9 +72,7 @@
 #' graph plotting functions.
 #' @method plot igraph
 #' @family plot
-#' @export
-#' @family plot
-#' @export
+#' @export plot.igraph
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot polygon text par
 #' @keywords graphs

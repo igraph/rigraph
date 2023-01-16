@@ -92,9 +92,6 @@ graph plotting functions.
 
 Other plot: 
 \code{\link{rglplot}()}
-
-Other plot: 
-\code{\link{rglplot}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
