@@ -14,8 +14,8 @@ vignette: >
 
 ***
 
-# Creating a graph
-`igraph` offers many ways to create a graph. The simplest one is the function `make_empty_graph`:
+# Starting igraph
+To start using `igraph` in your R code, you must first load the library:
 
 ```{r echo = FALSE}
 knitr::opts_chunk$set(fig.width=6, fig.height=6)
@@ -24,6 +24,11 @@ knitr::opts_chunk$set(fig.width=6, fig.height=6)
 ```{r setup}
 library("igraph")
 ```
+
+Now you have all `igraph` functions available.
+
+# Creating a graph
+`igraph` offers many ways to create a graph. The simplest one is the function `make_empty_graph`:
 
 ```{r}
 g <- make_empty_graph()
