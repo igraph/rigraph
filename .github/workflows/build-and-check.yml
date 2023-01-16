@@ -61,8 +61,30 @@ jobs:
           make igraph
         shell: bash
 
-      - name: Package validation
+      - name: Commit changes
+        if: ${{ env.GITHUB_ACTOR == env.GITHUB_REPOSITORY_OWNER }}
         run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git fetch
+            if [ -n "${GITHUB_HEAD_REF}" ]; then
+              git add .
+              git stash save
+              git switch ${GITHUB_HEAD_REF}
+              git merge origin/${GITHUB_BASE_REF} --no-edit
+              git stash pop
+            fi
+            git add .
+            git commit -m "Automated changes"
+            git push
+          fi
+        shell: bash
+
+      - name: Package validation
+        if: ${{ env.GITHUB_ACTOR != env.GITHUB_REPOSITORY_OWNER }}
+        run: |
+          git status --porcelain
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git diff --cached
@@ -109,14 +131,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -133,12 +150,9 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          working-directory: igraph
 
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
-        with:
-          working-directory: igraph
 
   coverage:
     runs-on: ubuntu-20.04
@@ -153,14 +167,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -173,11 +182,9 @@ jobs:
         with:
           needs: coverage
           pak-version: devel
-          working-directory: igraph
 
       - name: Run coverage
         run: |
-          setwd("igraph")
           line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
 
           cov <- covr::package_coverage(

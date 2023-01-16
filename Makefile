@@ -204,12 +204,9 @@ OBJECTS := $(shell echo $(CORESRC) $(VENDORSRC) $(ARPACK) $(RAY) $(UUID) | \
 object_files: force
 	@echo '$(OBJECTS)' | cmp -s - $@ || echo '$(OBJECTS)' > $@
 
-configure.ac: %: tools/stimulus/%
-	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
-
 src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 		object_files
-	sed 's/@VERSION@/'$(VERSION)'/g' $< >$@
+	cp $< $@
 	printf "%s" "OBJECTS=" >> $@
 	# Can't insert newlines, not all make variants accept them
 	cat object_files >> $@
@@ -229,9 +226,6 @@ docs: pre_build
 igraph: igraph_$(VERSION).tar.gz
 
 igraph_$(VERSION).tar.gz: docs
-	rm -f src/config.h
-	rm -f src/Makevars
-	touch src/config.h
 	Rscript -e 'devtools::build(path = ".")'
 
 #############
@@ -261,21 +255,14 @@ test:
 
 clean:
 	@rm -rf autom4te.cache/
-	@rm -f  configure
 	@rm -f  config.log
 	@rm -f  config.status
 	@rm -f  igraph_*.tar.gz
 	@rm -f  igraph_*.tgz
 	@rm -f  object_files
 	@rm -rf version_number
-	@rm -f  configure.ac
 	@rm -rf src/*.o
 	@rm -rf src/*.so
-	@rm -rf src/Makevars*
-	@rm -f  src/config.*
-	@rm -rf src/core
-	@rm -rf src/include
-	@rm -rf src/vendor
 	@cd $(top_srcdir) && git reset --hard
 
 distclean: clean

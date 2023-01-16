@@ -1,7 +1,4 @@
-/core/
-/vendor/
-/include/
-/*.o
-/*.so
-/config.*
-/Makevars*
+*.o
+*.so
+/config.h
+/config.h.in~
