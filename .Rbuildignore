@@ -32,3 +32,6 @@
 ^codecov\.yml$
 ^\.gitattributes$
 ^build$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
