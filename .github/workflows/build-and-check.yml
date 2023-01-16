@@ -14,12 +14,12 @@ name: R-CMD-check
 
 jobs:
   build_src_package:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     name: Build source R package
 
     env:
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/jammy/latest
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -48,7 +48,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .venv
-          key: Python-venv-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
+          key: Python-venv-jammy-${{ runner.os }}-${{ hashFiles('tools/build-requirements.txt') }}
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -61,8 +61,30 @@ jobs:
           make igraph
         shell: bash
 
-      - name: Package validation
+      - name: Commit changes
+        if: ${{ env.GITHUB_ACTOR == env.GITHUB_REPOSITORY_OWNER }}
         run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --local user.name "$GITHUB_ACTOR"
+            git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git fetch
+            if [ -n "${GITHUB_HEAD_REF}" ]; then
+              git add .
+              git stash save
+              git switch ${GITHUB_HEAD_REF}
+              git merge origin/${GITHUB_BASE_REF} --no-edit
+              git stash pop
+            fi
+            git add .
+            git commit -m "Automated changes"
+            git push
+          fi
+        shell: bash
+
+      - name: Package validation
+        if: ${{ env.GITHUB_ACTOR != env.GITHUB_REPOSITORY_OWNER }}
+        run: |
+          git status --porcelain
           if [ -n "$(git status --porcelain)" ]; then
             git add .
             git diff --cached
@@ -109,14 +131,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -133,12 +150,9 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-          working-directory: igraph
 
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
-        with:
-          working-directory: igraph
 
   coverage:
     runs-on: ubuntu-20.04
@@ -153,14 +167,9 @@ jobs:
       MAKEFLAGS: -j2
 
     steps:
-      - name: Download R source package
-        uses: actions/download-artifact@v2
+      - uses: actions/checkout@v2
         with:
-          name: rigraph
-
-      - name: Extract source package
-        run: tar -xvf igraph*.tar.gz
-        shell: bash
+          fetch-depth: 0
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -173,11 +182,9 @@ jobs:
         with:
           needs: coverage
           pak-version: devel
-          working-directory: igraph
 
       - name: Run coverage
         run: |
-          setwd("igraph")
           line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
 
           cov <- covr::package_coverage(
@@ -187,41 +194,3 @@ jobs:
           )
           covr::codecov(coverage = cov, quiet = FALSE)
         shell: Rscript {0}
-
-  # Automatically deploy the source code to the master branch
-  deploy_src:
-    runs-on: ubuntu-20.04
-
-    name: Deploy source R package to master branch
-
-    if: success() && github.ref == 'refs/heads/dev'
-    needs: R-CMD-check
-
-    steps:
-      - name: Checkout master branch
-        uses: actions/checkout@v2
-        with:
-          ref: master
-
-      - name: Download R source package
-        uses: actions/download-artifact@v2
-        with:
-          name: rigraph
-
-      - name: Extract source package
-        run: |
-          find . -type f -maxdepth 1 | grep -v 'igraph.*tar.gz' | xargs rm
-          rm -rf R build demo doc inst man src tests
-          tar -xvf igraph*.tar.gz --strip-components=1
-          rm *.tar.gz
-
-      - name: Push to master branch
-        run: |
-          # Setup the username and email.
-          git config user.name "GH actions bot"
-          git config user.email "<>"
-
-          # Stage files, commit and push
-          git add .
-          git commit -m "${{ github.event.head_commit.message }} [Triggered by ${{ github.event.after }}]"
-          git push origin master

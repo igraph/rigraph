@@ -5,11 +5,15 @@
 - Merge remote-tracking branch 'adrian/dev' into adrian.
 
 
-
 # igraph 1.3.5.9096
 
-- Merge remote-tracking branch 'origin/dev' into adrian.
+- Merge pull request #634 from igraph/b-test-order.
 
+Fix test order
+
+- Merge pull request #632 from igraph/b-brittle-eigen-test.
+
+Fix brittle test
 
 
 # igraph 1.3.5.9095
