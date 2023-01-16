@@ -1,4 +1,6 @@
 test_that("cluster_leading_eigen works", {
+  set.seed(20230115)
+
   ## Check-test
 
   f <- function(membership, community, value, vector, multiplier, extra) {

@@ -30,3 +30,5 @@
 ^igraph\.Rproj$
 ^\.Rproj\.user$
 ^codecov\.yml$
+^\.gitattributes$
+^build$

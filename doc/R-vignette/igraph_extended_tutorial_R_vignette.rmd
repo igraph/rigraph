@@ -386,13 +386,13 @@ V(g)$degree[degree(g) == 3]
 
 There are also a few special structural properties for selecting edges.
 
-Using `from` or `to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
+Using `.from` or `.to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
 
 ```{r echo = TRUE, warning = FALSE}
-E(g)[from(3)]
+E(g)[.from(3)]
 ```
 
-Using `to` filter based on the target vertices. This is different from `from` if the graph is directed.
+Using `.to` filter based on the target vertices. This is different from `.from` if the graph is directed.
 
 For instance, the following expression selects all the edges between Carmina (vertex index 3), Dennis (vertex index 5) and Esther (vertex index 6). The expression %--% is a special operator that can be used to select all edges between two sets of vertices. It ignores the edge directions in directed graphs.
 
