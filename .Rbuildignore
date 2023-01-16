@@ -31,3 +31,4 @@
 ^\.Rproj\.user$
 ^codecov\.yml$
 ^\.gitattributes$
+^build$
