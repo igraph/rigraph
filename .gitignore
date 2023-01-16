@@ -6,7 +6,6 @@
 /igraph_*.tar.gz
 /igraph_*.tgz
 /object_files
-/revdep/
 /version_number
 igraph.Rcheck/
 .venv/
