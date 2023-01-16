@@ -126,7 +126,7 @@ Let us add some more vertices and edges to our graph. In `igraph` we can use the
 
 ```{r echo = TRUE}
 g <- g %>% add_edges(edges=c(1,34)) %>% add_vertices(3) %>%
-	 add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
+     add_edges(edges=c(38,39, 39,40, 40,38, 40,37))
 g
 ```
 
@@ -193,7 +193,7 @@ graph2 <- make_tree(127, 2, mode = "undirected")
 identical_graphs(graph1,graph2)
 ```
 
-Other function generate graphs *stochastically*, i.e. they produce a different graph each time. For instance `sample_grg`:
+Other functions generate graphs *stochastically*, i.e. they produce a different graph each time. For instance `sample_grg`:
 
 ```{r echo = TRUE}
 graph1 <- sample_grg(100, 0.2)
@@ -217,15 +217,16 @@ Checking for isomorphism can take a while for large graphs (in this case, the an
 
 # Setting and retrieving attributes
 
-In addition to IDs, vertex and edges can have *attributes* such as a name, coordinates for plotting, metadata, and weights. The graph itself can have such attributes too (e.g. a name, which will show in `summary`). In a sense, every `graph`, vertex and edge can be used as a R variable to store and retrieve these attributes.
+In addition to IDs, vertex and edges can have *attributes* such as a name, coordinates for plotting, metadata, and weights. The graph itself can have such attributes too (e.g. a name, which will show in `summary`). In a sense, every graph, vertex and edge can be used as an R namespace to store and retrieve these attributes.
 
 To demonstrate the use of attributes, let us create a simple social network:
 
 ```{r}
-g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, George-Dennis:Frank, Dennis-Esther)
+g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther,
+                George-Dennis:Frank, Dennis-Esther)
 ```
 
-Each vertex represents a person, so we want to store ages, genders and type of connection between two people (`is_formal` refers to whether a connection between one person or another is formal or informal, i.e. colleagues or friends). The `\$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
+Each vertex represents a person, so we want to store ages, genders and types of connection between two people (`is_formal` refers to whether a connection between one person or another is formal or informal, i.e. colleagues or friends). The `\$` operator is a shortcut to get and set graph attributes. It is shorter and just as readable as `graph_attr` and `set_graph_attr`.
 
 ```{r echo = TRUE}
 V(g)$age <- c(25, 31, 18, 23, 47, 22, 50) 
@@ -237,7 +238,8 @@ summary(g)
 `V` and `E` are the standard way to obtain a sequence of all vertices and edges, respectively. This assigns an attribute to *all* vertices/edges at once. Another way to generate our social network is with the use of `set_vertex_attr` and `set_edge_attr` and the operator %\>%:
 
 ```{r echo = TRUE, eval=FALSE}
-g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther, George-Dennis:Frank, Dennis-Esther) %>%
+g <- make_graph(~ Alice-Bob:Claire:Frank, Claire-Alice:Dennis:Frank:Esther,
+                George-Dennis:Frank, Dennis-Esther) %>%
   set_vertex_attr("age", value = c(25, 31, 18, 23, 47, 22, 50)) %>%
   set_vertex_attr("gender", value = c("f", "m", "f", "m", "m", "f", "m")) %>%
   set_edge_attr("is_formal", value = c(FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE))
@@ -251,24 +253,24 @@ E(g)$is_formal
 ```
 
 ```{r}
-E(g)$is_formal[1] <- c(TRUE)
+E(g)$is_formal[1] <- TRUE
 ```
 
 ```{r echo = TRUE}
 E(g)$is_formal
 ```
 
-Attribute values can be set to any R object, but note that storing the graph in some file formats might result the loss of complex attribute values. Both vertices, edges and the graph itself can all be keyed like a dictionary to set attributes, e.g. to add a date to the graph:
+Attribute values can be set to any R object, but note that storing the graph in some file formats might result in the loss of complex attribute values. Vertices, edges and the graph itself can all be used to set attributes, e.g. to add a date to the graph:
 
 ```{r echo = TRUE}
 g$date <- c("2022-02-11")
 graph_attr(g, "date")
 ```
 
-To retrieve a dictionary of attributes, you can use `graph_attr`, `vertex_attr`, and `edge_attr`. To find the ID of a vertex you can use the function `match`:
+To retrieve attributes, you can also use `graph_attr`, `vertex_attr`, and `edge_attr`. To find the ID of a vertex you can use the function `match`:
 
 ```{r echo = TRUE}
-match(c("George"),V(g)$name)
+match(c("George"), V(g)$name)
 ```
 
 To assign attributes to a subset of vertices or edges, you can use:
@@ -281,7 +283,7 @@ V(g)
 To delete attributes:
 
 ```{r echo = TRUE}
-g <- delete_vertex_attr(g,"gender")
+g <- delete_vertex_attr(g, "gender")
 V(g)$gender
 ```
 
@@ -291,7 +293,7 @@ If you want to save a graph in R with all the attributes use the R's standard fu
 
 `igraph` provides a large set of functions to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network constructed in the previous section.
 
-Perhaps the simplest property one can think of is the `degree`. The degree of a vertex equals the number of edges adjacent to it. In case of directed networks, we can also define `in-degree` (the number of edges pointing towards the vertex) and `out-degree` (the number of edges originating from the vertex). `igraph` is able to calculate all of them using a simple syntax:
+Perhaps the simplest property one can think of is the _degree_. The degree of a vertex equals the number of edges adjacent to it. In case of directed networks, we can also define _in-degree_ (the number of edges pointing towards the vertex) and _out-degree_ (the number of edges originating from the vertex). `igraph` is able to calculate all of them using a simple syntax:
 
 ```{r echo = TRUE}
 degree(g)
@@ -300,14 +302,14 @@ degree(g)
 If the graph was directed, we would have been able to calculate the in- and out-degrees separately using `degree(mode="in")` and `degree(mode="out")`. You can also pass a single vertex ID or a list of vertex IDs to `degree` if you want to calculate the degrees for only a subset of vertices:
 
 ```{r echo = TRUE}
-degree(g,7)
+degree(g, 7)
 ```
 
 ```{r echo = TRUE}
-degree(g, v = c(3,4,5))
+degree(g, v=c(3,4,5))
 ```
 
-A similar syntax is used for most of the structural properties `igraph` can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs. Later in the `next chapter <querying_vertices_and_edges>`, you will learn how to restrict them to exactly the vertices or edges you want.
+A similar syntax is used for most of the structural properties `igraph` can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs.
 
 ***
 **NOTE:** For some measures, it does not make sense to calculate them only for a few vertices or edges instead of the whole graph, as it would take the same time anyway. In this case, the functions won't accept vertex or edge IDs, but you can still restrict the resulting list later using standard operations. One such example is eigenvector centrality (`evcent()`).
@@ -325,16 +327,6 @@ Now we can also figure out which connections have the highest betweenness centra
 ```{r echo = TRUE}
 ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
-```
-
-Most structural properties can also be retrieved for a subset of vertices or edges or for a single vertex or edge by calling the appropriate function on `Vertex` or `Edge` object of interest:
-
-```{r echo = TRUE}
-degree(g)
-```
-
-```{r echo = TRUE}
-    degree(g)[3]
 ```
 
 # Querying vertices and edges based on attributes
