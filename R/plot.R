@@ -134,7 +134,7 @@ plot.igraph <- function(x,
   margin <- rep(margin, length.out = 4)
   rescale <- params("plot", "rescale")
   asp <- params("plot", "asp")
-  frame <- params("plot", "frame")
+  frame.plot <- params("plot", "frame.plot")
   main <- params("plot", "main")
   sub <- params("plot", "sub")
   xlab <- params("plot", "xlab")
@@ -161,7 +161,7 @@ plot.igraph <- function(x,
   if (!add) {
     plot(0, 0,
       type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim,
-      axes = axes, frame = frame, asp = asp, main = main, sub = sub
+      axes = axes, frame.plot = frame.plot, asp = asp, main = main, sub = sub
     )
   }
 
