@@ -1,6 +1,10 @@
 ---
 title: "igraph (R interface)"
-output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
 vignette: >
   %\VignetteIndexEntry{igraph (R interface)}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +18,16 @@ vignette: >
 
 ***
 
-# Starting igraph
-To start using `igraph` in your R code, you must first load the library:
+## Installation
+To install the library from CRAN, use:
+```{r echo = TRUE, eval = FALSE}
+install.packages("igraph")
+```
+
+More details on dependencies, requirements, and troubleshooting on installation are found on the main [documentation page](https://igraph.org/r/).
+
+## Usage
+To use `igraph` in your R code, you must first load the library:
 
 ```{r echo = FALSE}
 knitr::opts_chunk$set(fig.width=6, fig.height=6)
@@ -27,7 +39,7 @@ library("igraph")
 
 Now you have all `igraph` functions available.
 
-# Creating a graph
+## Creating a graph
 `igraph` offers many ways to create a graph. The simplest one is the function `make_empty_graph`:
 
 ```{r}
@@ -77,7 +89,7 @@ plot(g)
 
 A more detailed description of plotting options is provided later on in this tutorial.
 
-# Vertex and edge IDs
+## Vertex and edge IDs
 
 Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always consecutive and they start with 1 (one). For a graph with n vertices the vertex IDs are always between 1 and n. If some operation changes the number of vertices in the graphs, e.g. a subgraph is created via `induced_subgraph`, then the vertices are renumbered to satisfy this criterion.
 
@@ -90,7 +102,7 @@ The same is true for the edges as well: edge IDs are always between 1 and m, the
 
 In addition to IDs, vertices and edges can be assigned a name and other attributes. That makes it easier to track them whenever the graph is altered. Examples of this pattern are shown later on in this tutorial.
 
-# Adding/deleting vertices and edges
+## Adding/deleting vertices and edges
 
 Let's continue working with the Karate club graph. To add to add one or more vertices to an existing graph, use `add_vertices`:
 
@@ -175,7 +187,7 @@ chordal_graph <- add_edges(g1, is_chordal(g1, fillin=TRUE)$fillin)
 plot(chordal_graph)
 ```
 
-# Constructing graphs
+## Constructing graphs
 In addition to `make_empty_graph`, `make_graph`, and `make_graph_from_literal`, `igraph` includes many other function to construct a graph. Some are *deterministic*, i.e. they produce the same graph each single time, e.g. `make_tree`:
 
 ```{r echo = TRUE}
@@ -215,7 +227,7 @@ isomorphic(graph1,graph2)
 
 Checking for isomorphism can take a while for large graphs (in this case, the answer can quickly be given by checking the degree sequence of the two graphs). `identical_graph` is a stricter criterion than `isomorphic`: the two graphs must have the same list of vertices and edges, in exactly the same order, with same directedness, and the two graphs must also have identical graph, vertex and edge attributes.
 
-# Setting and retrieving attributes
+## Setting and retrieving attributes
 
 In addition to IDs, vertex and edges can have *attributes* such as a name, coordinates for plotting, metadata, and weights. The graph itself can have such attributes too (e.g. a name, which will show in `summary`). In a sense, every graph, vertex and edge can be used as an R namespace to store and retrieve these attributes.
 
@@ -289,7 +301,7 @@ V(g)$gender
 
 If you want to save a graph in R with all the attributes use the R's standard function `dput` function and retrieve it later with `dget`. You can also just save the R workspace and restore it later.
 
-# Structural properties of graphs
+## Structural properties of graphs
 
 `igraph` provides a large set of functions to calculate various structural properties of graphs. It is beyond the scope of this tutorial to document all of them, hence this section will only introduce a few of them for illustrative purposes. We will work on the small social network constructed in the previous section.
 
@@ -337,9 +349,9 @@ ebs <- edge_betweenness(g)
 as_edgelist(g)[ebs == max(ebs), ]
 ```
 
-# Querying vertices and edges based on attributes
+## Querying vertices and edges based on attributes
 
-## Selecting vertices
+### Selecting vertices
 
 Imagine that in a given social network, you want to find out who has the largest degree. You can do that with the tools presented so far and the `which` namespace:
 
@@ -404,7 +416,7 @@ V(g)$degree[degree(g) == 3]
 V(g)$name[degree(g) == 3]
 ```
 
-## Selecting edges
+### Selecting edges
 Edges can be selected based on attributes just like vertices. As mentioned above, the standard way to get edges is `E`. Moreover, there are a few special structural properties for selecting edges.
 
 Using `.from` or `.to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
@@ -441,7 +453,7 @@ women
 E(g)[men %--% women]
 ```
 
-## Finding a single vertex or edge with some properties
+### Finding a single vertex or edge with some properties
 
 In many cases we are looking for a single vertex or edge of a graph with some properties, and either we do not care which one of the matches is returned if there are multiple matches, or we know in advance that there will be only one match. A typical example is looking up vertices by their names in the `name` property.
 
@@ -458,7 +470,7 @@ Looking up an unknown name will yield an exception:
 match(c("Joe"),V(g)$name)
 ```
 
-## Looking up vertices by names
+### Looking up vertices by names
 
 Looking up vertices by names is a very common operation, and it is usually much easier to remember the names of the vertices in a graph than their IDs. To this end, igraph treats the `name` attribute of vertices specially; they are indexed such that vertices can be looked up by their names in amortized constant time. E.g, you can simply look up the degree (number of connections) of Dennis as follows:
 
@@ -468,7 +480,7 @@ degree(g,v="Dennis")
 
 The mapping between vertex names and IDs is maintained transparently by igraph in the background; whenever the graph changes, igraph also updates the internal mapping. However, uniqueness of vertex names is *not* enforced; you can easily create a graph where two vertices have the same name, but igraph will return only one of them when you look them up by names, the other one will be available only by its index.
 
-# Treating a graph as an adjacency matrix
+## Treating a graph as an adjacency matrix
 
 Adjacency matrix is another way to form a graph. In adjacency matrix, rows and columns are labeled by graph vertices: the elements of the matrix indicate whether the vertices *i* and *j* have a common edge (*i, j*). The adjacency matrix for the example graph is:
 
@@ -478,11 +490,11 @@ get.adjacency(g)
 
 For example, Carmina (`1, 0, 0, 1, 1, 1, 0`) is directly connected to Alejandra (who has vertex index 1), Dennis (index 5), Esther (index 6), and Frank (index 4), but not to Bruno (index 2) nor George (index 7).
 
-# Layouts and plotting
+## Layouts and plotting
 
 A graph is an abstract mathematical object without a specific representation in 2D, 3D or any other geometric space. This means that whenever we want to visualise a graph, we have to find a mapping from vertices to coordinates in two- or three-dimensional space first, preferably in a way that is useful and/or pleasing for the eye. A separate branch of graph theory, namely graph drawing, tries to solve this problem via several graph layout algorithms. igraph implements quite a few layout algorithms and is also able to draw them onto the screen or to a PDF, PNG or SVG file using the [Cairo library](https://www.cairographics.org).
 
-## Layout algorithms
+### Layout algorithms
 
 The layout functions in igraph always start with `layout`. The following table summarises them:
 
@@ -526,7 +538,7 @@ Layout functions return a matrix, usually a two column matrix (3 columns for a 3
 
 ***
 
-## Drawing a graph using a layout
+### Drawing a graph using a layout
 
 We can plot our imaginary social network with the Kamada-Kawai layout algorithm as follows:
 
@@ -579,7 +591,7 @@ This latter approach is preferred if you want to keep the properties of the visu
 
 In summary, there are special vertex and edge properties that correspond to the visual representation of the graph. These attributes override the default settings of igraph (i.e color, weight, name, shape,layout,etc.). The following two tables summarise the most frequently used visual attributes for vertices and edges, respectively:
 
-## Vertex attributes controlling graph plots
+### Vertex attributes controlling graph plots
 
 | Attribute name | Keyword argument      | Purpose                                                                                                                                                                                                                                        |
 |----------------------|----------------------|-----------------------------|
@@ -593,7 +605,7 @@ In summary, there are special vertex and edge properties that correspond to the 
 | `shape`        | `vertex.shape`        | The shape of the vertex, currently "circle", "square", "csquare", "rectangle", "crectangle", "vrectangle", "pie" (see vertex.shape.pie), 'sphere', and "none" are supported, and only by the plot.igraph command.                              |
 | `size`         | `vertex.size`         | The size of the vertex, a numeric scalar or vector, in the latter case each vertex sizes may differ                                                                                                                                            |
 
-## Edge attributes controlling graph plots
+### Edge attributes controlling graph plots
 
 | Attribute name | Keyword argument   | Purpose                                                                                                                                                                                                                                     |
 |-------------------------|-----------------------------|------------------|
@@ -605,7 +617,7 @@ In summary, there are special vertex and edge properties that correspond to the 
 | `width`        | `edge.width`       | Width of the edge in pixels                                                                                                                                                                                                                 |
 | `label`        | `edge.label`       | If specified, it adds a label to the edge.                                                                                                                                                                                                  |
 
-## Generic keyword arguments of `plot()`
+### Generic keyword arguments of `plot()`
 
 These settings can be specified as keyword arguments to the `plot` function to control the overall appearance of the plot.
 
@@ -615,7 +627,7 @@ These settings can be specified as keyword arguments to the `plot` function to c
 | `layout`          | The layout to be used. It can be an instance of `Layout`, a list of tuples containing X-Y coordinates, or the name of a layout algorithm. The default is `auto`, which selects a layout algorithm automatically based on the size and connectedness of the graph. |
 | `margin`          | The amount of empty space below, over, at the left and right of the plot, it is a numeric vector of length four.                                                                                                                                                  |
 
-## Specifying colors in plots
+### Specifying colors in plots
 
 igraph understands the following color specifications wherever it expects a color (e.g., edge, vertex or label colors in the respective attributes):
 
@@ -631,7 +643,7 @@ This is a string according to one of the following formats (where *R*, *G* and *
 -   `#RGB`, components range from 0 to 15 in hexadecimal format. Example: `"#08f"`.
 -   `rgb(R, G, B)`, components range from 0 to 255 or from 0% to 100%. Example: `"rgb(0, 127, 255)"` or `"rgb(0%, 50%, 100%)"`.
 
-## Saving plots
+### Saving plots
 
 `igraph` can be used to create publication-quality plots. The preferred format is inferred from the file name extension. `igraph` can save to anything that is supported by Cairo, including SVG, PDF and PNG files. SVG or PDF files can then later be converted to PostScript (`.ps`) or Encapsulated PostScript (`.eps`) format if you prefer that, while PNG files can be converted to TIF (`.tif`):
 
@@ -645,7 +657,7 @@ plot(g, layout = layout_with_kk(g), vertex.size = 20, margin = 0.5,
 dev.off()
 ```
 
-# igraph and the outside world
+## igraph and the outside world
 No graph module would be complete without some kind of import/export functionality that enables the package to communicate with external programs and toolkits. `igraph` is no exception: it provides functions to read the most common graph formats and to save graphs into files obeying these format specifications. The main functions for reading and writing from/to file are `read_graph` and `write_graph`, respectively. The following table summarises the formats igraph can read or write:
 
 | Format                                                                    | Short name  | Read function                                                                                                                                                                             | Write function                                      |
@@ -674,8 +686,16 @@ summary(karate)
 
 ***
 
-# Where to go next
+## Where to go next
 
 This tutorial is a brief introduction to `igraph` in R. We sincerely hope you enjoyed reading it and that it will be useful for your own network analyses.
 
 For a detailed description of specific functions, see [https://igraph.org/r/html/latest/](https://igraph.org/r/html/latest/). For questions on how to use `igraph`, please visit our [Forum](https://igraph.discourse.group). To report a bug, open a [Github issue](https://github.com/igraph/rigraph/issues). Please do not ask usage questions on Github directly as it's meant for developers rather than users.
+
+## Session info
+
+For the sake of reproducibility, the session information for the code above is the following:
+
+```{r session-info}
+sessionInfo()
+```
