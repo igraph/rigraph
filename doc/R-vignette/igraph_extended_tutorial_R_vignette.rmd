@@ -79,7 +79,7 @@ A more detailed description of plotting options is provided later on in this tut
 
 # Vertex and edge IDs
 
-Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always consecutive and they start with 1 (one). For a graph with n vertices the vertex IDs are always between 1 and n. If some operation changes the number of vertices in the graphs, e.g. a subgraph is created via induced_subgraph, then the vertices are renumbered to satisfy this criterion.
+Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always consecutive and they start with 1 (one). For a graph with n vertices the vertex IDs are always between 1 and n. If some operation changes the number of vertices in the graphs, e.g. a subgraph is created via `induced_subgraph`, then the vertices are renumbered to satisfy this criterion.
 
 The same is true for the edges as well: edge IDs are always between 1 and m, the total number of edges in the graph.
 
@@ -309,6 +309,14 @@ degree(g, 7)
 degree(g, v=c(3,4,5))
 ```
 
+Of course, you can also use the syntax:
+
+```{r echo = TRUE}
+degree(g)['Bruno']
+```
+
+However, this call computes the degree for the whole graph first, so it can be slow for large graphs.
+
 A similar syntax is used for most of the structural properties `igraph` can calculate. For vertex properties, the functions accept a vertex ID or a list of vertex IDs (and if they are omitted, the default is the set of all vertices). For edge properties, the functions accept a single edge ID or a list of edge IDs.
 
 ***
@@ -331,15 +339,15 @@ as_edgelist(g)[ebs == max(ebs), ]
 
 # Querying vertices and edges based on attributes
 
-## Selecting vertices and edges
+## Selecting vertices
 
-Imagine that in a given social network, you would like to find out who has the largest degree or betweenness centrality. You can do that with the tools presented so far and some basic R knowledge:
+Imagine that in a given social network, you want to find out who has the largest degree. You can do that with the tools presented so far and the `which` namespace:
 
 ```{r echo = TRUE}
 which.max(degree(g))
 ```
 
-If the first positional argument is a callable object (i.e., a function or anything that behaves like a function), the object will be called for every vertex that's currently in the sequence. If the function returns `True`, the vertex will be included, otherwise it will be excluded:
+Another example would be to select only vertices that have only odd IDs but not even ones, using the `V` function:
 
 ```{r echo = TRUE}
 graph <- graph.full(n=10)
@@ -347,14 +355,10 @@ only_odd_vertices <- which(V(graph)%%2==1)
 length(only_odd_vertices)
 ```
 
-If the first positional argument is an iterable (i.e., a list), it *must* return integers and these integers will be considered as indices into the current vertex set (which is *not* necessarily the whole graph). Only those vertices that match the given indices will be included in the filtered vertex set. Floats, strings, invalid vertex IDs will display an error message:
+Of course, it is possible to select vertices or edges by positional indices:
 
 ```{r echo = TRUE}
 seq <- V(graph)[2,3,7]
-length(seq)
-```
-
-```{r echo = TRUE}
 seq
 ```
 
@@ -363,17 +367,20 @@ seq <- seq[1,3]    #filtering an existing vertex set
 seq
 ```
 
+Selecting a vertex that does not exist results in an error:
+
 ```{r echo = TRUE, eval = FALSE}
 seq <- V(graph)[2,3,7,"foo", 3.5]
+## Error in simple_vs_index(x, ii, na_ok) : Unknown vertex selected
 ```
 
-Operators can be used to filter the vertices based on their attributes or their structural properties. First select the name of the attribute or structural property and then use the `which` function to evaluate each vertex using some operator and another attribute. For instance, the following command gives you people younger than 30 years in our imaginary social network:
+`which` selections and vertex/edge attributes cam be combined to obtain fairly complex boolean selections. For instance, the following command gives you the names of the individuals younger than 30 years in our social network:
 
 ```{r echo = TRUE}
 V(g)$name[which(V(g)$age < 30)]
 ```
 
-The possibilities are as follows:
+Of course, `<` is not the only boolean operator that can be used for this. Other possibilities include the following:
 
 | Operator                  | Meaning                                                         |
 |------------------------------------|------------------------------------|
@@ -386,18 +393,19 @@ The possibilities are as follows:
 | `%in%`                    | The attribute/property value must be *included in*              |
 | `%notin% <- Negate(%in%)` | The attribute/property value must *not be included in*          |
 
-Theoretically, it can happen that there exists an attribute and a structural property with the same name (e.g., you could have a vertex attribute named `degree`). In that case, just be careful to reference the attribute correctly and then call the function to calculate the structural property. For instance, we create a new attribute called degree:
+If an attribute has the same name as an `igraph` function, you should be careful as the syntax can become a little confusing. For instance, if there is an attribute named `degree` that represents the grades of an exam for each person, that should not be confused with the `igraph` function that computes the degrees of vertices in a network sense:
 
 ```{r echo = TRUE}
-V(g)$degree <- c("A", "B", "C", "D", "E", "F", "G")
+V(g)$degree <- c("A", "B", "B+", "A+", "C", "A", "B")
 V(g)$degree[degree(g) == 3]
 ```
 
 ```{r echo = TRUE}
-    V(g)$name[degree(g) == 3]
+V(g)$name[degree(g) == 3]
 ```
 
-There are also a few special structural properties for selecting edges.
+## Selecting edges
+Edges can be selected based on attributes just like vertices. As mentioned above, the standard way to get edges is `E`. Moreover, there are a few special structural properties for selecting edges.
 
 Using `.from` or `.to` based on the source vertices of the edges. E.g., to select all the edges originating from Carmina (who has vertex index 3):
 
@@ -405,7 +413,7 @@ Using `.from` or `.to` based on the source vertices of the edges. E.g., to selec
 E(g)[.from(3)]
 ```
 
-Using `.to` filter based on the target vertices. This is different from `.from` if the graph is directed.
+Using `.to` filter based on the target vertices. This is different from `.from` if the graph is directed, while it gives the same answer for undirected graphs.
 
 For instance, the following expression selects all the edges between Carmina (vertex index 3), Dennis (vertex index 5) and Esther (vertex index 6). The expression %--% is a special operator that can be used to select all edges between two sets of vertices. It ignores the edge directions in directed graphs.
 
@@ -511,11 +519,16 @@ layout <- layout.reingold.tilford(g, root= 2)
 layout <- layout_as_tree(g, root = 2)
 ```
 
-Layout functions return a `Layout` object which behaves mostly like a list of lists. Each list entry in a `Layout` object corresponds to a vertex in the original graph and contains the vertex coordinates in the 2D or 3D space. `Layout` objects also contain some useful functions to translate, scale or rotate the coordinates in a batch. However, the primary utility of `Layout` objects is that you can pass them to the `plot` function along with the graph to obtain a 2D drawing.
+Layout functions return a matrix, usually a two column matrix (3 columns for a 3D layout). Each row in this matrix corresponds to a vertex in the original graph, ordered by ID, and contains the vertex coordinates in the 2D or 3D space.
+
+***
+**NOTE:** If you are familiary with the Python interface of `igraph`, you might notice that layouts are handled differently there, with a dedicated `Layout` object. In the R interface, they are simple matrices.
+
+***
 
 ## Drawing a graph using a layout
 
-For instance, we can plot our imaginary social network with the Kamada-Kawai layout algorithm as follows:
+We can plot our imaginary social network with the Kamada-Kawai layout algorithm as follows:
 
 ```{r}
 layout <- layout_with_kk(g)
