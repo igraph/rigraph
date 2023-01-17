@@ -6,17 +6,38 @@
 
 - Fix deprecation warnings about 'from' and 'to' in edge selectors.
 
+
+# igraph 1.3.5.9097
+
+## Bug fixes
+
+- Handle the default NULL value of frame.plot properly.
+
+- Do not use 'frame' partial argument when calling plot.default().
+
+## Chore
+
+- Track revdepcheck results (#621).
+
+- Move to single branch setup (#620).
+
+## Documentation
+
+- Wrap README badges for detection by pkgdown (#637).
+
 ## Uncategorized
 
-- Merge remote-tracking branch 'adrian/dev' into adrian.
+- Ignore.
 
+- Update instructions.
 
-- Merge remote-tracking branch 'adrian/dev' into adrian.
+- Ignore.
 
+- Automated changes.
 
-- Merge branch 'master' into dev.
+- Run autoconf on 22.04.
 
-- Merge branch 'master' into dev.
+- Automated changes.
 
 
 # igraph 1.3.5.9096
