@@ -1,5 +1,38 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9097
+
+## Bug fixes
+
+- Handle the default NULL value of frame.plot properly.
+
+- Do not use 'frame' partial argument when calling plot.default().
+
+## Chore
+
+- Track revdepcheck results (#621).
+
+- Move to single branch setup (#620).
+
+## Documentation
+
+- Wrap README badges for detection by pkgdown (#637).
+
+## Uncategorized
+
+- Ignore.
+
+- Update instructions.
+
+- Ignore.
+
+- Automated changes.
+
+- Run autoconf on 22.04.
+
+- Automated changes.
+
+
 # igraph 1.3.5.9096
 
 - Merge pull request #634 from igraph/b-test-order.
