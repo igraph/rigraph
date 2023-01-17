@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9098
+
+## Bug fixes
+
+- Fix deprecation warnings about 'from' and 'to' in edge selectors.
+
+## Uncategorized
+
+- Merge remote-tracking branch 'adrian/dev' into adrian.
+
+
+- Merge remote-tracking branch 'adrian/dev' into adrian.
+
+
+- Merge branch 'master' into dev.
+
+- Merge branch 'master' into dev.
+
+
 # igraph 1.3.5.9096
 
 - Merge pull request #634 from igraph/b-test-order.
