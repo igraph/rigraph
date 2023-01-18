@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9099
+
+## doc
+
+- More updates to the vignette.
+
+## Uncategorized
+
+- Merge branch 'master' into dev.
+
+
 # igraph 1.3.5.9098
 
 ## Bug fixes
