@@ -1,5 +1,60 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9098
+
+- Added igraph extended tutorial as R vignette (@ntamas, #587).
+
+- Update igraph_extended_tutorial_R_vignette_english.Rmd (@ntamas, #587).
+
+- Bump version to 1.3.5.9095 (@ntamas, #587).
+
+- A bunch of fixes after review and rename (@ntamas, #587).
+
+- Adapt one line suggested by @szhorvat (@ntamas, #587).
+
+- R vignette compiles into html and PDF using rmarkdown (@ntamas, #587).
+
+- Remove methods since R is not very much OO (@ntamas, #587).
+
+- Bump version to 1.3.5.9096 (@ntamas, #587).
+
+- Corrections throughout (@ntamas, #587).
+
+- Bump version to 1.3.5.9097 (@ntamas, #587).
+
+- Fix: fix deprecation warnings about 'from' and 'to' in edge selectors (@ntamas, #587).
+
+- Read/write files corrected (@ntamas, #587).
+
+- Remove Spanish version, will be a separate PR (@ntamas, #587).
+
+- NEWS.md went for a spin, bring it back (@ntamas, #587).
+
+- Minor tweaks, adjusted figure sizes, work in progress (@ntamas, #587).
+
+- Title, notes, first paragraph (@ntamas, #587).
+
+- Starting igraph (@ntamas, #587).
+
+- More corrections (@ntamas, #587).
+
+- Clean up a bunch of Python-isms in the second half (@ntamas, #587).
+
+- Session info, headers down a notch, some wording (@ntamas, #587).
+
+- Bump version to 1.3.5.9098 (@ntamas, #587).
+
+- Doc: more updates to the vignette (@ntamas, #587).
+
+- Bump version to 1.3.5.9099 (@ntamas, #587).
+
+- Doc: vignette cleanup finished (@ntamas, #587).
+
+- Revert changes to DESCRIPTION (@ntamas, #587).
+
+- Revert changes to NEWS.md (@ntamas, #587).
+
+
 # igraph 1.3.5.9097
 
 ## Bug fixes
