@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 19 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 16 new problems
+ * We saw 11 new problems
  * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
@@ -13,20 +13,10 @@ Issues with CRAN packages are summarised below.
 * backbone
   checking tests ... ERROR
 
-* clustAnalytics
-  checking re-building of vignette outputs ... WARNING
-
 * deepdep
   checking tests ... ERROR
 
-* Diderot
-  checking examples ... ERROR
-
 * egor
-  checking tests ... ERROR
-
-* gemtc
-  checking examples ... ERROR
   checking tests ... ERROR
 
 * GREMLINS
@@ -36,14 +26,10 @@ Issues with CRAN packages are summarised below.
 * incidentally
   checking re-building of vignette outputs ... WARNING
 
-* metanetwork
-  checking tests ... ERROR
-
 * mstknnclust
   checking re-building of vignette outputs ... WARNING
 
 * nat
-  checking examples ... ERROR
   checking tests ... ERROR
 
 * netmeta
@@ -51,9 +37,6 @@ Issues with CRAN packages are summarised below.
 
 * poppr
   checking tests ... ERROR
-
-* riverconn
-  checking examples ... ERROR
 
 * sfnetworks
   checking tests ... ERROR
