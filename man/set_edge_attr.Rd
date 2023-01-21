@@ -16,7 +16,8 @@ set_edge_attr(graph, name, index = E(graph), value)
 a subset of edges.}
 
 \item{value}{The new value of the attribute for all (or \code{index})
-edges.}
+edges.
+If \code{NULL}, the input is returned unchanged.}
 }
 \value{
 The graph, with the edge attribute added or set.

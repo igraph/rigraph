@@ -227,6 +227,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   of a subset of vertices.
 #' @param value The new value of the attribute for all (or `index`)
 #'   vertices.
+#'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
 #'
 #' @aliases set.vertex.attribute
@@ -250,6 +251,11 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+
+  if (is.null(value)) {
+    return(graph)
+  }
+
   single <- is_single_index(index)
   complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
@@ -431,6 +437,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   a subset of edges.
 #' @param value The new value of the attribute for all (or `index`)
 #'   edges.
+#'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
 #'
 #' @aliases set.edge.attribute
@@ -454,6 +461,11 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+
+  if (is.null(value)) {
+    return(graph)
+  }
+
   complete <- is_complete_iterator(index)
   single <- is_single_index(index)
   name <- as.character(name)

@@ -245,3 +245,12 @@ test_that("setting attributes strips names (#466)", {
   E(g)$bar <- c(a = 1)
   expect_identical(E(g)$bar, rep(1, 10))
 })
+
+test_that("setting NULL attributes works and doesn't change the input (#466)", {
+  g <- make_ring(10)
+
+  expect_identical(set_vertex_attr(g, "foo", value = NULL), g)
+  expect_identical(set_vertex_attr(g, "foo", 1:3, value = NULL), g)
+  expect_identical(set_edge_attr(g, "foo", value = NULL), g)
+  expect_identical(set_edge_attr(g, "foo", 1:3, value = NULL), g)
+})
