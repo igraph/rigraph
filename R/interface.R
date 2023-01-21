@@ -85,7 +85,10 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   for (i in seq(attrs)) {
-    graph <- set_edge_attr(graph, nam[[i]], idx, attrs[[nam[i]]])
+    attr <- attrs[[nam[i]]]
+    if (!is.null(attr)) {
+      graph <- set_edge_attr(graph, nam[[i]], idx, attr)
+    }
   }
 
   graph
@@ -148,7 +151,10 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   for (i in seq(attrs)) {
-    graph <- set_vertex_attr(graph, nam[[i]], idx, attrs[[nam[i]]])
+    attr <- attrs[[nam[i]]]
+    if (!is.null(attr)) {
+      graph <- set_vertex_attr(graph, nam[[i]], idx, attr)
+    }
   }
 
   graph
