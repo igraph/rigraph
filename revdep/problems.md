@@ -346,7 +346,7 @@ Run `revdepcheck::cloud_details(, "netmeta")` for more info
     > 
     > net1 <- netmeta(p1)
     > cm <- netcontrib(net1)
-    Error: C stack usage  9965300 is too close to the limit
+    Error: C stack usage  9966612 is too close to the limit
     Execution halted
     ```
 
@@ -355,6 +355,47 @@ Run `revdepcheck::cloud_details(, "netmeta")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 2 marked UTF-8 strings
+    ```
+
+# NetOrigin
+
+<details>
+
+* Version: 1.1-4
+* GitHub: https://github.com/jmanitz/NetOrigin
+* Source code: https://github.com/cran/NetOrigin
+* Date/Publication: 2022-01-20 08:32:42 UTC
+* Number of recursive dependencies: 77
+
+Run `revdepcheck::cloud_details(, "NetOrigin")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘NetOrigin-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: origin
+    > ### Title: Origin Estimation for Propagation Processes on Complex Networks
+    > ### Aliases: origin origin_edm origin_backtracking origin_centrality
+    > ###   origin_bayesian
+    > 
+    > ### ** Examples
+    > 
+    ...
+    > performance(om, start=1, graph=ptnGoe)
+                      start                         est  hitt rank spj dist
+    1 X.Adolf.Hoyer.Strasse X.Gotthelf.Leimbach.Strasse FALSE    2   2 1332
+    > 
+    > # backtracking origin estimation (Manitz et al., 2016)
+    > ob <- origin(events=delayGoe[10,-c(1:2)], type='backtracking', graph=ptnGoe)
+    Error in if (V(graph)[current_node]$events > 0 | !start_with_event_node) { : 
+      argument is of length zero
+    Calls: origin -> origin_backtracking
+    Execution halted
     ```
 
 # poppr

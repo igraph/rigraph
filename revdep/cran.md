@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 16 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 759 reverse dependencies (758 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 11 new problems
- * We failed to check 0 packages
+ * We saw 12 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -35,6 +35,9 @@ Issues with CRAN packages are summarised below.
 * netmeta
   checking examples ... ERROR
 
+* NetOrigin
+  checking examples ... ERROR
+
 * poppr
   checking tests ... ERROR
 
@@ -44,3 +47,13 @@ Issues with CRAN packages are summarised below.
 * signnet
   checking examples ... ERROR
 
+### Failed to check
+
+* DRviaSPCN (NA)
+* genekitr  (NA)
+* immcp     (NA)
+* numbat    (NA)
+* Platypus  (NA)
+* tidySEM   (NA)
+* vivid     (NA)
+* webSDM    (NA)

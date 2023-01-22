@@ -1,6 +1,20 @@
 # Revdeps
 
-## New problems (11)
+## Failed to check (9)
+
+|package   |version |error |warning |note |
+|:---------|:-------|:-----|:-------|:----|
+|DRviaSPCN |?       |      |        |     |
+|genekitr  |?       |      |        |     |
+|immcp     |?       |      |        |     |
+|numbat    |?       |      |        |     |
+|Platypus  |?       |      |        |     |
+|NA        |?       |      |        |     |
+|tidySEM   |?       |      |        |     |
+|vivid     |?       |      |        |     |
+|webSDM    |?       |      |        |     |
+
+## New problems (12)
 
 |package      |version |error  |warning |note |
 |:------------|:-------|:------|:-------|:----|
@@ -12,6 +26,7 @@
 |[mstknnclust](problems.md#mstknnclust)|0.3.1   |       |__+1__  |     |
 |[nat](problems.md#nat)|1.8.19  |__+1__ |1       |     |
 |[netmeta](problems.md#netmeta)|2.7-0   |__+1__ |        |1    |
+|[NetOrigin](problems.md#netorigin)|1.1-4   |__+1__ |        |     |
 |[poppr](problems.md#poppr)|2.9.3   |__+1__ |1       |1    |
 |[sfnetworks](problems.md#sfnetworks)|0.6.1   |__+1__ |        |     |
 |[signnet](problems.md#signnet)|1.0.0   |__+1__ |        |1    |
