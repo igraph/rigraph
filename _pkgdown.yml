@@ -1,0 +1,7 @@
+url: ~
+template:
+  bootstrap: 5
+
+
+authors:
+  after: "See the [AUTHORS file](/AUTHORS-list.html) for other contributors."
