@@ -1682,8 +1682,8 @@ sample_fitness <- sample_fitness
 #'
 #' The game simply uses [sample_fitness()] with appropriately
 #' constructed fitness vectors. In particular, the fitness of vertex \eqn{i} is
-#' \eqn{i^{-alpha}}{i^(-alpha)}, where \eqn{alpha = 1/(gamma-1)} and gamma is
-#' the exponent given in the arguments.
+#' \eqn{i^{-\alpha}}{i^(-alpha)}, where \eqn{\alpha = 1/(\gamma-1)}{alpha = 1/(gamma - 1)}
+#' and \eqn{\gamma}{gamma} is the exponent given in the arguments.
 #'
 #' To remove correlations between in- and out-degrees in case of directed
 #' graphs, the in-fitness vector will be shuffled after it has been set up and
@@ -1693,7 +1693,7 @@ sample_fitness <- sample_fitness
 #' smaller than 3 in the original formulation of the game. This function
 #' provides an argument that lets you remove the finite size effects by
 #' assuming that the fitness of vertex \eqn{i} is
-#' \eqn{(i+i_0-1)^{-alpha}}{(i+i0-1)^(-alpha)} where \eqn{i_0}{i0} is a
+#' \eqn{(i+i_0-1)^{-\alpha}}{(i+i0-1)^(-alpha)} where \eqn{i_0}{i0} is a
 #' constant chosen appropriately to ensure that the maximum degree is less than
 #' the square root of the number of edges times the average degree; see the
 #' paper of Chung and Lu, and Cho et al for more details.
@@ -1704,7 +1704,7 @@ sample_fitness <- sample_fitness
 #' @param exponent.out Numeric scalar, the power law exponent of the degree
 #'   distribution. For directed graphs, this specifies the exponent of the
 #'   out-degree distribution. It must be greater than or equal to 2. If you pass
-#'   `Inf` here, you will get back an Erdos-Renyi random network.
+#'   `Inf` here, you will get back an Erdős-Rényi random network.
 #' @param exponent.in Numeric scalar. If negative, the generated graph will be
 #'   undirected. If greater than or equal to 2, this argument specifies the
 #'   exponent of the in-degree distribution. If non-negative but less than 2, an
