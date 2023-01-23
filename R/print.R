@@ -470,6 +470,7 @@ print_all <- function(object, ...) {
 #' letter is \sQuote{`W`} for weighted graphs, i.e. graphs with the
 #' `weight` edge attribute set. The fourth letter is \sQuote{`B`} for
 #' bipartite graphs, i.e. for graphs with the `type` vertex attribute set.
+#' Then the number of vertices and edges are printed before the two dashes.
 #'
 #' Then, after two dashes, the name of the graph is printed, if it has one,
 #' i.e. if the `name` graph attribute is set.
