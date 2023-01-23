@@ -65,7 +65,7 @@ optionally graph, vertex and/or edge attributes.
 \sQuote{print.full} igraph option and \code{\link[=igraph_opt]{igraph_opt()}}.
 
 The graph summary printed by \code{summary.igraph} (and \code{print.igraph()}
-and \code{print_all()}) consists one or more lines. The first line contains
+and \code{print_all()}) consists of one or more lines. The first line contains
 the basic properties of the graph, and the rest contains its attributes.
 Here is an example, a small star graph with weighted directed edges and named
 vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
@@ -83,7 +83,9 @@ letter is \sQuote{\code{W}} for weighted graphs, i.e. graphs with the
 \code{weight} edge attribute set. The fourth letter is \sQuote{\code{B}} for
 bipartite graphs, i.e. for graphs with the \code{type} vertex attribute set.
 
-Then, after two dashes, the name of the graph is printed, if it has one,
+This is followed by the number of vertices and edges, then two dashes.
+
+Finally, after two dashes, the name of the graph is printed, if it has one,
 i.e. if the \code{name} graph attribute is set.
 
 From the second line, the attributes of the graph are listed, separated by a
