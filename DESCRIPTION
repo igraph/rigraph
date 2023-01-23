@@ -43,4 +43,4 @@ Config/testthat/start-first: vs-es, scan, vs-operators, weakref, watts.strogatz.
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Authors@R: 
-    person("Tanás", "Nepusz", , "ntamas@gmail.com", role = c("aut", "cre"), comment = "See also AUTHORS file.")
+    person("Tamás", "Nepusz", , "ntamas@gmail.com", role = c("aut", "cre"), comment = "See also AUTHORS file.")
