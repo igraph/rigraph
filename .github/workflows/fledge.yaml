@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   fledge:
+    if: ${{ github.repository_owner == 'igraph' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
