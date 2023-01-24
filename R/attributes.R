@@ -35,8 +35,6 @@
 
 
 
-ATTRIBUTE_STRICT_RECYCLING <- TRUE
-
 #' Graph attributes of a graph
 #'
 #' @param graph Input graph.
@@ -272,18 +270,18 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
-    if (ATTRIBUTE_STRICT_RECYCLING) {
-      if (length(value) == 1) {
-        value_in <- rep(unname(value), length(index))
-      } else if (length(value) == length(index)) {
-        value_in <- unname(value)
-      } else {
-        stop("strict recycling (1)")
-      }
+    if (length(value) == 1) {
+      value_in <- rep(unname(value), length(index))
+    } else if (length(value) == length(index)) {
+      value_in <- unname(value)
     } else {
-      value_in <- unname(rep(value, length.out = length(index)))
-      # Trigger recycling warning
-      value_in[seq_along(value_in)] <- value
+      stop(
+        "Length of new attribute value must be ",
+        if (length(index) != 1) "1 or ",
+        length(index),
+        ", the number of target vertices, not ",
+        length(value)
+      )
     }
 
     if (complete) {
@@ -482,18 +480,18 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
-    if (ATTRIBUTE_STRICT_RECYCLING) {
-      if (length(value) == 1) {
-        value_in <- rep(unname(value), length(index))
-      } else if (length(value) == length(index)) {
-        value_in <- unname(value)
-      } else {
-        stop("strict recycling (2)")
-      }
+    if (length(value) == 1) {
+      value_in <- rep(unname(value), length(index))
+    } else if (length(value) == length(index)) {
+      value_in <- unname(value)
     } else {
-      value_in <- unname(rep(value, length.out = length(index)))
-      # Trigger recycling warning
-      value_in[seq_along(value_in)] <- value
+      stop(
+        "Length of new attribute value must be ",
+        if (length(index) != 1) "1 or ",
+        length(index),
+        ", the number of target edges, not ",
+        length(value)
+      )
     }
 
     if (complete) {
