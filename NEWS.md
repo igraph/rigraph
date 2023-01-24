@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9102
+
+## Chore
+
+- Avoid fledge workflow on forks.
+
+
 # igraph 1.3.5.9101
 
 ## Documentation
