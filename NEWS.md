@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9101
+
+## Documentation
+
+- Link to installation troubleshooting info (@maelle, #646).
+
+- Further polish print_all() docs.
+
+- Clarify print_all() output.
+
+
 # igraph 1.3.5.9100
 
 ## Chore
