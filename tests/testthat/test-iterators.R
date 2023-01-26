@@ -93,9 +93,11 @@ test_that("V(g) returns complete iterator, completeness is lost with next subset
 })
 
 test_that("E(g) returns complete iterator, completeness is lost with next subsetting", {
-  g <- make_star(4)
+  g <- make_full_graph(4)
   iter <- E(g)
   expect_true(is_complete_iterator(iter))
   expect_false(is_complete_iterator(iter[1]))
   expect_false(is_complete_iterator(iter[1:3]))
+  expect_false(is_complete_iterator(E(g, P = 1:4)))
+  expect_false(is_complete_iterator(E(g, path = 1:4)))
 })
