@@ -1,5 +1,34 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9102
+
+## Chore
+
+- Avoid fledge workflow on forks.
+
+
+# igraph 1.3.5.9101
+
+## Documentation
+
+- Link to installation troubleshooting info (@maelle, #646).
+
+- Further polish print_all() docs.
+
+- Clarify print_all() output.
+
+
+# igraph 1.3.5.9100
+
+## Chore
+
+- Fix make from a clean repository.
+
+## Documentation
+
+- Polish sample_fitness_pl() docs.
+
+
 # igraph 1.3.5.9099
 
 ## Chore

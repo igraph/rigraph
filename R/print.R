@@ -453,7 +453,7 @@ print_all <- function(object, ...) {
 #' \sQuote{print.full} igraph option and [igraph_opt()].
 #'
 #' The graph summary printed by `summary.igraph` (and `print.igraph()`
-#' and `print_all()`) consists one or more lines. The first line contains
+#' and `print_all()`) consists of one or more lines. The first line contains
 #' the basic properties of the graph, and the rest contains its attributes.
 #' Here is an example, a small star graph with weighted directed edges and named
 #' vertices: \preformatted{    IGRAPH badcafe DNW- 10 9 -- In-star
@@ -471,7 +471,9 @@ print_all <- function(object, ...) {
 #' `weight` edge attribute set. The fourth letter is \sQuote{`B`} for
 #' bipartite graphs, i.e. for graphs with the `type` vertex attribute set.
 #'
-#' Then, after two dashes, the name of the graph is printed, if it has one,
+#' This is followed by the number of vertices and edges, then two dashes.
+#'
+#' Finally, after two dashes, the name of the graph is printed, if it has one,
 #' i.e. if the `name` graph attribute is set.
 #'
 #' From the second line, the attributes of the graph are listed, separated by a
