@@ -31,7 +31,7 @@ Run `revdepcheck::cloud_details(, "backbone")` for more info
       test_backbone.R...............   35 tests [0;32mOK[0m 
       test_backbone.R...............   36 tests [0;32mOK[0m 
       test_backbone.R...............   36 tests [0;32mOK[0m Error in i_set_vertex_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-        strict recycling (1)
+        Length of new attribute value must be 1 or 110, the number of target vertices, not 10
       Calls: <Anonymous> ... FUN -> eval -> eval -> <Anonymous> -> i_set_vertex_attr
       Execution halted
     ```
@@ -96,7 +96,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       Running ‘testthat.R’
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Filtering out empty alter entries using provided network size values: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: [ FAIL 1 | WARN 4 | SKIP 15 | PASS 205 ]
+      Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: Filtering out empty alter entries using provided network size values: Sorting data by egoID: Transforming alters data to long format: Transforming wide dyad data to edgelist: [ FAIL 1 | WARN 7 | SKIP 15 | PASS 205 ]
       
       ══ Skipped tests ═══════════════════════════════════════════════════════════════
       • On CRAN (15)
@@ -108,7 +108,7 @@ Run `revdepcheck::cloud_details(, "egor")` for more info
       `actual` is a double vector ()
       `expected` is NULL
       
-      [ FAIL 1 | WARN 4 | SKIP 15 | PASS 205 ]
+      [ FAIL 1 | WARN 7 | SKIP 15 | PASS 205 ]
       Error: Test failures
       Execution halted
     ```
@@ -149,7 +149,7 @@ Run `revdepcheck::cloud_details(, "GREMLINS")` for more info
     [1] "Best model------ ICL : -2028.78 . Nb of clusters: [ 2 2 ] for [ A , B ] respectively"
     > plotMBM(res_MBMsimu)
     Error in i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE) : 
-      strict recycling (2)
+      Length of new attribute value must be 1 or 0, the number of target edges, not 8
     Calls: plotMBM -> %>% -> set_edge_attr -> i_set_edge_attr
     Execution halted
     ```
@@ -161,7 +161,7 @@ Run `revdepcheck::cloud_details(, "GREMLINS")` for more info
     --- re-building ‘EcologicalNetwork.Rmd’ using rmarkdown
     Quitting from lines 130-131 (EcologicalNetwork.Rmd) 
     Error: processing vignette 'EcologicalNetwork.Rmd' failed with diagnostics:
-    strict recycling (2)
+    Length of new attribute value must be 1 or 0, the number of target edges, not 14
     --- failed re-building ‘EcologicalNetwork.Rmd’
     
     --- re-building ‘Introduction.Rmd’ using rmarkdown
@@ -249,7 +249,7 @@ Run `revdepcheck::cloud_details(, "mstknnclust")` for more info
     --- re-building ‘guide.Rmd’ using rmarkdown
     Quitting from lines 103-110 (guide.Rmd) 
     Error: processing vignette 'guide.Rmd' failed with diagnostics:
-    strict recycling (1)
+    Length of new attribute value must be 1 or 84, the number of target vertices, not 2
     --- failed re-building ‘guide.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -267,7 +267,7 @@ Run `revdepcheck::cloud_details(, "mstknnclust")` for more info
 * GitHub: https://github.com/natverse/nat
 * Source code: https://github.com/cran/nat
 * Date/Publication: 2022-04-06 11:50:02 UTC
-* Number of recursive dependencies: 86
+* Number of recursive dependencies: 87
 
 Run `revdepcheck::cloud_details(, "nat")` for more info
 
@@ -346,7 +346,7 @@ Run `revdepcheck::cloud_details(, "netmeta")` for more info
     > 
     > net1 <- netmeta(p1)
     > cm <- netcontrib(net1)
-    Error: C stack usage  9966612 is too close to the limit
+    Error: C stack usage  9968708 is too close to the limit
     Execution halted
     ```
 
@@ -542,7 +542,7 @@ Run `revdepcheck::cloud_details(, "signnet")` for more info
     > g <- graph.full(4, directed = TRUE)
     > E(g)$sign <- c(-1, 1, 1, -1, -1, 1)
     Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      strict recycling (2)
+      Length of new attribute value must be 1 or 12, the number of target edges, not 6
     Calls: E<- -> i_set_edge_attr
     Execution halted
     ```
@@ -553,6 +553,6 @@ Run `revdepcheck::cloud_details(, "signnet")` for more info
     ```
       installed size is  7.8Mb
       sub-directories of 1Mb or more:
-        libs   6.2Mb
+        libs   6.1Mb
     ```
 

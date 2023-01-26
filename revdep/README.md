@@ -1,19 +1,5 @@
 # Revdeps
 
-## Failed to check (9)
-
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|DRviaSPCN |?       |      |        |     |
-|genekitr  |?       |      |        |     |
-|immcp     |?       |      |        |     |
-|numbat    |?       |      |        |     |
-|Platypus  |?       |      |        |     |
-|NA        |?       |      |        |     |
-|tidySEM   |?       |      |        |     |
-|vivid     |?       |      |        |     |
-|webSDM    |?       |      |        |     |
-
 ## New problems (12)
 
 |package      |version |error  |warning |note |
