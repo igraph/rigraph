@@ -317,6 +317,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   if (is.null(P) && is.null(path)) {
     ec <- ecount(graph)
     res <- seq_len(ec)
+    res <- set_complete_iterator(res)
   } else if (!is.null(P)) {
     on.exit(.Call(C_R_igraph_finalizer))
     res <- .Call(
@@ -340,7 +341,6 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   }
 
   class(res) <- "igraph.es"
-  res <- set_complete_iterator(res)
   add_vses_graph_ref(res, graph)
 }
 
