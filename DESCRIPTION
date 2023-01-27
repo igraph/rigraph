@@ -27,7 +27,9 @@ Suggests:
     tcltk,
     testthat,
     withr,
-    vdiffr
+    vdiffr,
+    knitr,
+    rmarkdown
 License: GPL (>= 2)
 URL: https://igraph.org, https://igraph.discourse.group/
 SystemRequirements:
@@ -44,3 +46,4 @@ Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref, watts.strogatz.game
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
