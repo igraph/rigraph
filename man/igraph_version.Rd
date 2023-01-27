@@ -23,7 +23,12 @@ packageDescription("igraph")$Version
 igraph_version()
 
 }
+\seealso{
+Other test: 
+\code{\link{igraph_test}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{test}
 \keyword{graphs}

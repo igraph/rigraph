@@ -39,6 +39,7 @@
 #' @return Returns `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [demo()]
+#' @family demo
 #' @export
 #' @keywords graphs
 #' @examples

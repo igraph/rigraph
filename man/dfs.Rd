@@ -124,8 +124,33 @@ tmp <- dfs(make_tree(10) \%du\% make_tree(10),
 }
 \seealso{
 \code{\link[=bfs]{bfs()}} for breadth-first search.
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_matching}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{structural.properties}
 \keyword{graphs}

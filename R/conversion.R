@@ -207,6 +207,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' as_adjacency_matrix(g)
 #' E(g)$weight <- runif(ecount(g))
 #' as_adjacency_matrix(g, attr = "weight")
+#' @family conversion
 #' @export
 as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
                                 attr = NULL, edges = FALSE, names = TRUE,
@@ -226,6 +227,7 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 }
 
+#' @family conversion
 #' @export
 #' @rdname as_adjacency_matrix
 as_adj <- as_adjacency_matrix
@@ -253,6 +255,7 @@ as_adj <- as_adjacency_matrix
 #' V(g)$name <- LETTERS[seq_len(gorder(g))]
 #' as_edgelist(g)
 #'
+#' @family conversion
 #' @export
 as_edgelist <- function(graph, names = TRUE) {
   if (!is_igraph(graph)) {
@@ -317,6 +320,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] for removing multiple and/or loop edges from
 #' a graph.
+#' @family conversion
 #' @export
 #' @keywords graphs
 #' @examples
@@ -358,6 +362,7 @@ as.directed <- as.directed
 #'   might be mapped to a single one in the new graph, and their attributes are
 #'   combined. Please see [attribute.combination()] for details on
 #'   this.
+#' @family conversion
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
   # Argument checks
@@ -411,6 +416,7 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' a very expensive operation on large graphs.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_edgelist()], [as_adj()]
+#' @family conversion
 #' @export
 #' @keywords graphs
 #' @examples
@@ -458,6 +464,7 @@ as_adj_list <- function(graph,
 
 #' @rdname as_adj_list
 #' @aliases get.adjlist
+#' @family conversion
 #' @export
 as_adj_edge_list <- function(graph,
                              mode = c("all", "out", "in", "total"),
@@ -537,6 +544,7 @@ as_adj_edge_list <- function(graph,
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
+#' @family conversion
 #' @export
 graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
                                 unlist.attrs = TRUE) {
@@ -628,6 +636,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' g4 <- graph_from_graphnel(GNEL2)
 #' g4
 #' }
+#' @family conversion
 #' @export
 as_graphnel <- function(graph) {
   if (!is_igraph(graph)) {
@@ -842,6 +851,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph_from_incidence_matrix()] for the opposite operation.
+#' @family conversion
 #' @export
 #' @keywords graphs
 #' @examples
@@ -871,6 +881,7 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
 #'   edges, or both. The default is \sQuote{edges}.
+#' @family conversion
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   if (!is_igraph(x)) {
@@ -958,6 +969,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' g3 <- graph_from_adj_list(al, mode = "all", duplicate = FALSE)
 #' ecount(g3)
 #' which_multiple(g3)
+#' @family conversion
 #' @export
 graph_from_adj_list <- graph_from_adj_list
 
@@ -976,6 +988,7 @@ graph_from_adj_list <- graph_from_adj_list
 #' @param graph Input graph
 #' @return A long data frame.
 #'
+#' @family conversion
 #' @export
 #' @examples
 #' g <- make_(
@@ -1040,6 +1053,7 @@ as_long_data_frame <- function(graph) {
 #'   adjacency matrix or a two-column numeric matrix representing the edgelist.
 #' @author Michal Bojanowski, originally from the `intergraph` package
 #' @seealso [as_adjacency_matrix()], [as_edgelist()]
+#' @family conversion
 #' @export
 #' @examples
 #'

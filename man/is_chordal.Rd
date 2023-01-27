@@ -84,4 +84,5 @@ of Computation} 13, 566--579.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{decomposition}
 \keyword{graphs}

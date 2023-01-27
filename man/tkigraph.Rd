@@ -23,4 +23,5 @@ details about how to use it.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{socnet}
 \keyword{graphs}

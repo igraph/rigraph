@@ -47,8 +47,29 @@ sapply(k10, plot, vertex.label = NA)
 \seealso{
 \code{\link[=sample_degseq]{sample_degseq()}} for a generator with prescribed degree
 sequence.
+
+Other games: 
+\code{\link{connect}()},
+\code{\link{erdos.renyi.game}()},
+\code{\link{sample_bipartite}()},
+\code{\link{sample_degseq}()},
+\code{\link{sample_dot_product}()},
+\code{\link{sample_gnm}()},
+\code{\link{sample_gnp}()},
+\code{\link{sample_grg}()},
+\code{\link{sample_growing}()},
+\code{\link{sample_hierarchical_sbm}()},
+\code{\link{sample_islands}()},
+\code{\link{sample_last_cit}()},
+\code{\link{sample_pa_age}()},
+\code{\link{sample_pa}()},
+\code{\link{sample_pref}()},
+\code{\link{sample_sbm}()},
+\code{\link{sample_smallworld}()},
+\code{\link{sample_traits_callaway}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
 }
+\concept{games}
 \keyword{graphs}

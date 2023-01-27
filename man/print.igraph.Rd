@@ -111,4 +111,5 @@ summary(g)
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{print}
 \keyword{graphs}

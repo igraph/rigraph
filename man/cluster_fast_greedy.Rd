@@ -68,9 +68,31 @@ See also \code{\link[=cluster_walktrap]{cluster_walktrap()}},
 \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} and
 \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}}
 \code{\link[=cluster_leiden]{cluster_leiden()}} for other methods.
+
+Other community: 
+\code{\link{as_membership}()},
+\code{\link{cluster_edge_betweenness}()},
+\code{\link{cluster_fluid_communities}()},
+\code{\link{cluster_infomap}()},
+\code{\link{cluster_label_prop}()},
+\code{\link{cluster_leading_eigen}()},
+\code{\link{cluster_leiden}()},
+\code{\link{cluster_louvain}()},
+\code{\link{cluster_optimal}()},
+\code{\link{cluster_spinglass}()},
+\code{\link{cluster_walktrap}()},
+\code{\link{compare}()},
+\code{\link{contract}()},
+\code{\link{groups}()},
+\code{\link{make_clusters}()},
+\code{\link{membership}()},
+\code{\link{modularity.igraph}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{split_join_distance}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com} for the R interface.
 }
+\concept{community}
 \keyword{graphs}

@@ -41,8 +41,14 @@ sapply(components, diameter)
 \seealso{
 \code{\link[=is_connected]{is_connected()}} to decide whether a graph is connected,
 \code{\link[=components]{components()}} to calculate the connected components of a graph.
+
+Other components: 
+\code{\link{articulation_points}()},
+\code{\link{biconnected_components}()},
+\code{\link{component_distribution}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{components}
 \keyword{graphs}

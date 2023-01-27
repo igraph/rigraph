@@ -72,7 +72,7 @@
 #' graph plotting functions.
 #' @method plot igraph
 #' @export
-#' @export plot.igraph
+#' @family plot
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot polygon text par
 #' @keywords graphs
@@ -520,8 +520,10 @@ plot.igraph <- function(x,
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [igraph.plotting], [plot.igraph()] for the 2D
 #' version, [tkplot()] for interactive graph drawing in 2D.
+#' @family plot
 #' @export
 #' @keywords graphs
+#' @family plot
 #' @export
 #' @examples
 #'
@@ -536,6 +538,7 @@ rglplot <- function(x, ...) {
 }
 
 #' @method rglplot igraph
+#' @family plot
 #' @export
 rglplot.igraph <- function(x, ...) {
   graph <- x

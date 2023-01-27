@@ -52,4 +52,12 @@ all_simple_paths(g, 1, 5)
 all_simple_paths(g, 1, c(3, 5))
 
 }
+\seealso{
+Other paths: 
+\code{\link{distance_table}()},
+\code{\link{eccentricity}()},
+\code{\link{is_dag}()},
+\code{\link{radius}()}
+}
+\concept{paths}
 \keyword{graphs}

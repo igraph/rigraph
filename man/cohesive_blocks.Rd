@@ -297,4 +297,5 @@ Gabor Csardi \email{csardi.gabor@gmail.com} for the current
 implementation, Peter McMahan (\url{https://socialsciences.uchicago.edu/news/alumni-profile-peter-mcmahan-phd17-sociology})
 wrote the first version in R.
 }
+\concept{cohesive.blocks}
 \keyword{graphs}

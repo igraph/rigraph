@@ -78,9 +78,14 @@ weighted_clique_num(g)
 }
 \seealso{
 \code{\link[=ivs]{ivs()}}
+
+Other cliques: 
+\code{\link{cliques}()},
+\code{\link{ivs}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
+\concept{cliques}
 \keyword{graphs}
