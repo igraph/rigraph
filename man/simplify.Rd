@@ -75,4 +75,5 @@ is_simple(simplify(g))
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{simple}
 \keyword{graphs}

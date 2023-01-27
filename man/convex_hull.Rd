@@ -30,7 +30,14 @@ Clifford Stein. Introduction to Algorithms, Second Edition. MIT Press and
 McGraw-Hill, 2001. ISBN 0262032937. Pages 949-955 of section 33.3: Finding
 the convex hull.
 }
+\seealso{
+Other other: 
+\code{\link{running_mean}()},
+\code{\link{sample_seq}()},
+\code{\link{srand}()}
+}
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
 }
+\concept{other}
 \keyword{graphs}

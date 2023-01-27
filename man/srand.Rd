@@ -12,6 +12,13 @@ srand(seed)
 \description{
 Deprecated function, used to set random seed of the C library's RNG
 }
+\seealso{
+Other other: 
+\code{\link{convex_hull}()},
+\code{\link{running_mean}()},
+\code{\link{sample_seq}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{other}

@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9104
+
+- Merge pull request #652 from wael-sadek/f-check-if-forked.
+
+skip fledge job if the repo is a fork
+
+
 # igraph 1.3.5.9103
 
 ## Bug fixes

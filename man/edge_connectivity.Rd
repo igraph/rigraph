@@ -80,8 +80,20 @@ social networks: node connectivity and conditional density, TODO: citation
 \seealso{
 \code{\link[=max_flow]{max_flow()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
 \code{\link[=vertex_disjoint_paths]{vertex_disjoint_paths()}}, \code{\link[=cohesion]{cohesion()}}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

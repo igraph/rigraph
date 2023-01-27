@@ -102,4 +102,5 @@ Networks, Phys. Rev. Lett. 87, 198701 (2001).
 I. Vragović, E. Louis, and A. Díaz-Guilera, Efficiency of informational
 transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 }
+\concept{efficiency}
 \keyword{graphs}

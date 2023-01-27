@@ -79,8 +79,39 @@ groups(clu)
 }
 \seealso{
 \code{\link[=decompose]{decompose()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=groups]{groups()}}
+
+Other components: 
+\code{\link{articulation_points}()},
+\code{\link{biconnected_components}()},
+\code{\link{decompose}()}
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_matching}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{components}
+\concept{structural.properties}
 \keyword{graphs}

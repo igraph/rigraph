@@ -29,8 +29,16 @@ is_dag(g)
 g2 <- g + edge(5, 1)
 is_dag(g2)
 }
+\seealso{
+Other paths: 
+\code{\link{all_simple_paths}()},
+\code{\link{distance_table}()},
+\code{\link{eccentricity}()},
+\code{\link{radius}()}
+}
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} for the C code, Gabor Csardi
 \email{csardi.gabor@gmail.com} for the R interface.
 }
+\concept{paths}
 \keyword{graphs}

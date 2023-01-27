@@ -78,6 +78,10 @@ Computing}, 6:505--517, 1977.
 }
 \seealso{
 \code{\link[=cliques]{cliques()}}
+
+Other cliques: 
+\code{\link{cliques}()},
+\code{\link{weighted_cliques}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} ported it from the Very Nauty
@@ -85,4 +89,5 @@ Graph Library by Keith Briggs (\url{http://keithbriggs.info/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com} wrote the R interface and this manual
 page.
 }
+\concept{cliques}
 \keyword{graphs}

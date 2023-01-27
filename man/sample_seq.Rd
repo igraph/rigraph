@@ -37,7 +37,14 @@ Jeffrey Scott Vitter: An Efficient Algorithm for Sequential
 Random Sampling, \emph{ACM Transactions on Mathematical Software}, 13/1,
 58--67.
 }
+\seealso{
+Other other: 
+\code{\link{convex_hull}()},
+\code{\link{running_mean}()},
+\code{\link{srand}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{other}
 \keyword{datagen}
