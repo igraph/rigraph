@@ -58,6 +58,7 @@
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [distances()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -97,6 +98,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
   )
 }
 
+#' @family structural.properties
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
@@ -126,6 +128,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
+#' @family structural.properties
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
@@ -156,6 +159,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname distances
 mean_distance <- mean_distance
@@ -188,6 +192,7 @@ mean_distance <- mean_distance
 #'   degree vertices, the second vertices with degree one, etc.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -228,6 +233,7 @@ degree <- function(graph, v = V(graph),
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
+#' @family structural.properties
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -379,6 +385,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -504,6 +511,7 @@ distances <- function(graph, v = V(graph), to = V(graph),
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
+#' @family structural.properties
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -598,6 +606,7 @@ shortest_paths <- function(graph, from, to = V(graph),
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(graph, from,
@@ -667,6 +676,7 @@ all_shortest_paths <- function(graph, from,
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -721,6 +731,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -744,6 +755,7 @@ subgraph <- function(graph, vids) {
 #'   scratch. \sQuote{`auto`} chooses between the two implementations
 #'   automatically, using heuristics based on the size of the original and the
 #'   result graph.
+#' @family structural.properties
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -768,6 +780,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
+#' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -853,6 +866,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras, Alessandro
 #' Vespignani: The architecture of complex weighted networks, Proc. Natl. Acad.
 #' Sci. USA 101, 3747 (2004)
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -985,6 +999,7 @@ transitivity <- function(graph, type = c(
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Burt, R.S. (2004). Structural holes and good ideas.
 #' *American Journal of Sociology* 110, 349-399.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1040,6 +1055,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' @return A numeric scalar between zero and one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1088,6 +1104,7 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' to get rid of the multiple and/or loop edges.
 #' @references Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 #' Methods and Applications.  Cambridge: Cambridge University Press.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1112,6 +1129,7 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
+#' @family structural.properties
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
@@ -1183,6 +1201,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1232,6 +1251,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
 }
 
 #' @rdname ego
+#' @family structural.properties
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
@@ -1284,6 +1304,7 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
 #'
 #' Seidman S. B. (1983) Network structure and minimum degree, *Social
 #' Networks*, 5, 269--287.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1336,6 +1357,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -1391,6 +1413,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' heuristic for the feedback arc set problem. *Information Processing Letters*
 #' 47:6, pp. 319-323, 1993
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -1422,6 +1445,7 @@ feedback_arc_set <- feedback_arc_set
 #' @references Alon Itai and Michael Rodeh: Finding a minimum circuit in a
 #' graph *Proceedings of the ninth annual ACM symposium on Theory of
 #' computing*, 1-10, 1977
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1486,6 +1510,7 @@ girth <- function(graph, circle = TRUE) {
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1587,6 +1612,7 @@ any_loop <- any_loop
 #'   `FALSE`, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [dfs()] for depth-first search.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1747,6 +1773,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [bfs()] for breadth-first search.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1881,6 +1908,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   vector is the number of clusters of size zero, so this is always zero.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [decompose()], [subcomponent()], [groups()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1939,6 +1967,7 @@ count_components <- count_components
 #'   a mapping from the vertices of the new graph to the vertices of the old
 #'   graph.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2001,6 +2030,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'   matrix. The `Matrix` package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2127,6 +2157,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' print_all(g2, v = TRUE)
 #' max_bipartite_match(g2)
 #' #' @keywords graphs
+#' @family structural.properties
 #' @export
 is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
@@ -2144,6 +2175,7 @@ is_matching <- function(graph, matching, types = NULL) {
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
@@ -2162,6 +2194,7 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,
@@ -2226,6 +2259,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' dyad_census(g)
 #' which_mutual(g)
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
+#' @family structural.properties
 #' @export
 which_mutual <- which_mutual
 
@@ -2298,5 +2332,6 @@ which_mutual <- which_mutual
 #' g5 <- make_star(10)
 #' E(g5)$weight <- seq(ecount(g5))
 #' knn(g5)
+#' @family structural.properties
 #' @export
 knn <- knn

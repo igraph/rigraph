@@ -191,6 +191,7 @@ i.postprocess.layout <- function(maybe_layout) {
 #' @seealso [igraph.plotting] for all plotting parameters,
 #' [plot.igraph()], [tkplot()] and [rglplot()]
 #' for plotting functions.
+#' @family plot.common
 #' @export
 #' @importFrom stats ave
 #' @keywords graphs

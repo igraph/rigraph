@@ -51,6 +51,7 @@
 #' @seealso [components()]
 #' @references Prim, R.C. 1957. Shortest connection networks and some
 #' generalizations *Bell System Technical Journal*, 37 1389--1401.
+#' @family minimum.spanning.tree
 #' @export
 #' @keywords graphs
 #' @examples

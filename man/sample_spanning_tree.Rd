@@ -34,5 +34,10 @@ forest <- subgraph.edges(g, edges)
 }
 \seealso{
 \code{\link[=subgraph.edges]{subgraph.edges()}} to extract the tree itself
+
+Other trees: 
+\code{\link{is_tree}()},
+\code{\link{to_prufer}()}
 }
+\concept{trees}
 \keyword{graph}

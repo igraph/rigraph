@@ -13,3 +13,4 @@ igraph.Rcheck/
 .Rproj.user
 /configure~
 /build/
+/docs/

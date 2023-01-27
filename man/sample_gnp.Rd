@@ -44,8 +44,49 @@ Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
 \code{\link[=sample_gnm]{sample_gnm()}}, \code{\link[=sample_pa]{sample_pa()}}
+
+Other games: 
+\code{\link{connect}()},
+\code{\link{erdos.renyi.game}()},
+\code{\link{sample_bipartite}()},
+\code{\link{sample_degseq}()},
+\code{\link{sample_dot_product}()},
+\code{\link{sample_gnm}()},
+\code{\link{sample_grg}()},
+\code{\link{sample_growing}()},
+\code{\link{sample_hierarchical_sbm}()},
+\code{\link{sample_islands}()},
+\code{\link{sample_k_regular}()},
+\code{\link{sample_last_cit}()},
+\code{\link{sample_pa_age}()},
+\code{\link{sample_pa}()},
+\code{\link{sample_pref}()},
+\code{\link{sample_sbm}()},
+\code{\link{sample_smallworld}()},
+\code{\link{sample_traits_callaway}()}
+
+Other games: 
+\code{\link{connect}()},
+\code{\link{erdos.renyi.game}()},
+\code{\link{sample_bipartite}()},
+\code{\link{sample_degseq}()},
+\code{\link{sample_dot_product}()},
+\code{\link{sample_gnm}()},
+\code{\link{sample_grg}()},
+\code{\link{sample_growing}()},
+\code{\link{sample_hierarchical_sbm}()},
+\code{\link{sample_islands}()},
+\code{\link{sample_k_regular}()},
+\code{\link{sample_last_cit}()},
+\code{\link{sample_pa_age}()},
+\code{\link{sample_pa}()},
+\code{\link{sample_pref}()},
+\code{\link{sample_sbm}()},
+\code{\link{sample_smallworld}()},
+\code{\link{sample_traits_callaway}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{games}
 \keyword{graphs}

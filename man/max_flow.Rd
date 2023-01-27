@@ -75,4 +75,16 @@ Flow Problem \emph{Journal of the ACM} 35:921-940, 1988.
 \code{\link[=min_cut]{min_cut()}} for minimum cut calculations,
 \code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
 \code{\link[=vertex_connectivity]{vertex_connectivity()}}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
 }
+\concept{flow}

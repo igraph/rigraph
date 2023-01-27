@@ -134,10 +134,24 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 }
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
+
+Other centrality: 
+\code{\link{alpha_centrality}()},
+\code{\link{arpack_defaults}},
+\code{\link{closeness}()},
+\code{\link{diversity}()},
+\code{\link{eigen_centrality}()},
+\code{\link{estimate_betweenness}()},
+\code{\link{harmonic_centrality}()},
+\code{\link{page_rank}()},
+\code{\link{spectrum}()},
+\code{\link{strength}()},
+\code{\link{subgraph_centrality}()}
 }
 \author{
 Carter T. Butts
 (\url{http://www.faculty.uci.edu/profile.cfm?faculty_id=5057}), ported to
 igraph by Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{centrality}
 \keyword{graphs}

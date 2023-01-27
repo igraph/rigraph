@@ -123,4 +123,5 @@ distributions in empirical data. SIAM Review 51(4):661-703, 2009.
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
+\concept{fit}
 \keyword{graphs}

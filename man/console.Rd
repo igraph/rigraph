@@ -31,4 +31,5 @@ The console is written in Tcl/Tk and required the \code{tcltk} package.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{console}
 \keyword{graphs}

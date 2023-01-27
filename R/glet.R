@@ -76,6 +76,7 @@
 #'   E(g)[width == 2]$color <- "#E495A5"
 #'   plot(g, layout = co)
 #' }
+#' @family glet
 #' @export
 graphlet_basis <- function(graph, weights = NULL) {
   ## Argument checks
@@ -103,6 +104,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 }
 
 #' @rdname graphlet_basis
+#' @family glet
 #' @export
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
                           Mu = rep(1, length(cliques))) {

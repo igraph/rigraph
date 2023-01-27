@@ -54,8 +54,22 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 }
 \seealso{
 \code{\link[=degree]{degree()}} for the unweighted version.
+
+Other centrality: 
+\code{\link{alpha_centrality}()},
+\code{\link{arpack_defaults}},
+\code{\link{closeness}()},
+\code{\link{diversity}()},
+\code{\link{eigen_centrality}()},
+\code{\link{estimate_betweenness}()},
+\code{\link{harmonic_centrality}()},
+\code{\link{page_rank}()},
+\code{\link{power_centrality}()},
+\code{\link{spectrum}()},
+\code{\link{subgraph_centrality}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{centrality}
 \keyword{graphs}

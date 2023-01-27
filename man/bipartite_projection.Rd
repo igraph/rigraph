@@ -89,7 +89,12 @@ print(proj2[[1]], g = TRUE, e = TRUE)
 print(proj2[[2]], g = TRUE, e = TRUE)
 
 }
+\seealso{
+Other bipartite: 
+\code{\link{bipartite_mapping}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{bipartite}
 \keyword{graphs}

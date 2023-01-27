@@ -59,6 +59,7 @@
 #' I. Vragović, E. Louis, and A. Díaz-Guilera, Efficiency of informational
 #' transfer in regular and complex networks, Phys. Rev. E 71, 1 (2005).
 #'
+#' @family efficiency
 #' @export
 #' @keywords graphs
 #' @examples

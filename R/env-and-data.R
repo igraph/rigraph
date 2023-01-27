@@ -25,6 +25,7 @@
 #' @aliases dot-env
 #' @format NULL
 #' @usage NULL
+#' @family env-and-data
 #' @export
 #' @md
 .data <- rlang::.data
@@ -32,5 +33,6 @@
 #' @rdname dot-data
 #' @format NULL
 #' @usage NULL
+#' @family env-and-data
 #' @export
 .env <- rlang::.env
