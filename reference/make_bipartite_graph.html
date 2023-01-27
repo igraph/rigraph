@@ -20,7 +20,10 @@ between different kinds."><!-- mathjax --><script src="https://cdnjs.cloudflare.
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item">
@@ -129,9 +132,9 @@ checks whether the graph has a vertex attribute called <code>type</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">make_bipartite_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8b8075a U--B 10 5 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fd2c873 U--B 10 5 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8b8075a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fd2c873:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 3-- 4 5-- 6 7-- 8 9--10</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
