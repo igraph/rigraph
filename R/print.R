@@ -507,9 +507,9 @@ print_all <- function(object, ...) {
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @export
 #' @method print igraph
 #' @family print
-#' @export print.igraph
 #' @keywords graphs
 #' @examples
 #'

@@ -71,8 +71,8 @@
 #' parameters and [tkplot()] and [rglplot()] for other
 #' graph plotting functions.
 #' @method plot igraph
+#' @export
 #' @family plot
-#' @export plot.igraph
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot polygon text par
 #' @keywords graphs
