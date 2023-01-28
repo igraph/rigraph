@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9105
+
+## Documentation
+
+- Move vignette to standard location (@maelle, #645).
+
+## Uncategorized
+
+- Merge pull request #638 from maelle/config-draft.
+
+1st config draft
+
+
 # igraph 1.3.5.9104
 
 - Merge pull request #652 from wael-sadek/f-check-if-forked.
