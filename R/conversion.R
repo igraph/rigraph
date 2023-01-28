@@ -1061,7 +1061,7 @@ as_long_data_frame <- function(graph) {
 #' as.matrix(g, "adjacency")
 #' as.matrix(g, "edgelist")
 #' # use edge attribute "weight"
-#' E(g)$weight <- rep(1:10, each = ecount(g))
+#' E(g)$weight <- rep(1:10, length.out = ecount(g))
 #' as.matrix(g, "adjacency", sparse = FALSE, attr = "weight")
 #'
 as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {

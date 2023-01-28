@@ -2148,7 +2148,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' is_max_matching(g, m2)
 #' is_max_matching(g, m3)
 #'
-#' V(g)$type <- c(FALSE, TRUE)
+#' V(g)$type <- rep(c(FALSE, TRUE), 3)
 #' print_all(g, v = TRUE)
 #' max_bipartite_match(g)
 #'
