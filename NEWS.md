@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9106
+
+## Features
+
+- Breaking change: Allow change of attribute type when setting attribute for all vertices or edges, only attributes of length 1 or the length of the target set allowed (#633).
+
+## Breaking changes
+
+- Breaking change: Allow change of attribute type when setting attribute for all vertices or edges, only attributes of length 1 or the length of the target set allowed (#633).
+
+
 # igraph 1.3.5.9105
 
 ## Documentation
