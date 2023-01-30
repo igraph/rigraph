@@ -42,5 +42,8 @@ Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref, watts.strogatz.game
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
-Authors@R: 
-    person("Tamás", "Nepusz", , "ntamas@gmail.com", role = c("aut", "cre"), comment = "See also AUTHORS file.")
+Authors@R: c(
+    person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut")
+    person("Tamás", "Nepusz", , "ntamas@gmail.com", role = c("aut", "cre"),
+           comment = "See also AUTHORS file.")
+  )
