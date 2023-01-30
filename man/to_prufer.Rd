@@ -32,5 +32,10 @@ to_prufer(g)
 \seealso{
 \code{\link[=make_from_prufer]{make_from_prufer()}} to construct a graph from its
 Prufer sequence
+
+Other trees: 
+\code{\link{is_tree}()},
+\code{\link{sample_spanning_tree}()}
 }
+\concept{trees}
 \keyword{graphs}

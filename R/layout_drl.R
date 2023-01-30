@@ -75,6 +75,7 @@
 #' @references See the following technical report: Martin, S., Brown, W.M.,
 #' Klavans, R., Boyack, K.W., DrL: Distributed Recursive (Graph) Layout. SAND
 #' Reports, 2008. 2936: p. 1-10.
+#' @family layout_drl
 #' @export
 #' @importFrom stats runif
 #' @keywords graphs
@@ -139,10 +140,12 @@ layout_with_drl <- function(graph, use.seed = FALSE,
 
 #' @rdname layout_with_drl
 #' @param ... Passed to `layout_with_drl()`.
+#' @family layout_drl
 #' @export
 with_drl <- function(...) layout_spec(layout_with_drl, ...)
 
 
+#' @family layout_drl
 #' @export
 igraph.drl.default <- list(
   edge.cut = 32 / 40,
@@ -172,6 +175,7 @@ igraph.drl.default <- list(
   simmer.damping.mult = 0
 )
 
+#' @family layout_drl
 #' @export
 igraph.drl.coarsen <- list(
   edge.cut = 32 / 40,
@@ -201,6 +205,7 @@ igraph.drl.coarsen <- list(
   simmer.damping.mult = 0
 )
 
+#' @family layout_drl
 #' @export
 igraph.drl.coarsest <- list(
   edge.cut = 32 / 40,
@@ -230,6 +235,7 @@ igraph.drl.coarsest <- list(
   simmer.damping.mult = 0
 )
 
+#' @family layout_drl
 #' @export
 igraph.drl.refine <- list(
   edge.cut = 32 / 40,
@@ -259,6 +265,7 @@ igraph.drl.refine <- list(
   simmer.damping.mult = 0
 )
 
+#' @family layout_drl
 #' @export
 igraph.drl.final <- list(
   edge.cut = 32 / 40,
@@ -288,6 +295,7 @@ igraph.drl.final <- list(
   simmer.damping.mult = 0
 )
 
+#' @family layout_drl
 #' @export
 drl_defaults <- list(
   coarsen = igraph.drl.coarsen,

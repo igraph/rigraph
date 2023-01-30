@@ -390,6 +390,7 @@ nexus.format.result <- function(l, name = "") {
 #' ## Any word can match
 #' nexus_search("blog or US or karate")
 #' }
+#' @family nexus
 #' @export
 #' @importFrom utils URLencode
 nexus_list <- function(tags = NULL, offset = 0, limit = 10,
@@ -419,6 +420,7 @@ nexus_list <- function(tags = NULL, offset = 0, limit = 10,
   #  nexus.format.result(l, name)
 }
 
+#' @family nexus
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
@@ -455,6 +457,7 @@ nexus_info <- function(id, nexus.url = igraph_opt("nexus.url")) {
   #  return(res)
 }
 
+#' @family nexus
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode
@@ -490,6 +493,7 @@ nexus_get <- function(id, offset = 0,
   # }
 }
 
+#' @family nexus
 #' @export
 #' @rdname nexus
 #' @importFrom utils URLencode

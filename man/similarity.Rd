@@ -77,4 +77,5 @@ Lada A. Adamic and Eytan Adar: Friends and neighbors on the Web.
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com} for the manual page.
 }
+\concept{similarity}
 \keyword{graphs}

@@ -1,5 +1,61 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9106
+
+## Features
+
+- Breaking change: Allow change of attribute type when setting attribute for all vertices or edges, only attributes of length 1 or the length of the target set allowed (#633).
+
+## Breaking changes
+
+- Breaking change: Allow change of attribute type when setting attribute for all vertices or edges, only attributes of length 1 or the length of the target set allowed (#633).
+
+
+# igraph 1.3.5.9105
+
+## Documentation
+
+- Move vignette to standard location (@maelle, #645).
+
+## Uncategorized
+
+- Merge pull request #638 from maelle/config-draft.
+
+1st config draft
+
+
+# igraph 1.3.5.9104
+
+- Merge pull request #652 from wael-sadek/f-check-if-forked.
+
+skip fledge job if the repo is a fork
+
+
+# igraph 1.3.5.9103
+
+## Bug fixes
+
+- Iterators created with `E(P = ...)` or `E(path = ...)` are incomplete (#648).
+
+
+# igraph 1.3.5.9102
+
+## Chore
+
+- Avoid fledge workflow on forks.
+
+
+# igraph 1.3.5.9101
+
+## Documentation
+
+- Link to installation troubleshooting info (@maelle, #646).
+
+- Further polish print_all() docs.
+
+- Clarify print_all() output.
+
+
 # igraph 1.3.5.9100
 
 ## Chore

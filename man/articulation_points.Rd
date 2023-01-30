@@ -46,8 +46,19 @@ bridges(g)
 \code{\link[=biconnected_components]{biconnected_components()}}, \code{\link[=components]{components()}},
 \code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
 \code{\link[=edge_connectivity]{edge_connectivity()}}
+
+Other components: 
+\code{\link{biconnected_components}()},
+\code{\link{component_distribution}()},
+\code{\link{decompose}()}
+
+Other components: 
+\code{\link{biconnected_components}()},
+\code{\link{component_distribution}()},
+\code{\link{decompose}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{components}
 \keyword{graphs}

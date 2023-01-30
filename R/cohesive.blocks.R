@@ -190,6 +190,7 @@
 #' @references J. Moody and D. R. White. Structural cohesion and embeddedness:
 #' A hierarchical concept of social groups. *American Sociological
 #' Review*, 68(1):103--127, Feb 2003.
+#' @family cohesive.blocks
 #' @export
 #' @keywords graphs
 #' @examples
@@ -267,23 +268,27 @@ cohesive_blocks <- function(graph, labels = TRUE) {
 
 #' @rdname cohesive_blocks
 #' @method length cohesiveBlocks
+#' @family cohesive.blocks
 #' @export
 length.cohesiveBlocks <- function(x) {
   length(x$blocks)
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 blocks <- function(blocks) {
   blocks$blocks
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph = graph)
 }
 
+#' @family cohesive.blocks
 #' @export
 cohesion <- function(x, ...) {
   UseMethod("cohesion")
@@ -291,18 +296,21 @@ cohesion <- function(x, ...) {
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks
+#' @family cohesive.blocks
 #' @export
 cohesion.cohesiveBlocks <- function(x, ...) {
   x$cohesion
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 hierarchy <- function(blocks) {
   blocks$blockTree
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 parent <- function(blocks) {
   blocks$parent
@@ -310,6 +318,7 @@ parent <- function(blocks) {
 
 #' @rdname cohesive_blocks
 #' @method print cohesiveBlocks
+#' @family cohesive.blocks
 #' @export
 print.cohesiveBlocks <- function(x, ...) {
   cat("Cohesive block structure:\n")
@@ -359,6 +368,7 @@ print.cohesiveBlocks <- function(x, ...) {
 
 #' @rdname cohesive_blocks
 #' @method summary cohesiveBlocks
+#' @family cohesive.blocks
 #' @export
 summary.cohesiveBlocks <- function(object, ...) {
   cat(
@@ -370,6 +380,7 @@ summary.cohesiveBlocks <- function(object, ...) {
 
 #' @rdname cohesive_blocks
 #' @method plot cohesiveBlocks
+#' @family cohesive.blocks
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
@@ -385,6 +396,7 @@ plot.cohesiveBlocks <- function(x, y,
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 #' @importFrom graphics plot
 plot_hierarchy <- function(blocks,
@@ -456,6 +468,7 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 export_pajek <- function(blocks, graph, file,
                          project.file = TRUE) {
@@ -474,6 +487,7 @@ export_pajek <- function(blocks, graph, file,
 }
 
 #' @rdname cohesive_blocks
+#' @family cohesive.blocks
 #' @export
 max_cohesion <- function(blocks) {
   res <- numeric(blocks$vcount)

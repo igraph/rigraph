@@ -24,6 +24,7 @@
 #'   calculated.
 #' @param cutoff The maximum path length to consider when calculating the
 #'   betweenness. If zero or negative then there is no such limit.
+#' @family centrality
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL, nobigint = TRUE) {
   if (!missing(nobigint)) {
@@ -105,6 +106,7 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #'
 #' Ulrik Brandes, A Faster Algorithm for Betweenness Centrality. *Journal
 #' of Mathematical Sociology* 25(2):163-177, 2001.
+#' @family centrality
 #' @export
 #' @keywords graphs
 #' @examples
@@ -154,6 +156,7 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
+#' @family centrality
 #' @export
 edge_betweenness <- function(graph, e = E(graph),
                              directed = TRUE, weights = NULL, cutoff = -1) {
@@ -183,6 +186,7 @@ edge_betweenness <- function(graph, e = E(graph),
   res[as.numeric(e)]
 }
 
+#' @family centrality
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
@@ -242,6 +246,7 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #' @seealso [betweenness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
+#' @family centrality
 #' @export
 #' @keywords graphs
 #' @examples
@@ -291,12 +296,14 @@ closeness <- function(graph, vids = V(graph),
   res
 }
 
+#' @family centrality
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
   closeness(graph, vids, mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }
 
 #' @rdname arpack
+#' @family centrality
 #' @export
 arpack_defaults <- list(
   bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
@@ -490,6 +497,7 @@ arpack_defaults <- list(
 #'     which = "LM", maxiter = 2000
 #'   ))
 #' }
+#' @family centrality
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
                    env = parent.frame(), complex = !sym) {
@@ -588,6 +596,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' @seealso [eigen_centrality()], [page_rank()]
 #' @references Ernesto Estrada, Juan A. Rodriguez-Velazquez: Subgraph
 #' centrality in Complex Networks. *Physical Review E* 71, 056103 (2005).
+#' @family centrality
 #' @export
 #' @keywords graphs
 #' @examples
@@ -668,6 +677,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' ## Smallest eigenvalues
 #' spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 #'
+#' @family centrality
 #' @export
 spectrum <- spectrum
 
@@ -760,6 +770,7 @@ eigen_defaults <- list(
 #' g <- make_ring(10, directed = FALSE)
 #' # Compute eigenvector centrality scores
 #' eigen_centrality(g)
+#' @family centrality
 #' @export
 eigen_centrality <- eigen_centrality
 
@@ -798,6 +809,7 @@ eigen_centrality <- eigen_centrality
 #' # No weights, a warning is given
 #' g <- make_ring(10)
 #' strength(g)
+#' @family centrality
 #' @export
 strength <- strength
 
@@ -841,6 +853,7 @@ strength <- strength
 #' diversity(g1)
 #' diversity(g2)
 #' diversity(g3)
+#' @family centrality
 #' @export
 diversity <- diversity
 
@@ -1027,6 +1040,7 @@ authority_score <- authority_score
 #' page_rank(g3)$vector
 #' reset <- seq(vcount(g3))
 #' page_rank(g3, personalized = reset)$vector
+#' @family centrality
 #' @export
 page_rank <- page_rank
 
@@ -1063,6 +1077,7 @@ page_rank <- page_rank
 #' @seealso [betweenness()], [closeness()]
 #' @references M. Marchiori and V. Latora, Harmony in the small-world,
 #' *Physica A* 285, pp. 539-546 (2000).
+#' @family centrality
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1210,6 +1225,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 #' *American Journal of Sociology*, 92, 1170-1182.
 #' @keywords graphs
+#' @family centrality
 #' @export
 #' @examples
 #'
@@ -1393,6 +1409,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' @references Bonacich, P. and Lloyd, P. (2001). ``Eigenvector-like
 #' measures of centrality for asymmetric relations'' *Social Networks*,
 #' 23, 191-201.
+#' @family centrality
 #' @export
 #' @keywords graphs
 #' @examples

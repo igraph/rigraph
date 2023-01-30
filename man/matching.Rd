@@ -103,7 +103,7 @@ is_max_matching(g, m1)
 is_max_matching(g, m2)
 is_max_matching(g, m3)
 
-V(g)$type <- c(FALSE, TRUE)
+V(g)$type <- rep(c(FALSE, TRUE), 3)
 print_all(g, v = TRUE)
 max_bipartite_match(g)
 
@@ -113,6 +113,80 @@ print_all(g2, v = TRUE)
 max_bipartite_match(g2)
 #' @keywords graphs
 }
+\seealso{
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
+}
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}
 }
+\concept{structural.properties}

@@ -69,13 +69,16 @@
 #' is_simple(simplify(g, remove.loops = FALSE))
 #' is_simple(simplify(g, remove.multiple = FALSE))
 #' is_simple(simplify(g))
+#' @family simple
 #' @export
 simplify <- simplify
 
+#' @family simple
 #' @export
 #' @rdname simplify
 is_simple <- is_simple
 
+#' @family simple
 #' @export
 #' @rdname simplify
 simplify_and_colorize <- function(graph) {

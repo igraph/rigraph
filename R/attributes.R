@@ -34,6 +34,7 @@
 ##
 
 
+
 #' Graph attributes of a graph
 #'
 #' @param graph Input graph.
@@ -174,11 +175,12 @@ vertex_attr <- function(graph, name, index = V(graph)) {
   } else {
     myattr <-
       .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)[[as.character(name)]]
-    if (!missing(index)) {
+    if (is_complete_iterator(index)) {
+      myattr
+    } else {
       index <- as.igraph.vs(graph, index)
-      myattr <- myattr[index]
+      myattr[index]
     }
-    myattr
   }
 }
 
@@ -223,6 +225,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   of a subset of vertices.
 #' @param value The new value of the attribute for all (or `index`)
 #'   vertices.
+#'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
 #'
 #' @aliases set.vertex.attribute
@@ -235,31 +238,58 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' g
 #' plot(g)
 set_vertex_attr <- function(graph, name, index = V(graph), value) {
-  i_set_vertex_attr(
-    graph = graph, name = name, index = index,
-    value = value
-  )
+  if (is_complete_iterator(index)) {
+    i_set_vertex_attr(graph = graph, name = name, value = value, check = FALSE)
+  } else {
+    i_set_vertex_attr(graph = graph, name = name, index = index, value = value)
+  }
 }
 
-i_set_vertex_attr <- function(graph, name, index = V(graph), value,
-                              check = TRUE) {
+i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+
+  if (is.null(value)) {
+    return(graph)
+  }
+
   single <- is_single_index(index)
+  complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
     index <- as.igraph.vs(graph, index)
   }
   name <- as.character(name)
-  vc <- vcount(graph)
 
   vattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
+
+  if (!complete && !(name %in% names(vattrs))) {
+    vattrs[[name]] <- value[rep.int(NA_integer_, vcount(graph))]
+  }
+
   if (single) {
     vattrs[[name]][[index]] <- value
   } else {
-    vattrs[[name]][index] <- value
+    if (length(value) == 1) {
+      value_in <- rep(unname(value), length(index))
+    } else if (length(value) == length(index)) {
+      value_in <- unname(value)
+    } else {
+      stop(
+        "Length of new attribute value must be ",
+        if (length(index) != 1) "1 or ",
+        length(index),
+        ", the number of target vertices, not ",
+        length(value)
+      )
+    }
+
+    if (complete) {
+      vattrs[[name]] <- value_in
+    } else {
+      vattrs[[name]][index] <- value_in
+    }
   }
-  length(vattrs[[name]]) <- vc
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattrs)
 }
@@ -355,7 +385,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
   } else {
     name <- as.character(name)
     myattr <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)[[name]]
-    if (is.null(index)) {
+    if (is_complete_iterator(index)) {
       myattr
     } else {
       index <- as.igraph.es(graph, index)
@@ -405,6 +435,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   a subset of edges.
 #' @param value The new value of the attribute for all (or `index`)
 #'   edges.
+#'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
 #'
 #' @aliases set.edge.attribute
@@ -417,26 +448,58 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' g
 #' plot(g)
 set_edge_attr <- function(graph, name, index = E(graph), value) {
-  i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+  if (is_complete_iterator(index)) {
+    i_set_edge_attr(graph = graph, name = name, value = value, check = FALSE)
+  } else {
+    i_set_edge_attr(graph = graph, name = name, index = index, value = value)
+  }
 }
 
-i_set_edge_attr <- function(graph, name, index = E(graph), value,
-                            check = TRUE) {
+i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
+
+  if (is.null(value)) {
+    return(graph)
+  }
+
+  complete <- is_complete_iterator(index)
   single <- is_single_index(index)
   name <- as.character(name)
-  if (!missing(index) && check) index <- as.igraph.es(graph, index)
-  ec <- ecount(graph)
+  if (!missing(index) && check) {
+    index <- as.igraph.es(graph, index)
+  }
 
   eattrs <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+
+  if (!complete && !(name %in% names(eattrs))) {
+    eattrs[[name]] <- value[rep.int(NA_integer_, ecount(graph))]
+  }
+
   if (single) {
     eattrs[[name]][[index]] <- value
   } else {
-    eattrs[[name]][index] <- value
+    if (length(value) == 1) {
+      value_in <- rep(unname(value), length(index))
+    } else if (length(value) == length(index)) {
+      value_in <- unname(value)
+    } else {
+      stop(
+        "Length of new attribute value must be ",
+        if (length(index) != 1) "1 or ",
+        length(index),
+        ", the number of target edges, not ",
+        length(value)
+      )
+    }
+
+    if (complete) {
+      eattrs[[name]] <- value_in
+    } else {
+      eattrs[[name]][index] <- value_in
+    }
   }
-  length(eattrs[[name]]) <- ec
 
   .Call(C_R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattrs)
 }

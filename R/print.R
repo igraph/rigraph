@@ -430,6 +430,7 @@
   cat(alstr, sep = "\n")
 }
 
+#' @family print
 #' @export
 print_all <- function(object, ...) {
   print.igraph(object, full = TRUE, ...)
@@ -506,9 +507,9 @@ print_all <- function(object, ...) {
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @method print igraph
 #' @export
-#' @export print.igraph
+#' @method print igraph
+#' @family print
 #' @keywords graphs
 #' @examples
 #'
@@ -555,6 +556,7 @@ print.igraph <- function(x, full = igraph_opt("print.full"),
 
 #' @rdname print.igraph
 #' @method summary igraph
+#' @family print
 #' @export
 summary.igraph <- function(object, ...) {
   .print.header(object)

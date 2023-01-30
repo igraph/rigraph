@@ -37,6 +37,7 @@
 #'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
+#' @family test
 #' @export
 igraph_test <- function() {
   do.call(require, list("testthat"))
@@ -57,6 +58,7 @@ igraph_test <- function() {
 #' @return A character scalar, the igraph version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
+#' @family test
 #' @export
 #' @examples
 #'

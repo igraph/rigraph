@@ -435,5 +435,6 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 
 #' @rdname graph_from_adjacency_matrix
 #' @param ... Passed to `graph_from_adjacency_matrix()`.
+#' @family adjacency
 #' @export
 from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)

@@ -1,7 +1,225 @@
 url: ~
+
 template:
   bootstrap: 5
 
-
 authors:
   after: "See the [AUTHORS file](/AUTHORS-list.html) for other contributors."
+
+reference:
+- title: Adjacency
+- contents:
+  - has_concept("adjacency")
+- title: Graph attributes
+- contents:
+  - has_concept("graph attributes")
+- title: Structural queries
+- contents:
+  - has_concept("structural queries")
+- title: Bipartite
+- contents:
+  - has_concept("bipartite")
+- title: Centrality
+- contents:
+  - has_concept("centrality")
+- title: Centralization related
+- contents:
+  - has_concept("centralization related")
+- title: Cliques
+- contents:
+  - has_concept("cliques")
+- title: Cocitation
+- contents:
+  - has_concept("cocitation")
+- title: Cohesive blocks
+- contents:
+  - has_concept("cohesive.blocks")
+- title: Coloring
+- contents:
+  - has_concept("coloring")
+- title: Community
+- contents:
+  - has_concept("community")
+- title: Components
+- contents:
+  - has_concept("components")
+- title: Console
+- contents:
+  - has_concept("console")
+- title: Conversion
+- contents:
+  - has_concept("conversion")
+- title: Deterministic constructors
+- contents:
+  - has_concept("deterministic constructors")
+- title: Decomposition
+- contents:
+  - has_concept("decomposition")
+- title: Graphical degree sequences
+- contents:
+  - has_concept("graphical degree sequences")
+- title: Demo
+- contents:
+  - has_concept("demo")
+- title: Efficiency
+- contents:
+  - has_concept("efficiency")
+- title: Latent position vector samplers
+- contents:
+  - has_concept("latent position vector samplers")
+- title: Env and data
+- contents:
+  - has_concept("env-and-data")
+- title: Epi
+- contents:
+  - has_concept("epi")
+- title: Eulerian
+- contents:
+  - has_concept("eulerian")
+- title: Fit
+- contents:
+  - has_concept("fit")
+- title: Flow
+- contents:
+  - has_concept("flow")
+- title: Foreign
+- contents:
+  - has_concept("foreign")
+- title: Games
+- contents:
+  - has_concept("games")
+- title: Glet
+- contents:
+  - has_concept("glet")
+- title: Hierarchical random graph functions
+- contents:
+  - has_concept("hierarchical random graph functions")
+- title: Incidence
+- contents:
+  - has_concept("incidence")
+- title: Structural queries
+- contents:
+  - has_concept("structural queries")
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- title: Structural queries
+- contents:
+  - has_concept("structural queries")
+- title: Vertex and edge sequences
+- contents:
+  - has_concept("vertex and edge sequences")
+- title: Vertex and edge sequence operations
+- contents:
+  - has_concept("vertex and edge sequence operations")
+- title: Graph attributes
+- contents:
+  - has_concept("graph attributes")
+- title: Graph layouts
+- contents:
+  - has_concept("graph layouts")
+- title: Layout modifiers
+- contents:
+  - has_concept("layout modifiers")
+- title: Layout drl
+- contents:
+  - has_concept("layout_drl")
+- title: Constructor modifiers
+- contents:
+  - has_concept("constructor modifiers")
+- title: Deterministic constructors
+- contents:
+  - has_concept("deterministic constructors")
+- title: Minimum spanning tree
+- contents:
+  - has_concept("minimum.spanning.tree")
+- title: Graph motifs
+- contents:
+  - has_concept("graph motifs")
+- title: Nexus
+- contents:
+  - has_concept("nexus")
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- title: Other
+- contents:
+  - has_concept("other")
+- title: Palettes
+- contents:
+  - has_concept("palettes")
+- title: Igraph options
+- contents:
+  - has_concept("igraph options")
+- title: Paths
+- contents:
+  - has_concept("paths")
+- title: Plot
+- contents:
+  - has_concept("plot")
+- title: Plot common
+- contents:
+  - has_concept("plot.common")
+- title: Plot shapes
+- contents:
+  - has_concept("plot.shapes")
+- title: Print
+- contents:
+  - has_concept("print")
+- title: Printer callbacks
+- contents:
+  - has_concept("printer callbacks")
+- title: Random walk
+- contents:
+  - has_concept("random_walk")
+- title: Rewiring functions
+- contents:
+  - has_concept("rewiring functions")
+- title: Scan statistics
+- contents:
+  - has_concept("scan statistics")
+- title: Scg
+- contents:
+  - has_concept("scg")
+- title: Sgm
+- contents:
+  - has_concept("sgm")
+- title: Similarity
+- contents:
+  - has_concept("similarity")
+- title: Simple
+- contents:
+  - has_concept("simple")
+- title: Socnet
+- contents:
+  - has_concept("socnet")
+- title: Structural properties
+- contents:
+  - has_concept("structural.properties")
+- title: Structural queries
+- contents:
+  - has_concept("structural queries")
+- title: Test
+- contents:
+  - has_concept("test")
+- title: Tkplot
+- contents:
+  - has_concept("tkplot")
+- title: Graph isomorphism
+- contents:
+  - has_concept("graph isomorphism")
+- title: Trees
+- contents:
+  - has_concept("trees")
+- title: Triangles
+- contents:
+  - has_concept("triangles")
+- title: Versions
+- contents:
+  - has_concept("versions")
+- title: Others
+- contents:
+  - lacks_concepts(c("adjacency", "graph attributes", "structural queries", "bipartite", "centrality", "centralization related", "cliques", "cocitation", "cohesive.blocks", "coloring", "community", "components", "console", "conversion", "deterministic constructors", "decomposition", "graphical degree sequences", "demo", "efficiency", "latent position vector samplers", "env-and-data", "epi", "eulerian", "fit", "flow", "foreign", "games", "glet", "hierarchical random graph functions", "incidence", "structural queries", "functions for manipulating graph structure", "functions for manipulating graph structure", "structural queries", "vertex and edge sequences", "vertex and edge sequence operations", "graph attributes", "graph layouts", "layout modifiers", "layout_drl", "constructor modifiers", "deterministic constructors", "minimum.spanning.tree", "graph motifs", "nexus", "functions for manipulating graph structure", "other", "palettes", "igraph options", "paths", "plot", "plot.common", "plot.shapes", "print", "printer callbacks", "random_walk", "rewiring functions", "scan statistics", "scg", "sgm", "similarity", "simple", "socnet", "structural.properties", "structural queries", "test", "tkplot", "graph isomorphism", "trees", "triangles", "versions"))

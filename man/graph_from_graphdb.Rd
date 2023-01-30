@@ -94,8 +94,13 @@ of graphs and its use for benchmarking graph isomorphism algorithms,
 }
 \seealso{
 \code{\link[=read_graph]{read_graph()}}, \code{\link[=graph.isomorphic.vf2]{graph.isomorphic.vf2()}}
+
+Other foreign: 
+\code{\link{read_graph}()},
+\code{\link{write_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{foreign}
 \keyword{graphs}

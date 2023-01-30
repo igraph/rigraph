@@ -212,3 +212,4 @@ plot(g,
   vertex.norays = rep(4:8, length.out = vcount(g))
 )
 }
+\concept{plot.shapes}

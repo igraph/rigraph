@@ -16,7 +16,8 @@ set_vertex_attr(graph, name, index = V(graph), value)
 of a subset of vertices.}
 
 \item{value}{The new value of the attribute for all (or \code{index})
-vertices.}
+vertices.
+If \code{NULL}, the input is returned unchanged.}
 }
 \value{
 The graph, with the vertex attribute added or set.
