@@ -24,6 +24,12 @@
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -91,23 +97,23 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_vertex_attr.html">set_vertex_attr</a></span><span class="op">(</span><span class="st">"name"</span>, value <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fca4cf7 UN-- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH aad8c65 UN-- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fca4cf7 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from aad8c65 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A--B B--C C--D D--E E--F F--G G--H H--I I--J A--J</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from fca4cf7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from aad8c65:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] A B C D E F G H I J</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">delete_vertices</span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">delete_vertices</span><span class="op">(</span><span class="st">"B"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH de410db UN-- 7 5 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2aaebbd UN-- 7 5 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from de410db (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2aaebbd (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] C--D F--G G--H H--I I--J</span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/7 vertices, named, from de410db:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 7/7 vertices, named, from 2aaebbd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] C D F G H I J</span>
 </code></pre></div>
     </div>

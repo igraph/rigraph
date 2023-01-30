@@ -26,6 +26,12 @@ connected to the center vertex and nobody else."><!-- mathjax --><script src="ht
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -109,14 +115,14 @@ are undirected.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_star</span><span class="op">(</span><span class="fl">10</span>, mode <span class="op">=</span> <span class="st">"out"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 30949ed D--- 10 9 -- Out-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 385c1e6 D--- 10 9 -- Out-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 30949ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 385c1e6:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt; 2 1-&gt; 3 1-&gt; 4 1-&gt; 5 1-&gt; 6 1-&gt; 7 1-&gt; 8 1-&gt; 9 1-&gt;10</span>
 <span class="r-in"><span><span class="fu">make_star</span><span class="op">(</span><span class="fl">5</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3a8040f U--- 5 4 -- Star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5f730ac U--- 5 4 -- Star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mode (g/c), center (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3a8040f:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5f730ac:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 1--3 1--4 1--5</span>
 </code></pre></div>
     </div>

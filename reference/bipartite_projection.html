@@ -24,6 +24,12 @@
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -164,15 +170,15 @@ the second.</p>
 <span class="r-in"><span><span class="va">g2</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Event network"</span></span></span>
 <span class="r-in"><span><span class="va">proj2</span> <span class="op">&lt;-</span> <span class="fu">bipartite_projection</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 615f955 UNW- 5 8 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c45094f UNW- 5 8 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 615f955 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c45094f (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice--Bob   Alice--Cecil Alice--Ethel Bob  --Cecil Bob  --Ethel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Cecil--Ethel Cecil--Dan   Dan  --Ethel</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6f4880c UNW- 3 3 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 055d91b UNW- 3 3 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6f4880c (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 055d91b (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Party --Skiing    Party --Badminton Skiing--Badminton</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

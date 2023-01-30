@@ -26,6 +26,12 @@ have the same number of children."><!-- mathjax --><script src="https://cdnjs.cl
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -110,14 +116,14 @@ graph.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2419906 D--- 10 9 -- Tree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8e19d00 D--- 10 9 -- Tree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), children (g/n), mode (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2419906:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8e19d00:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt; 2 1-&gt; 3 2-&gt; 4 2-&gt; 5 3-&gt; 6 3-&gt; 7 4-&gt; 8 4-&gt; 9 5-&gt;10</span>
 <span class="r-in"><span><span class="fu">make_tree</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span>, mode <span class="op">=</span> <span class="st">"undirected"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 843f02b U--- 10 9 -- Tree</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ac80e68 U--- 10 9 -- Tree</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), children (g/n), mode (g/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 843f02b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ac80e68:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-- 2 1-- 3 1-- 4 2-- 5 2-- 6 2-- 7 3-- 8 3-- 9 3--10</span>
 </code></pre></div>
     </div>
