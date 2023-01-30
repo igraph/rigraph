@@ -33,7 +33,7 @@ using
 pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
 ```
 
-See the package wiki for more information on [installation troubleshooting](https://github.com/igraph/rigraph/wiki/Installation-Troubleshooting).
+See the package wiki for more information on [installation troubleshooting](https://igraph.github.io/rigraph/articles/installation-troubleshooting).
 
 ## Documentation
 
