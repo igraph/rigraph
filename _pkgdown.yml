@@ -4,19 +4,19 @@ template:
   bootstrap: 5
 
 reference:
-- title: Adjacency
+- title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
-- title: Graph attributes
+- title: Vertex, edge and graph attributes
 - contents:
   - has_concept("graph attributes")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
-- title: Bipartite
+- title: Bipartite graphs
 - contents:
   - has_concept("bipartite")
-- title: Centrality
+- title: Centrality measures
 - contents:
   - has_concept("centrality")
 - title: Centralization related
@@ -25,19 +25,19 @@ reference:
 - title: Cliques
 - contents:
   - has_concept("cliques")
-- title: Cocitation
+- title: Cocitation # merge into "Structural properties"
 - contents:
   - has_concept("cocitation")
-- title: Cohesive blocks
+- title: Cohesive blocks # merge into "Structural properties"
 - contents:
   - has_concept("cohesive.blocks")
-- title: Coloring
+- title: Graph coloring
 - contents:
   - has_concept("coloring")
-- title: Community
+- title: Community detection
 - contents:
   - has_concept("community")
-- title: Components
+- title: Connected components
 - contents:
   - has_concept("components")
 - title: Console
@@ -49,7 +49,7 @@ reference:
 - title: Deterministic constructors
 - contents:
   - has_concept("deterministic constructors")
-- title: Decomposition
+- title: Decomposition # merge into "Structural properties"
 - contents:
   - has_concept("decomposition")
 - title: Graphical degree sequences
@@ -58,7 +58,7 @@ reference:
 - title: Demo
 - contents:
   - has_concept("demo")
-- title: Efficiency
+- title: Efficiency # merge into "Centrality measures"
 - contents:
   - has_concept("efficiency")
 - title: Latent position vector samplers
@@ -67,10 +67,10 @@ reference:
 - title: Env and data
 - contents:
   - has_concept("env-and-data")
-- title: Epi
+- title: Processes on graphs
 - contents:
   - has_concept("epi")
-- title: Eulerian
+- title: Graph cycles
 - contents:
   - has_concept("eulerian")
 - title: Fit
@@ -79,22 +79,22 @@ reference:
 - title: Flow
 - contents:
   - has_concept("flow")
-- title: Foreign
+- title: Foreign format readers
 - contents:
   - has_concept("foreign")
-- title: Games
+- title: Random graph models (games)
 - contents:
   - has_concept("games")
-- title: Glet
+- title: Glet @ merge into "Cliques"
 - contents:
   - has_concept("glet")
 - title: Hierarchical random graph functions
 - contents:
   - has_concept("hierarchical random graph functions")
-- title: Incidence
+- title: Incidence # merge into "Bipartite graphs"
 - contents:
   - has_concept("incidence")
-- title: Structural queries
+- title: Structural queries # this appears a second time below
 - contents:
   - has_concept("structural queries")
 - title: Functions for manipulating graph structure
@@ -103,40 +103,40 @@ reference:
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
-- title: Structural queries
+- title: Structural queries # this appears a second time above
 - contents:
   - has_concept("structural queries")
 - title: Vertex and edge sequences
 - contents:
   - has_concept("vertex and edge sequences")
-- title: Vertex and edge sequence operations
+- title: Vertex and edge sequence operations # merge into "Vertex and edge sequences"
 - contents:
   - has_concept("vertex and edge sequence operations")
-- title: Graph attributes
+- title: Graph attributes # merge into "Vertex, edge and graph attributes" above, this is a duplicate?
 - contents:
   - has_concept("graph attributes")
-- title: Graph layouts
+- title: Visuaization
 - contents:
   - has_concept("graph layouts")
-- title: Layout modifiers
+- title: Layout modifiers # merge into "Visualization"
 - contents:
   - has_concept("layout modifiers")
-- title: Layout drl
+- title: Layout drl # merge into "Visualization"
 - contents:
   - has_concept("layout_drl")
 - title: Constructor modifiers
 - contents:
   - has_concept("constructor modifiers")
-- title: Deterministic constructors
+- title: Deterministic constructors # this is a duplicate, appears above
 - contents:
   - has_concept("deterministic constructors")
-- title: Minimum spanning tree
+- title: Minimum spanning tree # merge into "Trees"
 - contents:
   - has_concept("minimum.spanning.tree")
 - title: Graph motifs
 - contents:
   - has_concept("graph motifs")
-- title: Nexus
+- title: Nexus # remove, deprecated
 - contents:
   - has_concept("nexus")
 - title: Functions for manipulating graph structure
@@ -145,22 +145,22 @@ reference:
 - title: Other
 - contents:
   - has_concept("other")
-- title: Palettes
+- title: Palettes # merge into "Visualization"
 - contents:
   - has_concept("palettes")
-- title: Igraph options
+- title: Igraph options # "igraph" should not be capitalized
 - contents:
   - has_concept("igraph options")
 - title: Paths
 - contents:
   - has_concept("paths")
-- title: Plot
+- title: Plot # merge into "Visualization"
 - contents:
   - has_concept("plot")
-- title: Plot common
+- title: Plot common # merge into "Visualization"
 - contents:
   - has_concept("plot.common")
-- title: Plot shapes
+- title: Plot shapes # merge into "Visualization"
 - contents:
   - has_concept("plot.shapes")
 - title: Print
@@ -169,7 +169,7 @@ reference:
 - title: Printer callbacks
 - contents:
   - has_concept("printer callbacks")
-- title: Random walk
+- title: Random walk # merge into "Processes on graphs"
 - contents:
   - has_concept("random_walk")
 - title: Rewiring functions
@@ -178,19 +178,19 @@ reference:
 - title: Scan statistics
 - contents:
   - has_concept("scan statistics")
-- title: Scg
+- title: Spectral Coarse Graining
 - contents:
   - has_concept("scg")
-- title: Sgm
+- title: Graph matching
 - contents:
   - has_concept("sgm")
-- title: Similarity
+- title: Similarity measures
 - contents:
   - has_concept("similarity")
 - title: Simple
 - contents:
   - has_concept("simple")
-- title: Socnet
+- title: Interactive functions
 - contents:
   - has_concept("socnet")
 - title: Structural properties
@@ -202,7 +202,7 @@ reference:
 - title: Test
 - contents:
   - has_concept("test")
-- title: Tkplot
+- title: Tkplot # merge into "Interactive functions"
 - contents:
   - has_concept("tkplot")
 - title: Graph isomorphism
@@ -211,7 +211,7 @@ reference:
 - title: Trees
 - contents:
   - has_concept("trees")
-- title: Triangles
+- title: Triangles # merge intro structural properties; generally, should go together with "transitivity"
 - contents:
   - has_concept("triangles")
 - title: Versions
