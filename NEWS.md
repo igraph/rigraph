@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9107
+
+## Chore
+
+- Updated vendored C core.
+
+## Documentation
+
+- Installation troubleshooting as vignette (#656).
+
+* docs: installation troubleshooting as vignette
+
+* improve title
+
+* markup fix
+
+* add more Rtools links
+
+- Add installation instructions from R-universe (@maelle, #657).
+
+## Uncategorized
+
+- Merge pull request #655 from maelle/patch-2.
+
+Rm date field from vignette
+
+
 # igraph 1.3.5.9106
 
 ## Features
