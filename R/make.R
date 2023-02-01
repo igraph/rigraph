@@ -1750,11 +1750,11 @@ graph_from_lcf <- graph_from_lcf
 #' D. J. Kleitman and D. L. Wang,
 #' Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
 #' Discrete Mathematics 6, 1 (1973).
-#' <https://doi.org/10.1016/0012-365X%2873%2990037-X>
+#' \doi{10.1016/0012-365X(73)90037-X}
 #'
 #' Sz. Horvát and C. D. Modes,
 #' Connectedness matters: construction and exact random sampling of connected networks (2021).
-#' <https://doi.org/10.1088/2632-072X/abced5>
+#' \doi{10.1088/2632-072X/abced5}
 #' @export
 #' @keywords graphs
 #' @examples
