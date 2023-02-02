@@ -95,7 +95,7 @@ Poznámka o existenci konečných grafů (A remark on the existence of finite gr
 S. L. Hakimi,
 On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
 Journal of the SIAM 10, 3 (1962).
-\url{https://www.jstor.org/stable/2098770}
+\doi{https://doi.org/10.1137/0111010}
 
 D. J. Kleitman and D. L. Wang,
 Algorithms for Constructing Graphs and Digraphs with Given Valences and Factors,
