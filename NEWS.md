@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.3.5.9108
+
+## doc
+
+- Use \doi in help text where appropriate.
+
+
 # igraph 1.3.5.9107
 
 ## Chore
