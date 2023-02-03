@@ -36,7 +36,7 @@ SystemRequirements:
     gmp (optional),
     libxml2 (optional),
     glpk (>= 4.57, optional),
-    C++11
+    C++17
 BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
