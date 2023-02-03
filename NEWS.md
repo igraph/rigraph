@@ -98,7 +98,6 @@ make package manual page internal
  - The default maximum number of iterations for ARPACK has been increased to 3000 to match that of the igraph C core.
  - Rare convergence problems have been corrected in `cluster_leading_eigen()`.
  - All ARPACK-based functions now respect random seeds set in R when generating a random starting vector.
- - `distances(algorithm='johnson')` now throws an error if `mode != 'out'` for directed graphs, as no other `mode` is currently supported.
  - `igraph_version()` returned an invalid value in 1.3.4, this is now corrected.
  - The value of `par(xpd=...)` is now restored after plotting a graph.
  - Fixed a bug in `as.dendrogram.communities()` for large dendrograms, thanks
@@ -107,8 +106,9 @@ make package manual page internal
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
- - We now use `*3d` functions rather than `rgl.*` functions (see PR #619)
+ - Some `rgl.*()` function calls in the codebase were replaced with equivalent `*3d()` function calls in preparation for upcoming deprecations in `rgl` (see PR #619)
  - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.
+ - `hub_score()` and `authority_score()` considered self-loops only once on the diagonal of the adjacency matrix of undirected graphs, thus the result was not identical to that obtained by `eigen_centrality()` on loopy undirected graphs. This is now corrected.
 
 ## Deprecated
 
