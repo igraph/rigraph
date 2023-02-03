@@ -1,5 +1,33 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.4.0.9001
+
+- Same as previous version.
+
+
+# igraph 1.4.0.9000
+
+## Bug fixes
+
+- Don't ignore build/ when building the package because the vignette index is built there.
+
+## Chore
+
+- NEWS.md cleanup.
+
+## Testing
+
+- Skip plot test entirely on R-devel.
+
+## teset
+
+- Use separate plotting test for R 4.2 and R 4.3.
+
+## doc
+
+- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
+
+
 # igraph 1.4.0
 
 - Same as previous version.
