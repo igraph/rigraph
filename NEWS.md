@@ -28,6 +28,7 @@
  - Some `rgl.*()` function calls in the codebase were replaced with equivalent `*3d()` function calls in preparation for upcoming deprecations in `rgl` (see PR #619)
  - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.
  - `hub_score()` and `authority_score()` considered self-loops only once on the diagonal of the adjacency matrix of undirected graphs, thus the result was not identical to that obtained by `eigen_centrality()` on loopy undirected graphs. This is now corrected.
+ - `distances()` no longer ignores the `mode` parameter when `algorithm='johnson'`.
 
 ## Deprecated
 
