@@ -79,7 +79,7 @@ linear running time and memory load.
 }
 \examples{
 
-
+\dontrun{
 ## We are not running these examples any more, because they
 ## take a long time to run and this is against the CRAN repository
 ## policy. Copy and paste them by hand to your R prompt if
@@ -122,6 +122,7 @@ gr.true <- scg_group(cbind(x), 100)
 gr.km <- kmeans(x, 100, 100, 300)$cluster
 scg_eps(cbind(x), gr.true)
 scg_eps(cbind(x), gr.km)
+}
 
 }
 \references{
