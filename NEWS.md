@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.4.0.9002
+
+## Continuous integration
+
+- Testing what happens in CI if I switch SystemRequirements to C++17 to make CRAN happy.
+
+
 # igraph 1.4.0.9001
 
 - Same as previous version.
