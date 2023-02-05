@@ -1,5 +1,5 @@
 bibentry(bibtype="Article",
-         header="To cite 'igrpah' in publications use:",
+         header="To cite 'igraph' in publications use:",
          title="The igraph software package for complex network research",
          author=c(as.person("Gabor Csardi"), as.person("Tamas Nepusz")),
          journal="InterJournal",
