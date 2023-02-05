@@ -35,8 +35,7 @@ URL: https://igraph.org, https://igraph.discourse.group/
 SystemRequirements:
     gmp (optional),
     libxml2 (optional),
-    glpk (>= 4.57, optional),
-    C++17
+    glpk (>= 4.57, optional)
 BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
