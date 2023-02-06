@@ -4,6 +4,9 @@ template:
   bootstrap: 5
 
 reference:
+- title: igraph options
+- contents:
+  - has_concept("igraph options")
 - title: Construction
 - subtitle: Deterministic constructors
 - contents:
@@ -66,6 +69,8 @@ reference:
   - head_print
   - indent_print
   - printr
+  - has_concept("print")
+  - has_concept("printer callbacks")
 - subtitle: Console
 - contents:
   - has_concept("console")
@@ -175,15 +180,7 @@ reference:
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
-- title: igraph options
-- contents:
-  - has_concept("igraph options")
-- title: Print
-- contents:
-  - has_concept("print")
-- title: Printer callbacks
-- contents:
-  - has_concept("printer callbacks")
+
 - title: Scan statistics
 - contents:
   - has_concept("scan statistics")
