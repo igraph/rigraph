@@ -25,12 +25,6 @@ reference:
 - title: Cliques
 - contents:
   - has_concept("cliques")
-- title: Cocitation
-- contents:
-  - has_concept("cocitation")
-- title: Cohesive blocks
-- contents:
-  - has_concept("cohesive.blocks")
 - title: Coloring
 - contents:
   - has_concept("coloring")
@@ -193,6 +187,8 @@ reference:
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
+  - has_concept("cocitation")
+  - has_concept("cohesive.blocks")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
