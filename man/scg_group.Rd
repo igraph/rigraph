@@ -134,9 +134,15 @@ Matrix Analysis and Applications}, 2008.
 \seealso{
 \link{scg-method} for a detailed introduction. \code{\link[=scg]{scg()}},
 \code{\link[=scg_eps]{scg_eps()}}
+
+Other scg: 
+\code{\link{scg_semi_proj}()},
+\code{\link{scg}()},
+\code{\link{stochastic_matrix}()}
 }
 \author{
 David Morton de Lachapelle \email{david.morton@epfl.ch},
 \email{david.mortondelachapelle@swissquote.ch}
 }
+\concept{scg}
 \keyword{graphs}

@@ -60,4 +60,5 @@ count_triangles(kite) / (degree(kite) * (degree(kite) - 1) / 2)
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{triangles}
 \keyword{graphs}

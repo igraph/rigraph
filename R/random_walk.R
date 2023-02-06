@@ -27,6 +27,7 @@
 #' @return For `random_walk()`, a vertex sequence containing the vertices
 #'   along the walk. For `random_edge_walk()`, an edge sequence containing
 #'   the edges along the walk.
+#' @family random_walk
 #' @export
 #' @examples
 #' ## Stationary distribution of a Markov chain

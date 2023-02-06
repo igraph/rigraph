@@ -57,8 +57,13 @@ networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
 }
 \seealso{
 \code{\link[=read_graph]{read_graph()}}
+
+Other foreign: 
+\code{\link{graph_from_graphdb}()},
+\code{\link{read_graph}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{foreign}
 \keyword{graphs}

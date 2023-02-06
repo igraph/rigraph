@@ -55,4 +55,5 @@ generalizations \emph{Bell System Technical Journal}, 37 1389--1401.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{minimum.spanning.tree}
 \keyword{graphs}

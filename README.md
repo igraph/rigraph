@@ -16,11 +16,22 @@ You can install the stable version of R/igraph from CRAN:
 install.packages("igraph")
 ```
 
-For the development version, you can use Github, with the `remotes`
-package:
+For the development version, you can use R-universe
 
 ```r
-remotes::install_github("igraph/rigraph")
+options(
+  repos = c(
+    igraph = 'https://igraph.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'
+  )
+)
+install.packages('igraph')
+```
+
+or Github, with the `devtools` package:
+
+```r
+devtools::install_github("igraph/rigraph")
 ```
 
 For installation from source on Windows, you need to have
@@ -28,9 +39,12 @@ For installation from source on Windows, you need to have
 Additionally, the three system requirements of `glpk`, `libxml2` and `gmp` are
 not optional, but hard requirements. For versions R >= 4.0 you can install these
 using
+
 ```
 pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
 ```
+
+See the package wiki for more information on [installation troubleshooting](https://igraph.github.io/rigraph/articles/installation-troubleshooting).
 
 ## Documentation
 

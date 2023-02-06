@@ -1,214 +1,74 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# igraph 1.3.5.9099
+# igraph 1.4.0.9002
 
-## Chore
+## Continuous integration
 
-- Rename test files (#642).
-
-
-# igraph 1.3.5.9098
-
-- Added igraph extended tutorial as R vignette (@ntamas, #587).
-
-- Update igraph_extended_tutorial_R_vignette_english.Rmd (@ntamas, #587).
-
-- Bump version to 1.3.5.9095 (@ntamas, #587).
-
-- A bunch of fixes after review and rename (@ntamas, #587).
-
-- Adapt one line suggested by @szhorvat (@ntamas, #587).
-
-- R vignette compiles into html and PDF using rmarkdown (@ntamas, #587).
-
-- Remove methods since R is not very much OO (@ntamas, #587).
-
-- Bump version to 1.3.5.9096 (@ntamas, #587).
-
-- Corrections throughout (@ntamas, #587).
-
-- Bump version to 1.3.5.9097 (@ntamas, #587).
-
-- Fix: fix deprecation warnings about 'from' and 'to' in edge selectors (@ntamas, #587).
-
-- Read/write files corrected (@ntamas, #587).
-
-- Remove Spanish version, will be a separate PR (@ntamas, #587).
-
-- NEWS.md went for a spin, bring it back (@ntamas, #587).
-
-- Minor tweaks, adjusted figure sizes, work in progress (@ntamas, #587).
-
-- Title, notes, first paragraph (@ntamas, #587).
-
-- Starting igraph (@ntamas, #587).
-
-- More corrections (@ntamas, #587).
-
-- Clean up a bunch of Python-isms in the second half (@ntamas, #587).
-
-- Session info, headers down a notch, some wording (@ntamas, #587).
-
-- Bump version to 1.3.5.9098 (@ntamas, #587).
-
-- Doc: more updates to the vignette (@ntamas, #587).
-
-- Bump version to 1.3.5.9099 (@ntamas, #587).
-
-- Doc: vignette cleanup finished (@ntamas, #587).
-
-- Revert changes to DESCRIPTION (@ntamas, #587).
-
-- Revert changes to NEWS.md (@ntamas, #587).
+- Testing what happens in CI if I switch SystemRequirements to C++17 to make CRAN happy.
 
 
-# igraph 1.3.5.9097
+# igraph 1.4.0.9001
+
+- Same as previous version.
+
+
+# igraph 1.4.0.9000
 
 ## Bug fixes
 
-- Handle the default NULL value of frame.plot properly.
-
-- Do not use 'frame' partial argument when calling plot.default().
+- Don't ignore build/ when building the package because the vignette index is built there.
 
 ## Chore
 
-- Track revdepcheck results (#621).
+- NEWS.md cleanup.
 
-- Move to single branch setup (#620).
+## Testing
 
-## Documentation
+- Skip plot test entirely on R-devel.
 
-- Wrap README badges for detection by pkgdown (#637).
+## teset
 
-## Uncategorized
-
-- Ignore.
-
-- Update instructions.
-
-- Ignore.
-
-- Automated changes.
-
-- Run autoconf on 22.04.
-
-- Automated changes.
-
-
-# igraph 1.3.5.9096
-
-- Merge pull request #634 from igraph/b-test-order.
-
-Fix test order
-
-- Merge pull request #632 from igraph/b-brittle-eigen-test.
-
-Fix brittle test
-
-
-# igraph 1.3.5.9095
-
-## Chore
-
-- Stabilize vs-es tests (#631).
-
-
-# igraph 1.3.5.9094
-
-## Documentation
-
-- Clarify documentation of alpha_centrality.
-
-- Update Erdős-Rényi sampler docs, change an incorrect G(n,p) to G(n,m) in sample_bipartite().
-
-
-# igraph 1.3.5.9093
-
-## Bug fixes
-
-- `NULL` means empty vertex or edge list again in all functions (#625).
-
-* NULL remains an alias for an empty vertex or edge list
-
-Reverts d05ac3140bde37d53365da464e23b22fe89e1b90.
-
-* Special case
-
-* Revert #608
-
-* Style
-
-* doc: fix docs
-
-## Documentation
-
-- Use Markdown in documentation (#624).
-
-* Enable Markdown, mostly whitespace changes
-
-* Indent
-
-* Parentheses
-
-* as.dendrogram()
-
-* print()
-
-* plot()
-
-* summary()
-
-* Pipe
-
-* simple
-
-* full
-
-## Uncategorized
-
-- Fix: distances() with algorithm='johnson' now handles all mode parameter values correctly.
-
-- Docs: better explain use cases of Johnson's shortest path length algorithm.
-
-
-# igraph 1.3.5.9092
-
-- Merge pull request #619 from dmurdoch/rgl.
-
-Use *3d functions rather than rgl.* functions
-
-
-# igraph 1.3.5.9091
-
-## Bug fixes
-
-- Fix builds with some `make` variants (#617).
-
-
-# igraph 1.3.5.9090
-
-## Bug fixes
-
-- Fix syntax error in new unit test.
-
-- Fixed indexing of result vertices in convex_hull(), closes #613.
-
-## Chore
-
-- Add fledge workflow.
-
-- Prepare for using fledge for managing NEWS.md (#615).
-
-- Style remaining files (#614).
-
-- Clarify changelog item [skip ci].
+- Use separate plotting test for R 4.2 and R 4.3.
 
 ## doc
 
-- Switch to https in a URL that CRAN check was complaining about.
+- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
 
 
-# igraph 1.3.5.9089
+# igraph 1.4.0
+
+- Same as previous version.
+
+
+# igraph 1.3.5.9109
+
+## Bug fixes
+
+- Don't ignore build/ when building the package because the vignette index is built there.
+
+## Chore
+
+- NEWS.md cleanup.
+
+## Testing
+
+- Skip plot test entirely on R-devel.
+
+## teset
+
+- Use separate plotting test for R 4.2 and R 4.3.
+
+## doc
+
+- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
+
+
+# igraph 1.3.5.9106
+
+## Breaking changes
+
+ - Breaking change: Allow change of attribute type when setting attribute for all vertices or edges; only attributes of length 1 or the length of the target set allowed (#633).
+
 
 ## Added
 
@@ -229,6 +89,8 @@ Use *3d functions rather than rgl.* functions
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
+ - We now use `*3d` functions rather than `rgl.*` functions (see PR #619)
+ - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.
 
 ## Deprecated
 
@@ -237,6 +99,9 @@ Use *3d functions rather than rgl.* functions
 ## Other
 
  - Documentation improvements.
+ - The Github repository was now moved to a single-branch setup where the package can be built from the `main` branch directly.
+ - Added igraph extended tutorial as an R vignette (#587).
+ - igraph now has a homepage based on `pkgdown` thanks to @maelle (see #645). This will eventually become the official homepage.
 
 # igraph 1.3.5
 

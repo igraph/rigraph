@@ -21,7 +21,12 @@ themselves can be extracted from the package via \code{system.file("tests", pack
 This function simply calls the \code{test_dir} function from the
 \code{testthat} package on the test directory.
 }
+\seealso{
+Other test: 
+\code{\link{igraph_version}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{test}
 \keyword{graphs}

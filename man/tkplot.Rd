@@ -195,4 +195,5 @@ tkcreate(canvas, "text", width/2, 25, text="My title",
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{tkplot}
 \keyword{graphs}

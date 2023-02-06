@@ -92,8 +92,22 @@ measures of centrality for asymmetric relations'' \emph{Social Networks},
 }
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=power_centrality]{power_centrality()}}
+
+Other centrality: 
+\code{\link{arpack_defaults}},
+\code{\link{closeness}()},
+\code{\link{diversity}()},
+\code{\link{eigen_centrality}()},
+\code{\link{estimate_betweenness}()},
+\code{\link{harmonic_centrality}()},
+\code{\link{page_rank}()},
+\code{\link{power_centrality}()},
+\code{\link{spectrum}()},
+\code{\link{strength}()},
+\code{\link{subgraph_centrality}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{centrality}
 \keyword{graphs}

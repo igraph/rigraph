@@ -108,9 +108,23 @@ Conference, Brisbane, Australia, April 1998.
 \seealso{
 Other centrality scores: \code{\link[=closeness]{closeness()}},
 \code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}
+
+Other centrality: 
+\code{\link{alpha_centrality}()},
+\code{\link{arpack_defaults}},
+\code{\link{closeness}()},
+\code{\link{diversity}()},
+\code{\link{eigen_centrality}()},
+\code{\link{estimate_betweenness}()},
+\code{\link{harmonic_centrality}()},
+\code{\link{power_centrality}()},
+\code{\link{spectrum}()},
+\code{\link{strength}()},
+\code{\link{subgraph_centrality}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
+\concept{centrality}
 \keyword{graphs}

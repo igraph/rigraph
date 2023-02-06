@@ -36,4 +36,5 @@ col <- greedy_vertex_coloring(g)
 plot(g, vertex.color = col)
 
 }
+\concept{coloring}
 \keyword{graphs}

@@ -22,6 +22,7 @@
 
 .igraph.pb <- NULL
 
+#' @family console
 #' @export
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
@@ -42,6 +43,7 @@
   }
 }
 
+#' @family console
 #' @export
 .igraph.status <- function(message) {
   type <- igraph_opt("verbose")
@@ -267,6 +269,7 @@ close.igraphconsole <- function(con, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [igraph_options()] and the `verbose` option.
 #' @keywords graphs
+#' @family console
 #' @export
 console <- function() {
   oldverb <- igraph_opt("verbose")

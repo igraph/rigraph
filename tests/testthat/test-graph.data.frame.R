@@ -31,6 +31,13 @@ test_that("graph_from_data_frame works", {
   expect_that(df$edges, equals(relations))
 })
 
+test_that("graph_from_data_frame() creates attributes for zero-row data frames (#466)", {
+  x <- data.frame(from = integer(), to = integer(), foo = integer(), bar = numeric())
+  g <- graph_from_data_frame(x)
+  expect_identical(E(g)$foo, integer())
+  expect_identical(E(g)$bar, numeric())
+})
+
 test_that("graph_from_data_frame works on matrices", {
   el <- cbind(1:5, 5:1, weight = 1:5)
   g <- graph_from_data_frame(el)

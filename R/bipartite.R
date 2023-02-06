@@ -66,6 +66,7 @@
 #'   default it will be removed.
 #' @return A list of two undirected graphs. See details above.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family bipartite
 #' @export
 #' @keywords graphs
 #' @examples
@@ -190,5 +191,6 @@ bipartite_projection <- function(graph, types = NULL,
 #' g3 <- make_ring(10)
 #' g3 <- add_edges(g3, c(1, 3))
 #' bipartite_mapping(g3)
+#' @family bipartite
 #' @export
 bipartite_mapping <- bipartite_mapping

@@ -208,6 +208,7 @@
 #' [cluster_optimal()], [cluster_spinglass()],
 #' [cluster_walktrap()].
 #' @keywords graphs
+#' @family community
 #' @export
 #' @examples
 #'
@@ -237,6 +238,7 @@ membership <- function(communities) {
 }
 
 #' @method print membership
+#' @family community
 #' @export
 print.membership <- function(x, ...) print(unclass(x), ...)
 
@@ -248,6 +250,7 @@ print.membership <- function(x, ...) print(unclass(x), ...)
 #'
 #' @param x The input vector.
 #' @return The input vector, with the `membership` class added.
+#' @family community
 #' @export
 #' @examples
 #' ## Compare to the correct clustering
@@ -261,6 +264,7 @@ as_membership <- function(x) add_class(x, "membership")
 
 #' @rdname communities
 #' @method print communities
+#' @family community
 #' @export
 print.communities <- function(x, ...) {
   noc <- if (!is.null(x$membership)) max(membership(x), 0) else NA
@@ -310,6 +314,7 @@ print.communities <- function(x, ...) {
 #'
 #' @aliases create.communities
 #'
+#' @family community
 #' @export
 make_clusters <- function(graph, membership = NULL, algorithm = NULL,
                           merges = NULL, modularity = TRUE) {
@@ -348,6 +353,7 @@ make_clusters <- function(graph, membership = NULL, algorithm = NULL,
   res
 }
 
+#' @family community
 #' @export
 modularity <- function(x, ...) {
   UseMethod("modularity")
@@ -421,6 +427,7 @@ modularity <- function(x, ...) {
 #' @references Clauset, A.; Newman, M. E. J. & Moore, C. Finding community
 #' structure in very large networks, *Physical Review E* 2004, 70, 066111
 #' @method modularity igraph
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -452,6 +459,7 @@ modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, dir
 
 #' @rdname communities
 #' @method modularity communities
+#' @family community
 #' @export
 modularity.communities <- function(x, ...) {
   if (!is.null(x$modularity)) {
@@ -463,6 +471,7 @@ modularity.communities <- function(x, ...) {
 
 #' @rdname modularity.igraph
 #' @aliases mod.matrix
+#' @family community
 #' @export
 modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
@@ -494,6 +503,7 @@ modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1,
 
 #' @rdname communities
 #' @method length communities
+#' @family community
 #' @export
 length.communities <- function(x) {
   m <- membership(x)
@@ -501,6 +511,7 @@ length.communities <- function(x) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 sizes <- function(communities) {
   m <- membership(communities)
@@ -508,12 +519,14 @@ sizes <- function(communities) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 algorithm <- function(communities) {
   communities$algorithm
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 merges <- function(communities) {
   if (!is.null(communities$merges)) {
@@ -524,6 +537,7 @@ merges <- function(communities) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 crossing <- function(communities, graph) {
   m <- membership(communities)
@@ -538,12 +552,14 @@ crossing <- function(communities, graph) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 code_len <- function(communities) {
   communities$codelength
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 is_hierarchical <- function(communities) {
   !is.null(communities$merges)
@@ -573,6 +589,7 @@ complete.dend <- function(comm, use.modularity) {
 #' @rdname communities
 #' @importFrom stats as.dendrogram
 #' @method as.dendrogram communities
+#' @family community
 #' @export
 as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
                                       ...) {
@@ -669,6 +686,7 @@ as.dendrogram.communities <- function(object, hang = -1, use.modularity = FALSE,
 #' @rdname communities
 #' @importFrom stats as.hclust
 #' @method as.hclust communities
+#' @family community
 #' @export
 as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
                                   ...) {
@@ -676,6 +694,7 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 as_phylo <- function(x, ...) {
   UseMethod("as_phylo")
@@ -683,6 +702,7 @@ as_phylo <- function(x, ...) {
 
 #' @rdname communities
 #' @method as_phylo communities
+#' @family community
 #' @export
 as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
   if (!is_hierarchical(x)) {
@@ -738,6 +758,7 @@ as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 cut_at <- function(communities, no, steps) {
   if (!inherits(communities, "communities")) {
@@ -772,6 +793,7 @@ cut_at <- function(communities, no, steps) {
 }
 
 #' @rdname communities
+#' @family community
 #' @export
 show_trace <- function(communities) {
   if (!inherits(communities, "communities")) {
@@ -931,6 +953,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'
 #' V.A. Traag and Jeroen Bruggeman: Community detection in networks with
 #' positive and negative links, <https://arxiv.org/abs/0811.2329> (2008).
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1090,6 +1113,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' @references Traag, V. A., Waltman, L., & van Eck, N. J. (2019). From Louvain
 #'   to Leiden: guaranteeing well-connected communities. Scientific
 #'   reports, 9(1), 5233. doi: 10.1038/s41598-019-41695-z, arXiv:1810.08473v3 \[cs.SI\]
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1215,6 +1239,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #' &amp; Their Applications VI: Proceedings of Complex Networks 2017 (The Sixth
 #' International Conference on Complex Networks and Their Applications),
 #' Springer, vol 689, p 229, doi: 10.1007/978-3-319-72150-7_19
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1285,6 +1310,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 #' methods.
 #' @references Pascal Pons, Matthieu Latapy: Computing communities in large
 #' networks using random walks, https://arxiv.org/abs/physics/0512106
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1406,6 +1432,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' detection.
 #' @references M Newman and M Girvan: Finding and evaluating community
 #' structure in networks, *Physical Review E* 69, 026113 (2004)
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1496,6 +1523,7 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #' [cluster_leiden()] for other methods.
 #' @references A Clauset, MEJ Newman, C Moore: Finding community structure in
 #' very large networks, http://www.arxiv.org/abs/cond-mat/0408187
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1627,6 +1655,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #' [cluster_fast_greedy()], [as.dendrogram()]
 #' @references MEJ Newman: Finding community structure using the eigenvectors
 #' of matrices, Physical Review E 74 036104, 2006.
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1730,6 +1759,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' @references Raghavan, U.N. and Albert, R. and Kumara, S.: Near linear time
 #' algorithm to detect community structures in large-scale networks. *Phys
 #' Rev E* 76, 036106. (2007)
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1822,6 +1852,7 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #' @references Vincent D. Blondel, Jean-Loup Guillaume, Renaud Lambiotte,
 #' Etienne Lefebvre: Fast unfolding of communities in large networks. J. Stat.
 #' Mech. (2008) P10008
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1921,6 +1952,7 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
 #' *IEEE Transactions on Knowledge and Data Engineering* 20(2):172-188,
 #' 2008.
+#' @family community
 #' @export
 #' @keywords graphs
 cluster_optimal <- function(graph, weights = NULL) {
@@ -1989,6 +2021,7 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' A more detailed paper: M. Rosvall, D. Axelsson, and C. T. Bergstrom, The map
 #' equation, *Eur. Phys. J. Special Topics* 178, 13 (2009).
 #' \doi{10.1140/epjst/e2010-01179-1}, <https://arxiv.org/abs/0906.1405>.
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2046,6 +2079,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
 
 #' @rdname communities
 #' @method plot communities
+#' @family community
 #' @export
 #' @importFrom graphics plot
 plot.communities <- function(x, y,
@@ -2064,6 +2098,7 @@ plot.communities <- function(x, y,
 
 #' @rdname plot_dendrogram.communities
 #' @aliases dendPlot
+#' @family community
 #' @export
 plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
   UseMethod("plot_dendrogram")
@@ -2142,6 +2177,7 @@ plot_dendrogram <- function(x, mode = igraph_opt("dend.plot.type"), ...) {
 #'   `plot.phylo`, `plot.dendrogram` or `plot.hclust`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method plot_dendrogram communities
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2289,6 +2325,7 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #'
 #' Hubert L and Arabie P: Comparing partitions. *Journal of
 #' Classification* 2:193-218, 1985.
+#' @family community
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2308,6 +2345,7 @@ compare <- function(comm1, comm2, method = c(
 }
 
 #' @method compare communities
+#' @family community
 #' @export
 compare.communities <- function(comm1, comm2,
                                 method = c(
@@ -2318,6 +2356,7 @@ compare.communities <- function(comm1, comm2,
 }
 
 #' @method compare membership
+#' @family community
 #' @export
 compare.membership <- function(comm1, comm2,
                                method = c(
@@ -2328,6 +2367,7 @@ compare.membership <- function(comm1, comm2,
 }
 
 #' @method compare default
+#' @family community
 #' @export
 compare.default <- compare.membership
 
@@ -2388,6 +2428,7 @@ i_compare <- function(comm1, comm2, method = c(
 #' Institute for Mathematics and Computer Science in the Netherlands,
 #' Amsterdam, May 2000.
 #'
+#' @family community
 #' @export
 split_join_distance <- function(comm1, comm2) {
   comm1 <- if (inherits(comm1, "communities")) {
@@ -2431,12 +2472,14 @@ split_join_distance <- function(comm1, comm2) {
 #'
 #' g2 <- make_ring(10) + make_full_graph(5)
 #' groups(components(g2))
+#' @family community
 #' @export
 groups <- function(x) {
   UseMethod("groups")
 }
 
 #' @method groups default
+#' @family community
 #' @export
 groups.default <- function(x) {
   vids <- names(x$membership)
@@ -2445,22 +2488,26 @@ groups.default <- function(x) {
 }
 
 #' @method groups communities
+#' @family community
 #' @export
 groups.communities <- function(x) {
   m <- membership(x)
   groups.default(list(membership = m))
 }
 
+#' @family community
 #' @export
 communities <- groups.communities
 
 #' @method "[" communities
+#' @family community
 #' @export
 `[.communities` <- function(x, i) {
   groups(x)[i]
 }
 
 #' @method "[[" communities
+#' @family community
 #' @export
 `[[.communities` <- function(x, i) {
   groups(x)[[i]]
@@ -2501,5 +2548,6 @@ communities <- groups.communities
 #' ## combined using the 'toString' function.
 #' print(g2, g = TRUE, v = TRUE, e = TRUE)
 #'
+#' @family community
 #' @export
 contract <- contract

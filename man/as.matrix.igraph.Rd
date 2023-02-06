@@ -41,13 +41,26 @@ g <- make_graph("zachary")
 as.matrix(g, "adjacency")
 as.matrix(g, "edgelist")
 # use edge attribute "weight"
-E(g)$weight <- rep(1:10, each = ecount(g))
+E(g)$weight <- rep(1:10, length.out = ecount(g))
 as.matrix(g, "adjacency", sparse = FALSE, attr = "weight")
 
 }
 \seealso{
 \code{\link[=as_adjacency_matrix]{as_adjacency_matrix()}}, \code{\link[=as_edgelist]{as_edgelist()}}
+
+Other conversion: 
+\code{\link{as.directed}()},
+\code{\link{as_adj_list}()},
+\code{\link{as_adjacency_matrix}()},
+\code{\link{as_data_frame}()},
+\code{\link{as_edgelist}()},
+\code{\link{as_graphnel}()},
+\code{\link{as_incidence_matrix}()},
+\code{\link{as_long_data_frame}()},
+\code{\link{graph_from_adj_list}()},
+\code{\link{graph_from_graphnel}()}
 }
 \author{
 Michal Bojanowski, originally from the \code{intergraph} package
 }
+\concept{conversion}

@@ -45,4 +45,10 @@ is_tree(g)
 is_tree(g, details = TRUE)
 
 }
+\seealso{
+Other trees: 
+\code{\link{sample_spanning_tree}()},
+\code{\link{to_prufer}()}
+}
+\concept{trees}
 \keyword{graphs}
