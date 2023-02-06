@@ -165,9 +165,6 @@ reference:
 - title: Hierarchical random graph functions
 - contents:
   - has_concept("hierarchical random graph functions")
-- title: Functions for manipulating graph structure
-- contents:
-  - has_concept("functions for manipulating graph structure")
 - title: Vertex and edge sequences
 - contents:
   - has_concept("vertex and edge sequences")
