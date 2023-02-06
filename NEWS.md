@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.4.0.9003
+
+## Chore
+
+  - Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
+
+
 # igraph 1.4.0.9002
 
 ## Continuous integration
@@ -1556,5 +1563,4 @@ After about a year of development this is the first "official" release
 of the igraph library. This release should be considered as beta
 software, but it should be useful in general. Please send your
 questions and comments.
-
 
