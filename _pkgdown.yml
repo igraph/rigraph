@@ -61,6 +61,9 @@ reference:
 - subtitle: Env and data
 - contents:
   - has_concept("env-and-data")
+- title: Fit
+- contents:
+  - has_concept("fit")
 - subtitle: Printing
 - contents:
   - head_print
@@ -153,9 +156,6 @@ reference:
 - title: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
-- title: Fit
-- contents:
-  - has_concept("fit")
 - title: Foreign format readers
 - contents:
   - has_concept("foreign")
