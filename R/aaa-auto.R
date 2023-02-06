@@ -1519,6 +1519,7 @@ count_triangles <- function(graph, vids=V(graph)) {
 }
 
 #' @family triangles
+#' @rdname count_triangles
 #' @export
 triangles <- function(graph) {
   # Argument checks
