@@ -2069,7 +2069,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
   res
 }
 
-#' Graph matching
+#' Matching
 #'
 #' A matching in a graph means the selection of a set of edges that are
 #' pairwise non-adjacent, i.e. they have no common incident vertices. A
