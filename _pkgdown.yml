@@ -15,6 +15,10 @@ reference:
 - contents:
   - as.igraph
   - graph_from_lcf
+  - graph_
+- title: Utilities
+- contents:
+  - graph_id
 - title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -68,11 +72,11 @@ reference:
   - has_concept("env-and-data")
 - title: Processes on graphs
 - contents:
-  - has_concept("epi")
+  - has_concept("processes")
   - has_concept("random_walk")
 - title: Graph cycles
 - contents:
-  - has_concept("eulerian")
+  - has_concept("cycles")
 - title: Fit
 - contents:
   - has_concept("fit")
@@ -183,7 +187,7 @@ reference:
   - has_concept("versions")
 - title: Others
 - contents:
-  - lacks_concepts(c("adjacency", "attributes", "graph automorphism", "structural queries", "bipartite", "centrality", "centralization related", "cliques", "cocitation", "cohesive.blocks", "coloring", "community", "components", "console", "conversion", "deterministic constructors", "decomposition", "graphical degree sequences", "demo", "efficiency", "latent position vector samplers", "env-and-data", "epi", "eulerian", "fit", "flow", "foreign", "games", "glet", "hierarchical random graph functions", "incidence", "structural queries", "functions for manipulating graph structure", "functions for manipulating graph structure", "structural queries", "vertex and edge sequences", "vertex and edge sequence operations", "graph attributes", "graph layouts", "layout modifiers", "layout_drl", "constructor modifiers", "deterministic constructors", "minimum.spanning.tree", "graph motifs", "nexus", "functions for manipulating graph structure", "other", "palettes", "igraph options", "paths", "plot", "plot.common", "plot.shapes", "print", "printer callbacks", "random_walk", "rewiring functions", "scan statistics", "scg", "sgm", "similarity", "simple", "socnet", "structural.properties", "structural queries", "test", "tkplot", "graph isomorphism", "trees", "triangles", "versions"))
+  - lacks_concepts(c("adjacency", "attributes", "graph automorphism", "structural queries", "bipartite", "centrality", "centralization related", "cliques", "cocitation", "cohesive.blocks", "coloring", "community", "components", "console", "conversion", "deterministic constructors", "decomposition", "graphical degree sequences", "demo", "efficiency", "latent position vector samplers", "env-and-data", "processes", "fit", "flow", "foreign", "games", "glet", "hierarchical random graph functions", "incidence", "structural queries", "functions for manipulating graph structure", "functions for manipulating graph structure", "structural queries", "vertex and edge sequences", "vertex and edge sequence operations", "graph attributes", "graph layouts", "layout modifiers", "layout_drl", "constructor modifiers", "deterministic constructors", "minimum.spanning.tree", "graph motifs", "nexus", "functions for manipulating graph structure", "other", "palettes", "igraph options", "paths", "plot", "plot.common", "plot.shapes", "print", "printer callbacks", "random_walk", "rewiring functions", "scan statistics", "scg", "sgm", "similarity", "simple", "socnet", "structural.properties", "structural queries", "test", "tkplot", "graph isomorphism", "trees", "triangles", "versions"))
 - title: internal
 - contents:
   - has_concept("nexus")
