@@ -904,6 +904,7 @@ diversity <- diversity
 #' ## A ring
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
+#' @family centrality
 hub_score <- hub_score
 
 

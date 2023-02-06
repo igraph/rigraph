@@ -111,6 +111,7 @@ Centrality measures
 \code{\link{diversity}()},
 \code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
+\code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},
