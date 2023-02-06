@@ -48,7 +48,7 @@ reference:
   - has_concept("rewiring functions")
 - title: Utilities
 - subtitle: Utilities
-- subtitle: Misc
+- subtitle: Graph ID, comparison, name, weight
 - contents:
   - graph_id
   - identical_graphs
@@ -61,9 +61,6 @@ reference:
 - subtitle: Env and data
 - contents:
   - has_concept("env-and-data")
-- title: Fit
-- contents:
-  - has_concept("fit")
 - subtitle: Printing
 - contents:
   - head_print
@@ -72,6 +69,12 @@ reference:
 - subtitle: Console
 - contents:
   - has_concept("console")
+- subtitle: Misc
+- contents:
+  - convex_hull
+  - running_mean
+  - sample_seq
+  - fit_power_law
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
@@ -172,9 +175,6 @@ reference:
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
-- title: Other
-- contents:
-  - has_concept("other")
 - title: igraph options
 - contents:
   - has_concept("igraph options")
@@ -213,4 +213,5 @@ reference:
   - layout.fruchterman.reingold.grid
   - layout.spring
   - layout.svd
+  - srand
   - "%>%"
