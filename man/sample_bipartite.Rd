@@ -76,7 +76,7 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 \seealso{
 \code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} for the unipartite version.
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_degseq}()},
@@ -96,7 +96,7 @@ Other games:
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_degseq}()},

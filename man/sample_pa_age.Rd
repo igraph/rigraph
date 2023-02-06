@@ -140,7 +140,7 @@ max(degree(g3))
 \seealso{
 \code{\link[=sample_pa]{sample_pa()}}, \code{\link[=sample_gnp]{sample_gnp()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
@@ -160,7 +160,7 @@ Other games:
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

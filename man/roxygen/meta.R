@@ -6,6 +6,10 @@ list(
     centrality = "Centrality measures",
     coloring = "Graph coloring",
     community = "Community detection",
-    components = "Connected components"
+    components = "Connected components",
+    epi = "Processes on graphs",
+    eulerian = "Graph cycles",
+    foreign = "Foreign format readers",
+    games = "Random graph models (games)"
     )
 )
