@@ -135,7 +135,7 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
 
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{closeness}()},

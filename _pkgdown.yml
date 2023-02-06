@@ -16,7 +16,7 @@ reference:
 - title: Bipartite graphs
 - contents:
   - has_concept("bipartite")
-- title: Centrality
+- title: Centrality measures
 - contents:
   - has_concept("centrality")
 - title: Centralization related

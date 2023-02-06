@@ -103,7 +103,7 @@ Bonacich, P.  (1987).  Power and Centrality: A Family of
 Measures. \emph{American Journal of Sociology}, 92, 1170-1182.
 }
 \seealso{
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{closeness}()},
