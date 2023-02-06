@@ -208,6 +208,7 @@ reference:
 - title: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
+  - simplify_and_colorize
 - title: Trees
 - contents:
   - has_concept("trees")
