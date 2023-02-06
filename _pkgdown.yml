@@ -4,6 +4,16 @@ template:
   bootstrap: 5
 
 reference:
+- title: Construction
+- subtitle: Deterministic constructors
+- contents:
+  - has_concept("deterministic constructors")
+- subtitle: Constructor modifiers
+- contents:
+  - has_concept("constructor modifiers")
+- subtitle: Convert to igraph
+- contents:
+  - as.igraph
 - title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -43,9 +53,6 @@ reference:
 - title: Conversion
 - contents:
   - has_concept("conversion")
-- title: Deterministic constructors
-- contents:
-  - has_concept("deterministic constructors")
 - title: Graphical degree sequences
 - contents:
   - has_concept("graphical degree sequences")
@@ -102,9 +109,6 @@ reference:
   - has_concept("plot")
   - has_concept("plot.common")
   - has_concept("plot.shapes")
-- title: Constructor modifiers
-- contents:
-  - has_concept("constructor modifiers")
 - title: Graph motifs
 - contents:
   - has_concept("graph motifs")
