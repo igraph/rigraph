@@ -27,6 +27,7 @@ vertices and undirected graphd with 3 to 6 vertices.
 }
 \seealso{
 Other graph isomorphism: 
+\code{\link{canonical_permutation}()},
 \code{\link{count_isomorphisms}()},
 \code{\link{count_subgraph_isomorphisms}()},
 \code{\link{isomorphic}()},

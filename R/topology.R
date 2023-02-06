@@ -778,6 +778,7 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' el1 <- el1[order(el1[, 1], el1[, 2]), ]
 #' el2 <- el2[order(el2[, 1], el2[, 2]), ]
 #' all(el1 == el2)
+#' @family graph isomorphism
 #' @export
 canonical_permutation <- canonical_permutation
 
@@ -881,6 +882,7 @@ permute <- permute
 #' ## matching by colors, leading to only 4 automorphisms
 #' g <- make_full_graph(4)
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
+#' @family graph automorphism
 #' @export
 count_automorphisms <- count_automorphisms
 
@@ -939,5 +941,6 @@ count_automorphisms <- count_automorphisms
 #' ## "turns" the ring by one vertex to the left or right
 #' g <- make_ring(10)
 #' automorphism_group(g)
+#' @family graph automorphism
 #' @export
 automorphism_group <- automorphism_group

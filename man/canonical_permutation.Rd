@@ -89,9 +89,20 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \code{\link[=permute]{permute()}} to apply a permutation to a graph,
 \code{\link[=graph.isomorphic]{graph.isomorphic()}} for deciding graph isomorphism, possibly
 based on canonical labels.
+
+Other graph isomorphism: 
+\code{\link{count_isomorphisms}()},
+\code{\link{count_subgraph_isomorphisms}()},
+\code{\link{graph_from_isomorphism_class}()},
+\code{\link{isomorphic}()},
+\code{\link{isomorphism_class}()},
+\code{\link{isomorphisms}()},
+\code{\link{subgraph_isomorphic}()},
+\code{\link{subgraph_isomorphisms}()}
 }
 \author{
 Tommi Junttila for BLISS, Gabor Csardi
 \email{csardi.gabor@gmail.com} for the igraph and R interfaces.
 }
+\concept{graph isomorphism}
 \keyword{graphs}

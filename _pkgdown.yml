@@ -167,9 +167,13 @@ reference:
 - title: Test
 - contents:
   - has_concept("test")
-- title: Graph isomorphism
+- title: Topology
+- subtitle: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
+- subtitle: Graph automorphism
+- contents:
+  - has_concept("graph automorphism")
 - title: Trees
 - contents:
   - has_concept("trees")

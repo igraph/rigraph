@@ -72,10 +72,14 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \seealso{
 \code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
 \code{\link[=count_automorphisms]{count_automorphisms()}}
+
+Other graph automorphism: 
+\code{\link{count_automorphisms}()}
 }
 \author{
 Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS,
 Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code and
 Tamas Nepusz \email{ntamas@gmail.com} for this manual page.
 }
+\concept{graph automorphism}
 \keyword{graphs}
