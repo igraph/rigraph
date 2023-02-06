@@ -109,6 +109,7 @@ reference:
 - subtitle: Trees
 - contents:
   - has_concept("trees")
+  - make_from_prufer
   - has_concept("minimum.spanning.tree")
 - subtitle: Structural queries
 - contents:
@@ -129,6 +130,7 @@ reference:
 - title: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
+  - simplify_and_colorize
   - has_concept("graph automorphism")
 - title: Maximum flow and connectivity
 - contents:
