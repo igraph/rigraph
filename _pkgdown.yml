@@ -7,6 +7,8 @@ reference:
 - title: Construction
 - subtitle: Deterministic constructors
 - contents:
+  - starts_with("make_")
+  - realize_degseq
   - has_concept("deterministic constructors")
 - subtitle: Constructor modifiers
 - contents:
@@ -17,8 +19,18 @@ reference:
   - graph_from_lcf
   - graph_
 - title: Utilities
+- subtitle: Utilities
 - contents:
   - graph_id
+  - identical_graphs
+  - is_igraph
+  - is_named
+  - is_weighted
+- subtitle: Printing
+- contents:
+  - head_print
+  - indent_print
+  - printr
 - title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -64,9 +76,19 @@ reference:
 - title: Demo
 - contents:
   - has_concept("demo")
-- title: Latent position vector samplers
+- title: Sampling
+- subtitle: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
+- subtitle: Other samplers
+- contents:
+  - sample_
+  - sample_correlated_gnp_pair
+  - sample_fitness
+  - sample_fitness_pl
+  - sample_forestfire
+  - sample_tree
+  - sample_correlated_gnp
 - title: Env and data
 - contents:
   - has_concept("env-and-data")
@@ -112,11 +134,16 @@ reference:
   - has_concept("layout_drl")
   - has_concept("palettes")
   - has_concept("plot")
+  - igraph.plotting
+  - plot_dendrogram.igraphHRG
+  - plot_dendrogram
   - has_concept("plot.common")
   - has_concept("plot.shapes")
-- title: Graph motifs
+  - vertex.shape.pie
+- title: Graph motifs and subgraphs
 - contents:
   - has_concept("graph motifs")
+  - triad_census
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
@@ -147,6 +174,7 @@ reference:
 - title: Embedding
 - contents:
   - has_concept("embedding")
+  - embed_laplacian_matrix
 - title: Graph matching
 - contents:
   - has_concept("sgm")
@@ -175,6 +203,7 @@ reference:
 - subtitle: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
+  - permute
 - subtitle: Graph automorphism
 - contents:
   - has_concept("graph automorphism")
@@ -185,10 +214,13 @@ reference:
 - title: Versions
 - contents:
   - has_concept("versions")
-- title: Others
-- contents:
-  - lacks_concepts(c("adjacency", "attributes", "graph automorphism", "structural queries", "bipartite", "centrality", "centralization related", "cliques", "cocitation", "cohesive.blocks", "coloring", "community", "components", "console", "conversion", "deterministic constructors", "decomposition", "graphical degree sequences", "demo", "efficiency", "latent position vector samplers", "env-and-data", "processes", "fit", "flow", "foreign", "games", "glet", "hierarchical random graph functions", "incidence", "structural queries", "functions for manipulating graph structure", "functions for manipulating graph structure", "structural queries", "vertex and edge sequences", "vertex and edge sequence operations", "graph attributes", "graph layouts", "layout modifiers", "layout_drl", "constructor modifiers", "deterministic constructors", "minimum.spanning.tree", "graph motifs", "nexus", "functions for manipulating graph structure", "other", "palettes", "igraph options", "paths", "plot", "plot.common", "plot.shapes", "print", "printer callbacks", "random_walk", "rewiring functions", "scan statistics", "scg", "sgm", "similarity", "simple", "socnet", "structural.properties", "structural queries", "test", "tkplot", "graph isomorphism", "trees", "triangles", "versions"))
 - title: internal
 - contents:
+  - igraph-package
   - has_concept("nexus")
   - has_concept("test")
+  - layout.reingold.tilford
+  - layout.fruchterman.reingold.grid
+  - layout.spring
+  - layout.svd
+  - "%>%"

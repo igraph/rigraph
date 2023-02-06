@@ -241,6 +241,8 @@ Matrix Analysis and Applications}, 2008.
 \code{\link[=scg_group]{scg_group()}} and \code{\link[=scg_semi_proj]{scg_semi_proj()}}.
 
 Spectral Coarse Graining
+\code{\link{scg-method}},
+\code{\link{scg_eps}()},
 \code{\link{scg_group}()},
 \code{\link{scg_semi_proj}()},
 \code{\link{stochastic_matrix}()}

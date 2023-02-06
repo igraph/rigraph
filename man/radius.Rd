@@ -50,6 +50,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
-\code{\link{is_dag}()}
+\code{\link{is_dag}()},
+\code{\link{max_cardinality}()}
 }
 \concept{paths}

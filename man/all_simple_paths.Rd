@@ -57,6 +57,7 @@ Other paths:
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
 \code{\link{is_dag}()},
+\code{\link{max_cardinality}()},
 \code{\link{radius}()}
 }
 \concept{paths}

@@ -157,6 +157,7 @@ is_dag <- is_dag
 #' )
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
+#' @family paths
 max_cardinality <- max_cardinality
 
 

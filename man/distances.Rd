@@ -263,6 +263,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{eccentricity}()},
 \code{\link{is_dag}()},
+\code{\link{max_cardinality}()},
 \code{\link{radius}()}
 
 Other structural.properties: 

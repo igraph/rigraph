@@ -43,6 +43,7 @@ Vertex, edge and graph attributes
 \code{\link{edge_attr}()},
 \code{\link{graph_attr_names}()},
 \code{\link{graph_attr}()},
+\code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{set_edge_attr}()},

@@ -101,6 +101,8 @@ Matrix Analysis and Applications}, 2008.
 \code{\link[=scg_eps]{scg_eps()}}, \code{\link[=scg_group]{scg_group()}}
 
 Spectral Coarse Graining
+\code{\link{scg-method}},
+\code{\link{scg_eps}()},
 \code{\link{scg_group}()},
 \code{\link{scg}()},
 \code{\link{stochastic_matrix}()}

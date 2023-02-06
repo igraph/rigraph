@@ -614,6 +614,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #'
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
+#' @family flow
 min_st_separators <- min_st_separators
 
 

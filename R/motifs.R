@@ -236,5 +236,6 @@ dyad_census <- dyad_census
 #'
 #' g <- sample_gnm(15, 45, directed = TRUE)
 #' triad_census(g)
+#' @family motifs
 #' @export
 triad_census <- triad_census

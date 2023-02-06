@@ -809,6 +809,7 @@ is_weighted <- function(graph) {
 }
 
 #' @rdname make_bipartite_graph
+#' @family bipartite
 #' @export
 is_bipartite <- function(graph) {
   if (!is_igraph(graph)) {
@@ -895,6 +896,7 @@ igraph.i.attribute.combination <- function(comb) {
 #' new edge should be sum of the weights of the corresponding edges in the old
 #' graph; and that the rest of the attributes should be ignored (=dropped).
 #'
+#' @family attributes
 #' @name igraph-attribute-combination
 #' @aliases attribute.combination
 #' @section Predefined combination functions: The following combination

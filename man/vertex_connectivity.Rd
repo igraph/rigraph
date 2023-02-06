@@ -104,6 +104,7 @@ Other flow:
 \code{\link{max_flow}()},
 \code{\link{min_cut}()},
 \code{\link{min_separators}()},
+\code{\link{min_st_separators}()},
 \code{\link{st_cuts}()},
 \code{\link{st_min_cuts}()}
 
@@ -115,6 +116,7 @@ Other flow:
 \code{\link{max_flow}()},
 \code{\link{min_cut}()},
 \code{\link{min_separators}()},
+\code{\link{min_st_separators}()},
 \code{\link{st_cuts}()},
 \code{\link{st_min_cuts}()}
 }

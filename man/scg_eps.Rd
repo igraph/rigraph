@@ -57,8 +57,16 @@ Matrix Analysis and Applications}, 2008.
 }
 \seealso{
 \link{scg-method} and \code{\link[=scg]{scg()}}.
+
+Spectral Coarse Graining
+\code{\link{scg-method}},
+\code{\link{scg_group}()},
+\code{\link{scg_semi_proj}()},
+\code{\link{scg}()},
+\code{\link{stochastic_matrix}()}
 }
 \author{
 David Morton de Lachapelle,
 \url{http://people.epfl.ch/david.morton}.
 }
+\concept{scg}

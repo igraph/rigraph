@@ -34,6 +34,7 @@ Other paths:
 \code{\link{all_simple_paths}()},
 \code{\link{distance_table}()},
 \code{\link{eccentricity}()},
+\code{\link{max_cardinality}()},
 \code{\link{radius}()}
 }
 \author{
