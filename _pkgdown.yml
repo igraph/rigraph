@@ -48,12 +48,16 @@ reference:
   - has_concept("rewiring functions")
 - title: Utilities
 - subtitle: Utilities
+- subtitle: Misc
 - contents:
   - graph_id
   - identical_graphs
   - is_igraph
   - is_named
   - is_weighted
+- subtitle: Conversion
+- contents:
+  - has_concept("conversion")
 - subtitle: Printing
 - contents:
   - head_print
@@ -137,9 +141,6 @@ reference:
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Conversion
-- contents:
-  - has_concept("conversion")
 - title: Graphical degree sequences
 - contents:
   - has_concept("graphical degree sequences")
