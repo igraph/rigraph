@@ -31,6 +31,9 @@ reference:
   - has_concept("plot.common")
   - has_concept("plot.shapes")
   - vertex.shape.pie
+- subtitle: Graph coloring
+- contents:
+  - has_concept("coloring")
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
@@ -53,6 +56,9 @@ reference:
   - head_print
   - indent_print
   - printr
+- subtitle: Console
+- contents:
+  - has_concept("console")
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
@@ -105,6 +111,16 @@ reference:
 - contents:
   - has_concept("cliques")
   - has_concept("glet")
+- title: Community detection
+- contents:
+  - has_concept("community")
+- title: Graph cycles
+- contents:
+  - has_concept("cycles")
+- title: Processes on graphs
+- contents:
+  - has_concept("processes")
+  - has_concept("random_walk")
 - title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -118,18 +134,9 @@ reference:
 - contents:
   - has_concept("cliques")
   - has_concept("glet")
-- title: Graph coloring
-- contents:
-  - has_concept("coloring")
-- title: Community detection
-- contents:
-  - has_concept("community")
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Console
-- contents:
-  - has_concept("console")
 - title: Conversion
 - contents:
   - has_concept("conversion")
@@ -145,13 +152,6 @@ reference:
 - title: Env and data
 - contents:
   - has_concept("env-and-data")
-- title: Processes on graphs
-- contents:
-  - has_concept("processes")
-  - has_concept("random_walk")
-- title: Graph cycles
-- contents:
-  - has_concept("cycles")
 - title: Fit
 - contents:
   - has_concept("fit")
