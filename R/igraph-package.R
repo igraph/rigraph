@@ -41,6 +41,7 @@ NULL
 #'
 #' @rdname aaa-igraph-package
 #' @name igraph-package
+#' @keywords internal
 #' @aliases igraph-package igraph
 #' @docType package
 #'
