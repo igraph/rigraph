@@ -19,7 +19,7 @@ reference:
   - has_concept("adjacency")
 - title: Vertex, edge and graph attributes
 - contents:
-  - has_concept("graph attributes")
+  - has_concept("attributes")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
