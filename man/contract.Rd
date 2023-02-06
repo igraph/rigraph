@@ -45,30 +45,7 @@ g2 <- contract(g, rep(1:5, each = 2),
 print(g2, g = TRUE, v = TRUE, e = TRUE)
 
 }
-\seealso{
-Community detection
-\code{\link{as_membership}()},
-\code{\link{cluster_edge_betweenness}()},
-\code{\link{cluster_fast_greedy}()},
-\code{\link{cluster_fluid_communities}()},
-\code{\link{cluster_infomap}()},
-\code{\link{cluster_label_prop}()},
-\code{\link{cluster_leading_eigen}()},
-\code{\link{cluster_leiden}()},
-\code{\link{cluster_louvain}()},
-\code{\link{cluster_optimal}()},
-\code{\link{cluster_spinglass}()},
-\code{\link{cluster_walktrap}()},
-\code{\link{compare}()},
-\code{\link{groups}()},
-\code{\link{make_clusters}()},
-\code{\link{membership}()},
-\code{\link{modularity.igraph}()},
-\code{\link{plot_dendrogram}()},
-\code{\link{split_join_distance}()}
-}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{community}
 \keyword{graphs}

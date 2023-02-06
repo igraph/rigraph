@@ -18,6 +18,14 @@ reference:
   - as.igraph
   - graph_from_lcf
   - graph_
+- title: "Graph edition/modification"
+- contents:
+  - permute
+  - contract
+  - connect
+- subtitle: Rewiring functions
+- contents:
+  - has_concept("rewiring functions")
 - title: Utilities
 - subtitle: Utilities
 - contents:
@@ -37,17 +45,6 @@ reference:
 - title: Vertex, edge and graph attributes
 - contents:
   - has_concept("attributes")
-- title: Structural queries
-- contents:
-  - has_concept("structural queries")
-- title: Bipartite graphs
-- contents:
-  - has_concept("bipartite")
-  - has_concept("incidence")
-- title: Centrality measures
-- contents:
-  - has_concept("centrality")
-  - has_concept("efficiency")
 - title: Centralization related
 - contents:
   - has_concept("centralization related")
@@ -80,15 +77,6 @@ reference:
 - subtitle: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
-- subtitle: Other samplers
-- contents:
-  - sample_
-  - sample_correlated_gnp_pair
-  - sample_fitness
-  - sample_fitness_pl
-  - sample_forestfire
-  - sample_tree
-  - sample_correlated_gnp
 - title: Env and data
 - contents:
   - has_concept("env-and-data")
@@ -114,9 +102,6 @@ reference:
 - title: Hierarchical random graph functions
 - contents:
   - has_concept("hierarchical random graph functions")
-- title: Structural queries
-- contents:
-  - has_concept("structural queries")
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
@@ -140,10 +125,6 @@ reference:
   - has_concept("plot.common")
   - has_concept("plot.shapes")
   - vertex.shape.pie
-- title: Graph motifs and subgraphs
-- contents:
-  - has_concept("graph motifs")
-  - triad_census
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
@@ -153,18 +134,12 @@ reference:
 - title: igraph options
 - contents:
   - has_concept("igraph options")
-- title: Paths
-- contents:
-  - has_concept("paths")
 - title: Print
 - contents:
   - has_concept("print")
 - title: Printer callbacks
 - contents:
   - has_concept("printer callbacks")
-- title: Rewiring functions
-- contents:
-  - has_concept("rewiring functions")
 - title: Scan statistics
 - contents:
   - has_concept("scan statistics")
@@ -175,12 +150,6 @@ reference:
 - contents:
   - has_concept("embedding")
   - embed_laplacian_matrix
-- title: Graph matching
-- contents:
-  - has_concept("sgm")
-- title: Similarity
-- contents:
-  - has_concept("similarity")
 - title: Simple
 - contents:
   - has_concept("simple")
@@ -196,21 +165,43 @@ reference:
   - has_concept("decomposition")
   - has_concept("triangles")
   - starts_with("assortativity")
-- title: Structural queries
+- subtitle: Centrality measures
+- contents:
+  - has_concept("centrality")
+- subtitle: Paths
+- contents:
+  - has_concept("paths")
+- subtitle: Bipartite graphs
+- contents:
+  - has_concept("bipartite")
+  - has_concept("incidence")
+- subtitle: Efficiency
+- contents:
+  - has_concept("efficiency")
+- subtitle: Similarity
+- contents:
+  - has_concept("similarity")
+- subtitle: Trees
+- contents:
+  - has_concept("trees")
+  - has_concept("minimum.spanning.tree")
+- subtitle: Graph matching
+- contents:
+  - has_concept("sgm")
+- subtitle: Structural queries
 - contents:
   - has_concept("structural queries")
+- title: Graph motifs and subgraphs
+- contents:
+  - has_concept("graph motifs")
+  - triad_census
 - title: Topology
 - subtitle: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
-  - permute
 - subtitle: Graph automorphism
 - contents:
   - has_concept("graph automorphism")
-- title: Trees
-- contents:
-  - has_concept("trees")
-  - has_concept("minimum.spanning.tree")
 - title: Versions
 - contents:
   - has_concept("versions")

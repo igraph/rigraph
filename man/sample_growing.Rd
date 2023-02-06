@@ -45,11 +45,15 @@ g2 <- sample_growing(500, citation = TRUE)
 \code{\link[=sample_pa]{sample_pa()}}, \code{\link[=sample_gnp]{sample_gnp()}}
 
 Random graph models (games)
-\code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_correlated_gnp_pair}()},
+\code{\link{sample_correlated_gnp}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
+\code{\link{sample_fitness_pl}()},
+\code{\link{sample_fitness}()},
+\code{\link{sample_forestfire}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
 \code{\link{sample_grg}()},
@@ -62,14 +66,20 @@ Random graph models (games)
 \code{\link{sample_pref}()},
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()}
+\code{\link{sample_traits_callaway}()},
+\code{\link{sample_tree}()},
+\code{\link{sample_}()}
 
 Random graph models (games)
-\code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
+\code{\link{sample_correlated_gnp_pair}()},
+\code{\link{sample_correlated_gnp}()},
 \code{\link{sample_degseq}()},
 \code{\link{sample_dot_product}()},
+\code{\link{sample_fitness_pl}()},
+\code{\link{sample_fitness}()},
+\code{\link{sample_forestfire}()},
 \code{\link{sample_gnm}()},
 \code{\link{sample_gnp}()},
 \code{\link{sample_grg}()},
@@ -82,7 +92,9 @@ Random graph models (games)
 \code{\link{sample_pref}()},
 \code{\link{sample_sbm}()},
 \code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()}
+\code{\link{sample_traits_callaway}()},
+\code{\link{sample_tree}()},
+\code{\link{sample_}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

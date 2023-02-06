@@ -2548,6 +2548,5 @@ communities <- groups.communities
 #' ## combined using the 'toString' function.
 #' print(g2, g = TRUE, v = TRUE, e = TRUE)
 #'
-#' @family community
 #' @export
 contract <- contract

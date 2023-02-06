@@ -204,6 +204,7 @@ make_ <- function(...) {
 #' ## Arguments are passed on from sample_ to sample_sbm
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
+#' @family games
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
@@ -1207,6 +1208,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #'   Prufer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
+#' @family games
 #' @keywords graphs
 #' @examples
 #'
