@@ -177,6 +177,7 @@ disjoint_union <- function(...) {
 
 #' @export
 #' @rdname disjoint_union
+#' @family functions for manipulating graph structure
 "%du%" <- function(x, y) {
   disjoint_union(x, y)
 }
@@ -297,12 +298,14 @@ disjoint_union <- function(...) {
 #'   the function that implements `union()`.
 #' @return Depends on the function that implements this method.
 #'
+#' @family functions for manipulating graph structure
 #' @export
 union <- function(...) {
   UseMethod("union")
 }
 
 #' @method union default
+#' @family functions for manipulating graph structure
 #' @export
 union.default <- function(...) {
   base::union(...)
@@ -343,6 +346,7 @@ union.default <- function(...) {
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method union igraph
+#' @family functions for manipulating graph structure
 #' @export
 #' @keywords graphs
 #' @examples
@@ -361,6 +365,7 @@ union.igraph <- function(..., byname = "auto") {
   )
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 "%u%" <- function(x, y) {
   union(x, y)
@@ -379,6 +384,7 @@ union.igraph <- function(..., byname = "auto") {
 #'   the function that implements `intersection()`.
 #' @return Depends on the function that implements this method.
 #'
+#' @family functions for manipulating graph structure
 #' @export
 intersection <- function(...) {
   UseMethod("intersection")
@@ -421,6 +427,7 @@ intersection <- function(...) {
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method intersection igraph
+#' @family functions for manipulating graph structure
 #' @export
 #' @keywords graphs
 #' @examples
@@ -440,6 +447,7 @@ intersection.igraph <- function(..., byname = "auto",
   )
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 "%s%" <- function(x, y) {
   intersection(x, y)
@@ -458,6 +466,7 @@ intersection.igraph <- function(..., byname = "auto",
 #'   the function that implements `difference()`.
 #' @return Depends on the function that implements this method.
 #'
+#' @family functions for manipulating graph structure
 #' @export
 difference <- function(...) {
   UseMethod("difference")
@@ -496,6 +505,7 @@ difference <- function(...) {
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @method difference igraph
+#' @family functions for manipulating graph structure
 #' @export
 #' @keywords graphs
 #' @examples
@@ -552,6 +562,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
   }
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 "%m%" <- function(x, y) {
   difference(x, y)
@@ -576,6 +587,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' @param loops Logical constant, whether to generate loop edges.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family functions for manipulating graph structure
 #' @export
 #' @keywords graphs
 #' @examples
@@ -651,6 +663,7 @@ complementer <- function(graph, loops = FALSE) {
 #'   but not both graphs are named.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family functions for manipulating graph structure
 #' @export
 #' @keywords graphs
 #' @examples
@@ -727,6 +740,7 @@ compose <- function(g1, g2, byname = "auto") {
   res
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 "%c%" <- function(x, y) {
   compose(x, y)
@@ -777,6 +791,7 @@ edge <- function(...) {
   structure(list(...), class = "igraph.edge")
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 #' @rdname edge
 edges <- edge
@@ -813,6 +828,7 @@ vertex <- function(...) {
   structure(list(...), class = "igraph.vertex")
 }
 
+#' @family functions for manipulating graph structure
 #' @export
 #' @rdname vertex
 vertices <- vertex
@@ -1123,6 +1139,7 @@ path <- function(...) {
 #'   currently ignored.
 #'
 #' @method rep igraph
+#' @family functions for manipulating graph structure
 #' @export
 #'
 #' @examples
@@ -1142,6 +1159,7 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 
 #' @rdname rep.igraph
 #' @method * igraph
+#' @family functions for manipulating graph structure
 #' @export
 `*.igraph` <- function(x, n) {
   if (!is_igraph(x) && is_igraph(n)) {
@@ -1173,11 +1191,13 @@ rep.igraph <- function(x, n, mark = TRUE, ...) {
 #'
 #' g <- make_graph(~ 1 -+ 2, 2 -+ 3, 3 -+ 4)
 #' reverse_edges(g, 2)
+#' @family functions for manipulating graph structure
 #' @export
 reverse_edges <- reverse_edges
 
 #' @rdname reverse_edges
 #' @param x The input graph.
 #' @method t igraph
+#' @family functions for manipulating graph structure
 #' @export
 t.igraph <- function(x) reverse_edges(x)
