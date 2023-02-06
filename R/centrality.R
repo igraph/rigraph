@@ -955,6 +955,7 @@ hub_score <- hub_score
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
+#' @family centrality
 authority_score <- authority_score
 
 

@@ -48,6 +48,7 @@ centrality in Complex Networks. \emph{Physical Review E} 71, 056103 (2005).
 Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
+\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},

@@ -72,6 +72,7 @@ M. Marchiori and V. Latora, Harmony in the small-world,
 Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
+\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},

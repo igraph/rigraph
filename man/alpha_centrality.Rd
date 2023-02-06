@@ -95,6 +95,7 @@ measures of centrality for asymmetric relations'' \emph{Social Networks},
 
 Centrality measures
 \code{\link{arpack_defaults}},
+\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},

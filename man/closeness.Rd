@@ -91,6 +91,7 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
+\code{\link{authority_score}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{estimate_betweenness}()},
