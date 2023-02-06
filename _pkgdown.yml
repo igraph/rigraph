@@ -120,9 +120,6 @@ reference:
 - title: Centralization related
 - contents:
   - has_concept("centralization related")
-- subtitle: Graph matching
-- contents:
-  - has_concept("sgm")
 - title: Graph motifs and subgraphs
 - contents:
   - has_concept("graph motifs")
@@ -132,6 +129,9 @@ reference:
   - has_concept("graph isomorphism")
   - simplify_and_colorize
   - has_concept("graph automorphism")
+- subtitle: Graph matching
+- contents:
+  - has_concept("sgm")
 - title: Maximum flow and connectivity
 - contents:
   - has_concept("flow")
