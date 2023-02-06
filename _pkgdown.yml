@@ -58,6 +58,9 @@ reference:
 - subtitle: Conversion
 - contents:
   - has_concept("conversion")
+- subtitle: Env and data
+- contents:
+  - has_concept("env-and-data")
 - subtitle: Printing
 - contents:
   - head_print
@@ -150,9 +153,6 @@ reference:
 - title: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
-- title: Env and data
-- contents:
-  - has_concept("env-and-data")
 - title: Fit
 - contents:
   - has_concept("fit")
