@@ -42,6 +42,7 @@ E(g)[[.inc("A")]]
 Other vertex and edge sequences: 
 \code{\link{E}()},
 \code{\link{V}()},
+\code{\link{as_ids}()},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-vs-attributes}},

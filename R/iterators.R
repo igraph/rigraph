@@ -1789,6 +1789,7 @@ rev.igraph.es <- rev.igraph.vs
 #' V(g)$name <- letters[1:10]
 #' as_ids(V(g))
 #' as_ids(E(g))
+#' @family vertex and edge sequences
 as_ids <- function(seq) {
   UseMethod("as_ids")
 }

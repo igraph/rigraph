@@ -14,6 +14,7 @@ reference:
 - subtitle: Convert to igraph
 - contents:
   - as.igraph
+  - graph_from_lcf
 - title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -159,6 +160,7 @@ reference:
   - has_concept("cohesive.blocks")
   - has_concept("decomposition")
   - has_concept("triangles")
+  - starts_with("assortativity")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
