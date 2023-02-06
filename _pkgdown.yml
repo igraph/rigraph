@@ -18,8 +18,22 @@ reference:
   - as.igraph
   - graph_from_lcf
   - graph_
-- title: "Graph edition/modification"
+- title: Visualization
 - contents:
+  - has_concept("graph layouts")
+  - has_concept("layout modifiers")
+  - has_concept("layout_drl")
+  - has_concept("palettes")
+  - has_concept("plot")
+  - igraph.plotting
+  - plot_dendrogram.igraphHRG
+  - plot_dendrogram
+  - has_concept("plot.common")
+  - has_concept("plot.shapes")
+  - vertex.shape.pie
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
   - permute
   - contract
   - connect
@@ -39,124 +53,6 @@ reference:
   - head_print
   - indent_print
   - printr
-- title: Adjacency matrices
-- contents:
-  - has_concept("adjacency")
-- title: Vertex, edge and graph attributes
-- contents:
-  - has_concept("attributes")
-- title: Centralization related
-- contents:
-  - has_concept("centralization related")
-- title: Cliques
-- contents:
-  - has_concept("cliques")
-  - has_concept("glet")
-- title: Graph coloring
-- contents:
-  - has_concept("coloring")
-- title: Community detection
-- contents:
-  - has_concept("community")
-- title: Connected components
-- contents:
-  - has_concept("components")
-- title: Console
-- contents:
-  - has_concept("console")
-- title: Conversion
-- contents:
-  - has_concept("conversion")
-- title: Graphical degree sequences
-- contents:
-  - has_concept("graphical degree sequences")
-- title: Demo
-- contents:
-  - has_concept("demo")
-- title: Sampling
-- subtitle: Latent position vector samplers
-- contents:
-  - has_concept("latent position vector samplers")
-- title: Env and data
-- contents:
-  - has_concept("env-and-data")
-- title: Processes on graphs
-- contents:
-  - has_concept("processes")
-  - has_concept("random_walk")
-- title: Graph cycles
-- contents:
-  - has_concept("cycles")
-- title: Fit
-- contents:
-  - has_concept("fit")
-- title: Flow
-- contents:
-  - has_concept("flow")
-- title: Foreign format readers
-- contents:
-  - has_concept("foreign")
-- title: Random graph models (games)
-- contents:
-  - has_concept("games")
-- title: Hierarchical random graph functions
-- contents:
-  - has_concept("hierarchical random graph functions")
-- title: Functions for manipulating graph structure
-- contents:
-  - has_concept("functions for manipulating graph structure")
-- title: Functions for manipulating graph structure
-- contents:
-  - has_concept("functions for manipulating graph structure")
-- title: Vertex and edge sequences
-- contents:
-  - has_concept("vertex and edge sequences")
-  - has_concept("vertex and edge sequence operations")
-- title: Visualization
-- contents:
-  - has_concept("graph layouts")
-  - has_concept("layout modifiers")
-  - has_concept("layout_drl")
-  - has_concept("palettes")
-  - has_concept("plot")
-  - igraph.plotting
-  - plot_dendrogram.igraphHRG
-  - plot_dendrogram
-  - has_concept("plot.common")
-  - has_concept("plot.shapes")
-  - vertex.shape.pie
-- title: Functions for manipulating graph structure
-- contents:
-  - has_concept("functions for manipulating graph structure")
-- title: Other
-- contents:
-  - has_concept("other")
-- title: igraph options
-- contents:
-  - has_concept("igraph options")
-- title: Print
-- contents:
-  - has_concept("print")
-- title: Printer callbacks
-- contents:
-  - has_concept("printer callbacks")
-- title: Scan statistics
-- contents:
-  - has_concept("scan statistics")
-- title: Spectral Coarse Graining
-- contents:
-  - has_concept("scg")
-- title: Embedding
-- contents:
-  - has_concept("embedding")
-  - embed_laplacian_matrix
-- title: Simple
-- contents:
-  - has_concept("simple")
-- title: Interactive functions
-- contents:
-  - has_concept("socnet")
-  - has_concept("tkplot")
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
@@ -202,6 +98,111 @@ reference:
 - subtitle: Graph automorphism
 - contents:
   - has_concept("graph automorphism")
+- title: Flow
+- contents:
+  - has_concept("flow")
+- title: Cliques
+- contents:
+  - has_concept("cliques")
+  - has_concept("glet")
+- title: Adjacency matrices
+- contents:
+  - has_concept("adjacency")
+- title: Vertex, edge and graph attributes
+- contents:
+  - has_concept("attributes")
+- title: Centralization related
+- contents:
+  - has_concept("centralization related")
+- title: Cliques
+- contents:
+  - has_concept("cliques")
+  - has_concept("glet")
+- title: Graph coloring
+- contents:
+  - has_concept("coloring")
+- title: Community detection
+- contents:
+  - has_concept("community")
+- title: Connected components
+- contents:
+  - has_concept("components")
+- title: Console
+- contents:
+  - has_concept("console")
+- title: Conversion
+- contents:
+  - has_concept("conversion")
+- title: Graphical degree sequences
+- contents:
+  - has_concept("graphical degree sequences")
+- title: Demo
+- contents:
+  - has_concept("demo")
+- title: Latent position vector samplers
+- contents:
+  - has_concept("latent position vector samplers")
+- title: Env and data
+- contents:
+  - has_concept("env-and-data")
+- title: Processes on graphs
+- contents:
+  - has_concept("processes")
+  - has_concept("random_walk")
+- title: Graph cycles
+- contents:
+  - has_concept("cycles")
+- title: Fit
+- contents:
+  - has_concept("fit")
+- title: Foreign format readers
+- contents:
+  - has_concept("foreign")
+- title: Random graph models (games)
+- contents:
+  - has_concept("games")
+- title: Hierarchical random graph functions
+- contents:
+  - has_concept("hierarchical random graph functions")
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- title: Vertex and edge sequences
+- contents:
+  - has_concept("vertex and edge sequences")
+  - has_concept("vertex and edge sequence operations")
+- title: Functions for manipulating graph structure
+- contents:
+  - has_concept("functions for manipulating graph structure")
+- title: Other
+- contents:
+  - has_concept("other")
+- title: igraph options
+- contents:
+  - has_concept("igraph options")
+- title: Print
+- contents:
+  - has_concept("print")
+- title: Printer callbacks
+- contents:
+  - has_concept("printer callbacks")
+- title: Scan statistics
+- contents:
+  - has_concept("scan statistics")
+- title: Spectral Coarse Graining
+- contents:
+  - has_concept("scg")
+- title: Embedding
+- contents:
+  - has_concept("embedding")
+  - embed_laplacian_matrix
+- title: Simple
+- contents:
+  - has_concept("simple")
+- title: Interactive functions
+- contents:
+  - has_concept("socnet")
+  - has_concept("tkplot")
 - title: Versions
 - contents:
   - has_concept("versions")
