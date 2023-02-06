@@ -18,6 +18,9 @@ reference:
   - as.igraph
   - graph_from_lcf
   - graph_
+- subtitle: Adjacency matrices
+- contents:
+  - has_concept("adjacency")
 - title: Visualization
 - contents:
   - has_concept("graph layouts")
@@ -121,9 +124,6 @@ reference:
 - contents:
   - has_concept("processes")
   - has_concept("random_walk")
-- title: Adjacency matrices
-- contents:
-  - has_concept("adjacency")
 - title: Vertex, edge and graph attributes
 - contents:
   - has_concept("attributes")
