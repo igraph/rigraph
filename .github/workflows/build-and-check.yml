@@ -72,7 +72,6 @@ jobs:
               git add .
               git stash save
               git switch ${GITHUB_HEAD_REF}
-              git merge origin/${GITHUB_BASE_REF} --no-edit
               git stash pop
             fi
             git add .
