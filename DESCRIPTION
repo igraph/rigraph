@@ -50,10 +50,10 @@ Authors@R: c(
            comment = "See also AUTHORS file."),
     person("Vincent", "Traag", role = "aut"),
     person("Szabolcs", "Horvát", , "szhorvat@gmail.com", role = "aut"),
-    person("Fabio", "Zanini", , "fabio.zanini@fastmail.fm", role = "aut"),
+    person("Fabio", "Zanini", , "fabio.zanini@unsw.edu.au", role = "aut"),
     person("Daniel", "Noom", role = "aut"),
-    person("Kirill", "Müller", role = c("aut", "cre")),
-    person("Maëlle", "Salmon", role = "ctb", email = "kirill@cynkra.com"),
+    person("Kirill", "Müller", role = c("aut", "cre"), email = "kirill@cynkra.com"),
+    person("Maëlle", "Salmon", role = "ctb"),
     person("Chan Zuckerberg Initiative", role = "fnd")
   )
 VignetteBuilder: knitr
