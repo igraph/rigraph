@@ -156,7 +156,7 @@ reference:
 - title: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
-- title: Foreign format readers
+- title: I/O Read/Write Files
 - contents:
   - has_concept("foreign")
 - title: Random graph models (games)
