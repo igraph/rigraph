@@ -37,6 +37,7 @@ forest <- subgraph.edges(g, edges)
 
 Other trees: 
 \code{\link{is_tree}()},
+\code{\link{make_from_prufer}()},
 \code{\link{to_prufer}()}
 }
 \concept{trees}

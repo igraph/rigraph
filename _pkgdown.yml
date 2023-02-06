@@ -21,6 +21,9 @@ reference:
   - as.igraph
   - graph_from_lcf
   - graph_
+- subtitle: "Random graph models (games)"
+- contents:
+  - has_concept("games")
 - subtitle: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -46,6 +49,7 @@ reference:
   - permute
   - contract
   - connect
+  - has_concept("simple")
 - subtitle: Rewiring functions
 - contents:
   - has_concept("rewiring functions")
@@ -58,6 +62,7 @@ reference:
   - is_igraph
   - is_named
   - is_weighted
+  - is_chordal
 - subtitle: Conversion
 - contents:
   - has_concept("conversion")
@@ -71,9 +76,6 @@ reference:
   - printr
   - has_concept("print")
   - has_concept("printer callbacks")
-- subtitle: Console
-- contents:
-  - has_concept("console")
 - subtitle: Misc
 - contents:
   - convex_hull
@@ -85,12 +87,12 @@ reference:
   - has_concept("structural.properties")
   - has_concept("cocitation")
   - has_concept("cohesive.blocks")
-  - has_concept("decomposition")
   - has_concept("triangles")
   - starts_with("assortativity")
-- subtitle: Centrality measures
+- subtitle: Triangles and transitivity
 - contents:
-  - has_concept("centrality")
+  - matches("triangles")
+  - matches("transitivity")
 - subtitle: Paths
 - contents:
   - has_concept("paths")
@@ -108,24 +110,27 @@ reference:
 - contents:
   - has_concept("trees")
   - has_concept("minimum.spanning.tree")
-- subtitle: Graph matching
-- contents:
-  - has_concept("sgm")
 - subtitle: Structural queries
 - contents:
   - has_concept("structural queries")
+- subtitle: Centrality measures
+- contents:
+  - has_concept("centrality")
+- title: Centralization related
+- contents:
+  - has_concept("centralization related")
+- subtitle: Graph matching
+- contents:
+  - has_concept("sgm")
 - title: Graph motifs and subgraphs
 - contents:
   - has_concept("graph motifs")
   - triad_census
-- title: Topology
-- subtitle: Graph isomorphism
+- title: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
-- subtitle: Graph automorphism
-- contents:
   - has_concept("graph automorphism")
-- title: Flow
+- title: Maximum flow and connectivity
 - contents:
   - has_concept("flow")
 - title: Cliques
@@ -145,9 +150,6 @@ reference:
 - title: Vertex, edge and graph attributes
 - contents:
   - has_concept("attributes")
-- title: Centralization related
-- contents:
-  - has_concept("centralization related")
 - title: Cliques
 - contents:
   - has_concept("cliques")
@@ -167,9 +169,6 @@ reference:
 - title: I/O Read/Write Files
 - contents:
   - has_concept("foreign")
-- title: Random graph models (games)
-- contents:
-  - has_concept("games")
 - title: Hierarchical random graph functions
 - contents:
   - has_concept("hierarchical random graph functions")
@@ -191,9 +190,6 @@ reference:
 - contents:
   - has_concept("embedding")
   - embed_laplacian_matrix
-- title: Simple
-- contents:
-  - has_concept("simple")
 - title: Interactive functions
 - contents:
   - has_concept("socnet")
@@ -212,3 +208,4 @@ reference:
   - layout.svd
   - srand
   - "%>%"
+  - has_concept("console")

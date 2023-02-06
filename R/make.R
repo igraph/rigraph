@@ -1245,7 +1245,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #'
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
-#'
+#' @family trees
 #' @export
 make_from_prufer <- make_from_prufer
 

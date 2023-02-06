@@ -79,6 +79,7 @@ simplify <- simplify
 is_simple <- is_simple
 
 #' @family simple
+#' @family isomorphism
 #' @export
 #' @rdname simplify
 simplify_and_colorize <- function(graph) {
