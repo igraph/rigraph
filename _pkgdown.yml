@@ -19,19 +19,20 @@ reference:
 - title: Centrality measures
 - contents:
   - has_concept("centrality")
+  - has_concept("efficiency")
 - title: Centralization related
 - contents:
   - has_concept("centralization related")
 - title: Cliques
 - contents:
   - has_concept("cliques")
-- title: Coloring
+- title: Graph coloring
 - contents:
   - has_concept("coloring")
-- title: Community
+- title: Community detection
 - contents:
   - has_concept("community")
-- title: Components
+- title: Connected components
 - contents:
   - has_concept("components")
 - title: Console
@@ -43,18 +44,12 @@ reference:
 - title: Deterministic constructors
 - contents:
   - has_concept("deterministic constructors")
-- title: Decomposition
-- contents:
-  - has_concept("decomposition")
 - title: Graphical degree sequences
 - contents:
   - has_concept("graphical degree sequences")
 - title: Demo
 - contents:
   - has_concept("demo")
-- title: Efficiency
-- contents:
-  - has_concept("efficiency")
 - title: Latent position vector samplers
 - contents:
   - has_concept("latent position vector samplers")
@@ -189,6 +184,7 @@ reference:
   - has_concept("structural.properties")
   - has_concept("cocitation")
   - has_concept("cohesive.blocks")
+  - has_concept("decomposition")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")

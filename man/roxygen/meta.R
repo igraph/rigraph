@@ -3,6 +3,9 @@ list(
     adjacency = "Adjacency matrices",
     attributes = "Vertex, edge and graph attributes",
     bipartite = "Bipartite graphs",
-    centrality = "Centrality measures"
+    centrality = "Centrality measures",
+    coloring = "Graph coloring",
+    community = "Community detection",
+    components = "Connected components"
     )
 )
