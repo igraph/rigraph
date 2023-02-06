@@ -212,6 +212,7 @@ reference:
 - title: Trees
 - contents:
   - has_concept("trees")
+  - make_from_prufer
 - title: Triangles
 - contents:
   - has_concept("triangles")
