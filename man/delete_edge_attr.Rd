@@ -26,7 +26,7 @@ g2 <- delete_edge_attr(g, "name")
 edge_attr_names(g2)
 }
 \seealso{
-Other graph attributes: 
+Vertex, edge and graph attributes
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
 \code{\link{edge_attr<-}()},
@@ -44,4 +44,4 @@ Other graph attributes:
 \code{\link{vertex_attr_names}()},
 \code{\link{vertex_attr}()}
 }
-\concept{graph attributes}
+\concept{attributes}

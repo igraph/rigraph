@@ -32,7 +32,7 @@ g
 plot(g, edge.width = E(g)$weight)
 }
 \seealso{
-Other graph attributes: 
+Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
@@ -50,4 +50,4 @@ Other graph attributes:
 \code{\link{vertex_attr_names}()},
 \code{\link{vertex_attr}()}
 }
-\concept{graph attributes}
+\concept{attributes}

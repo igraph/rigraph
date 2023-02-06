@@ -1063,7 +1063,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #'
 #' @export
 #' @family vertex and edge sequences
-#' @family graph attributes
+#' @family attributes
 #' @examples
 #' g <- make_(
 #'   ring(10),

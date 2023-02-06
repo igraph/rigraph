@@ -43,7 +43,7 @@
 #' @return A list of graph attributes, or a single graph attribute.
 #'
 #' @aliases get.graph.attribute graph.attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -72,7 +72,7 @@ graph_attr <- function(graph, name) {
 #' @return The graph, with the attribute(s) added.
 #'
 #' @aliases graph.attributes<-
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -102,7 +102,7 @@ graph_attr <- function(graph, name) {
 #' @param value New value of the attribute.
 #' @return The graph with the new graph attribute added or set.
 #'
-#' @family graph attributes
+#' @family attributes
 #' @aliases set.graph.attribute
 #'
 #' @export
@@ -152,7 +152,7 @@ graph.attributes <- function(graph) {
 #'   all vertex attributes, if `name` is missing.
 #'
 #' @aliases get.vertex.attribute vertex.attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -197,7 +197,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' @return The graph, with the vertex attribute(s) added or set.
 #'
 #' @aliases vertex.attributes<-
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -229,7 +229,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #' @return The graph, with the vertex attribute added or set.
 #'
 #' @aliases set.vertex.attribute
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -363,7 +363,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 #'   edge attributes if `name` is missing.
 #'
 #' @aliases get.edge.attribute edge.attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -407,7 +407,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' @return The graph, with the edge attribute(s) added or set.
 #'
 #' @aliases edge.attributes<-
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -439,7 +439,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #' @return The graph, with the edge attribute added or set.
 #'
 #' @aliases set.edge.attribute
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -567,7 +567,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' @return Character vector, the names of the graph attributes.
 #'
 #' @aliases list.graph.attributes attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -590,7 +590,7 @@ graph_attr_names <- function(graph) {
 #' @return Character vector, the names of the vertex attributes.
 #'
 #' @aliases list.vertex.attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -617,7 +617,7 @@ vertex_attr_names <- function(graph) {
 #' @return Character vector, the names of the edge attributes.
 #'
 #' @aliases list.edge.attributes
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -643,7 +643,7 @@ edge_attr_names <- function(graph) {
 #' @return The graph, with the specified attribute removed.
 #'
 #' @aliases remove.graph.attribute
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -673,7 +673,7 @@ delete_graph_attr <- function(graph, name) {
 #' @return The graph, with the specified vertex attribute removed.
 #'
 #' @aliases remove.vertex.attribute
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -704,7 +704,7 @@ delete_vertex_attr <- function(graph, name) {
 #' @return The graph, with the specified edge attribute removed.
 #'
 #' @aliases remove.edge.attribute
-#' @family graph attributes
+#' @family attributes
 #'
 #' @export
 #' @examples
@@ -971,7 +971,7 @@ NULL
 #' @method $ igraph
 #' @name igraph-dollar
 #' @export
-#' @family graph attributes
+#' @family attributes
 #' @examples
 #' g <- make_ring(10)
 #' g$name

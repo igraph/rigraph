@@ -4,16 +4,16 @@ template:
   bootstrap: 5
 
 reference:
-- title: Adjacency
+- title: Adjacency matrices
 - contents:
   - has_concept("adjacency")
-- title: Graph attributes
+- title: Vertex, edge and graph attributes
 - contents:
   - has_concept("graph attributes")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
-- title: Bipartite
+- title: Bipartite graphs
 - contents:
   - has_concept("bipartite")
 - title: Centrality
@@ -112,9 +112,6 @@ reference:
 - title: Vertex and edge sequence operations
 - contents:
   - has_concept("vertex and edge sequence operations")
-- title: Graph attributes
-- contents:
-  - has_concept("graph attributes")
 - title: Graph layouts
 - contents:
   - has_concept("graph layouts")
