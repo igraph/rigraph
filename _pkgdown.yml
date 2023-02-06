@@ -61,6 +61,7 @@ reference:
 - title: Processes on graphs
 - contents:
   - has_concept("epi")
+  - has_concept("random_walk")
 - title: Graph cycles
 - contents:
   - has_concept("eulerian")
@@ -98,6 +99,9 @@ reference:
   - has_concept("layout modifiers")
   - has_concept("layout_drl")
   - has_concept("palettes")
+  - has_concept("plot")
+  - has_concept("plot.common")
+  - has_concept("plot.shapes")
 - title: Constructor modifiers
 - contents:
   - has_concept("constructor modifiers")
@@ -110,40 +114,28 @@ reference:
 - title: Other
 - contents:
   - has_concept("other")
-- title: Igraph options
+- title: igraph options
 - contents:
   - has_concept("igraph options")
 - title: Paths
 - contents:
   - has_concept("paths")
-- title: Plot
-- contents:
-  - has_concept("plot")
-- title: Plot common
-- contents:
-  - has_concept("plot.common")
-- title: Plot shapes
-- contents:
-  - has_concept("plot.shapes")
 - title: Print
 - contents:
   - has_concept("print")
 - title: Printer callbacks
 - contents:
   - has_concept("printer callbacks")
-- title: Random walk
-- contents:
-  - has_concept("random_walk")
 - title: Rewiring functions
 - contents:
   - has_concept("rewiring functions")
 - title: Scan statistics
 - contents:
   - has_concept("scan statistics")
-- title: Scg
+- title: Spectral Coarse Graining
 - contents:
   - has_concept("scg")
-- title: Sgm
+- title: Graph matching
 - contents:
   - has_concept("sgm")
 - title: Similarity
@@ -152,24 +144,23 @@ reference:
 - title: Simple
 - contents:
   - has_concept("simple")
-- title: Socnet
+- title: Interactive functions
 - contents:
   - has_concept("socnet")
+  - has_concept("tkplot")
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
   - has_concept("cocitation")
   - has_concept("cohesive.blocks")
   - has_concept("decomposition")
+  - has_concept("triangles")
 - title: Structural queries
 - contents:
   - has_concept("structural queries")
 - title: Test
 - contents:
   - has_concept("test")
-- title: Tkplot
-- contents:
-  - has_concept("tkplot")
 - title: Graph isomorphism
 - contents:
   - has_concept("graph isomorphism")
@@ -177,9 +168,6 @@ reference:
 - contents:
   - has_concept("trees")
   - has_concept("minimum.spanning.tree")
-- title: Triangles
-- contents:
-  - has_concept("triangles")
 - title: Versions
 - contents:
   - has_concept("versions")

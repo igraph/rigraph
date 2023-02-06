@@ -10,6 +10,8 @@ list(
     epi = "Processes on graphs",
     eulerian = "Graph cycles",
     foreign = "Foreign format readers",
-    games = "Random graph models (games)"
+    games = "Random graph models (games)",
+    scg = "Spectral Coarse Graining",
+    sgm = "Graph matching"
     )
 )
