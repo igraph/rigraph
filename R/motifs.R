@@ -195,6 +195,7 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #'
 #' g <- sample_pa(100)
 #' dyad_census(g)
+#' @family graph motifs
 #' @export
 dyad_census <- dyad_census
 

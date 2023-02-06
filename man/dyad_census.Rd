@@ -37,8 +37,14 @@ Applications.} Cambridge: Cambridge University Press. 1994.
 \seealso{
 \code{\link[=triad_census]{triad_census()}} for the same classification, but with
 triples.
+
+Other graph motifs: 
+\code{\link{count_motifs}()},
+\code{\link{motifs}()},
+\code{\link{sample_motifs}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{graph motifs}
 \keyword{graphs}
