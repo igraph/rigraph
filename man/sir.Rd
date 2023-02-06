@@ -119,5 +119,5 @@ Processes on graphs
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
 (\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
 }
-\concept{epi}
+\concept{processes}
 \keyword{graphs}

@@ -92,5 +92,5 @@ Processes on graphs
 Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com}.
 }
-\concept{epi}
+\concept{processes}
 \keyword{graphs}

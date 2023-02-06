@@ -56,5 +56,5 @@ has_eulerian_cycle(g)
 try(eulerian_cycle(g))
 
 }
-\concept{eulerian}
+\concept{cycles}
 \keyword{graphs}

@@ -59,21 +59,21 @@
 #' has_eulerian_cycle(g)
 #' try(eulerian_cycle(g))
 #'
-#' @family eulerian
+#' @family cycles
 #' @export
 has_eulerian_path <- function(graph) is_eulerian(graph)$has_path
 
 #' @rdname has_eulerian_path
-#' @family eulerian
+#' @family cycles
 #' @export
 has_eulerian_cycle <- function(graph) is_eulerian(graph)$has_cycle
 
 #' @rdname has_eulerian_path
-#' @family eulerian
+#' @family cycles
 #' @export
 eulerian_path <- eulerian_path
 
 #' @rdname has_eulerian_path
-#' @family eulerian
+#' @family cycles
 #' @export
 eulerian_cycle <- eulerian_cycle
