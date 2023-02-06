@@ -68,8 +68,12 @@ Statistics and Data Analysis}, Vol. 51, 918--930.
 }
 \seealso{
 \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}}
+
+Other embedding: 
+\code{\link{embed_adjacency_matrix}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{embedding}
 \keyword{graphs}
