@@ -18,3 +18,15 @@ The modified graph
 This is a helper function for the common parts of \code{make_()} and
 \code{sample_()}.
 }
+\seealso{
+Other constructor modifiers: 
+\code{\link{.extract_constructor_and_modifiers}()},
+\code{\link{simplified}()},
+\code{\link{with_edge_}()},
+\code{\link{with_graph_}()},
+\code{\link{with_vertex_}()},
+\code{\link{without_attr}()},
+\code{\link{without_loops}()},
+\code{\link{without_multiples}()}
+}
+\concept{constructor modifiers}
