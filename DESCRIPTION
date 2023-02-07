@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.3.5.9106
+Version: 1.4.0.9004
 Title: Network Analysis and Visualization
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
@@ -33,8 +33,7 @@ URL: https://igraph.org, https://igraph.discourse.group/
 SystemRequirements:
     gmp (optional),
     libxml2 (optional),
-    glpk (>= 4.57, optional),
-    C++11
+    glpk (>= 4.57, optional)
 BugReports: https://github.com/igraph/rigraph/issues
 Encoding: UTF-8
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig

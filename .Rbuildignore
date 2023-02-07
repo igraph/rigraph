@@ -31,9 +31,10 @@
 ^\.Rproj\.user$
 ^codecov\.yml$
 ^\.gitattributes$
-^build$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
+^\.zenodo.json$
+

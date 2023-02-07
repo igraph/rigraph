@@ -78,6 +78,7 @@ simplify <- simplify
 #' @rdname simplify
 is_simple <- is_simple
 
+#' @family isomorphism
 #' @family simple
 #' @export
 #' @rdname simplify

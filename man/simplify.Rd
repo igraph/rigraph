@@ -75,5 +75,6 @@ is_simple(simplify(g))
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{isomorphism}
 \concept{simple}
 \keyword{graphs}
