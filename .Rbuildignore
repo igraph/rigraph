@@ -36,3 +36,5 @@
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
+^\.zenodo.json$
+
