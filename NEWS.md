@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.4.0.9004
+
+## Documentation
+
+  - Fix is\_matching() title (#667).
+
+<!-- end list -->
+
+  - docs: fix is\_matching() title
+
+  - simplify twice
+
+  - :tree:
+
+  - wrong branch\!\!
+
+## Uncategorized
+
+  - Merge pull request #663 from maelle/pkg-man-page.
+
+make package manual page internal
+
+
 # igraph 1.4.0.9003
 
 ## Chore
@@ -1563,4 +1586,3 @@ After about a year of development this is the first "official" release
 of the igraph library. This release should be considered as beta
 software, but it should be useful in general. Please send your
 questions and comments.
-
