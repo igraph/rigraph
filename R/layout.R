@@ -1503,13 +1503,17 @@ layout.lgl <- function(..., params = list()) {
 #' Multidimensional scaling of some distance matrix defined on the vertices of
 #' a graph.
 #'
-#' `layout_with_mds()` uses metric multidimensional scaling for generating the
-#' coordinates. Multidimensional scaling aims to place points from a higher
-#' dimensional space in a (typically) 2 dimensional plane, so that the distance
-#' between the points are kept as much as this is possible.
+#' `layout_with_mds()` uses classical multidimensional scaling (Torgerson scaling)
+#' for generating the coordinates. Multidimensional scaling aims to place points
+#' from a higher dimensional space in a (typically) 2 dimensional plane, so that
+#' the distances between the points are kept as much as this is possible.
 #'
 #' By default igraph uses the shortest path matrix as the distances between the
 #' nodes, but the user can override this via the `dist` argument.
+#'
+#' Warning: If the graph is symmetric to the exchange of two vertices (as is the
+#' case with leaves of a tree connecting to the same parent), classical
+#' multidimensional scaling may assign the same coordinates to these vertices. 
 #'
 #' This function generates the layout separately for each graph component and
 #' then merges them via [merge_coords()].
@@ -1520,7 +1524,7 @@ layout.lgl <- function(..., params = list()) {
 #'   `NULL` (the default), then the unweighted shortest path matrix is used.
 #' @param dim `layout_with_mds()` supports dimensions up to the number of nodes
 #'   minus one, but only if the graph is connected; for unconnected graphs, the
-#'   only possible values is 2. This is because `merge_coords()` only works in
+#'   only possible value is 2. This is because `merge_coords()` only works in
 #'   2D.
 #' @param options This is currently ignored, as ARPACK is not used any more for
 #'   solving the eigenproblem
