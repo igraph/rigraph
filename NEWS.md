@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# igraph 1.4.0.9005
+
+## Chore
+
+  - Added Zenodo configuration file.
+
+
 # igraph 1.4.0.9004
 
 ## Documentation
