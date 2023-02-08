@@ -18,7 +18,7 @@ with_mds(...)
 
 \item{dim}{\code{layout_with_mds()} supports dimensions up to the number of nodes
 minus one, but only if the graph is connected; for unconnected graphs, the
-only possible values is 2. This is because \code{merge_coords()} only works in
+only possible value is 2. This is because \code{merge_coords()} only works in
 2D.}
 
 \item{options}{This is currently ignored, as ARPACK is not used any more for
@@ -34,13 +34,17 @@ Multidimensional scaling of some distance matrix defined on the vertices of
 a graph.
 }
 \details{
-\code{layout_with_mds()} uses metric multidimensional scaling for generating the
-coordinates. Multidimensional scaling aims to place points from a higher
-dimensional space in a (typically) 2 dimensional plane, so that the distance
-between the points are kept as much as this is possible.
+\code{layout_with_mds()} uses classical multidimensional scaling (Torgerson scaling)
+for generating the coordinates. Multidimensional scaling aims to place points
+from a higher dimensional space in a (typically) 2 dimensional plane, so that
+the distances between the points are kept as much as this is possible.
 
 By default igraph uses the shortest path matrix as the distances between the
 nodes, but the user can override this via the \code{dist} argument.
+
+Warning: If the graph is symmetric to the exchange of two vertices (as is the
+case with leaves of a tree connecting to the same parent), classical
+multidimensional scaling may assign the same coordinates to these vertices.
 
 This function generates the layout separately for each graph component and
 then merges them via \code{\link[=merge_coords]{merge_coords()}}.
