@@ -72,6 +72,7 @@
 #' graph plotting functions.
 #' @method plot igraph
 #' @export
+#' @rawNamespace export(plot.igraph)
 #' @family plot
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot polygon text par
