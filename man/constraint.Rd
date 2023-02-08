@@ -33,7 +33,7 @@ constraint, \eqn{C_i}{C[i]}, of vertex \eqn{i}'s ego network
   C[i] = sum( [sum( p[i,j] + p[i,q] p[q,j], q in V[i], q != i,j )]^2, j in
   V[i], j != i).
 }
-for a graph of order (ie. number of vertices) \eqn{N}, where
+for a graph of order (i.e. number of vertices) \eqn{N}, where
 proportional tie strengths are defined as
 \deqn{p_{ij} = \frac{a_{ij}+a_{ji}}{\sum_{k \in V_i \setminus \{i\}}(a_{ik}+a_{ki})},}{
   p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),

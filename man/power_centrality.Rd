@@ -86,7 +86,7 @@ theory motivates use of this measure, you should be very careful to choose a
 decay parameter on a non-ad hoc basis.
 }
 \note{
-This function was ported (ie. copied) from the SNA package.
+This function was ported (i.e. copied) from the SNA package.
 }
 \section{Warning }{
  Singular adjacency matrices cause no end of headaches for

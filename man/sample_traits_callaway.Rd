@@ -42,7 +42,7 @@ traits(...)
 stationary in time.}
 
 \item{pref.matrix}{A matrix giving the preferences of the given vertex
-types. These should be probabilities, ie. numbers between zero and one.}
+types. These should be probabilities, i.e. numbers between zero and one.}
 
 \item{directed}{Logical constant, whether to generate directed graphs.}
 

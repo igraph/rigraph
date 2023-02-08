@@ -42,7 +42,7 @@ bottom. There is one line for each merge (i.e. split) in matrix, the first
 line is the first merge (last split). The communities are identified by
 integer number starting from one. Community ids smaller than or equal to
 \eqn{N}, the number of vertices in the graph, belong to singleton
-communities, ie. individual vertices. Before the first merge we have \eqn{N}
+communities, i.e. individual vertices. Before the first merge we have \eqn{N}
 communities numbered from one to \eqn{N}. The first merge, the first line of
 the matrix creates community \eqn{N+1}, the second merge creates community
 \eqn{N+2}, etc.}

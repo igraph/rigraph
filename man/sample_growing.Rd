@@ -17,7 +17,7 @@ growing(...)
 
 \item{directed}{Logical, whether to create a directed graph.}
 
-\item{citation}{Logical. If \code{TRUE} a citation graph is created, ie. in
+\item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in
 each time step the added edges are originating from the new vertex.}
 
 \item{...}{Passed to \code{sample_growing()}.}

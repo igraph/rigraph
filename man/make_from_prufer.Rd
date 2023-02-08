@@ -3,14 +3,14 @@
 \name{make_from_prufer}
 \alias{make_from_prufer}
 \alias{from_prufer}
-\title{Create an undirected tree graph from its Prufer sequence}
+\title{Create an undirected tree graph from its Prüfer sequence}
 \usage{
 make_from_prufer(prufer)
 
 from_prufer(...)
 }
 \arguments{
-\item{prufer}{The Prufer sequence to convert into a graph}
+\item{prufer}{The Prüfer sequence to convert into a graph}
 
 \item{...}{Passed to \code{make_from_prufer()}}
 }
@@ -18,11 +18,11 @@ from_prufer(...)
 A graph object.
 }
 \description{
-\code{make_from_prufer()} creates an undirected tree graph from its Prufer
+\code{make_from_prufer()} creates an undirected tree graph from its Prüfer
 sequence.
 }
 \details{
-The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
 n-2 numbers, constructed as follows. If the graph has more than two vertices,
 find a vertex with degree one, remove it from the tree and add the label of
 the vertex that it was connected to to the sequence. Repeat until there are
@@ -35,6 +35,6 @@ to_prufer(g)
 
 }
 \seealso{
-\code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prufer sequence
+\code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prüfer sequence
 }
 \keyword{graphs}

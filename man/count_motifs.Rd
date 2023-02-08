@@ -20,7 +20,7 @@ of the motif (the \code{size} argument). By default no cuts are made.}
 \code{count_motifs()} returns  a numeric scalar.
 }
 \description{
-Graph motifs are small connected subgraphs with a well-defined
+Graph motifs are small connected induced subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{
