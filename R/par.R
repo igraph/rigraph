@@ -119,7 +119,7 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     (sparse) matrices. It is recommended, if the user works with
 #'     larger graphs.}
 #'   \item{verbose}{Logical constant, whether igraph functions should
-#'     talk more than minimal. Eg. if `TRUE` then some functions
+#'     talk more than minimal. E.g. if `TRUE` then some functions
 #'     will use progress bars while computing. Defaults to `FALSE`.}
 #'   \item{vertex.attr.comb}{Specifies what to do with the vertex
 #'     attributes if the graph is modified. The default value is

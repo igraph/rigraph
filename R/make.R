@@ -474,10 +474,10 @@ with_graph_ <- function(...) {
 #'   \item{Octahedral, Octahedron}{Platonic solid
 #'     with 6 vertices and 12 edges.}
 #'   \item{Petersen}{A 3-regular graph with 10
-#'     vertices and 15 edges. It is the smallest hypohamiltonian graph, ie. it is
+#'     vertices and 15 edges. It is the smallest hypohamiltonian graph, i.e. it is
 #'     non-hamiltonian but removing any single vertex from it makes it
 #'     Hamiltonian.}
-#'   \item{Robertson}{The unique (4,5)-cage graph, ie. a 4-regular
+#'   \item{Robertson}{The unique (4,5)-cage graph, i.e. a 4-regular
 #'    graph of girth 5. It has 19 vertices and 38 edges.}
 #'   \item{Smallestcyclicgroup}{A smallest nontrivial graph whose automorphism
 #'     group is cyclic. It has 9 vertices and 15 edges.}
@@ -733,7 +733,7 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #' operators. An edge operator is a sequence of \sQuote{`-`} and
 #' \sQuote{`+`} characters, the former is for the edges and the
 #' latter is used for arrow heads. The edges can be arbitrarily long,
-#' ie. you may use as many \sQuote{`-`} characters to \dQuote{draw}
+#' i.e. you may use as many \sQuote{`-`} characters to \dQuote{draw}
 #' them as you like.
 #'
 #' If all edge operators consist of only \sQuote{`-`} characters
@@ -1198,11 +1198,11 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' @param directed Whether to create a directed tree. The edges of the tree are
 #'   oriented away from the root.
 #' @param method The algorithm to use to generate the tree. \sQuote{prufer}
-#'   samples Prufer sequences uniformly and then converts the sampled sequence to
+#'   samples Prüfer sequences uniformly and then converts the sampled sequence to
 #'   a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
 #'   graph to uniformly sampleits spanning trees. (This is also known as Wilson's
 #'   algorithm). The default is \sQuote{lerw}. Note that the method based on
-#'   Prufer sequences does not support directed trees at the moment.
+#'   Prüfer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
 #' @keywords graphs
@@ -1221,21 +1221,21 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 
 ## -----------------------------------------------------------------
 
-#' Create an undirected tree graph from its Prufer sequence
+#' Create an undirected tree graph from its Prüfer sequence
 #'
-#' `make_from_prufer()` creates an undirected tree graph from its Prufer
+#' `make_from_prufer()` creates an undirected tree graph from its Prüfer
 #' sequence.
 #'
-#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+#' The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
 #' n-2 numbers, constructed as follows. If the graph has more than two vertices,
 #' find a vertex with degree one, remove it from the tree and add the label of
 #' the vertex that it was connected to to the sequence. Repeat until there are
 #' only two vertices in the remaining graph.
 #'
-#' @param prufer The Prufer sequence to convert into a graph
+#' @param prufer The Prüfer sequence to convert into a graph
 #' @return A graph object.
 #'
-#' @seealso [to_prufer()] to convert a graph into its Prufer sequence
+#' @seealso [to_prufer()] to convert a graph into its Prüfer sequence
 #' @keywords graphs
 #' @examples
 #'
@@ -1410,7 +1410,7 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' for `m` and `n`.
 #'
 #' De Bruijn graphs have some interesting properties, please see another
-#' source, eg. Wikipedia for details.
+#' source, e.g. Wikipedia for details.
 #'
 #' @aliases graph.de.bruijn
 #' @param m Integer scalar, the size of the alphabet. See details below.
@@ -1455,7 +1455,7 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' possible to transform the string of `v` into the string of `w` by
 #' removing the first letter and appending a letter to it.
 #'
-#' Kautz graphs have some interesting properties, see eg. Wikipedia for
+#' Kautz graphs have some interesting properties, see e.g. Wikipedia for
 #' details.
 #'
 #' @aliases graph.kautz

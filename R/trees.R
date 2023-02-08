@@ -36,22 +36,22 @@
 #' @export
 is_tree <- is_tree
 
-#' Convert a tree graph to its Prufer sequence
+#' Convert a tree graph to its Prüfer sequence
 #'
-#' `to_prufer()` converts a tree graph into its Prufer sequence.
+#' `to_prufer()` converts a tree graph into its Prüfer sequence.
 #'
-#' The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+#' The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
 #' n-2 numbers, constructed as follows. If the graph has more than two vertices,
 #' find a vertex with degree one, remove it from the tree and add the label of
 #' the vertex that it was connected to to the sequence. Repeat until there are
 #' only two vertices in the remaining graph.
 #'
-#' @param graph The graph to convert to a Prufer sequence
-#' @return The Prufer sequence of the graph, represented as a numeric vector of
+#' @param graph The graph to convert to a Prüfer sequence
+#' @return The Prüfer sequence of the graph, represented as a numeric vector of
 #'   vertex IDs in the sequence.
 #'
 #' @seealso [make_from_prufer()] to construct a graph from its
-#' Prufer sequence
+#' Prüfer sequence
 #' @keywords graphs
 #' @examples
 #'

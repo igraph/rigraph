@@ -64,7 +64,7 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' Is a degree sequence graphical?
 #'
 #' Determine whether the given vertex degrees (in- and out-degrees for
-#' directed graphs) can be realized in a graph.
+#' directed graphs) can be realized by a graph.
 #'
 #' The classical concept of graphicality assumes simple graphs. This function
 #' can perform the check also when self-loops, multi-edges, or both are allowed

@@ -242,7 +242,7 @@ as_adj <- as_adjacency_matrix
 #' @aliases get.edgelist
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
-#'   names (ie. the `name` vertex attribute) if they exist or numeric
+#'   names (i.e. the `name` vertex attribute) if they exist or numeric
 #'   vertex ids.
 #' @return A `gsize(graph)` by 2 numeric matrix.
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]

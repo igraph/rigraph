@@ -34,7 +34,7 @@
 #' @aliases running.mean
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
-#'   ie. smaller than the length of `v`.
+#'   i.e. smaller than the length of `v`.
 #' @return A numeric vector of length `length(v)-binwidth+1`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family other

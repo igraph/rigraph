@@ -498,7 +498,7 @@ print_all <- function(object, ...) {
 #' @param vertex.attributes Logical constant, whether to print vertex
 #'   attributes.
 #' @param edge.attributes Logical constant, whether to print edge attributes.
-#' @param names Logical constant, whether to print symbolic vertex names (ie.
+#' @param names Logical constant, whether to print symbolic vertex names (i.e.
 #'   the `name` vertex attribute) or vertex ids.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.

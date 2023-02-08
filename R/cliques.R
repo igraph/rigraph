@@ -21,7 +21,7 @@
 
 
 
-#' Functions to find cliques, ie. complete subgraphs in a graph
+#' Functions to find cliques, i.e. complete subgraphs in a graph
 #'
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
@@ -50,7 +50,7 @@
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
-#'   `NULL` means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
@@ -193,7 +193,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 clique_num <- clique_num
 
 
-#' Functions to find weighted cliques, ie. weighted complete subgraphs in a graph
+#' Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph
 #'
 #' These functions find all, the largest or all the maximal weighted cliques in
 #' an undirected graph. The weight of a clique is the sum of the weights of its
@@ -221,7 +221,7 @@ clique_num <- clique_num
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
-#'   `NULL` means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
 #' @param vertex.weights Vertex weight vector. If the graph has a `weight`
