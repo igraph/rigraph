@@ -509,6 +509,7 @@ print_all <- function(object, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @export
 #' @method print igraph
+#' @rawNamespace export(print.igraph)
 #' @family print
 #' @keywords graphs
 #' @examples
