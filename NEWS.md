@@ -1,4 +1,13 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# igraph 1.4.0.9006
+
+## Documentation
+
+  - Improve layout\_with\_mds() docs.
+
+  - Documentation polish.
+
 
 # igraph 1.4.0.9005
 
