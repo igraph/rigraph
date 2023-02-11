@@ -18,7 +18,7 @@ start argument is TRUE."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,7 +155,8 @@ Notes in Computer Science</em> 4503, 1--13. Springer-Verlag, Berlin Heidelberg
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## We are not running these examples any more, because they</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## We are not running these examples any more, because they</span></span></span>
 <span class="r-in"><span><span class="co">## take a long time (~15 seconds) to run and this is against the CRAN</span></span></span>
 <span class="r-in"><span><span class="co">## repository policy. Copy and paste them by hand to your R prompt if</span></span></span>
 <span class="r-in"><span><span class="co">## you want to run them.</span></span></span>
@@ -164,77 +165,14 @@ Notes in Computer Science</em> 4503, 1--13. Springer-Verlag, Berlin Heidelberg
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">10</span>, p <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">10</span>, p <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hrg</span> <span class="op">&lt;-</span> <span class="fu">fit_hrg</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hrg</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hierarchical random graph, at level 3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g1        p=   0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '- g12    p=0.44  7 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    '- g14 p=0.12  2  3  6  5  4  1  10 9  8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '- g17    p=0.78  20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    '- g13 p=0.35  15 14 19 11 18 17 12 16 13</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## The consensus tree for it</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="consensus_tree.html">consensus_tree</a></span><span class="op">(</span><span class="va">g</span>, hrg <span class="op">=</span> <span class="va">hrg</span>, start <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $parents</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 20 20 20 20 20 20 20 20 20 20 21 21 21 21 21 21 21 21 21 21 22 22 -1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $weights</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  8793  9831 10000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg$left</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -12  -8  -5   0  -7 -10  10 -15   8 -11  11 -14  -3  -2 -18  -4 -13 -16  12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg$right</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -17   1  14  -9  13  17  18   2   9  16 -19   6  -6   7   5   3  19   4  15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg$prob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.0000000 0.5714286 0.6666667 0.0000000 0.0000000 1.0000000 1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] 0.0000000 1.0000000 1.0000000 0.0000000 0.4444444 0.3500000 0.1250000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] 0.6000000 1.0000000 0.7777778 0.7500000 1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg$edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0 4 2 0 0 4 1 0 1 3 0 4 7 1 3 3 7 3 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg$vertices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 20  8  4  3  3  5  2  7  2  4  3 10  9  9  6  4 10  5  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Prediction of missing edges</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="make_full_graph.html">make_full_graph</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="path.html">path</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="predict_edges.html">predict_edges</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $edges</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]    5    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]    4    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]    2    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,]    1    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]    3    5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]    4    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,]    1    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]    2    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,]    3    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,]    2    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,]    4    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,]    2    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,]    4    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,]    1    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,]    3    8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,]    3    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,]    1    7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $prob</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0.272648783 0.005001911 0.004942516 0.004785216 0.004763794 0.004210195</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.004154408 0.004057616 0.003996802 0.003893010 0.003857092 0.003716136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] 0.003672164 0.003657983 0.003624458 0.003354700 0.003288983</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hrg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hierarchical random graph, at level 3:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> g1        p=   0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '- g5     p=   1  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    '- g7  p=   1  4 1 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> '- g3     p=0.67  5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    '- g2  p=   1  8 6 7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

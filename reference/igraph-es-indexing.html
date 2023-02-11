@@ -12,7 +12,7 @@ with some extras."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -207,52 +207,55 @@ examples below.</p>
 <span class="r-in"><span><span class="co"># Special operators for indexing based on graph structure</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, power <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%--%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 7b2bb89:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;3 5-&gt;3 6-&gt;3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 9867cf0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;1 5-&gt;1 6-&gt;1</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span> <span class="op">%-&gt;%</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from 7b2bb89:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;3 5-&gt;3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/99 edges from 9867cf0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;1 5-&gt;1</span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">%&lt;-%</span> <span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 7b2bb89:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;3 5-&gt;3 6-&gt;3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/99 edges from 9867cf0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2-&gt;1 3-&gt;2 4-&gt;1 5-&gt;1 6-&gt;1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -----------------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># The edges along the diameter</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">100</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="diameter.html">get_diameter</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span>, path <span class="op">=</span> <span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 11/99 edges from e411218:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 60--71 22--60 21--22  3--21  2-- 3  1-- 2  1-- 6  6--11 11--18 18--29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 29--74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 11/99 edges from 5dd560e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 20--46 16--20 11--16  9--11  1-- 9  1-- 3  3--17 17--45 45--63 63--81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] 81--82</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># -----------------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Select edges based on attributes</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_gnp.html">sample_gnp</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">3</span> <span class="op">/</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="set_edge_attr.html">set_edge_attr</a></span><span class="op">(</span><span class="st">"weight"</span>, value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">gsize</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[[</span><span class="va">weight</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 13/21 edges from ed55ad0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 16/32 edges from 5c88443:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    tail head tid hid     weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     1    2   1   2 -0.3789796</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     6    7   6   7 -0.7563029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     4   11   4  11 -2.5056914</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     7   11   7  11 -1.1602278</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10    8   12   8  12 -0.9959381</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12    2   15   2  15 -1.6408910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14   13   16  13  16 -0.9259612</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   11   17  11  17 -0.5157269</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17    4   18   4  18 -0.6436654</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   11   18  11  18 -0.4367438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   16   18  16  18 -0.6056577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   17   18  17  18 -1.4635844</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   10   19  10  19 -1.0354551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     3    6   3   6 -2.1691432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     3    7   3   7 -1.1377713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     7    9   7   9 -0.6199144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     8   10   8  10 -1.5413736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    7   11   7  11 -0.5745179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    9   14   9  14 -1.2127357</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16    2   16   2  16 -1.1184588</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17    4   16   4  16 -0.4535614</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19    4   17   4  17 -1.3225454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   15   17  15  17 -0.1472086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22    1   18   1  18 -1.5822800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23    5   18   5  18 -0.5166923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   12   18  12  18 -1.7821347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   14   18  14  18 -1.0942744</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26    6   19   6  19 -0.6835354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30    6   20   6  20 -1.0439761</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Indexing with a variable whose name matches the name of an attribute</span></span></span>
 <span class="r-in"><span><span class="co"># may fail; use .env to force the name lookup in the parent environment</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">2</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">[</span><span class="va">.env</span><span class="op">$</span><span class="va">x</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/21 edge from ed55ad0:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3--4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/32 edge from 5c88443:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3--6</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

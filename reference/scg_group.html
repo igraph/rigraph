@@ -12,7 +12,7 @@ exactly, or approximately but faster."><!-- mathjax --><script src="https://cdnj
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -172,7 +172,7 @@ Matrix Analysis and Applications</em>, 2008.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co">## We are not running these examples any more, because they</span></span></span>
 <span class="r-in"><span><span class="co">## take a long time to run and this is against the CRAN repository</span></span></span>
 <span class="r-in"><span><span class="co">## policy. Copy and paste them by hand to your R prompt if</span></span></span>
@@ -187,7 +187,6 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu">scg_group</span><span class="op">(</span><span class="va">V</span>, nt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">gr</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">col</span>, main <span class="op">=</span> <span class="st">"Group size"</span>, xlab <span class="op">=</span> <span class="st">"group"</span>, ylab <span class="op">=</span> <span class="st">"size"</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="scg_group-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## comparison with the grouping obtained by kmeans</span></span></span>
 <span class="r-in"><span><span class="co">## for a partition of same size</span></span></span>
@@ -205,7 +204,6 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span>  xlab <span class="op">=</span> <span class="st">"1st eigenvector"</span>,</span></span>
 <span class="r-in"><span>  ylab <span class="op">=</span> <span class="st">"2nd eigenvector"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="scg_group-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## kmeans disregards the first eigenvector as it</span></span></span>
 <span class="r-in"><span><span class="co">## spreads a much smaller range of values than the second one</span></span></span>
@@ -216,9 +214,8 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span><span class="va">gr.true</span> <span class="op">&lt;-</span> <span class="fu">scg_group</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gr.km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">300</span><span class="op">)</span><span class="op">$</span><span class="va">cluster</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="scg_eps.html">scg_eps</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">gr.true</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2306901</span>
 <span class="r-in"><span><span class="fu"><a href="scg_eps.html">scg_eps</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">gr.km</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4599422</span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

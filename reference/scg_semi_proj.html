@@ -12,7 +12,7 @@ partition of the vertices."><!-- mathjax --><script src="https://cdnjs.cloudflar
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,19 +162,18 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span><span class="va">lr</span> <span class="op">&lt;-</span> <span class="fu">scg_semi_proj</span><span class="op">(</span><span class="va">memb</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># In the symmetric case L = R</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">tcrossprod</a></span><span class="op">(</span><span class="va">lr</span><span class="op">$</span><span class="va">R</span><span class="op">)</span> <span class="co"># same as lr$R %*% t(lr$R)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 x 5 sparse Matrix of class "dsCMatrix"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1 . . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] . 1 . . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] . . 1 . .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] . . . 1 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] . . . . 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 x 4 sparse Matrix of class "dsCMatrix"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1 . . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] . 1 . .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] . . 1 .</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] . . . 1</span>
 <span class="r-in"><span><span class="va">P</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">crossprod</a></span><span class="op">(</span><span class="va">lr</span><span class="op">$</span><span class="va">R</span><span class="op">)</span> <span class="co"># same as t(lr$R) %*% lr$R</span></span></span>
 <span class="r-in"><span><span class="co"># P is an orthogonal projector</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/isSymmetric.html" class="external-link">isSymmetric</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">P</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">P</span> <span class="op">-</span> <span class="va">P</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.301929e-31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.5206e-31</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## use L and R to coarse-grain the graph Laplacian</span></span></span>
 <span class="r-in"><span><span class="va">lr</span> <span class="op">&lt;-</span> <span class="fu">scg_semi_proj</span><span class="op">(</span><span class="va">memb</span>, mtype <span class="op">=</span> <span class="st">"laplacian"</span><span class="op">)</span></span></span>
@@ -182,7 +181,7 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span><span class="va">Lt</span> <span class="op">&lt;-</span> <span class="va">lr</span><span class="op">$</span><span class="va">L</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">L</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">lr</span><span class="op">$</span><span class="va">R</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## or better lr$L %*% tcrossprod(L,lr$R)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">Lt</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.110223e-16 0.000000e+00 0.000000e+00 5.551115e-17 0.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.110223e-16 1.110223e-16 1.110223e-16 1.110223e-16</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

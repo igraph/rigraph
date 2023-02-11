@@ -12,7 +12,7 @@ simulated annealing."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,26 +112,26 @@ unpopulated.</p></dd>
 <dt>parupdate</dt>
 <dd><p>Logical constant, whether to update the spins of the
 vertices in parallel (synchronously) or not. This argument is ignored if the
-second form of the function is used (i.e. the ‘<code>vertex</code>’ argument
+second form of the function is used (ie. the ‘<code>vertex</code>’ argument
 is present). It is also not implemented in the “neg” implementation.</p></dd>
 
 
 <dt>start.temp</dt>
 <dd><p>Real constant, the start temperature.  This argument is
-ignored if the second form of the function is used (i.e. the
+ignored if the second form of the function is used (ie. the
 ‘<code>vertex</code>’ argument is present).</p></dd>
 
 
 <dt>stop.temp</dt>
 <dd><p>Real constant, the stop temperature. The simulation
 terminates if the temperature lowers below this level.  This argument is
-ignored if the second form of the function is used (i.e. the
+ignored if the second form of the function is used (ie. the
 ‘<code>vertex</code>’ argument is present).</p></dd>
 
 
 <dt>cool.fact</dt>
 <dd><p>Cooling factor for the simulated annealing.  This argument
-is ignored if the second form of the function is used (i.e. the
+is ignored if the second form of the function is used (ie. the
 ‘<code>vertex</code>’ argument is present).</p></dd>
 
 
@@ -174,12 +174,12 @@ is ignored if the ‘orig’ implementation is chosen.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>If the <code>vertex</code> argument is not given, i.e. the first form is
+<p>If the <code>vertex</code> argument is not given, ie. the first form is
 used then a <code>cluster_spinglass()</code> returns a
 <code><a href="communities.html">communities()</a></code> object.</p>
 
 
-<p>If the <code>vertex</code> argument is present, i.e. the second form is used then a
+<p>If the <code>vertex</code> argument is present, ie. the second form is used then a
 named list is returned with the following components:</p>
 <dl><dt>community</dt>
 <dd><p>Numeric vector giving the ids of the vertices in the same
@@ -203,7 +203,7 @@ community of <code>vertex</code> and the rest of the graph.</p></dd>
     <p>This function tries to find communities in a graph. A community is a set of
 nodes with many edges inside the community and few edges between outside it
 (i.e. between the community itself and the rest of the graph.)</p>
-<p>This idea is reversed for edges having a negative weight, i.e. few negative
+<p>This idea is reversed for edges having a negative weight, ie. few negative
 edges inside a community and many negative edges between communities. Note
 that only the ‘neg’ implementation supports negative edge weights.</p>
 <p>The <code>spinglass.cummunity</code> function can solve two problems related to

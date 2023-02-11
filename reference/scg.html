@@ -12,7 +12,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -275,7 +275,7 @@ Matrix Analysis and Applications</em>, 2008.
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co">## We are not running these examples any more, because they</span></span></span>
 <span class="r-in"><span><span class="co">## take a long time (~20 seconds) to run and this is against the CRAN</span></span></span>
 <span class="r-in"><span><span class="co">## repository policy. Copy and paste them by hand to your R prompt if</span></span></span>
@@ -303,15 +303,12 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span>  vertex.color <span class="op">=</span> <span class="va">col</span>, vertex.size <span class="op">=</span> <span class="fl">20</span> <span class="op">*</span> <span class="va">vsize</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">vsize</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vertex.label <span class="op">=</span> <span class="cn">NA</span>, layout <span class="op">=</span> <span class="va">layout_with_kk</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="scg-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## SCG of real-world network</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://igraph.org" class="external-link">igraphdata</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">immuno</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">immuno</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 46d8c3f U--- 1316 6300 -- immunoglobuline network</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), Citation (g/c), Author (g/c)</span>
 <span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">immuno</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">interv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">50</span>, <span class="fl">25</span>, <span class="fl">12</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">cg</span> <span class="op">&lt;-</span> <span class="fu">scg</span><span class="op">(</span><span class="va">immuno</span>,</span></span>
@@ -329,16 +326,6 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"interv"</span>, <span class="st">"lambda_i"</span>, <span class="st">"lambda_tilde_i"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N-1"</span>, <span class="st">"N-2"</span>, <span class="st">"N-3"</span>, <span class="st">"N-4"</span>, <span class="st">"N-5"</span>, <span class="st">"N-6"</span>, <span class="st">"N-7"</span>, <span class="st">"N-8"</span>, <span class="st">"N-9"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     interv   lambda_i lambda_tilde_i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-1 100+0i 0.00221+0i     0.00223+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-2 100+0i 0.00276+0i     0.00280+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-3  50+0i 0.03602+0i     0.03694+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-4  25+0i 0.03830+0i     0.04094+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-5  12+0i 0.07111+0i     0.07765+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-6   6+0i 0.07850+0i     0.08783+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-7   3+0i 0.20293+0i     0.20870+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-8   2+0i 0.21540+0i     0.34227+0i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> N-9   2+0i 0.22132+0i     0.41807+0i</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## use SCG to get the communities</span></span></span>
 <span class="r-in"><span><span class="va">com</span> <span class="op">&lt;-</span> <span class="fu">scg</span><span class="op">(</span><span class="fu"><a href="laplacian_matrix.html">laplacian_matrix</a></span><span class="op">(</span><span class="va">immuno</span><span class="op">)</span>, ev <span class="op">=</span> <span class="va">n</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, nt <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="va">groups</span></span></span>
@@ -365,8 +352,8 @@ Matrix Analysis and Applications</em>, 2008.
 <span class="r-in"><span>  layout <span class="op">=</span> <span class="va">layout.cg</span>, vertex.size <span class="op">=</span> <span class="fl">15</span> <span class="op">*</span> <span class="va">vsize</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">vsize</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vertex.color <span class="op">=</span> <span class="va">col</span><span class="op">[</span><span class="va">com.cg</span><span class="op">]</span>, vertex.label <span class="op">=</span> <span class="cn">NA</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="scg-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">op</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
