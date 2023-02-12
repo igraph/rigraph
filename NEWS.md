@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.0.9007
+
+## Bug fixes
+
+  - Remove C++11 specification because of CRAN pretests.
+
+  - Fixing CRAN pretest issues.
+
+## Chore
+
+  - Updated vendored C core.
+
+  - Finish upgrade to C++17.
+
+  - Updates NEWS.md with distances(algorithm='johnson') fix.
+
+  - Updated NEWS.md based on feedback from @szhorvat.
+
+  - Updated cran-comments and NEWS.
+
+
 # igraph 1.4.0.9006
 
 ## Documentation
