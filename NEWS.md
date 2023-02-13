@@ -1,4 +1,106 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# igraph 1.4.0.9007
+
+## Bug fixes
+
+  - Remove C++11 specification because of CRAN pretests.
+
+  - Fixing CRAN pretest issues.
+
+## Chore
+
+  - Updated vendored C core.
+
+  - Finish upgrade to C++17.
+
+  - Updates NEWS.md with distances(algorithm='johnson') fix.
+
+  - Updated NEWS.md based on feedback from @szhorvat.
+
+  - Updated cran-comments and NEWS.
+
+
+# igraph 1.4.0.9006
+
+## Documentation
+
+  - Improve layout\_with\_mds() docs.
+
+  - Documentation polish.
+
+
+# igraph 1.4.0.9005
+
+## Chore
+
+  - Added Zenodo configuration file.
+
+
+# igraph 1.4.0.9004
+
+## Documentation
+
+  - Fix is\_matching() title (#667).
+
+<!-- end list -->
+
+  - docs: fix is\_matching() title
+
+  - simplify twice
+
+  - :tree:
+
+  - wrong branch\!\!
+
+## Uncategorized
+
+  - Merge pull request #663 from maelle/pkg-man-page.
+
+make package manual page internal
+
+
+# igraph 1.4.0.9003
+
+## Chore
+
+  - Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
+
+
+# igraph 1.4.0.9002
+
+## Continuous integration
+
+- Testing what happens in CI if I switch SystemRequirements to C++17 to make CRAN happy.
+
+
+# igraph 1.4.0.9001
+
+- Same as previous version.
+
+
+# igraph 1.4.0.9000
+
+## Bug fixes
+
+- Don't ignore build/ when building the package because the vignette index is built there.
+
+## Chore
+
+- NEWS.md cleanup.
+
+## Testing
+
+- Skip plot test entirely on R-devel.
+
+## teset
+
+- Use separate plotting test for R 4.2 and R 4.3.
+
+## doc
+
+- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
+
 
 # igraph 1.4.0
 
@@ -1494,5 +1596,3 @@ After about a year of development this is the first "official" release
 of the igraph library. This release should be considered as beta
 software, but it should be useful in general. Please send your
 questions and comments.
-
-
