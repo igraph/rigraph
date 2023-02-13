@@ -216,11 +216,11 @@ pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 
 # We have everything, here we go
 
-build: pre_build
+build:
 	if ! [ -f src/config.h ]; then ./configure; fi
 	R CMD INSTALL -l "/tmp" --no-configure --no-byte-compile .
 
-docs: pre_build
+docs:
 	tools/builddocs.sh
 
 igraph: igraph_$(VERSION).tar.gz
