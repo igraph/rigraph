@@ -1,6 +1,6 @@
-#line 2 "src/core/io/dl-lexer.c"
+#line 1 "src/core/io/dl-lexer.c"
 
-#line 4 "src/core/io/dl-lexer.c"
+#line 3 "src/core/io/dl-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -823,10 +823,10 @@ static const flex_int16_t yy_chk[318] =
 #endif
 #define stdout 0
 #endif
-#line 827 "src/core/io/dl-lexer.c"
+#line 826 "src/core/io/dl-lexer.c"
 #define YY_NO_INPUT 1
 
-#line 830 "src/core/io/dl-lexer.c"
+#line 829 "src/core/io/dl-lexer.c"
 
 #define INITIAL 0
 #define LABELM 1
@@ -917,7 +917,7 @@ FILE *yyget_out ( yyscan_t yyscanner );
 
 void yyset_out  ( FILE * _out_str , yyscan_t yyscanner );
 
-			yy_size_t yyget_leng ( yyscan_t yyscanner );
+			int yyget_leng ( yyscan_t yyscanner );
 
 char *yyget_text ( yyscan_t yyscanner );
 
@@ -1115,7 +1115,7 @@ YY_DECL
 #line 80 "src/core/io/dl-lexer.l"
 
 
-#line 1119 "src/core/io/dl-lexer.c"
+#line 1118 "src/core/io/dl-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1323,7 +1323,7 @@ YY_RULE_SETUP
 #line 138 "src/core/io/dl-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1327 "src/core/io/dl-lexer.c"
+#line 1326 "src/core/io/dl-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2182,7 +2182,7 @@ FILE *yyget_out  (yyscan_t yyscanner)
 /** Get the length of the current token.
  * @param yyscanner The scanner object.
  */
-yy_size_t yyget_leng  (yyscan_t yyscanner)
+int yyget_leng  (yyscan_t yyscanner)
 {
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
     return yyleng;
