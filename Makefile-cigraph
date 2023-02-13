@@ -214,6 +214,9 @@ src/Makevars.win src/Makevars.ucrt src/Makevars.in: src/%: tools/stimulus/% \
 pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 	$(CGEN) $(RAY2) $(ARPACK2) $(UUID2)
 
+clean:
+	rm -rf src/core src/vendor src/include src/Makevars.in src/Makevars.ucrt src/Makevars.win src/config.h.in src/init.c src/rinterface.c R/aaa-auto.R
+
 .PHONY: all igraph force clean check check-cran check-rhub check-links install test
 
 .NOTPARALLEL:
