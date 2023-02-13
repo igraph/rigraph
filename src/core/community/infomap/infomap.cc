@@ -29,14 +29,15 @@
    homePage: http://www.irit.fr/~Emmanuel.Navarro/
 */
 
-#include <cmath>
+
 #include "igraph_interface.h"
 #include "igraph_community.h"
 #include "core/interruption.h"
 
-
 #include "infomap_Node.h"
 #include "infomap_Greedy.h"
+
+#include <math.h>
 
 /****************************************************************************/
 int infomap_partition(FlowGraph * fgraph, bool rcall) {
@@ -286,7 +287,7 @@ int igraph_community_infomap(const igraph_t * graph,
             igraph_real_t minweight = igraph_vector_min(e_weights);
             if (minweight < 0) {
                 IGRAPH_ERROR("Edge weights must not be negative.", IGRAPH_EINVAL);
-            } else if (isnan(minweight)) {
+            } else if (igraph_is_nan(minweight)) {
                 IGRAPH_ERROR("Edge weights must not be NaN values.", IGRAPH_EINVAL);
             }
         }
@@ -301,7 +302,7 @@ int igraph_community_infomap(const igraph_t * graph,
             igraph_real_t minweight = igraph_vector_min(v_weights);
             if (minweight <= 0) {
                 IGRAPH_ERROR("Vertex weights must be positive.", IGRAPH_EINVAL);
-            } else if (isnan(minweight)) {
+            } else if (igraph_is_nan(minweight)) {
                 IGRAPH_ERROR("Vertex weights must not be NaN values.", IGRAPH_EINVAL);
             }
         }
