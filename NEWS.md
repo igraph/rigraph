@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.0.9008
+
+## Bug fixes
+
+  - Fix warning about yyget\_leng returning wrong type when using LTO (#676).
+
+  - Update C core.
+
+  - Fixes compiling with GCC version 5 and earlier
+
+## Chore
+
+  - Avoid submodules for building igraph (#674).
+
+  - Makevars cleanup (#671).
+
+## Documentation
+
+  - Update troubleshooting info.
+
+## Uncategorized
+
+  - Merge branch 'cran-1.4.0'.
+
+
 # igraph 1.4.0.9007
 
 ## Bug fixes
