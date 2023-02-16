@@ -58,7 +58,6 @@ reference:
   - has_concept("vertex and edge sequences")
   - has_concept("vertex and edge sequence operations")
 - title: Utilities
-- subtitle: Utilities
 - subtitle: Graph ID, comparison, name, weight
 - contents:
   - graph_id
@@ -80,7 +79,10 @@ reference:
   - printr
   - has_concept("print")
   - has_concept("printer callbacks")
-- subtitle: Misc
+- subtitle: Latent position vector samplers
+- contents:
+  - has_concept("latent position vector samplers")
+- subtitle: Miscellaneous
 - contents:
   - convex_hull
   - running_mean
@@ -135,7 +137,7 @@ reference:
   - simplify_and_colorize
   - has_concept("graph automorphism")
   - permute
-- subtitle: Graph matching
+- title: Graph matching
 - contents:
   - has_concept("sgm")
 - title: Maximum flow and connectivity
@@ -181,9 +183,6 @@ reference:
 - title: Demo
 - contents:
   - has_concept("demo")
-- title: Latent position vector samplers
-- contents:
-  - has_concept("latent position vector samplers")
 - title: I/O read/write files
 - contents:
   - has_concept("foreign")
