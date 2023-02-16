@@ -43,6 +43,7 @@ reference:
 - subtitle: Graph coloring
 - contents:
   - has_concept("coloring")
+# The following are mostly about programming rather than analysis
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
@@ -53,6 +54,13 @@ reference:
 - subtitle: Rewiring functions
 - contents:
   - has_concept("rewiring functions")
+- title: Vertex, edge and graph attributes
+- contents:
+  - has_concept("attributes")
+- title: Vertex and edge sequences
+- contents:
+  - has_concept("vertex and edge sequences")
+  - has_concept("vertex and edge sequence operations")
 - title: Utilities
 - subtitle: Utilities
 - subtitle: Graph ID, comparison, name, weight
@@ -82,6 +90,7 @@ reference:
   - running_mean
   - sample_seq
   - fit_power_law
+# [[[ network analysis start
 - title: Structural properties
 - contents:
   - has_concept("structural.properties")
@@ -145,43 +154,9 @@ reference:
 - title: Graph cycles
 - contents:
   - has_concept("cycles")
-- title: Processes on graphs
-- contents:
-  - has_concept("processes")
-  - has_concept("random_walk")
-- title: Vertex, edge and graph attributes
-- contents:
-  - has_concept("attributes")
-- title: Cliques
-- contents:
-  - has_concept("cliques")
-  - has_concept("glet")
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Graphical degree sequences
-- contents:
-  - has_concept("graphical degree sequences")
-- title: Demo
-- contents:
-  - has_concept("demo")
-- title: Latent position vector samplers
-- contents:
-  - has_concept("latent position vector samplers")
-- title: I/O Read/Write Files
-- contents:
-  - has_concept("foreign")
-- title: Hierarchical random graph functions
-- contents:
-  - has_concept("hierarchical random graph functions")
-- title: Vertex and edge sequences
-- contents:
-  - has_concept("vertex and edge sequences")
-  - has_concept("vertex and edge sequence operations")
-- title: Functions for manipulating graph structure
-- contents:
-  - has_concept("functions for manipulating graph structure")
-
 - title: Scan statistics
 - contents:
   - has_concept("scan statistics")
@@ -192,6 +167,29 @@ reference:
 - contents:
   - has_concept("embedding")
   - embed_laplacian_matrix
+- title: Hierarchical random graph functions
+- contents:
+  - has_concept("hierarchical random graph functions")
+# network analysis end, we keep these sections together ]]]
+# the following two are also "scientific functions" (not "programming functions"),
+# but they do not compute a result for a graph, like in the previous sections
+- title: Graphical degree sequences
+- contents:
+  - has_concept("graphical degree sequences")
+- title: Processes on graphs
+- contents:
+  - has_concept("processes")
+  - has_concept("random_walk")
+# -----
+- title: Demo
+- contents:
+  - has_concept("demo")
+- title: Latent position vector samplers
+- contents:
+  - has_concept("latent position vector samplers")
+- title: I/O Read/Write Files
+- contents:
+  - has_concept("foreign")
 - title: Interactive functions
 - contents:
   - has_concept("socnet")
