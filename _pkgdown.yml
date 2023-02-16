@@ -13,6 +13,9 @@ reference:
   - starts_with("make_")
   - realize_degseq
   - has_concept("deterministic constructors")
+- subtitle: "Stochastic constructors -- Random graph models (games)"
+- contents:
+  - has_concept("games")
 - subtitle: Constructor modifiers
 - contents:
   - has_concept("constructor modifiers")
@@ -21,9 +24,6 @@ reference:
   - as.igraph
   - graph_from_lcf
   - graph_
-- subtitle: "Random graph models (games)"
-- contents:
-  - has_concept("games")
 - subtitle: Adjacency matrices
 - contents:
   - has_concept("adjacency")
