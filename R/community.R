@@ -2549,4 +2549,5 @@ communities <- groups.communities
 #' print(g2, g = TRUE, v = TRUE, e = TRUE)
 #'
 #' @export
+#' @family functions for manipulating graph structure
 contract <- contract

@@ -162,6 +162,7 @@ igraph.i.spMatrix <- function(M) {
 #' @param seed Ignored.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @family other
+#' @keywords internal
 #' @export
 srand <- function(seed) {
   warning(

@@ -108,6 +108,31 @@ g <- connect(g, 2)
 
 }
 \seealso{
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference.igraph}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{simplify}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
+
 Other structural.properties: 
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
@@ -184,5 +209,6 @@ Other structural.properties:
 Gabor Csardi \email{csardi.gabor@gmail.com}, the first version was
 done by Vincent Matossian
 }
+\concept{functions for manipulating graph structure}
 \concept{structural.properties}
 \keyword{graphs}

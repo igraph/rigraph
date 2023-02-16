@@ -62,6 +62,8 @@ Other functions for manipulating graph structure:
 \code{\link{add_vertices}()},
 \code{\link{complementer}()},
 \code{\link{compose}()},
+\code{\link{connect}()},
+\code{\link{contract}()},
 \code{\link{delete_edges}()},
 \code{\link{delete_vertices}()},
 \code{\link{difference.igraph}()},
@@ -72,8 +74,10 @@ Other functions for manipulating graph structure:
 \code{\link{intersection.igraph}()},
 \code{\link{intersection}()},
 \code{\link{path}()},
+\code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
+\code{\link{simplify}()},
 \code{\link{union}()},
 \code{\link{vertex}()}
 }

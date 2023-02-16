@@ -821,6 +821,7 @@ canonical_permutation <- canonical_permutation
 #' E(g2)$weight
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
+#' @family functions for manipulating graph structure
 permute <- permute
 
 
