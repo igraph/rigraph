@@ -54,7 +54,7 @@ igraph.pars.set.verbose <- function(verbose) {
         stop("tcltk package not available")
       }
     }
-    .Call(C_R_igraph_set_verbose, verbose)
+    .Call(C_R_igraph_set_verbose, TRUE)
   } else {
     stop("'verbose' should be a logical or character scalar")
   }
