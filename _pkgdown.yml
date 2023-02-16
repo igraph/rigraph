@@ -124,7 +124,7 @@ reference:
 - subtitle: Centrality measures
 - contents:
   - has_concept("centrality")
-- title: Centralization related
+- subtitle: Centralization
 - contents:
   - has_concept("centralization related")
 - title: Graph motifs and subgraphs
