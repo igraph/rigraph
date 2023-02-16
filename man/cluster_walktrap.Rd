@@ -75,7 +75,7 @@ vector, merge matrix, modularity score, etc.
 and \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection
 methods.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

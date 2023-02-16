@@ -76,7 +76,7 @@ sample_bipartite(10, 5, type = "Gnm", m = 20, directed = TRUE, mode = "all")
 \seealso{
 \code{\link[=sample_gnp]{sample_gnp()}} and \code{\link[=sample_gnm]{sample_gnm()}} for the unipartite version.
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_correlated_gnp}()},
@@ -102,7 +102,7 @@ Random graph models (games)
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_correlated_gnp_pair}()},
 \code{\link{sample_correlated_gnp}()},

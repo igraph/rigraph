@@ -70,7 +70,7 @@ Rev E} 76, 036106. (2007)
 \code{\link[=cluster_spinglass]{cluster_spinglass()}}, \code{\link[=cluster_louvain]{cluster_louvain()}} and
 \code{\link[=cluster_leiden]{cluster_leiden()}} for other community detection methods.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

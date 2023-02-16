@@ -75,7 +75,7 @@ Martin Hoefer, Zoran Nikoloski, Dorothea Wagner: On Modularity Clustering,
 \code{\link[=modularity]{modularity()}}. See also \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}} for a
 fast greedy optimizer.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

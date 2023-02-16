@@ -110,7 +110,7 @@ methods.
 See \code{\link[=communities]{communities()}} for extracting the results of the community
 detection.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_fast_greedy}()},
 \code{\link{cluster_fluid_communities}()},

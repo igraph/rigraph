@@ -72,7 +72,7 @@ conference on Knowledge discovery in data mining}, 177--187, 2005.
 \code{\link[=barabasi.game]{barabasi.game()}} for the basic preferential attachment
 model.
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

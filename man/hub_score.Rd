@@ -64,7 +64,7 @@ as IBM Research Report RJ 10076, May 1997.
 \code{\link[=page_rank]{page_rank()}} for the Page Rank scores. \code{\link[=arpack]{arpack()}} for
 the underlining machinery of the computation.
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

@@ -88,7 +88,7 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 \seealso{
 \code{\link[=betweenness]{betweenness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

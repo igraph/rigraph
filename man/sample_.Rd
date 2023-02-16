@@ -30,7 +30,7 @@ blocky3 <- pref_matrix \%>\%
   sample_(sbm(), n = 20, block.sizes = c(10, 10))
 }
 \seealso{
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

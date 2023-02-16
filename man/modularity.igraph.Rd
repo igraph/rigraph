@@ -104,7 +104,7 @@ structure in very large networks, \emph{Physical Review E} 2004, 70, 066111
 \code{\link[=cluster_louvain]{cluster_louvain()}} and \code{\link[=cluster_leiden]{cluster_leiden()}} for
 various community detection methods.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -124,7 +124,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

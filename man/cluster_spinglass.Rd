@@ -146,7 +146,7 @@ positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 \seealso{
 \code{\link[=communities]{communities()}}, \code{\link[=components]{components()}}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

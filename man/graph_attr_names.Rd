@@ -22,7 +22,7 @@ g <- make_ring(10)
 graph_attr_names(g)
 }
 \seealso{
-Vertex, edge and graph attributes
+Other attributes: 
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},

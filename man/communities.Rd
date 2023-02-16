@@ -275,7 +275,7 @@ The different methods for finding communities, they all return a
 \code{\link[=cluster_optimal]{cluster_optimal()}}, \code{\link[=cluster_spinglass]{cluster_spinglass()}},
 \code{\link[=cluster_walktrap]{cluster_walktrap()}}.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -295,7 +295,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -315,7 +315,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -335,7 +335,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -355,7 +355,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -375,7 +375,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -395,7 +395,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -415,7 +415,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -435,7 +435,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -455,7 +455,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -475,7 +475,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -495,7 +495,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -515,7 +515,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -535,7 +535,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -555,7 +555,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -575,7 +575,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -595,7 +595,7 @@ Community detection
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

@@ -106,13 +106,13 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=plot.sir]{plot.sir()}} to conveniently plot the results
 
-Processes on graphs
+Other processes: 
 \code{\link{plot.sir}()}
 
-Processes on graphs
+Other processes: 
 \code{\link{plot.sir}()}
 
-Processes on graphs
+Other processes: 
 \code{\link{plot.sir}()}
 }
 \author{

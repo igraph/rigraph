@@ -122,7 +122,7 @@ of matrices, Physical Review E 74 036104, 2006.
 \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}},
 \code{\link[=cluster_fast_greedy]{cluster_fast_greedy()}}, \code{\link[=as.dendrogram]{as.dendrogram()}}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

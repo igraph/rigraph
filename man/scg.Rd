@@ -240,7 +240,7 @@ Matrix Analysis and Applications}, 2008.
 \link{scg-method} for an introduction.  \code{\link[=scg_eps]{scg_eps()}},
 \code{\link[=scg_group]{scg_group()}} and \code{\link[=scg_semi_proj]{scg_semi_proj()}}.
 
-Spectral Coarse Graining
+Other scg: 
 \code{\link{scg-method}},
 \code{\link{scg_eps}()},
 \code{\link{scg_group}()},

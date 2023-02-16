@@ -67,7 +67,7 @@ print(g, v = TRUE)
 \seealso{
 \code{\link[=graph]{graph()}} to create one-mode networks
 
-Bipartite graphs
+Other bipartite: 
 \code{\link{bipartite_mapping}()},
 \code{\link{bipartite_projection}()}
 }

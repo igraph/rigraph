@@ -55,7 +55,7 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 \seealso{
 \code{\link[=degree]{degree()}} for the unweighted version.
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

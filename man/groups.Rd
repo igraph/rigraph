@@ -40,7 +40,7 @@ groups(components(g2))
 \code{\link[=components]{components()}} and the various community finding
 functions.
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

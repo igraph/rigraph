@@ -101,7 +101,7 @@ plot_dendrogram(fc)
 
 }
 \seealso{
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
@@ -121,7 +121,7 @@ Community detection
 \code{\link{modularity.igraph}()},
 \code{\link{split_join_distance}()}
 
-Community detection
+Other community: 
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

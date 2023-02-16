@@ -133,7 +133,7 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 \seealso{
 \code{\link[=closeness]{closeness()}}, \code{\link[=degree]{degree()}}, \code{\link[=harmonic_centrality]{harmonic_centrality()}}
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
@@ -148,7 +148,7 @@ Centrality measures
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
@@ -163,7 +163,7 @@ Centrality measures
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

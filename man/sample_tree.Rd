@@ -36,7 +36,7 @@ g <- sample_tree(100, method = "lerw")
 
 }
 \seealso{
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

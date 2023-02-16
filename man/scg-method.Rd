@@ -46,7 +46,7 @@ Networks, \emph{Physical Review Letters}, \strong{99}(3), 2007.
 \url{https://arxiv.org/abs/0706.0812}
 }
 \seealso{
-Spectral Coarse Graining
+Other scg: 
 \code{\link{scg_eps}()},
 \code{\link{scg_group}()},
 \code{\link{scg_semi_proj}()},

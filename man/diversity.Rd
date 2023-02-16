@@ -53,7 +53,7 @@ Nathan Eagle, Michael Macy and Rob Claxton: Network Diversity
 and Economic Development, \emph{Science} \strong{328}, 1029--1031, 2010.
 }
 \seealso{
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

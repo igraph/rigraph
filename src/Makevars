@@ -5,10 +5,10 @@ PKG_CXXFLAGS=$(CXX_VISIBILITY)
 PKG_FFLAGS=$(F_VISIBILITY)
 
 PKG_CPPFLAGS=-DUSING_R -I. -Icore -Iinclude -Ivendor \
-	-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -DNDEBUG -DNTIMER -DNPRINT \
+	-I/usr/include/libxml2 -DNDEBUG -DNTIMER -DNPRINT \
 	-DINTERNAL_ARPACK \
 	-DPRPACK_IGRAPH_SUPPORT -DIGRAPH_THREAD_LOCAL=/**/
-PKG_LIBS=-L/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib -lxml2 -lz -lpthread -licucore -lm   $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+PKG_LIBS=-lxml2 -lgmp -lglpk $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 all: $(SHLIB)
 

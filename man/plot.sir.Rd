@@ -85,7 +85,7 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=sir]{sir()}} for running the actual simulation.
 
-Processes on graphs
+Other processes: 
 \code{\link{time_bins.sir}()}
 }
 \author{

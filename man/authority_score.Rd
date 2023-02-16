@@ -66,7 +66,7 @@ eigenvector centrality, \code{\link[=page_rank]{page_rank()}} for the Page Rank
 scores. \code{\link[=arpack]{arpack()}} for the underlining machinery of the
 computation.
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{closeness}()},

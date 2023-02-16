@@ -27,7 +27,7 @@ compare(correct, fc)
 compare(correct, membership(fc))
 }
 \seealso{
-Community detection
+Other community: 
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
 \code{\link{cluster_fluid_communities}()},

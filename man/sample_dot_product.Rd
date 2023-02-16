@@ -56,7 +56,7 @@ for social networks. Dissertation, Johns Hopkins University, Maryland, USA,
 \code{\link[=sample_dirichlet]{sample_dirichlet()}}, \code{\link[=sample_sphere_surface]{sample_sphere_surface()}}
 and \code{\link[=sample_sphere_volume]{sample_sphere_volume()}} for sampling position vectors.
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -82,7 +82,7 @@ Random graph models (games)
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

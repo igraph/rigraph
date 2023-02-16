@@ -78,7 +78,7 @@ spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 \seealso{
 \code{\link[=as_adj]{as_adj()}} to create a (sparse) adjacency matrix.
 
-Centrality measures
+Other centrality: 
 \code{\link{alpha_centrality}()},
 \code{\link{arpack_defaults}},
 \code{\link{authority_score}()},

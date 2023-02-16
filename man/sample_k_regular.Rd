@@ -48,7 +48,7 @@ sapply(k10, plot, vertex.label = NA)
 \code{\link[=sample_degseq]{sample_degseq()}} for a generator with prescribed degree
 sequence.
 
-Random graph models (games)
+Other games: 
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

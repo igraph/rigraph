@@ -88,7 +88,7 @@ Other vertex and edge sequences:
 \code{\link{print.igraph.es}()},
 \code{\link{print.igraph.vs}()}
 
-Vertex, edge and graph attributes
+Other attributes: 
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
