@@ -44,7 +44,7 @@ reference:
 - contents:
   - has_concept("coloring")
 # The following are mostly about programming rather than analysis
-- title: Functions for manipulating graph structure
+- title: Functions for manipulating graphs
 - contents:
   - has_concept("functions for manipulating graph structure")
   - permute
