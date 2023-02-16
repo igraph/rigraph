@@ -13,6 +13,8 @@ reference:
   - starts_with("make_")
   - realize_degseq
   - has_concept("deterministic constructors")
+  - graph_
+  - graph_from_lcf
 - subtitle: "Stochastic constructors -- Random graph models (games)"
 - contents:
   - has_concept("games")
@@ -22,8 +24,6 @@ reference:
 - subtitle: Convert to igraph
 - contents:
   - as.igraph
-  - graph_from_lcf
-  - graph_
 - subtitle: Adjacency matrices
 - contents:
   - has_concept("adjacency")
@@ -134,6 +134,7 @@ reference:
   - has_concept("graph isomorphism")
   - simplify_and_colorize
   - has_concept("graph automorphism")
+  - permute
 - subtitle: Graph matching
 - contents:
   - has_concept("sgm")

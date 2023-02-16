@@ -355,6 +355,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @family games
 #' @export
 #' @keywords graphs
+#' @keywords internal
 #' @examples
 #'
 #' g <- erdos.renyi.game(1000, 1 / 1000)

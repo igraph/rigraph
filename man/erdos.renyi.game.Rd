@@ -98,3 +98,4 @@ Gabor Csardi \email{csardi.gabor@gmail.com}
 }
 \concept{games}
 \keyword{graphs}
+\keyword{internal}
