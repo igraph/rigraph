@@ -108,7 +108,7 @@ g <- connect(g, 2)
 
 }
 \seealso{
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_degseq}()},

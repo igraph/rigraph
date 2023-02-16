@@ -55,7 +55,7 @@ and evaluation. \emph{Social Networks}, 14, 5--61.
 \seealso{
 \code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_gnm]{sample_gnm()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
@@ -75,7 +75,7 @@ Other games:
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

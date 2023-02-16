@@ -218,7 +218,7 @@ Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 \code{\link[=hub_score]{hub_score()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} are some of the
 functions in igraph that use ARPACK.
 
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
@@ -231,7 +231,7 @@ Other centrality:
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},

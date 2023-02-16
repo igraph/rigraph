@@ -36,7 +36,7 @@ oc
 \seealso{
 \code{\link[=sample_gnp]{sample_gnp()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

@@ -69,7 +69,7 @@ See also \code{\link[=cluster_walktrap]{cluster_walktrap()}},
 \code{\link[=cluster_edge_betweenness]{cluster_edge_betweenness()}}, \code{\link[=cluster_louvain]{cluster_louvain()}}
 \code{\link[=cluster_leiden]{cluster_leiden()}} for other methods.
 
-Other community: 
+Community detection
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fluid_communities}()},

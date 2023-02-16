@@ -42,7 +42,7 @@ Institute for Mathematics and Computer Science in the Netherlands,
 Amsterdam, May 2000.
 }
 \seealso{
-Other community: 
+Community detection
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},
