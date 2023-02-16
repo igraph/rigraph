@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.0.9009
+
+  - Merge pull request #677 from ahmohamed/main.
+
+Fix errors when printing long vertex names.
+
+
 # igraph 1.4.0.9008
 
 ## Bug fixes
