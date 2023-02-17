@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.0.9010
+
+## Bug fixes
+
+  - Console() command now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
+
+
 # igraph 1.4.0.9009
 
   - Merge pull request #677 from ahmohamed/main.
