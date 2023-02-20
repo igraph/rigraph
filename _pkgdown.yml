@@ -195,7 +195,7 @@ reference:
 - contents:
   - has_concept("versions")
 - title: internal
-- contents:
+  contents:
   - igraph-package
   - has_concept("nexus")
   - has_concept("test")
