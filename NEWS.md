@@ -16,14 +16,7 @@
 
 - Skip plot test entirely on R-devel.
 
-## C core updates
-
-- Use `<math.h>` instead of `<cmath>` include.
-
-- Use `igraph_is_nan()` instead of `isnan()`.
-
-- Details at <https://github.com/igraph/igraph/compare/8c906c8c6d2a0600456aae12540adc6421e99f79...7c2f814753867f435ba459ced0189867e3e382d7>
-
+- Fix building with GCC version 5 or earlier
 
 ## Chore
 
