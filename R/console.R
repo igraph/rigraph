@@ -23,7 +23,7 @@
 
 #' The igraph console
 #'
-#' The igraph console is a GUI windows that shows what the currently running
+#' The igraph console is a GUI window that shows what the currently running
 #' igraph function is doing.
 #'
 #' The console can be started by calling the `console()` function.
