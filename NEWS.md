@@ -122,8 +122,6 @@
 
 - Skip plot test entirely on R-devel.
 
-## teset
-
 - Use separate plotting test for R 4.2 and R 4.3.
 
 ## doc
