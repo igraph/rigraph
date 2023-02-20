@@ -190,6 +190,7 @@ reference:
 - contents:
   - has_concept("socnet")
   - has_concept("tkplot")
+  - has_concept("console")
 - title: Versions
 - contents:
   - has_concept("versions")
@@ -204,4 +205,3 @@ reference:
   - layout.svd
   - srand
   - "%>%"
-  - has_concept("console")
