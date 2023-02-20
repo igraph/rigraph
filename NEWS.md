@@ -4,11 +4,11 @@
 
 ## Bug fixes
 
-- `console()` now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
+- `console()` now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info (#664).
 
 - Fix errors when printing long vertex names (#677, @ahmohamed).
 
-- Fix regression that broke builds on some systems (e.g., GCC version 5 or earlier), introduced in igraph 1.4.0.
+- Fix regression that broke builds on some systems (e.g., GCC version 5 or earlier), introduced in igraph 1.4.0 (#670, #671).
 
 ## Documentation
 
@@ -28,7 +28,7 @@
 
 - Makevars cleanup (#671).
 
-- Added Zenodo configuration file.
+- Add Zenodo configuration file.
 
 
 # igraph 1.4.0
