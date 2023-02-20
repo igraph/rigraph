@@ -8,6 +8,14 @@
 
 - Fix errors when printing long vertex names (#677, @ahmohamed).
 
+- Fix regression that broke builds on some systems (e.g., GCC version 5 or earlier), introduced in igraph 1.4.0.
+
+## Documentation
+
+- Various improvements (#663, @maelle; #667).
+
+## Internal
+
 - Fix warning about `yyget_leng()` returning wrong type when using LTO (#676).
 
 - Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers, while still requesting a C++ compiler for linking.
@@ -16,29 +24,11 @@
 
 - Skip plot test entirely on R-devel.
 
-- Fix building with GCC version 5 or earlier
-
-## Chore
-
 - Avoid submodules for building igraph (#674).
 
 - Makevars cleanup (#671).
 
 - Added Zenodo configuration file.
-
-## Documentation
-
-- Update troubleshooting info.
-
-- Documentation polish.
-
-- Improve `layout_with_mds()` docs.
-
-- Fix `is_matching()` title (#667).
-
-- Make package manual page internal (#663, @maelle).
-
-- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
 
 
 # igraph 1.4.0
