@@ -14,106 +14,86 @@
 
 ## Bug fixes
 
-  - Console() command now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
+- Console() command now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
 
 
 # igraph 1.4.0.9009
 
-  - Merge pull request #677 from ahmohamed/main.
-
-Fix errors when printing long vertex names.
+  - Fix errors when printing long vertex names (@ahmohamed, #677).
 
 
 # igraph 1.4.0.9008
 
 ## Bug fixes
 
-  - Fix warning about yyget\_leng returning wrong type when using LTO (#676).
+- Fix warning about yyget\_leng returning wrong type when using LTO (#676).
 
-  - Update C core.
+- Update C core.
 
-  - Fixes compiling with GCC version 5 and earlier
+- Fixes compiling with GCC version 5 and earlier
 
 ## Chore
 
-  - Avoid submodules for building igraph (#674).
+- Avoid submodules for building igraph (#674).
 
-  - Makevars cleanup (#671).
+- Makevars cleanup (#671).
 
 ## Documentation
 
-  - Update troubleshooting info.
-
-## Uncategorized
-
-  - Merge branch 'cran-1.4.0'.
+- Update troubleshooting info.
 
 
 # igraph 1.4.0.9007
 
 ## Bug fixes
 
-  - Remove C++11 specification because of CRAN pretests.
+- Remove C++11 specification because of CRAN pretests.
 
-  - Fixing CRAN pretest issues.
+- Fixing CRAN pretest issues.
 
 ## Chore
 
-  - Updated vendored C core.
+- Updated vendored C core.
 
-  - Finish upgrade to C++17.
+- Finish upgrade to C++17.
 
-  - Updates NEWS.md with distances(algorithm='johnson') fix.
+- Updates NEWS.md with distances(algorithm='johnson') fix.
 
-  - Updated NEWS.md based on feedback from @szhorvat.
+- Updated NEWS.md based on feedback from @szhorvat.
 
-  - Updated cran-comments and NEWS.
+- Updated cran-comments and NEWS.
 
 
 # igraph 1.4.0.9006
 
 ## Documentation
 
-  - Improve layout\_with\_mds() docs.
+- Improve layout\_with\_mds() docs.
 
-  - Documentation polish.
+- Documentation polish.
 
 
 # igraph 1.4.0.9005
 
 ## Chore
 
-  - Added Zenodo configuration file.
+- Added Zenodo configuration file.
 
 
 # igraph 1.4.0.9004
 
 ## Documentation
 
-  - Fix is\_matching() title (#667).
+- Fix is\_matching() title (#667).
 
-<!-- end list -->
-
-  - docs: fix is\_matching() title
-
-  - simplify twice
-
-  - :tree:
-
-  - wrong branch\!\!
-
-## Uncategorized
-
-  - Merge pull request #663 from maelle/pkg-man-page.
-
-make package manual page internal
+- Make package manual page internal (#663).
 
 
 # igraph 1.4.0.9003
 
 ## Chore
 
-  - Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
+- Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
 
 
 # igraph 1.4.0.9002
