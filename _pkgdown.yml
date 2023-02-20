@@ -127,6 +127,9 @@ reference:
 - subtitle: Centralization
 - contents:
   - has_concept("centralization related")
+- subtitle: Scan statistics
+- contents:
+  - has_concept("scan statistics")
 - title: Graph motifs and subgraphs
 - contents:
   - has_concept("graph motifs")
@@ -156,9 +159,6 @@ reference:
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Scan statistics
-- contents:
-  - has_concept("scan statistics")
 - title: Spectral Coarse Graining
 - contents:
   - has_concept("scg")
