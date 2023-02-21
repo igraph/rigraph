@@ -183,7 +183,7 @@ jobs:
 
       - name: Run coverage
         run: |
-          line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
+          line_exclusions <- fs::dir_ls(c("src/vendor"), type = "file", recurse = TRUE)
 
           cov <- covr::package_coverage(
             type = c("tests", "examples"),

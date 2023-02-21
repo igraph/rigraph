@@ -3,10 +3,6 @@ name: fledge
 on:
   # for manual triggers
   workflow_dispatch:
-  # for debugging
-  push:
-    paths:
-      - .github/workflows/fledge.yaml
   # daily run
   schedule:
   - cron: "30 0 * * *"
