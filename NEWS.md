@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9001
+
+## Chore
+
+  - Don't run fledge workflow on push.
+
+## Continuous integration
+
+  - Do not exclude C core from coverage.
+
+## Testing
+
+  - Rm leftover magrittr pipe definition (#684).
+
+
 # igraph 1.4.1.9000
 
 - Internal changes only.
