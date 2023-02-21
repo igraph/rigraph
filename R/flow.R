@@ -147,7 +147,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 
 
 
-#' Vertex connectivity.
+#' Vertex connectivity
 #'
 #' The vertex connectivity of a graph or two vertices, this is recently also
 #' called group cohesion.
@@ -164,7 +164,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' number of vertices needed to remove to make the graph not strongly
 #' connected. (If the graph is not strongly connected then this is zero.)
 #' `vertex_connectivity()` calculates this quantity if neither the
-#' `source` nor `target` arguments are given. (Ie. they are both
+#' `source` nor `target` arguments are given. (I.e. they are both
 #' `NULL`.)
 #'
 #' A set of vertex disjoint directed paths from `source` to `vertex`
@@ -250,7 +250,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 
 
 
-#' Edge connectivity.
+#' Edge connectivity
 #'
 #' The edge connectivity of a graph or two vertices, this is recently also
 #' called group adhesion.
@@ -264,7 +264,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' The edge connectivity of a graph is the minimum of the edge connectivity of
 #' every (ordered) pair of vertices in the graph.  `edge_connectivity()`
 #' calculates this quantity if neither the `source` nor the `target`
-#' arguments are given (ie. they are both `NULL`).
+#' arguments are given (i.e. they are both `NULL`).
 #'
 #' A set of edge disjoint paths between two vertices is a set of paths between
 #' them containing no common edges. The maximum number of edge disjoint paths
@@ -623,9 +623,9 @@ min_st_separators <- min_st_separators
 #' between two vertices is calculated.
 #'
 #' `max_flow()` calculates the maximum flow between two vertices in a
-#' weighted (ie. valued) graph. A flow from `source` to `target` is
+#' weighted (i.e. valued) graph. A flow from `source` to `target` is
 #' an assignment of non-negative real numbers to the edges of the graph,
-#' satisfying two properties: (1) for each edge the flow (ie. the assigned
+#' satisfying two properties: (1) for each edge the flow (i.e. the assigned
 #' number) is not more than the capacity of the edge (the `capacity`
 #' parameter or edge attribute), (2) for every vertex, except the source and
 #' the target the incoming flow is the same as the outgoing flow. The value of

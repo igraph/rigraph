@@ -71,7 +71,7 @@ another fixed vertex, these are called the neighborhood of the vertex.
 }
 \details{
 The neighborhood of a given order \code{o} of a vertex \code{v} includes all
-vertices which are closer to \code{v} than the order. Ie. order 0 is always
+vertices which are closer to \code{v} than the order. I.e. order 0 is always
 \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 

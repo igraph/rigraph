@@ -121,7 +121,7 @@ head_print_callback <- function(x, max_lines, header, footer,
 
   ## So how many items should we print?
   no <- tail(which(no_rows <= max_lines), 1)
-  if (is.null(no) || length(no) < 1 || is.na(no)) no <- len
+  if (is.null(no) || length(no) < 1 || is.na(no)) no <- can_max
 
   cat_pern <- function(..., sep = "\n") cat(..., sep = sep)
 

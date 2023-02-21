@@ -11,7 +11,7 @@ as_edgelist(graph, names = TRUE)
 \item{graph}{The graph to convert.}
 
 \item{names}{Whether to return a character matrix containing vertex
-names (ie. the \code{name} vertex attribute) if they exist or numeric
+names (i.e. the \code{name} vertex attribute) if they exist or numeric
 vertex ids.}
 }
 \value{

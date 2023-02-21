@@ -48,6 +48,7 @@ argument is set to \code{TRUE}. Otherwise a HRG is fitted to the graph
 first.
 }
 \examples{
+\dontrun{
 ## We are not running these examples any more, because they
 ## take a long time (~15 seconds) to run and this is against the CRAN
 ## repository policy. Copy and paste them by hand to your R prompt if
@@ -64,6 +65,7 @@ consensus_tree(g, hrg = hrg, start = TRUE)
 ## Prediction of missing edges
 g2 <- make_full_graph(4) + (make_full_graph(4) - path(1, 2))
 predict_edges(g2)
+}
 }
 \references{
 A. Clauset, C. Moore, and M.E.J. Newman. Hierarchical structure

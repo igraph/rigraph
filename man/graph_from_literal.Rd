@@ -33,7 +33,7 @@ the graph. The expressions consist of vertex names and edge
 operators. An edge operator is a sequence of \sQuote{\code{-}} and
 \sQuote{\code{+}} characters, the former is for the edges and the
 latter is used for arrow heads. The edges can be arbitrarily long,
-ie. you may use as many \sQuote{\code{-}} characters to \dQuote{draw}
+i.e. you may use as many \sQuote{\code{-}} characters to \dQuote{draw}
 them as you like.
 
 If all edge operators consist of only \sQuote{\code{-}} characters

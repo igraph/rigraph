@@ -64,7 +64,7 @@
 #' @aliases sample_pa barabasi.game ba.game
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
-#'   ie. linear preferential attachment.
+#'   i.e. linear preferential attachment.
 #' @param m Numeric constant, the number of edges to add in each time step This
 #'   argument is only used if both `out.dist` and `out.seq` are omitted
 #'   or NULL.
@@ -532,7 +532,7 @@ degseq <- function(..., deterministic = FALSE) {
 #' @param n Numeric constant, number of vertices in the graph.
 #' @param m Numeric constant, number of edges added in each time step.
 #' @param directed Logical, whether to create a directed graph.
-#' @param citation Logical. If `TRUE` a citation graph is created, ie. in
+#' @param citation Logical. If `TRUE` a citation graph is created, i.e. in
 #'   each time step the added edges are originating from the new vertex.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -795,7 +795,7 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' @param type.dist The distribution of the vertex types. This is assumed to be
 #'   stationary in time.
 #' @param pref.matrix A matrix giving the preferences of the given vertex
-#'   types. These should be probabilities, ie. numbers between zero and one.
+#'   types. These should be probabilities, i.e. numbers between zero and one.
 #' @param directed Logical constant, whether to generate directed graphs.
 #' @param k The number of trials per time step, see details below.
 #' @return A new graph object.

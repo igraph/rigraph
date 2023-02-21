@@ -23,28 +23,31 @@
 
 #' Minimum spanning tree
 #'
-#' A subgraph of a connected graph is a *minimum spanning tree* if it is
-#' tree, and the sum of its edge weights are the minimal among all tree
-#' subgraphs of the graph. A minimum spanning forest of a graph is the graph
-#' consisting of the minimum spanning trees of its components.
+#' A *spanning tree* of a connected graph is a connected subgraph with
+#' the smallest number of edges that includes all vertices of the graph.
+#' A graph will have many spanning trees. Among these, the *minimum spanning
+#' tree* will have the smallest sum of edge weights.
 #'
-#' If the graph is unconnected a minimum spanning forest is returned.
+#' The *minimum spanning forest* of a disconnected graph is the collection
+#' of minimum spanning trees of all of its components.
+#'
+#' If the graph is not connected a minimum spanning forest is returned.
 #'
 #' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
-#' @param weights Numeric algorithm giving the weights of the edges in the
+#' @param weights Numeric vector giving the weights of the edges in the
 #'   graph. The order is determined by the edge ids. This is ignored if the
 #'   `unweighted` algorithm is chosen. Edge weights are interpreted as
 #'   distances.
 #' @param algorithm The algorithm to use for calculation. `unweighted` can
 #'   be used for unweighted graphs, and `prim` runs Prim's algorithm for
-#'   weighted graphs.  If this is `NULL` then igraph tries to select the
+#'   weighted graphs.  If this is `NULL` then igraph will select the
 #'   algorithm automatically: if the graph has an edge attribute called
 #'   `weight` or the `weights` argument is not `NULL` then Prim's
-#'   algorithm is chosen, otherwise the unweighted algorithm is performed.
+#'   algorithm is chosen, otherwise the unweighted algorithm is used.
 #' @param \dots Additional arguments, unused.
-#' @return A graph object with the minimum spanning forest. (To check that it
-#'   is a tree check that the number of its edges is `vcount(graph)-1`.)
+#' @return A graph object with the minimum spanning forest. To check whether it
+#'   is a tree, check that the number of its edges is `vcount(graph)-1`.
 #'   The edge and vertex attributes of the original graph are preserved in the
 #'   result.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

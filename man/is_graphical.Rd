@@ -30,7 +30,7 @@ A logical scalar.
 }
 \description{
 Determine whether the given vertex degrees (in- and out-degrees for
-directed graphs) can be realized in a graph.
+directed graphs) can be realized by a graph.
 }
 \details{
 The classical concept of graphicality assumes simple graphs. This function

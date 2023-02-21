@@ -858,7 +858,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' nodes with many edges inside the community and few edges between outside it
 #' (i.e. between the community itself and the rest of the graph.)
 #'
-#' This idea is reversed for edges having a negative weight, ie. few negative
+#' This idea is reversed for edges having a negative weight, i.e. few negative
 #' edges inside a community and many negative edges between communities. Note
 #' that only the \sQuote{neg} implementation supports negative edge weights.
 #'
@@ -891,17 +891,17 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   unpopulated.
 #' @param parupdate Logical constant, whether to update the spins of the
 #'   vertices in parallel (synchronously) or not. This argument is ignored if the
-#'   second form of the function is used (ie. the \sQuote{`vertex`} argument
+#'   second form of the function is used (i.e. the \sQuote{`vertex`} argument
 #'   is present). It is also not implemented in the \dQuote{neg} implementation.
 #' @param start.temp Real constant, the start temperature.  This argument is
-#'   ignored if the second form of the function is used (ie. the
+#'   ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
 #' @param stop.temp Real constant, the stop temperature. The simulation
 #'   terminates if the temperature lowers below this level.  This argument is
-#'   ignored if the second form of the function is used (ie. the
+#'   ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
 #' @param cool.fact Cooling factor for the simulated annealing.  This argument
-#'   is ignored if the second form of the function is used (ie. the
+#'   is ignored if the second form of the function is used (i.e. the
 #'   \sQuote{`vertex`} argument is present).
 #' @param update.rule Character constant giving the \sQuote{null-model} of the
 #'   simulation. Possible values: \dQuote{simple} and \dQuote{config}.
@@ -926,11 +926,11 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #'   If this argument is set to zero, the algorithm reduces to a graph coloring
 #'   algorithm, using the number of spins as the number of colors. This argument
 #'   is ignored if the \sQuote{orig} implementation is chosen.
-#' @return If the `vertex` argument is not given, ie. the first form is
+#' @return If the `vertex` argument is not given, i.e. the first form is
 #'   used then a [cluster_spinglass()] returns a
 #'   [communities()] object.
 #'
-#'   If the `vertex` argument is present, ie. the second form is used then a
+#'   If the `vertex` argument is present, i.e. the second form is used then a
 #'   named list is returned with the following components:
 #'   \item{community}{Numeric vector giving the ids of the vertices in the same
 #'   community as `vertex`.} \item{cohesion}{The cohesion score of the
@@ -1407,7 +1407,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #'   line is the first merge (last split). The communities are identified by
 #'   integer number starting from one. Community ids smaller than or equal to
 #'   \eqn{N}, the number of vertices in the graph, belong to singleton
-#'   communities, ie. individual vertices. Before the first merge we have \eqn{N}
+#'   communities, i.e. individual vertices. Before the first merge we have \eqn{N}
 #'   communities numbered from one to \eqn{N}. The first merge, the first line of
 #'   the matrix creates community \eqn{N+1}, the second merge creates community
 #'   \eqn{N+2}, etc.

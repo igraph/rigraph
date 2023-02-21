@@ -146,10 +146,10 @@ has 50 vertices and 72 edges.}
 \item{Octahedral, Octahedron}{Platonic solid
 with 6 vertices and 12 edges.}
 \item{Petersen}{A 3-regular graph with 10
-vertices and 15 edges. It is the smallest hypohamiltonian graph, ie. it is
+vertices and 15 edges. It is the smallest hypohamiltonian graph, i.e. it is
 non-hamiltonian but removing any single vertex from it makes it
 Hamiltonian.}
-\item{Robertson}{The unique (4,5)-cage graph, ie. a 4-regular
+\item{Robertson}{The unique (4,5)-cage graph, i.e. a 4-regular
 graph of girth 5. It has 19 vertices and 38 edges.}
 \item{Smallestcyclicgroup}{A smallest nontrivial graph whose automorphism
 group is cyclic. It has 9 vertices and 15 edges.}

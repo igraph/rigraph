@@ -1208,7 +1208,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #'   calculation. The \sQuote{Matrix} package is required for sparse matrix
 #'   support
 #' @return A vector, containing the centrality scores.
-#' @note This function was ported (ie. copied) from the SNA package.
+#' @note This function was ported (i.e. copied) from the SNA package.
 #' @section Warning : Singular adjacency matrices cause no end of headaches for
 #' this algorithm; thus, the routine may fail in certain cases.  This will be
 #' fixed when I get a better algorithm.  `power_centrality()` will not symmetrize your

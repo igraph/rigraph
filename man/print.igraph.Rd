@@ -34,7 +34,7 @@ attributes.}
 
 \item{edge.attributes}{Logical constant, whether to print edge attributes.}
 
-\item{names}{Logical constant, whether to print symbolic vertex names (ie.
+\item{names}{Logical constant, whether to print symbolic vertex names (i.e.
 the \code{name} vertex attribute) or vertex ids.}
 
 \item{max.lines}{The maximum number of lines to use. The rest of the

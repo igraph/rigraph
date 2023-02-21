@@ -6,7 +6,7 @@
 \alias{max_weighted_cliques}
 \alias{count_max_weighted_cliques}
 \alias{weighted_clique_num}
-\title{Functions to find weighted cliques, ie. weighted complete subgraphs in a graph}
+\title{Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph}
 \usage{
 weighted_cliques(
   graph,
@@ -27,7 +27,7 @@ vertex is assumed to have a weight of 1. Note that the current implementation
 of the weighted clique finder supports positive integer weights only.}
 
 \item{min.weight}{Numeric constant, lower limit on the weight of the cliques to find.
-\code{NULL} means no limit, ie. it is the same as 0.}
+\code{NULL} means no limit, i.e. it is the same as 0.}
 
 \item{max.weight}{Numeric constant, upper limit on the weight of the cliques to find.
 \code{NULL} means no limit.}

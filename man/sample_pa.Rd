@@ -26,7 +26,7 @@ pa(...)
 \item{n}{Number of vertices.}
 
 \item{power}{The power of the preferential attachment, the default is one,
-ie. linear preferential attachment.}
+i.e. linear preferential attachment.}
 
 \item{m}{Numeric constant, the number of edges to add in each time step This
 argument is only used if both \code{out.dist} and \code{out.seq} are omitted

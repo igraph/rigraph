@@ -1,33 +1,114 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# igraph 1.4.1.9001
+
+## Chore
+
+  - Don't run fledge workflow on push.
+
+## Continuous integration
+
+  - Do not exclude C core from coverage.
+
+## Testing
+
+  - Rm leftover magrittr pipe definition (#684).
+
+
+# igraph 1.4.1.9000
+
+- Internal changes only.
+
+
+# igraph 1.4.1
+
+- Same as previous version.
+
+
+# igraph 1.4.0.9010
+
+## Bug fixes
+
+- Console() command now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
+
+
+# igraph 1.4.0.9009
+
+  - Fix errors when printing long vertex names (@ahmohamed, #677).
+
+
+# igraph 1.4.0.9008
+
+## Bug fixes
+
+- Fix warning about yyget\_leng returning wrong type when using LTO (#676).
+
+- Update C core.
+
+- Fixes compiling with GCC version 5 and earlier
+
+## Chore
+
+- Avoid submodules for building igraph (#674).
+
+- Makevars cleanup (#671).
+
+## Documentation
+
+- Update troubleshooting info.
+
+
+# igraph 1.4.0.9007
+
+## Bug fixes
+
+- Remove C++11 specification because of CRAN pretests.
+
+- Fixing CRAN pretest issues.
+
+## Chore
+
+- Updated vendored C core.
+
+- Finish upgrade to C++17.
+
+- Updates NEWS.md with distances(algorithm='johnson') fix.
+
+- Updated NEWS.md based on feedback from @szhorvat.
+
+- Updated cran-comments and NEWS.
+
+
+# igraph 1.4.0.9006
+
+## Documentation
+
+- Improve layout\_with\_mds() docs.
+
+- Documentation polish.
+
+
+# igraph 1.4.0.9005
+
+## Chore
+
+- Added Zenodo configuration file.
+
 
 # igraph 1.4.0.9004
 
 ## Documentation
 
-  - Fix is\_matching() title (#667).
+- Fix is\_matching() title (#667).
 
-<!-- end list -->
-
-  - docs: fix is\_matching() title
-
-  - simplify twice
-
-  - :tree:
-
-  - wrong branch\!\!
-
-## Uncategorized
-
-  - Merge pull request #663 from maelle/pkg-man-page.
-
-make package manual page internal
+- Make package manual page internal (#663).
 
 
 # igraph 1.4.0.9003
 
 ## Chore
 
-  - Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
+- Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
 
 
 # igraph 1.4.0.9002
@@ -56,8 +137,6 @@ make package manual page internal
 
 - Skip plot test entirely on R-devel.
 
-## teset
-
 - Use separate plotting test for R 4.2 and R 4.3.
 
 ## doc
@@ -66,34 +145,6 @@ make package manual page internal
 
 
 # igraph 1.4.0
-
-- Same as previous version.
-
-
-# igraph 1.3.5.9109
-
-## Bug fixes
-
-- Don't ignore build/ when building the package because the vignette index is built there.
-
-## Chore
-
-- NEWS.md cleanup.
-
-## Testing
-
-- Skip plot test entirely on R-devel.
-
-## teset
-
-- Use separate plotting test for R 4.2 and R 4.3.
-
-## doc
-
-- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
-
-
-# igraph 1.3.5.9106
 
 ## Breaking changes
 
@@ -110,7 +161,6 @@ make package manual page internal
  - The default maximum number of iterations for ARPACK has been increased to 3000 to match that of the igraph C core.
  - Rare convergence problems have been corrected in `cluster_leading_eigen()`.
  - All ARPACK-based functions now respect random seeds set in R when generating a random starting vector.
- - `distances(algorithm='johnson')` now throws an error if `mode != 'out'` for directed graphs, as no other `mode` is currently supported.
  - `igraph_version()` returned an invalid value in 1.3.4, this is now corrected.
  - The value of `par(xpd=...)` is now restored after plotting a graph.
  - Fixed a bug in `as.dendrogram.communities()` for large dendrograms, thanks
@@ -119,8 +169,10 @@ make package manual page internal
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
- - We now use `*3d` functions rather than `rgl.*` functions (see PR #619)
+ - Some `rgl.*()` function calls in the codebase were replaced with equivalent `*3d()` function calls in preparation for upcoming deprecations in `rgl` (see PR #619)
  - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.
+ - `hub_score()` and `authority_score()` considered self-loops only once on the diagonal of the adjacency matrix of undirected graphs, thus the result was not identical to that obtained by `eigen_centrality()` on loopy undirected graphs. This is now corrected.
+ - `distances()` no longer ignores the `mode` parameter when `algorithm='johnson'`.
 
 ## Deprecated
 
