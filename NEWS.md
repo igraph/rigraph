@@ -10,6 +10,8 @@
 
 - Fix regression that broke builds on some systems (e.g., GCC version 5 or earlier), introduced in igraph 1.4.0 (#670, #671).
 
+- `fit_hrg()` does not crash any more when called with a graph that has less than three vertices.
+
 ## Documentation
 
 - Various improvements (#663, @maelle; #667).
