@@ -1,6 +1,5 @@
 ---
 title: "igraph (R interface) in spanish"
-date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
