@@ -1,5 +1,23 @@
 url: ~
 
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    intro:
+      text: Get started
+      menu:
+      - text: Intro in English
+        href: articles/igraph.html
+      - text: Intro en Español
+        href: articles/igraph_ES.html
+
 template:
   bootstrap: 5
 
