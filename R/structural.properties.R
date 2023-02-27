@@ -58,6 +58,7 @@
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [distances()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -97,6 +98,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
   )
 }
 
+#' @family structural.properties
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
@@ -126,6 +128,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
+#' @family structural.properties
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
@@ -156,6 +159,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname distances
 mean_distance <- mean_distance
@@ -178,7 +182,7 @@ mean_distance <- mean_distance
 #' @param normalized Logical scalar, whether to normalize the degree.  If
 #'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
-#' @param \dots Additional arguments to pass to `degree()`, eg. `mode`
+#' @param \dots Additional arguments to pass to `degree()`, e.g. `mode`
 #'   is useful but also `v` and `loops` make sense.
 #' @return For `degree()` a numeric vector of the same length as argument
 #'   `v`.
@@ -188,6 +192,7 @@ mean_distance <- mean_distance
 #'   degree vertices, the second vertices with degree one, etc.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -228,6 +233,7 @@ degree <- function(graph, v = V(graph),
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
+#' @family structural.properties
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -315,7 +321,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   the given vertices should be calculated for directed graphs. If `out`
 #'   then the shortest paths *from* the vertex, if `in` then *to*
 #'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, ie. not directed paths are searched. This
+#'   undirected graph will be used, i.e. not directed paths are searched. This
 #'   argument is ignored for undirected graphs.
 #' @param weights Possibly a numeric vector giving edge weights. If this is
 #'   `NULL` and the graph has a `weight` edge attribute, then the
@@ -379,6 +385,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -504,6 +511,7 @@ distances <- function(graph, v = V(graph), to = V(graph),
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
+#' @family structural.properties
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -598,6 +606,7 @@ shortest_paths <- function(graph, from, to = V(graph),
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(graph, from,
@@ -667,6 +676,7 @@ all_shortest_paths <- function(graph, from,
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [components()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -721,6 +731,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -744,6 +755,7 @@ subgraph <- function(graph, vids) {
 #'   scratch. \sQuote{`auto`} chooses between the two implementations
 #'   automatically, using heuristics based on the size of the original and the
 #'   result graph.
+#' @family structural.properties
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -768,6 +780,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
+#' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -834,13 +847,17 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @param weights Optional weights for weighted transitivity. It is ignored for
 #'   other transitivity measures. If it is `NULL` (the default) and the
 #'   graph has a `weight` edge attribute, then it is used automatically.
-#' @param isolates Character scalar, defines how to treat vertices with degree
-#'   zero and one. If it is \sQuote{`NaN`} then they local transitivity is
+#' @param isolates Character scalar, for local versions of transitivity, it
+#'   defines how to treat vertices with degree zero and one.
+#'   If it is \sQuote{`NaN`} then their local transitivity is
 #'   reported as `NaN` and they are not included in the averaging, for the
 #'   transitivity types that calculate an average. If there are no vertices with
 #'   degree two or higher, then the averaging will still result `NaN`. If it
 #'   is \sQuote{`zero`}, then we report 0 transitivity for them, and they
 #'   are included in the averaging, if an average is calculated.
+#'   For the global transitivity, it controls how to handle graphs with
+#'   no connected triplets: `NaN` or zero will be returned according to
+#'   the respective setting.
 #' @return For \sQuote{`global`} a single number, or `NaN` if there
 #'   are no connected triples in the graph.
 #'
@@ -853,6 +870,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras, Alessandro
 #' Vespignani: The architecture of complex weighted networks, Proc. Natl. Acad.
 #' Sci. USA 101, 3747 (2004)
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -965,7 +983,7 @@ transitivity <- function(graph, type = c(
 #'   C[i] = sum( [sum( p[i,j] + p[i,q] p[q,j], q in V[i], q != i,j )]^2, j in
 #'   V[i], j != i).
 #' }
-#' for a graph of order (ie. number of vertices) \eqn{N}, where
+#' for a graph of order (i.e. number of vertices) \eqn{N}, where
 #' proportional tie strengths are defined as
 #' \deqn{p_{ij} = \frac{a_{ij}+a_{ji}}{\sum_{k \in V_i \setminus \{i\}}(a_{ik}+a_{ki})},}{
 #'   p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),
@@ -985,6 +1003,7 @@ transitivity <- function(graph, type = c(
 #' and Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references Burt, R.S. (2004). Structural holes and good ideas.
 #' *American Journal of Sociology* 110, 349-399.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1040,6 +1059,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' @return A numeric scalar between zero and one.
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1088,6 +1108,7 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' to get rid of the multiple and/or loop edges.
 #' @references Wasserman, S., and Faust, K.  (1994).  Social Network Analysis:
 #' Methods and Applications.  Cambridge: Cambridge University Press.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1112,6 +1133,7 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
+#' @family structural.properties
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
@@ -1142,7 +1164,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' another fixed vertex, these are called the neighborhood of the vertex.
 #'
 #' The neighborhood of a given order `o` of a vertex `v` includes all
-#' vertices which are closer to `v` than the order. Ie. order 0 is always
+#' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
@@ -1183,6 +1205,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
 #' done by Vincent Matossian
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1232,6 +1255,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
 }
 
 #' @rdname ego
+#' @family structural.properties
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
@@ -1284,6 +1308,7 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
 #'
 #' Seidman S. B. (1983) Network structure and minimum degree, *Social
 #' Networks*, 5, 269--287.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1336,6 +1361,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com} for the R interface
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -1391,6 +1417,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' heuristic for the feedback arc set problem. *Information Processing Letters*
 #' 47:6, pp. 319-323, 1993
 #' @keywords graphs
+#' @family structural.properties
 #' @export
 #' @examples
 #'
@@ -1405,7 +1432,7 @@ feedback_arc_set <- feedback_arc_set
 #'
 #' The current implementation works for undirected graphs only, directed graphs
 #' are treated as undirected graphs. Loop edges and multiple edges are ignored.
-#' If the graph is a forest (ie. acyclic), then zero is returned.
+#' If the graph is a forest (i.e. acyclic), then zero is returned.
 #'
 #' This implementation is based on Alon Itai and Michael Rodeh: Finding a
 #' minimum circuit in a graph *Proceedings of the ninth annual ACM
@@ -1422,6 +1449,7 @@ feedback_arc_set <- feedback_arc_set
 #' @references Alon Itai and Michael Rodeh: Finding a minimum circuit in a
 #' graph *Proceedings of the ninth annual ACM symposium on Theory of
 #' computing*, 1-10, 1977
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1469,7 +1497,7 @@ girth <- function(graph, circle = TRUE) {
 #'
 #' Note that the semantics for `which_multiple()` and `count_multiple()` is
 #' different. `which_multiple()` gives `TRUE` for all occurrences of a
-#' multiple edge except for one. Ie. if there are three `i-j` edges in the
+#' multiple edge except for one. I.e. if there are three `i-j` edges in the
 #' graph then `which_multiple()` returns `TRUE` for only two of them while
 #' `count_multiple()` returns \sQuote{3} for all three.
 #'
@@ -1486,6 +1514,7 @@ girth <- function(graph, circle = TRUE) {
 #'   `count_multiple()` returns a numeric vector.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [simplify()] to eliminate loop and multiple edges.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1587,6 +1616,7 @@ any_loop <- any_loop
 #'   `FALSE`, i.e. if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [dfs()] for depth-first search.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1747,6 +1777,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   if their calculation is not requested.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [bfs()] for breadth-first search.
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1881,6 +1912,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   vector is the number of clusters of size zero, so this is always zero.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [decompose()], [subcomponent()], [groups()]
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1939,6 +1971,7 @@ count_components <- count_components
 #'   a mapping from the vertices of the new graph to the vertices of the old
 #'   graph.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2001,6 +2034,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'   matrix. The `Matrix` package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
@@ -2039,7 +2073,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
   res
 }
 
-#' Graph matching
+#' Matching
 #'
 #' A matching in a graph means the selection of a set of edges that are
 #' pairwise non-adjacent, i.e. they have no common incident vertices. A
@@ -2118,7 +2152,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' is_max_matching(g, m2)
 #' is_max_matching(g, m3)
 #'
-#' V(g)$type <- c(FALSE, TRUE)
+#' V(g)$type <- rep(c(FALSE, TRUE), 3)
 #' print_all(g, v = TRUE)
 #' max_bipartite_match(g)
 #'
@@ -2127,6 +2161,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' print_all(g2, v = TRUE)
 #' max_bipartite_match(g2)
 #' #' @keywords graphs
+#' @family structural.properties
 #' @export
 is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
@@ -2144,6 +2179,7 @@ is_matching <- function(graph, matching, types = NULL) {
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
@@ -2162,6 +2198,7 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
+#' @family structural.properties
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,
@@ -2226,6 +2263,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' dyad_census(g)
 #' which_mutual(g)
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
+#' @family structural.properties
 #' @export
 which_mutual <- which_mutual
 
@@ -2298,5 +2336,6 @@ which_mutual <- which_mutual
 #' g5 <- make_star(10)
 #' E(g5)$weight <- seq(ecount(g5))
 #' knn(g5)
+#' @family structural.properties
 #' @export
 knn <- knn

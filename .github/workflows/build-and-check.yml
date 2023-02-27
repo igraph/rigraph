@@ -25,7 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true
           fetch-depth: 0
 
       - name: Setup R
@@ -72,7 +71,6 @@ jobs:
               git add .
               git stash save
               git switch ${GITHUB_HEAD_REF}
-              git merge origin/${GITHUB_BASE_REF} --no-edit
               git stash pop
             fi
             git add .
@@ -185,7 +183,7 @@ jobs:
 
       - name: Run coverage
         run: |
-          line_exclusions <- fs::dir_ls(c("src/core", "src/vendor"), type = "file", recurse = TRUE)
+          line_exclusions <- fs::dir_ls(c("src/vendor"), type = "file", recurse = TRUE)
 
           cov <- covr::package_coverage(
             type = c("tests", "examples"),

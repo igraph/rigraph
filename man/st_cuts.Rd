@@ -51,8 +51,20 @@ graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
 \code{\link[=st_min_cuts]{st_min_cuts()}} to list all minimum cuts.
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

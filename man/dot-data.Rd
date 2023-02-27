@@ -28,4 +28,5 @@ you can import \code{.data} and \code{.env} from \code{igraph} if needed. Altern
 you can declare them explicitly with \code{utils::globalVariables()} to silence
 the warnings.
 }
+\concept{env-and-data}
 \keyword{datasets}

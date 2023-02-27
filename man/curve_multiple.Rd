@@ -47,4 +47,5 @@ for plotting functions.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{plot.common}
 \keyword{graphs}

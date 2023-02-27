@@ -37,7 +37,7 @@ assign(".next", 1, .tkplot.env)
 #'
 #' `tkplot()` and its companion functions serve as an interactive graph
 #' drawing facility. Not all parameters of the plot can be changed
-#' interactively right now though, eg. the colors of vertices, edges, and also
+#' interactively right now though, e.g. the colors of vertices, edges, and also
 #' others have to be pre-defined.
 #'
 #' `tkplot()` is an interactive graph drawing facility. It is not very well
@@ -86,7 +86,7 @@ assign(".next", 1, .tkplot.env)
 #' in postscript format.
 #'
 #' `tk_canvas()` returns the Tk canvas object that belongs to a graph
-#' plot. The canvas can be directly manipulated then, eg. labels can be added,
+#' plot. The canvas can be directly manipulated then, e.g. labels can be added,
 #' it could be saved to a file programmatically, etc. See an example below.
 #'
 #' `tk_coords()` returns the coordinates of the vertices in a matrix.
@@ -131,6 +131,7 @@ assign(".next", 1, .tkplot.env)
 #'   and `tk_rotate()` return `NULL` invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [plot.igraph()], [layout()]
+#' @family tkplot
 #' @export
 #' @keywords graphs
 #' @section Examples:
@@ -671,6 +672,7 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_close <- function(tkp.id, window.close = TRUE) {
   if (window.close) {
@@ -685,6 +687,7 @@ tk_close <- function(tkp.id, window.close = TRUE) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_off <- function() {
   eapply(.tkplot.env, function(tkp) {
@@ -695,6 +698,7 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_fit <- function(tkp.id, width = NULL, height = NULL) {
   tkp <- .tkplot.get(tkp.id)
@@ -724,6 +728,7 @@ tk_fit <- function(tkp.id, width = NULL, height = NULL) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -749,6 +754,7 @@ tk_center <- function(tkp.id) {
 
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
+#' @family tkplot
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
@@ -760,6 +766,7 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_postscript <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -774,6 +781,7 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_coords <- function(tkp.id, norm = FALSE) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -790,6 +798,7 @@ tk_coords <- function(tkp.id, norm = FALSE) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_set_coords <- function(tkp.id, coords) {
   stopifnot(is.matrix(coords), ncol(coords) == 2)
@@ -799,6 +808,7 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -824,6 +834,7 @@ tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 }
 
 #' @rdname tkplot
+#' @family tkplot
 #' @export
 tk_canvas <- function(tkp.id) {
   .tkplot.get(tkp.id)$canvas

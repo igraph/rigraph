@@ -23,6 +23,7 @@
 # Connected components, subgraphs, kinda
 ###################################################################
 
+#' @family components
 #' @export
 count_components <- function(graph, mode = c("weak", "strong")) {
   if (!is_igraph(graph)) {
@@ -43,6 +44,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #'   frequency) is calculated.
 #' @param mul.size Logical. If TRUE the relative frequencies will be multiplied
 #'   by the cluster sizes.
+#' @family components
 #' @export
 #' @importFrom graphics hist
 component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
@@ -70,7 +72,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 
 #' Decompose a graph into components
 #'
-#' Creates a separate graph for each component of a graph.
+#' Creates a separate graph for each connected component of a graph.
 #'
 #' @aliases decompose.graph
 #' @param graph The original graph.
@@ -83,12 +85,13 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'   ignored. Supply `NA` here if you don't want to limit the number of
 #'   components.
 #' @param min.vertices The minimum number of vertices a component should
-#'   contain in order to place it in the result list. Eg. supply 2 here to ignore
+#'   contain in order to place it in the result list. E.g. supply 2 here to ignore
 #'   isolate vertices.
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [is_connected()] to decide whether a graph is connected,
 #' [components()] to calculate the connected components of a graph.
+#' @family components
 #' @export
 #' @keywords graphs
 #' @examples
@@ -155,10 +158,12 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #' g <- make_graph("krackhardt_kite")
 #' bridges(g)
 #'
+#' @family components
 #' @export
 articulation_points <- articulation_points
 
 #' @rdname articulation_points
+#' @family components
 #' @export
 bridges <- bridges
 
@@ -198,5 +203,6 @@ bridges <- bridges
 #' clu <- components(g)$membership
 #' g <- add_edges(g, c(which(clu == 1), which(clu == 2)))
 #' bc <- biconnected_components(g)
+#' @family components
 #' @export
 biconnected_components <- biconnected_components

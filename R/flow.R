@@ -77,6 +77,7 @@
 #' g2 <- graph(c(1, 2, 2, 3, 3, 4, 1, 6, 6, 5, 5, 4, 4, 1))
 #' E(g2)$capacity <- c(3, 1, 2, 10, 1, 3, 2)
 #' min_cut(g2, value.only = FALSE)
+#' @family flow
 #' @export
 min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.only = TRUE) {
   if (!is_igraph(graph)) {
@@ -146,7 +147,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 
 
 
-#' Vertex connectivity.
+#' Vertex connectivity
 #'
 #' The vertex connectivity of a graph or two vertices, this is recently also
 #' called group cohesion.
@@ -163,7 +164,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' number of vertices needed to remove to make the graph not strongly
 #' connected. (If the graph is not strongly connected then this is zero.)
 #' `vertex_connectivity()` calculates this quantity if neither the
-#' `source` nor `target` arguments are given. (Ie. they are both
+#' `source` nor `target` arguments are given. (I.e. they are both
 #' `NULL`.)
 #'
 #' A set of vertex disjoint directed paths from `source` to `vertex`
@@ -203,6 +204,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
 #' Blocks In Social Networks: Node Connectivity and Conditional Density.
 #' *Sociological Methodology* 31 (1) : 305-359.
+#' @family flow
 #' @export
 #' @keywords graphs
 #' @examples
@@ -248,7 +250,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 
 
 
-#' Edge connectivity.
+#' Edge connectivity
 #'
 #' The edge connectivity of a graph or two vertices, this is recently also
 #' called group adhesion.
@@ -262,7 +264,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' The edge connectivity of a graph is the minimum of the edge connectivity of
 #' every (ordered) pair of vertices in the graph.  `edge_connectivity()`
 #' calculates this quantity if neither the `source` nor the `target`
-#' arguments are given (ie. they are both `NULL`).
+#' arguments are given (i.e. they are both `NULL`).
 #'
 #' A set of edge disjoint paths between two vertices is a set of paths between
 #' them containing no common edges. The maximum number of edge disjoint paths
@@ -296,6 +298,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' [vertex_disjoint_paths()], [cohesion()]
 #' @references Douglas R. White and Frank Harary: The cohesiveness of blocks in
 #' social networks: node connectivity and conditional density, TODO: citation
+#' @family flow
 #' @export
 #' @keywords graphs
 #' @examples
@@ -337,6 +340,7 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
   }
 }
 
+#' @family flow
 #' @export
 edge_disjoint_paths <- function(graph, source, target) {
   if (!is_igraph(graph)) {
@@ -357,6 +361,7 @@ edge_disjoint_paths <- function(graph, source, target) {
   )
 }
 
+#' @family flow
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   if (!is_igraph(graph)) {
@@ -377,6 +382,7 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   )
 }
 
+#' @family flow
 #' @export
 adhesion <- function(graph, checks = TRUE) {
   if (!is_igraph(graph)) {
@@ -389,6 +395,7 @@ adhesion <- function(graph, checks = TRUE) {
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
+#' @family flow
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
   if (!is_igraph(x)) {
@@ -436,6 +443,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #'   a --+ 1:2:3, 1:2:3 --+ b
 #' )
 #' st_cuts(g2, source = "s", target = "t")
+#' @family flow
 #' @export
 st_cuts <- st_cuts
 
@@ -486,6 +494,7 @@ st_cuts <- st_cuts
 #'   a --+ 1:2:3:4:5, 1:2:3:4:5 --+ b
 #' )
 #' st_min_cuts(g, source = "s", target = "t")
+#' @family flow
 #' @export
 st_min_cuts <- st_min_cuts
 
@@ -542,6 +551,7 @@ st_min_cuts <- st_min_cuts
 #' layout <- layout_as_tree(dtree$domtree, root = "R")
 #' layout[, 2] <- -layout[, 2]
 #' plot(dtree$domtree, layout = layout, vertex.label = V(dtree$domtree)$name)
+#' @family flow
 #' @export
 dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # Argument checks
@@ -613,9 +623,9 @@ min_st_separators <- min_st_separators
 #' between two vertices is calculated.
 #'
 #' `max_flow()` calculates the maximum flow between two vertices in a
-#' weighted (ie. valued) graph. A flow from `source` to `target` is
+#' weighted (i.e. valued) graph. A flow from `source` to `target` is
 #' an assignment of non-negative real numbers to the edges of the graph,
-#' satisfying two properties: (1) for each edge the flow (ie. the assigned
+#' satisfying two properties: (1) for each edge the flow (i.e. the assigned
 #' number) is not more than the capacity of the edge (the `capacity`
 #' parameter or edge attribute), (2) for every vertex, except the source and
 #' the target the incoming flow is the same as the outgoing flow. The value of
@@ -665,6 +675,7 @@ min_st_separators <- min_st_separators
 #' colnames(E) <- c("from", "to", "capacity")
 #' g1 <- graph_from_data_frame(as.data.frame(E))
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
+#' @family flow
 #' @export
 max_flow <- max_flow
 
@@ -689,6 +700,7 @@ max_flow <- max_flow
 #'   vertex separator or not.
 #' @seealso [is_min_separator()], [min_separators()]
 #'   lists all vertex separator of minimum size.
+#' @family flow
 #' @export
 is_separator <- is_separator
 
@@ -742,6 +754,7 @@ is_separator <- is_separator
 #' check.sep(mw4)
 #' check.sep(mw5)
 #'
+#' @family flow
 #' @export
 is_min_separator <- is_min_separator
 
@@ -773,6 +786,7 @@ is_min_separator <- is_min_separator
 #' J. Moody and D. R. White. Structural cohesion and embeddedness: A
 #' hierarchical concept of social groups. *American Sociological Review*,
 #' 68 103--127, Feb 2003.
+#' @family flow
 #' @export
 #' @examples
 #' # The graph from the Moody-White paper

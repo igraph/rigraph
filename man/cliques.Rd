@@ -11,7 +11,7 @@
 \alias{count_max_cliques}
 \alias{max_cliques}
 \alias{clique_size_counts}
-\title{Functions to find cliques, ie. complete subgraphs in a graph}
+\title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
 
@@ -22,7 +22,7 @@ max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 undirected ones, multiple edges and loops are ignored.}
 
 \item{min}{Numeric constant, lower limit on the size of the cliques to find.
-\code{NULL} means no limit, ie. it is the same as 0.}
+\code{NULL} means no limit, i.e. it is the same as 0.}
 
 \item{max}{Numeric constant, upper limit on the size of the cliques to find.
 \code{NULL} means no limit.}
@@ -97,9 +97,18 @@ in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
 \code{\link[=ivs]{ivs()}}
+
+Other cliques: 
+\code{\link{ivs}()},
+\code{\link{weighted_cliques}()}
+
+Other cliques: 
+\code{\link{ivs}()},
+\code{\link{weighted_cliques}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
+\concept{cliques}
 \keyword{graphs}

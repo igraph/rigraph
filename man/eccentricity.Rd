@@ -45,4 +45,11 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 \seealso{
 \code{\link[=radius]{radius()}} for a related concept,
 \code{\link[=distances]{distances()}} for general shortest path calculations.
+
+Other paths: 
+\code{\link{all_simple_paths}()},
+\code{\link{distance_table}()},
+\code{\link{is_dag}()},
+\code{\link{radius}()}
 }
+\concept{paths}

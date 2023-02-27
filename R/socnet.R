@@ -43,6 +43,7 @@
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [tkplot()] for interactive plotting of graphs.
 #' @keywords graphs
+#' @family socnet
 #' @export
 tkigraph <- function() {
   requireNamespace("tcltk", quietly = TRUE) ||

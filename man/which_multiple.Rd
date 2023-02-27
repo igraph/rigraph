@@ -44,7 +44,7 @@ edges.
 
 Note that the semantics for \code{which_multiple()} and \code{count_multiple()} is
 different. \code{which_multiple()} gives \code{TRUE} for all occurrences of a
-multiple edge except for one. Ie. if there are three \code{i-j} edges in the
+multiple edge except for one. I.e. if there are three \code{i-j} edges in the
 graph then \code{which_multiple()} returns \code{TRUE} for only two of them while
 \code{count_multiple()} returns \sQuote{3} for all three.
 
@@ -80,8 +80,33 @@ E(g)$weight
 }
 \seealso{
 \code{\link[=simplify]{simplify()}} to eliminate loop and multiple edges.
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_matching}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_mutual}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{structural.properties}
 \keyword{graphs}

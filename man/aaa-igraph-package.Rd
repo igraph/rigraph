@@ -167,3 +167,4 @@ See especially the documentation section. Join the discussion forum at
 \url{https://igraph.discourse.group} if you have questions or comments.
 }
 
+\keyword{internal}

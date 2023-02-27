@@ -51,9 +51,9 @@ between two vertices is calculated.
 }
 \details{
 \code{max_flow()} calculates the maximum flow between two vertices in a
-weighted (ie. valued) graph. A flow from \code{source} to \code{target} is
+weighted (i.e. valued) graph. A flow from \code{source} to \code{target} is
 an assignment of non-negative real numbers to the edges of the graph,
-satisfying two properties: (1) for each edge the flow (ie. the assigned
+satisfying two properties: (1) for each edge the flow (i.e. the assigned
 number) is not more than the capacity of the edge (the \code{capacity}
 parameter or edge attribute), (2) for every vertex, except the source and
 the target the incoming flow is the same as the outgoing flow. The value of
@@ -75,4 +75,16 @@ Flow Problem \emph{Journal of the ACM} 35:921-940, 1988.
 \code{\link[=min_cut]{min_cut()}} for minimum cut calculations,
 \code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
 \code{\link[=vertex_connectivity]{vertex_connectivity()}}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
 }
+\concept{flow}

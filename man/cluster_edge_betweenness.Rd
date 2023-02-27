@@ -42,7 +42,7 @@ bottom. There is one line for each merge (i.e. split) in matrix, the first
 line is the first merge (last split). The communities are identified by
 integer number starting from one. Community ids smaller than or equal to
 \eqn{N}, the number of vertices in the graph, belong to singleton
-communities, ie. individual vertices. Before the first merge we have \eqn{N}
+communities, i.e. individual vertices. Before the first merge we have \eqn{N}
 communities numbered from one to \eqn{N}. The first merge, the first line of
 the matrix creates community \eqn{N+1}, the second merge creates community
 \eqn{N+2}, etc.}
@@ -109,8 +109,30 @@ methods.
 
 See \code{\link[=communities]{communities()}} for extracting the results of the community
 detection.
+
+Other community: 
+\code{\link{as_membership}()},
+\code{\link{cluster_fast_greedy}()},
+\code{\link{cluster_fluid_communities}()},
+\code{\link{cluster_infomap}()},
+\code{\link{cluster_label_prop}()},
+\code{\link{cluster_leading_eigen}()},
+\code{\link{cluster_leiden}()},
+\code{\link{cluster_louvain}()},
+\code{\link{cluster_optimal}()},
+\code{\link{cluster_spinglass}()},
+\code{\link{cluster_walktrap}()},
+\code{\link{compare}()},
+\code{\link{contract}()},
+\code{\link{groups}()},
+\code{\link{make_clusters}()},
+\code{\link{membership}()},
+\code{\link{modularity.igraph}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{split_join_distance}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{community}
 \keyword{graphs}

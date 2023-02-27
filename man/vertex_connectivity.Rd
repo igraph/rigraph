@@ -8,7 +8,7 @@
 \alias{vertex_disjoint_paths}
 \alias{graph.cohesion}
 \alias{cohesion.igraph}
-\title{Vertex connectivity.}
+\title{Vertex connectivity}
 \usage{
 vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 
@@ -53,7 +53,7 @@ The vertex connectivity of a graph is the minimum vertex connectivity of all
 number of vertices needed to remove to make the graph not strongly
 connected. (If the graph is not strongly connected then this is zero.)
 \code{vertex_connectivity()} calculates this quantity if neither the
-\code{source} nor \code{target} arguments are given. (Ie. they are both
+\code{source} nor \code{target} arguments are given. (I.e. they are both
 \code{NULL}.)
 
 A set of vertex disjoint directed paths from \code{source} to \code{vertex}
@@ -95,8 +95,31 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
 \seealso{
 \code{\link[=max_flow]{max_flow()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
 \code{\link[=edge_disjoint_paths]{edge_disjoint_paths()}}, \code{\link[=adhesion]{adhesion()}}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()}
+
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

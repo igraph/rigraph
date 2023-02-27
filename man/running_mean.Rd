@@ -11,7 +11,7 @@ running_mean(v, binwidth)
 \item{v}{The numeric vector.}
 
 \item{binwidth}{Numeric constant, the size of the bin, should be meaningful,
-ie. smaller than the length of \code{v}.}
+i.e. smaller than the length of \code{v}.}
 }
 \value{
 A numeric vector of length \code{length(v)-binwidth+1}
@@ -31,7 +31,14 @@ the first \code{binwidth} elements of \code{v}, the second element of
 running_mean(1:100, 10)
 
 }
+\seealso{
+Other other: 
+\code{\link{convex_hull}()},
+\code{\link{sample_seq}()},
+\code{\link{srand}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{other}
 \keyword{manip}

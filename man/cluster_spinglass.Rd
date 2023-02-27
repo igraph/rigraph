@@ -43,20 +43,20 @@ unpopulated.}
 
 \item{parupdate}{Logical constant, whether to update the spins of the
 vertices in parallel (synchronously) or not. This argument is ignored if the
-second form of the function is used (ie. the \sQuote{\code{vertex}} argument
+second form of the function is used (i.e. the \sQuote{\code{vertex}} argument
 is present). It is also not implemented in the \dQuote{neg} implementation.}
 
 \item{start.temp}{Real constant, the start temperature.  This argument is
-ignored if the second form of the function is used (ie. the
+ignored if the second form of the function is used (i.e. the
 \sQuote{\code{vertex}} argument is present).}
 
 \item{stop.temp}{Real constant, the stop temperature. The simulation
 terminates if the temperature lowers below this level.  This argument is
-ignored if the second form of the function is used (ie. the
+ignored if the second form of the function is used (i.e. the
 \sQuote{\code{vertex}} argument is present).}
 
 \item{cool.fact}{Cooling factor for the simulated annealing.  This argument
-is ignored if the second form of the function is used (ie. the
+is ignored if the second form of the function is used (i.e. the
 \sQuote{\code{vertex}} argument is present).}
 
 \item{update.rule}{Character constant giving the \sQuote{null-model} of the
@@ -87,11 +87,11 @@ algorithm, using the number of spins as the number of colors. This argument
 is ignored if the \sQuote{orig} implementation is chosen.}
 }
 \value{
-If the \code{vertex} argument is not given, ie. the first form is
+If the \code{vertex} argument is not given, i.e. the first form is
 used then a \code{\link[=cluster_spinglass]{cluster_spinglass()}} returns a
 \code{\link[=communities]{communities()}} object.
 
-If the \code{vertex} argument is present, ie. the second form is used then a
+If the \code{vertex} argument is present, i.e. the second form is used then a
 named list is returned with the following components:
 \item{community}{Numeric vector giving the ids of the vertices in the same
 community as \code{vertex}.} \item{cohesion}{The cohesion score of the
@@ -109,7 +109,7 @@ This function tries to find communities in a graph. A community is a set of
 nodes with many edges inside the community and few edges between outside it
 (i.e. between the community itself and the rest of the graph.)
 
-This idea is reversed for edges having a negative weight, ie. few negative
+This idea is reversed for edges having a negative weight, i.e. few negative
 edges inside a community and many negative edges between communities. Note
 that only the \sQuote{neg} implementation supports negative edge weights.
 
@@ -145,6 +145,27 @@ positive and negative links, \url{https://arxiv.org/abs/0811.2329} (2008).
 }
 \seealso{
 \code{\link[=communities]{communities()}}, \code{\link[=components]{components()}}
+
+Other community: 
+\code{\link{as_membership}()},
+\code{\link{cluster_edge_betweenness}()},
+\code{\link{cluster_fast_greedy}()},
+\code{\link{cluster_fluid_communities}()},
+\code{\link{cluster_infomap}()},
+\code{\link{cluster_label_prop}()},
+\code{\link{cluster_leading_eigen}()},
+\code{\link{cluster_leiden}()},
+\code{\link{cluster_louvain}()},
+\code{\link{cluster_optimal}()},
+\code{\link{cluster_walktrap}()},
+\code{\link{compare}()},
+\code{\link{contract}()},
+\code{\link{groups}()},
+\code{\link{make_clusters}()},
+\code{\link{membership}()},
+\code{\link{modularity.igraph}()},
+\code{\link{plot_dendrogram}()},
+\code{\link{split_join_distance}()}
 }
 \author{
 Jorg Reichardt for the original code and Gabor Csardi
@@ -153,4 +174,5 @@ Jorg Reichardt for the original code and Gabor Csardi
 Changes to the original function for including the possibility of negative
 ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
 }
+\concept{community}
 \keyword{graphs}

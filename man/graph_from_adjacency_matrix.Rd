@@ -161,4 +161,5 @@ create graphs.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{adjacency}
 \keyword{graphs}

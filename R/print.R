@@ -430,6 +430,7 @@
   cat(alstr, sep = "\n")
 }
 
+#' @family print
 #' @export
 print_all <- function(object, ...) {
   print.igraph(object, full = TRUE, ...)
@@ -497,7 +498,7 @@ print_all <- function(object, ...) {
 #' @param vertex.attributes Logical constant, whether to print vertex
 #'   attributes.
 #' @param edge.attributes Logical constant, whether to print edge attributes.
-#' @param names Logical constant, whether to print symbolic vertex names (ie.
+#' @param names Logical constant, whether to print symbolic vertex names (i.e.
 #'   the `name` vertex attribute) or vertex ids.
 #' @param max.lines The maximum number of lines to use. The rest of the
 #'   output will be truncated.
@@ -506,9 +507,10 @@ print_all <- function(object, ...) {
 #' @param \dots Additional agruments.
 #' @return All these functions return the graph invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @method print igraph
 #' @export
-#' @export print.igraph
+#' @method print igraph
+#' @rawNamespace export(print.igraph)
+#' @family print
 #' @keywords graphs
 #' @examples
 #'
@@ -555,6 +557,7 @@ print.igraph <- function(x, full = igraph_opt("print.full"),
 
 #' @rdname print.igraph
 #' @method summary igraph
+#' @family print
 #' @export
 summary.igraph <- function(object, ...) {
   .print.header(object)

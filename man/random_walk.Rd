@@ -74,3 +74,4 @@ cor(table(w), ec)
 ## But these are (almost) the same
 cor(table(w), pg)
 }
+\concept{random_walk}

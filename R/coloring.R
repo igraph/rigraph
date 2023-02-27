@@ -17,6 +17,7 @@
 #' @return A numeric vector where item `i` contains the color index
 #'   associated to vertex `i`
 #'
+#' @family coloring
 #' @export
 #' @keywords graphs
 #' @examples

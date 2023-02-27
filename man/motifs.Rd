@@ -24,7 +24,7 @@ classes. Note that for unconnected subgraphs, which are not considered to be
 motifs, the result will be \code{NA}.
 }
 \description{
-Graph motifs are small connected subgraphs with a well-defined
+Graph motifs are small connected induced subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{

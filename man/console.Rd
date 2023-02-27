@@ -3,15 +3,24 @@
 \name{console}
 \alias{console}
 \alias{igraph.console}
+\alias{.igraph.progress}
+\alias{.igraph.status}
 \title{The igraph console}
 \usage{
 console()
+
+.igraph.progress(percent, message, clean = FALSE)
+
+.igraph.status(message)
+}
+\arguments{
+\item{percent, message, clean}{Used internally by \code{.igraph.progress()} and \code{.igraph.status()}}
 }
 \value{
 \code{NULL}, invisibly.
 }
 \description{
-The igraph console is a GUI windows that shows what the currently running
+The igraph console is a GUI window that shows what the currently running
 igraph function is doing.
 }
 \details{
@@ -31,4 +40,5 @@ The console is written in Tcl/Tk and required the \code{tcltk} package.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{console}
 \keyword{graphs}

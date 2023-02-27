@@ -41,13 +41,17 @@ to supply \code{NULL} here than \code{V(graph)}.}
 other transitivity measures. If it is \code{NULL} (the default) and the
 graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{isolates}{Character scalar, defines how to treat vertices with degree
-zero and one. If it is \sQuote{\code{NaN}} then they local transitivity is
+\item{isolates}{Character scalar, for local versions of transitivity, it
+defines how to treat vertices with degree zero and one.
+If it is \sQuote{\code{NaN}} then their local transitivity is
 reported as \code{NaN} and they are not included in the averaging, for the
 transitivity types that calculate an average. If there are no vertices with
 degree two or higher, then the averaging will still result \code{NaN}. If it
 is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they
-are included in the averaging, if an average is calculated.}
+are included in the averaging, if an average is calculated.
+For the global transitivity, it controls how to handle graphs with
+no connected triplets: \code{NaN} or zero will be returned according to
+the respective setting.}
 }
 \value{
 For \sQuote{\code{global}} a single number, or \code{NaN} if there
@@ -114,7 +118,33 @@ Alain Barrat, Marc Barthelemy, Romualdo Pastor-Satorras, Alessandro
 Vespignani: The architecture of complex weighted networks, Proc. Natl. Acad.
 Sci. USA 101, 3747 (2004)
 }
+\seealso{
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
+\code{\link{diameter}()},
+\code{\link{distance_table}()},
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_matching}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{structural.properties}
 \keyword{graphs}

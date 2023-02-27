@@ -102,3 +102,4 @@ for (i in 1:length(gl$cliques)) {
   plot(g, layout = co)
 }
 }
+\concept{glet}

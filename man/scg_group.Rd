@@ -79,7 +79,7 @@ linear running time and memory load.
 }
 \examples{
 
-
+\dontrun{
 ## We are not running these examples any more, because they
 ## take a long time to run and this is against the CRAN repository
 ## policy. Copy and paste them by hand to your R prompt if
@@ -122,6 +122,7 @@ gr.true <- scg_group(cbind(x), 100)
 gr.km <- kmeans(x, 100, 100, 300)$cluster
 scg_eps(cbind(x), gr.true)
 scg_eps(cbind(x), gr.km)
+}
 
 }
 \references{
@@ -134,9 +135,15 @@ Matrix Analysis and Applications}, 2008.
 \seealso{
 \link{scg-method} for a detailed introduction. \code{\link[=scg]{scg()}},
 \code{\link[=scg_eps]{scg_eps()}}
+
+Other scg: 
+\code{\link{scg_semi_proj}()},
+\code{\link{scg}()},
+\code{\link{stochastic_matrix}()}
 }
 \author{
 David Morton de Lachapelle \email{david.morton@epfl.ch},
 \email{david.mortondelachapelle@swissquote.ch}
 }
+\concept{scg}
 \keyword{graphs}

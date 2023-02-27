@@ -11,7 +11,7 @@ as_edgelist(graph, names = TRUE)
 \item{graph}{The graph to convert.}
 
 \item{names}{Whether to return a character matrix containing vertex
-names (ie. the \code{name} vertex attribute) if they exist or numeric
+names (i.e. the \code{name} vertex attribute) if they exist or numeric
 vertex ids.}
 }
 \value{
@@ -35,5 +35,18 @@ as_edgelist(g)
 }
 \seealso{
 \code{\link[=graph_from_adjacency_matrix]{graph_from_adjacency_matrix()}}, \code{\link[=read_graph]{read_graph()}}
+
+Other conversion: 
+\code{\link{as.directed}()},
+\code{\link{as.matrix.igraph}()},
+\code{\link{as_adj_list}()},
+\code{\link{as_adjacency_matrix}()},
+\code{\link{as_data_frame}()},
+\code{\link{as_graphnel}()},
+\code{\link{as_incidence_matrix}()},
+\code{\link{as_long_data_frame}()},
+\code{\link{graph_from_adj_list}()},
+\code{\link{graph_from_graphnel}()}
 }
+\concept{conversion}
 \keyword{graphs}

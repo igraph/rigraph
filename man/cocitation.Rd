@@ -46,4 +46,5 @@ bibcoupling(g)
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{cocitation}
 \keyword{graphs}

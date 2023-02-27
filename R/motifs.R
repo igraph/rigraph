@@ -22,7 +22,7 @@
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected subgraphs with a well-defined
+#' Graph motifs are small connected induced subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
 #' `motifs()` searches a graph for motifs of a given size and returns a
@@ -74,7 +74,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected subgraphs with a well-defined
+#' Graph motifs are small connected induced subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
 #' `count_motifs()` calculates the total number of motifs of a given
@@ -118,7 +118,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
 #' Graph motifs
 #'
-#' Graph motifs are small connected subgraphs with a well-defined
+#' Graph motifs are small connected induced subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
 #' `sample_motifs()` estimates the total number of motifs of a given
@@ -201,7 +201,8 @@ dyad_census <- dyad_census
 
 #' Triad census, subgraphs with three vertices
 #'
-#' This function counts the different subgraphs of three vertices in a graph.
+#' This function counts the different induced subgraphs of three vertices in
+#' a graph.
 #'
 #' Triad census was defined by David and Leinhardt (see References below).
 #' Every triple of vertices (A, B, C) are classified into the 16 possible

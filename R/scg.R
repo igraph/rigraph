@@ -86,6 +86,7 @@ NULL
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_adj()]
+#' @family scg
 #' @export
 #' @keywords graphs
 #' @examples
@@ -198,11 +199,12 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
 #' Matrix Analysis and Applications*, 2008.
 #' <http://people.epfl.ch/david.morton>
+#' @family scg
 #' @export
 #' @keywords graphs
 #' @examples
 #'
-#'
+#' \dontrun{
 #' ## We are not running these examples any more, because they
 #' ## take a long time to run and this is against the CRAN repository
 #' ## policy. Copy and paste them by hand to your R prompt if
@@ -245,6 +247,7 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' gr.km <- kmeans(x, 100, 100, 300)$cluster
 #' scg_eps(cbind(x), gr.true)
 #' scg_eps(cbind(x), gr.km)
+#' }
 #'
 scg_group <- function(V, nt,
                       mtype = c(
@@ -339,6 +342,7 @@ scg_group <- function(V, nt,
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
 #' Matrix Analysis and Applications*, 2008.
 #' <http://people.epfl.ch/david.morton>
+#' @family scg
 #' @export
 #' @examples
 #'
@@ -514,11 +518,12 @@ scg_semi_proj <- function(groups,
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
 #' Matrix Analysis and Applications*, 2008.
 #' <http://people.epfl.ch/david.morton>
+#' @family scg
 #' @export
 #' @keywords graphs
 #' @examples
 #'
-#'
+#' \dontrun{
 #' ## We are not running these examples any more, because they
 #' ## take a long time (~20 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
@@ -596,6 +601,7 @@ scg_semi_proj <- function(groups,
 #'   vertex.color = col[com.cg], vertex.label = NA
 #' )
 #' par(op)
+#' }
 #'
 scg <- function(X, ev, nt, groups = NULL,
                 mtype = c("symmetric", "laplacian", "stochastic"),
@@ -613,6 +619,7 @@ scg <- function(X, ev, nt, groups = NULL,
 }
 
 #' @method scg igraph
+#' @family scg
 #' @export
 scg.igraph <- function(X, ev, nt, groups = NULL,
                        mtype = c("symmetric", "laplacian", "stochastic"),
@@ -637,6 +644,7 @@ scg.igraph <- function(X, ev, nt, groups = NULL,
 }
 
 #' @method scg matrix
+#' @family scg
 #' @export
 scg.matrix <- function(X, ev, nt, groups = NULL,
                        mtype = c("symmetric", "laplacian", "stochastic"),
@@ -661,6 +669,7 @@ scg.matrix <- function(X, ev, nt, groups = NULL,
 }
 
 #' @method scg Matrix
+#' @family scg
 #' @export
 scg.Matrix <- function(X, ev, nt, groups = NULL,
                        mtype = c("symmetric", "laplacian", "stochastic"),

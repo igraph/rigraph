@@ -34,9 +34,10 @@
 #' @aliases running.mean
 #' @param v The numeric vector.
 #' @param binwidth Numeric constant, the size of the bin, should be meaningful,
-#'   ie. smaller than the length of `v`.
+#'   i.e. smaller than the length of `v`.
 #' @return A numeric vector of length `length(v)-binwidth+1`
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family other
 #' @export
 #' @keywords manip
 #' @examples
@@ -74,6 +75,7 @@ running_mean <- function(v, binwidth) {
 #' @references Jeffrey Scott Vitter: An Efficient Algorithm for Sequential
 #' Random Sampling, *ACM Transactions on Mathematical Software*, 13/1,
 #' 58--67.
+#' @family other
 #' @export
 #' @keywords datagen
 #' @examples
@@ -159,6 +161,7 @@ igraph.i.spMatrix <- function(M) {
 #'
 #' @param seed Ignored.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @family other
 #' @export
 srand <- function(seed) {
   warning(
@@ -190,5 +193,6 @@ srand <- function(seed) {
 #'
 #' M <- cbind(runif(100), runif(100))
 #' convex_hull(M)
+#' @family other
 #' @export
 convex_hull <- convex_hull

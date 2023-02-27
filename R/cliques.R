@@ -21,7 +21,7 @@
 
 
 
-#' Functions to find cliques, ie. complete subgraphs in a graph
+#' Functions to find cliques, i.e. complete subgraphs in a graph
 #'
 #' These functions find all, the largest or all the maximal cliques in an
 #' undirected graph. The size of the largest clique can also be calculated.
@@ -50,7 +50,7 @@
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
-#'   `NULL` means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max Numeric constant, upper limit on the size of the cliques to find.
 #'   `NULL` means no limit.
 #' @return `cliques()`, `largest_cliques()` and `clique_num()`
@@ -74,6 +74,7 @@
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 #' in Sparse Graphs in Near-optimal Time.  <https://arxiv.org/abs/1006.5440>
+#' @family cliques
 #' @export
 #' @keywords graphs
 #' @examples
@@ -89,6 +90,7 @@
 #' max_cliques(g)
 cliques <- cliques
 
+#' @family cliques
 #' @export
 largest_cliques <- largest_cliques
 
@@ -103,6 +105,7 @@ largest_cliques <- largest_cliques
 #'   it exists, then it will be overwritten.) Each clique will be a separate line
 #'   in the file, given with the numeric ids of its vertices, separated by
 #'   whitespace.
+#' @family cliques
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   if (!is_igraph(graph)) {
@@ -156,6 +159,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   }
 }
 
+#' @family cliques
 #' @export
 count_max_cliques <- function(graph, min = NULL, max = NULL,
                               subset = NULL) {
@@ -184,11 +188,12 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
   res
 }
 
+#' @family cliques
 #' @export
 clique_num <- clique_num
 
 
-#' Functions to find weighted cliques, ie. weighted complete subgraphs in a graph
+#' Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph
 #'
 #' These functions find all, the largest or all the maximal weighted cliques in
 #' an undirected graph. The weight of a clique is the sum of the weights of its
@@ -216,7 +221,7 @@ clique_num <- clique_num
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
-#'   `NULL` means no limit, ie. it is the same as 0.
+#'   `NULL` means no limit, i.e. it is the same as 0.
 #' @param max.weight Numeric constant, upper limit on the weight of the cliques to find.
 #'   `NULL` means no limit.
 #' @param vertex.weights Vertex weight vector. If the graph has a `weight`
@@ -236,6 +241,7 @@ clique_num <- clique_num
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
 #' @seealso [ivs()]
+#' @family cliques
 #' @export
 #' @keywords graphs
 #' @examples
@@ -299,6 +305,7 @@ weighted_clique_num <- weighted_clique_num
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
 #' algorithm for generating all the maximal independent sets. *SIAM J
 #' Computing*, 6:505--517, 1977.
+#' @family cliques
 #' @export
 #' @keywords graphs
 #' @examples
@@ -342,6 +349,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
   res
 }
 
+#' @family cliques
 #' @export
 largest_ivs <- function(graph) {
   if (!is_igraph(graph)) {
@@ -359,6 +367,7 @@ largest_ivs <- function(graph) {
   res
 }
 
+#' @family cliques
 #' @export
 maximal_ivs <- function(graph) {
   if (!is_igraph(graph)) {
@@ -376,6 +385,7 @@ maximal_ivs <- function(graph) {
   res
 }
 
+#' @family cliques
 #' @export
 ivs_size <- function(graph) {
   if (!is_igraph(graph)) {
@@ -386,6 +396,7 @@ ivs_size <- function(graph) {
   .Call(C_R_igraph_independence_number, graph)
 }
 
+#' @family cliques
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
