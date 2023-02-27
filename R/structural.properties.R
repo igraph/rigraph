@@ -847,13 +847,17 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @param weights Optional weights for weighted transitivity. It is ignored for
 #'   other transitivity measures. If it is `NULL` (the default) and the
 #'   graph has a `weight` edge attribute, then it is used automatically.
-#' @param isolates Character scalar, defines how to treat vertices with degree
-#'   zero and one. If it is \sQuote{`NaN`} then they local transitivity is
+#' @param isolates Character scalar, for local versions of transitivity, it
+#'   defines how to treat vertices with degree zero and one.
+#'   If it is \sQuote{`NaN`} then their local transitivity is
 #'   reported as `NaN` and they are not included in the averaging, for the
 #'   transitivity types that calculate an average. If there are no vertices with
 #'   degree two or higher, then the averaging will still result `NaN`. If it
 #'   is \sQuote{`zero`}, then we report 0 transitivity for them, and they
 #'   are included in the averaging, if an average is calculated.
+#'   For the global transitivity, it controls how to handle graphs with
+#'   no connected triplets: `NaN` or zero will be returned according to
+#'   the respective setting.
 #' @return For \sQuote{`global`} a single number, or `NaN` if there
 #'   are no connected triples in the graph.
 #'
