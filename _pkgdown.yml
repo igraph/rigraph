@@ -1,25 +1,25 @@
 url: ~
 
+template:
+  bootstrap: 5
+
+
 navbar:
   structure:
     left:
     - intro
     - reference
-    - articles
-    - tutorials
     - news
+    - tutorials
     right: github
   components:
     intro:
       text: Get started
       menu:
-      - text: Intro in English
+      - text: Intro
         href: articles/igraph.html
-      - text: Intro en Español
+      - text: Intro (Español)
         href: articles/igraph_ES.html
-
-template:
-  bootstrap: 5
 
 reference:
 - title: Adjacency

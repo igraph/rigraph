@@ -1,11 +1,11 @@
 ---
-title: "igraph (R interface) in spanish"
+title: "igraph (interfaz R)"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{igraph (R interface)}
+  %\VignetteIndexEntry{igraph (interfaz R)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
