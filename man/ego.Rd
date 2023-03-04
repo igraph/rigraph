@@ -70,16 +70,16 @@ These functions find the vertices not farther than a given limit from
 another fixed vertex, these are called the neighborhood of the vertex.
 }
 \details{
-The neighborhood of a given order \code{o} of a vertex \code{v} includes all
+The neighborhood of a given order \code{r} of a vertex \code{v} includes all
 vertices which are closer to \code{v} than the order. I.e. order 0 is always
 \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 
-\code{ego_size()} calculates the size of the neighborhoods for the
-given vertices with the given order.
+\code{ego_size()} returns the size of the neighborhoods of the given order,
+for each given vertex.
 
-\code{ego()} calculates the neighborhoods of the given vertices with
-the given order parameter.
+\code{ego()} returns the vertices belonging to the neighborhoods of the given
+order, for each given vertex.
 
 \code{make_ego_graph()} is creates (sub)graphs from all neighborhoods of
 the given vertices with the given order parameter. This function preserves

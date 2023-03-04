@@ -41,13 +41,17 @@ to supply \code{NULL} here than \code{V(graph)}.}
 other transitivity measures. If it is \code{NULL} (the default) and the
 graph has a \code{weight} edge attribute, then it is used automatically.}
 
-\item{isolates}{Character scalar, defines how to treat vertices with degree
-zero and one. If it is \sQuote{\code{NaN}} then they local transitivity is
+\item{isolates}{Character scalar, for local versions of transitivity, it
+defines how to treat vertices with degree zero and one.
+If it is \sQuote{\code{NaN}} then their local transitivity is
 reported as \code{NaN} and they are not included in the averaging, for the
 transitivity types that calculate an average. If there are no vertices with
 degree two or higher, then the averaging will still result \code{NaN}. If it
 is \sQuote{\code{zero}}, then we report 0 transitivity for them, and they
-are included in the averaging, if an average is calculated.}
+are included in the averaging, if an average is calculated.
+For the global transitivity, it controls how to handle graphs with
+no connected triplets: \code{NaN} or zero will be returned according to
+the respective setting.}
 }
 \value{
 For \sQuote{\code{global}} a single number, or \code{NaN} if there
