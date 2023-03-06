@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9005
+
+## Chore
+
+  - Update vendored C core.
+
+
+# igraph 1.4.1.9004
+
+## Documentation
+
+  - Improve docs of ego/neighborhood functions.
+
+
+# igraph 1.4.1.9003
+
+## Documentation
+
+  - Improve transitivity() docs.
+
+## Uncategorized
+
+  - Merge branch 'cran-1.4.1'.
+
+
 # igraph 1.4.1.9002
 
 ## Chore

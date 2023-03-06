@@ -46,7 +46,7 @@ print(g2, g = TRUE, v = TRUE, e = TRUE)
 
 }
 \seealso{
-Other community: 
+Community detection
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

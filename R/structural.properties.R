@@ -1163,16 +1163,16 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
 #'
-#' The neighborhood of a given order `o` of a vertex `v` includes all
+#' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' `ego_size()` calculates the size of the neighborhoods for the
-#' given vertices with the given order.
+#' `ego_size()` returns the size of the neighborhoods of the given order,
+#' for each given vertex.
 #'
-#' `ego()` calculates the neighborhoods of the given vertices with
-#' the given order parameter.
+#' `ego()` returns the vertices belonging to the neighborhoods of the given
+#' order, for each given vertex.
 #'
 #' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves

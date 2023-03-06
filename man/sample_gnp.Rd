@@ -45,7 +45,7 @@ Mathematicae} 6, 290--297 (1959).
 \seealso{
 \code{\link[=sample_gnm]{sample_gnm()}}, \code{\link[=sample_pa]{sample_pa()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
@@ -65,7 +65,7 @@ Other games:
 \code{\link{sample_smallworld}()},
 \code{\link{sample_traits_callaway}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

@@ -53,7 +53,7 @@ max(abs(rowSums(W)) - 1)
 \seealso{
 \code{\link[=as_adj]{as_adj()}}
 
-Other scg: 
+Spectral Coarse Graining
 \code{\link{scg_group}()},
 \code{\link{scg_semi_proj}()},
 \code{\link{scg}()}
