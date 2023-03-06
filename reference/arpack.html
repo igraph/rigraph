@@ -303,7 +303,7 @@ Matrices. <em>Linear Algebra and its Applications</em>, vol 88/89, pp 575-595,
     <div class="dont-index"><p><code><a href="eigen_centrality.html">eigen_centrality()</a></code>, <code><a href="page_rank.html">page_rank()</a></code>,
 <code><a href="hub_score.html">hub_score()</a></code>, <code><a href="cluster_leading_eigen.html">cluster_leading_eigen()</a></code> are some of the
 functions in igraph that use ARPACK.</p>
-<p>Other centrality: 
+<p>Centrality measures
 <code><a href="alpha_centrality.html">alpha_centrality</a>()</code>,
 <code><a href="closeness.html">closeness</a>()</code>,
 <code><a href="diversity.html">diversity</a>()</code>,
@@ -315,7 +315,7 @@ functions in igraph that use ARPACK.</p>
 <code><a href="spectrum.html">spectrum</a>()</code>,
 <code><a href="strength.html">strength</a>()</code>,
 <code><a href="subgraph_centrality.html">subgraph_centrality</a>()</code></p>
-<p>Other centrality: 
+<p>Centrality measures
 <code><a href="alpha_centrality.html">alpha_centrality</a>()</code>,
 <code><a href="closeness.html">closeness</a>()</code>,
 <code><a href="diversity.html">diversity</a>()</code>,
@@ -344,17 +344,17 @@ ARPACK, Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vectors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]         [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] -0.261510542  0.108619191</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] -0.206834097  0.498036960</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,]  0.092623951  0.166899501</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] -0.003423423  0.006416922</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,]  0.160505513  0.157578228</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,]  0.593338725  0.283579449</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -0.320838923 -0.313930696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] -0.490573078  0.448340285</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.221327338  0.394812888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] -0.331425352 -0.389329586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              [,1]         [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] -0.42155490  0.387155674</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  0.43115321 -0.331613432</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] -0.04067514 -0.058713897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] -0.24431707 -0.000504789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] -0.34136328 -0.562078986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -0.19068207  0.309863119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -0.20303678  0.238370521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,]  0.31457298  0.407052446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.17591980 -0.311350973</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] -0.50103560 -0.072772747</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $options</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $options$bmat</span>
@@ -435,8 +435,8 @@ ARPACK, Gabor Csardi <a href="mailto:csardi.gabor@gmail.com">csardi.gabor@gmail.
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vectors</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -0.9486833  0.1054093  0.1054093  0.1054093  0.1054093  0.1054093</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7]  0.1054093  0.1054093  0.1054093  0.1054093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0.9486833 -0.1054093 -0.1054093 -0.1054093 -0.1054093 -0.1054093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.1054093 -0.1054093 -0.1054093 -0.1054093</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $options</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $options$bmat</span>
