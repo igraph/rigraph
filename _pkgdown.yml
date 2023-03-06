@@ -10,7 +10,7 @@ navbar:
     - intro
     - reference
     - news
-    - tutorials
+    - articles
     right: github
   components:
     intro:
@@ -20,6 +20,15 @@ navbar:
         href: articles/igraph.html
       - text: Intro (Español)
         href: articles/igraph_ES.html
+    articles:
+      text: Articles
+      menu:
+      - text: Installation FAQs
+        href: articles/installation-troubleshooting.html
+      - text: -------
+      - text: "All articles"
+        href: articles/index.html
+
 
 reference:
 - title: Adjacency
