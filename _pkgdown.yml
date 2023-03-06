@@ -15,7 +15,7 @@ reference:
   - has_concept("deterministic constructors")
   - graph_
   - graph_from_lcf
-- subtitle: "Stochastic constructors -- Random graph models (games)"
+- subtitle: "Stochastic constructors (random graph models)"
 - contents:
   - has_concept("games")
 - subtitle: Constructor modifiers
