@@ -56,7 +56,7 @@ Duncan J Watts and Steven H Strogatz: Collective dynamics of
 \seealso{
 \code{\link[=make_lattice]{make_lattice()}}, \code{\link[=rewire]{rewire()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
@@ -76,7 +76,7 @@ Other games:
 \code{\link{sample_sbm}()},
 \code{\link{sample_traits_callaway}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
