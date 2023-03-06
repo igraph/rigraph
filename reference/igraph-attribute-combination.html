@@ -26,20 +26,26 @@ vertex/edge attributes in these cases."><!-- mathjax --><script src="https://cdn
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -170,33 +176,33 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## new attribute is the sum of the old ones</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8d80bc1 D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 35985e5 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8d80bc1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 35985e5:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## collect attributes into a string</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 159281c D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 88eb55e D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 159281c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 88eb55e:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## concatenate them into a vector, this creates a complex</span></span></span>
 <span class="r-in"><span><span class="co">## attribute</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="st">"concat"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dfe5a6e D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 02b2338 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/x)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dfe5a6e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 02b2338:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## both attributes are collected into strings</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="va">toString</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5c661bb D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2fce716 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/c), name (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5c661bb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2fce716:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## harmonic average of weights, names are dropped</span></span></span>
@@ -204,9 +210,9 @@ general. <code><a href="igraph_options.html">igraph_options()</a></code> on igra
 <span class="r-in"><span>  weight <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">x</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"ignore"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d8fc41c D-W- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 0fd4cd2 D-W- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d8fc41c:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 0fd4cd2:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1-&gt;2 2-&gt;3 3-&gt;4</span>
 </code></pre></div>
     </div>

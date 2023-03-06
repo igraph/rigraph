@@ -20,20 +20,26 @@ identical or overlapping vertex sets."><!-- mathjax --><script src="https://cdnj
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -125,7 +131,7 @@ undirected.</p>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">D</span> <span class="op">-</span> <span class="va">A</span><span class="op">:</span><span class="cn">F</span><span class="op">:</span><span class="va">Y</span>, <span class="va">B</span> <span class="op">-</span> <span class="va">A</span> <span class="op">-</span> <span class="va">X</span> <span class="op">-</span> <span class="cn">F</span> <span class="op">-</span> <span class="va">H</span> <span class="op">-</span> <span class="va">Z</span>, <span class="cn">F</span> <span class="op">-</span> <span class="va">Y</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">net1</span> <span class="op">%s%</span> <span class="va">net2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 416a5a5 UN-- 13 4 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH f94d4fd UN-- 13 4 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + vertex attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |      name</span>
@@ -142,7 +148,7 @@ undirected.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [11]    Y</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [12]    X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [13]    Z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 416a5a5 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from f94d4fd (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] F--H A--B D--F D--A</span>
 </code></pre></div>
     </div>

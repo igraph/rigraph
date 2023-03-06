@@ -20,20 +20,26 @@ root vertex and spread along every edge &amp;#8220;simultaneously&amp;#8221;."><
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -266,22 +272,22 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ed5a5cd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ba6ae28:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ed5a5cd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ba6ae28:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $pred</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ed5a5cd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ba6ae28:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $succ</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ed5a5cd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from ba6ae28:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -354,7 +360,7 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 9c5e014:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from d9a5e61:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>

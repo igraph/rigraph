@@ -18,20 +18,26 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -78,14 +84,14 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># An artificial example</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="make_.html">make_</a></span><span class="op">(</span><span class="fu"><a href="make_full_graph.html">full_graph</a></span><span class="op">(</span><span class="fl">5</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 32c1b10 U--- 5 15 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e103498 U--- 5 15 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 32c1b10:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e103498:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--1 1--2 1--3 1--4 1--5 2--2 2--3 2--4 2--5 3--3 3--4 3--5 4--4 4--5 5--5</span>
 <span class="r-in"><span><span class="fu"><a href="make_.html">make_</a></span><span class="op">(</span><span class="fu"><a href="make_full_graph.html">full_graph</a></span><span class="op">(</span><span class="fl">5</span>, loops <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="fu">without_loops</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 38692d5 U--- 5 10 -- Full graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cbdaeed U--- 5 10 -- Full graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), loops (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 38692d5:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cbdaeed:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1--2 1--3 1--4 1--5 2--3 2--4 2--5 3--4 3--5 4--5</span>
 </code></pre></div>
     </div>

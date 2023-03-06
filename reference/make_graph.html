@@ -18,20 +18,26 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -316,13 +322,13 @@ groups, Journal of Anthropological Research 33, 452-473 (1977).</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 5ee1cca U--- 6 4 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 5ee1cca:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 14fd999 U--- 6 4 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 14fd999:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--2 2--3 3--4 5--6</span>
 <span class="r-in"><span><span class="fu">make_graph</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH fd9603a UN-- 4 3 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8310b11 UN-- 4 3 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from fd9603a (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8310b11 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A--B B--C C--D</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">solids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>

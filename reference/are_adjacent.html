@@ -20,20 +20,26 @@ where the existence of a directed (v1, v2) edge is queried."><!-- mathjax --><sc
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -109,9 +115,9 @@ graph.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ug</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ug</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6975ea0 U--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3d26ff0 U--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6975ea0:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3d26ff0:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 2 2-- 3 3-- 4 4-- 5 5-- 6 6-- 7 7-- 8 8-- 9 9--10 1--10</span>
 <span class="r-in"><span><span class="fu">are_adjacent</span><span class="op">(</span><span class="va">ug</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -120,9 +126,9 @@ graph.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">dg</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">dg</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cff9344 D--- 10 10 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ec32721 D--- 10 10 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cff9344:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ec32721:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-&gt; 2  2-&gt; 3  3-&gt; 4  4-&gt; 5  5-&gt; 6  6-&gt; 7  7-&gt; 8  8-&gt; 9  9-&gt;10 10-&gt; 1</span>
 <span class="r-in"><span><span class="fu">are_adjacent</span><span class="op">(</span><span class="va">ug</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>

@@ -18,20 +18,26 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -170,15 +176,15 @@ the second.</p>
 <span class="r-in"><span><span class="va">g2</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"Event network"</span></span></span>
 <span class="r-in"><span><span class="va">proj2</span> <span class="op">&lt;-</span> <span class="fu">bipartite_projection</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b688398 UNW- 5 8 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c0c8f7d UNW- 5 8 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b688398 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c0c8f7d (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Alice--Bob   Alice--Cecil Alice--Ethel Bob  --Cecil Bob  --Ethel</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] Cecil--Ethel Cecil--Dan   Dan  --Ethel</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">proj2</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 59a0193 UNW- 3 3 -- Event network</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b4c01b1 UNW- 3 3 -- Event network</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c), weight (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 59a0193 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b4c01b1 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Party --Skiing    Party --Badminton Skiing--Badminton</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

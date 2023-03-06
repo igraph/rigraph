@@ -20,20 +20,26 @@ another fixed vertex, these are called the neighborhood of the vertex."><!-- mat
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -254,41 +260,41 @@ done by Vincent Matossian</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 5 5</span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">0</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">ego</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1  2 10  3  9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2  1  3 10  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from d497a9b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from f8f4be8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 2 4 1 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -296,21 +302,21 @@ done by Vincent Matossian</p>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>, <span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>, <span class="st">"h"</span>, <span class="st">"i"</span>, <span class="st">"j"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">make_ego_graph</span><span class="op">(</span><span class="va">g</span>, order <span class="op">=</span> <span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3c658a3 UN-- 5 4 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 64fcc47 UN-- 5 4 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3c658a3 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 64fcc47 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c a--j i--j</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c7121fa UN-- 5 4 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ad32376 UN-- 5 4 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c7121fa (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ad32376 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d a--j</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH a2312c2 UN-- 5 4 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cef566e UN-- 5 4 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from a2312c2 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cef566e (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d d--e</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

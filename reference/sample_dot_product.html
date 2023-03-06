@@ -22,20 +22,26 @@ their latent position vectors."><!-- mathjax --><script src="https://cdnjs.cloud
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -164,8 +170,8 @@ and <code><a href="sample_sphere_volume.html">sample_sphere_volume()</a></code> 
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">lpvs</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8866571 U--- 10 31 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8866571:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3d1bb4e U--- 10 31 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3d1bb4e:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 4 1-- 5 1-- 6 1-- 7 1-- 8 1-- 9 1--10 2-- 4 2-- 5 2-- 6 2-- 8 2--10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 3-- 4 3-- 5 3-- 8 3-- 9 3--10 4-- 5 4-- 7 4-- 8 4--10 5-- 6 5-- 7 5-- 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] 6-- 7 6-- 8 7-- 8 7-- 9 8-- 9 8--10 9--10</span>
@@ -174,8 +180,8 @@ and <code><a href="sample_sphere_volume.html">sample_sphere_volume()</a></code> 
 <span class="r-in"><span><span class="va">lpvs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_sphere_surface.html">sample_sphere_surface</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">5</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">sample_dot_product</span><span class="op">(</span><span class="va">lpvs2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6678e52 U--- 20 128 -- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6678e52:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 19b9b00 U--- 20 128 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 19b9b00:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 3  1-- 5  1-- 7  1-- 8  1-- 9  1--10  1--11  1--12  1--15  1--19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  2-- 3  2-- 4  2-- 5  2-- 6  2-- 9  2--10  2--11  2--12  2--13  2--17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  2--18  2--19  2--20  3-- 6  3-- 7  3-- 8  3-- 9  3--10  3--11  3--12</span>

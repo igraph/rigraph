@@ -24,20 +24,26 @@ given vertex."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -437,43 +443,43 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/10 vertex, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 6 7 8 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $vpath[[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  5  4  3  2  1 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -489,19 +495,19 @@ Saddle River, N.J.: Prentice Hall.</p>
 <span class="r-in"><span><span class="fu">all_shortest_paths</span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span>, <span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7  6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8  7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $res[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from 128c0ed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 4/10 vertices, from bfaadea:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1 10  9  8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

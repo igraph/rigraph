@@ -20,20 +20,26 @@ its nodes where each node comes before all nodes to which it has edges."><!-- ma
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/igraph.html">Get started</a>
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-get-started">Get started</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-get-started">
+    <a class="dropdown-item" href="../articles/igraph.html">Intro</a>
+    <a class="dropdown-item" href="../articles/igraph_ES.html">Intro (Español)</a>
+  </div>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation troubleshooting</a>
+    <a class="dropdown-item" href="../articles/installation-troubleshooting.html">Installation FAQs</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">All articles</a>
   </div>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -134,7 +140,7 @@ and a warning is issued.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">barabasi.game</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">topo_sort</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from b25e3f6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 100/100 vertices, from 8d570e1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  13  14  19  22  23  26  27  29  33  38  39  41  42  43  45  46  47  49</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [19]  50  52  53  55  56  57  59  60  61  62  63  65  66  67  68  69  70  71</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  72  73  74  75  76  77  78  79  80  81  82  84  85  86  87  88  89  90</span>
