@@ -56,5 +56,18 @@ has_eulerian_cycle(g)
 try(eulerian_cycle(g))
 
 }
+\seealso{
+Other cycles: 
+\code{\link{is_dag}()}
+
+Other cycles: 
+\code{\link{is_dag}()}
+
+Other cycles: 
+\code{\link{is_dag}()}
+
+Other cycles: 
+\code{\link{is_dag}()}
+}
 \concept{cycles}
 \keyword{graphs}

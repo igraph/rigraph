@@ -217,41 +217,11 @@ Matrices. \emph{Linear Algebra and its Applications}, vol 88/89, pp 575-595,
 \code{\link[=eigen_centrality]{eigen_centrality()}}, \code{\link[=page_rank]{page_rank()}},
 \code{\link[=hub_score]{hub_score()}}, \code{\link[=cluster_leading_eigen]{cluster_leading_eigen()}} are some of the
 functions in igraph that use ARPACK.
-
-Other centrality: 
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{estimate_betweenness}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
-
-Other centrality: 
-\code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
-\code{\link{closeness}()},
-\code{\link{diversity}()},
-\code{\link{eigen_centrality}()},
-\code{\link{estimate_betweenness}()},
-\code{\link{harmonic_centrality}()},
-\code{\link{hub_score}()},
-\code{\link{page_rank}()},
-\code{\link{power_centrality}()},
-\code{\link{spectrum}()},
-\code{\link{strength}()},
-\code{\link{subgraph_centrality}()}
 }
 \author{
 Rich Lehoucq, Kristi Maschhoff, Danny Sorensen, Chao Yang for
 ARPACK, Gabor Csardi \email{csardi.gabor@gmail.com} for the R interface.
 }
-\concept{centrality}
+\concept{arpack}
 \keyword{datasets}
 \keyword{graphs}

@@ -106,7 +106,8 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' is_dag(g)
 #' g2 <- g + edge(5, 1)
 #' is_dag(g2)
-#' @family paths
+#' @family cycles
+#' @family structural.properties
 #' @export
 is_dag <- is_dag
 
@@ -157,7 +158,7 @@ is_dag <- is_dag
 #' )
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
-#' @family paths
+#' @family chordal
 max_cardinality <- max_cardinality
 
 

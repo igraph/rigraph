@@ -137,7 +137,6 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 
 Other centrality: 
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
@@ -146,7 +145,6 @@ Other centrality:
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
-\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 }

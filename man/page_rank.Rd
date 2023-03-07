@@ -111,7 +111,6 @@ Other centrality scores: \code{\link[=closeness]{closeness()}},
 
 Other centrality: 
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
@@ -120,7 +119,6 @@ Other centrality:
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{power_centrality}()},
-\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 }

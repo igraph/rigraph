@@ -59,15 +59,11 @@ of Computation} 13, 566--579.
 \seealso{
 \code{\link[=is_chordal]{is_chordal()}}
 
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{is_dag}()},
-\code{\link{radius}()}
+Other chordal: 
+\code{\link{is_chordal}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{paths}
+\concept{chordal}
 \keyword{graphs}

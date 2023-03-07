@@ -80,9 +80,12 @@ of Computation} 13, 566--579.
 }
 \seealso{
 \code{\link[=max_cardinality]{max_cardinality()}}
+
+Other chordal: 
+\code{\link{max_cardinality}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{decomposition}
+\concept{chordal}
 \keyword{graphs}

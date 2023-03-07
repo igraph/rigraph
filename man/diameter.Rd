@@ -67,32 +67,14 @@ get_diameter(g, weights = NA)
 \seealso{
 \code{\link[=distances]{distances()}}
 
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{connect}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
+Other paths: 
+\code{\link{all_simple_paths}()},
 \code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
+\code{\link{eccentricity}()},
+\code{\link{radius}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{structural.properties}
+\concept{paths}
 \keyword{graphs}

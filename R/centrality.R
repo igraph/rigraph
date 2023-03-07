@@ -303,7 +303,7 @@ estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "al
 }
 
 #' @rdname arpack
-#' @family centrality
+#' @family arpack
 #' @export
 arpack_defaults <- list(
   bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
@@ -497,7 +497,7 @@ arpack_defaults <- list(
 #'     which = "LM", maxiter = 2000
 #'   ))
 #' }
-#' @family centrality
+#' @family arpack
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
                    env = parent.frame(), complex = !sym) {
@@ -677,7 +677,6 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' ## Smallest eigenvalues
 #' spectrum(kite, which = list(pos = "SM", howmany = 2))$values
 #'
-#' @family centrality
 #' @export
 spectrum <- spectrum
 

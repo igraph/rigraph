@@ -57,7 +57,6 @@ Natl. Acad. Sci. USA 101, 3747 (2004)
 
 Other centrality: 
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
@@ -67,7 +66,6 @@ Other centrality:
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
-\code{\link{spectrum}()},
 \code{\link{subgraph_centrality}()}
 }
 \author{

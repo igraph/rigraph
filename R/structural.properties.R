@@ -58,7 +58,7 @@
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [distances()]
-#' @family structural.properties
+#' @family paths
 #' @export
 #' @keywords graphs
 #' @examples
@@ -1414,6 +1414,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' 47:6, pp. 319-323, 1993
 #' @keywords graphs
 #' @family structural.properties
+#' @family cycles
 #' @export
 #' @examples
 #'
@@ -1446,6 +1447,7 @@ feedback_arc_set <- feedback_arc_set
 #' graph *Proceedings of the ninth annual ACM symposium on Theory of
 #' computing*, 1-10, 1977
 #' @family structural.properties
+#' @family cycles
 #' @export
 #' @keywords graphs
 #' @examples

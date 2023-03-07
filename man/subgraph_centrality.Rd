@@ -47,7 +47,6 @@ centrality in Complex Networks. \emph{Physical Review E} 71, 056103 (2005).
 
 Other centrality: 
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
@@ -57,7 +56,6 @@ Other centrality:
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
-\code{\link{spectrum}()},
 \code{\link{strength}()}
 }
 \author{

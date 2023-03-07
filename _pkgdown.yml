@@ -96,6 +96,10 @@ reference:
   - has_concept("cohesive.blocks")
   - has_concept("triangles")
   - starts_with("assortativity")
+  - spectrum
+- subtitle: Chordal graphs
+- contents:
+  - has_concept("chordal")
 - subtitle: Triangles and transitivity
 - contents:
   - matches("triangles")
@@ -121,6 +125,9 @@ reference:
 - subtitle: Structural queries
 - contents:
   - has_concept("structural queries")
+- subtitle: ARPACK eigenvector calculation
+- contents:
+  - has_concept("arpack")
 - subtitle: Centrality measures
 - contents:
   - has_concept("centrality")
@@ -159,14 +166,14 @@ reference:
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Spectral Coarse Graining
+- title: Spectral coarse graining
 - contents:
   - has_concept("scg")
-- title: Embedding
+- title: Spectral embedding
 - contents:
   - has_concept("embedding")
   - embed_laplacian_matrix
-- title: Hierarchical random graph functions
+- title: Hierarchical random graphs
 - contents:
   - has_concept("hierarchical random graph functions")
 # network analysis end, we keep these sections together ]]]
