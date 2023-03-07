@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9006
+
+## Continuous integration
+
+  - Fix oldrel runs by adding a dependency on the development version of the ape package (#687).
+
+## Documentation
+
+  - Improve "family" titles (#679).
+
+## Uncategorized
+
+  - Spanish vignette in location suggested by #645 (#650).
+
+
 # igraph 1.4.1.9005
 
 ## Chore
