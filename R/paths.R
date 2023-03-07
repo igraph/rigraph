@@ -40,7 +40,7 @@
 #'   from the given vertices should be calculated for directed graphs. If
 #'   `out` then the shortest paths *from* the vertex, if `in`
 #'   then *to* it will be considered. If `all`, the default, then
-#'   the corresponding undirected graph will be used, ie. not directed paths
+#'   the corresponding undirected graph will be used, i.e. not directed paths
 #'   are searched. This argument is ignored for undirected graphs.
 #' @param cutoff Maximum length of path that is considered. If negative, paths of all lengths are considered.
 #' @return A list of integer vectors, each integer vector is a path from

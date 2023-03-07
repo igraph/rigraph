@@ -2,22 +2,22 @@
 % Please edit documentation in R/trees.R
 \name{to_prufer}
 \alias{to_prufer}
-\title{Convert a tree graph to its Prufer sequence}
+\title{Convert a tree graph to its Prüfer sequence}
 \usage{
 to_prufer(graph)
 }
 \arguments{
-\item{graph}{The graph to convert to a Prufer sequence}
+\item{graph}{The graph to convert to a Prüfer sequence}
 }
 \value{
-The Prufer sequence of the graph, represented as a numeric vector of
+The Prüfer sequence of the graph, represented as a numeric vector of
 vertex IDs in the sequence.
 }
 \description{
-\code{to_prufer()} converts a tree graph into its Prufer sequence.
+\code{to_prufer()} converts a tree graph into its Prüfer sequence.
 }
 \details{
-The Prufer sequence of a tree graph with n labeled vertices is a sequence of
+The Prüfer sequence of a tree graph with n labeled vertices is a sequence of
 n-2 numbers, constructed as follows. If the graph has more than two vertices,
 find a vertex with degree one, remove it from the tree and add the label of
 the vertex that it was connected to to the sequence. Repeat until there are
@@ -31,7 +31,7 @@ to_prufer(g)
 }
 \seealso{
 \code{\link[=make_from_prufer]{make_from_prufer()}} to construct a graph from its
-Prufer sequence
+Prüfer sequence
 
 Other trees: 
 \code{\link{is_tree}()},

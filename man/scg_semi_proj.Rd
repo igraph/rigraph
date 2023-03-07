@@ -100,7 +100,7 @@ Matrix Analysis and Applications}, 2008.
 \link{scg-method} for a detailed introduction. \code{\link[=scg]{scg()}},
 \code{\link[=scg_eps]{scg_eps()}}, \code{\link[=scg_group]{scg_group()}}
 
-Other scg: 
+Spectral Coarse Graining
 \code{\link{scg-method}},
 \code{\link{scg_eps}()},
 \code{\link{scg_group}()},

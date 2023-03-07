@@ -72,7 +72,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 
 #' Decompose a graph into components
 #'
-#' Creates a separate graph for each component of a graph.
+#' Creates a separate graph for each connected component of a graph.
 #'
 #' @aliases decompose.graph
 #' @param graph The original graph.
@@ -85,7 +85,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'   ignored. Supply `NA` here if you don't want to limit the number of
 #'   components.
 #' @param min.vertices The minimum number of vertices a component should
-#'   contain in order to place it in the result list. Eg. supply 2 here to ignore
+#'   contain in order to place it in the result list. E.g. supply 2 here to ignore
 #'   isolate vertices.
 #' @return A list of graph objects.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}

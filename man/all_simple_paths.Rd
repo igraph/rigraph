@@ -23,7 +23,7 @@ all_simple_paths(
 from the given vertices should be calculated for directed graphs. If
 \code{out} then the shortest paths \emph{from} the vertex, if \verb{in}
 then \emph{to} it will be considered. If \code{all}, the default, then
-the corresponding undirected graph will be used, ie. not directed paths
+the corresponding undirected graph will be used, i.e. not directed paths
 are searched. This argument is ignored for undirected graphs.}
 
 \item{cutoff}{Maximum length of path that is considered. If negative, paths of all lengths are considered.}

@@ -36,7 +36,7 @@ and even more edges, so probably you don't want to supply too big numbers
 for \code{m} and \code{n}.
 
 De Bruijn graphs have some interesting properties, please see another
-source, eg. Wikipedia for details.
+source, e.g. Wikipedia for details.
 }
 \examples{
 

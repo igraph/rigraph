@@ -106,7 +106,7 @@ simplify(g, edge.attr.comb = list(
 \code{\link[=edge_attr]{edge_attr()}} on how to use graph/vertex/edge attributes in
 general. \code{\link[=igraph_options]{igraph_options()}} on igraph parameters.
 
-Other attributes: 
+Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},

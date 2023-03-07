@@ -47,7 +47,7 @@ g2 <- sample_grg(1000, 0.05, torus = TRUE)
 \seealso{
 \code{\link[=sample_gnp]{sample_gnp()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -73,7 +73,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

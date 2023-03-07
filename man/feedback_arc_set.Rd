@@ -73,6 +73,12 @@ Other structural.properties:
 \code{\link{unfold_tree}()},
 \code{\link{which_multiple}()},
 \code{\link{which_mutual}()}
+
+Graph cycles
+\code{\link{girth}()},
+\code{\link{has_eulerian_path}()},
+\code{\link{is_dag}()}
 }
+\concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}

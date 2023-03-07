@@ -7,7 +7,7 @@
 \alias{graph.adhesion}
 \alias{adhesion}
 \alias{edge.disjoint.paths}
-\title{Edge connectivity.}
+\title{Edge connectivity}
 \usage{
 edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
 }
@@ -45,7 +45,7 @@ and \code{target} arguments are given (and not \code{NULL}).
 The edge connectivity of a graph is the minimum of the edge connectivity of
 every (ordered) pair of vertices in the graph.  \code{edge_connectivity()}
 calculates this quantity if neither the \code{source} nor the \code{target}
-arguments are given (ie. they are both \code{NULL}).
+arguments are given (i.e. they are both \code{NULL}).
 
 A set of edge disjoint paths between two vertices is a set of paths between
 them containing no common edges. The maximum number of edge disjoint paths

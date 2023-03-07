@@ -82,7 +82,7 @@ but the probability of an edge depends on the (potentially) cited
 vertex only.
 }
 \seealso{
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -108,7 +108,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -134,7 +134,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -160,7 +160,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -186,7 +186,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -212,7 +212,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

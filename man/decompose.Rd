@@ -21,14 +21,14 @@ ignored. Supply \code{NA} here if you don't want to limit the number of
 components.}
 
 \item{min.vertices}{The minimum number of vertices a component should
-contain in order to place it in the result list. Eg. supply 2 here to ignore
+contain in order to place it in the result list. E.g. supply 2 here to ignore
 isolate vertices.}
 }
 \value{
 A list of graph objects.
 }
 \description{
-Creates a separate graph for each component of a graph.
+Creates a separate graph for each connected component of a graph.
 }
 \examples{
 
@@ -42,7 +42,7 @@ sapply(components, diameter)
 \code{\link[=is_connected]{is_connected()}} to decide whether a graph is connected,
 \code{\link[=components]{components()}} to calculate the connected components of a graph.
 
-Other components: 
+Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
 \code{\link{component_distribution}()}

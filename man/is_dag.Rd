@@ -30,7 +30,9 @@ g2 <- g + edge(5, 1)
 is_dag(g2)
 }
 \seealso{
-Other cycles: 
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
 \code{\link{has_eulerian_path}()}
 
 Other structural.properties: 

@@ -130,7 +130,7 @@ Other community detection algorithms: \code{\link[=cluster_walktrap]{cluster_wal
 \code{\link[=cluster_optimal]{cluster_optimal()}}
 \code{\link[=cluster_walktrap]{cluster_walktrap()}}
 
-Other community: 
+Community detection
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

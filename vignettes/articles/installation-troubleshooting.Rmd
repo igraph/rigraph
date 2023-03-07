@@ -61,6 +61,10 @@ This problem occurs when there are multiple incompatible gfortran versions on yo
 
 Make sure that Anaconda's `bin` directory is _not_ present in your `PATH` environment variable. [Do not add this directory to the path manually. Instead, let Anaconda manage it using `conda init`.](https://docs.anaconda.com/anaconda/user-guide/faq/#distribution-faq-linux-path) Only Anaconda's `condabin`, _but not `bin`_, should be present in the `PATH`.
 
+## libmkl_rt.so.1: cannot open shared object file: No such file or directory
+
+This issue typically occurs when an Anaconda environment containing conflicting BLAS libraries is active. Please refer to the instructions in the section "libgfortran.so.4: cannot open shared object file".
+
 ## libglpk.so.40: cannot open shared object file: No such file or directory
 
 This error will occur on Linux systems when igraph was compiled with GLPK support, but GLPK is not currently installed on the system. To resolve it, install GLPK. On Debian-based systems, simply use `sudo apt install libglpk40`.

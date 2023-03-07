@@ -86,7 +86,7 @@ theory motivates use of this measure, you should be very careful to choose a
 decay parameter on a non-ad hoc basis.
 }
 \note{
-This function was ported (ie. copied) from the SNA package.
+This function was ported (i.e. copied) from the SNA package.
 }
 \section{Warning }{
  Singular adjacency matrices cause no end of headaches for
@@ -135,7 +135,7 @@ Bonacich, P.  (1987).  ``Power and Centrality: A Family of Measures.''
 \seealso{
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=alpha_centrality]{alpha_centrality()}}
 
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},

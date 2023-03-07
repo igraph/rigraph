@@ -46,7 +46,7 @@ bc <- biconnected_components(g)
 \code{\link[=articulation_points]{articulation_points()}}, \code{\link[=components]{components()}},
 \code{\link[=is_connected]{is_connected()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}}
 
-Other components: 
+Connected components
 \code{\link{articulation_points}()},
 \code{\link{component_distribution}()},
 \code{\link{decompose}()}

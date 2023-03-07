@@ -13,11 +13,11 @@ sample_tree(n, directed = FALSE, method = c("lerw", "prufer"))
 oriented away from the root.}
 
 \item{method}{The algorithm to use to generate the tree. \sQuote{prufer}
-samples Prufer sequences uniformly and then converts the sampled sequence to
+samples Prüfer sequences uniformly and then converts the sampled sequence to
 a tree. \sQuote{lerw} performs a loop-erased random walk on the complete
 graph to uniformly sampleits spanning trees. (This is also known as Wilson's
 algorithm). The default is \sQuote{lerw}. Note that the method based on
-Prufer sequences does not support directed trees at the moment.}
+Prüfer sequences does not support directed trees at the moment.}
 }
 \value{
 A graph object.
@@ -36,7 +36,7 @@ g <- sample_tree(100, method = "lerw")
 
 }
 \seealso{
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

@@ -51,9 +51,9 @@ between two vertices is calculated.
 }
 \details{
 \code{max_flow()} calculates the maximum flow between two vertices in a
-weighted (ie. valued) graph. A flow from \code{source} to \code{target} is
+weighted (i.e. valued) graph. A flow from \code{source} to \code{target} is
 an assignment of non-negative real numbers to the edges of the graph,
-satisfying two properties: (1) for each edge the flow (ie. the assigned
+satisfying two properties: (1) for each edge the flow (i.e. the assigned
 number) is not more than the capacity of the edge (the \code{capacity}
 parameter or edge attribute), (2) for every vertex, except the source and
 the target the incoming flow is the same as the outgoing flow. The value of

@@ -34,7 +34,7 @@ number of vertices in the graph.}
 \item{cumulative}{Logical; whether the cumulative degree distribution is to
 be calculated.}
 
-\item{\dots}{Additional arguments to pass to \code{degree()}, eg. \code{mode}
+\item{\dots}{Additional arguments to pass to \code{degree()}, e.g. \code{mode}
 is useful but also \code{v} and \code{loops} make sense.}
 }
 \value{

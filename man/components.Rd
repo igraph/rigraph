@@ -80,7 +80,7 @@ groups(clu)
 \seealso{
 \code{\link[=decompose]{decompose()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=groups]{groups()}}
 
-Other components: 
+Connected components
 \code{\link{articulation_points}()},
 \code{\link{biconnected_components}()},
 \code{\link{decompose}()}

@@ -11,7 +11,7 @@ running_mean(v, binwidth)
 \item{v}{The numeric vector.}
 
 \item{binwidth}{Numeric constant, the size of the bin, should be meaningful,
-ie. smaller than the length of \code{v}.}
+i.e. smaller than the length of \code{v}.}
 }
 \value{
 A numeric vector of length \code{length(v)-binwidth+1}

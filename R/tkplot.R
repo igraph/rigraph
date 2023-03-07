@@ -37,7 +37,7 @@ assign(".next", 1, .tkplot.env)
 #'
 #' `tkplot()` and its companion functions serve as an interactive graph
 #' drawing facility. Not all parameters of the plot can be changed
-#' interactively right now though, eg. the colors of vertices, edges, and also
+#' interactively right now though, e.g. the colors of vertices, edges, and also
 #' others have to be pre-defined.
 #'
 #' `tkplot()` is an interactive graph drawing facility. It is not very well
@@ -86,7 +86,7 @@ assign(".next", 1, .tkplot.env)
 #' in postscript format.
 #'
 #' `tk_canvas()` returns the Tk canvas object that belongs to a graph
-#' plot. The canvas can be directly manipulated then, eg. labels can be added,
+#' plot. The canvas can be directly manipulated then, e.g. labels can be added,
 #' it could be saved to a file programmatically, etc. See an example below.
 #'
 #' `tk_coords()` returns the coordinates of the vertices in a matrix.

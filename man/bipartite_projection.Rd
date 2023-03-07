@@ -90,7 +90,7 @@ print(proj2[[2]], g = TRUE, e = TRUE)
 
 }
 \seealso{
-Other bipartite: 
+Bipartite graphs
 \code{\link{bipartite_mapping}()},
 \code{\link{is_bipartite}()}
 }

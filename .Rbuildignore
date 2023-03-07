@@ -2,6 +2,7 @@
 ^.github$
 ^cigraph$
 ^Makefile$
+^Makefile-cigraph$
 ^src/Makevars$
 ^tools$
 ^.gitmodules$
@@ -36,3 +37,5 @@
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
+^\.zenodo.json$
+

@@ -182,7 +182,7 @@ mean_distance <- mean_distance
 #' @param normalized Logical scalar, whether to normalize the degree.  If
 #'   `TRUE` then the result is divided by \eqn{n-1}, where \eqn{n} is the
 #'   number of vertices in the graph.
-#' @param \dots Additional arguments to pass to `degree()`, eg. `mode`
+#' @param \dots Additional arguments to pass to `degree()`, e.g. `mode`
 #'   is useful but also `v` and `loops` make sense.
 #' @return For `degree()` a numeric vector of the same length as argument
 #'   `v`.
@@ -321,7 +321,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #'   the given vertices should be calculated for directed graphs. If `out`
 #'   then the shortest paths *from* the vertex, if `in` then *to*
 #'   it will be considered. If `all`, the default, then the corresponding
-#'   undirected graph will be used, ie. not directed paths are searched. This
+#'   undirected graph will be used, i.e. not directed paths are searched. This
 #'   argument is ignored for undirected graphs.
 #' @param weights Possibly a numeric vector giving edge weights. If this is
 #'   `NULL` and the graph has a `weight` edge attribute, then the
@@ -847,13 +847,17 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @param weights Optional weights for weighted transitivity. It is ignored for
 #'   other transitivity measures. If it is `NULL` (the default) and the
 #'   graph has a `weight` edge attribute, then it is used automatically.
-#' @param isolates Character scalar, defines how to treat vertices with degree
-#'   zero and one. If it is \sQuote{`NaN`} then they local transitivity is
+#' @param isolates Character scalar, for local versions of transitivity, it
+#'   defines how to treat vertices with degree zero and one.
+#'   If it is \sQuote{`NaN`} then their local transitivity is
 #'   reported as `NaN` and they are not included in the averaging, for the
 #'   transitivity types that calculate an average. If there are no vertices with
 #'   degree two or higher, then the averaging will still result `NaN`. If it
 #'   is \sQuote{`zero`}, then we report 0 transitivity for them, and they
 #'   are included in the averaging, if an average is calculated.
+#'   For the global transitivity, it controls how to handle graphs with
+#'   no connected triplets: `NaN` or zero will be returned according to
+#'   the respective setting.
 #' @return For \sQuote{`global`} a single number, or `NaN` if there
 #'   are no connected triples in the graph.
 #'
@@ -979,7 +983,7 @@ transitivity <- function(graph, type = c(
 #'   C[i] = sum( [sum( p[i,j] + p[i,q] p[q,j], q in V[i], q != i,j )]^2, j in
 #'   V[i], j != i).
 #' }
-#' for a graph of order (ie. number of vertices) \eqn{N}, where
+#' for a graph of order (i.e. number of vertices) \eqn{N}, where
 #' proportional tie strengths are defined as
 #' \deqn{p_{ij} = \frac{a_{ij}+a_{ji}}{\sum_{k \in V_i \setminus \{i\}}(a_{ik}+a_{ki})},}{
 #'   p[i,j]=(a[i,j]+a[j,i]) / sum(a[i,k]+a[k,i], k in V[i], k != i),
@@ -1159,16 +1163,16 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
 #'
-#' The neighborhood of a given order `o` of a vertex `v` includes all
-#' vertices which are closer to `v` than the order. Ie. order 0 is always
+#' The neighborhood of a given order `r` of a vertex `v` includes all
+#' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' `ego_size()` calculates the size of the neighborhoods for the
-#' given vertices with the given order.
+#' `ego_size()` returns the size of the neighborhoods of the given order,
+#' for each given vertex.
 #'
-#' `ego()` calculates the neighborhoods of the given vertices with
-#' the given order parameter.
+#' `ego()` returns the vertices belonging to the neighborhoods of the given
+#' order, for each given vertex.
 #'
 #' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
@@ -1429,7 +1433,7 @@ feedback_arc_set <- feedback_arc_set
 #'
 #' The current implementation works for undirected graphs only, directed graphs
 #' are treated as undirected graphs. Loop edges and multiple edges are ignored.
-#' If the graph is a forest (ie. acyclic), then zero is returned.
+#' If the graph is a forest (i.e. acyclic), then zero is returned.
 #'
 #' This implementation is based on Alon Itai and Michael Rodeh: Finding a
 #' minimum circuit in a graph *Proceedings of the ninth annual ACM
@@ -1495,7 +1499,7 @@ girth <- function(graph, circle = TRUE) {
 #'
 #' Note that the semantics for `which_multiple()` and `count_multiple()` is
 #' different. `which_multiple()` gives `TRUE` for all occurrences of a
-#' multiple edge except for one. Ie. if there are three `i-j` edges in the
+#' multiple edge except for one. I.e. if there are three `i-j` edges in the
 #' graph then `which_multiple()` returns `TRUE` for only two of them while
 #' `count_multiple()` returns \sQuote{3} for all three.
 #'

@@ -205,7 +205,7 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' @keywords graphs
 #' @examples
 #'
-#'
+#' \dontrun{
 #' ## We are not running these examples any more, because they
 #' ## take a long time to run and this is against the CRAN repository
 #' ## policy. Copy and paste them by hand to your R prompt if
@@ -248,6 +248,7 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 #' gr.km <- kmeans(x, 100, 100, 300)$cluster
 #' scg_eps(cbind(x), gr.true)
 #' scg_eps(cbind(x), gr.km)
+#' }
 #'
 scg_group <- function(V, nt,
                       mtype = c(
@@ -523,7 +524,7 @@ scg_semi_proj <- function(groups,
 #' @keywords graphs
 #' @examples
 #'
-#'
+#' \dontrun{
 #' ## We are not running these examples any more, because they
 #' ## take a long time (~20 seconds) to run and this is against the CRAN
 #' ## repository policy. Copy and paste them by hand to your R prompt if
@@ -601,6 +602,7 @@ scg_semi_proj <- function(groups,
 #'   vertex.color = col[com.cg], vertex.label = NA
 #' )
 #' par(op)
+#' }
 #'
 scg <- function(X, ev, nt, groups = NULL,
                 mtype = c("symmetric", "laplacian", "stochastic"),

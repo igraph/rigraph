@@ -20,9 +20,42 @@
 #
 ###################################################################
 
+
+#' The igraph console
+#'
+#' The igraph console is a GUI window that shows what the currently running
+#' igraph function is doing.
+#'
+#' The console can be started by calling the `console()` function.
+#' Then it stays open, until the user closes it.
+#'
+#' Another way to start it to set the `verbose` igraph option to
+#' \dQuote{tkconsole} via `igraph_options()`. Then the console (re)opens
+#' each time an igraph function supporting it starts; to close it, set the
+#' `verbose` option to another value.
+#'
+#' The console is written in Tcl/Tk and required the `tcltk` package.
+#'
+#' @aliases igraph.console
+#' @return `NULL`, invisibly.
+#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
+#' @seealso [igraph_options()] and the `verbose` option.
+#' @keywords graphs
+#' @family console
+#' @export
+console <- function() {
+  oldverb <- igraph_opt("verbose")
+  igraph_options(verbose = "tkconsole")
+  pb <- .igraph.progress.tkconsole.create(oldverb)
+  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
+  .igraph.progress.tkconsole.message("Console started.\n")
+  invisible()
+}
+
 .igraph.pb <- NULL
 
-#' @family console
+#' @rdname console
+#' @param percent,message,clean Used internally by `.igraph.progress()` and `.igraph.status()`
 #' @export
 .igraph.progress <- function(percent, message, clean = FALSE) {
   if (clean) {
@@ -43,7 +76,7 @@
   }
 }
 
-#' @family console
+#' @rdname console
 #' @export
 .igraph.status <- function(message) {
   type <- igraph_opt("verbose")
@@ -247,35 +280,4 @@ close.igraphconsole <- function(con, ...) {
   }
   pb <- list(widget = pBar, get = get, set = set, label = .lab)
   list(frame = frame, pb = pb)
-}
-
-#' The igraph console
-#'
-#' The igraph console is a GUI windows that shows what the currently running
-#' igraph function is doing.
-#'
-#' The console can be started by calling the `console()` function.
-#' Then it stays open, until the user closes it.
-#'
-#' Another way to start it to set the `verbose` igraph option to
-#' \dQuote{tkconsole} via `igraph_options()`. Then the console (re)opens
-#' each time an igraph function supporting it starts; to close it, set the
-#' `verbose` option to another value.
-#'
-#' The console is written in Tcl/Tk and required the `tcltk` package.
-#'
-#' @aliases igraph.console
-#' @return `NULL`, invisibly.
-#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [igraph_options()] and the `verbose` option.
-#' @keywords graphs
-#' @family console
-#' @export
-console <- function() {
-  oldverb <- igraph_opt("verbose")
-  igraph_options(verbose = "tkconsole")
-  pb <- .igraph.progress.tkconsole.create(oldverb)
-  assign(".igraph.pb", pb, envir = asNamespace("igraph"))
-  .igraph.progress.tkconsole.message("Console started.\n")
-  invisible()
 }

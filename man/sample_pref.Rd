@@ -101,7 +101,7 @@ tkplot(g, layout = layout_in_circle)
 \code{\link[=sample_traits]{sample_traits()}}.
 \code{\link[=sample_traits_callaway]{sample_traits_callaway()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -127,7 +127,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -153,7 +153,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -179,7 +179,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

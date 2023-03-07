@@ -57,16 +57,24 @@ try(eulerian_cycle(g))
 
 }
 \seealso{
-Other cycles: 
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
 \code{\link{is_dag}()}
 
-Other cycles: 
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
 \code{\link{is_dag}()}
 
-Other cycles: 
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
 \code{\link{is_dag}()}
 
-Other cycles: 
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
 \code{\link{is_dag}()}
 }
 \concept{cycles}

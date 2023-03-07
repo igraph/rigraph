@@ -58,7 +58,7 @@ Matrix Analysis and Applications}, 2008.
 \seealso{
 \link{scg-method} and \code{\link[=scg]{scg()}}.
 
-Other scg: 
+Spectral Coarse Graining
 \code{\link{scg-method}},
 \code{\link{scg_group}()},
 \code{\link{scg_semi_proj}()},

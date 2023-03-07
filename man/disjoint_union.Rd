@@ -35,7 +35,7 @@ values in the new graph are set to \code{NA}. Graph attributes are simply
 copied to the result. If this would result a name clash, then they are
 renamed by adding suffixes: _1, _2, etc.
 
-Note that if both graphs have vertex names (ie. a \code{name} vertex
+Note that if both graphs have vertex names (i.e. a \code{name} vertex
 attribute), then the concatenated vertex names might be non-unique in the
 result. A warning is given if this happens.
 

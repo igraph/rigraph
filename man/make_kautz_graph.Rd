@@ -31,7 +31,7 @@ a directed edge from a vertex \code{v} to another vertex \code{w} if it is
 possible to transform the string of \code{v} into the string of \code{w} by
 removing the first letter and appending a letter to it.
 
-Kautz graphs have some interesting properties, see eg. Wikipedia for
+Kautz graphs have some interesting properties, see e.g. Wikipedia for
 details.
 }
 \examples{

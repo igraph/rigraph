@@ -17,7 +17,7 @@ growing(...)
 
 \item{directed}{Logical, whether to create a directed graph.}
 
-\item{citation}{Logical. If \code{TRUE} a citation graph is created, ie. in
+\item{citation}{Logical. If \code{TRUE} a citation graph is created, i.e. in
 each time step the added edges are originating from the new vertex.}
 
 \item{...}{Passed to \code{sample_growing()}.}
@@ -44,7 +44,7 @@ g2 <- sample_growing(500, citation = TRUE)
 \seealso{
 \code{\link[=sample_pa]{sample_pa()}}, \code{\link[=sample_gnp]{sample_gnp()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -70,7 +70,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

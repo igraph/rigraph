@@ -23,7 +23,7 @@ The girth of a graph is the length of the shortest circle in it.
 \details{
 The current implementation works for undirected graphs only, directed graphs
 are treated as undirected graphs. Loop edges and multiple edges are ignored.
-If the graph is a forest (ie. acyclic), then zero is returned.
+If the graph is a forest (i.e. acyclic), then zero is returned.
 
 This implementation is based on Alon Itai and Michael Rodeh: Finding a
 minimum circuit in a graph \emph{Proceedings of the ninth annual ACM
@@ -74,9 +74,15 @@ Other structural.properties:
 \code{\link{unfold_tree}()},
 \code{\link{which_multiple}()},
 \code{\link{which_mutual}()}
+
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{has_eulerian_path}()},
+\code{\link{is_dag}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{cycles}
 \concept{structural.properties}
 \keyword{graphs}

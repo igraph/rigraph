@@ -34,7 +34,7 @@ A numeric scalar, an estimate for the total number of motifs in
 the graph.
 }
 \description{
-Graph motifs are small connected subgraphs with a well-defined
+Graph motifs are small connected induced subgraphs with a well-defined
 structure.  These functions search a graph for various motifs.
 }
 \details{

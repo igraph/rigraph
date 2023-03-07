@@ -149,7 +149,7 @@ linear running time and memory load.
 }
 \examples{
 
-
+\dontrun{
 ## We are not running these examples any more, because they
 ## take a long time (~20 seconds) to run and this is against the CRAN
 ## repository policy. Copy and paste them by hand to your R prompt if
@@ -227,6 +227,7 @@ plot(gt,
   vertex.color = col[com.cg], vertex.label = NA
 )
 par(op)
+}
 
 }
 \references{
@@ -240,7 +241,7 @@ Matrix Analysis and Applications}, 2008.
 \link{scg-method} for an introduction.  \code{\link[=scg_eps]{scg_eps()}},
 \code{\link[=scg_group]{scg_group()}} and \code{\link[=scg_semi_proj]{scg_semi_proj()}}.
 
-Other scg: 
+Spectral Coarse Graining
 \code{\link{scg-method}},
 \code{\link{scg_eps}()},
 \code{\link{scg_group}()},

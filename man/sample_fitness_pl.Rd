@@ -88,7 +88,7 @@ scale-free networks under the Achlioptas process. \emph{Phys Rev Lett}
 103:135702, 2009.
 }
 \seealso{
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

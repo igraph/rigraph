@@ -33,7 +33,7 @@ vertex_attr(g)
 plot(g)
 }
 \seealso{
-Other attributes: 
+Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},

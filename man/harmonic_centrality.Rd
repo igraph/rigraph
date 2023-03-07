@@ -69,7 +69,7 @@ M. Marchiori and V. Latora, Harmony in the small-world,
 \seealso{
 \code{\link[=betweenness]{betweenness()}}, \code{\link[=closeness]{closeness()}}
 
-Other centrality: 
+Centrality measures
 \code{\link{alpha_centrality}()},
 \code{\link{authority_score}()},
 \code{\link{closeness}()},

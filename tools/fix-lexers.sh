@@ -11,13 +11,7 @@ for fname in src/core/io/*-lexer.c; do
     mv ${fname}.new ${fname}
 
     # Remove 'noreturn' declaration from exit points
-	sed -e 's/^\([^#]*\)yynoreturn /\1__attribute__((unused)) /g' ${fname} >${fname}.new
-    mv ${fname}.new ${fname}
-
-    # flex on Ubuntu 20.04 generates 'int yyget_leng'; flex on macOS generates
-    # 'yy_size_t yyget_leng'. We need to be consistent as we also declare
-    # yyget_leng ourselves in the parser and we use yy_size_t there
-    cat ${fname} | sed -e 's/int yyget_leng/yy_size_t yyget_leng/g' >${fname}.new
+    sed -e 's/^\([^#]*\)yynoreturn /\1__attribute__((unused)) /g' ${fname} >${fname}.new
     mv ${fname}.new ${fname}
 done
 
@@ -29,8 +23,8 @@ for fname in src/core/io/*-lexer.c src/core/io/*-parser.c; do
 done
 
 for fname in src/core/io/*-parser.c; do
-	# Bison 3.8.2 (and maybe other versions) refer to #include yy.tab.h in the
-	# generated file; we need to replace this with the real header name
+    # Bison 3.8.2 (and maybe other versions) refer to #include yy.tab.h in the
+    # generated file; we need to replace this with the real header name
     header=`basename ${fname} .c`.h
     cat ${fname} | sed -e 's,^#include.*yy.tab.h.*$,#include "io/'"${header}"'",g' >${fname}.new
     mv ${fname}.new ${fname}

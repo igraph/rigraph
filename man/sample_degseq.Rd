@@ -108,7 +108,7 @@ all(degree(g5) == degs)
 \code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
 \code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},
@@ -134,7 +134,7 @@ Other games:
 \code{\link{sample_tree}()},
 \code{\link{sample_}()}
 
-Other games: 
+Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_correlated_gnp_pair}()},

@@ -38,7 +38,7 @@ This is useful to integrate the results of community finding algorithms
 that are not included in igraph.
 }
 \seealso{
-Other community: 
+Community detection
 \code{\link{as_membership}()},
 \code{\link{cluster_edge_betweenness}()},
 \code{\link{cluster_fast_greedy}()},

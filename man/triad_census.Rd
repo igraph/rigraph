@@ -16,7 +16,8 @@ A numeric vector, the subgraph counts, in the order given in the
 above description.
 }
 \description{
-This function counts the different subgraphs of three vertices in a graph.
+This function counts the different induced subgraphs of three vertices in
+a graph.
 }
 \details{
 Triad census was defined by David and Leinhardt (see References below).

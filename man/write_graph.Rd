@@ -58,7 +58,7 @@ networks. \emph{J Mol Biol.} 2004 Jun 25;340(1):179-90.
 \seealso{
 \code{\link[=read_graph]{read_graph()}}
 
-Other foreign: 
+Foreign format readers
 \code{\link{graph_from_graphdb}()},
 \code{\link{read_graph}()}
 }
