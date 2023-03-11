@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9007
+
+## Chore
+
+  - Update C core.
+
+  - ARPACK-based calculations are now interruptible
+
+  - `shortest_paths()` and `all_shortest_paths()` no longer crash when an invalid `from` vertex is passed and weights are being used
+
+
 # igraph 1.4.1.9006
 
 ## Continuous integration
