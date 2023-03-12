@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1.9007</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,15 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.1.9007" id="igraph-1419007">igraph 1.4.1.9007<a class="anchor" aria-label="anchor" href="#igraph-1419007"></a></h2>
+<div class="section level3">
+<h3 id="chore-1-4-1-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-1-4-1-9007"></a></h3>
+<ul><li><p>Update C core.</p></li>
+<li><p>ARPACK-based calculations are now interruptible</p></li>
+<li><p><code><a href="../reference/distances.html">shortest_paths()</a></code> and <code><a href="../reference/distances.html">all_shortest_paths()</a></code> no longer crash when an invalid <code>from</code> vertex is passed and weights are being used</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.1.9006" id="igraph-1419006">igraph 1.4.1.9006<a class="anchor" aria-label="anchor" href="#igraph-1419006"></a></h2>
 <div class="section level3">
@@ -186,7 +195,7 @@
 <li>
 <code><a href="../reference/plot.igraph.html">plot.igraph()</a></code> does not use the <code>frame=...</code> partial argument any more when calling <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot.default()</a></code>. The default <code>NULL</code> value of <code>frame.plot</code> is now also handled correctly.</li>
 <li>
-<code><a href="../reference/hub_score.html">hub_score()</a></code> and <code><a href="../reference/authority_score.html">authority_score()</a></code> considered self-loops only once on the diagonal of the adjacency matrix of undirected graphs, thus the result was not identical to that obtained by <code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> on loopy undirected graphs. This is now corrected.</li>
+<code><a href="../reference/hub_score.html">hub_score()</a></code> and <code><a href="https://rdrr.io/pkg/igraph/man/authority_score.html" class="external-link">authority_score()</a></code> considered self-loops only once on the diagonal of the adjacency matrix of undirected graphs, thus the result was not identical to that obtained by <code><a href="../reference/eigen_centrality.html">eigen_centrality()</a></code> on loopy undirected graphs. This is now corrected.</li>
 <li>
 <code><a href="../reference/distances.html">distances()</a></code> no longer ignores the <code>mode</code> parameter when <code>algorithm='johnson'</code>.</li>
 </ul></div>
