@@ -858,15 +858,18 @@ strength <- strength
 diversity <- diversity
 
 
-#' Kleinberg's hub centrality scores.
+#' Kleinberg's hub and authority centrality scores.
 #'
 #' The hub scores of the vertices are defined as the principal eigenvector
 #' of \eqn{A A^T}{A*t(A)}, where \eqn{A} is the adjacency matrix of the
 #' graph.
 #'
+#' Similarly, the authority scores of the vertices are defined as the principal
+#' eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency matrix of
+#' the graph.
+#'
 #' For undirected matrices the adjacency matrix is symmetric and the hub
-#' scores are the same as authority scores, see
-#' [authority_score()].
+#' scores are the same as authority scores.
 #'
 #' @aliases hub.score
 #' @param graph The input graph.
@@ -882,69 +885,20 @@ diversity <- diversity
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @return A named list with members:
-#'   \item{vector}{The authority/hub scores of the vertices.}
+#'   \item{vector}{The hub or authority scores of the vertices.}
 #'   \item{value}{The corresponding eigenvalue of the calculated
 #'     principal eigenvector.}
 #'   \item{options}{Some information about the ARPACK computation, it has
 #'     the same members as the `options` member returned
 #'     by [arpack()], see that for documentation.}
-#' @seealso [authority_score()],
-#' [eigen_centrality()] for eigenvector centrality,
+#' @seealso [eigen_centrality()] for eigenvector centrality,
 #' [page_rank()] for the Page Rank scores. [arpack()] for
 #' the underlining machinery of the computation.
 #' @references J. Kleinberg. Authoritative sources in a hyperlinked
 #' environment. *Proc. 9th ACM-SIAM Symposium on Discrete Algorithms*,
 #' 1998. Extended version in *Journal of the ACM* 46(1999). Also appears
 #' as IBM Research Report RJ 10076, May 1997.
-#' @examples
-#' ## An in-star
-#' g <- make_star(10)
-#' hub_score(g)$vector
 #'
-#' ## A ring
-#' g2 <- make_ring(10)
-#' hub_score(g2)$vector
-hub_score <- hub_score
-
-
-#' Kleinberg's authority centrality scores.
-#'
-#' The authority scores of the vertices are defined as the principal
-#' eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency
-#' matrix of the graph.
-#'
-#' For undirected matrices the adjacency matrix is symmetric and the
-#' authority scores are the same as hub scores, see
-#' [hub_score()].
-#'
-#' @aliases authority.score
-#' @param graph The input graph.
-#' @param scale Logical scalar, whether to scale the result to have a maximum
-#'   score of one. If no scaling is used then the result vector has unit length
-#'   in the Euclidean norm.
-#' @param weights Optional positive weight vector for calculating weighted
-#'   scores. If the graph has a `weight` edge attribute, then this is used
-#'   by default.
-#'   This function interprets edge weights as connection strengths. In the
-#'   random surfer model, an edge with a larger weight is more likely to be
-#'   selected by the surfer.
-#' @param options A named list, to override some ARPACK options. See
-#'   [arpack()] for details.
-#' @return A named list with members:
-#'   \item{vector}{The authority/hub scores of the vertices.}
-#'   \item{value}{The corresponding eigenvalue of the calculated
-#'     principal eigenvector.}
-#'   \item{options}{Some information about the ARPACK computation, it has
-#'     the same members as the `options` member returned
-#'     by [arpack()], see that for documentation.}
-#' @seealso [hub_score()], [eigen_centrality()] for
-#' eigenvector centrality, [page_rank()] for the Page Rank
-#' scores. [arpack()] for the underlining machinery of the
-#' computation.
-#' @references J. Kleinberg. Authoritative sources in a hyperlinked
-#' environment. *Proc. 9th ACM-SIAM Symposium on Discrete Algorithms*,
-#' 1998. Extended version in *Journal of the ACM* 46(1999). Also appears
-#' as IBM Research Report RJ 10076, May 1997.
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
@@ -955,6 +909,13 @@ hub_score <- hub_score
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
+hub_score <- hub_score
+
+
+#' @rdname hub_score
+#' @aliases authority.score
+#' @param options A named list, to override some ARPACK options. See
+#'   [arpack()] for details.
 authority_score <- authority_score
 
 
