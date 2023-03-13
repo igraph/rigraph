@@ -39,3 +39,4 @@ Other plot.shapes:
 \code{\link{shapes}()}
 }
 \concept{plot.shapes}
+\keyword{internal}

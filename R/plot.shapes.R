@@ -321,6 +321,7 @@ add_shape <- function(shape, clip = shape_noclip,
 #' consistent API.
 #' @family plot.shapes
 #' @inheritParams add_shape
+#' @keywords internal
 #' @export
 add.vertex.shape <-  function(shape, clip = shape_noclip,
                       plot = shape_noplot,
