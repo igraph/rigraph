@@ -159,8 +159,6 @@ deprecated("dominator.tree", dominator_tree)
 #' @export dyad.census
 deprecated("dyad.census", dyad_census)
 
-#' @export ecount
-deprecated("ecount", gsize)
 #' @export edge.betweenness
 deprecated("edge.betweenness", edge_betweenness)
 #' @export edge.betweenness.community
@@ -555,8 +553,6 @@ deprecated("triad.census", triad_census)
 #' @export unfold.tree
 deprecated("unfold.tree", unfold_tree)
 
-#' @export vcount
-deprecated("vcount", gorder)
 #' @export vertex.connectivity
 deprecated("vertex.connectivity", vertex_connectivity)
 #' @export vertex.disjoint.paths

@@ -227,7 +227,7 @@ delete_vertices <- function(graph, v) {
 
 #' The size of the graph (number of edges)
 #'
-#' `ecount()` is an alias of this function.
+#' `ecount()` and `gsize()` are aliases.
 #'
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
@@ -252,6 +252,9 @@ gsize <- function(graph) {
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_ecount, graph)
 }
+#' @rdname gsize
+#' @export
+ecount <- gsize
 
 #' Neighboring (adjacent) vertices in a graph
 #'
@@ -480,7 +483,7 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 
 #' Order (number of vertices) of a graph
 #'
-#' `vcount()` is an alias of this function.
+#' @description `vcount()` and `gorder()` are aliases.
 #'
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
@@ -494,6 +497,9 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' gorder(g)
 #' vcount(g)
 gorder <- gorder
+#' @rdname gorder
+#' @export
+vcount <- gorder
 
 #' Adjacent vertices of multiple vertices in a graph
 #'
