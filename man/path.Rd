@@ -47,6 +47,7 @@ E(g4)[[]]
 \seealso{
 Other functions for manipulating graph structure: 
 \code{\link{+.igraph}()},
+\code{\link{add.vertices}()},
 \code{\link{add_edges}()},
 \code{\link{add_vertices}()},
 \code{\link{delete_edges}()},

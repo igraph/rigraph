@@ -123,7 +123,6 @@ add.edges <- function(graph, edges, ..., attr = list()) {
 #'   below.
 #' @return The graph, with the vertices (and attributes) added.
 #'
-#' @aliases add.vertices
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -171,6 +170,22 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   }
 
   graph
+}
+
+#' Add vertices to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertices` was renamed to `add_vertices()` to create a more
+#' consistent API.
+#' @family functions for manipulating graph structure
+#' @inheritParams add_vertices
+#' @keywords internal
+#' @export
+add.vertices <- function(graph, nv, ..., attr = list()) {
+  lifecycle::deprecate_soft("1.5.0", "add.vertices()", "add_vertices()")
+  add_vertices(graph = graph, nv = nv, ..., attr = attr)
 }
 
 #' Delete edges from a graph
