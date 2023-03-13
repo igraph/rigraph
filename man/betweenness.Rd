@@ -135,7 +135,6 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
@@ -143,12 +142,12 @@ Centrality measures
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
+\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
@@ -156,12 +155,12 @@ Centrality measures
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
+\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
@@ -169,6 +168,7 @@ Centrality measures
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
+\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 }

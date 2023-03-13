@@ -105,7 +105,6 @@ Measures. \emph{American Journal of Sociology}, 92, 1170-1182.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{authority_score}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{estimate_betweenness}()},
@@ -113,6 +112,7 @@ Centrality measures
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
+\code{\link{spectrum}()},
 \code{\link{strength}()},
 \code{\link{subgraph_centrality}()}
 }
