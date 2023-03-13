@@ -303,7 +303,7 @@ estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "al
 }
 
 #' @rdname arpack
-#' @family centrality
+#' @family arpack
 #' @export
 arpack_defaults <- list(
   bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
@@ -497,7 +497,7 @@ arpack_defaults <- list(
 #'     which = "LM", maxiter = 2000
 #'   ))
 #' }
-#' @family centrality
+#' @family arpack
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
                    env = parent.frame(), complex = !sym) {
@@ -909,6 +909,7 @@ diversity <- diversity
 #' g2 <- make_ring(10)
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
+#' @family centrality
 hub_score <- hub_score
 
 

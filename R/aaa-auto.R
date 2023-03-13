@@ -1518,6 +1518,8 @@ count_triangles <- function(graph, vids=V(graph)) {
   res
 }
 
+#' @family triangles
+#' @rdname count_triangles
 #' @export
 triangles <- function(graph) {
   # Argument checks
@@ -2143,6 +2145,7 @@ embed_adjacency_matrix <- function(graph, no, weights=NULL, which=c("lm", "la", 
   res
 }
 
+#' @family embedding
 #' @export
 embed_laplacian_matrix <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=igraph.arpack.default) {
   # Argument checks

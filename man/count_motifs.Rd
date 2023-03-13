@@ -37,6 +37,7 @@ sample_motifs(g, 3)
 \code{\link[=isomorphism_class]{isomorphism_class()}}
 
 Other graph motifs: 
+\code{\link{dyad_census}()},
 \code{\link{motifs}()},
 \code{\link{sample_motifs}()}
 }

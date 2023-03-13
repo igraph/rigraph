@@ -6,6 +6,8 @@
 \title{Order (number of vertices) of a graph}
 \usage{
 gorder(graph)
+
+vcount(graph)
 }
 \arguments{
 \item{graph}{The graph}
@@ -14,7 +16,7 @@ gorder(graph)
 Number of vertices, numeric scalar.
 }
 \description{
-\code{vcount()} is an alias of this function.
+\code{vcount()} and \code{gorder()} are aliases.
 }
 \examples{
 g <- make_ring(10)

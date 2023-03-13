@@ -137,6 +137,8 @@ Matrix Analysis and Applications}, 2008.
 \code{\link[=scg_eps]{scg_eps()}}
 
 Spectral Coarse Graining
+\code{\link{scg-method}},
+\code{\link{scg_eps}()},
 \code{\link{scg_semi_proj}()},
 \code{\link{scg}()},
 \code{\link{stochastic_matrix}()}

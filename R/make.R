@@ -34,9 +34,11 @@
 #' @param .variant Constructor variant; must be one of \sQuote{make},
 #'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
 #'   specification has deterministic and random variants.
+#' @family constructor modifiers
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
+#' @noRd
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -83,7 +85,9 @@
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
+#' @family constructor modifiers
 #' @return The modified graph
+#' @noRd
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
@@ -202,6 +206,7 @@ make_ <- function(...) {
 #' ## Arguments are passed on from sample_ to sample_sbm
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
+#' @family games
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
@@ -1205,6 +1210,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #'   Prüfer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
+#' @family games
 #' @keywords graphs
 #' @examples
 #'
@@ -1241,7 +1247,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #'
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
-#'
+#' @family trees
 #' @export
 make_from_prufer <- make_from_prufer
 
@@ -1374,6 +1380,7 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' make_line_graph(make_line_graph(g))
 #' make_line_graph(make_line_graph(make_line_graph(g)))
 #'
+#' @export
 make_line_graph <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1519,6 +1526,7 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
 #' g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 #'
+#' @export
 make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
                                       mode = c("all", "out", "in")) {
   n1 <- as.integer(n1)
@@ -1593,6 +1601,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 #' print(g, v = TRUE)
 #'
+#' @export
 make_bipartite_graph <- function(types, edges, directed = FALSE) {
   vertex.names <- names(types)
 

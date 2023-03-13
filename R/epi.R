@@ -19,7 +19,7 @@
 #
 ###################################################################
 
-#' @family epi
+#' @family processes
 #' @export
 time_bins <- function(x, middle = TRUE) {
   UseMethod("time_bins")
@@ -27,7 +27,7 @@ time_bins <- function(x, middle = TRUE) {
 
 #' @method time_bins sir
 #' @rdname sir
-#' @family epi
+#' @family processes
 #' @export
 #' @importFrom stats IQR
 time_bins.sir <- function(x, middle = TRUE) {
@@ -52,7 +52,7 @@ time_bins.sir <- function(x, middle = TRUE) {
 #' @importFrom stats median
 #' @method median sir
 #' @rdname sir
-#' @family epi
+#' @family processes
 #' @export
 median.sir <- function(x, na.rm = FALSE, ...) {
   sir <- x
@@ -73,7 +73,7 @@ median.sir <- function(x, na.rm = FALSE, ...) {
 #' @importFrom stats quantile
 #' @method quantile sir
 #' @rdname sir
-#' @family epi
+#' @family processes
 #' @export
 quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
@@ -144,7 +144,7 @@ quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
 #' @references Bailey, Norman T. J. (1975). The mathematical theory of
 #' infectious diseases and its applications (2nd ed.). London: Griffin.
 #' @method plot sir
-#' @family epi
+#' @family processes
 #' @export
 #' @importFrom graphics plot lines
 #' @keywords graphs

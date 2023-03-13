@@ -32,9 +32,14 @@ only two vertices in the remaining graph.
 
 g <- make_tree(13, 3)
 to_prufer(g)
-
 }
 \seealso{
 \code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prüfer sequence
+
+Other trees: 
+\code{\link{is_tree}()},
+\code{\link{sample_spanning_tree}()},
+\code{\link{to_prufer}()}
 }
+\concept{trees}
 \keyword{graphs}

@@ -71,10 +71,14 @@ Workshop on Analytic Algorithms and Combinatorics.} 2007.
 \code{\link[=canonical_permutation]{canonical_permutation()}}, \code{\link[=permute]{permute()}},
 and \code{\link[=automorphism_group]{automorphism_group()}} for a compact representation of all
 automorphisms
+
+Other graph automorphism: 
+\code{\link{automorphism_group}()}
 }
 \author{
 Tommi Junttila (\url{http://users.ics.aalto.fi/tjunttil/}) for BLISS
 and Gabor Csardi \email{csardi.gabor@gmail.com} for the igraph glue code
 and this manual page.
 }
+\concept{graph automorphism}
 \keyword{graphs}

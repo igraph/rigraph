@@ -56,5 +56,26 @@ has_eulerian_cycle(g)
 try(eulerian_cycle(g))
 
 }
-\concept{eulerian}
+\seealso{
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_dag}()}
+
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_dag}()}
+
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_dag}()}
+
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_dag}()}
+}
+\concept{cycles}
 \keyword{graphs}

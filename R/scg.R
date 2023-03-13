@@ -26,6 +26,7 @@
 #' graphs.
 #'
 #' @name scg-method
+#' @family scg
 #' @section Introduction: The SCG functions provide a framework, called
 #' Spectral Coarse Graining (SCG), for reducing large graphs while preserving
 #' their *spectral-related features*, that is features closely related
@@ -843,4 +844,5 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #' km <- kmeans(v, 5)
 #' sum(km$withinss)
 #' scg_eps(cbind(v), km$cluster)^2
+#' @family scg
 scg_eps <- scg_eps

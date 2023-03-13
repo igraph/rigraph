@@ -34,7 +34,7 @@ graph_attr(g) <- list(
 plot(g)
 }
 \seealso{
-Other graph attributes: 
+Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
@@ -43,6 +43,7 @@ Other graph attributes:
 \code{\link{edge_attr}()},
 \code{\link{graph_attr_names}()},
 \code{\link{graph_attr}()},
+\code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
 \code{\link{igraph-vs-attributes}},
 \code{\link{set_edge_attr}()},
@@ -52,4 +53,4 @@ Other graph attributes:
 \code{\link{vertex_attr_names}()},
 \code{\link{vertex_attr}()}
 }
-\concept{graph attributes}
+\concept{attributes}

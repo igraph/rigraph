@@ -6,6 +6,8 @@
 \title{The size of the graph (number of edges)}
 \usage{
 gsize(graph)
+
+ecount(graph)
 }
 \arguments{
 \item{graph}{The graph.}
@@ -14,7 +16,7 @@ gsize(graph)
 Numeric scalar, the number of edges.
 }
 \description{
-\code{ecount()} is an alias of this function.
+\code{ecount()} and \code{gsize()} are aliases.
 }
 \examples{
 g <- sample_gnp(100, 2 / 100)

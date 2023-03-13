@@ -53,4 +53,5 @@ Mifflin.
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{motifs}
 \keyword{graphs}
