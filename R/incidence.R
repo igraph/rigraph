@@ -194,6 +194,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
 #' rownames(inc) <- LETTERS[1:3]
 #' graph_from_incidence_matrix(inc)
 #'
+#' @export
 graph_from_incidence_matrix <- function(incidence, directed = FALSE,
                                         mode = c("all", "out", "in", "total"),
                                         multiple = FALSE, weighted = NULL,
