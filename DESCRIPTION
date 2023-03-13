@@ -56,5 +56,3 @@ Authors@R: c(
     person("Chan Zuckerberg Initiative", role = "fnd")
   )
 VignetteBuilder: knitr
-Remotes:
-    emmanuelparadis/ape
