@@ -377,6 +377,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 #' g10 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, add.rownames = "code")
 #' summary(g10)
 #'
+#' @export
 graph_from_adjacency_matrix <- function(adjmatrix,
                                         mode = c(
                                           "directed", "undirected", "max",
