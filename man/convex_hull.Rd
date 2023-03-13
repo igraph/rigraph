@@ -33,8 +33,7 @@ the convex hull.
 \seealso{
 Other other: 
 \code{\link{running_mean}()},
-\code{\link{sample_seq}()},
-\code{\link{srand}()}
+\code{\link{sample_seq}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com}

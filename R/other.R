@@ -155,23 +155,6 @@ igraph.i.spMatrix <- function(M) {
   }
 }
 
-
-
-#' Deprecated function, used to set random seed of the C library's RNG
-#'
-#' @param seed Ignored.
-#' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @family other
-#' @export
-srand <- function(seed) {
-  warning(
-    "This function does nothing, as calling srand from R packages\n",
-    "is now not allowed. If you want to reproduce your past\n",
-    "results, use an older version of igraph, e.g. 0.7.1"
-  )
-}
-
-
 #' Convex hull of a set of vertices
 #'
 #' Calculate the convex hull of a set of points, i.e. the covering polygon that
