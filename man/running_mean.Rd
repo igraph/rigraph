@@ -34,8 +34,7 @@ running_mean(1:100, 10)
 \seealso{
 Other other: 
 \code{\link{convex_hull}()},
-\code{\link{sample_seq}()},
-\code{\link{srand}()}
+\code{\link{sample_seq}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
