@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9008
+
+## doc
+
+  - Remove unneeded authority\_score.Rd.
+
+  - Merged man page of hub\_score() and authority\_score(), closes #698.
+
+
 # igraph 1.4.1.9007
 
 ## Chore
