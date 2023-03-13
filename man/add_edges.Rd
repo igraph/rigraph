@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{add_edges}
 \alias{add_edges}
-\alias{add.edges}
 \title{Add edges to a graph}
 \usage{
 add_edges(graph, edges, ..., attr = list())

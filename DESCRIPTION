@@ -8,6 +8,7 @@ Depends: methods
 Imports:
     graphics,
     grDevices,
+    lifecycle,
     magrittr,
     Matrix,
     pkgconfig (>= 2.0.0),

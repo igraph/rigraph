@@ -46,7 +46,6 @@
 #'
 #' @export
 #'
-#' @aliases add.edges
 #' @family functions for manipulating graph structure
 #'
 #' @examples
@@ -92,6 +91,20 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   }
 
   graph
+}
+#' Add edges to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.edges()` was renamed to `add_edges()` to create a more
+#' consistent API.
+#' @inheritParams add_edges
+#' @keywords internal
+#' @export
+add.edges <- function(graph, edges, ..., attr = list()) {
+   lifecycle::deprecate_soft("1.5.0", "add.edges()", "add_edges()")
+   add_edges(graph = graph, edges = edges, ..., attr = attr)
 }
 
 #' Add vertices to a graph
