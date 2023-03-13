@@ -15,8 +15,6 @@ sample_(pa(10, m = 3, algorithm = "bag"), without_multiples())
 }
 \seealso{
 Other constructor modifiers: 
-\code{\link{.apply_modifiers}()},
-\code{\link{.extract_constructor_and_modifiers}()},
 \code{\link{simplified}()},
 \code{\link{with_edge_}()},
 \code{\link{with_graph_}()},

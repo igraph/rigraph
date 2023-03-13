@@ -38,6 +38,7 @@
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
+#' @noRd
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -86,6 +87,7 @@
 #' @param mods The modifiers to apply
 #' @family constructor modifiers
 #' @return The modified graph
+#' @noRd
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
@@ -1378,6 +1380,7 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' make_line_graph(make_line_graph(g))
 #' make_line_graph(make_line_graph(make_line_graph(g)))
 #'
+#' @export
 make_line_graph <- function(graph) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1523,6 +1526,7 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' g3 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "in")
 #' g4 <- make_full_bipartite_graph(2, 3, directed = TRUE, mode = "all")
 #'
+#' @export
 make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
                                       mode = c("all", "out", "in")) {
   n1 <- as.integer(n1)
@@ -1597,6 +1601,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
 #' print(g, v = TRUE)
 #'
+#' @export
 make_bipartite_graph <- function(types, edges, directed = FALSE) {
   vertex.names <- names(types)
 

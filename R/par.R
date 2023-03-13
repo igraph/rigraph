@@ -28,7 +28,6 @@
   "vertex.attr.comb" = list(name = "concat", "ignore"),
   "edge.attr.comb" = list(weight = "sum", name = "concat", "ignore"),
   "sparsematrices" = TRUE,
-  "nexus.url" = "http://nexus.igraph.org",
   "add.params" = TRUE,
   "add.vertex.names" = TRUE,
   "dend.plot.type" = "auto",

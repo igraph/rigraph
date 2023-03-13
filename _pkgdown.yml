@@ -231,7 +231,6 @@ reference:
 - title: internal
   contents:
   - igraph-package
-  - has_concept("nexus")
   - has_concept("test")
   - layout.reingold.tilford
   - layout.fruchterman.reingold.grid
