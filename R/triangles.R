@@ -34,7 +34,7 @@
 #'
 #' `count_triangles()` counts how many triangles a vertex is part of.
 #'
-#' @aliases count_triangles adjacent.triangles triangles
+#' @aliases count_triangles triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a
@@ -70,3 +70,19 @@
 #' @family triangles
 #' @export
 count_triangles <- count_triangles
+
+#' Find triangles in graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `adjacent.triangles` was renamed to `count_triangles()` to create a more
+#' consistent API.
+#' @family plot.shapes
+#' @inheritParams count_triangles
+#' @keywords internal
+#' @export
+adjacent.triangles <- function(graph, vids = V(graph)) {
+  lifecycle::deprecate_soft("1.5.0", "adjacent.triangles()", "count_triangles()")
+  count_triangles(graph = graph, vids = vids)
+}

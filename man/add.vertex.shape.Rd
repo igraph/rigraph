@@ -36,6 +36,7 @@ consistent API.
 }
 \seealso{
 Other plot.shapes: 
+\code{\link{adjacent.triangles}()},
 \code{\link{shapes}()}
 }
 \concept{plot.shapes}

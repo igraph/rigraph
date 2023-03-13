@@ -213,15 +213,19 @@ plot(g,
 }
 \seealso{
 Other plot.shapes: 
-\code{\link{add.vertex.shape}()}
+\code{\link{add.vertex.shape}()},
+\code{\link{adjacent.triangles}()}
 
 Other plot.shapes: 
-\code{\link{add.vertex.shape}()}
+\code{\link{add.vertex.shape}()},
+\code{\link{adjacent.triangles}()}
 
 Other plot.shapes: 
-\code{\link{add.vertex.shape}()}
+\code{\link{add.vertex.shape}()},
+\code{\link{adjacent.triangles}()}
 
 Other plot.shapes: 
-\code{\link{add.vertex.shape}()}
+\code{\link{add.vertex.shape}()},
+\code{\link{adjacent.triangles}()}
 }
 \concept{plot.shapes}

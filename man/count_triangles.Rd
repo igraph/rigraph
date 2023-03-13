@@ -2,7 +2,6 @@
 % Please edit documentation in R/triangles.R
 \name{count_triangles}
 \alias{count_triangles}
-\alias{adjacent.triangles}
 \alias{triangles}
 \title{Find triangles in graphs}
 \usage{

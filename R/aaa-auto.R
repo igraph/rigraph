@@ -1506,7 +1506,7 @@ triad_census <- function(graph) {
 }
 
 #' @export
-count_triangles <- function(graph, vids=V(graph)) {
+count_triangles <- function(graph, vids = V(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)

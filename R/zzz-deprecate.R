@@ -27,8 +27,6 @@ deprecated <- function(old, new) {
   assign(old, new, envir = asNamespace(packageName()))
 }
 
-#' @export adjacent.triangles
-deprecated("adjacent.triangles", count_triangles)
 #' @export articulation.points
 deprecated("articulation.points", articulation_points)
 #' @export aging.prefatt.game
