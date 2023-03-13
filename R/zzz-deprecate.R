@@ -455,14 +455,6 @@ deprecated("multilevel.community", cluster_louvain)
 deprecated("neighborhood", ego)
 #' @export neighborhood.size
 deprecated("neighborhood.size", ego_size)
-#' @export nexus.get
-deprecated("nexus.get", nexus_get)
-#' @export nexus.info
-deprecated("nexus.info", nexus_info)
-#' @export nexus.list
-deprecated("nexus.list", nexus_list)
-#' @export nexus.search
-deprecated("nexus.search", nexus_search)
 #' @export no.clusters
 deprecated("no.clusters", count_components)
 

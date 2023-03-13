@@ -164,9 +164,6 @@ reference:
 - title: Graph motifs
 - contents:
   - has_concept("graph motifs")
-- title: Nexus
-- contents:
-  - has_concept("nexus")
 - title: Functions for manipulating graph structure
 - contents:
   - has_concept("functions for manipulating graph structure")
