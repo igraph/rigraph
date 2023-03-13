@@ -236,5 +236,4 @@ reference:
   - layout.fruchterman.reingold.grid
   - layout.spring
   - layout.svd
-  - srand
   - "%>%"
