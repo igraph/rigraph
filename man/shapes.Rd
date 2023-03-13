@@ -2,7 +2,6 @@
 % Please edit documentation in R/plot.shapes.R
 \name{shapes}
 \alias{shapes}
-\alias{add.vertex.shape}
 \alias{igraph.shape.noclip}
 \alias{igraph.shape.noplot}
 \alias{vertex.shapes}
@@ -211,5 +210,18 @@ plot(g,
   vertex.size = seq(10, 20, length.out = vcount(g)),
   vertex.norays = rep(4:8, length.out = vcount(g))
 )
+}
+\seealso{
+Other plot.shapes: 
+\code{\link{add.vertex.shape}()}
+
+Other plot.shapes: 
+\code{\link{add.vertex.shape}()}
+
+Other plot.shapes: 
+\code{\link{add.vertex.shape}()}
+
+Other plot.shapes: 
+\code{\link{add.vertex.shape}()}
 }
 \concept{plot.shapes}

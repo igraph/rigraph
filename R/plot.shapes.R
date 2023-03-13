@@ -151,7 +151,7 @@
 #' `shape_noplot()` is a very simple (and probably not very
 #' useful) plotting function, that does not plot anything.
 #'
-#' @aliases add.vertex.shape igraph.shape.noclip igraph.shape.noplot
+#' @aliases igraph.shape.noclip igraph.shape.noplot
 #'   vertex.shapes igraph.vertex.shapes
 #'
 #' @param shape Character scalar, name of a vertex shape. If it is
@@ -312,7 +312,24 @@ add_shape <- function(shape, clip = shape_noclip,
   do.call(igraph.options, parameters)
   invisible(TRUE)
 }
-
+#' Add shapes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertex.shape` was renamed to `add_shape()` to create a more
+#' consistent API.
+#' @family plot.shapes
+#' @inheritParams add_shape
+#' @export
+add.vertex.shape <-  function(shape, clip = shape_noclip,
+                      plot = shape_noplot,
+                      parameters = list()) {
+  lifecycle::deprecate_soft("1.5.0", "add.vertex.shape()", "add_shape()")
+  add_shape(shape = shape, clip = clip,
+                      plot = plot,
+                      parameters = parameters)
+}
 ## These are the predefined shapes
 
 .igraph.shape.circle.clip <- function(coords, el, params,

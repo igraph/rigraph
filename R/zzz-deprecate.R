@@ -27,8 +27,6 @@ deprecated <- function(old, new) {
   assign(old, new, envir = asNamespace(packageName()))
 }
 
-#' @export add.vertex.shape
-deprecated("add.vertex.shape", add_shape)
 #' @export add.vertices
 deprecated("add.vertices", add_vertices)
 #' @export adjacent.triangles
