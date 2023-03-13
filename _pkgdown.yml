@@ -3,6 +3,8 @@ url: ~
 template:
   bootstrap: 5
 
+authors:
+  after: "See the [AUTHORS file](/AUTHORS-list.html) for other contributors."
 
 navbar:
   structure:
@@ -28,7 +30,6 @@ navbar:
       - text: -------
       - text: "All articles"
         href: articles/index.html
-
 
 reference:
 - title: Adjacency
