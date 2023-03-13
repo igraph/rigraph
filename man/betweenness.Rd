@@ -135,11 +135,11 @@ of Mathematical Sociology} 25(2):163-177, 2001.
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{harmonic_centrality}()},
+\code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},
@@ -148,11 +148,11 @@ Centrality measures
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{harmonic_centrality}()},
+\code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},
@@ -161,11 +161,11 @@ Centrality measures
 
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
 \code{\link{harmonic_centrality}()},
+\code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},

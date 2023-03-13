@@ -106,18 +106,18 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=plot.sir]{plot.sir()}} to conveniently plot the results
 
-Other epi: 
+Processes on graphs
 \code{\link{plot.sir}()}
 
-Other epi: 
+Processes on graphs
 \code{\link{plot.sir}()}
 
-Other epi: 
+Processes on graphs
 \code{\link{plot.sir}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk
 (\url{http://math.bu.edu/people/kolaczyk/}) wrote the initial version in R.
 }
-\concept{epi}
+\concept{processes}
 \keyword{graphs}

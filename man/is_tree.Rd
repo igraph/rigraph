@@ -47,6 +47,7 @@ is_tree(g, details = TRUE)
 }
 \seealso{
 Other trees: 
+\code{\link{make_from_prufer}()},
 \code{\link{sample_spanning_tree}()},
 \code{\link{to_prufer}()}
 }

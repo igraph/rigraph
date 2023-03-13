@@ -75,6 +75,7 @@ plot(g)
 Other vertex and edge sequences: 
 \code{\link{E}()},
 \code{\link{V}()},
+\code{\link{as_ids}()},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-vs-attributes}},
@@ -86,6 +87,7 @@ Other vertex and edge sequences:
 Other vertex and edge sequences: 
 \code{\link{E}()},
 \code{\link{V}()},
+\code{\link{as_ids}()},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},
 \code{\link{igraph-vs-attributes}},

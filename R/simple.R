@@ -70,16 +70,19 @@
 #' is_simple(simplify(g, remove.multiple = FALSE))
 #' is_simple(simplify(g))
 #' @family simple
+#' @family functions for manipulating graph structure
 #' @export
 simplify <- simplify
 
 #' @family simple
+#' @family functions for manipulating graph structure
 #' @export
 #' @rdname simplify
 is_simple <- is_simple
 
 #' @family isomorphism
 #' @family simple
+#' @family functions for manipulating graph structure
 #' @export
 #' @rdname simplify
 simplify_and_colorize <- function(graph) {

@@ -40,7 +40,6 @@ Community detection
 \code{\link{cluster_spinglass}()},
 \code{\link{cluster_walktrap}()},
 \code{\link{compare}()},
-\code{\link{contract}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
 \code{\link{membership}()},

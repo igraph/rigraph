@@ -41,3 +41,17 @@ V(g)$name <- letters[1:10]
 as_ids(V(g))
 as_ids(E(g))
 }
+\seealso{
+Other vertex and edge sequences: 
+\code{\link{E}()},
+\code{\link{V}()},
+\code{\link{igraph-es-attributes}},
+\code{\link{igraph-es-indexing2}},
+\code{\link{igraph-es-indexing}},
+\code{\link{igraph-vs-attributes}},
+\code{\link{igraph-vs-indexing2}},
+\code{\link{igraph-vs-indexing}},
+\code{\link{print.igraph.es}()},
+\code{\link{print.igraph.vs}()}
+}
+\concept{vertex and edge sequences}

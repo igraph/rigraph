@@ -64,6 +64,7 @@ V(g2)
 \seealso{
 Other vertex and edge sequences: 
 \code{\link{E}()},
+\code{\link{as_ids}()},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},

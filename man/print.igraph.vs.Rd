@@ -55,6 +55,7 @@ V(g4)[[2:5, 7:8]]
 Other vertex and edge sequences: 
 \code{\link{E}()},
 \code{\link{V}()},
+\code{\link{as_ids}()},
 \code{\link{igraph-es-attributes}},
 \code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},

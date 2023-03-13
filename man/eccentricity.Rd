@@ -48,8 +48,8 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 
 Other paths: 
 \code{\link{all_simple_paths}()},
+\code{\link{diameter}()},
 \code{\link{distance_table}()},
-\code{\link{is_dag}()},
 \code{\link{radius}()}
 }
 \concept{paths}

@@ -85,12 +85,12 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \seealso{
 \code{\link[=sir]{sir()}} for running the actual simulation.
 
-Other epi: 
+Processes on graphs
 \code{\link{time_bins.sir}()}
 }
 \author{
 Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
 Csardi \email{csardi.gabor@gmail.com}.
 }
-\concept{epi}
+\concept{processes}
 \keyword{graphs}

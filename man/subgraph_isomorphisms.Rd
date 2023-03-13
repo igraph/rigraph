@@ -68,6 +68,7 @@ supply \code{NULL} for both of these arguments.}
 
 \seealso{
 Other graph isomorphism: 
+\code{\link{canonical_permutation}()},
 \code{\link{count_isomorphisms}()},
 \code{\link{count_subgraph_isomorphisms}()},
 \code{\link{graph_from_isomorphism_class}()},

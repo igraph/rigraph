@@ -108,25 +108,30 @@ g <- connect(g, 2)
 
 }
 \seealso{
-Random graph models (games)
-\code{\link{erdos.renyi.game}()},
-\code{\link{sample_bipartite}()},
-\code{\link{sample_degseq}()},
-\code{\link{sample_dot_product}()},
-\code{\link{sample_gnm}()},
-\code{\link{sample_gnp}()},
-\code{\link{sample_grg}()},
-\code{\link{sample_growing}()},
-\code{\link{sample_hierarchical_sbm}()},
-\code{\link{sample_islands}()},
-\code{\link{sample_k_regular}()},
-\code{\link{sample_last_cit}()},
-\code{\link{sample_pa_age}()},
-\code{\link{sample_pa}()},
-\code{\link{sample_pref}()},
-\code{\link{sample_sbm}()},
-\code{\link{sample_smallworld}()},
-\code{\link{sample_traits_callaway}()}
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference.igraph}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{simplify}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
 
 Other structural.properties: 
 \code{\link{bfs}()},
@@ -135,11 +140,11 @@ Other structural.properties:
 \code{\link{coreness}()},
 \code{\link{degree}()},
 \code{\link{dfs}()},
-\code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},
 \code{\link{laplacian_matrix}()},
@@ -159,11 +164,11 @@ Other structural.properties:
 \code{\link{coreness}()},
 \code{\link{degree}()},
 \code{\link{dfs}()},
-\code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},
 \code{\link{laplacian_matrix}()},
@@ -183,11 +188,11 @@ Other structural.properties:
 \code{\link{coreness}()},
 \code{\link{degree}()},
 \code{\link{dfs}()},
-\code{\link{diameter}()},
 \code{\link{distance_table}()},
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},
 \code{\link{laplacian_matrix}()},
@@ -204,6 +209,6 @@ Other structural.properties:
 Gabor Csardi \email{csardi.gabor@gmail.com}, the first version was
 done by Vincent Matossian
 }
-\concept{games}
+\concept{functions for manipulating graph structure}
 \concept{structural.properties}
 \keyword{graphs}

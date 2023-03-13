@@ -34,6 +34,7 @@
 #' @param .variant Constructor variant; must be one of \sQuote{make},
 #'   \sQuote{graph} or \sQuote{sample}. Used in cases when the same constructor
 #'   specification has deterministic and random variants.
+#' @family constructor modifiers
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
@@ -84,6 +85,7 @@
 #'
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
+#' @family constructor modifiers
 #' @return The modified graph
 #' @noRd
 .apply_modifiers <- function(graph, mods) {
@@ -204,6 +206,7 @@ make_ <- function(...) {
 #' ## Arguments are passed on from sample_ to sample_sbm
 #' blocky3 <- pref_matrix %>%
 #'   sample_(sbm(), n = 20, block.sizes = c(10, 10))
+#' @family games
 sample_ <- function(...) {
   me <- attr(sys.function(), "name") %||% "construct"
   extracted <- .extract_constructor_and_modifiers(..., .operation = me, .variant = "sample")
@@ -1207,6 +1210,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #'   Prüfer sequences does not support directed trees at the moment.
 #' @return A graph object.
 #'
+#' @family games
 #' @keywords graphs
 #' @examples
 #'
@@ -1243,7 +1247,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #'
 #' g <- make_tree(13, 3)
 #' to_prufer(g)
-#'
+#' @family trees
 #' @export
 make_from_prufer <- make_from_prufer
 

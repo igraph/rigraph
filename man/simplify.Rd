@@ -71,10 +71,86 @@ is_simple(simplify(g))
 \code{\link[=which_loop]{which_loop()}}, \code{\link[=which_multiple]{which_multiple()}} and
 \code{\link[=count_multiple]{count_multiple()}}, \code{\link[=delete_edges]{delete_edges()}},
 \code{\link[=delete_vertices]{delete_vertices()}}
+
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{connect}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference.igraph}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
+
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{connect}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference.igraph}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
+
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{connect}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference.igraph}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{functions for manipulating graph structure}
 \concept{isomorphism}
 \concept{simple}
 \keyword{graphs}

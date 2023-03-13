@@ -30,15 +30,39 @@ g2 <- g + edge(5, 1)
 is_dag(g2)
 }
 \seealso{
-Other paths: 
-\code{\link{all_simple_paths}()},
+Graph cycles
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{has_eulerian_path}()}
+
+Other structural.properties: 
+\code{\link{bfs}()},
+\code{\link{component_distribution}()},
+\code{\link{connect}()},
+\code{\link{constraint}()},
+\code{\link{coreness}()},
+\code{\link{degree}()},
+\code{\link{dfs}()},
 \code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{radius}()}
+\code{\link{edge_density}()},
+\code{\link{feedback_arc_set}()},
+\code{\link{girth}()},
+\code{\link{is_matching}()},
+\code{\link{knn}()},
+\code{\link{laplacian_matrix}()},
+\code{\link{reciprocity}()},
+\code{\link{subcomponent}()},
+\code{\link{subgraph}()},
+\code{\link{topo_sort}()},
+\code{\link{transitivity}()},
+\code{\link{unfold_tree}()},
+\code{\link{which_multiple}()},
+\code{\link{which_mutual}()}
 }
 \author{
 Tamas Nepusz \email{ntamas@gmail.com} for the C code, Gabor Csardi
 \email{csardi.gabor@gmail.com} for the R interface.
 }
-\concept{paths}
+\concept{cycles}
+\concept{structural.properties}
 \keyword{graphs}

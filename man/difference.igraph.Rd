@@ -60,7 +60,34 @@ G <- wheel \%m\% sstar
 print_all(G)
 plot(G, layout = layout_nicely(wheel))
 }
+\seealso{
+Other functions for manipulating graph structure: 
+\code{\link{+.igraph}()},
+\code{\link{add_edges}()},
+\code{\link{add_vertices}()},
+\code{\link{complementer}()},
+\code{\link{compose}()},
+\code{\link{connect}()},
+\code{\link{contract}()},
+\code{\link{delete_edges}()},
+\code{\link{delete_vertices}()},
+\code{\link{difference}()},
+\code{\link{disjoint_union}()},
+\code{\link{edge}()},
+\code{\link{igraph-minus}},
+\code{\link{intersection.igraph}()},
+\code{\link{intersection}()},
+\code{\link{path}()},
+\code{\link{permute}()},
+\code{\link{rep.igraph}()},
+\code{\link{reverse_edges}()},
+\code{\link{simplify}()},
+\code{\link{union.igraph}()},
+\code{\link{union}()},
+\code{\link{vertex}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{functions for manipulating graph structure}
 \keyword{graphs}

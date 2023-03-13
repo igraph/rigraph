@@ -355,6 +355,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' @family games
 #' @export
 #' @keywords graphs
+#' @keywords internal
 #' @examples
 #'
 #' g <- erdos.renyi.game(1000, 1 / 1000)
@@ -1069,8 +1070,8 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
 
 #' @rdname ego
-#' @family games
 #' @export
+#' @family functions for manipulating graph structure
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
@@ -1661,6 +1662,7 @@ sample_k_regular <- sample_k_regular
 #' distribution in scale-free networks. *Phys Rev Lett* 87(27):278701,
 #' 2001.
 #' @keywords graphs
+#' @family games
 #' @examples
 #'
 #' N <- 10000
@@ -1727,6 +1729,7 @@ sample_fitness <- sample_fitness
 #' Cho YS, Kim JS, Park J, Kahng B, Kim D: Percolation transitions in
 #' scale-free networks under the Achlioptas process. *Phys Rev Lett*
 #' 103:135702, 2009.
+#' @family games
 #' @keywords graphs
 #' @examples
 #'
@@ -1780,6 +1783,7 @@ sample_fitness_pl <- sample_fitness_pl
 #' time: densification laws, shrinking diameters and possible explanations.
 #' *KDD '05: Proceeding of the eleventh ACM SIGKDD international
 #' conference on Knowledge discovery in data mining*, 177--187, 2005.
+#' @family games
 #' @keywords graphs
 #' @examples
 #'
@@ -1821,6 +1825,7 @@ sample_forestfire <- sample_forestfire
 #' @references Lyzinski, V., Fishkind, D. E., Priebe, C. E. (2013).  Seeded
 #' graph matching for correlated Erdos-Renyi graphs.
 #' <https://arxiv.org/abs/1304.7844>
+#' @family games
 #' @examples
 #' g <- sample_gnp(1000, .1)
 #' g2 <- sample_correlated_gnp(g, corr = 0.5)
@@ -1857,6 +1862,7 @@ sample_correlated_gnp <- sample_correlated_gnp
 #' graph matching for correlated Erdos-Renyi graphs.
 #' <https://arxiv.org/abs/1304.7844>
 #' @keywords graphs
+#' @family games
 #' @examples
 #' gg <- sample_correlated_gnp_pair(
 #'   n = 10, corr = .8, p = .5,

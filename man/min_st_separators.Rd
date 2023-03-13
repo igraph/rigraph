@@ -42,7 +42,21 @@ the Minimal Separators of a Graph, In: Peter Widmayer, Gabriele Neyer and
 Stephan Eidenbenz (editors): \emph{Graph-theoretic concepts in computer
 science}, 1665, 167--172, 1999. Springer.
 }
+\seealso{
+Other flow: 
+\code{\link{dominator_tree}()},
+\code{\link{edge_connectivity}()},
+\code{\link{is_min_separator}()},
+\code{\link{is_separator}()},
+\code{\link{max_flow}()},
+\code{\link{min_cut}()},
+\code{\link{min_separators}()},
+\code{\link{st_cuts}()},
+\code{\link{st_min_cuts}()},
+\code{\link{vertex_connectivity}()}
+}
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{flow}
 \keyword{graphs}

@@ -55,11 +55,11 @@ and Economic Development, \emph{Science} \strong{328}, 1029--1031, 2010.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
-\code{\link{arpack_defaults}},
 \code{\link{closeness}()},
 \code{\link{eigen_centrality}()},
 \code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
+\code{\link{hub_score}()},
 \code{\link{page_rank}()},
 \code{\link{power_centrality}()},
 \code{\link{spectrum}()},

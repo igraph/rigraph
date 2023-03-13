@@ -48,8 +48,8 @@ calculations.
 
 Other paths: 
 \code{\link{all_simple_paths}()},
+\code{\link{diameter}()},
 \code{\link{distance_table}()},
-\code{\link{eccentricity}()},
-\code{\link{is_dag}()}
+\code{\link{eccentricity}()}
 }
 \concept{paths}

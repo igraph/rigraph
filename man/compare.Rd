@@ -89,7 +89,6 @@ Community detection
 \code{\link{cluster_optimal}()},
 \code{\link{cluster_spinglass}()},
 \code{\link{cluster_walktrap}()},
-\code{\link{contract}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
 \code{\link{membership}()},

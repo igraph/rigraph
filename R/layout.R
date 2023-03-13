@@ -696,6 +696,7 @@ on_grid <- function(...) layout_spec(layout_on_grid, ...)
 
 #' @rdname layout_on_grid
 #' @export
+#' @keywords internal
 layout.grid.3d <- function(graph, width = 0, height = 0) {
   .Deprecated("layout_on_grid", msg = paste0(
     "layout.grid.3d is deprecated from\n",

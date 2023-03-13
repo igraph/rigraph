@@ -88,6 +88,7 @@
 #' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_adjacency_matrix(RDP, 5)
+#' @family embedding
 #' @export
 embed_adjacency_matrix <- embed_adjacency_matrix
 
@@ -148,6 +149,7 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #' RDP.graph.3 <- sample_dot_product(lpvs.sph)
 #' dim_select(embed_adjacency_matrix(RDP.graph.3, 10)$D)
 #'
+#' @family embedding
 #' @export
 dim_select <- dim_select
 
