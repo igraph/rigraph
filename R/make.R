@@ -37,6 +37,7 @@
 #' @return A named list with three items: \sQuote{cons} for the constructor
 #'   function, \sQuote{mods} for the modifiers and \sQuote{args} for the
 #'   remaining, unparsed arguments.
+#' @noRd
 .extract_constructor_and_modifiers <- function(..., .operation, .variant) {
   args <- list(...)
   cidx <- vapply(args, inherits, TRUE, what = "igraph_constructor_spec")
@@ -84,6 +85,7 @@
 #' @param graph The graph to apply the modifiers to
 #' @param mods The modifiers to apply
 #' @return The modified graph
+#' @noRd
 .apply_modifiers <- function(graph, mods) {
   for (m in mods) {
     if (m$id == "without_attr") {
