@@ -103,26 +103,30 @@ unchanged, vertex attributes are combined, according to the
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Community detection
-<code><a href="as_membership.html">as_membership</a>()</code>,
-<code><a href="cluster_edge_betweenness.html">cluster_edge_betweenness</a>()</code>,
-<code><a href="cluster_fast_greedy.html">cluster_fast_greedy</a>()</code>,
-<code><a href="cluster_fluid_communities.html">cluster_fluid_communities</a>()</code>,
-<code><a href="cluster_infomap.html">cluster_infomap</a>()</code>,
-<code><a href="cluster_label_prop.html">cluster_label_prop</a>()</code>,
-<code><a href="cluster_leading_eigen.html">cluster_leading_eigen</a>()</code>,
-<code><a href="cluster_leiden.html">cluster_leiden</a>()</code>,
-<code><a href="cluster_louvain.html">cluster_louvain</a>()</code>,
-<code><a href="cluster_optimal.html">cluster_optimal</a>()</code>,
-<code><a href="cluster_spinglass.html">cluster_spinglass</a>()</code>,
-<code><a href="cluster_walktrap.html">cluster_walktrap</a>()</code>,
-<code><a href="compare.html">compare</a>()</code>,
-<code><a href="groups.html">groups</a>()</code>,
-<code><a href="make_clusters.html">make_clusters</a>()</code>,
-<code><a href="communities.html">membership</a>()</code>,
-<code><a href="modularity.igraph.html">modularity.igraph</a>()</code>,
-<code><a href="plot_dendrogram.communities.html">plot_dendrogram</a>()</code>,
-<code><a href="split_join_distance.html">split_join_distance</a>()</code></p></div>
+    <div class="dont-index"><p>Other functions for manipulating graph structure: 
+<code><a href="plus-.igraph.html">+.igraph</a>()</code>,
+<code><a href="add_edges.html">add_edges</a>()</code>,
+<code><a href="add_vertices.html">add_vertices</a>()</code>,
+<code><a href="complementer.html">complementer</a>()</code>,
+<code><a href="compose.html">compose</a>()</code>,
+<code><a href="ego.html">connect</a>()</code>,
+<code><a href="delete_edges.html">delete_edges</a>()</code>,
+<code><a href="delete_vertices.html">delete_vertices</a>()</code>,
+<code><a href="difference.igraph.html">difference.igraph</a>()</code>,
+<code><a href="difference.html">difference</a>()</code>,
+<code><a href="disjoint_union.html">disjoint_union</a>()</code>,
+<code><a href="edge.html">edge</a>()</code>,
+<code><a href="igraph-minus.html">igraph-minus</a></code>,
+<code><a href="intersection.igraph.html">intersection.igraph</a>()</code>,
+<code><a href="intersection.html">intersection</a>()</code>,
+<code><a href="path.html">path</a>()</code>,
+<code><a href="permute.html">permute</a>()</code>,
+<code><a href="rep.igraph.html">rep.igraph</a>()</code>,
+<code><a href="reverse_edges.html">reverse_edges</a>()</code>,
+<code><a href="simplify.html">simplify</a>()</code>,
+<code><a href="union.igraph.html">union.igraph</a>()</code>,
+<code><a href="union.html">union</a>()</code>,
+<code><a href="vertex.html">vertex</a>()</code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -144,10 +148,10 @@ unchanged, vertex attributes are combined, according to the
 <span class="r-in"><span><span class="co">## graph and edge attributes are kept, vertex attributes are</span></span></span>
 <span class="r-in"><span><span class="co">## combined using the 'toString' function.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g2</span>, g <span class="op">=</span> <span class="cn">TRUE</span>, v <span class="op">=</span> <span class="cn">TRUE</span>, e <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c8e858a UNW- 5 10 -- Ring</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 55f85ea UNW- 5 10 -- Ring</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l), name (v/c), weight</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | (e/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c8e858a (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 55f85ea (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a, b--a, b a, b--c, d c, d--c, d c, d--e, f e, f--e, f e, f--g, h</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] g, h--g, h g, h--i, j i, j--i, j a, b--i, j</span>
 <span class="r-in"><span></span></span>

@@ -140,7 +140,19 @@ as IBM Research Report RJ 10076, May 1997.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="eigen_centrality.html">eigen_centrality()</a></code> for eigenvector centrality,
 <code><a href="page_rank.html">page_rank()</a></code> for the Page Rank scores. <code><a href="arpack.html">arpack()</a></code> for
-the underlining machinery of the computation.</p></div>
+the underlining machinery of the computation.</p>
+<p>Centrality measures
+<code><a href="alpha_centrality.html">alpha_centrality</a>()</code>,
+<code><a href="closeness.html">closeness</a>()</code>,
+<code><a href="diversity.html">diversity</a>()</code>,
+<code><a href="eigen_centrality.html">eigen_centrality</a>()</code>,
+<code><a href="betweenness.html">estimate_betweenness</a>()</code>,
+<code><a href="harmonic_centrality.html">harmonic_centrality</a>()</code>,
+<code><a href="page_rank.html">page_rank</a>()</code>,
+<code><a href="power_centrality.html">power_centrality</a>()</code>,
+<code><a href="spectrum.html">spectrum</a>()</code>,
+<code><a href="strength.html">strength</a>()</code>,
+<code><a href="subgraph_centrality.html">subgraph_centrality</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -157,9 +169,9 @@ the underlining machinery of the computation.</p></div>
 <span class="r-in"><span><span class="co">## A ring</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hub_score</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 0 1 0 1 0 1 0 1 0</span>
-<span class="r-in"><span><span class="fu">authority_score</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 1 1 1 1 1 1</span>
+<span class="r-in"><span><span class="fu">authority_score</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 0 1 0 1 0 1 0 1 0</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

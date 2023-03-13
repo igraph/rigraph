@@ -93,7 +93,7 @@ are set as attributes.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other graph attributes: 
+    <div class="dont-index"><p>Vertex, edge and graph attributes
 <code><a href="delete_edge_attr.html">delete_edge_attr</a>()</code>,
 <code><a href="delete_graph_attr.html">delete_graph_attr</a>()</code>,
 <code><a href="delete_vertex_attr.html">delete_vertex_attr</a>()</code>,
@@ -102,6 +102,7 @@ are set as attributes.</p></dd>
 <code><a href="edge_attr.html">edge_attr</a>()</code>,
 <code><a href="graph_attr_names.html">graph_attr_names</a>()</code>,
 <code><a href="graph_attr.html">graph_attr</a>()</code>,
+<code><a href="igraph-attribute-combination.html">igraph-attribute-combination</a></code>,
 <code><a href="igraph-dollar.html">igraph-dollar</a></code>,
 <code><a href="igraph-vs-attributes.html">igraph-vs-attributes</a></code>,
 <code><a href="set_edge_attr.html">set_edge_attr</a>()</code>,
@@ -117,9 +118,9 @@ are set as attributes.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="op">~</span> <span class="va">A</span> <span class="op">-</span> <span class="va">B</span><span class="op">:</span><span class="va">C</span><span class="op">:</span><span class="va">D</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"name"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"4-star"</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b33edfc UN-- 4 3 -- 4-star</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH b666d2c UN-- 4 3 -- 4-star</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), name (v/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b33edfc (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from b666d2c (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] A--B A--C A--D</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="graph_attr.html">graph_attr</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>

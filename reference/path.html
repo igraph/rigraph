@@ -99,10 +99,25 @@ to <code><a href="delete_edges.html">delete_edges()</a></code>.</p>
 <code><a href="plus-.igraph.html">+.igraph</a>()</code>,
 <code><a href="add_edges.html">add_edges</a>()</code>,
 <code><a href="add_vertices.html">add_vertices</a>()</code>,
+<code><a href="complementer.html">complementer</a>()</code>,
+<code><a href="compose.html">compose</a>()</code>,
+<code><a href="ego.html">connect</a>()</code>,
+<code><a href="contract.html">contract</a>()</code>,
 <code><a href="delete_edges.html">delete_edges</a>()</code>,
 <code><a href="delete_vertices.html">delete_vertices</a>()</code>,
+<code><a href="difference.igraph.html">difference.igraph</a>()</code>,
+<code><a href="difference.html">difference</a>()</code>,
+<code><a href="disjoint_union.html">disjoint_union</a>()</code>,
 <code><a href="edge.html">edge</a>()</code>,
 <code><a href="igraph-minus.html">igraph-minus</a></code>,
+<code><a href="intersection.igraph.html">intersection.igraph</a>()</code>,
+<code><a href="intersection.html">intersection</a>()</code>,
+<code><a href="permute.html">permute</a>()</code>,
+<code><a href="rep.igraph.html">rep.igraph</a>()</code>,
+<code><a href="reverse_edges.html">reverse_edges</a>()</code>,
+<code><a href="simplify.html">simplify</a>()</code>,
+<code><a href="union.igraph.html">union.igraph</a>()</code>,
+<code><a href="union.html">union</a>()</code>,
 <code><a href="vertex.html">vertex</a>()</code></p></div>
     </div>
 
@@ -122,7 +137,7 @@ to <code><a href="delete_edges.html">delete_edges()</a></code>.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g3</span> <span class="op">&lt;-</span> <span class="va">g2</span> <span class="op">+</span> <span class="fu">path</span><span class="op">(</span><span class="st">"e"</span>, <span class="st">"f"</span>, <span class="st">"g"</span>, weight <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g3</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 edges from df1e6bd (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/5 edges from 5b15962 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tail head tid hid weight color</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    a    b   1   2     NA  &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    b    c   2   3     NA  &lt;NA&gt;</span>
@@ -132,7 +147,7 @@ to <code><a href="delete_edges.html">delete_edges()</a></code>.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g4</span> <span class="op">&lt;-</span> <span class="va">g3</span> <span class="op">+</span> <span class="fu">path</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f"</span>, <span class="st">"c"</span>, <span class="st">"j"</span>, <span class="st">"d"</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, color <span class="op">=</span> <span class="st">"green"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g4</span><span class="op">)</span><span class="op">[[</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/8 edges from 7a28663 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 8/8 edges from 703d369 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   tail head tid hid weight color width</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    a    b   1   2     NA  &lt;NA&gt;    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    b    c   2   3     NA  &lt;NA&gt;    NA</span>
