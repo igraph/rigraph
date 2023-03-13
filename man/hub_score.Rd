@@ -3,9 +3,13 @@
 \name{hub_score}
 \alias{hub_score}
 \alias{hub.score}
-\title{Kleinberg's hub centrality scores.}
+\alias{authority_score}
+\alias{authority.score}
+\title{Kleinberg's hub and authority centrality scores.}
 \usage{
 hub_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults)
+
+authority_score(graph, scale = TRUE, weights = NULL, options = arpack_defaults)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -26,7 +30,7 @@ selected by the surfer.}
 }
 \value{
 A named list with members:
-\item{vector}{The authority/hub scores of the vertices.}
+\item{vector}{The hub or authority scores of the vertices.}
 \item{value}{The corresponding eigenvalue of the calculated
 principal eigenvector.}
 \item{options}{Some information about the ARPACK computation, it has
@@ -39,18 +43,23 @@ of \eqn{A A^T}{A*t(A)}, where \eqn{A} is the adjacency matrix of the
 graph.
 }
 \details{
+Similarly, the authority scores of the vertices are defined as the principal
+eigenvector of \eqn{A^T A}{t(A)*A}, where \eqn{A} is the adjacency matrix of
+the graph.
+
 For undirected matrices the adjacency matrix is symmetric and the hub
-scores are the same as authority scores, see
-\code{\link[=authority_score]{authority_score()}}.
+scores are the same as authority scores.
 }
 \examples{
 ## An in-star
 g <- make_star(10)
 hub_score(g)$vector
+authority_score(g)$vector
 
 ## A ring
 g2 <- make_ring(10)
 hub_score(g2)$vector
+authority_score(g2)$vector
 }
 \references{
 J. Kleinberg. Authoritative sources in a hyperlinked
@@ -59,7 +68,6 @@ environment. \emph{Proc. 9th ACM-SIAM Symposium on Discrete Algorithms},
 as IBM Research Report RJ 10076, May 1997.
 }
 \seealso{
-\code{\link[=authority_score]{authority_score()}},
 \code{\link[=eigen_centrality]{eigen_centrality()}} for eigenvector centrality,
 \code{\link[=page_rank]{page_rank()}} for the Page Rank scores. \code{\link[=arpack]{arpack()}} for
 the underlining machinery of the computation.

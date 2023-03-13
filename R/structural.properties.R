@@ -847,13 +847,17 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 #' @param weights Optional weights for weighted transitivity. It is ignored for
 #'   other transitivity measures. If it is `NULL` (the default) and the
 #'   graph has a `weight` edge attribute, then it is used automatically.
-#' @param isolates Character scalar, defines how to treat vertices with degree
-#'   zero and one. If it is \sQuote{`NaN`} then they local transitivity is
+#' @param isolates Character scalar, for local versions of transitivity, it
+#'   defines how to treat vertices with degree zero and one.
+#'   If it is \sQuote{`NaN`} then their local transitivity is
 #'   reported as `NaN` and they are not included in the averaging, for the
 #'   transitivity types that calculate an average. If there are no vertices with
 #'   degree two or higher, then the averaging will still result `NaN`. If it
 #'   is \sQuote{`zero`}, then we report 0 transitivity for them, and they
 #'   are included in the averaging, if an average is calculated.
+#'   For the global transitivity, it controls how to handle graphs with
+#'   no connected triplets: `NaN` or zero will be returned according to
+#'   the respective setting.
 #' @return For \sQuote{`global`} a single number, or `NaN` if there
 #'   are no connected triples in the graph.
 #'
@@ -1159,16 +1163,16 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
 #'
-#' The neighborhood of a given order `o` of a vertex `v` includes all
+#' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' `ego_size()` calculates the size of the neighborhoods for the
-#' given vertices with the given order.
+#' `ego_size()` returns the size of the neighborhoods of the given order,
+#' for each given vertex.
 #'
-#' `ego()` calculates the neighborhoods of the given vertices with
-#' the given order parameter.
+#' `ego()` returns the vertices belonging to the neighborhoods of the given
+#' order, for each given vertex.
 #'
 #' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves

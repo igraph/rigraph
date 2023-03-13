@@ -123,6 +123,7 @@
 #' as_data_frame(g, what = "vertices")
 #' as_data_frame(g, what = "edges")
 #'
+#' @export
 graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   d <- as.data.frame(d)
   if (!is.null(vertices)) {

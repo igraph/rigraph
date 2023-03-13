@@ -17,4 +17,4 @@ rsync -avq \
 
 cp doc/*.Rd man/
 cp ${tempdir}/NAMESPACE .
-cp ${tempdir}/man/* man/
+cp -r ${tempdir}/man/* man/

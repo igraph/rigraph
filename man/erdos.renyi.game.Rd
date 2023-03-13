@@ -67,7 +67,7 @@ Mathematicae} 6, 290--297 (1959).
 \seealso{
 \code{\link[=sample_pa]{sample_pa()}}
 
-Other games: 
+Random graph models (games)
 \code{\link{connect}()},
 \code{\link{sample_bipartite}()},
 \code{\link{sample_degseq}()},

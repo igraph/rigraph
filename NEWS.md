@@ -1,18 +1,89 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9008
+
+## doc
+
+  - Remove unneeded authority\_score.Rd.
+
+  - Merged man page of hub\_score() and authority\_score(), closes #698.
+
+
+# igraph 1.4.1.9007
+
+## Chore
+
+  - Update C core.
+
+  - ARPACK-based calculations are now interruptible
+
+  - `shortest_paths()` and `all_shortest_paths()` no longer crash when an invalid `from` vertex is passed and weights are being used
+
+
+# igraph 1.4.1.9006
+
+## Continuous integration
+
+  - Fix oldrel runs by adding a dependency on the development version of the ape package (#687).
+
+## Documentation
+
+  - Improve "family" titles (#679).
+
+## Uncategorized
+
+  - Spanish vignette in location suggested by #645 (#650).
+
+
+# igraph 1.4.1.9005
+
+## Chore
+
+  - Update vendored C core.
+
+
+# igraph 1.4.1.9004
+
+## Documentation
+
+  - Improve docs of ego/neighborhood functions.
+
+
+# igraph 1.4.1.9003
+
+## Documentation
+
+  - Improve transitivity() docs.
+
+## Uncategorized
+
+  - Merge branch 'cran-1.4.1'.
+
+
+# igraph 1.4.1.9002
+
+## Chore
+
+- Updated C core.
+
+## Documentation
+
+- Fix NEWS.md formatting (#683).
+
+
 # igraph 1.4.1.9001
 
 ## Chore
 
-  - Don't run fledge workflow on push.
+- Don't run fledge workflow on push.
 
 ## Continuous integration
 
-  - Do not exclude C core from coverage.
+- Do not exclude C core from coverage.
 
 ## Testing
 
-  - Rm leftover magrittr pipe definition (#684).
+- Rm leftover magrittr pipe definition (#684).
 
 
 # igraph 1.4.1.9000
@@ -22,126 +93,35 @@
 
 # igraph 1.4.1
 
-- Same as previous version.
-
-
-# igraph 1.4.0.9010
-
 ## Bug fixes
 
-- Console() command now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info.
+- `console()` now works again and provides a Tcl/Tk based UI where igraph can post status messages and progress info (#664).
 
+- Fix errors when printing long vertex names (#677, @ahmohamed).
 
-# igraph 1.4.0.9009
+- Fix regression that broke builds on some systems (e.g., GCC version 5 or earlier), introduced in igraph 1.4.0 (#670, #671).
 
-  - Fix errors when printing long vertex names (@ahmohamed, #677).
+- `fit_hrg()` does not crash any more when called with a graph that has less than three vertices.
 
+## Documentation
 
-# igraph 1.4.0.9008
+- Various improvements (#663, @maelle; #667).
 
-## Bug fixes
+## Internal
 
-- Fix warning about yyget\_leng returning wrong type when using LTO (#676).
+- Fix warning about `yyget_leng()` returning wrong type when using LTO (#676).
 
-- Update C core.
+- Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers, while still requesting a C++ compiler for linking.
 
-- Fixes compiling with GCC version 5 and earlier
+- Don't ignore `build/` when building the package because the vignette index is built there.
 
-## Chore
+- Skip plot test entirely on R-devel.
 
 - Avoid submodules for building igraph (#674).
 
 - Makevars cleanup (#671).
 
-## Documentation
-
-- Update troubleshooting info.
-
-
-# igraph 1.4.0.9007
-
-## Bug fixes
-
-- Remove C++11 specification because of CRAN pretests.
-
-- Fixing CRAN pretest issues.
-
-## Chore
-
-- Updated vendored C core.
-
-- Finish upgrade to C++17.
-
-- Updates NEWS.md with distances(algorithm='johnson') fix.
-
-- Updated NEWS.md based on feedback from @szhorvat.
-
-- Updated cran-comments and NEWS.
-
-
-# igraph 1.4.0.9006
-
-## Documentation
-
-- Improve layout\_with\_mds() docs.
-
-- Documentation polish.
-
-
-# igraph 1.4.0.9005
-
-## Chore
-
-- Added Zenodo configuration file.
-
-
-# igraph 1.4.0.9004
-
-## Documentation
-
-- Fix is\_matching() title (#667).
-
-- Make package manual page internal (#663).
-
-
-# igraph 1.4.0.9003
-
-## Chore
-
-- Don't mention C++11 or C++17 for best compatibility with both newest R and older compilers.
-
-
-# igraph 1.4.0.9002
-
-## Continuous integration
-
-- Testing what happens in CI if I switch SystemRequirements to C++17 to make CRAN happy.
-
-
-# igraph 1.4.0.9001
-
-- Same as previous version.
-
-
-# igraph 1.4.0.9000
-
-## Bug fixes
-
-- Don't ignore build/ when building the package because the vignette index is built there.
-
-## Chore
-
-- NEWS.md cleanup.
-
-## Testing
-
-- Skip plot test entirely on R-devel.
-
-- Use separate plotting test for R 4.2 and R 4.3.
-
-## doc
-
-- Replace a jstor.org URL with its DOI equivalent to prevent a 403 Forbidden error during CRAN checks.
+- Add Zenodo configuration file.
 
 
 # igraph 1.4.0

@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.4.1.9001
+Version: 1.4.1.9008
 Title: Network Analysis and Visualization
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
@@ -15,7 +15,7 @@ Imports:
     stats,
     utils
 Suggests:
-    ape,
+    ape (>= 5.7-0.1),
     digest,
     graph,
     igraphdata,
@@ -56,3 +56,5 @@ Authors@R: c(
     person("Chan Zuckerberg Initiative", role = "fnd")
   )
 VignetteBuilder: knitr
+Remotes:
+    emmanuelparadis/ape
