@@ -1,5 +1,38 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9009
+
+## Bug fixes
+
+  - Remove srand() from \_pkgdown.yml.
+
+## Chore
+
+  - Rm nexus functions that do not work any more since the Nexus g… (#705).
+
+  - Move export tags to related file, away from package man page source (#703).
+
+## Documentation
+
+  - Reorganize function reference (#662).
+
+  - Reinstate ecount() and vcount() (#706).
+
+  - Rm docs for two internal functions (#704).
+
+  - Refactor contributors listing (#647).
+
+## Refactoring
+
+  - Remove srand()\! (#701).
+
+  - Rm dev dependency on ape (#707).
+
+## doc
+
+  - Use proper repo URL in contributors list of README.md.
+
+
 # igraph 1.4.1.9008
 
 ## doc
