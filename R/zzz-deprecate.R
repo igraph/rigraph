@@ -64,7 +64,7 @@ deprecated("automorphisms", count_automorphisms)
 #' @export autocurve.edges
 deprecated("autocurve.edges", curve_multiple)
 #' @export average.path.length
-deprecated("average.path.length", mean_distance)
+deprecated("average.path.length", mean_distance_impl)
 
 #' @export ba.game
 deprecated("ba.game", sample_pa)
@@ -128,7 +128,7 @@ deprecated("contract.vertices", contract)
 #' @export convex.hull
 deprecated("convex.hull", convex_hull)
 #' @export count.multiple
-deprecated("count.multiple", count_multiple)
+deprecated("count.multiple", count_multiple_impl)
 #' @export cutat
 deprecated("cutat", cut_at)
 
@@ -171,7 +171,7 @@ deprecated("farthest.nodes", farthest_vertices)
 #' @export fastgreedy.community
 deprecated("fastgreedy.community", cluster_fast_greedy)
 #' @export forest.fire.game
-deprecated("forest.fire.game", sample_forestfire)
+deprecated("forest.fire.game", sample_forestfire_impl)
 
 #' @export get.adjedgelist
 deprecated("get.adjedgelist", as_adj_edge_list)
@@ -198,7 +198,7 @@ deprecated("graph.adhesion", adhesion)
 #' @export graph.adjacency
 deprecated("graph.adjacency", graph_from_adjacency_matrix)
 #' @export graph.adjlist
-deprecated("graph.adjlist", graph_from_adj_list)
+deprecated("graph.adjlist", graph_from_adj_list_impl)
 #' @export graph.atlas
 deprecated("graph.atlas", graph_from_atlas)
 #' @export graph.automorphisms
@@ -260,7 +260,7 @@ deprecated("graph.laplacian", laplacian_matrix)
 #' @export graph.lattice
 deprecated("graph.lattice", make_lattice)
 #' @export graph.lcf
-deprecated("graph.lcf", graph_from_lcf)
+deprecated("graph.lcf", graph_from_lcf_impl)
 #' @export graph.maxflow
 deprecated("graph.maxflow", max_flow)
 #' @export graph.mincut
@@ -293,7 +293,7 @@ deprecated("growing.random.game", sample_growing)
 deprecated("grg.game", sample_grg)
 
 #' @export has.multiple
-deprecated("has.multiple", any_multiple)
+deprecated("has.multiple", any_multiple_impl)
 #' @export hrg.consensus
 deprecated("hrg.consensus", consensus_tree)
 #' @export hrg.create
@@ -336,7 +336,7 @@ deprecated("is.chordal", is_chordal)
 #' @export is.connected
 deprecated("is.connected", is_connected)
 #' @export is.dag
-deprecated("is.dag", is_dag)
+deprecated("is.dag", is_dag_impl)
 #' @export is.degree.sequence
 deprecated("is.degree.sequence", is_degseq)
 #' @export is.directed
@@ -348,7 +348,7 @@ deprecated("is.hierarchical", is_hierarchical)
 #' @export is.igraph
 deprecated("is.igraph", is_igraph)
 #' @export is.loop
-deprecated("is.loop", which_loop)
+deprecated("is.loop", which_loop_impl)
 #' @export is.matching
 deprecated("is.matching", is_matching)
 #' @export is.maximal.matching
@@ -356,7 +356,7 @@ deprecated("is.maximal.matching", is_max_matching)
 #' @export is.minimal.separator
 deprecated("is.minimal.separator", is_min_separator)
 #' @export is.multiple
-deprecated("is.multiple", which_multiple)
+deprecated("is.multiple", which_multiple_impl)
 #' @export is.mutual
 deprecated("is.mutual", which_mutual)
 #' @export is.named
@@ -364,12 +364,12 @@ deprecated("is.named", is_named)
 #' @export is.separator
 deprecated("is.separator", is_separator)
 #' @export is.simple
-deprecated("is.simple", is_simple)
+deprecated("is.simple", is_simple_impl)
 #' @export is.weighted
 deprecated("is.weighted", is_weighted)
 
 #' @export k.regular.game
-deprecated("k.regular.game", sample_k_regular)
+deprecated("k.regular.game", sample_k_regular_impl)
 
 #' @export label.propagation.community
 deprecated("label.propagation.community", cluster_label_prop)
@@ -446,9 +446,9 @@ deprecated("no.clusters", count_components)
 deprecated("optimal.community", cluster_optimal)
 
 #' @export page.rank
-deprecated("page.rank", page_rank)
+deprecated("page.rank", page_rank_impl)
 #' @export path.length.hist
-deprecated("path.length.hist", distance_table)
+deprecated("path.length.hist", distance_table_impl)
 #' @export permute.vertices
 deprecated("permute.vertices", permute)
 #' @export piecewise.layout
@@ -472,7 +472,13 @@ deprecated("remove.vertex.attribute", delete_vertex_attr)
 deprecated("running.mean", running_mean)
 
 #' @export sbm.game
-deprecated("sbm.game", sample_sbm)
+deprecated("sbm.game", sample_sbm_impl)
+#' @export scgGrouping
+deprecated("scgGrouping", scg_group)
+#' @export scgNormEps
+deprecated("scgNormEps", scg_eps)
+#' @export scgSemiProjectors
+deprecated("scgSemiProjectors", scg_semi_proj)
 #' @export set.edge.attribute
 deprecated("set.edge.attribute", set_edge_attr)
 #' @export set.graph.attribute
@@ -490,9 +496,9 @@ deprecated("stCuts", st_cuts)
 #' @export stMincuts
 deprecated("stMincuts", st_min_cuts)
 #' @export static.fitness.game
-deprecated("static.fitness.game", sample_fitness)
+deprecated("static.fitness.game", sample_fitness_impl)
 #' @export static.power.law.game
-deprecated("static.power.law.game", sample_fitness_pl)
+deprecated("static.power.law.game", sample_fitness_pl_impl)
 #' @export subgraph.centrality
 deprecated("subgraph.centrality", subgraph_centrality)
 
