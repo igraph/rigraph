@@ -76,10 +76,29 @@ get_title <- function(fn_name) {
 
 
 # treat calls ----
-template <-
-treat_call <- function(old, new) {
-  # find where new is defined
+treat_call <- function(old, new, pkg_defs) {
+  template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
+  relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
+  new_text <- whisker::whisker.render(
+    template,
+    data = list(
+      old = old,
+      new = new,
+      new_usage = relevant_row[["usage"]],
+      new_title = get_title(new)
+    )
+  )
+  script_lines <- brio::read_lines(relevant_row[["script_name"]])
+  new_lines <- append(
+    script_lines,
+    values = c("", strsplit(new_text, "\n")[[1]]),
+    after = as.numeric(relevant_row[["line2"]])
+  )
+  brio::write_lines(new_lines, relevant_row[["script_name"]])
 }
+
+# document ----
+# devtools::document()
 
 # delete script ----
 # fs::file_delete(zzz_script)
