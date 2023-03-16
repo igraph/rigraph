@@ -228,6 +228,7 @@ dim_select <- dim_select_impl
 #' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
+#' @family embedding
 embed_laplacian_matrix <- embed_laplacian_matrix_impl
 
 
