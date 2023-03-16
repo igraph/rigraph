@@ -120,7 +120,7 @@ treat_call <- function(old, new) {
       new = new,
       args = relevant_row[["args"]],
       new_usage = relevant_row[["usage"]],
-      new_title = get_title(new)
+      new_title = stringr::str_squish(get_title(new))
     )
   )
   script_lines <- brio::read_lines(relevant_row[["script_name"]])
