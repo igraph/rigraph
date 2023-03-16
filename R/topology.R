@@ -337,6 +337,15 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
+graph.isomorphic.34 <- graph.isomorphic.34_impl
+#' @export
+graph.isomorphic.bliss <- graph.isomorphic.bliss_impl
+#' @export
+graph.isomorphic.vf2 <- graph.isomorphic.vf2_impl
+#' @export
+graph.subisomorphic.vf2 <- graph.subisomorphic.vf2_impl
+
+#' @export
 #' @rdname isomorphic
 is_isomorphic_to <- isomorphic
 
@@ -492,6 +501,8 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
   }
 }
 
+#' @export
+graph.count.isomorphisms.vf2 <- graph.count.isomorphisms.vf2_impl
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
 #' another graph
@@ -565,6 +576,8 @@ count_subgraph_isomorphisms <- function(pattern, target,
   }
 }
 
+#' @export
+graph.count.subisomorphisms.vf2 <- graph.count.subisomorphisms.vf2_impl
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
 #'
@@ -685,6 +698,8 @@ isomorphism_class <- function(graph, v) {
   }
 }
 
+#' @export
+graph.isoclass <- graph.isoclass_impl
 
 #' Create a graph from an isomorphism class
 #'
@@ -825,6 +840,8 @@ canonical_permutation <- canonical_permutation_impl
 #' @family functions for manipulating graph structure
 permute <- permute_impl
 
+#' @export
+graph.isomorphic <- graph.isomorphic_impl
 
 #' Number of automorphisms
 #'

@@ -586,29 +586,3 @@ deprecated("igraph.shape.noclip", shape_noclip)
 deprecated("igraph.shape.noplot", shape_noplot)
 #' @export create.communities
 deprecated("create.communities", make_clusters)
-
-
-#' @export
-graph.count.isomorphisms.vf2 <- graph.count.isomorphisms.vf2_impl
-#' @export
-graph.count.subisomorphisms.vf2 <- graph.count.subisomorphisms.vf2_impl
-#' @export
-graph.isoclass <- graph.isoclass_impl
-#' @export
-graph.isomorphic <- graph.isomorphic_impl
-#' @export
-graph.isomorphic.34 <- graph.isomorphic.34_impl
-#' @export
-graph.isomorphic.bliss <- graph.isomorphic.bliss_impl
-#' @export
-graph.isomorphic.vf2 <- graph.isomorphic.vf2_impl
-#' @export
-graph.subisomorphic.vf2 <- graph.subisomorphic.vf2_impl
-#' @export
-graphlets <- graphlets_impl
-#' @export
-similarity.dice <- similarity.dice_impl
-#' @export
-similarity.invlogweighted <- similarity.invlogweighted_impl
-#' @export
-similarity.jaccard <- similarity.jaccard_impl
