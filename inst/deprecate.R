@@ -68,6 +68,13 @@ if (inherits(usage, "try-error")) browser()
 
 pkg_defs <- purrr::map2_df(scripts, names(scripts), parse_script_function_call)
 
+# get function title from pkgdown ----
+get_title <- function(fn_name) {
+  rd_href <- pkgdown:::get_rd_from_help("igraph", fn_name)
+  pkgdown:::extract_title(rd_href)
+}
+
+
 # treat calls ----
 template <-
 treat_call <- function(old, new) {
