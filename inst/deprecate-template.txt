@@ -1,0 +1,15 @@
+#' {{new_title}}
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `{{old}}()` was renamed to `{{new}}()` to create a more
+#' consistent API.
+#' @inheritParams {{new}}
+#' @keywords internal
+#' @export
+{{old}} <- function({{new_usage}}) {
+   lifecycle::deprecate_soft("1.5.0", "{{old}}()", "{{new}}()")
+   args <- rlang::fn_fmls()
+   do.call({{new}}, args)
+}
