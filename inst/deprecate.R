@@ -29,53 +29,55 @@ tibblify_call <- function(deprecated_call) {
 deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
 
 # parse ALL the package scripts ----
-scripts <- fs::dir_ls(here::here("R")) |>
-  purrr::keep(~(.x != zzz_script)) |>
-  purrr::map(parse_script)
+parse_package_defs <- function() {
+  scripts <- fs::dir_ls(here::here("R")) |>
+    purrr::keep(~(.x != zzz_script)) |>
+    purrr::map(parse_script)
 
-parse_script_function_call <- function(script, script_name) {
-  fns <- xml2::xml_find_all(script, ".//FUNCTION[text()='function']")
-  is_fn_definition <- function(fn) {
-    siblings <- fn |> xml2::xml_parent() |> xml2::xml_siblings()
-    (length(siblings) == 2) && (xml2::xml_name(siblings[[2]]) == "LEFT_ASSIGN")
-  }
-  fns <- purrr::keep(fns, is_fn_definition)
-
-  parse_function <- function(fn) {
-    whole_definition <- fn |> xml2::xml_parent()|> xml2::xml_parent()
-    line1 <- xml2::xml_attr(whole_definition, "line1")
-    line2 <- xml2::xml_attr(whole_definition, "line2")
-    name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
-
-    args <- xml2::xml_find_all(whole_definition, ".//SYMBOL_FORMALS") |> xml2::xml_text()
-    if ("..." %in% args) {
-      if (length(args) == 1) {
-        args <- "..."
-      } else {
-        args <- toString(c(glue::glue("{args[args!='...']} = {args[args!='...']}"), "..."))
-      }
-    } else {
-    args <- toString(glue::glue("{args} = {args}"))
+  parse_script_function_call <- function(script, script_name) {
+    fns <- xml2::xml_find_all(script, ".//FUNCTION[text()='function']")
+    is_fn_definition <- function(fn) {
+      siblings <- fn |> xml2::xml_parent() |> xml2::xml_siblings()
+      (length(siblings) == 2) && (xml2::xml_name(siblings[[2]]) == "LEFT_ASSIGN")
     }
+    fns <- purrr::keep(fns, is_fn_definition)
 
-    usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
-    # TODO use XPath not numbers? although this should work?
-    usage <- usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " ")
+    parse_function <- function(fn) {
+      whole_definition <- fn |> xml2::xml_parent()|> xml2::xml_parent()
+      line1 <- xml2::xml_attr(whole_definition, "line1")
+      line2 <- xml2::xml_attr(whole_definition, "line2")
+      name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
 
-    tibble::tibble(
-      line1 = line1,
-      line2 = line2,
-      name = name,
-      usage = usage,
-      args = args
-    )
+      args <- xml2::xml_find_all(whole_definition, ".//SYMBOL_FORMALS") |> xml2::xml_text()
+      if ("..." %in% args) {
+        if (length(args) == 1) {
+          args <- "..."
+        } else {
+          args <- toString(c(glue::glue("{args[args!='...']} = {args[args!='...']}"), "..."))
+        }
+      } else {
+        args <- toString(glue::glue("{args} = {args}"))
+      }
+
+      usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
+      # TODO use XPath not numbers? although this should work?
+      usage <- usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " ")
+
+      tibble::tibble(
+        line1 = line1,
+        line2 = line2,
+        name = name,
+        usage = usage,
+        args = args
+      )
+    }
+    script_df <- purrr::map_df(fns, parse_function)
+    script_df$script_name <- script_name
+    script_df
   }
-  script_df <- purrr::map_df(fns, parse_function)
-  script_df$script_name <- script_name
-  script_df
-}
 
-pkg_defs <- purrr::map2_df(scripts, names(scripts), parse_script_function_call)
+  purrr::map2_df(scripts, names(scripts), parse_script_function_call)
+}
 
 # get function title from pkgdown ----
 get_title <- function(fn_name) {
@@ -84,10 +86,13 @@ get_title <- function(fn_name) {
 }
 
 # treat calls ----
-treat_call <- function(old, new, pkg_defs) {
-  if (old %in% c("igraph.eigen.default", "igraph.arpack.default")) {
+treat_call <- function(old, new) {
+
+  if (old %in% c("igraph.eigen.default", "igraph.arpack.default", "graph.famous")) {
     return()
   }
+
+  pkg_defs <- parse_package_defs()
   template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
   relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
   if (nrow(relevant_row) > 1) {
@@ -114,8 +119,7 @@ treat_call <- function(old, new, pkg_defs) {
 purrr::walk2(
   deprecated_df[["old"]],
   deprecated_df[["new"]],
-  treat_call,
-  pkg_defs = pkg_defs
+  treat_call
 )
 
 # document ----
