@@ -103,6 +103,11 @@ treat_call <- function(old, new) {
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
+
+  if (grepl("_impl$", new)) {
+    new <- sub("_impl$", "", new)
+  }
+
   new_text <- whisker::whisker.render(
     template,
     data = list(
