@@ -70,7 +70,9 @@
 global_efficiency <- global_efficiency_impl
 
 #' @rdname global_efficiency
+#' @export
 local_efficiency <- local_efficiency_impl
 
 #' @rdname global_efficiency
+#' @export
 average_local_efficiency <- average_local_efficiency_impl

@@ -219,6 +219,7 @@ dim_select <- dim_select_impl
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 #' *Journal of the American Statistical Association*, Vol. 107(499), 2012
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' ## A small graph

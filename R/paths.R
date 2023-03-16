@@ -140,6 +140,7 @@ is_dag <- is_dag_impl
 #' hypergraphs, and selectively reduce acyclic hypergraphs.  *SIAM Journal
 #' of Computation* 13, 566--579.
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' ## The examples from the Tarjan-Yannakakis paper

@@ -46,4 +46,5 @@
 random_walk <- random_walk_impl
 
 #' @rdname random_walk
+#' @export
 random_edge_walk <- random_edge_walk_impl

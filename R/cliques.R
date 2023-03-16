@@ -254,7 +254,9 @@ clique_num <- clique_num_impl
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
 weighted_cliques <- weighted_cliques_impl
+#' @export
 largest_weighted_cliques <- largest_weighted_cliques_impl
+#' @export
 weighted_clique_num <- weighted_clique_num_impl
 
 #' Independent vertex sets

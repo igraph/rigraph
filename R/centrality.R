@@ -899,6 +899,7 @@ diversity <- diversity_impl
 #' 1998. Extended version in *Journal of the ACM* 46(1999). Also appears
 #' as IBM Research Report RJ 10076, May 1997.
 #'
+#' @export
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
@@ -917,6 +918,7 @@ hub_score <- hub_score_impl
 #' @aliases authority.score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
+#' @export
 authority_score <- authority_score_impl
 
 

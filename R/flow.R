@@ -607,6 +607,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' Stephan Eidenbenz (editors): *Graph-theoretic concepts in computer
 #' science*, 1665, 167--172, 1999. Springer.
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' ring <- make_ring(4)

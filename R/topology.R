@@ -703,6 +703,7 @@ isomorphism_class <- function(graph, v) {
 #' @aliases graph.isocreate
 #'
 #' @family graph isomorphism
+#' @export
 graph_from_isomorphism_class <- graph_from_isomorphism_class_impl
 
 

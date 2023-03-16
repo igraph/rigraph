@@ -1663,6 +1663,7 @@ sample_k_regular <- sample_k_regular_impl
 #' 2001.
 #' @keywords graphs
 #' @family games
+#' @export
 #' @examples
 #'
 #' N <- 10000
@@ -1731,6 +1732,7 @@ sample_fitness <- sample_fitness_impl
 #' 103:135702, 2009.
 #' @family games
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
@@ -1785,6 +1787,7 @@ sample_fitness_pl <- sample_fitness_pl_impl
 #' conference on Knowledge discovery in data mining*, 177--187, 2005.
 #' @family games
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' g <- sample_forestfire(10000, fw.prob = 0.37, bw.factor = 0.32 / 0.37)
@@ -1826,6 +1829,7 @@ sample_forestfire <- sample_forestfire_impl
 #' graph matching for correlated Erdos-Renyi graphs.
 #' <https://arxiv.org/abs/1304.7844>
 #' @family games
+#' @export
 #' @examples
 #' g <- sample_gnp(1000, .1)
 #' g2 <- sample_correlated_gnp(g, corr = 0.5)
@@ -1863,6 +1867,7 @@ sample_correlated_gnp <- sample_correlated_gnp_impl
 #' <https://arxiv.org/abs/1304.7844>
 #' @keywords graphs
 #' @family games
+#' @export
 #' @examples
 #' gg <- sample_correlated_gnp_pair(
 #'   n = 10, corr = .8, p = .5,

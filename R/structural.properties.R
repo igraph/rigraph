@@ -1546,9 +1546,13 @@ girth <- function(graph, circle = TRUE) {
 #' E(g)$weight
 #'
 which_multiple <- which_multiple_impl
+#' @export
 any_multiple <- any_multiple_impl
+#' @export
 count_multiple <- count_multiple_impl
+#' @export
 which_loop <- which_loop_impl
+#' @export
 any_loop <- any_loop_impl
 
 
@@ -1945,6 +1949,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 }
 
 #' @rdname components
+#' @export
 is_connected <- is_connected_impl
 
 #' @rdname components

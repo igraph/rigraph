@@ -838,6 +838,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
 #' Matrix Analysis and Applications*, 2008.
 #' <http://people.epfl.ch/david.morton>
+#' @export
 #' @examples
 #'
 #' v <- rexp(20)
