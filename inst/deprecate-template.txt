@@ -8,7 +8,7 @@
 #' @inheritParams {{new}}
 #' @keywords internal
 #' @export
-{{old}} <- function({{new_usage}}) {
+{{old}} <- function({{{new_usage}}}) {
    lifecycle::deprecate_soft("1.5.0", "{{old}}()", "{{new}}()")
    {{new}}({{args}})
 }

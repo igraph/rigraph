@@ -85,8 +85,14 @@ get_title <- function(fn_name) {
 
 # treat calls ----
 treat_call <- function(old, new, pkg_defs) {
+  if (old %in% c("igraph.eigen.default", "igraph.arpack.default")) {
+    return()
+  }
   template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
   relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
+  if (nrow(relevant_row) > 1) {
+    relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
+  }
   new_text <- whisker::whisker.render(
     template,
     data = list(
@@ -105,11 +111,17 @@ treat_call <- function(old, new, pkg_defs) {
   )
   brio::write_lines(new_lines, relevant_row[["script_name"]])
 }
+purrr::walk2(
+  deprecated_df[["old"]],
+  deprecated_df[["new"]],
+  treat_call,
+  pkg_defs = pkg_defs
+)
 
 # document ----
-# usethis::use_lifecycle()
-# devtools::document()
+usethis::use_lifecycle()
+devtools::document()
 
 
 # delete script ----
-# fs::file_delete(zzz_script)
+fs::file_delete(zzz_script)
