@@ -100,6 +100,11 @@ treat_call <- function(old, new) {
   pkg_defs <- parse_package_defs()
   template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
   relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
+
+  if (nrow(relevant_row) == 0) {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == sprintf("%s_impl", new),]
+  }
+
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
