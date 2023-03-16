@@ -160,12 +160,12 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 #'
 #' @family components
 #' @export
-articulation_points <- articulation_points
+articulation_points <- articulation_points_impl
 
 #' @rdname articulation_points
 #' @family components
 #' @export
-bridges <- bridges
+bridges <- bridges_impl
 
 
 #' Biconnected components
@@ -205,4 +205,4 @@ bridges <- bridges
 #' bc <- biconnected_components(g)
 #' @family components
 #' @export
-biconnected_components <- biconnected_components
+biconnected_components <- biconnected_components_impl

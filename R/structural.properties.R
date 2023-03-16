@@ -162,7 +162,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
 #' @family structural.properties
 #' @export
 #' @rdname distances
-mean_distance <- mean_distance
+mean_distance <- mean_distance_impl
 
 
 
@@ -1425,7 +1425,7 @@ topo_sort <- function(graph, mode = c("out", "all", "in")) {
 #' g <- sample_gnm(20, 40, directed = TRUE)
 #' feedback_arc_set(g)
 #' feedback_arc_set(g, algo = "approx")
-feedback_arc_set <- feedback_arc_set
+feedback_arc_set <- feedback_arc_set_impl
 
 #' Girth of a graph
 #'
@@ -1545,11 +1545,15 @@ girth <- function(graph, circle = TRUE) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
-which_multiple <- which_multiple
-any_multiple <- any_multiple
-count_multiple <- count_multiple
-which_loop <- which_loop
-any_loop <- any_loop
+which_multiple <- which_multiple_impl
+#' @export
+any_multiple <- any_multiple_impl
+#' @export
+count_multiple <- count_multiple_impl
+#' @export
+which_loop <- which_loop_impl
+#' @export
+any_loop <- any_loop_impl
 
 
 #' Breadth-first search
@@ -1945,7 +1949,8 @@ components <- function(graph, mode = c("weak", "strong")) {
 }
 
 #' @rdname components
-is_connected <- is_connected
+#' @export
+is_connected <- is_connected_impl
 
 #' @rdname components
 count_components <- count_components
@@ -2267,7 +2272,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
-which_mutual <- which_mutual
+which_mutual <- which_mutual_impl
 
 
 #' Average nearest neighbor degree
@@ -2340,4 +2345,4 @@ which_mutual <- which_mutual
 #' knn(g5)
 #' @family structural.properties
 #' @export
-knn <- knn
+knn <- knn_impl

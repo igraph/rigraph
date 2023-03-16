@@ -179,3 +179,6 @@ function() {
   gl2 <- graphlet_proj(g2, gl$Bc, 1000)
   fitandplot(g2, gl2)
 }
+
+#' @export
+graphlets <- graphlets_impl

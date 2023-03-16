@@ -95,7 +95,8 @@ Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 \code{\link[=sample_dot_product]{sample_dot_product()}}
 
 Other embedding: 
-\code{\link{dim_select}()}
+\code{\link{dim_select}()},
+\code{\link{embed_laplacian_matrix}()}
 }
 \concept{embedding}
 \keyword{graphs}

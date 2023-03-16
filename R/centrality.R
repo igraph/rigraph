@@ -679,7 +679,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- spectrum
+spectrum <- spectrum_impl
 
 eigen_defaults <- list(
   pos = "LM", howmany = 1L, il = -1L, iu = -1L,
@@ -772,7 +772,7 @@ eigen_defaults <- list(
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-eigen_centrality <- eigen_centrality
+eigen_centrality <- eigen_centrality_impl
 
 
 #' Strength or weighted vertex degree
@@ -811,7 +811,7 @@ eigen_centrality <- eigen_centrality
 #' strength(g)
 #' @family centrality
 #' @export
-strength <- strength
+strength <- strength_impl
 
 
 #' Graph diversity
@@ -855,7 +855,7 @@ strength <- strength
 #' diversity(g3)
 #' @family centrality
 #' @export
-diversity <- diversity
+diversity <- diversity_impl
 
 
 #' Kleinberg's hub and authority centrality scores.
@@ -899,6 +899,7 @@ diversity <- diversity
 #' 1998. Extended version in *Journal of the ACM* 46(1999). Also appears
 #' as IBM Research Report RJ 10076, May 1997.
 #'
+#' @export
 #' @examples
 #' ## An in-star
 #' g <- make_star(10)
@@ -910,14 +911,15 @@ diversity <- diversity
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
 #' @family centrality
-hub_score <- hub_score
+hub_score <- hub_score_impl
 
 
 #' @rdname hub_score
 #' @aliases authority.score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
-authority_score <- authority_score
+#' @export
+authority_score <- authority_score_impl
 
 
 #' The Page Rank algorithm
@@ -1004,7 +1006,7 @@ authority_score <- authority_score
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-page_rank <- page_rank
+page_rank <- page_rank_impl
 
 #' Harmonic centrality of vertices
 #'
@@ -1051,7 +1053,7 @@ page_rank <- page_rank
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-harmonic_centrality <- harmonic_centrality
+harmonic_centrality <- harmonic_centrality_impl
 
 
 

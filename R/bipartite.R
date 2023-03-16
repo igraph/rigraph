@@ -148,6 +148,8 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' @export
+bipartite_projection_size <- bipartite_projection_size_impl
 
 #' Decide whether a graph is bipartite
 #'
@@ -193,4 +195,4 @@ bipartite_projection <- function(graph, types = NULL,
 #' bipartite_mapping(g3)
 #' @family bipartite
 #' @export
-bipartite_mapping <- bipartite_mapping
+bipartite_mapping <- bipartite_mapping_impl

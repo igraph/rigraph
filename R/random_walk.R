@@ -43,7 +43,8 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
-random_walk <- random_walk
+random_walk <- random_walk_impl
 
 #' @rdname random_walk
-random_edge_walk <- random_edge_walk
+#' @export
+random_edge_walk <- random_edge_walk_impl

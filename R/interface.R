@@ -496,10 +496,10 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
-gorder <- gorder
+gorder <- gorder_impl
 #' @rdname gorder
 #' @export
-vcount <- gorder
+vcount <- gorder_impl
 
 #' Adjacent vertices of multiple vertices in a graph
 #'

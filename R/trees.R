@@ -34,7 +34,7 @@
 #'
 #' @family trees
 #' @export
-is_tree <- is_tree
+is_tree <- is_tree_impl
 
 #' Convert a tree graph to its Prüfer sequence
 #'
@@ -60,7 +60,7 @@ is_tree <- is_tree
 #'
 #' @family trees
 #' @export
-to_prufer <- to_prufer
+to_prufer <- to_prufer_impl
 
 #' Samples from the spanning trees of a graph randomly and uniformly
 #'
@@ -88,4 +88,4 @@ to_prufer <- to_prufer
 #'
 #' @family trees
 #' @export
-sample_spanning_tree <- sample_spanning_tree
+sample_spanning_tree <- sample_spanning_tree_impl

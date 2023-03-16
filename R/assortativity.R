@@ -93,6 +93,7 @@
 #' M. E. J. Newman: Assortative mixing in networks, *Phys. Rev. Lett.* 89,
 #' 208701 (2002) <https://arxiv.org/abs/cond-mat/0205405>
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' # random network, close to zero
@@ -100,10 +101,12 @@
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-assortativity <- assortativity
+assortativity <- assortativity_impl
 
 #' @rdname assortativity
-assortativity_nominal <- assortativity_nominal
+#' @export
+assortativity_nominal <- assortativity_nominal_impl
 
 #' @rdname assortativity
-assortativity_degree <- assortativity_degree
+#' @export
+assortativity_degree <- assortativity_degree_impl

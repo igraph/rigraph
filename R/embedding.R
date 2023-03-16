@@ -90,7 +90,7 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-embed_adjacency_matrix <- embed_adjacency_matrix
+embed_adjacency_matrix <- embed_adjacency_matrix_impl
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -151,7 +151,7 @@ embed_adjacency_matrix <- embed_adjacency_matrix
 #'
 #' @family embedding
 #' @export
-dim_select <- dim_select
+dim_select <- dim_select_impl
 
 
 #' Spectral Embedding of the Laplacian of a Graph
@@ -219,6 +219,7 @@ dim_select <- dim_select
 #' Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 #' *Journal of the American Statistical Association*, Vol. 107(499), 2012
 #' @keywords graphs
+#' @export
 #' @examples
 #'
 #' ## A small graph
@@ -228,7 +229,8 @@ dim_select <- dim_select
 #' })
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
-embed_laplacian_matrix <- embed_laplacian_matrix
+#' @family embedding
+embed_laplacian_matrix <- embed_laplacian_matrix_impl
 
 
 #' Sample vectors uniformly from the surface of a sphere
