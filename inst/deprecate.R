@@ -49,19 +49,24 @@ parse_package_defs <- function() {
       name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
 
       args <- xml2::xml_find_all(whole_definition, ".//SYMBOL_FORMALS") |> xml2::xml_text()
-      if ("..." %in% args) {
-        if (length(args) == 1) {
-          args <- "..."
+      if (length(args) > 0) {
+        if ("..." %in% args) {
+          if (length(args) == 1) {
+            args <- "..."
+          } else {
+            args <- toString(c(glue::glue("{args[args!='...']} = {args[args!='...']}"), "..."))
+          }
         } else {
-          args <- toString(c(glue::glue("{args[args!='...']} = {args[args!='...']}"), "..."))
+          args <- toString(glue::glue("{args} = {args}"))
         }
-      } else {
-        args <- toString(glue::glue("{args} = {args}"))
-      }
 
-      usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
-      # TODO use XPath not numbers? although this should work?
-      usage <- usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " ")
+        usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
+        # TODO use XPath not numbers? although this should work?
+        usage <- usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " ")
+      } else {
+        args <- ""
+        usage <- ""
+      }
 
       tibble::tibble(
         line1 = line1,
