@@ -36,7 +36,7 @@ deprecated("add.vertices", add_vertices)
 #' @export adjacent.triangles
 deprecated("adjacent.triangles", count_triangles_impl)
 #' @export articulation.points
-deprecated("articulation.points", articulation_points)
+deprecated("articulation.points", articulation_points_impl)
 #' @export aging.prefatt.game
 deprecated("aging.prefatt.game", sample_pa_age)
 #' @export aging.ba.game
