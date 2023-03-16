@@ -12,7 +12,7 @@ graph, like an adjacency matrix."><!-- mathjax --><script src="https://cdnjs.clo
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1.9009</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -194,7 +194,7 @@ defined in the ‘<code>Matrix</code>’ package, if <code>sparse</code> if
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>    [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a . . . . . . . 1 1 .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> b . . 1 . . . . . . .</span>
@@ -209,7 +209,7 @@ defined in the ‘<code>Matrix</code>’ package, if <code>sparse</code> if
 <span class="r-in"><span><span class="fu"><a href="E.html">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gsize.html">ecount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">as_adjacency_matrix</span><span class="op">(</span><span class="va">g</span>, attr <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 x 10 sparse Matrix of class "dgCMatrix"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>    [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   [[ suppressing 10 column names ‘a’, ‘b’, ‘c’ ... ]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> a .         .         .         . .           .          .          0.125495772</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> b .         .         0.9695255 . .           .          .          .          </span>
