@@ -34,16 +34,31 @@ scripts <- fs::dir_ls(here::here("R")) |>
   purrr::map(parse_script)
 
 parse_script_function_call <- function(script, script_name) {
-  fns <- xml2::xml_find_all(script, ".//FUNCTION")
+  fns <- xml2::xml_find_all(script, ".//FUNCTION[text()='function']")
+  is_fn_definition <- function(fn) {
+    siblings <- fn |> xml2::xml_parent() |> xml2::xml_siblings()
+    (length(siblings) == 2) && (xml2::xml_name(siblings[[2]]) == "LEFT_ASSIGN")
+  }
+  fns <- purrr::keep(fns, is_fn_definition)
+
   parse_function <- function(fn) {
     whole_definition <- fn |> xml2::xml_parent()|> xml2::xml_parent()
     line1 <- xml2::xml_attr(whole_definition, "line1")
     line2 <- xml2::xml_attr(whole_definition, "line2")
     name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
+
+    usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
+    # TODO use XPath not numbers? although this should work?
+    usage <- try(
+      usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " "),
+silent =TRUE
+          )
+if (inherits(usage, "try-error")) browser()
     tibble::tibble(
       line1 = line1,
       line2 = line2,
-      name = name
+      name = name,
+      usage = usage
     )
   }
   script_df <- purrr::map_df(fns, parse_function)
@@ -54,6 +69,7 @@ parse_script_function_call <- function(script, script_name) {
 pkg_defs <- purrr::map2_df(scripts, names(scripts), parse_script_function_call)
 
 # treat calls ----
+template <-
 treat_call <- function(old, new) {
   # find where new is defined
 }
