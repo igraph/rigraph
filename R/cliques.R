@@ -400,8 +400,8 @@ ivs_size <- function(graph) {
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
-    maximal_clique_size_counts(graph, min, max, ...)
+    maximal_clique_size_counts_impl(graph, min, max, ...)
   } else {
-    all_clique_size_counts(graph, min, max, ...)
+    all_clique_size_counts_impl(graph, min, max, ...)
   }
 }
