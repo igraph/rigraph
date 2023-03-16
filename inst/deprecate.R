@@ -28,7 +28,7 @@ tibblify_call <- function(deprecated_call) {
 
 deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
 
-# parse ALL the package ----
+# parse ALL the package scripts ----
 scripts <- fs::dir_ls(here::here("R")) |>
   purrr::keep(~(.x != zzz_script)) |>
   purrr::map(parse_script)
@@ -47,18 +47,27 @@ parse_script_function_call <- function(script, script_name) {
     line2 <- xml2::xml_attr(whole_definition, "line2")
     name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
 
+    args <- xml2::xml_find_all(whole_definition, ".//SYMBOL_FORMALS") |> xml2::xml_text()
+    if ("..." %in% args) {
+      if (length(args) == 1) {
+        args <- "..."
+      } else {
+        args <- toString(c(glue::glue("{args[args!='...']} = {args[args!='...']}"), "..."))
+      }
+    } else {
+    args <- toString(glue::glue("{args} = {args}"))
+    }
+
     usage_wrap <- xml2::xml_children(whole_definition)[[3]] |> xml2::xml_children()
     # TODO use XPath not numbers? although this should work?
-    usage <- try(
-      usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " "),
-silent =TRUE
-          )
-if (inherits(usage, "try-error")) browser()
+    usage <- usage_wrap[3:(length(usage_wrap)-2)] |> xml2::xml_text() |> paste(collapse = " ")
+
     tibble::tibble(
       line1 = line1,
       line2 = line2,
       name = name,
-      usage = usage
+      usage = usage,
+      args = args
     )
   }
   script_df <- purrr::map_df(fns, parse_function)
@@ -74,7 +83,6 @@ get_title <- function(fn_name) {
   pkgdown:::extract_title(rd_href)
 }
 
-
 # treat calls ----
 treat_call <- function(old, new, pkg_defs) {
   template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
@@ -84,6 +92,7 @@ treat_call <- function(old, new, pkg_defs) {
     data = list(
       old = old,
       new = new,
+      args = relevant_row[["args"]],
       new_usage = relevant_row[["usage"]],
       new_title = get_title(new)
     )
@@ -98,7 +107,9 @@ treat_call <- function(old, new, pkg_defs) {
 }
 
 # document ----
+# usethis::use_lifecycle()
 # devtools::document()
+
 
 # delete script ----
 # fs::file_delete(zzz_script)

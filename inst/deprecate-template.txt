@@ -10,6 +10,5 @@
 #' @export
 {{old}} <- function({{new_usage}}) {
    lifecycle::deprecate_soft("1.5.0", "{{old}}()", "{{new}}()")
-   args <- rlang::fn_fmls()
-   do.call({{new}}, args)
+   {{new}}({{args}})
 }
