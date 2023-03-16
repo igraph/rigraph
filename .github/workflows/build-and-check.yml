@@ -121,7 +121,6 @@ jobs:
           - {os: ubuntu-20.04,   r: 'oldrel-2', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04,   r: 'oldrel-3', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04,   r: 'oldrel-4', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04,   r: 'oldrel-5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
