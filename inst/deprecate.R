@@ -48,6 +48,25 @@ parse_package_defs <- function() {
       line2 <- xml2::xml_attr(whole_definition, "line2")
       name <- whole_definition |> xml2::xml_child() |> xml2::xml_text()
 
+      if (name %in% c(
+        "tk_off",
+        "get_all_options",
+        "tkigraph",
+        ".tkigraph.clusters",
+        "show.communities",
+        "sortPopup"
+      )) {
+        return(
+          tibble::tibble(
+            line1 = line1,
+            line2 = line2,
+            name = name,
+            usage = "",
+            args = ""
+          )
+        )
+      }
+
       args <- xml2::xml_find_all(whole_definition, ".//SYMBOL_FORMALS") |> xml2::xml_text()
       if (length(args) > 0) {
         if ("..." %in% args) {
