@@ -148,6 +148,8 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' @export
+bipartite_projection_size <- bipartite_projection_size_impl
 
 #' Decide whether a graph is bipartite
 #'
