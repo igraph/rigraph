@@ -612,8 +612,3 @@ similarity.dice <- similarity.dice_impl
 similarity.invlogweighted <- similarity.invlogweighted_impl
 #' @export
 similarity.jaccard <- similarity.jaccard_impl
-
-#' @export
-#' @family triangles
-#' @rdname count_triangles
-triangles <- triangles_impl

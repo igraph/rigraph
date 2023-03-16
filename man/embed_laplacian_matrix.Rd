@@ -100,8 +100,13 @@ Consistent Adjacency Spectral Embedding for Stochastic Blockmodel Graphs,
 \seealso{
 \code{\link[=embed_adjacency_matrix]{embed_adjacency_matrix()}},
 \code{\link[=sample_dot_product]{sample_dot_product()}}
+
+Other embedding: 
+\code{\link{dim_select}()},
+\code{\link{embed_adjacency_matrix}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{embedding}
 \keyword{graphs}
