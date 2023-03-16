@@ -97,4 +97,4 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' is_degseq(degree(g))
 #' is_graphical(degree(g))
 #' @export
-is_graphical <- is_graphical
+is_graphical <- is_graphical_impl

@@ -178,4 +178,4 @@ igraph.i.spMatrix <- function(M) {
 #' convex_hull(M)
 #' @family other
 #' @export
-convex_hull <- convex_hull
+convex_hull <- convex_hull_impl

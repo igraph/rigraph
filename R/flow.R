@@ -445,7 +445,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' st_cuts(g2, source = "s", target = "t")
 #' @family flow
 #' @export
-st_cuts <- st_cuts
+st_cuts <- st_cuts_impl
 
 
 #' List all minimum \eqn{(s,t)}-cuts of a graph
@@ -496,7 +496,7 @@ st_cuts <- st_cuts
 #' st_min_cuts(g, source = "s", target = "t")
 #' @family flow
 #' @export
-st_min_cuts <- st_min_cuts
+st_min_cuts <- st_min_cuts_impl
 
 
 #' Dominator tree
@@ -615,7 +615,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' chvatal <- make_graph("chvatal")
 #' min_st_separators(chvatal)
 #' @family flow
-min_st_separators <- min_st_separators
+min_st_separators <- min_st_separators_impl
 
 
 #' Maximum flow in a graph
@@ -678,7 +678,7 @@ min_st_separators <- min_st_separators
 #' max_flow(g1, source = V(g1)["1"], target = V(g1)["2"])
 #' @family flow
 #' @export
-max_flow <- max_flow
+max_flow <- max_flow_impl
 
 
 #' Vertex separators
@@ -703,7 +703,7 @@ max_flow <- max_flow
 #'   lists all vertex separator of minimum size.
 #' @family flow
 #' @export
-is_separator <- is_separator
+is_separator <- is_separator_impl
 
 
 #' Minimal vertex separators
@@ -757,7 +757,7 @@ is_separator <- is_separator
 #'
 #' @family flow
 #' @export
-is_min_separator <- is_min_separator
+is_min_separator <- is_min_separator_impl
 
 
 #' Minimum size vertex separators
@@ -829,4 +829,4 @@ is_min_separator <- is_min_separator
 #'   John - Gery:Russ:Michael
 #' )
 #' min_separators(camp)
-min_separators <- min_separators
+min_separators <- min_separators_impl

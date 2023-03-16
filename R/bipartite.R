@@ -193,4 +193,4 @@ bipartite_projection <- function(graph, types = NULL,
 #' bipartite_mapping(g3)
 #' @family bipartite
 #' @export
-bipartite_mapping <- bipartite_mapping
+bipartite_mapping <- bipartite_mapping_impl

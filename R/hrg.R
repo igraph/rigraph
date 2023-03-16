@@ -172,7 +172,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     vertices. The order is the same as in the `parents` vector.}
 #' @family hierarchical random graph functions
 #' @export
-consensus_tree <- consensus_tree
+consensus_tree <- consensus_tree_impl
 
 
 #' Create a hierarchical random graph from an igraph graph
@@ -190,7 +190,7 @@ consensus_tree <- consensus_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg <- hrg
+hrg <- hrg_impl
 
 
 #' Create an igraph graph from a hierarchical random graph model
@@ -203,7 +203,7 @@ hrg <- hrg
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg_tree <- hrg_tree
+hrg_tree <- hrg_tree_impl
 
 
 #' Sample from a hierarchical random graph model
@@ -217,7 +217,7 @@ hrg_tree <- hrg_tree
 #'
 #' @family hierarchical random graph functions
 #' @export
-sample_hrg <- sample_hrg
+sample_hrg <- sample_hrg_impl
 
 #' Predict edges based on a hierarchical random graph model
 #'

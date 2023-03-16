@@ -67,10 +67,10 @@
 #' g <- make_graph("zachary")
 #' global_efficiency(g)
 #' average_local_efficiency(g)
-global_efficiency <- global_efficiency
+global_efficiency <- global_efficiency_impl
 
 #' @rdname global_efficiency
-local_efficiency <- local_efficiency
+local_efficiency <- local_efficiency_impl
 
 #' @rdname global_efficiency
-average_local_efficiency <- average_local_efficiency
+average_local_efficiency <- average_local_efficiency_impl

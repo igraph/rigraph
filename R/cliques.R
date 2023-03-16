@@ -88,11 +88,11 @@
 #' # To have a bit less maximal cliques, about 100-200 usually
 #' g <- sample_gnp(100, 0.03)
 #' max_cliques(g)
-cliques <- cliques
+cliques <- cliques_impl
 
 #' @family cliques
 #' @export
-largest_cliques <- largest_cliques
+largest_cliques <- largest_cliques_impl
 
 #' @rdname cliques
 #' @param subset If not `NULL`, then it must be a vector of vertex ids,
@@ -190,7 +190,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 
 #' @family cliques
 #' @export
-clique_num <- clique_num
+clique_num <- clique_num_impl
 
 
 #' Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph
@@ -253,9 +253,9 @@ clique_num <- clique_num
 #' weighted_cliques(g, maximal = TRUE)
 #' largest_weighted_cliques(g)
 #' weighted_clique_num(g)
-weighted_cliques <- weighted_cliques
-largest_weighted_cliques <- largest_weighted_cliques
-weighted_clique_num <- weighted_clique_num
+weighted_cliques <- weighted_cliques_impl
+largest_weighted_cliques <- largest_weighted_cliques_impl
+weighted_clique_num <- weighted_clique_num_impl
 
 #' Independent vertex sets
 #'

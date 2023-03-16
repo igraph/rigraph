@@ -845,4 +845,4 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
 #' sum(km$withinss)
 #' scg_eps(cbind(v), km$cluster)^2
 #' @family scg
-scg_eps <- scg_eps
+scg_eps <- scg_eps_impl

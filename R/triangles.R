@@ -69,4 +69,4 @@
 #' count_triangles(kite) / (degree(kite) * (degree(kite) - 1) / 2)
 #' @family triangles
 #' @export
-count_triangles <- count_triangles
+count_triangles <- count_triangles_impl

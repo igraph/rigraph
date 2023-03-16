@@ -354,7 +354,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' )
 #' print(ug4, e = TRUE)
 #'
-as.directed <- as.directed
+as.directed <- as.directed_impl
 
 #' @rdname as.directed
 #' @param edge.attr.comb Specifies what to do with edge attributes, if
@@ -971,7 +971,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' which_multiple(g3)
 #' @family conversion
 #' @export
-graph_from_adj_list <- graph_from_adj_list
+graph_from_adj_list <- graph_from_adj_list_impl
 
 
 #' Convert a graph to a long data frame

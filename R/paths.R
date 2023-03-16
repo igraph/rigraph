@@ -109,7 +109,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @family cycles
 #' @family structural.properties
 #' @export
-is_dag <- is_dag
+is_dag <- is_dag_impl
 
 
 #' Maximum cardinality search
@@ -159,7 +159,7 @@ is_dag <- is_dag
 #' max_cardinality(g2)
 #' is_chordal(g2, fillin = TRUE)
 #' @family chordal
-max_cardinality <- max_cardinality
+max_cardinality <- max_cardinality_impl
 
 
 #' Eccentricity of the vertices in a graph
@@ -193,7 +193,7 @@ max_cardinality <- max_cardinality
 #' eccentricity(g)
 #' @family paths
 #' @export
-eccentricity <- eccentricity
+eccentricity <- eccentricity_impl
 
 
 #' Radius of a graph
@@ -228,11 +228,11 @@ eccentricity <- eccentricity
 #' radius(g)
 #' @family paths
 #' @export
-radius <- radius
+radius <- radius_impl
 
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
 #' @family paths
 #' @export
-distance_table <- distance_table
+distance_table <- distance_table_impl

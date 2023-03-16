@@ -703,7 +703,7 @@ isomorphism_class <- function(graph, v) {
 #' @aliases graph.isocreate
 #'
 #' @family graph isomorphism
-graph_from_isomorphism_class <- graph_from_isomorphism_class
+graph_from_isomorphism_class <- graph_from_isomorphism_class_impl
 
 
 #' Canonical permutation of a graph
@@ -780,7 +780,7 @@ graph_from_isomorphism_class <- graph_from_isomorphism_class
 #' all(el1 == el2)
 #' @family graph isomorphism
 #' @export
-canonical_permutation <- canonical_permutation
+canonical_permutation <- canonical_permutation_impl
 
 
 #' Permute the vertices of a graph
@@ -822,7 +822,7 @@ canonical_permutation <- canonical_permutation
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
-permute <- permute
+permute <- permute_impl
 
 
 #' Number of automorphisms
@@ -885,7 +885,7 @@ permute <- permute
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-count_automorphisms <- count_automorphisms
+count_automorphisms <- count_automorphisms_impl
 
 
 #' Generating set of the automorphism group of a graph
@@ -944,4 +944,4 @@ count_automorphisms <- count_automorphisms
 #' automorphism_group(g)
 #' @family graph automorphism
 #' @export
-automorphism_group <- automorphism_group
+automorphism_group <- automorphism_group_impl

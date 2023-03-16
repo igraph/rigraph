@@ -72,13 +72,13 @@
 #' @family simple
 #' @family functions for manipulating graph structure
 #' @export
-simplify <- simplify
+simplify <- simplify_impl
 
 #' @family simple
 #' @family functions for manipulating graph structure
 #' @export
 #' @rdname simplify
-is_simple <- is_simple
+is_simple <- is_simple_impl
 
 #' @family isomorphism
 #' @family simple

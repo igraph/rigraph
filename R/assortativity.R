@@ -100,10 +100,10 @@
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-assortativity <- assortativity
+assortativity <- assortativity_impl
 
 #' @rdname assortativity
-assortativity_nominal <- assortativity_nominal
+assortativity_nominal <- assortativity_nominal_impl
 
 #' @rdname assortativity
-assortativity_degree <- assortativity_degree
+assortativity_degree <- assortativity_degree_impl

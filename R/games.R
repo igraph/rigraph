@@ -1405,7 +1405,7 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' g
 #' @family games
 #' @export
-sample_sbm <- sample_sbm
+sample_sbm <- sample_sbm_impl
 
 #' @rdname sample_sbm
 #' @param ... Passed to `sample_sbm()`.
@@ -1536,7 +1536,7 @@ hierarchical_sbm <- function(...) {
 #' g2
 #' @family games
 #' @export
-sample_dot_product <- sample_dot_product
+sample_dot_product <- sample_dot_product_impl
 
 #' @rdname sample_dot_product
 #' @param ... Passed to `sample_dot_product()`.
@@ -1569,7 +1569,7 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' @keywords graphs
 #' @family games
 #' @export
-sample_islands <- sample_islands
+sample_islands <- sample_islands_impl
 
 
 #' Create a random regular graph
@@ -1608,7 +1608,7 @@ sample_islands <- sample_islands
 #' sapply(k10, plot, vertex.label = NA)
 #' @family games
 #' @export
-sample_k_regular <- sample_k_regular
+sample_k_regular <- sample_k_regular_impl
 
 
 #' Random graphs from vertex fitness scores
@@ -1669,7 +1669,7 @@ sample_k_regular <- sample_k_regular
 #' g <- sample_fitness(5 * N, sample((1:50)^-2, N, replace = TRUE))
 #' degree_distribution(g)
 #' plot(degree_distribution(g, cumulative = TRUE), log = "xy")
-sample_fitness <- sample_fitness
+sample_fitness <- sample_fitness_impl
 
 
 #' Scale-free random graphs, from vertex fitness scores
@@ -1735,7 +1735,7 @@ sample_fitness <- sample_fitness
 #'
 #' g <- sample_fitness_pl(10000, 30000, 2.2, 2.3)
 #' plot(degree_distribution(g, cumulative = TRUE, mode = "out"), log = "xy")
-sample_fitness_pl <- sample_fitness_pl
+sample_fitness_pl <- sample_fitness_pl_impl
 
 
 #' Forest Fire Network Model
@@ -1792,7 +1792,7 @@ sample_fitness_pl <- sample_fitness_pl
 #' dd2 <- degree_distribution(g, mode = "out")
 #' plot(seq(along.with = dd1) - 1, dd1, log = "xy")
 #' points(seq(along.with = dd2) - 1, dd2, col = 2, pch = 2)
-sample_forestfire <- sample_forestfire
+sample_forestfire <- sample_forestfire_impl
 
 
 #' Generate a new random graph from a given graph by randomly
@@ -1832,7 +1832,7 @@ sample_forestfire <- sample_forestfire
 #' cor(as.vector(g[]), as.vector(g2[]))
 #' g
 #' g2
-sample_correlated_gnp <- sample_correlated_gnp
+sample_correlated_gnp <- sample_correlated_gnp_impl
 
 
 #' Sample a pair of correlated \eqn{G(n,p)} random graphs
@@ -1870,4 +1870,4 @@ sample_correlated_gnp <- sample_correlated_gnp
 #' )
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
-sample_correlated_gnp_pair <- sample_correlated_gnp_pair
+sample_correlated_gnp_pair <- sample_correlated_gnp_pair_impl
