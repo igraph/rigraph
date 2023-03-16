@@ -47,6 +47,10 @@ deprecated("aging.barabasi.game", sample_pa_age)
 deprecated("alpha.centrality", alpha_centrality)
 #' @export are.connected
 deprecated("are.connected", are_adjacent)
+#' @export asPhylo
+deprecated("asPhylo", as_phylo)
+#' @method asPhylo communities
+deprecated("asPhylo.communities", as_phylo.communities)
 #' @export assortativity.degree
 deprecated("assortativity.degree", assortativity_degree)
 #' @export assortativity.nominal
