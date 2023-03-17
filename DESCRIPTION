@@ -28,6 +28,7 @@ Suggests:
     vdiffr,
     knitr,
     rmarkdown
+LinkingTo: cpp11
 License: GPL (>= 2)
 URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/
 SystemRequirements:
