@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9010
+
+## Chore
+
+  - Don't check oldrel-5 on GHA (#718).
+
+  - Change stimulus to generate functions with `_impl` suffix (#712).
+
+  - Tweak URLs so that pkgdown/downlit can link to our functions.
+
+
 # igraph 1.4.1.9009
 
 ## Bug fixes
