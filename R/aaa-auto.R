@@ -351,7 +351,7 @@ harmonic_centrality_impl <- function(graph, vids=V(graph), mode=c("out", "in", "
   res
 }
 
-page_rank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V(graph), directed=TRUE, damping=0.85, personalized=NULL, weights=NULL, options=NULL) {
+personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V(graph), directed=TRUE, damping=0.85, personalized=NULL, weights=NULL, options=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   algo <- switch(igraph.match.arg(algo), "arpack"=1L, "prpack"=2L)

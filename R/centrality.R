@@ -1006,7 +1006,7 @@ authority_score <- authority_score_impl
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-page_rank <- page_rank_impl
+page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
 #'

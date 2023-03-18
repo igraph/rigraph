@@ -365,10 +365,6 @@ igraph_harmonic_centrality_cutoff:
 
 igraph_pagerank:
     IGNORE: RR, RC, RInit
-    NAME: page_rank
-
-igraph_personalized_pagerank:
-    NAME: page_rank
 
 igraph_rewire:
     IGNORE: RR, RC
@@ -730,11 +726,9 @@ igraph_layout_graphopt:
 
 igraph_layout_drl:
     IGNORE: RR
-    NAME: layout.drl
 
 igraph_layout_drl_3d:
     IGNORE: RR
-    NAME: layout.drl
 
 igraph_layout_merge_dla:
     IGNORE: RR, RC
@@ -1320,4 +1314,3 @@ igraph_vertex_coloring_greedy:
 
 igraph_convergence_degree:
     IGNORE: RR, RC, RInit
-
