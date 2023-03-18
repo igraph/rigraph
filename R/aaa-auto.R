@@ -2249,3 +2249,4 @@ greedy_vertex_coloring_impl <- function(graph, heuristic=c("colored_neighbors"))
   }
   res
 }
+
