@@ -162,7 +162,7 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
 #' @family structural.properties
 #' @export
 #' @rdname distances
-mean_distance <- mean_distance_impl
+mean_distance <- average_path_length_dijkstra_impl
 
 
 
@@ -1545,15 +1545,15 @@ girth <- function(graph, circle = TRUE) {
 #' any(which_multiple(g))
 #' E(g)$weight
 #'
-which_multiple <- which_multiple_impl
+which_multiple <- is_multiple_impl
 #' @export
-any_multiple <- any_multiple_impl
+any_multiple <- has_multiple_impl
 #' @export
 count_multiple <- count_multiple_impl
 #' @export
-which_loop <- which_loop_impl
+which_loop <- is_loop_impl
 #' @export
-any_loop <- any_loop_impl
+any_loop <- has_loop_impl
 
 
 #' Breadth-first search
@@ -2272,7 +2272,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' sum(which_mutual(g)) / 2 == dyad_census(g)$mut
 #' @family structural.properties
 #' @export
-which_mutual <- which_mutual_impl
+which_mutual <- is_mutual_impl
 
 
 #' Average nearest neighbor degree
@@ -2345,4 +2345,4 @@ which_mutual <- which_mutual_impl
 #' knn(g5)
 #' @family structural.properties
 #' @export
-knn <- knn_impl
+knn <- avg_nearest_neighbor_degree_impl

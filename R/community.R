@@ -2550,4 +2550,4 @@ communities <- groups.communities
 #'
 #' @export
 #' @family functions for manipulating graph structure
-contract <- contract_impl
+contract <- contract_vertices_impl

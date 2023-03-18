@@ -190,7 +190,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 
 #' @family cliques
 #' @export
-clique_num <- clique_num_impl
+clique_num <- clique_number_impl
 
 
 #' Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph
@@ -257,7 +257,7 @@ weighted_cliques <- weighted_cliques_impl
 #' @export
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
-weighted_clique_num <- weighted_clique_num_impl
+weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
 #'
@@ -402,8 +402,8 @@ ivs_size <- function(graph) {
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
-    maximal_clique_size_counts_impl(graph, min, max, ...)
+    maximal_cliques_hist_impl(graph, min, max, ...)
   } else {
-    all_clique_size_counts_impl(graph, min, max, ...)
+    clique_size_hist_impl(graph, min, max, ...)
   }
 }

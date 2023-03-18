@@ -1,6 +1,6 @@
 # styler: off
 
-gorder_impl <- function(graph) {
+vcount_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -12,7 +12,7 @@ gorder_impl <- function(graph) {
   res
 }
 
-graph_from_lcf_impl <- function(n, shifts, repeats=1) {
+lcf_vector_impl <- function(n, shifts, repeats=1) {
   # Argument checks
   n <- as.integer(n)
   shifts <- as.numeric(shifts)
@@ -29,7 +29,7 @@ graph_from_lcf_impl <- function(n, shifts, repeats=1) {
   res
 }
 
-graph_from_adj_list_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
+adjlist_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
   # Argument checks
   adjlist <- lapply(adjlist, function(x) as.integer(x)-1L)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
@@ -42,7 +42,7 @@ graph_from_adj_list_impl <- function(adjlist, mode=c("out", "in", "all", "total"
   res
 }
 
-realize_degseq_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
+realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
   # Argument checks
   out.deg <- as.numeric(out.deg)
   if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
@@ -65,7 +65,7 @@ realize_degseq_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simp
   res
 }
 
-sample_forestfire_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
+forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.integer(nodes)
   fw.prob <- as.numeric(fw.prob)
@@ -87,7 +87,7 @@ sample_forestfire_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed
   res
 }
 
-sample_islands_impl <- function(islands.n, islands.size, islands.pin, n.inter) {
+simple_interconnected_islands_game_impl <- function(islands.n, islands.size, islands.pin, n.inter) {
   # Argument checks
   islands.n <- as.integer(islands.n)
   islands.size <- as.integer(islands.size)
@@ -109,7 +109,7 @@ sample_islands_impl <- function(islands.n, islands.size, islands.pin, n.inter) {
   res
 }
 
-sample_fitness_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
+static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.edges <- as.integer(no.of.edges)
   fitness.out <- as.numeric(fitness.out)
@@ -130,7 +130,7 @@ sample_fitness_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops
   res
 }
 
-sample_fitness_pl_impl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.in=-1, loops=FALSE, multiple=FALSE, finite.size.correction=TRUE) {
+static_power_law_game_impl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.in=-1, loops=FALSE, multiple=FALSE, finite.size.correction=TRUE) {
   # Argument checks
   no.of.nodes <- as.integer(no.of.nodes)
   no.of.edges <- as.integer(no.of.edges)
@@ -156,7 +156,7 @@ sample_fitness_pl_impl <- function(no.of.nodes, no.of.edges, exponent.out, expon
   res
 }
 
-sample_k_regular_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) {
+k_regular_game_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.nodes <- as.integer(no.of.nodes)
   k <- as.integer(k)
@@ -175,7 +175,7 @@ sample_k_regular_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE
   res
 }
 
-sample_sbm_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE) {
+sbm_game_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE) {
   # Argument checks
   n <- as.integer(n)
   pref.matrix <- as.matrix(structure(as.double(pref.matrix), dim=dim(pref.matrix)))
@@ -195,7 +195,7 @@ sample_sbm_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=F
   res
 }
 
-hsbm_1_game_impl <- function(n, m, rho, C, p) {
+hsbm_game_impl <- function(n, m, rho, C, p) {
   # Argument checks
   n <- as.integer(n)
   m <- as.integer(m)
@@ -239,7 +239,7 @@ hsbm_list_game_impl <- function(n, mlist, rholist, Clist, p) {
   res
 }
 
-sample_correlated_gnp_impl <- function(old.graph, corr, p=edge_density(old.graph), permutation=NULL) {
+correlated_game_impl <- function(old.graph, corr, p=edge_density(old.graph), permutation=NULL) {
   # Argument checks
   if (!is_igraph(old.graph)) { stop("Not a graph object") }
   corr <- as.numeric(corr)
@@ -259,7 +259,7 @@ sample_correlated_gnp_impl <- function(old.graph, corr, p=edge_density(old.graph
   res
 }
 
-sample_correlated_gnp_pair_impl <- function(n, corr, p, directed=FALSE, permutation=NULL) {
+correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NULL) {
   # Argument checks
   n <- as.integer(n)
   corr <- as.numeric(corr)
@@ -274,7 +274,7 @@ sample_correlated_gnp_pair_impl <- function(n, corr, p, directed=FALSE, permutat
   res
 }
 
-sample_dot_product_impl <- function(vecs, directed=FALSE) {
+dot_product_game_impl <- function(vecs, directed=FALSE) {
   # Argument checks
   vecs <- as.matrix(structure(as.double(vecs), dim=dim(vecs)))
   directed <- as.logical(directed)
@@ -326,7 +326,7 @@ sample_dirichlet_impl <- function(n, alpha) {
   res
 }
 
-harmonic_centrality_impl <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), weights=NULL, normalized=FALSE, cutoff=-1) {
+harmonic_centrality_cutoff_impl <- function(graph, vids=V(graph), mode=c("out", "in", "all", "total"), weights=NULL, normalized=FALSE, cutoff=-1) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -398,7 +398,7 @@ reverse_edges_impl <- function(graph, eids=E(graph)) {
   res
 }
 
-mean_distance_impl <- function(graph, weights=NULL, directed=TRUE, unconnected=TRUE, details=FALSE) {
+average_path_length_dijkstra_impl <- function(graph, weights=NULL, directed=TRUE, unconnected=TRUE, details=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -421,7 +421,7 @@ mean_distance_impl <- function(graph, weights=NULL, directed=TRUE, unconnected=T
   res
 }
 
-distance_table_impl <- function(graph, directed=TRUE) {
+path_length_hist_impl <- function(graph, directed=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   directed <- as.logical(directed)
@@ -469,7 +469,7 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   res
 }
 
-which_loop_impl <- function(graph, eids=E(graph)) {
+is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   eids <- as.igraph.es(graph, eids)
@@ -503,7 +503,7 @@ is_simple_impl <- function(graph) {
   res
 }
 
-which_multiple_impl <- function(graph, eids=E(graph)) {
+is_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   eids <- as.igraph.es(graph, eids)
@@ -515,7 +515,7 @@ which_multiple_impl <- function(graph, eids=E(graph)) {
   res
 }
 
-any_loop_impl <- function(graph) {
+has_loop_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -526,7 +526,7 @@ any_loop_impl <- function(graph) {
   res
 }
 
-any_multiple_impl <- function(graph) {
+has_multiple_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -549,7 +549,7 @@ count_multiple_impl <- function(graph, eids=E(graph)) {
   res
 }
 
-eigen_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults) {
+eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   directed <- as.logical(directed)
@@ -619,7 +619,7 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   res
 }
 
-which_mutual_impl <- function(graph, eids=E(graph)) {
+is_mutual_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   eids <- as.igraph.es(graph, eids)
@@ -631,7 +631,7 @@ which_mutual_impl <- function(graph, eids=E(graph)) {
   res
 }
 
-max_cardinality_impl <- function(graph) {
+maximum_cardinality_search_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -644,7 +644,7 @@ max_cardinality_impl <- function(graph) {
   res
 }
 
-knn_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), neighbor.degree.mode=c("all", "out", "in", "total"), weights=NULL) {
+avg_nearest_neighbor_degree_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), neighbor.degree.mode=c("all", "out", "in", "total"), weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -692,7 +692,7 @@ strength_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "tota
   res
 }
 
-centralize_impl <- function(scores, theoretical.max=0, normalized=TRUE) {
+centralization_impl <- function(scores, theoretical.max=0, normalized=TRUE) {
   # Argument checks
   scores <- as.numeric(scores)
   theoretical.max <- as.numeric(theoretical.max)
@@ -706,7 +706,7 @@ centralize_impl <- function(scores, theoretical.max=0, normalized=TRUE) {
   res
 }
 
-centr_degree_impl <- function(graph, mode=c("all", "out", "in", "total"), loops=TRUE, normalized=TRUE) {
+centralization_degree_impl <- function(graph, mode=c("all", "out", "in", "total"), loops=TRUE, normalized=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
@@ -720,7 +720,7 @@ centr_degree_impl <- function(graph, mode=c("all", "out", "in", "total"), loops=
   res
 }
 
-centr_betw_impl <- function(graph, directed=TRUE, normalized=TRUE) {
+centralization_betweenness_impl <- function(graph, directed=TRUE, normalized=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   directed <- as.logical(directed)
@@ -733,7 +733,7 @@ centr_betw_impl <- function(graph, directed=TRUE, normalized=TRUE) {
   res
 }
 
-centr_betw_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
+centralization_betweenness_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
   # Argument checks
   if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
   nodes <- as.integer(nodes)
@@ -746,7 +746,7 @@ centr_betw_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
   res
 }
 
-centr_clo_impl <- function(graph, mode=c("out", "in", "all", "total"), normalized=TRUE) {
+centralization_closeness_impl <- function(graph, mode=c("out", "in", "all", "total"), normalized=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
@@ -759,7 +759,7 @@ centr_clo_impl <- function(graph, mode=c("out", "in", "all", "total"), normalize
   res
 }
 
-centr_clo_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", "total")) {
+centralization_closeness_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", "total")) {
   # Argument checks
   if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
   nodes <- as.integer(nodes)
@@ -772,7 +772,7 @@ centr_clo_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", 
   res
 }
 
-centr_eigen_impl <- function(graph, directed=FALSE, scale=TRUE, options=arpack_defaults, normalized=TRUE) {
+centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, options=arpack_defaults, normalized=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   directed <- as.logical(directed)
@@ -787,7 +787,7 @@ centr_eigen_impl <- function(graph, directed=FALSE, scale=TRUE, options=arpack_d
   res
 }
 
-centr_eigen_tmax_impl <- function(graph=NULL, nodes=0, directed=FALSE, scale=TRUE) {
+centralization_eigenvector_centrality_tmax_impl <- function(graph=NULL, nodes=0, directed=FALSE, scale=TRUE) {
   # Argument checks
   if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
   nodes <- as.integer(nodes)
@@ -840,7 +840,7 @@ assortativity_degree_impl <- function(graph, directed=TRUE) {
   res
 }
 
-contract_impl <- function(graph, mapping, vertex.attr.comb=igraph_opt("vertex.attr.comb")) {
+contract_vertices_impl <- function(graph, mapping, vertex.attr.comb=igraph_opt("vertex.attr.comb")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   mapping <- as.numeric(mapping)-1
@@ -1041,7 +1041,7 @@ bipartite_projection_size_impl <- function(graph, types=NULL) {
   res
 }
 
-bipartite_mapping_impl <- function(graph) {
+is_bipartite_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1139,7 +1139,7 @@ cliques_impl <- function(graph, min=0, max=0) {
   res
 }
 
-all_clique_size_counts_impl <- function(graph, min.size=0, max.size=0) {
+clique_size_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   min.size <- as.integer(min.size)
@@ -1168,7 +1168,7 @@ largest_cliques_impl <- function(graph) {
   res
 }
 
-maximal_clique_size_counts_impl <- function(graph, min.size=0, max.size=0) {
+maximal_cliques_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   min.size <- as.integer(min.size)
@@ -1181,7 +1181,7 @@ maximal_clique_size_counts_impl <- function(graph, min.size=0, max.size=0) {
   res
 }
 
-clique_num_impl <- function(graph) {
+clique_number_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1243,7 +1243,7 @@ largest_weighted_cliques_impl <- function(graph, vertex.weights=NULL) {
   res
 }
 
-weighted_clique_num_impl <- function(graph, vertex.weights=NULL) {
+weighted_clique_number_impl <- function(graph, vertex.weights=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(vertex.weights) && "weight" %in% vertex_attr_names(graph)) {
@@ -1262,7 +1262,7 @@ weighted_clique_num_impl <- function(graph, vertex.weights=NULL) {
   res
 }
 
-similarity.jaccard_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_jaccard_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -1276,7 +1276,7 @@ similarity.jaccard_impl <- function(graph, vids=V(graph), mode=c("all", "out", "
   res
 }
 
-similarity.dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -1290,7 +1290,7 @@ similarity.dice_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in"
   res
 }
 
-similarity.invlogweighted_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total")) {
+similarity_inverse_log_weighted_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -1303,7 +1303,7 @@ similarity.invlogweighted_impl <- function(graph, vids=V(graph), mode=c("all", "
   res
 }
 
-sample_hrg_impl <- function(hrg) {
+hrg_game_impl <- function(hrg) {
   # Argument checks
   if (is.null(hrg)) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
@@ -1321,7 +1321,7 @@ sample_hrg_impl <- function(hrg) {
   res
 }
 
-hrg_tree_impl <- function(hrg) {
+hrg_dendrogram_impl <- function(hrg) {
   # Argument checks
   if (is.null(hrg)) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
@@ -1335,7 +1335,7 @@ hrg_tree_impl <- function(hrg) {
   res
 }
 
-consensus_tree_impl <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
+hrg_consensus_impl <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (is.null(hrg)) {
@@ -1352,7 +1352,7 @@ consensus_tree_impl <- function(graph, hrg=NULL, start=FALSE, num.samples=10000)
   res
 }
 
-hrg_impl <- function(graph, prob) {
+hrg_create_impl <- function(graph, prob) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   prob <- as.numeric(prob)
@@ -1390,7 +1390,7 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   res
 }
 
-as.directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acyclic")) {
+to_directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acyclic")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   mode <- switch(igraph.match.arg(mode), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)
@@ -1424,7 +1424,7 @@ triad_census_impl <- function(graph) {
   res
 }
 
-count_triangles_impl <- function(graph, vids=V(graph)) {
+adjacent_list_triangles_impl <- function(graph, vids=V(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
@@ -1436,7 +1436,7 @@ count_triangles_impl <- function(graph, vids=V(graph)) {
   res
 }
 
-triangles_impl <- function(graph) {
+list_triangles_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1449,7 +1449,7 @@ triangles_impl <- function(graph) {
   res
 }
 
-max_flow_impl <- function(graph, source, target, capacity=NULL) {
+maxflow_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
@@ -1499,7 +1499,7 @@ dominator_tree_impl <- function(graph, root, mode=c("out", "in", "all", "total")
   res
 }
 
-st_cuts_impl <- function(graph, source, target) {
+all_st_cuts_impl <- function(graph, source, target) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
@@ -1529,7 +1529,7 @@ st_cuts_impl <- function(graph, source, target) {
   res
 }
 
-st_min_cuts_impl <- function(graph, source, target, capacity=NULL) {
+all_st_mincuts_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   source <- as.igraph.vs(graph, source)
@@ -1579,7 +1579,7 @@ is_separator_impl <- function(graph, candidate) {
   res
 }
 
-is_min_separator_impl <- function(graph, candidate) {
+is_minimal_separator_impl <- function(graph, candidate) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   candidate <- as.igraph.vs(graph, candidate)
@@ -1591,7 +1591,7 @@ is_min_separator_impl <- function(graph, candidate) {
   res
 }
 
-min_st_separators_impl <- function(graph) {
+all_minimal_st_separators_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1607,7 +1607,7 @@ min_st_separators_impl <- function(graph) {
   res
 }
 
-min_separators_impl <- function(graph) {
+minimum_size_separators_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1623,7 +1623,7 @@ min_separators_impl <- function(graph) {
   res
 }
 
-graph.isoclass_impl <- function(graph) {
+isoclass_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
 
@@ -1634,7 +1634,7 @@ graph.isoclass_impl <- function(graph) {
   res
 }
 
-graph.isomorphic_impl <- function(graph1, graph2) {
+isomorphic_impl <- function(graph1, graph2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1646,7 +1646,7 @@ graph.isomorphic_impl <- function(graph1, graph2) {
   res
 }
 
-graph_from_isomorphism_class_impl <- function(size, number, directed=TRUE) {
+isoclass_create_impl <- function(size, number, directed=TRUE) {
   # Argument checks
   size <- as.integer(size)
   number <- as.integer(number)
@@ -1659,7 +1659,7 @@ graph_from_isomorphism_class_impl <- function(size, number, directed=TRUE) {
   res
 }
 
-graph.isomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1711,7 +1711,7 @@ graph.isomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.colo
   res
 }
 
-graph.count.isomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1763,7 +1763,7 @@ graph.count.isomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, ver
   res
 }
 
-graph.subisomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1815,7 +1815,7 @@ graph.subisomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.c
   res
 }
 
-graph.count.subisomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1867,7 +1867,7 @@ graph.count.subisomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, 
   res
 }
 
-graph.isomorphic.34_impl <- function(graph1, graph2) {
+isomorphic_34_impl <- function(graph1, graph2) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1901,7 +1901,7 @@ canonical_permutation_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl"
   res
 }
 
-permute_impl <- function(graph, permutation) {
+permute_vertices_impl <- function(graph, permutation) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   permutation <- as.numeric(permutation)-1
@@ -1913,7 +1913,7 @@ permute_impl <- function(graph, permutation) {
   res
 }
 
-graph.isomorphic.bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph1)) { stop("Not a graph object") }
   if (!is_igraph(graph2)) { stop("Not a graph object") }
@@ -1946,7 +1946,7 @@ graph.isomorphic.bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("
   res
 }
 
-count_automorphisms_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+automorphisms_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   if (missing(colors)) {
@@ -1998,7 +1998,7 @@ automorphism_group_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "
   res
 }
 
-scg_eps_impl <- function(V, groups, mtype=c("symmetric", "laplacian", "stochastic"), p=NULL, norm=c("row", "col")) {
+scg_norm_eps_impl <- function(V, groups, mtype=c("symmetric", "laplacian", "stochastic"), p=NULL, norm=c("row", "col")) {
   # Argument checks
   V <- as.matrix(structure(as.double(V), dim=dim(V)))
   groups <- as.numeric(groups)-1
@@ -2013,7 +2013,7 @@ scg_eps_impl <- function(V, groups, mtype=c("symmetric", "laplacian", "stochasti
   res
 }
 
-embed_adjacency_matrix_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=graph.strength(graph, weights=weights)/(vcount(graph)-1), options=igraph.arpack.default) {
+adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=graph.strength(graph, weights=weights)/(vcount(graph)-1), options=igraph.arpack.default) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   no <- as.integer(no)
@@ -2037,7 +2037,7 @@ embed_adjacency_matrix_impl <- function(graph, no, weights=NULL, which=c("lm", "
   res
 }
 
-embed_laplacian_matrix_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=igraph.arpack.default) {
+laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=igraph.arpack.default) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   no <- as.integer(no)
@@ -2064,7 +2064,7 @@ embed_laplacian_matrix_impl <- function(graph, no, weights=NULL, which=c("lm", "
   res
 }
 
-spectrum_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults) {
+eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
@@ -2178,7 +2178,7 @@ is_tree_impl <- function(graph, mode=c("out", "in", "all", "total"), details=FAL
   res
 }
 
-make_from_prufer_impl <- function(prufer) {
+from_prufer_impl <- function(prufer) {
   # Argument checks
   prufer <- as.integer(prufer)-1L
 
@@ -2205,7 +2205,7 @@ to_prufer_impl <- function(graph) {
   res
 }
 
-sample_spanning_tree_impl <- function(graph, vid=0) {
+random_spanning_tree_impl <- function(graph, vid=0) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vid <- as.igraph.vs(graph, vid)
@@ -2222,7 +2222,7 @@ sample_spanning_tree_impl <- function(graph, vid=0) {
   res
 }
 
-sample_tree_impl <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
+tree_game_impl <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
   # Argument checks
   n <- as.integer(n)
   directed <- as.logical(directed)
@@ -2235,7 +2235,7 @@ sample_tree_impl <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
   res
 }
 
-greedy_vertex_coloring_impl <- function(graph, heuristic=c("colored_neighbors")) {
+vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   heuristic <- switch(igraph.match.arg(heuristic), "colored_neighbors"=0L)
