@@ -16,7 +16,7 @@
 */
 
 /* .C calls */
-extern int igraphhcass2(int *, int *, int *, int *, int *, int *);
+extern void igraphhcass2(void *, void *, void *, void *, void *, void *);
 
 /* .Call calls */
 extern SEXP make_lazy(SEXP, SEXP, SEXP);
