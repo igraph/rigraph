@@ -75,4 +75,4 @@ triangles <- list_triangles_impl
 #' @export
 #' @family triangles
 #' @rdname count_triangles
-count_triangles <- adjacent_list_triangles_impl
+count_triangles <- adjacent_triangles_impl

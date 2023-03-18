@@ -1424,7 +1424,7 @@ triad_census_impl <- function(graph) {
   res
 }
 
-adjacent_list_triangles_impl <- function(graph, vids=V(graph)) {
+adjacent_triangles_impl <- function(graph, vids=V(graph)) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
   vids <- as.igraph.vs(graph, vids)
