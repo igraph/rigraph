@@ -6,3 +6,13 @@ test_that("Starting from state works (#225)", {
   hrg2 <- fit_hrg(g, hrg = hrg, start = TRUE, steps = 1)
   expect_that(hrg2, is_equivalent_to(hrg))
 })
+
+test_that("as.hclust.igraphHRG() works", {
+  set.seed(42)
+
+  g <- make_graph("zachary")
+  hrg <- hrg.fit(g)
+  expect_snapshot({
+    summary(as.hclust(hrg))
+  })
+})
