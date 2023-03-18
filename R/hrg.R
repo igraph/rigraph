@@ -454,7 +454,7 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
 }
 
 #' @importFrom stats as.hclust
-#' @method as.hclust igraphHRG
+#' @export
 as.hclust.igraphHRG <- function(x, ...) {
   merge3 <- buildMerges(x)
 
