@@ -16,6 +16,7 @@ Imports:
     utils
 Suggests:
     ape (>= 5.7-0.1),
+    decor,
     digest,
     graph,
     igraphdata,
@@ -28,6 +29,7 @@ Suggests:
     vdiffr,
     knitr,
     rmarkdown
+LinkingTo: cpp11
 License: GPL (>= 2)
 URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/
 SystemRequirements:

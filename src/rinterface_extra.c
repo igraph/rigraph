@@ -184,49 +184,7 @@ SEXP R_igraph_hcass2(SEXP in, SEXP ia, SEXP ib) {
   igraph_vector_int_destroy(&b);
 
   IGRAPH_FINALLY_CLEAN(2);
-  
-  UNPROTECT(1);
-  return result;
-}
 
-SEXP R_igraph_psumtree_draw(SEXP plength, SEXP howmany, SEXP prob) {
-  SEXP result;
-  int length=INTEGER(plength)[0];
-  int i, n=INTEGER(howmany)[0];
-  igraph_psumtree_t tree;
-  igraph_real_t sum;
-
-  PROTECT(result=NEW_INTEGER(n));  
-
-  igraph_psumtree_init(&tree, length);
-  if (isNull(prob)) {
-    for (i=0; i<length; i++) {
-      igraph_psumtree_update(&tree, i, 1.0);
-    }
-  } else {
-    if (GET_LENGTH(prob) != length) {
-      igraph_error("Cannot sample, invalid prob vector length",
-		   __FILE__, __LINE__, IGRAPH_EINVAL);
-    }
-    for (i=0; i<length; i++) {
-      igraph_psumtree_update(&tree, i, REAL(prob)[i]);
-    }
-  }
-
-  sum=igraph_psumtree_sum(&tree);
-
-  RNG_BEGIN();
-
-  for (i=0; i<n; i++) {
-    igraph_real_t r=RNG_UNIF(0, sum);
-    long int idx;
-    igraph_psumtree_search(&tree, &idx, r);
-    INTEGER(result)[i] = idx + 1;
-  }
-  
-  RNG_END();
-
-  igraph_psumtree_destroy(&tree);
   UNPROTECT(1);
   return result;
 }

@@ -34,8 +34,6 @@
 #include "rinterface.h"
 #include "rrandom.h"
 
-#include "init.c"               /* registration table */
-
 #include <stdio.h>
 
 #if defined(__SANITIZE_ADDRESS__)
@@ -2479,11 +2477,7 @@ int R_igraph_status_handler(const char *message, void *data) {
   return 0;
 }
 
-void attribute_visible R_init_igraph(DllInfo *dll) {
-  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-  R_useDynamicSymbols(dll, FALSE);
-  R_forceSymbols(dll, TRUE);
-
+void R_igraph_init_handlers(DllInfo *dll) {
   igraph_rng_R_install();
 
   igraph_set_fatal_handler(R_igraph_fatal_handler);
