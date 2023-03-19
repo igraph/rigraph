@@ -482,8 +482,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   order <- .Call(C_R_igraph_igraphhcass2,
     n = as.integer(n),
     ia = as.integer(mergeInto[, 1]),
-    ib = as.integer(mergeInto[, 2]),
-    order = integer(n), iia = integer(n), iib = integer(n)
+    ib = as.integer(mergeInto[, 2])
   )
 
   mynames <- if (is.null(x$names)) 1:n else x$names
