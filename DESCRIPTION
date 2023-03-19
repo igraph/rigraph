@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.4.1.9010
+Version: 1.4.1.9011
 Title: Network Analysis and Visualization
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
