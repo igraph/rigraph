@@ -55,7 +55,7 @@
 /*                                                               C */
 /* ---------------------------------------------------------------C */
 
-SEXP igraphhcass2(SEXP n, int *ia, int *ib, 
+int igraphhcass2(int *n, int *ia, int *ib, 
 		 int *iorder, int *iia, 
 		 int *iib) {
 
@@ -80,21 +80,19 @@ SEXP igraphhcass2(SEXP n, int *ia, int *ib,
   --ib;
   --ia;
 
-  int *c_n = INTEGER(n);
-
   /* Function Body */
-  i__1 = *c_n;
+  i__1 = *n;
   for (i__ = 1; i__ <= i__1; ++i__) {
     iia[i__] = ia[i__];
     iib[i__] = ib[i__];
   }
-  i__1 = *c_n - 2;
+  i__1 = *n - 2;
   for (i__ = 1; i__ <= i__1; ++i__) {
     /*        In the following, smallest (+ve or -ve) seq. no. wanted */
     /* Computing MIN */
     i__2 = ia[i__], i__3 = ib[i__];
     k = i__2 < i__3 ? i__2 : i__3;
-    i__2 = *c_n - 1;
+    i__2 = *n - 1;
     for (j = i__ + 1; j <= i__2; ++j) {
       if (ia[j] == k) {
 	iia[j] = -i__;
@@ -104,12 +102,12 @@ SEXP igraphhcass2(SEXP n, int *ia, int *ib,
       }
     }
   }
-  i__1 = *c_n - 1;
+  i__1 = *n - 1;
   for (i__ = 1; i__ <= i__1; ++i__) {
     iia[i__] = -iia[i__];
     iib[i__] = -iib[i__];
   }
-  i__1 = *c_n - 1;
+  i__1 = *n - 1;
   for (i__ = 1; i__ <= i__1; ++i__) {
     if (iia[i__] > 0 && iib[i__] < 0) {
       k = iia[i__];
@@ -130,10 +128,10 @@ SEXP igraphhcass2(SEXP n, int *ia, int *ib,
 
   /*     NEW PART FOR 'ORDER' */
 
-  iorder[1] = iia[*c_n - 1];
-  iorder[2] = iib[*c_n - 1];
+  iorder[1] = iia[*n - 1];
+  iorder[2] = iib[*n - 1];
   loc = 2;
-  for (i__ = *c_n - 2; i__ >= 1; --i__) {
+  for (i__ = *n - 2; i__ >= 1; --i__) {
     i__1 = loc;
     for (j = 1; j <= i__1; ++j) {
       if (iorder[j] == i__) {
@@ -158,16 +156,12 @@ SEXP igraphhcass2(SEXP n, int *ia, int *ib,
     ;
   }
 
-  i__1 = *c_n;
+  i__1 = *n;
   for (i__ = 1; i__ <= i__1; ++i__) {
     iorder[i__] = -iorder[i__];
   }
 
-  SEXP result;
-  PROTECT(result=NEW_INTEGER(*c_n));
-  memcpy(INTEGER(result), iorder, (*c_n) * sizeof(int));
-
-  return result;
+  return 0;
 } /* hcass2_ */
 
 
