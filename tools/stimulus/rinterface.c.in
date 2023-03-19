@@ -2480,7 +2480,7 @@ int R_igraph_status_handler(const char *message, void *data) {
 }
 
 void attribute_visible R_init_igraph(DllInfo *dll) {
-  R_registerRoutines(dll, CEntries, CallEntries, NULL, NULL);
+  R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
   R_forceSymbols(dll, TRUE);
 

@@ -479,7 +479,7 @@ as.hclust.igraphHRG <- function(x, ...) {
     map2[i] <- -mr[1]
   }
   n <- nrow(merge) + 1
-  hcass <- .C("igraphhcass2",
+  order <- .Call(C_R_igraph_igraphhcass2,
     n = as.integer(n),
     ia = as.integer(mergeInto[, 1]),
     ib = as.integer(mergeInto[, 2]),
@@ -488,7 +488,7 @@ as.hclust.igraphHRG <- function(x, ...) {
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(
-    merge = merge, height = 1:nrow(merge), order = hcass$order,
+    merge = merge, height = 1:nrow(merge), order = order,
     labels = mynames, method = NA_character_,
     dist.method = NA_character_
   )
