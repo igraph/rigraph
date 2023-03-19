@@ -165,7 +165,7 @@ int igraphhcass2(int *n, int *ia, int *ib,
 } /* hcass2_ */
 
 
-SEXP R_igraph_hcass2 (SEXP in, SEXP ia, SEXP ib) {
+SEXP R_igraph_hcass2(SEXP in, SEXP ia, SEXP ib) {
   SEXP result;
   int n = INTEGER(in)[0];
   igraph_vector_int_t a, b;
