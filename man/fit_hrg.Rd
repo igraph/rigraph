@@ -45,7 +45,8 @@ given internal vertex, including itself.}
 \code{steps} number of MCMC steps to perform the fitting, or a convergence
 criteria if the specified number of steps is zero. \code{fit_hrg()} can start
 from a given HRG, if this is given in the \code{hrg()} argument and the
-\code{start} argument is \code{TRUE}.
+\code{start} argument is \code{TRUE}. It can be converted to the \code{hclust} class using
+\code{as.hclust()} provided in this package.
 }
 \examples{
 \dontrun{
@@ -58,6 +59,7 @@ from a given HRG, if this is given in the \code{hrg()} argument and the
 g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 hrg <- fit_hrg(g)
 hrg
+summary(as.hclust(hrg))
 
 ## The consensus tree for it
 consensus_tree(g, hrg = hrg, start = TRUE)
