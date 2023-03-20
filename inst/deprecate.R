@@ -136,7 +136,12 @@ treat_call <- function(old, new, topics) {
   if (!nzchar(relevant_row[["args"]])) {
     inheritParamsOrNot <- "#'"
   } else {
-    inheritParamsOrNot <- sprintf("#' @inheritParams %s", new)
+    if (new %in% topics[["name"]]) {
+      inheritParamsOrNot <- sprintf("#' @inheritParams %s", new)
+    } else {
+      name <- topics[["name"]][which(purrr::map_lgl(topics$alias, ~new %in%.x))]
+      inheritParamsOrNot <- sprintf("#' @inheritParams %s", name)
+    }
   }
 
   new_text <- whisker::whisker.render(
