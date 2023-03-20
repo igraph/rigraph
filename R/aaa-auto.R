@@ -241,7 +241,7 @@ hsbm_list_game_impl <- function(n, mlist, rholist, Clist, p) {
 
 sample_correlated_gnp_impl <- function(old.graph, corr, p=edge_density(old.graph), permutation=NULL) {
   # Argument checks
-  if (!is_igraph(old.graph)) { stop("Not a graph object") }
+  ensure_igraph(old.graph)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   if (!is.null(permutation)) permutation <- as.numeric(permutation)-1
@@ -1636,8 +1636,8 @@ graph.isoclass_impl <- function(graph) {
 
 graph.isomorphic_impl <- function(graph1, graph2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
@@ -1661,8 +1661,8 @@ graph_from_isomorphism_class_impl <- function(size, number, directed=TRUE) {
 
 graph.isomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -1713,8 +1713,8 @@ graph.isomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.colo
 
 graph.count.isomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -1765,8 +1765,8 @@ graph.count.isomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, ver
 
 graph.subisomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -1817,8 +1817,8 @@ graph.subisomorphic.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.c
 
 graph.count.subisomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -1869,8 +1869,8 @@ graph.count.subisomorphisms.vf2_impl <- function(graph1, graph2, vertex.color1, 
 
 graph.isomorphic.34_impl <- function(graph1, graph2) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
 
   on.exit( .Call(C_R_igraph_finalizer) )
   # Function call
@@ -1915,8 +1915,8 @@ permute_impl <- function(graph, permutation) {
 
 graph.isomorphic.bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
-  if (!is_igraph(graph1)) { stop("Not a graph object") }
-  if (!is_igraph(graph2)) { stop("Not a graph object") }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(colors1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       colors1 <- V(graph1)$color
