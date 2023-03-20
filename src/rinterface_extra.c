@@ -8193,7 +8193,7 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
   igraph_vector_t vp;
   igraph_vector_t res;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t error=LOGICAL(perror)[0];
+  igraph_bool_t err=LOGICAL(perror)[0];
   igraph_bool_t multi=LOGICAL(pmulti)[0];
   SEXP result;
 
@@ -8203,9 +8203,9 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
 
   if (multi) {
     igraph_get_eids_multi(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed,
-                          error);
+                          err);
   } else {
-    IGRAPH_R_CHECK(igraph_get_eids(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed, error));
+    IGRAPH_R_CHECK(igraph_get_eids(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed, err));
   }
 
   PROTECT(result=R_igraph_vector_to_SEXP(&res));

@@ -28,4 +28,9 @@
 
 SEXP R_igraph_add_env(SEXP graph);
 
-#define IGRAPH_R_CHECK(x) do { x; } while (0)
+#define IGRAPH_R_CHECK(func) \
+    do { \
+        if (0) {igraph_error_type_t __c = func; } \
+        igraph_error_type_t __c = func; \
+        if (__c != IGRAPH_SUCCESS) { Rf_error(igraph_strerror(__c)); } \
+    } while (0)
