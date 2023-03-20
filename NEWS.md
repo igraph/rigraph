@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9012
+
+## Chore
+
+  - Convert all calls to the `igraph_*()` API to one-liners.
+
+Closes #725.
+
+  - Move code from `rinterface.c` to `rinterface_extra.c` to shorten `rinterface.c.in`.
+
+  - Introduce cpp11 package to improve error handling in the long run (#720).
+
+  - `as.hclust.igraphHRG` uses `.Call()` interface (#727).
+
+
 # igraph 1.4.1.9011
 
 ## Bug fixes
