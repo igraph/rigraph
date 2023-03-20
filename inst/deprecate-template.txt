@@ -5,7 +5,7 @@
 #'
 #' `{{old}}()` was renamed to `{{new}}()` to create a more
 #' consistent API.
-#' @inheritParams {{new}}
+{{inheritParamsOrNot}}
 #' @keywords internal
 #' @export
 {{old}} <- function({{{new_usage}}}) {

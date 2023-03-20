@@ -132,12 +132,19 @@ treat_call <- function(old, new) {
     new <- sub("_impl$", "", new)
   }
 
+  if (!nzchar(relevant_row[["args"]])) {
+    inheritParamsOrNot <- "#'"
+  } else {
+    inheritParamsOrNot <- sprintf("#' @inheritParams %s", new)
+  }
+
   new_text <- whisker::whisker.render(
     template,
     data = list(
       old = old,
       new = new,
       args = relevant_row[["args"]],
+      inheritParamsOrNot = inheritParamsOrNot,
       new_usage = relevant_row[["usage"]],
       new_title = stringr::str_squish(get_title(new))
     )
