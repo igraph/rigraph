@@ -57,9 +57,8 @@
 #' bibcoupling(g)
 #'
 cocitation <- function(graph, v = V(graph)) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   v <- as.igraph.vs(graph, v)
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_cocitation, graph, v - 1)
@@ -73,9 +72,8 @@ cocitation <- function(graph, v = V(graph)) {
 #' @family cocitation
 #' @export
 bibcoupling <- function(graph, v = V(graph)) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   v <- as.igraph.vs(graph, v)
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_bibcoupling, graph, v - 1)

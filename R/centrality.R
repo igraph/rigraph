@@ -117,9 +117,8 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #'
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         nobigint = TRUE, normalized = FALSE, cutoff = -1) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   v <- as.igraph.vs(graph, v)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -161,9 +160,8 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 edge_betweenness <- function(graph, e = E(graph),
                              directed = TRUE, weights = NULL, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   e <- as.igraph.es(graph, e)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -262,9 +260,8 @@ closeness <- function(graph, vids = V(graph),
                       mode = c("out", "in", "all", "total"), weights = NULL,
                       normalized = FALSE, cutoff = -1) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   vids <- as.igraph.vs(graph, vids)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
@@ -1060,9 +1057,7 @@ harmonic_centrality <- harmonic_centrality_impl
 bonpow.dense <- function(graph, nodes = V(graph),
                          loops = FALSE, exponent = 1,
                          rescale = FALSE, tol = 1e-7) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   d <- as_adj(graph)
   if (!loops) {
@@ -1238,9 +1233,7 @@ power_centrality <- function(graph, nodes = V(graph),
 alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
                                    loops = FALSE, exo = 1, weights = NULL,
                                    tol = 1e-7) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   exo <- rep(exo, length.out = vcount(graph))
   exo <- matrix(exo, ncol = 1)
@@ -1278,9 +1271,7 @@ alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
 alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
                                     loops = FALSE, exo = 1, weights = NULL,
                                     tol = 1e-7) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   vc <- vcount(graph)
 

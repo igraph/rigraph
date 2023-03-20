@@ -46,9 +46,7 @@ get.edge <- function(graph, id) {
     "'ends' instead."
   ))
 
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   id <- as.numeric(id)
   ec <- ecount(graph)
