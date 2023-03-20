@@ -103,14 +103,15 @@ parse_package_defs <- function() {
   purrr::map2_df(scripts, names(scripts), parse_script_function_call)
 }
 
-# get function title from pkgdown ----
+# get docs from pkgdown ----
 get_title <- function(fn_name) {
   rd_href <- pkgdown:::get_rd_from_help("igraph", fn_name)
   pkgdown:::extract_title(rd_href)
 }
+topics <- pkgdown::as_pkgdown()[["topics"]]
 
 # treat calls ----
-treat_call <- function(old, new) {
+treat_call <- function(old, new, topics) {
 
   if (old %in% c("igraph.eigen.default", "igraph.arpack.default", "graph.famous")) {
     return()
@@ -160,7 +161,8 @@ treat_call <- function(old, new) {
 purrr::walk2(
   deprecated_df[["old"]],
   deprecated_df[["new"]],
-  treat_call
+  treat_call,
+  topics = topics
 )
 
 # document ----
