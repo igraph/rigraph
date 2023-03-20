@@ -21,9 +21,7 @@
 
 get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
                                 attr = NULL, edges = FALSE, names = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
   type <- switch(type,
@@ -96,9 +94,7 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
 
 get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
                                  attr = NULL, edges = FALSE, names = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
 
@@ -212,9 +208,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
                                 attr = NULL, edges = FALSE, names = TRUE,
                                 sparse = igraph_opt("sparsematrices")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (!missing(edges)) {
     warning("The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0")
@@ -258,9 +252,7 @@ as_adj <- as_adjacency_matrix
 #' @family conversion
 #' @export
 as_edgelist <- function(graph, names = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   on.exit(.Call(C_R_igraph_finalizer))
   res <- matrix(.Call(C_R_igraph_get_edgelist, graph, TRUE),
     ncol = 2
@@ -366,9 +358,7 @@ as.directed <- as.directed_impl
 #' @export
 as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.attr.comb = igraph_opt("edge.attr.comb")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
     "collapse" = 1,
     "each" = 0,
@@ -429,9 +419,7 @@ as_adj_list <- function(graph,
                         mode = c("all", "out", "in", "total"),
                         loops = c("twice", "once", "ignore"),
                         multiple = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode,
@@ -469,9 +457,7 @@ as_adj_list <- function(graph,
 as_adj_edge_list <- function(graph,
                              mode = c("all", "out", "in", "total"),
                              loops = c("twice", "once", "ignore")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   mode <- igraph.match.arg(mode)
   mode <- as.numeric(switch(mode,
@@ -639,9 +625,7 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' @family conversion
 #' @export
 as_graphnel <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not an igraph graph")
-  }
+  ensure_igraph(graph)
 
   if (any_multiple(graph)) {
     stop("multiple edges are not supported in graphNEL graphs")
@@ -862,9 +846,7 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
                                 names = TRUE, sparse = FALSE) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
 
   names <- as.logical(names)
@@ -998,9 +980,7 @@ graph_from_adj_list <- graph_from_adj_list_impl
 #' )
 #' as_long_data_frame(g)
 as_long_data_frame <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   ver <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
   class(ver) <- "data.frame"

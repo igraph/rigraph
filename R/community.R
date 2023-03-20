@@ -475,9 +475,8 @@ modularity.communities <- function(x, ...) {
 #' @export
 modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   if (!missing(membership)) {
     warning("The membership argument is deprecated; modularity_matrix does not need it")
   }
@@ -970,9 +969,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
                               update.rule = c("config", "random", "simple"),
                               gamma = 1.0, implementation = c("orig", "neg"),
                               gamma.minus = 1.0) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1128,9 +1125,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            weights = NULL, resolution_parameter = 1, beta = 0.01,
                            initial_membership = NULL, n_iterations = 2, vertex_weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   # Parse objective function argument
   objective_function <- igraph.match.arg(objective_function)
@@ -1247,9 +1242,8 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #' comms <- cluster_fluid_communities(g, 2)
 cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   no.of.communities <- as.integer(no.of.communities)
 
   on.exit(.Call(C_R_igraph_finalizer))
@@ -1322,9 +1316,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 cluster_walktrap <- function(graph, weights = NULL, steps = 4,
                              merges = TRUE, modularity = TRUE,
                              membership = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object!")
-  }
+  ensure_igraph(graph)
 
   if (membership && !modularity) {
     modularity <- TRUE
@@ -1451,9 +1443,7 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
                                      merges = TRUE, bridges = TRUE,
                                      modularity = TRUE,
                                      membership = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object!")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1536,9 +1526,7 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
 #'
 cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
                                 membership = TRUE, weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1673,9 +1661,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   steps <- as.integer(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -1770,9 +1757,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'
 cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1864,9 +1850,8 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
 #'
 cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1957,9 +1942,8 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
 #' @keywords graphs
 cluster_optimal <- function(graph, weights = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2036,9 +2020,8 @@ cluster_optimal <- function(graph, weights = NULL) {
 cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
                             nb.trials = 10, modularity = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   if (is.null(e.weights) && "weight" %in% edge_attr_names(graph)) {
     e.weights <- E(graph)$weight
   }

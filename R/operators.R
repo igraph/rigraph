@@ -604,9 +604,7 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' graph.isomorphic(gu, make_full_graph(vcount(g)))
 #'
 complementer <- function(graph, loops = FALSE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_complementer, graph, as.logical(loops))
 }

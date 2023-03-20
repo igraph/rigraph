@@ -1382,9 +1382,7 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #'
 #' @export
 make_line_graph <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(C_R_igraph_finalizer))
   res <- .Call(C_R_igraph_linegraph, graph)

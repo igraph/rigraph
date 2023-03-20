@@ -1073,9 +1073,7 @@ asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 #' @export
 #' @family functions for manipulating graph structure
 connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,

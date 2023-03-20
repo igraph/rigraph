@@ -114,9 +114,7 @@ NULL
 #' @family hierarchical random graph functions
 fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
       left = c(), right = c(), prob = c(), edges = c(),
@@ -282,9 +280,7 @@ sample_hrg <- sample_hrg_impl
 predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
                           num.bins = 25) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(hrg)) {
     hrg <- list(
       left = c(), right = c(), prob = c(), edges = c(),

@@ -80,9 +80,7 @@
 #' @family flow
 #' @export
 min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.only = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(capacity)) {
     if ("capacity" %in% edge_attr_names(graph)) {
       capacity <- E(graph)$capacity
@@ -223,9 +221,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' cohesion(g)
 #'
 vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (length(source) == 0) {
     source <- NULL
@@ -315,9 +311,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' adhesion(g)
 #'
 edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (length(source) == 0) {
     source <- NULL
@@ -343,9 +337,7 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
 #' @family flow
 #' @export
 edge_disjoint_paths <- function(graph, source, target) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (length(source) == 0) {
     source <- NULL
@@ -364,9 +356,7 @@ edge_disjoint_paths <- function(graph, source, target) {
 #' @family flow
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (length(source) == 0) {
     source <- NULL
@@ -385,9 +375,7 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
 #' @family flow
 #' @export
 adhesion <- function(graph, checks = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_adhesion, graph, as.logical(checks))
@@ -555,9 +543,7 @@ st_min_cuts <- st_min_cuts_impl
 #' @export
 dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+ ensure_igraph(graph)
   root <- as.igraph.vs(graph, root)
   if (length(root) == 0) {
     stop("No vertex was specified")

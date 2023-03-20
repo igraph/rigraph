@@ -147,9 +147,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 #' @export
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   vids <- as.igraph.vs(graph, vids) - 1
 
   on.exit(.Call(C_R_igraph_finalizer))

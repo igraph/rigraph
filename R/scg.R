@@ -105,9 +105,7 @@ NULL
 #'
 stochastic_matrix <- function(graph, column.wise = FALSE,
                               sparse = igraph_opt("sparsematrices")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   column.wise <- as.logical(column.wise)
   if (length(column.wise) != 1) {
