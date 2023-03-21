@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9013
+
+## Documentation
+
+  - Add docs for as.hclust.igraphHRG() (#733).
+
+
 # igraph 1.4.1.9012
 
 ## Chore
