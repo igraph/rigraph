@@ -2375,6 +2375,12 @@ igraph_attribute_table_t *R_igraph_attribute_oldtable;
 /* borrowed from IGraph/M, thanks to @szhorvat */
 
 static char R_igraph_error_reason[4096];
+static char R_igraph_warning_reason[4096];
+static int R_igraph_warnings_count = 0;
+
+void R_igraph_error() {
+  Rf_error("%s", R_igraph_error_reason);
+}
 
 static inline int is_punctuated(const char *str) {
   const size_t len = strlen(str);
@@ -2408,20 +2414,16 @@ void R_igraph_error_handler(const char *reason, const char *file,
 
   /* We are not supposed to touch 'reason' after we have called
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
-   * IGRAPH_FINALLY_FREE() can then clean it up. Since error() calls longjmp(),
-   * we cannot do anything after calling error() either. Therefore, we make a
-   * copy of 'reason' first into a statically allocated buffer. */
-  strncpy(R_igraph_error_reason, reason, sizeof(R_igraph_error_reason));
+   * IGRAPH_FINALLY_FREE() can then clean it up. */
+
+  snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
+    "At %s:%i : %s%s %s", file, line, reason,
+    maybe_add_punctuation(reason, ","),
+    igraph_strerror(igraph_errno)
+  );
   R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
 
   IGRAPH_FINALLY_FREE();
-
-  error(
-    "At %s:%i : %s%s %s", file, line, R_igraph_error_reason,
-    maybe_add_punctuation(R_igraph_error_reason, ","),
-    igraph_strerror(igraph_errno)
-  );
-
 }
 
 void R_igraph_warning_handler(const char *reason, const char *file,

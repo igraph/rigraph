@@ -28,8 +28,10 @@
 
 SEXP R_igraph_add_env(SEXP graph);
 
+void R_igraph_error();
+
 #define IGRAPH_R_CHECK(func) \
     do { \
         igraph_error_type_t __c = func; \
-        if (__c != IGRAPH_SUCCESS) { Rf_error(igraph_strerror(__c)); } \
+        if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
     } while (0)
