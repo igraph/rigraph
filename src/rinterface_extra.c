@@ -9613,31 +9613,6 @@ int igraphhcass2(int *n, int *ia, int *ib,
   return 0;
 } /* hcass2_ */
 
-
-SEXP R_igraph_hcass2(SEXP in, SEXP ia, SEXP ib) {
-  SEXP result;
-  int n = INTEGER(in)[0];
-  igraph_vector_int_t a, b;
-
-  if (igraph_vector_int_init(&a, n)) error("Out of memory");
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &a);
-
-  if (igraph_vector_int_init(&b, n)) error("Out of memory");
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &b);
-
-  PROTECT(result = NEW_INTEGER(n));
-
-  igraphhcass2(INTEGER(in), INTEGER(ia), INTEGER(ib), INTEGER(result), VECTOR(a), VECTOR(b));
-
-  igraph_vector_int_destroy(&a);
-  igraph_vector_int_destroy(&b);
-
-  IGRAPH_FINALLY_CLEAN(2);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
   SEXP result;
   int i, no=0, n=GET_LENGTH(vector);

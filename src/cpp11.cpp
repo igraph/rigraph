@@ -5,7 +5,7 @@
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
-// sample.cpp
+// cpprinterface.cpp
 SEXP igraph_hcass2(SEXP n, SEXP ia, SEXP ib);
 extern "C" SEXP _igraph_igraph_hcass2(SEXP n, SEXP ia, SEXP ib) {
   BEGIN_CPP11
@@ -174,7 +174,6 @@ extern SEXP R_igraph_growing_random_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_harmonic_centrality_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_has_loop(SEXP);
 extern SEXP R_igraph_has_multiple(SEXP);
-extern SEXP R_igraph_hcass2(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_consensus(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_create(SEXP, SEXP);
 extern SEXP R_igraph_hrg_dendrogram(SEXP);
@@ -554,7 +553,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_harmonic_centrality_cutoff",                 (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                  6},
     {"R_igraph_has_loop",                                   (DL_FUNC) &R_igraph_has_loop,                                    1},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
-    {"R_igraph_hcass2",                                     (DL_FUNC) &R_igraph_hcass2,                                      3},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},
     {"R_igraph_hrg_dendrogram",                             (DL_FUNC) &R_igraph_hrg_dendrogram,                              1},
