@@ -6,10 +6,10 @@
 #include <R_ext/Visibility.h>
 
 // sample.cpp
-double mean_cpp(doubles x);
-extern "C" SEXP _igraph_mean_cpp(SEXP x) {
+SEXP igraph_hcass2(SEXP n, SEXP ia, SEXP ib);
+extern "C" SEXP _igraph_igraph_hcass2(SEXP n, SEXP ia, SEXP ib) {
   BEGIN_CPP11
-    return cpp11::as_sexp(mean_cpp(cpp11::as_cpp<cpp11::decay_t<doubles>>(x)));
+    return cpp11::as_sexp(igraph_hcass2(cpp11::as_cpp<cpp11::decay_t<SEXP>>(n), cpp11::as_cpp<cpp11::decay_t<SEXP>>(ia), cpp11::as_cpp<cpp11::decay_t<SEXP>>(ib)));
   END_CPP11
 }
 
@@ -773,7 +773,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},
     {"promise_env_",                                        (DL_FUNC) &promise_env_,                                         1},
     {"promise_expr_",                                       (DL_FUNC) &promise_expr_,                                        1},
-    {"_igraph_mean_cpp",                                    (DL_FUNC) &_igraph_mean_cpp,                                     1},
+    {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
     {NULL, NULL, 0}
 };
 }
