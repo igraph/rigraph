@@ -52,7 +52,8 @@ NULL
 #' `steps` number of MCMC steps to perform the fitting, or a convergence
 #' criteria if the specified number of steps is zero. `fit_hrg()` can start
 #' from a given HRG, if this is given in the `hrg()` argument and the
-#' `start` argument is `TRUE`.
+#' `start` argument is `TRUE`. It can be converted to the `hclust` class using
+#' `as.hclust()` provided in this package.
 #'
 #' @aliases hrg.fit
 #' @param graph The graph to fit the model to. Edge directions are ignored in
@@ -100,6 +101,7 @@ NULL
 #' g <- sample_gnp(10, p = 1 / 2) + sample_gnp(10, p = 1 / 2)
 #' hrg <- fit_hrg(g)
 #' hrg
+#' summary(as.hclust(hrg))
 #'
 #' ## The consensus tree for it
 #' consensus_tree(g, hrg = hrg, start = TRUE)
@@ -455,6 +457,7 @@ as.dendrogram.igraphHRG <- function(object, hang = 0.01, ...) {
 
 #' @importFrom stats as.hclust
 #' @export
+#'
 as.hclust.igraphHRG <- function(x, ...) {
   merge3 <- buildMerges(x)
 
@@ -479,16 +482,15 @@ as.hclust.igraphHRG <- function(x, ...) {
     map2[i] <- -mr[1]
   }
   n <- nrow(merge) + 1
-  hcass <- .C("igraphhcass2",
+  order <- .Call(C_R_igraph_hcass2,
     n = as.integer(n),
     ia = as.integer(mergeInto[, 1]),
-    ib = as.integer(mergeInto[, 2]),
-    order = integer(n), iia = integer(n), iib = integer(n)
+    ib = as.integer(mergeInto[, 2])
   )
 
   mynames <- if (is.null(x$names)) 1:n else x$names
   res <- list(
-    merge = merge, height = 1:nrow(merge), order = hcass$order,
+    merge = merge, height = 1:nrow(merge), order = order,
     labels = mynames, method = NA_character_,
     dist.method = NA_character_
   )

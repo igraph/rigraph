@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.4.1.9010
+Version: 1.4.1.9013
 Title: Network Analysis and Visualization
 Description: Routines for simple graphs and network analysis. It can
   handle large graphs very well and provides functions for generating random
@@ -16,6 +16,7 @@ Imports:
     utils
 Suggests:
     ape (>= 5.7-0.1),
+    decor,
     digest,
     graph,
     igraphdata,
@@ -28,6 +29,7 @@ Suggests:
     vdiffr,
     knitr,
     rmarkdown
+LinkingTo: cpp11
 License: GPL (>= 2)
 URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/
 SystemRequirements:
