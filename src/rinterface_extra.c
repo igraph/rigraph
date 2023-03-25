@@ -2375,10 +2375,10 @@ igraph_attribute_table_t *R_igraph_attribute_oldtable;
 /* borrowed from IGraph/M, thanks to @szhorvat */
 
 static char R_igraph_error_reason[4096];
-static char R_igraph_warning_reason[4096];
-static int R_igraph_warnings_count = 0;
+static int R_igraph_errors_count = 0;
 
 void R_igraph_error() {
+  R_igraph_errors_count = 0;
   Rf_error("%s", R_igraph_error_reason);
 }
 
@@ -2416,12 +2416,16 @@ void R_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
-  snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
-    "At %s:%i : %s%s %s", file, line, reason,
-    maybe_add_punctuation(reason, ","),
-    igraph_strerror(igraph_errno)
-  );
-  R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
+  printf("count %d \n", R_igraph_errors_count);
+
+  if (R_igraph_errors_count == 0) {
+    snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
+      "At %s:%i : %s%s %s", file, line, reason,
+      maybe_add_punctuation(reason, ","),
+      igraph_strerror(igraph_errno));
+    R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
+  }
+  R_igraph_errors_count++;
 
   IGRAPH_FINALLY_FREE();
 }
