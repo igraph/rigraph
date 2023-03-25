@@ -2416,8 +2416,6 @@ void R_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
-  printf("count %d \n", R_igraph_errors_count);
-
   if (R_igraph_errors_count == 0) {
     snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
       "At %s:%i : %s%s %s", file, line, reason,
