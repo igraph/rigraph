@@ -27,3 +27,5 @@
 #define R_IGRAPH_VERSION_VAR ".__igraph_version__."
 
 SEXP R_igraph_add_env(SEXP graph);
+
+#define IGRAPH_R_CHECK(x) do { x; } while (0)
