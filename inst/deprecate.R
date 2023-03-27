@@ -136,10 +136,16 @@ treat_call <- function(old, new, topics) {
   if (!nzchar(relevant_row[["args"]])) {
     inheritParamsOrNot <- "#'"
   } else {
+    # https://github.com/igraph/rigraph/pull/716#issuecomment-1476119739
+    name <- topics[["name"]][which(purrr::map_lgl(topics$alias, ~new %in%.x))]
+    if (length(name) > 0) {
+      new <- name
+    }
+
     if (new %in% topics[["name"]]) {
       inheritParamsOrNot <- sprintf("#' @inheritParams %s", new)
     } else {
-      name <- topics[["name"]][which(purrr::map_lgl(topics$alias, ~new %in%.x))]
+
       inheritParamsOrNot <- sprintf("#' @inheritParams %s", name)
     }
   }
