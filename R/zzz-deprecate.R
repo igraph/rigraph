@@ -543,7 +543,7 @@ deprecated("watts.strogatz.game", sample_smallworld)
 #' @export write.graph
 deprecated("write.graph", write_graph)
 #' @export graph.famous
-deprecated("graph.famous", make_famous_graph)
+deprecated("graph.famous", make_graph)
 #' @export igraph.from.graphNEL
 deprecated("igraph.from.graphNEL", graph_from_graphnel)
 #' @export igraph.to.graphNEL

@@ -113,7 +113,7 @@ topics <- pkgdown::as_pkgdown()[["topics"]]
 # treat calls ----
 treat_call <- function(old, new, topics) {
 
-  if (old %in% c("igraph.eigen.default", "igraph.arpack.default", "graph.famous")) {
+  if (old %in% c("igraph.eigen.default", "igraph.arpack.default")) {
     return()
   }
 
