@@ -53,9 +53,9 @@ graph.adjacency.dense <- function(adjmatrix,
       stop("not a square matrix")
     }
 
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      C_R_igraph_weighted_adjacency, adjmatrix,
+      R_igraph_weighted_adjacency, adjmatrix,
       as.numeric(mode), weighted, diag
     )
   } else {
@@ -68,8 +68,8 @@ graph.adjacency.dense <- function(adjmatrix,
       diag(adjmatrix) <- 0
     }
 
-    on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
+    on.exit(.Call(R_igraph_finalizer))
+    res <- .Call(R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
   }
 
   res

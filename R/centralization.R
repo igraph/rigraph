@@ -165,9 +165,9 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
   )
   loops <- as.logical(loops)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
+  res <- .Call(R_igraph_centralization_degree_tmax, graph, nodes, mode, loops)
 
   res
 }
@@ -217,9 +217,9 @@ centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRU
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_centralization_betweenness, graph, directed, normalized)
+  res <- .Call(R_igraph_centralization_betweenness, graph, directed, normalized)
 
   res
 }

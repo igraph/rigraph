@@ -33,9 +33,9 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
   )
 
   if (edges || is.null(attr)) {
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      C_R_igraph_get_adjacency, graph, as.numeric(type),
+      R_igraph_get_adjacency, graph, as.numeric(type),
       as.logical(edges)
     )
   } else {
@@ -261,8 +261,8 @@ as_edgelist <- function(graph, names = TRUE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- matrix(.Call(C_R_igraph_get_edgelist, graph, TRUE),
+  on.exit(.Call(R_igraph_finalizer))
+  res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE),
     ncol = 2
   )
   res <- res + 1
@@ -376,9 +376,9 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
   )
   edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_to_undirected, graph, mode, edge.attr.comb)
+  res <- .Call(R_igraph_to_undirected, graph, mode, edge.attr.comb)
 
   res
 }
@@ -452,8 +452,8 @@ as_adj_list <- function(graph,
   }
 
   multiple <- if (multiple) 1 else 0
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_get_adjlist, graph, mode, loops, multiple)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_get_adjlist, graph, mode, loops, multiple)
   res <- lapply(res, `+`, 1)
   if (igraph_opt("return.vs.es")) {
     res <- lapply(res, unsafe_create_vs, graph = graph, verts = V(graph))
@@ -491,8 +491,8 @@ as_adj_edge_list <- function(graph,
     loops <- 2
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_get_adjedgelist, graph, mode, loops)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_get_adjedgelist, graph, mode, loops)
   res <- lapply(res, function(.x) E(graph)[.x + 1])
   if (is_named(graph)) names(res) <- V(graph)$name
   res
@@ -722,9 +722,9 @@ as_graphnel <- function(graph) {
 
 get.incidence.dense <- function(graph, types, names, attr) {
   if (is.null(attr)) {
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     ## Function call
-    res <- .Call(C_R_igraph_get_incidence, graph, types)
+    res <- .Call(R_igraph_get_incidence, graph, types)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[res$row_ids + 1]
@@ -890,7 +890,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   what <- igraph.match.arg(what)
 
   if (what %in% c("vertices", "both")) {
-    ver <- .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_vertex)
+    ver <- .Call(R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_vertex)
     class(ver) <- "data.frame"
     rn <- if (is_named(x)) {
       V(x)$name
@@ -904,7 +904,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
     el <- as_edgelist(x)
     edg <- c(
       list(from = el[, 1]), list(to = el[, 2]),
-      .Call(C_R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
+      .Call(R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
     )
     class(edg) <- "data.frame"
     rownames(edg) <- seq_len(ecount(x))
@@ -1002,7 +1002,7 @@ as_long_data_frame <- function(graph) {
     stop("Not a graph object")
   }
 
-  ver <- .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
+  ver <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
   class(ver) <- "data.frame"
   rn <- if (is_named(graph)) {
     V(graph)$name
@@ -1014,7 +1014,7 @@ as_long_data_frame <- function(graph) {
   el <- as_edgelist(graph, names = FALSE)
   edg <- c(
     list(from = el[, 1]), list(to = el[, 2]),
-    .Call(C_R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
+    .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
   )
   class(edg) <- "data.frame"
   rownames(edg) <- seq_len(ecount(graph))

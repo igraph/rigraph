@@ -72,10 +72,10 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     edge.color2 <- as.integer(edge.color2) - 1L
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
+    R_igraph_get_isomorphisms_vf2, graph1, graph2, vertex.color1,
     vertex.color2, edge.color1, edge.color2
   )
 
@@ -134,10 +134,10 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
     edge.color2 <- as.integer(edge.color2) - 1L
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_get_subisomorphisms_vf2, graph1, graph2,
+    R_igraph_get_subisomorphisms_vf2, graph1, graph2,
     vertex.color1, vertex.color2, edge.color1, edge.color2
   )
 
@@ -152,9 +152,9 @@ graph.isoclass.subgraph <- function(graph, vids) {
   }
   vids <- as.igraph.vs(graph, vids) - 1
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_isoclass_subgraph, graph, vids)
+  res <- .Call(R_igraph_isoclass_subgraph, graph, vids)
   res
 }
 
@@ -187,10 +187,10 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
     domains <- lapply(domains, function(x) as.igraph.vs(target, x) - 1)
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_subisomorphic_lad, pattern, target, domains,
+    R_igraph_subisomorphic_lad, pattern, target, domains,
     induced, time.limit, map, all.maps
   )
 
@@ -324,11 +324,11 @@ isomorphic <- function(graph1, graph2, method = c(
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
-    on.exit(.Call(C_R_igraph_finalizer))
-    .Call(C_R_igraph_isomorphic, graph1, graph2)
+    on.exit(.Call(R_igraph_finalizer))
+    .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "direct") {
-    on.exit(.Call(C_R_igraph_finalizer))
-    .Call(C_R_igraph_isomorphic_34, graph1, graph2)
+    on.exit(.Call(R_igraph_finalizer))
+    .Call(R_igraph_isomorphic_34, graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {

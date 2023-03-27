@@ -169,4 +169,3 @@ SEXP promise_env_(SEXP prom) {
 
   return PRENV(prom);
 }
-

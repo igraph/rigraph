@@ -138,8 +138,8 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -180,9 +180,9 @@ edge_betweenness <- function(graph, e = E(graph),
     cutoff <- -1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
+  res <- .Call(R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
   res[as.numeric(e)]
 }
 
@@ -287,9 +287,9 @@ closeness <- function(graph, vids = V(graph),
     cutoff <- -1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
+  res <- .Call(R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
@@ -526,8 +526,8 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
     warning("Symmetric matrix, setting `complex' to FALSE")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_arpack, func, extra, options, env, sym)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -562,9 +562,9 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   values <- as.matrix(structure(as.double(values), dim = dim(values)))
   nev <- as.integer(nev)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
 
   res
 }
