@@ -2377,9 +2377,21 @@ igraph_attribute_table_t *R_igraph_attribute_oldtable;
 static char R_igraph_error_reason[4096];
 static int R_igraph_errors_count = 0;
 
+static char R_igraph_warning_reason[4096];
+static int R_igraph_warnings_count = 0;
+
 void R_igraph_error() {
   R_igraph_errors_count = 0;
   Rf_error("%s", R_igraph_error_reason);
+}
+
+void R_igraph_warning() {
+  if (R_igraph_warnings_count > 0) {
+    int count = R_igraph_warnings_count;
+    R_igraph_warnings_count = 0;
+
+    Rf_warning("%s", R_igraph_warning_reason);
+  }
 }
 
 static inline int is_punctuated(const char *str) {
@@ -2430,7 +2442,12 @@ void R_igraph_error_handler(const char *reason, const char *file,
 
 void R_igraph_warning_handler(const char *reason, const char *file,
                               int line, int igraph_errno) {
-  warning("At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+  if (R_igraph_warnings_count == 0) {
+    snprintf(R_igraph_warning_reason, sizeof(R_igraph_warning_reason),
+      "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+    R_igraph_warning_reason[sizeof(R_igraph_warning_reason) - 1] = 0;
+  }
+  R_igraph_warnings_count++;
 }
 
 extern int R_interrupts_pending;
