@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9014
+
+## Chore
+
+  - Introduce `IGRAPH_R_CHECK()` as a no-op (#729).
+
+
 # igraph 1.4.1.9013
 
 ## Documentation
