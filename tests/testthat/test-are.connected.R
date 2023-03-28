@@ -4,7 +4,7 @@ test_that("are_adjacent works", {
   expect_true(are_adjacent(g, "B", "A"))
   expect_false(are_adjacent(g, "A", "D"))
 
-  g2 <- graph(c(1, 2, 2, 3, 3, 4), dir = FALSE)
+  g2 <- make_graph(c(1, 2, 2, 3, 3, 4), dir = FALSE)
   expect_true(are_adjacent(g2, 1, 2))
   expect_true(are_adjacent(g2, 3, 2))
   expect_false(are_adjacent(g2, 4, 1))

@@ -61,7 +61,7 @@ tmax <- centr_degree_tmax(g, loops = FALSE)
 centralize(deg, tmax)
 
 # The most centralized graph according to eigenvector centrality
-g0 <- graph(c(2, 1), n = 10, dir = FALSE)
+g0 <- make_graph(c(2, 1), n = 10, dir = FALSE)
 g1 <- make_star(10, mode = "undirected")
 centr_eigen(g0)$centralization
 centr_eigen(g1)$centralization
