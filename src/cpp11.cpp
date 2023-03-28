@@ -6,10 +6,10 @@
 #include <R_ext/Visibility.h>
 
 // cpprinterface.cpp
-SEXP igraph_hcass2(SEXP n, SEXP ia, SEXP ib);
+cpp11::integers igraph_hcass2(int n, cpp11::integers ia, cpp11::integers ib);
 extern "C" SEXP _igraph_igraph_hcass2(SEXP n, SEXP ia, SEXP ib) {
   BEGIN_CPP11
-    return cpp11::as_sexp(igraph_hcass2(cpp11::as_cpp<cpp11::decay_t<SEXP>>(n), cpp11::as_cpp<cpp11::decay_t<SEXP>>(ia), cpp11::as_cpp<cpp11::decay_t<SEXP>>(ib)));
+    return cpp11::as_sexp(igraph_hcass2(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ia), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ib)));
   END_CPP11
 }
 
