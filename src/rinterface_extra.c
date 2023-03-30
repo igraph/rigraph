@@ -2413,12 +2413,17 @@ void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
 #ifdef IGRAPH_SANITIZER_AVAILABLE
     __sanitizer_print_stack_trace();
 #endif
+  if (R_igraph_errors_count == 0) {
+    snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
+      "At %s:%i : %s%s This is an unexpected igraph error; please report this "
+      "as a bug, along with the steps to reproduce it.",
+      file, line, reason, maybe_add_punctuation(reason, ".")
+    );
+    R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
+  }
+  R_igraph_errors_count++;
+
   IGRAPH_FINALLY_FREE();
-  error(
-    "At %s:%i : %s%s This is an unexpected igraph error; please report this "
-    "as a bug, along with the steps to reproduce it.",
-    file, line, reason, maybe_add_punctuation(reason, ".")
-  );
 }
 
 void R_igraph_error_handler(const char *reason, const char *file,
