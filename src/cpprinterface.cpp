@@ -18,6 +18,5 @@ cpp11::integers igraph_hcass2(int n, cpp11::integers ia, cpp11::integers ib) {
 
   igraphhcass2(n, INTEGER(ia), INTEGER(ib), INTEGER(result), a.begin(), b.begin());
 
-  UNPROTECT(1);
   return result;
 }
