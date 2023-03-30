@@ -26,4 +26,4 @@
 #' col <- greedy_vertex_coloring(g)
 #' plot(g, vertex.color = col)
 #'
-greedy_vertex_coloring <- greedy_vertex_coloring_impl
+greedy_vertex_coloring <- vertex_coloring_greedy_impl

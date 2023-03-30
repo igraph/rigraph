@@ -130,9 +130,9 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   start <- as.logical(start)
   steps <- as.integer(steps)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_hrg_fit, graph, hrg, start, steps)
+  res <- .Call(R_igraph_hrg_fit, graph, hrg, start, steps)
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -174,7 +174,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #'     vertices. The order is the same as in the `parents` vector.}
 #' @family hierarchical random graph functions
 #' @export
-consensus_tree <- consensus_tree_impl
+consensus_tree <- hrg_consensus_impl
 
 
 #' Create a hierarchical random graph from an igraph graph
@@ -192,7 +192,7 @@ consensus_tree <- consensus_tree_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg <- hrg_impl
+hrg <- hrg_create_impl
 
 
 #' Create an igraph graph from a hierarchical random graph model
@@ -205,7 +205,7 @@ hrg <- hrg_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg_tree <- hrg_tree_impl
+hrg_tree <- hrg_dendrogram_impl
 
 
 #' Sample from a hierarchical random graph model
@@ -219,7 +219,7 @@ hrg_tree <- hrg_tree_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
-sample_hrg <- sample_hrg_impl
+sample_hrg <- hrg_game_impl
 
 #' Predict edges based on a hierarchical random graph model
 #'
@@ -299,10 +299,10 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
   num.samples <- as.integer(num.samples)
   num.bins <- as.integer(num.bins)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_hrg_predict, graph, hrg, start, num.samples,
+    R_igraph_hrg_predict, graph, hrg, start, num.samples,
     num.bins
   )
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)

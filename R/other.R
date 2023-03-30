@@ -51,8 +51,8 @@ running_mean <- function(v, binwidth) {
     stop("Vector too short for this binwidth.")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_running_mean, v, binwidth)
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_running_mean, v, binwidth)
 }
 
 
@@ -88,9 +88,9 @@ sample_seq <- function(low, high, length) {
     stop("length too big for this interval")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_random_sample, as.numeric(low), as.numeric(high),
+    R_igraph_random_sample, as.numeric(low), as.numeric(high),
     as.numeric(length)
   )
 }

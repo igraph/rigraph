@@ -57,8 +57,8 @@ get.edge <- function(graph, id) {
     stop("No such edge")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_get_edge, graph, as.numeric(id) - 1)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_get_edge, graph, as.numeric(id) - 1)
   res + 1
 }
 

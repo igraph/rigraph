@@ -120,8 +120,8 @@ disjoint_union <- function(...) {
     stop("Not a graph object")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_disjoint_union, graphs)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_disjoint_union, graphs)
 
   ## Graph attributes
   graph.attributes(res) <- rename.attr.if.needed("g", graphs)
@@ -221,11 +221,11 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(C_R_igraph_union, newgraphs, edgemaps)
+      res <- .Call(R_igraph_union, newgraphs, edgemaps)
     } else {
-      res <- .Call(C_R_igraph_intersection, newgraphs, edgemaps)
+      res <- .Call(R_igraph_intersection, newgraphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -257,11 +257,11 @@ disjoint_union <- function(...) {
       })
     }
 
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     if (call == "union") {
-      res <- .Call(C_R_igraph_union, graphs, edgemaps)
+      res <- .Call(R_igraph_union, graphs, edgemaps)
     } else {
-      res <- .Call(C_R_igraph_intersection, graphs, edgemaps)
+      res <- .Call(R_igraph_intersection, graphs, edgemaps)
     }
     maps <- res$edgemaps
     res <- res$graph
@@ -553,12 +553,12 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
     }
     big <- permute(big, perm)
 
-    on.exit(.Call(C_R_igraph_finalizer))
-    res <- .Call(C_R_igraph_difference, big, small)
+    on.exit(.Call(R_igraph_finalizer))
+    res <- .Call(R_igraph_difference, big, small)
     permute(res, match(V(res)$name, bnames))
   } else {
-    on.exit(.Call(C_R_igraph_finalizer))
-    .Call(C_R_igraph_difference, big, small)
+    on.exit(.Call(R_igraph_finalizer))
+    .Call(R_igraph_difference, big, small)
   }
 }
 
@@ -607,8 +607,8 @@ complementer <- function(graph, loops = FALSE) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_complementer, graph, as.logical(loops))
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_complementer, graph, as.logical(loops))
 }
 
 
@@ -711,8 +711,8 @@ compose <- function(g1, g2, byname = "auto") {
   edgemaps <- (length(edge_attr_names(g1)) != 0 ||
     length(edge_attr_names(g2)) != 0)
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_compose, g1, g2, edgemaps)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_compose, g1, g2, edgemaps)
   maps <- list(res$edge_map1, res$edge_map2)
   res <- res$graph
 

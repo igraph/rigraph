@@ -122,15 +122,15 @@ layout_with_drl <- function(graph, use.seed = FALSE,
     fixed <- as.logical(fixed)
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      C_R_igraph_layout_drl, graph, seed, use.seed, options,
+      R_igraph_layout_drl, graph, seed, use.seed, options,
       weights, fixed
     )
   } else {
     res <- .Call(
-      C_R_igraph_layout_drl_3d, graph, seed, use.seed, options,
+      R_igraph_layout_drl_3d, graph, seed, use.seed, options,
       weights, fixed
     )
   }

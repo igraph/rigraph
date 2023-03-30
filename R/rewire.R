@@ -89,8 +89,8 @@ rewire_keeping_degseq <- function(graph, loops, niter) {
   loops <- as.logical(loops)
   mode <- if (loops) 1 else 0
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_rewire, graph, as.numeric(niter), as.numeric(mode))
 }
 
 #' Rewires the endpoints of the edges of a graph to a random vertex
@@ -157,9 +157,9 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
+    R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
     as.logical(multiple)
   )
 }
@@ -168,9 +168,9 @@ rewire_each_directed_edge <- function(graph, prob, loops, mode) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
+    R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),
     as.numeric(mode)
   )
 }
