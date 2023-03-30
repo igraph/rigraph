@@ -451,9 +451,9 @@ modularity.igraph <- function(x, membership, weights = NULL, resolution = 1, dir
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_modularity, x, membership - 1, weights, resolution, directed)
+  res <- .Call(R_igraph_modularity, x, membership - 1, weights, resolution, directed)
   res
 }
 
@@ -493,9 +493,9 @@ modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1,
   resolution <- as.numeric(resolution)
   directed <- as.logical(directed)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_modularity_matrix, graph, weights, resolution, directed)
+  res <- .Call(R_igraph_modularity_matrix, graph, weights, resolution, directed)
 
   res
 }
@@ -839,8 +839,8 @@ community.to.membership2 <- function(merges, vcount, steps) {
   mode(merges) <- "numeric"
   mode(vcount) <- "numeric"
   mode(steps) <- "numeric"
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_community_to_membership2, merges - 1, vcount, steps)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_community_to_membership2, merges - 1, vcount, steps)
   res + 1
 }
 
@@ -991,10 +991,10 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
     "neg" = 1
   )
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   if (is.null(vertex) || length(vertex) == 0) {
     res <- .Call(
-      C_R_igraph_spinglass_community, graph, weights,
+      R_igraph_spinglass_community, graph, weights,
       as.numeric(spins), as.logical(parupdate),
       as.numeric(start.temp),
       as.numeric(stop.temp), as.numeric(cool.fact),
@@ -1010,7 +1010,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
     class(res) <- "communities"
   } else {
     res <- .Call(
-      C_R_igraph_spinglass_my_community, graph, weights,
+      R_igraph_spinglass_my_community, graph, weights,
       as.igraph.vs(graph, vertex) - 1, as.numeric(spins),
       as.numeric(update.rule), as.numeric(gamma)
     )
@@ -1166,12 +1166,12 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     }
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   membership <- initial_membership
   if (n_iterations > 0) {
     for (i in 1:n_iterations) {
       res <- .Call(
-        C_R_igraph_community_leiden, graph, weights,
+        R_igraph_community_leiden, graph, weights,
         vertex_weights, as.numeric(resolution_parameter),
         as.numeric(beta), !is.null(membership),
         membership
@@ -1184,7 +1184,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     while (prev_quality < quality) {
       prev_quality <- quality
       res <- .Call(
-        C_R_igraph_community_leiden, graph, weights,
+        R_igraph_community_leiden, graph, weights,
         vertex_weights, as.numeric(resolution_parameter),
         as.numeric(beta), !is.null(membership),
         membership
@@ -1246,9 +1246,9 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 
   no.of.communities <- as.integer(no.of.communities)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_community_fluid_communities, graph, no.of.communities)
+  res <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
@@ -1331,9 +1331,9 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
     weights <- NULL
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_walktrap_community, graph, weights, as.numeric(steps),
+    R_igraph_walktrap_community, graph, weights, as.numeric(steps),
     as.logical(merges), as.logical(modularity), as.logical(membership)
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -1454,9 +1454,9 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
     weights <- NULL
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_community_edge_betweenness, graph, weights,
+    R_igraph_community_edge_betweenness, graph, weights,
     as.logical(directed),
     as.logical(edge.betweenness),
     as.logical(merges), as.logical(bridges),
@@ -1537,9 +1537,9 @@ cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
     weights <- NULL
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_community_fastgreedy, graph, as.logical(merges),
+    R_igraph_community_fastgreedy, graph, as.logical(merges),
     as.logical(modularity), as.logical(membership), weights
   )
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
@@ -1556,7 +1556,7 @@ cluster_fast_greedy <- function(graph, merges = TRUE, modularity = TRUE,
 igraph.i.levc.arp <- function(externalP, externalE) {
   f <- function(v) {
     v <- as.numeric(v)
-    .Call(C_R_igraph_i_levc_arp, externalP, externalE, v)
+    .Call(R_igraph_i_levc_arp, externalP, externalE, v)
   }
   f
 }
@@ -1679,10 +1679,10 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   options.tmp[names(options)] <- options
   options <- options.tmp
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_community_leading_eigenvector, graph, steps,
+    R_igraph_community_leading_eigenvector, graph, steps,
     weights, options, start, callback, extra, env,
     environment(igraph.i.levc.arp)
   )
@@ -1770,9 +1770,9 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_community_label_propagation, graph, weights, initial, fixed)
+  res <- .Call(R_igraph_community_label_propagation, graph, weights, initial, fixed)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1862,9 +1862,9 @@ cluster_louvain <- function(graph, weights = NULL, resolution = 1) {
   }
   resolution <- as.numeric(resolution)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_community_multilevel, graph, weights, resolution)
+  res <- .Call(R_igraph_community_multilevel, graph, weights, resolution)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -1953,9 +1953,9 @@ cluster_optimal <- function(graph, weights = NULL) {
     weights <- NULL
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_community_optimal_modularity, graph, weights)
+  res <- .Call(R_igraph_community_optimal_modularity, graph, weights)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
@@ -2040,10 +2040,10 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   }
   nb.trials <- as.integer(nb.trials)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_community_infomap, graph, e.weights,
+    R_igraph_community_infomap, graph, e.weights,
     v.weights, nb.trials
   )
 
@@ -2375,8 +2375,8 @@ i_compare <- function(comm1, comm2, method = c(
     rand = 3,
     adjusted.rand = 4
   )
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_compare_communities, comm1, comm2, method)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_compare_communities, comm1, comm2, method)
   res
 }
 
@@ -2424,8 +2424,8 @@ split_join_distance <- function(comm1, comm2) {
   } else {
     as.numeric(comm2)
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_split_join_distance, comm1, comm2)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_split_join_distance, comm1, comm2)
   unlist(res)
 }
 
@@ -2533,4 +2533,4 @@ communities <- groups.communities
 #'
 #' @export
 #' @family functions for manipulating graph structure
-contract <- contract_impl
+contract <- contract_vertices_impl

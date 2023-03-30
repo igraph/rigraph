@@ -1,5 +1,5 @@
 
-#' @useDynLib igraph, .registration = TRUE, .fixes = "C_"
+#' @useDynLib igraph, .registration = TRUE
 #' @import methods
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data .env

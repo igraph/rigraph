@@ -32,7 +32,7 @@
   if (length(gal) != 0) {
     ga <- paste(
       sep = "", gal, " (g/",
-      .Call(C_R_igraph_get_attr_mode, object, 2L),
+      .Call(R_igraph_get_attr_mode, object, 2L),
       ")"
     )
   }
@@ -40,7 +40,7 @@
   if (length(val) != 0) {
     va <- paste(
       sep = "", val, " (v/",
-      .Call(C_R_igraph_get_attr_mode, object, 3L),
+      .Call(R_igraph_get_attr_mode, object, 3L),
       ")"
     )
   }
@@ -48,7 +48,7 @@
   if (length(eal) != 0) {
     ea <- paste(
       sep = "", edge_attr_names(object), " (e/",
-      .Call(C_R_igraph_get_attr_mode, object, 4L),
+      .Call(R_igraph_get_attr_mode, object, 4L),
       ")"
     )
   }

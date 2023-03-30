@@ -61,9 +61,9 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
     )
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_motifs_randesu, graph, as.integer(size),
+    R_igraph_motifs_randesu, graph, as.integer(size),
     as.numeric(cut.prob)
   )
   res[is.nan(res)] <- NA
@@ -105,9 +105,9 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
     )
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_motifs_randesu_no, graph, as.integer(size),
+    R_igraph_motifs_randesu_no, graph, as.integer(size),
     as.numeric(cut.prob)
   )
 }
@@ -154,9 +154,9 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
     )
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_motifs_randesu_estimate, graph, as.integer(size),
+    R_igraph_motifs_randesu_estimate, graph, as.integer(size),
     as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample)
   )
 }

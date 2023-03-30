@@ -137,8 +137,8 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
   if (!missing(nobigint)) {
     warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
   if (normalized) {
     vc <- as.numeric(vcount(graph))
     if (is_directed(graph) && directed) {
@@ -178,9 +178,9 @@ edge_betweenness <- function(graph, e = E(graph),
     cutoff <- -1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
+  res <- .Call(R_igraph_edge_betweenness_cutoff, graph, directed, weights, cutoff)
   res[as.numeric(e)]
 }
 
@@ -284,9 +284,9 @@ closeness <- function(graph, vids = V(graph),
     cutoff <- -1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
+  res <- .Call(R_igraph_closeness_cutoff, graph, vids - 1, mode, weights, normalized, cutoff)$res
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- V(graph)$name[vids]
   }
@@ -523,8 +523,8 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
     warning("Symmetric matrix, setting `complex' to FALSE")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_arpack, func, extra, options, env, sym)
+  on.exit(.Call(R_igraph_finalizer))
+  res <- .Call(R_igraph_arpack, func, extra, options, env, sym)
 
   if (complex) {
     rew <- arpack.unpack.complex(
@@ -559,9 +559,9 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   values <- as.matrix(structure(as.double(values), dim = dim(values)))
   nev <- as.integer(nev)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_arpack_unpack_complex, vectors, values, nev)
+  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
 
   res
 }
@@ -676,13 +676,15 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- spectrum_impl
+spectrum <- eigen_adjacency_impl
 
-eigen_defaults <- list(
-  pos = "LM", howmany = 1L, il = -1L, iu = -1L,
-  vl = -Inf, vu = Inf, vestimate = 0L,
-  balance = "none"
-)
+eigen_defaults <- function() {
+  list(
+    pos = "LM", howmany = 1L, il = -1L, iu = -1L,
+    vl = -Inf, vu = Inf, vestimate = 0L,
+    balance = "none"
+  )
+}
 
 #' Find Eigenvector Centrality Scores of Network Positions
 #'
@@ -769,7 +771,7 @@ eigen_defaults <- list(
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-eigen_centrality <- eigen_centrality_impl
+eigen_centrality <- eigenvector_centrality_impl
 
 
 #' Strength or weighted vertex degree
@@ -1003,7 +1005,7 @@ authority_score <- authority_score_impl
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-page_rank <- page_rank_impl
+page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
 #'
@@ -1050,7 +1052,7 @@ page_rank <- page_rank_impl
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-harmonic_centrality <- harmonic_centrality_impl
+harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
 
@@ -1189,10 +1191,10 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' @examples
 #'
 #' # Generate some test data from Bonacich, 1987:
-#' g.c <- graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-#' g.d <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
-#' g.e <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
-#' g.f <- graph(
+#' g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
+#' g.d <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
+#' g.e <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
+#' g.f <- make_graph(
 #'   c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13),
 #'   dir = FALSE
 #' )
@@ -1370,9 +1372,9 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' @examples
 #'
 #' # The examples from Bonacich's paper
-#' g.1 <- graph(c(1, 3, 2, 3, 3, 4, 4, 5))
-#' g.2 <- graph(c(2, 1, 3, 1, 4, 1, 5, 1))
-#' g.3 <- graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
+#' g.1 <- make_graph(c(1, 3, 2, 3, 3, 4, 4, 5))
+#' g.2 <- make_graph(c(2, 1, 3, 1, 4, 1, 5, 1))
+#' g.3 <- make_graph(c(1, 2, 2, 3, 3, 4, 4, 1, 5, 1))
 #' alpha_centrality(g.1)
 #' alpha_centrality(g.2)
 #' alpha_centrality(g.3, alpha = 0.5)

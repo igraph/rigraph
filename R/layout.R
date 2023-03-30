@@ -289,10 +289,10 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
   vgap <- as.numeric(vgap)
   maxiter <- as.integer(maxiter)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
 
   ## Function call
-  res <- .Call(C_R_igraph_layout_bipartite, graph, types, hgap, vgap, maxiter)
+  res <- .Call(R_igraph_layout_bipartite, graph, types, hgap, vgap, maxiter)
 
   res
 }
@@ -351,9 +351,9 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
   }
   if (!is.null(order)) order <- as.numeric(order) - 1
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_star, graph, center - 1, order)
+  res <- .Call(R_igraph_layout_star, graph, center - 1, order)
 
   res
 }
@@ -439,9 +439,9 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
   )
   flip.y <- as.logical(flip.y)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_layout_reingold_tilford, graph, root, mode,
+    R_igraph_layout_reingold_tilford, graph, root, mode,
     rootlevel, circular
   )
   if (flip.y && vcount(graph) > 0) {
@@ -499,8 +499,8 @@ layout.reingold.tilford <- function(..., params = list()) {
 layout_in_circle <- function(graph, order = V(graph)) {
   ensure_igraph(graph)
   order <- as.igraph.vs(graph, order) - 1L
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_layout_circle, graph, order)
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_layout_circle, graph, order)
 }
 
 #' @rdname layout_in_circle
@@ -666,12 +666,12 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
     height <- as.integer(height)
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (dim == 2) {
-    res <- .Call(C_R_igraph_layout_grid, graph, width)
+    res <- .Call(R_igraph_layout_grid, graph, width)
   } else {
-    res <- .Call(C_R_igraph_layout_grid_3d, graph, width, height)
+    res <- .Call(R_igraph_layout_grid_3d, graph, width, height)
   }
 
   res
@@ -697,9 +697,9 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
   width <- as.integer(width)
   height <- as.integer(height)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_grid_3d, graph, width, height)
+  res <- .Call(R_igraph_layout_grid_3d, graph, width, height)
 
   res
 }
@@ -729,6 +729,11 @@ layout_on_sphere <- function(graph) {
   ensure_igraph(graph)
   on.exit(.Call(C_R_igraph_finalizer))
   .Call(C_R_igraph_layout_sphere, graph)
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  on.exit(.Call(R_igraph_finalizer))
+  .Call(R_igraph_layout_sphere, graph)
 }
 
 
@@ -766,11 +771,11 @@ layout.sphere <- function(..., params = list()) {
 layout_randomly <- function(graph, dim = 2) {
   ensure_igraph(graph)
   if (dim == 2) {
-    on.exit(.Call(C_R_igraph_finalizer))
-    .Call(C_R_igraph_layout_random, graph)
+    on.exit(.Call(R_igraph_finalizer))
+    .Call(R_igraph_layout_random, graph)
   } else if (dim == 3) {
-    on.exit(.Call(C_R_igraph_finalizer))
-    .Call(C_R_igraph_layout_random_3d, graph)
+    on.exit(.Call(R_igraph_finalizer))
+    .Call(R_igraph_layout_random_3d, graph)
   } else {
     stop("Invalid `dim' value")
   }
@@ -925,10 +930,10 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
   weight.edge.crossings <- as.numeric(weight.edge.crossings)
   weight.node.edge.dist <- as.numeric(weight.node.edge.dist)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_layout_davidson_harel, graph, coords, use.seed,
+    R_igraph_layout_davidson_harel, graph, coords, use.seed,
     maxiter, fineiter, cool.fact, weight.node.dist,
     weight.border, weight.edge.lengths, weight.edge.crossings,
     weight.node.edge.dist
@@ -1080,15 +1085,15 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
     warning("Argument `repulserad' is deprecated and has no effect")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   if (dim == 2) {
     res <- .Call(
-      C_R_igraph_layout_fruchterman_reingold, graph, coords,
+      R_igraph_layout_fruchterman_reingold, graph, coords,
       niter, start.temp, weights, minx, maxx, miny, maxy, grid
     )
   } else {
     res <- .Call(
-      C_R_igraph_layout_fruchterman_reingold_3d, graph, coords,
+      R_igraph_layout_fruchterman_reingold_3d, graph, coords,
       niter, start.temp, weights, minx, maxx, miny, maxy,
       minz, maxz
     )
@@ -1168,10 +1173,10 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
   temp.min <- as.numeric(temp.min)
   temp.init <- as.numeric(temp.init)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_layout_gem, graph, coords, use.seed, maxiter,
+    R_igraph_layout_gem, graph, coords, use.seed, maxiter,
     temp.max, temp.min, temp.init
   )
 
@@ -1245,9 +1250,9 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
   spring.constant <- as.double(spring.constant)
   max.sa.movement <- as.double(max.sa.movement)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_layout_graphopt, graph, niter, charge, mass,
+    R_igraph_layout_graphopt, graph, niter, charge, mass,
     spring.length, spring.constant, max.sa.movement, start
   )
 }
@@ -1374,16 +1379,16 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
     warning("Argument `coolexp' is deprecated and has no effect")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   if (dim == 2) {
     res <- .Call(
-      C_R_igraph_layout_kamada_kawai, graph, coords, maxiter,
+      R_igraph_layout_kamada_kawai, graph, coords, maxiter,
       epsilon, kkconst, weights, minx, maxx, miny, maxy
     )
   } else {
     res <- .Call(
-      C_R_igraph_layout_kamada_kawai_3d, graph, coords, maxiter,
+      R_igraph_layout_kamada_kawai_3d, graph, coords, maxiter,
       epsilon, kkconst, weights, minx, maxx, miny, maxy, minz,
       maxz
     )
@@ -1447,9 +1452,9 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
     root <- as.igraph.vs(graph, root) - 1
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_layout_lgl, graph, as.double(maxiter),
+    R_igraph_layout_lgl, graph, as.double(maxiter),
     as.double(maxdelta), as.double(area), as.double(coolexp),
     as.double(repulserad), as.double(cellsize), root
   )
@@ -1522,9 +1527,9 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
   if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
   dim <- as.integer(dim)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_layout_mds, graph, dist, dim)
+  res <- .Call(R_igraph_layout_mds, graph, dist, dim)
 
   res
 }
@@ -1760,10 +1765,10 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
   }
   attributes <- igraph.match.arg(attributes)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_layout_sugiyama, graph, layers, hgap,
+    R_igraph_layout_sugiyama, graph, layers, hgap,
     vgap, maxiter, weights
   )
 
@@ -1927,9 +1932,9 @@ merge_coords <- function(graphs, layouts, method = "dla") {
     stop("Not a graph object")
   }
   if (method == "dla") {
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      C_R_igraph_layout_merge_dla,
+      R_igraph_layout_merge_dla,
       graphs, layouts
     )
   } else {

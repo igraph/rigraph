@@ -64,7 +64,7 @@
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph(c(1, 2, 1, 2, 3, 3))
+#' g <- make_graph(c(1, 2, 1, 2, 3, 3))
 #' is_simple(g)
 #' is_simple(simplify(g, remove.loops = FALSE))
 #' is_simple(simplify(g, remove.multiple = FALSE))
@@ -89,9 +89,9 @@ simplify_and_colorize <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_simplify_and_colorize, graph)
+  res <- .Call(R_igraph_simplify_and_colorize, graph)
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

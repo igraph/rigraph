@@ -96,9 +96,9 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   }
   fillin <- as.logical(fillin)
   newgraph <- as.logical(newgraph)
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    C_R_igraph_is_chordal, graph, alpha, alpham1,
+    R_igraph_is_chordal, graph, alpha, alpham1,
     fillin, newgraph
   )
   if (fillin) {

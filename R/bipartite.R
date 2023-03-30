@@ -113,10 +113,10 @@ bipartite_projection <- function(graph, types = NULL,
     warning("`probe1' ignored if only one projection is requested")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
   res <- .Call(
-    C_R_igraph_bipartite_projection, graph, types,
+    R_igraph_bipartite_projection, graph, types,
     as.integer(probe1), which
   )
   if (remove.type) {
@@ -193,4 +193,4 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' bipartite_mapping(g3)
 #' @family bipartite
 #' @export
-bipartite_mapping <- bipartite_mapping_impl
+bipartite_mapping <- is_bipartite_impl

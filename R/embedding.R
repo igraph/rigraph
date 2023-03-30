@@ -90,7 +90,7 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-embed_adjacency_matrix <- embed_adjacency_matrix_impl
+embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -230,7 +230,7 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-embed_laplacian_matrix <- embed_laplacian_matrix_impl
+embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 
 
 #' Sample vectors uniformly from the surface of a sphere
@@ -268,9 +268,9 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_sample_sphere_surface, dim, n, radius, positive)
+  res <- .Call(R_igraph_sample_sphere_surface, dim, n, radius, positive)
 
   res
 }
@@ -310,9 +310,9 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_sample_sphere_volume, dim, n, radius, positive)
+  res <- .Call(R_igraph_sample_sphere_volume, dim, n, radius, positive)
 
   res
 }
@@ -345,9 +345,9 @@ sample_dirichlet <- function(n, alpha) {
   n <- as.integer(n)
   alpha <- as.numeric(alpha)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_sample_dirichlet, n, alpha)
+  res <- .Call(R_igraph_sample_dirichlet, n, alpha)
 
   res
 }

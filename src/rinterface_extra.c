@@ -2375,6 +2375,24 @@ igraph_attribute_table_t *R_igraph_attribute_oldtable;
 /* borrowed from IGraph/M, thanks to @szhorvat */
 
 static char R_igraph_error_reason[4096];
+static int R_igraph_errors_count = 0;
+
+static char R_igraph_warning_reason[4096];
+static int R_igraph_warnings_count = 0;
+
+void R_igraph_error() {
+  R_igraph_errors_count = 0;
+  Rf_error("%s", R_igraph_error_reason);
+}
+
+void R_igraph_warning() {
+  if (R_igraph_warnings_count > 0) {
+    int count = R_igraph_warnings_count;
+    R_igraph_warnings_count = 0;
+
+    Rf_warning("%s", R_igraph_warning_reason);
+  }
+}
 
 static inline int is_punctuated(const char *str) {
   const size_t len = strlen(str);
@@ -2408,25 +2426,28 @@ void R_igraph_error_handler(const char *reason, const char *file,
 
   /* We are not supposed to touch 'reason' after we have called
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
-   * IGRAPH_FINALLY_FREE() can then clean it up. Since error() calls longjmp(),
-   * we cannot do anything after calling error() either. Therefore, we make a
-   * copy of 'reason' first into a statically allocated buffer. */
-  strncpy(R_igraph_error_reason, reason, sizeof(R_igraph_error_reason));
-  R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
+   * IGRAPH_FINALLY_FREE() can then clean it up. */
+
+  if (R_igraph_errors_count == 0) {
+    snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
+      "At %s:%i : %s%s %s", file, line, reason,
+      maybe_add_punctuation(reason, ","),
+      igraph_strerror(igraph_errno));
+    R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
+  }
+  R_igraph_errors_count++;
 
   IGRAPH_FINALLY_FREE();
-
-  error(
-    "At %s:%i : %s%s %s", file, line, R_igraph_error_reason,
-    maybe_add_punctuation(R_igraph_error_reason, ","),
-    igraph_strerror(igraph_errno)
-  );
-
 }
 
 void R_igraph_warning_handler(const char *reason, const char *file,
                               int line, int igraph_errno) {
-  warning("At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+  if (R_igraph_warnings_count == 0) {
+    snprintf(R_igraph_warning_reason, sizeof(R_igraph_warning_reason),
+      "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
+    R_igraph_warning_reason[sizeof(R_igraph_warning_reason) - 1] = 0;
+  }
+  R_igraph_warnings_count++;
 }
 
 extern int R_interrupts_pending;
@@ -8193,7 +8214,7 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
   igraph_vector_t vp;
   igraph_vector_t res;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t error=LOGICAL(perror)[0];
+  igraph_bool_t err=LOGICAL(perror)[0];
   igraph_bool_t multi=LOGICAL(pmulti)[0];
   SEXP result;
 
@@ -8203,9 +8224,9 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
 
   if (multi) {
     igraph_get_eids_multi(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed,
-                          error);
+                          err);
   } else {
-    IGRAPH_R_CHECK(igraph_get_eids(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed, error));
+    IGRAPH_R_CHECK(igraph_get_eids(&g, &res, /*pairs=*/ &vp, /*path=*/ 0, directed, err));
   }
 
   PROTECT(result=R_igraph_vector_to_SEXP(&res));

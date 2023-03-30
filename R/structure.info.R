@@ -48,8 +48,12 @@
 are_adjacent <- function(graph, v1, v2) {
   ensure_igraph(graph)
   on.exit(.Call(C_R_igraph_finalizer))
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+  on.exit(.Call(R_igraph_finalizer))
   .Call(
-    C_R_igraph_are_connected, graph, as.igraph.vs(graph, v1) - 1,
+    R_igraph_are_connected, graph, as.igraph.vs(graph, v1) - 1,
     as.igraph.vs(graph, v2) - 1
   )
 }

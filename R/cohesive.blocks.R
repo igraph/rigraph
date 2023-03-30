@@ -249,9 +249,9 @@ cohesive_blocks <- function(graph, labels = TRUE) {
   # Argument checks
   ensure_igraph(graph)
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_cohesive_blocks, graph)
+  res <- .Call(R_igraph_cohesive_blocks, graph)
   class(res) <- "cohesiveBlocks"
   if (labels && "name" %in% vertex_attr_names(graph)) {
     res$labels <- V(graph)$name
