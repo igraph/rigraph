@@ -31,7 +31,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(C_R_igraph_mybracket, graph, 10L)
+    .Call(R_igraph_mybracket, graph, 10L)
   } else {
     NULL
   }
@@ -85,7 +85,7 @@ get_es_graph_id <- get_vs_graph_id <- function(seq) {
 #' @export
 identical_graphs <- function(g1, g2, attrs = TRUE) {
   stopifnot(is_igraph(g1), is_igraph(g2))
-  .Call(C_R_igraph_identical_graphs, g1, g2, as.logical(attrs))
+  .Call(R_igraph_identical_graphs, g1, g2, as.logical(attrs))
 }
 
 add_vses_graph_ref <- function(vses, graph) {
@@ -319,15 +319,15 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
     res <- seq_len(ec)
     res <- set_complete_iterator(res)
   } else if (!is.null(P)) {
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      C_R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
+      R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
       as.logical(directed)
     ) + 1
   } else {
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      C_R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
+      R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
       as.logical(directed)
     ) + 1
   }
@@ -525,9 +525,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(v)) {
       v <- which(v)
     }
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
       as.numeric(mode)
     )
     tmp[as.numeric(x)]
@@ -556,9 +556,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -576,9 +576,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -592,9 +592,9 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     if (is.logical(e)) {
       e <- which(e)
     }
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -873,9 +873,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 
   .inc <- function(v) {
     ## TRUE iff the edge is incident to at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -890,9 +890,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   .from <- function(v) {
     ## TRUE iff the edge originates from at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -903,9 +903,9 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   }
   .to <- function(v) {
     ## TRUE iff the edge points to at least one vertex in v
-    on.exit(.Call(C_R_igraph_finalizer))
+    on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      C_R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -932,8 +932,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
         .to = .to, to = to,
-        .igraph.from = list(.Call(C_R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
-        .igraph.to = list(.Call(C_R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
+        .igraph.from = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
+        .igraph.to = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
         .igraph.graph = list(graph),
         `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
         .env = env,

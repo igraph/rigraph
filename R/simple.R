@@ -91,9 +91,9 @@ simplify_and_colorize <- function(graph) {
     stop("Not a graph object")
   }
 
-  on.exit(.Call(C_R_igraph_finalizer))
+  on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(C_R_igraph_simplify_and_colorize, graph)
+  res <- .Call(R_igraph_simplify_and_colorize, graph)
 
   V(res$res)$color <- res$vertex_color
   E(res$res)$color <- res$edge_color

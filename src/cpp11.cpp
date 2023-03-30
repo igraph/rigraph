@@ -769,11 +769,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_write_graph_ncol",                           (DL_FUNC) &R_igraph_write_graph_ncol,                            4},
     {"R_igraph_write_graph_pajek",                          (DL_FUNC) &R_igraph_write_graph_pajek,                           2},
     {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
+    {"_igraph_mean_cpp",                                    (DL_FUNC) &_igraph_mean_cpp,                                     1},
     {"make_lazy",                                           (DL_FUNC) &make_lazy,                                            3},
     {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},
     {"promise_env_",                                        (DL_FUNC) &promise_env_,                                         1},
     {"promise_expr_",                                       (DL_FUNC) &promise_expr_,                                        1},
-    {"_igraph_mean_cpp",                                    (DL_FUNC) &_igraph_mean_cpp,                                     1},
     {NULL, NULL, 0}
 };
 }
