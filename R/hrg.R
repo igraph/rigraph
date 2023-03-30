@@ -482,7 +482,7 @@ as.hclust.igraphHRG <- function(x, ...) {
     map2[i] <- -mr[1]
   }
   n <- nrow(merge) + 1
-  order <- .Call(R_igraph_hcass2,
+  order <- igraph_hcass2(
     n = as.integer(n),
     ia = as.integer(mergeInto[, 1]),
     ib = as.integer(mergeInto[, 2])
