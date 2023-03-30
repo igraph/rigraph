@@ -346,7 +346,7 @@ as.igraph.igraphHRG <- function(x, ...) {
   ll <- ifelse(x$left < 0, -x$left + ovc, x$left + 1)
   rr <- ifelse(x$right < 0, -x$right + ovc, x$right + 1)
   edges <- c(rbind(seq_len(ivc) + ovc, ll), rbind(seq_len(ivc) + ovc, rr))
-  res <- graph(edges)
+  res <- make_graph(edges)
 
   V(res)$name <- c(
     if (!is.null(x$names)) x$names else as.character(1:ovc),

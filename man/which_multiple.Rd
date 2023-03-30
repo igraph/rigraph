@@ -54,7 +54,7 @@ original multiplicity as an edge attribute.
 \examples{
 
 # Loops
-g <- graph(c(1, 1, 2, 2, 3, 3, 4, 5))
+g <- make_graph(c(1, 1, 2, 2, 3, 3, 4, 5))
 any_loop(g)
 which_loop(g)
 

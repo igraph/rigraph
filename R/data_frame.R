@@ -245,12 +245,12 @@ graph_from_edgelist <- function(el, directed = TRUE) {
       names <- unique(as.character(t(el)))
       ids <- seq(names)
       names(ids) <- names
-      res <- graph(unname(ids[t(el)]), directed = directed)
+      res <- make_graph(unname(ids[t(el)]), directed = directed)
       rm(ids)
       V(res)$name <- names
     } else {
       ## normal edge list
-      res <- graph(t(el), directed = directed)
+      res <- make_graph(t(el), directed = directed)
     }
   }
 

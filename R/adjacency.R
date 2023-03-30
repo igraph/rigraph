@@ -239,7 +239,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
     res <- add_edges(res, edges = t(as.matrix(el[, 1:2])), attr = weight)
   } else {
     edges <- unlist(apply(el, 1, function(x) rep(unname(x[1:2]), x[3])))
-    res <- graph(n = vc, edges, directed = (mode == "directed"))
+    res <- make_graph(n = vc, edges, directed = (mode == "directed"))
   }
   res
 }

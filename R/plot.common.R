@@ -197,7 +197,7 @@ i.postprocess.layout <- function(maybe_layout) {
 #' @keywords graphs
 #' @examples
 #'
-#' g <- graph(c(
+#' g <- make_graph(c(
 #'   0, 1, 1, 0, 1, 2, 1, 3, 1, 3, 1, 3,
 #'   2, 3, 2, 3, 2, 3, 2, 3, 0, 1
 #' ) + 1)

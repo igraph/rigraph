@@ -169,7 +169,7 @@ pause()
 ### Graphs
 ## Create a small graph, A->B, A->C, B->C, C->E, D
 ## A=1, B=2, C=3, D=4, E=5
-g <- graph(c(1, 2, 1, 3, 2, 3, 3, 5), n = 5)
+g <- make_graph(c(1, 2, 1, 3, 2, 3, 3, 5), n = 5)
 
 pause()
 
@@ -180,7 +180,7 @@ pause()
 
 ### Create an undirected graph as well
 ## A--B, A--C, B--C, C--E, D
-g2 <- graph(c(1, 2, 1, 3, 2, 3, 3, 5), n = 5, dir = FALSE)
+g2 <- make_graph(c(1, 2, 1, 3, 2, 3, 3, 5), n = 5, dir = FALSE)
 g2
 
 pause()
@@ -215,7 +215,7 @@ as.directed(as.undirected(g))
 pause()
 
 ### Multiple edges
-g <- graph(c(1, 2, 1, 2, 1, 3, 2, 3, 4, 5), n = 5)
+g <- make_graph(c(1, 2, 1, 2, 1, 3, 2, 3, 4, 5), n = 5)
 g
 
 is_simple(g)
@@ -230,7 +230,7 @@ is_simple(g)
 pause()
 
 ### Loop edges
-g <- graph(c(1, 1, 1, 2, 1, 3, 2, 3, 4, 5), n = 5)
+g <- make_graph(c(1, 1, 1, 2, 1, 3, 2, 3, 4, 5), n = 5)
 g
 
 is_simple(g)

@@ -99,10 +99,10 @@ matrices unless you really mean to do so.
 \examples{
 
 # Generate some test data from Bonacich, 1987:
-g.c <- graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-g.d <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
-g.e <- graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
-g.f <- graph(
+g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
+g.d <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 3, 6, 4, 7), dir = FALSE)
+g.e <- make_graph(c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 3, 7, 3, 8, 4, 9, 4, 10), dir = FALSE)
+g.f <- make_graph(
   c(1, 2, 1, 3, 1, 4, 2, 5, 2, 6, 2, 7, 3, 8, 3, 9, 3, 10, 4, 11, 4, 12, 4, 13),
   dir = FALSE
 )

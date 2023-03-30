@@ -47,7 +47,7 @@ test_that("make_graph gives warning for ignored arguments", {
 test_that("a make_graph bug is fixed", {
   E <- cbind(1, 3)
   d <- 3
-  g <- graph(as.vector(t(E)), d, FALSE)
+  g <- make_graph(as.vector(t(E)), d, FALSE)
 
   expect_equal(vcount(g), 3)
   expect_equal(ecount(g), 1)
