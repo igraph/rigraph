@@ -9525,7 +9525,7 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
 /*                                                               C */
 /* ---------------------------------------------------------------C */
 
-int igraphhcass2(int n, int *ia, int *ib,
+int igraphhcass2(int n, const int *ia, const int *ib,
 		 int *iorder, int *iia,
 		 int *iib) {
 
