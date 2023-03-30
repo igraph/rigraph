@@ -402,7 +402,7 @@ EIGENWHICH:
     DEFAULT:
         Default: list()
     INCONV: |-
-        %I%.tmp <- eigen_defaults;
+        %I%.tmp <- eigen_defaults();
         %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp
 
 EIGENWHICHPOS:
