@@ -2070,7 +2070,7 @@ spectrum_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_a
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
     "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
     "comp_arpack"=5)
-  which.tmp <- eigen_defaults;
+  which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
 

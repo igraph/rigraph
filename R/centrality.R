@@ -681,11 +681,13 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @export
 spectrum <- spectrum_impl
 
-eigen_defaults <- list(
-  pos = "LM", howmany = 1L, il = -1L, iu = -1L,
-  vl = -Inf, vu = Inf, vestimate = 0L,
-  balance = "none"
-)
+eigen_defaults <- function() {
+  list(
+    pos = "LM", howmany = 1L, il = -1L, iu = -1L,
+    vl = -Inf, vu = Inf, vestimate = 0L,
+    balance = "none"
+  )
+}
 
 #' Find Eigenvector Centrality Scores of Network Positions
 #'
