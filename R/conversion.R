@@ -342,7 +342,7 @@ as_edgelist <- function(graph, names = TRUE) {
 #' plot(ug3, layout = layout_in_circle, edge.label = E(ug3)$weight)
 #' }
 #'
-#' g4 <- graph(c(
+#' g4 <- make_graph(c(
 #'   1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 4,
 #'   6, 7, 7, 6, 7, 8, 7, 8, 8, 7, 8, 9, 8, 9,
 #'   9, 8, 9, 8, 9, 9, 10, 10, 10, 10

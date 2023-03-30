@@ -127,7 +127,7 @@ test_that("General scan-stat works, US, scan-1, weighted, directed", {
 ## TODO
 
 test_that("Issue 18 is resolved", {
-  g <- graph(c(1, 2, 2, 1, 1, 3, 3, 1, 2, 4, 3, 4, 3, 5, 5, 3, 4, 5, 5, 4))
+  g <- make_graph(c(1, 2, 2, 1, 1, 3, 3, 1, 2, 4, 3, 4, 3, 5, 5, 3, 4, 5, 5, 4))
   expect_that(local_scan(g, mode = "all"), equals(c(4, 3, 7, 6, 5)))
   expect_that(local_scan(g, mode = "out"), equals(c(4, 3, 7, 2, 5)))
   expect_that(local_scan(g, mode = "in"), equals(c(4, 2, 4, 6, 5)))
@@ -142,7 +142,7 @@ test_that("Issue 18 is really resolved", {
     15, 18, 16, 5, 16, 10, 16, 13, 16, 18, 17, 5
   )
 
-  g <- graph(el)
+  g <- make_graph(el)
 
   sc1 <- sapply(graph.neighborhood(g, order = 1, mode = "all"), ecount)
   sc2 <- local_scan(graph.us = g, mode = "all", k = 1)

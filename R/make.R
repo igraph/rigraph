@@ -940,7 +940,7 @@ graph_from_literal_i <- function(mf) {
 
   ids <- seq(along.with = v)
   names(ids) <- v
-  res <- graph(unname(ids[edges]), n = length(v), directed = directed)
+  res <- make_graph(unname(ids[edges]), n = length(v), directed = directed)
   if (simplify) res <- simplify(res)
   res <- set_vertex_attr(res, "name", value = v)
   res

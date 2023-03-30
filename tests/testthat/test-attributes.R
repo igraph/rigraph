@@ -9,7 +9,7 @@ test_that("assigning and querying attributes work", {
 })
 
 test_that("brackering works", {
-  g <- graph(c(1, 2, 1, 3, 3, 4))
+  g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
   g <- set_graph_attr(g, name = "name", "foo")
@@ -38,7 +38,7 @@ test_that("brackering works", {
 test_that("brackering works with a function", {
   library(testthat)
 
-  g <- graph(c(1, 2, 1, 3, 3, 4))
+  g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
   g <- set_graph_attr(g, name = "name", "foo")
@@ -68,7 +68,7 @@ test_that("brackering works with a function", {
 })
 
 test_that("brackering works with shortcuts", {
-  g <- graph(c(1, 2, 1, 3, 3, 4))
+  g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
   g <- set_graph_attr(g, name = "name", "foo")
@@ -94,7 +94,7 @@ test_that("brackering works with shortcuts", {
 ## TODO: subsetting
 
 test_that("we can query all attributes at once", {
-  g <- graph(c(1, 2, 1, 3, 2, 4))
+  g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   expect_equal(graph_attr(g), structure(list(), .Names = character(0)))
   expect_equal(vertex_attr(g), list())
@@ -113,7 +113,7 @@ test_that("we can query all attributes at once", {
 })
 
 test_that("we can query single attributes with the generic functions", {
-  g <- graph(c(1, 2, 1, 3, 2, 4))
+  g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   g$name <- "toy"
   g$layout <- cbind(1:4, 1:4)
@@ -131,7 +131,7 @@ test_that("we can query single attributes with the generic functions", {
 })
 
 test_that("we can query a subset of vertices", {
-  g <- graph(c(1, 2, 1, 3, 2, 4))
+  g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
   V(g)$color <- as.list(rainbow(4))
@@ -148,7 +148,7 @@ test_that("we can query a subset of vertices", {
 })
 
 test_that("we can set all attributes at once", {
-  g <- graph(c(1, 2, 1, 3, 2, 4))
+  g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   g$name <- "toy"
   g$layout <- cbind(1:4, 1:4)
@@ -157,7 +157,7 @@ test_that("we can set all attributes at once", {
   E(g)$weight <- 1:3
   E(g)$label <- as.list(LETTERS[1:3])
 
-  g2 <- graph(c(2, 1, 3, 1, 4, 1))
+  g2 <- make_graph(c(2, 1, 3, 1, 4, 1))
 
   graph_attr(g2) <- graph_attr(g)
   expect_equal(graph_attr(g2), graph_attr(g))
@@ -170,14 +170,14 @@ test_that("we can set all attributes at once", {
 })
 
 test_that("we can set all attributes some vertices/edges", {
-  g <- graph(c(1, 2, 1, 3, 2, 4))
+  g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   V(g)$name <- letters[1:4]
   V(g)$color <- as.list(rainbow(4))
   E(g)$weight <- 1:3
   E(g)$label <- as.list(LETTERS[1:3])
 
-  g2 <- graph(c(2, 1, 3, 1, 4, 1, 2, 5, 3, 6))
+  g2 <- make_graph(c(2, 1, 3, 1, 4, 1, 2, 5, 3, 6))
 
   vertex_attr(g2, index = c(1, 2, 4, 5)) <- vertex_attr(g)
   expect_equal(vertex_attr(g2), list(name = c(
@@ -206,7 +206,7 @@ test_that("cannot use vs/es from another graph", {
 })
 
 test_that("attribute combinations handle errors correctly", {
-  g <- graph(c(1, 2, 2, 1))
+  g <- make_graph(c(1, 2, 2, 1))
   E(g)$weight <- c("a", "b")
   expect_error(as.undirected(g, edge.attr.comb = list(weight = "sum")), "invalid 'type'")
   expect_error(as.undirected(g, edge.attr.comb = list(weight = sum)), "invalid 'type'")

@@ -68,7 +68,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
     }
 
     edges <- unlist(apply(el, 1, function(x) rep(unname(x[1:2]), x[3])))
-    res <- graph(n = n1 + n2, edges, directed = directed)
+    res <- make_graph(n = n1 + n2, edges, directed = directed)
   }
 
   set_vertex_attr(res, "type", value = c(rep(FALSE, n1), rep(TRUE, n2)))

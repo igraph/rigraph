@@ -72,7 +72,7 @@ function. This results almost always a complex attribute.} }
 
 \examples{
 
-g <- graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
+g <- make_graph(c(1, 2, 1, 2, 1, 2, 2, 3, 3, 4))
 E(g)$weight <- 1:5
 
 ## print attribute values with the graph

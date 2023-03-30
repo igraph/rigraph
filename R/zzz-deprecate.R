@@ -321,8 +321,6 @@ deprecated("hub.score", hub_score)
 deprecated("igraph.arpack.default", arpack_defaults)
 #' @export igraph.console
 deprecated("igraph.console", console)
-#' @export igraph.eigen.default
-deprecated("igraph.eigen.default", eigen_defaults)
 #' @export igraph.sample
 deprecated("igraph.sample", sample_seq)
 #' @export igraph.version
