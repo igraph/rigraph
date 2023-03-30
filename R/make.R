@@ -1217,7 +1217,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 #' g <- sample_tree(100, method = "lerw")
 #'
 #' @export
-sample_tree <- sample_tree_impl
+sample_tree <- tree_game_impl
 
 #' @rdname make_tree
 #' @param ... Passed to `make_tree()` or `sample_tree()`.
@@ -1249,7 +1249,7 @@ tree <- function(...) constructor_spec(list(make = make_tree, sample = sample_tr
 #' to_prufer(g)
 #' @family trees
 #' @export
-make_from_prufer <- make_from_prufer_impl
+make_from_prufer <- from_prufer_impl
 
 #' @rdname make_from_prufer
 #' @param ... Passed to `make_from_prufer()`
@@ -1698,7 +1698,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' g2 <- make_graph("Franklin")
 #' isomorphic(g1, g2)
 #' @export
-graph_from_lcf <- graph_from_lcf_impl
+graph_from_lcf <- lcf_vector_impl
 
 ## -----------------------------------------------------------------
 
@@ -1791,4 +1791,4 @@ graph_from_lcf <- graph_from_lcf_impl
 #' }
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
-realize_degseq <- realize_degseq_impl
+realize_degseq <- realize_degree_sequence_impl

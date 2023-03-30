@@ -195,4 +195,4 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' bipartite_mapping(g3)
 #' @family bipartite
 #' @export
-bipartite_mapping <- bipartite_mapping_impl
+bipartite_mapping <- is_bipartite_impl

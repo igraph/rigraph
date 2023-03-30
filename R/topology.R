@@ -337,13 +337,13 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
-graph.isomorphic.34 <- graph.isomorphic.34_impl
+graph.isomorphic.34 <- isomorphic_34_impl
 #' @export
-graph.isomorphic.bliss <- graph.isomorphic.bliss_impl
+graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
-graph.isomorphic.vf2 <- graph.isomorphic.vf2_impl
+graph.isomorphic.vf2 <- isomorphic_vf2_impl
 #' @export
-graph.subisomorphic.vf2 <- graph.subisomorphic.vf2_impl
+graph.subisomorphic.vf2 <- subisomorphic_vf2_impl
 
 #' @export
 #' @rdname isomorphic
@@ -502,7 +502,7 @@ count_isomorphisms <- function(graph1, graph2, method = "vf2", ...) {
 }
 
 #' @export
-graph.count.isomorphisms.vf2 <- graph.count.isomorphisms.vf2_impl
+graph.count.isomorphisms.vf2 <- count_isomorphisms_vf2_impl
 
 #' Count the isomorphic mappings between a graph and the subgraphs of
 #' another graph
@@ -577,7 +577,7 @@ count_subgraph_isomorphisms <- function(pattern, target,
 }
 
 #' @export
-graph.count.subisomorphisms.vf2 <- graph.count.subisomorphisms.vf2_impl
+graph.count.subisomorphisms.vf2 <- count_subisomorphisms_vf2_impl
 
 #' Calculate all isomorphic mappings between the vertices of two graphs
 #'
@@ -699,7 +699,7 @@ isomorphism_class <- function(graph, v) {
 }
 
 #' @export
-graph.isoclass <- graph.isoclass_impl
+graph.isoclass <- isoclass_impl
 
 #' Create a graph from an isomorphism class
 #'
@@ -719,7 +719,7 @@ graph.isoclass <- graph.isoclass_impl
 #'
 #' @family graph isomorphism
 #' @export
-graph_from_isomorphism_class <- graph_from_isomorphism_class_impl
+graph_from_isomorphism_class <- isoclass_create_impl
 
 
 #' Canonical permutation of a graph
@@ -838,10 +838,10 @@ canonical_permutation <- canonical_permutation_impl
 #' all(sort(E(g2)$weight) == sort(E(g)$weight))
 #' @export
 #' @family functions for manipulating graph structure
-permute <- permute_impl
+permute <- permute_vertices_impl
 
 #' @export
-graph.isomorphic <- graph.isomorphic_impl
+graph.isomorphic <- isomorphic_impl
 
 #' Number of automorphisms
 #'
@@ -903,7 +903,7 @@ graph.isomorphic <- graph.isomorphic_impl
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-count_automorphisms <- count_automorphisms_impl
+count_automorphisms <- automorphisms_impl
 
 
 #' Generating set of the automorphism group of a graph

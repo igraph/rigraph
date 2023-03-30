@@ -86,7 +86,7 @@ NULL
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-centralize <- centralize_impl
+centralize <- centralization_impl
 
 #' Centralize a graph according to the degrees of vertices
 #'
@@ -119,7 +119,7 @@ centralize <- centralize_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-centr_degree <- centr_degree_impl
+centr_degree <- centralization_degree_impl
 
 #' Theoretical maximum for degree centralization
 #'
@@ -249,7 +249,7 @@ centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRU
 #' centr_betw(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_betw_tmax(g))
 #' centr_betw(g, normalized = TRUE)$centralization
-centr_betw_tmax <- centr_betw_tmax_impl
+centr_betw_tmax <- centralization_betweenness_tmax_impl
 
 #' Centralize a graph according to the closeness of vertices
 #'
@@ -280,7 +280,7 @@ centr_betw_tmax <- centr_betw_tmax_impl
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-centr_clo <- centr_clo_impl
+centr_clo <- centralization_closeness_impl
 
 #' Theoretical maximum for closeness centralization
 #'
@@ -307,7 +307,7 @@ centr_clo <- centr_clo_impl
 #' centr_clo(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_clo_tmax(g))
 #' centr_clo(g, normalized = TRUE)$centralization
-centr_clo_tmax <- centr_clo_tmax_impl
+centr_clo_tmax <- centralization_closeness_tmax_impl
 
 #' Centralize a graph according to the eigenvector centrality of vertices
 #'
@@ -349,7 +349,7 @@ centr_clo_tmax <- centr_clo_tmax_impl
 #' g1 <- make_star(10, mode = "undirected")
 #' centr_eigen(g0)$centralization
 #' centr_eigen(g1)$centralization
-centr_eigen <- centr_eigen_impl
+centr_eigen <- centralization_eigenvector_centrality_impl
 
 #' Theoretical maximum for betweenness centralization
 #'
@@ -378,4 +378,4 @@ centr_eigen <- centr_eigen_impl
 #' centr_eigen(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
-centr_eigen_tmax <- centr_eigen_tmax_impl
+centr_eigen_tmax <- centralization_eigenvector_centrality_tmax_impl

@@ -90,7 +90,7 @@
 #' embed <- embed_adjacency_matrix(RDP, 5)
 #' @family embedding
 #' @export
-embed_adjacency_matrix <- embed_adjacency_matrix_impl
+embed_adjacency_matrix <- adjacency_spectral_embedding_impl
 
 
 #' Dimensionality selection for singular values using profile likelihood.
@@ -230,7 +230,7 @@ dim_select <- dim_select_impl
 #' RDP <- sample_dot_product(lpvs)
 #' embed <- embed_laplacian_matrix(RDP, 5)
 #' @family embedding
-embed_laplacian_matrix <- embed_laplacian_matrix_impl
+embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 
 
 #' Sample vectors uniformly from the surface of a sphere

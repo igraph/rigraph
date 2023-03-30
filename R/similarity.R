@@ -71,8 +71,8 @@ similarity <- function(graph, vids = V(graph),
 }
 
 #' @export
-similarity.jaccard <- similarity.jaccard_impl
+similarity.jaccard <- similarity_jaccard_impl
 #' @export
-similarity.dice <- similarity.dice_impl
+similarity.dice <- similarity_dice_impl
 #' @export
-similarity.invlogweighted <- similarity.invlogweighted_impl
+similarity.invlogweighted <- similarity_inverse_log_weighted_impl

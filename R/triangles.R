@@ -70,9 +70,9 @@
 #' @family triangles
 #' @export
 #' @rdname count_triangles
-triangles <- triangles_impl
+triangles <- list_triangles_impl
 
 #' @export
 #' @family triangles
 #' @rdname count_triangles
-count_triangles <- count_triangles_impl
+count_triangles <- adjacent_triangles_impl

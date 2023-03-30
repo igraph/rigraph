@@ -679,7 +679,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- spectrum_impl
+spectrum <- eigen_adjacency_impl
 
 eigen_defaults <- function() {
   list(
@@ -774,7 +774,7 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-eigen_centrality <- eigen_centrality_impl
+eigen_centrality <- eigenvector_centrality_impl
 
 
 #' Strength or weighted vertex degree
@@ -1008,7 +1008,7 @@ authority_score <- authority_score_impl
 #' page_rank(g3, personalized = reset)$vector
 #' @family centrality
 #' @export
-page_rank <- page_rank_impl
+page_rank <- personalized_pagerank_impl
 
 #' Harmonic centrality of vertices
 #'
@@ -1055,7 +1055,7 @@ page_rank <- page_rank_impl
 #' harmonic_centrality(g2, mode = "out")
 #' harmonic_centrality(g %du% make_full_graph(5), mode = "all")
 #'
-harmonic_centrality <- harmonic_centrality_impl
+harmonic_centrality <- harmonic_centrality_cutoff_impl
 
 
 
