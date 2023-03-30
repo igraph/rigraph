@@ -1,4 +1,12 @@
 # ensure_igraph() works
 
-    Not a graph object.
+    Must provide a graph object (provided wrong object type).
+
+---
+
+    Must provide a graph object (provided wrong object type).
+
+---
+
+    Must provide a graph object (provided `NULL`).
 

@@ -5,7 +5,7 @@ ensure_igraph <- function(graph) {
   }
 
   if (is.null(graph)) {
-    cli::cli_abort("Must provide a graph object  (provided {.code NULL}).")
+    cli::cli_abort("Must provide a graph object (provided {.code NULL}).")
   }
 
   if (!is_igraph(graph)) {
