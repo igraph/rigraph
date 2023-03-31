@@ -21,15 +21,18 @@
       
       $father
       + 3/3 vertices, named:
-      [1] a b c
+         a    b    c 
+      <NA> <NA>    b 
       
       $pred
       + 3/3 vertices, named:
-      [1] a b c
+         a    b    c 
+      <NA> <NA>    b 
       
       $succ
       + 3/3 vertices, named:
-      [1] a b c
+         a    b    c 
+      <NA>    c <NA> 
       
       $dist
         a   b   c 

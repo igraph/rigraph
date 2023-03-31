@@ -1262,13 +1262,18 @@ print.igraph.vs <- function(x,
                             id = igraph_opt("print.id"),
                             ...) {
   graph <- get_vs_graph(x)
+  if (!is.null(graph)) {
+    vertices <- V(graph)
+  } else {
+    vertices <- NULL
+  }
   len <- length(x)
   gid <- graph_id(x)
 
   title <- "+ " %+% chr(len) %+% "/" %+%
-    (if (is.null(graph)) "?" else chr(vcount(graph))) %+%
+    (if (is.null(vertices)) "?" else chr(length(vertices))) %+%
     (if (len == 1) " vertex" else " vertices") %+%
-    (if (!is.null(names(x))) ", named" else "") %+%
+    (if (!is.null(names(vertices))) ", named" else "") %+%
     (if (isTRUE(id) && !is.na(gid)) paste(", from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(graph)) " (deleted)" else "") %+%
     ":\n"
@@ -1288,7 +1293,14 @@ print.igraph.vs <- function(x,
   } else {
     ## Single bracket
 
-    x2 <- if (!is.null(names(x))) names(x) else as.vector(x)
+    if (!is.null(names(vertices))) {
+      x2 <- names(vertices)[as.vector(x)]
+      if (!is.null(names(x)) && !identical(names(x), x2)) {
+        names(x2) <- names(x)
+      }
+    } else {
+      x2 <- as.vector(x)
+    }
     if (length(x2)) {
       if (is.logical(full) && full) {
         print(x2, quote = FALSE)

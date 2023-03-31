@@ -84,8 +84,8 @@
     Code
       vs
     Output
-      + 10/? vertices, named (deleted):
-       [1] a b c d e f g h i j
+      + 10/? vertices (deleted):
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       es
     Output
