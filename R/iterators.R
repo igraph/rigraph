@@ -25,13 +25,13 @@
 ###################################################################
 
 update_es_ref <- update_vs_ref <- function(graph) {
-  env <- get_vs_ref(graph)
+  env <- get_es_ref(graph)
   if (!is.null(env)) assign("me", graph, envir = env)
 }
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_mybracket, graph, 10L)
+    .Call(R_igraph_mybracket, graph, igraph_t_idx_env)
   } else {
     NULL
   }
