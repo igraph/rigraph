@@ -1020,10 +1020,11 @@ as_long_data_frame <- function(graph) {
   rownames(edg) <- seq_len(ecount(graph))
 
   ver2 <- ver
-  names(ver) <- paste0("from_", names(ver))
-  names(ver2) <- paste0("to_", names(ver2))
-
-  edg <- cbind(edg, ver[el[, 1], ], ver2[el[, 2], ])
+  if (length(ver) > 0) {
+    names(ver) <- paste0("from_", names(ver))
+    names(ver2) <- paste0("to_", names(ver2))
+    edg <- cbind(edg, ver[el[, 1], , drop = FALSE], ver2[el[, 2], , drop = FALSE])
+  }
 
   edg
 }

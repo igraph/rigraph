@@ -45,3 +45,19 @@ test_that("graph_from_data_frame works on matrices", {
   el2 <- as_data_frame(g)
   expect_that(as.data.frame(el), is_equivalent_to(el2))
 })
+
+test_that("as_long_data_frame() works correctly with and without names", {
+  expect_snapshot({
+    ring <- make_ring(3)
+    as_long_data_frame(ring)
+
+    V(ring)$name <- letters[1:3]
+    as_long_data_frame(ring)
+
+    V(ring)$score <- LETTERS[1:3]
+    as_long_data_frame(ring)
+
+    E(ring)$info <- 3:1
+    as_long_data_frame(ring)
+  })
+})
