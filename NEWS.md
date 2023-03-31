@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9015
+
+## Chore
+
+  - Cpp11 wrapper for `igraph_hcass2()` (#734).
+
+  - Remove C\_ prefix from exported functions for cpp11 compatibility (#739).
+
+  - Avoid aliases in Stimulus (#722).
+
+  - Define and use `IGRAPH_R_CHECK()` (#729).
+
+## Documentation
+
+  - Replace `graph()` with `make_graph()` in examples (#738).
+
+  - Register URL in pkgdown config (#743).
+
+## Refactoring
+
+  - Breaking change: Remove `igraph.eigen.default()` and `eigen_defaults`, introduce internal `eigen_defaults()` as a function (#741).
+
+## Breaking changes
+
+  - Breaking change: Remove `igraph.eigen.default()` and `eigen_defaults`, introduce internal `eigen_defaults()` as a function (#741).
+
+
 # igraph 1.4.1.9014
 
 ## Chore
