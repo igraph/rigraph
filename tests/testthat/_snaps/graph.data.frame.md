@@ -24,4 +24,12 @@
       1    1  2         a          A       b        B
       2    2  3         b          B       c        C
       3    1  3         a          A       c        C
+    Code
+      E(ring)$info <- 3:1
+      as_long_data_frame(ring)
+    Output
+        from to info from_name from_score to_name to_score
+      1    1  2    3         a          A       b        B
+      2    2  3    2         b          B       c        C
+      3    1  3    1         a          A       c        C
 

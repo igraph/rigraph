@@ -56,5 +56,8 @@ test_that("as_long_data_frame() works correctly with and without names", {
 
     V(ring)$score <- LETTERS[1:3]
     as_long_data_frame(ring)
+
+    E(ring)$info <- 3:1
+    as_long_data_frame(ring)
   })
 })
