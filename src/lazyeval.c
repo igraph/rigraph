@@ -16,7 +16,7 @@ SEXP promise_as_lazy(SEXP promise, SEXP env, int follow_symbols) {
     // get some symbols along the way. If the symbol is bound to a promise
     // keep going on up
     if (follow_symbols && TYPEOF(promise) == SYMSXP) {
-      SEXP obj = findVar(promise, env);
+      SEXP obj = Rf_findVar(promise, env);
       if (TYPEOF(obj) == PROMSXP) {
         promise = obj;
       }
@@ -24,16 +24,16 @@ SEXP promise_as_lazy(SEXP promise, SEXP env, int follow_symbols) {
   }
 
   // Make named list for output
-  SEXP lazy = PROTECT(allocVector(VECSXP, 2));
+  SEXP lazy = PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(lazy, 0, promise);
   SET_VECTOR_ELT(lazy, 1, env);
 
-  SEXP names = PROTECT(allocVector(STRSXP, 2));
-  SET_STRING_ELT(names, 0, mkChar("expr"));
-  SET_STRING_ELT(names, 1, mkChar("env"));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+  SET_STRING_ELT(names, 0, Rf_mkChar("expr"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("env"));
 
-  setAttrib(lazy, install("names"), names);
-  setAttrib(lazy, install("class"), PROTECT(mkString("lazy")));
+  Rf_setAttrib(lazy, Rf_install("names"), names);
+  Rf_setAttrib(lazy, Rf_install("class"), PROTECT(Rf_mkString("lazy")));
 
   UNPROTECT(3);
 
@@ -41,16 +41,16 @@ SEXP promise_as_lazy(SEXP promise, SEXP env, int follow_symbols) {
 }
 
 SEXP make_lazy(SEXP name, SEXP env, SEXP follow_symbols_) {
-  SEXP promise = PROTECT(findVar(name, env));
-  int follow_symbols = asLogical(follow_symbols_);
+  SEXP promise = PROTECT(Rf_findVar(name, env));
+  int follow_symbols = Rf_asLogical(follow_symbols_);
   SEXP ret = promise_as_lazy(promise, env, follow_symbols);
   UNPROTECT(1);
   return ret;
 }
 
 SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
-  SEXP dots = PROTECT(findVar(install("..."), env));
-  int follow_symbols = asLogical(follow_symbols_);
+  SEXP dots = PROTECT(Rf_findVar(Rf_install("..."), env));
+  int follow_symbols = Rf_asLogical(follow_symbols_);
 
   // Figure out how many elements in dots
   int n = 0;
@@ -59,8 +59,8 @@ SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
   }
 
   // Allocate list to store results
-  SEXP lazy_dots = PROTECT(allocVector(VECSXP, n));
-  SEXP names = PROTECT(allocVector(STRSXP, n));
+  SEXP lazy_dots = PROTECT(Rf_allocVector(VECSXP, n));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
 
   // Iterate through all elements of dots, converting promises into lazy exprs
   int i = 0;
@@ -76,8 +76,8 @@ SEXP make_lazy_dots(SEXP env, SEXP follow_symbols_) {
     nxt = CDR(nxt);
     i++;
   }
-  setAttrib(lazy_dots, install("names"), names);
-  setAttrib(lazy_dots, install("class"), PROTECT(mkString("lazy_dots")));
+  Rf_setAttrib(lazy_dots, Rf_install("names"), names);
+  Rf_setAttrib(lazy_dots, Rf_install("class"), PROTECT(Rf_mkString("lazy_dots")));
 
   UNPROTECT(4);
 
@@ -159,7 +159,7 @@ SEXP promise_(SEXP expr, SEXP env) {
 
 SEXP promise_expr_(SEXP prom) {
   if (TYPEOF(prom) != PROMSXP) {
-    error("prom must be a promise");
+    Rf_error("prom must be a promise");
   }
 
   return PREXPR(prom);
@@ -167,7 +167,7 @@ SEXP promise_expr_(SEXP prom) {
 
 SEXP promise_env_(SEXP prom) {
   if (TYPEOF(prom) != PROMSXP) {
-    error("prom must be a promise");
+    Rf_error("prom must be a promise");
   }
 
   return PRENV(prom);
