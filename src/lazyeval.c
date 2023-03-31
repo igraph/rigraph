@@ -1,3 +1,6 @@
+// Require R_ and Rf_ prefixes for R API
+#define R_NO_REMAP
+
 #include <R.h>
 #include <Rdefines.h>
 
