@@ -2416,7 +2416,8 @@ void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
   IGRAPH_FINALLY_FREE();
   error(
     "At %s:%i : %s%s This is an unexpected igraph error; please report this "
-    "as a bug, along with the steps to reproduce it.",
+    "as a bug, along with the steps to reproduce it.\n"
+    "Please restart your R session to avoid crashes or other surprising behavior.",
     file, line, reason, maybe_add_punctuation(reason, ".")
   );
 }
