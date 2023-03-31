@@ -109,3 +109,23 @@ test_that("BFS callback does not blow up when another igraph function is raised 
 
   expect_true(TRUE)
 })
+
+test_that("snapshot test", {
+  local_igraph_options(print.id = FALSE)
+
+  expect_snapshot({
+    g <- graph_from_literal(a -+ b -+ c)
+    bfs(
+      g,
+      root = 2,
+      mode = "out",
+      unreachable = FALSE,
+      order = TRUE,
+      rank = TRUE,
+      father = TRUE,
+      pred = TRUE,
+      succ = TRUE,
+      dist = TRUE
+    )
+  })
+})
