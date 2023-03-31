@@ -1021,7 +1021,6 @@ as_long_data_frame <- function(graph) {
 
   ver2 <- ver
   if (length(ver) > 0) {
-    # https://github.com/igraph/rigraph/issues/297
     names(ver) <- paste0("from_", names(ver))
     names(ver2) <- paste0("to_", names(ver2))
     edg <- cbind(edg, ver[el[, 1], , drop = FALSE], ver2[el[, 2], , drop = FALSE])
