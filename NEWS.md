@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9016
+
+## Bug fixes
+
+  - `as_long_data_frame()` now correctly processes vertex attributes and works with graphs without vertex attributes (#748).
+
+## Chore
+
+  - Use `R_NO_REMAP` (#749).
+
+  - Fix consistency in weakref code (#747).
+
+## Documentation
+
+  - Suggest restarting R session after fatal error (#745).
+
+
 # igraph 1.4.1.9015
 
 ## Chore
