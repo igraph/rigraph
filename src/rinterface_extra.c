@@ -2435,14 +2435,15 @@ void R_igraph_error_handler(const char *reason, const char *file,
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
    * IGRAPH_FINALLY_FREE() can then clean it up. */
 
-  if (R_igraph_errors_count == 0 || R_igraph_in_r_check != 0) {
+  if (R_igraph_errors_count == 0 || R_igraph_in_r_check == 0) {
     snprintf(R_igraph_error_reason, sizeof(R_igraph_error_reason),
       "At %s:%i : %s%s %s", file, line, reason,
       maybe_add_punctuation(reason, ","),
       igraph_strerror(igraph_errno));
     R_igraph_error_reason[sizeof(R_igraph_error_reason) - 1] = 0;
 
-    if (R_igraph_in_r_check != 0) {
+    if (R_igraph_in_r_check == 0) {
+      IGRAPH_FINALLY_FREE();
       R_igraph_error();
     }
   }
