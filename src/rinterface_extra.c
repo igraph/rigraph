@@ -2403,6 +2403,13 @@ void R_igraph_warning() {
   }
 }
 
+void R_igraph_interrupt() {
+  R_igraph_errors_count = 0;
+  // FIXME: Call into R to run
+  // stop(structure(list(message = R_igraph_error_reason), class = c("interrupt", "condition")))
+  Rf_error("%s", R_igraph_error_reason);
+}
+
 static inline int is_punctuated(const char *str) {
   const size_t len = strlen(str);
   if (len == 0) {
@@ -2488,11 +2495,7 @@ int R_igraph_interrupt_handler(void *data) {
    */
   if (R_ToplevelExec(checkInterruptFn, NULL) == FALSE) {
     IGRAPH_FINALLY_FREE();
-    /* We set R_interrupts_pending to 1 to indicate want to interrupt. */
-    R_interrupts_pending = 1;
-    R_CheckUserInterrupt();
-    /* Process was not yet interrupted, so we bail out instead */
-    IGRAPH_FATAL("Interruption failed");
+    return IGRAPH_INTERRUPTED;
   }
   return IGRAPH_SUCCESS;
 }
