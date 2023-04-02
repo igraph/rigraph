@@ -40,7 +40,6 @@ test_that("graph_from_data_frame() creates attributes for zero-row data frames (
 test_that("graph_from_data_frame works on matrices", {
   el <- cbind(1:5, 5:1, weight = 1:5)
   g <- graph_from_data_frame(el)
-  g <- delete_vertex_attr(g, "name")
   el2 <- as_data_frame(g)
   expect_that(as.data.frame(el), is_equivalent_to(el2))
 })

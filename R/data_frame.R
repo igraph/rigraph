@@ -100,16 +100,17 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) { # nocov star
 #' is returned, in a list with named entries `vertices` and `edges`.
 #'
 #' @param d A data frame containing a symbolic edge list in the first two
-#'   columns. Additional columns are considered as edge attributes.  Since
+#'   columns, as vertex names or vertex IDs.
+#    Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with
-#'   `as.data.frame`.
+#'   [as.data.frame()].
 #' @param directed Logical scalar, whether or not to create a directed graph.
 #' @param vertices A data frame with vertex metadata, or `NULL`. See
 #'   details below. Since version 0.7 this argument is coerced to a data frame
-#'   with `as.data.frame`, if not `NULL`.
+#'   with [as.data.frame()], if not `NULL`.
 #' @return An igraph graph object for `graph_from_data_frame()`, and either a
 #'   data frame or a list of two data frames named `edges` and
-#'   `vertices` for `as.data.frame`.
+#'   `vertices` for [as.data.frame()].
 #' @note For `graph_from_data_frame()` `NA` elements in the first two
 #' columns \sQuote{d} are replaced by the string \dQuote{NA} before creating
 #' the graph. This means that all `NA`s will correspond to a single
@@ -155,37 +156,61 @@ graph.data.frame <- function(d, directed = TRUE, vertices = NULL) { # nocov star
 #' @export
 graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   d <- as.data.frame(d)
-  if (!is.null(vertices)) {
+  if (is.character(vertices) || is.factor(vertices)) {
+    vertices <- data.frame(name = as.character(vertices))
+  } else if (is.matrix(vertices)) {
     vertices <- as.data.frame(vertices)
+  } else if (!is.null(vertices) && !is.data.frame(vertices)) {
+    stop("`vertices` must be a data frame or a character vector if given")
   }
 
   if (ncol(d) < 2) {
-    stop("the data frame should contain at least two columns")
+    stop("`d` should contain at least two columns")
   }
 
-  ## Handle if some elements are 'NA'
-  if (any(is.na(d[, 1:2]))) {
-    warning("In `d' `NA' elements were replaced with string \"NA\"")
-    d[, 1:2][is.na(d[, 1:2])] <- "NA"
-  }
-  if (!is.null(vertices) && any(is.na(vertices[, 1]))) {
-    warning("In `vertices[,1]' `NA' elements were replaced with string \"NA\"")
-    vertices[, 1][is.na(vertices[, 1])] <- "NA"
+  if (!is.null(vertices) && ncol(vertices) >= 1) {
+    names <- vertices$name
+    if (!is.null(names)) {
+      if (anyNA(names)) {
+        warning('Replacing `NA` in vertex names in `vertices` with the string "NA"')
+        names[is.na(names)] <- "NA"
+      }
+      if (anyDuplicated(names)) {
+        stop("Duplicate vertex names")
+      }
+    }
+  } else {
+    names <- NULL
   }
 
-  names <- unique(c(as.character(d[, 1]), as.character(d[, 2])))
-  if (!is.null(vertices)) {
-    names2 <- names
-    vertices <- as.data.frame(vertices)
-    if (ncol(vertices) < 1) {
-      stop("Vertex data frame contains no rows")
+  if (is.numeric(d[[1]]) && !is.factor(d[[1]]) && is.numeric(d[[2]]) && !is.factor(d[[2]])) {
+    edges <- rbind(d[[1]], d[[2]])
+    names <- seq_len(max(edges, 0L))
+  } else {
+    if (is.null(names)) {
+      names <- unique(c(as.character(d[[1]]), as.character(d[[2]])))
     }
-    names <- as.character(vertices[, 1])
-    if (any(duplicated(names))) {
-      stop("Duplicate vertex names")
+
+    if (is.null(vertices)) {
+      vertices <- data.frame(name = names)
+    } else if (!("name" %in% names(vertices))) {
+      vertices <- cbind(data.frame(name = names), vertices)
     }
-    if (any(!names2 %in% names)) {
-      stop("Some vertex names in edge list are not listed in vertex data frame")
+
+    name_edges <- rbind(as.character(d[[1]]), as.character(d[[2]]))
+
+    if (anyNA(name_edges)) {
+      warning('Replacing `NA` in vertex names in `d` with the string "NA"')
+      name_edges[is.na(name_edges)] <- "NA"
+    }
+
+    edges <- matrix(match(name_edges, names), nrow = 2)
+    if (anyNA(edges)) {
+      stop(
+        "Vertex name ",
+        name_edges[is.na(edges)][[1]],
+        " in edge list is not listed in vertex data frame"
+      )
     }
   }
 
@@ -193,42 +218,26 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   g <- make_empty_graph(n = 0, directed = directed)
 
   # vertex attributes
-  attrs <- list(name = names)
-  if (!is.null(vertices)) {
-    if (ncol(vertices) > 1) {
-      for (i in 2:ncol(vertices)) {
-        newval <- vertices[, i]
-        if (inherits(newval, "factor")) {
-          newval <- as.character(newval)
-        }
-        attrs[[names(vertices)[i]]] <- newval
-      }
-    }
-  }
+  vattrs <- lapply(vertices, unfactor)
 
   # add vertices
-  g <- add_vertices(g, length(names), attr = attrs)
-
-  # create edge list
-  from <- as.character(d[, 1])
-  to <- as.character(d[, 2])
-  edges <- rbind(match(from, names), match(to, names))
+  g <- add_vertices(g, length(names), attr = vattrs)
 
   # edge attributes
-  attrs <- list()
-  if (ncol(d) > 2) {
-    for (i in 3:ncol(d)) {
-      newval <- d[, i]
-      if (inherits(newval, "factor")) {
-        newval <- as.character(newval)
-      }
-      attrs[[names(d)[i]]] <- newval
-    }
-  }
+  eattrs <- lapply(d[-1:-2], unfactor)
 
   # add the edges
-  g <- add_edges(g, edges, attr = attrs)
+  g <- add_edges(g, edges, attr = eattrs)
+
   g
+}
+
+unfactor <- function(x) {
+  if (!inherits(x, "factor")) {
+    return(x)
+  }
+
+  as.character(x)
 }
 
 #' @rdname graph_from_data_frame
