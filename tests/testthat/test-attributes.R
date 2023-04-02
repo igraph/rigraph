@@ -97,8 +97,8 @@ test_that("we can query all attributes at once", {
   g <- make_graph(c(1, 2, 1, 3, 2, 4))
 
   expect_equal(graph_attr(g), structure(list(), .Names = character(0)))
-  expect_equal(vertex_attr(g), list())
-  expect_equal(edge_attr(g), list())
+  expect_equal(unname(vertex_attr(g)), list())
+  expect_equal(unname(edge_attr(g)), list())
 
   g$name <- "toy"
   g$layout <- cbind(1:4, 1:4)
