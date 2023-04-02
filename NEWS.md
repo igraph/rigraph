@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.1.9017
+
+## Bug fixes
+
+  - Use longjmp by default in functions called from the top level (#750).
+
+## Features
+
+  - Avoid longjmp for interrupts (#751).
+
+## Chore
+
+  - Use true vertex names for printing vertex sets. If a vertex set captures a relationship between vertices (e.g., the `father` component of `bfs()`), the vertex set is printed as a named vector (#754).
+
+
 # igraph 1.4.1.9016
 
 ## Bug fixes
