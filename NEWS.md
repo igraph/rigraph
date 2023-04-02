@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.2
+
+## Chore
+
+- Bool and FIXME (#755).
+
+## Refactoring
+
+- Trivial.
+
+
 # igraph 1.4.1.9017
 
 ## Bug fixes
