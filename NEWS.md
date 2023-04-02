@@ -1,14 +1,13 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9000
+
+- Internal changes only.
+
+
 # igraph 1.4.2.9000
 
-## Chore
-
-- Bool and FIXME (#755).
-
-## Refactoring
-
-- Trivial.
+- Internal changes only.
 
 
 # igraph 1.4.2
