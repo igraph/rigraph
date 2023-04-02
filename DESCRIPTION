@@ -50,13 +50,13 @@ RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut"),
-    person("Tamás", "Nepusz", , "ntamas@gmail.com", role = "aut",
+    person("Tamás", "Nepusz", , "ntamas@gmail.com", role = c("aut", "cre"),
            comment = "See also AUTHORS file."),
     person("Vincent", "Traag", role = "aut"),
     person("Szabolcs", "Horvát", , "szhorvat@gmail.com", role = "aut"),
     person("Fabio", "Zanini", , "fabio.zanini@unsw.edu.au", role = "aut"),
     person("Daniel", "Noom", role = "aut"),
-    person("Kirill", "Müller", role = c("aut", "cre"), email = "kirill@cynkra.com"),
+    person("Kirill", "Müller", role = "aut", email = "kirill@cynkra.com"),
     person("Maëlle", "Salmon", role = "ctb"),
     person("Chan Zuckerberg Initiative", role = "fnd")
   )
