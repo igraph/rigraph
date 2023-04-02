@@ -903,7 +903,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   if (what %in% c("edges", "both")) {
     el <- as_edgelist(x)
     edg <- c(
-      list(from = el[, 1]), list(to = el[, 2]),
+      list(from = el[, 1], to = el[, 2]),
       .Call(R_igraph_mybracket2, x, igraph_t_idx_attr, igraph_attr_idx_edge)
     )
     class(edg) <- "data.frame"
