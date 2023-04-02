@@ -379,7 +379,10 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
   R_igraph_attribute_add_to_preserve_list(result);
   for (i=1; i<3; i++) {
-    SET_VECTOR_ELT(result, i+1, NEW_LIST(0)); /* gal, val, eal */
+    SEXP attr = PROTECT(NEW_LIST(0));
+    SET_NAMES(attr, NEW_CHARACTER(0));
+    SET_VECTOR_ELT(result, i+1, attr); /* gal, val, eal */
+    UNPROTECT(1);
   }
   graph->attr=result;
 
