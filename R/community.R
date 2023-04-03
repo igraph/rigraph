@@ -93,10 +93,10 @@
 #' `dendrogram` object. It only works for hierarchical methods, and gives
 #' an error message to others. See [stats::dendrogram()] for details.
 #'
-#' `as.hclust` is similar to [as.dendrogram()], but converts a
+#' [stats::as.hclust()] is similar to [as.dendrogram()], but converts a
 #' hierarchical community structure to a `hclust` object.
 #'
-#' `as_phylo()` converts a hierarchical community structure to a `phylo`
+#' [ape::as.phylo()] converts a hierarchical community structure to a `phylo`
 #' object, you will need the `ape` package for this.
 #'
 #' `show_trace()` works (currently) only for communities found by the leading
@@ -121,8 +121,8 @@
 #' @aliases communities membership algorithm crossing cutat merges sizes cut_at
 #' is.hierarchical print.communities plot.communities length.communities
 #' as.dendrogram.communities as.hclust.communities code_len
-#' asPhylo asPhylo.communities showtrace code.length
-#' as_phylo as_phylo.communities show_trace is_hierarchical
+#' showtrace code.length
+#' show_trace is_hierarchical
 #' @param communities,x,object A `communities` object, the result of an
 #'   igraph community detection function.
 #' @param graph An igraph graph object, corresponding to `communities`.
@@ -669,16 +669,7 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
   as.hclust(as.dendrogram(x, hang = hang, use.modularity = use.modularity))
 }
 
-#' @rdname communities
-#' @export
-as_phylo <- function(x, ...) {
-  UseMethod("as_phylo")
-}
-
-#' @rdname communities
-#' @method as_phylo communities
-#' @export
-as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
+as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   if (!is_hierarchical(x)) {
     stop("Not a hierarchical community structure")
   }
@@ -730,7 +721,7 @@ as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
   class(obj) <- "phylo"
   ape::reorder.phylo(obj)
 }
-
+rlang::on_load(s3_register("ape::as.phylo", "communities"))
 #' @rdname communities
 #' @export
 cut_at <- function(communities, no, steps) {
@@ -2232,7 +2223,7 @@ dendPlotPhylo <- function(communities, colbar = palette(),
                           use.modularity = FALSE,
                           edge.color = "#AAAAAAFF",
                           edge.lty = c(1, 2), ...) {
-  phy <- as_phylo(communities, use.modularity = use.modularity)
+  phy <- ape::as.phylo(communities, use.modularity = use.modularity)
 
   getedges <- function(tip) {
     repeat {
