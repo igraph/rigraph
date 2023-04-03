@@ -735,7 +735,7 @@ centralization_betweenness_impl <- function(graph, directed=TRUE, normalized=TRU
 
 centralization_betweenness_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
   # Argument checks
-  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  ensure_igraph(graph, optional = TRUE)
   nodes <- as.integer(nodes)
   directed <- as.logical(directed)
 
@@ -761,7 +761,7 @@ centralization_closeness_impl <- function(graph, mode=c("out", "in", "all", "tot
 
 centralization_closeness_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", "total")) {
   # Argument checks
-  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  ensure_igraph(graph, optional = TRUE)
   nodes <- as.integer(nodes)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
 
@@ -789,7 +789,7 @@ centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, sc
 
 centralization_eigenvector_centrality_tmax_impl <- function(graph=NULL, nodes=0, directed=FALSE, scale=TRUE) {
   # Argument checks
-  if (!is.null(graph) && !is_igraph(graph)) { stop("Not a graph object") }
+  ensure_igraph(graph, optional = TRUE)
   nodes <- as.integer(nodes)
   directed <- as.logical(directed)
   scale <- as.logical(scale)

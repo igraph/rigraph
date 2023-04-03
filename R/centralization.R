@@ -153,7 +153,7 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
     warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
   }
   # Argument checks
-  ensure_igraph(graph)
+  ensure_igraph(graph, optional = TRUE)
 
   nodes <- as.integer(nodes)
   mode <- switch(igraph.match.arg(mode),
