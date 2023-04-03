@@ -107,9 +107,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
                           Mu = rep(1, length(cliques))) {
   # Argument checks
-  if (!is.igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }

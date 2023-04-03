@@ -386,9 +386,7 @@ adhesion <- function(graph, checks = TRUE) {
 #' @family flow
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_cohesion, x, as.logical(checks))

@@ -183,11 +183,7 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #' g
 delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_delete_edges, graph, as.igraph.es(graph, edges) - 1)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_delete_edges, graph, as.igraph.es(graph, edges) - 1)
 }
@@ -214,11 +210,7 @@ delete_edges <- function(graph, edges) {
 #' V(g2)
 delete_vertices <- function(graph, v) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_delete_vertices, graph, as.igraph.vs(graph, v) - 1)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_delete_vertices, graph, as.igraph.vs(graph, v) - 1)
 }
@@ -249,11 +241,7 @@ delete_vertices <- function(graph, v) {
 #'   hist()
 gsize <- function(graph) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_ecount, graph)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_ecount, graph)
 }
@@ -363,11 +351,7 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' is_directed(g2)
 is_directed <- function(graph) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_is_directed, graph)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_is_directed, graph)
 }
@@ -473,10 +457,7 @@ get.edges <- function(graph, es) {
 #'
 get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALSE) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_get_eids, graph, as.igraph.vs(graph, vp) - 1,

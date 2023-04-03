@@ -253,11 +253,6 @@ as_adj <- as_adjacency_matrix
 #' @export
 as_edgelist <- function(graph, names = TRUE) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- matrix(.Call(C_R_igraph_get_edgelist, graph, TRUE),
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
   on.exit(.Call(R_igraph_finalizer))
   res <- matrix(.Call(R_igraph_get_edgelist, graph, TRUE),
     ncol = 2
@@ -871,9 +866,7 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
 #' @family conversion
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   what <- igraph.match.arg(what)
 
   if (what %in% c("vertices", "both")) {
