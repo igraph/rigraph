@@ -116,7 +116,7 @@ disjoint_union <- function(...) {
   graphs <- unlist(recursive = FALSE, lapply(list(...), function(l) {
     if (is_igraph(l)) list(l) else l
   }))
-  purrr::walk(graphs, ensure_igraph)
+  lapply(graphs, ensure_igraph)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_disjoint_union, graphs)
@@ -185,7 +185,7 @@ disjoint_union <- function(...) {
   graphs <- unlist(recursive = FALSE, lapply(list(...), function(l) {
     if (is_igraph(l)) list(l) else l
   }))
-  purrr::walk(graphs, ensure_igraph)
+  lapply(graphs, ensure_igraph)
   if (byname != "auto" && !is.logical(byname)) {
     stop("`bynam' must be \"auto\", or logical")
   }

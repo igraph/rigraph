@@ -1924,7 +1924,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' g <- disjoint_union(graphs)
 #' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 merge_coords <- function(graphs, layouts, method = "dla") {
-  purrr::walk(graphs, ensure_igraph)
+  lapply(graphs, ensure_igraph)
   if (method == "dla") {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
