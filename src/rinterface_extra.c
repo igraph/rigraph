@@ -2389,12 +2389,12 @@ void R_igraph_set_in_r_check(bool set) {
   R_igraph_in_r_check = set;
 }
 
-void R_igraph_error() {
+void R_igraph_error(void) {
   R_igraph_errors_count = 0;
   Rf_error("%s", R_igraph_error_reason);
 }
 
-void R_igraph_warning() {
+void R_igraph_warning(void) {
   if (R_igraph_warnings_count > 0) {
     int count = R_igraph_warnings_count;
     R_igraph_warnings_count = 0;
@@ -2403,7 +2403,7 @@ void R_igraph_warning() {
   }
 }
 
-void R_igraph_interrupt() {
+void R_igraph_interrupt(void) {
   R_igraph_errors_count = 0;
   // FIXME: Call into R to run
   // stop(structure(list(message = R_igraph_error_reason), class = c("interrupt", "condition")))
