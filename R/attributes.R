@@ -118,10 +118,6 @@ set_graph_attr <- function(graph, name, value) {
 #' @export
 graph.attributes <- function(graph) {
   ensure_igraph(graph)
-  .Call(C_R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
   .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
 }
 
@@ -557,11 +553,6 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' graph_attr_names(g)
 graph_attr_names <- function(graph) {
   ensure_igraph(graph)
-
-  res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
   res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_graph)
   if (is.null(res)) {
     res <- character()
@@ -587,10 +578,6 @@ graph_attr_names <- function(graph) {
 vertex_attr_names <- function(graph) {
   ensure_igraph(graph)
 
-  res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
   res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
 
   if (is.null(res)) {
@@ -615,11 +602,6 @@ vertex_attr_names <- function(graph) {
 #' plot(g)
 edge_attr_names <- function(graph) {
   ensure_igraph(graph)
-
-  res <- .Call(C_R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
   res <- .Call(R_igraph_mybracket2_names, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
   if (is.null(res)) {
     res <- character()
