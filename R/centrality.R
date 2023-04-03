@@ -305,11 +305,13 @@ estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "al
 #' @rdname arpack
 #' @family arpack
 #' @export
-arpack_defaults <- list(
-  bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
-  ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
-  mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
-)
+arpack_defaults <- function() {
+  list(
+    bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
+    ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
+    mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
+  )
+}
 
 #' ARPACK eigenvector calculation
 #'
@@ -418,8 +420,7 @@ arpack_defaults <- list(
 #' re-orthogonalization.} } } Please see the ARPACK documentation for
 #' additional details.
 #'
-#' @aliases arpack arpack-options igraph.arpack.default arpack.unpack.complex
-#' arpack_defaults
+#' @aliases arpack arpack-options arpack.unpack.complex arpack_defaults
 #' @param func The function to perform the matrix-vector multiplication. ARPACK
 #'   requires to perform these by the user. The function gets the vector \eqn{x}
 #'   as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
@@ -499,7 +500,7 @@ arpack_defaults <- list(
 #' }
 #' @family arpack
 #' @export
-arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
+arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
   if (!is.list(options) ||
     (is.null(names(options)) && length(options) != 0)) {
@@ -508,16 +509,16 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
   if (any(names(options) == "")) {
     stop("all options must be named")
   }
-  if (any(!names(options) %in% names(arpack_defaults))) {
+  if (any(!names(options) %in% names(arpack_defaults()))) {
     stop(
       "unkown ARPACK option(s): ",
-      paste(setdiff(names(options), names(arpack_defaults)),
+      paste(setdiff(names(options), names(arpack_defaults())),
         collapse = ", "
       )
     )
   }
 
-  options.tmp <- arpack_defaults
+  options.tmp <- arpack_defaults()
   options.tmp[names(options)] <- options
   options <- options.tmp
 

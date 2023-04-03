@@ -1514,7 +1514,7 @@ layout.lgl <- function(..., params = list()) {
 #'
 #' Warning: If the graph is symmetric to the exchange of two vertices (as is the
 #' case with leaves of a tree connecting to the same parent), classical
-#' multidimensional scaling may assign the same coordinates to these vertices. 
+#' multidimensional scaling may assign the same coordinates to these vertices.
 #'
 #' This function generates the layout separately for each graph component and
 #' then merges them via [merge_coords()].
@@ -1544,7 +1544,7 @@ layout.lgl <- function(..., params = list()) {
 #' l <- layout_with_mds(g)
 #' plot(g, layout = l, vertex.label = NA, vertex.size = 3)
 layout_with_mds <- function(graph, dist = NULL, dim = 2,
-                            options = arpack_defaults) {
+                            options = arpack_defaults()) {
   # Argument checks
   if (!is_igraph(graph)) {
     stop("Not a graph object")

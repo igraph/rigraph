@@ -286,7 +286,7 @@ EDGESETLIST:
 
 ARPACKOPT:
     INCONV:
-        INOUT: '%I%.tmp <- arpack_defaults; %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp'
+        INOUT: '%I%.tmp <- arpack_defaults(); %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp'
 
 DRL_OPTIONS:
     INCONV:
@@ -424,7 +424,7 @@ PAGERANKOPT:
           if (%I1% == 0L) {
             %I% <- list(niter=1000, eps=0.001)
           } else if (%I1% == 1L) {
-            %I% <- arpack_defaults
+            %I% <- arpack_defaults()
           } else {
             %I% <- NULL
           }

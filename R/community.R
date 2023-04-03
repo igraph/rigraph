@@ -1669,7 +1669,7 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'
 cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   start = NULL,
-                                  options = arpack_defaults,
+                                  options = arpack_defaults(),
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
   # Argument checks
@@ -1688,7 +1688,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
-  options.tmp <- arpack_defaults
+  options.tmp <- arpack_defaults()
   options.tmp[names(options)] <- options
   options <- options.tmp
 

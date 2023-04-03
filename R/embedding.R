@@ -65,7 +65,7 @@
 #'   graph. This vector is added to the diagonal of the adjacency matrix.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [igraph.arpack.default].
+#'   the values given by [arpack_defaults()].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
@@ -203,7 +203,7 @@ dim_select <- dim_select_impl
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [igraph.arpack.default].
+#'   the values given by [arpack_defaults()].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent

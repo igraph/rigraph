@@ -10,7 +10,7 @@ spectrum(
   graph,
   algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"),
   which = list(),
-  options = arpack_defaults
+  options = arpack_defaults()
 )
 }
 \arguments{

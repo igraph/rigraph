@@ -6,7 +6,7 @@
 \alias{with_mds}
 \title{Graph layout by multidimensional scaling}
 \usage{
-layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults)
+layout_with_mds(graph, dist = NULL, dim = 2, options = arpack_defaults())
 
 with_mds(...)
 }
