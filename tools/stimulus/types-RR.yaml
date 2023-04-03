@@ -3,7 +3,7 @@ GRAPH:
     INCONV: ensure_igraph(%I%)
 
 GRAPH_OR_0:
-    INCONV: ensure_igraph(%I%)
+    INCONV: ensure_igraph(%I%, optional = TRUE)
 
 INTEGER:
     DEFAULT:
