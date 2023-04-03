@@ -727,11 +727,7 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @family graph layouts
 layout_on_sphere <- function(graph) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  .Call(C_R_igraph_layout_sphere, graph)
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_layout_sphere, graph)
 }
@@ -1928,9 +1924,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' g <- disjoint_union(graphs)
 #' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 merge_coords <- function(graphs, layouts, method = "dla") {
-  if (!all(sapply(graphs, is_igraph))) {
-    stop("Not a graph object")
-  }
+  purrr::walk(graphs, ensure_igraph)
   if (method == "dla") {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(

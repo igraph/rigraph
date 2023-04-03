@@ -1430,11 +1430,7 @@ feedback_arc_set <- feedback_arc_set_impl
 #'
 girth <- function(graph, circle = TRUE) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  res <- .Call(C_R_igraph_girth, graph, as.logical(circle))
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_girth, graph, as.logical(circle))
   if (igraph_opt("return.vs.es") && circle) {

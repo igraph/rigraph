@@ -153,10 +153,7 @@ each_edge <- function(prob, loops = FALSE, multiple = FALSE, mode = c("all", "ou
 
 rewire_each_edge <- function(graph, prob, loops, multiple) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_rewire_edges, graph, as.numeric(prob), as.logical(loops),
@@ -166,10 +163,7 @@ rewire_each_edge <- function(graph, prob, loops, multiple) {
 
 rewire_each_directed_edge <- function(graph, prob, loops, mode) {
   ensure_igraph(graph)
-  on.exit(.Call(C_R_igraph_finalizer))
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_rewire_directed_edges, graph, as.numeric(prob), as.logical(loops),

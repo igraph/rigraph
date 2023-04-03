@@ -1178,9 +1178,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `V<-` <- function(x, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
@@ -1199,9 +1197,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
