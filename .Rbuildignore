@@ -39,3 +39,4 @@
 ^vignettes/articles$
 ^\.zenodo.json$
 
+^AUTHORS-list\.md$
