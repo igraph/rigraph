@@ -518,9 +518,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
     )
   }
 
-  options.tmp <- arpack_defaults()
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   if (sym && complex) {
     complex <- FALSE

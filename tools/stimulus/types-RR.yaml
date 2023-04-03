@@ -286,11 +286,11 @@ EDGESETLIST:
 
 ARPACKOPT:
     INCONV:
-        INOUT: '%I%.tmp <- arpack_defaults(); %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp'
+        INOUT: '%I% <- modify_list(arpack_defaults(), %I%)'
 
 DRL_OPTIONS:
     INCONV:
-        IN: '%I%.tmp <- drl_defaults$default; %I%.tmp [names(%I%)] <- %I%; %I% <- %I%.tmp'
+        IN: '%I% <- modify_list(drl_defaults$default, %I%)'
 
 STRVECTOR: {}
 

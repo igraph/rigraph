@@ -1688,9 +1688,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
-  options.tmp <- arpack_defaults()
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

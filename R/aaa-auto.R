@@ -562,7 +562,7 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   } else {
     weights <- NULL
   }
-  options.tmp <- arpack_defaults(); options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
