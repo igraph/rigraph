@@ -237,14 +237,6 @@ reference:
   - layout.spring
   - layout.svd
   - "%>%"
-    person("Gábor", "Gábor", , "csardi.gabor@gmail.com", role = "aut"),
-    person("Tamás", "", , "ntamas@gmail.com", role = "aut",
-           comment = "See also AUTHORS file."),
-    person("Vincent", "Traag", role = "aut"),
-    person("Szabolcs", "Horvát", , "szhorvat@gmail.com", role = "aut"),
-    person("Fabio", "Zanini", , "fabio.zanini@unsw.edu.au", role = "aut"),
-    person("Daniel", "Noom", role = "aut"),
-    person("Kirill", "Müller", role = c("aut", "cre"), email = "kirill@cynkra.com"),
 
 authors:
   Gábor Csárdi:
