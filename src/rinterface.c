@@ -164,7 +164,7 @@ SEXP R_igraph_vcount(SEXP graph) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
                                         /* Call igraph */
-  c_result=  igraph_vcount(&c_graph);
+  c_result=igraph_vcount(&c_graph);
 
                                         /* Convert output */
 
@@ -2337,7 +2337,7 @@ SEXP R_igraph_centralization(SEXP scores, SEXP theoretical_max, SEXP normalized)
   c_theoretical_max=REAL(theoretical_max)[0];
   c_normalized=LOGICAL(normalized)[0];
                                         /* Call igraph */
-  c_result=  igraph_centralization(&c_scores, c_theoretical_max, c_normalized);
+  c_result=igraph_centralization(&c_scores, c_theoretical_max, c_normalized);
 
                                         /* Convert output */
 
