@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9001
+
+## Chore
+
+  - Update generated interface (#765).
+
+## Uncategorized
+
+  - Merged cran-1.4.2 into main.
+
+
 # igraph 1.4.99.9000
 
 - Internal changes only.
