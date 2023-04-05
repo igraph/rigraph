@@ -1,5 +1,7 @@
 *.o
 *.so
+*.a
 /config.h
 /config.h.in~
 /Makevars
+/include/
