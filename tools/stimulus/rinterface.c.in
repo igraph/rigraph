@@ -22,7 +22,7 @@
 */
 
 #include "igraph.h"
-#include "graph/neighbors.h"
+#include "igraph_neighborhood.h"
 
 #include "config.h"
 
