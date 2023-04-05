@@ -12,4 +12,4 @@ project(
 )
 
 set(IGRAPH_INTEGER_SIZE 32)
-add_subdirectory(cigraph)
+add_subdirectory(src/vendor/cigraph)
