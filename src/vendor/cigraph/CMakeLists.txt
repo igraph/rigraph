@@ -15,6 +15,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/etc/cmake)
 # Note that we must do this only if PROJECT_NAME is not set at this point. If
 # it is set, it means that igraph is being used as a subproject of another
 # project.
+message(${PROJECT_NAME})
 if(NOT PROJECT_NAME)
   include(BuildType)
 endif()
