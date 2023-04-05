@@ -22,7 +22,7 @@
 */
 
 #include "igraph.h"
-#include "graph/neighbors.h"
+#include "igraph_neighborhood.h"
 
 #include "config.h"
 
@@ -55,11 +55,9 @@ SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_vector_int_to_SEXP(const igraph_vector_int_t *v);
 SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v);
 SEXP R_igraph_vector_bool_to_SEXP(const igraph_vector_bool_t *v);
-SEXP R_igraph_vector_long_to_SEXP(const igraph_vector_long_t *v);
 SEXP R_igraph_vector_complex_to_SEXP(const igraph_vector_complex_t* v);
 SEXP R_igraph_0orvector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_0orvector_bool_to_SEXP(const igraph_vector_bool_t *v);
-SEXP R_igraph_0orvector_long_to_SEXP(const igraph_vector_long_t *v);
 SEXP R_igraph_0orvector_complex_to_SEXP(const igraph_vector_complex_t *v);
 SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m);
 SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
@@ -104,7 +102,6 @@ int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_int(SEXP sv, igraph_vector_int_t *v);
-int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v);
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);
@@ -114,7 +111,6 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb);
 SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info);
 int R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
 int R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);
-SEXP R_igraph_vector_long_to_SEXPp1(const igraph_vector_long_t *v);
 SEXP R_igraph_vectorlist_to_SEXP_p1(const igraph_vector_ptr_t *ptr);
 SEXP R_igraph_0orvector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
@@ -5122,7 +5118,7 @@ SEXP R_igraph_get_stochastic(SEXP graph, SEXP column_wise) {
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
   c_column_wise=LOGICAL(column_wise)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_stochastic(&c_graph, &c_res, c_column_wise));
+  IGRAPH_R_CHECK(igraph_get_stochastic(&c_graph, &c_res, c_column_wise, NULL));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
@@ -6748,7 +6744,7 @@ SEXP R_igraph_is_matching(SEXP graph, SEXP types, SEXP matching) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
-  igraph_vector_long_t c_matching;
+  igraph_vector_int_t c_matching;
   igraph_bool_t c_res;
   SEXP res;
 
@@ -6756,12 +6752,12 @@ SEXP R_igraph_is_matching(SEXP graph, SEXP types, SEXP matching) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
-  R_SEXP_to_vector_long_copy(matching, &c_matching);
+  R_SEXP_to_vector_int_copy(matching, &c_matching);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_matching(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_matching, &c_res));
 
                                         /* Convert output */
-  igraph_vector_long_destroy(&c_matching);
+  igraph_vector_int_destroy(&c_matching);
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
   r_result = res;
@@ -6777,7 +6773,7 @@ SEXP R_igraph_is_maximal_matching(SEXP graph, SEXP types, SEXP matching) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_bool_t c_types;
-  igraph_vector_long_t c_matching;
+  igraph_vector_int_t c_matching;
   igraph_bool_t c_res;
   SEXP res;
 
@@ -6785,12 +6781,12 @@ SEXP R_igraph_is_maximal_matching(SEXP graph, SEXP types, SEXP matching) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
-  R_SEXP_to_vector_long_copy(matching, &c_matching);
+  R_SEXP_to_vector_int_copy(matching, &c_matching);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_maximal_matching(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_matching, &c_res));
 
                                         /* Convert output */
-  igraph_vector_long_destroy(&c_matching);
+  igraph_vector_int_destroy(&c_matching);
   PROTECT(res=NEW_LOGICAL(1));
   LOGICAL(res)[0]=c_res;
   r_result = res;
@@ -6808,7 +6804,7 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   igraph_vector_bool_t c_types;
   igraph_integer_t c_matching_size;
   igraph_real_t c_matching_weight;
-  igraph_vector_long_t c_matching;
+  igraph_vector_int_t c_matching;
   igraph_vector_t c_weights;
   igraph_real_t c_eps;
   SEXP matching_size;
@@ -6820,10 +6816,10 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
   c_matching_size=0;
-  if (0 != igraph_vector_long_init(&c_matching, 0)) {
+  if (0 != igraph_vector_int_init(&c_matching, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_long_destroy, &c_matching);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_matching);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_eps=REAL(eps)[0];
                                         /* Call igraph */
@@ -6836,8 +6832,8 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   INTEGER(matching_size)[0]=c_matching_size;
   PROTECT(matching_weight=NEW_NUMERIC(1));
   REAL(matching_weight)[0]=c_matching_weight;
-  PROTECT(matching=R_igraph_vector_long_to_SEXPp1(&c_matching));
-  igraph_vector_long_destroy(&c_matching);
+  PROTECT(matching=R_igraph_vector_int_to_SEXPp1(&c_matching));
+  igraph_vector_int_destroy(&c_matching);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, matching_size);
   SET_VECTOR_ELT(r_result, 1, matching_weight);
