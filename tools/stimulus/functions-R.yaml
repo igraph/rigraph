@@ -1076,7 +1076,7 @@ igraph_from_prufer:
         GATTR-PARAM: prufer
 
 igraph_random_spanning_tree:
-    PARAMS: GRAPH graph, OUT EDGESET res, OPTIONAL VERTEX vid=0
+    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
 
 #######################################
 # Coloring

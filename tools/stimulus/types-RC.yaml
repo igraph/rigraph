@@ -385,7 +385,7 @@ VERTEXWEIGHTS:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGECAPACITY:
+EDGE_CAPACITY:
     CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_t
     INCONV:
@@ -559,14 +559,11 @@ VERTEXSET:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXSET_INT:
-    CALL:
-        OUT: '&%C%'
-    CTYPE:
-        IN: disallowed
-        INOUT: disallowed
-        OUT: igraph_vector_int_t
+VERTEX_INDICES:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
     INCONV:
+        IN: R_SEXP_to_vector_int(%I%, &%C%);
         OUT: |-
             if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -574,29 +571,24 @@ VERTEXSET_INT:
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-EDGESET:
-    CALL:
-        IN: '%C%'
-        OUT: '&%C%'
-    CTYPE:
-        IN: igraph_es_t
-        OUT: igraph_vector_t
+EDGE_INDICES:
+    CALL: '&%C%'
+    CTYPE: igraph_vector_int_t
     INCONV:
-        IN: R_SEXP_to_igraph_es(%I%, &%C1%, &%C%);
+        IN: R_SEXP_to_vector_int(%I%, &%C%);
         OUT: |-
-            if (0 != igraph_vector_init(&%C%, 0)) {
+            if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
             }
-            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
-        IN: igraph_es_destroy(&%C%);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
-            igraph_vector_destroy(&%C%);
+            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 'NULL':
@@ -902,7 +894,7 @@ EIGENWHICHPOS:
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
 
-SIRLIST:
+SIR_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_ptr_t
     INCONV:

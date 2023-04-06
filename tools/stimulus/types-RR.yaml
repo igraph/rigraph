@@ -136,7 +136,7 @@ VERTEXSET:
               %I% <- create_vs(%I1%, %I%)
             }
 
-VERTEXSET_INT:
+VERTEX_INDICES:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
@@ -147,15 +147,15 @@ VERTEXSET_INT:
               %I% <- create_vs(%I1%, %I%)
             }
 
-EDGESET:
+EDGE_INDICES:
     CALL: '%I%-1'
     DEFAULT:
-        ALL: E(%I1%)
-    INCONV: '%I% <- as.igraph.es(%I1%, %I%)'
+        ALL: V(%I1%)
+    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
-              %I% <- create_es(%I1%, %I%)
+              %I% <- create_vs(%I1%, %I%)
             }
 
 EDGEWEIGHTS:
@@ -180,7 +180,7 @@ VERTEXWEIGHTS:
           %I% <- NULL
         }
 
-EDGECAPACITY:
+EDGE_CAPACITY:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$capacity
@@ -410,7 +410,7 @@ EIGENWHICHPOS:
         ASE: c("lm", "la", "sa")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "lm"=0L, "la"=2L, "sa"=3L)'
 
-SIRLIST: {}
+SIR_LIST: {}
 
 PAGERANKALGO:
     DEFAULT:
