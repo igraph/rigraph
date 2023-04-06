@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9002
+
+## Chore
+
+  - Bump stimulus.
+
+
 # igraph 1.4.99.9001
 
 ## Chore
