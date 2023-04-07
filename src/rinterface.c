@@ -10902,7 +10902,7 @@ SEXP R_igraph_version() {
                                         /* Convert input */
 
                                         /* Call igraph */
-  igraph_version(c_version_string, &c_major, &c_minor, &c_subminor);
+  igraph_version(&c_version_string, &c_major, &c_minor, &c_subminor);
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));

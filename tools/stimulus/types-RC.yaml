@@ -60,6 +60,13 @@ INT:
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
 
+CSTRING:
+    CTYPE: const char*
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
+
 LONGINT:
     CTYPE: long int
     INCONV:
