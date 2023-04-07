@@ -252,12 +252,12 @@ SEXP R_igraph_vcount(SEXP graph) {
 /*-------------------------------------------/
 / igraph_empty_attrs                         /
 /-------------------------------------------*/
-SEXP R_igraph_empty_attrs(SEXP n, SEXP directed, SEXP attr) {
+SEXP R_igraph_empty_attrs(SEXP n, SEXP directed) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
   igraph_bool_t c_directed;
-  void c_attr;
+
   SEXP graph;
 
   SEXP r_result;
@@ -265,7 +265,7 @@ SEXP R_igraph_empty_attrs(SEXP n, SEXP directed, SEXP attr) {
   c_n=INTEGER(n)[0];
   c_directed=LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_empty_attrs(&c_graph, c_n, c_directed, c_attr));
+  IGRAPH_R_CHECK(igraph_empty_attrs(&c_graph, c_n, c_directed, 0));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);

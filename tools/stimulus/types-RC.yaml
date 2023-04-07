@@ -606,6 +606,11 @@ ISOCOMPAT_FUNC:
     CTYPE: ~
     HEADER: {}
 
+ATTRIBUTES:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 ARPACKOPT:
     CALL: '&%C%'
     INCONV:
