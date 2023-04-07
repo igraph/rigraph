@@ -10970,26 +10970,6 @@ SEXP R_igraph_get_incidence() {
 }
 
 /*-------------------------------------------/
-/ igraph_clusters                            /
-/-------------------------------------------*/
-SEXP R_igraph_clusters() {
-                                        /* Declarations */
-  int c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  c_result=igraph_clusters();
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_get_stochastic_sparsemat            /
 /-------------------------------------------*/
 SEXP R_igraph_get_stochastic_sparsemat() {

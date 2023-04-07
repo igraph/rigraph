@@ -515,7 +515,7 @@ igraph_laplacian:
 # Components
 #######################################
 
-igraph_clusters:
+igraph_connected_components:
     IGNORE: RR
 
 igraph_decompose:
