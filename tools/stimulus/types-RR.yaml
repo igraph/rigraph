@@ -150,6 +150,17 @@ VERTEX_INDICES:
               %I% <- create_vs(%I1%, %I%)
             }
 
+VERTEX_INDEX_PAIRS:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: V(%I1%)
+    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
 EDGE_INDICES:
     CALL: '%I%-1'
     DEFAULT:

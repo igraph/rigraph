@@ -6622,10 +6622,11 @@ SEXP R_igraph_similarity_dice_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP loop
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_vector_int(pairs, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_loops=LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_dice_pairs(&c_graph, &c_res, c_pairs, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_dice_pairs(&c_graph, &c_res, &c_pairs, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
@@ -6756,10 +6757,11 @@ SEXP R_igraph_similarity_jaccard_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP l
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_vector_int(pairs, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_loops=LOGICAL(loops)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_similarity_jaccard_pairs(&c_graph, &c_res, c_pairs, c_mode, c_loops));
+  IGRAPH_R_CHECK(igraph_similarity_jaccard_pairs(&c_graph, &c_res, &c_pairs, c_mode, c_loops));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
