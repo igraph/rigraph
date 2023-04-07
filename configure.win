@@ -1,0 +1,19 @@
+#! /bin/sh
+
+set -eux pipefail
+
+cd src
+
+# Set version of igraph
+# FIXME: Ensure this is written when vendoring
+if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
+    echo "0.10.0" >> ./vendor/cigraph/IGRAPH_VERSION
+fi
+
+# Build igraph with cmake
+cmake -H. -Bbuild -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_SHARED_LIBRARY_PREFIX_CXX=""
+
+make -C build install
+
+cp -r ./install/include/igraph ./include
+cp ./install/lib/libigraph.a .
