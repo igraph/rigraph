@@ -266,20 +266,6 @@ VERTEXSETLIST:
               }
             }
 
-VERTEXSETLIST_INT:
-    INCONV:
-        IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
-
-EDGESETLIST:
-    OUTCONV:
-        OUT: |-
-            if (igraph_opt("return.vs.es")) {
-              es <- E(%I1%)
-              for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- unsafe_create_es(%I1%, %I%[[i_]], es = es)
-              }
-            }
-
 'ARPACKSTORAGE':
     CALL: {}
     HEADER: ~
