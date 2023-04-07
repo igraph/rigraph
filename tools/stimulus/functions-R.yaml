@@ -743,6 +743,16 @@ igraph_get_adjacency:
 igraph_get_edgelist:
     IGNORE: RR, RC
 
+igraph_invalidate_cache:
+    PARAMS: INOUT GRAPH graph
+    IGNORE: RR
+
+igraph_write_graph_dimacs_flow:
+    PARAMS: |-
+        INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
+        VECTOR capacity
+    IGNORE: RR
+
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
 
