@@ -7755,19 +7755,22 @@ SEXP R_igraph_write_graph_dimacs_flow(SEXP graph, SEXP outstream, SEXP source, S
   igraph_integer_t c_source;
   igraph_integer_t c_target;
   igraph_vector_t c_capacity;
-  int c_result;
+
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
+  R_SEXP_to_igraph_copy(graph, &c_graph);
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
   c_source = (igraph_integer_t) REAL(source)[0];
   c_target = (igraph_integer_t) REAL(target)[0];
   R_SEXP_to_vector(capacity, &c_capacity);
                                         /* Call igraph */
-  c_result=igraph_write_graph_dimacs_flow(&c_graph, c_outstream, c_source, c_target, &c_capacity);
+  IGRAPH_R_CHECK(igraph_write_graph_dimacs_flow(&c_graph, c_outstream, c_source, c_target, &c_capacity));
 
                                         /* Convert output */
-
-
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
@@ -10746,7 +10749,7 @@ SEXP R_igraph_progress(SEXP message, SEXP percent) {
                                         /* Convert input */
   c_percent=REAL(percent)[0];
                                         /* Call igraph */
-  c_result=igraph_progress(c_message, c_percent, 0);
+  IGRAPH_R_CHECK(igraph_progress(c_message, c_percent, 0));
 
                                         /* Convert output */
 
@@ -10768,7 +10771,7 @@ SEXP R_igraph_status(SEXP message) {
                                         /* Convert input */
 
                                         /* Call igraph */
-  c_result=igraph_status(c_message, 0);
+  IGRAPH_R_CHECK(igraph_status(c_message, 0));
 
                                         /* Convert output */
 
@@ -10828,16 +10831,19 @@ SEXP R_igraph_expand_path_to_pairs(SEXP path) {
 SEXP R_igraph_invalidate_cache(SEXP graph) {
                                         /* Declarations */
   igraph_t c_graph;
-  void c_result;
+
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
+  R_SEXP_to_igraph_copy(graph, &c_graph);
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
                                         /* Call igraph */
-  c_result=igraph_invalidate_cache(&c_graph);
+  igraph_invalidate_cache(&c_graph);
 
                                         /* Convert output */
-
-
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
@@ -10896,7 +10902,7 @@ SEXP R_igraph_version() {
                                         /* Convert input */
 
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_version(c_version_string, &c_major, &c_minor, &c_subminor));
+  igraph_version(c_version_string, &c_major, &c_minor, &c_subminor);
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
