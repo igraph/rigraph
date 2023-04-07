@@ -52,7 +52,7 @@ VECTOR_INT:
 VECTORM1:
     INCONV: '%I% <- as.numeric(%I%)-1'
 
-VECTOR_OR_0:
+VECTOR_INT_OR_0:
     INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
 
 VECTORM1_OR_0:
@@ -69,6 +69,9 @@ VECTOR_BOOL_OR_0:
 
 MATRIX:
     INCONV: '%I% <- as.matrix(structure(as.double(%I%), dim=dim(%I%)))'
+
+MATRIX_INT:
+    INCONV: '%I% <- as.matrix(structure(as.integer(%I%), dim=dim(%I%)))'
 
 MATRIX_OR_0:
     INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))

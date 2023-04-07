@@ -57,9 +57,11 @@ SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v);
 SEXP R_igraph_vector_bool_to_SEXP(const igraph_vector_bool_t *v);
 SEXP R_igraph_vector_complex_to_SEXP(const igraph_vector_complex_t* v);
 SEXP R_igraph_0orvector_to_SEXP(const igraph_vector_t *v);
+SEXP R_igraph_0orvector_int_to_SEXP(const igraph_vector_int_t *v);
 SEXP R_igraph_0orvector_bool_to_SEXP(const igraph_vector_bool_t *v);
 SEXP R_igraph_0orvector_complex_to_SEXP(const igraph_vector_complex_t *v);
 SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m);
+SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m);
 SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
 SEXP R_igraph_0ormatrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
 SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m);
@@ -85,6 +87,7 @@ int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
 int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v);
 int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl);
+int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl);
 int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl);
 int R_SEXP_to_igraph_matrix_copy(SEXP pakl, igraph_matrix_t *akl);
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res);
@@ -96,7 +99,7 @@ int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
                                    igraph_vector_ptr_t *ptr);
 int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_ptr_t *ptr);
 int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
-                                    igraph_vector_ptr_t *ptr);
+                                    igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
@@ -114,6 +117,7 @@ SEXP R_igraph_vectorlist_to_SEXP_p1(const igraph_vector_ptr_t *ptr);
 SEXP R_igraph_0orvector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
 SEXP R_igraph_vector_to_SEXPp1(const igraph_vector_t *v);
+SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
 /***********************************************/
@@ -628,9 +632,10 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
   SEXP r_result;
                                         /* Convert input */
   c_nodes=INTEGER(nodes)[0];
+  R_SEXP_to_matrix_int(W, &c_W);
   c_directed=LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_extended_chordal_ring(&c_graph, c_nodes, c_W, c_directed));
+  IGRAPH_R_CHECK(igraph_extended_chordal_ring(&c_graph, c_nodes, &c_W, c_directed));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
@@ -805,16 +810,16 @@ SEXP R_igraph_full_multipartite(SEXP n, SEXP directed, SEXP mode) {
 SEXP R_igraph_realize_degree_sequence(SEXP out_deg, SEXP in_deg, SEXP allowed_edge_types, SEXP method) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_out_deg;
-  igraph_vector_t c_in_deg;
+  igraph_vector_int_t c_out_deg;
+  igraph_vector_int_t c_in_deg;
   igraph_edge_type_sw_t c_allowed_edge_types;
   igraph_realize_degseq_t c_method;
   SEXP graph;
 
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_vector(out_deg, &c_out_deg);
-  if (!Rf_isNull(in_deg)) { R_SEXP_to_vector(in_deg, &c_in_deg); }
+  R_SEXP_to_vector_int(out_deg, &c_out_deg);
+  if (!Rf_isNull(in_deg)) { R_SEXP_to_vector_int(in_deg, &c_in_deg); }
   c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
   c_method = (igraph_realize_degseq_t) Rf_asInteger(method);
                                         /* Call igraph */
@@ -6953,18 +6958,25 @@ SEXP R_igraph_community_multilevel(SEXP graph, SEXP weights, SEXP resolution) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
+  if (0 != igraph_matrix_int_init(&c_memberships, 0, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_memberships);
   if (0 != igraph_vector_init(&c_modularity, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_modularity);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_community_multilevel(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), c_resolution, &c_membership, c_memberships, &c_modularity));
+  IGRAPH_R_CHECK(igraph_community_multilevel(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), c_resolution, &c_membership, &c_memberships, &c_modularity));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
   PROTECT(r_names=NEW_CHARACTER(3));
   PROTECT(membership=R_igraph_vector_int_to_SEXP(&c_membership));
   igraph_vector_int_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(memberships=R_igraph_matrix_int_to_SEXP(&c_memberships));
+  igraph_matrix_int_destroy(&c_memberships);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(modularity=R_igraph_vector_to_SEXP(&c_modularity));
   igraph_vector_destroy(&c_modularity);
@@ -9824,7 +9836,7 @@ SEXP R_igraph_sir(SEXP graph, SEXP beta, SEXP gamma, SEXP no_sim) {
 SEXP R_igraph_convex_hull(SEXP data) {
                                         /* Declarations */
   igraph_matrix_t c_data;
-  igraph_vector_t c_resverts;
+  igraph_vector_int_t c_resverts;
   igraph_matrix_t c_rescoords;
   SEXP resverts;
   SEXP rescoords;
@@ -9832,10 +9844,10 @@ SEXP R_igraph_convex_hull(SEXP data) {
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_matrix(data, &c_data);
-  if (0 != igraph_vector_init(&c_resverts, 0)) {
+  if (0 != igraph_vector_int_init(&c_resverts, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_resverts);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_resverts);
   if (0 != igraph_matrix_init(&c_rescoords, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -9846,8 +9858,8 @@ SEXP R_igraph_convex_hull(SEXP data) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(resverts=R_igraph_vector_to_SEXPp1(&c_resverts));
-  igraph_vector_destroy(&c_resverts);
+  PROTECT(resverts=R_igraph_vector_int_to_SEXPp1(&c_resverts));
+  igraph_vector_int_destroy(&c_resverts);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(rescoords=R_igraph_matrix_to_SEXP(&c_rescoords));
   igraph_matrix_destroy(&c_rescoords);
