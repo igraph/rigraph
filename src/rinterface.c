@@ -97,7 +97,7 @@ int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it);
 int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
 int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
                                    igraph_vector_ptr_t *ptr);
-int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_ptr_t *ptr);
+int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list);
 int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
@@ -1403,9 +1403,10 @@ SEXP R_igraph_hsbm_list_game(SEXP n, SEXP mlist, SEXP rholist, SEXP Clist, SEXP 
                                         /* Convert input */
   c_n=INTEGER(n)[0];
   R_SEXP_to_vector_int(mlist, &c_mlist);
+  R_igraph_SEXP_to_vectorlist(rholist, &c_rholist);
   c_p=REAL(p)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_hsbm_list_game(&c_graph, c_n, &c_mlist, c_rholist, c_Clist, c_p));
+  IGRAPH_R_CHECK(igraph_hsbm_list_game(&c_graph, c_n, &c_mlist, &c_rholist, c_Clist, c_p));
 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
