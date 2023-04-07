@@ -53,6 +53,10 @@ INTEGER:
 
 INT:
     CTYPE: int
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+        INOUT: '&%C%'
     INCONV:
         IN: '%C%=INTEGER(%I%)[0];'
 
