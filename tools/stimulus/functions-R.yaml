@@ -341,9 +341,6 @@ igraph_rewire:
 igraph_induced_subgraph:
     IGNORE: RR
 
-igraph_subgraph_edges:
-    IGNORE: RR
-
 igraph_average_path_length:
     # No need for it, igraph_average_path_length_dijkstra takes care of the
     # unweighted case as well
@@ -435,9 +432,6 @@ igraph_arpack_rssolve:
 igraph_arpack_rnsolve:
     IGNORE: RR, RC, RInit
 
-igraph_arpack_unpack_complex:
-    IGNORE: RR
-
 igraph_unfold_tree:
     IGNORE: RR
 
@@ -490,12 +484,6 @@ igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
 
 igraph_create_bipartite:
-    IGNORE: RR
-
-igraph_incidence:
-    IGNORE: RR
-
-igraph_get_incidence:
     IGNORE: RR
 
 igraph_bipartite_game_gnp:
@@ -764,9 +752,6 @@ igraph_to_undirected:
 igraph_get_stochastic:
     IGNORE: RR
 
-igraph_get_stochastic_sparsemat:
-    IGNORE: RR
-
 #######################################
 # Read and write foreign formats
 #######################################
@@ -977,20 +962,23 @@ igraph_simplify_and_colorize:
 # SCG
 #######################################
 
-igraph_scg_grouping:
-    IGNORE: RR
+# TODO: define what to do with SCG
+# scg is in separate repository from
 
-igraph_scg_semiprojectors:
-    IGNORE: RR, RC, RInit
+# igraph_scg_grouping:
+#     IGNORE: RR
 
-igraph_scg_adjacency:
-    IGNORE: RR, RC, RInit
+# igraph_scg_semiprojectors:
+#     IGNORE: RR, RC, RInit
 
-igraph_scg_stochastic:
-    IGNORE: RR, RC, RInit
+# igraph_scg_adjacency:
+#     IGNORE: RR, RC, RInit
 
-igraph_scg_laplacian:
-    IGNORE: RR, RC, RInit
+# igraph_scg_stochastic:
+#     IGNORE: RR, RC, RInit
+
+# igraph_scg_laplacian:
+#     IGNORE: RR, RC, RInit
 
 #######################################
 # Matching
