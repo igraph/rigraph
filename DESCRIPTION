@@ -35,7 +35,8 @@ LinkingTo:
     cpp11 (>= 0.2.0)
 License: GPL (>= 2)
 URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/
-SystemRequirements:
+SystemRequirements: 
+    CMake (>= 3.18),
     gmp (optional),
     libxml2 (optional),
     glpk (>= 4.57, optional)
