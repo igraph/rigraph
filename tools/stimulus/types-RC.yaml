@@ -236,9 +236,9 @@ VECTOR_LONG_M1:
             igraph_vector_long_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-MATRIXLIST:
+MATRIX_LIST:
     CALL: '&%C%'
-    CTYPE: igraph_vector_ptr_t
+    CTYPE: igraph_matrix_list_t
     INCONV:
         IN: R_igraph_SEXP_to_matrixlist(%I%, &%C%);
 

@@ -263,7 +263,7 @@ ISOCOMPAT_FUNC:
 
 VECTORLIST: {}
 
-MATRIXLIST:
+MATRIX_LIST:
     INCONV:
         IN: |-
             if (!all(sapply(%I%, is.matrix))) {

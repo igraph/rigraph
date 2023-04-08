@@ -100,7 +100,7 @@ int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
 int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list);
 int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
-int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
+int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_int(SEXP sv, igraph_vector_int_t *v);
