@@ -4738,7 +4738,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   }
   if (pred) {
     SET_VECTOR_ELT(result, 2, R_igraph_vector_int_to_SEXP(&predvec));
-    igraph_vector_long_destroy(&predvec);
+    igraph_vector_int_destroy(&predvec);
   } else {
     SET_VECTOR_ELT(result, 2, R_NilValue);
   }
