@@ -48,7 +48,6 @@ GRAPH_LIST:
             IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
             PROTECT(%I%=R_igraph_graphlist_to_SEXP(&%C%));
             igraph_graph_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
@@ -710,7 +709,7 @@ BLISSINFO:
             PROTECT(%I%=R_igraph_bliss_info_to_SEXP(&%C%));
             if (%C%.group_size) { free(%C%.group_size); }
 
-STRVECTOR:
+VECTOR_STR:
     CALL: '&%C%'
     CTYPE: igraph_strvector_t
     INCONV:

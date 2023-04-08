@@ -292,7 +292,7 @@ DRL_OPTIONS:
     INCONV:
         IN: '%I%.tmp <- drl_defaults$default; %I%.tmp [names(%I%)] <- %I%; %I% <- %I%.tmp'
 
-STRVECTOR: {}
+VECTOR_STR: {}
 
 BLISSSH:
     DEFAULT:

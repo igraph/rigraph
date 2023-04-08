@@ -7260,7 +7260,6 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
   IGRAPH_R_CHECK(igraph_hrg_sample_many(&c_hrg, &c_samples, c_num_samples));
 
                                         /* Convert output */
-  IGRAPH_FINALLY(igraph_graph_list_destroy, &c_samples);
   PROTECT(samples=R_igraph_graphlist_to_SEXP(&c_samples));
   igraph_graph_list_destroy(&c_samples);
   IGRAPH_FINALLY_CLEAN(1);
@@ -7703,6 +7702,10 @@ SEXP R_igraph_read_graph_dimacs_flow(SEXP instream, SEXP directed) {
 
   SEXP r_result, r_names;
                                         /* Convert input */
+  if (0 != igraph_strvector_init(&c_problem, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_strvector_destroy, &c_problem);
   if (0 != igraph_vector_int_init(&c_label, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -7715,7 +7718,7 @@ SEXP R_igraph_read_graph_dimacs_flow(SEXP instream, SEXP directed) {
   IGRAPH_FINALLY(igraph_vector_destroy, &c_capacity);
   c_directed=LOGICAL(directed)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&c_graph, c_instream, c_problem, &c_label, &c_source, &c_target, &c_capacity, c_directed));
+  IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&c_graph, c_instream, &c_problem, &c_label, &c_source, &c_target, &c_capacity, c_directed));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(6));
@@ -7723,6 +7726,9 @@ SEXP R_igraph_read_graph_dimacs_flow(SEXP instream, SEXP directed) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(problem=R_igraph_strvector_to_SEXP(&c_problem));
+  igraph_strvector_destroy(&c_problem);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(label=R_igraph_vector_int_to_SEXP(&c_label));
   igraph_vector_int_destroy(&c_label);
