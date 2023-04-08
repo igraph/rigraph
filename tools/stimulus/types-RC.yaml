@@ -37,6 +37,22 @@ GRAPH_OR_0:
             igraph_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+GRAPH_LIST:
+    CALL: '&%C%'
+    CTYPE: igraph_graph_list_t
+    INCONV:
+        OUT: |-
+            if (0 != igraph_graph_list_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
+    OUTCONV:
+        OUT: |-
+            IGRAPH_FINALLY(igraph_graph_list_destroy, &%C%);
+            PROTECT(%I%=R_igraph_graphlist_to_SEXP(&%C%));
+            igraph_graph_list_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 INTEGER:
     CTYPE: igraph_integer_t
     CALL:

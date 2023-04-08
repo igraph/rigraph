@@ -72,7 +72,7 @@ SEXP R_igraph_0orvectorlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_matrixlist_destroy(igraph_vector_ptr_t *ptr);
-SEXP R_igraph_graphlist_to_SEXP(const igraph_vector_ptr_t *ptr);
+SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list);
 void R_igraph_graphlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg);
 SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit);
@@ -7251,12 +7251,19 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != igraph_graph_list_init(&c_samples, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_graph_list_destroy, &c_samples);
   c_num_samples=INTEGER(num_samples)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_hrg_sample_many(&c_hrg, c_samples, c_num_samples));
+  IGRAPH_R_CHECK(igraph_hrg_sample_many(&c_hrg, &c_samples, c_num_samples));
 
                                         /* Convert output */
-
+  IGRAPH_FINALLY(igraph_graph_list_destroy, &c_samples);
+  PROTECT(samples=R_igraph_graphlist_to_SEXP(&c_samples));
+  igraph_graph_list_destroy(&c_samples);
+  IGRAPH_FINALLY_CLEAN(1);
   r_result = samples;
 
   UNPROTECT(1);
