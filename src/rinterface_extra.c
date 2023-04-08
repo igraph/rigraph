@@ -2436,7 +2436,7 @@ void R_igraph_fatal_handler(const char *reason, const char *file, int line) {
 }
 
 void R_igraph_error_handler(const char *reason, const char *file,
-                         int line, int igraph_errno) {
+                              int line, igraph_error_t igraph_errno) {
 
   /* We are not supposed to touch 'reason' after we have called
    * IGRAPH_FINALLY_FREE() because 'reason' might be allocated on the heap and
@@ -5245,7 +5245,7 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP file, SEXP pid, SEXP pcreator) {
 #endif
   if (stream==0) { igraph_error("Cannot write edgelist", __FILE__, __LINE__,
                                 IGRAPH_EFILE); }
-  IGRAPH_R_CHECK(igraph_write_graph_gml(&g, stream, ppid, creator));
+  IGRAPH_R_CHECK(igraph_write_graph_gml(&g, stream, IGRAPH_WRITE_GML_DEFAULT_SW, ppid, creator));
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
