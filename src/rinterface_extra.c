@@ -315,7 +315,7 @@ void R_igraph_attribute_protected_destroy(void *dummy) {
   R_igraph_attribute_protected_size=0;
 }
 
-int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
+igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
   SEXP result, names, gal;
   long int i;
   long int attrno;
@@ -425,7 +425,7 @@ void R_igraph_attribute_destroy(igraph_t *graph) {
    2) the not-copied attributes will be set up by subsequent calls
       to permute_vertices and/or permute/edges anyway. */
 
-int R_igraph_attribute_copy(igraph_t *to, const igraph_t *from,
+igraph_error_t R_igraph_attribute_copy(igraph_t *to, const igraph_t *from,
                             igraph_bool_t ga, igraph_bool_t va, igraph_bool_t ea) {
   SEXP fromattr=from->attr;
   if (ga && va && ea) {
@@ -589,7 +589,7 @@ SEXP R_igraph_attribute_add_vertices_dup(SEXP attr) {
   return newattr;
 }
 
-int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
+igraph_error_t R_igraph_attribute_add_vertices(igraph_t *graph, igraph_integer_t nv,
                                     igraph_vector_ptr_t *nattr) {
   SEXP attr=graph->attr;
   SEXP val, rep=0, names, newnames;
@@ -730,11 +730,11 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
 
 int R_igraph_attribute_permute_vertices_same(const igraph_t *graph,
                                              igraph_t *newgraph,
-                                             const igraph_vector_t *idx) {
+                                             const igraph_vector_int_t *idx) {
   SEXP attr=newgraph->attr;
   SEXP val;
   long int i, valno;
-  long int idxlen=igraph_vector_size(idx);
+  long int idxlen=igraph_vector_int_size(idx);
   SEXP ss;
   int px = 0;
 
@@ -781,7 +781,7 @@ int R_igraph_attribute_permute_vertices_same(const igraph_t *graph,
   /* Convert idx to an R object, we will use this for indexing */
   PROTECT(ss=NEW_INTEGER(idxlen)); px++;
   for (i=0; i<idxlen; i++) {
-    INTEGER(ss)[i] = (int) VECTOR(*idx)[i]+1;
+    INTEGER(ss)[i] = (int) igraph_vector_int_get(idx, i)+1;
   }
 
   for (i=0; i<valno; i++) {
@@ -802,13 +802,13 @@ int R_igraph_attribute_permute_vertices_same(const igraph_t *graph,
 
 int R_igraph_attribute_permute_vertices_diff(const igraph_t *graph,
                                              igraph_t *newgraph,
-                                             const igraph_vector_t *idx) {
+                                             const igraph_vector_int_t *idx) {
   SEXP attr=graph->attr;
   SEXP toattr=newgraph->attr;
   SEXP val, toval;
   SEXP names;
   long int i, valno;
-  long int idxlen=igraph_vector_size(idx);
+  long int idxlen=igraph_vector_int_size(idx);
   SEXP ss;
   int px = 0;
 
@@ -821,7 +821,7 @@ int R_igraph_attribute_permute_vertices_diff(const igraph_t *graph,
   /* Convert idx to an R object, we will use this for indexing */
   PROTECT(ss=NEW_INTEGER(idxlen)); px++;
   for (i=0; i<idxlen; i++) {
-    INTEGER(ss)[i] = (int) VECTOR(*idx)[i]+1;
+    INTEGER(ss)[i] = (int) igraph_vector_int_get(idx, i)+1;
   }
 
   /* Resize the vertex attribute list in 'newgraph' */
@@ -844,9 +844,9 @@ int R_igraph_attribute_permute_vertices_diff(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_permute_vertices(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_permute_vertices(const igraph_t *graph,
                                         igraph_t *newgraph,
-                                        const igraph_vector_t *idx) {
+                                        const igraph_vector_int_t *idx) {
   if (graph == newgraph) {
     return R_igraph_attribute_permute_vertices_same(graph, newgraph, idx);
   } else {
@@ -945,11 +945,11 @@ SEXP R_igraph_attribute_add_edges_append1(igraph_vector_ptr_t *nattr, int j,
 }
 
 void R_igraph_attribute_add_edges_append(SEXP eal,
-                                         const igraph_vector_t *edges,
+                                         const igraph_vector_int_t *edges,
                                          igraph_vector_ptr_t *nattr) {
   SEXP names;
   long int ealno, i;
-  long int ne=igraph_vector_size(edges)/2, nattrno;
+  long int ne=igraph_vector_int_size(edges)/2, nattrno;
   SEXP rep = R_NilValue;
   int px = 0;
 
@@ -994,14 +994,14 @@ void R_igraph_attribute_add_edges_append(SEXP eal,
   UNPROTECT(px);
 }
 
-int R_igraph_attribute_add_edges(igraph_t *graph,
-                                 const igraph_vector_t *edges,
+igraph_error_t R_igraph_attribute_add_edges(igraph_t *graph,
+                                 const igraph_vector_int_t *edges,
                                  igraph_vector_ptr_t *nattr) {
   SEXP attr=graph->attr;
   SEXP eal, names, newnames;
   igraph_vector_t news;
   long int ealno, i, origlen, nattrno, newattrs;
-  long int ne=igraph_vector_size(edges)/2;
+  long int ne=igraph_vector_int_size(edges)/2;
   int px = 0;
 
   if (igraph_vector_init(&news, 0)) Rf_error("Out of memory");
@@ -1113,12 +1113,12 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
 
 int R_igraph_attribute_permute_edges_same(const igraph_t *graph,
                                           igraph_t *newgraph,
-                                          const igraph_vector_t *idx) {
+                                          const igraph_vector_int_t *idx) {
 
   SEXP attr=newgraph->attr;
   SEXP eal;
   long int i, ealno;
-  long int idxlen=igraph_vector_size(idx);
+  long int idxlen=igraph_vector_int_size(idx);
   SEXP ss;
   int px = 0;
 
@@ -1165,7 +1165,7 @@ int R_igraph_attribute_permute_edges_same(const igraph_t *graph,
   /* Convert idx to an R object, we will use this for indexing */
   PROTECT(ss=NEW_INTEGER(idxlen)); px++;
   for (i=0; i<idxlen; i++) {
-    INTEGER(ss)[i] = (int) VECTOR(*idx)[i]+1;
+    INTEGER(ss)[i] = (int) igraph_vector_int_get(idx, i)+1;
   }
 
   for (i=0; i<ealno; i++) {
@@ -1186,14 +1186,14 @@ int R_igraph_attribute_permute_edges_same(const igraph_t *graph,
 
 int R_igraph_attribute_permute_edges_diff(const igraph_t *graph,
                                           igraph_t *newgraph,
-                                          const igraph_vector_t *idx) {
+                                          const igraph_vector_int_t *idx) {
 
   SEXP attr=graph->attr;
   SEXP toattr=newgraph->attr;
   SEXP eal, toeal;
   SEXP names;
   long int i, ealno;
-  long int idxlen=igraph_vector_size(idx);
+  long int idxlen=igraph_vector_int_size(idx);
   SEXP ss;
 
   eal=VECTOR_ELT(attr,3);
@@ -1205,7 +1205,7 @@ int R_igraph_attribute_permute_edges_diff(const igraph_t *graph,
   /* Convert idx to an R object, we will use this for indexing */
   PROTECT(ss=NEW_INTEGER(idxlen));
   for (i=0; i<idxlen; i++) {
-    INTEGER(ss)[i] = (int) VECTOR(*idx)[i]+1;
+    INTEGER(ss)[i] = (int) igraph_vector_int_get(idx, i)+1;
   }
 
   /* Resize the vertex attribute list in 'newgraph' */
@@ -1229,9 +1229,9 @@ int R_igraph_attribute_permute_edges_diff(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_permute_edges(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_permute_edges(const igraph_t *graph,
                                      igraph_t *newgraph,
-                                     const igraph_vector_t *idx) {
+                                     const igraph_vector_int_t *idx) {
   if (graph==newgraph) {
     return R_igraph_attribute_permute_edges_same(graph, newgraph, idx);
   } else {
@@ -1239,22 +1239,22 @@ int R_igraph_attribute_permute_edges(const igraph_t *graph,
   }
 }
 
-int R_igraph_attribute_get_info(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_info(const igraph_t *graph,
                                 igraph_strvector_t *gnames,
-                                igraph_vector_t *gtypes,
+                                igraph_vector_int_t *gtypes,
                                 igraph_strvector_t *vnames,
-                                igraph_vector_t *vtypes,
+                                igraph_vector_int_t *vtypes,
                                 igraph_strvector_t *enames,
-                                igraph_vector_t *etypes) {
+                                igraph_vector_int_t *etypes) {
   igraph_strvector_t *names[3] = { gnames, vnames, enames };
-  igraph_vector_t *types[3] = { gtypes, vtypes, etypes };
+  igraph_vector_int_t *types[3] = { gtypes, vtypes, etypes };
   long int i, j;
 
   SEXP attr=graph->attr;
 
   for (i=0; i<3; i++) {
     igraph_strvector_t *n=names[i];
-    igraph_vector_t *t=types[i];
+    igraph_vector_int_t *t=types[i];
     SEXP al=VECTOR_ELT(attr, i+1);
 
     if (n) {                    /* return names */
@@ -1264,17 +1264,17 @@ int R_igraph_attribute_get_info(const igraph_t *graph,
     }
 
     if (t) {                    /* return types */
-      igraph_vector_resize(t, GET_LENGTH(al));
+      igraph_vector_int_resize(t, GET_LENGTH(al));
       for (j=0; j<GET_LENGTH(al); j++) {
         SEXP a=VECTOR_ELT(al, j);
         if (TYPEOF(a)==REALSXP || TYPEOF(a)==INTSXP) {
-          VECTOR(*t)[j]=IGRAPH_ATTRIBUTE_NUMERIC;
+          igraph_vector_int_set(t, j, GRAPH_ATTRIBUTE_NUMERIC);
         } else if (IS_LOGICAL(a)) {
-          VECTOR(*t)[j]=IGRAPH_ATTRIBUTE_BOOLEAN;
+          igraph_vector_int_set(t, j, IGRAPH_ATTRIBUTE_BOOLEAN);
         } else if (IS_CHARACTER(a)) {
-          VECTOR(*t)[j]=IGRAPH_ATTRIBUTE_STRING;
+          igraph_vector_int_set(t, j, IGRAPH_ATTRIBUTE_STRING);
         } else {
-          VECTOR(*t)[j]=IGRAPH_ATTRIBUTE_R_OBJECT;
+          igraph_vector_int_set(t, j, IGRAPH_ATTRIBUTE_OBJECT);
         }
       }
     }
@@ -1308,7 +1308,7 @@ igraph_bool_t R_igraph_attribute_has_attr(const igraph_t *graph,
   return res != R_NilValue;
 }
 
-int R_igraph_attribute_gettype(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_gettype(const igraph_t *graph,
                                igraph_attribute_type_t *type,
                                igraph_attribute_elemtype_t elemtype,
                                const char *name) {
@@ -1343,7 +1343,7 @@ int R_igraph_attribute_gettype(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_numeric_graph_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_numeric_graph_attr(const igraph_t *graph,
                                               const char *name,
                                               igraph_vector_t *value) {
   SEXP gal=VECTOR_ELT(graph->attr, 1);
@@ -1366,7 +1366,7 @@ int R_igraph_attribute_get_numeric_graph_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_bool_graph_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_bool_graph_attr(const igraph_t *graph,
                                            const char *name,
                                            igraph_vector_bool_t *value) {
   SEXP gal=VECTOR_ELT(graph->attr, 1);
@@ -1385,7 +1385,7 @@ int R_igraph_attribute_get_bool_graph_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_string_graph_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_string_graph_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_strvector_t *value) {
   /* TODO: serialization */
@@ -1405,7 +1405,7 @@ int R_igraph_attribute_get_string_graph_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_numeric_vertex_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_numeric_vertex_attr(const igraph_t *graph,
                                                const char *name,
                                                igraph_vs_t vs,
                                                igraph_vector_t *value) {
@@ -1453,7 +1453,7 @@ int R_igraph_attribute_get_numeric_vertex_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_bool_vertex_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_bool_vertex_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_vs_t vs,
                                             igraph_vector_bool_t *value) {
@@ -1492,7 +1492,7 @@ int R_igraph_attribute_get_bool_vertex_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_string_vertex_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_string_vertex_attr(const igraph_t *graph,
                                               const char *name,
                                               igraph_vs_t vs,
                                               igraph_strvector_t *value) {
@@ -1530,7 +1530,7 @@ int R_igraph_attribute_get_string_vertex_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_numeric_edge_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_numeric_edge_attr(const igraph_t *graph,
                                              const char *name,
                                              igraph_es_t es,
                                              igraph_vector_t *value) {
@@ -1578,7 +1578,7 @@ int R_igraph_attribute_get_numeric_edge_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_bool_edge_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_bool_edge_attr(const igraph_t *graph,
                                           const char *name,
                                           igraph_es_t es,
                                           igraph_vector_bool_t *value) {
@@ -1617,7 +1617,7 @@ int R_igraph_attribute_get_bool_edge_attr(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_get_string_edge_attr(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_get_string_edge_attr(const igraph_t *graph,
                                             const char *name,
                                             igraph_es_t es,
                                             igraph_strvector_t *value) {
@@ -1995,9 +1995,9 @@ SEXP R_igraph_ac_func(SEXP attr,
   return res;
 }
 
-int R_igraph_attribute_combine_vertices(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_combine_vertices(const igraph_t *graph,
                          igraph_t *newgraph,
-                         const igraph_vector_ptr_t *merges,
+                         const igraph_vector_int_list_t *merges,
                          const igraph_attribute_combination_t *comb) {
 
   SEXP attr=graph->attr;
@@ -2170,9 +2170,9 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
   return 0;
 }
 
-int R_igraph_attribute_combine_edges(const igraph_t *graph,
+igraph_error_t R_igraph_attribute_combine_edges(const igraph_t *graph,
                          igraph_t *newgraph,
-                         const igraph_vector_ptr_t *merges,
+                         const igraph_vector_int_list_t *merges,
                          const igraph_attribute_combination_t *comb) {
 
   SEXP attr=graph->attr;
@@ -2461,8 +2461,7 @@ void R_igraph_error_handler(const char *reason, const char *file,
   IGRAPH_FINALLY_FREE();
 }
 
-void R_igraph_warning_handler(const char *reason, const char *file,
-                              int line, int igraph_errno) {
+void R_igraph_warning_handler(const char *reason, const char *file, int line) {
   if (R_igraph_warnings_count == 0) {
     snprintf(R_igraph_warning_reason, sizeof(R_igraph_warning_reason),
       "At %s:%i : %s%s", file, line, reason, maybe_add_punctuation(reason, "."));
@@ -2478,7 +2477,7 @@ void checkInterruptFn(void *dummy) {
   R_CheckUserInterrupt();
 }
 
-int R_igraph_interrupt_handler(void *data) {
+igraph_error_t R_igraph_interrupt_handler(void *data) {
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
@@ -2499,7 +2498,7 @@ int R_igraph_interrupt_handler(void *data) {
   return IGRAPH_SUCCESS;
 }
 
-int R_igraph_progress_handler(const char *message, igraph_real_t percent,
+igraph_error_t R_igraph_progress_handler(const char *message, igraph_real_t percent,
                               void * data) {
   SEXP ec;
   int ecint;
@@ -2518,7 +2517,7 @@ int R_igraph_progress_handler(const char *message, igraph_real_t percent,
   return ecint;
 }
 
-int R_igraph_status_handler(const char *message, void *data) {
+igraph_error_t R_igraph_status_handler(const char *message, void *data) {
   SEXP l4 = PROTECT(Rf_install(".igraph.status"));
   SEXP l5 = PROTECT(Rf_ScalarString(Rf_mkChar(message)));
   SEXP l6 = PROTECT(Rf_lang2(l4, l5));
@@ -4744,7 +4743,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   }
   if (inbound) {
     SET_VECTOR_ELT(result, 3, R_igraph_vector_int_to_SEXP(&inboundvec));
-    igraph_vector_long_destroy(&inboundvec);
+    igraph_vector_int_destroy(&inboundvec);
   } else {
     SET_VECTOR_ELT(result, 3, R_NilValue);
   }
