@@ -502,6 +502,19 @@ arpack_defaults <- function() {
 #' @export
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
+
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = "So a function, not an object."
+    )
+    options <- arpack_defaults()
+  }
+
   if (!is.list(options) ||
     (is.null(names(options)) && length(options) != 0)) {
     stop("options must be a named list")
