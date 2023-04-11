@@ -84,6 +84,7 @@ int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);
 int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
 int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v);
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
 int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl);
 int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl);
 int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl);
@@ -1655,20 +1656,20 @@ igraph_error_t R_igraph_attribute_get_string_edge_attr(const igraph_t *graph,
 }
 
 SEXP R_igraph_ac_sum_numeric(SEXP attr,
-                             const igraph_vector_ptr_t *merges) {
+                             const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     igraph_real_t s=0.0;
     for (j=0; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
+      igraph_integer_t src=igraph_vector_int_get(v, j);
       s += REAL(attr2)[src];
     }
     REAL(res)[i] = s;
@@ -1679,20 +1680,20 @@ SEXP R_igraph_ac_sum_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_prod_numeric(SEXP attr,
-                              const igraph_vector_ptr_t *merges) {
+                              const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     igraph_real_t s=1.0;
     for (j=0; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
+      igraph_integer_t src=igraph_vector_int_get(v, j);
       s *= REAL(attr2)[src];
     }
     REAL(res)[i] = s;
@@ -1703,20 +1704,20 @@ SEXP R_igraph_ac_prod_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_min_numeric(SEXP attr,
-                             const igraph_vector_ptr_t *merges) {
+                             const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
-    igraph_real_t m= n > 0 ? REAL(attr2)[(long) VECTOR(*v)[0] ] : NA_REAL;
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
+    igraph_real_t m= n > 0 ? REAL(attr2)[igraph_vector_int_get(v, 0) ] : NA_REAL;
     for (j=1; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
+      igraph_integer_t src=igraph_vector_int_get(v, j);
       igraph_real_t val= REAL(attr2)[src];
       if (val < m) {
         m=val;
@@ -1730,20 +1731,20 @@ SEXP R_igraph_ac_min_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_max_numeric(SEXP attr,
-                             const igraph_vector_ptr_t *merges) {
+                             const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
-    igraph_real_t m= n > 0 ? REAL(attr2)[(long) VECTOR(*v)[0] ] : NA_REAL;
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
+    igraph_real_t m= n > 0 ? REAL(attr2)[igraph_vector_int_get(v, 0)] : NA_REAL;
     for (j=1; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
+      igraph_integer_t src=igraph_vector_int_get(v, j);
       igraph_real_t val= REAL(attr2)[src];
       if (val > m) {
         m=val;
@@ -1757,10 +1758,10 @@ SEXP R_igraph_ac_max_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_random_numeric(SEXP attr,
-                                const igraph_vector_ptr_t *merges) {
+                                const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
@@ -1768,15 +1769,15 @@ SEXP R_igraph_ac_random_numeric(SEXP attr,
   RNG_BEGIN();
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int n=igraph_vector_int_size(v);
     if (n==0) {
       REAL(res)[i]=NA_REAL;
     } else if (n==1) {
-      REAL(res)[i]=REAL(attr2)[(long) VECTOR(*v)[0] ];
+      REAL(res)[i]=REAL(attr2)[igraph_vector_int_get(v, 0)];
     } else {
       long int r=RNG_INTEGER(0,n-1);
-      REAL(res)[i]=REAL(attr2)[(long) VECTOR(*v)[r] ];
+      REAL(res)[i]=REAL(attr2)[igraph_vector_int_get(v, r)];
     }
   }
 
@@ -1787,21 +1788,21 @@ SEXP R_igraph_ac_random_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_first_numeric(SEXP attr,
-                               const igraph_vector_ptr_t *merges) {
+                               const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int n=igraph_vector_int_size(v);
     if (n==0) {
       REAL(res)[i]=NA_REAL;
     } else {
-      REAL(res)[i]=REAL(attr2)[(long) VECTOR(*v)[0] ];
+      REAL(res)[i]=REAL(attr2)[igraph_vector_int_get(v, 0)];
     }
   }
 
@@ -1810,21 +1811,21 @@ SEXP R_igraph_ac_first_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_last_numeric(SEXP attr,
-                              const igraph_vector_ptr_t *merges) {
+                              const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int n=igraph_vector_int_size(v);
     if (n==0) {
       REAL(res)[i]=NA_REAL;
     } else {
-      REAL(res)[i]=REAL(attr2)[(long) VECTOR(*v)[n-1] ];
+      REAL(res)[i]=REAL(attr2)[igraph_vector_int_get(v, n-1)];
     }
   }
 
@@ -1833,20 +1834,20 @@ SEXP R_igraph_ac_last_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_mean_numeric(SEXP attr,
-                              const igraph_vector_ptr_t *merges) {
+                              const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     igraph_real_t s= n>0 ? 0.0 : NA_REAL;
     for (j=0; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
+      igraph_integer_t src=igraph_vector_int_get(v, j);
       s += REAL(attr2)[src];
     }
     if (n>0) { s=s/n; }
@@ -1858,26 +1859,26 @@ SEXP R_igraph_ac_mean_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_median_numeric(SEXP attr,
-                                const igraph_vector_ptr_t *merges) {
+                                const igraph_vector_int_list_t *merges) {
   SEXP res;
   SEXP attr2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(attr2=AS_NUMERIC(attr));
   PROTECT(res=NEW_NUMERIC(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     SEXP tmp, call, tmp2;
     if (n==0) {
       REAL(res)[i] = NA_REAL;
     } else if (n==1) {
-      REAL(res)[i] = REAL(attr2)[ (long) VECTOR(*v)[0] ];
+      REAL(res)[i] = REAL(attr2)[igraph_vector_int_get(v, 0)];
     } else {
       PROTECT(tmp=NEW_NUMERIC(n));
       for (j=0; j<n; j++) {
-        long int src=(long int) VECTOR(*v)[j];
+        igraph_integer_t src=igraph_vector_int_get(v, j);
         REAL(tmp)[j] = REAL(attr2)[src];
       }
       PROTECT(call=Rf_lang2(Rf_install("median"), tmp));
@@ -1892,22 +1893,22 @@ SEXP R_igraph_ac_median_numeric(SEXP attr,
 }
 
 SEXP R_igraph_ac_all_other(SEXP attr,
-                           const igraph_vector_ptr_t *merges,
+                           const igraph_vector_int_list_t *merges,
                            const char *function_name,
                            SEXP arg) {
   SEXP res, res2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(res=NEW_LIST(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     SEXP tmp;
-    PROTECT(tmp=NEW_NUMERIC(n));
+    PROTECT(tmp=NEW_INTEGER(n));
     for (j=0; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
-      REAL(tmp)[j] = src+1;
+      igraph_integer_t src=igraph_vector_int_get(v, j);
+      INTEGER(tmp)[j] = src+1;
     }
     SEXP l1 = PROTECT(Rf_install(function_name));
     SEXP l2 = PROTECT(Rf_install("["));
@@ -1945,21 +1946,21 @@ SEXP R_igraph_ac_all_other(SEXP attr,
 }
 
 SEXP R_igraph_ac_func(SEXP attr,
-                      const igraph_vector_ptr_t *merges,
+                      const igraph_vector_int_list_t *merges,
                       SEXP func) {
   SEXP res, res2;
-  long int i, len=igraph_vector_ptr_size(merges);
+  long int i, len=igraph_vector_int_list_size(merges);
 
   PROTECT(res=NEW_LIST(len));
 
   for (i=0; i<len; i++) {
-    igraph_vector_t *v=VECTOR(*merges)[i];
-    long int j, n=igraph_vector_size(v);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(merges, i);
+    long int j, n=igraph_vector_int_size(v);
     SEXP tmp;
-    PROTECT(tmp=NEW_NUMERIC(n));
+    PROTECT(tmp=NEW_INTEGER(n));
     for (j=0; j<n; j++) {
-      long int src=(long int) VECTOR(*v)[j];
-      REAL(tmp)[j] = src+1;
+      igraph_integer_t src=igraph_vector_int_get(v, j);
+      INTEGER(tmp)[j] = src+1;
     }
     SEXP l1 = PROTECT(Rf_install("["));
     SEXP l2 = PROTECT(Rf_lang3(l1, attr, tmp));
@@ -2611,19 +2612,7 @@ SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v) {
 
   PROTECT(result=NEW_INTEGER(n));
   for (i=0; i<n; i++) {
-    INTEGER(result)[i]=VECTOR(*v)[i]+1;
-  }
-  UNPROTECT(1);
-  return result;
-}
-
-SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v) {
-  SEXP result;
-  long int i, n=igraph_vector_int_size(v);
-
-  PROTECT(result=NEW_INTEGER(n));
-  for (i=0; i<n; i++) {
-    INTEGER(result)[i]=VECTOR(*v)[i]+1;
+    INTEGER(result)[i]=igraph_vector_int_get(v, i)+1;
   }
   UNPROTECT(1);
   return result;
@@ -2880,7 +2869,7 @@ SEXP R_igraph_vectorlist_to_SEXP(const igraph_vector_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_t *v=VECTOR(*list)[i];
+    igraph_vector_t *v=igraph_vector_list_get_ptr(list, i);
     SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(v));
   }
 
@@ -3010,11 +2999,11 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
   SEXP result, names;
 
   PROTECT(result=NEW_LIST(5));
-  SET_VECTOR_ELT(result, 0, R_igraph_vector_to_SEXP(&hrg->left));
-  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&hrg->right));
+  SET_VECTOR_ELT(result, 0, R_igraph_vector_int_to_SEXP(&hrg->left));
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_int_to_SEXP(&hrg->right));
   SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&hrg->prob));
-  SET_VECTOR_ELT(result, 3, R_igraph_vector_to_SEXP(&hrg->edges));
-  SET_VECTOR_ELT(result, 4, R_igraph_vector_to_SEXP(&hrg->vertices));
+  SET_VECTOR_ELT(result, 3, R_igraph_vector_int_to_SEXP(&hrg->edges));
+  SET_VECTOR_ELT(result, 4, R_igraph_vector_int_to_SEXP(&hrg->vertices));
 
   PROTECT(names=NEW_CHARACTER(5));
   SET_STRING_ELT(names, 0, Rf_mkChar("left"));
@@ -3029,20 +3018,20 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
 }
 
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg) {
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 0), &hrg->left);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 1), &hrg->right);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 0), &hrg->left);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 1), &hrg->right);
   R_SEXP_to_vector(VECTOR_ELT(shrg, 2), &hrg->prob);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 3), &hrg->edges);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 4), &hrg->vertices);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 3), &hrg->edges);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 4), &hrg->vertices);
   return 0;
 }
 
 int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg) {
-  R_SEXP_to_vector_copy(VECTOR_ELT(shrg, 0), &hrg->left);
-  R_SEXP_to_vector_copy(VECTOR_ELT(shrg, 1), &hrg->right);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 0), &hrg->left);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 1), &hrg->right);
   R_SEXP_to_vector_copy(VECTOR_ELT(shrg, 2), &hrg->prob);
-  R_SEXP_to_vector_copy(VECTOR_ELT(shrg, 3), &hrg->edges);
-  R_SEXP_to_vector_copy(VECTOR_ELT(shrg, 4), &hrg->vertices);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 3), &hrg->edges);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 4), &hrg->vertices);
   return 0;
 }
 
@@ -3345,6 +3334,10 @@ int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v) {
 
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v) {
   return igraph_vector_init_copy(v, REAL(sv), GET_LENGTH(sv));
+}
+
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
+  return igraph_vector_int_init_copy(v, INTEGER(sv), GET_LENGTH(sv));
 }
 
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v) {
