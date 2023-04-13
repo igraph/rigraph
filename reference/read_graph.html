@@ -14,7 +14,7 @@ are supported."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,8 +115,9 @@ each file format, below.</p>
     <div class="section level2">
     <h2 id="edge-list-format">Edge list format<a class="anchor" aria-label="anchor" href="#edge-list-format"></a></h2>
     <p>This format is a simple text file with numeric
-vertex ids defining the edges. There is no need to have newline characters
-between the edges, a simple space will also do.</p>
+vertex IDs defining the edges. There is no need to have newline characters
+between the edges, a simple space will also do. Vertex IDs contained in
+the file are assumed to start at zero.</p>
 <p>Additional arguments:</p><dl><dt>n</dt>
 <dd><p>The number of vertices in the
 graph. If it is smaller than or equal to the largest integer in the file,
@@ -127,6 +128,13 @@ then it is ignored; so it is safe to set it to zero (the default).</p></dd>
 default value is <code>TRUE</code>.</p></dd>
  
 </dl></div>
+    <div class="section level2">
+    <h2 id="pajek-format">Pajek format<a class="anchor" aria-label="anchor" href="#pajek-format"></a></h2>
+    <p>Currently igraph only supports Pajek network
+files, with a <code>.net</code> extension, but not Pajek project files with
+a <code>.paj</code> extension. Only network data is supported; permutations,
+hierarchies, clusters and vectors are not.</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="write_graph.html">write_graph()</a></code></p>
