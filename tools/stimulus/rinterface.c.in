@@ -99,7 +99,7 @@ int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
 int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
                                    igraph_vector_ptr_t *ptr);
 int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list);
-int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
+int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);

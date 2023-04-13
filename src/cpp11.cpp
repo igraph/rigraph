@@ -532,7 +532,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_diameter",                               (DL_FUNC) &R_igraph_get_diameter,                                4},
     {"R_igraph_get_edge",                                   (DL_FUNC) &R_igraph_get_edge,                                    2},
     {"R_igraph_get_edgelist",                               (DL_FUNC) &R_igraph_get_edgelist,                                2},
-    {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    5},
+    {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    4},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
     {"R_igraph_get_incidence",                              (DL_FUNC) &R_igraph_get_incidence,                               2},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},

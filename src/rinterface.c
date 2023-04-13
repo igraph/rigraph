@@ -98,7 +98,7 @@ int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
 int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
                                    igraph_vector_ptr_t *ptr);
 int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list);
-int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
+int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
@@ -8117,7 +8117,7 @@ SEXP R_igraph_local_scan_neighborhood_ecount(SEXP graph, SEXP weights, SEXP neig
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(neighborhoods)) { R_igraph_SEXP_to_vectorlist_int(neighborhoods, &c_neighborhoods); }
+  if (!Rf_isNull(neighborhoods)) { R_igraph_SEXP_to_vector_int_list(neighborhoods, &c_neighborhoods); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_neighborhood_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_neighborhoods));
 
@@ -8150,7 +8150,7 @@ SEXP R_igraph_local_scan_subset_ecount(SEXP graph, SEXP weights, SEXP subsets) {
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(subsets)) { R_igraph_SEXP_to_vectorlist_int(subsets, &c_subsets); }
+  if (!Rf_isNull(subsets)) { R_igraph_SEXP_to_vector_int_list(subsets, &c_subsets); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_subset_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_subsets));
 
