@@ -55,9 +55,6 @@ VECTORM1:
 VECTOR_INT_OR_0:
     INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
 
-VECTORM1_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)-1
-
 VECTOR_LONG_M1:
     INCONV: '%I% <- as.numeric(%I%)-1'
 
