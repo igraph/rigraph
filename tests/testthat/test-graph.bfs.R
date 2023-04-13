@@ -13,7 +13,7 @@ test_that("BFS works from multiple root vertices", {
 
   expect_that(
     as.vector(bfs(g, 1, unreachable = FALSE)$order),
-    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6, rep(NaN, 10)))
+    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6, rep(NA, 10)))
   )
 
   expect_that(
