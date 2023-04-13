@@ -86,6 +86,7 @@ int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);
 int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
 int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v);
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
 int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl);
 int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl);
 int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl);
