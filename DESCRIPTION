@@ -34,7 +34,7 @@ Suggests:
 LinkingTo: 
     cpp11 (>= 0.2.0)
 License: GPL (>= 2)
-URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/
+URL: https://r.igraph.org/, https://igraph.org/, https://igraph.discourse.group/, https://github.com/igraph/rigraph/
 SystemRequirements:
     gmp (optional),
     libxml2 (optional),
