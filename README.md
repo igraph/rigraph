@@ -49,7 +49,7 @@ See the package wiki for more information on [installation troubleshooting](http
 
 ## Documentation
 
-See the [igraph homepage](https://igraph.org/r/) for the complete manual.
+See the [igraph homepage](https://igraph.org/) for the complete manual.
 
 ## Contributions
 
