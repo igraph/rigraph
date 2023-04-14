@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9004
+
+## Bug fixes
+
+  - Fix tests for dev waldo (#779).
+
+## Uncategorized
+
+  - Fix linking on Windows: gfortran needs quadmath. (#778).
+
+
 # igraph 1.4.99.9003
 
 ## Documentation
