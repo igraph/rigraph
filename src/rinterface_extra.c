@@ -3498,9 +3498,8 @@ int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it) {
 
 int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it) {
 
-  igraph_vector_t *tmpv=(igraph_vector_t*)R_alloc(1,sizeof(igraph_vector_t));
-  igraph_es_vector(it, igraph_vector_view(tmpv, REAL(rit),
-                                          GET_LENGTH(rit)));
+  igraph_vector_int_t *tmpv=(igraph_vector_int_t*)R_alloc(1,sizeof(igraph_vector_int_t));
+  igraph_es_vector(it, tmpv);
   return 0;
 }
 
@@ -3852,7 +3851,7 @@ SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
   IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, (igraph_integer_t) vid, mode));
 
   PROTECT(result=R_igraph_vector_int_to_SEXP(&neis));
-  igraph_vector_destroy(&neis);
+  igraph_vector_int_destroy(&neis);
 
   UNPROTECT(1);
   return result;
@@ -4782,17 +4781,19 @@ SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
 }
 
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
-                                 SEXP pattr, SEXP ploops) {
+                                 SEXP pweights, SEXP ploops) {
 
   igraph_t g;
   igraph_matrix_t adjm;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_vector_t weights;
   SEXP result;
-  const char *attr=CHAR(STRING_ELT(pattr, 0));
+
+  R_SEXP_to_vector(pweights, &weights);
 
   R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, attr, loops));
+  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
   PROTECT(result=R_igraph_to_SEXP(&g));
   igraph_destroy(&g);
 
