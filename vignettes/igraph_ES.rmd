@@ -26,7 +26,7 @@ Para instalar la librería desde CRAN, usa:
 install.packages("igraph")
 ```
 
-Encontrarás más información sobre dependencias, requisitos y resolución de problemas sobre la instalación en la [página principal](https://igraph.org/).
+Encontrarás más información sobre dependencias, requisitos y resolución de problemas sobre la instalación en la [página principal](https://r.igraph.org/).
 
 ## Uso de igraph
 
