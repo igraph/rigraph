@@ -2826,27 +2826,27 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   PROTECT(result=NEW_LIST(10));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   SET_VECTOR_ELT(result, 1, NEW_LOGICAL(1));
-  SET_VECTOR_ELT(result, 2, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 3, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 4, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 5, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 6, NEW_NUMERIC(no_of_nodes+1));
-  SET_VECTOR_ELT(result, 7, NEW_NUMERIC(no_of_nodes+1));
+  SET_VECTOR_ELT(result, 2, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 3, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 4, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 5, NEW_INTEGER(no_of_edges));
+  SET_VECTOR_ELT(result, 6, NEW_INTEGER(no_of_nodes+1));
+  SET_VECTOR_ELT(result, 7, NEW_INTEGER(no_of_nodes+1));
 
   REAL(VECTOR_ELT(result, 0))[0]=no_of_nodes;
   LOGICAL(VECTOR_ELT(result, 1))[0]=graph->directed;
-  memcpy(REAL(VECTOR_ELT(result, 2)), graph->from.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 3)), graph->to.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 4)), graph->oi.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 5)), graph->ii.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 6)), graph->os.stor_begin,
-         sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
-  memcpy(REAL(VECTOR_ELT(result, 7)), graph->is.stor_begin,
-         sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
+  memcpy(INTEGER(VECTOR_ELT(result, 2)), graph->from.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 3)), graph->to.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 4)), graph->oi.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 5)), graph->ii.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) no_of_edges);
+  memcpy(INTEGER(VECTOR_ELT(result, 6)), graph->os.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) (no_of_nodes+1));
+  memcpy(INTEGER(VECTOR_ELT(result, 7)), graph->is.stor_begin,
+         sizeof(igraph_integer_t)*(size_t) (no_of_nodes+1));
 
   SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
 
@@ -3247,15 +3247,13 @@ int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list) {
   int length=GET_LENGTH(vectorlist);
   int i;
   igraph_vector_t *vecs;
-  igraph_vector_t **vecsptr;
 
   vecs = (igraph_vector_t *) R_alloc((size_t) length, sizeof(igraph_vector_t));
-  vecsptr = (igraph_vector_t **) R_alloc((size_t) length,
-                                         sizeof(igraph_vector_t*));
-  igraph_vector_ptr_view(list, (void**) vecsptr, length);
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
   for (i=0; i<length; i++) {
     igraph_vector_t *v=&vecs[i];
-    vecsptr[i] = v;
     SEXP el=VECTOR_ELT(vectorlist, i);
     igraph_vector_view(v, REAL(el), GET_LENGTH(el));
   }
@@ -3267,16 +3265,14 @@ int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
   int length=GET_LENGTH(vectorlist);
   int i;
   igraph_vector_int_t *vecs;
-  igraph_vector_int_t **vecsptr;
 
   vecs = (igraph_vector_int_t *) R_alloc((size_t) length,
                                          sizeof(igraph_vector_int_t));
-  vecsptr = (igraph_vector_int_t **) R_alloc((size_t) length,
-                                             sizeof(igraph_vector_int_t*));
-  igraph_vector_int_ptr_view(list, (void**) vecsptr, length);
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
   for (i=0; i<length; i++) {
     igraph_vector_int_t *v=&vecs[i];
-    vecsptr[i] = v;
     SEXP el=VECTOR_ELT(vectorlist, i);
     igraph_vector_int_view(v, INTEGER(el), GET_LENGTH(el));
   }
@@ -3287,15 +3283,13 @@ int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
   int length=GET_LENGTH(matrixlist);
   int i;
   igraph_matrix_t *vecs;
-  igraph_matrix_t **vecsptr;
 
   vecs = (igraph_matrix_t *) R_alloc((size_t) length, sizeof(igraph_matrix_t));
-  vecsptr = (igraph_matrix_t **) R_alloc((size_t) length,
-                                         sizeof(igraph_matrix_t*));
-  igraph_vector_ptr_view(list, (void**) vecsptr, length);
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
   for (i=0; i<length; i++) {
     igraph_matrix_t *v=&vecs[i];
-    vecsptr[i] = v;
     SEXP el=VECTOR_ELT(matrixlist, i);
     SEXP dim=GET_DIM(el);
     igraph_matrix_view(v, REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
@@ -3304,11 +3298,13 @@ int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
 }
 
 int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
+  long int length=GET_LENGTH(rval);
   long int i;
-  sv->len=GET_LENGTH(rval);
-  sv->data=(char**) R_alloc((size_t) (sv->len), sizeof(char*));
-  for (i=0; i<sv->len; i++) {
-    sv->data[i]=(char*) CHAR(STRING_ELT(rval, i));
+  sv->stor_begin=(char**) R_alloc((size_t) length, sizeof(char*));
+  sv->stor_end=sv->stor_begin+length;
+  sv->end=sv->stor_end;
+  for (i=0; i<igraph_strvector_size(sv); i++) {
+    sv->stor_begin[i]=(char*) CHAR(STRING_ELT(rval, i));
   }
 
   return 0;
@@ -3317,7 +3313,7 @@ int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
 int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv) {
   long int i;
   igraph_strvector_init(sv, GET_LENGTH(rval));
-  for (i=0; i<sv->len; i++) {
+  for (i=0; i<igraph_strvector_size(sv); i++) {
     igraph_strvector_set(sv, i, CHAR(STRING_ELT(rval, i)));
   }
 
@@ -3332,11 +3328,11 @@ int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v) {
 }
 
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v) {
-  return igraph_vector_init_copy(v, REAL(sv), GET_LENGTH(sv));
+  return igraph_vector_init_array(v, REAL(sv), GET_LENGTH(sv));
 }
 
 int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
-  return igraph_vector_int_init_copy(v, INTEGER(sv), GET_LENGTH(sv));
+  return igraph_vector_int_init_array(v, INTEGER(sv), GET_LENGTH(sv));
 }
 
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v) {
@@ -3380,7 +3376,7 @@ int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl) {
 }
 
 int R_SEXP_to_igraph_matrix_copy(SEXP pakl, igraph_matrix_t *akl) {
-  igraph_vector_init_copy(&akl->data, REAL(pakl), GET_LENGTH(pakl));
+  igraph_vector_init_array(&akl->data, REAL(pakl), GET_LENGTH(pakl));
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
   akl->ncol=INTEGER(GET_DIM(pakl))[1];
 
@@ -3395,7 +3391,7 @@ int R_SEXP_to_vector_complex(SEXP pv, igraph_vector_complex_t *v) {
 }
 
 int R_SEXP_to_vector_complex_copy(SEXP pv, igraph_vector_complex_t *v) {
-  igraph_vector_complex_init_copy(v, (igraph_complex_t*) COMPLEX(pv),
+  igraph_vector_complex_init_array(v, (igraph_complex_t*) COMPLEX(pv),
                                   GET_LENGTH(pv));
   return 0;
 }
@@ -3408,7 +3404,7 @@ int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl) {
 }
 
 int R_SEXP_to_matrix_complex_copy(SEXP pakl, igraph_matrix_complex_t *akl) {
-  igraph_vector_complex_init_copy(&akl->data,
+  igraph_vector_complex_init_array(&akl->data,
                                   (igraph_complex_t*) COMPLEX(pakl),
                                   GET_LENGTH(pakl));
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
@@ -3427,7 +3423,7 @@ int R_igraph_SEXP_to_array3(SEXP rval, igraph_array3_t *a) {
 }
 
 int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
-  igraph_vector_init_copy(&a->data, REAL(rval), GET_LENGTH(rval));
+  igraph_vector_init_array(&a->data, REAL(rval), GET_LENGTH(rval));
   a->n1=INTEGER(GET_DIM(rval))[0];
   a->n2=INTEGER(GET_DIM(rval))[1];
   a->n3=INTEGER(GET_DIM(rval))[2];
@@ -3459,17 +3455,17 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 
   res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
   res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  igraph_vector_init_copy(&res->from, REAL(VECTOR_ELT(graph, 2)),
+  igraph_vector_int_init_array(&res->from, INTEGER(VECTOR_ELT(graph, 2)),
                    GET_LENGTH(VECTOR_ELT(graph, 2)));
-  igraph_vector_init_copy(&res->to, REAL(VECTOR_ELT(graph, 3)),
+  igraph_vector_int_init_array(&res->to, INTEGER(VECTOR_ELT(graph, 3)),
                    GET_LENGTH(VECTOR_ELT(graph, 3)));
-  igraph_vector_init_copy(&res->oi, REAL(VECTOR_ELT(graph, 4)),
+  igraph_vector_int_init_array(&res->oi, INTEGER(VECTOR_ELT(graph, 4)),
                    GET_LENGTH(VECTOR_ELT(graph, 4)));
-  igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, 5)),
+  igraph_vector_int_init_array(&res->ii, INTEGER(VECTOR_ELT(graph, 5)),
                    GET_LENGTH(VECTOR_ELT(graph, 5)));
-  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, 6)),
+  igraph_vector_int_init_array(&res->os, INTEGER(VECTOR_ELT(graph, 6)),
                    GET_LENGTH(VECTOR_ELT(graph, 6)));
-  igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, 7)),
+  igraph_vector_int_init_array(&res->is, INTEGER(VECTOR_ELT(graph, 7)),
                    GET_LENGTH(VECTOR_ELT(graph, 7)));
 
   /* attributes */
@@ -3486,9 +3482,8 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 
 int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it) {
 
-  igraph_vector_t *tmpv=(igraph_vector_t*)R_alloc(1,sizeof(igraph_vector_t));
-  igraph_vs_vector(it, igraph_vector_view(tmpv, REAL(rit),
-                                          GET_LENGTH(rit)));
+  igraph_vector_int_t *tmpv=(igraph_vector_int_t*)R_alloc(1,sizeof(igraph_vector_int_t));
+  igraph_vs_vector(it, tmpv);
   return 0;
 }
 
@@ -4707,7 +4702,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
       igraph_vector_int_copy_to(&vects[i], INTEGER(VECTOR_ELT(result1, i)));
       igraph_vector_int_destroy(&vects[i]);
     }
-    igraph_vector_ptr_destroy(&ptrvec);
+    igraph_vector_int_list_destroy(&ptrvec);
   } else {
     SET_VECTOR_ELT(result, 0, R_NilValue);
   }
@@ -4716,7 +4711,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     result2=VECTOR_ELT(result, 1);
     for (i=0; i<no; i++) {
       SET_VECTOR_ELT(result2, i, NEW_INTEGER(igraph_vector_int_size(&evects[i])));
-      igraph_vector_int_copy_to(&evects[i], INTGEER(VECTOR_ELT(result2, i)));
+      igraph_vector_int_copy_to(&evects[i], INTEGER(VECTOR_ELT(result2, i)));
       igraph_vector_int_destroy(&evects[i]);
     }
     igraph_vector_int_list_destroy(&ptrevec);
