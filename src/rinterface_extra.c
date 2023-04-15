@@ -4880,26 +4880,6 @@ SEXP R_igraph_layout_circle(SEXP graph, SEXP porder) {
   return result;
 }
 
-SEXP R_igraph_erdos_renyi_game(SEXP pn, SEXP ptype,
-                               SEXP pporm, SEXP pdirected, SEXP ploops) {
-
-  igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_real_t porm=REAL(pporm)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
-  SEXP result;
-
-  igraph_erdos_renyi_game(&g, (igraph_erdos_renyi_t) type, n, porm, directed,
-                          loops);
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_destroy(&g);
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
 
   igraph_t g;
@@ -8606,16 +8586,6 @@ SEXP R_igraph_simple_interconnected_islands_game(SEXP islands_n, SEXP islands_si
   return result;
 }
 
-SEXP R_igraph_version(void) {
-  const char *version;
-  SEXP result;
-  igraph_version(&version, /*major=*/ 0, /*minor=*/ 0, /*patch=*/ 0);
-  PROTECT(result=NEW_CHARACTER(1));
-  SET_STRING_ELT(result, 0, Rf_mkChar(version));
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
                                    SEXP pwhich) {
   /* Declarations */
@@ -8690,28 +8660,6 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
 
   UNPROTECT(1);
   return(result);
-}
-
-SEXP R_igraph_solve_lsap(SEXP px, SEXP pnc) {
-
-  igraph_matrix_t x;
-  igraph_integer_t nc = INTEGER(pnc)[0];
-  igraph_vector_int_t p;
-  SEXP result;
-
-  R_SEXP_to_matrix(px, &x);
-
-  igraph_vector_int_init(&p, nc);
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &p);
-
-  igraph_solve_lsap(&x, nc, &p);
-
-  PROTECT(result = R_igraph_vector_int_to_SEXP(&p));
-  igraph_vector_int_destroy(&p);
-  IGRAPH_FINALLY_CLEAN(1);
-
-  UNPROTECT(1);
-  return result;
 }
 
 SEXP R_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
