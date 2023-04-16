@@ -1,15 +1,15 @@
 set(SOURCES
-    Color.cpp
-    Light.cpp
-    Point.cpp
-    RIgraphRay.cpp
-    Ray.cpp
-    RayTracer.cpp
-    RayVector.cpp
-    Shape.cpp
-    Sphere.cpp
-    Triangle.cpp
-    unit_limiter.cpp
+  Color.cpp
+  Light.cpp
+  Point.cpp
+  RIgraphRay.cpp
+  Ray.cpp
+  RayTracer.cpp
+  RayVector.cpp
+  Shape.cpp
+  Sphere.cpp
+  Triangle.cpp
+  unit_limiter.cpp
 )
 
 add_library(simpleraytracer ${SOURCES})
