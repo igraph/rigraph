@@ -9726,78 +9726,8 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
 /-------------------------------------------*/
 SEXP R_igraph_eigen_adjacency(SEXP graph, SEXP algorithm, SEXP which, SEXP options) {
                                         /* Declarations */
-  igraph_t c_graph;
-  igraph_eigen_algorithm_t c_algorithm;
-  igraph_eigen_which_t c_which;
-  igraph_arpack_options_t c_options;
-
-  igraph_vector_t c_values;
-  igraph_matrix_t c_vectors;
-  igraph_vector_complex_t c_cmplxvalues;
-  igraph_matrix_complex_t c_cmplxvectors;
-  SEXP values;
-  SEXP vectors;
-  SEXP cmplxvalues;
-  SEXP cmplxvectors;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  c_algorithm=REAL(algorithm)[0];
-  R_SEXP_to_igraph_eigen_which(which, &c_which);
-  R_SEXP_to_igraph_arpack_options(options, &c_options);
-  if (0 != igraph_vector_init(&c_values, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_values);
-  if (0 != igraph_matrix_init(&c_vectors, 0, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_matrix_destroy, &c_vectors);
-  if (0 != igraph_vector_complex_init(&c_cmplxvalues, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_complex_destroy, &c_cmplxvalues);
-  cmplxvalues=R_GlobalEnv; /* hack to have a non-NULL value */
-  if (0 != igraph_matrix_complex_init(&c_cmplxvectors, 0, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_matrix_complex_destroy, &c_cmplxvectors);
-  cmplxvectors=R_GlobalEnv; /* hack to have a non-NULL value */
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eigen_adjacency(&c_graph, c_algorithm, &c_which, &c_options, 0, &c_values, &c_vectors, (Rf_isNull(cmplxvalues) ? 0 : &c_cmplxvalues), (Rf_isNull(cmplxvectors) ? 0 : &c_cmplxvectors)));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(5));
-  PROTECT(r_names=NEW_CHARACTER(5));
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
-  PROTECT(values=R_igraph_vector_to_SEXP(&c_values));
-  igraph_vector_destroy(&c_values);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(vectors=R_igraph_matrix_to_SEXP(&c_vectors));
-  igraph_matrix_destroy(&c_vectors);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(cmplxvalues=R_igraph_0orvector_complex_to_SEXP(&c_cmplxvalues));
-  igraph_vector_complex_destroy(&c_cmplxvalues);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(cmplxvectors=R_igraph_0ormatrix_complex_to_SEXP(&c_cmplxvectors));
-  igraph_matrix_complex_destroy(&c_cmplxvectors);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, options);
-  SET_VECTOR_ELT(r_result, 1, values);
-  SET_VECTOR_ELT(r_result, 2, vectors);
-  SET_VECTOR_ELT(r_result, 3, cmplxvalues);
-  SET_VECTOR_ELT(r_result, 4, cmplxvectors);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("options"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("values"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("vectors"));
-  SET_STRING_ELT(r_names, 3, Rf_mkChar("cmplxvalues"));
-  SET_STRING_ELT(r_names, 4, Rf_mkChar("cmplxvectors"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(6);
-
-  UNPROTECT(1);
-  return(r_result);
+  // FIXME
+  return R_NilValue;
 }
 
 /*-------------------------------------------/
@@ -9983,63 +9913,8 @@ SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
 / igraph_eigen_matrix                        /
 /-------------------------------------------*/
 SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
-                                        /* Declarations */
-  igraph_matrix_t c_A;
-  igraph_sparsemat_t c_sA;
-  igraph_arpack_function_t c_fun;
-  int c_n;
-
-  igraph_eigen_algorithm_t c_algorithm;
-  igraph_eigen_which_t c_which;
-  igraph_arpack_options_t c_options;
-
-  igraph_vector_complex_t c_values;
-  igraph_matrix_complex_t c_vectors;
-  SEXP values;
-  SEXP vectors;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  R_SEXP_to_matrix(A, &c_A);
-  R_SEXP_to_sparsemat(sA, &c_sA);
-  c_n=INTEGER(n)[0];
-  c_algorithm=REAL(algorithm)[0];
-  R_SEXP_to_igraph_eigen_which(which, &c_which);
-  R_SEXP_to_igraph_arpack_options(options, &c_options);
-  if (0 != igraph_vector_complex_init(&c_values, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_complex_destroy, &c_values);
-  values=R_GlobalEnv; /* hack to have a non-NULL value */
-  if (0 != igraph_matrix_complex_init(&c_vectors, 0, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_matrix_complex_destroy, &c_vectors);
-  vectors=R_GlobalEnv; /* hack to have a non-NULL value */
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eigen_matrix(&c_A, &c_sA, c_fun, c_n, 0, c_algorithm, &c_which, &c_options, 0, (Rf_isNull(values) ? 0 : &c_values), (Rf_isNull(vectors) ? 0 : &c_vectors)));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
-  PROTECT(values=R_igraph_0orvector_complex_to_SEXP(&c_values));
-  igraph_vector_complex_destroy(&c_values);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(vectors=R_igraph_0ormatrix_complex_to_SEXP(&c_vectors));
-  igraph_matrix_complex_destroy(&c_vectors);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, options);
-  SET_VECTOR_ELT(r_result, 1, values);
-  SET_VECTOR_ELT(r_result, 2, vectors);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("options"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("values"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("vectors"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
-
-  UNPROTECT(1);
-  return(r_result);
+  // FIXME
+  return R_NilValue;
 }
 
 /*-------------------------------------------/
