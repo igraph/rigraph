@@ -3081,6 +3081,46 @@ SEXP R_igraph_maxflow_stats_to_SEXP(const igraph_maxflow_stats_t *st) {
   return result;
 }
 
+SEXP R_igraph_arpack_unpack_complex(SEXP vectors, SEXP values, SEXP nev) {
+                                        /* Declarations */
+  igraph_matrix_t c_vectors;
+  igraph_matrix_t c_values;
+  igraph_integer_t c_nev;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  if (0 != R_SEXP_to_igraph_matrix_copy(vectors, &c_vectors)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_vectors);
+  if (0 != R_SEXP_to_igraph_matrix_copy(values, &c_values)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_values);
+  c_nev=INTEGER(nev)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_arpack_unpack_complex(&c_vectors, &c_values, c_nev));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  PROTECT(vectors=R_igraph_matrix_to_SEXP(&c_vectors));
+  igraph_matrix_destroy(&c_vectors);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(values=R_igraph_matrix_to_SEXP(&c_values));
+  igraph_matrix_destroy(&c_values);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, vectors);
+  SET_VECTOR_ELT(r_result, 1, values);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("vectors"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("values"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
 SEXP R_igraph_sirlist_to_SEXP(const igraph_vector_ptr_t *sl) {
   SEXP result, names;
   int i, n=igraph_vector_ptr_size(sl);
