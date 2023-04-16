@@ -46,26 +46,6 @@ empty_attrs_impl <- function(n, directed, attr) {
   res
 }
 
-get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  from <- as.igraph.vs(%I1%, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
-  to <- as.igraph.vs(%I1%, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_all_eids_between, graph, from-1, to-1, directed)
-
-  res
-}
-
 sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
   # Argument checks
   require(Matrix); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -648,34 +628,6 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path_dijkstra, graph, from-1, to-1, weights, mode)
-
-  res
-}
-
-get_shortest_path_astar_impl <- function(graph, from, to, weights=NULL, mode=c("out", "in", "all", "total"), heuristic=NULL, =NULL) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  from <- as.igraph.vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
-  to <- as.igraph.vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_shortest_path_astar, graph, from-1, to-1, weights, mode, heuristic)
 
   res
 }
@@ -1337,27 +1289,6 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   res
 }
 
-hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(%I1%)) {
-    weights <- E(%I1%)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
-
-  res
-}
-
 is_mutual_impl <- function(graph, eids=ALL, loops=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1654,48 +1585,6 @@ radius_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   res
 }
 
-pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  start.vid <- as.igraph.vs(%I1%, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_pseudo_diameter, graph, start.vid-1, directed, unconnected)
-
-  res
-}
-
-pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  start.vid <- as.igraph.vs(%I1%, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_pseudo_diameter_dijkstra, graph, weights, start.vid-1, directed, unconnected)
-
-  res
-}
-
 diversity_impl <- function(graph, weights=NULL, vids=ALL) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1861,22 +1750,6 @@ is_graphical_impl <- function(out.deg, in.deg, allowed.edge.types=c("simple", "l
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_graphical, out.deg, in.deg, allowed.edge.types)
-
-  res
-}
-
-bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  root <- as.igraph.vs(%I1%, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_bfs_simple, graph, root-1, mode)
 
   res
 }
@@ -2536,27 +2409,6 @@ read_graph_dimacs_flow_impl <- function(instream, directed=TRUE) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_read_graph_dimacs_flow, instream, directed)
-
-  res
-}
-
-write_graph_dimacs_flow_impl <- function(graph, outstream, source=0, target=0, capacity) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  source <- as.igraph.vs(%I1%, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
-  target <- as.igraph.vs(%I1%, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
-  capacity <- as.numeric(capacity)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_write_graph_dimacs_flow, graph, outstream, source-1, target-1, capacity)
-
 
   res
 }
@@ -3749,22 +3601,6 @@ invalidate_cache_impl <- function(graph) {
   # Function call
   res <- .Call(R_igraph_invalidate_cache, graph)
 
-
-  res
-}
-
-vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  start <- as.igraph.vs(%I1%, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path, mode)
 
   res
 }
