@@ -21,6 +21,9 @@ include_directories(${R_INCLUDE} ${R_LIBRARIES_INCLUDES} vendor/cigraph/include)
 
 set(IGRAPH_INTEGER_SIZE 32)
 set(IGRAPH_OPENMP_SUPPORT OFF)
+set(IGRAPH_USE_INTERNAL_GLPK ON)
+set(IGRAPH_USE_INTERNAL_LAPACK ON)
+set(IGRAPH_USE_INTERNAL_GMP ON)
 add_subdirectory(vendor/cigraph)
 
 add_subdirectory(vendor/simpleraytracer)
