@@ -9823,61 +9823,8 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SE
 / igraph_eigen_matrix_symmetric              /
 /-------------------------------------------*/
 SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
-                                        /* Declarations */
-  igraph_matrix_t c_A;
-  igraph_sparsemat_t c_sA;
-  igraph_arpack_function_t c_fun;
-  int c_n;
-
-  igraph_eigen_algorithm_t c_algorithm;
-  igraph_eigen_which_t c_which;
-  igraph_arpack_options_t c_options;
-
-  igraph_vector_t c_values;
-  igraph_matrix_t c_vectors;
-  SEXP values;
-  SEXP vectors;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  R_SEXP_to_matrix(A, &c_A);
-  R_SEXP_to_sparsemat(sA, &c_sA);
-  c_n=INTEGER(n)[0];
-  c_algorithm=REAL(algorithm)[0];
-  R_SEXP_to_igraph_eigen_which(which, &c_which);
-  R_SEXP_to_igraph_arpack_options(options, &c_options);
-  if (0 != igraph_vector_init(&c_values, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_values);
-  if (0 != igraph_matrix_init(&c_vectors, 0, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_matrix_destroy, &c_vectors);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eigen_matrix_symmetric(&c_A, &c_sA, c_fun, c_n, 0, c_algorithm, &c_which, &c_options, 0, &c_values, &c_vectors));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(3));
-  PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
-  PROTECT(values=R_igraph_vector_to_SEXP(&c_values));
-  igraph_vector_destroy(&c_values);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(vectors=R_igraph_matrix_to_SEXP(&c_vectors));
-  igraph_matrix_destroy(&c_vectors);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, options);
-  SET_VECTOR_ELT(r_result, 1, values);
-  SET_VECTOR_ELT(r_result, 2, vectors);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("options"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("values"));
-  SET_STRING_ELT(r_names, 2, Rf_mkChar("vectors"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(4);
-
-  UNPROTECT(1);
-  return(r_result);
+  // FIXME
+  return R_NilValue;
 }
 
 /*-------------------------------------------/
