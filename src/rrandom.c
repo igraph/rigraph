@@ -91,12 +91,12 @@ static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
 
 static igraph_rng_type_t igraph_rng_R_type = {
     /* name= */      "GNU R",
-    /* min=  */      0,
-    /* max=  */      0x7FFFFFFFUL,
+    /* bits= */      31,
     /* init= */      igraph_rng_R_init,
     /* destroy= */   igraph_rng_R_destroy,
     /* seed= */      igraph_rng_R_seed,
     /* get= */       igraph_rng_R_get,
+    /* get_int */    NULL,
     /* get_real= */  igraph_rng_R_get_real,
     /* get_norm= */  igraph_rng_R_get_norm,
     /* get_geom= */  igraph_rng_R_get_geom,
