@@ -18,3 +18,4 @@ cmake --install build --config Release
 
 cp -r ./install/include/igraph ./include
 cp ./install/lib/libigraph.a .
+cp ./install/lib/libsimpleraytracer.a .
