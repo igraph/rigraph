@@ -10,4 +10,4 @@ PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 all: $(SHLIB)
 
-OBJECTS=libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
+OBJECTS=libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o vendor/uuid/R.o
