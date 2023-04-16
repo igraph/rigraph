@@ -557,16 +557,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
 }
 
 arpack.unpack.complex <- function(vectors, values, nev) {
-  # Argument checks
-  vectors <- as.matrix(structure(as.double(vectors), dim = dim(vectors)))
-  values <- as.matrix(structure(as.double(values), dim = dim(values)))
-  nev <- as.integer(nev)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_arpack_unpack_complex, vectors, values, nev)
-
-  res
+  # FIXME
 }
 
 

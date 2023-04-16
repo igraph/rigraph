@@ -721,54 +721,7 @@ as_graphnel <- function(graph) {
 }
 
 get.incidence.dense <- function(graph, types, names, attr) {
-  if (is.null(attr)) {
-    on.exit(.Call(R_igraph_finalizer))
-    ## Function call
-    res <- .Call(R_igraph_get_incidence, graph, types)
-
-    if (names && "name" %in% vertex_attr_names(graph)) {
-      rownames(res$res) <- V(graph)$name[res$row_ids + 1]
-      colnames(res$res) <- V(graph)$name[res$col_ids + 1]
-    } else {
-      rownames(res$res) <- res$row_ids + 1
-      colnames(res$res) <- res$col_ids + 1
-    }
-    res$res
-  } else {
-    attr <- as.character(attr)
-    if (!attr %in% edge_attr_names(graph)) {
-      stop("no such edge attribute")
-    }
-
-    vc <- vcount(graph)
-    n1 <- sum(!types)
-    n2 <- vc - n1
-    res <- matrix(0, n1, n2)
-
-    recode <- numeric(vc)
-    recode[!types] <- seq_len(n1)
-    recode[types] <- seq_len(n2)
-
-    for (i in seq(length.out = ecount(graph))) {
-      eo <- ends(graph, i, names = FALSE)
-      e <- recode[eo]
-      if (!types[eo[1]]) {
-        res[e[1], e[2]] <- edge_attr(graph, attr, i)
-      } else {
-        res[e[2], e[1]] <- edge_attr(graph, attr, i)
-      }
-    }
-
-    if (names && "name" %in% vertex_attr_names(graph)) {
-      rownames(res) <- V(graph)$name[which(!types)]
-      colnames(res) <- V(graph)$name[which(types)]
-    } else {
-      rownames(res) <- which(!types)
-      colnames(res) <- which(types)
-    }
-
-    res
-  }
+  # FIXME
 }
 
 get.incidence.sparse <- function(graph, types, names, attr) {

@@ -76,65 +76,7 @@ graph.incidence.sparse <- function(incidence, directed, mode, multiple,
 
 graph.incidence.dense <- function(incidence, directed, mode, multiple,
                                   weighted) {
-  if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
-
-    n1 <- nrow(incidence)
-    n2 <- ncol(incidence)
-    no.edges <- sum(incidence != 0)
-    if (directed && mode == 3) {
-      no.edges <- no.edges * 2
-    }
-    edges <- numeric(2 * no.edges)
-    weight <- numeric(no.edges)
-    ptr <- 1
-    for (i in seq_len(nrow(incidence))) {
-      for (j in seq_len(ncol(incidence))) {
-        if (incidence[i, j] != 0) {
-          if (!directed || mode == 1) {
-            edges[2 * ptr - 1] <- i
-            edges[2 * ptr] <- n1 + j
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          } else if (mode == 2) {
-            edges[2 * ptr - 1] <- n1 + j
-            edges[2 * ptr] <- i
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          } else if (mode == 3) {
-            edges[2 * ptr - 1] <- i
-            edges[2 * ptr] <- n1 + j
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-            edges[2 * ptr - 1] <- n1 + j
-            edges[2 * ptr] <- i
-            weight[ptr] <- incidence[i, j]
-            ptr <- ptr + 1
-          }
-        }
-      }
-    }
-    res <- make_empty_graph(n = n1 + n2, directed = directed)
-    weight <- list(weight)
-    names(weight) <- weighted
-    res <- add_edges(res, edges, attr = weight)
-    res <- set_vertex_attr(res, "type",
-      value = c(rep(FALSE, n1), rep(TRUE, n2))
-    )
-  } else {
-    mode(incidence) <- "double"
-    on.exit(.Call(R_igraph_finalizer))
-    ## Function call
-    res <- .Call(R_igraph_incidence, incidence, directed, mode, multiple)
-    res <- set_vertex_attr(res$graph, "type", value = res$types)
-  }
-
-  res
+  # FIXME
 }
 
 #' Create graphs from an incidence matrix

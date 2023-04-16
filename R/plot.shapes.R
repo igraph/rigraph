@@ -1005,37 +1005,7 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
 #' @importFrom graphics rasterImage
 #' @importFrom grDevices col2rgb as.raster
 .igraph.shape.sphere.plot <- function(coords, v = NULL, params) {
-  getparam <- function(pname) {
-    p <- params("vertex", pname)
-    if (length(p) != 1 && !is.null(v)) {
-      p <- p[v]
-    }
-    p
-  }
-  vertex.color <- rep(getparam("color"), length.out = nrow(coords))
-  vertex.size <- rep(1 / 200 * getparam("size"), length.out = nrow(coords))
-
-  ## Need to create a separate image for every different vertex color
-  allcols <- unique(vertex.color)
-  images <- lapply(allcols, function(col) {
-    img <- .Call(R_igraph_getsphere,
-      pos = c(0.0, 0.0, 10.0), radius = 7.0,
-      color = col2rgb(col) / 255, bgcolor = c(0, 0, 0),
-      lightpos = list(c(-2, 2, 2)), lightcolor = list(c(1, 1, 1)),
-      width = 100L, height = 100L
-    )
-    as.raster(img)
-  })
-  whichImage <- match(vertex.color, allcols)
-
-  for (i in seq_len(nrow(coords))) {
-    vsp2 <- vertex.size[i]
-    rasterImage(
-      images[[whichImage[i]]],
-      coords[i, 1] - vsp2, coords[i, 2] - vsp2,
-      coords[i, 1] + vsp2, coords[i, 2] + vsp2
-    )
-  }
+  # FIXME
 }
 
 .igraph.shape.raster.clip <- .igraph.shape.rectangle.clip
