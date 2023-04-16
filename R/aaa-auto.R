@@ -46,26 +46,6 @@ empty_attrs_impl <- function(n, directed, attr) {
   res
 }
 
-get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  from <- as.igraph.vs(%I1%, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
-  }
-  to <- as.igraph.vs(%I1%, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_all_eids_between, graph, from-1, to-1, directed)
-
-  res
-}
-
 sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
   # Argument checks
   require(Matrix); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -208,7 +188,7 @@ full_multipartite_impl <- function(n, directed=FALSE, mode=c("all", "out", "in",
 
 realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
   # Argument checks
-  out.deg <- as.numeric(out.deg)
+  out.deg <- as.integer(out.deg)
   if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
   allowed.edge.types <- switch(igraph.match.arg(allowed.edge.types),
     "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
@@ -450,6 +430,9 @@ hsbm_list_game_impl <- function(n, mlist, rholist, Clist, p) {
   # Argument checks
   n <- as.integer(n)
   mlist <- as.integer(mlist)
+  if (!all(sapply(Clist, is.matrix))) {
+    stop("Clist is not a list of matrices")
+  }
   p <- as.numeric(p)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -592,7 +575,12 @@ get_shortest_path_impl <- function(graph, from, to, mode=c("out", "in", "all", "
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path, graph, from-1, to-1, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_vs(graph, res$edges)
+  }
   res
 }
 
@@ -620,7 +608,12 @@ get_shortest_path_bellman_ford_impl <- function(graph, from, to, weights=NULL, m
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path_bellman_ford, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_vs(graph, res$edges)
+  }
   res
 }
 
@@ -648,35 +641,12 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path_dijkstra, graph, from-1, to-1, weights, mode)
-
-  res
-}
-
-get_shortest_path_astar_impl <- function(graph, from, to, weights=NULL, mode=c("out", "in", "all", "total"), heuristic=NULL, =NULL) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  from <- as.igraph.vs(graph, from)
-  if (length(from) == 0) {
-    stop("No vertex was specified")
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
   }
-  to <- as.igraph.vs(graph, to)
-  if (length(to) == 0) {
-    stop("No vertex was specified")
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_vs(graph, res$edges)
   }
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_shortest_path_astar, graph, from-1, to-1, weights, mode, heuristic)
-
   res
 }
 
@@ -783,6 +753,7 @@ distances_floyd_warshall_impl <- function(graph, from=ALL, to=ALL, weights=NULL,
 voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=RANDOM) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  generators <- as.igraph.vs(graph, generators)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -795,7 +766,7 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_voronoi, graph, generators, weights, mode, tiebreaker)
+  res <- .Call(R_igraph_voronoi, graph, generators-1, weights, mode, tiebreaker)
 
   res
 }
@@ -853,7 +824,12 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_widest_path, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_vs(graph, res$edges)
+  }
   res
 }
 
@@ -937,7 +913,9 @@ spanner_impl <- function(graph, stretch, weights) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_spanner, graph, stretch, weights)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(, res)
+  }
   res
 }
 
@@ -1170,7 +1148,9 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_feedback_arc_set, graph, weights, algo)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -1337,27 +1317,6 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   res
 }
 
-hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  scale <- as.logical(scale)
-  if (is.null(weights) && "weight" %in% edge_attr_names(%I1%)) {
-    weights <- E(%I1%)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
-
-  res
-}
-
 is_mutual_impl <- function(graph, eids=ALL, loops=TRUE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -1390,6 +1349,9 @@ maximum_cardinality_search_impl <- function(graph) {
   # Function call
   res <- .Call(R_igraph_maximum_cardinality_search, graph)
   res$alpha <- res$alpha+1
+  if (igraph_opt("return.vs.es")) {
+    res$alpham1 <- create_vs(graph, res$alpham1)
+  }
   res
 }
 
@@ -1638,7 +1600,9 @@ graph_center_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_graph_center, graph, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -1650,48 +1614,6 @@ radius_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_radius, graph, mode)
-
-  res
-}
-
-pseudo_diameter_impl <- function(graph, start.vid, directed=TRUE, unconnected=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  start.vid <- as.igraph.vs(%I1%, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_pseudo_diameter, graph, start.vid-1, directed, unconnected)
-
-  res
-}
-
-pseudo_diameter_impl <- function(graph, weights=NULL, start.vid, directed=TRUE, unconnected=TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-  start.vid <- as.igraph.vs(%I1%, start.vid)
-  if (length(start.vid) == 0) {
-    stop("No vertex was specified")
-  }
-  directed <- as.logical(directed)
-  unconnected <- as.logical(unconnected)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_pseudo_diameter_dijkstra, graph, weights, start.vid-1, directed, unconnected)
 
   res
 }
@@ -1737,7 +1659,12 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_random_walk, graph, weights, start-1, mode, steps, stuck)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_vs(graph, res$edges)
+  }
   res
 }
 
@@ -1763,7 +1690,9 @@ random_edge_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_random_edge_walk, graph, weights, start-1, mode, steps, stuck)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -1861,22 +1790,6 @@ is_graphical_impl <- function(out.deg, in.deg, allowed.edge.types=c("simple", "l
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_graphical, out.deg, in.deg, allowed.edge.types)
-
-  res
-}
-
-bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  root <- as.igraph.vs(%I1%, root)
-  if (length(root) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_bfs_simple, graph, root-1, mode)
 
   res
 }
@@ -1993,20 +1906,6 @@ get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total")
   res
 }
 
-connected_components_impl <- function(graph, mode=c("weak", "strong"), details=FALSE) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  mode <- switch(igraph.match.arg(mode), "weak"=1, "strong"=2)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_connected_components, graph, mode)
-  if (!details) {
-    res <- res$membership
-  }
-  res
-}
-
 is_connected_impl <- function(graph, mode=c("weak", "strong")) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -2026,7 +1925,9 @@ articulation_points_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_articulation_points, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2037,7 +1938,9 @@ biconnected_components_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biconnected_components, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$articulation.points <- create_vs(graph, res$articulation.points)
+  }
   res
 }
 
@@ -2048,7 +1951,9 @@ bridges_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bridges, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2092,12 +1997,13 @@ largest_cliques_impl <- function(graph) {
 maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0, max.size=0, details=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  subset <- as.igraph.vs(graph, subset)
   min.size <- as.integer(min.size)
   max.size <- as.integer(max.size)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset, outfile, min.size, max.size)
+  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset-1, outfile, min.size, max.size)
   if (!details) {
     res <- res$res
   }
@@ -2196,7 +2102,9 @@ roots_for_tree_layout_impl <- function(graph, mode=c("out", "in", "all", "total"
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_roots_for_tree_layout, graph, mode, heuristic)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2276,12 +2184,13 @@ similarity_dice_es_impl <- function(graph, es=ALL, mode=c("all", "out", "in", "t
 similarity_dice_pairs_impl <- function(graph, pairs, mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  pairs <- as.igraph.vs(graph, pairs)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_dice_pairs, graph, pairs, mode, loops)
+  res <- .Call(R_igraph_similarity_dice_pairs, graph, pairs-1, mode, loops)
 
   res
 }
@@ -2327,12 +2236,13 @@ similarity_jaccard_es_impl <- function(graph, es=ALL, mode=c("all", "out", "in",
 similarity_jaccard_pairs_impl <- function(graph, pairs, mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  pairs <- as.igraph.vs(graph, pairs)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_jaccard_pairs, graph, pairs, mode, loops)
+  res <- .Call(R_igraph_similarity_jaccard_pairs, graph, pairs-1, mode, loops)
 
   res
 }
@@ -2540,27 +2450,6 @@ read_graph_dimacs_flow_impl <- function(instream, directed=TRUE) {
   res
 }
 
-write_graph_dimacs_flow_impl <- function(graph, outstream, source=0, target=0, capacity) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  source <- as.igraph.vs(%I1%, source)
-  if (length(source) == 0) {
-    stop("No vertex was specified")
-  }
-  target <- as.igraph.vs(%I1%, target)
-  if (length(target) == 0) {
-    stop("No vertex was specified")
-  }
-  capacity <- as.numeric(capacity)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_write_graph_dimacs_flow, graph, outstream, source-1, target-1, capacity)
-
-
-  res
-}
-
 dyad_census_impl <- function(graph) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
@@ -2620,7 +2509,9 @@ list_triangles_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_list_triangles, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2640,6 +2531,14 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
 gomory_hu_tree_impl <- function(graph, capacity) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2659,17 +2558,41 @@ maxflow_impl <- function(graph, source, target, capacity) {
   if (length(target) == 0) {
     stop("No vertex was specified")
   }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maxflow, graph, source-1, target-1, capacity)
-
+  if (igraph_opt("return.vs.es")) {
+    res$cut <- create_vs(graph, res$cut)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$partition1 <- create_vs(graph, res$partition1)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$partition2 <- create_vs(graph, res$partition2)
+  }
   res
 }
 
 residual_graph_impl <- function(graph, capacity, flow) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
   flow <- as.numeric(flow)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2682,6 +2605,14 @@ residual_graph_impl <- function(graph, capacity, flow) {
 reverse_residual_graph_impl <- function(graph, capacity, flow) {
   # Argument checks
   if (!is_igraph(graph)) { stop("Not a graph object") }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
   flow <- as.numeric(flow)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2704,6 +2635,9 @@ dominator_tree_impl <- function(graph, root, mode=c("out", "in", "all", "total")
   # Function call
   res <- .Call(R_igraph_dominator_tree, graph, root-1, mode)
   res$dom <- res$dom+1
+  if (igraph_opt("return.vs.es")) {
+    res$leftout <- create_vs(graph, res$leftout)
+  }
   res
 }
 
@@ -2736,6 +2670,14 @@ all_st_mincuts_impl <- function(graph, source, target, capacity) {
   target <- as.igraph.vs(graph, target)
   if (length(target) == 0) {
     stop("No vertex was specified")
+  }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3434,7 +3376,12 @@ eulerian_path_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eulerian_path, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$epath <- create_vs(graph, res$epath)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$vpath <- create_vs(graph, res$vpath)
+  }
   res
 }
 
@@ -3445,7 +3392,12 @@ eulerian_cycle_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eulerian_cycle, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$epath <- create_vs(graph, res$epath)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$vpath <- create_vs(graph, res$vpath)
+  }
   res
 }
 
@@ -3520,6 +3472,9 @@ is_forest_impl <- function(graph, mode=c("out", "in", "all", "total"), details=F
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_forest, graph, mode)
+  if (igraph_opt("return.vs.es")) {
+    res$roots <- create_vs(graph, res$roots)
+  }
   if (!details) {
     res <- res$res
   }
@@ -3576,7 +3531,7 @@ random_spanning_tree_impl <- function(graph, vid=0) {
   # Function call
   res <- .Call(R_igraph_random_spanning_tree, graph, vid-1)
   if (igraph_opt("return.vs.es")) {
-    res <- create_es(graph, res)
+    res <- create_vs(graph, res)
   }
   res
 }
@@ -3726,45 +3681,6 @@ strerror_impl <- function(igraph.errno) {
   # Function call
   res <- .Call(R_igraph_strerror, igraph.errno)
 
-
-  res
-}
-
-expand_path_to_pairs_impl <- function(path) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_expand_path_to_pairs, path)
-
-  res
-}
-
-invalidate_cache_impl <- function(graph) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_invalidate_cache, graph)
-
-
-  res
-}
-
-vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
-  # Argument checks
-  if (!is_igraph(graph)) { stop("Not a graph object") }
-  start <- as.igraph.vs(%I1%, start)
-  if (length(start) == 0) {
-    stop("No vertex was specified")
-  }
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path, mode)
 
   res
 }
