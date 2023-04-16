@@ -11,7 +11,7 @@ if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
 fi
 
 # Build igraph with cmake
-cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install -DCMAKE_SHARED_LIBRARY_PREFIX_CXX=""
+cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
 
 cmake --build build --config Release
 cmake --install build --config Release

@@ -19,4 +19,5 @@ execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); pkgs 
 include_directories(${R_INCLUDE} ${R_LIBRARIES_INCLUDES})
 
 set(IGRAPH_INTEGER_SIZE 32)
+set(IGRAPH_OPENMP_SUPPORT OFF)
 add_subdirectory(vendor/cigraph)
