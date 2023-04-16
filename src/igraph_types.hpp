@@ -1,3 +1,3 @@
 #pragma once
 
-#include "vendor/cigraph/include/igraph_types.h"
+#include "include/igraph/igraph_types.h"
