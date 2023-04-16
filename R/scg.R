@@ -279,11 +279,7 @@ scg_group <- function(V, nt,
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(
-    R_igraph_scg_grouping, V, as.integer(nt[1]),
-    if (length(nt) == 1) NULL else nt,
-    mtype, algo, p, maxiter
-  )
+  res <- NULL
   res
 }
 
@@ -392,10 +388,7 @@ scg_semi_proj <- function(groups,
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(
-    R_igraph_scg_semiprojectors, groups, mtype, p, norm,
-    sparse
-  )
+  res <- NULL
 
   if (sparse) {
     res$L <- igraph.i.spMatrix(res$L)
@@ -750,11 +743,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
     if (!is.null(evec)) {
       storage.mode(evec) <- "double"
     }
-    res <- .Call(
-      R_igraph_scg_adjacency, graph, matrix, sparsemat, ev,
-      nt, algo, evec, groups,
-      use.arpack, maxiter, sparse, output, semproj, epairs
-    )
+    res <- NULL
   } else if (mtype == "laplacian") {
     norm <- switch(igraph.match.arg(norm),
       "row" = 1,
@@ -768,12 +757,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
       "left" = 2,
       "right" = 3
     )
-    res <- .Call(
-      R_igraph_scg_laplacian, graph, matrix, sparsemat, ev,
-      nt, algo, norm, direction,
-      evec, groups, use.arpack, maxiter, sparse, output,
-      semproj, epairs
-    )
+    res <- NULL
   } else if (mtype == "stochastic") {
     norm <- switch(igraph.match.arg(norm),
       "row" = 1,
@@ -786,11 +770,7 @@ myscg <- function(graph, matrix, sparsemat, ev, nt, groups = NULL,
       storage.mode(p) <- "double"
     }
     stat.prob <- as.logical(stat.prob)
-    res <- .Call(
-      R_igraph_scg_stochastic, graph, matrix, sparsemat, ev,
-      nt, algo, norm, evec, groups, p, use.arpack,
-      maxiter, sparse, output, semproj, epairs, stat.prob
-    )
+    res <- NULL
   }
 
   if (!is.null(res$Xt) &&
