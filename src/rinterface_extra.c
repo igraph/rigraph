@@ -8960,3 +8960,8 @@ SEXP R_igraph_add_env(SEXP graph) {
 SEXP R_igraph_get_graph_id(SEXP graph) {
   return Rf_findVar(Rf_install("myid"), VECTOR_ELT(graph, 9));
 }
+
+SEXP R_igraph_vectorlist_int_to_SEXP(const igraph_vector_int_list_t *list) {
+  // FIXME
+  return R_NilValue;
+}
