@@ -16,4 +16,3 @@ cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMA
 cmake --build build --config Release
 cmake --install build --config Release
 
-cp -r ./install/include/igraph ./include
