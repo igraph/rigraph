@@ -121,10 +121,10 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 
   on.exit(.Call(R_igraph_finalizer))
   if (sparse) {
-    res <- .Call(R_igraph_get_stochastic_sparsemat, graph, column.wise)
+    res <- get_stochastic_sparse_impl(graph, column.wise)
     res <- igraph.i.spMatrix(res)
   } else {
-    res <- .Call(R_igraph_get_stochastic, graph, column.wise)
+    res <- .Call(R_igraph_get_stochastic, graph, column.wise, NULL)
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

@@ -1939,7 +1939,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_clusters, graph, mode)
+  res <- .Call(R_igraph_connected_components, graph, mode)
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name
