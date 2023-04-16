@@ -783,18 +783,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
-  # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  eids <- as.igraph.es(graph, eids)
-  delete.vertices <- as.logical(delete.vertices)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_subgraph_edges, graph, eids - 1, delete.vertices)
-
-  res
+  # FIXME
 }
 
 #' Transitivity of a graph
@@ -1928,24 +1917,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' groups(clu)
 #'
 components <- function(graph, mode = c("weak", "strong")) {
-  # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-  mode <- switch(igraph.match.arg(mode),
-    "weak" = 1,
-    "strong" = 2
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_clusters, graph, mode)
-  res$membership <- res$membership + 1
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$membership) <- V(graph)$name
-  }
-
-  res
+  # FIXME
 }
 
 #' @rdname components

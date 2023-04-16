@@ -315,25 +315,7 @@ isomorphic <- function(graph1, graph2, method = c(
                          "auto", "direct",
                          "vf2", "bliss"
                        ), ...) {
-  if (!is_igraph(graph1)) {
-    stop("Not a graph object")
-  }
-  if (!is_igraph(graph2)) {
-    stop("Not a graph object")
-  }
-  method <- igraph.match.arg(method)
-
-  if (method == "auto") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic, graph1, graph2)
-  } else if (method == "direct") {
-    on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic_34, graph1, graph2)
-  } else if (method == "vf2") {
-    graph.isomorphic.vf2(graph1, graph2, ...)$iso
-  } else if (method == "bliss") {
-    graph.isomorphic.bliss(graph1, graph2, ...)$iso
-  }
+  # FIXME
 }
 
 #' @export
