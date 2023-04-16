@@ -260,7 +260,6 @@ extern SEXP R_igraph_isoclass(SEXP);
 extern SEXP R_igraph_isoclass_create(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_isoclass_subgraph(SEXP, SEXP);
 extern SEXP R_igraph_isomorphic(SEXP, SEXP);
-extern SEXP R_igraph_isomorphic_34(SEXP, SEXP);
 extern SEXP R_igraph_isomorphic_bliss(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_isomorphic_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_k_regular_game(SEXP, SEXP, SEXP, SEXP);
@@ -383,11 +382,6 @@ extern SEXP R_igraph_sample_dirichlet(SEXP, SEXP);
 extern SEXP R_igraph_sample_sphere_surface(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_sample_sphere_volume(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_sbm_game(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_scg_adjacency(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_scg_grouping(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_scg_laplacian(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_scg_semiprojectors(SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP R_igraph_scg_stochastic(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_set_verbose(SEXP);
 extern SEXP R_igraph_shortest_paths(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_similarity_dice(SEXP, SEXP, SEXP, SEXP);
@@ -421,7 +415,6 @@ extern SEXP R_igraph_stochastic_imitation(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_strength(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_strerror(SEXP);
 extern SEXP R_igraph_subcomponent(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_subgraph_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subgraph_from_edges(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic(SEXP, SEXP);
 extern SEXP R_igraph_subisomorphic_function_vf2(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -476,7 +469,6 @@ extern SEXP R_igraph_write_graph_leda(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_write_graph_lgl(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_write_graph_ncol(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_write_graph_pajek(SEXP, SEXP);
-extern SEXP UUID_gen(SEXP);
 extern SEXP make_lazy(SEXP, SEXP, SEXP);
 extern SEXP make_lazy_dots(SEXP, SEXP);
 extern SEXP promise_env_(SEXP);
@@ -728,7 +720,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_isoclass_create",                            (DL_FUNC) &R_igraph_isoclass_create,                             3},
     {"R_igraph_isoclass_subgraph",                          (DL_FUNC) &R_igraph_isoclass_subgraph,                           2},
     {"R_igraph_isomorphic",                                 (DL_FUNC) &R_igraph_isomorphic,                                  2},
-    {"R_igraph_isomorphic_34",                              (DL_FUNC) &R_igraph_isomorphic_34,                               2},
     {"R_igraph_isomorphic_bliss",                           (DL_FUNC) &R_igraph_isomorphic_bliss,                            5},
     {"R_igraph_isomorphic_vf2",                             (DL_FUNC) &R_igraph_isomorphic_vf2,                              6},
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
@@ -851,11 +842,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_sample_sphere_surface",                      (DL_FUNC) &R_igraph_sample_sphere_surface,                       4},
     {"R_igraph_sample_sphere_volume",                       (DL_FUNC) &R_igraph_sample_sphere_volume,                        4},
     {"R_igraph_sbm_game",                                   (DL_FUNC) &R_igraph_sbm_game,                                    5},
-    {"R_igraph_scg_adjacency",                              (DL_FUNC) &R_igraph_scg_adjacency,                              14},
-    {"R_igraph_scg_grouping",                               (DL_FUNC) &R_igraph_scg_grouping,                                7},
-    {"R_igraph_scg_laplacian",                              (DL_FUNC) &R_igraph_scg_laplacian,                              16},
-    {"R_igraph_scg_semiprojectors",                         (DL_FUNC) &R_igraph_scg_semiprojectors,                          5},
-    {"R_igraph_scg_stochastic",                             (DL_FUNC) &R_igraph_scg_stochastic,                             17},
     {"R_igraph_set_verbose",                                (DL_FUNC) &R_igraph_set_verbose,                                 1},
     {"R_igraph_shortest_paths",                             (DL_FUNC) &R_igraph_shortest_paths,                              6},
     {"R_igraph_similarity_dice",                            (DL_FUNC) &R_igraph_similarity_dice,                             4},
@@ -889,7 +875,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_strength",                                   (DL_FUNC) &R_igraph_strength,                                    5},
     {"R_igraph_strerror",                                   (DL_FUNC) &R_igraph_strerror,                                    1},
     {"R_igraph_subcomponent",                               (DL_FUNC) &R_igraph_subcomponent,                                3},
-    {"R_igraph_subgraph_edges",                             (DL_FUNC) &R_igraph_subgraph_edges,                              3},
     {"R_igraph_subgraph_from_edges",                        (DL_FUNC) &R_igraph_subgraph_from_edges,                         3},
     {"R_igraph_subisomorphic",                              (DL_FUNC) &R_igraph_subisomorphic,                               2},
     {"R_igraph_subisomorphic_function_vf2",                 (DL_FUNC) &R_igraph_subisomorphic_function_vf2,                  7},
@@ -944,7 +929,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_write_graph_lgl",                            (DL_FUNC) &R_igraph_write_graph_lgl,                             5},
     {"R_igraph_write_graph_ncol",                           (DL_FUNC) &R_igraph_write_graph_ncol,                            4},
     {"R_igraph_write_graph_pajek",                          (DL_FUNC) &R_igraph_write_graph_pajek,                           2},
-    {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
     {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
     {"make_lazy",                                           (DL_FUNC) &make_lazy,                                            3},
     {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},

@@ -1975,7 +1975,7 @@ SEXP R_igraph_get_shortest_path_dijkstra(SEXP graph, SEXP from, SEXP to, SEXP we
 /*-------------------------------------------/
 / igraph_get_shortest_path_astar             /
 /-------------------------------------------*/
-SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode, SEXP heuristic) {
+SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_vector_int_t c_vertices;
@@ -1984,7 +1984,7 @@ SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weigh
   igraph_integer_t c_to;
   igraph_vector_t c_weights;
   igraph_neimode_t c_mode;
-  igraph_astar_heuristic_func_t c_heuristic;
+
 
   SEXP vertices;
   SEXP edges;
@@ -2005,7 +2005,7 @@ SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weigh
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_shortest_path_astar(&c_graph, &c_vertices, &c_edges, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_heuristic, 0));
+  IGRAPH_R_CHECK(igraph_get_shortest_path_astar(&c_graph, &c_vertices, &c_edges, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode, 0, 0));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

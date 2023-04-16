@@ -9,6 +9,7 @@ project(
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Compile igraph with USING_R definition
 add_compile_definitions(USING_R)
@@ -23,3 +24,4 @@ set(IGRAPH_OPENMP_SUPPORT OFF)
 add_subdirectory(vendor/cigraph)
 
 add_subdirectory(vendor/simpleraytracer)
+add_subdirectory(vendor/uuid)

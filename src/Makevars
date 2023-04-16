@@ -6,8 +6,8 @@ PKG_CPPFLAGS=-DUSING_R -I. -Icore -Iinclude -Ivendor \
 	-DNDEBUG -DNTIMER -DNPRINT \
 	-DINTERNAL_ARPACK \
 	-DPRPACK_IGRAPH_SUPPORT -DIGRAPH_THREAD_LOCAL=/**/ -fPIC
-PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -Linstall/lib -ligraph -lsimpleraytracer
+PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -Linstall/lib -luuid -ligraph -lsimpleraytracer -lxml2
 
 all: $(SHLIB)
 
-OBJECTS=libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
+OBJECTS=install/lib/libuuid.a install/lib/libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o

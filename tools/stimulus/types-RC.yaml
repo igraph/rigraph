@@ -622,6 +622,11 @@ ISOCOMPAT_FUNC:
     CTYPE: ~
     HEADER: {}
 
+ASTAR_HEURISTIC_FUNC:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 ATTRIBUTES:
     CALL: '0'
     CTYPE: ~
