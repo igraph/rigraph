@@ -792,7 +792,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_subgraph_edges, graph, eids - 1, delete.vertices)
+  res <- .Call(R_igraph_subgraph_from_edges, graph, eids - 1, delete.vertices)
 
   res
 }
