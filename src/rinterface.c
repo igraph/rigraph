@@ -67,7 +67,7 @@ SEXP R_igraph_0ormatrix_complex_to_SEXP(const igraph_matrix_complex_t *m);
 SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m);
 SEXP R_igraph_to_SEXP(const igraph_t *graph);
 SEXP R_igraph_vectorlist_to_SEXP(const igraph_vector_ptr_t *ptr);
-SEXP R_igraph_vectorlist_int_to_SEXP(const igraph_vector_int_list_t *list);
+SEXP R_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
 SEXP R_igraph_0orvectorlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr);
@@ -2066,10 +2066,10 @@ SEXP R_igraph_get_all_shortest_paths(SEXP graph, SEXP from, SEXP to, SEXP mode) 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
   PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(vertices=R_igraph_vectorlist_int_to_SEXP(&c_vertices));
+  PROTECT(vertices=R_igraph_vector_int_list_to_SEXP(&c_vertices));
   igraph_vector_int_list_destroy(&c_vertices);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edges=R_igraph_vectorlist_int_to_SEXP(&c_edges));
+  PROTECT(edges=R_igraph_vector_int_list_to_SEXP(&c_edges));
   igraph_vector_int_list_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(nrgeo=R_igraph_vector_int_to_SEXP(&c_nrgeo));
@@ -2201,10 +2201,10 @@ SEXP R_igraph_get_all_shortest_paths_dijkstra(SEXP graph, SEXP from, SEXP to, SE
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
   PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(vertices=R_igraph_vectorlist_int_to_SEXP(&c_vertices));
+  PROTECT(vertices=R_igraph_vector_int_list_to_SEXP(&c_vertices));
   igraph_vector_int_list_destroy(&c_vertices);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edges=R_igraph_vectorlist_int_to_SEXP(&c_edges));
+  PROTECT(edges=R_igraph_vector_int_list_to_SEXP(&c_edges));
   igraph_vector_int_list_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(nrgeo=R_igraph_vector_int_to_SEXP(&c_nrgeo));
@@ -2455,10 +2455,10 @@ SEXP R_igraph_get_k_shortest_paths(SEXP graph, SEXP weights, SEXP k, SEXP from, 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(vertex_paths=R_igraph_vectorlist_int_to_SEXP(&c_vertex_paths));
+  PROTECT(vertex_paths=R_igraph_vector_int_list_to_SEXP(&c_vertex_paths));
   igraph_vector_int_list_destroy(&c_vertex_paths);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edge_paths=R_igraph_vectorlist_int_to_SEXP(&c_edge_paths));
+  PROTECT(edge_paths=R_igraph_vector_int_list_to_SEXP(&c_edge_paths));
   igraph_vector_int_list_destroy(&c_edge_paths);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, vertex_paths);
@@ -2572,10 +2572,10 @@ SEXP R_igraph_get_widest_paths(SEXP graph, SEXP from, SEXP to, SEXP weights, SEX
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
   PROTECT(r_names=NEW_CHARACTER(4));
-  PROTECT(vertices=R_igraph_vectorlist_int_to_SEXP(&c_vertices));
+  PROTECT(vertices=R_igraph_vector_int_list_to_SEXP(&c_vertices));
   igraph_vector_int_list_destroy(&c_vertices);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edges=R_igraph_vectorlist_int_to_SEXP(&c_edges));
+  PROTECT(edges=R_igraph_vector_int_list_to_SEXP(&c_edges));
   igraph_vector_int_list_destroy(&c_edges);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(parents=R_igraph_vector_int_to_SEXP(&c_parents));
@@ -5664,13 +5664,13 @@ SEXP R_igraph_biconnected_components(SEXP graph) {
   PROTECT(r_names=NEW_CHARACTER(5));
   PROTECT(no=NEW_INTEGER(1));
   INTEGER(no)[0]=c_no;
-  PROTECT(tree_edges=R_igraph_vectorlist_int_to_SEXP(&c_tree_edges));
+  PROTECT(tree_edges=R_igraph_vector_int_list_to_SEXP(&c_tree_edges));
   igraph_vector_int_list_destroy(&c_tree_edges);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(component_edges=R_igraph_vectorlist_int_to_SEXP(&c_component_edges));
+  PROTECT(component_edges=R_igraph_vector_int_list_to_SEXP(&c_component_edges));
   igraph_vector_int_list_destroy(&c_component_edges);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(components=R_igraph_vectorlist_int_to_SEXP(&c_components));
+  PROTECT(components=R_igraph_vector_int_list_to_SEXP(&c_components));
   igraph_vector_int_list_destroy(&c_components);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(articulation_points=R_igraph_vector_int_to_SEXP(&c_articulation_points));
@@ -5746,7 +5746,7 @@ SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
   IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vectorlist_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_list_to_SEXP(&c_res));
   igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
@@ -5808,7 +5808,7 @@ SEXP R_igraph_largest_cliques(SEXP graph) {
   IGRAPH_R_CHECK(igraph_largest_cliques(&c_graph, &c_res));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vectorlist_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_list_to_SEXP(&c_res));
   igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
@@ -5849,7 +5849,7 @@ SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(res=R_igraph_vectorlist_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_list_to_SEXP(&c_res));
   igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(no=NEW_INTEGER(1));
@@ -5951,7 +5951,7 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight,
   IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_min_weight, c_max_weight, c_maximal));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vectorlist_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_list_to_SEXP(&c_res));
   igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
@@ -5982,7 +5982,7 @@ SEXP R_igraph_largest_weighted_cliques(SEXP graph, SEXP vertex_weights) {
   IGRAPH_R_CHECK(igraph_largest_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res));
 
                                         /* Convert output */
-  PROTECT(res=R_igraph_vectorlist_int_to_SEXP(&c_res));
+  PROTECT(res=R_igraph_vector_int_list_to_SEXP(&c_res));
   igraph_vector_int_list_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
@@ -8612,10 +8612,10 @@ SEXP R_igraph_all_st_cuts(SEXP graph, SEXP source, SEXP target) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(cuts=R_igraph_vectorlist_int_to_SEXP(&c_cuts));
+  PROTECT(cuts=R_igraph_vector_int_list_to_SEXP(&c_cuts));
   igraph_vector_int_list_destroy(&c_cuts);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(partition1s=R_igraph_vectorlist_int_to_SEXP(&c_partition1s));
+  PROTECT(partition1s=R_igraph_vector_int_list_to_SEXP(&c_partition1s));
   igraph_vector_int_list_destroy(&c_partition1s);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, cuts);
@@ -8667,10 +8667,10 @@ SEXP R_igraph_all_st_mincuts(SEXP graph, SEXP source, SEXP target, SEXP capacity
   PROTECT(r_names=NEW_CHARACTER(3));
   PROTECT(value=NEW_NUMERIC(1));
   REAL(value)[0]=c_value;
-  PROTECT(cuts=R_igraph_vectorlist_int_to_SEXP(&c_cuts));
+  PROTECT(cuts=R_igraph_vector_int_list_to_SEXP(&c_cuts));
   igraph_vector_int_list_destroy(&c_cuts);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(partition1s=R_igraph_vectorlist_int_to_SEXP(&c_partition1s));
+  PROTECT(partition1s=R_igraph_vector_int_list_to_SEXP(&c_partition1s));
   igraph_vector_int_list_destroy(&c_partition1s);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, value);
@@ -8799,7 +8799,7 @@ SEXP R_igraph_all_minimal_st_separators(SEXP graph) {
   IGRAPH_R_CHECK(igraph_all_minimal_st_separators(&c_graph, &c_separators));
 
                                         /* Convert output */
-  PROTECT(separators=R_igraph_vectorlist_int_to_SEXP(&c_separators));
+  PROTECT(separators=R_igraph_vector_int_list_to_SEXP(&c_separators));
   igraph_vector_int_list_destroy(&c_separators);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = separators;
@@ -8828,7 +8828,7 @@ SEXP R_igraph_minimum_size_separators(SEXP graph) {
   IGRAPH_R_CHECK(igraph_minimum_size_separators(&c_graph, &c_separators));
 
                                         /* Convert output */
-  PROTECT(separators=R_igraph_vectorlist_int_to_SEXP(&c_separators));
+  PROTECT(separators=R_igraph_vector_int_list_to_SEXP(&c_separators));
   igraph_vector_int_list_destroy(&c_separators);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = separators;
@@ -9080,7 +9080,7 @@ SEXP R_igraph_get_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1,
   IGRAPH_R_CHECK(igraph_get_isomorphisms_vf2(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_maps, 0, 0, 0));
 
                                         /* Convert output */
-  PROTECT(maps=R_igraph_vectorlist_int_to_SEXP(&c_maps));
+  PROTECT(maps=R_igraph_vector_int_list_to_SEXP(&c_maps));
   igraph_vector_int_list_destroy(&c_maps);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = maps;
@@ -9182,7 +9182,7 @@ SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SE
 /*-------------------------------------------/
 / igraph_subisomorphic_function_vf2          /
 /-------------------------------------------*/
-SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP ishohandler_fn) {
+SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9192,7 +9192,7 @@ SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_c
   igraph_vector_int_t c_edge_color2;
   igraph_vector_int_t c_map12;
   igraph_vector_int_t c_map21;
-  igraph_isohandler_t c_ishohandler_fn;
+
 
 
 
@@ -9216,7 +9216,7 @@ SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_c
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map21);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_subisomorphic_function_vf2(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_map12, &c_map21, c_ishohandler_fn, 0, 0, 0));
+  IGRAPH_R_CHECK(igraph_subisomorphic_function_vf2(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_map12, &c_map21, 0, 0, 0, 0));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -9309,7 +9309,7 @@ SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_colo
   IGRAPH_R_CHECK(igraph_get_subisomorphisms_vf2(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1), (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2), (Rf_isNull(edge_color1) ? 0 : &c_edge_color1), (Rf_isNull(edge_color2) ? 0 : &c_edge_color2), &c_maps, 0, 0, 0));
 
                                         /* Convert output */
-  PROTECT(maps=R_igraph_vectorlist_int_to_SEXP(&c_maps));
+  PROTECT(maps=R_igraph_vector_int_list_to_SEXP(&c_maps));
   igraph_vector_int_list_destroy(&c_maps);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = maps;
@@ -9517,7 +9517,7 @@ SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(generators=R_igraph_vectorlist_int_to_SEXP(&c_generators));
+  PROTECT(generators=R_igraph_vector_int_list_to_SEXP(&c_generators));
   igraph_vector_int_list_destroy(&c_generators);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(info=R_igraph_bliss_info_to_SEXP(&c_info));
@@ -9983,11 +9983,11 @@ SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
 /*-------------------------------------------/
 / igraph_eigen_matrix                        /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
-  igraph_arpack_function_t c_fun;
+
   int c_n;
 
   igraph_eigen_algorithm_t c_algorithm;
@@ -10018,7 +10018,7 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SE
   IGRAPH_FINALLY(igraph_matrix_complex_destroy, &c_vectors);
   vectors=R_GlobalEnv; /* hack to have a non-NULL value */
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eigen_matrix(&c_A, &c_sA, c_fun, c_n, 0, c_algorithm, &c_which, &c_options, 0, (Rf_isNull(values) ? 0 : &c_values), (Rf_isNull(vectors) ? 0 : &c_vectors)));
+  IGRAPH_R_CHECK(igraph_eigen_matrix(&c_A, &c_sA, 0, c_n, 0, c_algorithm, &c_which, &c_options, 0, (Rf_isNull(values) ? 0 : &c_values), (Rf_isNull(vectors) ? 0 : &c_vectors)));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -10046,11 +10046,11 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SE
 /*-------------------------------------------/
 / igraph_eigen_matrix_symmetric              /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
-  igraph_arpack_function_t c_fun;
+
   int c_n;
 
   igraph_eigen_algorithm_t c_algorithm;
@@ -10079,7 +10079,7 @@ SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP fun, SEXP n, SEXP alg
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_vectors);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_eigen_matrix_symmetric(&c_A, &c_sA, c_fun, c_n, 0, c_algorithm, &c_which, &c_options, 0, &c_values, &c_vectors));
+  IGRAPH_R_CHECK(igraph_eigen_matrix_symmetric(&c_A, &c_sA, 0, c_n, 0, c_algorithm, &c_which, &c_options, 0, &c_values, &c_vectors));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
@@ -10286,7 +10286,7 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
   IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, c_start, c_bfs_cutoff, (Rf_isNull(weights) ? 0 : &c_weights)));
 
                                         /* Convert output */
-  PROTECT(basis=R_igraph_vectorlist_int_to_SEXP(&c_basis));
+  PROTECT(basis=R_igraph_vector_int_list_to_SEXP(&c_basis));
   igraph_vector_int_list_destroy(&c_basis);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = basis;
@@ -10323,7 +10323,7 @@ SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP bfs_cutoff, SEXP complete, SE
   IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order, (Rf_isNull(weights) ? 0 : &c_weights)));
 
                                         /* Convert output */
-  PROTECT(basis=R_igraph_vectorlist_int_to_SEXP(&c_basis));
+  PROTECT(basis=R_igraph_vector_int_list_to_SEXP(&c_basis));
   igraph_vector_int_list_destroy(&c_basis);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = basis;

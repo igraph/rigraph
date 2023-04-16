@@ -285,7 +285,7 @@ VECTOR_INT_LIST:
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_list_to_SEXP(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -301,7 +301,7 @@ VERTEXSET_LIST:
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_list_to_SEXP(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -317,7 +317,7 @@ EDGESET_LIST:
             IGRAPH_FINALLY(igraph_vector_int_list_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vectorlist_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_list_to_SEXP(&%C%));
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -622,6 +622,11 @@ ISOCOMPAT_FUNC:
     CTYPE: ~
     HEADER: {}
 
+ISOMORPHISM_FUNC:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
 ASTAR_HEURISTIC_FUNC:
     CALL: '0'
     CTYPE: ~
@@ -640,6 +645,11 @@ ARPACKOPT:
         INOUT: PROTECT(%I%=R_igraph_arpack_options_to_SEXP(&%C%));
 
 ARPACKSTORAGE:
+    CALL: '0'
+    CTYPE: ~
+    HEADER: {}
+
+ARPACKFUNC:
     CALL: '0'
     CTYPE: ~
     HEADER: {}
