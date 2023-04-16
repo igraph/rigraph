@@ -3043,7 +3043,8 @@ SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit) {
   SET_VECTOR_ELT(result, 2, Rf_ScalarReal(plfit->xmin));
   SET_VECTOR_ELT(result, 3, Rf_ScalarReal(plfit->L));
   SET_VECTOR_ELT(result, 4, Rf_ScalarReal(plfit->D));
-  SET_VECTOR_ELT(result, 5, Rf_ScalarReal(plfit->p));
+  //TODO: fixme
+  //SET_VECTOR_ELT(result, 5, Rf_ScalarReal(plfit->p));
 
   PROTECT(names=NEW_CHARACTER(6));
   SET_STRING_ELT(names, 0, Rf_mkChar("continuous"));
@@ -4760,19 +4761,8 @@ SEXP R_igraph_are_connected(SEXP graph, SEXP pv1, SEXP pv2) {
 }
 
 SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
-
-  igraph_t g;
-  igraph_matrix_t adjm;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  SEXP result;
-
-  R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_adjacency(&g, &adjm, (igraph_adjacency_t) mode));
-  PROTECT(result=R_igraph_to_SEXP(&g));
-  igraph_destroy(&g);
-
-  UNPROTECT(1);
-  return result;
+  //TODO: fixme
+  return R_NilValue;
 }
 
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
@@ -4931,21 +4921,8 @@ SEXP R_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
 }
 
 SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP peids) {
-
-  igraph_t g;
-  igraph_matrix_t res;
-  igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_bool_t eids=LOGICAL(peids)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  igraph_matrix_init(&res, 0, 0);
-  IGRAPH_R_CHECK(igraph_get_adjacency(&g, &res, (igraph_get_adjacency_t) type, eids));
-  PROTECT(result=R_igraph_matrix_to_SEXP(&res));
-  igraph_matrix_destroy(&res);
-
-  UNPROTECT(1);
-  return result;
+  //TODO: fixme
+  return R_NilValue;
 }
 
 SEXP R_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
