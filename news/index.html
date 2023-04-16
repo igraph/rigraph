@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,17 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.99.9004" id="igraph-14999004">igraph 1.4.99.9004<a class="anchor" aria-label="anchor" href="#igraph-14999004"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-4-99-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-4-99-9004"></a></h3>
+<ul><li>Fix tests for dev waldo (<a href="https://github.com/igraph/rigraph/issues/779" class="external-link">#779</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-1-4-99-9004">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-4-99-9004"></a></h3>
+<ul><li>Fix linking on Windows: gfortran needs quadmath. (<a href="https://github.com/igraph/rigraph/issues/778" class="external-link">#778</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.4.99.9003" id="igraph-14999003">igraph 1.4.99.9003<a class="anchor" aria-label="anchor" href="#igraph-14999003"></a></h2>
 <div class="section level3">
@@ -186,6 +197,8 @@
 <code><a href="../reference/dfs.html">dfs()</a></code> accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.</li>
 <li>
 <code><a href="../reference/as_graphnel.html">as_graphnel()</a></code> does not duplicate loop edges any more.</li>
+<li>
+<code><a href="../reference/as_graphnel.html">as_graphnel()</a></code> now checks that the input graph has no multi-edges. Multi-edges are not supported by the graphNEL class.</li>
 <li>
 <code><a href="../reference/convex_hull.html">convex_hull()</a></code> now returns the vertices of the convex hull with 1-based indexing.</li>
 <li>Some <code>rgl.*()</code> function calls in the codebase were replaced with equivalent <code>*3d()</code> function calls in preparation for upcoming deprecations in <code>rgl</code> (see PR <a href="https://github.com/igraph/rigraph/issues/619" class="external-link">#619</a>)</li>
