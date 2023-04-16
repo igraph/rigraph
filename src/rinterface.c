@@ -1975,55 +1975,8 @@ SEXP R_igraph_get_shortest_path_dijkstra(SEXP graph, SEXP from, SEXP to, SEXP we
 / igraph_get_shortest_path_astar             /
 /-------------------------------------------*/
 SEXP R_igraph_get_shortest_path_astar(SEXP graph, SEXP from, SEXP to, SEXP weights, SEXP mode, SEXP heuristic) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_int_t c_vertices;
-  igraph_vector_int_t c_edges;
-  igraph_integer_t c_from;
-  igraph_integer_t c_to;
-  igraph_vector_t c_weights;
-  igraph_neimode_t c_mode;
-  igraph_astar_heuristic_func_t c_heuristic;
-
-  SEXP vertices;
-  SEXP edges;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_int_init(&c_vertices, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertices);
-  if (0 != igraph_vector_int_init(&c_edges, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
-  c_from = (igraph_integer_t) REAL(from)[0];
-  c_to = (igraph_integer_t) REAL(to)[0];
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_get_shortest_path_astar(&c_graph, &c_vertices, &c_edges, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_heuristic, 0));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(vertices=R_igraph_vector_int_to_SEXP(&c_vertices));
-  igraph_vector_int_destroy(&c_vertices);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(edges=R_igraph_vector_int_to_SEXP(&c_edges));
-  igraph_vector_int_destroy(&c_edges);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, vertices);
-  SET_VECTOR_ELT(r_result, 1, edges);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("vertices"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("edges"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
+  // FIXME
+  return R_NilValue;
 }
 
 /*-------------------------------------------/
