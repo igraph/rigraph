@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9005
+
+## Chore
+
+  - Remove redundant AUTHORS link from DESCRIPTION.
+
+  - Prepare migration to igraph/C 0.10 (#781).
+
+  - Update NEWS.
+
+
 # igraph 1.4.99.9004
 
 ## Bug fixes
