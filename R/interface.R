@@ -389,7 +389,7 @@ ends <- function(graph, es, names = TRUE) {
     stop("Not a graph object")
   }
 
-  es2 <- as.igraph.es(graph, na.omit(es)) - 1
+  es2 <- as.integer(as.igraph.es(graph, na.omit(es)) - 1)
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
   on.exit(.Call(R_igraph_finalizer))
