@@ -121,6 +121,22 @@ SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
 SEXP R_igraph_vector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
+enum igraph_t_idx {
+  igraph_t_idx_n,
+  igraph_t_idx_directed,
+  igraph_t_idx_from,
+  igraph_t_idx_to,
+  igraph_t_idx_oi,
+  igraph_t_idx_ii,
+  igraph_t_idx_os,
+  igraph_t_idx_is,
+  igraph_t_idx_attr,
+
+  igraph_t_idx_env,
+
+  igraph_t_idx_max = 11,
+};
+
 
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
@@ -2844,7 +2860,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   long int no_of_nodes=igraph_vcount(graph);
   long int no_of_edges=igraph_ecount(graph);
 
-  PROTECT(result=NEW_LIST(10));
+  PROTECT(result=NEW_LIST(igraph_t_idx_max));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   SET_VECTOR_ELT(result, 1, NEW_LOGICAL(1));
   SET_VECTOR_ELT(result, 2, NEW_NUMERIC(no_of_edges));
@@ -9710,7 +9726,7 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 }
 
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == 10 && Rf_isEnvironment(VECTOR_ELT(graph, 9))) {
+  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(VECTOR_ELT(graph, 9))) {
     SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), VECTOR_ELT(graph, 9));
     if (ver != R_UnboundValue) {
       return ver;
@@ -9750,9 +9766,9 @@ SEXP R_igraph_add_env(SEXP graph) {
   char my_id_chr[40];
   int px = 0;
 
-  if (GET_LENGTH(graph) != 10) {
-    PROTECT(result = NEW_LIST(10)); px++;
-    for (i = 0; i < 9; i++) {
+  if (GET_LENGTH(graph) <= igraph_t_idx_env) {
+    PROTECT(result = NEW_LIST(igraph_t_idx_max)); px++;
+    for (i = 0; i < igraph_t_idx_env; i++) {
       SET_VECTOR_ELT(result, i, Rf_duplicate(VECTOR_ELT(graph, i)));
     }
     SET_ATTRIB(result, Rf_duplicate(ATTRIB(graph)));

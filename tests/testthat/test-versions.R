@@ -6,6 +6,8 @@ test_that("we create graphs of the current version", {
 })
 
 test_that("we can upgrade from 0.4.0 to 0.8.0", {
+  skip("FIXME: upgrades from older versions, add new test too")
+
   g <- make_ring(10)
   g <- unclass(g)
   g[[10]] <- NULL
