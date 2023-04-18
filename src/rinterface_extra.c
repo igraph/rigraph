@@ -132,7 +132,7 @@ enum igraph_t_idx {
   igraph_t_idx_is,
   igraph_t_idx_attr,
 
-  igraph_t_idx_env,
+  igraph_t_idx_env = 10,
 
   igraph_t_idx_max = 11,
 };
@@ -2892,7 +2892,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   REAL(VECTOR_ELT(graph->attr, 0))[0] += 1;
 
   /* Environment for vertex/edge seqs */
-  SET_VECTOR_ELT(result, 9, R_NilValue);
+  SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
   R_igraph_add_env(result);
 
   UNPROTECT(1);
@@ -9725,9 +9725,13 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
   return Rf_ScalarLogical(1);
 }
 
+SEXP R_igraph_graph_env(SEXP graph) {
+  return VECTOR_ELT(graph, igraph_t_idx_env);
+}
+
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(VECTOR_ELT(graph, 9))) {
-    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), VECTOR_ELT(graph, 9));
+  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
     if (ver != R_UnboundValue) {
       return ver;
     } else {
@@ -9748,11 +9752,11 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   uuid_unparse_lower(my_id, my_id_chr);
   SEXP l1 = PROTECT(Rf_install("myid"));
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
-  Rf_defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
-  Rf_defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
   UNPROTECT(1);
@@ -9775,18 +9779,18 @@ SEXP R_igraph_add_env(SEXP graph) {
     SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
   }
 
-  SET_VECTOR_ELT(result, 9, Rf_allocSExp(ENVSXP));
+  SET_VECTOR_ELT(result, igraph_t_idx_env, Rf_allocSExp(ENVSXP));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
 
   SEXP l1 = PROTECT(Rf_install("myid")); px++;
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr)); px++;
-  Rf_defineVar(l1, l2, VECTOR_ELT(result, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
-  Rf_defineVar(l1, l2, VECTOR_ELT(result, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   UNPROTECT(px);
 
@@ -9794,5 +9798,5 @@ SEXP R_igraph_add_env(SEXP graph) {
 }
 
 SEXP R_igraph_get_graph_id(SEXP graph) {
-  return Rf_findVar(Rf_install("myid"), VECTOR_ELT(graph, 9));
+  return Rf_findVar(Rf_install("myid"), R_igraph_graph_env(graph));
 }
