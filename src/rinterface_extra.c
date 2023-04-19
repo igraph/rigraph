@@ -130,7 +130,7 @@ enum igraph_t_idx {
   igraph_t_idx_ii,
   igraph_t_idx_os,
   igraph_t_idx_is,
-  igraph_t_idx_attr,
+  igraph_t_idx_attr = 9,
 
   igraph_t_idx_env = 10,
 
@@ -269,7 +269,7 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
 
 SEXP R_igraph_get_attr_mode(SEXP graph, SEXP pwhich) {
   int which=INTEGER(pwhich)[0]-1;
-  SEXP obj=VECTOR_ELT(VECTOR_ELT(graph, 8), which);
+  SEXP obj=VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), which);
   int i, len=GET_LENGTH(obj);
   SEXP result;
 
@@ -2888,7 +2888,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
 
   /* Attributes */
-  SET_VECTOR_ELT(result, 8, graph->attr);
+  SET_VECTOR_ELT(result, igraph_t_idx_attr, graph->attr);
   REAL(VECTOR_ELT(graph->attr, 0))[0] += 1;
 
   /* Environment for vertex/edge seqs */
@@ -3505,9 +3505,9 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   R_SEXP_to_vector(VECTOR_ELT(graph, 7), &res->is);
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 0; /* igraph_t objects */
-  res->attr=VECTOR_ELT(graph, 8);
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects refcount */
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 0; /* igraph_t objects */
+  res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
 }
@@ -3530,9 +3530,9 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
                    GET_LENGTH(VECTOR_ELT(graph, 7)));
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 1; /* igraph_t objects */
-  R_PreserveObject(res->attr=VECTOR_ELT(graph, 8));
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects */
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 1; /* igraph_t objects */
+  R_PreserveObject(res->attr=VECTOR_ELT(graph, igraph_t_idx_attr));
 
   return 0;
 }
@@ -9716,7 +9716,7 @@ SEXP R_igraph_weak_ref_run_finalizer(SEXP ref) {
 
 SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
   int i;
-  int n = LOGICAL(attrs)[0] ? 9 : 8;
+  int n = LOGICAL(attrs)[0] ? igraph_t_idx_attr + 1 : igraph_t_idx_attr;
   for (i = 0; i < n; i++) {
     if (!R_compute_identical(VECTOR_ELT(g1, i), VECTOR_ELT(g2, i), 0)) {
       return Rf_ScalarLogical(0);
