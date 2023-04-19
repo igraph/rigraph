@@ -223,7 +223,9 @@ biconnected_components <- biconnected_components_impl
 #' @export
 #'
 #' @examples
-#' g <- sample_gnp(8, .2, directed = TRUE)
+#' N <- 8
+#' p <- .2
+#' g <- sample_gnp(N, p, directed = TRUE)
 #' V(g)$color <- 1:N
 #' plot(g)
 #' plot(largest_component(g))

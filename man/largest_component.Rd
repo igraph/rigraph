@@ -20,7 +20,9 @@ a tie, the first component by vertex ID order is returned. Vertex IDs from
 the original graph are not retained in the returned graph.
 }
 \examples{
-g <- sample_gnp(8, .2, directed = TRUE)
+N <- 8
+p <- .2
+g <- sample_gnp(N, p, directed = TRUE)
 V(g)$color <- 1:N
 plot(g)
 plot(largest_component(g))
