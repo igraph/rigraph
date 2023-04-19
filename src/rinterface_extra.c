@@ -128,7 +128,7 @@ enum igraph_t_idx {
   igraph_t_idx_to,
   igraph_t_idx_oi,
   igraph_t_idx_ii,
-  igraph_t_idx_os,
+  igraph_t_idx_os = 7,
   igraph_t_idx_is = 8,
   igraph_t_idx_attr = 9,
 
@@ -2867,7 +2867,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   SET_VECTOR_ELT(result, 3, NEW_NUMERIC(no_of_edges));
   SET_VECTOR_ELT(result, 4, NEW_NUMERIC(no_of_edges));
   SET_VECTOR_ELT(result, 5, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 6, NEW_NUMERIC(no_of_nodes+1));
+  SET_VECTOR_ELT(result, igraph_t_idx_os, NEW_NUMERIC(no_of_nodes+1));
   SET_VECTOR_ELT(result, igraph_t_idx_is, NEW_NUMERIC(no_of_nodes+1));
 
   REAL(VECTOR_ELT(result, 0))[0]=no_of_nodes;
@@ -2880,7 +2880,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
          sizeof(igraph_real_t)*(size_t) no_of_edges);
   memcpy(REAL(VECTOR_ELT(result, 5)), graph->ii.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 6)), graph->os.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_os)), graph->os.stor_begin,
          sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
   memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_is)), graph->is.stor_begin,
          sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
@@ -3501,7 +3501,7 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   R_SEXP_to_vector(VECTOR_ELT(graph, 3), &res->to);
   R_SEXP_to_vector(VECTOR_ELT(graph, 4), &res->oi);
   R_SEXP_to_vector(VECTOR_ELT(graph, 5), &res->ii);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 6), &res->os);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_os), &res->os);
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_is), &res->is);
 
   /* attributes */
@@ -3524,8 +3524,8 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
                    GET_LENGTH(VECTOR_ELT(graph, 4)));
   igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, 5)),
                    GET_LENGTH(VECTOR_ELT(graph, 5)));
-  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, 6)),
-                   GET_LENGTH(VECTOR_ELT(graph, 6)));
+  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, igraph_t_idx_os)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_os)));
   igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, igraph_t_idx_is)),
                    GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_is)));
 
