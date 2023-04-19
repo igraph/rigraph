@@ -206,3 +206,41 @@ bridges <- bridges_impl
 #' @family components
 #' @export
 biconnected_components <- biconnected_components_impl
+
+
+#' Find the largest connected component of a graph
+#'
+#' This function returns the largest connected component of a graph. In case of
+#' a tie, the first component by vertex ID order is returned. Vertex IDs from
+#' the original graph are not retained in the returned graph.
+#' 
+## #' @rdname components
+## #' @family components
+#' @param graph The original graph.
+#' @param mode Passed to `components()`. Ignored if `graph` is undirected.
+#' @returns The largest connected component of the graph.
+#' @seealso [components()], [induced_subgraph()]
+#' @export
+#'
+#' @examples
+#' g <- sample_gnp(8, .2, directed = TRUE)
+#' V(g)$color <- 1:N
+#' plot(g)
+#' plot(largest_component(g))
+#' plot(largest_component(g, mode = "strong"))
+largest_component <- function(graph, mode = c("weak", "strong")) {
+  if (!is_igraph(graph)) {
+    stop("Not a graph object")
+  }
+    
+  if (is_directed(graph)) {
+    comps <- components(graph, mode = mode)
+  } else {
+    comps <- components(graph)
+  }
+
+  lcc_id <- which.max(comps$csize)
+  vids <- V(graph)[comps$membership == lcc_id]
+
+  induced_subgraph(graph, vids)
+}
