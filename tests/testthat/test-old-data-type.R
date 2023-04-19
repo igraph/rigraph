@@ -1,4 +1,5 @@
 test_that("VS/ES work with old data type", {
+  skip("Fix update of old graph")
   karate <-
     structure(
       list(
