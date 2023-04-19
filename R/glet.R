@@ -94,7 +94,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 
   ## Drop all attributes, we don't want to deal with them, TODO
   graph2 <- graph
-  graph2[[9]] <- list(c(1, 0, 1), list(), list(), list())
+  graph2[[igraph_t_idx_attr]] <- list(c(1, 0, 1), list(), list(), list())
 
   on.exit(.Call(R_igraph_finalizer))
   ## Function call
