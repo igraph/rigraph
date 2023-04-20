@@ -1,8 +1,6 @@
 test_that("Kamada-Kawai layout generator works", {
   skip_on_cran()
 
-  skip("Why does this fail now?")
-
   set.seed(42)
 
   get_radii <- function(layout) {
