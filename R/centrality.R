@@ -510,7 +510,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
       "1.5.0",
       I("arpack_defaults"),
       "arpack_defaults()",
-      details = "So a function, not an object."
+      details = c("So the function arpack_defaults(), not an object called code arpack_defaults.")
     )
     options <- arpack_defaults()
   }
