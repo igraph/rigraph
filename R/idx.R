@@ -4,7 +4,7 @@ igraph_t_idx_directed <- 2L
 igraph_t_idx_from <- 3L
 igraph_t_idx_to <- 4L
 igraph_t_idx_oi <- 5L
-igraph_t_idx_ii <- 6L
+igraph_t_idx_ii <- 7L
 igraph_t_idx_os <- 8L
 igraph_t_idx_is <- 9L
 igraph_t_idx_attr <- 10L
