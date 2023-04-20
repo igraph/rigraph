@@ -15,8 +15,7 @@ authors <- meta$`Authors@R`
 authors <- utils:::.read_authors_at_R_field(authors)
 authors <- Filter(function(e) {!(is.null(e$given) && is.null(e$family)) && !is.na(match("aut", e$role))}, authors)
 authors <- format(authors, include = c("given", "family"))
-# fix abbreviation of Szabolcs' name
-authors <- sub("Szabolcs", "{S} zabolcs", authors)
+# TODO fix abbreviation of Szabolcs' name
 authors <- paste(paste(head(authors, -1L), collapse = ", "), tail(authors, 1L), sep = " and ")
 bibentry(bibtype = "Manual",
          title = "{igraph}: Network Analysis and Visualization in R",
