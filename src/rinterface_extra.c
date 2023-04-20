@@ -123,7 +123,7 @@ SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
 enum igraph_t_idx {
   igraph_t_idx_n,
-  igraph_t_idx_directed,
+  igraph_t_idx_directed = 2,
   igraph_t_idx_from = 3,
   igraph_t_idx_to = 4,
   igraph_t_idx_oi = 5,
@@ -2862,7 +2862,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
 
   PROTECT(result=NEW_LIST(igraph_t_idx_max));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
-  SET_VECTOR_ELT(result, 1, NEW_LOGICAL(1));
+  SET_VECTOR_ELT(result, igraph_t_idx_directed, NEW_LOGICAL(1));
   SET_VECTOR_ELT(result, igraph_t_idx_from, NEW_NUMERIC(no_of_edges));
   SET_VECTOR_ELT(result, igraph_t_idx_to, NEW_NUMERIC(no_of_edges));
   SET_VECTOR_ELT(result, igraph_t_idx_oi, NEW_NUMERIC(no_of_edges));
@@ -2871,7 +2871,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   SET_VECTOR_ELT(result, igraph_t_idx_is, NEW_NUMERIC(no_of_nodes+1));
 
   REAL(VECTOR_ELT(result, 0))[0]=no_of_nodes;
-  LOGICAL(VECTOR_ELT(result, 1))[0]=graph->directed;
+  LOGICAL(VECTOR_ELT(result, igraph_t_idx_directed))[0]=graph->directed;
   memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_from)), graph->from.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
   memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_to)), graph->to.stor_begin,
@@ -3496,7 +3496,7 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 
   res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
-  res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
+  res->directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &res->from);
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), &res->to);
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_oi), &res->oi);
@@ -3515,7 +3515,7 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 
   res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
-  res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
+  res->directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
   igraph_vector_init_copy(&res->from, REAL(VECTOR_ELT(graph, igraph_t_idx_from)),
                    GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_from)));
   igraph_vector_init_copy(&res->to, REAL(VECTOR_ELT(graph, igraph_t_idx_to)),

@@ -1,6 +1,6 @@
 # Indexes into unclass(g)
 igraph_t_idx_n <- 1L
-igraph_t_idx_directed <- 2L
+igraph_t_idx_directed <- 3L
 igraph_t_idx_from <- 4L
 igraph_t_idx_to <- 5L
 igraph_t_idx_oi <- 6L
