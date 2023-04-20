@@ -8,7 +8,6 @@ bibentry(bibtype="Article",
          year=2006,
          url="https://igraph.org")
 
-year <- sub("-.*", "", meta$Date)
 note <- sprintf("R package version %s", meta$Version)
 # https://github.com/cran/lidR/blob/f0dae39007c9d174f6e1962ff236fd8826f1501d/inst/CITATION#L21
 year <- format(Sys.Date(), "%Y")
@@ -16,6 +15,8 @@ authors <- meta$`Authors@R`
 authors <- utils:::.read_authors_at_R_field(authors)
 authors <- Filter(function(e) {!(is.null(e$given) && is.null(e$family)) && !is.na(match("aut", e$role))}, authors)
 authors <- format(authors, include = c("given", "family"))
+# fix abbreviation of Szabolcs' name
+authors <- sub("Szabolcs", "{S} zabolcs", authors)
 authors <- paste(paste(head(authors, -1L), collapse = ", "), tail(authors, 1L), sep = " and ")
 bibentry(bibtype = "Manual",
          title = "{igraph}: Network Analysis and Visualization in R",
