@@ -122,21 +122,18 @@ SEXP R_igraph_vector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
 enum igraph_t_idx {
-  igraph_t_idx_n = 1,
-  igraph_t_idx_directed = 2,
-  igraph_t_idx_from = 3,
-  igraph_t_idx_to = 4,
-  igraph_t_idx_oi = 5,
-  igraph_t_idx_ii = 6,
-  igraph_t_idx_os = 7,
-  igraph_t_idx_is = 8,
-  igraph_t_idx_attr = 9,
-
-  igraph_t_idx_env = 10,
-
-  igraph_t_idx_max = 11,
+  igraph_t_idx_n = 0,
+  igraph_t_idx_directed = 1,
+  igraph_t_idx_from = 2,
+  igraph_t_idx_to = 3,
+  igraph_t_idx_oi = 4,
+  igraph_t_idx_ii = 5,
+  igraph_t_idx_os = 6,
+  igraph_t_idx_is = 7,
+  igraph_t_idx_attr = 8,
+  igraph_t_idx_env = 9,
+  igraph_t_idx_max = 10,
 };
-
 
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
