@@ -1,4 +1,5 @@
 Package: igraph
+Version: 1.4.99.9005
 Title: Network Analysis and Visualization
 Version: 1.4.99.9002
 Authors@R: c(

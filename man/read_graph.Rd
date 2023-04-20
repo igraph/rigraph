@@ -46,14 +46,22 @@ each file format, below.
 }
 \section{Edge list format}{
  This format is a simple text file with numeric
-vertex ids defining the edges. There is no need to have newline characters
-between the edges, a simple space will also do.
+vertex IDs defining the edges. There is no need to have newline characters
+between the edges, a simple space will also do. Vertex IDs contained in
+the file are assumed to start at zero.
 
 Additional arguments: \describe{ \item{n}{The number of vertices in the
 graph. If it is smaller than or equal to the largest integer in the file,
 then it is ignored; so it is safe to set it to zero (the default).}
 \item{directed}{Logical scalar, whether to create a directed graph. The
 default value is \code{TRUE}.} }
+}
+
+\section{Pajek format}{
+ Currently igraph only supports Pajek network
+files, with a \code{.net} extension, but not Pajek project files with
+a \code{.paj} extension. Only network data is supported; permutations,
+hierarchies, clusters and vectors are not.
 }
 
 \seealso{

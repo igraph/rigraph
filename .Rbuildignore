@@ -1,3 +1,5 @@
+src/vendor/cigraph
+
 ^tags$
 ^.github$
 ^cigraph$
