@@ -121,6 +121,19 @@ SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
 SEXP R_igraph_vector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
+enum igraph_t_idx {
+  igraph_t_idx_n = 0,
+  igraph_t_idx_directed = 1,
+  igraph_t_idx_from = 2,
+  igraph_t_idx_to = 3,
+  igraph_t_idx_oi = 4,
+  igraph_t_idx_ii = 5,
+  igraph_t_idx_os = 6,
+  igraph_t_idx_is = 7,
+  igraph_t_idx_attr = 8,
+  igraph_t_idx_env = 9,
+  igraph_t_idx_max = 10,
+};
 
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
@@ -253,7 +266,7 @@ SEXP R_igraph_handle_safe_eval_result(SEXP result) {
 
 SEXP R_igraph_get_attr_mode(SEXP graph, SEXP pwhich) {
   int which=INTEGER(pwhich)[0]-1;
-  SEXP obj=VECTOR_ELT(VECTOR_ELT(graph, 8), which);
+  SEXP obj=VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), which);
   int i, len=GET_LENGTH(obj);
   SEXP result;
 
@@ -2844,39 +2857,39 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   long int no_of_nodes=igraph_vcount(graph);
   long int no_of_edges=igraph_ecount(graph);
 
-  PROTECT(result=NEW_LIST(10));
-  SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
-  SET_VECTOR_ELT(result, 1, NEW_LOGICAL(1));
-  SET_VECTOR_ELT(result, 2, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 3, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 4, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 5, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, 6, NEW_NUMERIC(no_of_nodes+1));
-  SET_VECTOR_ELT(result, 7, NEW_NUMERIC(no_of_nodes+1));
+  PROTECT(result=NEW_LIST(igraph_t_idx_max));
+  SET_VECTOR_ELT(result, igraph_t_idx_n, NEW_NUMERIC(1));
+  SET_VECTOR_ELT(result, igraph_t_idx_directed, NEW_LOGICAL(1));
+  SET_VECTOR_ELT(result, igraph_t_idx_from, NEW_NUMERIC(no_of_edges));
+  SET_VECTOR_ELT(result, igraph_t_idx_to, NEW_NUMERIC(no_of_edges));
+  SET_VECTOR_ELT(result, igraph_t_idx_oi, NEW_NUMERIC(no_of_edges));
+  SET_VECTOR_ELT(result, igraph_t_idx_ii, NEW_NUMERIC(no_of_edges));
+  SET_VECTOR_ELT(result, igraph_t_idx_os, NEW_NUMERIC(no_of_nodes+1));
+  SET_VECTOR_ELT(result, igraph_t_idx_is, NEW_NUMERIC(no_of_nodes+1));
 
-  REAL(VECTOR_ELT(result, 0))[0]=no_of_nodes;
-  LOGICAL(VECTOR_ELT(result, 1))[0]=graph->directed;
-  memcpy(REAL(VECTOR_ELT(result, 2)), graph->from.stor_begin,
+  REAL(VECTOR_ELT(result, igraph_t_idx_n))[0]=no_of_nodes;
+  LOGICAL(VECTOR_ELT(result, igraph_t_idx_directed))[0]=graph->directed;
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_from)), graph->from.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 3)), graph->to.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_to)), graph->to.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 4)), graph->oi.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_oi)), graph->oi.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 5)), graph->ii.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_ii)), graph->ii.stor_begin,
          sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, 6)), graph->os.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_os)), graph->os.stor_begin,
          sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
-  memcpy(REAL(VECTOR_ELT(result, 7)), graph->is.stor_begin,
+  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_is)), graph->is.stor_begin,
          sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
 
   SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
 
   /* Attributes */
-  SET_VECTOR_ELT(result, 8, graph->attr);
+  SET_VECTOR_ELT(result, igraph_t_idx_attr, graph->attr);
   REAL(VECTOR_ELT(graph->attr, 0))[0] += 1;
 
   /* Environment for vertex/edge seqs */
-  SET_VECTOR_ELT(result, 9, R_NilValue);
+  SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
   R_igraph_add_env(result);
 
   UNPROTECT(1);
@@ -3479,44 +3492,44 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 
-  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
-  res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  R_SEXP_to_vector(VECTOR_ELT(graph, 2), &res->from);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 3), &res->to);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 4), &res->oi);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 5), &res->ii);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 6), &res->os);
-  R_SEXP_to_vector(VECTOR_ELT(graph, 7), &res->is);
+  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+  res->directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &res->from);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), &res->to);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_oi), &res->oi);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_ii), &res->ii);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_os), &res->os);
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_is), &res->is);
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects refcount */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 0; /* igraph_t objects */
-  res->attr=VECTOR_ELT(graph, 8);
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects refcount */
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 0; /* igraph_t objects */
+  res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
 }
 
 int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
 
-  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, 0))[0];
-  res->directed=LOGICAL(VECTOR_ELT(graph, 1))[0];
-  igraph_vector_init_copy(&res->from, REAL(VECTOR_ELT(graph, 2)),
-                   GET_LENGTH(VECTOR_ELT(graph, 2)));
-  igraph_vector_init_copy(&res->to, REAL(VECTOR_ELT(graph, 3)),
-                   GET_LENGTH(VECTOR_ELT(graph, 3)));
-  igraph_vector_init_copy(&res->oi, REAL(VECTOR_ELT(graph, 4)),
-                   GET_LENGTH(VECTOR_ELT(graph, 4)));
-  igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, 5)),
-                   GET_LENGTH(VECTOR_ELT(graph, 5)));
-  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, 6)),
-                   GET_LENGTH(VECTOR_ELT(graph, 6)));
-  igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, 7)),
-                   GET_LENGTH(VECTOR_ELT(graph, 7)));
+  res->n=(igraph_integer_t) REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+  res->directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+  igraph_vector_init_copy(&res->from, REAL(VECTOR_ELT(graph, igraph_t_idx_from)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_from)));
+  igraph_vector_init_copy(&res->to, REAL(VECTOR_ELT(graph, igraph_t_idx_to)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_to)));
+  igraph_vector_init_copy(&res->oi, REAL(VECTOR_ELT(graph, igraph_t_idx_oi)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_oi)));
+  igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, igraph_t_idx_ii)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_ii)));
+  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, igraph_t_idx_os)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_os)));
+  igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, igraph_t_idx_is)),
+                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_is)));
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[0] = 1; /* R objects */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, 8), 0))[1] = 1; /* igraph_t objects */
-  R_PreserveObject(res->attr=VECTOR_ELT(graph, 8));
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects */
+  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 1; /* igraph_t objects */
+  R_PreserveObject(res->attr=VECTOR_ELT(graph, igraph_t_idx_attr));
 
   return 0;
 }
@@ -9700,7 +9713,7 @@ SEXP R_igraph_weak_ref_run_finalizer(SEXP ref) {
 
 SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
   int i;
-  int n = LOGICAL(attrs)[0] ? 9 : 8;
+  int n = LOGICAL(attrs)[0] ? igraph_t_idx_attr + 1 : igraph_t_idx_attr;
   for (i = 0; i < n; i++) {
     if (!R_compute_identical(VECTOR_ELT(g1, i), VECTOR_ELT(g2, i), 0)) {
       return Rf_ScalarLogical(0);
@@ -9709,9 +9722,13 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
   return Rf_ScalarLogical(1);
 }
 
+SEXP R_igraph_graph_env(SEXP graph) {
+  return VECTOR_ELT(graph, igraph_t_idx_env);
+}
+
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == 10 && Rf_isEnvironment(VECTOR_ELT(graph, 9))) {
-    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), VECTOR_ELT(graph, 9));
+  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
     if (ver != R_UnboundValue) {
       return ver;
     } else {
@@ -9732,11 +9749,11 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   uuid_unparse_lower(my_id, my_id_chr);
   SEXP l1 = PROTECT(Rf_install("myid"));
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
-  Rf_defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
-  Rf_defineVar(l1, l2, VECTOR_ELT(graph, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
   UNPROTECT(1);
@@ -9750,27 +9767,27 @@ SEXP R_igraph_add_env(SEXP graph) {
   char my_id_chr[40];
   int px = 0;
 
-  if (GET_LENGTH(graph) != 10) {
-    PROTECT(result = NEW_LIST(10)); px++;
-    for (i = 0; i < 9; i++) {
+  if (GET_LENGTH(graph) <= igraph_t_idx_env) {
+    PROTECT(result = NEW_LIST(igraph_t_idx_max)); px++;
+    for (i = 0; i < igraph_t_idx_env; i++) {
       SET_VECTOR_ELT(result, i, Rf_duplicate(VECTOR_ELT(graph, i)));
     }
     SET_ATTRIB(result, Rf_duplicate(ATTRIB(graph)));
     SET_CLASS(result, Rf_duplicate(GET_CLASS(graph)));
   }
 
-  SET_VECTOR_ELT(result, 9, Rf_allocSExp(ENVSXP));
+  SET_VECTOR_ELT(result, igraph_t_idx_env, Rf_allocSExp(ENVSXP));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
 
   SEXP l1 = PROTECT(Rf_install("myid")); px++;
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr)); px++;
-  Rf_defineVar(l1, l2, VECTOR_ELT(result, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
-  Rf_defineVar(l1, l2, VECTOR_ELT(result, 9));
+  Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   UNPROTECT(px);
 
@@ -9778,5 +9795,5 @@ SEXP R_igraph_add_env(SEXP graph) {
 }
 
 SEXP R_igraph_get_graph_id(SEXP graph) {
-  return Rf_findVar(Rf_install("myid"), VECTOR_ELT(graph, 9));
+  return Rf_findVar(Rf_install("myid"), R_igraph_graph_env(graph));
 }

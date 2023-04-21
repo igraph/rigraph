@@ -9,6 +9,7 @@ igraph_t_idx_os <- 7L
 igraph_t_idx_is <- 8L
 igraph_t_idx_attr <- 9L
 igraph_t_idx_env <- 10L
+igraph_t_idx_max <- 11L
 
 # Indexes into unclass(g)[[igraph_t_idx_attr]]
 igraph_attr_idx_unknown <- 1L # integer of length 3, for what purpose?
