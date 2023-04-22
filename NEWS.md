@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9006
+
+## Chore
+
+  - Ensure we're always using named indexes to access the internal data structure (#784).
+
+
 # igraph 1.4.99.9005
 
 ## Chore
