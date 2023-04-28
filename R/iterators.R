@@ -31,7 +31,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_mybracket, graph, igraph_t_idx_env)
+    .Call(R_igraph_copy_env, graph)
   } else {
     NULL
   }
@@ -932,8 +932,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
         .to = .to, to = to,
-        .igraph.from = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
+        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
         .igraph.graph = list(graph),
         `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
         .env = env,

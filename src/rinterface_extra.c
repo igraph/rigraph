@@ -2851,6 +2851,11 @@ SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m) {
   return result;
 }
 
+SEXP R_igraph_graph_env(SEXP graph)
+{
+  return VECTOR_ELT(graph, igraph_t_idx_env);
+}
+
 void R_igraph_set_n(SEXP rgraph, const igraph_t *graph)
 {
   SET_VECTOR_ELT(rgraph, igraph_t_idx_n, NEW_NUMERIC(1));
@@ -3811,6 +3816,25 @@ SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info) {
 }
 
 /*******************************************************************/
+
+SEXP R_igraph_copy_from(SEXP graph)
+{
+  igraph_vector_t from;
+  R_igraph_get_from(graph, &from);
+  return R_igraph_vector_to_SEXP(&from);
+}
+
+SEXP R_igraph_copy_to(SEXP graph)
+{
+  igraph_vector_t to;
+  R_igraph_get_to(graph, &to);
+  return R_igraph_vector_to_SEXP(&to);
+}
+
+SEXP R_igraph_copy_env(SEXP graph)
+{
+  return Rf_duplicate(R_igraph_graph_env(graph));
+}
 
 SEXP R_igraph_mybracket(SEXP graph, SEXP pidx) {
   int idx=INTEGER(pidx)[0]-1;
@@ -9765,10 +9789,6 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
     }
   }
   return Rf_ScalarLogical(1);
-}
-
-SEXP R_igraph_graph_env(SEXP graph) {
-  return VECTOR_ELT(graph, igraph_t_idx_env);
 }
 
 SEXP R_igraph_graph_version(SEXP graph) {
