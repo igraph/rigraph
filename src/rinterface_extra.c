@@ -3812,6 +3812,16 @@ SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info) {
 
 /*******************************************************************/
 
+SEXP R_igraph_copy_from(SEXP graph)
+{
+  return Rf_duplicate(VECTOR_ELT(graph, igraph_t_idx_from));
+}
+
+SEXP R_igraph_copy_to(SEXP graph)
+{
+  return Rf_duplicate(VECTOR_ELT(graph, igraph_t_idx_to));
+}
+
 SEXP R_igraph_mybracket(SEXP graph, SEXP pidx) {
   int idx=INTEGER(pidx)[0]-1;
   return Rf_duplicate(VECTOR_ELT(graph, idx));

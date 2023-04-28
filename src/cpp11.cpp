@@ -92,6 +92,8 @@ extern SEXP R_igraph_connect_neighborhood(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_constraint(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_contract_vertices(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_convex_hull(SEXP);
+extern SEXP R_igraph_copy_from(SEXP);
+extern SEXP R_igraph_copy_to(SEXP);
 extern SEXP R_igraph_coreness(SEXP, SEXP);
 extern SEXP R_igraph_correlated_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_correlated_pair_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -471,6 +473,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_constraint",                                 (DL_FUNC) &R_igraph_constraint,                                  3},
     {"R_igraph_contract_vertices",                          (DL_FUNC) &R_igraph_contract_vertices,                           3},
     {"R_igraph_convex_hull",                                (DL_FUNC) &R_igraph_convex_hull,                                 1},
+    {"R_igraph_copy_from",                                  (DL_FUNC) &R_igraph_copy_from,                                   1},
+    {"R_igraph_copy_to",                                    (DL_FUNC) &R_igraph_copy_to,                                     1},
     {"R_igraph_coreness",                                   (DL_FUNC) &R_igraph_coreness,                                    2},
     {"R_igraph_correlated_game",                            (DL_FUNC) &R_igraph_correlated_game,                             4},
     {"R_igraph_correlated_pair_game",                       (DL_FUNC) &R_igraph_correlated_pair_game,                        5},
