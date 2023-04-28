@@ -3822,6 +3822,11 @@ SEXP R_igraph_copy_to(SEXP graph)
   return Rf_duplicate(VECTOR_ELT(graph, igraph_t_idx_to));
 }
 
+SEXP R_igraph_copy_env(SEXP graph)
+{
+  return Rf_duplicate(VECTOR_ELT(graph, igraph_t_idx_env));
+}
+
 SEXP R_igraph_mybracket(SEXP graph, SEXP pidx) {
   int idx=INTEGER(pidx)[0]-1;
   return Rf_duplicate(VECTOR_ELT(graph, idx));

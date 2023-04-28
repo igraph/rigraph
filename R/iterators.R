@@ -31,7 +31,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_mybracket, graph, igraph_t_idx_env)
+    .Call(R_igraph_copy_env, graph)
   } else {
     NULL
   }
