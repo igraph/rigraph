@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9007
+
+## Chore
+
+  - Copy for igraph data members (#793).
+
+  - Get/set for igraph data members (#792).
+
+
 # igraph 1.4.99.9006
 
 ## Chore
