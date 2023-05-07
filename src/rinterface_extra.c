@@ -2861,7 +2861,7 @@ igraph_t *R_igraph_get_pointer(SEXP graph)
 {
   if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
     SEXP xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
-    if (xp != R_UnboundValue) {
+    if (xp != R_UnboundValue && xp != R_NilValue) {
       return (igraph_t*)(R_ExternalPtrAddr(xp));
     } else {
       return NULL;
@@ -9894,6 +9894,9 @@ SEXP R_igraph_add_env(SEXP graph) {
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
+
+  l1 = PROTECT(Rf_install("igraph")); px++;
+  Rf_defineVar(l1, R_NilValue, R_igraph_graph_env(result));
 
   UNPROTECT(px);
 
