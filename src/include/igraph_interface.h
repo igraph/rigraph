@@ -37,7 +37,7 @@ __BEGIN_DECLS
 
 IGRAPH_EXPORT int igraph_empty(igraph_t *graph, igraph_integer_t n, igraph_bool_t directed);
 IGRAPH_EXPORT int igraph_empty_attrs(igraph_t *graph, igraph_integer_t n, igraph_bool_t directed, void *attr);
-IGRAPH_EXPORT void igraph_destroy(igraph_t *graph);
+IGRAPH_EXPORT void IGRAPH_I_ATTRIBUTE_DESTROY(igraph_t *graph);
 IGRAPH_EXPORT int igraph_copy(igraph_t *to, const igraph_t *from);
 IGRAPH_EXPORT int igraph_add_edges(igraph_t *graph, const igraph_vector_t *edges,
                                    void *attr);
