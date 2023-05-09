@@ -5652,7 +5652,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&comps)));
   for (i=0; i<igraph_vector_ptr_size(&comps); i++) {
     SET_VECTOR_ELT(result, i, R_igraph_to_SEXP(VECTOR(comps)[i]));
-    IGRAPH_I_ATTRIBUTE_DESTROY(VECTOR(comps)[i]);
+    IGRAPH_I_ATTRIBUTE_DESTROY((igraph_t*)VECTOR(comps)[i]);
     igraph_free(VECTOR(comps)[i]);
   }
   igraph_vector_ptr_destroy(&comps);
