@@ -22,6 +22,7 @@
 */
 
 #include "igraph.h"
+#include "graph/attributes.h"
 #include "graph/neighbors.h"
 
 #include "config.h"
@@ -51,7 +52,7 @@
 #include <sanitizer/asan_interface.h>
 #endif
 
-#define IGRAPH_I_DESTROY igraph_destroy
+#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
 
 SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_vector_int_to_SEXP(const igraph_vector_int_t *v);
@@ -2858,6 +2859,20 @@ SEXP R_igraph_graph_env(SEXP graph)
   return VECTOR_ELT(graph, igraph_t_idx_env);
 }
 
+igraph_t *R_igraph_get_pointer(SEXP graph)
+{
+  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    SEXP xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+    if (xp != R_UnboundValue && xp != R_NilValue) {
+      return (igraph_t*)(R_ExternalPtrAddr(xp));
+    } else {
+      return NULL;
+    }
+  } else {
+    return NULL;
+  }
+}
+
 void R_igraph_set_n(SEXP rgraph, const igraph_t *graph)
 {
   SET_VECTOR_ELT(rgraph, igraph_t_idx_n, NEW_NUMERIC(1));
@@ -2866,6 +2881,10 @@ void R_igraph_set_n(SEXP rgraph, const igraph_t *graph)
 
 igraph_integer_t R_igraph_get_n(SEXP graph)
 {
+  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  if (pgraph) {
+    return pgraph->n;
+  }
   return REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
 }
 
@@ -2906,6 +2925,33 @@ void R_igraph_get_to(SEXP graph, igraph_vector_t* to)
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
 }
 
+static void free_graph(SEXP xp)
+{
+  igraph_t *graph = (igraph_t*)(R_ExternalPtrAddr(xp));
+  igraph_vector_destroy(&graph->from);
+  igraph_vector_destroy(&graph->to);
+  igraph_vector_destroy(&graph->oi);
+  igraph_vector_destroy(&graph->ii);
+  igraph_vector_destroy(&graph->os);
+  igraph_vector_destroy(&graph->is);
+  IGRAPH_FREE(graph);
+}
+
+void R_igraph_env_graph_pointer(SEXP result, const igraph_t* graph)
+{
+  int px = 0;
+
+  igraph_t *pgraph = IGRAPH_CALLOC(1, igraph_t);
+  *pgraph = *graph;
+
+  SEXP l1 = PROTECT(Rf_install("igraph")); px++;
+  SEXP l2 = PROTECT(R_MakeExternalPtr(pgraph, R_NilValue, R_NilValue)); px++;
+  Rf_defineVar(l1, l2, R_igraph_graph_env(result));
+  R_RegisterCFinalizerEx(l2, free_graph, TRUE);
+
+  UNPROTECT(px);
+}
+
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
 
   SEXP result;
@@ -2940,6 +2986,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   /* Environment for vertex/edge seqs */
   SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
   R_igraph_add_env(result);
+  R_igraph_env_graph_pointer(result, graph);
 
   UNPROTECT(1);
   return result;
@@ -9855,6 +9902,9 @@ SEXP R_igraph_add_env(SEXP graph) {
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
   l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
+
+  l1 = PROTECT(Rf_install("igraph")); px++;
+  Rf_defineVar(l1, R_NilValue, R_igraph_graph_env(result));
 
   UNPROTECT(px);
 
