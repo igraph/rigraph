@@ -2928,7 +2928,12 @@ void R_igraph_get_to(SEXP graph, igraph_vector_t* to)
 static void free_graph(SEXP xp)
 {
   igraph_t *graph = (igraph_t*)(R_ExternalPtrAddr(xp));
-  igraph_destroy(graph);
+  igraph_vector_destroy(&graph->from);
+  igraph_vector_destroy(&graph->to);
+  igraph_vector_destroy(&graph->oi);
+  igraph_vector_destroy(&graph->ii);
+  igraph_vector_destroy(&graph->os);
+  igraph_vector_destroy(&graph->is);
   IGRAPH_FREE(graph);
 }
 
