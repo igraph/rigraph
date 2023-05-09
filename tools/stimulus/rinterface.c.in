@@ -51,6 +51,8 @@
 #include <sanitizer/asan_interface.h>
 #endif
 
+#define IGRAPH_I_DESTROY igraph_destroy
+
 SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_vector_int_to_SEXP(const igraph_vector_int_t *v);
 SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v);
