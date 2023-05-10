@@ -2887,9 +2887,14 @@ igraph_t *R_igraph_get_pointer(SEXP graph) {
   if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
     return NULL;
   }
+
   SEXP xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   if (xp == R_UnboundValue || xp == R_NilValue) {
-    return NULL;
+    igraph_t g;
+    R_SEXP_to_igraph(graph, &g);
+
+    R_igraph_set_pointer(graph, NULL);
+    xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   }
   return (igraph_t*)(R_ExternalPtrAddr(xp));
 }
@@ -2913,6 +2918,10 @@ void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
 }
 
 igraph_bool_t R_igraph_get_directed(SEXP graph) {
+  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  if (pgraph) {
+    return pgraph->directed;
+  }
   return LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
 }
 
@@ -2924,7 +2933,12 @@ void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
 }
 
 void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), from);
+  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  if (pgraph) {
+    *from = pgraph->from;
+  } else {
+    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), from);
+  }
 }
 
 void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
@@ -2935,7 +2949,12 @@ void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
 }
 
 void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
+  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  if (pgraph) {
+    *to = pgraph->to;
+  } else {
+    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
+  }
 }
 
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
