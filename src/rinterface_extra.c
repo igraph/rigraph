@@ -2854,79 +2854,11 @@ SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m) {
   return result;
 }
 
-SEXP R_igraph_graph_env(SEXP graph)
-{
+SEXP R_igraph_graph_env(SEXP graph) {
   return VECTOR_ELT(graph, igraph_t_idx_env);
 }
 
-igraph_t *R_igraph_get_pointer(SEXP graph)
-{
-  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
-    SEXP xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
-    if (xp != R_UnboundValue && xp != R_NilValue) {
-      return (igraph_t*)(R_ExternalPtrAddr(xp));
-    } else {
-      return NULL;
-    }
-  } else {
-    return NULL;
-  }
-}
-
-void R_igraph_set_n(SEXP rgraph, const igraph_t *graph)
-{
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_n, NEW_NUMERIC(1));
-  REAL(VECTOR_ELT(rgraph, igraph_t_idx_n))[0]=igraph_vcount(graph);
-}
-
-igraph_integer_t R_igraph_get_n(SEXP graph)
-{
-  igraph_t *pgraph = R_igraph_get_pointer(graph);
-  if (pgraph) {
-    return pgraph->n;
-  }
-  return REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
-}
-
-void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph)
-{
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_directed, NEW_LOGICAL(1));
-  LOGICAL(VECTOR_ELT(rgraph, igraph_t_idx_directed))[0]=graph->directed;
-}
-
-igraph_bool_t R_igraph_get_directed(SEXP graph)
-{
-  return LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
-}
-
-void R_igraph_set_from(SEXP rgraph, const igraph_t *graph)
-{
-  long int no_of_edges=igraph_ecount(graph);
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_from, NEW_NUMERIC(no_of_edges));
-  memcpy(REAL(VECTOR_ELT(rgraph, igraph_t_idx_from)), graph->from.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-}
-
-void R_igraph_get_from(SEXP graph, igraph_vector_t* from)
-{
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), from);
-}
-
-void R_igraph_set_to(SEXP rgraph, const igraph_t *graph)
-{
-  long int no_of_edges=igraph_ecount(graph);
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_to, NEW_NUMERIC(no_of_edges));
-  memcpy(REAL(VECTOR_ELT(rgraph, igraph_t_idx_to)), graph->to.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-}
-
-void R_igraph_get_to(SEXP graph, igraph_vector_t* to)
-{
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
-}
-
-static void free_graph(SEXP xp)
-{
+static void free_graph(SEXP xp) {
   igraph_t *graph = (igraph_t*)(R_ExternalPtrAddr(xp));
   igraph_vector_destroy(&graph->from);
   igraph_vector_destroy(&graph->to);
@@ -2937,8 +2869,7 @@ static void free_graph(SEXP xp)
   IGRAPH_FREE(graph);
 }
 
-void R_igraph_env_graph_pointer(SEXP result, const igraph_t* graph)
-{
+void R_igraph_set_pointer(SEXP result, const igraph_t* graph) {
   int px = 0;
 
   igraph_t *pgraph = IGRAPH_CALLOC(1, igraph_t);
@@ -2950,6 +2881,76 @@ void R_igraph_env_graph_pointer(SEXP result, const igraph_t* graph)
   R_RegisterCFinalizerEx(l2, free_graph, TRUE);
 
   UNPROTECT(px);
+}
+
+igraph_t *R_igraph_get_pointer(SEXP graph) {
+  if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    return NULL;
+  }
+
+  SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+  if (xp == R_UnboundValue || xp == R_NilValue) {
+    return NULL;
+  }
+  return (igraph_t*)(R_ExternalPtrAddr(xp));
+}
+
+void R_igraph_set_n(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_n, NEW_NUMERIC(1));
+  REAL(VECTOR_ELT(rgraph, igraph_t_idx_n))[0]=igraph_vcount(graph);
+}
+
+igraph_integer_t R_igraph_get_n(SEXP graph) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  if (pgraph) {
+    return pgraph->n;
+  }
+  return REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+}
+
+void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_directed, NEW_LOGICAL(1));
+  LOGICAL(VECTOR_ELT(rgraph, igraph_t_idx_directed))[0]=graph->directed;
+}
+
+igraph_bool_t R_igraph_get_directed(SEXP graph) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  if (pgraph) {
+    return pgraph->directed;
+  }
+  return LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+}
+
+void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
+  long int no_of_edges=igraph_ecount(graph);
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_from, NEW_NUMERIC(no_of_edges));
+  memcpy(REAL(VECTOR_ELT(rgraph, igraph_t_idx_from)), graph->from.stor_begin,
+         sizeof(igraph_real_t)*(size_t) no_of_edges);
+}
+
+void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  if (pgraph) {
+    *from = pgraph->from;
+  } else {
+    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), from);
+  }
+}
+
+void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
+  long int no_of_edges=igraph_ecount(graph);
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_to, NEW_NUMERIC(no_of_edges));
+  memcpy(REAL(VECTOR_ELT(rgraph, igraph_t_idx_to)), graph->to.stor_begin,
+         sizeof(igraph_real_t)*(size_t) no_of_edges);
+}
+
+void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  if (pgraph) {
+    *to = pgraph->to;
+  } else {
+    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
+  }
 }
 
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
@@ -2986,7 +2987,7 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   /* Environment for vertex/edge seqs */
   SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
   R_igraph_add_env(result);
-  R_igraph_env_graph_pointer(result, graph);
+  R_igraph_set_pointer(result, graph);
 
   UNPROTECT(1);
   return result;
