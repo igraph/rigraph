@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9008
+
+## Chore
+
+  - Store graph pointer in environment (#794).
+
+  - Prepare for storing igraph object in R structure (#795).
+
+
 # igraph 1.4.99.9007
 
 ## Chore
