@@ -2888,13 +2888,9 @@ igraph_t *R_igraph_get_pointer(SEXP graph) {
     return NULL;
   }
 
-  SEXP xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+  SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   if (xp == R_UnboundValue || xp == R_NilValue) {
-    igraph_t g;
-    R_SEXP_to_igraph(graph, &g);
-
-    R_igraph_set_pointer(graph, NULL);
-    xp = Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+    return NULL;
   }
   return (igraph_t*)(R_ExternalPtrAddr(xp));
 }
@@ -2905,7 +2901,7 @@ void R_igraph_set_n(SEXP rgraph, const igraph_t *graph) {
 }
 
 igraph_integer_t R_igraph_get_n(SEXP graph) {
-  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
   if (pgraph) {
     return pgraph->n;
   }
@@ -2918,7 +2914,7 @@ void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
 }
 
 igraph_bool_t R_igraph_get_directed(SEXP graph) {
-  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
   if (pgraph) {
     return pgraph->directed;
   }
@@ -2933,7 +2929,7 @@ void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
 }
 
 void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
-  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
   if (pgraph) {
     *from = pgraph->from;
   } else {
@@ -2949,7 +2945,7 @@ void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
 }
 
 void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
-  igraph_t *pgraph = R_igraph_get_pointer(graph);
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
   if (pgraph) {
     *to = pgraph->to;
   } else {
