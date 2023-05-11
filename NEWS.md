@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9009
+
+## Chore
+
+  - igraph pointer accessors (#796).
+
+
 # igraph 1.4.99.9008
 
 ## Chore
