@@ -147,6 +147,10 @@ treat_call <- function(old, new, topics) {
     relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_betweenness_tmax_impl",]
   }
 
+  if (new == "centr_clo") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_closeness_impl",]
+  }
+
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
