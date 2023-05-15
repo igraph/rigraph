@@ -105,6 +105,11 @@ parse_package_defs <- function() {
 
 # get docs from pkgdown ----
 get_title <- function(fn_name) {
+
+  if (fn_name == "adjacent_triangles") {
+    fn_name <- "count_triangles"
+  }
+
   rd_href <- pkgdown:::get_rd_from_help("igraph", fn_name)
   pkgdown:::extract_title(rd_href)
 }
@@ -119,6 +124,11 @@ treat_call <- function(old, new, topics) {
 
   pkg_defs <- parse_package_defs()
   template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
+
+  if (new == "count_automorphisms") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "automorphisms_impl",]
+  }
+
   relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
 
   if (nrow(relevant_row) == 0) {
