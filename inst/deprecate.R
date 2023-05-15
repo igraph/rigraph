@@ -151,6 +151,22 @@ treat_call <- function(old, new, topics) {
     relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_closeness_impl",]
   }
 
+  if (new == "centr_clo_tmax") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_closeness_tmax_impl",]
+  }
+
+  if (new == "centr_degree") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_degree_impl",]
+  }
+
+  if (new == "centr_eigen") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_eigenvector_centrality_impl",]
+  }
+
+  if (new == "centr_eigen_tmax") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_eigenvector_centrality_tmax_impl",]
+  }
+
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
