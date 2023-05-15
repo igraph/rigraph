@@ -1,4 +1,5 @@
 # parse script ----
+file.create("R/aaa-NOT-auto.R")
 zzz_script <- here::here("R", "zzz-deprecate.R")
 
 parse_script <- function(path) {
@@ -197,13 +198,23 @@ treat_call <- function(old, new, topics) {
       new_title = stringr::str_squish(get_title(new))
     )
   )
-  script_lines <- brio::read_lines(relevant_row[["script_name"]])
-  new_lines <- append(
-    script_lines,
-    values = c("", strsplit(new_text, "\n")[[1]]),
-    after = as.numeric(relevant_row[["line2"]])
-  )
-  brio::write_lines(new_lines, relevant_row[["script_name"]])
+  if (grepl("aaa\\-auto\\.R", relevant_row[["script_name"]])) {
+
+    script_lines <- brio::read_lines("R/aaa-NOT-auto.R")
+    new_lines <- append(
+      script_lines,
+      values = c("", strsplit(new_text, "\n")[[1]])
+    )
+    brio::write_lines(new_lines, "R/aaa-NOT-auto.R")
+  } else {
+    script_lines <- brio::read_lines(relevant_row[["script_name"]])
+    new_lines <- append(
+      script_lines,
+      values = c("", strsplit(new_text, "\n")[[1]]),
+      after = as.numeric(relevant_row[["line2"]])
+    )
+    brio::write_lines(new_lines, relevant_row[["script_name"]])
+  }
 }
 purrr::walk2(
   deprecated_df[["old"]],
