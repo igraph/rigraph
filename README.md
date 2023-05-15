@@ -2,6 +2,7 @@
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
 ![CRAN Downloads](https://cranlogs.r-pkg.org/badges/igraph)
+[![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph?branch=main)
 <!-- badges: end -->
 
 # R/igraph
@@ -44,7 +45,7 @@ using
 pacman -Sy mingw-w64-{i686,x86_64}-glpk mingw-w64-{i686,x86_64}-libxml2 mingw-w64-{i686,x86_64}-gmp
 ```
 
-See the package wiki for more information on [installation troubleshooting](https://igraph.github.io/rigraph/articles/installation-troubleshooting).
+See the package wiki for more information on [installation troubleshooting](https://r.igraph.org/articles/installation-troubleshooting).
 
 ## Documentation
 

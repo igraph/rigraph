@@ -25,13 +25,13 @@
 ###################################################################
 
 update_es_ref <- update_vs_ref <- function(graph) {
-  env <- get_vs_ref(graph)
+  env <- get_es_ref(graph)
   if (!is.null(env)) assign("me", graph, envir = env)
 }
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_mybracket, graph, 10L)
+    .Call(R_igraph_copy_env, graph)
   } else {
     NULL
   }
@@ -928,8 +928,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
         .to = .to, to = to,
-        .igraph.from = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
+        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
         .igraph.graph = list(graph),
         `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
         .env = env,
@@ -1254,13 +1254,18 @@ print.igraph.vs <- function(x,
                             id = igraph_opt("print.id"),
                             ...) {
   graph <- get_vs_graph(x)
+  if (!is.null(graph)) {
+    vertices <- V(graph)
+  } else {
+    vertices <- NULL
+  }
   len <- length(x)
   gid <- graph_id(x)
 
   title <- "+ " %+% chr(len) %+% "/" %+%
-    (if (is.null(graph)) "?" else chr(vcount(graph))) %+%
+    (if (is.null(vertices)) "?" else chr(length(vertices))) %+%
     (if (len == 1) " vertex" else " vertices") %+%
-    (if (!is.null(names(x))) ", named" else "") %+%
+    (if (!is.null(names(vertices))) ", named" else "") %+%
     (if (isTRUE(id) && !is.na(gid)) paste(", from", substr(gid, 1, 7)) else "") %+%
     (if (is.null(graph)) " (deleted)" else "") %+%
     ":\n"
@@ -1280,7 +1285,14 @@ print.igraph.vs <- function(x,
   } else {
     ## Single bracket
 
-    x2 <- if (!is.null(names(x))) names(x) else as.vector(x)
+    if (!is.null(names(vertices))) {
+      x2 <- names(vertices)[as.vector(x)]
+      if (!is.null(names(x)) && !identical(names(x), x2)) {
+        names(x2) <- names(x)
+      }
+    } else {
+      x2 <- as.vector(x)
+    }
     if (length(x2)) {
       if (is.logical(full) && full) {
         print(x2, quote = FALSE)

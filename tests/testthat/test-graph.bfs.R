@@ -13,7 +13,7 @@ test_that("BFS works from multiple root vertices", {
 
   expect_that(
     as.vector(bfs(g, 1, unreachable = FALSE)$order),
-    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6, rep(NaN, 10)))
+    equals(c(1, 2, 10, 3, 9, 4, 8, 5, 7, 6, rep(NA, 10)))
   )
 
   expect_that(
@@ -108,4 +108,24 @@ test_that("BFS callback does not blow up when another igraph function is raised 
   bfs(g, root = 3, mode = "out", callback = callback)
 
   expect_true(TRUE)
+})
+
+test_that("snapshot test", {
+  local_igraph_options(print.id = FALSE)
+
+  expect_snapshot({
+    g <- graph_from_literal(a -+ b -+ c)
+    bfs(
+      g,
+      root = 2,
+      mode = "out",
+      unreachable = FALSE,
+      order = TRUE,
+      rank = TRUE,
+      father = TRUE,
+      pred = TRUE,
+      succ = TRUE,
+      dist = TRUE
+    )
+  })
 })

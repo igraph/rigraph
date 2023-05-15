@@ -5,11 +5,11 @@
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
-// sample.cpp
-double mean_cpp(doubles x);
-extern "C" SEXP _igraph_mean_cpp(SEXP x) {
+// cpprinterface.cpp
+cpp11::integers igraph_hcass2(int n, cpp11::integers ia, cpp11::integers ib);
+extern "C" SEXP _igraph_igraph_hcass2(SEXP n, SEXP ia, SEXP ib) {
   BEGIN_CPP11
-    return cpp11::as_sexp(mean_cpp(cpp11::as_cpp<cpp11::decay_t<doubles>>(x)));
+    return cpp11::as_sexp(igraph_hcass2(cpp11::as_cpp<cpp11::decay_t<int>>(n), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ia), cpp11::as_cpp<cpp11::decay_t<cpp11::integers>>(ib)));
   END_CPP11
 }
 
@@ -92,6 +92,9 @@ extern SEXP R_igraph_connect_neighborhood(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_constraint(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_contract_vertices(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_convex_hull(SEXP);
+extern SEXP R_igraph_copy_env(SEXP);
+extern SEXP R_igraph_copy_from(SEXP);
+extern SEXP R_igraph_copy_to(SEXP);
 extern SEXP R_igraph_coreness(SEXP, SEXP);
 extern SEXP R_igraph_correlated_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_correlated_pair_game(SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -174,7 +177,6 @@ extern SEXP R_igraph_growing_random_game(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_harmonic_centrality_cutoff(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_has_loop(SEXP);
 extern SEXP R_igraph_has_multiple(SEXP);
-extern SEXP R_igraph_hcass2(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_consensus(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_hrg_create(SEXP, SEXP);
 extern SEXP R_igraph_hrg_dendrogram(SEXP);
@@ -277,7 +279,6 @@ extern SEXP R_igraph_modularity_matrix(SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_estimate(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP R_igraph_motifs_randesu_no(SEXP, SEXP, SEXP);
-extern SEXP R_igraph_mybracket(SEXP, SEXP);
 extern SEXP R_igraph_mybracket2(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_copy(SEXP, SEXP, SEXP);
 extern SEXP R_igraph_mybracket2_names(SEXP, SEXP, SEXP);
@@ -472,6 +473,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_constraint",                                 (DL_FUNC) &R_igraph_constraint,                                  3},
     {"R_igraph_contract_vertices",                          (DL_FUNC) &R_igraph_contract_vertices,                           3},
     {"R_igraph_convex_hull",                                (DL_FUNC) &R_igraph_convex_hull,                                 1},
+    {"R_igraph_copy_env",                                   (DL_FUNC) &R_igraph_copy_env,                                    1},
+    {"R_igraph_copy_from",                                  (DL_FUNC) &R_igraph_copy_from,                                   1},
+    {"R_igraph_copy_to",                                    (DL_FUNC) &R_igraph_copy_to,                                     1},
     {"R_igraph_coreness",                                   (DL_FUNC) &R_igraph_coreness,                                    2},
     {"R_igraph_correlated_game",                            (DL_FUNC) &R_igraph_correlated_game,                             4},
     {"R_igraph_correlated_pair_game",                       (DL_FUNC) &R_igraph_correlated_pair_game,                        5},
@@ -554,7 +558,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_harmonic_centrality_cutoff",                 (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                  6},
     {"R_igraph_has_loop",                                   (DL_FUNC) &R_igraph_has_loop,                                    1},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
-    {"R_igraph_hcass2",                                     (DL_FUNC) &R_igraph_hcass2,                                      3},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},
     {"R_igraph_hrg_dendrogram",                             (DL_FUNC) &R_igraph_hrg_dendrogram,                              1},
@@ -657,7 +660,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_motifs_randesu",                             (DL_FUNC) &R_igraph_motifs_randesu,                              3},
     {"R_igraph_motifs_randesu_estimate",                    (DL_FUNC) &R_igraph_motifs_randesu_estimate,                     5},
     {"R_igraph_motifs_randesu_no",                          (DL_FUNC) &R_igraph_motifs_randesu_no,                           3},
-    {"R_igraph_mybracket",                                  (DL_FUNC) &R_igraph_mybracket,                                   2},
     {"R_igraph_mybracket2",                                 (DL_FUNC) &R_igraph_mybracket2,                                  3},
     {"R_igraph_mybracket2_copy",                            (DL_FUNC) &R_igraph_mybracket2_copy,                             3},
     {"R_igraph_mybracket2_names",                           (DL_FUNC) &R_igraph_mybracket2_names,                            3},
@@ -769,7 +771,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_write_graph_ncol",                           (DL_FUNC) &R_igraph_write_graph_ncol,                            4},
     {"R_igraph_write_graph_pajek",                          (DL_FUNC) &R_igraph_write_graph_pajek,                           2},
     {"UUID_gen",                                            (DL_FUNC) &UUID_gen,                                             1},
-    {"_igraph_mean_cpp",                                    (DL_FUNC) &_igraph_mean_cpp,                                     1},
+    {"_igraph_igraph_hcass2",                               (DL_FUNC) &_igraph_igraph_hcass2,                                3},
     {"make_lazy",                                           (DL_FUNC) &make_lazy,                                            3},
     {"make_lazy_dots",                                      (DL_FUNC) &make_lazy_dots,                                       2},
     {"promise_env_",                                        (DL_FUNC) &promise_env_,                                         1},

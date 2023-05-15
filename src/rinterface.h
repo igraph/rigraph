@@ -21,6 +21,8 @@
 
 */
 
+#include <stdbool.h>
+
 #include "uuid/uuid.h"
 
 #define R_IGRAPH_TYPE_VERSION "0.8.0"
@@ -28,12 +30,17 @@
 
 SEXP R_igraph_add_env(SEXP graph);
 
-void R_igraph_error();
-void R_igraph_warning();
+void R_igraph_set_in_r_check(bool set);
+void R_igraph_error(void);
+void R_igraph_warning(void);
+void R_igraph_interrupt(void);
 
 #define IGRAPH_R_CHECK(func) \
     do { \
+        R_igraph_set_in_r_check(1); \
         igraph_error_type_t __c = func; \
+        R_igraph_set_in_r_check(0); \
         R_igraph_warning(); \
-        if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
+        if (__c == IGRAPH_INTERRUPTED) { R_igraph_interrupt(); } \
+        else if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
     } while (0)
