@@ -139,6 +139,10 @@ treat_call <- function(old, new, topics) {
     relevant_row <- pkg_defs[pkg_defs[["name"]] == "average_path_length_dijkstra_impl",]
   }
 
+  if (new == "bipartite_mapping") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "is_bipartite_impl",]
+  }
+
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
