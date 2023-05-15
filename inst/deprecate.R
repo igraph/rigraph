@@ -29,6 +29,30 @@ tibblify_call <- function(deprecated_call) {
 deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
 
 # parse ALL the package scripts ----
+
+.parse_impl_assignements <- function() {
+  scripts <- fs::dir_ls(here::here("R")) |>
+    purrr::keep(~(.x != zzz_script)) |>
+    purrr::map(parse_script)
+
+  parse_script_function_call <- function(xml) {
+    kiddos <- xml2::xml_children(xml)
+    candidates <- kiddos[xml2::xml_name(kiddos) == "expr"]
+    candidates <- candidates[purrr::map_int(candidates, ~length(xml2::xml_children(.x))) == 3]
+
+    purrr::map_df(
+      candidates,
+      ~ tibble::tibble(
+        left = xml2::xml_children(.x)[[1]] |> xml2::xml_text(),
+        right = xml2::xml_children(.x)[[3]] |> xml2::xml_text()
+      )
+    )
+  }
+
+  purrr::map_df(scripts, parse_script_function_call)
+}
+parse_impl_assignements <- memoise::memoise(.parse_impl_assignements)
+
 parse_package_defs <- function() {
   scripts <- fs::dir_ls(here::here("R")) |>
     purrr::keep(~(.x != zzz_script)) |>
@@ -131,40 +155,10 @@ treat_call <- function(old, new, topics) {
     relevant_row <- pkg_defs[pkg_defs[["name"]] == sprintf("%s_impl", new),]
   }
 
-  if (new == "count_automorphisms") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "automorphisms_impl",]
-  }
-
-  if (new == "mean_distance") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "average_path_length_dijkstra_impl",]
-  }
-
-  if (new == "bipartite_mapping") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "is_bipartite_impl",]
-  }
-
-  if (new == "centr_betw_tmax") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_betweenness_tmax_impl",]
-  }
-
-  if (new == "centr_clo") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_closeness_impl",]
-  }
-
-  if (new == "centr_clo_tmax") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_closeness_tmax_impl",]
-  }
-
-  if (new == "centr_degree") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_degree_impl",]
-  }
-
-  if (new == "centr_eigen") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_eigenvector_centrality_impl",]
-  }
-
-  if (new == "centr_eigen_tmax") {
-    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_eigenvector_centrality_tmax_impl",]
+  if (nrow(relevant_row) == 0) {
+    assignments <- parse_impl_assignements()
+    actual_def <- assignments[["right"]][assignments[["left"]] == new]
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == actual_def,]
   }
 
   if (nrow(relevant_row) > 1) {
