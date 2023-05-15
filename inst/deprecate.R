@@ -143,6 +143,10 @@ treat_call <- function(old, new, topics) {
     relevant_row <- pkg_defs[pkg_defs[["name"]] == "is_bipartite_impl",]
   }
 
+  if (new == "centr_betw_tmax") {
+    relevant_row <- pkg_defs[pkg_defs[["name"]] == "centralization_betweenness_tmax_impl",]
+  }
+
   if (nrow(relevant_row) > 1) {
     relevant_row <- relevant_row[!grepl("aaa-auto", relevant_row[["script_name"]]),]
   }
