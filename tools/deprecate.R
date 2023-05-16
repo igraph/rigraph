@@ -148,7 +148,7 @@ treat_call <- function(old, new, topics) {
   }
 
   pkg_defs <- parse_package_defs()
-  template <- paste(readLines(here::here("inst", "deprecate-template.txt")), collapse = "\n")
+  template <- paste(readLines(here::here("tools", "deprecate-template.txt")), collapse = "\n")
 
   relevant_row <- pkg_defs[pkg_defs[["name"]] == new,]
 
