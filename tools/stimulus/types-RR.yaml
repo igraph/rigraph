@@ -1,9 +1,9 @@
 
 GRAPH:
-    INCONV: if (!is_igraph(%I%)) { stop("Not a graph object") }
+    INCONV: ensure_igraph(%I%)
 
 GRAPH_OR_0:
-    INCONV: if (!is.null(graph) && !is_igraph(%I%)) { stop("Not a graph object") }
+    INCONV: ensure_igraph(%I%, optional = TRUE)
 
 INTEGER:
     DEFAULT:

@@ -78,9 +78,7 @@
 #' get_diameter(g, weights = NA)
 #'
 diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -102,9 +100,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -132,9 +128,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -204,9 +198,7 @@ mean_distance <- average_path_length_dijkstra_impl
 degree <- function(graph, v = V(graph),
                    mode = c("all", "out", "in", "total"), loops = TRUE,
                    normalized = FALSE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   v <- as.igraph.vs(graph, v)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
@@ -237,9 +229,7 @@ degree <- function(graph, v = V(graph),
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   cs <- degree(graph, ...)
   hi <- hist(cs, -1:max(cs), plot = FALSE)$density
   if (!cumulative) {
@@ -431,9 +421,7 @@ distances <- function(graph, v = V(graph), to = V(graph),
                         "automatic", "unweighted", "dijkstra",
                         "bellman-ford", "johnson"
                       )) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   # make sure that the lower-level function in C gets mode == "out"
   # unconditionally when the graph is undirected; this is used for
@@ -519,9 +507,7 @@ shortest_paths <- function(graph, from, to = V(graph),
                            output = c("vpath", "epath", "both"),
                            predecessors = FALSE, inbound.edges = FALSE,
                            algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -613,9 +599,7 @@ all_shortest_paths <- function(graph, from,
                                to = V(graph),
                                mode = c("out", "all", "in"),
                                weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -686,9 +670,7 @@ all_shortest_paths <- function(graph, from,
 #' subcomponent(g, 1, "out")
 #' subcomponent(g, 1, "all")
 subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -759,9 +741,7 @@ subgraph <- function(graph, vids) {
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   vids <- as.igraph.vs(graph, vids)
   impl <- switch(igraph.match.arg(impl),
     "auto" = 0,
@@ -784,9 +764,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   eids <- as.igraph.es(graph, eids)
   delete.vertices <- as.logical(delete.vertices)
 
@@ -902,9 +880,7 @@ transitivity <- function(graph, type = c(
                            "barrat", "weighted"
                          ),
                          vids = NULL, weights = NULL, isolates = c("NaN", "zero")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   type <- igraph.match.arg(type)
   type <- switch(type,
     "undirected" = 0,
@@ -1012,9 +988,7 @@ transitivity <- function(graph, type = c(
 #' constraint(g)
 #'
 constraint <- function(graph, nodes = V(graph), weights = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   nodes <- as.igraph.vs(graph, nodes)
 
   if (is.null(weights)) {
@@ -1069,9 +1043,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #'
 reciprocity <- function(graph, ignore.loops = TRUE,
                         mode = c("default", "ratio")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
     "default" = 0,
     "ratio" = 1
@@ -1124,9 +1096,7 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' edge_density(simplify(g), loops = FALSE) # this is also right, but different
 #'
 edge_density <- function(graph, loops = FALSE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_density, graph, as.logical(loops))
@@ -1137,9 +1107,7 @@ edge_density <- function(graph, loops = FALSE) {
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -1228,9 +1196,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #'
 ego <- function(graph, order = 1, nodes = V(graph),
                 mode = c("all", "out", "in"), mindist = 0) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -1259,9 +1225,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -1318,9 +1282,7 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
 #' coreness(g) # small core triangle in a ring
 #'
 coreness <- function(graph, mode = c("all", "out", "in")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -1369,9 +1331,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' topo_sort(g)
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -1469,9 +1429,8 @@ feedback_arc_set <- feedback_arc_set_impl
 #' girth(g)
 #'
 girth <- function(graph, circle = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_girth, graph, as.logical(circle))
   if (igraph_opt("return.vs.es") && circle) {
@@ -1657,9 +1616,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 pred = FALSE, succ = FALSE, dist = FALSE,
                 callback = NULL, extra = NULL, rho = parent.frame(),
                 neimode) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (!missing(neimode)) {
     warning("Argument `neimode' is deprecated; use `mode' instead")
@@ -1822,10 +1779,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE,
                 in.callback = NULL, out.callback = NULL, extra = NULL,
                 rho = parent.frame(), neimode) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
-
+  ensure_igraph(graph)
   if (!missing(neimode)) {
     warning("Argument `neimode' is deprecated; use `mode' instead")
     if (missing(mode)) {
@@ -1929,9 +1883,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
     "weak" = 1,
     "strong" = 2
@@ -1992,9 +1944,7 @@ count_components <- count_components
 #'
 unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
@@ -2054,9 +2004,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
                              sparse = igraph_opt("sparsematrices")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   normalized <- as.logical(normalized)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -2172,9 +2120,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' @export
 is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
   matching <- as.igraph.vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
@@ -2191,9 +2137,7 @@ is_matching <- function(graph, matching, types = NULL) {
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
   matching <- as.igraph.vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
@@ -2211,9 +2155,7 @@ is_max_matching <- function(graph, matching, types = NULL) {
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,
                                 eps = .Machine$double.eps) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight

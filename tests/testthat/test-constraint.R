@@ -1,8 +1,6 @@
 test_that("constraint works", {
   constraint.orig <- function(graph, nodes = V(graph), attr = NULL) {
-    if (!is_igraph(graph)) {
-      stop("Not a graph object")
-    }
+    ensure_igraph(graph)
     idx <- degree(graph) != 0
     A <- as_adj(graph, attr = attr, sparse = FALSE)
     A <- A[idx, idx]

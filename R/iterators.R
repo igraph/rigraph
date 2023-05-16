@@ -205,9 +205,7 @@ set_complete_iterator <- function(x, value = TRUE) {
 #'   set_vertex_attr("name", value = letters[1:10])
 #' V(g2)
 V <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   update_vs_ref(graph)
 
@@ -304,9 +302,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
 E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   update_es_ref(graph)
 
@@ -1182,9 +1178,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `V<-` <- function(x, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
@@ -1203,9 +1197,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")

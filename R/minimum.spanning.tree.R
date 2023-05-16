@@ -64,9 +64,7 @@
 #'
 mst <- function(graph, weights = NULL,
                 algorithm = NULL, ...) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(algorithm)) {
     if (!is.null(weights) || "weight" %in% edge_attr_names(graph)) {
