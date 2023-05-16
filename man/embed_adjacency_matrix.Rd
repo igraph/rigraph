@@ -42,7 +42,7 @@ graph. This vector is added to the diagonal of the adjacency matrix.}
 
 \item{options}{A named list containing the parameters for the SVD
 computation algorithm in ARPACK. By default, the list of values is assigned
-the values given by \link{igraph.arpack.default}.}
+the values given by \code{\link[=arpack_defaults]{arpack_defaults()}}.}
 }
 \value{
 A list containing with entries: \item{X}{Estimated latent positions,
