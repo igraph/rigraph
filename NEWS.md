@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9010
+
+## Documentation
+
+  - Add ORCID to DESCRIPTION, add Kirill's ORCID + desc::desc\_normalize() (#774).
+
+  - Add DOI to CITATION (#773).
+
+## Uncategorized
+
+  - Add authors links to pkgdown config (#766).
+
+
 # igraph 1.4.99.9009
 
 ## Chore
