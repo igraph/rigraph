@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.4.99.9009
+Version: 1.4.99.9010
 Title: Network Analysis and Visualization
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
@@ -66,5 +66,5 @@ Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-SystemRequirements:gmp (optional), libxml2 (optional), glpk (>= 4.57,
+SystemRequirements: gmp (optional), libxml2 (optional), glpk (>= 4.57,
     optional)
