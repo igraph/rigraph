@@ -245,6 +245,66 @@ Status: 1 ERROR
 
 
 ```
+# HospitalNetwork
+
+<details>
+
+* Version: 0.9.3
+* GitHub: https://github.com/PascalCrepey/HospitalNetwork
+* Source code: https://github.com/cran/HospitalNetwork
+* Date/Publication: 2023-02-27 08:22:43 UTC
+* Number of recursive dependencies: 115
+
+Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘HospitalNetwork’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/HospitalNetwork/new/HospitalNetwork.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘HospitalNetwork’ ...
+** package ‘HospitalNetwork’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘graphlayouts’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘HospitalNetwork’
+* removing ‘/tmp/workdir/HospitalNetwork/new/HospitalNetwork.Rcheck/HospitalNetwork’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘HospitalNetwork’ ...
+** package ‘HospitalNetwork’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘graphlayouts’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘HospitalNetwork’
+* removing ‘/tmp/workdir/HospitalNetwork/old/HospitalNetwork.Rcheck/HospitalNetwork’
+
+
+```
 # immcp
 
 <details>
@@ -488,6 +548,82 @@ Run `revdepcheck::cloud_details(, "NA")` for more info
 
 
 ```
+# Platypus
+
+<details>
+
+* Version: 3.4.1
+* GitHub: NA
+* Source code: https://github.com/cran/Platypus
+* Date/Publication: 2022-08-15 07:20:20 UTC
+* Number of recursive dependencies: 354
+
+Run `revdepcheck::cloud_details(, "Platypus")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/Platypus/new/Platypus.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Platypus/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Platypus’ version ‘3.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+Package required but not available: ‘ggtree’
+
+Packages suggested but not available for checking:
+  'Matrix.utils', 'monocle3', 'ProjecTILs', 'SeuratWrappers',
+  'vanddraabe'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/Platypus/old/Platypus.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Platypus/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Platypus’ version ‘3.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+Package required but not available: ‘ggtree’
+
+Packages suggested but not available for checking:
+  'Matrix.utils', 'monocle3', 'ProjecTILs', 'SeuratWrappers',
+  'vanddraabe'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
 # NA
 
 <details>
@@ -527,11 +663,11 @@ Run `revdepcheck::cloud_details(, "NA")` for more info
 
 <details>
 
-* Version: 0.2.3
+* Version: 0.2.4
 * GitHub: https://github.com/cjvanlissa/tidySEM
 * Source code: https://github.com/cran/tidySEM
-* Date/Publication: 2022-04-14 17:50:02 UTC
-* Number of recursive dependencies: 173
+* Date/Publication: 2023-05-01 20:00:06 UTC
+* Number of recursive dependencies: 190
 
 Run `revdepcheck::cloud_details(, "tidySEM")` for more info
 
@@ -549,16 +685,16 @@ Run `revdepcheck::cloud_details(, "tidySEM")` for more info
 * using option ‘--no-manual’
 * checking for file ‘tidySEM/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘tidySEM’ version ‘0.2.3’
+* this is package ‘tidySEM’ version ‘0.2.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 ...
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘Generating_syntax.Rmd’ using ‘UTF-8’... OK
   ‘Plotting_graphs.Rmd’ using ‘UTF-8’... OK
   ‘Tabulating_results.Rmd’ using ‘UTF-8’... OK
+  ‘lca_confirmatory.Rmd’ using ‘UTF-8’... OK
+  ‘lca_exploratory.Rmd’ using ‘UTF-8’... OK
+  ‘lca_lcga.Rmd’ using ‘UTF-8’... OK
+  ‘lca_ordinal.Rmd’ using ‘UTF-8’... OK
   ‘sem_graph.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... OK
 * DONE
@@ -579,16 +715,16 @@ Status: 1 NOTE
 * using option ‘--no-manual’
 * checking for file ‘tidySEM/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘tidySEM’ version ‘0.2.3’
+* this is package ‘tidySEM’ version ‘0.2.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 ...
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘Generating_syntax.Rmd’ using ‘UTF-8’... OK
   ‘Plotting_graphs.Rmd’ using ‘UTF-8’... OK
   ‘Tabulating_results.Rmd’ using ‘UTF-8’... OK
+  ‘lca_confirmatory.Rmd’ using ‘UTF-8’... OK
+  ‘lca_exploratory.Rmd’ using ‘UTF-8’... OK
+  ‘lca_lcga.Rmd’ using ‘UTF-8’... OK
+  ‘lca_ordinal.Rmd’ using ‘UTF-8’... OK
   ‘sem_graph.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... OK
 * DONE
