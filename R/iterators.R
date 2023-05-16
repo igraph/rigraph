@@ -31,7 +31,7 @@ update_es_ref <- update_vs_ref <- function(graph) {
 
 get_es_ref <- get_vs_ref <- function(graph) {
   if (is_igraph(graph) && !warn_version(graph)) {
-    .Call(R_igraph_mybracket, graph, igraph_t_idx_env)
+    .Call(R_igraph_copy_env, graph)
   } else {
     NULL
   }
@@ -205,9 +205,7 @@ set_complete_iterator <- function(x, value = TRUE) {
 #'   set_vertex_attr("name", value = letters[1:10])
 #' V(g2)
 V <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   update_vs_ref(graph)
 
@@ -304,9 +302,7 @@ unsafe_create_es <- function(graph, idx, es = NULL) {
 #'   set_vertex_attr("name", value = letters[1:10])
 #' E(g2)
 E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   update_es_ref(graph)
 
@@ -932,8 +928,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
         .inc = .inc, inc = inc, adj = adj,
         .from = .from, from = from,
         .to = .to, to = to,
-        .igraph.from = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_from)[as.numeric(x)]),
-        .igraph.to = list(.Call(R_igraph_mybracket, graph, igraph_t_idx_to)[as.numeric(x)]),
+        .igraph.from = list(.Call(R_igraph_copy_from, graph)[as.numeric(x)]),
+        .igraph.to = list(.Call(R_igraph_copy_to, graph)[as.numeric(x)]),
         .igraph.graph = list(graph),
         `%--%` = `%--%`, `%->%` = `%->%`, `%<-%` = `%<-%`,
         .env = env,
@@ -1182,9 +1178,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-vs-attributes
 #' @export
 `V<-` <- function(x, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
@@ -1203,9 +1197,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
 #' @name igraph-es-attributes
 #' @export
 `E<-` <- function(x, path = NULL, P = NULL, directed = NULL, value) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
   if (!"name" %in% names(attributes(value)) ||
     !"value" %in% names(attributes(value))) {
     stop("invalid indexing")
