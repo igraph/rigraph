@@ -104,6 +104,9 @@ check_version <- function(graph) {
 }
 
 warn_version <- function(graph) {
+  # Calling for side effect: error if R_SEXP_to_igraph() fails
+  vcount_impl(graph)
+
   if (graph_version() != graph_version(graph)) {
     message(
       "This graph was created by an old(er) igraph version.\n",

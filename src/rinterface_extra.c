@@ -2883,16 +2883,52 @@ void R_igraph_set_pointer(SEXP result, const igraph_t* graph) {
   UNPROTECT(px);
 }
 
+void R_igraph_restore_pointer(SEXP graph) {
+  igraph_t g;
+  igraph_vector_t v;
+  igraph_integer_t n=REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+  igraph_bool_t directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+
+  igraph_vector_t from;
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &from);
+
+  igraph_vector_t to;
+  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), &to);
+
+  igraph_integer_t i, s=igraph_vector_size(&from);
+  igraph_vector_init(&v, s*2);
+
+  for (i = 0; i < s; ++i)
+  {
+    igraph_vector_set(&v, i*2, VECTOR(to)[i]);
+    igraph_vector_set(&v, i*2+1, VECTOR(from)[i]);
+  }
+
+  igraph_empty(&g, n, directed);
+  igraph_add_edges(&g, &v, NULL);
+  R_igraph_set_pointer(graph, &g);
+}
+
 igraph_t *R_igraph_get_pointer(SEXP graph) {
   if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
-    return NULL;
+    Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
   }
 
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   if (xp == R_UnboundValue || xp == R_NilValue) {
-    return NULL;
+    R_igraph_restore_pointer(graph);
+    xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
   }
-  return (igraph_t*)(R_ExternalPtrAddr(xp));
+
+  igraph_t *pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
+
+  if (!pgraph) {
+    R_igraph_restore_pointer(graph);
+    xp=Rf_findVar(Rf_install("igraph"), R_igraph_graph_env(graph));
+    pgraph=(igraph_t*)(R_ExternalPtrAddr(xp));
+  }
+
+  return pgraph;
 }
 
 void R_igraph_set_n(SEXP rgraph, const igraph_t *graph) {
@@ -2902,10 +2938,7 @@ void R_igraph_set_n(SEXP rgraph, const igraph_t *graph) {
 
 igraph_integer_t R_igraph_get_n(SEXP graph) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
-  if (pgraph) {
-    return pgraph->n;
-  }
-  return REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+  return pgraph->n;
 }
 
 void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
@@ -2915,10 +2948,7 @@ void R_igraph_set_directed(SEXP rgraph, const igraph_t *graph) {
 
 igraph_bool_t R_igraph_get_directed(SEXP graph) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
-  if (pgraph) {
-    return pgraph->directed;
-  }
-  return LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+  return pgraph->directed;
 }
 
 void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
@@ -2930,11 +2960,7 @@ void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
 
 void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
-  if (pgraph) {
-    *from = pgraph->from;
-  } else {
-    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), from);
-  }
+  *from = pgraph->from;
 }
 
 void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
@@ -2946,11 +2972,27 @@ void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
 
 void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
-  if (pgraph) {
-    *to = pgraph->to;
-  } else {
-    R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), to);
-  }
+  *to = pgraph->to;
+}
+
+void R_igraph_get_oi(SEXP graph, igraph_vector_t* oi) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  *oi = pgraph->oi;
+}
+
+void R_igraph_get_ii(SEXP graph, igraph_vector_t* ii) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  *ii = pgraph->ii;
+}
+
+void R_igraph_get_os(SEXP graph, igraph_vector_t* os) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  *os = pgraph->os;
+}
+
+void R_igraph_get_is(SEXP graph, igraph_vector_t* is) {
+  igraph_t *pgraph=R_igraph_get_pointer(graph);
+  *is = pgraph->is;
 }
 
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
@@ -2964,19 +3006,6 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   R_igraph_set_directed(result, graph);
   R_igraph_set_from(result, graph);
   R_igraph_set_to(result, graph);
-  SET_VECTOR_ELT(result, igraph_t_idx_oi, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, igraph_t_idx_ii, NEW_NUMERIC(no_of_edges));
-  SET_VECTOR_ELT(result, igraph_t_idx_os, NEW_NUMERIC(no_of_nodes+1));
-  SET_VECTOR_ELT(result, igraph_t_idx_is, NEW_NUMERIC(no_of_nodes+1));
-
-  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_oi)), graph->oi.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_ii)), graph->ii.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
-  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_os)), graph->os.stor_begin,
-         sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
-  memcpy(REAL(VECTOR_ELT(result, igraph_t_idx_is)), graph->is.stor_begin,
-         sizeof(igraph_real_t)*(size_t) (no_of_nodes+1));
 
   SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
 
@@ -3593,10 +3622,10 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   res->directed=R_igraph_get_directed(graph);
   R_igraph_get_from(graph, &res->from);
   R_igraph_get_to(graph, &res->to);
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_oi), &res->oi);
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_ii), &res->ii);
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_os), &res->os);
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_is), &res->is);
+  R_igraph_get_oi(graph, &res->oi);
+  R_igraph_get_ii(graph, &res->ii);
+  R_igraph_get_os(graph, &res->os);
+  R_igraph_get_is(graph, &res->is);
 
   /* attributes */
   REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects refcount */
@@ -3617,14 +3646,18 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   igraph_vector_t to;
   R_igraph_get_to(graph, &to);
   igraph_vector_copy(&res->to, &to);
-  igraph_vector_init_copy(&res->oi, REAL(VECTOR_ELT(graph, igraph_t_idx_oi)),
-                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_oi)));
-  igraph_vector_init_copy(&res->ii, REAL(VECTOR_ELT(graph, igraph_t_idx_ii)),
-                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_ii)));
-  igraph_vector_init_copy(&res->os, REAL(VECTOR_ELT(graph, igraph_t_idx_os)),
-                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_os)));
-  igraph_vector_init_copy(&res->is, REAL(VECTOR_ELT(graph, igraph_t_idx_is)),
-                   GET_LENGTH(VECTOR_ELT(graph, igraph_t_idx_is)));
+  igraph_vector_t oi;
+  R_igraph_get_oi(graph, &oi);
+  igraph_vector_copy(&res->oi, &oi);
+  igraph_vector_t ii;
+  R_igraph_get_ii(graph, &ii);
+  igraph_vector_copy(&res->ii, &ii);
+  igraph_vector_t os;
+  R_igraph_get_os(graph, &os);
+  igraph_vector_copy(&res->os, &os);
+  igraph_vector_t is;
+  R_igraph_get_is(graph, &is);
+  igraph_vector_copy(&res->is, &is);
 
   /* attributes */
   REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects */
