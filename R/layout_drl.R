@@ -91,9 +91,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
                             weights = NULL,
                             fixed = NULL,
                             dim = 2) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (dim != 2 && dim != 3) {
     stop("`dim' must be 2 or 3")

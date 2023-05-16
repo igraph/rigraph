@@ -237,3 +237,19 @@ reference:
   - layout.spring
   - layout.svd
   - "%>%"
+
+authors:
+  Gábor Csárdi:
+    href: "https://github.com/gaborcsardi"
+  Tamás Nepusz:
+    href: "https://github.com/ntamas"
+  Vincent Traag:
+    href: "https://www.traag.net/"
+  Szabolcs Horvát:
+    href: "http://szhorvat.net/"
+  Fabio Zanini:
+    href: "https://fabilab.org/pages/people.html"
+  Daniel Noom:
+    href: "https://github.com/GroteGnoom"
+  Kirill Müller:
+    href: "https://krlmlr.info/"

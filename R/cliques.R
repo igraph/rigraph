@@ -108,9 +108,7 @@ largest_cliques <- largest_cliques_impl
 #' @family cliques
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(min)) {
     min <- 0
@@ -164,9 +162,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 count_max_cliques <- function(graph, min = NULL, max = NULL,
                               subset = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(min)) {
     min <- 0
@@ -325,9 +321,7 @@ weighted_clique_num <- weighted_clique_number_impl
 #'
 #' length(maximal_ivs(g))
 ivs <- function(graph, min = NULL, max = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   if (is.null(min)) {
     min <- 0
@@ -354,9 +348,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
 #' @family cliques
 #' @export
 largest_ivs <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_largest_independent_vertex_sets, graph)
@@ -372,9 +364,7 @@ largest_ivs <- function(graph) {
 #' @family cliques
 #' @export
 maximal_ivs <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_maximal_independent_vertex_sets, graph)
@@ -390,9 +380,7 @@ maximal_ivs <- function(graph) {
 #' @family cliques
 #' @export
 ivs_size <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_independence_number, graph)

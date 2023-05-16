@@ -283,9 +283,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
                                 maxiter = 100) {
   ## Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
@@ -341,9 +339,7 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' layout_(g, as_star())
 layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (vcount(graph) == 0) {
     # Any other layout will do so just pick one that supports graphs with no
     # vertices
@@ -431,9 +427,7 @@ as_star <- function(...) layout_spec(layout_as_star, ...)
 layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
                            rootlevel = numeric(), mode = c("out", "in", "all"),
                            flip.y = TRUE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   root <- as.igraph.vs(graph, root) - 1
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
@@ -503,9 +497,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' V(karate)$shape <- "none"
 #' plot(karate, layout = coords)
 layout_in_circle <- function(graph, order = V(graph)) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   order <- as.igraph.vs(graph, order) - 1L
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_layout_circle, graph, order)
@@ -666,9 +658,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' }
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   width <- as.integer(width)
   dim <- as.integer(dim)
   stopifnot(dim == 2 || dim == 3)
@@ -703,9 +693,7 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
     "igraph 0.8.0, please use layout_on_grid instead"
   ))
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   width <- as.integer(width)
   height <- as.integer(height)
 
@@ -738,9 +726,8 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
 #' @export
 #' @family graph layouts
 layout_on_sphere <- function(graph) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
+
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_layout_sphere, graph)
 }
@@ -778,9 +765,7 @@ layout.sphere <- function(..., params = list()) {
 #' @export
 #' @family graph layouts
 layout_randomly <- function(graph, dim = 2) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (dim == 2) {
     on.exit(.Call(R_igraph_finalizer))
     .Call(R_igraph_layout_random, graph)
@@ -924,9 +909,7 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
                            weight.edge.crossings = 1.0 - sqrt(edge_density(graph)),
                            weight.node.edge.dist = 0.2 * (1 - edge_density(graph))) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
     use.seed <- TRUE
@@ -1049,9 +1032,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
                            minz = NULL, maxz = NULL,
                            coolexp, maxdelta, area, repulserad, maxiter) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
@@ -1174,9 +1155,7 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
                             temp.max = max(vcount(graph), 1), temp.min = 1 / 10,
                             temp.init = sqrt(max(vcount(graph), 1))) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
     use.seed <- TRUE
@@ -1256,9 +1235,7 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.001,
                                  mass = 30, spring.length = 0, spring.constant = 1,
                                  max.sa.movement = 5) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(start)) {
     start <- structure(as.numeric(start), dim = dim(start))
   }
@@ -1358,9 +1335,7 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   }
   if (!missing(start)) coords <- start
 
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
@@ -1466,9 +1441,7 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
                             area = vcount(graph)^2, coolexp = 1.5,
                             repulserad = area * vcount(graph),
                             cellsize = sqrt(sqrt(area)), root = NULL) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(root)) {
     root <- -1
   } else {
@@ -1546,9 +1519,7 @@ layout.lgl <- function(..., params = list()) {
 layout_with_mds <- function(graph, dist = NULL, dim = 2,
                             options = arpack_defaults()) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
   dim <- as.integer(dim)
 
@@ -1775,9 +1746,7 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
                                  maxiter = 100, weights = NULL,
                                  attributes = c("default", "all", "none")) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(layers)) layers <- as.numeric(layers) - 1
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
@@ -1955,9 +1924,7 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' g <- disjoint_union(graphs)
 #' plot(g, layout = lay, vertex.size = 3, labels = NA, edge.color = "black")
 merge_coords <- function(graphs, layouts, method = "dla") {
-  if (!all(sapply(graphs, is_igraph))) {
-    stop("Not a graph object")
-  }
+  lapply(graphs, ensure_igraph)
   if (method == "dla") {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
@@ -2033,9 +2000,7 @@ norm_coords <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1,
 #' @param graph The input graph.
 #' @export
 layout_components <- function(graph, layout = layout_with_kk, ...) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   V(graph)$id <- seq(vcount(graph))
   gl <- decompose(graph)

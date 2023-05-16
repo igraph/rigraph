@@ -1,5 +1,97 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9010
+
+## Documentation
+
+  - Add ORCID to DESCRIPTION, add Kirill's ORCID + desc::desc\_normalize() (#774).
+
+  - Add DOI to CITATION (#773).
+
+## Uncategorized
+
+  - Add authors links to pkgdown config (#766).
+
+
+# igraph 1.4.99.9009
+
+## Chore
+
+  - igraph pointer accessors (#796).
+
+
+# igraph 1.4.99.9008
+
+## Chore
+
+  - Store graph pointer in environment (#794).
+
+  - Prepare for storing igraph object in R structure (#795).
+
+
+# igraph 1.4.99.9007
+
+## Chore
+
+  - Copy for igraph data members (#793).
+
+  - Get/set for igraph data members (#792).
+
+
+# igraph 1.4.99.9006
+
+## Chore
+
+  - Ensure we're always using named indexes to access the internal data structure (#784).
+
+
+# igraph 1.4.99.9005
+
+## Chore
+
+  - Remove redundant AUTHORS link from DESCRIPTION.
+
+  - Prepare migration to igraph/C 0.10 (#781).
+
+  - Update NEWS.
+
+
+# igraph 1.4.99.9004
+
+## Bug fixes
+
+  - Fix tests for dev waldo (#779).
+
+## Uncategorized
+
+  - Fix linking on Windows: gfortran needs quadmath. (#778).
+
+
+# igraph 1.4.99.9003
+
+## Documentation
+
+  - Mention limitation of Pajek reader, refs #776.
+
+
+# igraph 1.4.99.9002
+
+## Chore
+
+  - Bump stimulus.
+
+
+# igraph 1.4.99.9001
+
+## Chore
+
+  - Update generated interface (#765).
+
+## Uncategorized
+
+  - Merged cran-1.4.2 into main.
+
+
 # igraph 1.4.99.9000
 
 - Internal changes only.
@@ -131,6 +223,7 @@ See [diff](https://github.com/igraph/igraph/compare/87c70998344a39b44218f7af903b
  - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
+ - `as_graphnel()` now checks that the input graph has no multi-edges. Multi-edges are not supported by the graphNEL class.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
  - Some `rgl.*()` function calls in the codebase were replaced with equivalent `*3d()` function calls in preparation for upcoming deprecations in `rgl` (see PR #619)
  - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.
