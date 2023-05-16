@@ -97,3 +97,12 @@ chr <- as.character
 drop_null <- function(x) {
   x[!sapply(x, is.null)]
 }
+
+# from https://github.com/r-lib/pkgdown/blob/c354aa7e5ea1f9936692494c28c89e5bdd31fc68/R/utils.R#L109
+modify_list <- function(x, y) {
+  if (is.null(y)) {
+    return(x)
+  }
+
+  utils::modifyList(x, y)
+}

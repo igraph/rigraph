@@ -305,8 +305,6 @@ deprecated("hrg.predict", predict_edges)
 #' @export hub.score
 deprecated("hub.score", hub_score)
 
-#' @export igraph.arpack.default
-deprecated("igraph.arpack.default", arpack_defaults)
 #' @export igraph.console
 deprecated("igraph.console", console)
 #' @export igraph.sample

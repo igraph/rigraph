@@ -318,11 +318,13 @@ closeness.estimate <- estimate_closeness
 #' @rdname arpack
 #' @family arpack
 #' @export
-arpack_defaults <- list(
-  bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
-  ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
-  mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
-)
+arpack_defaults <- function() {
+  list(
+    bmat = "I", n = 0, which = "XX", nev = 1, tol = 0.0,
+    ncv = 3, ldv = 0, ishift = 1, maxiter = 3000, nb = 1,
+    mode = 1, start = 0, sigma = 0.0, sigmai = 0.0
+  )
+}
 
 #' ARPACK eigenvector calculation
 #'
@@ -431,7 +433,7 @@ arpack_defaults <- list(
 #' re-orthogonalization.} } } Please see the ARPACK documentation for
 #' additional details.
 #'
-#' @aliases arpack arpack-options igraph.arpack.default arpack.unpack.complex
+#' @aliases arpack arpack-options arpack.unpack.complex
 #' arpack_defaults
 #' @param func The function to perform the matrix-vector multiplication. ARPACK
 #'   requires to perform these by the user. The function gets the vector \eqn{x}
@@ -512,8 +514,21 @@ arpack_defaults <- list(
 #' }
 #' @family arpack
 #' @export
-arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
+arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
+
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
   if (!is.list(options) ||
     (is.null(names(options)) && length(options) != 0)) {
     stop("options must be a named list")
@@ -530,9 +545,7 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults,
     )
   }
 
-  options.tmp <- arpack_defaults
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   if (sym && complex) {
     complex <- FALSE
