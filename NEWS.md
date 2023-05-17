@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9011
+
+## Chore
+
+  - Restore igraph pointer (#799).
+
+## Refactoring
+
+  - Create `ensure_igraph()` (#730).
+
+
 # igraph 1.4.99.9010
 
 ## Documentation
