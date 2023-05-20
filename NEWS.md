@@ -1,5 +1,61 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9011
+
+## Chore
+
+  - Restore igraph pointer (#799).
+
+## Refactoring
+
+  - Create `ensure_igraph()` (#730).
+
+
+# igraph 1.4.99.9010
+
+## Documentation
+
+  - Add ORCID to DESCRIPTION, add Kirill's ORCID + desc::desc\_normalize() (#774).
+
+  - Add DOI to CITATION (#773).
+
+## Uncategorized
+
+  - Add authors links to pkgdown config (#766).
+
+
+# igraph 1.4.99.9009
+
+## Chore
+
+  - igraph pointer accessors (#796).
+
+
+# igraph 1.4.99.9008
+
+## Chore
+
+  - Store graph pointer in environment (#794).
+
+  - Prepare for storing igraph object in R structure (#795).
+
+
+# igraph 1.4.99.9007
+
+## Chore
+
+  - Copy for igraph data members (#793).
+
+  - Get/set for igraph data members (#792).
+
+
+# igraph 1.4.99.9006
+
+## Chore
+
+  - Ensure we're always using named indexes to access the internal data structure (#784).
+
+
 # igraph 1.4.99.9005
 
 ## Chore
@@ -13,18 +69,18 @@
 
 # igraph 1.4.99.9004
 
-## Bug fixes
+## Bug fixes (already in 1.4.3)
 
   - Fix tests for dev waldo (#779).
 
-## Uncategorized
+## Uncategorized (already in 1.4.3)
 
   - Fix linking on Windows: gfortran needs quadmath. (#778).
 
 
 # igraph 1.4.99.9003
 
-## Documentation
+## Documentation (already in 1.4.3)
 
   - Mention limitation of Pajek reader, refs #776.
 
@@ -42,19 +98,23 @@
 
   - Update generated interface (#765).
 
-## Uncategorized
-
-  - Merged cran-1.4.2 into main.
-
 
 # igraph 1.4.99.9000
 
 - Internal changes only.
 
 
-# igraph 1.4.2.9000
+# igraph 1.4.3
 
-- Internal changes only.
+## Internal
+
+  - Fix tests for dev waldo (#779, @hadley).
+
+  - Fix linking on Windows: gfortran needs quadmath. (#778).
+
+## Documentation
+
+  - Mention limitation of Pajek reader (#776).
 
 
 # igraph 1.4.2

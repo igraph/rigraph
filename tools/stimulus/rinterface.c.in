@@ -22,6 +22,7 @@
 */
 
 #include "igraph.h"
+#include "graph/attributes.h"
 #include "graph/neighbors.h"
 
 #include "config.h"
@@ -50,6 +51,8 @@
 #ifdef IGRAPH_SANITIZER_AVAILABLE
 #include <sanitizer/asan_interface.h>
 #endif
+
+#define IGRAPH_I_DESTROY IGRAPH_I_ATTRIBUTE_DESTROY
 
 SEXP R_igraph_vector_to_SEXP(const igraph_vector_t *v);
 SEXP R_igraph_vector_int_to_SEXP(const igraph_vector_int_t *v);

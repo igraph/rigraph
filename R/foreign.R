@@ -178,9 +178,7 @@ write_graph <- function(graph, file,
                           "graphml", "dimacs", "gml", "dot", "leda"
                         ),
                         ...) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.character(file) || length(grep("://", file, fixed = TRUE)) > 0 ||
     length(grep("~", file, fixed = TRUE)) > 0) {
     tmpfile <- TRUE

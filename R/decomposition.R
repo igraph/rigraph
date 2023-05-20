@@ -87,9 +87,7 @@
 #'
 is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
                        fillin = FALSE, newgraph = FALSE) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (!is.null(alpha)) {
     alpha <- as.numeric(alpha) - 1
   }

@@ -25,12 +25,8 @@ graph.get.isomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                        vertex.color2, edge.color1,
                                        edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) {
-    stop("Not a graph object")
-  }
-  if (!is_igraph(graph2)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -87,12 +83,8 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
                                           vertex.color2, edge.color1,
                                           edge.color2) {
   # Argument checks
-  if (!is_igraph(graph1)) {
-    stop("Not a graph object")
-  }
-  if (!is_igraph(graph2)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   if (missing(vertex.color1)) {
     if ("color" %in% vertex_attr_names(graph1)) {
       vertex.color1 <- V(graph1)$color
@@ -147,9 +139,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 #' @export
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   vids <- as.igraph.vs(graph, vids) - 1
 
   on.exit(.Call(R_igraph_finalizer))
@@ -163,12 +153,8 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
                                     induced = FALSE, map = TRUE, all.maps = FALSE,
                                     time.limit = Inf) {
   # Argument checks
-  if (!is_igraph(pattern)) {
-    stop("Not a graph object")
-  }
-  if (!is_igraph(target)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(pattern)
+  ensure_igraph(target)
   induced <- as.logical(induced)
   if (time.limit == Inf) {
     time.limit <- 0L
@@ -315,12 +301,8 @@ isomorphic <- function(graph1, graph2, method = c(
                          "auto", "direct",
                          "vf2", "bliss"
                        ), ...) {
-  if (!is_igraph(graph1)) {
-    stop("Not a graph object")
-  }
-  if (!is_igraph(graph2)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph1)
+  ensure_igraph(graph2)
   method <- igraph.match.arg(method)
 
   if (method == "auto") {
