@@ -114,7 +114,7 @@
 
 ## Documentation
 
-  - Mention limitation of Pajek reader, refs #776.
+  - Mention limitation of Pajek reader (#776).
 
 
 # igraph 1.4.2
