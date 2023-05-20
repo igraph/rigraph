@@ -1,5 +1,108 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9011
+
+## Chore
+
+  - Restore igraph pointer (#799).
+
+## Refactoring
+
+  - Create `ensure_igraph()` (#730).
+
+
+# igraph 1.4.99.9010
+
+## Documentation
+
+  - Add ORCID to DESCRIPTION, add Kirill's ORCID + desc::desc\_normalize() (#774).
+
+  - Add DOI to CITATION (#773).
+
+## Uncategorized
+
+  - Add authors links to pkgdown config (#766).
+
+
+# igraph 1.4.99.9009
+
+## Chore
+
+  - igraph pointer accessors (#796).
+
+
+# igraph 1.4.99.9008
+
+## Chore
+
+  - Store graph pointer in environment (#794).
+
+  - Prepare for storing igraph object in R structure (#795).
+
+
+# igraph 1.4.99.9007
+
+## Chore
+
+  - Copy for igraph data members (#793).
+
+  - Get/set for igraph data members (#792).
+
+
+# igraph 1.4.99.9006
+
+## Chore
+
+  - Ensure we're always using named indexes to access the internal data structure (#784).
+
+
+# igraph 1.4.99.9005
+
+## Chore
+
+  - Remove redundant AUTHORS link from DESCRIPTION.
+
+  - Prepare migration to igraph/C 0.10 (#781).
+
+  - Update NEWS.
+
+
+# igraph 1.4.99.9004
+
+## Bug fixes
+
+  - Fix tests for dev waldo (#779).
+
+## Uncategorized
+
+  - Fix linking on Windows: gfortran needs quadmath. (#778).
+
+
+# igraph 1.4.99.9003
+
+## Documentation
+
+  - Mention limitation of Pajek reader, refs #776.
+
+
+# igraph 1.4.99.9002
+
+## Chore
+
+  - Bump stimulus.
+
+
+# igraph 1.4.99.9001
+
+## Chore
+
+  - Update generated interface (#765).
+
+## Uncategorized
+
+  - Merged cran-1.4.2 into main.
+
+
 # igraph 1.4.99.9000
 
 - Internal changes only.
@@ -12,249 +115,66 @@
 
 # igraph 1.4.2
 
-## Chore
-
-- Bool and FIXME (#755).
-
-## Refactoring
-
-- Trivial.
-
-
-# igraph 1.4.1.9017
-
-## Bug fixes
-
-  - Use longjmp by default in functions called from the top level (#750).
-
-## Features
-
-  - Avoid longjmp for interrupts (#751).
-
-## Chore
-
-  - Use true vertex names for printing vertex sets. If a vertex set captures a relationship between vertices (e.g., the `father` component of `bfs()`), the vertex set is printed as a named vector (#754).
-
-
-# igraph 1.4.1.9016
-
-## Bug fixes
-
-  - `as_long_data_frame()` now correctly processes vertex attributes and works with graphs without vertex attributes (#748).
-
-## Chore
-
-  - Use `R_NO_REMAP` (#749).
-
-  - Fix consistency in weakref code (#747).
-
-## Documentation
-
-  - Suggest restarting R session after fatal error (#745).
-
-
-# igraph 1.4.1.9015
-
-## Chore
-
-  - Cpp11 wrapper for `igraph_hcass2()` (#734).
-
-  - Remove C\_ prefix from exported functions for cpp11 compatibility (#739).
-
-  - Avoid aliases in Stimulus (#722).
-
-  - Define and use `IGRAPH_R_CHECK()` (#729).
-
-## Documentation
-
-  - Replace `graph()` with `make_graph()` in examples (#738).
-
-  - Register URL in pkgdown config (#743).
-
-## Refactoring
-
-  - Breaking change: Remove `igraph.eigen.default()` and `eigen_defaults`, introduce internal `eigen_defaults()` as a function (#741).
-
 ## Breaking changes
 
-  - Breaking change: Remove `igraph.eigen.default()` and `eigen_defaults`, introduce internal `eigen_defaults()` as a function (#741).
+- Remove `igraph.eigen.default()` and `eigen_defaults`, introduce internal `eigen_defaults()` as a function (#741).
+
+- Remove broken `nexus*()` functions (#705), and `srand()` (#701).
 
 
-# igraph 1.4.1.9014
+## C core
 
-## Chore
+- Update C core.
 
-  - Introduce `IGRAPH_R_CHECK()` as a no-op (#729).
+- ARPACK-based calculations are now interruptible.
 
+- `shortest_paths()` and `all_shortest_paths()` no longer crash when an invalid `from` vertex is passed and weights are being used.
 
-# igraph 1.4.1.9013
-
-## Documentation
-
-  - Add docs for as.hclust.igraphHRG() (#733).
+See [diff](https://github.com/igraph/igraph/compare/87c70998344a39b44218f7af903bf62b8bbf3e71...98304787bc811bf709be5aeddea7b570c370988e) for details.
 
 
-# igraph 1.4.1.9012
+## Printing
 
-## Chore
+- Use true vertex names for printing vertex sets. If a vertex set captures a relationship between vertices (e.g., the `father` component of `bfs()`), the vertex set is printed as a named vector (#754).
 
-  - Convert all calls to the `igraph_*()` API to one-liners.
+- Suggest restarting R session after fatal error (#745).
 
-Closes #725.
-
-  - Move code from `rinterface.c` to `rinterface_extra.c` to shorten `rinterface.c.in`.
-
-  - Introduce cpp11 package to improve error handling in the long run (#720).
-
-  - `as.hclust.igraphHRG` uses `.Call()` interface (#727).
-
-
-# igraph 1.4.1.9011
 
 ## Bug fixes
 
-  - `as.hclust(hrg.fit(g))` works again (#721).
+- `as_long_data_frame()` now correctly processes vertex attributes and works with graphs without vertex attributes (#748).
 
-## Chore
+- `as.hclust(hrg.fit(g))` works again (#721).
 
-  - Move implementation from `rinterface.c.in` to `rinterface_extra.c` (#723).
-
-  - Use tagged stimulus.
-
-
-# igraph 1.4.1.9010
-
-## Chore
-
-  - Don't check oldrel-5 on GHA (#718).
-
-  - Change stimulus to generate functions with `_impl` suffix (#712).
-
-  - Tweak URLs so that pkgdown/downlit can link to our functions.
-
-
-# igraph 1.4.1.9009
-
-## Bug fixes
-
-  - Remove srand() from \_pkgdown.yml.
-
-## Chore
-
-  - Rm nexus functions that do not work any more since the Nexus g… (#705).
-
-  - Move export tags to related file, away from package man page source (#703).
 
 ## Documentation
 
-  - Reorganize function reference (#662).
+- The documentation is now available at <https://igraph.org/> (#743).
 
-  - Reinstate ecount() and vcount() (#706).
+- Reorganize function reference (#662).
 
-  - Rm docs for two internal functions (#704).
+- Replace `graph()` with `make_graph()` in examples (#738).
 
-  - Refactor contributors listing (#647).
+- Add docs for `as.hclust.igraphHRG()` (#733).
 
-## Refactoring
+- Merged man page of `hub_score()` and `authority_score()` (#698).
 
-  - Remove srand()\! (#701).
+- Refactor contributors listing (#647).
 
-  - Rm dev dependency on ape (#707).
+- Improve "family" titles (#679).
 
-## doc
+- Improve docs of ego/neighborhood functions.
 
-  - Use proper repo URL in contributors list of README.md.
-
-
-# igraph 1.4.1.9008
-
-## doc
-
-  - Remove unneeded authority\_score.Rd.
-
-  - Merged man page of hub\_score() and authority\_score(), closes #698.
+- Improve `transitivity()` docs.
 
 
-# igraph 1.4.1.9007
+## Internal
 
-## Chore
+- Introduce cpp11 package to improve error handling in the long run (#720).
 
-  - Update C core.
+- Avoid longjmp for error handling and interrupts (#751).
 
-  - ARPACK-based calculations are now interruptible
-
-  - `shortest_paths()` and `all_shortest_paths()` no longer crash when an invalid `from` vertex is passed and weights are being used
-
-
-# igraph 1.4.1.9006
-
-## Continuous integration
-
-  - Fix oldrel runs by adding a dependency on the development version of the ape package (#687).
-
-## Documentation
-
-  - Improve "family" titles (#679).
-
-## Uncategorized
-
-  - Spanish vignette in location suggested by #645 (#650).
-
-
-# igraph 1.4.1.9005
-
-## Chore
-
-  - Update vendored C core.
-
-
-# igraph 1.4.1.9004
-
-## Documentation
-
-  - Improve docs of ego/neighborhood functions.
-
-
-# igraph 1.4.1.9003
-
-## Documentation
-
-  - Improve transitivity() docs.
-
-## Uncategorized
-
-  - Merge branch 'cran-1.4.1'.
-
-
-# igraph 1.4.1.9002
-
-## Chore
-
-- Updated C core.
-
-## Documentation
-
-- Fix NEWS.md formatting (#683).
-
-
-# igraph 1.4.1.9001
-
-## Chore
-
-- Don't run fledge workflow on push.
-
-## Continuous integration
-
-- Do not exclude C core from coverage.
-
-## Testing
-
-- Rm leftover magrittr pipe definition (#684).
-
-
-# igraph 1.4.1.9000
-
-- Internal changes only.
+- `as.hclust.igraphHRG` uses `.Call()` interface (#727).
 
 
 # igraph 1.4.1
@@ -314,6 +234,7 @@ Closes #725.
  - Fixed two bugs in `graph_from_incidence_matrix()` that prevented the creation of directed graphs with `mode="all"` from dense or sparse matrices.
  - `dfs()` accidentally returned zero-based root vertex indices in the result object; this is now fixed and the indices are now 1-based.
  - `as_graphnel()` does not duplicate loop edges any more.
+ - `as_graphnel()` now checks that the input graph has no multi-edges. Multi-edges are not supported by the graphNEL class.
  - `convex_hull()` now returns the vertices of the convex hull with 1-based indexing.
  - Some `rgl.*()` function calls in the codebase were replaced with equivalent `*3d()` function calls in preparation for upcoming deprecations in `rgl` (see PR #619)
  - `plot.igraph()` does not use the `frame=...` partial argument any more when calling `plot.default()`. The default `NULL` value of `frame.plot` is now also handled correctly.

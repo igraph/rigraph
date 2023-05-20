@@ -26,9 +26,7 @@
 #' @family components
 #' @export
 count_components <- function(graph, mode = c("weak", "strong")) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "weak" = 1,
@@ -49,9 +47,7 @@ count_components <- function(graph, mode = c("weak", "strong")) {
 #' @importFrom graphics hist
 component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
                                    ...) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   cs <- components(graph, ...)$csize
   hi <- hist(cs, -1:max(cs), plot = FALSE)$density
@@ -103,9 +99,7 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'
 decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
                       min.vertices = 0) {
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "weak" = 1,
