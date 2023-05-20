@@ -56,9 +56,7 @@
 }
 
 .print.header <- function(object, id = igraph_opt("print.id")) {
-  if (!is_igraph(object)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(object)
 
   title <- paste0(
     "IGRAPH ",
@@ -525,9 +523,7 @@ print.igraph <- function(x, full = igraph_opt("print.full"),
                          names = TRUE, max.lines = igraph_opt("auto.print.lines"),
                          id = igraph_opt("print.id"),
                          ...) {
-  if (!is_igraph(x)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(x)
 
   head_lines <- .print.header(x, id)
   if (is.logical(full) && full) {

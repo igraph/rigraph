@@ -80,9 +80,7 @@
 #' @export
 graphlet_basis <- function(graph, weights = NULL) {
   ## Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -94,7 +92,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 
   ## Drop all attributes, we don't want to deal with them, TODO
   graph2 <- graph
-  graph2[[9]] <- list(c(1, 0, 1), list(), list(), list())
+  graph2[[igraph_t_idx_attr]] <- list(c(1, 0, 1), list(), list(), list())
 
   on.exit(.Call(R_igraph_finalizer))
   ## Function call
@@ -109,9 +107,7 @@ graphlet_basis <- function(graph, weights = NULL) {
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
                           Mu = rep(1, length(cliques))) {
   # Argument checks
-  if (!is.igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }

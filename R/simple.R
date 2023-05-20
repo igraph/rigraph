@@ -87,9 +87,7 @@ is_simple <- is_simple_impl
 #' @rdname simplify
 simplify_and_colorize <- function(graph) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
