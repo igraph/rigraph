@@ -69,18 +69,18 @@
 
 # igraph 1.4.99.9004
 
-## Bug fixes
+## Bug fixes (already in 1.4.3)
 
   - Fix tests for dev waldo (#779).
 
-## Uncategorized
+## Uncategorized (already in 1.4.3)
 
   - Fix linking on Windows: gfortran needs quadmath. (#778).
 
 
 # igraph 1.4.99.9003
 
-## Documentation
+## Documentation (already in 1.4.3)
 
   - Mention limitation of Pajek reader, refs #776.
 
@@ -98,19 +98,23 @@
 
   - Update generated interface (#765).
 
-## Uncategorized
-
-  - Merged cran-1.4.2 into main.
-
 
 # igraph 1.4.99.9000
 
 - Internal changes only.
 
 
-# igraph 1.4.2.9000
+# igraph 1.4.3
 
-- Internal changes only.
+## Internal
+
+  - Fix tests for dev waldo (#779, @hadley).
+
+  - Fix linking on Windows: gfortran needs quadmath. (#778).
+
+## Documentation
+
+  - Mention limitation of Pajek reader, refs #776.
 
 
 # igraph 1.4.2
