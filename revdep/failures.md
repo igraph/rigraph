@@ -1,79 +1,3 @@
-# beadplexr
-
-<details>
-
-* Version: 0.4.1
-* GitHub: NA
-* Source code: https://github.com/cran/beadplexr
-* Date/Publication: 2022-03-05 13:50:02 UTC
-* Number of recursive dependencies: 128
-
-Run `revdepcheck::cloud_details(, "beadplexr")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/beadplexr/new/beadplexr.Rcheck’
-* using R version 4.1.1 (2021-08-10)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘beadplexr/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘beadplexr’ version ‘0.4.1’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-...
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘cba_macsplex_example.Rmd’ using ‘UTF-8’... OK
-  ‘legendplex_analysis.Rmd’ using ‘UTF-8’... OK
-  ‘preparing_flow_data.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/beadplexr/old/beadplexr.Rcheck’
-* using R version 4.1.1 (2021-08-10)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘beadplexr/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘beadplexr’ version ‘0.4.1’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-...
-  Running ‘testthat.R’
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘cba_macsplex_example.Rmd’ using ‘UTF-8’... OK
-  ‘legendplex_analysis.Rmd’ using ‘UTF-8’... OK
-  ‘preparing_flow_data.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
-
-
-
-
-
-```
 # NA
 
 <details>
@@ -242,66 +166,6 @@ Status: 1 ERROR
 
 
 
-
-
-```
-# HospitalNetwork
-
-<details>
-
-* Version: 0.9.3
-* GitHub: https://github.com/PascalCrepey/HospitalNetwork
-* Source code: https://github.com/cran/HospitalNetwork
-* Date/Publication: 2023-02-27 08:22:43 UTC
-* Number of recursive dependencies: 115
-
-Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘HospitalNetwork’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/HospitalNetwork/new/HospitalNetwork.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘HospitalNetwork’ ...
-** package ‘HospitalNetwork’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘graphlayouts’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘HospitalNetwork’
-* removing ‘/tmp/workdir/HospitalNetwork/new/HospitalNetwork.Rcheck/HospitalNetwork’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘HospitalNetwork’ ...
-** package ‘HospitalNetwork’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘graphlayouts’
-Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: lazy loading failed for package ‘HospitalNetwork’
-* removing ‘/tmp/workdir/HospitalNetwork/old/HospitalNetwork.Rcheck/HospitalNetwork’
 
 
 ```
@@ -667,7 +531,7 @@ Run `revdepcheck::cloud_details(, "NA")` for more info
 * GitHub: https://github.com/cjvanlissa/tidySEM
 * Source code: https://github.com/cran/tidySEM
 * Date/Publication: 2023-05-01 20:00:06 UTC
-* Number of recursive dependencies: 190
+* Number of recursive dependencies: 189
 
 Run `revdepcheck::cloud_details(, "tidySEM")` for more info
 
@@ -688,17 +552,15 @@ Run `revdepcheck::cloud_details(, "tidySEM")` for more info
 * this is package ‘tidySEM’ version ‘0.2.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-...
-  ‘Plotting_graphs.Rmd’ using ‘UTF-8’... OK
-  ‘Tabulating_results.Rmd’ using ‘UTF-8’... OK
-  ‘lca_confirmatory.Rmd’ using ‘UTF-8’... OK
-  ‘lca_exploratory.Rmd’ using ‘UTF-8’... OK
-  ‘lca_lcga.Rmd’ using ‘UTF-8’... OK
-  ‘lca_ordinal.Rmd’ using ‘UTF-8’... OK
-  ‘sem_graph.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘blavaan’
+
+Package suggested but not available for checking: ‘umx’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 * DONE
-Status: 1 NOTE
+Status: 1 ERROR
 
 
 
@@ -718,17 +580,15 @@ Status: 1 NOTE
 * this is package ‘tidySEM’ version ‘0.2.4’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-...
-  ‘Plotting_graphs.Rmd’ using ‘UTF-8’... OK
-  ‘Tabulating_results.Rmd’ using ‘UTF-8’... OK
-  ‘lca_confirmatory.Rmd’ using ‘UTF-8’... OK
-  ‘lca_exploratory.Rmd’ using ‘UTF-8’... OK
-  ‘lca_lcga.Rmd’ using ‘UTF-8’... OK
-  ‘lca_ordinal.Rmd’ using ‘UTF-8’... OK
-  ‘sem_graph.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘blavaan’
+
+Package suggested but not available for checking: ‘umx’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 * DONE
-Status: 1 NOTE
+Status: 1 ERROR
 
 
 
