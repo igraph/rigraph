@@ -1,5 +1,5 @@
 test_that("serialization works", {
-  local_igraph_options(print.id = FALSE)
+  local_igraph_options(print.id = FALSE, print.full = TRUE)
 
   g <- make_ring(3, directed = TRUE)
   gs <- unserialize(serialize(g, NULL))
