@@ -2548,13 +2548,13 @@ int R_igraph_status_handler(const char *message, void *data) {
   return 0;
 }
 
-static R_xlen_t R_igraph_vector_Length(SEXP vec) {
+static R_xlen_t R_igraph_altrep_length(SEXP vec) {
   SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
   igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
   return igraph_ecount(g);
 }
 
-static void *R_igraph_vector_Dataptr(SEXP vec, Rboolean writeable) {
+static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
   SEXP data = R_altrep_data2(vec);
   if (data == R_NilValue) {
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
@@ -2569,13 +2569,33 @@ static void *R_igraph_vector_Dataptr(SEXP vec, Rboolean writeable) {
   return REAL(data);
 }
 
-static R_altrep_class_t R_altrep_vector_class;
+static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
+  SEXP data = R_altrep_data2(vec);
+  if (data == R_NilValue) {
+    SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
+    igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
+    
+    long int no_of_edges=igraph_ecount(g);
+    data=NEW_NUMERIC(no_of_edges);
+    memcpy(REAL(data), g->to.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
+    R_set_altrep_data2(vec, data);
+  }
+
+  return REAL(data);
+}
+
+static R_altrep_class_t R_igraph_altrep_from_class;
+static R_altrep_class_t R_igraph_altrep_to_class;
 
 void R_igraph_init_vector_class(DllInfo *dll) {
-  R_altrep_vector_class=R_make_altreal_class("igraph_vector", "base", dll);
+  R_igraph_altrep_from_class=R_make_altreal_class("igraph_from", "base", dll);
+  R_igraph_altrep_to_class=R_make_altreal_class("igraph_to", "base", dll);
 
-  R_set_altrep_Length_method(R_altrep_vector_class, R_igraph_vector_Length);
-  R_set_altvec_Dataptr_method(R_altrep_vector_class, R_igraph_vector_Dataptr);
+  R_set_altrep_Length_method(R_igraph_altrep_from_class, R_igraph_altrep_length);
+  R_set_altvec_Dataptr_method(R_igraph_altrep_from_class, R_igraph_altrep_from);
+
+  R_set_altrep_Length_method(R_igraph_altrep_to_class, R_igraph_altrep_length);
+  R_set_altvec_Dataptr_method(R_igraph_altrep_to_class, R_igraph_altrep_to);
 }
 
 void R_igraph_init_handlers(DllInfo *dll) {
@@ -2983,7 +3003,7 @@ igraph_bool_t R_igraph_get_directed(SEXP graph) {
 }
 
 void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_from, R_new_altrep(R_altrep_vector_class, R_igraph_graph_env(rgraph), R_NilValue));
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_from, R_new_altrep(R_igraph_altrep_from_class, R_igraph_graph_env(rgraph), R_NilValue));
 }
 
 void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
@@ -2992,10 +3012,7 @@ void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
 }
 
 void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
-  long int no_of_edges=igraph_ecount(graph);
-  SET_VECTOR_ELT(rgraph, igraph_t_idx_to, NEW_NUMERIC(no_of_edges));
-  memcpy(REAL(VECTOR_ELT(rgraph, igraph_t_idx_to)), graph->to.stor_begin,
-         sizeof(igraph_real_t)*(size_t) no_of_edges);
+  SET_VECTOR_ELT(rgraph, igraph_t_idx_to, R_new_altrep(R_igraph_altrep_to_class, R_igraph_graph_env(rgraph), R_NilValue));
 }
 
 void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
@@ -3032,7 +3049,6 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   PROTECT(result=NEW_LIST(igraph_t_idx_max));
   R_igraph_set_n(result, graph);
   R_igraph_set_directed(result, graph);
-  R_igraph_set_to(result, graph);
 
   SET_CLASS(result, Rf_ScalarString(Rf_mkChar("igraph")));
 
@@ -3044,7 +3060,9 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
   R_igraph_add_env(result);
   R_igraph_set_pointer(result, graph);
+  /* Set from and to requires environment */
   R_igraph_set_from(result, graph);
+  R_igraph_set_to(result, graph);
 
   UNPROTECT(1);
   return result;
