@@ -5,4 +5,9 @@ test_that("serialization works", {
   gs <- unserialize(serialize(g, NULL))
 
   expect_identical(unclass(g)[-igraph_t_idx_env], unclass(gs)[-igraph_t_idx_env])
+
+  expect_snapshot({
+    g
+    gs
+  })
 })
