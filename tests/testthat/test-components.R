@@ -1,3 +1,31 @@
+test_that("count_components counts correctly", {
+    g <- make_star(20, "undirected")
+    h <- make_ring(10)
+
+    G <- disjoint_union(g, h)
+
+    expect_that(count_components(G), equals(2L))
+})
+
+test_that("a null graph has zero components", {
+    g <- make_empty_graph(0)
+    
+    expect_that(count_components(g), equals(0L))
+})
+
+test_that("component_distribution finds correct distribution", {
+    g <- graph_from_literal(
+        A,
+        B - C,
+        D - E - F,
+        G - H
+    )
+
+    ref <- c(0.00, 0.25, 0.50, 0.25)
+
+    expect_that(component_distribution(g), equals(ref))
+})
+
 test_that("largest component is actually the largest", {
     g <- make_star(20, "undirected")
     h <- make_ring(10)
