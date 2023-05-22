@@ -2555,7 +2555,7 @@ static R_xlen_t R_igraph_altrep_length(SEXP vec) {
 }
 
 static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
-  SEXP data = R_altrep_data2(vec);
+  SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
     SEXP option=Rf_GetOption(Rf_install("igraph.verbose"), R_BaseEnv);
     if (option != R_NilValue && !Rf_isNull(option) && LOGICAL_ELT(option, 0) == 1) {
@@ -2575,7 +2575,7 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
 }
 
 static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
-  SEXP data = R_altrep_data2(vec);
+  SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
     SEXP option=Rf_GetOption(Rf_install("igraph.verbose"), R_BaseEnv);
     if (option != R_NilValue && !Rf_isNull(option) && LOGICAL_ELT(option, 0) == 1) {
@@ -2959,8 +2959,7 @@ void R_igraph_restore_pointer(SEXP graph) {
   igraph_integer_t i, s=igraph_vector_size(&from);
   igraph_vector_init(&v, s*2);
 
-  for (i = 0; i < s; ++i)
-  {
+  for (i = 0; i < s; ++i) {
     igraph_vector_set(&v, i*2, VECTOR(to)[i]);
     igraph_vector_set(&v, i*2+1, VECTOR(from)[i]);
   }
