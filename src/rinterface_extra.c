@@ -2960,8 +2960,8 @@ void R_igraph_restore_pointer(SEXP graph) {
   igraph_vector_init(&v, s*2);
 
   for (i = 0; i < s; ++i) {
-    igraph_vector_set(&v, i*2, VECTOR(to)[i]);
-    igraph_vector_set(&v, i*2+1, VECTOR(from)[i]);
+    igraph_vector_set(&v, i*2, VECTOR(from)[i]);
+    igraph_vector_set(&v, i*2+1, VECTOR(to)[i]);
   }
 
   igraph_empty(&g, n, directed);
