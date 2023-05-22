@@ -12,7 +12,7 @@ eigenvector centralities of positions v within it"><!-- mathjax --><script src="
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9013</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,10 +99,10 @@ in the Euclidean norm.</p></dd>
 <dd><p>A numerical vector or <code>NULL</code>. This argument can be used
 to give edge weights for calculating the weighted eigenvector centrality of
 vertices. If this is <code>NULL</code> and the graph has a <code>weight</code> edge
-attribute then that is used. If <code>weights</code> is a numerical vector then it
+attribute then that is used. If <code>weights</code> is a numerical vector then it is
 used, even if the graph has a <code>weight</code> edge attribute. If this is
 <code>NA</code>, then no edge weights are used (even if the graph has a
-<code>weight</code> edge attribute. Note that if there are negative edge weights
+<code>weight</code> edge attribute). Note that if there are negative edge weights
 and the direction of the edges is considered, then the eigenvector might be
 complex. In this case only the real part is reported.
 This function interprets weights as connection strength. Higher
