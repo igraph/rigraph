@@ -228,3 +228,17 @@ test_that("indexing without arguments", {
 
   expect_equal(ignore_attr = TRUE, v, x2)
 })
+
+test_that("vertex indexes are stored as raw numbers", {
+  g <- make_ring(3, directed = TRUE)
+  V(g)$id <- V(g)
+  expect_identical(V(g)$id, as.numeric(1:3))
+  expect_error(induced_subgraph(g, 1), NA)
+})
+
+test_that("edge indexes are stored as raw numbers", {
+  g <- make_ring(3, directed = TRUE)
+  E(g)$id <- E(g)
+  expect_identical(E(g)$id, as.numeric(1:3))
+  expect_error(induced_subgraph(g, 1:2), NA)
+})
