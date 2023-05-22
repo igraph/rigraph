@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9013
+
+## Bug fixes
+
+  - Fix direction of edges when restoring (#805).
+
+
 # igraph 1.4.99.9012
 
   - Merge branch 'cran-1.4.3' (early part).
