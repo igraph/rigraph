@@ -2906,6 +2906,7 @@ void R_igraph_restore_pointer(SEXP graph) {
 
   igraph_empty(&g, n, directed);
   igraph_add_edges(&g, &v, NULL);
+  igraph_vector_destroy(&v);
   R_igraph_set_pointer(graph, &g);
 }
 
