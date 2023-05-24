@@ -2883,11 +2883,9 @@ void R_igraph_set_pointer(SEXP result, const igraph_t* graph) {
   UNPROTECT(px);
 }
 
-void R_igraph_restore_pointer(SEXP graph) {
-  igraph_t g;
-  igraph_vector_t v;
-  igraph_integer_t n=REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
-  igraph_bool_t directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+static int restore_pointer(SEXP graph, igraph_t *g) {
+  igraph_integer_t no_of_nodes = REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
+  igraph_bool_t directed = LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
 
   igraph_vector_t from;
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &from);
@@ -2895,18 +2893,28 @@ void R_igraph_restore_pointer(SEXP graph) {
   igraph_vector_t to;
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), &to);
 
-  igraph_integer_t i, s=igraph_vector_size(&from);
-  igraph_vector_init(&v, s*2);
+  igraph_vector_t edges;
+  igraph_integer_t no_of_edges=igraph_vector_size(&from);
+  IGRAPH_VECTOR_INIT_FINALLY(&edges, no_of_edges*2);
 
-  for (i = 0; i < s; ++i)
-  {
-    igraph_vector_set(&v, i*2, VECTOR(from)[i]);
-    igraph_vector_set(&v, i*2+1, VECTOR(to)[i]);
+  for (igraph_integer_t i = 0; i < no_of_edges; ++i) {
+    VECTOR(edges)[2*i] = VECTOR(from)[i];
+    VECTOR(edges)[2*i+1] = VECTOR(to)[i];
   }
 
-  igraph_empty(&g, n, directed);
-  igraph_add_edges(&g, &v, NULL);
-  igraph_vector_destroy(&v);
+  IGRAPH_CHECK(igraph_empty(g, no_of_nodes, directed));
+  IGRAPH_FINALLY(igraph_destroy, g);
+  IGRAPH_CHECK(igraph_add_edges(g, &edges, NULL));
+  
+  igraph_vector_destroy(&edges);
+  IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
+
+  return IGRAPH_SUCCESS;
+}
+
+void R_igraph_restore_pointer(SEXP graph) {
+  igraph_t g;
+  IGRAPH_R_CHECK(restore_pointer(graph, &g));
   R_igraph_set_pointer(graph, &g);
 }
 
