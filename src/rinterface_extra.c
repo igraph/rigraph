@@ -2426,14 +2426,14 @@ void R_igraph_interrupt(void) {
   Rf_error("%s", R_igraph_error_reason);
 }
 
-static inline int is_punctuated(const char *str) {
+static inline bool is_punctuated(const char *str) {
   const size_t len = strlen(str);
   if (len == 0) {
-    return 1;
+    return true;
   } else if (str[len-1] == '.' || str[len-1] == '!' || str[len-1] == '?' || str[len-1] == '\n') {
-    return 1;
+    return true;
   } else {
-    return 0;
+    return false;
   }
 }
 
