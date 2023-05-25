@@ -2557,11 +2557,7 @@ static R_xlen_t R_igraph_altrep_length(SEXP vec) {
 static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
   SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
-    SEXP option=Rf_GetOption(Rf_install("igraph.verbose"), R_BaseEnv);
-    if (option != R_NilValue && TYPEOF(option) == LGLSXP && Rf_xlength(option) == 1 && LOGICAL_ELT(option, 0) == 1) {
-      Rprintf("Materializing 'from' vector.\n");
-    }
-
+    R_igraph_status_handler("Materializing 'from' vector.\n", NULL);
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
     
@@ -2577,10 +2573,7 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
 static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
   SEXP data=R_altrep_data2(vec);
   if (data == R_NilValue) {
-    SEXP option=Rf_GetOption(Rf_install("igraph.verbose"), R_BaseEnv);
-    if (option != R_NilValue && !Rf_isNull(option) && LOGICAL_ELT(option, 0) == 1) {
-      Rprintf("Materializing 'to' vector.\n");
-    }
+    R_igraph_status_handler("Materializing 'to' vector.\n", NULL);
 
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
@@ -2920,6 +2913,7 @@ SEXP R_igraph_graph_env(SEXP graph) {
 }
 
 static void free_graph(SEXP xp) {
+  R_igraph_status_handler("Free graph external pointer.\n", NULL);
   igraph_t *graph = (igraph_t*)(R_ExternalPtrAddr(xp));
   igraph_vector_destroy(&graph->from);
   igraph_vector_destroy(&graph->to);
@@ -2936,6 +2930,8 @@ void R_igraph_set_pointer(SEXP result, const igraph_t* graph) {
   igraph_t *pgraph = IGRAPH_CALLOC(1, igraph_t);
   *pgraph = *graph;
 
+  R_igraph_status_handler("Make graph external pointer.\n", NULL);
+
   SEXP l1 = PROTECT(Rf_install("igraph")); px++;
   SEXP l2 = PROTECT(R_MakeExternalPtr(pgraph, R_NilValue, R_NilValue)); px++;
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
@@ -2949,6 +2945,8 @@ void R_igraph_restore_pointer(SEXP graph) {
   igraph_vector_t v;
   igraph_integer_t n=REAL(VECTOR_ELT(graph, igraph_t_idx_n))[0];
   igraph_bool_t directed=LOGICAL(VECTOR_ELT(graph, igraph_t_idx_directed))[0];
+
+  R_igraph_status_handler("Restore graph external pointer.\n", NULL);
 
   igraph_vector_t from;
   R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &from);
