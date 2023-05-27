@@ -2,6 +2,7 @@
 % Please edit documentation in R/components.R, R/structural.properties.R
 \name{component_distribution}
 \alias{component_distribution}
+\alias{largest_component}
 \alias{components}
 \alias{no.clusters}
 \alias{clusters}
@@ -12,6 +13,8 @@
 \title{Connected components of a graph}
 \usage{
 component_distribution(graph, cumulative = FALSE, mul.size = FALSE, ...)
+
+largest_component(graph, mode = c("weak", "strong"))
 
 components(graph, mode = c("weak", "strong"))
 
@@ -49,6 +52,8 @@ For \code{component_distribution()} a numeric vector with the relative
 frequencies. The length of the vector is the size of the largest component
 plus one. Note that (for currently unknown reasons) the first element of the
 vector is the number of clusters of size zero, so this is always zero.
+
+For \code{largest_component()} the largest connected component of the graph.
 }
 \description{
 Calculate the maximal (weakly or strongly) connected components of a graph
@@ -66,6 +71,11 @@ the number of clusters found instead of returning the actual clusters.
 \code{component_distribution()} creates a histogram for the maximal connected
 component sizes.
 
+\code{largest_component()} returns the largest connected component of a graph. For
+directed graphs, optionally the largest weakly or strongly connected component.
+In case of a tie, the first component by vertex ID order is returned. Vertex
+IDs from the original graph are not retained in the returned graph.
+
 The weakly connected components are found by a simple breadth-first search.
 The strongly connected components are implemented by two consecutive
 depth-first searches.
@@ -75,10 +85,15 @@ depth-first searches.
 g <- sample_gnp(20, 1 / 20)
 clu <- components(g)
 groups(clu)
-
+largest_component(g)
 }
 \seealso{
 \code{\link[=decompose]{decompose()}}, \code{\link[=subcomponent]{subcomponent()}}, \code{\link[=groups]{groups()}}
+
+Connected components
+\code{\link{articulation_points}()},
+\code{\link{biconnected_components}()},
+\code{\link{decompose}()}
 
 Connected components
 \code{\link{articulation_points}()},
