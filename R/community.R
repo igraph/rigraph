@@ -1690,7 +1690,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   res$algorithm <- "leading eigenvector"
   res$vcount <- vcount(graph)
   res$membership <- res$membership + 1
-  res$merges <- res$merges + 1
+  res$cluster_merges <- res$cluster_merges + 1
   res$history <- res$history + 1
   class(res) <- "communities"
   res
