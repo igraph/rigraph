@@ -1,5 +1,5 @@
 Package: igraph
-Version: 1.4.99.9014
+Version: 1.4.99.9015
 Title: Network Analysis and Visualization
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "aut",
@@ -28,7 +28,7 @@ URL: https://r.igraph.org/, https://igraph.org/,
 BugReports: https://github.com/igraph/rigraph/issues
 Depends:
     methods,
-    R (>= 3.0.2)
+    R (>= 3.5.0)
 Imports:
     cli,
     graphics,

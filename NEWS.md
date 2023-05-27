@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9015
+
+## Refactoring
+
+  - Use bool in some places for better readability.
+
+
 # igraph 1.4.99.9014
 
 ## Features
