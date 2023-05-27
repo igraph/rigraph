@@ -1,5 +1,23 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9015
+
+## Refactoring
+
+  - Use bool in some places for better readability.
+
+
+# igraph 1.4.99.9014
+
+## Features
+
+  - New `largest_component()` returns the largest connected component (#786).
+
+## Documentation
+
+  - Fix typos in eigen\_centrality docs, thanks @JJ\!
+
+
 # igraph 1.4.99.9013
 
 ## Bug fixes
