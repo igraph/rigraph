@@ -8431,7 +8431,7 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   SET_VECTOR_ELT(result, 4, eigenvalues);
   SET_VECTOR_ELT(result, 5, eigenvectors);
   SET_VECTOR_ELT(result, 6, history);
-  SET_STRING_ELT(names, 0, Rf_mkChar("cluster_merges"));
+  SET_STRING_ELT(names, 0, Rf_mkChar("cluster.merges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("membership"));
   SET_STRING_ELT(names, 2, Rf_mkChar("options"));
   SET_STRING_ELT(names, 3, Rf_mkChar("modularity"));
