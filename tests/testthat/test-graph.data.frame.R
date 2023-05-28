@@ -1,6 +1,5 @@
 test_that("graph_from_data_frame works", {
-  library(igraph)
-  igraph_options(print.full = TRUE)
+  local_igraph_options(print.full = TRUE)
 
   actors <- data.frame(
     name = c(

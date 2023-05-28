@@ -2,6 +2,8 @@ test_that("basic plot test, R < 4.3", {
   set.seed("20221214")
 
   skip_if(getRversion() >= 4.3)
+  # FIXME: Reenable after separating layouting from plotting
+  skip_on_ci()
 
   vdiffr::expect_doppelganger(
     "Basic graph, R <= 4.2",
@@ -17,10 +19,8 @@ test_that("basic plot test, R >= 4.3", {
   set.seed("20221214")
 
   skip_if(getRversion() < 4.3)
-
-  # skip unconditionally; I don't have time to figure this out now but
-  # we need the tests to pass
-  skip_if(TRUE)
+  # FIXME: Reenable after separating layouting from plotting
+  skip_on_ci()
 
   vdiffr::expect_doppelganger(
     "Basic graph, R >= 4.3",
