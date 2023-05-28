@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9016
+
+## Chore
+
+  - The `from` and `to` components of the R representation of an igraph objects use ALTREP to avoid unnecessary materialization (#804).
+
+
 # igraph 1.4.99.9015
 
 ## Refactoring

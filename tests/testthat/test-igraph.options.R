@@ -1,5 +1,6 @@
 test_that("igraph_options works", {
-  igraph_options(verbose = TRUE)
+  old <- igraph_options(verbose = TRUE)
+  on.exit(igraph_options(old))
   expect_true(igraph_opt("verbose"))
 
   igraph_options(verbose = FALSE)
