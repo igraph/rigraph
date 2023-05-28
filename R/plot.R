@@ -92,9 +92,7 @@ plot.igraph <- function(x,
                         mark.expand = 15, loop.size = 1,
                         ...) {
   graph <- x
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   vc <- vcount(graph)
 
@@ -543,9 +541,7 @@ rglplot <- function(x, ...) {
 #' @export
 rglplot.igraph <- function(x, ...) {
   graph <- x
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   create.edge <- function(v1, v2, r1, r2, ec, ew, am, as) {
     ## these could also be parameters:

@@ -2,6 +2,7 @@
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/igraph/rigraph/workflows/R-CMD-check/badge.svg)
 ![CRAN Downloads](https://cranlogs.r-pkg.org/badges/igraph)
+[![Codecov test coverage](https://codecov.io/gh/igraph/rigraph/branch/main/graph/badge.svg)](https://app.codecov.io/gh/igraph/rigraph?branch=main)
 <!-- badges: end -->
 
 # R/igraph
@@ -48,7 +49,7 @@ See the package wiki for more information on [installation troubleshooting](http
 
 ## Documentation
 
-See the [igraph homepage](https://igraph.org/r/) for the complete manual.
+See the [igraph package's website](https://r.igraph.org/) for the complete manual.
 
 ## Contributions
 

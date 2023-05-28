@@ -247,9 +247,7 @@
 #'
 cohesive_blocks <- function(graph, labels = TRUE) {
   # Argument checks
-  if (!is_igraph(graph)) {
-    stop("Not a graph object")
-  }
+  ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
