@@ -1,5 +1,5 @@
 test_that("print.igraph works", {
-  igraph_options(print.full = TRUE)
+  local_igraph_options(print.full = TRUE)
   options(width = 76)
 
   g <- make_ring(5)
@@ -44,8 +44,6 @@ test_that("print.igraph works", {
     "F", "G", "F", "H", "G", "H", "H", "I", "I", "J"
   )
   expect_that(print(kite), prints_text("A -- "))
-
-  igraph_options(print.full = FALSE)
 })
 
 test_that("print.igraph.es uses vertex names", {

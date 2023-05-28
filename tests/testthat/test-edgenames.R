@@ -1,6 +1,6 @@
 test_that("edge names work", {
   ## named edges
-  igraph_options(print.edge.attributes = TRUE)
+  local_igraph_options(print.edge.attributes = TRUE)
   g <- make_ring(10)
   E(g)$name <- letters[1:ecount(g)]
   g2 <- delete_edges(g, c("b", "d", "e"))
