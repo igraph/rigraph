@@ -53,13 +53,10 @@ test_that("we pass arguments unevaluated", {
   expect_true(identical_graphs(g0, g1))
 })
 
-test_that("simplify argument works", {
-  g1 <- graph_from_literal(1 - 1, 1 - 2, 1 - 2)
-  g2 <- graph_from_literal(1 - 1, 1 - 2, 1 - 2, simplify = FALSE)
-
-  expect_that(vcount(g1), equals(2))
-  expect_that(ecount(g1), equals(1))
-
-  expect_that(vcount(g2), equals(2))
-  expect_that(ecount(g2), equals(3))
+test_that("graph_from_literal(simplify = FALSE)", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(1 - 1, 1 - 2, 1 - 2)
+    graph_from_literal(1 - 1, 1 - 2, 1 - 2, simplify = FALSE)
+  })
 })
