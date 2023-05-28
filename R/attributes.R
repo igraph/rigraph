@@ -242,6 +242,12 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
     return(graph)
   }
 
+  # https://github.com/igraph/rigraph/issues/807
+  # Checks if any of those classes is inherited from
+  if (inherits(value, c("igraph.vs", "igraph.es"))) {
+    value <- as.numeric(value)
+  }
+
   single <- is_single_index(index)
   complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
@@ -444,6 +450,12 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
 
   if (is.null(value)) {
     return(graph)
+  }
+
+  # https://github.com/igraph/rigraph/issues/807
+  # Checks if any of those classes is inherited from
+  if (inherits(value, c("igraph.vs", "igraph.es"))) {
+    value <- as.numeric(value)
   }
 
   complete <- is_complete_iterator(index)
