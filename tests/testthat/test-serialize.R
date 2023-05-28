@@ -7,7 +7,6 @@ test_that("serialization works", {
   expect_identical(unclass(g)[-igraph_t_idx_env], unclass(gs)[-igraph_t_idx_env])
 
   expect_snapshot({
-    igraph_opt("print.full")
     g
     gs
   })

@@ -1,10 +1,6 @@
 # serialization works
 
     Code
-      igraph_opt("print.full")
-    Output
-      [1] "auto"
-    Code
       g
     Output
       IGRAPH D--- 3 3 -- Ring graph
