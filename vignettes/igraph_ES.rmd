@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`igraph` es una biblioteca rápida y de código abierto para el análisis de grafos o redes. El núcleo de ésta libreria se encuentra escrito en C y contiene enlaces para lenguajes de alto nivel como [R](https://igraph.org/r/), [Python](https://igraph.readthedocs.io/), y [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). Esta viñeta pretende darte una visión general de las funciones disponibles de `igraph` en R. Para obtener información detallada de cada función, consulta <https://igraph.org/r/html/latest/>.
+`igraph` es una biblioteca rápida y de código abierto para el análisis de grafos o redes. El núcleo de ésta libreria se encuentra escrito en C y contiene enlaces para lenguajes de alto nivel como [R](https://r.igraph.org/), [Python](https://python.igraph.org/), y [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). Esta viñeta pretende darte una visión general de las funciones disponibles de `igraph` en R. Para obtener información detallada de cada función, consulta <https://r.igraph.org/reference/>.
 
 ------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ Para instalar la librería desde CRAN, usa:
 install.packages("igraph")
 ```
 
-Encontrarás más información sobre dependencias, requisitos y resolución de problemas sobre la instalación en la [página principal](https://igraph.org/r/).
+Encontrarás más información sobre dependencias, requisitos y resolución de problemas sobre la instalación en la [página principal](https://r.igraph.org/).
 
 ## Uso de igraph
 
@@ -102,7 +102,7 @@ Lo mismo ocurre con las aristas: los ID de las aristas están siempre entre 1 y 
 
 ------------------------------------------------------------------------
 
-**NOTA**: Si estás familiarizado con C o con la interfaz [Python](https://igraph.readthedocs.io/en/stable/) de `igraph`, te habrás dado cuenta de que en esos lenguajes los IDs de vértices y aristas empiezan por 0. En la interfaz de R, ambos empiezan por 1, para mantener la coherencia con la convención de cada lenguaje.
+**NOTA**: Si estás familiarizado con C o con la interfaz [Python](https://python.igraph.org/en/stable/) de `igraph`, te habrás dado cuenta de que en esos lenguajes los IDs de vértices y aristas empiezan por 0. En la interfaz de R, ambos empiezan por 1, para mantener la coherencia con la convención de cada lenguaje.
 
 ------------------------------------------------------------------------
 
@@ -628,7 +628,7 @@ Ningún módulo de grafos estaría completo sin algún tipo de funcionalidad de 
 
 Este tutorial es una breve introducción a `igraph` en R. Esperamos que hayas disfrutado de su lectura y que te resulte útil para tus propios análisis de redes.
 
-Para una descripción detallada de funciones específicas, consulta <https://igraph.org/r/html/latest/>. Si tienes preguntas sobre cómo utilizar `igraph`, visita nuestro [Foro](https://igraph.discourse.group). Para informar de un error, abre una [incidencia en Github](https://github.com/igraph/rigraph/issues). Por favor, no hagas preguntas de uso en Github directamente, ya que está pensado para desarrolladores y no para usuarios.
+Para una descripción detallada de funciones específicas, consulta <https://r.igraph.org/reference/>. Si tienes preguntas sobre cómo utilizar `igraph`, visita nuestro [Foro](https://igraph.discourse.group). Para informar de un error, abre una [incidencia en Github](https://github.com/igraph/rigraph/issues). Por favor, no hagas preguntas de uso en Github directamente, ya que está pensado para desarrolladores y no para usuarios.
 
 ## Información de la sesión
 
