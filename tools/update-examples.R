@@ -66,4 +66,9 @@ treat_topic <- function(topic, deprecated_df) {
 }
 
 df <- purrr::map_df(topics[["name"]], treat_topic, deprecated_df = deprecated_df)
-# Update by hand, document(), R CMD
+# Update by hand, document(), R CMD build, re-run script to be sure
+if (nrow(df) > 0) {
+  View(df)
+} else {
+  message("All fixed! :-)")
+}
