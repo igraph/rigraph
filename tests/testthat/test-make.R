@@ -52,3 +52,46 @@ test_that("we pass arguments unevaluated", {
   g1 <- graph_(from_literal(A -+ B:C))
   expect_true(identical_graphs(g0, g1))
 })
+
+test_that("graph_from_literal() and simple undirected graphs", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(A - B)
+    graph_from_literal(A - B - C)
+    graph_from_literal(A - B - C - A)
+  })
+})
+
+test_that("graph_from_literal() and undirected explosion", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(A:B:C - D:E, B:D - C:E)
+    graph_from_literal(A:B:C - D:E - F:G:H - I - J:K:L:M)
+  })
+})
+
+test_that("graph_from_literal() and simple directed graphs", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(A -+ B)
+    graph_from_literal(A -+ B -+ C)
+    graph_from_literal(A -+ B -+ C -+ A)
+    graph_from_literal(A -+ B +- C -+ A)
+  })
+})
+
+test_that("graph_from_literal() and directed explosion", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(A:B:C -+ D:E, B:D +- C:E)
+    graph_from_literal(A:B:C -+ D:E +- F:G:H -+ I +- J:K:L:M)
+  })
+})
+
+test_that("graph_from_literal(simplify = FALSE)", {
+  local_igraph_options(print.id = FALSE)
+  expect_snapshot({
+    graph_from_literal(1 - 1, 1 - 2, 1 - 2)
+    graph_from_literal(1 - 1, 1 - 2, 1 - 2, simplify = FALSE)
+  })
+})
