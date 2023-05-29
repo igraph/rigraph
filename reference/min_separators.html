@@ -12,7 +12,7 @@ more components"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9017</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,7 +123,7 @@ hierarchical concept of social groups. <em>American Sociological Review</em>,
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The graph from the Moody-White paper</span></span></span>
-<span class="r-in"><span><span class="va">mw</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph.formula</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">mw</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fl">1</span> <span class="op">-</span> <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">2</span> <span class="op">-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">3</span> <span class="op">-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">:</span><span class="fl">7</span>, <span class="fl">4</span> <span class="op">-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">:</span><span class="fl">7</span>,</span></span>
 <span class="r-in"><span>  <span class="fl">5</span> <span class="op">-</span> <span class="fl">6</span><span class="op">:</span><span class="fl">7</span><span class="op">:</span><span class="fl">21</span>, <span class="fl">6</span> <span class="op">-</span> <span class="fl">7</span>, <span class="fl">7</span> <span class="op">-</span> <span class="fl">8</span><span class="op">:</span><span class="fl">11</span><span class="op">:</span><span class="fl">14</span><span class="op">:</span><span class="fl">19</span>, <span class="fl">8</span> <span class="op">-</span> <span class="fl">9</span><span class="op">:</span><span class="fl">11</span><span class="op">:</span><span class="fl">14</span>, <span class="fl">9</span> <span class="op">-</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>  <span class="fl">10</span> <span class="op">-</span> <span class="fl">12</span><span class="op">:</span><span class="fl">13</span>, <span class="fl">11</span> <span class="op">-</span> <span class="fl">12</span><span class="op">:</span><span class="fl">14</span>, <span class="fl">12</span> <span class="op">-</span> <span class="fl">16</span>, <span class="fl">13</span> <span class="op">-</span> <span class="fl">16</span>, <span class="fl">14</span> <span class="op">-</span> <span class="fl">15</span>, <span class="fl">15</span> <span class="op">-</span> <span class="fl">16</span>,</span></span>
@@ -140,77 +140,77 @@ hierarchical concept of social groups. <em>American Sociological Review</em>,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/23 vertex, named, from 4b39522:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 1/23 vertex, named, from 8d7d878:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from 3e4499a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from c730de7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from 3e4499a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from c730de7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5  19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from 3e4499a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from c730de7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from 3e4499a:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/14 vertices, named, from c730de7:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from ddc24d3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from 4fc9b54:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from ddc24d3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from 4fc9b54:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 14 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from ddc24d3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/10 vertices, named, from 4fc9b54:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8  10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/7 vertices, named, from 7e1f6bb:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/7 vertices, named, from 6145c31:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a1b5da6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a6383af:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8  11 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a1b5da6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a6383af:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  11 14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a1b5da6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a6383af:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  8  14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a1b5da6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 3/4 vertices, named, from a6383af:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7  8  11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">mw5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from 4a211be:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from fd4b2ca:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 3 4 5 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from 4a211be:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from fd4b2ca:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 3 4 5 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from 4a211be:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 5/7 vertices, named, from fd4b2ca:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 4 6 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Another example, the science camp network</span></span></span>
-<span class="r-in"><span><span class="va">camp</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph.formula</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">camp</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="va">Harry</span><span class="op">:</span><span class="va">Steve</span><span class="op">:</span><span class="va">Don</span><span class="op">:</span><span class="va">Bert</span> <span class="op">-</span> <span class="va">Harry</span><span class="op">:</span><span class="va">Steve</span><span class="op">:</span><span class="va">Don</span><span class="op">:</span><span class="va">Bert</span>,</span></span>
 <span class="r-in"><span>  <span class="va">Pam</span><span class="op">:</span><span class="va">Brazey</span><span class="op">:</span><span class="va">Carol</span><span class="op">:</span><span class="va">Pat</span> <span class="op">-</span> <span class="va">Pam</span><span class="op">:</span><span class="va">Brazey</span><span class="op">:</span><span class="va">Carol</span><span class="op">:</span><span class="va">Pat</span>,</span></span>
 <span class="r-in"><span>  <span class="va">Holly</span> <span class="op">-</span> <span class="va">Carol</span><span class="op">:</span><span class="va">Pat</span><span class="op">:</span><span class="va">Pam</span><span class="op">:</span><span class="va">Jennie</span><span class="op">:</span><span class="va">Bill</span>,</span></span>
@@ -226,47 +226,47 @@ hierarchical concept of social groups. <em>American Sociological Review</em>,
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">min_separators</span><span class="op">(</span><span class="va">camp</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Gery Russ</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] John Gery</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Michael Gery   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Holly Gery </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Pat  John</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Pat     Michael</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Pat   Holly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[8]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Holly John </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[9]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Holly   Michael</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[10]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Steve Russ </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[11]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 5a7cf2e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 2/18 vertices, named, from 4eecd77:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] Steve Bert </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
