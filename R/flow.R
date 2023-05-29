@@ -207,9 +207,9 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' @keywords graphs
 #' @examples
 #'
-#' g <- barabasi.game(100, m = 1)
+#' g <- sample_pa(100, m = 1)
 #' g <- delete_edges(g, E(g)[100 %--% 1])
-#' g2 <- barabasi.game(100, m = 5)
+#' g2 <- sample_pa(100, m = 5)
 #' g2 <- delete_edges(g2, E(g2)[100 %--% 1])
 #' vertex_connectivity(g, 100, 1)
 #' vertex_connectivity(g2, 100, 1)
@@ -299,8 +299,8 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' @keywords graphs
 #' @examples
 #'
-#' g <- barabasi.game(100, m = 1)
-#' g2 <- barabasi.game(100, m = 5)
+#' g <- sample_pa(100, m = 1)
+#' g2 <- sample_pa(100, m = 5)
 #' edge_connectivity(g, 100, 1)
 #' edge_connectivity(g2, 100, 1)
 #' edge_disjoint_paths(g2, 100, 1)
@@ -785,11 +785,11 @@ is_min_separator <- is_minimal_separator_impl
 #' )
 #'
 #' # Cohesive subgraphs
-#' mw1 <- induced.subgraph(mw, as.character(c(1:7, 17:23)))
-#' mw2 <- induced.subgraph(mw, as.character(7:16))
-#' mw3 <- induced.subgraph(mw, as.character(17:23))
-#' mw4 <- induced.subgraph(mw, as.character(c(7, 8, 11, 14)))
-#' mw5 <- induced.subgraph(mw, as.character(1:7))
+#' mw1 <- induced_subgraph(mw, as.character(c(1:7, 17:23)))
+#' mw2 <- induced_subgraph(mw, as.character(7:16))
+#' mw3 <- induced_subgraph(mw, as.character(17:23))
+#' mw4 <- induced_subgraph(mw, as.character(c(7, 8, 11, 14)))
+#' mw5 <- induced_subgraph(mw, as.character(1:7))
 #'
 #' min_separators(mw)
 #' min_separators(mw1)

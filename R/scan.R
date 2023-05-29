@@ -96,7 +96,7 @@
 #'   graph.them = pair$graph2, k = 1
 #' )
 #'
-#' Neigh_1 <- neighborhood(pair$graph1, order = 1)
+#' Neigh_1 <- ego(pair$graph1, order = 1)
 #' local_1_them_nhood <- local_scan(
 #'   graph.us = pair$graph1,
 #'   graph.them = pair$graph2,

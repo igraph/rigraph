@@ -59,7 +59,7 @@ any_loop(g)
 which_loop(g)
 
 # Multiple edges
-g <- barabasi.game(10, m = 3, algorithm = "bag")
+g <- sample_pa(10, m = 3, algorithm = "bag")
 any_multiple(g)
 which_multiple(g)
 count_multiple(g)
@@ -67,11 +67,11 @@ which_multiple(simplify(g))
 all(count_multiple(simplify(g)) == 1)
 
 # Direction of the edge is important
-which_multiple(graph(c(1, 2, 2, 1)))
-which_multiple(graph(c(1, 2, 2, 1), dir = FALSE))
+which_multiple(make_graph(c(1, 2, 2, 1)))
+which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE))
 
 # Remove multiple edges but keep multiplicity
-g <- barabasi.game(10, m = 3, algorithm = "bag")
+g <- sample_pa(10, m = 3, algorithm = "bag")
 E(g)$weight <- count_multiple(g)
 g <- simplify(g, edge.attr.comb = list(weight = "min"))
 any(which_multiple(g))

@@ -38,11 +38,11 @@ mw <- graph_from_literal(
 )
 
 # Cohesive subgraphs
-mw1 <- induced.subgraph(mw, as.character(c(1:7, 17:23)))
-mw2 <- induced.subgraph(mw, as.character(7:16))
-mw3 <- induced.subgraph(mw, as.character(17:23))
-mw4 <- induced.subgraph(mw, as.character(c(7, 8, 11, 14)))
-mw5 <- induced.subgraph(mw, as.character(1:7))
+mw1 <- induced_subgraph(mw, as.character(c(1:7, 17:23)))
+mw2 <- induced_subgraph(mw, as.character(7:16))
+mw3 <- induced_subgraph(mw, as.character(17:23))
+mw4 <- induced_subgraph(mw, as.character(c(7, 8, 11, 14)))
+mw5 <- induced_subgraph(mw, as.character(1:7))
 
 min_separators(mw)
 min_separators(mw1)

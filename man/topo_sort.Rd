@@ -33,7 +33,7 @@ and a warning is issued.
 }
 \examples{
 
-g <- barabasi.game(100)
+g <- sample_pa(100)
 topo_sort(g)
 
 }
