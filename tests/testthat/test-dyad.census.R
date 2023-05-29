@@ -1,6 +1,6 @@
 test_that("dyad_census works", {
   g1 <- make_ring(10)
-  expect_that(dc1 <- dyad_census(g1), gives_warning("undirected"))
+  expect_warning(dc1 <- dyad_census(g1), "directed")
   expect_that(dc1, equals(list(mut = 10, asym = 0, null = 35)))
 
   g2 <- make_ring(10, directed = TRUE, mutual = TRUE)
