@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9017
+
+## Bug fixes
+
+  - Rename `merges` to `cluster_merges` in output of `cluster_leading_eigen()` (#820).
+
+## Features
+
+  - Avoid vertex and edge sequences in attributes (#808).
+
+## Documentation
+
+  - Update links to igraph webpage (#780).
+
+## Testing
+
+  - Reenable serialization test (#809).
+
+  - Stabilize tests (#823).
+
+
 # igraph 1.4.99.9016
 
 ## Chore
