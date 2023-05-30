@@ -73,9 +73,9 @@ included only for the ease of using more descriptive function names.
 }
 \examples{
 
-g <- barabasi.game(100, m = 1)
+g <- sample_pa(100, m = 1)
 g <- delete_edges(g, E(g)[100 \%--\% 1])
-g2 <- barabasi.game(100, m = 5)
+g2 <- sample_pa(100, m = 5)
 g2 <- delete_edges(g2, E(g2)[100 \%--\% 1])
 vertex_connectivity(g, 100, 1)
 vertex_connectivity(g2, 100, 1)

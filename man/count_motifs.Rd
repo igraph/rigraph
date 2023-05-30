@@ -28,7 +28,7 @@ structure.  These functions search a graph for various motifs.
 size in graph.
 }
 \examples{
-g <- barabasi.game(100)
+g <- sample_pa(100)
 motifs(g, 3)
 count_motifs(g, 3)
 sample_motifs(g, 3)

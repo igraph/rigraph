@@ -47,7 +47,7 @@
 #' @family graph motifs
 #'
 #' @examples
-#' g <- barabasi.game(100)
+#' g <- sample_pa(100)
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
@@ -91,7 +91,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @family graph motifs
 #'
 #' @examples
-#' g <- barabasi.game(100)
+#' g <- sample_pa(100)
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)
@@ -139,7 +139,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 #' @family graph motifs
 #'
 #' @examples
-#' g <- barabasi.game(100)
+#' g <- sample_pa(100)
 #' motifs(g, 3)
 #' count_motifs(g, 3)
 #' sample_motifs(g, 3)

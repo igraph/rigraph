@@ -1236,7 +1236,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
 #' @export
 #' @keywords graphs
 #' @examples
-#' g <- graph.famous("Zachary")
+#' g <- make_graph("Zachary")
 #' comms <- cluster_fluid_communities(g, 2)
 cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks

@@ -43,7 +43,7 @@ mean_distance(g)
 
 # Rewiring the start of each directed edge preserves the in-degree distribution
 # but not the out-degree distribution
-g <- barabasi.game(1000)
+g <- sample_pa(1000)
 g2 <- g \%>\% rewire(each_edge(mode = "in", multiple = TRUE, prob = 0.2))
 degree(g, mode = "in") == degree(g2, mode = "in")
 }

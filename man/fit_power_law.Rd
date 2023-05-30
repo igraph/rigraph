@@ -98,7 +98,7 @@ parameters of the fitted distribution. See references below for the details.
 \examples{
 
 # This should approximately yield the correct exponent 3
-g <- barabasi.game(1000) # increase this number to have a better estimate
+g <- sample_pa(1000) # increase this number to have a better estimate
 d <- degree(g, mode = "in")
 fit1 <- fit_power_law(d + 1, 10)
 fit2 <- fit_power_law(d + 1, 10, implementation = "R.mle")
