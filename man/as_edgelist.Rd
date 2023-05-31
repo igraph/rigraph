@@ -15,7 +15,7 @@ names (i.e. the \code{name} vertex attribute) if they exist or numeric
 vertex ids.}
 }
 \value{
-A \code{gsize(graph)} by 2 numeric matrix.
+A \code{ecount(graph)} by 2 numeric matrix.
 }
 \description{
 Sometimes it is useful to work with a standard representation of a
