@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9019
+
+## Documentation
+
+  - Fix use of deprecated functions in examples (#827).
+
+
 # igraph 1.4.99.9018
 
 ## Testing
