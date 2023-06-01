@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9020
+
+## Documentation
+
+  - Replace gsize by ecount.
+
+
 # igraph 1.4.99.9019
 
 ## Documentation
