@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9021
+
+## Documentation
+
+  - Update installation troubleshooting info.
+
+
 # igraph 1.4.99.9020
 
 ## Documentation
