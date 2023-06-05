@@ -103,16 +103,23 @@ warn_version <- function(graph) {
   # Don't call vcount_impl() to avoid recursion
   .Call(R_igraph_vcount, graph)
 
-  if (graph_version() != graph_version(graph)) {
+  # graph_version() calls is_igraph(), but that function must call warn_version() for safety
+  their_version <- as.package_version(.Call(R_igraph_graph_version, graph))
+
+  if (pkg_graph_version == their_version) {
+    return(FALSE)
+  }
+
+  if (pkg_graph_version > their_version) {
     message(
       "This graph was created by an old(er) igraph version.\n",
       "  Call upgrade_graph() on it to use with the current igraph version\n",
       "  For now we convert it on the fly..."
     )
-    TRUE
-  } else {
-    FALSE
+    return(TRUE)
   }
+
+  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
 }
 
 oldformats <- function() {
