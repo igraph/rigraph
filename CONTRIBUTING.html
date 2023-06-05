@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9022</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,24 +75,27 @@
 </div>
 <div class="section level2">
 <h2 id="development-and-compilation">Development and Compilation<a class="anchor" aria-label="anchor" href="#development-and-compilation"></a></h2>
-<p>All development is being done on the default branch, so that it can be automatically installed using <code>remotes::install_github("igraph/rigraph")</code> or <code>pak::pak("igraph/rigraph")</code> . Some parts of the code (sources for the C library, <code>.Rd</code> documentation files, …) are stored redundantly and updated by running <code>make</code> or <code>make igraph</code>.</p>
-<p>If you clone the repository, you can locally build and test the <code>igraph</code> package using the <code>testthat</code> package as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">test_local</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>All development is being done on the default branch so that it can be automatically installed using <code>remotes::install_github("igraph/rigraph")</code> or <code>pak::pak("igraph/rigraph")</code>. If you have the stable version of igraph already installed, you can avoid conflicts by installing the development version in its own directory, e.g. <code>remotes::install_github("igraph/rigraph", lib = "~/testing/")</code>. Then, to load the development version in an R session, use <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(igraph, lib.loc = "~/testing/")</a></code>. Remove the development version with <code>remove.packages("igraph", lib = "~/testing/")</code>.</p>
+<p>You can locally build and test the <code>igraph</code> package as follows. From an R process running in the local <code>./rigraph</code> directory, run <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> to compile the cloned version of igraph and load it for use in the current session. You can run the package tests with <code><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">testthat::test_local()</a></code>. If your change includes updates to the documentation, also run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> to update the package documentation. Note that you can either clone the package and locally build it with <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> <em>or</em> install the package from GitHub with <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code>—you do not need to do both. You can keep your local clone up to date with <code>git</code> tools, or remove it by deleting the local <code>./rigraph</code> directory.</p>
+<div class="section level3">
+<h3 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a></h3>
 <p>When building from source on Windows, you need to have <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> installed. Additionally, the two system requirements of <code>glpk</code> and <code>libxml2</code> are not optional, but hard requirements. For version R &gt;= 4.0 you can install these two from an RTools terminal using</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pacman</span> <span class="at">-Sy</span> mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-glpk mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-libxml2</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pacman</span> <span class="at">-Sy</span> mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-glpk mingw-w64-<span class="dt">{i686</span><span class="op">,</span><span class="dt">x86_64}</span>-libxml2</span></code></pre></div>
 <p>To update the files stored redundantly, run</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> igraph</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> igraph</span></code></pre></div>
 <p>. This is done automatically on CI/CD, in some cases changes are committed directly to the branch that is being tested.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="making-trivial-changes">Making Trivial Changes<a class="anchor" aria-label="anchor" href="#making-trivial-changes"></a></h2>
-<ul><li>Then look for the file you want to modify.</li>
+<ul><li>
+<a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo" class="external-link">Fork</a> the repository. You should have a copy of <code>/rigraph</code> under your username, at <code>https://github.com/&lt;username&gt;/rigraph</code>.</li>
+<li>In <em>your</em> forked repository, look for the file you want to modify.</li>
 <li>Click on the edit symbol (pen) on the upper right corner of the file view.</li>
 <li>Make your edits.</li>
 <li>Write a short commit message, less than 65 characters. E.g. “Fix manual page typo” or “Fix degree bug for loops”. If needed, elaborate your changes below in the “extended description” field.</li>
 <li>Commit your changes.</li>
-<li>Go back to the start page of <em>your</em> forked repository. It is at <code>https://github.com/&lt;username&gt;/rigraph</code>.</li>
+<li>Go back to the start page of your forked repository.</li>
 <li>Click on the green button before the branch name to create a pull request.</li>
 <li>Click on “Create pull request”.</li>
 <li>Provide a more detailed description if you like. Please also indicate that you are fine with licensing your contribution under igraph’s license (see Legal Stuff below).</li>
@@ -103,12 +106,13 @@
 </ul></div>
 <div class="section level2">
 <h2 id="making-more-involved-changes">Making More Involved Changes<a class="anchor" aria-label="anchor" href="#making-more-involved-changes"></a></h2>
-<p>This is mostly the same as for trivial changes, but you probably want to edit the sources on your computer, instead of online on GitHub.</p>
-<ul><li>Open an issue in the issue tracker about the proposed changes. This is not required for smaller things, but I suggest you do it for others. Just in case somebody is already working on the same thing, or it is something we don’t want in igraph.</li>
-<li>Fork the repository, and clone it to the machine you’ll work on.</li>
-<li>Make sure you work on the <code>dev</code> branch, or alternatively, create a new branch based on the <code>dev</code> branch.</li>
-<li>Once ready with your changes, build igraph, and run the tests as indicated above.</li>
-<li>Submit your pull request.</li>
+<p>This is mostly the same as for trivial changes, but you probably want to edit the sources on your computer, instead of online on GitHub. If you are unfamiliar with cloning repositories from GitHub, the manual <a href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories" class="external-link">page</a> for working with remote repositories is a good place to start. There is also a more general introduction page <a href="https://docs.github.com/en/get-started/quickstart" class="external-link">here</a>, which includes information on setting up <a href="https://docs.github.com/en/get-started/quickstart/set-up-git" class="external-link"><code>git</code></a>. The <code>git</code> manual is <a href="https://www.git-scm.com/docs" class="external-link">here</a>. R development environments may also include support for <code>git</code>/GitHub integration (for an introduction to the RStudio tools, see this <a href="https://geo.uzh.ch/microsite/reproducible_research/post/rr-rstudio-git/" class="external-link">tutorial</a>; Emacs/ESS users can use <a href="https://magit.vc/" class="external-link">Magit</a>).</p>
+<ul><li>Open an issue in the issue tracker about the proposed changes. This is not required for smaller things, but we suggest you do it for others. Just in case somebody is already working on the same thing, or it is something we don’t want in igraph.</li>
+<li>Fork and clone the repository. If you have already forked the repository, synch your forked copy to get the latest version of the <code>main</code> branch, then fetch the updated <code>main</code> to your local clone.</li>
+<li>Make changes to the appropriate files in the local clone.</li>
+<li>Once ready with your changes, build igraph and run the tests as indicated above.</li>
+<li>Commit your changes to a new branch. Give the branch a descriptive name that is specific to the changes you want to make. Then, push those changes to your forked copy of igraph on GitHub.</li>
+<li>Submit your pull request to the main branch. You should see text similar to “<code>&lt;username&gt;</code> wants to merge 1 commit into <code>igraph:main</code> from <code>&lt;username&gt;:fix-some-func</code>”. If your pull request relates directly to an issue (e.g., if you opened an issue to discuss the proposed changes), include the keyword “fix” and the issue number (e.g., “Fix #123) on its own line in your initial comment for the pull request. This step supports better issue tracking; for a list of keywords, see <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword" class="external-link">here</a>.</li>
 <li>Now you need to wait for us, unfortunately. Please ping us, if it takes long to respond. E.g. a week is considered to be long.</li>
 </ul></div>
 <div class="section level2">
@@ -116,15 +120,15 @@
 <p>Some tips on writing igraph code. In general, look at how things are done, and try to do them similarly. (Unless you think they are not done well, in which case please tell us.)</p>
 <div class="section level3">
 <h3 id="code-formatting">Code Formatting<a class="anchor" aria-label="anchor" href="#code-formatting"></a></h3>
-<p>We follow the <a href="https://style.tidyverse.org/" class="external-link">tidyverse style guide</a> for formatting. The styler package helps apply this style to the code. Look at the style (indentation, braces, etc.) of some recently committed bigger change, and try to mimic that.</p>
+<p>We follow the <a href="https://style.tidyverse.org/" class="external-link">tidyverse style guide</a> for formatting. The <a href="https://styler.r-lib.org/" class="external-link">styler package</a> helps apply this style to the code (see also the <a href="https://lintr.r-lib.org/" class="external-link">lintr package</a>). Look at the style (indentation, braces, etc.) of some recently committed bigger change, and try to mimic that.</p>
 </div>
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a></h3>
-<p>Please document your new functions using <code>roxygen2</code>, and run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> or <code>make igraph</code> to update the <code>.Rd</code> files.</p>
+<p>Please document your new functions using <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>, and run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> or <code>make igraph</code> to update the <code>.Rd</code> files.</p>
 </div>
 <div class="section level3">
 <h3 id="test-cases">Test Cases<a class="anchor" aria-label="anchor" href="#test-cases"></a></h3>
-<p>Unless you change something trivial, please consider adding test cases. This is important! See the files in the <code>inst/tests</code> directory for examples.</p>
+<p>Unless you change something trivial, please consider adding test cases. This is important! See the files in the <code>./rigraph/tests/testthat</code> directory for examples. See the r-utils package <a href="https://testthat.r-lib.org/" class="external-link">testthat</a> for some unit testing support functions.</p>
 </div>
 <div class="section level3">
 <h3 id="ask-us">Ask Us!<a class="anchor" aria-label="anchor" href="#ask-us"></a></h3>
@@ -142,7 +146,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Gábor Csárdi, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio Zanini, Daniel Noom, Kirill Müller, Chan Zuckerberg Initiative.</p>
+  <p></p><p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative.</p>
 </div>
 
 <div class="pkgdown-footer-right">
