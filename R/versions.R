@@ -22,7 +22,7 @@
 ##
 ## ----------------------------------------------------------------------
 
-pkg_graph_version <- "0.8.0"
+pkg_graph_version <- "1.5.0"
 
 pkg_graph_version_obj <- as.package_version(pkg_graph_version)
 

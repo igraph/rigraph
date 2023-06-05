@@ -5,7 +5,7 @@ test_that("we create graphs of the current version", {
   expect_equal(v1, v2)
 })
 
-test_that("we can upgrade from 0.4.0 to 0.8.0", {
+test_that("we can upgrade from 0.4.0 to 1.5.0", {
   g <- make_ring(10)
   g <- unclass(g)
   g[[10]] <- NULL
@@ -14,7 +14,7 @@ test_that("we can upgrade from 0.4.0 to 0.8.0", {
   expect_equal(graph_version(g), as.package_version("0.4.0"))
 
   g2 <- upgrade_graph(g)
-  expect_equal(graph_version(g2), as.package_version("0.8.0"))
+  expect_equal(graph_version(g2), as.package_version("1.5.0"))
 })
 
 test_that("reading of old igraph formats", {
@@ -36,7 +36,7 @@ test_that("reading of old igraph formats", {
   expect_snapshot({
     s[["1.0.0"]]
   })
-  expect_snapshot(error = TRUE, {
+  expect_snapshot({
     s[["1.5.0"]]
   })
 })
