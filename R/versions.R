@@ -22,6 +22,8 @@
 ##
 ## ----------------------------------------------------------------------
 
+pkg_graph_version <- "0.8.0"
+
 #' igraph data structure versions
 #'
 #' igraph's internal data representation changes sometimes between
@@ -44,7 +46,7 @@
 #' @export
 graph_version <- function(graph) {
   if (missing(graph)) {
-    "0.8.0"
+    pkg_graph_version
   } else {
     stopifnot(is_igraph(graph))
     .Call(R_igraph_graph_version, graph)
