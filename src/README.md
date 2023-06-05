@@ -6,7 +6,7 @@
     ```sh
     git submodule init
     git submodule update
-    # git submodule magic
+    # other git submodule commands to update the submodule to the desired version
     ```
 2. Clean the `src/` directory:
     ```sh
