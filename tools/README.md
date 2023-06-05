@@ -17,3 +17,8 @@ The logic is governed by the `Makefile-cigraph` file.
     ```sh
     make -f Makefile-cigraph src/rinterface.c R/aaa-auto.R
     ```
+
+3. Optional: Clean submodule
+    ```sh
+    git submodule deinit --all
+    ```
