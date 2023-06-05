@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.99.9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,8 +67,6 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">component_distribution</span><span class="op">(</span><span class="va">graph</span>, cumulative <span class="op">=</span> <span class="cn">FALSE</span>, mul.size <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">largest_component</span><span class="op">(</span><span class="va">graph</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weak"</span>, <span class="st">"strong"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">components</span><span class="op">(</span><span class="va">graph</span>, mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weak"</span>, <span class="st">"strong"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -129,9 +127,6 @@ belongs.</p></dd>
 frequencies. The length of the vector is the size of the largest component
 plus one. Note that (for currently unknown reasons) the first element of the
 vector is the number of clusters of size zero, so this is always zero.</p>
-
-
-<p>For <code>largest_component()</code> the largest connected component of the graph.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -143,10 +138,6 @@ of a graph.</p>
 the number of clusters found instead of returning the actual clusters.</p>
 <p><code>component_distribution()</code> creates a histogram for the maximal connected
 component sizes.</p>
-<p><code>largest_component()</code> returns the largest connected component of a graph. For
-directed graphs, optionally the largest weakly or strongly connected component.
-In case of a tie, the first component by vertex ID order is returned. Vertex
-IDs from the original graph are not retained in the returned graph.</p>
 <p>The weakly connected components are found by a simple breadth-first search.
 The strongly connected components are implemented by two consecutive
 depth-first searches.</p>
@@ -154,10 +145,6 @@ depth-first searches.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="decompose.html">decompose()</a></code>, <code><a href="subcomponent.html">subcomponent()</a></code>, <code><a href="groups.html">groups()</a></code></p>
-<p>Connected components
-<code><a href="articulation_points.html">articulation_points</a>()</code>,
-<code><a href="biconnected_components.html">biconnected_components</a>()</code>,
-<code><a href="decompose.html">decompose</a>()</code></p>
 <p>Connected components
 <code><a href="articulation_points.html">articulation_points</a>()</code>,
 <code><a href="biconnected_components.html">biconnected_components</a>()</code>,
@@ -236,11 +223,7 @@ depth-first searches.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`13`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="fu">largest_component</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 417275d U--- 6 5 -- Erdos-Renyi (gnp) graph</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), type (g/c), loops (g/l), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 417275d:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--3 1--5 2--5 4--5 3--6</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -248,7 +231,7 @@ depth-first searches.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="https://github.com/ntamas" class="external-link">Tamás Nepusz</a>, <a href="https://www.traag.net/" class="external-link">Vincent Traag</a>, <a href="http://szhorvat.net/" class="external-link">Szabolcs Horvát</a>, <a href="https://fabilab.org/pages/people.html" class="external-link">Fabio Zanini</a>, <a href="https://github.com/GroteGnoom" class="external-link">Daniel Noom</a>, <a href="https://krlmlr.info/" class="external-link">Kirill Müller</a>, Chan Zuckerberg Initiative.</p>
+  <p></p><p>Developed by Gábor Csárdi, Tamás Nepusz, Vincent Traag, Szabolcs Horvát, Fabio Zanini, Daniel Noom, Kirill Müller, Chan Zuckerberg Initiative.</p>
 </div>
 
 <div class="pkgdown-footer-right">
