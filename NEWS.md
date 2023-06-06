@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9023
+
+## Chore
+
+  - Extract variable.
+
+## Documentation
+
+  - Document running Stimulus \[ci skip\].
+
+## Testing
+
+  - Merge tests (#822).
+
+## Uncategorized
+
+  - Merge commit '1eec234e8'.
+
+  - Merge branch 'cran-1.4.3'.
+
+
 # igraph 1.4.99.9022
 
 ## Bug fixes
