@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9024
+
+## Bug fixes
+
+  - Fix error message in make\_graph() when simplify=... is used with a non-formula, closes #834.
+
+
 # igraph 1.4.99.9023
 
 ## Chore
