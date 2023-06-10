@@ -24,6 +24,8 @@
 
 pkg_graph_version <- "0.8.0"
 
+pkg_graph_version_obj <- as.package_version(pkg_graph_version)
+
 #' igraph data structure versions
 #'
 #' igraph's internal data representation changes sometimes between
@@ -46,11 +48,13 @@ pkg_graph_version <- "0.8.0"
 #' @export
 graph_version <- function(graph) {
   if (missing(graph)) {
-    pkg_graph_version
-  } else {
-    stopifnot(is_igraph(graph))
-    .Call(R_igraph_graph_version, graph)
+    return(pkg_graph_version_obj)
   }
+
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
+
+  as.package_version(.Call(R_igraph_graph_version, graph))
 }
 
 #' igraph data structure versions
@@ -74,7 +78,8 @@ graph_version <- function(graph) {
 #' @family versions
 #' @export
 upgrade_graph <- function(graph) {
-  stopifnot(is_igraph(graph))
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
 
   g_ver <- graph_version(graph)
   p_ver <- graph_version()
@@ -101,16 +106,23 @@ warn_version <- function(graph) {
   # Don't call vcount_impl() to avoid recursion
   .Call(R_igraph_vcount, graph)
 
-  if (graph_version() != graph_version(graph)) {
+  # graph_version() calls is_igraph(), but that function must call warn_version() for safety
+  their_version <- as.package_version(.Call(R_igraph_graph_version, graph))
+
+  if (pkg_graph_version == their_version) {
+    return(FALSE)
+  }
+
+  if (pkg_graph_version > their_version) {
     message(
       "This graph was created by an old(er) igraph version.\n",
       "  Call upgrade_graph() on it to use with the current igraph version\n",
       "  For now we convert it on the fly..."
     )
-    TRUE
-  } else {
-    FALSE
+    return(TRUE)
   }
+
+  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
 }
 
 oldformats <- function() {
