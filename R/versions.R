@@ -51,7 +51,9 @@ graph_version <- function(graph) {
     return(pkg_graph_version_obj)
   }
 
-  stopifnot(is_igraph(graph))
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
+
   as.package_version(.Call(R_igraph_graph_version, graph))
 }
 
@@ -76,7 +78,8 @@ graph_version <- function(graph) {
 #' @family versions
 #' @export
 upgrade_graph <- function(graph) {
-  stopifnot(is_igraph(graph))
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
 
   g_ver <- graph_version(graph)
   p_ver <- graph_version()

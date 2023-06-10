@@ -40,6 +40,7 @@ is_igraph <- function(graph) {
     return(FALSE)
   }
 
+  warn_version(graph)
   TRUE
 }
 
