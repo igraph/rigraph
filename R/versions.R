@@ -107,7 +107,8 @@ check_version <- function(graph) {
 
 warn_version <- function(graph) {
   # Calling for side effect: error if R_SEXP_to_igraph() fails
-  vcount_impl(graph)
+  # Don't call vcount_impl() to avoid recursion
+  .Call(R_igraph_vcount, graph)
 
   if (graph_version() != graph_version(graph)) {
     message(
