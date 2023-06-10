@@ -84,18 +84,21 @@ upgrade_graph <- function(graph) {
   g_ver <- graph_version(graph)
   p_ver <- graph_version()
 
-  if (g_ver < p_ver) {
-    if ((g_ver == "0.4.0" && p_ver == "0.8.0")) {
-      .Call(R_igraph_add_env, graph)
-    } else if (g_ver == "0.7.999" && p_ver == "0.8.0") {
-      .Call(R_igraph_add_version_to_env, graph)
-    } else {
-      stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
-    }
-  } else if (g_ver > p_ver) {
+  if (g_ver == p_ver) {
+    return(graph)
+  }
+
+  if (g_ver > p_ver) {
     stop("Don't know how to downgrade graph from ", g_ver, " to ", p_ver)
+  }
+
+  # g_ver < p_ver
+  if (g_ver == "0.4.0") {
+    .Call(R_igraph_add_env, graph)
+  } else if (g_ver == "0.7.999") {
+    .Call(R_igraph_add_version_to_env, graph)
   } else {
-    graph
+    stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
   }
 }
 
