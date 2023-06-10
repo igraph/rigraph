@@ -112,3 +112,12 @@ warn_version <- function(graph) {
     FALSE
   }
 }
+
+oldformats <- function() {
+  readRDS(system.file("oldformats/oldformats.rds", package = "igraph"))
+}
+
+oldsamples <- function() {
+  f <- oldformats()
+  rlang::set_names(f$result, f$version)
+}
