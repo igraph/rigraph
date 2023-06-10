@@ -19,20 +19,19 @@ test_that("we can upgrade from 0.4.0 to 0.8.0", {
 
 test_that("reading of old igraph formats", {
   s <- oldsamples()
-  # Causes segfault
-  # expect_snapshot({
-  #   s[["0.1.1"]]
-  # })
-  expect_snapshot({
+  expect_snapshot(error = TRUE, {
+    s[["0.1.1"]]
+  })
+  expect_snapshot(error = TRUE, {
     s[["0.2"]]
   })
-  expect_snapshot({
+  expect_snapshot(error = TRUE, {
     s[["0.4"]]
   })
-  expect_snapshot({
+  expect_snapshot(error = TRUE, {
     s[["0.5"]]
   })
-  expect_snapshot({
+  expect_snapshot(error = TRUE, {
     s[["0.6"]]
   })
   expect_snapshot({
