@@ -36,7 +36,11 @@
 #' is_igraph(g)
 #' is_igraph(numeric(10))
 is_igraph <- function(graph) {
-  "igraph" %in% class(graph)
+  if (!inherits(graph, "igraph")) {
+    return(FALSE)
+  }
+
+  TRUE
 }
 
 #' @export
