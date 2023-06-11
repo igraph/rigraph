@@ -51,9 +51,9 @@
         Call upgrade_graph() on it to use with the current igraph version
         For now we convert it on the fly...
     Output
-      IGRAPH 0fb28c0 D--- 3 3 -- Ring graph
+      IGRAPH D--- 3 3 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
-      + edges from 0fb28c0:
+      + edges:
       [1] 1->2 2->3 3->1
     Code
       graph_version(g)
@@ -101,9 +101,9 @@
         Call upgrade_graph() on it to use with the current igraph version
         For now we convert it on the fly...
     Output
-      IGRAPH D--- 3 3 -- Ring graph
+      IGRAPH 0fb28c0 D--- 3 3 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
-      + edges:
+      + edges from 0fb28c0:
       [1] 1->2 2->3 3->1
 
 ---
@@ -111,8 +111,8 @@
     Code
       s[["1.5.0"]]
     Output
-      IGRAPH D--- 3 3 -- Ring graph
+      IGRAPH 0fb28c0 D--- 3 3 -- Ring graph
       + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
-      + edges:
+      + edges from 0fb28c0:
       [1] 1->2 2->3 3->1
 
