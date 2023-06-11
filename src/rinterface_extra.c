@@ -9950,11 +9950,9 @@ SEXP R_igraph_graph_version(SEXP graph) {
   }
 }
 
-SEXP R_igraph_add_version_to_env(SEXP graph) {
+SEXP R_igraph_add_myid_to_env(SEXP graph) {
   uuid_t my_id;
   char my_id_chr[40];
-
-  PROTECT(graph = Rf_duplicate(graph));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
@@ -9962,12 +9960,16 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
-  l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
-  l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
+
+  return graph;
+}
+
+SEXP R_igraph_add_version_to_env(SEXP graph) {
+  SEXP l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
+  SEXP l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
-  UNPROTECT(1);
   return graph;
 }
 

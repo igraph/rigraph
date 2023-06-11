@@ -96,6 +96,8 @@ upgrade_graph <- function(graph) {
   if (g_ver == "0.4.0") {
     .Call(R_igraph_add_env, graph)
   } else if (g_ver == "0.7.999") {
+    # Not observed in the wild
+    .Call(R_igraph_add_myid_to_env, graph)
     .Call(R_igraph_add_version_to_env, graph)
   } else {
     stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
