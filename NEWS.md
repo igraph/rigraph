@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9025
+
+## Bug fixes
+
+  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
+
+## Chore
+
+  - Add tests for old version, based on the released version.
+
+Merge branch 'b-830-stop-downgrade-rel'
+
+  - Internal refactorings (#836).
+
+## Breaking changes
+
+  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
+
+
 # igraph 1.4.99.9024
 
 ## Bug fixes
