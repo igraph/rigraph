@@ -124,6 +124,17 @@ warn_version <- function(graph) {
       "  Call upgrade_graph() on it to use with the current igraph version\n",
       "  For now we convert it on the fly..."
     )
+
+    # In-place upgrade:
+    # - The igraph element in the igraph_t_idx_env component will be added
+    #   transparently because it's missing.
+    # - The components igraph_t_idx_oi, igraph_t_idx_ii, igraph_t_idx_os,
+    #   igraph_t_idx_is are ignored, but we can't do much about the contents.
+    #   Users will have to call upgrade_graph(), but this is what the message
+    #   is about.
+    if (pkg_graph_version <= "1.5.0") {
+      .Call(R_igraph_add_version_to_env, graph)
+    }
     return(TRUE)
   }
 
