@@ -128,11 +128,24 @@ warn_version <- function(graph) {
   stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
 }
 
-oldformats <- function() {
-  readRDS(system.file("oldformats/oldformats.rds", package = "igraph"))
+oldpredecessors <- function() {
+  c(
+    "1.5.0" = "1.4.3",
+    "1.0.0" = "0.7.1",
+    "0.6" = "0.5.5-4",
+    "0.5" = "0.4.5",
+    "0.2" = "0.1.2",
+    "0.1.1" = NA
+  )
 }
 
 oldsamples <- function() {
-  f <- oldformats()
-  rlang::set_names(f$result, f$version)
+  list(
+    "1.5.0" = oldsample_1_5_0(),
+    "1.0.0" = oldsample_1_0_0(),
+    "0.6" = oldsample_0_6(),
+    "0.5" = oldsample_0_5(),
+    "0.2" = oldsample_0_2(),
+    "0.1.1" = oldsample_0_1_1()
+  )
 }

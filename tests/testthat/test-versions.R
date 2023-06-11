@@ -18,15 +18,14 @@ test_that("we can upgrade from 0.4.0 to 0.8.0", {
 })
 
 test_that("reading of old igraph formats", {
+  local_igraph_options(print.id = FALSE)
+
   s <- oldsamples()
   expect_snapshot(error = TRUE, {
     s[["0.1.1"]]
   })
   expect_snapshot(error = TRUE, {
     s[["0.2"]]
-  })
-  expect_snapshot(error = TRUE, {
-    s[["0.4"]]
   })
   expect_snapshot(error = TRUE, {
     s[["0.5"]]
