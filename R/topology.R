@@ -276,7 +276,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' isomorphic(g1, g2)
 #'
 #' # create two isomorphic graphs, by permuting the vertices of the first
-#' g1 <- barabasi.game(30, m = 2, directed = FALSE)
+#' g1 <- sample_pa(30, m = 2, directed = FALSE)
 #' g2 <- permute(g1, sample(vcount(g1)))
 #' # should be TRUE
 #' isomorphic(g1, g2)

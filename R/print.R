@@ -538,14 +538,19 @@ print.igraph <- function(x, full = igraph_opt("print.full"),
     } else if (edge.attributes && length(edge_attr_names(x)) != 0) {
       .print.edges.edgelist(x, names = names)
     } else if (median(degree(x, mode = "out")) < 3) {
-      .print.edges.compressed(x, names = names, max.lines = NULL)
+      .print.edges.compressed(x, names = names, max.lines = NULL, id = id)
     } else if (is_named(x)) {
       .print.edges.adjlist.named(x)
     } else {
       .print.edges.adjlist(x)
     }
   } else if (full == "auto") {
-    .print.edges.compressed(x, names = names, max.lines = max(0, max.lines - head_lines))
+    .print.edges.compressed(
+      x,
+      names = names,
+      max.lines = max(0, max.lines - head_lines),
+      id = id
+    )
   }
 
   invisible(x)

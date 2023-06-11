@@ -1,8 +1,11 @@
 
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
+## usethis namespace: start
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data .env
+#' @importFrom rlang warn
+## usethis namespace: end
 NULL
 
 #' Magrittr's pipes

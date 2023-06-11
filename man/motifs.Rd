@@ -34,7 +34,7 @@ the motifs is defined by their isomorphism class, see
 \code{\link[=isomorphism_class]{isomorphism_class()}}.
 }
 \examples{
-g <- barabasi.game(100)
+g <- sample_pa(100)
 motifs(g, 3)
 count_motifs(g, 3)
 sample_motifs(g, 3)

@@ -1,5 +1,140 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9025
+
+## Bug fixes
+
+  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
+
+## Chore
+
+  - Add tests for old version, based on the released version.
+
+Merge branch 'b-830-stop-downgrade-rel'
+
+  - Internal refactorings (#836).
+
+## Breaking changes
+
+  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
+
+
+# igraph 1.4.99.9024
+
+## Bug fixes
+
+  - Fix error message in make\_graph() when simplify=... is used with a non-formula, closes #834.
+
+
+# igraph 1.4.99.9023
+
+## Chore
+
+  - Extract variable.
+
+## Documentation
+
+  - Document running Stimulus \[ci skip\].
+
+## Testing
+
+  - Merge tests (#822).
+
+## Uncategorized
+
+  - Merge commit '1eec234e8'.
+
+  - Merge branch 'cran-1.4.3'.
+
+
+# igraph 1.4.99.9022
+
+## Bug fixes
+
+  - The internal `R_igraph_restore_pointer()` no longer leaks memory (#813).
+
+
+# igraph 1.4.99.9021
+
+## Documentation
+
+  - Update installation troubleshooting info.
+
+
+# igraph 1.4.99.9020
+
+## Documentation
+
+  - Replace gsize by ecount.
+
+
+# igraph 1.4.99.9019
+
+## Documentation
+
+  - Fix use of deprecated functions in examples (#827).
+
+
+# igraph 1.4.99.9018
+
+## Testing
+
+  - Add more tests for `graph_from_literal()` (#826).
+
+
+# igraph 1.4.99.9017
+
+## Bug fixes
+
+  - Rename `merges` to `cluster_merges` in output of `cluster_leading_eigen()` (#820).
+
+## Features
+
+  - Avoid vertex and edge sequences in attributes (#808).
+
+## Documentation
+
+  - Update links to igraph webpage (#780).
+
+## Testing
+
+  - Reenable serialization test (#809).
+
+  - Stabilize tests (#823).
+
+
+# igraph 1.4.99.9016
+
+## Chore
+
+  - The `from` and `to` components of the R representation of an igraph objects use ALTREP to avoid unnecessary materialization (#804).
+
+
+# igraph 1.4.99.9015
+
+## Refactoring
+
+  - Use bool in some places for better readability.
+
+
+# igraph 1.4.99.9014
+
+## Features
+
+  - New `largest_component()` returns the largest connected component (#786).
+
+## Documentation
+
+  - Fix typos in eigen\_centrality docs, thanks @JJ\!
+
+
+# igraph 1.4.99.9013
+
+## Bug fixes
+
+  - Fix direction of edges when restoring (#805).
+
+
 # igraph 1.4.99.9012
 
   - Merge branch 'cran-1.4.3' (early part).

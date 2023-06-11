@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-`igraph` is a fast and open source library for the analysis of graphs or networks. The library consists of a core written in C and bindings for high-level languages including [R](https://igraph.org/r/), [Python](https://igraph.readthedocs.io/), and [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). This vignette aims to give you an overview of the functions available in the R interface of `igraph`. For detailed function by function API documentation, check out [https://igraph.org/r/html/latest/](https://igraph.org/r/html/latest/).
+`igraph` is a fast and open source library for the analysis of graphs or networks. The library consists of a core written in C and bindings for high-level languages including [R](https://r.igraph.org/), [Python](https://python.igraph.org/en/stable/), and [Mathematica](http://szhorvat.net/pelican/igraphm-a-mathematica-interface-for-igraph.html). This vignette aims to give you an overview of the functions available in the R interface of `igraph`. For detailed function by function API documentation, check out <https://r.igraph.org/reference/>.
 
 ***
 **NOTE:** Throughout this tutorial, we will use words `graph` and `network` as synonyms, and also `vertex` or `node` as synonyms.
@@ -23,7 +23,7 @@ To install the library from CRAN, use:
 install.packages("igraph")
 ```
 
-More details on dependencies, requirements, and troubleshooting on installation are found on the main [documentation page](https://igraph.org/r/).
+More details on dependencies, requirements, and troubleshooting on installation are found on the main [documentation page](https://r.igraph.org/).
 
 ## Usage
 To use `igraph` in your R code, you must first load the library:
@@ -95,7 +95,7 @@ Vertices and edges have numerical vertex IDs in igraph. Vertex IDs are always co
 The same is true for the edges as well: edge IDs are always between 1 and m, the total number of edges in the graph.
 
 ***
-**NOTE**: If you are familiar with the C core or the [Python](https://igraph.readthedocs.io/en/stable/) interface of `igraph`, you might have noticed that in those languages vertex and edge IDs start from 0. In the R interface, both start from 1 instead, to keep consistent with the convention in each language.
+**NOTE**: If you are familiar with the C core or the [Python](https://python.igraph.org/en/stable/) interface of `igraph`, you might have noticed that in those languages vertex and edge IDs start from 0. In the R interface, both start from 1 instead, to keep consistent with the convention in each language.
 
 ***
 
@@ -620,7 +620,7 @@ No graph module would be complete without some kind of import/export functionali
 
 This tutorial is a brief introduction to `igraph` in R. We sincerely hope you enjoyed reading it and that it will be useful for your own network analyses.
 
-For a detailed description of specific functions, see [https://igraph.org/r/html/latest/](https://igraph.org/r/html/latest/). For questions on how to use `igraph`, please visit our [Forum](https://igraph.discourse.group). To report a bug, open a [Github issue](https://github.com/igraph/rigraph/issues). Please do not ask usage questions on Github directly as it's meant for developers rather than users.
+For a detailed description of specific functions, see <https://r.igraph.org/reference/>. For questions on how to use `igraph`, please visit our [Forum](https://igraph.discourse.group). To report a bug, open a [Github issue](https://github.com/igraph/rigraph/issues). Please do not ask usage questions on Github directly as it's meant for developers rather than users.
 
 ## Session info
 

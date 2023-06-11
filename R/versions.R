@@ -22,6 +22,10 @@
 ##
 ## ----------------------------------------------------------------------
 
+pkg_graph_version <- "1.5.0"
+
+pkg_graph_version_obj <- as.package_version(pkg_graph_version)
+
 #' igraph data structure versions
 #'
 #' igraph's internal data representation changes sometimes between
@@ -44,11 +48,13 @@
 #' @export
 graph_version <- function(graph) {
   if (missing(graph)) {
-    "0.8.0"
-  } else {
-    stopifnot(is_igraph(graph))
-    .Call(R_igraph_graph_version, graph)
+    return(pkg_graph_version_obj)
   }
+
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
+
+  as.package_version(.Call(R_igraph_graph_version, graph))
 }
 
 #' igraph data structure versions
@@ -72,49 +78,104 @@ graph_version <- function(graph) {
 #' @family versions
 #' @export
 upgrade_graph <- function(graph) {
-  stopifnot(is_igraph(graph))
+  # Don't call is_igraph() here to avoid recursion
+  stopifnot(inherits(graph, "igraph"))
 
   g_ver <- graph_version(graph)
   p_ver <- graph_version()
 
-  if (g_ver < p_ver) {
-    if ((g_ver == "0.4.0" && p_ver == "0.8.0")) {
-      .Call(R_igraph_add_env, graph)
-    } else if (g_ver == "0.7.999" && p_ver == "0.8.0") {
-      .Call(R_igraph_add_version_to_env, graph)
-    } else {
-      stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
-    }
-  } else if (g_ver > p_ver) {
+  if (g_ver == p_ver) {
+    return(graph)
+  }
+
+  if (g_ver > p_ver) {
     stop("Don't know how to downgrade graph from ", g_ver, " to ", p_ver)
-  } else {
+  }
+
+  # g_ver < p_ver
+  if (g_ver == "0.4.0") {
+    .Call(R_igraph_add_env, graph)
+  } else if (g_ver == "0.7.999") {
+    # Not observed in the wild
+    .Call(R_igraph_add_myid_to_env, graph)
+    .Call(R_igraph_add_version_to_env, graph)
+  } else if (g_ver == "0.8.0") {
+    .Call(R_igraph_add_version_to_env, graph)
+    graph <- unclass(graph)
+    graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
+    class(graph) <- "igraph"
+
+    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # update "me" element of environment
+    V(graph)
+
     graph
+  } else {
+    stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
   }
 }
 
 ## Check that the version is the latest
 
-check_version <- function(graph) {
-  if (graph_version() != graph_version(graph)) {
-    stop(
-      "This graph was created by an old(er) igraph version.\n",
-      "  Call upgrade_graph() on it to use with the current igraph version"
-    )
-  }
-}
-
 warn_version <- function(graph) {
   # Calling for side effect: error if R_SEXP_to_igraph() fails
-  vcount_impl(graph)
+  # Don't call vcount_impl() to avoid recursion
+  .Call(R_igraph_vcount, graph)
 
-  if (graph_version() != graph_version(graph)) {
+  # graph_version() calls is_igraph(), but that function must call warn_version() for safety
+  their_version <- as.package_version(.Call(R_igraph_graph_version, graph))
+
+  if (pkg_graph_version == their_version) {
+    return(FALSE)
+  }
+
+  if (pkg_graph_version > their_version) {
     message(
       "This graph was created by an old(er) igraph version.\n",
       "  Call upgrade_graph() on it to use with the current igraph version\n",
       "  For now we convert it on the fly..."
     )
-    TRUE
-  } else {
-    FALSE
+
+    # In-place upgrade:
+    # - The igraph element in the igraph_t_idx_env component will be added
+    #   transparently because it's missing.
+    # - The components igraph_t_idx_oi, igraph_t_idx_ii, igraph_t_idx_os,
+    #   igraph_t_idx_is are ignored, but we can't do much about the contents.
+    #   Users will have to call upgrade_graph(), but this is what the message
+    #   is about.
+    if (pkg_graph_version <= "1.5.0") {
+      .Call(R_igraph_add_version_to_env, graph)
+    }
+    return(TRUE)
   }
+
+  stop("This graph was created by a new(er) igraph version. Please install the latest version of igraph and try again.")
+}
+
+oldpredecessors <- function() {
+  c(
+    "1.5.0" = "1.4.3",
+    "1.0.0" = "0.7.1",
+    "0.6" = "0.5.5-4",
+    "0.5" = "0.4.5",
+    "0.2" = "0.1.2",
+    "0.1.1" = NA
+  )
+}
+
+oldsamples <- function() {
+  list(
+    "1.5.0" = oldsample_1_5_0(),
+    "1.0.0" = oldsample_1_0_0(),
+    "0.6" = oldsample_0_6(),
+    "0.5" = oldsample_0_5(),
+    "0.2" = oldsample_0_2(),
+    "0.1.1" = oldsample_0_1_1()
+  )
+}
+
+clear_native_ptr <- function(g) {
+  gx <- unclass(g)
+  gx[[igraph_t_idx_env]]$igraph <- NULL
+  g
 }

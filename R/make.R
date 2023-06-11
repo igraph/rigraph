@@ -577,7 +577,7 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
     graph_from_literal_i(mf)
   } else {
     if (!missing(simplify)) {
-      stop("'simplify' should not be given for graph literals")
+      stop("'simplify' should only be used for graph literals")
     }
 
     if (!missing(dir) && !missing(directed)) {

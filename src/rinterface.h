@@ -25,7 +25,7 @@
 
 #include "uuid/uuid.h"
 
-#define R_IGRAPH_TYPE_VERSION "0.8.0"
+#define R_IGRAPH_TYPE_VERSION "1.5.0"
 #define R_IGRAPH_VERSION_VAR ".__igraph_version__."
 
 SEXP R_igraph_add_env(SEXP graph);
@@ -37,9 +37,9 @@ void R_igraph_interrupt(void);
 
 #define IGRAPH_R_CHECK(func) \
     do { \
-        R_igraph_set_in_r_check(1); \
+        R_igraph_set_in_r_check(true); \
         igraph_error_type_t __c = func; \
-        R_igraph_set_in_r_check(0); \
+        R_igraph_set_in_r_check(false); \
         R_igraph_warning(); \
         if (__c == IGRAPH_INTERRUPTED) { R_igraph_interrupt(); } \
         else if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \

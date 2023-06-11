@@ -25,7 +25,7 @@ several fluids interacting in a non-homogeneous environment
 interaction and density.
 }
 \examples{
-g <- graph.famous("Zachary")
+g <- make_graph("Zachary")
 comms <- cluster_fluid_communities(g, 2)
 }
 \references{

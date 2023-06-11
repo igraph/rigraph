@@ -238,7 +238,7 @@ as_adj <- as_adjacency_matrix
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
 #'   vertex ids.
-#' @return A `gsize(graph)` by 2 numeric matrix.
+#' @return A `ecount(graph)` by 2 numeric matrix.
 #' @seealso [graph_from_adjacency_matrix()], [read_graph()]
 #' @keywords graphs
 #' @examples

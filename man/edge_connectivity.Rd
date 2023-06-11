@@ -61,8 +61,8 @@ included only for having more descriptive function names.
 }
 \examples{
 
-g <- barabasi.game(100, m = 1)
-g2 <- barabasi.game(100, m = 5)
+g <- sample_pa(100, m = 1)
+g2 <- sample_pa(100, m = 5)
 edge_connectivity(g, 100, 1)
 edge_connectivity(g2, 100, 1)
 edge_disjoint_paths(g2, 100, 1)

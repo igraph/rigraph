@@ -1327,7 +1327,7 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' @export
 #' @examples
 #'
-#' g <- barabasi.game(100)
+#' g <- sample_pa(100)
 #' topo_sort(g)
 #'
 topo_sort <- function(graph, mode = c("out", "all", "in")) {
@@ -1486,7 +1486,7 @@ girth <- function(graph, circle = TRUE) {
 #' which_loop(g)
 #'
 #' # Multiple edges
-#' g <- barabasi.game(10, m = 3, algorithm = "bag")
+#' g <- sample_pa(10, m = 3, algorithm = "bag")
 #' any_multiple(g)
 #' which_multiple(g)
 #' count_multiple(g)
@@ -1494,11 +1494,11 @@ girth <- function(graph, circle = TRUE) {
 #' all(count_multiple(simplify(g)) == 1)
 #'
 #' # Direction of the edge is important
-#' which_multiple(graph(c(1, 2, 2, 1)))
-#' which_multiple(graph(c(1, 2, 2, 1), dir = FALSE))
+#' which_multiple(make_graph(c(1, 2, 2, 1)))
+#' which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE))
 #'
 #' # Remove multiple edges but keep multiplicity
-#' g <- barabasi.game(10, m = 3, algorithm = "bag")
+#' g <- sample_pa(10, m = 3, algorithm = "bag")
 #' E(g)$weight <- count_multiple(g)
 #' g <- simplify(g, edge.attr.comb = list(weight = "min"))
 #' any(which_multiple(g))
@@ -1846,6 +1846,11 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' `component_distribution()` creates a histogram for the maximal connected
 #' component sizes.
 #'
+#' `largest_component()` returns the largest connected component of a graph. For
+#' directed graphs, optionally the largest weakly or strongly connected component.
+#' In case of a tie, the first component by vertex ID order is returned. Vertex
+#' IDs from the original graph are not retained in the returned graph.
+#'
 #' The weakly connected components are found by a simple breadth-first search.
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
@@ -1870,6 +1875,8 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #'   frequencies. The length of the vector is the size of the largest component
 #'   plus one. Note that (for currently unknown reasons) the first element of the
 #'   vector is the number of clusters of size zero, so this is always zero.
+#'
+#'   For `largest_component()` the largest connected component of the graph.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [decompose()], [subcomponent()], [groups()]
 #' @family structural.properties
@@ -1880,7 +1887,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' g <- sample_gnp(20, 1 / 20)
 #' clu <- components(g)
 #' groups(clu)
-#'
+#' largest_component(g)
 components <- function(graph, mode = c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
