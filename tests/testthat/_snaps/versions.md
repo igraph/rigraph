@@ -3,8 +3,8 @@
     Code
       oldsample_0_1_1()
     Error <simpleError>
-      This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+      This graph was created by igraph < 0.2.
+        Upgrading this format is not supported, sorry.
 
 # we can't upgrade from 0.1.1 to 1.5.0, explicitly
 
@@ -65,8 +65,8 @@
     Code
       s[["0.1.1"]]
     Error <simpleError>
-      This graph was created by a now unsupported old igraph version.
-        Call upgrade_version() before using igraph functions on that object.
+      This graph was created by igraph < 0.2.
+        Upgrading this format is not supported, sorry.
 
 ---
 

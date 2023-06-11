@@ -2979,6 +2979,9 @@ void R_igraph_restore_pointer(SEXP graph) {
 
 igraph_t *R_igraph_get_pointer(SEXP graph) {
   if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    if (GET_LENGTH(graph) == 11) {
+      Rf_error("This graph was created by igraph < 0.2.\n  Upgrading this format is not supported, sorry.");
+    }
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
   }
 
