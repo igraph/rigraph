@@ -5,6 +5,16 @@ test_that("we create graphs of the current version", {
   expect_equal(v1, v2)
 })
 
+test_that("we can't upgrade from 0.1.1 to 1.5.0", {
+  g <- oldsample_0_1_1()
+
+  expect_equal(graph_version(g), as.package_version("0.1.1"))
+
+  expect_snapshot(error = TRUE, {
+    upgrade_graph(g)
+  })
+})
+
 test_that("we can upgrade from 0.2 to 1.5.0", {
   g <- oldsample_0_2()
 

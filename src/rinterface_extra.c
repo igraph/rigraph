@@ -2964,7 +2964,7 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
   IGRAPH_CHECK(igraph_empty(g, no_of_nodes, directed));
   IGRAPH_FINALLY(igraph_destroy, g);
   IGRAPH_CHECK(igraph_add_edges(g, &edges, NULL));
-  
+
   igraph_vector_destroy(&edges);
   IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
 
@@ -9938,7 +9938,9 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 }
 
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
+  if (GET_LENGTH(graph) == 11) {
+    return Rf_mkString("0.1.1");
+  } else if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
     SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
     if (ver != R_UnboundValue) {
       return ver;

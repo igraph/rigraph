@@ -1,3 +1,10 @@
+# we can't upgrade from 0.1.1 to 1.5.0
+
+    Code
+      upgrade_graph(g)
+    Error <simpleError>
+      Don't know how to upgrade graph from 0.1.1 to 1.5.0
+
 # reading of old igraph formats
 
     Code
