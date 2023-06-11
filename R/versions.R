@@ -99,6 +99,17 @@ upgrade_graph <- function(graph) {
     # Not observed in the wild
     .Call(R_igraph_add_myid_to_env, graph)
     .Call(R_igraph_add_version_to_env, graph)
+  } else if (g_ver == "0.8.0") {
+    .Call(R_igraph_add_version_to_env, graph)
+    graph <- unclass(graph)
+    graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
+    class(graph) <- "igraph"
+
+    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # update "me" element of environment
+    V(graph)
+
+    graph
   } else {
     stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
   }
@@ -161,4 +172,10 @@ oldsamples <- function() {
     "0.2" = oldsample_0_2(),
     "0.1.1" = oldsample_0_1_1()
   )
+}
+
+clear_native_ptr <- function(g) {
+  gx <- unclass(g)
+  gx[[igraph_t_idx_env]]$igraph <- NULL
+  g
 }

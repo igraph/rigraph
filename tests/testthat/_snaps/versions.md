@@ -5,6 +5,29 @@
     Error <simpleError>
       Don't know how to upgrade graph from 0.1.1 to 1.5.0
 
+# we can upgrade from 1.0.0 to 1.5.0, on the fly
+
+    Code
+      g <- oldsample_1_0_0()
+      graph_version(g)
+    Output
+      [1] '0.8.0'
+    Code
+      g
+    Message <simpleMessage>
+      This graph was created by an old(er) igraph version.
+        Call upgrade_graph() on it to use with the current igraph version
+        For now we convert it on the fly...
+    Output
+      IGRAPH 0fb28c0 D--- 3 3 -- Ring graph
+      + attr: name (g/c), mutual (g/l), circular (g/l), bar (v/c), foo (e/c)
+      + edges from 0fb28c0:
+      [1] 1->2 2->3 3->1
+    Code
+      graph_version(g)
+    Output
+      [1] '1.5.0'
+
 # reading of old igraph formats
 
     Code

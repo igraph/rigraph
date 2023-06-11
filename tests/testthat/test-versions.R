@@ -42,6 +42,29 @@ test_that("we can upgrade from 0.6 to 1.5.0", {
   expect_equal(graph_version(g2), as.package_version("1.5.0"))
 })
 
+test_that("we can upgrade from 1.0.0 to 1.5.0, on the fly", {
+  expect_snapshot({
+    g <- oldsample_1_0_0()
+    graph_version(g)
+    g
+    graph_version(g)
+  })
+})
+
+test_that("we can upgrade from 1.0.0 to 1.5.0, explicitly", {
+  g <- oldsample_1_0_0()
+  graph_version(g)
+  g2 <- upgrade_graph(g)
+  graph_version(g2)
+
+  g3 <- oldsample_1_5_0()
+
+  expect_identical(
+    unclass(clear_native_ptr(g2)),
+    unclass(clear_native_ptr(g3))
+  )
+})
+
 test_that("reading of old igraph formats", {
   local_igraph_options(print.id = FALSE)
 
