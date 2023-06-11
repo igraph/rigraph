@@ -5,7 +5,13 @@ test_that("we create graphs of the current version", {
   expect_equal(v1, v2)
 })
 
-test_that("we can't upgrade from 0.1.1 to 1.5.0", {
+test_that("we can't upgrade from 0.1.1 to 1.5.0, on the fly", {
+  expect_snapshot(error = TRUE, {
+    oldsample_0_1_1()
+  })
+})
+
+test_that("we can't upgrade from 0.1.1 to 1.5.0, explicitly", {
   g <- oldsample_0_1_1()
 
   expect_equal(graph_version(g), as.package_version("0.1.1"))
@@ -15,7 +21,13 @@ test_that("we can't upgrade from 0.1.1 to 1.5.0", {
   })
 })
 
-test_that("we can upgrade from 0.2 to 1.5.0", {
+test_that("we can't upgrade from 0.2 to 1.5.0, on the fly", {
+  expect_snapshot(error = TRUE, {
+    oldsample_0_2()
+  })
+})
+
+test_that("we can upgrade from 0.2 to 1.5.0, explicitly", {
   g <- oldsample_0_2()
 
   expect_equal(graph_version(g), as.package_version("0.4.0"))
@@ -24,7 +36,13 @@ test_that("we can upgrade from 0.2 to 1.5.0", {
   expect_equal(graph_version(g2), as.package_version("1.5.0"))
 })
 
-test_that("we can upgrade from 0.5 to 1.5.0", {
+test_that("we can't upgrade from 0.5 to 1.5.0, on the fly", {
+  expect_snapshot(error = TRUE, {
+    oldsample_0_5()
+  })
+})
+
+test_that("we can upgrade from 0.5 to 1.5.0, explicitly", {
   g <- oldsample_0_5()
 
   expect_equal(graph_version(g), as.package_version("0.4.0"))
@@ -33,7 +51,13 @@ test_that("we can upgrade from 0.5 to 1.5.0", {
   expect_equal(graph_version(g2), as.package_version("1.5.0"))
 })
 
-test_that("we can upgrade from 0.6 to 1.5.0", {
+test_that("we can't upgrade from 0.6 to 1.5.0, on the fly", {
+  expect_snapshot(error = TRUE, {
+    oldsample_0_6()
+  })
+})
+
+test_that("we can upgrade from 0.6 to 1.5.0, explicitly", {
   g <- oldsample_0_6()
 
   expect_equal(graph_version(g), as.package_version("0.4.0"))
