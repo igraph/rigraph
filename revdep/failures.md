@@ -101,14 +101,72 @@ Status: 1 ERROR
 
 
 ```
+# FinNet
+
+<details>
+
+* Version: 0.1.1
+* GitHub: https://github.com/FATelarico/FinNet
+* Source code: https://github.com/cran/FinNet
+* Date/Publication: 2023-06-01 13:00:02 UTC
+* Number of recursive dependencies: 42
+
+Run `revdepcheck::cloud_details(, "FinNet")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘FinNet’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/FinNet/new/FinNet.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘FinNet’ ...
+** package ‘FinNet’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+Error in parse(outFile) : 
+  /tmp/workdir/FinNet/new/FinNet.Rcheck/00_pkg_src/FinNet/R/00.helpers.R:172:21: unexpected input
+171:   y <- rep(clrs[1], 3)|> paste0(collapse = '')|>
+172:     paste0('#', x = _
+                         ^
+ERROR: unable to collate and parse R files for package ‘FinNet’
+* removing ‘/tmp/workdir/FinNet/new/FinNet.Rcheck/FinNet’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘FinNet’ ...
+** package ‘FinNet’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+Error in parse(outFile) : 
+  /tmp/workdir/FinNet/old/FinNet.Rcheck/00_pkg_src/FinNet/R/00.helpers.R:172:21: unexpected input
+171:   y <- rep(clrs[1], 3)|> paste0(collapse = '')|>
+172:     paste0('#', x = _
+                         ^
+ERROR: unable to collate and parse R files for package ‘FinNet’
+* removing ‘/tmp/workdir/FinNet/old/FinNet.Rcheck/FinNet’
+
+
+```
 # genekitr
 
 <details>
 
-* Version: 1.1.9
+* Version: 1.2.2
 * GitHub: https://github.com/GangLiLab/genekitr
 * Source code: https://github.com/cran/genekitr
-* Date/Publication: 2023-04-15 07:50:02 UTC
+* Date/Publication: 2023-05-24 04:00:02 UTC
 * Number of recursive dependencies: 206
 
 Run `revdepcheck::cloud_details(, "genekitr")` for more info
@@ -127,7 +185,7 @@ Run `revdepcheck::cloud_details(, "genekitr")` for more info
 * using option ‘--no-manual’
 * checking for file ‘genekitr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘genekitr’ version ‘1.1.9’
+* this is package ‘genekitr’ version ‘1.2.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -153,7 +211,7 @@ Status: 1 ERROR
 * using option ‘--no-manual’
 * checking for file ‘genekitr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘genekitr’ version ‘1.1.9’
+* this is package ‘genekitr’ version ‘1.2.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -265,16 +323,16 @@ Run `revdepcheck::cloud_details(, "MACP")` for more info
 * package encoding: UTF-8
 * checking package namespace information ... OK
 ...
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘MACP_tutorial.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
+--- failed re-building ‘MACP_tutorial.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘MACP_tutorial.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
 * DONE
-Status: 3 NOTEs
+Status: 1 ERROR, 1 WARNING, 3 NOTEs
 
 
 
@@ -315,10 +373,10 @@ Status: 3 NOTEs
 
 <details>
 
-* Version: 1.3.0
+* Version: 1.3.2
 * GitHub: https://github.com/kharchenkolab/numbat
 * Source code: https://github.com/cran/numbat
-* Date/Publication: 2023-04-02 17:50:03 UTC
+* Date/Publication: 2023-06-06 16:40:02 UTC
 * Number of recursive dependencies: 132
 
 Run `revdepcheck::cloud_details(, "numbat")` for more info
@@ -336,7 +394,7 @@ Run `revdepcheck::cloud_details(, "numbat")` for more info
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘numbat/DESCRIPTION’ ... OK
-* this is package ‘numbat’ version ‘1.3.0’
+* this is package ‘numbat’ version ‘1.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -361,7 +419,7 @@ Status: 1 ERROR
 * using session charset: UTF-8
 * using option ‘--no-manual’
 * checking for file ‘numbat/DESCRIPTION’ ... OK
-* this is package ‘numbat’ version ‘1.3.0’
+* this is package ‘numbat’ version ‘1.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
@@ -485,6 +543,95 @@ Status: 1 ERROR
 
 
 
+
+
+```
+# R6causal
+
+<details>
+
+* Version: 0.7.0
+* GitHub: NA
+* Source code: https://github.com/cran/R6causal
+* Date/Publication: 2022-11-04 08:00:02 UTC
+* Number of recursive dependencies: 98
+
+Run `revdepcheck::cloud_details(, "R6causal")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘R6causal’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/R6causal/new/R6causal.Rcheck/00install.out’ for details.
+    ```
+
+## Newly fixed
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘using_R6causal.Rmd’ using rmarkdown
+    A new version of TeX Live has been released. If you need to install or update any LaTeX packages, you have to upgrade TinyTeX with tinytex::reinstall_tinytex(repository = "illinois").
+    
+    tlmgr: Local TeX Live (2022) is older than remote repository (2023).
+    Cross release updates are only supported with
+      update-tlmgr-latest(.sh/.exe) --update
+    See https://tug.org/texlive/upgrade.html for details.
+    Warning in system2("tlmgr", args, ...) :
+    ...
+    
+    Error: processing vignette 'using_R6causal.Rmd' failed with diagnostics:
+    LaTeX failed to compile /tmp/workdir/R6causal/old/R6causal.Rcheck/vign_test/R6causal/vignettes/using_R6causal.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See using_R6causal.log for more info.
+    --- failed re-building ‘using_R6causal.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘using_R6causal.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘R6causal’ ...
+** package ‘R6causal’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error in .igraph.status("Make graph external pointer.\n") : 
+  could not find function ".igraph.status"
+Error: unable to load R code in package ‘R6causal’
+Execution halted
+ERROR: lazy loading failed for package ‘R6causal’
+* removing ‘/tmp/workdir/R6causal/new/R6causal.Rcheck/R6causal’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘R6causal’ ...
+** package ‘R6causal’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (R6causal)
 
 
 ```
@@ -625,16 +772,16 @@ Run `revdepcheck::cloud_details(, "vivid")` for more info
 * checking package namespace information ... OK
 * checking package dependencies ... NOTE
 ...
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘vividVignette.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
+--- failed re-building ‘vividVignette.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘vividVignette.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
 * DONE
-Status: 1 NOTE
+Status: 1 WARNING, 1 NOTE
 
 
 
