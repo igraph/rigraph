@@ -41,6 +41,7 @@ Imports:
     utils
 Suggests:
     ape (>= 5.7-0.1),
+    callr,
     decor,
     digest,
     graph,

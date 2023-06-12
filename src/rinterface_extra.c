@@ -2524,27 +2524,33 @@ int R_igraph_progress_handler(const char *message, igraph_real_t percent,
   SEXP ec;
   int ecint;
   SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(Rf_mkChar("igraph")));
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
   SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_GlobalEnv));
+  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
 
   SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
   SEXP l5 = PROTECT(Rf_ScalarReal(percent));
-  SEXP l6 = PROTECT(Rf_ScalarString(Rf_mkChar(message)));
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
   SEXP l7 = PROTECT(Rf_lang3(l4, l5, l6));
   PROTECT(ec=Rf_eval(l7, rho));
+
   ecint=INTEGER(ec)[0];
-  UNPROTECT(9);
+  UNPROTECT(11);
   return ecint;
 }
 
 int R_igraph_status_handler(const char *message, void *data) {
-  SEXP l4 = PROTECT(Rf_install(".igraph.status"));
-  SEXP l5 = PROTECT(Rf_ScalarString(Rf_mkChar(message)));
-  SEXP l6 = PROTECT(Rf_lang2(l4, l5));
-  PROTECT(Rf_eval(l6, R_GlobalEnv));
+  SEXP l1 = PROTECT(Rf_install("getNamespace"));
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
+  SEXP l3 = PROTECT(Rf_lang2(l1, l2));
+  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
 
-  UNPROTECT(4);
+  SEXP l4 = PROTECT(Rf_install(".igraph.status"));
+  SEXP l5 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(message))));
+  SEXP l6 = PROTECT(Rf_lang2(l4, l5));
+  PROTECT(Rf_eval(l6, rho));
+
+  UNPROTECT(10);
   return 0;
 }
 
@@ -2625,16 +2631,17 @@ SEXP R_igraph_set_verbose(SEXP verbose) {
 SEXP R_igraph_finalizer(void) {
   IGRAPH_FINALLY_FREE();
   SEXP l1 = PROTECT(Rf_install("getNamespace"));
-  SEXP l2 = PROTECT(Rf_ScalarString(Rf_mkChar("igraph")));
+  SEXP l2 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar("igraph"))));
   SEXP l3 = PROTECT(Rf_lang2(l1, l2));
-  SEXP rho = PROTECT(Rf_eval(l3, R_GlobalEnv));
+  SEXP rho = PROTECT(Rf_eval(l3, R_BaseEnv));
+
   SEXP l4 = PROTECT(Rf_install(".igraph.progress"));
   SEXP l5 = PROTECT(Rf_ScalarReal(0.0));
-  SEXP l6 = PROTECT(Rf_ScalarString(Rf_mkChar("")));
+  SEXP l6 = PROTECT(Rf_ScalarString(PROTECT(Rf_mkChar(""))));
   SEXP l7 = PROTECT(Rf_ScalarLogical(1));
   SEXP l8 = PROTECT(Rf_lang4(l4, l5, l6, l7));
   Rf_eval(l8, rho);
-  UNPROTECT(9);
+  UNPROTECT(11);
   return R_NilValue;
 }
 
@@ -2964,7 +2971,7 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
   IGRAPH_CHECK(igraph_empty(g, no_of_nodes, directed));
   IGRAPH_FINALLY(igraph_destroy, g);
   IGRAPH_CHECK(igraph_add_edges(g, &edges, NULL));
-  
+
   igraph_vector_destroy(&edges);
   IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
 
