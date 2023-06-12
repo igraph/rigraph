@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9026
+
+## Chore
+
+  - Data as constructed objects (#838).
+
+  - Refactor and add tests (#837).
+
+
 # igraph 1.4.99.9025
 
 ## Bug fixes
