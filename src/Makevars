@@ -1,0 +1,13 @@
+PKG_CFLAGS=$(C_VISIBILITY)
+PKG_CXXFLAGS=$(CXX_VISIBILITY)
+PKG_FFLAGS=$(F_VISIBILITY)
+
+PKG_CPPFLAGS=-DUSING_R -I. -Icore -Iinstall/include/igraph -Ivendor \
+	-DNDEBUG -DNTIMER -DNPRINT \
+	-DINTERNAL_ARPACK \
+	-DPRPACK_IGRAPH_SUPPORT -DIGRAPH_THREAD_LOCAL=/**/ -fPIC
+PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -Linstall/lib -luuid -ligraph -lsimpleraytracer -lxml2
+
+all: $(SHLIB)
+
+OBJECTS=rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
