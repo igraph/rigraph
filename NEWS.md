@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9027
+
+## Bug fixes
+
+  - Compatibility with tidyselect, mitigate #797.
+
+  - Fix handler lookup and protection (#839).
+
+
 # igraph 1.4.99.9026
 
 ## Chore
