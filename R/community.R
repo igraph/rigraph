@@ -1691,10 +1691,6 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   res$vcount <- vcount(graph)
   res$membership <- res$membership + 1
   res$cluster.merges <- res$cluster.merges + 1
-
-  # tidygraph compatibility
-  res$merges <- res$cluster.merges
-
   res$history <- res$history + 1
   class(res) <- "communities"
   res
