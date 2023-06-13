@@ -1,6 +1,6 @@
 # Revdeps
 
-## New problems (7)
+## New problems (6)
 
 |package    |version |error  |warning |note |
 |:----------|:-------|:------|:-------|:----|
@@ -10,5 +10,4 @@
 |[nda](problems.md#nda)|0.1.6   |__+1__ |        |     |
 |[netseg](problems.md#netseg)|1.0-1   |__+1__ |        |     |
 |[SNscan](problems.md#snscan)|1.0     |__+1__ |        |     |
-|[tidygraph](problems.md#tidygraph)|1.2.3   |__+1__ |        |     |
 
