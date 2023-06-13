@@ -122,7 +122,7 @@ igraph_full_bipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
-        OUT GRAPH graph, VECTOR out_deg, VECTOR_OR_0 in_deg=NULL,
+        OUT GRAPH graph, VECTOR_INT out_deg, VECTOR_INT_OR_0 in_deg=NULL,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
     R:
       GATTR:
@@ -341,9 +341,6 @@ igraph_rewire:
 igraph_induced_subgraph:
     IGNORE: RR
 
-igraph_subgraph_edges:
-    IGNORE: RR
-
 igraph_average_path_length:
     # No need for it, igraph_average_path_length_dijkstra takes care of the
     # unweighted case as well
@@ -435,9 +432,6 @@ igraph_arpack_rssolve:
 igraph_arpack_rnsolve:
     IGNORE: RR, RC, RInit
 
-igraph_arpack_unpack_complex:
-    IGNORE: RR
-
 igraph_unfold_tree:
     IGNORE: RR
 
@@ -492,12 +486,6 @@ igraph_bipartite_projection:
 igraph_create_bipartite:
     IGNORE: RR
 
-igraph_incidence:
-    IGNORE: RR
-
-igraph_get_incidence:
-    IGNORE: RR
-
 igraph_bipartite_game_gnp:
     IGNORE: RR
 
@@ -515,7 +503,7 @@ igraph_laplacian:
 # Components
 #######################################
 
-igraph_clusters:
+igraph_connected_components:
     IGNORE: RR
 
 igraph_decompose:
@@ -755,6 +743,16 @@ igraph_get_adjacency:
 igraph_get_edgelist:
     IGNORE: RR, RC
 
+igraph_invalidate_cache:
+    PARAMS: INOUT GRAPH graph
+    IGNORE: RR
+
+igraph_write_graph_dimacs_flow:
+    PARAMS: |-
+        INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
+        VECTOR capacity
+    IGNORE: RR
+
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
 
@@ -762,9 +760,6 @@ igraph_to_undirected:
     IGNORE: RR
 
 igraph_get_stochastic:
-    IGNORE: RR
-
-igraph_get_stochastic_sparsemat:
     IGNORE: RR
 
 #######################################
@@ -977,20 +972,23 @@ igraph_simplify_and_colorize:
 # SCG
 #######################################
 
-igraph_scg_grouping:
-    IGNORE: RR
+# TODO: define what to do with SCG
+# scg is in separate repository from
 
-igraph_scg_semiprojectors:
-    IGNORE: RR, RC, RInit
+# igraph_scg_grouping:
+#     IGNORE: RR
 
-igraph_scg_adjacency:
-    IGNORE: RR, RC, RInit
+# igraph_scg_semiprojectors:
+#     IGNORE: RR, RC, RInit
 
-igraph_scg_stochastic:
-    IGNORE: RR, RC, RInit
+# igraph_scg_adjacency:
+#     IGNORE: RR, RC, RInit
 
-igraph_scg_laplacian:
-    IGNORE: RR, RC, RInit
+# igraph_scg_stochastic:
+#     IGNORE: RR, RC, RInit
+
+# igraph_scg_laplacian:
+#     IGNORE: RR, RC, RInit
 
 #######################################
 # Matching
@@ -1076,7 +1074,7 @@ igraph_from_prufer:
         GATTR-PARAM: prufer
 
 igraph_random_spanning_tree:
-    PARAMS: GRAPH graph, OUT EDGESET res, OPTIONAL VERTEX vid=0
+    PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
 
 #######################################
 # Coloring
