@@ -494,7 +494,7 @@ as.hclust.igraphHRG <- function(x, ...) {
   res
 }
 
-#' @method as_phylo igraphHRG
+#' @export
 #' @importFrom stats reorder
 as_phylo.igraphHRG <- function(x, ...) {
   ovc <- length(x$left) + 1L
