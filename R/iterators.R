@@ -317,13 +317,13 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   } else if (!is.null(P)) {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_pairs, graph, as.igraph.vs(graph, P) - 1,
+      R_igraph_es_pairs, graph, as_igraph_vs(graph, P) - 1,
       as.logical(directed)
     ) + 1
   } else {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_es_path, graph, as.igraph.vs(graph, path) - 1,
+      R_igraph_es_path, graph, as_igraph_vs(graph, path) - 1,
       as.logical(directed)
     ) + 1
   }
@@ -523,7 +523,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_nei, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_vs_nei, graph, x, as_igraph_vs(graph, v) - 1,
       as.numeric(mode)
     )
     tmp[as.numeric(x)]
@@ -871,7 +871,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge is incident to at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -888,7 +888,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge originates from at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -901,7 +901,7 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
     ## TRUE iff the edge points to at least one vertex in v
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_es_adj, graph, x, as.igraph.vs(graph, v) - 1,
+      R_igraph_es_adj, graph, x, as_igraph_vs(graph, v) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -964,8 +964,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  f <- as.igraph.vs(graph, f) - 1
-  t <- as.igraph.vs(graph, t) - 1
+  f <- as_igraph_vs(graph, f) - 1
+  t <- as_igraph_vs(graph, t) - 1
   (from %in% f & to %in% t) | (to %in% f & from %in% t)
 }
 
@@ -974,8 +974,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  f <- as.igraph.vs(graph, f) - 1
-  t <- as.igraph.vs(graph, t) - 1
+  f <- as_igraph_vs(graph, f) - 1
+  t <- as_igraph_vs(graph, t) - 1
   if (is_directed(graph)) {
     from %in% f & to %in% t
   } else {
@@ -988,8 +988,8 @@ simple_es_index <- function(x, i, na_ok = FALSE) {
   from <- get(".igraph.from", parent.frame())
   to <- get(".igraph.to", parent.frame())
   graph <- get(".igraph.graph", parent.frame())
-  value <- as.igraph.vs(graph, value) - 1
-  t <- as.igraph.vs(graph, t) - 1
+  value <- as_igraph_vs(graph, value) - 1
+  t <- as_igraph_vs(graph, t) - 1
   if (is_directed(graph)) {
     from %in% value & to %in% t
   } else {
@@ -1366,7 +1366,7 @@ print.igraph.es <- function(x,
 
 # these are internal
 
-as.igraph.vs <- function(graph, v, na.ok = FALSE) {
+as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   if (inherits(v, "igraph.vs") && !is.null(graph) &&
     !warn_version(graph)) {
     if (get_graph_id(graph) != get_vs_graph_id(v)) {
@@ -1490,7 +1490,7 @@ parse_op_args <- function(..., what, is_fun, as_fun, check_graph = TRUE) {
 parse_vs_op_args <- function(...) {
   parse_op_args(...,
     what = "a vertex", is_fun = is_igraph_vs,
-    as_fun = as.igraph.vs
+    as_fun = as_igraph_vs
   )
 }
 

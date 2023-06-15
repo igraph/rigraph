@@ -119,7 +119,7 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         nobigint = TRUE, normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)
 
-  v <- as.igraph.vs(graph, v)
+  v <- as_igraph_vs(graph, v)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -262,7 +262,7 @@ closeness <- function(graph, vids = V(graph),
   # Argument checks
   ensure_igraph(graph)
 
-  vids <- as.igraph.vs(graph, vids)
+  vids <- as_igraph_vs(graph, vids)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
@@ -1218,7 +1218,7 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 power_centrality <- function(graph, nodes = V(graph),
                              loops = FALSE, exponent = 1,
                              rescale = FALSE, tol = 1e-7, sparse = TRUE) {
-  nodes <- as.igraph.vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- bonpow.sparse(graph, nodes, loops, exponent, rescale, tol)
   } else {
@@ -1382,7 +1382,7 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
                              loops = FALSE, exo = 1, weights = NULL,
                              tol = 1e-7, sparse = TRUE) {
-  nodes <- as.igraph.vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, nodes)
   if (sparse) {
     res <- alpha.centrality.sparse(
       graph, nodes, alpha, loops,

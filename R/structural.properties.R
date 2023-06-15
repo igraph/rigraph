@@ -199,7 +199,7 @@ degree <- function(graph, v = V(graph),
                    mode = c("all", "out", "in", "total"), loops = TRUE,
                    normalized = FALSE) {
   ensure_igraph(graph)
-  v <- as.igraph.vs(graph, v)
+  v <- as_igraph_vs(graph, v)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -430,8 +430,8 @@ distances <- function(graph, v = V(graph), to = V(graph),
     mode <- "out"
   }
 
-  v <- as.igraph.vs(graph, v)
-  to <- as.igraph.vs(graph, to)
+  v <- as_igraph_vs(graph, v)
+  to <- as_igraph_vs(graph, to)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "out" = 1,
@@ -545,11 +545,11 @@ shortest_paths <- function(graph, from, to = V(graph),
     warning("Unweighted algorithm chosen, weights ignored")
   }
 
-  to <- as.igraph.vs(graph, to) - 1
+  to <- as_igraph_vs(graph, to) - 1
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_get_shortest_paths, graph,
-    as.igraph.vs(graph, from) - 1, to, as.numeric(mode),
+    as_igraph_vs(graph, from) - 1, to, as.numeric(mode),
     as.numeric(length(to)), weights, as.numeric(output),
     as.logical(predecessors), as.logical(inbound.edges),
     as.numeric(algorithm)
@@ -623,13 +623,13 @@ all_shortest_paths <- function(graph, from,
   if (is.null(weights)) {
     res <- .Call(
       R_igraph_get_all_shortest_paths, graph,
-      as.igraph.vs(graph, from) - 1, as.igraph.vs(graph, to) - 1,
+      as_igraph_vs(graph, from) - 1, as_igraph_vs(graph, to) - 1,
       as.numeric(mode)
     )
   } else {
     res <- .Call(
       R_igraph_get_all_shortest_paths_dijkstra, graph,
-      as.igraph.vs(graph, from) - 1, as.igraph.vs(graph, to) - 1,
+      as_igraph_vs(graph, from) - 1, as_igraph_vs(graph, to) - 1,
       weights, as.numeric(mode)
     )
   }
@@ -680,7 +680,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_subcomponent, graph, as.igraph.vs(graph, v) - 1,
+    R_igraph_subcomponent, graph, as_igraph_vs(graph, v) - 1,
     as.numeric(mode)
   ) + 1L
 
@@ -742,7 +742,7 @@ subgraph <- function(graph, vids) {
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as.igraph.vs(graph, vids)
+  vids <- as_igraph_vs(graph, vids)
   impl <- switch(igraph.match.arg(impl),
     "auto" = 0,
     "copy_and_delete" = 1,
@@ -917,7 +917,7 @@ transitivity <- function(graph, type = c(
     if (is.null(vids)) {
       .Call(R_igraph_transitivity_local_undirected_all, graph, isolates)
     } else {
-      vids <- as.igraph.vs(graph, vids) - 1
+      vids <- as_igraph_vs(graph, vids) - 1
       .Call(
         R_igraph_transitivity_local_undirected, graph, vids,
         isolates
@@ -929,7 +929,7 @@ transitivity <- function(graph, type = c(
     if (is.null(vids)) {
       vids <- V(graph)
     }
-    vids <- as.igraph.vs(graph, vids) - 1
+    vids <- as_igraph_vs(graph, vids) - 1
     if (is.null(weights)) {
       .Call(
         R_igraph_transitivity_local_undirected, graph, vids,
@@ -989,7 +989,7 @@ transitivity <- function(graph, type = c(
 #'
 constraint <- function(graph, nodes = V(graph), weights = NULL) {
   ensure_igraph(graph)
-  nodes <- as.igraph.vs(graph, nodes)
+  nodes <- as_igraph_vs(graph, nodes)
 
   if (is.null(weights)) {
     if ("weight" %in% edge_attr_names(graph)) {
@@ -1119,7 +1119,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
   on.exit(.Call(R_igraph_finalizer))
   .Call(
     R_igraph_neighborhood_size, graph,
-    as.igraph.vs(graph, nodes) - 1, as.numeric(order), as.numeric(mode),
+    as_igraph_vs(graph, nodes) - 1, as.numeric(order), as.numeric(mode),
     mindist
   )
 }
@@ -1208,7 +1208,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood, graph,
-    as.igraph.vs(graph, nodes) - 1, as.numeric(order),
+    as_igraph_vs(graph, nodes) - 1, as.numeric(order),
     as.numeric(mode), mindist
   )
   res <- lapply(res, function(x) x + 1)
@@ -1237,7 +1237,7 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood_graphs, graph,
-    as.igraph.vs(graph, nodes) - 1, as.numeric(order),
+    as_igraph_vs(graph, nodes) - 1, as.numeric(order),
     as.numeric(mode), mindist
   )
   res
@@ -1626,10 +1626,10 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   }
 
   if (length(root) == 1) {
-    root <- as.igraph.vs(graph, root) - 1
+    root <- as_igraph_vs(graph, root) - 1
     roots <- NULL
   } else {
-    roots <- as.igraph.vs(graph, root) - 1
+    roots <- as_igraph_vs(graph, root) - 1
     root <- 0 # ignored anyway
   }
   mode <- switch(igraph.match.arg(mode),
@@ -1640,7 +1640,7 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   )
   unreachable <- as.logical(unreachable)
   if (!is.null(restricted)) {
-    restricted <- as.igraph.vs(graph, restricted) - 1
+    restricted <- as_igraph_vs(graph, restricted) - 1
   }
   if (!is.null(callback)) {
     callback <- as.function(callback)
@@ -1787,7 +1787,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     }
   }
 
-  root <- as.igraph.vs(graph, root) - 1
+  root <- as_igraph_vs(graph, root) - 1
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,
@@ -1958,7 +1958,7 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
     "all" = 3,
     "total" = 3
   )
-  roots <- as.igraph.vs(graph, roots) - 1
+  roots <- as_igraph_vs(graph, roots) - 1
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2129,7 +2129,7 @@ is_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as.igraph.vs(graph, matching, na.ok = TRUE) - 1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
 
   on.exit(.Call(R_igraph_finalizer))
@@ -2146,7 +2146,7 @@ is_max_matching <- function(graph, matching, types = NULL) {
   # Argument checks
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph, required = F)
-  matching <- as.igraph.vs(graph, matching, na.ok = TRUE) - 1
+  matching <- as_igraph_vs(graph, matching, na.ok = TRUE) - 1
   matching[is.na(matching)] <- -1
 
   on.exit(.Call(R_igraph_finalizer))

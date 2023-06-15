@@ -168,7 +168,7 @@ vertex_attr <- function(graph, name, index = V(graph)) {
     if (is_complete_iterator(index)) {
       myattr
     } else {
-      index <- as.igraph.vs(graph, index)
+      index <- as_igraph_vs(graph, index)
       myattr[index]
     }
   }
@@ -251,7 +251,7 @@ i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE
   single <- is_single_index(index)
   complete <- is_complete_iterator(index)
   if (!missing(index) && check) {
-    index <- as.igraph.vs(graph, index)
+    index <- as_igraph_vs(graph, index)
   }
   name <- as.character(name)
 
@@ -293,7 +293,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   ensure_igraph(graph)
 
   if (!missing(index)) {
-    index <- as.igraph.vs(graph, index)
+    index <- as_igraph_vs(graph, index)
   }
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_vertex)
@@ -320,7 +320,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
   }
 
   if (!missing(index)) {
-    index <- as.igraph.vs(graph, index)
+    index <- as_igraph_vs(graph, index)
 
     if (any(duplicated(index)) || any(is.na(index))) {
       stop("Invalid vertices in index")

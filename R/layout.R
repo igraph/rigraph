@@ -345,7 +345,7 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
     # vertices
     return(layout_in_circle(graph))
   }
-  center <- as.igraph.vs(graph, center)
+  center <- as_igraph_vs(graph, center)
   if (length(center) == 0) {
     center <- 1
   }
@@ -428,7 +428,7 @@ layout_as_tree <- function(graph, root = numeric(), circular = FALSE,
                            rootlevel = numeric(), mode = c("out", "in", "all"),
                            flip.y = TRUE) {
   ensure_igraph(graph)
-  root <- as.igraph.vs(graph, root) - 1
+  root <- as_igraph_vs(graph, root) - 1
   circular <- as.logical(circular)
   rootlevel <- as.double(rootlevel)
   mode <- switch(igraph.match.arg(mode),
@@ -498,7 +498,7 @@ layout.reingold.tilford <- function(..., params = list()) {
 #' plot(karate, layout = coords)
 layout_in_circle <- function(graph, order = V(graph)) {
   ensure_igraph(graph)
-  order <- as.igraph.vs(graph, order) - 1L
+  order <- as_igraph_vs(graph, order) - 1L
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_layout_circle, graph, order)
 }
@@ -1445,7 +1445,7 @@ layout_with_lgl <- function(graph, maxiter = 150, maxdelta = vcount(graph),
   if (is.null(root)) {
     root <- -1
   } else {
-    root <- as.igraph.vs(graph, root) - 1
+    root <- as_igraph_vs(graph, root) - 1
   }
 
   on.exit(.Call(R_igraph_finalizer))

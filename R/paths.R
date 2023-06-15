@@ -60,8 +60,8 @@ all_simple_paths <- function(graph, from, to = V(graph),
                              cutoff = -1) {
   ## Argument checks
   ensure_igraph(graph)
-  from <- as.igraph.vs(graph, from)
-  to <- as.igraph.vs(graph, to)
+  from <- as_igraph_vs(graph, from)
+  to <- as_igraph_vs(graph, to)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,

@@ -115,7 +115,7 @@ INT:
 VERTEX:
     CALL: '%I%-1'
     INCONV: |-
-        %I% <- as.igraph.vs(%I1%, %I%)
+        %I% <- as_igraph_vs(%I1%, %I%)
         if (length(%I%) == 0) {
           stop("No vertex was specified")
         }
@@ -129,7 +129,7 @@ VERTEXSET:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
-    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -140,7 +140,7 @@ VERTEXSET_INT:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
-    INCONV: '%I% <- as.igraph.vs(%I1%, %I%)'
+    INCONV: '%I% <- as_igraph_vs(%I1%, %I%)'
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {

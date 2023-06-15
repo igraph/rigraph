@@ -97,7 +97,7 @@ bipartite_projection <- function(graph, types = NULL,
   ensure_igraph(graph)
   types <- handle_vertex_type_arg(types, graph)
   if (!is.null(probe1)) {
-    probe1 <- as.igraph.vs(graph, probe1) - 1
+    probe1 <- as_igraph_vs(graph, probe1) - 1
     if (length(probe1) < 1) {
       probe1 <- -1
     }
