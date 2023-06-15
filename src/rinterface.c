@@ -6110,27 +6110,27 @@ SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP 
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   if (0 != igraph_vector_init(&c_map12, 0)) {
@@ -6200,27 +6200,27 @@ SEXP R_igraph_count_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   c_count=0;
@@ -6266,27 +6266,27 @@ SEXP R_igraph_get_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1,
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   if (0 != igraph_vector_ptr_init(&c_maps, 0)) {
@@ -6340,27 +6340,27 @@ SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SE
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   if (0 != igraph_vector_init(&c_map12, 0)) {
@@ -6430,27 +6430,27 @@ SEXP R_igraph_count_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_co
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   c_count=0;
@@ -6496,27 +6496,27 @@ SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_colo
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(vertex_color1)) {
-      R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
+    R_SEXP_to_vector_int_copy(vertex_color1, &c_vertex_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color1);
   if (!Rf_isNull(vertex_color2)) {
-      R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
+    R_SEXP_to_vector_int_copy(vertex_color2, &c_vertex_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_vertex_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_vertex_color2);
   if (!Rf_isNull(edge_color1)) {
-      R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
+    R_SEXP_to_vector_int_copy(edge_color1, &c_edge_color1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color1);
   if (!Rf_isNull(edge_color2)) {
-      R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
+    R_SEXP_to_vector_int_copy(edge_color2, &c_edge_color2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_edge_color2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edge_color2);
   if (0 != igraph_vector_ptr_init(&c_maps, 0)) {
@@ -6587,9 +6587,9 @@ SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(colors)) {
-      R_SEXP_to_vector_int_copy(colors, &c_colors);
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
   if (0 != igraph_vector_init(&c_labeling, 0)) {
@@ -6675,15 +6675,15 @@ SEXP R_igraph_isomorphic_bliss(SEXP graph1, SEXP graph2, SEXP colors1, SEXP colo
   R_SEXP_to_igraph(graph1, &c_graph1);
   R_SEXP_to_igraph(graph2, &c_graph2);
   if (!Rf_isNull(colors1)) {
-      R_SEXP_to_vector_int_copy(colors1, &c_colors1);
+    R_SEXP_to_vector_int_copy(colors1, &c_colors1);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors1, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors1, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors1);
   if (!Rf_isNull(colors2)) {
-      R_SEXP_to_vector_int_copy(colors2, &c_colors2);
+    R_SEXP_to_vector_int_copy(colors2, &c_colors2);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors2, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors2, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors2);
   if (0 != igraph_vector_init(&c_map12, 0)) {
@@ -6751,9 +6751,9 @@ SEXP R_igraph_automorphisms(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(colors)) {
-      R_SEXP_to_vector_int_copy(colors, &c_colors);
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
   c_sh = (igraph_bliss_sh_t) Rf_asInteger(sh);
@@ -6788,9 +6788,9 @@ SEXP R_igraph_automorphism_group(SEXP graph, SEXP colors, SEXP sh) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(colors)) {
-      R_SEXP_to_vector_int_copy(colors, &c_colors);
+    R_SEXP_to_vector_int_copy(colors, &c_colors);
   } else {
-      IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_colors, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_colors);
   if (0 != igraph_vector_ptr_init(&c_generators, 0)) {

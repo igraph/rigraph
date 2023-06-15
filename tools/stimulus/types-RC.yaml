@@ -669,9 +669,9 @@ VERTEX_COLOR:
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-                R_SEXP_to_vector_int_copy(%I%, &%C%);
+              R_SEXP_to_vector_int_copy(%I%, &%C%);
             } else {
-                IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
+              IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
@@ -696,9 +696,9 @@ EDGE_COLOR:
     INCONV:
         IN: |-
             if (!Rf_isNull(%I%)) {
-                R_SEXP_to_vector_int_copy(%I%, &%C%);
+              R_SEXP_to_vector_int_copy(%I%, &%C%);
             } else {
-                IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
+              IGRAPH_R_CHECK(igraph_vector_int_init(&%C%, 0));
             }
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
         OUT: |-
