@@ -90,7 +90,7 @@ all(degree(g5) == degs)
 V. Havel,
 Poznámka o existenci konečných grafů (A remark on the existence of finite graphs),
 Časopis pro pěstování matematiky 80, 477-480 (1955).
-\url{https://eudml.org/doc/19050}
+https://eudml.org/doc/19050
 
 S. L. Hakimi,
 On Realizability of a Set of Integers as Degrees of the Vertices of a Linear Graph,
