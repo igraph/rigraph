@@ -31,7 +31,9 @@ entry_for_txt <- format(bibentry(
 
 txt <- gsub("Horvát S", "Horvát Sz", entry_for_txt)
 
-aut_new <- sub("Szabolcs", "{\\\\relax Sz}abolcs", authors)
+# FIXME: \relax brings CRAN trouble
+# aut_new <- sub("Szabolcs", "{\\\\relax Sz}abolcs", authors)
+aut_new <- authors
 
 bibentry(
   bibtype = "Manual",
