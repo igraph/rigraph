@@ -66,11 +66,10 @@ betweenness.estimate <- estimate_betweenness
 #'
 #' Both functions allow you to consider only paths of length `cutoff` or
 #' smaller; this can be run for larger graphs, as the running time is not
-#' quadratic (if `cutoff` is small). If `cutoff` is zero or negative,
-#' then the function calculates the exact betweenness scores. Using zero as a
-#' cutoff is *deprecated* and future versions (from 1.4.0) will treat zero
-#' cutoff literally (i.e. no paths considered at all). If you want no cutoff,
-#' use a negative number.
+#' quadratic (if `cutoff` is small). If `cutoff` is negative (the default),
+#' then the function calculates the exact betweenness scores. Since igraph 1.5,
+#' a `cutoff` value of zero is treated literally, i.e. paths of length larger
+#' than zero are ignored.
 #'
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
@@ -133,10 +132,6 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
     weights <- NULL
   }
   cutoff <- as.numeric(cutoff)
-  if (cutoff == 0) {
-    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted betweenness, set it to -1")
-    cutoff <- -1
-  }
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
   if (normalized) {
@@ -173,10 +168,6 @@ edge_betweenness <- function(graph, e = E(graph),
     weights <- NULL
   }
   cutoff <- as.numeric(cutoff)
-  if (cutoff == 0) {
-    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted edge betweenness, set it to -1")
-    cutoff <- -1
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -223,11 +214,10 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #'
 # " You may use the \code{cutoff} argument to consider only paths of length
 #' `cutoff` or smaller. This can be run for larger graphs, as the running
-#' time is not quadratic (if `cutoff` is small). If `cutoff` is zero
-#' or negative (which is the default), then the function calculates the exact
-#' closeness scores. Using zero as a cutoff is *deprecated* and future
-#' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
-#' considered at all). If you want no cutoff, use a negative number.
+#' time is not quadratic (if `cutoff` is small). If `cutoff` is
+#' negative (which is the default), then the function calculates the exact
+#' closeness scores. Since igraph 1.5, a `cutoff` value of zero is treated
+#' literally, i.e. path with a length greater than zero are ignored.
 #'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected
 #' graphs, consider using the harmonic centrality with
@@ -292,10 +282,6 @@ closeness <- function(graph, vids = V(graph),
   }
   normalized <- as.logical(normalized)
   cutoff <- as.numeric(cutoff)
-  if (cutoff == 0) {
-    warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted closeness, set it to -1")
-    cutoff <- -1
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
