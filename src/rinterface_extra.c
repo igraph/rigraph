@@ -2986,6 +2986,9 @@ void R_igraph_restore_pointer(SEXP graph) {
 
 igraph_t *R_igraph_get_pointer(SEXP graph) {
   if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    if (GET_LENGTH(graph) == 11) {
+      Rf_error("This graph was created by igraph < 0.2.\n  Upgrading this format is not supported, sorry.");
+    }
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
   }
 
@@ -9948,7 +9951,9 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 }
 
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
+  if (GET_LENGTH(graph) == 11) {
+    return Rf_mkString("0.1.1");
+  } else if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
     SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
     if (ver != R_UnboundValue) {
       return ver;
@@ -9960,11 +9965,9 @@ SEXP R_igraph_graph_version(SEXP graph) {
   }
 }
 
-SEXP R_igraph_add_version_to_env(SEXP graph) {
+SEXP R_igraph_add_myid_to_env(SEXP graph) {
   uuid_t my_id;
   char my_id_chr[40];
-
-  PROTECT(graph = Rf_duplicate(graph));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
@@ -9972,12 +9975,16 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
-  l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
-  l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
+
+  return graph;
+}
+
+SEXP R_igraph_add_version_to_env(SEXP graph) {
+  SEXP l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
+  SEXP l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
-  UNPROTECT(1);
   return graph;
 }
 
