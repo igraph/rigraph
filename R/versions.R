@@ -22,7 +22,7 @@
 ##
 ## ----------------------------------------------------------------------
 
-pkg_graph_version <- "0.8.0"
+pkg_graph_version <- "1.5.0"
 
 pkg_graph_version_obj <- as.package_version(pkg_graph_version)
 
@@ -96,7 +96,20 @@ upgrade_graph <- function(graph) {
   if (g_ver == "0.4.0") {
     .Call(R_igraph_add_env, graph)
   } else if (g_ver == "0.7.999") {
+    # Not observed in the wild
+    .Call(R_igraph_add_myid_to_env, graph)
     .Call(R_igraph_add_version_to_env, graph)
+  } else if (g_ver == "0.8.0") {
+    .Call(R_igraph_add_version_to_env, graph)
+    graph <- unclass(graph)
+    graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
+    class(graph) <- "igraph"
+
+    # Calling for side effect: error if R_SEXP_to_igraph() fails, create native igraph,
+    # update "me" element of environment
+    V(graph)
+
+    graph
   } else {
     stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
   }
@@ -122,6 +135,17 @@ warn_version <- function(graph) {
       "  Call upgrade_graph() on it to use with the current igraph version\n",
       "  For now we convert it on the fly..."
     )
+
+    # In-place upgrade:
+    # - The igraph element in the igraph_t_idx_env component will be added
+    #   transparently because it's missing.
+    # - The components igraph_t_idx_oi, igraph_t_idx_ii, igraph_t_idx_os,
+    #   igraph_t_idx_is are ignored, but we can't do much about the contents.
+    #   Users will have to call upgrade_graph(), but this is what the message
+    #   is about.
+    if (pkg_graph_version <= "1.5.0") {
+      .Call(R_igraph_add_version_to_env, graph)
+    }
     return(TRUE)
   }
 
@@ -148,4 +172,10 @@ oldsamples <- function() {
     "0.2" = oldsample_0_2(),
     "0.1.1" = oldsample_0_1_1()
   )
+}
+
+clear_native_ptr <- function(g) {
+  gx <- unclass(g)
+  gx[[igraph_t_idx_env]]$igraph <- NULL
+  g
 }
