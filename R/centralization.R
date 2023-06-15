@@ -179,9 +179,6 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #' @param graph The input graph.
 #' @param directed logical scalar, whether to use directed shortest paths for
 #'   calculating betweenness.
-#' @param nobigint Logical scalar, whether to use big integers for the
-#'   betweenness calculation. This argument is deprecated in igraph 1.3 and
-#'   will be removed in igraph 1.4.
 #' @param normalized Logical scalar. Whether to normalize the graph level
 #'   centrality score by dividing by the theoretical maximum.
 #' @return A named list with the following components:
@@ -204,16 +201,12 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #' centr_clo(g, mode = "all")$centralization
 #' centr_betw(g, directed = FALSE)$centralization
 #' centr_eigen(g, directed = FALSE)$centralization
-centr_betw <- function(graph, directed = TRUE, nobigint = TRUE, normalized = TRUE) {
+centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   # Argument checks
   ensure_igraph(graph)
 
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
-
-  if (!missing(nobigint)) {
-    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
-  }
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

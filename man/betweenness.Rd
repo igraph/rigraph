@@ -13,7 +13,6 @@ betweenness(
   v = V(graph),
   directed = TRUE,
   weights = NULL,
-  nobigint = TRUE,
   normalized = FALSE,
   cutoff = -1
 )
@@ -38,9 +37,6 @@ determining the shortest paths.}
 betweenness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
-
-\item{nobigint}{Logical scalar, whether to use big integers during the
-calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.}
 
 \item{normalized}{Logical scalar, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered

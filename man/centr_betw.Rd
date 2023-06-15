@@ -5,17 +5,13 @@
 \alias{centralization.betweenness}
 \title{Centralize a graph according to the betweenness of vertices}
 \usage{
-centr_betw(graph, directed = TRUE, nobigint = TRUE, normalized = TRUE)
+centr_betw(graph, directed = TRUE, normalized = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
 
 \item{directed}{logical scalar, whether to use directed shortest paths for
 calculating betweenness.}
-
-\item{nobigint}{Logical scalar, whether to use big integers for the
-betweenness calculation. This argument is deprecated in igraph 1.3 and
-will be removed in igraph 1.4.}
 
 \item{normalized}{Logical scalar. Whether to normalize the graph level
 centrality score by dividing by the theoretical maximum.}

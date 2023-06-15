@@ -29,7 +29,6 @@
 #' @keywords internal
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
-
   lifecycle::deprecate_soft(
     "1.6.0",
     "estimate_betweenness()",
@@ -86,8 +85,6 @@ betweenness.estimate <- estimate_betweenness
 #'   betweenness. If the graph has a `weight` edge attribute, then this is
 #'   used by default. Weights are used to calculate weighted shortest paths,
 #'   so they are interpreted as distances.
-#' @param nobigint Logical scalar, whether to use big integers during the
-#'   calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.
 #' @param normalized Logical scalar, whether to normalize the betweenness
 #'   scores. If `TRUE`, then the results are normalized by the number of ordered
 #'   or unordered vertex pairs in directed and undirected graphs, respectively.
@@ -122,7 +119,7 @@ betweenness.estimate <- estimate_betweenness
 #' @param cutoff The maximum path length to consider when calculating the
 #'   betweenness. If zero or negative then there is no such limit.
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
-                        nobigint = TRUE, normalized = FALSE, cutoff = -1) {
+                        normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)
 
   v <- as_igraph_vs(graph, v)
@@ -139,9 +136,6 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
   if (cutoff == 0) {
     warning("`cutoff' == 0 will be treated literally from igraph 1.4. If you want unrestricted betweenness, set it to -1")
     cutoff <- -1
-  }
-  if (!missing(nobigint)) {
-    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
   }
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_betweenness_cutoff, graph, v - 1, directed, weights, cutoff)
