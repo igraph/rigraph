@@ -22,14 +22,19 @@
 ##
 ## ----------------------------------------------------------------------
 
-pkg_graph_version <- "1.5.0"
 
-pkg_graph_version_obj <- as.package_version(pkg_graph_version)
+# format versions
+ver_0_1_1 <- 0L   # 0.1.1
+ver_0_4 <- 1L     # 0.4
+ver_0_7_999 <- 2L # 0.7.999
+ver_0_8 <- 3L     # 0.8
+ver_1_5_0 <- 4L   # 1.5.0
+pkg_graph_version <- ver_1_5_0
 
 #' igraph data structure versions
 #'
 #' igraph's internal data representation changes sometimes between
-#' versions. This means that it is not possible to use igraph objects
+#' versions. This means that it is not always possible to use igraph objects
 #' that were created (and possibly saved to a file) with an older
 #' igraph version.
 #'
@@ -41,20 +46,20 @@ pkg_graph_version_obj <- as.package_version(pkg_graph_version)
 #'
 #' @param graph The input graph. If it is missing, then
 #'   the version number of the current data format is returned.
-#' @return A character scalar.
+#' @return An integer scalar.
 #'
 #' @seealso upgrade_graph to convert the data format of a graph.
 #' @family versions
 #' @export
 graph_version <- function(graph) {
   if (missing(graph)) {
-    return(pkg_graph_version_obj)
+    return(pkg_graph_version)
   }
 
   # Don't call is_igraph() here to avoid recursion
   stopifnot(inherits(graph, "igraph"))
 
-  as.package_version(.Call(R_igraph_graph_version, graph))
+  .Call(R_igraph_graph_version, graph)
 }
 
 #' igraph data structure versions
@@ -89,17 +94,17 @@ upgrade_graph <- function(graph) {
   }
 
   if (g_ver > p_ver) {
-    stop("Don't know how to downgrade graph from ", g_ver, " to ", p_ver)
+    stop("Don't know how to downgrade graph from version ", g_ver, " to ", p_ver)
   }
 
   # g_ver < p_ver
-  if (g_ver == "0.4.0") {
+  if (g_ver == ver_0_4) {
     .Call(R_igraph_add_env, graph)
-  } else if (g_ver == "0.7.999") {
+  } else if (g_ver == ver_0_7_999) {
     # Not observed in the wild
     .Call(R_igraph_add_myid_to_env, graph)
     .Call(R_igraph_add_version_to_env, graph)
-  } else if (g_ver == "0.8.0") {
+  } else if (g_ver == ver_0_8) {
     .Call(R_igraph_add_version_to_env, graph)
     graph <- unclass(graph)
     graph[igraph_t_idx_oi:igraph_t_idx_is] <- list(NULL)
@@ -111,7 +116,7 @@ upgrade_graph <- function(graph) {
 
     graph
   } else {
-    stop("Don't know how to upgrade graph from ", g_ver, " to ", p_ver)
+    stop("Don't know how to upgrade graph from version ", g_ver, " to ", p_ver)
   }
 }
 
@@ -123,7 +128,7 @@ warn_version <- function(graph) {
   .Call(R_igraph_vcount, graph)
 
   # graph_version() calls is_igraph(), but that function must call warn_version() for safety
-  their_version <- as.package_version(.Call(R_igraph_graph_version, graph))
+  their_version <- .Call(R_igraph_graph_version, graph)
 
   if (pkg_graph_version == their_version) {
     return(FALSE)
@@ -143,7 +148,7 @@ warn_version <- function(graph) {
     #   igraph_t_idx_is are ignored, but we can't do much about the contents.
     #   Users will have to call upgrade_graph(), but this is what the message
     #   is about.
-    if (pkg_graph_version <= "1.5.0") {
+    if (pkg_graph_version <= ver_1_5_0) {
       .Call(R_igraph_add_version_to_env, graph)
     }
     return(TRUE)

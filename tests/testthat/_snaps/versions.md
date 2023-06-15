@@ -11,7 +11,7 @@
     Code
       upgrade_graph(g)
     Error <simpleError>
-      Don't know how to upgrade graph from 0.1.1 to 1.5.0
+      Don't know how to upgrade graph from version 0 to 4
 
 # we can't upgrade from 0.2 to 1.5.0, on the fly
 
@@ -43,7 +43,7 @@
       g <- oldsample_1_0_0()
       graph_version(g)
     Output
-      [1] '0.8.0'
+      [1] 3
     Code
       g
     Message <simpleMessage>
@@ -58,7 +58,7 @@
     Code
       graph_version(g)
     Output
-      [1] '1.5.0'
+      [1] 4
 
 # reading of old igraph formats
 
