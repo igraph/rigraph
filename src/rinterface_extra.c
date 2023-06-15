@@ -7221,7 +7221,12 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int_copy(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   igraph_vector_ptr_init(&ptrvec,0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &ptrvec, /*no=*/ 0, /*file=*/ 0,
@@ -7234,6 +7239,8 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
     igraph_vector_destroy(vec);
     igraph_free(vec);
   }
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_ptr_destroy(&ptrvec);
 
   UNPROTECT(1);
@@ -7254,7 +7261,12 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
 #endif
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int_copy(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
 #if HAVE_OPEN_MEMSTREAM == 1
   stream=open_memstream(&bp, &size);
 #else
@@ -7266,6 +7278,8 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
                                 minsize, maxsize);
   fclose(stream);
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
   memcpy(RAW(result), bp, sizeof(char)*size);
@@ -7291,7 +7305,12 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   SEXP result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int_copy(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   c_min_size=INTEGER(min_size)[0];
   c_max_size=INTEGER(max_size)[0];
                                         /* Call igraph */
@@ -7299,6 +7318,8 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
                                 /*ptr=*/ 0, &c_no, /*file=*/ 0,
                                 c_min_size, c_max_size);
 
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
                                         /* Convert output */
   PROTECT(no=NEW_INTEGER(1));
   INTEGER(no)[0]=c_no;
