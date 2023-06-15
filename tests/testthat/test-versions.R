@@ -67,6 +67,8 @@ test_that("we can upgrade from 0.6 to 1.5.0, explicitly", {
 })
 
 test_that("we can upgrade from 1.0.0 to 1.5.0, on the fly", {
+  local_igraph_options(print.id = FALSE)
+
   expect_snapshot({
     g <- oldsample_1_0_0()
     graph_version(g)
