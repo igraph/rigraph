@@ -11,11 +11,11 @@ graph_version(graph)
 the version number of the current data format is returned.}
 }
 \value{
-A character scalar.
+An integer scalar.
 }
 \description{
 igraph's internal data representation changes sometimes between
-versions. This means that it is not possible to use igraph objects
+versions. This means that it is not always possible to use igraph objects
 that were created (and possibly saved to a file) with an older
 igraph version.
 }

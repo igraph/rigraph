@@ -139,6 +139,20 @@ enum igraph_t_idx {
   igraph_t_idx_max = 10,
 };
 
+// format versions
+enum igraph_versions {
+  ver_0_1_1,   // 0.1.1
+  ver_0_4,     // 0.4
+  ver_0_7_999, // 0.7.999
+  ver_0_8,     // 0.8
+  ver_1_5_0,   // 1.5.0
+  ver_current = ver_1_5_0
+};
+
+#define R_IGRAPH_VERSION_VAR ".__igraph_version__."
+
+
+
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
     PROTECT(s);
@@ -2566,7 +2580,7 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
     R_igraph_status_handler("Materializing 'from' vector.\n", NULL);
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
-    
+
     long int no_of_edges=igraph_ecount(g);
     data=NEW_NUMERIC(no_of_edges);
     memcpy(REAL(data), g->from.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
@@ -2583,7 +2597,7 @@ static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
 
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
-    
+
     long int no_of_edges=igraph_ecount(g);
     data=NEW_NUMERIC(no_of_edges);
     memcpy(REAL(data), g->to.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
@@ -9973,17 +9987,23 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 
 SEXP R_igraph_graph_version(SEXP graph) {
   if (GET_LENGTH(graph) == 11) {
-    return Rf_mkString("0.1.1");
-  } else if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
-    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
-    if (ver != R_UnboundValue) {
-      return ver;
-    } else {
-      return Rf_mkString("0.7.999");
-    }
-  } else {
-    return Rf_mkString("0.4.0");
+    return Rf_ScalarInteger(ver_0_1_1);
   }
+
+  if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    return Rf_ScalarInteger(ver_0_4);
+  }
+
+  SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
+  if (ver == R_UnboundValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+
+  if (TYPEOF(ver) == STRSXP) {
+    return Rf_ScalarInteger(ver_0_8);
+  }
+
+  return ver;
 }
 
 SEXP R_igraph_add_myid_to_env(SEXP graph) {
@@ -10002,7 +10022,7 @@ SEXP R_igraph_add_myid_to_env(SEXP graph) {
 
 SEXP R_igraph_add_version_to_env(SEXP graph) {
   SEXP l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
-  SEXP l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
+  SEXP l2 = PROTECT(Rf_ScalarInteger(ver_current));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
@@ -10035,7 +10055,7 @@ SEXP R_igraph_add_env(SEXP graph) {
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
-  l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
+  l2 = PROTECT(Rf_ScalarInteger(ver_current)); px++;
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install("igraph")); px++;
