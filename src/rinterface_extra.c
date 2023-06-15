@@ -2566,7 +2566,7 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
     R_igraph_status_handler("Materializing 'from' vector.\n", NULL);
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
-
+    
     long int no_of_edges=igraph_ecount(g);
     data=NEW_NUMERIC(no_of_edges);
     memcpy(REAL(data), g->from.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
@@ -2583,7 +2583,7 @@ static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
 
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
-
+    
     long int no_of_edges=igraph_ecount(g);
     data=NEW_NUMERIC(no_of_edges);
     memcpy(REAL(data), g->to.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
@@ -8475,7 +8475,7 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   SET_VECTOR_ELT(result, 4, eigenvalues);
   SET_VECTOR_ELT(result, 5, eigenvectors);
   SET_VECTOR_ELT(result, 6, history);
-  SET_STRING_ELT(names, 0, Rf_mkChar("cluster.merges"));
+  SET_STRING_ELT(names, 0, Rf_mkChar("merges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("membership"));
   SET_STRING_ELT(names, 2, Rf_mkChar("options"));
   SET_STRING_ELT(names, 3, Rf_mkChar("modularity"));
