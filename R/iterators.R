@@ -554,7 +554,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
       as.numeric(3)
     )
     tmp[as.numeric(x)]
@@ -574,7 +574,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
       as.numeric(1)
     )
     tmp[as.numeric(x)]
@@ -590,7 +590,7 @@ simple_vs_index <- function(x, i, na_ok = FALSE) {
     }
     on.exit(.Call(R_igraph_finalizer))
     tmp <- .Call(
-      R_igraph_vs_adj, graph, x, as.igraph.es(graph, e) - 1,
+      R_igraph_vs_adj, graph, x, as_igraph_es(graph, e) - 1,
       as.numeric(2)
     )
     tmp[as.numeric(x)]
@@ -1394,7 +1394,7 @@ as_igraph_vs <- function(graph, v, na.ok = FALSE) {
   }
 }
 
-as.igraph.es <- function(graph, e) {
+as_igraph_es <- function(graph, e) {
   if (inherits(e, "igraph.es") && !is.null(graph) &&
     !warn_version(graph)) {
     if (get_graph_id(graph) != get_es_graph_id(e)) {
@@ -1498,7 +1498,7 @@ parse_vs_op_args <- function(...) {
 parse_es_op_args <- function(...) {
   parse_op_args(...,
     what = "an edge", is_fun = is_igraph_es,
-    as_fun = as.igraph.es
+    as_fun = as_igraph_es
   )
 }
 

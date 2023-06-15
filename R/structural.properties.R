@@ -765,7 +765,7 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
   delete.vertices <- as.logical(delete.vertices)
 
   on.exit(.Call(R_igraph_finalizer))

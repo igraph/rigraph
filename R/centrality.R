@@ -162,7 +162,7 @@ edge_betweenness <- function(graph, e = E(graph),
   # Argument checks
   ensure_igraph(graph)
 
-  e <- as.igraph.es(graph, e)
+  e <- as_igraph_es(graph, e)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight

@@ -389,7 +389,7 @@ personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V
 reverse_edges_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -472,7 +472,7 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
 is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -506,7 +506,7 @@ is_simple_impl <- function(graph) {
 is_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -540,7 +540,7 @@ has_multiple_impl <- function(graph) {
 count_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -622,7 +622,7 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
 is_mutual_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
-  eids <- as.igraph.es(graph, eids)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

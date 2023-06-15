@@ -185,7 +185,7 @@ delete_edges <- function(graph, edges) {
   ensure_igraph(graph)
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_delete_edges, graph, as.igraph.es(graph, edges) - 1)
+  .Call(R_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
 }
 
 #' Delete vertices from a graph
@@ -375,7 +375,7 @@ is_directed <- function(graph) {
 ends <- function(graph, es, names = TRUE) {
   ensure_igraph(graph)
 
-  es2 <- as.igraph.es(graph, na.omit(es)) - 1
+  es2 <- as_igraph_es(graph, na.omit(es)) - 1
   res <- matrix(NA_integer_, ncol = length(es), nrow = 2)
 
   on.exit(.Call(R_igraph_finalizer))

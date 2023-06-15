@@ -378,7 +378,7 @@ edge_attr <- function(graph, name, index = E(graph)) {
     if (is_complete_iterator(index)) {
       myattr
     } else {
-      index <- as.igraph.es(graph, index)
+      index <- as_igraph_es(graph, index)
       myattr[index]
     }
   }
@@ -462,7 +462,7 @@ i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) 
   single <- is_single_index(index)
   name <- as.character(name)
   if (!missing(index) && check) {
-    index <- as.igraph.es(graph, index)
+    index <- as_igraph_es(graph, index)
   }
 
   eattrs <- .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
@@ -503,7 +503,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   ensure_igraph(graph)
 
   if (!missing(index)) {
-    index <- as.igraph.es(graph, index)
+    index <- as_igraph_es(graph, index)
   }
 
   res <- .Call(R_igraph_mybracket2_copy, graph, igraph_t_idx_attr, igraph_attr_idx_edge)
@@ -530,7 +530,7 @@ edge.attributes <- function(graph, index = E(graph)) {
   }
 
   if (!missing(index)) {
-    index <- as.igraph.es(graph, index)
+    index <- as_igraph_es(graph, index)
     if (any(duplicated(index)) || any(is.na(index))) {
       stop("Invalid edges in index")
     }

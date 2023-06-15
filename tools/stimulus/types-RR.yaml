@@ -151,7 +151,7 @@ EDGESET:
     CALL: '%I%-1'
     DEFAULT:
         ALL: E(%I1%)
-    INCONV: '%I% <- as.igraph.es(%I1%, %I%)'
+    INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
