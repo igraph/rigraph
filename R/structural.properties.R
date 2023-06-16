@@ -1130,6 +1130,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #'
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
+#' Note that `ego()` and `neighborhood()` are synonyms, aliases.
 #'
 #' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
@@ -1226,11 +1227,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
 
 #' @export
 #' @rdname ego
-neighborhood <- function(graph, order = 1, nodes = V(graph),
-                mode = c("all", "out", "in"), mindist = 0) {
-  ego(graph, order = order, nodes = nodes,
-      mode = mode, mindist = mindist)
-}
+neighborhood <- ego
 #' @rdname ego
 #' @family structural.properties
 #' @export

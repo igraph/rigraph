@@ -76,6 +76,7 @@ see details for performance characteristics.}
 \description{
 These functions find the vertices not farther than a given limit from
 another fixed vertex, these are called the neighborhood of the vertex.
+Note that \code{ego()} and \code{neighborhood()} are synonyms, aliases.
 }
 \details{
 The neighborhood of a given order \code{r} of a vertex \code{v} includes all
