@@ -231,9 +231,6 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 #' considered at all). If you want no cutoff, use a negative number.
 #'
-#' `estimate_closeness()` is an alias for `closeness()` with a different
-#' argument order, for sake of compatibility with older versions of igraph.
-#'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected
 #' graphs, consider using the harmonic centrality with
 #' [harmonic_centrality()]
@@ -311,12 +308,27 @@ closeness <- function(graph, vids = V(graph),
   res
 }
 
-#' @family centrality
+#' Deprecated version of `closeness()`
+#'
+#' @description
+#' Use [`closeness()`] with the `cutoff` argument instead.
+#' `r lifecycle::badge("deprecated")`
+#'
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
+
+  lifecycle::deprecate_soft(
+    "1.5.0",
+    "estimate_closeness()",
+    "closeness()",
+    details = "with the cutoff argument."
+  )
+
   closeness(graph, vids, mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }
 
+#' @export
+closeness.estimate <- estimate_closeness
 #' @rdname arpack
 #' @family arpack
 #' @export

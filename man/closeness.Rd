@@ -64,9 +64,6 @@ closeness scores. Using zero as a cutoff is \emph{deprecated} and future
 versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 considered at all). If you want no cutoff, use a negative number.
 
-\code{estimate_closeness()} is an alias for \code{closeness()} with a different
-argument order, for sake of compatibility with older versions of igraph.
-
 Closeness centrality is meaningful only for connected graphs. In disconnected
 graphs, consider using the harmonic centrality with
 \code{\link[=harmonic_centrality]{harmonic_centrality()}}
