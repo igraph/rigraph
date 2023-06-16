@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.4.99.9028
+
+## Bug fixes
+
+  - Revdepcheck results (#789).
+
+## Features
+
+  - Breaking change: `graph_version()` returns an integer scalar (#847).
+
+  - Bump igraph format version to 1.5.0 (#835).
+
+## Chore
+
+  - Copy output integer vector (#841).
+
+## Breaking changes
+
+  - Breaking change: `graph_version()` returns an integer scalar (#847).
+
+
 # igraph 1.4.99.9027
 
 ## Bug fixes
