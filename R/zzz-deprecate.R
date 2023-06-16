@@ -72,8 +72,6 @@ deprecated("average.path.length", mean_distance)
 deprecated("ba.game", sample_pa)
 #' @export barabasi.game
 deprecated("barabasi.game", sample_pa)
-#' @export betweenness.estimate
-deprecated("betweenness.estimate", estimate_betweenness)
 #' @export biconnected.components
 deprecated("biconnected.components", biconnected_components)
 #' @export bipartite.mapping

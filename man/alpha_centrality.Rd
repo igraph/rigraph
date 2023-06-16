@@ -94,10 +94,10 @@ measures of centrality for asymmetric relations'' \emph{Social Networks},
 \code{\link[=eigen_centrality]{eigen_centrality()}} and \code{\link[=power_centrality]{power_centrality()}}
 
 Centrality measures
+\code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
-\code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},

@@ -90,9 +90,9 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{betweenness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
-\code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},
