@@ -986,7 +986,7 @@ path <- function(...) {
       toadd <- unlist(e2[names(e2) == ""])
       attr <- e2[names(e2) != ""]
     }
-    res <- add_edges(e1, as.igraph.vs(e1, toadd), attr = attr)
+    res <- add_edges(e1, as_igraph_vs(e1, toadd), attr = attr)
   } else if ("igraph.vertex" %in% class(e2)) {
     ## Adding vertices, possibly with attributes
     ## If there is a single unnamed argument, that contains the vertex names
@@ -1016,7 +1016,7 @@ path <- function(...) {
       toadd <- unlist(e2[names(e2) == ""])
       attr <- e2[names(e2) != ""]
     }
-    toadd <- as.igraph.vs(e1, toadd)
+    toadd <- as_igraph_vs(e1, toadd)
     lt <- length(toadd)
     if (lt > 2) {
       toadd <- c(toadd[1], rep(toadd[2:(lt - 1)], each = 2), toadd[lt])

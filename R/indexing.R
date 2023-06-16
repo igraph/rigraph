@@ -308,8 +308,8 @@
       mode <- if (directed) "out" else "all"
       lapply(adjacent_vertices(x, i, mode = mode), intersection, V(x)[.env$j])
     } else {
-      i <- as.igraph.vs(x, i)
-      j <- as.igraph.vs(x, j)
+      i <- as_igraph_vs(x, i)
+      j <- as_igraph_vs(x, j)
       mode <- if (directed) "out" else "all"
       ee <- incident_edges(x, i, mode = mode)
       lapply(seq_along(i), function(yy) {
@@ -402,8 +402,8 @@ length.igraph <- function(x) {
     x <- delete_edges(x, todel)
   } else {
     ## Addition or update of an attribute (or both)
-    i <- if (missing(i)) as.numeric(V(x)) else as.igraph.vs(x, i)
-    j <- if (missing(j)) as.numeric(V(x)) else as.igraph.vs(x, j)
+    i <- if (missing(i)) as.numeric(V(x)) else as_igraph_vs(x, i)
+    j <- if (missing(j)) as.numeric(V(x)) else as_igraph_vs(x, j)
     if (length(i) != 0 && length(j) != 0) {
       ## Existing edges, and their endpoints
       exe <- lapply(x[[i, j, ..., edges = TRUE]], as.vector)

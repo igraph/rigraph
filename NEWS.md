@@ -1,290 +1,62 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.4.99.9028
-
-## Bug fixes
-
-  - Revdepcheck results (#789).
-
-## Features
-
-  - Breaking change: `graph_version()` returns an integer scalar (#847).
-
-  - Bump igraph format version to 1.5.0 (#835).
-
-## Chore
-
-  - Copy output integer vector (#841).
+# igraph 1.5.0
 
 ## Breaking changes
 
-  - Breaking change: `graph_version()` returns an integer scalar (#847).
+The internal format of graph objects has changed in a mostly backward-compatible way, to prepare for upgrading the C core to 0.10. Details are described at <https://github.com/igraph/rigraph/wiki/The-igraph-object-format>. Accessing graph objects that have been created with an older igraph version give a clean error message with instructions (#832). The new format cannot be read by igraph 1.4.3 or older, the following error is raised when trying to do so:
 
+```
+This graph was created by an old(er) igraph version.
+  Call upgrade_graph() on it to use with the current igraph version
+  For now we convert it on the fly...
+Error in is_directed(object) : 
+  REAL() can only be applied to a 'numeric', not a 'NULL'
+```
 
-# igraph 1.4.99.9027
+The only supported remedy is to upgrade the igraph package to version 1.5.0 or later.
 
-## Bug fixes
-
-  - Compatibility with tidyselect, mitigate #797.
-
-  - Fix handler lookup and protection (#839).
-
-
-# igraph 1.4.99.9026
-
-## Chore
-
-  - Data as constructed objects (#838).
-
-  - Refactor and add tests (#837).
-
-
-# igraph 1.4.99.9025
-
-## Bug fixes
-
-  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
-
-## Chore
-
-  - Add tests for old version, based on the released version.
-
-Merge branch 'b-830-stop-downgrade-rel'
-
-  - Internal refactorings (#836).
-
-## Breaking changes
-
-  - Breaking change: Clean error message when trying to access a graph that has been saved with a newer or an older version of the package, `graph_version()` returns an object of class `"package_version"` (#832).
-
-
-# igraph 1.4.99.9024
-
-## Bug fixes
-
-  - Fix error message in make\_graph() when simplify=... is used with a non-formula, closes #834.
-
-
-# igraph 1.4.99.9023
-
-## Chore
-
-  - Extract variable.
-
-## Documentation
-
-  - Document running Stimulus \[ci skip\].
-
-## Testing
-
-  - Merge tests (#822).
-
-## Uncategorized
-
-  - Merge commit '1eec234e8'.
-
-  - Merge branch 'cran-1.4.3'.
-
-
-# igraph 1.4.99.9022
-
-## Bug fixes
-
-  - The internal `R_igraph_restore_pointer()` no longer leaks memory (#813).
-
-
-# igraph 1.4.99.9021
-
-## Documentation
-
-  - Update installation troubleshooting info.
-
-
-# igraph 1.4.99.9020
-
-## Documentation
-
-  - Replace gsize by ecount.
-
-
-# igraph 1.4.99.9019
-
-## Documentation
-
-  - Fix use of deprecated functions in examples (#827).
-
-
-# igraph 1.4.99.9018
-
-## Testing
-
-  - Add more tests for `graph_from_literal()` (#826).
-
-
-# igraph 1.4.99.9017
-
-## Bug fixes
-
-  - Rename `merges` to `cluster_merges` in output of `cluster_leading_eigen()` (#820).
+`graph_version()` now returns an integer scalar (#832, #847), `4` as of igraph 1.5.0 (#835).
 
 ## Features
 
-  - Avoid vertex and edge sequences in attributes (#808).
+- Vertex and edge sequences are converted to numeric vectors when used in attributes (#808).
 
-## Documentation
-
-  - Update links to igraph webpage (#780).
-
-## Testing
-
-  - Reenable serialization test (#809).
-
-  - Stabilize tests (#823).
-
-
-# igraph 1.4.99.9016
-
-## Chore
-
-  - The `from` and `to` components of the R representation of an igraph objects use ALTREP to avoid unnecessary materialization (#804).
-
-
-# igraph 1.4.99.9015
-
-## Refactoring
-
-  - Use bool in some places for better readability.
-
-
-# igraph 1.4.99.9014
-
-## Features
-
-  - New `largest_component()` returns the largest connected component (#786).
-
-## Documentation
-
-  - Fix typos in eigen\_centrality docs, thanks @JJ\!
-
-
-# igraph 1.4.99.9013
+- New `largest_component()` returns the largest connected component (#786, @ngmaclaren).
 
 ## Bug fixes
 
-  - Fix direction of edges when restoring (#805).
+  - Fix error message in `make_graph()` when `simplify = ...` is used with a non-formula (#834).
 
+## Testing
 
-# igraph 1.4.99.9012
+- Add more tests for `graph_from_literal()` (#826).
 
-  - Merge branch 'cran-1.4.3' (early part).
-
-  - Merge branch 'cran-1.4.3' (early part).
-
-  - Update CONTRIBUTING.md (#791).
-
-
-# igraph 1.4.99.9011
-
-## Chore
-
-  - Restore igraph pointer (#799).
-
-## Refactoring
-
-  - Create `ensure_igraph()` (#730).
-
-
-# igraph 1.4.99.9010
+- Reenable serialization test and tests for `dyad_census()`, stabilize tests (#809, #822, #823).
 
 ## Documentation
 
-  - Add ORCID to DESCRIPTION, add Kirill's ORCID + desc::desc\_normalize() (#774).
+- The documentation for the R package is now hosted at <https://r.igraph.org/> (#780).
 
-  - Add DOI to CITATION (#773).
+- Update `vignette("installation-troubleshooting")`.
 
-## Uncategorized
+- Fix use of deprecated functions in examples, e.g., replace `gsize()` by `ecount()` (#827).
 
-  - Add authors links to pkgdown config (#766).
+- Fix typos in `?eigen_centrality` docs (@JJ).
 
+- Update CONTRIBUTING.md and ORCID information (#791, #774).
 
-# igraph 1.4.99.9009
+- Add DOI to CITATION (#773).
 
-## Chore
+## Internal
 
-  - igraph pointer accessors (#796).
+- Add data for old igraph versions as constructed objects, and tests (#838).
 
+- Ensure we're always using named indexes to access the internal data structure (#784).
 
-# igraph 1.4.99.9008
+- Prepare migration to igraph/C 0.10 (#781).
 
-## Chore
-
-  - Store graph pointer in environment (#794).
-
-  - Prepare for storing igraph object in R structure (#795).
-
-
-# igraph 1.4.99.9007
-
-## Chore
-
-  - Copy for igraph data members (#793).
-
-  - Get/set for igraph data members (#792).
-
-
-# igraph 1.4.99.9006
-
-## Chore
-
-  - Ensure we're always using named indexes to access the internal data structure (#784).
-
-
-# igraph 1.4.99.9005
-
-## Chore
-
-  - Remove redundant AUTHORS link from DESCRIPTION.
-
-  - Prepare migration to igraph/C 0.10 (#781).
-
-  - Update NEWS.
-
-
-# igraph 1.4.99.9004
-
-## Bug fixes (already in 1.4.3)
-
-  - Fix tests for dev waldo (#779).
-
-## Uncategorized (already in 1.4.3)
-
-  - Fix linking on Windows: gfortran needs quadmath. (#778).
-
-
-# igraph 1.4.99.9003
-
-## Documentation (already in 1.4.3)
-
-  - Mention limitation of Pajek reader, refs #776.
-
-
-# igraph 1.4.99.9002
-
-## Chore
-
-  - Bump stimulus.
-
-
-# igraph 1.4.99.9001
-
-## Chore
-
-  - Update generated interface (#765).
-
-
-# igraph 1.4.99.9000
-
-- Internal changes only.
+- Update generated interface (#765).
 
 
 # igraph 1.4.3
