@@ -187,9 +187,9 @@ stochastic block model.</p>
 <span class="r-in"><span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">sample_hierarchical_sbm</span><span class="op">(</span><span class="fl">100</span>, <span class="fl">10</span>, rho <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span>, C <span class="op">=</span> <span class="va">C</span>, p <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">20</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 2eb631d U--- 100 464 -- Hierarchical stochastic block model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH dfc77ba U--- 100 464 -- Hierarchical stochastic block model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), rho (g/n), C (g/n), p (g/n)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 2eb631d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from dfc77ba:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1-- 2  1-- 3  2-- 3  1-- 4  2-- 4  3-- 4  1-- 5  2-- 5  3-- 5  1-- 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  2-- 6  3-- 6  4-- 8  5-- 8  4-- 9  5-- 9  6-- 9  4--10  5--10  6--10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  8-- 9  7--10  8--10  9--10 11--12 11--13 12--13 12--14 11--15 12--15</span>
@@ -199,7 +199,7 @@ stochastic block model.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [61] 26--30 27--29 28--29 27--30 28--30 31--32 31--33 32--33 31--35 33--35</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [71] 31--36 32--36 33--36 34--37 35--37 36--37 34--38 35--38 36--38 34--39</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org" class="external-link">Matrix</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">g</span><span class="op">[</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-plt img"><img src="sample_hierarchical_sbm-1.png" alt="" width="700" height="433"></span>
