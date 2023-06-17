@@ -7449,11 +7449,7 @@ SEXP R_igraph_from_prufer(SEXP prufer) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (!Rf_isNull(prufer)) {
-    R_SEXP_to_vector_int_copy(prufer, &c_prufer);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&c_prufer, 0));
-  }
+  R_SEXP_to_vector_int_copy(prufer, &c_prufer);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_prufer);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_from_prufer(&c_graph, &c_prufer));
