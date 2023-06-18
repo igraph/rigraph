@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9001
+
+## Bug fixes
+
+  - `types-RC.yaml` (#846).
+
+
 # igraph 1.5.0.9000
 
 - Merge branch 'cran-1.5.0'.
