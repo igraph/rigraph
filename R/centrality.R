@@ -25,8 +25,6 @@
 #' `r lifecycle::badge("deprecated")`
 #' @param vids The vertices for which the vertex betweenness estimation will be
 #'   calculated.
-#' @param cutoff The maximum path length to consider when calculating the
-#'   betweenness. If zero or negative then there is no such limit.
 #' @inheritParams betweenness
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
@@ -120,6 +118,8 @@ betweenness.estimate <- estimate_betweenness
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
+#' @param cutoff The maximum path length to consider when calculating the
+#'   betweenness. If zero or negative then there is no such limit.
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         nobigint = TRUE, normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)

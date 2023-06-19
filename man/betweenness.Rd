@@ -50,6 +50,9 @@ In an undirected graph,
 \eqn{B^n}{Bnorm} is the normalized, \eqn{B} the raw betweenness, and \eqn{n}
 is the number of vertices in the graph.}
 
+\item{cutoff}{The maximum path length to consider when calculating the
+betweenness. If zero or negative then there is no such limit.}
+
 \item{e}{The edges for which the edge betweenness will be calculated.}
 }
 \value{
