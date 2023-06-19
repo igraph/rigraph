@@ -3,7 +3,6 @@
 \name{closeness}
 \alias{closeness}
 \alias{closeness.estimate}
-\alias{estimate_closeness}
 \title{Closeness centrality of vertices}
 \usage{
 closeness(
