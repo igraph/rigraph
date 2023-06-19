@@ -27,6 +27,7 @@
 #'   calculated.
 #' @param cutoff The maximum path length to consider when calculating the
 #'   betweenness. If zero or negative then there is no such limit.
+#' @inheritParams betweenness
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
 
@@ -194,6 +195,7 @@ edge_betweenness <- function(graph, e = E(graph),
 #' Use [`edge_betweenness()`] with the `cutoff` argument instead.
 #' `r lifecycle::badge("deprecated")`
 #'
+#' @inheritParams edge_betweenness
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
@@ -314,6 +316,7 @@ closeness <- function(graph, vids = V(graph),
 #' Use [`closeness()`] with the `cutoff` argument instead.
 #' `r lifecycle::badge("deprecated")`
 #'
+#' @inheritParams closeness
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
 
