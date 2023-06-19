@@ -1009,7 +1009,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
   } else {
     res <- .Call(
       R_igraph_spinglass_my_community, graph, weights,
-      as.igraph.vs(graph, vertex) - 1, as.numeric(spins),
+      as_igraph_vs(graph, vertex) - 1, as.numeric(spins),
       as.numeric(update.rule), as.numeric(gamma)
     )
     res$community <- res$community + 1
@@ -1690,11 +1690,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   res$algorithm <- "leading eigenvector"
   res$vcount <- vcount(graph)
   res$membership <- res$membership + 1
-  res$cluster.merges <- res$cluster.merges + 1
-
-  # tidygraph compatibility
-  res$merges <- res$cluster.merges
-
+  res$merges <- res$merges + 1
   res$history <- res$history + 1
   class(res) <- "communities"
   res

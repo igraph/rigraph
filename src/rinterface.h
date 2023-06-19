@@ -25,9 +25,6 @@
 
 #include "uuid/uuid.h"
 
-#define R_IGRAPH_TYPE_VERSION "0.8.0"
-#define R_IGRAPH_VERSION_VAR ".__igraph_version__."
-
 SEXP R_igraph_add_env(SEXP graph);
 
 void R_igraph_set_in_r_check(bool set);

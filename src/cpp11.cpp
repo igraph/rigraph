@@ -17,6 +17,7 @@ extern "C" {
 /* .Call calls */
 extern SEXP R_igraph_add_edges(SEXP, SEXP);
 extern SEXP R_igraph_add_env(SEXP);
+extern SEXP R_igraph_add_myid_to_env(SEXP);
 extern SEXP R_igraph_add_version_to_env(SEXP);
 extern SEXP R_igraph_add_vertices(SEXP, SEXP);
 extern SEXP R_igraph_address(SEXP);
@@ -398,6 +399,7 @@ extern SEXP promise_expr_(SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_edges",                                  (DL_FUNC) &R_igraph_add_edges,                                   2},
     {"R_igraph_add_env",                                    (DL_FUNC) &R_igraph_add_env,                                     1},
+    {"R_igraph_add_myid_to_env",                            (DL_FUNC) &R_igraph_add_myid_to_env,                             1},
     {"R_igraph_add_version_to_env",                         (DL_FUNC) &R_igraph_add_version_to_env,                          1},
     {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_address",                                    (DL_FUNC) &R_igraph_address,                                     1},

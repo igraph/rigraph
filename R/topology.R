@@ -140,7 +140,7 @@ graph.get.subisomorphisms.vf2 <- function(graph1, graph2, vertex.color1,
 graph.isoclass.subgraph <- function(graph, vids) {
   # Argument checks
   ensure_igraph(graph)
-  vids <- as.igraph.vs(graph, vids) - 1
+  vids <- as_igraph_vs(graph, vids) - 1
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -170,7 +170,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
     if (length(domains) != vcount(pattern)) {
       stop("`domains' length and `pattern' number of vertices must match")
     }
-    domains <- lapply(domains, function(x) as.igraph.vs(target, x) - 1)
+    domains <- lapply(domains, function(x) as_igraph_vs(target, x) - 1)
   }
 
   on.exit(.Call(R_igraph_finalizer))

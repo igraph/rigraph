@@ -107,7 +107,7 @@ int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
-int R_SEXP_to_vector_int(SEXP sv, igraph_vector_int_t *v);
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
 int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v);
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
@@ -138,6 +138,20 @@ enum igraph_t_idx {
   igraph_t_idx_env = 9,
   igraph_t_idx_max = 10,
 };
+
+// format versions
+enum igraph_versions {
+  ver_0_1_1,   // 0.1.1
+  ver_0_4,     // 0.4
+  ver_0_7_999, // 0.7.999
+  ver_0_8,     // 0.8
+  ver_1_5_0,   // 1.5.0
+  ver_current = ver_1_5_0
+};
+
+#define R_IGRAPH_VERSION_VAR ".__igraph_version__."
+
+
 
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {
@@ -2986,6 +3000,9 @@ void R_igraph_restore_pointer(SEXP graph) {
 
 igraph_t *R_igraph_get_pointer(SEXP graph) {
   if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    if (GET_LENGTH(graph) == 11) {
+      Rf_error("This graph was created by igraph < 0.2.\n  Upgrading this format is not supported, sorry.");
+    }
     Rf_error("This graph was created by a now unsupported old igraph version.\n  Call upgrade_version() before using igraph functions on that object.");
   }
 
@@ -3604,10 +3621,13 @@ int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v) {
   return 0;
 }
 
-int R_SEXP_to_vector_int(SEXP sv, igraph_vector_int_t *v) {
-  v->stor_begin=(int*) INTEGER(sv);
-  v->stor_end=v->stor_begin+GET_LENGTH(sv);
-  v->end=v->stor_end;
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
+  long int i, n=GET_LENGTH(sv);
+  int *svv=INTEGER(sv);
+  igraph_vector_int_init(v, n);
+  for (i = 0; i<n; i++) {
+    VECTOR(*v)[i] = svv[i];
+  }
   return 0;
 }
 
@@ -7215,7 +7235,12 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   igraph_vector_ptr_init(&ptrvec,0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &ptrvec, /*no=*/ 0, /*file=*/ 0,
@@ -7228,6 +7253,8 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
     igraph_vector_destroy(vec);
     igraph_free(vec);
   }
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_ptr_destroy(&ptrvec);
 
   UNPROTECT(1);
@@ -7248,7 +7275,12 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
 #endif
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
 #if HAVE_OPEN_MEMSTREAM == 1
   stream=open_memstream(&bp, &size);
 #else
@@ -7260,6 +7292,8 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
                                 /*ptr=*/ 0, /*no=*/ 0, /*file=*/ stream,
                                 minsize, maxsize);
   fclose(stream);
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
   memcpy(RAW(result), bp, sizeof(char)*size);
@@ -7285,7 +7319,12 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   SEXP result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+     R_SEXP_to_vector_int_copy(psubset, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   c_min_size=INTEGER(min_size)[0];
   c_max_size=INTEGER(max_size)[0];
                                         /* Call igraph */
@@ -7293,6 +7332,8 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
                                 /*ptr=*/ 0, &c_no, /*file=*/ 0,
                                 c_min_size, c_max_size);
 
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
                                         /* Convert output */
   PROTECT(no=NEW_INTEGER(1));
   INTEGER(no)[0]=c_no;
@@ -8448,7 +8489,7 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   SET_VECTOR_ELT(result, 4, eigenvalues);
   SET_VECTOR_ELT(result, 5, eigenvectors);
   SET_VECTOR_ELT(result, 6, history);
-  SET_STRING_ELT(names, 0, Rf_mkChar("cluster.merges"));
+  SET_STRING_ELT(names, 0, Rf_mkChar("merges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("membership"));
   SET_STRING_ELT(names, 2, Rf_mkChar("options"));
   SET_STRING_ELT(names, 3, Rf_mkChar("modularity"));
@@ -9945,23 +9986,29 @@ SEXP R_igraph_identical_graphs(SEXP g1, SEXP g2, SEXP attrs) {
 }
 
 SEXP R_igraph_graph_version(SEXP graph) {
-  if (GET_LENGTH(graph) == igraph_t_idx_max && Rf_isEnvironment(R_igraph_graph_env(graph))) {
-    SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
-    if (ver != R_UnboundValue) {
-      return ver;
-    } else {
-      return Rf_mkString("0.7.999");
-    }
-  } else {
-    return Rf_mkString("0.4.0");
+  if (GET_LENGTH(graph) == 11) {
+    return Rf_ScalarInteger(ver_0_1_1);
   }
+
+  if (GET_LENGTH(graph) != igraph_t_idx_max || !Rf_isEnvironment(R_igraph_graph_env(graph))) {
+    return Rf_ScalarInteger(ver_0_4);
+  }
+
+  SEXP ver = Rf_findVar(Rf_install(R_IGRAPH_VERSION_VAR), R_igraph_graph_env(graph));
+  if (ver == R_UnboundValue) {
+    return Rf_ScalarInteger(ver_0_7_999);
+  }
+
+  if (TYPEOF(ver) == STRSXP) {
+    return Rf_ScalarInteger(ver_0_8);
+  }
+
+  return ver;
 }
 
-SEXP R_igraph_add_version_to_env(SEXP graph) {
+SEXP R_igraph_add_myid_to_env(SEXP graph) {
   uuid_t my_id;
   char my_id_chr[40];
-
-  PROTECT(graph = Rf_duplicate(graph));
 
   uuid_generate(my_id);
   uuid_unparse_lower(my_id, my_id_chr);
@@ -9969,12 +10016,16 @@ SEXP R_igraph_add_version_to_env(SEXP graph) {
   SEXP l2 = PROTECT(Rf_mkString(my_id_chr));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
-  l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
-  l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION));
+
+  return graph;
+}
+
+SEXP R_igraph_add_version_to_env(SEXP graph) {
+  SEXP l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR));
+  SEXP l2 = PROTECT(Rf_ScalarInteger(ver_current));
   Rf_defineVar(l1, l2, R_igraph_graph_env(graph));
   UNPROTECT(2);
 
-  UNPROTECT(1);
   return graph;
 }
 
@@ -10004,7 +10055,7 @@ SEXP R_igraph_add_env(SEXP graph) {
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install(R_IGRAPH_VERSION_VAR)); px++;
-  l2 = PROTECT(Rf_mkString(R_IGRAPH_TYPE_VERSION)); px++;
+  l2 = PROTECT(Rf_ScalarInteger(ver_current)); px++;
   Rf_defineVar(l1, l2, R_igraph_graph_env(result));
 
   l1 = PROTECT(Rf_install("igraph")); px++;
