@@ -105,9 +105,9 @@ Measures. \emph{American Journal of Sociology}, 92, 1170-1182.
 \seealso{
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{betweenness}()},
 \code{\link{closeness}()},
 \code{\link{diversity}()},
-\code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},

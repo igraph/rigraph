@@ -72,8 +72,6 @@ deprecated("average.path.length", mean_distance)
 deprecated("ba.game", sample_pa)
 #' @export barabasi.game
 deprecated("barabasi.game", sample_pa)
-#' @export betweenness.estimate
-deprecated("betweenness.estimate", estimate_betweenness)
 #' @export biconnected.components
 deprecated("biconnected.components", biconnected_components)
 #' @export bipartite.mapping
@@ -117,8 +115,6 @@ deprecated("cited.type.game", sample_cit_types)
 deprecated("citing.cited.type.game", sample_cit_cit_types)
 #' @export clique.number
 deprecated("clique.number", clique_num)
-#' @export closeness.estimate
-deprecated("closeness.estimate", estimate_closeness)
 #' @export cluster.distribution
 deprecated("cluster.distribution", component_distribution)
 #' @export clusters
@@ -163,8 +159,6 @@ deprecated("dyad.census", dyad_census)
 deprecated("edge.betweenness", edge_betweenness)
 #' @export edge.betweenness.community
 deprecated("edge.betweenness.community", cluster_edge_betweenness)
-#' @export edge.betweenness.estimate
-deprecated("edge.betweenness.estimate", estimate_edge_betweenness)
 #' @export edge.connectivity
 deprecated("edge.connectivity", edge_connectivity)
 #' @export edge.disjoint.paths

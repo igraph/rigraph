@@ -19,20 +19,29 @@
 #
 ###################################################################
 
-#' @rdname betweenness
+#' Deprecated version of `betweenness()`
+#'
+#' @description Use [`betweenness()`] with the `cutoff` argument instead.
+#' `r lifecycle::badge("deprecated")`
 #' @param vids The vertices for which the vertex betweenness estimation will be
 #'   calculated.
-#' @param cutoff The maximum path length to consider when calculating the
-#'   betweenness. If zero or negative then there is no such limit.
-#' @family centrality
+#' @inheritParams betweenness
+#' @keywords internal
 #' @export
-estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL, nobigint = TRUE) {
-  if (!missing(nobigint)) {
-    warning("'nobigint' is deprecated since igraph 1.3 and will be removed in igraph 1.4")
-  }
+estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
+
+  lifecycle::deprecate_soft(
+    "1.6.0",
+    "estimate_betweenness()",
+    "betweenness()",
+    details = "with the cutoff argument."
+  )
+
   betweenness(graph, v = vids, directed = directed, cutoff = cutoff, weights = weights)
 }
 
+#' @export
+betweenness.estimate <- estimate_betweenness
 
 
 #' Vertex and edge betweenness centrality
@@ -64,16 +73,11 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #' cutoff literally (i.e. no paths considered at all). If you want no cutoff,
 #' use a negative number.
 #'
-#' `estimate_betweenness()` and `estimate_edge_betweenness()` are
-#' aliases for `betweenness()` and `edge_betweenness()`, with a different
-#' argument order, for sake of compatibility with older versions of igraph.
-#'
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #'
 #' @aliases betweenness edge.betweenness betweenness.estimate
-#' edge.betweenness.estimate edge_betweenness estimate_betweenness
-#' estimate_edge_betweenness
+#' edge.betweenness.estimate edge_betweenness
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
@@ -115,6 +119,8 @@ estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff
 #' betweenness(g)
 #' edge_betweenness(g)
 #'
+#' @param cutoff The maximum path length to consider when calculating the
+#'   betweenness. If zero or negative then there is no such limit.
 betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
                         nobigint = TRUE, normalized = FALSE, cutoff = -1) {
   ensure_igraph(graph)
@@ -184,12 +190,28 @@ edge_betweenness <- function(graph, e = E(graph),
   res[as.numeric(e)]
 }
 
-#' @family centrality
+#' Deprecated version of `edge_betweenness()`
+#'
+#' @description
+#' Use [`edge_betweenness()`] with the `cutoff` argument instead.
+#' `r lifecycle::badge("deprecated")`
+#'
+#' @inheritParams edge_betweenness
+#' @keywords internal
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
+    lifecycle::deprecate_soft(
+    "1.6.0",
+    "estimate_edge_betweenness()",
+    "edge_betweenness()",
+    details = "with the cutoff argument."
+  )
   edge_betweenness(graph, e, directed = directed, cutoff = cutoff, weights = weights)
 }
+
+#' @export
+edge.betweenness.estimate <- estimate_edge_betweenness
 
 #' Closeness centrality of vertices
 #'
@@ -213,14 +235,11 @@ estimate_edge_betweenness <- function(graph, e = E(graph),
 #' versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 #' considered at all). If you want no cutoff, use a negative number.
 #'
-#' `estimate_closeness()` is an alias for `closeness()` with a different
-#' argument order, for sake of compatibility with older versions of igraph.
-#'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected
 #' graphs, consider using the harmonic centrality with
 #' [harmonic_centrality()]
 #'
-#' @aliases closeness closeness.estimate estimate_closeness
+#' @aliases closeness closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
@@ -293,12 +312,29 @@ closeness <- function(graph, vids = V(graph),
   res
 }
 
-#' @family centrality
+#' Deprecated version of `closeness()`
+#'
+#' @description
+#' Use [`closeness()`] with the `cutoff` argument instead.
+#' `r lifecycle::badge("deprecated")`
+#'
+#' @inheritParams closeness
+#' @keywords internal
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
+
+  lifecycle::deprecate_soft(
+    "1.6.0",
+    "estimate_closeness()",
+    "closeness()",
+    details = "with the cutoff argument."
+  )
+
   closeness(graph, vids, mode = mode, weights = weights, normalized = normalized, cutoff = cutoff)
 }
 
+#' @export
+closeness.estimate <- estimate_closeness
 #' @rdname arpack
 #' @family arpack
 #' @export
