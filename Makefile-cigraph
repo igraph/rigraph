@@ -206,6 +206,7 @@ pre_build: venv patches $(CSRC) $(CINC2) $(PARSER2) $(RSRC) $(RGEN) \
 
 clean:
 	rm -rf src/core src/vendor src/include src/Makevars.in src/Makevars.ucrt src/Makevars.win src/config.h.in src/rinterface.c R/aaa-auto.R
+	git -C $(top_srcdir) reset --hard
 
 .PHONY: all igraph force clean check check-cran check-rhub check-links install test
 
