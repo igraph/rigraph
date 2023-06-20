@@ -26,6 +26,7 @@
 #' @param vids The vertices for which the vertex betweenness estimation will be
 #'   calculated.
 #' @inheritParams betweenness
+#' @keywords internal
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
 
@@ -196,6 +197,7 @@ edge_betweenness <- function(graph, e = E(graph),
 #' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams edge_betweenness
+#' @keywords internal
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
@@ -317,6 +319,7 @@ closeness <- function(graph, vids = V(graph),
 #' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams closeness
+#' @keywords internal
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
 

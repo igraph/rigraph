@@ -32,3 +32,4 @@ so they are interpreted as distances.}
 Use \code{\link[=edge_betweenness]{edge_betweenness()}} with the \code{cutoff} argument instead.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\keyword{internal}

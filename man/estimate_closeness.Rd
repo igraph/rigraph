@@ -41,3 +41,4 @@ all reachable vertices.}
 Use \code{\link[=closeness]{closeness()}} with the \code{cutoff} argument instead.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
+\keyword{internal}

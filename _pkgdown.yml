@@ -237,9 +237,6 @@ reference:
   - layout.spring
   - layout.svd
   - "%>%"
-  - estimate_betweenness
-  - estimate_edge_betweenness
-  - estimate_closeness
 
 authors:
   Gábor Csárdi:
