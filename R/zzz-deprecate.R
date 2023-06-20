@@ -447,8 +447,6 @@ deprecated("mod.matrix", modularity_matrix)
 #' @export multilevel.community
 deprecated("multilevel.community", cluster_louvain)
 
-#' @export neighborhood
-deprecated("neighborhood", ego)
 #' @export neighborhood.size
 deprecated("neighborhood.size", ego_size)
 #' @export no.clusters
