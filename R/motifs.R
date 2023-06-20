@@ -191,7 +191,13 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' dyad_census(g)
 #' @family graph motifs
 #' @export
-dyad_census <- dyad_census_impl
+dyad_census <- function(graph) {
+  if (!is_directed(graph)) {
+    warn("`dyad_census()` requires a directed graph.")
+  }
+
+  dyad_census_impl(graph)
+}
 
 
 #' Triad census, subgraphs with three vertices

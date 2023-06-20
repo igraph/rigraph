@@ -1406,10 +1406,6 @@ dyad_census_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)
 
-  if (!is_directed(graph)) {
-    warn("`dyad_census()` requires a directed graph.")
-  }
-
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_dyad_census, graph)
@@ -2253,3 +2249,4 @@ vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors"))
   }
   res
 }
+
