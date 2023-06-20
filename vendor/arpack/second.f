@@ -11,22 +11,11 @@
 *  =======
 *
 *  SECOND returns the user time for a process in igraphseconds.
-*  This version gets the time from the system function ETIME.
+*  This version was changed in igraph to always return zero, since
+*  we do not need the timings. The original version used the
+*  non-standard ETIME, which is unsupported by flang.
 *
-*     .. Local Scalars ..
-      REAL               T1
-*     ..
-*     .. Local Arrays ..
-      REAL               TARRAY( 2 )
-*     ..
-*     .. External Functions ..
-      REAL               ETIME
-*     ..
-*     .. Executable Statements ..
-*
-      TARRAY( 1 ) = 0.0
-      T1 = ETIME( TARRAY )
-      T  = TARRAY( 1 )
+      T  = 0.0e+0
 
       RETURN
 *

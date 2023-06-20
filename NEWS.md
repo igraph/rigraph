@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9002
+
+## Bug fixes
+
+  - Avoid using of non-standard Fortran function ETIME (#858).
+
+  - Use -lquadmath in Makevars.win.
+
+for compatibility with alternative R distributions such as Microsoft R Open
+
+fixes #855
+
+## Chore
+
+  - Ci sanitizer (#854).
+
+  - Remove redundant reference to AUTHORS from DESCRIPTION.
+
+
 # igraph 1.5.0.9001
 
 ## Bug fixes

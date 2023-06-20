@@ -3,7 +3,6 @@
 \name{closeness}
 \alias{closeness}
 \alias{closeness.estimate}
-\alias{estimate_closeness}
 \title{Closeness centrality of vertices}
 \usage{
 closeness(
@@ -64,9 +63,6 @@ closeness scores. Using zero as a cutoff is \emph{deprecated} and future
 versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 considered at all). If you want no cutoff, use a negative number.
 
-\code{estimate_closeness()} is an alias for \code{closeness()} with a different
-argument order, for sake of compatibility with older versions of igraph.
-
 Closeness centrality is meaningful only for connected graphs. In disconnected
 graphs, consider using the harmonic centrality with
 \code{\link[=harmonic_centrality]{harmonic_centrality()}}
@@ -90,9 +86,9 @@ Conceptual Clarification. \emph{Social Networks}, 1, 215-239.
 
 Centrality measures
 \code{\link{alpha_centrality}()},
+\code{\link{betweenness}()},
 \code{\link{diversity}()},
 \code{\link{eigen_centrality}()},
-\code{\link{estimate_betweenness}()},
 \code{\link{harmonic_centrality}()},
 \code{\link{hub_score}()},
 \code{\link{page_rank}()},

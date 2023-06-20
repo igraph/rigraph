@@ -1130,6 +1130,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #'
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
+#' Note that `ego()` and `neighborhood()` are synonyms, aliases.
 #'
 #' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
@@ -1139,7 +1140,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' `ego_size()` returns the size of the neighborhoods of the given order,
 #' for each given vertex.
 #'
-#' `ego()` returns the vertices belonging to the neighborhoods of the given
+#' `ego()`/`neighborhood()` (synonyms) returns the vertices belonging to the neighborhoods of the given
 #' order, for each given vertex.
 #'
 #' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
@@ -1165,7 +1166,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @return
 #'   \itemize{
 #'   \item{`ego_size()` returns with an integer vector.}
-#'   \item{`ego()` returns A list of `igraph.vs` or a list of numeric
+#'   \item{`ego()`/`neighborhood()` (synonyms) returns A list of `igraph.vs` or a list of numeric
 #'         vectors depending on the value of `igraph_opt("return.vs.es")`,
 #'         see details for performance characteristics.}
 #'   \item{`make_ego_graph()` returns with a list of graphs.}
@@ -1185,6 +1186,10 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' ego(g, order = 0, 1:3)
 #' ego(g, order = 1, 1:3)
 #' ego(g, order = 2, 1:3)
+#' # neighborhood() is an alias of ego()
+#' neighborhood(g, order = 0, 1:3)
+#' neighborhood(g, order = 1, 1:3)
+#' neighborhood(g, order = 2, 1:3)
 #'
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
@@ -1220,6 +1225,9 @@ ego <- function(graph, order = 1, nodes = V(graph),
   res
 }
 
+#' @export
+#' @rdname ego
+neighborhood <- ego
 #' @rdname ego
 #' @family structural.properties
 #' @export

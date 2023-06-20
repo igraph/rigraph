@@ -30,6 +30,14 @@ ego(
   mindist = 0
 )
 
+neighborhood(
+  graph,
+  order = 1,
+  nodes = V(graph),
+  mode = c("all", "out", "in"),
+  mindist = 0
+)
+
 make_ego_graph(
   graph,
   order = 1,
@@ -58,7 +66,7 @@ argument is ignored for undirected graphs.}
 \value{
 \itemize{
 \item{\code{ego_size()} returns with an integer vector.}
-\item{\code{ego()} returns A list of \code{igraph.vs} or a list of numeric
+\item{\code{ego()}/\code{neighborhood()} (synonyms) returns A list of \code{igraph.vs} or a list of numeric
 vectors depending on the value of \code{igraph_opt("return.vs.es")},
 see details for performance characteristics.}
 \item{\code{make_ego_graph()} returns with a list of graphs.}
@@ -68,6 +76,7 @@ see details for performance characteristics.}
 \description{
 These functions find the vertices not farther than a given limit from
 another fixed vertex, these are called the neighborhood of the vertex.
+Note that \code{ego()} and \code{neighborhood()} are synonyms, aliases.
 }
 \details{
 The neighborhood of a given order \code{r} of a vertex \code{v} includes all
@@ -78,7 +87,7 @@ is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 \code{ego_size()} returns the size of the neighborhoods of the given order,
 for each given vertex.
 
-\code{ego()} returns the vertices belonging to the neighborhoods of the given
+\code{ego()}/\code{neighborhood()} (synonyms) returns the vertices belonging to the neighborhoods of the given
 order, for each given vertex.
 
 \code{make_ego_graph()} is creates (sub)graphs from all neighborhoods of
@@ -97,6 +106,10 @@ ego_size(g, order = 2, 1:3)
 ego(g, order = 0, 1:3)
 ego(g, order = 1, 1:3)
 ego(g, order = 2, 1:3)
+# neighborhood() is an alias of ego()
+neighborhood(g, order = 0, 1:3)
+neighborhood(g, order = 1, 1:3)
+neighborhood(g, order = 2, 1:3)
 
 # attributes are preserved
 V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
