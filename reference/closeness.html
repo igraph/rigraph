@@ -137,8 +137,6 @@ or negative (which is the default), then the function calculates the exact
 closeness scores. Using zero as a cutoff is <em>deprecated</em> and future
 versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
 considered at all). If you want no cutoff, use a negative number.</p>
-<p><code>estimate_closeness()</code> is an alias for <code>closeness()</code> with a different
-argument order, for sake of compatibility with older versions of igraph.</p>
 <p>Closeness centrality is meaningful only for connected graphs. In disconnected
 graphs, consider using the harmonic centrality with
 <code><a href="harmonic_centrality.html">harmonic_centrality()</a></code></p>
@@ -153,9 +151,9 @@ Conceptual Clarification. <em>Social Networks</em>, 1, 215-239.</p>
     <div class="dont-index"><p><code><a href="betweenness.html">betweenness()</a></code>, <code><a href="degree.html">degree()</a></code>, <code><a href="harmonic_centrality.html">harmonic_centrality()</a></code></p>
 <p>Centrality measures
 <code><a href="alpha_centrality.html">alpha_centrality</a>()</code>,
+<code><a href="betweenness.html">betweenness</a>()</code>,
 <code><a href="diversity.html">diversity</a>()</code>,
 <code><a href="eigen_centrality.html">eigen_centrality</a>()</code>,
-<code><a href="betweenness.html">estimate_betweenness</a>()</code>,
 <code><a href="harmonic_centrality.html">harmonic_centrality</a>()</code>,
 <code><a href="hub_score.html">hub_score</a>()</code>,
 <code><a href="page_rank.html">page_rank</a>()</code>,

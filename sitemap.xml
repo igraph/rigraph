@@ -367,6 +367,15 @@
     <loc>https://r.igraph.org/reference/erdos.renyi.game.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/estimate_betweenness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/estimate_closeness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/estimate_edge_betweenness.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/feedback_arc_set.html</loc>
   </url>
   <url>
