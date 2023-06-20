@@ -30,7 +30,7 @@
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
 
   lifecycle::deprecate_soft(
-    "1.5.0",
+    "1.6.0",
     "estimate_betweenness()",
     "betweenness()",
     details = "with the cutoff argument."
@@ -200,7 +200,7 @@ edge_betweenness <- function(graph, e = E(graph),
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
     lifecycle::deprecate_soft(
-    "1.5.0",
+    "1.6.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
     details = "with the cutoff argument."
@@ -321,7 +321,7 @@ closeness <- function(graph, vids = V(graph),
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
 
   lifecycle::deprecate_soft(
-    "1.5.0",
+    "1.6.0",
     "estimate_closeness()",
     "closeness()",
     details = "with the cutoff argument."
