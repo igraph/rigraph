@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9003
+
+## Bug fixes
+
+  - Fix generation of code for functions with VERTEX\_COLOR out-arguments, refs #850.
+
+## Chore
+
+  - Align autogeneration (#859).
+
+## Documentation
+
+  - Undeprecate neighborhood() (#851).
+
+## Refactoring
+
+  - Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
+
+## Breaking changes
+
+  - Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
+
+
 # igraph 1.5.0.9002
 
 ## Bug fixes
