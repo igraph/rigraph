@@ -2861,6 +2861,20 @@ SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
   return result;
 }
 
+SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
+  SEXP result, dim;
+
+  PROTECT(result=NEW_INTEGER(igraph_matrix_int_size(m)));
+  igraph_matrix_int_copy_to(m, INTEGER(result));
+  PROTECT(dim=NEW_INTEGER(2));
+  INTEGER(dim)[0]=(int) igraph_matrix_int_nrow(m);
+  INTEGER(dim)[1]=(int) igraph_matrix_int_ncol(m);
+  SET_DIM(result, dim);
+
+  UNPROTECT(2);
+  return result;
+}
+
 SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m) {
   SEXP result;
   if (m) {
@@ -3113,6 +3127,20 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
   /* Set from and to requires environment */
   R_igraph_set_from(result, graph);
   R_igraph_set_to(result, graph);
+
+  UNPROTECT(1);
+  return result;
+}
+
+SEXP R_igraph_vector_list_to_SEXP(const igraph_vector_list_t *list) {
+  SEXP result;
+  long int i, n=igraph_vector_list_size(list);
+
+  PROTECT(result=NEW_LIST(n));
+  for (i=0; i<n; i++) {
+    igraph_vector_t *v=VECTOR(*list, i);
+    SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(v));
+  }
 
   UNPROTECT(1);
   return result;
@@ -8373,13 +8401,13 @@ typedef struct R_igraph_i_levc_data_t {
   SEXP rho2;
 } R_igraph_i_levc_data_t;
 
-int R_igraph_i_levc_callback(const igraph_vector_t *membership,
-                     long int comm,
-                     igraph_real_t eigenvalue,
-                     const igraph_vector_t *eigenvector,
-                     igraph_arpack_function_t *arpack_multiplier,
-                     void *arpack_extra,
-                     void *extra) {
+igraph_error_t R_igraph_i_levc_callback(const igraph_vector_int_t *membership,
+            igraph_integer_t comm,
+            igraph_real_t eigenvalue,
+            const igraph_vector_t *eigenvector,
+            igraph_arpack_function_t *arpack_multiplier,
+            void *arpack_extra,
+            void *extra) {
 
   SEXP s_memb, s_comm, s_evalue, s_evector, s_multip;
   SEXP R_fcall, R_multip_call;
@@ -8388,7 +8416,7 @@ int R_igraph_i_levc_callback(const igraph_vector_t *membership,
   R_igraph_i_levc_data_t *data=extra;
   R_igraph_i_function_container_t cont = { arpack_multiplier };
 
-  PROTECT(s_memb=R_igraph_vector_to_SEXP(membership));
+  PROTECT(s_memb=R_igraph_vector_int_to_SEXP(membership));
   PROTECT(s_comm=NEW_NUMERIC(1)); REAL(s_comm)[0]=comm;
   PROTECT(s_evalue=NEW_NUMERIC(1)); REAL(s_evalue)[0]=eigenvalue;
   PROTECT(s_evector=R_igraph_vector_to_SEXP(eigenvector));
@@ -8418,15 +8446,15 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
                                             SEXP callback_env2) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_matrix_t c_merges;
-  igraph_vector_t c_membership;
+  igraph_matrix_int_t c_merges;
+  igraph_vector_int_t c_membership;
   igraph_integer_t c_steps;
   igraph_vector_t v_weights, *pweights=0;
   igraph_bool_t c_start=!Rf_isNull(pstart);
   igraph_arpack_options_t c_options;
   igraph_real_t c_modularity;
   igraph_vector_t c_eigenvalues;
-  igraph_vector_ptr_t c_eigenvectors;
+  igraph_vector_list_t c_eigenvectors;
   igraph_vector_t c_history;
   SEXP merges;
   SEXP membership;
@@ -8444,24 +8472,24 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
   if (!Rf_isNull(weights)) {
     pweights=&v_weights; R_SEXP_to_vector(weights, &v_weights);
   }
-  if (0 != igraph_matrix_init(&c_merges, 0, 0)) {
+  if (0 != igraph_matrix_int_init(&c_merges, 0, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_matrix_destroy, &c_merges);
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_merges);
   if (c_start) {
-    R_SEXP_to_vector_copy(pstart, &c_membership);
+    R_SEXP_to_vector_int_copy(pstart, &c_membership);
   } else {
-    if (0 != igraph_vector_init(&c_membership, 0)) {
+    if (0 != igraph_vector_int_init(&c_membership, 0)) {
       igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
     }
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_membership);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
   c_steps=INTEGER(steps)[0];
   R_SEXP_to_igraph_arpack_options(options, &c_options);
   if (0 != igraph_vector_init(&c_eigenvalues, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  if (0 != igraph_vector_ptr_init(&c_eigenvectors, 0)) {
+  if (0 != igraph_vector_list_init(&c_eigenvectors, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   if (0 != igraph_vector_init(&c_history, 0)) {
@@ -8473,19 +8501,19 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
                                         /* Convert output */
   PROTECT(result=NEW_LIST(7));
   PROTECT(names=NEW_CHARACTER(7));
-  PROTECT(merges=R_igraph_matrix_to_SEXP(&c_merges));
-  igraph_matrix_destroy(&c_merges);
+  PROTECT(merges=R_igraph_matrix_int_to_SEXP(&c_merges));
+  igraph_matrix_int_destroy(&c_merges);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(membership=R_igraph_vector_to_SEXP(&c_membership));
-  igraph_vector_destroy(&c_membership);
+  PROTECT(membership=R_igraph_vector_int_to_SEXP(&c_membership));
+  igraph_vector_int_destroy(&c_membership);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(options=R_igraph_arpack_options_to_SEXP(&c_options));
   PROTECT(modularity=NEW_NUMERIC(1));
   REAL(modularity)[0]=c_modularity;
   PROTECT(eigenvalues=R_igraph_vector_to_SEXP(&c_eigenvalues));
   igraph_vector_destroy(&c_eigenvalues);
-  PROTECT(eigenvectors=R_igraph_vectorlist_to_SEXP(&c_eigenvectors));
-  R_igraph_vectorlist_destroy(&c_eigenvectors);
+  PROTECT(eigenvectors=R_igraph_vector_list_to_SEXP(&c_eigenvectors));
+  igraph_vector_list_destroy(&c_eigenvectors);
   PROTECT(history=R_igraph_vector_to_SEXP(&c_history));
   igraph_vector_destroy(&c_history);
   SET_VECTOR_ELT(result, 0, merges);
