@@ -2733,11 +2733,11 @@ SEXP R_igraph_0orvector_int_to_SEXP(const igraph_vector_int_t *v) {
 }
 
 /* The same, plus destroy */
-SEXP R_igraph_0orvector_to_SEXP_d(igraph_vector_t *v) {
+SEXP R_igraph_0orvector_int_to_SEXP_d(igraph_vector_int_t *v) {
   SEXP result;
   if (v) {
-    PROTECT(result=R_igraph_vector_to_SEXP(v));
-    igraph_vector_destroy(v);
+    PROTECT(result=R_igraph_vector_int_to_SEXP(v));
+    igraph_vector_int_destroy(v);
   } else {
     PROTECT(result=R_NilValue);
   }
@@ -8221,19 +8221,18 @@ igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
   return cres;
 }
 
-igraph_bool_t R_igraph_dfshandler_in(const igraph_t *graph,
-                                     igraph_integer_t vid,
-                                     igraph_integer_t dist,
-                                     void *extra) {
+igraph_error_t R_igraph_dfshandler_in(const igraph_t *graph,
+                                      igraph_integer_t vid,
+                                      igraph_integer_t dist,
+                                      void *extra) {
 
   return R_igraph_dfshandler(graph, vid, dist, extra, 0);
 }
 
-
-igraph_bool_t R_igraph_dfshandler_out(const igraph_t *graph,
-                                      igraph_integer_t vid,
-                                      igraph_integer_t dist,
-                                      void *extra) {
+igraph_error_t R_igraph_dfshandler_out(const igraph_t *graph,
+                                       igraph_integer_t vid,
+                                       igraph_integer_t dist,
+                                       void *extra) {
 
   return R_igraph_dfshandler(graph, vid, dist, extra, 1);
 }
@@ -8249,24 +8248,24 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
   igraph_integer_t root=(igraph_integer_t) REAL(proot)[0];
   igraph_integer_t neimode=(igraph_integer_t) REAL(pneimode)[0];
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
-  igraph_vector_t order, order_out, father, dist;
-  igraph_vector_t *p_order=0, *p_order_out=0, *p_father=0, *p_dist=0;
+  igraph_vector_int_t order, order_out, father, dist;
+  igraph_vector_int_t *p_order=0, *p_order_out=0, *p_father=0, *p_dist=0;
   igraph_dfshandler_t *in_callback=0, *out_callback=0;
   R_igraph_i_dfs_data_t cb_data, *p_cb_data=0;
 
   R_SEXP_to_igraph(graph, &g);
 
   if (LOGICAL(porder)[0]) {
-    igraph_vector_init(&order, 0); p_order=&order;
+    igraph_vector_int_init(&order, 0); p_order=&order;
   }
   if (LOGICAL(porder_out)[0]) {
-    igraph_vector_init(&order_out, 0); p_order_out=&order_out;
+    igraph_vector_int_init(&order_out, 0); p_order_out=&order_out;
   }
   if (LOGICAL(pfather)[0]) {
-    igraph_vector_init(&father, 0); p_father=&father;
+    igraph_vector_int_init(&father, 0); p_father=&father;
   }
   if (LOGICAL(pdist)[0]) {
-    igraph_vector_init(&dist, 0); p_dist=&dist;
+    igraph_vector_int_init(&dist, 0); p_dist=&dist;
   }
 
   if (!Rf_isNull(pin_callback) || !Rf_isNull(pout_callback)) {
@@ -8304,20 +8303,19 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
   }
 
   SET_STRING_ELT(names, 2, Rf_mkChar("order"));
-  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP_d(p_order));
+  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP_d(p_order));
   SET_STRING_ELT(names, 3, Rf_mkChar("order.out"));
-  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_to_SEXP_d(p_order_out));
+  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_int_to_SEXP_d(p_order_out));
   SET_STRING_ELT(names, 4, Rf_mkChar("father"));
-  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_to_SEXP_d(p_father));
+  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_father));
   SET_STRING_ELT(names, 5, Rf_mkChar("dist"));
-  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_to_SEXP_d(p_dist));
+  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_int_to_SEXP_d(p_dist));
 
   SET_NAMES(result, names);
 
   UNPROTECT(2);
   return result;
 }
-
 
 SEXP R_igraph_cohesive_blocks(SEXP graph) {
   igraph_vector_int_list_t c_blocks;
