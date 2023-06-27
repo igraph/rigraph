@@ -8046,7 +8046,7 @@ typedef struct {
   SEXP graph, fun, extra, rho;
 } R_igraph_i_bfs_data_t;
 
-igraph_bool_t R_igraph_bfshandler(const igraph_t *graph,
+igraph_error_t R_igraph_bfshandler(const igraph_t *graph,
                                   igraph_integer_t vid,
                                   igraph_integer_t pred,
                                   igraph_integer_t succ,
@@ -8058,7 +8058,7 @@ igraph_bool_t R_igraph_bfshandler(const igraph_t *graph,
   SEXP args, R_fcall, result, names;
   igraph_bool_t cres;
 
-  PROTECT(args=NEW_NUMERIC(5));
+  PROTECT(args=NEW_INTEGER(5));
   PROTECT(names=NEW_CHARACTER(5));
 
   SET_STRING_ELT(names, 0, Rf_mkChar("vid"));
@@ -8066,11 +8066,11 @@ igraph_bool_t R_igraph_bfshandler(const igraph_t *graph,
   SET_STRING_ELT(names, 2, Rf_mkChar("succ"));
   SET_STRING_ELT(names, 3, Rf_mkChar("rank"));
   SET_STRING_ELT(names, 4, Rf_mkChar("dist"));
-  REAL(args)[0]=vid + 1;
-  REAL(args)[1]=pred + 1;
-  REAL(args)[2]=succ + 1;
-  REAL(args)[3]=rank + 1;
-  REAL(args)[4]=dist;
+  INTEGER(args)[0]=vid + 1;
+  INTEGER(args)[1]=pred + 1;
+  INTEGER(args)[2]=succ + 1;
+  INTEGER(args)[3]=rank + 1;
+  INTEGER(args)[4]=dist;
   SET_NAMES(args, names);
 
   PROTECT(R_fcall = Rf_lang4(data->fun, data->graph, args, data->extra));
@@ -8091,46 +8091,46 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   SEXP result, names;
 
   igraph_integer_t root=(igraph_integer_t) REAL(proot)[0];
-  igraph_vector_t roots;
+  igraph_vector_int_t roots;
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
-  igraph_vector_t restricted;
+  igraph_vector_int_t restricted;
   igraph_integer_t neimode=(igraph_integer_t) REAL(pneimode)[0];
-  igraph_vector_t order, rank, father, pred, succ, dist;
-  igraph_vector_t *p_order=0, *p_rank=0, *p_father=0, *p_pred=0,
+  igraph_vector_int_t order, rank, father, pred, succ, dist;
+  igraph_vector_int_t *p_order=0, *p_rank=0, *p_father=0, *p_pred=0,
     *p_succ=0, *p_dist=0;
   igraph_bfshandler_t *callback=0;
   R_igraph_i_bfs_data_t cb_data, *p_cb_data=0;
 
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(proots)) {
-    R_SEXP_to_vector(proots, &roots);
+    R_SEXP_to_vector_int_copy(proots, &roots);
   }
   if (!Rf_isNull(prestricted)) {
-    R_SEXP_to_vector(prestricted, &restricted);
+    R_SEXP_to_vector_int_copy(prestricted, &restricted);
   }
 
   if (LOGICAL(porder)[0]) {
-    igraph_vector_init(&order, 0); IGRAPH_FINALLY(igraph_vector_destroy, &order);
+    igraph_vector_int_init(&order, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &order);
     p_order=&order;
   }
   if (LOGICAL(prank)[0]) {
-    igraph_vector_init(&rank, 0); IGRAPH_FINALLY(igraph_vector_destroy, &rank);
+    igraph_vector_int_init(&rank, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &rank);
     p_rank=&rank;
   }
   if (LOGICAL(pfather)[0]) {
-    igraph_vector_init(&father, 0); IGRAPH_FINALLY(igraph_vector_destroy, &father);
+    igraph_vector_int_init(&father, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &father);
     p_father=&father;
   }
   if (LOGICAL(ppred)[0]) {
-    igraph_vector_init(&pred, 0); IGRAPH_FINALLY(igraph_vector_destroy, &pred);
+    igraph_vector_int_init(&pred, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &pred);
     p_pred=&pred;
   }
   if (LOGICAL(psucc)[0]) {
-    igraph_vector_init(&succ, 0); IGRAPH_FINALLY(igraph_vector_destroy, &succ);
+    igraph_vector_int_init(&succ, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &succ);
     p_succ=&succ;
   }
   if (LOGICAL(pdist)[0]) {
-    igraph_vector_init(&dist, 0); IGRAPH_FINALLY(igraph_vector_destroy, &dist);
+    igraph_vector_int_init(&dist, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &dist);
     p_dist=&dist;
   }
 
@@ -8163,28 +8163,28 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   }
 
   SET_STRING_ELT(names, 2, Rf_mkChar("order"));
-  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP_d(p_order));
+  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP_d(p_order));
   SET_STRING_ELT(names, 3, Rf_mkChar("rank"));
-  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_to_SEXP_d(p_rank));
+  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_int_to_SEXP_d(p_rank));
   SET_STRING_ELT(names, 4, Rf_mkChar("father"));
-  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_to_SEXP_d(p_father));
+  SET_VECTOR_ELT(result, 4, R_igraph_0orvector_int_to_SEXP_d(p_father));
   SET_STRING_ELT(names, 5, Rf_mkChar("pred"));
-  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_to_SEXP_d(p_pred));
+  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_int_to_SEXP_d(p_pred));
   SET_STRING_ELT(names, 6, Rf_mkChar("succ"));
-  SET_VECTOR_ELT(result, 6, R_igraph_0orvector_to_SEXP_d(p_succ));
+  SET_VECTOR_ELT(result, 6, R_igraph_0orvector_int_to_SEXP_d(p_succ));
   SET_STRING_ELT(names, 7, Rf_mkChar("dist"));
-  SET_VECTOR_ELT(result, 7, R_igraph_0orvector_to_SEXP_d(p_dist));
+  SET_VECTOR_ELT(result, 7, R_igraph_0orvector_int_to_SEXP_d(p_dist));
 
   SET_NAMES(result, names);
 
   UNPROTECT(2);
 
-  if (p_dist) { igraph_vector_destroy(p_dist); IGRAPH_FINALLY_CLEAN(1); p_dist = 0; }
-  if (p_succ) { igraph_vector_destroy(p_succ); IGRAPH_FINALLY_CLEAN(1); p_succ = 0; }
-  if (p_pred) { igraph_vector_destroy(p_pred); IGRAPH_FINALLY_CLEAN(1); p_pred = 0; }
-  if (p_father) { igraph_vector_destroy(p_father); IGRAPH_FINALLY_CLEAN(1); p_father = 0; }
-  if (p_rank) { igraph_vector_destroy(p_rank); IGRAPH_FINALLY_CLEAN(1); p_rank = 0; }
-  if (p_order) { igraph_vector_destroy(p_order); IGRAPH_FINALLY_CLEAN(1); p_order = 0; }
+  if (p_dist) { igraph_vector_int_destroy(p_dist); IGRAPH_FINALLY_CLEAN(1); p_dist = 0; }
+  if (p_succ) { igraph_vector_int_destroy(p_succ); IGRAPH_FINALLY_CLEAN(1); p_succ = 0; }
+  if (p_pred) { igraph_vector_int_destroy(p_pred); IGRAPH_FINALLY_CLEAN(1); p_pred = 0; }
+  if (p_father) { igraph_vector_int_destroy(p_father); IGRAPH_FINALLY_CLEAN(1); p_father = 0; }
+  if (p_rank) { igraph_vector_int_destroy(p_rank); IGRAPH_FINALLY_CLEAN(1); p_rank = 0; }
+  if (p_order) { igraph_vector_int_destroy(p_order); IGRAPH_FINALLY_CLEAN(1); p_order = 0; }
 
   return result;
 }
