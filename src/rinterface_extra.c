@@ -8320,9 +8320,9 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
 
 
 SEXP R_igraph_cohesive_blocks(SEXP graph) {
-  igraph_vector_ptr_t c_blocks;
-  igraph_vector_t c_cohesion;
-  igraph_vector_t c_parent;
+  igraph_vector_int_list_t c_blocks;
+  igraph_vector_int_t c_cohesion;
+  igraph_vector_int_t c_parent;
   igraph_t c_blockTree;
   igraph_t c_graph;
   SEXP blocks;
@@ -8333,35 +8333,35 @@ SEXP R_igraph_cohesive_blocks(SEXP graph) {
   SEXP names;
 
   R_SEXP_to_igraph(graph, &c_graph);
-  if (0 != igraph_vector_ptr_init(&c_blocks, 0)) {
+  if (0 != igraph_vector_int_list_init(&c_blocks, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(R_igraph_vectorlist_destroy, &c_blocks);
-  if (0 != igraph_vector_init(&c_cohesion, 0)) {
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_blocks);
+  if (0 != igraph_vector_int_init(&c_cohesion, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_cohesion);
-  if (0 != igraph_vector_init(&c_parent, 0)) {
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_cohesion);
+  if (0 != igraph_vector_int_init(&c_parent, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_parent);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_parent);
 
   IGRAPH_R_CHECK(igraph_cohesive_blocks(&c_graph, &c_blocks, &c_cohesion, &c_parent, &c_blockTree));
 
   PROTECT(result=NEW_LIST(4));
   PROTECT(names=NEW_CHARACTER(4));
-  PROTECT(blocks=R_igraph_vectorlist_to_SEXP_p1(&c_blocks));
-  R_igraph_vectorlist_destroy(&c_blocks);
+  PROTECT(blocks=R_igraph_vector_int_list_to_SEXP_p1(&c_blocks));
+  igraph_vector_int_list_destroy(&c_blocks);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(cohesion=R_igraph_vector_to_SEXP(&c_cohesion));
-  igraph_vector_destroy(&c_cohesion);
+  PROTECT(cohesion=R_igraph_vector_int_to_SEXP(&c_cohesion));
+  igraph_vector_int_destroy(&c_cohesion);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(parent=R_igraph_vector_to_SEXPp1(&c_parent));
-  igraph_vector_destroy(&c_parent);
+  PROTECT(parent=R_igraph_vector_int_to_SEXPp1(&c_parent));
+  igraph_vector_int_destroy(&c_parent);
   IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_blockTree);
   PROTECT(blockTree=R_igraph_to_SEXP(&c_blockTree));
-  IGRAPH_I_DESTROY(&c_blockTree);
+  igraph_destroy(&c_blockTree);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(result, 0, blocks);
   SET_VECTOR_ELT(result, 1, cohesion);
