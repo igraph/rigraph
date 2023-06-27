@@ -2723,6 +2723,17 @@ SEXP R_igraph_0orvector_to_SEXP(const igraph_vector_t *v) {
   return result;
 }
 
+SEXP R_igraph_0orvector_int_to_SEXP(const igraph_vector_int_t *v) {
+  SEXP result;
+  if (v) {
+    PROTECT(result=R_igraph_vector_int_to_SEXP(v));
+  } else {
+    PROTECT(result=R_NilValue);
+  }
+  UNPROTECT(1);
+  return result;
+}
+
 /* The same, plus destroy */
 SEXP R_igraph_0orvector_to_SEXP_d(igraph_vector_t *v) {
   SEXP result;
@@ -9623,8 +9634,8 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   igraph_vector_bool_t c_types;
   igraph_t c_proj1;
   igraph_t c_proj2;
-  igraph_vector_t c_multiplicity1;
-  igraph_vector_t c_multiplicity2;
+  igraph_vector_int_t c_multiplicity1;
+  igraph_vector_int_t c_multiplicity2;
   igraph_integer_t c_probe1;
   igraph_integer_t which=INTEGER(pwhich)[0];
   igraph_bool_t do_1=(which == 0 || which == 1);
@@ -9638,15 +9649,15 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
-  if (0 != igraph_vector_init(&c_multiplicity1, 0)) {
+  if (0 != igraph_vector_int_init(&c_multiplicity1, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_multiplicity1);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_multiplicity1);
   multiplicity1 = R_GlobalEnv; /* hack to have a non-NULL value */
-  if (0 != igraph_vector_init(&c_multiplicity2, 0)) {
+  if (0 != igraph_vector_int_init(&c_multiplicity2, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
-  IGRAPH_FINALLY(igraph_vector_destroy, &c_multiplicity2);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_multiplicity2);
   multiplicity2=R_GlobalEnv; /* hack to have a non-NULL value */
   c_probe1=INTEGER(probe1)[0];
   /* Call igraph */
@@ -9671,11 +9682,11 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   } else {
     PROTECT(proj2=R_NilValue);
   }
-  PROTECT(multiplicity1=R_igraph_0orvector_to_SEXP(&c_multiplicity1));
-  igraph_vector_destroy(&c_multiplicity1);
+  PROTECT(multiplicity1=R_igraph_0orvector_int_to_SEXP(&c_multiplicity1));
+  igraph_vector_int_destroy(&c_multiplicity1);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(multiplicity2=R_igraph_0orvector_to_SEXP(&c_multiplicity2));
-  igraph_vector_destroy(&c_multiplicity2);
+  PROTECT(multiplicity2=R_igraph_0orvector_int_to_SEXP(&c_multiplicity2));
+  igraph_vector_int_destroy(&c_multiplicity2);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(result, 0, proj1);
   SET_VECTOR_ELT(result, 1, proj2);
