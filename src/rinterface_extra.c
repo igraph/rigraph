@@ -7988,10 +7988,10 @@ SEXP R_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
                          SEXP pfillin, SEXP pnewgraph) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_alpha;
-  igraph_vector_t c_alpham1;
+  igraph_vector_int_t c_alpha;
+  igraph_vector_int_t c_alpham1;
   igraph_bool_t c_chordal;
-  igraph_vector_t c_fillin;
+  igraph_vector_int_t c_fillin;
   igraph_t c_newgraph;
   SEXP chordal;
   SEXP fillin;
@@ -7999,13 +7999,13 @@ SEXP R_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
   SEXP result, names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (!Rf_isNull(alpha)) { R_SEXP_to_vector(alpha, &c_alpha); }
-  if (!Rf_isNull(alpham1)) { R_SEXP_to_vector(alpham1, &c_alpham1); }
+  if (!Rf_isNull(alpha)) { R_SEXP_to_vector_int_copy(alpha, &c_alpha); }
+  if (!Rf_isNull(alpham1)) { R_SEXP_to_vector_int_copy(alpham1, &c_alpham1); }
   if (LOGICAL(pfillin)[0]) {
-    if (0 != igraph_vector_init(&c_fillin, 0)) {
+    if (0 != igraph_vector_int_init(&c_fillin, 0)) {
       igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
     }
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_fillin);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_fillin);
   }
   IGRAPH_R_CHECK(igraph_is_chordal(&c_graph, (Rf_isNull(alpha) ? 0 : &c_alpha), (Rf_isNull(alpham1) ? 0 : &c_alpham1), &c_chordal, (LOGICAL(pfillin)[0] ? &c_fillin : 0), (LOGICAL(pnewgraph)[0] ? &c_newgraph : 0)));
 
@@ -8015,8 +8015,8 @@ SEXP R_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
   PROTECT(chordal=NEW_LOGICAL(1));
   LOGICAL(chordal)[0]=c_chordal;
   if (LOGICAL(pfillin)[0]) {
-    PROTECT(fillin=R_igraph_vector_to_SEXP(&c_fillin));
-    igraph_vector_destroy(&c_fillin);
+    PROTECT(fillin=R_igraph_vector_int_to_SEXP(&c_fillin));
+    igraph_vector_int_destroy(&c_fillin);
     IGRAPH_FINALLY_CLEAN(1);
   } else {
     PROTECT(fillin=R_NilValue);
@@ -8024,7 +8024,7 @@ SEXP R_igraph_is_chordal(SEXP graph, SEXP alpha, SEXP alpham1,
   if (LOGICAL(pnewgraph)[0]) {
     IGRAPH_FINALLY(igraph_destroy, &c_newgraph);
     PROTECT(newgraph=R_igraph_to_SEXP(&c_newgraph));
-    IGRAPH_I_DESTROY(&c_newgraph);
+    igraph_destroy(&c_newgraph);
     IGRAPH_FINALLY_CLEAN(1);
   } else {
     PROTECT(newgraph=R_NilValue);
