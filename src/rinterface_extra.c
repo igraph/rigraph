@@ -7261,7 +7261,7 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
                               SEXP pminsize, SEXP pmaxsize) {
 
   igraph_t g;
-  igraph_vector_ptr_t ptrvec;
+  igraph_vector_int_list_t list;
   long int i;
   igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
   igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
@@ -7269,27 +7269,13 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) {
-     R_SEXP_to_vector_int_copy(psubset, &subset);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
-  }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
-  igraph_vector_ptr_init(&ptrvec,0);
+  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int_copy(psubset, &subset); }
+  igraph_vector_int_list_init(&list, 0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
-                                &ptrvec, /*no=*/ 0, /*file=*/ 0,
+                                &list, /*no=*/ 0, /*file=*/ 0,
                                 minsize, maxsize);
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_int_destroy(&subset);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_ptr_destroy(&ptrvec);
+  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
+  igraph_vector_int_list_destroy(&list);
 
   UNPROTECT(1);
   return result;
@@ -7380,24 +7366,17 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
 SEXP R_igraph_independent_vertex_sets(SEXP graph,
                                       SEXP pminsize, SEXP pmaxsize) {
   igraph_t g;
-  igraph_vector_ptr_t ptrvec;
+  igraph_vector_int_list_t list;
   igraph_integer_t minsize=(igraph_integer_t) REAL(pminsize)[0];
   igraph_integer_t maxsize=(igraph_integer_t) REAL(pmaxsize)[0];
   long int i;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec, 0);
-  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &ptrvec, minsize, maxsize));
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
+  igraph_vector_int_list_init(&list, 0);
+  IGRAPH_R_CHECK(igraph_independent_vertex_sets(&g, &list, minsize, maxsize));
+  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
+  igraph_vector_int_list_destroy(&list);
 
   UNPROTECT(1);
   return result;
