@@ -32,7 +32,7 @@
 
 #include "core/interruption.h"
 
-igraph_error_t igraph_sir_init(igraph_sir_t *sir) {
+int igraph_sir_init(igraph_sir_t *sir) {
     IGRAPH_CHECK(igraph_vector_init(&sir->times, 1));
     IGRAPH_FINALLY(igraph_vector_destroy, &sir->times);
     IGRAPH_CHECK(igraph_vector_int_init(&sir->no_s, 1));
@@ -41,7 +41,7 @@ igraph_error_t igraph_sir_init(igraph_sir_t *sir) {
     IGRAPH_FINALLY(igraph_vector_int_destroy, &sir->no_i);
     IGRAPH_CHECK(igraph_vector_int_init(&sir->no_r, 1));
     IGRAPH_FINALLY_CLEAN(3);
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
@@ -59,7 +59,7 @@ void igraph_sir_destroy(igraph_sir_t *sir) {
 }
 
 static void igraph_i_sir_destroy(igraph_vector_ptr_t *v) {
-    igraph_integer_t i, n = igraph_vector_ptr_size(v);
+    int i, n = igraph_vector_ptr_size(v);
     for (i = 0; i < n; i++) {
         if ( VECTOR(*v)[i] ) {
             igraph_sir_destroy( VECTOR(*v)[i]) ;
@@ -80,7 +80,7 @@ static void igraph_i_sir_destroy(igraph_vector_ptr_t *v) {
  * of the population might be in three states: susceptible, infected
  * and recovered. Recovered people are assumed to be immune to the
  * disease. Susceptibles become infected with a rate that depends on
- * their number of infected neighbors. Infected people become recovered
+ * their number of infected neigbors. Infected people become recovered
  * with a constant rate. See these parameters below.
  *
  * </para><para>
@@ -109,23 +109,26 @@ static void igraph_i_sir_destroy(igraph_vector_ptr_t *v) {
  * Time complexity: O(no_sim * (|V| + |E| log(|V|))).
  */
 
-igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
+int igraph_sir(const igraph_t *graph, igraph_real_t beta,
                igraph_real_t gamma, igraph_integer_t no_sim,
                igraph_vector_ptr_t *result) {
 
-    igraph_integer_t infected;
+    int infected;
     igraph_vector_int_t status;
     igraph_adjlist_t adjlist;
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t i, j, ns, ni, nr;
+    int no_of_nodes = igraph_vcount(graph);
+    int i, j, ns, ni, nr;
     igraph_vector_int_t *neis;
     igraph_psumtree_t tree;
     igraph_real_t psum;
-    igraph_integer_t neilen;
+    int neilen;
     igraph_bool_t simple;
 
     if (no_of_nodes == 0) {
         IGRAPH_ERROR("Cannot run SIR model on empty graph.", IGRAPH_EINVAL);
+    }
+    if (igraph_is_directed(graph)) {
+        IGRAPH_WARNING("Edge directions are ignored in SIR model.");
     }
     if (beta < 0) {
         IGRAPH_ERROR("The infection rate beta must be non-negative in SIR model.", IGRAPH_EINVAL);
@@ -142,16 +145,6 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
     if (!simple) {
         IGRAPH_ERROR("SIR model only works with simple graphs.", IGRAPH_EINVAL);
     }
-    if (igraph_is_directed(graph)) {
-        igraph_bool_t has_mutual;
-        IGRAPH_WARNING("Edge directions are ignored in SIR model.");
-        /* When the graph is directed, mutual edges are effectively multi-edges as we
-         * are ignoring edge directions. */
-        IGRAPH_CHECK(igraph_has_mutual(graph, &has_mutual, false));
-        if (has_mutual) {
-            IGRAPH_ERROR("SIR model only works with simple graphs.", IGRAPH_EINVAL);
-        }
-    }
 
     IGRAPH_CHECK(igraph_vector_int_init(&status, no_of_nodes));
     IGRAPH_FINALLY(igraph_vector_int_destroy, &status);
@@ -166,7 +159,7 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
     for (i = 0; i < no_sim; i++) {
         igraph_sir_t *sir = IGRAPH_CALLOC(1, igraph_sir_t);
         if (!sir) {
-            IGRAPH_ERROR("Cannot run SIR model.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
+            IGRAPH_ERROR("Cannot run SIR model.", IGRAPH_ENOMEM);
         }
         IGRAPH_CHECK(igraph_sir_init(sir));
         VECTOR(*result)[i] = sir;
@@ -205,14 +198,14 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
         neis = igraph_adjlist_get(&adjlist, infected);
         neilen = igraph_vector_int_size(neis);
         for (i = 0; i < neilen; i++) {
-            igraph_integer_t nei = VECTOR(*neis)[i];
+            int nei = VECTOR(*neis)[i];
             IGRAPH_CHECK(igraph_psumtree_update(&tree, nei, beta));
         }
 
         while (ni > 0) {
             igraph_real_t tt;
             igraph_real_t r;
-            igraph_integer_t vchange;
+            long int vchange;
 
             IGRAPH_ALLOW_INTERRUPTION();
 
@@ -229,7 +222,7 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
                 ni--; nr++;
                 IGRAPH_CHECK(igraph_psumtree_update(&tree, vchange, 0.0));
                 for (i = 0; i < neilen; i++) {
-                    igraph_integer_t nei = VECTOR(*neis)[i];
+                    int nei = VECTOR(*neis)[i];
                     if (VECTOR(status)[nei] == S_S) {
                         igraph_real_t rate = igraph_psumtree_get(&tree, nei);
                         IGRAPH_CHECK(igraph_psumtree_update(&tree, nei, rate - beta));
@@ -241,7 +234,7 @@ igraph_error_t igraph_sir(const igraph_t *graph, igraph_real_t beta,
                 ns--; ni++;
                 IGRAPH_CHECK(igraph_psumtree_update(&tree, vchange, gamma));
                 for (i = 0; i < neilen; i++) {
-                    igraph_integer_t nei = VECTOR(*neis)[i];
+                    int nei = VECTOR(*neis)[i];
                     if (VECTOR(status)[nei] == S_S) {
                         igraph_real_t rate = igraph_psumtree_get(&tree, nei);
                         IGRAPH_CHECK(igraph_psumtree_update(&tree, nei, rate + beta));

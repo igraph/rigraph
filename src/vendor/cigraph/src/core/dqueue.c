@@ -30,11 +30,11 @@
 #include "igraph_pmt_off.h"
 #undef BASE_IGRAPH_REAL
 
-#define BASE_INT
+#define BASE_LONG
 #include "igraph_pmt.h"
 #include "dqueue.pmt"
 #include "igraph_pmt_off.h"
-#undef BASE_INT
+#undef BASE_LONG
 
 #define BASE_CHAR
 #include "igraph_pmt.h"
@@ -47,3 +47,9 @@
 #include "dqueue.pmt"
 #include "igraph_pmt_off.h"
 #undef BASE_BOOL
+
+#define BASE_INT
+#include "igraph_pmt.h"
+#include "dqueue.pmt"
+#include "igraph_pmt_off.h"
+#undef BASE_INT

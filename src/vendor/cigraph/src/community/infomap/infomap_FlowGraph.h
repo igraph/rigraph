@@ -22,52 +22,47 @@
 
 */
 
-#ifndef INFOMAP_FLOWGRAPH_H
-#define INFOMAP_FLOWGRAPH_H
-
-#include "infomap_Node.h"
-
-#include "igraph_datatype.h"
-#include "igraph_types.h"
-#include "igraph_vector.h"
+#ifndef FLOWGRAPH_H
+#define FLOWGRAPH_H
 
 #include <vector>
 #include <set>
-#include <cmath>
 
-inline double plogp(double x) {
-    return x > 0.0 ? x*std::log(x) : 0.0;
-}
+#include "igraph_interface.h"
+
+#include "infomap_Node.h"
 
 class FlowGraph {
 private:
-    void init(igraph_integer_t n, const igraph_vector_t *nodeWeights);
+    void init(int n, const igraph_vector_t *nodeWeights);
 
 public:
-    FlowGraph(igraph_integer_t n);
-    FlowGraph(igraph_integer_t n, const igraph_vector_t *nodeWeights);
-    FlowGraph(const FlowGraph &fgraph);
-    FlowGraph(const FlowGraph &fgraph, const std::vector<igraph_integer_t> &sub_members);
+    FlowGraph(int n);
+    FlowGraph(int n, const igraph_vector_t *nodeWeights);
+    FlowGraph(FlowGraph * fgraph);
+    FlowGraph(FlowGraph * fgraph, int sub_Nnode, int * sub_members);
 
-    FlowGraph(const igraph_t *graph, const igraph_vector_t *e_weights,
+    FlowGraph(const igraph_t * graph, const igraph_vector_t *e_weights,
               const igraph_vector_t *v_weights);
 
-    void swap(FlowGraph &fgraph);
+    ~FlowGraph();
+
+    void swap(FlowGraph * fgraph);
 
     void initiate();
     void eigenvector();
     void calibrate();
 
-    void back_to(const FlowGraph &fgraph);
+    void back_to(FlowGraph * fgraph);
 
     /*************************************************************************/
-    std::vector<Node> node;
-    igraph_integer_t Nnode;
+    Node **node;
+    int  Nnode;
 
     double alpha, beta;
 
-    igraph_integer_t Ndanglings;
-    std::vector<igraph_integer_t> danglings; // id of dangling nodes
+    int Ndanglings;
+    std::vector<int> danglings; // id of dangling nodes
 
     double exit;                  //
     double exitFlow;              //
@@ -78,4 +73,6 @@ public:
     double codeLength;
 };
 
-#endif // INFOMAP_FLOWGRAPH_H
+void delete_FlowGraph(FlowGraph *fgraph);
+
+#endif

@@ -33,13 +33,8 @@
 
 #ifdef HAVE_GLPK
 
-#include "igraph_decls.h"
-#include "igraph_error.h"
-
 #include <glpk.h>
 #include <setjmp.h>
-
-__BEGIN_DECLS
 
 typedef struct igraph_i_glpk_error_info_s {
     jmp_buf jmp;            /* used for bailing when there is a GLPK error */
@@ -51,15 +46,15 @@ typedef struct igraph_i_glpk_error_info_s {
 
 extern IGRAPH_THREAD_LOCAL igraph_i_glpk_error_info_t igraph_i_glpk_error_info;
 
-igraph_error_t igraph_i_glpk_check(int retval, const char* message);
+int igraph_i_glpk_check(int retval, const char* message);
 void igraph_i_glpk_interruption_hook(glp_tree *tree, void *info);
 void igraph_i_glpk_error_hook(void *info);
 int igraph_i_glpk_terminal_hook(void *info, const char *s);
 void igraph_i_glp_delete_prob(glp_prob *p);
 
 #define IGRAPH_GLPK_CHECK(func, message) do { \
-        igraph_error_t igraph_i_ret = igraph_i_glpk_check(func, message); \
-        if (IGRAPH_UNLIKELY(igraph_i_ret != IGRAPH_SUCCESS)) { \
+        int igraph_i_ret = igraph_i_glpk_check(func, message); \
+        if (IGRAPH_UNLIKELY(igraph_i_ret != 0)) { \
             return igraph_i_ret; \
         } } while (0)
 
@@ -141,8 +136,6 @@ void igraph_i_glp_delete_prob(glp_prob *p);
         } \
     } while (0)
 
-__END_DECLS
+#endif
 
-#endif /* HAVE_GLPK */
-
-#endif /* IGRAPH_GLPK_SUPPORT_H */
+#endif

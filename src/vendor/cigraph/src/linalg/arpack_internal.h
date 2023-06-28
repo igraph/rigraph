@@ -28,11 +28,8 @@
    include this header.
 */
 
-#include "igraph_decls.h"
 #include "igraph_types.h"
 #include "config.h"
-
-__BEGIN_DECLS
 
 #ifndef INTERNAL_ARPACK
     #define igraphdsaupd_   dsaupd_
@@ -228,7 +225,5 @@ int igraphdsortc_(char *which, int *apply, int* n, igraph_real_t *xreal,
                   igraph_real_t *ximag, igraph_real_t *y);
 
 #endif
-
-__END_DECLS
 
 #endif  /* ARPACK_INTERNAL_H */

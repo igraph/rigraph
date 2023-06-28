@@ -21,19 +21,15 @@
 
 */
 
-#include "hrg/dendro.h"
-#include "hrg/graph.h"
-#include "hrg/graph_simp.h"
-
 #include "igraph_interface.h"
+#include "igraph_memory.h"
 #include "igraph_attributes.h"
 #include "igraph_hrg.h"
 #include "igraph_random.h"
-#include "igraph_structural.h"
 
-#include "core/exceptions.h"
-
-#include <climits>
+#include "hrg/dendro.h"
+#include "hrg/graph.h"
+#include "hrg/graph_simp.h"
 
 using namespace fitHRG;
 
@@ -83,7 +79,7 @@ struct pblock {
 };
 }
 
-static igraph_error_t markovChainMonteCarlo(dendro *d, igraph_integer_t period,
+static int markovChainMonteCarlo(dendro *d, unsigned int period,
                           igraph_hrg_t *hrg) {
 
     igraph_real_t bestL = d->getLikelihood();
@@ -102,12 +98,10 @@ static igraph_error_t markovChainMonteCarlo(dendro *d, igraph_integer_t period,
     // model averaging sense), you'll need to code that yourself.
 
     // do 'period' MCMC moves before doing anything else
-    for (igraph_integer_t i = 0; i < period; i++) {
+    for (unsigned int i = 0; i < period; i++) {
 
         // make a MCMC move
-        if (!d->monteCarloMove(dL, flag_taken, 1.0)) {
-            return IGRAPH_FAILURE;
-        }
+        IGRAPH_CHECK(! d->monteCarloMove(dL, flag_taken, 1.0));
 
         // get likelihood of this D given G
         igraph_real_t cl = d->getLikelihood();
@@ -121,14 +115,13 @@ static igraph_error_t markovChainMonteCarlo(dendro *d, igraph_integer_t period,
     // corrects floating-point errors O(n)
     d->refreshLikelihood();
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t markovChainMonteCarlo2(dendro *d, igraph_integer_t num_samples) {
+static int markovChainMonteCarlo2(dendro *d, int num_samples) {
     bool flag_taken;
     double dL, ptest = 1.0 / (50.0 * (double)(d->g->numNodes()));
-    igraph_integer_t sample_num = 0;
-    int t = 1, thresh = 200 * d->g->numNodes();
+    int sample_num = 0, t = 1, thresh = 200 * d->g->numNodes();
 
     // Since we're sampling uniformly at random over the equilibrium
     // walk, we just need to do a bunch of MCMC moves and let the
@@ -151,10 +144,10 @@ static igraph_error_t markovChainMonteCarlo2(dendro *d, igraph_integer_t num_sam
         d->refreshLikelihood(); // TODO: less frequently
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t MCMCEquilibrium_Find(dendro *d, igraph_hrg_t *hrg) {
+static int MCMCEquilibrium_Find(dendro *d, igraph_hrg_t *hrg) {
 
     // We want to run the MCMC until we've found equilibrium; we
     // use the heuristic of the average log-likelihood (which is
@@ -172,9 +165,7 @@ static igraph_error_t MCMCEquilibrium_Find(dendro *d, igraph_hrg_t *hrg) {
         oldMeanL = newMeanL;
         newMeanL = 0.0;
         for (int i = 0; i < 65536; i++) {
-            if (!d->monteCarloMove(dL, flag_taken, 1.0)) {
-                return IGRAPH_FAILURE;
-            }
+            IGRAPH_CHECK(! d->monteCarloMove(dL, flag_taken, 1.0));
             Likeli = d->getLikelihood();
             newMeanL += Likeli;
         }
@@ -190,33 +181,27 @@ static igraph_error_t MCMCEquilibrium_Find(dendro *d, igraph_hrg_t *hrg) {
         d->recordDendrogramStructure(hrg);
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t igraph_i_hrg_getgraph(const igraph_t *igraph,
+static int igraph_i_hrg_getgraph(const igraph_t *igraph,
                                  dendro *d) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(igraph);
-    igraph_integer_t no_of_edges = igraph_ecount(igraph);
-    igraph_integer_t i;
+    int no_of_nodes = igraph_vcount(igraph);
+    int no_of_edges = igraph_ecount(igraph);
+    int i;
 
-    if (no_of_nodes > INT_MAX) {
-        IGRAPH_ERROR("Graph too large for the HRG module.", IGRAPH_EOVERFLOW);
-    }
-
-    // TODO: Can this be relaxed? buildDendrogram() creates a tree with n-2 internal edges,
-    // i.e. zero internal edges for a 2-vertex graph. This is not handled at the moment.
     if (no_of_nodes < 3) {
         IGRAPH_ERROR("Graph must have at least 3 vertices for HRG, got only %" IGRAPH_PRId " vertices.", IGRAPH_EINVAL);
     }
 
     // Create graph
-    d->g = new graph((int) no_of_nodes);
+    d->g = new graph(no_of_nodes);
 
     // Add edges
     for (i = 0; i < no_of_edges; i++) {
-        int from = (int) IGRAPH_FROM(igraph, i);
-        int to = (int) IGRAPH_TO(igraph, i);
+        int from = IGRAPH_FROM(igraph, i);
+        int to = IGRAPH_TO(igraph, i);
         if (from == to) {
             continue;
         }
@@ -230,34 +215,29 @@ static igraph_error_t igraph_i_hrg_getgraph(const igraph_t *igraph,
 
     d->buildDendrogram();
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t igraph_i_hrg_getsimplegraph(const igraph_t *igraph,
+static int igraph_i_hrg_getsimplegraph(const igraph_t *igraph,
                                        dendro *d, simpleGraph **sg,
-                                       igraph_integer_t num_bins) {
+                                       int num_bins) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(igraph);
-    igraph_integer_t no_of_edges = igraph_ecount(igraph);
-    igraph_integer_t i;
+    int no_of_nodes = igraph_vcount(igraph);
+    int no_of_edges = igraph_ecount(igraph);
+    int i;
 
-    if (no_of_nodes > INT_MAX) {
-        IGRAPH_ERROR("Graph too large for the HRG module.", IGRAPH_EOVERFLOW);
-    }
-
-    // TODO: See analogous TODO item in igraph_i_hrg_getgraph()
     if (no_of_nodes < 3) {
         IGRAPH_ERROR("Graph must have at least 3 vertices for HRG, got only %" IGRAPH_PRId " vertices.", IGRAPH_EINVAL);
     }
 
     // Create graphs
-    d->g = new graph((int) no_of_nodes, true);
+    d->g = new graph(no_of_nodes, true);
     d->g->setAdjacencyHistograms(num_bins);
-    (*sg) = new simpleGraph((int) no_of_nodes);
+    (*sg) = new simpleGraph(no_of_nodes);
 
     for (i = 0; i < no_of_edges; i++) {
-        int from = (int) IGRAPH_FROM(igraph, i);
-        int to = (int) IGRAPH_TO(igraph, i);
+        int from = IGRAPH_FROM(igraph, i);
+        int to = IGRAPH_TO(igraph, i);
         if (from == to) {
             continue;
         }
@@ -277,16 +257,27 @@ static igraph_error_t igraph_i_hrg_getsimplegraph(const igraph_t *igraph,
 
     d->buildDendrogram();
 
-    return IGRAPH_SUCCESS;
+    return 0;
+}
+
+static void igraph_i_delete_dendrogram(dendro* d) {
+    delete d;
+}
+
+static void igraph_i_delete_simple_graph(simpleGraph* g) {
+    delete g;
+}
+
+static void igraph_i_clear_pblock_array(pblock* arr) {
+    delete [] arr;
 }
 
 /**
  * \function igraph_hrg_init
- * \brief Allocate memory for a HRG.
+ * Allocate memory for a HRG.
  *
  * This function must be called before passing an \ref igraph_hrg_t to
  * an igraph function.
- *
  * \param hrg Pointer to the HRG data structure to initialize.
  * \param n The number of vertices in the graph that is modeled by
  *    this HRG. It can be zero, if this is not yet known.
@@ -295,45 +286,38 @@ static igraph_error_t igraph_i_hrg_getsimplegraph(const igraph_t *igraph,
  * Time complexity: O(n), the number of vertices in the graph.
  */
 
-igraph_error_t igraph_hrg_init(igraph_hrg_t *hrg, igraph_integer_t n) {
-    if (n < 0) {
-        IGRAPH_ERRORF("Number of vertices should not be negative, got %" IGRAPH_PRId ".", IGRAPH_EINVAL, n);
-    }
-    if (n == 0) {
-        n = 1;
-    }
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&hrg->left,      n - 1);
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&hrg->right,     n - 1);
-    IGRAPH_VECTOR_INIT_FINALLY    (&hrg->prob,      n - 1);
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&hrg->edges,     n - 1);
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&hrg->vertices,  n - 1);
+int igraph_hrg_init(igraph_hrg_t *hrg, int n) {
+    IGRAPH_VECTOR_INIT_FINALLY(&hrg->left,      n - 1);
+    IGRAPH_VECTOR_INIT_FINALLY(&hrg->right,     n - 1);
+    IGRAPH_VECTOR_INIT_FINALLY(&hrg->prob,      n - 1);
+    IGRAPH_VECTOR_INIT_FINALLY(&hrg->edges,     n - 1);
+    IGRAPH_VECTOR_INIT_FINALLY(&hrg->vertices,  n - 1);
     IGRAPH_FINALLY_CLEAN(5);
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
  * \function igraph_hrg_destroy
- * \brief Deallocate memory for an HRG.
+ * Deallocate memory for an HRG.
  *
  * The HRG data structure can be reinitialized again with an \ref
  * igraph_hrg_destroy call.
- *
  * \param hrg Pointer to the HRG data structure to deallocate.
  *
  * Time complexity: operating system dependent.
  */
 
 void igraph_hrg_destroy(igraph_hrg_t *hrg) {
-    igraph_vector_int_destroy(&hrg->left);
-    igraph_vector_int_destroy(&hrg->right);
+    igraph_vector_destroy(&hrg->left);
+    igraph_vector_destroy(&hrg->right);
     igraph_vector_destroy(&hrg->prob);
-    igraph_vector_int_destroy(&hrg->edges);
-    igraph_vector_int_destroy(&hrg->vertices);
+    igraph_vector_destroy(&hrg->edges);
+    igraph_vector_destroy(&hrg->vertices);
 }
 
 /**
  * \function igraph_hrg_size
- * \brief Returns the size of the HRG, the number of leaf nodes.
+ * Returns the size of the HRG, the number of leaf nodes.
  *
  * \param hrg Pointer to the HRG.
  * \return The number of leaf nodes in the HRG.
@@ -341,13 +325,13 @@ void igraph_hrg_destroy(igraph_hrg_t *hrg) {
  * Time complexity: O(1).
  */
 
-igraph_integer_t igraph_hrg_size(const igraph_hrg_t *hrg) {
-    return igraph_vector_int_size(&hrg->left) + 1;
+int igraph_hrg_size(const igraph_hrg_t *hrg) {
+    return igraph_vector_size(&hrg->left) + 1;
 }
 
 /**
  * \function igraph_hrg_resize
- * \brief Resize a HRG.
+ * Resize a HRG.
  *
  * \param hrg Pointer to an initialized (see \ref igraph_hrg_init)
  *   HRG.
@@ -357,43 +341,35 @@ igraph_integer_t igraph_hrg_size(const igraph_hrg_t *hrg) {
  * Time complexity: O(n), n is the new size.
  */
 
-igraph_error_t igraph_hrg_resize(igraph_hrg_t *hrg, igraph_integer_t newsize) {
-    igraph_integer_t origsize = igraph_hrg_size(hrg);
+int igraph_hrg_resize(igraph_hrg_t *hrg, int newsize) {
+    int origsize = igraph_hrg_size(hrg);
+    int ret = 0;
+    igraph_error_handler_t *oldhandler =
+        igraph_set_error_handler(igraph_error_handler_ignore);
 
-    /* The data structure must be left in a consistent state if resizing fails. */
+    ret  = igraph_vector_resize(&hrg->left, newsize - 1);
+    ret |= igraph_vector_resize(&hrg->right, newsize - 1);
+    ret |= igraph_vector_resize(&hrg->prob, newsize - 1);
+    ret |= igraph_vector_resize(&hrg->edges, newsize - 1);
+    ret |= igraph_vector_resize(&hrg->vertices, newsize - 1);
 
-#define CHECK_ERR(expr) \
-    do { \
-        igraph_error_t err = (expr); \
-        if (err != IGRAPH_SUCCESS) { \
-            igraph_vector_int_resize(&hrg->left, origsize); \
-            igraph_vector_int_resize(&hrg->right, origsize); \
-            igraph_vector_resize(&hrg->prob, origsize); \
-            igraph_vector_int_resize(&hrg->edges, origsize); \
-            igraph_vector_int_resize(&hrg->vertices, origsize); \
-            IGRAPH_FINALLY_EXIT(); \
-            IGRAPH_ERROR("Cannot resize HRG.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */ \
-        } \
-    } while (0)
+    igraph_set_error_handler(oldhandler);
 
-    IGRAPH_FINALLY_ENTER();
-    {
-        CHECK_ERR(igraph_vector_int_resize(&hrg->left, newsize - 1));
-        CHECK_ERR(igraph_vector_int_resize(&hrg->right, newsize - 1));
-        CHECK_ERR(igraph_vector_resize(&hrg->prob, newsize - 1));
-        CHECK_ERR(igraph_vector_int_resize(&hrg->edges, newsize - 1));
-        CHECK_ERR(igraph_vector_int_resize(&hrg->vertices, newsize - 1));
+    if (ret) {
+        igraph_vector_resize(&hrg->left, origsize);
+        igraph_vector_resize(&hrg->right, origsize);
+        igraph_vector_resize(&hrg->prob, origsize);
+        igraph_vector_resize(&hrg->edges, origsize);
+        igraph_vector_resize(&hrg->vertices, origsize);
+        IGRAPH_ERROR("Cannot resize HRG", ret);
     }
-    IGRAPH_FINALLY_EXIT();
 
-#undef CHECK_ERR
-
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
  * \function igraph_hrg_fit
- * \brief Fit a hierarchical random graph model to a network.
+ * Fit a hierarchical random graph model to a network
  *
  * \param graph The igraph graph to fit the model to. Edge directions
  *   are ignored in directed graphs.
@@ -402,7 +378,7 @@ igraph_error_t igraph_hrg_resize(igraph_hrg_t *hrg, igraph_integer_t newsize) {
  *   function, that can be used as the starting point of the Markov
  *   Chain Monte Carlo fitting, if the \c start argument is true.
  * \param start Logical, whether to start the fitting from the given
- *   HRG model.
+ *   HRG.
  * \param steps Integer, the number of MCMC steps to take in the
  *   fitting procedure. If this is zero, then the fitting stop is a
  *   convergence criteria is fulfilled.
@@ -411,14 +387,12 @@ igraph_error_t igraph_hrg_resize(igraph_hrg_t *hrg, igraph_integer_t newsize) {
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_hrg_fit(const igraph_t *graph,
+int igraph_hrg_fit(const igraph_t *graph,
                    igraph_hrg_t *hrg,
                    igraph_bool_t start,
-                   igraph_integer_t steps) {
+                   int steps) {
 
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN
-
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
+    int no_of_nodes = igraph_vcount(graph);
 
     RNG_BEGIN();
 
@@ -427,7 +401,7 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
     // If we want to start from HRG
     if (start) {
         if (igraph_hrg_size(hrg) != no_of_nodes) {
-            IGRAPH_ERROR("Invalid HRG to start from.", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Invalid HRG to start from", IGRAPH_EINVAL);
         }
         // Convert the igraph graph
         IGRAPH_CHECK(igraph_i_hrg_getgraph(graph, &d));
@@ -448,125 +422,164 @@ igraph_error_t igraph_hrg_fit(const igraph_t *graph,
 
     RNG_END();
 
-    return IGRAPH_SUCCESS;
+    return 0;
 
-    IGRAPH_HANDLE_EXCEPTIONS_END
 }
 
 /**
  * \function igraph_hrg_sample
- * \brief Sample from a hierarchical random graph model.
+ * Sample from a hierarchical random graph model
  *
- * This function draws a single sample from a hierarchical random graph model.
- *
- * \param hrg A HRG model to sample from
- * \param sample Pointer to an uninitialized graph; the sample is stored here.
+ * Sample from a hierarchical random graph ensemble. The ensemble can
+ * be given as a graph (\c input_graph), or as a HRG object (\c hrg).
+ * If a graph is given, then first an MCMC optimization is performed
+ * to find the optimal fitting model; then the MCMC is used to sample
+ * the graph(s).
+ * \param input_graph An igraph graph, or a null pointer. If not a
+ *   null pointer, then a HRG is first fitted to the graph, possibly
+ *   starting from the given HRG, if the \c start argument is true. If
+ *   is is a null pointer, then the given HRG is used as a starting
+ *   point, to  find the optimum of the Markov chain, before the
+ *   sampling.
+ * \param sample Pointer to an uninitialized graph, or a null
+ *   pointer. If only one sample is requested, and it is not a null
+ *   pointer, then the sample is stored here.
+ * \param samples An initialized vector of pointers. If more than one
+ *   samples are requested, then they are stored here. Note that to
+ *   free this data structure, you need to call \ref igraph_destroy() on
+ *   each graph first, then \ref igraph_free() on all pointers, and finally
+ *   \ref igraph_vector_ptr_destroy.
+ * \param no_samples The number of samples to generate.
+ * \param hrg A HRG. It is modified during the sampling.
+ * \param start Logical, whether to start the MCMC from the given
+ *   HRG.
  * \return Error code.
  *
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_hrg_sample(const igraph_hrg_t *hrg, igraph_t *sample) {
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN
-    dendro d;
+int igraph_hrg_sample(const igraph_t *input_graph,
+                      igraph_t *sample,
+                      igraph_vector_ptr_t *samples,
+                      igraph_integer_t no_samples,
+                      igraph_hrg_t *hrg,
+                      igraph_bool_t start) {
 
-    // TODO: error handling
+    int i;
+    dendro *d;
 
-    RNG_BEGIN();
-
-    d.clearDendrograph();
-    d.importDendrogramStructure(hrg);
-    d.makeRandomGraph();
-    d.recordGraphStructure(sample);
-
-    RNG_END();
-
-    return IGRAPH_SUCCESS;
-    IGRAPH_HANDLE_EXCEPTIONS_END
-}
-
-/**
- * \function igraph_hrg_sample_many
- * \brief Draw multiple samples from a hierarchical random graph model.
- *
- * This function draws multiple samples from a hierarchical random graph
- * ensemble. The ensemble can be given as a graph (\c input_graph), or as an
- * HRG object (\c hrg). If a graph is given, then first an MCMC optimization is
- * performed to find the optimal fitting model; then the MCMC is used to sample
- * the new graph.
- *
- * \param hrg A HRG model to sample from
- * \param samples An initialized graph list that will contain the sampled
- *   graphs. Note that existing graphs in the graph list are \em not removed
- *   so make sure you supply an empty list if you do not need the old contents
- *   of the list.
- * \param num_samples The number of samples to generate.
- * \return Error code.
- *
- * Time complexity: TODO.
- */
-
-igraph_error_t igraph_hrg_sample_many(
-    const igraph_hrg_t *hrg, igraph_graph_list_t *samples,
-    igraph_integer_t num_samples
-) {
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN
-    igraph_t g;
-    dendro d;
-
-    if (num_samples < 0) {
-        IGRAPH_ERROR("Number of samples must be non-negative.", IGRAPH_EINVAL);
+    if (no_samples < 0) {
+        IGRAPH_ERROR("Number of samples must be non-negative", IGRAPH_EINVAL);
     }
 
-    if (num_samples == 0) {
-        return IGRAPH_SUCCESS;
+    if (!sample && !samples) {
+        IGRAPH_ERROR("Give at least one of `sample' and `samples'",
+                     IGRAPH_EINVAL);
+    }
+
+    if (no_samples != 1 && sample) {
+        IGRAPH_ERROR("Number of samples should be one if `sample' is given",
+                     IGRAPH_EINVAL);
+    }
+
+    if (no_samples > 1 && !samples) {
+        IGRAPH_ERROR("`samples' must be non-null if number of samples "
+                     "is larger than 1", IGRAPH_EINVAL);
+    }
+
+    if (!start && !input_graph) {
+        IGRAPH_ERROR("Input graph must be given if initial HRG is not used",
+                     IGRAPH_EINVAL);
+    }
+
+    if (!start) {
+        IGRAPH_CHECK(igraph_hrg_resize(hrg, igraph_vcount(input_graph)));
+    }
+
+    if (input_graph && igraph_hrg_size(hrg) != igraph_vcount(input_graph)) {
+        IGRAPH_ERROR("Invalid HRG size, should match number of nodes",
+                     IGRAPH_EINVAL);
     }
 
     RNG_BEGIN();
 
-    d.clearDendrograph();
-    d.importDendrogramStructure(hrg);
-    while (num_samples > 0) {
-        d.makeRandomGraph();
-        d.recordGraphStructure(&g);
-        IGRAPH_FINALLY(igraph_destroy, &g);
-        IGRAPH_CHECK(igraph_graph_list_push_back(samples, &g));
-        IGRAPH_FINALLY_CLEAN(1);
+    d = new dendro;
+    IGRAPH_FINALLY(igraph_i_delete_dendrogram, d);
+
+    // Need to find equilibrium first?
+    if (start) {
+        d->clearDendrograph();
+        d->importDendrogramStructure(hrg);
+    } else {
+        IGRAPH_CHECK(MCMCEquilibrium_Find(d, hrg));
     }
+
+    // TODO: free on error
+
+    if (sample) {
+        // A single graph
+        d->makeRandomGraph();
+        d->recordGraphStructure(sample);
+        if (samples) {
+            igraph_t *G = IGRAPH_CALLOC(1, igraph_t);
+            if (!G) {
+                IGRAPH_ERROR("Cannot sample HRG graphs", IGRAPH_ENOMEM);
+            }
+            d->recordGraphStructure(G);
+            IGRAPH_CHECK(igraph_vector_ptr_resize(samples, 1));
+            VECTOR(*samples)[0] = G;
+        }
+    } else {
+        // Sample many
+        IGRAPH_CHECK(igraph_vector_ptr_resize(samples, no_samples));
+        for (i = 0; i < no_samples; i++) {
+            igraph_t *G = IGRAPH_CALLOC(1, igraph_t);
+            if (!G) {
+                IGRAPH_ERROR("Cannot sample HRG graphs", IGRAPH_ENOMEM);
+            }
+            d->makeRandomGraph();
+            d->recordGraphStructure(G);
+            VECTOR(*samples)[i] = G;
+        }
+    }
+
+    delete d;
+    IGRAPH_FINALLY_CLEAN(1);
 
     RNG_END();
 
-    return IGRAPH_SUCCESS;
-    IGRAPH_HANDLE_EXCEPTIONS_END
+    return 0;
 }
 
 /**
  * \function igraph_hrg_game
- * \brief Generate a hierarchical random graph.
+ * Generate a hierarchical random graph
  *
  * This function is a simple shortcut to \ref igraph_hrg_sample.
- * It creates a single graph from the given HRG.
- *
+ * It creates a single graph, from the given HRG.
  * \param graph Pointer to an uninitialized graph, the new graph is
  *   created here.
- * \param hrg The hierarchical random graph model to sample from.
+ * \param hrg The hierarchical random graph model to sample from. It
+ *   is modified during the MCMC process.
  * \return Error code.
  *
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_hrg_game(igraph_t *graph,
+int igraph_hrg_game(igraph_t *graph,
                     const igraph_hrg_t *hrg) {
-    return igraph_hrg_sample(hrg, graph);
+    return igraph_hrg_sample(/* input_graph= */ 0, /* sample= */ graph,
+            /* samples= */ 0, /* no_samples=*/ 1,
+            /* hrg= */ (igraph_hrg_t*) hrg,
+            /* start= */ 1);
 }
 
 /**
  * \function igraph_hrg_dendrogram
- * \brief Create a dendrogram from a hierarchical random graph.
+ * Create a dendrogram from a hierarchical random graph.
  *
  * Creates the igraph graph equivalent of an \ref igraph_hrg_t data
  * structure.
- *
  * \param graph Pointer to an uninitialized graph, the result is
  *   stored here.
  * \param hrg The hierarchical random graph to convert.
@@ -575,15 +588,14 @@ igraph_error_t igraph_hrg_game(igraph_t *graph,
  * Time complexity: O(n), the number of vertices in the graph.
  */
 
-igraph_error_t igraph_hrg_dendrogram(
-    igraph_t *graph, const igraph_hrg_t *hrg
-) {
+int igraph_hrg_dendrogram(igraph_t *graph,
+                          const igraph_hrg_t *hrg) {
 
-    igraph_integer_t orig_nodes = igraph_hrg_size(hrg);
-    igraph_integer_t no_of_nodes = orig_nodes * 2 - 1;
-    igraph_integer_t no_of_edges = no_of_nodes > 0 ? no_of_nodes - 1 : 0;
-    igraph_vector_int_t edges;
-    igraph_integer_t i, idx = 0;
+    int orig_nodes = igraph_hrg_size(hrg);
+    int no_of_nodes = orig_nodes * 2 - 1;
+    int no_of_edges = no_of_nodes > 0 ? no_of_nodes - 1 : 0;
+    igraph_vector_t edges;
+    int i, idx = 0;
     igraph_vector_ptr_t vattrs;
     igraph_vector_t prob;
     igraph_attribute_record_t rec = { "probability",
@@ -600,14 +612,14 @@ igraph_error_t igraph_hrg_dendrogram(
         VECTOR(prob)[orig_nodes + i] = VECTOR(hrg->prob)[i];
     }
 
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges * 2);
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, no_of_edges * 2);
     IGRAPH_CHECK(igraph_vector_ptr_init(&vattrs, 1));
     IGRAPH_FINALLY(igraph_vector_ptr_destroy, &vattrs);
     VECTOR(vattrs)[0] = &rec;
 
     for (i = 0; i < orig_nodes - 1; i++) {
-        igraph_integer_t left = VECTOR(hrg->left)[i];
-        igraph_integer_t right = VECTOR(hrg->right)[i];
+        int left = VECTOR(hrg->left)[i];
+        int right = VECTOR(hrg->right)[i];
 
         VECTOR(edges)[idx++] = orig_nodes + i;
         VECTOR(edges)[idx++] = left < 0 ? orig_nodes - left - 1 : left;
@@ -618,19 +630,19 @@ igraph_error_t igraph_hrg_dendrogram(
     IGRAPH_CHECK(igraph_empty(graph, 0, IGRAPH_DIRECTED));
     IGRAPH_FINALLY(igraph_destroy, graph);
     IGRAPH_CHECK(igraph_add_vertices(graph, no_of_nodes, &vattrs));
-    IGRAPH_CHECK(igraph_add_edges(graph, &edges, NULL));
+    IGRAPH_CHECK(igraph_add_edges(graph, &edges, 0));
 
     igraph_vector_ptr_destroy(&vattrs);
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_destroy(&edges);
     igraph_vector_destroy(&prob);
     IGRAPH_FINALLY_CLEAN(4);  // + 1 for graph
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
  * \function igraph_hrg_consensus
- * \brief Calculate a consensus tree for a HRG.
+ * Calculate a consensus tree for a HRG.
  *
  * The calculation can be started from the given HRG (\c hrg), or (if
  * \c start is false), a HRG is first fitted to the given graph.
@@ -639,8 +651,8 @@ igraph_error_t igraph_hrg_dendrogram(
  * \param parents An initialized vector, the results are stored
  *   here. For each vertex, the id of its parent vertex is stored, or
  *   -1, if the vertex is the root vertex in the tree. The first n
- *   vertex IDs (from 0) refer to the original vertices of the graph,
- *   the other IDs refer to vertex groups.
+ *   vertex ids (from 0) refer to the original vertices of the graph,
+ *   the other ids refer to vertex groups.
  * \param weights Numeric vector, counts the number of times a given
  *   tree split occured in the generated network samples, for each
  *   internal vertices. The order is the same as in \c parents.
@@ -656,23 +668,23 @@ igraph_error_t igraph_hrg_dendrogram(
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
-                         igraph_vector_int_t *parents,
+int igraph_hrg_consensus(const igraph_t *graph,
+                         igraph_vector_t *parents,
                          igraph_vector_t *weights,
                          igraph_hrg_t *hrg,
                          igraph_bool_t start,
-                         igraph_integer_t num_samples) {
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN
+                         int num_samples) {
 
     dendro *d;
 
     if (start && !hrg) {
-        IGRAPH_ERROR("`hrg' must be given if `start' is true.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("`hrg' must be given is `start' is true", IGRAPH_EINVAL);
     }
 
     RNG_BEGIN();
 
     d = new dendro;
+    IGRAPH_FINALLY(igraph_i_delete_dendrogram, d);
 
     if (start) {
         IGRAPH_CHECK(igraph_i_hrg_getgraph(graph, d));
@@ -681,7 +693,7 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
     } else {
         IGRAPH_CHECK(igraph_i_hrg_getgraph(graph, d));
         if (hrg) {
-            igraph_hrg_resize(hrg, igraph_vcount(graph));
+            IGRAPH_CHECK(igraph_hrg_resize(hrg, igraph_vcount(graph)));
         }
         IGRAPH_CHECK(MCMCEquilibrium_Find(d, hrg));
     }
@@ -691,15 +703,14 @@ igraph_error_t igraph_hrg_consensus(const igraph_t *graph,
     d->recordConsensusTree(parents, weights);
 
     delete d;
+    IGRAPH_FINALLY_CLEAN(1);
 
     RNG_END();
 
-    return IGRAPH_SUCCESS;
-
-    IGRAPH_HANDLE_EXCEPTIONS_END
+    return 0;
 }
 
-static igraph_error_t MCMCEquilibrium_Sample(dendro *d, igraph_integer_t num_samples) {
+static int MCMCEquilibrium_Sample(dendro *d, int num_samples) {
 
     // Because moves in the dendrogram space are chosen (Monte
     // Carlo) so that we sample dendrograms with probability
@@ -714,8 +725,8 @@ static igraph_error_t MCMCEquilibrium_Sample(dendro *d, igraph_integer_t num_sam
 
     double dL;
     bool flag_taken;
-    igraph_integer_t sample_num = 0;
-    igraph_integer_t t = 1, thresh = 100 * d->g->numNodes();
+    int sample_num = 0;
+    int t = 1, thresh = 100 * d->g->numNodes();
     double ptest = 1.0 / 10.0 / d->g->numNodes();
 
     while (sample_num < num_samples) {
@@ -728,10 +739,10 @@ static igraph_error_t MCMCEquilibrium_Sample(dendro *d, igraph_integer_t num_sam
         t++;
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static int QsortPartition (pblock* array, igraph_integer_t left, igraph_integer_t right, igraph_integer_t index) {
+static int QsortPartition (pblock* array, int left, int right, int index) {
     pblock p_value, temp;
     p_value.L = array[index].L;
     p_value.i = array[index].i;
@@ -748,8 +759,8 @@ static int QsortPartition (pblock* array, igraph_integer_t left, igraph_integer_
     array[index].i = temp.i;
     array[index].j = temp.j;
 
-    igraph_integer_t stored = left;
-    for (igraph_integer_t i = left; i < right; i++) {
+    int stored = left;
+    for (int i = left; i < right; i++) {
         if (array[i].L <= p_value.L) {
             // swap(array[stored], array[i])
             temp.L = array[i].L;
@@ -778,17 +789,17 @@ static int QsortPartition (pblock* array, igraph_integer_t left, igraph_integer_
     return stored;
 }
 
-static void QsortMain (pblock* array, igraph_integer_t left, igraph_integer_t right) {
+static void QsortMain (pblock* array, int left, int right) {
     if (right > left) {
-        igraph_integer_t pivot = left;
-        igraph_integer_t part  = QsortPartition(array, left, right, pivot);
+        int pivot = left;
+        int part  = QsortPartition(array, left, right, pivot);
         QsortMain(array, left,   part - 1);
         QsortMain(array, part + 1, right  );
     }
     return;
 }
 
-static igraph_error_t rankCandidatesByProbability(simpleGraph *sg, dendro *d,
+static int rankCandidatesByProbability(simpleGraph *sg, dendro *d,
                                 pblock *br_list, int mk) {
     int mkk = 0;
     int n = sg->getNumNodes();
@@ -807,13 +818,13 @@ static igraph_error_t rankCandidatesByProbability(simpleGraph *sg, dendro *d,
     // Sort the candidates by their average probability
     QsortMain(br_list, 0, mk - 1);
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t recordPredictions(pblock *br_list, igraph_vector_int_t *edges,
+static int recordPredictions(pblock *br_list, igraph_vector_t *edges,
                       igraph_vector_t *prob, int mk) {
 
-    IGRAPH_CHECK(igraph_vector_int_resize(edges, mk * 2));
+    IGRAPH_CHECK(igraph_vector_resize(edges, mk * 2));
     IGRAPH_CHECK(igraph_vector_resize(prob, mk));
 
     for (int i = mk - 1, idx = 0, idx2 = 0; i >= 0; i--) {
@@ -822,16 +833,15 @@ static igraph_error_t recordPredictions(pblock *br_list, igraph_vector_int_t *ed
         VECTOR(*prob)[idx2++] = br_list[i].L;
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
  * \function igraph_hrg_predict
- * \brief Predict missing edges in a graph, based on HRG models.
+ * Predict missing edges in a graph, based on HRG models
  *
  * Samples HRG models for a network, and estimated the probability
  * that an edge was falsely observed as non-existent in the network.
- *
  * \param graph The input graph.
  * \param edges The list of missing edges is stored here, the first
  *   two elements are the first edge, the next two the second edge,
@@ -849,29 +859,28 @@ static igraph_error_t recordPredictions(pblock *br_list, igraph_vector_int_t *ed
  * Time complexity: TODO.
  */
 
-igraph_error_t igraph_hrg_predict(const igraph_t *graph,
-                       igraph_vector_int_t *edges,
+int igraph_hrg_predict(const igraph_t *graph,
+                       igraph_vector_t *edges,
                        igraph_vector_t *prob,
                        igraph_hrg_t *hrg,
                        igraph_bool_t start,
-                       igraph_integer_t num_samples,
-                       igraph_integer_t num_bins) {
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN
+                       int num_samples,
+                       int num_bins) {
 
-    dendro *d;
     pblock *br_list;
     int mk;
     simpleGraph *sg;
 
     if (start && !hrg) {
-        IGRAPH_ERROR("`hrg' must be given if `start' is true.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("`hrg' must be given is `start' is true", IGRAPH_EINVAL);
     }
 
     RNG_BEGIN();
 
-    d = new dendro;
+    dendro d;
 
-    IGRAPH_CHECK(igraph_i_hrg_getsimplegraph(graph, d, &sg, num_bins));
+    IGRAPH_CHECK(igraph_i_hrg_getsimplegraph(graph, &d, &sg, num_bins));
+    IGRAPH_FINALLY(igraph_i_delete_simple_graph, sg);
 
     mk = sg->getNumNodes() * (sg->getNumNodes() - 1) / 2 - sg->getNumLinks() / 2;
     br_list = new pblock[mk];
@@ -880,35 +889,34 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
         br_list[i].i = -1;
         br_list[i].j = -1;
     }
+    IGRAPH_FINALLY(igraph_i_clear_pblock_array, br_list);
 
     if (start) {
-        d->clearDendrograph();
-        d->importDendrogramStructure(hrg);
+        d.clearDendrograph();
+        d.importDendrogramStructure(hrg);
     } else {
         if (hrg) {
-            igraph_hrg_resize(hrg, igraph_vcount(graph));
+            IGRAPH_CHECK(igraph_hrg_resize(hrg, igraph_vcount(graph)));
         }
-        IGRAPH_CHECK(MCMCEquilibrium_Find(d, hrg));
+        IGRAPH_CHECK(MCMCEquilibrium_Find(&d, hrg));
     }
 
-    IGRAPH_CHECK(MCMCEquilibrium_Sample(d, num_samples));
-    IGRAPH_CHECK(rankCandidatesByProbability(sg, d, br_list, mk));
+    IGRAPH_CHECK(MCMCEquilibrium_Sample(&d, num_samples));
+    IGRAPH_CHECK(rankCandidatesByProbability(sg, &d, br_list, mk));
     IGRAPH_CHECK(recordPredictions(br_list, edges, prob, mk));
 
-    delete d;
     delete sg;
     delete [] br_list;
+    IGRAPH_FINALLY_CLEAN(2);
 
     RNG_END();
 
-    return IGRAPH_SUCCESS;
-
-    IGRAPH_HANDLE_EXCEPTIONS_END
+    return 0;
 }
 
 /**
  * \function igraph_hrg_create
- * \brief Create a HRG from an igraph graph.
+ * Create a HRG from an igraph graph.
  *
  * \param hrg Pointer to an initialized \ref igraph_hrg_t. The result
  *    is stored here.
@@ -916,25 +924,25 @@ igraph_error_t igraph_hrg_predict(const igraph_t *graph,
  *    binary tree, with n-1 internal and n leaf vertices. The root
  *    vertex must have in-degree zero.
  * \param prob The vector of probabilities, this is used to label the
- *    internal nodes of the hierarchical random graph.
+ *    internal nodes of the hierarchical random graph. The values
+ *    corresponding to the leaves are ignored.
  * \return Error code.
  *
  * Time complexity: O(n), the number of vertices in the tree.
  */
 
-igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
+int igraph_hrg_create(igraph_hrg_t *hrg,
                       const igraph_t *graph,
                       const igraph_vector_t *prob) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_internal = no_of_nodes > 0 ? (no_of_nodes - 1) / 2 : 0;
-    igraph_vector_int_t deg, idx;
-    igraph_integer_t root = 0;
-    igraph_integer_t d0 = 0, d1 = 0, d2 = 0;
-    igraph_integer_t ii = 0, il = 0;
-    igraph_vector_int_t neis;
+    int no_of_nodes = igraph_vcount(graph);
+    int no_of_internal = no_of_nodes > 0 ? (no_of_nodes - 1) / 2 : 0;
+    igraph_vector_t deg, idx;
+    int root = 0;
+    int d0 = 0, d1 = 0, d2 = 0;
+    int ii = 0, il = 0;
+    igraph_vector_t neis;
     igraph_vector_t path;
-    igraph_bool_t simple;
 
     // --------------------------------------------------------
     // CHECKS
@@ -942,57 +950,50 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
 
     // At least three vertices are required
     if (no_of_nodes < 3) {
-        IGRAPH_ERROR("HRG tree must have at least three vertices.",
+        IGRAPH_ERROR("HRG tree must have at least three vertices",
                      IGRAPH_EINVAL);
     }
 
     // Prob vector was given
     if (!prob) {
-        IGRAPH_ERROR("Probability vector must be given for HRG.",
+        IGRAPH_ERROR("Probability vector must be given for HRG",
                      IGRAPH_EINVAL);
     }
 
     // Length of prob vector
-    if (igraph_vector_size(prob) != no_of_nodes / 2) {
-        IGRAPH_ERRORF("HRG probability vector size (%" IGRAPH_PRId ") should be equal "
-                "to the number of internal nodes (%" IGRAPH_PRId ").", IGRAPH_EINVAL,
-                igraph_vector_size(prob), no_of_nodes / 2);
+    if (igraph_vector_size(prob) != no_of_nodes) {
+        IGRAPH_ERROR("HRG probability vector of wrong size", IGRAPH_EINVAL);
     }
 
     // Must be a directed graph
     if (!igraph_is_directed(graph)) {
-        IGRAPH_ERROR("HRG graph must be directed.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("HRG graph must be directed", IGRAPH_EINVAL);
     }
 
     // Number of nodes must be odd
     if (no_of_nodes % 2 == 0) {
-        IGRAPH_ERROR("Complete HRG graph must have odd number of vertices.",
+        IGRAPH_ERROR("Complete HRG graph must have odd number of vertices",
                      IGRAPH_EINVAL);
     }
 
-    IGRAPH_CHECK(igraph_is_simple(graph, &simple));
-    if (!simple) {
-        IGRAPH_ERROR("HRG graph must be a simple graph.", IGRAPH_EINVAL);
-    }
-
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&deg, 0);
+    IGRAPH_VECTOR_INIT_FINALLY(&deg, 0);
 
     // Every vertex, except for the root must have in-degree one.
     IGRAPH_CHECK(igraph_degree(graph, &deg, igraph_vss_all(), IGRAPH_IN,
                                IGRAPH_LOOPS));
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t d = VECTOR(deg)[i];
+    for (int i = 0; i < no_of_nodes; i++) {
+        int d = VECTOR(deg)[i];
         switch (d) {
         case 0: d0++; root = i; break;
         case 1: d1++; break;
         default:
             IGRAPH_ERROR("HRG nodes must have in-degree one, except for the "
-                         "root vertex.", IGRAPH_EINVAL);
+                         "root vertex", IGRAPH_EINVAL);
         }
     }
     if (d1 != no_of_nodes - 1 || d0 != 1) {
         IGRAPH_ERROR("HRG nodes must have in-degree one, except for the "
-                     "root vertex.", IGRAPH_EINVAL);
+                     "root vertex", IGRAPH_EINVAL);
     }
 
     // Every internal vertex must have out-degree two,
@@ -1001,13 +1002,13 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
     IGRAPH_CHECK(igraph_degree(graph, &deg, igraph_vss_all(), IGRAPH_OUT,
                                IGRAPH_LOOPS));
     for (int i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t d = VECTOR(deg)[i];
+        int d = VECTOR(deg)[i];
         switch (d) {
         case 0: d0++; break;
         case 2: d2++; break;
         default:
             IGRAPH_ERROR("HRG nodes must have out-degree 2 (internal nodes) or "
-                         "degree 0 (leaves).", IGRAPH_EINVAL);
+                         "degree 0 (leaves)", IGRAPH_EINVAL);
         }
     }
 
@@ -1024,10 +1025,10 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
 
     // Create an index, that maps the root node as first, then
     // the internal nodes, then the leaf nodes
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&idx, no_of_nodes);
+    IGRAPH_VECTOR_INIT_FINALLY(&idx, no_of_nodes);
     VECTOR(idx)[root] = - (ii++) - 1;
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t d = VECTOR(deg)[i];
+    for (int i = 0; i < no_of_nodes; i++) {
+        int d = VECTOR(deg)[i];
         if (i == root) {
             continue;
         }
@@ -1040,27 +1041,27 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
     }
 
     IGRAPH_CHECK(igraph_hrg_resize(hrg, no_of_internal + 1));
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&neis, 0);
-    for (igraph_integer_t i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t ri = VECTOR(idx)[i];
+    IGRAPH_VECTOR_INIT_FINALLY(&neis, 0);
+    for (int i = 0; i < no_of_nodes; i++) {
+        int ri = VECTOR(idx)[i];
         if (ri >= 0) {
             continue;
         }
         IGRAPH_CHECK(igraph_neighbors(graph, &neis, i, IGRAPH_OUT));
-        VECTOR(hrg->left )[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[0] ];
-        VECTOR(hrg->right)[-ri - 1] = VECTOR(idx)[ VECTOR(neis)[1] ];
+        VECTOR(hrg->left )[-ri - 1] = VECTOR(idx)[ (int) VECTOR(neis)[0] ];
+        VECTOR(hrg->right)[-ri - 1] = VECTOR(idx)[ (int) VECTOR(neis)[1] ];
         VECTOR(hrg->prob )[-ri - 1] = VECTOR(*prob)[i];
     }
 
     // Calculate the number of vertices and edges in each subtree
-    igraph_vector_int_null(&hrg->edges);
-    igraph_vector_int_null(&hrg->vertices);
+    igraph_vector_null(&hrg->edges);
+    igraph_vector_null(&hrg->vertices);
     IGRAPH_VECTOR_INIT_FINALLY(&path, 0);
     IGRAPH_CHECK(igraph_vector_push_back(&path, VECTOR(idx)[root]));
     while (!igraph_vector_empty(&path)) {
-        igraph_integer_t ri = igraph_vector_tail(&path);
-        igraph_integer_t lc = VECTOR(hrg->left)[-ri - 1];
-        igraph_integer_t rc = VECTOR(hrg->right)[-ri - 1];
+        int ri = igraph_vector_tail(&path);
+        int lc = VECTOR(hrg->left)[-ri - 1];
+        int rc = VECTOR(hrg->right)[-ri - 1];
         if (lc < 0 && VECTOR(hrg->vertices)[-lc - 1] == 0) {
             // Go left
             IGRAPH_CHECK(igraph_vector_push_back(&path, lc));
@@ -1080,10 +1081,10 @@ igraph_error_t igraph_hrg_create(igraph_hrg_t *hrg,
     }
 
     igraph_vector_destroy(&path);
-    igraph_vector_int_destroy(&neis);
-    igraph_vector_int_destroy(&idx);
-    igraph_vector_int_destroy(&deg);
+    igraph_vector_destroy(&neis);
+    igraph_vector_destroy(&idx);
+    igraph_vector_destroy(&deg);
     IGRAPH_FINALLY_CLEAN(4);
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }

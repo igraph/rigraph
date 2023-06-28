@@ -25,14 +25,6 @@
 
 #include "core/trie.h"
 
-/* TODO: Find out maximum supported vertex count. */
-#ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
-/* Limit maximum vertex count when using a fuzzer, to avoid out-of-memory failure. */
-#define IGRAPH_DL_MAX_VERTEX_COUNT (1 << 20)
-#else
-#define IGRAPH_DL_MAX_VERTEX_COUNT INT32_MAX
-#endif
-
 typedef enum { IGRAPH_DL_MATRIX,
                IGRAPH_DL_EDGELIST1, IGRAPH_DL_NODELIST1
              } igraph_i_dl_type_t;
@@ -40,14 +32,13 @@ typedef enum { IGRAPH_DL_MATRIX,
 typedef struct {
     void *scanner;
     int eof;
-    char errmsg[300];
-    igraph_error_t igraph_errno;
     int mode;
-    igraph_integer_t n;
-    igraph_integer_t from, to;
-    igraph_vector_int_t edges;
+    long int n;
+    long int from, to;
+    igraph_vector_t edges;
     igraph_vector_t weights;
     igraph_strvector_t labels;
     igraph_trie_t trie;
     igraph_i_dl_type_t type;
+    char errmsg[300];
 } igraph_i_dl_parsedata_t;

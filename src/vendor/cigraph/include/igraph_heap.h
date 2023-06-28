@@ -25,8 +25,6 @@
 #define IGRAPH_HEAP_H
 
 #include "igraph_decls.h"
-#include "igraph_error.h"
-#include "igraph_types.h"
 
 __BEGIN_DECLS
 
@@ -52,7 +50,7 @@ __BEGIN_DECLS
 #undef HEAP_TYPE_MIN
 #undef BASE_IGRAPH_REAL
 
-#define BASE_INT
+#define BASE_LONG
 #define HEAP_TYPE_MAX
 #include "igraph_pmt.h"
 #include "igraph_heap_pmt.h"
@@ -63,7 +61,7 @@ __BEGIN_DECLS
 #include "igraph_heap_pmt.h"
 #include "igraph_pmt_off.h"
 #undef HEAP_TYPE_MIN
-#undef BASE_INT
+#undef BASE_LONG
 
 #define BASE_CHAR
 #define HEAP_TYPE_MAX

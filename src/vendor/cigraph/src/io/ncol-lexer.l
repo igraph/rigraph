@@ -44,6 +44,7 @@
 
 */
 
+#include "config.h"
 #include <stdlib.h>
 
 #include "io/ncol-header.h"
@@ -69,7 +70,6 @@
 %option reentrant
 %option bison-bridge
 %option bison-locations
-%option yylineno
 
 alnum [^ \t\n\r\0]
 

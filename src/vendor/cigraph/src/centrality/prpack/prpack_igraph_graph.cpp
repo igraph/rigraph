@@ -1,9 +1,6 @@
 #include "prpack_igraph_graph.h"
-#include <stdexcept>
-#include <climits>
 #include <cstdlib>
 #include <cstring>
-#include <new>
 
 #include "igraph_interface.h"
 
@@ -12,69 +9,53 @@ using namespace std;
 
 #ifdef PRPACK_IGRAPH_SUPPORT
 
-igraph_error_t prpack_igraph_graph::convert_from_igraph(
-        const igraph_t *g, const igraph_vector_t *weights, bool directed) {
-
-    const bool treat_as_directed = igraph_is_directed(g) && directed;
-    igraph_integer_t vcount = igraph_vcount(g), ecount = igraph_ecount(g);
-    double *p_weight = nullptr;
-
-    if (vcount > INT_MAX) {
-        IGRAPH_ERROR("Too many vertices for PRPACK.", IGRAPH_EINVAL);
-    }
-    if (ecount > (treat_as_directed ? INT_MAX : INT_MAX/2)) {
-        IGRAPH_ERROR("Too many edges for PRPACK.", IGRAPH_EINVAL);
-    }
-
-    if (weights && igraph_vector_size(weights) != ecount) {
-        IGRAPH_ERROR("Weight vector length must agree with number of edges.", IGRAPH_EINVAL);
-    }
+prpack_igraph_graph::prpack_igraph_graph(const igraph_t* g, const igraph_vector_t* weights,
+        bool directed) {
+    const igraph_bool_t treat_as_directed = igraph_is_directed(g) && directed;
+    igraph_es_t es;
+    igraph_eit_t eit;
+    igraph_vector_t neis;
+    long int i, j, eid, sum, temp, num_ignored_es;
+    int *p_head, *p_head_copy;
+    double* p_weight = 0;
 
     // Get the number of vertices and edges. For undirected graphs, we add
     // an edge in both directions.
-    num_vs = (int) vcount;
-    num_es = (int) ecount;
+    num_vs = igraph_vcount(g);
+    num_es = igraph_ecount(g);
     num_self_es = 0;
     if (!treat_as_directed) {
         num_es *= 2;
     }
 
     // Allocate memory for heads and tails
-    int *p_head = heads = new int[num_es];
+    p_head = heads = new int[num_es];
     tails = new int[num_vs];
     memset(tails, 0, num_vs * sizeof(tails[0]));
 
     // Allocate memory for weights if needed
-    if (weights) {
+    if (weights != 0) {
         p_weight = vals = new double[num_es];
     }
 
     // Count the number of ignored edges (those with negative or zero weight)
-    int num_ignored_es = 0;
+    num_ignored_es = 0;
 
     if (treat_as_directed) {
-        // Use of igraph "finally" stack is safe in this block
-        // since no exceptions can be thrown from here.
-
         // Select all the edges and iterate over them by the source vertices
+        es = igraph_ess_all(IGRAPH_EDGEORDER_TO);
+
         // Add the edges
-        igraph_eit_t eit;
-        IGRAPH_CHECK(igraph_eit_create(g, igraph_ess_all(IGRAPH_EDGEORDER_TO), &eit));
-        IGRAPH_FINALLY(igraph_eit_destroy, &eit);
+        igraph_eit_create(g, es, &eit);
         while (!IGRAPH_EIT_END(eit)) {
-            igraph_integer_t eid = IGRAPH_EIT_GET(eit);
+            eid = IGRAPH_EIT_GET(eit);
             IGRAPH_EIT_NEXT(eit);
 
             // Handle the weight
             if (weights != 0) {
                 // Does this edge have zero or negative weight?
-                if (VECTOR(*weights)[eid] < 0) {
-                    // Negative weights are disallowed.
-                    IGRAPH_ERROR("Edge weights must not be negative.", IGRAPH_EINVAL);
-                } else if (isnan(VECTOR(*weights)[eid])) {
-                    IGRAPH_ERROR("Edge weights must not be NaN.", IGRAPH_EINVAL);
-                } else if (VECTOR(*weights)[eid] == 0) {
-                    // Edges with zero weight are ignored.
+                if (VECTOR(*weights)[eid] <= 0) {
+                    // Ignore it.
                     num_ignored_es++;
                     continue;
                 }
@@ -92,32 +73,25 @@ igraph_error_t prpack_igraph_graph::convert_from_igraph(
             }
         }
         igraph_eit_destroy(&eit);
-        IGRAPH_FINALLY_CLEAN(1);
     } else {
-        // Use of igraph "finally" stack is safe in this block
-        // since no exceptions can be thrown from here.
-
         // Select all the edges and iterate over them by the target vertices
-        igraph_vector_int_t neis;
-        IGRAPH_CHECK(igraph_vector_int_init(&neis, 0));
-        IGRAPH_FINALLY(igraph_vector_int_destroy, &neis);
+        igraph_vector_init(&neis, 0);
 
-        for (int i = 0; i < num_vs; i++) {
-            IGRAPH_CHECK(igraph_incident(g, &neis, i, IGRAPH_ALL));
-
-            int temp = igraph_vector_int_size(&neis);
+        for (i = 0; i < num_vs; i++) {
+            igraph_incident(g, &neis, i, IGRAPH_ALL);
+            temp = igraph_vector_size(&neis);
 
             // TODO: should loop edges be added in both directions?
-            int *p_head_copy = p_head;
-            for (int j = 0; j < temp; j++) {
+            p_head_copy = p_head;
+            for (j = 0; j < temp; j++) {
                 if (weights != 0) {
-                    if (VECTOR(*weights)[VECTOR(neis)[j]] <= 0) {
+                    if (VECTOR(*weights)[(long int)VECTOR(neis)[j]] <= 0) {
                         // Ignore
                         num_ignored_es++;
                         continue;
                     }
 
-                    *p_weight = VECTOR(*weights)[VECTOR(neis)[j]];
+                    *p_weight = VECTOR(*weights)[(long int)VECTOR(neis)[j]];
                     ++p_weight;
                 }
 
@@ -130,16 +104,15 @@ igraph_error_t prpack_igraph_graph::convert_from_igraph(
             tails[i] = p_head - p_head_copy;
         }
 
-        igraph_vector_int_destroy(&neis);
-        IGRAPH_FINALLY_CLEAN(1);
+        igraph_vector_destroy(&neis);
     }
 
     // Decrease num_es by the number of ignored edges
     num_es -= num_ignored_es;
 
     // Finalize the tails vector
-    for (int i = 0, sum = 0; i < num_vs; ++i) {
-        int temp = sum;
+    for (i = 0, sum = 0; i < num_vs; ++i) {
+        temp = sum;
         sum += tails[i];
         tails[i] = temp;
     }
@@ -168,8 +141,6 @@ igraph_error_t prpack_igraph_graph::convert_from_igraph(
     }
     printf("===========================\n");
     */
-
-    return IGRAPH_SUCCESS;
 }
 
 // PRPACK_IGRAPH_SUPPORT

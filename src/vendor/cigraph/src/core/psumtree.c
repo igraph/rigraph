@@ -27,9 +27,11 @@
 #include "igraph_psumtree.h"
 #include "igraph_error.h"
 
-#include "math/safe_intop.h"
-
 #include <math.h>
+
+static double igraph_i_log2(double f) {
+    return log(f) / log(2.0);
+}
 
 /**
  * \ingroup psumtree
@@ -81,27 +83,17 @@
  * The tree is initialized with a fixed number of elements. After initialization,
  * the value corresponding to each element is zero.
  *
- * \param t The tree to initialize.
- * \param size The number of elements in the tree. It must be at least one.
- * \return Error code, typically \c IGRAPH_ENOMEM if there is not enough memory.
+ * \param t The tree to initialize
+ * \param size The number of elements in the tree
+ * \return Error code, typically \c IGRAPH_ENOMEM if there is not enough memory
  *
  * Time complexity: O(n) for a tree containing n elements
  */
-igraph_error_t igraph_psumtree_init(igraph_psumtree_t *t, igraph_integer_t size) {
-    igraph_integer_t vecsize;
-
-    IGRAPH_ASSERT(size > 0);
-
+int igraph_psumtree_init(igraph_psumtree_t *t, long int size) {
     t->size = size;
-
-    /* offset = 2^ceiling(log2(size)) - 1 */
-    IGRAPH_CHECK(igraph_i_safe_next_pow_2(size, &t->offset));
-    t->offset -= 1;
-
-    IGRAPH_SAFE_ADD(t->offset, t->size, &vecsize);
-    IGRAPH_CHECK(igraph_vector_init(&t->v, vecsize));
-
-    return IGRAPH_SUCCESS;
+    t->offset = (long int) (pow(2, ceil(igraph_i_log2(size))) - 1);
+    IGRAPH_CHECK(igraph_vector_init(&t->v, t->offset + t->size));
+    return 0;
 }
 
 /**
@@ -112,7 +104,7 @@ igraph_error_t igraph_psumtree_init(igraph_psumtree_t *t, igraph_integer_t size)
  * \param t The tree to reset.
  */
 void igraph_psumtree_reset(igraph_psumtree_t *t) {
-    igraph_vector_null(&t->v);
+    igraph_vector_fill(&(t->v), 0);
 }
 
 /**
@@ -146,7 +138,7 @@ void igraph_psumtree_destroy(igraph_psumtree_t *t) {
  *
  * Time complexity: O(1)
  */
-igraph_real_t igraph_psumtree_get(const igraph_psumtree_t *t, igraph_integer_t idx) {
+igraph_real_t igraph_psumtree_get(const igraph_psumtree_t *t, long int idx) {
     const igraph_vector_t *tree = &t->v;
     return VECTOR(*tree)[t->offset + idx];
 }
@@ -177,11 +169,11 @@ igraph_real_t igraph_psumtree_get(const igraph_psumtree_t *t, igraph_integer_t i
  *
  * Time complexity: O(log n), where n is the number of items in the tree.
  */
-igraph_error_t igraph_psumtree_search(const igraph_psumtree_t *t, igraph_integer_t *idx,
+int igraph_psumtree_search(const igraph_psumtree_t *t, long int *idx,
                            igraph_real_t search) {
     const igraph_vector_t *tree = &t->v;
-    igraph_integer_t i = 1;
-    igraph_integer_t size = igraph_vector_size(tree);
+    long int i = 1;
+    long int size = igraph_vector_size(tree);
 
     IGRAPH_ASSERT(search >= 0);
     IGRAPH_ASSERT(search < igraph_psumtree_sum(t));
@@ -216,12 +208,12 @@ igraph_error_t igraph_psumtree_search(const igraph_psumtree_t *t, igraph_integer
  *
  * Time complexity: O(log n), where n is the number of items in the tree.
  */
-igraph_error_t igraph_psumtree_update(igraph_psumtree_t *t, igraph_integer_t idx,
+int igraph_psumtree_update(igraph_psumtree_t *t, long int idx,
                            igraph_real_t new_value) {
     const igraph_vector_t *tree = &t->v;
     igraph_real_t difference;
 
-    if (new_value >= 0 && isfinite(new_value)) {
+    if (new_value >= 0 && igraph_finite(new_value)) {
         idx = idx + t->offset + 1;
         difference = new_value - VECTOR(*tree)[idx - 1];
 
@@ -249,7 +241,7 @@ igraph_error_t igraph_psumtree_update(igraph_psumtree_t *t, igraph_integer_t idx
  *
  * Time complexity: O(1).
  */
-igraph_integer_t igraph_psumtree_size(const igraph_psumtree_t *t) {
+long int igraph_psumtree_size(const igraph_psumtree_t *t) {
     return t->size;
 }
 

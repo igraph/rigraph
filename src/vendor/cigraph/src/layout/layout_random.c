@@ -42,10 +42,10 @@
  * Time complexity: O(|V|), the
  * number of vertices.
  */
-igraph_error_t igraph_layout_random(const igraph_t *graph, igraph_matrix_t *res) {
+int igraph_layout_random(const igraph_t *graph, igraph_matrix_t *res) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t i;
+    long int no_of_nodes = igraph_vcount(graph);
+    long int i;
 
     IGRAPH_CHECK(igraph_matrix_resize(res, no_of_nodes, 2));
 
@@ -58,7 +58,7 @@ igraph_error_t igraph_layout_random(const igraph_t *graph, igraph_matrix_t *res)
 
     RNG_END();
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
@@ -79,10 +79,10 @@ igraph_error_t igraph_layout_random(const igraph_t *graph, igraph_matrix_t *res)
  *
  * Time complexity: O(|V|), the number of vertices.
  */
-igraph_error_t igraph_layout_random_3d(const igraph_t *graph, igraph_matrix_t *res) {
+int igraph_layout_random_3d(const igraph_t *graph, igraph_matrix_t *res) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t i;
+    long int no_of_nodes = igraph_vcount(graph);
+    long int i;
 
     IGRAPH_CHECK(igraph_matrix_resize(res, no_of_nodes, 3));
 
@@ -103,7 +103,7 @@ igraph_error_t igraph_layout_random_3d(const igraph_t *graph, igraph_matrix_t *r
 /* The following functions generate suitable initial random layouts for
  * the Fruchterman-Reingold and Kamada-Kawai algorithms. */
 
-igraph_error_t igraph_i_layout_random_bounded(
+int igraph_i_layout_random_bounded(
         const igraph_t *graph,
         igraph_matrix_t *res,
         const igraph_vector_t *minx, const igraph_vector_t *maxx,
@@ -160,16 +160,16 @@ igraph_error_t igraph_i_layout_random_bounded(
         igraph_real_t x2 = maxx ? VECTOR(*maxx)[i] : dmaxx;
         igraph_real_t y1 = miny ? VECTOR(*miny)[i] : dminy;
         igraph_real_t y2 = maxy ? VECTOR(*maxy)[i] : dmaxy;
-        if (!isfinite(x1)) {
+        if (!igraph_finite(x1)) {
             x1 = -width / 2;
         }
-        if (!isfinite(x2)) {
+        if (!igraph_finite(x2)) {
             x2 =  width / 2;
         }
-        if (!isfinite(y1)) {
+        if (!igraph_finite(y1)) {
             y1 = -height / 2;
         }
-        if (!isfinite(y2)) {
+        if (!igraph_finite(y2)) {
             y2 =  height / 2;
         }
         MATRIX(*res, i, 0) = RNG_UNIF(x1, x2);
@@ -179,7 +179,7 @@ igraph_error_t igraph_i_layout_random_bounded(
     return IGRAPH_SUCCESS;
 }
 
-igraph_error_t igraph_i_layout_random_bounded_3d(
+int igraph_i_layout_random_bounded_3d(
         const igraph_t *graph, igraph_matrix_t *res,
         const igraph_vector_t *minx, const igraph_vector_t *maxx,
         const igraph_vector_t *miny, const igraph_vector_t *maxy,
@@ -257,22 +257,22 @@ igraph_error_t igraph_i_layout_random_bounded_3d(
         igraph_real_t y2 = maxy ? VECTOR(*maxy)[i] : dmaxy;
         igraph_real_t z1 = minz ? VECTOR(*minz)[i] : dminz;
         igraph_real_t z2 = maxz ? VECTOR(*maxz)[i] : dmaxz;
-        if (!isfinite(x1)) {
+        if (!igraph_finite(x1)) {
             x1 = -width / 2;
         }
-        if (!isfinite(x2)) {
+        if (!igraph_finite(x2)) {
             x2 =  width / 2;
         }
-        if (!isfinite(y1)) {
+        if (!igraph_finite(y1)) {
             y1 = -height / 2;
         }
-        if (!isfinite(y2)) {
+        if (!igraph_finite(y2)) {
             y2 =  height / 2;
         }
-        if (!isfinite(z1)) {
+        if (!igraph_finite(z1)) {
             z1 = -depth / 2;
         }
-        if (!isfinite(z2)) {
+        if (!igraph_finite(z2)) {
             z2 =  depth / 2;
         }
         MATRIX(*res, i, 0) = RNG_UNIF(x1, x2);

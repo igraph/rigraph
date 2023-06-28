@@ -44,21 +44,23 @@
 
 */
 
-#include "igraph_types.h"
-#include "igraph_memory.h"
-#include "igraph_error.h"
-
-#include "io/lgl-header.h"
-#include "io/parsers/lgl-parser.h"
-#include "io/parsers/lgl-lexer.h"
-#include "io/parse_utils.h"
-#include "internal/hacks.h"
-
 #include <stdio.h>
 #include <string.h>
 
+#include "igraph_types.h"
+#include "igraph_memory.h"
+#include "igraph_error.h"
+#include "config.h"
+
+#include "core/math.h"
+#include "io/lgl-header.h"
+#include "io/parsers/lgl-parser.h"
+#include "io/parsers/lgl-lexer.h"
+#include "internal/hacks.h"
+
 int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
                        const char *s);
+igraph_real_t igraph_lgl_get_number(const char *str, long int len);
 
 #define scanner context->scanner
 %}
@@ -74,17 +76,17 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
 %lex-param { void *scanner }
 
 %union {
-  igraph_integer_t edgenum;
-  igraph_real_t weightnum;
+  long int edgenum;
+  double weightnum;
 }
 
 %type <edgenum>   edgeid
 %type <weightnum> weight
 
-%token ALNUM    "alphanumeric"
-%token NEWLINE  "end of line"
-%token HASH     "#"
-%token END 0    "end of file" /* friendly name for $end */
+%token ALNUM
+%token NEWLINE
+%token HASH             "#"
+%token END 0            "end of file" /* friendly name for $end */
 %token ERROR
 
 %%
@@ -101,36 +103,26 @@ vertexdef : HASH edgeid NEWLINE       { context->actvertex=$2; } ;
 edges :   /* empty */ | edges edge ;
 
 edge :   edgeid NEWLINE             {
-             IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actvertex));
-             IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, $1));
-             IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0));
+             igraph_vector_push_back(context->vector, context->actvertex);
+             igraph_vector_push_back(context->vector, $1);
+             igraph_vector_push_back(context->weights, 0);
            }
        | edgeid weight NEWLINE      {
-             IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actvertex));
-             IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, $1));
-             IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, $2));
+             igraph_vector_push_back(context->vector, context->actvertex);
+             igraph_vector_push_back(context->vector, $1);
+             igraph_vector_push_back(context->weights, $2);
              context->has_weights = 1;
            }
 ;
 
 
-edgeid : ALNUM  {
-  igraph_integer_t trie_id;
-  IGRAPH_YY_CHECK(igraph_trie_get_len(context->trie,
-    igraph_lgl_yyget_text(scanner),
-    igraph_lgl_yyget_leng(scanner),
-    &trie_id
-  ));
-  $$ = trie_id;
-};
+edgeid : ALNUM  { igraph_trie_get2(context->trie,
+                                   igraph_lgl_yyget_text(scanner),
+                                   igraph_lgl_yyget_leng(scanner),
+                                   &$$); };
 
-weight : ALNUM  {
-    igraph_real_t val;
-    IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_lgl_yyget_text(scanner),
-                                        igraph_lgl_yyget_leng(scanner),
-                                        &val));
-    $$=val;
-} ;
+weight : ALNUM  { $$=igraph_lgl_get_number(igraph_lgl_yyget_text(scanner),
+                                           igraph_lgl_yyget_leng(scanner)); } ;
 
 %%
 
@@ -142,3 +134,13 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
   return 0;
 }
 
+igraph_real_t igraph_lgl_get_number(const char *str, long int length) {
+  igraph_real_t num;
+  char *tmp=IGRAPH_CALLOC(length+1, char);
+
+  strncpy(tmp, str, length);
+  tmp[length]='\0';
+  sscanf(tmp, "%lf", &num);
+  IGRAPH_FREE(tmp);
+  return num;
+}

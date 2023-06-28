@@ -30,7 +30,8 @@
 
 __BEGIN_DECLS
 
-extern IGRAPH_THREAD_LOCAL igraph_interruption_handler_t *igraph_i_interruption_handler;
+extern IGRAPH_THREAD_LOCAL igraph_interruption_handler_t
+*igraph_i_interruption_handler;
 
 /**
  * \define IGRAPH_ALLOW_INTERRUPTION
@@ -45,11 +46,12 @@ extern IGRAPH_THREAD_LOCAL igraph_interruption_handler_t *igraph_i_interruption_
 
 #define IGRAPH_ALLOW_INTERRUPTION() \
     do { \
-        if (igraph_i_interruption_handler) { \
-            if (igraph_allow_interruption(NULL) != IGRAPH_SUCCESS) { \
-                return IGRAPH_INTERRUPTED; \
-            } \
-        } \
+        if (igraph_i_interruption_handler) { if (igraph_allow_interruption(NULL) != IGRAPH_SUCCESS) return IGRAPH_INTERRUPTED; \
+        } } while (0)
+
+#define IGRAPH_ALLOW_INTERRUPTION_NORETURN() \
+    do { \
+        if (igraph_i_interruption_handler) { igraph_allow_interruption(NULL); } \
     } while (0)
 
 __END_DECLS

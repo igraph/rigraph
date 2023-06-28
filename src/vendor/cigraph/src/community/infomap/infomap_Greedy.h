@@ -22,22 +22,27 @@
 
 */
 
-#ifndef INFOMAP_GREEDY_H
-#define INFOMAP_GREEDY_H
+#ifndef GREEDY_H
+#define GREEDY_H
 
-#include "infomap_Node.h"
-#include "infomap_FlowGraph.h"
+#include <vector>
+#include <map>
+#include <utility>
+#include <climits>
 
 #include "igraph_random.h"
 
-#include <vector>
+#include "infomap_Node.h"
+#include "infomap_FlowGraph.h"
 
 class Greedy {
 public:
     Greedy(FlowGraph * fgraph);
     // initialise les attributs par rapport au graph
 
-    void setMove(const std::vector<igraph_integer_t> &moveTo);
+    ~Greedy();
+
+    void setMove(int *moveTo);
     //virtual void determMove(int *moveTo);
 
     bool optimize();
@@ -46,16 +51,12 @@ public:
     void apply(bool sort);
     //virtual void level(Node ***, bool sort);
 
-    /* void tune(void); */ /* unused */
+    void tune(void);
 
     /**************************************************************************/
 
-public:
-    double codeLength;
-
-private:
     FlowGraph * graph;
-    igraph_integer_t Nnode;
+    int Nnode;
 
     double exit;
     double exitFlow;
@@ -63,19 +64,22 @@ private:
     double size_log_size;
     double nodeSize_log_nodeSize;
 
+    double codeLength;
+
     double alpha, beta;
     // local copy of fgraph alpha, beta (=alpha -  Nnode = graph->Nnode;1)
 
-    std::vector<igraph_integer_t> node_index;  // module number of each node
+    std::vector<int> node_index;  // module number of each node
 
-    igraph_integer_t Nempty;
-    std::vector<igraph_integer_t> mod_empty;
+    int Nempty;
+    std::vector<int> mod_empty;
 
     std::vector<double> mod_exit;  // version tmp de node
     std::vector<double> mod_size;
     std::vector<double> mod_danglingSize;
     std::vector<double> mod_teleportWeight;
-    std::vector<size_t> mod_members;
+    std::vector<int> mod_members;
 };
 
-#endif // INFOMAP_GREEDY_H
+void delete_Greedy(Greedy *greedy);
+#endif

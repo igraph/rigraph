@@ -1,6 +1,7 @@
 /*
    IGraph library.
-   Copyright (C) 2007-2021  The igraph development team
+   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   334 Harvard st, Cambridge, MA, 02138 USA
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -14,8 +15,9 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
+
 */
 
 %{
@@ -42,6 +44,7 @@
 
 */
 
+#include "config.h"
 #include <stdlib.h>
 
 #include "io/gml-header.h"
@@ -67,25 +70,18 @@
 %option reentrant
 %option bison-bridge
 %option bison-locations
-%option yylineno
 
 digit       [0-9]
-whitespace  [ \r\n\t\v\f]
-
-/* Use to parse inf/nan as number only when expecting a value, i.e. after a keyword.
- * Otherwise they are parsed as a keyword. */
-%s VALUE
+whitespace  [ \r\n\t]
 
 %%
 
-^#[^\0\n\r]*            { /* comments ignored */ }
+^#[^\n\r]*[\n]|[\r]     { /* comments ignored */ }
 
-\"[^\0\"]*\"            { BEGIN(INITIAL); return STRING; }
-<VALUE>(\+|\-)?((?i:nan)|(?i:inf)) { BEGIN(INITIAL); return NUM; }
-(\+|\-)?{digit}+(\.{digit}+)?([eE](\+|\-)?{digit}+)? { BEGIN(INITIAL); return NUM; }
-[a-zA-Z_][a-zA-Z_0-9]*  { BEGIN(VALUE); return KEYWORD; }
+\"[^\x00\"]*\"                                  { return STRING; }
+\-?{digit}+(\.{digit}+)?([eE](\+|\-)?{digit}+)? { return NUM; }
+[a-zA-Z_][a-zA-Z_0-9]*  { return KEYWORD; }
 \[                      {
-                          BEGIN(INITIAL);
                           yyextra->depth++;
                           if (yyextra->depth >= 32) {
                             return ERROR;
@@ -95,9 +91,22 @@ whitespace  [ \r\n\t\v\f]
                         }
 \]                      {
                           yyextra->depth--;
-                          return LISTCLOSE;
+                          if (yyextra->depth < 0) {
+                            return ERROR;
+                          } else {
+                            return LISTCLOSE;
+                          }
                         }
+\n\r|\r\n|\r|\n         { }
 {whitespace}            { /* other whitespace ignored */ }
 
+<<EOF>>                 {
+                          if (yyextra->eof) {
+                            yyterminate();
+                          } else {
+                            yyextra->eof=1;
+                            return EOFF;
+                          }
+                        }
 .                       { return ERROR; }
 %%

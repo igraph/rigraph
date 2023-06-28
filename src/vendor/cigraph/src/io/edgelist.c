@@ -27,7 +27,8 @@
 #include "igraph_iterators.h"
 
 #include "core/interruption.h"
-#include "io/parse_utils.h"
+
+#include <ctype.h>
 
 /**
  * \section about_loadsave
@@ -36,8 +37,7 @@
  * from a file.</para>
  *
  * <para>They assume that the current locale uses a decimal point and not
- * a decimal comma. See \ref igraph_enter_safelocale() and
- * \ref igraph_exit_safelocale() for more information.</para>
+ * a decimal comma.</para>
  *
  * <para>Note that as \a igraph uses the traditional C streams, it is
  * possible to read/write files from/to memory, at least on GNU
@@ -54,7 +54,6 @@
  * whitespace. The integers represent vertex IDs. Placing each edge (i.e. pair of integers)
  * on a separate line is not required, but it is recommended for readability.
  * Edges of directed graphs are assumed to be in "from, to" order.
- *
  * \param graph Pointer to an uninitialized graph object.
  * \param instream Pointer to a stream, it should be readable.
  * \param n The number of vertices in the graph. If smaller than the
@@ -69,44 +68,52 @@
  *
  * Time complexity: O(|V|+|E|), the
  * number of vertices plus the number of edges. It is assumed that
- * reading an integer requires O(1) time.
+ * reading an integer requires O(1)
+ * time.
  */
-igraph_error_t igraph_read_graph_edgelist(igraph_t *graph, FILE *instream,
+int igraph_read_graph_edgelist(igraph_t *graph, FILE *instream,
                                igraph_integer_t n, igraph_bool_t directed) {
 
-    igraph_vector_int_t edges = IGRAPH_VECTOR_NULL;
-    igraph_integer_t from, to;
+    igraph_vector_t edges = IGRAPH_VECTOR_NULL;
+    long int from, to;
+    int c;
 
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
-    IGRAPH_CHECK(igraph_vector_int_reserve(&edges, 100));
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, 0);
+    IGRAPH_CHECK(igraph_vector_reserve(&edges, 100));
 
-    for (;;) {
+    /* skip all whitespace */
+    do {
+        c = getc (instream);
+    } while (isspace (c));
+    ungetc (c, instream);
+
+    while (!feof(instream)) {
+        int read;
+
         IGRAPH_ALLOW_INTERRUPTION();
 
-        IGRAPH_CHECK(igraph_i_fskip_whitespace(instream));
-
-        if (feof(instream)) break;
-
-        IGRAPH_CHECK(igraph_i_fget_integer(instream, &from));
-        IGRAPH_CHECK(igraph_i_fget_integer(instream, &to));
-
-#ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
-        /* Protect from very large memory allocations when fuzzing. */
-#define IGRAPH_EDGELIST_MAX_VERTEX_COUNT (1L << 20)
-        if (from > IGRAPH_EDGELIST_MAX_VERTEX_COUNT || to > IGRAPH_EDGELIST_MAX_VERTEX_COUNT) {
-            IGRAPH_ERROR("Vertex count too large in edgelist file.", IGRAPH_EINVAL);
+        read = fscanf(instream, "%li", &from);
+        if (read != 1) {
+            IGRAPH_ERROR("parsing edgelist file failed", IGRAPH_PARSEERROR);
         }
-#endif
+        read = fscanf(instream, "%li", &to);
+        if (read != 1) {
+            IGRAPH_ERROR("parsing edgelist file failed", IGRAPH_PARSEERROR);
+        }
+        IGRAPH_CHECK(igraph_vector_push_back(&edges, from));
+        IGRAPH_CHECK(igraph_vector_push_back(&edges, to));
 
-        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, from));
-        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, to));
+        /* skip all whitespace */
+        do {
+            c = getc (instream);
+        } while (isspace (c));
+        ungetc (c, instream);
     }
 
     IGRAPH_CHECK(igraph_create(graph, &edges, n, directed));
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
-
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
@@ -115,10 +122,8 @@ igraph_error_t igraph_read_graph_edgelist(igraph_t *graph, FILE *instream,
  * \brief Writes the edge list of a graph to a file.
  *
  * </para><para>
- * Edges are represented as pairs of 0-based vertex indices.
  * One edge is written per line, separated by a single space.
  * For directed graphs edges are written in from, to order.
- *
  * \param graph The graph object to write.
  * \param outstream Pointer to a stream, it should be writable.
  * \return Error code:
@@ -130,7 +135,7 @@ igraph_error_t igraph_read_graph_edgelist(igraph_t *graph, FILE *instream,
  * integer to the file requires O(1)
  * time.
  */
-igraph_error_t igraph_write_graph_edgelist(const igraph_t *graph, FILE *outstream) {
+int igraph_write_graph_edgelist(const igraph_t *graph, FILE *outstream) {
 
     igraph_eit_t it;
 
@@ -142,16 +147,16 @@ igraph_error_t igraph_write_graph_edgelist(const igraph_t *graph, FILE *outstrea
         igraph_integer_t from, to;
         int ret;
         igraph_edge(graph, IGRAPH_EIT_GET(it), &from, &to);
-        ret = fprintf(outstream, "%" IGRAPH_PRId " %" IGRAPH_PRId "\n",
-                      from,
-                      to);
+        ret = fprintf(outstream, "%li %li\n",
+                      (long int) from,
+                      (long int) to);
         if (ret < 0) {
-            IGRAPH_ERROR("Failed writing edgelist.", IGRAPH_EFILE);
+            IGRAPH_ERROR("Write error", IGRAPH_EFILE);
         }
         IGRAPH_EIT_NEXT(it);
     }
 
     igraph_eit_destroy(&it);
     IGRAPH_FINALLY_CLEAN(1);
-    return IGRAPH_SUCCESS;
+    return 0;
 }

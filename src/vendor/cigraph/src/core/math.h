@@ -1,6 +1,8 @@
+/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2022  The igraph development team <igraph@igraph.org>
+   Copyright (C) 2008-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -13,71 +15,74 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+   along with this program; if not, write to the Free Software
+   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
+   02110-1301 USA
+
 */
 
-#ifndef IGRAPH_CORE_MATH_H
-#define IGRAPH_CORE_MATH_H
+#ifndef IGRAPH_MATH_H
+#define IGRAPH_MATH_H
 
-/* Use math constants with MSVC */
-#if defined(_MSC_VER) && !defined(_USE_MATH_DEFINES)
-#define _USE_MATH_DEFINES
-#endif
+#include "igraph_decls.h"
+
+#include "config.h"
 
 #include <math.h>
+#include <stddef.h>
 
-/* Math constants are not part of standard C */
+__BEGIN_DECLS
 
-#ifndef M_E
-#define M_E         2.71828182845904523536028747135266250
+/**
+ * \def IGRAPH_SHORTEST_PATH_EPSILON
+ *
+ * Relative error threshold used in weighted shortest path calculations
+ * to decide whether two shortest paths are of equal length.
+ */
+#define IGRAPH_SHORTEST_PATH_EPSILON 1e-10
+
+/*
+ * Compiler-related hacks, mostly because of Microsoft Visual C++
+ */
+double igraph_i_round(double X);
+int igraph_i_snprintf(char *buffer, size_t count, const char *format, ...);
+
+double igraph_log2(const double a);
+double igraph_log1p(double a);
+double igraph_fmin(double a, double b);
+#ifndef HAVE_LOG2
+    #define log2(a) igraph_log2(a)
 #endif
-
-#ifndef M_LOG2E
-#define M_LOG2E     1.44269504088896340735992468100189214
+#ifndef HAVE_LOG1P
+    #define log1p(a) igraph_log1p(a)
 #endif
-
-#ifndef M_LOG10E
-#define M_LOG10E    0.434294481903251827651128918916605082
+#ifndef HAVE_FMIN
+    #define fmin(a,b) igraph_fmin((a),(b))
 #endif
-
-#ifndef M_LN2
-#define M_LN2       0.693147180559945309417232121458176568
-#endif
-
-#ifndef M_LN10
-#define M_LN10      2.30258509299404568401799145468436421
+#ifndef HAVE_ROUND
+    #define round igraph_i_round
 #endif
 
 #ifndef M_PI
-#define M_PI        3.14159265358979323846264338327950288
+    #define M_PI 3.14159265358979323846
 #endif
-
 #ifndef M_PI_2
-#define M_PI_2      1.57079632679489661923132169163975144
+    #define M_PI_2 1.57079632679489661923
 #endif
-
-#ifndef M_PI_4
-#define M_PI_4      0.785398163397448309615660845819875721
+#ifndef M_LN2
+    #define M_LN2 0.69314718055994530942
 #endif
-
-#ifndef M_1_PI
-#define M_1_PI      0.318309886183790671537767526745028724
-#endif
-
-#ifndef M_2_PI
-#define M_2_PI      0.636619772367581343075535053490057448
-#endif
-
-#ifndef M_2_SQRTPI
-#define M_2_SQRTPI  1.12837916709551257389615890312154517
-#endif
-
 #ifndef M_SQRT2
-#define M_SQRT2     1.41421356237309504880168872420969808
+    #define M_SQRT2 1.4142135623730950488016887
+#endif
+#ifndef M_LN_SQRT_2PI
+    #define M_LN_SQRT_2PI   0.918938533204672741780329736406 /* log(sqrt(2*pi))
+    == log(2*pi)/2 */
 #endif
 
-#ifndef M_SQRT1_2
-#define M_SQRT1_2   0.707106781186547524400844362104849039
-#endif
+IGRAPH_PRIVATE_EXPORT int igraph_almost_equals(double a, double b, double eps);
+IGRAPH_PRIVATE_EXPORT int igraph_cmp_epsilon(double a, double b, double eps);
 
-#endif /* IGRAPH_CORE_MATH_H */
+__END_DECLS
+
+#endif

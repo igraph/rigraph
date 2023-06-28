@@ -33,8 +33,6 @@
 #ifndef __NODE_H__
 #define __NODE_H__
 
-#include <igraph_types.h>
-
 // The node class contains information about a given node for
 // use by the density server process.
 
@@ -48,16 +46,16 @@ class Node {
 public:
 
     bool fixed;   // if true do not change the
-    igraph_integer_t id;
-
     // position of this node
+    int id;
+
     float x, y;
     float sub_x, sub_y;
     float energy;
 
 public:
 
-    Node( igraph_integer_t node_id ) {
+    Node( int node_id ) {
         x = y = 0.0; fixed = false;
         id = node_id;
     }

@@ -45,11 +45,6 @@
     #define __unused
 #endif
 
-#if defined(_MSC_VER) && _MSC_VER < 1927
-    /* MSVC does not understand restrict before version 19.27 */
-    #define restrict __restrict
-#endif
-
 #ifndef __unused
   #define __unused    __attribute__ ((unused))
 #endif
@@ -76,7 +71,7 @@ static inline char	*med3(char *, char *, char *, cmp_t *, void *);
  */
 
 static inline void
-swapfunc(char * restrict a, char * restrict b, size_t es)
+swapfunc(char *a, char *b, size_t es)
 {
 	char t;
 

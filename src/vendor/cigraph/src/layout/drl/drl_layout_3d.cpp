@@ -86,6 +86,11 @@ using namespace drl3d;
  * \param options The parameters to pass to the layout generator.
  * \param weights Edge weights, pointer to a vector. If this is a null
  *    pointer then every edge will have the same weight.
+ * \param fixed Pointer to a logical vector, or a null pointer. This
+ *    can be used to fix the position of some vertices. Vertices for
+ *    which it is true will not be moved, but stay at the coordinates
+ *    given in the \p res matrix. This argument is ignored if it is a
+ *    null pointer or if use_seed is false.
  * \return Error code.
  *
  * Time complexity: ???.
@@ -93,10 +98,11 @@ using namespace drl3d;
  * \sa \ref igraph_layout_drl() for the standard 2d version.
  */
 
-igraph_error_t igraph_layout_drl_3d(const igraph_t *graph, igraph_matrix_t *res,
+int igraph_layout_drl_3d(const igraph_t *graph, igraph_matrix_t *res,
                          igraph_bool_t use_seed,
                          const igraph_layout_drl_options_t *options,
-                         const igraph_vector_t *weights) {
+                         const igraph_vector_t *weights,
+                         const igraph_vector_bool_t *fixed) {
 
     const char msg[] = "Damping multipliers cannot be negative, got %g.";
 
@@ -136,7 +142,7 @@ igraph_error_t igraph_layout_drl_3d(const igraph_t *graph, igraph_matrix_t *res,
         neighbors.init_parms(options);
         if (use_seed) {
             IGRAPH_CHECK(igraph_matrix_resize(res, igraph_vcount(graph), 3));
-            neighbors.read_real(res);
+            neighbors.read_real(res, fixed);
         }
         neighbors.draw_graph(res);
 

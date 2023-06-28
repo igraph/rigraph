@@ -118,19 +118,18 @@ void igraph_i_glp_delete_prob(glp_prob *p) {
     }
 }
 
-igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
-    const char *code = "none";
+int igraph_i_glpk_check(int retval, const char* message) {
+    char* code = "none";
     char message_and_code[4096];
-    igraph_error_t ret;
 
-    if (retval == 0) {
+    if (retval == IGRAPH_SUCCESS) {
         return IGRAPH_SUCCESS;
     }
 
     /* handle errors */
-#define HANDLE_CODE(c)  case c: code = #c; ret = IGRAPH_##c; break;
-#define HANDLE_CODE2(c) case c: code = #c; ret = IGRAPH_FAILURE; break;
-#define HANDLE_CODE3(c) case c: code = #c; ret = IGRAPH_INTERRUPTED; break;
+#define HANDLE_CODE(c) case c: code = #c; retval = IGRAPH_##c; break;
+#define HANDLE_CODE2(c) case c: code = #c; retval = IGRAPH_FAILURE; break;
+#define HANDLE_CODE3(c) case c: code = #c; retval = IGRAPH_INTERRUPTED; break;
     switch (retval) {
         HANDLE_CODE(GLP_EBOUND);
         HANDLE_CODE(GLP_EROOT);
@@ -150,7 +149,7 @@ igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
         HANDLE_CODE2(GLP_EITLIM);
 
     default:
-        IGRAPH_ERROR("Unknown GLPK error.", IGRAPH_FAILURE);
+        IGRAPH_ERROR("Unknown GLPK error", IGRAPH_FAILURE);
     }
 #undef HANDLE_CODE
 #undef HANDLE_CODE2
@@ -158,7 +157,7 @@ igraph_error_t igraph_i_glpk_check(int retval, const char* message) {
 
     snprintf(message_and_code, sizeof(message_and_code) / sizeof(message_and_code[0]),
             "%s (%s)", message, code);
-    IGRAPH_ERROR(message_and_code, ret);
+    IGRAPH_ERROR(message_and_code, retval);
 }
 
 #else

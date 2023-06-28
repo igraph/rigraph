@@ -21,7 +21,7 @@
 
 /* Default cliquer options */
 IGRAPH_THREAD_LOCAL clique_options clique_default_options = {
-	reorder_by_default, NULL, /*clique_print_time*/ NULL, NULL, NULL, NULL, NULL, 0
+    reorder_by_default, NULL, /*clique_print_time*/ NULL, NULL, NULL, NULL, NULL, 0
 };
 
 
@@ -88,18 +88,18 @@ memcpy(&realtimer,&old_realtimer,sizeof(struct timeval));*/
 /* Recursion and helper functions */
 static boolean sub_unweighted_single(int *table, int size, int min_size,
 				     graph_t *g);
-static igraph_error_t sub_unweighted_all(int *table, int size, int min_size, int max_size,
+static CLIQUER_LARGE_INT sub_unweighted_all(int *table, int size, int min_size, int max_size,
                                             boolean maximal, graph_t *g,
-                                            clique_options *opts, CLIQUER_LARGE_INT *num_found);
-static igraph_error_t sub_weighted_all(int *table, int size, int weight,
+                                            clique_options *opts);
+static int sub_weighted_all(int *table, int size, int weight,
 			    int current_weight, int prune_low, int prune_high,
 			    int min_weight, int max_weight, boolean maximal,
-			    graph_t *g, clique_options *opts, int *weight_found);
+			    graph_t *g, clique_options *opts);
 
 
-static igraph_error_t store_clique(set_t clique, graph_t *g, clique_options *opts);
+static boolean store_clique(set_t clique, graph_t *g, clique_options *opts);
 static boolean is_maximal(set_t clique, graph_t *g);
-static igraph_error_t false_function(set_t clique,graph_t *g,clique_options *opts);
+static boolean false_function(set_t clique,graph_t *g,clique_options *opts);
 
 
 
@@ -140,10 +140,10 @@ static igraph_error_t false_function(set_t clique,graph_t *g,clique_options *opt
  */
 static int unweighted_clique_search_single(int *table, int min_size,
 					   graph_t *g, clique_options *opts) {
-	/*
+    /*
     struct tms tms;
 	struct timeval timeval;
-	*/
+    */
 	int i,j;
 	int v,w;
 	int *newtable;
@@ -181,7 +181,7 @@ static int unweighted_clique_search_single(int *table, int min_size,
 			clique_size[v]=clique_size[w];
 		}
 
-		/*
+        /*
 		if (opts && opts->time_function) {
 			gettimeofday(&timeval,NULL);
 			times(&tms);
@@ -200,7 +200,7 @@ static int unweighted_clique_search_single(int *table, int min_size,
 				return 0;
 			}
 		}
-		*/
+        */
 
 		if (min_size) {
 			if (clique_size[v]>=min_size) {
@@ -289,7 +289,7 @@ static boolean sub_unweighted_single(int *table, int size, int min_size,
 			}
 		}
 
-		/* Avoid unnecessary loops (next size == p1-newtable) */
+		/* Avoid unneccessary loops (next size == p1-newtable) */
 		if (p1-newtable < min_size-1)
 			continue;
 		/* Now p1-newtable >= min_size-1 >= 2-1 == 1, so we can use
@@ -325,7 +325,6 @@ static boolean sub_unweighted_single(int *table, int size, int min_size,
  *   maximal  - requires cliques to be maximal
  *   g        - the graph
  *   opts     - time printing and clique storage options
- *   num_found - number of cliques found
  *
  * Cliques found are stored as defined by opts->user_function and
  * opts->clique_list.  opts->time_function is called after each
@@ -333,22 +332,24 @@ static boolean sub_unweighted_single(int *table, int size, int min_size,
  *
  * clique_size[] must be defined and correct for all values of
  * table[0], ..., table[start-1].
+ *
+ * Returns the number of cliques stored (not neccessarily number of cliques
+ * in graph, if user/time_function aborts).
  */
-static igraph_error_t unweighted_clique_search_all(
-	int *table, int start, int min_size, int max_size, boolean maximal,
-	graph_t *g, clique_options *opts, CLIQUER_LARGE_INT *num_found
-) {
-	/*
+static CLIQUER_LARGE_INT unweighted_clique_search_all(int *table, int start,
+                                                      int min_size, int max_size,
+                                                      boolean maximal, graph_t *g,
+                                                      clique_options *opts) {
+    /*
 	struct timeval timeval;
 	struct tms tms;
-	*/
-	int i, j;
+    */
+        int i, j;
 	int v;
 	int *newtable;
 	int newsize;
-	CLIQUER_LARGE_INT r;
-	CLIQUER_LARGE_INT count=0;
-	igraph_error_t retval = IGRAPH_SUCCESS;
+        CLIQUER_LARGE_INT r;
+        CLIQUER_LARGE_INT count=0;
 
 	if (temp_count) {
 		temp_count--;
@@ -372,14 +373,15 @@ static igraph_error_t unweighted_clique_search_all(
 		}
 
 		SET_ADD_ELEMENT(current_clique,v);
-		retval=sub_unweighted_all(newtable,newsize,min_size-1,max_size-1,
-				maximal,g,opts,&r);
+                r=sub_unweighted_all(newtable,newsize,min_size-1,max_size-1,
+				     maximal,g,opts);
 		SET_DEL_ELEMENT(current_clique,v);
-		count+=r;
-		if (retval) {
+                if (r<0) {
 			/* Abort. */
+                        count-=r;
 			break;
 		}
+                count+=r;
 
 #if 0
 		if (opts->time_function) {
@@ -403,12 +405,7 @@ static igraph_error_t unweighted_clique_search_all(
 #endif
 	}
 	temp_list[temp_count++]=newtable;
-
-	if (num_found) {
-		*num_found = count;
-	}
-
-	return retval;
+	return count;
 }
 
 /*
@@ -426,7 +423,6 @@ static igraph_error_t unweighted_clique_search_all(
  *   maximal  - require cliques to be maximal (passed through)
  *   g        - the graph
  *   opts     - storage options
- *   num_found - number of cliques found
  *
  * All cliques of suitable size found are stored according to opts.
  *
@@ -437,37 +433,32 @@ static igraph_error_t unweighted_clique_search_all(
  * clique_size[] for all values in table must be defined and correct,
  * otherwise inaccurate results may occur.
  */
-static igraph_error_t sub_unweighted_all(int *table, int size, int min_size, int max_size,
+static CLIQUER_LARGE_INT sub_unweighted_all(int *table, int size, int min_size, int max_size,
                                             boolean maximal, graph_t *g,
-                                            clique_options *opts, CLIQUER_LARGE_INT *num_found) {
-	igraph_error_t retval = IGRAPH_SUCCESS;
+                                            clique_options *opts) {
 	int i;
 	int v;
 	int *newtable;
 	int *p1, *p2;
-	CLIQUER_LARGE_INT n;
-	CLIQUER_LARGE_INT count=0;     /* Amount of cliques found */
+        CLIQUER_LARGE_INT n;
+        CLIQUER_LARGE_INT count=0;     /* Amount of cliques found */
 
 	if (min_size <= 0) {
 		if ((!maximal) || is_maximal(current_clique,g)) {
 			/* We've found one.  Store it. */
 			count++;
-			retval = store_clique(current_clique, g, opts);
-			if (retval) {
-				*num_found = count;
-				return retval == IGRAPH_STOP ? IGRAPH_SUCCESS : retval;
+			if (!store_clique(current_clique,g,opts)) {
+				return -count;
 			}
 		}
 		if (max_size <= 0) {
 			/* If we add another element, size will be too big. */
-			*num_found = count;
-			return IGRAPH_SUCCESS;
+			return count;
 		}
 	}
 
 	if (size < min_size) {
-		*num_found = count;
-		return IGRAPH_SUCCESS;
+		return count;
 	}
 
 	/* Dynamic memory allocation with cache */
@@ -497,25 +488,25 @@ static igraph_error_t sub_unweighted_all(int *table, int size, int min_size, int
 			}
 		}
 
-		/* Avoid unnecessary loops (next size == p1-newtable) */
+		/* Avoid unneccessary loops (next size == p1-newtable) */
 		if (p1-newtable < min_size-1) {
 			continue;
 		}
 
 		SET_ADD_ELEMENT(current_clique,v);
-		retval = sub_unweighted_all(newtable,p1-newtable,
-				     min_size-1,max_size-1,maximal,g,opts,&n);
+		n=sub_unweighted_all(newtable,p1-newtable,
+				     min_size-1,max_size-1,maximal,g,opts);
 		SET_DEL_ELEMENT(current_clique,v);
-		count += n;
-		if (retval || n < 0) {
+		if (n < 0) {
+			/* Abort. */
+			count -= n;
+			count = -count;
 			break;
 		}
 		count+=n;
 	}
 	temp_list[temp_count++]=newtable;
-
-	*num_found = count;
-	return retval;
+	return count;
 }
 
 
@@ -555,13 +546,13 @@ static igraph_error_t sub_unweighted_all(int *table, int size, int min_size, int
  *
  * Note: Does NOT use opts->user_function of opts->clique_list.
  */
-static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
+static int weighted_clique_search_single(int *table, int min_weight,
 					 int max_weight, graph_t *g,
-					 clique_options *opts, int *result) {
-	/*
+					 clique_options *opts) {
+    /*
 	struct timeval timeval;
 	struct tms tms;
-	*/
+    */
 	int i,j;
 	int v;
 	int *newtable;
@@ -570,9 +561,6 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
 	int search_weight;
 	int min_w;
 	clique_options localopts;
-	igraph_error_t retval = IGRAPH_SUCCESS;
-
-	ASSERT(result != NULL);
 
 	if (min_weight==0)
 		min_w=INT_MAX;
@@ -588,13 +576,10 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
 			if (g->weights[table[i]] <= max_weight) {
 				set_empty(best_clique);
 				SET_ADD_ELEMENT(best_clique,table[i]);
-				*result = g->weights[table[i]];
-				return IGRAPH_SUCCESS;
+				return g->weights[table[i]];
 			}
 		}
-
-		*result = 0;
-		return IGRAPH_SUCCESS;
+		return 0;
 	}
 
 	localopts.time_function=NULL;
@@ -613,8 +598,7 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
 	if (min_weight && (search_weight >= min_weight)) {
 		if (search_weight <= max_weight) {
 			/* Found suitable clique. */
-			*result = search_weight;
-			return IGRAPH_SUCCESS;
+			return search_weight;
 		}
 		search_weight=min_weight-1;
 	}
@@ -643,14 +627,14 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
 
 
 		SET_ADD_ELEMENT(current_clique,v);
-		retval=sub_weighted_all(newtable,newsize,newweight,
+		search_weight=sub_weighted_all(newtable,newsize,newweight,
 					       g->weights[v],search_weight,
 					       clique_size[table[i-1]] +
 					       g->weights[v],
 					       min_w,max_weight,FALSE,
-					       g,&localopts, &search_weight);
+					       g,&localopts);
 		SET_DEL_ELEMENT(current_clique,v);
-		if (retval || search_weight < 0) {
+		if (search_weight < 0) {
 			break;
 		}
 
@@ -681,12 +665,9 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
 	temp_list[temp_count++]=newtable;
 	if (min_weight && (search_weight > 0)) {
 		/* Requested clique has not been found. */
-		*result = 0;
-	} else {
-		*result = clique_size[table[i-1]];
+		return 0;
 	}
-
-	return retval;
+	return clique_size[table[i-1]];
 }
 
 
@@ -705,7 +686,6 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
  *   maximal    - search only for maximal cliques
  *   g          - the graph
  *   opts       - time printing and clique storage options
- *   num_found - number of cliques found
  *
  * Cliques found are stored as defined by opts->user_function and
  * opts->clique_list.  opts->time_function is called after each
@@ -714,13 +694,13 @@ static igraph_error_t weighted_clique_search_single(int *table, int min_weight,
  * clique_size[] must be defined and correct for all values of
  * table[0], ..., table[start-1].
  *
- * Returns the number of cliques stored (not necessarily number of cliques
+ * Returns the number of cliques stored (not neccessarily number of cliques
  * in graph, if user/time_function aborts).
  */
-static igraph_error_t weighted_clique_search_all(int *table, int start,
+static int weighted_clique_search_all(int *table, int start,
 				      int min_weight, int max_weight,
 				      boolean maximal, graph_t *g,
-				      clique_options *opts, int* num_found) {
+				      clique_options *opts) {
     /*
 	struct timeval timeval;
 	struct tms tms;
@@ -730,7 +710,6 @@ static igraph_error_t weighted_clique_search_all(int *table, int start,
 	int *newtable;
 	int newsize;
 	int newweight;
-	igraph_error_t retval = IGRAPH_SUCCESS;
 
 	if (temp_count) {
 		temp_count--;
@@ -756,12 +735,12 @@ static igraph_error_t weighted_clique_search_all(int *table, int start,
 		}
 
 		SET_ADD_ELEMENT(current_clique,v);
-		retval=sub_weighted_all(newtable,newsize,newweight,
+		j=sub_weighted_all(newtable,newsize,newweight,
 				   g->weights[v],min_weight-1,INT_MAX,
-				   min_weight,max_weight,maximal,g,opts,&j);
+				   min_weight,max_weight,maximal,g,opts);
 		SET_DEL_ELEMENT(current_clique,v);
 
-		if (retval || j < 0) {
+		if (j<0) {
 			/* Abort. */
 			break;
 		}
@@ -790,11 +769,7 @@ static igraph_error_t weighted_clique_search_all(int *table, int start,
 	}
 	temp_list[temp_count++]=newtable;
 
-	if (num_found) {
-		*num_found = clique_list_count;
-	}
-
-	return retval;
+	return clique_list_count;
 }
 
 /*
@@ -817,11 +792,12 @@ static igraph_error_t weighted_clique_search_all(int *table, int start,
  *   maximal    - search only for maximal cliques
  *   g          - the graph
  *   opts       - storage options
- *   weight_found - weight of the heaviest clique found (prune_low if a heavier
- *                clique hasn't been found); if a clique with weight at least
- *                min_size is found then min_size-1 is returned.
  *
  * All cliques of suitable weight found are stored according to opts.
+ *
+ * Returns weight of heaviest clique found (prune_low if a heavier clique
+ * hasn't been found);  if a clique with weight at least min_size is found
+ * then min_size-1 is returned.  If clique storage failed, -1 is returned.
  *
  * The largest clique found smaller than max_weight is stored in
  * best_clique, if non-NULL.
@@ -836,11 +812,10 @@ static igraph_error_t weighted_clique_search_all(int *table, int start,
  * searching for all cliques, min_weight should be given the minimum weight
  * desired.
  */
-static igraph_error_t sub_weighted_all(int *table, int size, int weight,
+static int sub_weighted_all(int *table, int size, int weight,
 			    int current_weight, int prune_low, int prune_high,
 			    int min_weight, int max_weight, boolean maximal,
-			    graph_t *g, clique_options *opts, int* weight_found) {
-	igraph_error_t retval = IGRAPH_SUCCESS;
+			    graph_t *g, clique_options *opts) {
 	int i;
 	int v,w;
 	int *newtable;
@@ -851,16 +826,13 @@ static igraph_error_t sub_weighted_all(int *table, int size, int weight,
 		if ((current_weight <= max_weight) &&
 		    ((!maximal) || is_maximal(current_clique,g))) {
 			/* We've found one.  Store it. */
-			retval = store_clique(current_clique,g,opts);
-			if (retval) {
-				*weight_found = -1;
-				return retval == IGRAPH_STOP ? IGRAPH_SUCCESS : retval;
+			if (!store_clique(current_clique,g,opts)) {
+				return -1;
 			}
 		}
 		if (current_weight >= max_weight) {
 			/* Clique too heavy. */
-			*weight_found = min_weight-1;
-			return IGRAPH_SUCCESS;
+			return min_weight-1;
 		}
 	}
 	if (size <= 0) {
@@ -870,16 +842,12 @@ static igraph_error_t sub_weighted_all(int *table, int size, int weight,
 			if (best_clique) {
 				best_clique = set_copy(best_clique,current_clique);
 			}
-			if (current_weight < min_weight) {
-				*weight_found = current_weight;
-				return IGRAPH_SUCCESS;
-			} else {
-				*weight_found = min_weight-1;
-				return IGRAPH_SUCCESS;
-			}
+			if (current_weight < min_weight)
+				return current_weight;
+			else
+				return min_weight-1;
 		} else {
-			*weight_found = prune_low;
-			return IGRAPH_SUCCESS;
+			return prune_low;
 		}
 	}
 
@@ -916,28 +884,26 @@ static igraph_error_t sub_weighted_all(int *table, int size, int weight,
 
 		w=g->weights[v];
 		weight-=w;
-		/* Avoid a few unnecessary loops */
+		/* Avoid a few unneccessary loops */
 		if (current_weight+w+newweight <= prune_low) {
 			continue;
 		}
 
 		SET_ADD_ELEMENT(current_clique,v);
-		retval=sub_weighted_all(newtable,p1-newtable,
+		prune_low=sub_weighted_all(newtable,p1-newtable,
 					   newweight,
 					   current_weight+w,
 					   prune_low,prune_high,
 					   min_weight,max_weight,maximal,
-					   g,opts, &prune_low);
+					   g,opts);
 		SET_DEL_ELEMENT(current_clique,v);
-		if (retval || (prune_low<0) || (prune_low>=prune_high)) {
+		if ((prune_low<0) || (prune_low>=prune_high)) {
 			/* Impossible to find larger clique. */
 			break;
 		}
 	}
 	temp_list[temp_count++]=newtable;
-
-	*weight_found = prune_low;
-	return IGRAPH_SUCCESS;
+	return prune_low;
 }
 
 
@@ -954,10 +920,10 @@ static igraph_error_t sub_weighted_all(int *table, int size, int weight,
  *   clique - the clique to store
  *   opts   - storage options
  *
- * Returns the same igraph error code as the one returned by
- * opts->user_function(). Returns IGRAPH_SUCCESS if no callback is defined.
+ * Returns FALSE if opts->user_function() returned FALSE; otherwise
+ * returns TRUE.
  */
-static igraph_error_t store_clique(set_t clique, graph_t *g, clique_options *opts) {
+static boolean store_clique(set_t clique, graph_t *g, clique_options *opts) {
 
 	clique_list_count++;
 
@@ -978,10 +944,13 @@ static igraph_error_t store_clique(set_t clique, graph_t *g, clique_options *opt
 
 	/* user_function() */
 	if (opts->user_function) {
-		return opts->user_function(clique, g, opts);
+		if (!opts->user_function(clique,g,opts)) {
+			/* User function requested abort. */
+			return FALSE;
+		}
 	}
 
-	return IGRAPH_SUCCESS;
+	return TRUE;
 }
 
 /*
@@ -1065,10 +1034,10 @@ static boolean is_maximal(set_t clique, graph_t *g) {
 /*
  * false_function()
  *
- * Returns IGRAPH_STOP.  Can be used as user_function.
+ * Returns FALSE.  Can be used as user_function.
  */
-static igraph_error_t false_function(set_t clique,graph_t *g,clique_options *opts) {
-	return IGRAPH_STOP;
+static boolean false_function(set_t clique,graph_t *g,clique_options *opts) {
+	return FALSE;
 }
 
 
@@ -1079,31 +1048,31 @@ static igraph_error_t false_function(set_t clique,graph_t *g,clique_options *opt
 /*
  * clique_unweighted_max_weight()
  *
+ * Returns the size of the maximum (sized) clique in g (or 0 if search
+ * was aborted).
+ *
  *   g    - the graph
  *   opts - time printing options
- *   size - the size of the maximum (sized) clique in g
  *
  * Note: As we don't have an algorithm faster than actually finding
  *       a maximum clique, we use clique_unweighted_find_single().
  *       This incurs only very small overhead.
  */
-igraph_error_t clique_unweighted_max_weight(graph_t *g, clique_options *opts, int* size) {
-	set_t clique;
+int clique_unweighted_max_weight(graph_t *g, clique_options *opts) {
+	set_t s;
+	int size;
 
 	ASSERT((sizeof(setelement)*8)==ELEMENTSIZE);
 	ASSERT(g!=NULL);
 
-	IGRAPH_CHECK(clique_unweighted_find_single(g, 0, 0, FALSE,opts, &clique));
-
-	if (size != NULL) {
-		*size = clique ? set_size(clique) : 0;
+	s=clique_unweighted_find_single(g,0,0,FALSE,opts);
+	if (s==NULL) {
+		/* Search was aborted. */
+		return 0;
 	}
-
-	if (clique) {
-		set_free(clique);
-	}
-
-	return IGRAPH_SUCCESS;
+	size=set_size(s);
+	set_free(s);
+	return size;
 }
 
 
@@ -1128,13 +1097,11 @@ igraph_error_t clique_unweighted_max_weight(graph_t *g, clique_options *opts, in
  *
  * Note: Does NOT use opts->user_function() or opts->clique_list[].
  */
-igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_size,
-				    boolean maximal, clique_options *opts, set_t *clique) {
+set_t clique_unweighted_find_single(graph_t *g,int min_size,int max_size,
+				    boolean maximal, clique_options *opts) {
 	int i;
 	int *table;
 	set_t s;
-	igraph_error_t retval = IGRAPH_SUCCESS;
-	CLIQUER_LARGE_INT found;
 
 	ENTRANCE_SAVE();
 	entrance_level++;
@@ -1142,7 +1109,6 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
 	if (opts==NULL)
 		opts=&clique_default_options;
 
-	ASSERT(clique!=NULL);
 	ASSERT((sizeof(setelement)*8)==ELEMENTSIZE);
 	ASSERT(g!=NULL);
 	ASSERT(min_size>=0);
@@ -1154,8 +1120,7 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
 	if ((max_size>0) && (min_size>max_size)) {
 		/* state was not changed */
 		entrance_level--;
-		*clique = NULL;
-		return IGRAPH_SUCCESS;
+		return NULL;
 	}
 
     /*
@@ -1187,7 +1152,8 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
 	}
 	ASSERT(reorder_is_bijection(table,g->n));
 
-	if (unweighted_clique_search_single(table,min_size,g,opts) == 0) {
+
+	if (unweighted_clique_search_single(table,min_size,g,opts)==0) {
 		set_free(current_clique);
 		current_clique=NULL;
 		goto cleanreturn;
@@ -1208,20 +1174,20 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
 			for (i=0; i < g->n-1; i++)
 				if (clique_size[table[i]]>=min_size)
 					break;
-			retval = unweighted_clique_search_all(
-				table, i, min_size, max_size, maximal, g, &localopts, &found
-			);
-			set_free(current_clique);
-			if (retval || !found) {
-				current_clique=NULL;
-			} else {
+			if (unweighted_clique_search_all(table,i,min_size,
+							 max_size,maximal,
+							 g,&localopts)) {
+				set_free(current_clique);
 				current_clique=s;
+			} else {
+				set_free(current_clique);
+				current_clique=NULL;
 			}
 		}
 	}
 
     cleanreturn:
-	*clique = current_clique;
+	s=current_clique;
 
 	/* Free resources */
 	for (i=0; i < temp_count; i++)
@@ -1233,7 +1199,7 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
 	ENTRANCE_RESTORE();
 	entrance_level--;
 
-	return retval;
+	return s;
 }
 
 
@@ -1249,24 +1215,21 @@ igraph_error_t clique_unweighted_find_single(graph_t *g,int min_size,int max_siz
  *              upper limit is used.  If min_size==0, this must also be 0.
  *   maximal  - require cliques to be maximal cliques
  *   opts     - time printing and clique storage options
- *   num_found - the number of cliques found.  This can be less than the number
- *               of cliques in the graph iff opts->time_function() returns
- *               FALSE (request abort) or opts->user_function() returns an
- *               igraph error code
+ *
+ * Returns the number of cliques found.  This can be less than the number
+ * of cliques in the graph iff opts->time_function() or opts->user_function()
+ * returns FALSE (request abort).
  *
  * The cliques found are stored in opts->clique_list[] and
  * opts->user_function() is called with them (if non-NULL).  The cliques
  * stored in opts->clique_list[] are newly allocated, and can be freed
  * by set_free().
  */
-igraph_error_t clique_unweighted_find_all(
-	graph_t *g, int min_size, int max_size, boolean maximal, clique_options *opts,
-	CLIQUER_LARGE_INT *num_found
-) {
+CLIQUER_LARGE_INT clique_unweighted_find_all(graph_t *g, int min_size, int max_size,
+                                             boolean maximal, clique_options *opts) {
 	int i;
 	int *table;
-	CLIQUER_LARGE_INT count;
-	igraph_error_t retval = IGRAPH_SUCCESS;
+        CLIQUER_LARGE_INT count;
 
 	ENTRANCE_SAVE();
 	entrance_level++;
@@ -1285,10 +1248,7 @@ igraph_error_t clique_unweighted_find_all(
 	if ((max_size>0) && (min_size>max_size)) {
 		/* state was not changed */
 		entrance_level--;
-		if (num_found) {
-			*num_found = 0;
-		}
-		return IGRAPH_SUCCESS;
+		return 0;
 	}
 
     /*
@@ -1326,7 +1286,7 @@ igraph_error_t clique_unweighted_find_all(
 
 	/* Search as normal until there is a chance to find a suitable
 	 * clique. */
-	if (unweighted_clique_search_single(table,min_size,g,opts) == 0) {
+	if (unweighted_clique_search_single(table,min_size,g,opts)==0) {
 		count=0;
 		goto cleanreturn;
 	}
@@ -1343,8 +1303,8 @@ igraph_error_t clique_unweighted_find_all(
 	for (i=0; i < g->n-1; i++)
 		if (clique_size[table[i]] >= min_size)
 			break;
-
-	retval = unweighted_clique_search_all(table, i, min_size, max_size, maximal, g, opts, &count);
+	count=unweighted_clique_search_all(table,i,min_size,max_size,
+					   maximal,g,opts);
 
   cleanreturn:
 	/* Free resources */
@@ -1358,11 +1318,7 @@ igraph_error_t clique_unweighted_find_all(
 	ENTRANCE_RESTORE();
 	entrance_level--;
 
-	if (num_found) {
-		*num_found = count;
-	}
-
-	return retval;
+	return count;
 }
 
 
@@ -1381,32 +1337,21 @@ igraph_error_t clique_unweighted_find_all(
  *       a maximum weight clique, we use clique_find_single().
  *       This incurs only very small overhead.
  */
-igraph_error_t clique_max_weight(graph_t *g, clique_options *opts, int *weight_found) {
+int clique_max_weight(graph_t *g,clique_options *opts) {
 	set_t s;
-	int weight = 0;
-	igraph_error_t retval;
+	int weight;
 
 	ASSERT((sizeof(setelement)*8)==ELEMENTSIZE);
 	ASSERT(g!=NULL);
 
-	retval = clique_find_single(g, 0, 0, FALSE, opts, &s);
-
-	if (retval || s == NULL) {
+	s=clique_find_single(g,0,0,FALSE,opts);
+	if (s==NULL) {
 		/* Search was aborted. */
-		weight = 0;
-	} else {
-		weight = graph_subgraph_weight(g,s);
+		return 0;
 	}
-
-	if (s != NULL) {
-		set_free(s);
-	}
-
-	if (weight_found) {
-		*weight_found = weight;
-	}
-
-	return retval;
+	weight=graph_subgraph_weight(g,s);
+	set_free(s);
+	return weight;
 }
 
 
@@ -1434,16 +1379,11 @@ igraph_error_t clique_max_weight(graph_t *g, clique_options *opts, int *weight_f
  * Note: Automatically uses clique_unweighted_find_single if all vertex
  *       weights are the same.
  */
-igraph_error_t clique_find_single(
-	graph_t *g, int min_weight, int max_weight, boolean maximal,
-	clique_options *opts, set_t *clique
-) {
+set_t clique_find_single(graph_t *g,int min_weight,int max_weight,
+			 boolean maximal, clique_options *opts) {
 	int i;
 	int *table;
 	set_t s;
-	igraph_error_t retval = IGRAPH_SUCCESS;
-	int weight_found;
-	int num_found;
 
 	ENTRANCE_SAVE();
 	entrance_level++;
@@ -1451,7 +1391,6 @@ igraph_error_t clique_find_single(
 	if (opts==NULL)
 		opts=&clique_default_options;
 
-	ASSERT(clique!=NULL);
 	ASSERT((sizeof(setelement)*8)==ELEMENTSIZE);
 	ASSERT(g!=NULL);
 	ASSERT(min_weight>=0);
@@ -1463,8 +1402,7 @@ igraph_error_t clique_find_single(
 	if ((max_weight>0) && (min_weight>max_weight)) {
 		/* state was not changed */
 		entrance_level--;
-		*clique = NULL;
-		return IGRAPH_SUCCESS;
+		return NULL;
 	}
 
     /*
@@ -1481,17 +1419,16 @@ igraph_error_t clique_find_single(
 			if (max_weight < min_weight) {
 				/* state was not changed */
 				entrance_level--;
-				*clique = NULL;
-				return IGRAPH_SUCCESS;
+				return NULL;
 			}
 		}
 
 		weight_multiplier = g->weights[0];
 		entrance_level--;
-		retval = clique_unweighted_find_single(g, min_weight, max_weight, maximal, opts, &s);
+		s=clique_unweighted_find_single(g,min_weight,max_weight,
+						maximal,opts);
 		ENTRANCE_RESTORE();
-		*clique = s;
-		return retval;
+		return s;
 	}
 
 	/* Dynamic allocation */
@@ -1524,15 +1461,13 @@ igraph_error_t clique_find_single(
 	if (max_weight==0)
 		max_weight=INT_MAX;
 
-	retval = weighted_clique_search_single(table, min_weight, max_weight, g, opts, &weight_found);
-
-	if (retval || weight_found == 0) {
+	if (weighted_clique_search_single(table,min_weight,max_weight,
+					  g,opts)==0) {
 		/* Requested clique has not been found. */
 		set_free(best_clique);
 		best_clique=NULL;
 		goto cleanreturn;
 	}
-
 	if (maximal && (min_weight>0)) {
 		maximalize_clique(best_clique,g);
 		if (graph_subgraph_weight(g,best_clique) > max_weight) {
@@ -1548,12 +1483,9 @@ igraph_error_t clique_find_single(
 				if ((clique_size[table[i]] >= min_weight) ||
 				    (clique_size[table[i]] == 0))
 					break;
-
-			retval = weighted_clique_search_all(
-				table, i, min_weight, max_weight, maximal, g, &localopts, &num_found
-			);
-
-			if (retval || !weight_found) {
+			if (!weighted_clique_search_all(table,i,min_weight,
+							max_weight,maximal,
+							g,&localopts)) {
 				set_free(best_clique);
 				best_clique=NULL;
 			}
@@ -1578,9 +1510,7 @@ igraph_error_t clique_find_single(
 	ENTRANCE_RESTORE();
 	entrance_level--;
 
-	*clique = s;
-
-	return retval;
+	return s;
 }
 
 
@@ -1600,10 +1530,10 @@ igraph_error_t clique_find_single(
  *                also be 0.
  *   maximal    - require cliques to be maximal cliques
  *   opts       - time printing and clique storage options
- *   num_found  - the number of cliques found.  This can be less than the number
- *                of cliques in the graph iff opts->time_function() returns
- *                FALSE (request abort) or opts->user_function() returns an
- *                igraph error code
+ *
+ * Returns the number of cliques found.  This can be less than the number
+ * of cliques in the graph iff opts->time_function() or opts->user_function()
+ * returns FALSE (request abort).
  *
  * The cliques found are stored in opts->clique_list[] and
  * opts->user_function() is called with them (if non-NULL).  The cliques
@@ -1613,12 +1543,11 @@ igraph_error_t clique_find_single(
  * Note: Automatically uses clique_unweighted_find_all if all vertex
  *       weights are the same.
  */
-igraph_error_t clique_find_all(graph_t *g, int min_weight, int max_weight,
-		    boolean maximal, clique_options *opts, int *num_found) {
-	int i,n;
+int clique_find_all(graph_t *g, int min_weight, int max_weight,
+		    boolean maximal, clique_options *opts) {
+        int i,n;
 	int *table;
-	CLIQUER_LARGE_INT r;
-	igraph_error_t retval = IGRAPH_SUCCESS;
+        CLIQUER_LARGE_INT r;
 
 	ENTRANCE_SAVE();
 	entrance_level++;
@@ -1637,10 +1566,7 @@ igraph_error_t clique_find_all(graph_t *g, int min_weight, int max_weight,
 	if ((max_weight>0) && (min_weight>max_weight)) {
 		/* state was not changed */
 		entrance_level--;
-		if (num_found) {
-			*num_found = 0;
-		}
-		return IGRAPH_SUCCESS;
+		return 0;
 	}
 
     /*
@@ -1656,21 +1582,16 @@ igraph_error_t clique_find_all(graph_t *g, int min_weight, int max_weight,
 			if (max_weight < min_weight) {
 				/* state was not changed */
 				entrance_level--;
-				if (num_found) {
-					*num_found = 0;
-				}
-				return IGRAPH_SUCCESS;
+				return 0;
 			}
 		}
 
 		weight_multiplier = g->weights[0];
 		entrance_level--;
-		retval = clique_unweighted_find_all(g, min_weight, max_weight, maximal, opts, &r);
+                r=clique_unweighted_find_all(g,min_weight,max_weight,maximal,
+					     opts);
 		ENTRANCE_RESTORE();
-		if (num_found) {
-			*num_found = r;
-		}
-		return retval;
+                return r;
 	}
 
 	/* Dynamic allocation */
@@ -1699,8 +1620,8 @@ igraph_error_t clique_find_all(graph_t *g, int min_weight, int max_weight,
 	ASSERT(reorder_is_bijection(table,g->n));
 
 	/* First phase */
-	retval = weighted_clique_search_single(table, min_weight, INT_MAX, g, opts, &n);
-	if (retval || n == 0) {
+	n=weighted_clique_search_single(table,min_weight,INT_MAX,g,opts);
+	if (n==0) {
 		/* Requested clique has not been found. */
 		goto cleanreturn;
 	}
@@ -1719,9 +1640,10 @@ igraph_error_t clique_find_all(graph_t *g, int min_weight, int max_weight,
 			break;
 
 	/* Second phase */
-	retval = weighted_clique_search_all(table, i, min_weight, max_weight, maximal, g, opts, &n);
+	n=weighted_clique_search_all(table,i,min_weight,max_weight,maximal,
+				     g,opts);
 
-cleanreturn:
+      cleanreturn:
 	/* Free resources */
 	for (i=0; i < temp_count; i++)
 		free(temp_list[i]);
@@ -1734,11 +1656,7 @@ cleanreturn:
 	ENTRANCE_RESTORE();
 	entrance_level--;
 
-	if (num_found) {
-		*num_found = n;
-	}
-
-	return retval;
+	return n;
 }
 
 

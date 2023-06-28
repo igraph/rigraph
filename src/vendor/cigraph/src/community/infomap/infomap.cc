@@ -29,43 +29,35 @@
    homePage: http://www.irit.fr/~Emmanuel.Navarro/
 */
 
-#include "igraph_community.h"
 
-#include "core/exceptions.h"
+#include "igraph_interface.h"
+#include "igraph_community.h"
 #include "core/interruption.h"
 
 #include "infomap_Node.h"
-#include "infomap_FlowGraph.h"
 #include "infomap_Greedy.h"
 
-#include <cmath>
-#include <vector>
-
-// This is necessary for GCC 5 and earlier, where including <cmath>
-// makes isnan() unusable without the std:: prefix, even if <math.h>
-// was included as well.
-using std::isnan;
+#include <math.h>
 
 /****************************************************************************/
-static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
+int infomap_partition(FlowGraph * fgraph, bool rcall) {
+    Greedy * greedy;
 
     // save the original graph
-    FlowGraph cpy_fgraph(fgraph);
+    FlowGraph * cpy_fgraph = new FlowGraph(fgraph);
+    IGRAPH_FINALLY(delete_FlowGraph, cpy_fgraph);
 
-    igraph_integer_t Nnode = cpy_fgraph.Nnode;
+    int Nnode = cpy_fgraph->Nnode;
     // "real" number of vertex, ie. number of vertex of the graph
 
-    igraph_integer_t iteration = 0;
+    int iteration = 0;
     double outer_oldCodeLength, newCodeLength;
 
-    std::vector<igraph_integer_t> initial_move;
+    int *initial_move = NULL;
     bool initial_move_done = true;
 
-    // re-use vector in loop for better performance
-    std::vector<igraph_integer_t> subMoveTo;
-
     do { // Main loop
-        outer_oldCodeLength = fgraph.codeLength;
+        outer_oldCodeLength = fgraph->codeLength;
 
         if (iteration > 0) {
             /**********************************************************************/
@@ -73,45 +65,62 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
             // ===========================================
 
             // intial_move indicate current clustering
-            initial_move.resize(Nnode);
+            initial_move = new int[Nnode];
             // new_cluster_id --> old_cluster_id (save curent clustering state)
 
+            IGRAPH_FINALLY(operator delete [], initial_move);
             initial_move_done = false;
 
-            subMoveTo.clear(); // enventual new partitionment of original graph
+            int *subMoveTo = NULL; // enventual new partitionment of original graph
 
-            if ((iteration % 2 == 0) && (fgraph.Nnode > 1)) {
+            if ((iteration % 2 == 0) && (fgraph->Nnode > 1)) {
                 // 0/ Submodule movements : partition each module of the
                 // current partition (rec. call)
 
-                subMoveTo.resize(Nnode);
+                subMoveTo = new int[Nnode];
                 // vid_cpy_fgraph  --> new_cluster_id (new partition)
 
-                igraph_integer_t subModIndex = 0;
+                IGRAPH_FINALLY(operator delete [], subMoveTo);
 
-                for (igraph_integer_t i = 0 ; i < fgraph.Nnode ; i++) {
+                int subModIndex = 0;
+
+                for (int i = 0 ; i < fgraph->Nnode ; i++) {
                     // partition each non trivial module
-                    size_t sub_Nnode = fgraph.node[i].members.size();
+                    int sub_Nnode = fgraph->node[i]->members.size();
                     if (sub_Nnode > 1) { // If the module is not trivial
-                        const std::vector<igraph_integer_t> &sub_members = fgraph.node[i].members;
+                        int *sub_members  = new int[sub_Nnode];      // id_sub --> id
+                        IGRAPH_FINALLY(operator delete [], sub_members);
+
+                        for (int j = 0 ; j < sub_Nnode ; j++) {
+                            sub_members[j] = fgraph->node[i]->members[j];
+                        }
 
                         // extraction of the subgraph
-                        FlowGraph sub_fgraph(cpy_fgraph, sub_members);
-                        sub_fgraph.initiate();
+                        FlowGraph *sub_fgraph = new FlowGraph(cpy_fgraph, sub_Nnode,
+                                                              sub_members);
+                        IGRAPH_FINALLY(delete_FlowGraph, sub_fgraph);
+                        sub_fgraph->initiate();
 
                         // recursif call of partitionment on the subgraph
                         infomap_partition(sub_fgraph, true);
 
                         // Record membership changes
-                        for (igraph_integer_t j = 0; j < sub_fgraph.Nnode; j++) {
-                            for (const auto &v : sub_fgraph.node[j].members) {
-                                subMoveTo[sub_members[v]] = subModIndex;
+                        for (int j = 0; j < sub_fgraph->Nnode; j++) {
+                            int Nmembers = sub_fgraph->node[j]->members.size();
+                            for (int k = 0; k < Nmembers; k++) {
+                                subMoveTo[sub_members[sub_fgraph->node[j]->members[k]]] =
+                                    subModIndex;
                             }
                             initial_move[subModIndex] = i;
                             subModIndex++;
                         }
+
+                        delete sub_fgraph;
+                        IGRAPH_FINALLY_CLEAN(1);
+                        delete [] sub_members;
+                        IGRAPH_FINALLY_CLEAN(1);
                     } else {
-                        subMoveTo[fgraph.node[i].members[0]] = subModIndex;
+                        subMoveTo[fgraph->node[i]->members[0]] = subModIndex;
                         initial_move[subModIndex] = i;
                         subModIndex++;
                     }
@@ -119,19 +128,26 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
             } else {
                 // 1/ Single-node movements : allows each node to move (again)
                 // save current modules
-                for (igraph_integer_t i = 0; i < fgraph.Nnode; i++) { // for each module
-                    for (const auto &v : fgraph.node[i].members) { // for each vertex (of the module)
-                        initial_move[v] = i;
+                for (int i = 0; i < fgraph->Nnode; i++) { // for each module
+                    int Nmembers = fgraph->node[i]->members.size(); // Module size
+                    for (int j = 0; j < Nmembers; j++) { // for each vertex (of the module)
+                        initial_move[fgraph->node[i]->members[j]] = i;
                     }
                 }
             }
 
-            fgraph.back_to(cpy_fgraph);
-            if (! subMoveTo.empty()) {
-                Greedy cpy_greedy(&fgraph);
+            fgraph->back_to(cpy_fgraph);
+            if (subMoveTo) {
+                Greedy *cpy_greedy = new Greedy(fgraph);
+                IGRAPH_FINALLY(delete_Greedy, cpy_greedy);
 
-                cpy_greedy.setMove(subMoveTo);
-                cpy_greedy.apply(false);
+                cpy_greedy->setMove(subMoveTo);
+                cpy_greedy->apply(false);
+
+                delete_Greedy(cpy_greedy);
+                IGRAPH_FINALLY_CLEAN(1);
+                delete [] subMoveTo;
+                IGRAPH_FINALLY_CLEAN(1);
             }
         }
         /**********************************************************************/
@@ -141,26 +157,29 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
 
         do {
             // greedy optimizing object creation
-            Greedy greedy(&fgraph);
+            greedy = new Greedy(fgraph);
+            IGRAPH_FINALLY(delete_Greedy, greedy);
 
             // Initial move to apply ?
-            if (!initial_move_done && ! initial_move.empty()) {
+            if (!initial_move_done && initial_move) {
                 initial_move_done = true;
-                greedy.setMove(initial_move);
+                greedy->setMove(initial_move);
             }
 
-            oldCodeLength = greedy.codeLength;
+            oldCodeLength = greedy->codeLength;
             bool moved = true;
-            //igraph_integer_t count = 0;
+            //int Nloops = 0;
+            //int count = 0;
             double inner_oldCodeLength = 1000;
 
             while (moved) { // main greedy optimizing loop
-                inner_oldCodeLength = greedy.codeLength;
-                moved = greedy.optimize();
+                inner_oldCodeLength = greedy->codeLength;
+                moved = greedy->optimize();
 
+                //Nloops++;
                 //count++;
 
-                if (fabs(greedy.codeLength - inner_oldCodeLength) < 1.0e-10)
+                if (fabs(greedy->codeLength - inner_oldCodeLength) < 1.0e-10)
                     // if the move does'n reduce the codelenght -> exit !
                 {
                     moved = false;
@@ -173,10 +192,20 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
             }
 
             // transform the network to network of modules:
-            greedy.apply(true);
-            newCodeLength = greedy.codeLength;
+            greedy->apply(true);
+            newCodeLength = greedy->codeLength;
+
+            // destroy greedy object
+            delete greedy;
+            IGRAPH_FINALLY_CLEAN(1);
+
         } while (oldCodeLength - newCodeLength >  1.0e-10);
         // while there is some improvement
+
+        if (iteration > 0) {
+            delete [] initial_move;
+            IGRAPH_FINALLY_CLEAN(1);
+        }
 
         iteration++;
         if (!rcall) {
@@ -184,55 +213,51 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
         }
     } while (outer_oldCodeLength - newCodeLength > 1.0e-10);
 
+    delete cpy_fgraph;
+    IGRAPH_FINALLY_CLEAN(1);
     return IGRAPH_SUCCESS;
 }
 
 
 /**
  * \function igraph_community_infomap
- * \brief Find community structure that minimizes the expected description length of a random walker trajectory.
+ * \brief Find community structure that minimizes the expected
+ * description length of a random walker trajectory.
  *
- * Implementation of the Infomap community detection algorithm of
+ * Implementation of the InfoMap community detection algorithm.of
  * Martin Rosvall and Carl T. Bergstrom.
  *
- * </para><para>
- * For more details, see the visualization of the math and the map generator
- * at https://www.mapequation.org . The original paper describing the algorithm
- * is: M. Rosvall and C. T. Bergstrom, Maps of information flow reveal community
- * structure in complex networks, PNAS 105, 1118 (2008)
- * (http://dx.doi.org/10.1073/pnas.0706851105, http://arxiv.org/abs/0707.0609).
- * A more detailed paper about the algorithm is: M. Rosvall, D. Axelsson, and
- * C. T. Bergstrom, The map equation, Eur. Phys. J. Special Topics 178, 13 (2009).
- * (http://dx.doi.org/10.1140/epjst/e2010-01179-1, http://arxiv.org/abs/0906.1405)
+ * See :
+ * Visualization of the math and the map generator: www.mapequation.org
+ * [2] The original paper: M. Rosvall and C. T. Bergstrom, Maps of
+ * information flow reveal community structure in complex networks, PNAS
+ * 105, 1118 (2008) [http://dx.doi.org/10.1073/pnas.0706851105 ,
+ * http://arxiv.org/abs/0707.0609 ]
+ * [3] A more detailed paper: M. Rosvall, D. Axelsson, and C. T. Bergstrom,
+ * The map equation, Eur. Phys. J. Special Topics 178, 13 (2009).
+ * [http://dx.doi.org/10.1140/epjst/e2010-01179-1 ,
+ * http://arxiv.org/abs/0906.1405 ]
 
  * </para><para>
  * The original C++ implementation of Martin Rosvall is used,
  * see http://www.tp.umu.se/~rosvall/downloads/infomap_undir.tgz .
- * Integration in igraph was done by Emmanuel Navarro (who is grateful to
- * Martin Rosvall and Carl T. Bergstrom for providing this source code).
+ * Intergation in igraph has be done by Emmanuel Navarro (who is grateful to
+  * Martin Rosvall and Carl T. Bergstrom for providing this source code.)
  *
  * </para><para>
  * Note that the graph must not contain isolated vertices.
  *
  * </para><para>
- * If you want to specify a random seed (as in the original
+ * If you want to specify a random seed (as in original
  * implementation) you can use \ref igraph_rng_seed().
  *
  * \param graph The input graph.
  * \param e_weights Numeric vector giving the weights of the edges.
- *     The random walker will favour edges with high weights over
- *     edges with low weights; the probability of picking a particular
- *     outbound edge from a node is directly proportional to its weight.
- *     If it is \c NULL then all edges will have equal
+ *     If it is a NULL pointer then all edges will have equal
  *     weights. The weights are expected to be non-negative.
  * \param v_weights Numeric vector giving the weights of the vertices.
- *     Vertices with higher weights are favoured by the random walker
- *     when it needs to "teleport" to a new node after getting stuck in
- *     a sink node (i.e. a node with no outbound edges). The probability
- *     of picking a vertex when the random walker teleports is directly
- *     proportional to the weight of the vertex. If this argument is \c NULL
- *     then all vertices will have equal weights. Weights are expected
- *     to be positive.
+ *     If it is a NULL pointer then all vertices will have equal
+ *     weights. The weights are expected to be positive.
  * \param nb_trials The number of attempts to partition the network
  *     (can be any integer value equal or larger than 1).
  * \param membership Pointer to a vector. The membership vector is
@@ -246,14 +271,12 @@ static igraph_error_t infomap_partition(FlowGraph &fgraph, bool rcall) {
  *
  * Time complexity: TODO.
  */
-igraph_error_t igraph_community_infomap(const igraph_t * graph,
+int igraph_community_infomap(const igraph_t * graph,
                              const igraph_vector_t *e_weights,
                              const igraph_vector_t *v_weights,
-                             igraph_integer_t nb_trials,
-                             igraph_vector_int_t *membership,
+                             int nb_trials,
+                             igraph_vector_t *membership,
                              igraph_real_t *codelength) {
-
-    IGRAPH_HANDLE_EXCEPTIONS_BEGIN;
 
     if (e_weights) {
         const igraph_integer_t ecount = igraph_ecount(graph);
@@ -261,12 +284,10 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
             IGRAPH_ERROR("Invalid edge weight vector length.", IGRAPH_EINVAL);
         }
         if (ecount > 0) {
-            /* Allow both positive and zero weights.
-             * The conversion to Infomap format will simply skip zero-weight edges/ */
             igraph_real_t minweight = igraph_vector_min(e_weights);
             if (minweight < 0) {
                 IGRAPH_ERROR("Edge weights must not be negative.", IGRAPH_EINVAL);
-            } else if (isnan(minweight)) {
+            } else if (igraph_is_nan(minweight)) {
                 IGRAPH_ERROR("Edge weights must not be NaN values.", IGRAPH_EINVAL);
             }
         }
@@ -278,53 +299,58 @@ igraph_error_t igraph_community_infomap(const igraph_t * graph,
             IGRAPH_ERROR("Invalid vertex weight vector length.", IGRAPH_EINVAL);
         }
         if (vcount > 0) {
-            /* TODO: Currently we require strictly positive. Can this be
-             * relaxed to non-negative values? */
             igraph_real_t minweight = igraph_vector_min(v_weights);
             if (minweight <= 0) {
                 IGRAPH_ERROR("Vertex weights must be positive.", IGRAPH_EINVAL);
-            } else if (isnan(minweight)) {
+            } else if (igraph_is_nan(minweight)) {
                 IGRAPH_ERROR("Vertex weights must not be NaN values.", IGRAPH_EINVAL);
             }
         }
     }
 
-    FlowGraph fgraph(graph, e_weights, v_weights);
+    FlowGraph * fgraph = new FlowGraph(graph, e_weights, v_weights);
+    IGRAPH_FINALLY(delete_FlowGraph, fgraph);
 
     // compute stationary distribution
-    fgraph.initiate();
+    fgraph->initiate();
 
+    FlowGraph * cpy_fgraph ;
     double shortestCodeLength = 1000.0;
 
     // create membership vector
-    igraph_integer_t Nnode = fgraph.Nnode;
-    IGRAPH_CHECK(igraph_vector_int_resize(membership, Nnode));
+    int Nnode = fgraph->Nnode;
+    IGRAPH_CHECK(igraph_vector_resize(membership, Nnode));
 
-    for (igraph_integer_t trial = 0; trial < nb_trials; trial++) {
-        FlowGraph cpy_fgraph(fgraph);
+    for (int trial = 0; trial < nb_trials; trial++) {
+        cpy_fgraph = new FlowGraph(fgraph);
+        IGRAPH_FINALLY(delete_FlowGraph, cpy_fgraph);
 
         //partition the network
         IGRAPH_CHECK(infomap_partition(cpy_fgraph, false));
 
         // if better than the better...
-        if (cpy_fgraph.codeLength < shortestCodeLength) {
-            shortestCodeLength = cpy_fgraph.codeLength;
+        if (cpy_fgraph->codeLength < shortestCodeLength) {
+            shortestCodeLength = cpy_fgraph->codeLength;
             // ... store the partition
-            for (igraph_integer_t i = 0 ; i < cpy_fgraph.Nnode ; i++) {
-                size_t Nmembers = cpy_fgraph.node[i].members.size();
-                for (size_t k = 0; k < Nmembers; k++) {
-                    //cluster[ cpy_fgraph->node[i].members[k] ] = i;
-                    VECTOR(*membership)[cpy_fgraph.node[i].members[k]] = i;
+            for (int i = 0 ; i < cpy_fgraph->Nnode ; i++) {
+                int Nmembers = cpy_fgraph->node[i]->members.size();
+                for (int k = 0; k < Nmembers; k++) {
+                    //cluster[ cpy_fgraph->node[i]->members[k] ] = i;
+                    VECTOR(*membership)[cpy_fgraph->node[i]->members[k]] = i;
                 }
             }
         }
+
+        delete_FlowGraph(cpy_fgraph);
+        IGRAPH_FINALLY_CLEAN(1);
     }
 
     *codelength = (igraph_real_t) shortestCodeLength / log(2.0);
 
-    IGRAPH_CHECK(igraph_reindex_membership(membership, NULL, NULL));
+    delete fgraph;
+    IGRAPH_FINALLY_CLEAN(1);
+
+    IGRAPH_CHECK(igraph_reindex_membership(membership, 0, 0));
 
     return IGRAPH_SUCCESS;
-
-    IGRAPH_HANDLE_EXCEPTIONS_END;
 }

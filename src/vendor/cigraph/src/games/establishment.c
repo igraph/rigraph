@@ -56,21 +56,21 @@
  * Time complexity: O(|V|*k*log(|V|)), |V| is the number of vertices
  * and k is the \p k parameter.
  */
-igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes,
+int igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes,
                               igraph_integer_t types, igraph_integer_t k,
                               const igraph_vector_t *type_dist,
                               const igraph_matrix_t *pref_matrix,
                               igraph_bool_t directed,
-                              igraph_vector_int_t *node_type_vec) {
-    igraph_integer_t i, j;
-    igraph_vector_int_t edges;
+                              igraph_vector_t *node_type_vec) {
+    long int i, j;
+    igraph_vector_t edges;
     igraph_vector_t cumdist;
-    igraph_vector_int_t potneis;
+    igraph_vector_t potneis;
     igraph_real_t maxcum;
-    igraph_vector_int_t *nodetypes;
+    igraph_vector_t *nodetypes;
 
     /* Argument contracts */
-    if (nodes < 0) {
+    if(nodes < 0){
         IGRAPH_ERROR("The number of vertices must be non-negative.", IGRAPH_EINVAL);
     }
 
@@ -90,7 +90,7 @@ igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes
         if (lo < 0) {
             IGRAPH_ERROR("The vertex type distribution vector must not contain negative values.", IGRAPH_EINVAL);
         }
-        if (isnan(lo)) {
+        if (igraph_is_nan(lo)) {
             IGRAPH_ERROR("The vertex type distribution vector must not contain NaN.", IGRAPH_EINVAL);
         }
     }
@@ -101,12 +101,12 @@ igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes
 
     {
         igraph_real_t lo, hi;
-        igraph_matrix_minmax(pref_matrix, &lo, &hi); /* matrix size is at least 1x1, safe to call minmax */
+        igraph_matrix_minmax(pref_matrix, &lo, &hi);
 
         if (lo < 0 || hi > 1) {
             IGRAPH_ERROR("The preference matrix must contain probabilities in [0, 1].", IGRAPH_EINVAL);
         }
-        if (isnan(lo) || isnan(hi)) {
+        if (igraph_is_nan(lo) || igraph_is_nan(hi)) {
             IGRAPH_ERROR("The preference matrix must not contain NaN.", IGRAPH_EINVAL);
         }
     }
@@ -115,9 +115,9 @@ igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes
         IGRAPH_ERROR("The preference matrix must be symmetric when generating undirected graphs.", IGRAPH_EINVAL);
     }
 
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, 0);
     IGRAPH_VECTOR_INIT_FINALLY(&cumdist, types + 1);
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&potneis, k);
+    IGRAPH_VECTOR_INIT_FINALLY(&potneis, k);
 
     if (type_dist) {
         VECTOR(cumdist)[0] = 0;
@@ -137,33 +137,33 @@ igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes
 
     if (node_type_vec) {
         nodetypes = node_type_vec;
-        IGRAPH_CHECK(igraph_vector_int_resize(nodetypes, nodes));
+        IGRAPH_CHECK(igraph_vector_resize(nodetypes, nodes));
     } else {
-        nodetypes = IGRAPH_CALLOC(1, igraph_vector_int_t);
+        nodetypes = IGRAPH_CALLOC(1, igraph_vector_t);
         if (! nodetypes) {
-            IGRAPH_ERROR("Insufficient memory for establishment_game.", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
+            IGRAPH_ERROR("Insufficient memory for establishment_game.", IGRAPH_ENOMEM);
         }
         IGRAPH_FINALLY(igraph_free, nodetypes);
-        IGRAPH_VECTOR_INT_INIT_FINALLY(nodetypes, nodes);
+        IGRAPH_VECTOR_INIT_FINALLY(nodetypes, nodes);
     }
 
     RNG_BEGIN();
 
     for (i = 0; i < nodes; i++) {
         igraph_real_t uni = RNG_UNIF(0, maxcum);
-        igraph_integer_t type;
+        long int type;
         igraph_vector_binsearch(&cumdist, uni, &type);
         VECTOR(*nodetypes)[i] = type - 1;
     }
 
     for (i = k; i < nodes; i++) {
-        igraph_integer_t type1 = VECTOR(*nodetypes)[i];
+        long int type1 = (long int) VECTOR(*nodetypes)[i];
         igraph_random_sample(&potneis, 0, i - 1, k);
         for (j = 0; j < k; j++) {
-            igraph_integer_t type2 = VECTOR(*nodetypes)[VECTOR(potneis)[j]];
+            long int type2 = (long int) VECTOR(*nodetypes)[(long int)VECTOR(potneis)[j]];
             if (RNG_UNIF01() < MATRIX(*pref_matrix, type1, type2)) {
-                IGRAPH_CHECK(igraph_vector_int_push_back(&edges, i));
-                IGRAPH_CHECK(igraph_vector_int_push_back(&edges, VECTOR(potneis)[j]));
+                IGRAPH_CHECK(igraph_vector_push_back(&edges, i));
+                IGRAPH_CHECK(igraph_vector_push_back(&edges, VECTOR(potneis)[j]));
             }
         }
     }
@@ -171,15 +171,15 @@ igraph_error_t igraph_establishment_game(igraph_t *graph, igraph_integer_t nodes
     RNG_END();
 
     if (! node_type_vec) {
-        igraph_vector_int_destroy(nodetypes);
+        igraph_vector_destroy(nodetypes);
         IGRAPH_FREE(nodetypes);
         IGRAPH_FINALLY_CLEAN(2);
     }
-    igraph_vector_int_destroy(&potneis);
+    igraph_vector_destroy(&potneis);
     igraph_vector_destroy(&cumdist);
     IGRAPH_FINALLY_CLEAN(2);
     IGRAPH_CHECK(igraph_create(graph, &edges, nodes, directed));
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
 
     return IGRAPH_SUCCESS;

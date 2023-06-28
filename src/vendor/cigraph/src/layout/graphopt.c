@@ -33,43 +33,43 @@
 
 static igraph_real_t igraph_i_distance_between(
         const igraph_matrix_t *c,
-        igraph_integer_t a, igraph_integer_t b);
+        long int a, long int b);
 
-static void igraph_i_determine_electric_axal_forces(
+static int igraph_i_determine_electric_axal_forces(
         const igraph_matrix_t *pos,
         igraph_real_t *x,
         igraph_real_t *y,
         igraph_real_t directed_force,
         igraph_real_t distance,
-        igraph_integer_t other_node,
-        igraph_integer_t this_node);
+        long int other_node,
+        long int this_node);
 
-static void igraph_i_apply_electrical_force(
+static int igraph_i_apply_electrical_force(
         const igraph_matrix_t *pos,
         igraph_vector_t *pending_forces_x,
         igraph_vector_t *pending_forces_y,
-        igraph_integer_t other_node, igraph_integer_t this_node,
+        long int other_node, long int this_node,
         igraph_real_t node_charge,
         igraph_real_t distance);
 
-static void igraph_i_determine_spring_axal_forces(
+static int igraph_i_determine_spring_axal_forces(
         const igraph_matrix_t *pos,
         igraph_real_t *x, igraph_real_t *y,
         igraph_real_t directed_force,
         igraph_real_t distance,
         igraph_real_t spring_length,
-        igraph_integer_t other_node,
-        igraph_integer_t this_node);
+        long int other_node,
+        long int this_node);
 
-static void igraph_i_apply_spring_force(
+static int igraph_i_apply_spring_force(
         const igraph_matrix_t *pos,
         igraph_vector_t *pending_forces_x,
         igraph_vector_t *pending_forces_y,
-        igraph_integer_t other_node,
-        igraph_integer_t this_node, igraph_real_t spring_length,
+        long int other_node,
+        long int this_node, igraph_real_t spring_length,
         igraph_real_t spring_constant);
 
-static void igraph_i_move_nodes(
+static int igraph_i_move_nodes(
         igraph_matrix_t *pos,
         const igraph_vector_t *pending_forces_x,
         const igraph_vector_t *pending_forces_y,
@@ -78,19 +78,19 @@ static void igraph_i_move_nodes(
 
 static igraph_real_t igraph_i_distance_between(
         const igraph_matrix_t *c,
-        igraph_integer_t a, igraph_integer_t b) {
+        long int a, long int b) {
     igraph_real_t diffx = MATRIX(*c, a, 0) - MATRIX(*c, b, 0);
     igraph_real_t diffy = MATRIX(*c, a, 1) - MATRIX(*c, b, 1);
-    return sqrt(diffx*diffx + diffy*diffy);
+    return sqrt( diffx * diffx + diffy * diffy );
 }
 
-static void igraph_i_determine_electric_axal_forces(const igraph_matrix_t *pos,
+static int igraph_i_determine_electric_axal_forces(const igraph_matrix_t *pos,
         igraph_real_t *x,
         igraph_real_t *y,
         igraph_real_t directed_force,
         igraph_real_t distance,
-        igraph_integer_t other_node,
-        igraph_integer_t this_node) {
+        long int other_node,
+        long int this_node) {
 
     // We know what the directed force is.  We now need to translate it
     // into the appropriate x and y components.
@@ -133,13 +133,15 @@ static void igraph_i_determine_electric_axal_forces(const igraph_matrix_t *pos,
     if (MATRIX(*pos, other_node, 1) < MATRIX(*pos, this_node, 1)) {
         *y = *y * -1;
     }
+
+    return 0;
 }
 
-static void igraph_i_apply_electrical_force(
+static int igraph_i_apply_electrical_force(
         const igraph_matrix_t *pos,
         igraph_vector_t *pending_forces_x,
         igraph_vector_t *pending_forces_y,
-        igraph_integer_t other_node, igraph_integer_t this_node,
+        long int other_node, long int this_node,
         igraph_real_t node_charge,
         igraph_real_t distance) {
 
@@ -155,15 +157,17 @@ static void igraph_i_apply_electrical_force(
     VECTOR(*pending_forces_y)[this_node] += y_force;
     VECTOR(*pending_forces_x)[other_node] -= x_force;
     VECTOR(*pending_forces_y)[other_node] -= y_force;
+
+    return 0;
 }
 
-static void igraph_i_determine_spring_axal_forces(
+static int igraph_i_determine_spring_axal_forces(
         const igraph_matrix_t *pos,
         igraph_real_t *x, igraph_real_t *y,
         igraph_real_t directed_force,
         igraph_real_t distance,
         igraph_real_t spring_length,
-        igraph_integer_t other_node, igraph_integer_t this_node) {
+        long int other_node, long int this_node) {
 
     // if the spring is just the right size, the forces will be 0, so we can
     // skip the computation.
@@ -192,14 +196,16 @@ static void igraph_i_determine_spring_axal_forces(
         *x = 0.5 * *x;
         *y = 0.5 * *y;
     }
+
+    return 0;
 }
 
-static void igraph_i_apply_spring_force(
+static int igraph_i_apply_spring_force(
         const igraph_matrix_t *pos,
         igraph_vector_t *pending_forces_x,
         igraph_vector_t *pending_forces_y,
-        igraph_integer_t other_node,
-        igraph_integer_t this_node, igraph_real_t spring_length,
+        long int other_node,
+        long int this_node, igraph_real_t spring_length,
         igraph_real_t spring_constant) {
 
     // determined using Hooke's Law:
@@ -216,7 +222,7 @@ static void igraph_i_apply_spring_force(
     // and when it does, electrical force will probably push one or both of them
     // one way or another anyway.
     if (distance == 0.0) {
-        return;
+        return 0;
     }
 
     displacement = distance - spring_length;
@@ -237,9 +243,11 @@ static void igraph_i_apply_spring_force(
     VECTOR(*pending_forces_y)[this_node] += y_force;
     VECTOR(*pending_forces_x)[other_node] -= x_force;
     VECTOR(*pending_forces_y)[other_node] -= y_force;
+
+    return 0;
 }
 
-static void igraph_i_move_nodes(
+static int igraph_i_move_nodes(
         igraph_matrix_t *pos,
         const igraph_vector_t *pending_forces_x,
         const igraph_vector_t *pending_forces_y,
@@ -260,7 +268,7 @@ static void igraph_i_move_nodes(
     //   velocity     = force / mass
     //   displacement = force / mass
 
-    igraph_integer_t this_node, no_of_nodes = igraph_vector_size(pending_forces_x);
+    long int this_node, no_of_nodes = igraph_vector_size(pending_forces_x);
 
     for (this_node = 0; this_node < no_of_nodes; this_node++) {
 
@@ -284,16 +292,19 @@ static void igraph_i_move_nodes(
         MATRIX(*pos, this_node, 1) += y_movement;
 
     }
+    return 0;
 }
 
 /**
  * \function igraph_layout_graphopt
  * \brief Optimizes vertex layout via the graphopt algorithm.
  *
+ * </para><para>
  * This is a port of the graphopt layout algorithm by Michael Schmuhl.
- * graphopt version 0.4.1 was rewritten in C, the support for
- * layers was removed and the code was reorganized to avoid some
- * unnecessary steps when the node charge (see below) is zero.
+ * graphopt version 0.4.1 was rewritten in C and the support for
+ * layers was removed (might be added later) and a code was a bit
+ * reorganized to avoid some unnecessary steps is the node charge (see below)
+ * is zero.
  *
  * </para><para>
  * Graphopt uses physical analogies for defining attracting and repelling
@@ -303,7 +314,6 @@ static void igraph_i_move_nodes(
  *
  * </para><para>
  * See also http://www.schmuhl.org/graphopt/ for the original graphopt.
- *
  * \param graph The input graph.
  * \param res Pointer to an initialized matrix, the result will be stored here
  *    and its initial contents are used as the starting point of the simulation
@@ -336,7 +346,7 @@ static void igraph_i_move_nodes(
  * |V| is the number of vertices, |E| the number
  * of edges. If \p node_charge is zero then it is only O(n|E|).
  */
-igraph_error_t igraph_layout_graphopt(const igraph_t *graph, igraph_matrix_t *res,
+int igraph_layout_graphopt(const igraph_t *graph, igraph_matrix_t *res,
                            igraph_integer_t niter,
                            igraph_real_t node_charge, igraph_real_t node_mass,
                            igraph_real_t spring_length,
@@ -344,16 +354,16 @@ igraph_error_t igraph_layout_graphopt(const igraph_t *graph, igraph_matrix_t *re
                            igraph_real_t max_sa_movement,
                            igraph_bool_t use_seed) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
+    long int no_of_nodes = igraph_vcount(graph);
+    long int no_of_edges = igraph_ecount(graph);
     igraph_vector_t pending_forces_x, pending_forces_y;
     /* Set a flag to calculate (or not) the electrical forces that the nodes */
     /* apply on each other based on if both node types' charges are zero. */
     igraph_bool_t apply_electric_charges = (node_charge != 0);
 
-    igraph_integer_t this_node, other_node, edge;
+    long int this_node, other_node, edge;
     igraph_real_t distance;
-    igraph_integer_t i;
+    long int i;
 
     IGRAPH_VECTOR_INIT_FINALLY(&pending_forces_x, no_of_nodes);
     IGRAPH_VECTOR_INIT_FINALLY(&pending_forces_y, no_of_nodes);
@@ -412,8 +422,8 @@ igraph_error_t igraph_layout_graphopt(const igraph_t *graph, igraph_matrix_t *re
 
         // Apply force from springs
         for (edge = 0; edge < no_of_edges; edge++) {
-            igraph_integer_t tthis_node = IGRAPH_FROM(graph, edge);
-            igraph_integer_t oother_node = IGRAPH_TO(graph, edge);
+            long int tthis_node = IGRAPH_FROM(graph, edge);
+            long int oother_node = IGRAPH_TO(graph, edge);
             // Apply spring force on both nodes
             igraph_i_apply_spring_force(res, &pending_forces_x, &pending_forces_y,
                                         oother_node, tthis_node, spring_length,

@@ -25,39 +25,31 @@
 #include "igraph_constructors.h"
 #include "igraph_conversion.h"
 #include "igraph_interface.h"
+#include "igraph_memory.h"
 #include "igraph_qsort.h"
-#include "igraph_vector_list.h"
 
 #include "operators/misc_internal.h"
+
+#include <limits.h>
 
 /**
  * \function igraph_intersection
  * \brief Collect the common edges from two graphs.
  *
+ * </para><para>
  * The result graph contains only edges present both in the first and
  * the second graph. The number of vertices in the result graph is the
  * same as the larger from the two arguments.
- *
- * </para><para>
- * The directedness of the operand graphs must be the same.
- *
- * </para><para>
- * Edge multiplicities are handled by taking the \em smaller of the two
- * multiplicities in the input graphs. In other words, if the first graph
- * has N edges between a vertex pair (u, v) and the second graph has M edges,
- * the result graph will have min(N, M) edges between them.
  *
  * \param res Pointer to an uninitialized graph object. This will
  * contain the result of the operation.
  * \param left The first operand, a graph object.
  * \param right The second operand, a graph object.
- * \param edge_map1 Null pointer, or an initialized vector.
+ * \param edge_map1 Null pointer, or an initialized \type igraph_vector_t.
  *    If the latter, then a mapping from the edges of the result graph, to
- *    the edges of the \p left input graph is stored here. For the edges that
- *    are not in the intersection, -1 is stored.
- * \param edge_map2 Null pointer, or an initialized vector. The same
- *    as \p edge_map1, but for the \p right input graph. For the edges that
- *    are not in the intersection, -1 is stored.
+ *    the edges of the \p left input graph is stored here.
+ * \param edge_map2 Null pointer, or an \type igraph_vector_t. The same
+ *    as \p edge_map1, but for the \p right input graph.
  * \return Error code.
  * \sa \ref igraph_intersection_many() to calculate the intersection
  * of many graphs at once, \ref igraph_union(), \ref
@@ -69,10 +61,10 @@
  *
  * \example examples/simple/igraph_intersection.c
  */
-igraph_error_t igraph_intersection(igraph_t *res,
+int igraph_intersection(igraph_t *res,
                         const igraph_t *left, const igraph_t *right,
-                        igraph_vector_int_t *edge_map1,
-                        igraph_vector_int_t *edge_map2) {
+                        igraph_vector_t *edge_map1,
+                        igraph_vector_t *edge_map2) {
     return igraph_i_merge(res, IGRAPH_MERGE_MODE_INTERSECTION, left, right,
                           edge_map1, edge_map2);
 }
@@ -81,6 +73,7 @@ igraph_error_t igraph_intersection(igraph_t *res,
  * \function igraph_intersection_many
  * \brief The intersection of more than two graphs.
  *
+ * </para><para>
  * This function calculates the intersection of the graphs stored in
  * the \p graphs argument. Only those edges will be included in the
  * result graph which are part of every graph in \p graphs.
@@ -89,25 +82,15 @@ igraph_error_t igraph_intersection(igraph_t *res,
  * The number of vertices in the result graph will be the maximum
  * number of vertices in the argument graphs.
  *
- * </para><para>
- * The directedness of the argument graphs must be the same.
- * If the graph list has length zero, the result will be a \em directed
- * graph with no vertices.
- *
- * </para><para>
- * Edge multiplicities are handled by taking the \em minimum multiplicity of the
- * all multiplicities for the same vertex pair (u, v) in the input graphs; this
- * will be the multiplicity of (u, v) in the result graph.
- *
  * \param res Pointer to an uninitialized graph object, the result of
  *        the operation will be stored here.
  * \param graphs Pointer vector, contains pointers to graphs objects,
  *        the operands of the intersection operator.
  * \param edgemaps If not a null pointer, then it must be an initialized
- *        list of integer vectors, and the mappings of edges from the graphs to
- *        the result graph will be stored here, in the same order as
+ *        pointer vector and the mappings of edges from the graphs to the
+ *        result graph will be stored here, in the same order as
  *        \p graphs. Each mapping is stored in a separate
- *        \type igraph_vector_int_t object. For the edges that are not in
+ *        \type igraph_vector_t object. For the edges that are not in
  *        the intersection, -1 is stored.
  * \return Error code.
  * \sa \ref igraph_intersection() for the intersection of two graphs,
@@ -118,21 +101,19 @@ igraph_error_t igraph_intersection(igraph_t *res,
  * |E| is the number of edges in the smallest graph (i.e. the graph having
  * the less vertices).
  */
-igraph_error_t igraph_intersection_many(
-    igraph_t *res, const igraph_vector_ptr_t *graphs,
-    igraph_vector_int_list_t *edgemaps
-) {
+int igraph_intersection_many(igraph_t *res,
+                             const igraph_vector_ptr_t *graphs,
+                             igraph_vector_ptr_t *edgemaps) {
 
-    igraph_integer_t no_of_graphs = igraph_vector_ptr_size(graphs);
-    igraph_integer_t no_of_nodes = 0;
-    igraph_bool_t directed = true;
-    igraph_vector_int_t edges;
-    igraph_vector_int_list_t edge_vects, order_vects;
-    igraph_integer_t i, j, tailfrom = no_of_graphs > 0 ? 0 : -1, tailto = -1;
-    igraph_vector_int_t no_edges;
-    igraph_bool_t allne = no_of_graphs > 0;
-    igraph_bool_t allsame = false;
-    igraph_integer_t idx = 0;
+    long int no_of_graphs = igraph_vector_ptr_size(graphs);
+    long int no_of_nodes = 0;
+    igraph_bool_t directed = 1;
+    igraph_vector_t edges;
+    igraph_vector_ptr_t edge_vects, order_vects;
+    long int i, j, tailfrom = no_of_graphs > 0 ? 0 : -1, tailto = -1;
+    igraph_vector_long_t no_edges;
+    igraph_bool_t allne = no_of_graphs == 0 ? 0 : 1, allsame = 0;
+    long int idx = 0;
 
     /* Check directedness */
     if (no_of_graphs != 0) {
@@ -140,18 +121,24 @@ igraph_error_t igraph_intersection_many(
     }
     for (i = 1; i < no_of_graphs; i++) {
         if (directed != igraph_is_directed(VECTOR(*graphs)[i])) {
-            IGRAPH_ERROR("Cannot create intersection of directed and undirected graphs.",
+            IGRAPH_ERROR("Cannot intersect directed and undirected graphs",
                          IGRAPH_EINVAL);
         }
     }
 
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
-    IGRAPH_CHECK(igraph_vector_int_init(&no_edges, no_of_graphs));
-    IGRAPH_FINALLY(igraph_vector_int_destroy, &no_edges);
+    if (edgemaps) {
+        IGRAPH_CHECK(igraph_vector_ptr_resize(edgemaps, no_of_graphs));
+        igraph_vector_ptr_null(edgemaps);
+        IGRAPH_FINALLY(igraph_i_union_intersection_destroy_vectors, edgemaps);
+    }
+
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, 0);
+    IGRAPH_CHECK(igraph_vector_long_init(&no_edges, no_of_graphs));
+    IGRAPH_FINALLY(igraph_vector_long_destroy, &no_edges);
 
     /* Calculate number of nodes, query number of edges */
     for (i = 0; i < no_of_graphs; i++) {
-        igraph_integer_t n = igraph_vcount(VECTOR(*graphs)[i]);
+        long int n = igraph_vcount(VECTOR(*graphs)[i]);
         if (n > no_of_nodes) {
             no_of_nodes = n;
         }
@@ -160,38 +147,55 @@ igraph_error_t igraph_intersection_many(
     }
 
     if (edgemaps) {
-        IGRAPH_CHECK(igraph_vector_int_list_resize(edgemaps, no_of_graphs));
         for (i = 0; i < no_of_graphs; i++) {
-            igraph_vector_int_t* v = igraph_vector_int_list_get_ptr(edgemaps, i);
-            IGRAPH_CHECK(igraph_vector_int_resize(v, VECTOR(no_edges)[i]));
-            igraph_vector_int_fill(v, -1);
+            VECTOR(*edgemaps)[i] = IGRAPH_CALLOC(1, igraph_vector_t);
+            if (!VECTOR(*edgemaps)[i]) {
+                IGRAPH_ERROR("Cannot intersect graphs", IGRAPH_ENOMEM);
+            }
+            IGRAPH_CHECK(igraph_vector_init(VECTOR(*edgemaps)[i],
+                                            VECTOR(no_edges)[i]));
+            igraph_vector_fill(VECTOR(*edgemaps)[i], -1);
         }
     }
 
     /* Allocate memory for the edge lists and their index vectors */
-    IGRAPH_VECTOR_INT_LIST_INIT_FINALLY(&edge_vects, no_of_graphs);
-    IGRAPH_VECTOR_INT_LIST_INIT_FINALLY(&order_vects, no_of_graphs);
+    if (no_of_graphs != 0) {
+        IGRAPH_CHECK(igraph_vector_ptr_init(&edge_vects, no_of_graphs));
+        IGRAPH_FINALLY(igraph_i_union_intersection_destroy_vectors, &edge_vects);
+        IGRAPH_CHECK(igraph_vector_ptr_init(&order_vects, no_of_graphs));
+        IGRAPH_FINALLY(igraph_i_union_intersection_destroy_vector_longs, &order_vects);
+    }
+    for (i = 0; i < no_of_graphs; i++) {
+        VECTOR(edge_vects)[i] = IGRAPH_CALLOC(1, igraph_vector_t);
+        VECTOR(order_vects)[i] = IGRAPH_CALLOC(1, igraph_vector_long_t);
+        if (! VECTOR(edge_vects)[i] || ! VECTOR(order_vects)[i]) {
+            IGRAPH_ERROR("Cannot intersect graphs", IGRAPH_ENOMEM);
+        }
+        IGRAPH_CHECK(igraph_vector_init(VECTOR(edge_vects)[i],
+                                        2 * VECTOR(no_edges)[i]));
+        IGRAPH_CHECK(igraph_vector_long_init(VECTOR(order_vects)[i],
+                                             VECTOR(no_edges)[i]));
+    }
 
     /* Query and sort the edge lists */
     for (i = 0; i < no_of_graphs; i++) {
-        igraph_integer_t k, j, n = VECTOR(no_edges)[i];
-        igraph_vector_int_t *ev = igraph_vector_int_list_get_ptr(&edge_vects, i);
-        igraph_vector_int_t *order = igraph_vector_int_list_get_ptr(&order_vects, i);
-        IGRAPH_CHECK(igraph_get_edgelist(VECTOR(*graphs)[i], ev, /*bycol=*/ false));
+        long int k, j, n = VECTOR(no_edges)[i];
+        igraph_vector_t *edges = VECTOR(edge_vects)[i];
+        igraph_vector_long_t *order = VECTOR(order_vects)[i];
+        IGRAPH_CHECK(igraph_get_edgelist(VECTOR(*graphs)[i], edges, /*bycol=*/0));
         if (!directed) {
             for (k = 0, j = 0; k < n; k++, j += 2) {
-                if (VECTOR(*ev)[j] > VECTOR(*ev)[j + 1]) {
-                    igraph_integer_t tmp = VECTOR(*ev)[j];
-                    VECTOR(*ev)[j] = VECTOR(*ev)[j + 1];
-                    VECTOR(*ev)[j + 1] = tmp;
+                if (VECTOR(*edges)[j] > VECTOR(*edges)[j + 1]) {
+                    long int tmp = VECTOR(*edges)[j];
+                    VECTOR(*edges)[j] = VECTOR(*edges)[j + 1];
+                    VECTOR(*edges)[j + 1] = tmp;
                 }
             }
         }
-        IGRAPH_CHECK(igraph_vector_int_resize(order, n));
         for (k = 0; k < n; k++) {
             VECTOR(*order)[k] = k;
         }
-        igraph_qsort_r(VECTOR(*order), n, sizeof(VECTOR(*order)[0]), ev,
+        igraph_qsort_r(VECTOR(*order), n, sizeof(VECTOR(*order)[0]), edges,
                        igraph_i_order_edgelist_cmp);
     }
 
@@ -204,12 +208,11 @@ igraph_error_t igraph_intersection_many(
     while (allne) {
 
         /* Look for the smallest tail element */
-        for (j = 0, tailfrom = IGRAPH_INTEGER_MAX, tailto = IGRAPH_INTEGER_MAX; j < no_of_graphs; j++) {
-            igraph_vector_int_t *order = igraph_vector_int_list_get_ptr(&order_vects, j);
-            igraph_vector_int_t *ev = igraph_vector_int_list_get_ptr(&edge_vects, j);
-            igraph_integer_t edge = igraph_vector_int_tail(order);
-            igraph_integer_t from = VECTOR(*ev)[2 * edge];
-            igraph_integer_t to = VECTOR(*ev)[2 * edge + 1];
+        for (j = 0, tailfrom = LONG_MAX, tailto = LONG_MAX; j < no_of_graphs; j++) {
+            long int edge = igraph_vector_long_tail(VECTOR(order_vects)[j]);
+            igraph_vector_t *ev = VECTOR(edge_vects)[j];
+            long int from = VECTOR(*ev)[2 * edge];
+            long int to = VECTOR(*ev)[2 * edge + 1];
             if (from < tailfrom || (from == tailfrom && to < tailto)) {
                 tailfrom = from; tailto = to;
             }
@@ -218,17 +221,16 @@ igraph_error_t igraph_intersection_many(
         /* OK, now remove all elements from the tail(s) that are bigger
            than the smallest tail element. */
         for (j = 0, allsame = 1; j < no_of_graphs; j++) {
-            igraph_integer_t from = -1, to = -1;
-            igraph_vector_int_t *order = igraph_vector_int_list_get_ptr(&order_vects, j);
+            long int from = -1, to = -1;
             while (1) {
-                igraph_integer_t edge = igraph_vector_int_tail(order);
-                igraph_vector_int_t *ev = igraph_vector_int_list_get_ptr(&edge_vects, j);
+                long int edge = igraph_vector_long_tail(VECTOR(order_vects)[j]);
+                igraph_vector_t *ev = VECTOR(edge_vects)[j];
                 from = VECTOR(*ev)[2 * edge];
                 to = VECTOR(*ev)[2 * edge + 1];
                 if (from > tailfrom || (from == tailfrom && to > tailto)) {
-                    igraph_vector_int_pop_back(order);
-                    if (igraph_vector_int_empty(order)) {
-                        allne = false;
+                    igraph_vector_long_pop_back(VECTOR(order_vects)[j]);
+                    if (igraph_vector_long_empty(VECTOR(order_vects)[j])) {
+                        allne = 0;
                         break;
                     }
                 } else {
@@ -243,26 +245,25 @@ igraph_error_t igraph_intersection_many(
         /* Add the edge, if the smallest tail element was present
            in all graphs. */
         if (allsame) {
-            IGRAPH_CHECK(igraph_vector_int_push_back(&edges, tailfrom));
-            IGRAPH_CHECK(igraph_vector_int_push_back(&edges, tailto));
+            IGRAPH_CHECK(igraph_vector_push_back(&edges, tailfrom));
+            IGRAPH_CHECK(igraph_vector_push_back(&edges, tailto));
         }
 
         /* Drop edges matching the smalles tail elements
            from the order vectors, build edge maps */
         if (allne) {
             for (j = 0; j < no_of_graphs; j++) {
-                igraph_vector_int_t *order = igraph_vector_int_list_get_ptr(&order_vects, j);
-                igraph_integer_t edge = igraph_vector_int_tail(order);
-                igraph_vector_int_t *ev = igraph_vector_int_list_get_ptr(&edge_vects, j);
-                igraph_integer_t from = VECTOR(*ev)[2 * edge];
-                igraph_integer_t to = VECTOR(*ev)[2 * edge + 1];
+                long int edge = igraph_vector_long_tail(VECTOR(order_vects)[j]);
+                igraph_vector_t *ev = VECTOR(edge_vects)[j];
+                long int from = VECTOR(*ev)[2 * edge];
+                long int to = VECTOR(*ev)[2 * edge + 1];
                 if (from == tailfrom && to == tailto) {
-                    igraph_vector_int_pop_back(order);
-                    if (igraph_vector_int_empty(order)) {
-                        allne = false;
+                    igraph_vector_long_pop_back(VECTOR(order_vects)[j]);
+                    if (igraph_vector_long_empty(VECTOR(order_vects)[j])) {
+                        allne = 0;
                     }
                     if (edgemaps && allsame) {
-                        igraph_vector_int_t *map = igraph_vector_int_list_get_ptr(edgemaps, j);
+                        igraph_vector_t *map = VECTOR(*edgemaps)[j];
                         VECTOR(*map)[edge] = idx;
                     }
                 }
@@ -274,14 +275,22 @@ igraph_error_t igraph_intersection_many(
 
     } /* while allne */
 
-    igraph_vector_int_list_destroy(&order_vects);
-    igraph_vector_int_list_destroy(&edge_vects);
-    igraph_vector_int_destroy(&no_edges);
-    IGRAPH_FINALLY_CLEAN(3);
+    if (no_of_graphs > 0) {
+        igraph_i_union_intersection_destroy_vector_longs(&order_vects);
+        igraph_i_union_intersection_destroy_vectors(&edge_vects);
+        IGRAPH_FINALLY_CLEAN(2);
+    }
 
-    IGRAPH_CHECK(igraph_create(res, &edges, no_of_nodes, directed));
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_long_destroy(&no_edges);
     IGRAPH_FINALLY_CLEAN(1);
 
-    return IGRAPH_SUCCESS;
+    IGRAPH_CHECK(igraph_create(res, &edges, (igraph_integer_t) no_of_nodes,
+                               directed));
+    igraph_vector_destroy(&edges);
+    IGRAPH_FINALLY_CLEAN(1);
+    if (edgemaps) {
+        IGRAPH_FINALLY_CLEAN(1);
+    }
+
+    return 0;
 }

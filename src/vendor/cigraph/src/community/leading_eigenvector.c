@@ -28,13 +28,12 @@
 #include "igraph_dqueue.h"
 #include "igraph_interface.h"
 #include "igraph_iterators.h"
+#include "igraph_memory.h"
 #include "igraph_random.h"
 #include "igraph_statusbar.h"
 #include "igraph_structural.h"
 
 #include "core/interruption.h"
-
-#include <limits.h>
 
 /**
  * \section about_leading_eigenvector_methods
@@ -79,48 +78,47 @@
  */
 
 typedef struct igraph_i_community_leading_eigenvector_data_t {
-    igraph_vector_int_t *idx;
-    igraph_vector_int_t *idx2;
+    igraph_vector_t *idx;
+    igraph_vector_t *idx2;
     igraph_adjlist_t *adjlist;
     igraph_inclist_t *inclist;
     igraph_vector_t *tmp;
-    igraph_integer_t no_of_edges;
-    igraph_vector_int_t *mymembership;
-    igraph_integer_t comm;
+    long int no_of_edges;
+    igraph_vector_t *mymembership;
+    long int comm;
     const igraph_vector_t *weights;
     const igraph_t *graph;
     igraph_vector_t *strength;
     igraph_real_t sumweights;
 } igraph_i_community_leading_eigenvector_data_t;
 
-static igraph_error_t igraph_i_community_leading_eigenvector(
-        igraph_real_t *to,
-        const igraph_real_t *from,
-        int n, void *extra) {
+static int igraph_i_community_leading_eigenvector(igraph_real_t *to,
+                                                  const igraph_real_t *from,
+                                                  int n, void *extra) {
 
     igraph_i_community_leading_eigenvector_data_t *data = extra;
-    igraph_integer_t j, k, nlen, size = n;
-    igraph_vector_int_t *idx = data->idx;
-    igraph_vector_int_t *idx2 = data->idx2;
+    long int j, k, nlen, size = n;
+    igraph_vector_t *idx = data->idx;
+    igraph_vector_t *idx2 = data->idx2;
     igraph_vector_t *tmp = data->tmp;
     igraph_adjlist_t *adjlist = data->adjlist;
     igraph_real_t ktx, ktx2;
-    igraph_integer_t no_of_edges = data->no_of_edges;
-    igraph_vector_int_t *mymembership = data->mymembership;
-    igraph_integer_t comm = data->comm;
+    long int no_of_edges = data->no_of_edges;
+    igraph_vector_t *mymembership = data->mymembership;
+    long int comm = data->comm;
 
     /* Ax */
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_vector_int_t *neis = igraph_adjlist_get(adjlist, oldid);
         nlen = igraph_vector_int_size(neis);
         to[j] = 0.0;
         VECTOR(*tmp)[j] = 0.0;
         for (k = 0; k < nlen; k++) {
-            igraph_integer_t nei = VECTOR(*neis)[k];
-            igraph_integer_t neimemb = VECTOR(*mymembership)[nei];
+            long int nei = (long int) VECTOR(*neis)[k];
+            long int neimemb = (long int) VECTOR(*mymembership)[nei];
             if (neimemb == comm) {
-                to[j] += from[ VECTOR(*idx2)[nei] ];
+                to[j] += from[ (long int) VECTOR(*idx2)[nei] ];
                 VECTOR(*tmp)[j] += 1;
             }
         }
@@ -129,9 +127,9 @@ static igraph_error_t igraph_i_community_leading_eigenvector(
     /* Now calculate k^Tx/2m */
     ktx = 0.0; ktx2 = 0.0;
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_vector_int_t *neis = igraph_adjlist_get(adjlist, oldid);
-        igraph_integer_t degree = igraph_vector_int_size(neis);
+        long int degree = igraph_vector_int_size(neis);
         ktx += from[j] * degree;
         ktx2 += degree;
     }
@@ -140,7 +138,7 @@ static igraph_error_t igraph_i_community_leading_eigenvector(
 
     /* Now calculate Bx */
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_vector_int_t *neis = igraph_adjlist_get(adjlist, oldid);
         igraph_real_t degree = igraph_vector_int_size(neis);
         to[j] = to[j] - ktx * degree;
@@ -152,23 +150,22 @@ static igraph_error_t igraph_i_community_leading_eigenvector(
         to[j] -= VECTOR(*tmp)[j] * from[j];
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
-static igraph_error_t igraph_i_community_leading_eigenvector_weighted(
-        igraph_real_t *to,
-        const igraph_real_t *from,
-        int n, void *extra) {
+static int igraph_i_community_leading_eigenvector_weighted(igraph_real_t *to,
+                                                           const igraph_real_t *from,
+                                                           int n, void *extra) {
 
     igraph_i_community_leading_eigenvector_data_t *data = extra;
-    igraph_integer_t j, k, nlen, size = n;
-    igraph_vector_int_t *idx = data->idx;
-    igraph_vector_int_t *idx2 = data->idx2;
+    long int j, k, nlen, size = n;
+    igraph_vector_t *idx = data->idx;
+    igraph_vector_t *idx2 = data->idx2;
     igraph_vector_t *tmp = data->tmp;
     igraph_inclist_t *inclist = data->inclist;
     igraph_real_t ktx, ktx2;
-    igraph_vector_int_t *mymembership = data->mymembership;
-    igraph_integer_t comm = data->comm;
+    igraph_vector_t *mymembership = data->mymembership;
+    long int comm = data->comm;
     const igraph_vector_t *weights = data->weights;
     const igraph_t *graph = data->graph;
     igraph_vector_t *strength = data->strength;
@@ -176,18 +173,18 @@ static igraph_error_t igraph_i_community_leading_eigenvector_weighted(
 
     /* Ax */
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_vector_int_t *inc = igraph_inclist_get(inclist, oldid);
         nlen = igraph_vector_int_size(inc);
         to[j] = 0.0;
         VECTOR(*tmp)[j] = 0.0;
         for (k = 0; k < nlen; k++) {
-            igraph_integer_t edge = VECTOR(*inc)[k];
+            long int edge = (long int) VECTOR(*inc)[k];
             igraph_real_t w = VECTOR(*weights)[edge];
-            igraph_integer_t nei = IGRAPH_OTHER(graph, edge, oldid);
-            igraph_integer_t neimemb = VECTOR(*mymembership)[nei];
+            long int nei = IGRAPH_OTHER(graph, edge, oldid);
+            long int neimemb = (long int) VECTOR(*mymembership)[nei];
             if (neimemb == comm) {
-                to[j] += from[ VECTOR(*idx2)[nei] ] * w;
+                to[j] += from[ (long int) VECTOR(*idx2)[nei] ] * w;
                 VECTOR(*tmp)[j] += w;
             }
         }
@@ -196,7 +193,7 @@ static igraph_error_t igraph_i_community_leading_eigenvector_weighted(
     /* k^Tx/2m */
     ktx = 0.0; ktx2 = 0.0;
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_real_t str = VECTOR(*strength)[oldid];
         ktx += from[j] * str;
         ktx2 += str;
@@ -206,7 +203,7 @@ static igraph_error_t igraph_i_community_leading_eigenvector_weighted(
 
     /* Bx */
     for (j = 0; j < size; j++) {
-        igraph_integer_t oldid = VECTOR(*idx)[j];
+        long int oldid = (long int) VECTOR(*idx)[j];
         igraph_real_t str = VECTOR(*strength)[oldid];
         to[j] = to[j] - ktx * str;
         VECTOR(*tmp)[j] = VECTOR(*tmp)[j] - ktx2 * str;
@@ -217,11 +214,22 @@ static igraph_error_t igraph_i_community_leading_eigenvector_weighted(
         to[j] -= VECTOR(*tmp)[j] * from[j];
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
+}
+
+static void igraph_i_levc_free(igraph_vector_ptr_t *ptr) {
+    long int i, n = igraph_vector_ptr_size(ptr);
+    for (i = 0; i < n; i++) {
+        igraph_vector_t *v = VECTOR(*ptr)[i];
+        if (v) {
+            igraph_vector_destroy(v);
+            IGRAPH_FREE(VECTOR(*ptr)[i]);
+        }
+    }
 }
 
 static void igraph_i_error_handler_none(const char *reason, const char *file,
-                                        int line, igraph_error_t igraph_errno) {
+                                        int line, int igraph_errno) {
     IGRAPH_UNUSED(reason);
     IGRAPH_UNUSED(file);
     IGRAPH_UNUSED(line);
@@ -269,8 +277,8 @@ static void igraph_i_error_handler_none(const char *reason, const char *file,
  *    underlying community structure and no further steps can be
  *    done. If you want as many steps as possible then supply the
  *    number of vertices in the network here.
- * \param options The options for ARPACK. Supply \c NULL here to use the
- *    defaults. \c n is always overwritten. \c ncv is set to at least 4.
+ * \param options The options for ARPACK. \c n is always
+ *    overwritten. \c ncv is set to at least 4.
  * \param modularity If not a null pointer, then it must be a pointer
  *    to a real number and the modularity score of the final division
  *    is stored here.
@@ -282,9 +290,12 @@ static void igraph_i_error_handler_none(const char *reason, const char *file,
  *    non-positive eigenvalues, that do not result a split, are stored
  *    as well.
  * \param eigenvectors If not a null pointer, then the eigenvectors
- *    that are calculated in each step of the algorithm are stored here,
- *    in a list of vectors. Each eigenvector is stored in an
- *    \ref igraph_vector_t object.
+ *    that are calculated in each step of the algorithm, are stored here,
+ *    in a pointer vector. Each eigenvector is stored in an
+ *    \ref igraph_vector_t object. The user is responsible of
+ *    deallocating the memory that belongs to the individual vectors,
+ *    by calling first \ref igraph_vector_destroy(), and then
+ *    \ref igraph_free() on them.
  * \param history Pointer to an initialized vector or a null pointer.
  *    If not a null pointer, then a trace of the algorithm is stored
  *    here, encoded numerically. The various operations:
@@ -310,12 +321,10 @@ static void igraph_i_error_handler_none(const char *reason, const char *file,
  * \param callback A null pointer or a function of type \ref
  *    igraph_community_leading_eigenvector_callback_t. If given, this
  *    callback function is called after each eigenvector/eigenvalue
- *    calculation. If the callback returns \c IGRAPH_STOP, then the
- *    community finding algorithm stops. If it returns \c IGRAPH_SUCCESS,
- *    the algorithm continues normally. Any other return value is considered
- *    an igraph error code and will terminete the algorithm with the same
- *    error code. See the arguments passed to the callback at the documentation
- *    of \ref igraph_community_leading_eigenvector_callback_t.
+ *    calculation. If the callback returns a non-zero value, then the
+ *    community finding algorithm stops. See the arguments passed to
+ *    the callback at the documentation of \ref
+ *    igraph_community_leading_eigenvector_callback_t.
  * \param callback_extra Extra argument to pass to the callback
  *    function.
  * \return Error code.
@@ -328,45 +337,39 @@ static void igraph_i_error_handler_none(const char *reason, const char *file,
  * |E| the number of edges, <quote>steps</quote> the number of splits
  * performed.
  */
-igraph_error_t igraph_community_leading_eigenvector(
-        const igraph_t *graph,
+int igraph_community_leading_eigenvector(const igraph_t *graph,
         const igraph_vector_t *weights,
-        igraph_matrix_int_t *merges,
-        igraph_vector_int_t *membership,
+        igraph_matrix_t *merges,
+        igraph_vector_t *membership,
         igraph_integer_t steps,
         igraph_arpack_options_t *options,
         igraph_real_t *modularity,
         igraph_bool_t start,
         igraph_vector_t *eigenvalues,
-        igraph_vector_list_t *eigenvectors,
+        igraph_vector_ptr_t *eigenvectors,
         igraph_vector_t *history,
         igraph_community_leading_eigenvector_callback_t *callback,
         void *callback_extra) {
 
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_dqueue_int_t tosplit;
-    igraph_vector_int_t idx, idx2;
-    igraph_vector_t mymerges;
+    long int no_of_nodes = igraph_vcount(graph);
+    long int no_of_edges = igraph_ecount(graph);
+    igraph_dqueue_t tosplit;
+    igraph_vector_t idx, idx2, mymerges;
     igraph_vector_t strength, tmp;
     igraph_vector_t start_vec;
-    igraph_integer_t staken = 0;
+    long int staken = 0;
     igraph_adjlist_t adjlist;
     igraph_inclist_t inclist;
-    igraph_integer_t i, j, k, l;
-    igraph_integer_t communities;
-    igraph_vector_int_t vmembership, *mymembership = membership;
+    long int i, j, k, l;
+    long int communities;
+    igraph_vector_t vmembership, *mymembership = membership;
     igraph_i_community_leading_eigenvector_data_t extra;
     igraph_arpack_storage_t storage;
     igraph_real_t mod = 0;
     igraph_arpack_function_t *arpcb1 =
-            weights ? igraph_i_community_leading_eigenvector_weighted :
-                      igraph_i_community_leading_eigenvector;
+        weights ? igraph_i_community_leading_eigenvector_weighted :
+        igraph_i_community_leading_eigenvector;
     igraph_real_t sumweights = 0.0;
-
-    if (no_of_nodes > INT_MAX) {
-        IGRAPH_ERROR("Graph too large for ARPACK", IGRAPH_EOVERFLOW);
-    }
 
     if (weights && no_of_edges != igraph_vector_size(weights)) {
         IGRAPH_ERROR("Invalid weight vector length", IGRAPH_EINVAL);
@@ -378,12 +381,12 @@ igraph_error_t igraph_community_leading_eigenvector(
     }
 
     if (start && membership &&
-        igraph_vector_int_size(membership) != no_of_nodes) {
+        igraph_vector_size(membership) != no_of_nodes) {
         IGRAPH_ERROR("Wrong length for vector of predefined memberships",
                      IGRAPH_EINVAL);
     }
 
-    if (start && membership && igraph_vector_int_max(membership) >= no_of_nodes) {
+    if (start && membership && igraph_vector_max(membership) >= no_of_nodes) {
         IGRAPH_WARNING("Too many communities in membership start vector");
     }
 
@@ -392,22 +395,23 @@ igraph_error_t igraph_community_leading_eigenvector(
     }
 
     if (steps < 0 || steps > no_of_nodes - 1) {
-        steps = no_of_nodes > 0 ? no_of_nodes - 1 : 0;
+        steps = (igraph_integer_t) no_of_nodes - 1;
     }
 
     if (!membership) {
         mymembership = &vmembership;
-        IGRAPH_VECTOR_INT_INIT_FINALLY(mymembership, 0);
+        IGRAPH_VECTOR_INIT_FINALLY(mymembership, 0);
     }
 
     IGRAPH_VECTOR_INIT_FINALLY(&mymerges, 0);
     IGRAPH_CHECK(igraph_vector_reserve(&mymerges, steps * 2));
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&idx, 0);
+    IGRAPH_VECTOR_INIT_FINALLY(&idx, 0);
     if (eigenvalues)  {
         igraph_vector_clear(eigenvalues);
     }
     if (eigenvectors) {
-        igraph_vector_list_clear(eigenvectors);
+        igraph_vector_ptr_clear(eigenvectors);
+        IGRAPH_FINALLY(igraph_i_levc_free, eigenvectors);
     }
 
     IGRAPH_STATUS("Starting leading eigenvector method.\n", 0);
@@ -415,35 +419,35 @@ igraph_error_t igraph_community_leading_eigenvector(
     if (!start) {
         /* Calculate the weakly connected components in the graph and use them as
          * an initial split */
-        IGRAPH_CHECK(igraph_connected_components(graph, mymembership, &idx, 0, IGRAPH_WEAK));
-        communities = igraph_vector_int_size(&idx);
-        IGRAPH_STATUSF(("Starting from %" IGRAPH_PRId " component(s).\n", 0, communities));
+        IGRAPH_CHECK(igraph_clusters(graph, mymembership, &idx, 0, IGRAPH_WEAK));
+        communities = igraph_vector_size(&idx);
+        IGRAPH_STATUSF(("Starting from %li component(s).\n", 0, communities));
         if (history) {
             IGRAPH_CHECK(igraph_vector_push_back(history,
                                                  IGRAPH_LEVC_HIST_START_FULL));
         }
     } else {
         /* Just create the idx vector for the given membership vector */
-        communities = igraph_vector_int_max(mymembership) + 1;
-        IGRAPH_STATUSF(("Starting from given membership vector with %" IGRAPH_PRId
-                        " communities.\n", 0, communities));
+        communities = (long int) igraph_vector_max(mymembership) + 1;
+        IGRAPH_STATUSF(("Starting from given membership vector with %li "
+                        "communities.\n", 0, communities));
         if (history) {
             IGRAPH_CHECK(igraph_vector_push_back(history,
                                                  IGRAPH_LEVC_HIST_START_GIVEN));
             IGRAPH_CHECK(igraph_vector_push_back(history, communities));
         }
-        IGRAPH_CHECK(igraph_vector_int_resize(&idx, communities));
-        igraph_vector_int_null(&idx);
+        IGRAPH_CHECK(igraph_vector_resize(&idx, communities));
+        igraph_vector_null(&idx);
         for (i = 0; i < no_of_nodes; i++) {
-            igraph_integer_t t = VECTOR(*mymembership)[i];
+            int t = (int) VECTOR(*mymembership)[i];
             VECTOR(idx)[t] += 1;
         }
     }
 
-    IGRAPH_DQUEUE_INT_INIT_FINALLY(&tosplit, 100);
+    IGRAPH_DQUEUE_INIT_FINALLY(&tosplit, 100);
     for (i = 0; i < communities; i++) {
         if (VECTOR(idx)[i] > 2) {
-            IGRAPH_CHECK(igraph_dqueue_int_push(&tosplit, i));
+            igraph_dqueue_push(&tosplit, i);
         }
     }
     for (i = 1; i < communities; i++) {
@@ -454,10 +458,15 @@ igraph_error_t igraph_community_leading_eigenvector(
             IGRAPH_CHECK(igraph_vector_push_back(eigenvalues, IGRAPH_NAN));
         }
         if (eigenvectors) {
-            /* There are no eigenvectors associated to these steps because the
-             * splits were given by the user (or by the components of the graph)
-             * so we push empty vectors */
-            IGRAPH_CHECK(igraph_vector_list_push_back_new(eigenvectors, NULL));
+            igraph_vector_t *v = IGRAPH_CALLOC(1, igraph_vector_t);
+            if (!v) {
+                IGRAPH_ERROR("Cannot do leading eigenvector community detection",
+                             IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_free, v);
+            IGRAPH_VECTOR_INIT_FINALLY(v, 0);
+            IGRAPH_CHECK(igraph_vector_ptr_push_back(eigenvectors, v));
+            IGRAPH_FINALLY_CLEAN(2);
         }
         if (history) {
             IGRAPH_CHECK(igraph_vector_push_back(history, IGRAPH_LEVC_HIST_SPLIT));
@@ -467,9 +476,9 @@ igraph_error_t igraph_community_leading_eigenvector(
     staken = communities - 1;
 
     IGRAPH_VECTOR_INIT_FINALLY(&tmp, no_of_nodes);
-    IGRAPH_CHECK(igraph_vector_int_resize(&idx, no_of_nodes));
-    igraph_vector_int_null(&idx);
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&idx2, no_of_nodes);
+    IGRAPH_CHECK(igraph_vector_resize(&idx, no_of_nodes));
+    igraph_vector_null(&idx);
+    IGRAPH_VECTOR_INIT_FINALLY(&idx2, no_of_nodes);
     if (!weights) {
         IGRAPH_CHECK(igraph_adjlist_init(graph, &adjlist, IGRAPH_ALL, IGRAPH_LOOPS_TWICE, IGRAPH_MULTIPLE));
         IGRAPH_FINALLY(igraph_adjlist_destroy, &adjlist);
@@ -480,10 +489,6 @@ igraph_error_t igraph_community_leading_eigenvector(
         IGRAPH_CHECK(igraph_strength(graph, &strength, igraph_vss_all(),
                                      IGRAPH_ALL, IGRAPH_LOOPS, weights));
         sumweights = igraph_vector_sum(weights);
-    }
-
-    if (options == 0) {
-        options = igraph_arpack_options_get_default();
     }
 
     options->ncv = 0;   /* 0 means "automatic" in igraph_arpack_rssolve */
@@ -507,12 +512,12 @@ igraph_error_t igraph_community_leading_eigenvector(
     extra.no_of_edges = no_of_edges;
     extra.mymembership = mymembership;
 
-    while (!igraph_dqueue_int_empty(&tosplit) && staken < steps) {
-        igraph_integer_t comm = igraph_dqueue_int_pop_back(&tosplit);
+    while (!igraph_dqueue_empty(&tosplit) && staken < steps) {
+        long int comm = (long int) igraph_dqueue_pop_back(&tosplit);
         /* depth first search */
-        igraph_integer_t size = 0;
+        long int size = 0;
 
-        IGRAPH_STATUSF(("Trying to split community %" IGRAPH_PRId "... ", 0, comm));
+        IGRAPH_STATUSF(("Trying to split community %li... ", 0, comm));
         IGRAPH_ALLOW_INTERRUPTION();
 
         for (i = 0; i < no_of_nodes; i++) {
@@ -554,9 +559,9 @@ igraph_error_t igraph_community_leading_eigenvector(
         IGRAPH_CHECK(igraph_vector_shuffle(&start_vec));
 
         {
-            igraph_error_t retval;
+            int retval;
             igraph_error_handler_t *errh =
-                    igraph_set_error_handler(igraph_i_error_handler_none);
+                igraph_set_error_handler(igraph_i_error_handler_none);
             retval = igraph_arpack_rssolve(arpcb1, &extra, options, &storage, /*values=*/ 0, /*vectors=*/ 0);
             igraph_set_error_handler(errh);
             if (retval != IGRAPH_SUCCESS && retval != IGRAPH_ARPACK_MAXIT && retval != IGRAPH_ARPACK_NOSHIFT) {
@@ -601,17 +606,11 @@ igraph_error_t igraph_community_leading_eigenvector(
 
         if (callback) {
             igraph_vector_t vv;
-            igraph_error_t ret;
-
+            int ret;
             igraph_vector_view(&vv, storage.v, size);
-            IGRAPH_CHECK_CALLBACK(
-                        callback(
-                            mymembership, comm, storage.d[0], &vv, arpcb1,
-                            &extra, callback_extra
-                        ), &ret
-                    );
-
-            if (ret == IGRAPH_STOP) {
+            ret = callback(mymembership, comm, storage.d[0], &vv,
+                           arpcb1, &extra, callback_extra);
+            if (ret) {
                 break;
             }
         }
@@ -621,13 +620,18 @@ igraph_error_t igraph_community_leading_eigenvector(
         }
 
         if (eigenvectors) {
-            igraph_vector_t *v;
-            /* TODO: this would be faster if we had an igraph_vector_list_push_back_new_with_size_hint */
-            IGRAPH_CHECK(igraph_vector_list_push_back_new(eigenvectors, &v));
-            IGRAPH_CHECK(igraph_vector_resize(v, size));
+            igraph_vector_t *v = IGRAPH_CALLOC(1, igraph_vector_t);
+            if (!v) {
+                IGRAPH_ERROR("Cannot do leading eigenvector community detection",
+                             IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_free, v);
+            IGRAPH_VECTOR_INIT_FINALLY(v, size);
             for (i = 0; i < size; i++) {
                 VECTOR(*v)[i] = storage.v[i];
             }
+            IGRAPH_CHECK(igraph_vector_ptr_push_back(eigenvectors, v));
+            IGRAPH_FINALLY_CLEAN(2);
         }
 
         if (storage.d[0] <= 0) {
@@ -682,7 +686,7 @@ igraph_error_t igraph_community_leading_eigenvector(
         /* Rewrite the mymembership vector */
         for (j = 0; j < size; j++) {
             if (storage.v[j] < 0) {
-                igraph_integer_t oldid = VECTOR(idx)[j];
+                long int oldid = (long int) VECTOR(idx)[j];
                 VECTOR(*mymembership)[oldid] = communities - 1;
             }
         }
@@ -697,10 +701,10 @@ igraph_error_t igraph_community_leading_eigenvector(
 
         /* Store the resulting communities in the queue if needed */
         if (l > 1) {
-            IGRAPH_CHECK(igraph_dqueue_int_push(&tosplit, communities - 1));
+            IGRAPH_CHECK(igraph_dqueue_push(&tosplit, communities - 1));
         }
         if (size - l > 1) {
-            IGRAPH_CHECK(igraph_dqueue_int_push(&tosplit, comm));
+            IGRAPH_CHECK(igraph_dqueue_push(&tosplit, comm));
         }
 
     }
@@ -715,23 +719,23 @@ igraph_error_t igraph_community_leading_eigenvector(
         igraph_vector_destroy(&strength);
         IGRAPH_FINALLY_CLEAN(2);
     }
-    igraph_dqueue_int_destroy(&tosplit);
+    igraph_dqueue_destroy(&tosplit);
     igraph_vector_destroy(&tmp);
-    igraph_vector_int_destroy(&idx2);
+    igraph_vector_destroy(&idx2);
     IGRAPH_FINALLY_CLEAN(3);
 
     IGRAPH_STATUS("Done.\n", 0);
 
     /* reform the mymerges vector */
     if (merges) {
-        igraph_vector_int_null(&idx);
+        igraph_vector_null(&idx);
         l = igraph_vector_size(&mymerges);
         k = communities;
         j = 0;
-        IGRAPH_CHECK(igraph_matrix_int_resize(merges, l / 2, 2));
+        IGRAPH_CHECK(igraph_matrix_resize(merges, l / 2, 2));
         for (i = l; i > 0; i -= 2) {
-            igraph_integer_t from = VECTOR(mymerges)[i - 1];
-            igraph_integer_t to = VECTOR(mymerges)[i - 2];
+            long int from = (long int) VECTOR(mymerges)[i - 1];
+            long int to = (long int) VECTOR(mymerges)[i - 2];
             MATRIX(*merges, j, 0) = VECTOR(mymerges)[i - 2];
             MATRIX(*merges, j, 1) = VECTOR(mymerges)[i - 1];
             if (VECTOR(idx)[from] != 0) {
@@ -745,22 +749,25 @@ igraph_error_t igraph_community_leading_eigenvector(
         }
     }
 
-    igraph_vector_int_destroy(&idx);
+    if (eigenvectors) {
+        IGRAPH_FINALLY_CLEAN(1);
+    }
+    igraph_vector_destroy(&idx);
     igraph_vector_destroy(&mymerges);
     IGRAPH_FINALLY_CLEAN(2);
 
     if (modularity) {
-        IGRAPH_CHECK(igraph_modularity(graph, mymembership, weights,
-                                       /* resolution */ 1,
-                                       /* only undirected */ 0, modularity));
+      IGRAPH_CHECK(igraph_modularity(graph, mymembership, weights,
+                                    /* resolution */ 1,
+                                    /* only undirected */ 0, modularity));
     }
 
     if (!membership) {
-        igraph_vector_int_destroy(mymembership);
+        igraph_vector_destroy(mymembership);
         IGRAPH_FINALLY_CLEAN(1);
     }
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 
 /**
@@ -785,38 +792,37 @@ igraph_error_t igraph_community_leading_eigenvector(
  *
  * Time complexity: O(|V|), the number of vertices.
  */
-igraph_error_t igraph_le_community_to_membership(const igraph_matrix_int_t *merges,
-                                                 igraph_integer_t steps,
-                                                 igraph_vector_int_t *membership,
-                                                 igraph_vector_int_t *csize) {
+int igraph_le_community_to_membership(const igraph_matrix_t *merges,
+                                      igraph_integer_t steps,
+                                      igraph_vector_t *membership,
+                                      igraph_vector_t *csize) {
 
-    igraph_integer_t no_of_nodes = igraph_vector_int_size(membership);
-    igraph_vector_int_t fake_memb;
-    igraph_integer_t components, i;
+    long int no_of_nodes = igraph_vector_size(membership);
+    igraph_vector_t fake_memb;
+    long int components, i;
 
     if (no_of_nodes > 0) {
-        components = igraph_vector_int_max(membership) + 1;
+        components = (long int) igraph_vector_max(membership) + 1;
     } else {
         components = 0;
     }
     if (components > no_of_nodes) {
-        IGRAPH_ERRORF("Invalid membership vector: number of components (%" IGRAPH_PRId ") must "
-                      "not be greater than the number of nodes (%" IGRAPH_PRId ").",
-                      IGRAPH_EINVAL, components, no_of_nodes);
+        IGRAPH_ERRORF("Invalid membership vector: number of components (%ld) must "
+         "not be greater than the number of nodes (%ld).", IGRAPH_EINVAL, components, no_of_nodes);
     }
     if (steps >= components) {
-        IGRAPH_ERRORF("Number of steps (%" IGRAPH_PRId ") must be smaller than number of components (%" IGRAPH_PRId ").",
+        IGRAPH_ERRORF("Number of steps (%" IGRAPH_PRId ") must be smaller than number of components (%ld).",
                       IGRAPH_EINVAL, steps, components);
     }
 
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&fake_memb, components);
+    IGRAPH_VECTOR_INIT_FINALLY(&fake_memb, components);
 
     /* Check membership vector */
     for (i = 0; i < no_of_nodes; i++) {
         if (VECTOR(*membership)[i] < 0) {
-            IGRAPH_ERRORF("Invalid membership vector, negative ID found: %" IGRAPH_PRId ".", IGRAPH_EINVAL, VECTOR(*membership)[i]);
+            IGRAPH_ERRORF("Invalid membership vector, negative ID found: %g.", IGRAPH_EINVAL, VECTOR(*membership)[i]);
         }
-        VECTOR(fake_memb)[ VECTOR(*membership)[i] ] += 1;
+        VECTOR(fake_memb)[ (long int) VECTOR(*membership)[i] ] += 1;
     }
     for (i = 0; i < components; i++) {
         if (VECTOR(fake_memb)[i] == 0) {
@@ -827,24 +833,26 @@ igraph_error_t igraph_le_community_to_membership(const igraph_matrix_int_t *merg
         }
     }
 
-    IGRAPH_CHECK(igraph_community_to_membership(merges, components, steps, &fake_memb, 0));
+    IGRAPH_CHECK(igraph_community_to_membership(merges, (igraph_integer_t)
+                 components, steps,
+                 &fake_memb, 0));
 
     /* Ok, now we have the membership of the initial components,
        rewrite the original membership vector. */
 
     if (csize) {
-        IGRAPH_CHECK(igraph_vector_int_resize(csize, components - steps));
-        igraph_vector_int_null(csize);
+        IGRAPH_CHECK(igraph_vector_resize(csize, components - steps));
+        igraph_vector_null(csize);
     }
 
     for (i = 0; i < no_of_nodes; i++) {
-        VECTOR(*membership)[i] = VECTOR(fake_memb)[ VECTOR(*membership)[i] ];
+        VECTOR(*membership)[i] = VECTOR(fake_memb)[ (long int) VECTOR(*membership)[i] ];
         if (csize) {
-            VECTOR(*csize)[ VECTOR(*membership)[i] ] += 1;
+            VECTOR(*csize)[ (long int) VECTOR(*membership)[i] ] += 1;
         }
     }
 
-    igraph_vector_int_destroy(&fake_memb);
+    igraph_vector_destroy(&fake_memb);
     IGRAPH_FINALLY_CLEAN(1);
-    return IGRAPH_SUCCESS;
+    return 0;
 }

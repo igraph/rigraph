@@ -85,15 +85,10 @@ namespace gengraph {
 #define HASH_NONE (-1)
 
 #ifdef HASH_SIZE_IS_POWER2
-inline igraph_integer_t HASH_EXPAND(igraph_integer_t x) {
-    /* Returns pow(2, floor(log2(x)) + 2) if x > 0, 1 otherwise. Works up to
-     * x == 2^64, starts to break down afterwards */
+inline int HASH_EXPAND(int x) {
     _HASH_EXP_CALL();
     x += x;
     x |= x >> 1;  x |= x >> 2;  x |= x >> 4;  x |= x >> 8;  x |= x >> 16;
-#if IGRAPH_INTEGER_SIZE == 64
-    x |= x >> 32;
-#endif
     return x + 1;
 }
 #define HASH_KEY(x,size) ((x*2198737)&((size)-1))
@@ -109,19 +104,19 @@ inline igraph_integer_t HASH_EXPAND(igraph_integer_t x) {
 #define HASH_REKEY(k,size) ((k)==0 ? (size)-1 : (k)-1)
 #else //MACRO_RATHER_THAN_INLINE
 #ifndef HASH_SIZE_IS_POWER2
-inline igraph_integer_t  HASH_KEY(igraph_integer_t x, igraph_integer_t size) {
+inline int  HASH_KEY(const int x, const int size) {
     assert(x >= 0);
     return x % size;
 };
-inline igraph_integer_t  HASH_EXPAND(igraph_integer_t x) {
+inline int  HASH_EXPAND(const int x) {
     _HASH_EXP_CALL();
     return x + (x >> 1);
 };
-inline int  HASH_UNEXPAND(igraph_integer_t x) {
+inline int  HASH_UNEXPAND(const int x) {
     return ((x << 1) + 1) / 3;
 };
 #endif //HASH_SIZE_IS_POWER2
-inline int  HASH_REKEY(igraph_integer_t k, igraph_integer_t s) {
+inline int  HASH_REKEY(const int k, const int s) {
     assert(k >= 0);
     if (k == 0) {
         return s - 1;
@@ -129,7 +124,7 @@ inline int  HASH_REKEY(igraph_integer_t k, igraph_integer_t s) {
         return k - 1;
     }
 };
-inline int  HASH_SIZE(igraph_integer_t x) {
+inline int  HASH_SIZE(const int x) {
     if (IS_HASH(x)) {
         return HASH_EXPAND(x);
     } else {
@@ -138,7 +133,7 @@ inline int  HASH_SIZE(igraph_integer_t x) {
 };
 #endif //MACRO_RATHER_THAN_INLINE
 
-inline igraph_integer_t HASH_PAIR_KEY(igraph_integer_t x, igraph_integer_t y, igraph_integer_t size) {
+inline int HASH_PAIR_KEY(const int x, const int y, const int size) {
     return HASH_KEY(x * 1434879443 + y, size);
 }
 
@@ -148,19 +143,17 @@ inline igraph_integer_t HASH_PAIR_KEY(igraph_integer_t x, igraph_integer_t y, ig
 //_________________________________________________________________________
 
 // copy hash table into raw vector
-inline void H_copy(igraph_integer_t *mem, igraph_integer_t *h, igraph_integer_t size) {
-    for (igraph_integer_t i = HASH_EXPAND(size); i--; h++) {
-        if (*h != HASH_NONE) {
+inline void H_copy(int *mem, int *h, int size) {
+    for (int i = HASH_EXPAND(size); i--; h++) if (*h != HASH_NONE) {
             *(mem++) = *h;
         }
-    }
 }
 
 // Look for the place to add an element. Return NULL if element is already here.
-inline igraph_integer_t* H_add(igraph_integer_t* h, igraph_integer_t size, igraph_integer_t a) {
+inline int* H_add(int* h, const int size, int a) {
     _HASH_ADD_CALL();
     _HASH_ADD_ITER();
-    igraph_integer_t k = HASH_KEY(a, size);
+    int k = HASH_KEY(a, size);
     if (h[k] == HASH_NONE) {
         return h + k;
     }
@@ -175,8 +168,8 @@ inline igraph_integer_t* H_add(igraph_integer_t* h, igraph_integer_t size, igrap
 }
 
 // would element be well placed in newk ?
-inline bool H_better(igraph_integer_t a, igraph_integer_t size, igraph_integer_t currentk, igraph_integer_t newk) {
-    igraph_integer_t k = HASH_KEY(a, size);
+inline bool H_better(const int a, const int size, const int currentk, const int newk) {
+    int k = HASH_KEY(a, size);
     if (newk < currentk) {
         return (k < currentk && k >= newk);
     } else {
@@ -185,13 +178,13 @@ inline bool H_better(igraph_integer_t a, igraph_integer_t size, igraph_integer_t
 }
 
 // removes h[k]
-inline void H_rm(igraph_integer_t* h, igraph_integer_t size, igraph_integer_t k) {
+inline void H_rm(int* h, const int size, int k) {
     _HASH_RM_CALL();
-    igraph_integer_t lasthole = k;
+    int lasthole = k;
     do {
         _HASH_RM_ITER();
         k = HASH_REKEY(k, size);
-        igraph_integer_t next = h[k];
+        int next = h[k];
         if (next == HASH_NONE) {
             break;
         }
@@ -204,11 +197,11 @@ inline void H_rm(igraph_integer_t* h, igraph_integer_t size, igraph_integer_t k)
 }
 
 //put a
-inline igraph_integer_t* H_put(igraph_integer_t* h, igraph_integer_t size, igraph_integer_t a) {
+inline int* H_put(int* h, const int size, const int a) {
     assert(H_add(h, size, a) != NULL);
     _HASH_PUT_CALL();
     _HASH_PUT_ITER();
-    igraph_integer_t k = HASH_KEY(a, size);
+    int k = HASH_KEY(a, size);
     while (h[k] != HASH_NONE) {
         k = HASH_REKEY(k, size);
         _HASH_PUT_ITER();
@@ -219,11 +212,11 @@ inline igraph_integer_t* H_put(igraph_integer_t* h, igraph_integer_t size, igrap
 }
 
 // find A
-inline igraph_integer_t H_find(igraph_integer_t *h, igraph_integer_t size, igraph_integer_t a) {
+inline int H_find(int *h, int size, const int a) {
     assert(H_add(h, size, a) == NULL);
     _HASH_FIND_CALL();
     _HASH_FIND_ITER();
-    igraph_integer_t k = HASH_KEY(a, size);
+    int k = HASH_KEY(a, size);
     while (h[k] != a) {
         k = HASH_REKEY(k, size);
         _HASH_FIND_ITER();
@@ -232,10 +225,10 @@ inline igraph_integer_t H_find(igraph_integer_t *h, igraph_integer_t size, igrap
 }
 
 // Look for the place to add an element. Return NULL if element is already here.
-inline bool H_pair_insert(igraph_integer_t* h, igraph_integer_t size, igraph_integer_t a, igraph_integer_t b) {
+inline bool H_pair_insert(int* h, const int size, int a, int b) {
     _HASH_ADD_CALL();
     _HASH_ADD_ITER();
-    igraph_integer_t k = HASH_PAIR_KEY(a, b, size);
+    int k = HASH_PAIR_KEY(a, b, size);
     if (h[2 * k] == HASH_NONE) {
         h[2 * k] = a;
         h[2 * k + 1] = b;
@@ -260,7 +253,7 @@ inline bool H_pair_insert(igraph_integer_t* h, igraph_integer_t size, igraph_int
 //_________________________________________________________________________
 
 // Look for an element
-inline bool H_is(igraph_integer_t *mem, igraph_integer_t size, igraph_integer_t elem) {
+inline bool H_is(int *mem, const int size, const int elem) {
     if (IS_HASH(size)) {
         return (H_add(mem, HASH_EXPAND(size), elem) == NULL);
     } else {
@@ -269,13 +262,13 @@ inline bool H_is(igraph_integer_t *mem, igraph_integer_t size, igraph_integer_t 
 }
 
 //pick random location (containing an element)
-inline igraph_integer_t* H_random(igraph_integer_t* mem, igraph_integer_t size) {
+inline int* H_random(int* mem, int size) {
     if (!IS_HASH(size)) {
         return mem + (my_random() % size);
     }
     _HASH_RAND_CALL();
     size = HASH_EXPAND(size);
-    igraph_integer_t* yo;
+    int* yo;
     do {
         yo = mem + HASH_KEY(my_random(), size);
         _HASH_RAND_ITER();
@@ -284,7 +277,7 @@ inline igraph_integer_t* H_random(igraph_integer_t* mem, igraph_integer_t size) 
 }
 
 // replace *k by b
-inline igraph_integer_t* H_rpl(igraph_integer_t *mem, igraph_integer_t size, igraph_integer_t* k, igraph_integer_t b) {
+inline int* H_rpl(int *mem, int size, int* k, const int b) {
     assert(!H_is(mem, size, b));
     if (!IS_HASH(size)) {
         *k = b;
@@ -298,7 +291,7 @@ inline igraph_integer_t* H_rpl(igraph_integer_t *mem, igraph_integer_t size, igr
 }
 
 // replace a by b
-inline igraph_integer_t* H_rpl(igraph_integer_t *mem, igraph_integer_t size, igraph_integer_t a, igraph_integer_t b) {
+inline int* H_rpl(int *mem, int size, const int a, const int b) {
     assert(H_is(mem, size, a));
     assert(!H_is(mem, size, b));
     if (!IS_HASH(size)) {

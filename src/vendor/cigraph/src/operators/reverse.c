@@ -29,7 +29,6 @@
 #include "igraph_vector.h"
 
 #include "graph/attributes.h"
-#include "graph/internal.h"
 
 /**
  * \function igraph_reverse_edges
@@ -48,13 +47,12 @@
  *              Pass <code>igraph_ess_all(IGRAPH_EDGEORDER_ID)</code> to reverse all edges.
  * \return Error code.
  *
- * Time complexity: O(1) if all edges are reversed, otherwise
- * O(|E|) where |E| is the number of edges in the graph.
+ * Time complexity: O(|E|) where |E| is the number of edges in the graph.
  */
-igraph_error_t igraph_reverse_edges(igraph_t *graph, const igraph_es_t eids) {
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_vector_int_t edges;
+int igraph_reverse_edges(igraph_t *graph, const igraph_es_t eids) {
+    long int no_of_edges = igraph_ecount(graph);
+    long int no_of_nodes = igraph_vcount(graph);
+    igraph_vector_t edges;
     igraph_eit_t eit;
     igraph_t new_graph;
 
@@ -63,13 +61,8 @@ igraph_error_t igraph_reverse_edges(igraph_t *graph, const igraph_es_t eids) {
         return IGRAPH_SUCCESS;
     }
 
-    /* Use fast method when all edges are to be reversed. */
-    if (igraph_es_is_all(&eids)) {
-        return igraph_i_reverse(graph);
-    }
-
     /* Convert graph to edge list. */
-    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 2*no_of_edges);
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, 2*no_of_edges);
     IGRAPH_CHECK(igraph_get_edgelist(graph, &edges, /* bycol= */ 0));
 
     /* Reverse the edges. */
@@ -78,8 +71,8 @@ igraph_error_t igraph_reverse_edges(igraph_t *graph, const igraph_es_t eids) {
     IGRAPH_FINALLY(igraph_eit_destroy, &eit);
 
     for (; !IGRAPH_EIT_END(eit); IGRAPH_EIT_NEXT(eit)) {
-        igraph_integer_t eid = IGRAPH_EIT_GET(eit);
-        igraph_integer_t tmp = VECTOR(edges)[2*eid];
+        long int eid = IGRAPH_EIT_GET(eit);
+        long int tmp = VECTOR(edges)[2*eid];
         VECTOR(edges)[2*eid] = VECTOR(edges)[2*eid + 1];
         VECTOR(edges)[2*eid + 1] = tmp;
     }
@@ -92,7 +85,7 @@ igraph_error_t igraph_reverse_edges(igraph_t *graph, const igraph_es_t eids) {
     IGRAPH_I_ATTRIBUTE_COPY(&new_graph, graph, 1, 1, 1); /* does IGRAPH_CHECK */
 
     igraph_eit_destroy(&eit);
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_destroy(&edges);
     igraph_destroy(graph);
     IGRAPH_FINALLY_CLEAN(3);
 

@@ -70,23 +70,23 @@
  *
  * Time complexity: O(|V||E|), the number of vertices times the number of edges.
  */
-igraph_error_t igraph_convergence_degree(const igraph_t *graph, igraph_vector_t *result,
+int igraph_convergence_degree(const igraph_t *graph, igraph_vector_t *result,
                               igraph_vector_t *ins, igraph_vector_t *outs) {
-    igraph_integer_t no_of_nodes = igraph_vcount(graph);
-    igraph_integer_t no_of_edges = igraph_ecount(graph);
-    igraph_integer_t i, j, k, n;
-    igraph_integer_t *geodist;
+    long int no_of_nodes = igraph_vcount(graph);
+    long int no_of_edges = igraph_ecount(graph);
+    long int i, j, k, n;
+    long int *geodist;
     igraph_vector_int_t *eids;
     igraph_vector_t *ins_p, *outs_p, ins_v, outs_v;
-    igraph_dqueue_int_t q;
+    igraph_dqueue_t q;
     igraph_inclist_t inclist;
     igraph_bool_t directed = igraph_is_directed(graph);
 
     if (result != 0) {
         IGRAPH_CHECK(igraph_vector_resize(result, no_of_edges));
     }
-    IGRAPH_CHECK(igraph_dqueue_int_init(&q, 100));
-    IGRAPH_FINALLY(igraph_dqueue_int_destroy, &q);
+    IGRAPH_CHECK(igraph_dqueue_init(&q, 100));
+    IGRAPH_FINALLY(igraph_dqueue_destroy, &q);
 
     if (ins == 0) {
         ins_p = &ins_v;
@@ -106,9 +106,9 @@ igraph_error_t igraph_convergence_degree(const igraph_t *graph, igraph_vector_t 
         igraph_vector_null(outs_p);
     }
 
-    geodist = IGRAPH_CALLOC(no_of_nodes, igraph_integer_t);
+    geodist = IGRAPH_CALLOC(no_of_nodes, long int);
     if (geodist == 0) {
-        IGRAPH_ERROR("Cannot calculate convergence degrees", IGRAPH_ENOMEM); /* LCOV_EXCL_LINE */
+        IGRAPH_ERROR("Cannot calculate convergence degrees", IGRAPH_ENOMEM);
     }
     IGRAPH_FINALLY(igraph_free, geodist);
 
@@ -121,19 +121,19 @@ igraph_error_t igraph_convergence_degree(const igraph_t *graph, igraph_vector_t 
         IGRAPH_FINALLY(igraph_inclist_destroy, &inclist);
         vec = (k == 0) ? VECTOR(*ins_p) : VECTOR(*outs_p);
         for (i = 0; i < no_of_nodes; i++) {
-            igraph_dqueue_int_clear(&q);
-            memset(geodist, 0, sizeof(geodist[0]) * (size_t) no_of_nodes);
+            igraph_dqueue_clear(&q);
+            memset(geodist, 0, sizeof(long int) * (size_t) no_of_nodes);
             geodist[i] = 1;
-            IGRAPH_CHECK(igraph_dqueue_int_push(&q, i));
-            IGRAPH_CHECK(igraph_dqueue_int_push(&q, 0));
-            while (!igraph_dqueue_int_empty(&q)) {
-                igraph_integer_t actnode = igraph_dqueue_int_pop(&q);
-                igraph_integer_t actdist = igraph_dqueue_int_pop(&q);
+            IGRAPH_CHECK(igraph_dqueue_push(&q, i));
+            IGRAPH_CHECK(igraph_dqueue_push(&q, 0.0));
+            while (!igraph_dqueue_empty(&q)) {
+                long int actnode = (long int) igraph_dqueue_pop(&q);
+                long int actdist = (long int) igraph_dqueue_pop(&q);
                 IGRAPH_ALLOW_INTERRUPTION();
                 eids = igraph_inclist_get(&inclist, actnode);
                 n = igraph_vector_int_size(eids);
                 for (j = 0; j < n; j++) {
-                    igraph_integer_t neighbor = IGRAPH_OTHER(graph, VECTOR(*eids)[j], actnode);
+                    long int neighbor = IGRAPH_OTHER(graph, VECTOR(*eids)[j], actnode);
                     if (geodist[neighbor] != 0) {
                         /* we've already seen this node, another shortest path? */
                         if (geodist[neighbor] - 1 == actdist + 1) {
@@ -141,30 +141,30 @@ igraph_error_t igraph_convergence_degree(const igraph_t *graph, igraph_vector_t 
                              * increase either the size of the infield or the outfield */
                             if (!directed) {
                                 if (actnode < neighbor) {
-                                    VECTOR(*ins_p)[VECTOR(*eids)[j]] += 1;
+                                    VECTOR(*ins_p)[(long int)VECTOR(*eids)[j]] += 1;
                                 } else {
-                                    VECTOR(*outs_p)[VECTOR(*eids)[j]] += 1;
+                                    VECTOR(*outs_p)[(long int)VECTOR(*eids)[j]] += 1;
                                 }
                             } else {
-                                vec[VECTOR(*eids)[j]] += 1;
+                                vec[(long int)VECTOR(*eids)[j]] += 1;
                             }
                         } else if (geodist[neighbor] - 1 < actdist + 1) {
                             continue;
                         }
                     } else {
                         /* we haven't seen this node yet */
-                        IGRAPH_CHECK(igraph_dqueue_int_push(&q, neighbor));
-                        IGRAPH_CHECK(igraph_dqueue_int_push(&q, actdist + 1));
+                        IGRAPH_CHECK(igraph_dqueue_push(&q, neighbor));
+                        IGRAPH_CHECK(igraph_dqueue_push(&q, actdist + 1));
                         /* Since this edge is in the BFS tree rooted at i, we must
                          * increase either the size of the infield or the outfield */
                         if (!directed) {
                             if (actnode < neighbor) {
-                                VECTOR(*ins_p)[VECTOR(*eids)[j]] += 1;
+                                VECTOR(*ins_p)[(long int)VECTOR(*eids)[j]] += 1;
                             } else {
-                                VECTOR(*outs_p)[VECTOR(*eids)[j]] += 1;
+                                VECTOR(*outs_p)[(long int)VECTOR(*eids)[j]] += 1;
                             }
                         } else {
-                            vec[VECTOR(*eids)[j]] += 1;
+                            vec[(long int)VECTOR(*eids)[j]] += 1;
                         }
                         geodist[neighbor] = actdist + 2;
                     }
@@ -201,8 +201,8 @@ igraph_error_t igraph_convergence_degree(const igraph_t *graph, igraph_vector_t 
     }
 
     IGRAPH_FREE(geodist);
-    igraph_dqueue_int_destroy(&q);
+    igraph_dqueue_destroy(&q);
     IGRAPH_FINALLY_CLEAN(2);
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }

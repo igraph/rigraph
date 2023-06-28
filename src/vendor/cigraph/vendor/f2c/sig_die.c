@@ -1,8 +1,6 @@
 #include "stdio.h"
 #include "signal.h"
 
-#include "igraph_error.h"
-
 #ifndef SIGIOT
 #ifdef SIGABRT
 #define SIGIOT SIGABRT
@@ -36,13 +34,14 @@ void sig_die(const char *s, int kill)
 #ifdef SIGIOT
 		signal(SIGIOT, SIG_DFL);
 #endif
+		abort();
 		}
 	else {
 #ifdef NO_ONEXIT
 		f_exit();
 #endif
+		exit(1);
 		}
-	IGRAPH_FATAL("sig_die() called from f2c code");
 	}
 #ifdef __cplusplus
 }

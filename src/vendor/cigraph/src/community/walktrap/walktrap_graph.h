@@ -89,10 +89,13 @@ public:
     double total_weight;       // total weight of the edges
     Vertex* vertices;     // array of the vertices
 
+    long memory();            // the total memory used in Bytes
     Graph();          // create an empty graph
     ~Graph();         // destructor
+    char** index;         // to keep the real name of the vertices
 
-    igraph_error_t convert_from_igraph(const igraph_t *igraph, const igraph_vector_t *weights);
+    int convert_from_igraph(const igraph_t * igraph,
+                            const igraph_vector_t *weights);
 };
 
 }

@@ -17,17 +17,13 @@ foreach(FORMAT dl gml lgl ncol pajek)
     if (BISON_VERSION VERSION_GREATER_EQUAL 3)
       set(bison_no_deprecated -Wno-deprecated)
     endif()
-    if (NOT FLEX_KEEP_LINE_NUMBERS)
-      set(bison_hide_line_numbers --no-lines)
-      set(flex_hide_line_numbers --noline)
-    endif()
     bison_target(
       ${FORMAT}_parser io/${FORMAT}-parser.y ${CMAKE_CURRENT_BINARY_DIR}/io/parsers/${FORMAT}-parser.c
-      COMPILE_FLAGS "${bison_hide_line_numbers} ${bison_no_deprecated}"
+      COMPILE_FLAGS "--no-lines ${bison_no_deprecated}"
     )
     flex_target(
       ${FORMAT}_lexer io/${FORMAT}-lexer.l ${CMAKE_CURRENT_BINARY_DIR}/io/parsers/${FORMAT}-lexer.c
-      COMPILE_FLAGS "${flex_hide_line_numbers}"
+      COMPILE_FLAGS "--noline"
       DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/io/parsers/${FORMAT}-lexer.h
     )
     add_flex_bison_dependency(${FORMAT}_lexer ${FORMAT}_parser)
@@ -46,30 +42,28 @@ add_library(
   core/error.c
   core/estack.c
   core/fixed_vectorlist.c
-  core/genheap.c
   core/grid.c
   core/heap.c
   core/indheap.c
   core/interruption.c
   core/marked_queue.c
   core/matrix.c
-  core/matrix_list.c
   core/memory.c
   core/printing.c
   core/progress.c
   core/psumtree.c
   core/set.c
   core/sparsemat.c
+  core/spmatrix.c
   core/stack.c
   core/statusbar.c
   core/strvector.c
   core/trie.c
-  core/vector.c
-  core/vector_list.c
   core/vector_ptr.c
+  core/vector.c
 
+  math/bfgs.c
   math/complex.c
-  math/safe_intop.c
   math/utils.c
 
   linalg/arpack.c
@@ -78,47 +72,37 @@ add_library(
   linalg/lapack.c
 
   random/random.c
-  random/rng_glibc2.c
-  random/rng_mt19937.c
-  random/rng_pcg32.c
-  random/rng_pcg64.c
 
   graph/adjlist.c
   graph/attributes.c
   graph/basic_query.c
-  graph/caching.c
   graph/cattributes.c
-  graph/graph_list.c
   graph/iterators.c
-  graph/type_common.c
   graph/type_indexededgelist.c
   graph/visitors.c
 
   constructors/adjacency.c
   constructors/atlas.c
   constructors/basic_constructors.c
-  constructors/circulant.c
   constructors/de_bruijn.c
   constructors/famous.c
   constructors/full.c
-  constructors/generalized_petersen.c
   constructors/kautz.c
-  constructors/lattices.c
   constructors/lcf.c
   constructors/linegraph.c
   constructors/prufer.c
   constructors/regular.c
-  constructors/trees.c
-
 
   games/barabasi.c
   games/callaway_traits.c
   games/citations.c
   games/correlated.c
+  games/degree_sequence_vl/gengraph_box_list.cpp
   games/degree_sequence_vl/gengraph_degree_sequence.cpp
   games/degree_sequence_vl/gengraph_graph_molloy_hash.cpp
   games/degree_sequence_vl/gengraph_graph_molloy_optimized.cpp
   games/degree_sequence_vl/gengraph_mr-connected.cpp
+  games/degree_sequence_vl/gengraph_powerlaw.cpp
   games/degree_sequence.c
   games/dotproduct.c
   games/erdos_renyi.c
@@ -140,10 +124,6 @@ add_library(
   centrality/centralization.c
   centrality/closeness.c
   centrality/coreness.c
-  centrality/eigenvector.c
-  centrality/hub_authority.c
-  centrality/pagerank.c
-  centrality/truss.cpp
   centrality/prpack.cpp
 
   cliques/cliquer_wrapper.c
@@ -157,6 +137,7 @@ add_library(
   community/fluid.c
   community/infomap/infomap_FlowGraph.cc
   community/infomap/infomap_Greedy.cc
+  community/infomap/infomap_Node.cc
   community/infomap/infomap.cc
   community/label_propagation.c
   community/leading_eigenvector.c
@@ -178,7 +159,6 @@ add_library(
   connectivity/separators.c
 
   flow/flow.c
-  flow/flow_conversion.c
   flow/st-cuts.c
 
   hrg/hrg_types.cc
@@ -196,7 +176,6 @@ add_library(
   io/lgl.c
   io/ncol.c
   io/pajek.c
-  io/parse_utils.c
   ${PARSER_SOURCES}
 
   layout/circular.c
@@ -220,7 +199,6 @@ add_library(
   layout/merge_grid.c
   layout/reingold_tilford.c
   layout/sugiyama.c
-  layout/umap.c
 
   operators/add_edge.c
   operators/complementer.c
@@ -240,36 +218,36 @@ add_library(
   operators/union.c
 
   paths/all_shortest_paths.c
-  paths/astar.c
   paths/bellman_ford.c
   paths/dijkstra.c
   paths/distances.c
   paths/eulerian.c
-  paths/floyd_warshall.c
   paths/histogram.c
   paths/johnson.c
   paths/random_walk.c
   paths/shortest_paths.c
   paths/simple_paths.c
-  paths/sparsifier.c
   paths/unweighted.c
-  paths/voronoi.c
-  paths/widest_paths.c
 
   properties/basic_properties.c
   properties/constraint.c
   properties/convergence_degree.c
   properties/dag.c
   properties/degrees.c
-  properties/ecc.c
   properties/girth.c
   properties/loops.c
   properties/multiplicity.c
   properties/neighborhood.c
-  properties/perfect.c
   properties/spectral.c
   properties/trees.c
   properties/triangles.c
+
+  scg/scg_approximate_methods.c
+  scg/scg_exact_scg.c
+  scg/scg_kmeans.c
+  scg/scg_optimal_method.c
+  scg/scg_utils.c
+  scg/scg.c
 
   isomorphism/bliss.cc
   isomorphism/isoclasses.c
@@ -283,7 +261,6 @@ add_library(
   misc/cocitation.c
   misc/coloring.c
   misc/conversion.c
-  misc/cycle_bases.c
   misc/degree_sequence.cpp
   misc/embedding.c
   misc/feedback_arc_set.c
@@ -292,9 +269,7 @@ add_library(
   misc/microscopic_update.c
   misc/mixing.c
   misc/motifs.c
-  misc/order_cycle.cpp
   misc/other.c
-  misc/power_law_fit.c
   misc/scan.c
   misc/sir.c
   misc/spanning_trees.c
@@ -304,7 +279,6 @@ add_library(
   internal/lsap.c
   internal/qsort_r.c
   internal/qsort.c
-  internal/utils.c
   internal/zeroin.c
 
   version.c
@@ -313,18 +287,16 @@ add_library(
   $<IF:$<OR:$<BOOL:${ARPACK_IS_VENDORED}>,$<BOOL:${BLAS_IS_VENDORED}>,$<BOOL:${LAPACK_IS_VENDORED}>>,$<TARGET_OBJECTS:f2c_vendored>,>
   $<IF:$<BOOL:${ARPACK_IS_VENDORED}>,$<TARGET_OBJECTS:arpack_vendored>,>
   $<IF:$<BOOL:${BLAS_IS_VENDORED}>,$<TARGET_OBJECTS:blas_vendored>,>
+  $<IF:$<BOOL:${CXSPARSE_IS_VENDORED}>,$<TARGET_OBJECTS:cxsparse_vendored>,>
   $<IF:$<BOOL:${GLPK_IS_VENDORED}>,$<TARGET_OBJECTS:glpk_vendored>,>
   $<IF:$<BOOL:${GMP_IS_VENDORED}>,$<TARGET_OBJECTS:gmp_vendored>,>
   $<IF:$<BOOL:${LAPACK_IS_VENDORED}>,$<TARGET_OBJECTS:lapack_vendored>,>
   $<IF:$<BOOL:${PLFIT_IS_VENDORED}>,$<TARGET_OBJECTS:plfit_vendored>,>
 )
 
-# Required by Xcode new build system
-add_dependencies(igraph parsersources)
-
 # Set soname for the library
-set_target_properties(igraph PROPERTIES VERSION "3.0.0")
-set_target_properties(igraph PROPERTIES SOVERSION 3)
+set_target_properties(igraph PROPERTIES VERSION "0.0.0")
+set_target_properties(igraph PROPERTIES SOVERSION 0)
 
 # Add extra compiler definitions if needed
 target_compile_definitions(
@@ -332,10 +304,6 @@ target_compile_definitions(
   PRIVATE
   IGRAPH_VERIFY_FINALLY_STACK=$<IF:$<BOOL:${IGRAPH_VERIFY_FINALLY_STACK}>,1,0>
 )
-# target_compile_options(
-#   # -Wconversion could be useful?
-#   igraph PRIVATE -Wshorten-64-to-32
-# )
 
 # Make sure that a macro named IGRAPH_FILE_BASENAME is provided in every
 # compiler call so we can use these in debug messages without revealing the
@@ -358,10 +326,12 @@ target_include_directories(
   ${PROJECT_SOURCE_DIR}/vendor
 
   # Vendored library include paths
+  "$<$<BOOL:${CXSPARSE_IS_VENDORED}>:$<TARGET_PROPERTY:cxsparse_vendored,INCLUDE_DIRECTORIES>>"
   "$<$<BOOL:${GLPK_IS_VENDORED}>:$<TARGET_PROPERTY:glpk_vendored,INCLUDE_DIRECTORIES>>"
   "$<$<BOOL:${PLFIT_IS_VENDORED}>:$<TARGET_PROPERTY:plfit_vendored,INCLUDE_DIRECTORIES>>"
 
   # Include paths for dependencies
+  "$<$<BOOL:${CXSPARSE_INCLUDE_DIRS}>:${CXSPARSE_INCLUDE_DIRS}>"
   "$<$<BOOL:${GLPK_INCLUDE_DIR}>:${GLPK_INCLUDE_DIR}>"
   "$<$<BOOL:${GMP_INCLUDE_DIR}>:${GMP_INCLUDE_DIR}>"
   "$<$<BOOL:${LIBXML2_INCLUDE_DIRS}>:${LIBXML2_INCLUDE_DIRS}>"
@@ -378,6 +348,10 @@ endif()
 
 if(BLAS_LIBRARIES)
   target_link_libraries(igraph PUBLIC ${BLAS_LIBRARIES})
+endif()
+
+if(CXSPARSE_LIBRARIES)
+  target_link_libraries(igraph PUBLIC ${CXSPARSE_LIBRARIES})
 endif()
 
 if(GLPK_LIBRARIES)
@@ -404,8 +378,15 @@ endif()
 target_link_libraries(
   igraph
   PRIVATE
-  bliss cliquer cxsparse_vendored pcg prpack
+  bliss cliquer prpack
 )
+
+# Disable complex number support for CXSparse because:
+#   - It is necessary to compile with MSVC
+#   - igraph does not need complex number support from CXSparse on any platform
+# This is needed here (in addition to the cxsparse_vendored target) because
+# igraph may be compiled with an external CXSparse.
+target_compile_definitions(igraph PRIVATE NCOMPLEX)
 
 if (NOT BUILD_SHARED_LIBS)
   target_compile_definitions(igraph PRIVATE IGRAPH_STATIC)
@@ -453,7 +434,7 @@ write_basic_package_version_file(
 
 # Define how to install the library
 install(
-  TARGETS igraph bliss cliquer cxsparse_vendored pcg prpack
+  TARGETS igraph bliss cliquer prpack
   EXPORT igraph_targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

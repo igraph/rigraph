@@ -29,9 +29,8 @@ typedef struct {
     void *scanner;
     int eof;
     char errmsg[300];
-    igraph_error_t igraph_errno;
-    igraph_bool_t has_weights;
-    igraph_vector_int_t *vector;
+    int has_weights;
+    igraph_vector_t *vector;
     igraph_vector_t *weights;
     igraph_trie_t *trie;
 } igraph_i_ncol_parsedata_t;

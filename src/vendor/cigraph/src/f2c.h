@@ -7,7 +7,6 @@
 #ifndef F2C_INCLUDE
 #define F2C_INCLUDE
 
-#include "igraph_error.h"
 #include "linalg/blas_internal.h"
 #include "linalg/lapack_internal.h"
 #include "linalg/arpack_internal.h"
@@ -146,7 +145,7 @@ union Multitype {   /* for multiple entry points */
 
 typedef union Multitype Multitype;
 
-/*typedef igraph_integer_t Long;*/  /* No longer used; formerly in Namelist */
+/*typedef long int Long;*/  /* No longer used; formerly in Namelist */
 
 struct Vardesc {    /* for Namelist */
     char *name;

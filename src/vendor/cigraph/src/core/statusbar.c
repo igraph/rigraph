@@ -33,7 +33,7 @@ static IGRAPH_THREAD_LOCAL igraph_status_handler_t *igraph_i_status_handler = 0;
 
 /**
  * \function igraph_status
- * \brief Reports status from an igraph function.
+ * Report status from an igraph function.
  *
  * It calls the installed status handler function, if there is
  * one. Otherwise it does nothing. Note that the standard way to
@@ -41,7 +41,6 @@ static IGRAPH_THREAD_LOCAL igraph_status_handler_t *igraph_i_status_handler = 0;
  * \ref IGRAPH_STATUS or \ref IGRAPH_STATUSF macro, as these
  * take care of the termination of the calling function if the
  * status handler returns with \c IGRAPH_INTERRUPTED.
- *
  * \param message The status message.
  * \param data Additional context, with user-defined semantics.
  *        Existing igraph functions pass a null pointer here.
@@ -52,7 +51,7 @@ static IGRAPH_THREAD_LOCAL igraph_status_handler_t *igraph_i_status_handler = 0;
  * Time complexity: O(1).
  */
 
-igraph_error_t igraph_status(const char *message, void *data) {
+int igraph_status(const char *message, void *data) {
     if (igraph_i_status_handler) {
         if (igraph_i_status_handler(message, data) != IGRAPH_SUCCESS) {
             return IGRAPH_INTERRUPTED;
@@ -63,7 +62,7 @@ igraph_error_t igraph_status(const char *message, void *data) {
 
 /**
  * \function igraph_statusf
- * \brief Report status, more flexible printf-like version.
+ * Report status, more flexible printf-like version.
  *
  * This is the more flexible version of \ref igraph_status(),
  * that has a syntax similar to the \c printf standard C library function.
@@ -77,15 +76,14 @@ igraph_error_t igraph_status(const char *message, void *data) {
  *        \p message argument.
  * \return Error code. If a status handler function was called
  *        and it did not return with \c IGRAPH_SUCCESS, then
- *        \c IGRAPH_INTERRUPTED is returned by \ref igraph_status().
+ *        \c IGRAPH_INTERRUPTED is returned by \c igraph_status().
  */
 
-igraph_error_t igraph_statusf(const char *message, void *data, ...) {
+int igraph_statusf(const char *message, void *data, ...) {
     char buffer[300];
     va_list ap;
     va_start(ap, data);
     vsnprintf(buffer, sizeof(buffer) - 1, message, ap);
-    va_end(ap);
     return igraph_status(buffer, data);
 }
 
@@ -95,9 +93,8 @@ igraph_error_t igraph_statusf(const char *message, void *data, ...) {
  * \function igraph_status_handler_stderr
  * A simple predefined status handler function.
  *
- * A simple status handler function that writes the status
- * message to the standard error.
- *
+ * A simple status handler function, that writes the status
+ * message to the standard errror.
  * \param message The status message.
  * \param data Additional context, with user-defined semantics.
  *        Existing igraph functions pass a null pointer here.
@@ -106,10 +103,10 @@ igraph_error_t igraph_statusf(const char *message, void *data, ...) {
  * Time complexity: O(1).
  */
 
-igraph_error_t igraph_status_handler_stderr(const char *message, void *data) {
+int igraph_status_handler_stderr(const char *message, void *data) {
     IGRAPH_UNUSED(data);
     fputs(message, stderr);
-    return IGRAPH_SUCCESS;
+    return 0;
 }
 #endif
 

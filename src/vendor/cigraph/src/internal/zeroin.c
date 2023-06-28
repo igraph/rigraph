@@ -89,16 +89,16 @@
 
 #define EPSILON DBL_EPSILON
 
-igraph_error_t igraph_zeroin(   /* An estimate of the root */
+int igraph_zeroin(              /* An estimate of the root */
     igraph_real_t *ax,          /* Left border | of the range   */
     igraph_real_t *bx,          /* Right border| the root is seeked*/
     igraph_real_t (*f)(igraph_real_t x, void *info),    /* Function under investigation */
-    void *info,                 /* Add'l info passed on to f    */
+    void *info,             /* Add'l info passed on to f    */
     igraph_real_t *Tol,         /* Acceptable tolerance     */
-    int *Maxit,                 /* Max # of iterations */
-    igraph_real_t *res) {       /* Result is stored here */
+    int *Maxit,             /* Max # of iterations */
+    igraph_real_t *res) {               /* Result is stored here */
     igraph_real_t a, b, c,      /* Abscissae, descr. see above  */
-                  fa, fb, fc;   /* f(a), f(b), f(c) */
+                  fa, fb, fc;         /* f(a), f(b), f(c) */
     igraph_real_t tol;
     int maxit;
 
@@ -111,27 +111,30 @@ igraph_error_t igraph_zeroin(   /* An estimate of the root */
         *Tol = 0.0;
         *Maxit = 0;
         *res = a;
-        return IGRAPH_SUCCESS;
+        return 0;
     }
     if (fb ==  0.0) {
         *Tol = 0.0;
         *Maxit = 0;
         *res = b;
-        return IGRAPH_SUCCESS;
+        return 0;
     }
 
-    while (maxit--) {                     /* Main iteration loop */
-        igraph_real_t prev_step = b - a;  /* Distance from the last but one to the last approximation */
-        igraph_real_t tol_act;            /* Actual tolerance */
-        igraph_real_t p;                  /* Interpolation step is calculated in the form p/q; */
-        igraph_real_t q;                  /* division operations are delayed until the last moment */
-        igraph_real_t new_step;           /* Step at this iteration */
+    while (maxit--) {   /* Main iteration loop  */
+        igraph_real_t prev_step = b - a;  /* Distance from the last but one
+                       to the last approximation    */
+        igraph_real_t tol_act;      /* Actual tolerance     */
+        igraph_real_t p;        /* Interpolation step is calcu- */
+        igraph_real_t q;        /* lated in the form p/q; divi-
+                     * sion operations is delayed
+                     * until the last moment    */
+        igraph_real_t new_step;     /* Step at this iteration   */
 
         IGRAPH_ALLOW_INTERRUPTION();
 
         if ( fabs(fc) < fabs(fb) ) {
-            /* Swap data for b to be the best approximation */
-            a = b;  b = c;  c = a;
+            /* Swap data for b to be the    */
+            a = b;  b = c;  c = a;  /* best approximation       */
             fa = fb;  fb = fc;  fc = fa;
         }
         tol_act = 2 * EPSILON * fabs(b) + tol / 2;
@@ -141,18 +144,18 @@ igraph_error_t igraph_zeroin(   /* An estimate of the root */
             *Maxit -= maxit;
             *Tol = fabs(c - b);
             *res = b;
-            return IGRAPH_SUCCESS;        /* Acceptable approx. is found  */
+            return 0;           /* Acceptable approx. is found  */
         }
 
         /* Decide if the interpolation can be tried */
         if ( fabs(prev_step) >= tol_act /* If prev_step was large enough*/
              && fabs(fa) > fabs(fb) ) {
             /* and was in true direction,
-             * Interpolation may be tried   */
+                         * Interpolation may be tried   */
             register igraph_real_t t1, cb, t2;
             cb = c - b;
             if ( a == c ) {     /* If we have only two distinct */
-                                /* points linear interpolation  */
+                /* points linear interpolation  */
                 t1 = fb / fa;   /* can only be applied      */
                 p = cb * t1;
                 q = 1.0 - t1;

@@ -24,4 +24,5 @@ endif()
 # function as is (without visibility specification)
 target_compile_definitions(cliquer PRIVATE IGRAPH_STATIC)
 
-use_all_warnings(cliquer)
+# TODO(ntamas): make sure that this works for Cliquer
+# use_all_warnings(cliquer)

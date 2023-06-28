@@ -24,8 +24,6 @@
 
 #include "igraph_interface.h"
 
-#include "math/safe_intop.h"
-
 /**
  * \function igraph_de_bruijn
  * \brief Generate a de Bruijn graph.
@@ -55,14 +53,15 @@
  *
  * Time complexity: O(|V|+|E|), the number of vertices plus the number of edges.
  */
-igraph_error_t igraph_de_bruijn(igraph_t *graph, igraph_integer_t m, igraph_integer_t n) {
+int igraph_de_bruijn(igraph_t *graph, igraph_integer_t m, igraph_integer_t n) {
 
     /* m - number of symbols */
     /* n - length of strings */
 
-    igraph_integer_t no_of_nodes, no_of_edges;
-    igraph_vector_int_t edges;
-    igraph_integer_t i, j;
+    long int no_of_nodes, no_of_edges;
+    igraph_vector_t edges;
+    long int i, j;
+    long int mm = m;
 
     if (m < 0 || n < 0) {
         IGRAPH_ERROR("`m' and `n' should be non-negative in a de Bruijn graph",
@@ -76,36 +75,25 @@ igraph_error_t igraph_de_bruijn(igraph_t *graph, igraph_integer_t m, igraph_inte
         return igraph_empty(graph, 0, IGRAPH_DIRECTED);
     }
 
-    {
-        igraph_real_t no_of_nodes_real = pow(m, n);
-        no_of_nodes = no_of_nodes_real;
-        if (no_of_nodes != no_of_nodes_real) {
-            IGRAPH_ERRORF("Parameters (%" IGRAPH_PRId ", %" IGRAPH_PRId ") too large for De Bruijn graph.", IGRAPH_EINVAL,
-                          m, n);
-        }
-    }
-    /* no_of_edges = m * no_of_nodes */
-    IGRAPH_SAFE_MULT(no_of_nodes, m, &no_of_edges);
+    no_of_nodes = (long int) pow(m, n);
+    no_of_edges = no_of_nodes * m;
 
-    {
-        igraph_integer_t no_of_edges2;
-        IGRAPH_SAFE_MULT(no_of_edges, 2, &no_of_edges2);
-        IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
-        IGRAPH_CHECK(igraph_vector_int_reserve(&edges, no_of_edges2));
-    }
+    IGRAPH_VECTOR_INIT_FINALLY(&edges, 0);
+    IGRAPH_CHECK(igraph_vector_reserve(&edges, no_of_edges * 2));
 
     for (i = 0; i < no_of_nodes; i++) {
-        igraph_integer_t basis = (i * m) % no_of_nodes;
+        long int basis = (i * mm) % no_of_nodes;
         for (j = 0; j < m; j++) {
-            igraph_vector_int_push_back(&edges, i);
-            igraph_vector_int_push_back(&edges, basis + j);
+            igraph_vector_push_back(&edges, i);
+            igraph_vector_push_back(&edges, basis + j);
         }
     }
 
-    IGRAPH_CHECK(igraph_create(graph, &edges, no_of_nodes, IGRAPH_DIRECTED));
+    IGRAPH_CHECK(igraph_create(graph, &edges, (igraph_integer_t) no_of_nodes,
+                               IGRAPH_DIRECTED));
 
-    igraph_vector_int_destroy(&edges);
+    igraph_vector_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
 
-    return IGRAPH_SUCCESS;
+    return 0;
 }
