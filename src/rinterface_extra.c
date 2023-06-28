@@ -4279,19 +4279,18 @@ SEXP R_igraph_degree(SEXP graph, SEXP vids, SEXP pmode, SEXP ploops) {
 
   igraph_t g;
   igraph_vs_t vs;
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
   igraph_bool_t loops=LOGICAL(ploops)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(vids, &g, &vs);
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_degree(&g, &res, vs, mode, loops));
 
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
   igraph_vs_destroy(&vs);
 
   UNPROTECT(1);
