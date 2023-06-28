@@ -4382,16 +4382,15 @@ SEXP R_igraph_subcomponent(SEXP graph, SEXP pvertex, SEXP pmode) {
   igraph_t g;
   igraph_real_t vertex=REAL(pvertex)[0];
   igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_subcomponent(&g, &res, vertex, mode));
 
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
 
   UNPROTECT(1);
   return result;
