@@ -4123,16 +4123,16 @@ SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
 
 SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
 
-  igraph_vector_t v;                    /* do NOT destroy! */
+  igraph_vector_int_t v;                    /* do NOT destroy! */
   igraph_t g;
   SEXP result;
 
-  R_SEXP_to_vector(edges, &v);
+  R_SEXP_to_vector_int_copy(edges, &v);
   R_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_FINALLY(igraph_destroy, &g);
   IGRAPH_R_CHECK(igraph_add_edges(&g, &v, 0));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
   IGRAPH_FINALLY_CLEAN(1);
 
   UNPROTECT(1);
