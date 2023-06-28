@@ -7529,9 +7529,9 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
   igraph_t g;
   igraph_vector_t weights, *ppweights=0;
   igraph_integer_t steps=(igraph_integer_t) REAL(psteps)[0];
-  igraph_matrix_t merges;
+  igraph_matrix_int_t merges;
   igraph_vector_t modularity;
-  igraph_vector_t membership;
+  igraph_vector_int_t membership;
   SEXP result, names;
 
   R_SEXP_to_igraph(graph, &g);
@@ -7540,19 +7540,19 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
     R_SEXP_to_vector(pweights, ppweights);
   }
 
-  igraph_matrix_init(&merges, 0, 0);
+  igraph_matrix_int_init(&merges, 0, 0);
   igraph_vector_init(&modularity, 0);
-  igraph_vector_init(&membership, 0);
+  igraph_vector_int_init(&membership, 0);
 
   IGRAPH_R_CHECK(igraph_community_walktrap(&g, ppweights, steps, &merges, &modularity, &membership));
 
   PROTECT(result=NEW_LIST(3));
   if (LOGICAL(pmerges)[0]) {
-    SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_to_SEXP(&merges));
+    SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_int_to_SEXP(&merges));
   } else {
     SET_VECTOR_ELT(result, 0, R_NilValue);
   }
-  igraph_matrix_destroy(&merges);
+  igraph_matrix_int_destroy(&merges);
   if (LOGICAL(pmodularity)[0]) {
     SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(&modularity));
   } else {
@@ -7560,11 +7560,11 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
   }
   igraph_vector_destroy(&modularity);
   if (LOGICAL(pmembership)[0]) {
-    SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP(&membership));
+    SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP(&membership));
   } else {
     SET_VECTOR_ELT(result, 2, R_NilValue);
   }
-  igraph_vector_destroy(&membership);
+  igraph_vector_int_destroy(&membership);
   PROTECT(names=NEW_CHARACTER(3));
   SET_STRING_ELT(names, 0, Rf_mkChar("merges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("modularity"));
