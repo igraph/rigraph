@@ -5311,16 +5311,16 @@ SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP peids) {
 SEXP R_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
                                    SEXP pmethod) {
   igraph_t g;
-  igraph_vector_t outseq;
-  igraph_vector_t inseq;
+  igraph_vector_int_t outseq;
+  igraph_vector_int_t inseq;
   igraph_integer_t method=(igraph_integer_t) REAL(pmethod)[0];
   SEXP result;
 
-  R_SEXP_to_vector(pout_seq, &outseq);
-  if (!Rf_isNull(pin_seq)) { R_SEXP_to_vector(pin_seq, &inseq); }
+  R_SEXP_to_vector_int_copy(pout_seq, &outseq);
+  if (!Rf_isNull(pin_seq)) { R_SEXP_to_vector_int_copy(pin_seq, &inseq); }
   IGRAPH_R_CHECK(igraph_degree_sequence_game(&g, &outseq, Rf_isNull(pin_seq) ? 0 : &inseq, (igraph_degseq_t) method));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
