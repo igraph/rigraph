@@ -7242,16 +7242,15 @@ SEXP R_igraph_coreness(SEXP graph, SEXP pmode) {
 
   igraph_t g;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_coreness(&g, &res, (igraph_neimode_t) mode));
 
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
 
   UNPROTECT(1);
   return result;
