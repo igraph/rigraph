@@ -4966,9 +4966,9 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   igraph_integer_t from=(igraph_integer_t) REAL(pfrom)[0];
   igraph_vs_t to;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_vector_t *vects, *evects;
+  igraph_vector_int_t *vects, *evects;
   long int i;
-  igraph_vector_ptr_t ptrvec, ptrevec;
+  igraph_vector_int_list_t ptrvec, ptrevec;
   igraph_vector_t w, *pw=&w;
   igraph_bool_t negw=0;
   SEXP result, result1, result2, names;
@@ -4977,7 +4977,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   igraph_bool_t pred=LOGICAL(ppred)[0];
   igraph_bool_t inbound=LOGICAL(pinbound)[0];
   long int algo=(long int) REAL(palgo)[0];
-  igraph_vector_long_t predvec, inboundvec;
+  igraph_vector_int_t predvec, inboundvec;
 
   long int no=(long int) REAL(pno)[0];
 
@@ -4985,21 +4985,23 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   R_SEXP_to_igraph_vs(pto, &g, &to);
 
   if (verts) {
-    igraph_vector_ptr_init(&ptrvec, no);
-    vects=(igraph_vector_t*) R_alloc((size_t) GET_LENGTH(pto),
-                                     sizeof(igraph_vector_t));
+    igraph_vector_int_list_init(&ptrvec, no);
+    vects=(igraph_vector_int_t*) R_alloc((size_t) GET_LENGTH(pto),
+                                     sizeof(igraph_vector_int_t));
     for (i=0; i<no; i++) {
-      igraph_vector_init(&vects[i], 0);
-      VECTOR(ptrvec)[i]=&vects[i];
+      igraph_vector_int_init(&vects[i], 0);
+      igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(&ptrvec, i);
+      v=&vects[i];
     }
   }
   if (edges) {
-    igraph_vector_ptr_init(&ptrevec, no);
-    evects=(igraph_vector_t*) R_alloc((size_t) GET_LENGTH(pto),
-                                      sizeof(igraph_vector_t));
+    igraph_vector_int_list_init(&ptrevec, no);
+    evects=(igraph_vector_int_t*) R_alloc((size_t) GET_LENGTH(pto),
+                                      sizeof(igraph_vector_int_t));
     for (i=0; i<no; i++) {
-      igraph_vector_init(&evects[i], 0);
-      VECTOR(ptrevec)[i]=&evects[i];
+      igraph_vector_int_init(&evects[i], 0);
+      igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(&ptrevec, i);
+      v=&evects[i];
     }
   }
 
@@ -5010,8 +5012,8 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     negw = igraph_vector_size(&w) > 0 && igraph_vector_min(&w) < 0;
   }
 
-  if (pred) { igraph_vector_long_init(&predvec, no); }
-  if (inbound) { igraph_vector_long_init(&inboundvec, no); }
+  if (pred) { igraph_vector_int_init(&predvec, no); }
+  if (inbound) { igraph_vector_int_init(&inboundvec, no); }
 
   switch (algo) {
   case 0:                       /* automatic */
@@ -5038,11 +5040,11 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     SET_VECTOR_ELT(result, 0, NEW_LIST(no));
     result1=VECTOR_ELT(result, 0);
     for (i=0; i<no; i++) {
-      SET_VECTOR_ELT(result1, i, NEW_NUMERIC(igraph_vector_size(&vects[i])));
-      igraph_vector_copy_to(&vects[i], REAL(VECTOR_ELT(result1, i)));
-      igraph_vector_destroy(&vects[i]);
+      SET_VECTOR_ELT(result1, i, NEW_INTEGER(igraph_vector_int_size(&vects[i])));
+      igraph_vector_int_copy_to(&vects[i], INTEGER(VECTOR_ELT(result1, i)));
+      igraph_vector_int_destroy(&vects[i]);
     }
-    igraph_vector_ptr_destroy(&ptrvec);
+    igraph_vector_int_list_destroy(&ptrvec);
   } else {
     SET_VECTOR_ELT(result, 0, R_NilValue);
   }
@@ -5050,23 +5052,23 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     SET_VECTOR_ELT(result, 1, NEW_LIST(no));
     result2=VECTOR_ELT(result, 1);
     for (i=0; i<no; i++) {
-      SET_VECTOR_ELT(result2, i, NEW_NUMERIC(igraph_vector_size(&evects[i])));
-      igraph_vector_copy_to(&evects[i], REAL(VECTOR_ELT(result2, i)));
-      igraph_vector_destroy(&evects[i]);
+      SET_VECTOR_ELT(result2, i, NEW_INTEGER(igraph_vector_int_size(&evects[i])));
+      igraph_vector_int_copy_to(&evects[i], INTEGER(VECTOR_ELT(result2, i)));
+      igraph_vector_int_destroy(&evects[i]);
     }
-    igraph_vector_ptr_destroy(&ptrevec);
+    igraph_vector_int_list_destroy(&ptrevec);
   } else {
     SET_VECTOR_ELT(result, 1, R_NilValue);
   }
   if (pred) {
-    SET_VECTOR_ELT(result, 2, R_igraph_vector_long_to_SEXP(&predvec));
-    igraph_vector_long_destroy(&predvec);
+    SET_VECTOR_ELT(result, 2, R_igraph_vector_int_to_SEXP(&predvec));
+    igraph_vector_int_destroy(&predvec);
   } else {
     SET_VECTOR_ELT(result, 2, R_NilValue);
   }
   if (inbound) {
-    SET_VECTOR_ELT(result, 3, R_igraph_vector_long_to_SEXP(&inboundvec));
-    igraph_vector_long_destroy(&inboundvec);
+    SET_VECTOR_ELT(result, 3, R_igraph_vector_int_to_SEXP(&inboundvec));
+    igraph_vector_int_destroy(&inboundvec);
   } else {
     SET_VECTOR_ELT(result, 3, R_NilValue);
   }
