@@ -4616,7 +4616,7 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
   igraph_real_t power=REAL(ppower)[0];
   igraph_integer_t m=Rf_isNull(pm) ? 0 : (igraph_integer_t) REAL(pm)[0];
-  igraph_vector_t outseq, *myoutseq=0;
+  igraph_vector_int_t outseq, *myoutseq=0;
   igraph_bool_t outpref=LOGICAL(poutpref)[0];
   igraph_real_t A=REAL(pA)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
@@ -4625,7 +4625,7 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   SEXP result;
 
   if (!Rf_isNull(poutseq)) {
-    R_SEXP_to_vector(poutseq, &outseq);
+    R_SEXP_to_vector_int_copy(poutseq, &outseq);
     myoutseq=&outseq;
   }
 
@@ -4636,7 +4636,7 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
 
   IGRAPH_R_CHECK(igraph_barabasi_game(&g, n, power, m, myoutseq, outpref, A, directed, algo, ppstart));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
