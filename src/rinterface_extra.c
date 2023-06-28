@@ -7577,16 +7577,16 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
 
 SEXP R_igraph_topological_sorting(SEXP graph, SEXP pneimode) {
   igraph_t g;
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   igraph_integer_t mode=(igraph_integer_t) REAL(pneimode)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_topological_sorting(&g, &res, (igraph_neimode_t) mode));
 
-  PROTECT(result=R_igraph_vector_to_SEXP(&res));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
 
   UNPROTECT(1);
   return result;
