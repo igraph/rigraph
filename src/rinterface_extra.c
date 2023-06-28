@@ -6603,7 +6603,7 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
   SEXP result;
 
-  igraph_vector_t adje;
+  igraph_vector_int_t adje;
   igraph_vit_t vv;
   long int i;
 
@@ -6611,21 +6611,21 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
   R_SEXP_to_igraph_vs(pv, &g, &v);
 
   igraph_vit_create(&g, v, &vv);
-  igraph_vector_init(&adje, 0);
+  igraph_vector_int_init(&adje, 0);
   PROTECT(result=NEW_LOGICAL(igraph_ecount(&g)));
   memset(LOGICAL(result), 0, sizeof(LOGICAL(result)[0]) *
          (size_t) igraph_ecount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
     IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), (igraph_neimode_t) mode));
-    for (i=0; i<igraph_vector_size(&adje); i++) {
-      long int edge=(long int) VECTOR(adje)[i];
+    for (i=0; i<igraph_vector_int_size(&adje); i++) {
+      igraph_integer_t edge=VECTOR(*adje, i);
       LOGICAL(result)[edge]=1;
     }
     IGRAPH_VIT_NEXT(vv);
   }
 
-  igraph_vector_destroy(&adje);
+  igraph_vector_int_destroy(&adje);
   igraph_vit_destroy(&vv);
   igraph_vs_destroy(&v);
 
