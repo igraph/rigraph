@@ -6778,14 +6778,14 @@ SEXP R_igraph_mincut(SEXP graph, SEXP pcapacity) {
   igraph_t g;
   igraph_vector_t capacity, *ppcapacity=0;
   igraph_real_t value;
-  igraph_vector_t partition;
-  igraph_vector_t partition2;
-  igraph_vector_t cut;
+  igraph_vector_int_t partition;
+  igraph_vector_int_t partition2;
+  igraph_vector_int_t cut;
   SEXP result, names;
 
-  igraph_vector_init(&cut, 0);
-  igraph_vector_init(&partition, 0);
-  igraph_vector_init(&partition2, 0);
+  igraph_vector_int_init(&cut, 0);
+  igraph_vector_int_init(&partition, 0);
+  igraph_vector_int_init(&partition2, 0);
 
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(pcapacity)) {
@@ -6799,12 +6799,12 @@ SEXP R_igraph_mincut(SEXP graph, SEXP pcapacity) {
   PROTECT(names=NEW_CHARACTER(4));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   REAL(VECTOR_ELT(result, 0))[0]=value;
-  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&cut));
-  igraph_vector_destroy(&cut);
-  SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&partition));
-  igraph_vector_destroy(&partition);
-  SET_VECTOR_ELT(result, 3, R_igraph_vector_to_SEXP(&partition2));
-  igraph_vector_destroy(&partition2);
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_int_to_SEXP(&cut));
+  igraph_vector_int_destroy(&cut);
+  SET_VECTOR_ELT(result, 2, R_igraph_vector_int_to_SEXP(&partition));
+  igraph_vector_int_destroy(&partition);
+  SET_VECTOR_ELT(result, 3, R_igraph_vector_int_to_SEXP(&partition2));
+  igraph_vector_int_destroy(&partition2);
   SET_STRING_ELT(names, 0, Rf_mkChar("value"));
   SET_STRING_ELT(names, 1, Rf_mkChar("cut"));
   SET_STRING_ELT(names, 2, Rf_mkChar("partition1"));
