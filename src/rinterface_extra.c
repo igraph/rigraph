@@ -7142,24 +7142,17 @@ SEXP R_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_t vids;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_vector_ptr_t res;
+  igraph_vector_int_list_t res;
   long int i;
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids);
-  igraph_vector_ptr_init(&res, 0);
+  igraph_vector_int_list_init(&res, 0);
   IGRAPH_R_CHECK(igraph_neighborhood(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&res)));
-  for (i=0; i<igraph_vector_ptr_size(&res); i++) {
-    igraph_vector_t *v=VECTOR(res)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(v)));
-    igraph_vector_copy_to(v, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(v);
-    igraph_free(v);
-  }
-  igraph_vector_ptr_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&res));
+  igraph_vector_int_list_destroy(&res);
   igraph_vs_destroy(&vids);
 
   UNPROTECT(1);
