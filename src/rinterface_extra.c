@@ -7598,12 +7598,12 @@ SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
                                          SEXP pmodularity, SEXP pmembership) {
   igraph_t g;
   igraph_vector_t weights, *ppweights=0;
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   igraph_vector_t eb, *ppeb=0;
-  igraph_matrix_t merges, *ppmerges=0;
-  igraph_vector_t bridges, *ppbridges=0;
+  igraph_matrix_int_t merges, *ppmerges=0;
+  igraph_vector_int_t bridges, *ppbridges=0;
   igraph_vector_t modularity, *ppmodularity=0;
-  igraph_vector_t membership, *ppmembership=0;
+  igraph_vector_int_t membership, *ppmembership=0;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   SEXP result, names;
 
@@ -7612,18 +7612,18 @@ SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
     ppweights=&weights;
     R_SEXP_to_vector(pweights, ppweights);
   }
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   if (LOGICAL(peb)[0]) {
     ppeb=&eb;
     igraph_vector_init(&eb, 0);
   }
   if (LOGICAL(pmerges)[0]) {
     ppmerges=&merges;
-    igraph_matrix_init(&merges, 0, 0);
+    igraph_matrix_int_init(&merges, 0, 0);
   }
   if (LOGICAL(pbridges)[0]) {
     ppbridges=&bridges;
-    igraph_vector_init(&bridges, 0);
+    igraph_vector_int_init(&bridges, 0);
   }
   if (LOGICAL(pmodularity)[0]) {
     ppmodularity=&modularity;
@@ -7631,23 +7631,23 @@ SEXP R_igraph_community_edge_betweenness(SEXP graph, SEXP pweights,
   }
   if (LOGICAL(pmembership)[0]) {
     ppmembership=&membership;
-    igraph_vector_init(&membership, 0);
+    igraph_vector_int_init(&membership, 0);
   }
   IGRAPH_R_CHECK(igraph_community_edge_betweenness(&g, &res, ppeb, ppmerges, ppbridges, ppmodularity, ppmembership, directed, ppweights));
 
   PROTECT(result=NEW_LIST(6));
-  SET_VECTOR_ELT(result, 0, R_igraph_vector_to_SEXP(&res));
-  igraph_vector_destroy(&res);
+  SET_VECTOR_ELT(result, 0, R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
   SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(ppeb));
   if (ppeb) { igraph_vector_destroy(ppeb); }
-  SET_VECTOR_ELT(result, 2, R_igraph_0ormatrix_to_SEXP(ppmerges));
-  if (ppmerges) { igraph_matrix_destroy(ppmerges); }
-  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_to_SEXP(ppbridges));
-  if (ppbridges) { igraph_vector_destroy(ppbridges); }
+  SET_VECTOR_ELT(result, 2, R_igraph_0ormatrix_int_to_SEXP(ppmerges));
+  if (ppmerges) { igraph_matrix_int_destroy(ppmerges); }
+  SET_VECTOR_ELT(result, 3, R_igraph_0orvector_int_to_SEXP(ppbridges));
+  if (ppbridges) { igraph_vector_int_destroy(ppbridges); }
   SET_VECTOR_ELT(result, 4, R_igraph_0orvector_to_SEXP(ppmodularity));
   if (ppmodularity) { igraph_vector_destroy(ppmodularity); }
-  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_to_SEXP(ppmembership));
-  if (ppmembership) { igraph_vector_destroy(ppmembership); }
+  SET_VECTOR_ELT(result, 5, R_igraph_0orvector_int_to_SEXP(ppmembership));
+  if (ppmembership) { igraph_vector_int_destroy(ppmembership); }
   PROTECT(names=NEW_CHARACTER(6));
   SET_STRING_ELT(names, 0, Rf_mkChar("removed.edges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("edge.betweenness"));
