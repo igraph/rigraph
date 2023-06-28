@@ -6319,17 +6319,16 @@ SEXP R_igraph_get_edge(SEXP graph, SEXP peid) {
 SEXP R_igraph_edges(SEXP graph, SEXP eids) {
   igraph_t g;
   igraph_es_t es;
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_es(eids, &g, &es);
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_edges(&g, es, &res));
 
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
   igraph_es_destroy(&es);
 
   UNPROTECT(1);
