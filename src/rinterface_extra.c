@@ -6683,7 +6683,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   igraph_t g;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   FILE *file;
-  igraph_vector_t label;
+  igraph_vector_int_t label;
   igraph_strvector_t problem;
   igraph_integer_t source, target;
   igraph_vector_t cap;
@@ -6698,7 +6698,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   if (file==0) { igraph_error("Cannot read edgelist", __FILE__, __LINE__,
                               IGRAPH_EFILE);
   }
-  igraph_vector_init(&label, 0);
+  igraph_vector_int_init(&label, 0);
   igraph_strvector_init(&problem, 0);
   igraph_vector_init(&cap, 0);
   IGRAPH_R_CHECK(igraph_read_graph_dimacs(&g, file, &problem, &label, &source, &target, &cap, directed));
@@ -6708,7 +6708,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
     SET_VECTOR_ELT(result, 0, R_igraph_strvector_to_SEXP(&problem));
     igraph_strvector_destroy(&problem);
     SET_VECTOR_ELT(result, 1, R_igraph_to_SEXP(&g));
-    IGRAPH_I_DESTROY(&g);
+    igraph_destroy(&g);
     SET_VECTOR_ELT(result, 2, NEW_NUMERIC(1));
     REAL(VECTOR_ELT(result, 2))[0]=source;
     SET_VECTOR_ELT(result, 3, NEW_NUMERIC(1));
@@ -6721,9 +6721,9 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
     SET_VECTOR_ELT(result, 0, R_igraph_strvector_to_SEXP(&problem));
     igraph_strvector_destroy(&problem);
     SET_VECTOR_ELT(result, 1, R_igraph_to_SEXP(&g));
-    IGRAPH_I_DESTROY(&g);
-    SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&label));
-    igraph_vector_destroy(&label);
+    igraph_destroy(&g);
+    SET_VECTOR_ELT(result, 2, R_igraph_vector_int_to_SEXP(&label));
+    igraph_vector_int_destroy(&label);
   } else {
     /* This shouldn't happen */
     igraph_error("Invalid DIMACS file (problem) type", __FILE__, __LINE__,
