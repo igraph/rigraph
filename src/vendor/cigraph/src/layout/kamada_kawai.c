@@ -46,6 +46,10 @@
  * far-apart veritces will have a smaller effect on the layout.
  *
  * </para><para>
+ * Disconnected graphs are handled by assuming that the graph distance between
+ * vertices in different components is the same as the graph diameter.
+ *
+ * </para><para>
  * This layout works particularly well for locally connected spatial networks
  * such as lattices.
  *
@@ -99,7 +103,7 @@
  * graph.
  */
 
-int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
+igraph_error_t igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
                                igraph_bool_t use_seed, igraph_integer_t maxiter,
                                igraph_real_t epsilon, igraph_real_t kkconst,
                                const igraph_vector_t *weights,
@@ -115,43 +119,43 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
     igraph_integer_t i, j, m;
 
     if (maxiter < 0) {
-        IGRAPH_ERROR("Number of iterations must be non-negatice in "
-                     "Kamada-Kawai layout", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Number of iterations must be non-negative in "
+                     "Kamada-Kawai layout.", IGRAPH_EINVAL);
     }
     if (kkconst <= 0) {
-        IGRAPH_ERROR("`K' constant must be positive in Kamada-Kawai layout",
+        IGRAPH_ERROR("`K' constant must be positive in Kamada-Kawai layout.",
                      IGRAPH_EINVAL);
     }
 
     if (use_seed && (igraph_matrix_nrow(res) != no_nodes ||
                      igraph_matrix_ncol(res) != 2)) {
         IGRAPH_ERROR("Invalid start position matrix size in "
-                     "Kamada-Kawai layout", IGRAPH_EINVAL);
+                     "Kamada-Kawai layout.", IGRAPH_EINVAL);
     }
     if (weights && igraph_vector_size(weights) != no_edges) {
-        IGRAPH_ERROR("Invalid weight vector length", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid weight vector length.", IGRAPH_EINVAL);
     }
     if (weights && no_edges > 0 && igraph_vector_min(weights) <= 0) {
         IGRAPH_ERROR("Weights must be positive for Kamada-Kawai layout.", IGRAPH_EINVAL);
     }
 
     if (minx && igraph_vector_size(minx) != no_nodes) {
-        IGRAPH_ERROR("Invalid minx vector length", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid minx vector length.", IGRAPH_EINVAL);
     }
     if (maxx && igraph_vector_size(maxx) != no_nodes) {
-        IGRAPH_ERROR("Invalid maxx vector length", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid maxx vector length.", IGRAPH_EINVAL);
     }
     if (minx && maxx && !igraph_vector_all_le(minx, maxx)) {
-        IGRAPH_ERROR("minx must not be greater than maxx", IGRAPH_EINVAL);
+        IGRAPH_ERROR("minx must not be greater than maxx.", IGRAPH_EINVAL);
     }
     if (miny && igraph_vector_size(miny) != no_nodes) {
-        IGRAPH_ERROR("Invalid miny vector length", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid miny vector length.", IGRAPH_EINVAL);
     }
     if (maxy && igraph_vector_size(maxy) != no_nodes) {
-        IGRAPH_ERROR("Invalid maxy vector length", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid maxy vector length.", IGRAPH_EINVAL);
     }
     if (miny && maxy && !igraph_vector_all_le(miny, maxy)) {
-        IGRAPH_ERROR("miny must not be greater than maxy", IGRAPH_EINVAL);
+        IGRAPH_ERROR("miny must not be greater than maxy.", IGRAPH_EINVAL);
     }
 
     if (!use_seed) {
@@ -168,21 +172,21 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
     }
 
     if (no_nodes <= 1) {
-        return 0;
+        return IGRAPH_SUCCESS;
     }
 
     IGRAPH_MATRIX_INIT_FINALLY(&dij, no_nodes, no_nodes);
     IGRAPH_MATRIX_INIT_FINALLY(&kij, no_nodes, no_nodes);
     IGRAPH_MATRIX_INIT_FINALLY(&lij, no_nodes, no_nodes);
 
-    IGRAPH_CHECK(igraph_shortest_paths_dijkstra(graph, &dij, igraph_vss_all(),
-                 igraph_vss_all(), weights,
-                 IGRAPH_ALL));
+    IGRAPH_CHECK(igraph_distances_dijkstra(graph, &dij, igraph_vss_all(),
+                 igraph_vss_all(), weights, IGRAPH_ALL));
 
+    /* Find largest finite distance */
     max_dij = 0.0;
     for (i = 0; i < no_nodes; i++) {
         for (j = i + 1; j < no_nodes; j++) {
-            if (!igraph_finite(MATRIX(dij, i, j))) {
+            if (!isfinite(MATRIX(dij, i, j))) {
                 continue;
             }
             if (MATRIX(dij, i, j) > max_dij) {
@@ -190,6 +194,9 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
             }
         }
     }
+
+    /* Replace infinite distances by the largest finite distance,
+     * effectively making the graph connected. */
     for (i = 0; i < no_nodes; i++) {
         for (j = 0; j < no_nodes; j++) {
             if (MATRIX(dij, i, j) > max_dij) {
@@ -222,7 +229,7 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
             }
             dx = MATRIX(*res, m, 0) - MATRIX(*res, i, 0);
             dy = MATRIX(*res, m, 1) - MATRIX(*res, i, 1);
-            mi_dist = sqrt(dx * dx + dy * dy);
+            mi_dist = sqrt(dx*dx + dy*dy);
             myD1 += MATRIX(kij, m, i) * (dx - MATRIX(lij, m, i) * dx / mi_dist);
             myD2 += MATRIX(kij, m, i) * (dy - MATRIX(lij, m, i) * dy / mi_dist);
         }
@@ -262,7 +269,7 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
             }
             dx = old_x - MATRIX(*res, i, 0);
             dy = old_y - MATRIX(*res, i, 1);
-            dist = sqrt(dx * dx + dy * dy);
+            dist = sqrt(dx*dx + dy*dy);
             den = dist * (dx * dx + dy * dy);
             A += MATRIX(kij, m, i) * (1 - MATRIX(lij, m, i) * dy * dy / den);
             B += MATRIX(kij, m, i) * MATRIX(lij, m, i) * dx * dy / den;
@@ -317,10 +324,10 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
             }
             old_dx = old_x - MATRIX(*res, i, 0);
             old_dy = old_y - MATRIX(*res, i, 1);
-            old_mi_dist = sqrt(old_dx * old_dx + old_dy * old_dy);
+            old_mi_dist = sqrt(old_dx*old_dx + old_dy*old_dy);
             new_dx = new_x - MATRIX(*res, i, 0);
             new_dy = new_y - MATRIX(*res, i, 1);
-            new_mi_dist = sqrt(new_dx * new_dx + new_dy * new_dy);
+            new_mi_dist = sqrt(new_dx*new_dx + new_dy*new_dy);
 
             VECTOR(D1)[i] -= MATRIX(kij, m, i) *
                              (-old_dx + MATRIX(lij, m, i) * old_dx / old_mi_dist);
@@ -349,7 +356,7 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
     igraph_matrix_destroy(&dij);
     IGRAPH_FINALLY_CLEAN(5);
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }
 
 /**
@@ -406,7 +413,7 @@ int igraph_layout_kamada_kawai(const igraph_t *graph, igraph_matrix_t *res,
  * graph.
  */
 
-int igraph_layout_kamada_kawai_3d(const igraph_t *graph, igraph_matrix_t *res,
+igraph_error_t igraph_layout_kamada_kawai_3d(const igraph_t *graph, igraph_matrix_t *res,
                                   igraph_bool_t use_seed, igraph_integer_t maxiter,
                                   igraph_real_t epsilon, igraph_real_t kkconst,
                                   const igraph_vector_t *weights,
@@ -484,21 +491,19 @@ int igraph_layout_kamada_kawai_3d(const igraph_t *graph, igraph_matrix_t *res,
     }
 
     if (no_nodes <= 1) {
-        return 0;
+        return IGRAPH_SUCCESS;
     }
 
     IGRAPH_MATRIX_INIT_FINALLY(&dij, no_nodes, no_nodes);
     IGRAPH_MATRIX_INIT_FINALLY(&kij, no_nodes, no_nodes);
     IGRAPH_MATRIX_INIT_FINALLY(&lij, no_nodes, no_nodes);
-
-    IGRAPH_CHECK(igraph_shortest_paths_dijkstra(graph, &dij, igraph_vss_all(),
-                 igraph_vss_all(), weights,
-                 IGRAPH_ALL));
+    IGRAPH_CHECK(igraph_distances_dijkstra(graph, &dij, igraph_vss_all(),
+                 igraph_vss_all(), weights, IGRAPH_ALL));
 
     max_dij = 0.0;
     for (i = 0; i < no_nodes; i++) {
         for (j = i + 1; j < no_nodes; j++) {
-            if (!igraph_finite(MATRIX(dij, i, j))) {
+            if (!isfinite(MATRIX(dij, i, j))) {
                 continue;
             }
             if (MATRIX(dij, i, j) > max_dij) {
@@ -693,5 +698,5 @@ int igraph_layout_kamada_kawai_3d(const igraph_t *graph, igraph_matrix_t *res,
     igraph_matrix_destroy(&dij);
     IGRAPH_FINALLY_CLEAN(6);
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }

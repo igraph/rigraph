@@ -46,21 +46,21 @@
 #include "pottsmodel_2.h"
 
 #include "igraph_community.h"
-#include "igraph_error.h"
-#include "igraph_random.h"
-#include "core/math.h"
-#include "igraph_interface.h"
 #include "igraph_components.h"
+#include "igraph_error.h"
+#include "igraph_interface.h"
+#include "igraph_random.h"
+
 #include "core/interruption.h"
 #include "core/exceptions.h"
 
-static int igraph_i_community_spinglass_orig(
+static igraph_error_t igraph_i_community_spinglass_orig(
         const igraph_t *graph,
         const igraph_vector_t *weights,
         igraph_real_t *modularity,
         igraph_real_t *temperature,
-        igraph_vector_t *membership,
-        igraph_vector_t *csize,
+        igraph_vector_int_t *membership,
+        igraph_vector_int_t *csize,
         igraph_integer_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
@@ -69,13 +69,13 @@ static int igraph_i_community_spinglass_orig(
         igraph_spincomm_update_t update_rule,
         igraph_real_t gamma);
 
-static int igraph_i_community_spinglass_negative(
+static igraph_error_t igraph_i_community_spinglass_negative(
         const igraph_t *graph,
         const igraph_vector_t *weights,
         igraph_real_t *modularity,
         igraph_real_t *temperature,
-        igraph_vector_t *membership,
-        igraph_vector_t *csize,
+        igraph_vector_int_t *membership,
+        igraph_vector_int_t *csize,
         igraph_integer_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
@@ -90,7 +90,7 @@ static int igraph_i_community_spinglass_negative(
 
 /**
  * \function igraph_community_spinglass
- * \brief Community detection based on statistical mechanics
+ * \brief Community detection based on statistical mechanics.
  *
  * This function implements the community structure detection
  * algorithm proposed by Joerg Reichardt and Stefan Bornholdt.
@@ -104,11 +104,11 @@ static int igraph_i_community_spinglass_negative(
  * with positive and negative links, http://arxiv.org/abs/0811.2329 .
  *
  * \param graph The input graph, it may be directed but the direction
- *     of the edges is not used in the algorithm.
+ *     of the edges is ignored by the algorithm.
  * \param weights The vector giving the edge weights, it may be \c NULL,
  *     in which case all edges are weighted equally. The edge weights
  *     must be positive unless using the \c IGRAPH_SPINCOMM_IMP_NEG
- *     implementation. This condition is not verified by the function.
+ *     implementation.
  * \param modularity Pointer to a real number, if not \c NULL then the
  *     modularity score of the solution will be stored here. This is the
  *     gereralized modularity that simplifies to the one defined in
@@ -126,20 +126,17 @@ static int igraph_i_community_spinglass_negative(
  *     NULL then the sizes of the clusters will stored here in cluster
  *     number order. The vector will be resized as needed.
  * \param spins Integer giving the number of spins, i.e. the maximum
- *     number of clusters. Usually it is not a program to give a high
- *     number here, the default was 25 in the original code. Even if
- *     the number of spins is high the number of clusters in the
- *     result might be small.
+ *     number of clusters. Even if the number of spins is high the number of
+ *     clusters in the result might be small.
  * \param parupdate A logical constant, whether to update all spins in
- *     parallel. The default for this argument was \c FALSE (i.e. 0) in
- *     the original code. It is not implemented in the \c
- *     IGRAPH_SPINCOMM_INP_NEG implementation.
- * \param starttemp Real number, the temperature at the start. The
- *     value of this argument was 1.0 in the original code.
- * \param stoptemp Real number, the algorithm stops at this
- *     temperature. The default was 0.01 in the original code.
+ *     parallel. It is not implemented in the \c IGRAPH_SPINCOMM_INP_NEG
+ *     implementation.
+ * \param starttemp Real number, the temperature at the start. A reasonable
+ *     default is 1.0.
+ * \param stoptemp Real number, the algorithm stops at this temperature. A
+ *     reasonable default is 0.01.
  * \param coolfact Real number, the cooling factor for the simulated
- *     annealing. The default was 0.99 in the original code.
+ *     annealing. A reasonable default is 0.99.
  * \param update_rule The type of the update rule. Possible values: \c
  *     IGRAPH_SPINCOMM_UPDATE_SIMPLE and \c
  *     IGRAPH_SPINCOMM_UPDATE_CONFIG. Basically this parameter defines
@@ -149,29 +146,20 @@ static int igraph_i_community_spinglass_negative(
  *     configuration model is used. The configuration means that the
  *     baseline for the clustering is a random graph with the same
  *     degree distribution as the input graph.
- * \param gamma Real number. The gamma parameter of the
- *     algorithm. This defines the weight of the missing and existing
- *     links in the quality function for the clustering. The default
- *     value in the original code was 1.0, which is equal weight to
- *     missing and existing edges. Smaller values make the existing
- *     links contibute more to the energy function which is minimized
- *     in the algorithm. Bigger values make the missing links more
- *     important. (If my understanding is correct.)
+ * \param gamma Real number. The gamma parameter of the algorithm,
+ *     acting as a resolution parameter. Smaller values typically lead to
+ *     larger clusters, larger values typically lead to smaller clusters.
  * \param implementation Constant, chooses between the two
  *     implementations of the spin-glass algorithm that are included
  *     in igraph. \c IGRAPH_SPINCOMM_IMP_ORIG selects the original
  *     implementation, this is faster, \c IGRAPH_SPINCOMM_INP_NEG selects
- *     a new implementation by Vincent Traag that allows negative edge
- *     weights.
- * \param gamma_minus Real number. Parameter for the \c
- *     IGRAPH_SPINCOMM_IMP_NEG implementation. This
- *     specifies the balance between the importance of present and
- *     non-present negative weighted edges in a community. Smaller values of
- *     \p gamma_minus lead to communities with lesser
- *     negative intra-connectivity.
- *     If this argument is set to zero, the algorithm reduces to a graph
- *     coloring algorithm, using the number of spins as the number of
- *     colors.
+ *     an implementation that allows negative edge weights.
+ * \param gamma_minus Real number. Parameter for the \c IGRAPH_SPINCOMM_IMP_NEG
+ *     implementation. This acts as a resolution parameter for the negative part
+ *     of the network. Smaller values of \p gamma_minus leads to fewer negative
+ *     edges within clusters. If this argument is set to zero, the algorithm
+ *     reduces to a graph coloring algorithm when all edges have negative
+ *     weights, using the number of spins as the number of colors.
  * \return Error code.
  *
  * \sa igraph_community_spinglass_single() for calculating the community
@@ -181,12 +169,12 @@ static int igraph_i_community_spinglass_negative(
  *
  */
 
-int igraph_community_spinglass(const igraph_t *graph,
+igraph_error_t igraph_community_spinglass(const igraph_t *graph,
                                const igraph_vector_t *weights,
                                igraph_real_t *modularity,
                                igraph_real_t *temperature,
-                               igraph_vector_t *membership,
-                               igraph_vector_t *csize,
+                               igraph_vector_int_t *membership,
+                               igraph_vector_int_t *csize,
                                igraph_integer_t spins,
                                igraph_bool_t parupdate,
                                igraph_real_t starttemp,
@@ -194,11 +182,7 @@ int igraph_community_spinglass(const igraph_t *graph,
                                igraph_real_t coolfact,
                                igraph_spincomm_update_t update_rule,
                                igraph_real_t gamma,
-                               /* the rest is for the NegSpin implementation */
                                igraph_spinglass_implementation_t implementation,
-                               /*                 igraph_matrix_t *adhesion, */
-                               /*                 igraph_matrix_t *normalised_adhesion, */
-                               /*                 igraph_real_t *polarization, */
                                igraph_real_t gamma_minus) {
 
     IGRAPH_HANDLE_EXCEPTIONS(
@@ -216,8 +200,6 @@ int igraph_community_spinglass(const igraph_t *graph,
                     spins, parupdate, starttemp,
                     stoptemp, coolfact,
                     update_rule, gamma,
-                    /*                       adhesion, normalised_adhesion, */
-                    /*                       polarization, */
                     gamma_minus);
             break;
         default:
@@ -227,13 +209,13 @@ int igraph_community_spinglass(const igraph_t *graph,
     );
 }
 
-static int igraph_i_community_spinglass_orig(
+static igraph_error_t igraph_i_community_spinglass_orig(
         const igraph_t *graph,
         const igraph_vector_t *weights,
         igraph_real_t *modularity,
         igraph_real_t *temperature,
-        igraph_vector_t *membership,
-        igraph_vector_t *csize,
+        igraph_vector_int_t *membership,
+        igraph_vector_int_t *csize,
         igraph_integer_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
@@ -242,9 +224,9 @@ static int igraph_i_community_spinglass_orig(
         igraph_spincomm_update_t update_rule,
         igraph_real_t gamma) {
 
-    long int no_of_nodes = igraph_vcount(graph);
+    igraph_integer_t no_of_nodes = igraph_vcount(graph);
     unsigned long changes, runs;
-    igraph_bool_t use_weights = 0;
+    igraph_bool_t use_weights = false;
     bool zeroT;
     double kT, acc, prob;
 
@@ -262,6 +244,9 @@ static int igraph_i_community_spinglass_orig(
             IGRAPH_ERROR("Invalid weight vector length", IGRAPH_EINVAL);
         }
         use_weights = 1;
+        if (igraph_vector_min(weights) < 0) {
+            IGRAPH_ERROR("Weights must not be negative when using the original implementation of spinglass communities. Select the implementation meant for negative weights.", IGRAPH_EINVAL);
+        }
     }
     if (coolfact < 0 || coolfact >= 1.0) {
         IGRAPH_ERROR("Invalid cooling factor", IGRAPH_EINVAL);
@@ -278,8 +263,8 @@ static int igraph_i_community_spinglass_orig(
        null and singleton graphs, so we catch them here. */
     if (no_of_nodes < 2) {
         if (membership) {
-            IGRAPH_CHECK(igraph_vector_resize(membership, no_of_nodes));
-            igraph_vector_fill(membership, 0);
+            IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
+            igraph_vector_int_fill(membership, 0);
         }
         if (modularity) {
             IGRAPH_CHECK(igraph_modularity(graph, membership, 0, 1, igraph_is_directed(graph), modularity));
@@ -289,8 +274,8 @@ static int igraph_i_community_spinglass_orig(
         }
         if (csize) {
             /* 0 clusters for 0 nodes, 1 cluster for 1 node */
-            IGRAPH_CHECK(igraph_vector_resize(csize, no_of_nodes));
-            igraph_vector_fill(csize, 1);
+            IGRAPH_CHECK(igraph_vector_int_resize(csize, no_of_nodes));
+            igraph_vector_int_fill(csize, 1);
         }
         return IGRAPH_SUCCESS;
     }
@@ -367,12 +352,12 @@ static int igraph_i_community_spinglass_orig(
 
     RNG_END();
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }
 
 /**
  * \function igraph_community_spinglass_single
- * \brief Community of a single node based on statistical mechanics
+ * \brief Community of a single node based on statistical mechanics.
  *
  * This function implements the community structure detection
  * algorithm proposed by Joerg Reichardt and Stefan Bornholdt. It is
@@ -388,10 +373,10 @@ static int igraph_i_community_spinglass_orig(
  * \param weights Pointer to a vector with the weights of the edges.
  *    Alternatively \c NULL can be supplied to have the same weight
  *    for every edge.
- * \param vertex The vertex id of the vertex of which ths community is
+ * \param vertex The vertex ID of the vertex of which ths community is
  *    calculated.
  * \param community Pointer to an initialized vector, the result, the
- *    ids of the vertices in the community of the input vertex will be
+ *    IDs of the vertices in the community of the input vertex will be
  *    stored here. The vector will be resized as needed.
  * \param cohesion Pointer to a real variable, if not \c NULL the
  *     cohesion index of the community will be stored here.
@@ -430,10 +415,10 @@ static int igraph_i_community_spinglass_orig(
  * Time complexity: TODO.
  */
 
-int igraph_community_spinglass_single(const igraph_t *graph,
+igraph_error_t igraph_community_spinglass_single(const igraph_t *graph,
                                       const igraph_vector_t *weights,
                                       igraph_integer_t vertex,
-                                      igraph_vector_t *community,
+                                      igraph_vector_int_t *community,
                                       igraph_real_t *cohesion,
                                       igraph_real_t *adhesion,
                                       igraph_integer_t *inner_links,
@@ -442,7 +427,7 @@ int igraph_community_spinglass_single(const igraph_t *graph,
                                       igraph_spincomm_update_t update_rule,
                                       igraph_real_t gamma) {
     IGRAPH_HANDLE_EXCEPTIONS(
-        igraph_bool_t use_weights = 0;
+        igraph_bool_t use_weights = false;
         double prob;
         char startnode[255];
 
@@ -465,7 +450,7 @@ int igraph_community_spinglass_single(const igraph_t *graph,
             IGRAPH_ERROR("Invalid gamme value", IGRAPH_EINVAL);
         }
         if (vertex < 0 || vertex > igraph_vcount(graph)) {
-            IGRAPH_ERROR("Invalid vertex id", IGRAPH_EINVAL);
+            IGRAPH_ERROR("Invalid vertex ID", IGRAPH_EINVAL);
         }
 
         /* Check whether we have a single component */
@@ -493,23 +478,23 @@ int igraph_community_spinglass_single(const igraph_t *graph,
         /* the initial conf is needed, because otherwise,
            the degree of the nodes is not in the weight property, stupid!!! */
         pm.assign_initial_conf(-1);
-        snprintf(startnode, 255, "%li", (long int)vertex + 1);
+        snprintf(startnode, 255, "%" IGRAPH_PRId "", vertex + 1);
         pm.FindCommunityFromStart(gamma, prob, startnode, community,
                                    cohesion, adhesion, inner_links, outer_links);
 
         RNG_END();
     );
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }
 
-static int igraph_i_community_spinglass_negative(
+static igraph_error_t igraph_i_community_spinglass_negative(
         const igraph_t *graph,
         const igraph_vector_t *weights,
         igraph_real_t *modularity,
         igraph_real_t *temperature,
-        igraph_vector_t *membership,
-        igraph_vector_t *csize,
+        igraph_vector_int_t *membership,
+        igraph_vector_int_t *csize,
         igraph_integer_t spins,
         igraph_bool_t parupdate,
         igraph_real_t starttemp,
@@ -522,9 +507,9 @@ static int igraph_i_community_spinglass_negative(
         /* igraph_real_t *polarization, */
         igraph_real_t gamma_minus) {
 
-    long int no_of_nodes = igraph_vcount(graph);
+    igraph_integer_t no_of_nodes = igraph_vcount(graph);
     unsigned long changes, runs;
-    igraph_bool_t use_weights = 0;
+    igraph_bool_t use_weights = false;
     bool zeroT;
     double kT, acc;
     igraph_real_t d_n;
@@ -565,8 +550,8 @@ static int igraph_i_community_spinglass_negative(
        null and singleton graphs, so we catch them here. */
     if (no_of_nodes < 2) {
         if (membership) {
-            IGRAPH_CHECK(igraph_vector_resize(membership, no_of_nodes));
-            igraph_vector_fill(membership, 0);
+            IGRAPH_CHECK(igraph_vector_int_resize(membership, no_of_nodes));
+            igraph_vector_int_fill(membership, 0);
         }
         if (modularity) {
             IGRAPH_CHECK(igraph_modularity(graph, membership, 0, 1, igraph_is_directed(graph), modularity));
@@ -576,8 +561,8 @@ static int igraph_i_community_spinglass_negative(
         }
         if (csize) {
             /* 0 clusters for 0 nodes, 1 cluster for 1 node */
-            IGRAPH_CHECK(igraph_vector_resize(csize, no_of_nodes));
-            igraph_vector_fill(csize, 1);
+            IGRAPH_CHECK(igraph_vector_int_resize(csize, no_of_nodes));
+            igraph_vector_int_fill(csize, 1);
         }
         return IGRAPH_SUCCESS;
     }
@@ -589,7 +574,7 @@ static int igraph_i_community_spinglass_negative(
         IGRAPH_ERROR("Cannot work with unconnected graph", IGRAPH_EINVAL);
     }
 
-    if (weights) {
+    if (weights && igraph_vector_size(weights) > 0) {
         igraph_vector_minmax(weights, &d_n, &d_p);
     } else {
         d_n = d_p = 1;
@@ -660,5 +645,5 @@ static int igraph_i_community_spinglass_negative(
 
     RNG_END();
 
-    return 0;
+    return IGRAPH_SUCCESS;
 }

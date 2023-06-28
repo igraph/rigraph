@@ -55,17 +55,21 @@
  *
  * \example examples/simple/igraph_grg_game.c
  */
-int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
+igraph_error_t igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
                     igraph_real_t radius, igraph_bool_t torus,
                     igraph_vector_t *x, igraph_vector_t *y) {
 
-    long int i;
-    igraph_vector_t myx, myy, *xx = &myx, *yy = &myy, edges;
+    igraph_integer_t i;
+    igraph_vector_t myx, myy, *xx = &myx, *yy = &myy;
+    igraph_vector_int_t edges;
     igraph_real_t r2;
 
     if (nodes < 0) {
         IGRAPH_ERROR("Number of vertices must not be negative.", IGRAPH_EINVAL);
     }
+
+    IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, 0);
+    IGRAPH_CHECK(igraph_vector_int_reserve(&edges, nodes));
 
     /* since we only connect nodes strictly closer than radius,
      * radius < 0 is equivalent to radius == 0 */
@@ -73,9 +77,6 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
         radius = 0;
     }
     r2 = radius*radius;
-
-    IGRAPH_VECTOR_INIT_FINALLY(&edges, 0);
-    IGRAPH_CHECK(igraph_vector_reserve(&edges, nodes));
 
     if (x) {
         xx = x;
@@ -105,7 +106,7 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
         for (i = 0; i < nodes; i++) {
             igraph_real_t xx1 = VECTOR(*xx)[i];
             igraph_real_t yy1 = VECTOR(*yy)[i];
-            long int j = i + 1;
+            igraph_integer_t j = i + 1;
             igraph_real_t dx, dy;
 
             IGRAPH_ALLOW_INTERRUPTION();
@@ -114,8 +115,8 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
             while ( j < nodes && (dx = VECTOR(*xx)[j] - xx1) < radius) {
                 dy = VECTOR(*yy)[j] - yy1;
                 if (dx * dx + dy * dy < r2) {
-                    IGRAPH_CHECK(igraph_vector_push_back(&edges, i));
-                    IGRAPH_CHECK(igraph_vector_push_back(&edges, j));
+                    IGRAPH_CHECK(igraph_vector_int_push_back(&edges, i));
+                    IGRAPH_CHECK(igraph_vector_int_push_back(&edges, j));
                 }
                 j++;
             }
@@ -124,7 +125,7 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
         for (i = 0; i < nodes; i++) {
             igraph_real_t xx1 = VECTOR(*xx)[i];
             igraph_real_t yy1 = VECTOR(*yy)[i];
-            long int j = i + 1;
+            igraph_integer_t j = i + 1;
             igraph_real_t dx, dy;
 
             IGRAPH_ALLOW_INTERRUPTION();
@@ -139,8 +140,8 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
                     dy = 1 - dy;
                 }
                 if (dx * dx + dy * dy < r2) {
-                    IGRAPH_CHECK(igraph_vector_push_back(&edges, i));
-                    IGRAPH_CHECK(igraph_vector_push_back(&edges, j));
+                    IGRAPH_CHECK(igraph_vector_int_push_back(&edges, i));
+                    IGRAPH_CHECK(igraph_vector_int_push_back(&edges, j));
                 }
                 j++;
             }
@@ -153,8 +154,8 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
                         dy = 1 - dy;
                     }
                     if (dx * dx + dy * dy < r2) {
-                        IGRAPH_CHECK(igraph_vector_push_back(&edges, i));
-                        IGRAPH_CHECK(igraph_vector_push_back(&edges, j));
+                        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, i));
+                        IGRAPH_CHECK(igraph_vector_int_push_back(&edges, j));
                     }
                     j++;
                 }
@@ -172,7 +173,7 @@ int igraph_grg_game(igraph_t *graph, igraph_integer_t nodes,
     }
 
     IGRAPH_CHECK(igraph_create(graph, &edges, nodes, IGRAPH_UNDIRECTED));
-    igraph_vector_destroy(&edges);
+    igraph_vector_int_destroy(&edges);
     IGRAPH_FINALLY_CLEAN(1);
 
     return IGRAPH_SUCCESS;

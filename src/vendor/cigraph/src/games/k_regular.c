@@ -23,8 +23,6 @@
 
 #include "igraph_games.h"
 
-#include "igraph_interface.h"
-
 /**
  * \ingroup generators
  * \function igraph_k_regular_game
@@ -36,10 +34,11 @@
  *
  * </para><para>
  * Currently, this game simply uses \ref igraph_degree_sequence_game with
- * the \c SIMPLE_NO_MULTIPLE method and appropriately constructed degree sequences.
- * Thefore, it does not sample uniformly: while it can generate all k-regular graphs
- * with the given number of vertices, it does not generate each one with the same
- * probability.
+ * the \c IGRAPH_DEGSEQ_CONFIGURATION or the \c IGRAPH_DEGSEQ_FAST_SIMPLE
+ * method and appropriately constructed degree sequences.
+ * Thefore, it does not sample uniformly: while it can generate all k-regular
+ * graphs with the given number of vertices, it does not generate each one with
+ * the same probability.
  *
  * \param graph        Pointer to an uninitialized graph object.
  * \param no_of_nodes  The number of nodes in the generated graph.
@@ -57,28 +56,29 @@
  *
  * Time complexity: O(|V|+|E|) if \c multiple is true, otherwise not known.
  */
-int igraph_k_regular_game(igraph_t *graph,
+igraph_error_t igraph_k_regular_game(igraph_t *graph,
                           igraph_integer_t no_of_nodes, igraph_integer_t k,
                           igraph_bool_t directed, igraph_bool_t multiple) {
-    igraph_vector_t degseq;
-    igraph_degseq_t mode = multiple ? IGRAPH_DEGSEQ_SIMPLE : IGRAPH_DEGSEQ_SIMPLE_NO_MULTIPLE;
+    igraph_vector_int_t degseq;
+    igraph_degseq_t mode = multiple ? IGRAPH_DEGSEQ_CONFIGURATION : IGRAPH_DEGSEQ_FAST_HEUR_SIMPLE;
 
     /* Note to self: we are not using IGRAPH_DEGSEQ_VL when multiple = false
-     * because the VL method is not really good at generating k-regular graphs.
-     * Actually, that's why we have added SIMPLE_NO_MULTIPLE. */
+     * because the VL method is not really good at generating k-regular graphs,
+     * and it produces only connected graphs.
+     * Actually, that's why we have added FAST_HEUR_SIMPLE. */
 
     if (no_of_nodes < 0) {
-        IGRAPH_ERROR("number of nodes must be non-negative", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Number of nodes must be non-negative.", IGRAPH_EINVAL);
     }
     if (k < 0) {
-        IGRAPH_ERROR("degree must be non-negative", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Degree must be non-negative.", IGRAPH_EINVAL);
     }
 
-    IGRAPH_VECTOR_INIT_FINALLY(&degseq, no_of_nodes);
-    igraph_vector_fill(&degseq, k);
+    IGRAPH_VECTOR_INT_INIT_FINALLY(&degseq, no_of_nodes);
+    igraph_vector_int_fill(&degseq, k);
     IGRAPH_CHECK(igraph_degree_sequence_game(graph, &degseq, directed ? &degseq : 0, mode));
 
-    igraph_vector_destroy(&degseq);
+    igraph_vector_int_destroy(&degseq);
     IGRAPH_FINALLY_CLEAN(1);
 
     return IGRAPH_SUCCESS;
