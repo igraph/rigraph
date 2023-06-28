@@ -3070,7 +3070,7 @@ void R_igraph_set_from(SEXP rgraph, const igraph_t *graph) {
   SET_VECTOR_ELT(rgraph, igraph_t_idx_from, R_new_altrep(R_igraph_altrep_from_class, R_igraph_graph_env(rgraph), R_NilValue));
 }
 
-void R_igraph_get_from(SEXP graph, igraph_vector_t* from) {
+void R_igraph_get_from(SEXP graph, igraph_vector_int_t* from) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *from = pgraph->from;
 }
@@ -3079,27 +3079,27 @@ void R_igraph_set_to(SEXP rgraph, const igraph_t *graph) {
   SET_VECTOR_ELT(rgraph, igraph_t_idx_to, R_new_altrep(R_igraph_altrep_to_class, R_igraph_graph_env(rgraph), R_NilValue));
 }
 
-void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
+void R_igraph_get_to(SEXP graph, igraph_vector_int_t* to) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *to = pgraph->to;
 }
 
-void R_igraph_get_oi(SEXP graph, igraph_vector_t* oi) {
+void R_igraph_get_oi(SEXP graph, igraph_vector_int_t* oi) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *oi = pgraph->oi;
 }
 
-void R_igraph_get_ii(SEXP graph, igraph_vector_t* ii) {
+void R_igraph_get_ii(SEXP graph, igraph_vector_int_t* ii) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *ii = pgraph->ii;
 }
 
-void R_igraph_get_os(SEXP graph, igraph_vector_t* os) {
+void R_igraph_get_os(SEXP graph, igraph_vector_int_t* os) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *os = pgraph->os;
 }
 
-void R_igraph_get_is(SEXP graph, igraph_vector_t* is) {
+void R_igraph_get_is(SEXP graph, igraph_vector_int_t* is) {
   igraph_t *pgraph=R_igraph_get_pointer(graph);
   *is = pgraph->is;
 }
@@ -3732,7 +3732,7 @@ int R_igraph_SEXP_to_array3(SEXP rval, igraph_array3_t *a) {
 }
 
 int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
-  igraph_vector_init_copy(&a->data, REAL(rval), GET_LENGTH(rval));
+  igraph_vector_init_array(&a->data, REAL(rval), GET_LENGTH(rval));
   a->n1=INTEGER(GET_DIM(rval))[0];
   a->n2=INTEGER(GET_DIM(rval))[1];
   a->n3=INTEGER(GET_DIM(rval))[2];
@@ -3765,24 +3765,24 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   res->n=R_igraph_get_n(graph);
   res->directed=R_igraph_get_directed(graph);
 
-  igraph_vector_t from;
+  igraph_vector_int_t from;
   R_igraph_get_from(graph, &from);
-  igraph_vector_copy(&res->from, &from);
-  igraph_vector_t to;
+  igraph_vector_int_init_copy(&res->from, &from);
+  igraph_vector_int_t to;
   R_igraph_get_to(graph, &to);
-  igraph_vector_copy(&res->to, &to);
-  igraph_vector_t oi;
+  igraph_vector_int_init_copy(&res->to, &to);
+  igraph_vector_int_t oi;
   R_igraph_get_oi(graph, &oi);
-  igraph_vector_copy(&res->oi, &oi);
-  igraph_vector_t ii;
+  igraph_vector_int_init_copy(&res->oi, &oi);
+  igraph_vector_int_t ii;
   R_igraph_get_ii(graph, &ii);
-  igraph_vector_copy(&res->ii, &ii);
-  igraph_vector_t os;
+  igraph_vector_int_init_copy(&res->ii, &ii);
+  igraph_vector_int_t os;
   R_igraph_get_os(graph, &os);
-  igraph_vector_copy(&res->os, &os);
-  igraph_vector_t is;
+  igraph_vector_int_init_copy(&res->os, &os);
+  igraph_vector_int_t is;
   R_igraph_get_is(graph, &is);
-  igraph_vector_copy(&res->is, &is);
+  igraph_vector_int_init_copy(&res->is, &is);
 
   /* attributes */
   REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects */
@@ -4027,16 +4027,16 @@ SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info) {
 
 SEXP R_igraph_copy_from(SEXP graph)
 {
-  igraph_vector_t from;
+  igraph_vector_int_t from;
   R_igraph_get_from(graph, &from);
-  return R_igraph_vector_to_SEXP(&from);
+  return R_igraph_vector_int_to_SEXP(&from);
 }
 
 SEXP R_igraph_copy_to(SEXP graph)
 {
-  igraph_vector_t to;
+  igraph_vector_int_t to;
   R_igraph_get_to(graph, &to);
-  return R_igraph_vector_to_SEXP(&to);
+  return R_igraph_vector_int_to_SEXP(&to);
 }
 
 SEXP R_igraph_copy_env(SEXP graph)
