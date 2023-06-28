@@ -5845,7 +5845,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   igraph_connectedness_t mode = (igraph_connectedness_t) Rf_asInteger(pmode);
   igraph_integer_t maxcompno=(igraph_integer_t) REAL(pmaxcompno)[0];
   igraph_integer_t minelements=(igraph_integer_t) REAL(pminelements)[0];
-  igraph_vector_ptr_t comps;
+  igraph_graph_list_t comps;
   SEXP result;
   long int i;
 
@@ -5854,16 +5854,11 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&comps, 0);
-  IGRAPH_FINALLY(igraph_vector_ptr_destroy, &comps);
+  igraph_graph_list_init(&comps, 0);
+  IGRAPH_FINALLY(igraph_graph_list_destroy, &comps);
   IGRAPH_R_CHECK(igraph_decompose(&g, &comps, mode, maxcompno, minelements));
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&comps)));
-  for (i=0; i<igraph_vector_ptr_size(&comps); i++) {
-    SET_VECTOR_ELT(result, i, R_igraph_to_SEXP(VECTOR(comps)[i]));
-    IGRAPH_I_DESTROY((igraph_t*)VECTOR(comps)[i]);
-    igraph_free(VECTOR(comps)[i]);
-  }
-  igraph_vector_ptr_destroy(&comps);
+  PROTECT(result=R_igraph_graphlist_to_SEXP(&comps));
+  igraph_graph_list_destroy(&comps);
 
   UNPROTECT(1);
   IGRAPH_FINALLY_CLEAN(2);
