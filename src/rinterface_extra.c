@@ -75,7 +75,7 @@ SEXP R_igraph_0orvector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
 void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_matrixlist_destroy(igraph_vector_ptr_t *ptr);
-SEXP R_igraph_graphlist_to_SEXP(const igraph_vector_ptr_t *ptr);
+SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list);
 void R_igraph_graphlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg);
 SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit);
@@ -3276,13 +3276,13 @@ void R_igraph_matrixlist_destroy(igraph_vector_ptr_t *ptr) {
   igraph_vector_ptr_destroy(ptr);
 }
 
-SEXP R_igraph_graphlist_to_SEXP(const igraph_vector_ptr_t *ptr) {
+SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
   SEXP result;
-  long int i, n=igraph_vector_ptr_size(ptr);
+  long int i, n=igraph_graph_list_size(list);
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_t *g=VECTOR(*ptr)[i];
+    igraph_t *g=igraph_graph_list_get_ptr(list, i);
     SET_VECTOR_ELT(result, i, R_igraph_to_SEXP(g));
   }
   UNPROTECT(1);
@@ -7172,7 +7172,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_t vids;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_vector_ptr_t res;
+  igraph_graph_list_t res;
   long int i;
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
@@ -7183,16 +7183,10 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
 
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids);
-  igraph_vector_ptr_init(&res, 0);
+  igraph_graph_list_init(&res, 0);
   IGRAPH_R_CHECK(igraph_neighborhood_graphs(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&res)));
-  for (i=0; i<igraph_vector_ptr_size(&res); i++) {
-    igraph_t *g=VECTOR(res)[i];
-    SET_VECTOR_ELT(result, i, R_igraph_to_SEXP(g));
-    IGRAPH_I_DESTROY(g);
-    igraph_free(g);
-  }
-  igraph_vector_ptr_destroy(&res);
+  PROTECT(result=R_igraph_graphlist_to_SEXP(&res));
+  igraph_graph_list_destroy(&res);
   igraph_vs_destroy(&vids);
 
   UNPROTECT(1);
