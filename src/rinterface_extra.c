@@ -23,6 +23,7 @@
 
 #include "igraph.h"
 #include "igraph_neighborhood.h"
+#include "vendor/cigraph/src/graph/internal.h"
 
 #include "config.h"
 
@@ -7783,18 +7784,18 @@ SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode, SEXP ploops) {
   SEXP result;
   long int i;
   long int no_of_nodes;
-  igraph_vector_t neis;
+  igraph_vector_int_t neis;
   igraph_integer_t loops=(igraph_integer_t) REAL(ploops)[0];
 
   R_SEXP_to_igraph(graph, &g);
   no_of_nodes=igraph_vcount(&g);
-  igraph_vector_init(&neis, 0);
+  igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (i=0; i<no_of_nodes; i++) {
     igraph_i_incident(&g, &neis, (igraph_integer_t) i, (igraph_neimode_t) mode, (igraph_loops_t) loops);
-    SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(&neis));
+    SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(&neis));
   }
-  igraph_vector_destroy(&neis);
+  igraph_vector_int_destroy(&neis);
 
   UNPROTECT(1);
   return result;
@@ -8653,11 +8654,10 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   return(result);
 }
 
-int igraph_i_graphlets_project(const igraph_t *graph,
-                               const igraph_vector_t *weights,
-                               const igraph_vector_ptr_t *cliques,
-                               igraph_vector_t *Mu, igraph_bool_t startMu,
-                               int niter, int vid1);
+igraph_error_t igraph_i_graphlets_project(
+            const igraph_t *graph, const igraph_vector_t *weights,
+            const igraph_vector_int_list_t *cliques, igraph_vector_t *Mu, igraph_bool_t startMu,
+            igraph_integer_t niter, igraph_integer_t vid1);
 
 /*-------------------------------------------/
 / igraph_graphlets_project                   /
@@ -8668,7 +8668,7 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
   /* Declarations */
   igraph_t c_graph;
   igraph_vector_t c_weights;
-  igraph_vector_ptr_t c_cliques;
+  igraph_vector_int_list_t c_cliques;
   igraph_vector_t c_Mu;
   int c_niter;
 
@@ -8677,7 +8677,7 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(cliques)) { R_igraph_SEXP_to_vectorlist(cliques, &c_cliques); }
+  if (!Rf_isNull(cliques)) { R_igraph_SEXP_to_vector_int_list(cliques, &c_cliques); }
   if (0 != R_SEXP_to_vector_copy(Mu, &c_Mu)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
