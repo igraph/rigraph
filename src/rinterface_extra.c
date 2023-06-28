@@ -7428,22 +7428,15 @@ SEXP R_igraph_largest_independent_vertex_sets(SEXP graph) {
 
 SEXP R_igraph_maximal_independent_vertex_sets(SEXP graph) {
   igraph_t g;
-  igraph_vector_ptr_t ptrvec;
+  igraph_vector_int_list_t list;
   long int i;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  igraph_vector_ptr_init(&ptrvec,0);
-  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &ptrvec));
-  PROTECT(result=NEW_LIST(igraph_vector_ptr_size(&ptrvec)));
-  for (i=0; i<igraph_vector_ptr_size(&ptrvec); i++) {
-    igraph_vector_t *vec=VECTOR(ptrvec)[i];
-    SET_VECTOR_ELT(result, i, NEW_NUMERIC(igraph_vector_size(vec)));
-    igraph_vector_copy_to(vec, REAL(VECTOR_ELT(result, i)));
-    igraph_vector_destroy(vec);
-    igraph_free(vec);
-  }
-  igraph_vector_ptr_destroy(&ptrvec);
+  igraph_vector_int_list_init(&list,0);
+  IGRAPH_R_CHECK(igraph_maximal_independent_vertex_sets(&g, &list));
+  PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
+  igraph_vector_int_list_destroy(&list);
 
   UNPROTECT(1);
   return result;
