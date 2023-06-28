@@ -5116,19 +5116,21 @@ SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
 }
 
 SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
-                                 SEXP pattr, SEXP ploops) {
+                                 SEXP pweights, SEXP ploops) {
 
   igraph_t g;
   igraph_matrix_t adjm;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_vector_t weights;
   SEXP result;
-  const char *attr=CHAR(STRING_ELT(pattr, 0));
+
+  R_SEXP_to_vector(pweights, &weights);
 
   R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, attr, loops));
+  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
