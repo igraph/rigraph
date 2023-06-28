@@ -4261,15 +4261,15 @@ SEXP R_igraph_is_directed(SEXP graph) {
 SEXP R_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
 
   igraph_t g;
-  igraph_vector_t v;
+  igraph_vector_int_t v;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   SEXP result;
 
-  R_SEXP_to_vector(edges, &v);
+  R_SEXP_to_vector_int_copy(edges, &v);
   IGRAPH_R_CHECK(igraph_create(&g, &v, n, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
