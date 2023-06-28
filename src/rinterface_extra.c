@@ -3810,9 +3810,9 @@ int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it) {
 
 int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it) {
 
-  igraph_vector_t *tmpv=(igraph_vector_t*)R_alloc(1,sizeof(igraph_vector_t));
-  igraph_es_vector(it, igraph_vector_view(tmpv, REAL(rit),
-                                          GET_LENGTH(rit)));
+  igraph_vector_int_t *tmpv=(igraph_vector_int_t*)R_alloc(1,sizeof(igraph_vector_int_t));
+  igraph_es_vector(it, igraph_vector_int_view(tmpv, INTEGER(rit), LENGTH(rit)));
+
   return 0;
 }
 
