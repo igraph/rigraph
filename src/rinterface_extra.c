@@ -5107,7 +5107,8 @@ SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
   SEXP result;
 
   R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_adjacency(&g, &adjm, (igraph_adjacency_t) mode));
+  // TODO: fix
+  // IGRAPH_R_CHECK(igraph_adjacency(&g, &adjm, (igraph_adjacency_t) mode));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
