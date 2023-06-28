@@ -5256,17 +5256,16 @@ SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
 
 SEXP R_igraph_random_sample(SEXP plow, SEXP phigh, SEXP plength) {
 
-  igraph_vector_t res;
+  igraph_vector_int_t res;
   igraph_integer_t low=(igraph_integer_t) REAL(plow)[0];
   igraph_integer_t high=(igraph_integer_t) REAL(phigh)[0];
   igraph_integer_t length=(igraph_integer_t) REAL(plength)[0];
   SEXP result;
 
-  igraph_vector_init(&res, 0);
+  igraph_vector_int_init(&res, 0);
   IGRAPH_R_CHECK(igraph_random_sample(&res, low, high, length));
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&res)));
-  igraph_vector_copy_to(&res, REAL(result));
-  igraph_vector_destroy(&res);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&res);
 
   UNPROTECT(1);
   return result;
