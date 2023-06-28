@@ -7711,29 +7711,29 @@ SEXP R_igraph_community_to_membership(SEXP graph, SEXP pmerges,
                                       SEXP pcsize) {
   igraph_t g;
   igraph_integer_t nodes;
-  igraph_matrix_t merges;
+  igraph_matrix_int_t merges;
   igraph_integer_t steps=(igraph_integer_t) REAL(psteps)[0];
-  igraph_vector_t membership, *ppmembership=0;
-  igraph_vector_t csize, *ppcsize=0;
+  igraph_vector_int_t membership, *ppmembership=0;
+  igraph_vector_int_t csize, *ppcsize=0;
   SEXP result, names;
 
   R_SEXP_to_igraph(graph, &g);
   nodes=igraph_vcount(&g);
-  R_SEXP_to_matrix(pmerges, &merges);
+  R_SEXP_to_matrix_int(pmerges, &merges);
   if (LOGICAL(pmembership)[0]) {
     ppmembership=&membership;
-    igraph_vector_init(ppmembership, 0);
+    igraph_vector_int_init(ppmembership, 0);
   }
   if (LOGICAL(pcsize)[0]) {
     ppcsize=&csize;
-    igraph_vector_init(ppcsize, 0);
+    igraph_vector_int_init(ppcsize, 0);
   }
   IGRAPH_R_CHECK(igraph_community_to_membership(&merges, nodes, steps, ppmembership, ppcsize));
   PROTECT(result=NEW_LIST(2));
-  SET_VECTOR_ELT(result, 0, R_igraph_0orvector_to_SEXP(ppmembership));
-  if (ppmembership) { igraph_vector_destroy(ppmembership); }
-  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(ppcsize));
-  if (ppcsize) { igraph_vector_destroy(ppcsize); }
+  SET_VECTOR_ELT(result, 0, R_igraph_0orvector_int_to_SEXP(ppmembership));
+  if (ppmembership) { igraph_vector_int_destroy(ppmembership); }
+  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_int_to_SEXP(ppcsize));
+  if (ppcsize) { igraph_vector_int_destroy(ppcsize); }
   PROTECT(names=NEW_CHARACTER(2));
   SET_STRING_ELT(names, 0, Rf_mkChar("membership"));
   SET_STRING_ELT(names, 1, Rf_mkChar("csize"));
