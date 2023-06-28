@@ -6204,30 +6204,30 @@ SEXP R_igraph_compose(SEXP pleft, SEXP pright, SEXP pedgemaps) {
   igraph_t res;
   SEXP result, names;
   igraph_bool_t edgemaps=LOGICAL(pedgemaps)[0];
-  igraph_vector_t v_edgemap1, *my_edgemap1=edgemaps ? &v_edgemap1 : 0;
-  igraph_vector_t v_edgemap2, *my_edgemap2=edgemaps ? &v_edgemap2 : 0;
+  igraph_vector_int_t v_edgemap1, *my_edgemap1=edgemaps ? &v_edgemap1 : 0;
+  igraph_vector_int_t v_edgemap2, *my_edgemap2=edgemaps ? &v_edgemap2 : 0;
 
   R_SEXP_to_igraph(pleft, &left);
   R_SEXP_to_igraph(pright, &right);
   if (edgemaps) {
-    igraph_vector_init(my_edgemap1, 0);
-    IGRAPH_FINALLY(igraph_vector_destroy, my_edgemap1);
-    igraph_vector_init(my_edgemap2, 0);
-    IGRAPH_FINALLY(igraph_vector_destroy, my_edgemap2);
+    igraph_vector_int_init(my_edgemap1, 0);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, my_edgemap1);
+    igraph_vector_int_init(my_edgemap2, 0);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, my_edgemap2);
   }
   IGRAPH_R_CHECK(igraph_compose(&res, &left, &right, my_edgemap1, my_edgemap2));
   PROTECT(result=NEW_LIST(3));
   SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&res));
-  IGRAPH_I_DESTROY(&res);
-  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP(my_edgemap2));
+  igraph_destroy(&res);
+  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP(my_edgemap2));
   if (edgemaps) {
-    igraph_vector_destroy(my_edgemap2);
+    igraph_vector_int_destroy(my_edgemap2);
     IGRAPH_FINALLY_CLEAN(1);
   }
-  IGRAPH_I_DESTROY(&res);
-  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(my_edgemap1));
+  igraph_destroy(&res);
+  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_int_to_SEXP(my_edgemap1));
   if (edgemaps) {
-    igraph_vector_destroy(my_edgemap1);
+    igraph_vector_int_destroy(my_edgemap1);
     IGRAPH_FINALLY_CLEAN(1);
   }
   PROTECT(names=NEW_CHARACTER(3));
