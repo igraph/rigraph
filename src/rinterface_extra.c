@@ -5567,7 +5567,7 @@ SEXP R_igraph_write_graph_gml(SEXP graph, SEXP file, SEXP pid, SEXP pcreator) {
 #endif
   if (stream==0) { igraph_error("Cannot write edgelist", __FILE__, __LINE__,
                                 IGRAPH_EFILE); }
-  IGRAPH_R_CHECK(igraph_write_graph_gml(&g, stream, ppid, creator));
+  IGRAPH_R_CHECK(igraph_write_graph_gml(&g, stream, IGRAPH_WRITE_GML_DEFAULT_SW, ppid, creator));
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
