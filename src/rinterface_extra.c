@@ -4651,17 +4651,17 @@ SEXP R_igraph_recent_degree_game(SEXP pn, SEXP ppower, SEXP pwindow,
   igraph_real_t power=REAL(ppower)[0];
   igraph_integer_t window=(igraph_integer_t) REAL(pwindow)[0];
   igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_vector_t outseq;
+  igraph_vector_int_t outseq;
   igraph_bool_t outpref=LOGICAL(poutpref)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_real_t zero_appeal=REAL(pzero_appeal)[0];
   SEXP result;
 
-  R_SEXP_to_vector(poutseq, &outseq);
+  R_SEXP_to_vector_int_copy(poutseq, &outseq);
 
   IGRAPH_R_CHECK(igraph_recent_degree_game(&g, n, power, window, m, &outseq, outpref, zero_appeal, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
