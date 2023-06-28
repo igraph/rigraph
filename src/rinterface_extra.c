@@ -3677,7 +3677,7 @@ int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v) {
 }
 
 int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl) {
-  R_SEXP_to_vector_int(pakl, &akl->data);
+  R_SEXP_to_vector_int_copy(pakl, &akl->data);
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
   akl->ncol=INTEGER(GET_DIM(pakl))[1];
 
@@ -7502,22 +7502,21 @@ SEXP R_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
   return result;
 }
 
-
 SEXP R_igraph_citing_cited_type_game(SEXP pnodes, SEXP ptypes, SEXP ppref,
                                      SEXP pedges, SEXP pdirected) {
   igraph_t g;
   igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
   igraph_integer_t edges=(igraph_integer_t) REAL(pedges)[0];
-  igraph_vector_t types;
+  igraph_vector_int_t types;
   igraph_matrix_t pref;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   SEXP result;
 
-  R_SEXP_to_vector(ptypes, &types);
+  R_SEXP_to_vector_int_copy(ptypes, &types);
   R_SEXP_to_matrix(ppref, &pref);
   IGRAPH_R_CHECK(igraph_citing_cited_type_game(&g, nodes, &types, &pref, edges, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
