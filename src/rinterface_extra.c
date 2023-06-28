@@ -6429,16 +6429,16 @@ SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
                                       SEXP pmode, SEXP prootlevel, SEXP pcirc) {
 
   igraph_t g;
-  igraph_vector_t root;
+  igraph_vector_int_t root;
   igraph_matrix_t res;
   igraph_bool_t circ=LOGICAL(pcirc)[0];
   int mode=(int) REAL(pmode)[0];
-  igraph_vector_t rootlevel;
+  igraph_vector_int_t rootlevel;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  R_SEXP_to_vector(proot, &root);
-  R_SEXP_to_vector(prootlevel, &rootlevel);
+  R_SEXP_to_vector_int_copy(proot, &root);
+  R_SEXP_to_vector_int_copy(prootlevel, &rootlevel);
   igraph_matrix_init(&res, 0, 0);
   if (!circ) {
     IGRAPH_R_CHECK(igraph_layout_reingold_tilford(&g, &res, (igraph_neimode_t) mode, LENGTH(proot)==0 ? 0 : &root, &rootlevel));
