@@ -22,8 +22,7 @@
 */
 
 #include "igraph.h"
-#include "graph/attributes.h"
-#include "graph/neighbors.h"
+#include "igraph_neighborhood.h"
 
 #include "config.h"
 
@@ -106,7 +105,6 @@ int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
-int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v);
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);
@@ -116,7 +114,6 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb);
 SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info);
 int R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
 int R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);
-SEXP R_igraph_vector_long_to_SEXPp1(const igraph_vector_long_t *v);
 SEXP R_igraph_vector_int_list_to_SEXP_p1(const igraph_vector_int_list_t *list);
 SEXP R_igraph_0orvector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
@@ -2789,21 +2786,6 @@ SEXP R_igraph_vector_long_to_SEXP(const igraph_vector_long_t *v) {
   return result;
 }
 
-SEXP R_igraph_vector_long_to_SEXPp1(const igraph_vector_long_t *v) {
-  SEXP result;
-  long int i, n=igraph_vector_long_size(v);
-  double *rr;
-
-  PROTECT(result=NEW_NUMERIC(n));
-  rr=REAL(result);
-  for (i=0; i<n; i++) {
-    rr[i] = VECTOR(*v)[i]+1;
-  }
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_0orvector_bool_to_SEXP(const igraph_vector_bool_t *v) {
   SEXP result;
   if (v) {
@@ -3544,24 +3526,22 @@ int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
 int R_igraph_SEXP_to_0orvector_int_list(SEXP vectorlist,
                                    igraph_vector_int_list_t *list) {
   if (!Rf_isNull(vectorlist)) {
-    return R_igraph_SEXP_to_vector_int_list(vectorlist, ptr);
+    return R_igraph_SEXP_to_vector_int_list(vectorlist, list);
   }
   return 0;
 }
 
-int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_ptr_t *ptr) {
+int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list) {
   int length=GET_LENGTH(vectorlist);
   int i;
   igraph_vector_t *vecs;
-  igraph_vector_t **vecsptr;
 
   vecs = (igraph_vector_t *) R_alloc((size_t) length, sizeof(igraph_vector_t));
-  vecsptr = (igraph_vector_t **) R_alloc((size_t) length,
-                                         sizeof(igraph_vector_t*));
-  igraph_vector_ptr_view(ptr, (void**) vecsptr, length);
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
   for (i=0; i<length; i++) {
     igraph_vector_t *v=&vecs[i];
-    vecsptr[i] = v;
     SEXP el=VECTOR_ELT(vectorlist, i);
     igraph_vector_view(v, REAL(el), GET_LENGTH(el));
   }
@@ -3587,19 +3567,17 @@ int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
   return 0;
 }
 
-int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr) {
+int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list) {
   int length=GET_LENGTH(matrixlist);
   int i;
   igraph_matrix_t *vecs;
-  igraph_matrix_t **vecsptr;
 
   vecs = (igraph_matrix_t *) R_alloc((size_t) length, sizeof(igraph_matrix_t));
-  vecsptr = (igraph_matrix_t **) R_alloc((size_t) length,
-                                         sizeof(igraph_matrix_t*));
-  igraph_vector_ptr_view(ptr, (void**) vecsptr, length);
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
   for (i=0; i<length; i++) {
     igraph_matrix_t *v=&vecs[i];
-    vecsptr[i] = v;
     SEXP el=VECTOR_ELT(matrixlist, i);
     SEXP dim=GET_DIM(el);
     igraph_matrix_view(v, REAL(el), INTEGER(dim)[0], INTEGER(dim)[1]);
@@ -3608,11 +3586,13 @@ int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr) {
 }
 
 int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
+  long int length=GET_LENGTH(rval);
   long int i;
-  sv->len=GET_LENGTH(rval);
-  sv->data=(char**) R_alloc((size_t) (sv->len), sizeof(char*));
-  for (i=0; i<sv->len; i++) {
-    sv->data[i]=(char*) CHAR(STRING_ELT(rval, i));
+  sv->stor_begin=(char**) R_alloc((size_t) length, sizeof(char*));
+  sv->stor_end=sv->stor_begin+length;
+  sv->end=sv->stor_end;
+  for (i=0; i<igraph_strvector_size(sv); i++) {
+    sv->stor_begin[i]=(char*) CHAR(STRING_ELT(rval, i));
   }
 
   return 0;
@@ -3621,7 +3601,7 @@ int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv) {
 int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv) {
   long int i;
   igraph_strvector_init(sv, GET_LENGTH(rval));
-  for (i=0; i<sv->len; i++) {
+  for (i=0; i<igraph_strvector_size(sv); i++) {
     igraph_strvector_set(sv, i, CHAR(STRING_ELT(rval, i)));
   }
 
@@ -3636,7 +3616,7 @@ int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v) {
 }
 
 int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v) {
-  return igraph_vector_init_copy(v, REAL(sv), GET_LENGTH(sv));
+  return igraph_vector_init_array(v, REAL(sv), GET_LENGTH(sv));
 }
 
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v) {
@@ -3666,16 +3646,6 @@ int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   return 0;
 }
 
-int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v) {
-  long int i, n=GET_LENGTH(sv);
-  double *svv=REAL(sv);
-  igraph_vector_long_init(v, n);
-  for (i=0; i<n; i++) {
-    VECTOR(*v)[i] = (long int) svv[i];
-  }
-  return 0;
-}
-
 int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl) {
   R_SEXP_to_vector_int_copy(pakl, &akl->data);
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
@@ -3685,7 +3655,7 @@ int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl) {
 }
 
 int R_SEXP_to_igraph_matrix_copy(SEXP pakl, igraph_matrix_t *akl) {
-  igraph_vector_init_copy(&akl->data, REAL(pakl), GET_LENGTH(pakl));
+  igraph_vector_init_array(&akl->data, REAL(pakl), GET_LENGTH(pakl));
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
   akl->ncol=INTEGER(GET_DIM(pakl))[1];
 
@@ -3700,7 +3670,7 @@ int R_SEXP_to_vector_complex(SEXP pv, igraph_vector_complex_t *v) {
 }
 
 int R_SEXP_to_vector_complex_copy(SEXP pv, igraph_vector_complex_t *v) {
-  igraph_vector_complex_init_copy(v, (igraph_complex_t*) COMPLEX(pv),
+  igraph_vector_complex_init_array(v, (igraph_complex_t*) COMPLEX(pv),
                                   GET_LENGTH(pv));
   return 0;
 }
@@ -3713,7 +3683,7 @@ int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl) {
 }
 
 int R_SEXP_to_matrix_complex_copy(SEXP pakl, igraph_matrix_complex_t *akl) {
-  igraph_vector_complex_init_copy(&akl->data,
+  igraph_vector_complex_init_array(&akl->data,
                                   (igraph_complex_t*) COMPLEX(pakl),
                                   GET_LENGTH(pakl));
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
