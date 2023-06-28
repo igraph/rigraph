@@ -2745,10 +2745,10 @@ SEXP R_igraph_0orvector_int_to_SEXP_d(igraph_vector_int_t *v) {
   return result;
 }
 
-SEXP R_igraph_0orvector_to_SEXPp1(const igraph_vector_t *v) {
+SEXP R_igraph_0orvector_int_to_SEXPp1(const igraph_vector_int_t *v) {
   SEXP result;
   if (v) {
-    PROTECT(result=R_igraph_vector_to_SEXPp1(v));
+    PROTECT(result=R_igraph_vector_int_to_SEXPp1(v));
   } else {
     PROTECT(result=R_NilValue);
   }
@@ -7769,20 +7769,20 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
 SEXP R_igraph_girth(SEXP graph, SEXP pcircle) {
 
   igraph_t g;
-  igraph_vector_t circle, *ppcircle=0;
-  igraph_integer_t girth;
+  igraph_vector_int_t circle, *ppcircle=0;
+  igraph_real_t girth;
   SEXP result, names;
 
   R_SEXP_to_igraph(graph, &g);
-  if (LOGICAL(pcircle)[0]) { igraph_vector_init(&circle, 0); ppcircle=&circle; }
+  if (LOGICAL(pcircle)[0]) { igraph_vector_int_init(&circle, 0); ppcircle=&circle; }
 
   IGRAPH_R_CHECK(igraph_girth(&g, &girth, ppcircle));
 
   PROTECT(result=NEW_LIST(2));
   SET_VECTOR_ELT(result, 0, NEW_NUMERIC(1));
   REAL(VECTOR_ELT(result, 0))[0]=girth;
-  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXPp1(ppcircle));
-  if (ppcircle) { igraph_vector_destroy(ppcircle); }
+  SET_VECTOR_ELT(result, 1, R_igraph_0orvector_int_to_SEXPp1(ppcircle));
+  if (ppcircle) { igraph_vector_int_destroy(ppcircle); }
   PROTECT(names=NEW_CHARACTER(2));
   SET_STRING_ELT(names, 0, Rf_mkChar("girth"));
   SET_STRING_ELT(names, 1, Rf_mkChar("circle"));
@@ -7904,7 +7904,7 @@ typedef struct R_igraph_i_arpack_data_t {
   SEXP rho;
 } R_igraph_i_arpack_data_t;
 
-int R_igraph_i_arpack_callback(igraph_real_t *to, const igraph_real_t *from,
+igraph_error_t R_igraph_i_arpack_callback(igraph_real_t *to, const igraph_real_t *from,
                                int n, void *extra) {
   SEXP s_from, s_to;
   SEXP R_fcall;
