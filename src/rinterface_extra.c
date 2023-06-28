@@ -4171,20 +4171,19 @@ SEXP R_igraph_ecount(SEXP graph) {
 SEXP R_igraph_neighbors(SEXP graph, SEXP pvid, SEXP pmode) {
 
   igraph_t g;
-  igraph_vector_t neis;
+  igraph_vector_int_t neis;
   SEXP result;
   igraph_real_t vid;
   igraph_neimode_t mode;
 
-  igraph_vector_init(&neis, 0);
+  igraph_vector_int_init(&neis, 0);
   vid=REAL(pvid)[0];
   mode = (igraph_neimode_t) Rf_asInteger(pmode);
   R_SEXP_to_igraph(graph, &g);
   IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, (igraph_integer_t) vid, mode));
 
-  PROTECT(result=NEW_NUMERIC(igraph_vector_size(&neis)));
-  igraph_vector_copy_to(&neis, REAL(result));
-  igraph_vector_destroy(&neis);
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&neis));
+  igraph_vector_int_destroy(&neis);
 
   UNPROTECT(1);
   return result;
