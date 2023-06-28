@@ -7488,15 +7488,16 @@ SEXP R_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
   igraph_t g;
   igraph_integer_t nodes=(igraph_integer_t) REAL(pnodes)[0];
   igraph_integer_t edges=(igraph_integer_t) REAL(pedges)[0];
-  igraph_vector_t types, pref;
+  igraph_vector_int_t types;
+  igraph_vector_t pref;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   SEXP result;
 
-  R_SEXP_to_vector(ptypes, &types);
+  R_SEXP_to_vector_int_copy(ptypes, &types);
   R_SEXP_to_vector(ppref, &pref);
   IGRAPH_R_CHECK(igraph_cited_type_game(&g, nodes, &types, &pref, edges, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
