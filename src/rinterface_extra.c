@@ -2875,10 +2875,10 @@ SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
   return result;
 }
 
-SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m) {
+SEXP R_igraph_0ormatrix_int_to_SEXP(const igraph_matrix_int_t *m) {
   SEXP result;
   if (m) {
-    PROTECT(result=R_igraph_matrix_to_SEXP(m));
+    PROTECT(result=R_igraph_matrix_int_to_SEXP(m));
   } else {
     PROTECT(result=R_NilValue);
   }
@@ -7665,9 +7665,9 @@ SEXP R_igraph_community_fastgreedy(SEXP graph, SEXP pmerges, SEXP pmodularity,
                                    SEXP pmembership, SEXP pweights) {
 
   igraph_t g;
-  igraph_matrix_t merges, *ppmerges=0;
+  igraph_matrix_int_t merges, *ppmerges=0;
   igraph_vector_t modularity, *ppmodularity=0;
-  igraph_vector_t membership, *ppmembership=0;
+  igraph_vector_int_t membership, *ppmembership=0;
   igraph_vector_t weights, *ppweights=0;
   SEXP result, names;
 
@@ -7678,7 +7678,7 @@ SEXP R_igraph_community_fastgreedy(SEXP graph, SEXP pmerges, SEXP pmodularity,
   R_SEXP_to_igraph(graph, &g);
   if (LOGICAL(pmerges)[0]) {
     ppmerges=&merges;
-    igraph_matrix_init(&merges, 0, 0);
+    igraph_matrix_int_init(&merges, 0, 0);
   }
   if (LOGICAL(pmodularity)[0]) {
     ppmodularity=&modularity;
@@ -7686,16 +7686,16 @@ SEXP R_igraph_community_fastgreedy(SEXP graph, SEXP pmerges, SEXP pmodularity,
   }
   if (LOGICAL(pmembership)[0]) {
     ppmembership=&membership;
-    igraph_vector_init(&membership, 0);
+    igraph_vector_int_init(&membership, 0);
   }
   IGRAPH_R_CHECK(igraph_community_fastgreedy(&g, ppweights, ppmerges, ppmodularity, ppmembership));
   PROTECT(result=NEW_LIST(3));
-  SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_to_SEXP(ppmerges));
-  if (ppmerges) { igraph_matrix_destroy(ppmerges); }
+  SET_VECTOR_ELT(result, 0, R_igraph_0ormatrix_int_to_SEXP(ppmerges));
+  if (ppmerges) { igraph_matrix_int_destroy(ppmerges); }
   SET_VECTOR_ELT(result, 1, R_igraph_0orvector_to_SEXP(ppmodularity));
   if (ppmodularity) { igraph_vector_destroy(ppmodularity); }
-  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_to_SEXP(ppmembership));
-  if (ppmembership) { igraph_vector_destroy(ppmembership); }
+  SET_VECTOR_ELT(result, 2, R_igraph_0orvector_int_to_SEXP(ppmembership));
+  if (ppmembership) { igraph_vector_int_destroy(ppmembership); }
   PROTECT(names=NEW_CHARACTER(3));
   SET_STRING_ELT(names, 0, Rf_mkChar("merges"));
   SET_STRING_ELT(names, 1, Rf_mkChar("modularity"));
