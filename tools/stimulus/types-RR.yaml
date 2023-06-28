@@ -216,7 +216,7 @@ VERTEX_COLOR:
         OUT: |-
             %I% <- %I%+1L
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
-              names(%I%) <- vertex_attr(%I1%, "name", %I2%)
+              names(%I%) <- vertex_attr(%I1%, "name")
             }
 
 EDGE_COLOR:
