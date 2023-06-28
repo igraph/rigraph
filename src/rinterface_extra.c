@@ -3676,8 +3676,8 @@ int R_SEXP_to_vector_long_copy(SEXP sv, igraph_vector_long_t *v) {
   return 0;
 }
 
-int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl) {
-  R_SEXP_to_vector(pakl, &akl->data);
+int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl) {
+  R_SEXP_to_vector_int(pakl, &akl->data);
   akl->nrow=INTEGER(GET_DIM(pakl))[0];
   akl->ncol=INTEGER(GET_DIM(pakl))[1];
 
@@ -7746,20 +7746,20 @@ SEXP R_igraph_community_to_membership(SEXP graph, SEXP pmerges,
 SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
                                        SEXP psteps) {
 
-  igraph_matrix_t merges;
+  igraph_matrix_int_t merges;
   igraph_integer_t vcount=(igraph_integer_t) REAL(pvcount)[0];
   igraph_integer_t steps=(igraph_integer_t) REAL(psteps)[0];
-  igraph_vector_t membership;
+  igraph_vector_int_t membership;
   SEXP result;
 
-  R_SEXP_to_matrix(pmerges, &merges);
-  igraph_vector_init(&membership, 0);
-  IGRAPH_FINALLY(igraph_vector_destroy, &membership);
+  R_SEXP_to_matrix_int(pmerges, &merges);
+  igraph_vector_int_init(&membership, 0);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &membership);
 
   IGRAPH_R_CHECK(igraph_community_to_membership(&merges, vcount, steps, &membership, 0));
-  PROTECT(result=R_igraph_vector_to_SEXP(&membership));
+  PROTECT(result=R_igraph_vector_int_to_SEXP(&membership));
 
-  igraph_vector_destroy(&membership);
+  igraph_vector_int_destroy(&membership);
   IGRAPH_FINALLY_CLEAN(1);
 
   UNPROTECT(1);
