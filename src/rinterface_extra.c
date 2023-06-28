@@ -7014,22 +7014,22 @@ SEXP R_igraph_spinglass_community(SEXP graph, SEXP weights,
   igraph_real_t lambda=REAL(plambda)[0];
   igraph_real_t modularity;
   igraph_real_t temperature;
-  igraph_vector_t membership;
-  igraph_vector_t csize;
+  igraph_vector_int_t membership;
+  igraph_vector_int_t csize;
   SEXP result, names;
 
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(weights)) {
     pweights=&v_weights; R_SEXP_to_vector(weights, &v_weights);
   }
-  igraph_vector_init(&membership, 0);
-  igraph_vector_init(&csize, 0);
+  igraph_vector_int_init(&membership, 0);
+  igraph_vector_int_init(&csize, 0);
   IGRAPH_R_CHECK(igraph_community_spinglass(&g, pweights, &modularity, &temperature, &membership, &csize, spins, parupdate, starttemp, stoptemp, coolfact, update_rule, gamma, implementation, lambda));
 
   PROTECT(result=NEW_LIST(4));
   PROTECT(names=NEW_CHARACTER(4));
-  SET_VECTOR_ELT(result, 0, NEW_NUMERIC(igraph_vector_size(&membership)));
-  SET_VECTOR_ELT(result, 1, NEW_NUMERIC(igraph_vector_size(&csize)));
+  SET_VECTOR_ELT(result, 0, R_igraph_vector_int_to_SEXP(&membership));
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_int_to_SEXP(&csize));
   SET_VECTOR_ELT(result, 2, NEW_NUMERIC(1));
   SET_VECTOR_ELT(result, 3, NEW_NUMERIC(1));
   SET_STRING_ELT(names, 0, Rf_mkChar("membership"));
@@ -7037,13 +7037,11 @@ SEXP R_igraph_spinglass_community(SEXP graph, SEXP weights,
   SET_STRING_ELT(names, 2, Rf_mkChar("modularity"));
   SET_STRING_ELT(names, 3, Rf_mkChar("temperature"));
   SET_NAMES(result, names);
-  igraph_vector_copy_to(&membership, REAL(VECTOR_ELT(result, 0)));
-  igraph_vector_copy_to(&csize, REAL(VECTOR_ELT(result, 1)));
   REAL(VECTOR_ELT(result, 2))[0]=modularity;
   REAL(VECTOR_ELT(result, 3))[0]=temperature;
 
-  igraph_vector_destroy(&membership);
-  igraph_vector_destroy(&csize);
+  igraph_vector_int_destroy(&membership);
+  igraph_vector_int_destroy(&csize);
 
   UNPROTECT(2);
   return result;
