@@ -6252,7 +6252,7 @@ SEXP R_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
   igraph_real_t aging_exp=REAL(paging_exp)[0];
   igraph_integer_t aging_bin=(igraph_integer_t) REAL(paging_bin)[0];
   igraph_integer_t m=(igraph_integer_t) REAL(pm)[0];
-  igraph_vector_t out_seq;
+  igraph_vector_int_t out_seq;
   igraph_bool_t out_pref=LOGICAL(pout_pref)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_real_t zero_deg_appeal=REAL(pzero_deg_appeal)[0];
@@ -6261,11 +6261,11 @@ SEXP R_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
   igraph_real_t age_coef=REAL(page_coef)[0];
   SEXP result;
 
-  R_SEXP_to_vector(pout_seq, &out_seq);
+  R_SEXP_to_vector_int_copy(pout_seq, &out_seq);
 
   IGRAPH_R_CHECK(igraph_barabasi_aging_game(&g, n, m, &out_seq, out_pref, pa_exp, aging_exp, aging_bin, zero_deg_appeal, zero_age_appeal, deg_coef, age_coef, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
