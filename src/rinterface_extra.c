@@ -3325,13 +3325,12 @@ int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg) {
 SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit) {
   SEXP result, names;
 
-  PROTECT(result=NEW_LIST(6));
+  PROTECT(result=NEW_LIST(5));
   SET_VECTOR_ELT(result, 0, Rf_ScalarLogical(plfit->continuous));
   SET_VECTOR_ELT(result, 1, Rf_ScalarReal(plfit->alpha));
   SET_VECTOR_ELT(result, 2, Rf_ScalarReal(plfit->xmin));
   SET_VECTOR_ELT(result, 3, Rf_ScalarReal(plfit->L));
   SET_VECTOR_ELT(result, 4, Rf_ScalarReal(plfit->D));
-  SET_VECTOR_ELT(result, 5, Rf_ScalarReal(plfit->p));
 
   PROTECT(names=NEW_CHARACTER(6));
   SET_STRING_ELT(names, 0, Rf_mkChar("continuous"));
