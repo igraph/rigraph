@@ -98,13 +98,13 @@ int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it);
 int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
 int R_igraph_SEXP_to_0orvectorlist(SEXP vectorlist,
                                    igraph_vector_ptr_t *ptr);
-int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list);
+int R_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list);
 int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
-int R_SEXP_to_vector_int(SEXP sv, igraph_vector_int_t *v);
+int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
 int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);

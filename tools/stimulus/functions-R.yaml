@@ -405,6 +405,22 @@ igraph_girth:
 igraph_add_edge:
     IGNORE: RR, RC, RInit
 
+igraph_get_all_eids_between:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: from ON graph, to ON graph
+
+igraph_hub_and_authority_scores:
+    DEPS: weights ON graph
+
+igraph_pseudo_diameter:
+    DEPS: start_vid ON graph
+
+igraph_pseudo_diameter_dijkstra:
+    DEPS: start_vid ON graph, weights ON graph
+
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two
@@ -431,6 +447,9 @@ igraph_arpack_rssolve:
 
 igraph_arpack_rnsolve:
     IGNORE: RR, RC, RInit
+
+igraph_get_shortest_path_astar:
+    IGNORE: RR, RC, Rinit
 
 igraph_unfold_tree:
     IGNORE: RR

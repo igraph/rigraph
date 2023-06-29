@@ -49,6 +49,9 @@ VECTOR_LONG:
 VECTOR_INT:
     INCONV: '%I% <- as.integer(%I%)'
 
+VECTOR_INT_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- as.integer(%I%)
+
 VECTORM1:
     INCONV: '%I% <- as.numeric(%I%)-1'
 
@@ -385,6 +388,8 @@ MATRIX_COMPLEX:
     INCONV: '%I% <- as.matrix(structure(as.complex(%I%), dim=dim(%I%)))'
 
 PLFIT: {}
+
+SPARSEMATPTR: {}
 
 MAXFLOW_STATS:
     CALL: {}
