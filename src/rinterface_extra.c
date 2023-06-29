@@ -4089,7 +4089,7 @@ SEXP R_igraph_add_vertices(SEXP graph, SEXP pnv) {
   R_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_R_CHECK(igraph_add_vertices(&g, nv, 0));
   PROTECT(result=R_igraph_to_SEXP(&g));
-  IGRAPH_I_DESTROY(&g);
+  igraph_destroy(&g);
 
   UNPROTECT(1);
   return result;
