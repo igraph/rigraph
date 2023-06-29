@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9004
+
+## Chore
+
+  - Update vendor cigraph 0.10 (#862).
+
+
 # igraph 1.5.0.9003
 
 ## Bug fixes
