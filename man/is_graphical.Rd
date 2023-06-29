@@ -7,7 +7,7 @@
 \usage{
 is_graphical(
   out.deg,
-  in.deg = NULL,
+  in.deg,
   allowed.edge.types = c("simple", "loops", "multi", "all")
 )
 }

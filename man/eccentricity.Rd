@@ -4,7 +4,7 @@
 \alias{eccentricity}
 \title{Eccentricity of the vertices in a graph}
 \usage{
-eccentricity(graph, vids = V(graph), mode = c("all", "out", "in", "total"))
+eccentricity(graph, vids = ALL, mode = c("all", "out", "in", "total"))
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}

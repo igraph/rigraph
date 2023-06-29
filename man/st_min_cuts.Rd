@@ -5,7 +5,7 @@
 \alias{stMincuts}
 \title{List all minimum \eqn{(s,t)}-cuts of a graph}
 \usage{
-st_min_cuts(graph, source, target, capacity = NULL)
+st_min_cuts(graph, source, target, capacity)
 }
 \arguments{
 \item{graph}{The input graph. It must be directed.}

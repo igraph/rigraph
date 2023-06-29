@@ -5,7 +5,7 @@
 \alias{graph.maxflow}
 \title{Maximum flow in a graph}
 \usage{
-max_flow(graph, source, target, capacity = NULL)
+max_flow(graph, source, target, capacity)
 }
 \arguments{
 \item{graph}{The input graph.}

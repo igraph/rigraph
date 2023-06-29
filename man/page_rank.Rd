@@ -8,11 +8,11 @@
 page_rank(
   graph,
   algo = c("prpack", "arpack"),
-  vids = V(graph),
+  vids = ALL,
   directed = TRUE,
   damping = 0.85,
-  personalized = NULL,
-  weights = NULL,
+  personalized,
+  weights,
   options = NULL
 )
 }

@@ -8,22 +8,14 @@
 \alias{assortativity_nominal}
 \title{Assortativity coefficient}
 \usage{
-assortativity(graph, types1, types2 = NULL, directed = TRUE)
+assortativity(graph, values, values.in, directed = TRUE, normalized = TRUE)
 
-assortativity_nominal(graph, types, directed = TRUE)
+assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 assortativity_degree(graph, directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
-
-\item{types1}{The vertex values, these can be arbitrary numeric values.}
-
-\item{types2}{A second value vector to be using for the incoming edges when
-calculating assortativity for a directed graph.  Supply \code{NULL} here if
-you want to use the same values for outgoing and incoming edges. This
-argument is ignored (with a warning) if it is not \code{NULL} and undirected
-assortativity coefficient is being calculated.}
 
 \item{directed}{Logical scalar, whether to consider edge directions for
 directed graphs. This argument is ignored for undirected graphs. Supply
@@ -34,6 +26,14 @@ graphs.}
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
 with \code{\link[=as.integer]{as.integer()}}.}
+
+\item{types1}{The vertex values, these can be arbitrary numeric values.}
+
+\item{types2}{A second value vector to be using for the incoming edges when
+calculating assortativity for a directed graph.  Supply \code{NULL} here if
+you want to use the same values for outgoing and incoming edges. This
+argument is ignored (with a warning) if it is not \code{NULL} and undirected
+assortativity coefficient is being calculated.}
 }
 \value{
 A single real number.

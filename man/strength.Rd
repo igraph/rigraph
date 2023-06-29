@@ -7,7 +7,7 @@
 \usage{
 strength(
   graph,
-  vids = V(graph),
+  vids = ALL,
   mode = c("all", "out", "in", "total"),
   loops = TRUE,
   weights = NULL

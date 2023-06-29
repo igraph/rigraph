@@ -10,7 +10,7 @@ global_efficiency(graph, weights = NULL, directed = TRUE)
 
 local_efficiency(
   graph,
-  vids = V(graph),
+  vids = ALL,
   weights = NULL,
   directed = TRUE,
   mode = c("all", "out", "in", "total")

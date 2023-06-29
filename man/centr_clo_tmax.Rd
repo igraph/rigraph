@@ -5,7 +5,7 @@
 \alias{centralization.closeness.tmax}
 \title{Theoretical maximum for closeness centralization}
 \usage{
-centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))
+centr_clo_tmax(graph, nodes = 0, mode = c("out", "in", "all", "total"))
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL}, if

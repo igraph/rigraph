@@ -5,7 +5,7 @@
 \alias{graph.diversity}
 \title{Graph diversity}
 \usage{
-diversity(graph, weights = NULL, vids = V(graph))
+diversity(graph, weights = NULL, vids = ALL)
 }
 \arguments{
 \item{graph}{The input graph. Edge directions are ignored.}

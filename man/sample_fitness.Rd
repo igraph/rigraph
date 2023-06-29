@@ -8,7 +8,7 @@
 sample_fitness(
   no.of.edges,
   fitness.out,
-  fitness.in = NULL,
+  fitness.in,
   loops = FALSE,
   multiple = FALSE
 )
