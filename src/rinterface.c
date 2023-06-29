@@ -992,40 +992,6 @@ SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
 }
 
 /*-------------------------------------------/
-/ igraph_erdos_renyi_game                    /
-/-------------------------------------------*/
-SEXP R_igraph_erdos_renyi_game(SEXP type, SEXP n, SEXP p_or_m, SEXP directed, SEXP loops) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_erdos_renyi_t c_type;
-  igraph_integer_t c_n;
-  igraph_real_t c_p_or_m;
-  igraph_bool_t c_directed;
-  igraph_bool_t c_loops;
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  c_type = (igraph_erdos_renyi_t) Rf_asInteger(type);
-  c_n=INTEGER(n)[0];
-  c_p_or_m=REAL(p_or_m)[0];
-  c_directed=LOGICAL(directed)[0];
-  c_loops=LOGICAL(loops)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_erdos_renyi_game(&c_graph, c_type, c_n, c_p_or_m, c_directed, c_loops));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  igraph_destroy(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_preference_game                     /
 /-------------------------------------------*/
 SEXP R_igraph_preference_game(SEXP nodes, SEXP types, SEXP type_dist, SEXP fixed_sizes, SEXP pref_matrix, SEXP directed, SEXP loops) {
@@ -7373,32 +7339,6 @@ SEXP R_igraph_hrg_game(SEXP hrg) {
 }
 
 /*-------------------------------------------/
-/ igraph_hrg_dendrogram                      /
-/-------------------------------------------*/
-SEXP R_igraph_hrg_dendrogram(SEXP hrg) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_hrg_t c_hrg;
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_hrg_dendrogram(&c_graph, &c_hrg));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  igraph_destroy(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_hrg_consensus                       /
 /-------------------------------------------*/
 SEXP R_igraph_hrg_consensus(SEXP graph, SEXP hrg, SEXP start, SEXP num_samples) {
@@ -7594,6 +7534,48 @@ SEXP R_igraph_hrg_size(SEXP hrg) {
 
   PROTECT(r_result=NEW_INTEGER(1));
   INTEGER(r_result)[0]=c_result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_from_hrg_dendrogram                 /
+/-------------------------------------------*/
+SEXP R_igraph_from_hrg_dendrogram(SEXP hrg) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_hrg_t c_hrg;
+  igraph_vector_t c_prob;
+  SEXP graph;
+  SEXP prob;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != igraph_vector_init(&c_prob, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_prob);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_from_hrg_dendrogram(&c_graph, &c_hrg, &c_prob));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(2));
+  PROTECT(r_names=NEW_CHARACTER(2));
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(prob=R_igraph_vector_to_SEXP(&c_prob));
+  igraph_vector_destroy(&c_prob);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, graph);
+  SET_VECTOR_ELT(r_result, 1, prob);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("prob"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(3);
 
   UNPROTECT(1);
   return(r_result);
