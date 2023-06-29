@@ -2919,13 +2919,13 @@ SEXP R_igraph_0orarray3_to_SEXP(const igraph_array3_t *a) {
 SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m) {
   SEXP result;
   long int i;
-  char *str;
+  const char *str;
   long int len;
 
   len=igraph_strvector_size(m);
   PROTECT(result=NEW_CHARACTER(len));
   for (i=0; i<len; i++) {
-    igraph_strvector_get(m, i, &str);
+    str = igraph_strvector_get(m, i);
     SET_STRING_ELT(result, i, Rf_mkChar(str));
   }
 
