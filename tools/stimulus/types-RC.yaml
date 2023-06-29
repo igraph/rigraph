@@ -197,7 +197,7 @@ VECTORM1:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
-        IN: R_SEXP_to_vector_int(%I%, &%C%);
+        IN: R_SEXP_to_vector_int_copy(%I%, &%C%);
         INOUT: |-
             if (0 != R_SEXP_to_vector_int_copy(%I%, &%C%)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -266,7 +266,7 @@ VECTOR_LIST:
     CALL: '&%C%'
     CTYPE: igraph_vector_list_t
     INCONV:
-        IN: R_igraph_SEXP_to_vectorlist(%I%, &%C%);
+        IN: R_igraph_SEXP_to_vector_list(%I%, &%C%);
         OUT: |-
             if (0 != igraph_vector_list_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -339,7 +339,7 @@ VECTOR_INT_OR_0:
     CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
     CTYPE: igraph_vector_int_t
     INCONV:
-        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_int(%I%, &%C%); }
+        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector_int_copy(%I%, &%C%); }
         INOUT: |-
             if (!Rf_isNull(%I%)) {
               if (0 != R_SEXP_to_vector_int_copy(%I%, &%C%)) {
@@ -568,7 +568,7 @@ VERTEX_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
-        IN: R_SEXP_to_vector_int(%I%, &%C%);
+        IN: R_SEXP_to_vector_int_copy(%I%, &%C%);
         OUT: |-
             if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -584,7 +584,7 @@ VERTEX_INDEX_PAIRS:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
-        IN: R_SEXP_to_vector_int(%I%, &%C%);
+        IN: R_SEXP_to_vector_int_copy(%I%, &%C%);
         OUT: |-
             if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -600,7 +600,7 @@ EDGE_INDICES:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
-        IN: R_SEXP_to_vector_int(%I%, &%C%);
+        IN: R_SEXP_to_vector_int_copy(%I%, &%C%);
         OUT: |-
             if (0 != igraph_vector_int_init(&%C%, 0)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);

@@ -24,6 +24,7 @@
 #include "igraph.h"
 #include "igraph_neighborhood.h"
 #include "vendor/cigraph/src/graph/internal.h"
+#include "vendor/cigraph/src/graph/attributes.h"
 
 #include "config.h"
 
@@ -3566,6 +3567,23 @@ int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr) {
   return 0;
 }
 
+int R_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list) {
+  int length=GET_LENGTH(vectorlist);
+  int i;
+  igraph_vector_t *vecs;
+
+  vecs = (igraph_vector_t *) R_alloc((size_t) length, sizeof(igraph_vector_t));
+  list->stor_begin=vecs;
+  list->stor_end=list->stor_begin+length;
+  list->end=list->stor_end;
+  for (i=0; i<length; i++) {
+    igraph_vector_t *v=&vecs[i];
+    SEXP el=VECTOR_ELT(vectorlist, i);
+    igraph_vector_view(v, REAL(el), GET_LENGTH(el));
+  }
+  return 0;
+}
+
 int R_igraph_SEXP_to_0orvector_int_list(SEXP vectorlist,
                                    igraph_vector_int_list_t *list) {
   if (!Rf_isNull(vectorlist)) {
@@ -3669,6 +3687,14 @@ int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   for (i = 0; i<n; i++) {
     VECTOR(*v)[i] = svv[i];
   }
+  return 0;
+}
+
+int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl) {
+  R_SEXP_to_vector(pakl, &akl->data);
+  akl->nrow=INTEGER(GET_DIM(pakl))[0];
+  akl->ncol=INTEGER(GET_DIM(pakl))[1];
+
   return 0;
 }
 
@@ -3807,7 +3833,7 @@ int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it) {
 int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it) {
 
   igraph_vector_int_t *tmpv=(igraph_vector_int_t*)R_alloc(1,sizeof(igraph_vector_int_t));
-  igraph_es_vector(it, igraph_vector_int_view(tmpv, INTEGER(rit), LENGTH(rit)));
+  igraph_es_vector(it, igraph_vector_int_view(tmpv, REAL(rit), LENGTH(rit)));
 
   return 0;
 }

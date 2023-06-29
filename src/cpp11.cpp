@@ -29,13 +29,14 @@ extern SEXP R_igraph_adjlist(void *, void *, void *);
 extern SEXP R_igraph_all_minimal_st_separators(void *);
 extern SEXP R_igraph_all_st_cuts(void *, void *, void *);
 extern SEXP R_igraph_all_st_mincuts(void *, void *, void *, void *);
+extern SEXP R_igraph_almost_equals(void *, void *, void *);
 extern SEXP R_igraph_are_connected(void *, void *, void *);
 extern SEXP R_igraph_arpack(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_arpack_unpack_complex(void *, void *, void *);
 extern SEXP R_igraph_articulation_points(void *);
-extern SEXP R_igraph_assortativity(void *, void *, void *, void *);
+extern SEXP R_igraph_assortativity(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_assortativity_degree(void *, void *);
-extern SEXP R_igraph_assortativity_nominal(void *, void *, void *);
+extern SEXP R_igraph_assortativity_nominal(void *, void *, void *, void *);
 extern SEXP R_igraph_asymmetric_preference_game(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_atlas(void *);
 extern SEXP R_igraph_authority_score(void *, void *, void *, void *);
@@ -47,9 +48,13 @@ extern SEXP R_igraph_avg_nearest_neighbor_degree(void *, void *, void *, void *,
 extern SEXP R_igraph_barabasi_aging_game(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_barabasi_game(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_betweenness_cutoff(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_betweenness_subset(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bfs(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_bfs_simple(void *, void *, void *);
+extern SEXP R_igraph_biadjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_bibcoupling(void *, void *);
 extern SEXP R_igraph_biconnected_components(void *);
+extern SEXP R_igraph_bipartite_game(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_game_gnm(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_game_gnp(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_bipartite_projection(void *, void *, void *, void *);
@@ -66,12 +71,14 @@ extern SEXP R_igraph_centralization_degree(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_degree_tmax(void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_centralization_eigenvector_centrality_tmax(void *, void *, void *, void *);
+extern SEXP R_igraph_circulant(void *, void *, void *);
 extern SEXP R_igraph_cited_type_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_citing_cited_type_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_clique_number(void *);
 extern SEXP R_igraph_clique_size_hist(void *, void *, void *);
 extern SEXP R_igraph_cliques(void *, void *, void *);
 extern SEXP R_igraph_closeness_cutoff(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_cmp_epsilon(void *, void *, void *);
 extern SEXP R_igraph_cocitation(void *, void *);
 extern SEXP R_igraph_cohesion(void *, void *);
 extern SEXP R_igraph_cohesive_blocks(void *);
@@ -93,6 +100,7 @@ extern SEXP R_igraph_connected_components(void *, void *);
 extern SEXP R_igraph_constraint(void *, void *, void *);
 extern SEXP R_igraph_contract_vertices(void *, void *, void *);
 extern SEXP R_igraph_convex_hull(void *);
+extern SEXP R_igraph_copy(void *);
 extern SEXP R_igraph_copy_env(void *);
 extern SEXP R_igraph_copy_from(void *);
 extern SEXP R_igraph_copy_to(void *);
@@ -110,25 +118,40 @@ extern SEXP R_igraph_degree(void *, void *, void *, void *);
 extern SEXP R_igraph_degree_sequence_game(void *, void *, void *);
 extern SEXP R_igraph_delete_edges(void *, void *);
 extern SEXP R_igraph_delete_vertices(void *, void *);
+extern SEXP R_igraph_delete_vertices_idx(void *, void *);
 extern SEXP R_igraph_density(void *, void *);
+extern SEXP R_igraph_deterministic_optimal_imitation(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_dfs(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_difference(void *, void *);
 extern SEXP R_igraph_dim_select(void *);
 extern SEXP R_igraph_disjoint_union(void *);
+extern SEXP R_igraph_distances(void *, void *, void *, void *);
+extern SEXP R_igraph_distances_bellman_ford(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_cutoff(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_dijkstra(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_dijkstra_cutoff(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_floyd_warshall(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_distances_johnson(void *, void *, void *, void *);
 extern SEXP R_igraph_diversity(void *, void *, void *);
 extern SEXP R_igraph_dominator_tree(void *, void *, void *);
 extern SEXP R_igraph_dot_product_game(void *, void *);
 extern SEXP R_igraph_dyad_census(void *);
+extern SEXP R_igraph_ecc(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_eccentricity(void *, void *, void *);
+extern SEXP R_igraph_eccentricity_dijkstra(void *, void *, void *, void *);
 extern SEXP R_igraph_ecount(void *);
 extern SEXP R_igraph_edge_betweenness_cutoff(void *, void *, void *, void *);
+extern SEXP R_igraph_edge_betweenness_subset(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_edge_connectivity(void *, void *);
 extern SEXP R_igraph_edge_disjoint_paths(void *, void *, void *);
 extern SEXP R_igraph_edges(void *, void *);
 extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *);
+extern SEXP R_igraph_eigen_matrix(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_eigen_matrix_symmetric(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
+extern SEXP R_igraph_empty_attrs(void *, void *, void *);
 extern SEXP R_igraph_erdos_renyi_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_es_adj(void *, void *, void *, void *);
 extern SEXP R_igraph_es_pairs(void *, void *, void *);
@@ -136,19 +159,27 @@ extern SEXP R_igraph_es_path(void *, void *, void *);
 extern SEXP R_igraph_establishment_game(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_eulerian_cycle(void *);
 extern SEXP R_igraph_eulerian_path(void *);
+extern SEXP R_igraph_even_tarjan_reduction(void *);
+extern SEXP R_igraph_expand_path_to_pairs(void *);
 extern SEXP R_igraph_extended_chordal_ring(void *, void *, void *);
 extern SEXP R_igraph_famous(void *);
 extern SEXP R_igraph_farthest_points(void *, void *, void *, void *);
 extern SEXP R_igraph_feedback_arc_set(void *, void *, void *);
 extern SEXP R_igraph_finalizer(void);
 extern SEXP R_igraph_forest_fire_game(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_from_hrg_dendrogram(void *);
 extern SEXP R_igraph_from_prufer(void *);
 extern SEXP R_igraph_full(void *, void *, void *);
 extern SEXP R_igraph_full_bipartite(void *, void *, void *, void *);
 extern SEXP R_igraph_full_citation(void *, void *);
+extern SEXP R_igraph_full_multipartite(void *, void *, void *);
+extern SEXP R_igraph_fundamental_cycles(void *, void *, void *, void *);
+extern SEXP R_igraph_generalized_petersen(void *, void *);
 extern SEXP R_igraph_get_adjacency(void *, void *, void *);
+extern SEXP R_igraph_get_adjacency_sparse(void *, void *, void *, void *);
 extern SEXP R_igraph_get_adjedgelist(void *, void *, void *);
 extern SEXP R_igraph_get_adjlist(void *, void *, void *, void *);
+extern SEXP R_igraph_get_all_eids_between(void *, void *, void *, void *);
 extern SEXP R_igraph_get_all_shortest_paths(void *, void *, void *, void *);
 extern SEXP R_igraph_get_all_shortest_paths_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_all_simple_paths(void *, void *, void *, void *, void *);
@@ -161,14 +192,26 @@ extern SEXP R_igraph_get_edgelist(void *, void *);
 extern SEXP R_igraph_get_eids(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_graph_id(void *);
 extern SEXP R_igraph_get_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_k_shortest_paths(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_laplacian(void *, void *, void *, void *);
+extern SEXP R_igraph_get_laplacian_sparse(void *, void *, void *, void *);
+extern SEXP R_igraph_get_shortest_path(void *, void *, void *, void *);
+extern SEXP R_igraph_get_shortest_path_bellman_ford(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_shortest_path_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_shortest_paths(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_stochastic(void *, void *);
+extern SEXP R_igraph_get_stochastic_sparse(void *, void *, void *);
 extern SEXP R_igraph_get_stochastic_sparsemat(void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_widest_path(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_getsphere(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_girth(void *, void *);
 extern SEXP R_igraph_global_efficiency(void *, void *, void *);
+extern SEXP R_igraph_gomory_hu_tree(void *, void *);
 extern SEXP R_igraph_graph_adjacency(void *, void *);
+extern SEXP R_igraph_graph_center(void *, void *);
+extern SEXP R_igraph_graph_count(void *, void *);
 extern SEXP R_igraph_graph_version(void *);
 extern SEXP R_igraph_graphlets(void *, void *, void *);
 extern SEXP R_igraph_graphlets_candidate_basis(void *, void *);
@@ -176,16 +219,23 @@ extern SEXP R_igraph_graphlets_project(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_grg_game(void *, void *, void *, void *);
 extern SEXP R_igraph_growing_random_game(void *, void *, void *, void *);
 extern SEXP R_igraph_harmonic_centrality_cutoff(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_has_attribute_table(void *);
 extern SEXP R_igraph_has_loop(void *);
 extern SEXP R_igraph_has_multiple(void *);
+extern SEXP R_igraph_has_mutual(void *, void *);
 extern SEXP R_igraph_hrg_consensus(void *, void *, void *, void *);
 extern SEXP R_igraph_hrg_create(void *, void *);
 extern SEXP R_igraph_hrg_dendrogram(void *);
 extern SEXP R_igraph_hrg_fit(void *, void *, void *, void *);
 extern SEXP R_igraph_hrg_game(void *);
 extern SEXP R_igraph_hrg_predict(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_hrg_resize(void *, void *);
+extern SEXP R_igraph_hrg_sample(void *);
+extern SEXP R_igraph_hrg_sample_many(void *, void *);
+extern SEXP R_igraph_hrg_size(void *);
 extern SEXP R_igraph_hsbm_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_hsbm_list_game(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_hub_and_authority_scores(void *, void *, void *, void *);
 extern SEXP R_igraph_hub_score(void *, void *, void *, void *);
 extern SEXP R_igraph_i_levc_arp(void *, void *, void *);
 extern SEXP R_igraph_identical_graphs(void *, void *, void *);
@@ -195,20 +245,24 @@ extern SEXP R_igraph_incident_edges(void *, void *, void *);
 extern SEXP R_igraph_independence_number(void *);
 extern SEXP R_igraph_independent_vertex_sets(void *, void *, void *);
 extern SEXP R_igraph_induced_subgraph(void *, void *, void *);
+extern SEXP R_igraph_induced_subgraph_map(void *, void *, void *);
 extern SEXP R_igraph_intersection(void *, void *);
+extern SEXP R_igraph_is_acyclic(void *);
 extern SEXP R_igraph_is_bipartite(void *);
 extern SEXP R_igraph_is_chordal(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_is_connected(void *, void *);
 extern SEXP R_igraph_is_dag(void *);
 extern SEXP R_igraph_is_directed(void *);
 extern SEXP R_igraph_is_eulerian(void *);
+extern SEXP R_igraph_is_forest(void *, void *);
 extern SEXP R_igraph_is_graphical(void *, void *, void *);
 extern SEXP R_igraph_is_loop(void *, void *);
 extern SEXP R_igraph_is_matching(void *, void *, void *);
 extern SEXP R_igraph_is_maximal_matching(void *, void *, void *);
 extern SEXP R_igraph_is_minimal_separator(void *, void *);
 extern SEXP R_igraph_is_multiple(void *, void *);
-extern SEXP R_igraph_is_mutual(void *, void *);
+extern SEXP R_igraph_is_mutual(void *, void *, void *);
+extern SEXP R_igraph_is_perfect(void *);
 extern SEXP R_igraph_is_separator(void *, void *);
 extern SEXP R_igraph_is_simple(void *);
 extern SEXP R_igraph_is_tree(void *, void *);
@@ -219,6 +273,7 @@ extern SEXP R_igraph_isomorphic(void *, void *);
 extern SEXP R_igraph_isomorphic_bliss(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_isomorphic_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_k_regular_game(void *, void *, void *, void *);
+extern SEXP R_igraph_kary_tree(void *, void *, void *);
 extern SEXP R_igraph_kautz(void *, void *);
 extern SEXP R_igraph_laplacian(void *, void *, void *, void *);
 extern SEXP R_igraph_laplacian_spectral_embedding(void *, void *, void *, void *, void *, void *, void *);
@@ -249,6 +304,9 @@ extern SEXP R_igraph_layout_reingold_tilford(void *, void *, void *, void *, voi
 extern SEXP R_igraph_layout_sphere(void *);
 extern SEXP R_igraph_layout_star(void *, void *, void *);
 extern SEXP R_igraph_layout_sugiyama(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_layout_umap(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_layout_umap_3d(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_layout_umap_compute_weights(void *, void *, void *);
 extern SEXP R_igraph_lcf_vector(void *, void *, void *);
 extern SEXP R_igraph_linegraph(void *);
 extern SEXP R_igraph_list_triangles(void *);
@@ -260,22 +318,26 @@ extern SEXP R_igraph_local_scan_1_ecount_them(void *, void *, void *, void *);
 extern SEXP R_igraph_local_scan_k_ecount(void *, void *, void *, void *);
 extern SEXP R_igraph_local_scan_k_ecount_them(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_local_scan_neighborhood_ecount(void *, void *, void *);
+extern SEXP R_igraph_local_scan_subset_ecount(void *, void *, void *);
 extern SEXP R_igraph_make_weak_ref(void *, void *, void *);
 extern SEXP R_igraph_maxflow(void *, void *, void *, void *);
 extern SEXP R_igraph_maximal_cliques(void *, void *, void *, void *);
 extern SEXP R_igraph_maximal_cliques_count(void *, void *, void *, void *);
 extern SEXP R_igraph_maximal_cliques_file(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_maximal_cliques_hist(void *, void *, void *);
+extern SEXP R_igraph_maximal_cliques_subset(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_maximal_independent_vertex_sets(void *);
 extern SEXP R_igraph_maximum_bipartite_matching(void *, void *, void *, void *);
 extern SEXP R_igraph_maximum_cardinality_search(void *);
 extern SEXP R_igraph_mincut(void *, void *);
 extern SEXP R_igraph_mincut_value(void *, void *);
+extern SEXP R_igraph_minimum_cycle_basis(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_minimum_size_separators(void *);
 extern SEXP R_igraph_minimum_spanning_tree_prim(void *, void *);
 extern SEXP R_igraph_minimum_spanning_tree_unweighted(void *);
 extern SEXP R_igraph_modularity(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_modularity_matrix(void *, void *, void *, void *);
+extern SEXP R_igraph_moran_process(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_motifs_randesu(void *, void *, void *);
 extern SEXP R_igraph_motifs_randesu_estimate(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_motifs_randesu_no(void *, void *, void *);
@@ -292,14 +354,19 @@ extern SEXP R_igraph_no_clusters(void *, void *);
 extern SEXP R_igraph_path_length_hist(void *, void *);
 extern SEXP R_igraph_permute_vertices(void *, void *);
 extern SEXP R_igraph_personalized_pagerank(void *, void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_personalized_pagerank_vs(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_power_law_fit(void *, void *, void *);
 extern SEXP R_igraph_preference_game(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_progress(void *, void *);
+extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
+extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_radius(void *, void *);
 extern SEXP R_igraph_random_edge_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_random_sample(void *, void *, void *);
 extern SEXP R_igraph_random_spanning_tree(void *, void *);
-extern SEXP R_igraph_random_walk(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_random_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_read_graph_dimacs(void *, void *);
+extern SEXP R_igraph_read_graph_dimacs_flow(void *, void *);
 extern SEXP R_igraph_read_graph_dl(void *, void *);
 extern SEXP R_igraph_read_graph_edgelist(void *, void *, void *);
 extern SEXP R_igraph_read_graph_gml(void *);
@@ -311,35 +378,42 @@ extern SEXP R_igraph_read_graph_pajek(void *);
 extern SEXP R_igraph_realize_degree_sequence(void *, void *, void *, void *);
 extern SEXP R_igraph_recent_degree_aging_game(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_reciprocity(void *, void *, void *);
+extern SEXP R_igraph_regular_tree(void *, void *, void *);
+extern SEXP R_igraph_residual_graph(void *, void *, void *);
 extern SEXP R_igraph_reverse_edges(void *, void *);
+extern SEXP R_igraph_reverse_residual_graph(void *, void *, void *);
 extern SEXP R_igraph_rewire(void *, void *, void *);
 extern SEXP R_igraph_rewire_directed_edges(void *, void *, void *, void *);
 extern SEXP R_igraph_rewire_edges(void *, void *, void *, void *);
 extern SEXP R_igraph_ring(void *, void *, void *, void *);
+extern SEXP R_igraph_roots_for_tree_layout(void *, void *, void *);
+extern SEXP R_igraph_roulette_wheel_imitation(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_running_mean(void *, void *);
 extern SEXP R_igraph_sample_dirichlet(void *, void *);
 extern SEXP R_igraph_sample_sphere_surface(void *, void *, void *, void *);
 extern SEXP R_igraph_sample_sphere_volume(void *, void *, void *, void *);
 extern SEXP R_igraph_sbm_game(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_adjacency(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_grouping(void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_laplacian(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_norm_eps(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_semiprojectors(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_stochastic(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_set_verbose(void *);
 extern SEXP R_igraph_shortest_paths(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_dice(void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_dice_es(void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_dice_pairs(void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_inverse_log_weighted(void *, void *, void *);
 extern SEXP R_igraph_similarity_jaccard(void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_jaccard_es(void *, void *, void *, void *);
+extern SEXP R_igraph_similarity_jaccard_pairs(void *, void *, void *, void *);
 extern SEXP R_igraph_simple_interconnected_islands_game(void *, void *, void *, void *);
 extern SEXP R_igraph_simplify(void *, void *, void *, void *);
 extern SEXP R_igraph_simplify_and_colorize(void *);
 extern SEXP R_igraph_sir(void *, void *, void *, void *);
 extern SEXP R_igraph_solve_lsap(void *, void *);
+extern SEXP R_igraph_spanner(void *, void *, void *);
+extern SEXP R_igraph_sparse_adjacency(void *, void *, void *);
+extern SEXP R_igraph_sparse_weighted_adjacency(void *, void *, void *);
 extern SEXP R_igraph_spinglass_community(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_spinglass_my_community(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_split_join_distance(void *, void *);
+extern SEXP R_igraph_square_lattice(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_st_edge_connectivity(void *, void *, void *);
 extern SEXP R_igraph_st_mincut(void *, void *, void *, void *);
 extern SEXP R_igraph_st_mincut_value(void *, void *, void *, void *);
@@ -347,29 +421,43 @@ extern SEXP R_igraph_st_vertex_connectivity(void *, void *, void *);
 extern SEXP R_igraph_star(void *, void *, void *);
 extern SEXP R_igraph_static_fitness_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_static_power_law_game(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_status(void *);
+extern SEXP R_igraph_stochastic_imitation(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_strength(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_strerror(void *);
 extern SEXP R_igraph_subcomponent(void *, void *, void *);
 extern SEXP R_igraph_subgraph_from_edges(void *, void *, void *);
+extern SEXP R_igraph_subisomorphic(void *, void *);
+extern SEXP R_igraph_subisomorphic_function_vf2(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_subisomorphic_lad(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_subisomorphic_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_symmetric_tree(void *, void *);
 extern SEXP R_igraph_to_directed(void *, void *);
 extern SEXP R_igraph_to_prufer(void *);
 extern SEXP R_igraph_to_undirected(void *, void *, void *);
 extern SEXP R_igraph_topological_sorting(void *, void *);
+extern SEXP R_igraph_transitive_closure_dag(void *);
 extern SEXP R_igraph_transitivity_avglocal_undirected(void *, void *);
 extern SEXP R_igraph_transitivity_barrat(void *, void *, void *, void *);
 extern SEXP R_igraph_transitivity_local_undirected(void *, void *, void *);
 extern SEXP R_igraph_transitivity_local_undirected_all(void *, void *);
 extern SEXP R_igraph_transitivity_undirected(void *, void *);
 extern SEXP R_igraph_tree(void *, void *, void *);
+extern SEXP R_igraph_tree_from_parent_vector(void *, void *);
 extern SEXP R_igraph_tree_game(void *, void *, void *);
 extern SEXP R_igraph_triad_census(void *);
+extern SEXP R_igraph_triangular_lattice(void *, void *, void *);
+extern SEXP R_igraph_trussness(void *);
+extern SEXP R_igraph_turan(void *, void *);
 extern SEXP R_igraph_unfold_tree(void *, void *, void *);
 extern SEXP R_igraph_union(void *, void *);
 extern SEXP R_igraph_vcount(void *);
+extern SEXP R_igraph_version(void *);
 extern SEXP R_igraph_vertex_coloring_greedy(void *, void *);
 extern SEXP R_igraph_vertex_connectivity(void *, void *);
 extern SEXP R_igraph_vertex_disjoint_paths(void *, void *, void *);
+extern SEXP R_igraph_vertex_path_from_edge_path(void *, void *, void *, void *);
+extern SEXP R_igraph_voronoi(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_vs_adj(void *, void *, void *, void *);
 extern SEXP R_igraph_vs_nei(void *, void *, void *, void *);
 extern SEXP R_igraph_walktrap_community(void *, void *, void *, void *, void *, void *);
@@ -380,6 +468,10 @@ extern SEXP R_igraph_weak_ref_value(void *);
 extern SEXP R_igraph_weighted_adjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_weighted_clique_number(void *, void *);
 extern SEXP R_igraph_weighted_cliques(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_weighted_sparsemat(void *, void *, void *, void *);
+extern SEXP R_igraph_wheel(void *, void *, void *);
+extern SEXP R_igraph_widest_path_widths_dijkstra(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_widest_path_widths_floyd_warshall(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_write_graph_dimacs(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_write_graph_dot(void *, void *);
 extern SEXP R_igraph_write_graph_edgelist(void *, void *);
@@ -410,13 +502,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_all_minimal_st_separators",                  (DL_FUNC) &R_igraph_all_minimal_st_separators,                   1},
     {"R_igraph_all_st_cuts",                                (DL_FUNC) &R_igraph_all_st_cuts,                                 3},
     {"R_igraph_all_st_mincuts",                             (DL_FUNC) &R_igraph_all_st_mincuts,                              4},
+    {"R_igraph_almost_equals",                              (DL_FUNC) &R_igraph_almost_equals,                               3},
     {"R_igraph_are_connected",                              (DL_FUNC) &R_igraph_are_connected,                               3},
     {"R_igraph_arpack",                                     (DL_FUNC) &R_igraph_arpack,                                      5},
     {"R_igraph_arpack_unpack_complex",                      (DL_FUNC) &R_igraph_arpack_unpack_complex,                       3},
     {"R_igraph_articulation_points",                        (DL_FUNC) &R_igraph_articulation_points,                         1},
-    {"R_igraph_assortativity",                              (DL_FUNC) &R_igraph_assortativity,                               4},
+    {"R_igraph_assortativity",                              (DL_FUNC) &R_igraph_assortativity,                               5},
     {"R_igraph_assortativity_degree",                       (DL_FUNC) &R_igraph_assortativity_degree,                        2},
-    {"R_igraph_assortativity_nominal",                      (DL_FUNC) &R_igraph_assortativity_nominal,                       3},
+    {"R_igraph_assortativity_nominal",                      (DL_FUNC) &R_igraph_assortativity_nominal,                       4},
     {"R_igraph_asymmetric_preference_game",                 (DL_FUNC) &R_igraph_asymmetric_preference_game,                  6},
     {"R_igraph_atlas",                                      (DL_FUNC) &R_igraph_atlas,                                       1},
     {"R_igraph_authority_score",                            (DL_FUNC) &R_igraph_authority_score,                             4},
@@ -428,9 +521,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_barabasi_aging_game",                        (DL_FUNC) &R_igraph_barabasi_aging_game,                        12},
     {"R_igraph_barabasi_game",                              (DL_FUNC) &R_igraph_barabasi_game,                               9},
     {"R_igraph_betweenness_cutoff",                         (DL_FUNC) &R_igraph_betweenness_cutoff,                          5},
+    {"R_igraph_betweenness_subset",                         (DL_FUNC) &R_igraph_betweenness_subset,                          6},
     {"R_igraph_bfs",                                        (DL_FUNC) &R_igraph_bfs,                                        15},
+    {"R_igraph_bfs_simple",                                 (DL_FUNC) &R_igraph_bfs_simple,                                  3},
+    {"R_igraph_biadjacency",                                (DL_FUNC) &R_igraph_biadjacency,                                 4},
     {"R_igraph_bibcoupling",                                (DL_FUNC) &R_igraph_bibcoupling,                                 2},
     {"R_igraph_biconnected_components",                     (DL_FUNC) &R_igraph_biconnected_components,                      1},
+    {"R_igraph_bipartite_game",                             (DL_FUNC) &R_igraph_bipartite_game,                              7},
     {"R_igraph_bipartite_game_gnm",                         (DL_FUNC) &R_igraph_bipartite_game_gnm,                          5},
     {"R_igraph_bipartite_game_gnp",                         (DL_FUNC) &R_igraph_bipartite_game_gnp,                          5},
     {"R_igraph_bipartite_projection",                       (DL_FUNC) &R_igraph_bipartite_projection,                        4},
@@ -447,12 +544,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_centralization_degree_tmax",                 (DL_FUNC) &R_igraph_centralization_degree_tmax,                  4},
     {"R_igraph_centralization_eigenvector_centrality",      (DL_FUNC) &R_igraph_centralization_eigenvector_centrality,       5},
     {"R_igraph_centralization_eigenvector_centrality_tmax", (DL_FUNC) &R_igraph_centralization_eigenvector_centrality_tmax,  4},
+    {"R_igraph_circulant",                                  (DL_FUNC) &R_igraph_circulant,                                   3},
     {"R_igraph_cited_type_game",                            (DL_FUNC) &R_igraph_cited_type_game,                             5},
     {"R_igraph_citing_cited_type_game",                     (DL_FUNC) &R_igraph_citing_cited_type_game,                      5},
     {"R_igraph_clique_number",                              (DL_FUNC) &R_igraph_clique_number,                               1},
     {"R_igraph_clique_size_hist",                           (DL_FUNC) &R_igraph_clique_size_hist,                            3},
     {"R_igraph_cliques",                                    (DL_FUNC) &R_igraph_cliques,                                     3},
     {"R_igraph_closeness_cutoff",                           (DL_FUNC) &R_igraph_closeness_cutoff,                            6},
+    {"R_igraph_cmp_epsilon",                                (DL_FUNC) &R_igraph_cmp_epsilon,                                 3},
     {"R_igraph_cocitation",                                 (DL_FUNC) &R_igraph_cocitation,                                  2},
     {"R_igraph_cohesion",                                   (DL_FUNC) &R_igraph_cohesion,                                    2},
     {"R_igraph_cohesive_blocks",                            (DL_FUNC) &R_igraph_cohesive_blocks,                             1},
@@ -474,6 +573,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_constraint",                                 (DL_FUNC) &R_igraph_constraint,                                  3},
     {"R_igraph_contract_vertices",                          (DL_FUNC) &R_igraph_contract_vertices,                           3},
     {"R_igraph_convex_hull",                                (DL_FUNC) &R_igraph_convex_hull,                                 1},
+    {"R_igraph_copy",                                       (DL_FUNC) &R_igraph_copy,                                        1},
     {"R_igraph_copy_env",                                   (DL_FUNC) &R_igraph_copy_env,                                    1},
     {"R_igraph_copy_from",                                  (DL_FUNC) &R_igraph_copy_from,                                   1},
     {"R_igraph_copy_to",                                    (DL_FUNC) &R_igraph_copy_to,                                     1},
@@ -491,25 +591,40 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_degree_sequence_game",                       (DL_FUNC) &R_igraph_degree_sequence_game,                        3},
     {"R_igraph_delete_edges",                               (DL_FUNC) &R_igraph_delete_edges,                                2},
     {"R_igraph_delete_vertices",                            (DL_FUNC) &R_igraph_delete_vertices,                             2},
+    {"R_igraph_delete_vertices_idx",                        (DL_FUNC) &R_igraph_delete_vertices_idx,                         2},
     {"R_igraph_density",                                    (DL_FUNC) &R_igraph_density,                                     2},
+    {"R_igraph_deterministic_optimal_imitation",            (DL_FUNC) &R_igraph_deterministic_optimal_imitation,             6},
     {"R_igraph_dfs",                                        (DL_FUNC) &R_igraph_dfs,                                        12},
     {"R_igraph_diameter",                                   (DL_FUNC) &R_igraph_diameter,                                    4},
     {"R_igraph_difference",                                 (DL_FUNC) &R_igraph_difference,                                  2},
     {"R_igraph_dim_select",                                 (DL_FUNC) &R_igraph_dim_select,                                  1},
     {"R_igraph_disjoint_union",                             (DL_FUNC) &R_igraph_disjoint_union,                              1},
+    {"R_igraph_distances",                                  (DL_FUNC) &R_igraph_distances,                                   4},
+    {"R_igraph_distances_bellman_ford",                     (DL_FUNC) &R_igraph_distances_bellman_ford,                      5},
+    {"R_igraph_distances_cutoff",                           (DL_FUNC) &R_igraph_distances_cutoff,                            5},
+    {"R_igraph_distances_dijkstra",                         (DL_FUNC) &R_igraph_distances_dijkstra,                          5},
+    {"R_igraph_distances_dijkstra_cutoff",                  (DL_FUNC) &R_igraph_distances_dijkstra_cutoff,                   6},
+    {"R_igraph_distances_floyd_warshall",                   (DL_FUNC) &R_igraph_distances_floyd_warshall,                    6},
+    {"R_igraph_distances_johnson",                          (DL_FUNC) &R_igraph_distances_johnson,                           4},
     {"R_igraph_diversity",                                  (DL_FUNC) &R_igraph_diversity,                                   3},
     {"R_igraph_dominator_tree",                             (DL_FUNC) &R_igraph_dominator_tree,                              3},
     {"R_igraph_dot_product_game",                           (DL_FUNC) &R_igraph_dot_product_game,                            2},
     {"R_igraph_dyad_census",                                (DL_FUNC) &R_igraph_dyad_census,                                 1},
+    {"R_igraph_ecc",                                        (DL_FUNC) &R_igraph_ecc,                                         5},
     {"R_igraph_eccentricity",                               (DL_FUNC) &R_igraph_eccentricity,                                3},
+    {"R_igraph_eccentricity_dijkstra",                      (DL_FUNC) &R_igraph_eccentricity_dijkstra,                       4},
     {"R_igraph_ecount",                                     (DL_FUNC) &R_igraph_ecount,                                      1},
     {"R_igraph_edge_betweenness_cutoff",                    (DL_FUNC) &R_igraph_edge_betweenness_cutoff,                     4},
+    {"R_igraph_edge_betweenness_subset",                    (DL_FUNC) &R_igraph_edge_betweenness_subset,                     6},
     {"R_igraph_edge_connectivity",                          (DL_FUNC) &R_igraph_edge_connectivity,                           2},
     {"R_igraph_edge_disjoint_paths",                        (DL_FUNC) &R_igraph_edge_disjoint_paths,                         3},
     {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
+    {"R_igraph_eigen_matrix",                               (DL_FUNC) &R_igraph_eigen_matrix,                                7},
+    {"R_igraph_eigen_matrix_symmetric",                     (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                      7},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
+    {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 3},
     {"R_igraph_erdos_renyi_game",                           (DL_FUNC) &R_igraph_erdos_renyi_game,                            5},
     {"R_igraph_es_adj",                                     (DL_FUNC) &R_igraph_es_adj,                                      4},
     {"R_igraph_es_pairs",                                   (DL_FUNC) &R_igraph_es_pairs,                                    3},
@@ -517,19 +632,27 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_establishment_game",                         (DL_FUNC) &R_igraph_establishment_game,                          6},
     {"R_igraph_eulerian_cycle",                             (DL_FUNC) &R_igraph_eulerian_cycle,                              1},
     {"R_igraph_eulerian_path",                              (DL_FUNC) &R_igraph_eulerian_path,                               1},
+    {"R_igraph_even_tarjan_reduction",                      (DL_FUNC) &R_igraph_even_tarjan_reduction,                       1},
+    {"R_igraph_expand_path_to_pairs",                       (DL_FUNC) &R_igraph_expand_path_to_pairs,                        1},
     {"R_igraph_extended_chordal_ring",                      (DL_FUNC) &R_igraph_extended_chordal_ring,                       3},
     {"R_igraph_famous",                                     (DL_FUNC) &R_igraph_famous,                                      1},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
     {"R_igraph_feedback_arc_set",                           (DL_FUNC) &R_igraph_feedback_arc_set,                            3},
     {"R_igraph_finalizer",                                  (DL_FUNC) &R_igraph_finalizer,                                   0},
     {"R_igraph_forest_fire_game",                           (DL_FUNC) &R_igraph_forest_fire_game,                            5},
+    {"R_igraph_from_hrg_dendrogram",                        (DL_FUNC) &R_igraph_from_hrg_dendrogram,                         1},
     {"R_igraph_from_prufer",                                (DL_FUNC) &R_igraph_from_prufer,                                 1},
     {"R_igraph_full",                                       (DL_FUNC) &R_igraph_full,                                        3},
     {"R_igraph_full_bipartite",                             (DL_FUNC) &R_igraph_full_bipartite,                              4},
     {"R_igraph_full_citation",                              (DL_FUNC) &R_igraph_full_citation,                               2},
+    {"R_igraph_full_multipartite",                          (DL_FUNC) &R_igraph_full_multipartite,                           3},
+    {"R_igraph_fundamental_cycles",                         (DL_FUNC) &R_igraph_fundamental_cycles,                          4},
+    {"R_igraph_generalized_petersen",                       (DL_FUNC) &R_igraph_generalized_petersen,                        2},
     {"R_igraph_get_adjacency",                              (DL_FUNC) &R_igraph_get_adjacency,                               3},
+    {"R_igraph_get_adjacency_sparse",                       (DL_FUNC) &R_igraph_get_adjacency_sparse,                        4},
     {"R_igraph_get_adjedgelist",                            (DL_FUNC) &R_igraph_get_adjedgelist,                             3},
     {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 4},
+    {"R_igraph_get_all_eids_between",                       (DL_FUNC) &R_igraph_get_all_eids_between,                        4},
     {"R_igraph_get_all_shortest_paths",                     (DL_FUNC) &R_igraph_get_all_shortest_paths,                      4},
     {"R_igraph_get_all_shortest_paths_dijkstra",            (DL_FUNC) &R_igraph_get_all_shortest_paths_dijkstra,             5},
     {"R_igraph_get_all_simple_paths",                       (DL_FUNC) &R_igraph_get_all_simple_paths,                        5},
@@ -542,14 +665,26 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_eids",                                   (DL_FUNC) &R_igraph_get_eids,                                    5},
     {"R_igraph_get_graph_id",                               (DL_FUNC) &R_igraph_get_graph_id,                                1},
     {"R_igraph_get_isomorphisms_vf2",                       (DL_FUNC) &R_igraph_get_isomorphisms_vf2,                        6},
+    {"R_igraph_get_k_shortest_paths",                       (DL_FUNC) &R_igraph_get_k_shortest_paths,                        6},
+    {"R_igraph_get_laplacian",                              (DL_FUNC) &R_igraph_get_laplacian,                               4},
+    {"R_igraph_get_laplacian_sparse",                       (DL_FUNC) &R_igraph_get_laplacian_sparse,                        4},
+    {"R_igraph_get_shortest_path",                          (DL_FUNC) &R_igraph_get_shortest_path,                           4},
+    {"R_igraph_get_shortest_path_bellman_ford",             (DL_FUNC) &R_igraph_get_shortest_path_bellman_ford,              5},
+    {"R_igraph_get_shortest_path_dijkstra",                 (DL_FUNC) &R_igraph_get_shortest_path_dijkstra,                  5},
     {"R_igraph_get_shortest_paths",                         (DL_FUNC) &R_igraph_get_shortest_paths,                         10},
     {"R_igraph_get_stochastic",                             (DL_FUNC) &R_igraph_get_stochastic,                              2},
+    {"R_igraph_get_stochastic_sparse",                      (DL_FUNC) &R_igraph_get_stochastic_sparse,                       3},
     {"R_igraph_get_stochastic_sparsemat",                   (DL_FUNC) &R_igraph_get_stochastic_sparsemat,                    2},
     {"R_igraph_get_subisomorphisms_vf2",                    (DL_FUNC) &R_igraph_get_subisomorphisms_vf2,                     6},
+    {"R_igraph_get_widest_path",                            (DL_FUNC) &R_igraph_get_widest_path,                             5},
+    {"R_igraph_get_widest_paths",                           (DL_FUNC) &R_igraph_get_widest_paths,                            5},
     {"R_igraph_getsphere",                                  (DL_FUNC) &R_igraph_getsphere,                                   8},
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_global_efficiency",                          (DL_FUNC) &R_igraph_global_efficiency,                           3},
+    {"R_igraph_gomory_hu_tree",                             (DL_FUNC) &R_igraph_gomory_hu_tree,                              2},
     {"R_igraph_graph_adjacency",                            (DL_FUNC) &R_igraph_graph_adjacency,                             2},
+    {"R_igraph_graph_center",                               (DL_FUNC) &R_igraph_graph_center,                                2},
+    {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
     {"R_igraph_graph_version",                              (DL_FUNC) &R_igraph_graph_version,                               1},
     {"R_igraph_graphlets",                                  (DL_FUNC) &R_igraph_graphlets,                                   3},
     {"R_igraph_graphlets_candidate_basis",                  (DL_FUNC) &R_igraph_graphlets_candidate_basis,                   2},
@@ -557,16 +692,23 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_grg_game",                                   (DL_FUNC) &R_igraph_grg_game,                                    4},
     {"R_igraph_growing_random_game",                        (DL_FUNC) &R_igraph_growing_random_game,                         4},
     {"R_igraph_harmonic_centrality_cutoff",                 (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                  6},
+    {"R_igraph_has_attribute_table",                        (DL_FUNC) &R_igraph_has_attribute_table,                         1},
     {"R_igraph_has_loop",                                   (DL_FUNC) &R_igraph_has_loop,                                    1},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
+    {"R_igraph_has_mutual",                                 (DL_FUNC) &R_igraph_has_mutual,                                  2},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},
     {"R_igraph_hrg_dendrogram",                             (DL_FUNC) &R_igraph_hrg_dendrogram,                              1},
     {"R_igraph_hrg_fit",                                    (DL_FUNC) &R_igraph_hrg_fit,                                     4},
     {"R_igraph_hrg_game",                                   (DL_FUNC) &R_igraph_hrg_game,                                    1},
     {"R_igraph_hrg_predict",                                (DL_FUNC) &R_igraph_hrg_predict,                                 5},
+    {"R_igraph_hrg_resize",                                 (DL_FUNC) &R_igraph_hrg_resize,                                  2},
+    {"R_igraph_hrg_sample",                                 (DL_FUNC) &R_igraph_hrg_sample,                                  1},
+    {"R_igraph_hrg_sample_many",                            (DL_FUNC) &R_igraph_hrg_sample_many,                             2},
+    {"R_igraph_hrg_size",                                   (DL_FUNC) &R_igraph_hrg_size,                                    1},
     {"R_igraph_hsbm_game",                                  (DL_FUNC) &R_igraph_hsbm_game,                                   5},
     {"R_igraph_hsbm_list_game",                             (DL_FUNC) &R_igraph_hsbm_list_game,                              5},
+    {"R_igraph_hub_and_authority_scores",                   (DL_FUNC) &R_igraph_hub_and_authority_scores,                    4},
     {"R_igraph_hub_score",                                  (DL_FUNC) &R_igraph_hub_score,                                   4},
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
@@ -576,20 +718,24 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_independence_number",                        (DL_FUNC) &R_igraph_independence_number,                         1},
     {"R_igraph_independent_vertex_sets",                    (DL_FUNC) &R_igraph_independent_vertex_sets,                     3},
     {"R_igraph_induced_subgraph",                           (DL_FUNC) &R_igraph_induced_subgraph,                            3},
+    {"R_igraph_induced_subgraph_map",                       (DL_FUNC) &R_igraph_induced_subgraph_map,                        3},
     {"R_igraph_intersection",                               (DL_FUNC) &R_igraph_intersection,                                2},
+    {"R_igraph_is_acyclic",                                 (DL_FUNC) &R_igraph_is_acyclic,                                  1},
     {"R_igraph_is_bipartite",                               (DL_FUNC) &R_igraph_is_bipartite,                                1},
     {"R_igraph_is_chordal",                                 (DL_FUNC) &R_igraph_is_chordal,                                  5},
     {"R_igraph_is_connected",                               (DL_FUNC) &R_igraph_is_connected,                                2},
     {"R_igraph_is_dag",                                     (DL_FUNC) &R_igraph_is_dag,                                      1},
     {"R_igraph_is_directed",                                (DL_FUNC) &R_igraph_is_directed,                                 1},
     {"R_igraph_is_eulerian",                                (DL_FUNC) &R_igraph_is_eulerian,                                 1},
+    {"R_igraph_is_forest",                                  (DL_FUNC) &R_igraph_is_forest,                                   2},
     {"R_igraph_is_graphical",                               (DL_FUNC) &R_igraph_is_graphical,                                3},
     {"R_igraph_is_loop",                                    (DL_FUNC) &R_igraph_is_loop,                                     2},
     {"R_igraph_is_matching",                                (DL_FUNC) &R_igraph_is_matching,                                 3},
     {"R_igraph_is_maximal_matching",                        (DL_FUNC) &R_igraph_is_maximal_matching,                         3},
     {"R_igraph_is_minimal_separator",                       (DL_FUNC) &R_igraph_is_minimal_separator,                        2},
     {"R_igraph_is_multiple",                                (DL_FUNC) &R_igraph_is_multiple,                                 2},
-    {"R_igraph_is_mutual",                                  (DL_FUNC) &R_igraph_is_mutual,                                   2},
+    {"R_igraph_is_mutual",                                  (DL_FUNC) &R_igraph_is_mutual,                                   3},
+    {"R_igraph_is_perfect",                                 (DL_FUNC) &R_igraph_is_perfect,                                  1},
     {"R_igraph_is_separator",                               (DL_FUNC) &R_igraph_is_separator,                                2},
     {"R_igraph_is_simple",                                  (DL_FUNC) &R_igraph_is_simple,                                   1},
     {"R_igraph_is_tree",                                    (DL_FUNC) &R_igraph_is_tree,                                     2},
@@ -600,6 +746,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_isomorphic_bliss",                           (DL_FUNC) &R_igraph_isomorphic_bliss,                            5},
     {"R_igraph_isomorphic_vf2",                             (DL_FUNC) &R_igraph_isomorphic_vf2,                              6},
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
+    {"R_igraph_kary_tree",                                  (DL_FUNC) &R_igraph_kary_tree,                                   3},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
     {"R_igraph_laplacian",                                  (DL_FUNC) &R_igraph_laplacian,                                   4},
     {"R_igraph_laplacian_spectral_embedding",               (DL_FUNC) &R_igraph_laplacian_spectral_embedding,                7},
@@ -630,6 +777,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_layout_sphere",                              (DL_FUNC) &R_igraph_layout_sphere,                               1},
     {"R_igraph_layout_star",                                (DL_FUNC) &R_igraph_layout_star,                                 3},
     {"R_igraph_layout_sugiyama",                            (DL_FUNC) &R_igraph_layout_sugiyama,                             6},
+    {"R_igraph_layout_umap",                                (DL_FUNC) &R_igraph_layout_umap,                                 7},
+    {"R_igraph_layout_umap_3d",                             (DL_FUNC) &R_igraph_layout_umap_3d,                              7},
+    {"R_igraph_layout_umap_compute_weights",                (DL_FUNC) &R_igraph_layout_umap_compute_weights,                 3},
     {"R_igraph_lcf_vector",                                 (DL_FUNC) &R_igraph_lcf_vector,                                  3},
     {"R_igraph_linegraph",                                  (DL_FUNC) &R_igraph_linegraph,                                   1},
     {"R_igraph_list_triangles",                             (DL_FUNC) &R_igraph_list_triangles,                              1},
@@ -641,22 +791,26 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_local_scan_k_ecount",                        (DL_FUNC) &R_igraph_local_scan_k_ecount,                         4},
     {"R_igraph_local_scan_k_ecount_them",                   (DL_FUNC) &R_igraph_local_scan_k_ecount_them,                    5},
     {"R_igraph_local_scan_neighborhood_ecount",             (DL_FUNC) &R_igraph_local_scan_neighborhood_ecount,              3},
+    {"R_igraph_local_scan_subset_ecount",                   (DL_FUNC) &R_igraph_local_scan_subset_ecount,                    3},
     {"R_igraph_make_weak_ref",                              (DL_FUNC) &R_igraph_make_weak_ref,                               3},
     {"R_igraph_maxflow",                                    (DL_FUNC) &R_igraph_maxflow,                                     4},
     {"R_igraph_maximal_cliques",                            (DL_FUNC) &R_igraph_maximal_cliques,                             4},
     {"R_igraph_maximal_cliques_count",                      (DL_FUNC) &R_igraph_maximal_cliques_count,                       4},
     {"R_igraph_maximal_cliques_file",                       (DL_FUNC) &R_igraph_maximal_cliques_file,                        5},
     {"R_igraph_maximal_cliques_hist",                       (DL_FUNC) &R_igraph_maximal_cliques_hist,                        3},
+    {"R_igraph_maximal_cliques_subset",                     (DL_FUNC) &R_igraph_maximal_cliques_subset,                      5},
     {"R_igraph_maximal_independent_vertex_sets",            (DL_FUNC) &R_igraph_maximal_independent_vertex_sets,             1},
     {"R_igraph_maximum_bipartite_matching",                 (DL_FUNC) &R_igraph_maximum_bipartite_matching,                  4},
     {"R_igraph_maximum_cardinality_search",                 (DL_FUNC) &R_igraph_maximum_cardinality_search,                  1},
     {"R_igraph_mincut",                                     (DL_FUNC) &R_igraph_mincut,                                      2},
     {"R_igraph_mincut_value",                               (DL_FUNC) &R_igraph_mincut_value,                                2},
+    {"R_igraph_minimum_cycle_basis",                        (DL_FUNC) &R_igraph_minimum_cycle_basis,                         5},
     {"R_igraph_minimum_size_separators",                    (DL_FUNC) &R_igraph_minimum_size_separators,                     1},
     {"R_igraph_minimum_spanning_tree_prim",                 (DL_FUNC) &R_igraph_minimum_spanning_tree_prim,                  2},
     {"R_igraph_minimum_spanning_tree_unweighted",           (DL_FUNC) &R_igraph_minimum_spanning_tree_unweighted,            1},
     {"R_igraph_modularity",                                 (DL_FUNC) &R_igraph_modularity,                                  5},
     {"R_igraph_modularity_matrix",                          (DL_FUNC) &R_igraph_modularity_matrix,                           4},
+    {"R_igraph_moran_process",                              (DL_FUNC) &R_igraph_moran_process,                               5},
     {"R_igraph_motifs_randesu",                             (DL_FUNC) &R_igraph_motifs_randesu,                              3},
     {"R_igraph_motifs_randesu_estimate",                    (DL_FUNC) &R_igraph_motifs_randesu_estimate,                     5},
     {"R_igraph_motifs_randesu_no",                          (DL_FUNC) &R_igraph_motifs_randesu_no,                           3},
@@ -673,14 +827,19 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_path_length_hist",                           (DL_FUNC) &R_igraph_path_length_hist,                            2},
     {"R_igraph_permute_vertices",                           (DL_FUNC) &R_igraph_permute_vertices,                            2},
     {"R_igraph_personalized_pagerank",                      (DL_FUNC) &R_igraph_personalized_pagerank,                       8},
+    {"R_igraph_personalized_pagerank_vs",                   (DL_FUNC) &R_igraph_personalized_pagerank_vs,                    8},
     {"R_igraph_power_law_fit",                              (DL_FUNC) &R_igraph_power_law_fit,                               3},
     {"R_igraph_preference_game",                            (DL_FUNC) &R_igraph_preference_game,                             7},
+    {"R_igraph_progress",                                   (DL_FUNC) &R_igraph_progress,                                    2},
+    {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
+    {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
     {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      2},
     {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},
     {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},
-    {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 5},
+    {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 6},
     {"R_igraph_read_graph_dimacs",                          (DL_FUNC) &R_igraph_read_graph_dimacs,                           2},
+    {"R_igraph_read_graph_dimacs_flow",                     (DL_FUNC) &R_igraph_read_graph_dimacs_flow,                      2},
     {"R_igraph_read_graph_dl",                              (DL_FUNC) &R_igraph_read_graph_dl,                               2},
     {"R_igraph_read_graph_edgelist",                        (DL_FUNC) &R_igraph_read_graph_edgelist,                         3},
     {"R_igraph_read_graph_gml",                             (DL_FUNC) &R_igraph_read_graph_gml,                              1},
@@ -692,35 +851,42 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_realize_degree_sequence",                    (DL_FUNC) &R_igraph_realize_degree_sequence,                     4},
     {"R_igraph_recent_degree_aging_game",                   (DL_FUNC) &R_igraph_recent_degree_aging_game,                   10},
     {"R_igraph_reciprocity",                                (DL_FUNC) &R_igraph_reciprocity,                                 3},
+    {"R_igraph_regular_tree",                               (DL_FUNC) &R_igraph_regular_tree,                                3},
+    {"R_igraph_residual_graph",                             (DL_FUNC) &R_igraph_residual_graph,                              3},
     {"R_igraph_reverse_edges",                              (DL_FUNC) &R_igraph_reverse_edges,                               2},
+    {"R_igraph_reverse_residual_graph",                     (DL_FUNC) &R_igraph_reverse_residual_graph,                      3},
     {"R_igraph_rewire",                                     (DL_FUNC) &R_igraph_rewire,                                      3},
     {"R_igraph_rewire_directed_edges",                      (DL_FUNC) &R_igraph_rewire_directed_edges,                       4},
     {"R_igraph_rewire_edges",                               (DL_FUNC) &R_igraph_rewire_edges,                                4},
     {"R_igraph_ring",                                       (DL_FUNC) &R_igraph_ring,                                        4},
+    {"R_igraph_roots_for_tree_layout",                      (DL_FUNC) &R_igraph_roots_for_tree_layout,                       3},
+    {"R_igraph_roulette_wheel_imitation",                   (DL_FUNC) &R_igraph_roulette_wheel_imitation,                    6},
     {"R_igraph_running_mean",                               (DL_FUNC) &R_igraph_running_mean,                                2},
     {"R_igraph_sample_dirichlet",                           (DL_FUNC) &R_igraph_sample_dirichlet,                            2},
     {"R_igraph_sample_sphere_surface",                      (DL_FUNC) &R_igraph_sample_sphere_surface,                       4},
     {"R_igraph_sample_sphere_volume",                       (DL_FUNC) &R_igraph_sample_sphere_volume,                        4},
     {"R_igraph_sbm_game",                                   (DL_FUNC) &R_igraph_sbm_game,                                    5},
-    {"R_igraph_scg_adjacency",                              (DL_FUNC) &R_igraph_scg_adjacency,                              14},
-    {"R_igraph_scg_grouping",                               (DL_FUNC) &R_igraph_scg_grouping,                                7},
-    {"R_igraph_scg_laplacian",                              (DL_FUNC) &R_igraph_scg_laplacian,                              16},
-    {"R_igraph_scg_norm_eps",                               (DL_FUNC) &R_igraph_scg_norm_eps,                                5},
-    {"R_igraph_scg_semiprojectors",                         (DL_FUNC) &R_igraph_scg_semiprojectors,                          5},
-    {"R_igraph_scg_stochastic",                             (DL_FUNC) &R_igraph_scg_stochastic,                             17},
     {"R_igraph_set_verbose",                                (DL_FUNC) &R_igraph_set_verbose,                                 1},
     {"R_igraph_shortest_paths",                             (DL_FUNC) &R_igraph_shortest_paths,                              6},
     {"R_igraph_similarity_dice",                            (DL_FUNC) &R_igraph_similarity_dice,                             4},
+    {"R_igraph_similarity_dice_es",                         (DL_FUNC) &R_igraph_similarity_dice_es,                          4},
+    {"R_igraph_similarity_dice_pairs",                      (DL_FUNC) &R_igraph_similarity_dice_pairs,                       4},
     {"R_igraph_similarity_inverse_log_weighted",            (DL_FUNC) &R_igraph_similarity_inverse_log_weighted,             3},
     {"R_igraph_similarity_jaccard",                         (DL_FUNC) &R_igraph_similarity_jaccard,                          4},
+    {"R_igraph_similarity_jaccard_es",                      (DL_FUNC) &R_igraph_similarity_jaccard_es,                       4},
+    {"R_igraph_similarity_jaccard_pairs",                   (DL_FUNC) &R_igraph_similarity_jaccard_pairs,                    4},
     {"R_igraph_simple_interconnected_islands_game",         (DL_FUNC) &R_igraph_simple_interconnected_islands_game,          4},
     {"R_igraph_simplify",                                   (DL_FUNC) &R_igraph_simplify,                                    4},
     {"R_igraph_simplify_and_colorize",                      (DL_FUNC) &R_igraph_simplify_and_colorize,                       1},
     {"R_igraph_sir",                                        (DL_FUNC) &R_igraph_sir,                                         4},
     {"R_igraph_solve_lsap",                                 (DL_FUNC) &R_igraph_solve_lsap,                                  2},
+    {"R_igraph_spanner",                                    (DL_FUNC) &R_igraph_spanner,                                     3},
+    {"R_igraph_sparse_adjacency",                           (DL_FUNC) &R_igraph_sparse_adjacency,                            3},
+    {"R_igraph_sparse_weighted_adjacency",                  (DL_FUNC) &R_igraph_sparse_weighted_adjacency,                   3},
     {"R_igraph_spinglass_community",                        (DL_FUNC) &R_igraph_spinglass_community,                        11},
     {"R_igraph_spinglass_my_community",                     (DL_FUNC) &R_igraph_spinglass_my_community,                      6},
     {"R_igraph_split_join_distance",                        (DL_FUNC) &R_igraph_split_join_distance,                         2},
+    {"R_igraph_square_lattice",                             (DL_FUNC) &R_igraph_square_lattice,                              5},
     {"R_igraph_st_edge_connectivity",                       (DL_FUNC) &R_igraph_st_edge_connectivity,                        3},
     {"R_igraph_st_mincut",                                  (DL_FUNC) &R_igraph_st_mincut,                                   4},
     {"R_igraph_st_mincut_value",                            (DL_FUNC) &R_igraph_st_mincut_value,                             4},
@@ -728,29 +894,43 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_star",                                       (DL_FUNC) &R_igraph_star,                                        3},
     {"R_igraph_static_fitness_game",                        (DL_FUNC) &R_igraph_static_fitness_game,                         5},
     {"R_igraph_static_power_law_game",                      (DL_FUNC) &R_igraph_static_power_law_game,                       7},
+    {"R_igraph_status",                                     (DL_FUNC) &R_igraph_status,                                      1},
+    {"R_igraph_stochastic_imitation",                       (DL_FUNC) &R_igraph_stochastic_imitation,                        6},
     {"R_igraph_strength",                                   (DL_FUNC) &R_igraph_strength,                                    5},
+    {"R_igraph_strerror",                                   (DL_FUNC) &R_igraph_strerror,                                    1},
     {"R_igraph_subcomponent",                               (DL_FUNC) &R_igraph_subcomponent,                                3},
     {"R_igraph_subgraph_from_edges",                        (DL_FUNC) &R_igraph_subgraph_from_edges,                         3},
+    {"R_igraph_subisomorphic",                              (DL_FUNC) &R_igraph_subisomorphic,                               2},
+    {"R_igraph_subisomorphic_function_vf2",                 (DL_FUNC) &R_igraph_subisomorphic_function_vf2,                  7},
     {"R_igraph_subisomorphic_lad",                          (DL_FUNC) &R_igraph_subisomorphic_lad,                           7},
     {"R_igraph_subisomorphic_vf2",                          (DL_FUNC) &R_igraph_subisomorphic_vf2,                           6},
+    {"R_igraph_symmetric_tree",                             (DL_FUNC) &R_igraph_symmetric_tree,                              2},
     {"R_igraph_to_directed",                                (DL_FUNC) &R_igraph_to_directed,                                 2},
     {"R_igraph_to_prufer",                                  (DL_FUNC) &R_igraph_to_prufer,                                   1},
     {"R_igraph_to_undirected",                              (DL_FUNC) &R_igraph_to_undirected,                               3},
     {"R_igraph_topological_sorting",                        (DL_FUNC) &R_igraph_topological_sorting,                         2},
+    {"R_igraph_transitive_closure_dag",                     (DL_FUNC) &R_igraph_transitive_closure_dag,                      1},
     {"R_igraph_transitivity_avglocal_undirected",           (DL_FUNC) &R_igraph_transitivity_avglocal_undirected,            2},
     {"R_igraph_transitivity_barrat",                        (DL_FUNC) &R_igraph_transitivity_barrat,                         4},
     {"R_igraph_transitivity_local_undirected",              (DL_FUNC) &R_igraph_transitivity_local_undirected,               3},
     {"R_igraph_transitivity_local_undirected_all",          (DL_FUNC) &R_igraph_transitivity_local_undirected_all,           2},
     {"R_igraph_transitivity_undirected",                    (DL_FUNC) &R_igraph_transitivity_undirected,                     2},
     {"R_igraph_tree",                                       (DL_FUNC) &R_igraph_tree,                                        3},
+    {"R_igraph_tree_from_parent_vector",                    (DL_FUNC) &R_igraph_tree_from_parent_vector,                     2},
     {"R_igraph_tree_game",                                  (DL_FUNC) &R_igraph_tree_game,                                   3},
     {"R_igraph_triad_census",                               (DL_FUNC) &R_igraph_triad_census,                                1},
+    {"R_igraph_triangular_lattice",                         (DL_FUNC) &R_igraph_triangular_lattice,                          3},
+    {"R_igraph_trussness",                                  (DL_FUNC) &R_igraph_trussness,                                   1},
+    {"R_igraph_turan",                                      (DL_FUNC) &R_igraph_turan,                                       2},
     {"R_igraph_unfold_tree",                                (DL_FUNC) &R_igraph_unfold_tree,                                 3},
     {"R_igraph_union",                                      (DL_FUNC) &R_igraph_union,                                       2},
     {"R_igraph_vcount",                                     (DL_FUNC) &R_igraph_vcount,                                      1},
+    {"R_igraph_version",                                    (DL_FUNC) &R_igraph_version,                                     1},
     {"R_igraph_vertex_coloring_greedy",                     (DL_FUNC) &R_igraph_vertex_coloring_greedy,                      2},
     {"R_igraph_vertex_connectivity",                        (DL_FUNC) &R_igraph_vertex_connectivity,                         2},
     {"R_igraph_vertex_disjoint_paths",                      (DL_FUNC) &R_igraph_vertex_disjoint_paths,                       3},
+    {"R_igraph_vertex_path_from_edge_path",                 (DL_FUNC) &R_igraph_vertex_path_from_edge_path,                  4},
+    {"R_igraph_voronoi",                                    (DL_FUNC) &R_igraph_voronoi,                                     5},
     {"R_igraph_vs_adj",                                     (DL_FUNC) &R_igraph_vs_adj,                                      4},
     {"R_igraph_vs_nei",                                     (DL_FUNC) &R_igraph_vs_nei,                                      4},
     {"R_igraph_walktrap_community",                         (DL_FUNC) &R_igraph_walktrap_community,                          6},
@@ -761,6 +941,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          4},
     {"R_igraph_weighted_clique_number",                     (DL_FUNC) &R_igraph_weighted_clique_number,                      2},
     {"R_igraph_weighted_cliques",                           (DL_FUNC) &R_igraph_weighted_cliques,                            5},
+    {"R_igraph_weighted_sparsemat",                         (DL_FUNC) &R_igraph_weighted_sparsemat,                          4},
+    {"R_igraph_wheel",                                      (DL_FUNC) &R_igraph_wheel,                                       3},
+    {"R_igraph_widest_path_widths_dijkstra",                (DL_FUNC) &R_igraph_widest_path_widths_dijkstra,                 5},
+    {"R_igraph_widest_path_widths_floyd_warshall",          (DL_FUNC) &R_igraph_widest_path_widths_floyd_warshall,           5},
     {"R_igraph_write_graph_dimacs",                         (DL_FUNC) &R_igraph_write_graph_dimacs,                          5},
     {"R_igraph_write_graph_dot",                            (DL_FUNC) &R_igraph_write_graph_dot,                             2},
     {"R_igraph_write_graph_edgelist",                       (DL_FUNC) &R_igraph_write_graph_edgelist,                        2},
