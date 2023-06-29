@@ -705,7 +705,24 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #'
 #' @family centrality
 #' @export
-spectrum <- eigen_adjacency_impl
+spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  eigen_adjacency_impl(graph,
+                       algorithm = algorithm,
+                       which = which,
+                       options = options)
+}
 
 eigen_defaults <- function() {
   list(
@@ -800,8 +817,30 @@ eigen_defaults <- function() {
 #' eigen_centrality(g)
 #' @family centrality
 #' @export
-eigen_centrality <- eigenvector_centrality_impl
+eigen_centrality <- function(graph,
+                             directed = FALSE,
+                             scale = TRUE,
+                             weights = NULL,
+                             options = arpack_defaults()) {
 
+    eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  eigenvector_centrality_impl(graph = graph,
+                              directed = directed,
+                              scale = scale,
+                              weights = weights,
+                              options = options)
+}
 
 #' Strength or weighted vertex degree
 #'
@@ -940,16 +979,49 @@ diversity <- diversity_impl
 #' hub_score(g2)$vector
 #' authority_score(g2)$vector
 #' @family centrality
-hub_score <- hub_score_impl
+hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
+  hub_score_impl(graph = graph,
+                 scale = scale,
+                 weights = weights,
+                 options = options)
+}
 
 #' @rdname hub_score
 #' @aliases authority.score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
-authority_score <- authority_score_impl
+authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
 
+  authority_score_impl(graph = graph,
+                       scale = scale,
+                       weights = weights,
+                       options = options)
+}
 
 #' The Page Rank algorithm
 #'
