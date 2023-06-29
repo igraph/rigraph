@@ -76,7 +76,6 @@ void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_matrixlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list);
-void R_igraph_graphlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg);
 SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit);
 SEXP R_igraph_sparsemat_to_SEXP(const igraph_sparsemat_t *sp);
@@ -3120,7 +3119,7 @@ SEXP R_igraph_vector_list_to_SEXP(const igraph_vector_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_t *v=VECTOR(*list, i);
+    igraph_vector_t *v=igraph_vector_list_get_ptr(*list, i);
     SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(v));
   }
 
@@ -3134,7 +3133,7 @@ SEXP R_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_int_t *v=VECTOR(*list, i);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(*list, i);
     SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(v));
   }
 
@@ -3158,7 +3157,7 @@ SEXP R_igraph_vectorlist_int_to_SEXP(const igraph_vector_ptr_t *ptr) {
 
 SEXP R_igraph_0orvector_int_list_to_SEXP(const igraph_vector_int_list_t *list) {
   SEXP result;
-  if (ptr) {
+  if (list) {
     PROTECT(result=R_igraph_vector_int_list_to_SEXP(list));
   } else {
     PROTECT(result=R_NilValue);
@@ -3174,7 +3173,7 @@ SEXP R_igraph_vector_int_list_to_SEXP_p1(const igraph_vector_int_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_int_t *v=VECTOR(*list)[i];
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(list, i);
     long int j, vn=igraph_vector_int_size(v);
     SEXP vs;
     PROTECT(vs=NEW_NUMERIC(vn));
@@ -3269,17 +3268,6 @@ SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
   }
   UNPROTECT(1);
   return result;
-}
-
-void R_igraph_graphlist_destroy(igraph_vector_ptr_t *ptr) {
-  long int i, n=igraph_vector_ptr_size(ptr);
-
-  for (i=0; i<n; i++) {
-    igraph_t *g=VECTOR(*ptr)[i];
-    IGRAPH_I_DESTROY(g);
-  }
-  igraph_free(VECTOR(*ptr)[0]);
-  igraph_vector_ptr_destroy(ptr);
 }
 
 SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
