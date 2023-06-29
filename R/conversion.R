@@ -708,7 +708,7 @@ get.incidence.dense <- function(graph, types, names, attr) {
   if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
     ## Function call
-    res <- .Call(R_igraph_get_incidence, graph, types)
+    res <- .Call(R_igraph_get_biadjacency, graph, types)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
       rownames(res$res) <- V(graph)$name[res$row_ids + 1]

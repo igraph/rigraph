@@ -509,11 +509,6 @@ igraph_connected_components:
 igraph_decompose:
     IGNORE: RR, RC
 
-igraph_clusters:
-    PARAMS: |-
-        GRAPH graph, OUT VECTOR membership, OUT VECTOR csize,
-        OUT INTEGER no, CONNECTEDNESS mode=WEAK
-
 #######################################
 # Cliques
 #######################################
@@ -1081,11 +1076,6 @@ igraph_from_prufer:
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
 
-igraph_get_incidence:
-    PARAMS: |-
-        GRAPH graph, BIPARTITE_TYPES types=NULL, OUT MATRIX res,
-        OUT VECTOR_OR_0 row_ids, OUT VECTOR_OR_0 col_ids
-
 igraph_get_stochastic_sparsemat:
     PARAMS: |-
         GRAPH graph, OUT SPARSEMATPTR sparsemat,
@@ -1093,9 +1083,6 @@ igraph_get_stochastic_sparsemat:
 
 igraph_hrg_dendrogram:
     PARAMS: OUT GRAPH graph, HRG hrg
-
-igraph_isomorphic_34:
-    PARAMS: GRAPH graph1, GRAPH graph2, OUT BOOLEAN iso
 
 #######################################
 # Coloring

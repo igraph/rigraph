@@ -1874,7 +1874,7 @@ isomorphic_34_impl <- function(graph1, graph2) {
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_isomorphic_34, graph1, graph2)
+  res <- .Call(R_igraph_isomorphic, graph1, graph2)
 
   res
 }
