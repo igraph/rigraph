@@ -3286,11 +3286,11 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
   SEXP result, names;
 
   PROTECT(result=NEW_LIST(5));
-  SET_VECTOR_ELT(result, 0, R_igraph_vector_to_SEXP(&hrg->left));
-  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&hrg->right));
+  SET_VECTOR_ELT(result, 0, R_igraph_vector_int_to_SEXP(&hrg->left));
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_int_to_SEXP(&hrg->right));
   SET_VECTOR_ELT(result, 2, R_igraph_vector_to_SEXP(&hrg->prob));
-  SET_VECTOR_ELT(result, 3, R_igraph_vector_to_SEXP(&hrg->edges));
-  SET_VECTOR_ELT(result, 4, R_igraph_vector_to_SEXP(&hrg->vertices));
+  SET_VECTOR_ELT(result, 3, R_igraph_vector_int_to_SEXP(&hrg->edges));
+  SET_VECTOR_ELT(result, 4, R_igraph_vector_int_to_SEXP(&hrg->vertices));
 
   PROTECT(names=NEW_CHARACTER(5));
   SET_STRING_ELT(names, 0, Rf_mkChar("left"));
@@ -3305,11 +3305,11 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
 }
 
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg) {
-  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 0), &hrg->left);
-  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 1), &hrg->right);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 0), &hrg->left);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 1), &hrg->right);
   R_SEXP_to_vector(VECTOR_ELT(shrg, 2), &hrg->prob);
-  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 3), &hrg->edges);
-  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 4), &hrg->vertices);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 3), &hrg->edges);
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 4), &hrg->vertices);
   return 0;
 }
 
