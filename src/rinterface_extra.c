@@ -3305,11 +3305,11 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
 }
 
 int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg) {
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 0), &hrg->left);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 1), &hrg->right);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 0), &hrg->left);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 1), &hrg->right);
   R_SEXP_to_vector(VECTOR_ELT(shrg, 2), &hrg->prob);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 3), &hrg->edges);
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 4), &hrg->vertices);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 3), &hrg->edges);
+  R_SEXP_to_vector_int(VECTOR_ELT(shrg, 4), &hrg->vertices);
   return 0;
 }
 
