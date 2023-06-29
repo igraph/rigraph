@@ -11247,3 +11247,196 @@ SEXP R_igraph_version() {
   UNPROTECT(1);
   return(r_result);
 }
+
+/*-------------------------------------------/
+/ igraph_clusters                            /
+/-------------------------------------------*/
+SEXP R_igraph_clusters(SEXP graph, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_membership;
+  igraph_vector_t c_csize;
+  igraph_integer_t c_no;
+  igraph_connectedness_t c_mode;
+  SEXP membership;
+  SEXP csize;
+  SEXP no;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (0 != igraph_vector_init(&c_membership, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_membership);
+  if (0 != igraph_vector_init(&c_csize, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_csize);
+  c_no=0;
+  c_mode=REAL(mode)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_clusters(&c_graph, &c_membership, &c_csize, &c_no, c_mode));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(membership=R_igraph_vector_to_SEXP(&c_membership));
+  igraph_vector_destroy(&c_membership);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(csize=R_igraph_vector_to_SEXP(&c_csize));
+  igraph_vector_destroy(&c_csize);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(no=NEW_INTEGER(1));
+  INTEGER(no)[0]=c_no;
+  SET_VECTOR_ELT(r_result, 0, membership);
+  SET_VECTOR_ELT(r_result, 1, csize);
+  SET_VECTOR_ELT(r_result, 2, no);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("membership"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("csize"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("no"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_get_incidence                       /
+/-------------------------------------------*/
+SEXP R_igraph_get_incidence(SEXP graph, SEXP types) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_bool_t c_types;
+  igraph_matrix_t c_res;
+  igraph_vector_t c_row_ids;
+  igraph_vector_t c_col_ids;
+  SEXP res;
+  SEXP row_ids;
+  SEXP col_ids;
+
+  SEXP r_result, r_names;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
+  if (0 != igraph_matrix_init(&c_res, 0, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
+  if (0 != igraph_vector_init(&c_row_ids, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_row_ids);
+  row_ids=R_GlobalEnv; /* hack to have a non-NULL value */
+  if (0 != igraph_vector_init(&c_col_ids, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_destroy, &c_col_ids);
+  col_ids=R_GlobalEnv; /* hack to have a non-NULL value */
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_incidence(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_res, (Rf_isNull(row_ids) ? 0 : &c_row_ids), (Rf_isNull(col_ids) ? 0 : &c_col_ids)));
+
+                                        /* Convert output */
+  PROTECT(r_result=NEW_LIST(3));
+  PROTECT(r_names=NEW_CHARACTER(3));
+  PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
+  igraph_matrix_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(row_ids=R_igraph_0orvector_to_SEXP(&c_row_ids));
+  igraph_vector_destroy(&c_row_ids);
+  IGRAPH_FINALLY_CLEAN(1);
+  PROTECT(col_ids=R_igraph_0orvector_to_SEXP(&c_col_ids));
+  igraph_vector_destroy(&c_col_ids);
+  IGRAPH_FINALLY_CLEAN(1);
+  SET_VECTOR_ELT(r_result, 0, res);
+  SET_VECTOR_ELT(r_result, 1, row_ids);
+  SET_VECTOR_ELT(r_result, 2, col_ids);
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("row_ids"));
+  SET_STRING_ELT(r_names, 2, Rf_mkChar("col_ids"));
+  SET_NAMES(r_result, r_names);
+  UNPROTECT(4);
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_get_stochastic_sparsemat            /
+/-------------------------------------------*/
+SEXP R_igraph_get_stochastic_sparsemat(SEXP graph, SEXP column_wise) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_sparsemat_t c_sparsemat;
+  igraph_bool_t c_column_wise;
+  SEXP sparsemat;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  /* Don't need to init. */
+  c_column_wise=LOGICAL(column_wise)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_get_stochastic_sparsemat(&c_graph, &c_sparsemat, c_column_wise));
+
+                                        /* Convert output */
+  PROTECT(sparsemat=R_igraph_sparsemat_to_SEXP(&c_sparsemat));
+  igraph_sparsemat_destroy(&c_sparsemat);
+  r_result = sparsemat;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_hrg_dendrogram                      /
+/-------------------------------------------*/
+SEXP R_igraph_hrg_dendrogram(SEXP hrg) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_hrg_t c_hrg;
+  SEXP graph;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_hrg(hrg, &c_hrg);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_hrg_dendrogram(&c_graph, &c_hrg));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
+  igraph_destroy(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = graph;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_isomorphic_34                       /
+/-------------------------------------------*/
+SEXP R_igraph_isomorphic_34(SEXP graph1, SEXP graph2) {
+                                        /* Declarations */
+  igraph_t c_graph1;
+  igraph_t c_graph2;
+  igraph_bool_t c_iso;
+  SEXP iso;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph1, &c_graph1);
+  R_SEXP_to_igraph(graph2, &c_graph2);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_isomorphic_34(&c_graph1, &c_graph2, &c_iso));
+
+                                        /* Convert output */
+  PROTECT(iso=NEW_LOGICAL(1));
+  LOGICAL(iso)[0]=c_iso;
+  r_result = iso;
+
+  UNPROTECT(1);
+  return(r_result);
+}

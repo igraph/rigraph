@@ -164,6 +164,35 @@ VECTOR:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+VECTOR_OR_0:
+    CALL: '(Rf_isNull(%I%) ? 0 : &%C%)'
+    CTYPE: igraph_vector_t
+    INCONV:
+        IN: if (!Rf_isNull(%I%)) { R_SEXP_to_vector(%I%, &%C%); }
+        INOUT: |-
+            if (!Rf_isNull(%I%)) {
+              if (0 != R_SEXP_to_vector(%I%, &%C%)) {
+                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+              }
+            } else {
+              if (0 != igraph_vector_init(&%C%, 0)) {
+                igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+              }
+            }
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=NEW_NUMERIC(0);
+        OUT: |-
+            if (0 != igraph_vector_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+            %I%=R_GlobalEnv; /* hack to have a non-NULL value */
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=R_igraph_0orvector_to_SEXP(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 VECTORM1:
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
