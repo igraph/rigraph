@@ -2940,12 +2940,12 @@ SEXP R_igraph_graph_env(SEXP graph) {
 static void free_graph(SEXP xp) {
   R_igraph_status_handler("Free graph external pointer.\n", NULL);
   igraph_t *graph = (igraph_t*)(R_ExternalPtrAddr(xp));
-  igraph_vector_destroy(&graph->from);
-  igraph_vector_destroy(&graph->to);
-  igraph_vector_destroy(&graph->oi);
-  igraph_vector_destroy(&graph->ii);
-  igraph_vector_destroy(&graph->os);
-  igraph_vector_destroy(&graph->is);
+  igraph_vector_int_destroy(&graph->from);
+  igraph_vector_int_destroy(&graph->to);
+  igraph_vector_int_destroy(&graph->oi);
+  igraph_vector_int_destroy(&graph->ii);
+  igraph_vector_int_destroy(&graph->os);
+  igraph_vector_int_destroy(&graph->is);
   IGRAPH_FREE(graph);
 }
 
