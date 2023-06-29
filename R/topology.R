@@ -319,7 +319,9 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
-graph.isomorphic.34 <- isomorphic_34_impl
+graph.isomorphic.34 <- function(graph1, graph2, method) {
+  isomorphic_34_impl(graph1, graph2, method)
+}
 #' @export
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
