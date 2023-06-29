@@ -9161,8 +9161,8 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
 /* ---------------------------------------------------------------C */
 
 int igraphhcass2(int n, const int *ia, const int *ib,
-		 int *iorder, int *iia,
-		 int *iib) {
+		 int *iorder, igraph_integer_t *iia,
+		 igraph_integer_t *iib) {
 
   /* System generated locals */
   int i__1, i__2, i__3;
