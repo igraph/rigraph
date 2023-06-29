@@ -3682,10 +3682,10 @@ int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v) {
 
 int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v) {
   long int i, n=GET_LENGTH(sv);
-  int *svv=INTEGER(sv);
+  double *svv=REAL(sv);
   igraph_vector_int_init(v, n);
   for (i = 0; i<n; i++) {
-    VECTOR(*v)[i] = svv[i];
+    VECTOR(*v)[i] = (igraph_integer_t)svv[i];
   }
   return 0;
 }
@@ -3833,7 +3833,8 @@ int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it) {
 int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it) {
 
   igraph_vector_int_t *tmpv=(igraph_vector_int_t*)R_alloc(1,sizeof(igraph_vector_int_t));
-  igraph_es_vector(it, igraph_vector_int_view(tmpv, REAL(rit), LENGTH(rit)));
+  R_SEXP_to_vector_int_copy(rit, tmpv);
+  igraph_es_vector(it, tmpv);
 
   return 0;
 }
