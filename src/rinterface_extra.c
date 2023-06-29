@@ -2971,15 +2971,15 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
 
   R_igraph_status_handler("Restore graph external pointer.\n", NULL);
 
-  igraph_vector_t from;
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_from), &from);
+  igraph_vector_int_t from;
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(graph, igraph_t_idx_from), &from);
 
-  igraph_vector_t to;
-  R_SEXP_to_vector(VECTOR_ELT(graph, igraph_t_idx_to), &to);
+  igraph_vector_int_t to;
+  R_SEXP_to_vector_int_copy(VECTOR_ELT(graph, igraph_t_idx_to), &to);
 
-  igraph_vector_t edges;
-  igraph_integer_t no_of_edges=igraph_vector_size(&from);
-  IGRAPH_VECTOR_INIT_FINALLY(&edges, no_of_edges*2);
+  igraph_vector_int_t edges;
+  igraph_integer_t no_of_edges=igraph_vector_int_size(&from);
+  IGRAPH_VECTOR_INT_INIT_FINALLY(&edges, no_of_edges*2);
 
   for (igraph_integer_t i = 0; i < no_of_edges; ++i) {
     VECTOR(edges)[2*i] = VECTOR(from)[i];
@@ -2990,7 +2990,7 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
   IGRAPH_FINALLY(igraph_destroy, g);
   IGRAPH_CHECK(igraph_add_edges(g, &edges, NULL));
 
-  igraph_vector_destroy(&edges);
+  igraph_vector_int_destroy(&edges);
   IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
 
   return IGRAPH_SUCCESS;
@@ -3119,7 +3119,7 @@ SEXP R_igraph_vector_list_to_SEXP(const igraph_vector_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_t *v=igraph_vector_list_get_ptr(*list, i);
+    igraph_vector_t *v=igraph_vector_list_get_ptr(list, i);
     SET_VECTOR_ELT(result, i, R_igraph_vector_to_SEXP(v));
   }
 
@@ -3133,7 +3133,7 @@ SEXP R_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list) {
 
   PROTECT(result=NEW_LIST(n));
   for (i=0; i<n; i++) {
-    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(*list, i);
+    igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(list, i);
     SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(v));
   }
 
