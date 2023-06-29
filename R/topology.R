@@ -310,7 +310,7 @@ isomorphic <- function(graph1, graph2, method = c(
     .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "direct") {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic_34, graph1, graph2)
+    .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
