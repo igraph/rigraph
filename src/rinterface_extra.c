@@ -97,12 +97,11 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res);
 int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it);
 int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it);
 int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
+int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
+                                    igraph_vector_int_list_t *list);
 int R_igraph_SEXP_to_0orvector_int_list(SEXP vectorlist,
                                    igraph_vector_int_list_t *list);
-int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_ptr_t *ptr);
-int R_igraph_SEXP_to_vectorlist_int(SEXP vectorlist,
-                                    igraph_vector_ptr_t *ptr);
-int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_vector_ptr_t *ptr);
+int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
 int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
 int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
@@ -3528,23 +3527,6 @@ int R_igraph_SEXP_to_0orvector_int_list(SEXP vectorlist,
                                    igraph_vector_int_list_t *list) {
   if (!Rf_isNull(vectorlist)) {
     return R_igraph_SEXP_to_vector_int_list(vectorlist, list);
-  }
-  return 0;
-}
-
-int R_igraph_SEXP_to_vectorlist(SEXP vectorlist, igraph_vector_list_t *list) {
-  int length=GET_LENGTH(vectorlist);
-  int i;
-  igraph_vector_t *vecs;
-
-  vecs = (igraph_vector_t *) R_alloc((size_t) length, sizeof(igraph_vector_t));
-  list->stor_begin=vecs;
-  list->stor_end=list->stor_begin+length;
-  list->end=list->stor_end;
-  for (i=0; i<length; i++) {
-    igraph_vector_t *v=&vecs[i];
-    SEXP el=VECTOR_ELT(vectorlist, i);
-    igraph_vector_view(v, REAL(el), GET_LENGTH(el));
   }
   return 0;
 }
