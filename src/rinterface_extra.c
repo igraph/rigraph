@@ -378,10 +378,6 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
   // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
   R_igraph_attribute_add_to_preserve_list(result);
-  SET_VECTOR_ELT(result, 0, NEW_NUMERIC(3));
-  REAL(VECTOR_ELT(result, 0))[0]=0; /* R objects */
-  REAL(VECTOR_ELT(result, 0))[1]=1; /* igraph_t objects */
-  REAL(VECTOR_ELT(result, 0))[2]=1; /* whether the graph is safe */
   for (i=1; i<3; i++) {
     SET_VECTOR_ELT(result, i+1, NEW_LIST(0)); /* gal, val, eal */
   }
