@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - r-*
       - fix/*
   pull_request:
     branches:
       - main
+      - r-*
       - fix/*
 
 name: R-CMD-check
