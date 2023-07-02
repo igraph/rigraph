@@ -298,7 +298,12 @@ test_that("vertex attributes are destroyed when the graph is destroyed", {
   gc()
   expect_false(finalized)
 
+  # Called for the side effect of clearing the protect list
+  make_empty_graph()
+  expect_false(finalized)
+
   rm(g)
+
   gc()
   expect_true(finalized)
 })
@@ -330,7 +335,12 @@ test_that("edge attributes are destroyed when the graph is destroyed", {
   gc()
   expect_false(finalized)
 
+  # Called for the side effect of clearing the protect list
+  make_empty_graph()
+  expect_false(finalized)
+
   rm(g)
+
   gc()
   expect_true(finalized)
 })

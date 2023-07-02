@@ -357,8 +357,13 @@ void R_igraph_attribute_add_to_preserve_list(SEXP attr) {
 void R_igraph_attribute_clean_preserve_list() {
   if (R_igraph_attribute_preserve_list) {
     // Mark the entire list available for garbage collection.
-    // Attributes that have been assigned to a graph object will remain protected.
+    // Attributes that have been assigned to an R graph object will remain protected.
     // Dangling attributes will be GC-ed eventually.
+
+    // This is called *before* entering an igraph function that might allocate
+    // attributes; after such a function returns, we need to keep preserving
+    // all attributes because they may be put into R graph objects
+    // and returned to R.
     SETCDR(R_igraph_attribute_preserve_list, R_NilValue);
   }
 }
