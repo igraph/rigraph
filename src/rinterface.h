@@ -27,6 +27,7 @@
 
 SEXP R_igraph_add_env(SEXP graph);
 
+void R_igraph_attribute_clean_preserve_list();
 void R_igraph_set_in_r_check(bool set);
 void R_igraph_error(void);
 void R_igraph_warning(void);
@@ -37,6 +38,7 @@ void R_igraph_interrupt(void);
         R_igraph_set_in_r_check(true); \
         igraph_error_type_t __c = func; \
         R_igraph_set_in_r_check(false); \
+        R_igraph_attribute_clean_preserve_list(); \
         R_igraph_warning(); \
         if (__c == IGRAPH_INTERRUPTED) { R_igraph_interrupt(); } \
         else if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
