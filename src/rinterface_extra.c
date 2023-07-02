@@ -5822,10 +5822,6 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   SEXP result;
   long int i;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_ptr_init(&comps, 0);
   IGRAPH_FINALLY(igraph_vector_ptr_destroy, &comps);
@@ -5839,8 +5835,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   igraph_vector_ptr_destroy(&comps);
 
   UNPROTECT(1);
-  IGRAPH_FINALLY_CLEAN(2);
-  R_igraph_attribute_protected_destroy(0);
+  IGRAPH_FINALLY_CLEAN(1);
 
   return result;
 }
@@ -7151,10 +7146,6 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids);
   igraph_vector_ptr_init(&res, 0);
@@ -7170,8 +7161,6 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_destroy(&vids);
 
   UNPROTECT(1);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return result;
 }
@@ -9291,10 +9280,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SEXP Mu;
   SEXP result, names;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
@@ -9326,8 +9311,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SET_NAMES(result, names);
 
   UNPROTECT(4);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return(result);
 }
@@ -9345,10 +9328,6 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   SEXP thresholds;
 
   SEXP result, names;
-
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
@@ -9380,8 +9359,6 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   SET_NAMES(result, names);
 
   UNPROTECT(4);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return(result);
 }
