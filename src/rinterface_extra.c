@@ -3718,8 +3718,6 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   R_igraph_get_is(graph, &res->is);
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects refcount */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 0; /* igraph_t objects */
   res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
