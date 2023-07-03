@@ -254,3 +254,93 @@ test_that("setting NULL attributes works and doesn't change the input (#466)", {
   expect_identical(set_edge_attr(g, "foo", value = NULL), g)
   expect_identical(set_edge_attr(g, "foo", 1:3, value = NULL), g)
 })
+
+test_that("GRAPH attributes are destroyed when the graph is destroyed", {
+  finalized <- FALSE
+  finalizer <- function(e) {
+    finalized <<- TRUE
+  }
+
+  env <- new.env(parent = emptyenv())
+  reg.finalizer(env, finalizer)
+
+  g <- make_ring(1)
+  g$a <- list(env)
+  rm(env)
+  gc()
+  expect_false(finalized)
+
+  rm(g)
+  gc()
+  expect_true(finalized)
+})
+
+test_that("vertex attributes are destroyed when the graph is destroyed", {
+  finalized <- FALSE
+  finalizer <- function(e) {
+    finalized <<- TRUE
+  }
+
+  env <- new.env(parent = emptyenv())
+  reg.finalizer(env, finalizer)
+
+  g <- make_ring(1)
+  V(g)$a <- list(env)
+  rm(env)
+  gc()
+  expect_false(finalized)
+
+  g <- add_vertices(g, 1)
+  gc()
+  expect_false(finalized)
+
+  g <- delete_vertices(g, 2)
+  gc()
+  expect_false(finalized)
+
+  # Called for the side effect of clearing the protect list
+  make_empty_graph()
+  expect_false(finalized)
+
+  rm(g)
+
+  gc()
+  expect_true(finalized)
+})
+
+test_that("edge attributes are destroyed when the graph is destroyed", {
+  finalized <- FALSE
+  finalizer <- function(e) {
+    finalized <<- TRUE
+  }
+
+  env <- new.env(parent = emptyenv())
+  reg.finalizer(env, finalizer)
+
+  g <- make_ring(2)
+  E(g)$a <- list(env)
+  rm(env)
+  gc()
+  expect_false(finalized)
+
+  g <- add_vertices(g, 1)
+  gc()
+  expect_false(finalized)
+
+  g <- add_edges(g, c(2, 3))
+  gc()
+  expect_false(finalized)
+
+  g <- delete_edges(g, 2)
+  gc()
+  expect_false(finalized)
+
+  # Called for the side effect of clearing the protect list
+  make_empty_graph()
+  expect_false(finalized)
+
+  rm(g)
+
+  gc()
+  expect_true(finalized)
+})

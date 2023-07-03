@@ -35,3 +35,13 @@ test_that("decompose keeps attributes", {
   expect_that(E(d[[1]])$name, equals(e1))
   expect_that(E(d[[2]])$name, equals(e2))
 })
+
+test_that("decompose protects correctly", {
+  g <- make_graph(integer(), n = 10001)
+  V(g)$a <- 1
+
+  torture <- gctorture2(10001)
+  on.exit(gctorture2(torture))
+
+  length(decompose(g))
+})
