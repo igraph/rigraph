@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9005
+
+## Bug fixes
+
+  - Change ownership rules of attribute objects (#870).
+
+## Chore
+
+  - Update revdepcheck results (#867).
+
+
 # igraph 1.5.0.9004
 
 ## Chore
