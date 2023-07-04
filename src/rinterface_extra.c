@@ -333,13 +333,32 @@ int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb) {
   return 0;
 }
 
-static SEXP R_igraph_attribute_protected=0;
-static long int R_igraph_attribute_protected_size=0;
+static SEXP R_igraph_attribute_preserve_list;
 
-void R_igraph_attribute_protected_destroy(void *dummy) {
-  R_ReleaseObject(R_igraph_attribute_protected);
-  R_igraph_attribute_protected=0;
-  R_igraph_attribute_protected_size=0;
+void R_igraph_attribute_add_to_preserve_list(SEXP attr) {
+  if (!R_igraph_attribute_preserve_list) {
+    // We don't care about freeing this, typically this is just a single node
+    R_igraph_attribute_preserve_list = Rf_cons(R_NilValue, R_NilValue);
+    R_PreserveObject(R_igraph_attribute_preserve_list);
+  }
+
+  // Create a new node, add it to the head of the list.
+  SEXP node = Rf_cons(attr, CDR(R_igraph_attribute_preserve_list));
+  SETCDR(R_igraph_attribute_preserve_list, node);
+}
+
+void R_igraph_attribute_clean_preserve_list() {
+  if (R_igraph_attribute_preserve_list) {
+    // Mark the entire list available for garbage collection.
+    // Attributes that have been assigned to an R graph object will remain protected.
+    // Dangling attributes will be GC-ed eventually.
+
+    // This is called *before* entering an igraph function that might allocate
+    // attributes; after such a function returns, we need to keep preserving
+    // all attributes because they may be put into R graph objects
+    // and returned to R.
+    SETCDR(R_igraph_attribute_preserve_list, R_NilValue);
+  }
 }
 
 igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
@@ -348,37 +367,15 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
   long int attrno;
   int px = 0;
 
-  if (R_igraph_attribute_protected) {
-    long int ll=GET_LENGTH(R_igraph_attribute_protected);
-    if (ll == R_igraph_attribute_protected_size) {
-      SEXP newl = NEW_LIST(2*ll);
-      long int i;
-      PROTECT(newl); px++;
-      for (i=0; i<ll; i++) {
-        SET_VECTOR_ELT(newl, i,
-                       VECTOR_ELT(R_igraph_attribute_protected, i));
-      }
-      R_ReleaseObject(R_igraph_attribute_protected);
-      R_PreserveObject(newl);
-      R_igraph_attribute_protected=newl;
-      UNPROTECT(1); px--;
-    }
-    SET_VECTOR_ELT(R_igraph_attribute_protected,
-                   R_igraph_attribute_protected_size, NEW_LIST(4));
-    result=VECTOR_ELT(R_igraph_attribute_protected,
-                      R_igraph_attribute_protected_size);
-    SET_VECTOR_ELT(result, 0, NEW_NUMERIC(4));
-    REAL(VECTOR_ELT(result, 0))[3] = R_igraph_attribute_protected_size;
-    R_igraph_attribute_protected_size += 1;
-  } else {
-    R_PreserveObject(result=NEW_LIST(4));
-    SET_VECTOR_ELT(result, 0, NEW_NUMERIC(3));
-  }
-  REAL(VECTOR_ELT(result, 0))[0]=0; /* R objects */
-  REAL(VECTOR_ELT(result, 0))[1]=1; /* igraph_t objects */
-  REAL(VECTOR_ELT(result, 0))[2]=1; /* whether the graph is safe */
+  result=NEW_LIST(4);
+  // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
+  // Adding to that list ensures that the attributes aren't GC-ed prematurely.
+  R_igraph_attribute_add_to_preserve_list(result);
   for (i=1; i<3; i++) {
-    SET_VECTOR_ELT(result, i+1, NEW_LIST(0)); /* gal, val, eal */
+    SEXP attr = PROTECT(NEW_LIST(0));
+    SET_NAMES(attr, NEW_CHARACTER(0));
+    SET_VECTOR_ELT(result, i+1, attr); /* gal, val, eal */
+    UNPROTECT(1);
   }
   graph->attr=result;
 
@@ -435,13 +432,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
 }
 
 void R_igraph_attribute_destroy(igraph_t *graph) {
-  SEXP attr=graph->attr;
-  REAL(VECTOR_ELT(attr, 0))[1] -= 1; /* refcount for igraph_t */
-  if (!R_igraph_attribute_protected &&
-      REAL(VECTOR_ELT(attr, 0))[1]==0 &&
-      REAL(VECTOR_ELT(attr, 0))[2]==1) {
-    R_ReleaseObject(attr);
-  }
+  // Owned by the R graph object, will be garbage-collected
   graph->attr=0;
 }
 
@@ -456,11 +447,6 @@ int R_igraph_attribute_copy(igraph_t *to, const igraph_t *from,
   SEXP fromattr=from->attr;
   if (ga && va && ea) {
     to->attr=from->attr;
-    REAL(VECTOR_ELT(fromattr, 0))[1] += 1; /* refcount only */
-    if (!R_igraph_attribute_protected &&
-        REAL(VECTOR_ELT(fromattr, 0))[1] == 1) {
-      R_PreserveObject(to->attr);
-    }
   } else {
     R_igraph_attribute_init(to,0); /* Sets up many things */
     SEXP toattr=to->attr;
@@ -579,39 +565,7 @@ void R_igraph_attribute_add_vertices_append(SEXP val, long int nv,
 
 SEXP R_igraph_attribute_add_vertices_dup(SEXP attr) {
   SEXP newattr=Rf_duplicate(attr);
-  int px = 0;
-
-  if (R_igraph_attribute_protected) {
-    PROTECT(newattr); px++;
-  } else {
-    R_PreserveObject(newattr);
-  }
-
-  REAL(VECTOR_ELT(attr, 0))[1] -= 1;
-  if (!R_igraph_attribute_protected &&
-      REAL(VECTOR_ELT(attr, 0))[1] == 0) {
-    R_ReleaseObject(attr);
-  }
-  REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-  REAL(VECTOR_ELT(newattr, 0))[1] = 1;
-  if (R_igraph_attribute_protected) {
-    long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
-    if (alen == 4) {
-      pos=REAL(VECTOR_ELT(attr, 0))[3];
-      SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-    } else {
-      SEXP tmp=PROTECT(NEW_NUMERIC(4)); px++;
-      REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-      REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-      REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-      pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
-      R_igraph_attribute_protected_size += 1;
-      SET_VECTOR_ELT(newattr, 0, tmp);
-    }
-    SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-  }
-
-  UNPROTECT(px);
+  R_igraph_attribute_add_to_preserve_list(newattr);
   return newattr;
 }
 
@@ -623,10 +577,8 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
   long int valno, i, origlen, nattrno, newattrs;
   int px = 0;
 
-  if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-    SEXP newattr = PROTECT(R_igraph_attribute_add_vertices_dup(attr)); px++;
-    attr=graph->attr=newattr;
-  }
+  SEXP newattr = PROTECT(R_igraph_attribute_add_vertices_dup(attr)); px++;
+  attr=graph->attr=newattr;
 
   val=VECTOR_ELT(attr, 2);
   valno=GET_LENGTH(val);
@@ -694,17 +646,9 @@ int R_igraph_attribute_add_vertices(igraph_t *graph, long int nv,
 /*   SEXP attr=graph->attr; */
 /*   SEXP eal, val; */
 /*   long int valno, ealno, i; */
-/*   if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) { */
-/*     SEXP newattr; */
-/*     PROTECT(newattr=Rf_duplicate(attr)); */
-/*     REAL(VECTOR_ELT(attr, 0))[1] -= 1; */
-/*     if (REAL(VECTOR_ELT(attr, 0))[1] == 0) { */
-/*        R_ReleaseObject(attr); */
-/*     } */
-/*     REAL(VECTOR_ELT(newattr, 0))[0] = 0; */
-/*     REAL(VECTOR_ELT(newattr, 0))[1] = 1; */
-/*     attr=graph->attr=newattr; */
-/*   } */
+/*   SEXP newattr; */
+/*   PROTECT(newattr=Rf_duplicate(attr)); */
+/*   attr=graph->attr=newattr; */
 
 /*   /\* Vertices *\/ */
 /*   val=VECTOR_ELT(attr, 2); */
@@ -764,39 +708,9 @@ int R_igraph_attribute_permute_vertices_same(const igraph_t *graph,
   SEXP ss;
   int px = 0;
 
-  /* We copy if we need to */
-  if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-    SEXP newattr = Rf_duplicate(attr);
-    if (R_igraph_attribute_protected) {
-      PROTECT(newattr); px++;
-    } else {
-      R_PreserveObject(newattr);
-    }
-    REAL(VECTOR_ELT(attr, 0))[1] -= 1;
-    if (!R_igraph_attribute_protected &&
-        REAL(VECTOR_ELT(attr, 0))[1] == 0) {
-      R_ReleaseObject(attr);
-    }
-    REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-    REAL(VECTOR_ELT(newattr, 0))[1] = 1;
-    if (R_igraph_attribute_protected) {
-      long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
-      if (alen == 4) {
-        pos=REAL(VECTOR_ELT(attr, 0))[3];
-        SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-      } else {
-        SEXP tmp=PROTECT(NEW_NUMERIC(4)); px++;
-        REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-        REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-        REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-        pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
-        R_igraph_attribute_protected_size += 1;
-        SET_VECTOR_ELT(newattr, 0, tmp);
-      }
-      SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-    }
-    attr=newgraph->attr=newattr;
-  }
+  SEXP newattr = Rf_duplicate(attr);
+  R_igraph_attribute_add_to_preserve_list(newattr);
+  attr=newgraph->attr=newattr;
 
   val=VECTOR_ELT(attr,2);
   valno=GET_LENGTH(val);
@@ -882,39 +796,7 @@ int R_igraph_attribute_permute_vertices(const igraph_t *graph,
 
 SEXP R_igraph_attribute_add_edges_dup(SEXP attr) {
   SEXP newattr=Rf_duplicate(attr);
-  int px = 0;
-
-  if (R_igraph_attribute_protected) {
-    PROTECT(newattr); px++;
-  } else {
-    R_PreserveObject(newattr);
-  }
-
-  REAL(VECTOR_ELT(attr, 0))[1] -= 1;
-  if (!R_igraph_attribute_protected &&
-      REAL(VECTOR_ELT(attr, 0))[1] == 0) {
-    R_ReleaseObject(attr);
-  }
-  REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-  REAL(VECTOR_ELT(newattr, 0))[1] = 1;
-  if (R_igraph_attribute_protected) {
-    long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
-    if (alen == 4) {
-      pos=REAL(VECTOR_ELT(attr, 0))[3];
-      SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-    } else {
-      SEXP tmp=PROTECT(NEW_NUMERIC(4)); px++;
-      REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-      REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-      REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-      pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
-      R_igraph_attribute_protected_size += 1;
-      SET_VECTOR_ELT(newattr, 0, tmp);
-    }
-    SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-  }
-
-  UNPROTECT(px);
+  R_igraph_attribute_add_to_preserve_list(newattr);
   return newattr;
 }
 
@@ -1033,10 +915,8 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
   if (igraph_vector_init(&news, 0)) Rf_error("Out of memory");
   IGRAPH_FINALLY(igraph_vector_destroy, &news);
 
-  if (REAL(VECTOR_ELT(attr, 0))[0] + REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-    SEXP newattr = PROTECT(R_igraph_attribute_add_edges_dup(attr)); px++;
-    attr=graph->attr=newattr;
-  }
+  SEXP newattr = PROTECT(R_igraph_attribute_add_edges_dup(attr)); px++;
+  attr=graph->attr=newattr;
 
   eal=VECTOR_ELT(attr, 3);
   ealno=GET_LENGTH(eal);
@@ -1101,17 +981,9 @@ int R_igraph_attribute_add_edges(igraph_t *graph,
 /*   SEXP attr=graph->attr; */
 /*   SEXP eal; */
 /*   long int ealno, i; */
-/*   if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) { */
-/*     SEXP newattr; */
-/*     PROTECT(newattr=Rf_duplicate(attr)); */
-/*     REAL(VECTOR_ELT(attr, 0))[1] -= 1; */
-/*     if (REAL(VECTOR_ELT(attr, 0))[1] == 0) { */
-/*       R_ReleaseObject(attr); */
-/*     } */
-/*     REAL(VECTOR_ELT(newattr, 0))[0] = 0; */
-/*     REAL(VECTOR_ELT(newattr, 0))[1] = 1; */
-/*     attr=graph->attr=newattr; */
-/*   } */
+/*   SEXP newattr; */
+/*   PROTECT(newattr=Rf_duplicate(attr)); */
+/*   attr=graph->attr=newattr; */
 
 /*   eal=VECTOR_ELT(attr, 3); */
 /*   ealno=GET_LENGTH(eal); */
@@ -1148,39 +1020,9 @@ int R_igraph_attribute_permute_edges_same(const igraph_t *graph,
   SEXP ss;
   int px = 0;
 
-  /* We copy if we need to */
-  if (REAL(VECTOR_ELT(attr, 0))[0]+REAL(VECTOR_ELT(attr, 0))[1] > 1) {
-    SEXP newattr=Rf_duplicate(attr);
-    if (R_igraph_attribute_protected) {
-      PROTECT(newattr); px++;
-    } else {
-      R_PreserveObject(newattr);
-    }
-    REAL(VECTOR_ELT(attr, 0))[1] -= 1;
-    if (!R_igraph_attribute_protected &&
-        REAL(VECTOR_ELT(attr, 0))[1] == 0) {
-      R_ReleaseObject(attr);
-    }
-    REAL(VECTOR_ELT(newattr, 0))[0] = 0;
-    REAL(VECTOR_ELT(newattr, 0))[1] = 1;
-    if (R_igraph_attribute_protected) {
-      long int pos, alen=LENGTH(VECTOR_ELT(attr, 0));
-      if (alen == 4) {
-        pos=REAL(VECTOR_ELT(attr, 0))[3];
-        SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-      } else {
-        SEXP tmp=PROTECT(NEW_NUMERIC(4)); px++;
-        REAL(tmp)[0] = REAL(VECTOR_ELT(attr, 0))[0];
-        REAL(tmp)[1] = REAL(VECTOR_ELT(attr, 0))[1];
-        REAL(tmp)[2] = REAL(VECTOR_ELT(attr, 0))[2];
-        pos = REAL(tmp)[3] = R_igraph_attribute_protected_size;
-        R_igraph_attribute_protected_size += 1;
-        SET_VECTOR_ELT(newattr, 0, tmp);
-      }
-      SET_VECTOR_ELT(R_igraph_attribute_protected, pos, newattr);
-    }
-    attr=newgraph->attr=newattr;
-  }
+  SEXP newattr=Rf_duplicate(attr);
+  R_igraph_attribute_add_to_preserve_list(newattr);
+  attr=newgraph->attr=newattr;
 
   eal=VECTOR_ELT(attr,3);
   ealno=GET_LENGTH(eal);
@@ -2065,10 +1907,6 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
     }
   }
 
-  /* Not safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=0;
-  REAL(VECTOR_ELT(toattr, 0))[2]=0;
-
   PROTECT(res=NEW_LIST(keepno)); px++;
   PROTECT(newnames=NEW_CHARACTER(keepno)); px++;
   for (i=0, j=0; i<valno; i++) {
@@ -2181,10 +2019,6 @@ int R_igraph_attribute_combine_vertices(const igraph_t *graph,
     }
   }
 
-  /* It is now safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=1;
-  REAL(VECTOR_ELT(toattr, 0))[2]=1;
-
   igraph_free(funcs);
   igraph_free(TODO);
   IGRAPH_FINALLY_CLEAN(2);
@@ -2239,10 +2073,6 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
       keepno++;
     }
   }
-
-  /* Not safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=0;
-  REAL(VECTOR_ELT(toattr, 0))[2]=0;
 
   PROTECT(res=NEW_LIST(keepno)); px++;
   PROTECT(newnames=NEW_CHARACTER(keepno)); px++;
@@ -2354,10 +2184,6 @@ int R_igraph_attribute_combine_edges(const igraph_t *graph,
       j++;
     }
   }
-
-  /* It is now safe to UNPROTECT attributes */
-  REAL(VECTOR_ELT(attr, 0))[2]=1;
-  REAL(VECTOR_ELT(toattr, 0))[2]=1;
 
   igraph_free(funcs);
   igraph_free(TODO);
@@ -3071,7 +2897,6 @@ SEXP R_igraph_to_SEXP(const igraph_t *graph) {
 
   /* Attributes */
   SET_VECTOR_ELT(result, igraph_t_idx_attr, graph->attr);
-  REAL(VECTOR_ELT(graph->attr, 0))[0] += 1;
 
   /* Environment for vertex/edge seqs */
   SET_VECTOR_ELT(result, igraph_t_idx_env, R_NilValue);
@@ -3775,8 +3600,6 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
   R_igraph_get_is(graph, &res->is);
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects refcount */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 0; /* igraph_t objects */
   res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
@@ -3807,9 +3630,7 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   igraph_vector_int_init_copy(&res->is, &is);
 
   /* attributes */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[0] = 1; /* R objects */
-  REAL(VECTOR_ELT(VECTOR_ELT(graph, igraph_t_idx_attr), 0))[1] = 1; /* igraph_t objects */
-  R_PreserveObject(res->attr=VECTOR_ELT(graph, igraph_t_idx_attr));
+  res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
 }
@@ -5871,10 +5692,6 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   SEXP result;
   long int i;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   R_SEXP_to_igraph(graph, &g);
   igraph_graph_list_init(&comps, 0);
   IGRAPH_FINALLY(igraph_graph_list_destroy, &comps);
@@ -5883,8 +5700,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   igraph_graph_list_destroy(&comps);
 
   UNPROTECT(1);
-  IGRAPH_FINALLY_CLEAN(2);
-  R_igraph_attribute_protected_destroy(0);
+  IGRAPH_FINALLY_CLEAN(1);
 
   return result;
 }
@@ -7174,10 +6990,6 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids);
   igraph_graph_list_init(&res, 0);
@@ -7187,8 +6999,6 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_destroy(&vids);
 
   UNPROTECT(1);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return result;
 }
@@ -8655,10 +8465,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SEXP Mu;
   SEXP result, names;
 
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
-
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
@@ -8690,8 +8496,6 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   SET_NAMES(result, names);
 
   UNPROTECT(4);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return(result);
 }
@@ -8709,10 +8513,6 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   SEXP thresholds;
 
   SEXP result, names;
-
-  R_PreserveObject(R_igraph_attribute_protected=NEW_LIST(100));
-  R_igraph_attribute_protected_size=0;
-  IGRAPH_FINALLY(R_igraph_attribute_protected_destroy, 0);
 
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
@@ -8744,8 +8544,6 @@ SEXP R_igraph_graphlets_candidate_basis(SEXP graph, SEXP weights) {
   SET_NAMES(result, names);
 
   UNPROTECT(4);
-  IGRAPH_FINALLY_CLEAN(1);
-  R_igraph_attribute_protected_destroy(0);
 
   return(result);
 }
