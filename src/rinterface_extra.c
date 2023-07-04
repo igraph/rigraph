@@ -2887,26 +2887,6 @@ void R_igraph_get_to(SEXP graph, igraph_vector_t* to) {
   *to = pgraph->to;
 }
 
-void R_igraph_get_oi(SEXP graph, igraph_vector_t* oi) {
-  igraph_t *pgraph=R_igraph_get_pointer(graph);
-  *oi = pgraph->oi;
-}
-
-void R_igraph_get_ii(SEXP graph, igraph_vector_t* ii) {
-  igraph_t *pgraph=R_igraph_get_pointer(graph);
-  *ii = pgraph->ii;
-}
-
-void R_igraph_get_os(SEXP graph, igraph_vector_t* os) {
-  igraph_t *pgraph=R_igraph_get_pointer(graph);
-  *os = pgraph->os;
-}
-
-void R_igraph_get_is(SEXP graph, igraph_vector_t* is) {
-  igraph_t *pgraph=R_igraph_get_pointer(graph);
-  *is = pgraph->is;
-}
-
 SEXP R_igraph_to_SEXP(const igraph_t *graph) {
 
   SEXP result;
@@ -3532,15 +3512,7 @@ int R_igraph_SEXP_to_array3_copy(SEXP rval, igraph_array3_t *a) {
 }
 
 int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
-
-  res->n=R_igraph_get_n(graph);
-  res->directed=R_igraph_get_directed(graph);
-  R_igraph_get_from(graph, &res->from);
-  R_igraph_get_to(graph, &res->to);
-  R_igraph_get_oi(graph, &res->oi);
-  R_igraph_get_ii(graph, &res->ii);
-  R_igraph_get_os(graph, &res->os);
-  R_igraph_get_is(graph, &res->is);
+  *res = *R_igraph_get_pointer(graph);
 
   /* attributes */
   res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
@@ -3549,30 +3521,10 @@ int R_SEXP_to_igraph(SEXP graph, igraph_t *res) {
 }
 
 int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
-
-  res->n=R_igraph_get_n(graph);
-  res->directed=R_igraph_get_directed(graph);
-
-  igraph_vector_t from;
-  R_igraph_get_from(graph, &from);
-  igraph_vector_copy(&res->from, &from);
-  igraph_vector_t to;
-  R_igraph_get_to(graph, &to);
-  igraph_vector_copy(&res->to, &to);
-  igraph_vector_t oi;
-  R_igraph_get_oi(graph, &oi);
-  igraph_vector_copy(&res->oi, &oi);
-  igraph_vector_t ii;
-  R_igraph_get_ii(graph, &ii);
-  igraph_vector_copy(&res->ii, &ii);
-  igraph_vector_t os;
-  R_igraph_get_os(graph, &os);
-  igraph_vector_copy(&res->os, &os);
-  igraph_vector_t is;
-  R_igraph_get_is(graph, &is);
-  igraph_vector_copy(&res->is, &is);
+  igraph_copy(res, R_igraph_get_pointer(graph));
 
   /* attributes */
+  /* FIXME: Why is this necessary? */
   res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
