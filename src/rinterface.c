@@ -4074,7 +4074,6 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
   IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_extd_graph);
   PROTECT(extd_graph=R_igraph_to_SEXP(&c_extd_graph));
-  IGRAPH_I_DESTROY(&c_extd_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(extd_to_orig_eids=R_igraph_0orvector_to_SEXPp1(&c_extd_to_orig_eids));
   igraph_vector_destroy(&c_extd_to_orig_eids);
@@ -5704,7 +5703,6 @@ SEXP R_igraph_dominator_tree(SEXP graph, SEXP root, SEXP mode) {
   IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_domtree);
   PROTECT(domtree=R_igraph_to_SEXP(&c_domtree));
-  IGRAPH_I_DESTROY(&c_domtree);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(leftout=R_igraph_vector_to_SEXPp1(&c_leftout));
   igraph_vector_destroy(&c_leftout);
