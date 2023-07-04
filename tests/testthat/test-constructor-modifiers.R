@@ -113,3 +113,18 @@ test_that("with_graph_", {
   expect_equal(g$color, g2$color)
   expect_equal(g$foo, g2$foo)
 })
+
+
+test_that("adding and removing attributes", {
+  g <- make_empty_graph()
+  g2 <- make_empty_graph()
+
+  g$foo <- "bar"
+  g <- delete_graph_attr(g, "foo")
+  E(g)$foo <- "bar"
+  g <- delete_edge_attr(g, "foo")
+  V(g)$foo <- "bar"
+  g <- delete_vertex_attr(g, "foo")
+
+  expect_true(identical_graphs(g, g2))
+})
