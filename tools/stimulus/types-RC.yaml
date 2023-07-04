@@ -9,12 +9,10 @@ GRAPH:
     OUTCONV:
         INOUT: |-
             PROTECT(%I%=R_igraph_to_SEXP(&%C%));
-            IGRAPH_I_DESTROY(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             IGRAPH_FINALLY(igraph_destroy, &%C%);
             PROTECT(%I%=R_igraph_to_SEXP(&%C%));
-            IGRAPH_I_DESTROY(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 GRAPH_OR_0:

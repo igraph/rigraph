@@ -148,7 +148,6 @@ SEXP R_igraph_empty(SEXP n, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -198,7 +197,6 @@ SEXP R_igraph_full_citation(SEXP n, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -228,7 +226,6 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -258,7 +255,6 @@ SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -290,7 +286,6 @@ SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -331,7 +326,6 @@ SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(types=R_igraph_0orvector_bool_to_SEXP(&c_types));
   igraph_vector_bool_destroy(&c_types);
@@ -371,7 +365,6 @@ SEXP R_igraph_realize_degree_sequence(SEXP out_deg, SEXP in_deg, SEXP allowed_ed
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -417,7 +410,6 @@ SEXP R_igraph_preference_game(SEXP nodes, SEXP types, SEXP type_dist, SEXP fixed
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(node_type_vec=R_igraph_vector_to_SEXP(&c_node_type_vec));
   igraph_vector_destroy(&c_node_type_vec);
@@ -475,7 +467,6 @@ SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_typ
   PROTECT(r_names=NEW_CHARACTER(3));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(node_type_in_vec=R_igraph_vector_to_SEXP(&c_node_type_in_vec));
   igraph_vector_destroy(&c_node_type_in_vec);
@@ -518,7 +509,6 @@ SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -548,7 +538,6 @@ SEXP R_igraph_rewire_directed_edges(SEXP graph, SEXP prob, SEXP loops, SEXP mode
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -582,7 +571,6 @@ SEXP R_igraph_forest_fire_game(SEXP nodes, SEXP fw_prob, SEXP bw_factor, SEXP am
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -616,7 +604,6 @@ SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitne
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -654,7 +641,6 @@ SEXP R_igraph_static_power_law_game(SEXP no_of_nodes, SEXP no_of_edges, SEXP exp
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -686,7 +672,6 @@ SEXP R_igraph_k_regular_game(SEXP no_of_nodes, SEXP k, SEXP directed, SEXP multi
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -721,7 +706,6 @@ SEXP R_igraph_sbm_game(SEXP n, SEXP pref_matrix, SEXP block_sizes, SEXP directed
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_block_sizes);
   IGRAPH_FINALLY_CLEAN(1);
@@ -757,7 +741,6 @@ SEXP R_igraph_hsbm_game(SEXP n, SEXP m, SEXP rho, SEXP C, SEXP p) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -792,7 +775,6 @@ SEXP R_igraph_hsbm_list_game(SEXP n, SEXP mlist, SEXP rholist, SEXP Clist, SEXP 
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_mlist);
   IGRAPH_FINALLY_CLEAN(1);
@@ -826,7 +808,6 @@ SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutatio
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_new_graph);
   PROTECT(new_graph=R_igraph_to_SEXP(&c_new_graph));
-  IGRAPH_I_DESTROY(&c_new_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = new_graph;
 
@@ -864,11 +845,9 @@ SEXP R_igraph_correlated_pair_game(SEXP n, SEXP corr, SEXP p, SEXP directed, SEX
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph1);
   PROTECT(graph1=R_igraph_to_SEXP(&c_graph1));
-  IGRAPH_I_DESTROY(&c_graph1);
   IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_graph2);
   PROTECT(graph2=R_igraph_to_SEXP(&c_graph2));
-  IGRAPH_I_DESTROY(&c_graph2);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, graph1);
   SET_VECTOR_ELT(r_result, 1, graph2);
@@ -901,7 +880,6 @@ SEXP R_igraph_dot_product_game(SEXP vecs, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -1514,7 +1492,6 @@ SEXP R_igraph_induced_subgraph(SEXP graph, SEXP vids, SEXP impl) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_res);
   PROTECT(res=R_igraph_to_SEXP(&c_res));
-  IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vs_destroy(&c_vids);
   r_result = res;
@@ -1545,7 +1522,6 @@ SEXP R_igraph_subgraph_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_res);
   PROTECT(res=R_igraph_to_SEXP(&c_res));
-  IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_es_destroy(&c_eids);
   r_result = res;
@@ -1572,7 +1548,6 @@ SEXP R_igraph_reverse_edges(SEXP graph, SEXP eids) {
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_es_destroy(&c_eids);
   r_result = graph;
@@ -1687,7 +1662,6 @@ SEXP R_igraph_simplify(SEXP graph, SEXP remove_multiple, SEXP remove_loops, SEXP
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_edge_attr_comb);
   IGRAPH_FINALLY_CLEAN(1);
@@ -2145,7 +2119,6 @@ SEXP R_igraph_unfold_tree(SEXP graph, SEXP mode, SEXP roots) {
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_tree);
   PROTECT(tree=R_igraph_to_SEXP(&c_tree));
-  IGRAPH_I_DESTROY(&c_tree);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(vertex_index=R_igraph_0orvector_to_SEXPp1(&c_vertex_index));
   igraph_vector_destroy(&c_vertex_index);
@@ -2793,7 +2766,6 @@ SEXP R_igraph_contract_vertices(SEXP graph, SEXP mapping, SEXP vertex_attr_comb)
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_vertex_attr_comb);
   IGRAPH_FINALLY_CLEAN(1);
@@ -3172,7 +3144,6 @@ SEXP R_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -3212,7 +3183,6 @@ SEXP R_igraph_incidence(SEXP incidence, SEXP directed, SEXP mode, SEXP multiple)
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(types=R_igraph_vector_bool_to_SEXP(&c_types));
   igraph_vector_bool_destroy(&c_types);
@@ -3364,7 +3334,6 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(types=R_igraph_0orvector_bool_to_SEXP(&c_types));
   igraph_vector_bool_destroy(&c_types);
@@ -3415,7 +3384,6 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
   PROTECT(r_names=NEW_CHARACTER(2));
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(types=R_igraph_0orvector_bool_to_SEXP(&c_types));
   igraph_vector_bool_destroy(&c_types);
@@ -4824,7 +4792,6 @@ SEXP R_igraph_hrg_game(SEXP hrg) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -4850,7 +4817,6 @@ SEXP R_igraph_hrg_dendrogram(SEXP hrg) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -5073,7 +5039,6 @@ SEXP R_igraph_to_directed(SEXP graph, SEXP mode) {
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -5102,7 +5067,6 @@ SEXP R_igraph_to_undirected(SEXP graph, SEXP mode, SEXP edge_attr_comb) {
 
                                         /* Convert output */
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_attribute_combination_destroy(&c_edge_attr_comb);
   IGRAPH_FINALLY_CLEAN(1);
@@ -6076,7 +6040,6 @@ SEXP R_igraph_isoclass_create(SEXP size, SEXP number, SEXP directed) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
@@ -6641,7 +6604,6 @@ SEXP R_igraph_permute_vertices(SEXP graph, SEXP permutation) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_res);
   PROTECT(res=R_igraph_to_SEXP(&c_res));
-  IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 
@@ -6854,7 +6816,6 @@ SEXP R_igraph_simplify_and_colorize(SEXP graph) {
   PROTECT(r_names=NEW_CHARACTER(3));
   IGRAPH_FINALLY(igraph_destroy, &c_res);
   PROTECT(res=R_igraph_to_SEXP(&c_res));
-  IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(vertex_color=R_igraph_vector_int_to_SEXP(&c_vertex_color));
   igraph_vector_int_destroy(&c_vertex_color);
@@ -7457,7 +7418,6 @@ SEXP R_igraph_from_prufer(SEXP prufer) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_prufer);
   IGRAPH_FINALLY_CLEAN(1);
@@ -7549,7 +7509,6 @@ SEXP R_igraph_tree_game(SEXP n, SEXP directed, SEXP method) {
                                         /* Convert output */
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
