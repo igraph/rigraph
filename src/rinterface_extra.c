@@ -3521,6 +3521,7 @@ int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res) {
   igraph_copy(res, R_igraph_get_pointer(graph));
 
   /* attributes */
+  /* FIXME: Why is this necessary? */
   res->attr=VECTOR_ELT(graph, igraph_t_idx_attr);
 
   return 0;
