@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9006
+
+## Bug fixes
+
+  - Fix `make clean` (#860).
+
+  - `identical_graphs()` now correctly detects identical graphs without node or edge attributes (#757).
+
+## Chore
+
+  - `R_SEXP_to_igraph()` and `R_SEXP_to_igraph_copy()` get `igraph_t` object from external pointer (#865).
+
+
 # igraph 1.5.0.9005
 
 ## Bug fixes
