@@ -20,9 +20,9 @@ execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); pkgs 
 include_directories(${R_INCLUDE} ${R_LIBRARIES_INCLUDES} vendor/cigraph/include)
 
 set(IGRAPH_OPENMP_SUPPORT OFF)
-set(IGRAPH_USE_INTERNAL_GLPK ON)
-set(IGRAPH_USE_INTERNAL_LAPACK ON)
-set(IGRAPH_USE_INTERNAL_GMP ON)
+set(IGRAPH_USE_INTERNAL_GLPK OFF)
+set(IGRAPH_USE_INTERNAL_LAPACK OFF)
+set(IGRAPH_USE_INTERNAL_GMP OFF)
 add_subdirectory(vendor/cigraph)
 
 add_subdirectory(vendor/simpleraytracer)
