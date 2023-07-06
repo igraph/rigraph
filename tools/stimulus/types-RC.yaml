@@ -49,7 +49,6 @@ GRAPH_LIST:
     OUTCONV:
         OUT: |-
             PROTECT(%I%=R_igraph_graphlist_to_SEXP(&%C%));
-            igraph_graph_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
 INTEGER:
