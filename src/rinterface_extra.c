@@ -2396,9 +2396,7 @@ static void *R_igraph_altrep_from(SEXP vec, Rboolean writeable) {
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
-    long int no_of_edges=igraph_ecount(g);
-    data=NEW_NUMERIC(no_of_edges);
-    memcpy(REAL(data), g->from.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
+    data=R_igraph_vector_int_to_SEXP(&g->from);
     R_set_altrep_data2(vec, data);
   }
 
@@ -2413,9 +2411,7 @@ static void *R_igraph_altrep_to(SEXP vec, Rboolean writeable) {
     SEXP xp=Rf_findVar(Rf_install("igraph"), R_altrep_data1(vec));
     igraph_t *g=(igraph_t*)(R_ExternalPtrAddr(xp));
 
-    long int no_of_edges=igraph_ecount(g);
-    data=NEW_NUMERIC(no_of_edges);
-    memcpy(REAL(data), g->to.stor_begin, sizeof(igraph_real_t)*(size_t) no_of_edges);
+    data=R_igraph_vector_int_to_SEXP(&g->to);
     R_set_altrep_data2(vec, data);
   }
 
