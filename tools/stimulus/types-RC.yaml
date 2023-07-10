@@ -542,7 +542,7 @@ VERTEX_QTY:
             igraph_vector_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXSET:
+VERTEX_SELECTOR:
     CALL:
         IN: '%C%'
         OUT: '&%C%'
