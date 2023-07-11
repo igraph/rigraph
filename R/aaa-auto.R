@@ -919,9 +919,10 @@ betweenness_subset_impl <- function(graph, vids=ALL, directed=TRUE, sources=ALL,
   res
 }
 
-edge_betweenness_subset_impl <- function(graph, eids=ALL, directed=TRUE, sources=ALL, targets=ALL, weights=NULL) {
+edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, sources=ALL, targets=ALL, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
   directed <- as.logical(directed)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -934,7 +935,7 @@ edge_betweenness_subset_impl <- function(graph, eids=ALL, directed=TRUE, sources
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_edge_betweenness_subset, graph, eids, directed, sources, targets, weights)
+  res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources, targets, weights)
 
   res
 }
@@ -1029,22 +1030,24 @@ personalized_pagerank_vs_impl <- function(graph, algo=c("prpack", "arpack"), vid
 subgraph_from_edges_impl <- function(graph, eids, delete.vertices=TRUE) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
   delete.vertices <- as.logical(delete.vertices)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_subgraph_from_edges, graph, eids, delete.vertices)
+  res <- .Call(R_igraph_subgraph_from_edges, graph, eids-1, delete.vertices)
 
   res
 }
 
-reverse_edges_impl <- function(graph, eids=ALL) {
+reverse_edges_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_reverse_edges, graph, eids)
+  res <- .Call(R_igraph_reverse_edges, graph, eids-1)
 
   res
 }
@@ -1098,16 +1101,17 @@ simplify_impl <- function(graph, remove.multiple=TRUE, remove.loops=TRUE, edge.a
   res
 }
 
-ecc_impl <- function(graph, eids=ALL, k=3, offset=FALSE, normalize=TRUE) {
+ecc_impl <- function(graph, eids=E(graph), k=3, offset=FALSE, normalize=TRUE) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
   k <- as.integer(k)
   offset <- as.logical(offset)
   normalize <- as.logical(normalize)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_ecc, graph, eids, k, offset, normalize)
+  res <- .Call(R_igraph_ecc, graph, eids-1, k, offset, normalize)
 
   res
 }
@@ -1132,13 +1136,14 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   res
 }
 
-is_loop_impl <- function(graph, eids=ALL) {
+is_loop_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_is_loop, graph, eids)
+  res <- .Call(R_igraph_is_loop, graph, eids-1)
 
   res
 }
@@ -1176,13 +1181,14 @@ is_simple_impl <- function(graph) {
   res
 }
 
-is_multiple_impl <- function(graph, eids=ALL) {
+is_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_is_multiple, graph, eids)
+  res <- .Call(R_igraph_is_multiple, graph, eids-1)
 
   res
 }
@@ -1209,13 +1215,14 @@ has_multiple_impl <- function(graph) {
   res
 }
 
-count_multiple_impl <- function(graph, eids=ALL) {
+count_multiple_impl <- function(graph, eids=E(graph)) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_count_multiple, graph, eids)
+  res <- .Call(R_igraph_count_multiple, graph, eids-1)
 
   res
 }
@@ -1316,14 +1323,15 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   res
 }
 
-is_mutual_impl <- function(graph, eids=ALL, loops=TRUE) {
+is_mutual_impl <- function(graph, eids=E(graph), loops=TRUE) {
   # Argument checks
   ensure_igraph(graph)
+  eids <- as_igraph_es(graph, eids)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_is_mutual, graph, eids, loops)
+  res <- .Call(R_igraph_is_mutual, graph, eids-1, loops)
 
   res
 }
@@ -2204,15 +2212,16 @@ similarity_dice_impl <- function(graph, vids=ALL, mode=c("all", "out", "in", "to
   res
 }
 
-similarity_dice_es_impl <- function(graph, es=ALL, mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_dice_es_impl <- function(graph, es=E(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
+  es <- as_igraph_es(graph, es)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_dice_es, graph, es, mode, loops)
+  res <- .Call(R_igraph_similarity_dice_es, graph, es-1, mode, loops)
 
   res
 }
@@ -2255,15 +2264,16 @@ similarity_jaccard_impl <- function(graph, vids=ALL, mode=c("all", "out", "in", 
   res
 }
 
-similarity_jaccard_es_impl <- function(graph, es=ALL, mode=c("all", "out", "in", "total"), loops=FALSE) {
+similarity_jaccard_es_impl <- function(graph, es=E(graph), mode=c("all", "out", "in", "total"), loops=FALSE) {
   # Argument checks
   ensure_igraph(graph)
+  es <- as_igraph_es(graph, es)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   loops <- as.logical(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_similarity_jaccard_es, graph, es, mode, loops)
+  res <- .Call(R_igraph_similarity_jaccard_es, graph, es-1, mode, loops)
 
   res
 }

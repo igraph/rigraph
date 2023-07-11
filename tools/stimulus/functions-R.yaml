@@ -425,6 +425,18 @@ igraph_pseudo_diameter:
 igraph_pseudo_diameter_dijkstra:
     DEPS: start_vid ON graph, weights ON graph
 
+igraph_bfs_simple:
+    DEPS: root ON graph
+
+igraph_is_bipartite:
+    DEPS: type ON graph
+
+igraph_bipartite_game:
+    DEPS: types ON graph
+
+igraph_vertex_path_from_edge_path:
+    DEPS: start ON graph
+
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two

@@ -150,7 +150,7 @@ VERTEXSET_INT:
               %I% <- create_vs(%I1%, %I%)
             }
 
-EDGESET:
+EDGE_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
         ALL: E(%I1%)

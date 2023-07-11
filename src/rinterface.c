@@ -2868,6 +2868,7 @@ SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP eids, SEXP directed, SEXP
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_igraph_es(eids, &c_graph, &c_eids);
   c_directed=LOGICAL(directed)[0];
   R_SEXP_to_igraph_vs(sources, &c_graph, &c_sources);
   R_SEXP_to_igraph_vs(targets, &c_graph, &c_targets);
@@ -2879,6 +2880,7 @@ SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP eids, SEXP directed, SEXP
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_eids);
   igraph_vs_destroy(&c_sources);
   igraph_vs_destroy(&c_targets);
   r_result = res;
@@ -3109,6 +3111,7 @@ SEXP R_igraph_subgraph_from_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  R_SEXP_to_igraph_es(eids, &c_graph, &c_eids);
   c_delete_vertices=LOGICAL(delete_vertices)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_subgraph_from_edges(&c_graph, &c_res, c_eids, c_delete_vertices));
@@ -3118,6 +3121,7 @@ SEXP R_igraph_subgraph_from_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
   PROTECT(res=R_igraph_to_SEXP(&c_res));
   IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -3136,6 +3140,7 @@ SEXP R_igraph_reverse_edges(SEXP graph, SEXP eids) {
                                         /* Convert input */
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
+  R_SEXP_to_igraph_es(eids, &c_graph, &c_eids);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_reverse_edges(&c_graph, c_eids));
 
@@ -3143,6 +3148,7 @@ SEXP R_igraph_reverse_edges(SEXP graph, SEXP eids) {
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_eids);
   r_result = graph;
 
   UNPROTECT(1);
@@ -3285,6 +3291,7 @@ SEXP R_igraph_ecc(SEXP graph, SEXP eids, SEXP k, SEXP offset, SEXP normalize) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_igraph_es(eids, &c_graph, &c_eids);
   c_k=INTEGER(k)[0];
   c_offset=LOGICAL(offset)[0];
   c_normalize=LOGICAL(normalize)[0];
@@ -3295,6 +3302,7 @@ SEXP R_igraph_ecc(SEXP graph, SEXP eids, SEXP k, SEXP offset, SEXP normalize) {
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_eids);
   r_result = res;
 
   UNPROTECT(1);
@@ -3351,6 +3359,7 @@ SEXP R_igraph_is_loop(SEXP graph, SEXP es) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_loop(&c_graph, &c_res, c_es));
 
@@ -3358,6 +3367,7 @@ SEXP R_igraph_is_loop(SEXP graph, SEXP es) {
   PROTECT(res=R_igraph_vector_bool_to_SEXP(&c_res));
   igraph_vector_bool_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);
@@ -3453,6 +3463,7 @@ SEXP R_igraph_is_multiple(SEXP graph, SEXP es) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_multiple(&c_graph, &c_res, c_es));
 
@@ -3460,6 +3471,7 @@ SEXP R_igraph_is_multiple(SEXP graph, SEXP es) {
   PROTECT(res=R_igraph_vector_bool_to_SEXP(&c_res));
   igraph_vector_bool_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);
@@ -3531,6 +3543,7 @@ SEXP R_igraph_count_multiple(SEXP graph, SEXP es) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_count_multiple(&c_graph, &c_res, c_es));
 
@@ -3538,6 +3551,7 @@ SEXP R_igraph_count_multiple(SEXP graph, SEXP es) {
   PROTECT(res=R_igraph_vector_int_to_SEXP(&c_res));
   igraph_vector_int_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);
@@ -3844,6 +3858,7 @@ SEXP R_igraph_is_mutual(SEXP graph, SEXP es, SEXP loops) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
   c_loops=LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_mutual(&c_graph, &c_res, c_es, c_loops));
@@ -3852,6 +3867,7 @@ SEXP R_igraph_is_mutual(SEXP graph, SEXP es, SEXP loops) {
   PROTECT(res=R_igraph_vector_bool_to_SEXP(&c_res));
   igraph_vector_bool_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);
@@ -6648,6 +6664,7 @@ SEXP R_igraph_similarity_dice_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_loops=LOGICAL(loops)[0];
                                         /* Call igraph */
@@ -6657,6 +6674,7 @@ SEXP R_igraph_similarity_dice_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) {
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);
@@ -6787,6 +6805,7 @@ SEXP R_igraph_similarity_jaccard_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) 
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
+  R_SEXP_to_igraph_es(es, &c_graph, &c_es);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_loops=LOGICAL(loops)[0];
                                         /* Call igraph */
@@ -6796,6 +6815,7 @@ SEXP R_igraph_similarity_jaccard_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) 
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_es_destroy(&c_es);
   r_result = res;
 
   UNPROTECT(1);

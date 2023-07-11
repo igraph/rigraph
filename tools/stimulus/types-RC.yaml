@@ -325,6 +325,27 @@ EDGESET_LIST:
             igraph_vector_int_list_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
+EDGE_SELECTOR:
+    CALL:
+        IN: '%C%'
+        OUT: '&%C%'
+    CTYPE:
+        IN: igraph_es_t
+        OUT: igraph_vector_t
+    INCONV:
+        IN: R_SEXP_to_igraph_es(%I%, &%C1%, &%C%);
+        OUT: |-
+            if (0 != igraph_vector_init(&%C%, 0)) {
+              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_vector_destroy, &%C%);
+    OUTCONV:
+        IN: igraph_es_destroy(&%C%);
+        OUT: |-
+            PROTECT(%I%=R_igraph_vector_to_SEXPp1(&%C%));
+            igraph_vector_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
+
 ADJLIST:
     CALL: '&%C%'
     CTYPE: igraph_adjlist_t
