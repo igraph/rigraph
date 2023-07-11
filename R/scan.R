@@ -157,7 +157,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
     if (!is.null(neighborhoods)) {
       if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         neighborhoods <- lapply(neighborhoods, function(x) {
-          as.integer(x) - 1L
+          as.numeric(x) - 1L
         })
         on.exit(.Call(R_igraph_finalizer))
         .Call(
@@ -210,7 +210,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
       neighborhoods <- lapply(neighborhoods, as.vector)
       if (is.character(FUN) && FUN %in% c("ecount", "wumweights")) {
         neighborhoods <- lapply(neighborhoods, function(x) {
-          as.integer(x) - 1L
+          as.numeric(x) - 1L
         })
         on.exit(.Call(R_igraph_finalizer))
         .Call(
