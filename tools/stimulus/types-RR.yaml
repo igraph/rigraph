@@ -47,10 +47,10 @@ VECTOR_LONG:
     INCONV: '%I% <- as.numeric(%I%)'
 
 VECTOR_INT:
-    INCONV: '%I% <- as.integer(%I%)'
+    INCONV: '%I% <- as.numeric(%I%)'
 
 VECTOR_INT_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.integer(%I%)
+    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
 
 VECTORM1:
     INCONV: '%I% <- as.numeric(%I%)-1'
@@ -128,7 +128,7 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
-VERTEXSET:
+VERTEX_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
