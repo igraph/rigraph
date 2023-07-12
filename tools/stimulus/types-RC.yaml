@@ -617,7 +617,7 @@ VERTEX_INDICES:
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
@@ -649,7 +649,7 @@ EDGE_INDICES:
             IGRAPH_FINALLY(igraph_vector_int_destroy, &%C%);
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 

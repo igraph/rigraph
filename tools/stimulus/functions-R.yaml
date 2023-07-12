@@ -414,7 +414,7 @@ igraph_get_all_eids_between:
     # for dependencies. The problem is that the VERTEXINDEX type needs two
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
-    DEPS: from ON graph, to ON graph
+    DEPS: from ON graph, to ON graph, eids ON graph
 
 igraph_hub_and_authority_scores:
     DEPS: weights ON graph

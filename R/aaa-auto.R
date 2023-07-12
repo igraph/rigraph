@@ -2925,7 +2925,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, ed
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -2935,7 +2935,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, ed
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -2978,7 +2978,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -2988,7 +2988,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3042,7 +3042,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2,
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3052,7 +3052,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2,
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3095,7 +3095,7 @@ subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1, verte
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3105,7 +3105,7 @@ subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1, verte
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3148,7 +3148,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.integer(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1L
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3158,7 +3158,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.integer(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1L
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3199,7 +3199,7 @@ canonical_permutation_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl"
     }
   }
   if (!is.null(colors)) {
-    colors <- as.integer(colors)-1L
+    colors <- as.numeric(colors)-1L
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3234,7 +3234,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "
     }
   }
   if (!is.null(colors1)) {
-    colors1 <- as.integer(colors1)-1L
+    colors1 <- as.numeric(colors1)-1L
   }
   if (missing(colors2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3244,7 +3244,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "
     }
   }
   if (!is.null(colors2)) {
-    colors2 <- as.integer(colors2)-1L
+    colors2 <- as.numeric(colors2)-1L
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3267,7 +3267,7 @@ automorphisms_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm",
     }
   }
   if (!is.null(colors)) {
-    colors <- as.integer(colors)-1L
+    colors <- as.numeric(colors)-1L
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3289,7 +3289,7 @@ automorphism_group_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "
     }
   }
   if (!is.null(colors)) {
-    colors <- as.integer(colors)-1L
+    colors <- as.numeric(colors)-1L
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 

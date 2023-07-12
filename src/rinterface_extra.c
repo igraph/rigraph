@@ -4902,8 +4902,7 @@ SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
   return result;
 }
 
-SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
-                                 SEXP pweights, SEXP ploops) {
+SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
 
   igraph_t g;
   igraph_matrix_t adjm;
@@ -4912,8 +4911,7 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode,
   igraph_vector_t weights;
   SEXP result;
 
-  R_SEXP_to_vector(pweights, &weights);
-
+  igraph_vector_init(&weights, 0);
   R_SEXP_to_matrix(adjmatrix, &adjm);
   IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
   PROTECT(result=R_igraph_to_SEXP(&g));

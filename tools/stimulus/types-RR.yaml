@@ -213,7 +213,7 @@ VERTEX_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.integer(%I%)-1L
+          %I% <- as.numeric(%I%)-1L
         }
     OUTCONV:
         OUT: |-
