@@ -164,6 +164,19 @@ regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
   res
 }
 
+graph_power_impl <- function(graph, order, directed=false) {
+  # Argument checks
+  ensure_igraph(graph)
+  order <- as.integer(order)
+  directed <- as.logical(directed)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graph_power, graph, order, directed)
+
+  res
+}
+
 lcf_vector_impl <- function(n, shifts, repeats=1) {
   # Argument checks
   n <- as.integer(n)

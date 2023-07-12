@@ -665,6 +665,36 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
 }
 
 /*-------------------------------------------/
+/ igraph_graph_power                         /
+/-------------------------------------------*/
+SEXP R_igraph_graph_power(SEXP graph, SEXP order, SEXP directed) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_t c_res;
+  igraph_integer_t c_order;
+  igraph_bool_t c_directed;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_order=INTEGER(order)[0];
+  c_directed=LOGICAL(directed)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_graph_power(&c_graph, &c_res, c_order, c_directed));
+
+                                        /* Convert output */
+  IGRAPH_FINALLY(igraph_destroy, &c_res);
+  PROTECT(res=R_igraph_to_SEXP(&c_res));
+  IGRAPH_I_DESTROY(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_lcf_vector                          /
 /-------------------------------------------*/
 SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {

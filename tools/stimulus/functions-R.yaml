@@ -1129,3 +1129,6 @@ igraph_hrg_dendrogram:
 
 igraph_convergence_degree:
     IGNORE: RR, RC, RInit
+
+igraph_community_voronoi:
+    IGNORE: RR, RC, RInit
