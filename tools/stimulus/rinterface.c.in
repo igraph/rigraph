@@ -71,6 +71,7 @@ SEXP R_igraph_strvector_to_SEXP(const igraph_strvector_t *m);
 SEXP R_igraph_to_SEXP(const igraph_t *graph);
 SEXP R_igraph_vectorlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 SEXP R_igraph_vector_int_list_to_SEXP(const igraph_vector_int_list_t *list);
+SEXP R_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list);
 SEXP R_igraph_0orvectorlist_to_SEXP(const igraph_vector_ptr_t *ptr);
 void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr);
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr);

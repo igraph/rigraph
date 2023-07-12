@@ -798,7 +798,18 @@ get_k_shortest_paths_impl <- function(graph, weights, k, from, to, mode=c("out",
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_k_shortest_paths, graph, weights, k, from-1, to-1, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$vertex.paths)) {
+      res$vertex.paths[[i_]] <- unsafe_create_vs(graph, res$vertex.paths[[i_]], verts = verts)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$edge.paths)) {
+      res$edge.paths[[i_]] <- unsafe_create_es(graph, res$edge.paths[[i_]], es = es)
+    }
+  }
   res
 }
 
@@ -851,7 +862,18 @@ get_widest_paths_impl <- function(graph, from, to=V(graph), weights=NULL, mode=c
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_widest_paths, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$vertices)) {
+      res$vertices[[i_]] <- unsafe_create_vs(graph, res$vertices[[i_]], verts = verts)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$edges)) {
+      res$edges[[i_]] <- unsafe_create_es(graph, res$edges[[i_]], es = es)
+    }
+  }
   res
 }
 
@@ -2024,7 +2046,24 @@ biconnected_components_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biconnected_components, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$tree.edges)) {
+      res$tree.edges[[i_]] <- unsafe_create_es(graph, res$tree.edges[[i_]], es = es)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$component.edges)) {
+      res$component.edges[[i_]] <- unsafe_create_es(graph, res$component.edges[[i_]], es = es)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$components)) {
+      res$components[[i_]] <- unsafe_create_vs(graph, res$components[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2048,7 +2087,12 @@ cliques_impl <- function(graph, min=0, max=0) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_cliques, graph, min, max)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2072,7 +2116,12 @@ largest_cliques_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_largest_cliques, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2085,6 +2134,12 @@ maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0,
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maximal_cliques_subset, graph, subset, outfile, min.size, max.size)
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$res)) {
+      res$res[[i_]] <- unsafe_create_vs(graph, res$res[[i_]], verts = verts)
+    }
+  }
   if (!details) {
     res <- res$res
   }
@@ -2133,7 +2188,12 @@ weighted_cliques_impl <- function(graph, vertex.weights=NULL, min.weight=0, max.
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_weighted_cliques, graph, vertex.weights, min.weight, max.weight, maximal)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2152,7 +2212,12 @@ largest_weighted_cliques_impl <- function(graph, vertex.weights=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_largest_weighted_cliques, graph, vertex.weights)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2345,7 +2410,12 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_graphlets, graph, weights, niter)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$cliques)) {
+      res$cliques[[i_]] <- unsafe_create_vs(graph, res$cliques[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2695,7 +2765,18 @@ all_st_cuts_impl <- function(graph, source, target) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_all_st_cuts, graph, source-1, target-1)
-
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$cuts)) {
+      res$cuts[[i_]] <- unsafe_create_es(graph, res$cuts[[i_]], es = es)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$partition1s)) {
+      res$partition1s[[i_]] <- unsafe_create_vs(graph, res$partition1s[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2714,7 +2795,18 @@ all_st_mincuts_impl <- function(graph, source, target, capacity) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_all_st_mincuts, graph, source-1, target-1, capacity)
-
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res$cuts)) {
+      res$cuts[[i_]] <- unsafe_create_es(graph, res$cuts[[i_]], es = es)
+    }
+  }
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$partition1s)) {
+      res$partition1s[[i_]] <- unsafe_create_vs(graph, res$partition1s[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2760,7 +2852,12 @@ all_minimal_st_separators_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_all_minimal_st_separators, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -2771,7 +2868,12 @@ minimum_size_separators_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_minimum_size_separators, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_vs(graph, res[[i_]], verts = verts)
+    }
+  }
   res
 }
 
@@ -3194,6 +3296,12 @@ automorphism_group_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_automorphism_group, graph, colors, sh)
+  if (igraph_opt("return.vs.es")) {
+    verts <- V(graph)
+    for (i_ in seq_along(res$generators)) {
+      res$generators[[i_]] <- unsafe_create_vs(graph, res$generators[[i_]], verts = verts)
+    }
+  }
   if (!details) {
     res <- res$generators
   }
@@ -3444,7 +3552,12 @@ fundamental_cycles_impl <- function(graph, start, bfs.cutoff, weights=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_fundamental_cycles, graph, start-1, bfs.cutoff, weights)
-
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_es(graph, res[[i_]], es = es)
+    }
+  }
   res
 }
 
@@ -3466,7 +3579,12 @@ minimum_cycle_basis_impl <- function(graph, bfs.cutoff, complete, use.cycle.orde
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_minimum_cycle_basis, graph, bfs.cutoff, complete, use.cycle.order, weights)
-
+  if (igraph_opt("return.vs.es")) {
+    es <- E(graph)
+    for (i_ in seq_along(res)) {
+      res[[i_]] <- unsafe_create_es(graph, res[[i_]], es = es)
+    }
+  }
   res
 }
 

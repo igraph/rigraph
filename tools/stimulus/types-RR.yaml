@@ -259,7 +259,7 @@ MATRIXLIST:
               stop("%I% is not a list of matrices")
             }
 
-VERTEXSETLIST:
+VERTEXSET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -273,7 +273,7 @@ VERTEXSETLIST_INT:
     INCONV:
         IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
 
-EDGESETLIST:
+EDGESET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
