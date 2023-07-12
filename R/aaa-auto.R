@@ -456,7 +456,7 @@ correlated_game_impl <- function(old.graph, corr, p=edge_density(old.graph), per
   ensure_igraph(old.graph)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
-  permutation <- as.integer(permutation)-1L
+  permutation <- as.numeric(permutation)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -477,7 +477,7 @@ correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NU
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   directed <- as.logical(directed)
-  permutation <- as.integer(permutation)-1L
+  permutation <- as.numeric(permutation)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1566,7 +1566,7 @@ centralization_eigenvector_centrality_tmax_impl <- function(graph, nodes=0, dire
 assortativity_nominal_impl <- function(graph, types, directed=TRUE, normalized=TRUE) {
   # Argument checks
   ensure_igraph(graph)
-  types <- as.integer(types)-1L
+  types <- as.numeric(types)-1L
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -1607,7 +1607,7 @@ assortativity_degree_impl <- function(graph, directed=TRUE) {
 contract_vertices_impl <- function(graph, mapping, vertex.attr.comb=igraph_opt("vertex.attr.comb")) {
   # Argument checks
   ensure_igraph(graph)
-  mapping <- as.integer(mapping)-1L
+  mapping <- as.numeric(mapping)-1L
   vertex.attr.comb <- igraph.i.attribute.combination(vertex.attr.comb)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3213,7 +3213,7 @@ canonical_permutation_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl"
 permute_vertices_impl <- function(graph, permutation) {
   # Argument checks
   ensure_igraph(graph)
-  permutation <- as.integer(permutation)-1L
+  permutation <- as.numeric(permutation)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3621,7 +3621,7 @@ is_forest_impl <- function(graph, mode=c("out", "in", "all", "total"), details=F
 
 from_prufer_impl <- function(prufer) {
   # Argument checks
-  prufer <- as.integer(prufer)-1L
+  prufer <- as.numeric(prufer)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3648,7 +3648,7 @@ to_prufer_impl <- function(graph) {
 
 tree_from_parent_vector_impl <- function(parents, type=OUT) {
   # Argument checks
-  parents <- as.integer(parents)-1L
+  parents <- as.numeric(parents)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

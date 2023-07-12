@@ -3276,8 +3276,8 @@ SEXP R_igraph_sparsemat_to_SEXP_triplet(const igraph_sparsemat_t *sp) {
   SET_VECTOR_ELT(res, 1, NEW_INTEGER(2));
   INTEGER(VECTOR_ELT(res, 1))[0] = (int) igraph_sparsemat_nrow(sp);
   INTEGER(VECTOR_ELT(res, 1))[1] = (int) igraph_sparsemat_ncol(sp);
-  SET_VECTOR_ELT(res, 2, NEW_INTEGER(nz));
-  SET_VECTOR_ELT(res, 3, NEW_INTEGER(nz));
+  SET_VECTOR_ELT(res, 2, NEW_NUMERIC(nz));
+  SET_VECTOR_ELT(res, 3, NEW_NUMERIC(nz));
   SET_VECTOR_ELT(res, 4, NEW_NUMERIC(nz));
   if (nz > 0) {
     igraph_vector_int_t i, j;
