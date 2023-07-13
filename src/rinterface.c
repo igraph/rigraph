@@ -840,7 +840,7 @@ SEXP R_igraph_full_multipartite(SEXP n, SEXP directed, SEXP mode) {
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(types=R_igraph_vector_int_to_SEXP(&c_types));
+  PROTECT(types=R_igraph_vector_int_to_SEXPp1(&c_types));
   igraph_vector_int_destroy(&c_types);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_n);
@@ -982,7 +982,7 @@ SEXP R_igraph_turan(SEXP n, SEXP r) {
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(types=R_igraph_vector_int_to_SEXP(&c_types));
+  PROTECT(types=R_igraph_vector_int_to_SEXPp1(&c_types));
   igraph_vector_int_destroy(&c_types);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, graph);
@@ -3857,7 +3857,7 @@ SEXP R_igraph_unfold_tree(SEXP graph, SEXP mode, SEXP roots) {
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_roots);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(vertex_index=R_igraph_vector_int_to_SEXP(&c_vertex_index));
+  PROTECT(vertex_index=R_igraph_vector_int_to_SEXPp1(&c_vertex_index));
   igraph_vector_int_destroy(&c_vertex_index);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, tree);
@@ -3959,7 +3959,7 @@ SEXP R_igraph_maximum_cardinality_search(SEXP graph) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
   PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(alpha=R_igraph_vector_int_to_SEXP(&c_alpha));
+  PROTECT(alpha=R_igraph_vector_int_to_SEXPp1(&c_alpha));
   igraph_vector_int_destroy(&c_alpha);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(alpham1=R_igraph_vector_int_to_SEXPp1(&c_alpham1));
@@ -5323,10 +5323,10 @@ SEXP R_igraph_get_biadjacency(SEXP graph, SEXP types) {
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(row_ids=R_igraph_vector_int_to_SEXP(&c_row_ids));
+  PROTECT(row_ids=R_igraph_vector_int_to_SEXPp1(&c_row_ids));
   igraph_vector_int_destroy(&c_row_ids);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(col_ids=R_igraph_vector_int_to_SEXP(&c_col_ids));
+  PROTECT(col_ids=R_igraph_vector_int_to_SEXPp1(&c_col_ids));
   igraph_vector_int_destroy(&c_col_ids);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, res);
@@ -6362,7 +6362,7 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
   PROTECT(extd_graph=R_igraph_to_SEXP(&c_extd_graph));
   IGRAPH_I_DESTROY(&c_extd_graph);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(extd_to_orig_eids=R_igraph_vector_int_to_SEXP(&c_extd_to_orig_eids));
+  PROTECT(extd_to_orig_eids=R_igraph_vector_int_to_SEXPp1(&c_extd_to_orig_eids));
   igraph_vector_int_destroy(&c_extd_to_orig_eids);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_layers);
@@ -8381,10 +8381,10 @@ SEXP R_igraph_induced_subgraph_map(SEXP graph, SEXP vids, SEXP impl) {
   IGRAPH_I_DESTROY(&c_res);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vs_destroy(&c_vids);
-  PROTECT(map=R_igraph_vector_int_to_SEXP(&c_map));
+  PROTECT(map=R_igraph_vector_int_to_SEXPp1(&c_map));
   igraph_vector_int_destroy(&c_map);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(invmap=R_igraph_vector_int_to_SEXP(&c_invmap));
+  PROTECT(invmap=R_igraph_vector_int_to_SEXPp1(&c_invmap));
   igraph_vector_int_destroy(&c_invmap);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, res);
@@ -8707,7 +8707,7 @@ SEXP R_igraph_dominator_tree(SEXP graph, SEXP root, SEXP mode) {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(3));
   PROTECT(r_names=NEW_CHARACTER(3));
-  PROTECT(dom=R_igraph_vector_int_to_SEXP(&c_dom));
+  PROTECT(dom=R_igraph_vector_int_to_SEXPp1(&c_dom));
   igraph_vector_int_destroy(&c_dom);
   IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_FINALLY(igraph_destroy, &c_domtree);
@@ -9175,10 +9175,10 @@ SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP 
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(iso=NEW_LOGICAL(1));
   LOGICAL(iso)[0]=c_iso;
-  PROTECT(map12=R_igraph_vector_int_to_SEXP(&c_map12));
+  PROTECT(map12=R_igraph_vector_int_to_SEXPp1(&c_map12));
   igraph_vector_int_destroy(&c_map12);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map21=R_igraph_vector_int_to_SEXP(&c_map21));
+  PROTECT(map21=R_igraph_vector_int_to_SEXPp1(&c_map21));
   igraph_vector_int_destroy(&c_map21);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, iso);
@@ -9429,10 +9429,10 @@ SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SE
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(iso=NEW_LOGICAL(1));
   LOGICAL(iso)[0]=c_iso;
-  PROTECT(map12=R_igraph_vector_int_to_SEXP(&c_map12));
+  PROTECT(map12=R_igraph_vector_int_to_SEXPp1(&c_map12));
   igraph_vector_int_destroy(&c_map12);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map21=R_igraph_vector_int_to_SEXP(&c_map21));
+  PROTECT(map21=R_igraph_vector_int_to_SEXPp1(&c_map21));
   igraph_vector_int_destroy(&c_map21);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, iso);
@@ -9518,10 +9518,10 @@ SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_c
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_edge_color2);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map12=R_igraph_vector_int_to_SEXP(&c_map12));
+  PROTECT(map12=R_igraph_vector_int_to_SEXPp1(&c_map12));
   igraph_vector_int_destroy(&c_map12);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map21=R_igraph_vector_int_to_SEXP(&c_map21));
+  PROTECT(map21=R_igraph_vector_int_to_SEXPp1(&c_map21));
   igraph_vector_int_destroy(&c_map21);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, map12);
@@ -9706,7 +9706,7 @@ SEXP R_igraph_canonical_permutation(SEXP graph, SEXP colors, SEXP sh) {
   PROTECT(r_names=NEW_CHARACTER(2));
   igraph_vector_int_destroy(&c_colors);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(labeling=R_igraph_vector_int_to_SEXP(&c_labeling));
+  PROTECT(labeling=R_igraph_vector_int_to_SEXPp1(&c_labeling));
   igraph_vector_int_destroy(&c_labeling);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(info=R_igraph_bliss_info_to_SEXP(&c_info));
@@ -9811,10 +9811,10 @@ SEXP R_igraph_isomorphic_bliss(SEXP graph1, SEXP graph2, SEXP colors1, SEXP colo
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(iso=NEW_LOGICAL(1));
   LOGICAL(iso)[0]=c_iso;
-  PROTECT(map12=R_igraph_vector_int_to_SEXP(&c_map12));
+  PROTECT(map12=R_igraph_vector_int_to_SEXPp1(&c_map12));
   igraph_vector_int_destroy(&c_map12);
   IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(map21=R_igraph_vector_int_to_SEXP(&c_map21));
+  PROTECT(map21=R_igraph_vector_int_to_SEXPp1(&c_map21));
   igraph_vector_int_destroy(&c_map21);
   IGRAPH_FINALLY_CLEAN(1);
   PROTECT(info1=R_igraph_bliss_info_to_SEXP(&c_info1));
@@ -10103,7 +10103,7 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   INTEGER(matching_size)[0]=c_matching_size;
   PROTECT(matching_weight=NEW_NUMERIC(1));
   REAL(matching_weight)[0]=c_matching_weight;
-  PROTECT(matching=R_igraph_vector_int_to_SEXP(&c_matching));
+  PROTECT(matching=R_igraph_vector_int_to_SEXPp1(&c_matching));
   igraph_vector_int_destroy(&c_matching);
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, matching_size);
@@ -10858,7 +10858,7 @@ SEXP R_igraph_to_prufer(SEXP graph) {
   IGRAPH_R_CHECK(igraph_to_prufer(&c_graph, &c_prufer));
 
                                         /* Convert output */
-  PROTECT(prufer=R_igraph_vector_int_to_SEXP(&c_prufer));
+  PROTECT(prufer=R_igraph_vector_int_to_SEXPp1(&c_prufer));
   igraph_vector_int_destroy(&c_prufer);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = prufer;

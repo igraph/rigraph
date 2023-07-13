@@ -116,8 +116,6 @@ ERROR:
     CTYPE: int
 
 INDEX_VECTOR:
-    # Indices in R are 1-based; the conversion takes place in the R layer,
-    # see types-RR.yaml
     CALL: '&%C%'
     CTYPE: igraph_vector_int_t
     INCONV:
@@ -134,7 +132,7 @@ INDEX_VECTOR:
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
-            PROTECT(%I%=R_igraph_vector_int_to_SEXP(&%C%));
+            PROTECT(%I%=R_igraph_vector_int_to_SEXPp1(&%C%));
             igraph_vector_int_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 

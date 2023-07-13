@@ -212,6 +212,7 @@ extern SEXP R_igraph_gomory_hu_tree(void *, void *);
 extern SEXP R_igraph_graph_adjacency(void *, void *);
 extern SEXP R_igraph_graph_center(void *, void *);
 extern SEXP R_igraph_graph_count(void *, void *);
+extern SEXP R_igraph_graph_power(void *, void *, void *);
 extern SEXP R_igraph_graph_version(void *);
 extern SEXP R_igraph_graphlets(void *, void *, void *);
 extern SEXP R_igraph_graphlets_candidate_basis(void *, void *);
@@ -685,6 +686,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_graph_adjacency",                            (DL_FUNC) &R_igraph_graph_adjacency,                             2},
     {"R_igraph_graph_center",                               (DL_FUNC) &R_igraph_graph_center,                                2},
     {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
+    {"R_igraph_graph_power",                                (DL_FUNC) &R_igraph_graph_power,                                 3},
     {"R_igraph_graph_version",                              (DL_FUNC) &R_igraph_graph_version,                               1},
     {"R_igraph_graphlets",                                  (DL_FUNC) &R_igraph_graphlets,                                   3},
     {"R_igraph_graphlets_candidate_basis",                  (DL_FUNC) &R_igraph_graphlets_candidate_basis,                   2},

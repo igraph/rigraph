@@ -216,7 +216,7 @@ full_multipartite_impl <- function(n, directed=FALSE, mode=c("all", "out", "in",
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_full_multipartite, n, directed, mode)
-  res$types <- res$types+1
+
   res
 }
 
@@ -276,7 +276,7 @@ turan_impl <- function(n, r) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_turan, n, r)
-  res$types <- res$types+1
+
   res
 }
 
@@ -1419,7 +1419,7 @@ maximum_cardinality_search_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maximum_cardinality_search, graph)
-  res$alpha <- res$alpha+1
+
   res
 }
 
@@ -1953,8 +1953,7 @@ get_biadjacency_impl <- function(graph, types=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_biadjacency, graph, types)
-  res$row.ids <- res$row.ids+1
-  res$col.ids <- res$col.ids+1
+
   res
 }
 
@@ -2688,8 +2687,7 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_induced_subgraph_map, graph, vids-1, impl)
-  res$map <- res$map+1
-  res$invmap <- res$invmap+1
+
   res
 }
 
@@ -2759,7 +2757,7 @@ dominator_tree_impl <- function(graph, root, mode=c("out", "in", "all", "total")
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_dominator_tree, graph, root-1, mode)
-  res$dom <- res$dom+1
+
   res
 }
 
@@ -2974,8 +2972,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, ed
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_isomorphic_vf2, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
-  res$map12 <- res$map12+1
-  res$map21 <- res$map21+1
+
   res
 }
 
@@ -3091,8 +3088,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2,
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_subisomorphic_vf2, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2)
-  res$map12 <- res$map12+1
-  res$map21 <- res$map21+1
+
   res
 }
 
@@ -3144,8 +3140,7 @@ subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1, verte
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_subisomorphic_function_vf2, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
-  res$map12 <- res$map12+1
-  res$map21 <- res$map21+1
+
   res
 }
 
@@ -3219,7 +3214,7 @@ canonical_permutation_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl"
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_canonical_permutation, graph, colors, sh)
-  res$labeling <- res$labeling+1
+
   res
 }
 
@@ -3264,8 +3259,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_isomorphic_bliss, graph1, graph2, colors1, colors2, sh)
-  res$map12 <- res$map12+1
-  res$map21 <- res$map21+1
+
   res
 }
 
@@ -3655,7 +3649,7 @@ to_prufer_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_to_prufer, graph)
-  res <- res+1
+
   res
 }
 

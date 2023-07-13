@@ -29,7 +29,6 @@ BOOLEAN:
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
     INCONV: '%I% <- as.numeric(%I%)-1L'
-    OUTCONV: '%I% <- %I%+1'
 
 VECTOR:
     DEFAULT:
