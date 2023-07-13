@@ -6132,16 +6132,13 @@ SEXP R_igraph_layout_star(SEXP graph, SEXP center, SEXP order) {
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
   c_center = (igraph_integer_t) REAL(center)[0];
-  R_SEXP_to_vector_int_copy(order, &c_order);
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_order);
+  if (!Rf_isNull(order)) { R_SEXP_to_vector_int_copy(order, &c_order); }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_layout_star(&c_graph, &c_res, c_center, &c_order));
+  IGRAPH_R_CHECK(igraph_layout_star(&c_graph, &c_res, c_center, (Rf_isNull(order) ? 0 : &c_order)));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_matrix_to_SEXP(&c_res));
   igraph_matrix_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  igraph_vector_int_destroy(&c_order);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 

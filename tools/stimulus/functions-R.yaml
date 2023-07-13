@@ -604,6 +604,10 @@ igraph_layout_circle:
     IGNORE: RR, RC
 
 igraph_layout_star:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, VERTEX center=V(graph)[1],
+        INDEX_VECTOR_OR_0 order=NULL
+    DEPS: center ON graph
     IGNORE: RR
 
 igraph_layout_grid:
