@@ -309,7 +309,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
+    INCONV: '%I% <- lapply(%I%, function(x) as.double(x)-1L)'
 
 COMMCMP:
     DEFAULT:

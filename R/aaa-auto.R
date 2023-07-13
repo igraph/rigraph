@@ -196,7 +196,7 @@ lcf_vector_impl <- function(n, shifts, repeats=1) {
 
 adjlist_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
   # Argument checks
-  adjlist <- lapply(adjlist, function(x) as.integer(x)-1L)
+  adjlist <- lapply(adjlist, function(x) as.double(x)-1L)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
   duplicate <- as.logical(duplicate)
 
