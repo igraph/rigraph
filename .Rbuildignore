@@ -40,5 +40,5 @@ src/vendor/cigraph
 ^\.github$
 ^vignettes/articles$
 ^\.zenodo.json$
-
 ^AUTHORS-list\.md$
+^CITATION\.cff$
