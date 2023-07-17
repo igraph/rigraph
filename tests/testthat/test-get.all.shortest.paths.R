@@ -29,7 +29,7 @@ test_that("all_shortest_paths works", {
   sp1 <- all_shortest_paths(g, "s", "t", weights = NA)
 
   expect_that(
-    sortlist(sp1$res),
+    sortlist(sp1$vertices),
     equals(list(c(1, 2, 7), c(1, 3, 7)))
   )
   expect_that(
@@ -40,7 +40,7 @@ test_that("all_shortest_paths works", {
   sp2 <- all_shortest_paths(g, "s", "t")
 
   expect_that(
-    sortlist(sp2$res),
+    sortlist(sp2$vertices),
     equals(list(c(1, 2, 3, 4, 7), c(1, 2, 7), c(1, 3, 7)))
   )
   expect_that(sp2$nrgeo, equals(c(1, 1, 2, 1, 1, 1, 3)))

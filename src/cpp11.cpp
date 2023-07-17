@@ -466,7 +466,7 @@ extern SEXP R_igraph_watts_strogatz_game(void *, void *, void *, void *, void *,
 extern SEXP R_igraph_weak_ref_key(void *);
 extern SEXP R_igraph_weak_ref_run_finalizer(void *);
 extern SEXP R_igraph_weak_ref_value(void *);
-extern SEXP R_igraph_weighted_adjacency(void *, void *, void *, void *);
+extern SEXP R_igraph_weighted_adjacency(void *, void *, void *);
 extern SEXP R_igraph_weighted_clique_number(void *, void *);
 extern SEXP R_igraph_weighted_cliques(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_weighted_sparsemat(void *, void *, void *, void *);
@@ -940,7 +940,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_weak_ref_key",                               (DL_FUNC) &R_igraph_weak_ref_key,                                1},
     {"R_igraph_weak_ref_run_finalizer",                     (DL_FUNC) &R_igraph_weak_ref_run_finalizer,                      1},
     {"R_igraph_weak_ref_value",                             (DL_FUNC) &R_igraph_weak_ref_value,                              1},
-    {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          4},
+    {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          3},
     {"R_igraph_weighted_clique_number",                     (DL_FUNC) &R_igraph_weighted_clique_number,                      2},
     {"R_igraph_weighted_cliques",                           (DL_FUNC) &R_igraph_weighted_cliques,                            5},
     {"R_igraph_weighted_sparsemat",                         (DL_FUNC) &R_igraph_weighted_sparsemat,                          4},

@@ -635,7 +635,7 @@ all_shortest_paths <- function(graph, from,
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   res

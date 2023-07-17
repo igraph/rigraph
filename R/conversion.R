@@ -711,11 +711,11 @@ get.incidence.dense <- function(graph, types, names, attr) {
     res <- .Call(R_igraph_get_biadjacency, graph, types)
 
     if (names && "name" %in% vertex_attr_names(graph)) {
-      rownames(res$res) <- V(graph)$name[res$row_ids + 1]
-      colnames(res$res) <- V(graph)$name[res$col_ids + 1]
+      rownames(res$res) <- V(graph)$name[res$row_ids]
+      colnames(res$res) <- V(graph)$name[res$col_ids]
     } else {
-      rownames(res$res) <- res$row_ids + 1
-      colnames(res$res) <- res$col_ids + 1
+      rownames(res$res) <- res$row_ids
+      colnames(res$res) <- res$col_ids
     }
     res$res
   } else {

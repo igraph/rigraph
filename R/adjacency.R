@@ -42,10 +42,7 @@ graph.adjacency.dense <- function(adjmatrix,
   mode(adjmatrix) <- "double"
 
   if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
+    if (!is.logical(weighted)) {
       stop("invalid value supplied for `weighted' argument, please see docs.")
     }
 
@@ -56,7 +53,7 @@ graph.adjacency.dense <- function(adjmatrix,
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
       R_igraph_weighted_adjacency, adjmatrix,
-      as.numeric(mode), weighted, diag
+      as.numeric(mode), diag
     )
   } else {
     adjmatrix <- as.matrix(adjmatrix)

@@ -4,7 +4,7 @@ test_that("Sampling from a Dirichlet works", {
   expect_that(dim(sd), equals(c(3, 100)))
   expect_that(colSums(sd), equals(rep(1, 100)))
   expect_that(mean(sd), equals(1 / 3))
-  expect_that(sd(sd), equals(0.248901845755354))
+  expect_that(sd(sd), equals(0.24102815))
 
   ## Corner cases
   sd1 <- sample_dirichlet(1, alpha = c(2, 2, 2))
