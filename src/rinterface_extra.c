@@ -2644,7 +2644,6 @@ SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
   for (i=0; i<n; i++) {
     REAL(result)[i]=(double)VECTOR(m->data)[i];
   }
-  UNPROTECT(1);
   PROTECT(dim=NEW_INTEGER(2));
   INTEGER(dim)[0]=(int) igraph_matrix_int_nrow(m);
   INTEGER(dim)[1]=(int) igraph_matrix_int_ncol(m);
