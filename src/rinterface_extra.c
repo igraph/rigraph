@@ -2654,14 +2654,10 @@ SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
 }
 
 SEXP R_igraph_0ormatrix_int_to_SEXP(const igraph_matrix_int_t *m) {
-  SEXP result;
-  if (m) {
-    PROTECT(result=R_igraph_matrix_int_to_SEXP(m));
-  } else {
-    PROTECT(result=R_NilValue);
+  if (!m) {
+    return R_NilValue;
   }
-  UNPROTECT(1);
-  return result;
+  return R_igraph_matrix_int_to_SEXP(m);
 }
 
 SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
