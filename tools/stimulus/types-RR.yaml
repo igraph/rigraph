@@ -30,6 +30,9 @@ INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
     INCONV: '%I% <- as.numeric(%I%)-1L'
 
+INDEX_VECTOR_OR_0:
+    INCONV: 'if (!is.null(%I%)) %I% <- as.numeric(%I%)-1L'
+
 VECTOR:
     DEFAULT:
         AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
