@@ -5,7 +5,7 @@
 \alias{t.igraph}
 \title{Reverse edges in a graph}
 \usage{
-reverse_edges(graph, eids = ALL)
+reverse_edges(graph, eids = E(graph))
 
 \method{t}{igraph}(x)
 }

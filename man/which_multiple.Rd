@@ -12,7 +12,7 @@
 \alias{which_loop}
 \title{Find the multiple or loop edges in a graph}
 \usage{
-which_multiple(graph, eids = ALL)
+which_multiple(graph, eids = E(graph))
 }
 \arguments{
 \item{graph}{The input graph.}

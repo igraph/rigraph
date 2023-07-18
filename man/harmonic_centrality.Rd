@@ -6,7 +6,7 @@
 \usage{
 harmonic_centrality(
   graph,
-  vids = ALL,
+  vids = V(graph),
   mode = c("out", "in", "all", "total"),
   weights = NULL,
   normalized = FALSE,

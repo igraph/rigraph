@@ -8,7 +8,7 @@
 \usage{
 triangles(graph)
 
-count_triangles(graph, vids = ALL)
+count_triangles(graph, vids = V(graph))
 }
 \arguments{
 \item{graph}{The input graph. It might be directed, but edge directions are

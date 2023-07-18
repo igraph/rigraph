@@ -8,7 +8,7 @@
 page_rank(
   graph,
   algo = c("prpack", "arpack"),
-  vids = ALL,
+  vids = V(graph),
   directed = TRUE,
   damping = 0.85,
   personalized,

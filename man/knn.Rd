@@ -7,7 +7,7 @@
 \usage{
 knn(
   graph,
-  vids = ALL,
+  vids = V(graph),
   mode = c("all", "out", "in", "total"),
   neighbor.degree.mode = c("all", "out", "in", "total"),
   weights = NULL

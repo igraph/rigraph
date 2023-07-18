@@ -5,7 +5,7 @@
 \alias{is.mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = ALL, loops = TRUE)
+which_mutual(graph, eids = E(graph), loops = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
