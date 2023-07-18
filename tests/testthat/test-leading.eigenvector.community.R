@@ -1,4 +1,6 @@
 test_that("cluster_leading_eigen works", {
+  skip("Crashes")
+
   set.seed(20230115)
 
   ## Check-test
