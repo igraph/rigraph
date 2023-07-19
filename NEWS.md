@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9007
+
+## Documentation
+
+  - Add cffr file and a GHA workflow that updates it automatically (#873).
+
+
 # igraph 1.5.0.9006
 
 ## Bug fixes
