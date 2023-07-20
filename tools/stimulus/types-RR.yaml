@@ -38,7 +38,7 @@ VECTOR:
         AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
     INCONV: '%I% <- as.numeric(%I%)'
 
-VERTEXINDEX:
+VERTEX_QTY:
     OUTCONV:
         OUT: |-
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {

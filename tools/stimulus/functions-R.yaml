@@ -417,7 +417,7 @@ igraph_get_all_eids_between:
     DEPS: from ON graph, to ON graph, eids ON graph
 
 igraph_hub_and_authority_scores:
-    DEPS: weights ON graph
+    DEPS: weights ON graph, hub_vector ON graph, authority_vector ON graph
 
 igraph_pseudo_diameter:
     DEPS: start_vid ON graph
@@ -604,9 +604,6 @@ igraph_layout_circle:
     IGNORE: RR, RC
 
 igraph_layout_star:
-    PARAMS: |-
-        GRAPH graph, OUT MATRIX res, VERTEX center=V(graph)[1],
-        INDEX_VECTOR_OR_0 order=NULL
     DEPS: center ON graph
     IGNORE: RR
 

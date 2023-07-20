@@ -982,7 +982,7 @@ MATRIX_COMPLEX:
             igraph_matrix_complex_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-VERTEXINDEX:
+VERTEX_QTY:
     CALL: '&%C%'
     CTYPE: igraph_vector_t
     INCONV:

@@ -973,7 +973,9 @@ betweenness_subset_impl <- function(graph, vids=V(graph), directed=TRUE, sources
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_betweenness_subset, graph, vids-1, directed, sources-1, targets-1, weights)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", )
+  }
   res
 }
 
@@ -996,7 +998,9 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", )
+  }
   res
 }
 
@@ -1019,7 +1023,9 @@ harmonic_centrality_cutoff_impl <- function(graph, vids=V(graph), mode=c("out", 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_harmonic_centrality_cutoff, graph, vids-1, mode, weights, normalized, cutoff)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1052,7 +1058,9 @@ personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_personalized_pagerank, graph, algo, vids-1, directed, damping, personalized, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1085,6 +1093,9 @@ personalized_pagerank_vs_impl <- function(graph, algo=c("prpack", "arpack"), vid
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_personalized_pagerank_vs, graph, algo, vids-1, directed, damping, reset.vids-1, weights, options)
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", vids)
+  }
   if (!details) {
     res <- res$vector
   }
@@ -1320,7 +1331,9 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eigenvector_centrality, graph, directed, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1341,7 +1354,9 @@ hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defau
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_score, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1362,7 +1377,9 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_authority_score, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$vector) <- vertex_attr(graph, "name", V(graph))
+  }
   res
 }
 
@@ -1383,7 +1400,12 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$hub.vector) <- vertex_attr(graph, "name", )
+  }
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$authority.vector) <- vertex_attr(graph, "name", )
+  }
   res
 }
 
@@ -1441,7 +1463,9 @@ avg_nearest_neighbor_degree_impl <- function(graph, vids=V(graph), mode=c("all",
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_avg_nearest_neighbor_degree, graph, vids-1, mode, neighbor.degree.mode, weights)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$knn) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1463,7 +1487,9 @@ strength_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "tota
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_strength, graph, vids-1, mode, loops, weights)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1639,7 +1665,9 @@ eccentricity_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eccentricity, graph, vids-1, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1660,7 +1688,9 @@ eccentricity_dijkstra_impl <- function(graph, weights=NULL, vids=V(graph), mode=
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eccentricity_dijkstra, graph, weights, vids-1, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1746,7 +1776,9 @@ diversity_impl <- function(graph, weights=NULL, vids=V(graph)) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_diversity, graph, weights, vids-1)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -1840,7 +1872,9 @@ local_efficiency_impl <- function(graph, vids=V(graph), weights=NULL, directed=T
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_local_efficiency, graph, vids-1, weights, directed, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res) <- vertex_attr(graph, "name", vids)
+  }
   res
 }
 
@@ -3758,7 +3792,9 @@ moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_moran_process, graph, weights, quantities, strategies, mode)
-
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$quantities) <- vertex_attr(graph, "name", )
+  }
   res
 }
 
