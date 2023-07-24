@@ -1753,7 +1753,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' g <- add_edges(g, c(1, 12))
 #' cluster_label_prop(g)
 #'
-cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NULL) {
+cluster_label_prop <- function(graph, weights = NULL, mode = c("out", "in", "all"), initial = NULL, fixed = NULL) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -1768,9 +1768,11 @@ cluster_label_prop <- function(graph, weights = NULL, initial = NULL, fixed = NU
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3)
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_label_propagation, graph, weights, initial, fixed)
+  res <- .Call(R_igraph_community_label_propagation, graph, mode, weights, initial, fixed)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }

@@ -86,7 +86,7 @@ extern SEXP R_igraph_community_edge_betweenness(void *, void *, void *, void *, 
 extern SEXP R_igraph_community_fastgreedy(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_fluid_communities(void *, void *);
 extern SEXP R_igraph_community_infomap(void *, void *, void *, void *);
-extern SEXP R_igraph_community_label_propagation(void *, void *, void *, void *);
+extern SEXP R_igraph_community_label_propagation(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_leading_eigenvector(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_leiden(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_multilevel(void *, void *, void *);
@@ -560,7 +560,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_fastgreedy",                       (DL_FUNC) &R_igraph_community_fastgreedy,                        5},
     {"R_igraph_community_fluid_communities",                (DL_FUNC) &R_igraph_community_fluid_communities,                 2},
     {"R_igraph_community_infomap",                          (DL_FUNC) &R_igraph_community_infomap,                           4},
-    {"R_igraph_community_label_propagation",                (DL_FUNC) &R_igraph_community_label_propagation,                 4},
+    {"R_igraph_community_label_propagation",                (DL_FUNC) &R_igraph_community_label_propagation,                 5},
     {"R_igraph_community_leading_eigenvector",              (DL_FUNC) &R_igraph_community_leading_eigenvector,               9},
     {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            7},
     {"R_igraph_community_multilevel",                       (DL_FUNC) &R_igraph_community_multilevel,                        3},
