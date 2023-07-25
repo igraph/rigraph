@@ -20,7 +20,7 @@
 ###################################################################
 
 get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
-                                attr = NULL, edges = FALSE, names = TRUE) {
+                                attr = NULL, weights = NULL, loops = FALSE, names = TRUE) {
   ensure_igraph(graph)
 
   type <- igraph.match.arg(type)
@@ -30,11 +30,13 @@ get.adjacency.dense <- function(graph, type = c("both", "upper", "lower"),
     "both" = 2
   )
 
-  if (edges || is.null(attr)) {
+  if (!is.null(weights)) weights <- as.numeric(weights)
+
+  if (is.null(attr)) {
     on.exit(.Call(R_igraph_finalizer))
     res <- .Call(
-      R_igraph_get_adjacency, graph, as.numeric(type),
-      as.logical(edges)
+      R_igraph_get_adjacency, graph, as.numeric(type), weights,
+      as.logical(loops)
     )
   } else {
     attr <- as.character(attr)
@@ -215,7 +217,7 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 
   if (!sparse) {
-    get.adjacency.dense(graph, type = type, attr = attr, edges = edges, names = names)
+    get.adjacency.dense(graph, type = type, attr = attr, weights = NULL, names = names)
   } else {
     get.adjacency.sparse(graph, type = type, attr = attr, edges = edges, names = names)
   }

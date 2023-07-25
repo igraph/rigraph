@@ -175,7 +175,7 @@ extern SEXP R_igraph_full_citation(void *, void *);
 extern SEXP R_igraph_full_multipartite(void *, void *, void *);
 extern SEXP R_igraph_fundamental_cycles(void *, void *, void *, void *);
 extern SEXP R_igraph_generalized_petersen(void *, void *);
-extern SEXP R_igraph_get_adjacency(void *, void *, void *);
+extern SEXP R_igraph_get_adjacency(void *, void *, void *, void *);
 extern SEXP R_igraph_get_adjacency_sparse(void *, void *, void *, void *);
 extern SEXP R_igraph_get_adjedgelist(void *, void *, void *);
 extern SEXP R_igraph_get_adjlist(void *, void *, void *, void *);
@@ -649,7 +649,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_full_multipartite",                          (DL_FUNC) &R_igraph_full_multipartite,                           3},
     {"R_igraph_fundamental_cycles",                         (DL_FUNC) &R_igraph_fundamental_cycles,                          4},
     {"R_igraph_generalized_petersen",                       (DL_FUNC) &R_igraph_generalized_petersen,                        2},
-    {"R_igraph_get_adjacency",                              (DL_FUNC) &R_igraph_get_adjacency,                               3},
+    {"R_igraph_get_adjacency",                              (DL_FUNC) &R_igraph_get_adjacency,                               4},
     {"R_igraph_get_adjacency_sparse",                       (DL_FUNC) &R_igraph_get_adjacency_sparse,                        4},
     {"R_igraph_get_adjedgelist",                            (DL_FUNC) &R_igraph_get_adjedgelist,                             3},
     {"R_igraph_get_adjlist",                                (DL_FUNC) &R_igraph_get_adjlist,                                 4},

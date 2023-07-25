@@ -5070,18 +5070,19 @@ SEXP R_igraph_get_edgelist(SEXP graph, SEXP pbycol) {
   return result;
 }
 
-SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP peids) {
+SEXP R_igraph_get_adjacency(SEXP graph, SEXP ptype, SEXP pweights, SEXP ploops) {
 
   igraph_t g;
   igraph_matrix_t res;
   igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
-  igraph_bool_t eids=LOGICAL(peids)[0];
+  igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_vector_t weights;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
+  if (!Rf_isNull(pweights)) { R_SEXP_to_vector(pweights, &weights); }
   igraph_matrix_init(&res, 0, 0);
-  // TODO: fix
-  // IGRAPH_R_CHECK(igraph_get_adjacency(&g, &res, (igraph_get_adjacency_t) type, eids));
+  IGRAPH_R_CHECK(igraph_get_adjacency(&g, &res, (igraph_get_adjacency_t) type, Rf_isNull(pweights) ? 0 : &weights, loops));
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
 
