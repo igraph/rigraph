@@ -88,7 +88,7 @@ extern SEXP R_igraph_community_fluid_communities(void *, void *);
 extern SEXP R_igraph_community_infomap(void *, void *, void *, void *);
 extern SEXP R_igraph_community_label_propagation(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_leading_eigenvector(void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_community_leiden(void *, void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_community_leiden(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_community_multilevel(void *, void *, void *);
 extern SEXP R_igraph_community_optimal_modularity(void *, void *);
 extern SEXP R_igraph_community_to_membership2(void *, void *, void *);
@@ -562,7 +562,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_community_infomap",                          (DL_FUNC) &R_igraph_community_infomap,                           4},
     {"R_igraph_community_label_propagation",                (DL_FUNC) &R_igraph_community_label_propagation,                 5},
     {"R_igraph_community_leading_eigenvector",              (DL_FUNC) &R_igraph_community_leading_eigenvector,               9},
-    {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            7},
+    {"R_igraph_community_leiden",                           (DL_FUNC) &R_igraph_community_leiden,                            8},
     {"R_igraph_community_multilevel",                       (DL_FUNC) &R_igraph_community_multilevel,                        3},
     {"R_igraph_community_optimal_modularity",               (DL_FUNC) &R_igraph_community_optimal_modularity,                2},
     {"R_igraph_community_to_membership2",                   (DL_FUNC) &R_igraph_community_to_membership2,                    3},

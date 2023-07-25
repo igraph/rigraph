@@ -1167,15 +1167,13 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   on.exit(.Call(R_igraph_finalizer))
   membership <- initial_membership
   if (n_iterations > 0) {
-    for (i in 1:n_iterations) {
-      res <- .Call(
-        R_igraph_community_leiden, graph, weights,
-        vertex_weights, as.numeric(resolution_parameter),
-        as.numeric(beta), !is.null(membership),
-        membership
-      )
-      membership <- res$membership
-    }
+    res <- .Call(
+      R_igraph_community_leiden, graph, weights,
+      vertex_weights, as.numeric(resolution_parameter),
+      as.numeric(beta), !is.null(membership), as.integer(n_iterations),
+      membership
+    )
+    membership <- res$membership
   } else {
     prev_quality <- -Inf
     quality <- 0.0
@@ -1184,7 +1182,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       res <- .Call(
         R_igraph_community_leiden, graph, weights,
         vertex_weights, as.numeric(resolution_parameter),
-        as.numeric(beta), !is.null(membership),
+        as.numeric(beta), !is.null(membership), 1,
         membership
       )
       membership <- res$membership
