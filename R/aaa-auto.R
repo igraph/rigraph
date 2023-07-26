@@ -101,13 +101,13 @@ wheel_impl <- function(n, mode=OUT, center=0) {
   res
 }
 
-square_lattice_impl <- function(dimvector, nei=1, directed=FALSE, mutual=FALSE, periodic) {
+square_lattice_impl <- function(dimvector, nei=1, directed=FALSE, mutual=FALSE, periodic=NULL) {
   # Argument checks
   dimvector <- as.numeric(dimvector)
   nei <- as.integer(nei)
   directed <- as.logical(directed)
   mutual <- as.logical(mutual)
-  periodic <- as.logical(periodic)
+  if (!is.null(periodic)) periodic <- as.logical(periodic)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -337,11 +337,11 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
   res
 }
 
-static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in, loops=FALSE, multiple=FALSE) {
+static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
   no.of.edges <- as.integer(no.of.edges)
   fitness.out <- as.numeric(fitness.out)
-  fitness.in <- as.numeric(fitness.in)
+  if (!is.null(fitness.in)) fitness.in <- as.numeric(fitness.in)
   loops <- as.logical(loops)
   multiple <- as.logical(multiple)
 
@@ -469,7 +469,7 @@ correlated_game_impl <- function(old.graph, corr, p=edge_density(old.graph), per
   ensure_igraph(old.graph)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
-  permutation <- as.numeric(permutation)-1L
+  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -490,7 +490,7 @@ correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NU
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   directed <- as.logical(directed)
-  permutation <- as.numeric(permutation)-1L
+  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1L
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -786,7 +786,7 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
   res
 }
 
-get_k_shortest_paths_impl <- function(graph, weights, k, from, to, mode=c("out", "in", "all", "total")) {
+get_k_shortest_paths_impl <- function(graph, weights=NULL, k, from, to, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1029,14 +1029,14 @@ harmonic_centrality_cutoff_impl <- function(graph, vids=V(graph), mode=c("out", 
   res
 }
 
-personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V(graph), directed=TRUE, damping=0.85, personalized, weights, options=NULL) {
+personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V(graph), directed=TRUE, damping=0.85, personalized=NULL, weights=NULL, options=NULL) {
   # Argument checks
   ensure_igraph(graph)
   algo <- switch(igraph.match.arg(algo), "arpack"=1L, "prpack"=2L)
   vids <- as_igraph_vs(graph, vids)
   directed <- as.logical(directed)
   damping <- as.numeric(damping)
-  personalized <- as.numeric(personalized)
+  if (!is.null(personalized)) personalized <- as.numeric(personalized)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1534,9 +1534,9 @@ centralization_betweenness_impl <- function(graph, directed=TRUE, normalized=TRU
   res
 }
 
-centralization_betweenness_tmax_impl <- function(graph, nodes=0, directed=TRUE) {
+centralization_betweenness_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
   # Argument checks
-  ensure_igraph(graph)
+  if (!is.null(graph)) ensure_igraph(graph)
   nodes <- as.integer(nodes)
   directed <- as.logical(directed)
 
@@ -1560,9 +1560,9 @@ centralization_closeness_impl <- function(graph, mode=c("out", "in", "all", "tot
   res
 }
 
-centralization_closeness_tmax_impl <- function(graph, nodes=0, mode=c("out", "in", "all", "total")) {
+centralization_closeness_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", "total")) {
   # Argument checks
-  ensure_igraph(graph)
+  if (!is.null(graph)) ensure_igraph(graph)
   nodes <- as.integer(nodes)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
 
@@ -1588,9 +1588,9 @@ centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, sc
   res
 }
 
-centralization_eigenvector_centrality_tmax_impl <- function(graph, nodes=0, directed=FALSE, scale=TRUE) {
+centralization_eigenvector_centrality_tmax_impl <- function(graph=NULL, nodes=0, directed=FALSE, scale=TRUE) {
   # Argument checks
-  ensure_igraph(graph)
+  if (!is.null(graph)) ensure_igraph(graph)
   nodes <- as.integer(nodes)
   directed <- as.logical(directed)
   scale <- as.logical(scale)
@@ -1616,11 +1616,11 @@ assortativity_nominal_impl <- function(graph, types, directed=TRUE, normalized=T
   res
 }
 
-assortativity_impl <- function(graph, values, values.in, directed=TRUE, normalized=TRUE) {
+assortativity_impl <- function(graph, values, values.in=NULL, directed=TRUE, normalized=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   values <- as.numeric(values)
-  values.in <- as.numeric(values.in)
+  if (!is.null(values.in)) values.in <- as.numeric(values.in)
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -1921,10 +1921,10 @@ trussness_impl <- function(graph) {
   res
 }
 
-is_graphical_impl <- function(out.deg, in.deg, allowed.edge.types=c("simple", "loops", "multi", "all")) {
+is_graphical_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all")) {
   # Argument checks
   out.deg <- as.numeric(out.deg)
-  in.deg <- as.numeric(in.deg)
+  if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
   allowed.edge.types <- switch(igraph.match.arg(allowed.edge.types),
     "simple"=0L, "loop"=1L, "loops"=1L, "multi"=6L, "multiple"=6L, "all"=7L)
 
@@ -2303,7 +2303,7 @@ layout_umap_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.dis
   ensure_igraph(graph)
   res <- as.matrix(structure(as.double(res), dim=dim(res)))
   use.seed <- as.logical(use.seed)
-  distances <- as.numeric(distances)
+  if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
   epochs <- as.integer(epochs)
   distances.are.weights <- as.logical(distances.are.weights)
@@ -2320,7 +2320,7 @@ layout_umap_3d_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.
   ensure_igraph(graph)
   res <- as.matrix(structure(as.double(res), dim=dim(res)))
   use.seed <- as.logical(use.seed)
-  distances <- as.numeric(distances)
+  if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
   epochs <- as.integer(epochs)
   distances.are.weights <- as.logical(distances.are.weights)
@@ -2725,7 +2725,7 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   res
 }
 
-gomory_hu_tree_impl <- function(graph, capacity) {
+gomory_hu_tree_impl <- function(graph, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
 
@@ -2736,7 +2736,7 @@ gomory_hu_tree_impl <- function(graph, capacity) {
   res
 }
 
-maxflow_impl <- function(graph, source, target, capacity) {
+maxflow_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
@@ -2825,7 +2825,7 @@ all_st_cuts_impl <- function(graph, source, target) {
   res
 }
 
-all_st_mincuts_impl <- function(graph, source, target, capacity) {
+all_st_mincuts_impl <- function(graph, source, target, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
   source <- as_igraph_vs(graph, source)
@@ -2958,7 +2958,7 @@ isoclass_create_impl <- function(size, number, directed=TRUE) {
   res
 }
 
-isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3074,7 +3074,7 @@ subisomorphic_impl <- function(graph1, graph2) {
   res
 }
 
-subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2) {
+subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3126,7 +3126,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2,
   res
 }
 
-subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn) {
+subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL, ishohandler.fn) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3230,7 +3230,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
   res
 }
 
-canonical_permutation_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3264,7 +3264,7 @@ permute_vertices_impl <- function(graph, permutation) {
   res
 }
 
-isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3297,7 +3297,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1, colors2, sh=c("fm", "
   res
 }
 
-automorphisms_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3319,7 +3319,7 @@ automorphisms_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm",
   res
 }
 
-automorphism_group_impl <- function(graph, colors, sh=c("fm", "f", "fs", "fl", "flm", "fsm"), details=FALSE) {
+automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm"), details=FALSE) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3573,10 +3573,10 @@ eulerian_cycle_impl <- function(graph) {
   res
 }
 
-fundamental_cycles_impl <- function(graph, start, bfs.cutoff, weights=NULL) {
+fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
-  start <- as_igraph_vs(graph, start)
+  if (!is.null(start)) start <- as_igraph_vs(graph, start)
   if (length(start) == 0) {
     stop("No vertex was specified")
   }
@@ -3701,7 +3701,7 @@ tree_from_parent_vector_impl <- function(parents, type=OUT) {
 random_spanning_tree_impl <- function(graph, vid=0) {
   # Argument checks
   ensure_igraph(graph)
-  vid <- as_igraph_vs(graph, vid)
+  if (!is.null(vid)) vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
     stop("No vertex was specified")
   }
