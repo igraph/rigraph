@@ -141,7 +141,7 @@ VERTEX_SELECTOR:
               %I% <- create_vs(%I1%, %I%)
             }
 
-VERTEXSET_INT:
+VERTEX_INDICES:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)

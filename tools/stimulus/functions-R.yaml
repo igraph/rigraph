@@ -278,6 +278,9 @@ igraph_minimum_spanning_tree_prim:
 igraph_closeness:
     IGNORE: RR
 
+igraph_expand_path_to_pairs:
+    IGNORE: RR
+
 igraph_closeness_cutoff:
     IGNORE: RR
 

@@ -596,7 +596,9 @@ get_shortest_path_impl <- function(graph, from, to, mode=c("out", "in", "all", "
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path, graph, from-1, to-1, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
   res
 }
 
@@ -624,7 +626,9 @@ get_shortest_path_bellman_ford_impl <- function(graph, from, to, weights=NULL, m
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path_bellman_ford, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
   res
 }
 
@@ -652,7 +656,9 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_shortest_path_dijkstra, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
   res
 }
 
@@ -769,6 +775,7 @@ distances_floyd_warshall_impl <- function(graph, from=V(graph), to=V(graph), wei
 voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=RANDOM) {
   # Argument checks
   ensure_igraph(graph)
+  generators <- as_igraph_vs(graph, generators)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -781,7 +788,7 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_voronoi, graph, generators, weights, mode, tiebreaker)
+  res <- .Call(R_igraph_voronoi, graph, generators-1, weights, mode, tiebreaker)
 
   res
 }
@@ -850,7 +857,9 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_widest_path, graph, from-1, to-1, weights, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
   res
 }
 
@@ -1441,7 +1450,9 @@ maximum_cardinality_search_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maximum_cardinality_search, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$alpham1 <- create_vs(graph, res$alpham1)
+  }
   res
 }
 
@@ -1702,7 +1713,9 @@ graph_center_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_graph_center, graph, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -1804,7 +1817,9 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_random_walk, graph, weights, start-1, mode, steps, stuck)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vertices <- create_vs(graph, res$vertices)
+  }
   res
 }
 
@@ -1947,7 +1962,9 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bfs_simple, graph, root-1, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$order <- create_vs(, res$order)
+  }
   res
 }
 
@@ -2081,7 +2098,9 @@ articulation_points_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_articulation_points, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2109,6 +2128,9 @@ biconnected_components_impl <- function(graph) {
     for (i_ in seq_along(res$components)) {
       res$components[[i_]] <- unsafe_create_vs(graph, res$components[[i_]], verts = verts)
     }
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$articulation.points <- create_vs(graph, res$articulation.points)
   }
   res
 }
@@ -2174,12 +2196,13 @@ largest_cliques_impl <- function(graph) {
 maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0, max.size=0, details=FALSE) {
   # Argument checks
   ensure_igraph(graph)
+  subset <- as_igraph_vs(graph, subset)
   min.size <- as.integer(min.size)
   max.size <- as.integer(max.size)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset, outfile, min.size, max.size)
+  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset-1, outfile, min.size, max.size)
   if (igraph_opt("return.vs.es")) {
     verts <- V(graph)
     for (i_ in seq_along(res$res)) {
@@ -2294,7 +2317,9 @@ roots_for_tree_layout_impl <- function(graph, mode=c("out", "in", "all", "total"
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_roots_for_tree_layout, graph, mode, heuristic)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2708,7 +2733,9 @@ list_triangles_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_list_triangles, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
   res
 }
 
@@ -2751,7 +2778,12 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maxflow, graph, source-1, target-1, capacity)
-
+  if (igraph_opt("return.vs.es")) {
+    res$partition1 <- create_vs(graph, res$partition1)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$partition2 <- create_vs(graph, res$partition2)
+  }
   res
 }
 
@@ -2791,7 +2823,9 @@ dominator_tree_impl <- function(graph, root, mode=c("out", "in", "all", "total")
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_dominator_tree, graph, root-1, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res$leftout <- create_vs(graph, res$leftout)
+  }
   res
 }
 
@@ -3558,7 +3592,9 @@ eulerian_path_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eulerian_path, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vpath <- create_vs(graph, res$vpath)
+  }
   res
 }
 
@@ -3569,7 +3605,9 @@ eulerian_cycle_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eulerian_cycle, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res$vpath <- create_vs(graph, res$vpath)
+  }
   res
 }
 
@@ -3654,6 +3692,9 @@ is_forest_impl <- function(graph, mode=c("out", "in", "all", "total"), details=F
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_forest, graph, mode)
+  if (igraph_opt("return.vs.es")) {
+    res$roots <- create_vs(graph, res$roots)
+  }
   if (!details) {
     res <- res$res
   }
@@ -3864,17 +3905,6 @@ strerror_impl <- function(igraph.errno) {
   res
 }
 
-expand_path_to_pairs_impl <- function(path) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_expand_path_to_pairs, path)
-
-  res
-}
-
 vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
@@ -3887,7 +3917,9 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path, mode)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(, res)
+  }
   res
 }
 

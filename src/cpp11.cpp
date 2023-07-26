@@ -160,7 +160,6 @@ extern SEXP R_igraph_establishment_game(void *, void *, void *, void *, void *, 
 extern SEXP R_igraph_eulerian_cycle(void *);
 extern SEXP R_igraph_eulerian_path(void *);
 extern SEXP R_igraph_even_tarjan_reduction(void *);
-extern SEXP R_igraph_expand_path_to_pairs(void *);
 extern SEXP R_igraph_extended_chordal_ring(void *, void *, void *);
 extern SEXP R_igraph_famous(void *);
 extern SEXP R_igraph_farthest_points(void *, void *, void *, void *);
@@ -634,7 +633,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eulerian_cycle",                             (DL_FUNC) &R_igraph_eulerian_cycle,                              1},
     {"R_igraph_eulerian_path",                              (DL_FUNC) &R_igraph_eulerian_path,                               1},
     {"R_igraph_even_tarjan_reduction",                      (DL_FUNC) &R_igraph_even_tarjan_reduction,                       1},
-    {"R_igraph_expand_path_to_pairs",                       (DL_FUNC) &R_igraph_expand_path_to_pairs,                        1},
     {"R_igraph_extended_chordal_ring",                      (DL_FUNC) &R_igraph_extended_chordal_ring,                       3},
     {"R_igraph_famous",                                     (DL_FUNC) &R_igraph_famous,                                      1},
     {"R_igraph_farthest_points",                            (DL_FUNC) &R_igraph_farthest_points,                             4},
