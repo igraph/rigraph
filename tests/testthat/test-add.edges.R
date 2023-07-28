@@ -40,6 +40,6 @@ test_that("add_edges signals error for zero vertex ids", {
   g <- make_full_graph(5) %du% make_full_graph(5) %du% make_full_graph(5)
   expect_that(
     add_edges(g, c(0, 5, 0, 10, 5, 10)),
-    throws_error("Invalid vertex id")
+    throws_error("Invalid vertex ID")
   )
 })
