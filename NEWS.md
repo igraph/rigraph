@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9008
+
+## Bug fixes
+
+  - Ensure that \_GNU\_SOURCE is always defined (#877).
+
+
 # igraph 1.5.0.9007
 
 ## Documentation
