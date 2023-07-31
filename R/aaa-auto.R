@@ -2755,6 +2755,14 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
 gomory_hu_tree_impl <- function(graph, capacity=NULL) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2774,6 +2782,14 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
   if (length(target) == 0) {
     stop("No vertex was specified")
   }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2790,6 +2806,14 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
 residual_graph_impl <- function(graph, capacity, flow) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
   flow <- as.numeric(flow)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2802,6 +2826,14 @@ residual_graph_impl <- function(graph, capacity, flow) {
 reverse_residual_graph_impl <- function(graph, capacity, flow) {
   # Argument checks
   ensure_igraph(graph)
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
+  }
   flow <- as.numeric(flow)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2869,6 +2901,14 @@ all_st_mincuts_impl <- function(graph, source, target, capacity=NULL) {
   target <- as_igraph_vs(graph, target)
   if (length(target) == 0) {
     stop("No vertex was specified")
+  }
+  if (is.null(capacity) && "capacity" %in% edge_attr_names(graph)) {
+    capacity <- E(graph)$capacity
+  }
+  if (!is.null(capacity) && any(!is.na(capacity))) {
+    capacity <- as.numeric(capacity)
+  } else {
+    capacity <- NULL
   }
 
   on.exit( .Call(R_igraph_finalizer) )

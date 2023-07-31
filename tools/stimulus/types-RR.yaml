@@ -185,7 +185,7 @@ VERTEXWEIGHTS:
           %I% <- NULL
         }
 
-EDGECAPACITY:
+EDGE_CAPACITY:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$capacity

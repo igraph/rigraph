@@ -2518,9 +2518,9 @@ SEXP R_igraph_vector_int_to_SEXPp1(const igraph_vector_int_t *v) {
   SEXP result;
   long int i, n=igraph_vector_int_size(v);
 
-  PROTECT(result=NEW_INTEGER(n));
+  PROTECT(result=NEW_NUMERIC(n));
   for (i=0; i<n; i++) {
-    INTEGER(result)[i]=VECTOR(*v)[i]+1;
+    REAL(result)[i]=(double)VECTOR(*v)[i]+1;
   }
   UNPROTECT(1);
   return result;
@@ -3277,10 +3277,24 @@ SEXP R_igraph_sparsemat_to_SEXP_triplet(const igraph_sparsemat_t *sp) {
   if (nz > 0) {
     igraph_vector_int_t i, j;
     igraph_vector_t x;
-    R_SEXP_to_vector_int_copy(VECTOR_ELT(res, 2), &i);
-    R_SEXP_to_vector_int_copy(VECTOR_ELT(res, 3), &j);
-    igraph_vector_view(&x, REAL(VECTOR_ELT(res, 4)), nz);
+    igraph_vector_int_init(&i, nz);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &i);
+
+    igraph_vector_int_init(&j, nz);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &j);
+
+    igraph_vector_init(&x, nz);
+    IGRAPH_FINALLY(igraph_vector_destroy, &x);
+
     igraph_sparsemat_getelements(sp, &j, &i, &x);
+    SET_VECTOR_ELT(res, 2, R_igraph_vector_int_to_SEXP(&i));
+    SET_VECTOR_ELT(res, 3, R_igraph_vector_int_to_SEXP(&j));
+    SET_VECTOR_ELT(res, 4, R_igraph_vector_to_SEXP(&x));
+
+    igraph_vector_int_destroy(&i);
+    igraph_vector_int_destroy(&j);
+    igraph_vector_destroy(&x);
+    IGRAPH_FINALLY_CLEAN(3);
   }
 
   PROTECT(names=NEW_CHARACTER(5));
