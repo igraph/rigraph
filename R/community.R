@@ -1770,13 +1770,14 @@ cluster_label_prop <- function(graph, weights = NULL, mode = c("out", "in", "all
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_label_propagation, graph, mode, weights, initial, fixed)
+  membership <- .Call(R_igraph_community_label_propagation, graph, mode, weights, initial, fixed)
+  res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
-  res$membership <- res$membership + 1
+  res$membership <- membership + 1
   class(res) <- "communities"
   res
 }
