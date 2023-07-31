@@ -50,7 +50,6 @@ clean:
 	@rm -rf version_number
 	@rm -rf src/*.o
 	@rm -rf src/*.so
-	@cd $(top_srcdir) && git reset --hard
 
 distclean: clean
 	@rm -rf $(PYVENV)

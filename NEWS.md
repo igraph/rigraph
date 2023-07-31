@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9008
+
+## Bug fixes
+
+  - Ensure that \_GNU\_SOURCE is always defined (#877).
+
+
+# igraph 1.5.0.9007
+
+## Documentation
+
+  - Add cffr file and a GHA workflow that updates it automatically (#873).
+
+
+# igraph 1.5.0.9006
+
+## Bug fixes
+
+  - Fix `make clean` (#860).
+
+  - `identical_graphs()` now correctly detects identical graphs without node or edge attributes (#757).
+
+## Chore
+
+  - `R_SEXP_to_igraph()` and `R_SEXP_to_igraph_copy()` get `igraph_t` object from external pointer (#865).
+
+
 # igraph 1.5.0.9005
 
 ## Bug fixes
