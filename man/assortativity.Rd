@@ -8,7 +8,13 @@
 \alias{assortativity_nominal}
 \title{Assortativity coefficient}
 \usage{
-assortativity(graph, values, values.in, directed = TRUE, normalized = TRUE)
+assortativity(
+  graph,
+  values,
+  values.in = NULL,
+  directed = TRUE,
+  normalized = TRUE
+)
 
 assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
 

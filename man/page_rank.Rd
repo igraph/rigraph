@@ -11,8 +11,8 @@ page_rank(
   vids = V(graph),
   directed = TRUE,
   damping = 0.85,
-  personalized,
-  weights,
+  personalized = NULL,
+  weights = NULL,
   options = NULL
 )
 }

@@ -5,7 +5,7 @@
 \alias{centralization.betweenness.tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
-centr_betw_tmax(graph, nodes = 0, directed = TRUE)
+centr_betw_tmax(graph = NULL, nodes = 0, directed = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL}, if

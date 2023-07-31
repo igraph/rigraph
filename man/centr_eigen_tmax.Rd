@@ -5,7 +5,7 @@
 \alias{centralization.evcent.tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
-centr_eigen_tmax(graph, nodes = 0, directed = FALSE, scale = TRUE)
+centr_eigen_tmax(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE)
 }
 \arguments{
 \item{graph}{The input graph. It can also be \code{NULL}, if
