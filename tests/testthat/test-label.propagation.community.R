@@ -1,4 +1,4 @@
-test_that("label.probagation.community works", {
+test_that("label.propagation.community works", {
   g <- make_graph("Zachary")
   set.seed(42)
   lpc <- cluster_label_prop(g)
