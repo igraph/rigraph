@@ -6446,12 +6446,7 @@ SEXP R_igraph_layout_mds(SEXP graph, SEXP dist, SEXP dim) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (!Rf_isNull(dist)) {
-    R_SEXP_to_matrix(dist, &c_dist);
-  } else {
-    IGRAPH_R_CHECK(igraph_matrix_init(&c_dist, 0, 0));
-    IGRAPH_FINALLY(igraph_matrix_destroy, &c_dist);
-  }
+  if (!Rf_isNull(dist)) { R_SEXP_to_matrix(dist, &c_dist); }
   c_dim=INTEGER(dim)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_mds(&c_graph, &c_res, (Rf_isNull(dist) ? 0 : &c_dist), c_dim));

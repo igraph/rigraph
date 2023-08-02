@@ -3929,10 +3929,13 @@ SEXP R_igraph_add_edges(SEXP graph, SEXP edges) {
   SEXP result;
 
   R_SEXP_to_vector_int_copy(edges, &v);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &v);
   R_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_FINALLY(igraph_destroy, &g);
   IGRAPH_R_CHECK(igraph_add_edges(&g, &v, 0));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&v);
+  IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_I_DESTROY(&g);
   IGRAPH_FINALLY_CLEAN(1);
 
@@ -4069,6 +4072,7 @@ SEXP R_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
   IGRAPH_R_CHECK(igraph_create(&g, &v, n, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
+  igraph_vector_int_destroy(&v);
 
   UNPROTECT(1);
   return result;
@@ -4399,6 +4403,7 @@ SEXP R_igraph_lattice(SEXP pdimvector, SEXP pnei, SEXP pdirected,
   IGRAPH_R_CHECK(igraph_lattice(&g, &dimvector, nei, directed, mutual, circular));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
+  igraph_vector_int_destroy(&dimvector);
 
   UNPROTECT(1);
   return result;
@@ -6222,6 +6227,8 @@ SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
+  igraph_vector_int_destroy(&root);
+  igraph_vector_int_destroy(&rootlevel);
 
   UNPROTECT(1);
   return result;
@@ -7021,11 +7028,20 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  if (!Rf_isNull(psubset)) { R_SEXP_to_vector_int_copy(psubset, &subset); }
+  if (!Rf_isNull(psubset)) {
+    R_SEXP_to_vector_int_copy(psubset, &subset);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
+  }
   igraph_vector_int_list_init(&list, 0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &list, /*no=*/ 0, /*file=*/ 0,
                                 minsize, maxsize);
+  igraph_vector_int_destroy(&subset);
+  IGRAPH_FINALLY_CLEAN(1);
+
   PROTECT(result=R_igraph_vector_int_list_to_SEXP(&list));
   igraph_vector_int_list_destroy(&list);
 
@@ -7092,11 +7108,12 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(psubset)) {
-     R_SEXP_to_vector_int_copy(psubset, &subset);
+    R_SEXP_to_vector_int_copy(psubset, &subset);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   } else {
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   }
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   c_min_size=INTEGER(min_size)[0];
   c_max_size=INTEGER(max_size)[0];
                                         /* Call igraph */

@@ -664,6 +664,8 @@ igraph_layout_sugiyama:
     IGNORE: RR
 
 igraph_layout_mds:
+    PARAMS: |-
+        GRAPH graph, OUT MATRIX res, MATRIX_OR_0 dist, INTEGER dim=2
     IGNORE: RR
 
 igraph_layout_bipartite:
