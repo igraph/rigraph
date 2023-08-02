@@ -440,6 +440,11 @@ igraph_bipartite_game:
 igraph_vertex_path_from_edge_path:
     DEPS: start ON graph
 
+igraph_assortativity:
+    PARAMS: |-
+        GRAPH graph, VECTOR values, VECTOR_OR_0 values_in,
+        OUT REAL res, BOOLEAN directed=True, BOOLEAN normalized=True
+
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two

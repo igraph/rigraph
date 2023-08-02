@@ -4508,12 +4508,7 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   R_SEXP_to_vector(values, &c_values);
-  if (!Rf_isNull(values_in)) {
-    R_SEXP_to_vector(values_in, &c_values_in);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_values_in, 0));
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_values_in);
-  }
+  if (!Rf_isNull(values_in)) { R_SEXP_to_vector(values_in, &c_values_in); }
   c_directed=LOGICAL(directed)[0];
   c_normalized=LOGICAL(normalized)[0];
                                         /* Call igraph */
