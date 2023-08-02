@@ -2778,6 +2778,8 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
   IGRAPH_FINALLY(igraph_destroy, g);
   IGRAPH_CHECK(igraph_add_edges(g, &edges, NULL));
 
+  igraph_vector_int_destroy(&from);
+  igraph_vector_int_destroy(&to);
   igraph_vector_int_destroy(&edges);
   IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
 
@@ -4393,6 +4395,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
+  igraph_vector_int_destroy(&to_data);
   igraph_vector_int_destroy(&vs_data);
   igraph_vs_destroy(&vs);
 
@@ -4440,8 +4443,10 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
 
   if (!Rf_isNull(poutseq)) {
     R_SEXP_to_vector_int_copy(poutseq, &outseq);
-    myoutseq=&outseq;
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&outseq, 0));
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &outseq);
 
   if (!Rf_isNull(pstart)) {
     R_SEXP_to_igraph(pstart, &start);
@@ -4450,6 +4455,8 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
 
   IGRAPH_R_CHECK(igraph_barabasi_game(&g, n, power, m, myoutseq, outpref, A, directed, algo, ppstart));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&outseq);
+  IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -4475,6 +4482,7 @@ SEXP R_igraph_recent_degree_game(SEXP pn, SEXP ppower, SEXP pwindow,
 
   IGRAPH_R_CHECK(igraph_recent_degree_game(&g, n, power, window, m, &outseq, outpref, zero_appeal, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&outseq);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -5134,9 +5142,17 @@ SEXP R_igraph_degree_sequence_game(SEXP pout_seq, SEXP pin_seq,
   SEXP result;
 
   R_SEXP_to_vector_int_copy(pout_seq, &outseq);
-  if (!Rf_isNull(pin_seq)) { R_SEXP_to_vector_int_copy(pin_seq, &inseq); }
+  if (!Rf_isNull(pin_seq)) {
+    R_SEXP_to_vector_int_copy(pin_seq, &inseq);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&inseq, 0));
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &inseq);
   IGRAPH_R_CHECK(igraph_degree_sequence_game(&g, &outseq, Rf_isNull(pin_seq) ? 0 : &inseq, (igraph_degseq_t) method));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&outseq);
+  igraph_vector_int_destroy(&inseq);
+  IGRAPH_FINALLY_CLEAN(1);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -5821,12 +5837,16 @@ SEXP R_igraph_motifs_randesu_estimate(SEXP graph, SEXP psize, SEXP pcutprob,
   SEXP result;
 
   R_SEXP_to_vector(pcutprob, &cutprob);
-  if (GET_LENGTH(psample) != 0) {
+  if (!Rf_isNull(psample)) {
     R_SEXP_to_vector_int_copy(psample, &sample);
-    sampleptr=&sample;
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&sample, 0));
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &sample);
   R_SEXP_to_igraph(graph, &g);
   IGRAPH_R_CHECK(igraph_motifs_randesu_estimate(&g, &res, size, &cutprob, samplesize, sampleptr));
+  igraph_vector_int_destroy(&sample);
+  IGRAPH_FINALLY_CLEAN(1);
   PROTECT(result=NEW_NUMERIC(1));
   REAL(result)[0]=res;
 
@@ -6068,6 +6088,7 @@ SEXP R_igraph_barabasi_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
 
   IGRAPH_R_CHECK(igraph_barabasi_aging_game(&g, n, m, &out_seq, out_pref, pa_exp, aging_exp, aging_bin, zero_deg_appeal, zero_age_appeal, deg_coef, age_coef, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&out_seq);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -6096,6 +6117,7 @@ SEXP R_igraph_recent_degree_aging_game(SEXP pn, SEXP ppa_exp, SEXP paging_exp,
 
   IGRAPH_R_CHECK(igraph_recent_degree_aging_game(&g, n, m, &out_seq, out_pref, pa_exp, aging_exp, aging_bin, time_window, zero_appeal, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&out_seq);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -6184,6 +6206,7 @@ SEXP R_igraph_es_path(SEXP graph, SEXP pp, SEXP pdir) {
   IGRAPH_R_CHECK(igraph_es_as_vector(&g, es, &res));
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
+  igraph_vector_int_destroy(&p);
   igraph_es_destroy(&es);
 
   UNPROTECT(1);
@@ -6206,6 +6229,7 @@ SEXP R_igraph_es_pairs(SEXP graph, SEXP pp, SEXP pdir) {
   IGRAPH_R_CHECK(igraph_es_as_vector(&g, es, &res));
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
+  igraph_vector_int_destroy(&p);
   igraph_es_destroy(&es);
 
   UNPROTECT(1);
@@ -7066,11 +7090,10 @@ SEXP R_igraph_maximal_cliques(SEXP graph, SEXP psubset,
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(psubset)) {
     R_SEXP_to_vector_int_copy(psubset, &subset);
-    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   } else {
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
-    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   igraph_vector_int_list_init(&list, 0);
   igraph_maximal_cliques_subset(&g, Rf_isNull(psubset) ? 0 : &subset,
                                 &list, /*no=*/ 0, /*file=*/ 0,
@@ -7100,7 +7123,7 @@ SEXP R_igraph_maximal_cliques_file(SEXP graph, SEXP psubset, SEXP file,
 
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(psubset)) {
-     R_SEXP_to_vector_int_copy(psubset, &subset);
+    R_SEXP_to_vector_int_copy(psubset, &subset);
   } else {
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
   }
@@ -7145,11 +7168,10 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(psubset)) {
     R_SEXP_to_vector_int_copy(psubset, &subset);
-    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   } else {
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
-    IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
   c_min_size=INTEGER(min_size)[0];
   c_max_size=INTEGER(max_size)[0];
                                         /* Call igraph */
@@ -7267,6 +7289,7 @@ SEXP R_igraph_cited_type_game(SEXP pnodes, SEXP pedges, SEXP ptypes,
   R_SEXP_to_vector(ppref, &pref);
   IGRAPH_R_CHECK(igraph_cited_type_game(&g, nodes, &types, &pref, edges, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&types);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -7287,6 +7310,7 @@ SEXP R_igraph_citing_cited_type_game(SEXP pnodes, SEXP ptypes, SEXP ppref,
   R_SEXP_to_matrix(ppref, &pref);
   IGRAPH_R_CHECK(igraph_citing_cited_type_game(&g, nodes, &types, &pref, edges, directed));
   PROTECT(result=R_igraph_to_SEXP(&g));
+  igraph_vector_int_destroy(&types);
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -8322,6 +8346,7 @@ SEXP R_igraph_get_eids(SEXP graph, SEXP pvp, SEXP pdirected,
   IGRAPH_R_CHECK(igraph_get_eids(&g, &res, /*pairs=*/ &vp, directed, err));
 
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
+  igraph_vector_int_destroy(&vp);
   igraph_vector_int_destroy(&res);
 
   UNPROTECT(1);
