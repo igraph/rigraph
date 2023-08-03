@@ -544,7 +544,9 @@ MATRIX_INT:
     CALL: '&%C%'
     CTYPE: igraph_matrix_int_t
     INCONV:
-        IN: R_SEXP_to_matrix_int(%I%, &%C%);
+        IN: |-
+            R_SEXP_to_matrix_int(%I%, &%C%);
+            IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
         INOUT: |-
             if (0 != R_SEXP_to_igraph_matrix_int_copy(%I%, &%C%)) {
               igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -556,6 +558,9 @@ MATRIX_INT:
             }
             IGRAPH_FINALLY(igraph_matrix_int_destroy, &%C%);
     OUTCONV:
+        IN: |-
+            igraph_matrix_int_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_matrix_int_to_SEXP(&%C%));
             igraph_matrix_int_destroy(&%C%);

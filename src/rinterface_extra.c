@@ -4861,6 +4861,9 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     break;
   }
 
+  igraph_vector_int_destroy(&to_data);
+  igraph_vs_destroy(&to);
+
   PROTECT(result=NEW_LIST(4));
   if (verts) {
     SET_VECTOR_ELT(result, 0, NEW_LIST(no));
@@ -4953,6 +4956,7 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
   igraph_vector_init(&weights, 0);
   R_SEXP_to_matrix(adjmatrix, &adjm);
   IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
+  igraph_vector_destroy(&weights);
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -7016,7 +7020,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_graph_list_init(&res, 0);
   IGRAPH_R_CHECK(igraph_neighborhood_graphs(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
   PROTECT(result=R_igraph_graphlist_to_SEXP(&res));
-  // igraph_graph_list_destroy(&res);
+  igraph_graph_list_destroy(&res);
   igraph_vector_int_destroy(&vids_data);
   igraph_vs_destroy(&vids);
 
@@ -7556,6 +7560,7 @@ SEXP R_igraph_community_to_membership2(SEXP pmerges, SEXP pvcount,
   IGRAPH_R_CHECK(igraph_community_to_membership(&merges, vcount, steps, &membership, 0));
   PROTECT(result=R_igraph_vector_int_to_SEXP(&membership));
 
+  igraph_matrix_int_destroy(&merges);
   igraph_vector_int_destroy(&membership);
   IGRAPH_FINALLY_CLEAN(1);
 
@@ -7901,10 +7906,17 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   R_SEXP_to_igraph(graph, &g);
   if (!Rf_isNull(proots)) {
     R_SEXP_to_vector_int_copy(proots, &roots);
+  } else {
+    igraph_vector_int_init(&roots, 0);
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &roots);
+
   if (!Rf_isNull(prestricted)) {
     R_SEXP_to_vector_int_copy(prestricted, &restricted);
+  } else {
+    igraph_vector_int_init(&restricted, 0);
   }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &restricted);
 
   if (LOGICAL(porder)[0]) {
     igraph_vector_int_init(&order, 0); IGRAPH_FINALLY(igraph_vector_int_destroy, &order);
@@ -7975,6 +7987,11 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   SET_NAMES(result, names);
 
   UNPROTECT(2);
+
+  igraph_vector_int_destroy(&roots);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&restricted);
+  IGRAPH_FINALLY_CLEAN(1);
 
   if (p_dist) { igraph_vector_int_destroy(p_dist); IGRAPH_FINALLY_CLEAN(1); p_dist = 0; }
   if (p_succ) { igraph_vector_int_destroy(p_succ); IGRAPH_FINALLY_CLEAN(1); p_succ = 0; }

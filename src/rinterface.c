@@ -656,6 +656,7 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
                                         /* Convert input */
   c_nodes=INTEGER(nodes)[0];
   R_SEXP_to_matrix_int(W, &c_W);
+  IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_W);
   c_directed=LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_extended_chordal_ring(&c_graph, c_nodes, &c_W, c_directed));
@@ -664,6 +665,8 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_matrix_int_destroy(&c_W);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 
