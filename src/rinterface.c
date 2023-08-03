@@ -760,6 +760,7 @@ SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
   PROTECT(graph=R_igraph_to_SEXP(&c_graph));
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
+  igraph_adjlist_destroy(&c_adjlist);
   r_result = graph;
 
   UNPROTECT(1);
@@ -8459,13 +8460,16 @@ SEXP R_igraph_local_scan_neighborhood_ecount(SEXP graph, SEXP weights, SEXP neig
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(neighborhoods)) { R_igraph_SEXP_to_vector_int_list(neighborhoods, &c_neighborhoods); }
+  R_igraph_SEXP_to_vector_int_list(neighborhoods, &c_neighborhoods);
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_neighborhoods);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_neighborhood_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_neighborhoods));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_list_destroy(&c_neighborhoods);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 
@@ -8492,13 +8496,16 @@ SEXP R_igraph_local_scan_subset_ecount(SEXP graph, SEXP weights, SEXP subsets) {
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (!Rf_isNull(subsets)) { R_igraph_SEXP_to_vector_int_list(subsets, &c_subsets); }
+  R_igraph_SEXP_to_vector_int_list(subsets, &c_subsets);
+  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_subsets);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_scan_subset_ecount(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), &c_subsets));
 
                                         /* Convert output */
   PROTECT(res=R_igraph_vector_to_SEXP(&c_res));
   igraph_vector_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_list_destroy(&c_subsets);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = res;
 
