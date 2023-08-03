@@ -879,7 +879,13 @@ SEXP R_igraph_realize_degree_sequence(SEXP out_deg, SEXP in_deg, SEXP allowed_ed
                                         /* Convert input */
   R_SEXP_to_vector_int_copy(out_deg, &c_out_deg);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_out_deg);
-  if (!Rf_isNull(in_deg)) { R_SEXP_to_vector_int_copy(in_deg, &c_in_deg); }
+  if (!Rf_isNull(in_deg)) {
+    R_SEXP_to_vector_int_copy(in_deg, &c_in_deg);
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_in_deg);
+  } else {
+    IGRAPH_R_CHECK(igraph_vector_int_init(&c_in_deg, 0));
+    IGRAPH_FINALLY(igraph_vector_int_destroy, &c_in_deg);
+  }
   c_allowed_edge_types = (igraph_edge_type_sw_t) Rf_asInteger(allowed_edge_types);
   c_method = (igraph_realize_degseq_t) Rf_asInteger(method);
                                         /* Call igraph */
@@ -891,6 +897,8 @@ SEXP R_igraph_realize_degree_sequence(SEXP out_deg, SEXP in_deg, SEXP allowed_ed
   IGRAPH_I_DESTROY(&c_graph);
   IGRAPH_FINALLY_CLEAN(1);
   igraph_vector_int_destroy(&c_out_deg);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_in_deg);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = graph;
 

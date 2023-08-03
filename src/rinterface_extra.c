@@ -2761,9 +2761,11 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
 
   igraph_vector_int_t from;
   R_SEXP_to_vector_int_copy(VECTOR_ELT(graph, igraph_t_idx_from), &from);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &from);
 
   igraph_vector_int_t to;
   R_SEXP_to_vector_int_copy(VECTOR_ELT(graph, igraph_t_idx_to), &to);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &to);
 
   igraph_vector_int_t edges;
   igraph_integer_t no_of_edges=igraph_vector_int_size(&from);
@@ -2781,7 +2783,7 @@ static int restore_pointer(SEXP graph, igraph_t *g) {
   igraph_vector_int_destroy(&from);
   igraph_vector_int_destroy(&to);
   igraph_vector_int_destroy(&edges);
-  IGRAPH_FINALLY_CLEAN(2); /* +1 for g */
+  IGRAPH_FINALLY_CLEAN(4); /* +1 for g */
 
   return IGRAPH_SUCCESS;
 }
