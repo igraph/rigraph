@@ -5698,6 +5698,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
   IGRAPH_FINALLY(igraph_graph_list_destroy, &comps);
   IGRAPH_R_CHECK(igraph_decompose(&g, &comps, mode, maxcompno, minelements));
   PROTECT(result=R_igraph_graphlist_to_SEXP(&comps));
+  IGRAPH_FREE(comps.stor_begin);
 
   UNPROTECT(1);
   IGRAPH_FINALLY_CLEAN(1);
@@ -7020,7 +7021,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_graph_list_init(&res, 0);
   IGRAPH_R_CHECK(igraph_neighborhood_graphs(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
   PROTECT(result=R_igraph_graphlist_to_SEXP(&res));
-  igraph_graph_list_destroy(&res);
+  IGRAPH_FREE(res.stor_begin);
   igraph_vector_int_destroy(&vids_data);
   igraph_vs_destroy(&vids);
 

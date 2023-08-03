@@ -49,6 +49,7 @@ GRAPH_LIST:
     OUTCONV:
         OUT: |-
             PROTECT(%I%=R_igraph_graphlist_to_SEXP(&%C%));
+            IGRAPH_FREE(%C%.stor_begin);
             IGRAPH_FINALLY_CLEAN(1);
 
 INTEGER:

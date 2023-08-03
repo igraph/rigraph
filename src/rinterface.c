@@ -7588,6 +7588,7 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
 
                                         /* Convert output */
   PROTECT(samples=R_igraph_graphlist_to_SEXP(&c_samples));
+  IGRAPH_FREE(c_samples.stor_begin);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = samples;
 
