@@ -4792,9 +4792,8 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   igraph_vs_t to;
   igraph_vector_int_t to_data;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_vector_int_t *vects, *evects;
   long int i;
-  igraph_vector_int_list_t ptrvec, ptrevec;
+  igraph_vector_int_list_t list, elist;
   igraph_vector_t w, *pw=&w;
   igraph_bool_t negw=0;
   SEXP result, result1, result2, names;
@@ -4811,24 +4810,10 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   R_SEXP_to_igraph_vs(pto, &g, &to, &to_data);
 
   if (verts) {
-    igraph_vector_int_list_init(&ptrvec, no);
-    vects=(igraph_vector_int_t*) R_alloc((size_t) GET_LENGTH(pto),
-                                     sizeof(igraph_vector_int_t));
-    for (i=0; i<no; i++) {
-      igraph_vector_int_init(&vects[i], 0);
-      igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(&ptrvec, i);
-      v=&vects[i];
-    }
+    igraph_vector_int_list_init(&list, no);
   }
   if (edges) {
-    igraph_vector_int_list_init(&ptrevec, no);
-    evects=(igraph_vector_int_t*) R_alloc((size_t) GET_LENGTH(pto),
-                                      sizeof(igraph_vector_int_t));
-    for (i=0; i<no; i++) {
-      igraph_vector_int_init(&evects[i], 0);
-      igraph_vector_int_t *v=igraph_vector_int_list_get_ptr(&ptrevec, i);
-      v=&evects[i];
-    }
+    igraph_vector_int_list_init(&elist, no);
   }
 
   if (Rf_isNull(weights)) {
@@ -4844,20 +4829,20 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   switch (algo) {
   case 0:                       /* automatic */
     if (negw) {
-      IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &ptrvec : 0, edges ? &ptrevec : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+      IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     } else {
       /* This one chooses 'unweighted' if there are no weights */
-      IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &ptrvec : 0, edges ? &ptrevec : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+      IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, verts ? &ptrvec : 0, edges ? &ptrevec : 0, from, to, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, verts ? &list : 0, edges ? &elist : 0, from, to, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   case 2:                       /* dijkstra */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &ptrvec : 0, edges ? &ptrevec : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   case 3:                       /* bellman-ford */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &ptrvec : 0, edges ? &ptrevec : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   }
 
@@ -4869,10 +4854,9 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     SET_VECTOR_ELT(result, 0, NEW_LIST(no));
     result1=VECTOR_ELT(result, 0);
     for (i=0; i<no; i++) {
-      SET_VECTOR_ELT(result1, i, R_igraph_vector_int_to_SEXP(&vects[i]));
-      igraph_vector_int_destroy(&vects[i]);
+      SET_VECTOR_ELT(result1, i, R_igraph_vector_int_to_SEXP(igraph_vector_int_list_get_ptr(&list, i)));
     }
-    igraph_vector_int_list_destroy(&ptrvec);
+    igraph_vector_int_list_destroy(&list);
   } else {
     SET_VECTOR_ELT(result, 0, R_NilValue);
   }
@@ -4880,10 +4864,9 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
     SET_VECTOR_ELT(result, 1, NEW_LIST(no));
     result2=VECTOR_ELT(result, 1);
     for (i=0; i<no; i++) {
-      SET_VECTOR_ELT(result2, i, R_igraph_vector_int_to_SEXP(&evects[i]));
-      igraph_vector_int_destroy(&evects[i]);
+      SET_VECTOR_ELT(result2, i, R_igraph_vector_int_to_SEXP(igraph_vector_int_list_get_ptr(&elist, i)));
     }
-    igraph_vector_int_list_destroy(&ptrevec);
+    igraph_vector_int_list_destroy(&elist);
   } else {
     SET_VECTOR_ELT(result, 1, R_NilValue);
   }
