@@ -16,8 +16,8 @@
       [1] b    c    <NA>
       
       $rank
-        a   b   c 
-      NaN   1   2 
+      a b c 
+      0 1 2 
       
       $father
       + 3/3 vertices, named:
@@ -35,8 +35,8 @@
       <NA>    c <NA> 
       
       $dist
-        a   b   c 
-      NaN   0   1 
+       a  b  c 
+      -1  0  1 
       
       $neimode
       [1] "out"
