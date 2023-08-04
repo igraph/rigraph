@@ -7881,7 +7881,7 @@ igraph_error_t R_igraph_bfshandler(const igraph_t *graph,
   cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
 
   UNPROTECT(4);
-  return cres ? IGRAPH_SUCCESS : IGRAPH_FAILURE;
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
