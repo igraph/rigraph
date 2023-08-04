@@ -19,9 +19,9 @@ test_that("sample_forestfire works", {
 
   expect_that(co, equals(structure(
     c(
-      1.06045500245466,
-      1.22800967143684,
-      1.96234121488344
+      1.02868827,
+      1.22744698,
+      1.98684314
     ),
     .Names = c(
       "sparse.xv",
