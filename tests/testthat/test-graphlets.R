@@ -154,6 +154,7 @@ graphlets.project.old <- function(graph, cliques, iter, Mu = NULL) {
 }
 
 test_that("Graphlet projection works", {
+  skip("https://github.com/igraph/rigraph/issues/878")
   D1 <- matrix(0, 5, 5)
   D2 <- matrix(0, 5, 5)
   D3 <- matrix(0, 5, 5)

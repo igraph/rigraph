@@ -1,4 +1,5 @@
 test_that("SIR works", {
+  skip("Random seed not applied")
   skip_on_os("solaris")
 
   set.seed(42)

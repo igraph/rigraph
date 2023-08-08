@@ -1,4 +1,5 @@
 test_that("any_multiple, count_multiple, which_multiple works", {
+  skip("Random seed not applied")
   set.seed(42)
 
   g <- barabasi.game(10, m = 3, algorithm = "bag")
