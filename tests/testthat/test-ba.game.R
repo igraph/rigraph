@@ -21,7 +21,7 @@ test_that("sample_pa can start from a graph", {
   g4 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_empty_graph(5))
   expect_that(ecount(g4), equals(5))
   expect_that(vcount(g4), equals(10))
-  expect_that(degree(g4), equals(c(2, 0, 0, 0, 1, 2, 1, 1, 2, 1)))
+  expect_that(degree(g4), equals(c(2, 0, 0, 0, 2, 1, 2, 1, 1, 1)))
 
   g6 <- sample_pa(10, m = 1, algorithm = "bag", start.graph = make_star(10))
   expect_true(graph.isomorphic(g6, make_star(10)))

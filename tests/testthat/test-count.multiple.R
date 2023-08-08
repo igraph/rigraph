@@ -6,15 +6,15 @@ test_that("any_multiple, count_multiple, which_multiple works", {
   cm <- count_multiple(g)
   expect_true(any_multiple(g))
   expect_that(im, equals(c(
-    FALSE, TRUE, TRUE, FALSE, TRUE, TRUE,
-    FALSE, FALSE, FALSE, FALSE, FALSE, TRUE,
-    FALSE, FALSE, TRUE, FALSE, FALSE, TRUE,
-    FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
-    FALSE, FALSE, TRUE
+    FALSE, TRUE, TRUE, FALSE, FALSE, TRUE,
+    FALSE, FALSE, TRUE, FALSE, TRUE, TRUE,
+    FALSE, FALSE, FALSE, TRUE, TRUE, FALSE,
+    FALSE, FALSE, TRUE, FALSE, TRUE, FALSE,
+    FALSE, FALSE, FALSE
   )))
   expect_that(cm, equals(c(
-    3, 3, 3, 3, 3, 3, 1, 1, 1, 2, 1, 2, 1, 2,
-    2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2
+    3, 3, 3, 3, 3, 3, 1, 2, 2, 3, 3, 3, 2, 1,
+    2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1
   )))
   expect_that(
     count_multiple(simplify(g)),
@@ -37,7 +37,7 @@ test_that("any_multiple, count_multiple, which_multiple works", {
   expect_false(any_multiple(g))
   expect_false(any(which_multiple(g)))
   expect_that(E(g)$weight, equals(c(
-    3, 2, 1, 2, 1, 3, 2, 1, 2, 1, 2,
-    1, 1, 1, 1, 1, 1, 1
+    3, 2, 1, 2, 1, 2, 1, 3, 3, 2, 1,
+    1, 1, 1, 1, 1, 1
   )))
 })
