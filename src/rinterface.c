@@ -469,9 +469,6 @@ SEXP R_igraph_square_lattice(SEXP dimvector, SEXP nei, SEXP directed, SEXP mutua
   c_mutual=LOGICAL(mutual)[0];
   if (!Rf_isNull(periodic)) {
     R_SEXP_to_vector_bool(periodic, &c_periodic);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_bool_init(&c_periodic, 0));
-    IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_periodic);
   }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_square_lattice(&c_graph, &c_dimvector, c_nei, c_directed, c_mutual, (Rf_isNull(periodic) ? 0 : &c_periodic)));
@@ -1276,9 +1273,6 @@ SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitne
   R_SEXP_to_vector(fitness_out, &c_fitness_out);
   if (!Rf_isNull(fitness_in)) {
     R_SEXP_to_vector(fitness_in, &c_fitness_in);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_fitness_in, 0));
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_fitness_in);
   }
   c_loops=LOGICAL(loops)[0];
   c_multiple=LOGICAL(multiple)[0];
@@ -3091,9 +3085,6 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   c_damping=REAL(damping)[0];
   if (!Rf_isNull(personalized)) {
     R_SEXP_to_vector(personalized, &c_personalized);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_personalized, 0));
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_personalized);
   }
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (c_algo == IGRAPH_PAGERANK_ALGO_ARPACK) {
@@ -6717,9 +6708,6 @@ SEXP R_igraph_layout_umap(SEXP graph, SEXP res, SEXP use_seed, SEXP distances, S
   c_use_seed=LOGICAL(use_seed)[0];
   if (!Rf_isNull(distances)) {
     R_SEXP_to_vector(distances, &c_distances);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_distances, 0));
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_distances);
   }
   c_min_dist=REAL(min_dist)[0];
   c_epochs=INTEGER(epochs)[0];
@@ -6760,9 +6748,6 @@ SEXP R_igraph_layout_umap_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP distances
   c_use_seed=LOGICAL(use_seed)[0];
   if (!Rf_isNull(distances)) {
     R_SEXP_to_vector(distances, &c_distances);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_init(&c_distances, 0));
-    IGRAPH_FINALLY(igraph_vector_destroy, &c_distances);
   }
   c_min_dist=REAL(min_dist)[0];
   c_epochs=INTEGER(epochs)[0];
@@ -7234,9 +7219,6 @@ SEXP R_igraph_community_label_propagation(SEXP graph, SEXP mode, SEXP weights, S
   }
   if (!Rf_isNull(fixed)) {
     R_SEXP_to_vector_bool(fixed, &c_fixed);
-  } else {
-    IGRAPH_R_CHECK(igraph_vector_bool_init(&c_fixed, 0));
-    IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_fixed);
   }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_community_label_propagation(&c_graph, &c_membership, c_mode, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), (Rf_isNull(initial) ? 0 : &c_initial), (Rf_isNull(fixed) ? 0 : &c_fixed)));
