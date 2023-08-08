@@ -5850,7 +5850,6 @@ SEXP R_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
   igraph_vector_ptr_t graphvec;
   igraph_matrix_list_t matrixlist;
   igraph_t *gras;
-  igraph_matrix_t *mats;
   igraph_matrix_t res;
   long int i;
   SEXP result;
@@ -5858,16 +5857,15 @@ SEXP R_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
   igraph_vector_ptr_init(&graphvec, GET_LENGTH(graphs));
   igraph_matrix_list_init(&matrixlist, GET_LENGTH(layouts));
   gras=(igraph_t*)R_alloc((size_t) GET_LENGTH(graphs), sizeof(igraph_t));
-  mats=(igraph_matrix_t*)R_alloc((size_t) GET_LENGTH(layouts),
-                                 sizeof(igraph_matrix_t));
   for (i=0; i<GET_LENGTH(graphs); i++) {
     R_SEXP_to_igraph(VECTOR_ELT(graphs, i), &gras[i]);
     VECTOR(graphvec)[i]=&gras[i];
   }
   for (i=0; i<GET_LENGTH(layouts); i++) {
-    R_SEXP_to_matrix(VECTOR_ELT(layouts, i), &mats[i]);
-    igraph_matrix_t *m=igraph_matrix_list_get_ptr(&matrixlist, i);
-    m=&mats[i];
+    igraph_matrix_t source;
+    R_SEXP_to_matrix(VECTOR_ELT(layouts, i), &source);
+    igraph_matrix_t *dest=igraph_matrix_list_get_ptr(&matrixlist, i);
+    igraph_matrix_init_copy(dest, &source);
   }
   igraph_matrix_init(&res, 0, 0);
   IGRAPH_R_CHECK(igraph_layout_merge_dla(&graphvec, &matrixlist, &res));
