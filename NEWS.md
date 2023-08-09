@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9010
+
+## Chore
+
+- Align attributes with CRAN version.
+
+- Add `cran_install()` helper.
+
+- Upgrade C routine registration to R 4.3.
+
+- `getRversion()` uses strings.
+
+## Uncategorized
+
+- Merge branch 'cran-1.5.0.1'.
+
+
 # igraph 1.5.0.9009
 
 ## Chore
