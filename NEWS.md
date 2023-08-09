@@ -106,6 +106,11 @@ fixes #855
 - Merge branch 'cran-1.5.0'.
 
 
+# igraph 1.5.0.1
+
+- Remove `ETIME()` call from Fortran code.
+
+
 # igraph 1.5.0
 
 ## Breaking changes
