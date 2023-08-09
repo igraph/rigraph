@@ -378,10 +378,19 @@ int R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *attr) {
   // The "preserve list" Will be cleared with the next invocation of IGRAPH_R_CHECK().
   // Adding to that list ensures that the attributes aren't GC-ed prematurely.
   R_igraph_attribute_add_to_preserve_list(result);
-  for (i=1; i<3; i++) {
+
+  /* Add dummy vector for compatibility with CRAN versions */
+  SEXP dummy = NEW_NUMERIC(3);
+  NUMERIC_POINTER(dummy)[0] = 1.0;
+  NUMERIC_POINTER(dummy)[1] = 0.0;
+  NUMERIC_POINTER(dummy)[2] = 1.0;
+  SET_VECTOR_ELT(result, 0, dummy);
+
+  /* Add vertex and edge attributes */
+  for (i=2; i<4; i++) {
     SEXP attr = PROTECT(NEW_LIST(0));
     SET_NAMES(attr, NEW_CHARACTER(0));
-    SET_VECTOR_ELT(result, i+1, attr); /* gal, val, eal */
+    SET_VECTOR_ELT(result, i, attr); /* gal, val, eal */
     UNPROTECT(1);
   }
   graph->attr=result;
