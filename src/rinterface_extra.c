@@ -354,7 +354,7 @@ void R_igraph_attribute_add_to_preserve_list(SEXP attr) {
   SETCDR(R_igraph_attribute_preserve_list, node);
 }
 
-void R_igraph_attribute_clean_preserve_list() {
+void R_igraph_attribute_clean_preserve_list(void) {
   if (R_igraph_attribute_preserve_list) {
     // Mark the entire list available for garbage collection.
     // Attributes that have been assigned to an R graph object will remain protected.
