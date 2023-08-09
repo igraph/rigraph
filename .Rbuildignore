@@ -43,3 +43,4 @@ src/vendor/cigraph
 ^AUTHORS-list\.md$
 ^CITATION\.cff$
 ^cran$
+^R/cran\.R$
