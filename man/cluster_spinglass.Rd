@@ -171,7 +171,7 @@ Jorg Reichardt for the original code and Gabor Csardi
 \email{csardi.gabor@gmail.com} for the igraph glue code.
 
 Changes to the original function for including the possibility of negative
-ties were implemented by Vincent Traag (\url{http://www.traag.net/}).
+ties were implemented by Vincent Traag (\url{https://www.traag.net/}).
 }
 \concept{community}
 \keyword{graphs}
