@@ -14,3 +14,4 @@ igraph.Rcheck/
 /configure~
 /build/
 inst/doc
+cran

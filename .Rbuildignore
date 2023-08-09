@@ -42,3 +42,4 @@ src/vendor/cigraph
 ^\.zenodo.json$
 ^AUTHORS-list\.md$
 ^CITATION\.cff$
+^cran$
