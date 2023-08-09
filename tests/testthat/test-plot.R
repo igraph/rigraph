@@ -1,7 +1,7 @@
 test_that("basic plot test, R < 4.3", {
   set.seed("20221214")
 
-  skip_if(getRversion() >= 4.3)
+  skip_if(getRversion() >= "4.3")
   # FIXME: Reenable after separating layouting from plotting
   skip_on_ci()
 
@@ -18,7 +18,7 @@ test_that("basic plot test, R < 4.3", {
 test_that("basic plot test, R >= 4.3", {
   set.seed("20221214")
 
-  skip_if(getRversion() < 4.3)
+  skip_if(getRversion() < "4.3")
   # FIXME: Reenable after separating layouting from plotting
   skip_on_ci()
 
