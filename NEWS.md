@@ -16,6 +16,8 @@
 
 - `R_SEXP_to_igraph()` and `R_SEXP_to_igraph_copy()` get `igraph_t` object from external pointer (#865).
 
+- Remove `ETIME()` call from Fortran code, already in CRAN version 1.5.0.1 (#858).
+
 - Ensure that `_GNU_SOURCE` is always defined (#877).
 
 - Fix `make clean` (#860).
@@ -37,11 +39,6 @@
 ## Refactoring
 
 - Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
-
-
-# igraph 1.5.0.1
-
-- Remove `ETIME()` call from Fortran code.
 
 
 # igraph 1.5.0
