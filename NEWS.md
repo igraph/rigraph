@@ -1,5 +1,9 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.1
+
+- Remove `ETIME()` call from Fortran code.
+
 # igraph 1.5.0
 
 ## Breaking changes
