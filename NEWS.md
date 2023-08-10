@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.0.9011
+
+  - Internal changes only.
+
+
 # igraph 1.5.0.9010
 
 ## Chore
