@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
 <div class="section level2">
 <h2 id="development-and-compilation">Development and Compilation<a class="anchor" aria-label="anchor" href="#development-and-compilation"></a></h2>
 <p>All development is being done on the default branch so that it can be automatically installed using <code>remotes::install_github("igraph/rigraph")</code> or <code>pak::pak("igraph/rigraph")</code>. If you have the stable version of igraph already installed, you can avoid conflicts by installing the development version in its own directory, e.g. <code>remotes::install_github("igraph/rigraph", lib = "~/testing/")</code>. Then, to load the development version in an R session, use <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(igraph, lib.loc = "~/testing/")</a></code>. Remove the development version with <code>remove.packages("igraph", lib = "~/testing/")</code>.</p>
-<p>You can locally build and test the <code>igraph</code> package as follows. From an R process running in the local <code>./rigraph</code> directory, run <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> to compile the cloned version of igraph and load it for use in the current session. You can run the package tests with <code><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">testthat::test_local()</a></code>. If your change includes updates to the documentation, also run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> to update the package documentation. Note that you can either clone the package and locally build it with <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> <em>or</em> install the package from GitHub with <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code>—you do not need to do both. You can keep your local clone up to date with <code>git</code> tools, or remove it by deleting the local <code>./rigraph</code> directory.</p>
+<p>You can locally build and test the <code>igraph</code> package as follows. From an R process running in the local <code>./rigraph</code> directory, run <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> to compile the cloned version of igraph and load it for use in the current session. You can run the package tests with <code><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">testthat::test_local()</a></code>. If your change includes updates to the documentation, also run <code>devtools::document()</code> to update the package documentation. Note that you can either clone the package and locally build it with <code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">pkgload::load_all()</a></code> <em>or</em> install the package from GitHub with <code>remotes::install_github()</code>—you do not need to do both. You can keep your local clone up to date with <code>git</code> tools, or remove it by deleting the local <code>./rigraph</code> directory.</p>
 <div class="section level3">
 <h3 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a></h3>
 <p>When building from source on Windows, you need to have <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link">RTools</a> installed. Additionally, the two system requirements of <code>glpk</code> and <code>libxml2</code> are not optional, but hard requirements. For version R &gt;= 4.0 you can install these two from an RTools terminal using</p>
@@ -124,7 +124,7 @@
 </div>
 <div class="section level3">
 <h3 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a></h3>
-<p>Please document your new functions using <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>, and run <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> or <code>make igraph</code> to update the <code>.Rd</code> files.</p>
+<p>Please document your new functions using <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>, and run <code>devtools::document()</code> or <code>make igraph</code> to update the <code>.Rd</code> files.</p>
 </div>
 <div class="section level3">
 <h3 id="test-cases">Test Cases<a class="anchor" aria-label="anchor" href="#test-cases"></a></h3>

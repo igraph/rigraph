@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,125 +60,42 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9010" id="igraph-1509010">igraph 1.5.0.9010<a class="anchor" aria-label="anchor" href="#igraph-1509010"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.5.1.9000" id="igraph-1519000">igraph 1.5.1.9000<a class="anchor" aria-label="anchor" href="#igraph-1519000"></a></h2>
+<ul><li>Merge branch ‘cran-1.5.1’.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.1" id="igraph-151">igraph 1.5.1<a class="anchor" aria-label="anchor" href="#igraph-151"></a></h2><p class="text-muted">CRAN release: 2023-08-10</p>
 <div class="section level3">
-<h3 id="chore-1-5-0-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9010"></a></h3>
-<ul><li><p>Align attributes with CRAN version.</p></li>
-<li><p>Add <code>cran_install()</code> helper.</p></li>
-<li><p>Upgrade C routine registration to R 4.3.</p></li>
+<h3 id="breaking-changes-1-5-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1"></a></h3>
+<ul><li>Breaking change: start deprecation of <code><a href="../reference/estimate_betweenness.html">estimate_betweenness()</a></code>, <code><a href="../reference/estimate_edge_betweenness.html">estimate_edge_betweenness()</a></code>, <code><a href="../reference/estimate_closeness.html">estimate_closeness()</a></code> (<a href="https://github.com/igraph/rigraph/issues/852" class="external-link">#852</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-5-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-1"></a></h3>
+<ul><li>
+<code><a href="../reference/identical_graphs.html">identical_graphs()</a></code> now correctly detects identical graphs without node or edge attributes (<a href="https://github.com/igraph/rigraph/issues/757" class="external-link">#757</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-1-5-1">Internal<a class="anchor" aria-label="anchor" href="#internal-1-5-1"></a></h3>
+<ul><li><p>Change ownership rules of attribute objects (<a href="https://github.com/igraph/rigraph/issues/870" class="external-link">#870</a>).</p></li>
+<li><p><code>R_SEXP_to_igraph()</code> and <code>R_SEXP_to_igraph_copy()</code> get <code>igraph_t</code> object from external pointer (<a href="https://github.com/igraph/rigraph/issues/865" class="external-link">#865</a>).</p></li>
+<li><p>Remove <code>ETIME()</code> call from Fortran code, already in CRAN version 1.5.0.1 (<a href="https://github.com/igraph/rigraph/issues/858" class="external-link">#858</a>).</p></li>
+<li><p>Ensure that <code>_GNU_SOURCE</code> is always defined (<a href="https://github.com/igraph/rigraph/issues/877" class="external-link">#877</a>).</p></li>
+<li><p>Fix <code>make clean</code> (<a href="https://github.com/igraph/rigraph/issues/860" class="external-link">#860</a>).</p></li>
+<li><p>Fix generation of code for functions with <code>VERTEX_COLOR</code> out-arguments (<a href="https://github.com/igraph/rigraph/issues/850" class="external-link">#850</a>).</p></li>
+<li><p>Use <code>-lquadmath</code> in <code>Makevars.win</code>, for compatibility with alternative R distributions such as Microsoft R Open (<a href="https://github.com/igraph/rigraph/issues/855" class="external-link">#855</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/r/base/numeric_version.html" class="external-link">getRversion()</a></code> uses strings.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="uncategorized-1-5-0-9010">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-5-0-9010"></a></h3>
-<ul><li>Merge branch ‘cran-1.5.0.1’.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9009" id="igraph-1509009">igraph 1.5.0.9009<a class="anchor" aria-label="anchor" href="#igraph-1509009"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-0-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9009"></a></h3>
-<ul><li>Fix typo in test name.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9008" id="igraph-1509008">igraph 1.5.0.9008<a class="anchor" aria-label="anchor" href="#igraph-1509008"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-0-9008">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9008"></a></h3>
-<ul><li>Ensure that _GNU_SOURCE is always defined (<a href="https://github.com/igraph/rigraph/issues/877" class="external-link">#877</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9007" id="igraph-1509007">igraph 1.5.0.9007<a class="anchor" aria-label="anchor" href="#igraph-1509007"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-0-9007">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-0-9007"></a></h3>
-<ul><li>Add cffr file and a GHA workflow that updates it automatically (<a href="https://github.com/igraph/rigraph/issues/873" class="external-link">#873</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9006" id="igraph-1509006">igraph 1.5.0.9006<a class="anchor" aria-label="anchor" href="#igraph-1509006"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-0-9006">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9006"></a></h3>
-<ul><li><p>Fix <code>make clean</code> (<a href="https://github.com/igraph/rigraph/issues/860" class="external-link">#860</a>).</p></li>
-<li><p><code><a href="../reference/identical_graphs.html">identical_graphs()</a></code> now correctly detects identical graphs without node or edge attributes (<a href="https://github.com/igraph/rigraph/issues/757" class="external-link">#757</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-0-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9006"></a></h3>
-<ul><li>
-<code>R_SEXP_to_igraph()</code> and <code>R_SEXP_to_igraph_copy()</code> get <code>igraph_t</code> object from external pointer (<a href="https://github.com/igraph/rigraph/issues/865" class="external-link">#865</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9005" id="igraph-1509005">igraph 1.5.0.9005<a class="anchor" aria-label="anchor" href="#igraph-1509005"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-0-9005">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9005"></a></h3>
-<ul><li>Change ownership rules of attribute objects (<a href="https://github.com/igraph/rigraph/issues/870" class="external-link">#870</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-0-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9005"></a></h3>
-<ul><li>Update revdepcheck results (<a href="https://github.com/igraph/rigraph/issues/867" class="external-link">#867</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9004" id="igraph-1509004">igraph 1.5.0.9004<a class="anchor" aria-label="anchor" href="#igraph-1509004"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-0-9004">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9004"></a></h3>
-<ul><li>Update vendor cigraph 0.10 (<a href="https://github.com/igraph/rigraph/issues/862" class="external-link">#862</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9003" id="igraph-1509003">igraph 1.5.0.9003<a class="anchor" aria-label="anchor" href="#igraph-1509003"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-0-9003">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9003"></a></h3>
-<ul><li>Fix generation of code for functions with VERTEX_COLOR out-arguments, refs <a href="https://github.com/igraph/rigraph/issues/850" class="external-link">#850</a>.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-0-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9003"></a></h3>
-<ul><li>Align autogeneration (<a href="https://github.com/igraph/rigraph/issues/859" class="external-link">#859</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-0-9003">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-0-9003"></a></h3>
-<ul><li>Undeprecate neighborhood() (<a href="https://github.com/igraph/rigraph/issues/851" class="external-link">#851</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-5-0-9003">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-0-9003"></a></h3>
-<ul><li>Breaking change: start deprecation of <code><a href="../reference/estimate_betweenness.html">estimate_betweenness()</a></code>, <code><a href="../reference/estimate_edge_betweenness.html">estimate_edge_betweenness()</a></code>, <code><a href="../reference/estimate_closeness.html">estimate_closeness()</a></code> (<a href="https://github.com/igraph/rigraph/issues/852" class="external-link">#852</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-0-9003">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-0-9003"></a></h3>
-<ul><li>Breaking change: start deprecation of <code><a href="../reference/estimate_betweenness.html">estimate_betweenness()</a></code>, <code><a href="../reference/estimate_edge_betweenness.html">estimate_edge_betweenness()</a></code>, <code><a href="../reference/estimate_closeness.html">estimate_closeness()</a></code> (<a href="https://github.com/igraph/rigraph/issues/852" class="external-link">#852</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9002" id="igraph-1509002">igraph 1.5.0.9002<a class="anchor" aria-label="anchor" href="#igraph-1509002"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-0-9002">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9002"></a></h3>
-<ul><li><p>Avoid using of non-standard Fortran function ETIME (<a href="https://github.com/igraph/rigraph/issues/858" class="external-link">#858</a>).</p></li>
-<li><p>Use -lquadmath in Makevars.win.</p></li>
-</ul><p>for compatibility with alternative R distributions such as Microsoft R Open</p>
-<p>fixes <a href="https://github.com/igraph/rigraph/issues/855" class="external-link">#855</a></p>
-</div>
-<div class="section level3">
-<h3 id="chore-1-5-0-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-0-9002"></a></h3>
-<ul><li><p>Ci sanitizer (<a href="https://github.com/igraph/rigraph/issues/854" class="external-link">#854</a>).</p></li>
+<h3 id="documentation-1-5-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1"></a></h3>
+<ul><li><p>Add cffr file and a GHA workflow that updates it automatically (<a href="https://github.com/igraph/rigraph/issues/873" class="external-link">#873</a>).</p></li>
+<li><p>Undeprecate <code><a href="../reference/ego.html">neighborhood()</a></code> (<a href="https://github.com/igraph/rigraph/issues/851" class="external-link">#851</a>).</p></li>
 <li><p>Remove redundant reference to AUTHORS from DESCRIPTION.</p></li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9001" id="igraph-1509001">igraph 1.5.0.9001<a class="anchor" aria-label="anchor" href="#igraph-1509001"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-1-5-0-9001">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-0-9001"></a></h3>
-<ul><li>
-<code>types-RC.yaml</code> (<a href="https://github.com/igraph/rigraph/issues/846" class="external-link">#846</a>).</li>
+<h3 id="refactoring-1-5-1">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-1"></a></h3>
+<ul><li>Breaking change: start deprecation of <code><a href="../reference/estimate_betweenness.html">estimate_betweenness()</a></code>, <code><a href="../reference/estimate_edge_betweenness.html">estimate_edge_betweenness()</a></code>, <code><a href="../reference/estimate_closeness.html">estimate_closeness()</a></code> (<a href="https://github.com/igraph/rigraph/issues/852" class="external-link">#852</a>).</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.9000" id="igraph-1509000">igraph 1.5.0.9000<a class="anchor" aria-label="anchor" href="#igraph-1509000"></a></h2>
-<ul><li>Merge branch ‘cran-1.5.0’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0.1" id="igraph-1501">igraph 1.5.0.1<a class="anchor" aria-label="anchor" href="#igraph-1501"></a></h2><p class="text-muted">CRAN release: 2023-07-23</p>
-<ul><li>Remove <code>ETIME()</code> call from Fortran code.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.0" id="igraph-150">igraph 1.5.0<a class="anchor" aria-label="anchor" href="#igraph-150"></a></h2><p class="text-muted">CRAN release: 2023-06-16</p>
 <div class="section level3">
