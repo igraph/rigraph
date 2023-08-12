@@ -1,136 +1,44 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.5.0.9011
-
-  - Internal changes only.
-
-
-# igraph 1.5.0.9010
-
-## Chore
-
-- Align attributes with CRAN version.
-
-- Add `cran_install()` helper.
-
-- Upgrade C routine registration to R 4.3.
-
-- `getRversion()` uses strings.
-
-## Uncategorized
-
-- Merge branch 'cran-1.5.0.1'.
-
-
-# igraph 1.5.0.9009
-
-## Chore
-
-  - Fix typo in test name.
-
-
-# igraph 1.5.0.9008
-
-## Bug fixes
-
-  - Ensure that \_GNU\_SOURCE is always defined (#877).
-
-
-# igraph 1.5.0.9007
-
-## Documentation
-
-  - Add cffr file and a GHA workflow that updates it automatically (#873).
-
-
-# igraph 1.5.0.9006
-
-## Bug fixes
-
-  - Fix `make clean` (#860).
-
-  - `identical_graphs()` now correctly detects identical graphs without node or edge attributes (#757).
-
-## Chore
-
-  - `R_SEXP_to_igraph()` and `R_SEXP_to_igraph_copy()` get `igraph_t` object from external pointer (#865).
-
-
-# igraph 1.5.0.9005
-
-## Bug fixes
-
-  - Change ownership rules of attribute objects (#870).
-
-## Chore
-
-  - Update revdepcheck results (#867).
-
-
-# igraph 1.5.0.9004
-
-## Chore
-
-  - Update vendor cigraph 0.10 (#862).
-
-
-# igraph 1.5.0.9003
-
-## Bug fixes
-
-  - Fix generation of code for functions with VERTEX\_COLOR out-arguments, refs #850.
-
-## Chore
-
-  - Align autogeneration (#859).
-
-## Documentation
-
-  - Undeprecate neighborhood() (#851).
-
-## Refactoring
-
-  - Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
+# igraph 1.5.1
 
 ## Breaking changes
 
-  - Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
-
-
-# igraph 1.5.0.9002
+- Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
 
 ## Bug fixes
 
-  - Avoid using of non-standard Fortran function ETIME (#858).
+- `identical_graphs()` now correctly detects identical graphs without node or edge attributes (#757).
 
-  - Use -lquadmath in Makevars.win.
+## Internal
 
-for compatibility with alternative R distributions such as Microsoft R Open
+- Change ownership rules of attribute objects (#870).
 
-fixes #855
+- `R_SEXP_to_igraph()` and `R_SEXP_to_igraph_copy()` get `igraph_t` object from external pointer (#865).
 
-## Chore
+- Remove `ETIME()` call from Fortran code, already in CRAN version 1.5.0.1 (#858).
 
-  - Ci sanitizer (#854).
+- Ensure that `_GNU_SOURCE` is always defined (#877).
 
-  - Remove redundant reference to AUTHORS from DESCRIPTION.
+- Fix `make clean` (#860).
 
+- Fix generation of code for functions with `VERTEX_COLOR` out-arguments (#850).
 
-# igraph 1.5.0.9001
+- Use `-lquadmath` in `Makevars.win`, for compatibility with alternative R distributions such as Microsoft R Open (#855).
 
-## Bug fixes
+- `getRversion()` uses strings.
 
-  - `types-RC.yaml` (#846).
+## Documentation
 
+- Add cffr file and a GHA workflow that updates it automatically (#873).
 
-# igraph 1.5.0.9000
+- Undeprecate `neighborhood()` (#851).
 
-- Merge branch 'cran-1.5.0'.
+- Remove redundant reference to AUTHORS from DESCRIPTION.
 
+## Refactoring
 
-# igraph 1.5.0.1
-
-- Remove `ETIME()` call from Fortran code.
+- Breaking change: start deprecation of `estimate_betweenness()`, `estimate_edge_betweenness()`, `estimate_closeness()` (#852).
 
 
 # igraph 1.5.0

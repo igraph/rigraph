@@ -939,7 +939,7 @@ community.to.membership2 <- function(merges, vcount, steps) {
 #' \email{csardi.gabor@@gmail.com} for the igraph glue code.
 #'
 #' Changes to the original function for including the possibility of negative
-#' ties were implemented by Vincent Traag (<http://www.traag.net/>).
+#' ties were implemented by Vincent Traag (<https://www.traag.net/>).
 #' @seealso [communities()], [components()]
 #' @references J. Reichardt and S. Bornholdt: Statistical Mechanics of
 #' Community Detection, *Phys. Rev. E*, 74, 016110 (2006),
