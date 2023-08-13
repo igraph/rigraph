@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 1.5.0.9006
+version: 1.5.1.9000
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
@@ -78,7 +78,7 @@ references:
   - family-names: Müller
     given-names: Kirill
   year: '2023'
-  notes: R package version 1.5.0.9006
+  notes: R package version 1.5.1.9000
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -347,11 +347,16 @@ references:
   url: https://github.com/r-lib/decor
   repository: https://CRAN.R-project.org/package=decor
   authors:
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@posit.co
+    orcid: https://orcid.org/0000-0003-4777-038X
   - family-names: François
     given-names: Romain
-    email: romain@rstudio.com
+    orcid: https://orcid.org/0000-0002-2444-4226
   - family-names: Hester
     given-names: Jim
+    orcid: https://orcid.org/0000-0002-2739-7082
   year: '2023'
 - type: software
   title: digest
@@ -425,6 +430,7 @@ references:
   - family-names: Falcon
     given-names: S
   year: '2023'
+  doi: 10.18129/B9.bioc.graph
 - type: software
   title: igraphdata
   abstract: 'igraphdata: A Collection of Network Data Sets for the ''igraph'' Package'

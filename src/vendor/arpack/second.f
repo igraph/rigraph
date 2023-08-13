@@ -24,11 +24,19 @@
 *     ..
 *     .. Executable Statements ..
 *
-      TARRAY( 1 ) = 0.0
-      T1 = ETIME( TARRAY )
-      T  = TARRAY( 1 )
-
+*     ======================================
+*     This has been changed by the CRAN team.
+*     Needs to be back-ported to igrapch/C
+*     ======================================
+*
+      T = 0.0
       RETURN
+*
+*     ======================================
+*     This has been changed by the CRAN team
+*     Needs to be back-ported to igrapch/C
+*     ======================================
+*
 *
 *     End of SECOND
 *
