@@ -10,4 +10,8 @@ PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -Linstall/lib -luuid -ligraph -lsi
 
 all: $(SHLIB)
 
+install/lib/libigraph.a:
+	cmake --build build --config Release
+	cmake --install build --config Release
+
 OBJECTS=rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
