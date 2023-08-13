@@ -10,5 +10,8 @@ if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
     echo "0.10.0" >> ./vendor/cigraph/IGRAPH_VERSION
 fi
 
-# Configure igraph with cmake
+# Build igraph with cmake
 cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
+
+cmake --build build --config Release
+cmake --install build --config Release

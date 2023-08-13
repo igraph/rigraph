@@ -11,9 +11,4 @@ PKG_LIBS=@XML2_LIBS@ @GMP_LIBS@ @GLPK_LIBS@ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -lstdc++ -L${GLPK_HOME}/lib \
   -lglpk -lgmp -lgfortran -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
-
-install/lib/libigraph.a:
-	cmake --build build --config Release
-	cmake --install build --config Release
-
-OBJECTS=rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
+OBJECTS=libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
