@@ -44,3 +44,5 @@ src/vendor/cigraph
 ^CITATION\.cff$
 ^cran$
 ^R/cran\.R$
+^src/build$
+^src/install$
