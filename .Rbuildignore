@@ -44,3 +44,4 @@
 ^R/cran\.R$
 ^src/build$
 ^src/install$
+^src/vendor/cigraph/\..*$
