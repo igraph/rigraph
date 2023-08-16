@@ -14,7 +14,7 @@ National Laboratories."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,6 @@ National Laboratories.</p>
 <span>  seed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  options <span class="op">=</span> <span class="va">drl_defaults</span><span class="op">$</span><span class="va">default</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fixed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dim <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -114,13 +113,6 @@ below.</p></dd>
 weights. Set this to <code>NA</code> if the graph was a ‘weight’ edge
 attribute, but you don't want to use it for the layout. Larger edge weights
 correspond to stronger connections.</p></dd>
-
-
-<dt>fixed</dt>
-<dd><p>Logical vector, it can be used to fix some vertices. Unfortunately
-this has never been implemented in the C core of the igraph library and thus
-it never worked. The argument is now deprecated and will be removed in
-igraph 1.4.0.</p></dd>
 
 
 <dt>dim</dt>

@@ -12,7 +12,7 @@ geodesics (shortest paths) going through a vertex or an edge."><!-- mathjax --><
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,6 @@ geodesics (shortest paths) going through a vertex or an edge.</p>
 <span>  v <span class="op">=</span> <span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  nobigint <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  normalized <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cutoff <span class="op">=</span> <span class="op">-</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span>
@@ -108,11 +107,6 @@ determining the shortest paths.</p></dd>
 betweenness. If the graph has a <code>weight</code> edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.</p></dd>
-
-
-<dt>nobigint</dt>
-<dd><p>Logical scalar, whether to use big integers during the
-calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.</p></dd>
 
 
 <dt>normalized</dt>
@@ -160,11 +154,10 @@ calculates edge betweenness.</p>
 which pass though vertex \(v\).</p>
 <p>Both functions allow you to consider only paths of length <code>cutoff</code> or
 smaller; this can be run for larger graphs, as the running time is not
-quadratic (if <code>cutoff</code> is small). If <code>cutoff</code> is zero or negative,
-then the function calculates the exact betweenness scores. Using zero as a
-cutoff is <em>deprecated</em> and future versions (from 1.4.0) will treat zero
-cutoff literally (i.e. no paths considered at all). If you want no cutoff,
-use a negative number.</p>
+quadratic (if <code>cutoff</code> is small). If <code>cutoff</code> is negative (the default),
+then the function calculates the exact betweenness scores. Since igraph 1.6.0,
+a <code>cutoff</code> value of zero is treated literally, i.e. paths of length larger
+than zero are ignored.</p>
 <p>For calculating the betweenness a similar algorithm to the one proposed by
 Brandes (see References) is used.</p>
     </div>

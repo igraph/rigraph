@@ -12,7 +12,7 @@ vertex from a given vertex."><!-- mathjax --><script src="https://cdnjs.cloudfla
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,11 +132,10 @@ sum of distances to all the other vertices in the graph:</p>
 <code>i</code> is omitted from the calculation. If no other vertices are reachable
 from <code>v</code>, then its closeness is returned as NaN.</p>
 <p><code>cutoff</code> or smaller. This can be run for larger graphs, as the running
-time is not quadratic (if <code>cutoff</code> is small). If <code>cutoff</code> is zero
-or negative (which is the default), then the function calculates the exact
-closeness scores. Using zero as a cutoff is <em>deprecated</em> and future
-versions (from 1.4.0) will treat zero cutoff literally (i.e. no paths
-considered at all). If you want no cutoff, use a negative number.</p>
+time is not quadratic (if <code>cutoff</code> is small). If <code>cutoff</code> is
+negative (which is the default), then the function calculates the exact
+closeness scores. Since igraph 1.6.0, a <code>cutoff</code> value of zero is treated
+literally, i.e. path with a length greater than zero are ignored.</p>
 <p>Closeness centrality is meaningful only for connected graphs. In disconnected
 graphs, consider using the harmonic centrality with
 <code><a href="harmonic_centrality.html">harmonic_centrality()</a></code></p>
