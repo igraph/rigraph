@@ -1,20 +1,23 @@
 ## revdepcheck results
 
-We checked 788 reverse dependencies (784 from CRAN + 4 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1044 reverse dependencies (798 from CRAN + 246 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 9 packages
+ * We saw 2 new problems
+ * We failed to check 1 packages
 
 Issues with CRAN packages are summarised below.
 
+### New problems
+(This reports the first line of each new failure)
+
+* BASiNETEntropy
+  checking whether package ‘BASiNETEntropy’ can be installed ... WARNING
+  checking R code for possible problems ... NOTE
+
+* bibliometrix
+  checking whether package ‘bibliometrix’ can be installed ... WARNING
+  checking R code for possible problems ... NOTE
+
 ### Failed to check
 
-* aPEAR     (NA)
-* DRviaSPCN (NA)
-* FinNet    (NA)
-* genekitr  (NA)
-* immcp     (NA)
-* MACP      (NA)
-* numbat    (NA)
-* tidySEM   (NA)
-* vivid     (NA)
+* vivid (NA)
