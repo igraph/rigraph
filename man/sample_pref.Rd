@@ -45,7 +45,8 @@ label. The \code{type.dist} argument gives the group sizes (i.e. number of
 vertices with the different labels) in this case.}
 
 \item{pref.matrix}{A square matrix giving the preferences of the vertex
-types. The matrix has \sQuote{types} rows and columns.}
+types. The matrix has \sQuote{types} rows and columns. When generating
+an undirected graph, it must be symmetric.}
 
 \item{directed}{Logical constant, whether to create a directed graph.}
 

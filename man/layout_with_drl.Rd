@@ -18,7 +18,6 @@ layout_with_drl(
   seed = matrix(runif(vcount(graph) * 2), ncol = 2),
   options = drl_defaults$default,
   weights = NULL,
-  fixed = NULL,
   dim = 2
 )
 
@@ -43,11 +42,6 @@ below.}
 weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 attribute, but you don't want to use it for the layout. Larger edge weights
 correspond to stronger connections.}
-
-\item{fixed}{Logical vector, it can be used to fix some vertices. Unfortunately
-this has never been implemented in the C core of the igraph library and thus
-it never worked. The argument is now deprecated and will be removed in
-igraph 1.4.0.}
 
 \item{dim}{Either \sQuote{2} or \sQuote{3}, it specifies whether we want a
 two dimensional or a three dimensional layout. Note that because of the
