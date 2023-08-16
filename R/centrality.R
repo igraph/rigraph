@@ -67,7 +67,7 @@ betweenness.estimate <- estimate_betweenness
 #' Both functions allow you to consider only paths of length `cutoff` or
 #' smaller; this can be run for larger graphs, as the running time is not
 #' quadratic (if `cutoff` is small). If `cutoff` is negative (the default),
-#' then the function calculates the exact betweenness scores. Since igraph 1.5,
+#' then the function calculates the exact betweenness scores. Since igraph 1.6.0,
 #' a `cutoff` value of zero is treated literally, i.e. paths of length larger
 #' than zero are ignored.
 #'
@@ -216,7 +216,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' `cutoff` or smaller. This can be run for larger graphs, as the running
 #' time is not quadratic (if `cutoff` is small). If `cutoff` is
 #' negative (which is the default), then the function calculates the exact
-#' closeness scores. Since igraph 1.5, a `cutoff` value of zero is treated
+#' closeness scores. Since igraph 1.6.0, a `cutoff` value of zero is treated
 #' literally, i.e. path with a length greater than zero are ignored.
 #'
 #' Closeness centrality is meaningful only for connected graphs. In disconnected

@@ -82,7 +82,7 @@ which pass though vertex \eqn{v}.
 Both functions allow you to consider only paths of length \code{cutoff} or
 smaller; this can be run for larger graphs, as the running time is not
 quadratic (if \code{cutoff} is small). If \code{cutoff} is negative (the default),
-then the function calculates the exact betweenness scores. Since igraph 1.5,
+then the function calculates the exact betweenness scores. Since igraph 1.6.0,
 a \code{cutoff} value of zero is treated literally, i.e. paths of length larger
 than zero are ignored.
 

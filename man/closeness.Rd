@@ -59,7 +59,7 @@ from \code{v}, then its closeness is returned as NaN.
 \code{cutoff} or smaller. This can be run for larger graphs, as the running
 time is not quadratic (if \code{cutoff} is small). If \code{cutoff} is
 negative (which is the default), then the function calculates the exact
-closeness scores. Since igraph 1.5, a \code{cutoff} value of zero is treated
+closeness scores. Since igraph 1.6.0, a \code{cutoff} value of zero is treated
 literally, i.e. path with a length greater than zero are ignored.
 
 Closeness centrality is meaningful only for connected graphs. In disconnected
