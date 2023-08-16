@@ -962,7 +962,8 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' @param type.dist.matrix The joint distribution of the in- and out-vertex
 #'   types.
 #' @param pref.matrix A square matrix giving the preferences of the vertex
-#'   types. The matrix has \sQuote{types} rows and columns.
+#'   types. The matrix has \sQuote{types} rows and columns. When generating
+#'   an undirected graph, it must be symmetric.
 #' @param directed Logical constant, whether to create a directed graph.
 #' @param loops Logical constant, whether self-loops are allowed in the graph.
 #' @return An igraph graph.
@@ -993,11 +994,6 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
                         directed = FALSE, loops = FALSE) {
   if (nrow(pref.matrix) != types || ncol(pref.matrix) != types) {
     stop("Invalid size for preference matrix")
-  }
-
-  if (!directed && !isSymmetric(pref.matrix)) {
-    warning("Undirected graphs require symmetric preference matrices, symmetrizing matrix. igraph 1.4.0 will reject non-symmetric matrices for undirected graphs.")
-    pref.matrix <- Matrix::forceSymmetric((pref.matrix + t(pref.matrix)) / 2)
   }
 
   on.exit(.Call(R_igraph_finalizer))

@@ -13,7 +13,6 @@ betweenness(
   v = V(graph),
   directed = TRUE,
   weights = NULL,
-  nobigint = TRUE,
   normalized = FALSE,
   cutoff = -1
 )
@@ -38,9 +37,6 @@ determining the shortest paths.}
 betweenness. If the graph has a \code{weight} edge attribute, then this is
 used by default. Weights are used to calculate weighted shortest paths,
 so they are interpreted as distances.}
-
-\item{nobigint}{Logical scalar, whether to use big integers during the
-calculation. Deprecated since igraph 1.3 and will be removed in igraph 1.4.}
 
 \item{normalized}{Logical scalar, whether to normalize the betweenness
 scores. If \code{TRUE}, then the results are normalized by the number of ordered
@@ -85,11 +81,10 @@ which pass though vertex \eqn{v}.
 
 Both functions allow you to consider only paths of length \code{cutoff} or
 smaller; this can be run for larger graphs, as the running time is not
-quadratic (if \code{cutoff} is small). If \code{cutoff} is zero or negative,
-then the function calculates the exact betweenness scores. Using zero as a
-cutoff is \emph{deprecated} and future versions (from 1.4.0) will treat zero
-cutoff literally (i.e. no paths considered at all). If you want no cutoff,
-use a negative number.
+quadratic (if \code{cutoff} is small). If \code{cutoff} is negative (the default),
+then the function calculates the exact betweenness scores. Since igraph 1.6.0,
+a \code{cutoff} value of zero is treated literally, i.e. paths of length larger
+than zero are ignored.
 
 For calculating the betweenness a similar algorithm to the one proposed by
 Brandes (see References) is used.
