@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9002
+
+## Chore
+
+  - Bump upcoming igraph/C 0.10 sources.
+
+  - Bump upcoming igraph/C 0.10 sources.
+
+  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+
+## Breaking changes
+
+  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+
+
 # igraph 1.5.1.9001
 
   - Internal changes only.
