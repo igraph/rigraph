@@ -1,17 +1,17 @@
 #! /bin/sh
 
-set -eux pipefail
+# set -eux pipefail
 
-cd src
+# cd src
 
-# Set version of igraph
-# FIXME: Ensure this is written when vendoring
-if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
-    echo "0.10.0" >> ./vendor/cigraph/IGRAPH_VERSION
-fi
+# # Set version of igraph
+# # FIXME: Ensure this is written when vendoring
+# if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
+#     echo "0.10.0" >> ./vendor/cigraph/IGRAPH_VERSION
+# fi
 
-# Build igraph with cmake
-cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
+# # Build igraph with cmake
+# cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
 
-cmake --build build --config Release
-cmake --install build --config Release
+# cmake --build build --config Release
+# cmake --install build --config Release

@@ -2,13 +2,13 @@ LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
 LIB_GMP ?= $(MINGW_PREFIX)
 
-PKG_CPPFLAGS=-DUSING_R -I. -Icore -Iinclude -Ivendor \
-	@XML2_CPPFLAGS@ -DNDEBUG -DNTIMER -DNPRINT \
+PKG_CPPFLAGS=-DUSING_R -I. -Icore -Iinclude/igraph -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/vendor -I/usr/include/libxml2 \
+	-DNDEBUG -DNTIMER -DNPRINT \
 	-DINTERNAL_ARPACK \
 	-DPRPACK_IGRAPH_SUPPORT -DIGRAPH_THREAD_LOCAL=/**/ \
-	-D_GNU_SOURCE=1
-PKG_LIBS=@XML2_LIBS@ @GMP_LIBS@ @GLPK_LIBS@ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+	-D_GNU_SOURCE=1 -DHAVE_GFORTRAN -DINTERNAL_ARPACK
+PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
-PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -lstdc++ -L${GLPK_HOME}/lib \
+PKG_LIBS = -L${LIB_XML}/lib -lxml2 -lz -llapack -lblas -lstdc++ -L${GLPK_HOME}/lib \
   -lglpk -lgmp -lgfortran -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
-OBJECTS=libigraph.a rinterface.o rinterface_extra.o rrandom.o lazyeval.o init.o cpp11.o cpprinterface.o
+OBJECTS={{ SOURCES }}
