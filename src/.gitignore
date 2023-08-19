@@ -2,3 +2,4 @@
 *.so
 /config.h
 /config.h.in~
+Makevars

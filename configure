@@ -1,17 +1,19 @@
-#! /bin/sh
+#!/bin/bash
 
-# set -eux pipefail
+# Use pkg-config to get the include directory for libxml-2.0
+xml2_include_dir=$(pkg-config --cflags libxml-2.0 | sed 's/^-I//')
 
-# cd src
+if [[ -n "$xml2_include_dir" ]]; then
+    PKG_CFLAGS="-I$xml2_include_dir"
+    echo "libxml2 include directory: $xml2_include_dir"
+else
+    echo "Error: libxml2 include directory not found"
+    exit 1
+fi
 
-# # Set version of igraph
-# # FIXME: Ensure this is written when vendoring
-# if ! [ -f ./vendor/cigraph/IGRAPH_VERSION ]; then
-#     echo "0.10.0" >> ./vendor/cigraph/IGRAPH_VERSION
-# fi
-
-# # Build igraph with cmake
-# cmake -S . -B build -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=install
-
-# cmake --build build --config Release
-# cmake --install build --config Release
+echo "# Generated from Makevars.in, do not edit by hand" > src/Makevars.new
+sed -e "s|@cflags@|$PKG_CFLAGS|" src/Makevars.in >> src/Makevars.new
+if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars src/Makevars.new); then
+  cp -f src/Makevars.new src/Makevars
+fi
+rm -f src/Makevars.new
