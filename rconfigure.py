@@ -8,7 +8,7 @@ def open_utf8(fpath, flags):
     else:
         return open(fpath, flags, encoding="utf8")
 
-with open_utf8(os.path.join('src', 'Makevars.in'), 'r') as f:
+with open_utf8(os.path.join('tools', 'Makevars.conf.in'), 'r') as f:
      text = f.read()
 
 ignore_folders = [
@@ -31,8 +31,7 @@ for root, dirnames, filenames in os.walk('src'):
                 continue
             sources.append(os.path.join(root[4:], filename[:filename.rfind('.')] + '.o'))
 
-print(sources)
 text = text.replace('{{ SOURCES }}', ' '.join(sources))
 
-with open_utf8(os.path.join('src', 'Makevars'), 'w') as f:
+with open_utf8(os.path.join('src', 'Makevars.in'), 'w') as f:
      f.write(text)
