@@ -31,7 +31,7 @@ for root, dirnames, filenames in os.walk('src'):
                 continue
             sources.append(os.path.join(root[4:], filename[:filename.rfind('.')] + '.o'))
 
-text = text.replace('{{ SOURCES }}', ' '.join(sources))
+text = "SOURCES = " + ' '.join(sources)
 
-with open_utf8(os.path.join('src', 'Makevars.in'), 'w') as f:
+with open_utf8(os.path.join('src', 'sources.mk'), 'w') as f:
      f.write(text)
