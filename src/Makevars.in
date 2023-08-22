@@ -10,6 +10,6 @@ PKG_CPPFLAGS=@cflags@ -DUSING_R -I. -Icore -Iinclude/igraph -Ivendor -Ivendor/ci
 	-D_GNU_SOURCE=1
 
 PKG_LIBS = -L${LIB_XML}/lib -lxml2 -lz -larpack -lstdc++ -L${GLPK_HOME}/lib \
-  -lglpk -lgmp -lgfortran -lquadmath -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
+  -lglpk -lgmp -L$(LIB_GMP)/lib $(BLAS_LIBS) $(LAPACK_LIBS)
 
 OBJECTS=${SOURCES}
