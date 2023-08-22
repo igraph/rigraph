@@ -1,15 +1,11 @@
 import os
 import sys
-import fnmatch
 
 def open_utf8(fpath, flags):
     if sys.version_info[0] < 3:
         return open(fpath, flags)
     else:
         return open(fpath, flags, encoding="utf8")
-
-with open_utf8(os.path.join('tools', 'Makevars.conf.in'), 'r') as f:
-     text = f.read()
 
 ignore_folders = [
     "src/vendor/cigraph/vendor/glpk",
@@ -31,7 +27,7 @@ for root, dirnames, filenames in os.walk('src'):
                 continue
             sources.append(os.path.join(root[4:], filename[:filename.rfind('.')] + '.o'))
 
-text = "SOURCES = " + ' '.join(sources)
+text = "OBJECTS=" + ' '.join(sources)
 
-with open_utf8(os.path.join('src', 'sources.mk'), 'w') as f:
+with open_utf8(os.path.join('src', 'objects.mk'), 'w') as f:
      f.write(text)
