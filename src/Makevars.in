@@ -1,4 +1,4 @@
-include objects.mk
+include sources.mk
 
 LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
