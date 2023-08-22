@@ -9,7 +9,7 @@
 /* #undef HAVE__STRNICMP */
 #define HAVE_STRDUP 1
 #define HAVE_STRNDUP 1
-#define HAVE_USELOCALE 1
+// #define HAVE_USELOCALE 1
 /* #undef HAVE_XLOCALE */
 /* #undef HAVE__CONFIGTHREADLOCALE */
 
