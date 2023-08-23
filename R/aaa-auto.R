@@ -63,7 +63,9 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_get_all_eids_between, graph, from-1, to-1, directed)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 
@@ -599,6 +601,9 @@ get_shortest_path_impl <- function(graph, from, to, mode=c("out", "in", "all", "
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
   }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_es(graph, res$edges)
+  }
   res
 }
 
@@ -629,6 +634,9 @@ get_shortest_path_bellman_ford_impl <- function(graph, from, to, weights=NULL, m
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
   }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_es(graph, res$edges)
+  }
   res
 }
 
@@ -658,6 +666,9 @@ get_shortest_path_dijkstra_impl <- function(graph, from, to, weights=NULL, mode=
   res <- .Call(R_igraph_get_shortest_path_dijkstra, graph, from-1, to-1, weights, mode)
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
+  }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_es(graph, res$edges)
   }
   res
 }
@@ -860,6 +871,9 @@ get_widest_path_impl <- function(graph, from, to, weights=NULL, mode=c("out", "i
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
   }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_es(graph, res$edges)
+  }
   res
 }
 
@@ -959,7 +973,9 @@ spanner_impl <- function(graph, stretch, weights) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_spanner, graph, stretch, weights)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(, res)
+  }
   res
 }
 
@@ -1216,7 +1232,9 @@ feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "e
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_feedback_arc_set, graph, weights, algo)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 
@@ -1820,6 +1838,9 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
   if (igraph_opt("return.vs.es")) {
     res$vertices <- create_vs(graph, res$vertices)
   }
+  if (igraph_opt("return.vs.es")) {
+    res$edges <- create_es(graph, res$edges)
+  }
   res
 }
 
@@ -1845,7 +1866,9 @@ random_edge_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_random_edge_walk, graph, weights, start-1, mode, steps, stuck)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 
@@ -2142,7 +2165,9 @@ bridges_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_bridges, graph)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 
@@ -2794,6 +2819,9 @@ maxflow_impl <- function(graph, source, target, capacity=NULL) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_maxflow, graph, source-1, target-1, capacity)
+  if (igraph_opt("return.vs.es")) {
+    res$cut <- create_es(graph, res$cut)
+  }
   if (igraph_opt("return.vs.es")) {
     res$partition1 <- create_vs(graph, res$partition1)
   }
@@ -3633,6 +3661,9 @@ eulerian_path_impl <- function(graph) {
   # Function call
   res <- .Call(R_igraph_eulerian_path, graph)
   if (igraph_opt("return.vs.es")) {
+    res$epath <- create_es(graph, res$epath)
+  }
+  if (igraph_opt("return.vs.es")) {
     res$vpath <- create_vs(graph, res$vpath)
   }
   res
@@ -3645,6 +3676,9 @@ eulerian_cycle_impl <- function(graph) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_eulerian_cycle, graph)
+  if (igraph_opt("return.vs.es")) {
+    res$epath <- create_es(graph, res$epath)
+  }
   if (igraph_opt("return.vs.es")) {
     res$vpath <- create_vs(graph, res$vpath)
   }
@@ -3715,14 +3749,16 @@ is_tree_impl <- function(graph, mode=c("out", "in", "all", "total"), details=FAL
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_tree, graph, mode)
+  if (igraph_opt("return.vs.es")) {
+    res$root <- create_vs(graph, res$root)
+  }
   if (!details) {
     res <- res$res
-  } else if (vcount(graph) == 0) {
+} else if (vcount(graph) == 0) {
     # FIXME: Better handled in rinterface_extra.c, or via a dedicated type?
   } else if (igraph_opt("return.vs.es")) {
     res$root <- create_vs(graph, res$root)
   }
-
   res
 }
 
@@ -3792,7 +3828,9 @@ random_spanning_tree_impl <- function(graph, vid=0) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_random_spanning_tree, graph, vid-1)
-
+  if (igraph_opt("return.vs.es")) {
+    res <- create_es(graph, res)
+  }
   res
 }
 
@@ -3954,11 +3992,12 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   if (length(start) == 0) {
     stop("No vertex was specified")
   }
+  edge.path <- as_igraph_es(graph, edge.path)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path, mode)
+  res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path-1, mode)
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(, res)
   }

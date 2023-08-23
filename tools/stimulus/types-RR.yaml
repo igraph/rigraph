@@ -152,6 +152,17 @@ VERTEX_INDICES:
               %I% <- create_vs(%I1%, %I%)
             }
 
+EDGE_INDICES:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: E(%I1%)
+    INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
 EDGE_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
