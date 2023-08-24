@@ -1,6 +1,6 @@
-#line 2 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 2 "src/include/io/parsers/pajek-lexer.c"
 
-#line 4 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 4 "src/include/io/parsers/pajek-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -15,237 +15,237 @@
 #endif
 
 #ifdef yy_create_buffer
-#define igraph_dl_yy_create_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_create_buffer_ALREADY_DEFINED
 #else
-#define yy_create_buffer igraph_dl_yy_create_buffer
+#define yy_create_buffer igraph_pajek_yy_create_buffer
 #endif
 
 #ifdef yy_delete_buffer
-#define igraph_dl_yy_delete_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_delete_buffer_ALREADY_DEFINED
 #else
-#define yy_delete_buffer igraph_dl_yy_delete_buffer
+#define yy_delete_buffer igraph_pajek_yy_delete_buffer
 #endif
 
 #ifdef yy_scan_buffer
-#define igraph_dl_yy_scan_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_scan_buffer_ALREADY_DEFINED
 #else
-#define yy_scan_buffer igraph_dl_yy_scan_buffer
+#define yy_scan_buffer igraph_pajek_yy_scan_buffer
 #endif
 
 #ifdef yy_scan_string
-#define igraph_dl_yy_scan_string_ALREADY_DEFINED
+#define igraph_pajek_yy_scan_string_ALREADY_DEFINED
 #else
-#define yy_scan_string igraph_dl_yy_scan_string
+#define yy_scan_string igraph_pajek_yy_scan_string
 #endif
 
 #ifdef yy_scan_bytes
-#define igraph_dl_yy_scan_bytes_ALREADY_DEFINED
+#define igraph_pajek_yy_scan_bytes_ALREADY_DEFINED
 #else
-#define yy_scan_bytes igraph_dl_yy_scan_bytes
+#define yy_scan_bytes igraph_pajek_yy_scan_bytes
 #endif
 
 #ifdef yy_init_buffer
-#define igraph_dl_yy_init_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_init_buffer_ALREADY_DEFINED
 #else
-#define yy_init_buffer igraph_dl_yy_init_buffer
+#define yy_init_buffer igraph_pajek_yy_init_buffer
 #endif
 
 #ifdef yy_flush_buffer
-#define igraph_dl_yy_flush_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_flush_buffer_ALREADY_DEFINED
 #else
-#define yy_flush_buffer igraph_dl_yy_flush_buffer
+#define yy_flush_buffer igraph_pajek_yy_flush_buffer
 #endif
 
 #ifdef yy_load_buffer_state
-#define igraph_dl_yy_load_buffer_state_ALREADY_DEFINED
+#define igraph_pajek_yy_load_buffer_state_ALREADY_DEFINED
 #else
-#define yy_load_buffer_state igraph_dl_yy_load_buffer_state
+#define yy_load_buffer_state igraph_pajek_yy_load_buffer_state
 #endif
 
 #ifdef yy_switch_to_buffer
-#define igraph_dl_yy_switch_to_buffer_ALREADY_DEFINED
+#define igraph_pajek_yy_switch_to_buffer_ALREADY_DEFINED
 #else
-#define yy_switch_to_buffer igraph_dl_yy_switch_to_buffer
+#define yy_switch_to_buffer igraph_pajek_yy_switch_to_buffer
 #endif
 
 #ifdef yypush_buffer_state
-#define igraph_dl_yypush_buffer_state_ALREADY_DEFINED
+#define igraph_pajek_yypush_buffer_state_ALREADY_DEFINED
 #else
-#define yypush_buffer_state igraph_dl_yypush_buffer_state
+#define yypush_buffer_state igraph_pajek_yypush_buffer_state
 #endif
 
 #ifdef yypop_buffer_state
-#define igraph_dl_yypop_buffer_state_ALREADY_DEFINED
+#define igraph_pajek_yypop_buffer_state_ALREADY_DEFINED
 #else
-#define yypop_buffer_state igraph_dl_yypop_buffer_state
+#define yypop_buffer_state igraph_pajek_yypop_buffer_state
 #endif
 
 #ifdef yyensure_buffer_stack
-#define igraph_dl_yyensure_buffer_stack_ALREADY_DEFINED
+#define igraph_pajek_yyensure_buffer_stack_ALREADY_DEFINED
 #else
-#define yyensure_buffer_stack igraph_dl_yyensure_buffer_stack
+#define yyensure_buffer_stack igraph_pajek_yyensure_buffer_stack
 #endif
 
 #ifdef yylex
-#define igraph_dl_yylex_ALREADY_DEFINED
+#define igraph_pajek_yylex_ALREADY_DEFINED
 #else
-#define yylex igraph_dl_yylex
+#define yylex igraph_pajek_yylex
 #endif
 
 #ifdef yyrestart
-#define igraph_dl_yyrestart_ALREADY_DEFINED
+#define igraph_pajek_yyrestart_ALREADY_DEFINED
 #else
-#define yyrestart igraph_dl_yyrestart
+#define yyrestart igraph_pajek_yyrestart
 #endif
 
 #ifdef yylex_init
-#define igraph_dl_yylex_init_ALREADY_DEFINED
+#define igraph_pajek_yylex_init_ALREADY_DEFINED
 #else
-#define yylex_init igraph_dl_yylex_init
+#define yylex_init igraph_pajek_yylex_init
 #endif
 
 #ifdef yylex_init_extra
-#define igraph_dl_yylex_init_extra_ALREADY_DEFINED
+#define igraph_pajek_yylex_init_extra_ALREADY_DEFINED
 #else
-#define yylex_init_extra igraph_dl_yylex_init_extra
+#define yylex_init_extra igraph_pajek_yylex_init_extra
 #endif
 
 #ifdef yylex_destroy
-#define igraph_dl_yylex_destroy_ALREADY_DEFINED
+#define igraph_pajek_yylex_destroy_ALREADY_DEFINED
 #else
-#define yylex_destroy igraph_dl_yylex_destroy
+#define yylex_destroy igraph_pajek_yylex_destroy
 #endif
 
 #ifdef yyget_debug
-#define igraph_dl_yyget_debug_ALREADY_DEFINED
+#define igraph_pajek_yyget_debug_ALREADY_DEFINED
 #else
-#define yyget_debug igraph_dl_yyget_debug
+#define yyget_debug igraph_pajek_yyget_debug
 #endif
 
 #ifdef yyset_debug
-#define igraph_dl_yyset_debug_ALREADY_DEFINED
+#define igraph_pajek_yyset_debug_ALREADY_DEFINED
 #else
-#define yyset_debug igraph_dl_yyset_debug
+#define yyset_debug igraph_pajek_yyset_debug
 #endif
 
 #ifdef yyget_extra
-#define igraph_dl_yyget_extra_ALREADY_DEFINED
+#define igraph_pajek_yyget_extra_ALREADY_DEFINED
 #else
-#define yyget_extra igraph_dl_yyget_extra
+#define yyget_extra igraph_pajek_yyget_extra
 #endif
 
 #ifdef yyset_extra
-#define igraph_dl_yyset_extra_ALREADY_DEFINED
+#define igraph_pajek_yyset_extra_ALREADY_DEFINED
 #else
-#define yyset_extra igraph_dl_yyset_extra
+#define yyset_extra igraph_pajek_yyset_extra
 #endif
 
 #ifdef yyget_in
-#define igraph_dl_yyget_in_ALREADY_DEFINED
+#define igraph_pajek_yyget_in_ALREADY_DEFINED
 #else
-#define yyget_in igraph_dl_yyget_in
+#define yyget_in igraph_pajek_yyget_in
 #endif
 
 #ifdef yyset_in
-#define igraph_dl_yyset_in_ALREADY_DEFINED
+#define igraph_pajek_yyset_in_ALREADY_DEFINED
 #else
-#define yyset_in igraph_dl_yyset_in
+#define yyset_in igraph_pajek_yyset_in
 #endif
 
 #ifdef yyget_out
-#define igraph_dl_yyget_out_ALREADY_DEFINED
+#define igraph_pajek_yyget_out_ALREADY_DEFINED
 #else
-#define yyget_out igraph_dl_yyget_out
+#define yyget_out igraph_pajek_yyget_out
 #endif
 
 #ifdef yyset_out
-#define igraph_dl_yyset_out_ALREADY_DEFINED
+#define igraph_pajek_yyset_out_ALREADY_DEFINED
 #else
-#define yyset_out igraph_dl_yyset_out
+#define yyset_out igraph_pajek_yyset_out
 #endif
 
 #ifdef yyget_leng
-#define igraph_dl_yyget_leng_ALREADY_DEFINED
+#define igraph_pajek_yyget_leng_ALREADY_DEFINED
 #else
-#define yyget_leng igraph_dl_yyget_leng
+#define yyget_leng igraph_pajek_yyget_leng
 #endif
 
 #ifdef yyget_text
-#define igraph_dl_yyget_text_ALREADY_DEFINED
+#define igraph_pajek_yyget_text_ALREADY_DEFINED
 #else
-#define yyget_text igraph_dl_yyget_text
+#define yyget_text igraph_pajek_yyget_text
 #endif
 
 #ifdef yyget_lineno
-#define igraph_dl_yyget_lineno_ALREADY_DEFINED
+#define igraph_pajek_yyget_lineno_ALREADY_DEFINED
 #else
-#define yyget_lineno igraph_dl_yyget_lineno
+#define yyget_lineno igraph_pajek_yyget_lineno
 #endif
 
 #ifdef yyset_lineno
-#define igraph_dl_yyset_lineno_ALREADY_DEFINED
+#define igraph_pajek_yyset_lineno_ALREADY_DEFINED
 #else
-#define yyset_lineno igraph_dl_yyset_lineno
+#define yyset_lineno igraph_pajek_yyset_lineno
 #endif
 
 #ifdef yyget_column
-#define igraph_dl_yyget_column_ALREADY_DEFINED
+#define igraph_pajek_yyget_column_ALREADY_DEFINED
 #else
-#define yyget_column igraph_dl_yyget_column
+#define yyget_column igraph_pajek_yyget_column
 #endif
 
 #ifdef yyset_column
-#define igraph_dl_yyset_column_ALREADY_DEFINED
+#define igraph_pajek_yyset_column_ALREADY_DEFINED
 #else
-#define yyset_column igraph_dl_yyset_column
+#define yyset_column igraph_pajek_yyset_column
 #endif
 
 #ifdef yywrap
-#define igraph_dl_yywrap_ALREADY_DEFINED
+#define igraph_pajek_yywrap_ALREADY_DEFINED
 #else
-#define yywrap igraph_dl_yywrap
+#define yywrap igraph_pajek_yywrap
 #endif
 
 #ifdef yyget_lval
-#define igraph_dl_yyget_lval_ALREADY_DEFINED
+#define igraph_pajek_yyget_lval_ALREADY_DEFINED
 #else
-#define yyget_lval igraph_dl_yyget_lval
+#define yyget_lval igraph_pajek_yyget_lval
 #endif
 
 #ifdef yyset_lval
-#define igraph_dl_yyset_lval_ALREADY_DEFINED
+#define igraph_pajek_yyset_lval_ALREADY_DEFINED
 #else
-#define yyset_lval igraph_dl_yyset_lval
+#define yyset_lval igraph_pajek_yyset_lval
 #endif
 
 #ifdef yyget_lloc
-#define igraph_dl_yyget_lloc_ALREADY_DEFINED
+#define igraph_pajek_yyget_lloc_ALREADY_DEFINED
 #else
-#define yyget_lloc igraph_dl_yyget_lloc
+#define yyget_lloc igraph_pajek_yyget_lloc
 #endif
 
 #ifdef yyset_lloc
-#define igraph_dl_yyset_lloc_ALREADY_DEFINED
+#define igraph_pajek_yyset_lloc_ALREADY_DEFINED
 #else
-#define yyset_lloc igraph_dl_yyset_lloc
+#define yyset_lloc igraph_pajek_yyset_lloc
 #endif
 
 #ifdef yyalloc
-#define igraph_dl_yyalloc_ALREADY_DEFINED
+#define igraph_pajek_yyalloc_ALREADY_DEFINED
 #else
-#define yyalloc igraph_dl_yyalloc
+#define yyalloc igraph_pajek_yyalloc
 #endif
 
 #ifdef yyrealloc
-#define igraph_dl_yyrealloc_ALREADY_DEFINED
+#define igraph_pajek_yyrealloc_ALREADY_DEFINED
 #else
-#define yyrealloc igraph_dl_yyrealloc
+#define yyrealloc igraph_pajek_yyrealloc
 #endif
 
 #ifdef yyfree
-#define igraph_dl_yyfree_ALREADY_DEFINED
+#define igraph_pajek_yyfree_ALREADY_DEFINED
 #else
-#define yyfree igraph_dl_yyfree
+#define yyfree igraph_pajek_yyfree
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -568,7 +568,9 @@ void yyfree ( void * , yyscan_t yyscanner );
 	}
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
-#define igraph_dl_yywrap(yyscanner) (/*CONSTCOND*/1)
+/* Begin user sect3 */
+
+#define igraph_pajek_yywrap(yyscanner) (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
@@ -590,8 +592,8 @@ static void __attribute__((unused)) yy_fatal_error ( const char* msg , yyscan_t 
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-#define YY_NUM_RULES 24
-#define YY_END_OF_BUFFER 25
+#define YY_NUM_RULES 48
+#define YY_END_OF_BUFFER 49
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -599,40 +601,44 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[129] =
+static const flex_int16_t yy_accept[162] =
     {   0,
-        0,    0,    0,    0,    0,    0,   18,   18,   21,   21,
-       25,   23,   22,    1,    1,    4,   23,   23,   23,   23,
-       12,   11,   12,   12,   14,   15,   13,   17,   18,   17,
-       16,   20,   21,   19,   22,    1,    4,    0,    0,    0,
-        0,    0,    3,   12,   12,   12,   12,   14,   13,   17,
-       18,   16,   17,   17,   20,   21,   19,    0,    2,    0,
-        0,    3,   12,   12,   16,   17,   16,    0,    0,    0,
-       12,   12,    5,    0,    0,    5,   12,    0,    0,   12,
-        0,    0,    0,    6,   12,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,   49,   46,    1,   12,   12,   46,
+        2,   46,   46,   46,   15,   46,   46,   46,   46,   46,
+       46,   46,   46,   46,   46,   46,   46,   46,   46,   46,
+       46,   47,    1,   46,    1,   12,   46,    0,   13,    2,
+        2,    2,   46,    0,   14,   46,   46,   46,   46,   46,
+       15,   46,   46,   29,   46,   46,   46,   46,   46,   26,
+       46,   46,   46,   46,   46,   46,   38,   46,   46,   46,
+       46,   27,   46,   23,   22,   28,   46,   46,   30,   46,
+       46,    5,    1,   13,   14,   46,   46,   46,   46,   46,
+       15,   46,   15,   33,   34,   37,   19,   20,   46,   46,
 
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    7,    9,    0,
-       10,    7,    7,    9,    8,   10,    8,    0
+       31,   32,   18,   35,   36,   43,   41,   39,   46,   42,
+       46,   46,   46,   46,   46,   46,   46,   46,    3,   46,
+       46,   45,   46,   21,   46,   25,   46,   46,    7,   46,
+       46,   46,   46,   24,   40,   44,   46,   46,   46,    8,
+       46,   46,   46,   46,   46,   46,   46,   11,   46,   46,
+       16,   17,   46,   46,    4,   46,    9,   46,    6,   10,
+        0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
-        2,    2,    4,    1,    1,    1,    1,    1,    1,    1,
+        4,    4,    5,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    5,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    6,    7,    8,    9,    1,   10,   11,   10,
-       10,   10,   10,   10,   10,   10,   10,   12,    1,    1,
-       13,    1,    1,    1,   14,   15,    1,   16,   17,   18,
-       19,    1,   20,    1,    1,   21,   22,   23,   24,    1,
-        1,   25,   26,   27,   28,    1,    1,   29,    1,    1,
-        1,    1,    1,    1,    1,    1,   30,   31,    1,   32,
+        1,    2,    1,    6,    1,    1,    7,    1,    1,    8,
+        9,   10,   11,    1,   12,   13,    1,   14,   15,   16,
+       14,   14,   14,   14,   14,   14,   14,    1,    1,    1,
+        1,    1,    1,    1,   17,   18,   19,   20,   21,   22,
+       23,   24,   25,    1,   26,   27,   28,   29,   30,   31,
+       32,   33,   34,   35,   36,   37,   38,   39,   40,   41,
+        1,    1,    1,    1,   42,    1,   43,   44,   45,   46,
 
-       33,   34,   35,    1,   36,    1,    1,   37,   38,   39,
-       40,    1,    1,   41,   42,   43,   44,    1,    1,   45,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       47,   48,   49,   50,   51,    1,   52,   53,   54,   55,
+       56,   57,   58,   59,   60,   61,   62,   63,   64,   65,
+       66,   67,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -649,184 +655,189 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[47] =
+static const YY_CHAR yy_meta[69] =
     {   0,
-        1,    2,    3,    3,    2,    1,    3,    1,    1,    1,
+        1,    2,    3,    2,    3,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    3
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    4
     } ;
 
-static const flex_int16_t yy_base[138] =
+static const flex_int16_t yy_base[171] =
     {   0,
-        0,   38,   76,  121,  166,  211,  256,  301,  346,  391,
-      101,  493,    4,   72,   64,    2,    1,    4,    0,   22,
-       15,  493,   55,   60,    0,  493,   24,    0,   31,   35,
-       77,    0,   45,   41,   53,  493,   53,   39,   66,   48,
-       69,   91,   93,   97,  101,  107,  112,    0,  113,    0,
-      114,  121,  110,  138,    0,  131,  129,   77,  150,  107,
-      118,  154,  158,  173,  169,  151,  154,   41,  127,  145,
-      179,  187,  493,  156,  159,  191,  193,  192,  198,  202,
-      215,  436,  221,  493,  232,    0,  193,  183,  205,  208,
-      212,  211,  220,  224,  223,  232,  251,  253,  250,  250,
+        0,    0,   67,   71,  145,    0,   75,   75,   78,   82,
+       87,   91,   80,   88,   97,  117,   86,  123,   84,   83,
+       96,   91,  173,  134,  144,  149,  154,   83,  158,   96,
+       88,  443,  151,    0,  160,  162,  166,  123,    0,  178,
+      182,  183,  191,  112,    0,  140,  157,  172,  170,  176,
+      198,  193,  210,  443,  226,  231,  235,  239,  244,  443,
+      214,  248,  252,  256,  260,  265,  443,  270,  274,  278,
+      282,  443,  176,  443,  443,  443,  211,  229,  443,  238,
+      242,    0,  287,  443,  443,  247,  248,  253,  258,  261,
+      284,  292,  295,  443,  443,  443,  443,  443,  260,  310,
 
-      252,  258,  255,  262,  257,  262,  253,  253,  255,  265,
-      256,  260,  273,  294,   14,  293,    8,  239,  312,  286,
-      316,  317,  318,  322,  323,  328,  330,  493,  475,  478,
-      481,  484,  487,  490,    7,    6,    0
+      443,  443,  443,  443,  443,  443,  443,  443,  271,  443,
+      321,  280,  327,  299,  300,  284,  304,  300,  296,  300,
+      334,  443,  343,  443,  347,  443,  319,  321,  314,  313,
+      328,  324,  330,  443,  443,  443,  321,  322,  333,  335,
+      324,  332,  349,  367,  372,  337,  351,    0,  352,  364,
+      443,  443,  351,  353,    0,  356,    0,  357,    0,    0,
+      443,  418,   81,  422,  425,  428,  431,  433,  436,  439
     } ;
 
-static const flex_int16_t yy_def[138] =
+static const flex_int16_t yy_def[171] =
     {   0,
-      129,  129,  130,  130,  131,  131,  132,  132,  133,  133,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      134,  128,  134,  134,  135,  128,  135,  136,  128,  136,
-      136,  137,  128,  137,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  134,  128,  134,  134,  135,  128,  136,
-      128,  136,  136,  136,  137,  128,  137,  128,  128,  128,
-      128,  128,  134,  134,  136,  136,  136,  128,  128,  128,
-      134,  134,  128,  128,  128,  134,  134,  128,  128,  134,
-      128,  128,  128,  128,  128,   82,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
+      161,    1,  162,  162,  161,  163,  161,  161,  161,  164,
+      165,  166,  163,  163,  163,  163,  163,  163,  163,  163,
+      163,  163,  163,  163,  163,  163,  163,  163,  163,  163,
+      163,  161,  167,  163,  161,  161,  164,  168,  163,  165,
+      169,  161,  166,  170,  163,  163,  163,  163,  163,  163,
+      163,  163,  163,  161,  163,  163,  163,  163,  163,  161,
+      163,  163,  163,  163,  163,  163,  161,  163,  163,  163,
+      163,  161,  163,  161,  161,  161,  163,  163,  161,  163,
+      163,  167,  167,  161,  161,  163,  163,  163,  163,  163,
+      163,  163,  163,  161,  161,  161,  161,  161,  163,  163,
 
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,    0,  128,  128,
-      128,  128,  128,  128,  128,  128,  128
+      161,  161,  161,  161,  161,  161,  161,  161,  163,  161,
+      163,  163,  163,  163,  163,  163,  163,  163,  163,  163,
+      163,  161,  163,  161,  163,  161,  163,  163,  163,  163,
+      163,  163,  163,  161,  161,  161,  163,  163,  163,  163,
+      163,  163,  163,  163,  163,  163,  163,  163,  163,  163,
+      161,  161,  163,  163,  163,  163,  163,  163,  163,  163,
+        0,  161,  161,  161,  161,  161,  161,  161,  161,  161
     } ;
 
-static const flex_int16_t yy_nxt[540] =
+static const flex_int16_t yy_nxt[512] =
     {   0,
-       55,   13,   14,   15,   13,   35,   50,   48,   35,   16,
-       16,   37,   37,   41,   38,   17,   45,   18,  121,   45,
-       19,   39,   20,   42,  119,   49,   42,   40,   49,   41,
-       38,   17,   51,   18,   43,   51,   19,   39,   20,   13,
-       14,   15,   13,   40,   52,   52,   56,   16,   16,   56,
-       57,   57,   73,   17,   35,   18,   45,   35,   19,   45,
-       20,   45,   37,   37,   45,   58,   36,   59,   46,   17,
-       59,   18,   60,   47,   19,   36,   20,   12,   14,   15,
-       22,   58,   22,   61,   46,   53,   52,   52,   60,   47,
-       68,   23,   42,   54,   62,   42,   24,   62,   45,   61,
+        6,    7,    8,    7,    9,   10,   11,   12,    6,   13,
+       14,   14,    6,   15,   15,   15,   16,   17,   18,    6,
+        6,   19,    6,   20,   21,   22,   23,    6,    6,    6,
+       24,   25,   26,   27,    6,   28,    6,   29,   30,   31,
+        6,    6,   16,   17,   18,    6,    6,   19,    6,   20,
+       21,   22,   23,    6,    6,    6,   24,   25,   26,   27,
+        6,   28,    6,   29,   30,   31,    6,   32,   33,    8,
+       33,    9,   33,    8,   33,    9,   35,   36,   35,   36,
+       36,   34,   36,   38,   38,   38,   38,   39,   41,   42,
+       41,   42,   44,   44,   44,   44,   46,   62,   63,   45,
 
-      128,   45,   45,   43,  128,   45,   68,   23,   45,   54,
-      128,   45,   24,   45,   49,   51,   45,   49,   51,   65,
-       65,   12,   12,   14,   15,   22,   64,   22,   69,   53,
-       52,   52,   56,   63,   70,   56,   23,   54,   57,   57,
-       74,   24,   64,   66,   69,   66,  128,   67,   67,   63,
-       70,   59,   23,   54,   59,   62,   74,   24,   62,   45,
-       67,   67,   45,   67,   67,   75,   12,   26,   14,   15,
-       26,   71,   12,  128,   45,   27,   27,   45,   65,   65,
-       45,   75,   78,   45,   79,   54,  128,   71,   45,   72,
-       76,   45,   45,   81,   45,   45,   81,   45,   78,   83,
+       47,   51,   51,   51,   58,   65,   66,   48,   49,   52,
+       51,   51,   51,   61,   64,   78,   50,   53,   54,   54,
+       85,   54,   46,   59,   60,   60,   47,   60,   84,   81,
+       58,   55,   56,   48,   49,   72,   72,   80,   72,   61,
+       64,   78,   50,   53,  161,   74,   74,   57,   74,   59,
+       75,   75,   83,   75,   83,   76,   76,   73,   76,   79,
+       79,   35,   79,   35,   36,  161,   36,   38,   38,   38,
+       38,   39,   86,   57,   67,   67,   87,   67,   77,   41,
+       42,   41,   42,   73,   42,   42,   42,   42,   88,   68,
+       89,   69,   44,   44,   44,   44,   90,  161,   86,   45,
 
-       79,   54,   83,   85,   82,   72,   85,   77,   91,   84,
-       92,   12,   26,   14,   15,   26,   81,   12,   80,   81,
-       27,   27,   83,   77,   91,   83,   92,   82,   93,   94,
-       95,   96,  128,   85,   80,   97,   85,   90,   98,   99,
-      122,  128,  128,  122,   93,   94,   95,   96,   90,  128,
-      123,   97,  100,   90,   98,   99,   12,   29,   14,   15,
-       29,   30,   12,   30,   90,   31,   31,  101,  100,  102,
-      103,  104,  105,  106,  107,  108,  109,  110,  111,  112,
-      113,  114,  115,  101,  116,  102,  103,  104,  105,  106,
-      107,  108,  109,  110,  111,  112,  113,  114,  115,  117,
+      111,  161,   87,   70,   77,   71,   91,   91,   91,  161,
+       52,   51,   51,   51,   88,   68,   89,   69,   53,  161,
+       92,   92,   90,   93,   93,   93,  111,   94,   94,   70,
+       94,   71,   95,   95,  161,   95,   96,   96,  161,   96,
+       97,   97,   99,   97,   53,   98,   98,  100,   98,  101,
+      101,  112,  101,  102,  102,  113,  102,  103,  103,  114,
+      103,  104,  104,  115,  104,  116,  105,  105,   99,  105,
+      117,  106,  106,  100,  106,  107,  107,  112,  107,  108,
+      108,  113,  108,  110,  110,  114,  110,  118,   83,  115,
+       83,  116,  119,  120,  121,  123,  117,   91,   91,   91,
 
-      116,   12,   29,   14,   15,   29,   30,   12,   30,  118,
-       31,   31,  120,  124,  125,  117,  124,  126,  122,  122,
-      126,  122,  122,  124,  127,  118,  124,  127,  120,  126,
-      125,  127,  126,  128,  127,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,   12,   33,   14,   15,
-       33,  128,   12,  128,  128,   34,   34,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,   12,   33,   14,   15,   33,  128,   12,  128,  128,
+      125,  109,  161,  161,   53,   93,   93,   93,   93,   93,
+       93,  122,  122,  118,  122,  127,  128,  129,  119,  120,
+      121,  123,  124,  124,  130,  124,  125,  109,  126,  126,
+       53,  126,  131,  132,  133,  134,  134,  137,  134,  138,
+      139,  127,  128,  129,  135,  135,  140,  135,  136,  136,
+      130,  136,  141,  142,  143,  144,  145,  146,  131,  132,
+      133,  147,  148,  137,  149,  138,  139,  150,  151,  151,
+      153,  151,  140,  152,  152,  154,  152,  155,  141,  142,
+      143,  144,  145,  146,  156,  157,  158,  147,  148,  159,
+      149,  160,  161,  150,  161,  161,  153,  161,  161,  161,
 
-       34,   34,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,   12,   86,  128,  128,
-       86,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,   87,   88,  128,  128,  128,  128,   89,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,   87,   88,
-      128,  128,  128,  128,   89,   12,   12,   12,   21,   21,
-       21,   25,   25,   25,   28,   28,   28,   32,   32,   32,
-       44,   44,   11,  128,  128,  128,  128,  128,  128,  128,
+      161,  154,  161,  155,  161,  161,  161,  161,  161,  161,
+      156,  157,  158,  161,  161,  159,  161,  160,   32,   32,
+       32,   32,   37,   37,   37,   40,   40,   40,   43,   43,
+       43,   82,   82,   38,   38,   38,   41,   41,   41,   44,
+       44,   44,    5,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
 
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161
     } ;
 
-static const flex_int16_t yy_chk[540] =
+static const flex_int16_t yy_chk[512] =
     {   0,
-      137,    1,    1,    1,    1,   13,  136,  135,   13,    1,
-        1,   16,   16,   19,   17,    1,   21,    1,  117,   21,
-        1,   17,    1,   20,  115,   27,   20,   18,   27,   19,
-       17,    1,   29,    1,   20,   29,    1,   17,    1,    2,
-        2,    2,    2,   18,   30,   30,   33,    2,    2,   33,
-       34,   34,   68,    2,   35,    2,   23,   35,    2,   23,
-        2,   24,   37,   37,   24,   38,   15,   39,   23,    2,
-       39,    2,   40,   24,    2,   14,    2,    3,    3,    3,
-        3,   38,    3,   41,   23,   31,   31,   31,   40,   24,
-       58,    3,   42,   31,   43,   42,    3,   43,   44,   41,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    3,    3,
+        3,    3,    4,    4,    4,    4,    7,    8,    7,    8,
+        9,  163,    9,   10,   10,   10,   10,   10,   11,   11,
+       11,   11,   12,   12,   12,   12,   13,   20,   20,   12,
 
-       11,   44,   45,   42,    0,   45,   58,    3,   46,   31,
-        0,   46,    3,   47,   49,   51,   47,   49,   51,   53,
-       53,    3,    4,    4,    4,    4,   47,    4,   60,   52,
-       52,   52,   56,   46,   61,   56,    4,   52,   57,   57,
-       69,    4,   47,   54,   60,   54,    0,   54,   54,   46,
-       61,   59,    4,   52,   59,   62,   69,    4,   62,   63,
-       66,   66,   63,   67,   67,   70,    4,    5,    5,    5,
-        5,   63,    5,    0,   64,    5,    5,   64,   65,   65,
-       71,   70,   74,   71,   75,   65,    0,   63,   72,   64,
-       71,   72,   76,   78,   77,   76,   78,   77,   74,   79,
+       13,   14,   14,   14,   17,   22,   22,   13,   13,   15,
+       15,   15,   15,   19,   21,   28,   13,   15,   16,   16,
+       44,   16,   13,   17,   18,   18,   13,   18,   38,   31,
+       17,   16,   16,   13,   13,   24,   24,   30,   24,   19,
+       21,   28,   13,   15,    5,   25,   25,   16,   25,   17,
+       26,   26,   33,   26,   33,   27,   27,   24,   27,   29,
+       29,   35,   29,   35,   36,    0,   36,   37,   37,   37,
+       37,   37,   46,   16,   23,   23,   47,   23,   27,   40,
+       40,   40,   40,   24,   41,   42,   41,   42,   48,   23,
+       49,   23,   43,   43,   43,   43,   50,    0,   46,   43,
 
-       75,   65,   79,   80,   78,   64,   80,   72,   87,   79,
-       88,    5,    6,    6,    6,    6,   81,    6,   77,   81,
-        6,    6,   83,   72,   87,   83,   88,   81,   89,   90,
-       91,   92,    0,   85,   77,   93,   85,   83,   94,   95,
-      118,    0,    0,  118,   89,   90,   91,   92,   85,    0,
-      118,   93,   96,   83,   94,   95,    6,    7,    7,    7,
-        7,    7,    7,    7,   85,    7,    7,   97,   96,   98,
-       99,  100,  101,  102,  103,  104,  105,  106,  107,  108,
-      109,  110,  111,   97,  112,   98,   99,  100,  101,  102,
-      103,  104,  105,  106,  107,  108,  109,  110,  111,  113,
+       73,    0,   47,   23,   27,   23,   52,   52,   52,    0,
+       51,   51,   51,   51,   48,   23,   49,   23,   51,    0,
+       53,   53,   50,   53,   53,   53,   73,   55,   55,   23,
+       55,   23,   56,   56,    0,   56,   57,   57,    0,   57,
+       58,   58,   61,   58,   51,   59,   59,   61,   59,   62,
+       62,   77,   62,   63,   63,   78,   63,   64,   64,   80,
+       64,   65,   65,   81,   65,   86,   66,   66,   61,   66,
+       87,   68,   68,   61,   68,   69,   69,   77,   69,   70,
+       70,   78,   70,   71,   71,   80,   71,   88,   83,   81,
+       83,   86,   89,   90,   99,  109,   87,   91,   91,   91,
 
-      112,    7,    8,    8,    8,    8,    8,    8,    8,  114,
-        8,    8,  116,  119,  120,  113,  119,  121,  122,  123,
-      121,  122,  123,  124,  125,  114,  124,  125,  116,  126,
-      120,  127,  126,    0,  127,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    8,    9,    9,    9,
-        9,    0,    9,    0,    0,    9,    9,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    9,   10,   10,   10,   10,    0,   10,    0,    0,
+      112,   70,    0,    0,   91,   92,   92,   92,   93,   93,
+       93,  100,  100,   88,  100,  114,  115,  116,   89,   90,
+       99,  109,  111,  111,  117,  111,  112,   70,  113,  113,
+       91,  113,  118,  119,  120,  121,  121,  127,  121,  128,
+      129,  114,  115,  116,  123,  123,  130,  123,  125,  125,
+      117,  125,  131,  132,  133,  137,  138,  139,  118,  119,
+      120,  140,  141,  127,  142,  128,  129,  143,  144,  144,
+      146,  144,  130,  145,  145,  147,  145,  149,  131,  132,
+      133,  137,  138,  139,  150,  153,  154,  140,  141,  156,
+      142,  158,    0,  143,    0,    0,  146,    0,    0,    0,
 
-       10,   10,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,   10,   82,    0,    0,
-       82,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,   82,   82,    0,    0,    0,    0,   82,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,   82,   82,
-        0,    0,    0,    0,   82,  129,  129,  129,  130,  130,
-      130,  131,  131,  131,  132,  132,  132,  133,  133,  133,
-      134,  134,  128,  128,  128,  128,  128,  128,  128,  128,
+        0,  147,    0,  149,    0,    0,    0,    0,    0,    0,
+      150,  153,  154,    0,    0,  156,    0,  158,  162,  162,
+      162,  162,  164,  164,  164,  165,  165,  165,  166,  166,
+      166,  167,  167,  168,  168,  168,  169,  169,  169,  170,
+      170,  170,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
 
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128,  128,
-      128,  128,  128,  128,  128,  128,  128,  128,  128
+      161,  161,  161,  161,  161,  161,  161,  161,  161,  161,
+      161
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[25] =
+static const flex_int32_t yy_rule_can_match_eol[49] =
     {   0,
-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0,     };
+0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 1, 1, 1, 1, 1, 0, 0, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -835,10 +846,10 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 1 "src/vendor/cigraph/src/io/pajek-lexer.l"
 /*
    IGraph library.
-   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -857,11 +868,11 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
    02110-1301 USA
 
 */
-#line 24 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 24 "src/vendor/cigraph/src/io/pajek-lexer.l"
 
 /*
    IGraph library.
-   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -882,14 +893,13 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 */
 
 #include <stdlib.h>
-#include <stdarg.h>
 
-#include "io/dl-header.h"
-#include "io/parsers/dl-parser.h"
+#include "io/pajek-header.h"
+#include "io/parsers/pajek-parser.h"
 
-#define YY_EXTRA_TYPE igraph_i_dl_parsedata_t*
+#define YY_EXTRA_TYPE igraph_i_pajek_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;
-#define YY_FATAL_ERROR(msg) IGRAPH_FATAL("Error in DL parser: " # msg)
+#define YY_FATAL_ERROR(msg) IGRAPH_FATAL("Error in Pajek parser: " # msg)
 #ifdef USING_R
 #define fprintf(file, msg, ...) (1)
 #ifdef stdout
@@ -897,16 +907,13 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 #endif
 #define stdout 0
 #endif
-#line 901 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 911 "src/include/io/parsers/pajek-lexer.c"
 #define YY_NO_INPUT 1
 
-#line 904 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 914 "src/include/io/parsers/pajek-lexer.c"
 
 #define INITIAL 0
-#define LABELM 1
-#define FULLMATRIX 2
-#define EDGELIST 3
-#define NODELIST 4
+#define netline 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -1186,10 +1193,10 @@ YY_DECL
 		}
 
 	{
-#line 81 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 81 "src/vendor/cigraph/src/io/pajek-lexer.l"
 
 
-#line 1193 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 1200 "src/include/io/parsers/pajek-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1216,13 +1223,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 129 )
+				if ( yy_current_state >= 162 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 493 );
+		while ( yy_base[yy_current_state] != 443 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -1259,156 +1266,419 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-/* rule 1 can match eol */
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return NEWLINE; }
+#line 83 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ }
 	YY_BREAK
 case 2:
+/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 85 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return DL; }
+#line 84 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ } /* comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 86 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return NEQ; }
+#line 85 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ BEGIN(netline); return NETWORKLINE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 87 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return NUM; }
+#line 86 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ BEGIN(netline); return NETWORKLINE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 89 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-  switch (yyextra->mode) {
-  case 0: BEGIN(FULLMATRIX);
-    break;
-  case 1: BEGIN(EDGELIST);
-    break;
-  case 2: BEGIN(NODELIST);
-    break;
-  }
-  return DATA; }
+#line 87 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ 
+   return NET_TITLE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ BEGIN(LABELM); return LABELS; }
+#line 89 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return VERTICESLINE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 101 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-  return LABELSEMBEDDED; }
+#line 90 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return ARCSLINE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 103 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-  yyextra->mode=0; return FORMATFULLMATRIX; }
+#line 91 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return EDGESLINE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 105 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-  yyextra->mode=1; return FORMATEDGELIST1; }
+#line 92 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return ARCSLISTLINE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 107 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-  yyextra->mode=2; return FORMATNODELIST1; }
+#line 93 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return EDGESLISTLINE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 110 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ /* eaten up */ }
+#line 94 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return MATRIXLINE; }
 	YY_BREAK
 case 12:
+/* rule 12 can match eol */
 YY_RULE_SETUP
-#line 111 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return LABEL; }
+#line 95 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ BEGIN(INITIAL); yyextra->mode=0; return NEWLINE; } /* skip over multiple newlines */
 	YY_BREAK
 case 13:
+/* rule 13 can match eol */
 YY_RULE_SETUP
-#line 113 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return DIGIT; }
+#line 96 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return QSTR; }
 	YY_BREAK
 case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
-#line 114 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return LABEL; }
+#line 97 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return PSTR; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 115 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ }
+#line 98 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{
+                    return NUM; }
 	YY_BREAK
 case 16:
+/* rule 16 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 6);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 6;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 117 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return NUM; }
+#line 101 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_X_FACT; } else { return ALNUM; } }
 	YY_BREAK
 case 17:
+/* rule 17 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 6);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 6;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 118 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return LABEL; }
+#line 102 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_Y_FACT; } else { return ALNUM; } }
 	YY_BREAK
 case 18:
+/* rule 18 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 119 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ }
+#line 103 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_IC; } else { return ALNUM; } }
 	YY_BREAK
 case 19:
+/* rule 19 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 121 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return NUM; }
+#line 104 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_BC; } else { return ALNUM; } }
 	YY_BREAK
 case 20:
+/* rule 20 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 122 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return LABEL; }
+#line 105 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_BW; } else { return ALNUM; } }
 	YY_BREAK
 case 21:
+/* rule 21 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 3);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 123 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ }
+#line 106 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_PHI; } else { return ALNUM; } }
 	YY_BREAK
 case 22:
+/* rule 22 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 125 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ /* eaten up */ }
-	YY_BREAK
-case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(LABELM):
-case YY_STATE_EOF(FULLMATRIX):
-case YY_STATE_EOF(EDGELIST):
-case YY_STATE_EOF(NODELIST):
-#line 127 "src/vendor/cigraph/src/io/dl-lexer.l"
-{
-                          if (yyextra->eof) {
-                            yyterminate();
-                          } else {
-                            yyextra->eof=1;
-                            BEGIN(INITIAL);
-                            return EOFF;
-                          }
-                        }
+#line 107 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_R; } else { return ALNUM; } }
 	YY_BREAK
 case 23:
+/* rule 23 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 137 "src/vendor/cigraph/src/io/dl-lexer.l"
-{ return 0; }
+#line 108 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_Q; } else { return ALNUM; } }
 	YY_BREAK
 case 24:
+/* rule 24 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 4);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 109 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_FONT; } else { return ALNUM; } }
+	YY_BREAK
+case 25:
+/* rule 25 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 3);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 110 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_URL; } else { return ALNUM; } }
+	YY_BREAK
+case 26:
+/* rule 26 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 112 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_C; } else { return ALNUM; } }
+	YY_BREAK
+case 27:
+/* rule 27 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 113 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_P; } else { return ALNUM; } }
+	YY_BREAK
+case 28:
+/* rule 28 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 114 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_S; } else { return ALNUM; } }
+	YY_BREAK
+case 29:
+/* rule 29 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 115 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_A; } else { return ALNUM; } }
+	YY_BREAK
+case 30:
+/* rule 30 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 116 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_W; } else { return ALNUM; } }
+	YY_BREAK
+case 31:
+/* rule 31 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 117 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_H1; } else { return ALNUM; } }
+	YY_BREAK
+case 32:
+/* rule 32 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 118 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_H2; } else { return ALNUM; } }
+	YY_BREAK
+case 33:
+/* rule 33 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 119 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_A1; } else { return ALNUM; } }
+	YY_BREAK
+case 34:
+/* rule 34 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 120 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_A2; } else { return ALNUM; } }
+	YY_BREAK
+case 35:
+/* rule 35 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 121 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_K1; } else { return ALNUM; } }
+	YY_BREAK
+case 36:
+/* rule 36 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 122 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_K2; } else { return ALNUM; } }
+	YY_BREAK
+case 37:
+/* rule 37 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 123 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_AP; } else { return ALNUM; } }
+	YY_BREAK
+case 38:
+/* rule 38 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 1);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 124 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_L; } else { return ALNUM; } }
+	YY_BREAK
+case 39:
+/* rule 39 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 125 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==2) { return EP_LP; } else { return ALNUM; } }
+	YY_BREAK
+case 40:
+/* rule 40 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 4);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 127 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_LPHI; } else
+                             if (yyextra->mode==2) { return EP_LPHI; } else { return ALNUM; } }
+	YY_BREAK
+case 41:
+/* rule 41 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 129 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_LC; } else
+                             if (yyextra->mode==2) { return EP_LC; } else { return ALNUM; } }
+	YY_BREAK
+case 42:
+/* rule 42 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 131 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_LR; } else
+                             if (yyextra->mode==2) { return EP_LR; } else { return ALNUM; } }
+	YY_BREAK
+case 43:
+/* rule 43 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 2);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 133 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_LA; } else
+                             if (yyextra->mode==2) { return EP_LA; } else { return ALNUM; } }
+	YY_BREAK
+case 44:
+/* rule 44 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 4);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 135 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_SIZE; } else
+                             if (yyextra->mode==2) { return EP_SIZE; } else { return ALNUM; } }
+	YY_BREAK
+case 45:
+/* rule 45 can match eol */
+*yy_cp = yyg->yy_hold_char; /* undo effects of setting up yytext */
+YY_LINENO_REWIND_TO(yy_bp + 3);
+yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
+YY_DO_BEFORE_ACTION; /* set up yytext again */
+YY_RULE_SETUP
+#line 137 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->mode==1) { return VP_FOS; } else
+                             if (yyextra->mode==2) { return EP_FOS; } else { return ALNUM; } }
+	YY_BREAK
+case 46:
+YY_RULE_SETUP
+#line 140 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return ALNUM; }
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+case YY_STATE_EOF(netline):
+#line 142 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ if (yyextra->eof) {
+                       yyterminate();
+                    } else {
+                       yyextra->eof=1;
+                       return NEWLINE;
+                    }
+                  }
+	YY_BREAK
+case 47:
+YY_RULE_SETUP
+#line 150 "src/vendor/cigraph/src/io/pajek-lexer.l"
+{ return ERROR; }
+	YY_BREAK
+case 48:
+YY_RULE_SETUP
+#line 152 "src/vendor/cigraph/src/io/pajek-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1412 "src/include/igraph/io/parsers/dl-lexer.c"
+#line 1682 "src/include/io/parsers/pajek-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1696,7 +1966,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 
 	for ( yy_cp = yyg->yytext_ptr + YY_MORE_ADJ; yy_cp < yyg->yy_c_buf_p; ++yy_cp )
 		{
-		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 46);
+		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 68);
 		if ( yy_accept[yy_current_state] )
 			{
 			yyg->yy_last_accepting_state = yy_current_state;
@@ -1705,7 +1975,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 129 )
+			if ( yy_current_state >= 162 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1725,7 +1995,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner; /* This var may be unused depending upon options. */
 	char *yy_cp = yyg->yy_c_buf_p;
 
-	YY_CHAR yy_c = 46;
+	YY_CHAR yy_c = 68;
 	if ( yy_accept[yy_current_state] )
 		{
 		yyg->yy_last_accepting_state = yy_current_state;
@@ -1734,11 +2004,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 129 )
+		if ( yy_current_state >= 162 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 128);
+	yy_is_jam = (yy_current_state == 161);
 
 	(void)yyg;
 	return yy_is_jam ? 0 : yy_current_state;
@@ -2567,4 +2837,6 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
+#line 152 "src/vendor/cigraph/src/io/pajek-lexer.l"
+
+
