@@ -65,19 +65,18 @@
 
 
 /* Substitute the variable and function names.  */
-#define yyparse         igraph_dl_yyparse
-#define yylex           igraph_dl_yylex
-#define yyerror         igraph_dl_yyerror
-#define yydebug         igraph_dl_yydebug
-#define yynerrs         igraph_dl_yynerrs
+#define yyparse         igraph_ncol_yyparse
+#define yylex           igraph_ncol_yylex
+#define yyerror         igraph_ncol_yyerror
+#define yydebug         igraph_ncol_yydebug
+#define yynerrs         igraph_ncol_yynerrs
 
 /* First part of user prologue.  */
-#line 23 "src/vendor/cigraph/src/io/dl-parser.y"
 
 
 /*
    IGraph library.
-   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard st, Cambridge, MA, 02138 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -97,27 +96,25 @@
 
 */
 
-#include "internal/hacks.h"
-#include "io/dl-header.h"
-#include "io/parsers/dl-parser.h"
-#include "io/parsers/dl-lexer.h"
-#include "io/parse_utils.h"
+#include "igraph_types.h"
+#include "igraph_memory.h"
+#include "igraph_error.h"
 
-int igraph_dl_yyerror(YYLTYPE* locp, igraph_i_dl_parsedata_t* context,
-                      const char *s);
-static igraph_error_t igraph_i_dl_add_str(char *newstr, yy_size_t length,
-                        igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_add_edge(igraph_integer_t from, igraph_integer_t to,
-                         igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_add_edge_w(igraph_integer_t from, igraph_integer_t to,
-                           igraph_real_t weight,
-                           igraph_i_dl_parsedata_t *context);
-static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid);
+#include "io/ncol-header.h"
+#include "io/parsers/ncol-parser.h"
+#include "io/parsers/ncol-lexer.h"
+#include "io/parse_utils.h"
+#include "internal/hacks.h"
+
+#include <stdio.h>
+#include <string.h>
+
+int igraph_ncol_yyerror(YYLTYPE* locp,
+                        igraph_i_ncol_parsedata_t *context,
+                        const char *s);
 
 #define scanner context->scanner
 
-
-#line 121 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -140,7 +137,7 @@ static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid);
 #  endif
 # endif
 
-#include "yy.tab.h"
+#include "ncol-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -148,57 +145,14 @@ enum yysymbol_kind_t
   YYSYMBOL_YYEOF = 0,                      /* "end of file"  */
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
-  YYSYMBOL_NUM = 3,                        /* "number"  */
+  YYSYMBOL_ALNUM = 3,                      /* "alphanumeric"  */
   YYSYMBOL_NEWLINE = 4,                    /* "end of line"  */
-  YYSYMBOL_DL = 5,                         /* "DL"  */
-  YYSYMBOL_NEQ = 6,                        /* "n=vertexcount"  */
-  YYSYMBOL_DATA = 7,                       /* "data:"  */
-  YYSYMBOL_LABELS = 8,                     /* "labels:"  */
-  YYSYMBOL_LABELSEMBEDDED = 9,             /* "labels embedded:"  */
-  YYSYMBOL_FORMATFULLMATRIX = 10,          /* FORMATFULLMATRIX  */
-  YYSYMBOL_FORMATEDGELIST1 = 11,           /* FORMATEDGELIST1  */
-  YYSYMBOL_FORMATNODELIST1 = 12,           /* FORMATNODELIST1  */
-  YYSYMBOL_DIGIT = 13,                     /* "binary digit"  */
-  YYSYMBOL_LABEL = 14,                     /* "label"  */
-  YYSYMBOL_EOFF = 15,                      /* EOFF  */
-  YYSYMBOL_ERROR = 16,                     /* ERROR  */
-  YYSYMBOL_YYACCEPT = 17,                  /* $accept  */
-  YYSYMBOL_input = 18,                     /* input  */
-  YYSYMBOL_trail = 19,                     /* trail  */
-  YYSYMBOL_eof = 20,                       /* eof  */
-  YYSYMBOL_rest = 21,                      /* rest  */
-  YYSYMBOL_formfullmatrix = 22,            /* formfullmatrix  */
-  YYSYMBOL_newline = 23,                   /* newline  */
-  YYSYMBOL_fullmatrix = 24,                /* fullmatrix  */
-  YYSYMBOL_labels = 25,                    /* labels  */
-  YYSYMBOL_fullmatrixdata = 26,            /* fullmatrixdata  */
-  YYSYMBOL_zerooneseq = 27,                /* zerooneseq  */
-  YYSYMBOL_zeroone = 28,                   /* zeroone  */
-  YYSYMBOL_labeledfullmatrixdata = 29,     /* labeledfullmatrixdata  */
-  YYSYMBOL_reallabeledfullmatrixdata = 30, /* reallabeledfullmatrixdata  */
-  YYSYMBOL_labelseq = 31,                  /* labelseq  */
-  YYSYMBOL_label = 32,                     /* label  */
-  YYSYMBOL_labeledmatrixlines = 33,        /* labeledmatrixlines  */
-  YYSYMBOL_labeledmatrixline = 34,         /* labeledmatrixline  */
-  YYSYMBOL_edgelist1 = 35,                 /* edgelist1  */
-  YYSYMBOL_edgelist1rest = 36,             /* edgelist1rest  */
-  YYSYMBOL_edgelist1data = 37,             /* edgelist1data  */
-  YYSYMBOL_edgelist1dataline = 38,         /* edgelist1dataline  */
-  YYSYMBOL_integer = 39,                   /* integer  */
-  YYSYMBOL_labelededgelist1data = 40,      /* labelededgelist1data  */
-  YYSYMBOL_labelededgelist1dataline = 41,  /* labelededgelist1dataline  */
-  YYSYMBOL_weight = 42,                    /* weight  */
-  YYSYMBOL_elabel = 43,                    /* elabel  */
-  YYSYMBOL_nodelist1 = 44,                 /* nodelist1  */
-  YYSYMBOL_nodelist1rest = 45,             /* nodelist1rest  */
-  YYSYMBOL_nodelist1data = 46,             /* nodelist1data  */
-  YYSYMBOL_nodelist1dataline = 47,         /* nodelist1dataline  */
-  YYSYMBOL_from = 48,                      /* from  */
-  YYSYMBOL_tolist = 49,                    /* tolist  */
-  YYSYMBOL_labelednodelist1data = 50,      /* labelednodelist1data  */
-  YYSYMBOL_labelednodelist1dataline = 51,  /* labelednodelist1dataline  */
-  YYSYMBOL_fromelabel = 52,                /* fromelabel  */
-  YYSYMBOL_labeltolist = 53                /* labeltolist  */
+  YYSYMBOL_ERROR = 5,                      /* ERROR  */
+  YYSYMBOL_YYACCEPT = 6,                   /* $accept  */
+  YYSYMBOL_input = 7,                      /* input  */
+  YYSYMBOL_edge = 8,                       /* edge  */
+  YYSYMBOL_edgeid = 9,                     /* edgeid  */
+  YYSYMBOL_weight = 10                     /* weight  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -315,7 +269,7 @@ typedef int yytype_uint16;
 
 
 /* Stored state numbers (used for stacks). */
-typedef yytype_uint8 yy_state_t;
+typedef yytype_int8 yy_state_t;
 
 /* State numbers in computations.  */
 typedef int yy_state_fast_t;
@@ -527,21 +481,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  4
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   118
+#define YYLAST   10
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  17
+#define YYNTOKENS  6
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  37
+#define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  66
+#define YYNRULES  8
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  138
+#define YYNSTATES  12
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   271
+#define YYMAXUTOK   260
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -581,21 +535,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16
+       5
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int16 yyrline[] =
+static const yytype_int8 yyrline[] =
 {
-       0,   104,   104,   114,   114,   116,   116,   118,   119,   120,
-     123,   123,   125,   125,   127,   128,   129,   132,   133,   139,
-     139,   144,   144,   146,   161,   163,   165,   165,   167,   171,
-     175,   180,   184,   186,   187,   188,   189,   190,   193,   194,
-     197,   202,   209,   217,   218,   221,   223,   227,   235,   254,
-     256,   257,   258,   259,   260,   263,   264,   267,   269,   276,
-     276,   284,   285,   288,   290,   294,   294
+       0,    92,    92,    93,    94,    97,   102,   110,   120
 };
 #endif
 
@@ -611,20 +558,9 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "\"number\"",
-  "\"end of line\"", "\"DL\"", "\"n=vertexcount\"", "\"data:\"",
-  "\"labels:\"", "\"labels embedded:\"", "FORMATFULLMATRIX",
-  "FORMATEDGELIST1", "FORMATNODELIST1", "\"binary digit\"", "\"label\"",
-  "EOFF", "ERROR", "$accept", "input", "trail", "eof", "rest",
-  "formfullmatrix", "newline", "fullmatrix", "labels", "fullmatrixdata",
-  "zerooneseq", "zeroone", "labeledfullmatrixdata",
-  "reallabeledfullmatrixdata", "labelseq", "label", "labeledmatrixlines",
-  "labeledmatrixline", "edgelist1", "edgelist1rest", "edgelist1data",
-  "edgelist1dataline", "integer", "labelededgelist1data",
-  "labelededgelist1dataline", "weight", "elabel", "nodelist1",
-  "nodelist1rest", "nodelist1data", "nodelist1dataline", "from", "tolist",
-  "labelednodelist1data", "labelednodelist1dataline", "fromelabel",
-  "labeltolist", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "\"alphanumeric\"",
+  "\"end of line\"", "ERROR", "$accept", "input", "edge", "edgeid",
+  "weight", YY_NULLPTR
 };
 
 static const char *
@@ -634,12 +570,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-114)
+#define YYPACT_NINF (-3)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-22)
+#define YYTABLE_NINF (-1)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -648,20 +584,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       8,    38,    11,    43,  -114,  -114,    44,    57,    46,    46,
-      46,    46,    46,    46,  -114,  -114,  -114,  -114,  -114,  -114,
-    -114,  -114,    69,    53,    63,    66,     6,    65,    46,    46,
-    -114,    46,    46,    46,  -114,  -114,    46,    46,  -114,  -114,
-    -114,  -114,     5,    19,  -114,  -114,  -114,    76,    84,  -114,
-      82,  -114,  -114,  -114,    46,  -114,  -114,  -114,    93,    43,
-      46,    46,    46,  -114,  -114,  -114,    46,    46,    46,  -114,
-      85,    86,  -114,    43,    23,  -114,  -114,    88,    33,  -114,
-    -114,    65,  -114,    85,  -114,  -114,  -114,    90,    46,    46,
-      87,    46,  -114,  -114,    46,    46,    87,    46,    25,  -114,
-    -114,  -114,    94,  -114,    95,  -114,  -114,    87,    29,  -114,
-      96,  -114,  -114,  -114,    49,  -114,  -114,    43,    46,    92,
-      46,    84,    46,     2,    46,  -114,  -114,   100,  -114,  -114,
-    -114,  -114,  -114,    87,  -114,    87,    87,    87
+      -3,     0,    -3,    -3,    -3,    -3,     2,    -2,    -3,    -3,
+       3,    -3
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -669,117 +593,55 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     1,    42,     0,     0,    12,    12,
-      12,    12,    12,    12,     3,     7,    11,     8,     9,    13,
-      19,    17,     0,     0,     0,     0,     5,    14,    12,    12,
-      10,    12,    12,    12,    32,    55,    12,    12,    49,     6,
-       2,     4,     0,     0,    26,    38,    17,     0,    50,    17,
-       0,    20,    23,    22,    12,    18,    16,    24,    12,    33,
-      12,    12,    12,    58,    56,    59,    12,    12,    12,    19,
-       0,     0,    39,     0,     0,    43,    17,     0,     0,    61,
-      17,    15,    21,    25,    29,    28,    27,     0,    12,    12,
-      35,    12,    57,    60,    12,    12,    52,    12,     0,    30,
-      47,    41,     0,    38,     0,    48,    44,     0,     0,    55,
-       0,    64,    62,    65,     0,    31,    40,    34,    12,     0,
-      12,    51,    12,     0,    12,    43,    46,     0,    43,    61,
-      63,    66,    61,    36,    45,    37,    53,    54
+       2,     0,     1,     7,     3,     4,     0,     0,     8,     5,
+       0,     6
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-    -114,  -114,  -114,  -114,  -114,  -114,    -9,    83,   -41,    36,
-      26,  -114,  -114,  -114,  -114,  -114,  -114,    24,  -114,  -114,
-       7,  -114,     4,  -113,  -114,    -7,   -82,  -114,  -114,     9,
-    -114,  -114,  -114,   -98,  -114,  -114,  -114
+      -3,    -3,    -3,     4,    -3
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,    26,    40,    14,    15,    20,    16,    28,    27,
-      42,    53,    56,    57,    58,    86,    83,    84,    17,    34,
-      59,    72,    73,    90,   106,   102,   107,    18,    38,    48,
-      64,    65,    77,    96,   112,   113,   123
+       0,     1,     5,     6,    10
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule whose
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
-static const yytype_int16 yytable[] =
+static const yytype_int8 yytable[] =
 {
-      21,    22,    23,    24,    25,    60,   130,     6,    66,    51,
-      19,     4,   133,     1,   111,   135,   105,    41,    52,    43,
-      44,    39,    45,    46,    47,   119,    54,    49,    50,   115,
-      88,   136,    89,    55,   137,    91,   120,    55,    52,    97,
-      94,   131,    95,    55,     3,    69,     5,    55,     7,    71,
-      19,    74,    75,    76,   111,   111,   124,    78,    79,    80,
-       8,     9,    10,    55,     8,     9,    10,    11,    12,    13,
-      31,    32,    33,    35,    36,    37,    29,    87,   -21,   103,
-     104,    93,   108,    61,    62,   109,   110,    63,   114,    67,
-      68,     5,    92,   100,   101,   100,   126,    70,   116,    82,
-      85,   105,   118,   122,   134,    81,    30,    99,    98,   125,
-     117,   128,   127,   129,     0,   132,     0,     0,   121
+       2,     8,     9,     3,     4,     3,     0,    11,     0,     0,
+       7
 };
 
-static const yytype_int16 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       9,    10,    11,    12,    13,    46,     4,     3,    49,     4,
-       4,     0,   125,     5,    96,   128,    14,    26,    13,    28,
-      29,    15,    31,    32,    33,   107,     7,    36,    37,     4,
-       7,   129,     9,    14,   132,    76,     7,    14,    13,    80,
-       7,   123,     9,    14,     6,    54,     3,    14,     4,    58,
-       4,    60,    61,    62,   136,   137,     7,    66,    67,    68,
-       7,     8,     9,    14,     7,     8,     9,    10,    11,    12,
-       7,     8,     9,     7,     8,     9,     7,    73,    13,    88,
-      89,    77,    91,     7,     8,    94,    95,     3,    97,     7,
-       8,     3,     4,     3,     4,     3,     4,     4,     4,    14,
-      14,    14,     7,     7,     4,    69,    23,    83,    82,   118,
-     103,   120,   119,   122,    -1,   124,    -1,    -1,   109
+       0,     3,     4,     3,     4,     3,    -1,     4,    -1,    -1,
+       6
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,    18,     6,     0,     3,    39,     4,     7,     8,
-       9,    10,    11,    12,    21,    22,    24,    35,    44,     4,
-      23,    23,    23,    23,    23,    23,    19,    26,    25,     7,
-      24,     7,     8,     9,    36,     7,     8,     9,    45,    15,
-      20,    23,    27,    23,    23,    23,    23,    23,    46,    23,
-      23,     4,    13,    28,     7,    14,    29,    30,    31,    37,
-      25,     7,     8,     3,    47,    48,    25,     7,     8,    23,
-       4,    23,    38,    39,    23,    23,    23,    49,    23,    23,
-      23,    26,    14,    33,    34,    14,    32,    39,     7,     9,
-      40,    25,     4,    39,     7,     9,    50,    25,    27,    34,
-       3,     4,    42,    23,    23,    14,    41,    43,    23,    23,
-      23,    43,    51,    52,    23,     4,     4,    37,     7,    43,
-       7,    46,     7,    53,     7,    23,     4,    42,    23,    23,
-       4,    43,    23,    40,     4,    40,    50,    50
+       0,     7,     0,     3,     4,     8,     9,     9,     3,     4,
+      10,     4
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    17,    18,    19,    19,    20,    20,    21,    21,    21,
-      22,    22,    23,    23,    24,    24,    24,    25,    25,    26,
-      26,    27,    27,    28,    29,    30,    31,    31,    32,    33,
-      33,    34,    35,    36,    36,    36,    36,    36,    37,    37,
-      38,    38,    39,    40,    40,    41,    41,    42,    43,    44,
-      45,    45,    45,    45,    45,    46,    46,    47,    48,    49,
-      49,    50,    50,    51,    52,    53,    53
+       0,     6,     7,     7,     7,     8,     8,     9,    10
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     7,     0,     2,     0,     1,     1,     1,     1,
-       3,     1,     0,     1,     3,     7,     5,     0,     3,     0,
-       3,     0,     2,     1,     1,     3,     0,     3,     1,     1,
-       2,     3,     3,     3,     7,     5,     9,     9,     0,     2,
-       4,     3,     1,     0,     2,     4,     3,     1,     1,     3,
-       2,     7,     5,     9,     9,     0,     2,     3,     1,     0,
-       2,     0,     2,     3,     1,     0,     2
+       0,     2,     0,     2,     2,     3,     4,     1,     1
 };
 
 
@@ -936,7 +798,7 @@ do {                                                                      \
 
 static void
 yy_symbol_value_print (FILE *yyo,
-                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_dl_parsedata_t* context)
+                       yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_ncol_parsedata_t* context)
 {
   FILE *yyoutput = yyo;
   YY_USE (yyoutput);
@@ -956,7 +818,7 @@ yy_symbol_value_print (FILE *yyo,
 
 static void
 yy_symbol_print (FILE *yyo,
-                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_dl_parsedata_t* context)
+                 yysymbol_kind_t yykind, YYSTYPE const * const yyvaluep, YYLTYPE const * const yylocationp, igraph_i_ncol_parsedata_t* context)
 {
   YYFPRINTF (yyo, "%s %s (",
              yykind < YYNTOKENS ? "token" : "nterm", yysymbol_name (yykind));
@@ -997,7 +859,7 @@ do {                                                            \
 
 static void
 yy_reduce_print (yy_state_t *yyssp, YYSTYPE *yyvsp, YYLTYPE *yylsp,
-                 int yyrule, igraph_i_dl_parsedata_t* context)
+                 int yyrule, igraph_i_ncol_parsedata_t* context)
 {
   int yylno = yyrline[yyrule];
   int yynrhs = yyr2[yyrule];
@@ -1328,7 +1190,7 @@ yysyntax_error (YYPTRDIFF_T *yymsg_alloc, char **yymsg,
 
 static void
 yydestruct (const char *yymsg,
-            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_dl_parsedata_t* context)
+            yysymbol_kind_t yykind, YYSTYPE *yyvaluep, YYLTYPE *yylocationp, igraph_i_ncol_parsedata_t* context)
 {
   YY_USE (yyvaluep);
   YY_USE (yylocationp);
@@ -1352,7 +1214,7 @@ yydestruct (const char *yymsg,
 `----------*/
 
 int
-yyparse (igraph_i_dl_parsedata_t* context)
+yyparse (igraph_i_ncol_parsedata_t* context)
 {
 /* Lookahead token kind.  */
 int yychar;
@@ -1636,429 +1498,46 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* input: "DL" "n=vertexcount" integer "end of line" rest trail eof  */
-#line 104 "src/vendor/cigraph/src/io/dl-parser.y"
-                                             {
-  context->n=(yyvsp[-4].integer);
-  if (context->n < 0) {
-    IGRAPH_YY_ERRORF("Invalid vertex count in DL file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->n);
-  }
-  if (context->n > IGRAPH_DL_MAX_VERTEX_COUNT) {
-    IGRAPH_YY_ERRORF("Vertex count too large in DL file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->n);
-  }
-}
-#line 1651 "yy.tab.c"
-    break;
-
-  case 7: /* rest: formfullmatrix  */
-#line 118 "src/vendor/cigraph/src/io/dl-parser.y"
-                        { context->type=IGRAPH_DL_MATRIX; }
-#line 1657 "yy.tab.c"
-    break;
-
-  case 8: /* rest: edgelist1  */
-#line 119 "src/vendor/cigraph/src/io/dl-parser.y"
-                        { context->type=IGRAPH_DL_EDGELIST1; }
-#line 1663 "yy.tab.c"
-    break;
-
-  case 9: /* rest: nodelist1  */
-#line 120 "src/vendor/cigraph/src/io/dl-parser.y"
-                        { context->type=IGRAPH_DL_NODELIST1; }
-#line 1669 "yy.tab.c"
-    break;
-
-  case 10: /* formfullmatrix: FORMATFULLMATRIX newline fullmatrix  */
-#line 123 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                     {}
-#line 1675 "yy.tab.c"
-    break;
-
-  case 11: /* formfullmatrix: fullmatrix  */
-#line 123 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                     {}
-#line 1681 "yy.tab.c"
-    break;
-
-  case 14: /* fullmatrix: "data:" newline fullmatrixdata  */
-#line 127 "src/vendor/cigraph/src/io/dl-parser.y"
-                                          { }
-#line 1687 "yy.tab.c"
-    break;
-
-  case 15: /* fullmatrix: "labels:" newline labels newline "data:" newline fullmatrixdata  */
-#line 128 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        { }
-#line 1693 "yy.tab.c"
-    break;
-
-  case 16: /* fullmatrix: "labels embedded:" newline "data:" newline labeledfullmatrixdata  */
-#line 129 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        { }
-#line 1699 "yy.tab.c"
-    break;
-
-  case 17: /* labels: %empty  */
-#line 132 "src/vendor/cigraph/src/io/dl-parser.y"
-              {}
-#line 1705 "yy.tab.c"
-    break;
-
-  case 18: /* labels: labels newline "label"  */
-#line 133 "src/vendor/cigraph/src/io/dl-parser.y"
-                                   {
-              IGRAPH_YY_CHECK(igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
-                                                  igraph_dl_yyget_leng(scanner),
-                                                  context)); }
-#line 1714 "yy.tab.c"
-    break;
-
-  case 19: /* fullmatrixdata: %empty  */
-#line 139 "src/vendor/cigraph/src/io/dl-parser.y"
-                {}
-#line 1720 "yy.tab.c"
-    break;
-
-  case 20: /* fullmatrixdata: fullmatrixdata zerooneseq "end of line"  */
-#line 139 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                       {
-  context->from += 1;
-  context->to = 0;
- }
-#line 1729 "yy.tab.c"
-    break;
-
-  case 22: /* zerooneseq: zerooneseq zeroone  */
-#line 144 "src/vendor/cigraph/src/io/dl-parser.y"
-                                 { }
-#line 1735 "yy.tab.c"
-    break;
-
-  case 23: /* zeroone: "binary digit"  */
-#line 146 "src/vendor/cigraph/src/io/dl-parser.y"
-               {
-  /* TODO: What if the digit is neither 0 or 1? Are multigraphs allowed? */
-  char c = igraph_dl_yyget_text(scanner)[0];
-  if (c == '1') {
-    IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
-                                         context->from));
-    IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
-                                         context->to));
-  } else if (c != '0') {
-      IGRAPH_YY_ERRORF("Unexpected digit '%c' in adjacency matrix in DL file.",
-                    IGRAPH_EINVAL, c);
-  }
-  context->to += 1;
-}
-#line 1754 "yy.tab.c"
-    break;
-
-  case 24: /* labeledfullmatrixdata: reallabeledfullmatrixdata  */
-#line 161 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                 {}
-#line 1760 "yy.tab.c"
-    break;
-
-  case 25: /* reallabeledfullmatrixdata: labelseq "end of line" labeledmatrixlines  */
-#line 163 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                               {}
-#line 1766 "yy.tab.c"
-    break;
-
-  case 28: /* label: "label"  */
-#line 167 "src/vendor/cigraph/src/io/dl-parser.y"
-             { IGRAPH_YY_CHECK(igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
-                                                   igraph_dl_yyget_leng(scanner),
-                                                   context)); }
-#line 1774 "yy.tab.c"
-    break;
-
-  case 29: /* labeledmatrixlines: labeledmatrixline  */
-#line 171 "src/vendor/cigraph/src/io/dl-parser.y"
+  case 5: /* edge: edgeid edgeid "end of line"  */
                                       {
-                 context->from += 1;
-                 context->to = 0;
-               }
-#line 1783 "yy.tab.c"
+           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
+           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
+           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
+       }
     break;
 
-  case 30: /* labeledmatrixlines: labeledmatrixlines labeledmatrixline  */
-#line 175 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                    {
-                 context->from += 1;
-                 context->to = 0;
-               }
-#line 1792 "yy.tab.c"
+  case 6: /* edge: edgeid edgeid weight "end of line"  */
+                                      {
+           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-3].edgenum)));
+           IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
+           IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
+           context->has_weights = 1;
+       }
     break;
 
-  case 31: /* labeledmatrixline: "label" zerooneseq "end of line"  */
-#line 180 "src/vendor/cigraph/src/io/dl-parser.y"
-                                            { }
-#line 1798 "yy.tab.c"
-    break;
-
-  case 32: /* edgelist1: FORMATEDGELIST1 newline edgelist1rest  */
-#line 184 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                 {}
-#line 1804 "yy.tab.c"
-    break;
-
-  case 33: /* edgelist1rest: "data:" newline edgelist1data  */
-#line 186 "src/vendor/cigraph/src/io/dl-parser.y"
-                                            {}
-#line 1810 "yy.tab.c"
-    break;
-
-  case 34: /* edgelist1rest: "labels:" newline labels newline "data:" newline edgelist1data  */
-#line 187 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        {}
-#line 1816 "yy.tab.c"
-    break;
-
-  case 35: /* edgelist1rest: "labels embedded:" newline "data:" newline labelededgelist1data  */
-#line 188 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        {}
-#line 1822 "yy.tab.c"
-    break;
-
-  case 36: /* edgelist1rest: "labels:" newline labels newline "labels embedded:" newline "data:" newline labelededgelist1data  */
-#line 189 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                                                      {}
-#line 1828 "yy.tab.c"
-    break;
-
-  case 37: /* edgelist1rest: "labels embedded:" newline "labels:" newline labels newline "data:" newline labelededgelist1data  */
-#line 190 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                                                      {}
-#line 1834 "yy.tab.c"
-    break;
-
-  case 38: /* edgelist1data: %empty  */
-#line 193 "src/vendor/cigraph/src/io/dl-parser.y"
-               {}
-#line 1840 "yy.tab.c"
-    break;
-
-  case 39: /* edgelist1data: edgelist1data edgelist1dataline  */
-#line 194 "src/vendor/cigraph/src/io/dl-parser.y"
-                                               {}
-#line 1846 "yy.tab.c"
-    break;
-
-  case 40: /* edgelist1dataline: integer integer weight "end of line"  */
-#line 197 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                  {
-                    igraph_integer_t from = (yyvsp[-3].integer), to = (yyvsp[-2].integer);
-                    IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
-                    IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
-                    IGRAPH_YY_CHECK(igraph_i_dl_add_edge_w(from-1, to-1, (yyvsp[-1].real), context)); }
-#line 1856 "yy.tab.c"
-    break;
-
-  case 41: /* edgelist1dataline: integer integer "end of line"  */
-#line 202 "src/vendor/cigraph/src/io/dl-parser.y"
-                                           {
-                    igraph_integer_t from = (yyvsp[-2].integer), to = (yyvsp[-1].integer);
-                    IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
-                    IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
-                    IGRAPH_YY_CHECK(igraph_i_dl_add_edge(from-1, to-1, context));
-}
-#line 1867 "yy.tab.c"
-    break;
-
-  case 42: /* integer: "number"  */
-#line 209 "src/vendor/cigraph/src/io/dl-parser.y"
-             {
-    igraph_integer_t val;
-    IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_dl_yyget_text(scanner),
-                                           igraph_dl_yyget_leng(scanner),
-                                           &val));
-    (yyval.integer)=val;
-}
-#line 1879 "yy.tab.c"
-    break;
-
-  case 43: /* labelededgelist1data: %empty  */
-#line 217 "src/vendor/cigraph/src/io/dl-parser.y"
-                      {}
-#line 1885 "yy.tab.c"
-    break;
-
-  case 44: /* labelededgelist1data: labelededgelist1data labelededgelist1dataline  */
-#line 218 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                    {}
-#line 1891 "yy.tab.c"
-    break;
-
-  case 45: /* labelededgelist1dataline: elabel elabel weight "end of line"  */
-#line 221 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                       {
-                          IGRAPH_YY_CHECK(igraph_i_dl_add_edge_w((yyvsp[-3].integer), (yyvsp[-2].integer), (yyvsp[-1].real), context)); }
-#line 1898 "yy.tab.c"
-    break;
-
-  case 46: /* labelededgelist1dataline: elabel elabel "end of line"  */
-#line 223 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                {
-                          IGRAPH_YY_CHECK(igraph_i_dl_add_edge((yyvsp[-2].integer), (yyvsp[-1].integer), context));
- }
-#line 1906 "yy.tab.c"
-    break;
-
-  case 47: /* weight: "number"  */
-#line 227 "src/vendor/cigraph/src/io/dl-parser.y"
-            {
-    igraph_real_t val;
-    IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_dl_yyget_text(scanner),
-                                        igraph_dl_yyget_leng(scanner),
-                                        &val));
-    (yyval.real)=val;
-}
-#line 1918 "yy.tab.c"
-    break;
-
-  case 48: /* elabel: "label"  */
-#line 235 "src/vendor/cigraph/src/io/dl-parser.y"
-              {
+  case 7: /* edgeid: "alphanumeric"  */
+                {
   igraph_integer_t trie_id;
-
-  /* Copy label list to trie, if needed */
-  if (igraph_strvector_size(&context->labels) != 0) {
-    igraph_integer_t i, id, n=igraph_strvector_size(&context->labels);
-    for (i=0; i<n; i++) {
-      IGRAPH_YY_CHECK(igraph_trie_get(&context->trie, STR(context->labels, i), &id));
-    }
-    igraph_strvector_clear(&context->labels);
-  }
-  IGRAPH_YY_CHECK(igraph_trie_get_len(&context->trie, igraph_dl_yyget_text(scanner),
-                                   igraph_dl_yyget_leng(scanner), &trie_id));
-  IGRAPH_ASSERT(0 <= trie_id && trie_id < IGRAPH_DL_MAX_VERTEX_COUNT);
-  (yyval.integer) = trie_id;
- }
-#line 1939 "yy.tab.c"
-    break;
-
-  case 49: /* nodelist1: FORMATNODELIST1 newline nodelist1rest  */
-#line 254 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                 {}
-#line 1945 "yy.tab.c"
-    break;
-
-  case 50: /* nodelist1rest: "data:" nodelist1data  */
-#line 256 "src/vendor/cigraph/src/io/dl-parser.y"
-                                    {}
-#line 1951 "yy.tab.c"
-    break;
-
-  case 51: /* nodelist1rest: "labels:" newline labels newline "data:" newline nodelist1data  */
-#line 257 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        {}
-#line 1957 "yy.tab.c"
-    break;
-
-  case 52: /* nodelist1rest: "labels embedded:" newline "data:" newline labelednodelist1data  */
-#line 258 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                        {}
-#line 1963 "yy.tab.c"
-    break;
-
-  case 53: /* nodelist1rest: "labels:" newline labels newline "labels embedded:" newline "data:" newline labelednodelist1data  */
-#line 259 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                                                      {}
-#line 1969 "yy.tab.c"
-    break;
-
-  case 54: /* nodelist1rest: "labels embedded:" newline "labels:" newline labels newline "data:" newline labelednodelist1data  */
-#line 260 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                                                      {}
-#line 1975 "yy.tab.c"
-    break;
-
-  case 55: /* nodelist1data: %empty  */
-#line 263 "src/vendor/cigraph/src/io/dl-parser.y"
-               {}
-#line 1981 "yy.tab.c"
-    break;
-
-  case 56: /* nodelist1data: nodelist1data nodelist1dataline  */
-#line 264 "src/vendor/cigraph/src/io/dl-parser.y"
-                                               {}
-#line 1987 "yy.tab.c"
-    break;
-
-  case 57: /* nodelist1dataline: from tolist "end of line"  */
-#line 267 "src/vendor/cigraph/src/io/dl-parser.y"
-                                       {}
-#line 1993 "yy.tab.c"
-    break;
-
-  case 58: /* from: "number"  */
-#line 269 "src/vendor/cigraph/src/io/dl-parser.y"
-          {
-  IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_dl_yyget_text(scanner),
-                  igraph_dl_yyget_leng(scanner),
-                  &context->from));
-  IGRAPH_YY_CHECK(igraph_i_dl_check_vid(context->from));
+  IGRAPH_YY_CHECK(igraph_trie_get_len(context->trie,
+    igraph_ncol_yyget_text(scanner),
+    igraph_ncol_yyget_leng(scanner),
+    &trie_id
+  ));
+  (yyval.edgenum) = trie_id;
 }
-#line 2004 "yy.tab.c"
     break;
 
-  case 59: /* tolist: %empty  */
-#line 276 "src/vendor/cigraph/src/io/dl-parser.y"
-        {}
-#line 2010 "yy.tab.c"
-    break;
-
-  case 60: /* tolist: tolist integer  */
-#line 276 "src/vendor/cigraph/src/io/dl-parser.y"
-                            {
-  igraph_integer_t to = (yyvsp[0].integer);
-  IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
-                                              context->from-1));
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges, to-1));
- }
-#line 2022 "yy.tab.c"
-    break;
-
-  case 61: /* labelednodelist1data: %empty  */
-#line 284 "src/vendor/cigraph/src/io/dl-parser.y"
-                      {}
-#line 2028 "yy.tab.c"
-    break;
-
-  case 62: /* labelednodelist1data: labelednodelist1data labelednodelist1dataline  */
-#line 285 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                                    {}
-#line 2034 "yy.tab.c"
-    break;
-
-  case 63: /* labelednodelist1dataline: fromelabel labeltolist "end of line"  */
-#line 288 "src/vendor/cigraph/src/io/dl-parser.y"
-                                                         { }
-#line 2040 "yy.tab.c"
-    break;
-
-  case 64: /* fromelabel: elabel  */
-#line 290 "src/vendor/cigraph/src/io/dl-parser.y"
-                   {
-  context->from=(yyvsp[0].integer);
- }
-#line 2048 "yy.tab.c"
-    break;
-
-  case 66: /* labeltolist: labeltolist elabel  */
-#line 294 "src/vendor/cigraph/src/io/dl-parser.y"
-                                  {
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
-                                              context->from));
-  IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges, (yyvsp[0].integer)));
- }
-#line 2058 "yy.tab.c"
+  case 8: /* weight: "alphanumeric"  */
+                {
+    igraph_real_t val;
+    IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_ncol_yyget_text(scanner),
+                                        igraph_ncol_yyget_leng(scanner),
+                                        &val));
+    (yyval.weightnum)=val;
+}
     break;
 
 
-#line 2062 "yy.tab.c"
 
       default: break;
     }
@@ -2287,59 +1766,13 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 300 "src/vendor/cigraph/src/io/dl-parser.y"
 
 
-int igraph_dl_yyerror(YYLTYPE* locp,
-                      igraph_i_dl_parsedata_t* context,
-                      const char *s) {
-  snprintf(context->errmsg, sizeof(context->errmsg)/sizeof(char)-1,
-           "Parse error in DL file, line %i (%s)",
-           locp->first_line, s);
-  return 0;
-}
-
-static igraph_error_t igraph_i_dl_add_str(char *newstr, yy_size_t length,
-                        igraph_i_dl_parsedata_t *context) {
-  IGRAPH_CHECK(igraph_strvector_push_back_len(&context->labels, newstr, length));
-  return IGRAPH_SUCCESS;
-}
-
-static igraph_error_t igraph_i_dl_add_edge(igraph_integer_t from, igraph_integer_t to,
-                         igraph_i_dl_parsedata_t *context) {
-  //IGRAPH_CHECK(igraph_i_dl_check_vid(from+1));
-  //IGRAPH_CHECK(igraph_i_dl_check_vid(to+1));
-  IGRAPH_CHECK(igraph_vector_int_push_back(&context->edges, from));
-  IGRAPH_CHECK(igraph_vector_int_push_back(&context->edges, to));
-  return IGRAPH_SUCCESS;
-}
-
-static igraph_error_t igraph_i_dl_add_edge_w(igraph_integer_t from, igraph_integer_t to,
-                           igraph_real_t weight,
-                           igraph_i_dl_parsedata_t *context) {
-  igraph_integer_t n=igraph_vector_size(&context->weights);
-  igraph_integer_t n2=igraph_vector_int_size(&context->edges)/2;
-  if (n != n2) {
-    IGRAPH_CHECK(igraph_vector_resize(&context->weights, n2));
-    for (; n<n2; n++) {
-      VECTOR(context->weights)[n]=IGRAPH_NAN;
-    }
-  }
-  IGRAPH_CHECK(igraph_i_dl_add_edge(from, to, context));
-  IGRAPH_CHECK(igraph_vector_push_back(&context->weights, weight));
-  return IGRAPH_SUCCESS;
-}
-
-/* Raise an error if the vertex index is invalid in the DL file.
- * DL files use 1-based vertex indices. */
-static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid) {
-    if (dl_vid < 1) {
-        IGRAPH_ERRORF("Invalid vertex index in DL file: %" IGRAPH_PRId ".",
-                      IGRAPH_EINVAL, dl_vid);
-    }
-    if (dl_vid > IGRAPH_DL_MAX_VERTEX_COUNT) {
-        IGRAPH_ERRORF("Vertex index too large in DL file: %" IGRAPH_PRId ".",
-                      IGRAPH_EINVAL, dl_vid);
-    }
-    return IGRAPH_SUCCESS;
+int igraph_ncol_yyerror(YYLTYPE* locp,
+            igraph_i_ncol_parsedata_t *context,
+            const char *s) {
+    snprintf(context->errmsg, sizeof(context->errmsg)/sizeof(char)-1,
+            "Parse error in NCOL file, line %i (%s)",
+            locp->first_line, s);
+    return 0;
 }

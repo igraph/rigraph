@@ -1,6 +1,3 @@
-#line 2 "src/vendor/io/ncol-lexer.c"
-
-#line 4 "src/vendor/io/ncol-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -680,7 +677,6 @@ static const flex_int32_t yy_rule_can_match_eol[6] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "src/vendor/cigraph/src/io/ncol-lexer.l"
 /*
    IGraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -702,7 +698,6 @@ static const flex_int32_t yy_rule_can_match_eol[6] =
    02110-1301 USA
 
 */
-#line 24 "src/vendor/cigraph/src/io/ncol-lexer.l"
 
 /*
    IGraph library.
@@ -741,9 +736,7 @@ static const flex_int32_t yy_rule_can_match_eol[6] =
 #endif
 #define stdout 0
 #endif
-#line 745 "src/vendor/io/ncol-lexer.c"
 #define YY_NO_INPUT 1
-#line 747 "src/vendor/io/ncol-lexer.c"
 
 #define INITIAL 0
 
@@ -1025,12 +1018,8 @@ YY_DECL
 		}
 
 	{
-#line 76 "src/vendor/cigraph/src/io/ncol-lexer.l"
 
-
-#line 79 "src/vendor/cigraph/src/io/ncol-lexer.l"
  /* ------------------------------------------------whitespace------*/
-#line 1034 "src/vendor/io/ncol-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1101,24 +1090,20 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 80 "src/vendor/cigraph/src/io/ncol-lexer.l"
 { }
 	YY_BREAK
 /* ---------------------------------------------------newline------*/
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/ncol-lexer.l"
 { return NEWLINE; }
 	YY_BREAK
 /* ----------------------------------------------alphanumeric------*/
 case 3:
 YY_RULE_SETUP
-#line 86 "src/vendor/cigraph/src/io/ncol-lexer.l"
 { return ALNUM; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 88 "src/vendor/cigraph/src/io/ncol-lexer.l"
 { if (yyextra->eof) {
                        yyterminate();
                     } else {
@@ -1130,15 +1115,12 @@ case YY_STATE_EOF(INITIAL):
 /* ---------------------------------------------anything else------*/
 case 4:
 YY_RULE_SETUP
-#line 97 "src/vendor/cigraph/src/io/ncol-lexer.l"
 { return ERROR; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 99 "src/vendor/cigraph/src/io/ncol-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1142 "src/vendor/io/ncol-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2297,7 +2279,4 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 }
 
 #define YYTABLES_NAME "yytables"
-
-#line 99 "src/vendor/cigraph/src/io/ncol-lexer.l"
-
 

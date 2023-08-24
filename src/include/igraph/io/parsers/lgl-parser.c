@@ -72,7 +72,6 @@
 #define yynerrs         igraph_lgl_yynerrs
 
 /* First part of user prologue.  */
-#line 23 "src/vendor/cigraph/src/io/lgl-parser.y"
 
 
 /*
@@ -115,7 +114,6 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
 
 #define scanner context->scanner
 
-#line 119 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -138,7 +136,7 @@ int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,
 #  endif
 # endif
 
-#include "yy.tab.h"
+#include "lgl-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1507,34 +1505,27 @@ yyreduce:
   switch (yyn)
     {
   case 6: /* vertexdef: "#" edgeid "end of line"  */
-#line 99 "src/vendor/cigraph/src/io/lgl-parser.y"
                                       { context->actvertex=(yyvsp[-1].edgenum); }
-#line 1513 "yy.tab.c"
     break;
 
   case 9: /* edge: edgeid "end of line"  */
-#line 103 "src/vendor/cigraph/src/io/lgl-parser.y"
                                     {
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actvertex));
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
              IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0));
            }
-#line 1523 "yy.tab.c"
     break;
 
   case 10: /* edge: edgeid weight "end of line"  */
-#line 108 "src/vendor/cigraph/src/io/lgl-parser.y"
                                     {
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, context->actvertex));
              IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
              IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
              context->has_weights = 1;
            }
-#line 1534 "yy.tab.c"
     break;
 
   case 11: /* edgeid: "alphanumeric"  */
-#line 117 "src/vendor/cigraph/src/io/lgl-parser.y"
                 {
   igraph_integer_t trie_id;
   IGRAPH_YY_CHECK(igraph_trie_get_len(context->trie,
@@ -1544,11 +1535,9 @@ yyreduce:
   ));
   (yyval.edgenum) = trie_id;
 }
-#line 1548 "yy.tab.c"
     break;
 
   case 12: /* weight: "alphanumeric"  */
-#line 127 "src/vendor/cigraph/src/io/lgl-parser.y"
                 {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_lgl_yyget_text(scanner),
@@ -1556,11 +1545,9 @@ yyreduce:
                                         &val));
     (yyval.weightnum)=val;
 }
-#line 1560 "yy.tab.c"
     break;
 
 
-#line 1564 "yy.tab.c"
 
       default: break;
     }
@@ -1789,7 +1776,6 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 135 "src/vendor/cigraph/src/io/lgl-parser.y"
 
 
 int igraph_lgl_yyerror(YYLTYPE* locp, igraph_i_lgl_parsedata_t *context,

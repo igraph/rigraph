@@ -72,7 +72,6 @@
 #define yynerrs         igraph_gml_yynerrs
 
 /* First part of user prologue.  */
-#line 21 "src/vendor/cigraph/src/io/gml-parser.y"
 
 
 /*
@@ -134,7 +133,6 @@ static igraph_error_t igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_
 #define USE(x) /*(x)*/
 
 
-#line 138 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -157,7 +155,7 @@ static igraph_error_t igraph_i_gml_merge(igraph_gml_tree_t *t1, igraph_gml_tree_
 #  endif
 # endif
 
-#include "yy.tab.h"
+#include "gml-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1231,27 +1229,19 @@ yydestruct (const char *yymsg,
   switch (yykind)
     {
     case YYSYMBOL_list: /* list  */
-#line 118 "src/vendor/cigraph/src/io/gml-parser.y"
             { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1237 "yy.tab.c"
         break;
 
     case YYSYMBOL_keyvalue: /* keyvalue  */
-#line 118 "src/vendor/cigraph/src/io/gml-parser.y"
             { igraph_gml_tree_destroy(((*yyvaluep).tree)); }
-#line 1243 "yy.tab.c"
         break;
 
     case YYSYMBOL_key: /* key  */
-#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
             { free(((*yyvaluep).str)); }
-#line 1249 "yy.tab.c"
         break;
 
     case YYSYMBOL_string: /* string  */
-#line 117 "src/vendor/cigraph/src/io/gml-parser.y"
             { free(((*yyvaluep).str)); }
-#line 1255 "yy.tab.c"
         break;
 
       default:
@@ -1555,57 +1545,40 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* input: list  */
-#line 122 "src/vendor/cigraph/src/io/gml-parser.y"
                    { context->tree=(yyvsp[0].tree); }
-#line 1561 "yy.tab.c"
     break;
 
   case 3: /* list: %empty  */
-#line 124 "src/vendor/cigraph/src/io/gml-parser.y"
                       { IGRAPH_YY_CHECK(igraph_i_gml_make_empty(&(yyval.tree))); }
-#line 1567 "yy.tab.c"
     break;
 
   case 4: /* list: keyvalue  */
-#line 125 "src/vendor/cigraph/src/io/gml-parser.y"
                       { (yyval.tree)=(yyvsp[0].tree); }
-#line 1573 "yy.tab.c"
     break;
 
   case 5: /* list: list keyvalue  */
-#line 126 "src/vendor/cigraph/src/io/gml-parser.y"
                       { IGRAPH_YY_CHECK(igraph_i_gml_merge((yyvsp[-1].tree), (yyvsp[0].tree))); (yyval.tree) = (yyvsp[-1].tree); }
-#line 1579 "yy.tab.c"
     break;
 
   case 6: /* keyvalue: key num  */
-#line 129 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_numeric((yyvsp[-1].str), (yylsp[-1]).first_line, (yyvsp[0].real), &(yyval.tree))); }
-#line 1585 "yy.tab.c"
     break;
 
   case 7: /* keyvalue: key string  */
-#line 131 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_string((yyvsp[-1].str), (yylsp[-1]).first_line, (yyvsp[0].str), &(yyval.tree))); }
-#line 1591 "yy.tab.c"
     break;
 
   case 8: /* keyvalue: key "[" list "]"  */
-#line 133 "src/vendor/cigraph/src/io/gml-parser.y"
             { IGRAPH_YY_CHECK(igraph_i_gml_make_list((yyvsp[-3].str), (yylsp[-3]).first_line, (yyvsp[-1].tree), &(yyval.tree))); }
-#line 1597 "yy.tab.c"
     break;
 
   case 9: /* key: "keyword"  */
-#line 136 "src/vendor/cigraph/src/io/gml-parser.y"
              { IGRAPH_YY_CHECK(igraph_i_gml_get_keyword(igraph_gml_yyget_text(scanner),
                                igraph_gml_yyget_leng(scanner),
                                &(yyval.str))); USE((yyvsp[0].str)); }
-#line 1605 "yy.tab.c"
     break;
 
   case 10: /* num: "number"  */
-#line 139 "src/vendor/cigraph/src/io/gml-parser.y"
           {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_gml_yyget_text(scanner),
@@ -1613,19 +1586,15 @@ yyreduce:
                                         &val));
     (yyval.real)=val;
 }
-#line 1617 "yy.tab.c"
     break;
 
   case 11: /* string: "string"  */
-#line 147 "src/vendor/cigraph/src/io/gml-parser.y"
                { IGRAPH_YY_CHECK(igraph_i_gml_get_string(igraph_gml_yyget_text(scanner),
                                          igraph_gml_yyget_leng(scanner),
                                          &(yyval.str))); }
-#line 1625 "yy.tab.c"
     break;
 
 
-#line 1629 "yy.tab.c"
 
       default: break;
     }
@@ -1854,7 +1823,6 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 151 "src/vendor/cigraph/src/io/gml-parser.y"
 
 
 int igraph_gml_yyerror(YYLTYPE* locp, igraph_i_gml_parsedata_t *context,

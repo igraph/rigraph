@@ -1,6 +1,3 @@
-#line 2 "src/vendor/io/gml-lexer.c"
-
-#line 4 "src/vendor/io/gml-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -15,237 +12,237 @@
 #endif
 
 #ifdef yy_create_buffer
-#define igraph_gml_yy_create_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_create_buffer_ALREADY_DEFINED
 #else
-#define yy_create_buffer igraph_gml_yy_create_buffer
+#define yy_create_buffer igraph_lgl_yy_create_buffer
 #endif
 
 #ifdef yy_delete_buffer
-#define igraph_gml_yy_delete_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_delete_buffer_ALREADY_DEFINED
 #else
-#define yy_delete_buffer igraph_gml_yy_delete_buffer
+#define yy_delete_buffer igraph_lgl_yy_delete_buffer
 #endif
 
 #ifdef yy_scan_buffer
-#define igraph_gml_yy_scan_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_buffer_ALREADY_DEFINED
 #else
-#define yy_scan_buffer igraph_gml_yy_scan_buffer
+#define yy_scan_buffer igraph_lgl_yy_scan_buffer
 #endif
 
 #ifdef yy_scan_string
-#define igraph_gml_yy_scan_string_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_string_ALREADY_DEFINED
 #else
-#define yy_scan_string igraph_gml_yy_scan_string
+#define yy_scan_string igraph_lgl_yy_scan_string
 #endif
 
 #ifdef yy_scan_bytes
-#define igraph_gml_yy_scan_bytes_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_bytes_ALREADY_DEFINED
 #else
-#define yy_scan_bytes igraph_gml_yy_scan_bytes
+#define yy_scan_bytes igraph_lgl_yy_scan_bytes
 #endif
 
 #ifdef yy_init_buffer
-#define igraph_gml_yy_init_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_init_buffer_ALREADY_DEFINED
 #else
-#define yy_init_buffer igraph_gml_yy_init_buffer
+#define yy_init_buffer igraph_lgl_yy_init_buffer
 #endif
 
 #ifdef yy_flush_buffer
-#define igraph_gml_yy_flush_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_flush_buffer_ALREADY_DEFINED
 #else
-#define yy_flush_buffer igraph_gml_yy_flush_buffer
+#define yy_flush_buffer igraph_lgl_yy_flush_buffer
 #endif
 
 #ifdef yy_load_buffer_state
-#define igraph_gml_yy_load_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yy_load_buffer_state_ALREADY_DEFINED
 #else
-#define yy_load_buffer_state igraph_gml_yy_load_buffer_state
+#define yy_load_buffer_state igraph_lgl_yy_load_buffer_state
 #endif
 
 #ifdef yy_switch_to_buffer
-#define igraph_gml_yy_switch_to_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_switch_to_buffer_ALREADY_DEFINED
 #else
-#define yy_switch_to_buffer igraph_gml_yy_switch_to_buffer
+#define yy_switch_to_buffer igraph_lgl_yy_switch_to_buffer
 #endif
 
 #ifdef yypush_buffer_state
-#define igraph_gml_yypush_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yypush_buffer_state_ALREADY_DEFINED
 #else
-#define yypush_buffer_state igraph_gml_yypush_buffer_state
+#define yypush_buffer_state igraph_lgl_yypush_buffer_state
 #endif
 
 #ifdef yypop_buffer_state
-#define igraph_gml_yypop_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yypop_buffer_state_ALREADY_DEFINED
 #else
-#define yypop_buffer_state igraph_gml_yypop_buffer_state
+#define yypop_buffer_state igraph_lgl_yypop_buffer_state
 #endif
 
 #ifdef yyensure_buffer_stack
-#define igraph_gml_yyensure_buffer_stack_ALREADY_DEFINED
+#define igraph_lgl_yyensure_buffer_stack_ALREADY_DEFINED
 #else
-#define yyensure_buffer_stack igraph_gml_yyensure_buffer_stack
+#define yyensure_buffer_stack igraph_lgl_yyensure_buffer_stack
 #endif
 
 #ifdef yylex
-#define igraph_gml_yylex_ALREADY_DEFINED
+#define igraph_lgl_yylex_ALREADY_DEFINED
 #else
-#define yylex igraph_gml_yylex
+#define yylex igraph_lgl_yylex
 #endif
 
 #ifdef yyrestart
-#define igraph_gml_yyrestart_ALREADY_DEFINED
+#define igraph_lgl_yyrestart_ALREADY_DEFINED
 #else
-#define yyrestart igraph_gml_yyrestart
+#define yyrestart igraph_lgl_yyrestart
 #endif
 
 #ifdef yylex_init
-#define igraph_gml_yylex_init_ALREADY_DEFINED
+#define igraph_lgl_yylex_init_ALREADY_DEFINED
 #else
-#define yylex_init igraph_gml_yylex_init
+#define yylex_init igraph_lgl_yylex_init
 #endif
 
 #ifdef yylex_init_extra
-#define igraph_gml_yylex_init_extra_ALREADY_DEFINED
+#define igraph_lgl_yylex_init_extra_ALREADY_DEFINED
 #else
-#define yylex_init_extra igraph_gml_yylex_init_extra
+#define yylex_init_extra igraph_lgl_yylex_init_extra
 #endif
 
 #ifdef yylex_destroy
-#define igraph_gml_yylex_destroy_ALREADY_DEFINED
+#define igraph_lgl_yylex_destroy_ALREADY_DEFINED
 #else
-#define yylex_destroy igraph_gml_yylex_destroy
+#define yylex_destroy igraph_lgl_yylex_destroy
 #endif
 
 #ifdef yyget_debug
-#define igraph_gml_yyget_debug_ALREADY_DEFINED
+#define igraph_lgl_yyget_debug_ALREADY_DEFINED
 #else
-#define yyget_debug igraph_gml_yyget_debug
+#define yyget_debug igraph_lgl_yyget_debug
 #endif
 
 #ifdef yyset_debug
-#define igraph_gml_yyset_debug_ALREADY_DEFINED
+#define igraph_lgl_yyset_debug_ALREADY_DEFINED
 #else
-#define yyset_debug igraph_gml_yyset_debug
+#define yyset_debug igraph_lgl_yyset_debug
 #endif
 
 #ifdef yyget_extra
-#define igraph_gml_yyget_extra_ALREADY_DEFINED
+#define igraph_lgl_yyget_extra_ALREADY_DEFINED
 #else
-#define yyget_extra igraph_gml_yyget_extra
+#define yyget_extra igraph_lgl_yyget_extra
 #endif
 
 #ifdef yyset_extra
-#define igraph_gml_yyset_extra_ALREADY_DEFINED
+#define igraph_lgl_yyset_extra_ALREADY_DEFINED
 #else
-#define yyset_extra igraph_gml_yyset_extra
+#define yyset_extra igraph_lgl_yyset_extra
 #endif
 
 #ifdef yyget_in
-#define igraph_gml_yyget_in_ALREADY_DEFINED
+#define igraph_lgl_yyget_in_ALREADY_DEFINED
 #else
-#define yyget_in igraph_gml_yyget_in
+#define yyget_in igraph_lgl_yyget_in
 #endif
 
 #ifdef yyset_in
-#define igraph_gml_yyset_in_ALREADY_DEFINED
+#define igraph_lgl_yyset_in_ALREADY_DEFINED
 #else
-#define yyset_in igraph_gml_yyset_in
+#define yyset_in igraph_lgl_yyset_in
 #endif
 
 #ifdef yyget_out
-#define igraph_gml_yyget_out_ALREADY_DEFINED
+#define igraph_lgl_yyget_out_ALREADY_DEFINED
 #else
-#define yyget_out igraph_gml_yyget_out
+#define yyget_out igraph_lgl_yyget_out
 #endif
 
 #ifdef yyset_out
-#define igraph_gml_yyset_out_ALREADY_DEFINED
+#define igraph_lgl_yyset_out_ALREADY_DEFINED
 #else
-#define yyset_out igraph_gml_yyset_out
+#define yyset_out igraph_lgl_yyset_out
 #endif
 
 #ifdef yyget_leng
-#define igraph_gml_yyget_leng_ALREADY_DEFINED
+#define igraph_lgl_yyget_leng_ALREADY_DEFINED
 #else
-#define yyget_leng igraph_gml_yyget_leng
+#define yyget_leng igraph_lgl_yyget_leng
 #endif
 
 #ifdef yyget_text
-#define igraph_gml_yyget_text_ALREADY_DEFINED
+#define igraph_lgl_yyget_text_ALREADY_DEFINED
 #else
-#define yyget_text igraph_gml_yyget_text
+#define yyget_text igraph_lgl_yyget_text
 #endif
 
 #ifdef yyget_lineno
-#define igraph_gml_yyget_lineno_ALREADY_DEFINED
+#define igraph_lgl_yyget_lineno_ALREADY_DEFINED
 #else
-#define yyget_lineno igraph_gml_yyget_lineno
+#define yyget_lineno igraph_lgl_yyget_lineno
 #endif
 
 #ifdef yyset_lineno
-#define igraph_gml_yyset_lineno_ALREADY_DEFINED
+#define igraph_lgl_yyset_lineno_ALREADY_DEFINED
 #else
-#define yyset_lineno igraph_gml_yyset_lineno
+#define yyset_lineno igraph_lgl_yyset_lineno
 #endif
 
 #ifdef yyget_column
-#define igraph_gml_yyget_column_ALREADY_DEFINED
+#define igraph_lgl_yyget_column_ALREADY_DEFINED
 #else
-#define yyget_column igraph_gml_yyget_column
+#define yyget_column igraph_lgl_yyget_column
 #endif
 
 #ifdef yyset_column
-#define igraph_gml_yyset_column_ALREADY_DEFINED
+#define igraph_lgl_yyset_column_ALREADY_DEFINED
 #else
-#define yyset_column igraph_gml_yyset_column
+#define yyset_column igraph_lgl_yyset_column
 #endif
 
 #ifdef yywrap
-#define igraph_gml_yywrap_ALREADY_DEFINED
+#define igraph_lgl_yywrap_ALREADY_DEFINED
 #else
-#define yywrap igraph_gml_yywrap
+#define yywrap igraph_lgl_yywrap
 #endif
 
 #ifdef yyget_lval
-#define igraph_gml_yyget_lval_ALREADY_DEFINED
+#define igraph_lgl_yyget_lval_ALREADY_DEFINED
 #else
-#define yyget_lval igraph_gml_yyget_lval
+#define yyget_lval igraph_lgl_yyget_lval
 #endif
 
 #ifdef yyset_lval
-#define igraph_gml_yyset_lval_ALREADY_DEFINED
+#define igraph_lgl_yyset_lval_ALREADY_DEFINED
 #else
-#define yyset_lval igraph_gml_yyset_lval
+#define yyset_lval igraph_lgl_yyset_lval
 #endif
 
 #ifdef yyget_lloc
-#define igraph_gml_yyget_lloc_ALREADY_DEFINED
+#define igraph_lgl_yyget_lloc_ALREADY_DEFINED
 #else
-#define yyget_lloc igraph_gml_yyget_lloc
+#define yyget_lloc igraph_lgl_yyget_lloc
 #endif
 
 #ifdef yyset_lloc
-#define igraph_gml_yyset_lloc_ALREADY_DEFINED
+#define igraph_lgl_yyset_lloc_ALREADY_DEFINED
 #else
-#define yyset_lloc igraph_gml_yyset_lloc
+#define yyset_lloc igraph_lgl_yyset_lloc
 #endif
 
 #ifdef yyalloc
-#define igraph_gml_yyalloc_ALREADY_DEFINED
+#define igraph_lgl_yyalloc_ALREADY_DEFINED
 #else
-#define yyalloc igraph_gml_yyalloc
+#define yyalloc igraph_lgl_yyalloc
 #endif
 
 #ifdef yyrealloc
-#define igraph_gml_yyrealloc_ALREADY_DEFINED
+#define igraph_lgl_yyrealloc_ALREADY_DEFINED
 #else
-#define yyrealloc igraph_gml_yyrealloc
+#define yyrealloc igraph_lgl_yyrealloc
 #endif
 
 #ifdef yyfree
-#define igraph_gml_yyfree_ALREADY_DEFINED
+#define igraph_lgl_yyfree_ALREADY_DEFINED
 #else
-#define yyfree igraph_gml_yyfree
+#define yyfree igraph_lgl_yyfree
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -570,7 +567,7 @@ void yyfree ( void * , yyscan_t yyscanner );
 
 /* Begin user sect3 */
 
-#define igraph_gml_yywrap(yyscanner) (/*CONSTCOND*/1)
+#define igraph_lgl_yywrap(yyscanner) (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
@@ -592,8 +589,8 @@ static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-#define YY_NUM_RULES 10
-#define YY_END_OF_BUFFER 11
+#define YY_NUM_RULES 6
+#define YY_END_OF_BUFFER 7
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -601,30 +598,28 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[40] =
+static const flex_int16_t yy_accept[14] =
     {   0,
-        0,    0,    0,    0,   11,    9,    8,    8,    9,    9,
-        4,    5,    6,    7,    1,    9,    5,    5,    0,    2,
-        4,    0,    0,    5,    1,    0,    0,    5,    5,    4,
-        0,    4,    0,    0,    3,    3,    3,    3,    0
+        0,    0,    7,    4,    2,    3,    3,    1,    5,    4,
+        2,    3,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
-        2,    2,    4,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    4,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    5,    6,    1,    1,    1,    1,    1,
-        1,    1,    7,    1,    8,    9,    1,   10,   10,   10,
-       10,   10,   10,   10,   10,   10,   10,    1,    1,    1,
-        1,    1,    1,    1,   11,   12,   12,   12,   13,   14,
-       12,   12,   15,   12,   12,   12,   12,   16,   12,   12,
-       12,   12,   12,   12,   12,   12,   12,   12,   12,   12,
-       17,    1,   18,    1,   12,    1,   19,   12,   12,   12,
+        1,    2,    1,    1,    5,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
-       13,   20,   12,   12,   21,   12,   12,   12,   12,   22,
-       12,   12,   12,   12,   12,   12,   12,   12,   12,   12,
-       12,   12,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -641,65 +636,39 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[24] =
+static const YY_CHAR yy_meta[7] =
     {   0,
-        1,    1,    2,    2,    1,    1,    1,    1,    1,    3,
-        3,    3,    3,    3,    3,    3,    1,    1,    3,    3,
-        3,    3,    4
+        1,    2,    3,    4,    5,    5
     } ;
 
-static const flex_int16_t yy_base[43] =
+static const flex_int16_t yy_base[18] =
     {   0,
-        0,   70,   17,   69,   74,   77,   77,   77,   68,   61,
-       17,    0,   77,   77,    0,   30,   12,   18,   59,   77,
-       34,   52,   46,    0,    0,   19,   31,   35,   41,   48,
-       38,   26,   45,   44,    0,    0,   77,   77,   77,   66,
-       28,   69
+        0,    0,   11,    0,    0,    0,    0,   12,   12,    0,
+        0,   12,   12,    9,    7,    4,    4
     } ;
 
-static const flex_int16_t yy_def[43] =
+static const flex_int16_t yy_def[18] =
     {   0,
-       39,    1,    1,    3,   39,   39,   39,   39,   40,   39,
-       39,   41,   39,   39,   42,   39,   41,   41,   40,   39,
-       39,   39,   39,   41,   42,   39,   39,   41,   41,   39,
-       39,   39,   39,   39,   41,   41,   39,   39,    0,   39,
-       39,   39
+       13,    1,   13,   14,   15,   16,   17,   13,   13,   14,
+       15,   13,    0,   13,   13,   13,   13
     } ;
 
-static const flex_int16_t yy_nxt[101] =
+static const flex_int16_t yy_nxt[19] =
     {   0,
-        6,    7,    8,    7,    9,    6,   10,   10,    6,   11,
-       12,   12,   12,   12,   12,   12,   13,   14,   12,   12,
-       12,   12,    6,   16,   16,   22,   21,   28,   29,   23,
-       24,   17,   18,   28,   33,   32,   29,   17,   18,   21,
-       33,   34,   22,   21,   26,   27,   23,   32,   35,   34,
-       26,   27,   31,   31,   35,   32,   36,   30,   37,   38,
-       23,   30,   36,   20,   37,   38,   19,   19,   19,   25,
-       21,   25,   20,   39,   15,   15,    5,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39
-
+        4,    5,    6,    7,    8,    9,   12,   12,   11,   10,
+       13,    3,   13,   13,   13,   13,   13,   13
     } ;
 
-static const flex_int16_t yy_chk[101] =
+static const flex_int16_t yy_chk[19] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    3,    3,   11,   11,   17,   18,   11,
-       41,    3,    3,   17,   26,   32,   18,    3,    3,   16,
-       26,   27,   21,   21,   16,   16,   21,   31,   28,   27,
-       16,   16,   23,   23,   28,   23,   29,   30,   33,   34,
-       30,   22,   29,   19,   33,   34,   40,   40,   40,   42,
-       10,   42,    9,    5,    4,    2,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39
-
+        1,    1,    1,    1,    1,    1,   17,   16,   15,   14,
+        3,   13,   13,   13,   13,   13,   13,   13
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[11] =
+static const flex_int32_t yy_rule_can_match_eol[7] =
     {   0,
-0, 1, 0, 0, 0, 0, 0, 1, 0, 0,     };
+0, 0, 1, 0, 0, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -708,10 +677,10 @@ static const flex_int32_t yy_rule_can_match_eol[11] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "src/vendor/cigraph/src/io/gml-lexer.l"
 /*
    IGraph library.
-   Copyright (C) 2007-2021  The igraph development team
+   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   334 Harvard st, Cambridge, MA, 02138 USA
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -725,10 +694,10 @@ static const flex_int32_t yy_rule_can_match_eol[11] =
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
+
 */
-#line 22 "src/vendor/cigraph/src/io/gml-lexer.l"
 
 /*
    IGraph library.
@@ -754,12 +723,12 @@ static const flex_int32_t yy_rule_can_match_eol[11] =
 
 #include <stdlib.h>
 
-#include "io/gml-header.h"
-#include "io/parsers/gml-parser.h"
+#include "io/lgl-header.h"
+#include "io/parsers/lgl-parser.h"
 
-#define YY_EXTRA_TYPE igraph_i_gml_parsedata_t*
+#define YY_EXTRA_TYPE igraph_i_lgl_parsedata_t*
 #define YY_USER_ACTION yylloc->first_line = yylineno;
-#define YY_FATAL_ERROR(msg) IGRAPH_FATAL("Error in GML parser: " # msg)
+#define YY_FATAL_ERROR(msg) IGRAPH_FATAL("Error in LGL parser: " # msg)
 #ifdef USING_R
 #define fprintf(file, msg, ...) (1)
 #ifdef stdout
@@ -767,15 +736,9 @@ static const flex_int32_t yy_rule_can_match_eol[11] =
 #endif
 #define stdout 0
 #endif
-#line 771 "src/vendor/io/gml-lexer.c"
 #define YY_NO_INPUT 1
-/* Use to parse inf/nan as number only when expecting a value, i.e. after a keyword.
- * Otherwise they are parsed as a keyword. */
-
-#line 776 "src/vendor/io/gml-lexer.c"
 
 #define INITIAL 0
-#define VALUE 1
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -1013,9 +976,6 @@ extern int yylex \
 #endif
 
 #define YY_RULE_SETUP \
-	if ( yyleng > 0 ) \
-		YY_CURRENT_BUFFER_LVALUE->yy_at_bol = \
-				(yytext[yyleng - 1] == '\n'); \
 	YY_USER_ACTION
 
 /** The main scanner function which does all the work.
@@ -1058,10 +1018,8 @@ YY_DECL
 		}
 
 	{
-#line 79 "src/vendor/cigraph/src/io/gml-lexer.l"
 
-
-#line 1065 "src/vendor/io/gml-lexer.c"
+ /* --------------------------------------------------hashmark------*/
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1076,7 +1034,6 @@ YY_DECL
 		yy_bp = yy_cp;
 
 		yy_current_state = yyg->yy_start;
-		yy_current_state += YY_AT_BOL();
 yy_match:
 		do
 			{
@@ -1089,13 +1046,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 40 )
+				if ( yy_current_state >= 14 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 77 );
+		while ( yy_base[yy_current_state] != 12 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -1133,71 +1090,41 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 81 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ /* comments ignored */ }
+{ return HASH; }
 	YY_BREAK
+/* ------------------------------------------------whitespace------*/
 case 2:
-/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ BEGIN(INITIAL); return STRING; }
+{ }
 	YY_BREAK
+/* ---------------------------------------------------newline------*/
 case 3:
+/* rule 3 can match eol */
 YY_RULE_SETUP
-#line 84 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ BEGIN(INITIAL); return NUM; }
+{ return NEWLINE; }
 	YY_BREAK
+/* ----------------------------------------------alphanumeric------*/
 case 4:
 YY_RULE_SETUP
-#line 85 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ BEGIN(INITIAL); return NUM; }
+{ return ALNUM; }
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+{ if (yyextra->eof) {
+                       yyterminate();
+                    } else {
+                       yyextra->eof=1;
+                       return NEWLINE;
+                    }
+                  }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 86 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ BEGIN(VALUE); return KEYWORD; }
+{ return ERROR; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 87 "src/vendor/cigraph/src/io/gml-lexer.l"
-{
-                          BEGIN(INITIAL);
-                          yyextra->depth++;
-                          if (yyextra->depth >= 32) {
-                            return ERROR;
-                          } else {
-                            return LISTOPEN;
-                          }
-                        }
-	YY_BREAK
-case 7:
-YY_RULE_SETUP
-#line 96 "src/vendor/cigraph/src/io/gml-lexer.l"
-{
-                          yyextra->depth--;
-                          return LISTCLOSE;
-                        }
-	YY_BREAK
-case 8:
-/* rule 8 can match eol */
-YY_RULE_SETUP
-#line 100 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ /* other whitespace ignored */ }
-	YY_BREAK
-case 9:
-YY_RULE_SETUP
-#line 102 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ return ERROR; }
-	YY_BREAK
-case 10:
-YY_RULE_SETUP
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1198 "src/vendor/io/gml-lexer.c"
-case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(VALUE):
-	yyterminate();
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1482,11 +1409,10 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
 	yy_current_state = yyg->yy_start;
-	yy_current_state += YY_AT_BOL();
 
 	for ( yy_cp = yyg->yytext_ptr + YY_MORE_ADJ; yy_cp < yyg->yy_c_buf_p; ++yy_cp )
 		{
-		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 23);
+		YY_CHAR yy_c = (*yy_cp ? yy_ec[YY_SC_TO_UI(*yy_cp)] : 6);
 		if ( yy_accept[yy_current_state] )
 			{
 			yyg->yy_last_accepting_state = yy_current_state;
@@ -1495,7 +1421,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 40 )
+			if ( yy_current_state >= 14 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1515,7 +1441,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner; /* This var may be unused depending upon options. */
 	char *yy_cp = yyg->yy_c_buf_p;
 
-	YY_CHAR yy_c = 23;
+	YY_CHAR yy_c = 6;
 	if ( yy_accept[yy_current_state] )
 		{
 		yyg->yy_last_accepting_state = yy_current_state;
@@ -1524,11 +1450,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 40 )
+		if ( yy_current_state >= 14 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 39);
+	yy_is_jam = (yy_current_state == 13);
 
 	(void)yyg;
 	return yy_is_jam ? 0 : yy_current_state;
@@ -1609,8 +1535,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	*yyg->yy_c_buf_p = '\0';	/* preserve yytext */
 	yyg->yy_hold_char = *++yyg->yy_c_buf_p;
 
-	YY_CURRENT_BUFFER_LVALUE->yy_at_bol = (c == '\n');
-	if ( YY_CURRENT_BUFFER_LVALUE->yy_at_bol )
+	if ( c == '\n' )
 		
     do{ yylineno++;
         yycolumn=0;
@@ -2358,7 +2283,4 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 }
 
 #define YYTABLES_NAME "yytables"
-
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
-
 

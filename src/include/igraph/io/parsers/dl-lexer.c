@@ -1,6 +1,3 @@
-#line 2 "src/vendor/io/dl-lexer.c"
-
-#line 4 "src/vendor/io/dl-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -835,7 +832,6 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "src/vendor/cigraph/src/io/dl-lexer.l"
 /*
    IGraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -857,7 +853,6 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
    02110-1301 USA
 
 */
-#line 24 "src/vendor/cigraph/src/io/dl-lexer.l"
 
 /*
    IGraph library.
@@ -897,10 +892,7 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 #endif
 #define stdout 0
 #endif
-#line 901 "src/vendor/io/dl-lexer.c"
 #define YY_NO_INPUT 1
-
-#line 904 "src/vendor/io/dl-lexer.c"
 
 #define INITIAL 0
 #define LABELM 1
@@ -1186,10 +1178,6 @@ YY_DECL
 		}
 
 	{
-#line 81 "src/vendor/cigraph/src/io/dl-lexer.l"
-
-
-#line 1193 "src/vendor/io/dl-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1261,27 +1249,22 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return NEWLINE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 85 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return DL; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 86 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return NEQ; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 87 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return NUM; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 89 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
   switch (yyextra->mode) {
   case 0: BEGIN(FULLMATRIX);
@@ -1295,91 +1278,74 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "src/vendor/cigraph/src/io/dl-lexer.l"
 { BEGIN(LABELM); return LABELS; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 101 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
   return LABELSEMBEDDED; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 103 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
   yyextra->mode=0; return FORMATFULLMATRIX; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 105 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
   yyextra->mode=1; return FORMATEDGELIST1; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 107 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
   yyextra->mode=2; return FORMATNODELIST1; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 110 "src/vendor/cigraph/src/io/dl-lexer.l"
 { /* eaten up */ }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 111 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return LABEL; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 113 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return DIGIT; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 114 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return LABEL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 115 "src/vendor/cigraph/src/io/dl-lexer.l"
 { }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 117 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return NUM; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 118 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return LABEL; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 119 "src/vendor/cigraph/src/io/dl-lexer.l"
 { }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 121 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return NUM; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 122 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return LABEL; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 123 "src/vendor/cigraph/src/io/dl-lexer.l"
 { }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 125 "src/vendor/cigraph/src/io/dl-lexer.l"
 { /* eaten up */ }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
@@ -1387,7 +1353,6 @@ case YY_STATE_EOF(LABELM):
 case YY_STATE_EOF(FULLMATRIX):
 case YY_STATE_EOF(EDGELIST):
 case YY_STATE_EOF(NODELIST):
-#line 127 "src/vendor/cigraph/src/io/dl-lexer.l"
 {
                           if (yyextra->eof) {
                             yyterminate();
@@ -1400,15 +1365,12 @@ case YY_STATE_EOF(NODELIST):
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 137 "src/vendor/cigraph/src/io/dl-lexer.l"
 { return 0; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1412 "src/vendor/io/dl-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2568,4 +2530,3 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
