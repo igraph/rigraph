@@ -1,6 +1,6 @@
-#line 2 "src/include/io/parsers/dl-lexer.c"
+#line 2 "src/vendor/io/dl-lexer.c"
 
-#line 4 "src/include/io/parsers/dl-lexer.c"
+#line 4 "src/vendor/io/dl-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -897,10 +897,10 @@ static const flex_int32_t yy_rule_can_match_eol[25] =
 #endif
 #define stdout 0
 #endif
-#line 901 "src/include/io/parsers/dl-lexer.c"
+#line 901 "src/vendor/io/dl-lexer.c"
 #define YY_NO_INPUT 1
 
-#line 904 "src/include/io/parsers/dl-lexer.c"
+#line 904 "src/vendor/io/dl-lexer.c"
 
 #define INITIAL 0
 #define LABELM 1
@@ -1189,7 +1189,7 @@ YY_DECL
 #line 81 "src/vendor/cigraph/src/io/dl-lexer.l"
 
 
-#line 1193 "src/include/io/parsers/dl-lexer.c"
+#line 1193 "src/vendor/io/dl-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1408,7 +1408,7 @@ YY_RULE_SETUP
 #line 138 "src/vendor/cigraph/src/io/dl-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1412 "src/include/io/parsers/dl-lexer.c"
+#line 1412 "src/vendor/io/dl-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
