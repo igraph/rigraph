@@ -72,6 +72,7 @@
 #define yynerrs         igraph_dl_yynerrs
 
 /* First part of user prologue.  */
+#line 23 "src/vendor/cigraph/src/io/dl-parser.y"
 
 
 /*
@@ -116,6 +117,7 @@ static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid);
 #define scanner context->scanner
 
 
+#line 121 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -138,7 +140,7 @@ static igraph_error_t igraph_i_dl_check_vid(igraph_integer_t dl_vid);
 #  endif
 # endif
 
-#include "dl-parser.h"
+#include "io/parsers/dl-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1635,6 +1637,7 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* input: "DL" "n=vertexcount" integer "end of line" rest trail eof  */
+#line 104 "src/vendor/cigraph/src/io/dl-parser.y"
                                              {
   context->n=(yyvsp[-4].integer);
   if (context->n < 0) {
@@ -1644,67 +1647,95 @@ yyreduce:
     IGRAPH_YY_ERRORF("Vertex count too large in DL file (%" IGRAPH_PRId ").", IGRAPH_EINVAL, context->n);
   }
 }
+#line 1651 "yy.tab.c"
     break;
 
   case 7: /* rest: formfullmatrix  */
+#line 118 "src/vendor/cigraph/src/io/dl-parser.y"
                         { context->type=IGRAPH_DL_MATRIX; }
+#line 1657 "yy.tab.c"
     break;
 
   case 8: /* rest: edgelist1  */
+#line 119 "src/vendor/cigraph/src/io/dl-parser.y"
                         { context->type=IGRAPH_DL_EDGELIST1; }
+#line 1663 "yy.tab.c"
     break;
 
   case 9: /* rest: nodelist1  */
+#line 120 "src/vendor/cigraph/src/io/dl-parser.y"
                         { context->type=IGRAPH_DL_NODELIST1; }
+#line 1669 "yy.tab.c"
     break;
 
   case 10: /* formfullmatrix: FORMATFULLMATRIX newline fullmatrix  */
+#line 123 "src/vendor/cigraph/src/io/dl-parser.y"
                                                      {}
+#line 1675 "yy.tab.c"
     break;
 
   case 11: /* formfullmatrix: fullmatrix  */
+#line 123 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                      {}
+#line 1681 "yy.tab.c"
     break;
 
   case 14: /* fullmatrix: "data:" newline fullmatrixdata  */
+#line 127 "src/vendor/cigraph/src/io/dl-parser.y"
                                           { }
+#line 1687 "yy.tab.c"
     break;
 
   case 15: /* fullmatrix: "labels:" newline labels newline "data:" newline fullmatrixdata  */
+#line 128 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         { }
+#line 1693 "yy.tab.c"
     break;
 
   case 16: /* fullmatrix: "labels embedded:" newline "data:" newline labeledfullmatrixdata  */
+#line 129 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         { }
+#line 1699 "yy.tab.c"
     break;
 
   case 17: /* labels: %empty  */
+#line 132 "src/vendor/cigraph/src/io/dl-parser.y"
               {}
+#line 1705 "yy.tab.c"
     break;
 
   case 18: /* labels: labels newline "label"  */
+#line 133 "src/vendor/cigraph/src/io/dl-parser.y"
                                    {
               IGRAPH_YY_CHECK(igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
                                                   igraph_dl_yyget_leng(scanner),
                                                   context)); }
+#line 1714 "yy.tab.c"
     break;
 
   case 19: /* fullmatrixdata: %empty  */
+#line 139 "src/vendor/cigraph/src/io/dl-parser.y"
                 {}
+#line 1720 "yy.tab.c"
     break;
 
   case 20: /* fullmatrixdata: fullmatrixdata zerooneseq "end of line"  */
+#line 139 "src/vendor/cigraph/src/io/dl-parser.y"
                                                        {
   context->from += 1;
   context->to = 0;
  }
+#line 1729 "yy.tab.c"
     break;
 
   case 22: /* zerooneseq: zerooneseq zeroone  */
+#line 144 "src/vendor/cigraph/src/io/dl-parser.y"
                                  { }
+#line 1735 "yy.tab.c"
     break;
 
   case 23: /* zeroone: "binary digit"  */
+#line 146 "src/vendor/cigraph/src/io/dl-parser.y"
                {
   /* TODO: What if the digit is neither 0 or 1? Are multigraphs allowed? */
   char c = igraph_dl_yyget_text(scanner)[0];
@@ -1719,90 +1750,124 @@ yyreduce:
   }
   context->to += 1;
 }
+#line 1754 "yy.tab.c"
     break;
 
   case 24: /* labeledfullmatrixdata: reallabeledfullmatrixdata  */
+#line 161 "src/vendor/cigraph/src/io/dl-parser.y"
                                                  {}
+#line 1760 "yy.tab.c"
     break;
 
   case 25: /* reallabeledfullmatrixdata: labelseq "end of line" labeledmatrixlines  */
+#line 163 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                {}
+#line 1766 "yy.tab.c"
     break;
 
   case 28: /* label: "label"  */
+#line 167 "src/vendor/cigraph/src/io/dl-parser.y"
              { IGRAPH_YY_CHECK(igraph_i_dl_add_str(igraph_dl_yyget_text(scanner),
                                                    igraph_dl_yyget_leng(scanner),
                                                    context)); }
+#line 1774 "yy.tab.c"
     break;
 
   case 29: /* labeledmatrixlines: labeledmatrixline  */
+#line 171 "src/vendor/cigraph/src/io/dl-parser.y"
                                       {
                  context->from += 1;
                  context->to = 0;
                }
+#line 1783 "yy.tab.c"
     break;
 
   case 30: /* labeledmatrixlines: labeledmatrixlines labeledmatrixline  */
+#line 175 "src/vendor/cigraph/src/io/dl-parser.y"
                                                     {
                  context->from += 1;
                  context->to = 0;
                }
+#line 1792 "yy.tab.c"
     break;
 
   case 31: /* labeledmatrixline: "label" zerooneseq "end of line"  */
+#line 180 "src/vendor/cigraph/src/io/dl-parser.y"
                                             { }
+#line 1798 "yy.tab.c"
     break;
 
   case 32: /* edgelist1: FORMATEDGELIST1 newline edgelist1rest  */
+#line 184 "src/vendor/cigraph/src/io/dl-parser.y"
                                                  {}
+#line 1804 "yy.tab.c"
     break;
 
   case 33: /* edgelist1rest: "data:" newline edgelist1data  */
+#line 186 "src/vendor/cigraph/src/io/dl-parser.y"
                                             {}
+#line 1810 "yy.tab.c"
     break;
 
   case 34: /* edgelist1rest: "labels:" newline labels newline "data:" newline edgelist1data  */
+#line 187 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         {}
+#line 1816 "yy.tab.c"
     break;
 
   case 35: /* edgelist1rest: "labels embedded:" newline "data:" newline labelededgelist1data  */
+#line 188 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         {}
+#line 1822 "yy.tab.c"
     break;
 
   case 36: /* edgelist1rest: "labels:" newline labels newline "labels embedded:" newline "data:" newline labelededgelist1data  */
+#line 189 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                                                       {}
+#line 1828 "yy.tab.c"
     break;
 
   case 37: /* edgelist1rest: "labels embedded:" newline "labels:" newline labels newline "data:" newline labelededgelist1data  */
+#line 190 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                                                       {}
+#line 1834 "yy.tab.c"
     break;
 
   case 38: /* edgelist1data: %empty  */
+#line 193 "src/vendor/cigraph/src/io/dl-parser.y"
                {}
+#line 1840 "yy.tab.c"
     break;
 
   case 39: /* edgelist1data: edgelist1data edgelist1dataline  */
+#line 194 "src/vendor/cigraph/src/io/dl-parser.y"
                                                {}
+#line 1846 "yy.tab.c"
     break;
 
   case 40: /* edgelist1dataline: integer integer weight "end of line"  */
+#line 197 "src/vendor/cigraph/src/io/dl-parser.y"
                                                   {
                     igraph_integer_t from = (yyvsp[-3].integer), to = (yyvsp[-2].integer);
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
                     IGRAPH_YY_CHECK(igraph_i_dl_add_edge_w(from-1, to-1, (yyvsp[-1].real), context)); }
+#line 1856 "yy.tab.c"
     break;
 
   case 41: /* edgelist1dataline: integer integer "end of line"  */
+#line 202 "src/vendor/cigraph/src/io/dl-parser.y"
                                            {
                     igraph_integer_t from = (yyvsp[-2].integer), to = (yyvsp[-1].integer);
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(from));
                     IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
                     IGRAPH_YY_CHECK(igraph_i_dl_add_edge(from-1, to-1, context));
 }
+#line 1867 "yy.tab.c"
     break;
 
   case 42: /* integer: "number"  */
+#line 209 "src/vendor/cigraph/src/io/dl-parser.y"
              {
     igraph_integer_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_dl_yyget_text(scanner),
@@ -1810,28 +1875,38 @@ yyreduce:
                                            &val));
     (yyval.integer)=val;
 }
+#line 1879 "yy.tab.c"
     break;
 
   case 43: /* labelededgelist1data: %empty  */
+#line 217 "src/vendor/cigraph/src/io/dl-parser.y"
                       {}
+#line 1885 "yy.tab.c"
     break;
 
   case 44: /* labelededgelist1data: labelededgelist1data labelededgelist1dataline  */
+#line 218 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                     {}
+#line 1891 "yy.tab.c"
     break;
 
   case 45: /* labelededgelist1dataline: elabel elabel weight "end of line"  */
+#line 221 "src/vendor/cigraph/src/io/dl-parser.y"
                                                        {
                           IGRAPH_YY_CHECK(igraph_i_dl_add_edge_w((yyvsp[-3].integer), (yyvsp[-2].integer), (yyvsp[-1].real), context)); }
+#line 1898 "yy.tab.c"
     break;
 
   case 46: /* labelededgelist1dataline: elabel elabel "end of line"  */
+#line 223 "src/vendor/cigraph/src/io/dl-parser.y"
                                                 {
                           IGRAPH_YY_CHECK(igraph_i_dl_add_edge((yyvsp[-2].integer), (yyvsp[-1].integer), context));
  }
+#line 1906 "yy.tab.c"
     break;
 
   case 47: /* weight: "number"  */
+#line 227 "src/vendor/cigraph/src/io/dl-parser.y"
             {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_dl_yyget_text(scanner),
@@ -1839,9 +1914,11 @@ yyreduce:
                                         &val));
     (yyval.real)=val;
 }
+#line 1918 "yy.tab.c"
     break;
 
   case 48: /* elabel: "label"  */
+#line 235 "src/vendor/cigraph/src/io/dl-parser.y"
               {
   igraph_integer_t trie_id;
 
@@ -1858,58 +1935,82 @@ yyreduce:
   IGRAPH_ASSERT(0 <= trie_id && trie_id < IGRAPH_DL_MAX_VERTEX_COUNT);
   (yyval.integer) = trie_id;
  }
+#line 1939 "yy.tab.c"
     break;
 
   case 49: /* nodelist1: FORMATNODELIST1 newline nodelist1rest  */
+#line 254 "src/vendor/cigraph/src/io/dl-parser.y"
                                                  {}
+#line 1945 "yy.tab.c"
     break;
 
   case 50: /* nodelist1rest: "data:" nodelist1data  */
+#line 256 "src/vendor/cigraph/src/io/dl-parser.y"
                                     {}
+#line 1951 "yy.tab.c"
     break;
 
   case 51: /* nodelist1rest: "labels:" newline labels newline "data:" newline nodelist1data  */
+#line 257 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         {}
+#line 1957 "yy.tab.c"
     break;
 
   case 52: /* nodelist1rest: "labels embedded:" newline "data:" newline labelednodelist1data  */
+#line 258 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                         {}
+#line 1963 "yy.tab.c"
     break;
 
   case 53: /* nodelist1rest: "labels:" newline labels newline "labels embedded:" newline "data:" newline labelednodelist1data  */
+#line 259 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                                                       {}
+#line 1969 "yy.tab.c"
     break;
 
   case 54: /* nodelist1rest: "labels embedded:" newline "labels:" newline labels newline "data:" newline labelednodelist1data  */
+#line 260 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                                                       {}
+#line 1975 "yy.tab.c"
     break;
 
   case 55: /* nodelist1data: %empty  */
+#line 263 "src/vendor/cigraph/src/io/dl-parser.y"
                {}
+#line 1981 "yy.tab.c"
     break;
 
   case 56: /* nodelist1data: nodelist1data nodelist1dataline  */
+#line 264 "src/vendor/cigraph/src/io/dl-parser.y"
                                                {}
+#line 1987 "yy.tab.c"
     break;
 
   case 57: /* nodelist1dataline: from tolist "end of line"  */
+#line 267 "src/vendor/cigraph/src/io/dl-parser.y"
                                        {}
+#line 1993 "yy.tab.c"
     break;
 
   case 58: /* from: "number"  */
+#line 269 "src/vendor/cigraph/src/io/dl-parser.y"
           {
   IGRAPH_YY_CHECK(igraph_i_parse_integer(igraph_dl_yyget_text(scanner),
                   igraph_dl_yyget_leng(scanner),
                   &context->from));
   IGRAPH_YY_CHECK(igraph_i_dl_check_vid(context->from));
 }
+#line 2004 "yy.tab.c"
     break;
 
   case 59: /* tolist: %empty  */
+#line 276 "src/vendor/cigraph/src/io/dl-parser.y"
         {}
+#line 2010 "yy.tab.c"
     break;
 
   case 60: /* tolist: tolist integer  */
+#line 276 "src/vendor/cigraph/src/io/dl-parser.y"
                             {
   igraph_integer_t to = (yyvsp[0].integer);
   IGRAPH_YY_CHECK(igraph_i_dl_check_vid(to));
@@ -1917,35 +2018,47 @@ yyreduce:
                                               context->from-1));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges, to-1));
  }
+#line 2022 "yy.tab.c"
     break;
 
   case 61: /* labelednodelist1data: %empty  */
+#line 284 "src/vendor/cigraph/src/io/dl-parser.y"
                       {}
+#line 2028 "yy.tab.c"
     break;
 
   case 62: /* labelednodelist1data: labelednodelist1data labelednodelist1dataline  */
+#line 285 "src/vendor/cigraph/src/io/dl-parser.y"
                                                                     {}
+#line 2034 "yy.tab.c"
     break;
 
   case 63: /* labelednodelist1dataline: fromelabel labeltolist "end of line"  */
+#line 288 "src/vendor/cigraph/src/io/dl-parser.y"
                                                          { }
+#line 2040 "yy.tab.c"
     break;
 
   case 64: /* fromelabel: elabel  */
+#line 290 "src/vendor/cigraph/src/io/dl-parser.y"
                    {
   context->from=(yyvsp[0].integer);
  }
+#line 2048 "yy.tab.c"
     break;
 
   case 66: /* labeltolist: labeltolist elabel  */
+#line 294 "src/vendor/cigraph/src/io/dl-parser.y"
                                   {
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges,
                                               context->from));
   IGRAPH_YY_CHECK(igraph_vector_int_push_back(&context->edges, (yyvsp[0].integer)));
  }
+#line 2058 "yy.tab.c"
     break;
 
 
+#line 2062 "yy.tab.c"
 
       default: break;
     }
@@ -2174,6 +2287,7 @@ yyreturnlab:
   return yyresult;
 }
 
+#line 300 "src/vendor/cigraph/src/io/dl-parser.y"
 
 
 int igraph_dl_yyerror(YYLTYPE* locp,

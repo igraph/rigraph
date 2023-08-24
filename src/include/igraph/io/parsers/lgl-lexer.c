@@ -1,3 +1,6 @@
+#line 2 "src/include/igraph/io/parsers/lgl-lexer.c"
+
+#line 4 "src/include/igraph/io/parsers/lgl-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -578,7 +581,7 @@ typedef int yy_state_type;
 static yy_state_type yy_get_previous_state ( yyscan_t yyscanner );
 static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  , yyscan_t yyscanner);
 static int yy_get_next_buffer ( yyscan_t yyscanner );
-static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
+static void __attribute__((unused)) yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 
 /* Done after the current pattern has been matched and before the
  * corresponding action - sets up yytext.
@@ -677,6 +680,7 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
+#line 1 "src/vendor/cigraph/src/io/lgl-lexer.l"
 /*
    IGraph library.
    Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -698,6 +702,7 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
    02110-1301 USA
 
 */
+#line 24 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
 /*
    IGraph library.
@@ -736,7 +741,9 @@ static const flex_int32_t yy_rule_can_match_eol[7] =
 #endif
 #define stdout 0
 #endif
+#line 745 "src/include/igraph/io/parsers/lgl-lexer.c"
 #define YY_NO_INPUT 1
+#line 747 "src/include/igraph/io/parsers/lgl-lexer.c"
 
 #define INITIAL 0
 
@@ -1018,8 +1025,12 @@ YY_DECL
 		}
 
 	{
+#line 76 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
+
+#line 79 "src/vendor/cigraph/src/io/lgl-lexer.l"
  /* --------------------------------------------------hashmark------*/
+#line 1034 "src/include/igraph/io/parsers/lgl-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1090,25 +1101,30 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
+#line 80 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { return HASH; }
 	YY_BREAK
 /* ------------------------------------------------whitespace------*/
 case 2:
 YY_RULE_SETUP
+#line 83 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { }
 	YY_BREAK
 /* ---------------------------------------------------newline------*/
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
+#line 86 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { return NEWLINE; }
 	YY_BREAK
 /* ----------------------------------------------alphanumeric------*/
 case 4:
 YY_RULE_SETUP
+#line 89 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { return ALNUM; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
+#line 91 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { if (yyextra->eof) {
                        yyterminate();
                     } else {
@@ -1119,12 +1135,15 @@ case YY_STATE_EOF(INITIAL):
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
+#line 99 "src/vendor/cigraph/src/io/lgl-lexer.l"
 { return ERROR; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
+#line 101 "src/vendor/cigraph/src/io/lgl-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
+#line 1147 "src/include/igraph/io/parsers/lgl-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1908,12 +1927,11 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len , yyscan
 #define YY_EXIT_FAILURE 2
 #endif
 
-static void yynoreturn yy_fatal_error (const char* msg , yyscan_t yyscanner)
+static void __attribute__((unused)) yy_fatal_error (const char* msg , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
 	fprintf( stderr, "%s\n", msg );
-	exit( YY_EXIT_FAILURE );
 }
 
 /* Redefine yyless() so it works in section 3 code. */
@@ -2283,4 +2301,7 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 }
 
 #define YYTABLES_NAME "yytables"
+
+#line 101 "src/vendor/cigraph/src/io/lgl-lexer.l"
+
 
