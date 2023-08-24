@@ -2,9 +2,9 @@
 #define igraph_ncol_yyHEADER_H 1
 #define igraph_ncol_yyIN_HEADER 1
 
-#line 6 "src/include/igraph/io/parsers/ncol-lexer.h"
+#line 6 "src/include/io/parsers/ncol-lexer.h"
 
-#line 8 "src/include/igraph/io/parsers/ncol-lexer.h"
+#line 8 "src/include/io/parsers/ncol-lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -731,6 +731,6 @@ extern int yylex \
 #line 99 "src/vendor/cigraph/src/io/ncol-lexer.l"
 
 
-#line 735 "src/include/igraph/io/parsers/ncol-lexer.h"
+#line 735 "src/include/io/parsers/ncol-lexer.h"
 #undef igraph_ncol_yyIN_HEADER
 #endif /* igraph_ncol_yyHEADER_H */

@@ -1,10 +1,10 @@
-#ifndef igraph_gml_yyHEADER_H
-#define igraph_gml_yyHEADER_H 1
-#define igraph_gml_yyIN_HEADER 1
+#ifndef igraph_lgl_yyHEADER_H
+#define igraph_lgl_yyHEADER_H 1
+#define igraph_lgl_yyIN_HEADER 1
 
-#line 6 "src/include/igraph/io/parsers/gml-lexer.h"
+#line 6 "src/include/io/parsers/lgl-lexer.h"
 
-#line 8 "src/include/igraph/io/parsers/gml-lexer.h"
+#line 8 "src/include/io/parsers/lgl-lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -19,237 +19,237 @@
 #endif
 
 #ifdef yy_create_buffer
-#define igraph_gml_yy_create_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_create_buffer_ALREADY_DEFINED
 #else
-#define yy_create_buffer igraph_gml_yy_create_buffer
+#define yy_create_buffer igraph_lgl_yy_create_buffer
 #endif
 
 #ifdef yy_delete_buffer
-#define igraph_gml_yy_delete_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_delete_buffer_ALREADY_DEFINED
 #else
-#define yy_delete_buffer igraph_gml_yy_delete_buffer
+#define yy_delete_buffer igraph_lgl_yy_delete_buffer
 #endif
 
 #ifdef yy_scan_buffer
-#define igraph_gml_yy_scan_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_buffer_ALREADY_DEFINED
 #else
-#define yy_scan_buffer igraph_gml_yy_scan_buffer
+#define yy_scan_buffer igraph_lgl_yy_scan_buffer
 #endif
 
 #ifdef yy_scan_string
-#define igraph_gml_yy_scan_string_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_string_ALREADY_DEFINED
 #else
-#define yy_scan_string igraph_gml_yy_scan_string
+#define yy_scan_string igraph_lgl_yy_scan_string
 #endif
 
 #ifdef yy_scan_bytes
-#define igraph_gml_yy_scan_bytes_ALREADY_DEFINED
+#define igraph_lgl_yy_scan_bytes_ALREADY_DEFINED
 #else
-#define yy_scan_bytes igraph_gml_yy_scan_bytes
+#define yy_scan_bytes igraph_lgl_yy_scan_bytes
 #endif
 
 #ifdef yy_init_buffer
-#define igraph_gml_yy_init_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_init_buffer_ALREADY_DEFINED
 #else
-#define yy_init_buffer igraph_gml_yy_init_buffer
+#define yy_init_buffer igraph_lgl_yy_init_buffer
 #endif
 
 #ifdef yy_flush_buffer
-#define igraph_gml_yy_flush_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_flush_buffer_ALREADY_DEFINED
 #else
-#define yy_flush_buffer igraph_gml_yy_flush_buffer
+#define yy_flush_buffer igraph_lgl_yy_flush_buffer
 #endif
 
 #ifdef yy_load_buffer_state
-#define igraph_gml_yy_load_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yy_load_buffer_state_ALREADY_DEFINED
 #else
-#define yy_load_buffer_state igraph_gml_yy_load_buffer_state
+#define yy_load_buffer_state igraph_lgl_yy_load_buffer_state
 #endif
 
 #ifdef yy_switch_to_buffer
-#define igraph_gml_yy_switch_to_buffer_ALREADY_DEFINED
+#define igraph_lgl_yy_switch_to_buffer_ALREADY_DEFINED
 #else
-#define yy_switch_to_buffer igraph_gml_yy_switch_to_buffer
+#define yy_switch_to_buffer igraph_lgl_yy_switch_to_buffer
 #endif
 
 #ifdef yypush_buffer_state
-#define igraph_gml_yypush_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yypush_buffer_state_ALREADY_DEFINED
 #else
-#define yypush_buffer_state igraph_gml_yypush_buffer_state
+#define yypush_buffer_state igraph_lgl_yypush_buffer_state
 #endif
 
 #ifdef yypop_buffer_state
-#define igraph_gml_yypop_buffer_state_ALREADY_DEFINED
+#define igraph_lgl_yypop_buffer_state_ALREADY_DEFINED
 #else
-#define yypop_buffer_state igraph_gml_yypop_buffer_state
+#define yypop_buffer_state igraph_lgl_yypop_buffer_state
 #endif
 
 #ifdef yyensure_buffer_stack
-#define igraph_gml_yyensure_buffer_stack_ALREADY_DEFINED
+#define igraph_lgl_yyensure_buffer_stack_ALREADY_DEFINED
 #else
-#define yyensure_buffer_stack igraph_gml_yyensure_buffer_stack
+#define yyensure_buffer_stack igraph_lgl_yyensure_buffer_stack
 #endif
 
 #ifdef yylex
-#define igraph_gml_yylex_ALREADY_DEFINED
+#define igraph_lgl_yylex_ALREADY_DEFINED
 #else
-#define yylex igraph_gml_yylex
+#define yylex igraph_lgl_yylex
 #endif
 
 #ifdef yyrestart
-#define igraph_gml_yyrestart_ALREADY_DEFINED
+#define igraph_lgl_yyrestart_ALREADY_DEFINED
 #else
-#define yyrestart igraph_gml_yyrestart
+#define yyrestart igraph_lgl_yyrestart
 #endif
 
 #ifdef yylex_init
-#define igraph_gml_yylex_init_ALREADY_DEFINED
+#define igraph_lgl_yylex_init_ALREADY_DEFINED
 #else
-#define yylex_init igraph_gml_yylex_init
+#define yylex_init igraph_lgl_yylex_init
 #endif
 
 #ifdef yylex_init_extra
-#define igraph_gml_yylex_init_extra_ALREADY_DEFINED
+#define igraph_lgl_yylex_init_extra_ALREADY_DEFINED
 #else
-#define yylex_init_extra igraph_gml_yylex_init_extra
+#define yylex_init_extra igraph_lgl_yylex_init_extra
 #endif
 
 #ifdef yylex_destroy
-#define igraph_gml_yylex_destroy_ALREADY_DEFINED
+#define igraph_lgl_yylex_destroy_ALREADY_DEFINED
 #else
-#define yylex_destroy igraph_gml_yylex_destroy
+#define yylex_destroy igraph_lgl_yylex_destroy
 #endif
 
 #ifdef yyget_debug
-#define igraph_gml_yyget_debug_ALREADY_DEFINED
+#define igraph_lgl_yyget_debug_ALREADY_DEFINED
 #else
-#define yyget_debug igraph_gml_yyget_debug
+#define yyget_debug igraph_lgl_yyget_debug
 #endif
 
 #ifdef yyset_debug
-#define igraph_gml_yyset_debug_ALREADY_DEFINED
+#define igraph_lgl_yyset_debug_ALREADY_DEFINED
 #else
-#define yyset_debug igraph_gml_yyset_debug
+#define yyset_debug igraph_lgl_yyset_debug
 #endif
 
 #ifdef yyget_extra
-#define igraph_gml_yyget_extra_ALREADY_DEFINED
+#define igraph_lgl_yyget_extra_ALREADY_DEFINED
 #else
-#define yyget_extra igraph_gml_yyget_extra
+#define yyget_extra igraph_lgl_yyget_extra
 #endif
 
 #ifdef yyset_extra
-#define igraph_gml_yyset_extra_ALREADY_DEFINED
+#define igraph_lgl_yyset_extra_ALREADY_DEFINED
 #else
-#define yyset_extra igraph_gml_yyset_extra
+#define yyset_extra igraph_lgl_yyset_extra
 #endif
 
 #ifdef yyget_in
-#define igraph_gml_yyget_in_ALREADY_DEFINED
+#define igraph_lgl_yyget_in_ALREADY_DEFINED
 #else
-#define yyget_in igraph_gml_yyget_in
+#define yyget_in igraph_lgl_yyget_in
 #endif
 
 #ifdef yyset_in
-#define igraph_gml_yyset_in_ALREADY_DEFINED
+#define igraph_lgl_yyset_in_ALREADY_DEFINED
 #else
-#define yyset_in igraph_gml_yyset_in
+#define yyset_in igraph_lgl_yyset_in
 #endif
 
 #ifdef yyget_out
-#define igraph_gml_yyget_out_ALREADY_DEFINED
+#define igraph_lgl_yyget_out_ALREADY_DEFINED
 #else
-#define yyget_out igraph_gml_yyget_out
+#define yyget_out igraph_lgl_yyget_out
 #endif
 
 #ifdef yyset_out
-#define igraph_gml_yyset_out_ALREADY_DEFINED
+#define igraph_lgl_yyset_out_ALREADY_DEFINED
 #else
-#define yyset_out igraph_gml_yyset_out
+#define yyset_out igraph_lgl_yyset_out
 #endif
 
 #ifdef yyget_leng
-#define igraph_gml_yyget_leng_ALREADY_DEFINED
+#define igraph_lgl_yyget_leng_ALREADY_DEFINED
 #else
-#define yyget_leng igraph_gml_yyget_leng
+#define yyget_leng igraph_lgl_yyget_leng
 #endif
 
 #ifdef yyget_text
-#define igraph_gml_yyget_text_ALREADY_DEFINED
+#define igraph_lgl_yyget_text_ALREADY_DEFINED
 #else
-#define yyget_text igraph_gml_yyget_text
+#define yyget_text igraph_lgl_yyget_text
 #endif
 
 #ifdef yyget_lineno
-#define igraph_gml_yyget_lineno_ALREADY_DEFINED
+#define igraph_lgl_yyget_lineno_ALREADY_DEFINED
 #else
-#define yyget_lineno igraph_gml_yyget_lineno
+#define yyget_lineno igraph_lgl_yyget_lineno
 #endif
 
 #ifdef yyset_lineno
-#define igraph_gml_yyset_lineno_ALREADY_DEFINED
+#define igraph_lgl_yyset_lineno_ALREADY_DEFINED
 #else
-#define yyset_lineno igraph_gml_yyset_lineno
+#define yyset_lineno igraph_lgl_yyset_lineno
 #endif
 
 #ifdef yyget_column
-#define igraph_gml_yyget_column_ALREADY_DEFINED
+#define igraph_lgl_yyget_column_ALREADY_DEFINED
 #else
-#define yyget_column igraph_gml_yyget_column
+#define yyget_column igraph_lgl_yyget_column
 #endif
 
 #ifdef yyset_column
-#define igraph_gml_yyset_column_ALREADY_DEFINED
+#define igraph_lgl_yyset_column_ALREADY_DEFINED
 #else
-#define yyset_column igraph_gml_yyset_column
+#define yyset_column igraph_lgl_yyset_column
 #endif
 
 #ifdef yywrap
-#define igraph_gml_yywrap_ALREADY_DEFINED
+#define igraph_lgl_yywrap_ALREADY_DEFINED
 #else
-#define yywrap igraph_gml_yywrap
+#define yywrap igraph_lgl_yywrap
 #endif
 
 #ifdef yyget_lval
-#define igraph_gml_yyget_lval_ALREADY_DEFINED
+#define igraph_lgl_yyget_lval_ALREADY_DEFINED
 #else
-#define yyget_lval igraph_gml_yyget_lval
+#define yyget_lval igraph_lgl_yyget_lval
 #endif
 
 #ifdef yyset_lval
-#define igraph_gml_yyset_lval_ALREADY_DEFINED
+#define igraph_lgl_yyset_lval_ALREADY_DEFINED
 #else
-#define yyset_lval igraph_gml_yyset_lval
+#define yyset_lval igraph_lgl_yyset_lval
 #endif
 
 #ifdef yyget_lloc
-#define igraph_gml_yyget_lloc_ALREADY_DEFINED
+#define igraph_lgl_yyget_lloc_ALREADY_DEFINED
 #else
-#define yyget_lloc igraph_gml_yyget_lloc
+#define yyget_lloc igraph_lgl_yyget_lloc
 #endif
 
 #ifdef yyset_lloc
-#define igraph_gml_yyset_lloc_ALREADY_DEFINED
+#define igraph_lgl_yyset_lloc_ALREADY_DEFINED
 #else
-#define yyset_lloc igraph_gml_yyset_lloc
+#define yyset_lloc igraph_lgl_yyset_lloc
 #endif
 
 #ifdef yyalloc
-#define igraph_gml_yyalloc_ALREADY_DEFINED
+#define igraph_lgl_yyalloc_ALREADY_DEFINED
 #else
-#define yyalloc igraph_gml_yyalloc
+#define yyalloc igraph_lgl_yyalloc
 #endif
 
 #ifdef yyrealloc
-#define igraph_gml_yyrealloc_ALREADY_DEFINED
+#define igraph_lgl_yyrealloc_ALREADY_DEFINED
 #else
-#define yyrealloc igraph_gml_yyrealloc
+#define yyrealloc igraph_lgl_yyrealloc
 #endif
 
 #ifdef yyfree
-#define igraph_gml_yyfree_ALREADY_DEFINED
+#define igraph_lgl_yyfree_ALREADY_DEFINED
 #else
-#define yyfree igraph_gml_yyfree
+#define yyfree igraph_lgl_yyfree
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -450,14 +450,13 @@ void yyfree ( void * , yyscan_t yyscanner );
 
 /* Begin user sect3 */
 
-#define igraph_gml_yywrap(yyscanner) (/*CONSTCOND*/1)
+#define igraph_lgl_yywrap(yyscanner) (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
 
 #define yytext_ptr yytext_r
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
-#define VALUE 1
 
 #endif
 
@@ -584,154 +583,154 @@ extern int yylex \
 #undef YY_DECL
 #endif
 
-#ifndef igraph_gml_yy_create_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_create_buffer_ALREADY_DEFINED
 #undef yy_create_buffer
 #endif
-#ifndef igraph_gml_yy_delete_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_delete_buffer_ALREADY_DEFINED
 #undef yy_delete_buffer
 #endif
-#ifndef igraph_gml_yy_scan_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_scan_buffer_ALREADY_DEFINED
 #undef yy_scan_buffer
 #endif
-#ifndef igraph_gml_yy_scan_string_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_scan_string_ALREADY_DEFINED
 #undef yy_scan_string
 #endif
-#ifndef igraph_gml_yy_scan_bytes_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_scan_bytes_ALREADY_DEFINED
 #undef yy_scan_bytes
 #endif
-#ifndef igraph_gml_yy_init_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_init_buffer_ALREADY_DEFINED
 #undef yy_init_buffer
 #endif
-#ifndef igraph_gml_yy_flush_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_flush_buffer_ALREADY_DEFINED
 #undef yy_flush_buffer
 #endif
-#ifndef igraph_gml_yy_load_buffer_state_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_load_buffer_state_ALREADY_DEFINED
 #undef yy_load_buffer_state
 #endif
-#ifndef igraph_gml_yy_switch_to_buffer_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_switch_to_buffer_ALREADY_DEFINED
 #undef yy_switch_to_buffer
 #endif
-#ifndef igraph_gml_yypush_buffer_state_ALREADY_DEFINED
+#ifndef igraph_lgl_yypush_buffer_state_ALREADY_DEFINED
 #undef yypush_buffer_state
 #endif
-#ifndef igraph_gml_yypop_buffer_state_ALREADY_DEFINED
+#ifndef igraph_lgl_yypop_buffer_state_ALREADY_DEFINED
 #undef yypop_buffer_state
 #endif
-#ifndef igraph_gml_yyensure_buffer_stack_ALREADY_DEFINED
+#ifndef igraph_lgl_yyensure_buffer_stack_ALREADY_DEFINED
 #undef yyensure_buffer_stack
 #endif
-#ifndef igraph_gml_yylex_ALREADY_DEFINED
+#ifndef igraph_lgl_yylex_ALREADY_DEFINED
 #undef yylex
 #endif
-#ifndef igraph_gml_yyrestart_ALREADY_DEFINED
+#ifndef igraph_lgl_yyrestart_ALREADY_DEFINED
 #undef yyrestart
 #endif
-#ifndef igraph_gml_yylex_init_ALREADY_DEFINED
+#ifndef igraph_lgl_yylex_init_ALREADY_DEFINED
 #undef yylex_init
 #endif
-#ifndef igraph_gml_yylex_init_extra_ALREADY_DEFINED
+#ifndef igraph_lgl_yylex_init_extra_ALREADY_DEFINED
 #undef yylex_init_extra
 #endif
-#ifndef igraph_gml_yylex_destroy_ALREADY_DEFINED
+#ifndef igraph_lgl_yylex_destroy_ALREADY_DEFINED
 #undef yylex_destroy
 #endif
-#ifndef igraph_gml_yyget_debug_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_debug_ALREADY_DEFINED
 #undef yyget_debug
 #endif
-#ifndef igraph_gml_yyset_debug_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_debug_ALREADY_DEFINED
 #undef yyset_debug
 #endif
-#ifndef igraph_gml_yyget_extra_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_extra_ALREADY_DEFINED
 #undef yyget_extra
 #endif
-#ifndef igraph_gml_yyset_extra_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_extra_ALREADY_DEFINED
 #undef yyset_extra
 #endif
-#ifndef igraph_gml_yyget_in_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_in_ALREADY_DEFINED
 #undef yyget_in
 #endif
-#ifndef igraph_gml_yyset_in_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_in_ALREADY_DEFINED
 #undef yyset_in
 #endif
-#ifndef igraph_gml_yyget_out_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_out_ALREADY_DEFINED
 #undef yyget_out
 #endif
-#ifndef igraph_gml_yyset_out_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_out_ALREADY_DEFINED
 #undef yyset_out
 #endif
-#ifndef igraph_gml_yyget_leng_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_leng_ALREADY_DEFINED
 #undef yyget_leng
 #endif
-#ifndef igraph_gml_yyget_text_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_text_ALREADY_DEFINED
 #undef yyget_text
 #endif
-#ifndef igraph_gml_yyget_lineno_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_lineno_ALREADY_DEFINED
 #undef yyget_lineno
 #endif
-#ifndef igraph_gml_yyset_lineno_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_lineno_ALREADY_DEFINED
 #undef yyset_lineno
 #endif
-#ifndef igraph_gml_yyget_column_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_column_ALREADY_DEFINED
 #undef yyget_column
 #endif
-#ifndef igraph_gml_yyset_column_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_column_ALREADY_DEFINED
 #undef yyset_column
 #endif
-#ifndef igraph_gml_yywrap_ALREADY_DEFINED
+#ifndef igraph_lgl_yywrap_ALREADY_DEFINED
 #undef yywrap
 #endif
-#ifndef igraph_gml_yyget_lval_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_lval_ALREADY_DEFINED
 #undef yyget_lval
 #endif
-#ifndef igraph_gml_yyset_lval_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_lval_ALREADY_DEFINED
 #undef yyset_lval
 #endif
-#ifndef igraph_gml_yyget_lloc_ALREADY_DEFINED
+#ifndef igraph_lgl_yyget_lloc_ALREADY_DEFINED
 #undef yyget_lloc
 #endif
-#ifndef igraph_gml_yyset_lloc_ALREADY_DEFINED
+#ifndef igraph_lgl_yyset_lloc_ALREADY_DEFINED
 #undef yyset_lloc
 #endif
-#ifndef igraph_gml_yyalloc_ALREADY_DEFINED
+#ifndef igraph_lgl_yyalloc_ALREADY_DEFINED
 #undef yyalloc
 #endif
-#ifndef igraph_gml_yyrealloc_ALREADY_DEFINED
+#ifndef igraph_lgl_yyrealloc_ALREADY_DEFINED
 #undef yyrealloc
 #endif
-#ifndef igraph_gml_yyfree_ALREADY_DEFINED
+#ifndef igraph_lgl_yyfree_ALREADY_DEFINED
 #undef yyfree
 #endif
-#ifndef igraph_gml_yytext_ALREADY_DEFINED
+#ifndef igraph_lgl_yytext_ALREADY_DEFINED
 #undef yytext
 #endif
-#ifndef igraph_gml_yyleng_ALREADY_DEFINED
+#ifndef igraph_lgl_yyleng_ALREADY_DEFINED
 #undef yyleng
 #endif
-#ifndef igraph_gml_yyin_ALREADY_DEFINED
+#ifndef igraph_lgl_yyin_ALREADY_DEFINED
 #undef yyin
 #endif
-#ifndef igraph_gml_yyout_ALREADY_DEFINED
+#ifndef igraph_lgl_yyout_ALREADY_DEFINED
 #undef yyout
 #endif
-#ifndef igraph_gml_yy_flex_debug_ALREADY_DEFINED
+#ifndef igraph_lgl_yy_flex_debug_ALREADY_DEFINED
 #undef yy_flex_debug
 #endif
-#ifndef igraph_gml_yylineno_ALREADY_DEFINED
+#ifndef igraph_lgl_yylineno_ALREADY_DEFINED
 #undef yylineno
 #endif
-#ifndef igraph_gml_yytables_fload_ALREADY_DEFINED
+#ifndef igraph_lgl_yytables_fload_ALREADY_DEFINED
 #undef yytables_fload
 #endif
-#ifndef igraph_gml_yytables_destroy_ALREADY_DEFINED
+#ifndef igraph_lgl_yytables_destroy_ALREADY_DEFINED
 #undef yytables_destroy
 #endif
-#ifndef igraph_gml_yyTABLES_NAME_ALREADY_DEFINED
+#ifndef igraph_lgl_yyTABLES_NAME_ALREADY_DEFINED
 #undef yyTABLES_NAME
 #endif
 
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 101 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
 
-#line 736 "src/include/igraph/io/parsers/gml-lexer.h"
-#undef igraph_gml_yyIN_HEADER
-#endif /* igraph_gml_yyHEADER_H */
+#line 735 "src/include/io/parsers/lgl-lexer.h"
+#undef igraph_lgl_yyIN_HEADER
+#endif /* igraph_lgl_yyHEADER_H */
