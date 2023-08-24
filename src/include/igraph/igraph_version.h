@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,26 +21,23 @@
 
 */
 
-#ifndef IGRAPH_THREADING_H
-#define IGRAPH_THREADING_H
+#ifndef IGRAPH_VERSION_H
+#define IGRAPH_VERSION_H
 
 #include "igraph_decls.h"
 
 __BEGIN_DECLS
 
-/**
- * \define IGRAPH_THREAD_SAFE
- *
- * Specifies whether igraph was built in thread-safe mode.
- *
- * This macro is defined to 1 if the current build of the igraph library is
- * built in thread-safe mode, and 0 if it is not. A thread-safe igraph library
- * attempts to use thread-local data structures instead of global ones, but
- * note that this is not (and can not) be guaranteed for third-party libraries
- * that igraph links to.
- */
+#define IGRAPH_VERSION "0.10.0"
+#define IGRAPH_VERSION_MAJOR 0
+#define IGRAPH_VERSION_MINOR 10
+#define IGRAPH_VERSION_PATCH 0
+#define IGRAPH_VERSION_PRERELEASE "cmake-experimental"
 
-#define IGRAPH_THREAD_SAFE 0
+IGRAPH_EXPORT void igraph_version(const char **version_string,
+                                  int *major,
+                                  int *minor,
+                                  int *subminor);
 
 __END_DECLS
 
