@@ -1,3 +1,6 @@
+#line 2 "src/include/igraph/io/parsers/pajek-lexer.c"
+
+#line 4 "src/include/igraph/io/parsers/pajek-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -578,7 +581,7 @@ typedef int yy_state_type;
 static yy_state_type yy_get_previous_state ( yyscan_t yyscanner );
 static yy_state_type yy_try_NUL_trans ( yy_state_type current_state  , yyscan_t yyscanner);
 static int yy_get_next_buffer ( yyscan_t yyscanner );
-static void yynoreturn yy_fatal_error ( const char* msg , yyscan_t yyscanner );
+static void __attribute__((unused)) yy_fatal_error ( const char* msg , yyscan_t yyscanner );
 
 /* Done after the current pattern has been matched and before the
  * corresponding action - sets up yytext.
@@ -843,6 +846,7 @@ static const flex_int32_t yy_rule_can_match_eol[49] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
+#line 1 "src/vendor/cigraph/src/io/pajek-lexer.l"
 /*
    IGraph library.
    Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
@@ -864,6 +868,7 @@ static const flex_int32_t yy_rule_can_match_eol[49] =
    02110-1301 USA
 
 */
+#line 24 "src/vendor/cigraph/src/io/pajek-lexer.l"
 
 /*
    IGraph library.
@@ -902,7 +907,10 @@ static const flex_int32_t yy_rule_can_match_eol[49] =
 #endif
 #define stdout 0
 #endif
+#line 911 "src/include/igraph/io/parsers/pajek-lexer.c"
 #define YY_NO_INPUT 1
+
+#line 914 "src/include/igraph/io/parsers/pajek-lexer.c"
 
 #define INITIAL 0
 #define netline 1
@@ -1185,6 +1193,10 @@ YY_DECL
 		}
 
 	{
+#line 81 "src/vendor/cigraph/src/io/pajek-lexer.l"
+
+
+#line 1200 "src/include/igraph/io/parsers/pajek-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1255,67 +1267,82 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
+#line 83 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
+#line 84 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { } /* comments */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
+#line 85 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { BEGIN(netline); return NETWORKLINE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
+#line 86 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { BEGIN(netline); return NETWORKLINE; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
+#line 87 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { 
    return NET_TITLE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
+#line 89 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return VERTICESLINE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
+#line 90 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return ARCSLINE; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
+#line 91 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return EDGESLINE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
+#line 92 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return ARCSLISTLINE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
+#line 93 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return EDGESLISTLINE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
+#line 94 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return MATRIXLINE; }
 	YY_BREAK
 case 12:
 /* rule 12 can match eol */
 YY_RULE_SETUP
+#line 95 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { BEGIN(INITIAL); yyextra->mode=0; return NEWLINE; } /* skip over multiple newlines */
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
+#line 96 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return QSTR; }
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
+#line 97 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return PSTR; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
+#line 98 "src/vendor/cigraph/src/io/pajek-lexer.l"
 {
                     return NUM; }
 	YY_BREAK
@@ -1326,6 +1353,7 @@ YY_LINENO_REWIND_TO(yy_bp + 6);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 6;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 101 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_X_FACT; } else { return ALNUM; } }
 	YY_BREAK
 case 17:
@@ -1335,6 +1363,7 @@ YY_LINENO_REWIND_TO(yy_bp + 6);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 6;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 102 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_Y_FACT; } else { return ALNUM; } }
 	YY_BREAK
 case 18:
@@ -1344,6 +1373,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 103 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_IC; } else { return ALNUM; } }
 	YY_BREAK
 case 19:
@@ -1353,6 +1383,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 104 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_BC; } else { return ALNUM; } }
 	YY_BREAK
 case 20:
@@ -1362,6 +1393,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 105 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_BW; } else { return ALNUM; } }
 	YY_BREAK
 case 21:
@@ -1371,6 +1403,7 @@ YY_LINENO_REWIND_TO(yy_bp + 3);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 106 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_PHI; } else { return ALNUM; } }
 	YY_BREAK
 case 22:
@@ -1380,6 +1413,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 107 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_R; } else { return ALNUM; } }
 	YY_BREAK
 case 23:
@@ -1389,6 +1423,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 108 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_Q; } else { return ALNUM; } }
 	YY_BREAK
 case 24:
@@ -1398,6 +1433,7 @@ YY_LINENO_REWIND_TO(yy_bp + 4);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 109 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_FONT; } else { return ALNUM; } }
 	YY_BREAK
 case 25:
@@ -1407,6 +1443,7 @@ YY_LINENO_REWIND_TO(yy_bp + 3);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 110 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_URL; } else { return ALNUM; } }
 	YY_BREAK
 case 26:
@@ -1416,6 +1453,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 112 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_C; } else { return ALNUM; } }
 	YY_BREAK
 case 27:
@@ -1425,6 +1463,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 113 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_P; } else { return ALNUM; } }
 	YY_BREAK
 case 28:
@@ -1434,6 +1473,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 114 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_S; } else { return ALNUM; } }
 	YY_BREAK
 case 29:
@@ -1443,6 +1483,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 115 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_A; } else { return ALNUM; } }
 	YY_BREAK
 case 30:
@@ -1452,6 +1493,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 116 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_W; } else { return ALNUM; } }
 	YY_BREAK
 case 31:
@@ -1461,6 +1503,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 117 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_H1; } else { return ALNUM; } }
 	YY_BREAK
 case 32:
@@ -1470,6 +1513,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 118 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_H2; } else { return ALNUM; } }
 	YY_BREAK
 case 33:
@@ -1479,6 +1523,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 119 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_A1; } else { return ALNUM; } }
 	YY_BREAK
 case 34:
@@ -1488,6 +1533,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 120 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_A2; } else { return ALNUM; } }
 	YY_BREAK
 case 35:
@@ -1497,6 +1543,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 121 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_K1; } else { return ALNUM; } }
 	YY_BREAK
 case 36:
@@ -1506,6 +1553,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 122 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_K2; } else { return ALNUM; } }
 	YY_BREAK
 case 37:
@@ -1515,6 +1563,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 123 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_AP; } else { return ALNUM; } }
 	YY_BREAK
 case 38:
@@ -1524,6 +1573,7 @@ YY_LINENO_REWIND_TO(yy_bp + 1);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 124 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_L; } else { return ALNUM; } }
 	YY_BREAK
 case 39:
@@ -1533,6 +1583,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 125 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==2) { return EP_LP; } else { return ALNUM; } }
 	YY_BREAK
 case 40:
@@ -1542,6 +1593,7 @@ YY_LINENO_REWIND_TO(yy_bp + 4);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 127 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_LPHI; } else
                              if (yyextra->mode==2) { return EP_LPHI; } else { return ALNUM; } }
 	YY_BREAK
@@ -1552,6 +1604,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 129 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_LC; } else
                              if (yyextra->mode==2) { return EP_LC; } else { return ALNUM; } }
 	YY_BREAK
@@ -1562,6 +1615,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 131 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_LR; } else
                              if (yyextra->mode==2) { return EP_LR; } else { return ALNUM; } }
 	YY_BREAK
@@ -1572,6 +1626,7 @@ YY_LINENO_REWIND_TO(yy_bp + 2);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 2;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 133 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_LA; } else
                              if (yyextra->mode==2) { return EP_LA; } else { return ALNUM; } }
 	YY_BREAK
@@ -1582,6 +1637,7 @@ YY_LINENO_REWIND_TO(yy_bp + 4);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 4;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 135 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_SIZE; } else
                              if (yyextra->mode==2) { return EP_SIZE; } else { return ALNUM; } }
 	YY_BREAK
@@ -1592,15 +1648,18 @@ YY_LINENO_REWIND_TO(yy_bp + 3);
 yyg->yy_c_buf_p = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
+#line 137 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->mode==1) { return VP_FOS; } else
                              if (yyextra->mode==2) { return EP_FOS; } else { return ALNUM; } }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
+#line 140 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return ALNUM; }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(netline):
+#line 142 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { if (yyextra->eof) {
                        yyterminate();
                     } else {
@@ -1611,12 +1670,15 @@ case YY_STATE_EOF(netline):
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
+#line 150 "src/vendor/cigraph/src/io/pajek-lexer.l"
 { return ERROR; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
+#line 152 "src/vendor/cigraph/src/io/pajek-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
+#line 1682 "src/include/igraph/io/parsers/pajek-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2400,12 +2462,11 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len , yyscan
 #define YY_EXIT_FAILURE 2
 #endif
 
-static void yynoreturn yy_fatal_error (const char* msg , yyscan_t yyscanner)
+static void __attribute__((unused)) yy_fatal_error (const char* msg , yyscan_t yyscanner)
 {
 	struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 	(void)yyg;
 	fprintf( stderr, "%s\n", msg );
-	exit( YY_EXIT_FAILURE );
 }
 
 /* Redefine yyless() so it works in section 3 code. */
@@ -2775,4 +2836,7 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 }
 
 #define YYTABLES_NAME "yytables"
+
+#line 152 "src/vendor/cigraph/src/io/pajek-lexer.l"
+
 

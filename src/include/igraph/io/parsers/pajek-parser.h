@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_IGRAPH_PAJEK_YY_HOME_ANTONOV548_RIGRAPH_SRC_BUILD_VENDOR_CIGRAPH_SRC_IO_PARSERS_PAJEK_PARSER_H_INCLUDED
-# define YY_IGRAPH_PAJEK_YY_HOME_ANTONOV548_RIGRAPH_SRC_BUILD_VENDOR_CIGRAPH_SRC_IO_PARSERS_PAJEK_PARSER_H_INCLUDED
+#ifndef YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
+# define YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -112,6 +112,7 @@ extern int igraph_pajek_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
+#line 111 "src/vendor/cigraph/src/io/pajek-parser.y"
 
   igraph_integer_t intnum;
   igraph_real_t    realnum;
@@ -120,6 +121,7 @@ union YYSTYPE
     size_t len;
   } string;
 
+#line 125 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -147,4 +149,4 @@ struct YYLTYPE
 int igraph_pajek_yyparse (igraph_i_pajek_parsedata_t* context);
 
 
-#endif /* !YY_IGRAPH_PAJEK_YY_HOME_ANTONOV548_RIGRAPH_SRC_BUILD_VENDOR_CIGRAPH_SRC_IO_PARSERS_PAJEK_PARSER_H_INCLUDED  */
+#endif /* !YY_IGRAPH_PAJEK_YY_YY_TAB_H_INCLUDED  */

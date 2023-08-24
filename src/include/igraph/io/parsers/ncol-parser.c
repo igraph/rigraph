@@ -72,6 +72,7 @@
 #define yynerrs         igraph_ncol_yynerrs
 
 /* First part of user prologue.  */
+#line 23 "src/vendor/cigraph/src/io/ncol-parser.y"
 
 
 /*
@@ -115,6 +116,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 
 #define scanner context->scanner
 
+#line 120 "yy.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -137,7 +139,7 @@ int igraph_ncol_yyerror(YYLTYPE* locp,
 #  endif
 # endif
 
-#include "ncol-parser.h"
+#include "io/parsers/ncol-parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1499,23 +1501,28 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* edge: edgeid edgeid "end of line"  */
+#line 97 "src/vendor/cigraph/src/io/ncol-parser.y"
                                       {
            IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
            IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-1].edgenum)));
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, 0.0));
        }
+#line 1511 "yy.tab.c"
     break;
 
   case 6: /* edge: edgeid edgeid weight "end of line"  */
+#line 102 "src/vendor/cigraph/src/io/ncol-parser.y"
                                       {
            IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-3].edgenum)));
            IGRAPH_YY_CHECK(igraph_vector_int_push_back(context->vector, (yyvsp[-2].edgenum)));
            IGRAPH_YY_CHECK(igraph_vector_push_back(context->weights, (yyvsp[-1].weightnum)));
            context->has_weights = 1;
        }
+#line 1522 "yy.tab.c"
     break;
 
   case 7: /* edgeid: "alphanumeric"  */
+#line 110 "src/vendor/cigraph/src/io/ncol-parser.y"
                 {
   igraph_integer_t trie_id;
   IGRAPH_YY_CHECK(igraph_trie_get_len(context->trie,
@@ -1525,9 +1532,11 @@ yyreduce:
   ));
   (yyval.edgenum) = trie_id;
 }
+#line 1536 "yy.tab.c"
     break;
 
   case 8: /* weight: "alphanumeric"  */
+#line 120 "src/vendor/cigraph/src/io/ncol-parser.y"
                 {
     igraph_real_t val;
     IGRAPH_YY_CHECK(igraph_i_parse_real(igraph_ncol_yyget_text(scanner),
@@ -1535,9 +1544,11 @@ yyreduce:
                                         &val));
     (yyval.weightnum)=val;
 }
+#line 1548 "yy.tab.c"
     break;
 
 
+#line 1552 "yy.tab.c"
 
       default: break;
     }
@@ -1766,6 +1777,7 @@ yyreturnlab:
   return yyresult;
 }
 
+#line 128 "src/vendor/cigraph/src/io/ncol-parser.y"
 
 
 int igraph_ncol_yyerror(YYLTYPE* locp,
