@@ -1662,7 +1662,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   # Argument checks
   ensure_igraph(graph)
 
-  steps <- as.integer(steps)
+  steps <- as.numeric(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }

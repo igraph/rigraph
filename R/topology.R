@@ -157,9 +157,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   ensure_igraph(target)
   induced <- as.logical(induced)
   if (time.limit == Inf) {
-    time.limit <- 0L
+    time.limit <- 0
   } else {
-    time.limit <- as.integer(time.limit)
+    time.limit <- as.numeric(time.limit)
   }
   map <- as.logical(map)
   all.maps <- as.logical(all.maps)

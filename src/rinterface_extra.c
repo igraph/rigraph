@@ -2626,6 +2626,7 @@ SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
   PROTECT(result=NEW_NUMERIC(igraph_matrix_size(m)));
   igraph_matrix_copy_to(m, REAL(result));
   PROTECT(dim=NEW_INTEGER(2));
+  /* TODO check that row and column counts fit in an int */
   INTEGER(dim)[0]=(int) igraph_matrix_nrow(m);
   INTEGER(dim)[1]=(int) igraph_matrix_ncol(m);
   SET_DIM(result, dim);
@@ -2643,6 +2644,7 @@ SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
     REAL(result)[i]=(double)VECTOR(m->data)[i];
   }
   PROTECT(dim=NEW_INTEGER(2));
+  /* TODO check that row and column counts fit in an int */
   INTEGER(dim)[0]=(int) igraph_matrix_int_nrow(m);
   INTEGER(dim)[1]=(int) igraph_matrix_int_ncol(m);
   SET_DIM(result, dim);
@@ -2663,6 +2665,7 @@ SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
   PROTECT(result=NEW_COMPLEX(igraph_matrix_complex_size(m)));
   igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result));
   PROTECT(dim=NEW_INTEGER(2));
+  /* TODO check that row and column counts fit in an int */
   INTEGER(dim)[0]=(int) igraph_matrix_complex_nrow(m);
   INTEGER(dim)[1]=(int) igraph_matrix_complex_ncol(m);
   SET_DIM(result, dim);
@@ -2687,6 +2690,7 @@ SEXP R_igraph_array3_to_SEXP(const igraph_array3_t *a) {
   PROTECT(result=NEW_NUMERIC(igraph_array3_size(a)));
   igraph_vector_copy_to(&a->data, REAL(result));
   PROTECT(dim=NEW_INTEGER(3));
+  /* TODO check that row, column and slice counts fit in an int */
   INTEGER(dim)[0]=(int) igraph_array3_n(a, 1);
   INTEGER(dim)[1]=(int) igraph_array3_n(a, 2);
   INTEGER(dim)[2]=(int) igraph_array3_n(a, 3);
@@ -3882,12 +3886,12 @@ SEXP R_igraph_mybracket3_set(SEXP graph, SEXP pidx1, SEXP pidx2,
   int idx2=INTEGER(pidx2)[0]-1;
   const char *name=CHAR(STRING_ELT(pname, 0));
   SEXP attrs, names;
-  int i, n;
+  igraph_integer_t i, n;
 
   PROTECT(newgraph=Rf_duplicate(graph));
   attrs=VECTOR_ELT(VECTOR_ELT(newgraph, idx1), idx2);
   names=PROTECT(Rf_getAttrib(attrs, R_NamesSymbol));
-  n=Rf_length(attrs);
+  n=Rf_xlength(attrs);
 
   for (i=0; i<n; i++) {
     if (strcmp(CHAR(STRING_ELT(names, i)), name) == 0) { break; }
@@ -4511,7 +4515,7 @@ SEXP R_igraph_layout_fruchterman_reingold(SEXP graph, SEXP coords,
     igraph_matrix_init(&c_coords, 0, 0);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_coords);
-  c_niter=INTEGER(niter)[0];
+  c_niter=(igraph_integer_t) REAL(niter)[0];
   c_start_temp=REAL(start_temp)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (!Rf_isNull(minx)) { R_SEXP_to_vector(minx, &c_minx); }
@@ -4561,7 +4565,7 @@ SEXP R_igraph_layout_fruchterman_reingold_3d(SEXP graph, SEXP coords,
     igraph_matrix_init(&c_coords, 0, 0);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_coords);
-  c_niter=INTEGER(niter)[0];
+  c_niter=(igraph_integer_t) REAL(niter)[0];
   c_start_temp=REAL(start_temp)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (!Rf_isNull(minx)) { R_SEXP_to_vector(minx, &c_minx); }
@@ -4611,7 +4615,7 @@ SEXP R_igraph_layout_kamada_kawai(SEXP graph, SEXP coords, SEXP maxiter,
     igraph_matrix_init(&c_coords, 0, 0);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_coords);
-  c_maxiter=INTEGER(maxiter)[0];
+  c_maxiter=(igraph_integer_t) REAL(maxiter)[0];
   c_epsilon=REAL(epsilon)[0];
   c_kkconst=REAL(kkconst)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
@@ -4664,7 +4668,7 @@ SEXP R_igraph_layout_kamada_kawai_3d(SEXP graph, SEXP coords, SEXP maxiter,
     igraph_matrix_init(&c_coords, 0, 0);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_coords);
-  c_maxiter=INTEGER(maxiter)[0];
+  c_maxiter=(igraph_integer_t) REAL(maxiter)[0];
   c_epsilon=REAL(epsilon)[0];
   c_kkconst=REAL(kkconst)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
@@ -5680,7 +5684,7 @@ SEXP R_igraph_decompose(SEXP graph, SEXP pmode, SEXP pmaxcompno,
 
 SEXP R_igraph_atlas(SEXP pno) {
 
-  int no=(int) REAL(pno)[0];
+  igraph_integer_t no = (igraph_integer_t) REAL(pno)[0];
   igraph_t g;
   SEXP result;
 
@@ -8253,7 +8257,7 @@ SEXP R_igraph_community_leading_eigenvector(SEXP graph, SEXP steps,
     }
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
-  c_steps=INTEGER(steps)[0];
+  c_steps=(igraph_integer_t) REAL(steps)[0];
   R_SEXP_to_igraph_arpack_options(options, &c_options);
   if (0 != igraph_vector_init(&c_eigenvalues, 0)) {
   igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -8385,7 +8389,7 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   igraph_vector_int_t c_map;
   igraph_vector_int_list_t c_maps;
   igraph_bool_t c_induced;
-  int c_time_limit;
+  igraph_integer_t c_time_limit;
   igraph_bool_t c_qmap;
   igraph_bool_t c_qall_maps;
   SEXP iso;
@@ -8427,7 +8431,7 @@ SEXP R_igraph_subisomorphic_lad(SEXP pattern, SEXP target, SEXP domains,
   }
 
   c_induced=LOGICAL(induced)[0];
-  c_time_limit=INTEGER(time_limit)[0];
+  c_time_limit=(igraph_integer_t) REAL(time_limit)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_subisomorphic_lad(&c_pattern, &c_target, (Rf_isNull(domains) ? 0 : &c_domains), &c_iso, (Rf_isNull(map) ? 0 : &c_map), (Rf_isNull(maps) ? 0 : &c_maps), c_induced, c_time_limit));
 
@@ -8474,7 +8478,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
   igraph_vector_t c_weights;
   igraph_vector_int_list_t c_cliques;
   igraph_vector_t c_Mu;
-  int c_niter;
+  igraph_integer_t c_niter;
   SEXP cliques;
   SEXP Mu;
   SEXP result, names;
@@ -8490,7 +8494,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Mu);
-  c_niter=INTEGER(niter)[0];
+  c_niter=(igraph_integer_t) REAL(niter)[0];
   /* Call igraph */
   IGRAPH_R_CHECK(igraph_graphlets(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Mu, c_niter));
 
@@ -8578,7 +8582,7 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
   igraph_vector_t c_weights;
   igraph_vector_int_list_t c_cliques;
   igraph_vector_t c_Mu;
-  int c_niter;
+  igraph_integer_t c_niter;
 
   SEXP result;
 
@@ -8595,7 +8599,7 @@ SEXP R_igraph_graphlets_project(SEXP graph, SEXP weights, SEXP cliques,
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Mu);
-  c_niter=INTEGER(niter)[0];
+  c_niter=(igraph_integer_t) REAL(niter)[0];
 
   /* TODO: Change igraph_i_graphlets_project to igraph_graphlets_project, because
    * we should not depend on non-public functions from igraph.

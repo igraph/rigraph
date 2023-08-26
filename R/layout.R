@@ -1044,7 +1044,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
     stop("Both `niter' and `maxiter' are given, give only one of them")
   }
   if (!missing(maxiter)) niter <- maxiter
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
   grid <- igraph.match.arg(grid)
@@ -1344,7 +1344,7 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
     stop("Dimension must be two or three")
   }
 
-  maxiter <- as.integer(maxiter)
+  maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
