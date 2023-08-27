@@ -202,23 +202,27 @@ pa <- function(...) constructor_spec(sample_pa, ...)
 
 #' Generate random graphs according to the \eqn{G(n,p)} Erdős-Rényi model
 #'
-#' This model is very simple, every possible edge is created with the same
-#' constant probability.
+#' Every possible edge is created independently with the same probability `p`.
+#' This model is also referred to as a Bernoulli random graph since the
+#' connectivity status of vertex pairs follows a Bernoulli distribution.
 #'
-#'
-#' The graph has \sQuote{n} vertices and for each edge the
-#' probability that it is present in the graph is \sQuote{p}.
+#' The graph has `n` vertices and each pair of vertices is connected
+#' with the same probability `p`. The `loops` parameter controls whether
+#' self-connections are also considered. This model effectively constrains
+#' the average number of edges, \eqn{p m_\text{max}}, where \eqn{m_\text{max}}
+#' is the largest possible number of edges, which depends on whether the
+#' graph is directed or undirected and whether self-loops are allowed.
 #'
 #' @param n The number of vertices in the graph.
 #' @param p The probability for drawing an edge between two
 #'   arbitrary vertices (\eqn{G(n,p)} graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
-#'   FALSE.
-#' @param loops Logical, whether to add loop edges, defaults to FALSE.
+#'   `FALSE`.
+#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_gnm()], [sample_pa()]
-#' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
+#' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @family games
 #' @export
@@ -261,23 +265,21 @@ gnp <- function(...) constructor_spec(sample_gnp, ...)
 
 #' Generate random graphs according to the \eqn{G(n,m)} Erdős-Rényi model
 #'
-#' This model is very simple, every possible edge is created with the same
-#' constant probability.
+#' Random graph with a fixed number of edges and vertices.
 #'
-#' The graph has \sQuote{n} vertices and \sQuote{m} edges,
-#' and the \sQuote{m} edges are chosen uniformly randomly from the set of all
-#' possible edges. This set includes loop edges as well if the `loops`
-#' parameter is TRUE.
+#' The graph has `n` vertices and `m` edges. The edges are chosen uniformly
+#' at random from the set of all vertex pairs. This set includes potential
+#' self-connections as well if the `loops` parameter is `TRUE`.
 #'
 #' @param n The number of vertices in the graph.
 #' @param m The number of edges in the graph.
 #' @param directed Logical, whether the graph will be directed, defaults to
-#'   FALSE.
-#' @param loops Logical, whether to add loop edges, defaults to FALSE.
+#'   `FALSE`.
+#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_gnp()], [sample_pa()]
-#' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
+#' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @family games
 #' @export
@@ -318,16 +320,14 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 
 #' Generate random graphs according to the Erdős-Rényi model
 #'
-#' This model is very simple, every possible edge is created with the same
-#' constant probability.
+#' Simple random graph model, specifying the edge count either precisely
+#' (\eqn{G(n,m)} model) or on average through a connection probability
+#' (\eqn{G(n,p)} model).
 #'
-#' In \eqn{G(n,p)} graphs, the graph has \sQuote{n} vertices and for each edge the
-#' probability that it is present in the graph is \sQuote{p}.
-#'
-#' In \eqn{G(n,m)} graphs, the graph has \sQuote{n} vertices and \sQuote{m} edges,
-#' and the \sQuote{m} edges are chosen uniformly randomly from the set of all
-#' possible edges. This set includes loop edges as well if the `loops`
-#' parameter is TRUE.
+#' In \eqn{G(n,m)} graphs, there are precisely `m` edges.
+#' 
+#' In \eqn{G(n,p)} graphs, all vertex pairs are connected with the same
+#' probability `p`.
 #'
 #' `random.graph.game()` is an alias to this function.
 #'
@@ -335,22 +335,22 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #'
 #' Since igraph version 0.8.0, both `erdos.renyi.game()` and
 #' `random.graph.game()` are deprecated, and [sample_gnp()] and
-#' [sample_gnm()] should be used instead.
+#' [sample_gnm()] should be used instead. See these for more details.
 #'
 #' @aliases erdos.renyi.game random.graph.game
 #' @param n The number of vertices in the graph.
 #' @param p.or.m Either the probability for drawing an edge between two
-#'   arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in the graph (for
-#'   \eqn{G(n,m)} graphs).
+#'   arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in
+#'   the graph (for \eqn{G(n,m)} graphs).
 #' @param type The type of the random graph to create, either `gnp()`
 #'   (\eqn{G(n,p)} graph) or `gnm()` (\eqn{G(n,m)} graph).
 #' @param directed Logical, whether the graph will be directed, defaults to
-#'   FALSE.
-#' @param loops Logical, whether to add loop edges, defaults to FALSE.
+#'   `FALSE`.
+#' @param loops Logical, whether to add loop edges, defaults to `FALSE`.
 #' @return A graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [sample_pa()]
-#' @references Erdos, P. and Renyi, A., On random graphs, *Publicationes
+#' @references Erdős, P. and Rényi, A., On random graphs, *Publicationes
 #' Mathematicae* 6, 290--297 (1959).
 #' @family games
 #' @export
