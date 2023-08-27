@@ -14,7 +14,7 @@ graph."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,18 +160,18 @@ the underlining machinery of the computation.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## An in-star</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_star.html">make_star</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hub_score</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3.370123e-16 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 3.330669e-16 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [6] 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00 1.000000e+00</span>
 <span class="r-in"><span><span class="fu">authority_score</span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.000000e+00 5.506804e-17 5.506804e-17 5.506804e-17 5.506804e-17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] 5.506804e-17 5.506804e-17 5.506804e-17 5.506804e-17 5.506804e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1.000000e+00 1.387779e-17 1.387779e-17 1.387779e-17 1.387779e-17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] 1.387779e-17 1.387779e-17 1.387779e-17 1.387779e-17 1.387779e-17</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## A ring</span></span></span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">hub_score</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 0 1 0 1 0 1 0 1 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 0 1 0 1 0 1 0 1 0 1</span>
 <span class="r-in"><span><span class="fu">authority_score</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">vector</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 1 1 1 1 1 1 1 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 0 1 0 1 0 1 0 1 0</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
