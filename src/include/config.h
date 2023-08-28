@@ -27,7 +27,7 @@
 /* #undef INTERNAL_ARPACK */
 /* #undef INTERNAL_GMP */
 
-#define IGRAPH_F77_SAVE static __thread
-#define IGRAPH_THREAD_LOCAL __thread
+#define IGRAPH_F77_SAVE
+#define IGRAPH_THREAD_LOCAL
 
 #endif
