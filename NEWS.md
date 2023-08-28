@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9003
+
+## Documentation
+
+  - Update Erdos-Renyi model docs.
+
+
 # igraph 1.5.1.9002
 
 ## Chore
