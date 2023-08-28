@@ -52,30 +52,6 @@
 #'   mode = "undirected", weighted = TRUE
 #' ))
 #' V(g)$color <- "white"
-#' E(g)$label <- E(g)$weight
-#' E(g)$label.cex <- 2
-#' E(g)$color <- "black"
-#' layout(matrix(1:6, nrow = 2, byrow = TRUE))
-#' co <- layout_with_kk(g)
-#' par(mar = c(1, 1, 1, 1))
-#' plot(g, layout = co)
-#'
-#' ## Calculate graphlets
-#' gl <- graphlets(g, niter = 1000)
-#'
-#' ## Plot graphlets
-#' for (i in 1:length(gl$cliques)) {
-#'   sel <- gl$cliques[[i]]
-#'   V(g)$color <- "white"
-#'   V(g)[sel]$color <- "#E495A5"
-#'   E(g)$width <- 1
-#'   E(g)[V(g)[sel] %--% V(g)[sel]]$width <- 2
-#'   E(g)$label <- ""
-#'   E(g)[width == 2]$label <- round(gl$Mu[i], 2)
-#'   E(g)$color <- "black"
-#'   E(g)[width == 2]$color <- "#E495A5"
-#'   plot(g, layout = co)
-#' }
 #' @family glet
 #' @export
 graphlet_basis <- function(graph, weights = NULL) {

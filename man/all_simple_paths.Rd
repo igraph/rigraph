@@ -48,8 +48,6 @@ This function currently ignored multiple and loop edges.
 \examples{
 
 g <- make_ring(10)
-all_simple_paths(g, 1, 5)
-all_simple_paths(g, 1, c(3, 5))
 
 }
 \seealso{

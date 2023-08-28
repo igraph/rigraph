@@ -653,7 +653,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' layout_on_grid(g2, dim = 3)
 #'
 #' plot(g, layout = layout_on_grid)
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 #'   rglplot(g, layout = layout_on_grid(g, dim = 3))
 #' }
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
