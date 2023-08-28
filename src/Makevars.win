@@ -4,9 +4,9 @@ LIB_XML ?= $(MINGW_PREFIX)
 GLPK_HOME ?= $(MINGW_PREFIX)
 LIB_GMP ?= $(MINGW_PREFIX)
 
-PKG_CPPFLAGS=@cflags@ -DUSING_R -I. -Icore -Iinclude/igraph -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/vendor \
+PKG_CPPFLAGS=@cflags@ -DUSING_R -I. -Icore -Iinclude -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
 	-DNDEBUG -DNTIMER -DNPRINT \
-	-DPRPACK_IGRAPH_SUPPORT -DIGRAPH_THREAD_LOCAL=/**/ \
+	-DPRPACK_IGRAPH_SUPPORT \
 	-D_GNU_SOURCE=1
 
 PKG_LIBS = -L${LIB_XML}/lib -lxml2 -lz -larpack -lstdc++ -L${GLPK_HOME}/lib \
