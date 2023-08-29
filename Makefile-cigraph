@@ -50,10 +50,6 @@ $(PYVENV)/stamp: tools/build-requirements.txt
 # Apply possible patches
 
 patches: $(CORESRC) $(VENDORSRC) $(CINC) $(PARSER2)
-	# TODO: fix patches
-	# if [ -d "patches" ]; then \
-	# 	find patches -type f -name '*.patch' -print0 | sort -z | xargs -t -0 -n 1 tools/apply-patch.sh; \
-	# fi
 	-rm -f src/*.orig
 	tools/fix-lexers.sh
 

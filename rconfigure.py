@@ -12,7 +12,7 @@ ignore_folders = [
     "src/vendor/cigraph/vendor/lapack",
     "src/vendor/cigraph/vendor/mini-gmp",
     "src/vendor/cigraph/vendor/f2c",
-    "src/build"
+    "src/vendor/cigraph/etc"
 ]
 
 sources = []
@@ -27,7 +27,7 @@ for root, dirnames, filenames in os.walk('src'):
                 continue
             sources.append(os.path.join(root[4:], filename[:filename.rfind('.')] + '.o'))
 
-text = "SOURCES=" + ' '.join(sources)
+text = "SOURCES=" + ' '.join(sources) + '\n'
 
 with open_utf8(os.path.join('src', 'sources.mk'), 'w') as f:
      f.write(text)
