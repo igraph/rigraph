@@ -71,7 +71,7 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
 
 sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
   # Argument checks
-  require(Matrix); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -82,7 +82,7 @@ sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
 
 sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
   # Argument checks
-  require(Matrix); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -284,7 +284,7 @@ turan_impl <- function(n, r) {
 
 weighted_sparsemat_impl <- function(A, directed, attr, loops=FALSE) {
   # Argument checks
-  require(Matrix); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   directed <- as.logical(directed)
   loops <- as.logical(loops)
 
@@ -3595,7 +3595,7 @@ cmp_epsilon_impl <- function(a, b, eps) {
 eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.arpack.default) {
   # Argument checks
   A <- as.matrix(structure(as.double(A), dim=dim(A)))
-  require(Matrix); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
     "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
@@ -3614,7 +3614,7 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.ar
 eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.arpack.default) {
   # Argument checks
   A <- as.matrix(structure(as.double(A), dim=dim(A)))
-  require(Matrix); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
     "arpack"=2, "comp_auto"=3, "comp_lapack"=4,

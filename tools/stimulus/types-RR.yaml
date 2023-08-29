@@ -386,12 +386,12 @@ SCGDIR:
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)'
 
 SPARSEMAT:
-    INCONV: require(Matrix); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+    INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
 SPARSEMAT_OR_0:
     INCONV: |-
         if (!is.null(%I%)) {
-          require(Matrix); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+          requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
         }
 
 VECTOR_COMPLEX:
