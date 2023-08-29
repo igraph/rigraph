@@ -18,7 +18,7 @@ ignore_folders = [
 sources = []
 for root, dirnames, filenames in os.walk('src'):
     for filename in filenames:
-        if filename.endswith(('.c', '.cc', '.cpp')):
+        if filename.endswith(('.c', '.cc', '.cpp', '.f')):
             ignore_file = False
             for f in ignore_folders:
                 if root.startswith(f):
