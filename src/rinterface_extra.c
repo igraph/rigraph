@@ -5857,7 +5857,7 @@ SEXP R_igraph_layout_merge_dla(SEXP graphs, SEXP layouts) {
     igraph_matrix_t source;
     R_SEXP_to_matrix(VECTOR_ELT(layouts, i), &source);
     igraph_matrix_t *dest=igraph_matrix_list_get_ptr(&matrixlist, i);
-    igraph_matrix_init_copy(dest, &source);
+    igraph_matrix_update(dest, &source);
   }
   igraph_matrix_init(&res, 0, 0);
   IGRAPH_R_CHECK(igraph_layout_merge_dla(&graphvec, &matrixlist, &res));
