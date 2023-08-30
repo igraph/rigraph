@@ -239,6 +239,7 @@ jobs:
           image: ghcr.io/krlmlr/rigraph-san:main
           options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph -e CI=${{ env.CI }}
           run: |
+            printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
             RDcsan -q -e 'Sys.setenv(TESTTHAT_PARALLEL=FALSE); testthat::test_local(reporter = "location", load_package = "installed")'
