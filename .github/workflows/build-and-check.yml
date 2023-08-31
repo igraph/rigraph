@@ -237,7 +237,7 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/krlmlr/rigraph-san:main
-          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph -e CI=${{ env.CI }}
+          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph -e CI=true
           run: |
             printenv
             cd rigraph
