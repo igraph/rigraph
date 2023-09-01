@@ -166,7 +166,7 @@ regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
   res
 }
 
-graph_power_impl <- function(graph, order, directed=false) {
+graph_power_impl <- function(graph, order, directed=FALSE) {
   # Argument checks
   ensure_igraph(graph)
   order <- as.integer(order)
@@ -3749,9 +3749,9 @@ is_tree_impl <- function(graph, mode=c("out", "in", "all", "total"), details=FAL
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_tree, graph, mode)
-  if (!details) {
+    if (!details) {
     res <- res$res
-  } else if (vcount(graph) == 0) {
+} else if (vcount(graph) == 0) {
     # FIXME: Better handled in rinterface_extra.c, or via a dedicated type?
   } else if (igraph_opt("return.vs.es")) {
     res$root <- create_vs(graph, res$root)
