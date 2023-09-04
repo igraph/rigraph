@@ -1,52 +1,5 @@
 #!/bin/bash
 
-# Function to check for the presence of a specific function in a header file
-check_function_in_header() {
-    symbol_to_check="$1"
-    header_to_check="$2"
-    define_to_check="$3"
-
-    if ! test -n "$CC"; then
-        CC=gcc
-    fi
-
-    # Define a template with a placeholder for the code
-    template='
-    #include <{{header_to_check}}>
-
-    int main() {
-        {{symbol_to_check}};
-        return 0;
-    }
-    '
-
-    # Replace the placeholder with the provided code
-    code_with_template="$(echo "$template" | sed "s/{{symbol_to_check}}/$symbol_to_check/; s/{{header_to_check}}/$header_to_check/")"
-
-    # Create a temporary C source file
-    source_file=$(mktemp /tmp/compiled_code.XXXXXX.c)
-
-    # Write the code with template to the source file
-    echo "$code_with_template" > "$source_file"
-
-    # Attempt to compile the code snippet
-    if $CC "$source_file" -o compiled_code 2>/dev/null; then
-        sed -i "s/#undef $define_to_check/#define $define_to_check 1/g" src/config.h
-        rm -f "$source_file" compiled_code
-        return 0
-    else
-        rm -f "$source_file" compiled_code
-        return 1
-    fi
-}
-
-cp ./src/config.h.in ./src/config.h
-
-check_function_in_header "strcasecmp(\"\", \"\")" "strings.h" "HAVE_STRCASECMP"
-check_function_in_header "strncasecmp(\"\", \"\", 0)" "strings.h" "HAVE_STRNCASECMP"
-check_function_in_header "_stricmp(\"\", \"\")" "string.h" "HAVE__STRICMP"
-check_function_in_header "_strnicmp(\"\", \"\", 0)" "string.h" "HAVE__STRNICMP"
-
 # Use pkg-config or xml2-config to get the include directory for libxml-2.0
 xml2_include_dir=""
 if which xml2-config >/dev/null 2>&1; then
