@@ -189,26 +189,19 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 clique_num <- clique_number_impl
 
 
-#' Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph
+#' Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph
 #'
 #' These functions find all, the largest or all the maximal weighted cliques in
 #' an undirected graph. The weight of a clique is the sum of the weights of its
-#' edges.
+#' vertices.
 #'
-#' `weighted_cliques()` find all complete subgraphs in the input graph,
+#' `weighted_cliques()` finds all complete subgraphs in the input graph,
 #' obeying the weight limitations given in the `min` and `max`
 #' arguments.
 #'
 #' `largest_weighted_cliques()` finds all largest weighted cliques in the
 #' input graph. A clique is largest if there is no other clique whose total
 #' weight is larger than the weight of this clique.
-#'
-#' `max_weighted_cliques` finds all maximal weighted cliques in the input graph.
-#' A weighted clique is maximal if it cannot be extended to a clique with larger
-#' total weight. The largest weighted cliques are always maximal, but a maximal
-#' weighted clique is not necessarily the largest.
-#'
-#' `count_max_weighted_cliques` counts the maximal weighted cliques.
 #'
 #' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
@@ -231,8 +224,7 @@ clique_num <- clique_number_impl
 #'   list containing numeric vectors of vertex IDs. Each list element is a weighted
 #'   clique, i.e. a vertex sequence of class [`igraph.vs()`][V].
 #'
-#'   `weighted_clique_num()` and `count_max_weighted_cliques` return an integer
-#'   scalar.
+#'   `weighted_clique_num()` returns an integer scalar.
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
