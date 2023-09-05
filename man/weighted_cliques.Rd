@@ -6,7 +6,7 @@
 \alias{max_weighted_cliques}
 \alias{count_max_weighted_cliques}
 \alias{weighted_clique_num}
-\title{Functions to find weighted cliques, i.e. weighted complete subgraphs in a graph}
+\title{Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph}
 \usage{
 weighted_cliques(
   graph,
@@ -40,29 +40,21 @@ or only the maximal ones (\code{TRUE}).}
 list containing numeric vectors of vertex IDs. Each list element is a weighted
 clique, i.e. a vertex sequence of class \code{\link[=V]{igraph.vs()}}.
 
-\code{weighted_clique_num()} and \code{count_max_weighted_cliques} return an integer
-scalar.
+\code{weighted_clique_num()} returns an integer scalar.
 }
 \description{
 These functions find all, the largest or all the maximal weighted cliques in
 an undirected graph. The weight of a clique is the sum of the weights of its
-edges.
+vertices.
 }
 \details{
-\code{weighted_cliques()} find all complete subgraphs in the input graph,
+\code{weighted_cliques()} finds all complete subgraphs in the input graph,
 obeying the weight limitations given in the \code{min} and \code{max}
 arguments.
 
 \code{largest_weighted_cliques()} finds all largest weighted cliques in the
 input graph. A clique is largest if there is no other clique whose total
 weight is larger than the weight of this clique.
-
-\code{max_weighted_cliques} finds all maximal weighted cliques in the input graph.
-A weighted clique is maximal if it cannot be extended to a clique with larger
-total weight. The largest weighted cliques are always maximal, but a maximal
-weighted clique is not necessarily the largest.
-
-\code{count_max_weighted_cliques} counts the maximal weighted cliques.
 
 \code{weighted_clique_num()} calculates the weight of the largest weighted clique(s).
 }
