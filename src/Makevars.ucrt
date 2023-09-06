@@ -5,7 +5,7 @@ GLPK_HOME ?= $(R_TOOLS_SOFT)
 LIB_GMP ?= $(R_TOOLS_SOFT)
 
 PKG_CPPFLAGS = -I${LIB_XML}/include/libxml2 -I${LIB_XML}/include -DLIBXML_STATIC -DUSING_R -I. -Icore -Iinclude -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
-        -DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK \
+        -DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
         -DPRPACK_IGRAPH_SUPPORT \
         -DHAVE__STRICMP=1 -DHAVE__STRNICMP=1 \
         -D_GNU_SOURCE=1
