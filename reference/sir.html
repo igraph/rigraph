@@ -12,7 +12,7 @@ graph"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathj
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -177,7 +177,9 @@ population might be in three states: susceptible, infected and recovered.
 Recovered people are assumed to be immune to the disease. Susceptibles
 become infected with a rate that depends on their number of infected
 neighbors. Infected people become recovered with a constant rate.</p>
-<p>The function <code>sir()</code> simulates the model.</p>
+<p>The function <code>sir()</code> simulates the model. This function runs multiple
+simulations, all starting with a single uniformly randomly chosen infected
+individual. A simulation is stopped when no infected individuals are left.</p>
 <p>Function <code>time_bins()</code> bins the simulation steps, using the
 Freedman-Diaconis heuristics to determine the bin width.</p>
 <p>Function <code>median</code> and <code>quantile</code> calculate the median and
