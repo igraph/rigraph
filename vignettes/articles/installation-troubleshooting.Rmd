@@ -10,9 +10,9 @@ knitr::opts_chunk$set(
 ```
 This page details common problems encountered when trying to install igraph. If you did not find an answer to your problem here, feel free to ask for help on https://igraph.discourse.group/. When you do so, be sure to state: 
 
-1. the output of `R.version` 
+1. the output of `sessionInfo()` 
 2. where you obtained R from 
-3. the complete output from running `install.packages("igraph")` in a fresh R session.
+3. the complete output from running `install.packages("igraph")` in a fresh R session
 
 ## Cannot compile igraph from sources on Windows or macOS
 
