@@ -40,7 +40,7 @@ Note that the pre-compiled binaries on CRAN are only compatible with the R distr
 If you decide to try to compile from sources anyway, basic requirements are listed below. It is assumed that you are comfortable compiling software from sources and resolving basic issues as they arise. Otherwise, please use the binaries.
 
  - Make sure you have a compatible toolchain installed, including a Fortran compiler. On Linux, make sure you have `gfortran` installed. For Windows, you will need Rtools.
-    - Instructions to install [Rtools for R-4.0.0 to to R-4.1.3](https://cran.r-project.org/bin/windows/Rtools/rtools40.html), see in particular the "Using pacman" link. You will find a [copyable pacman command for installing all dependencies](https://github.com/igraph/rigraph/#installation).
+    - Instructions to install [Rtools for R-4.0.0 to R-4.1.3](https://cran.r-project.org/bin/windows/Rtools/rtools40.html), see in particular the "Using pacman" link. You will find a [copyable pacman command for installing all dependencies](https://github.com/igraph/rigraph/#installation).
     - Instructions to install [Rtools for R4.2.x](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html) and [Rtools for R4.3.x](https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html).
  - Make sure you have the GLPK C library installed. This is not the same as the Rglpk R package. Instructions for installing libraries for Rtools4 on Windows are [here](https://cran.r-project.org/bin/windows/Rtools/)
 
