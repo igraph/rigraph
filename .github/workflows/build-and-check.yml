@@ -42,11 +42,6 @@ jobs:
       _R_CHECK_PKG_SIZES_: FALSE
 
     steps:
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          detached: true
-
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -80,7 +75,12 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Check R package
-        uses: r-lib/actions/check-r-package@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
         with:
-          error-on: '"error"'
+          detached: true
+
+      - name: Setup tmate session
+        run: |
+          sleep 36000
+        shell: bash
