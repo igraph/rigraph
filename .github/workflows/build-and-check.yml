@@ -46,6 +46,7 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         with:
           detached: true
+          limit-access-to-actor: true
 
       - uses: actions/checkout@v2
         with:
