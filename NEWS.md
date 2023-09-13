@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9006
+
+## Chore
+
+  - Improve troubleshooting info.
+
+  - Fix typo in troubleshooting docs.
+
+
 # igraph 1.5.1.9005
 
 ## Documentation
