@@ -9,6 +9,9 @@ on:
     branches:
       - main
       - fix/*
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
 name: R-CMD-check
 
 jobs:
@@ -34,6 +37,7 @@ jobs:
       - name: apt update
         run: |
           sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
         shell: bash
 
       - name: Cache R packages
@@ -178,39 +182,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
-
-      - name: Setup Pandoc
-        uses: r-lib/actions/setup-pandoc@v2
-
-      - name: Install R dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          needs: coverage
-          pak-version: devel
-
-      - name: Check R package
-        uses: r-lib/actions/check-r-package@v2
-        with:
-          error-on: '"note"'
-
-  coverage:
-    runs-on: ubuntu-20.04
-
-    needs: build_src_package
-
-    name: Coverage
-
-    env:
-      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      MAKEFLAGS: -j2
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: apt update
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -227,7 +203,6 @@ jobs:
       - name: Run coverage
         run: |
           line_exclusions <- fs::dir_ls(c("src/vendor"), type = "file", recurse = TRUE)
-
           cov <- covr::package_coverage(
             type = c("tests", "examples"),
             line_exclusions = as.list(names(line_exclusions)),
@@ -251,14 +226,16 @@ jobs:
       - name: apt update
         run: |
           sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
         shell: bash
 
       - name: run sanitizer
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/krlmlr/rigraph-san:main
-          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
+          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph -e CI=true
           run: |
+            printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
             RDcsan -q -e 'Sys.setenv(TESTTHAT_PARALLEL=FALSE); testthat::test_local(reporter = "location", load_package = "installed")'
