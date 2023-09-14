@@ -9,7 +9,6 @@ on:
     branches:
       - main
       - fix/*
-
 name: R-CMD-check
 
 jobs:
@@ -127,6 +126,52 @@ jobs:
       RGL_USE_NULL: true  # Ensure that rgl functions correctly on macOS
       MAKEFLAGS: -j2
       _R_CHECK_PKG_SIZES_: FALSE
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: apt update
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
+      - name: apt update
+        if: runner.os == 'macOS'
+        run: |
+          brew install glpk
+        shell: bash
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          rtools-version: 42
+          update-rtools: true
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+      - name: Check R package
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          error-on: '"error"'
+
+  coverage:
+    runs-on: ubuntu-20.04
+
+    needs: build_src_package
+
+    name: Coverage
+
+    env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/focal/latest
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAKEFLAGS: -j2
 
     steps:
       - uses: actions/checkout@v2
@@ -135,10 +180,6 @@ jobs:
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: ${{ matrix.config.r }}
-          rtools-version: 42
-          update-rtools: true
 
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v2
@@ -146,8 +187,8 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
-          needs: check
+          needs: coverage
+          pak-version: devel
 
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
