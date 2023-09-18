@@ -12,6 +12,7 @@
 \alias{clique_num}
 \alias{largest_weighted_cliques}
 \alias{weighted_clique_num}
+\alias{clique_size_counts}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
@@ -25,6 +26,8 @@ clique_num(graph)
 largest_weighted_cliques(graph, vertex.weights = NULL)
 
 weighted_clique_num(graph, vertex.weights = NULL)
+
+clique_size_counts(graph, min = 0, max = 0, maximal = FALSE, ...)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs will be considered as
@@ -127,5 +130,6 @@ Other cliques:
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
+\concept{clique}
 \concept{cliques}
 \keyword{graphs}

@@ -382,7 +382,7 @@ ivs_size <- function(graph) {
 }
 
 #' @family clique
-#' @rdname clique
+#' @rdname cliques
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
