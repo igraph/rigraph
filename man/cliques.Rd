@@ -6,16 +6,25 @@
 \alias{maximal.cliques}
 \alias{maximal.cliques.count}
 \alias{clique.number}
-\alias{clique_num}
 \alias{largest.cliques}
-\alias{count_max_cliques}
 \alias{max_cliques}
-\alias{clique_size_counts}
+\alias{count_max_cliques}
+\alias{clique_num}
+\alias{largest_weighted_cliques}
+\alias{weighted_clique_num}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
 
 max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
+
+count_max_cliques(graph, min = NULL, max = NULL, subset = NULL)
+
+clique_num(graph)
+
+largest_weighted_cliques(graph, vertex.weights = NULL)
+
+weighted_clique_num(graph, vertex.weights = NULL)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs will be considered as
@@ -97,6 +106,14 @@ in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
 \code{\link[=ivs]{ivs()}}
+
+Other cliques: 
+\code{\link{ivs}()},
+\code{\link{weighted_cliques}()}
+
+Other cliques: 
+\code{\link{ivs}()},
+\code{\link{weighted_cliques}()}
 
 Other cliques: 
 \code{\link{ivs}()},

@@ -45,8 +45,7 @@
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
-#' clique.number clique_num largest.cliques count_max_cliques max_cliques
-#' clique_size_counts
+#' clique.number largest.cliques max_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -158,6 +157,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
 }
 
 #' @family cliques
+#' @rdname cliques
 #' @export
 count_max_cliques <- function(graph, min = NULL, max = NULL,
                               subset = NULL) {
@@ -185,6 +185,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
 }
 
 #' @family cliques
+#' @rdname cliques
 #' @export
 clique_num <- clique_number_impl
 
@@ -205,8 +206,8 @@ clique_num <- clique_number_impl
 #'
 #' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
-#' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
-#' count_max_weighted_cliques weighted_clique_num
+#' @aliases weighted_cliques max_weighted_cliques
+#' count_max_weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
@@ -243,8 +244,10 @@ clique_num <- clique_number_impl
 #' weighted_clique_num(g)
 weighted_cliques <- weighted_cliques_impl
 #' @export
+#' @rdname cliques
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
+#' @rdname cliques
 weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
@@ -378,7 +381,8 @@ ivs_size <- function(graph) {
   .Call(R_igraph_independence_number, graph)
 }
 
-#' @family cliques
+#' @family clique
+#' @rdname clique
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
   if (maximal) {
