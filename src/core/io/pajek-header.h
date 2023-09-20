@@ -1,8 +1,7 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2011-2012  Gabor Csardi <csardi@rmki.kfki.hu>
+   334 Harvard street, Cambridge MA, 02139 USA
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,24 +20,27 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_error.h"
+#include "igraph_vector.h"
+#include "igraph_vector_ptr.h"
 
-#include "igraph_decls.h"
+#include "core/trie.h"
 
-__BEGIN_DECLS
-
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
-
-__END_DECLS
-
-#endif
+typedef struct {
+    void *scanner;
+    int eof;
+    char errmsg[300];
+    igraph_vector_t *vector;
+    igraph_bool_t directed;
+    int vcount, vcount2;
+    int actfrom;
+    int actto;
+    int mode; /* 0: general, 1: vertex, 2: edge */
+    igraph_trie_t *vertex_attribute_names;
+    igraph_vector_ptr_t *vertex_attributes;
+    igraph_trie_t *edge_attribute_names;
+    igraph_vector_ptr_t *edge_attributes;
+    int vertexid;
+    int actvertex;
+    int actedge;
+} igraph_i_pajek_parsedata_t;

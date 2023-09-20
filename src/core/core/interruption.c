@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -16,29 +16,27 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_interrupt.h"
+#include "config.h"
 
-#include "igraph_decls.h"
+IGRAPH_THREAD_LOCAL igraph_interruption_handler_t
+*igraph_i_interruption_handler = 0;
 
-__BEGIN_DECLS
+int igraph_allow_interruption(void* data) {
+    if (igraph_i_interruption_handler) {
+        return igraph_i_interruption_handler(data);
+    }
+    return IGRAPH_SUCCESS;
+}
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
-
-__END_DECLS
-
-#endif
+igraph_interruption_handler_t *
+igraph_set_interruption_handler (igraph_interruption_handler_t * new_handler) {
+    igraph_interruption_handler_t * previous_handler = igraph_i_interruption_handler;
+    igraph_i_interruption_handler = new_handler;
+    return previous_handler;
+}

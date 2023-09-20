@@ -16,28 +16,26 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_COHESIVE_BLOCKS_H
+#define IGRAPH_COHESIVE_BLOCKS_H
 
 #include "igraph_decls.h"
+#include "igraph_datatype.h"
+#include "igraph_vector.h"
+#include "igraph_vector_ptr.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+IGRAPH_EXPORT int igraph_cohesive_blocks(const igraph_t *graph,
+                                         igraph_vector_ptr_t *blocks,
+                                         igraph_vector_t *cohesion,
+                                         igraph_vector_t *parent,
+                                         igraph_t *block_tree);
 
 __END_DECLS
 

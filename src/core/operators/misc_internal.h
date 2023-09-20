@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2020  The igraph development team
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,25 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_OPERATORS_MISC_INTERNAL_H
+#define IGRAPH_OPERATORS_MISC_INTERNAL_H
 
 #include "igraph_decls.h"
+#include "igraph_datatype.h"
+#include "igraph_vector.h"
+#include "igraph_vector_ptr.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+#define IGRAPH_MERGE_MODE_UNION        1
+#define IGRAPH_MERGE_MODE_INTERSECTION 2
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+int igraph_i_order_edgelist_cmp(void *edges, const void *e1, const void *e2);
+int igraph_i_merge(igraph_t *res, int mode,
+                   const igraph_t *left, const igraph_t *right,
+                   igraph_vector_t *edge_map1, igraph_vector_t *edge_map2);
+void igraph_i_union_intersection_destroy_vectors(igraph_vector_ptr_t *v);
+void igraph_i_union_intersection_destroy_vector_longs(igraph_vector_ptr_t *v);
 
 __END_DECLS
 

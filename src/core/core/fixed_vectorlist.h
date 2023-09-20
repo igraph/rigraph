@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,30 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_TYPES_INTERNAL_H
+#define IGRAPH_TYPES_INTERNAL_H
 
 #include "igraph_decls.h"
+#include "igraph_types.h"
+#include "igraph_vector.h"
+#include "igraph_vector_ptr.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+/* -------------------------------------------------- */
+/* Vectorlist, fixed length                           */
+/* -------------------------------------------------- */
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+typedef struct igraph_fixed_vectorlist_t {
+    igraph_vector_t *vecs;
+    igraph_vector_ptr_t v;
+    long int length;
+} igraph_fixed_vectorlist_t;
+
+void igraph_fixed_vectorlist_destroy(igraph_fixed_vectorlist_t *l);
+int igraph_fixed_vectorlist_convert(igraph_fixed_vectorlist_t *l,
+                                    const igraph_vector_t *from,
+                                    long int size);
 
 __END_DECLS
 

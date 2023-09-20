@@ -1,8 +1,7 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2011-2012  Gabor Csardi <csardi@rmki.kfki.hu>
+   334 Harvard street, Cambridge MA, 02139 USA
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,24 +20,25 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_error.h"
 
-#include "igraph_decls.h"
+#include "io/gml-tree.h"
 
-__BEGIN_DECLS
+typedef struct {
+    void *scanner;
+    int eof;
+    int depth;
+    char errmsg[300];
+    igraph_gml_tree_t *tree;
+} igraph_i_gml_parsedata_t;
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+/**
+ * Initializes a GML parser context.
+ */
+int igraph_i_gml_parsedata_init(igraph_i_gml_parsedata_t* context);
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
-
-__END_DECLS
-
-#endif
+/**
+ * Destroys a GML parser context, freeing all memory currently used by the
+ * context.
+ */
+void igraph_i_gml_parsedata_destroy(igraph_i_gml_parsedata_t* context);

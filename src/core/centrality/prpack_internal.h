@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2007-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -16,28 +16,28 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_PRPACK
+#define IGRAPH_PRPACK
 
 #include "igraph_decls.h"
+#include "igraph_types.h"
+#include "igraph_datatype.h"
+#include "igraph_iterators.h"
+
+#include "igraph_interface.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+int igraph_i_personalized_pagerank_prpack(const igraph_t *graph, igraph_vector_t *vector,
+                                          igraph_real_t *value, const igraph_vs_t vids,
+                                          igraph_bool_t directed, igraph_real_t damping,
+                                          const igraph_vector_t *reset,
+                                          const igraph_vector_t *weights);
 
 __END_DECLS
 

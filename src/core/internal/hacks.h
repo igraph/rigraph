@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,40 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_HACKS_INTERNAL_H
+#define IGRAPH_HACKS_INTERNAL_H
 
-#include "igraph_decls.h"
+#include "config.h"
+
+#undef __BEGIN_DECLS
+#undef __END_DECLS
+#ifdef __cplusplus
+    #define __BEGIN_DECLS extern "C" {
+    #define __END_DECLS }
+#else
+    #define __BEGIN_DECLS /* empty */
+    #define __END_DECLS /* empty */
+#endif
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+#ifndef HAVE_STRDUP
+    #define strdup igraph_i_strdup
+    char* igraph_i_strdup(const char *s);
+#endif
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+#ifndef HAVE_STPCPY
+    #define stpcpy igraph_i_stpcpy
+    char* igraph_i_stpcpy(char* s1, const char* s2);
+#endif
+
+#ifndef HAVE_STRCASECMP
+    #ifdef HAVE__STRICMP
+        #define strcasecmp _stricmp
+    #else
+        #error "igraph needs strcasecmp() or _stricmp()"
+    #endif
+#endif
 
 __END_DECLS
 

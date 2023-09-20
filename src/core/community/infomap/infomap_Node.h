@@ -1,7 +1,8 @@
 /* -*- mode: C -*-  */
+/* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2011-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -16,29 +17,36 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc.,  51 Franklin Street, Fifth Floor, Boston, MA
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef NODE_H
+#define NODE_H
 
-#include "igraph_decls.h"
+#include <vector>
+#include <utility>
 
-__BEGIN_DECLS
+#include "igraph_interface.h"
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+class Node {
+public:
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+    Node();
+    Node(int modulenr, double tpweight);
 
-__END_DECLS
+    std::vector<int> members;
+    std::vector< std::pair<int, double> > inLinks;
+    std::vector< std::pair<int, double> > outLinks;
+    double selfLink;
+
+    double teleportWeight;
+    double danglingSize;
+    double exit;
+    double size;
+};
+
+void cpyNode(Node *newNode, Node *oldNode);
 
 #endif

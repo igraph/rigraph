@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,24 +21,30 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_types.h"
+#include "igraph_vector.h"
+#include "igraph_array.h"
 
-#include "igraph_decls.h"
+#define BASE_IGRAPH_REAL
+#include "igraph_pmt.h"
+#include "array.pmt"
+#include "igraph_pmt_off.h"
+#undef BASE_IGRAPH_REAL
 
-__BEGIN_DECLS
+#define BASE_LONG
+#include "igraph_pmt.h"
+#include "array.pmt"
+#include "igraph_pmt_off.h"
+#undef BASE_LONG
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+#define BASE_CHAR
+#include "igraph_pmt.h"
+#include "array.pmt"
+#include "igraph_pmt_off.h"
+#undef BASE_CHAR
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
-
-__END_DECLS
-
-#endif
+#define BASE_BOOL
+#include "igraph_pmt.h"
+#include "array.pmt"
+#include "igraph_pmt_off.h"
+#undef BASE_BOOL

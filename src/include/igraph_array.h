@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,40 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_ARRAY_H
+#define IGRAPH_ARRAY_H
 
 #include "igraph_decls.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+/* -------------------------------------------------- */
+/* 3D array                                           */
+/* -------------------------------------------------- */
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+#define BASE_IGRAPH_REAL
+#include "igraph_pmt.h"
+#include "igraph_array_pmt.h"
+#include "igraph_pmt_off.h"
+#undef BASE_IGRAPH_REAL
+
+#define BASE_LONG
+#include "igraph_pmt.h"
+#include "igraph_array_pmt.h"
+#include "igraph_pmt_off.h"
+#undef BASE_LONG
+
+#define BASE_CHAR
+#include "igraph_pmt.h"
+#include "igraph_array_pmt.h"
+#include "igraph_pmt_off.h"
+#undef BASE_CHAR
+
+#define BASE_BOOL
+#include "igraph_pmt.h"
+#include "igraph_array_pmt.h"
+#include "igraph_pmt_off.h"
+#undef BASE_BOOL
 
 __END_DECLS
 

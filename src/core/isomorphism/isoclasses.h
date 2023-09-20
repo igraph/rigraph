@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2008-2020  The igraph development team
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,25 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_ISOCLASSES_H
+#define IGRAPH_ISOCLASSES_H
 
 #include "igraph_decls.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+extern const unsigned int igraph_i_isoclass2_3[];
+extern const unsigned int igraph_i_isoclass2_4[];
+extern const unsigned int igraph_i_isoclass2_3u[];
+extern const unsigned int igraph_i_isoclass2_4u[];
+extern const unsigned int igraph_i_isoclass2_5u[];
+extern const unsigned int igraph_i_isoclass2_6u[];
+extern const unsigned int igraph_i_isoclass_3_idx[];
+extern const unsigned int igraph_i_isoclass_4_idx[];
+extern const unsigned int igraph_i_isoclass_3u_idx[];
+extern const unsigned int igraph_i_isoclass_4u_idx[];
+extern const unsigned int igraph_i_isoclass_5u_idx[];
+extern const unsigned int igraph_i_isoclass_6u_idx[];
 
 __END_DECLS
 

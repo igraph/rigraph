@@ -21,23 +21,32 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_SEPARATORS_H
+#define IGRAPH_SEPARATORS_H
 
 #include "igraph_decls.h"
+#include "igraph_constants.h"
+#include "igraph_types.h"
+#include "igraph_vector.h"
+#include "igraph_vector_ptr.h"
+#include "igraph_datatype.h"
+#include "igraph_iterators.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+IGRAPH_EXPORT int igraph_is_separator(const igraph_t *graph,
+                                      const igraph_vs_t candidate,
+                                      igraph_bool_t *res);
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+IGRAPH_EXPORT int igraph_all_minimal_st_separators(const igraph_t *graph,
+                                                   igraph_vector_ptr_t *separators);
+
+IGRAPH_EXPORT int igraph_is_minimal_separator(const igraph_t *graph,
+                                              const igraph_vs_t candidate,
+                                              igraph_bool_t *res);
+
+IGRAPH_EXPORT int igraph_minimum_size_separators(const igraph_t *graph,
+                                                 igraph_vector_ptr_t *separators);
 
 __END_DECLS
 

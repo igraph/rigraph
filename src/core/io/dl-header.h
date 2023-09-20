@@ -1,7 +1,6 @@
-/* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2009-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,24 +20,25 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#include "igraph_error.h"
+#include "igraph_types.h"
 
-#include "igraph_decls.h"
+#include "core/trie.h"
 
-__BEGIN_DECLS
+typedef enum { IGRAPH_DL_MATRIX,
+               IGRAPH_DL_EDGELIST1, IGRAPH_DL_NODELIST1
+             } igraph_i_dl_type_t;
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
-
-__END_DECLS
-
-#endif
+typedef struct {
+    void *scanner;
+    int eof;
+    int mode;
+    long int n;
+    long int from, to;
+    igraph_vector_t edges;
+    igraph_vector_t weights;
+    igraph_strvector_t labels;
+    igraph_trie_t trie;
+    igraph_i_dl_type_t type;
+    char errmsg[300];
+} igraph_i_dl_parsedata_t;

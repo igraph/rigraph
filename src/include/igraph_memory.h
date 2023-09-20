@@ -1,7 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
+   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
    334 Harvard street, Cambridge, MA 02139 USA
 
    This program is free software; you can redistribute it and/or modify
@@ -21,23 +21,24 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_MEMORY_H
+#define IGRAPH_MEMORY_H
 
+#include <stdlib.h>
 #include "igraph_decls.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
+#define IGRAPH_CALLOC(n,t)    (t*) calloc( (n) > 0 ? (size_t)(n) : (size_t)1, sizeof(t) )
+#define IGRAPH_REALLOC(p,n,t) (t*) realloc((void*)(p), (n) > 0 ? (size_t)((n)*sizeof(t)) : (size_t)1)
+#define IGRAPH_FREE(p)        (free( (void *)(p) ), (p) = NULL)
 
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+#define igraph_Calloc IGRAPH_CALLOC
+#define igraph_Realloc IGRAPH_REALLOC
+#define igraph_Free IGRAPH_FREE
+
+IGRAPH_EXPORT void igraph_free(void *p);
+IGRAPH_EXPORT void *igraph_malloc(size_t n);
 
 __END_DECLS
 

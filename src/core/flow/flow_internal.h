@@ -1,8 +1,7 @@
 /* -*- mode: C -*-  */
 /*
    IGraph library.
-   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
-   334 Harvard street, Cambridge, MA 02139 USA
+   Copyright (C) 2021 The igraph development team
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,23 +20,21 @@
 
 */
 
-#ifndef IGRAPH_VERSION_H
-#define IGRAPH_VERSION_H
+#ifndef IGRAPH_FLOW_INTERNAL_H
+#define IGRAPH_FLOW_INTERNAL_H
 
-#include "igraph_decls.h"
+#include "igraph_types.h"
 
 __BEGIN_DECLS
 
-#define IGRAPH_VERSION "@PACKAGE_VERSION@"
-#define IGRAPH_VERSION_MAJOR @PACKAGE_VERSION_MAJOR@
-#define IGRAPH_VERSION_MINOR @PACKAGE_VERSION_MINOR@
-#define IGRAPH_VERSION_PATCH @PACKAGE_VERSION_PATCH@
-#define IGRAPH_VERSION_PRERELEASE "@PACKAGE_VERSION_PRERELEASE@"
-
-IGRAPH_EXPORT int igraph_version(const char **version_string,
-                                 int *major,
-                                 int *minor,
-                                 int *subminor);
+IGRAPH_PRIVATE_EXPORT int igraph_i_all_st_cuts_pivot(const igraph_t *graph,
+                                                     const igraph_marked_queue_t *S,
+                                                     const igraph_estack_t *T,
+                                                     long int source,
+                                                     long int target,
+                                                     long int *v,
+                                                     igraph_vector_t *Isv,
+                                                     void *arg);
 
 __END_DECLS
 
