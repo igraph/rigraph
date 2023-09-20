@@ -33,10 +33,10 @@ LEX=flex
 %.c: %.y
 	$(YACC) $<
 	mv -f yy.tab.c src/vendor/io/$(notdir $@)
-	mv -f yy.tab.h src/include/io/parsers/$(basename $(notdir $@)).h
+	mv -f yy.tab.h src/vendor/io/parsers/$(basename $(notdir $@)).h
 
 %.c: %.l
-	$(LEX) -o src/vendor/io/$(notdir $@) --header-file=src/include/io/parsers/$(basename $(notdir $@)).h $<
+	$(LEX) -o src/vendor/io/$(notdir $@) --header-file=src/vendor/io/parsers/$(basename $(notdir $@)).h $<
 
 # Create Python virtualenv for Stimulus
 
