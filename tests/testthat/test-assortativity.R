@@ -1,5 +1,6 @@
 test_that("assortativity works", {
-  skip("UNSKIP: windows")
+  skip_on_cran()
+
   g <- read_graph(f <- gzfile("celegansneural.gml.gz"), format = "gml")
 
   assR <- function(graph) {
@@ -34,7 +35,7 @@ test_that("assortativity works", {
 })
 
 test_that("nominal assortativity works", {
-  skip("UNSKIP: windows")
+  skip_on_cran()
 
   o <- read_graph(f <- gzfile("football.gml.gz"), format = "gml")
   o <- simplify(o)
