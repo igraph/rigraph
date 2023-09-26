@@ -1,261 +1,124 @@
 # Revdeps
 
-## Failed to check (247)
+## Failed to check (7)
 
-|package                  |version |error |warning |note |
-|:------------------------|:-------|:-----|:-------|:----|
-|AlphaBeta                |?       |      |        |     |
-|ANF                      |?       |      |        |     |
-|ASpli                    |?       |      |        |     |
-|batchelor                |?       |      |        |     |
-|BayesSpace               |?       |      |        |     |
-|BiocFHIR                 |?       |      |        |     |
-|BiocPkgTools             |?       |      |        |     |
-|biodbKegg                |?       |      |        |     |
-|BioNAR                   |?       |      |        |     |
-|BioNERO                  |?       |      |        |     |
-|BioNet                   |?       |      |        |     |
-|BioNetStat               |?       |      |        |     |
-|BioTIP                   |?       |      |        |     |
-|BiRewire                 |?       |      |        |     |
-|bluster                  |?       |      |        |     |
-|CAMERA                   |?       |      |        |     |
-|CARNIVAL                 |?       |      |        |     |
-|CausalR                  |?       |      |        |     |
-|CBNplot                  |?       |      |        |     |
-|CellaRepertorium         |?       |      |        |     |
-|CellNOptR                |?       |      |        |     |
-|CellTrails               |?       |      |        |     |
-|CEMiTool                 |?       |      |        |     |
-|ceRNAnetsim              |?       |      |        |     |
-|CeTF                     |?       |      |        |     |
-|ChromSCape               |?       |      |        |     |
-|CHRONOS                  |?       |      |        |     |
-|cicero                   |?       |      |        |     |
-|CIMICE                   |?       |      |        |     |
-|CiteFuse                 |?       |      |        |     |
-|clevRvis                 |?       |      |        |     |
-|clipper                  |?       |      |        |     |
-|cliqueMS                 |?       |      |        |     |
-|clusterExperiment        |?       |      |        |     |
-|CNORfeeder               |?       |      |        |     |
-|cogeqc                   |?       |      |        |     |
-|condiments               |?       |      |        |     |
-|CoRegNet                 |?       |      |        |     |
-|cosmosR                  |?       |      |        |     |
-|covEB                    |?       |      |        |     |
-|csdR                     |?       |      |        |     |
-|CTDquerier               |?       |      |        |     |
-|DAPAR                    |?       |      |        |     |
-|DART                     |?       |      |        |     |
-|dcanr                    |?       |      |        |     |
-|dce                      |?       |      |        |     |
-|debrowser                |?       |      |        |     |
-|destiny                  |?       |      |        |     |
-|DEsubs                   |?       |      |        |     |
-|diffcoexp                |?       |      |        |     |
-|diffuStats               |?       |      |        |     |
-|DmelSGI                  |?       |      |        |     |
-|EBcoexpress              |?       |      |        |     |
-|eegc                     |?       |      |        |     |
-|EGAD                     |?       |      |        |     |
-|EnMCB                    |?       |      |        |     |
-|enrichplot               |?       |      |        |     |
-|epiNEM                   |?       |      |        |     |
-|epistasisGA              |?       |      |        |     |
-|esATAC                   |?       |      |        |     |
-|EventPointer             |?       |      |        |     |
-|FamAgg                   |?       |      |        |     |
-|fcoex                    |?       |      |        |     |
-|FELLA                    |?       |      |        |     |
-|FGNet                    |?       |      |        |     |
-|FLAMES                   |?       |      |        |     |
-|Fletcher2013b            |?       |      |        |     |
-|flowGraph                |?       |      |        |     |
-|FlowSOM                  |?       |      |        |     |
-|GeneGeneInteR            |?       |      |        |     |
-|geneplast                |?       |      |        |     |
-|GENESIS                  |?       |      |        |     |
-|geNetClassifier          |?       |      |        |     |
-|GeneTonic                |?       |      |        |     |
-|GenomicInteractions      |?       |      |        |     |
-|GNET2                    |?       |      |        |     |
-|GOSim                    |?       |      |        |     |
-|GRaNIE                   |?       |      |        |     |
-|GraphPAC                 |?       |      |        |     |
-|GSAR                     |?       |      |        |     |
-|GWENA                    |?       |      |        |     |
-|HarmonizedTCGAData       |?       |      |        |     |
-|HCAData                  |?       |      |        |     |
-|hipathia                 |?       |      |        |     |
-|HPiP                     |?       |      |        |     |
-|imcRtools                |?       |      |        |     |
-|IMMAN                    |?       |      |        |     |
-|INDEED                   |?       |      |        |     |
-|infercnv                 |?       |      |        |     |
-|InterCellar              |?       |      |        |     |
-|InterMineR               |?       |      |        |     |
-|IntOMICS                 |?       |      |        |     |
-|IntramiRExploreR         |?       |      |        |     |
-|IRISFGM                  |?       |      |        |     |
-|iSEE                     |?       |      |        |     |
-|iSEEu                    |?       |      |        |     |
-|KEGGlincs                |?       |      |        |     |
-|LACE                     |?       |      |        |     |
-|levi                     |?       |      |        |     |
-|Linnorm                  |?       |      |        |     |
-|lionessR                 |?       |      |        |     |
-|MAGAR                    |?       |      |        |     |
-|markovchain              |?       |      |        |     |
-|martini                  |?       |      |        |     |
-|mbOmic                   |?       |      |        |     |
-|MetaboSignal             |?       |      |        |     |
-|MetaNeighbor             |?       |      |        |     |
-|MetID                    |?       |      |        |     |
-|MetNet                   |?       |      |        |     |
-|miaSim                   |?       |      |        |     |
-|miloR                    |?       |      |        |     |
-|MineICA                  |?       |      |        |     |
-|miRSM                    |?       |      |        |     |
-|miRspongeR               |?       |      |        |     |
-|mistyR                   |?       |      |        |     |
-|mixOmics                 |?       |      |        |     |
-|MMUPHin                  |?       |      |        |     |
-|MODA                     |?       |      |        |     |
-|MOGAMUN                  |?       |      |        |     |
-|monocle                  |?       |      |        |     |
-|mosbi                    |?       |      |        |     |
-|multiSight               |?       |      |        |     |
-|mumosa                   |?       |      |        |     |
-|MWASTools                |?       |      |        |     |
-|Nebulosa                 |?       |      |        |     |
-|netDx                    |?       |      |        |     |
-|netOmics                 |?       |      |        |     |
-|NetPathMiner             |?       |      |        |     |
-|netresponse              |?       |      |        |     |
-|NetSAM                   |?       |      |        |     |
-|netSmooth                |?       |      |        |     |
-|netZooR                  |?       |      |        |     |
-|NoRCE                    |?       |      |        |     |
-|OmnipathR                |?       |      |        |     |
-|OncoSimulR               |?       |      |        |     |
-|ontoProc                 |?       |      |        |     |
-|oposSOM                  |?       |      |        |     |
-|OSCA.advanced            |?       |      |        |     |
-|OSCA.basic               |?       |      |        |     |
-|OSCA.multisample         |?       |      |        |     |
-|OSCA.workflows           |?       |      |        |     |
-|pageRank                 |?       |      |        |     |
-|pairkat                  |?       |      |        |     |
-|pandaR                   |?       |      |        |     |
-|PanomiR                  |?       |      |        |     |
-|PANR                     |?       |      |        |     |
-|PanViz                   |?       |      |        |     |
-|pareg                    |?       |      |        |     |
-|Path2PPI                 |?       |      |        |     |
-|paxtoolsr                |?       |      |        |     |
-|pcxn                     |?       |      |        |     |
-|PDATK                    |?       |      |        |     |
-|PFP                      |?       |      |        |     |
-|phemd                    |?       |      |        |     |
-|PhenoGeneRanker          |?       |      |        |     |
-|phenomis                 |?       |      |        |     |
-|PhosR                    |?       |      |        |     |
-|phyloseq                 |?       |      |        |     |
-|Pi                       |?       |      |        |     |
-|piano                    |?       |      |        |     |
-|PPInfer                  |?       |      |        |     |
-|proteasy                 |?       |      |        |     |
-|PSMatch                  |?       |      |        |     |
-|psygenet2r               |?       |      |        |     |
-|pwOmics                  |?       |      |        |     |
-|QFeatures                |?       |      |        |     |
-|qmtools                  |?       |      |        |     |
-|R3CPET                   |?       |      |        |     |
-|RandomWalkRestartMH      |?       |      |        |     |
-|rBiopaxParser            |?       |      |        |     |
-|RcisTarget               |?       |      |        |     |
-|RCSL                     |?       |      |        |     |
-|RCX                      |?       |      |        |     |
-|RCy3                     |?       |      |        |     |
-|ReactomePA               |?       |      |        |     |
-|rebook                   |?       |      |        |     |
-|RedeR                    |?       |      |        |     |
-|RITAN                    |?       |      |        |     |
-|RLassoCox                |?       |      |        |     |
-|rScudo                   |?       |      |        |     |
-|rsemmed                  |?       |      |        |     |
-|RTN                      |?       |      |        |     |
-|rTRM                     |?       |      |        |     |
-|SANTA                    |?       |      |        |     |
-|SBGNview                 |?       |      |        |     |
-|scClassify               |?       |      |        |     |
-|scDblFinder              |?       |      |        |     |
-|SCFA                     |?       |      |        |     |
-|schex                    |?       |      |        |     |
-|scHOT                    |?       |      |        |     |
-|scMerge                  |?       |      |        |     |
-|scPipe                   |?       |      |        |     |
-|scran                    |?       |      |        |     |
-|scRepertoire             |?       |      |        |     |
-|scTensor                 |?       |      |        |     |
-|scTGIF                   |?       |      |        |     |
-|scTreeViz                |?       |      |        |     |
-|SEPIRA                   |?       |      |        |     |
-|seqcombo                 |?       |      |        |     |
-|SGSeq                    |?       |      |        |     |
-|ShapePattern             |?       |      |        |     |
-|SIMLR                    |?       |      |        |     |
-|simplifyEnrichment       |?       |      |        |     |
-|sincell                  |?       |      |        |     |
-|SingleCellSignalR        |?       |      |        |     |
-|singleCellTK             |?       |      |        |     |
-|SingleRBook              |?       |      |        |     |
-|slingshot                |?       |      |        |     |
-|SMITE                    |?       |      |        |     |
-|Spaniel                  |?       |      |        |     |
-|SpatialCPie              |?       |      |        |     |
-|spatialHeatmap           |?       |      |        |     |
-|SpidermiR                |?       |      |        |     |
-|splatter                 |?       |      |        |     |
-|SplicingGraphs           |?       |      |        |     |
-|splineTimeR              |?       |      |        |     |
-|SPONGE                   |?       |      |        |     |
-|SPOTlight                |?       |      |        |     |
-|sSNAPPY                  |?       |      |        |     |
-|StarBioTrek              |?       |      |        |     |
-|STRINGdb                 |?       |      |        |     |
-|supraHex                 |?       |      |        |     |
-|synaptome.db             |?       |      |        |     |
-|SynExtend                |?       |      |        |     |
-|syntenet                 |?       |      |        |     |
-|TCGAbiolinks             |?       |      |        |     |
-|ternarynet               |?       |      |        |     |
-|tidybulk                 |?       |      |        |     |
-|tidySingleCellExperiment |?       |      |        |     |
-|timeOmics                |?       |      |        |     |
-|TimiRGeN                 |?       |      |        |     |
-|TOP                      |?       |      |        |     |
-|tradeSeq                 |?       |      |        |     |
-|TrajectoryUtils          |?       |      |        |     |
-|transcriptogramer        |?       |      |        |     |
-|TreeAndLeaf              |?       |      |        |     |
-|treeio                   |?       |      |        |     |
-|TRONCO                   |?       |      |        |     |
-|TSCAN                    |?       |      |        |     |
-|uSORT                    |?       |      |        |     |
-|veloviz                  |?       |      |        |     |
-|ViSEAGO                  |?       |      |        |     |
-|vissE                    |?       |      |        |     |
-|vivid                    |?       |      |        |     |
-|wppi                     |?       |      |        |     |
-|XINA                     |?       |      |        |     |
-|ZygosityPredictor        |?       |      |        |     |
+|package           |version |error  |warning |note |
+|:-----------------|:-------|:------|:-------|:----|
+|espadon           |?       |       |        |     |
+|ExprNet           |?       |       |        |     |
+|[mazeGen](failures.md#mazegen)|0.1.3   |__+1__ |        |     |
+|ProjectManagement |?       |       |        |     |
+|ShapePattern      |?       |       |        |     |
+|streamDAG         |?       |       |        |     |
+|vivid             |?       |       |        |     |
 
-## New problems (2)
+## New problems (105)
 
-|package        |version |error |warning |note   |
-|:--------------|:-------|:-----|:-------|:------|
-|[BASiNETEntropy](problems.md#basinetentropy)|0.99.5  |      |__+1__  |__+1__ |
-|[bibliometrix](problems.md#bibliometrix)|4.1.3   |      |__+1__  |__+1__ |
+|package               |version |error  |warning |note   |
+|:---------------------|:-------|:------|:-------|:------|
+|[adegenet](problems.md#adegenet)|2.1.10  |__+1__ |        |2      |
+|[backbone](problems.md#backbone)|2.1.2   |__+3__ |        |       |
+|[backShift](problems.md#backshift)|0.1.4.3 |__+2__ |        |1      |
+|[BayesNetBP](problems.md#bayesnetbp)|1.6.1   |__+1__ |        |       |
+|[BDgraph](problems.md#bdgraph)|2.72    |__+2__ |        |1      |
+|[bibliometrix](problems.md#bibliometrix)|4.1.3   |       |__+1__  |__+1__ |
+|[Canek](problems.md#canek)|0.2.2   |__+3__ |        |       |
+|[causaloptim](problems.md#causaloptim)|0.9.7   |__+2__ |        |       |
+|[CINNA](problems.md#cinna)|1.2.2   |__+1__ |        |1      |
+|[clickstream](problems.md#clickstream)|1.3.1   |__+1__ |        |       |
+|[CliquePercolation](problems.md#cliquepercolation)|0.4.0   |__+2__ |        |       |
+|[concorR](problems.md#concorr)|0.2.1   |__+1__ |        |       |
+|[countland](problems.md#countland)|0.1.1   |__+1__ |        |       |
+|[DiagrammeR](problems.md#diagrammer)|1.0.10  |__+2__ |        |1      |
+|[Diderot](problems.md#diderot)|0.13    |__+1__ |        |       |
+|[diffudist](problems.md#diffudist)|1.0.1   |__+1__ |        |1      |
+|[dimRed](problems.md#dimred)|0.2.6   |__+2__ |        |       |
+|[dnet](problems.md#dnet)|1.1.7   |__+1__ |        |       |
+|[DrDimont](problems.md#drdimont)|0.1.4   |__+2__ |        |       |
+|[ecoCopula](problems.md#ecocopula)|1.0.2   |__+3__ |        |       |
+|[ECoL](problems.md#ecol)|0.3.0   |__+2__ |        |1      |
+|[EcoNetGen](problems.md#econetgen)|0.2.4   |__+1__ |        |       |
+|[economiccomplexity](problems.md#economiccomplexity)|1.5.0   |__+1__ |        |2      |
+|[EGAnet](problems.md#eganet)|2.0.1   |__+1__ |        |       |
+|[eicm](problems.md#eicm)|1.0.3   |__+2__ |        |1      |
+|[einet](problems.md#einet)|0.1.0   |__+1__ |        |       |
+|[FCMapper](problems.md#fcmapper)|1.1     |__+1__ |        |       |
+|[fnets](problems.md#fnets)|0.1.5   |__+1__ |        |       |
+|[fossilbrush](problems.md#fossilbrush)|1.0.3   |__+2__ |        |1      |
+|[fssemR](problems.md#fssemr)|0.1.8   |__+1__ |        |2      |
+|[ghypernet](problems.md#ghypernet)|1.1.0   |__+1__ |        |2      |
+|[grand](problems.md#grand)|0.9.0   |__+2__ |        |       |
+|[graph4lg](problems.md#graph4lg)|1.8.0   |__+2__ |        |1      |
+|[gRbase](problems.md#grbase)|2.0.0   |__+1__ |1       |1      |
+|[HospitalNetwork](problems.md#hospitalnetwork)|0.9.3   |__+1__ |        |       |
+|[immcp](problems.md#immcp)|1.0.3   |__+1__ |        |       |
+|[incidentally](problems.md#incidentally)|1.0.2   |__+1__ |        |       |
+|[kangar00](problems.md#kangar00)|1.4.1   |__+1__ |        |       |
+|[Karen](problems.md#karen)|1.0     |__+1__ |1       |       |
+|[Libra](problems.md#libra)|1.7     |__+1__ |        |       |
+|[LoopDetectR](problems.md#loopdetectr)|0.1.2   |__+2__ |        |       |
+|[malan](problems.md#malan)|1.0.2   |__+2__ |        |1      |
+|[manymome](problems.md#manymome)|0.1.12  |__+2__ |        |       |
+|[manynet](problems.md#manynet)|0.2.3   |__+2__ |        |1      |
+|[missSBM](problems.md#misssbm)|1.0.3   |__+1__ |        |1      |
+|[mnda](problems.md#mnda)|1.0.9   |__+1__ |        |1      |
+|[modMax](problems.md#modmax)|1.1     |__+1__ |        |       |
+|[modnets](problems.md#modnets)|0.9.0   |__+1__ |        |1      |
+|[molnet](problems.md#molnet)|0.1.0   |__+2__ |        |       |
+|[motifcluster](problems.md#motifcluster)|0.2.3   |__+2__ |        |       |
+|[MRFcov](problems.md#mrfcov)|1.0.39  |__+2__ |        |       |
+|[mRMRe](problems.md#mrmre)|2.1.2.1 |__+1__ |        |1      |
+|[mstknnclust](problems.md#mstknnclust)|0.3.2   |__+1__ |        |       |
+|[MultIS](problems.md#multis)|0.6.2   |__+1__ |        |1      |
+|[mwcsr](problems.md#mwcsr)|0.1.7   |__+1__ |        |1      |
+|[nat](problems.md#nat)|1.8.23  |__+1__ |        |       |
+|[nda](problems.md#nda)|0.1.12  |__+1__ |        |       |
+|[Neighboot](problems.md#neighboot)|1.0.1   |__+1__ |        |       |
+|[netcom](problems.md#netcom)|2.1.6   |__+2__ |        |1      |
+|[NetCoupler](problems.md#netcoupler)|0.1.0   |__+3__ |        |       |
+|[netmeta](problems.md#netmeta)|2.8-2   |__+1__ |        |2      |
+|[NetMix](problems.md#netmix)|0.2.0.1 |__+1__ |        |1      |
+|[netrankr](problems.md#netrankr)|1.2.1   |__+3__ |        |1      |
+|[netropy](problems.md#netropy)|0.1.0   |__+2__ |        |       |
+|[netUtils](problems.md#netutils)|0.8.2   |__+1__ |        |1      |
+|[NetworkRiskMeasures](problems.md#networkriskmeasures)|0.1.4   |__+1__ |        |       |
+|[nevada](problems.md#nevada)|0.2.0   |__+1__ |        |1      |
+|[NIMAA](problems.md#nimaa)|0.2.1   |__+3__ |        |2      |
+|[numbat](problems.md#numbat)|1.3.2-1 |__+1__ |        |3      |
+|[oddnet](problems.md#oddnet)|0.1.0   |__+1__ |        |       |
+|[parsec](problems.md#parsec)|1.2.7   |__+1__ |        |       |
+|[pcalg](problems.md#pcalg)|2.7-9   |__+1__ |        |3      |
+|[phangorn](problems.md#phangorn)|2.11.1  |__+2__ |        |1      |
+|[phylopath](problems.md#phylopath)|1.1.3   |__+2__ |        |       |
+|[phyloseqGraphTest](problems.md#phyloseqgraphtest)|0.1.0   |__+1__ |        |2      |
+|[PLEXI](problems.md#plexi)|1.0.0   |__+1__ |        |       |
+|[poppr](problems.md#poppr)|2.9.4   |__+2__ |1       |       |
+|[R.temis](problems.md#rtemis)|0.1.3   |__+1__ |        |1      |
+|[RaceID](problems.md#raceid)|0.3.2   |__+1__ |        |1      |
+|[Radviz](problems.md#radviz)|0.9.3   |__+2__ |        |       |
+|[ragt2ridges](problems.md#ragt2ridges)|0.3.4   |__+1__ |        |3      |
+|[repo](problems.md#repo)|2.1.5   |__+1__ |        |       |
+|[ResIN](problems.md#resin)|1.1.0   |__+2__ |        |       |
+|[roads](problems.md#roads)|1.1.1   |__+1__ |        |       |
+|[RPANDA](problems.md#rpanda)|2.2     |__+1__ |        |1      |
+|[rscc](problems.md#rscc)|0.2.1   |__+1__ |        |       |
+|[rsetse](problems.md#rsetse)|0.5.0   |__+2__ |        |       |
+|[sbm](problems.md#sbm)|0.4.5   |__+3__ |        |       |
+|[scapGNN](problems.md#scapgnn)|0.1.4   |__+2__ |        |1      |
+|[SEMgraph](problems.md#semgraph)|1.2.0   |__+1__ |        |       |
+|[SeqNet](problems.md#seqnet)|1.1.3   |__+1__ |        |2      |
+|[sfnetworks](problems.md#sfnetworks)|0.6.3   |__+2__ |        |       |
+|[sharpshootR](problems.md#sharpshootr)|2.2     |__+1__ |        |       |
+|[signnet](problems.md#signnet)|1.0.2   |__+3__ |        |1      |
+|[simer](problems.md#simer)|0.9.0.2 |__+1__ |        |1      |
+|[SmCCNet](problems.md#smccnet)|0.99.0  |__+1__ |        |       |
+|[spectralGraphTopology](problems.md#spectralgraphtopology)|0.2.3   |__+1__ |        |1      |
+|[SteinerNet](problems.md#steinernet)|3.1.0   |__+2__ |        |       |
+|[stminsights](problems.md#stminsights)|0.4.2   |__+1__ |        |       |
+|[TDA](problems.md#tda)|1.9     |__+2__ |        |4      |
+|[treefit](problems.md#treefit)|1.0.2   |__+2__ |        |       |
+|[VertexSimilarity](problems.md#vertexsimilarity)|0.1     |__+1__ |        |1      |
+|[vocaldia](problems.md#vocaldia)|0.8.4   |__+1__ |        |       |
+|[wdnet](problems.md#wdnet)|1.2.2   |__+1__ |        |1      |
+|[wpa](problems.md#wpa)|1.9.0   |__+1__ |        |       |
 
