@@ -17,32 +17,30 @@ erdos.renyi.game(
 \item{n}{The number of vertices in the graph.}
 
 \item{p.or.m}{Either the probability for drawing an edge between two
-arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in the graph (for
-\eqn{G(n,m)} graphs).}
+arbitrary vertices (\eqn{G(n,p)} graph), or the number of edges in
+the graph (for \eqn{G(n,m)} graphs).}
 
 \item{type}{The type of the random graph to create, either \code{gnp()}
 (\eqn{G(n,p)} graph) or \code{gnm()} (\eqn{G(n,m)} graph).}
 
 \item{directed}{Logical, whether the graph will be directed, defaults to
-FALSE.}
+\code{FALSE}.}
 
-\item{loops}{Logical, whether to add loop edges, defaults to FALSE.}
+\item{loops}{Logical, whether to add loop edges, defaults to \code{FALSE}.}
 }
 \value{
 A graph object.
 }
 \description{
-This model is very simple, every possible edge is created with the same
-constant probability.
+Simple random graph model, specifying the edge count either precisely
+(\eqn{G(n,m)} model) or on average through a connection probability
+(\eqn{G(n,p)} model).
 }
 \details{
-In \eqn{G(n,p)} graphs, the graph has \sQuote{n} vertices and for each edge the
-probability that it is present in the graph is \sQuote{p}.
+In \eqn{G(n,m)} graphs, there are precisely \code{m} edges.
 
-In \eqn{G(n,m)} graphs, the graph has \sQuote{n} vertices and \sQuote{m} edges,
-and the \sQuote{m} edges are chosen uniformly randomly from the set of all
-possible edges. This set includes loop edges as well if the \code{loops}
-parameter is TRUE.
+In \eqn{G(n,p)} graphs, all vertex pairs are connected with the same
+probability \code{p}.
 
 \code{random.graph.game()} is an alias to this function.
 }
@@ -51,7 +49,7 @@ parameter is TRUE.
 
 Since igraph version 0.8.0, both \code{erdos.renyi.game()} and
 \code{random.graph.game()} are deprecated, and \code{\link[=sample_gnp]{sample_gnp()}} and
-\code{\link[=sample_gnm]{sample_gnm()}} should be used instead.
+\code{\link[=sample_gnm]{sample_gnm()}} should be used instead. See these for more details.
 }
 
 \examples{
@@ -61,7 +59,7 @@ degree_distribution(g)
 
 }
 \references{
-Erdos, P. and Renyi, A., On random graphs, \emph{Publicationes
+Erdős, P. and Rényi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{

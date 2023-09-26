@@ -33,7 +33,9 @@
 #' become infected with a rate that depends on their number of infected
 #' neighbors. Infected people become recovered with a constant rate.
 #'
-#' The function `sir()` simulates the model.
+#' The function `sir()` simulates the model. This function runs multiple
+#' simulations, all starting with a single uniformly randomly chosen infected
+#' individual. A simulation is stopped when no infected individuals are left.
 #'
 #' Function `time_bins()` bins the simulation steps, using the
 #' Freedman-Diaconis heuristics to determine the bin width.
