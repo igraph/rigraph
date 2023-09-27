@@ -72,7 +72,6 @@ test_that("cluster_leading_eigen works", {
   ## Stress-test. We skip this on R 3.4 and 3.5 because it seems like
   ## the results are not entirely deterministic there.
   skip_if(getRversion() < "3.6")
-  skip("https://github.com/igraph/rigraph/issues/879")
 
   for (i in 1:100) {
     g <- sample_gnm(20, sample(5:40, 1))
