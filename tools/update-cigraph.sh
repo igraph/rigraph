@@ -1,7 +1,5 @@
 #! /bin/sh
 
-set -euo pipefail
-
 cd $(dirname $0)/..
 
 rm -rf src/vendor/cigraph
@@ -18,6 +16,6 @@ version=$(git -C src/vendor/cigraph rev-parse HEAD)
 
 rm -rf src/vendor/cigraph/.git
 
-rm -rf src/vendor/cigraph/{.github,doc,examples,fuzzing,tests,tools}
+rm -rf src/vendor/cigraph/.github src/vendor/cigraph/doc src/vendor/cigraph/examples src/vendor/cigraph/fuzzing src/vendor/cigraph/tests src/vendor/cigraph/tools
 git add src/vendor/cigraph
 git commit -m "Update vendored igraph/C to igraph/igraph@${version}"
