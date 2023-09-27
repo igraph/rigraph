@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9007
+
+## Chore
+
+  - Remove duplicate vendored plfit.
+
+  - Sync vendored parser artifacts for igraph/C 0.10.
+
+  - Remove duplicate vendored cs.
+
+  - Sync vendored igraph/C 0.10.
+
+
 # igraph 1.5.1.9006
 
 ## Chore
