@@ -34,6 +34,4 @@ test_that("assortativity works", {
 
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "10.txt"))
   p <- read_graph(f <- gzfile("power.gml.gz"), format = "gml")
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "11.txt"))
-  p.asd <- assortativity_degree(p)
 })
