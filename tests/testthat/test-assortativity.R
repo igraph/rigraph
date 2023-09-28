@@ -32,6 +32,4 @@ test_that("assortativity works", {
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "9.txt"))
   expect_that(asu, equals(-0.16319921031570466807))
 
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "10.txt"))
-  p <- read_graph(f <- gzfile("power.gml.gz"), format = "gml")
 })
