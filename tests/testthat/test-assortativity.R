@@ -26,7 +26,4 @@ test_that("assortativity works", {
   expect_that(asd, equals(as))
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "7.txt"))
   expect_that(asd, equals(as2))
-
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "8.txt"))
-  asu <- assortativity_degree(simplify(as.undirected(g, mode = "collapse")))
 })
