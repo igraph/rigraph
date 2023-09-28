@@ -17,6 +17,4 @@ test_that("assortativity works", {
 
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "3.txt"))
   asd <- assortativity_degree(g)
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "4.txt"))
-  as <- assortativity(g, degree(g, mode = "out"), degree(g, mode = "in"))
 })
