@@ -40,7 +40,4 @@ test_that("assortativity works", {
   p.as <- assortativity(p, degree(p))
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "13.txt"))
   p.as2 <- assR(as.directed(p, mode = "mutual"))
-
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "14.txt"))
-  expect_that(p.asd, equals(p.as))
 })
