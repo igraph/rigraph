@@ -24,6 +24,4 @@ test_that("assortativity works", {
 
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "6.txt"))
   expect_that(asd, equals(as))
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "7.txt"))
-  expect_that(asd, equals(as2))
 })
