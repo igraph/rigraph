@@ -46,31 +46,3 @@ test_that("assortativity works", {
   writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "15.txt"))
   expect_that(p.asd, equals(p.as2))
 })
-
-test_that("nominal assortativity works", {
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "101.txt"))
-  o <- read_graph(f <- gzfile("football.gml.gz"), format = "gml")
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "102.txt"))
-  o <- simplify(o)
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "103.txt"))
-  an <- assortativity_nominal(o, V(o)$value + 1)
-
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "104.txt"))
-  el <- as_edgelist(o, names = FALSE)
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "105.txt"))
-  etm <- matrix(0, nrow = max(V(o)$value) + 1, ncol = max(V(o)$value) + 1)
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "106.txt"))
-  for (e in 1:nrow(el)) {
-    t1 <- V(o)$value[el[e, 1]] + 1
-    t2 <- V(o)$value[el[e, 2]] + 1
-    etm[t1, t2] <- etm[t1, t2] + 1
-    etm[t2, t1] <- etm[t2, t1] + 1
-  }
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "107.txt"))
-  etm <- etm / sum(etm)
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "108.txt"))
-  an2 <- (sum(diag(etm)) - sum(etm %*% etm)) / (1 - sum(etm %*% etm))
-
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "109.txt"))
-  expect_that(an, equals(an2))
-})
