@@ -42,12 +42,6 @@ jobs:
           sudo apt-get install -y libarpack2-dev
         shell: bash
 
-      - name: Cache R packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: R-source-${{ runner.os }}
-
       - name: Cache Python virtualenv
         uses: actions/cache@v2
         with:
@@ -137,6 +131,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Install ccache
+        uses: hendrikmuhs/ccache-action@v1.2.10
+        with:
+          max-size: 10G
+          verbose: 1
+          save: false
+          restore: false
 
       - name: apt update
         if: runner.os == 'Linux'
