@@ -14,7 +14,4 @@ test_that("assortativity works", {
     den2 <- sum(K * K) - sum(K)^2 / ecount(graph)
     num / sqrt(den1) / sqrt(den2)
   }
-
-  writeLines(character(), file.path(Sys.getenv("RUNNER_TEMP"), "3.txt"))
-  asd <- assortativity_degree(g)
 })
