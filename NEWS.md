@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9008
+
+## Chore
+
+  - Restore vendored plfit, remove from vendored cigraph for now.
+
+  - Restore vendored cs, remove from vendored cigraph for now.
+
+  - Install ccache on GHA.
+
+
 # igraph 1.5.1.9007
 
 ## Chore
