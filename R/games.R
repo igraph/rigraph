@@ -325,7 +325,7 @@ gnm <- function(...) constructor_spec(sample_gnm, ...)
 #' (\eqn{G(n,p)} model).
 #'
 #' In \eqn{G(n,m)} graphs, there are precisely `m` edges.
-#' 
+#'
 #' In \eqn{G(n,p)} graphs, all vertex pairs are connected with the same
 #' probability `p`.
 #'
@@ -1088,14 +1088,25 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 
 #' The Watts-Strogatz small-world model
 #'
-#' Generate a graph according to the Watts-Strogatz network model.
-#'
-#' First a lattice is created with the given `dim`, `size` and
-#' `nei` arguments. Then the edges of the lattice are rewired uniformly
-#' randomly with probability `p`.
+#' This function generates networks with the small-world property
+#' based on a variant of the Watts-Strogatz model. The network is obtained
+#' by first creating a periodic undirected lattice, then rewiring both
+#' endpoints of each edge with probability `p`, while avoiding the
+#' creation of multi-edges.
 #'
 #' Note that this function might create graphs with loops and/or multiple
 #' edges. You can use [simplify()] to get rid of these.
+#'
+#' @details
+#' This process differs from the original model of Watts and Strogatz
+#' (see reference) in that it rewires **both** endpoints of edges. Thus in
+#' the limit of `p=1`, we obtain a G(n,m) random graph with the
+#' same number of vertices and edges as the original lattice. In comparison,
+#' the original Watts-Strogatz model only rewires a single endpoint of each edge,
+#' thus the network does not become fully random even for `p=1`.
+#' For appropriate choices of `p`, both models exhibit the property of
+#' simultaneously having short path lengths and high clustering.
+#'
 #'
 #' @aliases watts.strogatz.game
 #' @param dim Integer constant, the dimension of the starting lattice.
