@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9009
+
+## Documentation
+
+  - Update `sample_smallworld()` manual page (#895).
+
+
 # igraph 1.5.1.9008
 
 ## Chore
