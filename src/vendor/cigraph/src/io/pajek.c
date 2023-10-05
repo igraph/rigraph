@@ -76,10 +76,6 @@ void igraph_i_pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
  * \function igraph_read_graph_pajek
  * \brief Reads a file in Pajek format.
  *
- * \param graph Pointer to an uninitialized graph object.
- * \param file An already opened file handler.
- * \return Error code.
- *
  * </para><para>
  * Only a subset of the Pajek format is implemented. This is partially
  * because this format is not very well documented, but also because
@@ -151,7 +147,10 @@ void igraph_i_pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
  * http://vlado.fmf.uni-lj.si/pub/networks/pajek/doc/pajekman.pdf for
  * information on the Pajek file format.
  *
- * </para><para>
+ * \param graph Pointer to an uninitialized graph object.
+ * \param file An already opened file handler.
+ * \return Error code.
+ *
  * Time complexity: O(|V|+|E|+|A|), |V| is the number of vertices, |E|
  * the number of edges, |A| the number of attributes (vertex + edge)
  * in the graph if there are attribute handlers installed.
@@ -184,7 +183,6 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
 
     context.directed = false; /* assume undirected until an element implying directedness is encountered */
     context.vector = &edges;
-    context.mode = 0;
     context.vcount = -1;
     context.vertexid = 0;
     context.vertex_attribute_names = &vattrnames;
@@ -192,7 +190,7 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
     context.edge_attribute_names = &eattrnames;
     context.edge_attributes = &eattrs;
     context.actedge = 0;
-    context.eof = 0;
+    context.eof = false;
     context.errmsg[0] = '\0';
     context.igraph_errno = IGRAPH_SUCCESS;
 
@@ -343,13 +341,13 @@ static igraph_error_t igraph_i_pajek_escape(const char* src, char** dest) {
     char *d;
     for (s = src; *s; s++, destlen++) {
         if (*s == '\\') {
-            need_escape = 1;
+            need_escape = true;
             destlen++;
         } else if (*s == '"') {
-            need_escape = 1;
+            need_escape = true;
             destlen++;
         } else if (!isalnum(*s)) {
-            need_escape = 1;
+            need_escape = true;
         }
     }
 
@@ -399,6 +397,10 @@ static igraph_error_t igraph_i_pajek_escape(const char* src, char** dest) {
 /**
  * \function igraph_write_graph_pajek
  * \brief Writes a graph to a file in Pajek format.
+ *
+ * Writes files in the native format of the Pajek software. This format
+ * is not recommended for data exchange or archival. It is meant solely
+ * for interoperability with Pajek.
  *
  * </para><para>
  * The Pajek vertex and edge parameters (like color) are determined by
@@ -536,7 +538,7 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
         IGRAPH_CHECK(igraph_i_attribute_gettype(graph, &type_type, IGRAPH_ATTRIBUTE_VERTEX, "type"));
         if (type_type == IGRAPH_ATTRIBUTE_BOOLEAN) {
             igraph_integer_t bptr = 0, tptr = 0;
-            bipartite = 1; write_vertex_attrs = 1;
+            bipartite = true; write_vertex_attrs = true;
             /* Count top and bottom vertices, we go over them twice,
             because we want to keep their original order */
             IGRAPH_CHECK(igraph_vector_int_init(&bip_index, no_of_nodes));
@@ -590,7 +592,7 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
         if (igraph_i_attribute_has_attr(graph, IGRAPH_ATTRIBUTE_VERTEX, vnames[i])) {
             IGRAPH_CHECK(igraph_i_attribute_gettype(
                              graph, &vtypes[i], IGRAPH_ATTRIBUTE_VERTEX, vnames[i]));
-            write_vertex_attrs = 1;
+            write_vertex_attrs = true;
         } else {
             vtypes[i] = (igraph_attribute_type_t) -1;
         }

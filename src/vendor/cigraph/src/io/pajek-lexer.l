@@ -72,77 +72,95 @@
 %option yylineno
 %option caseless
 
-digit [0-9]
-word [^ \t\v\f\r\n\0]
 whitespace [ \t\v\f]
+digit [0-9]
+
+/* Anything except non-printable (00-1F), space (20), del (7F) and '*': */
+word [^\x00-\x20\x7f*]
 
 %x netline
+%s vert edge
+
+/* Notes:
+ *  - Pajek files do not allow empty lines (empty lines should signify the end of the file).
+ *  - Unquoted '*' characters may only appear at the start of a line-initial word.
+ *  - '*net' is not a valid network line, but earlier igraph versions supported it, so we keep it for now.
+ *  - Some Pajek files have parenthesized segments. These are tokenized as PSTR but not handled at this time.
+ */
 
 %%
-
 <*>{whitespace}+  { }
-%[^\n\r\0]*[\n\r]*  { } /* comments */
+^%[^\n\r\0]*[\n\r]*  { } /* comments */
+
 \*net             { BEGIN(netline); return NETWORKLINE; }
 \*network         { BEGIN(netline); return NETWORKLINE; }
-<netline>{whitespace}({word}|{whitespace})* { 
-   return NET_TITLE; }
-\*vertices        { return VERTICESLINE; }
-\*arcs            { return ARCSLINE; }
-\*edges           { return EDGESLINE; }
-\*arcslist        { return ARCSLISTLINE; }
-\*edgeslist       { return EDGESLISTLINE; }
-\*matrix          { return MATRIXLINE; }
-<*>[\n\r]+        { BEGIN(INITIAL); yyextra->mode=0; return NEWLINE; } /* skip over multiple newlines */
+<netline>{whitespace}([^\n\r\0])* { return NET_TITLE; }
+<netline>[\n\r]+                  { 
+                    BEGIN(INITIAL); return NEWLINE; }
+
+\*vertices        { BEGIN(vert); return VERTICESLINE; }
+\*arcs            { BEGIN(edge); return ARCSLINE; }
+\*edges           { BEGIN(edge); return EDGESLINE; }
+\*arcslist        { BEGIN(INITIAL); return ARCSLISTLINE; }
+\*edgeslist       { BEGIN(INITIAL);return EDGESLISTLINE; }
+\*matrix          { BEGIN(INITIAL); return MATRIXLINE; }
+[\n\r]+           { return NEWLINE; }
+
 \"[^\"\0]*\"      { return QSTR; }
 \([^\)\0]*\)      { return PSTR; }
-(\+|\-)?{digit}+(\.{digit}+)?([eE](\+|\-)?{digit}+)? {
-                    return NUM; }
 
-x_fact/[ \t\n\r]  { if (yyextra->mode==1) { return VP_X_FACT; } else { return ALNUM; } }
-y_fact/[ \t\n\r]  { if (yyextra->mode==1) { return VP_Y_FACT; } else { return ALNUM; } }
-ic/[ \t\n\r]      { if (yyextra->mode==1) { return VP_IC; } else { return ALNUM; } }
-bc/[ \t\n\r]      { if (yyextra->mode==1) { return VP_BC; } else { return ALNUM; } }
-bw/[ \t\n\r]      { if (yyextra->mode==1) { return VP_BW; } else { return ALNUM; } }
-phi/[ \t\n\r]     { if (yyextra->mode==1) { return VP_PHI; } else { return ALNUM; } }
-r/[ \t\n\r]       { if (yyextra->mode==1) { return VP_R; } else { return ALNUM; } }
-q/[ \t\n\r]       { if (yyextra->mode==1) { return VP_Q; } else { return ALNUM; } }
-font/[ \t\n\r]    { if (yyextra->mode==1) { return VP_FONT; } else { return ALNUM; } }
-url/[ \t\n\r]     { if (yyextra->mode==1) { return VP_URL; } else { return ALNUM; } }
+(\+|\-)?{digit}+(\.{digit}+)?([eE](\+|\-)?{digit}+)? { return NUM; }
 
-c/[ \t\n\r]       { if (yyextra->mode==2) { return EP_C; } else { return ALNUM; } }
-p/[ \t\n\r]       { if (yyextra->mode==2) { return EP_P; } else { return ALNUM; } }
-s/[ \t\n\r]       { if (yyextra->mode==2) { return EP_S; } else { return ALNUM; } }
-a/[ \t\n\r]       { if (yyextra->mode==2) { return EP_A; } else { return ALNUM; } }
-w/[ \t\n\r]       { if (yyextra->mode==2) { return EP_W; } else { return ALNUM; } }
-h1/[ \t\n\r]      { if (yyextra->mode==2) { return EP_H1; } else { return ALNUM; } }
-h2/[ \t\n\r]      { if (yyextra->mode==2) { return EP_H2; } else { return ALNUM; } }
-a1/[ \t\n\r]      { if (yyextra->mode==2) { return EP_A1; } else { return ALNUM; } }
-a2/[ \t\n\r]      { if (yyextra->mode==2) { return EP_A2; } else { return ALNUM; } }
-k1/[ \t\n\r]      { if (yyextra->mode==2) { return EP_K1; } else { return ALNUM; } }
-k2/[ \t\n\r]      { if (yyextra->mode==2) { return EP_K2; } else { return ALNUM; } }
-ap/[ \t\n\r]      { if (yyextra->mode==2) { return EP_AP; } else { return ALNUM; } }
-l/[ \t\n\r]       { if (yyextra->mode==2) { return EP_L; } else { return ALNUM; } }
-lp/[ \t\n\r]      { if (yyextra->mode==2) { return EP_LP; } else { return ALNUM; } }
+<vert>{
+x_fact  { return VP_X_FACT; }
+y_fact  { return VP_Y_FACT; }
+ic      { return VP_IC; }
+bc      { return VP_BC; }
+bw      { return VP_BW; }
+phi     { return VP_PHI; }
+r       { return VP_R; }
+q       { return VP_Q; }
+font    { return VP_FONT; }
+url     { return VP_URL; }
 
-lphi/[ \t\n\r]    { if (yyextra->mode==1) { return VP_LPHI; } else
-                             if (yyextra->mode==2) { return EP_LPHI; } else { return ALNUM; } }
-lc/[ \t\n\r]      { if (yyextra->mode==1) { return VP_LC; } else
-                             if (yyextra->mode==2) { return EP_LC; } else { return ALNUM; } }
-lr/[ \t\n\r]      { if (yyextra->mode==1) { return VP_LR; } else
-                             if (yyextra->mode==2) { return EP_LR; } else { return ALNUM; } }
-la/[ \t\n\r]      { if (yyextra->mode==1) { return VP_LA; } else
-                             if (yyextra->mode==2) { return EP_LA; } else { return ALNUM; } }
-size/[ \t\n\r]    { if (yyextra->mode==1) { return VP_SIZE; } else
-                             if (yyextra->mode==2) { return EP_SIZE; } else { return ALNUM; } }
-fos/[ \t\n\r]     { if (yyextra->mode==1) { return VP_FOS; } else
-                             if (yyextra->mode==2) { return EP_FOS; } else { return ALNUM; } }
+lphi    { return VP_LPHI; }
+lc      { return VP_LC; }
+lr      { return VP_LR; }
+la      { return VP_LA; }
+size    { return VP_SIZE; }
+fos     { return VP_FOS; }
+}
+
+<edge>{
+c       { return EP_C; }
+p       { return EP_P; }
+s       { return EP_S; }
+a       { return EP_A; }
+w       { return EP_W; }
+h1      { return EP_H1; }
+h2      { return EP_H2; }
+a1      { return EP_A1; }
+a2      { return EP_A2; }
+k1      { return EP_K1; }
+k2      { return EP_K2; }
+ap      { return EP_AP; }
+l       { return EP_L; }
+lp      { return EP_LP; }
+
+lphi    { return EP_LPHI; }
+lc      { return EP_LC; }
+lr      { return EP_LR; }
+la      { return EP_LA; }
+size    { return EP_SIZE; }
+fos     { return EP_FOS; }
+}
 
 {word}+           { return ALNUM; }
 
 <<EOF>>           { if (yyextra->eof) {
                        yyterminate();
                     } else {
-                       yyextra->eof=1;
+                       yyextra->eof=true;
                        return NEWLINE;
                     }
                   }
