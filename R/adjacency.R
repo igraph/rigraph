@@ -32,11 +32,11 @@ graph.adjacency.dense <- function(adjmatrix,
   mode <- switch(mode,
     "directed" = 0,
     "undirected" = 1,
-    "max" = 1,
     "upper" = 2,
     "lower" = 3,
     "min" = 4,
-    "plus" = 5
+    "plus" = 5,
+    "max" = 6
   )
 
   mode(adjmatrix) <- "double"
