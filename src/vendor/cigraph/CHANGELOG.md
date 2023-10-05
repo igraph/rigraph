@@ -4,6 +4,23 @@
 
 ### Fixed
 
+ - Resolved "ignoring duplicate libraries" warning when building tests with Xcode 15 on macOS.
+ - Fixed the handling of duplicate vertex IDs in `igraph_induced_subgraph()`.
+
+### Other
+
+ - Updated vendored mini-gmp to 6.3.0.
+ - Documentation improvements.
+
+## [0.10.7] - 2023-09-04
+
+### Added
+
+ - `igraph_radius_dijkstra()` computes the graph radius with weighted edges (experimental function).
+ - `igraph_graph_center_dijkstra()` computes the graph center, i.e. the set of minimum eccentricity vertices, with weighted edges (experimental function).
+
+### Fixed
+
  - `igraph_full_bipartite()` now checks for overflow.
  - `igraph_bipartite_game_gnm()` and `igraph_bipartite_game_gnp()` are now more robust to overflow.
  - Bipartite graph creation functions now check input arguments.
@@ -1199,7 +1216,8 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
-[master]: https://github.com/igraph/igraph/compare/0.10.6..master
+[master]: https://github.com/igraph/igraph/compare/0.10.7..master
+[0.10.7]: https://github.com/igraph/igraph/compare/0.10.6..0.10.7
 [0.10.6]: https://github.com/igraph/igraph/compare/0.10.5..0.10.6
 [0.10.5]: https://github.com/igraph/igraph/compare/0.10.4..0.10.5
 [0.10.4]: https://github.com/igraph/igraph/compare/0.10.3..0.10.4

@@ -8,7 +8,7 @@ mkdir -p src/vendor
 
 git clone https://github.com/igraph/igraph src/vendor/cigraph
 
-if [ "$1" != "" ]; then
+if [ -n "${1-}" ]; then
   git -C src/vendor/cigraph switch --detach "$1"
 fi
 

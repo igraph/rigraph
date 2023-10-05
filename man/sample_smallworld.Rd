@@ -32,15 +32,24 @@ generated graph.}
 A graph object.
 }
 \description{
-Generate a graph according to the Watts-Strogatz network model.
+This function generates networks with the small-world property
+based on a variant of the Watts-Strogatz model. The network is obtained
+by first creating a periodic undirected lattice, then rewiring both
+endpoints of each edge with probability \code{p}, while avoiding the
+creation of multi-edges.
 }
 \details{
-First a lattice is created with the given \code{dim}, \code{size} and
-\code{nei} arguments. Then the edges of the lattice are rewired uniformly
-randomly with probability \code{p}.
-
 Note that this function might create graphs with loops and/or multiple
 edges. You can use \code{\link[=simplify]{simplify()}} to get rid of these.
+
+This process differs from the original model of Watts and Strogatz
+(see reference) in that it rewires \strong{both} endpoints of edges. Thus in
+the limit of \code{p=1}, we obtain a G(n,m) random graph with the
+same number of vertices and edges as the original lattice. In comparison,
+the original Watts-Strogatz model only rewires a single endpoint of each edge,
+thus the network does not become fully random even for \code{p=1}.
+For appropriate choices of \code{p}, both models exhibit the property of
+simultaneously having short path lengths and high clustering.
 }
 \examples{
 
