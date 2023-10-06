@@ -343,6 +343,37 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
 #'   mode = "undirected"
 #' )
 #'
+#' g4 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "max")
+#' all(nzs(pmax(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g4)$weight))
+#'
+#' g5 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "min")
+#' all(nzs(pmin(adjm, t(adjm))[upper.tri(adjm)]) == sort(E(g5)$weight))
+#'
+#' g6 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "upper")
+#' all(nzs(adjm[upper.tri(adjm)]) == sort(E(g6)$weight))
+#'
+#' g7 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "lower")
+#' all(nzs(adjm[lower.tri(adjm)]) == sort(E(g7)$weight))
+#'
+#' g8 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus")
+#' d2 <- function(x) {
+#'   diag(x) <- diag(x) / 2
+#'   x
+#' }
+#' all(nzs((d2(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g8)$weight))
+#'
+#' g9 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, mode = "plus", diag = FALSE)
+#' d0 <- function(x) {
+#'   diag(x) <- 0
+#' }
+#' all(nzs((d0(adjm + t(adjm)))[lower.tri(adjm)]) == sort(E(g9)$weight))
+#'
+#' ## row/column names
+#' rownames(adjm) <- sample(letters, nrow(adjm))
+#' colnames(adjm) <- seq(ncol(adjm))
+#' g10 <- graph_from_adjacency_matrix(adjm, weighted = TRUE, add.rownames = "code")
+#' summary(g10)
+#'
 #' @export
 graph_from_adjacency_matrix <- function(adjmatrix,
                                         mode = c(
