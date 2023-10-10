@@ -3090,13 +3090,12 @@ SEXP R_igraph_plfit_result_to_SEXP(const igraph_plfit_result_t *plfit) {
   SET_VECTOR_ELT(result, 3, Rf_ScalarReal(plfit->L));
   SET_VECTOR_ELT(result, 4, Rf_ScalarReal(plfit->D));
 
-  PROTECT(names=NEW_CHARACTER(6));
+  PROTECT(names=NEW_CHARACTER(5));
   SET_STRING_ELT(names, 0, Rf_mkChar("continuous"));
   SET_STRING_ELT(names, 1, Rf_mkChar("alpha"));
   SET_STRING_ELT(names, 2, Rf_mkChar("xmin"));
   SET_STRING_ELT(names, 3, Rf_mkChar("logLik"));
   SET_STRING_ELT(names, 4, Rf_mkChar("KS.stat"));
-  SET_STRING_ELT(names, 5, Rf_mkChar("KS.p"));
   SET_NAMES(result, names);
 
   UNPROTECT(2);
