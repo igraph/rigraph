@@ -63,6 +63,13 @@ reference below.
 # A quite dense graph
 set.seed(42)
 g <- sample_gnp(100, 0.9)
+ivs_size(g)
+ivs(g, min = ivs_size(g))
+largest_ivs(g)
+# Empty graph
+induced_subgraph(g, largest_ivs(g)[[1]])
+
+length(maximal_ivs(g))
 }
 \references{
 S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
