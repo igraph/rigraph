@@ -116,6 +116,10 @@ tmp <- dfs(make_tree(10),
 f.out <- function(graph, data, extra) {
   data["vid"] == 1
 }
+tmp <- dfs(make_tree(10) \%du\% make_tree(10),
+  root = 1,
+  out.callback = f.out
+)
 
 }
 \seealso{

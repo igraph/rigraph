@@ -1777,6 +1777,10 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' f.out <- function(graph, data, extra) {
 #'   data["vid"] == 1
 #' }
+#' tmp <- dfs(make_tree(10) %du% make_tree(10),
+#'   root = 1,
+#'   out.callback = f.out
+#' )
 #'
 dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
                 unreachable = TRUE,
