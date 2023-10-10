@@ -9101,7 +9101,7 @@ int igraphhcass2(int n, const int *ia, const int *ib,
 SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
   SEXP result;
   igraph_integer_t no=0, n=Rf_xlength(vector);
-  int *vec=INTEGER(vector), *p=vec, *pp=vec; // TODO refactor INTEGER()!
+  double *vec=REAL(vector), *p=vec, *pp=vec;
   for (igraph_integer_t i=0; i<n; i++) {
     if (vec[i] == 0) { no++; }
   }
@@ -9110,8 +9110,8 @@ SEXP R_igraph_get_all_simple_paths_pp(SEXP vector) {
   for (igraph_integer_t i=0; i<no; i++) {
     SEXP svec;
     while (*p != 0) { p++; }
-    SET_VECTOR_ELT(result, i, svec=NEW_INTEGER(p-pp));
-    memcpy(INTEGER(svec), pp, (p-pp) * sizeof(int));
+    SET_VECTOR_ELT(result, i, svec=NEW_NUMERIC(p-pp));
+    memcpy(REAL(svec), pp, (p-pp) * sizeof(double));
     pp = ++p;
   }
 
