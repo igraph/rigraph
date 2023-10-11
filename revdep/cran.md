@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 799 reverse dependencies (795 from CRAN + 4 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 105 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 105 new problems
- * We failed to check 3 packages
+ * We saw 88 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -22,9 +22,6 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* BayesNetBP
-  checking examples ... ERROR
-
 * BDgraph
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -38,19 +35,11 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* causaloptim
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * CINNA
   checking re-building of vignette outputs ... ERROR
 
 * clickstream
   checking examples ... ERROR
-
-* CliquePercolation
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * concorR
   checking examples ... ERROR
@@ -61,9 +50,6 @@ Issues with CRAN packages are summarised below.
 * DiagrammeR
   checking examples ... ERROR
   checking tests ... ERROR
-
-* Diderot
-  checking examples ... ERROR
 
 * diffudist
   checking re-building of vignette outputs ... ERROR
@@ -110,32 +96,18 @@ Issues with CRAN packages are summarised below.
 * fnets
   checking tests ... ERROR
 
-* fossilbrush
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * fssemR
   checking re-building of vignette outputs ... ERROR
 
 * ghypernet
   checking re-building of vignette outputs ... ERROR
 
-* grand
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * graph4lg
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* gRbase
-  checking examples ... ERROR
-
 * HospitalNetwork
   checking tests ... ERROR
-
-* immcp
-  checking examples ... ERROR
 
 * incidentally
   checking re-building of vignette outputs ... ERROR
@@ -149,15 +121,7 @@ Issues with CRAN packages are summarised below.
 * Libra
   checking examples ... ERROR
 
-* LoopDetectR
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
 * malan
-  checking examples ... ERROR
-  checking tests ... ERROR
-
-* manymome
   checking examples ... ERROR
   checking tests ... ERROR
 
@@ -207,9 +171,6 @@ Issues with CRAN packages are summarised below.
 * nda
   checking examples ... ERROR
 
-* Neighboot
-  checking examples ... ERROR
-
 * netcom
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -218,9 +179,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
-
-* netmeta
-  checking examples ... ERROR
 
 * NetMix
   checking examples ... ERROR
@@ -248,13 +206,7 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
-* numbat
-  checking examples ... ERROR
-
 * oddnet
-  checking examples ... ERROR
-
-* parsec
   checking examples ... ERROR
 
 * pcalg
@@ -326,10 +278,6 @@ Issues with CRAN packages are summarised below.
 * SeqNet
   checking examples ... ERROR
 
-* sfnetworks
-  checking examples ... ERROR
-  checking tests ... ERROR
-
 * sharpshootR
   checking examples ... ERROR
 
@@ -337,12 +285,6 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
-
-* simer
-  checking examples ... ERROR
-
-* SmCCNet
-  checking examples ... ERROR
 
 * spectralGraphTopology
   checking examples ... ERROR
@@ -374,8 +316,3 @@ Issues with CRAN packages are summarised below.
 * wpa
   checking examples ... ERROR
 
-### Failed to check
-
-* mazeGen   (NA)
-* streamDAG (NA)
-* vivid     (NA)

@@ -1,5 +1,23 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9011
+
+## Chore
+
+  - Added FUNDING.yml.
+
+
+# igraph 1.5.1.9010
+
+## Chore
+
+  - Fix vendoring script.
+
+## vendor
+
+  - Update vendored igraph/C to igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c.
+
+
 # igraph 1.5.1.9009
 
 ## Documentation
