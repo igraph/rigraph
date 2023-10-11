@@ -7967,7 +7967,7 @@ typedef struct {
   SEXP graph, fun_in, fun_out, extra, rho;
 } R_igraph_i_dfs_data_t;
 
-igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
+igraph_error_t R_igraph_dfshandler(const igraph_t *graph,
                                   igraph_integer_t vid,
                                   igraph_integer_t dist,
                                   void *extra,
@@ -7992,7 +7992,7 @@ igraph_bool_t R_igraph_dfshandler(const igraph_t *graph,
   cres = Rf_asLogical(R_igraph_handle_safe_eval_result_in_env(result, data->rho));
 
   UNPROTECT(4);
-  return cres;
+  return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
 igraph_error_t R_igraph_dfshandler_in(const igraph_t *graph,
