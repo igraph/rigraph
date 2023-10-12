@@ -55,6 +55,9 @@ graph.adjacency.dense <- function(adjmatrix,
       R_igraph_weighted_adjacency, adjmatrix,
       as.numeric(mode), diag
     )
+
+    E(res$graph)$weight <- res$weights
+    res <- res$graph
   } else {
     adjmatrix <- as.matrix(adjmatrix)
     attrs <- attributes(adjmatrix)

@@ -4927,13 +4927,19 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
   igraph_vector_t weights;
-  SEXP result;
+  SEXP result, names;
 
   igraph_vector_init(&weights, 0);
   R_SEXP_to_matrix(adjmatrix, &adjm);
   IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
+  PROTECT(result=NEW_LIST(2));
+  SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&g));
+  SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&weights));
+  PROTECT(names=NEW_CHARACTER(2));
+  SET_STRING_ELT(names, 0, Rf_mkChar("graph"));
+  SET_STRING_ELT(names, 1, Rf_mkChar("weights"));
+  SET_NAMES(result, names);
   igraph_vector_destroy(&weights);
-  PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
   UNPROTECT(1);
@@ -8493,7 +8499,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Mu);
-  c_niter=(igraph_integer_t) REAL(niter)[0];
+  c_niter=(igraph_integer_t) INTEGER(niter)[0];
   /* Call igraph */
   IGRAPH_R_CHECK(igraph_graphlets(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Mu, c_niter));
 
