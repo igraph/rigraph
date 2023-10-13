@@ -1467,9 +1467,6 @@ cluster_edge_betweenness <- function(graph, weights = NULL,
   res$merges <- res$merges + 1
   res$removed.edges <- res$removed.edges + 1
   res$bridges <- res$bridges + 1
-  if (modularity) {
-    res$modularity <- modularity(graph, res$membership)
-  }
   class(res) <- "communities"
   res
 }

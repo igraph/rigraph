@@ -1,5 +1,4 @@
 test_that("cluster_edge_betweenness works", {
-  skip("https://github.com/igraph/rigraph/issues/881")
   g <- make_graph("Zachary")
   ebc <- cluster_edge_betweenness(g)
 
