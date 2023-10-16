@@ -1,5 +1,4 @@
 test_that("community detection functions work", {
-  skip("https://github.com/igraph/rigraph/issues/881")
   set.seed(42)
 
   F <- list(

@@ -1766,6 +1766,7 @@ cluster_label_prop <- function(graph, weights = NULL, mode = c("out", "in", "all
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
+  directed <- switch(igraph.match.arg(mode), "out"=TRUE, "in"=TRUE, "all"=FALSE)
   mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3)
 
   on.exit(.Call(R_igraph_finalizer))
@@ -1778,6 +1779,7 @@ cluster_label_prop <- function(graph, weights = NULL, mode = c("out", "in", "all
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
   res$membership <- membership + 1
+  res$modularity <- modularity(graph, res$membership, weights, directed)
   class(res) <- "communities"
   res
 }
