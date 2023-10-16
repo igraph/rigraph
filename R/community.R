@@ -1714,7 +1714,10 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' communities.}
 #'
 #' @aliases label.propagation.community
-#' @param graph The input graph, should be undirected to make sense.
+#' @param graph The input graph. Note that the algorithm wsa originally
+#'   defined for undirected graphs. You are advised to set \sQuote{mode} to
+#'   `all` if you pass a directed graph here to treat it as
+#'   undirected.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If

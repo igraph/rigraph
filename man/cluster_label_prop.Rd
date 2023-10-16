@@ -14,7 +14,10 @@ cluster_label_prop(
 )
 }
 \arguments{
-\item{graph}{The input graph, should be undirected to make sense.}
+\item{graph}{The input graph. Note that the algorithm wsa originally
+defined for undirected graphs. You are advised to set \sQuote{mode} to
+\code{all} if you pass a directed graph here to treat it as
+undirected.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a
