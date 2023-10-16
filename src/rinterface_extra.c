@@ -4904,15 +4904,16 @@ SEXP R_igraph_are_connected(SEXP graph, SEXP pv1, SEXP pv2) {
   return result;
 }
 
-SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode) {
+SEXP R_igraph_graph_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
 
   igraph_t g;
   igraph_matrix_t adjm;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_integer_t loops=INTEGER(ploops)[0];
   SEXP result;
 
   R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_adjacency(&g, &adjm, (igraph_adjacency_t) mode, IGRAPH_NO_LOOPS));
+  IGRAPH_R_CHECK(igraph_adjacency(&g, &adjm, (igraph_adjacency_t) mode, (igraph_loops_t) loops));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -4925,13 +4926,13 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
   igraph_t g;
   igraph_matrix_t adjm;
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
-  igraph_bool_t loops=LOGICAL(ploops)[0];
+  igraph_integer_t loops=INTEGER(ploops)[0];
   igraph_vector_t weights;
   SEXP result, names;
 
   igraph_vector_init(&weights, 0);
   R_SEXP_to_matrix(adjmatrix, &adjm);
-  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, loops));
+  IGRAPH_R_CHECK(igraph_weighted_adjacency(&g, &adjm, (igraph_adjacency_t) mode, &weights, (igraph_loops_t) loops));
   PROTECT(result=NEW_LIST(2));
   SET_VECTOR_ELT(result, 0, R_igraph_to_SEXP(&g));
   SET_VECTOR_ELT(result, 1, R_igraph_vector_to_SEXP(&weights));

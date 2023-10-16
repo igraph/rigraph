@@ -27,7 +27,7 @@ graph.adjacency.dense <- function(adjmatrix,
                                     "directed", "undirected", "max",
                                     "min", "upper", "lower", "plus"
                                   ),
-                                  weighted = NULL, diag = TRUE) {
+                                  weighted = NULL, diag = c("once", "twice", "ignore")) {
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
     "directed" = 0,
@@ -37,6 +37,16 @@ graph.adjacency.dense <- function(adjmatrix,
     "min" = 4,
     "plus" = 5,
     "max" = 6
+  )
+
+  if (is.logical(diag)) {
+    diag <- ifelse(diag, "once", "ignore")
+  }
+  diag <- igraph.match.arg(diag)
+  diag <- switch(diag,
+    "ignore" = 0L,
+    "twice" = 1L,
+    "once" = 2L
   )
 
   mode(adjmatrix) <- "double"
@@ -69,7 +79,9 @@ graph.adjacency.dense <- function(adjmatrix,
     }
 
     on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
+    res <- .Call(
+      R_igraph_graph_adjacency, adjmatrix,
+      as.numeric(mode), diag)
   }
 
   res
