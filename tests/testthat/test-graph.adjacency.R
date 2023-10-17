@@ -1,5 +1,4 @@
 test_that("graph_from_adjacency_matrix works", {
-  skip("https://github.com/igraph/rigraph/issues/878")
   M1 <- rbind(
     c(0, 0, 1, 1),
     c(1, 0, 0, 0),
