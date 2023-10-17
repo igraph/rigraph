@@ -74,8 +74,8 @@
 #' @param types Vector giving the vertex types. They as assumed to be integer
 #'   numbers, starting with one. Non-integer values are converted to integers
 #'   with [as.integer()].
-#' @param types1 The vertex values, these can be arbitrary numeric values.
-#' @param types2 A second value vector to be using for the incoming edges when
+#' @param values The vertex values, these can be arbitrary numeric values.
+#' @param values.in A second value vector to be using for the incoming edges when
 #'   calculating assortativity for a directed graph.  Supply `NULL` here if
 #'   you want to use the same values for outgoing and incoming edges. This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
