@@ -1,144 +1,3 @@
-# adegenet
-
-<details>
-
-* Version: 2.1.10
-* GitHub: https://github.com/thibautjombart/adegenet
-* Source code: https://github.com/cran/adegenet
-* Date/Publication: 2023-01-26 22:00:23 UTC
-* Number of recursive dependencies: 113
-
-Run `revdepcheck::cloud_details(, "adegenet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘adegenet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: gengraph
-    > ### Title: Genetic transitive graphs
-    > ### Aliases: gengraph gengraph.default gengraph.matrix gengraph.dist
-    > ###   gengraph.genind gengraph.genpop gengraph.DNAbin
-    > 
-    > ### ** Examples
-    > 
-    ...
-    +     data(woodmouse)
-    +     g <- gengraph(woodmouse, cutoff=5)
-    +     g
-    +     plot(g$graph)
-    + 
-    + }
-    Loading required package: ape
-    Error in `E<-`(`*tmp*`, value = `*vtmp*`) : invalid indexing
-    Calls: gengraph ... gengraph.DNAbin -> gengraph -> gengraph.matrix -> E<-
-    Execution halted
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘adespatial’
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.7Mb
-      sub-directories of 1Mb or more:
-        R       1.9Mb
-        data    1.3Mb
-        files   1.7Mb
-    ```
-
-# backbone
-
-<details>
-
-* Version: 2.1.2
-* GitHub: https://github.com/zpneal/backbone
-* Source code: https://github.com/cran/backbone
-* Date/Publication: 2023-02-13 21:20:02 UTC
-* Number of recursive dependencies: 38
-
-Run `revdepcheck::cloud_details(, "backbone")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘backbone-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: disparity
-    > ### Title: Extract backbone using the Disparity Filter
-    > ### Aliases: disparity
-    > 
-    > ### ** Examples
-    > 
-    > #A network with heterogeneous (i.e. multiscale) weights
-    ...
-    +                 0,0,0,0,0,100,10,0,10,10,
-    +                 0,0,0,0,0,100,10,10,0,10,
-    +                 0,0,0,0,0,100,10,10,10,0),10)
-    > 
-    > net <- igraph::graph_from_adjacency_matrix(net, mode = "undirected", weighted = TRUE)
-    > plot(net, edge.width = sqrt(igraph::E(net)$weight)) #A stronger clique & a weaker clique
-    Error in sqrt(igraph::E(net)$weight) : 
-      non-numeric argument to mathematical function
-    Calls: plot -> plot.igraph -> i.parse.plot.params
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘tinytest.R’
-    Running the tests in ‘tests/tinytest.R’ failed.
-    Complete output:
-      > if ( requireNamespace("tinytest", quietly=TRUE) ){
-      +            tinytest::test_package("backbone")
-      + }
-       ____   backbone v2.1.2
-      |  _ \  Cite: Neal, Z. P., (2022). Backbone: An R package to extract network backbones.
-      |#|_) |       PLOS ONE, 17, e0269137. https://doi.org/10.1371/journal.pone.0269137
-      |# _ < 
-    ...
-      test_backbone.R...............   53 tests [0;32mOK[0m 
-      test_backbone.R...............   54 tests [0;32mOK[0m 
-      test_backbone.R...............   54 tests [0;32mOK[0m 
-      test_backbone.R...............   54 tests [0;32mOK[0m 
-      test_backbone.R...............   54 tests [0;32mOK[0m 
-      test_backbone.R...............   55 tests [0;31m1 fails[0m 
-      test_backbone.R...............   55 tests [0;31m1 fails[0m 
-      test_backbone.R...............   55 tests [0;31m1 fails[0m Error in igraph::`E<-`(`*tmp*`, value = `*vtmp*`) : invalid indexing
-      Calls: <Anonymous> ... lapply -> FUN -> eval -> eval -> <Anonymous> -> <Anonymous>
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘backbone.Rmd’ using rmarkdown
-    
-    Quitting from lines 132-134 [unnamed-chunk-5] (backbone.Rmd)
-    Error: processing vignette 'backbone.Rmd' failed with diagnostics:
-    non-numeric argument to mathematical function
-    --- failed re-building ‘backbone.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘backbone.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # backShift
 
 <details>
@@ -317,10 +176,10 @@ Run `revdepcheck::cloud_details(, "bibliometrix")` for more info
 
 <details>
 
-* Version: 0.2.2
+* Version: 0.2.3
 * GitHub: https://github.com/MartinLoza/Canek
 * Source code: https://github.com/cran/Canek
-* Date/Publication: 2023-05-31 04:50:02 UTC
+* Date/Publication: 2023-10-18 09:00:02 UTC
 * Number of recursive dependencies: 223
 
 Run `revdepcheck::cloud_details(, "Canek")` for more info
@@ -362,7 +221,7 @@ Run `revdepcheck::cloud_details(, "Canek")` for more info
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
     ...
-       2. └─Canek:::RunCanek.Seurat(x, "orig.ident")
+       2. └─Canek:::RunCanek.Seurat(x, "batch")
        3.   └─Canek::CorrectBatches(counts, debug = debug, ...)
        4.     └─Canek::CorrectBatch(...)
        5.       └─Canek:::CalculateMST(cluMem$centers[, 1:fuzzyPCA])
@@ -435,47 +294,6 @@ Run `revdepcheck::cloud_details(, "CINNA")` for more info
       All declared Imports should be used.
     ```
 
-# clickstream
-
-<details>
-
-* Version: 1.3.3
-* GitHub: NA
-* Source code: https://github.com/cran/clickstream
-* Date/Publication: 2023-09-27 14:50:02 UTC
-* Number of recursive dependencies: 43
-
-Run `revdepcheck::cloud_details(, "clickstream")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘clickstream-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: clickstream-package
-    > ### Title: Analyzes Clickstreams Based on Markov Chains
-    > ### Aliases: clickstream-package clickstream
-    > ### Keywords: Markov chain click stream
-    > 
-    > ### ** Examples
-    > 
-    ...
-    Absorbing Probabilities: 
-      None
-    1  NaN
-    
-    
-    > plot(mc)
-    Error in round(igraph::E(graph)$weight, digits) : 
-      non-numeric argument to mathematical function
-    Calls: plot -> plot -> .local
-    Execution halted
-    ```
-
 # concorR
 
 <details>
@@ -542,9 +360,9 @@ Run `revdepcheck::cloud_details(, "countland")` for more info
       > library(countland)
       > 
       > test_check("countland")
-      The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
-      which was just loaded, were retired in October 2023.
-      Please refer to R-spatial evolution reports for details, especially
+      countland object
+      the count matrix has 1000 genes (rows)
+          and 100 cells (columns)
     ...
        2.   ├─methods::as(...)
        3.   │ └─methods:::.class1(object)
@@ -609,17 +427,17 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       > 
       > suppressWarnings(RNGversion("3.5.0"))
       > test_check("DiagrammeR")
-      [ FAIL 7 | WARN 12 | SKIP 0 | PASS 2101 ]
-      
+      Warning: stack imbalance in '<-', 77 then 78
+      Warning: stack imbalance in '{', 73 then 74
     ...
       1/1 mismatches
-      [1] 0 - 3 == -3
-      ── Failure ('test-transform_graph.R:337:3'): Removing loop edges via a selection is possible ──
-      ... %>% nrow() not equal to 3.
+      [1] 107 - 98 == 9
+      ── Failure ('test-count_entities.R:142:3'): counting the number of strongly connected components is possible ──
+      graph %>% count_s_connected_cmpts() not equal to 4.
       1/1 mismatches
-      [1] 0 - 3 == -3
+      [1] 2 - 4 == -2
       
-      [ FAIL 7 | WARN 12 | SKIP 0 | PASS 2101 ]
+      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
       Error: Test failures
       Execution halted
     ```
@@ -629,115 +447,6 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 1 marked UTF-8 string
-    ```
-
-# diffudist
-
-<details>
-
-* Version: 1.0.1
-* GitHub: https://github.com/gbertagnolli/diffudist
-* Source code: https://github.com/cran/diffudist
-* Date/Publication: 2023-02-27 19:42:40 UTC
-* Number of recursive dependencies: 74
-
-Run `revdepcheck::cloud_details(, "diffudist")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘diffudist-package.Rmd’ using rmarkdown
-    
-    Quitting from lines 229-237 [PRRW-transition-matrix] (diffudist-package.Rmd)
-    Error: processing vignette 'diffudist-package.Rmd' failed with diagnostics:
-    no such edge attribute
-    --- failed re-building ‘diffudist-package.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘diffudist-package.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.0Mb
-      sub-directories of 1Mb or more:
-        libs   4.1Mb
-    ```
-
-# dimRed
-
-<details>
-
-* Version: 0.2.6
-* GitHub: https://github.com/gdkrmr/dimRed
-* Source code: https://github.com/cran/dimRed
-* Date/Publication: 2022-07-11 12:40:06 UTC
-* Number of recursive dependencies: 136
-
-Run `revdepcheck::cloud_details(, "dimRed")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘dimRed-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: FruchtermanReingold-class
-    > ### Title: Fruchterman Reingold Graph Layout
-    > ### Aliases: FruchtermanReingold-class FruchtermanReingold
-    > 
-    > ### ** Examples
-    > 
-    > if(requireNamespace(c("igraph", "coRanking"), quietly = TRUE)) {
-    ...
-    + 
-    + dat <- loadDataSet("Swiss Roll", n = 100)
-    + emb <- embed(dat, "FruchtermanReingold")
-    + plot(emb, type = "2vars")
-    + 
-    + }
-    Error in class(x) <- unique.default(c("AsIs", oldClass(x))) : 
-      attempt to set an attribute on NULL
-    Calls: embed ... em_graph_layout -> embed_graph -> f -> weight.trans
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(dimRed)
-      Loading required package: DRR
-      Loading required package: kernlab
-      Loading required package: CVST
-      Loading required package: Matrix
-      
-    ...
-        6.     ├─base::do.call(methodObject@fun, args)
-        7.     └─dimRed (local) `<fn>`(data = `<dimRedDt>`, keep.org.data = TRUE, pars = `<named list>`)
-        8.       └─dimRed:::em_graph_layout(...)
-        9.         └─dimRed:::embed_graph(data.graph, graph_em_method, ndim = ndim)
-       10.           ├─igraph (local) f(graph, weights = weight.trans(igraph::E(graph)$weight), dim = ndim)
-       11.           └─base (local) weight.trans(igraph::E(graph)$weight)
-      
-      [ FAIL 1 | WARN 9 | SKIP 7 | PASS 168 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # dnet
@@ -812,10 +521,10 @@ Run `revdepcheck::cloud_details(, "DrDimont")` for more info
     ...
     +                                  layers=layers_example, 
     +                                  settings=example_settings)
-    [23-10-10 12:17:15] Generating graph of layer mrna for groupA...
-    [23-10-10 12:17:15] Reducing network by WGCNA::pickHardThreshold...
-    [23-10-10 12:17:15] R2 cutoff: 0.65
-    [23-10-10 12:17:16] Cut Threshold: 0.26
+    [23-10-19 05:26:15] Generating graph of layer mrna for groupA...
+    [23-10-19 05:26:15] Reducing network by WGCNA::pickHardThreshold...
+    [23-10-19 05:26:15] R2 cutoff: 0.65
+    [23-10-19 05:26:15] Cut Threshold: 0.26
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
       At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
     Calls: generate_individual_graphs ... generate_reduced_graph -> <Anonymous> -> graph.adjacency.dense
@@ -949,6 +658,7 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
     > ## Extract all complexity measures for classification task
     > data(iris)
     > complexity(Species ~ ., iris)
+    Warning: stack imbalance in 'lapply', 49 then 50
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
       At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
     Calls: complexity ... network.default -> <Anonymous> -> graph.adjacency.dense
@@ -964,18 +674,18 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
       > library(ECoL)
       > 
       > test_check("ECoL")
-      [ FAIL 5 | WARN 0 | SKIP 0 | PASS 92 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
+      Warning: stack imbalance in 'lapply', 126 then 127
+      Warning: stack imbalance in 'lapply', 126 then 127
+      Warning: stack imbalance in 'lapply', 126 then 127
     ...
+          ▆
+       1. ├─ECoL::network(Species ~ ., iris, measures = "Density") at test_network.R:5:2
+       2. └─ECoL:::network.formula(Species ~ ., iris, measures = "Density")
+       3.   └─ECoL:::network.default(...)
        4.     └─igraph::graph.adjacency(dst, mode = "undirected", weighted = TRUE)
        5.       └─igraph:::graph.adjacency.dense(...)
-      ── Failure ('test_smoothness.R:6:3'): regression.result ────────────────────────
-      as.numeric(aux$S1) not equal to 0.18172983.
-      1/1 mismatches
-      [1] 0.554 - 0.182 == 0.372
       
-      [ FAIL 5 | WARN 0 | SKIP 0 | PASS 92 ]
+      [ FAIL 3 | WARN 0 | SKIP 0 | PASS 94 ]
       Error: Test failures
       Execution halted
     ```
@@ -985,47 +695,6 @@ Run `revdepcheck::cloud_details(, "ECoL")` for more info
 *   checking LazyData ... NOTE
     ```
       'LazyData' is specified without a 'data' directory
-    ```
-
-# EcoNetGen
-
-<details>
-
-* Version: 0.2.4
-* GitHub: https://github.com/cboettig/EcoNetGen
-* Source code: https://github.com/cran/EcoNetGen
-* Date/Publication: 2023-08-27 05:10:02 UTC
-* Number of recursive dependencies: 87
-
-Run `revdepcheck::cloud_details(, "EcoNetGen")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(EcoNetGen)
-      > 
-      > ## Windows i386 builds always time out when ggraph
-      > ## circle layout is present in README images.  CRAZY
-      > skip <- (R.Version()$arch == "i386") &
-    ...
-          "value"), check = FALSE)`: Length of new attribute value must be 1 or 424, the number of target edges, not 0
-      Backtrace:
-          ▆
-       1. └─EcoNetGen::netsampler(network_in) at test-netsample.R:55:6
-       2.   └─igraph::`E<-`(`*tmp*`, value = `*vtmp*`)
-       3.     └─igraph:::i_set_edge_attr(...)
-      
-      [ FAIL 3 | WARN 1 | SKIP 0 | PASS 21 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # economiccomplexity
@@ -1076,47 +745,6 @@ Run `revdepcheck::cloud_details(, "economiccomplexity")` for more info
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
-    ```
-
-# EGAnet
-
-<details>
-
-* Version: 2.0.1
-* GitHub: https://github.com/hfgolino/EGAnet
-* Source code: https://github.com/cran/EGAnet
-* Date/Publication: 2023-08-23 07:20:05 UTC
-* Number of recursive dependencies: 208
-
-Run `revdepcheck::cloud_details(, "EGAnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘EGAnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: EGA.estimate
-    > ### Title: Estimates 'EGA' for Multidimensional Structures
-    > ### Aliases: EGA.estimate
-    > 
-    > ### ** Examples
-    > 
-    > # Obtain data
-    ...
-    Warning in (function (Y, formula = NULL, type = "continuous", mixed_type = NULL,  :
-      imputation during model fitting is
-    currently only implemented for 'continuous'
-                       and 'mixed' data.
-    Warning in (function (Y, formula = NULL, type = "continuous", mixed_type = NULL,  :
-      analytic solution only available for 'type = continuous'
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: EGA.estimate ... convert2igraph -> silent_call -> capture.output -> withVisible
-    Execution halted
     ```
 
 # eicm
@@ -1186,88 +814,6 @@ Run `revdepcheck::cloud_details(, "eicm")` for more info
       All declared Imports should be used.
     ```
 
-# einet
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/travisbyrum/einet
-* Source code: https://github.com/cran/einet
-* Date/Publication: 2020-04-23 17:20:03 UTC
-* Number of recursive dependencies: 69
-
-Run `revdepcheck::cloud_details(, "einet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(einet)
-      > 
-      > test_check("einet")
-      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 11 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-      1/1 mismatches
-      [1] 1 - 2 == -1
-      ── Failure ('test_effective_information.R:69:3'): effective_information is correctly calculated ──
-      effective_information(or_copy) not equal to 1.5.
-      1/1 mismatches
-      [1] 1 - 1.5 == -0.5
-      
-      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 11 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# FCMapper
-
-<details>
-
-* Version: 1.1
-* GitHub: NA
-* Source code: https://github.com/cran/FCMapper
-* Date/Publication: 2016-02-12 07:40:47
-* Number of recursive dependencies: 10
-
-Run `revdepcheck::cloud_details(, "FCMapper")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘FCMapper-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: graph.fcm
-    > ### Title: Fuzzy cognitive map graph
-    > ### Aliases: graph.fcm
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-    > matrix[7,] = c(0,0,0,-0.5,0,0,1)
-    > concept.names = c("A","B","C","D","E","F","G")
-    > 
-    > results = nochanges.scenario(matrix,iter=25,concept.names)
-    > 
-    > graph.fcm(matrix,concept.sizes=results$Equilibrium_value,concept.names)
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 17, the number of target edges, not 0
-    Calls: graph.fcm -> <Anonymous> -> i_set_edge_attr
-    Execution halted
-    ```
-
 # fnets
 
 <details>
@@ -1309,55 +855,6 @@ Run `revdepcheck::cloud_details(, "fnets")` for more info
       Execution halted
     ```
 
-# fssemR
-
-<details>
-
-* Version: 0.1.8
-* GitHub: https://github.com/Ivis4ml/fssemR
-* Source code: https://github.com/cran/fssemR
-* Date/Publication: 2022-02-11 13:00:02 UTC
-* Number of recursive dependencies: 88
-
-Run `revdepcheck::cloud_details(, "fssemR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘fssemR.Rmd’ using rmarkdown
-    
-    Quitting from lines 73-76 [unnamed-chunk-4] (fssemR.Rmd)
-    Error: processing vignette 'fssemR.Rmd' failed with diagnostics:
-    assignment of an object of class "numeric" is not valid for @'x' in an object of class "lgTMatrix"; is(value, "logical") is not TRUE
-    --- failed re-building ‘fssemR.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘fssemR.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 18.2Mb
-      sub-directories of 1Mb or more:
-        libs  17.5Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘qpdf’
-      All declared Imports should be used.
-    ```
-
 # ghypernet
 
 <details>
@@ -1377,23 +874,23 @@ Run `revdepcheck::cloud_details(, "ghypernet")` for more info
 *   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
+      ...
     --- re-building ‘Significantlinks.Rmd’ using rmarkdown
+    Warning: stack imbalance in '<-', 59 then 60
+    Warning: stack imbalance in 'withVisible', 52 then 53
     
     Quitting from lines 66-79 [unnamed-chunk-4] (Significantlinks.Rmd)
     Error: processing vignette 'Significantlinks.Rmd' failed with diagnostics:
     invalid value supplied for `weighted' argument, please see docs.
     --- failed re-building ‘Significantlinks.Rmd’
-    
-    --- re-building ‘Tutorial_NRM.Rmd’ using rmarkdown
-    
     ...
-    --- failed re-building ‘Tutorial_NRM.Rmd’
+    --- finished re-building ‘Tutorial_NRM.Rmd’
     
     --- re-building ‘tutorial.Rmd’ using rmarkdown
     --- finished re-building ‘tutorial.Rmd’
     
-    SUMMARY: processing the following files failed:
-      ‘Significantlinks.Rmd’ ‘Tutorial_NRM.Rmd’
+    SUMMARY: processing the following file failed:
+      ‘Significantlinks.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -1428,49 +925,26 @@ Run `revdepcheck::cloud_details(, "graph4lg")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘graph4lg-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: compute_graph_modul
-    > ### Title: Compute modules from a graph by maximising modularity
-    > ### Aliases: compute_graph_modul
-    > 
-    > ### ** Examples
-    > 
-    > data("data_tuto")
-    > mat_gen <- data_tuto[[1]]
-    > graph <- gen_graph_thr(mat_w = mat_gen, mat_thr = mat_gen,
-    +                             thr = 0.8)
-    > res_mod <- compute_graph_modul(graph = graph,
-    +                                 algo = "fast_greedy",
-    +                                 node_inter = "distance")
-    Error in compute_graph_modul(graph = graph, algo = "fast_greedy", node_inter = "distance") : 
-      'graph' must have weighted links in order to compute the specified metric with 'node_inter = distance' option.
-    Execution halted
-    ```
-
 *   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘genetic_graph_2.Rmd’ using rmarkdown
-    
-    Quitting from lines 186-188 [unnamed-chunk-9] (genetic_graph_2.Rmd)
-    Error: processing vignette 'genetic_graph_2.Rmd' failed with diagnostics:
-    argument 1 is not a vector
-    --- failed re-building ‘genetic_graph_2.Rmd’
-    
-    --- re-building ‘graph_comparisons_4.Rmd’ using rmarkdown
-    
+    Warning: stack imbalance in '<-', 59 then 61
+    Warning: stack imbalance in 'withVisible', 52 then 54
+    Warning: stack imbalance in '<-', 59 then 60
+    Warning: stack imbalance in 'withVisible', 52 then 53
+    Warning: stack imbalance in '<-', 60 then 61
+    Warning: stack imbalance in 'withVisible', 53 then 54
+    Warning: stack imbalance in '<-', 59 then 61
+    Warning: stack imbalance in 'withVisible', 52 then 54
     ...
     --- finished re-building ‘input_data_processing_1.Rmd’
     
     --- re-building ‘landscape_graph_3.Rmd’ using rmarkdown
     --- finished re-building ‘landscape_graph_3.Rmd’
     
-    SUMMARY: processing the following files failed:
-      ‘genetic_graph_2.Rmd’ ‘graph_comparisons_4.Rmd’
+    SUMMARY: processing the following file failed:
+      ‘genetic_graph_2.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -1482,238 +956,6 @@ Run `revdepcheck::cloud_details(, "graph4lg")` for more info
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
-    ```
-
-# HospitalNetwork
-
-<details>
-
-* Version: 0.9.3
-* GitHub: https://github.com/PascalCrepey/HospitalNetwork
-* Source code: https://github.com/cran/HospitalNetwork
-* Date/Publication: 2023-02-27 08:22:43 UTC
-* Number of recursive dependencies: 117
-
-Run `revdepcheck::cloud_details(, "HospitalNetwork")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(HospitalNetwork)
-      Loading required package: data.table
-      > 
-      > test_check("HospitalNetwork")
-      [ FAIL 1 | WARN 0 | SKIP 2 | PASS 57 ]
-      
-    ...
-      [ FAIL 1 | WARN 0 | SKIP 2 | PASS 57 ]
-      Deleting unused snapshots:
-      • HospiNet/clmat100.svg
-      • HospiNet/clustdeg500.svg
-      • HospiNet/clustmatclust500.svg
-      • HospiNet/deg100.svg
-      • HospiNet/mat100.svg
-      • HospiNet/matclust500.svg
-      Error: Test failures
-      Execution halted
-    ```
-
-# incidentally
-
-<details>
-
-* Version: 1.0.2
-* GitHub: https://github.com/zpneal/incidentally
-* Source code: https://github.com/cran/incidentally
-* Date/Publication: 2023-02-15 21:00:02 UTC
-* Number of recursive dependencies: 39
-
-Run `revdepcheck::cloud_details(, "incidentally")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘congress.Rmd’ using rmarkdown
-    trying URL 'https://www.govinfo.gov/bulkdata/BILLSTATUS/115/sres/BILLSTATUS-115-sres.zip'
-    Content type 'application/zip' length 1940782 bytes (1.9 MB)
-    ==================================================
-    downloaded 1.9 MB
-    
-    trying URL 'https://www.govinfo.gov/bulkdata/BILLSTATUS/115/sres/BILLSTATUS-115-sres.zip'
-    Content type 'application/zip' length 1940782 bytes (1.9 MB)
-    ==================================================
-    ...
-    --- failed re-building ‘congress.Rmd’
-    
-    --- re-building ‘incidentally.Rmd’ using rmarkdown
-    --- finished re-building ‘incidentally.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘congress.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# kangar00
-
-<details>
-
-* Version: 1.4.1
-* GitHub: NA
-* Source code: https://github.com/cran/kangar00
-* Date/Publication: 2022-12-06 08:40:06 UTC
-* Number of recursive dependencies: 96
-
-Run `revdepcheck::cloud_details(, "kangar00")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘kangar00-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: pathway
-    > ### Title: An S4 class to represent a gene-gene interaction network
-    > ### Aliases: pathway pathway,ANY-method show,pathway-method
-    > ###   show,pathway,ANY-method summary,pathway-method
-    > ###   summary,pathway,ANY-method pathway2igraph,pathway-method
-    > ###   pathway2igraph ANY-method analyze,pathway-method analyze
-    > ###   get_genes,pathway-method get_genes plot,pathway,missing-method
-    ...
-      ..$ id  : chr "hsa04020"
-      ..$ adj : int [1:180, 1:180] 0 0 0 0 0 0 0 0 0 0 ...
-      .. ..- attr(*, "dimnames")=List of 2
-      .. .. ..$ : chr [1:180] "ITPKA" "ITPKB" "ITPKC" "ADCY1" ...
-      .. .. ..$ : chr [1:180] "ITPKA" "ITPKB" "ITPKC" "ADCY1" ...
-      ..$ sign: int [1:594] 1 1 1 1 1 1 1 1 1 1 ...
-    > g <- pathway2igraph(hsa04020)
-    Error in igraph::`E<-`(`*tmp*`, value = 1:297) : invalid indexing
-    Calls: pathway2igraph -> pathway2igraph -> .local -> <Anonymous>
-    Execution halted
-    ```
-
-# Karen
-
-<details>
-
-* Version: 1.0
-* GitHub: NA
-* Source code: https://github.com/cran/Karen
-* Date/Publication: 2022-09-15 07:40:02 UTC
-* Number of recursive dependencies: 39
-
-Run `revdepcheck::cloud_details(, "Karen")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘Karen-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get.cdn
-    > ### Title: Get the cell differentiation network from a fitted Kalman
-    > ###   Reaction Network.
-    > ### Aliases: get.cdn
-    > 
-    > ### ** Examples
-    > 
-    ...
-    	DONE
-    	Smoothing step...	DONE
-    	Exporting new initial conditions to the cluster...	DONE
-    > parallel::stopCluster(cl)
-    > 
-    > get.cdn(res.fit)
-    Error in order(E(net)$weight, decreasing = FALSE) : 
-      argument 1 is not a vector
-    Calls: get.cdn ... lazy_eval -> lapply -> FUN -> eval -> eval -> order
-    Execution halted
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Karen.ltx’ using tex
-    Error: processing vignette 'Karen.ltx' failed with diagnostics:
-    Running 'texi2dvi' on 'Karen.ltx' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `realboxes.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.12 \usepackage
-                    {amssymb}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘Karen.ltx’
-    
-    SUMMARY: processing the following file failed:
-      ‘Karen.ltx’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# Libra
-
-<details>
-
-* Version: 1.7
-* GitHub: NA
-* Source code: https://github.com/cran/Libra
-* Date/Publication: 2022-04-11 09:22:30 UTC
-* Number of recursive dependencies: 13
-
-Run `revdepcheck::cloud_details(, "Libra")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘Libra-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: ising
-    > ### Title: Linearized Bregman solver for composite conditionally likelihood
-    > ###   of Ising model with lasso penalty.
-    > ### Aliases: ising
-    > ### Keywords: regression
-    > 
-    > ### ** Examples
-    ...
-    > obj = ising(X,10,0.1,nt=1000,trate=100)
-    > g<-graph.adjacency(obj$path[,,770],mode="undirected",weighted=TRUE)
-    > E(g)[E(g)$weight<0]$color<-"red"
-    > E(g)[E(g)$weight>0]$color<-"green"
-    > V(g)$name<-attributes(west10)$names
-    > plot(g,vertex.shape="rectangle",vertex.size=35,vertex.label=V(g)$name,
-    + edge.width=2*abs(E(g)$weight),main="Ising Model (LB): sparsity=0.51")
-    Error in abs(E(g)$weight) : non-numeric argument to mathematical function
-    Calls: plot -> plot.igraph -> i.parse.plot.params
-    Execution halted
     ```
 
 # malan
@@ -1838,14 +1080,14 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       > 
       > test_check("manynet")
     ...
-      `expected`: TRUE 
-      ── Failure ('test-manip_transform.R:38:3'): matrix projected correctly by columns ──
-      is_weighted(to_mode2(ison_southern_women, "pearson")) is not TRUE
       
-      `actual`:   FALSE
-      `expected`: TRUE 
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test-make_create.R:40:3'): tree creation works ────────────────────
+      unname(as_matrix(create_tree(c(2, 2)))) not equal to matrix(c(1, 1, 1, 0), 2, 2).
+      1/4 mismatches
+      [1] 0 - 1 == -1
       
-      [ FAIL 6 | WARN 0 | SKIP 7 | PASS 298 ]
+      [ FAIL 1 | WARN 0 | SKIP 7 | PASS 303 ]
       Error: Test failures
       Execution halted
     ```
@@ -1855,147 +1097,6 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 *   checking package dependencies ... NOTE
     ```
     Package which this enhances but not available for checking: ‘Rgraphviz’
-    ```
-
-# missSBM
-
-<details>
-
-* Version: 1.0.3
-* GitHub: https://github.com/grossSBM/missSBM
-* Source code: https://github.com/cran/missSBM
-* Date/Publication: 2022-08-23 12:10:06 UTC
-* Number of recursive dependencies: 115
-
-Run `revdepcheck::cloud_details(, "missSBM")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘missSBM-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: estimateMissSBM
-    > ### Title: Estimation of simple SBMs with missing data
-    > ### Aliases: estimateMissSBM
-    > 
-    > ### ** Examples
-    > 
-    > ## SBM parameters
-    ...
-    
-    > 
-    > myModel <- collection$bestModel
-    > plot(myModel, "expected")
-    > plot(myModel, "imputed")
-    > plot(myModel, "meso")
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 6, the number of target edges, not 0
-    Calls: plot ... <Anonymous> -> plotMeso -> <Anonymous> -> i_set_edge_attr
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 11.1Mb
-      sub-directories of 1Mb or more:
-        libs   8.5Mb
-    ```
-
-# mnda
-
-<details>
-
-* Version: 1.0.9
-* GitHub: NA
-* Source code: https://github.com/cran/mnda
-* Date/Publication: 2023-01-25 08:30:02 UTC
-* Number of recursive dependencies: 89
-
-Run `revdepcheck::cloud_details(, "mnda")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘mnda-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: subgraph_difference_plot
-    > ### Title: Visualization of a difference subgroup using a circular graph
-    > ### Aliases: subgraph_difference_plot
-    > 
-    > ### ** Examples
-    > 
-    > myNet = network_gen(N_nodes = 100, N_var_nodes = 5, N_var_nei = 90, noise_sd = .01)
-    ...
-     15. │       └─l$compute_aesthetics(d, plot)
-     16. │         └─ggplot2 (local) compute_aesthetics(..., self = self)
-     17. │           └─base::lapply(aesthetics, eval_tidy, data = data, env = env)
-     18. │             └─rlang (local) FUN(X[[i]], ...)
-     19. └─base::.handleSimpleError(...)
-     20.   └─rlang (local) h(simpleError(msg, call))
-     21.     └─handlers[[1L]](cnd)
-     22.       └─cli::cli_abort(...)
-     23.         └─rlang::abort(...)
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘MASS’ ‘Matrix’ ‘magrittr’ ‘reticulate’ ‘tensorflow’ ‘usethis’
-      All declared Imports should be used.
-    ```
-
-# modMax
-
-<details>
-
-* Version: 1.1
-* GitHub: NA
-* Source code: https://github.com/cran/modMax
-* Date/Publication: 2015-07-24 18:21:32
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "modMax")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘modMax-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: greedy
-    > ### Title: Greedy algorithms
-    > ### Aliases: greedy rgplus msgvm cd louvain vertexSim mome
-    > ### Keywords: Analysis of algorithms Network dynamics Social network
-    > ###   Network theory Community discovery Graph clustering Modularity
-    > ###   Multilevel Community structure rural-urban migration Community
-    > ###   analysis Clustering Social networking service Community detection
-    ...
-    > vertices2 <- which(clusters(randomgraph2)$membership==1)  
-    > graph2 <- induced.subgraph(randomgraph2,vertices2)
-    > graph2 <- set.edge.attribute(graph2, "weight", value=runif(ecount(graph2),0,1))
-    > 
-    > adj2 <- get.adjacency(graph2, attr="weight")
-    > result2 <- louvain(adj2)
-    Error in get.adjacency.sparse(graph, type = type, attr = attr, edges = edges,  : 
-      no such edge attribute
-    Calls: louvain ... calculateQ -> get.adjacency -> get.adjacency.sparse
-    Execution halted
     ```
 
 # modnets
@@ -2162,72 +1263,6 @@ Run `revdepcheck::cloud_details(, "motifcluster")` for more info
       Execution halted
     ```
 
-# MRFcov
-
-<details>
-
-* Version: 1.0.39
-* GitHub: https://github.com/nicholasjclark/MRFcov
-* Source code: https://github.com/cran/MRFcov
-* Date/Publication: 2023-04-06 10:13:19 UTC
-* Number of recursive dependencies: 117
-
-Run `revdepcheck::cloud_details(, "MRFcov")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘MRFcov-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plotMRF_hm
-    > ### Title: Plot MRF interaction parameters as a heatmap
-    > ### Aliases: plotMRF_hm
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-    > 
-    > #To plot as an igraph network instead, we can simply extract the adjacency matrix
-    > net <- igraph::graph.adjacency(CRFmod$graph, weighted = TRUE, mode = "undirected")
-    > igraph::plot.igraph(net, layout = igraph::layout.circle,
-    +                    edge.width = abs(igraph::E(net)$weight),
-    +                    edge.color = ifelse(igraph::E(net)$weight < 0, 'blue', 'red'))
-    Error in abs(igraph::E(net)$weight) : 
-      non-numeric argument to mathematical function
-    Calls: <Anonymous> -> i.parse.plot.params
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Bird_Parasite_CRF.Rmd’ using rmarkdown
-    
-    Quitting from lines 52-58 [unnamed-chunk-6] (Bird_Parasite_CRF.Rmd)
-    Error: processing vignette 'Bird_Parasite_CRF.Rmd' failed with diagnostics:
-    non-numeric argument to mathematical function
-    --- failed re-building ‘Bird_Parasite_CRF.Rmd’
-    
-    --- re-building ‘CRF_data_prep.Rmd’ using rmarkdown
-    ...
-    --- finished re-building ‘CRF_data_prep.Rmd’
-    
-    --- re-building ‘Gaussian_Poisson_CRFs.Rmd’ using rmarkdown
-    --- finished re-building ‘Gaussian_Poisson_CRFs.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Bird_Parasite_CRF.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # mRMRe
 
 <details>
@@ -2294,90 +1329,6 @@ Run `revdepcheck::cloud_details(, "mRMRe")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-# mstknnclust
-
-<details>
-
-* Version: 0.3.2
-* GitHub: NA
-* Source code: https://github.com/cran/mstknnclust
-* Date/Publication: 2023-01-27 14:10:02 UTC
-* Number of recursive dependencies: 36
-
-Run `revdepcheck::cloud_details(, "mstknnclust")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘mstknnclust-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: generate.complete.graph
-    > ### Title: Generates a complete graph
-    > ### Aliases: generate.complete.graph
-    > ### Keywords: internal
-    > 
-    > ### ** Examples
-    > 
-    ...
-    The following object is masked from ‘package:base’:
-    
-        union
-    
-    > cg.network=igraph::graph.adjacency(d, mode="undirected", weighted=TRUE)
-    > plot(cg.network, edge.label=round(E(cg.network)$weight, 2), main="Complete Graph")
-    Error in round(E(cg.network)$weight, 2) : 
-      non-numeric argument to mathematical function
-    Calls: plot -> plot.igraph -> i.parse.plot.params
-    Execution halted
-    ```
-
-# MultIS
-
-<details>
-
-* Version: 0.6.2
-* GitHub: NA
-* Source code: https://github.com/cran/MultIS
-* Date/Publication: 2021-08-06 11:10:02 UTC
-* Number of recursive dependencies: 83
-
-Run `revdepcheck::cloud_details(, "MultIS")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘QuickStart.Rmd’ using knitr
-    
-    Quitting from lines 189-203 [QS-clusteringC3] (QuickStart.Rmd)
-    Error: processing vignette 'QuickStart.Rmd' failed with diagnostics:
-    arguments imply differing number of rows: 1274, 0, 1
-    --- failed re-building ‘QuickStart.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘QuickStart.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘poweRlaw’ ‘rmutil’
-      All declared Imports should be used.
     ```
 
 # mwcsr
@@ -2465,47 +1416,6 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
       Execution halted
     ```
 
-# nda
-
-<details>
-
-* Version: 0.1.13
-* GitHub: https://github.com/kzst/nda
-* Source code: https://github.com/cran/nda
-* Date/Publication: 2023-09-27 07:20:06 UTC
-* Number of recursive dependencies: 47
-
-Run `revdepcheck::cloud_details(, "nda")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘nda-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: data_gen
-    > ### Title: Generate random block matrix for GNDA
-    > ### Aliases: data_gen
-    > ### Keywords: array multivariate
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > # Specification 40 by 20 random block matrices with 3 blocks/factors
-    > df<-data_gen(40,20,3)
-    > library(psych)
-    > scree(df)
-    > biplot(ndr(df))
-    > plot(ndr(df))
-    Error in data.frame(from = edges$V1, to = edges$V2, smooth = c(FALSE),  : 
-      arguments imply differing number of rows: 57, 1, 0
-    Calls: plot -> plot.nda -> data.frame
-    Execution halted
-    ```
-
 # netcom
 
 <details>
@@ -2572,141 +1482,6 @@ Run `revdepcheck::cloud_details(, "netcom")` for more info
     Namespaces in Imports field not imported from:
       ‘ggfortify’ ‘ggplot2’ ‘ggraph’ ‘reshape2’
       All declared Imports should be used.
-    ```
-
-# NetCoupler
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/NetCoupler/NetCoupler
-* Source code: https://github.com/cran/NetCoupler
-* Date/Publication: 2022-04-08 09:02:33 UTC
-* Number of recursive dependencies: 103
-
-Run `revdepcheck::cloud_details(, "NetCoupler")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘NetCoupler-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: nc_estimate_links
-    > ### Title: Compute model estimates between an external (exposure or
-    > ###   outcome) variable and a network.
-    > ### Aliases: nc_estimate_links nc_estimate_exposure_links
-    > ###   nc_estimate_outcome_links
-    > 
-    > ### ** Examples
-    ...
-     16. │               └─tidyselect:::walk_data_tree(new, data_mask, context_mask)
-     17. │                 └─tidyselect:::as_indices_sel_impl(...)
-     18. │                   └─tidyselect:::as_indices_impl(...)
-     19. │                     └─tidyselect:::chr_as_locations(x, vars, call = call, arg = arg)
-     20. │                       └─vctrs::vec_as_location(...)
-     21. └─vctrs (local) `<fn>`()
-     22.   └─vctrs:::stop_subscript_oob(...)
-     23.     └─vctrs:::stop_subscript(...)
-     24.       └─rlang::abort(...)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(NetCoupler)
-      
-      Attaching package: 'NetCoupler'
-      
-      The following object is masked from 'package:testthat':
-    ...
-       28. │                     └─tidyselect:::chr_as_locations(x, vars, call = call, arg = arg)
-       29. │                       └─vctrs::vec_as_location(...)
-       30. └─vctrs (local) `<fn>`()
-       31.   └─vctrs:::stop_subscript_oob(...)
-       32.     └─vctrs:::stop_subscript(...)
-       33.       └─rlang::abort(...)
-      
-      [ FAIL 2 | WARN 1 | SKIP 0 | PASS 7 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘NetCoupler.Rmd’ using rmarkdown
-    
-    Quitting from lines 220-235 [example-use] (NetCoupler.Rmd)
-    Error: processing vignette 'NetCoupler.Rmd' failed with diagnostics:
-    Can't rename columns that don't exist.
-    ✖ Column `weight` doesn't exist.
-    --- failed re-building ‘NetCoupler.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘NetCoupler.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# NetMix
-
-<details>
-
-* Version: 0.2.0.1
-* GitHub: https://github.com/solivella/NetMix
-* Source code: https://github.com/cran/NetMix
-* Date/Publication: 2022-11-16 16:34:41 UTC
-* Number of recursive dependencies: 59
-
-Run `revdepcheck::cloud_details(, "NetMix")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘NetMix-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plot.mmsbm
-    > ### Title: Various visualization tools for 'mmsbm' objects
-    > ### Aliases: plot.mmsbm
-    > 
-    > ### ** Examples
-    > 
-    > library(NetMix)
-    ...
-    Warning in max(igraph::E(block.G)$weight) :
-      no non-missing arguments to max; returning -Inf
-    Warning in min(x, na.rm = na.rm) :
-      no non-missing arguments to min; returning Inf
-    Warning in max(x, na.rm = na.rm) :
-      no non-missing arguments to max; returning -Inf
-    Error in seq.default(range[1], range[2], length.out = 10) : 
-      'from' must be a finite number
-    Calls: plot -> plot.mmsbm -> .bar.legend -> seq -> seq.default
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.2Mb
-      sub-directories of 1Mb or more:
-        libs   5.8Mb
     ```
 
 # netrankr
@@ -2876,147 +1651,6 @@ Run `revdepcheck::cloud_details(, "netropy")` for more info
     Execution halted
     ```
 
-# netUtils
-
-<details>
-
-* Version: 0.8.2
-* GitHub: https://github.com/schochastics/netUtils
-* Source code: https://github.com/cran/netUtils
-* Date/Publication: 2023-06-29 16:40:08 UTC
-* Number of recursive dependencies: 53
-
-Run `revdepcheck::cloud_details(, "netUtils")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(netUtils)
-      > 
-      > test_check("netUtils")
-      
-      Attaching package: 'igraph'
-      
-    ...
-       2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. └─netUtils::as_adj_weighted(g, attr = "weight")
-       5.   ├─base::as.matrix(...)
-       6.   └─igraph::as_adj(g, attr = attr, type = "both", sparse = T)
-       7.     └─igraph:::get.adjacency.sparse(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 33 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.2Mb
-      sub-directories of 1Mb or more:
-        libs   6.0Mb
-    ```
-
-# NetworkRiskMeasures
-
-<details>
-
-* Version: 0.1.4
-* GitHub: https://github.com/carloscinelli/NetworkRiskMeasures
-* Source code: https://github.com/cran/NetworkRiskMeasures
-* Date/Publication: 2020-03-05 11:20:02 UTC
-* Number of recursive dependencies: 64
-
-Run `revdepcheck::cloud_details(, "NetworkRiskMeasures")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(NetworkRiskMeasures)
-      Loading required package: Matrix
-      > 
-      > test_check("NetworkRiskMeasures")
-      [ FAIL 1 | WARN 0 | SKIP 1 | PASS 31 ]
-      
-    ...
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test_1_risk_com.R:104:15'): vulnerability and communicability ─────
-      as.matrix(vi) not equal to `res`.
-      1/36 mismatches
-      [29] 0 - 0.5 == -0.5
-      
-      [ FAIL 1 | WARN 0 | SKIP 1 | PASS 31 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# nevada
-
-<details>
-
-* Version: 0.2.0
-* GitHub: https://github.com/astamm/nevada
-* Source code: https://github.com/cran/nevada
-* Date/Publication: 2023-09-03 21:00:02 UTC
-* Number of recursive dependencies: 108
-
-Run `revdepcheck::cloud_details(, "nevada")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘nevada-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: edge_count_global_variables
-    > ### Title: Transform distance matrix in edge properties of minimal spanning
-    > ###   tree
-    > ### Aliases: edge_count_global_variables
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > gnp_params <- list(p = 1/3)
-    > k_regular_params <- list(k = 8L)
-    > x <- nvd(model = "gnp", n = n1, model_params = gnp_params)
-    > y <- nvd(model = "k_regular", n = n2, model_params = k_regular_params)
-    > d <- dist_nvd(x, y, representation = "laplacian", distance = "frobenius")
-    > e <- edge_count_global_variables(d, n1, k = 5L)
-    Error in igraph::mst(g, algorithm = "prim") : 
-      edges weights must be supplied for Prim's algorithm
-    Calls: edge_count_global_variables -> kmst -> <Anonymous>
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.3Mb
-      sub-directories of 1Mb or more:
-        libs   4.8Mb
-    ```
-
 # NIMAA
 
 <details>
@@ -3038,49 +1672,24 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
     Running examples in ‘NIMAA-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: findCluster
-    > ### Title: Find clusters in projected unipartite networks
-    > ### Aliases: findCluster
+    > ### Name: scoreCluster
+    > ### Title: Score the cluster analysis in a projected network based on
+    > ###   additional internal measures.
+    > ### Aliases: scoreCluster
     > 
     > ### ** Examples
     > 
-    > # generate an incidence matrix
     ...
-    +   part = 1,
-    +   method = "all",
-    +   normalization = FALSE,
-    +   rm_weak_edges = TRUE,
-    +   comparison = TRUE
-    + )
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 4, the number of target edges, not 0
-    Calls: findCluster -> <Anonymous> -> i_set_edge_attr
+    > beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
+    > 
+    > # do clustering
+    > cls <- findCluster(beatAML_incidence_matrix,
+    +   part = 1, method = "infomap", normalization = FALSE,
+    +   rm_weak_edges = TRUE, comparison = FALSE)
+    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
+      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
+    Calls: findCluster ... projectGraph -> <Anonymous> -> graph.adjacency.dense
     Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(NIMAA)
-      > 
-      > test_check("NIMAA")
-      binmatnest.temperature 
-                    13.21274 
-      Size of Square: 	 66 rows x  66 columns 
-    ...
-          "value"), check = FALSE)`: Length of new attribute value must be 1 or 4, the number of target edges, not 0
-      Backtrace:
-          ▆
-       1. └─NIMAA::findCluster(...) at test-find-cluster.R:5:2
-       2.   └─igraph::`E<-`(`*tmp*`, value = `*vtmp*`)
-       3.     └─igraph:::i_set_edge_attr(...)
-      
-      [ FAIL 1 | WARN 6 | SKIP 0 | PASS 10 ]
-      Error: Test failures
-      Execution halted
     ```
 
 *   checking re-building of vignette outputs ... ERROR
@@ -3091,7 +1700,7 @@ Run `revdepcheck::cloud_details(, "NIMAA")` for more info
     
     Quitting from lines 138-148 [unnamed-chunk-7] (NIMAA-vignette.Rmd)
     Error: processing vignette 'NIMAA-vignette.Rmd' failed with diagnostics:
-    Length of new attribute value must be 1 or 9730, the number of target edges, not 0
+    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
     --- failed re-building ‘NIMAA-vignette.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -3312,346 +1921,6 @@ Run `revdepcheck::cloud_details(, "phangorn")` for more info
         libs   5.8Mb
     ```
 
-# phylopath
-
-<details>
-
-* Version: 1.2.0
-* GitHub: https://github.com/Ax3man/phylopath
-* Source code: https://github.com/cran/phylopath
-* Date/Publication: 2023-10-09 23:10:03 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "phylopath")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘phylopath-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: best
-    > ### Title: Extract and estimate the best supported model from a
-    > ###   phylogenetic path analysis.
-    > ### Aliases: best
-    > 
-    > ### ** Examples
-    > 
-    ...
-    DD  0 0.00000000 0.00000000 0.00000000
-    
-    attr(,"class")
-    [1] "fitted_DAG"
-    >   # Plot to show the weighted graph:
-    >   plot(best_model)
-    Error in abs(igraph::E(g)$weight) : 
-      non-numeric argument to mathematical function
-    Calls: plot ... plot.fitted_DAG -> <Anonymous> -> scale_radius -> continuous_scale
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘binary_models.Rmd’ using rmarkdown
-    
-    Quitting from lines 120-121 [unnamed-chunk-4] (binary_models.Rmd)
-    Error: processing vignette 'binary_models.Rmd' failed with diagnostics:
-    non-numeric argument to mathematical function
-    --- failed re-building ‘binary_models.Rmd’
-    
-    --- re-building ‘intro_to_phylopath.Rmd’ using rmarkdown
-    ...
-    Quitting from lines 170-171 [unnamed-chunk-14] (intro_to_phylopath.Rmd)
-    Error: processing vignette 'intro_to_phylopath.Rmd' failed with diagnostics:
-    non-numeric argument to mathematical function
-    --- failed re-building ‘intro_to_phylopath.Rmd’
-    
-    SUMMARY: processing the following files failed:
-      ‘binary_models.Rmd’ ‘intro_to_phylopath.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# phyloseqGraphTest
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/jfukuyama/phyloseqGraphTest
-* Source code: https://github.com/cran/phyloseqGraphTest
-* Date/Publication: 2020-02-07 16:30:02 UTC
-* Number of recursive dependencies: 95
-
-Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘phyloseqGraphTest-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: graph_perm_test
-    > ### Title: Performs graph-based permutation tests
-    > ### Aliases: graph_perm_test
-    > 
-    > ### ** Examples
-    > 
-    > library(phyloseq)
-    > data(enterotype)
-    > gt = graph_perm_test(enterotype, sampletype = "SeqTech", type = "mst")
-    Error in minimum.spanning.tree(gr, algorithm = "prim") : 
-      edges weights must be supplied for Prim's algorithm
-    Calls: graph_perm_test -> minimum.spanning.tree
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘intergraph’
-      All declared Imports should be used.
-    ```
-
-*   checking LazyData ... NOTE
-    ```
-      'LazyData' is specified without a 'data' directory
-    ```
-
-# PLEXI
-
-<details>
-
-* Version: 1.0.0
-* GitHub: NA
-* Source code: https://github.com/cran/PLEXI
-* Date/Publication: 2023-08-09 15:50:03 UTC
-* Number of recursive dependencies: 73
-
-Run `revdepcheck::cloud_details(, "PLEXI")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘PLEXI-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: subgraph_difference_plot
-    > ### Title: Visualization of a difference subgroup using a circular graph
-    > ### Aliases: subgraph_difference_plot
-    > 
-    > ### ** Examples
-    > 
-    > myNet = network_gen(n.nodes = 100, n.var.nodes = 5, n.var.nei = 90, noise.sd = .01)
-    ...
-     15. │       └─l$compute_aesthetics(d, plot)
-     16. │         └─ggplot2 (local) compute_aesthetics(..., self = self)
-     17. │           └─base::lapply(aesthetics, eval_tidy, data = data, env = env)
-     18. │             └─rlang (local) FUN(X[[i]], ...)
-     19. └─base::.handleSimpleError(...)
-     20.   └─rlang (local) h(simpleError(msg, call))
-     21.     └─handlers[[1L]](cnd)
-     22.       └─cli::cli_abort(...)
-     23.         └─rlang::abort(...)
-    Execution halted
-    ```
-
-# poppr
-
-<details>
-
-* Version: 2.9.4
-* GitHub: https://github.com/grunwaldlab/poppr
-* Source code: https://github.com/cran/poppr
-* Date/Publication: 2023-03-23 03:20:02 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "poppr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘poppr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: bruvo.msn
-    > ### Title: Create minimum spanning network of selected populations using
-    > ###   Bruvo's distance.
-    > ### Aliases: bruvo.msn msn.bruvo
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > # Load the data set.
-    > data(nancycats)
-    > 
-    > # View populations 8 and 9 with default colors. 
-    > bruvo.msn(nancycats, replen = rep(2, 9), sublist=8:9, vertex.label="inds", 
-    +           vertex.label.cex=0.7, vertex.label.dist=0.4)
-    Error in minimum.spanning.tree(g, algorithm = "prim", weights = E(g)$weight) : 
-      edges weights must be supplied for Prim's algorithm
-    Calls: bruvo.msn -> msn_constructor -> minimum.spanning.tree
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Complete output:
-      > library(testthat)
-      > options(poppr.debug = TRUE)
-      > test_check("poppr")
-      Loading required package: poppr
-      Loading required package: adegenet
-      Loading required package: ade4
-      
-    ...
-      Error in `minimum.spanning.tree(g, algorithm = "prim", weights = E(g)$weight)`: edges weights must be supplied for Prim's algorithm
-      Backtrace:
-          ▆
-       1. └─poppr::bruvo.msn(gend, replen = c(1, 1), showplot = FALSE) at test-msn.R:118:0
-       2.   └─poppr:::msn_constructor(...)
-       3.     └─igraph::minimum.spanning.tree(g, algorithm = "prim", weights = E(g)$weight)
-      
-      [ FAIL 2 | WARN 0 | SKIP 166 | PASS 332 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘algo.Rnw’ using knitr
-    Error: processing vignette 'algo.Rnw' failed with diagnostics:
-    Running 'texi2dvi' on 'algo.tex' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `colortbl.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    ...
-    l.270 \long
-               \def\@secondoffive#1#2#3#4#5{#2}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘algo.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘algo.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# R.temis
-
-<details>
-
-* Version: 0.1.3
-* GitHub: https://github.com/nalimilan/R.TeMiS
-* Source code: https://github.com/cran/R.temis
-* Date/Publication: 2021-05-12 19:02:12 UTC
-* Number of recursive dependencies: 137
-
-Run `revdepcheck::cloud_details(, "R.temis")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘R.temis-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: terms_graph
-    > ### Title: terms_graph
-    > ### Aliases: terms_graph
-    > 
-    > ### ** Examples
-    > 
-    > 
-    > file <- system.file("texts", "reut21578-factiva.xml", package="tm.plugin.factiva")
-    > corpus <- import_corpus(file, "factiva", language="en")
-    > dtm <- build_dtm(corpus)
-    > terms_graph(dtm, 100, 3)
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 4448, the number of target edges, not 0
-    Calls: terms_graph -> <Anonymous> -> i_set_edge_attr
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘testthat’
-      All declared Imports should be used.
-    ```
-
-# RaceID
-
-<details>
-
-* Version: 0.3.3
-* GitHub: NA
-* Source code: https://github.com/cran/RaceID
-* Date/Publication: 2023-09-28 10:10:08 UTC
-* Number of recursive dependencies: 143
-
-Run `revdepcheck::cloud_details(, "RaceID")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘RaceID.Rmd’ using rmarkdown
-    
-    Quitting from lines 903-906 [unnamed-chunk-128] (RaceID.Rmd)
-    Error: processing vignette 'RaceID.Rmd' failed with diagnostics:
-    Length of new attribute value must be 1 or 2, the number of target edges, not 0
-    --- failed re-building ‘RaceID.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘RaceID.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 16.3Mb
-      sub-directories of 1Mb or more:
-        data   6.1Mb
-        doc    6.7Mb
-        libs   2.6Mb
-    ```
-
 # Radviz
 
 <details>
@@ -3714,68 +1983,6 @@ Run `revdepcheck::cloud_details(, "Radviz")` for more info
     Execution halted
     ```
 
-# ragt2ridges
-
-<details>
-
-* Version: 0.3.4
-* GitHub: https://github.com/wvanwie/ragt2ridges
-* Source code: https://github.com/cran/ragt2ridges
-* Date/Publication: 2020-01-28 15:30:02 UTC
-* Number of recursive dependencies: 91
-
-Run `revdepcheck::cloud_details(, "ragt2ridges")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ragt2ridges-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: graphVAR1
-    > ### Title: Graphs of the temporal (or contemporaneous) relations implied by
-    > ###   the VAR(1) model
-    > ### Aliases: graphVAR1
-    > 
-    > ### ** Examples
-    > 
-    ...
-    +                0.5,  0.5,    0,    1,    0,    0, 
-    +                  0,  0.5,    0,    0,    1,    0, 
-    +                0.5,    0,  0.5,    0,    0,    1), byrow=TRUE, ncol=6)
-    > 
-    > # adjacency matrix of (global) conditional independencies.
-    > graphVAR1(A, P, type="TSCG")
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: graphVAR1 -> graph.adjacency -> graph.adjacency.dense
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 13.6Mb
-      sub-directories of 1Mb or more:
-        libs  12.8Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘Biobase’ ‘CGHbase’
-      All declared Imports should be used.
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘longitudinal’
-    ```
-
 # repo
 
 <details>
@@ -3814,188 +2021,6 @@ Run `revdepcheck::cloud_details(, "repo")` for more info
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
       invalid value supplied for `weighted' argument, please see docs.
     Calls: <Anonymous> -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-# ResIN
-
-<details>
-
-* Version: 1.1.0
-* GitHub: https://github.com/pwarncke77/ResIN
-* Source code: https://github.com/cran/ResIN
-* Date/Publication: 2023-06-30 10:10:02 UTC
-* Number of recursive dependencies: 94
-
-Run `revdepcheck::cloud_details(, "ResIN")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ResIN-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: ResIN
-    > ### Title: ResIN
-    > ### Aliases: ResIN
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-     14. │         └─ggplot2 (local) compute_aesthetics(..., self = self)
-     15. │           └─ggplot2:::scales_add_defaults(...)
-     16. │             └─base::lapply(aesthetics[new_aesthetics], eval_tidy, data = data)
-     17. │               └─rlang (local) FUN(X[[i]], ...)
-     18. └─base::.handleSimpleError(...)
-     19.   └─rlang (local) h(simpleError(msg, call))
-     20.     └─handlers[[1L]](cnd)
-     21.       └─cli::cli_abort(...)
-     22.         └─rlang::abort(...)
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘ResIN-VIGNETTE.Rmd’ using rmarkdown
-    
-    Quitting from lines 70-91 [plotting edges] (ResIN-VIGNETTE.Rmd)
-    Error: processing vignette 'ResIN-VIGNETTE.Rmd' failed with diagnostics:
-    Problem while computing aesthetics.
-    ℹ Error occurred in the 1st layer.
-    Caused by error in `FUN()`:
-    ! object 'weight' not found
-    --- failed re-building ‘ResIN-VIGNETTE.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘ResIN-VIGNETTE.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# roads
-
-<details>
-
-* Version: 1.1.1
-* GitHub: https://github.com/LandSciTech/roads
-* Source code: https://github.com/cran/roads
-* Date/Publication: 2023-06-24 04:10:03 UTC
-* Number of recursive dependencies: 113
-
-Run `revdepcheck::cloud_details(, "roads")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(roads)
-      > 
-      > test_check("roads")
-      [ FAIL 1 | WARN 1 | SKIP 0 | PASS 24 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-projectRoads_CLUSexample.R:62:3'): Projected roads results match CLUS example results for the 'mst' method ──
-      getRoadCells(costC, pR_mst$roads, "mst") not equal to `CLUS.mst.roads`.
-      Lengths differ: 13 is not 14
-      
-      [ FAIL 1 | WARN 1 | SKIP 0 | PASS 24 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-# RPANDA
-
-<details>
-
-* Version: 2.2
-* GitHub: https://github.com/hmorlon/PANDA
-* Source code: https://github.com/cran/RPANDA
-* Date/Publication: 2022-10-24 15:28:00 UTC
-* Number of recursive dependencies: 130
-
-Run `revdepcheck::cloud_details(, "RPANDA")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘RPANDA-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: spectR_t
-    > ### Title: Spectral density plot of phylogenetic trait data
-    > ### Aliases: spectR_t
-    > 
-    > ### ** Examples
-    > 
-    > tr<-rtree(10)
-    > dat<-runif(10,1,2)
-    > spectR_t(tr,dat,draw=TRUE)
-    Warning in regularize.values(x, y, ties, missing(ties), na.rm = na.rm) :
-      collapsing to unique 'x' values
-    Warning in min(x) : no non-missing arguments to min; returning Inf
-    Warning in max(x) : no non-missing arguments to max; returning -Inf
-    Error in plot.window(...) : need finite 'ylim' values
-    Calls: spectR_t -> plot -> plot.default -> localWindow -> plot.window
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R      3.0Mb
-        data   1.6Mb
-    ```
-
-# rscc
-
-<details>
-
-* Version: 0.2.1
-* GitHub: https://github.com/sigbertklinke/rscc
-* Source code: https://github.com/cran/rscc
-* Date/Publication: 2022-01-20 12:02:42 UTC
-* Number of recursive dependencies: 45
-
-Run `revdepcheck::cloud_details(, "rscc")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘rscc.Rmd’ using rmarkdown
-    
-    Quitting from lines 244-254 [unnamed-chunk-14] (rscc.Rmd)
-    Error: processing vignette 'rscc.Rmd' failed with diagnostics:
-    Length of new attribute value must be 1 or 91, the number of target edges, not 0
-    --- failed re-building ‘rscc.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘rscc.Rmd’
-    
-    Error: Vignette re-building failed.
     Execution halted
     ```
 
@@ -4104,51 +2129,26 @@ Run `revdepcheck::cloud_details(, "sbm")` for more info
     Execution halted
     ```
 
-*   checking tests ... ERROR
-    ```
-      Running ‘spelling.R’
-      Comparing ‘spelling.Rout’ to ‘spelling.Rout.save’ ...6c6
-    < NULL
-    ---
-    > All Done!
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(sbm)
-    ...
-        9. ├─base::plot(myMBM, type = "meso")
-       10. └─sbm:::plot.SBM(myMBM, type = "meso")
-       11.   └─x$plot(type, ordered, plotOptions)
-       12.     └─sbm:::plotMesoMultipartite(...)
-       13.       └─igraph::`E<-`(`*tmp*`, value = `*vtmp*`)
-       14.         └─igraph:::i_set_edge_attr(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 1045 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 *   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
+      ...
     --- re-building ‘Multipartite_EcologicalNetwork.Rmd’ using rmarkdown
-    
-    Quitting from lines 152-158 [plot meso] (Multipartite_EcologicalNetwork.Rmd)
-    Error: processing vignette 'Multipartite_EcologicalNetwork.Rmd' failed with diagnostics:
-    Length of new attribute value must be 1 or 35, the number of target edges, not 0
-    --- failed re-building ‘Multipartite_EcologicalNetwork.Rmd’
+    --- finished re-building ‘Multipartite_EcologicalNetwork.Rmd’
     
     --- re-building ‘MultiplexNetwork_principle.Rmd’ using rmarkdown
     --- finished re-building ‘MultiplexNetwork_principle.Rmd’
+    
+    --- re-building ‘Multiplex_allianceNwar_case_study.Rmd’ using rmarkdown
+    --- finished re-building ‘Multiplex_allianceNwar_case_study.Rmd’
     ...
     Quitting from lines 114-115 [simpleSBMfit plotmeso] (SBM_fungus_tree_network.Rmd)
     Error: processing vignette 'SBM_fungus_tree_network.Rmd' failed with diagnostics:
     At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
     --- failed re-building ‘SBM_fungus_tree_network.Rmd’
     
-    SUMMARY: processing the following files failed:
-      ‘Multipartite_EcologicalNetwork.Rmd’ ‘SBM_fungus_tree_network.Rmd’
+    SUMMARY: processing the following file failed:
+      ‘SBM_fungus_tree_network.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
@@ -4223,47 +2223,6 @@ Run `revdepcheck::cloud_details(, "scapGNN")` for more info
         extdata   2.3Mb
     ```
 
-# SEMgraph
-
-<details>
-
-* Version: 1.2.0
-* GitHub: https://github.com/fernandoPalluzzi/SEMgraph
-* Source code: https://github.com/cran/SEMgraph
-* Date/Publication: 2023-05-04 16:00:02 UTC
-* Number of recursive dependencies: 54
-
-Run `revdepcheck::cloud_details(, "SEMgraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘SEMgraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: SEMace
-    > ### Title: Compute the Average Causal Effect (ACE) for a given source-sink
-    > ###   pair
-    > ### Aliases: SEMace
-    > 
-    > ### ** Examples
-    > 
-    ...
-     Applying graph -> DAG conversion.
-    DAG conversion : TRUE
-    
-     Frequency distribution of path length from X to Y :< table of extent 0 >
-    
-    
-     ACE= 1 of 36Error in data.frame(..., check.names = FALSE) : 
-      arguments imply differing number of rows: 0, 1
-    Calls: SEMace -> rbind -> cbind -> cbind -> data.frame
-    Execution halted
-    ```
-
 # SeqNet
 
 <details>
@@ -4321,47 +2280,6 @@ Run `revdepcheck::cloud_details(, "SeqNet")` for more info
       All declared Imports should be used.
     ```
 
-# sharpshootR
-
-<details>
-
-* Version: 2.2
-* GitHub: https://github.com/ncss-tech/sharpshootR
-* Source code: https://github.com/cran/sharpshootR
-* Date/Publication: 2023-08-24 16:50:02 UTC
-* Number of recursive dependencies: 151
-
-Run `revdepcheck::cloud_details(, "sharpshootR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sharpshootR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plotSoilRelationGraph
-    > ### Title: Plot a component relation graph
-    > ### Aliases: plotSoilRelationGraph
-    > ### Keywords: hplot
-    > 
-    > ### ** Examples
-    > 
-    ...
-    +   # investigate max spanning tree + edges with weights > 75-th pctile
-    +   plotSoilRelationGraph(m, spanning.tree=0.75)
-    + 
-    +   par(op)
-    + 
-    + }
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 27, the number of target edges, not 0
-    Calls: plotSoilRelationGraph ... .maximum.spanning.tree -> <Anonymous> -> i_set_edge_attr
-    Execution halted
-    ```
-
 # signnet
 
 <details>
@@ -4383,23 +2301,17 @@ Run `revdepcheck::cloud_details(, "signnet")` for more info
     Running examples in ‘signnet-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: graph_circular_signed
-    > ### Title: circular signed graph
-    > ### Aliases: graph_circular_signed
+    > ### Name: graph_from_adjacency_matrix_signed
+    > ### Title: Create signed graphs from adjacency matrices
+    > ### Aliases: graph_from_adjacency_matrix_signed
     > 
     > ### ** Examples
     > 
-    > library(igraph)
-    ...
-    
-    The following object is masked from ‘package:base’:
-    
-        union
-    
-    > graph_circular_signed(n = 50)
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 366, the number of target edges, not 0
-    Calls: graph_circular_signed -> <Anonymous> -> i_set_edge_attr
+    > A <- matrix(c(0,1,-1,1,0,1,-1,1,0),3,3)
+    > graph_from_adjacency_matrix_signed(A)
+    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
+      invalid value supplied for `weighted' argument, please see docs.
+    Calls: graph_from_adjacency_matrix_signed -> <Anonymous> -> graph.adjacency.dense
     Execution halted
     ```
 
@@ -4412,18 +2324,18 @@ Run `revdepcheck::cloud_details(, "signnet")` for more info
       > library(signnet)
       > 
       > test_check("signnet")
-      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 87 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
+      Warning: stack imbalance in '<-', 77 then 78
+      Warning: stack imbalance in '{', 73 then 74
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 88 ]
     ...
-          "value"), check = FALSE)`: Length of new attribute value must be 1 or 45, the number of target edges, not 0
+          diag = diag)`: invalid value supplied for `weighted' argument, please see docs.
       Backtrace:
           ▆
-       1. └─signnet::graph_circular_signed(10, pos = 1, neg = 0) at test-random_graphs.R:23:2
-       2.   └─igraph::`E<-`(`*tmp*`, value = `*vtmp*`)
-       3.     └─igraph:::i_set_edge_attr(...)
+       1. └─signnet::graph_from_adjacency_matrix_signed(A, "undirected") at test-centrality_indices.R:86:2
+       2.   └─igraph::graph_from_adjacency_matrix(...)
+       3.     └─igraph:::graph.adjacency.dense(...)
       
-      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 87 ]
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 88 ]
       Error: Test failures
       Execution halted
     ```
@@ -4461,57 +2373,6 @@ Run `revdepcheck::cloud_details(, "signnet")` for more info
       sub-directories of 1Mb or more:
         data   1.0Mb
         libs   6.0Mb
-    ```
-
-# spectralGraphTopology
-
-<details>
-
-* Version: 0.2.3
-* GitHub: https://github.com/dppalomar/spectralGraphTopology
-* Source code: https://github.com/cran/spectralGraphTopology
-* Date/Publication: 2022-03-14 09:30:02 UTC
-* Number of recursive dependencies: 116
-
-Run `revdepcheck::cloud_details(, "spectralGraphTopology")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘spectralGraphTopology-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: learn_bipartite_graph
-    > ### Title: Learn a bipartite graph Learns a bipartite graph on the basis of
-    > ###   an observed data matrix
-    > ### Aliases: learn_bipartite_graph
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > c_scale <- colorRamp(colors)
-    > E(estimated_bipartite)$color = apply(
-    +   c_scale(E(estimated_bipartite)$weight / max(E(estimated_bipartite)$weight)), 1,
-    +                           function(x) rgb(x[1]/255, x[2]/255, x[3]/255))
-    Warning in max(E(estimated_bipartite)$weight) :
-      no non-missing arguments to max; returning -Inf
-    Error in i_set_edge_attr(x, attr(value, "name"), index = value, value = attr(value,  : 
-      Length of new attribute value must be 1 or 57, the number of target edges, not 0
-    Calls: E<- -> i_set_edge_attr
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  9.1Mb
-      sub-directories of 1Mb or more:
-        doc    3.1Mb
-        libs   5.5Mb
     ```
 
 # SteinerNet
@@ -4568,47 +2429,6 @@ Run `revdepcheck::cloud_details(, "SteinerNet")` for more info
       ‘tutorial.Rmd’
     
     Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# stminsights
-
-<details>
-
-* Version: 0.4.2
-* GitHub: https://github.com/cschwem2er/stminsights
-* Source code: https://github.com/cran/stminsights
-* Date/Publication: 2023-04-18 19:20:06 UTC
-* Number of recursive dependencies: 112
-
-Run `revdepcheck::cloud_details(, "stminsights")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘stminsights-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_network
-    > ### Title: extract topic correlation network
-    > ### Aliases: get_network
-    > 
-    > ### ** Examples
-    > 
-    > 
-    ...
-      7. │   └─dplyr:::mutate.data.frame(d_tmp, ...)
-      8. │     └─dplyr:::mutate_cols(.data, dplyr_quosures(...), by)
-      9. │       ├─base::withCallingHandlers(...)
-     10. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
-     11. │         └─mask$eval_all_mutate(quo)
-     12. │           └─dplyr (local) eval()
-     13. └─base::.handleSimpleError(...)
-     14.   └─dplyr (local) h(simpleError(msg, call))
-     15.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
     Execution halted
     ```
 
@@ -4712,72 +2532,6 @@ Run `revdepcheck::cloud_details(, "TDA")` for more info
     Execution halted
     ```
 
-# treefit
-
-<details>
-
-* Version: 1.0.2
-* GitHub: https://github.com/hayamizu-lab/treefit-r
-* Source code: https://github.com/cran/treefit
-* Date/Publication: 2022-01-18 07:50:02 UTC
-* Number of recursive dependencies: 156
-
-Run `revdepcheck::cloud_details(, "treefit")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > # Copyright (C) 2020  Momoko Hayamizu <hayamizu@ism.ac.jp>
-      > #
-      > # This program is free software: you can redistribute it and/or modify
-      > # it under the terms of the GNU General Public License as published by
-      > # the Free Software Foundation, either version 3 of the License, or
-      > # (at your option) any later version.
-      > #
-    ...
-       2.   └─treefit:::calculate_eigenvectors_list(...)
-       3.     └─base::lapply(...)
-       4.       └─treefit (local) FUN(X[[i]], ...)
-       5.         └─treefit:::do_build_tree(original, target, build_tree)
-       6.           └─treefit:::calculate_mst(target)
-       7.             └─igraph::delete_edge_attr(weighted_mst, "weight")
-      
-      [ FAIL 5 | WARN 0 | SKIP 0 | PASS 7 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘treefit.Rmd’ using rmarkdown
-    
-    Quitting from lines 100-105 [estimate-tree-like-data] (treefit.Rmd)
-    Error: processing vignette 'treefit.Rmd' failed with diagnostics:
-    No such edge attribute: weight
-    --- failed re-building ‘treefit.Rmd’
-    
-    --- re-building ‘working-with-seurat.Rmd’ using rmarkdown
-    ...
-    ==================================================
-    downloaded 6.0 MB
-    
-    --- finished re-building ‘working-with-seurat.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘treefit.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # VertexSimilarity
 
 <details>
@@ -4821,97 +2575,6 @@ Run `revdepcheck::cloud_details(, "VertexSimilarity")` for more info
       'LazyData' is specified without a 'data' directory
     ```
 
-# vocaldia
-
-<details>
-
-* Version: 0.8.4
-* GitHub: NA
-* Source code: https://github.com/cran/vocaldia
-* Date/Publication: 2022-08-14 20:40:02 UTC
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "vocaldia")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘vocaldia-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: igraph.vocaldia
-    > ### Title: igraph.vocaldia: Create an igraph vocalisation diagram
-    > ### Aliases: igraph.vocaldia
-    > 
-    > ### ** Examples
-    > 
-    > data(vocdia)
-    ...
-        decompose, spectrum
-    
-    The following object is masked from ‘package:base’:
-    
-        union
-    
-    Error in round(igraph::E(g)$weight, digits = 3) : 
-      non-numeric argument to mathematical function
-    Calls: igraph.vocaldia
-    Execution halted
-    ```
-
-# wdnet
-
-<details>
-
-* Version: 1.2.2
-* GitHub: NA
-* Source code: https://github.com/cran/wdnet
-* Date/Publication: 2023-09-06 21:10:02 UTC
-* Number of recursive dependencies: 52
-
-Run `revdepcheck::cloud_details(, "wdnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(wdnet)
-      > 
-      > test_check("wdnet")
-      [ FAIL 16 | WARN 0 | SKIP 0 | PASS 56 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-      Backtrace:
-          ▆
-       1. └─wdnet (local) my_expect_true(nstep = nstep, control = control, directed = FALSE) at test-rewire.R:76:2
-       2.   └─wdnet::dprewire(...) at test-rewire.R:47:4
-       3.     └─wdnet:::dprewire_undirected(...)
-       4.       └─wdnet:::dprewire_undirected_cpp(...)
-      
-      [ FAIL 16 | WARN 0 | SKIP 0 | PASS 56 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  9.3Mb
-      sub-directories of 1Mb or more:
-        libs   8.9Mb
-    ```
-
 # wpa
 
 <details>
@@ -4920,7 +2583,7 @@ Run `revdepcheck::cloud_details(, "wdnet")` for more info
 * GitHub: https://github.com/microsoft/wpa
 * Source code: https://github.com/cran/wpa
 * Date/Publication: 2023-08-21 15:00:02 UTC
-* Number of recursive dependencies: 119
+* Number of recursive dependencies: 123
 
 Run `revdepcheck::cloud_details(, "wpa")` for more info
 
