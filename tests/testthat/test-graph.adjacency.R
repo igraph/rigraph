@@ -235,6 +235,26 @@ test_that("graph_from_adjacency_matrix works", {
   )
 })
 
+test_that("graph_from_adjacency_matrix() snapshot", {
+  local_igraph_options(print.id = FALSE)
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  expect_snapshot({
+    m <- matrix(c(0, 2.5, 0, 0), ncol = 2)
+
+    graph_from_adjacency_matrix(m)
+    graph_from_adjacency_matrix(m, mode = "undirected")
+    graph_from_adjacency_matrix(m, mode = "max")
+    graph_from_adjacency_matrix(m, weighted = TRUE)
+    graph_from_adjacency_matrix(m, weighted = "w")
+  })
+
+  rlang::local_options(lifecycle_verbosity = "error")
+  expect_snapshot(error = TRUE, {
+    graph_from_adjacency_matrix(m, mode = "undirected")
+  })
+})
+
 test_that("graph_from_adjacency_matrix 2 edge bug is fixed", {
   A <- Matrix::Matrix(0, 10, 10, sparse = TRUE, doDiag = FALSE)
   A[3, 5] <- A[5, 3] <- 1
