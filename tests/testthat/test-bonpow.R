@@ -67,22 +67,6 @@ test_that("Power centrality works", {
     ))
   )
 
-  # Remove block after debug
-  g.c <- make_graph(c(1, 2, 1, 3, 2, 4, 3, 5), dir = FALSE)
-  g.c.w <- g.c
-  E(g.c.w)$weight <- seq_len(ecount(g.c.w)) * rep_len(c(1, -1), ecount(g.c.w))
-  g.c.w.mat <- as.matrix(as_adj(g.c.w, attr = "weight"))
-  bp.c.w.sna <- lapply(seq(-.4, .4, by = 0.1), function(x) {
-    round(sna::bonpow(g.c.w.mat, exponent = x), 2)[c(1, 2, 5)]
-  })
-  expect_that(bp.c.w.sna, equals(list(
-    c(0.75, 0.47, 1.42), c(0.87, -0.69, 1.13),
-    c(-0.72, 0.33, -1.38), c(-0.54, 0.61, -1.29),
-    c(-0.25, 1.01, -1.01), c(0.15, 1.33, -0.45),
-    c(0.69, 1.01, 0.81), c(0.20, 1.52, -0.58),
-    c(-0.50, -1.55, 0.00)
-  )))
-
   ## Test weights with sparse and dense fns vs. results from `sna::bonpow()`
   g.c.w <- g.c
   E(g.c.w)$weight <- seq_len(ecount(g.c.w)) * rep_len(c(1, -1), ecount(g.c.w))
