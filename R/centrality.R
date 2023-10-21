@@ -805,7 +805,8 @@ eigen_centrality <- eigenvector_centrality_impl
 #' @param weights Weight vector. If the graph has a `weight` edge
 #'   attribute, then this is used by default. If the graph does not have a
 #'   `weight` edge attribute and this argument is `NULL`, then a
-#'   warning is given and [degree()] is called.
+#'   [degree()] is called. If this is `NA`, then no edge weights are used
+#'   (even if the graph has a `weight` edge attribute).
 #' @return A numeric vector giving the strength of the vertices.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [degree()] for the unweighted version.
