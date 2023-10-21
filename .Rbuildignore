@@ -44,3 +44,4 @@ src/vendor/cigraph
 ^CITATION\.cff$
 ^cran$
 ^R/cran\.R$
+^\.ccache$

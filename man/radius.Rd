@@ -43,7 +43,7 @@ Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 }
 \seealso{
 \code{\link[=eccentricity]{eccentricity()}} for the underlying
-calculations, code{\link{distances}} for general shortest path
+calculations, \link{distances} for general shortest path
 calculations.
 
 Other paths: 

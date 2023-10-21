@@ -21,7 +21,7 @@ The edge sequence, invisibly.
 }
 \description{
 For long edge sequences, the printing is truncated to fit to the
-screen. Use \code{\link[=print]{print()}} explicitly and the code{full} argument to
+screen. Use \code{\link[=print]{print()}} explicitly and the \code{full} argument to
 see the full sequence.
 }
 \details{
