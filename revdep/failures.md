@@ -5,7 +5,7 @@
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/AlphaBeta
-* Number of recursive dependencies: 99
+* Number of recursive dependencies: 101
 
 Run `revdepcheck::cloud_details(, "AlphaBeta")` for more info
 
@@ -40,7 +40,7 @@ Run `revdepcheck::cloud_details(, "AlphaBeta")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ANF
-* Number of recursive dependencies: 111
+* Number of recursive dependencies: 113
 
 Run `revdepcheck::cloud_details(, "ANF")` for more info
 
@@ -75,7 +75,7 @@ Run `revdepcheck::cloud_details(, "ANF")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ASpli
-* Number of recursive dependencies: 159
+* Number of recursive dependencies: 160
 
 Run `revdepcheck::cloud_details(, "ASpli")` for more info
 
@@ -110,7 +110,7 @@ Run `revdepcheck::cloud_details(, "ASpli")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/batchelor
-* Number of recursive dependencies: 202
+* Number of recursive dependencies: 203
 
 Run `revdepcheck::cloud_details(, "batchelor")` for more info
 
@@ -145,7 +145,7 @@ Run `revdepcheck::cloud_details(, "batchelor")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/BayesSpace
-* Number of recursive dependencies: 270
+* Number of recursive dependencies: 272
 
 Run `revdepcheck::cloud_details(, "BayesSpace")` for more info
 
@@ -180,7 +180,7 @@ Run `revdepcheck::cloud_details(, "BayesSpace")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/BiocFHIR
-* Number of recursive dependencies: 79
+* Number of recursive dependencies: 81
 
 Run `revdepcheck::cloud_details(, "BiocFHIR")` for more info
 
@@ -215,7 +215,7 @@ Run `revdepcheck::cloud_details(, "BiocFHIR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/BiocPkgTools
-* Number of recursive dependencies: 161
+* Number of recursive dependencies: 163
 
 Run `revdepcheck::cloud_details(, "BiocPkgTools")` for more info
 
@@ -250,7 +250,7 @@ Run `revdepcheck::cloud_details(, "BiocPkgTools")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/biodbKegg
-* Number of recursive dependencies: 125
+* Number of recursive dependencies: 126
 
 Run `revdepcheck::cloud_details(, "biodbKegg")` for more info
 
@@ -320,7 +320,7 @@ Run `revdepcheck::cloud_details(, "BioNAR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/BioNERO
-* Number of recursive dependencies: 176
+* Number of recursive dependencies: 178
 
 Run `revdepcheck::cloud_details(, "BioNERO")` for more info
 
@@ -495,7 +495,7 @@ Run `revdepcheck::cloud_details(, "BiRewire")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/bluster
-* Number of recursive dependencies: 213
+* Number of recursive dependencies: 214
 
 Run `revdepcheck::cloud_details(, "bluster")` for more info
 
@@ -565,7 +565,7 @@ Run `revdepcheck::cloud_details(, "CAMERA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CARNIVAL
-* Number of recursive dependencies: 90
+* Number of recursive dependencies: 91
 
 Run `revdepcheck::cloud_details(, "CARNIVAL")` for more info
 
@@ -635,7 +635,7 @@ Run `revdepcheck::cloud_details(, "CausalR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CBNplot
-* Number of recursive dependencies: 246
+* Number of recursive dependencies: 247
 
 Run `revdepcheck::cloud_details(, "CBNplot")` for more info
 
@@ -670,7 +670,7 @@ Run `revdepcheck::cloud_details(, "CBNplot")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CellaRepertorium
-* Number of recursive dependencies: 179
+* Number of recursive dependencies: 180
 
 Run `revdepcheck::cloud_details(, "CellaRepertorium")` for more info
 
@@ -740,7 +740,7 @@ Run `revdepcheck::cloud_details(, "CellNOptR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CellTrails
-* Number of recursive dependencies: 213
+* Number of recursive dependencies: 215
 
 Run `revdepcheck::cloud_details(, "CellTrails")` for more info
 
@@ -775,7 +775,7 @@ Run `revdepcheck::cloud_details(, "CellTrails")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CEMiTool
-* Number of recursive dependencies: 200
+* Number of recursive dependencies: 203
 
 Run `revdepcheck::cloud_details(, "CEMiTool")` for more info
 
@@ -810,7 +810,7 @@ Run `revdepcheck::cloud_details(, "CEMiTool")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ceRNAnetsim
-* Number of recursive dependencies: 100
+* Number of recursive dependencies: 102
 
 Run `revdepcheck::cloud_details(, "ceRNAnetsim")` for more info
 
@@ -845,7 +845,7 @@ Run `revdepcheck::cloud_details(, "ceRNAnetsim")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CeTF
-* Number of recursive dependencies: 225
+* Number of recursive dependencies: 226
 
 Run `revdepcheck::cloud_details(, "CeTF")` for more info
 
@@ -880,7 +880,7 @@ Run `revdepcheck::cloud_details(, "CeTF")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ChromSCape
-* Number of recursive dependencies: 237
+* Number of recursive dependencies: 239
 
 Run `revdepcheck::cloud_details(, "ChromSCape")` for more info
 
@@ -950,7 +950,7 @@ Run `revdepcheck::cloud_details(, "CHRONOS")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/cicero
-* Number of recursive dependencies: 190
+* Number of recursive dependencies: 191
 
 Run `revdepcheck::cloud_details(, "cicero")` for more info
 
@@ -985,7 +985,7 @@ Run `revdepcheck::cloud_details(, "cicero")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CIMICE
-* Number of recursive dependencies: 103
+* Number of recursive dependencies: 105
 
 Run `revdepcheck::cloud_details(, "CIMICE")` for more info
 
@@ -1020,7 +1020,7 @@ Run `revdepcheck::cloud_details(, "CIMICE")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/CiteFuse
-* Number of recursive dependencies: 191
+* Number of recursive dependencies: 192
 
 Run `revdepcheck::cloud_details(, "CiteFuse")` for more info
 
@@ -1125,7 +1125,7 @@ Run `revdepcheck::cloud_details(, "clipper")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/cliqueMS
-* Number of recursive dependencies: 145
+* Number of recursive dependencies: 147
 
 Run `revdepcheck::cloud_details(, "cliqueMS")` for more info
 
@@ -1160,7 +1160,7 @@ Run `revdepcheck::cloud_details(, "cliqueMS")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/clusterExperiment
-* Number of recursive dependencies: 182
+* Number of recursive dependencies: 183
 
 Run `revdepcheck::cloud_details(, "clusterExperiment")` for more info
 
@@ -1230,7 +1230,7 @@ Run `revdepcheck::cloud_details(, "CNORfeeder")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/cogeqc
-* Number of recursive dependencies: 110
+* Number of recursive dependencies: 112
 
 Run `revdepcheck::cloud_details(, "cogeqc")` for more info
 
@@ -1265,7 +1265,7 @@ Run `revdepcheck::cloud_details(, "cogeqc")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/condiments
-* Number of recursive dependencies: 230
+* Number of recursive dependencies: 232
 
 Run `revdepcheck::cloud_details(, "condiments")` for more info
 
@@ -1335,7 +1335,7 @@ Run `revdepcheck::cloud_details(, "CoRegNet")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/cosmosR
-* Number of recursive dependencies: 154
+* Number of recursive dependencies: 155
 
 Run `revdepcheck::cloud_details(, "cosmosR")` for more info
 
@@ -1405,7 +1405,7 @@ Run `revdepcheck::cloud_details(, "covEB")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/csdR
-* Number of recursive dependencies: 126
+* Number of recursive dependencies: 128
 
 Run `revdepcheck::cloud_details(, "csdR")` for more info
 
@@ -1475,7 +1475,7 @@ Run `revdepcheck::cloud_details(, "CTDquerier")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/DAPAR
-* Number of recursive dependencies: 303
+* Number of recursive dependencies: 305
 
 Run `revdepcheck::cloud_details(, "DAPAR")` for more info
 
@@ -1545,7 +1545,7 @@ Run `revdepcheck::cloud_details(, "DART")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/dcanr
-* Number of recursive dependencies: 99
+* Number of recursive dependencies: 101
 
 Run `revdepcheck::cloud_details(, "dcanr")` for more info
 
@@ -1615,7 +1615,7 @@ Run `revdepcheck::cloud_details(, "dce")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/debrowser
-* Number of recursive dependencies: 224
+* Number of recursive dependencies: 226
 
 Run `revdepcheck::cloud_details(, "debrowser")` for more info
 
@@ -1650,7 +1650,7 @@ Run `revdepcheck::cloud_details(, "debrowser")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/destiny
-* Number of recursive dependencies: 244
+* Number of recursive dependencies: 245
 
 Run `revdepcheck::cloud_details(, "destiny")` for more info
 
@@ -1685,7 +1685,7 @@ Run `revdepcheck::cloud_details(, "destiny")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/DEsubs
-* Number of recursive dependencies: 115
+* Number of recursive dependencies: 117
 
 Run `revdepcheck::cloud_details(, "DEsubs")` for more info
 
@@ -1755,7 +1755,7 @@ Run `revdepcheck::cloud_details(, "diffcoexp")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/diffuStats
-* Number of recursive dependencies: 84
+* Number of recursive dependencies: 86
 
 Run `revdepcheck::cloud_details(, "diffuStats")` for more info
 
@@ -1790,7 +1790,7 @@ Run `revdepcheck::cloud_details(, "diffuStats")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/DmelSGI
-* Number of recursive dependencies: 149
+* Number of recursive dependencies: 147
 
 Run `revdepcheck::cloud_details(, "DmelSGI")` for more info
 
@@ -1860,7 +1860,7 @@ Run `revdepcheck::cloud_details(, "EBcoexpress")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/eegc
-* Number of recursive dependencies: 150
+* Number of recursive dependencies: 151
 
 Run `revdepcheck::cloud_details(, "eegc")` for more info
 
@@ -1895,7 +1895,7 @@ Run `revdepcheck::cloud_details(, "eegc")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/EGAD
-* Number of recursive dependencies: 92
+* Number of recursive dependencies: 93
 
 Run `revdepcheck::cloud_details(, "EGAD")` for more info
 
@@ -1930,7 +1930,7 @@ Run `revdepcheck::cloud_details(, "EGAD")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/EnMCB
-* Number of recursive dependencies: 259
+* Number of recursive dependencies: 260
 
 Run `revdepcheck::cloud_details(, "EnMCB")` for more info
 
@@ -2035,7 +2035,7 @@ Run `revdepcheck::cloud_details(, "epiNEM")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/epistasisGA
-* Number of recursive dependencies: 134
+* Number of recursive dependencies: 135
 
 Run `revdepcheck::cloud_details(, "epistasisGA")` for more info
 
@@ -2070,9 +2070,44 @@ Run `revdepcheck::cloud_details(, "epistasisGA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/esATAC
-* Number of recursive dependencies: 216
+* Number of recursive dependencies: 217
 
 Run `revdepcheck::cloud_details(, "esATAC")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# espadon
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/espadon
+* Number of recursive dependencies: 85
+
+Run `revdepcheck::cloud_details(, "espadon")` for more info
 
 </details>
 
@@ -2140,7 +2175,7 @@ Run `revdepcheck::cloud_details(, "EventPointer")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/FamAgg
-* Number of recursive dependencies: 87
+* Number of recursive dependencies: 89
 
 Run `revdepcheck::cloud_details(, "FamAgg")` for more info
 
@@ -2210,7 +2245,7 @@ Run `revdepcheck::cloud_details(, "fcoex")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/FELLA
-* Number of recursive dependencies: 114
+* Number of recursive dependencies: 115
 
 Run `revdepcheck::cloud_details(, "FELLA")` for more info
 
@@ -2280,7 +2315,7 @@ Run `revdepcheck::cloud_details(, "FGNet")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/FLAMES
-* Number of recursive dependencies: 246
+* Number of recursive dependencies: 247
 
 Run `revdepcheck::cloud_details(, "FLAMES")` for more info
 
@@ -2315,7 +2350,7 @@ Run `revdepcheck::cloud_details(, "FLAMES")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/Fletcher2013b
-* Number of recursive dependencies: 143
+* Number of recursive dependencies: 145
 
 Run `revdepcheck::cloud_details(, "Fletcher2013b")` for more info
 
@@ -2350,7 +2385,7 @@ Run `revdepcheck::cloud_details(, "Fletcher2013b")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/flowGraph
-* Number of recursive dependencies: 93
+* Number of recursive dependencies: 95
 
 Run `revdepcheck::cloud_details(, "flowGraph")` for more info
 
@@ -2385,7 +2420,7 @@ Run `revdepcheck::cloud_details(, "flowGraph")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/FlowSOM
-* Number of recursive dependencies: 150
+* Number of recursive dependencies: 152
 
 Run `revdepcheck::cloud_details(, "FlowSOM")` for more info
 
@@ -2420,7 +2455,7 @@ Run `revdepcheck::cloud_details(, "FlowSOM")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GeneGeneInteR
-* Number of recursive dependencies: 131
+* Number of recursive dependencies: 134
 
 Run `revdepcheck::cloud_details(, "GeneGeneInteR")` for more info
 
@@ -2455,9 +2490,44 @@ Run `revdepcheck::cloud_details(, "GeneGeneInteR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/geneplast
-* Number of recursive dependencies: 161
+* Number of recursive dependencies: 181
 
 Run `revdepcheck::cloud_details(, "geneplast")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# geneplast.data
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/geneplast.data
+* Number of recursive dependencies: 82
+
+Run `revdepcheck::cloud_details(, "geneplast.data")` for more info
 
 </details>
 
@@ -2490,7 +2560,7 @@ Run `revdepcheck::cloud_details(, "geneplast")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GENESIS
-* Number of recursive dependencies: 190
+* Number of recursive dependencies: 191
 
 Run `revdepcheck::cloud_details(, "GENESIS")` for more info
 
@@ -2560,7 +2630,7 @@ Run `revdepcheck::cloud_details(, "geNetClassifier")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GeneTonic
-* Number of recursive dependencies: 203
+* Number of recursive dependencies: 205
 
 Run `revdepcheck::cloud_details(, "GeneTonic")` for more info
 
@@ -2595,7 +2665,7 @@ Run `revdepcheck::cloud_details(, "GeneTonic")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GenomicInteractions
-* Number of recursive dependencies: 162
+* Number of recursive dependencies: 163
 
 Run `revdepcheck::cloud_details(, "GenomicInteractions")` for more info
 
@@ -2700,7 +2770,7 @@ Run `revdepcheck::cloud_details(, "GOSim")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GRaNIE
-* Number of recursive dependencies: 303
+* Number of recursive dependencies: 304
 
 Run `revdepcheck::cloud_details(, "GRaNIE")` for more info
 
@@ -2805,7 +2875,7 @@ Run `revdepcheck::cloud_details(, "GSAR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/GWENA
-* Number of recursive dependencies: 147
+* Number of recursive dependencies: 149
 
 Run `revdepcheck::cloud_details(, "GWENA")` for more info
 
@@ -2840,7 +2910,7 @@ Run `revdepcheck::cloud_details(, "GWENA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/HarmonizedTCGAData
-* Number of recursive dependencies: 108
+* Number of recursive dependencies: 110
 
 Run `revdepcheck::cloud_details(, "HarmonizedTCGAData")` for more info
 
@@ -2875,7 +2945,7 @@ Run `revdepcheck::cloud_details(, "HarmonizedTCGAData")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/HCAData
-* Number of recursive dependencies: 206
+* Number of recursive dependencies: 208
 
 Run `revdepcheck::cloud_details(, "HCAData")` for more info
 
@@ -2910,7 +2980,7 @@ Run `revdepcheck::cloud_details(, "HCAData")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/hipathia
-* Number of recursive dependencies: 168
+* Number of recursive dependencies: 170
 
 Run `revdepcheck::cloud_details(, "hipathia")` for more info
 
@@ -2980,7 +3050,7 @@ Run `revdepcheck::cloud_details(, "HPiP")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/imcRtools
-* Number of recursive dependencies: 276
+* Number of recursive dependencies: 277
 
 Run `revdepcheck::cloud_details(, "imcRtools")` for more info
 
@@ -3015,7 +3085,7 @@ Run `revdepcheck::cloud_details(, "imcRtools")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/IMMAN
-* Number of recursive dependencies: 93
+* Number of recursive dependencies: 95
 
 Run `revdepcheck::cloud_details(, "IMMAN")` for more info
 
@@ -3085,7 +3155,7 @@ Run `revdepcheck::cloud_details(, "INDEED")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/infercnv
-* Number of recursive dependencies: 197
+* Number of recursive dependencies: 199
 
 Run `revdepcheck::cloud_details(, "infercnv")` for more info
 
@@ -3120,7 +3190,7 @@ Run `revdepcheck::cloud_details(, "infercnv")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/InterCellar
-* Number of recursive dependencies: 202
+* Number of recursive dependencies: 203
 
 Run `revdepcheck::cloud_details(, "InterCellar")` for more info
 
@@ -3190,7 +3260,7 @@ Run `revdepcheck::cloud_details(, "InterMineR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/IntOMICS
-* Number of recursive dependencies: 223
+* Number of recursive dependencies: 224
 
 Run `revdepcheck::cloud_details(, "IntOMICS")` for more info
 
@@ -3225,7 +3295,7 @@ Run `revdepcheck::cloud_details(, "IntOMICS")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/IntramiRExploreR
-* Number of recursive dependencies: 97
+* Number of recursive dependencies: 99
 
 Run `revdepcheck::cloud_details(, "IntramiRExploreR")` for more info
 
@@ -3260,7 +3330,7 @@ Run `revdepcheck::cloud_details(, "IntramiRExploreR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/IRISFGM
-* Number of recursive dependencies: 290
+* Number of recursive dependencies: 292
 
 Run `revdepcheck::cloud_details(, "IRISFGM")` for more info
 
@@ -3295,7 +3365,7 @@ Run `revdepcheck::cloud_details(, "IRISFGM")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/iSEE
-* Number of recursive dependencies: 218
+* Number of recursive dependencies: 219
 
 Run `revdepcheck::cloud_details(, "iSEE")` for more info
 
@@ -3330,7 +3400,7 @@ Run `revdepcheck::cloud_details(, "iSEE")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/iSEEu
-* Number of recursive dependencies: 226
+* Number of recursive dependencies: 227
 
 Run `revdepcheck::cloud_details(, "iSEEu")` for more info
 
@@ -3400,7 +3470,7 @@ Run `revdepcheck::cloud_details(, "KEGGlincs")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/LACE
-* Number of recursive dependencies: 166
+* Number of recursive dependencies: 167
 
 Run `revdepcheck::cloud_details(, "LACE")` for more info
 
@@ -3435,7 +3505,7 @@ Run `revdepcheck::cloud_details(, "LACE")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/levi
-* Number of recursive dependencies: 95
+* Number of recursive dependencies: 97
 
 Run `revdepcheck::cloud_details(, "levi")` for more info
 
@@ -3470,7 +3540,7 @@ Run `revdepcheck::cloud_details(, "levi")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/Linnorm
-* Number of recursive dependencies: 105
+* Number of recursive dependencies: 107
 
 Run `revdepcheck::cloud_details(, "Linnorm")` for more info
 
@@ -3540,44 +3610,9 @@ Run `revdepcheck::cloud_details(, "lionessR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MAGAR
-* Number of recursive dependencies: 262
+* Number of recursive dependencies: 261
 
 Run `revdepcheck::cloud_details(, "MAGAR")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-
-
-
-
-
-
-```
-### CRAN
-
-```
-
-
-
-
-
-
-```
-# markovchain
-
-<details>
-
-* Version: NA
-* GitHub: NA
-* Source code: https://github.com/cran/markovchain
-* Number of recursive dependencies: 104
-
-Run `revdepcheck::cloud_details(, "markovchain")` for more info
 
 </details>
 
@@ -3610,7 +3645,7 @@ Run `revdepcheck::cloud_details(, "markovchain")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/martini
-* Number of recursive dependencies: 118
+* Number of recursive dependencies: 119
 
 Run `revdepcheck::cloud_details(, "martini")` for more info
 
@@ -3680,7 +3715,7 @@ Run `revdepcheck::cloud_details(, "mbOmic")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MetaboSignal
-* Number of recursive dependencies: 205
+* Number of recursive dependencies: 206
 
 Run `revdepcheck::cloud_details(, "MetaboSignal")` for more info
 
@@ -3715,7 +3750,7 @@ Run `revdepcheck::cloud_details(, "MetaboSignal")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MetaNeighbor
-* Number of recursive dependencies: 99
+* Number of recursive dependencies: 101
 
 Run `revdepcheck::cloud_details(, "MetaNeighbor")` for more info
 
@@ -3785,7 +3820,7 @@ Run `revdepcheck::cloud_details(, "MetID")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MetNet
-* Number of recursive dependencies: 124
+* Number of recursive dependencies: 126
 
 Run `revdepcheck::cloud_details(, "MetNet")` for more info
 
@@ -3820,7 +3855,7 @@ Run `revdepcheck::cloud_details(, "MetNet")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/miaSim
-* Number of recursive dependencies: 200
+* Number of recursive dependencies: 201
 
 Run `revdepcheck::cloud_details(, "miaSim")` for more info
 
@@ -3855,7 +3890,7 @@ Run `revdepcheck::cloud_details(, "miaSim")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/miloR
-* Number of recursive dependencies: 210
+* Number of recursive dependencies: 212
 
 Run `revdepcheck::cloud_details(, "miloR")` for more info
 
@@ -3925,7 +3960,7 @@ Run `revdepcheck::cloud_details(, "MineICA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/miRSM
-* Number of recursive dependencies: 357
+* Number of recursive dependencies: 358
 
 Run `revdepcheck::cloud_details(, "miRSM")` for more info
 
@@ -3960,7 +3995,7 @@ Run `revdepcheck::cloud_details(, "miRSM")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/miRspongeR
-* Number of recursive dependencies: 277
+* Number of recursive dependencies: 276
 
 Run `revdepcheck::cloud_details(, "miRspongeR")` for more info
 
@@ -3995,7 +4030,7 @@ Run `revdepcheck::cloud_details(, "miRspongeR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/mistyR
-* Number of recursive dependencies: 155
+* Number of recursive dependencies: 156
 
 Run `revdepcheck::cloud_details(, "mistyR")` for more info
 
@@ -4030,7 +4065,7 @@ Run `revdepcheck::cloud_details(, "mistyR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/mixOmics
-* Number of recursive dependencies: 96
+* Number of recursive dependencies: 98
 
 Run `revdepcheck::cloud_details(, "mixOmics")` for more info
 
@@ -4065,7 +4100,7 @@ Run `revdepcheck::cloud_details(, "mixOmics")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MMUPHin
-* Number of recursive dependencies: 272
+* Number of recursive dependencies: 274
 
 Run `revdepcheck::cloud_details(, "MMUPHin")` for more info
 
@@ -4170,7 +4205,7 @@ Run `revdepcheck::cloud_details(, "MOGAMUN")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/monocle
-* Number of recursive dependencies: 258
+* Number of recursive dependencies: 260
 
 Run `revdepcheck::cloud_details(, "monocle")` for more info
 
@@ -4205,7 +4240,7 @@ Run `revdepcheck::cloud_details(, "monocle")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/mosbi
-* Number of recursive dependencies: 107
+* Number of recursive dependencies: 109
 
 Run `revdepcheck::cloud_details(, "mosbi")` for more info
 
@@ -4275,7 +4310,7 @@ Run `revdepcheck::cloud_details(, "multiSight")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/mumosa
-* Number of recursive dependencies: 211
+* Number of recursive dependencies: 212
 
 Run `revdepcheck::cloud_details(, "mumosa")` for more info
 
@@ -4310,7 +4345,7 @@ Run `revdepcheck::cloud_details(, "mumosa")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/MWASTools
-* Number of recursive dependencies: 140
+* Number of recursive dependencies: 142
 
 Run `revdepcheck::cloud_details(, "MWASTools")` for more info
 
@@ -4345,7 +4380,7 @@ Run `revdepcheck::cloud_details(, "MWASTools")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/Nebulosa
-* Number of recursive dependencies: 236
+* Number of recursive dependencies: 238
 
 Run `revdepcheck::cloud_details(, "Nebulosa")` for more info
 
@@ -4380,7 +4415,7 @@ Run `revdepcheck::cloud_details(, "Nebulosa")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/netDx
-* Number of recursive dependencies: 248
+* Number of recursive dependencies: 249
 
 Run `revdepcheck::cloud_details(, "netDx")` for more info
 
@@ -4415,7 +4450,7 @@ Run `revdepcheck::cloud_details(, "netDx")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/netOmics
-* Number of recursive dependencies: 177
+* Number of recursive dependencies: 178
 
 Run `revdepcheck::cloud_details(, "netOmics")` for more info
 
@@ -4555,7 +4590,7 @@ Run `revdepcheck::cloud_details(, "NetSAM")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/netSmooth
-* Number of recursive dependencies: 222
+* Number of recursive dependencies: 223
 
 Run `revdepcheck::cloud_details(, "netSmooth")` for more info
 
@@ -4590,7 +4625,7 @@ Run `revdepcheck::cloud_details(, "netSmooth")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/netZooR
-* Number of recursive dependencies: 226
+* Number of recursive dependencies: 227
 
 Run `revdepcheck::cloud_details(, "netZooR")` for more info
 
@@ -4625,7 +4660,7 @@ Run `revdepcheck::cloud_details(, "netZooR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/NoRCE
-* Number of recursive dependencies: 156
+* Number of recursive dependencies: 157
 
 Run `revdepcheck::cloud_details(, "NoRCE")` for more info
 
@@ -4660,7 +4695,7 @@ Run `revdepcheck::cloud_details(, "NoRCE")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/OmnipathR
-* Number of recursive dependencies: 157
+* Number of recursive dependencies: 158
 
 Run `revdepcheck::cloud_details(, "OmnipathR")` for more info
 
@@ -4695,7 +4730,7 @@ Run `revdepcheck::cloud_details(, "OmnipathR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/OncoSimulR
-* Number of recursive dependencies: 102
+* Number of recursive dependencies: 104
 
 Run `revdepcheck::cloud_details(, "OncoSimulR")` for more info
 
@@ -4730,7 +4765,7 @@ Run `revdepcheck::cloud_details(, "OncoSimulR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ontoProc
-* Number of recursive dependencies: 124
+* Number of recursive dependencies: 126
 
 Run `revdepcheck::cloud_details(, "ontoProc")` for more info
 
@@ -5045,7 +5080,7 @@ Run `revdepcheck::cloud_details(, "pandaR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/PanomiR
-* Number of recursive dependencies: 182
+* Number of recursive dependencies: 184
 
 Run `revdepcheck::cloud_details(, "PanomiR")` for more info
 
@@ -5115,7 +5150,7 @@ Run `revdepcheck::cloud_details(, "PANR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/PanViz
-* Number of recursive dependencies: 79
+* Number of recursive dependencies: 81
 
 Run `revdepcheck::cloud_details(, "PanViz")` for more info
 
@@ -5220,7 +5255,7 @@ Run `revdepcheck::cloud_details(, "Path2PPI")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/paxtoolsr
-* Number of recursive dependencies: 167
+* Number of recursive dependencies: 168
 
 Run `revdepcheck::cloud_details(, "paxtoolsr")` for more info
 
@@ -5325,7 +5360,7 @@ Run `revdepcheck::cloud_details(, "PDATK")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/PFP
-* Number of recursive dependencies: 152
+* Number of recursive dependencies: 154
 
 Run `revdepcheck::cloud_details(, "PFP")` for more info
 
@@ -5360,7 +5395,7 @@ Run `revdepcheck::cloud_details(, "PFP")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/phemd
-* Number of recursive dependencies: 227
+* Number of recursive dependencies: 229
 
 Run `revdepcheck::cloud_details(, "phemd")` for more info
 
@@ -5430,7 +5465,7 @@ Run `revdepcheck::cloud_details(, "PhenoGeneRanker")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/phenomis
-* Number of recursive dependencies: 166
+* Number of recursive dependencies: 168
 
 Run `revdepcheck::cloud_details(, "phenomis")` for more info
 
@@ -5465,7 +5500,7 @@ Run `revdepcheck::cloud_details(, "phenomis")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/PhosR
-* Number of recursive dependencies: 182
+* Number of recursive dependencies: 183
 
 Run `revdepcheck::cloud_details(, "PhosR")` for more info
 
@@ -5500,7 +5535,7 @@ Run `revdepcheck::cloud_details(, "PhosR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/phyloseq
-* Number of recursive dependencies: 146
+* Number of recursive dependencies: 148
 
 Run `revdepcheck::cloud_details(, "phyloseq")` for more info
 
@@ -5535,7 +5570,7 @@ Run `revdepcheck::cloud_details(, "phyloseq")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/Pi
-* Number of recursive dependencies: 255
+* Number of recursive dependencies: 256
 
 Run `revdepcheck::cloud_details(, "Pi")` for more info
 
@@ -5633,6 +5668,41 @@ Run `revdepcheck::cloud_details(, "PPInfer")` for more info
 
 
 ```
+# ProjectManagement
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/ProjectManagement
+* Number of recursive dependencies: 79
+
+Run `revdepcheck::cloud_details(, "ProjectManagement")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
 # proteasy
 
 <details>
@@ -5675,7 +5745,7 @@ Run `revdepcheck::cloud_details(, "proteasy")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/PSMatch
-* Number of recursive dependencies: 182
+* Number of recursive dependencies: 185
 
 Run `revdepcheck::cloud_details(, "PSMatch")` for more info
 
@@ -5710,7 +5780,7 @@ Run `revdepcheck::cloud_details(, "PSMatch")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/psygenet2r
-* Number of recursive dependencies: 122
+* Number of recursive dependencies: 123
 
 Run `revdepcheck::cloud_details(, "psygenet2r")` for more info
 
@@ -5780,7 +5850,7 @@ Run `revdepcheck::cloud_details(, "pwOmics")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/QFeatures
-* Number of recursive dependencies: 154
+* Number of recursive dependencies: 156
 
 Run `revdepcheck::cloud_details(, "QFeatures")` for more info
 
@@ -5815,7 +5885,7 @@ Run `revdepcheck::cloud_details(, "QFeatures")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/qmtools
-* Number of recursive dependencies: 179
+* Number of recursive dependencies: 181
 
 Run `revdepcheck::cloud_details(, "qmtools")` for more info
 
@@ -5878,6 +5948,76 @@ Run `revdepcheck::cloud_details(, "R3CPET")` for more info
 
 
 ```
+# ragt2ridges
+
+<details>
+
+* Version: 0.3.4
+* GitHub: https://github.com/wvanwie/ragt2ridges
+* Source code: https://github.com/cran/ragt2ridges
+* Date/Publication: 2020-01-28 15:30:02 UTC
+* Number of recursive dependencies: 91
+
+Run `revdepcheck::cloud_details(, "ragt2ridges")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘ragt2ridges’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘ragt2ridges’ ...
+** package ‘ragt2ridges’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c ragt2ridges.cpp -o ragt2ridges.o
+gcc -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
+g++ -std=gnu++14 -shared -L/opt/R/4.2.1/lib/R/lib -L/usr/local/lib -o ragt2ridges.so RcppExports.o ragt2ridges.o registerDynamicSymbol.o -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.2.1/lib/R/lib -lR
+installing to /tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/00LOCK-ragt2ridges/00new/ragt2ridges/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: objects ‘ridgePchordal’, ‘support4ridgeP’ are not exported by 'namespace:rags2ridges'
+Execution halted
+ERROR: lazy loading failed for package ‘ragt2ridges’
+* removing ‘/tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/ragt2ridges’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘ragt2ridges’ ...
+** package ‘ragt2ridges’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
+g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c ragt2ridges.cpp -o ragt2ridges.o
+gcc -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
+g++ -std=gnu++14 -shared -L/opt/R/4.2.1/lib/R/lib -L/usr/local/lib -o ragt2ridges.so RcppExports.o ragt2ridges.o registerDynamicSymbol.o -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.2.1/lib/R/lib -lR
+installing to /tmp/workdir/ragt2ridges/old/ragt2ridges.Rcheck/00LOCK-ragt2ridges/00new/ragt2ridges/libs
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: objects ‘ridgePchordal’, ‘support4ridgeP’ are not exported by 'namespace:rags2ridges'
+Execution halted
+ERROR: lazy loading failed for package ‘ragt2ridges’
+* removing ‘/tmp/workdir/ragt2ridges/old/ragt2ridges.Rcheck/ragt2ridges’
+
+
+```
 # RandomWalkRestartMH
 
 <details>
@@ -5885,7 +6025,7 @@ Run `revdepcheck::cloud_details(, "R3CPET")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/RandomWalkRestartMH
-* Number of recursive dependencies: 81
+* Number of recursive dependencies: 82
 
 Run `revdepcheck::cloud_details(, "RandomWalkRestartMH")` for more info
 
@@ -5955,7 +6095,7 @@ Run `revdepcheck::cloud_details(, "rBiopaxParser")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/RcisTarget
-* Number of recursive dependencies: 161
+* Number of recursive dependencies: 163
 
 Run `revdepcheck::cloud_details(, "RcisTarget")` for more info
 
@@ -6025,7 +6165,7 @@ Run `revdepcheck::cloud_details(, "RCSL")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/RCX
-* Number of recursive dependencies: 61
+* Number of recursive dependencies: 63
 
 Run `revdepcheck::cloud_details(, "RCX")` for more info
 
@@ -6095,7 +6235,7 @@ Run `revdepcheck::cloud_details(, "RCy3")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ReactomePA
-* Number of recursive dependencies: 155
+* Number of recursive dependencies: 157
 
 Run `revdepcheck::cloud_details(, "ReactomePA")` for more info
 
@@ -6130,7 +6270,7 @@ Run `revdepcheck::cloud_details(, "ReactomePA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/rebook
-* Number of recursive dependencies: 244
+* Number of recursive dependencies: 245
 
 Run `revdepcheck::cloud_details(, "rebook")` for more info
 
@@ -6270,7 +6410,7 @@ Run `revdepcheck::cloud_details(, "RLassoCox")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/rScudo
-* Number of recursive dependencies: 152
+* Number of recursive dependencies: 154
 
 Run `revdepcheck::cloud_details(, "rScudo")` for more info
 
@@ -6305,7 +6445,7 @@ Run `revdepcheck::cloud_details(, "rScudo")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/rsemmed
-* Number of recursive dependencies: 60
+* Number of recursive dependencies: 62
 
 Run `revdepcheck::cloud_details(, "rsemmed")` for more info
 
@@ -6340,7 +6480,7 @@ Run `revdepcheck::cloud_details(, "rsemmed")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/RTN
-* Number of recursive dependencies: 137
+* Number of recursive dependencies: 139
 
 Run `revdepcheck::cloud_details(, "RTN")` for more info
 
@@ -6445,7 +6585,7 @@ Run `revdepcheck::cloud_details(, "SANTA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SBGNview
-* Number of recursive dependencies: 100
+* Number of recursive dependencies: 102
 
 Run `revdepcheck::cloud_details(, "SBGNview")` for more info
 
@@ -6515,7 +6655,7 @@ Run `revdepcheck::cloud_details(, "scClassify")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scDblFinder
-* Number of recursive dependencies: 219
+* Number of recursive dependencies: 220
 
 Run `revdepcheck::cloud_details(, "scDblFinder")` for more info
 
@@ -6585,7 +6725,7 @@ Run `revdepcheck::cloud_details(, "SCFA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/schex
-* Number of recursive dependencies: 263
+* Number of recursive dependencies: 265
 
 Run `revdepcheck::cloud_details(, "schex")` for more info
 
@@ -6655,7 +6795,7 @@ Run `revdepcheck::cloud_details(, "scHOT")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scMerge
-* Number of recursive dependencies: 216
+* Number of recursive dependencies: 217
 
 Run `revdepcheck::cloud_details(, "scMerge")` for more info
 
@@ -6690,7 +6830,7 @@ Run `revdepcheck::cloud_details(, "scMerge")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scPipe
-* Number of recursive dependencies: 255
+* Number of recursive dependencies: 256
 
 Run `revdepcheck::cloud_details(, "scPipe")` for more info
 
@@ -6725,7 +6865,7 @@ Run `revdepcheck::cloud_details(, "scPipe")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scran
-* Number of recursive dependencies: 227
+* Number of recursive dependencies: 228
 
 Run `revdepcheck::cloud_details(, "scran")` for more info
 
@@ -6795,7 +6935,7 @@ Run `revdepcheck::cloud_details(, "scRepertoire")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scTensor
-* Number of recursive dependencies: 301
+* Number of recursive dependencies: 302
 
 Run `revdepcheck::cloud_details(, "scTensor")` for more info
 
@@ -6830,7 +6970,7 @@ Run `revdepcheck::cloud_details(, "scTensor")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scTGIF
-* Number of recursive dependencies: 211
+* Number of recursive dependencies: 212
 
 Run `revdepcheck::cloud_details(, "scTGIF")` for more info
 
@@ -6865,7 +7005,7 @@ Run `revdepcheck::cloud_details(, "scTGIF")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/scTreeViz
-* Number of recursive dependencies: 281
+* Number of recursive dependencies: 282
 
 Run `revdepcheck::cloud_details(, "scTreeViz")` for more info
 
@@ -6900,7 +7040,7 @@ Run `revdepcheck::cloud_details(, "scTreeViz")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SEPIRA
-* Number of recursive dependencies: 56
+* Number of recursive dependencies: 58
 
 Run `revdepcheck::cloud_details(, "SEPIRA")` for more info
 
@@ -7040,7 +7180,7 @@ Run `revdepcheck::cloud_details(, "ShapePattern")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SIMLR
-* Number of recursive dependencies: 63
+* Number of recursive dependencies: 65
 
 Run `revdepcheck::cloud_details(, "SIMLR")` for more info
 
@@ -7075,7 +7215,7 @@ Run `revdepcheck::cloud_details(, "SIMLR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/simplifyEnrichment
-* Number of recursive dependencies: 224
+* Number of recursive dependencies: 226
 
 Run `revdepcheck::cloud_details(, "simplifyEnrichment")` for more info
 
@@ -7180,7 +7320,7 @@ Run `revdepcheck::cloud_details(, "SingleCellSignalR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/singleCellTK
-* Number of recursive dependencies: 395
+* Number of recursive dependencies: 397
 
 Run `revdepcheck::cloud_details(, "singleCellTK")` for more info
 
@@ -7250,7 +7390,7 @@ Run `revdepcheck::cloud_details(, "SingleRBook")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/slingshot
-* Number of recursive dependencies: 185
+* Number of recursive dependencies: 186
 
 Run `revdepcheck::cloud_details(, "slingshot")` for more info
 
@@ -7355,7 +7495,7 @@ Run `revdepcheck::cloud_details(, "Spaniel")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SpatialCPie
-* Number of recursive dependencies: 127
+* Number of recursive dependencies: 128
 
 Run `revdepcheck::cloud_details(, "SpatialCPie")` for more info
 
@@ -7390,7 +7530,7 @@ Run `revdepcheck::cloud_details(, "SpatialCPie")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/spatialHeatmap
-* Number of recursive dependencies: 293
+* Number of recursive dependencies: 298
 
 Run `revdepcheck::cloud_details(, "spatialHeatmap")` for more info
 
@@ -7460,7 +7600,7 @@ Run `revdepcheck::cloud_details(, "SpidermiR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/splatter
-* Number of recursive dependencies: 260
+* Number of recursive dependencies: 261
 
 Run `revdepcheck::cloud_details(, "splatter")` for more info
 
@@ -7565,7 +7705,7 @@ Run `revdepcheck::cloud_details(, "splineTimeR")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SPONGE
-* Number of recursive dependencies: 259
+* Number of recursive dependencies: 257
 
 Run `revdepcheck::cloud_details(, "SPONGE")` for more info
 
@@ -7600,7 +7740,7 @@ Run `revdepcheck::cloud_details(, "SPONGE")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/SPOTlight
-* Number of recursive dependencies: 256
+* Number of recursive dependencies: 258
 
 Run `revdepcheck::cloud_details(, "SPOTlight")` for more info
 
@@ -7635,7 +7775,7 @@ Run `revdepcheck::cloud_details(, "SPOTlight")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/sSNAPPY
-* Number of recursive dependencies: 176
+* Number of recursive dependencies: 178
 
 Run `revdepcheck::cloud_details(, "sSNAPPY")` for more info
 
@@ -7692,6 +7832,70 @@ Run `revdepcheck::cloud_details(, "StarBioTrek")` for more info
 
 ```
 
+
+
+
+
+
+```
+# streamDAG
+
+<details>
+
+* Version: 1.5
+* GitHub: NA
+* Source code: https://github.com/cran/streamDAG
+* Date/Publication: 2023-10-06 18:50:02 UTC
+* Number of recursive dependencies: 133
+
+Run `revdepcheck::cloud_details(, "streamDAG")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/streamDAG/new/streamDAG.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘streamDAG/DESCRIPTION’ ... OK
+* this is package ‘streamDAG’ version ‘1.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘asbio’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/streamDAG/old/streamDAG.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘streamDAG/DESCRIPTION’ ... OK
+* this is package ‘streamDAG’ version ‘1.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘asbio’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
@@ -7845,7 +8049,7 @@ Run `revdepcheck::cloud_details(, "SynExtend")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/syntenet
-* Number of recursive dependencies: 142
+* Number of recursive dependencies: 144
 
 Run `revdepcheck::cloud_details(, "syntenet")` for more info
 
@@ -7915,7 +8119,7 @@ Run `revdepcheck::cloud_details(, "TCGAbiolinks")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ternarynet
-* Number of recursive dependencies: 43
+* Number of recursive dependencies: 45
 
 Run `revdepcheck::cloud_details(, "ternarynet")` for more info
 
@@ -7985,7 +8189,7 @@ Run `revdepcheck::cloud_details(, "tidybulk")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/tidySingleCellExperiment
-* Number of recursive dependencies: 234
+* Number of recursive dependencies: 235
 
 Run `revdepcheck::cloud_details(, "tidySingleCellExperiment")` for more info
 
@@ -8020,7 +8224,7 @@ Run `revdepcheck::cloud_details(, "tidySingleCellExperiment")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/timeOmics
-* Number of recursive dependencies: 146
+* Number of recursive dependencies: 147
 
 Run `revdepcheck::cloud_details(, "timeOmics")` for more info
 
@@ -8055,7 +8259,7 @@ Run `revdepcheck::cloud_details(, "timeOmics")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/TimiRGeN
-* Number of recursive dependencies: 211
+* Number of recursive dependencies: 212
 
 Run `revdepcheck::cloud_details(, "TimiRGeN")` for more info
 
@@ -8090,7 +8294,7 @@ Run `revdepcheck::cloud_details(, "TimiRGeN")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/TOP
-* Number of recursive dependencies: 261
+* Number of recursive dependencies: 262
 
 Run `revdepcheck::cloud_details(, "TOP")` for more info
 
@@ -8125,7 +8329,7 @@ Run `revdepcheck::cloud_details(, "TOP")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/tradeSeq
-* Number of recursive dependencies: 178
+* Number of recursive dependencies: 179
 
 Run `revdepcheck::cloud_details(, "tradeSeq")` for more info
 
@@ -8160,7 +8364,7 @@ Run `revdepcheck::cloud_details(, "tradeSeq")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/TrajectoryUtils
-* Number of recursive dependencies: 88
+* Number of recursive dependencies: 90
 
 Run `revdepcheck::cloud_details(, "TrajectoryUtils")` for more info
 
@@ -8265,7 +8469,7 @@ Run `revdepcheck::cloud_details(, "TreeAndLeaf")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/treeio
-* Number of recursive dependencies: 105
+* Number of recursive dependencies: 106
 
 Run `revdepcheck::cloud_details(, "treeio")` for more info
 
@@ -8300,7 +8504,7 @@ Run `revdepcheck::cloud_details(, "treeio")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/TRONCO
-* Number of recursive dependencies: 101
+* Number of recursive dependencies: 103
 
 Run `revdepcheck::cloud_details(, "TRONCO")` for more info
 
@@ -8335,7 +8539,7 @@ Run `revdepcheck::cloud_details(, "TRONCO")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/TSCAN
-* Number of recursive dependencies: 128
+* Number of recursive dependencies: 130
 
 Run `revdepcheck::cloud_details(, "TSCAN")` for more info
 
@@ -8370,7 +8574,7 @@ Run `revdepcheck::cloud_details(, "TSCAN")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/uSORT
-* Number of recursive dependencies: 109
+* Number of recursive dependencies: 111
 
 Run `revdepcheck::cloud_details(, "uSORT")` for more info
 
@@ -8405,7 +8609,7 @@ Run `revdepcheck::cloud_details(, "uSORT")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/veloviz
-* Number of recursive dependencies: 59
+* Number of recursive dependencies: 61
 
 Run `revdepcheck::cloud_details(, "veloviz")` for more info
 
@@ -8440,7 +8644,7 @@ Run `revdepcheck::cloud_details(, "veloviz")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ViSEAGO
-* Number of recursive dependencies: 165
+* Number of recursive dependencies: 166
 
 Run `revdepcheck::cloud_details(, "ViSEAGO")` for more info
 
@@ -8475,7 +8679,7 @@ Run `revdepcheck::cloud_details(, "ViSEAGO")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/vissE
-* Number of recursive dependencies: 198
+* Number of recursive dependencies: 203
 
 Run `revdepcheck::cloud_details(, "vissE")` for more info
 
@@ -8511,7 +8715,7 @@ Run `revdepcheck::cloud_details(, "vissE")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/vivid
 * Date/Publication: 2023-07-10 22:20:02 UTC
-* Number of recursive dependencies: 211
+* Number of recursive dependencies: 212
 
 Run `revdepcheck::cloud_details(, "vivid")` for more info
 
@@ -8586,7 +8790,7 @@ Status: 1 NOTE
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/wppi
-* Number of recursive dependencies: 87
+* Number of recursive dependencies: 88
 
 Run `revdepcheck::cloud_details(, "wppi")` for more info
 
@@ -8656,7 +8860,7 @@ Run `revdepcheck::cloud_details(, "XINA")` for more info
 * Version: NA
 * GitHub: NA
 * Source code: https://github.com/cran/ZygosityPredictor
-* Number of recursive dependencies: 121
+* Number of recursive dependencies: 122
 
 Run `revdepcheck::cloud_details(, "ZygosityPredictor")` for more info
 
