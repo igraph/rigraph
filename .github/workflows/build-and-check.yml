@@ -247,4 +247,4 @@ jobs:
             printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
-            RDcsan -q -e 'Sys.setenv(TESTTHAT_PARALLEL=FALSE); testthat::test_local(reporter = "location", load_package = "installed")'
+            TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = "location", load_package = "installed")'
