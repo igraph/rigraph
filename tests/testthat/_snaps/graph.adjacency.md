@@ -8,12 +8,6 @@
       + edges:
       [1] 2->1 2->1
     Code
-      graph_from_adjacency_matrix(m, mode = "undirected")
-    Output
-      IGRAPH U--- 2 2 -- 
-      + edges:
-      [1] 1--2 1--2
-    Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
       IGRAPH U--- 2 2 -- 
