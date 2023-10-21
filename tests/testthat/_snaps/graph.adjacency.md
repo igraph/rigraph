@@ -8,6 +8,16 @@
       + edges:
       [1] 2->1 2->1
     Code
+      graph_from_adjacency_matrix(m, mode = "undirected")
+    Condition
+      Warning:
+      The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric with mode = "undirected" as of igraph 1.5.2.
+      i Use mode = "max" to achieve the original behavior.
+    Output
+      IGRAPH U--- 2 2 -- 
+      + edges:
+      [1] 1--2 1--2
+    Code
       graph_from_adjacency_matrix(m, mode = "max")
     Output
       IGRAPH U--- 2 2 -- 
@@ -27,13 +37,4 @@
       + attr: w (e/n)
       + edge:
       [1] 2->1
-
----
-
-    Code
-      graph_from_adjacency_matrix(m, mode = "undirected")
-    Condition
-      Error:
-      ! The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be symmetric if mode = "undirected" as of igraph 1.5.2.
-      i Use mode = "max" to achieve the original behavior.
 

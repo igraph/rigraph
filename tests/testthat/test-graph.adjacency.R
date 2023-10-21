@@ -243,14 +243,10 @@ test_that("graph_from_adjacency_matrix() snapshot", {
     m <- matrix(c(0, 2.5, 0, 0), ncol = 2)
 
     graph_from_adjacency_matrix(m)
+    graph_from_adjacency_matrix(m, mode = "undirected")
     graph_from_adjacency_matrix(m, mode = "max")
     graph_from_adjacency_matrix(m, weighted = TRUE)
     graph_from_adjacency_matrix(m, weighted = "w")
-  })
-
-  rlang::local_options(lifecycle_verbosity = "error")
-  expect_snapshot(error = TRUE, {
-    graph_from_adjacency_matrix(m, mode = "undirected")
   })
 })
 
