@@ -1,6 +1,6 @@
 # Revdeps
 
-## Failed to check (247)
+## Failed to check (251)
 
 |package                  |version |error |warning |note |
 |:------------------------|:-------|:-----|:-------|:----|
@@ -64,6 +64,7 @@
 |epiNEM                   |?       |      |        |     |
 |epistasisGA              |?       |      |        |     |
 |esATAC                   |?       |      |        |     |
+|espadon                  |?       |      |        |     |
 |EventPointer             |?       |      |        |     |
 |FamAgg                   |?       |      |        |     |
 |fcoex                    |?       |      |        |     |
@@ -75,6 +76,7 @@
 |FlowSOM                  |?       |      |        |     |
 |GeneGeneInteR            |?       |      |        |     |
 |geneplast                |?       |      |        |     |
+|geneplast.data           |?       |      |        |     |
 |GENESIS                  |?       |      |        |     |
 |geNetClassifier          |?       |      |        |     |
 |GeneTonic                |?       |      |        |     |
@@ -106,7 +108,6 @@
 |Linnorm                  |?       |      |        |     |
 |lionessR                 |?       |      |        |     |
 |MAGAR                    |?       |      |        |     |
-|markovchain              |?       |      |        |     |
 |martini                  |?       |      |        |     |
 |mbOmic                   |?       |      |        |     |
 |MetaboSignal             |?       |      |        |     |
@@ -165,6 +166,7 @@
 |Pi                       |?       |      |        |     |
 |piano                    |?       |      |        |     |
 |PPInfer                  |?       |      |        |     |
+|ProjectManagement        |?       |      |        |     |
 |proteasy                 |?       |      |        |     |
 |PSMatch                  |?       |      |        |     |
 |psygenet2r               |?       |      |        |     |
@@ -172,6 +174,7 @@
 |QFeatures                |?       |      |        |     |
 |qmtools                  |?       |      |        |     |
 |R3CPET                   |?       |      |        |     |
+|ragt2ridges              |0.3.4   |1     |        |     |
 |RandomWalkRestartMH      |?       |      |        |     |
 |rBiopaxParser            |?       |      |        |     |
 |RcisTarget               |?       |      |        |     |
@@ -224,6 +227,7 @@
 |SPOTlight                |?       |      |        |     |
 |sSNAPPY                  |?       |      |        |     |
 |StarBioTrek              |?       |      |        |     |
+|streamDAG                |?       |      |        |     |
 |STRINGdb                 |?       |      |        |     |
 |supraHex                 |?       |      |        |     |
 |synaptome.db             |?       |      |        |     |
@@ -254,8 +258,8 @@
 
 ## New problems (2)
 
-|package        |version |error |warning |note   |
-|:--------------|:-------|:-----|:-------|:------|
-|[BASiNETEntropy](problems.md#basinetentropy)|0.99.5  |      |__+1__  |__+1__ |
-|[bibliometrix](problems.md#bibliometrix)|4.1.3   |      |__+1__  |__+1__ |
+|package      |version |error  |warning |note   |
+|:------------|:-------|:------|:-------|:------|
+|[bibliometrix](problems.md#bibliometrix)|4.1.3   |       |__+1__  |__+1__ |
+|[pcalg](problems.md#pcalg)|2.7-9   |__+1__ |        |3      |
 

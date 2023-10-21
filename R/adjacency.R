@@ -22,13 +22,7 @@
 ##
 ## -----------------------------------------------------------------
 
-graph.adjacency.dense <- function(adjmatrix,
-                                  mode = c(
-                                    "directed", "undirected", "max",
-                                    "min", "upper", "lower", "plus"
-                                  ),
-                                  weighted = NULL, diag = TRUE) {
-  mode <- igraph.match.arg(mode)
+graph.adjacency.dense <- function(adjmatrix, mode, weighted = NULL, diag = TRUE) {
   mode <- switch(mode,
     "directed" = 0,
     "undirected" = 1,
@@ -87,13 +81,7 @@ mysummary <- function(x) {
 }
 
 
-graph.adjacency.sparse <- function(adjmatrix, mode = c(
-                                     "directed", "undirected", "max",
-                                     "min", "upper", "lower", "plus"
-                                   ),
-                                   weighted = NULL, diag = TRUE) {
-  mode <- igraph.match.arg(mode)
-
+graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE) {
   if (!is.null(weighted)) {
     if (is.logical(weighted) && weighted) {
       weighted <- "weight"
@@ -114,10 +102,6 @@ graph.adjacency.sparse <- function(adjmatrix, mode = c(
     adjmatrix <- as(adjmatrix, "CsparseMatrix")
   } else if (inherits(adjmatrix, "ddiMatrix")) {
     adjmatrix <- as(adjmatrix, "CsparseMatrix")
-  }
-
-  if (is.null(weighted) && mode == "undirected") {
-    mode <- "max"
   }
 
   if (mode == "directed") {
@@ -385,6 +369,20 @@ graph_from_adjacency_matrix <- function(adjmatrix,
                                         ),
                                         weighted = NULL, diag = TRUE,
                                         add.colnames = NULL, add.rownames = NA) {
+
+  mode <- igraph.match.arg(mode)
+
+  if (mode == "undirected") {
+    if (!is_symmetric(adjmatrix)) {
+      lifecycle::deprecate_soft(
+        "1.5.2",
+        "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
+        details = 'Use mode = "max" to achieve the original behavior.'
+      )
+      mode <- "max"
+    }
+  }
+
   if (inherits(adjmatrix, "Matrix")) {
     res <- graph.adjacency.sparse(adjmatrix, mode = mode, weighted = weighted, diag = diag)
   } else {
@@ -432,6 +430,14 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   }
 
   res
+}
+
+is_symmetric <- function(x) {
+  if (inherits(x, "Matrix")) {
+    Matrix::isSymmetric(x)
+  } else {
+    isSymmetric(x)
+  }
 }
 
 #' @rdname graph_from_adjacency_matrix
