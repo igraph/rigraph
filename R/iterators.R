@@ -1311,7 +1311,7 @@ print.igraph.vs <- function(x,
 #' Print an edge sequence to the screen
 #'
 #' For long edge sequences, the printing is truncated to fit to the
-#' screen. Use [print()] explicitly and the code{full} argument to
+#' screen. Use [print()] explicitly and the `full` argument to
 #' see the full sequence.
 #'
 #' Edge sequences created with the double bracket operator are printed

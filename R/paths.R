@@ -219,7 +219,7 @@ eccentricity <- eccentricity_impl
 #'   argument is ignored for undirected graphs.
 #' @return A numeric scalar, the radius of the graph.
 #' @seealso [eccentricity()] for the underlying
-#'   calculations, code{[distances]} for general shortest path
+#'   calculations, [distances] for general shortest path
 #'   calculations.
 #' @references Harary, F. Graph Theory. Reading, MA: Addison-Wesley, p. 35,
 #' 1994.

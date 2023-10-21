@@ -46,3 +46,4 @@
 ^src/install$
 ^src/vendor/cigraph/\..*$
 ^rconfigure\.py$
+^\.ccache$
