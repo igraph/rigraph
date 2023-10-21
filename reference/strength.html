@@ -99,7 +99,8 @@ argument is ignored.</p></dd>
 <dd><p>Weight vector. If the graph has a <code>weight</code> edge
 attribute, then this is used by default. If the graph does not have a
 <code>weight</code> edge attribute and this argument is <code>NULL</code>, then a
-warning is given and <code><a href="degree.html">degree()</a></code> is called.</p></dd>
+<code><a href="degree.html">degree()</a></code> is called. If this is <code>NA</code>, then no edge weights are used
+(even if the graph has a <code>weight</code> edge attribute).</p></dd>
 
 </dl></div>
     <div class="section level2">
