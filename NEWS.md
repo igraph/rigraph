@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9012
+
+## Features
+
+  - Warn if non-symmetric undirected adjacency matrix (#904).
+
+## Chore
+
+  - Declare CI for sanitizer builds.
+
+  - Update to testthat 3.2.0.
+
+## Documentation
+
+  - Strength() does not give a warning when no weights are given.
+
+## Testing
+
+  - Fix checks.
+
+
 # igraph 1.5.1.9011
 
 ## Chore
