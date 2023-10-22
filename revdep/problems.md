@@ -411,51 +411,6 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
     Package which this enhances but not available for checking: ‘Rgraphviz’
     ```
 
-# modnets
-
-<details>
-
-* Version: 0.9.0
-* GitHub: https://github.com/tswanson222/modnets
-* Source code: https://github.com/cran/modnets
-* Date/Publication: 2021-10-01 08:20:02 UTC
-* Number of recursive dependencies: 138
-
-Run `revdepcheck::cloud_details(, "modnets")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘modnets-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: CentralityAndClustering
-    > ### Title: Create table of centrality values or clustering coefficients
-    > ### Aliases: CentralityAndClustering centTable clustTable
-    > 
-    > ### ** Examples
-    > 
-    > x <- fitNetwork(gvarDat, 'M', lags = TRUE)
-    > 
-    > clustTable(x)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: clustTable ... lapply -> FUN -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.6Mb
-      sub-directories of 1Mb or more:
-        data   3.8Mb
-    ```
-
 # molnet
 
 <details>
@@ -807,23 +762,23 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
     Running examples in ‘pcalg-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: jointIda
-    > ### Title: Estimate Multiset of Possible Total Joint Effects
-    > ### Aliases: jointIda
+    > ### Name: pc
+    > ### Title: Estimate the Equivalence Class of a DAG using the PC Algorithm
+    > ### Aliases: pc
     > ### Keywords: multivariate models graphs
     > 
     > ### ** Examples
     > 
     ...
-        tapply, union, unique, unsplit, which.max, which.min
+    Order=3; remaining edges:16
     
-    Loading required package: grid
+    Rule 1': 1 -> 6  and  6 - 7  where  1  and  7  not connected and  1 6 7  faithful triple:  6 -> 7 
     > 
-    > ## Suppose that we know the true CPDAG and covariance matrix
-    > jointIda(x.pos=c(1,2), y.pos=6, covTrue, graphEst=myCPDAG, technique="RRC", type = "cpdag")
+    > ## due to sampling error, some edges were overwritten:
+    > isValidGraph(as(pc.fit, "amat"), type = "cpdag")
     Error in UseMethod("isSymmetric") : 
-      no applicable method for 'isSymmetric' applied to an object of class "c('double', 'numeric')"
-    Calls: jointIda ... ensure_igraph -> graph.adjacency -> is_symmetric -> isSymmetric
+      no applicable method for 'isSymmetric' applied to an object of class "amat"
+    Calls: isValidGraph ... ensure_igraph -> graph.adjacency -> is_symmetric -> isSymmetric
     Execution halted
     ```
 
@@ -964,72 +919,6 @@ Run `revdepcheck::cloud_details(, "phangorn")` for more info
       sub-directories of 1Mb or more:
         doc    1.5Mb
         libs   5.8Mb
-    ```
-
-# sbm
-
-<details>
-
-* Version: 0.4.5
-* GitHub: https://github.com/GrossSBM/sbm
-* Source code: https://github.com/cran/sbm
-* Date/Publication: 2023-01-09 10:30:02 UTC
-* Number of recursive dependencies: 110
-
-Run `revdepcheck::cloud_details(, "sbm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sbm-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: estimateSimpleSBM
-    > ### Title: Estimation of Simple SBMs
-    > ### Aliases: estimateSimpleSBM
-    > 
-    > ### ** Examples
-    > 
-    > ### =======================================
-    ...
-            -> For 2 groups
-    > plot(mySimpleSBM, 'data', ordered = FALSE)
-    > plot(mySimpleSBM, 'data')
-    > plot(mySimpleSBM, 'expected', ordered = FALSE)
-    > plot(mySimpleSBM, 'expected')
-    > plot(mySimpleSBM, 'meso')
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: plot ... <Anonymous> -> plotMeso -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Multipartite_EcologicalNetwork.Rmd’ using rmarkdown
-    --- finished re-building ‘Multipartite_EcologicalNetwork.Rmd’
-    
-    --- re-building ‘MultiplexNetwork_principle.Rmd’ using rmarkdown
-    --- finished re-building ‘MultiplexNetwork_principle.Rmd’
-    
-    --- re-building ‘Multiplex_allianceNwar_case_study.Rmd’ using rmarkdown
-    --- finished re-building ‘Multiplex_allianceNwar_case_study.Rmd’
-    ...
-    Quitting from lines 114-115 [simpleSBMfit plotmeso] (SBM_fungus_tree_network.Rmd)
-    Error: processing vignette 'SBM_fungus_tree_network.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘SBM_fungus_tree_network.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘SBM_fungus_tree_network.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
     ```
 
 # SteinerNet

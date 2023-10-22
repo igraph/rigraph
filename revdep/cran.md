@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 28 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 21 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 21 new problems
+ * We saw 19 new problems
  * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
@@ -39,9 +39,6 @@ Issues with CRAN packages are summarised below.
 * manynet
   checking tests ... ERROR
 
-* modnets
-  checking examples ... ERROR
-
 * molnet
   checking examples ... ERROR
 
@@ -68,10 +65,6 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
 
 * phangorn
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* sbm
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 

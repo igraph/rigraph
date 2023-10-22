@@ -1,6 +1,6 @@
 # Revdeps
 
-## New problems (21)
+## New problems (19)
 
 |package            |version |error  |warning |note   |
 |:------------------|:-------|:------|:-------|:------|
@@ -13,7 +13,6 @@
 |[economiccomplexity](problems.md#economiccomplexity)|1.5.0   |__+1__ |        |2      |
 |[malan](problems.md#malan)|1.0.2   |__+2__ |        |1      |
 |[manynet](problems.md#manynet)|0.2.3   |__+1__ |        |1      |
-|[modnets](problems.md#modnets)|0.9.0   |__+1__ |        |1      |
 |[molnet](problems.md#molnet)|0.1.0   |__+1__ |        |       |
 |[mwcsr](problems.md#mwcsr)|0.1.7   |__+1__ |        |1      |
 |[nat](problems.md#nat)|1.8.23  |__+1__ |        |       |
@@ -22,7 +21,6 @@
 |[oddnet](problems.md#oddnet)|0.1.0   |__+1__ |        |       |
 |[pcalg](problems.md#pcalg)|2.7-9   |__+2__ |        |3      |
 |[phangorn](problems.md#phangorn)|2.11.1  |__+2__ |        |1      |
-|[sbm](problems.md#sbm)|0.4.5   |__+2__ |        |       |
 |[SteinerNet](problems.md#steinernet)|3.1.0   |__+2__ |        |       |
 |[wpa](problems.md#wpa)|1.9.0   |__+1__ |        |       |
 
