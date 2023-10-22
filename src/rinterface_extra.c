@@ -421,7 +421,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
       UNPROTECT(px);
       IGRAPH_ERROR("R_objects not implemented yet", IGRAPH_UNIMPLEMENTED);
       break;
-    case IGRAPH_ATTRIBUTE_DEFAULT:
+    case IGRAPH_ATTRIBUTE_UNSPECIFIED:
     default:
       UNPROTECT(px);
       IGRAPH_ERROR("Unknown attribute type, this should not happen",
