@@ -1737,6 +1737,28 @@ graph_center_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   res
 }
 
+graph_center_dijkstra_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_graph_center_dijkstra, graph, weights, mode)
+  if (igraph_opt("return.vs.es")) {
+    res <- create_vs(graph, res)
+  }
+  res
+}
+
 radius_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   # Argument checks
   ensure_igraph(graph)
@@ -1745,6 +1767,26 @@ radius_impl <- function(graph, mode=c("all", "out", "in", "total")) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_radius, graph, mode)
+
+  res
+}
+
+radius_dijkstra_impl <- function(graph, weights=NULL, mode=c("all", "out", "in", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3, "total"=3)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_radius_dijkstra, graph, weights, mode)
 
   res
 }
@@ -3844,10 +3886,10 @@ tree_game_impl <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
   res
 }
 
-vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors")) {
+vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors", "dsatur")) {
   # Argument checks
   ensure_igraph(graph)
-  heuristic <- switch(igraph.match.arg(heuristic), "colored_neighbors"=0L)
+  heuristic <- switch(igraph.match.arg(heuristic), "colored_neighbors"=0L, "dsatur"=1L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

@@ -4603,7 +4603,9 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   R_SEXP_to_vector(values, &c_values);
-  if (!Rf_isNull(values_in)) { R_SEXP_to_vector(values_in, &c_values_in); }
+  if (!Rf_isNull(values_in)) {
+    R_SEXP_to_vector(values_in, &c_values_in);
+  }
   c_directed=LOGICAL(directed)[0];
   c_normalized=LOGICAL(normalized)[0];
                                         /* Call igraph */
@@ -4784,6 +4786,39 @@ SEXP R_igraph_graph_center(SEXP graph, SEXP mode) {
 }
 
 /*-------------------------------------------/
+/ igraph_graph_center_dijkstra               /
+/-------------------------------------------*/
+SEXP R_igraph_graph_center_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_vector_int_t c_res;
+  igraph_neimode_t c_mode;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  if (0 != igraph_vector_int_init(&c_res, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_res);
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_graph_center_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_res, c_mode));
+
+                                        /* Convert output */
+  PROTECT(res=R_igraph_vector_int_to_SEXPp1(&c_res));
+  igraph_vector_int_destroy(&c_res);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_radius                              /
 /-------------------------------------------*/
 SEXP R_igraph_radius(SEXP graph, SEXP mode) {
@@ -4799,6 +4834,34 @@ SEXP R_igraph_radius(SEXP graph, SEXP mode) {
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_radius(&c_graph, &c_radius, c_mode));
+
+                                        /* Convert output */
+  PROTECT(radius=NEW_NUMERIC(1));
+  REAL(radius)[0]=c_radius;
+  r_result = radius;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_radius_dijkstra                     /
+/-------------------------------------------*/
+SEXP R_igraph_radius_dijkstra(SEXP graph, SEXP weights, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_real_t c_radius;
+  igraph_neimode_t c_mode;
+  SEXP radius;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_radius_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_radius, c_mode));
 
                                         /* Convert output */
   PROTECT(radius=NEW_NUMERIC(1));

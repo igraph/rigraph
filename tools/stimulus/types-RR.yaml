@@ -486,9 +486,9 @@ RANDOM_TREE_METHOD:
 
 GREEDY_COLORING_HEURISTIC:
     DEFAULT:
-        NEIGHBORS: c("colored_neighbors")
+        NEIGHBORS: c("colored_neighbors", "dsatur")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L)
+        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L, "dsatur"=1L)
 
 REALIZE_DEGSEQ_METHOD:
     DEFAULT:
