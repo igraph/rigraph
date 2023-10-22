@@ -23,7 +23,7 @@ Run `revdepcheck::cloud_details(, "backShift")` for more info
       > library(backShift)
       > 
       > test_check("backShift")
-      [ FAIL 32 | WARN 9 | SKIP 0 | PASS 0 ]
+      [ FAIL 32 | WARN 7 | SKIP 0 | PASS 0 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
     ...
@@ -34,7 +34,7 @@ Run `revdepcheck::cloud_details(, "backShift")` for more info
        7.       └─igraph::graph.adjacency(Ahat.larger.1, mode = "directed", weighted = "a")
        8.         └─igraph:::graph.adjacency.dense(...)
       
-      [ FAIL 32 | WARN 9 | SKIP 0 | PASS 0 ]
+      [ FAIL 32 | WARN 7 | SKIP 0 | PASS 0 ]
       Error: Test failures
       Execution halted
     ```
@@ -62,81 +62,6 @@ Run `revdepcheck::cloud_details(, "backShift")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Packages unavailable to check Rd xrefs: ‘InvariantCausalPrediction’, ‘CompareCausalNetworks’
-    ```
-
-# BDgraph
-
-<details>
-
-* Version: 2.72
-* GitHub: NA
-* Source code: https://github.com/cran/BDgraph
-* Date/Publication: 2022-12-25 07:20:14 UTC
-* Number of recursive dependencies: 72
-
-Run `revdepcheck::cloud_details(, "BDgraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘BDgraph-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: bdgraph.mpl
-    > ### Title: Search algorithm in graphical models using marginal
-    > ###   pseudo-likehlihood
-    > ### Aliases: bdgraph.mpl
-    > ### Keywords: sampling algorithms structure learning iteration
-    > 
-    > ### ** Examples
-    ...
-    > data.sim <- bdgraph.sim( n = 70, p = 5, size = 7, vis = TRUE )
-    >    
-    > bdgraph.obj <- bdgraph.mpl( data = data.sim, iter = 500 )
-    500 MCMC sampling ... in progress: 
-    10%->20%->30%->40%->50%->60%->70%->80%->90%-> done>   
-    > summary( bdgraph.obj )
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: summary ... <Anonymous> -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘BDgraph-Examples.Rmd’ using rmarkdown
-    
-    Quitting from lines 67-68 [unnamed-chunk-5] (BDgraph-Examples.Rmd)
-    Error: processing vignette 'BDgraph-Examples.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘BDgraph-Examples.Rmd’
-    
-    --- re-building ‘Introduction-BDgraph.Rmd’ using rmarkdown
-    ...
-    Quitting from lines 200-201 [unnamed-chunk-13] (Introduction-BDgraph.Rmd)
-    Error: processing vignette 'Introduction-BDgraph.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘Introduction-BDgraph.Rmd’
-    
-    SUMMARY: processing the following files failed:
-      ‘BDgraph-Examples.Rmd’ ‘Introduction-BDgraph.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 11.0Mb
-      sub-directories of 1Mb or more:
-        libs   9.5Mb
     ```
 
 # bibliometrix
@@ -392,31 +317,6 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘DiagrammeR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: from_adj_matrix
-    > ### Title: Create a graph using an adjacency matrix
-    > ### Aliases: from_adj_matrix
-    > 
-    > ### ** Examples
-    > 
-    > # Create an adjacency matrix
-    ...
-    +     prob = c(0.9,0.1)
-    +   ) %>%
-    +   matrix(ncol = 10)
-    > 
-    > # Create a graph from the adjacency matrix
-    > graph <- from_adj_matrix(adj_matrix)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: from_adj_matrix -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
@@ -488,213 +388,6 @@ Run `revdepcheck::cloud_details(, "dnet")` for more info
       'names' attribute [2] must be the same length as the vector [0]
     Calls: dNetFind -> dNetInduce
     Execution halted
-    ```
-
-# DrDimont
-
-<details>
-
-* Version: 0.1.4
-* GitHub: NA
-* Source code: https://github.com/cran/DrDimont
-* Date/Publication: 2022-09-23 15:40:02 UTC
-* Number of recursive dependencies: 127
-
-Run `revdepcheck::cloud_details(, "DrDimont")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘DrDimont-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: generate_individual_graphs
-    > ### Title: Builds graphs from specified network layers
-    > ### Aliases: generate_individual_graphs
-    > 
-    > ### ** Examples
-    > 
-    > ## Don't show: 
-    ...
-    +                                  layers=layers_example, 
-    +                                  settings=example_settings)
-    [23-10-19 05:26:15] Generating graph of layer mrna for groupA...
-    [23-10-19 05:26:15] Reducing network by WGCNA::pickHardThreshold...
-    [23-10-19 05:26:15] R2 cutoff: 0.65
-    [23-10-19 05:26:15] Cut Threshold: 0.26
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: generate_individual_graphs ... generate_reduced_graph -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘DrDimont_Vignette.Rmd’ using rmarkdown
-    
-    Quitting from lines 328-333 [Individual graphs] (DrDimont_Vignette.Rmd)
-    Error: processing vignette 'DrDimont_Vignette.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘DrDimont_Vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘DrDimont_Vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# ecoCopula
-
-<details>
-
-* Version: 1.0.2
-* GitHub: NA
-* Source code: https://github.com/cran/ecoCopula
-* Date/Publication: 2022-03-02 00:20:02 UTC
-* Number of recursive dependencies: 116
-
-Run `revdepcheck::cloud_details(, "ecoCopula")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ecoCopula-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: cgr
-    > ### Title: Fitting Gaussian copula graphical lasso to co-occurrence data
-    > ### Aliases: cgr
-    > 
-    > ### ** Examples
-    > 
-    > abund <- spider$abund[,1:5]
-    > spider_mod <- stackedsdm(abund,~1, data = spider$x, ncores=2) 
-    > spid_graph=cgr(spider_mod)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: cgr ... ensure_igraph -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(ecoCopula)
-      Loading required package: mvabund
-      > 
-      > test_check("ecoCopula")
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      
-    ...
-       4. └─ecoCopula::cgr(spider.mod)
-       5.   └─ecoCopula:::graph_from_partial(part_cor)
-       6.     ├─igraph::as_data_frame(...)
-       7.     │ └─igraph:::ensure_igraph(x)
-       8.     └─igraph::graph_from_adjacency_matrix(...)
-       9.       └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 77 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘the_basics.Rmd’ using rmarkdown
-    
-    Quitting from lines 117-123 [unnamed-chunk-10] (the_basics.Rmd)
-    Error: processing vignette 'the_basics.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘the_basics.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘the_basics.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# ECoL
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/lpfgarcia/ECoL
-* Source code: https://github.com/cran/ECoL
-* Date/Publication: 2019-11-05 05:10:02 UTC
-* Number of recursive dependencies: 43
-
-Run `revdepcheck::cloud_details(, "ECoL")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘ECoL-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: complexity
-    > ### Title: Extract the complexity measures from datasets
-    > ### Aliases: complexity complexity.default complexity.formula
-    > 
-    > ### ** Examples
-    > 
-    > ## Extract all complexity measures for classification task
-    > data(iris)
-    > complexity(Species ~ ., iris)
-    Warning: stack imbalance in 'lapply', 49 then 50
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: complexity ... network.default -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(ECoL)
-      > 
-      > test_check("ECoL")
-      Warning: stack imbalance in 'lapply', 126 then 127
-      Warning: stack imbalance in 'lapply', 126 then 127
-      Warning: stack imbalance in 'lapply', 126 then 127
-    ...
-          ▆
-       1. ├─ECoL::network(Species ~ ., iris, measures = "Density") at test_network.R:5:2
-       2. └─ECoL:::network.formula(Species ~ ., iris, measures = "Density")
-       3.   └─ECoL:::network.default(...)
-       4.     └─igraph::graph.adjacency(dst, mode = "undirected", weighted = TRUE)
-       5.       └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 3 | WARN 0 | SKIP 0 | PASS 94 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking LazyData ... NOTE
-    ```
-      'LazyData' is specified without a 'data' directory
     ```
 
 # economiccomplexity
@@ -814,47 +507,6 @@ Run `revdepcheck::cloud_details(, "eicm")` for more info
       All declared Imports should be used.
     ```
 
-# fnets
-
-<details>
-
-* Version: 0.1.5
-* GitHub: NA
-* Source code: https://github.com/cran/fnets
-* Date/Publication: 2023-07-17 08:40:06 UTC
-* Number of recursive dependencies: 49
-
-Run `revdepcheck::cloud_details(, "fnets")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(fnets)
-      > 
-      > test_check("fnets")
-      [ FAIL 1 | WARN 3 | SKIP 16 | PASS 2 ]
-      
-      ══ Skipped tests (16) ══════════════════════════════════════════════════════════
-    ...
-       3.   ├─base::suppressWarnings(...)
-       4.   │ └─base::withCallingHandlers(...)
-       5.   ├─fnets::network(...)
-       6.   └─fnets:::network.fnets(...)
-       7.     └─igraph::graph_from_adjacency_matrix(...)
-       8.       └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 1 | WARN 3 | SKIP 16 | PASS 2 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # ghypernet
 
 <details>
@@ -907,55 +559,6 @@ Run `revdepcheck::cloud_details(, "ghypernet")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 11 marked UTF-8 strings
-    ```
-
-# graph4lg
-
-<details>
-
-* Version: 1.8.0
-* GitHub: NA
-* Source code: https://github.com/cran/graph4lg
-* Date/Publication: 2023-01-30 14:00:05 UTC
-* Number of recursive dependencies: 119
-
-Run `revdepcheck::cloud_details(, "graph4lg")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘genetic_graph_2.Rmd’ using rmarkdown
-    Warning: stack imbalance in '<-', 59 then 61
-    Warning: stack imbalance in 'withVisible', 52 then 54
-    Warning: stack imbalance in '<-', 59 then 60
-    Warning: stack imbalance in 'withVisible', 52 then 53
-    Warning: stack imbalance in '<-', 60 then 61
-    Warning: stack imbalance in 'withVisible', 53 then 54
-    Warning: stack imbalance in '<-', 59 then 61
-    Warning: stack imbalance in 'withVisible', 52 then 54
-    ...
-    --- finished re-building ‘input_data_processing_1.Rmd’
-    
-    --- re-building ‘landscape_graph_3.Rmd’ using rmarkdown
-    --- finished re-building ‘landscape_graph_3.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘genetic_graph_2.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘Rdpack’
-      All declared Imports should be used.
     ```
 
 # malan
@@ -1042,31 +645,6 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘manynet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: create
-    > ### Title: Make networks with defined structures
-    > ### Aliases: create create_empty create_filled create_ring create_star
-    > ###   create_tree create_lattice create_components create_core
-    > ###   create_explicit
-    > 
-    > ### ** Examples
-    ...
-    3     1     4
-    4     1     5
-    5     1     6
-    6     1     7
-    # ℹ 39 more rows
-    > create_ring(8, width = 2)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: create_ring -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
@@ -1087,7 +665,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 0 | SKIP 7 | PASS 303 ]
+      [ FAIL 1 | WARN 1 | SKIP 7 | PASS 303 ]
       Error: Test failures
       Execution halted
     ```
@@ -1165,41 +743,17 @@ Run `revdepcheck::cloud_details(, "molnet")` for more info
     Running examples in ‘molnet-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: generate_individual_graphs
-    > ### Title: Builds graphs from specified network layers
-    > ### Aliases: generate_individual_graphs
+    > ### Name: graph_metrics
+    > ### Title: Analyses metrics of an iGraph object
+    > ### Aliases: graph_metrics
     > 
     > ### ** Examples
     > 
-    > ## Don't show: 
-    ...
-    p-values adjusted.
-    
-    full adjusted p-value matrix complete.
-    
-    thresholding done.
-    
+    > adj_mat <- matrix(rnorm(36),nrow=6)
+    > graph <- igraph::graph_from_adjacency_matrix(adj_mat)
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: <Anonymous> ... generate_reduced_graph -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Molnet_Vignette.Rmd’ using rmarkdown
-    
-    Quitting from lines 255-256 [Individual Graphs] (Molnet_Vignette.Rmd)
-    Error: processing vignette 'Molnet_Vignette.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘Molnet_Vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Molnet_Vignette.Rmd’
-    
-    Error: Vignette re-building failed.
+      At vendor/cigraph/src/constructors/adjacency.c:334 : Edge counts should be non-negative, found -2.2147. Invalid value
+    Calls: <Anonymous> -> graph.adjacency.dense
     Execution halted
     ```
 
@@ -1261,74 +815,6 @@ Run `revdepcheck::cloud_details(, "motifcluster")` for more info
       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 762 ]
       Error: Test failures
       Execution halted
-    ```
-
-# mRMRe
-
-<details>
-
-* Version: 2.1.2.1
-* GitHub: NA
-* Source code: https://github.com/cran/mRMRe
-* Date/Publication: 2023-04-25 05:57:25 UTC
-* Number of recursive dependencies: 11
-
-Run `revdepcheck::cloud_details(, "mRMRe")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘mRMRe-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: visualize
-    > ### Title: mRMRe Network display
-    > ### Aliases: visualize visualize,mRMRe.Network-method
-    > ### Keywords: methods
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > feature_data <- mRMR.data(data =  data.frame(cgps.ge))
-    > 
-    > # Build an mRMR-based network and display it
-    > network <- new("mRMRe.Network", data = feature_data, target_indices = c(1),
-    + 				levels = c(3, 1), layers = 2)
-    > visualize(network)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: visualize ... visualize -> graph.adjacency -> graph.adjacency.dense
-    Execution halted
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘mRMRe.Rnw’ using Sweave
-    Loading required package: survival
-    Loading required package: igraph
-    
-    Attaching package: ‘igraph’
-    
-    The following objects are masked from ‘package:stats’:
-    
-        decompose, spectrum
-    ...
-    l.11 ^^M
-            
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘mRMRe.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘mRMRe.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
     ```
 
 # mwcsr
@@ -1451,9 +937,9 @@ Run `revdepcheck::cloud_details(, "netcom")` for more info
     +      max_norm = FALSE,
     +      verbose = FALSE
     + )
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: best_fit_optim ... ensure_igraph -> <Anonymous> -> graph.adjacency.dense
+    Error in igraph::transitivity(igraph_graph, type = "weighted") : 
+      At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
+    Calls: best_fit_optim -> compare_Target -> <Anonymous>
     Execution halted
     ```
 
@@ -1465,7 +951,7 @@ Run `revdepcheck::cloud_details(, "netcom")` for more info
     
     Quitting from lines 200-215 [Classify networks] (tutorial.Rmd)
     Error: processing vignette 'tutorial.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
+    At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
     --- failed re-building ‘tutorial.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -1585,146 +1071,6 @@ Run `revdepcheck::cloud_details(, "netrankr")` for more info
         libs  10.5Mb
     ```
 
-# netropy
-
-<details>
-
-* Version: 0.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/netropy
-* Date/Publication: 2022-02-02 08:20:02 UTC
-* Number of recursive dependencies: 87
-
-Run `revdepcheck::cloud_details(, "netropy")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘netropy-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: assoc_graph
-    > ### Title: Association Graphs
-    > ### Aliases: assoc_graph
-    > 
-    > ### ** Examples
-    > 
-    > library(ggraph)
-    ...
-    +                 ifelse(df.att$age<=45,1,2)),
-    +    practice = df.att$practice,
-    +    lawschool= df.att$lawschool-1)
-    > 
-    > # association graph based on cutoff 0.15
-    > assoc_graph(df.att.ed, 0.15)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: assoc_graph -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘joint_entropies.Rmd’ using rmarkdown
-    
-    Quitting from lines 96-98 [assoc_g] (joint_entropies.Rmd)
-    Error: processing vignette 'joint_entropies.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘joint_entropies.Rmd’
-    
-    --- re-building ‘prediction_power.Rmd’ using rmarkdown
-    ...
-    --- finished re-building ‘univariate_bivariate_trivariate.Rmd’
-    
-    --- re-building ‘variable_domains.Rmd’ using rmarkdown
-    --- finished re-building ‘variable_domains.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘joint_entropies.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# NIMAA
-
-<details>
-
-* Version: 0.2.1
-* GitHub: https://github.com/jafarilab/NIMAA
-* Source code: https://github.com/cran/NIMAA
-* Date/Publication: 2022-04-11 14:12:45 UTC
-* Number of recursive dependencies: 173
-
-Run `revdepcheck::cloud_details(, "NIMAA")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘NIMAA-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: scoreCluster
-    > ### Title: Score the cluster analysis in a projected network based on
-    > ###   additional internal measures.
-    > ### Aliases: scoreCluster
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > beatAML_incidence_matrix <- nominalAsBinet(beatAML_data)
-    > 
-    > # do clustering
-    > cls <- findCluster(beatAML_incidence_matrix,
-    +   part = 1, method = "infomap", normalization = FALSE,
-    +   rm_weak_edges = TRUE, comparison = FALSE)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: findCluster ... projectGraph -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘NIMAA-vignette.Rmd’ using rmarkdown
-    
-    Quitting from lines 138-148 [unnamed-chunk-7] (NIMAA-vignette.Rmd)
-    Error: processing vignette 'NIMAA-vignette.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘NIMAA-vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘NIMAA-vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.5Mb
-      sub-directories of 1Mb or more:
-        data   1.0Mb
-        doc    4.0Mb
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 24 marked UTF-8 strings
-    ```
-
 # oddnet
 
 <details>
@@ -1781,6 +1127,31 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
 </details>
 
 ## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘pcalg-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: jointIda
+    > ### Title: Estimate Multiset of Possible Total Joint Effects
+    > ### Aliases: jointIda
+    > ### Keywords: multivariate models graphs
+    > 
+    > ### ** Examples
+    > 
+    ...
+        tapply, union, unique, unsplit, which.max, which.min
+    
+    Loading required package: grid
+    > 
+    > ## Suppose that we know the true CPDAG and covariance matrix
+    > jointIda(x.pos=c(1,2), y.pos=6, covTrue, graphEst=myCPDAG, technique="RRC", type = "cpdag")
+    Error in UseMethod("isSymmetric") : 
+      no applicable method for 'isSymmetric' applied to an object of class "c('double', 'numeric')"
+    Calls: jointIda ... ensure_igraph -> graph.adjacency -> is_symmetric -> isSymmetric
+    Execution halted
+    ```
 
 *   checking tests ... ERROR
     ```
@@ -1921,68 +1292,6 @@ Run `revdepcheck::cloud_details(, "phangorn")` for more info
         libs   5.8Mb
     ```
 
-# Radviz
-
-<details>
-
-* Version: 0.9.3
-* GitHub: https://github.com/yannabraham/Radviz
-* Source code: https://github.com/cran/Radviz
-* Date/Publication: 2022-03-25 18:10:02 UTC
-* Number of recursive dependencies: 65
-
-Run `revdepcheck::cloud_details(, "Radviz")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘Radviz-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: do.optimGraphviz
-    > ### Title: Optimize the Dimensional Anchors Position using the Graphviz
-    > ###   algorithm
-    > ### Aliases: do.optimGraphviz
-    > 
-    > ### ** Examples
-    > 
-    ...
-    
-    The following object is masked from ‘package:base’:
-    
-        union
-    
-    > g.iris <- graph.adjacency(w.iris,mode='undirected',weight=TRUE,diag=FALSE)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: graph.adjacency -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘multivariate_analysis.Rmd’ using rmarkdown
-    
-    Quitting from lines 330-334 [unnamed-chunk-24] (multivariate_analysis.Rmd)
-    Error: processing vignette 'multivariate_analysis.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘multivariate_analysis.Rmd’
-    
-    --- re-building ‘single_cell_projections.Rmd’ using rmarkdown
-    --- finished re-building ‘single_cell_projections.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘multivariate_analysis.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # repo
 
 <details>
@@ -2021,70 +1330,6 @@ Run `revdepcheck::cloud_details(, "repo")` for more info
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
       invalid value supplied for `weighted' argument, please see docs.
     Calls: <Anonymous> -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-# rsetse
-
-<details>
-
-* Version: 0.5.0
-* GitHub: https://github.com/JonnoB/rSETSe
-* Source code: https://github.com/cran/rsetse
-* Date/Publication: 2021-06-11 10:00:02 UTC
-* Number of recursive dependencies: 86
-
-Run `revdepcheck::cloud_details(, "rsetse")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘rsetse-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: calc_spring_area
-    > ### Title: Calculate the cross sectional area of the edge
-    > ### Aliases: calc_spring_area
-    > 
-    > ### ** Examples
-    > 
-    >  
-    ...
-    
-        union
-    
-    > set.seed(234)
-    > g_prep <- generate_peels_network("A") %>%
-    +  set.edge.attribute(., name = "edge_characteristic", value = rep(1:16, each = 10))
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: %>% ... generate_peels_network_internal -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Categorical-and-continuous-features.Rmd’ using rmarkdown
-    --- finished re-building ‘Categorical-and-continuous-features.Rmd’
-    
-    --- re-building ‘separate-peels-quintet.Rmd’ using rmarkdown
-    
-    Quitting from lines 45-74 [unnamed-chunk-3] (separate-peels-quintet.Rmd)
-    Error: processing vignette 'separate-peels-quintet.Rmd' failed with diagnostics:
-    ℹ In index: 1.
-    Caused by error in `graph.adjacency.dense()`:
-    ! At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘separate-peels-quintet.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘separate-peels-quintet.Rmd’
-    
-    Error: Vignette re-building failed.
     Execution halted
     ```
 
@@ -2152,132 +1397,6 @@ Run `revdepcheck::cloud_details(, "sbm")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-# scapGNN
-
-<details>
-
-* Version: 0.1.4
-* GitHub: NA
-* Source code: https://github.com/cran/scapGNN
-* Date/Publication: 2023-08-08 08:10:02 UTC
-* Number of recursive dependencies: 96
-
-Run `revdepcheck::cloud_details(, "scapGNN")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘scapGNN-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plotGANetwork
-    > ### Title: Visualize gene association network graph of a gene module or
-    > ###   pathway at the specified cell phenotype
-    > ### Aliases: plotGANetwork
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > data("Hv_exp")
-    > index<-grep("0h",colnames(Hv_exp))
-    > cellset<-colnames(Hv_exp)[index]
-    > pathways<-load_path_data(system.file("extdata", "KEGG_human.gmt", package = "scapGNN"))
-    > geneset<-pathways[[which(names(pathways)=="Tight junction [PATH:hsa04530]")]]
-    > plotGANetwork(ConNetGNN_data,cellset,geneset,main = "Tight junction [PATH:hsa04530]")
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: plotGANetwork ... graph_from_adjacency_matrix -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘vignette.Rmd’ using rmarkdown
-    
-    Quitting from lines 170-185 [unnamed-chunk-8] (vignette.Rmd)
-    Error: processing vignette 'vignette.Rmd' failed with diagnostics:
-    At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    --- failed re-building ‘vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.7Mb
-      sub-directories of 1Mb or more:
-        data      3.3Mb
-        extdata   2.3Mb
-    ```
-
-# SeqNet
-
-<details>
-
-* Version: 1.1.3
-* GitHub: NA
-* Source code: https://github.com/cran/SeqNet
-* Date/Publication: 2021-07-09 08:20:08 UTC
-* Number of recursive dependencies: 76
-
-Run `revdepcheck::cloud_details(, "SeqNet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘SeqNet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: as_single_module
-    > ### Title: Collapses all modules in network into a single module
-    > ### Aliases: as_single_module
-    > 
-    > ### ** Examples
-    > 
-    > # This function can be used prior to generating weights for the network 
-    ...
-    > # is reduced to a single module prior to generating weights, then the
-    > # weighted and unweighted networks will maintain the same structure.
-    > nw <- random_network(20, n_modules = 3)
-    > g <- plot(nw)
-    > nw <- gen_partial_correlations(nw)
-    > plot(nw, g) # Additional edges appear from conditional dependencies across modules.
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:540 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: plot ... plot_network -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  7.3Mb
-      sub-directories of 1Mb or more:
-        data   4.7Mb
-        libs   1.8Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘Rdpack’
-      All declared Imports should be used.
     ```
 
 # signnet
@@ -2430,149 +1549,6 @@ Run `revdepcheck::cloud_details(, "SteinerNet")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-# TDA
-
-<details>
-
-* Version: 1.9
-* GitHub: NA
-* Source code: https://github.com/cran/TDA
-* Date/Publication: 2023-02-04 18:42:30 UTC
-* Number of recursive dependencies: 61
-
-Run `revdepcheck::cloud_details(, "TDA")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘TDA-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: clusterTree
-    > ### Title: Density clustering: the cluster tree
-    > ### Aliases: clusterTree print.clusterTree
-    > ### Keywords: nonparametric
-    > 
-    > ### ** Examples
-    > 
-    ...
-    > X <- rbind(X1, X2, X3)
-    > 
-    > k <- 100     #parameter of knn
-    > 
-    > ## Density clustering using knn and kde
-    > Tree <- clusterTree(X, k, density = "knn")
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: clusterTree -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘article.Rnw’
-      ...
-    > X3 <- cbind(rnorm(300, 6, 1), rnorm(300, 1, 1))
-    
-    > XX <- rbind(X1, X2, X3)
-    
-    > Tree <- clusterTree(XX, k = 100, density = "knn", 
-    +     printProgress = FALSE)
-    
-      When sourcing ‘article.R’:
-    Error: At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Execution halted
-    
-      ‘article.Rnw’ using ‘UTF-8’... failed
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 51.5Mb
-      sub-directories of 1Mb or more:
-        libs  50.1Mb
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘scales’
-      All declared Imports should be used.
-    ```
-
-*   checking for GNU extensions in Makefiles ... NOTE
-    ```
-    GNU make is a SystemRequirements.
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘article.Rnw’ using Sweave
-    
-    Error: processing vignette 'article.Rnw' failed with diagnostics:
-     chunk 48 (label = eq18b) 
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    
-    --- failed re-building ‘article.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘article.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# VertexSimilarity
-
-<details>
-
-* Version: 0.1
-* GitHub: NA
-* Source code: https://github.com/cran/VertexSimilarity
-* Date/Publication: 2016-01-24 21:37:10
-* Number of recursive dependencies: 10
-
-Run `revdepcheck::cloud_details(, "VertexSimilarity")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘VertexSimilarity-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: VertexSimilarity
-    > ### Title: Vertex Similarity
-    > ### Aliases: VertexSimilarity
-    > 
-    > ### ** Examples
-    > 
-    > m <- matrix(c(1,0,0,0,0,1,1,1,1),ncol=3,nrow=3,byrow=TRUE)
-    > SimilarityMatrix <- VertexSimilarity(m,alpha=0.85)
-    Loading required namespace: igraph
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:142 : Adjacency matrix should be symmetric to produce an undirected graph. Invalid value
-    Calls: VertexSimilarity -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-## In both
-
-*   checking LazyData ... NOTE
-    ```
-      'LazyData' is specified without a 'data' directory
     ```
 
 # wpa
