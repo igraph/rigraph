@@ -4349,7 +4349,7 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   igraph_t g;
   igraph_vs_t vs, to;
   igraph_vector_int_t vs_data, to_data;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   int algo = (int) REAL(palgo)[0];
   igraph_matrix_t res;
   igraph_vector_t w, *pw=&w;
@@ -4369,22 +4369,22 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
   switch (algo) {
   case 0:                       /* automatic */
     if (negw && mode != IGRAPH_ALL && Rf_xlength(pvids)>100) {
-      distances_johnson(&g, &res, vs, to, pw, (igraph_neimode_t) mode, negw);
+      distances_johnson(&g, &res, vs, to, pw, mode, negw);
     } else if (negw) {
-      IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, (igraph_neimode_t) mode));
+      IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, mode));
     } else {
       /* This one chooses 'unweighted' if there are no weights */
-      IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, (igraph_neimode_t) mode));
+      IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, mode));
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_shortest_paths(&g, &res, vs, to, (igraph_neimode_t) mode));
+    IGRAPH_R_CHECK(igraph_shortest_paths(&g, &res, vs, to, mode));
     break;
   case 2:                       /* dijkstra */
-    IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, (igraph_neimode_t) mode));
+    IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, mode));
     break;
   case 3:                       /* bellman-ford */
-    IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, (igraph_neimode_t) mode));
+    IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, mode));
     break;
   case 4:                       /* johnson */
     distances_johnson(&g, &res, vs, to, pw, mode, negw);
@@ -4785,7 +4785,7 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   igraph_integer_t from=(igraph_integer_t) REAL(pfrom)[0];
   igraph_vs_t to;
   igraph_vector_int_t to_data;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_list_t list, elist;
   igraph_vector_t w, *pw=&w;
   igraph_bool_t negw=0;
@@ -4822,20 +4822,20 @@ SEXP R_igraph_get_shortest_paths(SEXP graph, SEXP pfrom, SEXP pto,
   switch (algo) {
   case 0:                       /* automatic */
     if (negw) {
-      IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+      IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     } else {
       /* This one chooses 'unweighted' if there are no weights */
-      IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+      IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, verts ? &list : 0, edges ? &elist : 0, from, to, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths(&g, verts ? &list : 0, edges ? &elist : 0, from, to, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   case 2:                       /* dijkstra */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths_dijkstra(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   case 3:                       /* bellman-ford */
-    IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, (igraph_neimode_t) mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
+    IGRAPH_R_CHECK(igraph_get_shortest_paths_bellman_ford(&g, verts ? &list : 0, edges ? &elist : 0, from, to, pw, mode, pred ? &predvec : 0, inbound ? &inboundvec : 0));
     break;
   }
 
@@ -6201,7 +6201,7 @@ SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
   igraph_vector_int_t root;
   igraph_matrix_t res;
   igraph_bool_t circ=LOGICAL(pcirc)[0];
-  int mode=(int) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_t rootlevel;
   SEXP result;
 
@@ -6210,9 +6210,9 @@ SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
   R_SEXP_to_vector_int_copy(prootlevel, &rootlevel);
   igraph_matrix_init(&res, 0, 0);
   if (!circ) {
-    IGRAPH_R_CHECK(igraph_layout_reingold_tilford(&g, &res, (igraph_neimode_t) mode, LENGTH(proot)==0 ? 0 : &root, &rootlevel));
+    IGRAPH_R_CHECK(igraph_layout_reingold_tilford(&g, &res, mode, LENGTH(proot)==0 ? 0 : &root, &rootlevel));
   } else {
-    IGRAPH_R_CHECK(igraph_layout_reingold_tilford_circular(&g, &res, (igraph_neimode_t) mode, LENGTH(proot)==0 ? 0 : &root, &rootlevel));
+    IGRAPH_R_CHECK(igraph_layout_reingold_tilford_circular(&g, &res, mode, LENGTH(proot)==0 ? 0 : &root, &rootlevel));
   }
   PROTECT(result=R_igraph_matrix_to_SEXP(&res));
   igraph_matrix_destroy(&res);
@@ -6299,7 +6299,7 @@ SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
   igraph_t g;
   igraph_vs_t v;
   igraph_vector_int_t v_data;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
 
   igraph_vit_t vv;
@@ -6315,7 +6315,7 @@ SEXP R_igraph_vs_nei(SEXP graph, SEXP px, SEXP pv, SEXP pmode) {
          (size_t) igraph_vcount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
-    IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), (igraph_neimode_t) mode));
+    IGRAPH_R_CHECK(igraph_neighbors(&g, &neis, IGRAPH_VIT_GET(vv), mode));
     for (igraph_integer_t i=0; i<igraph_vector_int_size(&neis); i++) {
       igraph_integer_t nei=VECTOR(neis)[i];
       LOGICAL(result)[nei]=1;
@@ -6337,7 +6337,7 @@ SEXP R_igraph_vs_adj(SEXP graph, SEXP px, SEXP pe, SEXP pmode) {
   igraph_t g;
   igraph_es_t e;
   igraph_vector_int_t e_data;
-  int mode=(int) REAL(pmode)[0];
+  igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
 
   igraph_integer_t from, to;
@@ -6375,7 +6375,7 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
   igraph_t g;
   igraph_vs_t v;
   igraph_vector_int_t v_data;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode = (igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
 
   igraph_vector_int_t adje;
@@ -6391,7 +6391,7 @@ SEXP R_igraph_es_adj(SEXP graph, SEXP x, SEXP pv, SEXP pmode) {
          (size_t) igraph_ecount(&g));
 
   while (!IGRAPH_VIT_END(vv)) {
-    IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), (igraph_neimode_t) mode));
+    IGRAPH_R_CHECK(igraph_incident(&g, &adje, IGRAPH_VIT_GET(vv), mode));
     for (igraph_integer_t i=0; i < igraph_vector_int_size(&adje); i++) {
       igraph_integer_t edge=VECTOR(adje)[i];
       LOGICAL(result)[edge]=1;
@@ -6892,7 +6892,7 @@ SEXP R_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_t vids;
   igraph_vector_int_t vids_data;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_t res;
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
@@ -6900,7 +6900,7 @@ SEXP R_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids, &vids_data);
   igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_neighborhood_size(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
+  IGRAPH_R_CHECK(igraph_neighborhood_size(&g, &res, vids, order, mode, mindist));
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
   igraph_vector_int_destroy(&vids_data);
@@ -6916,7 +6916,7 @@ SEXP R_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_t vids;
   igraph_vector_int_t vids_data;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_list_t res;
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
@@ -6924,7 +6924,7 @@ SEXP R_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids, &vids_data);
   igraph_vector_int_list_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_neighborhood(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
+  IGRAPH_R_CHECK(igraph_neighborhood(&g, &res, vids, order, mode, mindist));
   PROTECT(result=R_igraph_vector_int_list_to_SEXP(&res));
   igraph_vector_int_list_destroy(&res);
   igraph_vector_int_destroy(&vids_data);
@@ -6940,7 +6940,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_vs_t vids;
   igraph_vector_int_t vids_data;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_graph_list_t res;
   igraph_integer_t mindist=INTEGER(pmindist)[0];
   SEXP result;
@@ -6948,7 +6948,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   R_SEXP_to_igraph(graph, &g);
   R_SEXP_to_igraph_vs(pvids, &g, &vids, &vids_data);
   igraph_graph_list_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_neighborhood_graphs(&g, &res, vids, order, (igraph_neimode_t) mode, mindist));
+  IGRAPH_R_CHECK(igraph_neighborhood_graphs(&g, &res, vids, order, mode, mindist));
   PROTECT(result=R_igraph_graphlist_to_SEXP(&res));
   IGRAPH_FREE(res.stor_begin);
   igraph_vector_int_destroy(&vids_data);
@@ -6963,11 +6963,11 @@ SEXP R_igraph_connect_neighborhood(SEXP graph, SEXP porder, SEXP pmode) {
 
   igraph_t g;
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
 
   R_SEXP_to_igraph_copy(graph, &g);
-  IGRAPH_R_CHECK(igraph_connect_neighborhood(&g, order, (igraph_neimode_t) mode));
+  IGRAPH_R_CHECK(igraph_connect_neighborhood(&g, order, mode));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -6998,13 +6998,13 @@ SEXP R_igraph_watts_strogatz_game(SEXP pdim, SEXP psize, SEXP pnei, SEXP pp,
 SEXP R_igraph_coreness(SEXP graph, SEXP pmode) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_t res;
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_coreness(&g, &res, (igraph_neimode_t) mode));
+  IGRAPH_R_CHECK(igraph_coreness(&g, &res, mode));
 
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
@@ -7302,15 +7302,15 @@ SEXP R_igraph_walktrap_community(SEXP graph, SEXP pweights,
   return result;
 }
 
-SEXP R_igraph_topological_sorting(SEXP graph, SEXP pneimode) {
+SEXP R_igraph_topological_sorting(SEXP graph, SEXP pmode) {
   igraph_t g;
   igraph_vector_int_t res;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pneimode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
   igraph_vector_int_init(&res, 0);
-  IGRAPH_R_CHECK(igraph_topological_sorting(&g, &res, (igraph_neimode_t) mode));
+  IGRAPH_R_CHECK(igraph_topological_sorting(&g, &res, mode));
 
   PROTECT(result=R_igraph_vector_int_to_SEXP(&res));
   igraph_vector_int_destroy(&res);
@@ -7580,7 +7580,7 @@ SEXP R_igraph_famous(SEXP name) {
 SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
   igraph_integer_t no_of_nodes;
   igraph_vector_int_t neis;
@@ -7592,7 +7592,7 @@ SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) {
   igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (igraph_integer_t i=0; i<no_of_nodes; i++) {
-    igraph_i_neighbors(&g, &neis, i, (igraph_neimode_t) mode, (igraph_loops_t) loops, (igraph_multiple_t) multiple);
+    igraph_i_neighbors(&g, &neis, i, mode, (igraph_loops_t) loops, (igraph_multiple_t) multiple);
     SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(&neis));
   }
   igraph_vector_int_destroy(&neis);
@@ -7604,7 +7604,7 @@ SEXP R_igraph_get_adjlist(SEXP graph, SEXP pmode, SEXP ploops, SEXP pmultiple) {
 SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode, SEXP ploops) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
   igraph_integer_t no_of_nodes;
   igraph_vector_int_t neis;
@@ -7615,7 +7615,7 @@ SEXP R_igraph_get_adjedgelist(SEXP graph, SEXP pmode, SEXP ploops) {
   igraph_vector_int_init(&neis, 0);
   PROTECT(result=NEW_LIST(no_of_nodes));
   for (igraph_integer_t i=0; i<no_of_nodes; i++) {
-    igraph_i_incident(&g, &neis, (igraph_integer_t) i, (igraph_neimode_t) mode, (igraph_loops_t) loops);
+    igraph_i_incident(&g, &neis, (igraph_integer_t) i, mode, (igraph_loops_t) loops);
     SET_VECTOR_ELT(result, i, R_igraph_vector_int_to_SEXP(&neis));
   }
   igraph_vector_int_destroy(&neis);
@@ -7807,7 +7807,7 @@ igraph_error_t R_igraph_bfshandler(const igraph_t *graph,
   return cres ? IGRAPH_STOP : IGRAPH_SUCCESS;
 }
 
-SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
+SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pmode,
                   SEXP punreachable, SEXP prestricted,
                   SEXP porder, SEXP prank, SEXP pfather,
                   SEXP ppred, SEXP psucc, SEXP pdist,
@@ -7820,7 +7820,7 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
   igraph_vector_int_t roots;
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
   igraph_vector_int_t restricted;
-  igraph_integer_t neimode=(igraph_integer_t) REAL(pneimode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_t order, rank, father, pred, succ, dist;
   igraph_vector_int_t *p_order=0, *p_rank=0, *p_father=0, *p_pred=0,
     *p_succ=0, *p_dist=0;
@@ -7876,7 +7876,7 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
     p_cb_data = &cb_data;
   }
 
-  IGRAPH_R_CHECK(igraph_bfs(&g, root, Rf_isNull(proots) ? 0 : &roots, (igraph_neimode_t) neimode, unreachable, Rf_isNull(prestricted) ? 0 : &restricted, p_order, p_rank, p_father, p_pred, p_succ, p_dist, (igraph_bfshandler_t*) callback, p_cb_data));
+  IGRAPH_R_CHECK(igraph_bfs(&g, root, Rf_isNull(proots) ? 0 : &roots, mode, unreachable, Rf_isNull(prestricted) ? 0 : &restricted, p_order, p_rank, p_father, p_pred, p_succ, p_dist, (igraph_bfshandler_t*) callback, p_cb_data));
 
   PROTECT(result=NEW_LIST(8));
   PROTECT(names=NEW_CHARACTER(8));
@@ -7887,9 +7887,9 @@ SEXP R_igraph_bfs(SEXP graph, SEXP proot, SEXP proots, SEXP pneimode,
 
   SET_STRING_ELT(names, 1, Rf_mkChar("mode"));
   SET_VECTOR_ELT(result, 1, NEW_CHARACTER(1));
-  if (neimode==1) {
+  if (mode==IGRAPH_OUT) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("out"));
-  } else if (neimode==2) {
+  } else if (mode==IGRAPH_IN) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("in"));
   } else {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("all"));
@@ -7975,7 +7975,7 @@ igraph_error_t R_igraph_dfshandler_out(const igraph_t *graph,
   return R_igraph_dfshandler(graph, vid, dist, extra, 1);
 }
 
-SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
+SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pmode, SEXP punreachable,
                   SEXP porder, SEXP porder_out, SEXP pfather, SEXP pdist,
                   SEXP pin_callback, SEXP pout_callback,
                   SEXP pextra, SEXP prho) {
@@ -7984,7 +7984,7 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
   SEXP result, names;
 
   igraph_integer_t root=(igraph_integer_t) REAL(proot)[0];
-  igraph_integer_t neimode=(igraph_integer_t) REAL(pneimode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_bool_t unreachable=LOGICAL(punreachable)[0];
   igraph_vector_int_t order, order_out, father, dist;
   igraph_vector_int_t *p_order=0, *p_order_out=0, *p_father=0, *p_dist=0;
@@ -8021,7 +8021,7 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
     out_callback=R_igraph_dfshandler_out;
   }
 
-  IGRAPH_R_CHECK(igraph_dfs(&g, root, (igraph_neimode_t) neimode, unreachable, p_order, p_order_out, p_father, p_dist, (igraph_dfshandler_t*) in_callback, (igraph_dfshandler_t*) out_callback, p_cb_data));
+  IGRAPH_R_CHECK(igraph_dfs(&g, root, mode, unreachable, p_order, p_order_out, p_father, p_dist, (igraph_dfshandler_t*) in_callback, (igraph_dfshandler_t*) out_callback, p_cb_data));
 
   PROTECT(result=NEW_LIST(6));
   PROTECT(names=NEW_CHARACTER(6));
@@ -8032,9 +8032,9 @@ SEXP R_igraph_dfs(SEXP graph, SEXP proot, SEXP pneimode, SEXP punreachable,
 
   SET_STRING_ELT(names, 1, Rf_mkChar("mode"));
   SET_VECTOR_ELT(result, 1, NEW_CHARACTER(1));
-  if (neimode==1) {
+  if (mode==IGRAPH_OUT) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("out"));
-  } else if (neimode==2) {
+  } else if (mode==IGRAPH_IN) {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("in"));
   } else {
     SET_STRING_ELT(VECTOR_ELT(result, 1), 0, Rf_mkChar("all"));
@@ -8846,7 +8846,7 @@ SEXP R_igraph_adjacent_vertices(SEXP pgraph, SEXP pv, SEXP pmode) {
   igraph_vs_t vs;
   igraph_vector_int_t vs_data;
   igraph_vit_t vit;
-  igraph_integer_t mode = (igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
   size_t i, n;
   igraph_lazy_adjlist_t adjlist;
@@ -8892,7 +8892,7 @@ SEXP R_igraph_incident_edges(SEXP pgraph, SEXP pe, SEXP pmode) {
   igraph_vs_t vs;
   igraph_vector_int_t vs_data;
   igraph_vit_t vit;
-  igraph_integer_t mode = (igraph_integer_t) REAL(pmode)[0];
+  igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   SEXP result;
   size_t i, n;
   igraph_lazy_inclist_t adjlist;

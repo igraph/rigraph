@@ -97,7 +97,7 @@ NEIMODE:
         IN: c("in", "out", "all", "total")
         OUT: c("out", "in", "all", "total")
         TOTAL: c("total", "out", "in", "all")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2, "all"=3, "total"=3)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1L, "in"=2L, "all"=3L, "total"=3L)'
 
 TODIRECTED:
     DEFAULT:
