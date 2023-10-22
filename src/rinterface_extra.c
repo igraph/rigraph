@@ -4943,7 +4943,7 @@ SEXP R_igraph_weighted_adjacency(SEXP adjmatrix, SEXP pmode, SEXP ploops) {
   igraph_vector_destroy(&weights);
   IGRAPH_I_DESTROY(&g);
 
-  UNPROTECT(1);
+  UNPROTECT(2);
   return result;
 }
 
