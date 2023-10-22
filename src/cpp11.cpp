@@ -22,6 +22,7 @@ extern SEXP R_igraph_add_version_to_env(void *);
 extern SEXP R_igraph_add_vertices(void *, void *);
 extern SEXP R_igraph_address(void *);
 extern SEXP R_igraph_adhesion(void *, void *);
+extern SEXP R_igraph_adjacency(void *, void *, void *);
 extern SEXP R_igraph_adjacency_spectral_embedding(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_adjacent_triangles(void *, void *);
 extern SEXP R_igraph_adjacent_vertices(void *, void *, void *);
@@ -208,8 +209,8 @@ extern SEXP R_igraph_getsphere(void *, void *, void *, void *, void *, void *, v
 extern SEXP R_igraph_girth(void *, void *);
 extern SEXP R_igraph_global_efficiency(void *, void *, void *);
 extern SEXP R_igraph_gomory_hu_tree(void *, void *);
-extern SEXP R_igraph_graph_adjacency(void *, void *, void *);
 extern SEXP R_igraph_graph_center(void *, void *);
+extern SEXP R_igraph_graph_center_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_graph_count(void *, void *);
 extern SEXP R_igraph_graph_power(void *, void *, void *);
 extern SEXP R_igraph_graph_version(void *);
@@ -361,6 +362,7 @@ extern SEXP R_igraph_progress(void *, void *);
 extern SEXP R_igraph_pseudo_diameter(void *, void *, void *, void *);
 extern SEXP R_igraph_pseudo_diameter_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_radius(void *, void *);
+extern SEXP R_igraph_radius_dijkstra(void *, void *, void *);
 extern SEXP R_igraph_random_edge_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_random_sample(void *, void *, void *);
 extern SEXP R_igraph_random_spanning_tree(void *, void *);
@@ -495,6 +497,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_add_vertices",                               (DL_FUNC) &R_igraph_add_vertices,                                2},
     {"R_igraph_address",                                    (DL_FUNC) &R_igraph_address,                                     1},
     {"R_igraph_adhesion",                                   (DL_FUNC) &R_igraph_adhesion,                                    2},
+    {"R_igraph_adjacency",                                  (DL_FUNC) &R_igraph_adjacency,                                   3},
     {"R_igraph_adjacency_spectral_embedding",               (DL_FUNC) &R_igraph_adjacency_spectral_embedding,                7},
     {"R_igraph_adjacent_triangles",                         (DL_FUNC) &R_igraph_adjacent_triangles,                          2},
     {"R_igraph_adjacent_vertices",                          (DL_FUNC) &R_igraph_adjacent_vertices,                           3},
@@ -681,8 +684,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_girth",                                      (DL_FUNC) &R_igraph_girth,                                       2},
     {"R_igraph_global_efficiency",                          (DL_FUNC) &R_igraph_global_efficiency,                           3},
     {"R_igraph_gomory_hu_tree",                             (DL_FUNC) &R_igraph_gomory_hu_tree,                              2},
-    {"R_igraph_graph_adjacency",                            (DL_FUNC) &R_igraph_graph_adjacency,                             3},
     {"R_igraph_graph_center",                               (DL_FUNC) &R_igraph_graph_center,                                2},
+    {"R_igraph_graph_center_dijkstra",                      (DL_FUNC) &R_igraph_graph_center_dijkstra,                       3},
     {"R_igraph_graph_count",                                (DL_FUNC) &R_igraph_graph_count,                                 2},
     {"R_igraph_graph_power",                                (DL_FUNC) &R_igraph_graph_power,                                 3},
     {"R_igraph_graph_version",                              (DL_FUNC) &R_igraph_graph_version,                               1},
@@ -834,6 +837,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_pseudo_diameter",                            (DL_FUNC) &R_igraph_pseudo_diameter,                             4},
     {"R_igraph_pseudo_diameter_dijkstra",                   (DL_FUNC) &R_igraph_pseudo_diameter_dijkstra,                    5},
     {"R_igraph_radius",                                     (DL_FUNC) &R_igraph_radius,                                      2},
+    {"R_igraph_radius_dijkstra",                            (DL_FUNC) &R_igraph_radius_dijkstra,                             3},
     {"R_igraph_random_edge_walk",                           (DL_FUNC) &R_igraph_random_edge_walk,                            6},
     {"R_igraph_random_sample",                              (DL_FUNC) &R_igraph_random_sample,                               3},
     {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},

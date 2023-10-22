@@ -61,13 +61,13 @@ igraph_is_same_graph:
 # Constructors, deterministic
 #######################################
 
-igraph_create:
-    IGNORE: RR, RC
-
 igraph_adjacency:
-    IGNORE: RR, RC, RInit
+    IGNORE: RR
 
 igraph_weighted_adjacency:
+    IGNORE: RR
+
+igraph_create:
     IGNORE: RR, RC
 
 igraph_star:
