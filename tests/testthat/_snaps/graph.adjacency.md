@@ -58,6 +58,24 @@
     Output
       IGRAPH U--- 2 0 -- 
       + edges:
+    Code
+      graph_from_adjacency_matrix(1)
+    Condition
+      Warning:
+      The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be a matrix as of igraph 1.5.2.
+    Output
+      IGRAPH D--- 1 1 -- 
+      + edge:
+      [1] 1->1
+    Code
+      graph_from_adjacency_matrix(1, mode = "undirected")
+    Condition
+      Warning:
+      The `adjmatrix` argument of `graph_from_adjacency_matrix()` must be a matrix as of igraph 1.5.2.
+    Output
+      IGRAPH U--- 1 1 -- 
+      + edge:
+      [1] 1--1
 
 # graph_from_adjacency_matrix() snapshot for sparse matrices
 

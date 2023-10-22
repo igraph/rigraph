@@ -258,6 +258,9 @@ test_that("graph_from_adjacency_matrix() snapshot", {
       dim = c(2L, 2L)
     )
     graph_from_adjacency_matrix(m2, mode = "undirected")
+
+    graph_from_adjacency_matrix(1)
+    graph_from_adjacency_matrix(1, mode = "undirected")
   })
 })
 

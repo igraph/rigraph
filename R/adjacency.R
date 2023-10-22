@@ -372,6 +372,14 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 
   mode <- igraph.match.arg(mode)
 
+  if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
+    lifecycle::deprecate_soft(
+      "1.5.2",
+      "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
+    )
+    adjmatrix <- as.matrix(1)
+  }
+
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
       lifecycle::deprecate_soft(
