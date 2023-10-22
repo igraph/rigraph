@@ -236,17 +236,56 @@ test_that("graph_from_adjacency_matrix works", {
 })
 
 test_that("graph_from_adjacency_matrix() snapshot", {
-  local_igraph_options(print.id = FALSE)
   rlang::local_options(lifecycle_verbosity = "warning")
 
+  local_igraph_options(print.id = FALSE)
+  expect_false(igraph_opt("print.id"))
+
   expect_snapshot({
+    igraph_opt("print.id")
+
     m <- matrix(c(0, 2.5, 0, 0), ncol = 2)
+    m
 
     graph_from_adjacency_matrix(m)
     graph_from_adjacency_matrix(m, mode = "undirected")
     graph_from_adjacency_matrix(m, mode = "max")
     graph_from_adjacency_matrix(m, weighted = TRUE)
     graph_from_adjacency_matrix(m, weighted = "w")
+
+    m2 <- structure(
+      c(0, 0.00211360121966095, 0.00211360121966098, 0),
+      dim = c(2L, 2L)
+    )
+    graph_from_adjacency_matrix(m2, mode = "undirected")
+
+    graph_from_adjacency_matrix(1)
+    graph_from_adjacency_matrix(1, mode = "undirected")
+  })
+})
+
+test_that("graph_from_adjacency_matrix() snapshot for sparse matrices", {
+  skip_if_not_installed("Matrix")
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  local_igraph_options(print.id = FALSE)
+  expect_false(igraph_opt("print.id"))
+
+  expect_snapshot({
+    igraph_opt("print.id")
+
+    m <- Matrix::sparseMatrix(2, 1, x = 2.5, dims = c(2, 2))
+    m
+
+    graph_from_adjacency_matrix(m)
+    graph_from_adjacency_matrix(m, mode = "undirected")
+    graph_from_adjacency_matrix(m, mode = "max")
+    graph_from_adjacency_matrix(m, weighted = TRUE)
+    graph_from_adjacency_matrix(m, weighted = "w")
+
+    m2 <- Matrix::sparseMatrix(2:1, 1:2, x = c(0.00211360121966095, 0.00211360121966098))
+    graph_from_adjacency_matrix(m2, mode = "undirected")
   })
 })
 
