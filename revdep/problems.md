@@ -1,69 +1,3 @@
-# backShift
-
-<details>
-
-* Version: 0.1.4.3
-* GitHub: https://github.com/christinaheinze/backShift
-* Source code: https://github.com/cran/backShift
-* Date/Publication: 2020-05-06 11:30:03 UTC
-* Number of recursive dependencies: 97
-
-Run `revdepcheck::cloud_details(, "backShift")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(backShift)
-      > 
-      > test_check("backShift")
-      [ FAIL 32 | WARN 7 | SKIP 0 | PASS 0 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. └─backShift::backShift(...)
-       5.   └─backShift:::permuteAndScale(estimatedB, verbose)
-       6.     └─backShift:::hasCPsmallerOne(Dhat, returnCycleNodes = FALSE)
-       7.       └─igraph::graph.adjacency(Ahat.larger.1, mode = "directed", weighted = "a")
-       8.         └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 32 | WARN 7 | SKIP 0 | PASS 0 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘exampleBackShift.Rmd’ using rmarkdown
-    
-    Quitting from lines 180-184 [unnamed-chunk-7] (exampleBackShift.Rmd)
-    Error: processing vignette 'exampleBackShift.Rmd' failed with diagnostics:
-    invalid value supplied for `weighted' argument, please see docs.
-    --- failed re-building ‘exampleBackShift.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘exampleBackShift.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Packages unavailable to check Rd xrefs: ‘InvariantCausalPrediction’, ‘CompareCausalNetworks’
-    ```
-
 # bibliometrix
 
 <details>
@@ -113,26 +47,6 @@ Run `revdepcheck::cloud_details(, "Canek")` for more info
 
 ## Newly broken
 
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘Canek-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: CorrectBatch
-    > ### Title: CorrectBatch
-    > ### Aliases: CorrectBatch
-    > 
-    > ### ** Examples
-    > 
-    > x <- SimBatches$batches[[1]]
-    > y <- SimBatches$batches[[2]]
-    > z <- CorrectBatch(x, y)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: CorrectBatch ... CalculateMST -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
 *   checking tests ... ERROR
     ```
       Running ‘testthat.R’
@@ -142,38 +56,20 @@ Run `revdepcheck::cloud_details(, "Canek")` for more info
       > library(Canek)
       > 
       > test_check("Canek")
-      [ FAIL 7 | WARN 0 | SKIP 0 | PASS 33 ]
+      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 90 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
     ...
-       2. └─Canek:::RunCanek.Seurat(x, "batch")
-       3.   └─Canek::CorrectBatches(counts, debug = debug, ...)
-       4.     └─Canek::CorrectBatch(...)
-       5.       └─Canek:::CalculateMST(cluMem$centers[, 1:fuzzyPCA])
-       6.         └─igraph::graph_from_adjacency_matrix(x, mode = "undirected", weighted = "weight")
-       7.           └─igraph:::graph.adjacency.dense(...)
+      as.integer(table(dataLouvain$cluster)) not equal to c(96, 125, 140, 171, 99).
+      Lengths differ: 4 is not 5
+      ── Failure ('test-Clustering.R:20:3'): Clustering with louvain works ───────────
+      dim(dataLouvain$centers) not equal to c(5, 10).
+      1/2 mismatches
+      [1] 4 - 5 == -1
       
-      [ FAIL 7 | WARN 0 | SKIP 0 | PASS 33 ]
+      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 90 ]
       Error: Test failures
       Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘toy_example.Rmd’ using rmarkdown
-    
-    Quitting from lines 79-80 [unnamed-chunk-5] (toy_example.Rmd)
-    Error: processing vignette 'toy_example.Rmd' failed with diagnostics:
-    invalid value supplied for `weighted' argument, please see docs.
-    --- failed re-building ‘toy_example.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘toy_example.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
     ```
 
 # CINNA
@@ -217,47 +113,6 @@ Run `revdepcheck::cloud_details(, "CINNA")` for more info
     Namespaces in Imports field not imported from:
       ‘circlize’ ‘utils’
       All declared Imports should be used.
-    ```
-
-# concorR
-
-<details>
-
-* Version: 0.2.1
-* GitHub: https://github.com/ATraxLab/concorR
-* Source code: https://github.com/cran/concorR
-* Date/Publication: 2020-11-25 20:30:07 UTC
-* Number of recursive dependencies: 19
-
-Run `revdepcheck::cloud_details(, "concorR")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘concorR-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: concor_igraph_apply
-    > ### Title: Find CONCOR partition and add to a list of 'igraph' objects
-    > ### Aliases: concor_igraph_apply
-    > 
-    > ### ** Examples
-    > 
-    > a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
-    ...
-    
-    > 
-    > b <- matrix(c(0, 0, 0, 4, 1, 0, 3, 0, 2, 1, 0, 1, 1, 0, 2, 0), ncol = 4)
-    > rownames(b) <- c("a", "b", "c", "d")
-    > colnames(b) <- c("a", "b", "c", "d")
-    > b.igraph <- igraph::graph_from_adjacency_matrix(b, weighted = "weight")
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: <Anonymous> -> graph.adjacency.dense
-    Execution halted
     ```
 
 # countland
@@ -327,8 +182,8 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       > 
       > suppressWarnings(RNGversion("3.5.0"))
       > test_check("DiagrammeR")
-      Warning: stack imbalance in '<-', 77 then 78
-      Warning: stack imbalance in '{', 73 then 74
+      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      
     ...
       1/1 mismatches
       [1] 107 - 98 == 9
@@ -438,127 +293,6 @@ Run `revdepcheck::cloud_details(, "economiccomplexity")` for more info
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
-    ```
-
-# eicm
-
-<details>
-
-* Version: 1.0.3
-* GitHub: https://github.com/miguel-porto/eicm
-* Source code: https://github.com/cran/eicm
-* Date/Publication: 2023-05-05 23:10:02 UTC
-* Number of recursive dependencies: 48
-
-Run `revdepcheck::cloud_details(, "eicm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘eicm-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: plotNetworkFromMatrix
-    > ### Title: Plot graphs from adjacency matrices
-    > ### Aliases: plotNetworkFromMatrix
-    > 
-    > ### ** Examples
-    > 
-    > # generate two adjacency matrices with 15 species and 10 interactions
-    ...
-    > 
-    > # set the species names
-    > rownames(A) <- rownames(B) <-
-    +   colnames(A) <- colnames(B) <- paste0("S", 1:15)
-    > 
-    > plotNetworkFromMatrix(A, B)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: plotNetworkFromMatrix -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘eicm.Rmd’ using rmarkdown
-    
-    Quitting from lines 185-187 [unnamed-chunk-7] (eicm.Rmd)
-    Error: processing vignette 'eicm.Rmd' failed with diagnostics:
-    invalid value supplied for `weighted' argument, please see docs.
-    --- failed re-building ‘eicm.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘eicm.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘snow’
-      All declared Imports should be used.
-    ```
-
-# ghypernet
-
-<details>
-
-* Version: 1.1.0
-* GitHub: NA
-* Source code: https://github.com/cran/ghypernet
-* Date/Publication: 2021-10-15 13:30:05 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "ghypernet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Significantlinks.Rmd’ using rmarkdown
-    Warning: stack imbalance in '<-', 59 then 60
-    Warning: stack imbalance in 'withVisible', 52 then 53
-    
-    Quitting from lines 66-79 [unnamed-chunk-4] (Significantlinks.Rmd)
-    Error: processing vignette 'Significantlinks.Rmd' failed with diagnostics:
-    invalid value supplied for `weighted' argument, please see docs.
-    --- failed re-building ‘Significantlinks.Rmd’
-    ...
-    --- finished re-building ‘Tutorial_NRM.Rmd’
-    
-    --- re-building ‘tutorial.Rmd’ using rmarkdown
-    --- finished re-building ‘tutorial.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Significantlinks.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘methods’
-      All declared Imports should be used.
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 11 marked UTF-8 strings
     ```
 
 # malan
@@ -755,66 +489,6 @@ Run `revdepcheck::cloud_details(, "molnet")` for more info
       At vendor/cigraph/src/constructors/adjacency.c:334 : Edge counts should be non-negative, found -2.2147. Invalid value
     Calls: <Anonymous> -> graph.adjacency.dense
     Execution halted
-    ```
-
-# motifcluster
-
-<details>
-
-* Version: 0.2.3
-* GitHub: https://github.com/wgunderwood/motifcluster
-* Source code: https://github.com/cran/motifcluster
-* Date/Publication: 2022-11-18 08:10:02 UTC
-* Number of recursive dependencies: 68
-
-Run `revdepcheck::cloud_details(, "motifcluster")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘motifcluster-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: get_largest_component
-    > ### Title: Get largest connected component
-    > ### Aliases: get_largest_component
-    > 
-    > ### ** Examples
-    > 
-    > adj_mat <- matrix(c(0, 1, 0, 0, 0, 0, 0, 0, 0), nrow = 3)
-    > get_largest_component(adj_mat)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: get_largest_component ... graph_from_adjacency_matrix -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(motifcluster)
-      > 
-      > test_check("motifcluster")
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 762 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-       1. ├─testthat::expect_equal(...) at test_utils.R:65:2
-       2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
-       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
-       4. └─motifcluster::get_largest_component(adj_mat_dense)
-       5.   └─igraph::graph_from_adjacency_matrix(...)
-       6.     └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 762 ]
-      Error: Test failures
-      Execution halted
     ```
 
 # mwcsr
@@ -1292,47 +966,6 @@ Run `revdepcheck::cloud_details(, "phangorn")` for more info
         libs   5.8Mb
     ```
 
-# repo
-
-<details>
-
-* Version: 2.1.5
-* GitHub: NA
-* Source code: https://github.com/cran/repo
-* Date/Publication: 2020-02-08 16:20:02 UTC
-* Number of recursive dependencies: 60
-
-Run `revdepcheck::cloud_details(, "repo")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘repo-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: repo_dependencies
-    > ### Title: Build and/or plots a dependency graph
-    > ### Aliases: repo_dependencies
-    > 
-    > ### ** Examples
-    > 
-    > ## Repository creation
-    ...
-    item1        0     0     0        0
-    item2        1     0     0        0
-    item3        1     1     0        0
-    temp.pdf     2     0     0        0
-    > ## The matrix can be plotted as a graph (requires igraph package)
-    > rp$dependencies()
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: <Anonymous> -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
 # sbm
 
 <details>
@@ -1397,101 +1030,6 @@ Run `revdepcheck::cloud_details(, "sbm")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-# signnet
-
-<details>
-
-* Version: 1.0.2
-* GitHub: https://github.com/schochastics/signnet
-* Source code: https://github.com/cran/signnet
-* Date/Publication: 2023-09-08 21:00:02 UTC
-* Number of recursive dependencies: 106
-
-Run `revdepcheck::cloud_details(, "signnet")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘signnet-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: graph_from_adjacency_matrix_signed
-    > ### Title: Create signed graphs from adjacency matrices
-    > ### Aliases: graph_from_adjacency_matrix_signed
-    > 
-    > ### ** Examples
-    > 
-    > A <- matrix(c(0,1,-1,1,0,1,-1,1,0),3,3)
-    > graph_from_adjacency_matrix_signed(A)
-    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      invalid value supplied for `weighted' argument, please see docs.
-    Calls: graph_from_adjacency_matrix_signed -> <Anonymous> -> graph.adjacency.dense
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(signnet)
-      > 
-      > test_check("signnet")
-      Warning: stack imbalance in '<-', 77 then 78
-      Warning: stack imbalance in '{', 73 then 74
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 88 ]
-    ...
-          diag = diag)`: invalid value supplied for `weighted' argument, please see docs.
-      Backtrace:
-          ▆
-       1. └─signnet::graph_from_adjacency_matrix_signed(A, "undirected") at test-centrality_indices.R:86:2
-       2.   └─igraph::graph_from_adjacency_matrix(...)
-       3.     └─igraph:::graph.adjacency.dense(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 88 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘blockmodeling.Rmd’ using rmarkdown
-    --- finished re-building ‘blockmodeling.Rmd’
-    
-    --- re-building ‘centrality.Rmd’ using rmarkdown
-    
-    Quitting from lines 45-62 [deg_same] (centrality.Rmd)
-    Error: processing vignette 'centrality.Rmd' failed with diagnostics:
-    invalid value supplied for `weighted' argument, please see docs.
-    --- failed re-building ‘centrality.Rmd’
-    ...
-    --- finished re-building ‘signed_networks.Rmd’
-    
-    --- re-building ‘structural_balance.Rmd’ using rmarkdown
-    --- finished re-building ‘structural_balance.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘centrality.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  8.1Mb
-      sub-directories of 1Mb or more:
-        data   1.0Mb
-        libs   6.0Mb
     ```
 
 # SteinerNet
