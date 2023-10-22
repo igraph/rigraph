@@ -47,39 +47,24 @@ graph.adjacency.dense <- function(
     "once" = 2L
   )
 
+  if (nrow(adjmatrix) != ncol(adjmatrix)) {
+    stop("not a square matrix")
+  }
+
   mode(adjmatrix) <- "double"
 
-  if (!is.null(weighted)) {
-    if (!is.logical(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
+  if (isTRUE(weighted)) {
+    weighted <- "weight"
+  } else if (!is.character(weighted)) {
+    weighted <- NULL
+  }
 
-    if (nrow(adjmatrix) != ncol(adjmatrix)) {
-      stop("not a square matrix")
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(
-      R_igraph_weighted_adjacency, adjmatrix,
-      as.numeric(mode), diag
-    )
-
-    E(res$graph)$weight <- res$weights
-    res <- res$graph
+  on.exit(.Call(R_igraph_finalizer))
+  if (is.null(weighted)) {
+    res <- .Call(R_igraph_graph_adjacency, adjmatrix, mode, diag)
   } else {
-    adjmatrix <- as.matrix(adjmatrix)
-    attrs <- attributes(adjmatrix)
-    adjmatrix <- as.numeric(adjmatrix)
-    attributes(adjmatrix) <- attrs
-
-    if (!diag) {
-      diag(adjmatrix) <- 0
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(
-      R_igraph_graph_adjacency, adjmatrix,
-      as.numeric(mode), diag)
+    res <- .Call(R_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
   res
