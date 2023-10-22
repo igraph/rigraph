@@ -1400,8 +1400,11 @@ feedback_arc_set <- feedback_arc_set_impl
 #' The girth of a graph is the length of the shortest circle in it.
 #'
 #' The current implementation works for undirected graphs only, directed graphs
-#' are treated as undirected graphs. Loop edges and multiple edges are ignored.
-#' If the graph is a forest (i.e. acyclic), then zero is returned.
+#' are treated as undirected graphs. Loop edges and multiple edges are ignored,
+#' i.e. cycles of length 1 and 2 are not considered.
+#'
+#' For graphs that contain no cycles, and only for such graphs,
+#' infinity is returned.
 #'
 #' This implementation is based on Alon Itai and Michael Rodeh: Finding a
 #' minimum circuit in a graph *Proceedings of the ninth annual ACM
