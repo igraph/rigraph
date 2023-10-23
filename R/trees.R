@@ -66,7 +66,7 @@ is_tree <- is_tree_impl
 #' @keywords graphs
 #' @examples
 #'
-#' g <- make_tree(7, 2)
+#' g <- make_tree(3) + make_tree(5,3)
 #' is_forest(g)
 #' is_forest(g, details = TRUE)
 #'
