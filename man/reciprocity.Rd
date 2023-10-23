@@ -23,10 +23,9 @@ Calculates the reciprocity of a directed graph.
 The measure of reciprocity defines the proportion of mutual connections, in
 a directed graph. It is most commonly defined as the probability that the
 opposite counterpart of a directed edge is also included in the graph. Or in
-adjacency matrix notation: \eqn{\sum_{ij} (A\cdot A')_{ij}}{sum(i, j,
-(A.*A')ij) / sum(i, j, Aij)}, where \eqn{A\cdot A'}{A.*A'} is the
-element-wise product of matrix \eqn{A} and its transpose. This measure is
-calculated if the \code{mode} argument is \code{default}.
+adjacency matrix notation:
+\eqn{1 - \left(\sum_{i,j} |A_{ij} - A_{ji}|\right) / \left(2\sum_{i,j} A_{ij}\right)}{1 - (sum_ij |A_ij - A_ji|) / (2 sum_ij A_ij)}.
+This measure is calculated if the \code{mode} argument is \code{default}.
 
 Prior to igraph version 0.6, another measure was implemented, defined as the
 probability of mutual connection between a vertex pair, if we know that
