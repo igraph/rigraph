@@ -115,7 +115,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
   stopifnot(is.null(graph.them) || vcount(graph.them) == vcount(graph.us))
 
   ## k must be non-negative integer
-  stopifnot(length(k) == 1, k >= 0, as.integer(k) == k)
+  stopifnot(length(k) == 1, k >= 0, trunc(k) == k)
 
   ## Must be NULL or a function
   stopifnot(is.null(FUN) || is.function(FUN) ||
@@ -193,7 +193,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
       } else if (is.character(FUN) && FUN %in% c("ecount", "sumweights")) {
         on.exit(.Call(R_igraph_finalizer))
         .Call(
-          R_igraph_local_scan_k_ecount, graph.us, as.integer(k),
+          R_igraph_local_scan_k_ecount, graph.us, as.numeric(k),
           if (weighted) as.numeric(E(graph.us)$weight) else NULL, cmode
         )
 
@@ -249,7 +249,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
         on.exit(.Call(R_igraph_finalizer))
         .Call(
           R_igraph_local_scan_k_ecount_them, graph.us, graph.them,
-          as.integer(k),
+          as.numeric(k),
           if (weighted) as.numeric(E(graph.them)$weight) else NULL,
           cmode
         )
@@ -337,10 +337,10 @@ scan_stat <- function(graphs, tau = 1, ell = 0,
   )
 
   ## tau must the a non-negative integer
-  stopifnot(length(tau) == 1, tau >= 0, as.integer(tau) == tau)
+  stopifnot(length(tau) == 1, tau >= 0, trunc(tau) == tau)
 
   ## ell must the a non-negative integer
-  stopifnot(length(ell) == 1, ell >= 0, as.integer(ell) == ell)
+  stopifnot(length(ell) == 1, ell >= 0, trunc(ell) == ell)
 
   locality <- igraph.match.arg(locality)
 

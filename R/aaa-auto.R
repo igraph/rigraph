@@ -37,7 +37,7 @@ vcount_impl <- function(graph) {
 
 empty_attrs_impl <- function(n, directed, attr) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -93,8 +93,8 @@ sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE)
 
 wheel_impl <- function(n, mode=OUT, center=0) {
   # Argument checks
-  n <- as.integer(n)
-  center <- as.integer(center)
+  n <- as.numeric(n)
+  center <- as.numeric(center)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -106,7 +106,7 @@ wheel_impl <- function(n, mode=OUT, center=0) {
 square_lattice_impl <- function(dimvector, nei=1, directed=FALSE, mutual=FALSE, periodic=NULL) {
   # Argument checks
   dimvector <- as.numeric(dimvector)
-  nei <- as.integer(nei)
+  nei <- as.numeric(nei)
   directed <- as.logical(directed)
   mutual <- as.logical(mutual)
   if (!is.null(periodic)) periodic <- as.logical(periodic)
@@ -133,8 +133,8 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
 
 kary_tree_impl <- function(n, children=2, type=OUT) {
   # Argument checks
-  n <- as.integer(n)
-  children <- as.integer(children)
+  n <- as.numeric(n)
+  children <- as.numeric(children)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -156,8 +156,8 @@ symmetric_tree_impl <- function(branches, type=OUT) {
 
 regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
   # Argument checks
-  h <- as.integer(h)
-  k <- as.integer(k)
+  h <- as.numeric(h)
+  k <- as.numeric(k)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -169,7 +169,7 @@ regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
 graph_power_impl <- function(graph, order, directed=FALSE) {
   # Argument checks
   ensure_igraph(graph)
-  order <- as.integer(order)
+  order <- as.numeric(order)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -181,9 +181,9 @@ graph_power_impl <- function(graph, order, directed=FALSE) {
 
 lcf_vector_impl <- function(n, shifts, repeats=1) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   shifts <- as.numeric(shifts)
-  repeats <- as.integer(repeats)
+  repeats <- as.numeric(repeats)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -247,7 +247,7 @@ realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, allowed.edge.type
 
 circulant_impl <- function(n, shifts, directed=FALSE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   shifts <- as.numeric(shifts)
   directed <- as.logical(directed)
 
@@ -260,8 +260,8 @@ circulant_impl <- function(n, shifts, directed=FALSE) {
 
 generalized_petersen_impl <- function(n, k) {
   # Argument checks
-  n <- as.integer(n)
-  k <- as.integer(k)
+  n <- as.numeric(n)
+  k <- as.numeric(k)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -272,8 +272,8 @@ generalized_petersen_impl <- function(n, k) {
 
 turan_impl <- function(n, r) {
   # Argument checks
-  n <- as.integer(n)
-  r <- as.integer(r)
+  n <- as.numeric(n)
+  r <- as.numeric(r)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -297,10 +297,10 @@ weighted_sparsemat_impl <- function(A, directed, attr, loops=FALSE) {
 
 forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   fw.prob <- as.numeric(fw.prob)
   bw.factor <- as.numeric(bw.factor)
-  ambs <- as.integer(ambs)
+  ambs <- as.numeric(ambs)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -319,10 +319,10 @@ forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=
 
 simple_interconnected_islands_game_impl <- function(islands.n, islands.size, islands.pin, n.inter) {
   # Argument checks
-  islands.n <- as.integer(islands.n)
-  islands.size <- as.integer(islands.size)
+  islands.n <- as.numeric(islands.n)
+  islands.size <- as.numeric(islands.size)
   islands.pin <- as.numeric(islands.pin)
-  n.inter <- as.integer(n.inter)
+  n.inter <- as.numeric(n.inter)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -341,7 +341,7 @@ simple_interconnected_islands_game_impl <- function(islands.n, islands.size, isl
 
 static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, loops=FALSE, multiple=FALSE) {
   # Argument checks
-  no.of.edges <- as.integer(no.of.edges)
+  no.of.edges <- as.numeric(no.of.edges)
   fitness.out <- as.numeric(fitness.out)
   if (!is.null(fitness.in)) fitness.in <- as.numeric(fitness.in)
   loops <- as.logical(loops)
@@ -362,8 +362,8 @@ static_fitness_game_impl <- function(no.of.edges, fitness.out, fitness.in=NULL, 
 
 static_power_law_game_impl <- function(no.of.nodes, no.of.edges, exponent.out, exponent.in=-1, loops=FALSE, multiple=FALSE, finite.size.correction=TRUE) {
   # Argument checks
-  no.of.nodes <- as.integer(no.of.nodes)
-  no.of.edges <- as.integer(no.of.edges)
+  no.of.nodes <- as.numeric(no.of.nodes)
+  no.of.edges <- as.numeric(no.of.edges)
   exponent.out <- as.numeric(exponent.out)
   exponent.in <- as.numeric(exponent.in)
   loops <- as.logical(loops)
@@ -388,8 +388,8 @@ static_power_law_game_impl <- function(no.of.nodes, no.of.edges, exponent.out, e
 
 k_regular_game_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) {
   # Argument checks
-  no.of.nodes <- as.integer(no.of.nodes)
-  k <- as.integer(k)
+  no.of.nodes <- as.numeric(no.of.nodes)
+  k <- as.numeric(k)
   directed <- as.logical(directed)
   multiple <- as.logical(multiple)
 
@@ -407,7 +407,7 @@ k_regular_game_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) 
 
 sbm_game_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   pref.matrix <- as.matrix(structure(as.double(pref.matrix), dim=dim(pref.matrix)))
   block.sizes <- as.numeric(block.sizes)
   directed <- as.logical(directed)
@@ -427,8 +427,8 @@ sbm_game_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FAL
 
 hsbm_game_impl <- function(n, m, rho, C, p) {
   # Argument checks
-  n <- as.integer(n)
-  m <- as.integer(m)
+  n <- as.numeric(n)
+  m <- as.numeric(m)
   rho <- as.numeric(rho)
   C <- as.matrix(structure(as.double(C), dim=dim(C)))
   p <- as.numeric(p)
@@ -450,7 +450,7 @@ hsbm_game_impl <- function(n, m, rho, C, p) {
 
 hsbm_list_game_impl <- function(n, mlist, rholist, Clist, p) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   mlist <- as.numeric(mlist)
   p <- as.numeric(p)
 
@@ -488,7 +488,7 @@ correlated_game_impl <- function(old.graph, corr, p=edge_density(old.graph), per
 
 correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NULL) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   directed <- as.logical(directed)
@@ -515,8 +515,8 @@ dot_product_game_impl <- function(vecs, directed=FALSE) {
 
 sample_sphere_surface_impl <- function(dim, n=1, radius=1, positive=TRUE) {
   # Argument checks
-  dim <- as.integer(dim)
-  n <- as.integer(n)
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
@@ -529,8 +529,8 @@ sample_sphere_surface_impl <- function(dim, n=1, radius=1, positive=TRUE) {
 
 sample_sphere_volume_impl <- function(dim, n=1, radius=1, positive=TRUE) {
   # Argument checks
-  dim <- as.integer(dim)
-  n <- as.integer(n)
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
@@ -543,7 +543,7 @@ sample_sphere_volume_impl <- function(dim, n=1, radius=1, positive=TRUE) {
 
 sample_dirichlet_impl <- function(n, alpha) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   alpha <- as.numeric(alpha)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -815,7 +815,7 @@ get_k_shortest_paths_impl <- function(graph, weights=NULL, k, from, to, mode=c("
   } else {
     weights <- NULL
   }
-  k <- as.integer(k)
+  k <- as.numeric(k)
   from <- as_igraph_vs(graph, from)
   if (length(from) == 0) {
     stop("No vertex was specified")
@@ -1205,7 +1205,7 @@ ecc_impl <- function(graph, eids=E(graph), k=3, offset=FALSE, normalize=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   eids <- as_igraph_es(graph, eids)
-  k <- as.integer(k)
+  k <- as.numeric(k)
   offset <- as.logical(offset)
   normalize <- as.logical(normalize)
 
@@ -1566,7 +1566,7 @@ centralization_betweenness_impl <- function(graph, directed=TRUE, normalized=TRU
 centralization_betweenness_tmax_impl <- function(graph=NULL, nodes=0, directed=TRUE) {
   # Argument checks
   if (!is.null(graph)) ensure_igraph(graph)
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -1592,7 +1592,7 @@ centralization_closeness_impl <- function(graph, mode=c("out", "in", "all", "tot
 centralization_closeness_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out", "in", "all", "total")) {
   # Argument checks
   if (!is.null(graph)) ensure_igraph(graph)
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -1620,7 +1620,7 @@ centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, sc
 centralization_eigenvector_centrality_tmax_impl <- function(graph=NULL, nodes=0, directed=FALSE, scale=TRUE) {
   # Argument checks
   if (!is.null(graph)) ensure_igraph(graph)
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   directed <- as.logical(directed)
   scale <- as.logical(scale)
 
@@ -1871,7 +1871,7 @@ random_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out", "i
     stop("No vertex was specified")
   }
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  steps <- as.integer(steps)
+  steps <- as.numeric(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -1902,7 +1902,7 @@ random_edge_walk_impl <- function(graph, start, steps, weights=NULL, mode=c("out
     stop("No vertex was specified")
   }
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-  steps <- as.integer(steps)
+  steps <- as.numeric(steps)
   stuck <- switch(igraph.match.arg(stuck), "error" = 0L, "return" = 1L)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2088,10 +2088,10 @@ is_bipartite_impl <- function(graph) {
 
 bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c("all", "out", "in", "total")) {
   # Argument checks
-  n1 <- as.integer(n1)
-  n2 <- as.integer(n2)
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
   p <- as.numeric(p)
-  m <- as.integer(m)
+  m <- as.numeric(m)
   directed <- as.logical(directed)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
@@ -2216,8 +2216,8 @@ bridges_impl <- function(graph) {
 cliques_impl <- function(graph, min=0, max=0) {
   # Argument checks
   ensure_igraph(graph)
-  min <- as.integer(min)
-  max <- as.integer(max)
+  min <- as.numeric(min)
+  max <- as.numeric(max)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2234,8 +2234,8 @@ cliques_impl <- function(graph, min=0, max=0) {
 clique_size_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   ensure_igraph(graph)
-  min.size <- as.integer(min.size)
-  max.size <- as.integer(max.size)
+  min.size <- as.numeric(min.size)
+  max.size <- as.numeric(max.size)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2264,8 +2264,8 @@ maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0,
   # Argument checks
   ensure_igraph(graph)
   subset <- as_igraph_vs(graph, subset)
-  min.size <- as.integer(min.size)
-  max.size <- as.integer(max.size)
+  min.size <- as.numeric(min.size)
+  max.size <- as.numeric(max.size)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2285,8 +2285,8 @@ maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0,
 maximal_cliques_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   ensure_igraph(graph)
-  min.size <- as.integer(min.size)
-  max.size <- as.integer(max.size)
+  min.size <- as.numeric(min.size)
+  max.size <- as.numeric(max.size)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2397,7 +2397,7 @@ layout_umap_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.dis
   use.seed <- as.logical(use.seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
-  epochs <- as.integer(epochs)
+  epochs <- as.numeric(epochs)
   distances.are.weights <- as.logical(distances.are.weights)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2414,7 +2414,7 @@ layout_umap_3d_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.
   use.seed <- as.logical(use.seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
-  epochs <- as.integer(epochs)
+  epochs <- as.numeric(epochs)
   distances.are.weights <- as.logical(distances.are.weights)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2543,7 +2543,7 @@ graphlets_impl <- function(graph, weights=NULL, niter=1000) {
   } else {
     weights <- NULL
   }
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2577,7 +2577,7 @@ hrg_sample_many_impl <- function(hrg, num.samples) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
-  num.samples <- as.integer(num.samples)
+  num.samples <- as.numeric(num.samples)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2612,7 +2612,7 @@ hrg_consensus_impl <- function(graph, hrg=NULL, start=FALSE, num.samples=10000) 
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
   start <- as.logical(start)
-  num.samples <- as.integer(num.samples)
+  num.samples <- as.numeric(num.samples)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2640,7 +2640,7 @@ hrg_resize_impl <- function(hrg, newsize) {
     hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
   }
   hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
-  newsize <- as.integer(newsize)
+  newsize <- as.numeric(newsize)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3091,8 +3091,8 @@ isomorphic_impl <- function(graph1, graph2) {
 
 isoclass_create_impl <- function(size, number, directed=TRUE) {
   # Argument checks
-  size <- as.integer(size)
-  number <- as.integer(number)
+  size <- as.numeric(size)
+  number <- as.numeric(number)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3495,7 +3495,7 @@ automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "f
 
 graph_count_impl <- function(n, directed=FALSE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3508,7 +3508,7 @@ graph_count_impl <- function(n, directed=FALSE) {
 adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=graph.strength(graph, weights=weights)/(vcount(graph)-1), options=igraph.arpack.default) {
   # Argument checks
   ensure_igraph(graph)
-  no <- as.integer(no)
+  no <- as.numeric(no)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3532,7 +3532,7 @@ adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
 laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=igraph.arpack.default) {
   # Argument checks
   ensure_igraph(graph)
-  no <- as.integer(no)
+  no <- as.numeric(no)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3578,7 +3578,7 @@ sir_impl <- function(graph, beta, gamma, no.sim=100) {
   ensure_igraph(graph)
   beta <- as.numeric(beta)
   gamma <- as.numeric(gamma)
-  no.sim <- as.integer(no.sim)
+  no.sim <- as.numeric(no.sim)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3675,7 +3675,7 @@ eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options
 solve_lsap_impl <- function(c, n) {
   # Argument checks
   c <- as.matrix(structure(as.double(c), dim=dim(c)))
-  n <- as.integer(n)
+  n <- as.numeric(n)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3734,7 +3734,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL)
   if (length(start) == 0) {
     stop("No vertex was specified")
   }
-  bfs.cutoff <- as.integer(bfs.cutoff)
+  bfs.cutoff <- as.numeric(bfs.cutoff)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3759,7 +3759,7 @@ fundamental_cycles_impl <- function(graph, start=NULL, bfs.cutoff, weights=NULL)
 minimum_cycle_basis_impl <- function(graph, bfs.cutoff, complete, use.cycle.order, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
-  bfs.cutoff <- as.integer(bfs.cutoff)
+  bfs.cutoff <- as.numeric(bfs.cutoff)
   complete <- as.logical(complete)
   use.cycle.order <- as.logical(use.cycle.order)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -3875,7 +3875,7 @@ random_spanning_tree_impl <- function(graph, vid=0) {
 
 tree_game_impl <- function(n, directed=FALSE, method=c("lerw", "prufer")) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
   method <- switch(igraph.match.arg(method), "prufer"=0L, "lerw"=1L)
 

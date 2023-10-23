@@ -1170,7 +1170,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
     res <- .Call(
       R_igraph_community_leiden, graph, weights,
       vertex_weights, as.numeric(resolution_parameter),
-      as.numeric(beta), !is.null(membership), as.integer(n_iterations),
+      as.numeric(beta), !is.null(membership), as.numeric(n_iterations),
       membership
     )
     membership <- res$membership
@@ -1240,7 +1240,7 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks
   ensure_igraph(graph)
 
-  no.of.communities <- as.integer(no.of.communities)
+  no.of.communities <- as.numeric(no.of.communities)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2042,7 +2042,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   } else {
     v.weights <- NULL
   }
-  nb.trials <- as.integer(nb.trials)
+  nb.trials <- as.numeric(nb.trials)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

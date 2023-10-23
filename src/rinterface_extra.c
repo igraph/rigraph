@@ -3185,7 +3185,7 @@ SEXP R_igraph_arpack_unpack_complex(SEXP vectors, SEXP values, SEXP nev) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_values);
-  c_nev=INTEGER(nev)[0];
+  c_nev=REAL(nev)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_arpack_unpack_complex(&c_vectors, &c_values, c_nev));
 
@@ -6894,7 +6894,7 @@ SEXP R_igraph_neighborhood_size(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_t res;
-  igraph_integer_t mindist=INTEGER(pmindist)[0];
+  igraph_integer_t mindist=REAL(pmindist)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
@@ -6918,7 +6918,7 @@ SEXP R_igraph_neighborhood(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_vector_int_list_t res;
-  igraph_integer_t mindist=INTEGER(pmindist)[0];
+  igraph_integer_t mindist=REAL(pmindist)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
@@ -6942,7 +6942,7 @@ SEXP R_igraph_neighborhood_graphs(SEXP graph, SEXP pvids, SEXP porder,
   igraph_integer_t order=(igraph_integer_t) REAL(porder)[0];
   igraph_neimode_t mode=(igraph_neimode_t) Rf_asInteger(pmode);
   igraph_graph_list_t res;
-  igraph_integer_t mindist=INTEGER(pmindist)[0];
+  igraph_integer_t mindist=REAL(pmindist)[0];
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
@@ -7108,8 +7108,8 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
     IGRAPH_R_CHECK(igraph_vector_int_init(&subset, 0));
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &subset);
-  c_min_size=INTEGER(min_size)[0];
-  c_max_size=INTEGER(max_size)[0];
+  c_min_size=REAL(min_size)[0];
+  c_max_size=REAL(max_size)[0];
                                         /* Call igraph */
   igraph_maximal_cliques_subset(&c_graph, Rf_isNull(psubset) ? 0 : &subset,
                                 /*ptr=*/ 0, &c_no, /*file=*/ 0,
@@ -7118,8 +7118,8 @@ SEXP R_igraph_maximal_cliques_count(SEXP graph, SEXP psubset,
   igraph_vector_int_destroy(&subset);
   IGRAPH_FINALLY_CLEAN(1);
                                         /* Convert output */
-  PROTECT(no=NEW_INTEGER(1));
-  INTEGER(no)[0]=c_no;
+  PROTECT(no=NEW_NUMERIC(1));
+  REAL(no)[0]=c_no;
   result=no;
 
   UNPROTECT(1);
@@ -8457,7 +8457,7 @@ SEXP R_igraph_graphlets(SEXP graph, SEXP weights, SEXP niter) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_Mu);
-  c_niter=(igraph_integer_t) INTEGER(niter)[0];
+  c_niter=(igraph_integer_t) REAL(niter)[0];
   /* Call igraph */
   IGRAPH_R_CHECK(igraph_graphlets(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_cliques, &c_Mu, c_niter));
 
@@ -8614,7 +8614,7 @@ SEXP R_igraph_adjacency_spectral_embedding(SEXP graph, SEXP no,
     R_SEXP_to_vector(pweights, &weights);
   }
   c_which=INTEGER(pwhich)[0];
-  c_no=INTEGER(no)[0];
+  c_no=REAL(no)[0];
   c_scaled=LOGICAL(scaled)[0];
   if (0 != igraph_matrix_init(&c_X, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -8692,7 +8692,7 @@ SEXP R_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
   /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   directed=igraph_is_directed(&c_graph);
-  c_no=INTEGER(no)[0];
+  c_no=REAL(no)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_which=INTEGER(which)[0];
   c_type=(igraph_laplacian_spectral_embedding_type_t) INTEGER(type)[0];
@@ -8750,10 +8750,10 @@ SEXP R_igraph_laplacian_spectral_embedding(SEXP graph, SEXP no,
 SEXP R_igraph_simple_interconnected_islands_game(SEXP islands_n, SEXP islands_size, SEXP islands_pin, SEXP n_inter) {
 
   igraph_t g;
-  igraph_integer_t a=INTEGER(islands_n)[0];
-  igraph_integer_t b=INTEGER(islands_size)[0];
+  igraph_integer_t a=REAL(islands_n)[0];
+  igraph_integer_t b=REAL(islands_size)[0];
   igraph_real_t c=REAL(islands_pin)[0];
-  igraph_integer_t d=INTEGER(n_inter)[0];
+  igraph_integer_t d=REAL(n_inter)[0];
   SEXP result;
 
   IGRAPH_R_CHECK(igraph_simple_interconnected_islands_game(&g, a, b, c, d));
@@ -8774,7 +8774,7 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   igraph_vector_int_t c_multiplicity1;
   igraph_vector_int_t c_multiplicity2;
   igraph_integer_t c_probe1;
-  igraph_integer_t which=INTEGER(pwhich)[0];
+  int which=INTEGER(pwhich)[0];
   igraph_bool_t do_1=(which == 0 || which == 1);
   igraph_bool_t do_2=(which == 0 || which == 2);
   SEXP proj1;
@@ -8796,7 +8796,7 @@ SEXP R_igraph_bipartite_projection(SEXP graph, SEXP types, SEXP probe1,
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_multiplicity2);
   multiplicity2=R_GlobalEnv; /* hack to have a non-NULL value */
-  c_probe1=INTEGER(probe1)[0];
+  c_probe1=REAL(probe1)[0];
   /* Call igraph */
   IGRAPH_R_CHECK(igraph_bipartite_projection(&c_graph, (Rf_isNull(types) ? 0 : &c_types), do_1 ? &c_proj1 : 0, do_2 ? &c_proj2 : 0, (Rf_isNull(multiplicity1) ? 0 : &c_multiplicity1), (Rf_isNull(multiplicity2) ? 0 : &c_multiplicity2), c_probe1));
 

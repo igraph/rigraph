@@ -1113,7 +1113,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -1207,7 +1207,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
@@ -1235,17 +1235,17 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood_graphs, graph,
     as_igraph_vs(graph, nodes) - 1, as.numeric(order),
-    as.numeric(mode), mindist
+    as.integer(mode), mindist
   )
   res
 }

@@ -9,7 +9,7 @@ INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
     INCONV:
-        IN: '%I% <- as.integer(%I%)'
+        IN: '%I% <- as.numeric(%I%)'
 
 REAL:
     DEFAULT:

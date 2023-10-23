@@ -59,12 +59,12 @@ INTEGER:
         OUT: '&%C%'
         INOUT: '&%C%'
     INCONV:
-        IN: '%C%=INTEGER(%I%)[0];'
+        IN: '%C%=(igraph_integer_t) REAL(%I%)[0];'
         OUT: '%C%=0;'
     OUTCONV:
         OUT: |-
-            PROTECT(%I%=NEW_INTEGER(1));
-            INTEGER(%I%)[0]=%C%;
+            PROTECT(%I%=NEW_NUMERIC(1));
+            REAL(%I%)[0]=(double) %C%;
 
 INT:
     CTYPE: int

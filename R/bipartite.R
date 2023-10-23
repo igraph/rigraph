@@ -117,7 +117,7 @@ bipartite_projection <- function(graph, types = NULL,
   # Function call
   res <- .Call(
     R_igraph_bipartite_projection, graph, types,
-    as.integer(probe1), which
+    as.numeric(probe1), which
   )
   if (remove.type) {
     if (is_igraph(res[[1]])) {

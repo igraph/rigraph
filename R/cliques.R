@@ -170,8 +170,8 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
   if (is.null(max)) {
     max <- 0
   }
-  min <- as.integer(min)
-  max <- as.integer(max)
+  min <- as.numeric(min)
+  max <- as.numeric(max)
 
   if (!is.null(subset)) {
     subset <- as.numeric(as_igraph_vs(graph, subset) - 1)

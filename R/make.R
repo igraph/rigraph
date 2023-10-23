@@ -704,7 +704,7 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
     stop("number of vertices must be an integer")
   }
 
-  n <- suppressWarnings(as.integer(n))
+  n <- suppressWarnings(as.numeric(n))
   if (is.na(n)) {
     stop("number of vertices must be an integer")
   }
@@ -1334,7 +1334,7 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 make_chordal_ring <- function(n, w, directed = FALSE) {
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_extended_chordal_ring, as.integer(n),
+    R_igraph_extended_chordal_ring, as.numeric(n),
     as.matrix(w), as.logical(directed)
   )
   if (igraph_opt("add.params")) {
@@ -1527,8 +1527,8 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' @export
 make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
                                       mode = c("all", "out", "in")) {
-  n1 <- as.integer(n1)
-  n2 <- as.integer(n2)
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(igraph.match.arg(mode),
     "out" = 1,
@@ -1652,7 +1652,7 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' print_all(make_full_citation_graph(10))
 make_full_citation_graph <- function(n, directed = TRUE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))
