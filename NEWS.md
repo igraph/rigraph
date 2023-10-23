@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9013
+
+## Features
+
+  - Improve symmetry check for adjacency matrices on input (#911).
+
+## Documentation
+
+  - Fix formul in reciprocity() docs.
+
+
 # igraph 1.5.1.9012
 
 ## Features
