@@ -5738,7 +5738,7 @@ SEXP R_igraph_establishment_game(SEXP pnodes, SEXP ptypes, SEXP pk,
 
 SEXP R_igraph_motifs_randesu(SEXP graph, SEXP psize, SEXP pcutprob) {
   igraph_t g;
-  igraph_integer_t size=INTEGER(psize)[0];
+  igraph_integer_t size=REAL(psize)[0];
   igraph_vector_t cutprob;
   igraph_vector_t res;
   SEXP result;
@@ -5757,7 +5757,7 @@ SEXP R_igraph_motifs_randesu(SEXP graph, SEXP psize, SEXP pcutprob) {
 
 SEXP R_igraph_motifs_randesu_no(SEXP graph, SEXP psize, SEXP pcutprob) {
   igraph_t g;
-  igraph_integer_t size=INTEGER(psize)[0];
+  igraph_integer_t size=REAL(psize)[0];
   igraph_vector_t cutprob;
   igraph_integer_t res;
   SEXP result;
@@ -5765,8 +5765,8 @@ SEXP R_igraph_motifs_randesu_no(SEXP graph, SEXP psize, SEXP pcutprob) {
   R_SEXP_to_vector(pcutprob, &cutprob);
   R_SEXP_to_igraph(graph, &g);
   IGRAPH_R_CHECK(igraph_motifs_randesu_no(&g, &res, size, &cutprob));
-  PROTECT(result=NEW_INTEGER(1));
-  INTEGER(result)[0]=res;
+  PROTECT(result=NEW_NUMERIC(1));
+  REAL(result)[0]=res;
 
   UNPROTECT(1);
   return result;
@@ -5775,9 +5775,9 @@ SEXP R_igraph_motifs_randesu_no(SEXP graph, SEXP psize, SEXP pcutprob) {
 SEXP R_igraph_motifs_randesu_estimate(SEXP graph, SEXP psize, SEXP pcutprob,
                                       SEXP psamplesize, SEXP psample) {
   igraph_t g;
-  igraph_integer_t size=INTEGER(psize)[0];
+  igraph_integer_t size=REAL(psize)[0];
   igraph_vector_t cutprob;
-  igraph_integer_t samplesize=INTEGER(psamplesize)[0];
+  igraph_integer_t samplesize=REAL(psamplesize)[0];
   igraph_vector_int_t sample;
   igraph_vector_int_t *sampleptr=0;
   igraph_integer_t res;

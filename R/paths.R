@@ -74,7 +74,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   ## Function call
   res <- .Call(
     R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.integer(cutoff), mode
+    as.numeric(cutoff), mode
   )
   res <- get.all.simple.paths.pp(res)
 
