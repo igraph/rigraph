@@ -89,6 +89,14 @@ static igraph_real_t igraph_rng_R_get_exp(void *state, igraph_real_t rate) {
     return scale * exp_rand();
 }
 
+static igraph_real_t igraph_rng_R_get_gamma(void *state, igraph_real_t shape, igraph_real_t scale) {
+    return Rf_rgamma(shape, scale);
+}
+
+static igraph_real_t igraph_rng_R_get_pois(void *state, igraph_real_t rate) {
+    return Rf_rpois(rate);
+}
+
 static igraph_rng_type_t igraph_rng_R_type = {
     /* name= */      "GNU R",
     /* bits = */     31,
@@ -102,8 +110,8 @@ static igraph_rng_type_t igraph_rng_R_type = {
     /* get_geom= */  igraph_rng_R_get_geom,
     /* get_binom= */ igraph_rng_R_get_binom,
     /* get_exp= */   igraph_rng_R_get_exp,
-    /* get_gamma= */ NULL, // TODO
-    /* get_pois= */  NULL  // TODO
+    /* get_gamma= */ igraph_rng_R_get_gamma,
+    /* get_pois= */  igraph_rng_R_get_pois
 };
 
 igraph_rng_t igraph_rng_R_instance;
