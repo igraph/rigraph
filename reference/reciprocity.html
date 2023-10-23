@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9013</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,9 +94,9 @@
     <p>The measure of reciprocity defines the proportion of mutual connections, in
 a directed graph. It is most commonly defined as the probability that the
 opposite counterpart of a directed edge is also included in the graph. Or in
-adjacency matrix notation: \(\sum_{ij} (A\cdot A')_{ij}\), where \(A\cdot A'\) is the
-element-wise product of matrix \(A\) and its transpose. This measure is
-calculated if the <code>mode</code> argument is <code>default</code>.</p>
+adjacency matrix notation:
+\(1 - \left(\sum_{i,j} |A_{ij} - A_{ji}|\right) / \left(2\sum_{i,j} A_{ij}\right)\).
+This measure is calculated if the <code>mode</code> argument is <code>default</code>.</p>
 <p>Prior to igraph version 0.6, another measure was implemented, defined as the
 probability of mutual connection between a vertex pair, if we know that
 there is a (possibly non-mutual) connection between them. In other words,
