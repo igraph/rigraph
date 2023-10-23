@@ -36,6 +36,44 @@
 #' @export
 is_tree <- is_tree_impl
 
+#' Decide whether a graph is a forest.
+#'
+#' `is_forest()` decides whether a graph is a forest, and optionally returns a
+#' set of possible root vertices for its components.
+#'
+#' An undirected graph is a forest if it has no cycles. In the directed case,
+#' a possible additional requirement is that edges in each tree are oriented
+#' away from the root (out-trees or arborescences) or all edges are oriented
+#' towards the root (in-trees or anti-arborescences). This test can be
+#' controlled using the mode parameter.
+#'
+#' By convention, the null graph (i.e. the graph with no vertices) is considered
+#' to be a forest.
+#'
+#' @param graph An igraph graph object
+#' @param mode Whether to consider edge directions in a directed graph.
+#'   \sQuote{all} ignores edge directions; \sQuote{out} requires edges to be
+#'   oriented outwards from the root, \sQuote{in} requires edges to be oriented
+#'   towards the root.
+#' @param details Whether to return only whether the graph is a tree (`FALSE`)
+#'   or also a possible root (`TRUE`)
+#' @return When `details` is `FALSE`, a logical value that indicates
+#'   whether the graph is a tree. When `details` is `TRUE`, a named
+#'   list with two entries: \item{res}{Logical value that indicates whether the
+#'   graph is a tree.} \item{root}{The root vertex of the tree; undefined if
+#'   the graph is not a tree.}
+#'
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_tree(7, 2)
+#' is_forest(g)
+#' is_forest(g, details = TRUE)
+#'
+#' @family trees
+#' @export
+is_forest <- is_forest_impl
+
 #' Convert a tree graph to its Prüfer sequence
 #'
 #' `to_prufer()` converts a tree graph into its Prüfer sequence.
