@@ -4,7 +4,7 @@
 \alias{greedy_vertex_coloring}
 \title{Greedy vertex coloring}
 \usage{
-greedy_vertex_coloring(graph, heuristic = c("colored_neighbors"))
+greedy_vertex_coloring(graph, heuristic = c("colored_neighbors", "dsatur"))
 }
 \arguments{
 \item{graph}{The graph object to color}
