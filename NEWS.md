@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9014
+
+## Documentation
+
+  - Render reciprocity docs.
+
+
 # igraph 1.5.1.9013
 
 ## Features
