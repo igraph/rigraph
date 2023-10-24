@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 21 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 802 reverse dependencies (799 from CRAN + 3 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 19 new problems
- * We failed to check 0 packages
+ * We saw 29 new problems
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -32,6 +32,15 @@ Issues with CRAN packages are summarised below.
 * economiccomplexity
   checking re-building of vignette outputs ... ERROR
 
+* ggnetwork
+  checking tests ... ERROR
+
+* inferCSN
+  checking examples ... ERROR
+
+* influential
+  checking dependencies in R code ... WARNING
+
 * malan
   checking examples ... ERROR
   checking tests ... ERROR
@@ -39,11 +48,17 @@ Issues with CRAN packages are summarised below.
 * manynet
   checking tests ... ERROR
 
+* migraph
+  checking examples ... ERROR
+
 * molnet
   checking examples ... ERROR
 
 * mwcsr
   checking re-building of vignette outputs ... ERROR
+
+* NAIR
+  checking tests ... ERROR
 
 * nat
   checking tests ... ERROR
@@ -57,6 +72,9 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* nosoi
+  checking re-building of vignette outputs ... ERROR
+
 * oddnet
   checking examples ... ERROR
 
@@ -68,6 +86,19 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* phyloseqGraphTest
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* rags2ridges
+  checking examples ... ERROR
+
+* rgraph6
+  checking re-building of vignette outputs ... ERROR
+
+* riverconn
+  checking re-building of vignette outputs ... ERROR
+
 * SteinerNet
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -75,3 +106,8 @@ Issues with CRAN packages are summarised below.
 * wpa
   checking examples ... ERROR
 
+### Failed to check
+
+* ragt2ridges (NA)
+* streamDAG   (NA)
+* vivid       (NA)

@@ -295,6 +295,123 @@ Run `revdepcheck::cloud_details(, "economiccomplexity")` for more info
       All declared Imports should be used.
     ```
 
+# ggnetwork
+
+<details>
+
+* Version: 0.5.12
+* GitHub: https://github.com/briatte/ggnetwork
+* Source code: https://github.com/cran/ggnetwork
+* Date/Publication: 2023-03-06 20:00:02 UTC
+* Number of recursive dependencies: 75
+
+Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(ggnetwork)
+      Loading required package: ggplot2
+      > 
+      > test_check("ggnetwork")
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      
+    ...
+          ▆
+       1. ├─testthat::expect_s3_class(...) at test-ggnetwork.R:35:2
+       2. │ └─testthat::quasi_label(enquo(object), arg = "object")
+       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+       4. └─ggnetwork::ggnetwork(n, layout = matrix(runif(28), ncol = 2)) at test-ggnetwork.R:36:4
+       5.   └─ggnetwork:::fortify.igraph(x, ...)
+      
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘sna’ ‘utils’
+      All declared Imports should be used.
+    ```
+
+# inferCSN
+
+<details>
+
+* Version: 0.99.0
+* GitHub: https://github.com/mengxu98/inferCSN
+* Source code: https://github.com/cran/inferCSN
+* Date/Publication: 2023-10-11 18:20:02 UTC
+* Number of recursive dependencies: 101
+
+Run `revdepcheck::cloud_details(, "inferCSN")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘inferCSN-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: dynamic.networks
+    > ### Title: Plot of dynamic networks
+    > ### Aliases: dynamic.networks
+    > 
+    > ### ** Examples
+    > 
+    > library(inferCSN)
+    > data("exampleMatrix")
+    > weightDT <- inferCSN(exampleMatrix)
+    > g <- dynamic.networks(weightDT, regulators = weightDT[1, 1])
+    Error in fortify.igraph(x, ...) : 
+      layout matrix dimensions do not match network size
+    Calls: dynamic.networks -> ggnetwork -> fortify.igraph
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 28.3Mb
+      sub-directories of 1Mb or more:
+        libs  27.3Mb
+    ```
+
+# influential
+
+<details>
+
+* Version: 2.2.7
+* GitHub: https://github.com/asalavaty/influential
+* Source code: https://github.com/cran/influential
+* Date/Publication: 2023-05-16 05:10:02 UTC
+* Number of recursive dependencies: 189
+
+Run `revdepcheck::cloud_details(, "influential")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking dependencies in R code ... WARNING
+    ```
+    '::' or ':::' import not declared from: ‘lifecycle’
+    ```
+
 # malan
 
 <details>
@@ -411,6 +528,47 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
     Package which this enhances but not available for checking: ‘Rgraphviz’
     ```
 
+# migraph
+
+<details>
+
+* Version: 1.1.0
+* GitHub: https://github.com/snlab-ch/migraph
+* Source code: https://github.com/cran/migraph
+* Date/Publication: 2023-10-04 15:50:16 UTC
+* Number of recursive dependencies: 117
+
+Run `revdepcheck::cloud_details(, "migraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘migraph-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: features
+    > ### Title: Measures of network topological features
+    > ### Aliases: features network_core network_factions network_modularity
+    > ###   network_smallworld network_scalefree network_balance
+    > 
+    > ### ** Examples
+    > 
+    ...
+    [1] -0.458
+    > network_smallworld(ison_brandes)
+    [1] NaN
+    > network_smallworld(ison_southern_women)
+    [1] -1.03
+    > network_scalefree(ison_adolescents)
+    Error in if (out$KS.p < 0.05) cat(paste("Note: Kolgomorov-Smirnov test that data",  : 
+      argument is of length zero
+    Calls: network_scalefree
+    Execution halted
+    ```
+
 # molnet
 
 <details>
@@ -441,7 +599,7 @@ Run `revdepcheck::cloud_details(, "molnet")` for more info
     > adj_mat <- matrix(rnorm(36),nrow=6)
     > graph <- igraph::graph_from_adjacency_matrix(adj_mat)
     Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
-      At vendor/cigraph/src/constructors/adjacency.c:334 : Edge counts should be non-negative, found -2.2147. Invalid value
+      At vendor/cigraph/src/constructors/adjacency.c:329 : Edge counts should be non-negative, found -2.2147. Invalid value
     Calls: <Anonymous> -> graph.adjacency.dense
     Execution halted
     ```
@@ -488,6 +646,47 @@ Run `revdepcheck::cloud_details(, "mwcsr")` for more info
       sub-directories of 1Mb or more:
         java   2.5Mb
         libs  14.2Mb
+    ```
+
+# NAIR
+
+<details>
+
+* Version: 1.0.2
+* GitHub: https://github.com/mlizhangx/Network-Analysis-for-Repertoire-Sequencing-
+* Source code: https://github.com/cran/NAIR
+* Date/Publication: 2023-09-27 10:20:08 UTC
+* Number of recursive dependencies: 87
+
+Run `revdepcheck::cloud_details(, "NAIR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(NAIR)
+      Welcome to NAIR: Network Analysis of Immune Repertoire.
+      Get started using `vignette("NAIR")`, or by visiting
+      https://mlizhangx.github.io/Network-Analysis-for-Repertoire-Sequencing-/
+      > 
+      > test_check("NAIR")
+    ...
+      `expected`: 20 55
+      
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 1219 ]
+      Error: Test failures
+      In addition: Warning messages:
+      1: In if (!inherits(graph, "igraph")) { :
+        closing unused connection 5 (/tmp/RtmpOAhibH/c.rds)
+      2: In if (!inherits(graph, "igraph")) { :
+        closing unused connection 4 (/tmp/RtmpOAhibH/b.rds)
+      Execution halted
     ```
 
 # nat
@@ -698,6 +897,47 @@ Run `revdepcheck::cloud_details(, "netrankr")` for more info
       sub-directories of 1Mb or more:
         doc    1.6Mb
         libs  10.5Mb
+    ```
+
+# nosoi
+
+<details>
+
+* Version: 1.1.0
+* GitHub: https://github.com/slequime/nosoi
+* Source code: https://github.com/cran/nosoi
+* Date/Publication: 2021-08-17 16:20:02 UTC
+* Number of recursive dependencies: 147
+
+Run `revdepcheck::cloud_details(, "nosoi")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘continuous.Rmd’ using rmarkdown
+    --- finished re-building ‘continuous.Rmd’
+    
+    --- re-building ‘discrete.Rmd’ using rmarkdown
+    
+    Quitting from lines 49-83 [setupMatrix] (discrete.Rmd)
+    Error: processing vignette 'discrete.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘discrete.Rmd’
+    ...
+    --- failed re-building ‘nosoi.Rmd’
+    
+    --- re-building ‘output.Rmd’ using rmarkdown
+    --- finished re-building ‘output.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘discrete.Rmd’ ‘nosoi.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 # oddnet
@@ -919,6 +1159,193 @@ Run `revdepcheck::cloud_details(, "phangorn")` for more info
       sub-directories of 1Mb or more:
         doc    1.5Mb
         libs   5.8Mb
+    ```
+
+# phyloseqGraphTest
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/jfukuyama/phyloseqGraphTest
+* Source code: https://github.com/cran/phyloseqGraphTest
+* Date/Publication: 2020-02-07 16:30:02 UTC
+* Number of recursive dependencies: 95
+
+Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘phyloseqGraphTest-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: plot_test_network
+    > ### Title: Plots the graph used for testing
+    > ### Aliases: plot_test_network
+    > 
+    > ### ** Examples
+    > 
+    > library(phyloseq)
+    > data(enterotype)
+    > gt = graph_perm_test(enterotype, sampletype = "SeqTech")
+    > plot_test_network(gt)
+    Error in fortify.igraph(data, ...) : 
+      layout matrix dimensions do not match network size
+    Calls: plot_test_network ... ggplot -> ggplot.default -> fortify -> fortify.igraph
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘gt_vignette.Rmd’ using rmarkdown
+    
+    Quitting from lines 175-176 [unnamed-chunk-5] (gt_vignette.Rmd)
+    Error: processing vignette 'gt_vignette.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘gt_vignette.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘gt_vignette.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘intergraph’
+      All declared Imports should be used.
+    ```
+
+*   checking LazyData ... NOTE
+    ```
+      'LazyData' is specified without a 'data' directory
+    ```
+
+# rags2ridges
+
+<details>
+
+* Version: 2.2.7
+* GitHub: https://github.com/CFWP/rags2ridges
+* Source code: https://github.com/cran/rags2ridges
+* Date/Publication: 2023-10-14 14:10:02 UTC
+* Number of recursive dependencies: 104
+
+Run `revdepcheck::cloud_details(, "rags2ridges")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘rags2ridges-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: GGMpathStats
+    > ### Title: Gaussian graphical model node pair path statistics
+    > ### Aliases: GGMpathStats
+    > 
+    > ### ** Examples
+    > 
+    > 
+    ...
+    
+    - Retained elements:  11 
+    - Corresponding to 3.67 % of possible edges 
+     
+    > 
+    > ## Obtain information on mediating and moderating paths between nodes 14 and 23
+    > pathStats <- GGMpathStats(PC0, 14, 23, verbose = TRUE, prune = FALSE)
+    Error in -path : invalid argument to unary operator
+    Calls: GGMpathStats -> rbind -> .pathContribution -> det -> determinant
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.2Mb
+      sub-directories of 1Mb or more:
+        libs   6.4Mb
+    ```
+
+# rgraph6
+
+<details>
+
+* Version: 2.0-2
+* GitHub: https://github.com/mbojan/rgraph6
+* Source code: https://github.com/cran/rgraph6
+* Date/Publication: 2022-08-25 12:10:02 UTC
+* Number of recursive dependencies: 60
+
+Run `revdepcheck::cloud_details(, "rgraph6")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘rgraph6.Rmd’ using rmarkdown
+    
+    Quitting from lines 162-171 [unnamed-chunk-9] (rgraph6.Rmd)
+    Error: processing vignette 'rgraph6.Rmd' failed with diagnostics:
+    values must be type 'integer',
+     but FUN(X[[1]]) result is type 'double'
+    --- failed re-building ‘rgraph6.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘rgraph6.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# riverconn
+
+<details>
+
+* Version: 0.3.28
+* GitHub: NA
+* Source code: https://github.com/cran/riverconn
+* Date/Publication: 2023-05-05 08:20:02 UTC
+* Number of recursive dependencies: 96
+
+Run `revdepcheck::cloud_details(, "riverconn")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘Tutorial.Rmd’ using rmarkdown
+    
+    Quitting from lines 210-221 [plot igraph] (Tutorial.Rmd)
+    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘Tutorial.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘Tutorial.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 # SteinerNet
