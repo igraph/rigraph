@@ -114,7 +114,7 @@ void igraph_i_pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
  * \c labeldegree2 instead of \c lphi, \c framewidth instead of \c bw,
  * \c fontsize instead of \c fos, \c rotation instead of \c phi,
  * \c radius instead of \c r, \c diamondratio instead of \c q,
- * \c labeldegree instead of \c la, \c vertexsize instead of \c size,
+ * \c labeldegree instead of \c la,
  * \c color instead of \c ic, \c framecolor instead of \c bc,
  * \c labelcolor instead of \c lc; these belong to vertices.
  *
@@ -138,8 +138,8 @@ void igraph_i_pajek_destroy_attr_vector(igraph_vector_ptr_t *attrs) {
  * In addition the following vertex attributes might be added: \c id
  * and \c name are added (with the same value) if there are vertex IDs in the
  * file. \c id is deprecated in favour of \c name and will no longer be used
- * by future versions of igraph. \c x and \c y, and potentially \c z if there
- * are vertex coordinates in the file.
+ * by future versions of igraph. \c x and \c y, and potentially \c z are also
+ * added if there are vertex coordinates in the file.
  *
  * </para><para>
  * The \c weight edge attribute will be added if there are edge weights present.
@@ -289,7 +289,23 @@ igraph_error_t igraph_read_graph_pajek(igraph_t *graph, FILE *instream) {
 #define V_Y                 2
 #define V_Z                 3
 #define V_SHAPE             4
-#define V_LAST              5
+#define V_XFACT             5
+#define V_YFACT             6
+#define V_LABELDIST         7
+#define V_LABELDEGREE2      8
+#define V_FRAMEWIDTH        9
+#define V_FONTSIZE         10
+#define V_ROTATION         11
+#define V_RADIUS           12
+#define V_DIAMONDRATIO     13
+#define V_LABELDEGREE      14
+#define V_VERTEXSIZE       15
+#define V_FONT             16
+#define V_URL              17
+#define V_COLOR            18
+#define V_FRAMECOLOR       19
+#define V_LABELCOLOR       20
+#define V_LAST             21
 
 #define E_WEIGHT            0
 #define E_LAST              1
@@ -340,10 +356,13 @@ static igraph_error_t igraph_i_pajek_escape(const char* src, char** dest) {
 
     for (s = src; *s; s++, d++) {
         switch (*s) {
+        /* Encode quotation marks as &#34;, as they would otherwise signify
+           the end/beginning of a string. */
         case '"':
             strcpy(d, "&#34;"); d += 4; break;
             break;
-        /* Convert both CR and LF to "\n", as neither should apear in a quoted string. */
+        /* Encode both CR and LF as \n, as neither should apear in a quoted string.
+           \n is the _only_ escape sequence Pajek understands. */
         case '\n':
         case '\r':
             *d = '\\'; d++;
@@ -399,6 +418,12 @@ static igraph_error_t igraph_i_pajek_escape(const char* src, char** dest) {
  * line endings manually with a text editor or with \c unix2dos or \c iconv
  * from the command line).
  *
+ * </para><para>
+ * Pajek will only interpret UTF-8 encoded files if they contain a byte-order
+ * mark (BOM) at the beginning. igraph is agnostic of string attribute encodings
+ * and therefore it will never write a BOM. You need to add this manually
+ * if/when necessary.
+ *
  * \param graph The graph object to write.
  * \param outstream The file to write to. It should be opened and writable.
  * \return Error code.
@@ -421,7 +446,13 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
     igraph_bool_t write_vertex_attrs = false;
 
     /* Same order as the #define's */
-    const char *vnames[] = { "id", "x", "y", "z", "shape" };
+    const char *vnames[] = { "id", "x", "y", "z", "shape", "xfact", "yfact",
+        "labeldist", "labeldegree2", "framewidth",
+        "fontsize", "rotation", "radius",
+        "diamondratio", "labeldegree", "vertexsize",
+        "font", "url", "color", "framecolor",
+        "labelcolor"
+    };
     IGRAPH_STATIC_ASSERT(sizeof(vnames) / sizeof(vnames[0]) == V_LAST);
 
     /* Arrays called xxx[]  are igraph attribute names,
@@ -544,7 +575,7 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
         }
     }
 
-    /* Check the vertex attributes */
+    /* Check the vertex attributes, and determine if we need to write them. */
     memset(vtypes, 0, sizeof(vtypes[0])*V_LAST);
     for (igraph_integer_t i = 0; i < V_LAST; i++) {
         if (igraph_i_attribute_has_attr(graph, IGRAPH_ATTRIBUTE_VERTEX, vnames[i])) {
@@ -667,6 +698,7 @@ igraph_error_t igraph_write_graph_pajek(const igraph_t *graph, FILE *outstream) 
     IGRAPH_FINALLY(igraph_eit_destroy, &eit);
 
     /* Check edge attributes */
+    /* TODO: refactor and simplify since only "weight" is relevant */
     for (igraph_integer_t i = 0; i < E_LAST; i++) {
         if (igraph_i_attribute_has_attr(graph, IGRAPH_ATTRIBUTE_EDGE, enames[i])) {
             IGRAPH_CHECK(igraph_i_attribute_gettype(
