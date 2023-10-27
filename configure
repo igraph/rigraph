@@ -22,6 +22,6 @@ fi
 echo "# Generated from Makevars.in, do not edit by hand" > src/Makevars.new
 sed -e "s|@cflags@|$PKG_CFLAGS|" src/Makevars.in >> src/Makevars.new
 if [ ! -f src/Makevars ] || (which diff > /dev/null && ! diff -q src/Makevars src/Makevars.new); then
-  cp -f src/Makevars.new src/Makevars
+    cp -f src/Makevars.new src/Makevars
 fi
 rm -f src/Makevars.new
