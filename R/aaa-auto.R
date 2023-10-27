@@ -3791,12 +3791,11 @@ is_tree_impl <- function(graph, mode=c("out", "in", "all", "total"), details=FAL
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_is_tree, graph, mode)
-    if (!details) {
-    res <- res$res
-} else if (vcount(graph) == 0) {
-    # FIXME: Better handled in rinterface_extra.c, or via a dedicated type?
-  } else if (igraph_opt("return.vs.es")) {
+  if (igraph_opt("return.vs.es") && vcount(graph) != 0) {
     res$root <- create_vs(graph, res$root)
+  }
+  if (!details) {
+    res <- res$res
   }
   res
 }

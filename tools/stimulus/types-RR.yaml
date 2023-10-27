@@ -130,6 +130,19 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
+VERTEX_ROOT:
+    CALL: '%I%-1'
+    INCONV: |-
+        %I% <- as_igraph_vs(%I1%, %I%)
+        if (length(%I%) == 0) {
+          stop("No vertex was specified")
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es") && vcount(%I1%) != 0) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
 VERTEX_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
