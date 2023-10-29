@@ -168,7 +168,8 @@ is called whenever a vertex is visited. See details below.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A named list with the following entries:</p><dl><dt>root</dt>
+<p>A named list with the following entries:</p>
+<dl><dt>root</dt>
 <dd><p>Numeric scalar.
 The root vertex that was used as the starting point of the search.</p></dd>
 
@@ -199,7 +200,8 @@ vertex.</p></dd>
 
 <dt>dist</dt>
 <dd><p>Numeric vector, for each vertex its distance from the
-root of the search tree.</p></dd>
+root of the search tree. Unreachable vertices have a negative distance
+as of igraph 1.6.0, this used to be <code>NaN</code>.</p></dd>
 
 
 </dl><p>Note that <code>order</code>, <code>rank</code>, <code>father</code>, <code>pred</code>, <code>succ</code></p>
@@ -220,11 +222,13 @@ predecessor (zero if this is the first vertex), ‘succ’, its successor
 (zero if this is the last vertex), ‘rank’, the rank of the
 current vertex, ‘dist’, its distance from the root of the search
 tree.</p></dd>
- <dt>extra</dt>
+
+<dt>extra</dt>
 <dd><p>The extra argument.</p></dd>
- 
-</dl><p>The callback must return FALSE
-to continue the search or TRUE to terminate it. See examples below on how to
+
+
+</dl><p>The callback must return <code>FALSE</code>
+to continue the search or <code>TRUE</code> to terminate it. See examples below on how to
 use the callback function.</p>
     </div>
     <div class="section level2">
@@ -275,22 +279,22 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 4b018f3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 9a6358f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  6  8 10  9  7  5  3 11 12 14 16 18 20 19 17 15 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 4b018f3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 9a6358f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  2  3  4  5  8  9 10  1 NA 11 12 13 14 15 18 19 20 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $pred</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 4b018f3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 9a6358f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1 10  9  8  7  5  4  3  2 NA 11 20 19 18 17 15 14 13 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $succ</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 4b018f3:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 9a6358f:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2 10  9  8  7 NA  6  5  4  3 12 20 19 18 17 NA 16 15 14 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
@@ -363,7 +367,7 @@ use the callback function.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 004bbb7:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 83e6724:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2 10  3  9  4  8  5  7  6 11 12 20 13 19 14 18 15 17 16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rank</span>
