@@ -134,12 +134,12 @@ degree of vertices with degree one, etc.</p></dd>
 <code>NaN</code> (zero divided by zero), the same is true for ‘<code>knnk</code>’
 if a given degree never appears in the network.</p>
 <p>The weighted version computes a weighted average of the neighbor degrees as</p>
-<p><code>k_nn_u = 1/s_u sum_v w_uv k_v</code>,</p>
-<p>where <code>s_u = sum_v w_uv</code> is the sum of the incident edge weights
-of vertex <code>u</code>, i.e. its strength.
+<p>$$k_{nn,u} = \frac{1}{s_u} \sum_v w_{uv} k_v,$$</p>
+<p>where \(s_u = \sum_v w_{uv}\) is the sum of the incident
+edge weights of vertex <code>u</code>, i.e. its strength.
 The sum runs over the neighbors <code>v</code> of vertex <code>u</code>
-as indicated by <code>mode</code>. <code>w_uv</code> denotes the weighted adjacency matrix
-and <code>k_v</code> is the neighbors' degree, specified by <code>neighbor_degree_mode</code>.</p>
+as indicated by <code>mode</code>. \(w_{uv}\) denotes the weighted adjacency matrix
+and \(k_v\) is the neighbors' degree, specified by <code>neighbor_degree_mode</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
