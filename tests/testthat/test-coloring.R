@@ -8,6 +8,10 @@ test_that("greedy_vertex_coloring works", {
     greedy_vertex_coloring(g, heuristic = "colored_neighbors"),
     equals(c(1, rep(2, vcount(g) - 1)))
   )
+  expect_that(
+    greedy_vertex_coloring(g, heuristic = "dsatur"),
+    equals(c(1, rep(2, vcount(g) - 1)))
+  )
 })
 
 test_that("greedy_vertex_coloring works on named graphs", {
