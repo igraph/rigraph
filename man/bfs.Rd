@@ -69,19 +69,26 @@ is called whenever a vertex is visited. See details below.}
 \code{mode} instead.}
 }
 \value{
-A named list with the following entries: \item{root}{Numeric scalar.
+A named list with the following entries:
+\describe{
+\item{root}{Numeric scalar.
 The root vertex that was used as the starting point of the search.}
 \item{neimode}{Character scalar. The \code{mode} argument of the function
 call. Note that for undirected graphs this is always \sQuote{all},
-irrespectively of the supplied value.} \item{order}{Numeric vector. The
+irrespectively of the supplied value.}
+\item{order}{Numeric vector. The
 vertex ids, in the order in which they were visited by the search.}
-\item{rank}{Numeric vector. The rank for each vertex.} \item{father}{Numeric
+\item{rank}{Numeric vector. The rank for each vertex.}
+\item{father}{Numeric
 vector. The father of each vertex, i.e. the vertex it was discovered from.}
 \item{pred}{Numeric vector. The previously visited vertex for each vertex,
-or 0 if there was no such vertex.} \item{succ}{Numeric vector. The next
+or 0 if there was no such vertex.}
+\item{succ}{Numeric vector. The next
 vertex that was visited after the current one, or 0 if there was no such
-vertex.} \item{dist}{Numeric vector, for each vertex its distance from the
+vertex.}
+\item{dist}{Numeric vector, for each vertex its distance from the
 root of the search tree.}
+}
 
 Note that \code{order}, \code{rank}, \code{father}, \code{pred}, \code{succ}
 and \code{dist} might be \code{NULL} if their corresponding argument is

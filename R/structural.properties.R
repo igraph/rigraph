@@ -1528,15 +1528,20 @@ any_loop <- has_loop_impl
 #' root vertex and spread along every edge \dQuote{simultaneously}.
 #'
 #'
-#' The callback function must have the following arguments: \describe{
+#' The callback function must have the following arguments:
+#' \describe{
 #' \item{graph}{The input graph is passed to the callback function here.}
 #' \item{data}{A named numeric vector, with the following entries:
 #' \sQuote{vid}, the vertex that was just visited, \sQuote{pred}, its
 #' predecessor (zero if this is the first vertex), \sQuote{succ}, its successor
 #' (zero if this is the last vertex), \sQuote{rank}, the rank of the
 #' current vertex, \sQuote{dist}, its distance from the root of the search
-#' tree.} \item{extra}{The extra argument.} } The callback must return FALSE
-#' to continue the search or TRUE to terminate it. See examples below on how to
+#' tree.}
+#' \item{extra}{The extra argument.}
+#' }
+#'
+#' The callback must return `FALSE`
+#' to continue the search or `TRUE` to terminate it. See examples below on how to
 #' use the callback function.
 #'
 #' @aliases graph.bfs
@@ -1569,19 +1574,25 @@ any_loop <- has_loop_impl
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
-#' @return A named list with the following entries: \item{root}{Numeric scalar.
+#' @return A named list with the following entries:
+#'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
 #'   \item{neimode}{Character scalar. The `mode` argument of the function
 #'   call. Note that for undirected graphs this is always \sQuote{all},
-#'   irrespectively of the supplied value.} \item{order}{Numeric vector. The
+#'   irrespectively of the supplied value.}
+#'   \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
-#'   \item{rank}{Numeric vector. The rank for each vertex.} \item{father}{Numeric
+#'   \item{rank}{Numeric vector. The rank for each vertex.}
+#'   \item{father}{Numeric
 #'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
 #'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
-#'   or 0 if there was no such vertex.} \item{succ}{Numeric vector. The next
+#'   or 0 if there was no such vertex.}
+#'   \item{succ}{Numeric vector. The next
 #'   vertex that was visited after the current one, or 0 if there was no such
-#'   vertex.} \item{dist}{Numeric vector, for each vertex its distance from the
-#'   root of the search tree.}
+#'   vertex.}
+#'   \item{dist}{Numeric vector, for each vertex its distance from the
+#'   root of the search tree. Unreachable vertices have a negative distance
+#'   as of igraph 1.6.0, this used to be `NaN`.}
 #'
 #'   Note that `order`, `rank`, `father`, `pred`, `succ`
 #'   and `dist` might be `NULL` if their corresponding argument is
@@ -1617,12 +1628,22 @@ any_loop <- has_loop_impl
 #' }
 #' bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #'
-bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
-                unreachable = TRUE, restricted = NULL,
-                order = TRUE, rank = FALSE, father = FALSE,
-                pred = FALSE, succ = FALSE, dist = FALSE,
-                callback = NULL, extra = NULL, rho = parent.frame(),
-                neimode) {
+bfs <- function(
+    graph,
+    root,
+    mode = c("out", "in", "all", "total"),
+    unreachable = TRUE,
+    restricted = NULL,
+    order = TRUE,
+    rank = FALSE,
+    father = FALSE,
+    pred = FALSE,
+    succ = FALSE,
+    dist = FALSE,
+    callback = NULL,
+    extra = NULL,
+    rho = parent.frame(),
+    neimode) {
   ensure_igraph(graph)
 
   if (!missing(neimode)) {
@@ -1684,6 +1705,10 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     if (pred) names(res$pred) <- V(graph)$name
     if (succ) names(res$succ) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
+  }
+
+  if (dist) {
+    res$dist[is.nan(res$dist)] <- -3
   }
 
   res
