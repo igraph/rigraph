@@ -2,7 +2,7 @@ test_that("girth works", {
   ## No circle in a tree
   g <- make_tree(1000, 3)
   gi <- girth(g)
-  expect_that(gi$girth, equals(0))
+  expect_that(gi$girth, equals(Inf))
   expect_that(as.vector(gi$circle), equals(numeric()))
 
   ## The worst case running time is for a ring

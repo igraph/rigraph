@@ -1400,7 +1400,7 @@ feedback_arc_set <- feedback_arc_set_impl
 #'
 #' The current implementation works for undirected graphs only, directed graphs
 #' are treated as undirected graphs. Loop edges and multiple edges are ignored.
-#' If the graph is a forest (i.e. acyclic), then zero is returned.
+#' If the graph is a forest (i.e. acyclic), then `Inf` is returned.
 #'
 #' This implementation is based on Alon Itai and Michael Rodeh: Finding a
 #' minimum circuit in a graph *Proceedings of the ninth annual ACM
@@ -1440,6 +1440,9 @@ girth <- function(graph, circle = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_girth, graph, as.logical(circle))
+  if (res$girth == 0) {
+    res$girth <- Inf
+  }
   if (igraph_opt("return.vs.es") && circle) {
     res$circle <- create_vs(graph, res$circle)
   }
