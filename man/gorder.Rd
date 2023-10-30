@@ -5,9 +5,9 @@
 \alias{vcount}
 \title{Order (number of vertices) of a graph}
 \usage{
-gorder(graph)
-
 vcount(graph)
+
+gorder(graph)
 }
 \arguments{
 \item{graph}{The graph}
