@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9014</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9015</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,38 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.1.9015" id="igraph-1519015">igraph 1.5.1.9015<a class="anchor" aria-label="anchor" href="#igraph-1519015"></a></h2>
+<div class="section level3">
+<h3 id="features-1-5-1-9015">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9015"></a></h3>
+<ul><li><p>Breaking change: <code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/igraph/rigraph/issues/931" class="external-link">#931</a>).</p></li>
+<li><p>Breaking change: <code>dist</code> computed by <code><a href="../reference/bfs.html">bfs()</a></code> is negative instead of <code>NaN</code> for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/926" class="external-link">#926</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-1-5-1-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9015"></a></h3>
+<ul><li>Document.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-1-5-1-9015">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9015"></a></h3>
+<ul><li>Update knnk() docs.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-1-5-1-9015">Testing<a class="anchor" aria-label="anchor" href="#testing-1-5-1-9015"></a></h3>
+<ul><li><p>Stabilize <code><a href="../reference/cluster_louvain.html">cluster_louvain()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/933" class="external-link">#933</a>).</p></li>
+<li><p>Stabilize <code><a href="../reference/sample_forestfire.html">sample_forestfire()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/929" class="external-link">#929</a>).</p></li>
+<li><p>Hard-code graph used in test (<a href="https://github.com/igraph/rigraph/issues/928" class="external-link">#928</a>).</p></li>
+<li><p>Update GML test file (<a href="https://github.com/igraph/rigraph/issues/925" class="external-link">#925</a>).</p></li>
+<li><p>Improve test for sampling from Dirichlet distribution (<a href="https://github.com/igraph/rigraph/issues/923" class="external-link">#923</a>).</p></li>
+<li><p>Omit test that no longer holds with igraph 0.10 (<a href="https://github.com/igraph/rigraph/issues/922" class="external-link">#922</a>).</p></li>
+<li><p>Stabilize test in preparation for upgrade (<a href="https://github.com/igraph/rigraph/issues/920" class="external-link">#920</a>).</p></li>
+<li><p>Stabilize plot test (<a href="https://github.com/igraph/rigraph/issues/919" class="external-link">#919</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-1-5-1-9015">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9015"></a></h3>
+<ul><li><p>Breaking change: <code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/igraph/rigraph/issues/931" class="external-link">#931</a>).</p></li>
+<li><p>Breaking change: <code>dist</code> computed by <code><a href="../reference/bfs.html">bfs()</a></code> is negative instead of <code>NaN</code> for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/926" class="external-link">#926</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.1.9014" id="igraph-1519014">igraph 1.5.1.9014<a class="anchor" aria-label="anchor" href="#igraph-1519014"></a></h2>
 <div class="section level3">
