@@ -1,7 +1,7 @@
 # snapshot test
 
     Code
-      g <- graph_from_literal(a - +b - +c)
+      g <- graph_from_literal(a - +b - +c, z - +a, d)
       bfs(g, root = 2, mode = "out", unreachable = FALSE, order = TRUE, rank = TRUE,
         father = TRUE, pred = TRUE, succ = TRUE, dist = TRUE)
     Output
@@ -12,31 +12,31 @@
       [1] "out"
       
       $order
-      + 3/3 vertices, named:
-      [1] b    c    <NA>
+      + 5/5 vertices, named:
+      [1] b    c    <NA> <NA> <NA>
       
       $rank
-      a b c 
-      0 1 2 
+        a   b   c   z   d 
+      NaN   1   2 NaN NaN 
       
       $father
-      + 3/3 vertices, named:
-         a    b    c 
-      <NA> <NA>    b 
+      + 5/5 vertices, named:
+         a    b    c    z    d 
+      <NA> <NA>    b <NA> <NA> 
       
       $pred
-      + 3/3 vertices, named:
-         a    b    c 
-      <NA> <NA>    b 
+      + 5/5 vertices, named:
+         a    b    c    z    d 
+      <NA> <NA>    b <NA> <NA> 
       
       $succ
-      + 3/3 vertices, named:
-         a    b    c 
-      <NA>    c <NA> 
+      + 5/5 vertices, named:
+         a    b    c    z    d 
+      <NA>    c <NA> <NA> <NA> 
       
       $dist
-       a  b  c 
-      -1  0  1 
+       a  b  c  z  d 
+      -3  0  1 -3 -3 
       
       $neimode
       [1] "out"

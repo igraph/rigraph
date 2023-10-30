@@ -55,13 +55,13 @@ if a given degree never appears in the network.
 
 The weighted version computes a weighted average of the neighbor degrees as
 
-\verb{k_nn_u = 1/s_u sum_v w_uv k_v},
+\deqn{k_{nn,u} = \frac{1}{s_u} \sum_v w_{uv} k_v,}{k_nn_u = 1/s_u sum_v w_uv k_v,}
 
-where \verb{s_u = sum_v w_uv} is the sum of the incident edge weights
-of vertex \code{u}, i.e. its strength.
+where \eqn{s_u = \sum_v w_{uv}}{s_u = sum_v w_uv} is the sum of the incident
+edge weights of vertex \code{u}, i.e. its strength.
 The sum runs over the neighbors \code{v} of vertex \code{u}
-as indicated by \code{mode}. \code{w_uv} denotes the weighted adjacency matrix
-and \code{k_v} is the neighbors' degree, specified by \code{neighbor_degree_mode}.
+as indicated by \code{mode}. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
+and \eqn{k_v}{k_v} is the neighbors' degree, specified by \code{neighbor_degree_mode}.
 }
 \examples{
 

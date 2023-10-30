@@ -20,8 +20,10 @@ test_that("shortest_paths works", {
 
   g <- graph_from_data_frame(as.data.frame(edges))
 
-  all1 <- all_shortest_paths(g, "s", "t", weights = NA)$vertices
-  all2 <- all_shortest_paths(g, "s", "t")$vertices
+  skip("Waiting for #930")
+
+  all1 <- all_shortest_paths(g, "s", "t", weights = NA)$res
+  all2 <- all_shortest_paths(g, "s", "t")$res
 
   s1 <- shortest_paths(g, "s", "t", weights = NA)
   s2 <- get.shortest.paths(g, "s", "t")

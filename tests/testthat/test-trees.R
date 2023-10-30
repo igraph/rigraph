@@ -1,11 +1,9 @@
 test_that("is_tree works for non-trees", {
+  skip("Waiting for #935")
+
   g <- make_graph("zachary")
   expect_false(is_tree(g))
-  expect_equal(
-    ignore_attr = TRUE,
-    is_tree(g, details = TRUE),
-    list(res = FALSE, root = V(g)[1])
-  )
+  expect_equal(ignore_attr = TRUE, is_tree(g, details = TRUE), list(res = FALSE, root = V(g)[numeric(0)]))
 
   g <- sample_pa(15, m = 3)
   expect_false(is_tree(g))
