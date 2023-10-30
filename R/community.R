@@ -1244,14 +1244,15 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
+  membership <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
 
+  res <- list()
+  res$membership <- membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "fluid communities"
-  res$membership <- res$membership + 1
   class(res) <- "communities"
   res
 }
