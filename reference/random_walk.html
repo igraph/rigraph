@@ -128,8 +128,11 @@ attribute.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>For <code>random_walk()</code>, a vertex sequence containing the vertices
-along the walk. For <code>random_edge_walk()</code>, an edge sequence containing
+<p>For <code>random_walk()</code>, a vertex sequence of length <code>steps + 1</code></p>
+
+
+<p>containing the vertices along the walk, starting with <code>start</code>.
+For <code>random_edge_walk()</code>, an edge sequence of length <code>steps</code> containing
 the edges along the walk.</p>
     </div>
     <div class="section level2">
@@ -138,6 +141,9 @@ the edges along the walk.</p>
 steps, choosing an edge from the actual vertex uniformly randomly. Edge
 directions are observed in directed graphs (see the <code>mode</code> argument
 as well). Multiple and loop edges are also observed.</p>
+<p>For igraph &lt; 1.6.0, <code>random_walk()</code> counted steps differently,
+and returned a sequence of length <code>steps</code> instead of <code>steps + 1</code>.
+This has changed to improve consistency with the underlying C library.</p>
     </div>
 
     <div class="section level2">
@@ -152,11 +158,11 @@ as well). Multiple and loop edges are also observed.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## These are similar, but not exactly the same</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span>, <span class="va">ec</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9623762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9623802</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## But these are (almost) the same</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span>, <span class="va">pg</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9999923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9999919</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
