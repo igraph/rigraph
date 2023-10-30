@@ -10,6 +10,10 @@
 #' directions are observed in directed graphs (see the `mode` argument
 #' as well). Multiple and loop edges are also observed.
 #'
+#' For igraph < 1.6.0, `random_walk()` counted steps differently,
+#' and returned a sequence of length `steps` instead of `steps + 1`.
+#' This has changed to improve consistency with the underlying C library.
+#'
 #' @param graph The input graph, might be undirected or directed.
 #' @param start The start vertex.
 #' @param steps The number of steps to make.
@@ -24,8 +28,9 @@
 #'   edge directions. This argument is ignored for undirected graphs.
 #' @param stuck What to do if the random walk gets stuck. `"return"`
 #'   returns the partial walk, `"error"` raises an error.
-#' @return For `random_walk()`, a vertex sequence containing the vertices
-#'   along the walk. For `random_edge_walk()`, an edge sequence containing
+#' @return For `random_walk()`, a vertex sequence of length `steps + 1`
+#'   containing the vertices along the walk, starting with `start`.
+#'   For `random_edge_walk()`, an edge sequence of length `steps` containing
 #'   the edges along the walk.
 #' @family random_walk
 #' @export
@@ -43,7 +48,14 @@
 #'
 #' ## But these are (almost) the same
 #' cor(table(w), pg)
-random_walk <- random_walk_impl
+random_walk <- function(
+    graph,
+    start,
+    steps,
+    mode = c("out", "in", "all", "total"),
+    stuck = c("return", "error")) {
+  random_walk_impl(graph, start, steps + 1, mode, stuck)
+}
 
 #' @rdname random_walk
 #' @export
