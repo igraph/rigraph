@@ -38,8 +38,7 @@ measure for directed graphs and the undirected version for undirected
 graphs.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
-numbers, starting with one. Non-integer values are converted to integers
-with \code{\link[=as.integer]{as.integer()}}.}
+numbers, starting with one. Non-integer values are converted to integers.}
 }
 \value{
 A single real number.
