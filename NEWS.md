@@ -1,5 +1,46 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9015
+
+## Features
+
+  - Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
+
+  - Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
+
+## Chore
+
+  - Document.
+
+## Documentation
+
+  - Update knnk() docs.
+
+## Testing
+
+  - Stabilize `cluster_louvain()` test (#933).
+
+  - Stabilize `sample_forestfire()` test (#929).
+
+  - Hard-code graph used in test (#928).
+
+  - Update GML test file (#925).
+
+  - Improve test for sampling from Dirichlet distribution (#923).
+
+  - Omit test that no longer holds with igraph 0.10 (#922).
+
+  - Stabilize test in preparation for upgrade (#920).
+
+  - Stabilize plot test (#919).
+
+## Breaking changes
+
+  - Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
+
+  - Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
+
+
 # igraph 1.5.1.9014
 
 ## Documentation
