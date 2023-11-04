@@ -2348,6 +2348,29 @@ void checkInterruptFn(void *dummy) {
 }
 
 int R_igraph_interrupt_handler(void *data) {
+  /* Limit how often checks are done. Also limit timing checks. */
+  static int iter = 0;
+  if (++iter < 4) return IGRAPH_SUCCESS;
+  iter = 0;
+  /* On systems that have fast and high-resolution timing functions,
+   * we try to limit interruption checks to at most once per 1 millisecond. */
+#if defined(__MACH__)
+  /* On Darwin/macOS, CLOCK_MONOTONIC_RAW_APPROX is the fastest method. */
+  static uint64_t last = 0;
+  uint64_t now = clock_gettime_nsec_np(CLOCK_MONOTONIC_RAW_APPROX);
+  if (now != 0) { /* now == 0 indicates failure */
+    if (now - last < 1000000) return IGRAPH_SUCCESS;
+    last = now;
+  }
+#elif defined(__linux__) || defined(__FreeBSD__)
+  static long last = 0;
+  struct timespec ts;
+  if (clock_gettime(CLOCK_MONOTONIC_COARSE, &ts) == 0) {
+    long now = ts.tv_nsec;
+    if (now - last < 1000000) return IGRAPH_SUCCESS;
+    last = now;
+  }
+#endif
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
