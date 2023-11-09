@@ -45,3 +45,4 @@ src/vendor/cigraph
 ^cran$
 ^R/cran\.R$
 ^\.ccache$
+^\.aviator/config\.yml$
