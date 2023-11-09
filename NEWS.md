@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9016
+
+## Features
+
+  - Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+
+## Testing
+
+  - Stabilize `cluster_label_prop()` test (#932).
+
+  - More robust `sample_pa()` test (#927).
+
+  - Make `cluster_louvain()` test bullet-proof.
+
+  - Stabilize SIR test (#936).
+
+## Breaking changes
+
+  - Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+
+
 # igraph 1.5.1.9015
 
 ## Features

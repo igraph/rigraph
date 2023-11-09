@@ -45,8 +45,9 @@ edge directions. This argument is ignored for undirected graphs.}
 returns the partial walk, \code{"error"} raises an error.}
 }
 \value{
-For \code{random_walk()}, a vertex sequence containing the vertices
-along the walk. For \code{random_edge_walk()}, an edge sequence containing
+For \code{random_walk()}, a vertex sequence of length \code{steps + 1}
+containing the vertices along the walk, starting with \code{start}.
+For \code{random_edge_walk()}, an edge sequence of length \code{steps} containing
 the edges along the walk.
 }
 \description{
@@ -59,6 +60,10 @@ Do a random walk. From the given start vertex, take the given number of
 steps, choosing an edge from the actual vertex uniformly randomly. Edge
 directions are observed in directed graphs (see the \code{mode} argument
 as well). Multiple and loop edges are also observed.
+
+For igraph < 1.6.0, \code{random_walk()} counted steps differently,
+and returned a sequence of length \code{steps} instead of \code{steps + 1}.
+This has changed to improve consistency with the underlying C library.
 }
 \examples{
 ## Stationary distribution of a Markov chain

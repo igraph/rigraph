@@ -638,6 +638,9 @@ all_shortest_paths <- function(graph, from,
     res$vertices <- lapply(res$vertices, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
+  # Transitional, eventually, remove $res
+  res$vpaths <- res$res
+
   res
 }
 
