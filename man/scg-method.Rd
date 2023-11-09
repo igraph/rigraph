@@ -47,10 +47,6 @@ Networks, \emph{Physical Review Letters}, \strong{99}(3), 2007.
 }
 \seealso{
 Spectral Coarse Graining
-\code{\link{scg_eps}()},
-\code{\link{scg_group}()},
-\code{\link{scg_semi_proj}()},
-\code{\link{scg}()},
 \code{\link{stochastic_matrix}()}
 }
 \author{

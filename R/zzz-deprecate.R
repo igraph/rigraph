@@ -477,12 +477,6 @@ deprecated("running.mean", running_mean)
 
 #' @export sbm.game
 deprecated("sbm.game", sample_sbm)
-#' @export scgGrouping
-deprecated("scgGrouping", scg_group)
-#' @export scgNormEps
-deprecated("scgNormEps", scg_eps)
-#' @export scgSemiProjectors
-deprecated("scgSemiProjectors", scg_semi_proj)
 #' @export set.edge.attribute
 deprecated("set.edge.attribute", set_edge_attr)
 #' @export set.graph.attribute
