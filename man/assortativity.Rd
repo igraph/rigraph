@@ -8,7 +8,15 @@
 \alias{assortativity_nominal}
 \title{Assortativity coefficient}
 \usage{
-assortativity(graph, types1, types2 = NULL, directed = TRUE)
+assortativity(
+  graph,
+  values,
+  ...,
+  values.in = NULL,
+  directed = TRUE,
+  types1 = NULL,
+  types2 = NULL
+)
 
 assortativity_nominal(graph, types, directed = TRUE)
 
@@ -17,19 +25,28 @@ assortativity_degree(graph, directed = TRUE)
 \arguments{
 \item{graph}{The input graph, it can be directed or undirected.}
 
-\item{types1}{The vertex values, these can be arbitrary numeric values.}
+\item{values}{The vertex values, these can be arbitrary numeric values.}
 
-\item{types2}{A second value vector to be using for the incoming edges when
-calculating assortativity for a directed graph.  Supply \code{NULL} here if
-you want to use the same values for outgoing and incoming edges. This
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{values.in}{A second value vector to be using for the incoming edges when
+calculating assortativity for a directed graph.
+Supply \code{NULL} here if
+you want to use the same values for outgoing and incoming edges.
+This
 argument is ignored (with a warning) if it is not \code{NULL} and undirected
 assortativity coefficient is being calculated.}
 
 \item{directed}{Logical scalar, whether to consider edge directions for
-directed graphs. This argument is ignored for undirected graphs. Supply
+directed graphs.
+This argument is ignored for undirected graphs.
+Supply
 \code{TRUE} here to do the natural thing, i.e. use directed version of the
 measure for directed graphs and the undirected version for undirected
 graphs.}
+
+\item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+Deprecated aliases for \code{values} and \code{values.in}, respectively.}
 
 \item{types}{Vector giving the vertex types. They as assumed to be integer
 numbers, starting with one. Non-integer values are converted to integers
