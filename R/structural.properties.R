@@ -2170,7 +2170,6 @@ is_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
@@ -2187,7 +2186,6 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,
