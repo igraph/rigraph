@@ -789,7 +789,6 @@ is_weighted <- function(graph) {
 }
 
 #' @rdname make_bipartite_graph
-#' @family bipartite
 #' @export
 is_bipartite <- function(graph) {
   ensure_igraph(graph)
