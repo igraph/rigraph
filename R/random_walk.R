@@ -17,12 +17,6 @@
 #' @param graph The input graph, might be undirected or directed.
 #' @param start The start vertex.
 #' @param steps The number of steps to make.
-#' @param weights The edge weights. Larger edge weights increase the
-#'   probability that an edge is selected by the random walker. In other
-#'   words, larger edge weights correspond to stronger connections. The
-#'   \sQuote{weight} edge attribute is used if present. Supply
-#'   \sQuote{`NA`} here if you want to ignore the \sQuote{weight} edge
-#'   attribute.
 #' @param mode How to follow directed edges. `"out"` steps along the
 #'   edge direction, `"in"` is opposite to that. `"all"` ignores
 #'   edge directions. This argument is ignored for undirected graphs.

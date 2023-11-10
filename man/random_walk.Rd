@@ -35,13 +35,6 @@ edge directions. This argument is ignored for undirected graphs.}
 
 \item{stuck}{What to do if the random walk gets stuck. \code{"return"}
 returns the partial walk, \code{"error"} raises an error.}
-
-\item{weights}{The edge weights. Larger edge weights increase the
-probability that an edge is selected by the random walker. In other
-words, larger edge weights correspond to stronger connections. The
-\sQuote{weight} edge attribute is used if present. Supply
-\sQuote{\code{NA}} here if you want to ignore the \sQuote{weight} edge
-attribute.}
 }
 \value{
 For \code{random_walk()}, a vertex sequence of length \code{steps + 1}
