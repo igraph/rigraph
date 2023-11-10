@@ -4,6 +4,7 @@
 ## usethis namespace: start
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data .env
+#' @importFrom rlang inject
 #' @importFrom rlang warn
 ## usethis namespace: end
 NULL
