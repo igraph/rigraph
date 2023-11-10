@@ -66,18 +66,15 @@ has_eulerian_path <- function(graph) {
 }
 
 #' @rdname has_eulerian_path
-#' @family cycles
 #' @export
 has_eulerian_cycle <- function(graph) {
   is_eulerian_impl(graph)$has_cycle
 }
 
 #' @rdname has_eulerian_path
-#' @family cycles
 #' @export
 eulerian_path <- eulerian_path_impl
 
 #' @rdname has_eulerian_path
-#' @family cycles
 #' @export
 eulerian_cycle <- eulerian_cycle_impl

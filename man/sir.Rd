@@ -110,12 +110,6 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 
 Processes on graphs
 \code{\link{plot.sir}()}
-
-Processes on graphs
-\code{\link{plot.sir}()}
-
-Processes on graphs
-\code{\link{plot.sir}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}. Eric Kolaczyk

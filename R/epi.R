@@ -52,7 +52,6 @@ time_bins.sir <- function(x, middle = TRUE) {
 #' @importFrom stats median
 #' @method median sir
 #' @rdname sir
-#' @family processes
 #' @export
 median.sir <- function(x, na.rm = FALSE, ...) {
   sir <- x
@@ -73,7 +72,6 @@ median.sir <- function(x, na.rm = FALSE, ...) {
 #' @importFrom stats quantile
 #' @method quantile sir
 #' @rdname sir
-#' @family processes
 #' @export
 quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x
