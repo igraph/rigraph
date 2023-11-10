@@ -615,6 +615,21 @@ VERTEX:
             PROTECT(%I% = NEW_INTEGER(1));
             INTEGER(%I%)[0] = %C% + 1;
 
+VERTEX_ROOT:
+    CALL:
+        IN: '%C%'
+        INOUT: '&%C%'
+        OUT: '&%C%'
+    CTYPE: igraph_integer_t
+    INCONV:
+        IN: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        INOUT: '%C% = (igraph_integer_t) REAL(%I%)[0];'
+        OUT: '%C% = -1;'
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = NEW_INTEGER(1));
+            INTEGER(%I%)[0] = %C% + 1;
+
 VERTEX_QTY:
     CALL: '&%C%'
     CTYPE: igraph_vector_t

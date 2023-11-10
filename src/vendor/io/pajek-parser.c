@@ -2736,8 +2736,23 @@ static igraph_error_t add_string_attribute(igraph_trie_t *names,
   igraph_strvector_t *na;
   igraph_attribute_record_t *rec;
 
+  if (attrname[0] == '\0') {
+    /* This is relevant only for custom attributes, which are always of string type.
+       No need to add the same check for numerical attributes. */
+    IGRAPH_ERROR("\"\" is not allowed as a parameter name in Pajek files.", IGRAPH_PARSEERROR);
+  }
+
   IGRAPH_CHECK(igraph_trie_get(names, attrname, &id));
   if (id == attrsize) {
+
+#ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
+    /* There are 21 standard vertex attributes and 21 standard edge attributes.
+     * We refuse to allow more to reduce memory usage when fuzzing. */
+    if (attrsize > 21) {
+      IGRAPH_ERROR("Too many attributes in Pajek file.", IGRAPH_PARSEERROR);
+    }
+#endif
+
     /* add a new attribute */
     rec = IGRAPH_CALLOC(1, igraph_attribute_record_t);
     CHECK_OOM_RP(rec);
@@ -2882,7 +2897,9 @@ static igraph_error_t check_bipartite(igraph_i_pajek_parsedata_t *context) {
   return IGRAPH_SUCCESS;
 }
 
-/* Check if attrname is a standard Pajek vertex attribute. */
+/* Check if attrname is a standard vertex attribute name used by igraph
+   for Pajek data. All of these must be listed here to prevent overwriting
+   standard attributes, or crashes due to incompatible attribute types. */
 static igraph_bool_t is_standard_vattr(const char *attrname) {
   const char *names[] = {
     /* vertex names: */
@@ -2905,7 +2922,9 @@ static igraph_bool_t is_standard_vattr(const char *attrname) {
   return false;
 }
 
-/* Check if attrname is a standard Pajek edge attribute. */
+/* Check if attrname is a standard edge attribute name used by igraph
+   for Pajek data. All of these must be listed here to prevent overwriting
+   standard attributes, or crashes due to incompatible attribute types. */
 static igraph_bool_t is_standard_eattr(const char *attrname) {
   const char *names[] = {
     /* other edge attributes: */

@@ -292,6 +292,9 @@ igraph_get_shortest_paths:
 
 igraph_get_all_shortest_paths:
     IGNORE: RR
+    PARAM_NAMES:
+        vertices: vpaths
+        edges: epaths
 
 igraph_shortest_paths_dijkstra:
     IGNORE: RR, RC, RInit
@@ -304,6 +307,9 @@ igraph_get_shortest_paths_bellman_ford:
 
 igraph_get_all_shortest_paths_dijkstra:
     IGNORE: RR
+    PARAM_NAMES:
+        vertices: vpaths
+        edges: epaths
 
 igraph_shortest_paths_bellman_ford:
     IGNORE: RR, RC, RInit

@@ -1498,6 +1498,28 @@ avg_nearest_neighbor_degree_impl <- function(graph, vids=V(graph), mode=c("all",
   res
 }
 
+degree_correlation_vector_impl <- function(graph, weights=NULL, from.mode=c("out", "in", "all", "total"), to.mode=c("in", "out", "all", "total"), directed.neighbors=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  from.mode <- switch(igraph.match.arg(from.mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  to.mode <- switch(igraph.match.arg(to.mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  directed.neighbors <- as.logical(directed.neighbors)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_degree_correlation_vector, graph, weights, from.mode, to.mode, directed.neighbors)
+
+  res
+}
+
 strength_impl <- function(graph, vids=V(graph), mode=c("all", "out", "in", "total"), loops=TRUE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
@@ -1668,6 +1690,27 @@ assortativity_degree_impl <- function(graph, directed=TRUE) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_assortativity_degree, graph, directed)
+
+  res
+}
+
+joint_degree_matrix_impl <- function(graph, max.out.degree=-1, max.in.degree=-1, weights=NULL) {
+  # Argument checks
+  ensure_igraph(graph)
+  max.out.degree <- as.numeric(max.out.degree)
+  max.in.degree <- as.numeric(max.in.degree)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_joint_degree_matrix, graph, max.out.degree, max.in.degree, weights)
 
   res
 }
@@ -3917,23 +3960,6 @@ deterministic_optimal_imitation_impl <- function(graph, vid, optimality=MAXIMUM,
   res
 }
 
-stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, mode=c("out", "in", "all", "total")) {
-  # Argument checks
-  ensure_igraph(graph)
-  vid <- as_igraph_vs(graph, vid)
-  if (length(vid) == 0) {
-    stop("No vertex was specified")
-  }
-  strategies <- as.numeric(strategies)
-  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_stochastic_imitation, graph, vid-1, algo, quantities, strategies, mode)
-
-  res
-}
-
 moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
@@ -3971,6 +3997,23 @@ roulette_wheel_imitation_impl <- function(graph, vid, is.local, quantities, stra
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_roulette_wheel_imitation, graph, vid-1, is.local, quantities, strategies, mode)
+
+  res
+}
+
+stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, mode=c("out", "in", "all", "total")) {
+  # Argument checks
+  ensure_igraph(graph)
+  vid <- as_igraph_vs(graph, vid)
+  if (length(vid) == 0) {
+    stop("No vertex was specified")
+  }
+  strategies <- as.numeric(strategies)
+  mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_stochastic_imitation, graph, vid-1, algo, quantities, strategies, mode)
 
   res
 }
