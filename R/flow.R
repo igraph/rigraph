@@ -383,7 +383,6 @@ adhesion <- function(graph, checks = TRUE) {
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
-#' @family flow
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
   ensure_igraph(x)
