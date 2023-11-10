@@ -47,3 +47,4 @@
 ^src/vendor/cigraph/\..*$
 ^rconfigure\.py$
 ^\.ccache$
+^\.aviator/config\.yml$
