@@ -1015,12 +1015,10 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
 #' @rdname sample_pref
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
-#' @family games
 #' @export
 pref <- function(...) constructor_spec(sample_pref, ...)
 
 #' @rdname sample_pref
-#' @family games
 #' @export
 sample_asym_pref <- function(nodes, types,
                              type.dist.matrix = matrix(1, types, types),
@@ -1055,7 +1053,6 @@ sample_asym_pref <- function(nodes, types,
 }
 
 #' @rdname sample_pref
-#' @family games
 #' @export
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
