@@ -371,7 +371,7 @@ personalized_pagerank_impl <- function(graph, algo=c("prpack", "arpack"), vids=V
     if (algo == 0L) {
       options <- list(niter=1000, eps=0.001)
     } else if (algo == 1L) {
-      options <- arpack_defaults
+      options <- arpack_defaults()
     } else {
       options <- NULL
     }
@@ -562,7 +562,7 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   } else {
     weights <- NULL
   }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -585,7 +585,7 @@ hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defau
   } else {
     weights <- NULL
   }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -608,7 +608,7 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   } else {
     weights <- NULL
   }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -777,7 +777,7 @@ centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, sc
   ensure_igraph(graph)
   directed <- as.logical(directed)
   scale <- as.logical(scale)
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
   normalized <- as.logical(normalized)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2028,7 +2028,7 @@ adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   which <- switch(igraph.match.arg(which), "lm"=0L, "la"=2L, "sa"=3L)
   scaled <- as.logical(scaled)
   cvec <- as.numeric(cvec)
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2055,7 +2055,7 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
     "da"=0L, "d-a"=0L, "idad"=1L, "i-dad"=1L, "dad"=2L,
     "oap"=3L)
   scaled <- as.logical(scaled)
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2072,7 +2072,7 @@ eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", 
     "comp_arpack"=5)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
