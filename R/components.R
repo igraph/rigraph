@@ -203,13 +203,12 @@ biconnected_components <- biconnected_components_impl
 
 
 #' @rdname components
-#' @family components
 #' @export
 largest_component <- function(graph, mode = c("weak", "strong")) {
   if (!is_igraph(graph)) {
     stop("Not a graph object")
   }
-  
+
   comps <- components(graph, mode = mode)
 
   lcc_id <- which.max(comps$csize)
