@@ -1403,6 +1403,7 @@ igraph_error_t FUNCTION(igraph_matrix, div_elements)(TYPE(igraph_matrix) *m1,
  * \brief Smallest element of a matrix.
  *
  * The matrix must be non-empty.
+ *
  * \param m The input matrix.
  * \return The smallest element of \p m, or NaN if any element is NaN.
  *
@@ -1861,9 +1862,9 @@ igraph_error_t FUNCTION(igraph_matrix, fprint)(const TYPE(igraph_matrix) *m, FIL
                 fputc(' ', file);
             }
 #ifdef FPRINTFUNC_ALIGNED
-            FPRINTFUNC_ALIGNED(file, VECTOR(column_width)[j], MATRIX(*m, i, j));
+            FPRINTFUNC_ALIGNED(file, (int) VECTOR(column_width)[j], MATRIX(*m, i, j));
 #else
-            fprintf(file, format, VECTOR(column_width)[j], MATRIX(*m, i, j));
+            fprintf(file, format, (int) VECTOR(column_width)[j], MATRIX(*m, i, j));
 #endif
         }
         fprintf(file, "\n");
