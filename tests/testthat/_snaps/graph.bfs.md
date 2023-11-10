@@ -16,8 +16,8 @@
       [1] b    c    <NA> <NA> <NA>
       
       $rank
-        a   b   c   z   d 
-      NaN   1   2 NaN NaN 
+      a b c z d 
+      0 1 2 0 0 
       
       $father
       + 5/5 vertices, named:
