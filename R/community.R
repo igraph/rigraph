@@ -1726,6 +1726,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'   weights. Set this to `NA` if the graph was a \sQuote{weight} edge
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
+#' @inheritParams rlang::args_dots_empty
 #' @param initial The initial state. If `NULL`, every vertex will have a
 #'   different label at the beginning. Otherwise it must be a vector with an
 #'   entry for each vertex. Non-negative values denote different labels, negative
@@ -1755,7 +1756,42 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' g <- add_edges(g, c(1, 12))
 #' cluster_label_prop(g)
 #'
-cluster_label_prop <- function(graph, weights = NULL, mode = c("out", "in", "all"), initial = NULL, fixed = NULL) {
+cluster_label_prop <- function(
+    graph,
+    weights = NULL,
+    ...,
+    mode = c("out", "in", "all"),
+    initial = NULL,
+    fixed = NULL) {
+  if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      "cluster_label_prop(... = )",
+      details = "Arguments `initial` and `fixed` must be named."
+    )
+
+    dots <- list(...)
+    dots[["graph"]] <- graph
+    dots[["weights"]] <- weights
+    if (!is.null(initial)) {
+      dots[["initial"]] <- initial
+    }
+    if (!is.null(fixed)) {
+      dots[["fixed"]] <- fixed
+    }
+
+    return(inject(cluster_label_prop0(!!!dots)))
+  }
+
+  cluster_label_prop0(graph, weights, mode, initial, fixed)
+}
+
+cluster_label_prop0 <- function(
+    graph,
+    weights = NULL,
+    mode = c("out", "in", "all"),
+    initial = NULL,
+    fixed = NULL) {
   # Argument checks
   ensure_igraph(graph)
 

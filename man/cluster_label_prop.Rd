@@ -8,6 +8,7 @@
 cluster_label_prop(
   graph,
   weights = NULL,
+  ...,
   mode = c("out", "in", "all"),
   initial = NULL,
   fixed = NULL
@@ -26,6 +27,8 @@ undirected.}
 weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an
