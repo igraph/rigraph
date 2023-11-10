@@ -322,12 +322,7 @@ extern SEXP R_igraph_sample_dirichlet(void *, void *);
 extern SEXP R_igraph_sample_sphere_surface(void *, void *, void *, void *);
 extern SEXP R_igraph_sample_sphere_volume(void *, void *, void *, void *);
 extern SEXP R_igraph_sbm_game(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_adjacency(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_grouping(void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_laplacian(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_scg_norm_eps(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_semiprojectors(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_scg_stochastic(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_set_verbose(void *);
 extern SEXP R_igraph_shortest_paths(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_similarity_dice(void *, void *, void *, void *);
@@ -704,12 +699,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_sample_sphere_surface",                      (DL_FUNC) &R_igraph_sample_sphere_surface,                       4},
     {"R_igraph_sample_sphere_volume",                       (DL_FUNC) &R_igraph_sample_sphere_volume,                        4},
     {"R_igraph_sbm_game",                                   (DL_FUNC) &R_igraph_sbm_game,                                    5},
-    {"R_igraph_scg_adjacency",                              (DL_FUNC) &R_igraph_scg_adjacency,                              14},
-    {"R_igraph_scg_grouping",                               (DL_FUNC) &R_igraph_scg_grouping,                                7},
-    {"R_igraph_scg_laplacian",                              (DL_FUNC) &R_igraph_scg_laplacian,                              16},
     {"R_igraph_scg_norm_eps",                               (DL_FUNC) &R_igraph_scg_norm_eps,                                5},
-    {"R_igraph_scg_semiprojectors",                         (DL_FUNC) &R_igraph_scg_semiprojectors,                          5},
-    {"R_igraph_scg_stochastic",                             (DL_FUNC) &R_igraph_scg_stochastic,                             17},
     {"R_igraph_set_verbose",                                (DL_FUNC) &R_igraph_set_verbose,                                 1},
     {"R_igraph_shortest_paths",                             (DL_FUNC) &R_igraph_shortest_paths,                              6},
     {"R_igraph_similarity_dice",                            (DL_FUNC) &R_igraph_similarity_dice,                             4},

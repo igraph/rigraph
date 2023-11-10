@@ -112,6 +112,32 @@ all_simple_paths <- function(graph, from, to = V(graph),
 is_dag <- is_dag_impl
 
 
+#' Acyclic graphs
+#'
+#' This function tests whether the given graph is free of cycles.
+#' It is only available as of igraph 2.0.0.
+#'
+#' This function looks for directed cycles in directed graphs and undirected
+#' cycles in undirected graphs.
+#'
+#' @param graph The input graph.
+#' @return A logical vector of length one.
+#' @keywords graphs
+#' @examplesIf FALSE
+#'
+#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' is_acyclic(g)
+#' is_acyclic(as.undirected(g))
+#' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
+#' and directed graphs.
+#' @family cycles
+#' @family structural.properties
+#' @export
+#' @keywords internal
+is_acyclic <- function(graph) {
+  cli::cli_abort("Only implemented in igraph 2.0.0")
+}
+
 #' Maximum cardinality search
 #'
 #' Maximum cardinality search is a simple ordering a vertices that is useful in

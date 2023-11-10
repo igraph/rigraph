@@ -37,6 +37,7 @@ to_prufer(g)
 \code{\link[=to_prufer]{to_prufer()}} to convert a graph into its Prüfer sequence
 
 Other trees: 
+\code{\link{is_forest}()},
 \code{\link{is_tree}()},
 \code{\link{sample_spanning_tree}()},
 \code{\link{to_prufer}()}
