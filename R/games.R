@@ -836,12 +836,10 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
 #' @rdname sample_traits_callaway
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
-#' @family games
 #' @export
 traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 
 #' @rdname sample_traits_callaway
-#' @family games
 #' @export
 sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
                           pref.matrix = matrix(1, types, types),
@@ -864,7 +862,6 @@ sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
 }
 
 #' @rdname sample_traits_callaway
-#' @family games
 #' @export
 traits <- function(...) constructor_spec(sample_traits, ...)
 
