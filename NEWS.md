@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9017
+
+## Features
+
+  - Update C core (#944).
+
+  - `is_tree(details = TRUE)` designates the first vertex as root for non-trees (#935).
+
+  - Breaking change: `vcount()` returns a numeric (#938).
+
+  - `all_shortest_paths()` returns the vertex list in both `res` and `vpaths` components (#930).
+
+## Chore
+
+  - Add Aviator configuration.
+
+## Breaking changes
+
+  - Breaking change: `vcount()` returns a numeric (#938).
+
+## Uncategorized
+
+  - Feat\! Remove `scg_eps()`, `scg_group()` and `scg_semi_proj()`, broken and no longer maintained (#946).
+
+
 # igraph 1.5.1.9016
 
 ## Features
