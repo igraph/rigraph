@@ -116,6 +116,7 @@ extern SEXP R_igraph_create_bipartite(void *, void *, void *);
 extern SEXP R_igraph_de_bruijn(void *, void *);
 extern SEXP R_igraph_decompose(void *, void *, void *, void *);
 extern SEXP R_igraph_degree(void *, void *, void *, void *);
+extern SEXP R_igraph_degree_correlation_vector(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_degree_sequence_game(void *, void *, void *);
 extern SEXP R_igraph_delete_edges(void *, void *);
 extern SEXP R_igraph_delete_vertices(void *, void *);
@@ -273,6 +274,7 @@ extern SEXP R_igraph_isoclass_subgraph(void *, void *);
 extern SEXP R_igraph_isomorphic(void *, void *);
 extern SEXP R_igraph_isomorphic_bliss(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_isomorphic_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_joint_degree_matrix(void *, void *, void *, void *);
 extern SEXP R_igraph_k_regular_game(void *, void *, void *, void *);
 extern SEXP R_igraph_kary_tree(void *, void *, void *);
 extern SEXP R_igraph_kautz(void *, void *);
@@ -591,6 +593,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_de_bruijn",                                  (DL_FUNC) &R_igraph_de_bruijn,                                   2},
     {"R_igraph_decompose",                                  (DL_FUNC) &R_igraph_decompose,                                   4},
     {"R_igraph_degree",                                     (DL_FUNC) &R_igraph_degree,                                      4},
+    {"R_igraph_degree_correlation_vector",                  (DL_FUNC) &R_igraph_degree_correlation_vector,                   5},
     {"R_igraph_degree_sequence_game",                       (DL_FUNC) &R_igraph_degree_sequence_game,                        3},
     {"R_igraph_delete_edges",                               (DL_FUNC) &R_igraph_delete_edges,                                2},
     {"R_igraph_delete_vertices",                            (DL_FUNC) &R_igraph_delete_vertices,                             2},
@@ -748,6 +751,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_isomorphic",                                 (DL_FUNC) &R_igraph_isomorphic,                                  2},
     {"R_igraph_isomorphic_bliss",                           (DL_FUNC) &R_igraph_isomorphic_bliss,                            5},
     {"R_igraph_isomorphic_vf2",                             (DL_FUNC) &R_igraph_isomorphic_vf2,                              6},
+    {"R_igraph_joint_degree_matrix",                        (DL_FUNC) &R_igraph_joint_degree_matrix,                         4},
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
     {"R_igraph_kary_tree",                                  (DL_FUNC) &R_igraph_kary_tree,                                   3},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
