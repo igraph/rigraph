@@ -34,10 +34,13 @@
  */
 #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
 /* Limit maximum vertex count when using a fuzzer, to avoid out-of-memory failure. */
-#define IGRAPH_PAJEK_MAX_VERTEX_COUNT (1 << 20)
+#define IGRAPH_PAJEK_MAX_VERTEX_COUNT (1 << 18)
 #else
 #define IGRAPH_PAJEK_MAX_VERTEX_COUNT INT32_MAX
 #endif
+
+#define CHECK_OOM_RP(p) IGRAPH_CHECK_OOM((p), "Not enough memory to read Pajek format.")
+#define CHECK_OOM_WP(p) IGRAPH_CHECK_OOM((p), "Not enough memory to write Pajek format.")
 
 typedef struct {
     void *scanner;
