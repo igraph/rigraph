@@ -153,7 +153,6 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 mean_distance <- average_path_length_dijkstra_impl
@@ -499,7 +498,6 @@ distances <- function(graph, v = V(graph), to = V(graph),
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
-#' @family structural.properties
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -592,7 +590,6 @@ shortest_paths <- function(graph, from, to = V(graph),
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(graph, from,
