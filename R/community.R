@@ -458,7 +458,6 @@ modularity.communities <- function(x, ...) {
 
 #' @rdname modularity.igraph
 #' @aliases mod.matrix
-#' @family community
 #' @export
 modularity_matrix <- function(graph, membership, weights = NULL, resolution = 1, directed = TRUE) {
   # Argument checks
