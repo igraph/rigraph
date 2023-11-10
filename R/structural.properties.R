@@ -737,7 +737,6 @@ subgraph <- function(graph, vids) {
 #'   scratch. \sQuote{`auto`} chooses between the two implementations
 #'   automatically, using heuristics based on the size of the original and the
 #'   result graph.
-#' @family structural.properties
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -760,7 +759,6 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
-#' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -1102,7 +1100,6 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
-#' @family structural.properties
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
@@ -1228,7 +1225,6 @@ ego <- function(graph, order = 1, nodes = V(graph),
 #' @rdname ego
 neighborhood <- ego
 #' @rdname ego
-#' @family structural.properties
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
