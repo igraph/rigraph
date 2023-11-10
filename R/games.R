@@ -1203,12 +1203,10 @@ sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins
 
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
-#' @family games
 #' @export
 last_cit <- function(...) constructor_spec(sample_last_cit, ...)
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 sample_cit_types <- function(n, edges = 1, types = rep(0, n),
                              pref = rep(1, length(types)),
@@ -1229,12 +1227,10 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 cit_types <- function(...) constructor_spec(sample_cit_types, ...)
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
                                  pref = matrix(1,
@@ -1260,7 +1256,6 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
