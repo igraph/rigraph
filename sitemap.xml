@@ -553,6 +553,9 @@
     <loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/is_acyclic.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/is_chordal.html</loc>
   </url>
   <url>
@@ -563,6 +566,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/is_directed.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is_forest.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/is_graphical.html</loc>

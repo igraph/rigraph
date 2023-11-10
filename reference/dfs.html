@@ -12,7 +12,7 @@ root vertex and tries to go quickly as far from as possible."><!-- mathjax --><s
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1.9017</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -217,6 +217,7 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <code><a href="edge_density.html">edge_density</a>()</code>,
 <code><a href="feedback_arc_set.html">feedback_arc_set</a>()</code>,
 <code><a href="girth.html">girth</a>()</code>,
+<code><a href="is_acyclic.html">is_acyclic</a>()</code>,
 <code><a href="is_dag.html">is_dag</a>()</code>,
 <code><a href="matching.html">is_matching</a>()</code>,
 <code><a href="knn.html">knn</a>()</code>,
@@ -250,15 +251,15 @@ to terminate it. See examples below on how to use the callback functions.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "out"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 040660b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 04440bd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  4  8  9  5 10  3  6  7 11 12 14 18 19 15 20 13 16 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $order.out</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 040660b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 04440bd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8  9  4 10  5  2  6  7  3  1 18 19 14 20 15 12 16 17 13 11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $father</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 040660b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 20/20 vertices, from 04440bd:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] NA  1  1  2  2  3  3  4  4  5 NA 11 11 12 12 13 13 14 14 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $dist</span>
