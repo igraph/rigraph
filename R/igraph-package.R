@@ -2,6 +2,7 @@
 #' @useDynLib igraph, .registration = TRUE
 #' @import methods
 ## usethis namespace: start
+#' @importFrom lifecycle deprecated
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data .env
 #' @importFrom rlang inject
