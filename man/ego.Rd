@@ -105,13 +105,13 @@ vertices which are closer to \code{v} than the order. I.e. order 0 is always
 \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 
-\code{ego_size()}/\code{neighborhood_size()} returns the size of the neighborhoods of the given order,
+\code{ego_size()}/\code{neighborhood_size()} (synonyms) returns the size of the neighborhoods of the given order,
 for each given vertex.
 
 \code{ego()}/\code{neighborhood()} (synonyms) returns the vertices belonging to the neighborhoods of the given
 order, for each given vertex.
 
-\code{make_ego_graph()}/\verb{make_neighborhood()_graph()} is creates (sub)graphs from all neighborhoods of
+\code{make_ego_graph()}/\verb{make_neighborhood()_graph()} (synonyms) is creates (sub)graphs from all neighborhoods of
 the given vertices with the given order parameter. This function preserves
 the vertex, edge and graph attributes.
 
