@@ -153,7 +153,6 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 mean_distance <- average_path_length_dijkstra_impl
@@ -499,7 +498,6 @@ distances <- function(graph, v = V(graph), to = V(graph),
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
-#' @family structural.properties
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -592,7 +590,6 @@ shortest_paths <- function(graph, from, to = V(graph),
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(graph, from,
@@ -740,7 +737,6 @@ subgraph <- function(graph, vids) {
 #'   scratch. \sQuote{`auto`} chooses between the two implementations
 #'   automatically, using heuristics based on the size of the original and the
 #'   result graph.
-#' @family structural.properties
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -763,7 +759,6 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
-#' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -1105,7 +1100,6 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
-#' @family structural.properties
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
@@ -1126,26 +1120,31 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
   )
 }
 
-
+#' @export
+#' @rdname ego
+neighborhood_size <- ego_size
 
 #' Neighborhood of graph vertices
 #'
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
-#' Note that `ego()` and `neighborhood()` are synonyms, aliases.
+#' Note that `ego()` and `neighborhood()`,
+#' `ego_size()` and `neighborhood_size()`,
+#' `make_ego_graph()` and `make_neighborhood()_graph()`,
+#' are synonyms (aliases).
 #'
 #' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' `ego_size()` returns the size of the neighborhoods of the given order,
+#' `ego_size()`/`neighborhood_size()` (synonyms) returns the size of the neighborhoods of the given order,
 #' for each given vertex.
 #'
 #' `ego()`/`neighborhood()` (synonyms) returns the vertices belonging to the neighborhoods of the given
 #' order, for each given vertex.
 #'
-#' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
+#' `make_ego_graph()`/`make_neighborhood()_graph()` (synonyms) is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #'
@@ -1167,11 +1166,11 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @param mindist The minimum distance to include the vertex in the result.
 #' @return
 #'   \itemize{
-#'   \item{`ego_size()` returns with an integer vector.}
+#'   \item{`ego_size()`/`neighborhood_size()` returns with an integer vector.}
 #'   \item{`ego()`/`neighborhood()` (synonyms) returns A list of `igraph.vs` or a list of numeric
 #'         vectors depending on the value of `igraph_opt("return.vs.es")`,
 #'         see details for performance characteristics.}
-#'   \item{`make_ego_graph()` returns with a list of graphs.}
+#'   \item{`make_ego_graph()`/`make_neighborhood_graph()` returns with a list of graphs.}
 #'   \item{`connect()` returns with a new graph object.}
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
@@ -1182,12 +1181,20 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @examples
 #'
 #' g <- make_ring(10)
+#'
 #' ego_size(g, order = 0, 1:3)
 #' ego_size(g, order = 1, 1:3)
 #' ego_size(g, order = 2, 1:3)
+#'
+#' # neighborhood_size() is an alias of ego_size()
+#' neighborhood_size(g, order = 0, 1:3)
+#' neighborhood_size(g, order = 1, 1:3)
+#' neighborhood_size(g, order = 2, 1:3)
+#'
 #' ego(g, order = 0, 1:3)
 #' ego(g, order = 1, 1:3)
 #' ego(g, order = 2, 1:3)
+#'
 #' # neighborhood() is an alias of ego()
 #' neighborhood(g, order = 0, 1:3)
 #' neighborhood(g, order = 1, 1:3)
@@ -1196,6 +1203,8 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 #' make_ego_graph(g, order = 2, 1:3)
+#' # make_neighborhood_graph() is an alias of make_ego_graph()
+#' make_neighborhood_graph(g, order = 2, 1:3)
 #'
 #' # connecting to the neighborhood
 #' g <- make_ring(10)
@@ -1231,7 +1240,6 @@ ego <- function(graph, order = 1, nodes = V(graph),
 #' @rdname ego
 neighborhood <- ego
 #' @rdname ego
-#' @family structural.properties
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
@@ -1253,7 +1261,9 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
   res
 }
 
-
+#' @export
+#' @rdname ego
+make_neighborhood_graph <- make_ego_graph
 
 #' K-core decomposition of graphs
 #'
@@ -1588,7 +1598,7 @@ any_loop <- has_loop_impl
 #'   irrespectively of the supplied value.}
 #'   \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
-#'   \item{rank}{Numeric vector. The rank for each vertex.}
+#'   \item{rank}{Numeric vector. The rank for each vertex, zero for unreachable vertices.}
 #'   \item{father}{Numeric
 #'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
 #'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
@@ -1711,6 +1721,10 @@ bfs <- function(
     if (pred) names(res$pred) <- V(graph)$name
     if (succ) names(res$succ) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
+  }
+
+  if (rank) {
+    res$rank[is.nan(res$rank)] <- 0
   }
 
   if (dist) {
@@ -2177,7 +2191,6 @@ is_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
@@ -2194,7 +2207,6 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,

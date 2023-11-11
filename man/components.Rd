@@ -95,11 +95,6 @@ Connected components
 \code{\link{biconnected_components}()},
 \code{\link{decompose}()}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{decompose}()}
-
 Other structural.properties: 
 \code{\link{bfs}()},
 \code{\link{connect}()},

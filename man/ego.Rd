@@ -3,6 +3,7 @@
 \name{connect}
 \alias{connect}
 \alias{ego_size}
+\alias{neighborhood_size}
 \alias{ego}
 \alias{neighborhood}
 \alias{neighborhood.size}
@@ -10,11 +11,20 @@
 \alias{ego_graph}
 \alias{connect.neighborhood}
 \alias{make_ego_graph}
+\alias{make_neighborhood_graph}
 \title{Neighborhood of graph vertices}
 \usage{
 connect(graph, order, mode = c("all", "out", "in", "total"))
 
 ego_size(
+  graph,
+  order = 1,
+  nodes = V(graph),
+  mode = c("all", "out", "in"),
+  mindist = 0
+)
+
+neighborhood_size(
   graph,
   order = 1,
   nodes = V(graph),
@@ -45,6 +55,14 @@ make_ego_graph(
   mode = c("all", "out", "in"),
   mindist = 0
 )
+
+make_neighborhood_graph(
+  graph,
+  order = 1,
+  nodes = V(graph),
+  mode = c("all", "out", "in"),
+  mindist = 0
+)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -65,18 +83,21 @@ argument is ignored for undirected graphs.}
 }
 \value{
 \itemize{
-\item{\code{ego_size()} returns with an integer vector.}
+\item{\code{ego_size()}/\code{neighborhood_size()} returns with an integer vector.}
 \item{\code{ego()}/\code{neighborhood()} (synonyms) returns A list of \code{igraph.vs} or a list of numeric
 vectors depending on the value of \code{igraph_opt("return.vs.es")},
 see details for performance characteristics.}
-\item{\code{make_ego_graph()} returns with a list of graphs.}
+\item{\code{make_ego_graph()}/\code{make_neighborhood_graph()} returns with a list of graphs.}
 \item{\code{connect()} returns with a new graph object.}
 }
 }
 \description{
 These functions find the vertices not farther than a given limit from
 another fixed vertex, these are called the neighborhood of the vertex.
-Note that \code{ego()} and \code{neighborhood()} are synonyms, aliases.
+Note that \code{ego()} and \code{neighborhood()},
+\code{ego_size()} and \code{neighborhood_size()},
+\code{make_ego_graph()} and \verb{make_neighborhood()_graph()},
+are synonyms (aliases).
 }
 \details{
 The neighborhood of a given order \code{r} of a vertex \code{v} includes all
@@ -84,13 +105,13 @@ vertices which are closer to \code{v} than the order. I.e. order 0 is always
 \code{v} itself, order 1 is \code{v} plus its immediate neighbors, order 2
 is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 
-\code{ego_size()} returns the size of the neighborhoods of the given order,
+\code{ego_size()}/\code{neighborhood_size()} (synonyms) returns the size of the neighborhoods of the given order,
 for each given vertex.
 
 \code{ego()}/\code{neighborhood()} (synonyms) returns the vertices belonging to the neighborhoods of the given
 order, for each given vertex.
 
-\code{make_ego_graph()} is creates (sub)graphs from all neighborhoods of
+\code{make_ego_graph()}/\verb{make_neighborhood()_graph()} (synonyms) is creates (sub)graphs from all neighborhoods of
 the given vertices with the given order parameter. This function preserves
 the vertex, edge and graph attributes.
 
@@ -100,12 +121,20 @@ all other vertices in its neighborhood.
 \examples{
 
 g <- make_ring(10)
+
 ego_size(g, order = 0, 1:3)
 ego_size(g, order = 1, 1:3)
 ego_size(g, order = 2, 1:3)
+
+# neighborhood_size() is an alias of ego_size()
+neighborhood_size(g, order = 0, 1:3)
+neighborhood_size(g, order = 1, 1:3)
+neighborhood_size(g, order = 2, 1:3)
+
 ego(g, order = 0, 1:3)
 ego(g, order = 1, 1:3)
 ego(g, order = 2, 1:3)
+
 # neighborhood() is an alias of ego()
 neighborhood(g, order = 0, 1:3)
 neighborhood(g, order = 1, 1:3)
@@ -114,6 +143,8 @@ neighborhood(g, order = 2, 1:3)
 # attributes are preserved
 V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 make_ego_graph(g, order = 2, 1:3)
+# make_neighborhood_graph() is an alias of make_ego_graph()
+make_neighborhood_graph(g, order = 2, 1:3)
 
 # connecting to the neighborhood
 g <- make_ring(10)
@@ -145,56 +176,6 @@ Other functions for manipulating graph structure:
 \code{\link{union.igraph}()},
 \code{\link{union}()},
 \code{\link{vertex}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
-
-Other structural.properties: 
-\code{\link{bfs}()},
-\code{\link{component_distribution}()},
-\code{\link{constraint}()},
-\code{\link{coreness}()},
-\code{\link{degree}()},
-\code{\link{dfs}()},
-\code{\link{distance_table}()},
-\code{\link{edge_density}()},
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_acyclic}()},
-\code{\link{is_dag}()},
-\code{\link{is_matching}()},
-\code{\link{knn}()},
-\code{\link{laplacian_matrix}()},
-\code{\link{reciprocity}()},
-\code{\link{subcomponent}()},
-\code{\link{subgraph}()},
-\code{\link{topo_sort}()},
-\code{\link{transitivity}()},
-\code{\link{unfold_tree}()},
-\code{\link{which_multiple}()},
-\code{\link{which_mutual}()}
 
 Other structural.properties: 
 \code{\link{bfs}()},

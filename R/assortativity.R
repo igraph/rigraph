@@ -71,19 +71,26 @@
 #' @aliases assortativity assortativity.degree assortativity_degree
 #' assortativity.nominal assortativity_nominal
 #' @param graph The input graph, it can be directed or undirected.
-#' @param types Vector giving the vertex types. They as assumed to be integer
-#'   numbers, starting with one. Non-integer values are converted to integers.
 #' @param values The vertex values, these can be arbitrary numeric values.
+#' @inheritParams rlang::args_dots_empty
 #' @param values.in A second value vector to be using for the incoming edges when
-#'   calculating assortativity for a directed graph.  Supply `NULL` here if
-#'   you want to use the same values for outgoing and incoming edges. This
+#'   calculating assortativity for a directed graph.
+#'   Supply `NULL` here if
+#'   you want to use the same values for outgoing and incoming edges.
+#'   This
 #'   argument is ignored (with a warning) if it is not `NULL` and undirected
 #'   assortativity coefficient is being calculated.
 #' @param directed Logical scalar, whether to consider edge directions for
-#'   directed graphs. This argument is ignored for undirected graphs. Supply
+#'   directed graphs.
+#'   This argument is ignored for undirected graphs.
+#'   Supply
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
+#' @param normalized TBD
+#' @param types1,types2
+#'   `r lifecycle::badge("deprecated")`
+#'   Deprecated aliases for `values` and `values.in`, respectively.
 #' @return A single real number.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @references M. E. J. Newman: Mixing patterns in networks, *Phys. Rev.
@@ -100,8 +107,65 @@
 #'
 #' # BA model, tends to be dissortative
 #' assortativity_degree(sample_pa(10000, m = 4))
-assortativity <- assortativity_impl
+assortativity <- function(graph,
+                          values,
+                          ...,
+                          values.in = NULL,
+                          directed = TRUE,
+                          normalized = TRUE,
+                          types1 = NULL,
+                          types2 = NULL) {
+  if (...length() > 0) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      "assortativity(... =)",
+      details = "Arguments `values` and `values.in` must be named."
+    )
+    dots <- list(...)
+    dots[["graph"]] <- graph
+    if (!missing(types2)) {
+      dots[["types2"]] <- types2
+    }
+    if (!missing(directed)) {
+      dots[["directed"]] <- directed
+    }
+    if (missing(values)) {
+      dots[["types1"]] <- types1
+    } else {
+      dots[["types1"]] <- values
+    }
+    return(inject(assortativity_legacy(!!!dots)))
+  }
 
+  if (missing(values)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      "assortativity(types1 =)",
+      "assortativity(values =)"
+    )
+    values <- types1
+  }
+
+  if (!is.null(types2)) {
+    lifecycle::deprecate_soft(
+      "1.6.0",
+      "assortativity(types2 =)",
+      "assortativity(values.in =)"
+    )
+    stopifnot(is.null(values.in))
+    values.in <- types2
+  }
+
+  assortativity_impl(graph, values, values.in, directed, normalized)
+}
+
+assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) {
+  assortativity_impl(graph, types1, types2, directed)
+}
+
+#' @param types Vector giving the vertex types. They as assumed to be integer
+#'   numbers, starting with one. Non-integer values are converted to integers
+#'   with [as.integer()].
 #' @rdname assortativity
 #' @export
 assortativity_nominal <- assortativity_nominal_impl

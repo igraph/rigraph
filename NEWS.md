@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9018
+
+## Features
+
+  - Rename arguments to `assortativity(values, values.in)` from `types1` and `types2` (#952).
+
+  - Add ellipsis to `cluster_label_prop()` (#954).
+
+  - Placeholders for `is_acyclic()` and `is_forest()`, to be implemented in igraph 2.0.0 (#945).
+
+## Chore
+
+  - Sync with igraph-0.10 branch (#951).
+
+
 # igraph 1.5.1.9017
 
 ## Features
