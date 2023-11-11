@@ -1598,7 +1598,7 @@ any_loop <- has_loop_impl
 #'   irrespectively of the supplied value.}
 #'   \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
-#'   \item{rank}{Numeric vector. The rank for each vertex.}
+#'   \item{rank}{Numeric vector. The rank for each vertex, zero for unreachable vertices.}
 #'   \item{father}{Numeric
 #'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
 #'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
@@ -1721,6 +1721,10 @@ bfs <- function(
     if (pred) names(res$pred) <- V(graph)$name
     if (succ) names(res$succ) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
+  }
+
+  if (rank) {
+    res$rank[is.nan(res$rank)] <- 0
   }
 
   if (dist) {
