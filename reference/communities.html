@@ -101,11 +101,6 @@ this class.</p>
 <span><span class="co"># S3 method for communities</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/as.hclust.html" class="external-link">as.hclust</a></span><span class="op">(</span><span class="va">x</span>, hang <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, use.modularity <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">as_phylo</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S3 method for communities</span></span>
-<span><span class="fu">as_phylo</span><span class="op">(</span><span class="va">x</span>, use.modularity <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">cut_at</span><span class="op">(</span><span class="va">communities</span>, <span class="va">no</span>, <span class="va">steps</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">show_trace</span><span class="op">(</span><span class="va">communities</span><span class="op">)</span></span>
@@ -307,9 +302,9 @@ non-hierarchical method.</p>
 <p><code><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram()</a></code> converts a hierarchical community structure to a
 <code>dendrogram</code> object. It only works for hierarchical methods, and gives
 an error message to others. See <code><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">stats::dendrogram()</a></code> for details.</p>
-<p><code>as.hclust</code> is similar to <code><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram()</a></code>, but converts a
+<p><code><a href="https://rdrr.io/r/stats/as.hclust.html" class="external-link">stats::as.hclust()</a></code> is similar to <code><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram()</a></code>, but converts a
 hierarchical community structure to a <code>hclust</code> object.</p>
-<p><code>as_phylo()</code> converts a hierarchical community structure to a <code>phylo</code>
+<p><code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo()</a></code> converts a hierarchical community structure to a <code>phylo</code>
 object, you will need the <code>ape</code> package for this.</p>
 <p><code>show_trace()</code> works (currently) only for communities found by the leading
 eigenvector method (<code><a href="cluster_leading_eigen.html">cluster_leading_eigen()</a></code>), and
