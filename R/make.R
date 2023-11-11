@@ -1594,6 +1594,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph()] to create one-mode networks
 #' @keywords graphs
+#' @family bipartite
 #' @examples
 #'
 #' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))

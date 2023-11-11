@@ -836,12 +836,10 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
 #' @rdname sample_traits_callaway
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
-#' @family games
 #' @export
 traits_callaway <- function(...) constructor_spec(sample_traits_callaway, ...)
 
 #' @rdname sample_traits_callaway
-#' @family games
 #' @export
 sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
                           pref.matrix = matrix(1, types, types),
@@ -864,7 +862,6 @@ sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
 }
 
 #' @rdname sample_traits_callaway
-#' @family games
 #' @export
 traits <- function(...) constructor_spec(sample_traits, ...)
 
@@ -1018,12 +1015,10 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
 #' @rdname sample_pref
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
-#' @family games
 #' @export
 pref <- function(...) constructor_spec(sample_pref, ...)
 
 #' @rdname sample_pref
-#' @family games
 #' @export
 sample_asym_pref <- function(nodes, types,
                              type.dist.matrix = matrix(1, types, types),
@@ -1058,7 +1053,6 @@ sample_asym_pref <- function(nodes, types,
 }
 
 #' @rdname sample_pref
-#' @family games
 #' @export
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
 
@@ -1209,12 +1203,10 @@ sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins
 
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
-#' @family games
 #' @export
 last_cit <- function(...) constructor_spec(sample_last_cit, ...)
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 sample_cit_types <- function(n, edges = 1, types = rep(0, n),
                              pref = rep(1, length(types)),
@@ -1235,12 +1227,10 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 cit_types <- function(...) constructor_spec(sample_cit_types, ...)
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
                                  pref = matrix(1,
@@ -1266,7 +1256,6 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
 }
 
 #' @rdname sample_last_cit
-#' @family games
 #' @export
 cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 
