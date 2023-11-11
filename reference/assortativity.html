@@ -69,7 +69,15 @@ external property) tend to connect to each, and negative otherwise.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">assortativity</span><span class="op">(</span><span class="va">graph</span>, <span class="va">types1</span>, types2 <span class="op">=</span> <span class="cn">NULL</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">assortativity</span><span class="op">(</span></span>
+<span>  <span class="va">graph</span>,</span>
+<span>  <span class="va">values</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  values.in <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  directed <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  types1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  types2 <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">assortativity_nominal</span><span class="op">(</span><span class="va">graph</span>, <span class="va">types</span>, directed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -82,24 +90,37 @@ external property) tend to connect to each, and negative otherwise.</p>
 <dd><p>The input graph, it can be directed or undirected.</p></dd>
 
 
-<dt>types1</dt>
+<dt>values</dt>
 <dd><p>The vertex values, these can be arbitrary numeric values.</p></dd>
 
 
-<dt>types2</dt>
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
+<dt>values.in</dt>
 <dd><p>A second value vector to be using for the incoming edges when
-calculating assortativity for a directed graph.  Supply <code>NULL</code> here if
-you want to use the same values for outgoing and incoming edges. This
+calculating assortativity for a directed graph.
+Supply <code>NULL</code> here if
+you want to use the same values for outgoing and incoming edges.
+This
 argument is ignored (with a warning) if it is not <code>NULL</code> and undirected
 assortativity coefficient is being calculated.</p></dd>
 
 
 <dt>directed</dt>
 <dd><p>Logical scalar, whether to consider edge directions for
-directed graphs. This argument is ignored for undirected graphs. Supply
+directed graphs.
+This argument is ignored for undirected graphs.
+Supply
 <code>TRUE</code> here to do the natural thing, i.e. use directed version of the
 measure for directed graphs and the undirected version for undirected
 graphs.</p></dd>
+
+
+<dt>types1, types2</dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a>
+Deprecated aliases for <code>values</code> and <code>values.in</code>, respectively.</p></dd>
 
 
 <dt>types</dt>
