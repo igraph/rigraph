@@ -2348,6 +2348,10 @@ void checkInterruptFn(void *dummy) {
 }
 
 int R_igraph_interrupt_handler(void *data) {
+  /* Temporary improvement for https://github.com/igraph/rigraph/issues/940 */
+  static int iter = 0;
+  if (++iter < 16) return IGRAPH_SUCCESS;
+  iter = 0;
   /* We need to call R_CheckUserInterrupt() regularly to enable interruptions.
    * However, if an interruption is pending, R_CheckUserInterrupt() will
    * longjmp back to the top level so we cannot clean up ourselves by calling
