@@ -1,5 +1,34 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9019
+
+## Features
+
+  - Breaking change: `bfs()` returns zero instead of `NaN` as rank for unreachable nodes (#956).
+
+  - Add aliases using the neighborhood terminology for all ego functions: (#950).
+
+## Chore
+
+  - Document.
+
+  - `usethis::use_lifecycle()` (#955).
+
+## Documentation
+
+  - Remove duplicate \\seealso{} (#948).
+
+## Refactoring
+
+  - Breaking change: Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
+
+## Breaking changes
+
+  - Breaking change: Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
+
+  - Breaking change: `bfs()` returns zero instead of `NaN` as rank for unreachable nodes (#956).
+
+
 # igraph 1.5.1.9018
 
 ## Features
