@@ -11,7 +11,7 @@ embed_adjacency_matrix(
   which = c("lm", "la", "sa"),
   scaled = TRUE,
   cvec = graph.strength(graph, weights = weights)/(vcount(graph) - 1),
-  options = igraph.arpack.default
+  options = arpack_defaults()
 )
 }
 \arguments{

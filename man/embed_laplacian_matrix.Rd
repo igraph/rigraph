@@ -11,7 +11,7 @@ embed_laplacian_matrix(
   which = c("lm", "la", "sa"),
   type = c("default", "D-A", "DAD", "I-DAD", "OAP"),
   scaled = TRUE,
-  options = igraph.arpack.default
+  options = arpack_defaults()
 )
 }
 \arguments{

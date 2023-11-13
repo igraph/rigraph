@@ -549,7 +549,7 @@ count_multiple_impl <- function(graph, eids=E(graph)) {
   res
 }
 
-eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults) {
+eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   directed <- as.logical(directed)
@@ -573,7 +573,7 @@ eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weigh
   res
 }
 
-hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) {
+hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   scale <- as.logical(scale)
@@ -596,7 +596,7 @@ hub_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defau
   res
 }
 
-authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) {
+authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   scale <- as.logical(scale)
@@ -772,7 +772,7 @@ centralization_closeness_tmax_impl <- function(graph=NULL, nodes=0, mode=c("out"
   res
 }
 
-centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, options=arpack_defaults, normalized=TRUE) {
+centralization_eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, options=arpack_defaults(), normalized=TRUE) {
   # Argument checks
   ensure_igraph(graph)
   directed <- as.logical(directed)
@@ -2064,7 +2064,7 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   res
 }
 
-eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults) {
+eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
