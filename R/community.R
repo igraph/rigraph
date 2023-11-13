@@ -1342,7 +1342,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' `edge.betweeness.community` returns various information collected
 #' through the run of the algorithm. See the return value down here.
 #'
-#' @aliases edge.betweenness.community cluster_edge_betweenness
+#' @aliases edge.betweenness.community
 #' @param graph The graph to analyze.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
