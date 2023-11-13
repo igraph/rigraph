@@ -1112,7 +1112,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' A ring is a one-dimensional lattice and this function is a special case
 #' of [make_lattice()].
 #'
-#' @aliases make_ring graph.ring
+#' @aliases graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -1574,7 +1574,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' `is_bipartite()` checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called `type`.
 #'
-#' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
+#' @aliases graph.bipartite is.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
 #'   When the vector is a named vector, the names will be attached to the graph
