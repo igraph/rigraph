@@ -139,8 +139,7 @@ uniformly choose \(m\) edges to realize.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="sample_gnp.html">sample_gnp()</a></code> and <code><a href="sample_gnm.html">sample_gnm()</a></code> for the unipartite version.</p>
-<p>Random graph models (games)
+    <div class="dont-index"><p>Random graph models (games)
 <code><a href="erdos.renyi.game.html">erdos.renyi.game</a>()</code>,
 <code><a href="sample_correlated_gnp_pair.html">sample_correlated_gnp_pair</a>()</code>,
 <code><a href="sample_correlated_gnp.html">sample_correlated_gnp</a>()</code>,
@@ -201,15 +200,15 @@ uniformly choose \(m\) edges to realize.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## empty graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4963fb4 U--B 15 0 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 01272c6 U--B 15 0 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4963fb4:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 01272c6:</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## full graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 3fc84e1 U--B 15 50 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH beda04c U--B 15 50 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 3fc84e1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from beda04c:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1--11  1--12  1--13  1--14  1--15  2--11  2--12  2--13  2--14  2--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11]  3--11  3--12  3--13  3--14  3--15  4--11  4--12  4--13  4--14  4--15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21]  5--11  5--12  5--13  5--14  5--15  6--11  6--12  6--13  6--14  6--15</span>
@@ -218,16 +217,16 @@ uniformly choose \(m\) edges to realize.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## random bipartite graph</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, p <span class="op">=</span> <span class="fl">.1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e5d5cf6 U--B 15 7 -- Bipartite Gnp random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 16813a1 U--B 15 7 -- Bipartite Gnp random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), p (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e5d5cf6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 16813a1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1--11 3--11 5--12 6--12 3--13 7--14 7--15</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## directed bipartite graph, G(n,m)</span></span></span>
 <span class="r-in"><span><span class="fu">sample_bipartite</span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, type <span class="op">=</span> <span class="st">"Gnm"</span>, m <span class="op">=</span> <span class="fl">20</span>, directed <span class="op">=</span> <span class="cn">TRUE</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 983f61e D--B 15 20 -- Bipartite Gnm random graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 20f0339 D--B 15 20 -- Bipartite Gnm random graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), m (g/n), type (v/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 983f61e:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 20f0339:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8-&gt;11  2-&gt;12  4-&gt;12  5-&gt;12  1-&gt;14  6-&gt;14  9-&gt;14 10-&gt;14  8-&gt;15 11-&gt; 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] 15-&gt; 1 12-&gt; 2 15-&gt; 2 11-&gt; 6 12-&gt; 6 13-&gt; 6 14-&gt; 7 14-&gt; 9 12-&gt;10 15-&gt;10</span>
 <span class="r-in"><span></span></span>

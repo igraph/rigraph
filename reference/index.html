@@ -216,6 +216,11 @@
           <code><a href="graph_from_lcf.html">graph_from_lcf()</a></code> 
         </dt>
         <dd>Creating a graph from LCF notation</dd>
+      </dl><dl><dt>
+          
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code> 
+        </dt>
+        <dd>Creating igraph graphs from data frames or vice-versa</dd>
       </dl></div><div class="section level2">
       
       <h3 id="stochastic-constructors-random-graph-models-">Stochastic constructors (random graph models)<a class="anchor" aria-label="anchor" href="#stochastic-constructors-random-graph-models-"></a></h3>
@@ -1112,11 +1117,6 @@ adding/removing edges</dd>
         <dd>Create graphs from adjacency lists</dd>
       </dl><dl><dt>
           
-          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code> 
-        </dt>
-        <dd>Creating igraph graphs from data frames or vice-versa</dd>
-      </dl><dl><dt>
-          
           <code><a href="graph_from_graphnel.html">graph_from_graphnel()</a></code> 
         </dt>
         <dd>Convert graphNEL objects from the graph package to igraph</dd>
@@ -1352,7 +1352,7 @@ adding/removing edges</dd>
         <dd>Convert a general graph into a forest</dd>
       </dl><dl><dt>
           
-          <code><a href="which_multiple.html">which_multiple()</a></code> 
+          <code><a href="which_multiple.html">which_multiple()</a></code> <code><a href="which_multiple.html">any_multiple()</a></code> <code><a href="which_multiple.html">count_multiple()</a></code> <code><a href="which_multiple.html">which_loop()</a></code> <code><a href="which_multiple.html">any_loop()</a></code> 
         </dt>
         <dd>Find the multiple or loop edges in a graph</dd>
       </dl><dl><dt>
@@ -1362,9 +1362,14 @@ adding/removing edges</dd>
         <dd>Find mutual edges in a directed graph</dd>
       </dl><dl><dt>
           
-          <code><a href="cocitation.html">cocitation()</a></code> 
+          <code><a href="cocitation.html">cocitation()</a></code> <code><a href="cocitation.html">bibcoupling()</a></code> 
         </dt>
         <dd>Cocitation coupling</dd>
+      </dl><dl><dt>
+          
+          <code><a href="similarity.html">similarity()</a></code> 
+        </dt>
+        <dd>Similarity measures of two vertices</dd>
       </dl><dl><dt>
           
           <code><a href="cohesive_blocks.html">cohesive_blocks()</a></code> <code><a href="cohesive_blocks.html">length(<i>&lt;cohesiveBlocks&gt;</i>)</a></code> <code><a href="cohesive_blocks.html">blocks()</a></code> <code><a href="cohesive_blocks.html">graphs_from_cohesive_blocks()</a></code> <code><a href="cohesive_blocks.html">cohesion(<i>&lt;cohesiveBlocks&gt;</i>)</a></code> <code><a href="cohesive_blocks.html">hierarchy()</a></code> <code><a href="cohesive_blocks.html">parent()</a></code> <code><a href="cohesive_blocks.html">print(<i>&lt;cohesiveBlocks&gt;</i>)</a></code> <code><a href="cohesive_blocks.html">summary(<i>&lt;cohesiveBlocks&gt;</i>)</a></code> <code><a href="cohesive_blocks.html">plot(<i>&lt;cohesiveBlocks&gt;</i>)</a></code> <code><a href="cohesive_blocks.html">plot_hierarchy()</a></code> <code><a href="cohesive_blocks.html">export_pajek()</a></code> <code><a href="cohesive_blocks.html">max_cohesion()</a></code> 
@@ -1445,7 +1450,7 @@ adding/removing edges</dd>
         <dd>List all simple paths from one source</dd>
       </dl><dl><dt>
           
-          <code><a href="diameter.html">diameter()</a></code> 
+          <code><a href="diameter.html">diameter()</a></code> <code><a href="diameter.html">get_diameter()</a></code> <code><a href="diameter.html">farthest_vertices()</a></code> 
         </dt>
         <dd>Diameter of a graph</dd>
       </dl><dl><dt>
@@ -1481,7 +1486,7 @@ adding/removing edges</dd>
         <dd>Decide whether a graph is bipartite</dd>
       </dl><dl><dt>
           
-          <code><a href="bipartite_projection.html">bipartite_projection()</a></code> 
+          <code><a href="bipartite_projection.html">bipartite_projection()</a></code> <code><a href="bipartite_projection.html">bipartite_projection_size()</a></code> 
         </dt>
         <dd>Project a bipartite graph</dd>
       </dl><dl><dt>
@@ -1954,7 +1959,7 @@ another graph</dd>
         <dd>Dominator tree</dd>
       </dl><dl><dt>
           
-          <code><a href="edge_connectivity.html">edge_connectivity()</a></code> 
+          <code><a href="edge_connectivity.html">edge_connectivity()</a></code> <code><a href="edge_connectivity.html">edge_disjoint_paths()</a></code> <code><a href="edge_connectivity.html">adhesion()</a></code> 
         </dt>
         <dd>Edge connectivity</dd>
       </dl><dl><dt>
@@ -1999,7 +2004,7 @@ another graph</dd>
         <dd>List all minimum \((s,t)\)-cuts of a graph</dd>
       </dl><dl><dt>
           
-          <code><a href="vertex_connectivity.html">vertex_connectivity()</a></code> <code><a href="vertex_connectivity.html">cohesion(<i>&lt;igraph&gt;</i>)</a></code> 
+          <code><a href="vertex_connectivity.html">vertex_connectivity()</a></code> <code><a href="vertex_connectivity.html">vertex_disjoint_paths()</a></code> <code><a href="vertex_connectivity.html">cohesion(<i>&lt;igraph&gt;</i>)</a></code> 
         </dt>
         <dd>Vertex connectivity</dd>
       </dl></div><div class="section level2">
@@ -2015,12 +2020,12 @@ another graph</dd>
 
       <dl><dt>
           
-          <code><a href="cliques.html">cliques()</a></code> <code><a href="cliques.html">max_cliques()</a></code> 
+          <code><a href="cliques.html">cliques()</a></code> <code><a href="cliques.html">largest_cliques()</a></code> <code><a href="cliques.html">max_cliques()</a></code> <code><a href="cliques.html">count_max_cliques()</a></code> <code><a href="cliques.html">clique_num()</a></code> <code><a href="cliques.html">largest_weighted_cliques()</a></code> <code><a href="cliques.html">weighted_clique_num()</a></code> <code><a href="cliques.html">clique_size_counts()</a></code> 
         </dt>
         <dd>Functions to find cliques, i.e. complete subgraphs in a graph</dd>
       </dl><dl><dt>
           
-          <code><a href="ivs.html">ivs()</a></code> 
+          <code><a href="ivs.html">ivs()</a></code> <code><a href="ivs.html">largest_ivs()</a></code> <code><a href="ivs.html">maximal_ivs()</a></code> <code><a href="ivs.html">ivs_size()</a></code> 
         </dt>
         <dd>Independent vertex sets</dd>
       </dl><dl><dt>
@@ -2030,7 +2035,7 @@ another graph</dd>
         <dd>Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph</dd>
       </dl><dl><dt>
           
-          <code><a href="graphlet_basis.html">graphlet_basis()</a></code> <code><a href="graphlet_basis.html">graphlet_proj()</a></code> 
+          <code><a href="graphlet_basis.html">graphlet_basis()</a></code> <code><a href="graphlet_basis.html">graphlet_proj()</a></code> <code><a href="graphlet_basis.html">graphlets()</a></code> 
         </dt>
         <dd>Graphlet decomposition of a graph</dd>
       </dl></div><div class="section level2">
@@ -2108,7 +2113,7 @@ van Eck &amp; Waltman.</dd>
         <dd>Community structure via short random walks</dd>
       </dl><dl><dt>
           
-          <code><a href="communities.html">membership()</a></code> <code><a href="communities.html">print(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">modularity(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">length(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">sizes()</a></code> <code><a href="communities.html">algorithm()</a></code> <code><a href="communities.html">merges()</a></code> <code><a href="communities.html">crossing()</a></code> <code><a href="communities.html">code_len()</a></code> <code><a href="communities.html">is_hierarchical()</a></code> <code><a href="communities.html">as.dendrogram(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">as.hclust(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">cut_at()</a></code> <code><a href="communities.html">show_trace()</a></code> <code><a href="communities.html">plot(<i>&lt;communities&gt;</i>)</a></code> 
+          <code><a href="communities.html">membership()</a></code> <code><a href="communities.html">print(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">modularity(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">length(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">sizes()</a></code> <code><a href="communities.html">algorithm()</a></code> <code><a href="communities.html">merges()</a></code> <code><a href="communities.html">crossing()</a></code> <code><a href="communities.html">code_len()</a></code> <code><a href="communities.html">is_hierarchical()</a></code> <code><a href="communities.html">as.dendrogram(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">as.hclust(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">cut_at()</a></code> <code><a href="communities.html">show_trace()</a></code> <code><a href="communities.html">plot(<i>&lt;communities&gt;</i>)</a></code> <code><a href="communities.html">communities()</a></code> 
         </dt>
         <dd>Functions to deal with the result of network community detection</dd>
       </dl><dl><dt>
@@ -2345,7 +2350,7 @@ van Eck &amp; Waltman.</dd>
         <dd>Plotting the results on multiple SIR model runs</dd>
       </dl><dl><dt>
           
-          <code><a href="sir.html">time_bins(<i>&lt;sir&gt;</i>)</a></code> <code><a href="sir.html">median(<i>&lt;sir&gt;</i>)</a></code> <code><a href="sir.html">quantile(<i>&lt;sir&gt;</i>)</a></code> <code><a href="sir.html">sir()</a></code> 
+          <code><a href="sir.html">time_bins()</a></code> <code><a href="sir.html">median(<i>&lt;sir&gt;</i>)</a></code> <code><a href="sir.html">quantile(<i>&lt;sir&gt;</i>)</a></code> <code><a href="sir.html">sir()</a></code> 
         </dt>
         <dd>SIR model on graphs</dd>
       </dl><dl><dt>

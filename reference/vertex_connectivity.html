@@ -71,6 +71,8 @@ called group cohesion.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">vertex_connectivity</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span>, checks <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">vertex_disjoint_paths</span><span class="op">(</span><span class="va">graph</span>, source <span class="op">=</span> <span class="cn">NULL</span>, target <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for igraph</span></span>
 <span><span class="fu">cohesion</span><span class="op">(</span><span class="va">x</span>, checks <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -147,9 +149,7 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="max_flow.html">max_flow()</a></code>, <code><a href="edge_connectivity.html">edge_connectivity()</a></code>,
-<code><a href="edge_connectivity.html">edge_disjoint_paths()</a></code>, <code><a href="edge_connectivity.html">adhesion()</a></code></p>
-<p>Other flow: 
+    <div class="dont-index"><p>Other flow: 
 <code><a href="dominator_tree.html">dominator_tree</a>()</code>,
 <code><a href="edge_connectivity.html">edge_connectivity</a>()</code>,
 <code><a href="is_min_separator.html">is_min_separator</a>()</code>,
