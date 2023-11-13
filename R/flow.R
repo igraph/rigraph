@@ -391,7 +391,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' removing these edges from \eqn{G} there is no directed path from \eqn{s} to
 #' \eqn{t}.
 #'
-#' @aliases stCuts st_cuts
+#' @aliases stCuts
 #' @param graph The input graph. It must be directed.
 #' @param source The source vertex.
 #' @param target The target vertex.
@@ -492,7 +492,7 @@ st_min_cuts <- all_st_mincuts_impl
 #' This function implements the Lengauer-Tarjan algorithm to construct the
 #' dominator tree of a directed graph. For details see the reference below.
 #'
-#' @aliases dominator.tree dominator_tree
+#' @aliases dominator.tree
 #' @param graph A directed graph. If it is not a flowgraph, and it contains
 #'   some vertices not reachable from the root vertex, then these vertices will
 #'   be collected and returned as part of the result.
@@ -567,7 +567,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' A \eqn{(s,t)} vertex separator is minimal if none of its subsets is an
 #' \eqn{(s,t)} vertex separator.
 #'
-#' @aliases minimal.st.separators min_st_separators
+#' @aliases minimal.st.separators
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @return A list of numeric vectors. Each vector contains a vertex set
