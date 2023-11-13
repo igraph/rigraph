@@ -5,6 +5,7 @@
 \alias{largest_component}
 \alias{components}
 \alias{no.clusters}
+\alias{clusters}
 \alias{is.connected}
 \alias{cluster.distribution}
 \alias{is_connected}
