@@ -1908,7 +1908,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
 #'
-#' @aliases no.clusters clusters is.connected cluster.distribution components
+#' @aliases no.clusters is.connected cluster.distribution
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
