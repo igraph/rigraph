@@ -839,7 +839,7 @@ graph.isomorphic <- isomorphic_impl
 #' automorphisms themselves, use [automorphism_group()] to obtain
 #' a compact representation of the automorphism group.
 #'
-#' @aliases graph.automorphisms automorphisms count_automorphisms
+#' @aliases graph.automorphisms automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
