@@ -200,8 +200,6 @@ clique_num <- clique_number_impl
 #'
 #' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
-#' @aliases weighted_cliques max_weighted_cliques
-#' count_max_weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.

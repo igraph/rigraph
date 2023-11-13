@@ -2,8 +2,6 @@
 % Please edit documentation in R/cliques.R
 \name{weighted_cliques}
 \alias{weighted_cliques}
-\alias{max_weighted_cliques}
-\alias{count_max_weighted_cliques}
 \title{Functions to find weighted cliques, i.e. vertex-weighted complete subgraphs in a graph}
 \usage{
 weighted_cliques(
