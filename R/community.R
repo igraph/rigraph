@@ -1621,9 +1621,22 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'
 cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   start = NULL,
-                                  options = arpack_defaults,
+                                  options = arpack_defaults(),
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
+
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -1639,9 +1652,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
-  options.tmp <- arpack_defaults
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

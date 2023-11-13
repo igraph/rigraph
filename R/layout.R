@@ -1517,7 +1517,20 @@ layout.lgl <- function(..., params = list()) {
 #' l <- layout_with_mds(g)
 #' plot(g, layout = l, vertex.label = NA, vertex.size = 3)
 layout_with_mds <- function(graph, dist = NULL, dim = 2,
-                            options = arpack_defaults) {
+                            options = arpack_defaults()) {
+
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
