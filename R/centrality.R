@@ -222,7 +222,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' graphs, consider using the harmonic centrality with
 #' [harmonic_centrality()]
 #'
-#' @aliases closeness closeness.estimate
+#' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
