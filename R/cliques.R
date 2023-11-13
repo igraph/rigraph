@@ -45,6 +45,7 @@
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases maximal.cliques maximal.cliques.count clique.number largest.cliques
+#' @inheritParams weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -87,6 +88,7 @@
 #' max_cliques(g)
 cliques <- cliques_impl
 
+#' @rdname cliques
 #' @export
 largest_cliques <- largest_cliques_impl
 

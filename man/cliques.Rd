@@ -6,6 +6,7 @@
 \alias{maximal.cliques.count}
 \alias{clique.number}
 \alias{largest.cliques}
+\alias{largest_cliques}
 \alias{max_cliques}
 \alias{count_max_cliques}
 \alias{clique_num}
@@ -15,6 +16,8 @@
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
+
+largest_cliques(graph)
 
 max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
 
@@ -49,6 +52,15 @@ character scalar. The output of the algorithm is written to this file. (If
 it exists, then it will be overwritten.) Each clique will be a separate line
 in the file, given with the numeric ids of its vertices, separated by
 whitespace.}
+
+\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
+vertex attribute, then this is used by default. If the graph does not have a
+\code{weight} vertex attribute and this argument is \code{NULL}, then every
+vertex is assumed to have a weight of 1. Note that the current implementation
+of the weighted clique finder supports positive integer weights only.}
+
+\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
+or only the maximal ones (\code{TRUE}).}
 }
 \value{
 \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
