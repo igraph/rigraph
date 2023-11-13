@@ -647,7 +647,6 @@ all_shortest_paths <- function(graph, from,
 #'
 #' A breadth-first search is conducted starting from vertex `v`.
 #'
-#' @aliases subcomponent
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
