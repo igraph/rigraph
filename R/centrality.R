@@ -847,7 +847,7 @@ eigen_centrality <- function(graph,
 #' Summing up the edge weights of the adjacent edges for each vertex.
 #'
 #'
-#' @aliases graph.strength strength
+#' @aliases graph.strength
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -899,7 +899,7 @@ strength <- strength_impl
 #'
 #' For vertices with degree less than two the function returns `NaN`.
 #'
-#' @aliases graph.diversity diversity
+#' @aliases graph.diversity
 #' @param graph The input graph. Edge directions are ignored.
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
@@ -1044,7 +1044,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #' PageRank for only some of the vertices does not result in any performance
 #' increase at all.
 #'
-#' @aliases page.rank page_rank
+#' @aliases page.rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library
