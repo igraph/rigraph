@@ -792,7 +792,7 @@ canonical_permutation <- canonical_permutation_impl
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
 #'
-#' @aliases permute.vertices permute
+#' @aliases permute.vertices
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
 #'   first element is the new id of vertex 1, etc. Every number between one and
