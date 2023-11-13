@@ -1486,8 +1486,7 @@ girth <- function(graph, circle = TRUE) {
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
 #'
-#' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
-#'   any_loop any_multiple which_loop
+#' @aliases has.multiple is.loop is.multiple count.multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
@@ -1526,12 +1525,16 @@ girth <- function(graph, circle = TRUE) {
 #' E(g)$weight
 #'
 which_multiple <- is_multiple_impl
+#' @rdname which_multiple
 #' @export
 any_multiple <- has_multiple_impl
+#' @rdname which_multiple
 #' @export
 count_multiple <- count_multiple_impl
+#' @rdname which_multiple
 #' @export
 which_loop <- is_loop_impl
+#' @rdname which_multiple
 #' @export
 any_loop <- has_loop_impl
 
