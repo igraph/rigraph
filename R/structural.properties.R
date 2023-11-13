@@ -38,7 +38,7 @@
 #' `farthest_vertices()` returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #'
-#' @aliases diameter get.diameter farthest.nodes farthest_vertices get_diameter
+#' @aliases get.diameter farthest.nodes
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
 #'   considered. This is ignored for undirected graphs.
@@ -96,7 +96,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
   )
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
@@ -124,7 +124,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
