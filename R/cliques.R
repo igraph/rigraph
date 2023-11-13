@@ -45,7 +45,7 @@
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
 #' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
-#' clique.number largest.cliques max_cliques
+#' clique.number largest.cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
