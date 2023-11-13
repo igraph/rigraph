@@ -74,7 +74,7 @@ betweenness.estimate <- estimate_betweenness
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #'
-#' @aliases betweenness edge.betweenness betweenness.estimate
+#' @aliases edge.betweenness betweenness.estimate
 #' edge.betweenness.estimate edge_betweenness
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
@@ -150,7 +150,6 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
-#' @family centrality
 #' @export
 edge_betweenness <- function(graph, e = E(graph),
                              directed = TRUE, weights = NULL, cutoff = -1) {
@@ -244,7 +243,6 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @return Numeric vector with the closeness values of all the vertices in
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [betweenness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
 #' @family centrality
