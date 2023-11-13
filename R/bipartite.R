@@ -41,7 +41,7 @@
 #'
 #' `bipartite_projection()` keeps vertex attributes.
 #'
-#' @aliases bipartite.projection bipartite.projection.size bipartite_projection_size bipartite_projection
+#' @aliases bipartite.projection bipartite.projection.size
 #' @param graph The input graph. It can be directed, but edge directions are
 #'   ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
@@ -146,6 +146,7 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' @rdname bipartite_projection
 #' @export
 bipartite_projection_size <- bipartite_projection_size_impl
 
