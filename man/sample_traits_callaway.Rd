@@ -2,10 +2,10 @@
 % Please edit documentation in R/games.R
 \name{sample_traits_callaway}
 \alias{sample_traits_callaway}
-\alias{sample_traits}
 \alias{callaway.traits.game}
 \alias{establishment.game}
 \alias{traits_callaway}
+\alias{sample_traits}
 \alias{traits}
 \title{Graph generation based on different vertex types}
 \usage{

@@ -2,10 +2,10 @@
 % Please edit documentation in R/games.R
 \name{sample_pref}
 \alias{sample_pref}
-\alias{sample_asym_pref}
 \alias{preference.game}
 \alias{asymmetric.preference.game}
 \alias{pref}
+\alias{sample_asym_pref}
 \alias{asym_pref}
 \title{Trait-based random generation}
 \usage{
@@ -99,9 +99,6 @@ tkplot(g, layout = layout_in_circle)
 
 }
 \seealso{
-\code{\link[=sample_traits]{sample_traits()}}.
-\code{\link[=sample_traits_callaway]{sample_traits_callaway()}}
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

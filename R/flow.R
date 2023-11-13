@@ -439,7 +439,7 @@ st_cuts <- all_st_cuts_impl
 #'
 #' An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 #'
-#' @aliases st_min_cuts stMincuts
+#' @aliases stMincuts
 #' @param graph The input graph. It must be directed.
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex.
