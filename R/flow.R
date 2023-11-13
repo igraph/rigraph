@@ -180,8 +180,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' precisely `vertex_connectivity()` is the most general, the other two are
 #' included only for the ease of using more descriptive function names.
 #'
-#' @aliases vertex.connectivity vertex.disjoint.paths cohesion vertex_connectivity
-#'   vertex_disjoint_paths graph.cohesion
+#' @aliases vertex.connectivity vertex.disjoint.paths cohesion graph.cohesion
 #' @param graph,x The input graph.
 #' @param source The id of the source vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
@@ -353,7 +352,7 @@ edge_disjoint_paths <- function(graph, source, target) {
   )
 }
 
-#' @family flow
+#' @rdname vertex_connectivity
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)

@@ -5,12 +5,14 @@
 \alias{vertex.connectivity}
 \alias{vertex.disjoint.paths}
 \alias{cohesion}
-\alias{vertex_disjoint_paths}
 \alias{graph.cohesion}
+\alias{vertex_disjoint_paths}
 \alias{cohesion.igraph}
 \title{Vertex connectivity}
 \usage{
 vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+
+vertex_disjoint_paths(graph, source = NULL, target = NULL)
 
 \method{cohesion}{igraph}(x, checks = TRUE, ...)
 }
