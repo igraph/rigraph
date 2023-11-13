@@ -778,7 +778,7 @@ eigen_defaults <- function() {
 #' From igraph version 0.5 this function uses ARPACK for the underlying
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
-#' @aliases evcent eigen_centrality
+#' @aliases evcent
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
