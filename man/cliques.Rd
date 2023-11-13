@@ -29,7 +29,7 @@ largest_weighted_cliques(graph, vertex.weights = NULL)
 
 weighted_clique_num(graph, vertex.weights = NULL)
 
-clique_size_counts(graph, min = 0, max = 0, maximal = FALSE, ...)
+clique_size_counts(graph, min = 0, max = 0, maximal = FALSE)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs will be considered as
