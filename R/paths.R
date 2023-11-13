@@ -260,6 +260,5 @@ radius <- radius_impl
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
-#' @family paths
 #' @export
 distance_table <- path_length_hist_impl

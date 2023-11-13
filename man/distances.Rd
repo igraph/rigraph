@@ -9,8 +9,8 @@
 \alias{get.all.shortest.paths}
 \alias{average.path.length}
 \alias{path.length.hist}
-\alias{all_shortest_paths}
 \alias{shortest_paths}
+\alias{all_shortest_paths}
 \title{Shortest (directed or undirected) paths between vertices}
 \usage{
 distance_table(graph, directed = TRUE)
@@ -259,12 +259,6 @@ West, D.B. (1996). \emph{Introduction to Graph Theory.} Upper
 Saddle River, N.J.: Prentice Hall.
 }
 \seealso{
-Other paths: 
-\code{\link{all_simple_paths}()},
-\code{\link{diameter}()},
-\code{\link{eccentricity}()},
-\code{\link{radius}()}
-
 Other structural.properties: 
 \code{\link{bfs}()},
 \code{\link{component_distribution}()},
@@ -289,6 +283,12 @@ Other structural.properties:
 \code{\link{unfold_tree}()},
 \code{\link{which_multiple}()},
 \code{\link{which_mutual}()}
+
+Other paths: 
+\code{\link{all_simple_paths}()},
+\code{\link{diameter}()},
+\code{\link{eccentricity}()},
+\code{\link{radius}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}

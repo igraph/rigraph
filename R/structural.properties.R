@@ -295,9 +295,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
 #'
-#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths distances
-#' mean_distance distance_table average.path.length path.length.hist
-#' all_shortest_paths shortest_paths
+#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
+#' average.path.length path.length.hist
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #'   calculated.
@@ -374,6 +373,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
 #' @family structural.properties
+#' @family paths
 #' @export
 #' @keywords graphs
 #' @examples
