@@ -184,7 +184,7 @@ deprecated("get.edgelist", as_edgelist)
 #' @export get.graph.attribute
 deprecated("get.graph.attribute", graph_attr)
 #' @export get.incidence
-deprecated("get.incidence", as_incidence_matrix)
+deprecated("get.incidence", as_biadjacency_matrix)
 #' @export get.stochastic
 deprecated("get.stochastic", stochastic_matrix)
 #' @export get.vertex.attribute
@@ -244,7 +244,7 @@ deprecated("graph.full.citation", make_full_citation_graph)
 #' @export graph.graphdb
 deprecated("graph.graphdb", graph_from_graphdb)
 #' @export graph.incidence
-deprecated("graph.incidence", graph_from_incidence_matrix)
+deprecated("graph.incidence", graph_from_biadjacency_matrix)
 #' @export graph.isocreate
 deprecated("graph.isocreate", graph_from_isomorphism_class)
 #' @export graph.kautz
