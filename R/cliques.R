@@ -260,15 +260,14 @@ weighted_clique_num <- weighted_clique_number_impl
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
 #'
-#' `independece.number` calculate the size of the largest independent
+#' `ivs_size()` calculate the size of the largest independent
 #' vertex set(s).
 #'
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
 #'
 #' @aliases independent.vertex.sets largest.independent.vertex.sets
-#' maximal.independent.vertex.sets independence.number ivs_size ivs
-#' largest_ivs maximal_ivs
+#' maximal.independent.vertex.sets independence.number
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
@@ -285,7 +284,6 @@ weighted_clique_num <- weighted_clique_number_impl
 #' Graph Library by Keith Briggs (<http://keithbriggs.info/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual
 #' page.
-#' @seealso [cliques()]
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
 #' algorithm for generating all the maximal independent sets. *SIAM J
 #' Computing*, 6:505--517, 1977.
@@ -331,7 +329,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 largest_ivs <- function(graph) {
   ensure_igraph(graph)
@@ -347,7 +345,7 @@ largest_ivs <- function(graph) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 maximal_ivs <- function(graph) {
   ensure_igraph(graph)
@@ -363,7 +361,7 @@ maximal_ivs <- function(graph) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
   ensure_igraph(graph)
