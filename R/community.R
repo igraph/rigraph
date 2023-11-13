@@ -2273,7 +2273,7 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #' This function assesses the distance between two community structures.
 #'
 #'
-#' @aliases compare.communities compare.membership compare
+#' @aliases compare.communities compare.membership
 #' @param comm1 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the first community
 #'   structure. The membership vector should contain the community id of each
@@ -2440,7 +2440,7 @@ split_join_distance <- function(comm1, comm2) {
 #'
 #' The second method works on [communities()] objects.
 #'
-#' @aliases groups groups.default groups.communities
+#' @aliases groups.default groups.communities
 #' @param x Some object that represents a grouping of the vertices. See details
 #'   below.
 #' @return A named list of numeric or character vectors. The names are just
@@ -2506,7 +2506,7 @@ communities <- groups.communities
 #' unchanged, vertex attributes are combined, according to the
 #' `vertex.attr.comb` parameter.
 #'
-#' @aliases contract.vertices contract
+#' @aliases contract.vertices
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
 #'   correspond to the vertices, and for each element the id in the new graph is
