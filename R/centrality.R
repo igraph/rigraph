@@ -518,15 +518,13 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
 
   eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      "2.0.0",
+      "arpack_defaults(options = 'must be a list')",
+      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
-    options <- arpack_defaults()
+    options <- options()
   }
 
   if (!is.list(options) ||
@@ -536,16 +534,18 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
   if (any(names(options) == "")) {
     stop("all options must be named")
   }
-  if (any(!names(options) %in% names(arpack_defaults))) {
+
+  defaults <- arpack_defaults()
+  if (any(!names(options) %in% names(defaults))) {
     stop(
       "unkown ARPACK option(s): ",
-      paste(setdiff(names(options), names(arpack_defaults)),
+      paste(setdiff(names(options), names(defaults)),
         collapse = ", "
       )
     )
   }
 
-  options <- modify_list(arpack_defaults(), options)
+  options <- modify_list(defaults, options)
 
   if (sym && complex) {
     complex <- FALSE
