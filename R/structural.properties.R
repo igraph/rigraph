@@ -165,7 +165,7 @@ mean_distance <- average_path_length_dijkstra_impl
 #' its adjacent edges.
 #'
 #'
-#' @aliases degree degree.distribution degree_distribution
+#' @aliases degree.distribution
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -224,7 +224,6 @@ degree <- function(graph, v = V(graph),
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
-#' @family structural.properties
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
