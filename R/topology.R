@@ -725,7 +725,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' connected non-singleton cell.} } See the paper in references for details
 #' about these.
 #'
-#' @aliases canonical.permutation canonical_permutation
+#' @aliases canonical.permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
