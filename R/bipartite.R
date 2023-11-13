@@ -170,7 +170,7 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' least two components, then the vertices in the separate components can be
 #' mapped independently.
 #'
-#' @aliases bipartite.mapping bipartite_mapping
+#' @aliases bipartite.mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
 #'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A
