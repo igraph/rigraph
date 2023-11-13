@@ -2,25 +2,25 @@
 % Please edit documentation in R/community.R
 \name{membership}
 \alias{membership}
-\alias{communities}
-\alias{algorithm}
-\alias{crossing}
 \alias{cutat}
-\alias{merges}
-\alias{sizes}
-\alias{cut_at}
 \alias{is.hierarchical}
+\alias{is_hierarchical}
 \alias{print.communities}
 \alias{plot.communities}
 \alias{length.communities}
 \alias{as.dendrogram.communities}
 \alias{as.hclust.communities}
-\alias{code_len}
 \alias{showtrace}
 \alias{code.length}
-\alias{show_trace}
-\alias{is_hierarchical}
 \alias{modularity.communities}
+\alias{sizes}
+\alias{algorithm}
+\alias{merges}
+\alias{crossing}
+\alias{code_len}
+\alias{cut_at}
+\alias{show_trace}
+\alias{communities}
 \title{Functions to deal with the result of network community detection}
 \usage{
 membership(communities)
@@ -59,6 +59,8 @@ show_trace(communities)
   edge.color = c("black", "red")[crossing(x, y) + 1],
   ...
 )
+
+communities(x)
 }
 \arguments{
 \item{communities, x, object}{A \code{communities} object, the result of an

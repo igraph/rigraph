@@ -118,11 +118,12 @@
 #'
 #' @rdname communities
 #' @family community
-#' @aliases communities membership algorithm crossing cutat merges sizes cut_at
-#' is.hierarchical print.communities plot.communities length.communities
-#' as.dendrogram.communities as.hclust.communities code_len
+#' @aliases cutat
+#' is.hierarchical is_hierarchical
+#' print.communities plot.communities
+#' length.communities
+#' as.dendrogram.communities as.hclust.communities
 #' showtrace code.length
-#' show_trace is_hierarchical
 #' @param communities,x,object A `communities` object, the result of an
 #'   igraph community detection function.
 #' @param graph An igraph graph object, corresponding to `communities`.
@@ -2477,7 +2478,7 @@ groups.communities <- function(x) {
   groups.default(list(membership = m))
 }
 
-#' @family community
+#' @rdname communities
 #' @export
 communities <- groups.communities
 
