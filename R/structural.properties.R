@@ -707,7 +707,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' is deprecated. In the next major version, `subgraph()` will overtake the
 #' functionality of `subgraph.edges()`.
 #'
-#' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
+#' @aliases induced.subgraph subgraph.edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
