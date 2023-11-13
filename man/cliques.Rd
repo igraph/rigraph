@@ -108,20 +108,6 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-\code{\link[=ivs]{ivs()}}
-
-Other cliques: 
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
-
-Other cliques: 
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
-
-Other cliques: 
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
-
 Other cliques: 
 \code{\link{ivs}()},
 \code{\link{weighted_cliques}()}
@@ -130,6 +116,5 @@ Other cliques:
 Tamas Nepusz \email{ntamas@gmail.com} and Gabor Csardi
 \email{csardi.gabor@gmail.com}
 }
-\concept{clique}
 \concept{cliques}
 \keyword{graphs}

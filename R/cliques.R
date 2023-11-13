@@ -69,7 +69,6 @@
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [ivs()]
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 #' in Sparse Graphs in Near-optimal Time.  <https://arxiv.org/abs/1006.5440>
@@ -89,7 +88,6 @@
 #' max_cliques(g)
 cliques <- cliques_impl
 
-#' @family cliques
 #' @export
 largest_cliques <- largest_cliques_impl
 
@@ -104,7 +102,6 @@ largest_cliques <- largest_cliques_impl
 #'   it exists, then it will be overwritten.) Each clique will be a separate line
 #'   in the file, given with the numeric ids of its vertices, separated by
 #'   whitespace.
-#' @family cliques
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   ensure_igraph(graph)
@@ -156,7 +153,6 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   }
 }
 
-#' @family cliques
 #' @rdname cliques
 #' @export
 count_max_cliques <- function(graph, min = NULL, max = NULL,
@@ -184,7 +180,6 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
   res
 }
 
-#' @family cliques
 #' @rdname cliques
 #' @export
 clique_num <- clique_number_impl
@@ -229,7 +224,6 @@ clique_num <- clique_number_impl
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [ivs()]
 #' @family cliques
 #' @export
 #' @keywords graphs
@@ -381,7 +375,6 @@ ivs_size <- function(graph) {
   .Call(R_igraph_independence_number, graph)
 }
 
-#' @family clique
 #' @rdname cliques
 #' @export
 clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {

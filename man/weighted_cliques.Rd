@@ -67,8 +67,6 @@ largest_weighted_cliques(g)
 weighted_clique_num(g)
 }
 \seealso{
-\code{\link[=ivs]{ivs()}}
-
 Other cliques: 
 \code{\link{cliques}()},
 \code{\link{ivs}()}
