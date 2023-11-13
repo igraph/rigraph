@@ -41,7 +41,6 @@ Other conversion:
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_adjacency_matrix}()},
-\code{\link{as_data_frame}()},
 \code{\link{as_graphnel}()},
 \code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},

@@ -74,7 +74,7 @@ betweenness.estimate <- estimate_betweenness
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #'
-#' @aliases betweenness edge.betweenness betweenness.estimate
+#' @aliases edge.betweenness betweenness.estimate
 #' edge.betweenness.estimate edge_betweenness
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
@@ -150,7 +150,6 @@ betweenness <- function(graph, v = V(graph), directed = TRUE, weights = NULL,
 
 #' @rdname betweenness
 #' @param e The edges for which the edge betweenness will be calculated.
-#' @family centrality
 #' @export
 edge_betweenness <- function(graph, e = E(graph),
                              directed = TRUE, weights = NULL, cutoff = -1) {
@@ -223,7 +222,7 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' graphs, consider using the harmonic centrality with
 #' [harmonic_centrality()]
 #'
-#' @aliases closeness closeness.estimate
+#' @aliases closeness.estimate
 #' @param graph The graph to analyze.
 #' @param vids The vertices for which closeness will be calculated.
 #' @param mode Character string, defined the types of the paths used for
@@ -244,7 +243,6 @@ edge.betweenness.estimate <- estimate_edge_betweenness
 #' @return Numeric vector with the closeness values of all the vertices in
 #'   `v`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [betweenness()], [degree()], [harmonic_centrality()]
 #' @references Freeman, L.C. (1979). Centrality in Social Networks I:
 #' Conceptual Clarification. *Social Networks*, 1, 215-239.
 #' @family centrality
@@ -778,7 +776,7 @@ eigen_defaults <- function() {
 #' From igraph version 0.5 this function uses ARPACK for the underlying
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
-#' @aliases evcent eigen_centrality
+#' @aliases evcent
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
@@ -847,7 +845,7 @@ eigen_centrality <- function(graph,
 #' Summing up the edge weights of the adjacent edges for each vertex.
 #'
 #'
-#' @aliases graph.strength strength
+#' @aliases graph.strength
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -899,7 +897,7 @@ strength <- strength_impl
 #'
 #' For vertices with degree less than two the function returns `NaN`.
 #'
-#' @aliases graph.diversity diversity
+#' @aliases graph.diversity
 #' @param graph The input graph. Edge directions are ignored.
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
@@ -1044,7 +1042,7 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #' PageRank for only some of the vertices does not result in any performance
 #' increase at all.
 #'
-#' @aliases page.rank page_rank
+#' @aliases page.rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library

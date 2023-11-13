@@ -15,6 +15,8 @@ bipartite_projection(
   which = c("both", "true", "false"),
   remove.type = TRUE
 )
+
+bipartite_projection_size(graph, types = NULL)
 }
 \arguments{
 \item{graph}{The input graph. It can be directed, but edge directions are

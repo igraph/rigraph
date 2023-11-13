@@ -19,7 +19,7 @@
 #
 ###################################################################
 
-#' @family processes
+#' @rdname sir
 #' @export
 time_bins <- function(x, middle = TRUE) {
   UseMethod("time_bins")
@@ -27,7 +27,6 @@ time_bins <- function(x, middle = TRUE) {
 
 #' @method time_bins sir
 #' @rdname sir
-#' @family processes
 #' @export
 #' @importFrom stats IQR
 time_bins.sir <- function(x, middle = TRUE) {

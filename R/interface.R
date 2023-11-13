@@ -226,7 +226,6 @@ delete_vertices <- function(graph, v) {
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
 #'
-#' @aliases ecount
 #' @family structural queries
 #'
 #' @export
@@ -473,7 +472,6 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
 #'
-#' @aliases vcount
 #' @family structural queries
 #'
 #' @export

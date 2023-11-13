@@ -12,16 +12,16 @@
 \alias{tkplot.setcoords}
 \alias{tkplot.center}
 \alias{tkplot.rotate}
-\alias{tk_canvas}
-\alias{tk_center}
 \alias{tk_close}
-\alias{tk_postscript}
-\alias{tk_fit}
-\alias{tk_coords}
 \alias{tk_off}
+\alias{tk_fit}
+\alias{tk_center}
 \alias{tk_reshape}
-\alias{tk_rotate}
+\alias{tk_postscript}
+\alias{tk_coords}
 \alias{tk_set_coords}
+\alias{tk_rotate}
+\alias{tk_canvas}
 \title{Interactive plotting of graphs}
 \usage{
 tkplot(graph, canvas.width = 450, canvas.height = 450, ...)

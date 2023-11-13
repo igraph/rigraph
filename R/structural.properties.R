@@ -38,7 +38,7 @@
 #' `farthest_vertices()` returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #'
-#' @aliases diameter get.diameter farthest.nodes farthest_vertices get_diameter
+#' @aliases get.diameter farthest.nodes
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
 #'   considered. This is ignored for undirected graphs.
@@ -96,7 +96,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
   )
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
@@ -124,7 +124,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
@@ -165,7 +165,7 @@ mean_distance <- average_path_length_dijkstra_impl
 #' its adjacent edges.
 #'
 #'
-#' @aliases degree degree.distribution degree_distribution
+#' @aliases degree.distribution
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -224,7 +224,6 @@ degree <- function(graph, v = V(graph),
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
-#' @family structural.properties
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -296,9 +295,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
 #'
-#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths distances
-#' mean_distance distance_table average.path.length path.length.hist
-#' all_shortest_paths shortest_paths
+#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
+#' average.path.length path.length.hist
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #'   calculated.
@@ -375,6 +373,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
 #' @family structural.properties
+#' @family paths
 #' @export
 #' @keywords graphs
 #' @examples
@@ -648,7 +647,6 @@ all_shortest_paths <- function(graph, from,
 #'
 #' A breadth-first search is conducted starting from vertex `v`.
 #'
-#' @aliases subcomponent
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
@@ -709,7 +707,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' is deprecated. In the next major version, `subgraph()` will overtake the
 #' functionality of `subgraph.edges()`.
 #'
-#' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
+#' @aliases induced.subgraph subgraph.edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1488,8 +1486,7 @@ girth <- function(graph, circle = TRUE) {
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
 #'
-#' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
-#'   any_loop any_multiple which_loop
+#' @aliases has.multiple is.loop is.multiple count.multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
@@ -1528,12 +1525,16 @@ girth <- function(graph, circle = TRUE) {
 #' E(g)$weight
 #'
 which_multiple <- is_multiple_impl
+#' @rdname which_multiple
 #' @export
 any_multiple <- has_multiple_impl
+#' @rdname which_multiple
 #' @export
 count_multiple <- count_multiple_impl
+#' @rdname which_multiple
 #' @export
 which_loop <- is_loop_impl
+#' @rdname which_multiple
 #' @export
 any_loop <- has_loop_impl
 
@@ -1907,7 +1908,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
 #'
-#' @aliases no.clusters clusters is.connected cluster.distribution components
+#' @aliases no.clusters clusters is.connected cluster.distribution
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -2120,7 +2121,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 #'
 #' @rdname matching
-#' @aliases is.matching is_matching is.maximal.matching is_max_matching
+#' @aliases is.matching is.maximal.matching
 #' maximum.bipartite.matching max_bipartite_match
 #' @param graph The input graph. It might be directed, but edge directions will
 #'   be ignored.
@@ -2253,7 +2254,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #'
 #' Undirected graphs contain only mutual edges by definition.
 #'
-#' @aliases is.mutual which_mutual
+#' @aliases is.mutual
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their ids.
@@ -2293,7 +2294,7 @@ which_mutual <- is_mutual_impl
 #' as indicated by `mode`. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
 #' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
-#' @aliases knn graph.knn
+#' @aliases graph.knn
 #' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
 #'   includes all vertices. Note, that if not all vertices are given here, then

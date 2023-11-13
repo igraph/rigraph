@@ -247,7 +247,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' edge crossings, using the Sugiyama algorithm (see
 #' [layout_with_sugiyama()]).
 #'
-#' @aliases layout_as_bipartite layout.bipartite
+#' @aliases layout.bipartite
 #' @param graph The bipartite input graph. It should have a logical
 #'   \sQuote{`type`} vertex attribute, or the `types` argument must be
 #'   given.
@@ -315,7 +315,7 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' It is possible to choose the vertex that will be in the center, and the
 #' order of the vertices can be also given.
 #'
-#' @aliases layout_as_star layout.star
+#' @aliases layout.star
 #' @param graph The graph to layout.
 #' @param center The id of the vertex to put in the center. By default it is
 #'   the first vertex.
@@ -628,7 +628,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' other. If you want to change the order of the vertices, then see the
 #' [permute()] function.
 #'
-#' @aliases layout_on_grid layout.grid layout.grid.3d
+#' @aliases layout.grid layout.grid.3d
 #' @param graph The input graph.
 #' @param width The number of vertices in a single row of the grid. If this is
 #'   zero or negative, then for 2d layouts the width of the grid will be the
