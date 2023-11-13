@@ -2121,7 +2121,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 #'
 #' @rdname matching
-#' @aliases is.matching is_matching is.maximal.matching is_max_matching
+#' @aliases is.matching is.maximal.matching
 #' maximum.bipartite.matching max_bipartite_match
 #' @param graph The input graph. It might be directed, but edge directions will
 #'   be ignored.
@@ -2254,7 +2254,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #'
 #' Undirected graphs contain only mutual edges by definition.
 #'
-#' @aliases is.mutual which_mutual
+#' @aliases is.mutual
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their ids.
@@ -2294,7 +2294,7 @@ which_mutual <- is_mutual_impl
 #' as indicated by `mode`. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
 #' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
-#' @aliases knn graph.knn
+#' @aliases graph.knn
 #' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
 #'   includes all vertices. Note, that if not all vertices are given here, then

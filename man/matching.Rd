@@ -4,9 +4,9 @@
 \alias{is_matching}
 \alias{is.matching}
 \alias{is.maximal.matching}
-\alias{is_max_matching}
 \alias{maximum.bipartite.matching}
 \alias{max_bipartite_match}
+\alias{is_max_matching}
 \title{Matching}
 \usage{
 is_matching(graph, matching, types = NULL)
