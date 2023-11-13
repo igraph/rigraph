@@ -2013,7 +2013,7 @@ scg_norm_eps_impl <- function(V, groups, mtype=c("symmetric", "laplacian", "stoc
   res
 }
 
-adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=graph.strength(graph, weights=weights)/(vcount(graph)-1), options=igraph.arpack.default) {
+adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), scaled=TRUE, cvec=graph.strength(graph, weights=weights)/(vcount(graph)-1), options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   no <- as.integer(no)
@@ -2037,7 +2037,7 @@ adjacency_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
   res
 }
 
-laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=igraph.arpack.default) {
+laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("lm", "la", "sa"), type=c("default", "D-A", "DAD", "I-DAD", "OAP"), scaled=TRUE, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   no <- as.integer(no)
