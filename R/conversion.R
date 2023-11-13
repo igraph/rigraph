@@ -387,7 +387,7 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' ids of adjacent edges (according to the `mode` argument) of all
 #' vertices.
 #'
-#' @aliases as_adj_list get.adjedgelist
+#' @aliases get.adjedgelist
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
 #'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
@@ -913,7 +913,7 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' [as_adj_list()], do your modifications to the graphs and finally
 #' create again an igraph graph by calling `graph_from_adj_list()`.
 #'
-#' @aliases graph.adjlist graph_from_adj_list
+#' @aliases graph.adjlist
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #'   throughout all vectors in the list must be less than the number of vectors
 #'   (=the number of vertices in the graph).
