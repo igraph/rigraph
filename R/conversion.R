@@ -863,7 +863,6 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
 #'   edges, or both. The default is \sQuote{edges}.
-#' @family conversion
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   ensure_igraph(x)
