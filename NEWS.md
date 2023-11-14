@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.1.9020
+
+## Bug fixes
+
+  - Reduce frequency of interruption checks (#957).
+
+## Documentation
+
+  - Rm use of aliases (#894).
+
+## Refactoring
+
+  - Breaking change: New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800).
+
+## Breaking changes
+
+  - Breaking change: New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800).
+
+
 # igraph 1.5.1.9019
 
 ## Features
