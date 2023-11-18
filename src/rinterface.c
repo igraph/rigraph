@@ -4231,8 +4231,8 @@ SEXP R_igraph_avg_nearest_neighbor_degree(SEXP graph, SEXP vids, SEXP mode, SEXP
 SEXP R_igraph_degree_correlation_vector(SEXP graph, SEXP weights, SEXP from_mode, SEXP to_mode, SEXP directed_neighbors) {
                                         /* Declarations */
   igraph_t c_graph;
-  igraph_vector_t c_knnk;
   igraph_vector_t c_weights;
+  igraph_vector_t c_knnk;
   igraph_neimode_t c_from_mode;
   igraph_neimode_t c_to_mode;
   igraph_bool_t c_directed_neighbors;
@@ -4241,16 +4241,16 @@ SEXP R_igraph_degree_correlation_vector(SEXP graph, SEXP weights, SEXP from_mode
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (0 != igraph_vector_init(&c_knnk, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_knnk);
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_from_mode = (igraph_neimode_t) Rf_asInteger(from_mode);
   c_to_mode = (igraph_neimode_t) Rf_asInteger(to_mode);
   c_directed_neighbors=LOGICAL(directed_neighbors)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_degree_correlation_vector(&c_graph, &c_knnk, (Rf_isNull(weights) ? 0 : &c_weights), c_from_mode, c_to_mode, c_directed_neighbors));
+  IGRAPH_R_CHECK(igraph_degree_correlation_vector(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_knnk, c_from_mode, c_to_mode, c_directed_neighbors));
 
                                         /* Convert output */
   PROTECT(knnk=R_igraph_vector_to_SEXP(&c_knnk));
@@ -4763,33 +4763,121 @@ SEXP R_igraph_assortativity_degree(SEXP graph, SEXP directed) {
 /*-------------------------------------------/
 / igraph_joint_degree_matrix                 /
 /-------------------------------------------*/
-SEXP R_igraph_joint_degree_matrix(SEXP graph, SEXP max_out_degree, SEXP max_in_degree, SEXP weights) {
+SEXP R_igraph_joint_degree_matrix(SEXP graph, SEXP weights, SEXP max_out_degree, SEXP max_in_degree) {
                                         /* Declarations */
   igraph_t c_graph;
+  igraph_vector_t c_weights;
   igraph_matrix_t c_jdm;
   igraph_integer_t c_max_out_degree;
   igraph_integer_t c_max_in_degree;
-  igraph_vector_t c_weights;
   SEXP jdm;
 
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (0 != igraph_matrix_init(&c_jdm, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_jdm);
   c_max_out_degree=(igraph_integer_t) REAL(max_out_degree)[0];
   c_max_in_degree=(igraph_integer_t) REAL(max_in_degree)[0];
-  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_joint_degree_matrix(&c_graph, &c_jdm, c_max_out_degree, c_max_in_degree, (Rf_isNull(weights) ? 0 : &c_weights)));
+  IGRAPH_R_CHECK(igraph_joint_degree_matrix(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_jdm, c_max_out_degree, c_max_in_degree));
 
                                         /* Convert output */
   PROTECT(jdm=R_igraph_matrix_to_SEXP(&c_jdm));
   igraph_matrix_destroy(&c_jdm);
   IGRAPH_FINALLY_CLEAN(1);
   r_result = jdm;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_joint_degree_distribution           /
+/-------------------------------------------*/
+SEXP R_igraph_joint_degree_distribution(SEXP graph, SEXP weights, SEXP from_mode, SEXP to_mode, SEXP directed_neighbors, SEXP normalized, SEXP max_from_degree, SEXP max_to_degree) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_t c_p;
+  igraph_neimode_t c_from_mode;
+  igraph_neimode_t c_to_mode;
+  igraph_bool_t c_directed_neighbors;
+  igraph_bool_t c_normalized;
+  igraph_integer_t c_max_from_degree;
+  igraph_integer_t c_max_to_degree;
+  SEXP p;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  if (0 != igraph_matrix_init(&c_p, 0, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_p);
+  c_from_mode = (igraph_neimode_t) Rf_asInteger(from_mode);
+  c_to_mode = (igraph_neimode_t) Rf_asInteger(to_mode);
+  c_directed_neighbors=LOGICAL(directed_neighbors)[0];
+  c_normalized=LOGICAL(normalized)[0];
+  c_max_from_degree=(igraph_integer_t) REAL(max_from_degree)[0];
+  c_max_to_degree=(igraph_integer_t) REAL(max_to_degree)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_joint_degree_distribution(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_p, c_from_mode, c_to_mode, c_directed_neighbors, c_normalized, c_max_from_degree, c_max_to_degree));
+
+                                        /* Convert output */
+  PROTECT(p=R_igraph_matrix_to_SEXP(&c_p));
+  igraph_matrix_destroy(&c_p);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = p;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_joint_type_distribution             /
+/-------------------------------------------*/
+SEXP R_igraph_joint_type_distribution(SEXP graph, SEXP weights, SEXP from_types, SEXP to_types, SEXP directed, SEXP normalized) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_vector_t c_weights;
+  igraph_matrix_t c_p;
+  igraph_vector_int_t c_from_types;
+  igraph_vector_int_t c_to_types;
+  igraph_bool_t c_directed;
+  igraph_bool_t c_normalized;
+  SEXP p;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
+  if (0 != igraph_matrix_init(&c_p, 0, 0)) {
+    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_matrix_destroy, &c_p);
+  R_SEXP_to_vector_int_copy(from_types, &c_from_types);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_from_types);
+  R_SEXP_to_vector_int_copy(to_types, &c_to_types);
+  IGRAPH_FINALLY(igraph_vector_int_destroy, &c_to_types);
+  c_directed=LOGICAL(directed)[0];
+  c_normalized=LOGICAL(normalized)[0];
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_joint_type_distribution(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_p, &c_from_types, &c_to_types, c_directed, c_normalized));
+
+                                        /* Convert output */
+  PROTECT(p=R_igraph_matrix_to_SEXP(&c_p));
+  igraph_matrix_destroy(&c_p);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_from_types);
+  IGRAPH_FINALLY_CLEAN(1);
+  igraph_vector_int_destroy(&c_to_types);
+  IGRAPH_FINALLY_CLEAN(1);
+  r_result = p;
 
   UNPROTECT(1);
   return(r_result);
