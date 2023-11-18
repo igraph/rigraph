@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9000
+
+## Chore
+
+- Sync GraphML reader.
+
+- Sync flex-generated line numbers.
+
+
 # igraph 1.5.1.9020
 
 ## Bug fixes
