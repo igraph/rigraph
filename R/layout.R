@@ -1519,16 +1519,13 @@ layout.lgl <- function(..., params = list()) {
 layout_with_mds <- function(graph, dist = NULL, dim = 2,
                             options = arpack_defaults()) {
 
-  eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      "1.6.0",
+      "layout_with_mds(options = 'must be a list')",
+      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
-    options <- arpack_defaults()
+    options <- options()
   }
 
   # Argument checks
