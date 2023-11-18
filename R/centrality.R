@@ -515,11 +515,10 @@ arpack_defaults <- function() {
 arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
 
-  eval_try <- rlang::eval_tidy(options)
   if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "2.0.0",
-      "arpack_defaults(options = 'must be a list')",
+      "1.6.0",
+      "arpack(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
     options <- options()
@@ -704,16 +703,13 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @family centrality
 #' @export
 spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
-  eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      "1.6.0",
+      "spectrum(options = 'must be a list')",
+      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
-    options <- arpack_defaults()
+    options <- options()
   }
 
   eigen_adjacency_impl(graph,
@@ -821,16 +817,13 @@ eigen_centrality <- function(graph,
                              weights = NULL,
                              options = arpack_defaults()) {
 
-    eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      "1.6.0",
+      "eigen_centrality(options = 'must be a list')",
+      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
-    options <- arpack_defaults()
+    options <- options()
   }
 
   eigenvector_centrality_impl(graph = graph,
@@ -979,16 +972,13 @@ diversity <- diversity_impl
 #' @family centrality
 hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
-  eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
-      I("arpack_defaults"),
-      "arpack_defaults()",
-      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+      "1.6.0",
+      "hub_score(options = 'must be a list')",
+      details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
-    options <- arpack_defaults()
+    options <- options()
   }
 
   hub_score_impl(graph = graph,
@@ -1003,11 +993,9 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
 #'   [arpack()] for details.
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
-  eval_try <- rlang::eval_tidy(options)
-  options_value <- rlang::call_args(rlang::current_call())[["options"]]
-  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+  if (is.function(options)) {
     lifecycle::deprecate_soft(
-      "1.5.0",
+      "1.6.0",
       I("arpack_defaults"),
       "arpack_defaults()",
       details = c("So the function arpack_defaults(), not an object called arpack_defaults.")

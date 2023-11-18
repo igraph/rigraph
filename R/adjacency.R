@@ -444,6 +444,8 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
     Matrix::isSymmetric(x, tol = 0, tol1 = 0)
+  } else if (is.matrix(x)) {
+    isSymmetric.matrix(x, tol = 0, tol1 = 0)
   } else {
     isSymmetric(x, tol = 0, tol1 = 0)
   }
