@@ -220,7 +220,8 @@ purrr::walk2(
   deprecated_df[["old"]],
   deprecated_df[["new"]],
   treat_call,
-  topics = topics
+  topics = topics,
+  .progress = TRUE
 )
 
 # document ----
