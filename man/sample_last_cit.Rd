@@ -3,12 +3,12 @@
 \name{sample_last_cit}
 \alias{sample_last_cit}
 \alias{cited.type.game}
-\alias{sample_cit_types}
 \alias{citing.cited.type.game}
-\alias{sample_cit_cit_types}
 \alias{lastcit.game}
 \alias{last_cit}
+\alias{sample_cit_types}
 \alias{cit_types}
+\alias{sample_cit_cit_types}
 \alias{cit_cit_types}
 \title{Random citation graphs}
 \usage{

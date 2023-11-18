@@ -93,10 +93,10 @@
 #' `dendrogram` object. It only works for hierarchical methods, and gives
 #' an error message to others. See [stats::dendrogram()] for details.
 #'
-#' `as.hclust` is similar to [as.dendrogram()], but converts a
+#' [stats::as.hclust()] is similar to [as.dendrogram()], but converts a
 #' hierarchical community structure to a `hclust` object.
 #'
-#' `as_phylo()` converts a hierarchical community structure to a `phylo`
+#' [ape::as.phylo()] converts a hierarchical community structure to a `phylo`
 #' object, you will need the `ape` package for this.
 #'
 #' `show_trace()` works (currently) only for communities found by the leading
@@ -118,11 +118,12 @@
 #'
 #' @rdname communities
 #' @family community
-#' @aliases communities membership algorithm crossing cutat merges sizes cut_at
-#' is.hierarchical print.communities plot.communities length.communities
-#' as.dendrogram.communities as.hclust.communities code_len
-#' asPhylo asPhylo.communities showtrace code.length
-#' as_phylo as_phylo.communities show_trace is_hierarchical
+#' @aliases cutat
+#' is.hierarchical is_hierarchical
+#' print.communities plot.communities
+#' length.communities
+#' as.dendrogram.communities as.hclust.communities
+#' showtrace code.length
 #' @param communities,x,object A `communities` object, the result of an
 #'   igraph community detection function.
 #' @param graph An igraph graph object, corresponding to `communities`.
@@ -669,16 +670,7 @@ as.hclust.communities <- function(x, hang = -1, use.modularity = FALSE,
   as.hclust(as.dendrogram(x, hang = hang, use.modularity = use.modularity))
 }
 
-#' @rdname communities
-#' @export
-as_phylo <- function(x, ...) {
-  UseMethod("as_phylo")
-}
-
-#' @rdname communities
-#' @method as_phylo communities
-#' @export
-as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
+as.phylo.communities <- function(x, use.modularity = FALSE, ...) {
   if (!is_hierarchical(x)) {
     stop("Not a hierarchical community structure")
   }
@@ -730,7 +722,7 @@ as_phylo.communities <- function(x, use.modularity = FALSE, ...) {
   class(obj) <- "phylo"
   ape::reorder.phylo(obj)
 }
-
+rlang::on_load(s3_register("ape::as.phylo", "communities"))
 #' @rdname communities
 #' @export
 cut_at <- function(communities, no, steps) {
@@ -1349,7 +1341,7 @@ cluster_walktrap <- function(graph, weights = NULL, steps = 4,
 #' `edge.betweeness.community` returns various information collected
 #' through the run of the algorithm. See the return value down here.
 #'
-#' @aliases edge.betweenness.community cluster_edge_betweenness
+#' @aliases edge.betweenness.community
 #' @param graph The graph to analyze.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
@@ -1629,9 +1621,22 @@ igraph.i.levc.arp <- function(externalP, externalE) {
 #'
 cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   start = NULL,
-                                  options = arpack_defaults,
+                                  options = arpack_defaults(),
                                   callback = NULL, extra = NULL,
                                   env = parent.frame()) {
+
+  eval_try <- rlang::eval_tidy(options)
+  options_value <- rlang::call_args(rlang::current_call())[["options"]]
+  if (is(eval_try, "function") && as.character(options_value) == "arpack_defaults") {
+    lifecycle::deprecate_soft(
+      "1.5.0",
+      I("arpack_defaults"),
+      "arpack_defaults()",
+      details = c("So the function arpack_defaults(), not an object called arpack_defaults.")
+    )
+    options <- arpack_defaults()
+  }
+
   # Argument checks
   ensure_igraph(graph)
 
@@ -1647,9 +1652,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   if (!is.null(start)) {
     start <- as.numeric(start) - 1
   }
-  options.tmp <- arpack_defaults
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -2241,7 +2245,7 @@ dendPlotPhylo <- function(communities, colbar = palette(),
                           use.modularity = FALSE,
                           edge.color = "#AAAAAAFF",
                           edge.lty = c(1, 2), ...) {
-  phy <- as_phylo(communities, use.modularity = use.modularity)
+  phy <- ape::as.phylo(communities, use.modularity = use.modularity)
 
   getedges <- function(tip) {
     repeat {
@@ -2278,7 +2282,7 @@ dendPlotPhylo <- function(communities, colbar = palette(),
 #' This function assesses the distance between two community structures.
 #'
 #'
-#' @aliases compare.communities compare.membership compare
+#' @aliases compare.communities compare.membership
 #' @param comm1 A [communities()] object containing a community
 #'   structure; or a numeric vector, the membership vector of the first community
 #'   structure. The membership vector should contain the community id of each
@@ -2445,7 +2449,7 @@ split_join_distance <- function(comm1, comm2) {
 #'
 #' The second method works on [communities()] objects.
 #'
-#' @aliases groups groups.default groups.communities
+#' @aliases groups.default groups.communities
 #' @param x Some object that represents a grouping of the vertices. See details
 #'   below.
 #' @return A named list of numeric or character vectors. The names are just
@@ -2483,7 +2487,7 @@ groups.communities <- function(x) {
   groups.default(list(membership = m))
 }
 
-#' @family community
+#' @rdname communities
 #' @export
 communities <- groups.communities
 
@@ -2511,7 +2515,7 @@ communities <- groups.communities
 #' unchanged, vertex attributes are combined, according to the
 #' `vertex.attr.comb` parameter.
 #'
-#' @aliases contract.vertices contract
+#' @aliases contract.vertices
 #' @param graph The input graph, it can be directed or undirected.
 #' @param mapping A numeric vector that specifies the mapping. Its elements
 #'   correspond to the vertices, and for each element the id in the new graph is

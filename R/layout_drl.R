@@ -95,9 +95,7 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   use.seed <- as.logical(use.seed)
   seed <- as.matrix(seed)
 
-  options.tmp <- drl_defaults$default
-  options.tmp[names(options)] <- options
-  options <- options.tmp
+  options <- modify_list(drl_defaults$default, options)
 
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight

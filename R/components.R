@@ -131,7 +131,7 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 # " two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
 #'
-#' @aliases articulation.points articulation_points
+#' @aliases articulation.points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return For `articulation_points()`, a numeric vector giving the vertex
@@ -175,7 +175,7 @@ bridges <- bridges_impl
 #' that this is not true for vertices: the same vertex can be part of many
 #' biconnected components.
 #'
-#' @aliases biconnected.components biconnected_components
+#' @aliases biconnected.components
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return A named list with three components: \item{no}{Numeric scalar, an

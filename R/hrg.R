@@ -494,9 +494,8 @@ as.hclust.igraphHRG <- function(x, ...) {
   res
 }
 
-#' @export
 #' @importFrom stats reorder
-as_phylo.igraphHRG <- function(x, ...) {
+as.phylo.igraphHRG <- function(x, ...) {
   ovc <- length(x$left) + 1L
   ivc <- ovc - 1L
   ll <- ifelse(x$left < 0, -x$left + ovc, x$left + 1)
@@ -514,8 +513,7 @@ as_phylo.igraphHRG <- function(x, ...) {
   class(obj) <- "phylo"
   reorder(obj)
 }
-
-
+rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 
 #' HRG dendrogram plot
 #'
@@ -636,7 +634,7 @@ hrgPlotDendrogram <- function(x, ...) {
 hrgPlotPhylo <- function(x, colbar = rainbow(11, start = .7, end = .1),
                          edge.color = NULL, use.edge.length = FALSE, ...) {
   vc <- length(x$left) + 1
-  phy <- as_phylo(x)
+  phy <- ape::as.phylo(x)
   br <- seq(0, 1, length.out = length(colbar))
   br[1] <- -1
   cc <- as.integer(cut(x$prob[phy$edge[, 1] - vc], breaks = br))
@@ -936,3 +934,4 @@ B-6  p=1  B-2 7
 B-7  p=1  B-5 2
 
 "
+

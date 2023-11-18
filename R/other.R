@@ -161,7 +161,7 @@ igraph.i.spMatrix <- function(M) {
 #' has the smallest area.
 #'
 #'
-#' @aliases convex.hull convex_hull
+#' @aliases convex.hull
 #' @param data The data points, a numeric matrix with two columns.
 #' @return A named list with components: \item{resverts}{The indices of the
 #'   input vertices that constritute the convex hull.} \item{rescoords}{The

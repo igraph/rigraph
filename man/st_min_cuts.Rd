@@ -60,8 +60,6 @@ JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 graphs, \emph{Algorithmica} 15, 351--372, 1996.
 }
 \seealso{
-\code{\link[=st_cuts]{st_cuts()}}, \code{\link[=min_separators]{min_separators()}}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

@@ -3,9 +3,9 @@
 \name{assortativity}
 \alias{assortativity}
 \alias{assortativity.degree}
-\alias{assortativity_degree}
 \alias{assortativity.nominal}
 \alias{assortativity_nominal}
+\alias{assortativity_degree}
 \title{Assortativity coefficient}
 \usage{
 assortativity(

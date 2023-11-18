@@ -8,7 +8,7 @@ message: 'To cite package "igraph" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'igraph: Network Analysis and Visualization'
-version: 1.5.1.9006
+version: 1.5.99.9000
 abstract: Routines for simple graphs and network analysis. It can handle large graphs
   very well and provides functions for generating random and regular graphs, graph
   visualization, centrality methods and much more.
@@ -59,6 +59,14 @@ contact:
   given-names: Kirill
   email: kirill@cynkra.com
   orcid: https://orcid.org/0000-0002-1416-3412
+keywords:
+- complex-networks
+- graph-algorithms
+- graph-theory
+- mathematics
+- network-analysis
+- network-graph
+- r
 references:
 - type: manual
   title: 'igraph: Network Analysis and Visualization in R'
@@ -78,7 +86,7 @@ references:
   - family-names: Müller
     given-names: Kirill
   year: '2023'
-  notes: R package version 1.5.1.9006
+  notes: R package version 1.5.99.9000
   doi: 10.5281/zenodo.7682609
   url: https://CRAN.R-project.org/package=igraph
 - type: software
@@ -146,10 +154,10 @@ references:
   authors:
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
     orcid: https://orcid.org/0000-0003-4757-117X
   year: '2023'
 - type: software
@@ -592,7 +600,7 @@ references:
     given-names: Jim
   - family-names: Henry
     given-names: Lionel
-    email: lionel@rstudio.com
+    email: lionel@posit.co
   - family-names: Müller
     given-names: Kirill
     email: krlmlr+r@mailbox.org

@@ -9,7 +9,7 @@ centr_eigen(
   graph,
   directed = FALSE,
   scale = TRUE,
-  options = arpack_defaults,
+  options = arpack_defaults(),
   normalized = TRUE
 )
 }

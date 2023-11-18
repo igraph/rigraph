@@ -866,7 +866,7 @@ igraph_hub_score:
     PARAMS: |-
         GRAPH graph, OUT VERTEX_QTY vector, OUT REAL value,
         BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
-        INOUT ARPACKOPT options=arpack_defaults
+        INOUT ARPACKOPT options=arpack_defaults()
     DEPS: weights ON graph, vector ON graph
 
 igraph_authority_score:

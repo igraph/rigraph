@@ -169,7 +169,7 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' non-existent.
 #'
 #'
-#' @aliases dyad.census dyad_census
+#' @aliases dyad.census
 #' @param graph The input graph. A warning is given if it is not directed.
 #' @return A named numeric vector with three elements: \item{mut}{The number of
 #'   pairs with mutual connections.} \item{asym}{The number of pairs with
@@ -220,7 +220,7 @@ dyad_census <- function(graph) {
 #' This functions uses the RANDESU motif finder algorithm to find and count the
 #' subgraphs, see [motifs()].
 #'
-#' @aliases triad.census triad_census
+#' @aliases triad.census
 #' @param graph The input graph, it should be directed. An undirected graph
 #'   results a warning, and undefined results.
 #' @return A numeric vector, the subgraph counts, in the order given in the

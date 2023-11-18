@@ -2,20 +2,34 @@
 % Please edit documentation in R/cliques.R
 \name{cliques}
 \alias{cliques}
-\alias{largest_cliques}
 \alias{maximal.cliques}
 \alias{maximal.cliques.count}
 \alias{clique.number}
-\alias{clique_num}
 \alias{largest.cliques}
-\alias{count_max_cliques}
+\alias{largest_cliques}
 \alias{max_cliques}
+\alias{count_max_cliques}
+\alias{clique_num}
+\alias{largest_weighted_cliques}
+\alias{weighted_clique_num}
 \alias{clique_size_counts}
 \title{Functions to find cliques, i.e. complete subgraphs in a graph}
 \usage{
 cliques(graph, min = 0, max = 0)
 
+largest_cliques(graph)
+
 max_cliques(graph, min = NULL, max = NULL, subset = NULL, file = NULL)
+
+count_max_cliques(graph, min = NULL, max = NULL, subset = NULL)
+
+clique_num(graph)
+
+largest_weighted_cliques(graph, vertex.weights = NULL)
+
+weighted_clique_num(graph, vertex.weights = NULL)
+
+clique_size_counts(graph, min = 0, max = 0, maximal = FALSE)
 }
 \arguments{
 \item{graph}{The input graph, directed graphs will be considered as
@@ -38,6 +52,15 @@ character scalar. The output of the algorithm is written to this file. (If
 it exists, then it will be overwritten.) Each clique will be a separate line
 in the file, given with the numeric ids of its vertices, separated by
 whitespace.}
+
+\item{vertex.weights}{Vertex weight vector. If the graph has a \code{weight}
+vertex attribute, then this is used by default. If the graph does not have a
+\code{weight} vertex attribute and this argument is \code{NULL}, then every
+vertex is assumed to have a weight of 1. Note that the current implementation
+of the weighted clique finder supports positive integer weights only.}
+
+\item{maximal}{Specifies whether to look for all weighted cliques (\code{FALSE})
+or only the maximal ones (\code{TRUE}).}
 }
 \value{
 \code{cliques()}, \code{largest_cliques()} and \code{clique_num()}
@@ -96,12 +119,6 @@ David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 in Sparse Graphs in Near-optimal Time.  \url{https://arxiv.org/abs/1006.5440}
 }
 \seealso{
-\code{\link[=ivs]{ivs()}}
-
-Other cliques: 
-\code{\link{ivs}()},
-\code{\link{weighted_cliques}()}
-
 Other cliques: 
 \code{\link{ivs}()},
 \code{\link{weighted_cliques}()}

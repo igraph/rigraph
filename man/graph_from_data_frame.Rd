@@ -129,21 +129,8 @@ as_data_frame(g, what = "edges")
 \code{\link[=graph_from_literal]{graph_from_literal()}}
 for another way to create graphs, \code{\link[=read.table]{read.table()}} to read in tables
 from files.
-
-Other conversion: 
-\code{\link{as.directed}()},
-\code{\link{as.matrix.igraph}()},
-\code{\link{as_adj_list}()},
-\code{\link{as_adjacency_matrix}()},
-\code{\link{as_edgelist}()},
-\code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
-\code{\link{as_long_data_frame}()},
-\code{\link{graph_from_adj_list}()},
-\code{\link{graph_from_graphnel}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{conversion}
 \keyword{graphs}

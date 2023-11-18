@@ -108,10 +108,10 @@
 #' The generic function [plot()] plots the graph, showing one or more
 #' cohesive blocks in it.
 #'
-#' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
+#' @aliases cohesive.blocks cohesiveBlocks blocks blockGraphs
 #' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' plot_hierarchy max_cohesion exportPajek
+#' exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)

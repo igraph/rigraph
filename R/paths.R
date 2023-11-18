@@ -93,7 +93,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
-#' @aliases is.dag is_dag
+#' @aliases is.dag
 #' @param graph The input graph. It may be undirected, in which case
 #'   `FALSE` is reported.
 #' @return A logical vector of length one.
@@ -255,6 +255,5 @@ radius <- radius_impl
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
-#' @family paths
 #' @export
 distance_table <- path_length_hist_impl

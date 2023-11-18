@@ -69,7 +69,7 @@
 #' If the `what` argument is `both`, then both vertex and edge data
 #' is returned, in a list with named entries `vertices` and `edges`.
 #'
-#' @aliases graph_from_data_frame graph.data.frame as_data_frame get.data.frame
+#' @aliases graph.data.frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
 #'   columns. Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with

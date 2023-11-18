@@ -47,12 +47,6 @@ deprecated("aging.barabasi.game", sample_pa_age)
 deprecated("alpha.centrality", alpha_centrality)
 #' @export are.connected
 deprecated("are.connected", are_adjacent)
-#' @export asPhylo
-deprecated("asPhylo", as_phylo)
-#' @method asPhylo communities
-deprecated("asPhylo.communities", as_phylo.communities)
-#' @method asPhylo igraphHRG
-deprecated("asPhylo.igraphHRG", as_phylo.igraphHRG)
 #' @export assortativity.degree
 deprecated("assortativity.degree", assortativity_degree)
 #' @export assortativity.nominal
@@ -311,8 +305,6 @@ deprecated("hrg.predict", predict_edges)
 #' @export hub.score
 deprecated("hub.score", hub_score)
 
-#' @export igraph.arpack.default
-deprecated("igraph.arpack.default", arpack_defaults)
 #' @export igraph.console
 deprecated("igraph.console", console)
 #' @export igraph.sample

@@ -2,29 +2,25 @@
 % Please edit documentation in R/community.R
 \name{membership}
 \alias{membership}
-\alias{communities}
-\alias{algorithm}
-\alias{crossing}
 \alias{cutat}
-\alias{merges}
-\alias{sizes}
-\alias{cut_at}
 \alias{is.hierarchical}
+\alias{is_hierarchical}
 \alias{print.communities}
 \alias{plot.communities}
 \alias{length.communities}
 \alias{as.dendrogram.communities}
 \alias{as.hclust.communities}
-\alias{code_len}
-\alias{asPhylo}
-\alias{asPhylo.communities}
 \alias{showtrace}
 \alias{code.length}
-\alias{as_phylo}
-\alias{as_phylo.communities}
-\alias{show_trace}
-\alias{is_hierarchical}
 \alias{modularity.communities}
+\alias{sizes}
+\alias{algorithm}
+\alias{merges}
+\alias{crossing}
+\alias{code_len}
+\alias{cut_at}
+\alias{show_trace}
+\alias{communities}
 \title{Functions to deal with the result of network community detection}
 \usage{
 membership(communities)
@@ -51,10 +47,6 @@ is_hierarchical(communities)
 
 \method{as.hclust}{communities}(x, hang = -1, use.modularity = FALSE, ...)
 
-as_phylo(x, ...)
-
-\method{as_phylo}{communities}(x, use.modularity = FALSE, ...)
-
 cut_at(communities, no, steps)
 
 show_trace(communities)
@@ -67,6 +59,8 @@ show_trace(communities)
   edge.color = c("black", "red")[crossing(x, y) + 1],
   ...
 )
+
+communities(x)
 }
 \arguments{
 \item{communities, x, object}{A \code{communities} object, the result of an
@@ -225,10 +219,10 @@ non-hierarchical method.
 \code{dendrogram} object. It only works for hierarchical methods, and gives
 an error message to others. See \code{\link[stats:dendrogram]{stats::dendrogram()}} for details.
 
-\code{as.hclust} is similar to \code{\link[=as.dendrogram]{as.dendrogram()}}, but converts a
+\code{\link[stats:as.hclust]{stats::as.hclust()}} is similar to \code{\link[=as.dendrogram]{as.dendrogram()}}, but converts a
 hierarchical community structure to a \code{hclust} object.
 
-\code{as_phylo()} converts a hierarchical community structure to a \code{phylo}
+\code{\link[ape:as.phylo]{ape::as.phylo()}} converts a hierarchical community structure to a \code{phylo}
 object, you will need the \code{ape} package for this.
 
 \code{show_trace()} works (currently) only for communities found by the leading

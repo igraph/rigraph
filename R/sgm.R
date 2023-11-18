@@ -39,7 +39,7 @@ solve_LSAP <- function(x, maximum = FALSE) {
 #'
 #' See references for further details.
 #'
-#' @aliases match_vertices seeded.graph.match
+#' @aliases seeded.graph.match
 #' @param A a numeric matrix, the adjacency matrix of the first graph
 #' @param B a numeric matrix, the adjacency matrix of the second graph
 #' @param m The number of seeds. The first `m` vertices of both graphs are
