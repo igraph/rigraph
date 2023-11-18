@@ -637,21 +637,6 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
   }
 }
 
-#' HRG dendrogram plot
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `dendPlot.igraphHRG()` was renamed to `plot_dendrogram.igraphHRG()` to create a more
-#' consistent API.
-#' @inheritParams plot_dendrogram.igraphHRG
-#' @keywords internal
-#' @export
-dendPlot.igraphHRG <- function(x , mode = igraph_opt("dend.plot.type") , ...) {
-   lifecycle::deprecate_soft("1.5.0", "dendPlot.igraphHRG()", "plot_dendrogram.igraphHRG()")
-   plot_dendrogram.igraphHRG(x = x, mode = mode, ...)
-}
-
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow
 #' @importFrom stats rect.hclust
