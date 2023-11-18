@@ -6,7 +6,7 @@ rm -rf src/vendor/cigraph
 
 mkdir -p src/vendor
 
-git clone https://github.com/igraph/igraph src/vendor/cigraph
+git clone https://github.com/igraph/igraph --depth=1 src/vendor/cigraph
 
 if [ -n "${1-}" ]; then
   git -C src/vendor/cigraph switch --detach "$1"
