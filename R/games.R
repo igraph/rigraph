@@ -189,6 +189,36 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
   res
 }
 
+#' Generate random graphs using preferential attachment
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `barabasi.game()` was renamed to `sample_pa()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa
+#' @keywords internal
+#' @export
+barabasi.game <- function(n , power = 1 , m = NULL , out.dist = NULL , out.seq = NULL , out.pref = FALSE , zero.appeal = 1 , directed = TRUE , algorithm = c("psumtree","psumtree-multiple","bag") , start.graph = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "barabasi.game()", "sample_pa()")
+   sample_pa(n = n, power = power, m = m, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, zero.appeal = zero.appeal, directed = directed, algorithm = algorithm, start.graph = start.graph)
+}
+
+#' Generate random graphs using preferential attachment
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `ba.game()` was renamed to `sample_pa()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa
+#' @keywords internal
+#' @export
+ba.game <- function(n , power = 1 , m = NULL , out.dist = NULL , out.seq = NULL , out.pref = FALSE , zero.appeal = 1 , directed = TRUE , algorithm = c("psumtree","psumtree-multiple","bag") , start.graph = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "ba.game()", "sample_pa()")
+   sample_pa(n = n, power = power, m = m, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, zero.appeal = zero.appeal, directed = directed, algorithm = algorithm, start.graph = start.graph)
+}
+
 #' @rdname sample_pa
 #' @param ... Passed to `sample_pa()`.
 #' @family games
@@ -501,6 +531,21 @@ sample_degseq <- function(out.deg, in.deg = NULL,
   res
 }
 
+#' Generate random graphs with a given degree sequence
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `degree.sequence.game()` was renamed to `sample_degseq()` to create a more
+#' consistent API.
+#' @inheritParams sample_degseq
+#' @keywords internal
+#' @export
+degree.sequence.game <- function(out.deg , in.deg = NULL , method = c("simple","vl","simple.no.multiple","simple.no.multiple.uniform")) {
+   lifecycle::deprecate_soft("1.5.0", "degree.sequence.game()", "sample_degseq()")
+   sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
+}
+
 #' @rdname sample_degseq
 #' @param deterministic  Whether the construction should be deterministic
 #' @param ... Passed to `realize_degseq()` if \sQuote{deterministic} is true,
@@ -553,6 +598,21 @@ sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
     res$citation <- citation
   }
   res
+}
+
+#' Growing random graph generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `growing.random.game()` was renamed to `sample_growing()` to create a more
+#' consistent API.
+#' @inheritParams sample_growing
+#' @keywords internal
+#' @export
+growing.random.game <- function(n , m = 1 , directed = TRUE , citation = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "growing.random.game()", "sample_growing()")
+   sample_growing(n = n, m = m, directed = directed, citation = citation)
 }
 
 #' @rdname sample_growing
@@ -755,6 +815,51 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
   res
 }
 
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.barabasi.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.barabasi.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "aging.barabasi.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+}
+
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.ba.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.ba.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "aging.ba.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+}
+
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.prefatt.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.prefatt.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "aging.prefatt.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+}
+
 #' @rdname sample_pa_age
 #' @param ... Passed to `sample_pa_age()`.
 #' @family games
@@ -826,6 +931,21 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
   res
 }
 
+#' Graph generation based on different vertex types
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `callaway.traits.game()` was renamed to `sample_traits_callaway()` to create a more
+#' consistent API.
+#' @inheritParams sample_traits_callaway
+#' @keywords internal
+#' @export
+callaway.traits.game <- function(nodes , types , edge.per.step = 1 , type.dist = rep(1,types) , pref.matrix = matrix(1,types,types) , directed = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "callaway.traits.game()", "sample_traits_callaway()")
+   sample_traits_callaway(nodes = nodes, types = types, edge.per.step = edge.per.step, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
+}
+
 #' @rdname sample_traits_callaway
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
@@ -852,6 +972,21 @@ sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
     res$pref.matrix <- pref.matrix
   }
   res
+}
+
+#' Graph generation based on different vertex types
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `establishment.game()` was renamed to `sample_traits_callaway()` to create a more
+#' consistent API.
+#' @inheritParams sample_traits_callaway
+#' @keywords internal
+#' @export
+establishment.game <- function(nodes , types , k = 1 , type.dist = rep(1,types) , pref.matrix = matrix(1,types,types) , directed = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "establishment.game()", "sample_traits_callaway()")
+   sample_traits_callaway(nodes = nodes, types = types, k = k, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
 }
 
 #' @rdname sample_traits_callaway
@@ -906,6 +1041,21 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
     res[[1]]$torus <- torus
   }
   res[[1]]
+}
+
+#' Geometric random graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `grg.game()` was renamed to `sample_grg()` to create a more
+#' consistent API.
+#' @inheritParams sample_grg
+#' @keywords internal
+#' @export
+grg.game <- function(nodes , radius , torus = FALSE , coords = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "grg.game()", "sample_grg()")
+   sample_grg(nodes = nodes, radius = radius, torus = torus, coords = coords)
 }
 
 #' @rdname sample_grg
@@ -1002,6 +1152,21 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
   res[[1]]
 }
 
+#' Trait-based random generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `preference.game()` was renamed to `sample_pref()` to create a more
+#' consistent API.
+#' @inheritParams sample_pref
+#' @keywords internal
+#' @export
+preference.game <- function(nodes , types , type.dist = rep(1,types) , fixed.sizes = FALSE , pref.matrix = matrix(1,types,types) , directed = FALSE , loops = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "preference.game()", "sample_pref()")
+   sample_pref(nodes = nodes, types = types, type.dist = type.dist, fixed.sizes = fixed.sizes, pref.matrix = pref.matrix, directed = directed, loops = loops)
+}
+
 #' @rdname sample_pref
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
@@ -1042,6 +1207,21 @@ sample_asym_pref <- function(nodes, types,
   res[[1]]
 }
 
+#' Trait-based random generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `asymmetric.preference.game()` was renamed to `sample_pref()` to create a more
+#' consistent API.
+#' @inheritParams sample_pref
+#' @keywords internal
+#' @export
+asymmetric.preference.game <- function(nodes , types , type.dist.matrix = matrix(1,types,types) , pref.matrix = matrix(1,types,types) , loops = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "asymmetric.preference.game()", "sample_pref()")
+   sample_pref(nodes = nodes, types = types, type.dist.matrix = type.dist.matrix, pref.matrix = pref.matrix, loops = loops)
+}
+
 #' @rdname sample_pref
 #' @export
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
@@ -1067,6 +1247,21 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
     R_igraph_connect_neighborhood, graph, as.numeric(order),
     as.numeric(mode)
   )
+}
+
+#' Neighborhood of graph vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `connect.neighborhood()` was renamed to `connect()` to create a more
+#' consistent API.
+#' @inheritParams connect
+#' @keywords internal
+#' @export
+connect.neighborhood <- function(graph , order , mode = c("all","out","in","total")) {
+   lifecycle::deprecate_soft("1.5.0", "connect.neighborhood()", "connect()")
+   connect(graph = graph, order = order, mode = mode)
 }
 
 
@@ -1136,6 +1331,21 @@ sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
   res
 }
 
+#' The Watts-Strogatz small-world model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `watts.strogatz.game()` was renamed to `sample_smallworld()` to create a more
+#' consistent API.
+#' @inheritParams sample_smallworld
+#' @keywords internal
+#' @export
+watts.strogatz.game <- function(dim , size , nei , p , loops = FALSE , multiple = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "watts.strogatz.game()", "sample_smallworld()")
+   sample_smallworld(dim = dim, size = size, nei = nei, p = p, loops = loops, multiple = multiple)
+}
+
 #' @rdname sample_smallworld
 #' @param ... Passed to `sample_smallworld()`.
 #' @family games
@@ -1190,6 +1400,21 @@ sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins
   res
 }
 
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `lastcit.game()` was renamed to `sample_last_cit()` to create a more
+#' consistent API.
+#' @inheritParams sample_last_cit
+#' @keywords internal
+#' @export
+lastcit.game <- function(n , edges = 1 , agebins = n/7100 , pref = (1:(agebins+1))^-3 , directed = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "lastcit.game()", "sample_last_cit()")
+   sample_last_cit(n = n, edges = edges, agebins = agebins, pref = pref, directed = directed)
+}
+
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
 #' @export
@@ -1213,6 +1438,21 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
     res$edges <- edges
   }
   res
+}
+
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cited.type.game()` was renamed to `sample_last_cit()` to create a more
+#' consistent API.
+#' @inheritParams sample_last_cit
+#' @keywords internal
+#' @export
+cited.type.game <- function(n , edges = 1 , types = rep(0,n) , pref = rep(1,length(types)) , directed = TRUE , attr = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "cited.type.game()", "sample_last_cit()")
+   sample_last_cit(n = n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
 }
 
 #' @rdname sample_last_cit
@@ -1242,6 +1482,21 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
     res$edges <- edges
   }
   res
+}
+
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `citing.cited.type.game()` was renamed to `sample_last_cit()` to create a more
+#' consistent API.
+#' @inheritParams sample_last_cit
+#' @keywords internal
+#' @export
+citing.cited.type.game <- function(n , edges = 1 , types = rep(0,n) , pref = matrix(1,nrow=length(types),ncol=length(types)) , directed = TRUE , attr = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "citing.cited.type.game()", "sample_last_cit()")
+   sample_last_cit(n = n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
 }
 
 #' @rdname sample_last_cit
@@ -1343,6 +1598,21 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   }
 
   res
+}
+
+#' Bipartite random graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bipartite.random.game()` was renamed to `sample_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams sample_bipartite
+#' @keywords internal
+#' @export
+bipartite.random.game <- function(n1 , n2 , type = c("gnp","gnm") , p , m , directed = FALSE , mode = c("out","in","all")) {
+   lifecycle::deprecate_soft("1.5.0", "bipartite.random.game()", "sample_bipartite()")
+   sample_bipartite(n1 = n1, n2 = n2, type = type, p = p, m = m, directed = directed, mode = mode)
 }
 
 #' @rdname sample_bipartite

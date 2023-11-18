@@ -218,6 +218,21 @@ curve_multiple <- function(graph, start = 0.5) {
   })
 }
 
+#' Optimal edge curvature when plotting graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `autocurve.edges()` was renamed to `curve_multiple()` to create a more
+#' consistent API.
+#' @inheritParams curve_multiple
+#' @keywords internal
+#' @export
+autocurve.edges <- function(graph , start = 0.5) {
+   lifecycle::deprecate_soft("1.5.0", "autocurve.edges()", "curve_multiple()")
+   curve_multiple(graph = graph, start = start, x = x)
+}
+
 .igraph.logo.raster <-
   structure(c(
     16777215L, 16777215L, 16777215L, 16777215L, 16777215L,

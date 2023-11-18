@@ -174,6 +174,21 @@ edge_betweenness <- function(graph, e = E(graph),
   res[as.numeric(e)]
 }
 
+#' Vertex and edge betweenness centrality
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.betweenness()` was renamed to `betweenness()` to create a more
+#' consistent API.
+#' @inheritParams betweenness
+#' @keywords internal
+#' @export
+edge.betweenness <- function(graph , e = E(graph) , directed = TRUE , weights = NULL , cutoff = -1) {
+   lifecycle::deprecate_soft("1.5.0", "edge.betweenness()", "betweenness()")
+   betweenness(graph = graph, e = e, directed = directed, weights = weights, cutoff = cutoff)
+}
+
 #' Deprecated version of `edge_betweenness()`
 #'
 #' @description
@@ -642,6 +657,21 @@ subgraph_centrality <- function(graph, diag = FALSE) {
   res
 }
 
+#' Find subgraph centrality scores of network positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `subgraph.centrality()` was renamed to `subgraph_centrality()` to create a more
+#' consistent API.
+#' @inheritParams subgraph_centrality
+#' @keywords internal
+#' @export
+subgraph.centrality <- function(graph , diag = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "subgraph.centrality()", "subgraph_centrality()")
+   subgraph_centrality(graph = graph, diag = diag)
+}
+
 
 #' Eigenvalues and eigenvectors of the adjacency matrix of a graph
 #'
@@ -720,6 +750,21 @@ spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto",
                        algorithm = algorithm,
                        which = which,
                        options = options)
+}
+
+#' Eigenvalues and eigenvectors of the adjacency matrix of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.eigen()` was renamed to `spectrum()` to create a more
+#' consistent API.
+#' @inheritParams spectrum
+#' @keywords internal
+#' @export
+graph.eigen <- function(graph , algorithm = c("arpack","auto","lapack","comp_auto","comp_lapack","comp_arpack") , which = list() , options = arpack_defaults()) {
+   lifecycle::deprecate_soft("1.5.0", "graph.eigen()", "spectrum()")
+   spectrum(graph = graph, algorithm = algorithm, which = which, options = options)
 }
 
 eigen_defaults <- function() {
@@ -838,6 +883,21 @@ eigen_centrality <- function(graph,
                               scale = scale,
                               weights = weights,
                               options = options)
+}
+
+#' Find Eigenvector Centrality Scores of Network Positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `evcent()` was renamed to `eigen_centrality()` to create a more
+#' consistent API.
+#' @inheritParams eigen_centrality
+#' @keywords internal
+#' @export
+evcent <- function(graph , directed = FALSE , scale = TRUE , weights = NULL , options = arpack_defaults()) {
+   lifecycle::deprecate_soft("1.5.0", "evcent()", "eigen_centrality()")
+   eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)
 }
 
 #' Strength or weighted vertex degree
@@ -997,6 +1057,21 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
                  options = options)
 }
 
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hub.score()` was renamed to `hub_score()` to create a more
+#' consistent API.
+#' @inheritParams hub_score
+#' @keywords internal
+#' @export
+hub.score <- function(graph , scale = TRUE , weights = NULL , options = arpack_defaults()) {
+   lifecycle::deprecate_soft("1.5.0", "hub.score()", "hub_score()")
+   hub_score(graph = graph, scale = scale, weights = weights, options = options)
+}
+
 #' @rdname hub_score
 #' @aliases authority.score
 #' @param options A named list, to override some ARPACK options. See
@@ -1019,6 +1094,21 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
                        scale = scale,
                        weights = weights,
                        options = options)
+}
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `hub_score()` to create a more
+#' consistent API.
+#' @inheritParams hub_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph , scale = TRUE , weights = NULL , options = arpack_defaults()) {
+   lifecycle::deprecate_soft("1.5.0", "authority.score()", "hub_score()")
+   hub_score(graph = graph, scale = scale, weights = weights, options = options)
 }
 
 #' The Page Rank algorithm
@@ -1332,6 +1422,21 @@ power_centrality <- function(graph, nodes = V(graph),
   res
 }
 
+#' Find Bonacich Power Centrality Scores of Network Positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bonpow()` was renamed to `power_centrality()` to create a more
+#' consistent API.
+#' @inheritParams power_centrality
+#' @keywords internal
+#' @export
+bonpow <- function(graph , nodes = V(graph) , loops = FALSE , exponent = 1 , rescale = FALSE , tol = 1e-7 , sparse = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "bonpow()", "power_centrality()")
+   power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
+}
+
 alpha.centrality.dense <- function(graph, nodes = V(graph), alpha = 1,
                                    loops = FALSE, exo = 1, weights = NULL,
                                    tol = 1e-7) {
@@ -1498,4 +1603,19 @@ alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
     names(res) <- vertex_attr(graph, "name", nodes)
   }
   res
+}
+
+#' Find Bonacich alpha centrality scores of network positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `alpha.centrality()` was renamed to `alpha_centrality()` to create a more
+#' consistent API.
+#' @inheritParams alpha_centrality
+#' @keywords internal
+#' @export
+alpha.centrality <- function(graph , nodes = V(graph) , alpha = 1 , loops = FALSE , exo = 1 , weights = NULL , tol = 1e-7 , sparse = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "alpha.centrality()", "alpha_centrality()")
+   alpha_centrality(graph = graph, nodes = nodes, alpha = alpha, loops = loops, exo = exo, weights = weights, tol = tol, sparse = sparse)
 }

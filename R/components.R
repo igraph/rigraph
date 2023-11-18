@@ -37,6 +37,21 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   .Call(R_igraph_no_clusters, graph, as.numeric(mode))
 }
 
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `no.clusters()` was renamed to `component_distribution()` to create a more
+#' consistent API.
+#' @inheritParams component_distribution
+#' @keywords internal
+#' @export
+no.clusters <- function(graph , mode = c("weak","strong")) {
+   lifecycle::deprecate_soft("1.5.0", "no.clusters()", "component_distribution()")
+   component_distribution(graph = graph, mode = mode)
+}
+
 #' @rdname components
 #' @param cumulative Logical, if TRUE the cumulative distirubution (relative
 #'   frequency) is calculated.
@@ -62,6 +77,21 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
   }
 
   res
+}
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cluster.distribution()` was renamed to `component_distribution()` to create a more
+#' consistent API.
+#' @inheritParams component_distribution
+#' @keywords internal
+#' @export
+cluster.distribution <- function(graph , cumulative = FALSE , mul.size = FALSE , ...) {
+   lifecycle::deprecate_soft("1.5.0", "cluster.distribution()", "component_distribution()")
+   component_distribution(graph = graph, cumulative = cumulative, mul.size = mul.size, ...)
 }
 
 
@@ -114,6 +144,21 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
     R_igraph_decompose, graph, as.numeric(mode),
     as.numeric(max.comps), as.numeric(min.vertices)
   )
+}
+
+#' Decompose a graph into components
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `decompose.graph()` was renamed to `decompose()` to create a more
+#' consistent API.
+#' @inheritParams decompose
+#' @keywords internal
+#' @export
+decompose.graph <- function(graph , mode = c("weak","strong") , max.comps = NA , min.vertices = 0) {
+   lifecycle::deprecate_soft("1.5.0", "decompose.graph()", "decompose()")
+   decompose(graph = graph, mode = mode, max.comps = max.comps, min.vertices = min.vertices)
 }
 
 

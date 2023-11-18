@@ -54,3 +54,18 @@ are_adjacent <- function(graph, v1, v2) {
     as_igraph_vs(graph, v2) - 1
   )
 }
+
+#' Are two vertices adjacent?
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `are.connected()` was renamed to `are_adjacent()` to create a more
+#' consistent API.
+#' @inheritParams are_adjacent
+#' @keywords internal
+#' @export
+are.connected <- function(graph , v1 , v2) {
+   lifecycle::deprecate_soft("1.5.0", "are.connected()", "are_adjacent()")
+   are_adjacent(graph = graph, v1 = v1, v2 = v2)
+}

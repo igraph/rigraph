@@ -297,6 +297,21 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
   res
 }
 
+#' Simple two-row layout for bipartite graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.bipartite()` was renamed to `layout_as_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams layout_as_bipartite
+#' @keywords internal
+#' @export
+layout.bipartite <- function(graph , types = NULL , hgap = 1 , vgap = 1 , maxiter = 100) {
+   lifecycle::deprecate_soft("1.5.0", "layout.bipartite()", "layout_as_bipartite()")
+   layout_as_bipartite(graph = graph, types = types, hgap = hgap, vgap = vgap, maxiter = maxiter)
+}
+
 
 #' @rdname layout_as_bipartite
 #' @param ... Arguments to pass to `layout_as_bipartite()`.
@@ -356,6 +371,21 @@ layout_as_star <- function(graph, center = V(graph)[1], order = NULL) {
   res <- .Call(R_igraph_layout_star, graph, center - 1, order)
 
   res
+}
+
+#' Generate coordinates to place the vertices of a graph in a star-shape
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.star()` was renamed to `layout_as_star()` to create a more
+#' consistent API.
+#' @inheritParams layout_as_star
+#' @keywords internal
+#' @export
+layout.star <- function(graph , center = V(graph)[1] , order = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "layout.star()", "layout_as_star()")
+   layout_as_star(graph = graph, center = center, order = order)
 }
 
 
@@ -610,6 +640,21 @@ layout_nicely <- function(graph, dim = 2, ...) {
   }
 }
 
+#' Choose an appropriate graph layout algorithm automatically
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.auto()` was renamed to `layout_nicely()` to create a more
+#' consistent API.
+#' @inheritParams layout_nicely
+#' @keywords internal
+#' @export
+layout.auto <- function(graph , dim = 2 , ...) {
+   lifecycle::deprecate_soft("1.5.0", "layout.auto()", "layout_nicely()")
+   layout_nicely(graph = graph, dim = dim, ...)
+}
+
 
 #' @rdname layout_nicely
 #' @export
@@ -675,6 +720,21 @@ layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   }
 
   res
+}
+
+#' Simple grid layout
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.grid()` was renamed to `layout_on_grid()` to create a more
+#' consistent API.
+#' @inheritParams layout_on_grid
+#' @keywords internal
+#' @export
+layout.grid <- function(graph , width = 0 , height = 0 , dim = 2) {
+   lifecycle::deprecate_soft("1.5.0", "layout.grid()", "layout_on_grid()")
+   layout_on_grid(graph = graph, width = width, height = height, dim = dim)
 }
 
 
@@ -938,6 +998,21 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
   res
 }
 
+#' The Davidson-Harel layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.davidson.harel()` was renamed to `layout_with_dh()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_dh
+#' @keywords internal
+#' @export
+layout.davidson.harel <- function(graph , coords = NULL , maxiter = 10 , fineiter = max(10,log2(vcount(graph))) , cool.fact = 0.75 , weight.node.dist = 1.0 , weight.border = 0.0 , weight.edge.lengths = edge_density(graph)/10 , weight.edge.crossings = 1.0-sqrt(edge_density(graph)) , weight.node.edge.dist = 0.2*(1-edge_density(graph))) {
+   lifecycle::deprecate_soft("1.5.0", "layout.davidson.harel()", "layout_with_dh()")
+   layout_with_dh(graph = graph, coords = coords, maxiter = maxiter, fineiter = fineiter, cool.fact = cool.fact, weight.node.dist = weight.node.dist, weight.border = weight.border, weight.edge.lengths = weight.edge.lengths, weight.edge.crossings = weight.edge.crossings, weight.node.edge.dist = weight.node.edge.dist)
+}
+
 
 #' @rdname layout_with_dh
 #' @param ... Passed to `layout_with_dh()`.
@@ -1179,6 +1254,21 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
   res
 }
 
+#' The GEM layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.gem()` was renamed to `layout_with_gem()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_gem
+#' @keywords internal
+#' @export
+layout.gem <- function(graph , coords = NULL , maxiter = 40*vcount(graph)^2 , temp.max = max(vcount(graph),1) , temp.min = 1/10 , temp.init = sqrt(max(vcount(graph),1))) {
+   lifecycle::deprecate_soft("1.5.0", "layout.gem()", "layout_with_gem()")
+   layout_with_gem(graph = graph, coords = coords, maxiter = maxiter, temp.max = temp.max, temp.min = temp.min, temp.init = temp.init)
+}
+
 
 #' @rdname layout_with_gem
 #' @param ... Passed to `layout_with_gem()`.
@@ -1251,6 +1341,21 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
     R_igraph_layout_graphopt, graph, niter, charge, mass,
     spring.length, spring.constant, max.sa.movement, start
   )
+}
+
+#' The graphopt layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.graphopt()` was renamed to `layout_with_graphopt()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_graphopt
+#' @keywords internal
+#' @export
+layout.graphopt <- function(graph , start = NULL , niter = 500 , charge = 0.001 , mass = 30 , spring.length = 0 , spring.constant = 1 , max.sa.movement = 5) {
+   lifecycle::deprecate_soft("1.5.0", "layout.graphopt()", "layout_with_graphopt()")
+   layout_with_graphopt(graph = graph, start = start, niter = niter, charge = charge, mass = mass, spring.length = spring.length, spring.constant = spring.constant, max.sa.movement = max.sa.movement)
 }
 
 
@@ -1541,6 +1646,21 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
   res <- .Call(R_igraph_layout_mds, graph, dist, dim)
 
   res
+}
+
+#' Graph layout by multidimensional scaling
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.mds()` was renamed to `layout_with_mds()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_mds
+#' @keywords internal
+#' @export
+layout.mds <- function(graph , dist = NULL , dim = 2 , options = arpack_defaults()) {
+   lifecycle::deprecate_soft("1.5.0", "layout.mds()", "layout_with_mds()")
+   layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
 }
 
 
@@ -1877,6 +1997,21 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
   res
 }
 
+#' The Sugiyama graph layout generator
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.sugiyama()` was renamed to `layout_with_sugiyama()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_sugiyama
+#' @keywords internal
+#' @export
+layout.sugiyama <- function(graph , layers = NULL , hgap = 1 , vgap = 1 , maxiter = 100 , weights = NULL , attributes = c("default","all","none")) {
+   lifecycle::deprecate_soft("1.5.0", "layout.sugiyama()", "layout_with_sugiyama()")
+   layout_with_sugiyama(graph = graph, layers = layers, hgap = hgap, vgap = vgap, maxiter = maxiter, weights = weights, attributes = attributes)
+}
+
 
 #' @rdname layout_with_sugiyama
 #' @param ... Passed to `layout_with_sugiyama()`.
@@ -1950,6 +2085,21 @@ merge_coords <- function(graphs, layouts, method = "dla") {
   res
 }
 
+#' Merging graph layouts
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.merge()` was renamed to `merge_coords()` to create a more
+#' consistent API.
+#' @inheritParams merge_coords
+#' @keywords internal
+#' @export
+layout.merge <- function(graphs , layouts , method = "dla") {
+   lifecycle::deprecate_soft("1.5.0", "layout.merge()", "merge_coords()")
+   merge_coords(graphs = graphs, layouts = layouts, method = method)
+}
+
 
 
 #' Normalize coordinates for plotting graphs
@@ -1997,6 +2147,21 @@ norm_coords <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1,
   layout
 }
 
+#' Normalize coordinates for plotting graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.norm()` was renamed to `norm_coords()` to create a more
+#' consistent API.
+#' @inheritParams norm_coords
+#' @keywords internal
+#' @export
+layout.norm <- function(layout , xmin = -1 , xmax = 1 , ymin = -1 , ymax = 1 , zmin = -1 , zmax = 1) {
+   lifecycle::deprecate_soft("1.5.0", "layout.norm()", "norm_coords()")
+   norm_coords(layout = layout, xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, zmin = zmin, zmax = zmax)
+}
+
 .layout.norm.col <- function(v, min, max) {
   vr <- range(v)
   if (vr[1] == vr[2]) {
@@ -2022,6 +2187,21 @@ layout_components <- function(graph, layout = layout_with_kk, ...) {
   l <- merge_coords(gl, ll)
   l[unlist(sapply(gl, vertex_attr, "id")), ] <- l[]
   l
+}
+
+#' Merging graph layouts
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `piecewise.layout()` was renamed to `merge_coords()` to create a more
+#' consistent API.
+#' @inheritParams merge_coords
+#' @keywords internal
+#' @export
+piecewise.layout <- function(graph , layout = layout_with_kk , ...) {
+   lifecycle::deprecate_soft("1.5.0", "piecewise.layout()", "merge_coords()")
+   merge_coords(graph = graph, layout = layout, ...)
 }
 
 #' Spring layout, this was removed from igraph

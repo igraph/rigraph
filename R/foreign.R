@@ -134,6 +134,21 @@ read_graph <- function(file, format = c(
   res
 }
 
+#' Reading foreign file formats
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `read.graph()` was renamed to `read_graph()` to create a more
+#' consistent API.
+#' @inheritParams read_graph
+#' @keywords internal
+#' @export
+read.graph <- function(file , format = c("edgelist","pajek","ncol","lgl","graphml","dimacs","graphdb","gml","dl") , ...) {
+   lifecycle::deprecate_soft("1.5.0", "read.graph()", "read_graph()")
+   read_graph(file = file, format = format, ...)
+}
+
 
 
 #' Writing the graph to a file in some format
@@ -208,6 +223,21 @@ write_graph <- function(graph, file,
   }
 
   invisible(res)
+}
+
+#' Writing the graph to a file in some format
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `write.graph()` was renamed to `write_graph()` to create a more
+#' consistent API.
+#' @inheritParams write_graph
+#' @keywords internal
+#' @export
+write.graph <- function(graph , file , format = c("edgelist","pajek","ncol","lgl","graphml","dimacs","gml","dot","leda") , ...) {
+   lifecycle::deprecate_soft("1.5.0", "write.graph()", "write_graph()")
+   write_graph(graph = graph, file = file, format = format, ...)
 }
 
 ################################################################
@@ -576,6 +606,21 @@ graph_from_graphdb <- function(url = NULL,
   write.graph.fromraw(buffer, f)
 
   .Call(R_igraph_read_graph_graphdb, f, as.logical(directed))
+}
+
+#' Load a graph from the graph database for testing graph isomorphism.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.graphdb()` was renamed to `graph_from_graphdb()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_graphdb
+#' @keywords internal
+#' @export
+graph.graphdb <- function(url = NULL , prefix = "iso" , type = "r001" , nodes = NULL , pair = "A" , which = 0 , base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip" , compressed = TRUE , directed = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "graph.graphdb()", "graph_from_graphdb()")
+   graph_from_graphdb(url = url, prefix = prefix, type = type, nodes = nodes, pair = pair, which = which, base = base, compressed = compressed, directed = directed)
 }
 
 read.graph.graphdb <- function(file, directed = TRUE, ...) {

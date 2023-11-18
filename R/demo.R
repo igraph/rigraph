@@ -192,3 +192,18 @@ igraph_demo <- function(which) {
 
   invisible()
 }
+
+#' Run igraph demos, step by step
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraphdemo()` was renamed to `igraph_demo()` to create a more
+#' consistent API.
+#' @inheritParams igraph_demo
+#' @keywords internal
+#' @export
+igraphdemo <- function(which) {
+   lifecycle::deprecate_soft("1.5.0", "igraphdemo()", "igraph_demo()")
+   igraph_demo(which = which, top = top, txt = txt, top = top, top = top, txt = txt, which = which, ...)
+}

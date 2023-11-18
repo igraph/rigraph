@@ -55,6 +55,21 @@ running_mean <- function(v, binwidth) {
   .Call(R_igraph_running_mean, v, binwidth)
 }
 
+#' Running mean of a time series
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `running.mean()` was renamed to `running_mean()` to create a more
+#' consistent API.
+#' @inheritParams running_mean
+#' @keywords internal
+#' @export
+running.mean <- function(v , binwidth) {
+   lifecycle::deprecate_soft("1.5.0", "running.mean()", "running_mean()")
+   running_mean(v = v, binwidth = binwidth)
+}
+
 
 
 #' Sampling a random integer sequence
@@ -93,6 +108,21 @@ sample_seq <- function(low, high, length) {
     R_igraph_random_sample, as.numeric(low), as.numeric(high),
     as.numeric(length)
   )
+}
+
+#' Sampling a random integer sequence
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.sample()` was renamed to `sample_seq()` to create a more
+#' consistent API.
+#' @inheritParams sample_seq
+#' @keywords internal
+#' @export
+igraph.sample <- function(low , high , length) {
+   lifecycle::deprecate_soft("1.5.0", "igraph.sample()", "sample_seq()")
+   sample_seq(low = low, high = high, length = length)
 }
 
 #' Common handler for vertex type arguments in igraph functions

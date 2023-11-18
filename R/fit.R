@@ -135,6 +135,21 @@ fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
   }
 }
 
+#' Fitting a power-law distribution function to discrete data
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `power.law.fit()` was renamed to `fit_power_law()` to create a more
+#' consistent API.
+#' @inheritParams fit_power_law
+#' @keywords internal
+#' @export
+power.law.fit <- function(x , xmin = NULL , start = 2 , force.continuous = FALSE , implementation = c("plfit","R.mle") , ...) {
+   lifecycle::deprecate_soft("1.5.0", "power.law.fit()", "fit_power_law()")
+   fit_power_law(x = x, xmin = xmin, start = start, force.continuous = force.continuous, implementation = implementation, ...)
+}
+
 power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   if (length(x) == 0) {
     stop("zero length vector")

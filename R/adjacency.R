@@ -440,6 +440,21 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   res
 }
 
+#' Create graphs from adjacency matrices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.adjacency()` was renamed to `graph_from_adjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_adjacency_matrix
+#' @keywords internal
+#' @export
+graph.adjacency <- function(adjmatrix , mode = c("directed","undirected","max","min","upper","lower","plus") , weighted = NULL , diag = TRUE , add.colnames = NULL , add.rownames = NA) {
+   lifecycle::deprecate_soft("1.5.0", "graph.adjacency()", "graph_from_adjacency_matrix()")
+   graph_from_adjacency_matrix(adjmatrix = adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
+}
+
 is_symmetric <- function(x) {
   if (inherits(x, "Matrix")) {
     Matrix::isSymmetric(x, tol = 0, tol1 = 0)

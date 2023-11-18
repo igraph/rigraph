@@ -244,6 +244,21 @@ graph_from_incidence_matrix <- function(incidence, directed = FALSE,
   res
 }
 
+#' Create graphs from an incidence matrix
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.incidence()` was renamed to `graph_from_incidence_matrix()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_incidence_matrix
+#' @keywords internal
+#' @export
+graph.incidence <- function(incidence , directed = FALSE , mode = c("all","out","in","total") , multiple = FALSE , weighted = NULL , add.names = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "graph.incidence()", "graph_from_incidence_matrix()")
+   graph_from_incidence_matrix(incidence = incidence, directed = directed, mode = mode, multiple = multiple, weighted = weighted, add.names = add.names)
+}
+
 #' @rdname graph_from_incidence_matrix
 #' @param ... Passed to `graph_from_incidence_matrix()`.
 #' @family incidence

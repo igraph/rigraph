@@ -273,6 +273,21 @@ shapes <- function(shape = NULL) {
   }
 }
 
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.shapes()` was renamed to `shapes()` to create a more
+#' consistent API.
+#' @inheritParams shapes
+#' @keywords internal
+#' @export
+vertex.shapes <- function(shape = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "vertex.shapes()", "shapes()")
+   shapes(shape = shape)
+}
+
 #' @rdname shapes
 #' @export
 shape_noclip <- function(coords, el, params,
@@ -288,10 +303,40 @@ shape_noclip <- function(coords, el, params,
   }
 }
 
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.shape.noclip()` was renamed to `shapes()` to create a more
+#' consistent API.
+#' @inheritParams shapes
+#' @keywords internal
+#' @export
+igraph.shape.noclip <- function(coords , el , params , end = c("both","from","to")) {
+   lifecycle::deprecate_soft("1.5.0", "igraph.shape.noclip()", "shapes()")
+   shapes(coords = coords, el = el, params = params, end = end)
+}
+
 #' @rdname shapes
 #' @export
 shape_noplot <- function(coords, v = NULL, params) {
   invisible(NULL)
+}
+
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.shape.noplot()` was renamed to `shapes()` to create a more
+#' consistent API.
+#' @inheritParams shapes
+#' @keywords internal
+#' @export
+igraph.shape.noplot <- function(coords , v = NULL , params) {
+   lifecycle::deprecate_soft("1.5.0", "igraph.shape.noplot()", "shapes()")
+   shapes(coords = coords, v = v, params = params)
 }
 
 #' @rdname shapes
@@ -308,6 +353,21 @@ add_shape <- function(shape, clip = shape_noclip,
   assign(shape, value = list(clip = clip, plot = plot), envir = .igraph.shapes)
   do.call(igraph.options, parameters)
   invisible(TRUE)
+}
+
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertex.shape()` was renamed to `shapes()` to create a more
+#' consistent API.
+#' @inheritParams shapes
+#' @keywords internal
+#' @export
+add.vertex.shape <- function(shape , clip = shape_noclip , plot = shape_noplot , parameters = list()) {
+   lifecycle::deprecate_soft("1.5.0", "add.vertex.shape()", "shapes()")
+   shapes(shape = shape, clip = clip, plot = plot, parameters = parameters)
 }
 
 ## These are the predefined shapes

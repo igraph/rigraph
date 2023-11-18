@@ -131,3 +131,18 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 
   res
 }
+
+#' Stochastic matrix of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.stochastic()` was renamed to `stochastic_matrix()` to create a more
+#' consistent API.
+#' @inheritParams stochastic_matrix
+#' @keywords internal
+#' @export
+get.stochastic <- function(graph , column.wise = FALSE , sparse = igraph_opt("sparsematrices")) {
+   lifecycle::deprecate_soft("1.5.0", "get.stochastic()", "stochastic_matrix()")
+   stochastic_matrix(graph = graph, column.wise = column.wise, sparse = sparse)
+}

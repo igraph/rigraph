@@ -106,3 +106,18 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   }
   res
 }
+
+#' Chordality of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.chordal()` was renamed to `is_chordal()` to create a more
+#' consistent API.
+#' @inheritParams is_chordal
+#' @keywords internal
+#' @export
+is.chordal <- function(graph , alpha = NULL , alpham1 = NULL , fillin = FALSE , newgraph = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "is.chordal()", "is_chordal()")
+   is_chordal(graph = graph, alpha = alpha, alpham1 = alpham1, fillin = fillin, newgraph = newgraph)
+}

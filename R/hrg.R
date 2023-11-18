@@ -140,6 +140,21 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   res
 }
 
+#' Fit a hierarchical random graph model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hrg.fit()` was renamed to `fit_hrg()` to create a more
+#' consistent API.
+#' @inheritParams fit_hrg
+#' @keywords internal
+#' @export
+hrg.fit <- function(graph , hrg = NULL , start = FALSE , steps = 0) {
+   lifecycle::deprecate_soft("1.5.0", "hrg.fit()", "fit_hrg()")
+   fit_hrg(graph = graph, hrg = hrg, start = start, steps = steps)
+}
+
 
 #' Create a consensus tree from several hierarchical random graph models
 #'
@@ -304,6 +319,21 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
   res$edges <- matrix(res$edges, ncol = 2, byrow = TRUE)
   class(res$hrg) <- "igraphHRG"
   res
+}
+
+#' Predict edges based on a hierarchical random graph model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hrg.predict()` was renamed to `predict_edges()` to create a more
+#' consistent API.
+#' @inheritParams predict_edges
+#' @keywords internal
+#' @export
+hrg.predict <- function(graph , hrg = NULL , start = FALSE , num.samples = 10000 , num.bins = 25) {
+   lifecycle::deprecate_soft("1.5.0", "hrg.predict()", "predict_edges()")
+   predict_edges(graph = graph, hrg = hrg, start = start, num.samples = num.samples, num.bins = num.bins)
 }
 
 
@@ -605,6 +635,21 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
   } else if (mode == "phylo") {
     hrgPlotPhylo(x, ...)
   }
+}
+
+#' HRG dendrogram plot
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dendPlot.igraphHRG()` was renamed to `plot_dendrogram.igraphHRG()` to create a more
+#' consistent API.
+#' @inheritParams plot_dendrogram.igraphHRG
+#' @keywords internal
+#' @export
+dendPlot.igraphHRG <- function(x , mode = igraph_opt("dend.plot.type") , ...) {
+   lifecycle::deprecate_soft("1.5.0", "dendPlot.igraphHRG()", "plot_dendrogram.igraphHRG()")
+   plot_dendrogram.igraphHRG(x = x, mode = mode, ...)
 }
 
 #' @importFrom graphics plot

@@ -202,6 +202,21 @@ graph_from_data_frame <- function(d, directed = TRUE, vertices = NULL) {
   g
 }
 
+#' Creating igraph graphs from data frames or vice-versa
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.data.frame()` was renamed to `as_data_frame()` to create a more
+#' consistent API.
+#' @inheritParams as_data_frame
+#' @keywords internal
+#' @export
+graph.data.frame <- function(d , directed = TRUE , vertices = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "graph.data.frame()", "as_data_frame()")
+   as_data_frame(d = d, directed = directed, vertices = vertices)
+}
+
 #' @rdname graph_from_data_frame
 #' @param ... Passed to `graph_from_data_frame()`.
 #' @export
@@ -255,6 +270,21 @@ graph_from_edgelist <- function(el, directed = TRUE) {
   }
 
   res
+}
+
+#' Create a graph from an edge list matrix
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.edgelist()` was renamed to `graph_from_edgelist()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_edgelist
+#' @keywords internal
+#' @export
+graph.edgelist <- function(el , directed = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "graph.edgelist()", "graph_from_edgelist()")
+   graph_from_edgelist(el = el, directed = directed)
 }
 
 #' @rdname graph_from_edgelist

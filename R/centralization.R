@@ -171,6 +171,21 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
   res
 }
 
+#' Theoretical maximum for degree centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.degree.tmax()` was renamed to `centr_degree_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_degree_tmax
+#' @keywords internal
+#' @export
+centralization.degree.tmax <- function(graph = NULL , nodes = 0 , mode = c("all","out","in","total") , loops = FALSE) {
+   lifecycle::deprecate_soft("1.5.0", "centralization.degree.tmax()", "centr_degree_tmax()")
+   centr_degree_tmax(graph = graph, nodes = nodes, mode = mode, loops = loops)
+}
+
 
 #' Centralize a graph according to the betweenness of vertices
 #'
@@ -213,6 +228,21 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   res <- .Call(R_igraph_centralization_betweenness, graph, directed, normalized)
 
   res
+}
+
+#' Centralize a graph according to the betweenness of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.betweenness()` was renamed to `centr_betw()` to create a more
+#' consistent API.
+#' @inheritParams centr_betw
+#' @keywords internal
+#' @export
+centralization.betweenness <- function(graph , directed = TRUE , normalized = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "centralization.betweenness()", "centr_betw()")
+   centr_betw(graph = graph, directed = directed, normalized = normalized)
 }
 
 #' Theoretical maximum for betweenness centralization

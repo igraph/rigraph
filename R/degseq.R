@@ -61,6 +61,21 @@ is_degseq <- function(out.deg, in.deg = NULL) {
   is_graphical(out.deg, in.deg, allowed.edge.types = "all")
 }
 
+#' Check if a degree sequence is valid for a multi-graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.degree.sequence()` was renamed to `is_degseq()` to create a more
+#' consistent API.
+#' @inheritParams is_degseq
+#' @keywords internal
+#' @export
+is.degree.sequence <- function(out.deg , in.deg = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "is.degree.sequence()", "is_degseq()")
+   is_degseq(out.deg = out.deg, in.deg = in.deg)
+}
+
 #' Is a degree sequence graphical?
 #'
 #' Determine whether the given vertex degrees (in- and out-degrees for

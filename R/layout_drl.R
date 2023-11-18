@@ -121,6 +121,21 @@ layout_with_drl <- function(graph, use.seed = FALSE,
   res
 }
 
+#' The DrL graph layout generator
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.drl()` was renamed to `layout_with_drl()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_drl
+#' @keywords internal
+#' @export
+layout.drl <- function(graph , use.seed = FALSE , seed = matrix(runif(vcount(graph)*2),ncol=2) , options = drl_defaults$default , weights = NULL , dim = 2) {
+   lifecycle::deprecate_soft("1.5.0", "layout.drl()", "layout_with_drl()")
+   layout_with_drl(graph = graph, use.seed = use.seed, seed = seed, options = options, weights = weights, dim = dim)
+}
+
 
 #' @rdname layout_with_drl
 #' @param ... Passed to `layout_with_drl()`.

@@ -45,6 +45,21 @@ igraph_test <- function() {
   do.call("test_dir", list(tdir))
 }
 
+#' Run package tests
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraphtest()` was renamed to `igraph_test()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraphtest <- function() {
+   lifecycle::deprecate_soft("1.5.0", "igraphtest()", "igraph_test()")
+   igraph_test()
+}
+
 
 # R_igraph_vers -----------------------------------------------------------------------
 
@@ -68,6 +83,21 @@ igraph_test <- function() {
 #'
 igraph_version <- function() {
   unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
+}
+
+#' Query igraph's version string
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.version()` was renamed to `igraph_version()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.version <- function() {
+   lifecycle::deprecate_soft("1.5.0", "igraph.version()", "igraph_version()")
+   igraph_version()
 }
 
 checkpkg <- function(package_file, args = character()) {

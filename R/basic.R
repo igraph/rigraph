@@ -44,6 +44,21 @@ is_igraph <- function(graph) {
   TRUE
 }
 
+#' Is this object an igraph graph?
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.igraph()` was renamed to `is_igraph()` to create a more
+#' consistent API.
+#' @inheritParams is_igraph
+#' @keywords internal
+#' @export
+is.igraph <- function(graph) {
+   lifecycle::deprecate_soft("1.5.0", "is.igraph()", "is_igraph()")
+   is_igraph(graph = graph)
+}
+
 #' @export
 get.edge <- function(graph, id) {
   .Deprecated("ends", msg = paste(

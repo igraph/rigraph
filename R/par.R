@@ -163,6 +163,21 @@ igraph_options <- function(...) {
   igraph_i_options(...)
 }
 
+#' Parameters for the igraph package
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.options()` was renamed to `igraph_options()` to create a more
+#' consistent API.
+#' @inheritParams igraph_options
+#' @keywords internal
+#' @export
+igraph.options <- function(...) {
+   lifecycle::deprecate_soft("1.5.0", "igraph.options()", "igraph_options()")
+   igraph_options(...)
+}
+
 igraph_i_options <- function(..., .in = parent.frame()) {
   if (nargs() == 0) {
     return(get_all_options())
@@ -225,6 +240,21 @@ igraph_opt <- function(x, default = NULL) {
   } else {
     get_config(paste0("igraph::", x), default)
   }
+}
+
+#' Parameters for the igraph package
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `getIgraphOpt()` was renamed to `igraph_options()` to create a more
+#' consistent API.
+#' @inheritParams igraph_options
+#' @keywords internal
+#' @export
+getIgraphOpt <- function(x , default = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "getIgraphOpt()", "igraph_options()")
+   igraph_options(x = x, default = default)
 }
 
 

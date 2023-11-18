@@ -72,6 +72,21 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
 #' Graph motifs
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs()` was renamed to `motifs()` to create a more
+#' consistent API.
+#' @inheritParams motifs
+#' @keywords internal
+#' @export
+graph.motifs <- function(graph , size = 3 , cut.prob = rep(0,size)) {
+   lifecycle::deprecate_soft("1.5.0", "graph.motifs()", "motifs()")
+   motifs(graph = graph, size = size, cut.prob = cut.prob)
+}
+
+#' Graph motifs
+#'
 #' Graph motifs are small connected induced subgraphs with a well-defined
 #' structure.  These functions search a graph for various motifs.
 #'
@@ -110,6 +125,21 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
     R_igraph_motifs_randesu_no, graph, as.integer(size),
     as.numeric(cut.prob)
   )
+}
+
+#' Graph motifs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs.no()` was renamed to `count_motifs()` to create a more
+#' consistent API.
+#' @inheritParams count_motifs
+#' @keywords internal
+#' @export
+graph.motifs.no <- function(graph , size = 3 , cut.prob = rep(0,size)) {
+   lifecycle::deprecate_soft("1.5.0", "graph.motifs.no()", "count_motifs()")
+   count_motifs(graph = graph, size = size, cut.prob = cut.prob)
 }
 
 #' Graph motifs
@@ -161,6 +191,21 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
   )
 }
 
+#' Graph motifs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.motifs.est()` was renamed to `sample_motifs()` to create a more
+#' consistent API.
+#' @inheritParams sample_motifs
+#' @keywords internal
+#' @export
+graph.motifs.est <- function(graph , size = 3 , cut.prob = rep(0,size) , sample.size = vcount(graph)/10 , sample = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "graph.motifs.est()", "sample_motifs()")
+   sample_motifs(graph = graph, size = size, cut.prob = cut.prob, sample.size = sample.size, sample = sample)
+}
+
 
 #' Dyad census of a graph
 #'
@@ -197,6 +242,21 @@ dyad_census <- function(graph) {
   }
 
   dyad_census_impl(graph)
+}
+
+#' Dyad census of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dyad.census()` was renamed to `dyad_census()` to create a more
+#' consistent API.
+#' @inheritParams dyad_census
+#' @keywords internal
+#' @export
+dyad.census <- function(graph) {
+   lifecycle::deprecate_soft("1.5.0", "dyad.census()", "dyad_census()")
+   dyad_census(graph = graph)
 }
 
 

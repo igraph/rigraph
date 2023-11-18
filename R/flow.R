@@ -140,6 +140,21 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
   res
 }
 
+#' Minimum cut in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.mincut()` was renamed to `min_cut()` to create a more
+#' consistent API.
+#' @inheritParams min_cut
+#' @keywords internal
+#' @export
+graph.mincut <- function(graph , source = NULL , target = NULL , capacity = NULL , value.only = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "graph.mincut()", "min_cut()")
+   min_cut(graph = graph, source = source, target = target, capacity = capacity, value.only = value.only)
+}
+
 
 
 #' Vertex connectivity
@@ -238,6 +253,21 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
   }
 }
 
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.connectivity()` was renamed to `vertex_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams vertex_connectivity
+#' @keywords internal
+#' @export
+vertex.connectivity <- function(graph , source = NULL , target = NULL , checks = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "vertex.connectivity()", "vertex_connectivity()")
+   vertex_connectivity(graph = graph, source = source, target = target, checks = checks)
+}
+
 
 
 #' Edge connectivity
@@ -325,6 +355,21 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
   }
 }
 
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.connectivity()` was renamed to `edge_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams edge_connectivity
+#' @keywords internal
+#' @export
+edge.connectivity <- function(graph , source = NULL , target = NULL , checks = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "edge.connectivity()", "edge_connectivity()")
+   edge_connectivity(graph = graph, source = source, target = target, checks = checks)
+}
+
 #' @rdname edge_connectivity
 #' @export
 edge_disjoint_paths <- function(graph, source, target) {
@@ -342,6 +387,21 @@ edge_disjoint_paths <- function(graph, source, target) {
     R_igraph_edge_disjoint_paths, graph,
     as_igraph_vs(graph, source) - 1, as_igraph_vs(graph, target) - 1
   )
+}
+
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.disjoint.paths()` was renamed to `edge_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams edge_connectivity
+#' @keywords internal
+#' @export
+edge.disjoint.paths <- function(graph , source , target) {
+   lifecycle::deprecate_soft("1.5.0", "edge.disjoint.paths()", "edge_connectivity()")
+   edge_connectivity(graph = graph, source = source, target = target)
 }
 
 #' @rdname vertex_connectivity
@@ -363,6 +423,21 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   )
 }
 
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.disjoint.paths()` was renamed to `vertex_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams vertex_connectivity
+#' @keywords internal
+#' @export
+vertex.disjoint.paths <- function(graph , source = NULL , target = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "vertex.disjoint.paths()", "vertex_connectivity()")
+   vertex_connectivity(graph = graph, source = source, target = target)
+}
+
 #' @rdname edge_connectivity
 #' @export
 adhesion <- function(graph, checks = TRUE) {
@@ -370,6 +445,21 @@ adhesion <- function(graph, checks = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_adhesion, graph, as.logical(checks))
+}
+
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.adhesion()` was renamed to `edge_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams edge_connectivity
+#' @keywords internal
+#' @export
+graph.adhesion <- function(graph , checks = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "graph.adhesion()", "edge_connectivity()")
+   edge_connectivity(graph = graph, checks = checks)
 }
 
 #' @rdname vertex_connectivity
@@ -552,6 +642,21 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   res$dom[res$dom == 0] <- -1
 
   res
+}
+
+#' Dominator tree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dominator.tree()` was renamed to `dominator_tree()` to create a more
+#' consistent API.
+#' @inheritParams dominator_tree
+#' @keywords internal
+#' @export
+dominator.tree <- function(graph , root , mode = c("out","in","all","total")) {
+   lifecycle::deprecate_soft("1.5.0", "dominator.tree()", "dominator_tree()")
+   dominator_tree(graph = graph, root = root, mode = mode)
 }
 
 

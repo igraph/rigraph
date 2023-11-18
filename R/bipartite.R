@@ -146,6 +146,21 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' Project a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bipartite.projection()` was renamed to `bipartite_projection()` to create a more
+#' consistent API.
+#' @inheritParams bipartite_projection
+#' @keywords internal
+#' @export
+bipartite.projection <- function(graph , types = NULL , multiplicity = TRUE , probe1 = NULL , which = c("both","true","false") , remove.type = TRUE) {
+   lifecycle::deprecate_soft("1.5.0", "bipartite.projection()", "bipartite_projection()")
+   bipartite_projection(graph = graph, types = types, multiplicity = multiplicity, probe1 = probe1, which = which, remove.type = remove.type)
+}
+
 #' @rdname bipartite_projection
 #' @export
 bipartite_projection_size <- bipartite_projection_size_impl

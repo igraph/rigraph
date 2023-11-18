@@ -100,6 +100,21 @@ graphlet_basis <- function(graph, weights = NULL) {
   res
 }
 
+#' Graphlet decomposition of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graphlets.candidate.basis()` was renamed to `graphlet_basis()` to create a more
+#' consistent API.
+#' @inheritParams graphlet_basis
+#' @keywords internal
+#' @export
+graphlets.candidate.basis <- function(graph , weights = NULL) {
+   lifecycle::deprecate_soft("1.5.0", "graphlets.candidate.basis()", "graphlet_basis()")
+   graphlet_basis(graph = graph, weights = weights)
+}
+
 #' @rdname graphlet_basis
 #' @export
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
@@ -122,6 +137,21 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
   res <- .Call(R_igraph_graphlets_project, graph, weights, cliques, Mu, niter)
 
   res
+}
+
+#' Graphlet decomposition of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graphlets.project()` was renamed to `graphlet_basis()` to create a more
+#' consistent API.
+#' @inheritParams graphlet_basis
+#' @keywords internal
+#' @export
+graphlets.project <- function(graph , weights = NULL , cliques , niter = 1000 , Mu = rep(1,length(cliques))) {
+   lifecycle::deprecate_soft("1.5.0", "graphlets.project()", "graphlet_basis()")
+   graphlet_basis(graph = graph, weights = weights, cliques = cliques, niter = niter, Mu = Mu)
 }
 
 #################

@@ -52,6 +52,21 @@ console <- function() {
   invisible()
 }
 
+#' The igraph console
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.console()` was renamed to `console()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.console <- function() {
+   lifecycle::deprecate_soft("1.5.0", "igraph.console()", "console()")
+   console()
+}
+
 .igraph.pb <- NULL
 
 #' @rdname console
