@@ -1109,7 +1109,7 @@ personalized_pagerank_vs_impl <- function(graph, algo=c("prpack", "arpack"), vid
     if (algo == 0L) {
       options <- list(niter=1000, eps=0.001)
     } else if (algo == 1L) {
-      options <- arpack_defaults
+      options <- arpack_defaults()
     } else {
       options <- NULL
     }
@@ -1422,7 +1422,7 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   } else {
     weights <- NULL
   }
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1694,11 +1694,9 @@ assortativity_degree_impl <- function(graph, directed=TRUE) {
   res
 }
 
-joint_degree_matrix_impl <- function(graph, max.out.degree=-1, max.in.degree=-1, weights=NULL) {
+joint_degree_matrix_impl <- function(graph, weights=NULL, max.out.degree=-1, max.in.degree=-1) {
   # Argument checks
   ensure_igraph(graph)
-  max.out.degree <- as.numeric(max.out.degree)
-  max.in.degree <- as.numeric(max.in.degree)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1707,10 +1705,60 @@ joint_degree_matrix_impl <- function(graph, max.out.degree=-1, max.in.degree=-1,
   } else {
     weights <- NULL
   }
+  max.out.degree <- as.numeric(max.out.degree)
+  max.in.degree <- as.numeric(max.in.degree)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_joint_degree_matrix, graph, max.out.degree, max.in.degree, weights)
+  res <- .Call(R_igraph_joint_degree_matrix, graph, weights, max.out.degree, max.in.degree)
+
+  res
+}
+
+joint_degree_distribution_impl <- function(graph, weights=NULL, from.mode=c("out", "in", "all", "total"), to.mode=c("in", "out", "all", "total"), directed.neighbors=TRUE, normalized=TRUE, max.from.degree=-1, max.to.degree=-1) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  from.mode <- switch(igraph.match.arg(from.mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  to.mode <- switch(igraph.match.arg(to.mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  directed.neighbors <- as.logical(directed.neighbors)
+  normalized <- as.logical(normalized)
+  max.from.degree <- as.numeric(max.from.degree)
+  max.to.degree <- as.numeric(max.to.degree)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_joint_degree_distribution, graph, weights, from.mode, to.mode, directed.neighbors, normalized, max.from.degree, max.to.degree)
+
+  res
+}
+
+joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.types=NULL, directed=TRUE, normalized=TRUE) {
+  # Argument checks
+  ensure_igraph(graph)
+  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
+    weights <- E(graph)$weight
+  }
+  if (!is.null(weights) && any(!is.na(weights))) {
+    weights <- as.numeric(weights)
+  } else {
+    weights <- NULL
+  }
+  from.types <- as.numeric(from.types)-1L
+  to.types <- as.numeric(to.types)-1L
+  directed <- as.logical(directed)
+  normalized <- as.logical(normalized)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_joint_type_distribution, graph, weights, from.types, to.types, directed, normalized)
 
   res
 }
@@ -3687,7 +3735,7 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.ar
     "comp_arpack"=5)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3706,7 +3754,7 @@ eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options
     "comp_arpack"=5)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
-  options.tmp <- arpack_defaults; options.tmp[ names(options) ] <- options ; options <- options.tmp
+  options <- modify_list(arpack_defaults(), options)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
