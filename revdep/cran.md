@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 802 reverse dependencies (799 from CRAN + 3 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 808 reverse dependencies (805 from CRAN + 3 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 29 new problems
- * We failed to check 3 packages
+ * We saw 13 new problems
+ * We failed to check 4 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -13,24 +13,6 @@ Issues with CRAN packages are summarised below.
 * bibliometrix
   checking whether package ‘bibliometrix’ can be installed ... WARNING
   checking R code for possible problems ... NOTE
-
-* Canek
-  checking tests ... ERROR
-
-* CINNA
-  checking re-building of vignette outputs ... ERROR
-
-* countland
-  checking tests ... ERROR
-
-* DiagrammeR
-  checking tests ... ERROR
-
-* dnet
-  checking examples ... ERROR
-
-* economiccomplexity
-  checking re-building of vignette outputs ... ERROR
 
 * ggnetwork
   checking tests ... ERROR
@@ -45,53 +27,19 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* manynet
-  checking tests ... ERROR
-
 * migraph
   checking examples ... ERROR
-
-* molnet
-  checking examples ... ERROR
-
-* mwcsr
-  checking re-building of vignette outputs ... ERROR
-
-* NAIR
   checking tests ... ERROR
-
-* nat
-  checking tests ... ERROR
-
-* netcom
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* netrankr
-  checking examples ... ERROR
-  checking tests ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * nosoi
   checking re-building of vignette outputs ... ERROR
 
-* oddnet
-  checking examples ... ERROR
-
 * pcalg
   checking examples ... ERROR
-  checking tests ... ERROR
-
-* phangorn
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
 * phyloseqGraphTest
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
-
-* rags2ridges
-  checking examples ... ERROR
 
 * rgraph6
   checking re-building of vignette outputs ... ERROR
@@ -99,15 +47,15 @@ Issues with CRAN packages are summarised below.
 * riverconn
   checking re-building of vignette outputs ... ERROR
 
-* SteinerNet
+* statGraph
   checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
 
-* wpa
-  checking examples ... ERROR
+* tidygraph
+  checking tests ... ERROR
 
 ### Failed to check
 
-* ragt2ridges (NA)
-* streamDAG   (NA)
-* vivid       (NA)
+* netgsa        (NA)
+* sharp         (NA)
+* sparsebnUtils (NA)
+* streamDAG     (NA)

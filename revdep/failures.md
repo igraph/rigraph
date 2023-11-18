@@ -33,6 +33,72 @@ Run `revdepcheck::cloud_details(, "espadon")` for more info
 
 
 ```
+# netgsa
+
+<details>
+
+* Version: 4.0.5
+* GitHub: https://github.com/mikehellstern/netgsa
+* Source code: https://github.com/cran/netgsa
+* Date/Publication: 2023-11-14 14:10:06 UTC
+* Number of recursive dependencies: 111
+
+Run `revdepcheck::cloud_details(, "netgsa")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/netgsa/new/netgsa.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘netgsa/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘netgsa’ version ‘4.0.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘RCy3’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/netgsa/old/netgsa.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘netgsa/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘netgsa’ version ‘4.0.5’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘RCy3’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
 # ProjectManagement
 
 <details>
@@ -68,76 +134,6 @@ Run `revdepcheck::cloud_details(, "ProjectManagement")` for more info
 
 
 ```
-# ragt2ridges
-
-<details>
-
-* Version: 0.3.4
-* GitHub: https://github.com/wvanwie/ragt2ridges
-* Source code: https://github.com/cran/ragt2ridges
-* Date/Publication: 2020-01-28 15:30:02 UTC
-* Number of recursive dependencies: 91
-
-Run `revdepcheck::cloud_details(, "ragt2ridges")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘ragt2ridges’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘ragt2ridges’ ...
-** package ‘ragt2ridges’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c ragt2ridges.cpp -o ragt2ridges.o
-gcc -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
-g++ -std=gnu++14 -shared -L/opt/R/4.2.1/lib/R/lib -L/usr/local/lib -o ragt2ridges.so RcppExports.o ragt2ridges.o registerDynamicSymbol.o -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.2.1/lib/R/lib -lR
-installing to /tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/00LOCK-ragt2ridges/00new/ragt2ridges/libs
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: objects ‘ridgePchordal’, ‘support4ridgeP’ are not exported by 'namespace:rags2ridges'
-Execution halted
-ERROR: lazy loading failed for package ‘ragt2ridges’
-* removing ‘/tmp/workdir/ragt2ridges/new/ragt2ridges.Rcheck/ragt2ridges’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘ragt2ridges’ ...
-** package ‘ragt2ridges’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++14 -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c ragt2ridges.cpp -o ragt2ridges.o
-gcc -I"/opt/R/4.2.1/lib/R/include" -DNDEBUG  -I'/opt/R/4.2.1/lib/R/site-library/Rcpp/include' -I'/opt/R/4.2.1/lib/R/site-library/RcppArmadillo/include' -I/usr/local/include   -fpic  -g -O2  -c registerDynamicSymbol.c -o registerDynamicSymbol.o
-g++ -std=gnu++14 -shared -L/opt/R/4.2.1/lib/R/lib -L/usr/local/lib -o ragt2ridges.so RcppExports.o ragt2ridges.o registerDynamicSymbol.o -llapack -lblas -lgfortran -lm -lquadmath -L/opt/R/4.2.1/lib/R/lib -lR
-installing to /tmp/workdir/ragt2ridges/old/ragt2ridges.Rcheck/00LOCK-ragt2ridges/00new/ragt2ridges/libs
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: objects ‘ridgePchordal’, ‘support4ridgeP’ are not exported by 'namespace:rags2ridges'
-Execution halted
-ERROR: lazy loading failed for package ‘ragt2ridges’
-* removing ‘/tmp/workdir/ragt2ridges/old/ragt2ridges.Rcheck/ragt2ridges’
-
-
-```
 # ShapePattern
 
 <details>
@@ -167,6 +163,158 @@ Run `revdepcheck::cloud_details(, "ShapePattern")` for more info
 
 ```
 
+
+
+
+
+
+```
+# sharp
+
+<details>
+
+* Version: 1.4.4
+* GitHub: https://github.com/barbarabodinier/sharp
+* Source code: https://github.com/cran/sharp
+* Date/Publication: 2023-10-21 22:50:02 UTC
+* Number of recursive dependencies: 152
+
+Run `revdepcheck::cloud_details(, "sharp")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/sharp/new/sharp.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sharp/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sharp’ version ‘1.4.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- failed re-building ‘overview.Rnw’
+
+SUMMARY: processing the following file failed:
+  ‘overview.Rnw’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/sharp/old/sharp.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sharp/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sharp’ version ‘1.4.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- failed re-building ‘overview.Rnw’
+
+SUMMARY: processing the following file failed:
+  ‘overview.Rnw’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 2 NOTEs
+
+
+
+
+
+```
+# sparsebnUtils
+
+<details>
+
+* Version: 0.0.8
+* GitHub: https://github.com/itsrainingdata/sparsebnUtils
+* Source code: https://github.com/cran/sparsebnUtils
+* Date/Publication: 2021-01-27 06:30:02 UTC
+* Number of recursive dependencies: 71
+
+Run `revdepcheck::cloud_details(, "sparsebnUtils")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/sparsebnUtils/new/sparsebnUtils.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sparsebnUtils/DESCRIPTION’ ... OK
+* this is package ‘sparsebnUtils’ version ‘0.0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘RCy3’
+...
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/sparsebnUtils/old/sparsebnUtils.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sparsebnUtils/DESCRIPTION’ ... OK
+* this is package ‘sparsebnUtils’ version ‘0.0.8’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘RCy3’
+...
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 2 NOTEs
 
 
 
@@ -231,82 +379,6 @@ See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
-
-
-
-
-
-```
-# vivid
-
-<details>
-
-* Version: 0.2.8
-* GitHub: NA
-* Source code: https://github.com/cran/vivid
-* Date/Publication: 2023-07-10 22:20:02 UTC
-* Number of recursive dependencies: 212
-
-Run `revdepcheck::cloud_details(, "vivid")` for more info
-
-</details>
-
-## Error before installation
-
-### Devel
-
-```
-* using log directory ‘/tmp/workdir/vivid/new/vivid.Rcheck’
-* using R version 4.2.1 (2022-06-23)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘vivid/DESCRIPTION’ ... OK
-* this is package ‘vivid’ version ‘0.2.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... NOTE
-...
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘vividVignette.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
-
-
-
-
-
-```
-### CRAN
-
-```
-* using log directory ‘/tmp/workdir/vivid/old/vivid.Rcheck’
-* using R version 4.2.1 (2022-06-23)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using option ‘--no-manual’
-* checking for file ‘vivid/DESCRIPTION’ ... OK
-* this is package ‘vivid’ version ‘0.2.8’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... NOTE
-...
-* checking installed files from ‘inst/doc’ ... OK
-* checking files in ‘vignettes’ ... OK
-* checking examples ... OK
-* checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking running R code from vignettes ... NONE
-  ‘vividVignette.Rmd’ using ‘UTF-8’... OK
-* checking re-building of vignette outputs ... OK
-* DONE
-Status: 1 NOTE
 
 
 
