@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 808 reverse dependencies (805 from CRAN + 3 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 13 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 13 new problems
- * We failed to check 4 packages
+ * We saw 10 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -27,15 +27,8 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-* migraph
-  checking examples ... ERROR
-  checking tests ... ERROR
-
 * nosoi
   checking re-building of vignette outputs ... ERROR
-
-* pcalg
-  checking examples ... ERROR
 
 * phyloseqGraphTest
   checking examples ... ERROR
@@ -50,12 +43,3 @@ Issues with CRAN packages are summarised below.
 * statGraph
   checking examples ... ERROR
 
-* tidygraph
-  checking tests ... ERROR
-
-### Failed to check
-
-* netgsa        (NA)
-* sharp         (NA)
-* sparsebnUtils (NA)
-* streamDAG     (NA)
