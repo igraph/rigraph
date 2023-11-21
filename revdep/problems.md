@@ -278,6 +278,22 @@ Run `revdepcheck::cloud_details(, "influential")` for more info
     '::' or ':::' import not declared from: ‘lifecycle’
     ```
 
+*   checking for code/documentation mismatches ... WARNING
+    ```
+    Codoc mismatches from documentation object 'graph_from_incidence_matrix':
+    graph_from_incidence_matrix
+      Code: function(...)
+      Docs: function(incidence, directed = FALSE, mode = c("all", "out",
+                     "in", "total"), multiple = FALSE, weighted = NULL,
+                     add.names = NULL)
+      Argument names in code not in docs:
+        ...
+      Argument names in docs not in code:
+        incidence directed mode multiple weighted add.names
+      Mismatches in argument names:
+        Position: 1 Code: ... Docs: incidence
+    ```
+
 # malan
 
 <details>

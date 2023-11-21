@@ -31,6 +31,7 @@ Issues with CRAN packages are summarised below.
 
 * influential
   checking dependencies in R code ... WARNING
+  checking for code/documentation mismatches ... WARNING
 
 * malan
   checking examples ... ERROR
