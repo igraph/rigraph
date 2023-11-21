@@ -138,7 +138,7 @@ reference:
 - subtitle: Bipartite graphs
 - contents:
   - has_concept("bipartite")
-  - has_concept("incidence")
+  - has_concept("biadjacency")
 - subtitle: Efficiency
 - contents:
   - has_concept("efficiency")

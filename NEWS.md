@@ -1,5 +1,35 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9002
+
+## Chore
+
+  - Update results (#968).
+
+
+# igraph 1.5.99.9001
+
+## Bug fixes
+
+  - Fix calls to `isSymmetric()` for matrix objects with a class (#965).
+
+## Chore
+
+  - Consistent check for `arpack_defaults` vs. `arpack_defaults()` (#966).
+
+  - Update revdepcheck results.
+
+  - Rerun sanitizer checks with progress reporter in case of failure (#964).
+
+  - Sync GraphML reader.
+
+  - Sync flex-generated line numbers.
+
+## Testing
+
+  - Clean up tests (#967).
+
+
 # igraph 1.5.99.9000
 
 ## Chore

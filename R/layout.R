@@ -270,7 +270,7 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' @examples
 #' # Random bipartite graph
 #' inc <- matrix(sample(0:1, 50, replace = TRUE, prob = c(2, 1)), 10, 5)
-#' g <- graph_from_incidence_matrix(inc)
+#' g <- graph_from_biadjacency_matrix(inc)
 #' plot(g,
 #'   layout = layout_as_bipartite,
 #'   vertex.color = c("green", "cyan")[V(g)$type + 1]

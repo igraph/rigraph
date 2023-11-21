@@ -84,7 +84,7 @@ rownames(M) <- c("Alice", "Bob", "Cecil", "Dan", "Ethel")
 colnames(M) <- c("Party", "Skiing", "Badminton")
 M[] <- sample(0:1, length(M), replace = TRUE)
 M
-g2 <- graph_from_incidence_matrix(M)
+g2 <- graph_from_biadjacency_matrix(M)
 g2$name <- "Event network"
 proj2 <- bipartite_projection(g2)
 print(proj2[[1]], g = TRUE, e = TRUE)
