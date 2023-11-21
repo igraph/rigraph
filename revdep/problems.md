@@ -135,7 +135,7 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 * GitHub: https://github.com/asalavaty/influential
 * Source code: https://github.com/cran/influential
 * Date/Publication: 2023-11-19 05:10:02 UTC
-* Number of recursive dependencies: 189
+* Number of recursive dependencies: 196
 
 Run `revdepcheck::cloud_details(, "influential")` for more info
 
@@ -146,6 +146,22 @@ Run `revdepcheck::cloud_details(, "influential")` for more info
 *   checking dependencies in R code ... WARNING
     ```
     '::' or ':::' import not declared from: ‘lifecycle’
+    ```
+
+*   checking for code/documentation mismatches ... WARNING
+    ```
+    Codoc mismatches from documentation object 'graph_from_incidence_matrix':
+    graph_from_incidence_matrix
+      Code: function(...)
+      Docs: function(incidence, directed = FALSE, mode = c("all", "out",
+                     "in", "total"), multiple = FALSE, weighted = NULL,
+                     add.names = NULL)
+      Argument names in code not in docs:
+        ...
+      Argument names in docs not in code:
+        incidence directed mode multiple weighted add.names
+      Mismatches in argument names:
+        Position: 1 Code: ... Docs: incidence
     ```
 
 # malan

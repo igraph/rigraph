@@ -1,6 +1,6 @@
 ## revdepcheck results
 
-We checked 13 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 10 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
  * We saw 10 new problems
  * We failed to check 0 packages
@@ -22,6 +22,7 @@ Issues with CRAN packages are summarised below.
 
 * influential
   checking dependencies in R code ... WARNING
+  checking for code/documentation mismatches ... WARNING
 
 * malan
   checking examples ... ERROR
