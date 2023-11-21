@@ -85,6 +85,9 @@
     <loc>https://r.igraph.org/reference/as_adjacency_matrix.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/as_biadjacency_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/as_edgelist.html</loc>
   </url>
   <url>
@@ -388,6 +391,9 @@
     <loc>https://r.igraph.org/reference/fit_power_law.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/from_incidence_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/get.edge.ids.html</loc>
   </url>
   <url>
@@ -419,6 +425,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph_from_atlas.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph_from_biadjacency_matrix.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph_from_data_frame.html</loc>

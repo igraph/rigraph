@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.99.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.99.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1092,6 +1092,11 @@ adding/removing edges</dd>
         <dd>Convert a graph to an adjacency matrix</dd>
       </dl><dl><dt>
           
+          <code><a href="as_biadjacency_matrix.html">as_biadjacency_matrix()</a></code> 
+        </dt>
+        <dd>Bipartite adjacency matrix of a bipartite graph</dd>
+      </dl><dl><dt>
+          
           <code><a href="as_edgelist.html">as_edgelist()</a></code> 
         </dt>
         <dd>Convert a graph to an edge list</dd>
@@ -1102,11 +1107,6 @@ adding/removing edges</dd>
         <dd>Convert igraph graphs to graphNEL objects from the graph package</dd>
       </dl><dl><dt>
           
-          <code><a href="as_incidence_matrix.html">as_incidence_matrix()</a></code> 
-        </dt>
-        <dd>Incidence matrix of a bipartite graph</dd>
-      </dl><dl><dt>
-          
           <code><a href="as_long_data_frame.html">as_long_data_frame()</a></code> 
         </dt>
         <dd>Convert a graph to a long data frame</dd>
@@ -1115,6 +1115,11 @@ adding/removing edges</dd>
           <code><a href="graph_from_adj_list.html">graph_from_adj_list()</a></code> 
         </dt>
         <dd>Create graphs from adjacency lists</dd>
+      </dl><dl><dt>
+          
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code> 
+        </dt>
+        <dd>Creating igraph graphs from data frames or vice-versa</dd>
       </dl><dl><dt>
           
           <code><a href="graph_from_graphnel.html">graph_from_graphnel()</a></code> 
@@ -1496,9 +1501,14 @@ adding/removing edges</dd>
         <dd>Create a bipartite graph</dd>
       </dl><dl><dt>
           
-          <code><a href="graph_from_incidence_matrix.html">graph_from_incidence_matrix()</a></code> <code><a href="graph_from_incidence_matrix.html">from_incidence_matrix()</a></code> 
+          <code><a href="graph_from_biadjacency_matrix.html">graph_from_biadjacency_matrix()</a></code> 
         </dt>
-        <dd>Create graphs from an incidence matrix</dd>
+        <dd>Create graphs from a bipartite adjacency matrix</dd>
+      </dl><dl><dt>
+          
+          <code><a href="graph_from_data_frame.html">as_data_frame()</a></code> <code><a href="graph_from_data_frame.html">graph_from_data_frame()</a></code> <code><a href="graph_from_data_frame.html">from_data_frame()</a></code> 
+        </dt>
+        <dd>Creating igraph graphs from data frames or vice-versa</dd>
       </dl></div><div class="section level2">
       
       <h3 id="efficiency">Efficiency<a class="anchor" aria-label="anchor" href="#efficiency"></a></h3>
