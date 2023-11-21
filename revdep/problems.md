@@ -261,10 +261,10 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 
 <details>
 
-* Version: 2.2.7
+* Version: 2.2.8
 * GitHub: https://github.com/asalavaty/influential
 * Source code: https://github.com/cran/influential
-* Date/Publication: 2023-05-16 05:10:02 UTC
+* Date/Publication: 2023-11-19 05:10:02 UTC
 * Number of recursive dependencies: 196
 
 Run `revdepcheck::cloud_details(, "influential")` for more info
@@ -398,7 +398,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 0 | SKIP 10 | PASS 303 ]
+      [ FAIL 1 | WARN 2 | SKIP 10 | PASS 303 ]
       Error: Test failures
       Execution halted
     ```
@@ -436,44 +436,24 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
     Running examples in ‘migraph-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: eigenv_centrality
-    > ### Title: Measures of eigenvector-like centrality and centralisation
-    > ### Aliases: eigenv_centrality node_eigenvector node_power node_alpha
-    > ###   node_pagerank network_eigenvector tie_eigenvector
+    > ### Name: features
+    > ### Title: Measures of network topological features
+    > ### Aliases: features network_core network_richclub network_factions
+    > ###   network_modularity network_smallworld network_scalefree
+    > ###   network_balance
     > 
     > ### ** Examples
-    > 
-    > node_eigenvector(mpn_elite_mex)
-    Warning in is(eval_try, "function") && as.character(options_value) == "arpack_defaults" :
-      'length(x) = 3 > 1' in coercion to 'logical(1)'
-    Error in utils::modifyList(x, y) : is.list(val) is not TRUE
-    Calls: node_eigenvector ... eigenvector_centrality_impl -> modify_list -> <Anonymous> -> stopifnot
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(manynet)
-      > library(migraph)
-      
-      Attaching package: 'migraph'
-      
-      The following objects are masked from 'package:manynet':
     ...
-        5.   └─migraph::node_eigenvector(edge_adj, normalized = normalized)
-        6.     └─igraph::eigen_centrality(...)
-        7.       └─igraph:::eigenvector_centrality_impl(...)
-        8.         └─igraph:::modify_list(arpack_defaults(), options)
-        9.           └─utils::modifyList(x, y)
-       10.             └─base::stopifnot(is.list(x), is.list(val))
-      
-      [ FAIL 4 | WARN 4 | SKIP 0 | PASS 270 ]
-      Error: Test failures
-      Execution halted
+    [1] -0.458
+    > network_smallworld(ison_brandes)
+    [1] NaN
+    > network_smallworld(ison_southern_women)
+    [1] -1.03
+    > network_scalefree(ison_adolescents)
+    Error in if (out$KS.p < 0.05) cat(paste("Note: Kolgomorov-Smirnov test that data",  : 
+      argument is of length zero
+    Calls: network_scalefree
+    Execution halted
     ```
 
 # molnet
@@ -545,10 +525,10 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 1219 ]
       Error: Test failures
       In addition: Warning messages:
-      1: In for (i in seq_len(n)) { :
-        closing unused connection 5 (/tmp/RtmpJoxdQ9/c.rds)
-      2: In for (i in seq_len(n)) { :
-        closing unused connection 4 (/tmp/RtmpJoxdQ9/b.rds)
+      1: In for (nme in names(lhs)) { :
+        closing unused connection 5 (/tmp/Rtmpy16DKG/c.rds)
+      2: In for (nme in names(lhs)) { :
+        closing unused connection 4 (/tmp/Rtmpy16DKG/b.rds)
       Execution halted
     ```
 
@@ -758,31 +738,6 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
 </details>
 
 ## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘pcalg-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: pc
-    > ### Title: Estimate the Equivalence Class of a DAG using the PC Algorithm
-    > ### Aliases: pc
-    > ### Keywords: multivariate models graphs
-    > 
-    > ### ** Examples
-    > 
-    ...
-    Order=3; remaining edges:16
-    
-    Rule 1': 1 -> 6  and  6 - 7  where  1  and  7  not connected and  1 6 7  faithful triple:  6 -> 7 
-    > 
-    > ## due to sampling error, some edges were overwritten:
-    > isValidGraph(as(pc.fit, "amat"), type = "cpdag")
-    Error in UseMethod("isSymmetric") : 
-      no applicable method for 'isSymmetric' applied to an object of class "amat"
-    Calls: isValidGraph ... ensure_igraph -> graph.adjacency -> is_symmetric -> isSymmetric
-    Execution halted
-    ```
 
 *   checking tests ... ERROR
     ```
@@ -1025,46 +980,5 @@ Run `revdepcheck::cloud_details(, "statGraph")` for more info
       object of type 'closure' is not subsettable
     Calls: tang.test -> t.embed.graph
     Execution halted
-    ```
-
-# tidygraph
-
-<details>
-
-* Version: 1.2.3
-* GitHub: https://github.com/thomasp85/tidygraph
-* Source code: https://github.com/cran/tidygraph
-* Date/Publication: 2023-02-01 21:10:02 UTC
-* Number of recursive dependencies: 82
-
-Run `revdepcheck::cloud_details(, "tidygraph")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(tidygraph)
-      
-      Attaching package: 'tidygraph'
-      
-      The following object is masked from 'package:testthat':
-      
-    ...
-       22. │   └─igraph:::modify_list(arpack_defaults(), options)
-       23. │     └─utils::modifyList(x, y)
-       24. │       └─base::stopifnot(is.list(x), is.list(val))
-       25. │         └─base::stop(simpleError(msg, call = if (p <- sys.parent(1L)) sys.call(p)))
-       26. └─dplyr (local) `<fn>`(`<smplErrr>`)
-       27.   └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
-      
-      [ FAIL 5 | WARN 2 | SKIP 0 | PASS 270 ]
-      Error: Test failures
-      Execution halted
     ```
 
