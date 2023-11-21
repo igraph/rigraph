@@ -801,10 +801,10 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 
 
 
-#' Incidence matrix of a bipartite graph
+#' Bipartite adjacency matrix of a bipartite graph
 #'
-#' This function can return a sparse or dense incidence matrix of a bipartite
-#' network. The incidence matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n}
+#' This function can return a sparse or dense bipartite adjacency matrix of a bipartite
+#' network. The bipartite adjacency matrix is an \eqn{n} times \eqn{m} matrix, \eqn{n}
 #' and \eqn{m} are the number of vertices of the two kinds.
 #'
 #' Bipartite graphs have a `type` vertex attribute in igraph, this is
@@ -818,9 +818,9 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #'   `type` vertex attribute. You must supply this argument if the graph has
 #'   no `type` vertex attribute.
 #' @param attr Either `NULL` or a character string giving an edge
-#'   attribute name. If `NULL`, then a traditional incidence matrix is
+#'   attribute name. If `NULL`, then a traditional bipartite adjacency matrix is
 #'   returned. If not `NULL` then the values of the given edge attribute are
-#'   included in the incidence matrix. If the graph has multiple edges, the edge
+#'   included in the bipartite adjacency matrix. If the graph has multiple edges, the edge
 #'   attribute of an arbitrarily chosen edge (for the multiple edges) is
 #'   included.
 #' @param names Logical scalar, if `TRUE` and the vertices in the graph
@@ -831,16 +831,20 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #'   created, you will need the `Matrix` package for this.
 #' @return A sparse or dense matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [graph_from_incidence_matrix()] for the opposite operation.
+#' @seealso [graph_from_biadjacency_matrix()] for the opposite operation.
 #' @family conversion
 #' @export
 #' @keywords graphs
+#' @details
+#' Some authors refer to the bipartite adjacency matrix as the
+#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
+#' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @examples
 #'
 #' g <- make_bipartite_graph(c(0, 1, 0, 1, 0, 0), c(1, 2, 2, 3, 3, 4))
-#' as_incidence_matrix(g)
+#' as_biadjacency_matrix(g)
 #'
-as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
+as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
                                 names = TRUE, sparse = FALSE) {
   # Argument checks
   ensure_igraph(graph)
@@ -855,11 +859,30 @@ as_incidence_matrix <- function(graph, types = NULL, attr = NULL,
     get.incidence.dense(graph, types = types, names = names, attr = attr)
   }
 }
-
+#' As incidence matrix
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `as_incidence_matrix()` was renamed to `as_biadjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams as_biadjacency_matrix
+#' @keywords internal
+#' @details
+#' Some authors refer to the bipartite adjacency matrix as the
+#' "bipartite incidence matrix". igraph 1.6.0 and later does not use
+#' this naming to avoid confusion with the edge-vertex incidence matrix.
+#' @export
+as_incidence_matrix <- function(...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "as_incidence_matrix()", "as_biadjacency_matrix()")
+   as_biadjacency_matrix(...)
+} # nocov end
 #' @rdname graph_from_data_frame
 #' @param x An igraph object.
 #' @param what Character constant, whether to return info about vertices,
 #'   edges, or both. The default is \sQuote{edges}.
+#' @family conversion
+#' @family biadjacency
 #' @export
 as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   ensure_igraph(x)
