@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9003
+
+## Features
+
+  - Change "incidence matrix" naming to "biadjacency matrix" (#962).
+
+## Chore
+
+  - Updated revdepcheck results.
+
+
 # igraph 1.5.99.9002
 
 ## Chore
