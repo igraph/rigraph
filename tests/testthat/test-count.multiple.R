@@ -25,10 +25,10 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
 
 
   ## Direction of the edge is important
-  expect_false(any_multiple(graph(c(1, 2, 2, 1))))
-  expect_that(which_multiple(graph(c(1, 2, 2, 1))), equals(c(FALSE, FALSE)))
+  expect_false(any_multiple(make_graph(c(1, 2, 2, 1))))
+  expect_that(which_multiple(make_graph(c(1, 2, 2, 1))), equals(c(FALSE, FALSE)))
   expect_that(
-    which_multiple(graph(c(1, 2, 2, 1), dir = FALSE)),
+    which_multiple(make_graph(c(1, 2, 2, 1), dir = FALSE)),
     equals(c(FALSE, TRUE))
   )
 
