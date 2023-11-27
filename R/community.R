@@ -2424,21 +2424,6 @@ plot_dendrogram.communities <- function(x,
   }
 }
 
-#' Community structure dendrogram plots
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' `dendPlot.communities()` was renamed to `plot_dendrogram.communities()` to create a more
-#' consistent API.
-#' @inheritParams plot_dendrogram.communities
-#' @keywords internal
-#' @export
-dendPlot.communities <- function(x , mode = igraph_opt("dend.plot.type") , ... , use.modularity = FALSE , palette = categorical_pal(8)) { # nocov start
-   lifecycle::deprecate_soft("1.6.0", "dendPlot.communities()", "plot_dendrogram.communities()")
-   plot_dendrogram.communities(x = x, mode = mode, use.modularity = use.modularity, palette = palette, ...)
-} # nocov end
-
 #' @importFrom grDevices palette
 #' @importFrom graphics plot
 #' @importFrom stats rect.hclust
