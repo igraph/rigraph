@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{predict_edges}
 \alias{predict_edges}
-\alias{hrg.predict}
 \title{Predict edges based on a hierarchical random graph model}
 \usage{
 predict_edges(

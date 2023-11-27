@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{decompose}
 \alias{decompose}
-\alias{decompose.graph}
 \title{Decompose a graph into components}
 \usage{
 decompose(graph, mode = c("weak", "strong"), max.comps = NA, min.vertices = 0)

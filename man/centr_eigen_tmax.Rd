@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_eigen_tmax}
 \alias{centr_eigen_tmax}
-\alias{centralization.evcent.tmax}
 \title{Theoretical maximum for betweenness centralization}
 \usage{
 centr_eigen_tmax(graph = NULL, nodes = 0, directed = FALSE, scale = TRUE)

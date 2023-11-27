@@ -164,7 +164,6 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #' defined in the \sQuote{`Matrix`} package, if `sparse` if
 #' `TRUE`.
 #'
-#' @aliases get.adjacency
 #' @param graph The graph to convert.
 #' @param type Gives how to create the adjacency matrix for undirected graphs.
 #'   It is ignored for directed graphs. Possible values: `upper`: the upper
@@ -221,6 +220,21 @@ as_adjacency_matrix <- function(graph, type = c("both", "upper", "lower"),
   }
 }
 
+#' Convert a graph to an adjacency matrix
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.adjacency()` was renamed to `as_adjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams as_adjacency_matrix
+#' @keywords internal
+#' @export
+get.adjacency <- function(graph , type = c("both","upper","lower") , attr = NULL , edges = FALSE , names = TRUE , sparse = igraph_opt("sparsematrices")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.adjacency()", "as_adjacency_matrix()")
+   as_adjacency_matrix(graph = graph, type = type, attr = attr, edges = edges, names = names, sparse = sparse)
+} # nocov end
+
 #' @export
 #' @rdname as_adjacency_matrix
 as_adj <- as_adjacency_matrix
@@ -232,7 +246,6 @@ as_adj <- as_adjacency_matrix
 #'
 #' `as_edgelist()` returns the list of edges in a graph.
 #'
-#' @aliases get.edgelist
 #' @param graph The graph to convert.
 #' @param names Whether to return a character matrix containing vertex
 #'   names (i.e. the `name` vertex attribute) if they exist or numeric
@@ -263,6 +276,21 @@ as_edgelist <- function(graph, names = TRUE) {
 
   res
 }
+
+#' Convert a graph to an edge list
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.edgelist()` was renamed to `as_edgelist()` to create a more
+#' consistent API.
+#' @inheritParams as_edgelist
+#' @keywords internal
+#' @export
+get.edgelist <- function(graph , names = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.edgelist()", "as_edgelist()")
+   as_edgelist(graph = graph, names = names)
+} # nocov end
 
 
 
@@ -385,7 +413,6 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
 #' ids of adjacent edges (according to the `mode` argument) of all
 #' vertices.
 #'
-#' @aliases get.adjedgelist
 #' @param graph The input graph.
 #' @param mode Character scalar, it gives what kind of adjacent edges/vertices
 #'   to include in the lists. \sQuote{`out`} is for outgoing edges/vertices,
@@ -448,8 +475,22 @@ as_adj_list <- function(graph,
   res
 }
 
+#' Adjacency lists
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.adjlist()` was renamed to `as_adj_list()` to create a more
+#' consistent API.
+#' @inheritParams as_adj_list
+#' @keywords internal
+#' @export
+get.adjlist <- function(graph , mode = c("all","out","in","total") , loops = c("twice","once","ignore") , multiple = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.adjlist()", "as_adj_list()")
+   as_adj_list(graph = graph, mode = mode, loops = loops, multiple = multiple)
+} # nocov end
+
 #' @rdname as_adj_list
-#' @aliases get.adjlist
 #' @export
 as_adj_edge_list <- function(graph,
                              mode = c("all", "out", "in", "total"),
@@ -481,6 +522,21 @@ as_adj_edge_list <- function(graph,
   res
 }
 
+#' Adjacency lists
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.adjedgelist()` was renamed to `as_adj_edge_list()` to create a more
+#' consistent API.
+#' @inheritParams as_adj_edge_list
+#' @keywords internal
+#' @export
+get.adjedgelist <- function(graph , mode = c("all","out","in","total") , loops = c("twice","once","ignore")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.adjedgelist()", "as_adj_edge_list()")
+   as_adj_edge_list(graph = graph, mode = mode, loops = loops)
+} # nocov end
+
 #' Convert graphNEL objects from the graph package to igraph
 #'
 #' The graphNEL class is defined in the `graph` package, it is another
@@ -495,7 +551,6 @@ as_adj_edge_list <- function(graph,
 #' attributes of the multiple edges are lost: they are all replaced by the
 #' attributes of the first of the multiple edges.
 #'
-#' @aliases igraph.from.graphNEL
 #' @param graphNEL The graphNEL graph.
 #' @param name Logical scalar, whether to add graphNEL vertex names as an
 #'   igraph vertex attribute called \sQuote{`name`}.
@@ -584,6 +639,21 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
   g
 }
 
+#' Convert graphNEL objects from the graph package to igraph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.from.graphNEL()` was renamed to `graph_from_graphnel()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_graphnel
+#' @keywords internal
+#' @export
+igraph.from.graphNEL <- function(graphNEL , name = TRUE , weight = TRUE , unlist.attrs = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraph.from.graphNEL()", "graph_from_graphnel()")
+   graph_from_graphnel(graphNEL = graphNEL, name = name, weight = weight, unlist.attrs = unlist.attrs)
+} # nocov end
+
 #' Convert igraph graphs to graphNEL objects from the graph package
 #'
 #' The graphNEL class is defined in the `graph` package, it is another
@@ -596,7 +666,6 @@ graph_from_graphnel <- function(graphNEL, name = TRUE, weight = TRUE,
 #' vertex names in the graphNEL graph. Otherwise numeric igraph vertex ids
 #' will be used for this purpose.
 #'
-#' @aliases igraph.to.graphNEL
 #' @param graph An igraph graph object.
 #' @return `as_graphnel()` returns a graphNEL graph object.
 #' @seealso [graph_from_graphnel()] for the other direction,
@@ -700,6 +769,21 @@ as_graphnel <- function(graph) {
 
   res
 }
+
+#' Convert igraph graphs to graphNEL objects from the graph package
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.to.graphNEL()` was renamed to `as_graphnel()` to create a more
+#' consistent API.
+#' @inheritParams as_graphnel
+#' @keywords internal
+#' @export
+igraph.to.graphNEL <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraph.to.graphNEL()", "as_graphnel()")
+   as_graphnel(graph = graph)
+} # nocov end
 
 get.incidence.dense <- function(graph, types, names, attr) {
   if (is.null(attr)) {
@@ -811,7 +895,6 @@ get.incidence.sparse <- function(graph, types, names, attr) {
 #' boolean and `FALSE` for the vertices of the first kind and `TRUE`
 #' for vertices of the second kind.
 #'
-#' @aliases get.incidence
 #' @param graph The input graph. The direction of the edges is ignored in
 #'   directed graphs.
 #' @param types An optional vertex type vector to use instead of the
@@ -859,6 +942,21 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
     get.incidence.dense(graph, types = types, names = names, attr = attr)
   }
 }
+
+#' Bipartite adjacency matrix of a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.incidence()` was renamed to `as_biadjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams as_biadjacency_matrix
+#' @keywords internal
+#' @export
+get.incidence <- function(graph , types = NULL , attr = NULL , names = TRUE , sparse = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.incidence()", "as_biadjacency_matrix()")
+   as_biadjacency_matrix(graph = graph, types = types, attr = attr, names = names, sparse = sparse)
+} # nocov end
 #' As incidence matrix
 #'
 #' @description
@@ -918,6 +1016,21 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
   }
 }
 
+#' Creating igraph graphs from data frames or vice-versa
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.data.frame()` was renamed to `as_data_frame()` to create a more
+#' consistent API.
+#' @inheritParams as_data_frame
+#' @keywords internal
+#' @export
+get.data.frame <- function(x , what = c("edges","vertices","both")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.data.frame()", "as_data_frame()")
+   as_data_frame(x = x, what = what)
+} # nocov end
+
 
 #' Create graphs from adjacency lists
 #'
@@ -932,7 +1045,6 @@ as_data_frame <- function(x, what = c("edges", "vertices", "both")) {
 #' [as_adj_list()], do your modifications to the graphs and finally
 #' create again an igraph graph by calling `graph_from_adj_list()`.
 #'
-#' @aliases graph.adjlist
 #' @param adjlist The adjacency list. It should be consistent, i.e. the maximum
 #'   throughout all vectors in the list must be less than the number of vectors
 #'   (=the number of vertices in the graph).

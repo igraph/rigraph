@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_gem}
 \alias{layout_with_gem}
-\alias{layout.gem}
 \alias{with_gem}
 \title{The GEM layout algorithm}
 \usage{

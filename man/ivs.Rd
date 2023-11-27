@@ -2,10 +2,6 @@
 % Please edit documentation in R/cliques.R
 \name{ivs}
 \alias{ivs}
-\alias{independent.vertex.sets}
-\alias{largest.independent.vertex.sets}
-\alias{maximal.independent.vertex.sets}
-\alias{independence.number}
 \alias{largest_ivs}
 \alias{maximal_ivs}
 \alias{ivs_size}

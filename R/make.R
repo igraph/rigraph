@@ -506,7 +506,6 @@ with_graph_ <- function(...) {
 #'     groups, Journal of Anthropological Research 33, 452-473 (1977).  } }
 #'
 #' @encoding UTF-8
-#' @aliases graph.famous graph
 #' @param edges A vector defining the edges, the first edge points
 #'   from the first element to the second, the second edge from the third
 #'   to the fourth, etc. For a numeric vector, these are interpreted
@@ -644,6 +643,36 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
   }
 }
 
+#' Create an igraph graph from a list of edges, or a notable graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph()` was renamed to `make_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_graph
+#' @keywords internal
+#' @export
+graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph()", "make_graph()")
+   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, dir = dir, simplify = simplify, ...)
+} # nocov end
+
+#' Create an igraph graph from a list of edges, or a notable graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.famous()` was renamed to `make_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_graph
+#' @keywords internal
+#' @export
+graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.famous()", "make_graph()")
+   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, dir = dir, simplify = simplify, ...)
+} # nocov end
+
 make_famous_graph <- function(name) {
   name <- gsub("\\s", "_", name)
 
@@ -687,7 +716,6 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 
 #' A graph with no edges
 #'
-#' @aliases graph.empty
 #' @concept Empty graph.
 #' @param n Number of vertices.
 #' @param directed Whether to create a directed graph.
@@ -717,6 +745,21 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
 
   res
 }
+
+#' A graph with no edges
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.empty()` was renamed to `make_empty_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_empty_graph
+#' @keywords internal
+#' @export
+graph.empty <- function(n = 0 , directed = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.empty()", "make_empty_graph()")
+   make_empty_graph(n = n, directed = directed)
+} # nocov end
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
@@ -797,7 +840,6 @@ empty_graph <- function(...) constructor_spec(make_empty_graph, ...)
 #'
 #' See more examples below.
 #'
-#' @aliases graph.formula
 #' @param ... For `graph_from_literal()` the formulae giving the
 #'   structure of the graph, see details below. For `from_literal()`
 #'   all arguments are passed to `graph_from_literal()`.
@@ -845,6 +887,21 @@ graph_from_literal <- function(..., simplify = TRUE) {
   mf <- as.list(match.call())[-1]
   graph_from_literal_i(mf)
 }
+
+#' Creating (small) graphs via a simple interface
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.formula()` was renamed to `graph_from_literal()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_literal
+#' @keywords internal
+#' @export
+graph.formula <- function(... , simplify = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.formula()", "graph_from_literal()")
+   graph_from_literal(simplify = simplify, ...)
+} # nocov end
 
 graph_from_literal_i <- function(mf) {
   ## In case 'simplify' is given
@@ -959,7 +1016,6 @@ from_literal <- function(...) {
 #' `star()` creates a star graph, in this every single vertex is
 #' connected to the center vertex and nobody else.
 #'
-#' @aliases graph.star
 #' @concept Star graph
 #' @param n Number of vertices.
 #' @param mode It defines the direction of the
@@ -1002,6 +1058,21 @@ make_star <- function(n, mode = c("in", "out", "mutual", "undirected"),
   res
 }
 
+#' Create a star graph, a tree with n vertices and n - 1 leaves
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.star()` was renamed to `make_star()` to create a more
+#' consistent API.
+#' @inheritParams make_star
+#' @keywords internal
+#' @export
+graph.star <- function(n , mode = c("in","out","mutual","undirected") , center = 1) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.star()", "make_star()")
+   make_star(n = n, mode = mode, center = center)
+} # nocov end
+
 #' @rdname make_star
 #' @param ... Passed to `make_star()`.
 #' @export
@@ -1011,7 +1082,6 @@ star <- function(...) constructor_spec(make_star, ...)
 
 #' Create a full graph
 #'
-#' @aliases graph.full
 #' @concept Full graph
 #' @param n Number of vertices.
 #' @param directed Whether to create a directed graph.
@@ -1036,6 +1106,21 @@ make_full_graph <- function(n, directed = FALSE, loops = FALSE) {
   res
 }
 
+#' Create a full graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full()` was renamed to `make_full_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_graph
+#' @keywords internal
+#' @export
+graph.full <- function(n , directed = FALSE , loops = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.full()", "make_full_graph()")
+   make_full_graph(n = n, directed = directed, loops = loops)
+} # nocov end
+
 #' @rdname make_full_graph
 #' @param ... Passed to `make_full_graph()`.
 #' @export
@@ -1051,7 +1136,6 @@ full_graph <- function(...) constructor_spec(make_full_graph, ...)
 #' `length` and `dim`. In the second form you omit
 #' `dimvector` and supply `length` and `dim`.
 #'
-#' @aliases graph.lattice
 #' @concept Lattice
 #' @param dimvector A vector giving the size of the lattice in each
 #'   dimension.
@@ -1100,6 +1184,21 @@ make_lattice <- function(dimvector = NULL, length = NULL, dim = NULL,
   res
 }
 
+#' Create a lattice graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.lattice()` was renamed to `make_lattice()` to create a more
+#' consistent API.
+#' @inheritParams make_lattice
+#' @keywords internal
+#' @export
+graph.lattice <- function(dimvector = NULL , length = NULL , dim = NULL , nei = 1 , directed = FALSE , mutual = FALSE , circular = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.lattice()", "make_lattice()")
+   make_lattice(dimvector = dimvector, length = length, dim = dim, nei = nei, directed = directed, mutual = mutual, circular = circular)
+} # nocov end
+
 #' @rdname make_lattice
 #' @param ... Passed to `make_lattice()`.
 #' @export
@@ -1112,7 +1211,6 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' A ring is a one-dimensional lattice and this function is a special case
 #' of [make_lattice()].
 #'
-#' @aliases graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -1141,6 +1239,21 @@ make_ring <- function(n, directed = FALSE, mutual = FALSE, circular = TRUE) {
   res
 }
 
+#' Create a ring graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.ring()` was renamed to `make_ring()` to create a more
+#' consistent API.
+#' @inheritParams make_ring
+#' @keywords internal
+#' @export
+graph.ring <- function(n , directed = FALSE , mutual = FALSE , circular = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.ring()", "make_ring()")
+   make_ring(n = n, directed = directed, mutual = mutual, circular = circular)
+} # nocov end
+
 #' @rdname make_ring
 #' @param ... Passed to `make_ring()`.
 #' @export
@@ -1153,7 +1266,6 @@ ring <- function(...) constructor_spec(make_ring, ...)
 #' Create a k-ary tree graph, where almost all vertices other than the leaves
 #' have the same number of children.
 #'
-#' @aliases graph.tree
 #' @concept Trees.
 #' @param n Number of vertices.
 #' @param children Integer scalar, the number of children of a vertex
@@ -1190,6 +1302,21 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
   }
   res
 }
+
+#' Create tree graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.tree()` was renamed to `make_tree()` to create a more
+#' consistent API.
+#' @inheritParams make_tree
+#' @keywords internal
+#' @export
+graph.tree <- function(n , children = 2 , mode = c("out","in","undirected")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.tree()", "make_tree()")
+   make_tree(n = n, children = children, mode = mode)
+} # nocov end
 
 #' Sample trees randomly and uniformly
 #'
@@ -1275,7 +1402,6 @@ from_prufer <- function(...) constructor_spec(make_from_prufer, ...)
 #'      automorphisms.
 #' }
 #'
-#' @aliases graph.atlas
 #' @concept Graph Atlas.
 #' @param n The id of the graph to create.
 #' @return An igraph graph.
@@ -1295,6 +1421,21 @@ graph_from_atlas <- function(n) {
   }
   res
 }
+
+#' Create a graph from the Graph Atlas
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.atlas()` was renamed to `graph_from_atlas()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_atlas
+#' @keywords internal
+#' @export
+graph.atlas <- function(n) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.atlas()", "graph_from_atlas()")
+   graph_from_atlas(n = n)
+} # nocov end
 
 #' @rdname graph_from_atlas
 #' @param ... Passed to `graph_from_atlas()`.
@@ -1317,7 +1458,6 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 #' of total nodes. See also Kotsis, G: Interconnection Topologies for
 #' Parallel Processing Systems, PARS Mitteilungen 11, 1-6, 1993.
 #'
-#' @aliases graph.extended.chordal.ring
 #' @param n The number of vertices.
 #' @param w A matrix which specifies the extended chordal ring. See
 #'   details below.
@@ -1344,6 +1484,21 @@ make_chordal_ring <- function(n, w, directed = FALSE) {
   res
 }
 
+#' Create an extended chordal ring graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.extended.chordal.ring()` was renamed to `make_chordal_ring()` to create a more
+#' consistent API.
+#' @inheritParams make_chordal_ring
+#' @keywords internal
+#' @export
+graph.extended.chordal.ring <- function(n , w , directed = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.extended.chordal.ring()", "make_chordal_ring()")
+   make_chordal_ring(n = n, w = w, directed = directed)
+} # nocov end
+
 #' @rdname make_chordal_ring
 #' @param ... Passed to `make_chordal_ring()`.
 #' @export
@@ -1366,7 +1521,6 @@ chordal_ring <- function(...) constructor_spec(make_chordal_ring, ...)
 #' the first vertex's corresponding edge is the same as the source of the
 #' second vertex's corresponding edge.
 #'
-#' @aliases line.graph
 #' @param graph The input graph, it can be directed or undirected.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version of
@@ -1391,6 +1545,21 @@ make_line_graph <- function(graph) {
   }
   res
 }
+
+#' Line graph of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `line.graph()` was renamed to `make_line_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_line_graph
+#' @keywords internal
+#' @export
+line.graph <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "line.graph()", "make_line_graph()")
+   make_line_graph(graph = graph)
+} # nocov end
 
 #' @rdname make_line_graph
 #' @param ... Passed to `make_line_graph()`.
@@ -1417,7 +1586,6 @@ line_graph <- function(...) constructor_spec(make_line_graph, ...)
 #' De Bruijn graphs have some interesting properties, please see another
 #' source, e.g. Wikipedia for details.
 #'
-#' @aliases graph.de.bruijn
 #' @param m Integer scalar, the size of the alphabet. See details below.
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
@@ -1442,6 +1610,21 @@ make_de_bruijn_graph <- function(m, n) {
   res
 }
 
+#' De Bruijn graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.de.bruijn()` was renamed to `make_de_bruijn_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_de_bruijn_graph
+#' @keywords internal
+#' @export
+graph.de.bruijn <- function(m , n) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.de.bruijn()", "make_de_bruijn_graph()")
+   make_de_bruijn_graph(m = m, n = n)
+} # nocov end
+
 #' @rdname make_de_bruijn_graph
 #' @param ... Passed to `make_de_bruijn_graph()`.
 #' @export
@@ -1463,7 +1646,6 @@ de_bruijn_graph <- function(...) constructor_spec(make_de_bruijn_graph, ...)
 #' Kautz graphs have some interesting properties, see e.g. Wikipedia for
 #' details.
 #'
-#' @aliases graph.kautz
 #' @param m Integer scalar, the size of the alphabet. See details below.
 #' @param n Integer scalar, the length of the labels. See details below.
 #' @return A graph object.
@@ -1488,6 +1670,21 @@ make_kautz_graph <- function(m, n) {
   res
 }
 
+#' Kautz graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.kautz()` was renamed to `make_kautz_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_kautz_graph
+#' @keywords internal
+#' @export
+graph.kautz <- function(m , n) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.kautz()", "make_kautz_graph()")
+   make_kautz_graph(m = m, n = n)
+} # nocov end
+
 #' @rdname make_kautz_graph
 #' @param ... Passed to `make_kautz_graph()`.
 #' @export
@@ -1504,7 +1701,6 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' this is boolean and `FALSE` for the vertices of the first kind and
 #' `TRUE` for vertices of the second kind.
 #'
-#' @aliases graph.full.bipartite
 #' @param n1 The number of vertices of the first kind.
 #' @param n2 The number of vertices of the second kind.
 #' @param directed Logical scalar, whether the graphs is directed.
@@ -1548,6 +1744,21 @@ make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
   set_vertex_attr(res$graph, "type", value = res$types)
 }
 
+#' Create a full bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full.bipartite()` was renamed to `make_full_bipartite_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_bipartite_graph
+#' @keywords internal
+#' @export
+graph.full.bipartite <- function(n1 , n2 , directed = FALSE , mode = c("all","out","in")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.full.bipartite()", "make_full_bipartite_graph()")
+   make_full_bipartite_graph(n1 = n1, n2 = n2, directed = directed, mode = mode)
+} # nocov end
+
 #' @rdname make_full_bipartite_graph
 #' @param ... Passed to `make_full_bipartite_graph()`.
 #' @export
@@ -1574,7 +1785,6 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' `is_bipartite()` checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called `type`.
 #'
-#' @aliases graph.bipartite is.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
 #'   When the vector is a named vector, the names will be attached to the graph
@@ -1629,6 +1839,21 @@ make_bipartite_graph <- function(types, edges, directed = FALSE) {
   res
 }
 
+#' Create a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.bipartite()` was renamed to `make_bipartite_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_bipartite_graph
+#' @keywords internal
+#' @export
+graph.bipartite <- function(types , edges , directed = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.bipartite()", "make_bipartite_graph()")
+   make_bipartite_graph(types = types, edges = edges, directed = directed)
+} # nocov end
+
 #' @rdname make_bipartite_graph
 #' @param ... Passed to `make_bipartite_graph()`.
 #' @export
@@ -1642,7 +1867,6 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' directed graph, where every `i->j` edge is present if and only if
 #' \eqn{j<i}. If `directed=FALSE` then the graph is just a full graph.
 #'
-#' @aliases graph.full.citation
 #' @param n The number of vertices.
 #' @param directed Whether to create a directed graph.
 #' @return An igraph graph.
@@ -1664,6 +1888,21 @@ make_full_citation_graph <- function(n, directed = TRUE) {
   res
 }
 
+#' Create a complete (full) citation graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.full.citation()` was renamed to `make_full_citation_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_full_citation_graph
+#' @keywords internal
+#' @export
+graph.full.citation <- function(n , directed = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.full.citation()", "make_full_citation_graph()")
+   make_full_citation_graph(n = n, directed = directed)
+} # nocov end
+
 #' @rdname make_full_citation_graph
 #' @param ... Passed to `make_full_citation_graph()`.
 #' @export
@@ -1681,7 +1920,7 @@ full_citation_graph <- function(...) constructor_spec(make_full_citation_graph, 
 #' details.
 #'
 #'
-#' @aliases graph.lcf graph_from_lcf
+#' @aliases graph_from_lcf
 #' @param n Integer, the number of vertices in the graph.
 #' @param shifts Integer vector, the shifts.
 #' @param repeats Integer constant, how many times to repeat the shifts.

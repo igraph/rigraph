@@ -2,9 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{is_matching}
 \alias{is_matching}
-\alias{is.matching}
-\alias{is.maximal.matching}
-\alias{maximum.bipartite.matching}
 \alias{max_bipartite_match}
 \alias{is_max_matching}
 \title{Matching}

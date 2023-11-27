@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{page_rank}
 \alias{page_rank}
-\alias{page.rank}
 \title{The Page Rank algorithm}
 \usage{
 page_rank(

@@ -61,7 +61,6 @@
 #' (in- + out-) degree of the vertex, unless the `out.pref` argument is set to
 #' `TRUE`.
 #'
-#' @aliases barabasi.game ba.game
 #' @param n Number of vertices.
 #' @param power The power of the preferential attachment, the default is one,
 #'   i.e. linear preferential attachment.
@@ -188,6 +187,36 @@ sample_pa <- function(n, power = 1, m = NULL, out.dist = NULL, out.seq = NULL,
 
   res
 }
+
+#' Generate random graphs using preferential attachment
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `barabasi.game()` was renamed to `sample_pa()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa
+#' @keywords internal
+#' @export
+barabasi.game <- function(n , power = 1 , m = NULL , out.dist = NULL , out.seq = NULL , out.pref = FALSE , zero.appeal = 1 , directed = TRUE , algorithm = c("psumtree","psumtree-multiple","bag") , start.graph = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "barabasi.game()", "sample_pa()")
+   sample_pa(n = n, power = power, m = m, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, zero.appeal = zero.appeal, directed = directed, algorithm = algorithm, start.graph = start.graph)
+} # nocov end
+
+#' Generate random graphs using preferential attachment
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `ba.game()` was renamed to `sample_pa()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa
+#' @keywords internal
+#' @export
+ba.game <- function(n , power = 1 , m = NULL , out.dist = NULL , out.seq = NULL , out.pref = FALSE , zero.appeal = 1 , directed = TRUE , algorithm = c("psumtree","psumtree-multiple","bag") , start.graph = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "ba.game()", "sample_pa()")
+   sample_pa(n = n, power = power, m = m, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, zero.appeal = zero.appeal, directed = directed, algorithm = algorithm, start.graph = start.graph)
+} # nocov end
 
 #' @rdname sample_pa
 #' @param ... Passed to `sample_pa()`.
@@ -426,7 +455,6 @@ random.graph.game <- erdos.renyi.game
 #' algorithm is used to randomize the graph. The \dQuote{vl} samples from the
 #' undirected, connected simple graphs uniformly.
 #'
-#' @aliases degree.sequence.game
 #' @param out.deg Numeric vector, the sequence of degrees (for undirected
 #'   graphs) or out-degrees (for directed graphs). For undirected graphs its sum
 #'   should be even. For directed graphs its sum should be the same as the sum of
@@ -501,6 +529,21 @@ sample_degseq <- function(out.deg, in.deg = NULL,
   res
 }
 
+#' Generate random graphs with a given degree sequence
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `degree.sequence.game()` was renamed to `sample_degseq()` to create a more
+#' consistent API.
+#' @inheritParams sample_degseq
+#' @keywords internal
+#' @export
+degree.sequence.game <- function(out.deg , in.deg = NULL , method = c("simple","vl","simple.no.multiple","simple.no.multiple.uniform")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "degree.sequence.game()", "sample_degseq()")
+   sample_degseq(out.deg = out.deg, in.deg = in.deg, method = method)
+} # nocov end
+
 #' @rdname sample_degseq
 #' @param deterministic  Whether the construction should be deterministic
 #' @param ... Passed to `realize_degseq()` if \sQuote{deterministic} is true,
@@ -525,7 +568,6 @@ degseq <- function(..., deterministic = FALSE) {
 #' vertices, otherwise the edges are connecting new vertex to uniformly
 #' randomly chosen old vertices.
 #'
-#' @aliases growing.random.game
 #' @param n Numeric constant, number of vertices in the graph.
 #' @param m Numeric constant, number of edges added in each time step.
 #' @param directed Logical, whether to create a directed graph.
@@ -554,6 +596,21 @@ sample_growing <- function(n, m = 1, directed = TRUE, citation = FALSE) {
   }
   res
 }
+
+#' Growing random graph generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `growing.random.game()` was renamed to `sample_growing()` to create a more
+#' consistent API.
+#' @inheritParams sample_growing
+#' @keywords internal
+#' @export
+growing.random.game <- function(n , m = 1 , directed = TRUE , citation = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "growing.random.game()", "sample_growing()")
+   sample_growing(n = n, m = m, directed = directed, citation = citation)
+} # nocov end
 
 #' @rdname sample_growing
 #' @param ... Passed to `sample_growing()`.
@@ -615,7 +672,6 @@ growing <- function(...) constructor_spec(sample_growing, ...)
 #'
 #' This function might generate graphs with multiple edges.
 #'
-#' @aliases aging.prefatt.game aging.barabasi.game aging.ba.game
 #' @param n The number of vertices in the graph.
 #' @param pa.exp The preferential attachment exponent, see the details below.
 #' @param aging.exp The exponent of the aging, usually a non-positive number,
@@ -755,6 +811,51 @@ sample_pa_age <- function(n, pa.exp, aging.exp, m = NULL, aging.bin = 300,
   res
 }
 
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.barabasi.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.barabasi.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "aging.barabasi.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+} # nocov end
+
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.ba.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.ba.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "aging.ba.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+} # nocov end
+
+#' Generate an evolving random graph with preferential attachment and aging
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `aging.prefatt.game()` was renamed to `sample_pa_age()` to create a more
+#' consistent API.
+#' @inheritParams sample_pa_age
+#' @keywords internal
+#' @export
+aging.prefatt.game <- function(n , pa.exp , aging.exp , m = NULL , aging.bin = 300 , out.dist = NULL , out.seq = NULL , out.pref = FALSE , directed = TRUE , zero.deg.appeal = 1 , zero.age.appeal = 0 , deg.coef = 1 , age.coef = 1 , time.window = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "aging.prefatt.game()", "sample_pa_age()")
+   sample_pa_age(n = n, pa.exp = pa.exp, aging.exp = aging.exp, m = m, aging.bin = aging.bin, out.dist = out.dist, out.seq = out.seq, out.pref = out.pref, directed = directed, zero.deg.appeal = zero.deg.appeal, zero.age.appeal = zero.age.appeal, deg.coef = deg.coef, age.coef = age.coef, time.window = time.window)
+} # nocov end
+
 #' @rdname sample_pa_age
 #' @param ... Passed to `sample_pa_age()`.
 #' @family games
@@ -782,7 +883,6 @@ pa_age <- function(...) constructor_spec(sample_pa_age, ...)
 #' depends on the types of the vertices involved and is taken from
 #' `pref.matrix`.
 #'
-#' @aliases callaway.traits.game establishment.game
 #' @param nodes The number of vertices in the graph.
 #' @param types The number of different vertex types.
 #' @param edge.per.step The number of edges to add to the graph per time step.
@@ -826,6 +926,21 @@ sample_traits_callaway <- function(nodes, types, edge.per.step = 1,
   res
 }
 
+#' Graph generation based on different vertex types
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `callaway.traits.game()` was renamed to `sample_traits_callaway()` to create a more
+#' consistent API.
+#' @inheritParams sample_traits_callaway
+#' @keywords internal
+#' @export
+callaway.traits.game <- function(nodes , types , edge.per.step = 1 , type.dist = rep(1,types) , pref.matrix = matrix(1,types,types) , directed = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "callaway.traits.game()", "sample_traits_callaway()")
+   sample_traits_callaway(nodes = nodes, types = types, edge.per.step = edge.per.step, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
+} # nocov end
+
 #' @rdname sample_traits_callaway
 #' @param ... Passed to the constructor, `sample_traits()` or
 #'   `sample_traits_callaway()`.
@@ -854,6 +969,21 @@ sample_traits <- function(nodes, types, k = 1, type.dist = rep(1, types),
   res
 }
 
+#' Graph generation based on different vertex types
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `establishment.game()` was renamed to `sample_traits()` to create a more
+#' consistent API.
+#' @inheritParams sample_traits
+#' @keywords internal
+#' @export
+establishment.game <- function(nodes , types , k = 1 , type.dist = rep(1,types) , pref.matrix = matrix(1,types,types) , directed = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "establishment.game()", "sample_traits()")
+   sample_traits(nodes = nodes, types = types, k = k, type.dist = type.dist, pref.matrix = pref.matrix, directed = directed)
+} # nocov end
+
 #' @rdname sample_traits_callaway
 #' @export
 traits <- function(...) constructor_spec(sample_traits, ...)
@@ -871,7 +1001,6 @@ traits <- function(...) constructor_spec(sample_traits, ...)
 #' Euclidean norm than a given radius. If the `torus` argument is
 #' `TRUE` then a unit area torus is used instead of a square.
 #'
-#' @aliases grg.game
 #' @param nodes The number of vertices in the graph.
 #' @param radius The radius within which the vertices will be connected by an
 #'   edge.
@@ -908,6 +1037,21 @@ sample_grg <- function(nodes, radius, torus = FALSE, coords = FALSE) {
   res[[1]]
 }
 
+#' Geometric random graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `grg.game()` was renamed to `sample_grg()` to create a more
+#' consistent API.
+#' @inheritParams sample_grg
+#' @keywords internal
+#' @export
+grg.game <- function(nodes , radius , torus = FALSE , coords = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "grg.game()", "sample_grg()")
+   sample_grg(nodes = nodes, radius = radius, torus = torus, coords = coords)
+} # nocov end
+
 #' @rdname sample_grg
 #' @param ... Passed to `sample_grg()`.
 #' @family games
@@ -939,7 +1083,6 @@ grg <- function(...) constructor_spec(sample_grg, ...)
 #' `type` vertex attribute for `sample_pref()` and from the
 #' `intype` and `outtype` vertex attribute for `sample_asym_pref()`.
 #'
-#' @aliases preference.game asymmetric.preference.game
 #' @param nodes The number of vertices in the graphs.
 #' @param types The number of different vertex types.
 #' @param type.dist The distribution of the vertex types, a numeric vector of
@@ -1002,6 +1145,21 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
   res[[1]]
 }
 
+#' Trait-based random generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `preference.game()` was renamed to `sample_pref()` to create a more
+#' consistent API.
+#' @inheritParams sample_pref
+#' @keywords internal
+#' @export
+preference.game <- function(nodes , types , type.dist = rep(1,types) , fixed.sizes = FALSE , pref.matrix = matrix(1,types,types) , directed = FALSE , loops = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "preference.game()", "sample_pref()")
+   sample_pref(nodes = nodes, types = types, type.dist = type.dist, fixed.sizes = fixed.sizes, pref.matrix = pref.matrix, directed = directed, loops = loops)
+} # nocov end
+
 #' @rdname sample_pref
 #' @param ... Passed to the constructor, `sample_pref()` or
 #'   `sample_asym_pref()`.
@@ -1042,6 +1200,21 @@ sample_asym_pref <- function(nodes, types,
   res[[1]]
 }
 
+#' Trait-based random generation
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `asymmetric.preference.game()` was renamed to `sample_asym_pref()` to create a more
+#' consistent API.
+#' @inheritParams sample_asym_pref
+#' @keywords internal
+#' @export
+asymmetric.preference.game <- function(nodes , types , type.dist.matrix = matrix(1,types,types) , pref.matrix = matrix(1,types,types) , loops = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "asymmetric.preference.game()", "sample_asym_pref()")
+   sample_asym_pref(nodes = nodes, types = types, type.dist.matrix = type.dist.matrix, pref.matrix = pref.matrix, loops = loops)
+} # nocov end
+
 #' @rdname sample_pref
 #' @export
 asym_pref <- function(...) constructor_spec(sample_asym_pref, ...)
@@ -1069,6 +1242,21 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
   )
 }
 
+#' Neighborhood of graph vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `connect.neighborhood()` was renamed to `connect()` to create a more
+#' consistent API.
+#' @inheritParams connect
+#' @keywords internal
+#' @export
+connect.neighborhood <- function(graph , order , mode = c("all","out","in","total")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "connect.neighborhood()", "connect()")
+   connect(graph = graph, order = order, mode = mode)
+} # nocov end
+
 
 #' The Watts-Strogatz small-world model
 #'
@@ -1092,7 +1280,6 @@ connect <- function(graph, order, mode = c("all", "out", "in", "total")) {
 #' simultaneously having short path lengths and high clustering.
 #'
 #'
-#' @aliases watts.strogatz.game
 #' @param dim Integer constant, the dimension of the starting lattice.
 #' @param size Integer constant, the size of the lattice along each dimension.
 #' @param nei Integer constant, the neighborhood within which the vertices of
@@ -1136,6 +1323,21 @@ sample_smallworld <- function(dim, size, nei, p, loops = FALSE,
   res
 }
 
+#' The Watts-Strogatz small-world model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `watts.strogatz.game()` was renamed to `sample_smallworld()` to create a more
+#' consistent API.
+#' @inheritParams sample_smallworld
+#' @keywords internal
+#' @export
+watts.strogatz.game <- function(dim , size , nei , p , loops = FALSE , multiple = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "watts.strogatz.game()", "sample_smallworld()")
+   sample_smallworld(dim = dim, size = size, nei = nei, p = p, loops = loops, multiple = multiple)
+} # nocov end
+
 #' @rdname sample_smallworld
 #' @param ... Passed to `sample_smallworld()`.
 #' @family games
@@ -1157,7 +1359,6 @@ smallworld <- function(...) constructor_spec(sample_smallworld, ...)
 #' but the probability of an edge depends on the (potentially) cited
 #' vertex only.
 #'
-#' @aliases cited.type.game citing.cited.type.game lastcit.game
 #' @param n Number of vertices.
 #' @param edges Number of edges per step.
 #' @param agebins Number of aging bins.
@@ -1190,6 +1391,21 @@ sample_last_cit <- function(n, edges = 1, agebins = n / 7100, pref = (1:(agebins
   res
 }
 
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `lastcit.game()` was renamed to `sample_last_cit()` to create a more
+#' consistent API.
+#' @inheritParams sample_last_cit
+#' @keywords internal
+#' @export
+lastcit.game <- function(n , edges = 1 , agebins = n/7100 , pref = (1:(agebins+1))^-3 , directed = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "lastcit.game()", "sample_last_cit()")
+   sample_last_cit(n = n, edges = edges, agebins = agebins, pref = pref, directed = directed)
+} # nocov end
+
 #' @rdname sample_last_cit
 #' @param ... Passed to the actual constructor.
 #' @export
@@ -1214,6 +1430,21 @@ sample_cit_types <- function(n, edges = 1, types = rep(0, n),
   }
   res
 }
+
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cited.type.game()` was renamed to `sample_cit_types()` to create a more
+#' consistent API.
+#' @inheritParams sample_cit_types
+#' @keywords internal
+#' @export
+cited.type.game <- function(n , edges = 1 , types = rep(0,n) , pref = rep(1,length(types)) , directed = TRUE , attr = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "cited.type.game()", "sample_cit_types()")
+   sample_cit_types(n = n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
+} # nocov end
 
 #' @rdname sample_last_cit
 #' @export
@@ -1244,6 +1475,21 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
   res
 }
 
+#' Random citation graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `citing.cited.type.game()` was renamed to `sample_cit_cit_types()` to create a more
+#' consistent API.
+#' @inheritParams sample_cit_cit_types
+#' @keywords internal
+#' @export
+citing.cited.type.game <- function(n , edges = 1 , types = rep(0,n) , pref = matrix(1,nrow=length(types),ncol=length(types)) , directed = TRUE , attr = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "citing.cited.type.game()", "sample_cit_cit_types()")
+   sample_cit_cit_types(n = n, edges = edges, types = types, pref = pref, directed = directed, attr = attr)
+} # nocov end
+
 #' @rdname sample_last_cit
 #' @export
 cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
@@ -1261,7 +1507,6 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #' with probability \eqn{p}, independently of the rest of the edges. In \eqn{G(n,m)}, we
 #' uniformly choose \eqn{m} edges to realize.
 #'
-#' @aliases bipartite.random.game
 #' @param n1 Integer scalar, the number of bottom vertices.
 #' @param n2 Integer scalar, the number of top vertices.
 #' @param type Character scalar, the type of the graph, \sQuote{gnp} creates a
@@ -1345,6 +1590,21 @@ sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
   res
 }
 
+#' Bipartite random graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bipartite.random.game()` was renamed to `sample_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams sample_bipartite
+#' @keywords internal
+#' @export
+bipartite.random.game <- function(n1 , n2 , type = c("gnp","gnm") , p , m , directed = FALSE , mode = c("out","in","all")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "bipartite.random.game()", "sample_bipartite()")
+   sample_bipartite(n1 = n1, n2 = n2, type = type, p = p, m = m, directed = directed, mode = mode)
+} # nocov end
+
 #' @rdname sample_bipartite
 #' @param ... Passed to `sample_bipartite()`.
 #' @family games
@@ -1362,7 +1622,6 @@ bipartite <- function(...) constructor_spec(sample_bipartite, ...)
 #' The order of the vertices in the generated graph corresponds to the
 #' `block.sizes` argument.
 #'
-#' @aliases sbm.game
 #' @param n Number of vertices in the graph.
 #' @param pref.matrix The matrix giving the Bernoulli rates.  This is a
 #'   \eqn{K\times K}{KxK} matrix, where \eqn{K} is the number of groups. The
@@ -1532,7 +1791,6 @@ dot_product <- function(...) constructor_spec(sample_dot_product, ...)
 #' oc
 #' }
 #'
-#' @aliases interconnected.islands.game
 #' @param islands.n The number of islands in the graph.
 #' @param islands.size The size of islands in the graph.
 #' @param islands.pin The probability to create each possible edge into each
@@ -1558,7 +1816,6 @@ sample_islands <- simple_interconnected_islands_game_impl
 #' The game simply uses [sample_degseq()] with appropriately
 #' constructed degree sequences.
 #'
-#' @aliases k.regular.game
 #' @param no.of.nodes Integer scalar, the number of vertices in the generated
 #'   graph.
 #' @param k Integer scalar, the degree of each vertex in the graph, or the
@@ -1618,7 +1875,6 @@ sample_k_regular <- k_regular_game_impl
 #' distribution. Alternatively, you may use [sample_fitness_pl()]
 #' which generates the fitnesses for you with a given exponent.
 #'
-#' @aliases static.fitness.game
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param fitness.out A numeric vector containing the fitness of each vertex.
 #'   For directed graphs, this specifies the out-fitness of each vertex.
@@ -1676,7 +1932,6 @@ sample_fitness <- static_fitness_game_impl
 #' the square root of the number of edges times the average degree; see the
 #' paper of Chung and Lu, and Cho et al for more details.
 #'
-#' @aliases static.power.law.game
 #' @param no.of.nodes The number of vertices in the generated graph.
 #' @param no.of.edges The number of edges in the generated graph.
 #' @param exponent.out Numeric scalar, the power law exponent of the degree
@@ -1739,7 +1994,6 @@ sample_fitness_pl <- static_power_law_game_impl
 #' available then we cite all of them.  \item The same procedure is applied to
 #' all the newly cited vertices.  }
 #'
-#' @aliases forest.fire.game
 #' @param nodes The number of vertices in the graph.
 #' @param fw.prob The forward burning probability, see details below.
 #' @param bw.factor The backward burning ratio. The backward burning

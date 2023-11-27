@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{unfold_tree}
 \alias{unfold_tree}
-\alias{unfold.tree}
 \title{Convert a general graph into a forest}
 \usage{
 unfold_tree(graph, mode = c("all", "out", "in", "total"), roots)

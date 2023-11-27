@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{plot_dendrogram}
 \alias{plot_dendrogram}
-\alias{dendPlot}
 \alias{plot_dendrogram.communities}
 \title{Community structure dendrogram plots}
 \usage{
@@ -117,7 +116,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{split_join_distance}()}
 }

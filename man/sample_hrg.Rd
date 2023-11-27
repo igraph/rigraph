@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{sample_hrg}
 \alias{sample_hrg}
-\alias{hrg.game}
 \title{Sample from a hierarchical random graph model}
 \usage{
 sample_hrg(hrg)

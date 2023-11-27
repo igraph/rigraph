@@ -2,7 +2,6 @@
 % Please edit documentation in R/test.R
 \name{igraph_version}
 \alias{igraph_version}
-\alias{igraph.version}
 \title{Query igraph's version string}
 \usage{
 igraph_version()

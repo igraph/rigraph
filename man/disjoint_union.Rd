@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{disjoint_union}
 \alias{disjoint_union}
-\alias{graph.disjoint.union}
 \alias{\%du\%}
 \title{Disjoint union of graphs}
 \usage{

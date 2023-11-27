@@ -2,10 +2,6 @@
 % Please edit documentation in R/plot.shapes.R
 \name{shapes}
 \alias{shapes}
-\alias{add.vertex.shape}
-\alias{igraph.shape.noclip}
-\alias{igraph.shape.noplot}
-\alias{vertex.shapes}
 \alias{igraph.vertex.shapes}
 \alias{shape_noclip}
 \alias{shape_noplot}

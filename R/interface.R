@@ -46,7 +46,6 @@
 #'
 #' @export
 #'
-#' @aliases add.edges
 #' @family functions for manipulating graph structure
 #'
 #' @examples
@@ -92,6 +91,21 @@ add_edges <- function(graph, edges, ..., attr = list()) {
   graph
 }
 
+#' Add edges to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.edges()` was renamed to `add_edges()` to create a more
+#' consistent API.
+#' @inheritParams add_edges
+#' @keywords internal
+#' @export
+add.edges <- function(graph , edges , ... , attr = list()) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "add.edges()", "add_edges()")
+   add_edges(graph = graph, edges = edges, attr = attr, ...)
+} # nocov end
+
 #' Add vertices to a graph
 #'
 #' If attributes are supplied, and they are not present in the graph,
@@ -108,7 +122,6 @@ add_edges <- function(graph, edges, ..., attr = list()) {
 #'   below.
 #' @return The graph, with the vertices (and attributes) added.
 #'
-#' @aliases add.vertices
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -156,6 +169,21 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
   graph
 }
 
+#' Add vertices to a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertices()` was renamed to `add_vertices()` to create a more
+#' consistent API.
+#' @inheritParams add_vertices
+#' @keywords internal
+#' @export
+add.vertices <- function(graph , nv , ... , attr = list()) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "add.vertices()", "add_vertices()")
+   add_vertices(graph = graph, nv = nv, attr = attr, ...)
+} # nocov end
+
 #' Delete edges from a graph
 #'
 #' @param graph The input graph.
@@ -165,7 +193,6 @@ add_vertices <- function(graph, nv, ..., attr = list()) {
 #'   `|`
 #' @return The graph, with the edges removed.
 #'
-#' @aliases delete.edges
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -188,13 +215,27 @@ delete_edges <- function(graph, edges) {
   .Call(R_igraph_delete_edges, graph, as_igraph_es(graph, edges) - 1)
 }
 
+#' Delete edges from a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `delete.edges()` was renamed to `delete_edges()` to create a more
+#' consistent API.
+#' @inheritParams delete_edges
+#' @keywords internal
+#' @export
+delete.edges <- function(graph , edges) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "delete.edges()", "delete_edges()")
+   delete_edges(graph = graph, edges = edges)
+} # nocov end
+
 #' Delete vertices from a graph
 #'
 #' @param graph The input graph.
 #' @param v The vertices to remove, a vertex sequence.
 #' @return The graph, with the vertices removed.
 #'
-#' @aliases delete.vertices
 #' @family functions for manipulating graph structure
 #'
 #' @export
@@ -214,6 +255,21 @@ delete_vertices <- function(graph, v) {
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_delete_vertices, graph, as_igraph_vs(graph, v) - 1)
 }
+
+#' Delete vertices from a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `delete.vertices()` was renamed to `delete_vertices()` to create a more
+#' consistent API.
+#' @inheritParams delete_vertices
+#' @keywords internal
+#' @export
+delete.vertices <- function(graph , v) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "delete.vertices()", "delete_vertices()")
+   delete_vertices(graph = graph, v = v)
+} # nocov end
 
 ###################################################################
 # Structure query
@@ -338,7 +394,6 @@ incident <- function(graph, v, mode = c("all", "out", "in", "total")) {
 #' @param graph The input graph
 #' @return Logical scalar, whether the graph is directed.
 #'
-#' @aliases is.directed
 #' @family structural queries
 #'
 #' @export
@@ -354,6 +409,21 @@ is_directed <- function(graph) {
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_is_directed, graph)
 }
+
+#' Check whether a graph is directed
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.directed()` was renamed to `is_directed()` to create a more
+#' consistent API.
+#' @inheritParams is_directed
+#' @keywords internal
+#' @export
+is.directed <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.directed()", "is_directed()")
+   is_directed(graph = graph)
+} # nocov end
 
 #' Incident vertices of some graph edges
 #'

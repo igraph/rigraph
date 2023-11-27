@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{vertex_attr_names}
 \alias{vertex_attr_names}
-\alias{list.vertex.attributes}
 \title{List names of vertex attributes}
 \usage{
 vertex_attr_names(graph)

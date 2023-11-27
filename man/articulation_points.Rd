@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{articulation_points}
 \alias{articulation_points}
-\alias{articulation.points}
 \alias{bridges}
 \title{Articulation points and bridges of a graph}
 \usage{

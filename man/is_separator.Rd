@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{is_separator}
 \alias{is_separator}
-\alias{is.separator}
 \title{Vertex separators}
 \usage{
 is_separator(graph, candidate)

@@ -42,7 +42,7 @@
 #'   attributes are returned in a list.
 #' @return A list of graph attributes, or a single graph attribute.
 #'
-#' @aliases get.graph.attribute graph.attributes
+#' @aliases graph.attributes
 #' @family attributes
 #'
 #' @export
@@ -58,6 +58,21 @@ graph_attr <- function(graph, name) {
     .Call(R_igraph_mybracket2, graph, igraph_t_idx_attr, igraph_attr_idx_graph)[[as.character(name)]]
   }
 }
+
+#' Graph attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.graph.attribute()` was renamed to `graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams graph_attr
+#' @keywords internal
+#' @export
+get.graph.attribute <- function(graph , name) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.graph.attribute()", "graph_attr()")
+   graph_attr(graph = graph, name = name)
+} # nocov end
 
 
 #' Set all or some graph attributes
@@ -101,7 +116,6 @@ graph_attr <- function(graph, name) {
 #' @return The graph with the new graph attribute added or set.
 #'
 #' @family attributes
-#' @aliases set.graph.attribute
 #'
 #' @export
 #' @examples
@@ -114,6 +128,21 @@ set_graph_attr <- function(graph, name, value) {
 
   .Call(R_igraph_mybracket3_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, name, value)
 }
+
+#' Set a graph attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.graph.attribute()` was renamed to `set_graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_graph_attr
+#' @keywords internal
+#' @export
+set.graph.attribute <- function(graph , name , value) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "set.graph.attribute()", "set_graph_attr()")
+   set_graph_attr(graph = graph, name = name, value = value)
+} # nocov end
 
 #' @export
 graph.attributes <- function(graph) {
@@ -143,7 +172,7 @@ graph.attributes <- function(graph) {
 #' @return The value of the vertex attribute, or the list of
 #'   all vertex attributes, if `name` is missing.
 #'
-#' @aliases get.vertex.attribute vertex.attributes
+#' @aliases vertex.attributes
 #' @family attributes
 #'
 #' @export
@@ -173,6 +202,21 @@ vertex_attr <- function(graph, name, index = V(graph)) {
     }
   }
 }
+
+#' Query vertex attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.vertex.attribute()` was renamed to `vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams vertex_attr
+#' @keywords internal
+#' @export
+get.vertex.attribute <- function(graph , name , index = V(graph)) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.vertex.attribute()", "vertex_attr()")
+   vertex_attr(graph = graph, name = name, index = index)
+} # nocov end
 
 #' Set one or more vertex attributes
 #'
@@ -218,7 +262,6 @@ vertex_attr <- function(graph, name, index = V(graph)) {
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the vertex attribute added or set.
 #'
-#' @aliases set.vertex.attribute
 #' @family attributes
 #'
 #' @export
@@ -234,6 +277,21 @@ set_vertex_attr <- function(graph, name, index = V(graph), value) {
     i_set_vertex_attr(graph = graph, name = name, index = index, value = value)
   }
 }
+
+#' Set vertex attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.vertex.attribute()` was renamed to `set_vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_vertex_attr
+#' @keywords internal
+#' @export
+set.vertex.attribute <- function(graph , name , index = V(graph) , value) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "set.vertex.attribute()", "set_vertex_attr()")
+   set_vertex_attr(graph = graph, name = name, index = index, value = value)
+} # nocov end
 
 i_set_vertex_attr <- function(graph, name, index = V(graph), value, check = TRUE) {
   ensure_igraph(graph)
@@ -353,7 +411,7 @@ vertex.attributes <- function(graph, index = V(graph)) {
 #' @return The value of the edge attribute, or the list of all
 #'   edge attributes if `name` is missing.
 #'
-#' @aliases get.edge.attribute edge.attributes
+#' @aliases edge.attributes
 #' @family attributes
 #'
 #' @export
@@ -383,6 +441,21 @@ edge_attr <- function(graph, name, index = E(graph)) {
     }
   }
 }
+
+#' Query edge attributes of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.edge.attribute()` was renamed to `edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams edge_attr
+#' @keywords internal
+#' @export
+get.edge.attribute <- function(graph , name , index = E(graph)) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.edge.attribute()", "edge_attr()")
+   edge_attr(graph = graph, name = name, index = index)
+} # nocov end
 
 #' Set one or more edge attributes
 #'
@@ -428,7 +501,6 @@ edge_attr <- function(graph, name, index = E(graph)) {
 #'   If `NULL`, the input is returned unchanged.
 #' @return The graph, with the edge attribute added or set.
 #'
-#' @aliases set.edge.attribute
 #' @family attributes
 #'
 #' @export
@@ -444,6 +516,21 @@ set_edge_attr <- function(graph, name, index = E(graph), value) {
     i_set_edge_attr(graph = graph, name = name, index = index, value = value)
   }
 }
+
+#' Set edge attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `set.edge.attribute()` was renamed to `set_edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams set_edge_attr
+#' @keywords internal
+#' @export
+set.edge.attribute <- function(graph , name , index = E(graph) , value) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "set.edge.attribute()", "set_edge_attr()")
+   set_edge_attr(graph = graph, name = name, index = index, value = value)
+} # nocov end
 
 i_set_edge_attr <- function(graph, name, index = E(graph), value, check = TRUE) {
   ensure_igraph(graph)
@@ -556,7 +643,7 @@ edge.attributes <- function(graph, index = E(graph)) {
 #' @param graph The graph.
 #' @return Character vector, the names of the graph attributes.
 #'
-#' @aliases list.graph.attributes attributes
+#' @aliases attributes
 #' @family attributes
 #'
 #' @export
@@ -572,12 +659,26 @@ graph_attr_names <- function(graph) {
   res
 }
 
+#' List names of graph attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.graph.attributes()` was renamed to `graph_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams graph_attr_names
+#' @keywords internal
+#' @export
+list.graph.attributes <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "list.graph.attributes()", "graph_attr_names()")
+   graph_attr_names(graph = graph)
+} # nocov end
+
 #' List names of vertex attributes
 #'
 #' @param graph The graph.
 #' @return Character vector, the names of the vertex attributes.
 #'
-#' @aliases list.vertex.attributes
 #' @family attributes
 #'
 #' @export
@@ -598,12 +699,26 @@ vertex_attr_names <- function(graph) {
   res
 }
 
+#' List names of vertex attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.vertex.attributes()` was renamed to `vertex_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams vertex_attr_names
+#' @keywords internal
+#' @export
+list.vertex.attributes <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "list.vertex.attributes()", "vertex_attr_names()")
+   vertex_attr_names(graph = graph)
+} # nocov end
+
 #' List names of edge attributes
 #'
 #' @param graph The graph.
 #' @return Character vector, the names of the edge attributes.
 #'
-#' @aliases list.edge.attributes
 #' @family attributes
 #'
 #' @export
@@ -621,13 +736,27 @@ edge_attr_names <- function(graph) {
   res
 }
 
+#' List names of edge attributes
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `list.edge.attributes()` was renamed to `edge_attr_names()` to create a more
+#' consistent API.
+#' @inheritParams edge_attr_names
+#' @keywords internal
+#' @export
+list.edge.attributes <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "list.edge.attributes()", "edge_attr_names()")
+   edge_attr_names(graph = graph)
+} # nocov end
+
 #' Delete a graph attribute
 #'
 #' @param graph The graph.
 #' @param name Name of the attribute to delete.
 #' @return The graph, with the specified attribute removed.
 #'
-#' @aliases remove.graph.attribute
 #' @family attributes
 #'
 #' @export
@@ -650,13 +779,27 @@ delete_graph_attr <- function(graph, name) {
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_graph, gattr)
 }
 
+#' Delete a graph attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.graph.attribute()` was renamed to `delete_graph_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_graph_attr
+#' @keywords internal
+#' @export
+remove.graph.attribute <- function(graph , name) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "remove.graph.attribute()", "delete_graph_attr()")
+   delete_graph_attr(graph = graph, name = name)
+} # nocov end
+
 #' Delete a vertex attribute
 #'
 #' @param graph The graph
 #' @param name The name of the vertex attribute to delete.
 #' @return The graph, with the specified vertex attribute removed.
 #'
-#' @aliases remove.vertex.attribute
 #' @family attributes
 #'
 #' @export
@@ -680,13 +823,27 @@ delete_vertex_attr <- function(graph, name) {
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_vertex, vattr)
 }
 
+#' Delete a vertex attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.vertex.attribute()` was renamed to `delete_vertex_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_vertex_attr
+#' @keywords internal
+#' @export
+remove.vertex.attribute <- function(graph , name) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "remove.vertex.attribute()", "delete_vertex_attr()")
+   delete_vertex_attr(graph = graph, name = name)
+} # nocov end
+
 #' Delete an edge attribute
 #'
 #' @param graph The graph
 #' @param name The name of the edge attribute to delete.
 #' @return The graph, with the specified edge attribute removed.
 #'
-#' @aliases remove.edge.attribute
 #' @family attributes
 #'
 #' @export
@@ -710,6 +867,21 @@ delete_edge_attr <- function(graph, name) {
   .Call(R_igraph_mybracket2_set, graph, igraph_t_idx_attr, igraph_attr_idx_edge, eattr)
 }
 
+#' Delete an edge attribute
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `remove.edge.attribute()` was renamed to `delete_edge_attr()` to create a more
+#' consistent API.
+#' @inheritParams delete_edge_attr
+#' @keywords internal
+#' @export
+remove.edge.attribute <- function(graph , name) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "remove.edge.attribute()", "delete_edge_attr()")
+   delete_edge_attr(graph = graph, name = name)
+} # nocov end
+
 #############
 
 
@@ -731,7 +903,6 @@ delete_edge_attr <- function(graph, name) {
 #' igraph, you have to check that for yourself, when assigning the vertex
 #' names.
 #'
-#' @aliases is.named
 #' @param graph The input graph.
 #' @return A logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -751,6 +922,21 @@ is_named <- function(graph) {
   "name" %in% vertex_attr_names(graph)
 }
 
+#' Named graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.named()` was renamed to `is_named()` to create a more
+#' consistent API.
+#' @inheritParams is_named
+#' @keywords internal
+#' @export
+is.named <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.named()", "is_named()")
+   is_named(graph = graph)
+} # nocov end
+
 
 
 #' Weighted graphs
@@ -769,7 +955,6 @@ is_named <- function(graph) {
 #' vertices, etc. Check the manual pages of the functions working with weighted
 #' graphs for details.
 #'
-#' @aliases is.weighted
 #' @param graph The input graph.
 #' @return A logical scalar.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -788,6 +973,21 @@ is_weighted <- function(graph) {
   "weight" %in% edge_attr_names(graph)
 }
 
+#' Weighted graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.weighted()` was renamed to `is_weighted()` to create a more
+#' consistent API.
+#' @inheritParams is_weighted
+#' @keywords internal
+#' @export
+is.weighted <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.weighted()", "is_weighted()")
+   is_weighted(graph = graph)
+} # nocov end
+
 #' @rdname make_bipartite_graph
 #' @export
 is_bipartite <- function(graph) {
@@ -795,6 +995,21 @@ is_bipartite <- function(graph) {
 
   "type" %in% vertex_attr_names(graph)
 }
+
+#' Create a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.bipartite()` was renamed to `is_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams is_bipartite
+#' @keywords internal
+#' @export
+is.bipartite <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.bipartite()", "is_bipartite()")
+   is_bipartite(graph = graph)
+} # nocov end
 
 #############
 

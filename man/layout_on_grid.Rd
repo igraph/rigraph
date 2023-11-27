@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_on_grid}
 \alias{layout_on_grid}
-\alias{layout.grid}
 \alias{layout.grid.3d}
 \alias{on_grid}
 \title{Simple grid layout}

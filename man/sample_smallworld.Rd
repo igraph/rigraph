@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_smallworld}
 \alias{sample_smallworld}
-\alias{watts.strogatz.game}
 \alias{smallworld}
 \title{The Watts-Strogatz small-world model}
 \usage{

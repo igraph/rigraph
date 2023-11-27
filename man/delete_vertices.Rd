@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{delete_vertices}
 \alias{delete_vertices}
-\alias{delete.vertices}
 \title{Delete vertices from a graph}
 \usage{
 delete_vertices(graph, v)

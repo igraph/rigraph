@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_fitness_pl}
 \alias{sample_fitness_pl}
-\alias{static.power.law.game}
 \title{Scale-free random graphs, from vertex fitness scores}
 \usage{
 sample_fitness_pl(

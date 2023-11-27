@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{as_edgelist}
 \alias{as_edgelist}
-\alias{get.edgelist}
 \title{Convert a graph to an edge list}
 \usage{
 as_edgelist(graph, names = TRUE)

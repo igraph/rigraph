@@ -42,7 +42,6 @@
 #' For undirected graphs the Stoer-Wagner algorithm (see reference below) is
 #' used to calculate the minimum cut.
 #'
-#' @aliases graph.mincut
 #' @param graph The input graph.
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex (sometimes also called sink).
@@ -140,6 +139,21 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
   res
 }
 
+#' Minimum cut in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.mincut()` was renamed to `min_cut()` to create a more
+#' consistent API.
+#' @inheritParams min_cut
+#' @keywords internal
+#' @export
+graph.mincut <- function(graph , source = NULL , target = NULL , capacity = NULL , value.only = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.mincut()", "min_cut()")
+   min_cut(graph = graph, source = source, target = target, capacity = capacity, value.only = value.only)
+} # nocov end
+
 
 
 #' Vertex connectivity
@@ -177,7 +191,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' precisely `vertex_connectivity()` is the most general, the other two are
 #' included only for the ease of using more descriptive function names.
 #'
-#' @aliases vertex.connectivity vertex.disjoint.paths cohesion graph.cohesion
+#' @aliases cohesion
 #' @param graph,x The input graph.
 #' @param source The id of the source vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
@@ -238,6 +252,21 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
   }
 }
 
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.connectivity()` was renamed to `vertex_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams vertex_connectivity
+#' @keywords internal
+#' @export
+vertex.connectivity <- function(graph , source = NULL , target = NULL , checks = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "vertex.connectivity()", "vertex_connectivity()")
+   vertex_connectivity(graph = graph, source = source, target = target, checks = checks)
+} # nocov end
+
 
 
 #' Edge connectivity
@@ -268,7 +297,6 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' more precisely the most general is `edge_connectivity()`, the others are
 #' included only for having more descriptive function names.
 #'
-#' @aliases edge.connectivity graph.adhesion edge.disjoint.paths
 #' @param graph The input graph.
 #' @param source The id of the source vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
@@ -325,6 +353,36 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
   }
 }
 
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.disjoint.paths()` was renamed to `edge_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams edge_connectivity
+#' @keywords internal
+#' @export
+edge.disjoint.paths <- function(graph , source = NULL , target = NULL , checks = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "edge.disjoint.paths()", "edge_connectivity()")
+   edge_connectivity(graph = graph, source = source, target = target, checks = checks)
+} # nocov end
+
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.connectivity()` was renamed to `edge_connectivity()` to create a more
+#' consistent API.
+#' @inheritParams edge_connectivity
+#' @keywords internal
+#' @export
+edge.connectivity <- function(graph , source = NULL , target = NULL , checks = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "edge.connectivity()", "edge_connectivity()")
+   edge_connectivity(graph = graph, source = source, target = target, checks = checks)
+} # nocov end
+
 #' @rdname edge_connectivity
 #' @export
 edge_disjoint_paths <- function(graph, source, target) {
@@ -363,6 +421,21 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   )
 }
 
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.disjoint.paths()` was renamed to `vertex_disjoint_paths()` to create a more
+#' consistent API.
+#' @inheritParams vertex_disjoint_paths
+#' @keywords internal
+#' @export
+vertex.disjoint.paths <- function(graph , source = NULL , target = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "vertex.disjoint.paths()", "vertex_disjoint_paths()")
+   vertex_disjoint_paths(graph = graph, source = source, target = target)
+} # nocov end
+
 #' @rdname edge_connectivity
 #' @export
 adhesion <- function(graph, checks = TRUE) {
@@ -371,6 +444,21 @@ adhesion <- function(graph, checks = TRUE) {
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_adhesion, graph, as.logical(checks))
 }
+
+#' Edge connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.adhesion()` was renamed to `adhesion()` to create a more
+#' consistent API.
+#' @inheritParams adhesion
+#' @keywords internal
+#' @export
+graph.adhesion <- function(graph , checks = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.adhesion()", "adhesion()")
+   adhesion(graph = graph, checks = checks)
+} # nocov end
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
@@ -391,7 +479,6 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' removing these edges from \eqn{G} there is no directed path from \eqn{s} to
 #' \eqn{t}.
 #'
-#' @aliases stCuts
 #' @param graph The input graph. It must be directed.
 #' @param source The source vertex.
 #' @param target The target vertex.
@@ -439,7 +526,6 @@ st_cuts <- all_st_cuts_impl
 #'
 #' An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 #'
-#' @aliases stMincuts
 #' @param graph The input graph. It must be directed.
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex.
@@ -492,7 +578,6 @@ st_min_cuts <- all_st_mincuts_impl
 #' This function implements the Lengauer-Tarjan algorithm to construct the
 #' dominator tree of a directed graph. For details see the reference below.
 #'
-#' @aliases dominator.tree
 #' @param graph A directed graph. If it is not a flowgraph, and it contains
 #'   some vertices not reachable from the root vertex, then these vertices will
 #'   be collected and returned as part of the result.
@@ -554,6 +639,21 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
   res
 }
 
+#' Dominator tree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dominator.tree()` was renamed to `dominator_tree()` to create a more
+#' consistent API.
+#' @inheritParams dominator_tree
+#' @keywords internal
+#' @export
+dominator.tree <- function(graph , root , mode = c("out","in","all","total")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "dominator.tree()", "dominator_tree()")
+   dominator_tree(graph = graph, root = root, mode = mode)
+} # nocov end
+
 
 #' Minimum size vertex separators
 #'
@@ -567,7 +667,6 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' A \eqn{(s,t)} vertex separator is minimal if none of its subsets is an
 #' \eqn{(s,t)} vertex separator.
 #'
-#' @aliases minimal.st.separators
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @return A list of numeric vectors. Each vector contains a vertex set
@@ -606,7 +705,6 @@ min_st_separators <- all_minimal_st_separators_impl
 #' the flow is the incoming flow of the `target` vertex. The maximum flow
 #' is the flow of maximum value.
 #'
-#' @aliases graph.maxflow
 #' @param graph The input graph.
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex (sometimes also called sink).
@@ -662,7 +760,6 @@ max_flow <- maxflow_impl
 #' In the special case of a fully connected graph with \eqn{n} vertices, each
 #' set of \eqn{n-1} vertices is considered to be a vertex separator.
 #'
-#' @aliases is.separator
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex ids of the candidate
@@ -686,7 +783,6 @@ is_separator <- is_separator_impl
 #' In the special case of a fully connected graph with \eqn{n} vertices, each
 #' set of \eqn{n-1} vertices is considered to be a vertex separator.
 #'
-#' @aliases is.minimal.separator
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @param candidate A numeric vector giving the vertex ids of the candidate
@@ -739,7 +835,6 @@ is_min_separator <- is_minimal_separator_impl
 #' In the special case of a fully connected input graph with \eqn{n} vertices,
 #' all subsets of size \eqn{n-1} are listed as the result.
 #'
-#' @aliases minimum.size.separators
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @return A list of numeric vectors. Each numeric vector is a vertex

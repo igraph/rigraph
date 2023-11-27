@@ -33,7 +33,6 @@
 #'
 #' If the graph is not connected a minimum spanning forest is returned.
 #'
-#' @aliases minimum.spanning.tree
 #' @param graph The graph object to analyze.
 #' @param weights Numeric vector giving the weights of the edges in the
 #'   graph. The order is determined by the edge ids. This is ignored if the
@@ -89,3 +88,18 @@ mst <- function(graph, weights = NULL,
     stop("Invalid algorithm")
   }
 }
+
+#' Minimum spanning tree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `minimum.spanning.tree()` was renamed to `mst()` to create a more
+#' consistent API.
+#' @inheritParams mst
+#' @keywords internal
+#' @export
+minimum.spanning.tree <- function(graph , weights = NULL , algorithm = NULL , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "minimum.spanning.tree()", "mst()")
+   mst(graph = graph, weights = weights, algorithm = algorithm, ...)
+} # nocov end

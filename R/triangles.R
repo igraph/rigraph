@@ -34,7 +34,7 @@
 #'
 #' `count_triangles()` counts how many triangles a vertex is part of.
 #'
-#' @aliases adjacent.triangles triangles
+#' @aliases triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a

@@ -6,10 +6,7 @@
 \alias{neighborhood_size}
 \alias{ego}
 \alias{neighborhood}
-\alias{neighborhood.size}
-\alias{graph.neighborhood}
 \alias{ego_graph}
-\alias{connect.neighborhood}
 \alias{make_ego_graph}
 \alias{make_neighborhood_graph}
 \title{Neighborhood of graph vertices}

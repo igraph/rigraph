@@ -2,15 +2,11 @@
 % Please edit documentation in R/cohesive.blocks.R
 \name{cohesive_blocks}
 \alias{cohesive_blocks}
-\alias{cohesive.blocks}
 \alias{cohesiveBlocks}
 \alias{blocks}
-\alias{blockGraphs}
 \alias{hierarchy}
 \alias{parent}
-\alias{plotHierarchy}
 \alias{export_pajek}
-\alias{maxcohesion}
 \alias{plot.cohesiveBlocks}
 \alias{summary.cohesiveBlocks}
 \alias{length.cohesiveBlocks}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_fast_greedy}
 \alias{cluster_fast_greedy}
-\alias{fastgreedy.community}
 \title{Community structure via greedy optimization of modularity}
 \usage{
 cluster_fast_greedy(
@@ -84,7 +83,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}

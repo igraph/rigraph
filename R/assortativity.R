@@ -68,7 +68,7 @@
 #' `assortativity_degree()` uses vertex degree (minus one) as vertex values
 #' and calls `assortativity()`.
 #'
-#' @aliases assortativity assortativity.degree assortativity.nominal
+#' @aliases assortativity
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty

@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{compose}
 \alias{compose}
-\alias{graph.compose}
 \alias{\%c\%}
 \title{Compose two graphs as binary relations}
 \usage{

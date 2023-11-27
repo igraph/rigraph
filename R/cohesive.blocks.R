@@ -108,8 +108,8 @@
 #' The generic function [plot()] plots the graph, showing one or more
 #' cohesive blocks in it.
 #'
-#' @aliases cohesive.blocks cohesiveBlocks blocks blockGraphs
-#' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
+#' @aliases cohesiveBlocks blocks
+#' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
 #' exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
@@ -264,6 +264,21 @@ cohesive_blocks <- function(graph, labels = TRUE) {
   res
 }
 
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cohesive.blocks()` was renamed to `cohesive_blocks()` to create a more
+#' consistent API.
+#' @inheritParams cohesive_blocks
+#' @keywords internal
+#' @export
+cohesive.blocks <- function(graph , labels = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "cohesive.blocks()", "cohesive_blocks()")
+   cohesive_blocks(graph = graph, labels = labels)
+} # nocov end
+
 #' @rdname cohesive_blocks
 #' @method length cohesiveBlocks
 #' @family cohesive.blocks
@@ -284,11 +299,42 @@ graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph = graph)
 }
 
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `blockGraphs()` was renamed to `graphs_from_cohesive_blocks()` to create a more
+#' consistent API.
+#' @inheritParams graphs_from_cohesive_blocks
+#' @keywords internal
+#' @export
+blockGraphs <- function(blocks , graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "blockGraphs()", "graphs_from_cohesive_blocks()")
+   graphs_from_cohesive_blocks(blocks = blocks, graph = graph)
+} # nocov end
+
 #' @family cohesive.blocks
 #' @export
 cohesion <- function(x, ...) {
   UseMethod("cohesion")
 }
+
+#' Vertex connectivity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.cohesion()` was renamed to `cohesion()` to create a more
+#' consistent API.
+#' @param x bla
+#' @param ... bla
+#' @keywords internal
+#' @export
+graph.cohesion <- function(x , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.cohesion()", "cohesion()")
+   cohesion(x = x, ...)
+} # nocov end
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks
@@ -396,6 +442,21 @@ plot_hierarchy <- function(blocks,
   plot(hierarchy(blocks), layout = layout, ...)
 }
 
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `plotHierarchy()` was renamed to `plot_hierarchy()` to create a more
+#' consistent API.
+#' @inheritParams plot_hierarchy
+#' @keywords internal
+#' @export
+plotHierarchy <- function(blocks , layout = layout_as_tree(hierarchy(blocks),root=1) , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "plotHierarchy()", "plot_hierarchy()")
+   plot_hierarchy(blocks = blocks, layout = layout, ...)
+} # nocov end
+
 exportPajek.cohesiveblocks.pf <- function(blocks, graph, file) {
   closeit <- FALSE
   if (is.character(file)) {
@@ -475,6 +536,21 @@ export_pajek <- function(blocks, graph, file,
   }
 }
 
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `exportPajek()` was renamed to `export_pajek()` to create a more
+#' consistent API.
+#' @inheritParams export_pajek
+#' @keywords internal
+#' @export
+exportPajek <- function(blocks , graph , file , project.file = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "exportPajek()", "export_pajek()")
+   export_pajek(blocks = blocks, graph = graph, file = file, project.file = project.file)
+} # nocov end
+
 #' @rdname cohesive_blocks
 #' @export
 max_cohesion <- function(blocks) {
@@ -489,6 +565,21 @@ max_cohesion <- function(blocks) {
   }
   res
 }
+
+#' Calculate Cohesive Blocks
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maxcohesion()` was renamed to `max_cohesion()` to create a more
+#' consistent API.
+#' @inheritParams max_cohesion
+#' @keywords internal
+#' @export
+maxcohesion <- function(blocks) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "maxcohesion()", "max_cohesion()")
+   max_cohesion(blocks = blocks)
+} # nocov end
 
 #########################################################
 ## Various designs to print the cohesive blocks

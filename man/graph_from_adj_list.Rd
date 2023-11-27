@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{graph_from_adj_list}
 \alias{graph_from_adj_list}
-\alias{graph.adjlist}
 \title{Create graphs from adjacency lists}
 \usage{
 graph_from_adj_list(

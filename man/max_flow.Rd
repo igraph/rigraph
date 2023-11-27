@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{max_flow}
 \alias{max_flow}
-\alias{graph.maxflow}
 \title{Maximum flow in a graph}
 \usage{
 max_flow(graph, source, target, capacity = NULL)

@@ -2,8 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{merge_coords}
 \alias{merge_coords}
-\alias{layout.merge}
-\alias{piecewise.layout}
 \alias{layout_components}
 \title{Merging graph layouts}
 \usage{

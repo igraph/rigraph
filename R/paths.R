@@ -93,7 +93,6 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
-#' @aliases is.dag
 #' @param graph The input graph. It may be undirected, in which case
 #'   `FALSE` is reported.
 #' @return A logical vector of length one.
@@ -150,7 +149,7 @@ is_acyclic <- function(graph) {
 #' The algorithm provides a simple basis for deciding whether a graph is
 #' chordal, see References below, and also [is_chordal()].
 #'
-#' @aliases maximum.cardinality.search max_cardinality
+#' @aliases max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The

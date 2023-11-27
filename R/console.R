@@ -36,7 +36,6 @@
 #'
 #' The console is written in Tcl/Tk and required the `tcltk` package.
 #'
-#' @aliases igraph.console
 #' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [igraph_options()] and the `verbose` option.
@@ -51,6 +50,21 @@ console <- function() {
   .igraph.progress.tkconsole.message("Console started.\n")
   invisible()
 }
+
+#' The igraph console
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.console()` was renamed to `console()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.console <- function() { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraph.console()", "console()")
+   console()
+} # nocov end
 
 .igraph.pb <- NULL
 

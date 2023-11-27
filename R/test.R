@@ -32,7 +32,6 @@
 #' This function simply calls the `test_dir` function from the
 #' `testthat` package on the test directory.
 #'
-#' @aliases igraphtest
 #' @return Whatever is returned by `test_dir` from the `testthat`
 #'   package.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -45,6 +44,21 @@ igraph_test <- function() {
   do.call("test_dir", list(tdir))
 }
 
+#' Run package tests
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraphtest()` was renamed to `igraph_test()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraphtest <- function() { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraphtest()", "igraph_test()")
+   igraph_test()
+} # nocov end
+
 
 # R_igraph_vers -----------------------------------------------------------------------
 
@@ -54,7 +68,6 @@ igraph_test <- function() {
 #'
 #' The igraph version string is always the same as the version of the R package.
 #'
-#' @aliases igraph.version
 #' @return A character scalar, the igraph version string.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @keywords graphs
@@ -69,6 +82,21 @@ igraph_test <- function() {
 igraph_version <- function() {
   unname(asNamespace("igraph")$.__NAMESPACE__.$spec["version"])
 }
+
+#' Query igraph's version string
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.version()` was renamed to `igraph_version()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.version <- function() { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraph.version()", "igraph_version()")
+   igraph_version()
+} # nocov end
 
 checkpkg <- function(package_file, args = character()) {
   package_file <- as.character(package_file)

@@ -47,7 +47,7 @@
 #' the original graph are discarded as the primary purpose of this function is
 #' to facilitate the usage of multigraphs with the VF2 algorithm.
 #'
-#' @aliases simplify is.simple
+#' @aliases simplify
 #' @param graph The graph to work on.
 #' @param remove.loops Logical, whether the loop edges are to be removed.
 #' @param remove.multiple Logical, whether the multiple edges are to be

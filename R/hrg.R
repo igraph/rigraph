@@ -55,7 +55,6 @@ NULL
 #' `start` argument is `TRUE`. It can be converted to the `hclust` class using
 #' `as.hclust()` provided in this package.
 #'
-#' @aliases hrg.fit
 #' @param graph The graph to fit the model to. Edge directions are ignored in
 #'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
@@ -140,6 +139,21 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
   res
 }
 
+#' Fit a hierarchical random graph model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hrg.fit()` was renamed to `fit_hrg()` to create a more
+#' consistent API.
+#' @inheritParams fit_hrg
+#' @keywords internal
+#' @export
+hrg.fit <- function(graph , hrg = NULL , start = FALSE , steps = 0) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "hrg.fit()", "fit_hrg()")
+   fit_hrg(graph = graph, hrg = hrg, start = start, steps = steps)
+} # nocov end
+
 
 #' Create a consensus tree from several hierarchical random graph models
 #'
@@ -149,7 +163,6 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
 #' sampling from the given HRG. Otherwise it optimizes the HRG log-likelihood
 #' first, and then samples starting from the optimum.
 #'
-#' @aliases hrg.consensus
 #' @param graph The graph the models were fitted to.
 #' @param hrg A hierarchical random graph model, in the form of an
 #'   `igraphHRG` object. `consensus_tree()` allows this to be
@@ -182,7 +195,6 @@ consensus_tree <- hrg_consensus_impl
 #' vertices. The `prob` argument contains the HRG probability labels
 #' for each vertex; these are ignored for leaf vertices.
 #'
-#' @aliases hrg.create
 #' @param graph The igraph graph to create the HRG from.
 #' @param prob A vector of probabilities, one for each vertex, in the order of
 #'   vertex ids.
@@ -211,7 +223,6 @@ hrg_tree <- hrg_dendrogram_impl
 #' `sample_hrg()` samples a graph from a given hierarchical random graph
 #' model.
 #'
-#' @aliases hrg.game
 #' @param hrg A hierarchical random graph model.
 #' @return An igraph graph.
 #'
@@ -228,7 +239,6 @@ sample_hrg <- hrg_game_impl
 #' argument is set to `TRUE`. Otherwise a HRG is fitted to the graph
 #' first.
 #'
-#' @aliases hrg.predict
 #' @param graph The graph to fit the model to. Edge directions are ignored in
 #'   directed graphs.
 #' @param hrg A hierarchical random graph model, in the form of an
@@ -305,6 +315,21 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
   class(res$hrg) <- "igraphHRG"
   res
 }
+
+#' Predict edges based on a hierarchical random graph model
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hrg.predict()` was renamed to `predict_edges()` to create a more
+#' consistent API.
+#' @inheritParams predict_edges
+#' @keywords internal
+#' @export
+hrg.predict <- function(graph , hrg = NULL , start = FALSE , num.samples = 10000 , num.bins = 25) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "hrg.predict()", "predict_edges()")
+   predict_edges(graph = graph, hrg = hrg, start = start, num.samples = num.samples, num.bins = num.bins)
+} # nocov end
 
 
 
@@ -574,7 +599,6 @@ rlang::on_load(s3_register("ape::as.phylo", "igraphHRG"))
 #'     plot_dendrogram(x, \dots)
 #' } The extra arguments are simply passed to [as.dendrogram()].
 #'
-#' @aliases hrg.dendrogram
 #' @param x An `igraphHRG`, a hierarchical random graph, as returned by
 #'   the [fit_hrg()] function.
 #' @param mode Which dendrogram plotting function to use. See details below.
@@ -606,6 +630,21 @@ plot_dendrogram.igraphHRG <- function(x, mode = igraph_opt("dend.plot.type"), ..
     hrgPlotPhylo(x, ...)
   }
 }
+
+#' HRG dendrogram plot
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `dendPlot.igraphHRG()` was renamed to `plot_dendrogram.igraphHRG()` to create a more
+#' consistent API.
+#' @inheritParams plot_dendrogram.igraphHRG
+#' @keywords internal
+#' @export
+dendPlot.igraphHRG <- function(x , mode = igraph_opt("dend.plot.type") , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "dendPlot.igraphHRG()", "plot_dendrogram.igraphHRG()")
+   plot_dendrogram.igraphHRG(x = x, mode = mode, ...)
+} # nocov end
 
 #' @importFrom graphics plot
 #' @importFrom grDevices rainbow

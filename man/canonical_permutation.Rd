@@ -2,7 +2,6 @@
 % Please edit documentation in R/topology.R
 \name{canonical_permutation}
 \alias{canonical_permutation}
-\alias{canonical.permutation}
 \title{Canonical permutation of a graph}
 \usage{
 canonical_permutation(

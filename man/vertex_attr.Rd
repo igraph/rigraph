@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{vertex_attr}
 \alias{vertex_attr}
-\alias{get.vertex.attribute}
 \alias{vertex.attributes}
 \title{Query vertex attributes of a graph}
 \usage{

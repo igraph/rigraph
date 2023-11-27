@@ -40,7 +40,6 @@
 #'
 #' It is also true that adding the fill-in edges to the graph makes it chordal.
 #'
-#' @aliases is.chordal
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
 #' @param alpha Numeric vector, the maximal chardinality ordering of the
@@ -106,3 +105,18 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   }
   res
 }
+
+#' Chordality of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.chordal()` was renamed to `is_chordal()` to create a more
+#' consistent API.
+#' @inheritParams is_chordal
+#' @keywords internal
+#' @export
+is.chordal <- function(graph , alpha = NULL , alpham1 = NULL , fillin = FALSE , newgraph = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.chordal()", "is_chordal()")
+   is_chordal(graph = graph, alpha = alpha, alpham1 = alpham1, fillin = fillin, newgraph = newgraph)
+} # nocov end

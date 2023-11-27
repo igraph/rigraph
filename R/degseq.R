@@ -32,7 +32,7 @@
 #' degree vectors are equal and whether their sums are also equal. These are
 #' known sufficient and necessary conditions for a degree sequence to be valid.
 #'
-#' @aliases is.degree.sequence is_degseq
+#' @aliases is_degseq
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #'   the out-degree sequence for directed graphs.
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it
@@ -61,6 +61,21 @@ is_degseq <- function(out.deg, in.deg = NULL) {
   is_graphical(out.deg, in.deg, allowed.edge.types = "all")
 }
 
+#' Check if a degree sequence is valid for a multi-graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.degree.sequence()` was renamed to `is_degseq()` to create a more
+#' consistent API.
+#' @inheritParams is_degseq
+#' @keywords internal
+#' @export
+is.degree.sequence <- function(out.deg , in.deg = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.degree.sequence()", "is_degseq()")
+   is_degseq(out.deg = out.deg, in.deg = in.deg)
+} # nocov end
+
 #' Is a degree sequence graphical?
 #'
 #' Determine whether the given vertex degrees (in- and out-degrees for
@@ -70,7 +85,6 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' can perform the check also when self-loops, multi-edges, or both are allowed
 #' in the graph.
 #'
-#' @aliases is.graphical.degree.sequence
 #' @param out.deg Integer vector, the degree sequence for undirected graphs, or
 #'   the out-degree sequence for directed graphs.
 #' @param in.deg `NULL` or an integer vector. For undirected graphs, it

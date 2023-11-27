@@ -41,7 +41,6 @@
 #'
 #' `bipartite_projection()` keeps vertex attributes.
 #'
-#' @aliases bipartite.projection bipartite.projection.size
 #' @param graph The input graph. It can be directed, but edge directions are
 #'   ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
@@ -146,6 +145,21 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' Project a bipartite graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bipartite.projection()` was renamed to `bipartite_projection()` to create a more
+#' consistent API.
+#' @inheritParams bipartite_projection
+#' @keywords internal
+#' @export
+bipartite.projection <- function(graph , types = NULL , multiplicity = TRUE , probe1 = NULL , which = c("both","true","false") , remove.type = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "bipartite.projection()", "bipartite_projection()")
+   bipartite_projection(graph = graph, types = types, multiplicity = multiplicity, probe1 = probe1, which = which, remove.type = remove.type)
+} # nocov end
+
 #' @rdname bipartite_projection
 #' @export
 bipartite_projection_size <- bipartite_projection_size_impl
@@ -170,7 +184,6 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' least two components, then the vertices in the separate components can be
 #' mapped independently.
 #'
-#' @aliases bipartite.mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
 #'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A

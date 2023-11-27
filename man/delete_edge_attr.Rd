@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{delete_edge_attr}
 \alias{delete_edge_attr}
-\alias{remove.edge.attribute}
 \title{Delete an edge attribute}
 \usage{
 delete_edge_attr(graph, name)

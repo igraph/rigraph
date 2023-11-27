@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{betweenness}
 \alias{betweenness}
-\alias{edge.betweenness}
 \alias{betweenness.estimate}
 \alias{edge.betweenness.estimate}
 \alias{edge_betweenness}

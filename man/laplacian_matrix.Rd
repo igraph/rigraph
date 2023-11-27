@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{laplacian_matrix}
 \alias{laplacian_matrix}
-\alias{graph.laplacian}
 \title{Graph Laplacian}
 \usage{
 laplacian_matrix(

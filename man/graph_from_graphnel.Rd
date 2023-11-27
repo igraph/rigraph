@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{graph_from_graphnel}
 \alias{graph_from_graphnel}
-\alias{igraph.from.graphNEL}
 \title{Convert graphNEL objects from the graph package to igraph}
 \usage{
 graph_from_graphnel(graphNEL, name = TRUE, weight = TRUE, unlist.attrs = TRUE)

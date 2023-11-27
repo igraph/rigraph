@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{graph_from_atlas}
 \alias{graph_from_atlas}
-\alias{graph.atlas}
 \alias{atlas}
 \title{Create a graph from the Graph Atlas}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_sugiyama}
 \alias{layout_with_sugiyama}
-\alias{layout.sugiyama}
 \alias{with_sugiyama}
 \title{The Sugiyama graph layout generator}
 \usage{

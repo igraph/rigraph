@@ -126,7 +126,7 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 #'     [attribute.combination()] for details on this.}
 #' }
 #'
-#' @aliases igraph.options igraph_options getIgraphOpt igraph_opt
+#' @aliases igraph_options igraph_opt
 #' @param \dots A list may be given as the only argument, or any number of
 #'   arguments may be in the `name=value` form, or no argument at all may be
 #'   given. See the Value and Details sections for explanation.
@@ -162,6 +162,21 @@ igraph.pars.callbacks <- list("verbose" = igraph.pars.set.verbose)
 igraph_options <- function(...) {
   igraph_i_options(...)
 }
+
+#' Parameters for the igraph package
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.options()` was renamed to `igraph_options()` to create a more
+#' consistent API.
+#' @inheritParams igraph_options
+#' @keywords internal
+#' @export
+igraph.options <- function(...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "igraph.options()", "igraph_options()")
+   igraph_options(...)
+} # nocov end
 
 igraph_i_options <- function(..., .in = parent.frame()) {
   if (nargs() == 0) {
@@ -226,6 +241,21 @@ igraph_opt <- function(x, default = NULL) {
     get_config(paste0("igraph::", x), default)
   }
 }
+
+#' Parameters for the igraph package
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `getIgraphOpt()` was renamed to `igraph_opt()` to create a more
+#' consistent API.
+#' @inheritParams igraph_opt
+#' @keywords internal
+#' @export
+getIgraphOpt <- function(x , default = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "getIgraphOpt()", "igraph_opt()")
+   igraph_opt(x = x, default = default)
+} # nocov end
 
 
 #' Run code with a temporary igraph options setting

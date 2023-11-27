@@ -255,7 +255,7 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
 #' @return Logical scalar, `TRUE` if the graphs are isomorphic.
 #'
 #' @aliases graph.isomorphic graph.isomorphic.34 graph.isomorphic.vf2
-#'   graph.isomorphic.bliss
+#' @aliases   graph.isomorphic.bliss
 #'
 #' @references
 #'  Tommi Junttila and Petteri Kaski: Engineering an Efficient Canonical
@@ -697,7 +697,6 @@ graph.isoclass <- isoclass_impl
 #' @return An igraph object, the graph of the given size, directedness
 #'   and isomorphism class.
 #'
-#' @aliases graph.isocreate
 #'
 #' @family graph isomorphism
 #' @export
@@ -725,7 +724,6 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' connected non-singleton cell.} } See the paper in references for details
 #' about these.
 #'
-#' @aliases canonical.permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
@@ -792,7 +790,6 @@ canonical_permutation <- canonical_permutation_impl
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
 #'
-#' @aliases permute.vertices
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
 #'   first element is the new id of vertex 1, etc. Every number between one and
@@ -839,7 +836,6 @@ graph.isomorphic <- isomorphic_impl
 #' automorphisms themselves, use [automorphism_group()] to obtain
 #' a compact representation of the automorphism group.
 #'
-#' @aliases graph.automorphisms automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an

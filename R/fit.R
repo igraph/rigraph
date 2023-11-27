@@ -56,7 +56,6 @@
 #' The function uses the method of Clauset, Shalizi and Newman to calculate the
 #' parameters of the fitted distribution. See references below for the details.
 #'
-#' @aliases power.law.fit
 #' @param x The data to fit, a numeric vector. For implementation
 #'   \sQuote{`R.mle`} the data must be integer values. For the
 #'   \sQuote{`plfit`} implementation non-integer values might be present and
@@ -134,6 +133,21 @@ fit_power_law <- function(x, xmin = NULL, start = 2, force.continuous = FALSE,
     power.law.fit.new(x, xmin = xmin, force.continuous = force.continuous)
   }
 }
+
+#' Fitting a power-law distribution function to discrete data
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `power.law.fit()` was renamed to `fit_power_law()` to create a more
+#' consistent API.
+#' @inheritParams fit_power_law
+#' @keywords internal
+#' @export
+power.law.fit <- function(x , xmin = NULL , start = 2 , force.continuous = FALSE , implementation = c("plfit","R.mle") , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "power.law.fit()", "fit_power_law()")
+   fit_power_law(x = x, xmin = xmin, start = start, force.continuous = force.continuous, implementation = implementation, ...)
+} # nocov end
 
 power.law.fit.old <- function(x, xmin = NULL, start = 2, ...) {
   if (length(x) == 0) {

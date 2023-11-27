@@ -59,7 +59,7 @@ NULL
 #' @return A real scalar, the centralization of the graph from which
 #'   `scores` were derived.
 #'
-#' @aliases centralization centralize.scores
+#' @aliases centralization
 #' @family centralization related
 #'
 #' @export
@@ -107,7 +107,6 @@ centralize <- centralization_impl
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.degree
 #' @family centralization related
 #'
 #' @export
@@ -136,7 +135,6 @@ centr_degree <- centralization_degree_impl
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
-#' @aliases centralization.degree.tmax
 #' @family centralization related
 #'
 #' @export
@@ -171,6 +169,21 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
   res
 }
 
+#' Theoretical maximum for degree centralization
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.degree.tmax()` was renamed to `centr_degree_tmax()` to create a more
+#' consistent API.
+#' @inheritParams centr_degree_tmax
+#' @keywords internal
+#' @export
+centralization.degree.tmax <- function(graph = NULL , nodes = 0 , mode = c("all","out","in","total") , loops = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "centralization.degree.tmax()", "centr_degree_tmax()")
+   centr_degree_tmax(graph = graph, nodes = nodes, mode = mode, loops = loops)
+} # nocov end
+
 
 #' Centralize a graph according to the betweenness of vertices
 #'
@@ -189,7 +202,6 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.betweenness
 #' @family centralization related
 #'
 #' @export
@@ -215,6 +227,21 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
   res
 }
 
+#' Centralize a graph according to the betweenness of vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `centralization.betweenness()` was renamed to `centr_betw()` to create a more
+#' consistent API.
+#' @inheritParams centr_betw
+#' @keywords internal
+#' @export
+centralization.betweenness <- function(graph , directed = TRUE , normalized = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "centralization.betweenness()", "centr_betw()")
+   centr_betw(graph = graph, directed = directed, normalized = normalized)
+} # nocov end
+
 #' Theoretical maximum for betweenness centralization
 #'
 #' See [centralize()] for a summary of graph centralization.
@@ -229,7 +256,6 @@ centr_betw <- function(graph, directed = TRUE, normalized = TRUE) {
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.betweenness.tmax
 #' @family centralization related
 #'
 #' @export
@@ -259,7 +285,6 @@ centr_betw_tmax <- centralization_betweenness_tmax_impl
 #'     using the same parameters. If the `normalized` argument was
 #'     `TRUE`, then the result was divided by this number.}
 #'
-#' @aliases centralization.closeness
 #' @family centralization related
 #'
 #' @export
@@ -287,7 +312,6 @@ centr_clo <- centralization_closeness_impl
 #'   closeness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.closeness.tmax
 #' @family centralization related
 #'
 #' @export
@@ -322,7 +346,6 @@ centr_clo_tmax <- centralization_closeness_tmax_impl
 #'   \item{theoretical_max}{The same as above, the theoretical maximum
 #'     centralization score for a graph with the same number of vertices.}
 #'
-#' @aliases centralization.evcent
 #' @family centralization related
 #'
 #' @export
@@ -358,7 +381,6 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   betweenness centrality score for graphs with given order and other
 #'   parameters.
 #'
-#' @aliases centralization.evcent.tmax
 #' @family centralization related
 #'
 #' @export
