@@ -200,7 +200,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
         ## General
       } else {
         sapply(
-          graph.neighborhood(graph.us, order = k, V(graph.us), mode = mode),
+          make_ego_graph(graph.us, order = k, V(graph.us), mode = mode),
           FUN, ...
         )
       }
