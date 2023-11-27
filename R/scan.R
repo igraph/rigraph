@@ -125,8 +125,8 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
   stopifnot(is.logical(weighted), length(weighted) == 1)
 
   ## If weighted, then the graph(s) must be weighted
-  stopifnot(!weighted || (is.weighted(graph.us) && (is.null(graph.them) ||
-    is.weighted(graph.them))))
+  stopifnot(!weighted || (is_weighted(graph.us) && (is.null(graph.them) ||
+    is_weighted(graph.them))))
 
   ## Check if 'neighborhoods' makes sense
   if (!is.null(neighborhoods)) {
