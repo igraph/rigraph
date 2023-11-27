@@ -11,7 +11,6 @@
 \alias{summary.cohesiveBlocks}
 \alias{length.cohesiveBlocks}
 \alias{print.cohesiveBlocks}
-\alias{exportPajek}
 \alias{graphs_from_cohesive_blocks}
 \alias{cohesion.cohesiveBlocks}
 \alias{plot_hierarchy}

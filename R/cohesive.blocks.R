@@ -111,7 +111,6 @@
 #' @aliases cohesiveBlocks blocks
 #' @aliases hierarchy parent export_pajek plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
