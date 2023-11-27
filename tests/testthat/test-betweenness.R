@@ -91,7 +91,7 @@ test_that("shortest paths are compared with tolerance when calculating betweenne
     5.2605598, 6.6816853, 4.9482123, 1.8989790
   )
 
-  g <- graph.data.frame(edges, directed = FALSE)
+  g <- graph_from_data_frame(edges, directed = FALSE)
   result <- betweenness(g, weights = edges.dists)
 
   expect_that(result[1:5], equals(c("1" = 0, "2" = 44, "3" = 71, "4" = 36.5, "6" = 44)))

@@ -1,5 +1,5 @@
 test_that("any_multiple(), count_multiple(), which_multiple() works", {
-  # g <- barabasi.game(10, m = 3, algorithm = "bag")
+  # g <- sample_pa(10, m = 3, algorithm = "bag")
   g <- graph_from_edgelist(cbind(
     c(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10),
     c(1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 3, 4, 3, 1, 1, 1, 3, 1, 2, 4, 1, 1, 2, 4, 1, 4, 1)
@@ -33,7 +33,7 @@ test_that("any_multiple(), count_multiple(), which_multiple() works", {
   )
 
   ## Remove multiple edges but keep multiplicity
-  # g <- barabasi.game(10, m = 3, algorithm = "bag")
+  # g <- sample_pa(10, m = 3, algorithm = "bag")
   g <- graph_from_edgelist(cbind(
     c(2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10),
     c(1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 4, 1, 4, 1, 1, 6, 4, 1, 5, 8)
