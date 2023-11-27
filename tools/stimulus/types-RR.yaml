@@ -33,7 +33,7 @@ INDEX_VECTOR:
 
 VECTOR:
     DEFAULT:
-        AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
+        AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
     INCONV: '%I% <- as.numeric(%I%)'
 
 VERTEXINDEX:
