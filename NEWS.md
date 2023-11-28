@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9004
+
+## Bug fixes
+
+  - Fix printf() warning (#975).
+
+
 # igraph 1.5.99.9003
 
 ## Features
