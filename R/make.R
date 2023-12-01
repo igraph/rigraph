@@ -655,7 +655,16 @@ make_graph <- function(edges, ..., n = max(edges), isolates = NULL,
 #' @export
 graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
    lifecycle::deprecate_soft("1.6.0", "graph()", "make_graph()")
-   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, dir = dir, simplify = simplify, ...)
+
+   if (!missing(dir) && missing(directed)) {
+     directed <- dir
+   }
+
+   if (missing(simplify)) {
+   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, ...)
+   } else {
+   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, simplify = simplify, ...)
+   }
 } # nocov end
 
 #' Create an igraph graph from a list of edges, or a notable graph
@@ -670,7 +679,16 @@ graph <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TR
 #' @export
 graph.famous <- function(edges , ... , n = max(edges) , isolates = NULL , directed = TRUE , dir = directed , simplify = TRUE) { # nocov start
    lifecycle::deprecate_soft("1.6.0", "graph.famous()", "make_graph()")
-   make_graph(edges = edges, n = n, isolates = isolates, directed = directed, dir = dir, simplify = simplify, ...)
+
+  if (!missing(dir) && missing(directed)) {
+    directed <- dir
+  }
+
+  if (missing(simplify)) {
+    make_graph(edges = edges, n = n, isolates = isolates, directed = directed, ...)
+  } else {
+    make_graph(edges = edges, n = n, isolates = isolates, directed = directed, simplify = simplify, ...)
+  }
 } # nocov end
 
 make_famous_graph <- function(name) {
