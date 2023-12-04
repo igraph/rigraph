@@ -2,7 +2,6 @@
 % Please edit documentation in R/foreign.R
 \name{read_graph}
 \alias{read_graph}
-\alias{read.graph}
 \alias{LGL}
 \alias{Pajek}
 \alias{GraphML}
