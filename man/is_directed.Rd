@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{is_directed}
 \alias{is_directed}
-\alias{is.directed}
 \title{Check whether a graph is directed}
 \usage{
 is_directed(graph)

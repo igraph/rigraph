@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{delete_edges}
 \alias{delete_edges}
-\alias{delete.edges}
 \title{Delete edges from a graph}
 \usage{
 delete_edges(graph, edges)
