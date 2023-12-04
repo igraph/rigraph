@@ -2,7 +2,6 @@
 % Please edit documentation in R/data_frame.R
 \name{graph_from_edgelist}
 \alias{graph_from_edgelist}
-\alias{graph.edgelist}
 \alias{from_edgelist}
 \title{Create a graph from an edge list matrix}
 \usage{
