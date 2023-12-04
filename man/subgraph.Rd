@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{subgraph}
 \alias{subgraph}
-\alias{induced.subgraph}
 \alias{subgraph.edges}
 \alias{induced_subgraph}
 \title{Subgraph of a graph}

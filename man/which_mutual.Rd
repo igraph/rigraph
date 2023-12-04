@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{which_mutual}
 \alias{which_mutual}
-\alias{is.mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
 which_mutual(graph, eids = E(graph))

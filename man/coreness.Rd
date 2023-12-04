@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{coreness}
 \alias{coreness}
-\alias{graph.coreness}
 \title{K-core decomposition of graphs}
 \usage{
 coreness(graph, mode = c("all", "out", "in"))

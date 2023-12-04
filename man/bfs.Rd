@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{bfs}
 \alias{bfs}
-\alias{graph.bfs}
 \title{Breadth-first search}
 \usage{
 bfs(
