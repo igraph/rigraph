@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_islands}
 \alias{sample_islands}
-\alias{interconnected.islands.game}
 \title{A graph with subgraphs that are each a random graph.}
 \usage{
 sample_islands(islands.n, islands.size, islands.pin, n.inter)

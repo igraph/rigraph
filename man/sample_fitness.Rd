@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_fitness}
 \alias{sample_fitness}
-\alias{static.fitness.game}
 \title{Random graphs from vertex fitness scores}
 \usage{
 sample_fitness(

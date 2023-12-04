@@ -2,8 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_pa}
 \alias{sample_pa}
-\alias{barabasi.game}
-\alias{ba.game}
 \alias{pa}
 \title{Generate random graphs using preferential attachment}
 \usage{
