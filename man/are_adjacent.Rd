@@ -2,7 +2,6 @@
 % Please edit documentation in R/structure.info.R
 \name{are_adjacent}
 \alias{are_adjacent}
-\alias{are.connected}
 \title{Are two vertices adjacent?}
 \usage{
 are_adjacent(graph, v1, v2)
