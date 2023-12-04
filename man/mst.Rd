@@ -2,7 +2,6 @@
 % Please edit documentation in R/minimum.spanning.tree.R
 \name{mst}
 \alias{mst}
-\alias{minimum.spanning.tree}
 \title{Minimum spanning tree}
 \usage{
 mst(graph, weights = NULL, algorithm = NULL, ...)
