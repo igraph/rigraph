@@ -57,7 +57,7 @@ Suggests:
     vdiffr,
     withr
 LinkingTo: 
-    cpp11 (>= 0.2.0)
+    cpp11 (>= 0.4.7)
 VignetteBuilder: 
     knitr
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
