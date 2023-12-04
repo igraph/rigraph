@@ -2,7 +2,6 @@
 % Please edit documentation in R/console.R
 \name{console}
 \alias{console}
-\alias{igraph.console}
 \alias{.igraph.progress}
 \alias{.igraph.status}
 \title{The igraph console}
