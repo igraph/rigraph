@@ -156,7 +156,7 @@ deprecated("edge.betweenness.community", cluster_edge_betweenness)
 #' @export edge.connectivity
 deprecated("edge.connectivity", edge_connectivity)
 #' @export edge.disjoint.paths
-deprecated("edge.disjoint.paths", edge_disjoint_paths)
+deprecated("edge.disjoint.paths", edge_connectivity)
 #' @export establishment.game
 deprecated("establishment.game", sample_traits)
 #' @export evcent
@@ -533,7 +533,7 @@ deprecated("watts.strogatz.game", sample_smallworld)
 #' @export write.graph
 deprecated("write.graph", write_graph)
 #' @export graph.famous
-deprecated("graph.famous", make_famous_graph)
+deprecated("graph.famous", make_graph)
 #' @export igraph.from.graphNEL
 deprecated("igraph.from.graphNEL", graph_from_graphnel)
 #' @export igraph.to.graphNEL
