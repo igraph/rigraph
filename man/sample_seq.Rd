@@ -2,7 +2,6 @@
 % Please edit documentation in R/other.R
 \name{sample_seq}
 \alias{sample_seq}
-\alias{igraph.sample}
 \title{Sampling a random integer sequence}
 \usage{
 sample_seq(low, high, length)
