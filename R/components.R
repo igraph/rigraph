@@ -1,3 +1,78 @@
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `no.clusters()` was renamed to `count_components()` to create a more
+#' consistent API.
+#' @inheritParams count_components
+#' @keywords internal
+#' @export
+no.clusters <- function(graph , mode = c("weak","strong")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "no.clusters()", "count_components()")
+   count_components(graph = graph, mode = mode)
+} # nocov end
+
+#' Decompose a graph into components
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `decompose.graph()` was renamed to `decompose()` to create a more
+#' consistent API.
+#' @inheritParams decompose
+#' @keywords internal
+#' @export
+decompose.graph <- function(graph , mode = c("weak","strong") , max.comps = NA , min.vertices = 0) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "decompose.graph()", "decompose()")
+   decompose(graph = graph, mode = mode, max.comps = max.comps, min.vertices = min.vertices)
+} # nocov end
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `cluster.distribution()` was renamed to `component_distribution()` to create a more
+#' consistent API.
+#' @inheritParams component_distribution
+#' @keywords internal
+#' @export
+cluster.distribution <- function(graph , cumulative = FALSE , mul.size = FALSE , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "cluster.distribution()", "component_distribution()")
+   component_distribution(graph = graph, cumulative = cumulative, mul.size = mul.size, ...)
+} # nocov end
+
+#' Biconnected components
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `biconnected.components()` was renamed to `biconnected_components()` to create a more
+#' consistent API.
+#' @inheritParams biconnected_components
+#' @keywords internal
+#' @export
+biconnected.components <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "biconnected.components()", "biconnected_components()")
+   biconnected_components(graph = graph)
+} # nocov end
+
+#' Articulation points and bridges of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `articulation.points()` was renamed to `articulation_points()` to create a more
+#' consistent API.
+#' @inheritParams articulation_points
+#' @keywords internal
+#' @export
+articulation.points <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "articulation.points()", "articulation_points()")
+   articulation_points(graph = graph)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -70,7 +145,6 @@ component_distribution <- function(graph, cumulative = FALSE, mul.size = FALSE,
 #'
 #' Creates a separate graph for each connected component of a graph.
 #'
-#' @aliases decompose.graph
 #' @param graph The original graph.
 #' @param mode Character constant giving the type of the components, wither
 #'   `weak` for weakly connected components or `strong` for strongly
@@ -131,7 +205,6 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
 # " two. If a graph contains no bridges, then its edge connectivity is at least
 #' two.
 #'
-#' @aliases articulation.points
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return For `articulation_points()`, a numeric vector giving the vertex
@@ -175,7 +248,6 @@ bridges <- bridges_impl
 #' that this is not true for vertices: the same vertex can be part of many
 #' biconnected components.
 #'
-#' @aliases biconnected.components
 #' @param graph The input graph. It is treated as an undirected graph, even if
 #'   it is directed.
 #' @return A named list with three components: \item{no}{Numeric scalar, an
@@ -217,12 +289,3 @@ largest_component <- function(graph, mode = c("weak", "strong")) {
   induced_subgraph(graph, vids)
 }
 #' @export articulation.points
-deprecated("articulation.points", articulation_points)
-#' @export biconnected.components
-deprecated("biconnected.components", biconnected_components)
-#' @export cluster.distribution
-deprecated("cluster.distribution", component_distribution)
-#' @export decompose.graph
-deprecated("decompose.graph", decompose)
-#' @export no.clusters
-deprecated("no.clusters", count_components)
