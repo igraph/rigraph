@@ -4,7 +4,6 @@
 \alias{modularity.igraph}
 \alias{modularity}
 \alias{modularity_matrix}
-\alias{mod.matrix}
 \title{Modularity of a community structure of a graph}
 \usage{
 \method{modularity}{igraph}(x, membership, weights = NULL, resolution = 1, directed = TRUE, ...)
@@ -120,7 +119,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
 }
