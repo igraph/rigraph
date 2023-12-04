@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_eigen}
 \alias{centr_eigen}
-\alias{centralization.evcent}
 \title{Centralize a graph according to the eigenvector centrality of vertices}
 \usage{
 centr_eigen(

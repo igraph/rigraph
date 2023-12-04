@@ -3,7 +3,6 @@
 \name{centralize}
 \alias{centralize}
 \alias{centralization}
-\alias{centralize.scores}
 \title{Centralization of a graph}
 \usage{
 centralize(scores, theoretical.max = 0, normalized = TRUE)
