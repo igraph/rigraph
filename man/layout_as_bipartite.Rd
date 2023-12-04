@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_bipartite}
 \alias{layout_as_bipartite}
-\alias{layout.bipartite}
 \alias{as_bipartite}
 \title{Simple two-row layout for bipartite graphs}
 \usage{

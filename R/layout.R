@@ -1,4 +1,184 @@
 
+#' Merging graph layouts
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `piecewise.layout()` was renamed to `layout_components()` to create a more
+#' consistent API.
+#' @inheritParams layout_components
+#' @keywords internal
+#' @export
+piecewise.layout <- function(graph , layout = layout_with_kk , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "piecewise.layout()", "layout_components()")
+   layout_components(graph = graph, layout = layout, ...)
+} # nocov end
+
+#' The Sugiyama graph layout generator
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.sugiyama()` was renamed to `layout_with_sugiyama()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_sugiyama
+#' @keywords internal
+#' @export
+layout.sugiyama <- function(graph , layers = NULL , hgap = 1 , vgap = 1 , maxiter = 100 , weights = NULL , attributes = c("default","all","none")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.sugiyama()", "layout_with_sugiyama()")
+   layout_with_sugiyama(graph = graph, layers = layers, hgap = hgap, vgap = vgap, maxiter = maxiter, weights = weights, attributes = attributes)
+} # nocov end
+
+#' Generate coordinates to place the vertices of a graph in a star-shape
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.star()` was renamed to `layout_as_star()` to create a more
+#' consistent API.
+#' @inheritParams layout_as_star
+#' @keywords internal
+#' @export
+layout.star <- function(graph , center = V(graph)[1] , order = NULL) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.star()", "layout_as_star()")
+   layout_as_star(graph = graph, center = center, order = order)
+} # nocov end
+
+#' Normalize coordinates for plotting graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.norm()` was renamed to `norm_coords()` to create a more
+#' consistent API.
+#' @inheritParams norm_coords
+#' @keywords internal
+#' @export
+layout.norm <- function(layout , xmin = -1 , xmax = 1 , ymin = -1 , ymax = 1 , zmin = -1 , zmax = 1) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.norm()", "norm_coords()")
+   norm_coords(layout = layout, xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, zmin = zmin, zmax = zmax)
+} # nocov end
+
+#' Merging graph layouts
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.merge()` was renamed to `merge_coords()` to create a more
+#' consistent API.
+#' @inheritParams merge_coords
+#' @keywords internal
+#' @export
+layout.merge <- function(graphs , layouts , method = "dla") { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.merge()", "merge_coords()")
+   merge_coords(graphs = graphs, layouts = layouts, method = method)
+} # nocov end
+
+#' Graph layout by multidimensional scaling
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.mds()` was renamed to `layout_with_mds()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_mds
+#' @keywords internal
+#' @export
+layout.mds <- function(graph , dist = NULL , dim = 2 , options = arpack_defaults()) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.mds()", "layout_with_mds()")
+   layout_with_mds(graph = graph, dist = dist, dim = dim, options = options)
+} # nocov end
+
+#' Simple grid layout
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.grid()` was renamed to `layout_on_grid()` to create a more
+#' consistent API.
+#' @inheritParams layout_on_grid
+#' @keywords internal
+#' @export
+layout.grid <- function(graph , width = 0 , height = 0 , dim = 2) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.grid()", "layout_on_grid()")
+   layout_on_grid(graph = graph, width = width, height = height, dim = dim)
+} # nocov end
+
+#' The graphopt layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.graphopt()` was renamed to `layout_with_graphopt()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_graphopt
+#' @keywords internal
+#' @export
+layout.graphopt <- function(graph , start = NULL , niter = 500 , charge = 0.001 , mass = 30 , spring.length = 0 , spring.constant = 1 , max.sa.movement = 5) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.graphopt()", "layout_with_graphopt()")
+   layout_with_graphopt(graph = graph, start = start, niter = niter, charge = charge, mass = mass, spring.length = spring.length, spring.constant = spring.constant, max.sa.movement = max.sa.movement)
+} # nocov end
+
+#' The GEM layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.gem()` was renamed to `layout_with_gem()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_gem
+#' @keywords internal
+#' @export
+layout.gem <- function(graph , coords = NULL , maxiter = 40*vcount(graph)^2 , temp.max = max(vcount(graph),1) , temp.min = 1/10 , temp.init = sqrt(max(vcount(graph),1))) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.gem()", "layout_with_gem()")
+   layout_with_gem(graph = graph, coords = coords, maxiter = maxiter, temp.max = temp.max, temp.min = temp.min, temp.init = temp.init)
+} # nocov end
+
+#' The Davidson-Harel layout algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.davidson.harel()` was renamed to `layout_with_dh()` to create a more
+#' consistent API.
+#' @inheritParams layout_with_dh
+#' @keywords internal
+#' @export
+layout.davidson.harel <- function(graph , coords = NULL , maxiter = 10 , fineiter = max(10,log2(vcount(graph))) , cool.fact = 0.75 , weight.node.dist = 1.0 , weight.border = 0.0 , weight.edge.lengths = edge_density(graph)/10 , weight.edge.crossings = 1.0-sqrt(edge_density(graph)) , weight.node.edge.dist = 0.2*(1-edge_density(graph))) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.davidson.harel()", "layout_with_dh()")
+   layout_with_dh(graph = graph, coords = coords, maxiter = maxiter, fineiter = fineiter, cool.fact = cool.fact, weight.node.dist = weight.node.dist, weight.border = weight.border, weight.edge.lengths = weight.edge.lengths, weight.edge.crossings = weight.edge.crossings, weight.node.edge.dist = weight.node.edge.dist)
+} # nocov end
+
+#' Simple two-row layout for bipartite graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.bipartite()` was renamed to `layout_as_bipartite()` to create a more
+#' consistent API.
+#' @inheritParams layout_as_bipartite
+#' @keywords internal
+#' @export
+layout.bipartite <- function(graph , types = NULL , hgap = 1 , vgap = 1 , maxiter = 100) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.bipartite()", "layout_as_bipartite()")
+   layout_as_bipartite(graph = graph, types = types, hgap = hgap, vgap = vgap, maxiter = maxiter)
+} # nocov end
+
+#' Choose an appropriate graph layout algorithm automatically
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `layout.auto()` was renamed to `layout_nicely()` to create a more
+#' consistent API.
+#' @inheritParams layout_nicely
+#' @keywords internal
+#' @export
+layout.auto <- function(graph , dim = 2 , ...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "layout.auto()", "layout_nicely()")
+   layout_nicely(graph = graph, dim = dim, ...)
+} # nocov end
+
 ## ----------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -247,7 +427,6 @@ normalize <- function(xmin = -1, xmax = 1, ymin = xmin, ymax = xmax,
 #' edge crossings, using the Sugiyama algorithm (see
 #' [layout_with_sugiyama()]).
 #'
-#' @aliases layout.bipartite
 #' @param graph The bipartite input graph. It should have a logical
 #'   \sQuote{`type`} vertex attribute, or the `types` argument must be
 #'   given.
@@ -315,7 +494,6 @@ as_bipartite <- function(...) layout_spec(layout_as_bipartite, ...)
 #' It is possible to choose the vertex that will be in the center, and the
 #' order of the vertices can be also given.
 #'
-#' @aliases layout.star
 #' @param graph The graph to layout.
 #' @param center The id of the vertex to put in the center. By default it is
 #'   the first vertex.
@@ -548,7 +726,6 @@ layout.circle <- function(..., params = list()) {
 #' forward the weights to these functions and issue a warning about this. You
 #' can use `weights = NA` to silence the warning.
 #'
-#' @aliases layout.auto
 #' @param graph The input graph
 #' @param dim Dimensions, should be 2 or 3.
 #' @param \dots For `layout_nicely()` the extra arguments are passed to
@@ -628,7 +805,7 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' other. If you want to change the order of the vertices, then see the
 #' [permute()] function.
 #'
-#' @aliases layout.grid layout.grid.3d
+#' @aliases layout.grid.3d
 #' @param graph The input graph.
 #' @param width The number of vertices in a single row of the grid. If this is
 #'   zero or negative, then for 2d layouts the width of the grid will be the
@@ -820,7 +997,6 @@ layout.random <- function(..., params = list()) {
 #' possible. The only major difference is that coordinates are explicitly kept
 #' within the bounds of the rectangle of the layout.
 #'
-#' @aliases layout.davidson.harel
 #' @param graph The graph to lay out. Edge directions are ignored.
 #' @param coords Optional starting positions for the vertices. If this argument
 #'   is not `NULL` then it should be an appropriate matrix of starting
@@ -1118,7 +1294,6 @@ layout.fruchterman.reingold <- function(..., params = list()) {
 #'
 #' See the referenced paper below for the details of the algorithm.
 #'
-#' @aliases layout.gem
 #' @param graph The input graph. Edge directions are ignored.
 #' @param coords If not `NULL`, then the starting coordinates should be
 #'   given here, in a two or three column matrix, depending on the `dim`
@@ -1206,7 +1381,6 @@ with_gem <- function(...) layout_spec(layout_with_gem, ...)
 #'
 #' See also <http://www.schmuhl.org/graphopt/> for the original graphopt.
 #'
-#' @aliases layout.graphopt
 #' @param graph The input graph.
 #' @param start If given, then it should be a matrix with two columns and one
 #'   line for each vertex. This matrix will be used as starting positions for the
@@ -1492,7 +1666,6 @@ layout.lgl <- function(..., params = list()) {
 #' This function generates the layout separately for each graph component and
 #' then merges them via [merge_coords()].
 #'
-#' @aliases layout.mds
 #' @param graph The input graph.
 #' @param dist The distance matrix for the multidimensional scaling.  If
 #'   `NULL` (the default), then the unweighted shortest path matrix is used.
@@ -1575,7 +1748,6 @@ with_mds <- function(...) layout_spec(layout_with_mds, ...)
 #'
 #' For more details, see the reference below.
 #'
-#' @aliases layout.sugiyama
 #' @param graph The input graph.
 #' @param layers A numeric vector or `NULL`. If not `NULL`, then it
 #'   should specify the layer index of the vertices. Layers are numbered from
@@ -1906,7 +2078,6 @@ with_sugiyama <- function(...) layout_spec(layout_with_sugiyama, ...)
 #' for each component separately. Finally it merges the layouts via calling
 #' `merge_coords()`.
 #'
-#' @aliases layout.merge piecewise.layout
 #' @param graphs A list of graph objects.
 #' @param layouts A list of two-column matrices.
 #' @param method Character constant giving the method to use. Right now only
@@ -1956,7 +2127,6 @@ merge_coords <- function(graphs, layouts, method = "dla") {
 #' `norm_coords()` normalizes a layout, it linearly transforms each
 #' coordinate separately to fit into the given limits.
 #'
-#' @aliases layout.norm
 #' @param layout A matrix with two or three columns, the layout to normalize.
 #' @param xmin,xmax The limits for the first coordinate, if one of them or both
 #'   are `NULL` then no normalization is performed along this direction.
@@ -2006,7 +2176,6 @@ norm_coords <- function(layout, xmin = -1, xmax = 1, ymin = -1, ymax = 1,
 }
 
 #' @rdname merge_coords
-#' @aliases piecewise.layout
 #' @param graph The input graph.
 #' @export
 layout_components <- function(graph, layout = layout_with_kk, ...) {
@@ -2066,26 +2235,3 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
   layout_with_fr(graph)
 }
 #' @export layout.auto
-deprecated("layout.auto", layout_nicely)
-#' @export layout.bipartite
-deprecated("layout.bipartite", layout_as_bipartite)
-#' @export layout.davidson.harel
-deprecated("layout.davidson.harel", layout_with_dh)
-#' @export layout.gem
-deprecated("layout.gem", layout_with_gem)
-#' @export layout.graphopt
-deprecated("layout.graphopt", layout_with_graphopt)
-#' @export layout.grid
-deprecated("layout.grid", layout_on_grid)
-#' @export layout.mds
-deprecated("layout.mds", layout_with_mds)
-#' @export layout.merge
-deprecated("layout.merge", merge_coords)
-#' @export layout.norm
-deprecated("layout.norm", norm_coords)
-#' @export layout.star
-deprecated("layout.star", layout_as_star)
-#' @export layout.sugiyama
-deprecated("layout.sugiyama", layout_with_sugiyama)
-#' @export piecewise.layout
-deprecated("piecewise.layout", layout_components)
