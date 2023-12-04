@@ -1,3 +1,18 @@
+
+#' Stochastic matrix of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.stochastic()` was renamed to `stochastic_matrix()` to create a more
+#' consistent API.
+#' @inheritParams stochastic_matrix
+#' @keywords internal
+#' @export
+get.stochastic <- function(graph , column.wise = FALSE , sparse = igraph_opt("sparsematrices")) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "get.stochastic()", "stochastic_matrix()")
+   stochastic_matrix(graph = graph, column.wise = column.wise, sparse = sparse)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -77,7 +92,6 @@ NULL
 #' where it is assumed that \eqn{D} is non-singular.  Column stochastic
 #' matrices are defined in a symmetric way.
 #'
-#' @aliases get.stochastic
 #' @param graph The input graph. Must be of class `igraph`.
 #' @param column.wise If `FALSE`, then the rows of the stochastic matrix
 #'   sum up to one; otherwise it is the columns.
@@ -132,4 +146,3 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
   res
 }
 #' @export get.stochastic
-deprecated("get.stochastic", stochastic_matrix)
