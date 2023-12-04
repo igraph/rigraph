@@ -2,9 +2,7 @@
 % Please edit documentation in R/conversion.R
 \name{as_adj_list}
 \alias{as_adj_list}
-\alias{get.adjedgelist}
 \alias{as_adj_edge_list}
-\alias{get.adjlist}
 \title{Adjacency lists}
 \usage{
 as_adj_list(
