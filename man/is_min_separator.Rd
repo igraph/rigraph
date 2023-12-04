@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{is_min_separator}
 \alias{is_min_separator}
-\alias{is.minimal.separator}
 \title{Minimal vertex separators}
 \usage{
 is_min_separator(graph, candidate)

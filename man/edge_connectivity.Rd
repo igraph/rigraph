@@ -2,9 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{edge_connectivity}
 \alias{edge_connectivity}
-\alias{edge.connectivity}
-\alias{graph.adhesion}
-\alias{edge.disjoint.paths}
 \alias{edge_disjoint_paths}
 \alias{adhesion}
 \title{Edge connectivity}
