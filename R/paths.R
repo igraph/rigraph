@@ -1,3 +1,48 @@
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `path.length.hist()` was renamed to `distance_table()` to create a more
+#' consistent API.
+#' @inheritParams distance_table
+#' @keywords internal
+#' @export
+path.length.hist <- function(graph , directed = TRUE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "path.length.hist()", "distance_table()")
+   distance_table(graph = graph, directed = directed)
+} # nocov end
+
+#' Maximum cardinality search
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximum.cardinality.search()` was renamed to `max_cardinality()` to create a more
+#' consistent API.
+#' @inheritParams max_cardinality
+#' @keywords internal
+#' @export
+maximum.cardinality.search <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "maximum.cardinality.search()", "max_cardinality()")
+   max_cardinality(graph = graph)
+} # nocov end
+
+#' Directed acyclic graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.dag()` was renamed to `is_dag()` to create a more
+#' consistent API.
+#' @inheritParams is_dag
+#' @keywords internal
+#' @export
+is.dag <- function(graph) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "is.dag()", "is_dag()")
+   is_dag(graph = graph)
+} # nocov end
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -93,7 +138,6 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
-#' @aliases is.dag
 #' @param graph The input graph. It may be undirected, in which case
 #'   `FALSE` is reported.
 #' @return A logical vector of length one.
@@ -150,7 +194,7 @@ is_acyclic <- function(graph) {
 #' The algorithm provides a simple basis for deciding whether a graph is
 #' chordal, see References below, and also [is_chordal()].
 #'
-#' @aliases maximum.cardinality.search max_cardinality
+#' @aliases max_cardinality
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored, as the algorithm is defined for undirected graphs.
 #' @return A list with two components: \item{alpha}{Numeric vector. The
@@ -263,8 +307,3 @@ radius <- radius_impl
 #' @export
 distance_table <- path_length_hist_impl
 #' @export is.dag
-deprecated("is.dag", is_dag)
-#' @export maximum.cardinality.search
-deprecated("maximum.cardinality.search", max_cardinality)
-#' @export path.length.hist
-deprecated("path.length.hist", distance_table)
