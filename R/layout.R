@@ -2065,3 +2065,27 @@ layout.fruchterman.reingold.grid <- function(graph, ...) {
   )
   layout_with_fr(graph)
 }
+#' @export layout.auto
+deprecated("layout.auto", layout_nicely)
+#' @export layout.bipartite
+deprecated("layout.bipartite", layout_as_bipartite)
+#' @export layout.davidson.harel
+deprecated("layout.davidson.harel", layout_with_dh)
+#' @export layout.gem
+deprecated("layout.gem", layout_with_gem)
+#' @export layout.graphopt
+deprecated("layout.graphopt", layout_with_graphopt)
+#' @export layout.grid
+deprecated("layout.grid", layout_on_grid)
+#' @export layout.mds
+deprecated("layout.mds", layout_with_mds)
+#' @export layout.merge
+deprecated("layout.merge", merge_coords)
+#' @export layout.norm
+deprecated("layout.norm", norm_coords)
+#' @export layout.star
+deprecated("layout.star", layout_as_star)
+#' @export layout.sugiyama
+deprecated("layout.sugiyama", layout_with_sugiyama)
+#' @export piecewise.layout
+deprecated("piecewise.layout", layout_components)

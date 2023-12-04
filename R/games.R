@@ -1847,3 +1847,51 @@ sample_correlated_gnp <- correlated_game_impl
 #' gg
 #' cor(as.vector(gg[[1]][]), as.vector(gg[[2]][]))
 sample_correlated_gnp_pair <- correlated_pair_game_impl
+#' @export aging.prefatt.game
+deprecated("aging.prefatt.game", sample_pa_age)
+#' @export aging.ba.game
+deprecated("aging.ba.game", sample_pa_age)
+#' @export aging.barabasi.game
+deprecated("aging.barabasi.game", sample_pa_age)
+#' @export asymmetric.preference.game
+deprecated("asymmetric.preference.game", sample_asym_pref)
+#' @export ba.game
+deprecated("ba.game", sample_pa)
+#' @export barabasi.game
+deprecated("barabasi.game", sample_pa)
+#' @export bipartite.random.game
+deprecated("bipartite.random.game", sample_bipartite)
+#' @export callaway.traits.game
+deprecated("callaway.traits.game", sample_traits_callaway)
+#' @export cited.type.game
+deprecated("cited.type.game", sample_cit_types)
+#' @export citing.cited.type.game
+deprecated("citing.cited.type.game", sample_cit_cit_types)
+#' @export connect.neighborhood
+deprecated("connect.neighborhood", connect)
+#' @export degree.sequence.game
+deprecated("degree.sequence.game", sample_degseq)
+#' @export establishment.game
+deprecated("establishment.game", sample_traits)
+#' @export forest.fire.game
+deprecated("forest.fire.game", sample_forestfire)
+#' @export growing.random.game
+deprecated("growing.random.game", sample_growing)
+#' @export grg.game
+deprecated("grg.game", sample_grg)
+#' @export interconnected.islands.game
+deprecated("interconnected.islands.game", sample_islands)
+#' @export k.regular.game
+deprecated("k.regular.game", sample_k_regular)
+#' @export lastcit.game
+deprecated("lastcit.game", sample_last_cit)
+#' @export preference.game
+deprecated("preference.game", sample_pref)
+#' @export sbm.game
+deprecated("sbm.game", sample_sbm)
+#' @export static.fitness.game
+deprecated("static.fitness.game", sample_fitness)
+#' @export static.power.law.game
+deprecated("static.power.law.game", sample_fitness_pl)
+#' @export watts.strogatz.game
+deprecated("watts.strogatz.game", sample_smallworld)

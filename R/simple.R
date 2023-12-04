@@ -93,3 +93,5 @@ simplify_and_colorize <- function(graph) {
   E(res$res)$color <- res$edge_color
   res$res
 }
+#' @export is.simple
+deprecated("is.simple", is_simple)

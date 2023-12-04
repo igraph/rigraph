@@ -370,3 +370,21 @@ centr_eigen <- centralization_eigenvector_centrality_impl
 #'   `/`(centr_eigen_tmax(g))
 #' centr_eigen(g, normalized = TRUE)$centralization
 centr_eigen_tmax <- centralization_eigenvector_centrality_tmax_impl
+#' @export centralization.betweenness
+deprecated("centralization.betweenness", centr_betw)
+#' @export centralization.betweenness.tmax
+deprecated("centralization.betweenness.tmax", centr_betw_tmax)
+#' @export centralization.closeness
+deprecated("centralization.closeness", centr_clo)
+#' @export centralization.closeness.tmax
+deprecated("centralization.closeness.tmax", centr_clo_tmax)
+#' @export centralization.degree
+deprecated("centralization.degree", centr_degree)
+#' @export centralization.degree.tmax
+deprecated("centralization.degree.tmax", centr_degree_tmax)
+#' @export centralization.evcent
+deprecated("centralization.evcent", centr_eigen)
+#' @export centralization.evcent.tmax
+deprecated("centralization.evcent.tmax", centr_eigen_tmax)
+#' @export centralize.scores
+deprecated("centralize.scores", centralize)

@@ -2531,3 +2531,37 @@ communities <- groups.communities
 #' @export
 #' @family functions for manipulating graph structure
 contract <- contract_vertices_impl
+#' @export code.length
+deprecated("code.length", code_len)
+#' @export contract.vertices
+deprecated("contract.vertices", contract)
+#' @export cutat
+deprecated("cutat", cut_at)
+#' @export dendPlot
+deprecated("dendPlot", plot_dendrogram)
+#' @export edge.betweenness.community
+deprecated("edge.betweenness.community", cluster_edge_betweenness)
+#' @export fastgreedy.community
+deprecated("fastgreedy.community", cluster_fast_greedy)
+#' @export infomap.community
+deprecated("infomap.community", cluster_infomap)
+#' @export is.hierarchical
+deprecated("is.hierarchical", is_hierarchical)
+#' @export label.propagation.community
+deprecated("label.propagation.community", cluster_label_prop)
+#' @export leading.eigenvector.community
+deprecated("leading.eigenvector.community", cluster_leading_eigen)
+#' @export mod.matrix
+deprecated("mod.matrix", modularity_matrix)
+#' @export multilevel.community
+deprecated("multilevel.community", cluster_louvain)
+#' @export optimal.community
+deprecated("optimal.community", cluster_optimal)
+#' @export showtrace
+deprecated("showtrace", show_trace)
+#' @export spinglass.community
+deprecated("spinglass.community", cluster_spinglass)
+#' @export walktrap.community
+deprecated("walktrap.community", cluster_walktrap)
+#' @export create.communities
+deprecated("create.communities", make_clusters)

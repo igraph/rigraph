@@ -1487,3 +1487,25 @@ alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
   }
   res
 }
+#' @export alpha.centrality
+deprecated("alpha.centrality", alpha_centrality)
+#' @export authority.score
+deprecated("authority.score", authority_score)
+#' @export bonpow
+deprecated("bonpow", power_centrality)
+#' @export edge.betweenness
+deprecated("edge.betweenness", edge_betweenness)
+#' @export evcent
+deprecated("evcent", eigen_centrality)
+#' @export graph.diversity
+deprecated("graph.diversity", diversity)
+#' @export graph.eigen
+deprecated("graph.eigen", spectrum)
+#' @export graph.strength
+deprecated("graph.strength", strength)
+#' @export hub.score
+deprecated("hub.score", hub_score)
+#' @export page.rank
+deprecated("page.rank", page_rank)
+#' @export subgraph.centrality
+deprecated("subgraph.centrality", subgraph_centrality)

@@ -2346,3 +2346,59 @@ which_mutual <- is_mutual_impl
 #' @family structural.properties
 #' @export
 knn <- avg_nearest_neighbor_degree_impl
+#' @export average.path.length
+deprecated("average.path.length", mean_distance)
+#' @export clusters
+deprecated("clusters", components)
+#' @export count.multiple
+deprecated("count.multiple", count_multiple)
+#' @export degree.distribution
+deprecated("degree.distribution", degree_distribution)
+#' @export farthest.nodes
+deprecated("farthest.nodes", farthest_vertices)
+#' @export graph.bfs
+deprecated("graph.bfs", bfs)
+#' @export graph.coreness
+deprecated("graph.coreness", coreness)
+#' @export graph.density
+deprecated("graph.density", edge_density)
+#' @export graph.dfs
+deprecated("graph.dfs", dfs)
+#' @export graph.knn
+deprecated("graph.knn", knn)
+#' @export graph.laplacian
+deprecated("graph.laplacian", laplacian_matrix)
+#' @export graph.neighborhood
+deprecated("graph.neighborhood", make_ego_graph)
+#' @export has.multiple
+deprecated("has.multiple", any_multiple)
+#' @export induced.subgraph
+deprecated("induced.subgraph", induced_subgraph)
+#' @export is.connected
+deprecated("is.connected", is_connected)
+#' @export is.loop
+deprecated("is.loop", which_loop)
+#' @export is.matching
+deprecated("is.matching", is_matching)
+#' @export is.maximal.matching
+deprecated("is.maximal.matching", is_max_matching)
+#' @export is.multiple
+deprecated("is.multiple", which_multiple)
+#' @export is.mutual
+deprecated("is.mutual", which_mutual)
+#' @export maximum.bipartite.matching
+deprecated("maximum.bipartite.matching", max_bipartite_match)
+#' @export neighborhood.size
+deprecated("neighborhood.size", ego_size)
+#' @export shortest.paths
+deprecated("shortest.paths", distances)
+#' @export topological.sort
+deprecated("topological.sort", topo_sort)
+#' @export unfold.tree
+deprecated("unfold.tree", unfold_tree)
+#' @export get.diameter
+deprecated("get.diameter", get_diameter)
+#' @export get.all.shortest.paths
+deprecated("get.all.shortest.paths", all_shortest_paths)
+#' @export get.shortest.paths
+deprecated("get.shortest.paths", shortest_paths)

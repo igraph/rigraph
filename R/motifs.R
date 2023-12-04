@@ -240,3 +240,13 @@ dyad_census <- function(graph) {
 #' @family motifs
 #' @export
 triad_census <- triad_census_impl
+#' @export dyad.census
+deprecated("dyad.census", dyad_census)
+#' @export graph.motifs
+deprecated("graph.motifs", motifs)
+#' @export graph.motifs.est
+deprecated("graph.motifs.est", sample_motifs)
+#' @export graph.motifs.no
+deprecated("graph.motifs.no", count_motifs)
+#' @export triad.census
+deprecated("triad.census", triad_census)

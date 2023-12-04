@@ -600,3 +600,9 @@ write.graph.leda <- function(graph, file, vertex.attr = NULL, edge.attr = NULL,
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_write_graph_leda, graph, file, vertex.attr, edge.attr)
 }
+#' @export graph.graphdb
+deprecated("graph.graphdb", graph_from_graphdb)
+#' @export read.graph
+deprecated("read.graph", read_graph)
+#' @export write.graph
+deprecated("write.graph", write_graph)

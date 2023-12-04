@@ -170,3 +170,7 @@ assortativity_nominal <- assortativity_nominal_impl
 #' @rdname assortativity
 #' @export
 assortativity_degree <- assortativity_degree_impl
+#' @export assortativity.degree
+deprecated("assortativity.degree", assortativity_degree)
+#' @export assortativity.nominal
+deprecated("assortativity.nominal", assortativity_nominal)

@@ -288,3 +288,5 @@ drl_defaults <- list(
   final = igraph.drl.final,
   refine = igraph.drl.refine
 )
+#' @export layout.drl
+deprecated("layout.drl", layout_with_drl)

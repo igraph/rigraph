@@ -796,3 +796,31 @@ is_min_separator <- is_minimal_separator_impl
 #' )
 #' min_separators(camp)
 min_separators <- minimum_size_separators_impl
+#' @export dominator.tree
+deprecated("dominator.tree", dominator_tree)
+#' @export edge.connectivity
+deprecated("edge.connectivity", edge_connectivity)
+#' @export edge.disjoint.paths
+deprecated("edge.disjoint.paths", edge_connectivity)
+#' @export graph.adhesion
+deprecated("graph.adhesion", adhesion)
+#' @export graph.maxflow
+deprecated("graph.maxflow", max_flow)
+#' @export graph.mincut
+deprecated("graph.mincut", min_cut)
+#' @export is.minimal.separator
+deprecated("is.minimal.separator", is_min_separator)
+#' @export is.separator
+deprecated("is.separator", is_separator)
+#' @export minimal.st.separators
+deprecated("minimal.st.separators", min_st_separators)
+#' @export minimum.size.separators
+deprecated("minimum.size.separators", min_separators)
+#' @export stCuts
+deprecated("stCuts", st_cuts)
+#' @export stMincuts
+deprecated("stMincuts", st_min_cuts)
+#' @export vertex.connectivity
+deprecated("vertex.connectivity", vertex_connectivity)
+#' @export vertex.disjoint.paths
+deprecated("vertex.disjoint.paths", vertex_disjoint_paths)

@@ -131,3 +131,5 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 
   res
 }
+#' @export get.stochastic
+deprecated("get.stochastic", stochastic_matrix)

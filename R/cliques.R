@@ -381,3 +381,19 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
     clique_size_hist_impl(graph, min, max)
   }
 }
+#' @export clique.number
+deprecated("clique.number", clique_num)
+#' @export independence.number
+deprecated("independence.number", ivs_size)
+#' @export independent.vertex.sets
+deprecated("independent.vertex.sets", ivs)
+#' @export largest.cliques
+deprecated("largest.cliques", largest_cliques)
+#' @export largest.independent.vertex.sets
+deprecated("largest.independent.vertex.sets", largest_ivs)
+#' @export maximal.cliques
+deprecated("maximal.cliques", max_cliques)
+#' @export maximal.cliques.count
+deprecated("maximal.cliques.count", count_max_cliques)
+#' @export maximal.independent.vertex.sets
+deprecated("maximal.independent.vertex.sets", maximal_ivs)

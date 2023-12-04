@@ -935,3 +935,15 @@ B-7  p=1  B-5 2
 
 "
 
+#' @export hrg.consensus
+deprecated("hrg.consensus", consensus_tree)
+#' @export hrg.create
+deprecated("hrg.create", hrg)
+#' @export hrg.dendrogram
+deprecated("hrg.dendrogram", hrg_tree)
+#' @export hrg.game
+deprecated("hrg.game", sample_hrg)
+#' @export hrg.fit
+deprecated("hrg.fit", fit_hrg)
+#' @export hrg.predict
+deprecated("hrg.predict", predict_edges)

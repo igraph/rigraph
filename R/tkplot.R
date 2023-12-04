@@ -1831,3 +1831,23 @@ i.tkplot.get.edge.lty <- function(edge.lty) {
   }
   edge.lty
 }
+#' @export tkplot.canvas
+deprecated("tkplot.canvas", tk_canvas)
+#' @export tkplot.center
+deprecated("tkplot.center", tk_center)
+#' @export tkplot.close
+deprecated("tkplot.close", tk_close)
+#' @export tkplot.export.postscript
+deprecated("tkplot.export.postscript", tk_postscript)
+#' @export tkplot.fit.to.screen
+deprecated("tkplot.fit.to.screen", tk_fit)
+#' @export tkplot.getcoords
+deprecated("tkplot.getcoords", tk_coords)
+#' @export tkplot.off
+deprecated("tkplot.off", tk_off)
+#' @export tkplot.reshape
+deprecated("tkplot.reshape", tk_reshape)
+#' @export tkplot.rotate
+deprecated("tkplot.rotate", tk_rotate)
+#' @export tkplot.setcoords
+deprecated("tkplot.setcoords", tk_set_coords)

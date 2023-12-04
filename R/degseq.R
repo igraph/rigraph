@@ -98,3 +98,7 @@ is_degseq <- function(out.deg, in.deg = NULL) {
 #' is_graphical(degree(g))
 #' @export
 is_graphical <- is_graphical_impl
+#' @export is.degree.sequence
+deprecated("is.degree.sequence", is_degseq)
+#' @export is.graphical.degree.sequence
+deprecated("is.graphical.degree.sequence", is_graphical)
