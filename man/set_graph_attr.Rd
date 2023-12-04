@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{set_graph_attr}
 \alias{set_graph_attr}
-\alias{set.graph.attribute}
 \title{Set a graph attribute}
 \usage{
 set_graph_attr(graph, name, value)

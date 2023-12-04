@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{set_edge_attr}
 \alias{set_edge_attr}
-\alias{set.edge.attribute}
 \title{Set edge attributes}
 \usage{
 set_edge_attr(graph, name, index = E(graph), value)
