@@ -1,3 +1,93 @@
+
+#' Intersection of two or more sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.intersection()` was renamed to `intersection()` to create a more
+#' consistent API.
+#' @inheritParams intersection
+#' @keywords internal
+#' @export
+graph.intersection <- function(...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.intersection()", "intersection()")
+   intersection(...)
+} # nocov end
+
+#' Union of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.union()` was renamed to `union.igraph()` to create a more
+#' consistent API.
+#' @inheritParams union.igraph
+#' @keywords internal
+#' @export
+graph.union <- function(... , byname = "auto") { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.union()", "union.igraph()")
+   union.igraph(byname = byname, ...)
+} # nocov end
+
+#' Difference of two sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.difference()` was renamed to `difference()` to create a more
+#' consistent API.
+#' @inheritParams difference
+#' @keywords internal
+#' @export
+graph.difference <- function(...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.difference()", "difference()")
+   difference(...)
+} # nocov end
+
+#' Disjoint union of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.disjoint.union()` was renamed to `disjoint_union()` to create a more
+#' consistent API.
+#' @inheritParams disjoint_union
+#' @keywords internal
+#' @export
+graph.disjoint.union <- function(...) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.disjoint.union()", "disjoint_union()")
+   disjoint_union(...)
+} # nocov end
+
+#' Compose two graphs as binary relations
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.compose()` was renamed to `compose()` to create a more
+#' consistent API.
+#' @inheritParams compose
+#' @keywords internal
+#' @export
+graph.compose <- function(g1 , g2 , byname = "auto") { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.compose()", "compose()")
+   compose(g1 = g1, g2 = g2, byname = byname)
+} # nocov end
+
+#' Complementer of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.complementer()` was renamed to `complementer()` to create a more
+#' consistent API.
+#' @inheritParams complementer
+#' @keywords internal
+#' @export
+graph.complementer <- function(graph , loops = FALSE) { # nocov start
+   lifecycle::deprecate_soft("1.6.0", "graph.complementer()", "complementer()")
+   complementer(graph = graph, loops = loops)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -96,7 +186,7 @@ rename.attr.if.needed <- function(type, graphs, newsize = NULL, maps = NULL,
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
 #'
-#' @aliases graph.disjoint.union %du%
+#' @aliases %du%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param x,y Graph objects.
 #' @return A new graph object.
@@ -332,7 +422,7 @@ union.default <- function(...) {
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
 #'
-#' @aliases graph.union %u%
+#' @aliases %u%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
@@ -411,7 +501,7 @@ intersection <- function(...) {
 #' An error is generated if some input graphs are directed and others are
 #' undirected.
 #'
-#' @aliases graph.intersection %s%
+#' @aliases %s%
 #' @param \dots Graph objects or lists of graph objects.
 #' @param byname A logical scalar, or the character scalar `auto`. Whether
 #'   to perform the operation based on symbolic vertex names. If it is
@@ -487,7 +577,7 @@ difference <- function(...) {
 #' Note that `big` and `small` must both be directed or both be
 #' undirected, otherwise an error message is given.
 #'
-#' @aliases graph.difference %m%
+#' @aliases %m%
 #' @param big The left hand side argument of the minus operator. A directed or
 #'   undirected graph.
 #' @param small The right hand side argument of the minus operator. A directed
@@ -577,7 +667,6 @@ difference.igraph <- function(big, small, byname = "auto", ...) {
 #' `complementer()` keeps graph and vertex attriubutes, edge
 #' attributes are lost.
 #'
-#' @aliases graph.complementer
 #' @param graph The input graph, can be directed or undirected.
 #' @param loops Logical constant, whether to generate loop edges.
 #' @return A new graph object.
@@ -647,7 +736,7 @@ complementer <- function(graph, loops = FALSE) {
 #' g1 and g2, respectively, then (a,a) is included in the result. See
 #' [simplify()] if you want to get rid of the self-loops.
 #'
-#' @aliases graph.compose %c%
+#' @aliases %c%
 #' @param g1 The first input graph.
 #' @param g2 The second input graph.
 #' @param byname A logical scalar, or the character scalar `auto`. Whether
@@ -1195,14 +1284,3 @@ reverse_edges <- reverse_edges_impl
 #' @export
 t.igraph <- function(x) reverse_edges(x)
 #' @export graph.complementer
-deprecated("graph.complementer", complementer)
-#' @export graph.compose
-deprecated("graph.compose", compose)
-#' @export graph.disjoint.union
-deprecated("graph.disjoint.union", disjoint_union)
-#' @export graph.difference
-deprecated("graph.difference", difference)
-#' @export graph.union
-deprecated("graph.union", union.igraph)
-#' @export graph.intersection
-deprecated("graph.intersection", intersection)
