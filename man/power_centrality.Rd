@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{power_centrality}
 \alias{power_centrality}
-\alias{bonpow}
 \title{Find Bonacich Power Centrality Scores of Network Positions}
 \usage{
 power_centrality(

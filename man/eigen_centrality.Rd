@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{eigen_centrality}
 \alias{eigen_centrality}
-\alias{evcent}
 \title{Find Eigenvector Centrality Scores of Network Positions}
 \usage{
 eigen_centrality(
