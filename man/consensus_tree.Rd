@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{consensus_tree}
 \alias{consensus_tree}
-\alias{hrg.consensus}
 \title{Create a consensus tree from several hierarchical random graph models}
 \usage{
 consensus_tree(graph, hrg = NULL, start = FALSE, num.samples = 10000)
