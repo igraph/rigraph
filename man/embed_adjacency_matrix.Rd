@@ -10,7 +10,7 @@ embed_adjacency_matrix(
   weights = NULL,
   which = c("lm", "la", "sa"),
   scaled = TRUE,
-  cvec = graph.strength(graph, weights = weights)/(vcount(graph) - 1),
+  cvec = strength(graph, weights = weights)/(vcount(graph) - 1),
   options = arpack_defaults()
 )
 }
