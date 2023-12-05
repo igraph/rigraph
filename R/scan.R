@@ -106,10 +106,10 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
                        weighted = FALSE, mode = c("out", "in", "all"),
                        neighborhoods = NULL, ...) {
   ## Must be igraph object
-  stopifnot(is.igraph(graph.us))
+  stopifnot(is_igraph(graph.us))
 
   ## Must be NULL or igraph object
-  stopifnot(is.null(graph.them) || is.igraph(graph.them))
+  stopifnot(is.null(graph.them) || is_igraph(graph.them))
 
   ## If given, number of vertices must match
   stopifnot(is.null(graph.them) || vcount(graph.them) == vcount(graph.us))
