@@ -28,7 +28,7 @@ test_that("sample_correlated_gnp works when p is not given", {
 test_that("sample_correlated_gnp works even for non-ER graphs", {
   set.seed(42)
 
-  g <- grg.game(100, 0.2)
+  g <- sample_grg(100, 0.2)
   g2 <- sample_correlated_gnp(g, corr = 1)
   expect_that(g[], equals(g2[]))
 
@@ -50,7 +50,7 @@ test_that("sample_correlated_gnp corner cases work", {
   set.seed(42)
 
   is.full <- function(g) {
-    g2 <- graph.full(vcount(g), directed = is.directed(g))
+    g2 <- make_full_graph(vcount(g), directed = is_directed(g))
     graph.isomorphic(g, g2)
   }
 
@@ -77,12 +77,12 @@ test_that("permutation works for sample_correlated_gnp", {
   g <- erdos.renyi.game(10, .3)
   perm <- sample(vcount(g))
   g2 <- sample_correlated_gnp(g, corr = .99999, p = .3, permutation = perm)
-  g <- permute.vertices(g, perm)
+  g <- permute(g, perm)
   expect_that(g[], equals(g2[]))
 
   g <- erdos.renyi.game(10, .3)
   perm <- sample(vcount(g))
   g2 <- sample_correlated_gnp(g, corr = 1, p = .3, permutation = perm)
-  g <- permute.vertices(g, perm)
+  g <- permute(g, perm)
   expect_that(g[], equals(g2[]))
 })

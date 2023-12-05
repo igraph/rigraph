@@ -1,9 +1,3 @@
-test_that("notable graphs work with make_graph", {
-  g <- make_graph("Levi")
-  g2 <- graph.famous("Levi")
-  expect_true(identical_graphs(g, g2))
-})
-
 test_that("make_graph for notable graphs is case insensitive", {
   g <- make_graph("Levi")
   g2 <- make_graph("levi")
