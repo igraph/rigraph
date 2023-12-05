@@ -72,7 +72,7 @@
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lm"</span>, <span class="st">"la"</span>, <span class="st">"sa"</span><span class="op">)</span>,</span>
 <span>  scaled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  cvec <span class="op">=</span> <span class="fu"><a href="strength.html">graph.strength</a></span><span class="op">(</span><span class="va">graph</span>, weights <span class="op">=</span> <span class="va">weights</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  cvec <span class="op">=</span> <span class="fu"><a href="strength.html">strength</a></span><span class="op">(</span><span class="va">graph</span>, weights <span class="op">=</span> <span class="va">weights</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  options <span class="op">=</span> <span class="fu"><a href="arpack.html">arpack_defaults</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
