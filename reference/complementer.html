@@ -12,7 +12,7 @@ graph."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/math
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.99.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.99.9007</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,9 +134,9 @@ attributes are lost.</p>
 <span class="r-in"><span><span class="co">## Complementer of a ring</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_ring.html">make_ring</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 18dc502 U--- 10 35 -- Ring graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH d020018 U--- 10 35 -- Ring graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (g/c), mutual (g/l), circular (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 18dc502:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from d020018:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1-- 9 1-- 8 1-- 7 1-- 6 1-- 5 1-- 4 1-- 3 2--10 2-- 9 2-- 8 2-- 7 2-- 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 2-- 5 2-- 4 3--10 3-- 9 3-- 8 3-- 7 3-- 6 3-- 5 4--10 4-- 9 4-- 8 4-- 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] 4-- 6 5--10 5-- 9 5-- 8 5-- 7 6--10 6-- 9 6-- 8 7--10 7-- 9 8--10</span>
@@ -146,10 +146,10 @@ attributes are lost.</p>
 <span class="r-in"><span><span class="va">gc</span> <span class="op">&lt;-</span> <span class="fu">complementer</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span> <span class="op">&lt;-</span> <span class="fu"><a href="union.html">union</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">gc</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gu</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH cca13bd U--- 10 45 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 84487c8 U--- 10 45 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name_1 (g/c), name_2 (g/c), mutual_1 (g/l), mutual_2 (g/l),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | circular_1 (g/l), circular_2 (g/l)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from cca13bd:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 84487c8:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 9--10 8--10 8-- 9 7--10 7-- 9 7-- 8 6--10 6-- 9 6-- 8 6-- 7 5--10 5-- 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] 5-- 8 5-- 7 5-- 6 4--10 4-- 9 4-- 8 4-- 7 4-- 6 4-- 5 3--10 3-- 9 3-- 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] 3-- 7 3-- 6 3-- 5 3-- 4 2--10 2-- 9 2-- 8 2-- 7 2-- 6 2-- 5 2-- 4 2-- 3</span>
