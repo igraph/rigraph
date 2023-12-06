@@ -481,7 +481,7 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' gorder(g)
 #' vcount(g)
 vcount <- function(graph) {
-  as.numeric(vcount_impl(graph))
+  as.integer(vcount_impl(graph))
 }
 
 #' @export
