@@ -2,125 +2,85 @@
 
 # igraph 1.6.0
 
-## tests
-
-- Update based on zzz-deprecate.R (#979).
-
 ## Breaking changes
 
-- Breaking change: New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800).
-- Breaking change: Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
-- Breaking change: `bfs()` returns zero instead of `NaN` as rank for unreachable nodes (#956).
-- Breaking change: `vcount()` returns a numeric (#938).
-- Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
-- Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
-- Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
-- Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+- New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800), with consistent usage checks (#966).
 
-## vendor
+- Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
 
-- Update vendored igraph/C to igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c.
+- `bfs()` with unreachable nodes returns zero instead of `NaN` as `rank` (#956), and negative instead of `NaN` for `dist` (#926).
+
+- `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
+
+- `girth()` returns `Inf` for acyclic graphs (#931).
+
+- Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+
+- Remove `scg_eps()`, `scg_group()` and `scg_semi_proj()`, broken and no longer maintained (#946).
 
 ## Bug fixes
 
-- Fix printf() warning (#975).
+- Fix `printf()` warning (#975).
+
 - Fix calls to `isSymmetric()` for matrix objects with a class (#965).
+
 - Reduce frequency of interruption checks (#957).
 
 ## Features
 
 - Change "incidence matrix" naming to "biadjacency matrix" (#962).
-- Breaking change: `bfs()` returns zero instead of `NaN` as rank for unreachable nodes (#956).
+
 - Add aliases using the neighborhood terminology for all ego functions: (#950).
+
 - Rename arguments to `assortativity(values, values.in)` from `types1` and `types2` (#952).
+
 - Add ellipsis to `cluster_label_prop()` (#954).
+
 - Placeholders for `is_acyclic()` and `is_forest()`, to be implemented in igraph 2.0.0 (#945).
-- Update C core (#944).
+
 - `is_tree(details = TRUE)` designates the first vertex as root for non-trees (#935).
-- Breaking change: `vcount()` returns a numeric (#938).
+
 - `all_shortest_paths()` returns the vertex list in both `res` and `vpaths` components (#930).
-- Breaking change: `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
-- Breaking change: `girth()` returns `Inf` for acyclic graphs (#931).
-- Breaking change: `dist` computed by `bfs()` is negative instead of `NaN` for unreachable nodes (#926).
+
 - Improve symmetry check for adjacency matrices on input (#911).
+
 - Warn if non-symmetric undirected adjacency matrix (#904).
-
-## Chore
-
-- Update revdepcheck results.
-- Work around ggnetwork problems for now (#987).
-- Request recent version of cpp11 (#985).
-- Updated revdepcheck results.
-- Update results (#968).
-- Consistent check for `arpack_defaults` vs. `arpack_defaults()` (#966).
-- Rerun sanitizer checks with progress reporter in case of failure (#964).
-- Sync GraphML reader.
-- Sync flex-generated line numbers.
-- Document.
-- `usethis::use_lifecycle()` (#955).
-- Sync with igraph-0.10 branch (#951).
-- Add Aviator configuration.
-- Declare CI for sanitizer builds.
-- Update to testthat 3.2.0.
-- Added FUNDING.yml.
-- Fix vendoring script.
-- Restore vendored plfit, remove from vendored cigraph for now.
-- Restore vendored cs, remove from vendored cigraph for now.
-- Install ccache on GHA.
-- Remove duplicate vendored plfit.
-- Sync vendored parser artifacts for igraph/C 0.10.
-- Remove duplicate vendored cs.
-- Sync vendored igraph/C 0.10.
-- Improve troubleshooting info.
-- Fix typo in troubleshooting docs.
-- Bump upcoming igraph/C 0.10 sources.
-- Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
 
 ## Documentation
 
-- Rm use of aliases (#894).
-- Remove duplicate \seealso{} (#948).
-- Update knnk() docs.
-- Render reciprocity docs.
-- Fix formul in reciprocity() docs.
-- Strength() does not give a warning when no weights are given.
+- Remove duplicate `\seealso{}` (#948).
+
+- Update `knnk()` and `sir()` docs.
+
+- Fix formula in `reciprocity()` docs.
+
+- `strength()` does not give a warning when no weights are given.
+
 - Update `sample_smallworld()` manual page (#895).
-- Improve sir() docs.
+
 - Correct documentation for weighted cliques.
+
 - Update Erdos-Renyi model docs.
-
-## Refactoring
-
-- Use `is_named()` instead of deprecated `is.named()` (#986).
-- Manually replace graph.strength() (#983).
-- Manually replace deprecated graph.neighborhood() (#982).
-- Manually replace deprecated is.igraph (#981).
-- Manually replace deprecated is.weighted() (#980).
-- Breaking change: New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800).
-- Breaking change: Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
 
 ## Testing
 
 - Clean up tests (#967).
-- Stabilize `cluster_label_prop()` test (#932).
-- More robust `sample_pa()` test (#927).
-- Make `cluster_louvain()` test bullet-proof.
-- Stabilize SIR test (#936).
-- Stabilize `cluster_louvain()` test (#933).
-- Stabilize `sample_forestfire()` test (#929).
+
+- Stabilize tests for `cluster_label_prop()` (#932), `sample_pa()` (#927), `cluster_louvain()` (#933), SIR (#936), `sample_forestfire()` (#929).
+
 - Hard-code graph used in test (#928).
+
 - Update GML test file (#925).
+
 - Improve test for sampling from Dirichlet distribution (#923).
+
 - Omit test that no longer holds with igraph 0.10 (#922).
+
 - Stabilize test in preparation for upgrade (#920).
+
 - Stabilize plot test (#919).
+
 - Fix checks.
-
-## Uncategorized
-
-- Feat! Remove `scg_eps()`, `scg_group()` and `scg_semi_proj()`, broken and no longer maintained (#946).
-- Internal changes only.
-- Merge branch 'cran-1.5.1'.
 
 
 # igraph 1.5.1
