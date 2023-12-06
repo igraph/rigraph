@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.99.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,353 +60,58 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9007" id="igraph-15999007">igraph 1.5.99.9007<a class="anchor" aria-label="anchor" href="#igraph-15999007"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9006" id="igraph-15999006">igraph 1.5.99.9006<a class="anchor" aria-label="anchor" href="#igraph-15999006"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.6.0" id="igraph-160">igraph 1.6.0<a class="anchor" aria-label="anchor" href="#igraph-160"></a></h2>
 <div class="section level3">
-<h3 id="chore-1-5-99-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9006"></a></h3>
-<ul><li><p>Update revdepcheck results.</p></li>
-<li><p>Work around ggnetwork problems for now (<a href="https://github.com/igraph/rigraph/issues/987" class="external-link">#987</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-5-99-9006">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-99-9006"></a></h3>
-<ul><li>Use <code><a href="../reference/is_named.html">is_named()</a></code> instead of deprecated <code><a href="../reference/is_named.html">is.named()</a></code> (<a href="https://github.com/igraph/rigraph/issues/986" class="external-link">#986</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9005" id="igraph-15999005">igraph 1.5.99.9005<a class="anchor" aria-label="anchor" href="#igraph-15999005"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-99-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9005"></a></h3>
-<ul><li>Request recent version of cpp11 (<a href="https://github.com/igraph/rigraph/issues/985" class="external-link">#985</a>).</li>
+<h3 id="breaking-changes-1-6-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0"></a></h3>
+<ul><li><p>New <code><a href="../reference/arpack.html">arpack_defaults()</a></code> replaces <code>igraph.arpack.default</code> and <code>arpack_defaults</code> lists (<a href="https://github.com/igraph/rigraph/issues/800" class="external-link">#800</a>), with consistent usage checks (<a href="https://github.com/igraph/rigraph/issues/966" class="external-link">#966</a>).</p></li>
+<li><p>Define methods for <code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo()</a></code> instead of own <code><a href="../reference/as_phylo.html">as_phylo()</a></code> generic, remove deprecated <code>asPhylo()</code> (<a href="https://github.com/igraph/rigraph/issues/763" class="external-link">#763</a>).</p></li>
+<li><p><code><a href="../reference/bfs.html">bfs()</a></code> with unreachable nodes returns zero instead of <code>NaN</code> as <code>rank</code> (<a href="https://github.com/igraph/rigraph/issues/956" class="external-link">#956</a>), and negative instead of <code>NaN</code> for <code>dist</code> (<a href="https://github.com/igraph/rigraph/issues/926" class="external-link">#926</a>).</p></li>
+<li><p><code><a href="../reference/random_walk.html">random_walk()</a></code> adds one more step, the resulting list of vertices is of length <code>steps + 1</code> (<a href="https://github.com/igraph/rigraph/issues/934" class="external-link">#934</a>).</p></li>
+<li><p><code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/igraph/rigraph/issues/931" class="external-link">#931</a>).</p></li>
+<li><p>Remove some behaviour / parameters that were deprecated in 1.3 (<a href="https://github.com/igraph/rigraph/issues/842" class="external-link">#842</a>).</p></li>
+<li><p>Remove <code>scg_eps()</code>, <code>scg_group()</code> and <code>scg_semi_proj()</code>, broken and no longer maintained (<a href="https://github.com/igraph/rigraph/issues/946" class="external-link">#946</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="refactoring-1-5-99-9005">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-99-9005"></a></h3>
-<ul><li><p>Manually replace graph.strength() (<a href="https://github.com/igraph/rigraph/issues/983" class="external-link">#983</a>).</p></li>
-<li><p>Manually replace deprecated graph.neighborhood() (<a href="https://github.com/igraph/rigraph/issues/982" class="external-link">#982</a>).</p></li>
-<li><p>Manually replace deprecated is.igraph (<a href="https://github.com/igraph/rigraph/issues/981" class="external-link">#981</a>).</p></li>
-<li><p>Manually replace deprecated is.weighted() (<a href="https://github.com/igraph/rigraph/issues/980" class="external-link">#980</a>).</p></li>
+<h3 id="bug-fixes-1-6-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0"></a></h3>
+<ul><li><p>Fix <code>printf()</code> warning (<a href="https://github.com/igraph/rigraph/issues/975" class="external-link">#975</a>).</p></li>
+<li><p>Fix calls to <code><a href="https://rdrr.io/pkg/Matrix/man/isSymmetric-methods.html" class="external-link">isSymmetric()</a></code> for matrix objects with a class (<a href="https://github.com/igraph/rigraph/issues/965" class="external-link">#965</a>).</p></li>
+<li><p>Reduce frequency of interruption checks (<a href="https://github.com/igraph/rigraph/issues/957" class="external-link">#957</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="tests-1-5-99-9005">tests<a class="anchor" aria-label="anchor" href="#tests-1-5-99-9005"></a></h3>
-<ul><li>Update based on zzz-deprecate.R (<a href="https://github.com/igraph/rigraph/issues/979" class="external-link">#979</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9004" id="igraph-15999004">igraph 1.5.99.9004<a class="anchor" aria-label="anchor" href="#igraph-15999004"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-99-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-99-9004"></a></h3>
-<ul><li>Fix printf() warning (<a href="https://github.com/igraph/rigraph/issues/975" class="external-link">#975</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9003" id="igraph-15999003">igraph 1.5.99.9003<a class="anchor" aria-label="anchor" href="#igraph-15999003"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-99-9003">Features<a class="anchor" aria-label="anchor" href="#features-1-5-99-9003"></a></h3>
-<ul><li>Change “incidence matrix” naming to “biadjacency matrix” (<a href="https://github.com/igraph/rigraph/issues/962" class="external-link">#962</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-99-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9003"></a></h3>
-<ul><li>Updated revdepcheck results.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9002" id="igraph-15999002">igraph 1.5.99.9002<a class="anchor" aria-label="anchor" href="#igraph-15999002"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-99-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9002"></a></h3>
-<ul><li>Update results (<a href="https://github.com/igraph/rigraph/issues/968" class="external-link">#968</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9001" id="igraph-15999001">igraph 1.5.99.9001<a class="anchor" aria-label="anchor" href="#igraph-15999001"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-99-9001">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-99-9001"></a></h3>
-<ul><li>Fix calls to <code><a href="https://rdrr.io/pkg/Matrix/man/isSymmetric-methods.html" class="external-link">isSymmetric()</a></code> for matrix objects with a class (<a href="https://github.com/igraph/rigraph/issues/965" class="external-link">#965</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-99-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9001"></a></h3>
-<ul><li><p>Consistent check for <code>arpack_defaults</code> vs. <code><a href="../reference/arpack.html">arpack_defaults()</a></code> (<a href="https://github.com/igraph/rigraph/issues/966" class="external-link">#966</a>).</p></li>
-<li><p>Update revdepcheck results.</p></li>
-<li><p>Rerun sanitizer checks with progress reporter in case of failure (<a href="https://github.com/igraph/rigraph/issues/964" class="external-link">#964</a>).</p></li>
-<li><p>Sync GraphML reader.</p></li>
-<li><p>Sync flex-generated line numbers.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-5-99-9001">Testing<a class="anchor" aria-label="anchor" href="#testing-1-5-99-9001"></a></h3>
-<ul><li>Clean up tests (<a href="https://github.com/igraph/rigraph/issues/967" class="external-link">#967</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.99.9000" id="igraph-15999000">igraph 1.5.99.9000<a class="anchor" aria-label="anchor" href="#igraph-15999000"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-99-9000">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-99-9000"></a></h3>
-<ul><li><p>Sync GraphML reader.</p></li>
-<li><p>Sync flex-generated line numbers.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9020" id="igraph-1519020">igraph 1.5.1.9020<a class="anchor" aria-label="anchor" href="#igraph-1519020"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-5-1-9020">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-5-1-9020"></a></h3>
-<ul><li>Reduce frequency of interruption checks (<a href="https://github.com/igraph/rigraph/issues/957" class="external-link">#957</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9020">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9020"></a></h3>
-<ul><li>Rm use of aliases (<a href="https://github.com/igraph/rigraph/issues/894" class="external-link">#894</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-5-1-9020">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-1-9020"></a></h3>
-<ul><li>Breaking change: New <code><a href="../reference/arpack.html">arpack_defaults()</a></code> replaces <code>igraph.arpack.default</code> and <code>arpack_defaults</code> lists (<a href="https://github.com/igraph/rigraph/issues/800" class="external-link">#800</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-1-9020">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9020"></a></h3>
-<ul><li>Breaking change: New <code><a href="../reference/arpack.html">arpack_defaults()</a></code> replaces <code>igraph.arpack.default</code> and <code>arpack_defaults</code> lists (<a href="https://github.com/igraph/rigraph/issues/800" class="external-link">#800</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9019" id="igraph-1519019">igraph 1.5.1.9019<a class="anchor" aria-label="anchor" href="#igraph-1519019"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9019">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9019"></a></h3>
-<ul><li><p>Breaking change: <code><a href="../reference/bfs.html">bfs()</a></code> returns zero instead of <code>NaN</code> as rank for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/956" class="external-link">#956</a>).</p></li>
+<h3 id="features-1-6-0">Features<a class="anchor" aria-label="anchor" href="#features-1-6-0"></a></h3>
+<ul><li><p>Change “incidence matrix” naming to “biadjacency matrix” (<a href="https://github.com/igraph/rigraph/issues/962" class="external-link">#962</a>).</p></li>
 <li><p>Add aliases using the neighborhood terminology for all ego functions: (<a href="https://github.com/igraph/rigraph/issues/950" class="external-link">#950</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-1-9019">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9019"></a></h3>
-<ul><li><p>Document.</p></li>
-<li><p><code><a href="https://usethis.r-lib.org/reference/use_lifecycle.html" class="external-link">usethis::use_lifecycle()</a></code> (<a href="https://github.com/igraph/rigraph/issues/955" class="external-link">#955</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9019">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9019"></a></h3>
-<ul><li>Remove duplicate \seealso{} (<a href="https://github.com/igraph/rigraph/issues/948" class="external-link">#948</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="refactoring-1-5-1-9019">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-5-1-9019"></a></h3>
-<ul><li>Breaking change: Define methods for <code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo()</a></code> instead of own <code><a href="../reference/as_phylo.html">as_phylo()</a></code> generic, remove deprecated <code>asPhylo()</code> (<a href="https://github.com/igraph/rigraph/issues/763" class="external-link">#763</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-1-9019">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9019"></a></h3>
-<ul><li><p>Breaking change: Define methods for <code><a href="https://rdrr.io/pkg/ape/man/as.phylo.html" class="external-link">ape::as.phylo()</a></code> instead of own <code><a href="../reference/as_phylo.html">as_phylo()</a></code> generic, remove deprecated <code>asPhylo()</code> (<a href="https://github.com/igraph/rigraph/issues/763" class="external-link">#763</a>).</p></li>
-<li><p>Breaking change: <code><a href="../reference/bfs.html">bfs()</a></code> returns zero instead of <code>NaN</code> as rank for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/956" class="external-link">#956</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9018" id="igraph-1519018">igraph 1.5.1.9018<a class="anchor" aria-label="anchor" href="#igraph-1519018"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9018">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9018"></a></h3>
-<ul><li><p>Rename arguments to <code>assortativity(values, values.in)</code> from <code>types1</code> and <code>types2</code> (<a href="https://github.com/igraph/rigraph/issues/952" class="external-link">#952</a>).</p></li>
+<li><p>Rename arguments to <code>assortativity(values, values.in)</code> from <code>types1</code> and <code>types2</code> (<a href="https://github.com/igraph/rigraph/issues/952" class="external-link">#952</a>).</p></li>
 <li><p>Add ellipsis to <code><a href="../reference/cluster_label_prop.html">cluster_label_prop()</a></code> (<a href="https://github.com/igraph/rigraph/issues/954" class="external-link">#954</a>).</p></li>
 <li><p>Placeholders for <code><a href="../reference/is_acyclic.html">is_acyclic()</a></code> and <code><a href="../reference/is_forest.html">is_forest()</a></code>, to be implemented in igraph 2.0.0 (<a href="https://github.com/igraph/rigraph/issues/945" class="external-link">#945</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-1-9018">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9018"></a></h3>
-<ul><li>Sync with igraph-0.10 branch (<a href="https://github.com/igraph/rigraph/issues/951" class="external-link">#951</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9017" id="igraph-1519017">igraph 1.5.1.9017<a class="anchor" aria-label="anchor" href="#igraph-1519017"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9017">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9017"></a></h3>
-<ul><li><p>Update C core (<a href="https://github.com/igraph/rigraph/issues/944" class="external-link">#944</a>).</p></li>
 <li><p><code>is_tree(details = TRUE)</code> designates the first vertex as root for non-trees (<a href="https://github.com/igraph/rigraph/issues/935" class="external-link">#935</a>).</p></li>
-<li><p>Breaking change: <code><a href="../reference/gorder.html">vcount()</a></code> returns a numeric (<a href="https://github.com/igraph/rigraph/issues/938" class="external-link">#938</a>).</p></li>
 <li><p><code><a href="../reference/distances.html">all_shortest_paths()</a></code> returns the vertex list in both <code>res</code> and <code>vpaths</code> components (<a href="https://github.com/igraph/rigraph/issues/930" class="external-link">#930</a>).</p></li>
+<li><p>Improve symmetry check for adjacency matrices on input (<a href="https://github.com/igraph/rigraph/issues/911" class="external-link">#911</a>).</p></li>
+<li><p>Warn if non-symmetric undirected adjacency matrix (<a href="https://github.com/igraph/rigraph/issues/904" class="external-link">#904</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-1-5-1-9017">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9017"></a></h3>
-<ul><li>Add Aviator configuration.</li>
+<h3 id="documentation-1-6-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-6-0"></a></h3>
+<ul><li><p>Remove duplicate <code>\seealso{}</code> (<a href="https://github.com/igraph/rigraph/issues/948" class="external-link">#948</a>).</p></li>
+<li><p>Update <code>knnk()</code> and <code><a href="../reference/sir.html">sir()</a></code> docs.</p></li>
+<li><p>Fix formula in <code><a href="../reference/reciprocity.html">reciprocity()</a></code> docs.</p></li>
+<li><p><code><a href="../reference/strength.html">strength()</a></code> does not give a warning when no weights are given.</p></li>
+<li><p>Update <code><a href="../reference/sample_smallworld.html">sample_smallworld()</a></code> manual page (<a href="https://github.com/igraph/rigraph/issues/895" class="external-link">#895</a>).</p></li>
+<li><p>Correct documentation for weighted cliques.</p></li>
+<li><p>Update Erdos-Renyi model docs.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="breaking-changes-1-5-1-9017">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9017"></a></h3>
-<ul><li>Breaking change: <code><a href="../reference/gorder.html">vcount()</a></code> returns a numeric (<a href="https://github.com/igraph/rigraph/issues/938" class="external-link">#938</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-1-5-1-9017">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-5-1-9017"></a></h3>
-<ul><li>Feat! Remove <code>scg_eps()</code>, <code>scg_group()</code> and <code>scg_semi_proj()</code>, broken and no longer maintained (<a href="https://github.com/igraph/rigraph/issues/946" class="external-link">#946</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9016" id="igraph-1519016">igraph 1.5.1.9016<a class="anchor" aria-label="anchor" href="#igraph-1519016"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9016">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9016"></a></h3>
-<ul><li>Breaking change: <code><a href="../reference/random_walk.html">random_walk()</a></code> adds one more step, the resulting list of vertices is of length <code>steps + 1</code> (<a href="https://github.com/igraph/rigraph/issues/934" class="external-link">#934</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-5-1-9016">Testing<a class="anchor" aria-label="anchor" href="#testing-1-5-1-9016"></a></h3>
-<ul><li><p>Stabilize <code><a href="../reference/cluster_label_prop.html">cluster_label_prop()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/932" class="external-link">#932</a>).</p></li>
-<li><p>More robust <code><a href="../reference/sample_pa.html">sample_pa()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/927" class="external-link">#927</a>).</p></li>
-<li><p>Make <code><a href="../reference/cluster_louvain.html">cluster_louvain()</a></code> test bullet-proof.</p></li>
-<li><p>Stabilize SIR test (<a href="https://github.com/igraph/rigraph/issues/936" class="external-link">#936</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-1-9016">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9016"></a></h3>
-<ul><li>Breaking change: <code><a href="../reference/random_walk.html">random_walk()</a></code> adds one more step, the resulting list of vertices is of length <code>steps + 1</code> (<a href="https://github.com/igraph/rigraph/issues/934" class="external-link">#934</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9015" id="igraph-1519015">igraph 1.5.1.9015<a class="anchor" aria-label="anchor" href="#igraph-1519015"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9015">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9015"></a></h3>
-<ul><li><p>Breaking change: <code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/igraph/rigraph/issues/931" class="external-link">#931</a>).</p></li>
-<li><p>Breaking change: <code>dist</code> computed by <code><a href="../reference/bfs.html">bfs()</a></code> is negative instead of <code>NaN</code> for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/926" class="external-link">#926</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-1-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9015"></a></h3>
-<ul><li>Document.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9015">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9015"></a></h3>
-<ul><li>Update knnk() docs.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-5-1-9015">Testing<a class="anchor" aria-label="anchor" href="#testing-1-5-1-9015"></a></h3>
-<ul><li><p>Stabilize <code><a href="../reference/cluster_louvain.html">cluster_louvain()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/933" class="external-link">#933</a>).</p></li>
-<li><p>Stabilize <code><a href="../reference/sample_forestfire.html">sample_forestfire()</a></code> test (<a href="https://github.com/igraph/rigraph/issues/929" class="external-link">#929</a>).</p></li>
+<h3 id="testing-1-6-0">Testing<a class="anchor" aria-label="anchor" href="#testing-1-6-0"></a></h3>
+<ul><li><p>Clean up tests (<a href="https://github.com/igraph/rigraph/issues/967" class="external-link">#967</a>).</p></li>
+<li><p>Stabilize tests for <code><a href="../reference/cluster_label_prop.html">cluster_label_prop()</a></code> (<a href="https://github.com/igraph/rigraph/issues/932" class="external-link">#932</a>), <code><a href="../reference/sample_pa.html">sample_pa()</a></code> (<a href="https://github.com/igraph/rigraph/issues/927" class="external-link">#927</a>), <code><a href="../reference/cluster_louvain.html">cluster_louvain()</a></code> (<a href="https://github.com/igraph/rigraph/issues/933" class="external-link">#933</a>), SIR (<a href="https://github.com/igraph/rigraph/issues/936" class="external-link">#936</a>), <code><a href="../reference/sample_forestfire.html">sample_forestfire()</a></code> (<a href="https://github.com/igraph/rigraph/issues/929" class="external-link">#929</a>).</p></li>
 <li><p>Hard-code graph used in test (<a href="https://github.com/igraph/rigraph/issues/928" class="external-link">#928</a>).</p></li>
 <li><p>Update GML test file (<a href="https://github.com/igraph/rigraph/issues/925" class="external-link">#925</a>).</p></li>
 <li><p>Improve test for sampling from Dirichlet distribution (<a href="https://github.com/igraph/rigraph/issues/923" class="external-link">#923</a>).</p></li>
 <li><p>Omit test that no longer holds with igraph 0.10 (<a href="https://github.com/igraph/rigraph/issues/922" class="external-link">#922</a>).</p></li>
 <li><p>Stabilize test in preparation for upgrade (<a href="https://github.com/igraph/rigraph/issues/920" class="external-link">#920</a>).</p></li>
 <li><p>Stabilize plot test (<a href="https://github.com/igraph/rigraph/issues/919" class="external-link">#919</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-1-9015">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9015"></a></h3>
-<ul><li><p>Breaking change: <code><a href="../reference/girth.html">girth()</a></code> returns <code>Inf</code> for acyclic graphs (<a href="https://github.com/igraph/rigraph/issues/931" class="external-link">#931</a>).</p></li>
-<li><p>Breaking change: <code>dist</code> computed by <code><a href="../reference/bfs.html">bfs()</a></code> is negative instead of <code>NaN</code> for unreachable nodes (<a href="https://github.com/igraph/rigraph/issues/926" class="external-link">#926</a>).</p></li>
+<li><p>Fix checks.</p></li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9014" id="igraph-1519014">igraph 1.5.1.9014<a class="anchor" aria-label="anchor" href="#igraph-1519014"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9014">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9014"></a></h3>
-<ul><li>Render reciprocity docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9013" id="igraph-1519013">igraph 1.5.1.9013<a class="anchor" aria-label="anchor" href="#igraph-1519013"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9013">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9013"></a></h3>
-<ul><li>Improve symmetry check for adjacency matrices on input (<a href="https://github.com/igraph/rigraph/issues/911" class="external-link">#911</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9013">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9013"></a></h3>
-<ul><li>Fix formul in reciprocity() docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9012" id="igraph-1519012">igraph 1.5.1.9012<a class="anchor" aria-label="anchor" href="#igraph-1519012"></a></h2>
-<div class="section level3">
-<h3 id="features-1-5-1-9012">Features<a class="anchor" aria-label="anchor" href="#features-1-5-1-9012"></a></h3>
-<ul><li>Warn if non-symmetric undirected adjacency matrix (<a href="https://github.com/igraph/rigraph/issues/904" class="external-link">#904</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-5-1-9012">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9012"></a></h3>
-<ul><li><p>Declare CI for sanitizer builds.</p></li>
-<li><p>Update to testthat 3.2.0.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9012">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9012"></a></h3>
-<ul><li>Strength() does not give a warning when no weights are given.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-5-1-9012">Testing<a class="anchor" aria-label="anchor" href="#testing-1-5-1-9012"></a></h3>
-<ul><li>Fix checks.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9011" id="igraph-1519011">igraph 1.5.1.9011<a class="anchor" aria-label="anchor" href="#igraph-1519011"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9011">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9011"></a></h3>
-<ul><li>Added FUNDING.yml.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9010" id="igraph-1519010">igraph 1.5.1.9010<a class="anchor" aria-label="anchor" href="#igraph-1519010"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9010"></a></h3>
-<ul><li>Fix vendoring script.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="vendor-1-5-1-9010">vendor<a class="anchor" aria-label="anchor" href="#vendor-1-5-1-9010"></a></h3>
-<ul><li>Update vendored igraph/C to <a href="mailto:igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c" class="email">igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9009" id="igraph-1519009">igraph 1.5.1.9009<a class="anchor" aria-label="anchor" href="#igraph-1519009"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9009">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9009"></a></h3>
-<ul><li>Update <code><a href="../reference/sample_smallworld.html">sample_smallworld()</a></code> manual page (<a href="https://github.com/igraph/rigraph/issues/895" class="external-link">#895</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9008" id="igraph-1519008">igraph 1.5.1.9008<a class="anchor" aria-label="anchor" href="#igraph-1519008"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9008"></a></h3>
-<ul><li><p>Restore vendored plfit, remove from vendored cigraph for now.</p></li>
-<li><p>Restore vendored cs, remove from vendored cigraph for now.</p></li>
-<li><p>Install ccache on GHA.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9007" id="igraph-1519007">igraph 1.5.1.9007<a class="anchor" aria-label="anchor" href="#igraph-1519007"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9007"></a></h3>
-<ul><li><p>Remove duplicate vendored plfit.</p></li>
-<li><p>Sync vendored parser artifacts for igraph/C 0.10.</p></li>
-<li><p>Remove duplicate vendored cs.</p></li>
-<li><p>Sync vendored igraph/C 0.10.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9006" id="igraph-1519006">igraph 1.5.1.9006<a class="anchor" aria-label="anchor" href="#igraph-1519006"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9006"></a></h3>
-<ul><li><p>Improve troubleshooting info.</p></li>
-<li><p>Fix typo in troubleshooting docs.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9005" id="igraph-1519005">igraph 1.5.1.9005<a class="anchor" aria-label="anchor" href="#igraph-1519005"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9005">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9005"></a></h3>
-<ul><li>Improve sir() docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9004" id="igraph-1519004">igraph 1.5.1.9004<a class="anchor" aria-label="anchor" href="#igraph-1519004"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9004">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9004"></a></h3>
-<ul><li>Correct documentation for weighted cliques.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9003" id="igraph-1519003">igraph 1.5.1.9003<a class="anchor" aria-label="anchor" href="#igraph-1519003"></a></h2>
-<div class="section level3">
-<h3 id="documentation-1-5-1-9003">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-5-1-9003"></a></h3>
-<ul><li>Update Erdos-Renyi model docs.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9002" id="igraph-1519002">igraph 1.5.1.9002<a class="anchor" aria-label="anchor" href="#igraph-1519002"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-5-1-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-1-5-1-9002"></a></h3>
-<ul><li><p>Bump upcoming igraph/C 0.10 sources.</p></li>
-<li><p>Bump upcoming igraph/C 0.10 sources.</p></li>
-<li><p>Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (<a href="https://github.com/igraph/rigraph/issues/842" class="external-link">#842</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="breaking-changes-1-5-1-9002">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-5-1-9002"></a></h3>
-<ul><li>Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (<a href="https://github.com/igraph/rigraph/issues/842" class="external-link">#842</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9001" id="igraph-1519001">igraph 1.5.1.9001<a class="anchor" aria-label="anchor" href="#igraph-1519001"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.1.9000" id="igraph-1519000">igraph 1.5.1.9000<a class="anchor" aria-label="anchor" href="#igraph-1519000"></a></h2>
-<ul><li>Merge branch ‘cran-1.5.1’.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.1" id="igraph-151">igraph 1.5.1<a class="anchor" aria-label="anchor" href="#igraph-151"></a></h2><p class="text-muted">CRAN release: 2023-08-10</p>
 <div class="section level3">
