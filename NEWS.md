@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9005
+
+## Chore
+
+  - Request recent version of cpp11 (#985).
+
+## Refactoring
+
+  - Manually replace graph.strength() (#983).
+
+  - Manually replace deprecated graph.neighborhood() (#982).
+
+  - Manually replace deprecated is.igraph (#981).
+
+  - Manually replace deprecated is.weighted() (#980).
+
+## tests
+
+  - Update based on zzz-deprecate.R (#979).
+
+
 # igraph 1.5.99.9004
 
 ## Bug fixes
