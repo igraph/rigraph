@@ -47,13 +47,12 @@
 #' SCG should be of interest to practitioners of various fields dealing with
 #' problems where matrix eigenpairs play an important role, as for instance is
 #' the case of dynamical processes on networks.
-#' @author David Morton de Lachapelle,
-#' <http://people.epfl.ch/david.morton>.
+#' @author David Morton de Lachapelle.
 #' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 #' Shrinking Matrices while Preserving their Eigenpairs with Application to the
 #' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
 #' Matrix Analysis and Applications*, 2008.
-#' <http://people.epfl.ch/david.morton>
+#' <https://www.epfl.ch/labs/lbs/wp-content/uploads/2018/07/scg_math_paper_dml_dg_pdl.pdf>
 #'
 #' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
 #' in Oscillator Networks. *Physical Review Letters*, **100**(17),
