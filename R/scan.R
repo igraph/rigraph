@@ -106,10 +106,10 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
                        weighted = FALSE, mode = c("out", "in", "all"),
                        neighborhoods = NULL, ...) {
   ## Must be igraph object
-  stopifnot(is.igraph(graph.us))
+  stopifnot(is_igraph(graph.us))
 
   ## Must be NULL or igraph object
-  stopifnot(is.null(graph.them) || is.igraph(graph.them))
+  stopifnot(is.null(graph.them) || is_igraph(graph.them))
 
   ## If given, number of vertices must match
   stopifnot(is.null(graph.them) || vcount(graph.them) == vcount(graph.us))
@@ -125,8 +125,8 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
   stopifnot(is.logical(weighted), length(weighted) == 1)
 
   ## If weighted, then the graph(s) must be weighted
-  stopifnot(!weighted || (is.weighted(graph.us) && (is.null(graph.them) ||
-    is.weighted(graph.them))))
+  stopifnot(!weighted || (is_weighted(graph.us) && (is.null(graph.them) ||
+    is_weighted(graph.them))))
 
   ## Check if 'neighborhoods' makes sense
   if (!is.null(neighborhoods)) {
@@ -200,7 +200,7 @@ local_scan <- function(graph.us, graph.them = NULL, k = 1, FUN = NULL,
         ## General
       } else {
         sapply(
-          graph.neighborhood(graph.us, order = k, V(graph.us), mode = mode),
+          make_ego_graph(graph.us, order = k, V(graph.us), mode = mode),
           FUN, ...
         )
       }

@@ -1,5 +1,62 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9007
+
+- Internal changes only.
+
+
+# igraph 1.5.99.9006
+
+## Chore
+
+- Update revdepcheck results.
+
+- Work around ggnetwork problems for now (#987).
+
+## Refactoring
+
+- Use `is_named()` instead of deprecated `is.named()` (#986).
+
+
+# igraph 1.5.99.9005
+
+## Chore
+
+  - Request recent version of cpp11 (#985).
+
+## Refactoring
+
+  - Manually replace graph.strength() (#983).
+
+  - Manually replace deprecated graph.neighborhood() (#982).
+
+  - Manually replace deprecated is.igraph (#981).
+
+  - Manually replace deprecated is.weighted() (#980).
+
+## tests
+
+  - Update based on zzz-deprecate.R (#979).
+
+
+# igraph 1.5.99.9004
+
+## Bug fixes
+
+  - Fix printf() warning (#975).
+
+
+# igraph 1.5.99.9003
+
+## Features
+
+  - Change "incidence matrix" naming to "biadjacency matrix" (#962).
+
+## Chore
+
+  - Updated revdepcheck results.
+
+
 # igraph 1.5.99.9002
 
 ## Chore

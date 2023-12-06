@@ -21,13 +21,10 @@ test_that("shortest_paths works", {
   g <- graph_from_data_frame(as.data.frame(edges))
 
   all1 <- all_shortest_paths(g, "s", "t", weights = NA)$vpaths
-  all2 <- all_shortest_paths(g, "s", "t")$vpaths
 
   s1 <- shortest_paths(g, "s", "t", weights = NA)
-  s2 <- get.shortest.paths(g, "s", "t")
 
   expect_true(s1$vpath %in% all1)
-  expect_true(s2$vpath %in% all2)
 })
 
 test_that("shortest_paths can handle negative weights", {

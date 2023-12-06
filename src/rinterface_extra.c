@@ -242,7 +242,7 @@ SEXP R_igraph_handle_safe_eval_result_in_env(SEXP result, SEXP rho) {
       SEXP condition_message = PROTECT(Rf_install("conditionMessage"));
       SEXP condition_message_call = PROTECT(Rf_lang2(condition_message, result));
       SEXP evaluated_condition_message = PROTECT(Rf_eval(condition_message_call, rho));
-      Rf_error(CHAR(STRING_ELT(evaluated_condition_message, 0)));
+      Rf_error("%s", CHAR(STRING_ELT(evaluated_condition_message, 0)));
       UNPROTECT(3);
       return R_NilValue;
 
