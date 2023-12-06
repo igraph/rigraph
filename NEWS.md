@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.5.99.9006
+
+## Chore
+
+- Update revdepcheck results.
+
+- Work around ggnetwork problems for now (#987).
+
+## Refactoring
+
+- Use `is_named()` instead of deprecated `is.named()` (#986).
+
+
 # igraph 1.5.99.9005
 
 ## Chore
