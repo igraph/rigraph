@@ -8,7 +8,10 @@ on:
   release:
     types: [published]
   push:
-    branches: [master, main]
+    branches:
+      - master
+      - main
+      - cran-*
     paths:
       - DESCRIPTION
       - inst/CITATION
