@@ -1,36 +1,3 @@
-# bibliometrix
-
-<details>
-
-* Version: 4.1.3
-* GitHub: https://github.com/massimoaria/bibliometrix
-* Source code: https://github.com/cran/bibliometrix
-* Date/Publication: 2023-06-15 20:10:02 UTC
-* Number of recursive dependencies: 151
-
-Run `revdepcheck::cloud_details(, "bibliometrix")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘bibliometrix’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Note: possible error in 'betweenness(net, v = V(net), ': unused argument (nobigint = TRUE) 
-    See ‘/tmp/workdir/bibliometrix/new/bibliometrix.Rcheck/00install.out’ for details.
-    Information on the location(s) of code generating the ‘Note’s can be
-    obtained by re-running with environment variable R_KEEP_PKG_SOURCE set
-    to ‘yes’.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    networkStat: possible error in betweenness(net, v = V(net), directed =
-      FALSE, weights = NULL, nobigint = TRUE, normalized = TRUE): unused
-      argument (nobigint = TRUE)
-    ```
-
 # Canek
 
 <details>
@@ -215,11 +182,11 @@ Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
 
 <details>
 
-* Version: 0.99.7
+* Version: 0.99.8
 * GitHub: https://github.com/mengxu98/inferCSN
 * Source code: https://github.com/cran/inferCSN
-* Date/Publication: 2023-10-30 10:30:02 UTC
-* Number of recursive dependencies: 101
+* Date/Publication: 2023-12-04 05:00:02 UTC
+* Number of recursive dependencies: 100
 
 Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 
@@ -252,9 +219,9 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 28.4Mb
+      installed size is 35.6Mb
       sub-directories of 1Mb or more:
-        libs  27.4Mb
+        libs  34.6Mb
     ```
 
 # influential
@@ -292,74 +259,6 @@ Run `revdepcheck::cloud_details(, "influential")` for more info
         incidence directed mode multiple weighted add.names
       Mismatches in argument names:
         Position: 1 Code: ... Docs: incidence
-    ```
-
-# malan
-
-<details>
-
-* Version: 1.0.2
-* GitHub: https://github.com/mikldk/malan
-* Source code: https://github.com/cran/malan
-* Date/Publication: 2020-06-25 12:00:06 UTC
-* Number of recursive dependencies: 91
-
-Run `revdepcheck::cloud_details(, "malan")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘malan-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: from_igraph
-    > ### Title: Convert igraph to population
-    > ### Aliases: from_igraph
-    > 
-    > ### ** Examples
-    > 
-    > g <- igraph::graph_from_literal( 2 +- 1 -+ 3, 4 -+ 5 )
-    > plot(g)
-    > pop <- from_igraph(g)
-    Error in from_igraph(g) : x must be a tree (or a forest)
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(malan)
-      Loading required package: dplyr
-      
-      Attaching package: 'dplyr'
-      
-      The following object is masked from 'package:testthat':
-    ...
-       1. └─malan::from_igraph(g1) at test-igraph.R:5:3
-      ── Error ('test-igraph.R:22:3'): igraph import works for forest ────────────────
-      Error in `from_igraph(g2)`: x must be a tree (or a forest)
-      Backtrace:
-          ▆
-       1. └─malan::from_igraph(g2) at test-igraph.R:22:3
-      
-      [ FAIL 2 | WARN 0 | SKIP 0 | PASS 439 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is 22.8Mb
-      sub-directories of 1Mb or more:
-        libs  21.8Mb
     ```
 
 # manynet
@@ -423,7 +322,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 * GitHub: https://github.com/snlab-ch/migraph
 * Source code: https://github.com/cran/migraph
 * Date/Publication: 2023-11-02 10:10:02 UTC
-* Number of recursive dependencies: 117
+* Number of recursive dependencies: 116
 
 Run `revdepcheck::cloud_details(, "migraph")` for more info
 
@@ -520,16 +419,25 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
       > 
       > test_check("NAIR")
     ...
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test_functions.R:722:3'): addClusterMembership works ──────────────
+      net$details$clusters_in_network (`actual`) not equal to c(fast_greedy = 20, leiden = 55) (`expected`).
+      
+        `actual`: 20 53
       `expected`: 20 55
       
       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 1219 ]
       Error: Test failures
-      In addition: Warning messages:
-      1: In for (nme in names(lhs)) { :
-        closing unused connection 5 (/tmp/Rtmpy16DKG/c.rds)
-      2: In for (nme in names(lhs)) { :
-        closing unused connection 4 (/tmp/Rtmpy16DKG/b.rds)
       Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.1Mb
+      sub-directories of 1Mb or more:
+        libs   6.6Mb
     ```
 
 # nat
@@ -768,10 +676,10 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 17.3Mb
+      installed size is 20.0Mb
       sub-directories of 1Mb or more:
         data   2.1Mb
-        libs  11.9Mb
+        libs  14.6Mb
     ```
 
 *   checking Rd cross-references ... NOTE
