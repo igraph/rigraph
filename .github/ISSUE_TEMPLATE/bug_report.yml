@@ -6,9 +6,15 @@ body:
       value: >
         igraph has several repositories for different components, please make sure you're raising your issue in the correct one:
 
+  - type: markdown
+    attributes:
+      value: >
         If you are confident that the issue is not in the R interface but in the C core of igraph, please add it to the main [igraph repo](https://github.com/igraph/igraph) instead.
 
-        If you are unsure, feel free to add your issue here - we will transfer it to the main [igraph repo](https://github.com/igraph/igraph) if the root cause is in the C core of igraph.
+  - type: markdown
+    attributes:
+      value: >
+        If you are unsure, feel free to add your issue here - we will transfer it to the main igraph repo if the root cause is in the C core of igraph.
 
   - type: textarea
     attributes:
@@ -24,7 +30,16 @@ body:
 
         For the text box below, please prepare a minimal reproducible example that demonstrates the bug. This is the best way to help us understand the issue and fix it.
 
-        Please use the [reprex package](https://reprex.tidyverse.org/) to create a minimal reproducible example: it's as easy as copying your code to the clipboard, running `reprex::reprex()` and pasting the results here. Issues without a reprex or with code not in reprex form are much more difficult for us to tackle.
+  - type: markdown
+    attributes:
+      value: >
+        Please use the [reprex package](https://reprex.tidyverse.org/) to create a minimal reproducible example:
+
+        1. copy your code to the clipboard
+        1. run `reprex::reprex()`
+        1. paste the results in the text box below
+
+        Issues without a reprex or with code not in reprex form are much more difficult for us to tackle.
 
   - type: textarea
     attributes:
