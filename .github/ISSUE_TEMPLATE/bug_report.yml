@@ -1,0 +1,34 @@
+name: Bug report form
+description: Report a defect in the R interface of igraph
+body:
+  - type: markdown
+    attributes:
+      value: >
+        igraph has several repositories for different components, please make sure you're raising your issue in the correct one:
+
+        If you are confident that the issue is not in the R interface but in the C core of igraph, please add it to the main [igraph repo](https://github.com/igraph/igraph) instead.
+
+        If you are unsure, feel free to add your issue here - we will transfer it to the main [igraph repo](https://github.com/igraph/igraph) if the root cause is in the C core of igraph.
+
+  - type: textarea
+    attributes:
+      label: What happens?
+      description: A short, clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: >
+        ## Reproducible example
+
+        For the text box below, please prepare a minimal reproducible example that demonstrates the bug. This is the best way to help us understand the issue and fix it.
+
+        Please use the [reprex package](https://reprex.tidyverse.org/) to create a minimal reproducible example: it's as easy as copying your code to the clipboard, running `reprex::reprex()` and pasting the results here. Issues without a reprex or with code not in reprex form are much more difficult for us to tackle.
+
+  - type: textarea
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the behavior, please use the {reprex} package.
+    validations:
+      required: true
