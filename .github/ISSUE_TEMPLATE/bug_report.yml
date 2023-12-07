@@ -36,7 +36,9 @@ body:
         Please use the [reprex package](https://reprex.tidyverse.org/) to create a minimal reproducible example:
 
         1. copy your code to the clipboard
+
         1. run `reprex::reprex()`
+
         1. paste the results in the text box below
 
         Issues without a reprex or with code not in reprex form are much more difficult for us to tackle.
