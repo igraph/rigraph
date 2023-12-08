@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9001
+
+## Chore
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+
 # igraph 1.6.0.9000
 
   - Merge branch 'cran-1.6.0'.
