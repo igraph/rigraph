@@ -7,16 +7,11 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g1 <- graph_from_adjacency_matrix(M1)
   el1 <- as_edgelist(g1)
-  expect_that(
+  expect_equal(
     el1[order(el1[, 1], el1[, 2]), ],
-    equals(
-      structure(
-        c(
-          1, 1, 2, 3, 3, 4, 4, 3, 4, 1, 2, 4,
-          1, 4
-        ),
-        .Dim = c(7L, 2L)
-      )
+    cbind(
+      c(1, 1, 2, 3, 3, 4, 4),
+      c(3, 4, 1, 2, 4, 1, 4)
     )
   )
 
@@ -28,11 +23,12 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g2 <- graph_from_adjacency_matrix(M2, mode = "undirected")
   el2 <- as_edgelist(g2)
-  expect_that(
+  expect_equal(
     el2[order(el2[, 1], el2[, 2]), ],
-    equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4),
-      .Dim = c(4L, 2L)
-    ))
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4)
+    )
   )
 
   M3 <- rbind(
@@ -43,9 +39,12 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g3 <- graph_from_adjacency_matrix(M3, mode = "min")
   el3 <- as_edgelist(g3)
-  expect_that(
+  expect_equal(
     el3[order(el3[, 1], el3[, 2]), ],
-    equals(structure(c(1, 1, 1, 2, 3, 4), .Dim = c(3L, 2L)))
+    cbind(
+      c(1, 1, 1),
+      c(2, 3, 4)
+    )
   )
 
   M4 <- rbind(
@@ -56,16 +55,11 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g4 <- graph_from_adjacency_matrix(M4, mode = "max")
   el4 <- as_edgelist(g4)
-  expect_that(
+  expect_equal(
     el4[order(el4[, 1], el4[, 2]), ],
-    equals(
-      structure(
-        c(
-          1, 1, 1, 1, 3,
-          2, 3, 4, 4, 4
-        ),
-        .Dim = c(5L, 2L)
-      )
+    cbind(
+      c(1, 1, 1, 1, 3),
+      c(2, 3, 4, 4, 4)
     )
   )
 
@@ -77,9 +71,12 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g5 <- graph_from_adjacency_matrix(M5, mode = "upper")
   el5 <- as_edgelist(g5)
-  expect_that(
+  expect_equal(
     el5[order(el5[, 1], el5[, 2]), ],
-    equals(structure(c(1, 1, 1, 1, 2, 3, 4, 4), .Dim = c(4L, 2L)))
+    cbind(
+      c(1, 1, 1, 1),
+      c(2, 3, 4, 4)
+    )
   )
 
   M6 <- rbind(
@@ -90,9 +87,12 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g6 <- graph_from_adjacency_matrix(M6, mode = "lower")
   el6 <- as_edgelist(g6)
-  expect_that(
+  expect_equal(
     el6[order(el6[, 1], el6[, 2]), ],
-    equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4), .Dim = c(4L, 2L)))
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4)
+    )
   )
 
   M7 <- rbind(
@@ -103,16 +103,11 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g7 <- graph_from_adjacency_matrix(M7, mode = "plus")
   el7 <- as_edgelist(g7)
-  expect_that(
+  expect_equal(
     el7[order(el7[, 1], el7[, 2]), ],
-    equals(
-      structure(
-        c(
-          1, 1, 1, 1, 1, 1, 1, 3, 2, 2, 3, 3,
-          4, 4, 4, 4
-        ),
-        .Dim = c(8L, 2L)
-      )
+    cbind(
+      c(1, 1, 1, 1, 1, 1, 1, 3),
+      c(2, 2, 3, 3, 4, 4, 4, 4)
     )
   )
 
@@ -124,16 +119,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g8 <- graph_from_adjacency_matrix(M8, mode = "directed", weighted = TRUE)
   el8 <- cbind(as_edgelist(g8), E(g8)$weight)
-  expect_that(
+  expect_equal(
     el8[order(el8[, 1], el8[, 2]), ],
-    equals(structure(
-      c(
-        1, 1, 1, 2, 3, 4, 4, 2, 3, 4, 1, 1,
-        1, 3, 1, 1, 0.5, 1, 1, 1, 2
-      ),
-      .Dim =
-        c(7L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1, 2, 3, 4, 4),
+      c(2, 3, 4, 1, 1, 1, 3),
+      c(1, 1, 0.5, 1, 1, 1, 2)
+    )
   )
 
   M9 <- rbind(
@@ -144,11 +136,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g9 <- graph_from_adjacency_matrix(M9, mode = "undirected", weighted = TRUE)
   el9 <- cbind(as_edgelist(g9), E(g9)$weight)
-  expect_that(
+  expect_equal(
     el9[order(el9[, 1], el9[, 2]), ],
-    equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 3, 2),
-      .Dim = c(4L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4),
+      c(1, 1, 3, 2)
+    )
   )
 
   M10 <- rbind(
@@ -159,11 +153,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g10 <- graph_from_adjacency_matrix(M10, mode = "max", weighted = TRUE)
   el10 <- cbind(as_edgelist(g10), E(g10)$weight)
-  expect_that(
+  expect_equal(
     el10[order(el10[, 1], el10[, 2]), ],
-    equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 1, 2),
-      .Dim = c(4L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4),
+      c(1, 1, 1, 2)
+    )
   )
 
   M11 <- rbind(
@@ -174,12 +170,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g11 <- graph_from_adjacency_matrix(M11, mode = "min", weighted = TRUE)
   el11 <- cbind(as_edgelist(g11), E(g11)$weight)
-  expect_that(
+  expect_equal(
     el11[order(el11[, 1], el11[, 2]), ],
-    equals(structure(c(1, 1, 1, 2, 3, 4, 1, 1, 0.5),
-      .Dim =
-        c(3L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1),
+      c(2, 3, 4),
+      c(1, 1, 0.5)
+    )
   )
 
   M12 <- rbind(
@@ -190,11 +187,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g12 <- graph_from_adjacency_matrix(M12, mode = "lower", weighted = TRUE)
   el12 <- cbind(as_edgelist(g12), E(g12)$weight)
-  expect_that(
+  expect_equal(
     el12[order(el12[, 1], el12[, 2]), ],
-    equals(structure(c(1, 1, 1, 3, 2, 3, 4, 4, 1, 1, 1, 2),
-      .Dim = c(4L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4),
+      c(1, 1, 1, 2)
+    )
   )
 
   M13 <- rbind(
@@ -205,12 +204,13 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g13 <- graph_from_adjacency_matrix(M13, mode = "upper", weighted = TRUE)
   el13 <- cbind(as_edgelist(g13), E(g13)$weight)
-  expect_that(
+  expect_equal(
     el13[order(el13[, 1], el13[, 2]), ],
-    equals(structure(c(1, 1, 1, 2, 3, 4, 1, 1, 0.5),
-      .Dim =
-        c(3L, 3L)
-    ))
+    cbind(
+      c(1, 1, 1),
+      c(2, 3, 4),
+      c(1, 1, 0.5)
+    )
   )
 
   M14 <- rbind(
@@ -221,16 +221,12 @@ test_that("graph_from_adjacency_matrix works", {
   )
   g14 <- graph_from_adjacency_matrix(M14, mode = "plus", weighted = TRUE)
   el14 <- cbind(as_edgelist(g14), E(g14)$weight)
-  expect_that(
+  expect_equal(
     el14[order(el14[, 1], el14[, 2]), ],
-    equals(
-      structure(
-        c(
-          1, 1, 1, 3, 2, 3, 4, 4, 2, 2, 1.5,
-          2
-        ),
-        .Dim = c(4L, 3L)
-      )
+    cbind(
+      c(1, 1, 1, 3),
+      c(2, 3, 4, 4),
+      c(2, 2, 1.5, 2)
     )
   )
 })
