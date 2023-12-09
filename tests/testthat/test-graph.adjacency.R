@@ -229,6 +229,37 @@ test_that("graph_from_adjacency_matrix works", {
       c(2, 2, 1.5, 2)
     )
   )
+
+  # shazam package
+  M15 <- rbind(
+    c(1)
+  )
+  g15 <- graph_from_adjacency_matrix(M15, mode = "undirected", diag = FALSE)
+  el15 <- cbind(as_edgelist(g15), E(g15)$weight)
+  expect_equal(
+    el15[order(el15[, 1], el15[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
+  )
+
+  M16 <- rbind(
+    c(1)
+  )
+  g16 <- graph_from_adjacency_matrix(M16, mode = "lower", diag = FALSE)
+  el16 <- cbind(as_edgelist(g16), E(g16)$weight)
+  expect_equal(
+    el16[order(el16[, 1], el16[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
+  )
+
+  M17 <- rbind(
+    c(1)
+  )
+  g17 <- graph_from_adjacency_matrix(M17, mode = "plus", diag = FALSE)
+  el17 <- cbind(as_edgelist(g17), E(g17)$weight)
+  expect_equal(
+    el17[order(el17[, 1], el17[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
+  )
 })
 
 test_that("graph_from_adjacency_matrix works", {
@@ -463,6 +494,37 @@ test_that("graph_from_adjacency_matrix works", {
       c(2, 3, 4, 4),
       c(2, 2, 1.5, 2)
     )
+  )
+
+  # shazam package
+  M15 <- rbind(
+    c(1)
+  )
+  g15 <- graph_from_adjacency_matrix(as(M15, "dgCMatrix"), mode = "undirected", diag = FALSE)
+  el15 <- cbind(as_edgelist(g15), E(g15)$weight)
+  expect_equal(
+    el15[order(el15[, 1], el15[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
+  )
+
+  M16 <- rbind(
+    c(1)
+  )
+  g16 <- graph_from_adjacency_matrix(as(M16, "dgCMatrix"), mode = "lower", diag = FALSE)
+  el16 <- cbind(as_edgelist(g16), E(g16)$weight)
+  expect_equal(
+    el16[order(el16[, 1], el16[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
+  )
+
+  M17 <- rbind(
+    c(1)
+  )
+  g17 <- graph_from_adjacency_matrix(as(M17, "dgCMatrix"), mode = "plus", diag = FALSE)
+  el17 <- cbind(as_edgelist(g17), E(g17)$weight)
+  expect_equal(
+    el17[order(el17[, 1], el17[, 2]), ],
+    matrix(numeric(), nrow = 0, ncol = 3, dimnames = list(NULL, NULL))
   )
 })
 
