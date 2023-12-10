@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9002
+
+  - Merge branch 'cran-1.6.0'.
+
+
 # igraph 1.6.0.9001
 
 ## Chore
