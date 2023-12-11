@@ -1,4 +1,19 @@
 
+#' Simple graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.simple()` was renamed to `is_simple()` to create a more
+#' consistent API.
+#' @inheritParams is_simple
+#' @keywords internal
+#' @export
+is.simple <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.simple()", "is_simple()")
+  is_simple(graph = graph)
+} # nocov end
+
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -47,7 +62,7 @@
 #' the original graph are discarded as the primary purpose of this function is
 #' to facilitate the usage of multigraphs with the VF2 algorithm.
 #'
-#' @aliases simplify is.simple
+#' @aliases simplify
 #' @param graph The graph to work on.
 #' @param remove.loops Logical, whether the loop edges are to be removed.
 #' @param remove.multiple Logical, whether the multiple edges are to be
@@ -94,4 +109,3 @@ simplify_and_colorize <- function(graph) {
   res$res
 }
 #' @export is.simple
-deprecated("is.simple", is_simple)

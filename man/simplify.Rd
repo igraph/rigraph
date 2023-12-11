@@ -2,7 +2,6 @@
 % Please edit documentation in R/simple.R
 \name{simplify}
 \alias{simplify}
-\alias{is.simple}
 \alias{is_simple}
 \alias{simplify_and_colorize}
 \title{Simple graphs}
