@@ -1,0 +1,14 @@
+#' {{new_title}}
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `{{old}}()` was renamed to `{{new}}()` to create a more
+#' consistent API.
+{{inheritParamsOrNot}}
+#' @keywords internal
+#' @export
+{{old}} <- function({{{new_usage}}}) { # nocov start
+   lifecycle::deprecate_soft("1.7.0", "{{old}}()", "{{new}}()")
+   {{new}}({{args}})
+} # nocov end
