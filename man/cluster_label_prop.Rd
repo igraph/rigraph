@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_label_prop}
 \alias{cluster_label_prop}
-\alias{label.propagation.community}
 \title{Finding communities based on propagating labels}
 \usage{
 cluster_label_prop(
@@ -97,7 +96,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}

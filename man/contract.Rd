@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{contract}
 \alias{contract}
-\alias{contract.vertices}
 \title{Contract several vertices into a single one}
 \usage{
 contract(graph, mapping, vertex.attr.comb = igraph_opt("vertex.attr.comb"))
