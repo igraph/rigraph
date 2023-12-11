@@ -1,17 +1,14 @@
 ## revdepcheck results
 
-We checked 21 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 19 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 19 new problems
+ * We saw 16 new problems
  * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
-
-* Canek
-  checking tests ... ERROR
 
 * countland
   checking tests ... ERROR
@@ -24,10 +21,6 @@ Issues with CRAN packages are summarised below.
 
 * inferCSN
   checking examples ... ERROR
-
-* influential
-  checking dependencies in R code ... WARNING
-  checking for code/documentation mismatches ... WARNING
 
 * manynet
   checking tests ... ERROR
@@ -59,9 +52,6 @@ Issues with CRAN packages are summarised below.
 
 * phyloseqGraphTest
   checking examples ... ERROR
-  checking re-building of vignette outputs ... ERROR
-
-* rgraph6
   checking re-building of vignette outputs ... ERROR
 
 * riverconn

@@ -1,44 +1,3 @@
-# Canek
-
-<details>
-
-* Version: 0.2.4
-* GitHub: https://github.com/MartinLoza/Canek
-* Source code: https://github.com/cran/Canek
-* Date/Publication: 2023-11-06 00:10:02 UTC
-* Number of recursive dependencies: 222
-
-Run `revdepcheck::cloud_details(, "Canek")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(Canek)
-      > 
-      > test_check("Canek")
-      [ FAIL 2 | WARN 3 | SKIP 0 | PASS 90 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-    ...
-      as.integer(table(dataLouvain$cluster)) not equal to c(96, 125, 140, 171, 99).
-      Lengths differ: 4 is not 5
-      ── Failure ('test-Clustering.R:20:3'): Clustering with louvain works ───────────
-      dim(dataLouvain$centers) not equal to c(5, 10).
-      1/2 mismatches
-      [1] 4 - 5 == -1
-      
-      [ FAIL 2 | WARN 3 | SKIP 0 | PASS 90 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # countland
 
 <details>
@@ -222,43 +181,6 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
       installed size is 35.6Mb
       sub-directories of 1Mb or more:
         libs  34.6Mb
-    ```
-
-# influential
-
-<details>
-
-* Version: 2.2.8
-* GitHub: https://github.com/asalavaty/influential
-* Source code: https://github.com/cran/influential
-* Date/Publication: 2023-11-19 05:10:02 UTC
-* Number of recursive dependencies: 196
-
-Run `revdepcheck::cloud_details(, "influential")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking dependencies in R code ... WARNING
-    ```
-    '::' or ':::' import not declared from: ‘lifecycle’
-    ```
-
-*   checking for code/documentation mismatches ... WARNING
-    ```
-    Codoc mismatches from documentation object 'graph_from_incidence_matrix':
-    graph_from_incidence_matrix
-      Code: function(...)
-      Docs: function(incidence, directed = FALSE, mode = c("all", "out",
-                     "in", "total"), multiple = FALSE, weighted = NULL,
-                     add.names = NULL)
-      Argument names in code not in docs:
-        ...
-      Argument names in docs not in code:
-        incidence directed mode multiple weighted add.names
-      Mismatches in argument names:
-        Position: 1 Code: ... Docs: incidence
     ```
 
 # manynet
@@ -778,41 +700,6 @@ Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
 *   checking LazyData ... NOTE
     ```
       'LazyData' is specified without a 'data' directory
-    ```
-
-# rgraph6
-
-<details>
-
-* Version: 2.0-2
-* GitHub: https://github.com/mbojan/rgraph6
-* Source code: https://github.com/cran/rgraph6
-* Date/Publication: 2022-08-25 12:10:02 UTC
-* Number of recursive dependencies: 60
-
-Run `revdepcheck::cloud_details(, "rgraph6")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘rgraph6.Rmd’ using rmarkdown
-    
-    Quitting from lines 162-171 [unnamed-chunk-9] (rgraph6.Rmd)
-    Error: processing vignette 'rgraph6.Rmd' failed with diagnostics:
-    values must be type 'integer',
-     but FUN(X[[1]]) result is type 'double'
-    --- failed re-building ‘rgraph6.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘rgraph6.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
     ```
 
 # riverconn
