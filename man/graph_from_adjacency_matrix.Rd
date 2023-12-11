@@ -2,7 +2,6 @@
 % Please edit documentation in R/adjacency.R
 \name{graph_from_adjacency_matrix}
 \alias{graph_from_adjacency_matrix}
-\alias{graph.adjacency}
 \alias{from_adjacency}
 \title{Create graphs from adjacency matrices}
 \usage{
