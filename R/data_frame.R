@@ -1,4 +1,34 @@
 
+#' Create a graph from an edge list matrix
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.edgelist()` was renamed to `graph_from_edgelist()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_edgelist
+#' @keywords internal
+#' @export
+graph.edgelist <- function(el, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.edgelist()", "graph_from_edgelist()")
+  graph_from_edgelist(el = el, directed = directed)
+} # nocov end
+
+#' Creating igraph graphs from data frames or vice-versa
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.data.frame()` was renamed to `graph_from_data_frame()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_data_frame
+#' @keywords internal
+#' @export
+graph.data.frame <- function(d, directed = TRUE, vertices = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.data.frame()", "graph_from_data_frame()")
+  graph_from_data_frame(d = d, directed = directed, vertices = vertices)
+} # nocov end
+
 ## ----------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -69,7 +99,6 @@
 #' If the `what` argument is `both`, then both vertex and edge data
 #' is returned, in a list with named entries `vertices` and `edges`.
 #'
-#' @aliases graph.data.frame get.data.frame
 #' @param d A data frame containing a symbolic edge list in the first two
 #'   columns. Additional columns are considered as edge attributes.  Since
 #'   version 0.7 this argument is coerced to a data frame with
@@ -218,7 +247,6 @@ from_data_frame <- function(...) constructor_spec(graph_from_data_frame, ...)
 #' names and a vertex id will be assigned to each name, and also a
 #' `name` vertex attribute will be added.
 #'
-#' @aliases graph.edgelist
 #' @concept Edge list
 #' @param el The edge list, a two column matrix, character or numeric.
 #' @param directed Whether to create a directed graph.
@@ -262,6 +290,3 @@ graph_from_edgelist <- function(el, directed = TRUE) {
 #' @export
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)
 #' @export graph.data.frame
-deprecated("graph.data.frame", graph_from_data_frame)
-#' @export graph.edgelist
-deprecated("graph.edgelist", graph_from_edgelist)
