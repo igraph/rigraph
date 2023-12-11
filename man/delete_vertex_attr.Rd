@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{delete_vertex_attr}
 \alias{delete_vertex_attr}
-\alias{remove.vertex.attribute}
 \title{Delete a vertex attribute}
 \usage{
 delete_vertex_attr(graph, name)
