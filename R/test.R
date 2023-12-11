@@ -75,3 +75,7 @@ checkpkg <- function(package_file, args = character()) {
   args <- as.character(args)
   do.call(":::", list("tools", ".check_packages"))(c(package_file, args))
 }
+#' @export igraph.version
+deprecated("igraph.version", igraph_version)
+#' @export igraphtest
+deprecated("igraphtest", igraph_test)

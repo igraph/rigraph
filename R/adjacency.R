@@ -473,3 +473,5 @@ is_symmetric <- function(x) {
 #' @family adjacency
 #' @export
 from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)
+#' @export graph.adjacency
+deprecated("graph.adjacency", graph_from_adjacency_matrix)

@@ -1194,3 +1194,15 @@ reverse_edges <- reverse_edges_impl
 #' @family functions for manipulating graph structure
 #' @export
 t.igraph <- function(x) reverse_edges(x)
+#' @export graph.complementer
+deprecated("graph.complementer", complementer)
+#' @export graph.compose
+deprecated("graph.compose", compose)
+#' @export graph.disjoint.union
+deprecated("graph.disjoint.union", disjoint_union)
+#' @export graph.difference
+deprecated("graph.difference", difference)
+#' @export graph.union
+deprecated("graph.union", union.igraph)
+#' @export graph.intersection
+deprecated("graph.intersection", intersection)

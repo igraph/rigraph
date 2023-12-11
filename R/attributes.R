@@ -969,3 +969,33 @@ NULL
 `$<-.igraph` <- function(x, name, value) {
   set_graph_attr(x, name, value)
 }
+#' @export get.edge.attribute
+deprecated("get.edge.attribute", edge_attr)
+#' @export get.graph.attribute
+deprecated("get.graph.attribute", graph_attr)
+#' @export get.vertex.attribute
+deprecated("get.vertex.attribute", vertex_attr)
+#' @export is.bipartite
+deprecated("is.bipartite", is_bipartite)
+#' @export is.named
+deprecated("is.named", is_named)
+#' @export is.weighted
+deprecated("is.weighted", is_weighted)
+#' @export list.edge.attributes
+deprecated("list.edge.attributes", edge_attr_names)
+#' @export list.graph.attributes
+deprecated("list.graph.attributes", graph_attr_names)
+#' @export list.vertex.attributes
+deprecated("list.vertex.attributes", vertex_attr_names)
+#' @export remove.edge.attribute
+deprecated("remove.edge.attribute", delete_edge_attr)
+#' @export remove.graph.attribute
+deprecated("remove.graph.attribute", delete_graph_attr)
+#' @export remove.vertex.attribute
+deprecated("remove.vertex.attribute", delete_vertex_attr)
+#' @export set.edge.attribute
+deprecated("set.edge.attribute", set_edge_attr)
+#' @export set.graph.attribute
+deprecated("set.graph.attribute", set_graph_attr)
+#' @export set.vertex.attribute
+deprecated("set.vertex.attribute", set_vertex_attr)

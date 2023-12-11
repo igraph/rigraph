@@ -179,3 +179,9 @@ igraph.i.spMatrix <- function(M) {
 #' @family other
 #' @export
 convex_hull <- convex_hull_impl
+#' @export convex.hull
+deprecated("convex.hull", convex_hull)
+#' @export igraph.sample
+deprecated("igraph.sample", sample_seq)
+#' @export running.mean
+deprecated("running.mean", running_mean)

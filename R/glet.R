@@ -177,3 +177,7 @@ function() {
 #' @rdname graphlet_basis
 #' @export
 graphlets <- graphlets_impl
+#' @export graphlets.candidate.basis
+deprecated("graphlets.candidate.basis", graphlet_basis)
+#' @export graphlets.project
+deprecated("graphlets.project", graphlet_proj)

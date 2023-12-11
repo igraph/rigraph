@@ -89,3 +89,5 @@ mst <- function(graph, weights = NULL,
     stop("Invalid algorithm")
   }
 }
+#' @export minimum.spanning.tree
+deprecated("minimum.spanning.tree", mst)

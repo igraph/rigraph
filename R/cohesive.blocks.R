@@ -599,3 +599,15 @@ max_cohesion <- function(blocks) {
 ##    |                      [21] ...
 ##    '- B-5    c. 3, n.  4  [ 1] ......o.oo o.........
 ##                           [21] ...
+#' @export blockGraphs
+deprecated("blockGraphs", graphs_from_cohesive_blocks)
+#' @export cohesive.blocks
+deprecated("cohesive.blocks", cohesive_blocks)
+#' @export graph.cohesion
+deprecated("graph.cohesion", cohesion)
+#' @export maxcohesion
+deprecated("maxcohesion", max_cohesion)
+#' @export plotHierarchy
+deprecated("plotHierarchy", plot_hierarchy)
+#' @export exportPajek
+deprecated("exportPajek", export_pajek)
