@@ -119,9 +119,15 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
   } else if (mode == "max") {
     ## MAXIMUM
     el <- mysummary(adjmatrix)
@@ -166,7 +172,12 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
     rm(adjmatrix)
@@ -177,6 +188,7 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     ## MINIMUM
     adjmatrix <- sign(adjmatrix) * sign(Matrix::t(adjmatrix)) * adjmatrix
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
     if (!diag) {
       el <- el[el[, 1] != el[, 2], ]
     }
@@ -206,15 +218,20 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
     if (diag) {
       adjmatrix <- Matrix::tril(adjmatrix)
     } else {
-      adjmatrix <- Matrix::tril(adjmatrix, -1)
+      if (vc == 1) {
+        # Work around Matrix glitch
+        adjmatrix <- as(matrix(0), "dgCMatrix")
+      } else {
+        adjmatrix <- Matrix::tril(adjmatrix, -1)
+      }
     }
     el <- mysummary(adjmatrix)
+    rm(adjmatrix)
     if (diag) {
       loop <- el[, 1] == el[, 2]
       el[loop, 3] <- el[loop, 3] / 2
     }
     el <- el[el[, 3] != 0, ]
-    rm(adjmatrix)
   }
 
   if (!is.null(weighted)) {
