@@ -1,3 +1,423 @@
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.shortest.paths()` was renamed to `shortest_paths()` to create a more
+#' consistent API.
+#' @inheritParams shortest_paths
+#' @keywords internal
+#' @export
+get.shortest.paths <- function(graph, from, to = V(graph), mode = c("out", "all", "in"), weights = NULL, output = c("vpath", "epath", "both"), predecessors = FALSE, inbound.edges = FALSE, algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "get.shortest.paths()", "shortest_paths()")
+  shortest_paths(graph = graph, from = from, to = to, mode = mode, weights = weights, output = output, predecessors = predecessors, inbound.edges = inbound.edges, algorithm = algorithm)
+} # nocov end
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.all.shortest.paths()` was renamed to `all_shortest_paths()` to create a more
+#' consistent API.
+#' @inheritParams all_shortest_paths
+#' @keywords internal
+#' @export
+get.all.shortest.paths <- function(graph, from, to = V(graph), mode = c("out", "all", "in"), weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "get.all.shortest.paths()", "all_shortest_paths()")
+  all_shortest_paths(graph = graph, from = from, to = to, mode = mode, weights = weights)
+} # nocov end
+
+#' Diameter of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `get.diameter()` was renamed to `get_diameter()` to create a more
+#' consistent API.
+#' @inheritParams get_diameter
+#' @keywords internal
+#' @export
+get.diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "get.diameter()", "get_diameter()")
+  get_diameter(graph = graph, directed = directed, unconnected = unconnected, weights = weights)
+} # nocov end
+
+#' Convert a general graph into a forest
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `unfold.tree()` was renamed to `unfold_tree()` to create a more
+#' consistent API.
+#' @inheritParams unfold_tree
+#' @keywords internal
+#' @export
+unfold.tree <- function(graph, mode = c("all", "out", "in", "total"), roots) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "unfold.tree()", "unfold_tree()")
+  unfold_tree(graph = graph, mode = mode, roots = roots)
+} # nocov end
+
+#' Topological sorting of vertices in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `topological.sort()` was renamed to `topo_sort()` to create a more
+#' consistent API.
+#' @inheritParams topo_sort
+#' @keywords internal
+#' @export
+topological.sort <- function(graph, mode = c("out", "all", "in")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "topological.sort()", "topo_sort()")
+  topo_sort(graph = graph, mode = mode)
+} # nocov end
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `shortest.paths()` was renamed to `distances()` to create a more
+#' consistent API.
+#' @inheritParams distances
+#' @keywords internal
+#' @export
+shortest.paths <- function(graph, v = V(graph), to = V(graph), mode = c("all", "out", "in"), weights = NULL, algorithm = c("automatic", "unweighted", "dijkstra", "bellman-ford", "johnson")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "shortest.paths()", "distances()")
+  distances(graph = graph, v = v, to = to, mode = mode, weights = weights, algorithm = algorithm)
+} # nocov end
+
+#' Neighborhood of graph vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `neighborhood.size()` was renamed to `ego_size()` to create a more
+#' consistent API.
+#' @inheritParams ego_size
+#' @keywords internal
+#' @export
+neighborhood.size <- function(graph, order = 1, nodes = V(graph), mode = c("all", "out", "in"), mindist = 0) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "neighborhood.size()", "ego_size()")
+  ego_size(graph = graph, order = order, nodes = nodes, mode = mode, mindist = mindist)
+} # nocov end
+
+#' Matching
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximum.bipartite.matching()` was renamed to `max_bipartite_match()` to create a more
+#' consistent API.
+#' @inheritParams max_bipartite_match
+#' @keywords internal
+#' @export
+maximum.bipartite.matching <- function(graph, types = NULL, weights = NULL, eps = .Machine$double.eps) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "maximum.bipartite.matching()", "max_bipartite_match()")
+  max_bipartite_match(graph = graph, types = types, weights = weights, eps = eps)
+} # nocov end
+
+#' Find mutual edges in a directed graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.mutual()` was renamed to `which_mutual()` to create a more
+#' consistent API.
+#' @inheritParams which_mutual
+#' @keywords internal
+#' @export
+is.mutual <- function(graph, eids = E(graph)) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.mutual()", "which_mutual()")
+  which_mutual(graph = graph, eids = eids)
+} # nocov end
+
+#' Find the multiple or loop edges in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.multiple()` was renamed to `which_multiple()` to create a more
+#' consistent API.
+#' @inheritParams which_multiple
+#' @keywords internal
+#' @export
+is.multiple <- function(graph, eids = E(graph)) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.multiple()", "which_multiple()")
+  which_multiple(graph = graph, eids = eids)
+} # nocov end
+
+#' Matching
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.maximal.matching()` was renamed to `is_max_matching()` to create a more
+#' consistent API.
+#' @inheritParams is_max_matching
+#' @keywords internal
+#' @export
+is.maximal.matching <- function(graph, matching, types = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.maximal.matching()", "is_max_matching()")
+  is_max_matching(graph = graph, matching = matching, types = types)
+} # nocov end
+
+#' Matching
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.matching()` was renamed to `is_matching()` to create a more
+#' consistent API.
+#' @inheritParams is_matching
+#' @keywords internal
+#' @export
+is.matching <- function(graph, matching, types = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.matching()", "is_matching()")
+  is_matching(graph = graph, matching = matching, types = types)
+} # nocov end
+
+#' Find the multiple or loop edges in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.loop()` was renamed to `which_loop()` to create a more
+#' consistent API.
+#' @inheritParams which_loop
+#' @keywords internal
+#' @export
+is.loop <- function(graph, eids = E(graph)) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.loop()", "which_loop()")
+  which_loop(graph = graph, eids = eids)
+} # nocov end
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `is.connected()` was renamed to `is_connected()` to create a more
+#' consistent API.
+#' @inheritParams is_connected
+#' @keywords internal
+#' @export
+is.connected <- function(graph, mode = c("weak", "strong")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "is.connected()", "is_connected()")
+  is_connected(graph = graph, mode = mode)
+} # nocov end
+
+#' Subgraph of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `induced.subgraph()` was renamed to `induced_subgraph()` to create a more
+#' consistent API.
+#' @inheritParams induced_subgraph
+#' @keywords internal
+#' @export
+induced.subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "induced.subgraph()", "induced_subgraph()")
+  induced_subgraph(graph = graph, vids = vids, impl = impl)
+} # nocov end
+
+#' Find the multiple or loop edges in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `has.multiple()` was renamed to `any_multiple()` to create a more
+#' consistent API.
+#' @inheritParams any_multiple
+#' @keywords internal
+#' @export
+has.multiple <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "has.multiple()", "any_multiple()")
+  any_multiple(graph = graph)
+} # nocov end
+
+#' Neighborhood of graph vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.neighborhood()` was renamed to `make_ego_graph()` to create a more
+#' consistent API.
+#' @inheritParams make_ego_graph
+#' @keywords internal
+#' @export
+graph.neighborhood <- function(graph, order = 1, nodes = V(graph), mode = c("all", "out", "in"), mindist = 0) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.neighborhood()", "make_ego_graph()")
+  make_ego_graph(graph = graph, order = order, nodes = nodes, mode = mode, mindist = mindist)
+} # nocov end
+
+#' Graph Laplacian
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.laplacian()` was renamed to `laplacian_matrix()` to create a more
+#' consistent API.
+#' @inheritParams laplacian_matrix
+#' @keywords internal
+#' @export
+graph.laplacian <- function(graph, normalized = FALSE, weights = NULL, sparse = igraph_opt("sparsematrices")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.laplacian()", "laplacian_matrix()")
+  laplacian_matrix(graph = graph, normalized = normalized, weights = weights, sparse = sparse)
+} # nocov end
+
+#' Average nearest neighbor degree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.knn()` was renamed to `knn()` to create a more
+#' consistent API.
+#' @inheritParams knn
+#' @keywords internal
+#' @export
+graph.knn <- function(graph, vids = V(graph), mode = c("all", "out", "in", "total"), neighbor.degree.mode = c("all", "out", "in", "total"), weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.knn()", "knn()")
+  knn(graph = graph, vids = vids, mode = mode, neighbor.degree.mode = neighbor.degree.mode, weights = weights)
+} # nocov end
+
+#' Depth-first search
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.dfs()` was renamed to `dfs()` to create a more
+#' consistent API.
+#' @inheritParams dfs
+#' @keywords internal
+#' @export
+graph.dfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreachable = TRUE, order = TRUE, order.out = FALSE, father = FALSE, dist = FALSE, in.callback = NULL, out.callback = NULL, extra = NULL, rho = parent.frame(), neimode) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.dfs()", "dfs()")
+  dfs(graph = graph, root = root, mode = mode, unreachable = unreachable, order = order, order.out = order.out, father = father, dist = dist, in.callback = in.callback, out.callback = out.callback, extra = extra, rho = rho, neimode = neimode)
+} # nocov end
+
+#' Graph density
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.density()` was renamed to `edge_density()` to create a more
+#' consistent API.
+#' @inheritParams edge_density
+#' @keywords internal
+#' @export
+graph.density <- function(graph, loops = FALSE) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.density()", "edge_density()")
+  edge_density(graph = graph, loops = loops)
+} # nocov end
+
+#' K-core decomposition of graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.coreness()` was renamed to `coreness()` to create a more
+#' consistent API.
+#' @inheritParams coreness
+#' @keywords internal
+#' @export
+graph.coreness <- function(graph, mode = c("all", "out", "in")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.coreness()", "coreness()")
+  coreness(graph = graph, mode = mode)
+} # nocov end
+
+#' Breadth-first search
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.bfs()` was renamed to `bfs()` to create a more
+#' consistent API.
+#' @inheritParams bfs
+#' @keywords internal
+#' @export
+graph.bfs <- function(graph, root, mode = c("out", "in", "all", "total"), unreachable = TRUE, restricted = NULL, order = TRUE, rank = FALSE, father = FALSE, pred = FALSE, succ = FALSE, dist = FALSE, callback = NULL, extra = NULL, rho = parent.frame(), neimode) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "graph.bfs()", "bfs()")
+  bfs(graph = graph, root = root, mode = mode, unreachable = unreachable, restricted = restricted, order = order, rank = rank, father = father, pred = pred, succ = succ, dist = dist, callback = callback, extra = extra, rho = rho, neimode = neimode)
+} # nocov end
+
+#' Diameter of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `farthest.nodes()` was renamed to `farthest_vertices()` to create a more
+#' consistent API.
+#' @inheritParams farthest_vertices
+#' @keywords internal
+#' @export
+farthest.nodes <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "farthest.nodes()", "farthest_vertices()")
+  farthest_vertices(graph = graph, directed = directed, unconnected = unconnected, weights = weights)
+} # nocov end
+
+#' Degree and degree distribution of the vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `degree.distribution()` was renamed to `degree_distribution()` to create a more
+#' consistent API.
+#' @inheritParams degree_distribution
+#' @keywords internal
+#' @export
+degree.distribution <- function(graph, cumulative = FALSE, ...) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "degree.distribution()", "degree_distribution()")
+  degree_distribution(graph = graph, cumulative = cumulative, ...)
+} # nocov end
+
+#' Find the multiple or loop edges in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `count.multiple()` was renamed to `count_multiple()` to create a more
+#' consistent API.
+#' @inheritParams count_multiple
+#' @keywords internal
+#' @export
+count.multiple <- function(graph, eids = E(graph)) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "count.multiple()", "count_multiple()")
+  count_multiple(graph = graph, eids = eids)
+} # nocov end
+
+#' Connected components of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `clusters()` was renamed to `components()` to create a more
+#' consistent API.
+#' @inheritParams components
+#' @keywords internal
+#' @export
+clusters <- function(graph, mode = c("weak", "strong")) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "clusters()", "components()")
+  components(graph = graph, mode = mode)
+} # nocov end
+
+#' Shortest (directed or undirected) paths between vertices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `average.path.length()` was renamed to `mean_distance()` to create a more
+#' consistent API.
+#' @inheritParams mean_distance
+#' @keywords internal
+#' @export
+average.path.length <- function(graph, weights = NULL, directed = TRUE, unconnected = TRUE, details = FALSE) { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "average.path.length()", "mean_distance()")
+  mean_distance(graph = graph, weights = weights, directed = directed, unconnected = unconnected, details = details)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -38,7 +458,6 @@
 #' `farthest_vertices()` returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #'
-#' @aliases get.diameter farthest.nodes
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
 #'   considered. This is ignored for undirected graphs.
@@ -165,7 +584,6 @@ mean_distance <- average_path_length_dijkstra_impl
 #' its adjacent edges.
 #'
 #'
-#' @aliases degree.distribution
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -295,8 +713,6 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
 #'
-#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
-#' average.path.length path.length.hist
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #'   calculated.
@@ -707,7 +1123,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' is deprecated. In the next major version, `subgraph()` will overtake the
 #' functionality of `subgraph.edges()`.
 #'
-#' @aliases induced.subgraph subgraph.edges
+#' @aliases subgraph.edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -1062,7 +1478,6 @@ reciprocity <- function(graph, ignore.loops = TRUE,
 #' does not check whether the graph has multi-edges and will return meaningless
 #' results for such graphs.
 #'
-#' @aliases graph.density
 #' @param graph The input graph.
 #' @param loops Logical constant, whether loop edges may exist in the graph.
 #'   This affects the calculation of the largest possible number of edges in the
@@ -1149,8 +1564,8 @@ neighborhood_size <- ego_size
 #' `connect()` creates a new graph by connecting each vertex to
 #' all other vertices in its neighborhood.
 #'
-#' @aliases neighborhood neighborhood.size graph.neighborhood ego_graph
-#' connect.neighborhood connect ego_size ego
+#' @aliases neighborhood ego_graph
+#' @aliases connect ego_size ego
 #' @param graph The input graph.
 #' @param order Integer giving the order of the neighborhood.
 #' @param nodes The vertices for which the calculation is performed.
@@ -1275,7 +1690,6 @@ make_neighborhood_graph <- make_ego_graph
 #'
 #' This function calculates the coreness for each vertex.
 #'
-#' @aliases graph.coreness
 #' @param graph The input graph, it can be directed or undirected
 #' @param mode The type of the core in directed graphs. Character constant,
 #'   possible values: `in`: in-cores are computed, `out`: out-cores are
@@ -1328,7 +1742,6 @@ coreness <- function(graph, mode = c("all", "out", "in")) {
 #' acyclic (it has at least one cycle), a partial topological sort is returned
 #' and a warning is issued.
 #'
-#' @aliases topological.sort
 #' @param graph The input graph, should be directed
 #' @param mode Specifies how to use the direction of the edges.  For
 #'   \dQuote{`out`}, the sorting order ensures that each node comes before
@@ -1486,7 +1899,6 @@ girth <- function(graph, circle = TRUE) {
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
 #'
-#' @aliases has.multiple is.loop is.multiple count.multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
@@ -1561,7 +1973,6 @@ any_loop <- has_loop_impl
 #' to continue the search or `TRUE` to terminate it. See examples below on how to
 #' use the callback function.
 #'
-#' @aliases graph.bfs
 #' @param graph The input graph.
 #' @param root Numeric vector, usually of length one. The root vertex, or root
 #'   vertices to start the search from.
@@ -1750,7 +2161,6 @@ bfs <- function(
 #' argument.} } The callback must return FALSE to continue the search or TRUE
 #' to terminate it. See examples below on how to use the callback functions.
 #'
-#' @aliases graph.dfs
 #' @param graph The input graph.
 #' @param root The single root vertex to start the search from.
 #' @param mode For directed graphs specifies the type of edges to follow.
@@ -1908,7 +2318,6 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
 #'
-#' @aliases no.clusters clusters is.connected cluster.distribution
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -1977,7 +2386,6 @@ count_components <- count_components
 #' The `roots` vector can be calculated by simply doing a topological sort
 #' in all components of the graph, see the examples below.
 #'
-#' @aliases unfold.tree
 #' @param graph The input graph, it can be either directed or undirected.
 #' @param mode Character string, defined the types of the paths used for the
 #'   breadth-first search. \dQuote{out} follows the outgoing, \dQuote{in} the
@@ -2038,7 +2446,6 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #' j with weight w, and 0 otherwise. The weighted degree of a vertex is the sum
 #' of the weights of its adjacent edges.
 #'
-#' @aliases graph.laplacian
 #' @param graph The input graph.
 #' @param normalized Whether to calculate the normalized Laplacian. See
 #'   definitions below.
@@ -2121,8 +2528,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 #'
 #' @rdname matching
-#' @aliases is.matching is.maximal.matching
-#' maximum.bipartite.matching max_bipartite_match
+#' @aliases max_bipartite_match
 #' @param graph The input graph. It might be directed, but edge directions will
 #'   be ignored.
 #' @param types Vertex types, if the graph is bipartite. By default they
@@ -2254,7 +2660,6 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #'
 #' Undirected graphs contain only mutual edges by definition.
 #'
-#' @aliases is.mutual
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their ids.
@@ -2294,7 +2699,6 @@ which_mutual <- is_mutual_impl
 #' as indicated by `mode`. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
 #' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
-#' @aliases graph.knn
 #' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
 #'   includes all vertices. Note, that if not all vertices are given here, then
@@ -2347,58 +2751,3 @@ which_mutual <- is_mutual_impl
 #' @export
 knn <- avg_nearest_neighbor_degree_impl
 #' @export average.path.length
-deprecated("average.path.length", mean_distance)
-#' @export clusters
-deprecated("clusters", components)
-#' @export count.multiple
-deprecated("count.multiple", count_multiple)
-#' @export degree.distribution
-deprecated("degree.distribution", degree_distribution)
-#' @export farthest.nodes
-deprecated("farthest.nodes", farthest_vertices)
-#' @export graph.bfs
-deprecated("graph.bfs", bfs)
-#' @export graph.coreness
-deprecated("graph.coreness", coreness)
-#' @export graph.density
-deprecated("graph.density", edge_density)
-#' @export graph.dfs
-deprecated("graph.dfs", dfs)
-#' @export graph.knn
-deprecated("graph.knn", knn)
-#' @export graph.laplacian
-deprecated("graph.laplacian", laplacian_matrix)
-#' @export graph.neighborhood
-deprecated("graph.neighborhood", make_ego_graph)
-#' @export has.multiple
-deprecated("has.multiple", any_multiple)
-#' @export induced.subgraph
-deprecated("induced.subgraph", induced_subgraph)
-#' @export is.connected
-deprecated("is.connected", is_connected)
-#' @export is.loop
-deprecated("is.loop", which_loop)
-#' @export is.matching
-deprecated("is.matching", is_matching)
-#' @export is.maximal.matching
-deprecated("is.maximal.matching", is_max_matching)
-#' @export is.multiple
-deprecated("is.multiple", which_multiple)
-#' @export is.mutual
-deprecated("is.mutual", which_mutual)
-#' @export maximum.bipartite.matching
-deprecated("maximum.bipartite.matching", max_bipartite_match)
-#' @export neighborhood.size
-deprecated("neighborhood.size", ego_size)
-#' @export shortest.paths
-deprecated("shortest.paths", distances)
-#' @export topological.sort
-deprecated("topological.sort", topo_sort)
-#' @export unfold.tree
-deprecated("unfold.tree", unfold_tree)
-#' @export get.diameter
-deprecated("get.diameter", get_diameter)
-#' @export get.all.shortest.paths
-deprecated("get.all.shortest.paths", all_shortest_paths)
-#' @export get.shortest.paths
-deprecated("get.shortest.paths", shortest_paths)

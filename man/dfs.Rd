@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{dfs}
 \alias{dfs}
-\alias{graph.dfs}
 \title{Depth-first search}
 \usage{
 dfs(
