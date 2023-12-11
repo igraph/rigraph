@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_mds}
 \alias{layout_with_mds}
-\alias{layout.mds}
 \alias{with_mds}
 \title{Graph layout by multidimensional scaling}
 \usage{
