@@ -2,7 +2,6 @@
 % Please edit documentation in R/plot.common.R
 \name{curve_multiple}
 \alias{curve_multiple}
-\alias{autocurve.edges}
 \title{Optimal edge curvature when plotting graphs}
 \usage{
 curve_multiple(graph, start = 0.5)
