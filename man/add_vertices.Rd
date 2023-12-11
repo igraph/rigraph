@@ -2,7 +2,6 @@
 % Please edit documentation in R/interface.R
 \name{add_vertices}
 \alias{add_vertices}
-\alias{add.vertices}
 \title{Add vertices to a graph}
 \usage{
 add_vertices(graph, nv, ..., attr = list())
