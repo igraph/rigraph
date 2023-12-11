@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,13 +142,13 @@ centralization score for a graph with the same number of vertices.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># A BA graph is quite centralized</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="sample_pa.html">sample_pa</a></span><span class="op">(</span><span class="fl">1000</span>, m <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="centr_degree.html">centr_degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">centralization</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1357814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1523145</span>
 <span class="r-in"><span><span class="fu"><a href="centr_clo.html">centr_clo</a></span><span class="op">(</span><span class="va">g</span>, mode <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span><span class="op">$</span><span class="va">centralization</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3885529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4128655</span>
 <span class="r-in"><span><span class="fu"><a href="centr_betw.html">centr_betw</a></span><span class="op">(</span><span class="va">g</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">centralization</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2004031</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2245963</span>
 <span class="r-in"><span><span class="fu">centr_eigen</span><span class="op">(</span><span class="va">g</span>, directed <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">$</span><span class="va">centralization</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9345768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9418167</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># The most centralized graph according to eigenvector centrality</span></span></span>
 <span class="r-in"><span><span class="va">g0</span> <span class="op">&lt;-</span> <span class="fu"><a href="make_graph.html">make_graph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, n <span class="op">=</span> <span class="fl">10</span>, dir <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>

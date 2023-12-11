@@ -12,7 +12,7 @@ simulated annealing."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -269,26 +269,26 @@ ties were implemented by Vincent Traag (<a href="https://www.traag.net/" class="
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="add_edges.html">add_edges</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="subcomponent.html">subcomponent</a></span><span class="op">(</span><span class="va">g</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">cluster_spinglass</span><span class="op">(</span><span class="va">g</span>, spins <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH clustering spinglass, groups: 2, mod: 0.48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH clustering spinglass, groups: 2, mod: 0.47</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + groups:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   $`1`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]  1  2  3  4  5  6  7  8  9 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 11 12 13 14 15 16 17 18 19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   $`2`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 11 12 13 14 15 16 17 18 19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]  1  2  3  4  5  6  7  8  9 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
 <span class="r-in"><span><span class="fu">cluster_spinglass</span><span class="op">(</span><span class="va">g</span>, vertex <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $community</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  2  5  6  9  7  8 10  4  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  3  4  6  7 10  9  8  5  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cohesion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11.66837</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.940789</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adhesion</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -23.33673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -17.88158</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $inner.links</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outer.links</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>

@@ -14,7 +14,7 @@ is the same but returns the edges that that random walk passed through."><!-- ma
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,6 +76,7 @@ is the same but returns the edges that that random walk passed through.</p>
 <span>  <span class="va">graph</span>,</span>
 <span>  <span class="va">start</span>,</span>
 <span>  <span class="va">steps</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"all"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
 <span>  stuck <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"return"</span>, <span class="st">"error"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -104,6 +105,15 @@ is the same but returns the edges that that random walk passed through.</p>
 <dd><p>The number of steps to make.</p></dd>
 
 
+<dt>weights</dt>
+<dd><p>The edge weights. Larger edge weights increase the
+probability that an edge is selected by the random walker. In other
+words, larger edge weights correspond to stronger connections. The
+‘weight’ edge attribute is used if present. Supply
+‘<code>NA</code>’ here if you want to ignore the ‘weight’ edge
+attribute.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>How to follow directed edges. <code>"out"</code> steps along the
 edge direction, <code>"in"</code> is opposite to that. <code>"all"</code> ignores
@@ -113,15 +123,6 @@ edge directions. This argument is ignored for undirected graphs.</p></dd>
 <dt>stuck</dt>
 <dd><p>What to do if the random walk gets stuck. <code>"return"</code>
 returns the partial walk, <code>"error"</code> raises an error.</p></dd>
-
-
-<dt>weights</dt>
-<dd><p>The edge weights. Larger edge weights increase the
-probability that an edge is selected by the random walker. In other
-words, larger edge weights correspond to stronger connections. The
-‘weight’ edge attribute is used if present. Supply
-‘<code>NA</code>’ here if you want to ignore the ‘weight’ edge
-attribute.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -158,11 +159,11 @@ This has changed to improve consistency with the underlying C library.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## These are similar, but not exactly the same</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span>, <span class="va">ec</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9623802</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9620044</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## But these are (almost) the same</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span>, <span class="va">pg</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9999919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9999458</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
