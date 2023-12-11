@@ -106,3 +106,5 @@ is_chordal <- function(graph, alpha = NULL, alpham1 = NULL,
   }
   res
 }
+#' @export is.chordal
+deprecated("is.chordal", is_chordal)

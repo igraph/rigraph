@@ -284,3 +284,5 @@ graph_from_incidence_matrix <- function(...) { # nocov start
    lifecycle::deprecate_soft("1.6.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
    graph_from_biadjacency_matrix(...)
 } # nocov end
+#' @export graph.incidence
+deprecated("graph.incidence", graph_from_biadjacency_matrix)

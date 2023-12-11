@@ -947,3 +947,13 @@ count_automorphisms <- count_automorphisms_impl
 #' @family graph automorphism
 #' @export
 automorphism_group <- automorphism_group_impl
+#' @export automorphisms
+deprecated("automorphisms", count_automorphisms)
+#' @export canonical.permutation
+deprecated("canonical.permutation", canonical_permutation)
+#' @export graph.automorphisms
+deprecated("graph.automorphisms", count_automorphisms)
+#' @export graph.isocreate
+deprecated("graph.isocreate", graph_from_isomorphism_class)
+#' @export permute.vertices
+deprecated("permute.vertices", permute)

@@ -1101,3 +1101,11 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   clip = .igraph.shape.raster.clip,
   plot = .igraph.shape.raster.plot
 )
+#' @export add.vertex.shape
+deprecated("add.vertex.shape", add_shape)
+#' @export vertex.shapes
+deprecated("vertex.shapes", shapes)
+#' @export igraph.shape.noclip
+deprecated("igraph.shape.noclip", shape_noclip)
+#' @export igraph.shape.noplot
+deprecated("igraph.shape.noplot", shape_noplot)

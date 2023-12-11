@@ -1791,3 +1791,39 @@ graph_from_lcf <- lcf_vector_impl
 #' g5 <- realize_degseq(degs, allowed.edge.types = "multi")
 #' all(degree(g5) == degs)
 realize_degseq <- realize_degree_sequence_impl
+#' @export graph.atlas
+deprecated("graph.atlas", graph_from_atlas)
+#' @export graph.bipartite
+deprecated("graph.bipartite", make_bipartite_graph)
+#' @export graph.de.bruijn
+deprecated("graph.de.bruijn", make_de_bruijn_graph)
+#' @export graph.empty
+deprecated("graph.empty", make_empty_graph)
+#' @export graph.extended.chordal.ring
+deprecated("graph.extended.chordal.ring", make_chordal_ring)
+#' @export graph.formula
+deprecated("graph.formula", graph_from_literal)
+#' @export graph.full
+deprecated("graph.full", make_full_graph)
+#' @export graph.full.bipartite
+deprecated("graph.full.bipartite", make_full_bipartite_graph)
+#' @export graph.full.citation
+deprecated("graph.full.citation", make_full_citation_graph)
+#' @export graph.kautz
+deprecated("graph.kautz", make_kautz_graph)
+#' @export graph.lattice
+deprecated("graph.lattice", make_lattice)
+#' @export graph.lcf
+deprecated("graph.lcf", graph_from_lcf)
+#' @export graph.star
+deprecated("graph.star", make_star)
+#' @export graph.tree
+deprecated("graph.tree", make_tree)
+#' @export graph.ring
+deprecated("graph.ring", make_ring)
+#' @export line.graph
+deprecated("line.graph", make_line_graph)
+#' @export graph.famous
+deprecated("graph.famous", make_graph)
+#' @export graph
+deprecated("graph", make_graph)

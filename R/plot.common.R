@@ -972,3 +972,5 @@ i.default.values <- new.env()
 i.default.values[["vertex"]] <- i.vertex.default
 i.default.values[["edge"]] <- i.edge.default
 i.default.values[["plot"]] <- i.plot.default
+#' @export autocurve.edges
+deprecated("autocurve.edges", curve_multiple)

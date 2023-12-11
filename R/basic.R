@@ -99,3 +99,5 @@ head_of <- function(graph, es) {
 tail_of <- function(graph, es) {
   create_vs(graph, ends(graph, es, names = FALSE)[, 1])
 }
+#' @export is.igraph
+deprecated("is.igraph", is_igraph)

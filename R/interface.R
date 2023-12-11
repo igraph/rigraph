@@ -573,3 +573,13 @@ incident_edges <- function(graph, v,
 
   res
 }
+#' @export add.edges
+deprecated("add.edges", add_edges)
+#' @export add.vertices
+deprecated("add.vertices", add_vertices)
+#' @export delete.edges
+deprecated("delete.edges", delete_edges)
+#' @export delete.vertices
+deprecated("delete.vertices", delete_vertices)
+#' @export is.directed
+deprecated("is.directed", is_directed)

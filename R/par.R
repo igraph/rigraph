@@ -247,3 +247,7 @@ with_igraph_opt <- function(options, code) {
   old <- igraph_options(options)
   force(code)
 }
+#' @export getIgraphOpt
+deprecated("getIgraphOpt", igraph_opt)
+#' @export igraph.options
+deprecated("igraph.options", igraph_options)

@@ -261,3 +261,7 @@ graph_from_edgelist <- function(el, directed = TRUE) {
 #' @param ... Passed to `graph_from_edgelist()`.
 #' @export
 from_edgelist <- function(...) constructor_spec(graph_from_edgelist, ...)
+#' @export graph.data.frame
+deprecated("graph.data.frame", graph_from_data_frame)
+#' @export graph.edgelist
+deprecated("graph.edgelist", graph_from_edgelist)
