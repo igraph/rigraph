@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_k_regular}
 \alias{sample_k_regular}
-\alias{k.regular.game}
 \title{Create a random regular graph}
 \usage{
 sample_k_regular(no.of.nodes, k, directed = FALSE, multiple = FALSE)

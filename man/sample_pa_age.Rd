@@ -2,9 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_pa_age}
 \alias{sample_pa_age}
-\alias{aging.prefatt.game}
-\alias{aging.barabasi.game}
-\alias{aging.ba.game}
 \alias{pa_age}
 \title{Generate an evolving random graph with preferential attachment and aging}
 \usage{
