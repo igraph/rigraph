@@ -1134,15 +1134,13 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
   on.exit(.Call(R_igraph_finalizer))
   membership <- initial_membership
   if (n_iterations > 0) {
-    for (i in 1:n_iterations) {
-      res <- .Call(
-        R_igraph_community_leiden, graph, weights,
-        vertex_weights, as.numeric(resolution_parameter),
-        as.numeric(beta), !is.null(membership),
-        membership
-      )
-      membership <- res$membership
-    }
+    res <- .Call(
+      R_igraph_community_leiden, graph, weights,
+      vertex_weights, as.numeric(resolution_parameter),
+      as.numeric(beta), !is.null(membership), as.numeric(n_iterations),
+      membership
+    )
+    membership <- res$membership
   } else {
     prev_quality <- -Inf
     quality <- 0.0
@@ -1151,7 +1149,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
       res <- .Call(
         R_igraph_community_leiden, graph, weights,
         vertex_weights, as.numeric(resolution_parameter),
-        as.numeric(beta), !is.null(membership),
+        as.numeric(beta), !is.null(membership), 1,
         membership
       )
       membership <- res$membership
@@ -1209,18 +1207,19 @@ cluster_fluid_communities <- function(graph, no.of.communities) {
   # Argument checks
   ensure_igraph(graph)
 
-  no.of.communities <- as.integer(no.of.communities)
+  no.of.communities <- as.numeric(no.of.communities)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
+  membership <- .Call(R_igraph_community_fluid_communities, graph, no.of.communities)
 
+  res <- list()
+  res$membership <- membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "fluid communities"
-  res$membership <- res$membership + 1
   class(res) <- "communities"
   res
 }
@@ -1638,7 +1637,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
   # Argument checks
   ensure_igraph(graph)
 
-  steps <- as.integer(steps)
+  steps <- as.numeric(steps)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -1692,7 +1691,10 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #' communities.}
 #'
 #' @aliases label.propagation.community
-#' @param graph The input graph, should be undirected to make sense.
+#' @param graph The input graph. Note that the algorithm wsa originally
+#'   defined for undirected graphs. You are advised to set \sQuote{mode} to
+#'   `all` if you pass a directed graph here to treat it as
+#'   undirected.
 #' @param weights The weights of the edges. It must be a positive numeric vector,
 #'   `NULL` or `NA`. If it is `NULL` and the input graph has a
 #'   \sQuote{weight} edge attribute, then that attribute will be used. If
@@ -1734,6 +1736,7 @@ cluster_label_prop <- function(
     graph,
     weights = NULL,
     ...,
+    mode = c("out", "in", "all"),
     initial = NULL,
     fixed = NULL) {
   if (...length() > 0) {
@@ -1756,12 +1759,13 @@ cluster_label_prop <- function(
     return(inject(cluster_label_prop0(!!!dots)))
   }
 
-  cluster_label_prop0(graph, weights, initial, fixed)
+  cluster_label_prop0(graph, weights, mode, initial, fixed)
 }
 
 cluster_label_prop0 <- function(
     graph,
     weights = NULL,
+    mode = c("out", "in", "all"),
     initial = NULL,
     fixed = NULL) {
   # Argument checks
@@ -1778,15 +1782,20 @@ cluster_label_prop0 <- function(
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
+  directed <- switch(igraph.match.arg(mode), "out"=TRUE, "in"=TRUE, "all"=FALSE)
+  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3)
+
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_community_label_propagation, graph, weights, initial, fixed)
+  membership <- .Call(R_igraph_community_label_propagation, graph, mode, weights, initial, fixed)
+  res <- list()
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     res$names <- V(graph)$name
   }
   res$vcount <- vcount(graph)
   res$algorithm <- "label propagation"
-  res$membership <- res$membership + 1
+  res$membership <- membership + 1
+  res$modularity <- modularity(graph, res$membership, weights, directed)
   class(res) <- "communities"
   res
 }
@@ -2046,7 +2055,7 @@ cluster_infomap <- function(graph, e.weights = NULL, v.weights = NULL,
   } else {
     v.weights <- NULL
   }
-  nb.trials <- as.integer(nb.trials)
+  nb.trials <- as.numeric(nb.trials)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

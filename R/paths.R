@@ -74,7 +74,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   ## Function call
   res <- .Call(
     R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.integer(cutoff), mode
+    as.numeric(cutoff), mode
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -111,11 +111,9 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @export
 is_dag <- is_dag_impl
 
-
 #' Acyclic graphs
 #'
 #' This function tests whether the given graph is free of cycles.
-#' It is only available as of igraph 2.0.0.
 #'
 #' This function looks for directed cycles in directed graphs and undirected
 #' cycles in undirected graphs.
@@ -123,7 +121,7 @@ is_dag <- is_dag_impl
 #' @param graph The input graph.
 #' @return A logical vector of length one.
 #' @keywords graphs
-#' @examplesIf FALSE
+#' @examples
 #'
 #' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
 #' is_acyclic(g)
@@ -133,10 +131,7 @@ is_dag <- is_dag_impl
 #' @family cycles
 #' @family structural.properties
 #' @export
-#' @keywords internal
-is_acyclic <- function(graph) {
-  cli::cli_abort("Only implemented in igraph 2.0.0")
-}
+is_acyclic <- is_acyclic_impl
 
 #' Maximum cardinality search
 #'

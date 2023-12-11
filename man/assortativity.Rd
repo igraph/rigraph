@@ -14,11 +14,12 @@ assortativity(
   ...,
   values.in = NULL,
   directed = TRUE,
+  normalized = TRUE,
   types1 = NULL,
   types2 = NULL
 )
 
-assortativity_nominal(graph, types, directed = TRUE)
+assortativity_nominal(graph, types, directed = TRUE, normalized = TRUE)
 
 assortativity_degree(graph, directed = TRUE)
 }
@@ -44,6 +45,8 @@ Supply
 \code{TRUE} here to do the natural thing, i.e. use directed version of the
 measure for directed graphs and the undirected version for undirected
 graphs.}
+
+\item{normalized}{TBD}
 
 \item{types1, types2}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 Deprecated aliases for \code{values} and \code{values.in}, respectively.}

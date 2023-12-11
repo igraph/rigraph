@@ -4,7 +4,7 @@
 \alias{is_forest}
 \title{Decide whether a graph is a forest.}
 \usage{
-is_forest(graph, mode, details)
+is_forest(graph, mode = c("out", "in", "all", "total"), details = FALSE)
 }
 \arguments{
 \item{graph}{An igraph graph object}
@@ -39,12 +39,11 @@ By convention, the null graph (i.e. the graph with no vertices) is considered
 to be a forest.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 g <- make_tree(3) + make_tree(5,3)
 is_forest(g)
 is_forest(g, details = TRUE)
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 Other trees: 
@@ -55,4 +54,3 @@ Other trees:
 }
 \concept{trees}
 \keyword{graphs}
-\keyword{internal}

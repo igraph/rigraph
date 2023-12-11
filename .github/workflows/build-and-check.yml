@@ -10,6 +10,10 @@ on:
       - main
       - fix/*
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
+
 name: R-CMD-check
 
 jobs:
@@ -35,6 +39,7 @@ jobs:
       - name: apt update
         run: |
           sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
         shell: bash
 
       - name: Cache Python virtualenv
@@ -135,6 +140,19 @@ jobs:
           save: false
           restore: false
 
+      - name: apt update
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
+
+      - name: apt update
+        if: runner.os == 'macOS'
+        run: |
+          brew install glpk
+        shell: bash
+
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
@@ -154,7 +172,7 @@ jobs:
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
         with:
-          error-on: '"note"'
+          error-on: '"error"'
 
   coverage:
     runs-on: ubuntu-20.04
@@ -173,6 +191,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: apt update
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
+        shell: bash
+
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
 
@@ -188,7 +212,6 @@ jobs:
       - name: Run coverage
         run: |
           line_exclusions <- fs::dir_ls(c("src/vendor"), type = "file", recurse = TRUE)
-
           cov <- covr::package_coverage(
             type = c("tests", "examples"),
             line_exclusions = as.list(names(line_exclusions)),
@@ -212,6 +235,7 @@ jobs:
       - name: apt update
         run: |
           sudo apt-get update
+          sudo apt-get install -y libarpack2-dev
         shell: bash
 
       - name: run sanitizer
@@ -221,6 +245,7 @@ jobs:
           options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
           run: |
             set -e
+            printenv
             cd rigraph
             RDcsan CMD INSTALL . --no-byte-compile
             TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'

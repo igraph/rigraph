@@ -22,48 +22,49 @@
 ##
 ## -----------------------------------------------------------------
 
-graph.adjacency.dense <- function(adjmatrix, mode, weighted = NULL, diag = TRUE) {
+graph.adjacency.dense <- function(
+    adjmatrix,
+    mode,
+    weighted = NULL,
+    diag = c("once", "twice", "ignore")) {
   mode <- switch(mode,
-    "directed" = 0,
-    "undirected" = 1,
-    "max" = 1,
-    "upper" = 2,
-    "lower" = 3,
-    "min" = 4,
-    "plus" = 5
+    "directed" = 0L,
+    "undirected" = 1L,
+    "upper" = 2L,
+    "lower" = 3L,
+    "min" = 4L,
+    "plus" = 5L,
+    "max" = 6L
   )
+
+  if (is.logical(diag)) {
+    diag <- ifelse(diag, "once", "ignore")
+  }
+  diag <- igraph.match.arg(diag)
+  diag <- switch(diag,
+    "ignore" = 0L,
+    "twice" = 1L,
+    "once" = 2L
+  )
+
+  if (nrow(adjmatrix) != ncol(adjmatrix)) {
+    stop("Adjacency matrices must be square.")
+  }
 
   mode(adjmatrix) <- "double"
 
-  if (!is.null(weighted)) {
-    if (is.logical(weighted) && weighted) {
-      weighted <- "weight"
-    }
-    if (!is.character(weighted)) {
-      stop("invalid value supplied for `weighted' argument, please see docs.")
-    }
+  if (isTRUE(weighted)) {
+    weighted <- "weight"
+  } else if (!is.character(weighted)) {
+    weighted <- NULL
+  }
 
-    if (nrow(adjmatrix) != ncol(adjmatrix)) {
-      stop("not a square matrix")
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(
-      R_igraph_weighted_adjacency, adjmatrix,
-      as.numeric(mode), weighted, diag
-    )
+  on.exit(.Call(R_igraph_finalizer))
+  if (is.null(weighted)) {
+    res <- .Call(R_igraph_adjacency, adjmatrix, mode, diag)
   } else {
-    adjmatrix <- as.matrix(adjmatrix)
-    attrs <- attributes(adjmatrix)
-    adjmatrix <- as.numeric(adjmatrix)
-    attributes(adjmatrix) <- attrs
-
-    if (!diag) {
-      diag(adjmatrix) <- 0
-    }
-
-    on.exit(.Call(R_igraph_finalizer))
-    res <- .Call(R_igraph_graph_adjacency, adjmatrix, as.numeric(mode))
+    res <- .Call(R_igraph_weighted_adjacency, adjmatrix, mode, diag)
+    res <- set_edge_attr(res$graph, weighted, value = res$weights)
   }
 
   res

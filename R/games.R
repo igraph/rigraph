@@ -985,7 +985,7 @@ sample_pref <- function(nodes, types, type.dist = rep(1, types),
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_preference_game, as.integer(nodes), as.integer(types),
+    R_igraph_preference_game, as.numeric(nodes), as.numeric(types),
     as.double(type.dist), as.logical(fixed.sizes),
     matrix(as.double(pref.matrix), types, types),
     as.logical(directed), as.logical(loops)
@@ -1024,7 +1024,7 @@ sample_asym_pref <- function(nodes, types,
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_asymmetric_preference_game,
-    as.integer(nodes), as.integer(types), as.integer(types),
+    as.numeric(nodes), as.numeric(types), as.numeric(types),
     matrix(as.double(type.dist.matrix), types, types),
     matrix(as.double(pref.matrix), types, types),
     as.logical(loops)
@@ -1300,14 +1300,14 @@ cit_cit_types <- function(...) constructor_spec(sample_cit_cit_types, ...)
 #'
 sample_bipartite <- function(n1, n2, type = c("gnp", "gnm"), p, m,
                              directed = FALSE, mode = c("out", "in", "all")) {
-  n1 <- as.integer(n1)
-  n2 <- as.integer(n2)
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
   type <- igraph.match.arg(type)
   if (!missing(p)) {
     p <- as.numeric(p)
   }
   if (!missing(m)) {
-    m <- as.integer(m)
+    m <- as.numeric(m)
   }
   directed <- as.logical(directed)
   mode <- switch(igraph.match.arg(mode),

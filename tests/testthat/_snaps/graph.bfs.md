@@ -36,7 +36,7 @@
       
       $dist
        a  b  c  z  d 
-      -3  0  1 -3 -3 
+      -1  0  1 -1 -1 
       
       $neimode
       [1] "out"

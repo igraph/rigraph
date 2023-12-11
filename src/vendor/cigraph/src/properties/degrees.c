@@ -2,7 +2,7 @@
 /* vim:set ts=4 sw=4 sts=4 et: */
 /*
    IGraph library.
-   Copyright (C) 2005-2021 The igraph development team
+   Copyright (C) 2005-2023  The igraph development team <igraph@igraph.org>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,10 +15,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-   02110-1301 USA
-
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "igraph_structural.h"
@@ -374,8 +371,9 @@ igraph_error_t igraph_avg_nearest_neighbor_degree(const igraph_t *graph,
  * ones.
  *
  * </para><para>
- * If P_ij is the joint degree distribution of the graph, then
- * <code>k_nn(k) = sum_k j P_kj</code>.
+ * If P_ij is the joint degree distribution of the graph, computable with
+ * \ref igraph_joint_degree_distribution(), then
+ * <code>k_nn(k) = (sum_j j P_kj) / (sum_j P_kj)</code>.
  *
  * </para><para>
  * The function \ref igraph_avg_nearest_neighbor_degree(), whose main purpose is to
@@ -406,12 +404,12 @@ igraph_error_t igraph_avg_nearest_neighbor_degree(const igraph_t *graph,
  * https://dx.doi.org/10.1073/pnas.0400087101
  *
  * \param graph The input graph.
+ * \param weights An optional weight vector. If not \c NULL, weighted averages will be computed.
  * \param knnk An initialized vector, the result will be written here.
  *    <code>knnk[d]</code> will contain the mean degree of vertices connected to
  *    by vertices of degree \c d. Note that in contrast to
  *    \ref igraph_avg_nearest_neighbor_degree(), <code>d=0</code> is also
  *    included.
- * \param weights An optional weight vector. If not \c NULL, weighted averages will be computed.
  * \param from_mode How to compute the degree of sources? Can be \c IGRAPH_OUT
  *    for out-degree, \c IGRAPH_IN for in-degree, or \c IGRAPH_ALL for total degree.
  *    Ignored in undirected graphs.
@@ -422,23 +420,32 @@ igraph_error_t igraph_avg_nearest_neighbor_degree(const igraph_t *graph,
  *    to be directed. Undirected connections are treated as reciprocal directed ones,
  *    i.e. both <code>u -> v</code> and <code>v -> u</code> will be considered.
  *    Ignored in undirected graphs.
- * \returns Error code.
+ * \return Error code.
  *
- * \sa \ref igraph_avg_nearest_neighbor_degree() for computing the average neighbour degree of
- * a set of vertices.
+ * \sa \ref igraph_avg_nearest_neighbor_degree() for computing the average neighbour
+ * degree of a set of vertices, \ref igraph_joint_degree_distribution() to get the
+ * complete joint degree distribution, and \ref igraph_assortativity_degree()
+ * to compute the degree assortativity.
  *
  * Time complexity: O(|E| + |V|)
  */
 igraph_error_t igraph_degree_correlation_vector(
-    const igraph_t *graph, igraph_vector_t *knnk, const igraph_vector_t *weights,
-    igraph_neimode_t from_mode, igraph_neimode_t to_mode,
-    igraph_bool_t directed_neighbors) {
+        const igraph_t *graph, const igraph_vector_t *weights,
+        igraph_vector_t *knnk,
+        igraph_neimode_t from_mode, igraph_neimode_t to_mode,
+        igraph_bool_t directed_neighbors) {
 
     igraph_integer_t no_of_nodes = igraph_vcount(graph);
     igraph_integer_t no_of_edges = igraph_ecount(graph);
     igraph_integer_t maxdeg;
     igraph_vector_t weight_sums;
     igraph_vector_int_t *deg_from, *deg_to, deg_out, deg_in, deg_all;
+
+    if (weights && igraph_vector_size(weights) != no_of_edges) {
+        IGRAPH_ERRORF("Weight vector length (%" IGRAPH_PRId ") does not match number of edges (%" IGRAPH_PRId ").",
+                      IGRAPH_EINVAL,
+                      igraph_vector_size(weights), no_of_edges);
+    }
 
     if (! igraph_is_directed(graph)) {
         from_mode = to_mode = IGRAPH_ALL;
@@ -469,7 +476,7 @@ igraph_error_t igraph_degree_correlation_vector(
     case IGRAPH_IN:  deg_from = &deg_in;  break;
     case IGRAPH_ALL: deg_from = &deg_all; break;
     default:
-        IGRAPH_ERROR("Invalid mode.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid 'from' mode.", IGRAPH_EINVAL);
     }
 
     switch (to_mode) {
@@ -477,7 +484,7 @@ igraph_error_t igraph_degree_correlation_vector(
     case IGRAPH_IN:  deg_to = &deg_in;  break;
     case IGRAPH_ALL: deg_to = &deg_all; break;
     default:
-        IGRAPH_ERROR("Invalid mode.", IGRAPH_EINVAL);
+        IGRAPH_ERROR("Invalid 'to' mode.", IGRAPH_EINVAL);
     }
 
     maxdeg = no_of_edges > 0 ? igraph_vector_int_max(deg_from) : 0;

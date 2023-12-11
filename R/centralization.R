@@ -155,7 +155,7 @@ centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "i
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
-  nodes <- as.integer(nodes)
+  nodes <- as.numeric(nodes)
   mode <- switch(igraph.match.arg(mode),
     "out" = 1,
     "in" = 2,

@@ -52,9 +52,14 @@ random_walk <- function(
     graph,
     start,
     steps,
+    weights = NULL,
     mode = c("out", "in", "all", "total"),
     stuck = c("return", "error")) {
-  random_walk_impl(graph, start, steps + 1, mode, stuck)
+  mode <- match.arg(mode)
+  stuck <- match.arg(stuck)
+  out <- random_walk_impl(graph, start, steps, weights, mode, stuck)
+  # FIXME: Support returning the full structure
+  out$vertices
 }
 
 #' @rdname random_walk

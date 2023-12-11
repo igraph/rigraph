@@ -866,7 +866,7 @@ igraph_hub_score:
     PARAMS: |-
         GRAPH graph, OUT VERTEX_QTY vector, OUT REAL value,
         BOOLEAN scale=True, EDGEWEIGHTS weights=NULL,
-        INOUT ARPACKOPT options=arpack_defaults()
+        INOUT ARPACKOPT options=arpack_defaults
     DEPS: weights ON graph, vector ON graph
 
 igraph_authority_score:
@@ -915,7 +915,8 @@ igraph_avg_nearest_neighbor_degree:
 
 igraph_degree_correlation_vector:
     PARAMS: |-
-        GRAPH graph, OUT VECTOR knnk, EDGEWEIGHTS weights=NULL,
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT VECTOR knnk,
         NEIMODE from_mode=OUT, NEIMODE to_mode=IN,
         BOOLEAN directed_neighbors=True
     DEPS: weights ON graph
@@ -999,9 +1000,28 @@ igraph_assortativity_degree:
 
 igraph_joint_degree_matrix:
     PARAMS: |-
-        GRAPH graph, OUT MATRIX jdm,
-        INTEGER max_out_degree=-1, INTEGER max_in_degree=-1,
-        EDGEWEIGHTS weights=NULL
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX jdm,
+        INTEGER max_out_degree=-1, INTEGER max_in_degree=-1
+    DEPS: weights ON graph
+
+igraph_joint_degree_distribution:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX p,
+        NEIMODE from_mode=OUT, NEIMODE to_mode=IN,
+        BOOLEAN directed_neighbors=True,
+        BOOLEAN normalized=True,
+        INTEGER max_from_degree=-1, INTEGER max_to_degree=-1
+    DEPS: weights ON graph
+
+igraph_joint_type_distribution:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX p,
+        INDEX_VECTOR from_types, INDEX_VECTOR to_types=NULL,
+        BOOLEAN directed=True,
+        BOOLEAN normalized=True
     DEPS: weights ON graph
 
 igraph_contract_vertices:

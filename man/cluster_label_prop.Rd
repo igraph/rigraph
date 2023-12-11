@@ -5,10 +5,20 @@
 \alias{label.propagation.community}
 \title{Finding communities based on propagating labels}
 \usage{
-cluster_label_prop(graph, weights = NULL, ..., initial = NULL, fixed = NULL)
+cluster_label_prop(
+  graph,
+  weights = NULL,
+  ...,
+  mode = c("out", "in", "all"),
+  initial = NULL,
+  fixed = NULL
+)
 }
 \arguments{
-\item{graph}{The input graph, should be undirected to make sense.}
+\item{graph}{The input graph. Note that the algorithm wsa originally
+defined for undirected graphs. You are advised to set \sQuote{mode} to
+\code{all} if you pass a directed graph here to treat it as
+undirected.}
 
 \item{weights}{The weights of the edges. It must be a positive numeric vector,
 \code{NULL} or \code{NA}. If it is \code{NULL} and the input graph has a

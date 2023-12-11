@@ -583,7 +583,7 @@ arpack.unpack.complex <- function(vectors, values, nev) {
   # Argument checks
   vectors <- as.matrix(structure(as.double(vectors), dim = dim(vectors)))
   values <- as.matrix(structure(as.double(values), dim = dim(values)))
-  nev <- as.integer(nev)
+  nev <- as.numeric(nev)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

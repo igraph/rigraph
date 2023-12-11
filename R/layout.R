@@ -287,7 +287,7 @@ layout_as_bipartite <- function(graph, types = NULL, hgap = 1, vgap = 1,
   types <- handle_vertex_type_arg(types, graph)
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
-  maxiter <- as.integer(maxiter)
+  maxiter <- as.numeric(maxiter)
 
   on.exit(.Call(R_igraph_finalizer))
 
@@ -653,17 +653,17 @@ nicely <- function(...) layout_spec(layout_nicely, ...)
 #' layout_on_grid(g2, dim = 3)
 #'
 #' plot(g, layout = layout_on_grid)
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 #'   rglplot(g, layout = layout_on_grid(g, dim = 3))
 #' }
 layout_on_grid <- function(graph, width = 0, height = 0, dim = 2) {
   # Argument checks
   ensure_igraph(graph)
-  width <- as.integer(width)
-  dim <- as.integer(dim)
+  width <- as.numeric(width)
+  dim <- as.numeric(dim)
   stopifnot(dim == 2 || dim == 3)
   if (dim == 3) {
-    height <- as.integer(height)
+    height <- as.numeric(height)
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -694,8 +694,8 @@ layout.grid.3d <- function(graph, width = 0, height = 0) {
   ))
   # Argument checks
   ensure_igraph(graph)
-  width <- as.integer(width)
-  height <- as.integer(height)
+  width <- as.numeric(width)
+  height <- as.numeric(height)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -917,8 +917,8 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
     use.seed <- FALSE
   }
-  maxiter <- as.integer(maxiter)
-  fineiter <- as.integer(fineiter)
+  maxiter <- as.numeric(maxiter)
+  fineiter <- as.numeric(fineiter)
   cool.fact <- as.numeric(cool.fact)
   weight.node.dist <- as.numeric(weight.node.dist)
   weight.border <- as.numeric(weight.border)
@@ -1036,7 +1036,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
-  dim <- as.integer(dim)
+  dim <- as.numeric(dim)
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
   }
@@ -1044,7 +1044,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
     stop("Both `niter' and `maxiter' are given, give only one of them")
   }
   if (!missing(maxiter)) niter <- maxiter
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
   start.temp <- as.numeric(start.temp)
 
   grid <- igraph.match.arg(grid)
@@ -1164,7 +1164,7 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
     use.seed <- FALSE
   }
 
-  maxiter <- as.integer(maxiter)
+  maxiter <- as.numeric(maxiter)
   temp.max <- as.numeric(temp.max)
   temp.min <- as.numeric(temp.min)
   temp.init <- as.numeric(temp.init)
@@ -1339,12 +1339,12 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   if (!is.null(coords)) {
     coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
   }
-  dim <- as.integer(dim)
+  dim <- as.numeric(dim)
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
   }
 
-  maxiter <- as.integer(maxiter)
+  maxiter <- as.numeric(maxiter)
   epsilon <- as.numeric(epsilon)
   kkconst <- as.numeric(kkconst)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
@@ -1531,7 +1531,7 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
-  dim <- as.integer(dim)
+  dim <- as.numeric(dim)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -1760,7 +1760,7 @@ layout_with_sugiyama <- function(graph, layers = NULL, hgap = 1, vgap = 1,
   if (!is.null(layers)) layers <- as.numeric(layers) - 1
   hgap <- as.numeric(hgap)
   vgap <- as.numeric(vgap)
-  maxiter <- as.integer(maxiter)
+  maxiter <- as.numeric(maxiter)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }

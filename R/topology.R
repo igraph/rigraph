@@ -157,9 +157,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   ensure_igraph(target)
   induced <- as.logical(induced)
   if (time.limit == Inf) {
-    time.limit <- 0L
+    time.limit <- 0
   } else {
-    time.limit <- as.integer(time.limit)
+    time.limit <- as.numeric(time.limit)
   }
   map <- as.logical(map)
   all.maps <- as.logical(all.maps)
@@ -310,7 +310,7 @@ isomorphic <- function(graph1, graph2, method = c(
     .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "direct") {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic_34, graph1, graph2)
+    .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
@@ -319,7 +319,9 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
-graph.isomorphic.34 <- isomorphic_34_impl
+graph.isomorphic.34 <- function(graph1, graph2, method) {
+  isomorphic_34_impl(graph1, graph2, method)
+}
 #' @export
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export

@@ -86,6 +86,7 @@
 #'   `TRUE` here to do the natural thing, i.e. use directed version of the
 #'   measure for directed graphs and the undirected version for undirected
 #'   graphs.
+#' @param normalized TBD
 #' @param types1,types2
 #'   `r lifecycle::badge("deprecated")`
 #'   Deprecated aliases for `values` and `values.in`, respectively.
@@ -110,6 +111,7 @@ assortativity <- function(graph,
                           ...,
                           values.in = NULL,
                           directed = TRUE,
+                          normalized = TRUE,
                           types1 = NULL,
                           types2 = NULL) {
   if (...length() > 0) {
@@ -153,7 +155,7 @@ assortativity <- function(graph,
     values.in <- types2
   }
 
-  assortativity_impl(graph, values, values.in, directed)
+  assortativity_impl(graph, values, values.in, directed, normalized)
 }
 
 assortativity_legacy <- function(graph, types1, types2 = NULL, directed = TRUE) {

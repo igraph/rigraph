@@ -72,7 +72,7 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'   the graph is not a tree.}
 #'
 #' @keywords graphs
-#' @examplesIf FALSE
+#' @examples
 #'
 #' g <- make_tree(3) + make_tree(5,3)
 #' is_forest(g)
@@ -80,10 +80,7 @@ is_tree <- function(graph, mode = c("out", "in", "all", "total"), details = FALS
 #'
 #' @family trees
 #' @export
-#' @keywords internal
-is_forest <- function(graph, mode, details) {
-  cli::cli_abort("Only implemented in igraph 2.0.0")
-}
+is_forest <- is_forest_impl
 
 #' Convert a tree graph to its Prüfer sequence
 #'

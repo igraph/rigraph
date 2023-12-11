@@ -631,11 +631,11 @@ all_shortest_paths <- function(graph, from,
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
 
   # Transitional, eventually, remove $res
-  res$vpaths <- res$res
+  res$res <- res$vpaths
 
   res
 }
@@ -766,7 +766,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_subgraph_edges, graph, eids - 1, delete.vertices)
+  res <- .Call(R_igraph_subgraph_from_edges, graph, eids - 1, delete.vertices)
 
   res
 }
@@ -1108,7 +1108,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -1217,7 +1217,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
@@ -1244,17 +1244,17 @@ make_ego_graph <- function(graph, order = 1, nodes = V(graph),
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood_graphs, graph,
     as_igraph_vs(graph, nodes) - 1, as.numeric(order),
-    as.numeric(mode), mindist
+    as.integer(mode), mindist
   )
   res
 }
@@ -1951,7 +1951,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_clusters, graph, mode)
+  res <- .Call(R_igraph_connected_components, graph, mode)
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name

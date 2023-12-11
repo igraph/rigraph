@@ -126,7 +126,7 @@ fit_hrg <- function(graph, hrg = NULL, start = FALSE, steps = 0) {
     as.numeric
   )
   start <- as.logical(start)
-  steps <- as.integer(steps)
+  steps <- as.numeric(steps)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -292,8 +292,8 @@ predict_edges <- function(graph, hrg = NULL, start = FALSE, num.samples = 10000,
     as.numeric
   )
   start <- as.logical(start)
-  num.samples <- as.integer(num.samples)
-  num.bins <- as.integer(num.bins)
+  num.samples <- as.numeric(num.samples)
+  num.bins <- as.numeric(num.bins)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call

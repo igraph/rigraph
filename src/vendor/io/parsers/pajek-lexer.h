@@ -457,7 +457,11 @@ void yyfree ( void * , yyscan_t yyscanner );
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
-#define netline 1
+#define unknown 1
+#define unknown_line 2
+#define bom 3
+#define vert 4
+#define edge 5
 
 #endif
 
@@ -729,9 +733,9 @@ extern int yylex \
 #undef yyTABLES_NAME
 #endif
 
-#line 152 "src/vendor/cigraph/src/io/pajek-lexer.l"
+#line 195 "src/vendor/cigraph/src/io/pajek-lexer.l"
 
 
-#line 736 "src/vendor/io/parsers/pajek-lexer.h"
+#line 740 "src/vendor/io/parsers/pajek-lexer.h"
 #undef igraph_pajek_yyIN_HEADER
 #endif /* igraph_pajek_yyHEADER_H */

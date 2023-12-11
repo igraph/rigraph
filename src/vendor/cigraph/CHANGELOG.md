@@ -2,9 +2,13 @@
 
 ## [master]
 
+## [0.10.8] - 2023-11-17
+
 ### Added
 
  - `igraph_joint_degree_matrix()` computes the joint degree matrix, i.e. counts connections between vertices of different degrees. (PR #2407 by Lára Margrét Hólmfríðardóttir @larah19)
+ - `igraph_joint_degree_distribution()` computes the joint distribution of degrees at either end of edges.
+ - `igraph_joint_type_distribution()` computes the joint distribution of vertex categories at either end of edges, i.e. the mixing matrix.
  - `igraph_degree_correlation_vector()` computes the degree correlation function and its various directed generalizations.
 
 ### Changed
@@ -23,6 +27,10 @@
  - `igraph_full()`, `igraph_full_citation()`, `igraph_full_multipartite()` and `igraph_turan()` are now interruptible.
  - `igraph_avg_nearest_neighbor_degree()` did not compute `knnk` correctly in the weighted case.
  - Fixed variadic arguments of invalid types, which could cause incorrect behaviour with `igraph_matrix_print()`, as well as test suite failures, on some platforms. 32-bit x86 was affected when setting `IGRAPH_INTEGER_SIZE` to 64.
+ - `igraph_subisomorphic_lad()` now returns a single null map when the pattern is the null graph.
+ - `igraph_community_spinglass()` now checks its parameters more carefully.
+ - `igraph_similarity_dice_pairs()` and `igraph_similarity_jaccard_pairs()` now validate vertex IDs.
+ - `igraph_maxflow()` now returns an error code if the source and target vertices are the same. It used to get stuck in an infinite loop in earlier versions when the `flow` argument was non-NULL.
 
 ### Other
 
@@ -711,6 +719,7 @@ Some of the highlights are:
    incorrect (it was always zero). This is now fixed.
  - `igraph_correlated_game()` would return incorrect results, or exhaust the memory,
     for most input graphs that were not generated with `igraph_erdos_renyi_game_gnp()`.
+ - `igraph_community_label_propagation` incorrectly did not result in all labels being dominant (issue #1963, fixed in PR #1966).
 
 ### Other
 
@@ -1234,7 +1243,8 @@ Some of the highlights are:
  - Provide proper support for Windows, using `__declspec(dllexport)` and `__declspec(dllimport)` for `DLL`s and static usage by using `#define IGRAPH_STATIC 1`.
  - Provided integer versions of `dqueue` and `stack` data types.
 
-[master]: https://github.com/igraph/igraph/compare/0.10.7..master
+[master]: https://github.com/igraph/igraph/compare/0.10.8..master
+[0.10.8]: https://github.com/igraph/igraph/compare/0.10.7..0.10.8
 [0.10.7]: https://github.com/igraph/igraph/compare/0.10.6..0.10.7
 [0.10.6]: https://github.com/igraph/igraph/compare/0.10.5..0.10.6
 [0.10.5]: https://github.com/igraph/igraph/compare/0.10.4..0.10.5

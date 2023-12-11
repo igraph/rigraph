@@ -1,93 +1,131 @@
-# causaleffect
+# Canek
 
 <details>
 
-* Version: 1.3.15
-* GitHub: https://github.com/santikka/causaleffect
-* Source code: https://github.com/cran/causaleffect
-* Date/Publication: 2022-07-14 09:10:05 UTC
-* Number of recursive dependencies: 17
+* Version: 0.2.4
+* GitHub: https://github.com/MartinLoza/Canek
+* Source code: https://github.com/cran/Canek
+* Date/Publication: 2023-11-06 00:10:02 UTC
+* Number of recursive dependencies: 222
 
-Run `revdepcheck::cloud_details(, "causaleffect")` for more info
+Run `revdepcheck::cloud_details(, "Canek")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking tests ... ERROR
     ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘causaleffect.ltx’ using tex
-    Error: processing vignette 'causaleffect.ltx' failed with diagnostics:
-    Running 'texi2dvi' on 'causaleffect.ltx' failed.
-    LaTeX errors:
-    ! LaTeX Error: File `thumbpdf.sty' not found.
-    
-    Type X to quit or <RETURN> to proceed,
-    or enter new name. (Default extension: sty)
-    
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(Canek)
+      > 
+      > test_check("Canek")
+      [ FAIL 2 | WARN 3 | SKIP 0 | PASS 90 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
     ...
-    l.16 \usepackage
-                    {csquotes}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘simplification.ltx’
-    
-    SUMMARY: processing the following files failed:
-      ‘causaleffect.ltx’ ‘simplification.ltx’
-    
-    Error: Vignette re-building failed.
-    Execution halted
+      as.integer(table(dataLouvain$cluster)) not equal to c(96, 125, 140, 171, 99).
+      Lengths differ: 4 is not 5
+      ── Failure ('test-Clustering.R:20:3'): Clustering with louvain works ───────────
+      dim(dataLouvain$centers) not equal to c(5, 10).
+      1/2 mismatches
+      [1] 4 - 5 == -1
+      
+      [ FAIL 2 | WARN 3 | SKIP 0 | PASS 90 ]
+      Error: Test failures
+      Execution halted
     ```
 
-# CINNA
+# countland
 
 <details>
 
-* Version: 1.2.2
+* Version: 0.1.1
 * GitHub: NA
-* Source code: https://github.com/cran/CINNA
-* Date/Publication: 2023-08-08 16:40:02 UTC
-* Number of recursive dependencies: 149
+* Source code: https://github.com/cran/countland
+* Date/Publication: 2022-08-17 06:40:06 UTC
+* Number of recursive dependencies: 199
 
-Run `revdepcheck::cloud_details(, "CINNA")` for more info
+Run `revdepcheck::cloud_details(, "countland")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking dependencies in R code ... NOTE
+*   checking tests ... ERROR
     ```
-    Namespaces in Imports field not imported from:
-      ‘circlize’ ‘utils’
-      All declared Imports should be used.
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(countland)
+      > 
+      > test_check("countland")
+      countland object
+      the count matrix has 1000 genes (rows)
+          and 100 cells (columns)
+    ...
+       2.   ├─methods::as(...)
+       3.   │ └─methods:::.class1(object)
+       4.   ├─base::do.call(...)
+       5.   └─base::lapply(...)
+       6.     └─countland (local) FUN(X[[i]], ...)
+       7.       └─base::apply(combX[spectral_cluster$cluster == x, ], 2, sum)
+      
+      [ FAIL 4 | WARN 0 | SKIP 0 | PASS 61 ]
+      Error: Test failures
+      Execution halted
     ```
 
-# dosearch
+# DiagrammeR
 
 <details>
 
-* Version: 1.0.8
-* GitHub: NA
-* Source code: https://github.com/cran/dosearch
-* Date/Publication: 2021-08-19 16:40:02 UTC
-* Number of recursive dependencies: 18
+* Version: 1.0.10
+* GitHub: https://github.com/rich-iannone/DiagrammeR
+* Source code: https://github.com/cran/DiagrammeR
+* Date/Publication: 2023-05-18 14:30:07 UTC
+* Number of recursive dependencies: 100
 
-Run `revdepcheck::cloud_details(, "dosearch")` for more info
+Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 
 </details>
 
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(DiagrammeR)
+      > 
+      > suppressWarnings(RNGversion("3.5.0"))
+      > test_check("DiagrammeR")
+      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      
+    ...
+      1/1 mismatches
+      [1] 107 - 98 == 9
+      ── Failure ('test-count_entities.R:142:3'): counting the number of strongly connected components is possible ──
+      graph %>% count_s_connected_cmpts() not equal to 4.
+      1/1 mismatches
+      [1] 2 - 4 == -2
+      
+      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      Error: Test failures
+      Execution halted
+    ```
+
 ## In both
 
-*   checking C++ specification ... NOTE
+*   checking data for non-ASCII characters ... NOTE
     ```
-      Specified C++11: please drop specification unless essential
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.5Mb
-      sub-directories of 1Mb or more:
-        libs   6.2Mb
+      Note: found 1 marked UTF-8 string
     ```
 
 # ggnetwork
@@ -103,6 +141,33 @@ Run `revdepcheck::cloud_details(, "dosearch")` for more info
 Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
 
 </details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(ggnetwork)
+      Loading required package: ggplot2
+      > 
+      > test_check("ggnetwork")
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      
+    ...
+          ▆
+       1. ├─testthat::expect_s3_class(...) at test-ggnetwork.R:35:3
+       2. │ └─testthat::quasi_label(enquo(object), arg = "object")
+       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+       4. └─ggnetwork::ggnetwork(n, layout = matrix(runif(28), ncol = 2)) at test-ggnetwork.R:36:5
+       5.   └─ggnetwork:::fortify.igraph(x, ...)
+      
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      Error: Test failures
+      Execution halted
+    ```
 
 ## In both
 
@@ -126,6 +191,29 @@ Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
 Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 
 </details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘inferCSN-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: dynamic.networks
+    > ### Title: Plot of dynamic networks
+    > ### Aliases: dynamic.networks
+    > 
+    > ### ** Examples
+    > 
+    > library(inferCSN)
+    > data("exampleMatrix")
+    > weightDT <- inferCSN(exampleMatrix)
+    > g <- dynamic.networks(weightDT, regulators = weightDT[1, 1])
+    Error in fortify.igraph(x, ...) : 
+      layout matrix dimensions do not match network size
+    Calls: dynamic.networks -> ggnetwork -> fortify.igraph
+    Execution halted
+    ```
 
 ## In both
 
@@ -173,62 +261,374 @@ Run `revdepcheck::cloud_details(, "influential")` for more info
         Position: 1 Code: ... Docs: incidence
     ```
 
-# markovchain
+# manynet
 
 <details>
 
-* Version: 0.9.5
-* GitHub: https://github.com/spedygiorgio/markovchain
-* Source code: https://github.com/cran/markovchain
-* Date/Publication: 2023-09-24 09:20:02 UTC
-* Number of recursive dependencies: 105
+* Version: 0.2.8
+* GitHub: https://github.com/snlab-ch/manynet
+* Source code: https://github.com/cran/manynet
+* Date/Publication: 2023-11-02 10:10:08 UTC
+* Number of recursive dependencies: 138
 
-Run `revdepcheck::cloud_details(, "markovchain")` for more info
+Run `revdepcheck::cloud_details(, "manynet")` for more info
 
 </details>
 
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(manynet)
+      Registered S3 method overwritten by 'manynet':
+        method          from     
+        print.tbl_graph tidygraph
+      > 
+      > test_check("manynet")
+    ...
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test-make_create.R:40:3'): tree creation works ────────────────────
+      unname(as_matrix(create_tree(c(2, 2)))) not equal to matrix(c(1, 1, 1, 0), 2, 2).
+      1/4 mismatches
+      [1] 0 - 1 == -1
+      
+      [ FAIL 1 | WARN 2 | SKIP 10 | PASS 303 ]
+      Error: Test failures
+      Execution halted
+    ```
+
 ## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package which this enhances but not available for checking: ‘Rgraphviz’
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 7 marked UTF-8 strings
+    ```
+
+# migraph
+
+<details>
+
+* Version: 1.1.5
+* GitHub: https://github.com/snlab-ch/migraph
+* Source code: https://github.com/cran/migraph
+* Date/Publication: 2023-11-02 10:10:02 UTC
+* Number of recursive dependencies: 116
+
+Run `revdepcheck::cloud_details(, "migraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘migraph-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: features
+    > ### Title: Measures of network topological features
+    > ### Aliases: features network_core network_richclub network_factions
+    > ###   network_modularity network_smallworld network_scalefree
+    > ###   network_balance
+    > 
+    > ### ** Examples
+    ...
+    [1] -0.458
+    > network_smallworld(ison_brandes)
+    [1] NaN
+    > network_smallworld(ison_southern_women)
+    [1] -1.03
+    > network_scalefree(ison_adolescents)
+    Error in if (out$KS.p < 0.05) cat(paste("Note: Kolgomorov-Smirnov test that data",  : 
+      argument is of length zero
+    Calls: network_scalefree
+    Execution halted
+    ```
+
+# molnet
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/molnet
+* Date/Publication: 2021-08-06 08:30:02 UTC
+* Number of recursive dependencies: 124
+
+Run `revdepcheck::cloud_details(, "molnet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘molnet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: graph_metrics
+    > ### Title: Analyses metrics of an iGraph object
+    > ### Aliases: graph_metrics
+    > 
+    > ### ** Examples
+    > 
+    > adj_mat <- matrix(rnorm(36),nrow=6)
+    > graph <- igraph::graph_from_adjacency_matrix(adj_mat)
+    Error in graph.adjacency.dense(adjmatrix, mode = mode, weighted = weighted,  : 
+      At vendor/cigraph/src/constructors/adjacency.c:329 : Edge counts should be non-negative, found -2.2147. Invalid value
+    Calls: <Anonymous> -> graph.adjacency.dense
+    Execution halted
+    ```
+
+# NAIR
+
+<details>
+
+* Version: 1.0.2
+* GitHub: https://github.com/mlizhangx/Network-Analysis-for-Repertoire-Sequencing-
+* Source code: https://github.com/cran/NAIR
+* Date/Publication: 2023-09-27 10:20:08 UTC
+* Number of recursive dependencies: 87
+
+Run `revdepcheck::cloud_details(, "NAIR")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(NAIR)
+      Welcome to NAIR: Network Analysis of Immune Repertoire.
+      Get started using `vignette("NAIR")`, or by visiting
+      https://mlizhangx.github.io/Network-Analysis-for-Repertoire-Sequencing-/
+      > 
+      > test_check("NAIR")
+    ...
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test_functions.R:722:3'): addClusterMembership works ──────────────
+      net$details$clusters_in_network (`actual`) not equal to c(fast_greedy = 20, leiden = 55) (`expected`).
+      
+        `actual`: 20 53
+      `expected`: 20 55
+      
+      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 1219 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.1Mb
+      sub-directories of 1Mb or more:
+        libs   6.6Mb
+    ```
+
+# nat
+
+<details>
+
+* Version: 1.8.23
+* GitHub: https://github.com/natverse/nat
+* Source code: https://github.com/cran/nat
+* Date/Publication: 2023-08-25 15:40:02 UTC
+* Number of recursive dependencies: 92
+
+Run `revdepcheck::cloud_details(, "nat")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘test-all.R’
+    Running the tests in ‘tests/test-all.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(nat)
+      Loading required package: rgl
+      Registered S3 method overwritten by 'nat':
+        method             from
+        as.mesh3d.ashape3d rgl 
+      Some nat functions depend on a CMTK installation. See ?cmtk and README.md for details.
+    ...
+       2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
+       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+       4. ├─base::subset(n, n_graph_dfs$order, invert = T)
+       5. └─nat:::subset.neuron(n, n_graph_dfs$order, invert = T)
+       6.   └─nat::prune_vertices(x, r, invert = !invert, ...)
+       7.     └─igraph::delete.vertices(g, verticestoprune)
+      
+      [ FAIL 1 | WARN 0 | SKIP 5 | PASS 787 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# netcom
+
+<details>
+
+* Version: 2.1.6
+* GitHub: https://github.com/langendorfr/netcom
+* Source code: https://github.com/cran/netcom
+* Date/Publication: 2022-07-21 17:40:06 UTC
+* Number of recursive dependencies: 105
+
+Run `revdepcheck::cloud_details(, "netcom")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘netcom-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: best_fit_optim
+    > ### Title: Empirical parameterization
+    > ### Aliases: best_fit_optim
+    > 
+    > ### ** Examples
+    > 
+    > # Import netcom
+    ...
+    +          "clustering_coefficient", "page_rank", "communities"
+    +      ), 
+    +      DD_weight = 1, 
+    +      max_norm = FALSE,
+    +      verbose = FALSE
+    + )
+    Error in igraph::transitivity(igraph_graph, type = "weighted") : 
+      At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
+    Calls: best_fit_optim -> compare_Target -> <Anonymous>
+    Execution halted
+    ```
 
 *   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
       ...
-    --- re-building ‘an_introduction_to_markovchain_package.Rmd’ using rmarkdown
-    Error: processing vignette 'an_introduction_to_markovchain_package.Rmd' failed with diagnostics:
-    pandoc version 2.7 or higher is required and was not found (see the help page ?rmarkdown::pandoc_available).
-    --- failed re-building ‘an_introduction_to_markovchain_package.Rmd’
+    --- re-building ‘tutorial.Rmd’ using rmarkdown
     
-    --- re-building ‘gsoc_2017_additions.Rmd’ using rmarkdown
-    --- finished re-building ‘gsoc_2017_additions.Rmd’
+    Quitting from lines 200-215 [Classify networks] (tutorial.Rmd)
+    Error: processing vignette 'tutorial.Rmd' failed with diagnostics:
+    At vendor/cigraph/src/properties/triangles.c:885 : Barrat's weighted transitivity measure works only if the graph has no multi-edges. Invalid value
+    --- failed re-building ‘tutorial.Rmd’
     
-    ...
-    Error: processing vignette 'higher_order_markov_chains.Rmd' failed with diagnostics:
-    pandoc version 2.7 or higher is required and was not found (see the help page ?rmarkdown::pandoc_available).
-    --- failed re-building ‘higher_order_markov_chains.Rmd’
-    
-    SUMMARY: processing the following files failed:
-      ‘an_introduction_to_markovchain_package.Rmd’
-      ‘higher_order_markov_chains.Rmd’
+    SUMMARY: processing the following file failed:
+      ‘tutorial.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted
     ```
 
-*   checking package dependencies ... NOTE
+## In both
+
+*   checking dependencies in R code ... NOTE
     ```
-    Package which this enhances but not available for checking: ‘etm’
+    Namespaces in Imports field not imported from:
+      ‘ggfortify’ ‘ggplot2’ ‘ggraph’ ‘reshape2’
+      All declared Imports should be used.
     ```
 
-*   checking installed package size ... NOTE
+# nosoi
+
+<details>
+
+* Version: 1.1.0
+* GitHub: https://github.com/slequime/nosoi
+* Source code: https://github.com/cran/nosoi
+* Date/Publication: 2021-08-17 16:20:02 UTC
+* Number of recursive dependencies: 147
+
+Run `revdepcheck::cloud_details(, "nosoi")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
     ```
-      installed size is 24.0Mb
-      sub-directories of 1Mb or more:
-        libs  21.9Mb
+    Error(s) in re-building vignettes:
+    --- re-building ‘continuous.Rmd’ using rmarkdown
+    --- finished re-building ‘continuous.Rmd’
+    
+    --- re-building ‘discrete.Rmd’ using rmarkdown
+    
+    Quitting from lines 49-83 [setupMatrix] (discrete.Rmd)
+    Error: processing vignette 'discrete.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘discrete.Rmd’
+    ...
+    --- failed re-building ‘nosoi.Rmd’
+    
+    --- re-building ‘output.Rmd’ using rmarkdown
+    --- finished re-building ‘output.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘discrete.Rmd’ ‘nosoi.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
-*   checking for GNU extensions in Makefiles ... NOTE
+# oddnet
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/oddnet
+* Date/Publication: 2022-12-22 20:10:01 UTC
+* Number of recursive dependencies: 85
+
+Run `revdepcheck::cloud_details(, "oddnet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
     ```
-    GNU make is a SystemRequirements.
+    Running examples in ‘oddnet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: tensorsplat
+    > ### Title: Implements Danai Koutra's TensorSplat algorithm
+    > ### Aliases: tensorsplat
+    > 
+    > ### ** Examples
+    > 
+    > # We generate a series of networks and add an anomaly at 50th network.
+    ...
+    > networks <- list()
+    > p.or.m.seq <- rep(0.05, 50)
+    > p.or.m.seq[20] <- 0.2  # anomalous network at 20
+    > for(i in 1:100){
+    +   gr <- igraph::erdos.renyi.game(100, p.or.m = p.or.m.seq[i])
+    +   networks[[i]] <- igraph::as_adjacency_matrix(gr)
+    + }
+    Error in igraph::erdos.renyi.game(100, p.or.m = p.or.m.seq[i]) : 
+      At vendor/cigraph/src/math/safe_intop.c:128 : NaN cannot be converted to an integer. Invalid value
+    Execution halted
     ```
 
 # pcalg
@@ -244,6 +644,33 @@ Run `revdepcheck::cloud_details(, "markovchain")` for more info
 Run `revdepcheck::cloud_details(, "pcalg")` for more info
 
 </details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘test_LINGAM.R’
+      Running ‘test_addBgKnowledge.R’
+      Running ‘test_adjustment.R’
+      Running ‘test_ages.R’
+      Running ‘test_amat2dag.R’
+      Running ‘test_arges.R’
+      Running ‘test_backdoor.R’
+      Comparing ‘test_backdoor.Rout’ to ‘test_backdoor.Rout.save’ ... OK
+      Running ‘test_bicscore.R’
+      Running ‘test_causalEffect.R’
+    ...
+      > set.seed(37)
+      > rD.10.4 <- withCallingHandlers(
+      +     rDAGall(10, 4) # "low-level warning" -- get it here and test it below
+      +     , warning = function(w) {
+      +         rDAG.warn <<- conditionMessage(w); invokeRestart("muffleWarning") })
+      > ## with a low-level warning:
+      > ## IGNORE_RDIFF_BEGIN
+      > rDAG.warn
+      Error: object 'rDAG.warn' not found
+      Execution halted
+    ```
 
 ## In both
 
@@ -299,6 +726,47 @@ Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
 
 </details>
 
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘phyloseqGraphTest-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: plot_test_network
+    > ### Title: Plots the graph used for testing
+    > ### Aliases: plot_test_network
+    > 
+    > ### ** Examples
+    > 
+    > library(phyloseq)
+    > data(enterotype)
+    > gt = graph_perm_test(enterotype, sampletype = "SeqTech")
+    > plot_test_network(gt)
+    Error in fortify.igraph(data, ...) : 
+      layout matrix dimensions do not match network size
+    Calls: plot_test_network ... ggplot -> ggplot.default -> fortify -> fortify.igraph
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘gt_vignette.Rmd’ using rmarkdown
+    
+    Quitting from lines 175-176 [unnamed-chunk-5] (gt_vignette.Rmd)
+    Error: processing vignette 'gt_vignette.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘gt_vignette.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘gt_vignette.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
 ## In both
 
 *   checking dependencies in R code ... NOTE
@@ -312,42 +780,70 @@ Run `revdepcheck::cloud_details(, "phyloseqGraphTest")` for more info
       'LazyData' is specified without a 'data' directory
     ```
 
-# shazam
+# rgraph6
 
 <details>
 
-* Version: 1.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/shazam
-* Date/Publication: 2023-10-02 18:50:02 UTC
-* Number of recursive dependencies: 128
+* Version: 2.0-2
+* GitHub: https://github.com/mbojan/rgraph6
+* Source code: https://github.com/cran/rgraph6
+* Date/Publication: 2022-08-25 12:10:02 UTC
+* Number of recursive dependencies: 60
 
-Run `revdepcheck::cloud_details(, "shazam")` for more info
+Run `revdepcheck::cloud_details(, "rgraph6")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
-    --- re-building ‘Baseline-Vignette.Rmd’ using rmarkdown
-    tlmgr update --all --self
-    Can't locate mktexlsr.pl in @INC (@INC contains: /opt/TinyTeX/tlpkg /opt/TinyTeX/texmf-dist/scripts/texlive /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.30.0 /usr/local/share/perl/5.30.0 /usr/lib/x86_64-linux-gnu/perl5/5.30 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.30 /usr/share/perl/5.30 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base) at /usr/bin/fmtutil line 26.
-    BEGIN failed--compilation aborted at /usr/bin/fmtutil line 28.
-    texlive-scripts package not found (?!), skipping revision consistency check
-    tlmgr: package repository https://ctan.math.illinois.edu/systems/texlive/tlnet (verified)
-    tlmgr install: package already present: l3backend
-    ! LaTeX Error: Mismatched LaTeX support files detected.
-    (LaTeX)        Loading 'l3backend-pdftex.def' aborted!
-    ...
-    LaTeX failed to compile /tmp/workdir/shazam/new/shazam.Rcheck/vign_test/shazam/vignettes/Targeting-Vignette.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips. See Targeting-Vignette.log for more info.
-    --- failed re-building ‘Targeting-Vignette.Rmd’
+      ...
+    --- re-building ‘rgraph6.Rmd’ using rmarkdown
     
-    SUMMARY: processing the following files failed:
-      ‘Baseline-Vignette.Rmd’ ‘DistToNearest-Vignette.Rmd’
-      ‘Mutation-Vignette.Rmd’ ‘Shmulate-Vignette.Rmd’
-      ‘Targeting-Vignette.Rmd’
+    Quitting from lines 162-171 [unnamed-chunk-9] (rgraph6.Rmd)
+    Error: processing vignette 'rgraph6.Rmd' failed with diagnostics:
+    values must be type 'integer',
+     but FUN(X[[1]]) result is type 'double'
+    --- failed re-building ‘rgraph6.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘rgraph6.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# riverconn
+
+<details>
+
+* Version: 0.3.28
+* GitHub: NA
+* Source code: https://github.com/cran/riverconn
+* Date/Publication: 2023-05-05 08:20:02 UTC
+* Number of recursive dependencies: 96
+
+Run `revdepcheck::cloud_details(, "riverconn")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘Tutorial.Rmd’ using rmarkdown
+    
+    Quitting from lines 210-221 [plot igraph] (Tutorial.Rmd)
+    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
+    layout matrix dimensions do not match network size
+    --- failed re-building ‘Tutorial.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘Tutorial.Rmd’
     
     Error: Vignette re-building failed.
     Execution halted

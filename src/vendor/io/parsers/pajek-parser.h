@@ -56,54 +56,51 @@ extern int igraph_pajek_yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     NEWLINE = 258,                 /* "end of line"  */
     NUM = 259,                     /* "number"  */
-    ALNUM = 260,                   /* ALNUM  */
-    QSTR = 261,                    /* QSTR  */
-    PSTR = 262,                    /* PSTR  */
-    NETWORKLINE = 263,             /* "*network line"  */
-    NET_TITLE = 264,               /* NET_TITLE  */
-    VERTICESLINE = 265,            /* "*vertices line"  */
-    ARCSLINE = 266,                /* "*arcs line"  */
-    EDGESLINE = 267,               /* "*edges line"  */
-    ARCSLISTLINE = 268,            /* "*arcslist line"  */
-    EDGESLISTLINE = 269,           /* "*edgeslist line"  */
-    MATRIXLINE = 270,              /* "*matrix line"  */
-    ERROR = 271,                   /* ERROR  */
-    VP_X_FACT = 272,               /* VP_X_FACT  */
-    VP_Y_FACT = 273,               /* VP_Y_FACT  */
-    VP_IC = 274,                   /* VP_IC  */
-    VP_BC = 275,                   /* VP_BC  */
-    VP_LC = 276,                   /* VP_LC  */
-    VP_LR = 277,                   /* VP_LR  */
-    VP_LPHI = 278,                 /* VP_LPHI  */
-    VP_BW = 279,                   /* VP_BW  */
-    VP_FOS = 280,                  /* VP_FOS  */
-    VP_PHI = 281,                  /* VP_PHI  */
-    VP_R = 282,                    /* VP_R  */
-    VP_Q = 283,                    /* VP_Q  */
-    VP_LA = 284,                   /* VP_LA  */
-    VP_FONT = 285,                 /* VP_FONT  */
-    VP_URL = 286,                  /* VP_URL  */
-    VP_SIZE = 287,                 /* VP_SIZE  */
+    ALNUM = 260,                   /* "word"  */
+    QSTR = 261,                    /* "quoted string"  */
+    NETWORKLINE = 262,             /* "*Network line"  */
+    VERTICESLINE = 263,            /* "*Vertices line"  */
+    ARCSLINE = 264,                /* "*Arcs line"  */
+    EDGESLINE = 265,               /* "*Edges line"  */
+    ARCSLISTLINE = 266,            /* "*Arcslist line"  */
+    EDGESLISTLINE = 267,           /* "*Edgeslist line"  */
+    MATRIXLINE = 268,              /* "*Matrix line"  */
+    ERROR = 269,                   /* ERROR  */
+    VP_X_FACT = 270,               /* VP_X_FACT  */
+    VP_Y_FACT = 271,               /* VP_Y_FACT  */
+    VP_PHI = 272,                  /* VP_PHI  */
+    VP_R = 273,                    /* VP_R  */
+    VP_Q = 274,                    /* VP_Q  */
+    VP_IC = 275,                   /* VP_IC  */
+    VP_BC = 276,                   /* VP_BC  */
+    VP_BW = 277,                   /* VP_BW  */
+    VP_LC = 278,                   /* VP_LC  */
+    VP_LA = 279,                   /* VP_LA  */
+    VP_LR = 280,                   /* VP_LR  */
+    VP_LPHI = 281,                 /* VP_LPHI  */
+    VP_FOS = 282,                  /* VP_FOS  */
+    VP_FONT = 283,                 /* VP_FONT  */
+    VP_URL = 284,                  /* VP_URL  */
+    EP_H1 = 285,                   /* EP_H1  */
+    EP_H2 = 286,                   /* EP_H2  */
+    EP_W = 287,                    /* EP_W  */
     EP_C = 288,                    /* EP_C  */
-    EP_S = 289,                    /* EP_S  */
+    EP_P = 289,                    /* EP_P  */
     EP_A = 290,                    /* EP_A  */
-    EP_W = 291,                    /* EP_W  */
-    EP_H1 = 292,                   /* EP_H1  */
-    EP_H2 = 293,                   /* EP_H2  */
-    EP_A1 = 294,                   /* EP_A1  */
-    EP_A2 = 295,                   /* EP_A2  */
-    EP_K1 = 296,                   /* EP_K1  */
-    EP_K2 = 297,                   /* EP_K2  */
-    EP_AP = 298,                   /* EP_AP  */
-    EP_P = 299,                    /* EP_P  */
-    EP_L = 300,                    /* EP_L  */
-    EP_LP = 301,                   /* EP_LP  */
-    EP_LR = 302,                   /* EP_LR  */
-    EP_LPHI = 303,                 /* EP_LPHI  */
-    EP_LC = 304,                   /* EP_LC  */
-    EP_LA = 305,                   /* EP_LA  */
-    EP_SIZE = 306,                 /* EP_SIZE  */
-    EP_FOS = 307                   /* EP_FOS  */
+    EP_S = 291,                    /* EP_S  */
+    EP_A1 = 292,                   /* EP_A1  */
+    EP_K1 = 293,                   /* EP_K1  */
+    EP_A2 = 294,                   /* EP_A2  */
+    EP_K2 = 295,                   /* EP_K2  */
+    EP_AP = 296,                   /* EP_AP  */
+    EP_L = 297,                    /* EP_L  */
+    EP_LP = 298,                   /* EP_LP  */
+    EP_LR = 299,                   /* EP_LR  */
+    EP_LPHI = 300,                 /* EP_LPHI  */
+    EP_LC = 301,                   /* EP_LC  */
+    EP_LA = 302,                   /* EP_LA  */
+    EP_FOS = 303,                  /* EP_FOS  */
+    EP_FONT = 304                  /* EP_FONT  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -112,7 +109,7 @@ extern int igraph_pajek_yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 111 "src/vendor/cigraph/src/io/pajek-parser.y"
+#line 116 "src/vendor/cigraph/src/io/pajek-parser.y"
 
   igraph_integer_t intnum;
   igraph_real_t    realnum;
@@ -120,8 +117,9 @@ union YYSTYPE
     char *str;
     size_t len;
   } string;
+  char *dynstr;
 
-#line 125 "yy.tab.h"
+#line 123 "yy.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -115,7 +115,7 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
     weights <- NULL
   }
   Mu <- as.numeric(Mu)
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
