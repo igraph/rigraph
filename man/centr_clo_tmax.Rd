@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_clo_tmax}
 \alias{centr_clo_tmax}
-\alias{centralization.closeness.tmax}
 \title{Theoretical maximum for closeness centralization}
 \usage{
 centr_clo_tmax(graph = NULL, nodes = 0, mode = c("out", "in", "all", "total"))

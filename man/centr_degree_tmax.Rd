@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_degree_tmax}
 \alias{centr_degree_tmax}
-\alias{centralization.degree.tmax}
 \title{Theoretical maximum for degree centralization}
 \usage{
 centr_degree_tmax(
