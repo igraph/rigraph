@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{min_cut}
 \alias{min_cut}
-\alias{graph.mincut}
 \title{Minimum cut in a graph}
 \usage{
 min_cut(
