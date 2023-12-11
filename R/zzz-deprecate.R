@@ -140,10 +140,6 @@ deprecated("delete.edges", delete_edges)
 deprecated("delete.vertices", delete_vertices)
 #' @export dendPlot
 deprecated("dendPlot", plot_dendrogram)
-#' @method dendPlot communities
-deprecated("dendPlot.communities", plot_dendrogram.communities)
-#' @method dendPlot igraphHRG
-deprecated("dendPlot.igraphHRG", plot_dendrogram.igraphHRG)
 #' @export dominator.tree
 deprecated("dominator.tree", dominator_tree)
 #' @export dyad.census
