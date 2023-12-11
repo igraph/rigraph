@@ -2,7 +2,6 @@
 % Please edit documentation in R/motifs.R
 \name{dyad_census}
 \alias{dyad_census}
-\alias{dyad.census}
 \title{Dyad census of a graph}
 \usage{
 dyad_census(graph)
