@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{intersection.igraph}
 \alias{intersection.igraph}
-\alias{graph.intersection}
 \alias{\%s\%}
 \title{Intersection of graphs}
 \usage{
