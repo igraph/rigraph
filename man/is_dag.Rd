@@ -2,7 +2,6 @@
 % Please edit documentation in R/paths.R
 \name{is_dag}
 \alias{is_dag}
-\alias{is.dag}
 \title{Directed acyclic graphs}
 \usage{
 is_dag(graph)
