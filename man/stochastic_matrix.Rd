@@ -2,7 +2,6 @@
 % Please edit documentation in R/scg.R
 \name{stochastic_matrix}
 \alias{stochastic_matrix}
-\alias{get.stochastic}
 \title{Stochastic matrix of a graph}
 \usage{
 stochastic_matrix(
