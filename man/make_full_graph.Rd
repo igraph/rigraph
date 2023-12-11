@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_full_graph}
 \alias{make_full_graph}
-\alias{graph.full}
 \alias{full_graph}
 \title{Create a full graph}
 \usage{

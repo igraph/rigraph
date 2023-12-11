@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{graph_from_lcf}
 \alias{graph_from_lcf}
-\alias{graph.lcf}
 \title{Creating a graph from LCF notation}
 \usage{
 graph_from_lcf(n, shifts, repeats = 1)
