@@ -1,4 +1,19 @@
 
+#' The igraph console
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.console()` was renamed to `console()` to create a more
+#' consistent API.
+#'
+#' @keywords internal
+#' @export
+igraph.console <- function() { # nocov start
+  lifecycle::deprecate_soft("1.7.0", "igraph.console()", "console()")
+  console()
+} # nocov end
+
 #   IGraph R package
 #   Copyright (C) 2010-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -36,7 +51,6 @@
 #'
 #' The console is written in Tcl/Tk and required the `tcltk` package.
 #'
-#' @aliases igraph.console
 #' @return `NULL`, invisibly.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [igraph_options()] and the `verbose` option.
@@ -282,4 +296,3 @@ close.igraphconsole <- function(con, ...) {
   list(frame = frame, pb = pb)
 }
 #' @export igraph.console
-deprecated("igraph.console", console)
