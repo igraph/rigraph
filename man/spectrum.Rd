@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{spectrum}
 \alias{spectrum}
-\alias{graph.eigen}
 \alias{igraph.eigen.default}
 \title{Eigenvalues and eigenvectors of the adjacency matrix of a graph}
 \usage{

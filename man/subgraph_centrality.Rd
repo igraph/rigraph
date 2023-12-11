@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{subgraph_centrality}
 \alias{subgraph_centrality}
-\alias{subgraph.centrality}
 \title{Find subgraph centrality scores of network positions}
 \usage{
 subgraph_centrality(graph, diag = FALSE)
