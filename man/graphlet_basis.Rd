@@ -2,8 +2,6 @@
 % Please edit documentation in R/glet.R
 \name{graphlet_basis}
 \alias{graphlet_basis}
-\alias{graphlets.project}
-\alias{graphlets.candidate.basis}
 \alias{graphlet_proj}
 \alias{graphlets}
 \title{Graphlet decomposition of a graph}
