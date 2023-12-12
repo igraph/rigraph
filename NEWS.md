@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9003
+
+## Features
+
+  - Upgrade igraph/C to 0.10 (@krlmlr, @Antonov548, #840).
+
+## Chore
+
+  - Update check results.
+
+
 # igraph 1.6.0.9002
 
   - Merge branch 'cran-1.6.0'.
