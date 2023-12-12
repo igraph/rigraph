@@ -82,6 +82,9 @@ igraph_ring:
 igraph_tree:
     IGNORE: RR, RC
 
+igraph_kary_tree:
+    IGNORE: RR, RC
+
 igraph_full:
     IGNORE: RR, RC
 

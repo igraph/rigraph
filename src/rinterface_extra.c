@@ -4330,14 +4330,14 @@ static int distances_johnson(const igraph_t *graph,
   }
   if (! negw) {
     /* Fall back to Dijstra when there are no negative weights, just like igraph_shortest_paths_johnson() would. */
-    return igraph_shortest_paths_dijkstra(graph, res, from, to, weights, mode);
+    return igraph_distances_dijkstra(graph, res, from, to, weights, mode);
   }
   /* We simulate mode=IN by swapping to/from and transposing the result matrix. */
   if (mode == IGRAPH_IN) {
-    IGRAPH_CHECK(igraph_shortest_paths_johnson(graph, res, to, from, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, to, from, weights));
     IGRAPH_CHECK(igraph_matrix_transpose(res));
   } else {
-    IGRAPH_CHECK(igraph_shortest_paths_johnson(graph, res, from, to, weights));
+    IGRAPH_CHECK(igraph_distances_johnson(graph, res, from, to, weights));
   }
   return IGRAPH_SUCCESS;
 }
@@ -4371,20 +4371,20 @@ SEXP R_igraph_shortest_paths(SEXP graph, SEXP pvids, SEXP pto,
     if (negw && mode != IGRAPH_ALL && Rf_xlength(pvids)>100) {
       distances_johnson(&g, &res, vs, to, pw, mode, negw);
     } else if (negw) {
-      IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, mode));
+      IGRAPH_R_CHECK(igraph_distances_bellman_ford(&g, &res, vs, to, pw, mode));
     } else {
       /* This one chooses 'unweighted' if there are no weights */
-      IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, mode));
+      IGRAPH_R_CHECK(igraph_distances_dijkstra(&g, &res, vs, to, pw, mode));
     }
     break;
   case 1:                       /* unweighted */
-    IGRAPH_R_CHECK(igraph_shortest_paths(&g, &res, vs, to, mode));
+    IGRAPH_R_CHECK(igraph_distances(&g, &res, vs, to, mode));
     break;
   case 2:                       /* dijkstra */
-    IGRAPH_R_CHECK(igraph_shortest_paths_dijkstra(&g, &res, vs, to, pw, mode));
+    IGRAPH_R_CHECK(igraph_distances_dijkstra(&g, &res, vs, to, pw, mode));
     break;
   case 3:                       /* bellman-ford */
-    IGRAPH_R_CHECK(igraph_shortest_paths_bellman_ford(&g, &res, vs, to, pw, mode));
+    IGRAPH_R_CHECK(igraph_distances_bellman_ford(&g, &res, vs, to, pw, mode));
     break;
   case 4:                       /* johnson */
     distances_johnson(&g, &res, vs, to, pw, mode, negw);
@@ -4937,7 +4937,7 @@ SEXP R_igraph_ring(SEXP pn, SEXP pdirected, SEXP pmutual, SEXP pcircular) {
   return result;
 }
 
-SEXP R_igraph_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
+SEXP R_igraph_kary_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
 
   igraph_t g;
   igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
@@ -4945,7 +4945,7 @@ SEXP R_igraph_tree(SEXP pn, SEXP pchildren, SEXP pmode) {
   igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
   SEXP result;
 
-  IGRAPH_R_CHECK(igraph_tree(&g, n, children, (igraph_tree_mode_t) mode));
+  IGRAPH_R_CHECK(igraph_kary_tree(&g, n, children, (igraph_tree_mode_t) mode));
   PROTECT(result=R_igraph_to_SEXP(&g));
   IGRAPH_I_DESTROY(&g);
 
@@ -6878,7 +6878,7 @@ SEXP R_igraph_no_clusters(SEXP graph, SEXP pmode) {
   SEXP result;
 
   R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_clusters(&g, 0, 0, &res, (igraph_connectedness_t) mode));
+  IGRAPH_R_CHECK(igraph_connected_components(&g, 0, 0, &res, (igraph_connectedness_t) mode));
   PROTECT(result=NEW_NUMERIC(1));
   REAL(result)[0]=res;
 

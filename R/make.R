@@ -1180,7 +1180,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_tree, as.numeric(n), as.numeric(children),
+    R_igraph_kary_tree, as.numeric(n), as.numeric(children),
     as.numeric(mode1)
   )
   if (igraph_opt("add.params")) {

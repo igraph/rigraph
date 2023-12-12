@@ -597,36 +597,6 @@ SEXP R_igraph_triangular_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
 }
 
 /*-------------------------------------------/
-/ igraph_kary_tree                           /
-/-------------------------------------------*/
-SEXP R_igraph_kary_tree(SEXP n, SEXP children, SEXP type) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_integer_t c_n;
-  igraph_integer_t c_children;
-  igraph_tree_mode_t c_type;
-  SEXP graph;
-
-  SEXP r_result;
-                                        /* Convert input */
-  c_n=(igraph_integer_t) REAL(n)[0];
-  c_children=(igraph_integer_t) REAL(children)[0];
-  c_type = (igraph_tree_mode_t) Rf_asInteger(type);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_kary_tree(&c_graph, c_n, c_children, c_type));
-
-                                        /* Convert output */
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_symmetric_tree                      /
 /-------------------------------------------*/
 SEXP R_igraph_symmetric_tree(SEXP branches, SEXP type) {

@@ -274,7 +274,9 @@ extern SEXP R_igraph_isoclass_subgraph(void *, void *);
 extern SEXP R_igraph_isomorphic(void *, void *);
 extern SEXP R_igraph_isomorphic_bliss(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_isomorphic_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_joint_degree_distribution(void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_joint_degree_matrix(void *, void *, void *, void *);
+extern SEXP R_igraph_joint_type_distribution(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_k_regular_game(void *, void *, void *, void *);
 extern SEXP R_igraph_kary_tree(void *, void *, void *);
 extern SEXP R_igraph_kautz(void *, void *);
@@ -446,7 +448,6 @@ extern SEXP R_igraph_transitivity_barrat(void *, void *, void *, void *);
 extern SEXP R_igraph_transitivity_local_undirected(void *, void *, void *);
 extern SEXP R_igraph_transitivity_local_undirected_all(void *, void *);
 extern SEXP R_igraph_transitivity_undirected(void *, void *);
-extern SEXP R_igraph_tree(void *, void *, void *);
 extern SEXP R_igraph_tree_from_parent_vector(void *, void *);
 extern SEXP R_igraph_tree_game(void *, void *, void *);
 extern SEXP R_igraph_triad_census(void *);
@@ -751,7 +752,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_isomorphic",                                 (DL_FUNC) &R_igraph_isomorphic,                                  2},
     {"R_igraph_isomorphic_bliss",                           (DL_FUNC) &R_igraph_isomorphic_bliss,                            5},
     {"R_igraph_isomorphic_vf2",                             (DL_FUNC) &R_igraph_isomorphic_vf2,                              6},
+    {"R_igraph_joint_degree_distribution",                  (DL_FUNC) &R_igraph_joint_degree_distribution,                   8},
     {"R_igraph_joint_degree_matrix",                        (DL_FUNC) &R_igraph_joint_degree_matrix,                         4},
+    {"R_igraph_joint_type_distribution",                    (DL_FUNC) &R_igraph_joint_type_distribution,                     6},
     {"R_igraph_k_regular_game",                             (DL_FUNC) &R_igraph_k_regular_game,                              4},
     {"R_igraph_kary_tree",                                  (DL_FUNC) &R_igraph_kary_tree,                                   3},
     {"R_igraph_kautz",                                      (DL_FUNC) &R_igraph_kautz,                                       2},
@@ -923,7 +926,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_transitivity_local_undirected",              (DL_FUNC) &R_igraph_transitivity_local_undirected,               3},
     {"R_igraph_transitivity_local_undirected_all",          (DL_FUNC) &R_igraph_transitivity_local_undirected_all,           2},
     {"R_igraph_transitivity_undirected",                    (DL_FUNC) &R_igraph_transitivity_undirected,                     2},
-    {"R_igraph_tree",                                       (DL_FUNC) &R_igraph_tree,                                        3},
     {"R_igraph_tree_from_parent_vector",                    (DL_FUNC) &R_igraph_tree_from_parent_vector,                     2},
     {"R_igraph_tree_game",                                  (DL_FUNC) &R_igraph_tree_game,                                   3},
     {"R_igraph_triad_census",                               (DL_FUNC) &R_igraph_triad_census,                                1},

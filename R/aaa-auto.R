@@ -131,18 +131,6 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
   res
 }
 
-kary_tree_impl <- function(n, children=2, type=OUT) {
-  # Argument checks
-  n <- as.numeric(n)
-  children <- as.numeric(children)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_kary_tree, n, children, type)
-
-  res
-}
-
 symmetric_tree_impl <- function(branches, type=OUT) {
   # Argument checks
   branches <- as.numeric(branches)
