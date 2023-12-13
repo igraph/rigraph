@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9004
+
+## Refactoring
+
+  - Eliminate the use of some deprecated C functions.
+
+
 # igraph 1.6.0.9003
 
 ## Features
