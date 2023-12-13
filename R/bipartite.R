@@ -41,7 +41,7 @@
 #'
 #' `bipartite_projection()` keeps vertex attributes.
 #'
-#' @aliases bipartite.projection bipartite.projection.size bipartite_projection_size bipartite_projection
+#' @aliases bipartite.projection bipartite.projection.size
 #' @param graph The input graph. It can be directed, but edge directions are
 #'   ignored during the computation.
 #' @param types An optional vertex type vector to use instead of the
@@ -83,7 +83,7 @@
 #' colnames(M) <- c("Party", "Skiing", "Badminton")
 #' M[] <- sample(0:1, length(M), replace = TRUE)
 #' M
-#' g2 <- graph_from_incidence_matrix(M)
+#' g2 <- graph_from_biadjacency_matrix(M)
 #' g2$name <- "Event network"
 #' proj2 <- bipartite_projection(g2)
 #' print(proj2[[1]], g = TRUE, e = TRUE)
@@ -117,7 +117,7 @@ bipartite_projection <- function(graph, types = NULL,
   # Function call
   res <- .Call(
     R_igraph_bipartite_projection, graph, types,
-    as.integer(probe1), which
+    as.numeric(probe1), which
   )
   if (remove.type) {
     if (is_igraph(res[[1]])) {
@@ -146,6 +146,7 @@ bipartite_projection <- function(graph, types = NULL,
   }
 }
 
+#' @rdname bipartite_projection
 #' @export
 bipartite_projection_size <- bipartite_projection_size_impl
 
@@ -169,7 +170,7 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' least two components, then the vertices in the separate components can be
 #' mapped independently.
 #'
-#' @aliases bipartite.mapping bipartite_mapping
+#' @aliases bipartite.mapping
 #' @param graph The input graph.
 #' @return A named list with two elements: \item{res}{A logical scalar,
 #'   `TRUE` if the can be bipartite, `FALSE` otherwise.} \item{type}{A

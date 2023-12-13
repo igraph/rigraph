@@ -101,10 +101,9 @@ assign(".next", 1, .tkplot.env)
 #' `tk_rotate()` rotates the figure, its parameter can be given either
 #' in degrees or in radians.
 #'
-#' @aliases tkplot tkplot.close tkplot.off tkplot.fit.to.screen tkplot.reshape
+#' @aliases tkplot.close tkplot.off tkplot.fit.to.screen tkplot.reshape
 #' tkplot.export.postscript tkplot.canvas tkplot.getcoords tkplot.setcoords
-#' tkplot.center tkplot.rotate tk_canvas tk_center tk_close tk_postscript
-#' tk_fit tk_coords tk_off tk_reshape tk_rotate tk_set_coords
+#' tkplot.center tkplot.rotate
 #' @param graph The `graph` to plot.
 #' @param canvas.width,canvas.height The size of the tkplot drawing area.
 #' @param tkp.id The id of the tkplot window to close/reshape/etc.
@@ -670,7 +669,6 @@ tkplot <- function(graph, canvas.width = 450, canvas.height = 450, ...) {
 ###################################################################
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_close <- function(tkp.id, window.close = TRUE) {
   if (window.close) {
@@ -685,7 +683,6 @@ tk_close <- function(tkp.id, window.close = TRUE) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_off <- function() {
   eapply(.tkplot.env, function(tkp) {
@@ -696,7 +693,6 @@ tk_off <- function() {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_fit <- function(tkp.id, width = NULL, height = NULL) {
   tkp <- .tkplot.get(tkp.id)
@@ -726,7 +722,6 @@ tk_fit <- function(tkp.id, width = NULL, height = NULL) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_center <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -752,7 +747,6 @@ tk_center <- function(tkp.id) {
 
 #' @rdname tkplot
 #' @param params Extra parameters in a list, to pass to the layout function.
-#' @family tkplot
 #' @export
 tk_reshape <- function(tkp.id, newlayout, ..., params) {
   tkp <- .tkplot.get(tkp.id)
@@ -764,7 +758,6 @@ tk_reshape <- function(tkp.id, newlayout, ..., params) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_postscript <- function(tkp.id) {
   tkp <- .tkplot.get(tkp.id)
@@ -779,7 +772,6 @@ tk_postscript <- function(tkp.id) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_coords <- function(tkp.id, norm = FALSE) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -796,7 +788,6 @@ tk_coords <- function(tkp.id, norm = FALSE) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_set_coords <- function(tkp.id, coords) {
   stopifnot(is.matrix(coords), ncol(coords) == 2)
@@ -806,7 +797,6 @@ tk_set_coords <- function(tkp.id, coords) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
   coords <- .tkplot.get(tkp.id, "coords")
@@ -832,7 +822,6 @@ tk_rotate <- function(tkp.id, degree = NULL, rad = NULL) {
 }
 
 #' @rdname tkplot
-#' @family tkplot
 #' @export
 tk_canvas <- function(tkp.id) {
   .tkplot.get(tkp.id)$canvas

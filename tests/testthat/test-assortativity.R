@@ -14,7 +14,7 @@ test_that("assortativity works", {
   }
 
   asd <- assortativity_degree(g)
-  as <- assortativity(g, degree(g, mode = "out"), degree(g, mode = "in"))
+  as <- assortativity(g, values = degree(g, mode = "out"), values.in = degree(g, mode = "in"))
   as2 <- assR(g)
 
   expect_that(asd, equals(as))

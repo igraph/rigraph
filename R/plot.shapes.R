@@ -274,7 +274,6 @@ shapes <- function(shape = NULL) {
 }
 
 #' @rdname shapes
-#' @family plot.shapes
 #' @export
 shape_noclip <- function(coords, el, params,
                          end = c("both", "from", "to")) {
@@ -290,14 +289,12 @@ shape_noclip <- function(coords, el, params,
 }
 
 #' @rdname shapes
-#' @family plot.shapes
 #' @export
 shape_noplot <- function(coords, v = NULL, params) {
   invisible(NULL)
 }
 
 #' @rdname shapes
-#' @family plot.shapes
 #' @export
 add_shape <- function(shape, clip = shape_noclip,
                       plot = shape_noplot,

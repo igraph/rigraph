@@ -128,8 +128,6 @@ de Solla Price, D. J. 1965. Networks of Scientific Papers \emph{Science},
 149 510--515.
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

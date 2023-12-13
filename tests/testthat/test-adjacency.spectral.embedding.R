@@ -266,7 +266,7 @@ test_that("Issue #51 is resolved", {
   pref.matrix <- diag(0.2, 2) + 0.2
   block.sizes <- c(800, 800)
   n <- sum(block.sizes)
-  g <- sbm.game(n, pref.matrix, block.sizes, directed = TRUE)
+  g <- sample_sbm(n, pref.matrix, block.sizes, directed = TRUE)
 
   for (i in 1:25) {
     ase <- embed_adjacency_matrix(g, 2)

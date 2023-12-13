@@ -157,9 +157,9 @@ graph.subisomorphic.lad <- function(pattern, target, domains = NULL,
   ensure_igraph(target)
   induced <- as.logical(induced)
   if (time.limit == Inf) {
-    time.limit <- 0L
+    time.limit <- 0
   } else {
-    time.limit <- as.integer(time.limit)
+    time.limit <- as.numeric(time.limit)
   }
   map <- as.logical(map)
   all.maps <- as.logical(all.maps)
@@ -310,7 +310,7 @@ isomorphic <- function(graph1, graph2, method = c(
     .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "direct") {
     on.exit(.Call(R_igraph_finalizer))
-    .Call(R_igraph_isomorphic_34, graph1, graph2)
+    .Call(R_igraph_isomorphic, graph1, graph2)
   } else if (method == "vf2") {
     graph.isomorphic.vf2(graph1, graph2, ...)$iso
   } else if (method == "bliss") {
@@ -319,7 +319,9 @@ isomorphic <- function(graph1, graph2, method = c(
 }
 
 #' @export
-graph.isomorphic.34 <- isomorphic_34_impl
+graph.isomorphic.34 <- function(graph1, graph2, method) {
+  isomorphic_34_impl(graph1, graph2, method)
+}
 #' @export
 graph.isomorphic.bliss <- isomorphic_bliss_impl
 #' @export
@@ -725,7 +727,7 @@ graph_from_isomorphism_class <- isoclass_create_impl
 #' connected non-singleton cell.} } See the paper in references for details
 #' about these.
 #'
-#' @aliases canonical.permutation canonical_permutation
+#' @aliases canonical.permutation
 #' @param graph The input graph, treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an
@@ -792,7 +794,7 @@ canonical_permutation <- canonical_permutation_impl
 #'
 #' `permute()` keeps all graph, vertex and edge attributes of the graph.
 #'
-#' @aliases permute.vertices permute
+#' @aliases permute.vertices
 #' @param graph The input graph, it can directed or undirected.
 #' @param permutation A numeric vector giving the permutation to apply. The
 #'   first element is the new id of vertex 1, etc. Every number between one and
@@ -839,7 +841,7 @@ graph.isomorphic <- isomorphic_impl
 #' automorphisms themselves, use [automorphism_group()] to obtain
 #' a compact representation of the automorphism group.
 #'
-#' @aliases graph.automorphisms automorphisms count_automorphisms
+#' @aliases graph.automorphisms automorphisms
 #' @param graph The input graph, it is treated as undirected.
 #' @param colors The colors of the individual vertices of the graph; only
 #'   vertices having the same color are allowed to match each other in an

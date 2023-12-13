@@ -114,7 +114,7 @@ test_that("snapshot test", {
   local_igraph_options(print.id = FALSE)
 
   expect_snapshot({
-    g <- graph_from_literal(a -+ b -+ c)
+    g <- graph_from_literal(a -+ b -+ c, z -+ a, d)
     bfs(
       g,
       root = 2,

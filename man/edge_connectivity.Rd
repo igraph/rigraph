@@ -3,13 +3,17 @@
 \name{edge_connectivity}
 \alias{edge_connectivity}
 \alias{edge.connectivity}
-\alias{edge_disjoint_paths}
 \alias{graph.adhesion}
-\alias{adhesion}
 \alias{edge.disjoint.paths}
+\alias{edge_disjoint_paths}
+\alias{adhesion}
 \title{Edge connectivity}
 \usage{
 edge_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+
+edge_disjoint_paths(graph, source, target)
+
+adhesion(graph, checks = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -78,9 +82,6 @@ Douglas R. White and Frank Harary: The cohesiveness of blocks in
 social networks: node connectivity and conditional density, TODO: citation
 }
 \seealso{
-\code{\link[=max_flow]{max_flow()}}, \code{\link[=vertex_connectivity]{vertex_connectivity()}},
-\code{\link[=vertex_disjoint_paths]{vertex_disjoint_paths()}}, \code{\link[=cohesion]{cohesion()}}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{is_min_separator}()},

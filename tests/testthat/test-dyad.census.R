@@ -11,9 +11,7 @@ test_that("dyad_census works", {
   dc3 <- dyad_census(g3)
   expect_that(dc3, equals(list(mut = 0, asym = 10, null = 35)))
 
-  g4 <- make_empty_graph(2000000)
-  expect_warning(dc4 <- dyad_census(g4), "Integer overflow")
-  expect_that(dc4, equals(list(mut = 0, asym = 0, null = -1)))
+  # Supporting 64-bit integers now, can't test for overflow
 })
 
 test_that("dyad_census works with celegansneural", {

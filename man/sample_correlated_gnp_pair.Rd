@@ -48,9 +48,6 @@ graph matching for correlated Erdos-Renyi graphs.
 \url{https://arxiv.org/abs/1304.7844}
 }
 \seealso{
-\code{\link[=sample_correlated_gnp]{sample_correlated_gnp()}},
-\code{\link[=sample_gnp]{sample_gnp()}}.
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

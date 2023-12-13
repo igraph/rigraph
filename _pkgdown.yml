@@ -42,6 +42,7 @@ reference:
   - has_concept("deterministic constructors")
   - graph_
   - graph_from_lcf
+  - as_data_frame
 - subtitle: "Stochastic constructors (random graph models)"
 - contents:
   - has_concept("games")
@@ -137,7 +138,7 @@ reference:
 - subtitle: Bipartite graphs
 - contents:
   - has_concept("bipartite")
-  - has_concept("incidence")
+  - has_concept("biadjacency")
 - subtitle: Efficiency
 - contents:
   - has_concept("efficiency")

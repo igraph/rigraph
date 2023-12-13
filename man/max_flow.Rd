@@ -72,10 +72,6 @@ A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 Flow Problem \emph{Journal of the ACM} 35:921-940, 1988.
 }
 \seealso{
-\code{\link[=min_cut]{min_cut()}} for minimum cut calculations,
-\code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=vertex_connectivity]{vertex_connectivity()}}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

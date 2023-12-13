@@ -1,6 +1,6 @@
-#line 1 "src/core/io/gml-lexer.c"
+#line 2 "src/core/io/gml-lexer.c"
 
-#line 3 "src/core/io/gml-lexer.c"
+#line 4 "src/core/io/gml-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -732,9 +732,9 @@ static const flex_int16_t yy_chk[61] =
 #endif
 #define stdout 0
 #endif
-#line 735 "src/core/io/gml-lexer.c"
+#line 736 "src/core/io/gml-lexer.c"
 #define YY_NO_INPUT 1
-#line 737 "src/core/io/gml-lexer.c"
+#line 738 "src/core/io/gml-lexer.c"
 
 #define INITIAL 0
 
@@ -1022,7 +1022,7 @@ YY_DECL
 #line 77 "src/core/io/gml-lexer.l"
 
 
-#line 1025 "src/core/io/gml-lexer.c"
+#line 1026 "src/core/io/gml-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1159,7 +1159,7 @@ YY_RULE_SETUP
 #line 112 "src/core/io/gml-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1162 "src/core/io/gml-lexer.c"
+#line 1163 "src/core/io/gml-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{

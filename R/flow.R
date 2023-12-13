@@ -64,9 +64,6 @@
 #'     after the cut edges are removed. Note that these vertices might be
 #'     actually in different components (after the cut edges are removed), as
 #'     the graph may fall apart into more than two components.}
-#' @seealso [max_flow()] for the related maximum flow
-#'   problem, [distances()], [edge_connectivity()],
-#'   [vertex_connectivity()]
 #' @references M. Stoer and F. Wagner: A simple min-cut algorithm,
 #' *Journal of the ACM*, 44 585-591, 1997.
 #' @examples
@@ -180,8 +177,7 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' precisely `vertex_connectivity()` is the most general, the other two are
 #' included only for the ease of using more descriptive function names.
 #'
-#' @aliases vertex.connectivity vertex.disjoint.paths cohesion vertex_connectivity
-#'   vertex_disjoint_paths graph.cohesion
+#' @aliases vertex.connectivity vertex.disjoint.paths cohesion graph.cohesion
 #' @param graph,x The input graph.
 #' @param source The id of the source vertex, for `vertex_connectivity()` it
 #'   can be `NULL`, see details below.
@@ -197,8 +193,6 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' @param ... Ignored.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [max_flow()], [edge_connectivity()],
-#' [edge_disjoint_paths()], [adhesion()]
 #' @references White, Douglas R and Frank Harary 2001. The Cohesiveness of
 #' Blocks In Social Networks: Node Connectivity and Conditional Density.
 #' *Sociological Methodology* 31 (1) : 305-359.
@@ -274,8 +268,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' more precisely the most general is `edge_connectivity()`, the others are
 #' included only for having more descriptive function names.
 #'
-#' @aliases edge.connectivity edge_disjoint_paths graph.adhesion adhesion
-#'   edge_connectivity edge.disjoint.paths
+#' @aliases edge.connectivity graph.adhesion edge.disjoint.paths
 #' @param graph The input graph.
 #' @param source The id of the source vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
@@ -290,8 +283,6 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #'   thanks Peter.
 #' @return A scalar real value.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [max_flow()], [vertex_connectivity()],
-#' [vertex_disjoint_paths()], [cohesion()]
 #' @references Douglas R. White and Frank Harary: The cohesiveness of blocks in
 #' social networks: node connectivity and conditional density, TODO: citation
 #' @family flow
@@ -334,7 +325,7 @@ edge_connectivity <- function(graph, source = NULL, target = NULL, checks = TRUE
   }
 }
 
-#' @family flow
+#' @rdname edge_connectivity
 #' @export
 edge_disjoint_paths <- function(graph, source, target) {
   ensure_igraph(graph)
@@ -353,7 +344,7 @@ edge_disjoint_paths <- function(graph, source, target) {
   )
 }
 
-#' @family flow
+#' @rdname vertex_connectivity
 #' @export
 vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   ensure_igraph(graph)
@@ -372,7 +363,7 @@ vertex_disjoint_paths <- function(graph, source = NULL, target = NULL) {
   )
 }
 
-#' @family flow
+#' @rdname edge_connectivity
 #' @export
 adhesion <- function(graph, checks = TRUE) {
   ensure_igraph(graph)
@@ -383,7 +374,6 @@ adhesion <- function(graph, checks = TRUE) {
 
 #' @rdname vertex_connectivity
 #' @method cohesion igraph
-#' @family flow
 #' @export
 cohesion.igraph <- function(x, checks = TRUE, ...) {
   ensure_igraph(x)
@@ -401,7 +391,7 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #' removing these edges from \eqn{G} there is no directed path from \eqn{s} to
 #' \eqn{t}.
 #'
-#' @aliases stCuts st_cuts
+#' @aliases stCuts
 #' @param graph The input graph. It must be directed.
 #' @param source The source vertex.
 #' @param target The target vertex.
@@ -413,7 +403,6 @@ cohesion.igraph <- function(x, checks = TRUE, ...) {
 #'   and its complementer \eqn{V-X}, generates the cut that contains exactly the
 #'   edges that go from \eqn{X} to \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [st_min_cuts()] to list all minimum cuts.
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
 #' @keywords graphs
@@ -450,7 +439,7 @@ st_cuts <- all_st_cuts_impl
 #'
 #' An \eqn{(s,t)}-cut is minimum if it is of the smallest possible size.
 #'
-#' @aliases st_min_cuts stMincuts
+#' @aliases stMincuts
 #' @param graph The input graph. It must be directed.
 #' @param source The id of the source vertex.
 #' @param target The id of the target vertex.
@@ -468,7 +457,6 @@ st_cuts <- all_st_cuts_impl
 #'   generates the cut that contains exactly the edges that go from \eqn{X} to
 #'   \eqn{V-X}.}
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @seealso [st_cuts()], [min_separators()]
 #' @references JS Provan and DR Shier: A Paradigm for listing (s,t)-cuts in
 #' graphs, *Algorithmica* 15, 351--372, 1996.
 #' @keywords graphs
@@ -504,7 +492,7 @@ st_min_cuts <- all_st_mincuts_impl
 #' This function implements the Lengauer-Tarjan algorithm to construct the
 #' dominator tree of a directed graph. For details see the reference below.
 #'
-#' @aliases dominator.tree dominator_tree
+#' @aliases dominator.tree
 #' @param graph A directed graph. If it is not a flowgraph, and it contains
 #'   some vertices not reachable from the root vertex, then these vertices will
 #'   be collected and returned as part of the result.
@@ -579,7 +567,7 @@ dominator_tree <- function(graph, root, mode = c("out", "in", "all", "total")) {
 #' A \eqn{(s,t)} vertex separator is minimal if none of its subsets is an
 #' \eqn{(s,t)} vertex separator.
 #'
-#' @aliases minimal.st.separators min_st_separators
+#' @aliases minimal.st.separators
 #' @param graph The input graph. It may be directed, but edge directions are
 #'   ignored.
 #' @return A list of numeric vectors. Each vector contains a vertex set
@@ -650,9 +638,6 @@ min_st_separators <- all_minimal_st_separators_impl
 #'     because of the gap heuristics and `nobfs` is the number of
 #'     times a global breadth-first-search update was performed to assign
 #'     better height (=distance) values to the vertices.}
-#' @seealso [min_cut()] for minimum cut calculations,
-#'   [distances()], [edge_connectivity()],
-#'   [vertex_connectivity()]
 #' @references A. V. Goldberg and R. E. Tarjan: A New Approach to the Maximum
 #' Flow Problem *Journal of the ACM* 35:921-940, 1988.
 #' @examples
@@ -684,7 +669,6 @@ max_flow <- maxflow_impl
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
-#' @seealso [is_min_separator()], [min_separators()]
 #'   lists all vertex separator of minimum size.
 #' @family flow
 #' @export
@@ -709,8 +693,6 @@ is_separator <- is_separator_impl
 #'   separator.
 #' @return A logical scalar, whether the supplied vertex set is a (minimal)
 #'   vertex separator or not.
-#' @seealso [min_separators()] lists all vertex separator of minimum
-#' size.
 #' @examples
 #' # The graph from the Moody-White paper
 #' mw <- graph_from_literal(
@@ -762,7 +744,6 @@ is_min_separator <- is_minimal_separator_impl
 #'   ignored.
 #' @return A list of numeric vectors. Each numeric vector is a vertex
 #'   separator.
-#' @seealso [is.separator()]
 #' @references Arkady Kanevsky: Finding all minimum-size separating vertex sets
 #' in a graph. *Networks* 23 533--541, 1993.
 #'

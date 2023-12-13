@@ -1,32 +1,61 @@
-test_that("authority score works", {
-  ashs <- function(graph, as = TRUE) {
-    mscale <- function(x) {
-      if (sd(x) != 0) {
-        x <- scale(x)
-      }
-      if (x[1] < 0) {
-        x <- -x
-      }
-      x
+test_that("`authority_score()` works", {
+  mscale <- function(x) {
+    if (sd(x) != 0) {
+      x <- scale(x)
     }
-    A <- as_adj(graph, sparse = FALSE)
-    if (as) {
-      s1 <- eigen(t(A) %*% A)$vectors[, 1]
-      s2 <- authority_score(graph)$vector
-    } else {
-      s1 <- eigen(A %*% t(A))$vectors[, 1]
-      s2 <- hub_score(graph)$vector
+    if (x[1] < 0) {
+      x <- -x
     }
-    expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+    x
   }
 
   g1 <- sample_pa(100, m = 10)
-  ashs(g1)
-  ashs(g1, as = FALSE)
+  A <- as_adj(g1, sparse = FALSE)
+  s1 <- eigen(t(A) %*% A)$vectors[, 1]
+  s2 <- authority_score(g1)$vector
+  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
 
   g2 <- sample_gnp(100, 2 / 100)
-  ashs(g2)
-  ashs(g2, as = FALSE)
+  A <- as_adj(g2, sparse = FALSE)
+  s1 <- eigen(t(A) %*% A)$vectors[, 1]
+  s2 <- authority_score(g2)$vector
+  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_warning(
+    s3 <- authority_score(g2, options = arpack_defaults)$vector
+  )
+  expect_equal(s2, s3)
+})
+
+test_that("`hub_score()` works", {
+  mscale <- function(x) {
+    if (sd(x) != 0) {
+      x <- scale(x)
+    }
+    if (x[1] < 0) {
+      x <- -x
+    }
+    x
+  }
+
+  g1 <- sample_pa(100, m = 10)
+  A <- as_adj(g1, sparse = FALSE)
+  s1 <- eigen(A %*% t(A))$vectors[, 1]
+  s2 <- hub_score(g1)$vector
+  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+
+  g2 <- sample_gnp(100, 2 / 100)
+  A <- as_adj(g2, sparse = FALSE)
+  s1 <- eigen(A %*% t(A))$vectors[, 1]
+  s2 <- hub_score(g2)$vector
+  expect_that(mscale(s1), is_equivalent_to(mscale(s2)))
+
+  rlang::local_options(lifecycle_verbosity = "warning")
+  expect_warning(
+    s3 <- hub_score(g2, options = arpack_defaults)$vector
+  )
+  expect_equal(s2, s3)
 })
 
 test_that("authority scores of a ring are all one", {

@@ -1,6 +1,6 @@
-#line 1 "src/core/io/ncol-lexer.c"
+#line 2 "src/core/io/ncol-lexer.c"
 
-#line 3 "src/core/io/ncol-lexer.c"
+#line 4 "src/core/io/ncol-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -718,9 +718,9 @@ static const flex_int16_t yy_chk[17] =
 #endif
 #define stdout 0
 #endif
-#line 721 "src/core/io/ncol-lexer.c"
+#line 722 "src/core/io/ncol-lexer.c"
 #define YY_NO_INPUT 1
-#line 723 "src/core/io/ncol-lexer.c"
+#line 724 "src/core/io/ncol-lexer.c"
 
 #define INITIAL 0
 
@@ -1007,7 +1007,7 @@ YY_DECL
 
 #line 79 "src/core/io/ncol-lexer.l"
  /* ------------------------------------------------whitespace------*/
-#line 1010 "src/core/io/ncol-lexer.c"
+#line 1011 "src/core/io/ncol-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1103,7 +1103,7 @@ YY_RULE_SETUP
 #line 99 "src/core/io/ncol-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1106 "src/core/io/ncol-lexer.c"
+#line 1107 "src/core/io/ncol-lexer.c"
 
 	case YY_END_OF_BUFFER:
 		{

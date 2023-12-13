@@ -331,7 +331,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   if ("name" %in% edge_attr_names(graph)) {
     names(res) <- edge_attr(graph)$name[res]
   }
-  if (is.named(graph)) {
+  if (is_named(graph)) {
     el <- ends(graph, es = res)
     attr(res, "vnames") <- paste(el[, 1], el[, 2], sep = "|")
   }
@@ -1311,7 +1311,7 @@ print.igraph.vs <- function(x,
 #' Print an edge sequence to the screen
 #'
 #' For long edge sequences, the printing is truncated to fit to the
-#' screen. Use [print()] explicitly and the code{full} argument to
+#' screen. Use [print()] explicitly and the `full` argument to
 #' see the full sequence.
 #'
 #' Edge sequences created with the double bracket operator are printed

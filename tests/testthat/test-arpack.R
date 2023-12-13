@@ -1,3 +1,13 @@
+test_that("arpack lifecycle warning", {
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  f <- function(x, extra = NULL) x
+  expect_warning(
+    res <- arpack(f, options = function() list(n = 10, nev = 2, ncv = 4), sym = TRUE)
+  )
+  expect_that(res$values, equals(c(1, 1)))
+})
+
 test_that("arpack works for identity matrix", {
   f <- function(x, extra = NULL) x
   res <- arpack(f, options = list(n = 10, nev = 2, ncv = 4), sym = TRUE)

@@ -15,10 +15,10 @@ test_that("Dot product rng works", {
 
   vecs <- replicate(5, rep(1 / 2, 4))
   g <- sample_dot_product(vecs)
-  expect_that(g[], is_equivalent_to(graph.full(5)[]))
+  expect_that(g[], is_equivalent_to(make_full_graph(5)[]))
 
   g2 <- sample_dot_product(vecs, directed = TRUE)
-  expect_that(g2[], is_equivalent_to(graph.full(5, directed = TRUE)[]))
+  expect_that(g2[], is_equivalent_to(make_full_graph(5, directed = TRUE)[]))
 
   vecs <- replicate(100, rep(sqrt(1 / 8), 4))
   g <- sample_dot_product(vecs)

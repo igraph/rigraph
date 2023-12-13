@@ -47,12 +47,6 @@ deprecated("aging.barabasi.game", sample_pa_age)
 deprecated("alpha.centrality", alpha_centrality)
 #' @export are.connected
 deprecated("are.connected", are_adjacent)
-#' @export asPhylo
-deprecated("asPhylo", as_phylo)
-#' @method asPhylo communities
-deprecated("asPhylo.communities", as_phylo.communities)
-#' @method asPhylo igraphHRG
-deprecated("asPhylo.igraphHRG", as_phylo.igraphHRG)
 #' @export assortativity.degree
 deprecated("assortativity.degree", assortativity_degree)
 #' @export assortativity.nominal
@@ -190,7 +184,7 @@ deprecated("get.edgelist", as_edgelist)
 #' @export get.graph.attribute
 deprecated("get.graph.attribute", graph_attr)
 #' @export get.incidence
-deprecated("get.incidence", as_incidence_matrix)
+deprecated("get.incidence", as_biadjacency_matrix)
 #' @export get.stochastic
 deprecated("get.stochastic", stochastic_matrix)
 #' @export get.vertex.attribute
@@ -250,7 +244,7 @@ deprecated("graph.full.citation", make_full_citation_graph)
 #' @export graph.graphdb
 deprecated("graph.graphdb", graph_from_graphdb)
 #' @export graph.incidence
-deprecated("graph.incidence", graph_from_incidence_matrix)
+deprecated("graph.incidence", graph_from_biadjacency_matrix)
 #' @export graph.isocreate
 deprecated("graph.isocreate", graph_from_isomorphism_class)
 #' @export graph.kautz
@@ -311,8 +305,6 @@ deprecated("hrg.predict", predict_edges)
 #' @export hub.score
 deprecated("hub.score", hub_score)
 
-#' @export igraph.arpack.default
-deprecated("igraph.arpack.default", arpack_defaults)
 #' @export igraph.console
 deprecated("igraph.console", console)
 #' @export igraph.sample
@@ -477,12 +469,6 @@ deprecated("running.mean", running_mean)
 
 #' @export sbm.game
 deprecated("sbm.game", sample_sbm)
-#' @export scgGrouping
-deprecated("scgGrouping", scg_group)
-#' @export scgNormEps
-deprecated("scgNormEps", scg_eps)
-#' @export scgSemiProjectors
-deprecated("scgSemiProjectors", scg_semi_proj)
 #' @export set.edge.attribute
 deprecated("set.edge.attribute", set_edge_attr)
 #' @export set.graph.attribute

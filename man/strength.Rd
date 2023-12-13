@@ -27,7 +27,8 @@ argument is ignored.}
 \item{weights}{Weight vector. If the graph has a \code{weight} edge
 attribute, then this is used by default. If the graph does not have a
 \code{weight} edge attribute and this argument is \code{NULL}, then a
-warning is given and \code{\link[=degree]{degree()}} is called.}
+\code{\link[=degree]{degree()}} is called. If this is \code{NA}, then no edge weights are used
+(even if the graph has a \code{weight} edge attribute).}
 }
 \value{
 A numeric vector giving the strength of the vertices.

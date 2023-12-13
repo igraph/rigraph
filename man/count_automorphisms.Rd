@@ -6,7 +6,11 @@
 \alias{automorphisms}
 \title{Number of automorphisms}
 \usage{
-count_automorphisms(graph, colors, sh = c("fm", "f", "fs", "fl", "flm", "fsm"))
+count_automorphisms(
+  graph,
+  colors = NULL,
+  sh = c("fm", "f", "fs", "fl", "flm", "fsm")
+)
 }
 \arguments{
 \item{graph}{The input graph, it is treated as undirected.}

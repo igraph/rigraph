@@ -5,7 +5,7 @@
 
 set -e
 
-for fname in src/core/io/*-lexer.c; do
+for fname in src/vendor/io/*-lexer.c; do
     # Remove unused exit points from the lexer
     cat ${fname} | grep -v '^\s*exit.*YY_EXIT_FAILURE' >${fname}.new
     mv ${fname}.new ${fname}
@@ -15,18 +15,11 @@ for fname in src/core/io/*-lexer.c; do
     mv ${fname}.new ${fname}
 done
 
-for fname in src/core/io/*-lexer.c src/core/io/*-parser.c; do
-    # the CMake build system puts the generated parsers in build/core/io/parsers.
-	# Here it is easier to put stuff in src/core/io so we rewrite the includes
-    cat ${fname} | sed -e 's,io/parsers/,io/,g' >${fname}.new
-    mv ${fname}.new ${fname}
-done
-
-for fname in src/core/io/*-parser.c; do
+for fname in src/vendor/io/*-parser.c; do
     # Bison 3.8.2 (and maybe other versions) refer to #include yy.tab.h in the
     # generated file; we need to replace this with the real header name
     header=`basename ${fname} .c`.h
-    cat ${fname} | sed -e 's,^#include.*yy.tab.h.*$,#include "io/'"${header}"'",g' >${fname}.new
+    cat ${fname} | sed -e 's,^#include.*yy.tab.h.*$,#include "io/parsers/'"${header}"'",g' >${fname}.new
     mv ${fname}.new ${fname}
 done
 

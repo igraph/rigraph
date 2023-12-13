@@ -60,9 +60,6 @@ check.sep(mw5)
 
 }
 \seealso{
-\code{\link[=min_separators]{min_separators()}} lists all vertex separator of minimum
-size.
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

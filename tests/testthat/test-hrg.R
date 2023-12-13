@@ -11,7 +11,7 @@ test_that("as.hclust.igraphHRG() works", {
   set.seed(42)
 
   g <- make_graph("zachary")
-  hrg <- hrg.fit(g)
+  hrg <- fit_hrg(g)
   expect_snapshot({
     summary(as.hclust(hrg))
   })

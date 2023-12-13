@@ -36,6 +36,7 @@ forest <- subgraph.edges(g, edges)
 \code{\link[=subgraph.edges]{subgraph.edges()}} to extract the tree itself
 
 Other trees: 
+\code{\link{is_forest}()},
 \code{\link{is_tree}()},
 \code{\link{make_from_prufer}()},
 \code{\link{to_prufer}()}

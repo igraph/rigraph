@@ -226,7 +226,6 @@ delete_vertices <- function(graph, v) {
 #' @param graph The graph.
 #' @return Numeric scalar, the number of edges.
 #'
-#' @aliases ecount
 #' @family structural queries
 #'
 #' @export
@@ -473,18 +472,21 @@ get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALS
 #' @param graph The graph
 #' @return Number of vertices, numeric scalar.
 #'
-#' @aliases vcount
 #' @family structural queries
 #'
 #' @export
+#' @name gorder
 #' @examples
 #' g <- make_ring(10)
 #' gorder(g)
 #' vcount(g)
-gorder <- vcount_impl
-#' @rdname gorder
+vcount <- function(graph) {
+  as.numeric(vcount_impl(graph))
+}
+
 #' @export
-vcount <- vcount_impl
+#' @rdname gorder
+gorder <- vcount
 
 #' Adjacent vertices of multiple vertices in a graph
 #'

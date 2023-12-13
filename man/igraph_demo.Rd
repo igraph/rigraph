@@ -29,7 +29,7 @@ The \code{tcltk} package is needed for \code{igraph_demo()}.
 \examples{
 
 igraph_demo()
-if (interactive()) {
+if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
   igraph_demo("centrality")
 }
 

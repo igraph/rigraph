@@ -36,8 +36,6 @@ test_that("brackering works", {
 })
 
 test_that("brackering works with a function", {
-  library(testthat)
-
   g <- make_graph(c(1, 2, 1, 3, 3, 4))
   g <- set_vertex_attr(g, name = "weight", value = 1:vcount(g))
   g <- set_edge_attr(g, name = "weight", value = 1:ecount(g))
@@ -196,7 +194,7 @@ test_that("we can set all attributes some vertices/edges", {
 })
 
 test_that("cannot use vs/es from another graph", {
-  g <- graph.ring(10)
+  g <- make_ring(10)
   g2 <- g + 1
   v <- V(g)[1:4]
   expect_error(g2 - v, "Cannot use a vertex sequence from another graph")

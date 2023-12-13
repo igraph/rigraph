@@ -1,23 +1,62 @@
 ## revdepcheck results
 
-We checked 1044 reverse dependencies (798 from CRAN + 246 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 19 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 2 new problems
- * We failed to check 1 packages
+ * We saw 16 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* BASiNETEntropy
-  checking whether package ‘BASiNETEntropy’ can be installed ... WARNING
-  checking R code for possible problems ... NOTE
+* countland
+  checking tests ... ERROR
 
-* bibliometrix
-  checking whether package ‘bibliometrix’ can be installed ... WARNING
-  checking R code for possible problems ... NOTE
+* DiagrammeR
+  checking tests ... ERROR
 
-### Failed to check
+* ggnetwork
+  checking tests ... ERROR
 
-* vivid (NA)
+* inferCSN
+  checking examples ... ERROR
+
+* manynet
+  checking tests ... ERROR
+
+* migraph
+  checking examples ... ERROR
+
+* molnet
+  checking examples ... ERROR
+
+* NAIR
+  checking tests ... ERROR
+
+* nat
+  checking tests ... ERROR
+
+* netcom
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* nosoi
+  checking re-building of vignette outputs ... ERROR
+
+* oddnet
+  checking examples ... ERROR
+
+* pcalg
+  checking tests ... ERROR
+
+* phyloseqGraphTest
+  checking examples ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
+* riverconn
+  checking re-building of vignette outputs ... ERROR
+
+* statGraph
+  checking examples ... ERROR
+

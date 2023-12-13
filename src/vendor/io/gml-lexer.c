@@ -592,8 +592,8 @@ static void __attribute__((unused)) yy_fatal_error ( const char* msg , yyscan_t 
 	yyg->yy_hold_char = *yy_cp; \
 	*yy_cp = '\0'; \
 	yyg->yy_c_buf_p = yy_cp;
-#define YY_NUM_RULES 10
-#define YY_END_OF_BUFFER 11
+#define YY_NUM_RULES 11
+#define YY_END_OF_BUFFER 12
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -601,12 +601,13 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[40] =
+static const flex_int16_t yy_accept[43] =
     {   0,
-        0,    0,    0,    0,   11,    9,    8,    8,    9,    9,
-        4,    5,    6,    7,    1,    9,    5,    5,    0,    2,
-        4,    0,    0,    5,    1,    0,    0,    5,    5,    4,
-        0,    4,    0,    0,    3,    3,    3,    3,    0
+        0,    0,    0,    0,   12,   10,    8,    9,    9,   10,
+       10,    4,    5,    6,    7,    1,   10,    5,    5,    8,
+        9,    0,    2,    4,    0,    0,    5,    1,    0,    0,
+        5,    5,    4,    0,    4,    0,    0,    3,    3,    3,
+        3,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -648,58 +649,60 @@ static const YY_CHAR yy_meta[24] =
         3,    3,    4
     } ;
 
-static const flex_int16_t yy_base[43] =
+static const flex_int16_t yy_base[46] =
     {   0,
-        0,   70,   17,   69,   74,   77,   77,   77,   68,   61,
-       17,    0,   77,   77,    0,   30,   12,   18,   59,   77,
-       34,   52,   46,    0,    0,   19,   31,   35,   41,   48,
-       38,   26,   45,   44,    0,    0,   77,   77,   77,   66,
-       28,   69
+        0,   78,   17,   77,   82,   85,   79,   23,   25,   74,
+       63,   21,    0,   85,   85,    0,   30,   19,   25,   70,
+       39,   66,   85,   40,   59,   47,    0,    0,   40,   47,
+       45,   45,   50,   38,   37,   50,   52,    0,    0,   85,
+       85,   85,   74,   34,   77
     } ;
 
-static const flex_int16_t yy_def[43] =
+static const flex_int16_t yy_def[46] =
     {   0,
-       39,    1,    1,    3,   39,   39,   39,   39,   40,   39,
-       39,   41,   39,   39,   42,   39,   41,   41,   40,   39,
-       39,   39,   39,   41,   42,   39,   39,   41,   41,   39,
-       39,   39,   39,   39,   41,   41,   39,   39,    0,   39,
-       39,   39
+       42,    1,    1,    3,   42,   42,   42,   42,   42,   43,
+       42,   42,   44,   42,   42,   45,   42,   44,   44,   42,
+       42,   43,   42,   42,   42,   42,   44,   45,   42,   42,
+       44,   44,   42,   42,   42,   42,   42,   44,   44,   42,
+       42,    0,   42,   42,   42
     } ;
 
-static const flex_int16_t yy_nxt[101] =
+static const flex_int16_t yy_nxt[109] =
     {   0,
-        6,    7,    8,    7,    9,    6,   10,   10,    6,   11,
-       12,   12,   12,   12,   12,   12,   13,   14,   12,   12,
-       12,   12,    6,   16,   16,   22,   21,   28,   29,   23,
-       24,   17,   18,   28,   33,   32,   29,   17,   18,   21,
-       33,   34,   22,   21,   26,   27,   23,   32,   35,   34,
-       26,   27,   31,   31,   35,   32,   36,   30,   37,   38,
-       23,   30,   36,   20,   37,   38,   19,   19,   19,   25,
-       21,   25,   20,   39,   15,   15,    5,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39
+        6,    7,    8,    9,   10,    6,   11,   11,    6,   12,
+       13,   13,   13,   13,   13,   13,   14,   15,   13,   13,
+       13,   13,    6,   17,   17,   21,   21,   21,   21,   25,
+       24,   18,   19,   26,   31,   32,   27,   18,   19,   24,
+       31,   21,   21,   32,   29,   30,   35,   35,   25,   24,
+       29,   30,   26,   34,   34,   36,   35,   37,   38,   33,
+       39,   36,   26,   40,   38,   37,   39,   41,   33,   40,
+       23,   20,   24,   41,   22,   22,   22,   28,   23,   28,
+       20,   42,   16,   16,    5,   42,   42,   42,   42,   42,
+       42,   42,   42,   42,   42,   42,   42,   42,   42,   42,
 
+       42,   42,   42,   42,   42,   42,   42,   42
     } ;
 
-static const flex_int16_t yy_chk[101] =
+static const flex_int16_t yy_chk[109] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    3,    3,   11,   11,   17,   18,   11,
-       41,    3,    3,   17,   26,   32,   18,    3,    3,   16,
-       26,   27,   21,   21,   16,   16,   21,   31,   28,   27,
-       16,   16,   23,   23,   28,   23,   29,   30,   33,   34,
-       30,   22,   29,   19,   33,   34,   40,   40,   40,   42,
-       10,   42,    9,    5,    4,    2,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39
+        1,    1,    1,    3,    3,    8,    8,    9,    9,   12,
+       12,    3,    3,   12,   18,   19,   44,    3,    3,   17,
+       18,   21,   21,   19,   17,   17,   35,   34,   24,   24,
+       17,   17,   24,   26,   26,   29,   26,   30,   31,   33,
+       32,   29,   33,   36,   31,   30,   32,   37,   25,   36,
+       22,   20,   11,   37,   43,   43,   43,   45,   10,   45,
+        7,    5,    4,    2,   42,   42,   42,   42,   42,   42,
+       42,   42,   42,   42,   42,   42,   42,   42,   42,   42,
 
+       42,   42,   42,   42,   42,   42,   42,   42
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[11] =
+static const flex_int32_t yy_rule_can_match_eol[12] =
     {   0,
-0, 1, 0, 0, 0, 0, 0, 1, 0, 0,     };
+0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
 
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
@@ -767,12 +770,12 @@ static const flex_int32_t yy_rule_can_match_eol[11] =
 #endif
 #define stdout 0
 #endif
-#line 771 "src/vendor/io/gml-lexer.c"
+#line 774 "src/vendor/io/gml-lexer.c"
 #define YY_NO_INPUT 1
 /* Use to parse inf/nan as number only when expecting a value, i.e. after a keyword.
  * Otherwise they are parsed as a keyword. */
 
-#line 776 "src/vendor/io/gml-lexer.c"
+#line 779 "src/vendor/io/gml-lexer.c"
 
 #define INITIAL 0
 #define VALUE 1
@@ -1058,10 +1061,10 @@ YY_DECL
 		}
 
 	{
-#line 79 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 80 "src/vendor/cigraph/src/io/gml-lexer.l"
 
 
-#line 1065 "src/vendor/io/gml-lexer.c"
+#line 1068 "src/vendor/io/gml-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1089,13 +1092,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 40 )
+				if ( yy_current_state >= 43 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 77 );
+		while ( yy_base[yy_current_state] != 85 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -1133,33 +1136,33 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 81 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 82 "src/vendor/cigraph/src/io/gml-lexer.l"
 { /* comments ignored */ }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 83 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 84 "src/vendor/cigraph/src/io/gml-lexer.l"
 { BEGIN(INITIAL); return STRING; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 84 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 85 "src/vendor/cigraph/src/io/gml-lexer.l"
 { BEGIN(INITIAL); return NUM; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 85 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 86 "src/vendor/cigraph/src/io/gml-lexer.l"
 { BEGIN(INITIAL); return NUM; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 86 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 87 "src/vendor/cigraph/src/io/gml-lexer.l"
 { BEGIN(VALUE); return KEYWORD; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 87 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 88 "src/vendor/cigraph/src/io/gml-lexer.l"
 {
                           BEGIN(INITIAL);
                           yyextra->depth++;
@@ -1172,29 +1175,34 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 96 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 97 "src/vendor/cigraph/src/io/gml-lexer.l"
 {
                           yyextra->depth--;
                           return LISTCLOSE;
                         }
 	YY_BREAK
 case 8:
-/* rule 8 can match eol */
 YY_RULE_SETUP
-#line 100 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 101 "src/vendor/cigraph/src/io/gml-lexer.l"
 { /* other whitespace ignored */ }
 	YY_BREAK
 case 9:
+/* rule 9 can match eol */
 YY_RULE_SETUP
 #line 102 "src/vendor/cigraph/src/io/gml-lexer.l"
-{ return ERROR; }
+{ yy_set_bol(true); /* set "beginning of line" even after \r */ }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 104 "src/vendor/cigraph/src/io/gml-lexer.l"
+{ return ERROR; }
+	YY_BREAK
+case 11:
+YY_RULE_SETUP
+#line 105 "src/vendor/cigraph/src/io/gml-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1198 "src/vendor/io/gml-lexer.c"
+#line 1206 "src/vendor/io/gml-lexer.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(VALUE):
 	yyterminate();
@@ -1495,7 +1503,7 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 40 )
+			if ( yy_current_state >= 43 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1524,11 +1532,11 @@ static int yy_get_next_buffer (yyscan_t yyscanner)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 40 )
+		if ( yy_current_state >= 43 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 39);
+	yy_is_jam = (yy_current_state == 42);
 
 	(void)yyg;
 	return yy_is_jam ? 0 : yy_current_state;
@@ -2358,6 +2366,6 @@ void yyfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 105 "src/vendor/cigraph/src/io/gml-lexer.l"
 
 

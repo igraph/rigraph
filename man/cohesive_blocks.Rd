@@ -5,7 +5,6 @@
 \alias{cohesive.blocks}
 \alias{cohesiveBlocks}
 \alias{blocks}
-\alias{graphs_from_cohesive_blocks}
 \alias{blockGraphs}
 \alias{hierarchy}
 \alias{parent}
@@ -16,10 +15,11 @@
 \alias{summary.cohesiveBlocks}
 \alias{length.cohesiveBlocks}
 \alias{print.cohesiveBlocks}
+\alias{exportPajek}
+\alias{graphs_from_cohesive_blocks}
+\alias{cohesion.cohesiveBlocks}
 \alias{plot_hierarchy}
 \alias{max_cohesion}
-\alias{exportPajek}
-\alias{cohesion.cohesiveBlocks}
 \title{Calculate Cohesive Blocks}
 \usage{
 cohesive_blocks(graph, labels = TRUE)

@@ -511,7 +511,7 @@ plot.igraph <- function(x,
 #' very useful either. See [igraph.plotting] for the possible
 #' arguments.
 #'
-#' @aliases rglplot rglplot.igraph
+#' @aliases rglplot.igraph
 #' @param x The graph to plot.
 #' @param \dots Additional arguments, see [igraph.plotting] for the
 #'   details
@@ -528,7 +528,7 @@ plot.igraph <- function(x,
 #'
 #' g <- make_lattice(c(5, 5, 5))
 #' coords <- layout_with_fr(g, dim = 3)
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
 #'   rglplot(g, layout = coords)
 #' }
 #'

@@ -1,4 +1,4 @@
-test_that("layout_with_mds works", {
+test_that("`layout_with_mds()` works", {
   ## A tree
 
   g <- make_tree(10, 2, "undirected")
@@ -13,8 +13,16 @@ test_that("layout_with_mds works", {
     ei$vectors[, 1:2] * rep(va, each = nrow(sp))
   }
 
-  expect_that(mymds(g), equals(layout_with_mds(g)))
+  out1 <- layout_with_mds(g)
+  expect_that(out1, equals(mymds(g)))
 
+  rlang::local_options(lifecycle_verbosity = "warning")
+
+  expect_warning(out2 <- layout_with_mds(g, options = arpack_defaults))
+  expect_that(out2, equals(out1))
+})
+
+test_that("`layout_with_mds()` stress test", {
   ## plot(g, layout=ll)
 
   ## A graph with multiple components, just test that it runs

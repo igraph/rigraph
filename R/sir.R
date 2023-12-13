@@ -44,7 +44,7 @@
 #' quantiles of the results, respectively, in bins calculated with
 #' `time_bins()`.
 #'
-#' @aliases median.sir quantile.sir time_bins time_bins.sir sir
+#' @aliases median.sir quantile.sir
 #' @param graph The graph to run the model on. If directed, then edge
 #'   directions are ignored and a warning is given.
 #' @param beta Non-negative scalar. The rate of infection of an individual that
@@ -100,5 +100,6 @@
 #' g <- sample_gnm(100, 100)
 #' sm <- sir(g, beta = 5, gamma = 1)
 #' plot(sm)
+#' @family processes
 #' @export
 sir <- sir_impl

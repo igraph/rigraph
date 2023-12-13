@@ -13,11 +13,11 @@ public:
         source.vec.stor_begin = nullptr;
     }
 
-    igVector(const igraph_vector_int_t *source) { igraph_vector_int_copy(&vec, source); }
+    igVector(const igraph_vector_int_t *source) { igraph_vector_int_init_copy(&vec, source); }
 
     explicit igVector(long len) { igraph_vector_int_init(&vec, len); }
 
-    igVector(const igVector &igv) : igVector() { igraph_vector_int_copy(&vec, &igv.vec); }
+    igVector(const igVector &igv) : igVector() { igraph_vector_int_init_copy(&vec, &igv.vec); }
 
     igVector & operator = (const igVector &igv) {
         igraph_vector_int_update(&vec, &igv.vec);

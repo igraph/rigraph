@@ -38,7 +38,6 @@
 #' costs the same amount of computation as for all vertices. This might change
 #' in the future.
 #'
-#' @aliases cocitation bibcoupling
 #' @param graph The graph object to analyze
 #' @param v Vertex sequence or numeric vector, the vertex ids for which the
 #'   cocitation or bibliographic coupling values we want to calculate. The
@@ -69,7 +68,7 @@ cocitation <- function(graph, v = V(graph)) {
   res
 }
 
-#' @family cocitation
+#' @rdname cocitation
 #' @export
 bibcoupling <- function(graph, v = V(graph)) {
   ensure_igraph(graph)

@@ -60,21 +60,7 @@ try(eulerian_cycle(g))
 Graph cycles
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
-\code{\link{is_dag}()}
-
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()}
-
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
-\code{\link{is_dag}()}
-
-Graph cycles
-\code{\link{feedback_arc_set}()},
-\code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()}
 }
 \concept{cycles}

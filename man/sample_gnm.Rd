@@ -42,8 +42,6 @@ Erdős, P. and Rényi, A., On random graphs, \emph{Publicationes
 Mathematicae} 6, 290--297 (1959).
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_pa]{sample_pa()}}
-
 Random graph models (games)
 \code{\link{erdos.renyi.game}()},
 \code{\link{sample_bipartite}()},

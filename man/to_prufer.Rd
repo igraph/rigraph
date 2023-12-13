@@ -34,6 +34,7 @@ to_prufer(g)
 Prüfer sequence
 
 Other trees: 
+\code{\link{is_forest}()},
 \code{\link{is_tree}()},
 \code{\link{make_from_prufer}()},
 \code{\link{sample_spanning_tree}()}

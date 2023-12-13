@@ -144,12 +144,12 @@ test_that("Issue 18 is really resolved", {
 
   g <- make_graph(el)
 
-  sc1 <- sapply(graph.neighborhood(g, order = 1, mode = "all"), ecount)
+  sc1 <- sapply(make_ego_graph(g, order = 1, mode = "all"), ecount)
   sc2 <- local_scan(graph.us = g, mode = "all", k = 1)
   expect_that(sc1, equals(sc2))
 
-  g2 <- induced.subgraph(g, 5:8)
-  sc21 <- sapply(graph.neighborhood(g2, order = 1, mode = "all"), ecount)
+  g2 <- induced_subgraph(g, 5:8)
+  sc21 <- sapply(make_ego_graph(g2, order = 1, mode = "all"), ecount)
   sc22 <- local_scan(graph.us = g2, mode = "all", k = 1)
   expect_that(sc21, equals(sc22))
 })
@@ -164,8 +164,8 @@ test_that("Issue 20 is resolved", {
 })
 
 test_that("FUN argument works, #32", {
-  r1 <- local_scan(graph.ring(10), k = 1, FUN = "ecount")
-  r2 <- local_scan(graph.ring(10), k = 1, FUN = ecount)
+  r1 <- local_scan(make_ring(10), k = 1, FUN = "ecount")
+  r2 <- local_scan(make_ring(10), k = 1, FUN = ecount)
   expect_that(r1, equals(rep(2, 10)))
   expect_that(r2, equals(rep(2, 10)))
 })

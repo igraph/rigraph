@@ -19,7 +19,7 @@
 #
 ###################################################################
 
-#' @family processes
+#' @rdname sir
 #' @export
 time_bins <- function(x, middle = TRUE) {
   UseMethod("time_bins")
@@ -27,7 +27,6 @@ time_bins <- function(x, middle = TRUE) {
 
 #' @method time_bins sir
 #' @rdname sir
-#' @family processes
 #' @export
 #' @importFrom stats IQR
 time_bins.sir <- function(x, middle = TRUE) {
@@ -52,7 +51,6 @@ time_bins.sir <- function(x, middle = TRUE) {
 #' @importFrom stats median
 #' @method median sir
 #' @rdname sir
-#' @family processes
 #' @export
 median.sir <- function(x, na.rm = FALSE, ...) {
   sir <- x
@@ -73,7 +71,6 @@ median.sir <- function(x, na.rm = FALSE, ...) {
 #' @importFrom stats quantile
 #' @method quantile sir
 #' @rdname sir
-#' @family processes
 #' @export
 quantile.sir <- function(x, comp = c("NI", "NS", "NR"), prob, ...) {
   sir <- x

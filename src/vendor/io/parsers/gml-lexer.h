@@ -729,7 +729,7 @@ extern int yylex \
 #undef yyTABLES_NAME
 #endif
 
-#line 103 "src/vendor/cigraph/src/io/gml-lexer.l"
+#line 105 "src/vendor/cigraph/src/io/gml-lexer.l"
 
 
 #line 736 "src/vendor/io/parsers/gml-lexer.h"

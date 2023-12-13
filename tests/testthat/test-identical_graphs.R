@@ -10,7 +10,7 @@ test_that("identical_graphs works", {
 })
 
 test_that("identical_graphs considers attributes", {
-  g <- barabasi.game(10)
+  g <- sample_pa(10)
   g2 <- g
 
   expect_true(identical_graphs(g, g2))

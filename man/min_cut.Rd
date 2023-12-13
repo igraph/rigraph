@@ -79,10 +79,6 @@ M. Stoer and F. Wagner: A simple min-cut algorithm,
 \emph{Journal of the ACM}, 44 585-591, 1997.
 }
 \seealso{
-\code{\link[=max_flow]{max_flow()}} for the related maximum flow
-problem, \code{\link[=distances]{distances()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=vertex_connectivity]{vertex_connectivity()}}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

@@ -5,7 +5,7 @@
 \alias{is.mutual}
 \title{Find mutual edges in a directed graph}
 \usage{
-which_mutual(graph, eids = E(graph))
+which_mutual(graph, eids = E(graph), loops = TRUE)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -53,6 +53,7 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},

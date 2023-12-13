@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' data-engine-version='2.0' width='720.00pt' height='576.00pt' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+</g>
+<defs>
+  <clipPath id='cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng=='>
+    <rect x='59.04' y='59.04' width='630.72' height='443.52' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNTkuMDR8Njg5Ljc2fDU5LjA0fDUwMi41Ng==)'>
+<polygon points='579.73,471.81 584.32,469.61 588.71,467.69 592.91,466.03 596.92,464.62 600.74,463.45 604.36,462.51 607.80,461.78 611.05,461.26 614.10,460.94 616.96,460.79 619.64,460.81 622.12,460.99 624.41,461.32 626.51,461.78 628.42,462.37 630.14,463.06 631.67,463.86 633.00,464.74 634.15,465.70 635.10,466.72 635.87,467.80 636.44,468.91 636.82,470.06 637.01,471.22 637.01,472.39 636.82,473.56 636.44,474.70 635.87,475.82 635.10,476.89 634.15,477.92 633.00,478.87 631.67,479.76 630.14,480.55 628.42,481.25 626.51,481.83 624.41,482.29 622.12,482.62 619.64,482.80 616.96,482.83 614.10,482.68 611.05,482.35 607.80,481.83 604.36,481.11 600.74,480.17 596.92,479.00 592.91,477.59 588.71,475.93 584.32,474.01 579.73,471.81 ' style='stroke-width: 0.75; stroke: #00FF00; fill: none;' />
+<line x1='555.28' y1='461.68' x2='384.48' y2='290.88' style='stroke-width: 0.75; stroke: #FF0000;' />
+<line x1='364.22' y1='270.62' x2='193.52' y2='99.92' style='stroke-width: 0.75; stroke: #0000FF;' />
+<circle cx='565.41' cy='471.81' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='374.35' cy='280.75' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+<circle cx='183.39' cy='89.79' r='14.33' style='stroke-width: 0.75; fill: #E69F00;' />
+</g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8MC4wMHw1NzYuMDA=)'>
+<text x='565.41' y='475.94' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='374.35' y='284.94' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='183.39' y='93.93' text-anchor='middle' style='font-size: 12.00px; fill: #00008B; font-family: sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+</g>
+</svg>

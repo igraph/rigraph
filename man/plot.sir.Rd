@@ -86,7 +86,7 @@ infectious diseases and its applications (2nd ed.). London: Griffin.
 \code{\link[=sir]{sir()}} for running the actual simulation.
 
 Processes on graphs
-\code{\link{time_bins.sir}()}
+\code{\link{time_bins}()}
 }
 \author{
 Eric Kolaczyk (\url{http://math.bu.edu/people/kolaczyk/}) and Gabor
