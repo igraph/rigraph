@@ -1328,7 +1328,7 @@ is_perfect_impl <- function(graph) {
   res
 }
 
-eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults) {
+eigenvector_centrality_impl <- function(graph, directed=FALSE, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   directed <- as.logical(directed)
@@ -1398,7 +1398,7 @@ authority_score_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack
   res
 }
 
-hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults) {
+hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
   scale <- as.logical(scale)
@@ -3713,7 +3713,7 @@ cmp_epsilon_impl <- function(a, b, eps) {
   res
 }
 
-eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.arpack.default) {
+eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
   # Argument checks
   A <- as.matrix(structure(as.double(A), dim=dim(A)))
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -3732,7 +3732,7 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.ar
   res
 }
 
-eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options=igraph.arpack.default) {
+eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
   # Argument checks
   A <- as.matrix(structure(as.double(A), dim=dim(A)))
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
