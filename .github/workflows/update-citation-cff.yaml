@@ -8,10 +8,15 @@ on:
   release:
     types: [published]
   push:
-    branches: [master, main]
+    branches:
+      - master
+      - main
+      - cran-*
     paths:
       - DESCRIPTION
       - inst/CITATION
+      - NEWS.md
+      - .github/workflows/update-citation-cff.yaml
   workflow_dispatch:
 
 name: Update CITATION.cff

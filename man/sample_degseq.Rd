@@ -104,7 +104,6 @@ g5 <- sample_degseq(degs, method = "vl")
 all(degree(g5) == degs)
 }
 \seealso{
-\code{\link[=sample_gnp]{sample_gnp()}}, \code{\link[=sample_pa]{sample_pa()}},
 \code{\link[=simplify]{simplify()}} to get rid of the multiple and/or loops edges,
 \code{\link[=realize_degseq]{realize_degseq()}} for a deterministic variant.
 

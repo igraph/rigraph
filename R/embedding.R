@@ -65,7 +65,7 @@
 #'   graph. This vector is added to the diagonal of the adjacency matrix.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [igraph.arpack.default].
+#'   the values given by [arpack_defaults()].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
@@ -203,7 +203,7 @@ dim_select <- dim_select_impl
 #'   returned instead of \eqn{X} and \eqn{Y}.
 #' @param options A named list containing the parameters for the SVD
 #'   computation algorithm in ARPACK. By default, the list of values is assigned
-#'   the values given by [igraph.arpack.default].
+#'   the values given by [arpack_defaults()].
 #' @return A list containing with entries: \item{X}{Estimated latent positions,
 #'   an `n` times `no` matrix, `n` is the number of vertices.}
 #'   \item{Y}{`NULL` for undirected graphs, the second half of the latent
@@ -263,8 +263,8 @@ embed_laplacian_matrix <- laplacian_spectral_embedding_impl
 #' vec.norm
 sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks
-  dim <- as.integer(dim)
-  n <- as.integer(n)
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
@@ -305,8 +305,8 @@ sample_sphere_surface <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' vec.norm
 sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
   # Argument checks
-  dim <- as.integer(dim)
-  n <- as.integer(n)
+  dim <- as.numeric(dim)
+  n <- as.numeric(n)
   radius <- as.numeric(radius)
   positive <- as.logical(positive)
 
@@ -342,7 +342,7 @@ sample_sphere_volume <- function(dim, n = 1, radius = 1, positive = TRUE) {
 #' colSums(lpvs.dir)
 sample_dirichlet <- function(n, alpha) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   alpha <- as.numeric(alpha)
 
   on.exit(.Call(R_igraph_finalizer))

@@ -15,8 +15,7 @@
 #' the algorithm, and they are useful if the user wishes to perform them
 #' individually: `graphlet_basis()` and `graphlet_proj()`.
 #'
-#' @aliases graphlets graphlets.project graphlet_proj graphlet_basis
-#' graphlets.candidate.basis
+#' @aliases graphlets.project graphlets.candidate.basis
 #' @param graph The input graph, edge directions are ignored. Only simple graph
 #'   (i.e. graphs without self-loops and multiple edges) are supported.
 #' @param weights Edge weights. If the graph has a `weight` edge attribute
@@ -102,7 +101,6 @@ graphlet_basis <- function(graph, weights = NULL) {
 }
 
 #' @rdname graphlet_basis
-#' @family glet
 #' @export
 graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
                           Mu = rep(1, length(cliques))) {
@@ -117,7 +115,7 @@ graphlet_proj <- function(graph, weights = NULL, cliques, niter = 1000,
     weights <- NULL
   }
   Mu <- as.numeric(Mu)
-  niter <- as.integer(niter)
+  niter <- as.numeric(niter)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
@@ -176,5 +174,6 @@ function() {
   fitandplot(g2, gl2)
 }
 
+#' @rdname graphlet_basis
 #' @export
 graphlets <- graphlets_impl

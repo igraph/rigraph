@@ -1,146 +1,131 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# igraph 1.5.1.9014
+# igraph 1.6.0.9004
 
-## Documentation
+## Refactoring
 
-  - Render reciprocity docs.
-
-
-# igraph 1.5.1.9013
-
-## Features
-
-  - Improve symmetry check for adjacency matrices on input (#911).
-
-## Documentation
-
-  - Fix formul in reciprocity() docs.
+  - Eliminate the use of some deprecated C functions.
 
 
-# igraph 1.5.1.9012
+# igraph 1.6.0.9003
 
 ## Features
 
-  - Warn if non-symmetric undirected adjacency matrix (#904).
+  - Upgrade igraph/C to 0.10 (@krlmlr, @Antonov548, #840).
 
 ## Chore
 
-  - Declare CI for sanitizer builds.
-
-  - Update to testthat 3.2.0.
-
-## Documentation
-
-  - Strength() does not give a warning when no weights are given.
-
-## Testing
-
-  - Fix checks.
+  - Update check results.
 
 
-# igraph 1.5.1.9011
+# igraph 1.6.0.9002
+
+  - Merge branch 'cran-1.6.0'.
+
+
+# igraph 1.6.0.9001
 
 ## Chore
 
-  - Added FUNDING.yml.
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
+
+  - Add bug report form.
 
 
-# igraph 1.5.1.9010
+# igraph 1.6.0.9000
 
-## Chore
+  - Merge branch 'cran-1.6.0'.
 
-  - Fix vendoring script.
-
-## vendor
-
-  - Update vendored igraph/C to igraph/igraph@67757ea68fa2057e6916bf55d0a090823d07c28c.
+  - Merge branch 'main' into cran-1.6.0.
 
 
-# igraph 1.5.1.9009
-
-## Documentation
-
-  - Update `sample_smallworld()` manual page (#895).
-
-
-# igraph 1.5.1.9008
-
-## Chore
-
-  - Restore vendored plfit, remove from vendored cigraph for now.
-
-  - Restore vendored cs, remove from vendored cigraph for now.
-
-  - Install ccache on GHA.
-
-
-# igraph 1.5.1.9007
-
-## Chore
-
-  - Remove duplicate vendored plfit.
-
-  - Sync vendored parser artifacts for igraph/C 0.10.
-
-  - Remove duplicate vendored cs.
-
-  - Sync vendored igraph/C 0.10.
-
-
-# igraph 1.5.1.9006
-
-## Chore
-
-  - Improve troubleshooting info.
-
-  - Fix typo in troubleshooting docs.
-
-
-# igraph 1.5.1.9005
-
-## Documentation
-
-  - Improve sir() docs.
-
-
-# igraph 1.5.1.9004
-
-## Documentation
-
-  - Correct documentation for weighted cliques.
-
-
-# igraph 1.5.1.9003
-
-## Documentation
-
-  - Update Erdos-Renyi model docs.
-
-
-# igraph 1.5.1.9002
-
-## Chore
-
-  - Bump upcoming igraph/C 0.10 sources.
-
-  - Bump upcoming igraph/C 0.10 sources.
-
-  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+# igraph 1.6.0
 
 ## Breaking changes
 
-  - Breaking change: Remove some behaviour / parameters that were deprecated in 1.3 (#842).
+- New `arpack_defaults()` replaces `igraph.arpack.default` and `arpack_defaults` lists (#800), with consistent usage checks (#966).
 
+- Define methods for `ape::as.phylo()` instead of own `as_phylo()` generic, remove deprecated `asPhylo()` (#763).
 
-# igraph 1.5.1.9001
+- `bfs()` with unreachable nodes returns zero instead of `NaN` as `rank` (#956), and negative instead of `NaN` for `dist` (#926).
 
-  - Internal changes only.
+- `random_walk()` adds one more step, the resulting list of vertices is of length `steps + 1` (#934).
 
+- `girth()` returns `Inf` for acyclic graphs (#931).
 
-# igraph 1.5.1.9000
+- Remove some behaviour / parameters that were deprecated in 1.3 (#842).
 
-- Merge branch 'cran-1.5.1'.
+- Remove `scg_eps()`, `scg_group()` and `scg_semi_proj()`, broken and no longer maintained (#946).
+
+## Bug fixes
+
+- Fix `printf()` warning (#975).
+
+- Fix calls to `isSymmetric()` for matrix objects with a class (#965).
+
+- Reduce frequency of interruption checks (#957).
+
+## Features
+
+- Change "incidence matrix" naming to "biadjacency matrix" (#962).
+
+- Add aliases using the neighborhood terminology for all ego functions: (#950).
+
+- Rename arguments to `assortativity(values, values.in)` from `types1` and `types2` (#952).
+
+- Add ellipsis to `cluster_label_prop()` (#954).
+
+- Placeholders for `is_acyclic()` and `is_forest()`, to be implemented in igraph 2.0.0 (#945).
+
+- `is_tree(details = TRUE)` designates the first vertex as root for non-trees (#935).
+
+- `all_shortest_paths()` returns the vertex list in both `res` and `vpaths` components (#930).
+
+- Improve symmetry check for adjacency matrices on input (#911).
+
+- Warn if non-symmetric undirected adjacency matrix (#904).
+
+## Documentation
+
+- Remove duplicate `\seealso{}` (#948).
+
+- Update `knnk()` and `sir()` docs.
+
+- Fix formula in `reciprocity()` docs.
+
+- `strength()` does not give a warning when no weights are given.
+
+- Update `sample_smallworld()` manual page (#895).
+
+- Correct documentation for weighted cliques.
+
+- Update Erdos-Renyi model docs.
+
+## Testing
+
+- Clean up tests (#967).
+
+- Stabilize tests for `cluster_label_prop()` (#932), `sample_pa()` (#927), `cluster_louvain()` (#933), SIR (#936), `sample_forestfire()` (#929).
+
+- Hard-code graph used in test (#928).
+
+- Update GML test file (#925).
+
+- Improve test for sampling from Dirichlet distribution (#923).
+
+- Omit test that no longer holds with igraph 0.10 (#922).
+
+- Stabilize test in preparation for upgrade (#920).
+
+- Stabilize plot test (#919).
+
+- Fix checks.
 
 
 # igraph 1.5.1

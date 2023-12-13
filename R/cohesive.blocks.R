@@ -108,10 +108,10 @@
 #' The generic function [plot()] plots the graph, showing one or more
 #' cohesive blocks in it.
 #'
-#' @aliases cohesive.blocks cohesiveBlocks blocks graphs_from_cohesive_blocks blockGraphs
+#' @aliases cohesive.blocks cohesiveBlocks blocks blockGraphs
 #' hierarchy parent plotHierarchy export_pajek maxcohesion plot.cohesiveBlocks
 #' summary.cohesiveBlocks length.cohesiveBlocks print.cohesiveBlocks
-#' plot_hierarchy max_cohesion exportPajek
+#' exportPajek
 #' @param graph For `cohesive_blocks()` a graph object of class
 #'   `igraph`. It must be undirected and simple. (See
 #'   [is_simple()].)
@@ -273,14 +273,12 @@ length.cohesiveBlocks <- function(x) {
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 blocks <- function(blocks) {
   blocks$blocks
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 graphs_from_cohesive_blocks <- function(blocks, graph) {
   lapply(blocks(blocks), induced_subgraph, graph = graph)
@@ -294,21 +292,18 @@ cohesion <- function(x, ...) {
 
 #' @rdname cohesive_blocks
 #' @method cohesion cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 cohesion.cohesiveBlocks <- function(x, ...) {
   x$cohesion
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 hierarchy <- function(blocks) {
   blocks$blockTree
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 parent <- function(blocks) {
   blocks$parent
@@ -316,7 +311,6 @@ parent <- function(blocks) {
 
 #' @rdname cohesive_blocks
 #' @method print cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 print.cohesiveBlocks <- function(x, ...) {
   cat("Cohesive block structure:\n")
@@ -378,7 +372,6 @@ summary.cohesiveBlocks <- function(object, ...) {
 
 #' @rdname cohesive_blocks
 #' @method plot cohesiveBlocks
-#' @family cohesive.blocks
 #' @export
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
@@ -394,7 +387,6 @@ plot.cohesiveBlocks <- function(x, y,
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 #' @importFrom graphics plot
 plot_hierarchy <- function(blocks,
@@ -466,7 +458,6 @@ exportPajek.cohesiveblocks.nopf <- function(blocks, graph, file) {
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 export_pajek <- function(blocks, graph, file,
                          project.file = TRUE) {
@@ -485,7 +476,6 @@ export_pajek <- function(blocks, graph, file,
 }
 
 #' @rdname cohesive_blocks
-#' @family cohesive.blocks
 #' @export
 max_cohesion <- function(blocks) {
   res <- numeric(blocks$vcount)

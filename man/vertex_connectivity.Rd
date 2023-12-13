@@ -5,12 +5,14 @@
 \alias{vertex.connectivity}
 \alias{vertex.disjoint.paths}
 \alias{cohesion}
-\alias{vertex_disjoint_paths}
 \alias{graph.cohesion}
+\alias{vertex_disjoint_paths}
 \alias{cohesion.igraph}
 \title{Vertex connectivity}
 \usage{
 vertex_connectivity(graph, source = NULL, target = NULL, checks = TRUE)
+
+vertex_disjoint_paths(graph, source = NULL, target = NULL)
 
 \method{cohesion}{igraph}(x, checks = TRUE, ...)
 }
@@ -93,21 +95,6 @@ Blocks In Social Networks: Node Connectivity and Conditional Density.
 \emph{Sociological Methodology} 31 (1) : 305-359.
 }
 \seealso{
-\code{\link[=max_flow]{max_flow()}}, \code{\link[=edge_connectivity]{edge_connectivity()}},
-\code{\link[=edge_disjoint_paths]{edge_disjoint_paths()}}, \code{\link[=adhesion]{adhesion()}}
-
-Other flow: 
-\code{\link{dominator_tree}()},
-\code{\link{edge_connectivity}()},
-\code{\link{is_min_separator}()},
-\code{\link{is_separator}()},
-\code{\link{max_flow}()},
-\code{\link{min_cut}()},
-\code{\link{min_separators}()},
-\code{\link{min_st_separators}()},
-\code{\link{st_cuts}()},
-\code{\link{st_min_cuts}()}
-
 Other flow: 
 \code{\link{dominator_tree}()},
 \code{\link{edge_connectivity}()},

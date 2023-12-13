@@ -6,13 +6,21 @@
 \alias{is.loop}
 \alias{is.multiple}
 \alias{count.multiple}
-\alias{count_multiple}
-\alias{any_loop}
 \alias{any_multiple}
+\alias{count_multiple}
 \alias{which_loop}
+\alias{any_loop}
 \title{Find the multiple or loop edges in a graph}
 \usage{
 which_multiple(graph, eids = E(graph))
+
+any_multiple(graph)
+
+count_multiple(graph, eids = E(graph))
+
+which_loop(graph, eids = E(graph))
+
+any_loop(graph)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -93,6 +101,7 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},

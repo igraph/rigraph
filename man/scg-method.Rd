@@ -35,7 +35,7 @@ D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
 Shrinking Matrices while Preserving their Eigenpairs with Application to the
 Spectral Coarse Graining of Graphs. Submitted to \emph{SIAM Journal on
 Matrix Analysis and Applications}, 2008.
-\url{http://people.epfl.ch/david.morton}
+\url{https://www.epfl.ch/labs/lbs/wp-content/uploads/2018/07/scg_math_paper_dml_dg_pdl.pdf}
 
 D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
 in Oscillator Networks. \emph{Physical Review Letters}, \strong{100}(17),
@@ -47,15 +47,10 @@ Networks, \emph{Physical Review Letters}, \strong{99}(3), 2007.
 }
 \seealso{
 Spectral Coarse Graining
-\code{\link{scg_eps}()},
-\code{\link{scg_group}()},
-\code{\link{scg_semi_proj}()},
-\code{\link{scg}()},
 \code{\link{stochastic_matrix}()}
 }
 \author{
-David Morton de Lachapelle,
-\url{http://people.epfl.ch/david.morton}.
+David Morton de Lachapelle.
 }
 \concept{scg}
 \keyword{graphs}

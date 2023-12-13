@@ -7,7 +7,7 @@
 
 #include "igraph_vector.hpp"
 
-extern "C" int igraphhcass2(int n, const int *ia, const int *ib, int *iorder, int *iia, int *iib);
+extern "C" int igraphhcass2(int n, const int *ia, const int *ib, int *iorder, igraph_integer_t *iia, igraph_integer_t *iib);
 
 // FIXME: This belongs in a header or in the cpp11 package
 const int* ptr(cpp11::integers v) {
