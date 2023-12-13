@@ -34,7 +34,7 @@
 #'
 #' `count_triangles()` counts how many triangles a vertex is part of.
 #'
-#' @aliases count_triangles adjacent.triangles triangles
+#' @aliases adjacent.triangles triangles
 #' @param graph The input graph. It might be directed, but edge directions are
 #'   ignored.
 #' @param vids The vertices to query, all of them by default. This might be a
@@ -73,6 +73,5 @@
 triangles <- list_triangles_impl
 
 #' @export
-#' @family triangles
 #' @rdname count_triangles
 count_triangles <- adjacent_triangles_impl

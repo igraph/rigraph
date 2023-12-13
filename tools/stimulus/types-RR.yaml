@@ -9,7 +9,7 @@ INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
     INCONV:
-        IN: '%I% <- as.integer(%I%)'
+        IN: '%I% <- as.numeric(%I%)'
 
 REAL:
     DEFAULT:
@@ -28,15 +28,17 @@ BOOLEAN:
 
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
-    INCONV: '%I% <- as.integer(%I%)-1L'
-    OUTCONV: '%I% <- %I%+1'
+    INCONV: '%I% <- as.numeric(%I%)-1L'
+
+INDEX_VECTOR_OR_0:
+    INCONV: 'if (!is.null(%I%)) %I% <- as.numeric(%I%)-1L'
 
 VECTOR:
     DEFAULT:
-        AsmDefaultCvec: graph.strength(%I1%, weights=weights)/(vcount(%I1%)-1)
+        AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
     INCONV: '%I% <- as.numeric(%I%)'
 
-VERTEXINDEX:
+VERTEX_QTY:
     OUTCONV:
         OUT: |-
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
@@ -47,7 +49,10 @@ VECTOR_LONG:
     INCONV: '%I% <- as.numeric(%I%)'
 
 VECTOR_INT:
-    INCONV: '%I% <- as.integer(%I%)'
+    INCONV: '%I% <- as.numeric(%I%)'
+
+VECTOR_INT_OR_0:
+    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
 
 VECTORM1:
     INCONV: '%I% <- as.numeric(%I%)-1'
@@ -92,7 +97,7 @@ NEIMODE:
         IN: c("in", "out", "all", "total")
         OUT: c("out", "in", "all", "total")
         TOTAL: c("total", "out", "in", "all")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1, "in"=2, "all"=3, "total"=3)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=1L, "in"=2L, "all"=3L, "total"=3L)'
 
 TODIRECTED:
     DEFAULT:
@@ -125,7 +130,20 @@ VERTEX:
               %I% <- create_vs(%I1%, %I%)
             }
 
-VERTEXSET:
+VERTEX_ROOT:
+    CALL: '%I%-1'
+    INCONV: |-
+        %I% <- as_igraph_vs(%I1%, %I%)
+        if (length(%I%) == 0) {
+          stop("No vertex was specified")
+        }
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es") && vcount(%I1%) != 0) {
+              %I% <- create_vs(%I1%, %I%)
+            }
+
+VERTEX_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
@@ -136,7 +154,7 @@ VERTEXSET:
               %I% <- create_vs(%I1%, %I%)
             }
 
-VERTEXSET_INT:
+VERTEX_INDICES:
     CALL: '%I%-1'
     DEFAULT:
         ALL: V(%I1%)
@@ -147,7 +165,18 @@ VERTEXSET_INT:
               %I% <- create_vs(%I1%, %I%)
             }
 
-EDGESET:
+EDGE_INDICES:
+    CALL: '%I%-1'
+    DEFAULT:
+        ALL: E(%I1%)
+    INCONV: '%I% <- as_igraph_es(%I1%, %I%)'
+    OUTCONV:
+        OUT: |-
+            if (igraph_opt("return.vs.es")) {
+              %I% <- create_es(%I1%, %I%)
+            }
+
+EDGE_SELECTOR:
     CALL: '%I%-1'
     DEFAULT:
         ALL: E(%I1%)
@@ -180,7 +209,7 @@ VERTEXWEIGHTS:
           %I% <- NULL
         }
 
-EDGECAPACITY:
+EDGE_CAPACITY:
     INCONV: |-
         if (is.null(%I%) && "capacity" %in% edge_attr_names(%I1%)) {
           %I% <- E(%I1%)$capacity
@@ -210,7 +239,7 @@ VERTEX_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.integer(%I%)-1L
+          %I% <- as.numeric(%I%)-1L
         }
     OUTCONV:
         OUT: |-
@@ -256,7 +285,7 @@ MATRIXLIST:
               stop("%I% is not a list of matrices")
             }
 
-VERTEXSETLIST:
+VERTEXSET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -270,7 +299,7 @@ VERTEXSETLIST_INT:
     INCONV:
         IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
 
-EDGESETLIST:
+EDGESET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
@@ -286,11 +315,11 @@ EDGESETLIST:
 
 ARPACKOPT:
     INCONV:
-        INOUT: '%I%.tmp <- arpack_defaults; %I%.tmp[ names(%I%) ] <- %I% ; %I% <- %I%.tmp'
+        INOUT: '%I% <- modify_list(arpack_defaults(), %I%)'
 
 DRL_OPTIONS:
     INCONV:
-        IN: '%I%.tmp <- drl_defaults$default; %I%.tmp [names(%I%)] <- %I%; %I% <- %I%.tmp'
+        IN: '%I% <- modify_list(drl_defaults$default, %I%)'
 
 STRVECTOR: {}
 
@@ -307,7 +336,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
+    INCONV: '%I% <- lapply(%I%, function(x) as.double(x)-1L)'
 
 COMMCMP:
     DEFAULT:
@@ -370,12 +399,12 @@ SCGDIR:
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)'
 
 SPARSEMAT:
-    INCONV: require(Matrix); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+    INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 
 SPARSEMAT_OR_0:
     INCONV: |-
         if (!is.null(%I%)) {
-          require(Matrix); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+          requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
         }
 
 VECTOR_COMPLEX:
@@ -385,6 +414,8 @@ MATRIX_COMPLEX:
     INCONV: '%I% <- as.matrix(structure(as.complex(%I%), dim=dim(%I%)))'
 
 PLFIT: {}
+
+SPARSEMATPTR: {}
 
 MAXFLOW_STATS:
     CALL: {}
@@ -424,7 +455,7 @@ PAGERANKOPT:
           if (%I1% == 0L) {
             %I% <- list(niter=1000, eps=0.001)
           } else if (%I1% == 1L) {
-            %I% <- arpack_defaults
+            %I% <- arpack_defaults()
           } else {
             %I% <- NULL
           }
@@ -468,9 +499,9 @@ RANDOM_TREE_METHOD:
 
 GREEDY_COLORING_HEURISTIC:
     DEFAULT:
-        NEIGHBORS: c("colored_neighbors")
+        NEIGHBORS: c("colored_neighbors", "dsatur")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L)
+        %I% <- switch(igraph.match.arg(%I%), "colored_neighbors"=0L, "dsatur"=1L)
 
 REALIZE_DEGSEQ_METHOD:
     DEFAULT:

@@ -331,7 +331,7 @@ E <- function(graph, P = NULL, path = NULL, directed = TRUE) {
   if ("name" %in% edge_attr_names(graph)) {
     names(res) <- edge_attr(graph)$name[res]
   }
-  if (is.named(graph)) {
+  if (is_named(graph)) {
     el <- ends(graph, es = res)
     attr(res, "vnames") <- paste(el[, 1], el[, 2], sep = "|")
   }

@@ -2,8 +2,8 @@
 % Please edit documentation in R/triangles.R
 \name{triangles}
 \alias{triangles}
-\alias{count_triangles}
 \alias{adjacent.triangles}
+\alias{count_triangles}
 \title{Find triangles in graphs}
 \usage{
 triangles(graph)

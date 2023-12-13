@@ -10,7 +10,7 @@ eigen_centrality(
   directed = FALSE,
   scale = TRUE,
   weights = NULL,
-  options = arpack_defaults
+  options = arpack_defaults()
 )
 }
 \arguments{

@@ -704,7 +704,7 @@ make_empty_graph <- function(n = 0, directed = TRUE) {
     stop("number of vertices must be an integer")
   }
 
-  n <- suppressWarnings(as.integer(n))
+  n <- suppressWarnings(as.numeric(n))
   if (is.na(n)) {
     stop("number of vertices must be an integer")
   }
@@ -1112,7 +1112,7 @@ lattice <- function(...) constructor_spec(make_lattice, ...)
 #' A ring is a one-dimensional lattice and this function is a special case
 #' of [make_lattice()].
 #'
-#' @aliases make_ring graph.ring
+#' @aliases graph.ring
 #' @param n Number of vertices.
 #' @param directed Whether the graph is directed.
 #' @param mutual Whether directed edges are mutual. It is ignored in
@@ -1180,7 +1180,7 @@ make_tree <- function(n, children = 2, mode = c("out", "in", "undirected")) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_tree, as.numeric(n), as.numeric(children),
+    R_igraph_kary_tree, as.numeric(n), as.numeric(children),
     as.numeric(mode1)
   )
   if (igraph_opt("add.params")) {
@@ -1334,7 +1334,7 @@ atlas <- function(...) constructor_spec(graph_from_atlas, ...)
 make_chordal_ring <- function(n, w, directed = FALSE) {
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_extended_chordal_ring, as.integer(n),
+    R_igraph_extended_chordal_ring, as.numeric(n),
     as.matrix(w), as.logical(directed)
   )
   if (igraph_opt("add.params")) {
@@ -1527,8 +1527,8 @@ kautz_graph <- function(...) constructor_spec(make_kautz_graph, ...)
 #' @export
 make_full_bipartite_graph <- function(n1, n2, directed = FALSE,
                                       mode = c("all", "out", "in")) {
-  n1 <- as.integer(n1)
-  n2 <- as.integer(n2)
+  n1 <- as.numeric(n1)
+  n2 <- as.numeric(n2)
   directed <- as.logical(directed)
   mode1 <- switch(igraph.match.arg(mode),
     "out" = 1,
@@ -1574,7 +1574,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' `is_bipartite()` checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called `type`.
 #'
-#' @aliases make_bipartite_graph graph.bipartite is.bipartite is_bipartite
+#' @aliases graph.bipartite is.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
 #'   When the vector is a named vector, the names will be attached to the graph
@@ -1594,6 +1594,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [graph()] to create one-mode networks
 #' @keywords graphs
+#' @family bipartite
 #' @examples
 #'
 #' g <- make_bipartite_graph(rep(0:1, length.out = 10), c(1:10))
@@ -1652,7 +1653,7 @@ bipartite_graph <- function(...) constructor_spec(make_bipartite_graph, ...)
 #' print_all(make_full_citation_graph(10))
 make_full_citation_graph <- function(n, directed = TRUE) {
   # Argument checks
-  n <- as.integer(n)
+  n <- as.numeric(n)
   directed <- as.logical(directed)
 
   on.exit(.Call(R_igraph_finalizer))

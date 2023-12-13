@@ -63,7 +63,7 @@ motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
-    R_igraph_motifs_randesu, graph, as.integer(size),
+    R_igraph_motifs_randesu, graph, as.numeric(size),
     as.numeric(cut.prob)
   )
   res[is.nan(res)] <- NA
@@ -107,7 +107,7 @@ count_motifs <- function(graph, size = 3, cut.prob = rep(0, size)) {
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_no, graph, as.integer(size),
+    R_igraph_motifs_randesu_no, graph, as.numeric(size),
     as.numeric(cut.prob)
   )
 }
@@ -156,8 +156,8 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
-    R_igraph_motifs_randesu_estimate, graph, as.integer(size),
-    as.numeric(cut.prob), as.integer(sample.size), as.numeric(sample)
+    R_igraph_motifs_randesu_estimate, graph, as.numeric(size),
+    as.numeric(cut.prob), as.numeric(sample.size), as.numeric(sample)
   )
 }
 
@@ -169,7 +169,7 @@ sample_motifs <- function(graph, size = 3, cut.prob = rep(0, size),
 #' non-existent.
 #'
 #'
-#' @aliases dyad.census dyad_census
+#' @aliases dyad.census
 #' @param graph The input graph. A warning is given if it is not directed.
 #' @return A named numeric vector with three elements: \item{mut}{The number of
 #'   pairs with mutual connections.} \item{asym}{The number of pairs with
@@ -220,7 +220,7 @@ dyad_census <- function(graph) {
 #' This functions uses the RANDESU motif finder algorithm to find and count the
 #' subgraphs, see [motifs()].
 #'
-#' @aliases triad.census triad_census
+#' @aliases triad.census
 #' @param graph The input graph, it should be directed. An undirected graph
 #'   results a warning, and undefined results.
 #' @return A numeric vector, the subgraph counts, in the order given in the

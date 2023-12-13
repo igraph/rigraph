@@ -28,7 +28,7 @@ test_that("simplify_and_colorize works", {
 
   expect_true(is_simple(result))
   expect_that(vcount(result), equals(vcount(g)))
-  expect_that(get.edgelist(result), equals(matrix(c(1:4, 2:5), ncol = 2)))
+  expect_that(as_edgelist(result), equals(matrix(c(1:4, 2:5), ncol = 2)))
   expect_that(V(result)$color, equals(c(0, 0, 0, 0, 1)))
   expect_that(E(result)$color, equals(c(1, 4, 1, 2)))
 })

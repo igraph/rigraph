@@ -45,7 +45,7 @@
 #' @examples
 #'
 #' igraph_demo()
-#' if (interactive()) {
+#' if (interactive() && requireNamespace("tcltk", quietly = TRUE)) {
 #'   igraph_demo("centrality")
 #' }
 #'

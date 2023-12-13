@@ -74,7 +74,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
   ## Function call
   res <- .Call(
     R_igraph_get_all_simple_paths, graph, from - 1, to - 1,
-    as.integer(cutoff), mode
+    as.numeric(cutoff), mode
   )
   res <- get.all.simple.paths.pp(res)
 
@@ -93,7 +93,7 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' `is_dag()` checks whether there is a directed cycle in the graph. If not,
 #' the graph is a DAG.
 #'
-#' @aliases is.dag is_dag
+#' @aliases is.dag
 #' @param graph The input graph. It may be undirected, in which case
 #'   `FALSE` is reported.
 #' @return A logical vector of length one.
@@ -111,6 +111,27 @@ all_simple_paths <- function(graph, from, to = V(graph),
 #' @export
 is_dag <- is_dag_impl
 
+#' Acyclic graphs
+#'
+#' This function tests whether the given graph is free of cycles.
+#'
+#' This function looks for directed cycles in directed graphs and undirected
+#' cycles in undirected graphs.
+#'
+#' @param graph The input graph.
+#' @return A logical vector of length one.
+#' @keywords graphs
+#' @examples
+#'
+#' g <- make_graph(c(1,2, 1,3, 2,4, 3,4), directed = TRUE)
+#' is_acyclic(g)
+#' is_acyclic(as.undirected(g))
+#' @seealso [is_forest()] and [is_dag()] for functions specific to undirected
+#' and directed graphs.
+#' @family cycles
+#' @family structural.properties
+#' @export
+is_acyclic <- is_acyclic_impl
 
 #' Maximum cardinality search
 #'
@@ -234,6 +255,5 @@ radius <- radius_impl
 #' @rdname distances
 #' @param directed Whether to consider directed paths in directed graphs,
 #'   this argument is ignored for undirected graphs.
-#' @family paths
 #' @export
 distance_table <- path_length_hist_impl

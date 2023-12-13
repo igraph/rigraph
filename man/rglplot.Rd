@@ -30,7 +30,7 @@ arguments.
 
 g <- make_lattice(c(5, 5, 5))
 coords <- layout_with_fr(g, dim = 3)
-if (interactive()) {
+if (interactive() && requireNamespace("rgl", quietly = TRUE)) {
   rglplot(g, layout = coords)
 }
 

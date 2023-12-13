@@ -38,7 +38,7 @@
 #' `farthest_vertices()` returns two vertex ids, the vertices which are
 #' connected by the diameter path.
 #'
-#' @aliases diameter get.diameter farthest.nodes farthest_vertices get_diameter
+#' @aliases get.diameter farthest.nodes
 #' @param graph The graph to analyze.
 #' @param directed Logical, whether directed or undirected paths are to be
 #'   considered. This is ignored for undirected graphs.
@@ -96,7 +96,7 @@ diameter <- function(graph, directed = TRUE, unconnected = TRUE, weights = NULL)
   )
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
                          weights = NULL) {
@@ -124,7 +124,7 @@ get_diameter <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
+#' @rdname diameter
 #' @export
 farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
                               weights = NULL) {
@@ -153,7 +153,6 @@ farthest_vertices <- function(graph, directed = TRUE, unconnected = TRUE,
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 mean_distance <- average_path_length_dijkstra_impl
@@ -166,7 +165,7 @@ mean_distance <- average_path_length_dijkstra_impl
 #' its adjacent edges.
 #'
 #'
-#' @aliases degree degree.distribution degree_distribution
+#' @aliases degree.distribution
 #' @param graph The graph to analyze.
 #' @param v The ids of vertices of which the degree will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -225,7 +224,6 @@ degree <- function(graph, v = V(graph),
 #' @rdname degree
 #' @param cumulative Logical; whether the cumulative degree distribution is to
 #'   be calculated.
-#' @family structural.properties
 #' @export
 #' @importFrom graphics hist
 degree_distribution <- function(graph, cumulative = FALSE, ...) {
@@ -297,9 +295,8 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' directions are considered, so every pair of vertices appears twice in the
 #' histogram.
 #'
-#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths distances
-#' mean_distance distance_table average.path.length path.length.hist
-#' all_shortest_paths shortest_paths
+#' @aliases shortest.paths get.shortest.paths get.all.shortest.paths
+#' average.path.length path.length.hist
 #' @param graph The graph to work on.
 #' @param v Numeric vector, the vertices from which the shortest paths will be
 #'   calculated.
@@ -376,6 +373,7 @@ degree_distribution <- function(graph, cumulative = FALSE, ...) {
 #' @references West, D.B. (1996). *Introduction to Graph Theory.* Upper
 #' Saddle River, N.J.: Prentice Hall.
 #' @family structural.properties
+#' @family paths
 #' @export
 #' @keywords graphs
 #' @examples
@@ -499,7 +497,6 @@ distances <- function(graph, v = V(graph), to = V(graph),
 #'   not reached during the search will have zero in the corresponding entry of
 #'   the vector. Note that the search terminates if all the vertices in `to`
 #'   are reached.
-#' @family structural.properties
 #' @export
 shortest_paths <- function(graph, from, to = V(graph),
                            mode = c("out", "all", "in"),
@@ -592,7 +589,6 @@ shortest_paths <- function(graph, from, to = V(graph),
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname distances
 all_shortest_paths <- function(graph, from,
@@ -635,8 +631,11 @@ all_shortest_paths <- function(graph, from,
   }
 
   if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
+
+  # Transitional, eventually, remove $res
+  res$res <- res$vpaths
 
   res
 }
@@ -648,7 +647,6 @@ all_shortest_paths <- function(graph, from,
 #'
 #' A breadth-first search is conducted starting from vertex `v`.
 #'
-#' @aliases subcomponent
 #' @param graph The graph to analyze.
 #' @param v The vertex to start the search from.
 #' @param mode Character string, either \dQuote{in}, \dQuote{out} or
@@ -709,7 +707,7 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 #' is deprecated. In the next major version, `subgraph()` will overtake the
 #' functionality of `subgraph.edges()`.
 #'
-#' @aliases subgraph induced.subgraph subgraph.edges induced_subgraph
+#' @aliases induced.subgraph subgraph.edges
 #' @param graph The original graph.
 #' @return A new graph object.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
@@ -737,7 +735,6 @@ subgraph <- function(graph, vids) {
 #'   scratch. \sQuote{`auto`} chooses between the two implementations
 #'   automatically, using heuristics based on the size of the original and the
 #'   result graph.
-#' @family structural.properties
 #' @export
 induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "create_from_scratch")) {
   # Argument checks
@@ -760,7 +757,6 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
 #' @param eids The edge ids of the edges that will be kept in the result graph.
 #' @param delete.vertices Logical scalar, whether to remove vertices that do
 #'   not have any adjacent edges in `eids`.
-#' @family structural.properties
 #' @export
 subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
   # Argument checks
@@ -770,7 +766,7 @@ subgraph.edges <- function(graph, eids, delete.vertices = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_subgraph_edges, graph, eids - 1, delete.vertices)
+  res <- .Call(R_igraph_subgraph_from_edges, graph, eids - 1, delete.vertices)
 
   res
 }
@@ -1102,7 +1098,6 @@ edge_density <- function(graph, loops = FALSE) {
 }
 
 #' @rdname ego
-#' @family structural.properties
 #' @export
 ego_size <- function(graph, order = 1, nodes = V(graph),
                      mode = c("all", "out", "in"), mindist = 0) {
@@ -1113,7 +1108,7 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -1123,26 +1118,31 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
   )
 }
 
-
+#' @export
+#' @rdname ego
+neighborhood_size <- ego_size
 
 #' Neighborhood of graph vertices
 #'
 #' These functions find the vertices not farther than a given limit from
 #' another fixed vertex, these are called the neighborhood of the vertex.
-#' Note that `ego()` and `neighborhood()` are synonyms, aliases.
+#' Note that `ego()` and `neighborhood()`,
+#' `ego_size()` and `neighborhood_size()`,
+#' `make_ego_graph()` and `make_neighborhood()_graph()`,
+#' are synonyms (aliases).
 #'
 #' The neighborhood of a given order `r` of a vertex `v` includes all
 #' vertices which are closer to `v` than the order. I.e. order 0 is always
 #' `v` itself, order 1 is `v` plus its immediate neighbors, order 2
 #' is order 1 plus the immediate neighbors of the vertices in order 1, etc.
 #'
-#' `ego_size()` returns the size of the neighborhoods of the given order,
+#' `ego_size()`/`neighborhood_size()` (synonyms) returns the size of the neighborhoods of the given order,
 #' for each given vertex.
 #'
 #' `ego()`/`neighborhood()` (synonyms) returns the vertices belonging to the neighborhoods of the given
 #' order, for each given vertex.
 #'
-#' `make_ego_graph()` is creates (sub)graphs from all neighborhoods of
+#' `make_ego_graph()`/`make_neighborhood()_graph()` (synonyms) is creates (sub)graphs from all neighborhoods of
 #' the given vertices with the given order parameter. This function preserves
 #' the vertex, edge and graph attributes.
 #'
@@ -1164,11 +1164,11 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @param mindist The minimum distance to include the vertex in the result.
 #' @return
 #'   \itemize{
-#'   \item{`ego_size()` returns with an integer vector.}
+#'   \item{`ego_size()`/`neighborhood_size()` returns with an integer vector.}
 #'   \item{`ego()`/`neighborhood()` (synonyms) returns A list of `igraph.vs` or a list of numeric
 #'         vectors depending on the value of `igraph_opt("return.vs.es")`,
 #'         see details for performance characteristics.}
-#'   \item{`make_ego_graph()` returns with a list of graphs.}
+#'   \item{`make_ego_graph()`/`make_neighborhood_graph()` returns with a list of graphs.}
 #'   \item{`connect()` returns with a new graph object.}
 #'   }
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}, the first version was
@@ -1179,12 +1179,20 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' @examples
 #'
 #' g <- make_ring(10)
+#'
 #' ego_size(g, order = 0, 1:3)
 #' ego_size(g, order = 1, 1:3)
 #' ego_size(g, order = 2, 1:3)
+#'
+#' # neighborhood_size() is an alias of ego_size()
+#' neighborhood_size(g, order = 0, 1:3)
+#' neighborhood_size(g, order = 1, 1:3)
+#' neighborhood_size(g, order = 2, 1:3)
+#'
 #' ego(g, order = 0, 1:3)
 #' ego(g, order = 1, 1:3)
 #' ego(g, order = 2, 1:3)
+#'
 #' # neighborhood() is an alias of ego()
 #' neighborhood(g, order = 0, 1:3)
 #' neighborhood(g, order = 1, 1:3)
@@ -1193,6 +1201,8 @@ ego_size <- function(graph, order = 1, nodes = V(graph),
 #' # attributes are preserved
 #' V(g)$name <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
 #' make_ego_graph(g, order = 2, 1:3)
+#' # make_neighborhood_graph() is an alias of make_ego_graph()
+#' make_neighborhood_graph(g, order = 2, 1:3)
 #'
 #' # connecting to the neighborhood
 #' g <- make_ring(10)
@@ -1207,7 +1217,7 @@ ego <- function(graph, order = 1, nodes = V(graph),
     "in" = 2,
     "all" = 3
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
@@ -1228,29 +1238,30 @@ ego <- function(graph, order = 1, nodes = V(graph),
 #' @rdname ego
 neighborhood <- ego
 #' @rdname ego
-#' @family structural.properties
 #' @export
 make_ego_graph <- function(graph, order = 1, nodes = V(graph),
                            mode = c("all", "out", "in"), mindist = 0) {
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "out" = 1,
-    "in" = 2,
-    "all" = 3
+    "out" = 1L,
+    "in" = 2L,
+    "all" = 3L
   )
-  mindist <- as.integer(mindist)
+  mindist <- as.numeric(mindist)
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_neighborhood_graphs, graph,
     as_igraph_vs(graph, nodes) - 1, as.numeric(order),
-    as.numeric(mode), mindist
+    as.integer(mode), mindist
   )
   res
 }
 
-
+#' @export
+#' @rdname ego
+make_neighborhood_graph <- make_ego_graph
 
 #' K-core decomposition of graphs
 #'
@@ -1400,7 +1411,7 @@ feedback_arc_set <- feedback_arc_set_impl
 #'
 #' The current implementation works for undirected graphs only, directed graphs
 #' are treated as undirected graphs. Loop edges and multiple edges are ignored.
-#' If the graph is a forest (i.e. acyclic), then zero is returned.
+#' If the graph is a forest (i.e. acyclic), then `Inf` is returned.
 #'
 #' This implementation is based on Alon Itai and Michael Rodeh: Finding a
 #' minimum circuit in a graph *Proceedings of the ninth annual ACM
@@ -1440,6 +1451,9 @@ girth <- function(graph, circle = TRUE) {
 
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_girth, graph, as.logical(circle))
+  if (res$girth == 0) {
+    res$girth <- Inf
+  }
   if (igraph_opt("return.vs.es") && circle) {
     res$circle <- create_vs(graph, res$circle)
   }
@@ -1472,8 +1486,7 @@ girth <- function(graph, circle = TRUE) {
 #' See the examples for getting rid of multiple edges while keeping their
 #' original multiplicity as an edge attribute.
 #'
-#' @aliases has.multiple is.loop is.multiple count.multiple count_multiple
-#'   any_loop any_multiple which_loop
+#' @aliases has.multiple is.loop is.multiple count.multiple
 #' @param graph The input graph.
 #' @param eids The edges to which the query is restricted. By default this is
 #'   all edges in the graph.
@@ -1512,12 +1525,16 @@ girth <- function(graph, circle = TRUE) {
 #' E(g)$weight
 #'
 which_multiple <- is_multiple_impl
+#' @rdname which_multiple
 #' @export
 any_multiple <- has_multiple_impl
+#' @rdname which_multiple
 #' @export
 count_multiple <- count_multiple_impl
+#' @rdname which_multiple
 #' @export
 which_loop <- is_loop_impl
+#' @rdname which_multiple
 #' @export
 any_loop <- has_loop_impl
 
@@ -1528,15 +1545,20 @@ any_loop <- has_loop_impl
 #' root vertex and spread along every edge \dQuote{simultaneously}.
 #'
 #'
-#' The callback function must have the following arguments: \describe{
+#' The callback function must have the following arguments:
+#' \describe{
 #' \item{graph}{The input graph is passed to the callback function here.}
 #' \item{data}{A named numeric vector, with the following entries:
 #' \sQuote{vid}, the vertex that was just visited, \sQuote{pred}, its
 #' predecessor (zero if this is the first vertex), \sQuote{succ}, its successor
 #' (zero if this is the last vertex), \sQuote{rank}, the rank of the
 #' current vertex, \sQuote{dist}, its distance from the root of the search
-#' tree.} \item{extra}{The extra argument.} } The callback must return FALSE
-#' to continue the search or TRUE to terminate it. See examples below on how to
+#' tree.}
+#' \item{extra}{The extra argument.}
+#' }
+#'
+#' The callback must return `FALSE`
+#' to continue the search or `TRUE` to terminate it. See examples below on how to
 #' use the callback function.
 #'
 #' @aliases graph.bfs
@@ -1569,19 +1591,25 @@ any_loop <- has_loop_impl
 #' @param rho The environment in which the callback function is evaluated.
 #' @param neimode This argument is deprecated from igraph 1.3.0; use
 #'   `mode` instead.
-#' @return A named list with the following entries: \item{root}{Numeric scalar.
+#' @return A named list with the following entries:
+#'   \item{root}{Numeric scalar.
 #'   The root vertex that was used as the starting point of the search.}
 #'   \item{neimode}{Character scalar. The `mode` argument of the function
 #'   call. Note that for undirected graphs this is always \sQuote{all},
-#'   irrespectively of the supplied value.} \item{order}{Numeric vector. The
+#'   irrespectively of the supplied value.}
+#'   \item{order}{Numeric vector. The
 #'   vertex ids, in the order in which they were visited by the search.}
-#'   \item{rank}{Numeric vector. The rank for each vertex.} \item{father}{Numeric
+#'   \item{rank}{Numeric vector. The rank for each vertex, zero for unreachable vertices.}
+#'   \item{father}{Numeric
 #'   vector. The father of each vertex, i.e. the vertex it was discovered from.}
 #'   \item{pred}{Numeric vector. The previously visited vertex for each vertex,
-#'   or 0 if there was no such vertex.} \item{succ}{Numeric vector. The next
+#'   or 0 if there was no such vertex.}
+#'   \item{succ}{Numeric vector. The next
 #'   vertex that was visited after the current one, or 0 if there was no such
-#'   vertex.} \item{dist}{Numeric vector, for each vertex its distance from the
-#'   root of the search tree.}
+#'   vertex.}
+#'   \item{dist}{Numeric vector, for each vertex its distance from the
+#'   root of the search tree. Unreachable vertices have a negative distance
+#'   as of igraph 1.6.0, this used to be `NaN`.}
 #'
 #'   Note that `order`, `rank`, `father`, `pred`, `succ`
 #'   and `dist` might be `NULL` if their corresponding argument is
@@ -1617,12 +1645,22 @@ any_loop <- has_loop_impl
 #' }
 #' bfs(make_ring(10) %du% make_ring(10), root = 1, callback = f)
 #'
-bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
-                unreachable = TRUE, restricted = NULL,
-                order = TRUE, rank = FALSE, father = FALSE,
-                pred = FALSE, succ = FALSE, dist = FALSE,
-                callback = NULL, extra = NULL, rho = parent.frame(),
-                neimode) {
+bfs <- function(
+    graph,
+    root,
+    mode = c("out", "in", "all", "total"),
+    unreachable = TRUE,
+    restricted = NULL,
+    order = TRUE,
+    rank = FALSE,
+    father = FALSE,
+    pred = FALSE,
+    succ = FALSE,
+    dist = FALSE,
+    callback = NULL,
+    extra = NULL,
+    rho = parent.frame(),
+    neimode) {
   ensure_igraph(graph)
 
   if (!missing(neimode)) {
@@ -1684,6 +1722,14 @@ bfs <- function(graph, root, mode = c("out", "in", "all", "total"),
     if (pred) names(res$pred) <- V(graph)$name
     if (succ) names(res$succ) <- V(graph)$name
     if (dist) names(res$dist) <- V(graph)$name
+  }
+
+  if (rank) {
+    res$rank[is.nan(res$rank)] <- 0
+  }
+
+  if (dist) {
+    res$dist[is.nan(res$dist)] <- -3
   }
 
   res
@@ -1862,7 +1908,7 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
 #' The strongly connected components are implemented by two consecutive
 #' depth-first searches.
 #'
-#' @aliases no.clusters clusters is.connected cluster.distribution components
+#' @aliases no.clusters clusters is.connected cluster.distribution
 #' @param graph The graph to analyze.
 #' @param mode Character string, either \dQuote{weak} or \dQuote{strong}.  For
 #'   directed graphs \dQuote{weak} implies weakly, \dQuote{strong} strongly
@@ -1905,7 +1951,7 @@ components <- function(graph, mode = c("weak", "strong")) {
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
-  res <- .Call(R_igraph_clusters, graph, mode)
+  res <- .Call(R_igraph_connected_components, graph, mode)
   res$membership <- res$membership + 1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res$membership) <- V(graph)$name
@@ -2075,7 +2121,7 @@ laplacian_matrix <- function(graph, normalized = FALSE, weights = NULL,
 #' \eqn{n/2} steps where \eqn{n} is the number of vertices in the graph.
 #'
 #' @rdname matching
-#' @aliases is.matching is_matching is.maximal.matching is_max_matching
+#' @aliases is.matching is.maximal.matching
 #' maximum.bipartite.matching max_bipartite_match
 #' @param graph The input graph. It might be directed, but edge directions will
 #'   be ignored.
@@ -2146,7 +2192,6 @@ is_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 is_max_matching <- function(graph, matching, types = NULL) {
@@ -2163,7 +2208,6 @@ is_max_matching <- function(graph, matching, types = NULL) {
   res
 }
 
-#' @family structural.properties
 #' @export
 #' @rdname matching
 max_bipartite_match <- function(graph, types = NULL, weights = NULL,
@@ -2210,7 +2254,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #'
 #' Undirected graphs contain only mutual edges by definition.
 #'
-#' @aliases is.mutual which_mutual
+#' @aliases is.mutual
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their ids.
@@ -2242,15 +2286,15 @@ which_mutual <- is_mutual_impl
 #'
 #' The weighted version computes a weighted average of the neighbor degrees as
 #'
-#' `k_nn_u = 1/s_u sum_v w_uv k_v`,
+#' \deqn{k_{nn,u} = \frac{1}{s_u} \sum_v w_{uv} k_v,}{k_nn_u = 1/s_u sum_v w_uv k_v,}
 #'
-#' where `s_u = sum_v w_uv` is the sum of the incident edge weights
-#' of vertex `u`, i.e. its strength.
+#' where \eqn{s_u = \sum_v w_{uv}}{s_u = sum_v w_uv} is the sum of the incident
+#' edge weights of vertex `u`, i.e. its strength.
 #' The sum runs over the neighbors `v` of vertex `u`
-#' as indicated by `mode`. `w_uv` denotes the weighted adjacency matrix
-#' and `k_v` is the neighbors' degree, specified by `neighbor_degree_mode`.
+#' as indicated by `mode`. \eqn{w_{uv}}{w_uv} denotes the weighted adjacency matrix
+#' and \eqn{k_v}{k_v} is the neighbors' degree, specified by `neighbor_degree_mode`.
 #'
-#' @aliases knn graph.knn
+#' @aliases graph.knn
 #' @param graph The input graph. It may be directed.
 #' @param vids The vertices for which the calculation is performed. Normally it
 #'   includes all vertices. Note, that if not all vertices are given here, then

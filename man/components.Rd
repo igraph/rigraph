@@ -95,11 +95,6 @@ Connected components
 \code{\link{biconnected_components}()},
 \code{\link{decompose}()}
 
-Connected components
-\code{\link{articulation_points}()},
-\code{\link{biconnected_components}()},
-\code{\link{decompose}()}
-
 Other structural.properties: 
 \code{\link{bfs}()},
 \code{\link{connect}()},
@@ -111,6 +106,7 @@ Other structural.properties:
 \code{\link{edge_density}()},
 \code{\link{feedback_arc_set}()},
 \code{\link{girth}()},
+\code{\link{is_acyclic}()},
 \code{\link{is_dag}()},
 \code{\link{is_matching}()},
 \code{\link{knn}()},

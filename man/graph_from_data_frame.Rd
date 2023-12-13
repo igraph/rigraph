@@ -135,15 +135,19 @@ Other conversion:
 \code{\link{as.matrix.igraph}()},
 \code{\link{as_adj_list}()},
 \code{\link{as_adjacency_matrix}()},
+\code{\link{as_biadjacency_matrix}()},
 \code{\link{as_edgelist}()},
 \code{\link{as_graphnel}()},
-\code{\link{as_incidence_matrix}()},
 \code{\link{as_long_data_frame}()},
 \code{\link{graph_from_adj_list}()},
 \code{\link{graph_from_graphnel}()}
+
+Other biadjacency: 
+\code{\link{graph_from_biadjacency_matrix}()}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
+\concept{biadjacency}
 \concept{conversion}
 \keyword{graphs}

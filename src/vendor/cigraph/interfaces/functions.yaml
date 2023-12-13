@@ -913,6 +913,14 @@ igraph_avg_nearest_neighbor_degree:
         EDGEWEIGHTS weights=NULL
     DEPS: vids ON graph, weights ON graph, knn ON graph vids
 
+igraph_degree_correlation_vector:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT VECTOR knnk,
+        NEIMODE from_mode=OUT, NEIMODE to_mode=IN,
+        BOOLEAN directed_neighbors=True
+    DEPS: weights ON graph
+
 igraph_strength:
     PARAMS: |-
         GRAPH graph, OUT VERTEX_QTY res, VERTEX_SELECTOR vids=ALL,
@@ -989,6 +997,32 @@ igraph_assortativity:
 
 igraph_assortativity_degree:
     PARAMS: GRAPH graph, OUT REAL res, BOOLEAN directed=True
+
+igraph_joint_degree_matrix:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX jdm,
+        INTEGER max_out_degree=-1, INTEGER max_in_degree=-1
+    DEPS: weights ON graph
+
+igraph_joint_degree_distribution:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX p,
+        NEIMODE from_mode=OUT, NEIMODE to_mode=IN,
+        BOOLEAN directed_neighbors=True,
+        BOOLEAN normalized=True,
+        INTEGER max_from_degree=-1, INTEGER max_to_degree=-1
+    DEPS: weights ON graph
+
+igraph_joint_type_distribution:
+    PARAMS: |-
+        GRAPH graph, EDGEWEIGHTS weights=NULL,
+        OUT MATRIX p,
+        INDEX_VECTOR from_types, INDEX_VECTOR to_types=NULL,
+        BOOLEAN directed=True,
+        BOOLEAN normalized=True
+    DEPS: weights ON graph
 
 igraph_contract_vertices:
     PARAMS: |-
@@ -2018,33 +2052,17 @@ igraph_maxflow_value:
         OPTIONAL EDGE_CAPACITY capacity, OPTIONAL OUT MAXFLOW_STATS stats
     DEPS: source ON graph, target ON graph, capacity ON graph
 
-igraph_mincut_value:
-    PARAMS: GRAPH graph, OUT REAL res, OPTIONAL EDGE_CAPACITY capacity
-    DEPS:
-        capacity ON graph
-
-igraph_st_mincut:
-    PARAMS: |-
-        GRAPH graph, OUT REAL value, OUT EDGE_INDICES cut,
-        OUT VERTEX_INDICES partition1, OUT VERTEX_INDICES partition2,
-        VERTEX source, VERTEX target,
-        OPTIONAL EDGE_CAPACITY capacity
-    DEPS: |-
-        source ON graph, target ON graph, capacity ON graph,
-        partition1 ON graph, partition2 ON graph, cut ON graph
-
-igraph_st_mincut_value:
-    PARAMS: |-
-        GRAPH graph, OUT REAL res, VERTEX source, VERTEX target,
-        OPTIONAL EDGE_CAPACITY capacity
-    DEPS: source ON graph, target ON graph, capacity ON graph
-
 igraph_mincut:
     PARAMS: |-
         GRAPH graph, OUT REAL value, OUT VERTEX_INDICES partition1,
         OUT VERTEX_INDICES partition2, OUT EDGE_INDICES cut,
         OPTIONAL EDGE_CAPACITY capacity
     DEPS: capacity ON graph, partition1 ON graph, partition2 ON graph, cut ON graph
+
+igraph_mincut_value:
+    PARAMS: GRAPH graph, OUT REAL res, OPTIONAL EDGE_CAPACITY capacity
+    DEPS:
+        capacity ON graph
 
 igraph_residual_graph:
     PARAMS: |-
@@ -2067,6 +2085,12 @@ igraph_st_mincut:
     DEPS: |-
         capacity ON graph, source ON graph, target ON graph,
         partition1 ON graph, partition2 ON graph, cut ON graph
+
+igraph_st_mincut_value:
+    PARAMS: |-
+        GRAPH graph, OUT REAL res, VERTEX source, VERTEX target,
+        OPTIONAL EDGE_CAPACITY capacity
+    DEPS: source ON graph, target ON graph, capacity ON graph
 
 igraph_st_vertex_connectivity:
     PARAMS: |-
@@ -2234,7 +2258,7 @@ igraph_subisomorphic_vf2:
         vertex_color1 ON graph1, vertex_color2 ON graph2,
         edge_color1 ON graph1, edge_color2 ON graph2
 
-igraph_subisomorphic_function_vf2:
+igraph_get_subisomorphisms_vf2_callback:
     PARAMS: |-
         GRAPH graph1, GRAPH graph2,
         OPTIONAL VERTEX_COLOR vertex_color1, OPTIONAL VERTEX_COLOR vertex_color2,
@@ -2286,7 +2310,7 @@ igraph_isomorphic_bliss:
         OPTIONAL OUT BLISSINFO info1, OPTIONAL OUT BLISSINFO info2
     DEPS: colors1 ON graph1, colors2 ON graph2
 
-igraph_automorphisms:
+igraph_count_automorphisms:
     PARAMS: |-
         GRAPH graph, OPTIONAL VERTEX_COLOR colors, BLISSSH sh="fm", OUT BLISSINFO info
     DEPS: colors ON graph
@@ -2510,12 +2534,6 @@ igraph_vertex_coloring_greedy:
 igraph_deterministic_optimal_imitation:
     PARAMS: |-
         GRAPH graph, VERTEX vid, OPTIMALITY optimality=MAXIMUM, VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
-    DEPS: vid ON graph, quantities ON graph, strategies ON graph
-
-igraph_stochastic_imitation:
-    PARAMS: |-
-        GRAPH graph, VERTEX vid, IMITATE_ALGORITHM algo, VERTEX_QTY quantities,
         INOUT VECTOR_INT strategies, NEIMODE mode=OUT
     DEPS: vid ON graph, quantities ON graph, strategies ON graph
 

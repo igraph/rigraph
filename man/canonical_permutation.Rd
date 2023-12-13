@@ -7,7 +7,7 @@
 \usage{
 canonical_permutation(
   graph,
-  colors,
+  colors = NULL,
   sh = c("fm", "f", "fs", "fl", "flm", "fsm")
 )
 }

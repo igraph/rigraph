@@ -44,9 +44,8 @@
 #' `clique_size_counts()` returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
-#' @aliases cliques largest_cliques maximal.cliques maximal.cliques.count
-#' clique.number clique_num largest.cliques count_max_cliques max_cliques
-#' clique_size_counts
+#' @aliases maximal.cliques maximal.cliques.count clique.number largest.cliques
+#' @inheritParams weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min Numeric constant, lower limit on the size of the cliques to find.
@@ -70,7 +69,6 @@
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [ivs()]
 #' @references For maximal cliques the following algorithm is implemented:
 #' David Eppstein, Maarten Loffler, Darren Strash: Listing All Maximal Cliques
 #' in Sparse Graphs in Near-optimal Time.  <https://arxiv.org/abs/1006.5440>
@@ -90,7 +88,7 @@
 #' max_cliques(g)
 cliques <- cliques_impl
 
-#' @family cliques
+#' @rdname cliques
 #' @export
 largest_cliques <- largest_cliques_impl
 
@@ -105,7 +103,6 @@ largest_cliques <- largest_cliques_impl
 #'   it exists, then it will be overwritten.) Each clique will be a separate line
 #'   in the file, given with the numeric ids of its vertices, separated by
 #'   whitespace.
-#' @family cliques
 #' @export
 max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) {
   ensure_igraph(graph)
@@ -118,7 +115,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   }
 
   if (!is.null(subset)) {
-    subset <- as.integer(as_igraph_vs(graph, subset) - 1)
+    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
   }
 
   if (!is.null(file)) {
@@ -157,7 +154,7 @@ max_cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NUL
   }
 }
 
-#' @family cliques
+#' @rdname cliques
 #' @export
 count_max_cliques <- function(graph, min = NULL, max = NULL,
                               subset = NULL) {
@@ -170,11 +167,11 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
   if (is.null(max)) {
     max <- 0
   }
-  min <- as.integer(min)
-  max <- as.integer(max)
+  min <- as.numeric(min)
+  max <- as.numeric(max)
 
   if (!is.null(subset)) {
-    subset <- as.integer(as_igraph_vs(graph, subset) - 1)
+    subset <- as.numeric(as_igraph_vs(graph, subset) - 1)
   }
 
   on.exit(.Call(R_igraph_finalizer))
@@ -184,7 +181,7 @@ count_max_cliques <- function(graph, min = NULL, max = NULL,
   res
 }
 
-#' @family cliques
+#' @rdname cliques
 #' @export
 clique_num <- clique_number_impl
 
@@ -205,8 +202,6 @@ clique_num <- clique_number_impl
 #'
 #' `weighted_clique_num()` calculates the weight of the largest weighted clique(s).
 #'
-#' @aliases weighted_cliques largest_weighted_cliques max_weighted_cliques
-#' count_max_weighted_cliques weighted_clique_num
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
 #' @param min.weight Numeric constant, lower limit on the weight of the cliques to find.
@@ -228,7 +223,6 @@ clique_num <- clique_number_impl
 #'
 #' @author Tamas Nepusz \email{ntamas@@gmail.com} and Gabor Csardi
 #' \email{csardi.gabor@@gmail.com}
-#' @seealso [ivs()]
 #' @family cliques
 #' @export
 #' @keywords graphs
@@ -243,8 +237,10 @@ clique_num <- clique_number_impl
 #' weighted_clique_num(g)
 weighted_cliques <- weighted_cliques_impl
 #' @export
+#' @rdname cliques
 largest_weighted_cliques <- largest_weighted_cliques_impl
 #' @export
+#' @rdname cliques
 weighted_clique_num <- weighted_clique_number_impl
 
 #' Independent vertex sets
@@ -266,15 +262,14 @@ weighted_clique_num <- weighted_clique_number_impl
 #' extended to a larger independent vertex set. The largest independent vertex
 #' sets are maximal, but the opposite is not always true.
 #'
-#' `independece.number` calculate the size of the largest independent
+#' `ivs_size()` calculate the size of the largest independent
 #' vertex set(s).
 #'
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
 #'
 #' @aliases independent.vertex.sets largest.independent.vertex.sets
-#' maximal.independent.vertex.sets independence.number ivs_size ivs
-#' largest_ivs maximal_ivs
+#' maximal.independent.vertex.sets independence.number
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
@@ -291,7 +286,6 @@ weighted_clique_num <- weighted_clique_number_impl
 #' Graph Library by Keith Briggs (<http://keithbriggs.info/>) and Gabor
 #' Csardi \email{csardi.gabor@@gmail.com} wrote the R interface and this manual
 #' page.
-#' @seealso [cliques()]
 #' @references S. Tsukiyama, M. Ide, H. Ariyoshi and I. Shirawaka. A new
 #' algorithm for generating all the maximal independent sets. *SIAM J
 #' Computing*, 6:505--517, 1977.
@@ -337,7 +331,7 @@ ivs <- function(graph, min = NULL, max = NULL) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 largest_ivs <- function(graph) {
   ensure_igraph(graph)
@@ -353,7 +347,7 @@ largest_ivs <- function(graph) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 maximal_ivs <- function(graph) {
   ensure_igraph(graph)
@@ -369,7 +363,7 @@ maximal_ivs <- function(graph) {
   res
 }
 
-#' @family cliques
+#' @rdname ivs
 #' @export
 ivs_size <- function(graph) {
   ensure_igraph(graph)
@@ -378,12 +372,12 @@ ivs_size <- function(graph) {
   .Call(R_igraph_independence_number, graph)
 }
 
-#' @family cliques
+#' @rdname cliques
 #' @export
-clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE, ...) {
+clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
   if (maximal) {
-    maximal_cliques_hist_impl(graph, min, max, ...)
+    maximal_cliques_hist_impl(graph, min, max)
   } else {
-    clique_size_hist_impl(graph, min, max, ...)
+    clique_size_hist_impl(graph, min, max)
   }
 }

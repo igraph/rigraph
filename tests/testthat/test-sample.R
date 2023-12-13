@@ -1,10 +1,10 @@
-test_that("Sampling from a Dirichlet works", {
+test_that("Sampling from a Dirichlet distribution works", {
   set.seed(42)
-  sd <- sample_dirichlet(100, alpha = c(1, 1, 1))
-  expect_that(dim(sd), equals(c(3, 100)))
-  expect_that(colSums(sd), equals(rep(1, 100)))
-  expect_that(mean(sd), equals(1 / 3))
-  expect_that(sd(sd), equals(0.248901845755354))
+  samp <- sample_dirichlet(10000, alpha = c(1, 1, 1))
+  expect_that(dim(samp), equals(c(3, 10000)))
+  expect_that(colSums(samp), equals(rep(1, 10000)))
+  expect_equal(rowMeans(samp), rep(1 / 3, 3), tolerance = 1e-2)
+  expect_equal(apply(samp, 1, sd), rep(1 / (3 * sqrt(2)), 3), tolerance = 1e-2)
 
   ## Corner cases
   sd1 <- sample_dirichlet(1, alpha = c(2, 2, 2))

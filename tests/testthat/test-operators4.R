@@ -65,7 +65,7 @@ test_that("union of unnamed graphs works", {
   E(g1)$b1 <- letters[1:10]
   E(g2)$b2 <- letters[11:23]
 
-  g <- graph.union(g1, g2)
+  g <- union.igraph(g1, g2)
 
   expect_that(
     sort(graph_attr_names(g)),
@@ -109,7 +109,7 @@ test_that("union of named graphs works", {
   E(g1)$b1 <- letters[1:10]
   E(g2)$b2 <- letters[11:23]
 
-  g <- graph.union(g1, g2)
+  g <- union.igraph(g1, g2)
 
   expect_that(
     sort(graph_attr_names(g)),
@@ -390,7 +390,7 @@ test_that("union of non-named graphs keeps attributes properly", {
   E(g)$weight <- sample(ecount(g))
   E(g2)$weight <- sample(ecount(g2))
 
-  gu <- graph.union(g, g2)
+  gu <- union.igraph(g, g2)
 
   rn <- function(D) {
     rownames(D) <- paste(D[, 1], D[, 2], sep = "-")
