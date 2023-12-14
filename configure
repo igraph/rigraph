@@ -12,7 +12,7 @@ else
 fi
 
 if [[ -n "$xml2_include_dir" ]]; then
-    PKG_CFLAGS="-I$xml2_include_dir"
+    PKG_CFLAGS="-I\"$xml2_include_dir\""
     echo "libxml2 include directory: $xml2_include_dir"
 else
     echo "Error: libxml2 include directory not found"

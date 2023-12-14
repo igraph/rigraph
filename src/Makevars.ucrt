@@ -4,12 +4,12 @@ LIB_XML ?= $(R_TOOLS_SOFT)
 GLPK_HOME ?= $(R_TOOLS_SOFT)
 LIB_GMP ?= $(R_TOOLS_SOFT)
 
-PKG_CPPFLAGS = -I${LIB_XML}/include/libxml2 -I${LIB_XML}/include -DLIBXML_STATIC -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
+PKG_CPPFLAGS = -I"${LIB_XML}/include/libxml2" -I"${LIB_XML}/include" -DLIBXML_STATIC -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
         -DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
         -DPRPACK_IGRAPH_SUPPORT \
         -D_GNU_SOURCE=1
 
-PKG_LIBS = -L${LIB_XML}/lib -lxml2 -liconv -lz -lws2_32 -lstdc++ \
+PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -liconv -lz -lws2_32 -lstdc++ \
   -lglpk -lgmp $(BLAS_LIBS) $(LAPACK_LIBS) -llzma
 
 OBJECTS=${SOURCES}
