@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9005
+
+## Chore
+
+  - Fix Stimulus definitions (#997).
+
+  - Remove duplicate vendored libraries (#996).
+
+  - Remove igraph/C 0.9 (#995).
+
+
 # igraph 1.6.0.9004
 
 ## Refactoring
