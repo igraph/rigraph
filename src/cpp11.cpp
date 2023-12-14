@@ -42,7 +42,6 @@ extern SEXP R_igraph_asymmetric_preference_game(void *, void *, void *, void *, 
 extern SEXP R_igraph_atlas(void *);
 extern SEXP R_igraph_authority_score(void *, void *, void *, void *);
 extern SEXP R_igraph_automorphism_group(void *, void *, void *);
-extern SEXP R_igraph_automorphisms(void *, void *, void *);
 extern SEXP R_igraph_average_local_efficiency(void *, void *, void *, void *);
 extern SEXP R_igraph_average_path_length_dijkstra(void *, void *, void *, void *);
 extern SEXP R_igraph_avg_nearest_neighbor_degree(void *, void *, void *, void *, void *);
@@ -108,6 +107,7 @@ extern SEXP R_igraph_copy_to(void *);
 extern SEXP R_igraph_coreness(void *, void *);
 extern SEXP R_igraph_correlated_game(void *, void *, void *, void *);
 extern SEXP R_igraph_correlated_pair_game(void *, void *, void *, void *, void *);
+extern SEXP R_igraph_count_automorphisms(void *, void *, void *);
 extern SEXP R_igraph_count_isomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_count_multiple(void *, void *);
 extern SEXP R_igraph_count_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
@@ -520,7 +520,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_atlas",                                      (DL_FUNC) &R_igraph_atlas,                                       1},
     {"R_igraph_authority_score",                            (DL_FUNC) &R_igraph_authority_score,                             4},
     {"R_igraph_automorphism_group",                         (DL_FUNC) &R_igraph_automorphism_group,                          3},
-    {"R_igraph_automorphisms",                              (DL_FUNC) &R_igraph_automorphisms,                               3},
     {"R_igraph_average_local_efficiency",                   (DL_FUNC) &R_igraph_average_local_efficiency,                    4},
     {"R_igraph_average_path_length_dijkstra",               (DL_FUNC) &R_igraph_average_path_length_dijkstra,                4},
     {"R_igraph_avg_nearest_neighbor_degree",                (DL_FUNC) &R_igraph_avg_nearest_neighbor_degree,                 5},
@@ -586,6 +585,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_coreness",                                   (DL_FUNC) &R_igraph_coreness,                                    2},
     {"R_igraph_correlated_game",                            (DL_FUNC) &R_igraph_correlated_game,                             4},
     {"R_igraph_correlated_pair_game",                       (DL_FUNC) &R_igraph_correlated_pair_game,                        5},
+    {"R_igraph_count_automorphisms",                        (DL_FUNC) &R_igraph_count_automorphisms,                         3},
     {"R_igraph_count_isomorphisms_vf2",                     (DL_FUNC) &R_igraph_count_isomorphisms_vf2,                      6},
     {"R_igraph_count_multiple",                             (DL_FUNC) &R_igraph_count_multiple,                              2},
     {"R_igraph_count_subisomorphisms_vf2",                  (DL_FUNC) &R_igraph_count_subisomorphisms_vf2,                   6},

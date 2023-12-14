@@ -3520,7 +3520,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
   res
 }
 
-automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
+count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "flm", "fsm")) {
   # Argument checks
   ensure_igraph(graph)
   if (missing(colors)) {
@@ -3537,7 +3537,7 @@ automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "fl", "
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_automorphisms, graph, colors, sh)
+  res <- .Call(R_igraph_count_automorphisms, graph, colors, sh)
 
   res
 }

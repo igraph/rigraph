@@ -887,7 +887,7 @@ graph.isomorphic <- isomorphic_impl
 #' count_automorphisms(g, colors = c(1, 2, 1, 2))
 #' @family graph automorphism
 #' @export
-count_automorphisms <- automorphisms_impl
+count_automorphisms <- count_automorphisms_impl
 
 
 #' Generating set of the automorphism group of a graph
