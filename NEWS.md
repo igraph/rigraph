@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9006
+
+## Bug fixes
+
+  - Fix compilation on Windows with spaces in the Rtools path (#1000).
+
+## Chore
+
+  - Avoid deprecated `R_igraph_automorphisms()` (#999).
+
+
 # igraph 1.6.0.9005
 
 ## Chore
