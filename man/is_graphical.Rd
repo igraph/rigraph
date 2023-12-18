@@ -2,7 +2,6 @@
 % Please edit documentation in R/degseq.R
 \name{is_graphical}
 \alias{is_graphical}
-\alias{is.graphical.degree.sequence}
 \title{Is a degree sequence graphical?}
 \usage{
 is_graphical(

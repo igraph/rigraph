@@ -2,7 +2,6 @@
 % Please edit documentation in R/degseq.R
 \name{is_degseq}
 \alias{is_degseq}
-\alias{is.degree.sequence}
 \title{Check if a degree sequence is valid for a multi-graph}
 \usage{
 is_degseq(out.deg, in.deg = NULL)
