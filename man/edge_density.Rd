@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{edge_density}
 \alias{edge_density}
-\alias{graph.density}
 \title{Graph density}
 \usage{
 edge_density(graph, loops = FALSE)

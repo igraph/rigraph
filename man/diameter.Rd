@@ -2,8 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{diameter}
 \alias{diameter}
-\alias{get.diameter}
-\alias{farthest.nodes}
 \alias{get_diameter}
 \alias{farthest_vertices}
 \title{Diameter of a graph}
