@@ -29,6 +29,14 @@ edge weight means a stronger connection for this function.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
+\item{mode}{Character scalar, specifies how to direct the edges in directed
+graphs. If it is \sQuote{out}, then directed edges point from bottom
+vertices to top vertices. If it is \sQuote{in}, edges point from top
+vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
+mutual edges. If this argument is \sQuote{all}, then each edge direction is
+considered independently and mutual edges might be generated. This argument
+is ignored for undirected graphs.}
+
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an
 entry for each vertex. Non-negative values denote different labels, negative

@@ -1948,6 +1948,7 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
 #' @inheritParams rlang::args_dots_empty
+#' @inheritParams sample_bipartite
 #' @param initial The initial state. If `NULL`, every vertex will have a
 #'   different label at the beginning. Otherwise it must be a vector with an
 #'   entry for each vertex. Non-negative values denote different labels, negative

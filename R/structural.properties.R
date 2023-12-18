@@ -2686,6 +2686,7 @@ max_bipartite_match <- function(graph, types = NULL, weights = NULL,
 #' @param graph The input graph.
 #' @param eids Edge sequence, the edges that will be probed. By default is
 #'   includes all edges in the order of their ids.
+#' @inheritParams strength
 #' @return A logical vector of the same length as the number of edges supplied.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [reciprocity()], [dyad_census()] if you just
