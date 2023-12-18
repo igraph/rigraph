@@ -1,3 +1,168 @@
+
+#' Find subgraph centrality scores of network positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `subgraph.centrality()` was renamed to `subgraph_centrality()` to create a more
+#' consistent API.
+#' @inheritParams subgraph_centrality
+#' @keywords internal
+#' @export
+subgraph.centrality <- function(graph, diag = FALSE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "subgraph.centrality()", "subgraph_centrality()")
+  subgraph_centrality(graph = graph, diag = diag)
+} # nocov end
+
+#' The Page Rank algorithm
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `page.rank()` was renamed to `page_rank()` to create a more
+#' consistent API.
+#' @inheritParams page_rank
+#' @keywords internal
+#' @export
+page.rank <- function(graph, algo = c("prpack", "arpack"), vids = V(graph), directed = TRUE, damping = 0.85, personalized = NULL, weights = NULL, options = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "page.rank()", "page_rank()")
+  page_rank(graph = graph, algo = algo, vids = vids, directed = directed, damping = damping, personalized = personalized, weights = weights, options = options)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `hub.score()` was renamed to `hub_score()` to create a more
+#' consistent API.
+#' @inheritParams hub_score
+#' @keywords internal
+#' @export
+hub.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "hub.score()", "hub_score()")
+  hub_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Strength or weighted vertex degree
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.strength()` was renamed to `strength()` to create a more
+#' consistent API.
+#' @inheritParams strength
+#' @keywords internal
+#' @export
+graph.strength <- function(graph, vids = V(graph), mode = c("all", "out", "in", "total"), loops = TRUE, weights = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.strength()", "strength()")
+  strength(graph = graph, vids = vids, mode = mode, loops = loops, weights = weights)
+} # nocov end
+
+#' Eigenvalues and eigenvectors of the adjacency matrix of a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.eigen()` was renamed to `spectrum()` to create a more
+#' consistent API.
+#' @inheritParams spectrum
+#' @keywords internal
+#' @export
+graph.eigen <- function(graph, algorithm = c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which = list(), options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.eigen()", "spectrum()")
+  spectrum(graph = graph, algorithm = algorithm, which = which, options = options)
+} # nocov end
+
+#' Graph diversity
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.diversity()` was renamed to `diversity()` to create a more
+#' consistent API.
+#' @inheritParams diversity
+#' @keywords internal
+#' @export
+graph.diversity <- function(graph, weights = NULL, vids = V(graph)) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.diversity()", "diversity()")
+  diversity(graph = graph, weights = weights, vids = vids)
+} # nocov end
+
+#' Find Eigenvector Centrality Scores of Network Positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `evcent()` was renamed to `eigen_centrality()` to create a more
+#' consistent API.
+#' @inheritParams eigen_centrality
+#' @keywords internal
+#' @export
+evcent <- function(graph, directed = FALSE, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "evcent()", "eigen_centrality()")
+  eigen_centrality(graph = graph, directed = directed, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Vertex and edge betweenness centrality
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `edge.betweenness()` was renamed to `edge_betweenness()` to create a more
+#' consistent API.
+#' @inheritParams edge_betweenness
+#' @keywords internal
+#' @export
+edge.betweenness <- function(graph, e = E(graph), directed = TRUE, weights = NULL, cutoff = -1) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "edge.betweenness()", "edge_betweenness()")
+  edge_betweenness(graph = graph, e = e, directed = directed, weights = weights, cutoff = cutoff)
+} # nocov end
+
+#' Find Bonacich Power Centrality Scores of Network Positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `bonpow()` was renamed to `power_centrality()` to create a more
+#' consistent API.
+#' @inheritParams power_centrality
+#' @keywords internal
+#' @export
+bonpow <- function(graph, nodes = V(graph), loops = FALSE, exponent = 1, rescale = FALSE, tol = 1e-7, sparse = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "bonpow()", "power_centrality()")
+  power_centrality(graph = graph, nodes = nodes, loops = loops, exponent = exponent, rescale = rescale, tol = tol, sparse = sparse)
+} # nocov end
+
+#' Kleinberg's hub and authority centrality scores.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `authority.score()` was renamed to `authority_score()` to create a more
+#' consistent API.
+#' @inheritParams authority_score
+#' @keywords internal
+#' @export
+authority.score <- function(graph, scale = TRUE, weights = NULL, options = arpack_defaults()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "authority.score()", "authority_score()")
+  authority_score(graph = graph, scale = scale, weights = weights, options = options)
+} # nocov end
+
+#' Find Bonacich alpha centrality scores of network positions
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `alpha.centrality()` was renamed to `alpha_centrality()` to create a more
+#' consistent API.
+#' @inheritParams alpha_centrality
+#' @keywords internal
+#' @export
+alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, exo = 1, weights = NULL, tol = 1e-7, sparse = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "alpha.centrality()", "alpha_centrality()")
+  alpha_centrality(graph = graph, nodes = nodes, alpha = alpha, loops = loops, exo = exo, weights = weights, tol = tol, sparse = sparse)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -74,8 +239,8 @@ betweenness.estimate <- estimate_betweenness
 #' For calculating the betweenness a similar algorithm to the one proposed by
 #' Brandes (see References) is used.
 #'
-#' @aliases edge.betweenness betweenness.estimate
-#' edge.betweenness.estimate edge_betweenness
+#' @aliases betweenness.estimate
+#' @aliases edge.betweenness.estimate
 #' @param graph The graph to analyze.
 #' @param v The vertices for which the vertex betweenness will be calculated.
 #' @param directed Logical, whether directed paths should be considered while
@@ -432,7 +597,7 @@ arpack_defaults <- function() {
 #' additional details.
 #'
 #' @aliases arpack arpack-options arpack.unpack.complex
-#' arpack_defaults
+#' @aliases arpack_defaults
 #' @param func The function to perform the matrix-vector multiplication. ARPACK
 #'   requires to perform these by the user. The function gets the vector \eqn{x}
 #'   as the first argument, and it should return \eqn{Ax}, where \eqn{A} is the
@@ -607,7 +772,6 @@ arpack.unpack.complex <- function(vectors, values, nev) {
 #' eigenvalues and eigenvectors of the adjacency matrix of the graph. This
 #' effectively means that the measure can only be calculated for small graphs.
 #'
-#' @aliases subgraph.centrality
 #' @param graph The input graph, it should be undirected, but the
 #'   implementation does not check this currently.
 #' @param diag Boolean scalar, whether to include the diagonal of the adjacency
@@ -667,7 +831,7 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' Note that ARPACK might be unstable for graphs with multiple components, e.g.
 #' graphs with isolate vertices.
 #'
-#' @aliases graph.eigen spectrum igraph.eigen.default
+#' @aliases spectrum igraph.eigen.default
 #' @param graph The input graph, can be directed or undirected.
 #' @param algorithm The algorithm to use. Currently only `arpack` is
 #'   implemented, which uses the ARPACK solver. See also [arpack()].
@@ -772,7 +936,6 @@ eigen_defaults <- function() {
 #' From igraph version 0.5 this function uses ARPACK for the underlying
 #' computation, see [arpack()] for more about ARPACK in igraph.
 #'
-#' @aliases evcent
 #' @param graph Graph to be analyzed.
 #' @param directed Logical scalar, whether to consider direction of the edges
 #'   in directed graphs. It is ignored for undirected graphs.
@@ -838,7 +1001,6 @@ eigen_centrality <- function(graph,
 #' Summing up the edge weights of the adjacent edges for each vertex.
 #'
 #'
-#' @aliases graph.strength
 #' @param graph The input graph.
 #' @param vids The vertices for which the strength will be calculated.
 #' @param mode Character string, \dQuote{out} for out-degree, \dQuote{in} for
@@ -890,7 +1052,6 @@ strength <- strength_impl
 #'
 #' For vertices with degree less than two the function returns `NaN`.
 #'
-#' @aliases graph.diversity
 #' @param graph The input graph. Edge directions are ignored.
 #' @param weights `NULL`, or the vector of edge weights to use for the
 #'   computation. If `NULL`, then the \sQuote{weight} attibute is used. Note
@@ -930,7 +1091,6 @@ diversity <- diversity_impl
 #' For undirected matrices the adjacency matrix is symmetric and the hub
 #' scores are the same as authority scores.
 #'
-#' @aliases hub.score
 #' @param graph The input graph.
 #' @param scale Logical scalar, whether to scale the result to have a maximum
 #'   score of one. If no scaling is used then the result vector has unit length
@@ -988,7 +1148,6 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
 }
 
 #' @rdname hub_score
-#' @aliases authority.score
 #' @param options A named list, to override some ARPACK options. See
 #'   [arpack()] for details.
 #' @export
@@ -1030,7 +1189,6 @@ authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defa
 #' PageRank for only some of the vertices does not result in any performance
 #' increase at all.
 #'
-#' @aliases page.rank
 #' @param graph The graph object.
 #' @param algo Character scalar, which implementation to use to carry out the
 #'   calculation. The default is `"prpack"`, which uses the PRPACK library
@@ -1240,7 +1398,6 @@ bonpow.sparse <- function(graph, nodes = V(graph), loops = FALSE,
 #' theory motivates use of this measure, you should be very careful to choose a
 #' decay parameter on a non-ad hoc basis.
 #'
-#' @aliases bonpow
 #' @param graph the input graph.
 #' @param nodes vertex sequence indicating which vertices are to be included in
 #'   the calculation.  By default, all vertices are included.
@@ -1420,7 +1577,6 @@ alpha.centrality.sparse <- function(graph, nodes = V(graph), alpha = 1,
 #' vertices and \eqn{\alpha}{alpha} is the relative importance of the
 #' endogenous versus exogenous factors.
 #'
-#' @aliases alpha.centrality
 #' @param graph The input graph, can be directed or undirected. In undirected
 #'   graphs, edges are treated as if they were reciprocal directed ones.
 #' @param nodes Vertex sequence, the vertices for which the alpha centrality
@@ -1487,25 +1643,3 @@ alpha_centrality <- function(graph, nodes = V(graph), alpha = 1,
   }
   res
 }
-#' @export alpha.centrality
-deprecated("alpha.centrality", alpha_centrality)
-#' @export authority.score
-deprecated("authority.score", authority_score)
-#' @export bonpow
-deprecated("bonpow", power_centrality)
-#' @export edge.betweenness
-deprecated("edge.betweenness", edge_betweenness)
-#' @export evcent
-deprecated("evcent", eigen_centrality)
-#' @export graph.diversity
-deprecated("graph.diversity", diversity)
-#' @export graph.eigen
-deprecated("graph.eigen", spectrum)
-#' @export graph.strength
-deprecated("graph.strength", strength)
-#' @export hub.score
-deprecated("hub.score", hub_score)
-#' @export page.rank
-deprecated("page.rank", page_rank)
-#' @export subgraph.centrality
-deprecated("subgraph.centrality", subgraph_centrality)
