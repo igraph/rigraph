@@ -50,7 +50,8 @@ tibblify_call <- function(deprecated_call) {
   tibble::tibble(old = gsub('"', '', old), new = new)
 }
 
-deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
+deprecated_df <- purrr::map(deprecated_calls, tibblify_call)
+deprecated_df <- do.call(rbind, deprecated_df)
 
 deprecated_df[["new"]] <-
   purrr::map_chr(
