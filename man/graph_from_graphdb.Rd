@@ -2,7 +2,6 @@
 % Please edit documentation in R/foreign.R
 \name{graph_from_graphdb}
 \alias{graph_from_graphdb}
-\alias{graph.graphdb}
 \title{Load a graph from the graph database for testing graph isomorphism.}
 \usage{
 graph_from_graphdb(
