@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{graph_from_literal}
 \alias{graph_from_literal}
-\alias{graph.formula}
 \alias{from_literal}
 \title{Creating (small) graphs via a simple interface}
 \usage{
