@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{min_separators}
 \alias{min_separators}
-\alias{minimum.size.separators}
 \title{Minimum size vertex separators}
 \usage{
 min_separators(graph)

@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{st_cuts}
 \alias{st_cuts}
-\alias{stCuts}
 \title{List all (s,t)-cuts of a graph}
 \usage{
 st_cuts(graph, source, target)
