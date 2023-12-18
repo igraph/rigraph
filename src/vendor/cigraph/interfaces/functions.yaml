@@ -100,13 +100,13 @@ igraph_create:
 
 igraph_adjacency:
     PARAMS: |-
-        OUT GRAPH graph, MATRIX adjmatrix, ADJACENCY_MODE mode=DIRECTED, LOOPS loops=ONCE
+        OUT GRAPH graph, MATRIX adjmatrix, ADJACENCY_MODE mode="DIRECTED", LOOPS loops="ONCE"
 
 igraph_sparse_adjacency:
     # adjmatrix is declared as INOUT because it might be modified during the
     # construction to eliminate duplicate elements from the representation
     PARAMS: |-
-        OUT GRAPH graph, INOUT SPARSEMAT adjmatrix, ADJACENCY_MODE mode=DIRECTED, LOOPS loops=ONCE
+        OUT GRAPH graph, INOUT SPARSEMAT adjmatrix, ADJACENCY_MODE mode="DIRECTED", LOOPS loops="ONCE"
 
 igraph_sparse_weighted_adjacency:
     # adjmatrix is declared as INOUT because it might be modified during the
@@ -121,10 +121,10 @@ igraph_weighted_adjacency:
         OUT EDGEWEIGHTS weights, LOOPS loops=ONCE
 
 igraph_star:
-    PARAMS: OUT GRAPH graph, INTEGER n, STAR_MODE mode=OUT, INTEGER center=0
+    PARAMS: OUT GRAPH graph, INTEGER n, STAR_MODE mode="OUT", INTEGER center=0
 
 igraph_wheel:
-    PARAMS: OUT GRAPH graph, INTEGER n, WHEEL_MODE mode=OUT, INTEGER center=0
+    PARAMS: OUT GRAPH graph, INTEGER n, WHEEL_MODE mode="OUT", INTEGER center=0
 
 igraph_square_lattice:
     PARAMS: |-
@@ -141,13 +141,13 @@ igraph_ring:
         BOOLEAN circular=True
 
 igraph_kary_tree:
-    PARAMS: OUT GRAPH graph, INTEGER n, INTEGER children=2, TREE_MODE type=OUT
+    PARAMS: OUT GRAPH graph, INTEGER n, INTEGER children=2, TREE_MODE type="OUT"
 
 igraph_symmetric_tree:
-    PARAMS: OUT GRAPH graph, VECTOR_INT branches, TREE_MODE type=OUT
+    PARAMS: OUT GRAPH graph, VECTOR_INT branches, TREE_MODE type="OUT"
 
 igraph_regular_tree:
-    PARAMS: OUT GRAPH graph, INTEGER h, INTEGER k=3, TREE_MODE type=UNDIRECTED
+    PARAMS: OUT GRAPH graph, INTEGER h, INTEGER k=3, TREE_MODE type="UNDIRECTED"
 
 igraph_full:
     PARAMS: OUT GRAPH graph, INTEGER n, BOOLEAN directed=False, BOOLEAN loops=False
@@ -565,7 +565,7 @@ igraph_distances_floyd_warshall:
 igraph_voronoi:
     PARAMS: |-
         GRAPH graph, OUT VECTOR_INT membership, OUT VECTOR distances,
-        VERTEX_INDICES generators, EDGEWEIGHTS weights=NULL, NEIMODE mode=OUT, VORONOI_TIEBREAKER tiebreaker=RANDOM
+        VERTEX_INDICES generators, EDGEWEIGHTS weights=NULL, NEIMODE mode="OUT", VORONOI_TIEBREAKER tiebreaker=RANDOM
     DEPS: weights ON graph, generators ON graph
 
 igraph_get_all_simple_paths:
@@ -1222,14 +1222,14 @@ igraph_bipartite_game:
 
 igraph_get_laplacian:
     PARAMS: |-
-        GRAPH graph, OUT MATRIX res, NEIMODE mode=OUT,
-        LAPLACIAN_NORMALIZATION normalization=UNNORMALIZED, EDGEWEIGHTS weights=NULL
+        GRAPH graph, OUT MATRIX res, NEIMODE mode="OUT",
+        LAPLACIAN_NORMALIZATION normalization="UNNORMALIZED", EDGEWEIGHTS weights=NULL
     DEPS: weights ON graph
 
 igraph_get_laplacian_sparse:
     PARAMS: |-
-        GRAPH graph, OUT SPARSEMAT sparseres, NEIMODE mode=OUT,
-        LAPLACIAN_NORMALIZATION normalization=UNNORMALIZED, EDGEWEIGHTS weights=NULL
+        GRAPH graph, OUT SPARSEMAT sparseres, NEIMODE mode="OUT",
+        LAPLACIAN_NORMALIZATION normalization="UNNORMALIZED", EDGEWEIGHTS weights=NULL
     DEPS: weights ON graph
 
 #######################################
@@ -1802,8 +1802,8 @@ igraph_get_adjacency:
 
 igraph_get_adjacency_sparse:
     PARAMS: |-
-        GRAPH graph, OUT SPARSEMAT sparsemat, GETADJACENCY type=BOTH,
-        EDGEWEIGHTS weights=NULL, LOOPS loops=ONCE
+        GRAPH graph, OUT SPARSEMAT sparsemat, GETADJACENCY type="BOTH",
+        EDGEWEIGHTS weights=NULL, LOOPS loops="ONCE"
     DEPS:
         weights ON graph
 
@@ -2499,7 +2499,7 @@ igraph_to_prufer:
     PARAMS: GRAPH graph, OUT INDEX_VECTOR prufer
 
 igraph_tree_from_parent_vector:
-    PARAMS: OUT GRAPH graph, INDEX_VECTOR parents, TREE_MODE type=OUT
+    PARAMS: OUT GRAPH graph, INDEX_VECTOR parents, TREE_MODE type="OUT"
 
 igraph_minimum_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, EDGEWEIGHTS weights=NULL
@@ -2533,8 +2533,8 @@ igraph_vertex_coloring_greedy:
 
 igraph_deterministic_optimal_imitation:
     PARAMS: |-
-        GRAPH graph, VERTEX vid, OPTIMALITY optimality=MAXIMUM, VERTEX_QTY quantities,
-        INOUT VECTOR_INT strategies, NEIMODE mode=OUT
+        GRAPH graph, VERTEX vid, OPTIMALITY optimality="MAXIMUM", VERTEX_QTY quantities,
+        INOUT VECTOR_INT strategies, NEIMODE mode="OUT"
     DEPS: vid ON graph, quantities ON graph, strategies ON graph
 
 igraph_moran_process:
