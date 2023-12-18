@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_dh}
 \alias{layout_with_dh}
-\alias{layout.davidson.harel}
 \alias{with_dh}
 \title{The Davidson-Harel layout algorithm}
 \usage{
