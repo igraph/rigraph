@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_leading_eigen}
 \alias{cluster_leading_eigen}
-\alias{leading.eigenvector.community}
 \title{Community structure detecting based on the leading eigenvector of the
 community matrix}
 \usage{
@@ -137,7 +136,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
