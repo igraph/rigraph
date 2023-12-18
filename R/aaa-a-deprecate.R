@@ -23,7 +23,7 @@
 ## For the future, right now, we do not warn or even message
 
 #' @importFrom utils packageName
-deprecated <- function(old, new) {
+deprecated <- function(old, new) { # nocov start
   assign(old, new, envir = asNamespace(packageName()))
-}
+} # nocov end
 
