@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{as_biadjacency_matrix}
 \alias{as_biadjacency_matrix}
-\alias{get.incidence}
 \title{Bipartite adjacency matrix of a bipartite graph}
 \usage{
 as_biadjacency_matrix(
