@@ -192,3 +192,5 @@ igraph_demo <- function(which) {
 
   invisible()
 }
+#' @export igraphdemo
+deprecated("igraphdemo", igraph_demo)

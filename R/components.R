@@ -216,3 +216,13 @@ largest_component <- function(graph, mode = c("weak", "strong")) {
 
   induced_subgraph(graph, vids)
 }
+#' @export articulation.points
+deprecated("articulation.points", articulation_points)
+#' @export biconnected.components
+deprecated("biconnected.components", biconnected_components)
+#' @export cluster.distribution
+deprecated("cluster.distribution", component_distribution)
+#' @export decompose.graph
+deprecated("decompose.graph", decompose)
+#' @export no.clusters
+deprecated("no.clusters", count_components)

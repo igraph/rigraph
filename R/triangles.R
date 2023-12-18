@@ -75,3 +75,5 @@ triangles <- list_triangles_impl
 #' @export
 #' @rdname count_triangles
 count_triangles <- adjacent_triangles_impl
+#' @export adjacent.triangles
+deprecated("adjacent.triangles", count_triangles)

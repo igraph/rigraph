@@ -257,3 +257,9 @@ radius <- radius_impl
 #'   this argument is ignored for undirected graphs.
 #' @export
 distance_table <- path_length_hist_impl
+#' @export is.dag
+deprecated("is.dag", is_dag)
+#' @export maximum.cardinality.search
+deprecated("maximum.cardinality.search", max_cardinality)
+#' @export path.length.hist
+deprecated("path.length.hist", distance_table)

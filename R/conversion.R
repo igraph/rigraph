@@ -1070,3 +1070,21 @@ as.matrix.igraph <- function(x, matrix.type = c("adjacency", "edgelist"), ...) {
     edgelist = as_edgelist(graph = x, ...)
   )
 }
+#' @export get.adjedgelist
+deprecated("get.adjedgelist", as_adj_edge_list)
+#' @export get.adjlist
+deprecated("get.adjlist", as_adj_list)
+#' @export get.adjacency
+deprecated("get.adjacency", as_adjacency_matrix)
+#' @export get.data.frame
+deprecated("get.data.frame", as_data_frame)
+#' @export get.edgelist
+deprecated("get.edgelist", as_edgelist)
+#' @export get.incidence
+deprecated("get.incidence", as_biadjacency_matrix)
+#' @export graph.adjlist
+deprecated("graph.adjlist", graph_from_adj_list)
+#' @export igraph.from.graphNEL
+deprecated("igraph.from.graphNEL", graph_from_graphnel)
+#' @export igraph.to.graphNEL
+deprecated("igraph.to.graphNEL", as_graphnel)

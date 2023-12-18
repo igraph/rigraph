@@ -54,3 +54,5 @@ are_adjacent <- function(graph, v1, v2) {
     as_igraph_vs(graph, v2) - 1
   )
 }
+#' @export are.connected
+deprecated("are.connected", are_adjacent)

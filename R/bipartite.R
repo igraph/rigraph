@@ -195,3 +195,9 @@ bipartite_projection_size <- bipartite_projection_size_impl
 #' @family bipartite
 #' @export
 bipartite_mapping <- is_bipartite_impl
+#' @export bipartite.mapping
+deprecated("bipartite.mapping", bipartite_mapping)
+#' @export bipartite.projection
+deprecated("bipartite.projection", bipartite_projection)
+#' @export bipartite.projection.size
+deprecated("bipartite.projection.size", bipartite_projection_size)

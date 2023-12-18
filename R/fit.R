@@ -184,3 +184,5 @@ power.law.fit.new <- function(data, xmin = -1, force.continuous = FALSE) {
 
   res
 }
+#' @export power.law.fit
+deprecated("power.law.fit", fit_power_law)
