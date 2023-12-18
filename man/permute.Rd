@@ -2,7 +2,6 @@
 % Please edit documentation in R/topology.R
 \name{permute}
 \alias{permute}
-\alias{permute.vertices}
 \title{Permute the vertices of a graph}
 \usage{
 permute(graph, permutation)
