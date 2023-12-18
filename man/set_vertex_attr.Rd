@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{set_vertex_attr}
 \alias{set_vertex_attr}
-\alias{set.vertex.attribute}
 \title{Set vertex attributes}
 \usage{
 set_vertex_attr(graph, name, index = V(graph), value)

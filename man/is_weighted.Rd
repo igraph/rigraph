@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{is_weighted}
 \alias{is_weighted}
-\alias{is.weighted}
 \title{Weighted graphs}
 \usage{
 is_weighted(graph)

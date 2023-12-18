@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{graph_attr_names}
 \alias{graph_attr_names}
-\alias{list.graph.attributes}
 \alias{attributes}
 \title{List names of graph attributes}
 \usage{

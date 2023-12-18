@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{delete_graph_attr}
 \alias{delete_graph_attr}
-\alias{remove.graph.attribute}
 \title{Delete a graph attribute}
 \usage{
 delete_graph_attr(graph, name)
