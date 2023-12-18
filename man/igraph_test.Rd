@@ -2,7 +2,6 @@
 % Please edit documentation in R/test.R
 \name{igraph_test}
 \alias{igraph_test}
-\alias{igraphtest}
 \title{Run package tests}
 \usage{
 igraph_test()
