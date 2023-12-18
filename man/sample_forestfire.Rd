@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_forestfire}
 \alias{sample_forestfire}
-\alias{forest.fire.game}
 \title{Forest Fire Network Model}
 \usage{
 sample_forestfire(nodes, fw.prob, bw.factor = 1, ambs = 1, directed = TRUE)

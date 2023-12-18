@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_growing}
 \alias{sample_growing}
-\alias{growing.random.game}
 \alias{growing}
 \title{Growing random graph generation}
 \usage{

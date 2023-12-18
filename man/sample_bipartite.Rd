@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_bipartite}
 \alias{sample_bipartite}
-\alias{bipartite.random.game}
 \alias{bipartite}
 \title{Bipartite random graphs}
 \usage{
