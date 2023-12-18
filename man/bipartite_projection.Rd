@@ -2,8 +2,6 @@
 % Please edit documentation in R/bipartite.R
 \name{bipartite_projection}
 \alias{bipartite_projection}
-\alias{bipartite.projection}
-\alias{bipartite.projection.size}
 \alias{bipartite_projection_size}
 \title{Project a bipartite graph}
 \usage{
