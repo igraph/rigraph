@@ -51,6 +51,14 @@ tibblify_call <- function(deprecated_call) {
 }
 
 deprecated_df <- purrr::map_df(deprecated_calls, tibblify_call)
+
+deprecated_df[["new"]] <-
+  purrr::map_chr(
+    deprecated_df[["new"]],
+    ~downlit::autolink(sprintf("igraph::%s", .x))
+  )
+
 names(deprecated_df) <- c("Old name", "New name")
+
 knitr::kable(deprecated_df)
 ```
