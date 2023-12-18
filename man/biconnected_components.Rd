@@ -2,7 +2,6 @@
 % Please edit documentation in R/components.R
 \name{biconnected_components}
 \alias{biconnected_components}
-\alias{biconnected.components}
 \title{Biconnected components}
 \usage{
 biconnected_components(graph)
