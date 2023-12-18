@@ -48,3 +48,4 @@
 ^rconfigure\.py$
 ^\.ccache$
 ^\.aviator/config\.yml$
+^src/vendor/cigraph/CITATION\.cff$
