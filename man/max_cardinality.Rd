@@ -2,7 +2,6 @@
 % Please edit documentation in R/paths.R
 \name{max_cardinality}
 \alias{max_cardinality}
-\alias{maximum.cardinality.search}
 \title{Maximum cardinality search}
 \usage{
 max_cardinality(graph)
