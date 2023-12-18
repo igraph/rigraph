@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_betw}
 \alias{centr_betw}
-\alias{centralization.betweenness}
 \title{Centralize a graph according to the betweenness of vertices}
 \usage{
 centr_betw(graph, directed = TRUE, normalized = TRUE)
