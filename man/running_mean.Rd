@@ -2,7 +2,6 @@
 % Please edit documentation in R/other.R
 \name{running_mean}
 \alias{running_mean}
-\alias{running.mean}
 \title{Running mean of a time series}
 \usage{
 running_mean(v, binwidth)
