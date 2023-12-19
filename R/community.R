@@ -1334,8 +1334,18 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' print(ldc)
 #' plot(ldc, g)
 cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
-                           weights = NULL, resolution = 1, beta = 0.01,
-                           initial_membership = NULL, n_iterations = 2, vertex_weights = NULL) {
+                           weights = NULL, resolution = 1,
+                           resolution_parameter = deprecated(), beta = 0.01,
+                           initial_membership = NULL,
+                           n_iterations = 2, vertex_weights = NULL) {
+
+  if (lifecycle::is_present(resolution_parameter)) {
+    lifecycle::deprecate_warn("1.5.0.9006",
+                              "cluster_leiden(resolution_parameter)",
+                              "cluster_leiden(resolution)")
+    resolution <- resolution_parameter
+  }
+
   ensure_igraph(graph)
 
   # Parse objective function argument
