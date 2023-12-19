@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9007
+
+## Refactoring
+
+  - Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
+
+  - Prepare using lifecycle for deprecations (#1001).
+
+
 # igraph 1.6.0.9006
 
 ## Bug fixes
