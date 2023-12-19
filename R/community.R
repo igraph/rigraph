@@ -1340,7 +1340,7 @@ cluster_leiden <- function(graph, objective_function = c("CPM", "modularity"),
                            n_iterations = 2, vertex_weights = NULL) {
 
   if (lifecycle::is_present(resolution_parameter)) {
-    lifecycle::deprecate_warn("1.5.0.9006",
+    lifecycle::deprecate_soft("1.5.0.9006",
                               "cluster_leiden(resolution_parameter)",
                               "cluster_leiden(resolution)")
     resolution <- resolution_parameter
