@@ -62,7 +62,7 @@ VignetteBuilder:
     knitr
 Config/Needs/build: roxygen2, devtools, irlba, pkgconfig
 Config/Needs/coverage: covr
-Config/Needs/website: downlit, purrr, tibble, xmlparsedata, xml2
+Config/Needs/website: readr
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: vs-es, scan, vs-operators, weakref,
