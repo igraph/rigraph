@@ -29,13 +29,11 @@ edge weight means a stronger connection for this function.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{mode}{Character scalar, specifies how to direct the edges in directed
-graphs. If it is \sQuote{out}, then directed edges point from bottom
-vertices to top vertices. If it is \sQuote{in}, edges point from top
-vertices to bottom vertices. \sQuote{out} and \sQuote{in} do not generate
-mutual edges. If this argument is \sQuote{all}, then each edge direction is
-considered independently and mutual edges might be generated. This argument
-is ignored for undirected graphs.}
+\item{mode}{Logical, whether to consider edge directions for the label propagation,
+and if so, in which direction the labels should propagate. Ignored for undirected graphs.
+"all" means to ignore edge directions (even in directed graphs).
+"out" means to propagate labels along the natural direction of the edges.
+"in" means to propagate labels backwards (i.e. from head to tail).}
 
 \item{initial}{The initial state. If \code{NULL}, every vertex will have a
 different label at the beginning. Otherwise it must be a vector with an
