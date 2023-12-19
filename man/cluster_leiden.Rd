@@ -9,7 +9,8 @@ cluster_leiden(
   graph,
   objective_function = c("CPM", "modularity"),
   weights = NULL,
-  resolution_parameter = 1,
+  resolution = 1,
+  resolution_parameter = deprecated(),
   beta = 0.01,
   initial_membership = NULL,
   n_iterations = 2,
@@ -30,7 +31,7 @@ weights. Set this to \code{NA} if the graph was a \sQuote{weight} edge
 attribute, but you don't want to use it for community detection. A larger
 edge weight means a stronger connection for this function.}
 
-\item{resolution_parameter}{The resolution parameter to use. Higher
+\item{resolution}{The resolution parameter to use. Higher
 resolutions lead to more smaller communities, while lower resolutions lead
 to fewer larger communities.}
 
@@ -105,7 +106,7 @@ g <- make_graph("Zachary")
 r <- quantile(strength(g))[2] / (gorder(g) - 1)
 # Set seed for sake of reproducibility
 set.seed(1)
-ldc <- cluster_leiden(g, resolution_parameter = r)
+ldc <- cluster_leiden(g, resolution = r)
 print(ldc)
 plot(ldc, g)
 }
