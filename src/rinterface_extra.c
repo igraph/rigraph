@@ -3146,7 +3146,7 @@ SEXP R_igraph_incidence(SEXP incidence, SEXP directed, SEXP mode, SEXP multiple)
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   c_multiple=LOGICAL(multiple)[0];
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_incidence(&c_graph, &c_types, &c_incidence, c_directed, c_mode, c_multiple));
+  IGRAPH_R_CHECK(igraph_biadjacency(&c_graph, &c_types, &c_incidence, c_directed, c_mode, c_multiple));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));
@@ -3258,7 +3258,7 @@ int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl) {
 
   igraph_sparsemat_view(akl, /*nzmax=*/ GET_LENGTH(x),
                           /*m=*/ INTEGER(Dim)[0], /*n=*/ INTEGER(Dim)[1],
-                          /*p=*/ INTEGER(p), /*i=*/ INTEGER(i),
+                          /*p=*/ (igraph_integer_t*)INTEGER(p), /*i=*/ (igraph_integer_t*)INTEGER(i),
                           /*x=*/ REAL(x), /*nz=*/ -1);
 
   return 0;
@@ -6476,7 +6476,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   igraph_vector_int_init(&label, 0);
   igraph_strvector_init(&problem, 0);
   igraph_vector_init(&cap, 0);
-  IGRAPH_R_CHECK(igraph_read_graph_dimacs(&g, file, &problem, &label, &source, &target, &cap, directed));
+  IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&g, file, &problem, &label, &source, &target, &cap, directed));
   fclose(file);
   if (!strcmp(STR(problem, 0), "max")) {
     PROTECT(result=NEW_LIST(5)); px++;
@@ -6534,7 +6534,7 @@ SEXP R_igraph_write_graph_dimacs(SEXP graph, SEXP file,
   if (stream==0) { igraph_error("Cannot write edgelist", __FILE__, __LINE__,
                                 IGRAPH_EFILE);
   }
-  IGRAPH_R_CHECK(igraph_write_graph_dimacs(&g, stream, source, target, &cap));
+  IGRAPH_R_CHECK(igraph_write_graph_dimacs_flow(&g, stream, source, target, &cap));
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
