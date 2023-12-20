@@ -3258,7 +3258,7 @@ int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl) {
 
   igraph_sparsemat_view(akl, /*nzmax=*/ GET_LENGTH(x),
                           /*m=*/ INTEGER(Dim)[0], /*n=*/ INTEGER(Dim)[1],
-                          /*p=*/ (igraph_integer_t*)INTEGER(p), /*i=*/ (igraph_integer_t*)INTEGER(i),
+                          /*p=*/ INTEGER(p), /*i=*/ INTEGER(i),
                           /*x=*/ REAL(x), /*nz=*/ -1);
 
   return 0;
