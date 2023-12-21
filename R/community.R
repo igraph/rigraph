@@ -1988,12 +1988,13 @@ cluster_optimal <- function(graph, weights = NULL) {
 #' Infomap community finding
 #'
 #' Find community structure that minimizes the expected description length of a
-#' random walker trajectory
+#' random walker trajectory. If the graph is directed, edge directions will
+#' be taken into account.
 #'
 #' Please see the details of this method in the references given below.
 #'
 #' @aliases infomap.community
-#' @param graph The input graph.
+#' @param graph The input graph. Edge directions will be taken into account.
 #' @param e.weights If not `NULL`, then a numeric vector of edge weights.
 #'   The length must match the number of edges in the graph.  By default the
 #'   \sQuote{`weight`} edge attribute is used as weights. If it is not
