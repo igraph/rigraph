@@ -130,7 +130,7 @@ graph.incidence.dense <- function(incidence, directed, mode, multiple,
     mode(incidence) <- "double"
     on.exit(.Call(R_igraph_finalizer))
     ## Function call
-    res <- .Call(R_igraph_incidence, incidence, directed, mode, multiple)
+    res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
     res <- set_vertex_attr(res$graph, "type", value = res$types)
   }
 
