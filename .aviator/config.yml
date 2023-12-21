@@ -27,7 +27,7 @@ merge_rules:
     type: default
   auto_update:
     enabled: true
-    label: ''
+    label: 'mergequeue'
     max_runs_for_update: 0
   merge_commit:
     use_title_and_body: false
