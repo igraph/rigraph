@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9008
+
+## Chore
+
+  - Add Aviator configuration.
+
+## Documentation
+
+  - Clarify that Infomap considers edge directions.
+
+
 # igraph 1.6.0.9007
 
 ## Refactoring
