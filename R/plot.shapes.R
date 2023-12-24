@@ -601,7 +601,7 @@ add_shape <- function(shape, clip = shape_noclip,
   rec.shift <- function(x0, y0, x1, y1, vsize, vsize2) {
     m <- (y0 - y1) / (x0 - x1)
     l <- cbind(
-      x1 - vsize / m, y1 - vsize2,
+      x1 - vsize2 / m, y1 - vsize2,
       x1 - vsize, y1 - vsize * m,
       x1 + vsize2 / m, y1 + vsize2,
       x1 + vsize, y1 + vsize * m
