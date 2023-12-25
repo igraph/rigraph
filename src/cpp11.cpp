@@ -718,7 +718,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_hub_score",                                  (DL_FUNC) &R_igraph_hub_score,                                   4},
     {"R_igraph_i_levc_arp",                                 (DL_FUNC) &R_igraph_i_levc_arp,                                  3},
     {"R_igraph_identical_graphs",                           (DL_FUNC) &R_igraph_identical_graphs,                            3},
-    {"R_igraph_biadjacency",                                (DL_FUNC) &R_igraph_biadjacency,                                 4},
     {"R_igraph_incident",                                   (DL_FUNC) &R_igraph_incident,                                    3},
     {"R_igraph_incident_edges",                             (DL_FUNC) &R_igraph_incident_edges,                              3},
     {"R_igraph_independence_number",                        (DL_FUNC) &R_igraph_independence_number,                         1},
