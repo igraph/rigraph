@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9009
+
+## Bug fixes
+
+  - Intersections between edges and rectangle vertices are computed correctly (#1021).
+
+
 # igraph 1.6.0.9008
 
 ## Chore
