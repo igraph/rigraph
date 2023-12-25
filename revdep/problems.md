@@ -95,7 +95,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 * GitHub: https://github.com/briatte/ggnetwork
 * Source code: https://github.com/cran/ggnetwork
 * Date/Publication: 2023-03-06 20:00:02 UTC
-* Number of recursive dependencies: 75
+* Number of recursive dependencies: 74
 
 Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
 
@@ -187,11 +187,11 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
 
 <details>
 
-* Version: 0.2.8
+* Version: 0.3.0
 * GitHub: https://github.com/snlab-ch/manynet
 * Source code: https://github.com/cran/manynet
-* Date/Publication: 2023-11-02 10:10:08 UTC
-* Number of recursive dependencies: 138
+* Date/Publication: 2023-12-15 19:10:02 UTC
+* Number of recursive dependencies: 140
 
 Run `revdepcheck::cloud_details(, "manynet")` for more info
 
@@ -219,7 +219,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 2 | SKIP 10 | PASS 303 ]
+      [ FAIL 1 | WARN 1 | SKIP 14 | PASS 329 ]
       Error: Test failures
       Execution halted
     ```
@@ -240,11 +240,11 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
 
 <details>
 
-* Version: 1.1.5
+* Version: 1.2.1
 * GitHub: https://github.com/snlab-ch/migraph
 * Source code: https://github.com/cran/migraph
-* Date/Publication: 2023-11-02 10:10:02 UTC
-* Number of recursive dependencies: 116
+* Date/Publication: 2023-12-17 22:30:02 UTC
+* Number of recursive dependencies: 115
 
 Run `revdepcheck::cloud_details(, "migraph")` for more info
 
@@ -320,7 +320,7 @@ Run `revdepcheck::cloud_details(, "molnet")` for more info
 * GitHub: https://github.com/mlizhangx/Network-Analysis-for-Repertoire-Sequencing-
 * Source code: https://github.com/cran/NAIR
 * Date/Publication: 2023-09-27 10:20:08 UTC
-* Number of recursive dependencies: 87
+* Number of recursive dependencies: 86
 
 Run `revdepcheck::cloud_details(, "NAIR")` for more info
 
@@ -370,7 +370,7 @@ Run `revdepcheck::cloud_details(, "NAIR")` for more info
 * GitHub: https://github.com/natverse/nat
 * Source code: https://github.com/cran/nat
 * Date/Publication: 2023-08-25 15:40:02 UTC
-* Number of recursive dependencies: 92
+* Number of recursive dependencies: 91
 
 Run `revdepcheck::cloud_details(, "nat")` for more info
 
@@ -411,7 +411,7 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
 * GitHub: https://github.com/langendorfr/netcom
 * Source code: https://github.com/cran/netcom
 * Date/Publication: 2022-07-21 17:40:06 UTC
-* Number of recursive dependencies: 105
+* Number of recursive dependencies: 104
 
 Run `revdepcheck::cloud_details(, "netcom")` for more info
 
@@ -736,17 +736,17 @@ Run `revdepcheck::cloud_details(, "riverconn")` for more info
     Execution halted
     ```
 
-# statGraph
+# tidygraph
 
 <details>
 
-* Version: 0.5.0
-* GitHub: NA
-* Source code: https://github.com/cran/statGraph
-* Date/Publication: 2021-05-19 07:00:06 UTC
-* Number of recursive dependencies: 20
+* Version: 1.3.0
+* GitHub: https://github.com/thomasp85/tidygraph
+* Source code: https://github.com/cran/tidygraph
+* Date/Publication: 2023-12-18 10:30:02 UTC
+* Number of recursive dependencies: 80
 
-Run `revdepcheck::cloud_details(, "statGraph")` for more info
+Run `revdepcheck::cloud_details(, "tidygraph")` for more info
 
 </details>
 
@@ -754,26 +754,51 @@ Run `revdepcheck::cloud_details(, "statGraph")` for more info
 
 *   checking examples ... ERROR
     ```
-    Running examples in ‘statGraph-Ex.R’ failed
+    Running examples in ‘tidygraph-Ex.R’ failed
     The error most likely occurred in:
     
-    > ### Name: tang.test
-    > ### Title: Tang hypothesis testing for random graphs.
-    > ### Aliases: tang.test
+    > ### Name: random_walk_rank
+    > ### Title: Perform a random walk on the graph and return encounter rank
+    > ### Aliases: random_walk_rank
     > 
     > ### ** Examples
     > 
-    > set.seed(42)
+    > graph <- create_notable("zachary")
     ...
-    > ## test under H0
-    > lpvs <- matrix(rnorm(200), 20, 10)
-    > lpvs <- apply(lpvs, 2, function(x) { return (abs(x)/sqrt(sum(x^2))) })
-    > G1 <- igraph::sample_dot_product(lpvs)
-    > G2 <- igraph::sample_dot_product(lpvs)
-    > D1 <- tang.test(G1, G2, 5)
-    Error in defaults$maxiter <- .Machine$integer.max : 
-      object of type 'closure' is not subsettable
-    Calls: tang.test -> t.embed.graph
+      8. │       └─dplyr:::mutate_col(dots[[i]], data, mask, new_columns)
+      9. │         └─mask$eval_all_mutate(quo)
+     10. │           └─dplyr (local) eval()
+     11. ├─tidygraph::random_walk_rank(200)
+     12. │ └─igraph::random_walk(graph, root, n, mode)
+     13. │   └─igraph:::random_walk_impl(...)
+     14. └─base::.handleSimpleError(...)
+     15.   └─dplyr (local) h(simpleError(msg, call))
+     16.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
     Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > # This file is part of the standard setup for testthat.
+      > # It is recommended that you do not modify it.
+      > #
+      > # Where should you do additional test configuration?
+      > # Learn more about the roles of various files in:
+      > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+      > # * https://testthat.r-lib.org/articles/special-files.html
+    ...
+       12. ├─tidygraph::random_walk_rank(30, 5)
+       13. │ └─igraph::random_walk(graph, root, n, mode)
+       14. │   └─igraph:::random_walk_impl(...)
+       15. └─base::.handleSimpleError(...)
+       16.   └─dplyr (local) h(simpleError(msg, call))
+       17.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
+      
+      [ FAIL 2 | WARN 10 | SKIP 0 | PASS 430 ]
+      Error: Test failures
+      Execution halted
     ```
 
