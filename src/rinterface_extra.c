@@ -3124,51 +3124,6 @@ SEXP R_igraph_maxflow_stats_to_SEXP(const igraph_maxflow_stats_t *st) {
   return result;
 }
 
-SEXP R_igraph_incidence(SEXP incidence, SEXP directed, SEXP mode, SEXP multiple) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_bool_t c_types;
-  igraph_matrix_t c_incidence;
-  igraph_bool_t c_directed;
-  igraph_neimode_t c_mode;
-  igraph_bool_t c_multiple;
-  SEXP graph;
-  SEXP types;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  if (0 != igraph_vector_bool_init(&c_types, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  R_SEXP_to_matrix(incidence, &c_incidence);
-  c_directed=LOGICAL(directed)[0];
-  c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  c_multiple=LOGICAL(multiple)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_incidence(&c_graph, &c_types, &c_incidence, c_directed, c_mode, c_multiple));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(types=R_igraph_vector_bool_to_SEXP(&c_types));
-  igraph_vector_bool_destroy(&c_types);
-  IGRAPH_FINALLY_CLEAN(1);
-  SET_VECTOR_ELT(r_result, 0, graph);
-  SET_VECTOR_ELT(r_result, 1, types);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("graph"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("types"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
 SEXP R_igraph_arpack_unpack_complex(SEXP vectors, SEXP values, SEXP nev) {
                                         /* Declarations */
   igraph_matrix_t c_vectors;
@@ -6476,7 +6431,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   igraph_vector_int_init(&label, 0);
   igraph_strvector_init(&problem, 0);
   igraph_vector_init(&cap, 0);
-  IGRAPH_R_CHECK(igraph_read_graph_dimacs(&g, file, &problem, &label, &source, &target, &cap, directed));
+  IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&g, file, &problem, &label, &source, &target, &cap, directed));
   fclose(file);
   if (!strcmp(STR(problem, 0), "max")) {
     PROTECT(result=NEW_LIST(5)); px++;
@@ -6534,7 +6489,7 @@ SEXP R_igraph_write_graph_dimacs(SEXP graph, SEXP file,
   if (stream==0) { igraph_error("Cannot write edgelist", __FILE__, __LINE__,
                                 IGRAPH_EFILE);
   }
-  IGRAPH_R_CHECK(igraph_write_graph_dimacs(&g, stream, source, target, &cap));
+  IGRAPH_R_CHECK(igraph_write_graph_dimacs_flow(&g, stream, source, target, &cap));
   fclose(stream);
 #if HAVE_OPEN_MEMSTREAM == 1
   PROTECT(result=Rf_allocVector(RAWSXP, size));
