@@ -46,6 +46,12 @@
     <loc>https://r.igraph.org/reference/aaa-igraph-package.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/add.edges.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/add.vertices.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/add_edges.html</loc>
   </url>
   <url>
@@ -58,7 +64,19 @@
     <loc>https://r.igraph.org/reference/adjacent_vertices.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/aging.ba.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/aging.barabasi.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/aging.prefatt.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/all_simple_paths.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/alpha.centrality.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/alpha_centrality.html</loc>
@@ -68,6 +86,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/arpack.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/articulation.points.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/articulation_points.html</loc>
@@ -112,10 +133,28 @@
     <loc>https://r.igraph.org/reference/as_phylo.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/assortativity.degree.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/assortativity.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/assortativity.nominal.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/asymmetric.preference.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/authority.score.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/automorphism_group.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/ba.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/barabasi.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/betweenness.html</loc>
@@ -124,7 +163,22 @@
     <loc>https://r.igraph.org/reference/bfs.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/biconnected.components.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/biconnected_components.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/bipartite.mapping.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/bipartite.projection.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/bipartite.projection.size.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/bipartite.random.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/bipartite_mapping.html</loc>
@@ -133,10 +187,19 @@
     <loc>https://r.igraph.org/reference/bipartite_projection.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/blockGraphs.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/bonpow.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/c.igraph.es.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/c.igraph.vs.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/callaway.traits.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/canonical_permutation.html</loc>
@@ -169,13 +232,52 @@
     <loc>https://r.igraph.org/reference/centr_eigen_tmax.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/centralization.betweenness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.betweenness.tmax.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.closeness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.closeness.tmax.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.degree.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.degree.tmax.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.evcent.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralization.evcent.tmax.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/centralize.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/centralize.scores.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/cited.type.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/citing.cited.type.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/clique.number.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/cliques.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/closeness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/cluster.distribution.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/cluster_edge_betweenness.html</loc>
@@ -214,6 +316,12 @@
     <loc>https://r.igraph.org/reference/cocitation.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/code.length.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/cohesive.blocks.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/cohesive_blocks.html</loc>
   </url>
   <url>
@@ -235,6 +343,9 @@
     <loc>https://r.igraph.org/reference/compose.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/connect.neighborhood.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/consensus_tree.html</loc>
   </url>
   <url>
@@ -245,6 +356,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/contract.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/contract.vertices.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/convex_hull.html</loc>
@@ -268,13 +382,31 @@
     <loc>https://r.igraph.org/reference/count_triangles.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/create.communities.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/curve_multiple.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/cutat.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/decompose.graph.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/decompose.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/degree.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/degree.sequence.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/delete.edges.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/delete.vertices.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/delete_edge_attr.html</loc>
@@ -290,6 +422,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/delete_vertices.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/dendPlot.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/dfs.html</loc>
@@ -325,6 +460,9 @@
     <loc>https://r.igraph.org/reference/diversity.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/dominator.tree.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/dominator_tree.html</loc>
   </url>
   <url>
@@ -338,6 +476,18 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/eccentricity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/edge.betweenness.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/edge.betweenness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/edge.connectivity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/edge.disjoint.paths.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/edge.html</loc>
@@ -376,6 +526,9 @@
     <loc>https://r.igraph.org/reference/erdos.renyi.game.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/establishment.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/estimate_betweenness.html</loc>
   </url>
   <url>
@@ -383,6 +536,15 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/estimate_edge_betweenness.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/evcent.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/exportPajek.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/fastgreedy.community.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/feedback_arc_set.html</loc>
@@ -394,10 +556,40 @@
     <loc>https://r.igraph.org/reference/fit_power_law.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/forest.fire.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/from_incidence_matrix.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/get.adjacency.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.adjedgelist.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.adjlist.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.edge.attribute.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/get.edge.ids.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.edgelist.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.graph.attribute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.incidence.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/get.vertex.attribute.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/girth.html</loc>
@@ -407,6 +599,45 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/gorder.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.adhesion.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.adjacency.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.adjlist.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.cohesion.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.diversity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.edgelist.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.eigen.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.graphdb.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.incidence.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.maxflow.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.mincut.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graph.strength.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/graph_.html</loc>
@@ -466,10 +697,22 @@
     <loc>https://r.igraph.org/reference/graphlet_basis.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/graphlets.candidate.basis.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/graphlets.project.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/greedy_vertex_coloring.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/grg.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/groups.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/growing.random.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/gsize.html</loc>
@@ -493,10 +736,31 @@
     <loc>https://r.igraph.org/reference/hrg-methods.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/hrg.consensus.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/hrg.create.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/hrg.dendrogram.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/hrg.fit.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/hrg.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/hrg.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/hrg.predict.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/hrg_tree.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/hub.score.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/hub_score.html</loc>
@@ -532,6 +796,15 @@
     <loc>https://r.igraph.org/reference/igraph-vs-indexing2.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/igraph.console.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/igraph.from.graphNEL.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/igraph.to.graphNEL.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/igraph_demo.html</loc>
   </url>
   <url>
@@ -544,6 +817,9 @@
     <loc>https://r.igraph.org/reference/igraph_version.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/igraphdemo.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/incident.html</loc>
   </url>
   <url>
@@ -553,7 +829,19 @@
     <loc>https://r.igraph.org/reference/indent_print.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/independence.number.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/independent.vertex.sets.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/infomap.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/interconnected.islands.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/intersection.html</loc>
@@ -566,6 +854,39 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/intersection.igraph.vs.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.bipartite.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.chordal.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.degree.sequence.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.directed.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.graphical.degree.sequence.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.hierarchical.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.igraph.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.minimal.separator.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.named.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.separator.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/is.weighted.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/is_acyclic.html</loc>
@@ -622,22 +943,73 @@
     <loc>https://r.igraph.org/reference/ivs.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/k.regular.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/keeping_degseq.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/knn.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/label.propagation.community.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/laplacian_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/largest.cliques.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/largest.independent.vertex.sets.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/lastcit.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.auto.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.bipartite.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.davidson.harel.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/layout.deprecated.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/layout.drl.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/layout.fruchterman.reingold.grid.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/layout.gem.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.graphopt.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.grid.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.mds.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.merge.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.norm.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/layout.spring.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.star.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/layout.sugiyama.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/layout.svd.html</loc>
@@ -695,6 +1067,18 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/layout_with_sugiyama.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/leading.eigenvector.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/list.edge.attributes.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/list.graph.attributes.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/list.vertex.attributes.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/local_scan.html</loc>
@@ -763,6 +1147,18 @@
     <loc>https://r.igraph.org/reference/max_flow.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/maxcohesion.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/maximal.cliques.count.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/maximal.cliques.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/maximal.independent.vertex.sets.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/merge_coords.html</loc>
   </url>
   <url>
@@ -775,6 +1171,15 @@
     <loc>https://r.igraph.org/reference/min_st_separators.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/minimal.st.separators.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/minimum.size.separators.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/mod.matrix.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/modularity.igraph.html</loc>
   </url>
   <url>
@@ -784,13 +1189,25 @@
     <loc>https://r.igraph.org/reference/mst.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/multilevel.community.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/neighbors.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/no.clusters.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/norm_coords.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/normalize.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/optimal.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/page.rank.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/page_rank.html</loc>
@@ -800,6 +1217,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/permute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/piecewise.layout.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/pipe.html</loc>
@@ -814,6 +1234,9 @@
     <loc>https://r.igraph.org/reference/plot.sir.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/plotHierarchy.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/plot_dendrogram.communities.html</loc>
   </url>
   <url>
@@ -823,10 +1246,16 @@
     <loc>https://r.igraph.org/reference/plus-.igraph.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/power.law.fit.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/power_centrality.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/predict_edges.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/preference.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/print.igraph.es.html</loc>
@@ -859,6 +1288,9 @@
     <loc>https://r.igraph.org/reference/random_walk.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/read.graph.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/read_graph.html</loc>
   </url>
   <url>
@@ -866,6 +1298,15 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/reciprocity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/remove.edge.attribute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/remove.graph.attribute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/remove.vertex.attribute.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/rep.igraph.html</loc>
@@ -982,6 +1423,9 @@
     <loc>https://r.igraph.org/reference/sample_tree.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/sbm.game.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/scan_stat.html</loc>
   </url>
   <url>
@@ -989,6 +1433,15 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/sequential_pal.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/set.edge.attribute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/set.graph.attribute.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/set.vertex.attribute.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/set_edge_attr.html</loc>
@@ -1001,6 +1454,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/shapes.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/showtrace.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/similarity.html</loc>
@@ -1018,13 +1474,28 @@
     <loc>https://r.igraph.org/reference/spectrum.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/spinglass.community.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/split_join_distance.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/stCuts.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/stMincuts.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/st_cuts.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/st_min_cuts.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/static.fitness.game.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/static.power.law.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/stochastic_matrix.html</loc>
@@ -1040,6 +1511,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/subcomponent.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/subgraph.centrality.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/subgraph.html</loc>
@@ -1099,6 +1573,12 @@
     <loc>https://r.igraph.org/reference/upgrade_graph.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/vertex.connectivity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/vertex.disjoint.paths.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/vertex.html</loc>
   </url>
   <url>
@@ -1115,6 +1595,12 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/vertex_connectivity.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/walktrap.community.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/watts.strogatz.game.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/weighted_cliques.html</loc>
@@ -1145,6 +1631,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/without_multiples.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/write.graph.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/write_graph.html</loc>
