@@ -411,7 +411,7 @@ Error in is_directed(object) :
 <div class="section level3">
 <h3 id="deprecated-1-4-0">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-1-4-0"></a></h3>
 <ul><li>
-<code><a href="../reference/count_automorphisms.html">automorphisms()</a></code> was renamed to <code><a href="../reference/count_automorphisms.html">count_automorphisms()</a></code>; the old name is still available, but it is deprecated.</li>
+<code><a href="../reference/automorphisms.html">automorphisms()</a></code> was renamed to <code><a href="../reference/count_automorphisms.html">count_automorphisms()</a></code>; the old name is still available, but it is deprecated.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="other-1-4-0">Other<a class="anchor" aria-label="anchor" href="#other-1-4-0"></a></h3>
@@ -473,7 +473,7 @@ Error in is_directed(object) :
 <li>
 <code><a href="../reference/edge_attr.html">edge_attr()</a></code> does not ignore its <code>index=...</code> argument any more.</li>
 <li>
-<code><a href="../reference/count_automorphisms.html">automorphisms()</a></code>, <code><a href="../reference/automorphism_group.html">automorphism_group()</a></code> and <code><a href="../reference/canonical_permutation.html">canonical_permutation()</a></code> now allow all possible values supported by the C core in the <code>sh</code> argument. Earlier versions supported only <code>"fm"</code>.</li>
+<code><a href="../reference/automorphisms.html">automorphisms()</a></code>, <code><a href="../reference/automorphism_group.html">automorphism_group()</a></code> and <code><a href="../reference/canonical_permutation.html">canonical_permutation()</a></code> now allow all possible values supported by the C core in the <code>sh</code> argument. Earlier versions supported only <code>"fm"</code>.</li>
 <li>The <code>vertex.frame.width</code> plotting parameter now allows zero and negative values; these will simply remove the outline of the corresponding vertex.</li>
 <li>The documentation of the <code>sh</code> argument of the BLISS isomorphism algorithm in <code><a href="../reference/isomorphic.html">isomorphic()</a></code> was fixed; earlier versions incorrectly referred to <code>sh1</code> and <code>sh2</code>.</li>
 <li>
@@ -502,7 +502,7 @@ Error in is_directed(object) :
 <li>
 <code><a href="../reference/sample_spanning_tree.html">sample_spanning_tree()</a></code> to sample spanning trees of an undirected graph uniformly at random</li>
 <li>
-<code><a href="../reference/count_automorphisms.html">automorphisms()</a></code> and <code><a href="../reference/canonical_permutation.html">canonical_permutation()</a></code> now supports vertex colors</li>
+<code><a href="../reference/automorphisms.html">automorphisms()</a></code> and <code><a href="../reference/canonical_permutation.html">canonical_permutation()</a></code> now supports vertex colors</li>
 <li>
 <code><a href="../reference/random_walk.html">random_edge_walk()</a></code> to record the edges traversed during a random walk</li>
 <li>
@@ -819,18 +819,18 @@ Error in is_directed(object) :
 <code><a href="../reference/communities.html">plot.communities()</a></code> (<code><a href="../reference/plot.igraph.html">plot.igraph()</a></code>, really) draws a border around the marked groups by default.</li>
 <li>printing graphs now converts the <code>name</code> graph attribute to character</li>
 <li>Convenience functions to query and set all attributes at once: <code>vertex.attriubutes()</code>, <code><a href="../reference/graph_attr.html">graph.attributes()</a></code> and <code><a href="../reference/edge_attr.html">edge.attributes()</a></code>.</li>
-<li>Function <code><a href="../reference/disjoint_union.html">graph.disjoint.union()</a></code> handles attributes now.</li>
-<li>Rewrite <code><a href="../reference/union.igraph.html">graph.union()</a></code> to handle attributes properly.</li>
+<li>Function <code><a href="../reference/graph.disjoint.union.html">graph.disjoint.union()</a></code> handles attributes now.</li>
+<li>Rewrite <code><a href="../reference/graph.union.html">graph.union()</a></code> to handle attributes properly.</li>
 <li>
 <code><a href="../reference/rewire.html">rewire()</a></code>: now supports the generation and destruction of loops.</li>
 <li>Erdos-Renyi type bipartite random graphs: <code><a href="../reference/bipartite.random.game.html">bipartite.random.game()</a></code>.</li>
-<li>Support the new options (predecessors and inbound_edges) of <code>get_shortest_paths()</code>, reorganized the output of <code><a href="../reference/distances.html">get.shortest.paths()</a></code> completely.</li>
+<li>Support the new options (predecessors and inbound_edges) of <code>get_shortest_paths()</code>, reorganized the output of <code><a href="../reference/get.shortest.paths.html">get.shortest.paths()</a></code> completely.</li>
 <li>Added <code><a href="../reference/graphlet_basis.html">graphlets()</a></code> and related functions.</li>
 <li>Fix modularity values of multilevel community if there are no merges at all.</li>
 <li>Fixed bug when deleting edges with FALSE in the matrix notation.</li>
 <li>Fix <code><a href="../reference/bonpow.html">bonpow()</a></code> and <code><a href="../reference/alpha.centrality.html">alpha.centrality()</a></code> and make sure that the sparse solver is called.</li>
 <li>
-<code><a href="../reference/tkplot.html">tkplot()</a></code> news: enable setting coordinates from the command line via <code><a href="../reference/tkplot.html">tkplot.setcoords()</a></code> and access to the canvas via <code><a href="../reference/tkplot.html">tkplot.canvas()</a></code>.</li>
+<code><a href="../reference/tkplot.html">tkplot()</a></code> news: enable setting coordinates from the command line via <code><a href="../reference/tkplot.setcoords.html">tkplot.setcoords()</a></code> and access to the canvas via <code><a href="../reference/tkplot.canvas.html">tkplot.canvas()</a></code>.</li>
 <li>Fixed a potential crash in <code>igraph_edge_connectivity()</code>, because of an un-initialized variable in the C code.</li>
 <li>Avoiding overflow in <code><a href="../reference/closeness.html">closeness()</a></code> and related functions.</li>
 <li>Check for NAs after converting ‘type’ to logical in <code><a href="../reference/bipartite.projection.html">bipartite.projection()</a></code>.</li>
@@ -841,7 +841,7 @@ Error in is_directed(object) :
 <li>Fixed a memory leak in the functions with attribute combinations.</li>
 <li>Removed some memory leaks from the SCG functions.</li>
 <li>Fixed some memory leaks in the ray tracer.</li>
-<li>Fixed memory leak in <code><a href="../reference/bfs.html">graph.bfs()</a></code> and <code><a href="../reference/dfs.html">graph.dfs()</a></code>.</li>
+<li>Fixed memory leak in <code><a href="../reference/graph.bfs.html">graph.bfs()</a></code> and <code><a href="../reference/graph.dfs.html">graph.dfs()</a></code>.</li>
 <li>Fix a bug in triad census that set the first element of the result to NaN.</li>
 <li>Fixed a crash in <code><a href="../reference/is.chordal.html">is.chordal()</a></code>.</li>
 <li>Fixed a bug in weighted modularity calculation, sum of the weights was truncated to an integer.</li>
@@ -853,20 +853,20 @@ Error in is_directed(object) :
 <li>Fixed missing whitespace in Pajek writer when the ID attribute was numeric.</li>
 <li>Fixed a bug that caused the GML reader to crash when the ID attribute was non-numeric.</li>
 <li>Fixed issue <a href="https://github.com/igraph/rigraph/issues/500" class="external-link">#500</a>, potential segfault if the two graphs in BLISS differ in the number of vertices or edges.</li>
-<li>Added <code><a href="../reference/igraph_test.html">igraphtest()</a></code> function.</li>
+<li>Added <code><a href="../reference/igraphtest.html">igraphtest()</a></code> function.</li>
 <li>Fix dyad census instability, sometimes incorrect results were reported.</li>
 <li>Dyad census detects integer overflow now and gives a warning.</li>
 <li>Function <code><a href="../reference/add.edges.html">add.edges()</a></code> does not allow now zeros in the vertex set.</li>
-<li>Added a function to count the number of adjacent triangles: <code><a href="../reference/count_triangles.html">adjacent.triangles()</a></code>.</li>
+<li>Added a function to count the number of adjacent triangles: <code><a href="../reference/adjacent.triangles.html">adjacent.triangles()</a></code>.</li>
 <li>Added <code><a href="../reference/graph.eigen.html">graph.eigen()</a></code> function, eigenproblems on adjacency matrices.</li>
-<li>Added some workarounds for functions that create a lot of graphs, <code><a href="../reference/decompose.graph.html">decompose.graph()</a></code> and <code><a href="../reference/ego.html">graph.neighborhood()</a></code> use it. Fixes issue <a href="https://github.com/igraph/rigraph/issues/508" class="external-link">#508</a>.</li>
+<li>Added some workarounds for functions that create a lot of graphs, <code><a href="../reference/decompose.graph.html">decompose.graph()</a></code> and <code><a href="../reference/graph.neighborhood.html">graph.neighborhood()</a></code> use it. Fixes issue <a href="https://github.com/igraph/rigraph/issues/508" class="external-link">#508</a>.</li>
 <li>Added weights support for <code><a href="../reference/optimal.community.html">optimal.community()</a></code>, closes <a href="https://github.com/igraph/rigraph/issues/511" class="external-link">#511</a>.</li>
 <li>Faster maximal clique finding.</li>
 <li>Added a function to count maximum cliques.</li>
 <li>Set operations: union, intersection, disjoint, union, difference, compose now work based on vertex names (if they are present) and keep attributes, closes <a href="https://github.com/igraph/rigraph/issues/20" class="external-link">#20</a>.</li>
 <li>Removed functions <code>graph.intersection.by.name()</code>, <code>graph.union.by.name()</code>, <code>graph.difference.by.name()</code>.</li>
-<li>The <code>+</code> operator on graphs now calls <code><a href="../reference/union.igraph.html">graph.union()</a></code> if both argument graphs are named, and calls <code><a href="../reference/disjoint_union.html">graph.disjoint.union()</a></code> otherwise.</li>
-<li>Added function <code><a href="../reference/igraph_version.html">igraph.version()</a></code>.</li>
+<li>The <code>+</code> operator on graphs now calls <code><a href="../reference/graph.union.html">graph.union()</a></code> if both argument graphs are named, and calls <code><a href="../reference/graph.disjoint.union.html">graph.disjoint.union()</a></code> otherwise.</li>
+<li>Added function <code><a href="../reference/igraph.version.html">igraph.version()</a></code>.</li>
 <li>Generate graphs from a stochastic block model: <code><a href="../reference/sbm.game.html">sbm.game()</a></code>.</li>
 <li>Do not suggest the stats, XML, jpeg and png packages any more.</li>
 <li>Fixed a <code>set.vertex/edge.attribute</code> bug that changed both graph objects, after copying (<a href="https://github.com/igraph/rigraph/issues/533" class="external-link">#533</a>)</li>
