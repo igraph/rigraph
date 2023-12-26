@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{edge_attr}
 \alias{edge_attr}
-\alias{get.edge.attribute}
 \alias{edge.attributes}
 \title{Query edge attributes of a graph}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{norm_coords}
 \alias{norm_coords}
-\alias{layout.norm}
 \title{Normalize coordinates for plotting graphs}
 \usage{
 norm_coords(

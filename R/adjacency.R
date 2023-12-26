@@ -1,4 +1,19 @@
 
+#' Create graphs from adjacency matrices
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.adjacency()` was renamed to `graph_from_adjacency_matrix()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_adjacency_matrix
+#' @keywords internal
+#' @export
+graph.adjacency <- function(adjmatrix, mode = c("directed", "undirected", "max", "min", "upper", "lower", "plus"), weighted = NULL, diag = TRUE, add.colnames = NULL, add.rownames = NA) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.adjacency()", "graph_from_adjacency_matrix()")
+  graph_from_adjacency_matrix(adjmatrix = adjmatrix, mode = mode, weighted = weighted, diag = diag, add.colnames = add.colnames, add.rownames = add.rownames)
+} # nocov end
+
 ## ----------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -294,7 +309,6 @@ graph.adjacency.sparse <- function(adjmatrix, mode, weighted = NULL, diag = TRUE
 #' undirected graph will be created, `A(i,j)+A(j,i)` gives the edge
 #' weights.} }
 #'
-#' @aliases graph.adjacency
 #' @param adjmatrix A square adjacency matrix. From igraph version 0.5.1 this
 #'   can be a sparse matrix created with the `Matrix` package.
 #' @param mode Character scalar, specifies how igraph should interpret the
@@ -473,5 +487,3 @@ is_symmetric <- function(x) {
 #' @family adjacency
 #' @export
 from_adjacency <- function(...) constructor_spec(graph_from_adjacency_matrix, ...)
-#' @export graph.adjacency
-deprecated("graph.adjacency", graph_from_adjacency_matrix)

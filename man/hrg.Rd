@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{hrg}
 \alias{hrg}
-\alias{hrg.create}
 \title{Create a hierarchical random graph from an igraph graph}
 \usage{
 hrg(graph, prob)

@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{st_min_cuts}
 \alias{st_min_cuts}
-\alias{stMincuts}
 \title{List all minimum \eqn{(s,t)}-cuts of a graph}
 \usage{
 st_min_cuts(graph, source, target, capacity = NULL)

@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_grg}
 \alias{sample_grg}
-\alias{grg.game}
 \alias{grg}
 \title{Geometric random graphs}
 \usage{

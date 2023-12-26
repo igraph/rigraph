@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{strength}
 \alias{strength}
-\alias{graph.strength}
 \title{Strength or weighted vertex degree}
 \usage{
 strength(

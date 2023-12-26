@@ -2,8 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_pref}
 \alias{sample_pref}
-\alias{preference.game}
-\alias{asymmetric.preference.game}
 \alias{pref}
 \alias{sample_asym_pref}
 \alias{asym_pref}

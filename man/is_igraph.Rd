@@ -2,7 +2,6 @@
 % Please edit documentation in R/basic.R
 \name{is_igraph}
 \alias{is_igraph}
-\alias{is.igraph}
 \title{Is this object an igraph graph?}
 \usage{
 is_igraph(graph)

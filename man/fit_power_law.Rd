@@ -2,7 +2,6 @@
 % Please edit documentation in R/fit.R
 \name{fit_power_law}
 \alias{fit_power_law}
-\alias{power.law.fit}
 \title{Fitting a power-law distribution function to discrete data}
 \usage{
 fit_power_law(

@@ -1,4 +1,34 @@
 
+#' Assortativity coefficient
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `assortativity.nominal()` was renamed to `assortativity_nominal()` to create a more
+#' consistent API.
+#' @inheritParams assortativity_nominal
+#' @keywords internal
+#' @export
+assortativity.nominal <- function(graph, types, directed = TRUE, normalized = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "assortativity.nominal()", "assortativity_nominal()")
+  assortativity_nominal(graph = graph, types = types, directed = directed, normalized = normalized)
+} # nocov end
+
+#' Assortativity coefficient
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `assortativity.degree()` was renamed to `assortativity_degree()` to create a more
+#' consistent API.
+#' @inheritParams assortativity_degree
+#' @keywords internal
+#' @export
+assortativity.degree <- function(graph, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "assortativity.degree()", "assortativity_degree()")
+  assortativity_degree(graph = graph, directed = directed)
+} # nocov end
+
 ## -----------------------------------------------------------------------
 ##
 ##   IGraph R package
@@ -68,7 +98,7 @@
 #' `assortativity_degree()` uses vertex degree (minus one) as vertex values
 #' and calls `assortativity()`.
 #'
-#' @aliases assortativity assortativity.degree assortativity.nominal
+#' @aliases assortativity
 #' @param graph The input graph, it can be directed or undirected.
 #' @param values The vertex values, these can be arbitrary numeric values.
 #' @inheritParams rlang::args_dots_empty
@@ -172,7 +202,3 @@ assortativity_nominal <- assortativity_nominal_impl
 #' @rdname assortativity
 #' @export
 assortativity_degree <- assortativity_degree_impl
-#' @export assortativity.degree
-deprecated("assortativity.degree", assortativity_degree)
-#' @export assortativity.nominal
-deprecated("assortativity.nominal", assortativity_nominal)

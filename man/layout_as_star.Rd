@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_as_star}
 \alias{layout_as_star}
-\alias{layout.star}
 \alias{as_star}
 \title{Generate coordinates to place the vertices of a graph in a star-shape}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/foreign.R
 \name{write_graph}
 \alias{write_graph}
-\alias{write.graph}
 \title{Writing the graph to a file in some format}
 \usage{
 write_graph(

@@ -1,3 +1,48 @@
+
+#' Writing the graph to a file in some format
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `write.graph()` was renamed to `write_graph()` to create a more
+#' consistent API.
+#' @inheritParams write_graph
+#' @keywords internal
+#' @export
+write.graph <- function(graph, file, format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "gml", "dot", "leda"), ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "write.graph()", "write_graph()")
+  write_graph(graph = graph, file = file, format = format, ...)
+} # nocov end
+
+#' Reading foreign file formats
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `read.graph()` was renamed to `read_graph()` to create a more
+#' consistent API.
+#' @inheritParams read_graph
+#' @keywords internal
+#' @export
+read.graph <- function(file, format = c("edgelist", "pajek", "ncol", "lgl", "graphml", "dimacs", "graphdb", "gml", "dl"), ...) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "read.graph()", "read_graph()")
+  read_graph(file = file, format = format, ...)
+} # nocov end
+
+#' Load a graph from the graph database for testing graph isomorphism.
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `graph.graphdb()` was renamed to `graph_from_graphdb()` to create a more
+#' consistent API.
+#' @inheritParams graph_from_graphdb
+#' @keywords internal
+#' @export
+graph.graphdb <- function(url = NULL, prefix = "iso", type = "r001", nodes = NULL, pair = "A", which = 0, base = "http://cneurocvs.rmki.kfki.hu/graphdb/gzip", compressed = TRUE, directed = TRUE) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "graph.graphdb()", "graph_from_graphdb()")
+  graph_from_graphdb(url = url, prefix = prefix, type = type, nodes = nodes, pair = pair, which = which, base = base, compressed = compressed, directed = directed)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2005-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -76,7 +121,7 @@ write.graph.fromraw <- function(buffer, file) {
 #' the file format (the `format` argument). See the details separately for
 #' each file format, below.
 #'
-#' @aliases read.graph LGL Pajek GraphML GML DL UCINET
+#' @aliases LGL Pajek GraphML GML DL UCINET
 #' @param file The connection to read from. This can be a local file, or a
 #'   `http` or `ftp` connection. It can also be a character string with
 #'   the file name or URI.
@@ -141,7 +186,6 @@ read_graph <- function(file, format = c(
 #' `write_graph()` is a general function for exporting graphs to foreign
 #' file formats, however not many formats are implemented right now.
 #'
-#' @aliases write.graph
 #' @param graph The graph to export.
 #' @param file A connection or a string giving the file name to write the graph
 #'   to.
@@ -480,7 +524,6 @@ write.graph.dot <- function(graph, file, ...) {
 #' <http://web.archive.org/web/20090215182331/http://amalfi.dis.unina.it/graph/db/doc/graphdbat.html>
 #' for the actual format of a graph database file and other information.
 #'
-#' @aliases graph.graphdb
 #' @param url If not `NULL` it is a complete URL with the file to import.
 #' @param prefix Gives the prefix. See details below. Possible values:
 #'   `iso`, `i2`, `si4`, `si6`, `mcs10`, `mcs30`,
@@ -600,9 +643,3 @@ write.graph.leda <- function(graph, file, vertex.attr = NULL, edge.attr = NULL,
   on.exit(.Call(R_igraph_finalizer))
   .Call(R_igraph_write_graph_leda, graph, file, vertex.attr, edge.attr)
 }
-#' @export graph.graphdb
-deprecated("graph.graphdb", graph_from_graphdb)
-#' @export read.graph
-deprecated("read.graph", read_graph)
-#' @export write.graph
-deprecated("write.graph", write_graph)

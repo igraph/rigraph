@@ -2,10 +2,6 @@
 % Please edit documentation in R/cliques.R
 \name{cliques}
 \alias{cliques}
-\alias{maximal.cliques}
-\alias{maximal.cliques.count}
-\alias{clique.number}
-\alias{largest.cliques}
 \alias{largest_cliques}
 \alias{max_cliques}
 \alias{count_max_cliques}

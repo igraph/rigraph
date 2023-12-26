@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{edge_attr_names}
 \alias{edge_attr_names}
-\alias{list.edge.attributes}
 \title{List names of edge attributes}
 \usage{
 edge_attr_names(graph)

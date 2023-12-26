@@ -2,7 +2,6 @@
 % Please edit documentation in R/centrality.R
 \name{alpha_centrality}
 \alias{alpha_centrality}
-\alias{alpha.centrality}
 \title{Find Bonacich alpha centrality scores of network positions}
 \usage{
 alpha_centrality(

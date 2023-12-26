@@ -1,3 +1,123 @@
+
+#' Independent vertex sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximal.independent.vertex.sets()` was renamed to `maximal_ivs()` to create a more
+#' consistent API.
+#' @inheritParams maximal_ivs
+#' @keywords internal
+#' @export
+maximal.independent.vertex.sets <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "maximal.independent.vertex.sets()", "maximal_ivs()")
+  maximal_ivs(graph = graph)
+} # nocov end
+
+#' Functions to find cliques, i.e. complete subgraphs in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximal.cliques.count()` was renamed to `count_max_cliques()` to create a more
+#' consistent API.
+#' @inheritParams count_max_cliques
+#' @keywords internal
+#' @export
+maximal.cliques.count <- function(graph, min = NULL, max = NULL, subset = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "maximal.cliques.count()", "count_max_cliques()")
+  count_max_cliques(graph = graph, min = min, max = max, subset = subset)
+} # nocov end
+
+#' Functions to find cliques, i.e. complete subgraphs in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `maximal.cliques()` was renamed to `max_cliques()` to create a more
+#' consistent API.
+#' @inheritParams max_cliques
+#' @keywords internal
+#' @export
+maximal.cliques <- function(graph, min = NULL, max = NULL, subset = NULL, file = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "maximal.cliques()", "max_cliques()")
+  max_cliques(graph = graph, min = min, max = max, subset = subset, file = file)
+} # nocov end
+
+#' Independent vertex sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `largest.independent.vertex.sets()` was renamed to `largest_ivs()` to create a more
+#' consistent API.
+#' @inheritParams largest_ivs
+#' @keywords internal
+#' @export
+largest.independent.vertex.sets <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "largest.independent.vertex.sets()", "largest_ivs()")
+  largest_ivs(graph = graph)
+} # nocov end
+
+#' Functions to find cliques, i.e. complete subgraphs in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `largest.cliques()` was renamed to `largest_cliques()` to create a more
+#' consistent API.
+#' @inheritParams largest_cliques
+#' @keywords internal
+#' @export
+largest.cliques <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "largest.cliques()", "largest_cliques()")
+  largest_cliques(graph = graph)
+} # nocov end
+
+#' Independent vertex sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `independent.vertex.sets()` was renamed to `ivs()` to create a more
+#' consistent API.
+#' @inheritParams ivs
+#' @keywords internal
+#' @export
+independent.vertex.sets <- function(graph, min = NULL, max = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "independent.vertex.sets()", "ivs()")
+  ivs(graph = graph, min = min, max = max)
+} # nocov end
+
+#' Independent vertex sets
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `independence.number()` was renamed to `ivs_size()` to create a more
+#' consistent API.
+#' @inheritParams ivs_size
+#' @keywords internal
+#' @export
+independence.number <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "independence.number()", "ivs_size()")
+  ivs_size(graph = graph)
+} # nocov end
+
+#' Functions to find cliques, i.e. complete subgraphs in a graph
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `clique.number()` was renamed to `clique_num()` to create a more
+#' consistent API.
+#' @inheritParams clique_num
+#' @keywords internal
+#' @export
+clique.number <- function(graph) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "clique.number()", "clique_num()")
+  clique_num(graph = graph)
+} # nocov end
 #   IGraph R package
 #   Copyright (C) 2006-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -44,7 +164,6 @@
 #' `clique_size_counts()` returns a numeric vector representing a histogram
 #' of clique sizes, between the given minimum and maximum clique size.
 #'
-#' @aliases maximal.cliques maximal.cliques.count clique.number largest.cliques
 #' @inheritParams weighted_cliques
 #' @param graph The input graph, directed graphs will be considered as
 #'   undirected ones, multiple edges and loops are ignored.
@@ -268,8 +387,6 @@ weighted_clique_num <- weighted_clique_number_impl
 #' These functions use the algorithm described by Tsukiyama et al., see
 #' reference below.
 #'
-#' @aliases independent.vertex.sets largest.independent.vertex.sets
-#' maximal.independent.vertex.sets independence.number
 #' @param graph The input graph, directed graphs are considered as undirected,
 #'   loop edges and multiple edges are ignored.
 #' @param min Numeric constant, limit for the minimum size of the independent
@@ -381,19 +498,3 @@ clique_size_counts <- function(graph, min = 0, max = 0, maximal = FALSE) {
     clique_size_hist_impl(graph, min, max)
   }
 }
-#' @export clique.number
-deprecated("clique.number", clique_num)
-#' @export independence.number
-deprecated("independence.number", ivs_size)
-#' @export independent.vertex.sets
-deprecated("independent.vertex.sets", ivs)
-#' @export largest.cliques
-deprecated("largest.cliques", largest_cliques)
-#' @export largest.independent.vertex.sets
-deprecated("largest.independent.vertex.sets", largest_ivs)
-#' @export maximal.cliques
-deprecated("maximal.cliques", max_cliques)
-#' @export maximal.cliques.count
-deprecated("maximal.cliques.count", count_max_cliques)
-#' @export maximal.independent.vertex.sets
-deprecated("maximal.independent.vertex.sets", maximal_ivs)

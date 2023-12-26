@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_nicely}
 \alias{layout_nicely}
-\alias{layout.auto}
 \alias{nicely}
 \title{Choose an appropriate graph layout algorithm automatically}
 \usage{

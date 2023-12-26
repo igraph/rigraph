@@ -2,10 +2,7 @@
 % Please edit documentation in R/flow.R
 \name{vertex_connectivity}
 \alias{vertex_connectivity}
-\alias{vertex.connectivity}
-\alias{vertex.disjoint.paths}
 \alias{cohesion}
-\alias{graph.cohesion}
 \alias{vertex_disjoint_paths}
 \alias{cohesion.igraph}
 \title{Vertex connectivity}

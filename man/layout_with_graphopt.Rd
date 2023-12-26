@@ -2,7 +2,6 @@
 % Please edit documentation in R/layout.R
 \name{layout_with_graphopt}
 \alias{layout_with_graphopt}
-\alias{layout.graphopt}
 \alias{with_graphopt}
 \title{The graphopt layout algorithm}
 \usage{

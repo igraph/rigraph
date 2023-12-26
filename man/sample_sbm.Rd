@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_sbm}
 \alias{sample_sbm}
-\alias{sbm.game}
 \alias{sbm}
 \title{Sample stochastic block model}
 \usage{

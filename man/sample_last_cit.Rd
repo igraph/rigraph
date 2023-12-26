@@ -2,9 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_last_cit}
 \alias{sample_last_cit}
-\alias{cited.type.game}
-\alias{citing.cited.type.game}
-\alias{lastcit.game}
 \alias{last_cit}
 \alias{sample_cit_types}
 \alias{cit_types}

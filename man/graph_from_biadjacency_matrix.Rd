@@ -2,7 +2,6 @@
 % Please edit documentation in R/incidence.R
 \name{graph_from_biadjacency_matrix}
 \alias{graph_from_biadjacency_matrix}
-\alias{graph.incidence}
 \title{Create graphs from a bipartite adjacency matrix}
 \usage{
 graph_from_biadjacency_matrix(

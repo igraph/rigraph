@@ -2,7 +2,6 @@
 % Please edit documentation in R/bipartite.R
 \name{bipartite_mapping}
 \alias{bipartite_mapping}
-\alias{bipartite.mapping}
 \title{Decide whether a graph is bipartite}
 \usage{
 bipartite_mapping(graph)

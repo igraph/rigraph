@@ -2,7 +2,6 @@
 % Please edit documentation in R/hrg.R
 \name{fit_hrg}
 \alias{fit_hrg}
-\alias{hrg.fit}
 \title{Fit a hierarchical random graph model}
 \usage{
 fit_hrg(graph, hrg = NULL, start = FALSE, steps = 0)

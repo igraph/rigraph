@@ -2,7 +2,6 @@
 % Please edit documentation in R/conversion.R
 \name{as_adjacency_matrix}
 \alias{as_adjacency_matrix}
-\alias{get.adjacency}
 \alias{as_adj}
 \title{Convert a graph to an adjacency matrix}
 \usage{

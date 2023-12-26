@@ -34,7 +34,7 @@ Run `revdepcheck::cloud_details(, "countland")` for more info
        6.     └─countland (local) FUN(X[[i]], ...)
        7.       └─base::apply(combX[spectral_cluster$cluster == x, ], 2, sum)
       
-      [ FAIL 4 | WARN 0 | SKIP 0 | PASS 61 ]
+      [ FAIL 4 | WARN 4 | SKIP 0 | PASS 61 ]
       Error: Test failures
       Execution halted
     ```
@@ -113,7 +113,7 @@ Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
       Loading required package: ggplot2
       > 
       > test_check("ggnetwork")
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      [ FAIL 1 | WARN 5 | SKIP 0 | PASS 38 ]
       
     ...
           ▆
@@ -123,7 +123,7 @@ Run `revdepcheck::cloud_details(, "ggnetwork")` for more info
        4. └─ggnetwork::ggnetwork(n, layout = matrix(runif(28), ncol = 2)) at test-ggnetwork.R:36:5
        5.   └─ggnetwork:::fortify.igraph(x, ...)
       
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 38 ]
+      [ FAIL 1 | WARN 5 | SKIP 0 | PASS 38 ]
       Error: Test failures
       Execution halted
     ```
@@ -183,6 +183,47 @@ Run `revdepcheck::cloud_details(, "inferCSN")` for more info
         libs  34.6Mb
     ```
 
+# intergraph
+
+<details>
+
+* Version: 2.0-3
+* GitHub: https://github.com/mbojan/intergraph
+* Source code: https://github.com/cran/intergraph
+* Date/Publication: 2023-08-20 23:22:33 UTC
+* Number of recursive dependencies: 63
+
+Run `revdepcheck::cloud_details(, "intergraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(intergraph)
+      > 
+      > test_check("intergraph")
+      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+    ...
+      ── Error ('test-netcompare.R:5:3'): netcompare just works ──────────────────────
+      Error in `eval(expr, envir, enclos)`: object 'r' not found
+      Backtrace:
+          ▆
+       1. └─testthat::expect_snapshot(print(r)) at test-netcompare.R:5:3
+       2.   └─rlang::cnd_signal(state$error)
+      
+      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
+      Error: Test failures
+      Execution halted
+    ```
+
 # manynet
 
 <details>
@@ -219,7 +260,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 1 | SKIP 14 | PASS 329 ]
+      [ FAIL 1 | WARN 11 | SKIP 14 | PASS 329 ]
       Error: Test failures
       Execution halted
     ```
@@ -391,14 +432,14 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
         as.mesh3d.ashape3d rgl 
       Some nat functions depend on a CMTK installation. See ?cmtk and README.md for details.
     ...
-       2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
        3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
        4. ├─base::subset(n, n_graph_dfs$order, invert = T)
        5. └─nat:::subset.neuron(n, n_graph_dfs$order, invert = T)
        6.   └─nat::prune_vertices(x, r, invert = !invert, ...)
        7.     └─igraph::delete.vertices(g, verticestoprune)
+       8.       └─igraph::delete_vertices(graph = graph, v = v)
       
-      [ FAIL 1 | WARN 0 | SKIP 5 | PASS 787 ]
+      [ FAIL 1 | WARN 11 | SKIP 5 | PASS 787 ]
       Error: Test failures
       Execution halted
     ```
@@ -582,15 +623,15 @@ Run `revdepcheck::cloud_details(, "pcalg")` for more info
       Running ‘test_bicscore.R’
       Running ‘test_causalEffect.R’
     ...
-      > set.seed(37)
-      > rD.10.4 <- withCallingHandlers(
-      +     rDAGall(10, 4) # "low-level warning" -- get it here and test it below
       +     , warning = function(w) {
       +         rDAG.warn <<- conditionMessage(w); invokeRestart("muffleWarning") })
       > ## with a low-level warning:
       > ## IGNORE_RDIFF_BEGIN
       > rDAG.warn
-      Error: object 'rDAG.warn' not found
+      [1] "The `edges` argument of `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0"
+      > ## IGNORE_RDIFF_END
+      > stopifnot(grepl("graph_molloy_.*Cannot shuffle graph", rDAG.warn))
+      Error: grepl("graph_molloy_.*Cannot shuffle graph", rDAG.warn) is not TRUE
       Execution halted
     ```
 
@@ -797,7 +838,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
        16.   └─dplyr (local) h(simpleError(msg, call))
        17.     └─rlang::abort(message, class = error_class, parent = parent, call = error_call)
       
-      [ FAIL 2 | WARN 10 | SKIP 0 | PASS 430 ]
+      [ FAIL 2 | WARN 21 | SKIP 0 | PASS 430 ]
       Error: Test failures
       Execution halted
     ```

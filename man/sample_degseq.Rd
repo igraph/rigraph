@@ -2,7 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_degseq}
 \alias{sample_degseq}
-\alias{degree.sequence.game}
 \alias{degseq}
 \title{Generate random graphs with a given degree sequence}
 \usage{

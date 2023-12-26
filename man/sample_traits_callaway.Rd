@@ -2,8 +2,6 @@
 % Please edit documentation in R/games.R
 \name{sample_traits_callaway}
 \alias{sample_traits_callaway}
-\alias{callaway.traits.game}
-\alias{establishment.game}
 \alias{traits_callaway}
 \alias{sample_traits}
 \alias{traits}

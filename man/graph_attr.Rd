@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{graph_attr}
 \alias{graph_attr}
-\alias{get.graph.attribute}
 \alias{graph.attributes}
 \title{Graph attributes of a graph}
 \usage{

@@ -2,7 +2,6 @@
 % Please edit documentation in R/decomposition.R
 \name{is_chordal}
 \alias{is_chordal}
-\alias{is.chordal}
 \title{Chordality of a graph}
 \usage{
 is_chordal(

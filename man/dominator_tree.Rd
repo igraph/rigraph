@@ -2,7 +2,6 @@
 % Please edit documentation in R/flow.R
 \name{dominator_tree}
 \alias{dominator_tree}
-\alias{dominator.tree}
 \title{Dominator tree}
 \usage{
 dominator_tree(graph, root, mode = c("out", "in", "all", "total"))

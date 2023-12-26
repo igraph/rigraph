@@ -2,7 +2,6 @@
 % Please edit documentation in R/centralization.R
 \name{centr_degree}
 \alias{centr_degree}
-\alias{centralization.degree}
 \title{Centralize a graph according to the degrees of vertices}
 \usage{
 centr_degree(

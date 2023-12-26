@@ -2,7 +2,6 @@
 % Please edit documentation in R/attributes.R
 \name{is_named}
 \alias{is_named}
-\alias{is.named}
 \title{Named graphs}
 \usage{
 is_named(graph)

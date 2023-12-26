@@ -2,7 +2,6 @@
 % Please edit documentation in R/community.R
 \name{cluster_louvain}
 \alias{cluster_louvain}
-\alias{multilevel.community}
 \title{Finding community structure by multi-level optimization of modularity}
 \usage{
 cluster_louvain(graph, weights = NULL, resolution = 1)
@@ -91,7 +90,6 @@ Community detection
 \code{\link{compare}()},
 \code{\link{groups}()},
 \code{\link{make_clusters}()},
-\code{\link{membership}()},
 \code{\link{modularity.igraph}()},
 \code{\link{plot_dendrogram}()},
 \code{\link{split_join_distance}()}
