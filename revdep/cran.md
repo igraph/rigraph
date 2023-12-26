@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 817 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 24 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 16 new problems
- * We failed to check 2 packages
+ * We saw 17 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -21,6 +21,9 @@ Issues with CRAN packages are summarised below.
 
 * inferCSN
   checking examples ... ERROR
+
+* intergraph
+  checking tests ... ERROR
 
 * manynet
   checking tests ... ERROR
@@ -61,7 +64,3 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
-### Failed to check
-
-* Seurat    (NA)
-* streamDAG (NA)

@@ -1,13 +1,6 @@
 # Revdeps
 
-## Failed to check (2)
-
-|package   |version |error |warning |note |
-|:---------|:-------|:-----|:-------|:----|
-|Seurat    |?       |      |        |     |
-|streamDAG |?       |      |        |     |
-
-## New problems (16)
+## New problems (17)
 
 |package           |version |error  |warning |note |
 |:-----------------|:-------|:------|:-------|:----|
@@ -15,6 +8,7 @@
 |[DiagrammeR](problems.md#diagrammer)|1.0.10  |__+1__ |        |1    |
 |[ggnetwork](problems.md#ggnetwork)|0.5.12  |__+1__ |        |1    |
 |[inferCSN](problems.md#infercsn)|0.99.8  |__+1__ |        |1    |
+|[intergraph](problems.md#intergraph)|2.0-3   |__+1__ |        |     |
 |[manynet](problems.md#manynet)|0.3.0   |__+1__ |        |2    |
 |[migraph](problems.md#migraph)|1.2.1   |__+1__ |        |     |
 |[molnet](problems.md#molnet)|0.1.0   |__+1__ |        |     |
