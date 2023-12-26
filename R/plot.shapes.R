@@ -1,4 +1,64 @@
 
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.shape.noplot()` was renamed to `shape_noplot()` to create a more
+#' consistent API.
+#' @inheritParams shape_noplot
+#' @keywords internal
+#' @export
+igraph.shape.noplot <- function(coords, v = NULL, params) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noplot()", "shape_noplot()")
+  shape_noplot(coords = coords, v = v, params = params)
+} # nocov end
+
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `igraph.shape.noclip()` was renamed to `shape_noclip()` to create a more
+#' consistent API.
+#' @inheritParams shape_noclip
+#' @keywords internal
+#' @export
+igraph.shape.noclip <- function(coords, el, params, end = c("both", "from", "to")) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "igraph.shape.noclip()", "shape_noclip()")
+  shape_noclip(coords = coords, el = el, params = params, end = end)
+} # nocov end
+
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `vertex.shapes()` was renamed to `shapes()` to create a more
+#' consistent API.
+#' @inheritParams shapes
+#' @keywords internal
+#' @export
+vertex.shapes <- function(shape = NULL) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "vertex.shapes()", "shapes()")
+  shapes(shape = shape)
+} # nocov end
+
+#' Various vertex shapes when plotting igraph graphs
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `add.vertex.shape()` was renamed to `add_shape()` to create a more
+#' consistent API.
+#' @inheritParams add_shape
+#' @keywords internal
+#' @export
+add.vertex.shape <- function(shape, clip = shape_noclip, plot = shape_noplot, parameters = list()) { # nocov start
+  lifecycle::deprecate_soft("2.0.0", "add.vertex.shape()", "add_shape()")
+  add_shape(shape = shape, clip = clip, plot = plot, parameters = parameters)
+} # nocov end
+
 #   IGraph R package
 #   Copyright (C) 2003-2012  Gabor Csardi <csardi.gabor@gmail.com>
 #   334 Harvard street, Cambridge, MA 02139 USA
@@ -151,8 +211,7 @@
 #' `shape_noplot()` is a very simple (and probably not very
 #' useful) plotting function, that does not plot anything.
 #'
-#' @aliases add.vertex.shape igraph.shape.noclip igraph.shape.noplot
-#'   vertex.shapes igraph.vertex.shapes
+#' @aliases   igraph.vertex.shapes
 #'
 #' @param shape Character scalar, name of a vertex shape. If it is
 #'    `NULL` for `shapes()`, then the names of all defined
@@ -1101,11 +1160,3 @@ mypie <- function(x, y, values, radius, edges = 200, col = NULL, angle = 45,
   clip = .igraph.shape.raster.clip,
   plot = .igraph.shape.raster.plot
 )
-#' @export add.vertex.shape
-deprecated("add.vertex.shape", add_shape)
-#' @export vertex.shapes
-deprecated("vertex.shapes", shapes)
-#' @export igraph.shape.noclip
-deprecated("igraph.shape.noclip", shape_noclip)
-#' @export igraph.shape.noplot
-deprecated("igraph.shape.noplot", shape_noplot)

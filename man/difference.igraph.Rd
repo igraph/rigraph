@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{difference.igraph}
 \alias{difference.igraph}
-\alias{graph.difference}
 \alias{\%m\%}
 \title{Difference of graphs}
 \usage{

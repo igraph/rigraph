@@ -4,11 +4,6 @@
 \alias{distance_table}
 \alias{mean_distance}
 \alias{distances}
-\alias{shortest.paths}
-\alias{get.shortest.paths}
-\alias{get.all.shortest.paths}
-\alias{average.path.length}
-\alias{path.length.hist}
 \alias{shortest_paths}
 \alias{all_shortest_paths}
 \title{Shortest (directed or undirected) paths between vertices}

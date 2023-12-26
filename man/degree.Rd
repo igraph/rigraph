@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{degree}
 \alias{degree}
-\alias{degree.distribution}
 \alias{degree_distribution}
 \title{Degree and degree distribution of the vertices}
 \usage{

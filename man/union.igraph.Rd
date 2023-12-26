@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{union.igraph}
 \alias{union.igraph}
-\alias{graph.union}
 \alias{\%u\%}
 \title{Union of graphs}
 \usage{

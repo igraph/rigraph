@@ -2,7 +2,6 @@
 % Please edit documentation in R/other.R
 \name{convex_hull}
 \alias{convex_hull}
-\alias{convex.hull}
 \title{Convex hull of a set of vertices}
 \usage{
 convex_hull(data)

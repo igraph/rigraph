@@ -2,7 +2,6 @@
 % Please edit documentation in R/motifs.R
 \name{triad_census}
 \alias{triad_census}
-\alias{triad.census}
 \title{Triad census, subgraphs with three vertices}
 \usage{
 triad_census(graph)

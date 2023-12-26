@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{knn}
 \alias{knn}
-\alias{graph.knn}
 \title{Average nearest neighbor degree}
 \usage{
 knn(

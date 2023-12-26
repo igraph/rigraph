@@ -2,7 +2,6 @@
 % Please edit documentation in R/topology.R
 \name{graph_from_isomorphism_class}
 \alias{graph_from_isomorphism_class}
-\alias{graph.isocreate}
 \title{Create a graph from an isomorphism class}
 \usage{
 graph_from_isomorphism_class(size, number, directed = TRUE)

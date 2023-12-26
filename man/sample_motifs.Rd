@@ -2,7 +2,6 @@
 % Please edit documentation in R/motifs.R
 \name{sample_motifs}
 \alias{sample_motifs}
-\alias{graph.motifs.est}
 \title{Graph motifs}
 \usage{
 sample_motifs(

@@ -2,7 +2,6 @@
 % Please edit documentation in R/operators.R
 \name{complementer}
 \alias{complementer}
-\alias{graph.complementer}
 \title{Complementer of a graph}
 \usage{
 complementer(graph, loops = FALSE)

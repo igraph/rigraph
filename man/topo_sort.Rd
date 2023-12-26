@@ -2,7 +2,6 @@
 % Please edit documentation in R/structural.properties.R
 \name{topo_sort}
 \alias{topo_sort}
-\alias{topological.sort}
 \title{Topological sorting of vertices in a graph}
 \usage{
 topo_sort(graph, mode = c("out", "all", "in"))

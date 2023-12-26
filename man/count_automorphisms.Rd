@@ -2,8 +2,6 @@
 % Please edit documentation in R/topology.R
 \name{count_automorphisms}
 \alias{count_automorphisms}
-\alias{graph.automorphisms}
-\alias{automorphisms}
 \title{Number of automorphisms}
 \usage{
 count_automorphisms(
