@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9010
+
+## Bug fixes
+
+  - Double registration of entrypoint removed.
+
+  - Fix some deprecated and incompatible pointers warnings (#1020).
+
+## Chore
+
+  - Update revdepcheck results.
+
+  - Add tools script and template for moving to lifecycle (#1022).
+
+## Documentation
+
+  - New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
+
+
 # igraph 1.6.0.9009
 
 ## Bug fixes
