@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9011
+
+## Refactoring
+
+  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
+
+  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
+
+## Breaking changes
+
+  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
+
+  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
+
+
 # igraph 1.6.0.9010
 
 ## Bug fixes
