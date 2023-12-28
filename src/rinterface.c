@@ -9911,9 +9911,9 @@ SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SE
 }
 
 /*-------------------------------------------/
-/ igraph_subisomorphic_function_vf2          /
+/ igraph_get_subisomorphisms_vf2_callback    /
 /-------------------------------------------*/
-SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_get_subisomorphisms_vf2_callback(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9967,7 +9967,7 @@ SEXP R_igraph_subisomorphic_function_vf2(SEXP graph1, SEXP graph2, SEXP vertex_c
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_map21);
                                         /* Call igraph */
-  IGRAPH_R_CHECK(igraph_subisomorphic_function_vf2(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1)), (Rf_isNull(vertex_color2) ? 0 : (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2)), (Rf_isNull(edge_color1) ? 0 : (Rf_isNull(edge_color1) ? 0 : &c_edge_color1)), (Rf_isNull(edge_color2) ? 0 : (Rf_isNull(edge_color2) ? 0 : &c_edge_color2)), &c_map12, &c_map21, 0, 0, 0, 0));
+  IGRAPH_R_CHECK(igraph_get_subisomorphisms_vf2_callback(&c_graph1, &c_graph2, (Rf_isNull(vertex_color1) ? 0 : (Rf_isNull(vertex_color1) ? 0 : &c_vertex_color1)), (Rf_isNull(vertex_color2) ? 0 : (Rf_isNull(vertex_color2) ? 0 : &c_vertex_color2)), (Rf_isNull(edge_color1) ? 0 : (Rf_isNull(edge_color1) ? 0 : &c_edge_color1)), (Rf_isNull(edge_color2) ? 0 : (Rf_isNull(edge_color2) ? 0 : &c_edge_color2)), &c_map12, &c_map21, 0, 0, 0, 0));
 
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(2));

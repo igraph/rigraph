@@ -204,6 +204,7 @@ extern SEXP R_igraph_get_stochastic(void *, void *);
 extern SEXP R_igraph_get_stochastic_sparse(void *, void *, void *);
 extern SEXP R_igraph_get_stochastic_sparsemat(void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
+extern SEXP R_igraph_get_subisomorphisms_vf2_callback(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_path(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_paths(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_getsphere(void *, void *, void *, void *, void *, void *, void *, void *);
@@ -433,7 +434,6 @@ extern SEXP R_igraph_strerror(void *);
 extern SEXP R_igraph_subcomponent(void *, void *, void *);
 extern SEXP R_igraph_subgraph_from_edges(void *, void *, void *);
 extern SEXP R_igraph_subisomorphic(void *, void *);
-extern SEXP R_igraph_subisomorphic_function_vf2(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_subisomorphic_lad(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_subisomorphic_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_symmetric_tree(void *, void *);
@@ -681,6 +681,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_stochastic_sparse",                      (DL_FUNC) &R_igraph_get_stochastic_sparse,                       3},
     {"R_igraph_get_stochastic_sparsemat",                   (DL_FUNC) &R_igraph_get_stochastic_sparsemat,                    2},
     {"R_igraph_get_subisomorphisms_vf2",                    (DL_FUNC) &R_igraph_get_subisomorphisms_vf2,                     6},
+    {"R_igraph_get_subisomorphisms_vf2_callback",           (DL_FUNC) &R_igraph_get_subisomorphisms_vf2_callback,            7},
     {"R_igraph_get_widest_path",                            (DL_FUNC) &R_igraph_get_widest_path,                             5},
     {"R_igraph_get_widest_paths",                           (DL_FUNC) &R_igraph_get_widest_paths,                            5},
     {"R_igraph_getsphere",                                  (DL_FUNC) &R_igraph_getsphere,                                   8},
@@ -910,7 +911,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_subcomponent",                               (DL_FUNC) &R_igraph_subcomponent,                                3},
     {"R_igraph_subgraph_from_edges",                        (DL_FUNC) &R_igraph_subgraph_from_edges,                         3},
     {"R_igraph_subisomorphic",                              (DL_FUNC) &R_igraph_subisomorphic,                               2},
-    {"R_igraph_subisomorphic_function_vf2",                 (DL_FUNC) &R_igraph_subisomorphic_function_vf2,                  7},
     {"R_igraph_subisomorphic_lad",                          (DL_FUNC) &R_igraph_subisomorphic_lad,                           7},
     {"R_igraph_subisomorphic_vf2",                          (DL_FUNC) &R_igraph_subisomorphic_vf2,                           6},
     {"R_igraph_symmetric_tree",                             (DL_FUNC) &R_igraph_symmetric_tree,                              2},

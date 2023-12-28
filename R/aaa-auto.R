@@ -3349,7 +3349,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
   res
 }
 
-subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL, ishohandler.fn) {
+get_subisomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color2=NULL, edge.color1=NULL, edge.color2=NULL, ishohandler.fn) {
   # Argument checks
   ensure_igraph(graph1)
   ensure_igraph(graph2)
@@ -3396,7 +3396,7 @@ subisomorphic_function_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, 
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_subisomorphic_function_vf2, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
+  res <- .Call(R_igraph_get_subisomorphisms_vf2_callback, graph1, graph2, vertex.color1, vertex.color2, edge.color1, edge.color2, ishohandler.fn)
 
   res
 }

@@ -314,6 +314,9 @@ EDGESET_LIST:
     HEADER: ~
 
 ARPACKOPT:
+    DEFAULT:
+        arpack_defaults: arpack_defaults()
+        igraph.arpack.default: arpack_defaults()
     INCONV:
         INOUT: '%I% <- modify_list(arpack_defaults(), %I%)'
 
