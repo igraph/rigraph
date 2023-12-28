@@ -2,9 +2,9 @@
 #define igraph_lgl_yyHEADER_H 1
 #define igraph_lgl_yyIN_HEADER 1
 
-#line 6 "src/vendor/io/parsers/lgl-lexer.h"
+#line 5 "src/vendor/io/parsers/lgl-lexer.h"
 
-#line 8 "src/vendor/io/parsers/lgl-lexer.h"
+#line 7 "src/vendor/io/parsers/lgl-lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -732,6 +732,6 @@ extern int yylex \
 #line 98 "src/vendor/cigraph/src/io/lgl-lexer.l"
 
 
-#line 736 "src/vendor/io/parsers/lgl-lexer.h"
+#line 735 "src/vendor/io/parsers/lgl-lexer.h"
 #undef igraph_lgl_yyIN_HEADER
 #endif /* igraph_lgl_yyHEADER_H */

@@ -2,9 +2,9 @@
 #define igraph_pajek_yyHEADER_H 1
 #define igraph_pajek_yyIN_HEADER 1
 
-#line 6 "src/vendor/io/parsers/pajek-lexer.h"
+#line 5 "src/vendor/io/parsers/pajek-lexer.h"
 
-#line 8 "src/vendor/io/parsers/pajek-lexer.h"
+#line 7 "src/vendor/io/parsers/pajek-lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -736,6 +736,6 @@ extern int yylex \
 #line 195 "src/vendor/cigraph/src/io/pajek-lexer.l"
 
 
-#line 740 "src/vendor/io/parsers/pajek-lexer.h"
+#line 739 "src/vendor/io/parsers/pajek-lexer.h"
 #undef igraph_pajek_yyIN_HEADER
 #endif /* igraph_pajek_yyHEADER_H */

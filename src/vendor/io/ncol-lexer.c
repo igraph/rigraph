@@ -1,6 +1,6 @@
-#line 2 "src/vendor/io/ncol-lexer.c"
+#line 1 "src/vendor/io/ncol-lexer.c"
 
-#line 4 "src/vendor/io/ncol-lexer.c"
+#line 3 "src/vendor/io/ncol-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -741,11 +741,11 @@ static const flex_int32_t yy_rule_can_match_eol[6] =
 #endif
 #define stdout 0
 #endif
-#line 745 "src/vendor/io/ncol-lexer.c"
+#line 744 "src/vendor/io/ncol-lexer.c"
 #define YY_NO_INPUT 1
 /* Anything except non-printable (00-1F), space (20) and del (7F) */
 
-#line 749 "src/vendor/io/ncol-lexer.c"
+#line 748 "src/vendor/io/ncol-lexer.c"
 
 #define INITIAL 0
 #define LINE 1
@@ -1033,7 +1033,7 @@ YY_DECL
 
 #line 82 "src/vendor/cigraph/src/io/ncol-lexer.l"
  /* ------------------------------------------------whitespace------*/
-#line 1037 "src/vendor/io/ncol-lexer.c"
+#line 1036 "src/vendor/io/ncol-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1133,7 +1133,7 @@ YY_RULE_SETUP
 #line 95 "src/vendor/cigraph/src/io/ncol-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1137 "src/vendor/io/ncol-lexer.c"
+#line 1136 "src/vendor/io/ncol-lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

@@ -1,6 +1,6 @@
-#line 2 "src/vendor/io/gml-lexer.c"
+#line 1 "src/vendor/io/gml-lexer.c"
 
-#line 4 "src/vendor/io/gml-lexer.c"
+#line 3 "src/vendor/io/gml-lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -770,12 +770,12 @@ static const flex_int32_t yy_rule_can_match_eol[12] =
 #endif
 #define stdout 0
 #endif
-#line 774 "src/vendor/io/gml-lexer.c"
+#line 773 "src/vendor/io/gml-lexer.c"
 #define YY_NO_INPUT 1
 /* Use to parse inf/nan as number only when expecting a value, i.e. after a keyword.
  * Otherwise they are parsed as a keyword. */
 
-#line 779 "src/vendor/io/gml-lexer.c"
+#line 778 "src/vendor/io/gml-lexer.c"
 
 #define INITIAL 0
 #define VALUE 1
@@ -1064,7 +1064,7 @@ YY_DECL
 #line 80 "src/vendor/cigraph/src/io/gml-lexer.l"
 
 
-#line 1068 "src/vendor/io/gml-lexer.c"
+#line 1067 "src/vendor/io/gml-lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1202,7 +1202,7 @@ YY_RULE_SETUP
 #line 105 "src/vendor/cigraph/src/io/gml-lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1206 "src/vendor/io/gml-lexer.c"
+#line 1205 "src/vendor/io/gml-lexer.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(VALUE):
 	yyterminate();
