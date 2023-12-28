@@ -414,7 +414,7 @@ igraph_error_t R_igraph_attribute_init(igraph_t *graph, igraph_vector_ptr_t *att
       strvec=(igraph_strvector_t*) rec->value;
       if (igraph_strvector_size(strvec) > 0) {
         SET_VECTOR_ELT(gal, i, NEW_CHARACTER(1));
-        SET_STRING_ELT(VECTOR_ELT(gal,i), 0, Rf_mkChar(STR(*strvec, 0)));
+        SET_STRING_ELT(VECTOR_ELT(gal,i), 0, Rf_mkChar(igraph_strvector_get(strvec, 0)));
       }
       break;
     case IGRAPH_ATTRIBUTE_OBJECT:
@@ -6433,7 +6433,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
   igraph_vector_init(&cap, 0);
   IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&g, file, &problem, &label, &source, &target, &cap, directed));
   fclose(file);
-  if (!strcmp(STR(problem, 0), "max")) {
+  if (!strcmp(igraph_strvector_get(&problem, 0), "max")) {
     PROTECT(result=NEW_LIST(5)); px++;
     SET_VECTOR_ELT(result, 0, R_igraph_strvector_to_SEXP(&problem));
     igraph_strvector_destroy(&problem);
@@ -6446,7 +6446,7 @@ SEXP R_igraph_read_graph_dimacs(SEXP pvfile, SEXP pdirected) {
     SET_VECTOR_ELT(result, 4, NEW_NUMERIC(igraph_vector_size(&cap)));
     igraph_vector_copy_to(&cap, REAL(VECTOR_ELT(result,4)));
     igraph_vector_destroy(&cap);
-  } else if (!strcmp(STR(problem, 0), "edge")) {
+  } else if (!strcmp(igraph_strvector_get(&problem, 0), "edge")) {
     PROTECT(result=NEW_LIST(3)); px++;
     SET_VECTOR_ELT(result, 0, R_igraph_strvector_to_SEXP(&problem));
     igraph_strvector_destroy(&problem);
