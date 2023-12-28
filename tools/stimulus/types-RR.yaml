@@ -2,9 +2,6 @@
 GRAPH:
     INCONV: ensure_igraph(%I%)
 
-GRAPH_OR_0:
-    INCONV: ensure_igraph(%I%, optional = TRUE)
-
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
@@ -28,10 +25,7 @@ BOOLEAN:
 
 INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
-    INCONV: '%I% <- as.numeric(%I%)-1L'
-
-INDEX_VECTOR_OR_0:
-    INCONV: 'if (!is.null(%I%)) %I% <- as.numeric(%I%)-1L'
+    INCONV: '%I% <- as.numeric(%I%)-1'
 
 VECTOR:
     DEFAULT:
@@ -45,44 +39,17 @@ VERTEX_QTY:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
-VECTOR_LONG:
-    INCONV: '%I% <- as.numeric(%I%)'
-
 VECTOR_INT:
     INCONV: '%I% <- as.numeric(%I%)'
-
-VECTOR_INT_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
-
-VECTORM1:
-    INCONV: '%I% <- as.numeric(%I%)-1'
-
-VECTOR_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
-
-VECTORM1_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)-1
-
-VECTOR_LONG_M1:
-    INCONV: '%I% <- as.numeric(%I%)-1'
 
 VECTOR_BOOL:
     INCONV: '%I% <- as.logical(%I%)'
 
-VECTOR_BOOL_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.logical(%I%)
-
 MATRIX:
-    INCONV: '%I% <- as.matrix(structure(as.double(%I%), dim=dim(%I%)))'
-
-MATRIX_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
+    INCONV: '%I% <- as.matrix(structure(as.numeric(%I%), dim=dim(%I%)))'
 
 ARRAY3:
-    INCONV: '%I% <- structure(as.double(%I%), dim=dim(%I%))'
-
-ARRAY3_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
+    INCONV: '%I% <- structure(as.numeric(%I%), dim=dim(%I%))'
 
 ATTRIBUTES: {}
 
@@ -239,11 +206,11 @@ VERTEX_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.numeric(%I%)-1L
+          %I% <- as.numeric(%I%)-1
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1L
+            %I% <- %I%+1
             if (igraph_opt("add.vertex.names") && is_named(%I1%)) {
               names(%I%) <- vertex_attr(%I1%, "name")
             }
@@ -258,11 +225,11 @@ EDGE_COLOR:
           }
         }
         if (!is.null(%I%)) {
-          %I% <- as.integer(%I%)-1L
+          %I% <- as.numeric(%I%)-1
         }
     OUTCONV:
         OUT: |-
-            %I% <- %I%+1L
+            %I% <- %I%+1
 
 'NULL':
     CALL: {}
@@ -297,7 +264,7 @@ VERTEXSET_LIST:
 
 VERTEXSETLIST_INT:
     INCONV:
-        IN: '%I% <- lapply(%I%, function(x) as.integer(x)-1L)'
+        IN: '%I% <- lapply(%I%, function(x) as.numeric(x)-1)'
 
 EDGESET_LIST:
     OUTCONV:
@@ -338,7 +305,7 @@ BLISSSH:
 BLISSINFO: {}
 
 ADJLIST:
-    INCONV: '%I% <- lapply(%I%, function(x) as.double(x)-1L)'
+    INCONV: '%I% <- lapply(%I%, function(x) as.numeric(x)-1)'
 
 COMMCMP:
     DEFAULT:
