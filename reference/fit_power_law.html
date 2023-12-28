@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,22 +162,22 @@ power-law distribution.</p></dd>
     <p>This function fits a power-law distribution to a vector containing samples
 from a distribution (that is assumed to follow a power-law of course). In a
 power-law distribution, it is generally assumed that \(P(X=x)\) is
-proportional to \(x^{-alpha}\), where \(x\) is a positive
+proportional to \(x^{-\alpha}\), where \(x\) is a positive
 number and \(\alpha\) is greater than 1. In many real-world cases,
 the power-law behaviour kicks in only above a threshold value
-\(x_{min}\). The goal of this function is to determine
-\(\alpha\) if \(x_{min}\) is given, or to determine
-\(x_{min}\) and the corresponding value of \(\alpha\).</p>
+\(x_\text{min}\). The goal of this function is to determine
+\(\alpha\) if \(x_\text{min}\) is given, or to determine
+\(x_\text{min}\) and the corresponding value of \(\alpha\).</p>
 <p><code>fit_power_law()</code> provides two maximum likelihood implementations.  If
 the <code>implementation</code> argument is ‘<code>R.mle</code>’, then the BFGS
 optimization (see <a href="https://rdrr.io/r/stats4/mle.html" class="external-link">mle</a>) algorithm is applied.  The additional
 arguments are passed to the mle function, so it is possible to change the
 optimization method and/or its parameters.  This implementation can
-<em>not</em> to fit the \(x_{min}\) argument, so use the
+<em>not</em> to fit the \(x_\text{min}\) argument, so use the
 ‘<code>plfit</code>’ implementation if you want to do that.</p>
 <p>The ‘<code>plfit</code>’ implementation also uses the maximum likelihood
-principle to determine \(\alpha\) for a given \(x_{min}\);
-When \(x_{min}\) is not given in advance, the algorithm will attempt
+principle to determine \(\alpha\) for a given \(x_\text{min}\);
+When \(x_\text{min}\) is not given in advance, the algorithm will attempt
 to find itsoptimal value for which the \(p\)-value of a Kolmogorov-Smirnov
 test between the fitted distribution and the original sample is the largest.
 The function uses the method of Clauset, Shalizi and Newman to calculate the
