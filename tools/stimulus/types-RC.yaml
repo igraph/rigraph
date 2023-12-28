@@ -89,7 +89,7 @@ BOOLEAN:
             LOGICAL(%I%)[0]=%C%;
 
 ERROR:
-    CTYPE: int
+    CTYPE: igraph_error_t
 
 INDEX_VECTOR:
     CALL: '&%C%'
