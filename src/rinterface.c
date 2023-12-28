@@ -2492,8 +2492,8 @@ SEXP R_igraph_get_k_shortest_paths(SEXP graph, SEXP weights, SEXP k, SEXP from, 
   IGRAPH_FINALLY_CLEAN(1);
   SET_VECTOR_ELT(r_result, 0, vertex_paths);
   SET_VECTOR_ELT(r_result, 1, edge_paths);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("vertex_paths"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("edge_paths"));
+  SET_STRING_ELT(r_names, 0, Rf_mkChar("vpaths"));
+  SET_STRING_ELT(r_names, 1, Rf_mkChar("epaths"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(3);
 

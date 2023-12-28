@@ -374,6 +374,10 @@ igraph_get_all_simple_paths:
       PP: get.all.simple.paths.pp
 
 igraph_get_k_shortest_paths:
+    PARAM_ORDER: graph, from, to, *, k, ...
+    PARAM_NAMES:
+        vertex_paths: vpaths
+        edge_paths: epaths
 
 igraph_get_widest_path:
 

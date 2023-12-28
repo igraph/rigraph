@@ -796,8 +796,9 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
   res
 }
 
-get_k_shortest_paths_impl <- function(graph, weights=NULL, k, from, to, mode=c("out", "in", "all", "total")) {
+get_k_shortest_paths_impl <- function(graph, from, to, ..., k, weights=NULL, mode=c("out", "in", "all", "total")) {
   # Argument checks
+  check_dots_empty()
   ensure_igraph(graph)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
@@ -822,10 +823,10 @@ get_k_shortest_paths_impl <- function(graph, weights=NULL, k, from, to, mode=c("
   # Function call
   res <- .Call(R_igraph_get_k_shortest_paths, graph, weights, k, from-1, to-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res$vertex.paths <- lapply(res$vertex.paths, unsafe_create_vs, graph = graph, verts = V(graph))
+    res$vpaths <- lapply(res$vpaths, unsafe_create_vs, graph = graph, verts = V(graph))
   }
   if (igraph_opt("return.vs.es")) {
-    res$edge.paths <- lapply(res$edge.paths, unsafe_create_es, graph = graph, es = E(graph))
+    res$epaths <- lapply(res$epaths, unsafe_create_es, graph = graph, es = E(graph))
   }
   res
 }
@@ -1196,7 +1197,7 @@ ecc_impl <- function(graph, eids=E(graph), k=3, offset=FALSE, normalize=TRUE) {
   res
 }
 
-reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c('default', 'ratio')) {
+reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c("default", "ratio")) {
   # Argument checks
   ensure_igraph(graph)
   ignore.loops <- as.logical(ignore.loops)
