@@ -2,9 +2,6 @@
 GRAPH:
     INCONV: ensure_igraph(%I%)
 
-GRAPH_OR_0:
-    INCONV: ensure_igraph(%I%, optional = TRUE)
-
 INTEGER:
     DEFAULT:
         FINEITER: max(10, log2(vcount(graph)))
@@ -30,9 +27,6 @@ INDEX_VECTOR:
     # Indices in R are 1-based; the conversion takes place here
     INCONV: '%I% <- as.numeric(%I%)-1L'
 
-INDEX_VECTOR_OR_0:
-    INCONV: 'if (!is.null(%I%)) %I% <- as.numeric(%I%)-1L'
-
 VECTOR:
     DEFAULT:
         AsmDefaultCvec: strength(%I1%, weights=weights)/(vcount(%I1%)-1)
@@ -45,44 +39,17 @@ VERTEX_QTY:
               names(%I%) <- vertex_attr(%I1%, "name", %I2%)
             }
 
-VECTOR_LONG:
-    INCONV: '%I% <- as.numeric(%I%)'
-
 VECTOR_INT:
     INCONV: '%I% <- as.numeric(%I%)'
-
-VECTOR_INT_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
-
-VECTORM1:
-    INCONV: '%I% <- as.numeric(%I%)-1'
-
-VECTOR_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)
-
-VECTORM1_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.numeric(%I%)-1
-
-VECTOR_LONG_M1:
-    INCONV: '%I% <- as.numeric(%I%)-1'
 
 VECTOR_BOOL:
     INCONV: '%I% <- as.logical(%I%)'
 
-VECTOR_BOOL_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- as.logical(%I%)
-
 MATRIX:
     INCONV: '%I% <- as.matrix(structure(as.double(%I%), dim=dim(%I%)))'
 
-MATRIX_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
-
 ARRAY3:
     INCONV: '%I% <- structure(as.double(%I%), dim=dim(%I%))'
-
-ARRAY3_OR_0:
-    INCONV: if (!is.null(%I%)) %I% <- structure(as.double(%I%), dim=dim(%I%))
 
 ATTRIBUTES: {}
 
