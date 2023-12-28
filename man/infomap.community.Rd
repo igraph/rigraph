@@ -13,7 +13,7 @@ infomap.community(
 )
 }
 \arguments{
-\item{graph}{The input graph.}
+\item{graph}{The input graph. Edge directions will be taken into account.}
 
 \item{e.weights}{If not \code{NULL}, then a numeric vector of edge weights.
 The length must match the number of edges in the graph.  By default the
