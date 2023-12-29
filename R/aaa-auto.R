@@ -1,5 +1,17 @@
 # styler: off
 
+empty_impl <- function(n=0, directed=TRUE) {
+  # Argument checks
+  n <- as.numeric(n)
+  directed <- as.logical(directed)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_empty, n, directed)
+
+  res
+}
+
 copy_impl <- function(from) {
   # Argument checks
   ensure_igraph(from)
