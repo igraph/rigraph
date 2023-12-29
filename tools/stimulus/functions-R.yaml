@@ -722,16 +722,12 @@ igraph_split_join_distance:
 igraph_community_infomap:
     IGNORE: RR
 
-#######################################
-# Other, (yet) undocumented functions
-#######################################
-
-igraph_convergence_degree:
-    IGNORE: RR, RC, RInit
-
 igraph_community_voronoi:
     IGNORE: RR, RC, RInit
 
+#######################################
+# Graphlets
+#######################################
 
 igraph_graphlets:
     IGNORE: RC
@@ -741,6 +737,10 @@ igraph_graphlets_candidate_basis:
 
 igraph_graphlets_project:
     IGNORE: RR, RC, RInit
+
+#######################################
+# Hierarchical random graphs
+#######################################
 
 igraph_hrg_fit:
     IGNORE: RR
@@ -985,28 +985,6 @@ igraph_simplify_and_colorize:
     IGNORE: RR
 
 #######################################
-# SCG
-#######################################
-
-# TODO: define what to do with SCG
-# scg is in separate repository from
-
-# igraph_scg_grouping:
-#     IGNORE: RR
-
-# igraph_scg_semiprojectors:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_adjacency:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_stochastic:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_laplacian:
-#     IGNORE: RR, RC, RInit
-
-#######################################
 # Matching
 #######################################
 
@@ -1075,13 +1053,18 @@ igraph_eulerian_cycle:
         edge_res: epath
         vertex_res: vpath
 
-igraph_is_tree:
-    PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
-    DEPS: root ON graph
+#######################################
+# Cycle bases
+#######################################
+
 
 #######################################
 # Trees
 #######################################
+
+igraph_is_tree:
+    PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
+    DEPS: root ON graph
 
 igraph_from_prufer:
     R:
@@ -1111,6 +1094,35 @@ igraph_random_spanning_tree:
 
 igraph_moran_process:
     DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
+
+#######################################
+# SCG
+#######################################
+
+# TODO: define what to do with SCG
+# scg is in separate repository from
+
+# igraph_scg_grouping:
+#     IGNORE: RR
+
+# igraph_scg_semiprojectors:
+#     IGNORE: RR, RC, RInit
+
+# igraph_scg_adjacency:
+#     IGNORE: RR, RC, RInit
+
+# igraph_scg_stochastic:
+#     IGNORE: RR, RC, RInit
+
+# igraph_scg_laplacian:
+#     IGNORE: RR, RC, RInit
+
+#######################################
+# Other, (yet) undocumented functions
+#######################################
+
+igraph_convergence_degree:
+    IGNORE: RR, RC, RInit
 
 igraph_expand_path_to_pairs:
     IGNORE: RR
