@@ -1096,14 +1096,6 @@ igraph_from_prufer:
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
 
-igraph_get_stochastic_sparsemat:
-    PARAMS: |-
-        GRAPH graph, OUT SPARSEMATPTR sparsemat,
-        BOOLEAN column_wise=False
-
-igraph_hrg_dendrogram:
-    PARAMS: OUT GRAPH graph, HRG hrg
-
 igraph_is_tree:
     PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
     DEPS: root ON graph
