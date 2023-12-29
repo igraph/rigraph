@@ -302,12 +302,6 @@ igraph_get_all_shortest_paths_dijkstra:
         vertices: vpaths
         edges: epaths
 
-igraph_shortest_paths_bellman_ford:
-    IGNORE: RR, RC, RInit
-
-igraph_shortest_paths_johnson:
-    IGNORE: RR, RC, RInit
-
 igraph_get_all_simple_paths:
     IGNORE: RR
     R:
