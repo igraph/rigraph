@@ -531,9 +531,6 @@ igraph_bipartite_game_gnm:
 # Spectral properties
 #######################################
 
-igraph_laplacian:
-    IGNORE: RR, RC, RInit
-
 #######################################
 # Components
 #######################################
