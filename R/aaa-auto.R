@@ -4066,29 +4066,3 @@ version_impl <- function() {
   res
 }
 
-get_stochastic_sparsemat_impl <- function(graph, column.wise=FALSE) {
-  # Argument checks
-  ensure_igraph(graph)
-  column.wise <- as.logical(column.wise)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_stochastic_sparsemat, graph, column.wise)
-
-  res
-}
-
-hrg_dendrogram_impl <- function(hrg) {
-  # Argument checks
-  if (is.null(hrg)) {
-    hrg <- list(left=c(), right=c(), prob=c(), edges=c(), vertices=c())
-  }
-  hrg <- lapply(hrg[c("left","right","prob","edges","vertices")], as.numeric)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_hrg_dendrogram, hrg)
-
-  res
-}
-

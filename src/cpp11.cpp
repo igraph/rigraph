@@ -202,7 +202,6 @@ extern SEXP R_igraph_get_shortest_path_dijkstra(void *, void *, void *, void *, 
 extern SEXP R_igraph_get_shortest_paths(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_stochastic(void *, void *);
 extern SEXP R_igraph_get_stochastic_sparse(void *, void *, void *);
-extern SEXP R_igraph_get_stochastic_sparsemat(void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_subisomorphisms_vf2_callback(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_get_widest_path(void *, void *, void *, void *, void *);
@@ -228,7 +227,6 @@ extern SEXP R_igraph_has_multiple(void *);
 extern SEXP R_igraph_has_mutual(void *, void *);
 extern SEXP R_igraph_hrg_consensus(void *, void *, void *, void *);
 extern SEXP R_igraph_hrg_create(void *, void *);
-extern SEXP R_igraph_hrg_dendrogram(void *);
 extern SEXP R_igraph_hrg_fit(void *, void *, void *, void *);
 extern SEXP R_igraph_hrg_game(void *);
 extern SEXP R_igraph_hrg_predict(void *, void *, void *, void *, void *);
@@ -679,7 +677,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_get_shortest_paths",                         (DL_FUNC) &R_igraph_get_shortest_paths,                         10},
     {"R_igraph_get_stochastic",                             (DL_FUNC) &R_igraph_get_stochastic,                              2},
     {"R_igraph_get_stochastic_sparse",                      (DL_FUNC) &R_igraph_get_stochastic_sparse,                       3},
-    {"R_igraph_get_stochastic_sparsemat",                   (DL_FUNC) &R_igraph_get_stochastic_sparsemat,                    2},
     {"R_igraph_get_subisomorphisms_vf2",                    (DL_FUNC) &R_igraph_get_subisomorphisms_vf2,                     6},
     {"R_igraph_get_subisomorphisms_vf2_callback",           (DL_FUNC) &R_igraph_get_subisomorphisms_vf2_callback,            7},
     {"R_igraph_get_widest_path",                            (DL_FUNC) &R_igraph_get_widest_path,                             5},
@@ -705,7 +702,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_has_mutual",                                 (DL_FUNC) &R_igraph_has_mutual,                                  2},
     {"R_igraph_hrg_consensus",                              (DL_FUNC) &R_igraph_hrg_consensus,                               4},
     {"R_igraph_hrg_create",                                 (DL_FUNC) &R_igraph_hrg_create,                                  2},
-    {"R_igraph_hrg_dendrogram",                             (DL_FUNC) &R_igraph_hrg_dendrogram,                              1},
     {"R_igraph_hrg_fit",                                    (DL_FUNC) &R_igraph_hrg_fit,                                     4},
     {"R_igraph_hrg_game",                                   (DL_FUNC) &R_igraph_hrg_game,                                    1},
     {"R_igraph_hrg_predict",                                (DL_FUNC) &R_igraph_hrg_predict,                                 5},
