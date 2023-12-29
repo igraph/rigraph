@@ -325,6 +325,9 @@ igraph_get_all_simple_paths:
     R:
       PP: get.all.simple.paths.pp
 
+igraph_spanner:
+    DEPS: weights ON graph, spanner ON graph
+
 igraph_subcomponent:
     IGNORE: RR, RC
 
@@ -334,11 +337,19 @@ igraph_betweenness:
 igraph_betweenness_cutoff:
     IGNORE: RR
 
+igraph_betweenness_subset:
+    DEPS: |-
+        vids ON graph, weights ON graph, res ON graph vids, sources ON graph, targets ON graph
+
 igraph_edge_betweenness:
     IGNORE: RR
 
 igraph_edge_betweenness_cutoff:
     IGNORE: RR
+
+igraph_edge_betweenness_subset:
+    DEPS: |-
+        eids ON graph, weights ON graph V(graph), res ON graph V(graph), sources ON graph, targets ON graph
 
 igraph_harmonic_centrality:
     # This is handled by igraph_harmonic_centrality_cutoff
@@ -428,9 +439,6 @@ igraph_get_all_eids_between:
     # in the argument list.
     DEPS: from ON graph, to ON graph, eids ON graph
 
-igraph_hub_and_authority_scores:
-    DEPS: weights ON graph, hub_vector ON graph, authority_vector ON graph
-
 igraph_pseudo_diameter:
     DEPS: start_vid ON graph
 
@@ -438,16 +446,16 @@ igraph_pseudo_diameter_dijkstra:
     DEPS: start_vid ON graph, weights ON graph
 
 igraph_bfs_simple:
-    DEPS: root ON graph
+    DEPS: root ON graph, order ON graph
 
 igraph_is_bipartite:
-    DEPS: type ON graph
+    DEPS: type ON graph V(graph)
 
 igraph_bipartite_game:
-    DEPS: types ON graph
+    DEPS: types ON graph V(graph)
 
 igraph_vertex_path_from_edge_path:
-    DEPS: start ON graph, edge_path ON graph
+    DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
 
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
@@ -469,6 +477,13 @@ igraph_authority_score:
     # dependencies: the graph and the vertex set, but we only have the graph
     # in the argument list.
     DEPS: weights ON graph, vector ON graph V(graph)
+
+igraph_hub_and_authority_scores:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
 
 igraph_arpack_rssolve:
     IGNORE: RR, RC, RInit
@@ -532,6 +547,9 @@ igraph_bipartite_projection:
 
 igraph_create_bipartite:
     IGNORE: RR
+
+igraph_biadjacency:
+    DEPS: types ON graph V(graph)
 
 igraph_bipartite_game_gnp:
     IGNORE: RR
@@ -1141,6 +1159,13 @@ igraph_is_tree:
 #######################################
 # Coloring
 #######################################
+
+#######################################
+# Microscopic update
+#######################################
+
+igraph_moran_process:
+    DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
 
 #######################################
 # Other, (yet) undocumented functions

@@ -950,7 +950,7 @@ spanner_impl <- function(graph, stretch, weights) {
   # Function call
   res <- .Call(R_igraph_spanner, graph, stretch, weights)
   if (igraph_opt("return.vs.es")) {
-    res <- create_es(, res)
+    res <- create_es(graph, res)
   }
   res
 }
@@ -975,7 +975,7 @@ betweenness_subset_impl <- function(graph, vids=V(graph), directed=TRUE, sources
   # Function call
   res <- .Call(R_igraph_betweenness_subset, graph, vids-1, directed, sources-1, targets-1, weights)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", )
+    names(res) <- vertex_attr(graph, "name", vids)
   }
   res
 }
@@ -1000,7 +1000,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res) <- vertex_attr(graph, "name", )
+    names(res) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -1404,10 +1404,10 @@ hub_and_authority_scores_impl <- function(graph, scale=TRUE, weights=NULL, optio
   # Function call
   res <- .Call(R_igraph_hub_and_authority_scores, graph, scale, weights, options)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$hub.vector) <- vertex_attr(graph, "name", )
+    names(res$hub.vector) <- vertex_attr(graph, "name", V(graph))
   }
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$authority.vector) <- vertex_attr(graph, "name", )
+    names(res$authority.vector) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -2095,7 +2095,7 @@ bfs_simple_impl <- function(graph, root, mode=c("out", "in", "all", "total")) {
   # Function call
   res <- .Call(R_igraph_bfs_simple, graph, root-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res$order <- create_vs(, res$order)
+    res$order <- create_vs(graph, res$order)
   }
   res
 }
@@ -2122,8 +2122,8 @@ biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_biadjacency, incidence, directed, mode, multiple)
-  if (igraph_opt("add.vertex.names") && is_named()) {
-    names(res$types) <- vertex_attr(, "name", )
+  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+    names(res$types) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -2148,7 +2148,7 @@ is_bipartite_impl <- function(graph) {
   # Function call
   res <- .Call(R_igraph_is_bipartite, graph)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$type) <- vertex_attr(graph, "name", )
+    names(res$type) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -2166,7 +2166,7 @@ bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c
   # Function call
   res <- .Call(R_igraph_bipartite_game, type, n1, n2, p, m, directed, mode)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$types) <- vertex_attr(graph, "name", )
+    names(res$types) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -3948,7 +3948,7 @@ moran_process_impl <- function(graph, weights=NULL, quantities, strategies, mode
   # Function call
   res <- .Call(R_igraph_moran_process, graph, weights, quantities, strategies, mode)
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
-    names(res$quantities) <- vertex_attr(graph, "name", )
+    names(res$quantities) <- vertex_attr(graph, "name", V(graph))
   }
   res
 }
@@ -4050,7 +4050,7 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   # Function call
   res <- .Call(R_igraph_vertex_path_from_edge_path, graph, start-1, edge.path-1, mode)
   if (igraph_opt("return.vs.es")) {
-    res <- create_vs(, res)
+    res <- create_vs(graph, res)
   }
   res
 }
