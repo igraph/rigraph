@@ -76,9 +76,6 @@ igraph_star:
 igraph_ring:
     IGNORE: RR, RC
 
-igraph_tree:
-    IGNORE: RR, RC
-
 igraph_kary_tree:
     IGNORE: RR, RC
 
