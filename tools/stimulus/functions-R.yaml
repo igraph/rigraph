@@ -281,9 +281,6 @@ igraph_expand_path_to_pairs:
 igraph_closeness_cutoff:
     IGNORE: RR
 
-igraph_shortest_paths:
-    IGNORE: RR, RC, RInit
-
 igraph_get_shortest_paths:
     IGNORE: RR, RC, RInit
 
