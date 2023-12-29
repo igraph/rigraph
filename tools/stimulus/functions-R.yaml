@@ -19,11 +19,17 @@ igraph_add_edges:
 igraph_add_vertices:
     IGNORE: RR, RC, RInit
 
+igraph_copy:
+
 igraph_delete_edges:
     IGNORE: RR, RC
 
 igraph_delete_vertices:
     IGNORE: RR, RC
+
+igraph_delete_vertices_idx:
+
+igraph_vcount:
 
 igraph_ecount:
     IGNORE: RR, RC
@@ -42,6 +48,8 @@ igraph_edge:
 
 igraph_edges:
     IGNORE: RR, RC
+
+igraph_empty_attrs:
 
 igraph_get_eid:
     IGNORE: RR, RC, RInit
@@ -74,17 +82,31 @@ igraph_create:
 igraph_adjacency:
     IGNORE: RR
 
+igraph_sparse_adjacency:
+
+igraph_sparse_weighted_adjacency:
+
 igraph_weighted_adjacency:
     IGNORE: RR
 
 igraph_star:
     IGNORE: RR, RC
 
+igraph_wheel:
+
+igraph_square_lattice:
+
+igraph_triangular_lattice:
+
 igraph_ring:
     IGNORE: RR, RC
 
 igraph_kary_tree:
     IGNORE: RR, RC
+
+igraph_symmetric_tree:
+
+igraph_regular_tree:
 
 igraph_full:
     IGNORE: RR, RC
@@ -104,6 +126,8 @@ igraph_extended_chordal_ring:
 igraph_connect_neighborhood:
     IGNORE: RR, RC
 
+igraph_graph_power:
+
 igraph_linegraph:
     IGNORE: RR, RC
 
@@ -121,8 +145,12 @@ igraph_lcf_vector:
       GATTR:
         name: LCF graph
 
+igraph_adjlist:
+
 igraph_full_bipartite:
     IGNORE: RR
+
+igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
@@ -132,6 +160,14 @@ igraph_realize_degree_sequence:
       GATTR:
         name: Graph from degree sequence
       GATTR-PARAM: out_deg, in_deg, allowed_edge_types, method
+
+igraph_circulant:
+
+igraph_generalized_petersen:
+
+igraph_turan:
+
+igraph_weighted_sparsemat:
 
 #######################################
 # Constructors, games
@@ -253,6 +289,16 @@ igraph_correlated_game:
           name: Correlated random graph
         GATTR-PARAM: corr, p
 
+igraph_correlated_pair_game:
+
+igraph_dot_product_game:
+
+igraph_sample_sphere_surface:
+
+igraph_sample_sphere_volume:
+
+igraph_sample_dirichlet:
+
 #######################################
 # Basic query functions
 #######################################
@@ -276,6 +322,16 @@ igraph_closeness:
 igraph_closeness_cutoff:
     IGNORE: RR
 
+igraph_distances:
+
+igraph_distances_cutoff:
+
+igraph_get_shortest_path:
+
+igraph_get_shortest_path_bellman_ford:
+
+igraph_get_shortest_path_dijkstra:
+
 igraph_get_shortest_path_astar:
     IGNORE: RR, RC, Rinit
 
@@ -287,6 +343,10 @@ igraph_get_all_shortest_paths:
     PARAM_NAMES:
         vertices: vpaths
         edges: epaths
+
+igraph_distances_dijkstra:
+
+igraph_distances_dijkstra_cutoff:
 
 igraph_get_shortest_paths_dijkstra:
     IGNORE: RR, RC, RInit
@@ -300,10 +360,28 @@ igraph_get_all_shortest_paths_dijkstra:
         vertices: vpaths
         edges: epaths
 
+igraph_distances_bellman_ford:
+
+igraph_distances_johnson:
+
+igraph_distances_floyd_warshall:
+
+igraph_voronoi:
+
 igraph_get_all_simple_paths:
     IGNORE: RR
     R:
       PP: get.all.simple.paths.pp
+
+igraph_get_k_shortest_paths:
+
+igraph_get_widest_path:
+
+igraph_get_widest_paths:
+
+igraph_widest_path_widths_dijkstra:
+
+igraph_widest_path_widths_floyd_warshall:
 
 igraph_spanner:
     DEPS: weights ON graph, spanner ON graph
@@ -335,8 +413,12 @@ igraph_harmonic_centrality:
     # This is handled by igraph_harmonic_centrality_cutoff
     IGNORE: RR, RC, RInit
 
+igraph_harmonic_centrality_cutoff:
+
 igraph_pagerank:
     IGNORE: RR, RC, RInit
+
+igraph_personalized_pagerank:
 
 igraph_personalized_pagerank_vs:
     DEPS: vids ON graph, weights ON graph, vector ON graph vids,
@@ -348,6 +430,10 @@ igraph_rewire:
 igraph_induced_subgraph:
     IGNORE: RR
 
+igraph_subgraph_from_edges:
+
+igraph_reverse_edges:
+
 igraph_average_path_length:
     # No need for it, igraph_average_path_length_dijkstra takes care of the
     # unweighted case as well
@@ -357,6 +443,10 @@ igraph_average_path_length_dijkstra:
     PARAM_NAMES:
         unconn_pairs: unconnected
         unconn: unconnected
+
+igraph_path_length_hist:
+
+igraph_simplify:
 
 igraph_transitivity_undirected:
     IGNORE: RR, RC
@@ -369,6 +459,8 @@ igraph_transitivity_avglocal_undirected:
 
 igraph_transitivity_barrat:
     IGNORE: RR, RC
+
+igraph_ecc:
 
 igraph_reciprocity:
     IGNORE: RR, RC
@@ -394,13 +486,25 @@ igraph_neighborhood_graphs:
 igraph_topological_sorting:
     IGNORE: RR, RC
 
+igraph_feedback_arc_set:
+
 igraph_is_loop:
     PARAM_NAMES:
         es: eids
 
+igraph_is_dag:
+
+igraph_is_acyclic:
+
+igraph_is_simple:
+
 igraph_is_multiple:
     PARAM_NAMES:
         es: eids
+
+igraph_has_loop:
+
+igraph_has_multiple:
 
 igraph_count_multiple:
     PARAM_NAMES:
@@ -408,6 +512,8 @@ igraph_count_multiple:
 
 igraph_girth:
     IGNORE: RR, RC, RInit
+
+igraph_is_perfect:
 
 igraph_add_edge:
     IGNORE: RR, RC, RInit
@@ -447,13 +553,65 @@ igraph_is_mutual:
     PARAM_NAMES:
         es: eids
 
+igraph_has_mutual:
+
+igraph_maximum_cardinality_search:
+
 igraph_is_chordal:
     IGNORE: RR, RC, RInit
+
+igraph_avg_nearest_neighbor_degree:
+
+igraph_degree_correlation_vector:
+
+igraph_strength:
+
+igraph_centralization:
+
+igraph_centralization_degree:
 
 igraph_centralization_degree_tmax:
     # temporarily coded manually because we need to handle a deprecation
     # between igraph 1.3.0 and 1.4.0
     IGNORE: RR
+
+igraph_centralization_betweenness:
+
+igraph_centralization_betweenness_tmax:
+
+igraph_centralization_closeness:
+
+igraph_centralization_closeness_tmax:
+
+igraph_centralization_eigenvector_centrality:
+
+igraph_centralization_eigenvector_centrality_tmax:
+
+igraph_assortativity_nominal:
+
+igraph_assortativity:
+
+igraph_assortativity_degree:
+
+igraph_joint_degree_matrix:
+
+igraph_joint_degree_distribution:
+
+igraph_joint_type_distribution:
+
+igraph_contract_vertices:
+
+igraph_eccentricity:
+
+igraph_eccentricity_dijkstra:
+
+igraph_graph_center:
+
+igraph_graph_center_dijkstra:
+
+igraph_radius:
+
+igraph_radius_dijkstra:
 
 igraph_pseudo_diameter:
     DEPS: start_vid ON graph
@@ -461,11 +619,23 @@ igraph_pseudo_diameter:
 igraph_pseudo_diameter_dijkstra:
     DEPS: start_vid ON graph, weights ON graph
 
+igraph_diversity:
+
 igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
 
 igraph_random_edge_walk:
     PARAM_ORDER: graph, start, steps, ...
+
+igraph_global_efficiency:
+
+igraph_local_efficiency:
+
+igraph_average_local_efficiency:
+
+igraph_transitive_closure_dag:
+
+igraph_trussness:
 
 #######################################
 # Degree sequences
@@ -473,6 +643,8 @@ igraph_random_edge_walk:
 
 igraph_is_bigraphical:
     IGNORE: RR, RC, RInit
+
+igraph_is_graphical:
 
 #######################################
 # Visitors
@@ -491,6 +663,12 @@ igraph_dfs:
 # Bipartite graphs
 #######################################
 
+igraph_bipartite_projection_size:
+
+#######################################
+# Bipartite graphs
+#######################################
+
 igraph_bipartite_projection:
     IGNORE: RR, RC, RInit
 
@@ -499,6 +677,8 @@ igraph_create_bipartite:
 
 igraph_biadjacency:
     DEPS: types ON graph V(graph)
+
+igraph_get_biadjacency:
 
 igraph_is_bipartite:
     DEPS: type ON graph V(graph)
@@ -512,6 +692,15 @@ igraph_bipartite_game_gnm:
 igraph_bipartite_game:
     DEPS: types ON graph V(graph)
 
+
+#######################################
+# Spectral properties
+#######################################
+
+igraph_get_laplacian:
+
+igraph_get_laplacian_sparse:
+
 #######################################
 # Spectral properties
 #######################################
@@ -523,8 +712,16 @@ igraph_bipartite_game:
 igraph_connected_components:
     IGNORE: RR
 
+igraph_is_connected:
+
 igraph_decompose:
     IGNORE: RR, RC
+
+igraph_articulation_points:
+
+igraph_biconnected_components:
+
+igraph_bridges:
 
 #######################################
 # Cliques
@@ -543,8 +740,12 @@ igraph_clique_size_hist:
     # is renamed and internal
     INTERNAL: true
 
+igraph_largest_cliques:
+
 igraph_maximal_cliques:
     IGNORE: RR, RC, RInit
+
+igraph_maximal_cliques_subset:
 
 igraph_maximal_cliques_callback:
     IGNORE: RR, RC, RInit
@@ -559,6 +760,14 @@ igraph_maximal_cliques_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
     # is renamed and internal
     INTERNAL: true
+
+igraph_clique_number:
+
+igraph_weighted_cliques:
+
+igraph_largest_weighted_cliques:
+
+igraph_weighted_clique_number:
 
 igraph_independent_vertex_sets:
     IGNORE: RR, RC
@@ -607,6 +816,8 @@ igraph_layout_reingold_tilford:
 igraph_layout_reingold_tilford_circular:
     IGNORE: RR, RC, RInit
 
+igraph_roots_for_tree_layout:
+
 igraph_layout_random_3d:
     IGNORE: RR, RC
 
@@ -646,6 +857,12 @@ igraph_layout_gem:
 igraph_layout_davidson_harel:
     IGNORE: RR
 
+igraph_layout_umap:
+
+igraph_layout_umap_3d:
+
+igraph_layout_umap_compute_weights:
+
 #######################################
 # Cocitation and other similarity measures
 #######################################
@@ -655,6 +872,20 @@ igraph_cocitation:
 
 igraph_bibcoupling:
     IGNORE: RR, RC
+
+igraph_similarity_dice:
+
+igraph_similarity_dice_es:
+
+igraph_similarity_dice_pairs:
+
+igraph_similarity_inverse_log_weighted:
+
+igraph_similarity_jaccard:
+
+igraph_similarity_jaccard_es:
+
+igraph_similarity_jaccard_pairs:
 
 #######################################
 # Community structure
@@ -747,10 +978,16 @@ igraph_hrg_fit:
     R:
         CLASS: igraphHRG
 
+igraph_hrg_sample:
+
+igraph_hrg_sample_many:
+
 igraph_hrg_game:
     R:
       GATTR:
         name: Hierarchical random graph model
+
+igraph_hrg_consensus:
 
 igraph_hrg_predict:
     IGNORE: RR
@@ -759,6 +996,12 @@ igraph_hrg_create:
     R:
         CLASS: igraphHRG
 
+igraph_hrg_resize:
+
+igraph_hrg_size:
+
+igraph_from_hrg_dendrogram:
+
 #######################################
 # Conversion
 #######################################
@@ -766,11 +1009,15 @@ igraph_hrg_create:
 igraph_get_adjacency:
     IGNORE: RR, RC
 
+igraph_get_adjacency_sparse:
+
 igraph_get_edgelist:
     IGNORE: RR, RC
 
 igraph_get_stochastic:
     IGNORE: RR
+
+igraph_get_stochastic_sparse:
 
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
@@ -796,6 +1043,8 @@ igraph_read_graph_pajek:
 
 igraph_read_graph_graphml:
     IGNORE: RR, RC
+
+igraph_read_graph_dimacs_flow:
 
 igraph_read_graph_graphdb:
     IGNORE: RR, RC
@@ -849,6 +1098,12 @@ igraph_motifs_randesu_estimate:
 igraph_motifs_randesu_no:
     IGNORE: RR, RC
 
+igraph_dyad_census:
+
+igraph_triad_census:
+
+igraph_adjacent_triangles:
+
 igraph_local_scan_0:
     IGNORE: RR
 
@@ -869,6 +1124,10 @@ igraph_local_scan_k_ecount_them:
 
 igraph_local_scan_neighborhood_ecount:
     IGNORE: RR
+
+igraph_local_scan_subset_ecount:
+
+igraph_list_triangles:
 
 #######################################
 # Graph operators
@@ -901,11 +1160,15 @@ igraph_complementer:
 igraph_compose:
     IGNORE: RR, RC, RInit
 
+igraph_induced_subgraph_map:
+
 #######################################
 # Maximum flows, minimum cuts
 #######################################
 
 igraph_gomory_hu_tree:
+
+igraph_maxflow:
 
 igraph_maxflow_value:
     IGNORE: RR, RC, RInit
@@ -915,6 +1178,10 @@ igraph_mincut:
 
 igraph_mincut_value:
     IGNORE: RR, RC
+
+igraph_residual_graph:
+
+igraph_reverse_residual_graph:
 
 igraph_st_mincut:
     IGNORE: RR
@@ -952,6 +1219,20 @@ igraph_cohesion:
 
 igraph_dominator_tree:
 
+igraph_all_st_cuts:
+
+igraph_all_st_mincuts:
+
+igraph_even_tarjan_reduction:
+
+igraph_is_separator:
+
+igraph_is_minimal_separator:
+
+igraph_all_minimal_st_separators:
+
+igraph_minimum_size_separators:
+
 igraph_cohesive_blocks:
     IGNORE: RR, RC
     R:
@@ -970,14 +1251,40 @@ igraph_coreness:
 
 igraph_isoclass:
 
+igraph_isomorphic:
+
 igraph_isoclass_subgraph:
     IGNORE: RR
+
+igraph_isoclass_create:
+
+igraph_isomorphic_vf2:
+
+igraph_count_isomorphisms_vf2:
 
 igraph_get_isomorphisms_vf2:
     IGNORE: RR
 
+igraph_subisomorphic:
+
+igraph_subisomorphic_vf2:
+
+igraph_get_subisomorphisms_vf2_callback:
+
+igraph_count_subisomorphisms_vf2:
+
 igraph_get_subisomorphisms_vf2:
     IGNORE: RR
+
+igraph_canonical_permutation:
+
+igraph_permute_vertices:
+
+igraph_isomorphic_bliss:
+
+igraph_count_automorphisms:
+
+igraph_automorphism_group:
 
 igraph_subisomorphic_lad:
     IGNORE: RR, RC, RInit
@@ -989,6 +1296,8 @@ igraph_simplify_and_colorize:
         GRAPH graph, OUT GRAPH res, OUT VECTOR_INT vertex_color, OUT VECTOR_INT edge_color
     # R function is hand-rolled
     IGNORE: RR
+
+igraph_graph_count:
 
 #######################################
 # Matching
@@ -1044,6 +1353,20 @@ igraph_running_mean:
 igraph_random_sample:
     IGNORE: RR, RC
 
+igraph_convex_hull:
+
+igraph_dim_select:
+
+igraph_almost_equals:
+
+igraph_cmp_epsilon:
+
+igraph_eigen_matrix:
+
+igraph_eigen_matrix_symmetric:
+
+igraph_solve_lsap:
+
 #######################################
 # Eulerian functions
 #######################################
@@ -1067,6 +1390,8 @@ igraph_eulerian_cycle:
 
 igraph_fundamental_cycles:
 
+igraph_minimum_cycle_basis:
+
 #######################################
 # Trees
 #######################################
@@ -1075,11 +1400,17 @@ igraph_is_tree:
     PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
     DEPS: root ON graph
 
+igraph_is_forest:
+
 igraph_from_prufer:
     R:
         GATTR:
           name: Tree from Prufer sequence
         GATTR-PARAM: prufer
+
+igraph_to_prufer:
+
+igraph_tree_from_parent_vector:
 
 igraph_minimum_spanning_tree:
     IGNORE: RR, RC, RInit
@@ -1092,6 +1423,8 @@ igraph_minimum_spanning_tree_prim:
 
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
+
+igraph_tree_game:
 
 #######################################
 # Coloring
@@ -1108,6 +1441,10 @@ igraph_deterministic_optimal_imitation:
 igraph_moran_process:
     DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
 
+igraph_roulette_wheel_imitation:
+
+igraph_stochastic_imitation:
+
 #######################################
 # Other, (yet) undocumented functions
 #######################################
@@ -1115,11 +1452,17 @@ igraph_moran_process:
 igraph_convergence_degree:
     IGNORE: RR, RC, RInit
 
+igraph_has_attribute_table:
+
 #######################################
 # Progress, status handling
 #######################################
 
 igraph_progress:
+
+igraph_status:
+
+igraph_strerror:
 
 #######################################
 # Other functions, documented, graph related
