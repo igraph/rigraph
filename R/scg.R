@@ -132,7 +132,7 @@ stochastic_matrix <- function(graph, column.wise = FALSE,
 
   on.exit(.Call(R_igraph_finalizer))
   if (sparse) {
-    res <- .Call(R_igraph_get_stochastic_sparsemat, graph, column.wise)
+    res <- .Call(R_igraph_get_stochastic_sparse, graph, column.wise, NULL)
     res <- igraph.i.spMatrix(res)
   } else {
     res <- .Call(R_igraph_get_stochastic, graph, column.wise)
