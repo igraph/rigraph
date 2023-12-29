@@ -46,10 +46,10 @@ VECTOR_BOOL:
     INCONV: '%I% <- as.logical(%I%)'
 
 MATRIX:
-    INCONV: '%I% <- as.matrix(structure(as.double(%I%), dim=dim(%I%)))'
+    INCONV: '%I%[] <- as.numeric(%I%)'
 
 ARRAY3:
-    INCONV: '%I% <- structure(as.double(%I%), dim=dim(%I%))'
+    INCONV: '%I%[] <- as.numeric(%I%)'
 
 ATTRIBUTES: {}
 
@@ -374,7 +374,7 @@ VECTOR_COMPLEX:
     INCONV: '%I% <- as.complex(%I%)'
 
 MATRIX_COMPLEX:
-    INCONV: '%I% <- as.matrix(structure(as.complex(%I%), dim=dim(%I%)))'
+    INCONV: '%I%[] <- as.complex(%I%)'
 
 PLFIT: {}
 

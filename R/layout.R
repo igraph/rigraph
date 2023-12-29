@@ -1087,7 +1087,7 @@ layout_with_dh <- function(graph, coords = NULL, maxiter = 10,
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
+    coords[] <- as.numeric(coords)
     use.seed <- TRUE
   } else {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
@@ -1209,9 +1209,7 @@ layout_with_fr <- function(graph, coords = NULL, dim = 2,
                            coolexp, maxdelta, area, repulserad, maxiter) {
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
-  }
+  coords[] <- as.numeric(coords)
   dim <- as.numeric(dim)
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
@@ -1332,7 +1330,7 @@ layout_with_gem <- function(graph, coords = NULL, maxiter = 40 * vcount(graph)^2
   # Argument checks
   ensure_igraph(graph)
   if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
+    coords[] <- as.numeric(coords)
     use.seed <- TRUE
   } else {
     coords <- matrix(NA_real_, ncol = 2, nrow = 0)
@@ -1410,9 +1408,7 @@ layout_with_graphopt <- function(graph, start = NULL, niter = 500, charge = 0.00
                                  mass = 30, spring.length = 0, spring.constant = 1,
                                  max.sa.movement = 5) {
   ensure_igraph(graph)
-  if (!is.null(start)) {
-    start <- structure(as.numeric(start), dim = dim(start))
-  }
+  start[] <- as.numeric(start)
   niter <- as.double(niter)
   charge <- as.double(charge)
   mass <- as.double(mass)
@@ -1510,9 +1506,7 @@ layout_with_kk <- function(graph, coords = NULL, dim = 2,
   if (!missing(start)) coords <- start
 
   ensure_igraph(graph)
-  if (!is.null(coords)) {
-    coords <- as.matrix(structure(as.double(coords), dim = dim(coords)))
-  }
+  coords[] <- as.numeric(coords)
   dim <- as.numeric(dim)
   if (dim != 2L && dim != 3L) {
     stop("Dimension must be two or three")
@@ -1703,7 +1697,7 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
 
   # Argument checks
   ensure_igraph(graph)
-  if (!is.null(dist)) dist <- structure(as.double(dist), dim = dim(dist))
+  dist[] <- as.numeric(dist)
   dim <- as.numeric(dim)
 
   on.exit(.Call(R_igraph_finalizer))

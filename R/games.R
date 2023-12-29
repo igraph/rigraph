@@ -1578,7 +1578,7 @@ sample_cit_cit_types <- function(n, edges = 1, types = rep(0, n),
                                    ncol = length(types)
                                  ),
                                  directed = TRUE, attr = TRUE) {
-  pref <- structure(as.numeric(pref), dim = dim(pref))
+  pref[] <- as.numeric(pref)
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(
     R_igraph_citing_cited_type_game, as.numeric(n),

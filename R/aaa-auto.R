@@ -396,7 +396,7 @@ k_regular_game_impl <- function(no.of.nodes, k, directed=FALSE, multiple=FALSE) 
 sbm_game_impl <- function(n, pref.matrix, block.sizes, directed=FALSE, loops=FALSE) {
   # Argument checks
   n <- as.numeric(n)
-  pref.matrix <- as.matrix(structure(as.double(pref.matrix), dim=dim(pref.matrix)))
+  pref.matrix[] <- as.numeric(pref.matrix)
   block.sizes <- as.numeric(block.sizes)
   directed <- as.logical(directed)
   loops <- as.logical(loops)
@@ -418,7 +418,7 @@ hsbm_game_impl <- function(n, m, rho, C, p) {
   n <- as.numeric(n)
   m <- as.numeric(m)
   rho <- as.numeric(rho)
-  C <- as.matrix(structure(as.double(C), dim=dim(C)))
+  C[] <- as.numeric(C)
   p <- as.numeric(p)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -491,7 +491,7 @@ correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NU
 
 dot_product_game_impl <- function(vecs, directed=FALSE) {
   # Argument checks
-  vecs <- as.matrix(structure(as.double(vecs), dim=dim(vecs)))
+  vecs[] <- as.numeric(vecs)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -2114,7 +2114,7 @@ bipartite_projection_size_impl <- function(graph, types=NULL) {
 
 biadjacency_impl <- function(incidence, directed=FALSE, mode=c("all", "out", "in", "total"), multiple=FALSE) {
   # Argument checks
-  incidence <- as.matrix(structure(as.double(incidence), dim=dim(incidence)))
+  incidence[] <- as.numeric(incidence)
   directed <- as.logical(directed)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
   multiple <- as.logical(multiple)
@@ -2436,7 +2436,7 @@ roots_for_tree_layout_impl <- function(graph, mode=c("out", "in", "all", "total"
 layout_umap_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.dist=0.0, epochs=200, distances.are.weights=FALSE) {
   # Argument checks
   ensure_igraph(graph)
-  res <- as.matrix(structure(as.double(res), dim=dim(res)))
+  res[] <- as.numeric(res)
   use.seed <- as.logical(use.seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
@@ -2453,7 +2453,7 @@ layout_umap_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.dis
 layout_umap_3d_impl <- function(graph, res, use.seed=FALSE, distances=NULL, min.dist=0.0, epochs=200, distances.are.weights=FALSE) {
   # Argument checks
   ensure_igraph(graph)
-  res <- as.matrix(structure(as.double(res), dim=dim(res)))
+  res[] <- as.numeric(res)
   use.seed <- as.logical(use.seed)
   if (!is.null(distances)) distances <- as.numeric(distances)
   min.dist <- as.numeric(min.dist)
@@ -3609,7 +3609,7 @@ sir_impl <- function(graph, beta, gamma, no.sim=100) {
 
 convex_hull_impl <- function(data) {
   # Argument checks
-  data <- as.matrix(structure(as.double(data), dim=dim(data)))
+  data[] <- as.numeric(data)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3655,7 +3655,7 @@ cmp_epsilon_impl <- function(a, b, eps) {
 
 eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
   # Argument checks
-  A <- as.matrix(structure(as.double(A), dim=dim(A)))
+  A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
@@ -3674,7 +3674,7 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_de
 
 eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
   # Argument checks
-  A <- as.matrix(structure(as.double(A), dim=dim(A)))
+  A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
   algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
@@ -3693,7 +3693,7 @@ eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options
 
 solve_lsap_impl <- function(c, n) {
   # Argument checks
-  c <- as.matrix(structure(as.double(c), dim=dim(c)))
+  c[] <- as.numeric(c)
   n <- as.numeric(n)
 
   on.exit( .Call(R_igraph_finalizer) )
