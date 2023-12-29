@@ -186,7 +186,7 @@ lcf_vector_impl <- function(n, shifts, repeats=1) {
 
 adjlist_impl <- function(adjlist, mode=c("out", "in", "all", "total"), duplicate=TRUE) {
   # Argument checks
-  adjlist <- lapply(adjlist, function(x) as.double(x)-1L)
+  adjlist <- lapply(adjlist, function(x) as.numeric(x)-1)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
   duplicate <- as.logical(duplicate)
 
@@ -459,7 +459,7 @@ correlated_game_impl <- function(old.graph, corr, p=edge_density(old.graph), per
   ensure_igraph(old.graph)
   corr <- as.numeric(corr)
   p <- as.numeric(p)
-  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1L
+  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -480,7 +480,7 @@ correlated_pair_game_impl <- function(n, corr, p, directed=FALSE, permutation=NU
   corr <- as.numeric(corr)
   p <- as.numeric(p)
   directed <- as.logical(directed)
-  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1L
+  if (!is.null(permutation)) permutation <- as.numeric(permutation)-1
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1632,7 +1632,7 @@ centralization_eigenvector_centrality_tmax_impl <- function(graph=NULL, nodes=0,
 assortativity_nominal_impl <- function(graph, types, directed=TRUE, normalized=TRUE) {
   # Argument checks
   ensure_igraph(graph)
-  types <- as.numeric(types)-1L
+  types <- as.numeric(types)-1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -1727,8 +1727,8 @@ joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.typ
   } else {
     weights <- NULL
   }
-  from.types <- as.numeric(from.types)-1L
-  to.types <- as.numeric(to.types)-1L
+  from.types <- as.numeric(from.types)-1
+  to.types <- as.numeric(to.types)-1
   directed <- as.logical(directed)
   normalized <- as.logical(normalized)
 
@@ -1742,7 +1742,7 @@ joint_type_distribution_impl <- function(graph, weights=NULL, from.types, to.typ
 contract_vertices_impl <- function(graph, mapping, vertex.attr.comb=igraph_opt("vertex.attr.comb")) {
   # Argument checks
   ensure_igraph(graph)
-  mapping <- as.numeric(mapping)-1L
+  mapping <- as.numeric(mapping)-1
   vertex.attr.comb <- igraph.i.attribute.combination(vertex.attr.comb)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3136,7 +3136,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3146,7 +3146,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3156,7 +3156,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.numeric(edge.color1)-1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -3166,7 +3166,7 @@ isomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.color
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.numeric(edge.color2)-1
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3188,7 +3188,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3198,7 +3198,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3208,7 +3208,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.numeric(edge.color1)-1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -3218,7 +3218,7 @@ count_isomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex.co
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.numeric(edge.color2)-1
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3252,7 +3252,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3262,7 +3262,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3272,7 +3272,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.numeric(edge.color1)-1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -3282,7 +3282,7 @@ subisomorphic_vf2_impl <- function(graph1, graph2, vertex.color1=NULL, vertex.co
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.numeric(edge.color2)-1
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3304,7 +3304,7 @@ get_subisomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3314,7 +3314,7 @@ get_subisomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3324,7 +3324,7 @@ get_subisomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.numeric(edge.color1)-1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -3334,7 +3334,7 @@ get_subisomorphisms_vf2_callback_impl <- function(graph1, graph2, vertex.color1=
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.numeric(edge.color2)-1
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3356,7 +3356,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(vertex.color1)) {
-    vertex.color1 <- as.numeric(vertex.color1)-1L
+    vertex.color1 <- as.numeric(vertex.color1)-1
   }
   if (missing(vertex.color2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3366,7 +3366,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(vertex.color2)) {
-    vertex.color2 <- as.numeric(vertex.color2)-1L
+    vertex.color2 <- as.numeric(vertex.color2)-1
   }
   if (missing(edge.color1)) {
     if ("color" %in% edge_attr_names(graph1)) {
@@ -3376,7 +3376,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(edge.color1)) {
-    edge.color1 <- as.integer(edge.color1)-1L
+    edge.color1 <- as.numeric(edge.color1)-1
   }
   if (missing(edge.color2)) {
     if ("color" %in% edge_attr_names(graph2)) {
@@ -3386,7 +3386,7 @@ count_subisomorphisms_vf2_impl <- function(graph1, graph2, vertex.color1, vertex
     }
   }
   if (!is.null(edge.color2)) {
-    edge.color2 <- as.integer(edge.color2)-1L
+    edge.color2 <- as.numeric(edge.color2)-1
   }
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -3407,7 +3407,7 @@ canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs",
     }
   }
   if (!is.null(colors)) {
-    colors <- as.numeric(colors)-1L
+    colors <- as.numeric(colors)-1
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3421,7 +3421,7 @@ canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs",
 permute_vertices_impl <- function(graph, permutation) {
   # Argument checks
   ensure_igraph(graph)
-  permutation <- as.numeric(permutation)-1L
+  permutation <- as.numeric(permutation)-1
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3442,7 +3442,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
     }
   }
   if (!is.null(colors1)) {
-    colors1 <- as.numeric(colors1)-1L
+    colors1 <- as.numeric(colors1)-1
   }
   if (missing(colors2)) {
     if ("color" %in% vertex_attr_names(graph2)) {
@@ -3452,7 +3452,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
     }
   }
   if (!is.null(colors2)) {
-    colors2 <- as.numeric(colors2)-1L
+    colors2 <- as.numeric(colors2)-1
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3474,7 +3474,7 @@ count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "
     }
   }
   if (!is.null(colors)) {
-    colors <- as.numeric(colors)-1L
+    colors <- as.numeric(colors)-1
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3496,7 +3496,7 @@ automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "f
     }
   }
   if (!is.null(colors)) {
-    colors <- as.numeric(colors)-1L
+    colors <- as.numeric(colors)-1
   }
   sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
 
@@ -3832,7 +3832,7 @@ is_forest_impl <- function(graph, mode=c("out", "in", "all", "total"), details=F
 
 from_prufer_impl <- function(prufer) {
   # Argument checks
-  prufer <- as.numeric(prufer)-1L
+  prufer <- as.numeric(prufer)-1
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3859,7 +3859,7 @@ to_prufer_impl <- function(graph) {
 
 tree_from_parent_vector_impl <- function(parents, type=OUT) {
   # Argument checks
-  parents <- as.numeric(parents)-1L
+  parents <- as.numeric(parents)-1
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3906,7 +3906,7 @@ vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors", 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_vertex_coloring_greedy, graph, heuristic)
-  res <- res+1L
+  res <- res+1
   if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name")
   }
