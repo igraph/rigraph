@@ -49,6 +49,13 @@ igraph_get_eid:
 igraph_get_eids:
     IGNORE: RR, RC, RInit
 
+igraph_get_all_eids_between:
+    # This is a temporary hack; we need to find a way to handle default values
+    # for dependencies. The problem is that the VERTEXINDEX type needs two
+    # dependencies: the graph and the vertex set, but we only have the graph
+    # in the argument list.
+    DEPS: from ON graph, to ON graph, eids ON graph
+
 igraph_incident:
     IGNORE: RR, RC
 
@@ -56,6 +63,9 @@ igraph_is_same_graph:
     # Not needed in R; we can simply compare things in the R layer without
     # calling into C
     IGNORE: RR, RC, RInit
+
+igraph_create:
+    IGNORE: RR, RC
 
 #######################################
 # Constructors, deterministic
@@ -66,9 +76,6 @@ igraph_adjacency:
 
 igraph_weighted_adjacency:
     IGNORE: RR
-
-igraph_create:
-    IGNORE: RR, RC
 
 igraph_star:
     IGNORE: RR, RC
@@ -263,23 +270,14 @@ igraph_diameter:
 igraph_diameter_dijkstra:
     IGNORE: RR, RC, RInit
 
-igraph_minimum_spanning_tree:
-    IGNORE: RR, RC, RInit
-
-igraph_minimum_spanning_tree_unweighted:
-    IGNORE: RR, RC
-
-igraph_minimum_spanning_tree_prim:
-    IGNORE: RR, RC
-
 igraph_closeness:
-    IGNORE: RR
-
-igraph_expand_path_to_pairs:
     IGNORE: RR
 
 igraph_closeness_cutoff:
     IGNORE: RR
+
+igraph_get_shortest_path_astar:
+    IGNORE: RR, RC, Rinit
 
 igraph_get_shortest_paths:
     IGNORE: RR, RC, RInit
@@ -339,6 +337,10 @@ igraph_harmonic_centrality:
 
 igraph_pagerank:
     IGNORE: RR, RC, RInit
+
+igraph_personalized_pagerank_vs:
+    DEPS: vids ON graph, weights ON graph, vector ON graph vids,
+        options ON algo, reset_vids ON graph
 
 igraph_rewire:
     IGNORE: RR, RC
@@ -410,35 +412,6 @@ igraph_girth:
 igraph_add_edge:
     IGNORE: RR, RC, RInit
 
-igraph_personalized_pagerank_vs:
-    DEPS: vids ON graph, weights ON graph, vector ON graph vids,
-        options ON algo, reset_vids ON graph
-
-igraph_get_all_eids_between:
-    # This is a temporary hack; we need to find a way to handle default values
-    # for dependencies. The problem is that the VERTEXINDEX type needs two
-    # dependencies: the graph and the vertex set, but we only have the graph
-    # in the argument list.
-    DEPS: from ON graph, to ON graph, eids ON graph
-
-igraph_pseudo_diameter:
-    DEPS: start_vid ON graph
-
-igraph_pseudo_diameter_dijkstra:
-    DEPS: start_vid ON graph, weights ON graph
-
-igraph_bfs_simple:
-    DEPS: root ON graph, order ON graph
-
-igraph_is_bipartite:
-    DEPS: type ON graph V(graph)
-
-igraph_bipartite_game:
-    DEPS: types ON graph V(graph)
-
-igraph_vertex_path_from_edge_path:
-    DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
-
 igraph_eigenvector_centrality:
     # This is a temporary hack; we need to find a way to handle default values
     # for dependencies. The problem is that the VERTEXINDEX type needs two
@@ -467,9 +440,6 @@ igraph_hub_and_authority_scores:
     # in the argument list.
     DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
 
-igraph_get_shortest_path_astar:
-    IGNORE: RR, RC, Rinit
-
 igraph_unfold_tree:
     IGNORE: RR
 
@@ -484,6 +454,12 @@ igraph_centralization_degree_tmax:
     # temporarily coded manually because we need to handle a deprecation
     # between igraph 1.3.0 and 1.4.0
     IGNORE: RR
+
+igraph_pseudo_diameter:
+    DEPS: start_vid ON graph
+
+igraph_pseudo_diameter_dijkstra:
+    DEPS: start_vid ON graph, weights ON graph
 
 igraph_random_walk:
     PARAM_ORDER: graph, start, steps, ...
@@ -505,6 +481,9 @@ igraph_is_bigraphical:
 igraph_bfs:
     IGNORE: RR, RC, RInit
 
+igraph_bfs_simple:
+    DEPS: root ON graph, order ON graph
+
 igraph_dfs:
     IGNORE: RR, RC, RInit
 
@@ -521,11 +500,17 @@ igraph_create_bipartite:
 igraph_biadjacency:
     DEPS: types ON graph V(graph)
 
+igraph_is_bipartite:
+    DEPS: type ON graph V(graph)
+
 igraph_bipartite_game_gnp:
     IGNORE: RR
 
 igraph_bipartite_game_gnm:
     IGNORE: RR
+
+igraph_bipartite_game:
+    DEPS: types ON graph V(graph)
 
 #######################################
 # Spectral properties
@@ -553,6 +538,11 @@ igraph_cliques:
 igraph_cliques_callback:
     IGNORE: RR, RC, RInit
 
+igraph_clique_size_hist:
+    # Wrapper function is hand-rolled in the R layer; the generated version
+    # is renamed and internal
+    INTERNAL: true
+
 igraph_maximal_cliques:
     IGNORE: RR, RC, RInit
 
@@ -564,11 +554,6 @@ igraph_maximal_cliques_count:
 
 igraph_maximal_cliques_file:
     IGNORE: RR, RC, RInit
-
-igraph_clique_size_hist:
-    # Wrapper function is hand-rolled in the R layer; the generated version
-    # is renamed and internal
-    INTERNAL: true
 
 igraph_maximal_cliques_hist:
     # Wrapper function is hand-rolled in the R layer; the generated version
@@ -722,17 +707,40 @@ igraph_community_fluid_communities:
 igraph_community_label_propagation:
     IGNORE: RR
 
-igraph_community_leiden:
-    IGNORE: RR
-
 igraph_community_multilevel:
     IGNORE: RR
 
 igraph_community_optimal_modularity:
     IGNORE: RR
 
+igraph_community_leiden:
+    IGNORE: RR
+
 igraph_split_join_distance:
     IGNORE: RR
+
+igraph_community_infomap:
+    IGNORE: RR
+
+#######################################
+# Other, (yet) undocumented functions
+#######################################
+
+igraph_convergence_degree:
+    IGNORE: RR, RC, RInit
+
+igraph_community_voronoi:
+    IGNORE: RR, RC, RInit
+
+
+igraph_graphlets:
+    IGNORE: RC
+
+igraph_graphlets_candidate_basis:
+    IGNORE: RR, RC
+
+igraph_graphlets_project:
+    IGNORE: RR, RC, RInit
 
 igraph_hrg_fit:
     IGNORE: RR
@@ -751,18 +759,6 @@ igraph_hrg_create:
     R:
         CLASS: igraphHRG
 
-igraph_community_infomap:
-    IGNORE: RR
-
-igraph_graphlets:
-    IGNORE: RC
-
-igraph_graphlets_candidate_basis:
-    IGNORE: RR, RC
-
-igraph_graphlets_project:
-    IGNORE: RR, RC, RInit
-
 #######################################
 # Conversion
 #######################################
@@ -773,23 +769,13 @@ igraph_get_adjacency:
 igraph_get_edgelist:
     IGNORE: RR, RC
 
-igraph_invalidate_cache:
-    PARAMS: INOUT GRAPH graph
-    IGNORE: RR
-
-igraph_write_graph_dimacs_flow:
-    PARAMS: |-
-        INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
-        VECTOR capacity
+igraph_get_stochastic:
     IGNORE: RR
 
 igraph_to_directed:
     PARAMS: INOUT GRAPH graph, TODIRECTED mode=MUTUAL
 
 igraph_to_undirected:
-    IGNORE: RR
-
-igraph_get_stochastic:
     IGNORE: RR
 
 #######################################
@@ -837,6 +823,12 @@ igraph_write_graph_graphml:
 
 igraph_write_graph_pajek:
     IGNORE: RR, RC
+
+igraph_write_graph_dimacs_flow:
+    PARAMS: |-
+        INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
+        VECTOR capacity
+    IGNORE: RR
 
 igraph_write_graph_gml:
     IGNORE: RR, RC
@@ -916,17 +908,17 @@ igraph_compose:
 igraph_maxflow_value:
     IGNORE: RR, RC, RInit
 
-igraph_mincut_value:
-    IGNORE: RR, RC
-
-igraph_st_mincut_value:
-    IGNORE: RR, RC
-
 igraph_mincut:
+    IGNORE: RR, RC
+
+igraph_mincut_value:
     IGNORE: RR, RC
 
 igraph_st_mincut:
     IGNORE: RR
+
+igraph_st_mincut_value:
+    IGNORE: RR, RC
 
 igraph_st_vertex_connectivity:
     IGNORE: RR, RC, RInit
@@ -1083,6 +1075,10 @@ igraph_eulerian_cycle:
         edge_res: epath
         vertex_res: vpath
 
+igraph_is_tree:
+    PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
+    DEPS: root ON graph
+
 #######################################
 # Trees
 #######################################
@@ -1093,12 +1089,17 @@ igraph_from_prufer:
           name: Tree from Prufer sequence
         GATTR-PARAM: prufer
 
+igraph_minimum_spanning_tree:
+    IGNORE: RR, RC, RInit
+
+igraph_minimum_spanning_tree_unweighted:
+    IGNORE: RR, RC
+
+igraph_minimum_spanning_tree_prim:
+    IGNORE: RR, RC
+
 igraph_random_spanning_tree:
     PARAMS: GRAPH graph, OUT EDGE_INDICES res, OPTIONAL VERTEX vid=0
-
-igraph_is_tree:
-    PARAMS: GRAPH graph, PRIMARY OUT BOOLEAN res, OPTIONAL OUT VERTEX_ROOT root, NEIMODE mode=OUT
-    DEPS: root ON graph
 
 #######################################
 # Coloring
@@ -1111,12 +1112,12 @@ igraph_is_tree:
 igraph_moran_process:
     DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
 
-#######################################
-# Other, (yet) undocumented functions
-#######################################
+igraph_expand_path_to_pairs:
+    IGNORE: RR
 
-igraph_convergence_degree:
-    IGNORE: RR, RC, RInit
+igraph_invalidate_cache:
+    PARAMS: INOUT GRAPH graph
+    IGNORE: RR
 
-igraph_community_voronoi:
-    IGNORE: RR, RC, RInit
+igraph_vertex_path_from_edge_path:
+    DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
