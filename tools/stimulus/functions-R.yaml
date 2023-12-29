@@ -905,6 +905,8 @@ igraph_compose:
 # Maximum flows, minimum cuts
 #######################################
 
+igraph_gomory_hu_tree:
+
 igraph_maxflow_value:
     IGNORE: RR, RC, RInit
 
@@ -948,6 +950,8 @@ igraph_cohesion:
 # Listing s-t cuts, separators
 #######################################
 
+igraph_dominator_tree:
+
 igraph_cohesive_blocks:
     IGNORE: RR, RC
     R:
@@ -963,6 +967,8 @@ igraph_coreness:
 #######################################
 # Graph isomorphism
 #######################################
+
+igraph_isoclass:
 
 igraph_isoclass_subgraph:
     IGNORE: RR
@@ -1011,6 +1017,8 @@ igraph_laplacian_spectral_embedding:
 # Eigensolvers
 #######################################
 
+igraph_eigen_adjacency:
+
 #######################################
 # Fitting power laws
 #######################################
@@ -1057,6 +1065,7 @@ igraph_eulerian_cycle:
 # Cycle bases
 #######################################
 
+igraph_fundamental_cycles:
 
 #######################################
 # Trees
@@ -1088,34 +1097,16 @@ igraph_random_spanning_tree:
 # Coloring
 #######################################
 
+igraph_vertex_coloring_greedy:
+
 #######################################
 # Microscopic update
 #######################################
 
+igraph_deterministic_optimal_imitation:
+
 igraph_moran_process:
     DEPS: weights ON graph, quantities ON graph V(graph), strategies ON graph
-
-#######################################
-# SCG
-#######################################
-
-# TODO: define what to do with SCG
-# scg is in separate repository from
-
-# igraph_scg_grouping:
-#     IGNORE: RR
-
-# igraph_scg_semiprojectors:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_adjacency:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_stochastic:
-#     IGNORE: RR, RC, RInit
-
-# igraph_scg_laplacian:
-#     IGNORE: RR, RC, RInit
 
 #######################################
 # Other, (yet) undocumented functions
@@ -1123,6 +1114,16 @@ igraph_moran_process:
 
 igraph_convergence_degree:
     IGNORE: RR, RC, RInit
+
+#######################################
+# Progress, status handling
+#######################################
+
+igraph_progress:
+
+#######################################
+# Other functions, documented, graph related
+#######################################
 
 igraph_expand_path_to_pairs:
     IGNORE: RR
@@ -1133,3 +1134,9 @@ igraph_invalidate_cache:
 
 igraph_vertex_path_from_edge_path:
     DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
+
+#######################################
+# Meta info
+#######################################
+
+igraph_version:
