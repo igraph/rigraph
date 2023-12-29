@@ -264,7 +264,7 @@ SEXP R_igraph_vcount(SEXP graph) {
 /*-------------------------------------------/
 / igraph_empty_attrs                         /
 /-------------------------------------------*/
-SEXP R_igraph_empty_attrs(SEXP n, SEXP directed) {
+SEXP R_igraph_empty_attrs(SEXP n, SEXP directed, SEXP /* attr */) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_integer_t c_n;
@@ -9569,7 +9569,7 @@ SEXP R_igraph_isoclass_create(SEXP size, SEXP number, SEXP directed) {
 /*-------------------------------------------/
 / igraph_isomorphic_vf2                      /
 /-------------------------------------------*/
-SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9661,7 +9661,7 @@ SEXP R_igraph_isomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP 
 /*-------------------------------------------/
 / igraph_count_isomorphisms_vf2              /
 /-------------------------------------------*/
-SEXP R_igraph_count_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_count_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9727,7 +9727,7 @@ SEXP R_igraph_count_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color
 /*-------------------------------------------/
 / igraph_get_isomorphisms_vf2                /
 /-------------------------------------------*/
-SEXP R_igraph_get_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_get_isomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9823,7 +9823,7 @@ SEXP R_igraph_subisomorphic(SEXP graph1, SEXP graph2) {
 /*-------------------------------------------/
 / igraph_subisomorphic_vf2                   /
 /-------------------------------------------*/
-SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -9915,7 +9915,7 @@ SEXP R_igraph_subisomorphic_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SE
 /*-------------------------------------------/
 / igraph_get_subisomorphisms_vf2_callback    /
 /-------------------------------------------*/
-SEXP R_igraph_get_subisomorphisms_vf2_callback(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_get_subisomorphisms_vf2_callback(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isomorphism_func */, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -10002,7 +10002,7 @@ SEXP R_igraph_get_subisomorphisms_vf2_callback(SEXP graph1, SEXP graph2, SEXP ve
 /*-------------------------------------------/
 / igraph_count_subisomorphisms_vf2           /
 /-------------------------------------------*/
-SEXP R_igraph_count_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_count_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -10068,7 +10068,7 @@ SEXP R_igraph_count_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_co
 /*-------------------------------------------/
 / igraph_get_subisomorphisms_vf2             /
 /-------------------------------------------*/
-SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2) {
+SEXP R_igraph_get_subisomorphisms_vf2(SEXP graph1, SEXP graph2, SEXP vertex_color1, SEXP vertex_color2, SEXP edge_color1, SEXP edge_color2, SEXP /* isocompat_func */, SEXP /* isocompat_func */, SEXP /* extra */) {
                                         /* Declarations */
   igraph_t c_graph1;
   igraph_t c_graph2;
@@ -10586,7 +10586,7 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
 /*-------------------------------------------/
 / igraph_eigen_adjacency                     /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_adjacency(SEXP graph, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_adjacency(SEXP graph, SEXP algorithm, SEXP which, SEXP options, SEXP /* arpackstorage */) {
                                         /* Declarations */
   igraph_t c_graph;
   igraph_eigen_algorithm_t c_algorithm;
@@ -10844,7 +10844,7 @@ SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
 /*-------------------------------------------/
 / igraph_eigen_matrix                        /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP /* arpackfunc */, SEXP n, SEXP /* extra */, SEXP algorithm, SEXP which, SEXP options, SEXP /* arpackstorage */) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
@@ -10907,7 +10907,7 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, 
 /*-------------------------------------------/
 / igraph_eigen_matrix_symmetric              /
 /-------------------------------------------*/
-SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, SEXP options) {
+SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP /* arpackfunc */, SEXP n, SEXP /* extra */, SEXP algorithm, SEXP which, SEXP options, SEXP /* arpackstorage */) {
                                         /* Declarations */
   igraph_matrix_t c_A;
   igraph_sparsemat_t c_sA;
@@ -11629,7 +11629,7 @@ SEXP R_igraph_has_attribute_table() {
 /*-------------------------------------------/
 / igraph_progress                            /
 /-------------------------------------------*/
-SEXP R_igraph_progress(SEXP message, SEXP percent) {
+SEXP R_igraph_progress(SEXP message, SEXP percent, SEXP /* extra */) {
                                         /* Declarations */
   const char* c_message;
   igraph_real_t c_percent;
@@ -11652,7 +11652,7 @@ SEXP R_igraph_progress(SEXP message, SEXP percent) {
 /*-------------------------------------------/
 / igraph_status                              /
 /-------------------------------------------*/
-SEXP R_igraph_status(SEXP message) {
+SEXP R_igraph_status(SEXP message, SEXP /* extra */) {
                                         /* Declarations */
   const char* c_message;
 
