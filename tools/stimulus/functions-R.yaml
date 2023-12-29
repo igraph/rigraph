@@ -575,9 +575,6 @@ igraph_maximal_cliques_hist:
     # is renamed and internal
     INTERNAL: true
 
-igraph_weighted_cliques_callback:
-    IGNORE: RR, RC, RInit
-
 igraph_independent_vertex_sets:
     IGNORE: RR, RC
 
