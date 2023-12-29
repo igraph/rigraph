@@ -838,9 +838,6 @@ igraph_write_graph_graphml:
 igraph_write_graph_pajek:
     IGNORE: RR, RC
 
-igraph_write_graph_dimacs:
-    IGNORE: RR, RC
-
 igraph_write_graph_gml:
     IGNORE: RR, RC
 
