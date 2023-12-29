@@ -289,10 +289,7 @@ VERTEXSET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
-              verts <- V(%I1%)
-              for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- unsafe_create_vs(%I1%, %I%[[i_]], verts = verts)
-              }
+              %I% <- lapply(%I%, unsafe_create_vs, graph = %I1%, verts = V(%I1%))
             }
 
 VERTEXSETLIST_INT:
@@ -303,10 +300,7 @@ EDGESET_LIST:
     OUTCONV:
         OUT: |-
             if (igraph_opt("return.vs.es")) {
-              es <- E(%I1%)
-              for (i_ in seq_along(%I%)) {
-                %I%[[i_]] <- unsafe_create_es(%I1%, %I%[[i_]], es = es)
-              }
+              %I% <- lapply(%I%, unsafe_create_es, graph = %I1%, es = E(%I1%))
             }
 
 'ARPACKSTORAGE':
