@@ -495,12 +495,6 @@ igraph_random_edge_walk:
 # Degree sequences
 #######################################
 
-igraph_is_degree_sequence:
-    IGNORE: RR, RC, RInit
-
-igraph_is_graphical_degree_sequence:
-    IGNORE: RR, RC, RInit
-
 igraph_is_bigraphical:
     IGNORE: RR, RC, RInit
 
