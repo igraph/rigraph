@@ -73,9 +73,6 @@ igraph_create:
 igraph_star:
     IGNORE: RR, RC
 
-igraph_lattice:
-    IGNORE: RR, RC
-
 igraph_ring:
     IGNORE: RR, RC
 
