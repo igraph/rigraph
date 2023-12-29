@@ -290,7 +290,7 @@ hrg <- hrg_create_impl
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg_tree <- hrg_dendrogram_impl
+hrg_tree <- from_hrg_dendrogram_impl
 
 
 #' Sample from a hierarchical random graph model
