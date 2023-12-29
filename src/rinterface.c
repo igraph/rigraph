@@ -6819,7 +6819,9 @@ SEXP R_igraph_layout_mds(SEXP graph, SEXP dist, SEXP dim) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (!Rf_isNull(dist)) { R_SEXP_to_matrix(dist, &c_dist); }
+  if (!Rf_isNull(dist)) {
+    R_SEXP_to_matrix(dist, &c_dist);
+  }
   c_dim=(igraph_integer_t) REAL(dim)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_mds(&c_graph, &c_res, (Rf_isNull(dist) ? 0 : &c_dist), c_dim));
@@ -11632,7 +11634,7 @@ SEXP R_igraph_progress(SEXP message, SEXP percent) {
   const char* c_message;
   igraph_real_t c_percent;
 
-  int c_result;
+  igraph_error_t c_result;
   SEXP r_result;
                                         /* Convert input */
   c_percent=REAL(percent)[0];
@@ -11654,7 +11656,7 @@ SEXP R_igraph_status(SEXP message) {
                                         /* Declarations */
   const char* c_message;
 
-  int c_result;
+  igraph_error_t c_result;
   SEXP r_result;
                                         /* Convert input */
 
@@ -11674,7 +11676,7 @@ SEXP R_igraph_status(SEXP message) {
 /-------------------------------------------*/
 SEXP R_igraph_strerror(SEXP igraph_errno) {
                                         /* Declarations */
-  int c_igraph_errno;
+  igraph_error_t c_igraph_errno;
   const char* c_result;
   SEXP r_result;
                                         /* Convert input */
