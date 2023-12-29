@@ -811,9 +811,6 @@ igraph_read_graph_pajek:
 igraph_read_graph_graphml:
     IGNORE: RR, RC
 
-igraph_read_graph_dimacs:
-    IGNORE: RR, RC
-
 igraph_read_graph_graphdb:
     IGNORE: RR, RC
 
