@@ -467,12 +467,6 @@ igraph_hub_and_authority_scores:
     # in the argument list.
     DEPS: weights ON graph, hub_vector ON graph V(graph), authority_vector ON graph V(graph)
 
-igraph_arpack_rssolve:
-    IGNORE: RR, RC, RInit
-
-igraph_arpack_rnsolve:
-    IGNORE: RR, RC, RInit
-
 igraph_get_shortest_path_astar:
     IGNORE: RR, RC, Rinit
 
