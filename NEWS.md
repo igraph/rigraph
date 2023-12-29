@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9012
+
+## Bug fixes
+
+  - Fix auto-generation and handling of arpack defaults.
+
+## Documentation
+
+  - Fix math formatting in fit\_power\_law() docs.
+
+## Refactoring
+
+  - Use new ARPACK\_DEFAULTS symbol from C core for default arpack options.
+
+
 # igraph 1.6.0.9011
 
 ## Refactoring
