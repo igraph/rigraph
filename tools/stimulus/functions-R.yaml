@@ -68,9 +68,9 @@ igraph_incident:
     IGNORE: RR, RC
 
 igraph_is_same_graph:
+    IGNORE: RR, RC, RInit
     # Not needed in R; we can simply compare things in the R layer without
     # calling into C
-    IGNORE: RR, RC, RInit
 
 igraph_create:
     IGNORE: RR, RC
@@ -213,12 +213,12 @@ igraph_asymmetric_preference_game:
     IGNORE: RR
 
 igraph_rewire_edges:
-    # Handled by rewire() in the R interface and rewire_directed_edges()
     IGNORE: RR
+    # Handled by rewire() in the R interface and rewire_directed_edges()
 
 igraph_rewire_directed_edges:
-    # Handled by rewire() in the R interface
     IGNORE: RR
+    # Handled by rewire() in the R interface
 
 igraph_watts_strogatz_game:
     IGNORE: RR, RC
@@ -410,8 +410,8 @@ igraph_edge_betweenness_subset:
         eids ON graph, weights ON graph V(graph), res ON graph V(graph), sources ON graph, targets ON graph
 
 igraph_harmonic_centrality:
-    # This is handled by igraph_harmonic_centrality_cutoff
     IGNORE: RR, RC, RInit
+    # This is handled by igraph_harmonic_centrality_cutoff
 
 igraph_harmonic_centrality_cutoff:
 
@@ -435,9 +435,9 @@ igraph_subgraph_from_edges:
 igraph_reverse_edges:
 
 igraph_average_path_length:
+    IGNORE: RR, RC, RInit
     # No need for it, igraph_average_path_length_dijkstra takes care of the
     # unweighted case as well
-    IGNORE: RR, RC, RInit
 
 igraph_average_path_length_dijkstra:
     PARAM_NAMES:
@@ -571,9 +571,9 @@ igraph_centralization:
 igraph_centralization_degree:
 
 igraph_centralization_degree_tmax:
+    IGNORE: RR
     # temporarily coded manually because we need to handle a deprecation
     # between igraph 1.3.0 and 1.4.0
-    IGNORE: RR
 
 igraph_centralization_betweenness:
 
@@ -792,8 +792,8 @@ igraph_layout_circle:
     IGNORE: RR, RC
 
 igraph_layout_star:
-    DEPS: center ON graph
     IGNORE: RR
+    DEPS: center ON graph
 
 igraph_layout_grid:
     IGNORE: RR
@@ -1074,10 +1074,10 @@ igraph_write_graph_pajek:
     IGNORE: RR, RC
 
 igraph_write_graph_dimacs_flow:
+    IGNORE: RR
     PARAMS: |-
         INOUT GRAPH graph, OUTFILE outstream, VERTEX source=0, VERTEX target=0,
         VECTOR capacity
-    IGNORE: RR
 
 igraph_write_graph_gml:
     IGNORE: RR, RC
@@ -1290,12 +1290,12 @@ igraph_subisomorphic_lad:
     IGNORE: RR, RC, RInit
 
 igraph_simplify_and_colorize:
+    IGNORE: RR
+    # R function is hand-rolled
     # Despite their names, vertex_color and edge_color are not really colors
     # but _multiplicities_, so we simply use VECTOR_INT there
     PARAMS: |-
         GRAPH graph, OUT GRAPH res, OUT VECTOR_INT vertex_color, OUT VECTOR_INT edge_color
-    # R function is hand-rolled
-    IGNORE: RR
 
 igraph_graph_count:
 
@@ -1472,8 +1472,8 @@ igraph_expand_path_to_pairs:
     IGNORE: RR
 
 igraph_invalidate_cache:
-    PARAMS: INOUT GRAPH graph
     IGNORE: RR
+    PARAMS: INOUT GRAPH graph
 
 igraph_vertex_path_from_edge_path:
     DEPS: start ON graph, vertex_path ON graph, edge_path ON graph
