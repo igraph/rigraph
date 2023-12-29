@@ -210,8 +210,9 @@ full_multipartite_impl <- function(n, directed=FALSE, mode=c("all", "out", "in",
   res
 }
 
-realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
+realize_degree_sequence_impl <- function(out.deg, in.deg=NULL, ..., allowed.edge.types=c("simple", "loops", "multi", "all"), method=c("smallest", "largest", "index")) {
   # Argument checks
+  check_dots_empty()
   out.deg <- as.numeric(out.deg)
   if (!is.null(in.deg)) in.deg <- as.numeric(in.deg)
   allowed.edge.types <- switch(igraph.match.arg(allowed.edge.types),

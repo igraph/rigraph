@@ -154,7 +154,7 @@ igraph_full_multipartite:
 
 igraph_realize_degree_sequence:
     PARAMS: |-
-        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL,
+        OUT GRAPH graph, VECTOR_INT out_deg, OPTIONAL VECTOR_INT in_deg=NULL, *,
         EDGE_TYPE_SW allowed_edge_types=SIMPLE, REALIZE_DEGSEQ_METHOD method=SMALLEST
     R:
       GATTR:
