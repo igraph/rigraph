@@ -334,8 +334,8 @@ HRG:
 
 RECIP:
     DEFAULT:
-        Default: c('default', 'ratio')
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), ''default''=0, ''ratio''=1)'
+        DEFAULT: c("default", "ratio")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=0L, "ratio"=1L)'
 
 SPARSEMAT:
     INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")

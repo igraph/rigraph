@@ -1192,6 +1192,19 @@ ecc_impl <- function(graph, eids=E(graph), k=3, offset=FALSE, normalize=TRUE) {
   res
 }
 
+reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c('default', 'ratio')) {
+  # Argument checks
+  ensure_igraph(graph)
+  ignore.loops <- as.logical(ignore.loops)
+  mode <- switch(igraph.match.arg(mode), "default"=0L, "ratio"=1L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_reciprocity, graph, ignore.loops, mode)
+
+  res
+}
+
 feedback_arc_set_impl <- function(graph, weights=NULL, algo=c("approx_eades", "exact_ip")) {
   # Argument checks
   ensure_igraph(graph)

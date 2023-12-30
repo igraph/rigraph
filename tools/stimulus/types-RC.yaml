@@ -719,10 +719,6 @@ HRG:
             igraph_hrg_destroy(&%C%);
             IGRAPH_FINALLY_CLEAN(1);
 
-RECIP:
-    INCONV:
-        IN: '%C%=REAL(%I%)[0];'
-
 SPARSEMAT:
     CALL: '&%C%'
     CTYPE: igraph_sparsemat_t

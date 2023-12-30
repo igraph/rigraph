@@ -3496,6 +3496,34 @@ SEXP R_igraph_ecc(SEXP graph, SEXP eids, SEXP k, SEXP offset, SEXP normalize) {
 }
 
 /*-------------------------------------------/
+/ igraph_reciprocity                         /
+/-------------------------------------------*/
+SEXP R_igraph_reciprocity(SEXP graph, SEXP ignore_loops, SEXP mode) {
+                                        /* Declarations */
+  igraph_t c_graph;
+  igraph_real_t c_res;
+  igraph_bool_t c_ignore_loops;
+  igraph_reciprocity_t c_mode;
+  SEXP res;
+
+  SEXP r_result;
+                                        /* Convert input */
+  R_SEXP_to_igraph(graph, &c_graph);
+  c_ignore_loops=LOGICAL(ignore_loops)[0];
+  c_mode = (igraph_reciprocity_t) Rf_asInteger(mode);
+                                        /* Call igraph */
+  IGRAPH_R_CHECK(igraph_reciprocity(&c_graph, &c_res, c_ignore_loops, c_mode));
+
+                                        /* Convert output */
+  PROTECT(res=NEW_NUMERIC(1));
+  REAL(res)[0]=c_res;
+  r_result = res;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
 / igraph_feedback_arc_set                    /
 /-------------------------------------------*/
 SEXP R_igraph_feedback_arc_set(SEXP graph, SEXP weights, SEXP algo) {
