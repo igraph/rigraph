@@ -153,7 +153,7 @@ extern SEXP R_igraph_eigen_matrix(void *, void *, void *, void *, void *, void *
 extern SEXP R_igraph_eigen_matrix_symmetric(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
-extern SEXP R_igraph_empty_attrs(void *, void *, void *);
+extern SEXP R_igraph_empty_attrs(void *, void *);
 extern SEXP R_igraph_erdos_renyi_game(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_es_adj(void *, void *, void *, void *);
 extern SEXP R_igraph_es_pairs(void *, void *, void *);
@@ -628,7 +628,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_eigen_matrix_symmetric",                     (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                      7},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
-    {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 3},
+    {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 2},
     {"R_igraph_erdos_renyi_game",                           (DL_FUNC) &R_igraph_erdos_renyi_game,                            5},
     {"R_igraph_es_adj",                                     (DL_FUNC) &R_igraph_es_adj,                                      4},
     {"R_igraph_es_pairs",                                   (DL_FUNC) &R_igraph_es_pairs,                                    3},

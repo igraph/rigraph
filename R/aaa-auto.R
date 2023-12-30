@@ -35,14 +35,14 @@ vcount_impl <- function(graph) {
   res
 }
 
-empty_attrs_impl <- function(n, directed, attr) {
+empty_attrs_impl <- function(n, directed) {
   # Argument checks
   n <- as.numeric(n)
   directed <- as.logical(directed)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
-  res <- .Call(R_igraph_empty_attrs, n, directed, attr)
+  res <- .Call(R_igraph_empty_attrs, n, directed)
 
   res
 }
