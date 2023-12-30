@@ -477,3 +477,8 @@ VORONOI_TIEBREAKER:
     DEFAULT:
         RANDOM: c("random", "first", "last")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "first"=0L, "last"=1L, "random"=2L)'
+
+GETADJACENCY:
+    DEFAULT:
+        BOTH: c("both", "upper", "lower")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "upper"=0L, "lower"=1L, "both"=2L)'

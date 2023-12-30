@@ -2737,9 +2737,10 @@ from_hrg_dendrogram_impl <- function(hrg) {
   res
 }
 
-get_adjacency_sparse_impl <- function(graph, type=BOTH, weights=NULL, loops=ONCE) {
+get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=ONCE) {
   # Argument checks
   ensure_igraph(graph)
+  type <- switch(igraph.match.arg(type), "upper"=0L, "lower"=1L, "both"=2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
