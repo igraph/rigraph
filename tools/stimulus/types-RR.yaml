@@ -51,7 +51,9 @@ MATRIX:
 ARRAY3:
     INCONV: '%I%[] <- as.numeric(%I%)'
 
-ATTRIBUTES: {}
+ATTRIBUTES:
+    CALL: {}
+    HEADER: ~
 
 CONNECTEDNESS:
     DEFAULT:
