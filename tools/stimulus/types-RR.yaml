@@ -337,28 +337,6 @@ RECIP:
         Default: c('default', 'ratio')
     INCONV: '%I% <- switch(igraph.match.arg(%I%), ''default''=0, ''ratio''=1)'
 
-SCGMAT:
-    DEFAULT:
-        Default: c("symmetric", "laplacian", "stochastic")
-    INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "symmetric"=1, "laplacian"=2, "stochastic"=3)
-
-SCGALGO:
-    DEFAULT:
-        Default: c("optimum", "interv_km", "interv", "exact_scg")
-    INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "optimum"=1, "interv_km"=2, "interv"=3, "exact_scg"=4)
-
-SCGNORM:
-    DEFAULT:
-        Default: c("row", "col")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "row"=1, "col"=2)'
-
-SCGDIR:
-    DEFAULT:
-        Default: c("default", "left", "right")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)'
-
 SPARSEMAT:
     INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
 

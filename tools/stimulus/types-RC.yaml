@@ -723,11 +723,6 @@ RECIP:
     INCONV:
         IN: '%C%=REAL(%I%)[0];'
 
-SCGDIR:
-    CTYPE: igraph_integer_t
-    INCONV:
-        IN: '%C%=REAL(%I%)[0];'
-
 SPARSEMAT:
     CALL: '&%C%'
     CTYPE: igraph_sparsemat_t
