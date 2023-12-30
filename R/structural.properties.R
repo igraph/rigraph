@@ -1056,6 +1056,32 @@ all_shortest_paths <- function(graph, from,
   res
 }
 
+#' Find the \eqn{k} shortest paths between two vertices
+#'
+#' Finds the \eqn{k} shortest paths between the given source and target
+#' vertex in order of increasing length. Currently this function uses
+#' Yen's algorithm.
+#'
+#' @param graph The input graph.
+#' @param from The source vertex of the shortest paths.
+#' @param to The target vertex of the shortest paths.
+#' @param k The number of paths to find. They will be returned in order of
+#' increasing length.
+#' @inheritParams shortest_paths
+#' @return A named list with two components is returned:
+#' \item{vpaths}{The list of \eqn{k} shortest paths in terms of vertices}
+#' \item{epaths}{The list of \eqn{k} shortest paths in terms of edges}
+#' @references Yen, Jin Y.:
+#' An algorithm for finding shortest routes from all source nodes to a given
+#' destination in general networks.
+#' Quarterly of Applied Mathematics. 27 (4): 526–530. (1970)
+#' <https://doi.org/10.1090/qam/253822>
+#' @export
+#' @family structural.properties
+#' @seealso [shortest_paths()], [all_shortest_paths()]
+#' @keywords graphs
+k_shortest_paths <- get_k_shortest_paths_impl
+
 #' In- or out- component of a vertex
 #'
 #' Finds all vertices reachable from a given vertex, or the opposite: all
@@ -1102,8 +1128,6 @@ subcomponent <- function(graph, v, mode = c("all", "out", "in")) {
 
   res
 }
-
-
 
 #' Subgraph of a graph
 #'
