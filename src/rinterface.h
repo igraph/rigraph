@@ -74,33 +74,33 @@ SEXP R_igraph_maxflow_stats_to_SEXP(const igraph_maxflow_stats_t *st);
 SEXP R_igraph_sirlist_to_SEXP(const igraph_vector_ptr_t *sl);
 void R_igraph_sirlist_destroy(igraph_vector_ptr_t *sl);
 
-int R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);
-int R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
-int R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
-int R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v);
-int R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl);
-int R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl);
-int R_SEXP_to_igraph_matrix_copy(SEXP pakl, igraph_matrix_t *akl);
-int R_SEXP_to_igraph(SEXP graph, igraph_t *res);
-int R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res);
-int R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, igraph_vector_int_t *data);
-int R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it, igraph_vector_int_t *data);
-int R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
-int R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
+igraph_error_t R_igraph_SEXP_to_strvector(SEXP rval, igraph_strvector_t *sv);
+igraph_error_t R_igraph_SEXP_to_strvector_copy(SEXP rval, igraph_strvector_t *sv);
+void R_SEXP_to_vector(SEXP sv, igraph_vector_t *v);
+igraph_error_t R_SEXP_to_vector_copy(SEXP sv, igraph_vector_t *v);
+void R_SEXP_to_matrix(SEXP pakl, igraph_matrix_t *akl);
+void R_SEXP_to_matrix_complex(SEXP pakl, igraph_matrix_complex_t *akl);
+igraph_error_t R_SEXP_to_igraph_matrix_copy(SEXP pakl, igraph_matrix_t *akl);
+igraph_error_t R_SEXP_to_igraph(SEXP graph, igraph_t *res);
+igraph_error_t R_SEXP_to_igraph_copy(SEXP graph, igraph_t *res);
+igraph_error_t R_SEXP_to_igraph_vs(SEXP rit, igraph_t *graph, igraph_vs_t *it, igraph_vector_int_t *data);
+igraph_error_t R_SEXP_to_igraph_es(SEXP rit, igraph_t *graph, igraph_es_t *it, igraph_vector_int_t *data);
+igraph_error_t R_SEXP_to_igraph_adjlist(SEXP vectorlist, igraph_adjlist_t *ptr);
+igraph_error_t R_igraph_SEXP_to_vector_int_list(SEXP vectorlist,
                                     igraph_vector_int_list_t *list);
-int R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
-int R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
-int R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
-int R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
-int R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
-int R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
-int R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);
+void R_igraph_SEXP_to_matrixlist(SEXP matrixlist, igraph_matrix_list_t *list);
+void R_SEXP_to_vector_bool(SEXP sv, igraph_vector_bool_t *v);
+igraph_error_t R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
+igraph_error_t R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
+igraph_error_t R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
+igraph_error_t R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
+igraph_error_t R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);
 
-int R_SEXP_to_igraph_layout_drl_options(SEXP in, igraph_layout_drl_options_t *opt);
-int R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb);
+void R_SEXP_to_igraph_layout_drl_options(SEXP in, igraph_layout_drl_options_t *opt);
+igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb);
 SEXP R_igraph_bliss_info_to_SEXP(const igraph_bliss_info_t *info);
-int R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
-int R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);
+igraph_error_t R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
+void R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);
 SEXP R_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list);
 SEXP R_igraph_0orvector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m);
@@ -108,9 +108,9 @@ SEXP R_igraph_vector_to_SEXPp1(const igraph_vector_t *v);
 SEXP R_igraph_arpack_options_to_SEXP(const igraph_arpack_options_t *opt);
 
 SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m);
-int R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl);
+igraph_error_t R_SEXP_to_matrix_int(SEXP pakl, igraph_matrix_int_t *akl);
 
-int R_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list);
+void R_igraph_SEXP_to_vector_list(SEXP vectorlist, igraph_vector_list_t *list);
 
 #define IGRAPH_R_CHECK(func) \
     do { \
