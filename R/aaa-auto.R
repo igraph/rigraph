@@ -91,9 +91,10 @@ sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE)
   res
 }
 
-wheel_impl <- function(n, mode=OUT, center=0) {
+wheel_impl <- function(n, mode=c("out", "in", "undirected", "mutual"), center=0) {
   # Argument checks
   n <- as.numeric(n)
+  mode <- switch(igraph.match.arg(mode), "out"=0L, "in"=1L, "undirected"=2L, "mutual"=3L)
   center <- as.numeric(center)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -131,9 +132,10 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
   res
 }
 
-symmetric_tree_impl <- function(branches, type=OUT) {
+symmetric_tree_impl <- function(branches, type=c("out", "in", "undirected")) {
   # Argument checks
   branches <- as.numeric(branches)
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -142,10 +144,11 @@ symmetric_tree_impl <- function(branches, type=OUT) {
   res
 }
 
-regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
+regular_tree_impl <- function(h, k=3, type=c("undirected", "out", "in")) {
   # Argument checks
   h <- as.numeric(h)
   k <- as.numeric(k)
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3872,9 +3875,10 @@ to_prufer_impl <- function(graph) {
   res
 }
 
-tree_from_parent_vector_impl <- function(parents, type=OUT) {
+tree_from_parent_vector_impl <- function(parents, type=c("out", "in", "undirected")) {
   # Argument checks
   parents <- as.numeric(parents)-1
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
