@@ -380,6 +380,11 @@ EIGENWHICHPOS:
         ASE: c("lm", "la", "sa")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "lm"=0L, "la"=2L, "sa"=3L)'
 
+LAPLACIAN_NORMALIZATION:
+    DEFAULT:
+        UNNORMALIZED: c("unnormalized", "symmetric", "left", "right")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)'
+
 SIRLIST: {}
 
 PAGERANKALGO:

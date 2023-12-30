@@ -2184,10 +2184,11 @@ bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c
   res
 }
 
-get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=UNNORMALIZED, weights=NULL) {
+get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=c("unnormalized", "symmetric", "left", "right"), weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  normalization <- switch(igraph.match.arg(normalization), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2204,10 +2205,11 @@ get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), norma
   res
 }
 
-get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=UNNORMALIZED, weights=NULL) {
+get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=c("unnormalized", "symmetric", "left", "right"), weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  normalization <- switch(igraph.match.arg(normalization), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
