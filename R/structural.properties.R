@@ -1351,13 +1351,21 @@ transitivity <- function(graph, type = c(
     .Call(R_igraph_transitivity_undirected, graph, isolates)
   } else if (type == 1) {
     if (is.null(vids)) {
-      .Call(R_igraph_transitivity_local_undirected_all, graph, isolates)
+      res <- .Call(R_igraph_transitivity_local_undirected_all, graph, isolates)
+      if (igraph_opt("add.vertex.names") && is_named(graph)) {
+        names(res) <- V(graph)$name
+      }
+      res
     } else {
-      vids <- as_igraph_vs(graph, vids) - 1
-      .Call(
-        R_igraph_transitivity_local_undirected, graph, vids,
+      vids <- as_igraph_vs(graph, vids)
+      res <- .Call(
+        R_igraph_transitivity_local_undirected, graph, vids - 1,
         isolates
       )
+      if (igraph_opt("add.vertex.names") && is_named(graph)) {
+        names(res) <- V(graph)$name[vids]
+      }
+      res
     }
   } else if (type == 2) {
     .Call(R_igraph_transitivity_avglocal_undirected, graph, isolates)
@@ -1365,18 +1373,22 @@ transitivity <- function(graph, type = c(
     if (is.null(vids)) {
       vids <- V(graph)
     }
-    vids <- as_igraph_vs(graph, vids) - 1
-    if (is.null(weights)) {
+    vids <- as_igraph_vs(graph, vids)
+    res <- if (is.null(weights)) {
       .Call(
-        R_igraph_transitivity_local_undirected, graph, vids,
+        R_igraph_transitivity_local_undirected, graph, vids - 1,
         isolates
       )
     } else {
       .Call(
-        R_igraph_transitivity_barrat, graph, vids, weights,
+        R_igraph_transitivity_barrat, graph, vids - 1, weights,
         isolates
       )
     }
+    if (igraph_opt("add.vertex.names") && is_named(graph)) {
+      names(res) <- V(graph)$name[vids]
+    }
+    res
   }
 }
 
