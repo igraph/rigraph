@@ -472,3 +472,8 @@ TREE_MODE:
         OUT: c("out", "in", "undirected")
         UNDIRECTED: c("undirected", "out", "in")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=0L, "in"=1L, "undirected"=2L)'
+
+VORONOI_TIEBREAKER:
+    DEFAULT:
+        RANDOM: c("random", "first", "last")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "first"=0L, "last"=1L, "random"=2L)'

@@ -774,7 +774,7 @@ distances_floyd_warshall_impl <- function(graph, from=V(graph), to=V(graph), wei
   res
 }
 
-voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=RANDOM) {
+voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=c("random", "first", "last")) {
   # Argument checks
   ensure_igraph(graph)
   generators <- as_igraph_vs(graph, generators)
@@ -787,6 +787,7 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
     weights <- NULL
   }
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  tiebreaker <- switch(igraph.match.arg(tiebreaker), "first"=0L, "last"=1L, "random"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
