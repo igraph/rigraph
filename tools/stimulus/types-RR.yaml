@@ -245,15 +245,6 @@ ISOCOMPAT_FUNC:
     CALL: {}
     HEADER: ~
 
-VECTORLIST: {}
-
-MATRIXLIST:
-    INCONV:
-        IN: |-
-            if (!all(sapply(%I%, is.matrix))) {
-              stop("%I% is not a list of matrices")
-            }
-
 VERTEXSET_LIST:
     OUTCONV:
         OUT: |-
@@ -281,8 +272,6 @@ ARPACKOPT:
 DRL_OPTIONS:
     INCONV:
         IN: '%I% <- modify_list(drl_defaults$default, %I%)'
-
-STRVECTOR: {}
 
 BLISSSH:
     DEFAULT:
