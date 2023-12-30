@@ -1,5 +1,40 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9013
+
+## Bug fixes
+
+  - Remove use of deprecated `STR()` (#1034).
+
+  - Stimulus argument dependencies (#1037).
+
+## Features
+
+  - Use `[]` assignment for converting matrices (#1035).
+
+## Chore
+
+  - Remove unused includes (#1039).
+
+  - Move towards autogenerating all bindings (#1043).
+
+  - Avoid deprecated function (#1041).
+
+  - Use new function in favor of deprecated one (#1038).
+
+  - Stabilize `sources.mk` (#1036).
+
+  - Regenerate parser (#1030).
+
+## Refactoring
+
+  - Clean up some auto-generation code (#1031).
+
+  - Remove unused parts from code generation (#1032).
+
+  - Replace loop by `lapply()` when returning vertex and edge sets (#1033).
+
+
 # igraph 1.6.0.9012
 
 ## Bug fixes
