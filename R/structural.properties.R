@@ -1452,20 +1452,7 @@ constraint <- function(graph, nodes = V(graph), weights = NULL) {
 #' g <- sample_gnp(20, 5 / 20, directed = TRUE)
 #' reciprocity(g)
 #'
-reciprocity <- function(graph, ignore.loops = TRUE,
-                        mode = c("default", "ratio")) {
-  ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode),
-    "default" = 0,
-    "ratio" = 1
-  )
-
-  on.exit(.Call(R_igraph_finalizer))
-  .Call(
-    R_igraph_reciprocity, graph, as.logical(ignore.loops),
-    as.numeric(mode)
-  )
-}
+reciprocity <- reciprocity_impl
 
 
 #' Graph density

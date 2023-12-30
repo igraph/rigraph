@@ -91,9 +91,10 @@ sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE)
   res
 }
 
-wheel_impl <- function(n, mode=OUT, center=0) {
+wheel_impl <- function(n, mode=c("out", "in", "undirected", "mutual"), center=0) {
   # Argument checks
   n <- as.numeric(n)
+  mode <- switch(igraph.match.arg(mode), "out"=0L, "in"=1L, "undirected"=2L, "mutual"=3L)
   center <- as.numeric(center)
 
   on.exit( .Call(R_igraph_finalizer) )
@@ -131,9 +132,10 @@ triangular_lattice_impl <- function(dimvector, directed=FALSE, mutual=FALSE) {
   res
 }
 
-symmetric_tree_impl <- function(branches, type=OUT) {
+symmetric_tree_impl <- function(branches, type=c("out", "in", "undirected")) {
   # Argument checks
   branches <- as.numeric(branches)
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -142,10 +144,11 @@ symmetric_tree_impl <- function(branches, type=OUT) {
   res
 }
 
-regular_tree_impl <- function(h, k=3, type=UNDIRECTED) {
+regular_tree_impl <- function(h, k=3, type=c("undirected", "out", "in")) {
   # Argument checks
   h <- as.numeric(h)
   k <- as.numeric(k)
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -771,7 +774,7 @@ distances_floyd_warshall_impl <- function(graph, from=V(graph), to=V(graph), wei
   res
 }
 
-voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=RANDOM) {
+voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "all", "total"), tiebreaker=c("random", "first", "last")) {
   # Argument checks
   ensure_igraph(graph)
   generators <- as_igraph_vs(graph, generators)
@@ -784,6 +787,7 @@ voronoi_impl <- function(graph, generators, weights=NULL, mode=c("out", "in", "a
     weights <- NULL
   }
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  tiebreaker <- switch(igraph.match.arg(tiebreaker), "first"=0L, "last"=1L, "random"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -1188,6 +1192,19 @@ ecc_impl <- function(graph, eids=E(graph), k=3, offset=FALSE, normalize=TRUE) {
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_ecc, graph, eids-1, k, offset, normalize)
+
+  res
+}
+
+reciprocity_impl <- function(graph, ignore.loops=TRUE, mode=c('default', 'ratio')) {
+  # Argument checks
+  ensure_igraph(graph)
+  ignore.loops <- as.logical(ignore.loops)
+  mode <- switch(igraph.match.arg(mode), "default"=0L, "ratio"=1L)
+
+  on.exit( .Call(R_igraph_finalizer) )
+  # Function call
+  res <- .Call(R_igraph_reciprocity, graph, ignore.loops, mode)
 
   res
 }
@@ -2171,10 +2188,11 @@ bipartite_game_impl <- function(type, n1, n2, p=0.0, m=0, directed=FALSE, mode=c
   res
 }
 
-get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=UNNORMALIZED, weights=NULL) {
+get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=c("unnormalized", "symmetric", "left", "right"), weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  normalization <- switch(igraph.match.arg(normalization), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2191,10 +2209,11 @@ get_laplacian_impl <- function(graph, mode=c("out", "in", "all", "total"), norma
   res
 }
 
-get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=UNNORMALIZED, weights=NULL) {
+get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total"), normalization=c("unnormalized", "symmetric", "left", "right"), weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
+  normalization <- switch(igraph.match.arg(normalization), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -2718,9 +2737,10 @@ from_hrg_dendrogram_impl <- function(hrg) {
   res
 }
 
-get_adjacency_sparse_impl <- function(graph, type=BOTH, weights=NULL, loops=ONCE) {
+get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=ONCE) {
   # Argument checks
   ensure_igraph(graph)
+  type <- switch(igraph.match.arg(type), "upper"=0L, "lower"=1L, "both"=2L)
   if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
     weights <- E(graph)$weight
   }
@@ -3857,9 +3877,10 @@ to_prufer_impl <- function(graph) {
   res
 }
 
-tree_from_parent_vector_impl <- function(parents, type=OUT) {
+tree_from_parent_vector_impl <- function(parents, type=c("out", "in", "undirected")) {
   # Argument checks
   parents <- as.numeric(parents)-1
+  type <- switch(igraph.match.arg(type), "out"=0L, "in"=1L, "undirected"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

@@ -6132,23 +6132,6 @@ SEXP R_igraph_es_pairs(SEXP graph, SEXP pp, SEXP pdir) {
   return result;
 }
 
-SEXP R_igraph_reciprocity(SEXP graph, SEXP pignore_loops, SEXP pmode) {
-
-  igraph_t g;
-  igraph_bool_t ignore_loops=LOGICAL(pignore_loops)[0];
-  igraph_real_t res;
-  igraph_reciprocity_t mode=REAL(pmode)[0];
-  SEXP result;
-
-  R_SEXP_to_igraph(graph, &g);
-  IGRAPH_R_CHECK(igraph_reciprocity(&g, &res, ignore_loops, mode));
-  PROTECT(result=NEW_NUMERIC(1));
-  REAL(result)[0]=res;
-
-  UNPROTECT(1);
-  return result;
-}
-
 SEXP R_igraph_layout_reingold_tilford(SEXP graph, SEXP proot,
                                       SEXP pmode, SEXP prootlevel, SEXP pcirc) {
 

@@ -463,7 +463,6 @@ igraph_transitivity_barrat:
 igraph_ecc:
 
 igraph_reciprocity:
-    IGNORE: RR, RC
 
 igraph_constraint:
     IGNORE: RR, RC

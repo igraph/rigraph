@@ -334,30 +334,8 @@ HRG:
 
 RECIP:
     DEFAULT:
-        Default: c('default', 'ratio')
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), ''default''=0, ''ratio''=1)'
-
-SCGMAT:
-    DEFAULT:
-        Default: c("symmetric", "laplacian", "stochastic")
-    INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "symmetric"=1, "laplacian"=2, "stochastic"=3)
-
-SCGALGO:
-    DEFAULT:
-        Default: c("optimum", "interv_km", "interv", "exact_scg")
-    INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "optimum"=1, "interv_km"=2, "interv"=3, "exact_scg"=4)
-
-SCGNORM:
-    DEFAULT:
-        Default: c("row", "col")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "row"=1, "col"=2)'
-
-SCGDIR:
-    DEFAULT:
-        Default: c("default", "left", "right")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=1, "left"=2, "right"=3)'
+        DEFAULT: c("default", "ratio")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "default"=0L, "ratio"=1L)'
 
 SPARSEMAT:
     INCONV: requireNamespace("Matrix", quietly = TRUE); %I% <- as(as(as(%I%, "dMatrix"), "generalMatrix"), "CsparseMatrix")
@@ -401,6 +379,11 @@ EIGENWHICHPOS:
     DEFAULT:
         ASE: c("lm", "la", "sa")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "lm"=0L, "la"=2L, "sa"=3L)'
+
+LAPLACIAN_NORMALIZATION:
+    DEFAULT:
+        UNNORMALIZED: c("unnormalized", "symmetric", "left", "right")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "unnormalized"=0L, "symmetric"=1L, "left"=2L, "right"=3L)'
 
 SIRLIST: {}
 
@@ -478,3 +461,24 @@ FAS_ALGORITHM:
         APPROX_EADES: c("approx_eades", "exact_ip")
     INCONV: |-
         %I% <- switch(igraph.match.arg(%I%), "exact_ip"=0L, "approx_eades"=1L)
+
+WHEEL_MODE:
+    DEFAULT:
+        OUT: c("out", "in", "undirected", "mutual")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=0L, "in"=1L, "undirected"=2L, "mutual"=3L)'
+
+TREE_MODE:
+    DEFAULT:
+        OUT: c("out", "in", "undirected")
+        UNDIRECTED: c("undirected", "out", "in")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "out"=0L, "in"=1L, "undirected"=2L)'
+
+VORONOI_TIEBREAKER:
+    DEFAULT:
+        RANDOM: c("random", "first", "last")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "first"=0L, "last"=1L, "random"=2L)'
+
+GETADJACENCY:
+    DEFAULT:
+        BOTH: c("both", "upper", "lower")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "upper"=0L, "lower"=1L, "both"=2L)'
