@@ -261,10 +261,6 @@ VERTEXSET_LIST:
               %I% <- lapply(%I%, unsafe_create_vs, graph = %I1%, verts = V(%I1%))
             }
 
-VERTEXSETLIST_INT:
-    INCONV:
-        IN: '%I% <- lapply(%I%, function(x) as.numeric(x)-1)'
-
 EDGESET_LIST:
     OUTCONV:
         OUT: |-
