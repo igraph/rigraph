@@ -1,5 +1,38 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9014
+
+## Bug fixes
+
+  - Fix incorrect usage in subgraph.edges() example.
+
+## Features
+
+  - New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
+
+## Chore
+
+  - Remove unused types (#1060).
+
+  - Re-generate docs.
+
+  - Don't pass attributes to C functions (#1048).
+
+## Refactoring
+
+  - Do not duplicate prototypes, use a common header for rinterface.c / rinterface\_extra.c (#1055).
+
+  - Remove unused stimulus type VERTEXSETLIST\_INT (#1049).
+
+## tests
+
+  - Test transferring colors in isomorphism functions (#1050).
+
+## Uncategorized
+
+  - Refactor/type-refactorings (#1052).
+
+
 # igraph 1.6.0.9013
 
 ## Bug fixes
