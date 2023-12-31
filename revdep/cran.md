@@ -1,20 +1,26 @@
 ## revdepcheck results
 
-We checked 17 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1947 reverse dependencies (1945 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 17 new problems
- * We failed to check 0 packages
+ * We saw 19 new problems
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
+* bnstruct
+  checking tests ... ERROR
+
 * countland
   checking tests ... ERROR
 
 * DiagrammeR
   checking tests ... ERROR
+
+* EGAnet
+  checking examples ... ERROR
 
 * ggnetwork
   checking tests ... ERROR
@@ -64,3 +70,8 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking tests ... ERROR
 
+### Failed to check
+
+* bsts      (NA)
+* Seurat    (NA)
+* streamDAG (NA)
