@@ -2291,8 +2291,8 @@ dfs <- function(graph, root, mode = c("out", "in", "all", "total"),
   if (father) res$father <- res$father + 1
 
   if (igraph_opt("return.vs.es")) {
-    if (order) res$order <- V(graph)[.env$res$order, na_ok = TRUE]
-    if (order.out) res$order.out <- V(graph)[.env$res$order.out, na_ok = TRUE]
+    if (order) res$order <- create_vs(graph, res$order, na_ok = TRUE)
+    if (order.out) res$order.out <- create_vs(graph, res$order.out, na_ok = TRUE)
     if (father) res$father <- create_vs(graph, res$father, na_ok = TRUE)
   }
 
