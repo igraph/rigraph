@@ -1,11 +1,17 @@
 # Revdeps
 
-## New problems (17)
+## New problems (24)
 
 |package           |version |error  |warning |note |
 |:-----------------|:-------|:------|:-------|:----|
+|[causaleffect](problems.md#causaleffect)|1.3.15  |__+1__ |1       |     |
+|[centiserve](problems.md#centiserve)|1.0.0   |__+1__ |        |     |
+|[cfid](problems.md#cfid)|0.1.7   |__+1__ |        |     |
+|[CINNA](problems.md#cinna)|1.2.2   |__+2__ |        |1    |
 |[countland](problems.md#countland)|0.1.1   |__+1__ |        |     |
 |[DiagrammeR](problems.md#diagrammer)|1.0.10  |__+1__ |        |1    |
+|[dosearch](problems.md#dosearch)|1.0.8   |__+1__ |        |2    |
+|[fanovaGraph](problems.md#fanovagraph)|1.5     |__+2__ |        |     |
 |[ggnetwork](problems.md#ggnetwork)|0.5.12  |__+1__ |        |1    |
 |[inferCSN](problems.md#infercsn)|0.99.8  |__+1__ |        |1    |
 |[intergraph](problems.md#intergraph)|2.0-3   |__+1__ |        |     |
@@ -21,4 +27,5 @@
 |[phyloseqGraphTest](problems.md#phyloseqgraphtest)|0.1.0   |__+2__ |        |2    |
 |[riverconn](problems.md#riverconn)|0.3.28  |__+1__ |        |     |
 |[tidygraph](problems.md#tidygraph)|1.3.0   |__+2__ |        |     |
+|[TreeDimensionTest](problems.md#treedimensiontest)|0.0.2   |__+1__ |        |     |
 

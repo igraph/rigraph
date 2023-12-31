@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_empty_graph}
 \alias{make_empty_graph}
-\alias{graph.empty}
 \alias{empty_graph}
 \title{A graph with no edges}
 \usage{

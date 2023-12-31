@@ -1,3 +1,217 @@
+# causaleffect
+
+<details>
+
+* Version: 1.3.15
+* GitHub: https://github.com/santikka/causaleffect
+* Source code: https://github.com/cran/causaleffect
+* Date/Publication: 2022-07-14 09:10:05 UTC
+* Number of recursive dependencies: 17
+
+Run `revdepcheck::cloud_details(, "causaleffect")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘causaleffect-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: causal.effect
+    > ### Title: Identify a causal effect
+    > ### Aliases: causal.effect
+    > 
+    > ### ** Examples
+    > 
+    > library(igraph)
+    ...
+    > # Here the bidirected edge between X and Z is set to be unobserved in graph g
+    > # This is denoted by giving them a description attribute with the value "U"
+    > # The edges in question are the fourth and the fifth edge
+    > g <- set.edge.attribute(graph = g, name = "description", index = c(4,5), value = "U")
+    Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
+    ℹ Please use `set_edge_attr()` instead.
+    > causal.effect("y", "x", G = g)
+    Error in simple_es_index(x, ii) : Unknown edge selected
+    Calls: causal.effect ... [ -> [.igraph.es -> lapply -> FUN -> simple_es_index
+    Execution halted
+    ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘causaleffect.ltx’ using tex
+    Error: processing vignette 'causaleffect.ltx' failed with diagnostics:
+    Running 'texi2dvi' on 'causaleffect.ltx' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `thumbpdf.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    
+    ...
+    l.16 \usepackage
+                    {csquotes}^^M
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘simplification.ltx’
+    
+    SUMMARY: processing the following files failed:
+      ‘causaleffect.ltx’ ‘simplification.ltx’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+# centiserve
+
+<details>
+
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/centiserve
+* Date/Publication: 2017-07-15 09:34:41 UTC
+* Number of recursive dependencies: 14
+
+Run `revdepcheck::cloud_details(, "centiserve")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘centiserve-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: averagedis
+    > ### Title: Find the average distance of a node
+    > ### Aliases: averagedis
+    > 
+    > ### ** Examples
+    > 
+    > g <- graph(c(1,2,2,3,3,4,4,2), directed=FALSE)
+    Warning: `graph()` was deprecated in igraph 2.0.0.
+    ℹ Please use `make_graph()` instead.
+    > averagedis(g)
+    Error in getIgraphOpt("add.vertex.names") && is.named(graph) : 
+      invalid 'x' type in 'x && y'
+    Calls: averagedis
+    Execution halted
+    ```
+
+# cfid
+
+<details>
+
+* Version: 0.1.7
+* GitHub: https://github.com/santikka/cfid
+* Source code: https://github.com/cran/cfid
+* Date/Publication: 2023-11-27 16:00:04 UTC
+* Number of recursive dependencies: 51
+
+Run `revdepcheck::cloud_details(, "cfid")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(cfid)
+      > 
+      > test_check("cfid")
+      [ FAIL 1 | WARN 4 | SKIP 0 | PASS 203 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+    ...
+       2. │ └─testthat::quasi_label(enquo(object), label, arg = "object")
+       3. │   └─rlang::eval_bare(expr, quo_get_env(quo))
+       4. └─cfid::import_graph(ig)
+       5.   └─cfid::dag(paste0(c(g_obs, g_unobs), collapse = "; "))
+       6.     └─cfid:::stopifnot_(nzchar(x), "Argument `x` contains only whitespace or special characters.")
+       7.       └─cfid:::stop_(message)
+      
+      [ FAIL 1 | WARN 4 | SKIP 0 | PASS 203 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# CINNA
+
+<details>
+
+* Version: 1.2.2
+* GitHub: NA
+* Source code: https://github.com/cran/CINNA
+* Date/Publication: 2023-08-08 16:40:02 UTC
+* Number of recursive dependencies: 149
+
+Run `revdepcheck::cloud_details(, "CINNA")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘CINNA-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: dangalchev_closeness_centrality
+    > ### Title: Dangalchev Closeness Centrality
+    > ### Aliases: dangalchev_closeness_centrality
+    > 
+    > ### ** Examples
+    > 
+    > 
+    ...
+    > data(zachary)
+    > 
+    > dangalchev_closeness_centrality(zachary)
+    This graph was created by an old(er) igraph version.
+      Call upgrade_graph() on it to use with the current igraph version
+      For now we convert it on the fly...
+    Error in getIgraphOpt("add.vertex.names") && is_named(x) : 
+      invalid 'x' type in 'x && y'
+    Calls: dangalchev_closeness_centrality
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘CINNA.Rmd’ using rmarkdown
+    
+    Quitting from lines 247-250 [unnamed-chunk-13] (CINNA.Rmd)
+    Error: processing vignette 'CINNA.Rmd' failed with diagnostics:
+    perplexity is too large for the number of samples
+    --- failed re-building ‘CINNA.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘CINNA.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘circlize’ ‘utils’
+      All declared Imports should be used.
+    ```
+
 # countland
 
 <details>
@@ -65,7 +279,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       > 
       > suppressWarnings(RNGversion("3.5.0"))
       > test_check("DiagrammeR")
-      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
       
     ...
       1/1 mismatches
@@ -75,7 +289,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       1/1 mismatches
       [1] 2 - 4 == -2
       
-      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
       Error: Test failures
       Execution halted
     ```
@@ -85,6 +299,122 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 1 marked UTF-8 string
+    ```
+
+# dosearch
+
+<details>
+
+* Version: 1.0.8
+* GitHub: NA
+* Source code: https://github.com/cran/dosearch
+* Date/Publication: 2021-08-19 16:40:02 UTC
+* Number of recursive dependencies: 18
+
+Run `revdepcheck::cloud_details(, "dosearch")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘dosearch-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: dosearch
+    > ### Title: Identify a causal effect from arbitrary experiments and
+    > ###   observations
+    > ### Aliases: dosearch
+    > 
+    > ### ** Examples
+    > 
+    ...
+    +   g_igraph <- igraph::set.edge.attribute(g_igraph, "description", 3:4, "U")
+    +   dosearch(data2, query2, g_igraph)
+    + }
+    Warning: `graph.formula()` was deprecated in igraph 2.0.0.
+    ℹ Please use `graph_from_literal()` instead.
+    Warning: `set.edge.attribute()` was deprecated in igraph 2.0.0.
+    ℹ Please use `set_edge_attr()` instead.
+    Error in graph_split[[x]] : subscript out of bounds
+    Calls: dosearch -> get_derivation_dag -> lapply -> FUN
+    Execution halted
+    ```
+
+## In both
+
+*   checking C++ specification ... NOTE
+    ```
+      Specified C++11: please drop specification unless essential
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.5Mb
+      sub-directories of 1Mb or more:
+        libs   6.2Mb
+    ```
+
+# fanovaGraph
+
+<details>
+
+* Version: 1.5
+* GitHub: NA
+* Source code: https://github.com/cran/fanovaGraph
+* Date/Publication: 2020-10-07 12:10:02 UTC
+* Number of recursive dependencies: 98
+
+Run `revdepcheck::cloud_details(, "fanovaGraph")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘fanovaGraph-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: estimateGraph
+    > ### Title: FANOVA graph estimation.
+    > ### Aliases: estimateGraph print.graphlist
+    > 
+    > ### ** Examples
+    > 
+    > # Ishigami function, true analytical values: D12 = D23 = 0, D13 =~ 3.374
+    > q.arg = list(list(min=-pi, max=pi), list(min=-pi, max=pi), list(min=-pi, max=pi)) 
+    > estimateGraph(f.mat=ishigami.fun, d=3, q.arg=q.arg, n.tot=10000, method="LiuOwen")
+    Error in (function (edges, n = max(edges), directed = TRUE)  : 
+      unused arguments (3, FALSE)
+    Calls: estimateGraph ... max_cliques -> ensure_igraph -> graph -> make_graph -> do.call
+    Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘run-all.R’
+    Running the tests in ‘tests/run-all.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(fanovaGraph)
+      Loading required package: sensitivity
+      Loading required package: igraph
+      
+      Attaching package: 'igraph'
+      
+    ...
+       3.     ├─igraph::maximal.cliques(graph(as.vector(t(E)), d, FALSE))
+       4.     │ └─igraph::max_cliques(...)
+       5.     │   └─igraph:::ensure_igraph(graph)
+       6.     └─igraph::graph(as.vector(t(E)), d, FALSE)
+       7.       └─igraph::make_graph(...)
+       8.         └─base::do.call(old_graph, args)
+      
+      [ FAIL 6 | WARN 3 | SKIP 0 | PASS 6 ]
+      Error: Test failures
+      Execution halted
     ```
 
 # ggnetwork
@@ -208,7 +538,7 @@ Run `revdepcheck::cloud_details(, "intergraph")` for more info
       > library(intergraph)
       > 
       > test_check("intergraph")
-      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
+      [ FAIL 2 | WARN 141 | SKIP 0 | PASS 54 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
     ...
@@ -219,7 +549,7 @@ Run `revdepcheck::cloud_details(, "intergraph")` for more info
        1. └─testthat::expect_snapshot(print(r)) at test-netcompare.R:5:3
        2.   └─rlang::cnd_signal(state$error)
       
-      [ FAIL 2 | WARN 138 | SKIP 0 | PASS 54 ]
+      [ FAIL 2 | WARN 141 | SKIP 0 | PASS 54 ]
       Error: Test failures
       Execution halted
     ```
@@ -260,7 +590,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 11 | SKIP 14 | PASS 329 ]
+      [ FAIL 1 | WARN 13 | SKIP 14 | PASS 329 ]
       Error: Test failures
       Execution halted
     ```
@@ -439,7 +769,7 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
        7.     └─igraph::delete.vertices(g, verticestoprune)
        8.       └─igraph::delete_vertices(graph = graph, v = v)
       
-      [ FAIL 1 | WARN 11 | SKIP 5 | PASS 787 ]
+      [ FAIL 1 | WARN 21 | SKIP 5 | PASS 787 ]
       Error: Test failures
       Execution halted
     ```
@@ -841,5 +1171,39 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
       [ FAIL 2 | WARN 21 | SKIP 0 | PASS 430 ]
       Error: Test failures
       Execution halted
+    ```
+
+# TreeDimensionTest
+
+<details>
+
+* Version: 0.0.2
+* GitHub: NA
+* Source code: https://github.com/cran/TreeDimensionTest
+* Date/Publication: 2022-03-12 10:30:07 UTC
+* Number of recursive dependencies: 69
+
+Run `revdepcheck::cloud_details(, "TreeDimensionTest")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘Tutorial.Rmd’ using rmarkdown
+    
+    Quitting from lines 46-56 [unnamed-chunk-5] (Tutorial.Rmd)
+    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
+    At vendor/cigraph/src/graph/type_indexededgelist.c:101 : Number of vertices must not be negative. Invalid value
+    --- failed re-building ‘Tutorial.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘Tutorial.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 

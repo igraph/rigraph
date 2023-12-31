@@ -2,7 +2,6 @@
 % Please edit documentation in R/make.R
 \name{make_tree}
 \alias{make_tree}
-\alias{graph.tree}
 \alias{tree}
 \title{Create tree graphs}
 \usage{

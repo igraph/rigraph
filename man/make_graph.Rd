@@ -3,8 +3,6 @@
 \encoding{UTF-8}
 \name{make_graph}
 \alias{make_graph}
-\alias{graph.famous}
-\alias{graph}
 \alias{make_directed_graph}
 \alias{make_undirected_graph}
 \alias{directed_graph}
