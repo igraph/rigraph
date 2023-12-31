@@ -12,8 +12,8 @@
       [1] "out"
       
       $order
-      + 5/5 vertices, named:
-      [1] b    c    <NA> <NA> <NA>
+      + 2/5 vertices, named:
+      [1] b c
       
       $rank
       a b c z d 
