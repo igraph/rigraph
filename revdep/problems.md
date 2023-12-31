@@ -65,7 +65,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       > 
       > suppressWarnings(RNGversion("3.5.0"))
       > test_check("DiagrammeR")
-      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
       
     ...
       1/1 mismatches
@@ -75,7 +75,7 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
       1/1 mismatches
       [1] 2 - 4 == -2
       
-      [ FAIL 2 | WARN 12 | SKIP 0 | PASS 2128 ]
+      [ FAIL 2 | WARN 13 | SKIP 0 | PASS 2128 ]
       Error: Test failures
       Execution halted
     ```
@@ -260,7 +260,7 @@ Run `revdepcheck::cloud_details(, "manynet")` for more info
       1/4 mismatches
       [1] 0 - 1 == -1
       
-      [ FAIL 1 | WARN 11 | SKIP 14 | PASS 329 ]
+      [ FAIL 1 | WARN 13 | SKIP 14 | PASS 329 ]
       Error: Test failures
       Execution halted
     ```
@@ -439,7 +439,7 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
        7.     └─igraph::delete.vertices(g, verticestoprune)
        8.       └─igraph::delete_vertices(graph = graph, v = v)
       
-      [ FAIL 1 | WARN 11 | SKIP 5 | PASS 787 ]
+      [ FAIL 1 | WARN 20 | SKIP 5 | PASS 787 ]
       Error: Test failures
       Execution halted
     ```
