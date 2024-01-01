@@ -40,15 +40,8 @@ INTEGER:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            if (Rf_xlength(%I%) != 1) {
-              igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                            __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(%I%));
-            }
-            if (((igraph_integer_t) REAL(%I%)[0]) != REAL(%I%)[0]) {
-              igraph_errorf("The value %.17g is not representable as an integer.",
-                            __FILE__, __LINE__, IGRAPH_EINVAL, REAL(%I%)[0]);
-            }
-            %C% = (igraph_integer_t) REAL(%I%)[0]; 
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = (igraph_integer_t) REAL(%I%)[0];
         OUT: '%C%=0;'
     OUTCONV:
         OUT: |-
@@ -63,11 +56,8 @@ INT:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            if (Rf_xlength(%I%) != 1) {
-              igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                            __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(%I%));
-            }
-            %C% = INTEGER(%I%)[0]; 
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = INTEGER(%I%)[0];
 
 CSTRING:
     CTYPE: const char*
@@ -82,14 +72,10 @@ REAL:
         IN: '%C%'
         OUT: '&%C%'
         INOUT: '&%C%'
-    INCONV: 
+    INCONV:
         IN: |-
-            if (Rf_xlength(%I%) == 1) {
-              %C% = REAL(%I%)[0]; 
-            } else {
-            igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                          __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(%I%));
-            }
+            IGRAPH_R_CHECK_REAL(%I%);
+            %C% = REAL(%I%)[0];
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
@@ -103,12 +89,8 @@ BOOLEAN:
         INOUT: '&%C%'
     INCONV:
         IN: |-
-            if (Rf_xlength(%I%) == 1) {
-              %C% = LOGICAL(%I%)[0]; 
-            } else {
-              igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                            __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(%I%));
-            }
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0];
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));

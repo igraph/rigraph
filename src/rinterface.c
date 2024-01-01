@@ -39,22 +39,10 @@ SEXP R_igraph_empty(SEXP n, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_empty(&c_graph, c_n, c_directed));
 
@@ -186,22 +174,10 @@ SEXP R_igraph_empty_attrs(SEXP n, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_empty_attrs(&c_graph, c_n, c_directed, 0));
 
@@ -237,12 +213,8 @@ SEXP R_igraph_get_all_eids_between(SEXP graph, SEXP from, SEXP to, SEXP directed
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_eids);
   c_from = (igraph_integer_t) REAL(from)[0];
   c_to = (igraph_integer_t) REAL(to)[0];
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_get_all_eids_between(&c_graph, &c_eids, c_from, c_to, c_directed));
 
@@ -438,27 +410,11 @@ SEXP R_igraph_wheel(SEXP n, SEXP mode, SEXP center) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   c_mode = (igraph_wheel_mode_t) Rf_asInteger(mode);
-  if (Rf_xlength(center) == 1) {
-    if (((igraph_integer_t) REAL(center)[0]) != REAL(center)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(center)[0]);
-    }
-    c_center = (igraph_integer_t) REAL(center)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(center));
-  }
+  IGRAPH_R_CHECK_INT(center);
+  c_center = (igraph_integer_t) REAL(center)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_wheel(&c_graph, c_n, c_mode, c_center));
 
@@ -490,28 +446,12 @@ SEXP R_igraph_square_lattice(SEXP dimvector, SEXP nei, SEXP directed, SEXP mutua
                                         /* Convert input */
   R_SEXP_to_vector_int_copy(dimvector, &c_dimvector);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_dimvector);
-  if (Rf_xlength(nei) == 1) {
-    if (((igraph_integer_t) REAL(nei)[0]) != REAL(nei)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nei)[0]);
-    }
-    c_nei = (igraph_integer_t) REAL(nei)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nei));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(mutual) == 1) {
-    c_mutual = LOGICAL(mutual)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(mutual));
-  }
+  IGRAPH_R_CHECK_INT(nei);
+  c_nei = (igraph_integer_t) REAL(nei)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
   if (!Rf_isNull(periodic)) {
     R_SEXP_to_vector_bool(periodic, &c_periodic);
   }
@@ -546,18 +486,10 @@ SEXP R_igraph_triangular_lattice(SEXP dimvector, SEXP directed, SEXP mutual) {
                                         /* Convert input */
   R_SEXP_to_vector_int_copy(dimvector, &c_dimvector);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_dimvector);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(mutual) == 1) {
-    c_mutual = LOGICAL(mutual)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(mutual));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(mutual);
+  c_mutual = LOGICAL(mutual)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_triangular_lattice(&c_graph, &c_dimvector, c_directed, c_mutual));
 
@@ -618,26 +550,10 @@ SEXP R_igraph_regular_tree(SEXP h, SEXP k, SEXP type) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(h) == 1) {
-    if (((igraph_integer_t) REAL(h)[0]) != REAL(h)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(h)[0]);
-    }
-    c_h = (igraph_integer_t) REAL(h)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(h));
-  }
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
+  IGRAPH_R_CHECK_INT(h);
+  c_h = (igraph_integer_t) REAL(h)[0];
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
   c_type = (igraph_tree_mode_t) Rf_asInteger(type);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_regular_tree(&c_graph, c_h, c_k, c_type));
@@ -665,22 +581,10 @@ SEXP R_igraph_full_citation(SEXP n, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_full_citation(&c_graph, c_n, c_directed));
 
@@ -708,24 +612,12 @@ SEXP R_igraph_extended_chordal_ring(SEXP nodes, SEXP W, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
   R_SEXP_to_matrix_int(W, &c_W);
   IGRAPH_FINALLY(igraph_matrix_int_destroy, &c_W);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_extended_chordal_ring(&c_graph, c_nodes, &c_W, c_directed));
 
@@ -756,22 +648,10 @@ SEXP R_igraph_graph_power(SEXP graph, SEXP order, SEXP directed) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(order) == 1) {
-    if (((igraph_integer_t) REAL(order)[0]) != REAL(order)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(order)[0]);
-    }
-    c_order = (igraph_integer_t) REAL(order)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(order));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(order);
+  c_order = (igraph_integer_t) REAL(order)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_graph_power(&c_graph, &c_res, c_order, c_directed));
 
@@ -799,28 +679,12 @@ SEXP R_igraph_lcf_vector(SEXP n, SEXP shifts, SEXP repeats) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_vector_int_copy(shifts, &c_shifts);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_shifts);
-  if (Rf_xlength(repeats) == 1) {
-    if (((igraph_integer_t) REAL(repeats)[0]) != REAL(repeats)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(repeats)[0]);
-    }
-    c_repeats = (igraph_integer_t) REAL(repeats)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(repeats));
-  }
+  IGRAPH_R_CHECK_INT(repeats);
+  c_repeats = (igraph_integer_t) REAL(repeats)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_lcf_vector(&c_graph, c_n, &c_shifts, c_repeats));
 
@@ -854,12 +718,8 @@ SEXP R_igraph_adjlist(SEXP adjlist, SEXP mode, SEXP duplicate) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(duplicate) == 1) {
-    c_duplicate = LOGICAL(duplicate)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(duplicate));
-  }
+  IGRAPH_R_CHECK_BOOL(duplicate);
+  c_duplicate = LOGICAL(duplicate)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_adjlist(&c_graph, &c_adjlist, c_mode, c_duplicate));
 
@@ -895,32 +755,12 @@ SEXP R_igraph_full_bipartite(SEXP n1, SEXP n2, SEXP directed, SEXP mode) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  if (Rf_xlength(n1) == 1) {
-    if (((igraph_integer_t) REAL(n1)[0]) != REAL(n1)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n1)[0]);
-    }
-    c_n1 = (igraph_integer_t) REAL(n1)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n1));
-  }
-  if (Rf_xlength(n2) == 1) {
-    if (((igraph_integer_t) REAL(n2)[0]) != REAL(n2)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n2)[0]);
-    }
-    c_n2 = (igraph_integer_t) REAL(n2)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n2));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n1);
+  c_n1 = (igraph_integer_t) REAL(n1)[0];
+  IGRAPH_R_CHECK_INT(n2);
+  c_n2 = (igraph_integer_t) REAL(n2)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_full_bipartite(&c_graph, &c_types, c_n1, c_n2, c_directed, c_mode));
@@ -967,12 +807,8 @@ SEXP R_igraph_full_multipartite(SEXP n, SEXP directed, SEXP mode) {
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
   R_SEXP_to_vector_int_copy(n, &c_n);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_n);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_full_multipartite(&c_graph, &c_types, &c_n, c_directed, c_mode));
@@ -1056,24 +892,12 @@ SEXP R_igraph_circulant(SEXP n, SEXP shifts, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_vector_int_copy(shifts, &c_shifts);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_shifts);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_circulant(&c_graph, c_n, &c_shifts, c_directed));
 
@@ -1102,26 +926,10 @@ SEXP R_igraph_generalized_petersen(SEXP n, SEXP k) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_generalized_petersen(&c_graph, c_n, c_k));
 
@@ -1154,26 +962,10 @@ SEXP R_igraph_turan(SEXP n, SEXP r) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(r) == 1) {
-    if (((igraph_integer_t) REAL(r)[0]) != REAL(r)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(r)[0]);
-    }
-    c_r = (igraph_integer_t) REAL(r)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(r));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_INT(r);
+  c_r = (igraph_integer_t) REAL(r)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_turan(&c_graph, &c_types, c_n, c_r));
 
@@ -1213,18 +1005,10 @@ SEXP R_igraph_weighted_sparsemat(SEXP A, SEXP directed, SEXP attr, SEXP loops) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_sparsemat(A, &c_A);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_weighted_sparsemat(&c_graph, &c_A, c_directed, c_attr, c_loops));
 
@@ -1258,50 +1042,22 @@ SEXP R_igraph_preference_game(SEXP nodes, SEXP types, SEXP type_dist, SEXP fixed
 
   SEXP r_result, r_names;
                                         /* Convert input */
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
-  if (Rf_xlength(types) == 1) {
-    if (((igraph_integer_t) REAL(types)[0]) != REAL(types)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(types)[0]);
-    }
-    c_types = (igraph_integer_t) REAL(types)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(types));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
+  IGRAPH_R_CHECK_INT(types);
+  c_types = (igraph_integer_t) REAL(types)[0];
   R_SEXP_to_vector(type_dist, &c_type_dist);
-  if (Rf_xlength(fixed_sizes) == 1) {
-    c_fixed_sizes = LOGICAL(fixed_sizes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(fixed_sizes));
-  }
+  IGRAPH_R_CHECK_BOOL(fixed_sizes);
+  c_fixed_sizes = LOGICAL(fixed_sizes)[0];
   R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
   if (0 != igraph_vector_int_init(&c_node_type_vec, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_node_type_vec);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_preference_game(&c_graph, c_nodes, c_types, &c_type_dist, c_fixed_sizes, &c_pref_matrix, &c_node_type_vec, c_directed, c_loops));
 
@@ -1346,36 +1102,12 @@ SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_typ
 
   SEXP r_result, r_names;
                                         /* Convert input */
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
-  if (Rf_xlength(out_types) == 1) {
-    if (((igraph_integer_t) REAL(out_types)[0]) != REAL(out_types)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(out_types)[0]);
-    }
-    c_out_types = (igraph_integer_t) REAL(out_types)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(out_types));
-  }
-  if (Rf_xlength(in_types) == 1) {
-    if (((igraph_integer_t) REAL(in_types)[0]) != REAL(in_types)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(in_types)[0]);
-    }
-    c_in_types = (igraph_integer_t) REAL(in_types)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(in_types));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
+  IGRAPH_R_CHECK_INT(out_types);
+  c_out_types = (igraph_integer_t) REAL(out_types)[0];
+  IGRAPH_R_CHECK_INT(in_types);
+  c_in_types = (igraph_integer_t) REAL(in_types)[0];
   R_SEXP_to_matrix(type_dist_matrix, &c_type_dist_matrix);
   R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
   if (0 != igraph_vector_int_init(&c_node_type_out_vec, 0)) {
@@ -1386,12 +1118,8 @@ SEXP R_igraph_asymmetric_preference_game(SEXP nodes, SEXP out_types, SEXP in_typ
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_node_type_in_vec);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_asymmetric_preference_game(&c_graph, c_nodes, c_out_types, c_in_types, &c_type_dist_matrix, &c_pref_matrix, &c_node_type_out_vec, &c_node_type_in_vec, c_loops));
 
@@ -1435,24 +1163,12 @@ SEXP R_igraph_rewire_edges(SEXP graph, SEXP prob, SEXP loops, SEXP multiple) {
                                         /* Convert input */
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  if (Rf_xlength(prob) == 1) {
-    c_prob = REAL(prob)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(prob));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
-  if (Rf_xlength(multiple) == 1) {
-    c_multiple = LOGICAL(multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(multiple));
-  }
+  IGRAPH_R_CHECK_REAL(prob);
+  c_prob = REAL(prob)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_rewire_edges(&c_graph, c_prob, c_loops, c_multiple));
 
@@ -1480,18 +1196,10 @@ SEXP R_igraph_rewire_directed_edges(SEXP graph, SEXP prob, SEXP loops, SEXP mode
                                         /* Convert input */
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  if (Rf_xlength(prob) == 1) {
-    c_prob = REAL(prob)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(prob));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_REAL(prob);
+  c_prob = REAL(prob)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_rewire_directed_edges(&c_graph, c_prob, c_loops, c_mode));
@@ -1521,44 +1229,16 @@ SEXP R_igraph_forest_fire_game(SEXP nodes, SEXP fw_prob, SEXP bw_factor, SEXP am
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
-  if (Rf_xlength(fw_prob) == 1) {
-    c_fw_prob = REAL(fw_prob)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(fw_prob));
-  }
-  if (Rf_xlength(bw_factor) == 1) {
-    c_bw_factor = REAL(bw_factor)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(bw_factor));
-  }
-  if (Rf_xlength(ambs) == 1) {
-    if (((igraph_integer_t) REAL(ambs)[0]) != REAL(ambs)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(ambs)[0]);
-    }
-    c_ambs = (igraph_integer_t) REAL(ambs)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(ambs));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
+  IGRAPH_R_CHECK_REAL(fw_prob);
+  c_fw_prob = REAL(fw_prob)[0];
+  IGRAPH_R_CHECK_REAL(bw_factor);
+  c_bw_factor = REAL(bw_factor)[0];
+  IGRAPH_R_CHECK_INT(ambs);
+  c_ambs = (igraph_integer_t) REAL(ambs)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_forest_fire_game(&c_graph, c_nodes, c_fw_prob, c_bw_factor, c_ambs, c_directed));
 
@@ -1588,32 +1268,16 @@ SEXP R_igraph_static_fitness_game(SEXP no_of_edges, SEXP fitness_out, SEXP fitne
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(no_of_edges) == 1) {
-    if (((igraph_integer_t) REAL(no_of_edges)[0]) != REAL(no_of_edges)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_of_edges)[0]);
-    }
-    c_no_of_edges = (igraph_integer_t) REAL(no_of_edges)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_of_edges));
-  }
+  IGRAPH_R_CHECK_INT(no_of_edges);
+  c_no_of_edges = (igraph_integer_t) REAL(no_of_edges)[0];
   R_SEXP_to_vector(fitness_out, &c_fitness_out);
   if (!Rf_isNull(fitness_in)) {
     R_SEXP_to_vector(fitness_in, &c_fitness_in);
   }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
-  if (Rf_xlength(multiple) == 1) {
-    c_multiple = LOGICAL(multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(multiple));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_static_fitness_game(&c_graph, c_no_of_edges, &c_fitness_out, (Rf_isNull(fitness_in) ? 0 : &c_fitness_in), c_loops, c_multiple));
 
@@ -1645,56 +1309,20 @@ SEXP R_igraph_static_power_law_game(SEXP no_of_nodes, SEXP no_of_edges, SEXP exp
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(no_of_nodes) == 1) {
-    if (((igraph_integer_t) REAL(no_of_nodes)[0]) != REAL(no_of_nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_of_nodes)[0]);
-    }
-    c_no_of_nodes = (igraph_integer_t) REAL(no_of_nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_of_nodes));
-  }
-  if (Rf_xlength(no_of_edges) == 1) {
-    if (((igraph_integer_t) REAL(no_of_edges)[0]) != REAL(no_of_edges)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_of_edges)[0]);
-    }
-    c_no_of_edges = (igraph_integer_t) REAL(no_of_edges)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_of_edges));
-  }
-  if (Rf_xlength(exponent_out) == 1) {
-    c_exponent_out = REAL(exponent_out)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(exponent_out));
-  }
-  if (Rf_xlength(exponent_in) == 1) {
-    c_exponent_in = REAL(exponent_in)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(exponent_in));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
-  if (Rf_xlength(multiple) == 1) {
-    c_multiple = LOGICAL(multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(multiple));
-  }
-  if (Rf_xlength(finite_size_correction) == 1) {
-    c_finite_size_correction = LOGICAL(finite_size_correction)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(finite_size_correction));
-  }
+  IGRAPH_R_CHECK_INT(no_of_nodes);
+  c_no_of_nodes = (igraph_integer_t) REAL(no_of_nodes)[0];
+  IGRAPH_R_CHECK_INT(no_of_edges);
+  c_no_of_edges = (igraph_integer_t) REAL(no_of_edges)[0];
+  IGRAPH_R_CHECK_REAL(exponent_out);
+  c_exponent_out = REAL(exponent_out)[0];
+  IGRAPH_R_CHECK_REAL(exponent_in);
+  c_exponent_in = REAL(exponent_in)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
+  IGRAPH_R_CHECK_BOOL(finite_size_correction);
+  c_finite_size_correction = LOGICAL(finite_size_correction)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_static_power_law_game(&c_graph, c_no_of_nodes, c_no_of_edges, c_exponent_out, c_exponent_in, c_loops, c_multiple, c_finite_size_correction));
 
@@ -1723,38 +1351,14 @@ SEXP R_igraph_k_regular_game(SEXP no_of_nodes, SEXP k, SEXP directed, SEXP multi
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(no_of_nodes) == 1) {
-    if (((igraph_integer_t) REAL(no_of_nodes)[0]) != REAL(no_of_nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_of_nodes)[0]);
-    }
-    c_no_of_nodes = (igraph_integer_t) REAL(no_of_nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_of_nodes));
-  }
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(multiple) == 1) {
-    c_multiple = LOGICAL(multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(multiple));
-  }
+  IGRAPH_R_CHECK_INT(no_of_nodes);
+  c_no_of_nodes = (igraph_integer_t) REAL(no_of_nodes)[0];
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_k_regular_game(&c_graph, c_no_of_nodes, c_k, c_directed, c_multiple));
 
@@ -1784,31 +1388,15 @@ SEXP R_igraph_sbm_game(SEXP n, SEXP pref_matrix, SEXP block_sizes, SEXP directed
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_matrix(pref_matrix, &c_pref_matrix);
   R_SEXP_to_vector_int_copy(block_sizes, &c_block_sizes);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_block_sizes);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_sbm_game(&c_graph, c_n, &c_pref_matrix, &c_block_sizes, c_directed, c_loops));
 
@@ -1840,34 +1428,14 @@ SEXP R_igraph_hsbm_game(SEXP n, SEXP m, SEXP rho, SEXP C, SEXP p) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(m) == 1) {
-    if (((igraph_integer_t) REAL(m)[0]) != REAL(m)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(m)[0]);
-    }
-    c_m = (igraph_integer_t) REAL(m)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(m));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
   R_SEXP_to_vector(rho, &c_rho);
   R_SEXP_to_matrix(C, &c_C);
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hsbm_game(&c_graph, c_n, c_m, &c_rho, &c_C, c_p));
 
@@ -1897,26 +1465,14 @@ SEXP R_igraph_hsbm_list_game(SEXP n, SEXP mlist, SEXP rholist, SEXP Clist, SEXP 
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_vector_int_copy(mlist, &c_mlist);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_mlist);
   R_igraph_SEXP_to_vector_list(rholist, &c_rholist);
   R_igraph_SEXP_to_matrixlist(Clist, &c_Clist);
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hsbm_list_game(&c_graph, c_n, &c_mlist, &c_rholist, &c_Clist, c_p));
 
@@ -1948,18 +1504,10 @@ SEXP R_igraph_correlated_game(SEXP old_graph, SEXP corr, SEXP p, SEXP permutatio
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(old_graph, &c_old_graph);
-  if (Rf_xlength(corr) == 1) {
-    c_corr = REAL(corr)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(corr));
-  }
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
+  IGRAPH_R_CHECK_REAL(corr);
+  c_corr = REAL(corr)[0];
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
   if (!Rf_isNull(permutation)) {
     R_SEXP_to_vector_int_copy(permutation, &c_permutation);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_permutation);
@@ -2000,34 +1548,14 @@ SEXP R_igraph_correlated_pair_game(SEXP n, SEXP corr, SEXP p, SEXP directed, SEX
 
   SEXP r_result, r_names;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(corr) == 1) {
-    c_corr = REAL(corr)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(corr));
-  }
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(corr);
+  c_corr = REAL(corr)[0];
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(permutation)) {
     R_SEXP_to_vector_int_copy(permutation, &c_permutation);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_permutation);
@@ -2075,12 +1603,8 @@ SEXP R_igraph_dot_product_game(SEXP vecs, SEXP directed) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_matrix(vecs, &c_vecs);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_dot_product_game(&c_graph, &c_vecs, c_directed));
 
@@ -2109,38 +1633,14 @@ SEXP R_igraph_sample_sphere_surface(SEXP dim, SEXP n, SEXP radius, SEXP positive
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(dim) == 1) {
-    if (((igraph_integer_t) REAL(dim)[0]) != REAL(dim)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(dim)[0]);
-    }
-    c_dim = (igraph_integer_t) REAL(dim)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(dim));
-  }
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(radius) == 1) {
-    c_radius = REAL(radius)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(radius));
-  }
-  if (Rf_xlength(positive) == 1) {
-    c_positive = LOGICAL(positive)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(positive));
-  }
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
   if (0 != igraph_matrix_init(&c_res, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -2172,38 +1672,14 @@ SEXP R_igraph_sample_sphere_volume(SEXP dim, SEXP n, SEXP radius, SEXP positive)
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(dim) == 1) {
-    if (((igraph_integer_t) REAL(dim)[0]) != REAL(dim)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(dim)[0]);
-    }
-    c_dim = (igraph_integer_t) REAL(dim)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(dim));
-  }
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(radius) == 1) {
-    c_radius = REAL(radius)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(radius));
-  }
-  if (Rf_xlength(positive) == 1) {
-    c_positive = LOGICAL(positive)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(positive));
-  }
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_REAL(radius);
+  c_radius = REAL(radius)[0];
+  IGRAPH_R_CHECK_BOOL(positive);
+  c_positive = LOGICAL(positive)[0];
   if (0 != igraph_matrix_init(&c_res, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -2233,16 +1709,8 @@ SEXP R_igraph_sample_dirichlet(SEXP n, SEXP alpha) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   R_SEXP_to_vector(alpha, &c_alpha);
   if (0 != igraph_matrix_init(&c_res, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
@@ -2293,12 +1761,8 @@ SEXP R_igraph_closeness(SEXP graph, SEXP vids, SEXP mode, SEXP weights, SEXP nor
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_closeness(&c_graph, &c_res, &c_reachable_count, &c_all_reachable, c_vids, c_mode, (Rf_isNull(weights) ? 0 : &c_weights), c_normalized));
 
@@ -2361,18 +1825,10 @@ SEXP R_igraph_closeness_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP weights, S
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_closeness_cutoff(&c_graph, &c_res, &c_reachable_count, &c_all_reachable, c_vids, c_mode, (Rf_isNull(weights) ? 0 : &c_weights), c_normalized, c_cutoff));
 
@@ -2468,12 +1924,8 @@ SEXP R_igraph_distances_cutoff(SEXP graph, SEXP from, SEXP to, SEXP mode, SEXP c
   igraph_vector_int_t c_to_data;
   R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_distances_cutoff(&c_graph, &c_res, c_from, c_to, c_mode, c_cutoff));
 
@@ -2783,12 +2235,8 @@ SEXP R_igraph_distances_dijkstra_cutoff(SEXP graph, SEXP from, SEXP to, SEXP wei
   R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_distances_dijkstra_cutoff(&c_graph, &c_res, c_from, c_to, (Rf_isNull(weights) ? 0 : &c_weights), c_mode, c_cutoff));
 
@@ -3078,16 +2526,8 @@ SEXP R_igraph_get_all_simple_paths(SEXP graph, SEXP from, SEXP to, SEXP cutoff, 
   c_from = (igraph_integer_t) REAL(from)[0];
   igraph_vector_int_t c_to_data;
   R_SEXP_to_igraph_vs(to, &c_graph, &c_to, &c_to_data);
-  if (Rf_xlength(cutoff) == 1) {
-    if (((igraph_integer_t) REAL(cutoff)[0]) != REAL(cutoff)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(cutoff)[0]);
-    }
-    c_cutoff = (igraph_integer_t) REAL(cutoff)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_INT(cutoff);
+  c_cutoff = (igraph_integer_t) REAL(cutoff)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_get_all_simple_paths(&c_graph, &c_res, c_from, c_to, c_cutoff, c_mode));
@@ -3132,16 +2572,8 @@ SEXP R_igraph_get_k_shortest_paths(SEXP graph, SEXP weights, SEXP k, SEXP from, 
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_edge_paths);
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
   c_from = (igraph_integer_t) REAL(from)[0];
   c_to = (igraph_integer_t) REAL(to)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
@@ -3403,12 +2835,8 @@ SEXP R_igraph_spanner(SEXP graph, SEXP stretch, SEXP weights) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_spanner);
-  if (Rf_xlength(stretch) == 1) {
-    c_stretch = REAL(stretch)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(stretch));
-  }
+  IGRAPH_R_CHECK_REAL(stretch);
+  c_stretch = REAL(stretch)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_spanner(&c_graph, &c_spanner, c_stretch, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -3445,19 +2873,11 @@ SEXP R_igraph_betweenness_cutoff(SEXP graph, SEXP vids, SEXP directed, SEXP weig
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_betweenness_cutoff(&c_graph, &c_res, c_vids, c_directed, (Rf_isNull(weights) ? 0 : &c_weights), c_cutoff));
 
@@ -3496,12 +2916,8 @@ SEXP R_igraph_betweenness_subset(SEXP graph, SEXP vids, SEXP directed, SEXP sour
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   R_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
@@ -3544,12 +2960,8 @@ SEXP R_igraph_edge_betweenness(SEXP graph, SEXP directed, SEXP weights) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_edge_betweenness(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -3583,19 +2995,11 @@ SEXP R_igraph_edge_betweenness_cutoff(SEXP graph, SEXP directed, SEXP weights, S
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_edge_betweenness_cutoff(&c_graph, &c_res, c_directed, (Rf_isNull(weights) ? 0 : &c_weights), c_cutoff));
 
@@ -3632,12 +3036,8 @@ SEXP R_igraph_edge_betweenness_subset(SEXP graph, SEXP eids, SEXP directed, SEXP
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_eids_data;
   R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   igraph_vector_int_t c_sources_data;
   R_SEXP_to_igraph_vs(sources, &c_graph, &c_sources, &c_sources_data);
   igraph_vector_int_t c_targets_data;
@@ -3687,18 +3087,10 @@ SEXP R_igraph_harmonic_centrality_cutoff(SEXP graph, SEXP vids, SEXP mode, SEXP 
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
-  if (Rf_xlength(cutoff) == 1) {
-    c_cutoff = REAL(cutoff)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cutoff));
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
+  IGRAPH_R_CHECK_REAL(cutoff);
+  c_cutoff = REAL(cutoff)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_harmonic_centrality_cutoff(&c_graph, &c_res, c_vids, c_mode, (Rf_isNull(weights) ? 0 : &c_weights), c_normalized, c_cutoff));
 
@@ -3743,18 +3135,10 @@ SEXP R_igraph_personalized_pagerank(SEXP graph, SEXP algo, SEXP vids, SEXP direc
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(damping) == 1) {
-    c_damping = REAL(damping)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(damping));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
   if (!Rf_isNull(personalized)) {
     R_SEXP_to_vector(personalized, &c_personalized);
   }
@@ -3825,18 +3209,10 @@ SEXP R_igraph_personalized_pagerank_vs(SEXP graph, SEXP algo, SEXP vids, SEXP di
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(damping) == 1) {
-    c_damping = REAL(damping)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(damping));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_REAL(damping);
+  c_damping = REAL(damping)[0];
   igraph_vector_int_t c_reset_vids_data;
   R_SEXP_to_igraph_vs(reset_vids, &c_graph, &c_reset_vids, &c_reset_vids_data);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
@@ -3928,12 +3304,8 @@ SEXP R_igraph_subgraph_from_edges(SEXP graph, SEXP eids, SEXP delete_vertices) {
   R_SEXP_to_igraph(graph, &c_graph);
   igraph_vector_int_t c_eids_data;
   R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data);
-  if (Rf_xlength(delete_vertices) == 1) {
-    c_delete_vertices = LOGICAL(delete_vertices)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(delete_vertices));
-  }
+  IGRAPH_R_CHECK_BOOL(delete_vertices);
+  c_delete_vertices = LOGICAL(delete_vertices)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_subgraph_from_edges(&c_graph, &c_res, c_eids, c_delete_vertices));
 
@@ -3997,18 +3369,10 @@ SEXP R_igraph_average_path_length_dijkstra(SEXP graph, SEXP weights, SEXP direct
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(unconn) == 1) {
-    c_unconn = LOGICAL(unconn)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(unconn));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(unconn);
+  c_unconn = LOGICAL(unconn)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_average_path_length_dijkstra(&c_graph, &c_res, &c_unconn_pairs, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_unconn));
 
@@ -4049,12 +3413,8 @@ SEXP R_igraph_path_length_hist(SEXP graph, SEXP directed) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_path_length_hist(&c_graph, &c_res, &c_unconnected, c_directed));
 
@@ -4091,18 +3451,10 @@ SEXP R_igraph_simplify(SEXP graph, SEXP remove_multiple, SEXP remove_loops, SEXP
                                         /* Convert input */
   R_SEXP_to_igraph_copy(graph, &c_graph);
   IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  if (Rf_xlength(remove_multiple) == 1) {
-    c_remove_multiple = LOGICAL(remove_multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(remove_multiple));
-  }
-  if (Rf_xlength(remove_loops) == 1) {
-    c_remove_loops = LOGICAL(remove_loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(remove_loops));
-  }
+  IGRAPH_R_CHECK_BOOL(remove_multiple);
+  c_remove_multiple = LOGICAL(remove_multiple)[0];
+  IGRAPH_R_CHECK_BOOL(remove_loops);
+  c_remove_loops = LOGICAL(remove_loops)[0];
   R_SEXP_to_attr_comb(edge_attr_comb, &c_edge_attr_comb);
   IGRAPH_FINALLY(igraph_attribute_combination_destroy, &c_edge_attr_comb);
                                         /* Call igraph */
@@ -4142,28 +3494,12 @@ SEXP R_igraph_ecc(SEXP graph, SEXP eids, SEXP k, SEXP offset, SEXP normalize) {
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   igraph_vector_int_t c_eids_data;
   R_SEXP_to_igraph_es(eids, &c_graph, &c_eids, &c_eids_data);
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
-  if (Rf_xlength(offset) == 1) {
-    c_offset = LOGICAL(offset)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(offset));
-  }
-  if (Rf_xlength(normalize) == 1) {
-    c_normalize = LOGICAL(normalize)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalize));
-  }
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
+  IGRAPH_R_CHECK_BOOL(offset);
+  c_offset = LOGICAL(offset)[0];
+  IGRAPH_R_CHECK_BOOL(normalize);
+  c_normalize = LOGICAL(normalize)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_ecc(&c_graph, &c_res, c_eids, c_k, c_offset, c_normalize));
 
@@ -4193,7 +3529,8 @@ SEXP R_igraph_reciprocity(SEXP graph, SEXP ignore_loops, SEXP mode) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_ignore_loops=LOGICAL(ignore_loops)[0];
+  IGRAPH_R_CHECK_BOOL(ignore_loops);
+  c_ignore_loops = LOGICAL(ignore_loops)[0];
   c_mode = (igraph_reciprocity_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_reciprocity(&c_graph, &c_res, c_ignore_loops, c_mode));
@@ -4508,18 +3845,10 @@ SEXP R_igraph_eigenvector_centrality(SEXP graph, SEXP directed, SEXP scale, SEXP
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   R_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
@@ -4568,12 +3897,8 @@ SEXP R_igraph_hub_score(SEXP graph, SEXP scale, SEXP weights, SEXP options) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   R_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
@@ -4622,12 +3947,8 @@ SEXP R_igraph_authority_score(SEXP graph, SEXP scale, SEXP weights, SEXP options
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   R_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
@@ -4682,12 +4003,8 @@ SEXP R_igraph_hub_and_authority_scores(SEXP graph, SEXP scale, SEXP weights, SEX
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_authority_vector);
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   R_SEXP_to_igraph_arpack_options(options, &c_options);
                                         /* Call igraph */
@@ -4789,12 +4106,8 @@ SEXP R_igraph_is_mutual(SEXP graph, SEXP es, SEXP loops) {
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_res);
   igraph_vector_int_t c_es_data;
   R_SEXP_to_igraph_es(es, &c_graph, &c_es, &c_es_data);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_mutual(&c_graph, &c_res, c_es, c_loops));
 
@@ -4823,12 +4136,8 @@ SEXP R_igraph_has_mutual(SEXP graph, SEXP loops) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_has_mutual(&c_graph, &c_res, c_loops));
 
@@ -4965,12 +4274,8 @@ SEXP R_igraph_degree_correlation_vector(SEXP graph, SEXP weights, SEXP from_mode
   IGRAPH_FINALLY(igraph_vector_destroy, &c_knnk);
   c_from_mode = (igraph_neimode_t) Rf_asInteger(from_mode);
   c_to_mode = (igraph_neimode_t) Rf_asInteger(to_mode);
-  if (Rf_xlength(directed_neighbors) == 1) {
-    c_directed_neighbors = LOGICAL(directed_neighbors)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed_neighbors));
-  }
+  IGRAPH_R_CHECK_BOOL(directed_neighbors);
+  c_directed_neighbors = LOGICAL(directed_neighbors)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_degree_correlation_vector(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_knnk, c_from_mode, c_to_mode, c_directed_neighbors));
 
@@ -5007,12 +4312,8 @@ SEXP R_igraph_strength(SEXP graph, SEXP vids, SEXP mode, SEXP loops, SEXP weight
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_strength(&c_graph, &c_res, c_vids, c_mode, c_loops, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -5041,18 +4342,10 @@ SEXP R_igraph_centralization(SEXP scores, SEXP theoretical_max, SEXP normalized)
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_vector(scores, &c_scores);
-  if (Rf_xlength(theoretical_max) == 1) {
-    c_theoretical_max = REAL(theoretical_max)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(theoretical_max));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_REAL(theoretical_max);
+  c_theoretical_max = REAL(theoretical_max)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   c_result=igraph_centralization(&c_scores, c_theoretical_max, c_normalized);
 
@@ -5089,18 +4382,10 @@ SEXP R_igraph_centralization_degree(SEXP graph, SEXP mode, SEXP loops, SEXP norm
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_degree(&c_graph, &c_res, c_mode, c_loops, &c_centralization, &c_theoretical_max, c_normalized));
 
@@ -5144,23 +4429,11 @@ SEXP R_igraph_centralization_degree_tmax(SEXP graph, SEXP nodes, SEXP mode, SEXP
   if (!Rf_isNull(graph)) {
     R_SEXP_to_igraph(graph, &c_graph);
   }
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_degree_tmax((Rf_isNull(graph) ? 0 : &c_graph), c_nodes, c_mode, c_loops, &c_res));
 
@@ -5195,18 +4468,10 @@ SEXP R_igraph_centralization_betweenness(SEXP graph, SEXP directed, SEXP normali
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_betweenness(&c_graph, &c_res, c_directed, &c_centralization, &c_theoretical_max, c_normalized));
 
@@ -5249,22 +4514,10 @@ SEXP R_igraph_centralization_betweenness_tmax(SEXP graph, SEXP nodes, SEXP direc
   if (!Rf_isNull(graph)) {
     R_SEXP_to_igraph(graph, &c_graph);
   }
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_betweenness_tmax((Rf_isNull(graph) ? 0 : &c_graph), c_nodes, c_directed, &c_res));
 
@@ -5300,12 +4553,8 @@ SEXP R_igraph_centralization_closeness(SEXP graph, SEXP mode, SEXP normalized) {
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_closeness(&c_graph, &c_res, c_mode, &c_centralization, &c_theoretical_max, c_normalized));
 
@@ -5348,16 +4597,8 @@ SEXP R_igraph_centralization_closeness_tmax(SEXP graph, SEXP nodes, SEXP mode) {
   if (!Rf_isNull(graph)) {
     R_SEXP_to_igraph(graph, &c_graph);
   }
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_closeness_tmax((Rf_isNull(graph) ? 0 : &c_graph), c_nodes, c_mode, &c_res));
@@ -5397,25 +4638,13 @@ SEXP R_igraph_centralization_eigenvector_centrality(SEXP graph, SEXP directed, S
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_vector);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
   R_SEXP_to_igraph_arpack_options(options, &c_options);
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_eigenvector_centrality(&c_graph, &c_vector, &c_value, c_directed, c_scale, &c_options, &c_centralization, &c_theoretical_max, c_normalized));
 
@@ -5466,28 +4695,12 @@ SEXP R_igraph_centralization_eigenvector_centrality_tmax(SEXP graph, SEXP nodes,
   if (!Rf_isNull(graph)) {
     R_SEXP_to_igraph(graph, &c_graph);
   }
-  if (Rf_xlength(nodes) == 1) {
-    if (((igraph_integer_t) REAL(nodes)[0]) != REAL(nodes)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nodes)[0]);
-    }
-    c_nodes = (igraph_integer_t) REAL(nodes)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nodes));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(scale) == 1) {
-    c_scale = LOGICAL(scale)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(scale));
-  }
+  IGRAPH_R_CHECK_INT(nodes);
+  c_nodes = (igraph_integer_t) REAL(nodes)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(scale);
+  c_scale = LOGICAL(scale)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_centralization_eigenvector_centrality_tmax((Rf_isNull(graph) ? 0 : &c_graph), c_nodes, c_directed, c_scale, &c_res));
 
@@ -5517,18 +4730,10 @@ SEXP R_igraph_assortativity_nominal(SEXP graph, SEXP types, SEXP directed, SEXP 
   R_SEXP_to_igraph(graph, &c_graph);
   R_SEXP_to_vector_int_copy(types, &c_types);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_types);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_assortativity_nominal(&c_graph, &c_types, &c_res, c_directed, c_normalized));
 
@@ -5563,18 +4768,10 @@ SEXP R_igraph_assortativity(SEXP graph, SEXP values, SEXP values_in, SEXP direct
   if (!Rf_isNull(values_in)) {
     R_SEXP_to_vector(values_in, &c_values_in);
   }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_assortativity(&c_graph, &c_values, (Rf_isNull(values_in) ? 0 : &c_values_in), &c_res, c_directed, c_normalized));
 
@@ -5600,12 +4797,8 @@ SEXP R_igraph_assortativity_degree(SEXP graph, SEXP directed) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_assortativity_degree(&c_graph, &c_res, c_directed));
 
@@ -5638,26 +4831,10 @@ SEXP R_igraph_joint_degree_matrix(SEXP graph, SEXP weights, SEXP max_out_degree,
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_jdm);
-  if (Rf_xlength(max_out_degree) == 1) {
-    if (((igraph_integer_t) REAL(max_out_degree)[0]) != REAL(max_out_degree)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_out_degree)[0]);
-    }
-    c_max_out_degree = (igraph_integer_t) REAL(max_out_degree)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_out_degree));
-  }
-  if (Rf_xlength(max_in_degree) == 1) {
-    if (((igraph_integer_t) REAL(max_in_degree)[0]) != REAL(max_in_degree)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_in_degree)[0]);
-    }
-    c_max_in_degree = (igraph_integer_t) REAL(max_in_degree)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_in_degree));
-  }
+  IGRAPH_R_CHECK_INT(max_out_degree);
+  c_max_out_degree = (igraph_integer_t) REAL(max_out_degree)[0];
+  IGRAPH_R_CHECK_INT(max_in_degree);
+  c_max_in_degree = (igraph_integer_t) REAL(max_in_degree)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_joint_degree_matrix(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_jdm, c_max_out_degree, c_max_in_degree));
 
@@ -5697,38 +4874,14 @@ SEXP R_igraph_joint_degree_distribution(SEXP graph, SEXP weights, SEXP from_mode
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_p);
   c_from_mode = (igraph_neimode_t) Rf_asInteger(from_mode);
   c_to_mode = (igraph_neimode_t) Rf_asInteger(to_mode);
-  if (Rf_xlength(directed_neighbors) == 1) {
-    c_directed_neighbors = LOGICAL(directed_neighbors)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed_neighbors));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
-  if (Rf_xlength(max_from_degree) == 1) {
-    if (((igraph_integer_t) REAL(max_from_degree)[0]) != REAL(max_from_degree)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_from_degree)[0]);
-    }
-    c_max_from_degree = (igraph_integer_t) REAL(max_from_degree)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_from_degree));
-  }
-  if (Rf_xlength(max_to_degree) == 1) {
-    if (((igraph_integer_t) REAL(max_to_degree)[0]) != REAL(max_to_degree)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_to_degree)[0]);
-    }
-    c_max_to_degree = (igraph_integer_t) REAL(max_to_degree)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_to_degree));
-  }
+  IGRAPH_R_CHECK_BOOL(directed_neighbors);
+  c_directed_neighbors = LOGICAL(directed_neighbors)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
+  IGRAPH_R_CHECK_INT(max_from_degree);
+  c_max_from_degree = (igraph_integer_t) REAL(max_from_degree)[0];
+  IGRAPH_R_CHECK_INT(max_to_degree);
+  c_max_to_degree = (igraph_integer_t) REAL(max_to_degree)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_joint_degree_distribution(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_p, c_from_mode, c_to_mode, c_directed_neighbors, c_normalized, c_max_from_degree, c_max_to_degree));
 
@@ -5768,18 +4921,10 @@ SEXP R_igraph_joint_type_distribution(SEXP graph, SEXP weights, SEXP from_types,
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_from_types);
   R_SEXP_to_vector_int_copy(to_types, &c_to_types);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_to_types);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(normalized) == 1) {
-    c_normalized = LOGICAL(normalized)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(normalized));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(normalized);
+  c_normalized = LOGICAL(normalized)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_joint_type_distribution(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_p, &c_from_types, &c_to_types, c_directed, c_normalized));
 
@@ -6045,18 +5190,10 @@ SEXP R_igraph_pseudo_diameter(SEXP graph, SEXP start_vid, SEXP directed, SEXP un
   c_start_vid = (igraph_integer_t) REAL(start_vid)[0];
   c_from=0;
   c_to=0;
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(unconnected) == 1) {
-    c_unconnected = LOGICAL(unconnected)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(unconnected));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(unconnected);
+  c_unconnected = LOGICAL(unconnected)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_pseudo_diameter(&c_graph, &c_diameter, c_start_vid, &c_from, &c_to, c_directed, c_unconnected));
 
@@ -6106,18 +5243,10 @@ SEXP R_igraph_pseudo_diameter_dijkstra(SEXP graph, SEXP weights, SEXP start_vid,
   c_start_vid = (igraph_integer_t) REAL(start_vid)[0];
   c_from=0;
   c_to=0;
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
-  if (Rf_xlength(unconnected) == 1) {
-    c_unconnected = LOGICAL(unconnected)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(unconnected));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
+  IGRAPH_R_CHECK_BOOL(unconnected);
+  c_unconnected = LOGICAL(unconnected)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_pseudo_diameter_dijkstra(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_diameter, c_start_vid, &c_from, &c_to, c_directed, c_unconnected));
 
@@ -6209,16 +5338,8 @@ SEXP R_igraph_random_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, SEXP 
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
   c_start = (igraph_integer_t) REAL(start)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(steps) == 1) {
-    if (((igraph_integer_t) REAL(steps)[0]) != REAL(steps)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(steps)[0]);
-    }
-    c_steps = (igraph_integer_t) REAL(steps)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(steps));
-  }
+  IGRAPH_R_CHECK_INT(steps);
+  c_steps = (igraph_integer_t) REAL(steps)[0];
   c_stuck = (igraph_random_walk_stuck_t) Rf_asInteger(stuck);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_random_walk(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_vertices, &c_edges, c_start, c_mode, c_steps, c_stuck));
@@ -6267,16 +5388,8 @@ SEXP R_igraph_random_edge_walk(SEXP graph, SEXP weights, SEXP start, SEXP mode, 
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edgewalk);
   c_start = (igraph_integer_t) REAL(start)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(steps) == 1) {
-    if (((igraph_integer_t) REAL(steps)[0]) != REAL(steps)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(steps)[0]);
-    }
-    c_steps = (igraph_integer_t) REAL(steps)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(steps));
-  }
+  IGRAPH_R_CHECK_INT(steps);
+  c_steps = (igraph_integer_t) REAL(steps)[0];
   c_stuck = (igraph_random_walk_stuck_t) Rf_asInteger(stuck);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_random_edge_walk(&c_graph, (Rf_isNull(weights) ? 0 : &c_weights), &c_edgewalk, c_start, c_mode, c_steps, c_stuck));
@@ -6306,12 +5419,8 @@ SEXP R_igraph_global_efficiency(SEXP graph, SEXP weights, SEXP directed) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_global_efficiency(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), c_directed));
 
@@ -6347,12 +5456,8 @@ SEXP R_igraph_local_efficiency(SEXP graph, SEXP vids, SEXP weights, SEXP directe
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_local_efficiency(&c_graph, &c_res, c_vids, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_mode));
@@ -6385,12 +5490,8 @@ SEXP R_igraph_average_local_efficiency(SEXP graph, SEXP weights, SEXP directed, 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_average_local_efficiency(&c_graph, &c_res, (Rf_isNull(weights) ? 0 : &c_weights), c_directed, c_mode));
@@ -6627,12 +5728,8 @@ SEXP R_igraph_create_bipartite(SEXP types, SEXP edges, SEXP directed) {
   if (!Rf_isNull(types)) { R_SEXP_to_vector_bool(types, &c_types); }
   R_SEXP_to_vector_int_copy(edges, &c_edges);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_edges);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_create_bipartite(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_edges, c_directed));
 
@@ -6670,19 +5767,11 @@ SEXP R_igraph_biadjacency(SEXP incidence, SEXP directed, SEXP mode, SEXP multipl
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
   R_SEXP_to_matrix(incidence, &c_incidence);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(multiple) == 1) {
-    c_multiple = LOGICAL(multiple)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(multiple));
-  }
+  IGRAPH_R_CHECK_BOOL(multiple);
+  c_multiple = LOGICAL(multiple)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_biadjacency(&c_graph, &c_types, &c_incidence, c_directed, c_mode, c_multiple));
 
@@ -6826,38 +5915,14 @@ SEXP R_igraph_bipartite_game_gnp(SEXP n1, SEXP n2, SEXP p, SEXP directed, SEXP m
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  if (Rf_xlength(n1) == 1) {
-    if (((igraph_integer_t) REAL(n1)[0]) != REAL(n1)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n1)[0]);
-    }
-    c_n1 = (igraph_integer_t) REAL(n1)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n1));
-  }
-  if (Rf_xlength(n2) == 1) {
-    if (((igraph_integer_t) REAL(n2)[0]) != REAL(n2)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n2)[0]);
-    }
-    c_n2 = (igraph_integer_t) REAL(n2)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n2));
-  }
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n1);
+  c_n1 = (igraph_integer_t) REAL(n1)[0];
+  IGRAPH_R_CHECK_INT(n2);
+  c_n2 = (igraph_integer_t) REAL(n2)[0];
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_bipartite_game_gnp(&c_graph, &c_types, c_n1, c_n2, c_p, c_directed, c_mode));
@@ -6904,42 +5969,14 @@ SEXP R_igraph_bipartite_game_gnm(SEXP n1, SEXP n2, SEXP m, SEXP directed, SEXP m
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
-  if (Rf_xlength(n1) == 1) {
-    if (((igraph_integer_t) REAL(n1)[0]) != REAL(n1)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n1)[0]);
-    }
-    c_n1 = (igraph_integer_t) REAL(n1)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n1));
-  }
-  if (Rf_xlength(n2) == 1) {
-    if (((igraph_integer_t) REAL(n2)[0]) != REAL(n2)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n2)[0]);
-    }
-    c_n2 = (igraph_integer_t) REAL(n2)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n2));
-  }
-  if (Rf_xlength(m) == 1) {
-    if (((igraph_integer_t) REAL(m)[0]) != REAL(m)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(m)[0]);
-    }
-    c_m = (igraph_integer_t) REAL(m)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(m));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n1);
+  c_n1 = (igraph_integer_t) REAL(n1)[0];
+  IGRAPH_R_CHECK_INT(n2);
+  c_n2 = (igraph_integer_t) REAL(n2)[0];
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_bipartite_game_gnm(&c_graph, &c_types, c_n1, c_n2, c_m, c_directed, c_mode));
@@ -6989,48 +6026,16 @@ SEXP R_igraph_bipartite_game(SEXP type, SEXP n1, SEXP n2, SEXP p, SEXP m, SEXP d
   }
   IGRAPH_FINALLY(igraph_vector_bool_destroy, &c_types);
   c_type = (igraph_erdos_renyi_t) Rf_asInteger(type);
-  if (Rf_xlength(n1) == 1) {
-    if (((igraph_integer_t) REAL(n1)[0]) != REAL(n1)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n1)[0]);
-    }
-    c_n1 = (igraph_integer_t) REAL(n1)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n1));
-  }
-  if (Rf_xlength(n2) == 1) {
-    if (((igraph_integer_t) REAL(n2)[0]) != REAL(n2)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n2)[0]);
-    }
-    c_n2 = (igraph_integer_t) REAL(n2)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n2));
-  }
-  if (Rf_xlength(p) == 1) {
-    c_p = REAL(p)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(p));
-  }
-  if (Rf_xlength(m) == 1) {
-    if (((igraph_integer_t) REAL(m)[0]) != REAL(m)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(m)[0]);
-    }
-    c_m = (igraph_integer_t) REAL(m)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(m));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n1);
+  c_n1 = (igraph_integer_t) REAL(n1)[0];
+  IGRAPH_R_CHECK_INT(n2);
+  c_n2 = (igraph_integer_t) REAL(n2)[0];
+  IGRAPH_R_CHECK_REAL(p);
+  c_p = REAL(p)[0];
+  IGRAPH_R_CHECK_INT(m);
+  c_m = (igraph_integer_t) REAL(m)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_bipartite_game(&c_graph, &c_types, c_type, c_n1, c_n2, c_p, c_m, c_directed, c_mode));
@@ -7356,26 +6361,10 @@ SEXP R_igraph_cliques(SEXP graph, SEXP min_size, SEXP max_size) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
-  if (Rf_xlength(min_size) == 1) {
-    if (((igraph_integer_t) REAL(min_size)[0]) != REAL(min_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(min_size)[0]);
-    }
-    c_min_size = (igraph_integer_t) REAL(min_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_size));
-  }
-  if (Rf_xlength(max_size) == 1) {
-    if (((igraph_integer_t) REAL(max_size)[0]) != REAL(max_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_size)[0]);
-    }
-    c_max_size = (igraph_integer_t) REAL(max_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_size));
-  }
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_cliques(&c_graph, &c_res, c_min_size, c_max_size));
 
@@ -7407,26 +6396,10 @@ SEXP R_igraph_clique_size_hist(SEXP graph, SEXP min_size, SEXP max_size) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_hist);
-  if (Rf_xlength(min_size) == 1) {
-    if (((igraph_integer_t) REAL(min_size)[0]) != REAL(min_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(min_size)[0]);
-    }
-    c_min_size = (igraph_integer_t) REAL(min_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_size));
-  }
-  if (Rf_xlength(max_size) == 1) {
-    if (((igraph_integer_t) REAL(max_size)[0]) != REAL(max_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_size)[0]);
-    }
-    c_max_size = (igraph_integer_t) REAL(max_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_size));
-  }
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_clique_size_hist(&c_graph, &c_hist, c_min_size, c_max_size));
 
@@ -7493,26 +6466,10 @@ SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
   c_no=0;
-  if (Rf_xlength(min_size) == 1) {
-    if (((igraph_integer_t) REAL(min_size)[0]) != REAL(min_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(min_size)[0]);
-    }
-    c_min_size = (igraph_integer_t) REAL(min_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_size));
-  }
-  if (Rf_xlength(max_size) == 1) {
-    if (((igraph_integer_t) REAL(max_size)[0]) != REAL(max_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_size)[0]);
-    }
-    c_max_size = (igraph_integer_t) REAL(max_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_size));
-  }
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_maximal_cliques_subset(&c_graph, &c_subset, &c_res, &c_no, c_outfile, c_min_size, c_max_size));
 
@@ -7553,26 +6510,10 @@ SEXP R_igraph_maximal_cliques_hist(SEXP graph, SEXP min_size, SEXP max_size) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_hist);
-  if (Rf_xlength(min_size) == 1) {
-    if (((igraph_integer_t) REAL(min_size)[0]) != REAL(min_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(min_size)[0]);
-    }
-    c_min_size = (igraph_integer_t) REAL(min_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_size));
-  }
-  if (Rf_xlength(max_size) == 1) {
-    if (((igraph_integer_t) REAL(max_size)[0]) != REAL(max_size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(max_size)[0]);
-    }
-    c_max_size = (igraph_integer_t) REAL(max_size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_size));
-  }
+  IGRAPH_R_CHECK_INT(min_size);
+  c_min_size = (igraph_integer_t) REAL(min_size)[0];
+  IGRAPH_R_CHECK_INT(max_size);
+  c_max_size = (igraph_integer_t) REAL(max_size)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_maximal_cliques_hist(&c_graph, &c_hist, c_min_size, c_max_size));
 
@@ -7632,24 +6573,12 @@ SEXP R_igraph_weighted_cliques(SEXP graph, SEXP vertex_weights, SEXP min_weight,
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
-  if (Rf_xlength(min_weight) == 1) {
-    c_min_weight = REAL(min_weight)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_weight));
-  }
-  if (Rf_xlength(max_weight) == 1) {
-    c_max_weight = REAL(max_weight)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(max_weight));
-  }
-  if (Rf_xlength(maximal) == 1) {
-    c_maximal = LOGICAL(maximal)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(maximal));
-  }
+  IGRAPH_R_CHECK_REAL(min_weight);
+  c_min_weight = REAL(min_weight)[0];
+  IGRAPH_R_CHECK_REAL(max_weight);
+  c_max_weight = REAL(max_weight)[0];
+  IGRAPH_R_CHECK_BOOL(maximal);
+  c_maximal = LOGICAL(maximal)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_weighted_cliques(&c_graph, (Rf_isNull(vertex_weights) ? 0 : &c_vertex_weights), &c_res, c_min_weight, c_max_weight, c_maximal));
 
@@ -7778,16 +6707,8 @@ SEXP R_igraph_layout_grid(SEXP graph, SEXP width) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(width) == 1) {
-    if (((igraph_integer_t) REAL(width)[0]) != REAL(width)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(width)[0]);
-    }
-    c_width = (igraph_integer_t) REAL(width)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(width));
-  }
+  IGRAPH_R_CHECK_INT(width);
+  c_width = (igraph_integer_t) REAL(width)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_grid(&c_graph, &c_res, c_width));
 
@@ -7819,26 +6740,10 @@ SEXP R_igraph_layout_grid_3d(SEXP graph, SEXP width, SEXP height) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(width) == 1) {
-    if (((igraph_integer_t) REAL(width)[0]) != REAL(width)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(width)[0]);
-    }
-    c_width = (igraph_integer_t) REAL(width)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(width));
-  }
-  if (Rf_xlength(height) == 1) {
-    if (((igraph_integer_t) REAL(height)[0]) != REAL(height)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(height)[0]);
-    }
-    c_height = (igraph_integer_t) REAL(height)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(height));
-  }
+  IGRAPH_R_CHECK_INT(width);
+  c_width = (igraph_integer_t) REAL(width)[0];
+  IGRAPH_R_CHECK_INT(height);
+  c_height = (igraph_integer_t) REAL(height)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_grid_3d(&c_graph, &c_res, c_width, c_height));
 
@@ -7903,12 +6808,8 @@ SEXP R_igraph_layout_drl(SEXP graph, SEXP res, SEXP use_seed, SEXP options, SEXP
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
   R_SEXP_to_igraph_layout_drl_options(options, &c_options);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
@@ -7942,12 +6843,8 @@ SEXP R_igraph_layout_drl_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP options, S
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
   R_SEXP_to_igraph_layout_drl_options(options, &c_options);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
@@ -7999,28 +6896,12 @@ SEXP R_igraph_layout_sugiyama(SEXP graph, SEXP layers, SEXP hgap, SEXP vgap, SEX
     IGRAPH_R_CHECK(igraph_vector_int_init(&c_layers, 0));
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_layers);
   }
-  if (Rf_xlength(hgap) == 1) {
-    c_hgap = REAL(hgap)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(hgap));
-  }
-  if (Rf_xlength(vgap) == 1) {
-    c_vgap = REAL(vgap)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(vgap));
-  }
-  if (Rf_xlength(maxiter) == 1) {
-    if (((igraph_integer_t) REAL(maxiter)[0]) != REAL(maxiter)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(maxiter)[0]);
-    }
-    c_maxiter = (igraph_integer_t) REAL(maxiter)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(maxiter));
-  }
+  IGRAPH_R_CHECK_REAL(hgap);
+  c_hgap = REAL(hgap)[0];
+  IGRAPH_R_CHECK_REAL(vgap);
+  c_vgap = REAL(vgap)[0];
+  IGRAPH_R_CHECK_INT(maxiter);
+  c_maxiter = (igraph_integer_t) REAL(maxiter)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_sugiyama(&c_graph, &c_res, &c_extd_graph, &c_extd_to_orig_eids, (Rf_isNull(layers) ? 0 : &c_layers), c_hgap, c_vgap, c_maxiter, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -8074,16 +6955,8 @@ SEXP R_igraph_layout_mds(SEXP graph, SEXP dist, SEXP dim) {
   if (!Rf_isNull(dist)) {
     R_SEXP_to_matrix(dist, &c_dist);
   }
-  if (Rf_xlength(dim) == 1) {
-    if (((igraph_integer_t) REAL(dim)[0]) != REAL(dim)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(dim)[0]);
-    }
-    c_dim = (igraph_integer_t) REAL(dim)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(dim));
-  }
+  IGRAPH_R_CHECK_INT(dim);
+  c_dim = (igraph_integer_t) REAL(dim)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_mds(&c_graph, &c_res, (Rf_isNull(dist) ? 0 : &c_dist), c_dim));
 
@@ -8118,28 +6991,12 @@ SEXP R_igraph_layout_bipartite(SEXP graph, SEXP types, SEXP hgap, SEXP vgap, SEX
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(hgap) == 1) {
-    c_hgap = REAL(hgap)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(hgap));
-  }
-  if (Rf_xlength(vgap) == 1) {
-    c_vgap = REAL(vgap)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(vgap));
-  }
-  if (Rf_xlength(maxiter) == 1) {
-    if (((igraph_integer_t) REAL(maxiter)[0]) != REAL(maxiter)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(maxiter)[0]);
-    }
-    c_maxiter = (igraph_integer_t) REAL(maxiter)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(maxiter));
-  }
+  IGRAPH_R_CHECK_REAL(hgap);
+  c_hgap = REAL(hgap)[0];
+  IGRAPH_R_CHECK_REAL(vgap);
+  c_vgap = REAL(vgap)[0];
+  IGRAPH_R_CHECK_INT(maxiter);
+  c_maxiter = (igraph_integer_t) REAL(maxiter)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_bipartite(&c_graph, (Rf_isNull(types) ? 0 : &c_types), &c_res, c_hgap, c_vgap, c_maxiter));
 
@@ -8173,40 +7030,16 @@ SEXP R_igraph_layout_gem(SEXP graph, SEXP res, SEXP use_seed, SEXP maxiter, SEXP
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
-  if (Rf_xlength(maxiter) == 1) {
-    if (((igraph_integer_t) REAL(maxiter)[0]) != REAL(maxiter)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(maxiter)[0]);
-    }
-    c_maxiter = (igraph_integer_t) REAL(maxiter)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(maxiter));
-  }
-  if (Rf_xlength(temp_max) == 1) {
-    c_temp_max = REAL(temp_max)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(temp_max));
-  }
-  if (Rf_xlength(temp_min) == 1) {
-    c_temp_min = REAL(temp_min)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(temp_min));
-  }
-  if (Rf_xlength(temp_init) == 1) {
-    c_temp_init = REAL(temp_init)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(temp_init));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
+  IGRAPH_R_CHECK_INT(maxiter);
+  c_maxiter = (igraph_integer_t) REAL(maxiter)[0];
+  IGRAPH_R_CHECK_REAL(temp_max);
+  c_temp_max = REAL(temp_max)[0];
+  IGRAPH_R_CHECK_REAL(temp_min);
+  c_temp_min = REAL(temp_min)[0];
+  IGRAPH_R_CHECK_REAL(temp_init);
+  c_temp_init = REAL(temp_init)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_gem(&c_graph, &c_res, c_use_seed, c_maxiter, c_temp_max, c_temp_min, c_temp_init));
 
@@ -8244,68 +7077,24 @@ SEXP R_igraph_layout_davidson_harel(SEXP graph, SEXP res, SEXP use_seed, SEXP ma
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
-  if (Rf_xlength(maxiter) == 1) {
-    if (((igraph_integer_t) REAL(maxiter)[0]) != REAL(maxiter)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(maxiter)[0]);
-    }
-    c_maxiter = (igraph_integer_t) REAL(maxiter)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(maxiter));
-  }
-  if (Rf_xlength(fineiter) == 1) {
-    if (((igraph_integer_t) REAL(fineiter)[0]) != REAL(fineiter)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(fineiter)[0]);
-    }
-    c_fineiter = (igraph_integer_t) REAL(fineiter)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(fineiter));
-  }
-  if (Rf_xlength(cool_fact) == 1) {
-    c_cool_fact = REAL(cool_fact)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(cool_fact));
-  }
-  if (Rf_xlength(weight_node_dist) == 1) {
-    c_weight_node_dist = REAL(weight_node_dist)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(weight_node_dist));
-  }
-  if (Rf_xlength(weight_border) == 1) {
-    c_weight_border = REAL(weight_border)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(weight_border));
-  }
-  if (Rf_xlength(weight_edge_lengths) == 1) {
-    c_weight_edge_lengths = REAL(weight_edge_lengths)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(weight_edge_lengths));
-  }
-  if (Rf_xlength(weight_edge_crossings) == 1) {
-    c_weight_edge_crossings = REAL(weight_edge_crossings)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(weight_edge_crossings));
-  }
-  if (Rf_xlength(weight_node_edge_dist) == 1) {
-    c_weight_node_edge_dist = REAL(weight_node_edge_dist)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(weight_node_edge_dist));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
+  IGRAPH_R_CHECK_INT(maxiter);
+  c_maxiter = (igraph_integer_t) REAL(maxiter)[0];
+  IGRAPH_R_CHECK_INT(fineiter);
+  c_fineiter = (igraph_integer_t) REAL(fineiter)[0];
+  IGRAPH_R_CHECK_REAL(cool_fact);
+  c_cool_fact = REAL(cool_fact)[0];
+  IGRAPH_R_CHECK_REAL(weight_node_dist);
+  c_weight_node_dist = REAL(weight_node_dist)[0];
+  IGRAPH_R_CHECK_REAL(weight_border);
+  c_weight_border = REAL(weight_border)[0];
+  IGRAPH_R_CHECK_REAL(weight_edge_lengths);
+  c_weight_edge_lengths = REAL(weight_edge_lengths)[0];
+  IGRAPH_R_CHECK_REAL(weight_edge_crossings);
+  c_weight_edge_crossings = REAL(weight_edge_crossings)[0];
+  IGRAPH_R_CHECK_REAL(weight_node_edge_dist);
+  c_weight_node_edge_dist = REAL(weight_node_edge_dist)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_davidson_harel(&c_graph, &c_res, c_use_seed, c_maxiter, c_fineiter, c_cool_fact, c_weight_node_dist, c_weight_border, c_weight_edge_lengths, c_weight_edge_crossings, c_weight_node_edge_dist));
 
@@ -8339,37 +7128,17 @@ SEXP R_igraph_layout_umap(SEXP graph, SEXP res, SEXP use_seed, SEXP distances, S
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
   if (!Rf_isNull(distances)) {
     R_SEXP_to_vector(distances, &c_distances);
   }
-  if (Rf_xlength(min_dist) == 1) {
-    c_min_dist = REAL(min_dist)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_dist));
-  }
-  if (Rf_xlength(epochs) == 1) {
-    if (((igraph_integer_t) REAL(epochs)[0]) != REAL(epochs)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(epochs)[0]);
-    }
-    c_epochs = (igraph_integer_t) REAL(epochs)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(epochs));
-  }
-  if (Rf_xlength(distances_are_weights) == 1) {
-    c_distances_are_weights = LOGICAL(distances_are_weights)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(distances_are_weights));
-  }
+  IGRAPH_R_CHECK_REAL(min_dist);
+  c_min_dist = REAL(min_dist)[0];
+  IGRAPH_R_CHECK_INT(epochs);
+  c_epochs = (igraph_integer_t) REAL(epochs)[0];
+  IGRAPH_R_CHECK_BOOL(distances_are_weights);
+  c_distances_are_weights = LOGICAL(distances_are_weights)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_umap(&c_graph, &c_res, c_use_seed, (Rf_isNull(distances) ? 0 : &c_distances), c_min_dist, c_epochs, c_distances_are_weights));
 
@@ -8403,37 +7172,17 @@ SEXP R_igraph_layout_umap_3d(SEXP graph, SEXP res, SEXP use_seed, SEXP distances
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(use_seed) == 1) {
-    c_use_seed = LOGICAL(use_seed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_seed));
-  }
+  IGRAPH_R_CHECK_BOOL(use_seed);
+  c_use_seed = LOGICAL(use_seed)[0];
   if (!Rf_isNull(distances)) {
     R_SEXP_to_vector(distances, &c_distances);
   }
-  if (Rf_xlength(min_dist) == 1) {
-    c_min_dist = REAL(min_dist)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(min_dist));
-  }
-  if (Rf_xlength(epochs) == 1) {
-    if (((igraph_integer_t) REAL(epochs)[0]) != REAL(epochs)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(epochs)[0]);
-    }
-    c_epochs = (igraph_integer_t) REAL(epochs)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(epochs));
-  }
-  if (Rf_xlength(distances_are_weights) == 1) {
-    c_distances_are_weights = LOGICAL(distances_are_weights)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(distances_are_weights));
-  }
+  IGRAPH_R_CHECK_REAL(min_dist);
+  c_min_dist = REAL(min_dist)[0];
+  IGRAPH_R_CHECK_INT(epochs);
+  c_epochs = (igraph_integer_t) REAL(epochs)[0];
+  IGRAPH_R_CHECK_BOOL(distances_are_weights);
+  c_distances_are_weights = LOGICAL(distances_are_weights)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_layout_umap_3d(&c_graph, &c_res, c_use_seed, (Rf_isNull(distances) ? 0 : &c_distances), c_min_dist, c_epochs, c_distances_are_weights));
 
@@ -8499,12 +7248,8 @@ SEXP R_igraph_similarity_dice(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_dice(&c_graph, &c_res, c_vids, c_mode, c_loops));
 
@@ -8542,12 +7287,8 @@ SEXP R_igraph_similarity_dice_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_es_data;
   R_SEXP_to_igraph_es(es, &c_graph, &c_es, &c_es_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_dice_es(&c_graph, &c_res, c_es, c_mode, c_loops));
 
@@ -8584,12 +7325,8 @@ SEXP R_igraph_similarity_dice_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP loop
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   R_SEXP_to_vector_int_copy(pairs, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_dice_pairs(&c_graph, &c_res, &c_pairs, c_mode, c_loops));
 
@@ -8661,12 +7398,8 @@ SEXP R_igraph_similarity_jaccard(SEXP graph, SEXP vids, SEXP mode, SEXP loops) {
   igraph_vector_int_t c_vids_data;
   R_SEXP_to_igraph_vs(vids, &c_graph, &c_vids, &c_vids_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_jaccard(&c_graph, &c_res, c_vids, c_mode, c_loops));
 
@@ -8704,12 +7437,8 @@ SEXP R_igraph_similarity_jaccard_es(SEXP graph, SEXP es, SEXP mode, SEXP loops) 
   igraph_vector_int_t c_es_data;
   R_SEXP_to_igraph_es(es, &c_graph, &c_es, &c_es_data);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_jaccard_es(&c_graph, &c_res, c_es, c_mode, c_loops));
 
@@ -8746,12 +7475,8 @@ SEXP R_igraph_similarity_jaccard_pairs(SEXP graph, SEXP pairs, SEXP mode, SEXP l
   IGRAPH_FINALLY(igraph_vector_destroy, &c_res);
   R_SEXP_to_vector_int_copy(pairs, &c_pairs);
   c_mode = (igraph_neimode_t) Rf_asInteger(mode);
-  if (Rf_xlength(loops) == 1) {
-    c_loops = LOGICAL(loops)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(loops));
-  }
+  IGRAPH_R_CHECK_BOOL(loops);
+  c_loops = LOGICAL(loops)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_similarity_jaccard_pairs(&c_graph, &c_res, &c_pairs, c_mode, c_loops));
 
@@ -8818,18 +7543,10 @@ SEXP R_igraph_modularity(SEXP graph, SEXP membership, SEXP weights, SEXP resolut
   R_SEXP_to_vector_int_copy(membership, &c_membership);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(resolution) == 1) {
-    c_resolution = REAL(resolution)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(resolution));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_modularity(&c_graph, &c_membership, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_resolution, c_directed, &c_modularity));
 
@@ -8860,22 +7577,14 @@ SEXP R_igraph_modularity_matrix(SEXP graph, SEXP weights, SEXP resolution, SEXP 
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(resolution) == 1) {
-    c_resolution = REAL(resolution)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(resolution));
-  }
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
   if (0 != igraph_matrix_init(&c_modmat, 0, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_modmat);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_modularity_matrix(&c_graph, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_resolution, &c_modmat, c_directed));
 
@@ -8902,16 +7611,8 @@ SEXP R_igraph_community_fluid_communities(SEXP graph, SEXP no_of_communities) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(no_of_communities) == 1) {
-    if (((igraph_integer_t) REAL(no_of_communities)[0]) != REAL(no_of_communities)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_of_communities)[0]);
-    }
-    c_no_of_communities = (igraph_integer_t) REAL(no_of_communities)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_of_communities));
-  }
+  IGRAPH_R_CHECK_INT(no_of_communities);
+  c_no_of_communities = (igraph_integer_t) REAL(no_of_communities)[0];
   if (0 != igraph_vector_int_init(&c_membership, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -8995,12 +7696,8 @@ SEXP R_igraph_community_multilevel(SEXP graph, SEXP weights, SEXP resolution) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(resolution) == 1) {
-    c_resolution = REAL(resolution)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(resolution));
-  }
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
   if (0 != igraph_vector_int_init(&c_membership, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -9106,34 +7803,14 @@ SEXP R_igraph_community_leiden(SEXP graph, SEXP weights, SEXP vertex_weights, SE
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
   if (!Rf_isNull(vertex_weights)) { R_SEXP_to_vector(vertex_weights, &c_vertex_weights); }
-  if (Rf_xlength(resolution) == 1) {
-    c_resolution = REAL(resolution)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(resolution));
-  }
-  if (Rf_xlength(beta) == 1) {
-    c_beta = REAL(beta)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(beta));
-  }
-  if (Rf_xlength(start) == 1) {
-    c_start = LOGICAL(start)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(start));
-  }
-  if (Rf_xlength(n_iterations) == 1) {
-    if (((igraph_integer_t) REAL(n_iterations)[0]) != REAL(n_iterations)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n_iterations)[0]);
-    }
-    c_n_iterations = (igraph_integer_t) REAL(n_iterations)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n_iterations));
-  }
+  IGRAPH_R_CHECK_REAL(resolution);
+  c_resolution = REAL(resolution)[0];
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(n_iterations);
+  c_n_iterations = (igraph_integer_t) REAL(n_iterations)[0];
   if (!Rf_isNull(membership)) {
     R_SEXP_to_vector_int_copy(membership, &c_membership);
     IGRAPH_FINALLY(igraph_vector_int_destroy, &c_membership);
@@ -9232,16 +7909,8 @@ SEXP R_igraph_community_infomap(SEXP graph, SEXP e_weights, SEXP v_weights, SEXP
   R_SEXP_to_igraph(graph, &c_graph);
   if (!Rf_isNull(e_weights)) { R_SEXP_to_vector(e_weights, &c_e_weights); }
   if (!Rf_isNull(v_weights)) { R_SEXP_to_vector(v_weights, &c_v_weights); }
-  if (Rf_xlength(nb_trials) == 1) {
-    if (((igraph_integer_t) REAL(nb_trials)[0]) != REAL(nb_trials)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(nb_trials)[0]);
-    }
-    c_nb_trials = (igraph_integer_t) REAL(nb_trials)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(nb_trials));
-  }
+  IGRAPH_R_CHECK_INT(nb_trials);
+  c_nb_trials = (igraph_integer_t) REAL(nb_trials)[0];
   if (0 != igraph_vector_int_init(&c_membership, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -9285,22 +7954,10 @@ SEXP R_igraph_hrg_fit(SEXP graph, SEXP hrg, SEXP start, SEXP steps) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
-  if (Rf_xlength(start) == 1) {
-    c_start = LOGICAL(start)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(start));
-  }
-  if (Rf_xlength(steps) == 1) {
-    if (((igraph_integer_t) REAL(steps)[0]) != REAL(steps)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(steps)[0]);
-    }
-    c_steps = (igraph_integer_t) REAL(steps)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(steps));
-  }
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(steps);
+  c_steps = (igraph_integer_t) REAL(steps)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_fit(&c_graph, &c_hrg, c_start, c_steps));
 
@@ -9357,16 +8014,8 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_graph_list_destroy, &c_samples);
-  if (Rf_xlength(num_samples) == 1) {
-    if (((igraph_integer_t) REAL(num_samples)[0]) != REAL(num_samples)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(num_samples)[0]);
-    }
-    c_num_samples = (igraph_integer_t) REAL(num_samples)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(num_samples));
-  }
+  IGRAPH_R_CHECK_INT(num_samples);
+  c_num_samples = (igraph_integer_t) REAL(num_samples)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_sample_many(&c_hrg, &c_samples, c_num_samples));
 
@@ -9435,22 +8084,10 @@ SEXP R_igraph_hrg_consensus(SEXP graph, SEXP hrg, SEXP start, SEXP num_samples) 
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
-  if (Rf_xlength(start) == 1) {
-    c_start = LOGICAL(start)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(start));
-  }
-  if (Rf_xlength(num_samples) == 1) {
-    if (((igraph_integer_t) REAL(num_samples)[0]) != REAL(num_samples)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(num_samples)[0]);
-    }
-    c_num_samples = (igraph_integer_t) REAL(num_samples)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(num_samples));
-  }
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(num_samples);
+  c_num_samples = (igraph_integer_t) REAL(num_samples)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_consensus(&c_graph, &c_parents, &c_weights, &c_hrg, c_start, c_num_samples));
 
@@ -9509,32 +8146,12 @@ SEXP R_igraph_hrg_predict(SEXP graph, SEXP hrg, SEXP start, SEXP num_samples, SE
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
-  if (Rf_xlength(start) == 1) {
-    c_start = LOGICAL(start)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(start));
-  }
-  if (Rf_xlength(num_samples) == 1) {
-    if (((igraph_integer_t) REAL(num_samples)[0]) != REAL(num_samples)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(num_samples)[0]);
-    }
-    c_num_samples = (igraph_integer_t) REAL(num_samples)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(num_samples));
-  }
-  if (Rf_xlength(num_bins) == 1) {
-    if (((igraph_integer_t) REAL(num_bins)[0]) != REAL(num_bins)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(num_bins)[0]);
-    }
-    c_num_bins = (igraph_integer_t) REAL(num_bins)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(num_bins));
-  }
+  IGRAPH_R_CHECK_BOOL(start);
+  c_start = LOGICAL(start)[0];
+  IGRAPH_R_CHECK_INT(num_samples);
+  c_num_samples = (igraph_integer_t) REAL(num_samples)[0];
+  IGRAPH_R_CHECK_INT(num_bins);
+  c_num_bins = (igraph_integer_t) REAL(num_bins)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_predict(&c_graph, &c_edges, &c_prob, &c_hrg, c_start, c_num_samples, c_num_bins));
 
@@ -9608,16 +8225,8 @@ SEXP R_igraph_hrg_resize(SEXP hrg, SEXP newsize) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
-  if (Rf_xlength(newsize) == 1) {
-    if (((igraph_integer_t) REAL(newsize)[0]) != REAL(newsize)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(newsize)[0]);
-    }
-    c_newsize = (igraph_integer_t) REAL(newsize)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(newsize));
-  }
+  IGRAPH_R_CHECK_INT(newsize);
+  c_newsize = (igraph_integer_t) REAL(newsize)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_resize(&c_hrg, c_newsize));
 
@@ -9748,12 +8357,8 @@ SEXP R_igraph_get_stochastic(SEXP graph, SEXP column_wise, SEXP weights) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_matrix_destroy, &c_res);
-  if (Rf_xlength(column_wise) == 1) {
-    c_column_wise = LOGICAL(column_wise)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(column_wise));
-  }
+  IGRAPH_R_CHECK_BOOL(column_wise);
+  c_column_wise = LOGICAL(column_wise)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_get_stochastic(&c_graph, &c_res, c_column_wise, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -9786,12 +8391,8 @@ SEXP R_igraph_get_stochastic_sparse(SEXP graph, SEXP column_wise, SEXP weights) 
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_sparsemat_destroy, &c_sparsemat);
-  if (Rf_xlength(column_wise) == 1) {
-    c_column_wise = LOGICAL(column_wise)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(column_wise));
-  }
+  IGRAPH_R_CHECK_BOOL(column_wise);
+  c_column_wise = LOGICAL(column_wise)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_get_stochastic_sparse(&c_graph, &c_sparsemat, c_column_wise, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -9899,12 +8500,8 @@ SEXP R_igraph_read_graph_dimacs_flow(SEXP instream, SEXP directed) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_capacity);
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_read_graph_dimacs_flow(&c_graph, c_instream, &c_problem, &c_label, &c_source, &c_target, &c_capacity, c_directed));
 
@@ -10233,16 +8830,8 @@ SEXP R_igraph_local_scan_k_ecount(SEXP graph, SEXP k, SEXP weights, SEXP mode) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
   if (0 != igraph_vector_init(&c_res, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -10279,16 +8868,8 @@ SEXP R_igraph_local_scan_k_ecount_them(SEXP us, SEXP them, SEXP k, SEXP weights_
                                         /* Convert input */
   R_SEXP_to_igraph(us, &c_us);
   R_SEXP_to_igraph(them, &c_them);
-  if (Rf_xlength(k) == 1) {
-    if (((igraph_integer_t) REAL(k)[0]) != REAL(k)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(k)[0]);
-    }
-    c_k = (igraph_integer_t) REAL(k)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(k));
-  }
+  IGRAPH_R_CHECK_INT(k);
+  c_k = (igraph_integer_t) REAL(k)[0];
   if (0 != igraph_vector_init(&c_res, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -11158,32 +9739,12 @@ SEXP R_igraph_isoclass_create(SEXP size, SEXP number, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(size) == 1) {
-    if (((igraph_integer_t) REAL(size)[0]) != REAL(size)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(size)[0]);
-    }
-    c_size = (igraph_integer_t) REAL(size)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(size));
-  }
-  if (Rf_xlength(number) == 1) {
-    if (((igraph_integer_t) REAL(number)[0]) != REAL(number)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(number)[0]);
-    }
-    c_number = (igraph_integer_t) REAL(number)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(number));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(size);
+  c_size = (igraph_integer_t) REAL(size)[0];
+  IGRAPH_R_CHECK_INT(number);
+  c_number = (igraph_integer_t) REAL(number)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_isoclass_create(&c_graph, c_size, c_number, c_directed));
 
@@ -12085,22 +10646,10 @@ SEXP R_igraph_graph_count(SEXP n, SEXP directed) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_count=0;
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_graph_count(c_n, c_directed, &c_count));
@@ -12202,12 +10751,8 @@ SEXP R_igraph_maximum_bipartite_matching(SEXP graph, SEXP types, SEXP weights, S
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_matching);
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
-  if (Rf_xlength(eps) == 1) {
-    c_eps = REAL(eps)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(eps));
-  }
+  IGRAPH_R_CHECK_REAL(eps);
+  c_eps = REAL(eps)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_maximum_bipartite_matching(&c_graph, (Rf_isNull(types) ? 0 : (Rf_isNull(types) ? 0 : &c_types)), &c_matching_size, &c_matching_weight, &c_matching, (Rf_isNull(weights) ? 0 : (Rf_isNull(weights) ? 0 : &c_weights)), c_eps));
 
@@ -12327,18 +10872,10 @@ SEXP R_igraph_power_law_fit(SEXP data, SEXP xmin, SEXP force_continuous) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_vector(data, &c_data);
-  if (Rf_xlength(xmin) == 1) {
-    c_xmin = REAL(xmin)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(xmin));
-  }
-  if (Rf_xlength(force_continuous) == 1) {
-    c_force_continuous = LOGICAL(force_continuous)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(force_continuous));
-  }
+  IGRAPH_R_CHECK_REAL(xmin);
+  c_xmin = REAL(xmin)[0];
+  IGRAPH_R_CHECK_BOOL(force_continuous);
+  c_force_continuous = LOGICAL(force_continuous)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_power_law_fit(&c_data, &c_res, c_xmin, c_force_continuous));
 
@@ -12365,28 +10902,12 @@ SEXP R_igraph_sir(SEXP graph, SEXP beta, SEXP gamma, SEXP no_sim) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  if (Rf_xlength(beta) == 1) {
-    c_beta = REAL(beta)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(beta));
-  }
-  if (Rf_xlength(gamma) == 1) {
-    c_gamma = REAL(gamma)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(gamma));
-  }
-  if (Rf_xlength(no_sim) == 1) {
-    if (((igraph_integer_t) REAL(no_sim)[0]) != REAL(no_sim)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(no_sim)[0]);
-    }
-    c_no_sim = (igraph_integer_t) REAL(no_sim)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(no_sim));
-  }
+  IGRAPH_R_CHECK_REAL(beta);
+  c_beta = REAL(beta)[0];
+  IGRAPH_R_CHECK_REAL(gamma);
+  c_gamma = REAL(gamma)[0];
+  IGRAPH_R_CHECK_INT(no_sim);
+  c_no_sim = (igraph_integer_t) REAL(no_sim)[0];
   if (0 != igraph_vector_ptr_init(&c_res, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -12544,12 +11065,8 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, 
                                         /* Convert input */
   R_SEXP_to_matrix(A, &c_A);
   R_SEXP_to_sparsemat(sA, &c_sA);
-  if (Rf_xlength(n) == 1) {
-    c_n = INTEGER(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = INTEGER(n)[0];
   c_algorithm=REAL(algorithm)[0];
   R_SEXP_to_igraph_eigen_which(which, &c_which);
   R_SEXP_to_igraph_arpack_options(options, &c_options);
@@ -12612,12 +11129,8 @@ SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SE
                                         /* Convert input */
   R_SEXP_to_matrix(A, &c_A);
   R_SEXP_to_sparsemat(sA, &c_sA);
-  if (Rf_xlength(n) == 1) {
-    c_n = INTEGER(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = INTEGER(n)[0];
   c_algorithm=REAL(algorithm)[0];
   R_SEXP_to_igraph_eigen_which(which, &c_which);
   R_SEXP_to_igraph_arpack_options(options, &c_options);
@@ -12668,16 +11181,8 @@ SEXP R_igraph_solve_lsap(SEXP c, SEXP n) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_matrix(c, &c_c);
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
   if (0 != igraph_vector_int_init(&c_p, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -12842,16 +11347,8 @@ SEXP R_igraph_fundamental_cycles(SEXP graph, SEXP start, SEXP bfs_cutoff, SEXP w
   if (!Rf_isNull(start)) {
     c_start = (igraph_integer_t) REAL(start)[0];
   }
-  if (Rf_xlength(bfs_cutoff) == 1) {
-    if (((igraph_integer_t) REAL(bfs_cutoff)[0]) != REAL(bfs_cutoff)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(bfs_cutoff)[0]);
-    }
-    c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(bfs_cutoff));
-  }
+  IGRAPH_R_CHECK_INT(bfs_cutoff);
+  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_fundamental_cycles(&c_graph, &c_basis, (Rf_isNull(start) ? 0 : c_start), c_bfs_cutoff, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -12886,28 +11383,12 @@ SEXP R_igraph_minimum_cycle_basis(SEXP graph, SEXP bfs_cutoff, SEXP complete, SE
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_basis);
-  if (Rf_xlength(bfs_cutoff) == 1) {
-    if (((igraph_integer_t) REAL(bfs_cutoff)[0]) != REAL(bfs_cutoff)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(bfs_cutoff)[0]);
-    }
-    c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(bfs_cutoff));
-  }
-  if (Rf_xlength(complete) == 1) {
-    c_complete = LOGICAL(complete)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(complete));
-  }
-  if (Rf_xlength(use_cycle_order) == 1) {
-    c_use_cycle_order = LOGICAL(use_cycle_order)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(use_cycle_order));
-  }
+  IGRAPH_R_CHECK_INT(bfs_cutoff);
+  c_bfs_cutoff = (igraph_integer_t) REAL(bfs_cutoff)[0];
+  IGRAPH_R_CHECK_BOOL(complete);
+  c_complete = LOGICAL(complete)[0];
+  IGRAPH_R_CHECK_BOOL(use_cycle_order);
+  c_use_cycle_order = LOGICAL(use_cycle_order)[0];
   if (!Rf_isNull(weights)) { R_SEXP_to_vector(weights, &c_weights); }
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_minimum_cycle_basis(&c_graph, &c_basis, c_bfs_cutoff, c_complete, c_use_cycle_order, (Rf_isNull(weights) ? 0 : &c_weights)));
@@ -13137,22 +11618,10 @@ SEXP R_igraph_tree_game(SEXP n, SEXP directed, SEXP method) {
 
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(n) == 1) {
-    if (((igraph_integer_t) REAL(n)[0]) != REAL(n)[0]) {
-      igraph_errorf("The value %.17g is not representable as an integer.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(n)[0]);
-    }
-    c_n = (igraph_integer_t) REAL(n)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(n));
-  }
-  if (Rf_xlength(directed) == 1) {
-    c_directed = LOGICAL(directed)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(directed));
-  }
+  IGRAPH_R_CHECK_INT(n);
+  c_n = (igraph_integer_t) REAL(n)[0];
+  IGRAPH_R_CHECK_BOOL(directed);
+  c_directed = LOGICAL(directed)[0];
   c_method = (igraph_random_tree_t) Rf_asInteger(method);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_tree_game(&c_graph, c_n, c_directed, c_method));
@@ -13294,12 +11763,8 @@ SEXP R_igraph_roulette_wheel_imitation(SEXP graph, SEXP vid, SEXP is_local, SEXP
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   c_vid = (igraph_integer_t) REAL(vid)[0];
-  if (Rf_xlength(is_local) == 1) {
-    c_is_local = LOGICAL(is_local)[0]; 
-  } else {
-    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(is_local));
-  }
+  IGRAPH_R_CHECK_BOOL(is_local);
+  c_is_local = LOGICAL(is_local)[0];
   R_SEXP_to_vector(quantities, &c_quantities);
   R_SEXP_to_vector_int_copy(strategies, &c_strategies);
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_strategies);
@@ -13383,12 +11848,8 @@ SEXP R_igraph_progress(SEXP message, SEXP percent) {
   igraph_error_t c_result;
   SEXP r_result;
                                         /* Convert input */
-  if (Rf_xlength(percent) == 1) {
-    c_percent = REAL(percent)[0]; 
-  } else {
-  igraph_errorf("Expecting a scalar real but received a vector of length %zu.", 
-                  __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(percent));
-  }
+  IGRAPH_R_CHECK_REAL(percent);
+  c_percent = REAL(percent)[0];
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_progress(c_message, c_percent, 0));
 

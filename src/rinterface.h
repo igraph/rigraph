@@ -118,3 +118,11 @@ igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *c
         if (__c == IGRAPH_INTERRUPTED) { R_igraph_interrupt(); } \
         else if (__c != IGRAPH_SUCCESS) { R_igraph_error(); } \
     } while (0)
+
+#define IGRAPH_R_CHECK_INT(v) R_check_int_scalar(v)
+#define IGRAPH_R_CHECK_REAL(v) R_check_real_scalar(v)
+#define IGRAPH_R_CHECK_BOOL(v) R_check_bool_scalar(v)
+
+void R_check_int_scalar(SEXP value);
+void R_check_real_scalar(SEXP value);
+void R_check_bool_scalar(SEXP value);
