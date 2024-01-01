@@ -223,7 +223,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH ce87dcc UN-B 6 5 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 8188d66 UN-B 6 5 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), type (v/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + vertex attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |     name  type</span>
@@ -233,7 +233,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [4]    d  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [5]    e FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [6]    f  TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from ce87dcc (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 8188d66 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d d--e e--f</span>
 <span class="r-in"><span><span class="fu">max_bipartite_match</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $matching_size</span>
@@ -250,7 +250,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span><span class="va">a</span> <span class="op">-</span> <span class="va">b</span> <span class="op">-</span> <span class="va">c</span> <span class="op">-</span> <span class="va">d</span> <span class="op">-</span> <span class="va">e</span> <span class="op">-</span> <span class="va">f</span> <span class="op">-</span> <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="V.html">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, length.out <span class="op">=</span> <span class="fu"><a href="gorder.html">vcount</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="print.igraph.html">print_all</a></span><span class="op">(</span><span class="va">g2</span>, v <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1bb1494 UN-B 7 6 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 78f7a7a UN-B 7 6 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), type (v/l)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + vertex attributes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |     name  type</span>
@@ -261,7 +261,7 @@ algorithm with greedy initialization and a global relabeling after every
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [5]    e FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [6]    f  TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> | [7]    g FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1bb1494 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 78f7a7a (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a--b b--c c--d d--e e--f f--g</span>
 <span class="r-in"><span><span class="fu">max_bipartite_match</span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $matching_size</span>
