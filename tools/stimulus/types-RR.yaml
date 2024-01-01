@@ -353,9 +353,9 @@ EIGENALGO:
     DEFAULT:
         ARPACK: c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "auto"=0, "lapack"=1,
-          "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-          "comp_arpack"=5)
+        %I% <- switch(igraph.match.arg(%I%), "auto"=0L, "lapack"=1L,
+          "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+          "comp_arpack"=5L)
 
 EIGENWHICH:
     DEFAULT:

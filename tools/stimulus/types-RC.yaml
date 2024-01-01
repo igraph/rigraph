@@ -840,10 +840,6 @@ MAXFLOW_STATS:
     OUTCONV:
         OUT: PROTECT(%I%=R_igraph_maxflow_stats_to_SEXP(&%C%));
 
-EIGENALGO:
-    INCONV:
-        IN: '%C%=REAL(%I%)[0];'
-
 EIGENWHICH:
     CALL: '&%C%'
     INCONV:

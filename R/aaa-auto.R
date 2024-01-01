@@ -3599,9 +3599,9 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
 eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
@@ -3679,9 +3679,9 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_de
   A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
@@ -3698,9 +3698,9 @@ eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options
   A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
