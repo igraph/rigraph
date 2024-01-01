@@ -39,7 +39,9 @@ INTEGER:
         OUT: '&%C%'
         INOUT: '&%C%'
     INCONV:
-        IN: '%C%=(igraph_integer_t) REAL(%I%)[0];'
+        IN: |-
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = (igraph_integer_t) REAL(%I%)[0];
         OUT: '%C%=0;'
     OUTCONV:
         OUT: |-
@@ -53,7 +55,9 @@ INT:
         OUT: '&%C%'
         INOUT: '&%C%'
     INCONV:
-        IN: '%C%=INTEGER(%I%)[0];'
+        IN: |-
+            IGRAPH_R_CHECK_INT(%I%);
+            %C% = INTEGER(%I%)[0];
 
 CSTRING:
     CTYPE: const char*
@@ -69,7 +73,9 @@ REAL:
         OUT: '&%C%'
         INOUT: '&%C%'
     INCONV:
-        IN: '%C%=REAL(%I%)[0];'
+        IN: |-
+            IGRAPH_R_CHECK_REAL(%I%);
+            %C% = REAL(%I%)[0];
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_NUMERIC(1));
@@ -82,7 +88,9 @@ BOOLEAN:
         OUT: '&%C%'
         INOUT: '&%C%'
     INCONV:
-        IN: '%C%=LOGICAL(%I%)[0];'
+        IN: |-
+            IGRAPH_R_CHECK_BOOL(%I%);
+            %C% = LOGICAL(%I%)[0];
     OUTCONV:
         OUT: |-
             PROTECT(%I%=NEW_LOGICAL(1));

@@ -67,7 +67,36 @@ enum igraph_versions {
 
 #define R_IGRAPH_VERSION_VAR ".__igraph_version__."
 
+/* The following three R_check_... functions must only be called from top-level C code,
+ * i.e. in contexts where igraph_error() does NOT return. */
 
+void R_check_int_scalar(SEXP value)
+{
+  if (Rf_xlength(value) != 1) {
+    igraph_errorf("Expecting a scalar integer but received a vector of length %zu.",
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(value));
+  }
+  if (((igraph_integer_t) REAL(value)[0]) != REAL(value)[0]) {
+    igraph_errorf("The value %.17g is not representable as an integer.",
+                    __FILE__, __LINE__, IGRAPH_EINVAL, REAL(value)[0]);
+  }
+}
+
+void R_check_real_scalar(SEXP value)
+{
+  if (Rf_xlength(value) != 1) {
+    igraph_errorf("Expecting a scalar real but received a vector of length %zu.",
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(value));
+  }
+}
+
+void R_check_bool_scalar(SEXP value)
+{
+  if (Rf_xlength(value) != 1) {
+    igraph_errorf("Expecting a scalar logical but received a vector of length %zu.",
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (size_t) Rf_xlength(value));
+  }
+}
 
 SEXP R_igraph_i_lang7(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x, SEXP y)
 {

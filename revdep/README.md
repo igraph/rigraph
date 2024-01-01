@@ -1,11 +1,23 @@
 # Revdeps
 
-## New problems (17)
+## Failed to check (5)
+
+|package   |version |error |warning |note |
+|:---------|:-------|:-----|:-------|:----|
+|bsts      |0.9.9   |1     |        |     |
+|MODIStsp  |?       |      |        |     |
+|sen2r     |?       |      |        |     |
+|Seurat    |?       |      |        |     |
+|streamDAG |?       |      |        |     |
+
+## New problems (19)
 
 |package           |version |error  |warning |note |
 |:-----------------|:-------|:------|:-------|:----|
+|[bnstruct](problems.md#bnstruct)|1.0.14  |__+1__ |1       |     |
 |[countland](problems.md#countland)|0.1.1   |__+1__ |        |     |
 |[DiagrammeR](problems.md#diagrammer)|1.0.10  |__+1__ |        |1    |
+|[EGAnet](problems.md#eganet)|2.0.3   |__+1__ |        |1    |
 |[ggnetwork](problems.md#ggnetwork)|0.5.12  |__+1__ |        |1    |
 |[inferCSN](problems.md#infercsn)|0.99.8  |__+1__ |        |1    |
 |[intergraph](problems.md#intergraph)|2.0-3   |__+1__ |        |     |

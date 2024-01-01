@@ -1,3 +1,71 @@
+# bnstruct
+
+<details>
+
+* Version: 1.0.14
+* GitHub: NA
+* Source code: https://github.com/cran/bnstruct
+* Date/Publication: 2022-11-30 14:10:02 UTC
+* Number of recursive dependencies: 104
+
+Run `revdepcheck::cloud_details(, "bnstruct")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > test_check("bnstruct")
+      Loading required package: bnstruct
+      Loading required package: bitops
+      Loading required package: igraph
+      
+      Attaching package: 'igraph'
+    ...
+          ▆
+       1. └─bnstruct::InferenceEngine(network) at test_em.R:6:1
+       2.   ├─bnstruct::build.junction.tree(object, dag)
+       3.   └─bnstruct::build.junction.tree(object, dag)
+       4.     └─bnstruct:::clique.tree(graph)
+       5.       └─igraph::cliques(ig, min = NULL, max = NULL)
+      
+      [ FAIL 1 | WARN 2 | SKIP 1 | PASS 1 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘bnstruct.Rnw’ using Sweave
+    Error: processing vignette 'bnstruct.Rnw' failed with diagnostics:
+    Running 'texi2dvi' on 'bnstruct.tex' failed.
+    LaTeX errors:
+    ! LaTeX Error: File `pdfpages.sty' not found.
+    
+    Type X to quit or <RETURN> to proceed,
+    or enter new name. (Default extension: sty)
+    ...
+    l.6 ^^M
+           
+    !  ==> Fatal error occurred, no output PDF file produced!
+    --- failed re-building ‘bnstruct.Rnw’
+    
+    SUMMARY: processing the following file failed:
+      ‘bnstruct.Rnw’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
 # countland
 
 <details>
@@ -85,6 +153,56 @@ Run `revdepcheck::cloud_details(, "DiagrammeR")` for more info
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 1 marked UTF-8 string
+    ```
+
+# EGAnet
+
+<details>
+
+* Version: 2.0.3
+* GitHub: https://github.com/hfgolino/EGAnet
+* Source code: https://github.com/cran/EGAnet
+* Date/Publication: 2023-11-17 17:30:05 UTC
+* Number of recursive dependencies: 190
+
+Run `revdepcheck::cloud_details(, "EGAnet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘EGAnet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: EGA.fit
+    > ### Title: 'EGA' Optimal Model Fit using the Total Entropy Fit Index
+    > ###   ('tefi')
+    > ### Aliases: EGA.fit
+    > 
+    > ### ** Examples
+    > 
+    ...
+    +   data = wmt, algorithm = "leiden",
+    +   objective_function = "modularity",
+    +   resolution_parameter = seq.int(0, 2, 0.05),
+    +   # default for modularity
+    +   plot.EGA = FALSE # no plot for CRAN checks
+    + )
+    Error in (function (graph, objective_function = c("CPM", "modularity"),  : 
+      At rinterface.c:9113 : Expecting a scalar real but received a vector of length 41. Invalid value
+    Calls: EGA.fit ... <Anonymous> -> do.call -> <Anonymous> -> do.call -> <Anonymous>
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        data   3.5Mb
     ```
 
 # ggnetwork
