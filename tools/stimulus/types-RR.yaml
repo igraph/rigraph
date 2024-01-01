@@ -74,14 +74,14 @@ TODIRECTED:
         MUTUAL: c("mutual", "arbitrary", "random", "acyclic")
         RANDOM: c("random", "arbitrary", "mutual", "acyclic")
         ACYCLIC: c("acyclic", "arbitrary", "mutual", "random")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0L, "mutual"=1L, "random"=2L, "acyclic"=3L)'
 
 TOUNDIRECTED:
     DEFAULT:
         COLLAPSE: c("collapse", "each", "mutual")
         EACH: c("each", "collapse", "mutual")
         MUTUAL: c("mutual", "collapse", "each")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1, "each"=0, "mutual"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1L, "each"=0L, "mutual"=2L)'
 
 INT:
     INCONV: '%I% <- as.integer(%I%)'

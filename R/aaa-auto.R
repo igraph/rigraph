@@ -2781,7 +2781,7 @@ get_stochastic_sparse_impl <- function(graph, column.wise=FALSE, weights=NULL) {
 to_directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acyclic")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)
+  mode <- switch(igraph.match.arg(mode), "arbitrary"=0L, "mutual"=1L, "random"=2L, "acyclic"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

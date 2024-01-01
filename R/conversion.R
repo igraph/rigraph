@@ -493,9 +493,9 @@ as.undirected <- function(graph, mode = c("collapse", "each", "mutual"), edge.at
   # Argument checks
   ensure_igraph(graph)
   mode <- switch(igraph.match.arg(mode),
-    "collapse" = 1,
-    "each" = 0,
-    "mutual" = 2
+    "collapse" = 1L,
+    "each" = 0L,
+    "mutual" = 2L
   )
   edge.attr.comb <- igraph.i.attribute.combination(edge.attr.comb)
 
