@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9015
+
+## Features
+
+  - Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
+
+## Chore
+
+  - Revdepcheck and scripts, no new failures.
+
+## Breaking changes
+
+  - Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
+
+
 # igraph 1.6.0.9014
 
 ## Bug fixes
