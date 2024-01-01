@@ -108,6 +108,9 @@ igraph_error_t R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
 void           R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);
 igraph_error_t R_SEXP_to_attr_comb(SEXP input, igraph_attribute_combination_t *comb);
 
+/* The following IGRAPH_R_... macros must only be called from top-level C code,
+ * i.e. in C functions which are called from R directly. */
+
 #define IGRAPH_R_CHECK(func) \
     do { \
         R_igraph_attribute_clean_preserve_list(); \

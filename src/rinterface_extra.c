@@ -67,6 +67,9 @@ enum igraph_versions {
 
 #define R_IGRAPH_VERSION_VAR ".__igraph_version__."
 
+/* The following three R_check_... functions must only be called from top-level C code,
+ * i.e. in contexts where igraph_error() does NOT return. */
+
 void R_check_int_scalar(SEXP value)
 {
   if (Rf_xlength(value) != 1) {
