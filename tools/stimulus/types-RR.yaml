@@ -297,7 +297,7 @@ COMMCMP:
 SUBGRAPH_IMPL:
     DEFAULT:
         AUTO: c("auto", "copy_and_delete", "create_from_scratch")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "auto"=0, "copy_and_delete"=1, "create_from_scratch"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "auto"=0L, "copy_and_delete"=1L, "create_from_scratch"=2L)'
 
 EDGE_ATTRIBUTE_COMBINATION:
     DEFAULT:
