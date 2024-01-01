@@ -289,9 +289,9 @@ read.graph.ncol <- function(file, predef = character(0), names = TRUE,
     stop("Unknown arguments to read_graph (NCOL format)")
   }
   weights <- switch(igraph.match.arg(weights),
-    "no" = 0,
-    "yes" = 1,
-    "auto" = 2
+    "no" = 0L,
+    "yes" = 1L,
+    "auto" = 2L
   )
   on.exit(.Call(R_igraph_finalizer))
   .Call(
@@ -329,9 +329,9 @@ read.graph.lgl <- function(file, names = TRUE,
     stop("Unknown arguments to read_graph (LGL format)")
   }
   weights <- switch(igraph.match.arg(weights),
-    "no" = 0,
-    "yes" = 1,
-    "auto" = 2
+    "no" = 0L,
+    "yes" = 1L,
+    "auto" = 2L
   )
   on.exit(.Call(R_igraph_finalizer))
   .Call(

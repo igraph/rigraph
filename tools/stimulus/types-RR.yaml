@@ -310,7 +310,7 @@ VERTEX_ATTRIBUTE_COMBINATION:
     INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
 
 ADD_WEIGHTS:
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "no"=0, "yes"=1, "auto"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "no"=0L, "yes"=1L, "auto"=2L)'
 
 HRG:
     DEFAULT:
