@@ -471,3 +471,9 @@ GETADJACENCY:
     DEFAULT:
         BOTH: c("both", "upper", "lower")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "upper"=0L, "lower"=1L, "both"=2L)'
+
+OPTIMALITY:
+    DEFAULT:
+        MINIMUM: c("minimum", "maximum")
+        MAXIMUM: c("maximum", "minimum")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'

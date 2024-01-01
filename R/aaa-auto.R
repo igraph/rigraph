@@ -3935,13 +3935,14 @@ vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors", 
   res
 }
 
-deterministic_optimal_imitation_impl <- function(graph, vid, optimality=MAXIMUM, quantities, strategies, mode=c("out", "in", "all", "total")) {
+deterministic_optimal_imitation_impl <- function(graph, vid, optimality=c("maximum", "minimum"), quantities, strategies, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
     stop("No vertex was specified")
   }
+  optimality <- switch(igraph.match.arg(optimality), "minimum"=0L, "maximum"=1L)
   strategies <- as.numeric(strategies)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 
