@@ -471,3 +471,10 @@ GETADJACENCY:
     DEFAULT:
         BOTH: c("both", "upper", "lower")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "upper"=0L, "lower"=1L, "both"=2L)'
+
+LOOPS:
+    DEFAULT:
+        TWICE:  c("twice", "once", "ignore")
+        ONCE:   c("once", "twice", "ignore")
+        IGNORE: c("ignore", "twice", "once")
+    INCONV: '%I% <- igraph.handle.loops.arg(%I%)'

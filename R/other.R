@@ -187,6 +187,23 @@ igraph.match.arg <- function(arg, choices, several.ok = FALSE) {
   match.arg(arg = arg, choices = choices, several.ok = several.ok)
 }
 
+igraph.handle.loops.arg <- function(arg) {
+  if (is.logical(arg)) {
+    if (arg) {
+      loops_out <- 1L
+    } else {
+      loops_out <- 0L
+    }
+  } else {
+    loops_out <- switch(match.arg(arg, c("twice", "once", "ignore")),
+      "ignore" = 0L,
+      "twice" = 1L,
+      "once" = 2L
+    )
+  }
+  loops_out
+}
+
 igraph.i.spMatrix <- function(M) {
   if (M$type == "triplet") {
     Matrix::sparseMatrix(dims = M$dim, i = M$i + 1L, j = M$p + 1L, x = M$x)
