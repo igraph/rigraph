@@ -5383,7 +5383,7 @@ SEXP R_igraph_read_graph_ncol(SEXP pvfile, SEXP ppredef,
                               SEXP pdirected) {
   igraph_t g;
   igraph_bool_t names=LOGICAL(pnames)[0];
-  igraph_add_weights_t weights=REAL(pweights)[0];
+  igraph_add_weights_t weights=INTEGER(pweights)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   FILE *file;
   igraph_strvector_t predef, *predefptr=0;
@@ -5456,7 +5456,7 @@ SEXP R_igraph_write_graph_ncol(SEXP graph, SEXP file, SEXP pnames,
 SEXP R_igraph_read_graph_lgl(SEXP pvfile, SEXP pnames, SEXP pweights, SEXP pdirected) {
   igraph_t g;
   igraph_bool_t names=LOGICAL(pnames)[0];
-  igraph_add_weights_t weights=REAL(pweights)[0];
+  igraph_add_weights_t weights=INTEGER(pweights)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   FILE *file;
   SEXP result;
@@ -6772,10 +6772,10 @@ SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
   return result;
 }
 
-SEXP R_igraph_no_clusters(SEXP graph, SEXP pmode) {
+SEXP R_igraph_no_components(SEXP graph, SEXP pmode) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_integer_t mode=(igraph_integer_t) INTEGER(pmode)[0];
   igraph_integer_t res;
   SEXP result;
 

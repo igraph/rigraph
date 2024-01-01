@@ -58,7 +58,7 @@ ATTRIBUTES:
 CONNECTEDNESS:
     DEFAULT:
         WEAK: c("weak", "strong")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "weak"=1, "strong"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "weak"=1L, "strong"=2L)'
 
 NEIMODE:
     DEFAULT:
@@ -74,14 +74,14 @@ TODIRECTED:
         MUTUAL: c("mutual", "arbitrary", "random", "acyclic")
         RANDOM: c("random", "arbitrary", "mutual", "acyclic")
         ACYCLIC: c("acyclic", "arbitrary", "mutual", "random")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "arbitrary"=0L, "mutual"=1L, "random"=2L, "acyclic"=3L)'
 
 TOUNDIRECTED:
     DEFAULT:
         COLLAPSE: c("collapse", "each", "mutual")
         EACH: c("each", "collapse", "mutual")
         MUTUAL: c("mutual", "collapse", "each")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1, "each"=0, "mutual"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "collapse"=1L, "each"=0L, "mutual"=2L)'
 
 INT:
     INCONV: '%I% <- as.integer(%I%)'
@@ -281,7 +281,7 @@ BLISSSH:
         '"fm"': c("fm", "f", "fs", "fl", "flm", "fsm")
         '"flm"': c("flm", "f", "fs", "fl", "fm", "fsm")
         '"fsm"': c("fsm", "f", "fs", "fl", "fm", "flm")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)'
 
 BLISSINFO: {}
 
@@ -292,12 +292,12 @@ COMMCMP:
     DEFAULT:
         VI: c("vi", "nmi", "split.join", "rand", "adjusted.rand")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "vi"=0, "nmi"=1, "split.join"=2, "rand"=3, "adjusted.rand"=4)
+        %I% <- switch(igraph.match.arg(%I%), "vi"=0L, "nmi"=1L, "split.join"=2L, "rand"=3L, "adjusted.rand"=4L)
 
 SUBGRAPH_IMPL:
     DEFAULT:
         AUTO: c("auto", "copy_and_delete", "create_from_scratch")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "auto"=0, "copy_and_delete"=1, "create_from_scratch"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "auto"=0L, "copy_and_delete"=1L, "create_from_scratch"=2L)'
 
 EDGE_ATTRIBUTE_COMBINATION:
     DEFAULT:
@@ -310,7 +310,7 @@ VERTEX_ATTRIBUTE_COMBINATION:
     INCONV: '%I% <- igraph.i.attribute.combination(%I%)'
 
 ADD_WEIGHTS:
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "no"=0, "yes"=1, "auto"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "no"=0L, "yes"=1L, "auto"=2L)'
 
 HRG:
     DEFAULT:
@@ -353,9 +353,9 @@ EIGENALGO:
     DEFAULT:
         ARPACK: c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "auto"=0, "lapack"=1,
-          "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-          "comp_arpack"=5)
+        %I% <- switch(igraph.match.arg(%I%), "auto"=0L, "lapack"=1L,
+          "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+          "comp_arpack"=5L)
 
 EIGENWHICH:
     DEFAULT:
@@ -471,3 +471,9 @@ GETADJACENCY:
     DEFAULT:
         BOTH: c("both", "upper", "lower")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "upper"=0L, "lower"=1L, "both"=2L)'
+
+OPTIMALITY:
+    DEFAULT:
+        MINIMUM: c("minimum", "maximum")
+        MAXIMUM: c("maximum", "minimum")
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'

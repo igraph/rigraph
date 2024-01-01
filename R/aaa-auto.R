@@ -2234,7 +2234,7 @@ get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total")
 is_connected_impl <- function(graph, mode=c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "weak"=1, "strong"=2)
+  mode <- switch(igraph.match.arg(mode), "weak"=1L, "strong"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2781,7 +2781,7 @@ get_stochastic_sparse_impl <- function(graph, column.wise=FALSE, weights=NULL) {
 to_directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acyclic")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "arbitrary"=0, "mutual"=1, "random"=2, "acyclic"=3)
+  mode <- switch(igraph.match.arg(mode), "arbitrary"=0L, "mutual"=1L, "random"=2L, "acyclic"=3L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2871,7 +2871,7 @@ induced_subgraph_map_impl <- function(graph, vids, impl) {
   # Argument checks
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
-  impl <- switch(igraph.match.arg(impl), "auto"=0, "copy_and_delete"=1, "create_from_scratch"=2)
+  impl <- switch(igraph.match.arg(impl), "auto"=0L, "copy_and_delete"=1L, "create_from_scratch"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3430,7 +3430,7 @@ canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs",
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3475,7 +3475,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
   if (!is.null(colors2)) {
     colors2 <- as.numeric(colors2)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3497,7 +3497,7 @@ count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3519,7 +3519,7 @@ automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "f
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3599,9 +3599,9 @@ laplacian_spectral_embedding_impl <- function(graph, no, weights=NULL, which=c("
 eigen_adjacency_impl <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
   # Argument checks
   ensure_igraph(graph)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
@@ -3679,9 +3679,9 @@ eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_de
   A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
@@ -3698,9 +3698,9 @@ eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options
   A[] <- as.numeric(A)
   requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
   n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0, "lapack"=1,
-    "arpack"=2, "comp_auto"=3, "comp_lapack"=4,
-    "comp_arpack"=5)
+  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
+    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
+    "comp_arpack"=5L)
   which.tmp <- eigen_defaults();
   which.tmp[ names(which) ] <- which ; which <- which.tmp
   options <- modify_list(arpack_defaults(), options)
@@ -3935,13 +3935,14 @@ vertex_coloring_greedy_impl <- function(graph, heuristic=c("colored_neighbors", 
   res
 }
 
-deterministic_optimal_imitation_impl <- function(graph, vid, optimality=MAXIMUM, quantities, strategies, mode=c("out", "in", "all", "total")) {
+deterministic_optimal_imitation_impl <- function(graph, vid, optimality=c("maximum", "minimum"), quantities, strategies, mode=c("out", "in", "all", "total")) {
   # Argument checks
   ensure_igraph(graph)
   vid <- as_igraph_vs(graph, vid)
   if (length(vid) == 0) {
     stop("No vertex was specified")
   }
+  optimality <- switch(igraph.match.arg(optimality), "minimum"=0L, "maximum"=1L)
   strategies <- as.numeric(strategies)
   mode <- switch(igraph.match.arg(mode), "out"=1L, "in"=2L, "all"=3L, "total"=3L)
 

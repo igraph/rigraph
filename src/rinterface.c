@@ -6157,7 +6157,7 @@ SEXP R_igraph_connected_components(SEXP graph, SEXP mode) {
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_csize);
   c_no=0;
-  c_mode=REAL(mode)[0];
+  c_mode = (igraph_connectedness_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_connected_components(&c_graph, &c_membership, &c_csize, &c_no, c_mode));
 
@@ -6198,7 +6198,7 @@ SEXP R_igraph_is_connected(SEXP graph, SEXP mode) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_mode=REAL(mode)[0];
+  c_mode = (igraph_connectedness_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_connected(&c_graph, &c_res, c_mode));
 
@@ -10801,7 +10801,7 @@ SEXP R_igraph_eigen_adjacency(SEXP graph, SEXP algorithm, SEXP which, SEXP optio
   SEXP r_result, r_names;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_algorithm=REAL(algorithm)[0];
+  c_algorithm = (igraph_eigen_algorithm_t) Rf_asInteger(algorithm);
   R_SEXP_to_igraph_eigen_which(which, &c_which);
   R_SEXP_to_igraph_arpack_options(options, &c_options);
   if (0 != igraph_vector_init(&c_values, 0)) {
@@ -11067,7 +11067,7 @@ SEXP R_igraph_eigen_matrix(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SEXP which, 
   R_SEXP_to_sparsemat(sA, &c_sA);
   IGRAPH_R_CHECK_INT(n);
   c_n = INTEGER(n)[0];
-  c_algorithm=REAL(algorithm)[0];
+  c_algorithm = (igraph_eigen_algorithm_t) Rf_asInteger(algorithm);
   R_SEXP_to_igraph_eigen_which(which, &c_which);
   R_SEXP_to_igraph_arpack_options(options, &c_options);
   if (0 != igraph_vector_complex_init(&c_values, 0)) {
@@ -11131,7 +11131,7 @@ SEXP R_igraph_eigen_matrix_symmetric(SEXP A, SEXP sA, SEXP n, SEXP algorithm, SE
   R_SEXP_to_sparsemat(sA, &c_sA);
   IGRAPH_R_CHECK_INT(n);
   c_n = INTEGER(n)[0];
-  c_algorithm=REAL(algorithm)[0];
+  c_algorithm = (igraph_eigen_algorithm_t) Rf_asInteger(algorithm);
   R_SEXP_to_igraph_eigen_which(which, &c_which);
   R_SEXP_to_igraph_arpack_options(options, &c_options);
   if (0 != igraph_vector_init(&c_values, 0)) {

@@ -2617,11 +2617,11 @@ i_compare <- function(comm1, comm2, method = c(
     as.numeric(as.factor(comm2))
   }
   method <- switch(igraph.match.arg(method),
-    vi = 0,
-    nmi = 1,
-    split.join = 2,
-    rand = 3,
-    adjusted.rand = 4
+    vi = 0L,
+    nmi = 1L,
+    split.join = 2L,
+    rand = 3L,
+    adjusted.rand = 4L
   )
   on.exit(.Call(R_igraph_finalizer))
   res <- .Call(R_igraph_compare_communities, comm1, comm2, method)

@@ -104,12 +104,12 @@ count_components <- function(graph, mode = c("weak", "strong")) {
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "weak" = 1,
-    "strong" = 2
+    "weak" = 1L,
+    "strong" = 2L
   )
 
   on.exit(.Call(R_igraph_finalizer))
-  .Call(R_igraph_no_clusters, graph, as.numeric(mode))
+  .Call(R_igraph_no_components, graph, mode)
 }
 
 #' @rdname components
@@ -176,8 +176,8 @@ decompose <- function(graph, mode = c("weak", "strong"), max.comps = NA,
   ensure_igraph(graph)
   mode <- igraph.match.arg(mode)
   mode <- switch(mode,
-    "weak" = 1,
-    "strong" = 2
+    "weak" = 1L,
+    "strong" = 2L
   )
 
   if (is.na(max.comps)) {

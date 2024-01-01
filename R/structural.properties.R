@@ -1181,9 +1181,9 @@ induced_subgraph <- function(graph, vids, impl = c("auto", "copy_and_delete", "c
   ensure_igraph(graph)
   vids <- as_igraph_vs(graph, vids)
   impl <- switch(igraph.match.arg(impl),
-    "auto" = 0,
-    "copy_and_delete" = 1,
-    "create_from_scratch" = 2
+    "auto" = 0L,
+    "copy_and_delete" = 1L,
+    "create_from_scratch" = 2L
   )
 
   on.exit(.Call(R_igraph_finalizer))
