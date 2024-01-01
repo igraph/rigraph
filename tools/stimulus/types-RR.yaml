@@ -281,7 +281,7 @@ BLISSSH:
         '"fm"': c("fm", "f", "fs", "fl", "flm", "fsm")
         '"flm"': c("flm", "f", "fs", "fl", "fm", "fsm")
         '"fsm"': c("fsm", "f", "fs", "fl", "fm", "flm")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)'
 
 BLISSINFO: {}
 

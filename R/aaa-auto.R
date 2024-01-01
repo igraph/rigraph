@@ -3430,7 +3430,7 @@ canonical_permutation_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs",
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3475,7 +3475,7 @@ isomorphic_bliss_impl <- function(graph1, graph2, colors1=NULL, colors2=NULL, sh
   if (!is.null(colors2)) {
     colors2 <- as.numeric(colors2)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3497,7 +3497,7 @@ count_automorphisms_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -3519,7 +3519,7 @@ automorphism_group_impl <- function(graph, colors=NULL, sh=c("fm", "f", "fs", "f
   if (!is.null(colors)) {
     colors <- as.numeric(colors)-1
   }
-  sh <- switch(igraph.match.arg(sh), "f"=0, "fl"=1, "fs"=2, "fm"=3, "flm"=4, "fsm"=5)
+  sh <- switch(igraph.match.arg(sh), "f"=0L, "fl"=1L, "fs"=2L, "fm"=3L, "flm"=4L, "fsm"=5L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
