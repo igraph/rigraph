@@ -292,7 +292,7 @@ COMMCMP:
     DEFAULT:
         VI: c("vi", "nmi", "split.join", "rand", "adjusted.rand")
     INCONV: |-
-        %I% <- switch(igraph.match.arg(%I%), "vi"=0, "nmi"=1, "split.join"=2, "rand"=3, "adjusted.rand"=4)
+        %I% <- switch(igraph.match.arg(%I%), "vi"=0L, "nmi"=1L, "split.join"=2L, "rand"=3L, "adjusted.rand"=4L)
 
 SUBGRAPH_IMPL:
     DEFAULT:
