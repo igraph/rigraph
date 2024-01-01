@@ -69,9 +69,10 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   res
 }
 
-sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
+sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=c("once", "twice", "ignore")) {
   # Argument checks
   requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  loops <- igraph.handle.loops.arg(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -80,9 +81,10 @@ sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
   res
 }
 
-sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
+sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=c("once", "twice", "ignore")) {
   # Argument checks
   requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
+  loops <- igraph.handle.loops.arg(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
@@ -2738,7 +2740,7 @@ from_hrg_dendrogram_impl <- function(hrg) {
   res
 }
 
-get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=ONCE) {
+get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=c("once", "twice", "ignore")) {
   # Argument checks
   ensure_igraph(graph)
   type <- switch(igraph.match.arg(type), "upper"=0L, "lower"=1L, "both"=2L)
@@ -2750,6 +2752,7 @@ get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), w
   } else {
     weights <- NULL
   }
+  loops <- igraph.handle.loops.arg(loops)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
