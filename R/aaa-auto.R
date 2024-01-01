@@ -2234,7 +2234,7 @@ get_laplacian_sparse_impl <- function(graph, mode=c("out", "in", "all", "total")
 is_connected_impl <- function(graph, mode=c("weak", "strong")) {
   # Argument checks
   ensure_igraph(graph)
-  mode <- switch(igraph.match.arg(mode), "weak"=1, "strong"=2)
+  mode <- switch(igraph.match.arg(mode), "weak"=1L, "strong"=2L)
 
   on.exit( .Call(R_igraph_finalizer) )
   # Function call

@@ -58,7 +58,7 @@ ATTRIBUTES:
 CONNECTEDNESS:
     DEFAULT:
         WEAK: c("weak", "strong")
-    INCONV: '%I% <- switch(igraph.match.arg(%I%), "weak"=1, "strong"=2)'
+    INCONV: '%I% <- switch(igraph.match.arg(%I%), "weak"=1L, "strong"=2L)'
 
 NEIMODE:
     DEFAULT:

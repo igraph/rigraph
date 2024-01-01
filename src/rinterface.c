@@ -6157,7 +6157,7 @@ SEXP R_igraph_connected_components(SEXP graph, SEXP mode) {
   }
   IGRAPH_FINALLY(igraph_vector_int_destroy, &c_csize);
   c_no=0;
-  c_mode=REAL(mode)[0];
+  c_mode = (igraph_connectedness_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_connected_components(&c_graph, &c_membership, &c_csize, &c_no, c_mode));
 
@@ -6198,7 +6198,7 @@ SEXP R_igraph_is_connected(SEXP graph, SEXP mode) {
   SEXP r_result;
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
-  c_mode=REAL(mode)[0];
+  c_mode = (igraph_connectedness_t) Rf_asInteger(mode);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_is_connected(&c_graph, &c_res, c_mode));
 

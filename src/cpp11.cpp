@@ -353,7 +353,7 @@ extern SEXP R_igraph_neighborhood(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_neighborhood_graphs(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_neighborhood_size(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_neighbors(void *, void *, void *);
-extern SEXP R_igraph_no_clusters(void *, void *);
+extern SEXP R_igraph_no_components(void *, void *);
 extern SEXP R_igraph_path_length_hist(void *, void *);
 extern SEXP R_igraph_permute_vertices(void *, void *);
 extern SEXP R_igraph_personalized_pagerank(void *, void *, void *, void *, void *, void *, void *, void *);
@@ -828,7 +828,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_neighborhood_graphs",                        (DL_FUNC) &R_igraph_neighborhood_graphs,                         5},
     {"R_igraph_neighborhood_size",                          (DL_FUNC) &R_igraph_neighborhood_size,                           5},
     {"R_igraph_neighbors",                                  (DL_FUNC) &R_igraph_neighbors,                                   3},
-    {"R_igraph_no_clusters",                                (DL_FUNC) &R_igraph_no_clusters,                                 2},
+    {"R_igraph_no_components",                              (DL_FUNC) &R_igraph_no_components,                               2},
     {"R_igraph_path_length_hist",                           (DL_FUNC) &R_igraph_path_length_hist,                            2},
     {"R_igraph_permute_vertices",                           (DL_FUNC) &R_igraph_permute_vertices,                            2},
     {"R_igraph_personalized_pagerank",                      (DL_FUNC) &R_igraph_personalized_pagerank,                       8},

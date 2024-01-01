@@ -6772,10 +6772,10 @@ SEXP R_igraph_spinglass_my_community(SEXP graph, SEXP weights,
   return result;
 }
 
-SEXP R_igraph_no_clusters(SEXP graph, SEXP pmode) {
+SEXP R_igraph_no_components(SEXP graph, SEXP pmode) {
 
   igraph_t g;
-  igraph_integer_t mode=(igraph_integer_t) REAL(pmode)[0];
+  igraph_integer_t mode=(igraph_integer_t) INTEGER(pmode)[0];
   igraph_integer_t res;
   SEXP result;
 
