@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9016
+
+## Bug fixes
+
+  - Check that we receive a scalar when expecting a scalar in C code (#1051).
+
+  - Local (weighted) transitivity now produces a named vector (#1057).
+
+## Chore
+
+  - Standardize the handling of some stimulus enum types (#1064).
+
+  - Improve readability in rinterface.h.
+
+
 # igraph 1.6.0.9015
 
 ## Features
