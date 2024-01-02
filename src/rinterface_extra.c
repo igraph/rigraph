@@ -2576,33 +2576,59 @@ SEXP R_igraph_0orvector_complex_to_SEXP(const igraph_vector_complex_t *v) {
 }
 
 SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
-
   SEXP result, dim;
+  const igraph_integer_t nrow = igraph_matrix_nrow(m);
+  const igraph_integer_t ncol = igraph_matrix_ncol(m);
+
+  /* Assuming that this function is called in a context where
+   * igraph_error() does not return. */
+  if (nrow > INT_MAX || ncol > INT_MAX) {
+    igraph_errorf("igraph returned a matrix of size %" IGRAPH_PRId " by %" IGRAPH_PRId ". "
+                  "R does not support matrices with more than %d rows or columns.",
+                  __FILE__, __LINE__, IGRAPH_FAILURE,
+                  nrow, ncol, INT_MAX);
+  }
 
   PROTECT(result=NEW_NUMERIC(igraph_matrix_size(m)));
   igraph_matrix_copy_to(m, REAL(result));
   PROTECT(dim=NEW_INTEGER(2));
-  /* TODO check that row and column counts fit in an int */
-  INTEGER(dim)[0]=(int) igraph_matrix_nrow(m);
-  INTEGER(dim)[1]=(int) igraph_matrix_ncol(m);
+  INTEGER(dim)[0] = (int) nrow;
+  INTEGER(dim)[1] = (int) ncol;
   SET_DIM(result, dim);
 
   UNPROTECT(2);
   return result;
 }
 
+SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m) {
+  if (!m) {
+    return R_NilValue;
+  }
+  return R_igraph_matrix_to_SEXP(m);
+}
+
 SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
   SEXP result, dim;
-  igraph_integer_t n = igraph_matrix_int_size(m);
+  const igraph_integer_t n = igraph_matrix_int_size(m);
+  const igraph_integer_t nrow = igraph_matrix_int_nrow(m);
+  const igraph_integer_t ncol = igraph_matrix_int_ncol(m);
+
+  /* Assuming that this function is called in a context where
+   * igraph_error() does not return. */
+  if (nrow > INT_MAX || ncol > INT_MAX) {
+    igraph_errorf("igraph returned an integer matrix of size %" IGRAPH_PRId " by %" IGRAPH_PRId ". "
+                  "R does not support matrices with more than %d rows or columns.",
+                  __FILE__, __LINE__, IGRAPH_FAILURE,
+                  nrow, ncol, INT_MAX);
+  }
 
   PROTECT(result=NEW_NUMERIC(n));
   for (igraph_integer_t i=0; i<n; i++) {
     REAL(result)[i]=(double)VECTOR(m->data)[i];
   }
   PROTECT(dim=NEW_INTEGER(2));
-  /* TODO check that row and column counts fit in an int */
-  INTEGER(dim)[0]=(int) igraph_matrix_int_nrow(m);
-  INTEGER(dim)[1]=(int) igraph_matrix_int_ncol(m);
+  INTEGER(dim)[0] = (int) nrow;
+  INTEGER(dim)[1] = (int) ncol;
   SET_DIM(result, dim);
 
   UNPROTECT(2);
@@ -2618,12 +2644,23 @@ SEXP R_igraph_0ormatrix_int_to_SEXP(const igraph_matrix_int_t *m) {
 
 SEXP R_igraph_matrix_complex_to_SEXP(const igraph_matrix_complex_t *m) {
   SEXP result, dim;
+  const igraph_integer_t nrow = igraph_matrix_complex_nrow(m);
+  const igraph_integer_t ncol = igraph_matrix_complex_ncol(m);
+
+  /* Assuming that this function is called in a context where
+   * igraph_error() does not return. */
+  if (nrow > INT_MAX || ncol > INT_MAX) {
+    igraph_errorf("igraph returned a complex matrix of size %" IGRAPH_PRId " by %" IGRAPH_PRId ". "
+                  "R does not support matrices with more than %d rows or columns.",
+                  __FILE__, __LINE__, IGRAPH_FAILURE,
+                  nrow, ncol, INT_MAX);
+  }
+
   PROTECT(result=NEW_COMPLEX(igraph_matrix_complex_size(m)));
   igraph_matrix_complex_copy_to(m, (igraph_complex_t*) COMPLEX(result));
   PROTECT(dim=NEW_INTEGER(2));
-  /* TODO check that row and column counts fit in an int */
-  INTEGER(dim)[0]=(int) igraph_matrix_complex_nrow(m);
-  INTEGER(dim)[1]=(int) igraph_matrix_complex_ncol(m);
+  INTEGER(dim)[0] = (int) nrow;
+  INTEGER(dim)[1] = (int) ncol;
   SET_DIM(result, dim);
   UNPROTECT(2);
   return result;
