@@ -2591,6 +2591,13 @@ SEXP R_igraph_matrix_to_SEXP(const igraph_matrix_t *m) {
   return result;
 }
 
+SEXP R_igraph_0ormatrix_to_SEXP(const igraph_matrix_t *m) {
+  if (!m) {
+    return R_NilValue;
+  }
+  return R_igraph_matrix_to_SEXP(m);
+}
+
 SEXP R_igraph_matrix_int_to_SEXP(const igraph_matrix_int_t *m) {
   SEXP result, dim;
   igraph_integer_t n = igraph_matrix_int_size(m);
