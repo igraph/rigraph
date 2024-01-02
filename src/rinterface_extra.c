@@ -2951,50 +2951,6 @@ SEXP R_igraph_vector_int_list_to_SEXPp1(const igraph_vector_int_list_t *list) {
   return result;
 }
 
-void R_igraph_vectorlist_destroy(igraph_vector_ptr_t *ptr) {
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
-
-  for (igraph_integer_t i=0; i<n; i++) {
-    igraph_vector_t *v=VECTOR(*ptr)[i];
-    igraph_vector_destroy(v);
-    igraph_free(v);
-  }
-  igraph_vector_ptr_destroy(ptr);
-}
-
-void R_igraph_vectorlist2_destroy(igraph_vector_ptr_t *ptr) {
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
-
-  for (igraph_integer_t i=0; i<n; i++) {
-    igraph_vector_t *v=VECTOR(*ptr)[i];
-    igraph_vector_destroy(v);
-  }
-  igraph_free(VECTOR(*ptr)[0]);
-  igraph_vector_ptr_destroy(ptr);
-}
-
-void R_igraph_vectorlist_int_destroy(igraph_vector_ptr_t *ptr) {
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
-
-  for (igraph_integer_t i=0; i<n; i++) {
-    igraph_vector_int_t *v=VECTOR(*ptr)[i];
-    igraph_vector_int_destroy(v);
-    igraph_free(v);
-   }
-  igraph_vector_ptr_destroy(ptr);
-}
-
-void R_igraph_vectorlist_int_destroy2(igraph_vector_ptr_t *ptr) {
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
-
-  for (igraph_integer_t i=0; i<n; i++) {
-    igraph_vector_int_t *v=VECTOR(*ptr)[i];
-    igraph_vector_int_destroy(v);
-   }
-  igraph_free(VECTOR(*ptr)[0]);
-  igraph_vector_ptr_destroy(ptr);
-}
-
 SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr) {
   SEXP result;
   igraph_integer_t n=igraph_vector_ptr_size(ptr);
@@ -3007,17 +2963,6 @@ SEXP R_igraph_matrixlist_to_SEXP(const igraph_vector_ptr_t *ptr) {
 
   UNPROTECT(1);
   return result;
-}
-
-void R_igraph_matrixlist_destroy(igraph_vector_ptr_t *ptr) {
-  igraph_integer_t n=igraph_vector_ptr_size(ptr);
-
-  for (igraph_integer_t i=0; i<n; i++) {
-    igraph_matrix_t *v=VECTOR(*ptr)[i];
-    igraph_matrix_destroy(v);
-    igraph_free(v);
-  }
-  igraph_vector_ptr_destroy(ptr);
 }
 
 SEXP R_igraph_graphlist_to_SEXP(const igraph_graph_list_t *list) {
