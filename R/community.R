@@ -2027,8 +2027,8 @@ cluster_label_prop0 <- function(
   if (!is.null(initial)) initial <- as.numeric(initial)
   if (!is.null(fixed)) fixed <- as.logical(fixed)
 
-  directed <- switch(igraph.match.arg(mode), "out"=TRUE, "in"=TRUE, "all"=FALSE)
-  mode <- switch(igraph.match.arg(mode), "out"=1, "in"=2, "all"=3)
+  directed <- switch(igraph.match.arg(mode), "out" = TRUE, "in" = TRUE, "all" = FALSE)
+  mode <- switch(igraph.match.arg(mode), "out" = 1L, "in" = 2L, "all" = 3L)
 
   on.exit(.Call(R_igraph_finalizer))
   # Function call
