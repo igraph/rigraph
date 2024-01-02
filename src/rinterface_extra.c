@@ -3865,7 +3865,8 @@ SEXP R_igraph_add_vertices(SEXP graph, SEXP pnv) {
   igraph_t g;
   SEXP result;
 
-  nv=(igraph_integer_t) REAL(pnv)[0];
+  R_check_int_scalar(pnv);
+  nv = (igraph_integer_t) REAL(pnv)[0];
   R_SEXP_to_igraph_copy(graph, &g);
   IGRAPH_R_CHECK(igraph_add_vertices(&g, nv, 0));
   PROTECT(result=R_igraph_to_SEXP(&g));
@@ -3985,9 +3986,15 @@ SEXP R_igraph_create(SEXP edges, SEXP pn, SEXP pdirected) {
 
   igraph_t g;
   igraph_vector_int_t v;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
-  igraph_bool_t directed=LOGICAL(pdirected)[0];
+  igraph_integer_t n;
+  igraph_bool_t directed;
   SEXP result;
+
+  R_check_int_scalar(pn);
+  n = (igraph_integer_t) REAL(pn)[0];
+
+  R_check_bool_scalar(pdirected);
+  directed = LOGICAL(pdirected)[0];
 
   R_SEXP_to_vector_int_copy(edges, &v);
   IGRAPH_R_CHECK(igraph_create(&g, &v, n, directed));
@@ -4346,7 +4353,7 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
                             SEXP palgo, SEXP pstart) {
 
   igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
+  igraph_integer_t n;
   igraph_real_t power=REAL(ppower)[0];
   igraph_integer_t m=Rf_isNull(pm) ? 0 : (igraph_integer_t) REAL(pm)[0];
   igraph_vector_int_t outseq, *myoutseq=0;
@@ -4356,6 +4363,9 @@ SEXP R_igraph_barabasi_game(SEXP pn, SEXP ppower, SEXP pm, SEXP poutseq,
   igraph_barabasi_algorithm_t algo = (igraph_barabasi_algorithm_t) Rf_asInteger(palgo);
   igraph_t start, *ppstart=0;
   SEXP result;
+
+  R_check_int_scalar(pn);
+  n = (igraph_integer_t) REAL(pn)[0];
 
   if (!Rf_isNull(poutseq)) {
     R_SEXP_to_vector_int_copy(poutseq, &outseq);
@@ -4913,12 +4923,15 @@ SEXP R_igraph_erdos_renyi_game(SEXP pn, SEXP ptype,
                                SEXP pporm, SEXP pdirected, SEXP ploops) {
 
   igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
+  igraph_integer_t n;
   igraph_integer_t type=(igraph_integer_t) REAL(ptype)[0];
   igraph_real_t porm=REAL(pporm)[0];
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
   SEXP result;
+
+  R_check_int_scalar(pn);
+  n=(igraph_integer_t) REAL(pn)[0];
 
   igraph_erdos_renyi_game(&g, (igraph_erdos_renyi_t) type, n, porm, directed,
                           loops);
@@ -4932,10 +4945,13 @@ SEXP R_igraph_erdos_renyi_game(SEXP pn, SEXP ptype,
 SEXP R_igraph_full(SEXP pn, SEXP pdirected, SEXP ploops) {
 
   igraph_t g;
-  igraph_integer_t n=(igraph_integer_t) REAL(pn)[0];
+  igraph_integer_t n;
   igraph_bool_t directed=LOGICAL(pdirected)[0];
   igraph_bool_t loops=LOGICAL(ploops)[0];
   SEXP result;
+
+  R_check_int_scalar(pn);
+  n=(igraph_integer_t) REAL(pn)[0];
 
   IGRAPH_R_CHECK(igraph_full(&g, n, directed, loops));
   PROTECT(result=R_igraph_to_SEXP(&g));
