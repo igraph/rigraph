@@ -698,25 +698,7 @@ undirected_graph <- function(...) constructor_spec(make_undirected_graph, ...)
 #' @examples
 #' make_empty_graph(n = 10)
 #' make_empty_graph(n = 5, directed = FALSE)
-make_empty_graph <- function(n = 0, directed = TRUE) {
-  # Argument checks
-  if (is.null(n)) {
-    stop("number of vertices must be an integer")
-  }
-
-  n <- suppressWarnings(as.numeric(n))
-  if (is.na(n)) {
-    stop("number of vertices must be an integer")
-  }
-
-  directed <- as.logical(directed)
-
-  on.exit(.Call(R_igraph_finalizer))
-  # Function call
-  res <- .Call(R_igraph_empty, n, directed)
-
-  res
-}
+make_empty_graph <- empty_impl
 
 #' @rdname make_empty_graph
 #' @param ... Passed to `make_graph_empty`.
