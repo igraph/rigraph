@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">igraph</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0.9017</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,27 @@
       <small>Source: <a href="https://github.com/igraph/rigraph/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.6.0.9017" id="igraph-1609017">igraph 1.6.0.9017<a class="anchor" aria-label="anchor" href="#igraph-1609017"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-6-0-9017">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-6-0-9017"></a></h3>
+<ul><li>Add scalar conversion checks in a few critical places (<a href="https://github.com/igraph/rigraph/issues/1069" class="external-link">#1069</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="refactoring-1-6-0-9017">Refactoring<a class="anchor" aria-label="anchor" href="#refactoring-1-6-0-9017"></a></h3>
+<ul><li><p>Remove unused vectorlist / matrixlist destructors (<a href="https://github.com/igraph/rigraph/issues/1070" class="external-link">#1070</a>).</p></li>
+<li><p>Breaking change: remove graph.isomorphic.34(), fixes <a href="https://github.com/igraph/rigraph/issues/1065" class="external-link">#1065</a> (<a href="https://github.com/igraph/rigraph/issues/1067" class="external-link">#1067</a>).</p></li>
+<li><p>Use integers for mode enum in cluster_label_prop.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="breaking-changes-1-6-0-9017">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-6-0-9017"></a></h3>
+<ul><li>Breaking change: remove graph.isomorphic.34(), fixes <a href="https://github.com/igraph/rigraph/issues/1065" class="external-link">#1065</a> (<a href="https://github.com/igraph/rigraph/issues/1067" class="external-link">#1067</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-1-6-0-9017">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-6-0-9017"></a></h3>
+<ul><li>Check that matrix sizes are in the supported range before passing them to R (<a href="https://github.com/igraph/rigraph/issues/1066" class="external-link">#1066</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.6.0.9016" id="igraph-1609016">igraph 1.6.0.9016<a class="anchor" aria-label="anchor" href="#igraph-1609016"></a></h2>
 <div class="section level3">
