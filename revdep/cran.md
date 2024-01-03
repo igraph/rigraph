@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 1947 reverse dependencies (1945 from CRAN + 2 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 26 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 19 new problems
- * We failed to check 3 packages
+ * We saw 25 new problems
+ * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -17,6 +17,12 @@ Issues with CRAN packages are summarised below.
   checking tests ... ERROR
 
 * DiagrammeR
+  checking tests ... ERROR
+
+* dnet
+  checking examples ... ERROR
+
+* dragon
   checking tests ... ERROR
 
 * EGAnet
@@ -46,6 +52,10 @@ Issues with CRAN packages are summarised below.
 * nat
   checking tests ... ERROR
 
+* nbTransmission
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
 * netcom
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -63,15 +73,21 @@ Issues with CRAN packages are summarised below.
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
 
+* rgraph6
+  checking re-building of vignette outputs ... ERROR
+
 * riverconn
+  checking re-building of vignette outputs ... ERROR
+
+* signnet
+  checking examples ... ERROR
+  checking tests ... ERROR
   checking re-building of vignette outputs ... ERROR
 
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
 
-### Failed to check
+* VertexSort
+  checking examples ... ERROR
 
-* bsts      (NA)
-* Seurat    (NA)
-* streamDAG (NA)
