@@ -1,9 +1,9 @@
 ## revdepcheck results
 
-We checked 25 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1949 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 23 new problems
- * We failed to check 0 packages
+ * We saw 26 new problems
+ * We failed to check 3 packages
 
 Issues with CRAN packages are summarised below.
 
@@ -52,6 +52,10 @@ Issues with CRAN packages are summarised below.
 * nat
   checking tests ... ERROR
 
+* nbTransmission
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
 * netcom
   checking examples ... ERROR
   checking re-building of vignette outputs ... ERROR
@@ -75,6 +79,14 @@ Issues with CRAN packages are summarised below.
 * riverconn
   checking re-building of vignette outputs ... ERROR
 
+* SCORPIUS
+  checking tests ... ERROR
+
+* signnet
+  checking examples ... ERROR
+  checking tests ... ERROR
+  checking re-building of vignette outputs ... ERROR
+
 * tidygraph
   checking examples ... ERROR
   checking tests ... ERROR
@@ -82,3 +94,8 @@ Issues with CRAN packages are summarised below.
 * VertexSort
   checking examples ... ERROR
 
+### Failed to check
+
+* bsts      (NA)
+* Seurat    (NA)
+* streamDAG (NA)
