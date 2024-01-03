@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9017
+
+## Bug fixes
+
+  - Add scalar conversion checks in a few critical places (#1069).
+
+## Refactoring
+
+  - Remove unused vectorlist / matrixlist destructors (#1070).
+
+  - Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
+
+  - Use integers for mode enum in cluster\_label\_prop.
+
+## Breaking changes
+
+  - Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
+
+## Uncategorized
+
+  - Check that matrix sizes are in the supported range before passing them to R (#1066).
+
+
 # igraph 1.6.0.9016
 
 ## Bug fixes
