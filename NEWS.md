@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9018
+
+## Chore
+
+  - Update revdepcheck results.
+
+  - Exclude bad packages from checks.
+
+
 # igraph 1.6.0.9017
 
 ## Bug fixes
