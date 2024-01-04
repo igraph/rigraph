@@ -716,18 +716,26 @@ EDGE_ATTRIBUTE_COMBINATION:
 HRG:
     CALL: '&%C%'
     INCONV:
-        IN: R_SEXP_to_hrg(%I%, &%C%);
+        IN: |-
+            if (0 != R_SEXP_to_hrg_copy(%I%, &%C%)) {
+              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+            }
+            IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
         INOUT: |-
             if (0 != R_SEXP_to_hrg_copy(%I%, &%C%)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
             }
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
         OUT: |-
             if (0 != igraph_hrg_init(&%C%, 0)) {
-              igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+              igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
             }
             IGRAPH_FINALLY(igraph_hrg_destroy, &%C%);
     OUTCONV:
+        INOUT: |-
+            PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
+            igraph_hrg_destroy(&%C%);
+            IGRAPH_FINALLY_CLEAN(1);
         OUT: |-
             PROTECT(%I%=R_igraph_hrg_to_SEXP(&%C%));
             igraph_hrg_destroy(&%C%);

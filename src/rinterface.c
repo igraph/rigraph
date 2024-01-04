@@ -7776,7 +7776,7 @@ SEXP R_igraph_hrg_fit(SEXP graph, SEXP hrg, SEXP start, SEXP steps) {
                                         /* Convert input */
   R_SEXP_to_igraph(graph, &c_graph);
   if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   IGRAPH_R_CHECK_BOOL(start);
@@ -7807,7 +7807,10 @@ SEXP R_igraph_hrg_sample(SEXP hrg) {
 
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_sample(&c_hrg, &c_sample));
 
@@ -7834,7 +7837,10 @@ SEXP R_igraph_hrg_sample_many(SEXP hrg, SEXP num_samples) {
 
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   if (0 != igraph_graph_list_init(&c_samples, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
@@ -7865,7 +7871,10 @@ SEXP R_igraph_hrg_game(SEXP hrg) {
 
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
                                         /* Call igraph */
   IGRAPH_R_CHECK(igraph_hrg_game(&c_graph, &c_hrg));
 
@@ -7906,7 +7915,7 @@ SEXP R_igraph_hrg_consensus(SEXP graph, SEXP hrg, SEXP start, SEXP num_samples) 
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_weights);
   if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   IGRAPH_R_CHECK_BOOL(start);
@@ -7968,7 +7977,7 @@ SEXP R_igraph_hrg_predict(SEXP graph, SEXP hrg, SEXP start, SEXP num_samples, SE
   }
   IGRAPH_FINALLY(igraph_vector_destroy, &c_prob);
   if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   IGRAPH_R_CHECK_BOOL(start);
@@ -8018,7 +8027,7 @@ SEXP R_igraph_hrg_create(SEXP graph, SEXP prob) {
   SEXP r_result;
                                         /* Convert input */
   if (0 != igraph_hrg_init(&c_hrg, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   R_SEXP_to_igraph(graph, &c_graph);
@@ -8047,7 +8056,7 @@ SEXP R_igraph_hrg_resize(SEXP hrg, SEXP newsize) {
   SEXP r_result;
                                         /* Convert input */
   if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
   IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   IGRAPH_R_CHECK_INT(newsize);
@@ -8074,7 +8083,10 @@ SEXP R_igraph_hrg_size(SEXP hrg) {
   igraph_integer_t c_result;
   SEXP r_result;
                                         /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
                                         /* Call igraph */
   c_result=igraph_hrg_size(&c_hrg);
 
@@ -8100,7 +8112,10 @@ SEXP R_igraph_from_hrg_dendrogram(SEXP hrg) {
 
   SEXP r_result, r_names;
                                         /* Convert input */
-  R_SEXP_to_hrg(hrg, &c_hrg);
+  if (0 != R_SEXP_to_hrg_copy(hrg, &c_hrg)) {
+    igraph_error("Insufficient memory to create HRG object", __FILE__, __LINE__, IGRAPH_ENOMEM);
+  }
+  IGRAPH_FINALLY(igraph_hrg_destroy, &c_hrg);
   if (0 != igraph_vector_init(&c_prob, 0)) {
     igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
   }
