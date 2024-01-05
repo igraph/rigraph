@@ -1084,47 +1084,6 @@ Run `revdepcheck::cloud_details(, "riverconn")` for more info
     Execution halted
     ```
 
-# SCORPIUS
-
-<details>
-
-* Version: 1.0.9
-* GitHub: https://github.com/rcannood/SCORPIUS
-* Source code: https://github.com/cran/SCORPIUS
-* Date/Publication: 2023-08-07 17:30:05 UTC
-* Number of recursive dependencies: 204
-
-Run `revdepcheck::cloud_details(, "SCORPIUS")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(SCORPIUS)
-      > library(dplyr)
-      
-      Attaching package: 'dplyr'
-      
-      The following objects are masked from 'package:stats':
-      
-    ...
-       4.   │   └─base::eval(mc, parent.frame())
-       5.   └─mclust::mclustBIC(data = `<dbl[,91]>`, verbose = verbose)
-       6.     ├─mclust::me(...)
-       7.     │ └─base::eval(mc, parent.frame())
-       8.     │   └─base::eval(mc, parent.frame())
-       9.     └─mclust::meEEE(...)
-      
-      [ FAIL 1 | WARN 0 | SKIP 1 | PASS 182 ]
-      Error: Test failures
-      Execution halted
-    ```
-
 # signnet
 
 <details>
