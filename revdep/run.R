@@ -3,7 +3,7 @@ strong <- unlist(tools::package_dependencies(me, which = "most", reverse = TRUE)
 # second <- unlist(tools::package_dependencies(strong, reverse = TRUE, recursive = TRUE), use.names = FALSE)
 second <- unlist(tools::package_dependencies(strong, reverse = TRUE), use.names = FALSE)
 bad <- c("streamDAG", "Seurat", "bsts")
-packages <- setdiff(unique(c(strong, second)), bad)
+packages <- unique(c(strong, second))
 
 revdepcheck::cloud_check(revdep_packages = packages)
 revdepcheck::cloud_status()
