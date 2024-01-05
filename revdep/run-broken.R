@@ -1,7 +1,7 @@
 broken <- revdepcheck::cloud_broken()
-failing <- revdepcheck::cloud_failing()
+failed <- revdepcheck::cloud_failed()
 
-packages <- c(broken, failing)
+packages <- c(broken, failed)
 revdepcheck::cloud_check(revdep_packages = packages)
 revdepcheck::cloud_status()
 revdepcheck::cloud_report()
