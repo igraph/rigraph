@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9020
+
+## Chore
+
+  - Fix typo in revdepcheck script.
+
+  - Tweak revdepcheck scripts.
+
+
 # igraph 1.6.0.9019
 
 ## Chore
