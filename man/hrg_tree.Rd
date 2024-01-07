@@ -10,7 +10,7 @@ hrg_tree(hrg)
 \item{hrg}{A hierarchical random graph model.}
 }
 \value{
-An igraph graph.
+An igraph graph with a vertex attribute called \code{"probability"}.
 }
 \description{
 \code{hrg_tree()} creates the corresponsing igraph tree of a hierarchical
