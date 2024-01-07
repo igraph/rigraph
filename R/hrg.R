@@ -286,11 +286,16 @@ hrg <- hrg_create_impl
 #' random graph model.
 #'
 #' @param hrg A hierarchical random graph model.
-#' @return An igraph graph.
+#' @return An igraph graph with a vertex attribute called `"probability"`.
 #'
 #' @family hierarchical random graph functions
 #' @export
-hrg_tree <- from_hrg_dendrogram_impl
+hrg_tree <- function(hrg) {
+  out <- from_hrg_dendrogram_impl(hrg)
+
+  g <- out$graph
+  set_vertex_attr(g, "probability", value = out$prob)
+}
 
 
 #' Sample from a hierarchical random graph model
