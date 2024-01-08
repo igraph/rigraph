@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9021
+
+## Bug fixes
+
+  - Restore `hrg_tree()` semantics (#1078).
+
+
 # igraph 1.6.0.9020
 
 ## Chore
