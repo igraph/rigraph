@@ -69,28 +69,6 @@ get_all_eids_between_impl <- function(graph, from, to, directed=TRUE) {
   res
 }
 
-sparse_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_sparse_adjacency, adjmatrix, mode, loops)
-
-  res
-}
-
-sparse_weighted_adjacency_impl <- function(adjmatrix, mode=DIRECTED, loops=ONCE) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); adjmatrix <- as(as(as(adjmatrix, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_sparse_weighted_adjacency, adjmatrix, mode, loops)
-
-  res
-}
-
 wheel_impl <- function(n, mode=c("out", "in", "undirected", "mutual"), center=0) {
   # Argument checks
   n <- as.numeric(n)
@@ -4011,18 +3989,6 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-has_attribute_table_impl <- function() {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_has_attribute_table, )
-
-
-  res
-}
-
 progress_impl <- function(message, percent) {
   # Argument checks
   percent <- as.numeric(percent)
@@ -4075,17 +4041,6 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   if (igraph_opt("return.vs.es")) {
     res <- create_vs(graph, res)
   }
-  res
-}
-
-version_impl <- function() {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_version, )
-
   res
 }
 
