@@ -58,7 +58,8 @@ static igraph_error_t igraph_rng_R_seed(void *state, igraph_uint_t seed) {
 }
 
 static igraph_uint_t igraph_rng_R_get(void *state) {
-    return (unif_rand() * 0x7FFFFFFFUL);
+    // unif_rand() returns a double in [0, 1)
+    return (unif_rand() * 0x40000000UL);
 }
 
 static igraph_real_t igraph_rng_R_get_real(void *state) {
@@ -99,7 +100,7 @@ static igraph_real_t igraph_rng_R_get_pois(void *state, igraph_real_t rate) {
 
 static igraph_rng_type_t igraph_rng_R_type = {
     /* name= */      "GNU R",
-    /* bits = */     31,
+    /* bits = */     30, // tested by test-rng.R, #782
     /* init= */      igraph_rng_R_init,
     /* destroy= */   igraph_rng_R_destroy,
     /* seed= */      igraph_rng_R_seed,
@@ -111,7 +112,7 @@ static igraph_rng_type_t igraph_rng_R_type = {
     /* get_binom= */ igraph_rng_R_get_binom,
     /* get_exp= */   igraph_rng_R_get_exp,
     /* get_gamma= */ igraph_rng_R_get_gamma,
-    /* get_pois= */  igraph_rng_R_get_pois
+    /* get_pois= */  igraph_rng_R_get_pois,
 };
 
 igraph_rng_t igraph_rng_R_instance;
