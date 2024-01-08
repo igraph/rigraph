@@ -1,16 +1,5 @@
-mm <- function(...) {
-  v <- as.numeric(as.vector(list(...)))
-  matrix(v, nrow = sqrt(length(v)))
-}
-am <- function(x) {
-  x <- as.matrix(x)
-  dimnames(x) <- NULL
-  x
-}
-
-g <- make_tree(20)
-
 test_that("[ indexing works", {
+  g <- make_tree(20)
   ## Are these vertices connected?
   expect_that(g[1, 2], equals(1))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(1, 1, 0, 1, 1, 0, 0, 0, 1)))
@@ -19,9 +8,8 @@ test_that("[ indexing works", {
   expect_that(am(g[c(8, 17), c(17, 8)]), equals(mm(1, 0, 0, 0)))
 })
 
-V(g)$name <- letters[1:vcount(g)]
-
 test_that("[ indexing works with symbolic names", {
+  g <- make_test_named_tree()
   ## The same with symbolic names
   expect_that(g["a", "b"], equals(1))
   expect_that(
@@ -40,6 +28,7 @@ test_that("[ indexing works with symbolic names", {
 })
 
 test_that("[ indexing works with logical vectors", {
+  g <- make_test_named_tree()
   ## Logical vectors
   lres <- structure(
     c(
@@ -59,6 +48,7 @@ test_that("[ indexing works with logical vectors", {
 })
 
 test_that("[ indexing works with negative indices", {
+  g <- make_test_named_tree()
   ## Negative indices
   nres <- structure(
     c(
@@ -79,10 +69,10 @@ test_that("[ indexing works with negative indices", {
   expect_that(as.matrix(g[2:3, -1]), equals(nres))
 })
 
-el <- as_edgelist(g, names = FALSE)
-E(g)$weight <- el[, 1] * el[, 2]
-
 test_that("[ indexing works with weighted graphs", {
+  g <- make_tree(20)
+  el <- as_edgelist(g, names = FALSE)
+  E(g)$weight <- el[, 1] * el[, 2]
   ## Weighted graphs
   expect_that(g[1, 2], equals(2))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
@@ -95,6 +85,7 @@ test_that("[ indexing works with weighted graphs", {
 })
 
 test_that("[ indexing works with weighted graphs and symbolic names", {
+  g <- make_test_weighted_tree()
   ## Weighted graph, with symbolic names
   expect_that(g["a", "b"], equals(2))
   expect_that(
@@ -112,9 +103,8 @@ test_that("[ indexing works with weighted graphs and symbolic names", {
   expect_that(am(g[c("h", "q"), c("q", "h")]), equals(mm(136, 0, 0, 0)))
 })
 
-################################################################
-
 test_that("[[ indexing works", {
+  g <- make_test_named_tree()
   ## Adjacent vertices
   expect_that(g[[1, ]], is_equivalent_to(list(a = V(g)[2:3])))
   expect_that(g[[, 2]], is_equivalent_to(list(b = V(g)[1])))
@@ -138,6 +128,7 @@ test_that("[[ indexing works", {
 })
 
 test_that("[[ indexing works with symbolic names", {
+  g <- make_test_named_tree()
   ## Same with vertex names
   expect_that(g[["a", ]], is_equivalent_to(list(a = V(g)[2:3])))
   expect_that(g[[, "b"]], is_equivalent_to(list(b = V(g)[1])))
@@ -161,6 +152,7 @@ test_that("[[ indexing works with symbolic names", {
 })
 
 test_that("[[ indexing works with logical vectors", {
+  g <- make_test_named_tree()
   ## Logical vectors
   expect_that(
     g[[degree(g, mode = "in") == 0, ]],
@@ -169,6 +161,8 @@ test_that("[[ indexing works with logical vectors", {
 })
 
 test_that("[[ indexing works with filtering on both ends", {
+  g <- make_test_named_tree()
+
   ## Filtering on both ends
   expect_that(
     g[[1:10, 1:10]],
@@ -181,12 +175,12 @@ test_that("[[ indexing works with filtering on both ends", {
 })
 
 test_that("[[ indexing is consistent with length()", {
+  g <- make_test_named_tree()
   expect_that(length(g), equals(vcount(g)))
 })
 
-################################################################
-
 test_that("[ can query edge ids", {
+  g <- make_test_named_tree()
   ## Query edge ids
   expect_that(g[1, 2, edges = TRUE], equals(1))
   expect_that(
@@ -208,6 +202,7 @@ test_that("[ can query edge ids", {
 })
 
 test_that("[ can query edge ids with symbolic names", {
+  g <- make_test_named_tree()
   ## The same with symbolic names
   expect_that(g["a", "b", edges = TRUE], equals(1))
   expect_that(
@@ -228,9 +223,8 @@ test_that("[ can query edge ids with symbolic names", {
   )
 })
 
-################################################################
-
 test_that("[[ can query incident edges", {
+  g <- make_test_named_tree()
   ## Incident edges of vertices
   expect_that(g[[1, , edges = TRUE]], is_equivalent_to(list(a = E(g)[1:2])))
   expect_that(g[[, 2, edges = TRUE]], is_equivalent_to(list(b = E(g)[1])))
@@ -254,6 +248,7 @@ test_that("[[ can query incident edges", {
 })
 
 test_that("[[ queries edges with vertex names", {
+  g <- make_test_named_tree()
   ## Same with vertex names
   expect_that(
     g[["a", , edges = TRUE]],
@@ -291,10 +286,8 @@ test_that("[[ queries edges with vertex names", {
     ))
   )
 })
-
-#################################################################
-
 test_that("[ handles from and to properly", {
+  g <- make_test_named_tree()
   ## from & to
   g <- make_tree(20)
   expect_that(g[from = c(1, 2, 2, 3), to = c(3, 4, 8, 7)], equals(c(1, 1, 0, 1)))
