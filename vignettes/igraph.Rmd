@@ -469,7 +469,7 @@ E(g)[men %--% women]
 The adjacency matrix is another way to represent a graph. In an adjacency matrix, rows and columns are labeled by graph vertices, and the elements of the matrix indicate the number of edges between vertices *i* and *j*. The adjacency matrix for the example graph is:
 
 ```{r echo = TRUE}
-get.adjacency(g)
+as_adjacency_matrix(g)
 ```
 
 For example, Carmina (`1, 0, 0, 1, 1, 1, 0`) is directly connected to Alejandra (who has vertex index 1), Frank (index 4), Dennis (index 5) and Esther (index 6), but not to Bruno (index 2) or to George (index 7).
