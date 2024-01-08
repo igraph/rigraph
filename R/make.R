@@ -207,7 +207,9 @@ graph.full <- function(n, directed = FALSE, loops = FALSE) { # nocov start
 #' @export
 graph.formula <- function(..., simplify = TRUE) { # nocov start
   lifecycle::deprecate_soft("2.0.0", "graph.formula()", "graph_from_literal()")
-  graph_from_literal(simplify = simplify, ...)
+
+  mf <- as.list(match.call())[-1]
+  graph_from_literal_i(mf)
 } # nocov end
 
 #' Create an extended chordal ring graph
