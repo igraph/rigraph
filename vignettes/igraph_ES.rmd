@@ -478,7 +478,7 @@ E(g)[men %--% women]
 Una matriz de adyacencia es otra manera de representar un grafo. En la matriz de adyacencia, las filas y columnas están indicadas por los vértices del grafo y los elementos de la matriz indican el número de aristas entre los vértices *i* y *j*. La matriz de adyacencia del grafo de nuestra red social imaginaria es:
 
 ```{r echo = TRUE}
-get.adjacency(g)
+as_adjacency_matrix(g)
 ```
 
 Por ejemplo, Carmina (`1, 0, 0, 1, 1, 1, 0`) está directamente conectada con Alejandra (que tiene el índice 1), Frank (índice 4), Dennis (índice 5), Esther (índice 6) y , pero no con Bruno (índice 2) ni con George (índice 7).
