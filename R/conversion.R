@@ -317,7 +317,7 @@ get.adjacency.sparse <- function(graph, type = c("both", "upper", "lower"),
 #'   numeric. If the `sparse` argument is `FALSE`, then character is
 #'   also allowed. The reason for the difference is that the `Matrix`
 #'   package does not support character sparse matrices yet.
-#' @param edges Logical scalar, whether to return the edge ids in the matrix.
+#' @param edges `r lifecycle::badge("deprecated")` Logical scalar, whether to return the edge ids in the matrix.
 #'   For non-existant edges zero is returned.
 #' @param names Logical constant, whether to assign row and column names
 #'   to the matrix. These are only assigned if the `name` vertex attribute
