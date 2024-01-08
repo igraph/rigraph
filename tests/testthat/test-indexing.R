@@ -70,9 +70,7 @@ test_that("[ indexing works with negative indices", {
 })
 
 test_that("[ indexing works with weighted graphs", {
-  g <- make_tree(20)
-  el <- as_edgelist(g, names = FALSE)
-  E(g)$weight <- el[, 1] * el[, 2]
+  g <- make_test_weighted_tree()
   ## Weighted graphs
   expect_that(g[1, 2], equals(2))
   expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
