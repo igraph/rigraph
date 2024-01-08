@@ -1,9 +1,3 @@
-am <- function(x) {
-  x <- as.matrix(x)
-  dimnames(x) <- NULL
-  x
-}
-
 test_that("[ can add and delete edges", {
   g <- make_empty_graph(10)
   A <- matrix(0, 10, 10)
