@@ -1,9 +1,9 @@
-mm <- function(...) {
+vector_to_square_matrix <- function(...) {
   v <- as.numeric(as.vector(list(...)))
   matrix(v, nrow = sqrt(length(v)))
 }
 
-am <- function(x) {
+canonicalize_matrix <- function(x) {
   x <- as.matrix(x)
   dimnames(x) <- NULL
   x

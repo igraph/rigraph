@@ -2,10 +2,10 @@ test_that("[ indexing works", {
   g <- make_tree(20)
   ## Are these vertices connected?
   expect_that(g[1, 2], equals(1))
-  expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(1, 1, 0, 1, 1, 0, 0, 0, 1)))
-  expect_that(am(g[c(1, 1, 7), c(5, 3, 12)]), equals(mm(0, 0, 0, 1, 1, 0, 0, 0, 0)))
-  expect_that(am(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]), equals(matrix(1, 4, 4)))
-  expect_that(am(g[c(8, 17), c(17, 8)]), equals(mm(1, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c(1, 1, 7), c(2, 3, 14)]), equals(vector_to_square_matrix(1, 1, 0, 1, 1, 0, 0, 0, 1)))
+  expect_that(canonicalize_matrix(g[c(1, 1, 7), c(5, 3, 12)]), equals(vector_to_square_matrix(0, 0, 0, 1, 1, 0, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]), equals(matrix(1, 4, 4)))
+  expect_that(canonicalize_matrix(g[c(8, 17), c(17, 8)]), equals(vector_to_square_matrix(1, 0, 0, 0)))
 })
 
 test_that("[ indexing works with symbolic names", {
@@ -13,18 +13,18 @@ test_that("[ indexing works with symbolic names", {
 
   expect_that(g["a", "b"], equals(1))
   expect_that(
-    am(g[c("a", "a", "g"), c("b", "c", "n")]),
-    equals(mm(1, 1, 0, 1, 1, 0, 0, 0, 1))
+    canonicalize_matrix(g[c("a", "a", "g"), c("b", "c", "n")]),
+    equals(vector_to_square_matrix(1, 1, 0, 1, 1, 0, 0, 0, 1))
   )
   expect_that(
-    am(g[c("a", "a", "g"), c("e", "c", "l")]),
-    equals(mm(0, 0, 0, 1, 1, 0, 0, 0, 0))
+    canonicalize_matrix(g[c("a", "a", "g"), c("e", "c", "l")]),
+    equals(vector_to_square_matrix(0, 0, 0, 1, 1, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
+    canonicalize_matrix(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
     equals(matrix(1, 4, 4))
   )
-  expect_that(am(g[c("h", "q"), c("q", "h")]), equals(mm(1, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c("h", "q"), c("q", "h")]), equals(vector_to_square_matrix(1, 0, 0, 0)))
 })
 
 test_that("[ indexing works with logical vectors", {
@@ -73,13 +73,13 @@ test_that("[ indexing works with weighted graphs", {
   g <- make_test_weighted_tree()
 
   expect_that(g[1, 2], equals(2))
-  expect_that(am(g[c(1, 1, 7), c(2, 3, 14)]), equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98)))
-  expect_that(am(g[c(1, 1, 7), c(5, 3, 12)]), equals(mm(0, 0, 0, 3, 3, 0, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c(1, 1, 7), c(2, 3, 14)]), equals(vector_to_square_matrix(2, 2, 0, 3, 3, 0, 0, 0, 98)))
+  expect_that(canonicalize_matrix(g[c(1, 1, 7), c(5, 3, 12)]), equals(vector_to_square_matrix(0, 0, 0, 3, 3, 0, 0, 0, 0)))
   expect_that(
-    am(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]),
-    equals(mm(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2))
+    canonicalize_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2)]),
+    equals(vector_to_square_matrix(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2))
   )
-  expect_that(am(g[c(8, 17), c(17, 8)]), equals(mm(136, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c(8, 17), c(17, 8)]), equals(vector_to_square_matrix(136, 0, 0, 0)))
 })
 
 test_that("[ indexing works with weighted graphs and symbolic names", {
@@ -87,18 +87,18 @@ test_that("[ indexing works with weighted graphs and symbolic names", {
 
   expect_that(g["a", "b"], equals(2))
   expect_that(
-    am(g[c("a", "a", "g"), c("b", "c", "n")]),
-    equals(mm(2, 2, 0, 3, 3, 0, 0, 0, 98))
+    canonicalize_matrix(g[c("a", "a", "g"), c("b", "c", "n")]),
+    equals(vector_to_square_matrix(2, 2, 0, 3, 3, 0, 0, 0, 98))
   )
   expect_that(
-    am(g[c("a", "a", "g"), c("e", "c", "l")]),
-    equals(mm(0, 0, 0, 3, 3, 0, 0, 0, 0))
+    canonicalize_matrix(g[c("a", "a", "g"), c("e", "c", "l")]),
+    equals(vector_to_square_matrix(0, 0, 0, 3, 3, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
-    equals(mm(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2))
+    canonicalize_matrix(g[c("a", "a", "a", "a"), c("b", "c", "b", "b")]),
+    equals(vector_to_square_matrix(2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2))
   )
-  expect_that(am(g[c("h", "q"), c("q", "h")]), equals(mm(136, 0, 0, 0)))
+  expect_that(canonicalize_matrix(g[c("h", "q"), c("q", "h")]), equals(vector_to_square_matrix(136, 0, 0, 0)))
 })
 
 test_that("[[ indexing works with adjacent vertices", {
@@ -181,20 +181,20 @@ test_that("[ can query edge ids", {
 
   expect_that(g[1, 2, edges = TRUE], equals(1))
   expect_that(
-    am(g[c(1, 1, 7), c(2, 3, 14), edges = TRUE]),
-    equals(mm(1, 1, 0, 2, 2, 0, 0, 0, 13))
+    canonicalize_matrix(g[c(1, 1, 7), c(2, 3, 14), edges = TRUE]),
+    equals(vector_to_square_matrix(1, 1, 0, 2, 2, 0, 0, 0, 13))
   )
   expect_that(
-    am(g[c(1, 1, 7), c(5, 3, 12), edges = TRUE]),
-    equals(mm(0, 0, 0, 2, 2, 0, 0, 0, 0))
+    canonicalize_matrix(g[c(1, 1, 7), c(5, 3, 12), edges = TRUE]),
+    equals(vector_to_square_matrix(0, 0, 0, 2, 2, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c(1, 1, 1, 1), c(2, 3, 2, 2), edges = TRUE]),
-    equals(mm(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
+    canonicalize_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2), edges = TRUE]),
+    equals(vector_to_square_matrix(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
   )
   expect_that(
-    am(g[c(8, 17), c(17, 8), edges = TRUE]),
-    equals(mm(16, 0, 0, 0))
+    canonicalize_matrix(g[c(8, 17), c(17, 8), edges = TRUE]),
+    equals(vector_to_square_matrix(16, 0, 0, 0))
   )
 })
 
@@ -203,20 +203,20 @@ test_that("[ can query edge ids with symbolic names", {
 
   expect_that(g["a", "b", edges = TRUE], equals(1))
   expect_that(
-    am(g[c("a", "a", "g"), c("b", "c", "n"), edges = TRUE]),
-    equals(mm(1, 1, 0, 2, 2, 0, 0, 0, 13))
+    canonicalize_matrix(g[c("a", "a", "g"), c("b", "c", "n"), edges = TRUE]),
+    equals(vector_to_square_matrix(1, 1, 0, 2, 2, 0, 0, 0, 13))
   )
   expect_that(
-    am(g[c("a", "a", "g"), c("e", "c", "l"), edges = TRUE]),
-    equals(mm(0, 0, 0, 2, 2, 0, 0, 0, 0))
+    canonicalize_matrix(g[c("a", "a", "g"), c("e", "c", "l"), edges = TRUE]),
+    equals(vector_to_square_matrix(0, 0, 0, 2, 2, 0, 0, 0, 0))
   )
   expect_that(
-    am(g[c("a", "a", "a", "a"), c("b", "c", "b", "b"), edges = TRUE]),
-    equals(mm(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
+    canonicalize_matrix(g[c("a", "a", "a", "a"), c("b", "c", "b", "b"), edges = TRUE]),
+    equals(vector_to_square_matrix(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
   )
   expect_that(
-    am(g[c("h", "q"), c("q", "h"), edges = TRUE]),
-    equals(mm(16, 0, 0, 0))
+    canonicalize_matrix(g[c("h", "q"), c("q", "h"), edges = TRUE]),
+    equals(vector_to_square_matrix(16, 0, 0, 0))
   )
 })
 
