@@ -1,6 +1,6 @@
 # Revdeps
 
-## New problems (23)
+## New problems (25)
 
 |package           |version |error  |warning |note |
 |:-----------------|:-------|:------|:-------|:----|
@@ -18,6 +18,7 @@
 |[molnet](problems.md#molnet)|0.1.0   |__+1__ |        |     |
 |[NAIR](problems.md#nair)|1.0.2   |__+1__ |        |1    |
 |[nat](problems.md#nat)|1.8.23  |__+1__ |        |     |
+|[nbTransmission](problems.md#nbtransmission)|1.1.2   |__+2__ |        |     |
 |[netcom](problems.md#netcom)|2.1.6   |__+2__ |        |1    |
 |[nosoi](problems.md#nosoi)|1.1.0   |__+1__ |        |     |
 |[oddnet](problems.md#oddnet)|0.1.0   |__+1__ |        |     |
@@ -25,6 +26,7 @@
 |[phyloseqGraphTest](problems.md#phyloseqgraphtest)|0.1.0   |__+2__ |        |2    |
 |[rgraph6](problems.md#rgraph6)|2.0-3   |__+1__ |        |     |
 |[riverconn](problems.md#riverconn)|0.3.28  |__+1__ |        |     |
+|[signnet](problems.md#signnet)|1.0.3   |__+3__ |        |1    |
 |[tidygraph](problems.md#tidygraph)|1.3.0   |__+2__ |        |     |
 |[VertexSort](problems.md#vertexsort)|0.1-1   |__+1__ |        |     |
 

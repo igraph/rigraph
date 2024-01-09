@@ -658,6 +658,65 @@ Run `revdepcheck::cloud_details(, "nat")` for more info
       Execution halted
     ```
 
+# nbTransmission
+
+<details>
+
+* Version: 1.1.2
+* GitHub: https://github.com/sarahleavitt/nbTransmission
+* Source code: https://github.com/cran/nbTransmission
+* Date/Publication: 2021-01-06 19:50:03 UTC
+* Number of recursive dependencies: 124
+
+Run `revdepcheck::cloud_details(, "nbTransmission")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(nbTransmission)
+      > 
+      > test_check("nbTransmission")
+      
+        |                                                                            
+        |                                                                      |   0%
+    ...
+          ▆
+       1. └─nbTransmission (local) nbHeatmapWrapper(testData, clustMethod = "hc_absolute", cutoff = 0.05) at test_visualizeResults.R:69:3
+       2.   └─nbTransmission::nbHeatmap(...) at test_visualizeResults.R:33:3
+       3.     └─igraph::get.adjacency(net, attr = "cluster", sparse = FALSE)
+       4.       └─igraph::as_adjacency_matrix(...)
+       5.         └─igraph:::get.adjacency.dense(...)
+      
+      [ FAIL 1 | WARN 11 | SKIP 0 | PASS 136 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+      ...
+    --- re-building ‘nbTransmission-vignette.Rmd’ using rmarkdown
+    
+    Quitting from lines 284-288 [heatmap] (nbTransmission-vignette.Rmd)
+    Error: processing vignette 'nbTransmission-vignette.Rmd' failed with diagnostics:
+    Matrices must be either numeric or logical, and the edge attribute is not
+    --- failed re-building ‘nbTransmission-vignette.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘nbTransmission-vignette.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
 # netcom
 
 <details>
@@ -1023,6 +1082,102 @@ Run `revdepcheck::cloud_details(, "riverconn")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
+    ```
+
+# signnet
+
+<details>
+
+* Version: 1.0.3
+* GitHub: https://github.com/schochastics/signnet
+* Source code: https://github.com/cran/signnet
+* Date/Publication: 2023-12-15 20:30:02 UTC
+* Number of recursive dependencies: 105
+
+Run `revdepcheck::cloud_details(, "signnet")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘signnet-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: complex_walks
+    > ### Title: Count Walks in complex signed network
+    > ### Aliases: complex_walks
+    > 
+    > ### ** Examples
+    > 
+    > g <- sample_islands_signed(2, 10, 1, 10)
+    > g <- as_complex_edges(g, attr = "type")
+    > complex_walks(g, attr = "type", k = 3)
+    Error in get.adjacency.dense(graph, type = type, attr = attr, weights = NULL,  : 
+      Matrices must be either numeric or logical, and the edge attribute is not
+    Calls: complex_walks ... as_adj_complex -> <Anonymous> -> get.adjacency.dense
+    Execution halted
+    ```
+
+*   checking tests ... ERROR
+    ```
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(signnet)
+      > 
+      > test_check("signnet")
+      [ FAIL 5 | WARN 13 | SKIP 0 | PASS 88 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+    ...
+      Backtrace:
+          ▆
+       1. └─signnet::complex_walks(g, "type", 3) at test-complex_matrices.R:171:3
+       2.   └─signnet::as_adj_complex(g, attr)
+       3.     └─igraph::as_adj(g, type = "both", attr, sparse = FALSE)
+       4.       └─igraph:::get.adjacency.dense(...)
+      
+      [ FAIL 5 | WARN 13 | SKIP 0 | PASS 88 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... ERROR
+    ```
+    Error(s) in re-building vignettes:
+    --- re-building ‘blockmodeling.Rmd’ using rmarkdown
+    --- finished re-building ‘blockmodeling.Rmd’
+    
+    --- re-building ‘centrality.Rmd’ using rmarkdown
+    --- finished re-building ‘centrality.Rmd’
+    
+    --- re-building ‘complex_matrices.Rmd’ using rmarkdown
+    
+    Quitting from lines 54-55 [pna_adj] (complex_matrices.Rmd)
+    ...
+    --- finished re-building ‘signed_networks.Rmd’
+    
+    --- re-building ‘structural_balance.Rmd’ using rmarkdown
+    --- finished re-building ‘structural_balance.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘complex_matrices.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 11.0Mb
+      sub-directories of 1Mb or more:
+        data   1.0Mb
+        libs   8.9Mb
     ```
 
 # tidygraph
