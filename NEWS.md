@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9022
+
+## Bug fixes
+
+  - Path to vendor header files (#1089).
+
+## Features
+
+  - Use 30 bits of R's RNG (#1079).
+
+## Chore
+
+  - Reduce warnings from `R CMD check` (#1087).
+
+## Documentation
+
+  - Rm get.adjacency() usage from intro vignettes (#1084).
+
+
 # igraph 1.6.0.9021
 
 ## Bug fixes
