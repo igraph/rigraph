@@ -219,7 +219,6 @@ extern SEXP R_igraph_graphlets_project(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_grg_game(void *, void *, void *, void *);
 extern SEXP R_igraph_growing_random_game(void *, void *, void *, void *);
 extern SEXP R_igraph_harmonic_centrality_cutoff(void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_has_attribute_table(void *);
 extern SEXP R_igraph_has_loop(void *);
 extern SEXP R_igraph_has_multiple(void *);
 extern SEXP R_igraph_has_mutual(void *, void *);
@@ -450,7 +449,6 @@ extern SEXP R_igraph_turan(void *, void *);
 extern SEXP R_igraph_unfold_tree(void *, void *, void *);
 extern SEXP R_igraph_union(void *, void *);
 extern SEXP R_igraph_vcount(void *);
-extern SEXP R_igraph_version(void *);
 extern SEXP R_igraph_vertex_coloring_greedy(void *, void *);
 extern SEXP R_igraph_vertex_connectivity(void *, void *);
 extern SEXP R_igraph_vertex_disjoint_paths(void *, void *, void *);
@@ -689,7 +687,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_grg_game",                                   (DL_FUNC) &R_igraph_grg_game,                                    4},
     {"R_igraph_growing_random_game",                        (DL_FUNC) &R_igraph_growing_random_game,                         4},
     {"R_igraph_harmonic_centrality_cutoff",                 (DL_FUNC) &R_igraph_harmonic_centrality_cutoff,                  6},
-    {"R_igraph_has_attribute_table",                        (DL_FUNC) &R_igraph_has_attribute_table,                         1},
     {"R_igraph_has_loop",                                   (DL_FUNC) &R_igraph_has_loop,                                    1},
     {"R_igraph_has_multiple",                               (DL_FUNC) &R_igraph_has_multiple,                                1},
     {"R_igraph_has_mutual",                                 (DL_FUNC) &R_igraph_has_mutual,                                  2},
@@ -920,7 +917,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_unfold_tree",                                (DL_FUNC) &R_igraph_unfold_tree,                                 3},
     {"R_igraph_union",                                      (DL_FUNC) &R_igraph_union,                                       2},
     {"R_igraph_vcount",                                     (DL_FUNC) &R_igraph_vcount,                                      1},
-    {"R_igraph_version",                                    (DL_FUNC) &R_igraph_version,                                     1},
     {"R_igraph_vertex_coloring_greedy",                     (DL_FUNC) &R_igraph_vertex_coloring_greedy,                      2},
     {"R_igraph_vertex_connectivity",                        (DL_FUNC) &R_igraph_vertex_connectivity,                         2},
     {"R_igraph_vertex_disjoint_paths",                      (DL_FUNC) &R_igraph_vertex_disjoint_paths,                       3},
