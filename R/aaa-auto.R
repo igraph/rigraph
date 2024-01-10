@@ -251,19 +251,6 @@ turan_impl <- function(n, r) {
   res
 }
 
-weighted_sparsemat_impl <- function(A, directed, attr, loops=FALSE) {
-  # Argument checks
-  requireNamespace("Matrix", quietly = TRUE); A <- as(as(as(A, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  directed <- as.logical(directed)
-  loops <- as.logical(loops)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_weighted_sparsemat, A, directed, attr, loops)
-
-  res
-}
-
 forest_fire_game_impl <- function(nodes, fw.prob, bw.factor=1, ambs=1, directed=TRUE) {
   # Argument checks
   nodes <- as.numeric(nodes)
@@ -3652,44 +3639,6 @@ cmp_epsilon_impl <- function(a, b, eps) {
   res
 }
 
-eigen_matrix_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
-  # Argument checks
-  A[] <- as.numeric(A)
-  requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
-    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
-    "comp_arpack"=5L)
-  which.tmp <- eigen_defaults();
-  which.tmp[ names(which) ] <- which ; which <- which.tmp
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_eigen_matrix, A, sA, fun, n, algorithm, which, options)
-
-  res
-}
-
-eigen_matrix_symmetric_impl <- function(A, sA, fun, n, algorithm, which, options=arpack_defaults()) {
-  # Argument checks
-  A[] <- as.numeric(A)
-  requireNamespace("Matrix", quietly = TRUE); sA <- as(as(as(sA, "dMatrix"), "generalMatrix"), "CsparseMatrix")
-  n <- as.integer(n)
-  algorithm <- switch(igraph.match.arg(algorithm), "auto"=0L, "lapack"=1L,
-    "arpack"=2L, "comp_auto"=3L, "comp_lapack"=4L,
-    "comp_arpack"=5L)
-  which.tmp <- eigen_defaults();
-  which.tmp[ names(which) ] <- which ; which <- which.tmp
-  options <- modify_list(arpack_defaults(), options)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_eigen_matrix_symmetric, A, sA, fun, n, algorithm, which, options)
-
-  res
-}
-
 solve_lsap_impl <- function(c, n) {
   # Argument checks
   c[] <- as.numeric(c)
@@ -4043,4 +3992,3 @@ vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out
   }
   res
 }
-

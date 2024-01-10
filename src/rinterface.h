@@ -101,7 +101,6 @@ igraph_error_t R_SEXP_to_vector_bool_copy(SEXP sv, igraph_vector_bool_t *v);
 igraph_error_t R_SEXP_to_vector_int_copy(SEXP sv, igraph_vector_int_t *v);
 igraph_error_t R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg);
 igraph_error_t R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg);
-igraph_error_t R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl);
 void           R_SEXP_to_igraph_layout_drl_options(SEXP in, igraph_layout_drl_options_t *opt);
 igraph_error_t R_SEXP_to_igraph_eigen_which(SEXP in, igraph_eigen_which_t *out);
 void           R_SEXP_to_igraph_arpack_options(SEXP in, igraph_arpack_options_t *opt);

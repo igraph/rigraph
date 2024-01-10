@@ -3166,20 +3166,6 @@ void R_igraph_sirlist_destroy(igraph_vector_ptr_t *sl) {
   igraph_vector_ptr_destroy(sl);
 }
 
-igraph_error_t R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl) {
-  SEXP Dim=GET_SLOT(pakl, Rf_install("Dim"));
-  SEXP i=GET_SLOT(pakl, Rf_install("i"));
-  SEXP p=GET_SLOT(pakl, Rf_install("p"));
-  SEXP x=GET_SLOT(pakl, Rf_install("x"));
-
-  igraph_sparsemat_view(akl, /*nzmax=*/ GET_LENGTH(x),
-                          /*m=*/ INTEGER(Dim)[0], /*n=*/ INTEGER(Dim)[1],
-                          /*p=*/ INTEGER(p), /*i=*/ INTEGER(i),
-                          /*x=*/ REAL(x), /*nz=*/ -1);
-
-  return IGRAPH_SUCCESS;
-}
-
 SEXP R_igraph_sparsemat_to_SEXP_triplet(const igraph_sparsemat_t *sp) {
   SEXP res, names;
   int nz=igraph_sparsemat_nonzero_storage(sp);
