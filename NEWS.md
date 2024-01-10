@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9023
+
+## Features
+
+  - Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+
+## Breaking changes
+
+  - Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+
+
 # igraph 1.6.0.9022
 
 ## Bug fixes
