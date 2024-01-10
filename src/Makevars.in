@@ -1,15 +1,15 @@
 include sources.mk
 
-LIB_XML ?= $(MINGW_PREFIX)
-GLPK_HOME ?= $(MINGW_PREFIX)
-LIB_GMP ?= $(MINGW_PREFIX)
+PKG_CFLAGS=$(C_VISIBILITY)
+PKG_CXXFLAGS=$(CXX_VISIBILITY)
+PKG_FFLAGS=$(F_VISIBILITY)
 
 PKG_CPPFLAGS=@cflags@ -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
 	-DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
 	-DPRPACK_IGRAPH_SUPPORT \
 	-D_GNU_SOURCE=1
 
-PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -lz -lstdc++ -L"${GLPK_HOME}/lib" \
-  -lglpk -lgmp -L"${LIB_GMP}/lib" "${BLAS_LIBS}" "${LAPACK_LIBS}"
+PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -lz -L"${GLPK_HOME}/lib" \
+  -lglpk -lgmp -L"${LIB_GMP}/lib" $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 OBJECTS=${SOURCES}
