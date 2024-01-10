@@ -149,8 +149,6 @@ extern SEXP R_igraph_edge_connectivity(void *, void *);
 extern SEXP R_igraph_edge_disjoint_paths(void *, void *, void *);
 extern SEXP R_igraph_edges(void *, void *);
 extern SEXP R_igraph_eigen_adjacency(void *, void *, void *, void *);
-extern SEXP R_igraph_eigen_matrix(void *, void *, void *, void *, void *, void *, void *);
-extern SEXP R_igraph_eigen_matrix_symmetric(void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_eigenvector_centrality(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_empty(void *, void *);
 extern SEXP R_igraph_empty_attrs(void *, void *);
@@ -412,8 +410,6 @@ extern SEXP R_igraph_simplify_and_colorize(void *);
 extern SEXP R_igraph_sir(void *, void *, void *, void *);
 extern SEXP R_igraph_solve_lsap(void *, void *);
 extern SEXP R_igraph_spanner(void *, void *, void *);
-extern SEXP R_igraph_sparse_adjacency(void *, void *, void *);
-extern SEXP R_igraph_sparse_weighted_adjacency(void *, void *, void *);
 extern SEXP R_igraph_spinglass_community(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_spinglass_my_community(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_split_join_distance(void *, void *);
@@ -470,7 +466,6 @@ extern SEXP R_igraph_weak_ref_value(void *);
 extern SEXP R_igraph_weighted_adjacency(void *, void *, void *);
 extern SEXP R_igraph_weighted_clique_number(void *, void *);
 extern SEXP R_igraph_weighted_cliques(void *, void *, void *, void *, void *);
-extern SEXP R_igraph_weighted_sparsemat(void *, void *, void *, void *);
 extern SEXP R_igraph_wheel(void *, void *, void *);
 extern SEXP R_igraph_widest_path_widths_dijkstra(void *, void *, void *, void *, void *);
 extern SEXP R_igraph_widest_path_widths_floyd_warshall(void *, void *, void *, void *, void *);
@@ -624,8 +619,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_edge_disjoint_paths",                        (DL_FUNC) &R_igraph_edge_disjoint_paths,                         3},
     {"R_igraph_edges",                                      (DL_FUNC) &R_igraph_edges,                                       2},
     {"R_igraph_eigen_adjacency",                            (DL_FUNC) &R_igraph_eigen_adjacency,                             4},
-    {"R_igraph_eigen_matrix",                               (DL_FUNC) &R_igraph_eigen_matrix,                                7},
-    {"R_igraph_eigen_matrix_symmetric",                     (DL_FUNC) &R_igraph_eigen_matrix_symmetric,                      7},
     {"R_igraph_eigenvector_centrality",                     (DL_FUNC) &R_igraph_eigenvector_centrality,                      5},
     {"R_igraph_empty",                                      (DL_FUNC) &R_igraph_empty,                                       2},
     {"R_igraph_empty_attrs",                                (DL_FUNC) &R_igraph_empty_attrs,                                 2},
@@ -887,8 +880,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_sir",                                        (DL_FUNC) &R_igraph_sir,                                         4},
     {"R_igraph_solve_lsap",                                 (DL_FUNC) &R_igraph_solve_lsap,                                  2},
     {"R_igraph_spanner",                                    (DL_FUNC) &R_igraph_spanner,                                     3},
-    {"R_igraph_sparse_adjacency",                           (DL_FUNC) &R_igraph_sparse_adjacency,                            3},
-    {"R_igraph_sparse_weighted_adjacency",                  (DL_FUNC) &R_igraph_sparse_weighted_adjacency,                   3},
     {"R_igraph_spinglass_community",                        (DL_FUNC) &R_igraph_spinglass_community,                        11},
     {"R_igraph_spinglass_my_community",                     (DL_FUNC) &R_igraph_spinglass_my_community,                      6},
     {"R_igraph_split_join_distance",                        (DL_FUNC) &R_igraph_split_join_distance,                         2},
@@ -945,7 +936,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_weighted_adjacency",                         (DL_FUNC) &R_igraph_weighted_adjacency,                          3},
     {"R_igraph_weighted_clique_number",                     (DL_FUNC) &R_igraph_weighted_clique_number,                      2},
     {"R_igraph_weighted_cliques",                           (DL_FUNC) &R_igraph_weighted_cliques,                            5},
-    {"R_igraph_weighted_sparsemat",                         (DL_FUNC) &R_igraph_weighted_sparsemat,                          4},
     {"R_igraph_wheel",                                      (DL_FUNC) &R_igraph_wheel,                                       3},
     {"R_igraph_widest_path_widths_dijkstra",                (DL_FUNC) &R_igraph_widest_path_widths_dijkstra,                 5},
     {"R_igraph_widest_path_widths_floyd_warshall",          (DL_FUNC) &R_igraph_widest_path_widths_floyd_warshall,           5},

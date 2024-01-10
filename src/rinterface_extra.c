@@ -3172,9 +3172,13 @@ igraph_error_t R_SEXP_to_sparsemat(SEXP pakl, igraph_sparsemat_t *akl) {
   SEXP p=GET_SLOT(pakl, Rf_install("p"));
   SEXP x=GET_SLOT(pakl, Rf_install("x"));
 
+  igraph_vector_int_t ci, cp;
+  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(i, &ci));
+  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(p, &cp));
+
   igraph_sparsemat_view(akl, /*nzmax=*/ GET_LENGTH(x),
                           /*m=*/ INTEGER(Dim)[0], /*n=*/ INTEGER(Dim)[1],
-                          /*p=*/ INTEGER(p), /*i=*/ INTEGER(i),
+                          /*p=*/ VECTOR(cp), /*i=*/ VECTOR(ci),
                           /*x=*/ REAL(x), /*nz=*/ -1);
 
   return IGRAPH_SUCCESS;
