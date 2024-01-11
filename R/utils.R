@@ -35,8 +35,8 @@ do_call <- function(f, ..., .args = list(), .env = parent.frame()) {
 }
 
 add_class <- function(x, class) {
-  if (!is(x, class)) {
-    class(x) <- c(class, class(x))
+  if (!inherits(x, class)) {
+    class(x) <- c(class(x), class)
   }
   x
 }

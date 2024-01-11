@@ -3,6 +3,7 @@
 \docType{package}
 \name{igraph-package}
 \alias{igraph-package}
+\alias{_PACKAGE}
 \alias{igraph}
 \title{The igraph package}
 \description{
@@ -167,4 +168,34 @@ See especially the documentation section. Join the discussion forum at
 \url{https://igraph.discourse.group} if you have questions or comments.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://r.igraph.org/}
+  \item \url{https://igraph.org/}
+  \item \url{https://igraph.discourse.group/}
+  \item Report bugs at \url{https://github.com/igraph/rigraph/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
+
+Authors:
+\itemize{
+  \item Gábor Csárdi \email{csardi.gabor@gmail.com} (\href{https://orcid.org/0000-0001-7098-9676}{ORCID})
+  \item Tamás Nepusz \email{ntamas@gmail.com} (\href{https://orcid.org/0000-0002-1451-338X}{ORCID})
+  \item Vincent Traag (\href{https://orcid.org/0000-0003-3170-3879}{ORCID})
+  \item Szabolcs Horvát \email{szhorvat@gmail.com} (\href{https://orcid.org/0000-0002-3100-523X}{ORCID})
+  \item Fabio Zanini \email{fabio.zanini@unsw.edu.au} (\href{https://orcid.org/0000-0001-7097-8539}{ORCID})
+  \item Daniel Noom
+}
+
+Other contributors:
+\itemize{
+  \item Maëlle Salmon [contributor]
+  \item Chan Zuckerberg Initiative [funder]
+}
+
+}
 \keyword{internal}

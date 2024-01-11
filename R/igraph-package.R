@@ -40,7 +40,6 @@ NULL
 #' @name igraph-package
 #' @keywords internal
 #' @aliases igraph-package igraph
-#' @docType package
 #'
 #' @section Introduction:
 #' The main goals of the igraph library is to provide a set of data types
@@ -184,4 +183,4 @@ NULL
 #'   The igraph homepage is at <https://igraph.org>.
 #'   See especially the documentation section. Join the discussion forum at
 #'   <https://igraph.discourse.group> if you have questions or comments.
-NULL
+"_PACKAGE"

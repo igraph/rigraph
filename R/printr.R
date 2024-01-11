@@ -171,18 +171,3 @@ indent_print <- function(..., .indent = " ", .printer = print) {
 
   invisible(list(...)[[1]])
 }
-
-#' Better printing of R packages
-#'
-#' This package provides better printing of R packages.
-#'
-#' @docType package
-#' @name printr
-NULL
-
-add_class <- function(x, class) {
-  if (!inherits(x, class)) {
-    class(x) <- c(class(x), class)
-  }
-  x
-}
