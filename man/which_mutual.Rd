@@ -11,6 +11,8 @@ which_mutual(graph, eids = E(graph), loops = TRUE)
 
 \item{eids}{Edge sequence, the edges that will be probed. By default is
 includes all edges in the order of their ids.}
+
+\item{loops}{Logical, whether to consider directed self-loops to be mutual.}
 }
 \value{
 A logical vector of the same length as the number of edges supplied.

@@ -1948,6 +1948,11 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
 #'   attribute, but you don't want to use it for community detection. A larger
 #'   edge weight means a stronger connection for this function.
 #' @inheritParams rlang::args_dots_empty
+#' @param mode Logical, whether to consider edge directions for the label propagation,
+#' and if so, in which direction the labels should propagate. Ignored for undirected graphs.
+#' "all" means to ignore edge directions (even in directed graphs).
+#' "out" means to propagate labels along the natural direction of the edges.
+#' "in" means to propagate labels backwards (i.e. from head to tail).
 #' @param initial The initial state. If `NULL`, every vertex will have a
 #'   different label at the beginning. Otherwise it must be a vector with an
 #'   entry for each vertex. Non-negative values denote different labels, negative
