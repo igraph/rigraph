@@ -490,10 +490,8 @@ get.edges <- function(graph, es) {
 #' @param error Logical scalar, whether to report an error if an edge is not
 #'   found in the graph. If `FALSE`, then no error is reported, and zero is
 #'   returned for the non-existant edge(s).
-#' @param multi Logical scalar, whether to handle multiple edges properly. If
-#'   `FALSE`, and a pair of vertices are given twice (or more), then always
-#'   the same edge id is reported back for them. If `TRUE`, then the edge
-#'   ids of multiple edges are correctly reported.
+#' @param multi
+#'   `r lifecycle::badge("deprecated")`
 #' @return A numeric vector of edge ids, one for each pair of input vertices.
 #'   If there is no edge in the input graph for a given pair of vertices, then
 #'   zero is reported. (If the `error` argument is `FALSE`.)
@@ -510,22 +508,28 @@ get.edges <- function(graph, es) {
 #' ## non-existant edge
 #' get.edge.ids(g, c(2, 1, 1, 4, 5, 4))
 #'
-#' ## multiple edges
-#' ## multi = FALSE, a single edge id is returned,
+#' ## For multiple edges, a single edge id is returned,
 #' ## as many times as corresponding pairs in the vertex series.
 #' g <- make_graph(rep(c(1, 2), 5))
-#' eis <- get.edge.ids(g, c(1, 2, 1, 2), multi = FALSE)
+#' eis <- get.edge.ids(g, c(1, 2, 1, 2))
 #' eis
 #' E(g)[eis]
 #'
-#' ## multi = TRUE, as many different edges, if any,
-#' ## are returned as pairs in the vertex series.
-#' eim <- get.edge.ids(g, c(1, 2, 1, 2, 1, 2), multi = TRUE)
-#' eim
-#' E(g)[eim]
-#'
-get.edge.ids <- function(graph, vp, directed = TRUE, error = FALSE, multi = FALSE) {
+get.edge.ids <- function(
+    graph,
+    vp,
+    directed = TRUE,
+    error = FALSE,
+    multi = FALSE) {
   ensure_igraph(graph)
+
+  if (lifecycle::is_present(multi)) {
+    if (isTRUE(multi)) {
+      lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
+    } else {
+      lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
+    }
+  }
 
   on.exit(.Call(R_igraph_finalizer))
   .Call(
