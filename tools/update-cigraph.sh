@@ -18,4 +18,4 @@ rm -rf src/vendor/cigraph/.git
 
 rm -rf src/vendor/cigraph/.github src/vendor/cigraph/doc src/vendor/cigraph/examples src/vendor/cigraph/fuzzing src/vendor/cigraph/tests src/vendor/cigraph/tools
 git add src/vendor/cigraph
-git commit -m "Update vendored igraph/C to igraph/igraph@${version}"
+git commit -m "chore: Update vendored igraph/C to igraph/igraph@${version}"
