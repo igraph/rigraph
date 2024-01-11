@@ -104,7 +104,6 @@ reference:
 - contents:
   - head_print
   - indent_print
-  - printr
   - has_concept("print")
   - has_concept("printer callbacks")
 - subtitle: Latent position vector samplers
