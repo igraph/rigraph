@@ -248,6 +248,7 @@ console <- function() {
   tcltk::tcl("update", "idletasks")
 }
 
+#' @exportS3Method NULL
 close.igraphconsole <- function(con, ...) {
   invisible()
 }
