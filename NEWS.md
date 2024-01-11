@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9024
+
+## Bug fixes
+
+  - Temporary remove functions with sparse matrices (#1093).
+
+
 # igraph 1.6.0.9023
 
 ## Features
