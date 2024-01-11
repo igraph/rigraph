@@ -55,19 +55,19 @@ Other functions for manipulating graph structure:
 \code{\link{contract}()},
 \code{\link{delete_edges}()},
 \code{\link{delete_vertices}()},
-\code{\link{difference.igraph}()},
 \code{\link{difference}()},
+\code{\link{difference.igraph}()},
 \code{\link{disjoint_union}()},
 \code{\link{edge}()},
 \code{\link{igraph-minus}},
-\code{\link{intersection.igraph}()},
 \code{\link{intersection}()},
+\code{\link{intersection.igraph}()},
 \code{\link{permute}()},
 \code{\link{rep.igraph}()},
 \code{\link{reverse_edges}()},
 \code{\link{simplify}()},
-\code{\link{union.igraph}()},
 \code{\link{union}()},
+\code{\link{union.igraph}()},
 \code{\link{vertex}()}
 }
 \concept{functions for manipulating graph structure}

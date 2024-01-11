@@ -29,8 +29,8 @@ Other structural queries:
 \code{\link{get.edge.ids}()},
 \code{\link{gorder}()},
 \code{\link{gsize}()},
-\code{\link{incident_edges}()},
 \code{\link{incident}()},
+\code{\link{incident_edges}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}
