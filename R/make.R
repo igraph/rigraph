@@ -14,11 +14,15 @@ graph <- function(edges, ..., n = max(edges), isolates = NULL, directed = TRUE, 
   if (!missing(dir) && missing(directed)) {
    directed <- dir
   }
+  current_call <- rlang::current_call()
+  current_args <- rlang::call_args(current_call)
+  current_args <- lapply(current_args, rlang::eval_tidy)
 
   if (missing(simplify)) {
-    make_graph(edges = edges, n = n, isolates = isolates, directed = directed, ...)
+    rlang::exec("make_graph", !!!current_args)
   } else {
-    make_graph(edges = edges, n = n, isolates = isolates, directed = directed, simplify = simplify, ...)
+    current_args <- c(simplify = simplify, !!!current_args)
+    rlang::exec("make_graph", current_args)
   }
 } # nocov end
 
