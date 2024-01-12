@@ -1290,6 +1290,7 @@ cluster_spinglass <- function(graph, weights = NULL, vertex = NULL, spins = 25,
 #' @param resolution The resolution parameter to use. Higher
 #'   resolutions lead to more smaller communities, while lower resolutions lead
 #'   to fewer larger communities.
+#' @param resolution_parameter  `r lifecycle::badge("superseded")` Use `resolution` instead.
 #' @param beta Parameter affecting the randomness in the Leiden algorithm.
 #'   This affects only the refinement step of the algorithm.
 #' @param initial_membership If provided, the Leiden algorithm
