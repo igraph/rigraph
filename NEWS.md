@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9025
+
+## Chore
+
+  - Document.
+
+  - Update revdepcheck results.
+
+  - Bump roxygen2 version (#1100).
+
+  - Remove roxygen2 warnings (#1099).
+
+  - Use Conventional Commits in upgrade script.
+
+  - Update vendored igraph/C to igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe.
+
+## Documentation
+
+  - Add missing param docs (#1005).
+
+## Uncategorized
+
+  - Fixes for Makevars.in for unix (revert accidental file updates) (#1092).
+
+
 # igraph 1.6.0.9024
 
 ## Bug fixes
