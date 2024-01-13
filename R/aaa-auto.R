@@ -969,7 +969,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", V(graph))
   }
   res
@@ -2297,25 +2297,6 @@ largest_cliques_impl <- function(graph) {
   res
 }
 
-maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0, max.size=0, details=FALSE) {
-  # Argument checks
-  ensure_igraph(graph)
-  subset <- as_igraph_vs(graph, subset)
-  min.size <- as.numeric(min.size)
-  max.size <- as.numeric(max.size)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset-1, outfile, min.size, max.size)
-  if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-  if (!details) {
-    res <- res$res
-  }
-  res
-}
-
 maximal_cliques_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   ensure_igraph(graph)
@@ -3595,30 +3576,6 @@ dim_select_impl <- function(sv) {
   res
 }
 
-almost_equals_impl <- function(a, b, eps) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_almost_equals, a, b, eps)
-
-
-  res
-}
-
-cmp_epsilon_impl <- function(a, b, eps) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_cmp_epsilon, a, b, eps)
-
-
-  res
-}
-
 solve_lsap_impl <- function(c, n) {
   # Argument checks
   c[] <- as.numeric(c)
@@ -3918,41 +3875,6 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-progress_impl <- function(message, percent) {
-  # Argument checks
-  percent <- as.numeric(percent)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_progress, message, percent)
-
-
-  res
-}
-
-status_impl <- function(message) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_status, message)
-
-
-  res
-}
-
-strerror_impl <- function(igraph.errno) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_strerror, igraph.errno)
-
-
-  res
-}
 
 vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks

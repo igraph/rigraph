@@ -6318,56 +6318,6 @@ SEXP R_igraph_largest_cliques(SEXP graph) {
 }
 
 /*-------------------------------------------/
-/ igraph_maximal_cliques_subset              /
-/-------------------------------------------*/
-SEXP R_igraph_maximal_cliques_subset(SEXP graph, SEXP subset, SEXP outfile, SEXP min_size, SEXP max_size) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  igraph_vector_int_t c_subset;
-  igraph_vector_int_list_t c_res;
-  igraph_integer_t c_no;
-  FILE* c_outfile;
-  igraph_integer_t c_min_size;
-  igraph_integer_t c_max_size;
-  SEXP res;
-  SEXP no;
-
-  SEXP r_result, r_names;
-                                        /* Convert input */
-  R_SEXP_to_igraph(graph, &c_graph);
-  R_SEXP_to_vector_int_copy(subset, &c_subset);
-  if (0 != igraph_vector_int_list_init(&c_res, 0)) {
-    igraph_error("", __FILE__, __LINE__, IGRAPH_ENOMEM);
-  }
-  IGRAPH_FINALLY(igraph_vector_int_list_destroy, &c_res);
-  c_no=0;
-  IGRAPH_R_CHECK_INT(min_size);
-  c_min_size = (igraph_integer_t) REAL(min_size)[0];
-  IGRAPH_R_CHECK_INT(max_size);
-  c_max_size = (igraph_integer_t) REAL(max_size)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_maximal_cliques_subset(&c_graph, &c_subset, &c_res, &c_no, c_outfile, c_min_size, c_max_size));
-
-                                        /* Convert output */
-  PROTECT(r_result=NEW_LIST(2));
-  PROTECT(r_names=NEW_CHARACTER(2));
-  PROTECT(res=R_igraph_vector_int_list_to_SEXPp1(&c_res));
-  igraph_vector_int_list_destroy(&c_res);
-  IGRAPH_FINALLY_CLEAN(1);
-  PROTECT(no=NEW_NUMERIC(1));
-  REAL(no)[0]=(double) c_no;
-  SET_VECTOR_ELT(r_result, 0, res);
-  SET_VECTOR_ELT(r_result, 1, no);
-  SET_STRING_ELT(r_names, 0, Rf_mkChar("res"));
-  SET_STRING_ELT(r_names, 1, Rf_mkChar("no"));
-  SET_NAMES(r_result, r_names);
-  UNPROTECT(3);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_maximal_cliques_hist                /
 /-------------------------------------------*/
 SEXP R_igraph_maximal_cliques_hist(SEXP graph, SEXP min_size, SEXP max_size) {
@@ -8414,37 +8364,6 @@ SEXP R_igraph_read_graph_dimacs_flow(SEXP instream, SEXP directed) {
   SET_STRING_ELT(r_names, 5, Rf_mkChar("capacity"));
   SET_NAMES(r_result, r_names);
   UNPROTECT(7);
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_write_graph_dimacs_flow             /
-/-------------------------------------------*/
-SEXP R_igraph_write_graph_dimacs_flow(SEXP graph, SEXP outstream, SEXP source, SEXP target, SEXP capacity) {
-                                        /* Declarations */
-  igraph_t c_graph;
-  FILE* c_outstream;
-  igraph_integer_t c_source;
-  igraph_integer_t c_target;
-  igraph_vector_t c_capacity;
-
-  SEXP r_result;
-                                        /* Convert input */
-  R_SEXP_to_igraph_copy(graph, &c_graph);
-  IGRAPH_FINALLY(igraph_destroy, &c_graph);
-  c_source = (igraph_integer_t) REAL(source)[0];
-  c_target = (igraph_integer_t) REAL(target)[0];
-  R_SEXP_to_vector(capacity, &c_capacity);
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_write_graph_dimacs_flow(&c_graph, c_outstream, c_source, c_target, &c_capacity));
-
-                                        /* Convert output */
-  PROTECT(graph=R_igraph_to_SEXP(&c_graph));
-  IGRAPH_I_DESTROY(&c_graph);
-  IGRAPH_FINALLY_CLEAN(1);
-  r_result = graph;
 
   UNPROTECT(1);
   return(r_result);
@@ -10870,52 +10789,6 @@ SEXP R_igraph_dim_select(SEXP sv) {
   return(r_result);
 }
 
-/*-------------------------------------------/
-/ igraph_almost_equals                       /
-/-------------------------------------------*/
-SEXP R_igraph_almost_equals(SEXP a, SEXP b, SEXP eps) {
-                                        /* Declarations */
-  double c_a;
-  double c_b;
-  double c_eps;
-  igraph_bool_t c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  c_result=igraph_almost_equals(c_a, c_b, c_eps);
-
-                                        /* Convert output */
-
-  PROTECT(r_result=NEW_LOGICAL(1));
-  LOGICAL(r_result)[0]=c_result;
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_cmp_epsilon                         /
-/-------------------------------------------*/
-SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
-                                        /* Declarations */
-  double c_a;
-  double c_b;
-  double c_eps;
-  int c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  c_result=igraph_cmp_epsilon(c_a, c_b, c_eps);
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
 
 /*-------------------------------------------/
 / igraph_solve_lsap                          /
@@ -11587,73 +11460,6 @@ SEXP R_igraph_has_attribute_table() {
 }
 
 /*-------------------------------------------/
-/ igraph_progress                            /
-/-------------------------------------------*/
-SEXP R_igraph_progress(SEXP message, SEXP percent) {
-                                        /* Declarations */
-  const char* c_message;
-  igraph_real_t c_percent;
-
-  igraph_error_t c_result;
-  SEXP r_result;
-                                        /* Convert input */
-  IGRAPH_R_CHECK_REAL(percent);
-  c_percent = REAL(percent)[0];
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_progress(c_message, c_percent, 0));
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_status                              /
-/-------------------------------------------*/
-SEXP R_igraph_status(SEXP message) {
-                                        /* Declarations */
-  const char* c_message;
-
-  igraph_error_t c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  IGRAPH_R_CHECK(igraph_status(c_message, 0));
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
-/ igraph_strerror                            /
-/-------------------------------------------*/
-SEXP R_igraph_strerror(SEXP igraph_errno) {
-                                        /* Declarations */
-  igraph_error_t c_igraph_errno;
-  const char* c_result;
-  SEXP r_result;
-                                        /* Convert input */
-
-                                        /* Call igraph */
-  c_result=igraph_strerror(c_igraph_errno);
-
-                                        /* Convert output */
-
-
-
-  UNPROTECT(1);
-  return(r_result);
-}
-
-/*-------------------------------------------/
 / igraph_expand_path_to_pairs                /
 /-------------------------------------------*/
 SEXP R_igraph_expand_path_to_pairs(SEXP path) {
@@ -11758,6 +11564,13 @@ SEXP R_igraph_version() {
                                         /* Convert output */
   PROTECT(r_result=NEW_LIST(4));
   PROTECT(r_names=NEW_CHARACTER(4));
+  PROTECT(version_string = Rf_mkCharLenCE(c_version_string, strlen(c_version_string), CE_UTF8));
+  PROTECT(major=NEW_INTEGER(1));
+  INTEGER(major)[0]=(int) c_major;
+  PROTECT(minor=NEW_INTEGER(1));
+  INTEGER(minor)[0]=(int) c_minor;
+  PROTECT(subminor=NEW_INTEGER(1));
+  INTEGER(subminor)[0]=(int) c_subminor;
   SET_VECTOR_ELT(r_result, 0, version_string);
   SET_VECTOR_ELT(r_result, 1, major);
   SET_VECTOR_ELT(r_result, 2, minor);
