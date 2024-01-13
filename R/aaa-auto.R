@@ -2716,17 +2716,6 @@ to_directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acy
   res
 }
 
-read_graph_dimacs_flow_impl <- function(instream, directed=TRUE) {
-  # Argument checks
-  directed <- as.logical(directed)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_read_graph_dimacs_flow, instream, directed)
-
-  res
-}
-
 dyad_census_impl <- function(graph) {
   # Argument checks
   ensure_igraph(graph)

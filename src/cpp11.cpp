@@ -362,7 +362,6 @@ extern SEXP R_igraph_random_sample(void *, void *, void *);
 extern SEXP R_igraph_random_spanning_tree(void *, void *);
 extern SEXP R_igraph_random_walk(void *, void *, void *, void *, void *, void *);
 extern SEXP R_igraph_read_graph_dimacs(void *, void *);
-extern SEXP R_igraph_read_graph_dimacs_flow(void *, void *);
 extern SEXP R_igraph_read_graph_dl(void *, void *);
 extern SEXP R_igraph_read_graph_edgelist(void *, void *, void *);
 extern SEXP R_igraph_read_graph_gml(void *);
@@ -823,7 +822,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"R_igraph_random_spanning_tree",                       (DL_FUNC) &R_igraph_random_spanning_tree,                        2},
     {"R_igraph_random_walk",                                (DL_FUNC) &R_igraph_random_walk,                                 6},
     {"R_igraph_read_graph_dimacs",                          (DL_FUNC) &R_igraph_read_graph_dimacs,                           2},
-    {"R_igraph_read_graph_dimacs_flow",                     (DL_FUNC) &R_igraph_read_graph_dimacs_flow,                      2},
     {"R_igraph_read_graph_dl",                              (DL_FUNC) &R_igraph_read_graph_dl,                               2},
     {"R_igraph_read_graph_edgelist",                        (DL_FUNC) &R_igraph_read_graph_edgelist,                         3},
     {"R_igraph_read_graph_gml",                             (DL_FUNC) &R_igraph_read_graph_gml,                              1},
