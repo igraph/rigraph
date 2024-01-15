@@ -34,51 +34,6 @@ get.stochastic <- function(graph, column.wise = FALSE, sparse = igraph_opt("spar
 #
 ###################################################################
 
-
-#' Spectral Coarse Graining
-#'
-#' Functions to perform the Spectral Coarse Graining (SCG) of matrices and
-#' graphs.
-#'
-#' @name scg-method
-#' @family scg
-#' @section Introduction: The SCG functions provide a framework, called
-#' Spectral Coarse Graining (SCG), for reducing large graphs while preserving
-#' their *spectral-related features*, that is features closely related
-#' with the eigenvalues and eigenvectors of a graph matrix (which for now can
-#' be the adjacency, the stochastic, or the Laplacian matrix).
-#'
-#' Common examples of such features comprise the first-passage-time of random
-#' walkers on Markovian graphs, thermodynamic properties of lattice models in
-#' statistical physics (e.g. Ising model), and the epidemic threshold of
-#' epidemic network models (SIR and SIS models).
-#'
-#' SCG differs from traditional clustering schemes by producing a
-#' *coarse-grained graph* (not just a partition of the vertices),
-#' representative of the original one. As shown in \[1\], Principal Component
-#' Analysis can be viewed as a particular SCG, called *exact SCG*, where
-#' the matrix to be coarse-grained is the covariance matrix of some data set.
-#'
-#' SCG should be of interest to practitioners of various fields dealing with
-#' problems where matrix eigenpairs play an important role, as for instance is
-#' the case of dynamical processes on networks.
-#' @author David Morton de Lachapelle.
-#' @references D. Morton de Lachapelle, D. Gfeller, and P. De Los Rios,
-#' Shrinking Matrices while Preserving their Eigenpairs with Application to the
-#' Spectral Coarse Graining of Graphs. Submitted to *SIAM Journal on
-#' Matrix Analysis and Applications*, 2008.
-#' <https://www.epfl.ch/labs/lbs/wp-content/uploads/2018/07/scg_math_paper_dml_dg_pdl.pdf>
-#'
-#' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining and Synchronization
-#' in Oscillator Networks. *Physical Review Letters*, **100**(17),
-#' 2008.  <https://arxiv.org/abs/0708.2055>
-#'
-#' D. Gfeller, and P. De Los Rios, Spectral Coarse Graining of Complex
-#' Networks, *Physical Review Letters*, **99**(3), 2007.
-#' <https://arxiv.org/abs/0706.0812>
-#' @keywords graphs
-NULL
-
 #' Stochastic matrix of a graph
 #'
 #' Retrieves the stochastic matrix of a graph of class `igraph`.
@@ -100,7 +55,6 @@ NULL
 #'   `sparse` argument was `TRUE`.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
 #' @seealso [as_adj()]
-#' @family scg
 #' @export
 #' @keywords graphs
 #' @examples

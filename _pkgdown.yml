@@ -193,9 +193,6 @@ reference:
 - title: Connected components
 - contents:
   - has_concept("components")
-- title: Spectral coarse graining
-- contents:
-  - has_concept("scg")
 - title: Spectral embedding
 - contents:
   - has_concept("embedding")

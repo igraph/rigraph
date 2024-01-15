@@ -51,12 +51,8 @@ max(abs(rowSums(W)) - 1)
 }
 \seealso{
 \code{\link[=as_adj]{as_adj()}}
-
-Spectral Coarse Graining
-\code{\link{scg-method}}
 }
 \author{
 Gabor Csardi \email{csardi.gabor@gmail.com}
 }
-\concept{scg}
 \keyword{graphs}
