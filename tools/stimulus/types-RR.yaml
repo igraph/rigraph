@@ -20,7 +20,6 @@ BOOLEAN:
     DEFAULT:
         'False': 'FALSE'
         'True': 'TRUE'
-        'ONCE': '"once"'
     INCONV:
         IN: '%I% <- as.logical(%I%)'
 
