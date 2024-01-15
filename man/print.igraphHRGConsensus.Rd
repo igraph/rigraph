@@ -28,9 +28,9 @@ edges), and it has two subgroups, \code{g1} and \code{g2}.
 Other hierarchical random graph functions: 
 \code{\link{consensus_tree}()},
 \code{\link{fit_hrg}()},
-\code{\link{hrg}()},
 \code{\link{hrg-methods}},
 \code{\link{hrg_tree}()},
+\code{\link{hrg}()},
 \code{\link{predict_edges}()},
 \code{\link{print.igraphHRG}()},
 \code{\link{sample_hrg}()}

@@ -38,12 +38,12 @@ centr_eigen(g, directed = FALSE)$centralization
 \seealso{
 Other centralization related: 
 \code{\link{centr_betw_tmax}()},
-\code{\link{centr_clo}()},
 \code{\link{centr_clo_tmax}()},
-\code{\link{centr_degree}()},
+\code{\link{centr_clo}()},
 \code{\link{centr_degree_tmax}()},
-\code{\link{centr_eigen}()},
+\code{\link{centr_degree}()},
 \code{\link{centr_eigen_tmax}()},
+\code{\link{centr_eigen}()},
 \code{\link{centralize}()}
 }
 \concept{centralization related}

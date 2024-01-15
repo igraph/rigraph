@@ -3,6 +3,7 @@
 \docType{package}
 \name{igraph-package}
 \alias{igraph-package}
+\alias{_PACKAGE}
 \alias{igraph}
 \title{The igraph package}
 \description{
