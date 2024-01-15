@@ -232,12 +232,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: apt update
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libarpack2-dev
-        shell: bash
-
       - name: run sanitizer
         uses: addnab/docker-run-action@v3
         with:
