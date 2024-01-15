@@ -30,8 +30,8 @@ Other structural queries:
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident}()},
 \code{\link{incident_edges}()},
+\code{\link{incident}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()}
 }
