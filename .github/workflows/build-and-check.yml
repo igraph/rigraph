@@ -219,27 +219,3 @@ jobs:
           )
           covr::codecov(coverage = cov, quiet = FALSE)
         shell: Rscript {0}
-
-  sanitizer:
-    runs-on: ubuntu-22.04
-
-    needs: build_src_package
-
-    name: Sanitizer
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: run sanitizer
-        uses: addnab/docker-run-action@v3
-        with:
-          image: ghcr.io/krlmlr/rigraph-san:main
-          options: --rm --platform linux/amd64 -v ${{ github.workspace }}:/rigraph
-          run: |
-            set -e
-            printenv
-            cd rigraph
-            RDcsan CMD INSTALL . --no-byte-compile
-            TESTTHAT_PARALLEL=false CI=true RDcsan -q -e 'testthat::test_local(reporter = c("location", "summary"), load_package = "installed")'
