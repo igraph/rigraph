@@ -477,3 +477,7 @@ OPTIMALITY:
         MINIMUM: c("minimum", "maximum")
         MAXIMUM: c("maximum", "minimum")
     INCONV: '%I% <- switch(igraph.match.arg(%I%), "minimum"=0L, "maximum"=1L)'
+
+LOOPS:
+    DEFAULT:
+        ONCE: '"once"'
