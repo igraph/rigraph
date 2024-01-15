@@ -9,7 +9,7 @@
 #' @importFrom rlang check_installed
 #' @importFrom rlang inject
 #' @importFrom rlang warn
-#' @importFrom rlang `%||%`
+#' @importFrom rlang %||%
 ## usethis namespace: end
 NULL
 
