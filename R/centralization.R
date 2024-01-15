@@ -265,8 +265,7 @@ centr_degree <- centralization_degree_impl
 #' @param mode This is the same as the `mode` argument of
 #'   `degree()`.
 #' @param loops Logical scalar, whether to consider loops edges when
-#'   calculating the degree. Currently the default value is `FALSE`,
-#'   but this argument will be required from igraph 1.4.0.
+#'   calculating the degree.
 #' @return Real scalar, the theoretical maximum (unnormalized) graph degree
 #'   centrality score for graphs with given order and other parameters.
 #'
@@ -283,11 +282,16 @@ centr_degree <- centralization_degree_impl
 centr_degree_tmax <- function(graph = NULL,
                               nodes = 0,
                               mode = c("all", "out", "in", "total"),
-                              loops = FALSE) {
-  # Compatibility check with pre-igraph 1.3.0
-  if (missing(loops)) {
-    warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
+                              loops) {
+  if (!lifecycle::is_present(loops)) {
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = "centr_degree_tmax(loops = 'must be explicit')",
+      details = "Default value (`FALSE`) will be dropped in next release, add an explicit value for the loops argument."
+    )
+    loops <- FALSE
   }
+
   # Argument checks
   ensure_igraph(graph, optional = TRUE)
 
