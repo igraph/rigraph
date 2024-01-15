@@ -74,7 +74,7 @@ void R_check_int_scalar(SEXP value)
 {
   if (Rf_xlength(value) != 1) {
     igraph_errorf("Expecting a scalar integer but received a vector of length %lu.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, (long int) Rf_xlength(value));
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (unsigned long) Rf_xlength(value));
   }
   if (((igraph_integer_t) REAL(value)[0]) != REAL(value)[0]) {
     igraph_errorf("The value %.17g is not representable as an integer.",
@@ -86,7 +86,7 @@ void R_check_real_scalar(SEXP value)
 {
   if (Rf_xlength(value) != 1) {
     igraph_errorf("Expecting a scalar real but received a vector of length %lu.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, (long int) Rf_xlength(value));
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (unsigned long) Rf_xlength(value));
   }
 }
 
@@ -94,7 +94,7 @@ void R_check_bool_scalar(SEXP value)
 {
   if (Rf_xlength(value) != 1) {
     igraph_errorf("Expecting a scalar logical but received a vector of length %lu.",
-                    __FILE__, __LINE__, IGRAPH_EINVAL, (long int) Rf_xlength(value));
+                    __FILE__, __LINE__, IGRAPH_EINVAL, (unsigned long) Rf_xlength(value));
   }
 }
 
