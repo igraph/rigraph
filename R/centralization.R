@@ -280,7 +280,10 @@ centr_degree <- centralization_degree_impl
 #' centr_degree(g, normalized = FALSE)$centralization %>%
 #'   `/`(centr_degree_tmax(g, loops = FALSE))
 #' centr_degree(g, normalized = TRUE)$centralization
-centr_degree_tmax <- function(graph = NULL, nodes = 0, mode = c("all", "out", "in", "total"), loops = FALSE) {
+centr_degree_tmax <- function(graph = NULL,
+                              nodes = 0,
+                              mode = c("all", "out", "in", "total"),
+                              loops = FALSE) {
   # Compatibility check with pre-igraph 1.3.0
   if (missing(loops)) {
     warning("centr_degree_tmax() will require an explicit value for its 'loops' argument from igraph 1.4.0. Assuming FALSE now.")
