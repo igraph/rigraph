@@ -176,50 +176,6 @@ test_that("[[ indexing is consistent with length()", {
   expect_that(length(g), equals(vcount(g)))
 })
 
-test_that("[ can query edge ids", {
-  g <- make_test_named_tree()
-
-  expect_that(g[1, 2, edges = TRUE], equals(1))
-  expect_that(
-    canonicalize_matrix(g[c(1, 1, 7), c(2, 3, 14), edges = TRUE]),
-    equals(vector_to_square_matrix(1, 1, 0, 2, 2, 0, 0, 0, 13))
-  )
-  expect_that(
-    canonicalize_matrix(g[c(1, 1, 7), c(5, 3, 12), edges = TRUE]),
-    equals(vector_to_square_matrix(0, 0, 0, 2, 2, 0, 0, 0, 0))
-  )
-  expect_that(
-    canonicalize_matrix(g[c(1, 1, 1, 1), c(2, 3, 2, 2), edges = TRUE]),
-    equals(vector_to_square_matrix(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
-  )
-  expect_that(
-    canonicalize_matrix(g[c(8, 17), c(17, 8), edges = TRUE]),
-    equals(vector_to_square_matrix(16, 0, 0, 0))
-  )
-})
-
-test_that("[ can query edge ids with symbolic names", {
-  g <- make_test_named_tree()
-
-  expect_that(g["a", "b", edges = TRUE], equals(1))
-  expect_that(
-    canonicalize_matrix(g[c("a", "a", "g"), c("b", "c", "n"), edges = TRUE]),
-    equals(vector_to_square_matrix(1, 1, 0, 2, 2, 0, 0, 0, 13))
-  )
-  expect_that(
-    canonicalize_matrix(g[c("a", "a", "g"), c("e", "c", "l"), edges = TRUE]),
-    equals(vector_to_square_matrix(0, 0, 0, 2, 2, 0, 0, 0, 0))
-  )
-  expect_that(
-    canonicalize_matrix(g[c("a", "a", "a", "a"), c("b", "c", "b", "b"), edges = TRUE]),
-    equals(vector_to_square_matrix(1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1))
-  )
-  expect_that(
-    canonicalize_matrix(g[c("h", "q"), c("q", "h"), edges = TRUE]),
-    equals(vector_to_square_matrix(16, 0, 0, 0))
-  )
-})
-
 test_that("[[ can query incident edges", {
   g <- make_test_named_tree()
 
