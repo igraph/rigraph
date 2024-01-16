@@ -1868,8 +1868,8 @@ cluster_leading_eigen <- function(graph, steps = -1, weights = NULL,
                                   env = parent.frame()) {
 
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "cluster_leading_eigen(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
@@ -1986,8 +1986,8 @@ cluster_label_prop <- function(
     initial = NULL,
     fixed = NULL) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "cluster_label_prop(... = )",
       details = "Arguments `initial` and `fixed` must be named."
     )

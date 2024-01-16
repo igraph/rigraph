@@ -10,8 +10,8 @@
 #' @inheritParams ape::as.phylo
 #' @keywords internal
 as_phylo <- function(x, ...) {
-  lifecycle::deprecate_soft(
-    "1.5.0",
+  lifecycle::deprecate_warn(
+    "2.0.0",
     "ape::as.phylo()"
   )
   check_installed("ape", "for using `as.phylo()`")

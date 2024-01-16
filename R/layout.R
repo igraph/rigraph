@@ -1687,8 +1687,8 @@ layout_with_mds <- function(graph, dist = NULL, dim = 2,
                             options = arpack_defaults()) {
 
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "layout_with_mds(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )

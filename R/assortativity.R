@@ -148,8 +148,8 @@ assortativity <- function(graph,
                           types1 = NULL,
                           types2 = NULL) {
   if (...length() > 0) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "assortativity(... =)",
       details = "Arguments `values` and `values.in` must be named."
     )
@@ -170,8 +170,8 @@ assortativity <- function(graph,
   }
 
   if (missing(values)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "assortativity(types1 =)",
       "assortativity(values =)"
     )
@@ -179,8 +179,8 @@ assortativity <- function(graph,
   }
 
   if (!is.null(types2)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "assortativity(types2 =)",
       "assortativity(values.in =)"
     )

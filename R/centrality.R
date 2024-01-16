@@ -196,8 +196,8 @@ alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, 
 #' @keywords internal
 #' @export
 estimate_betweenness <- function(graph, vids = V(graph), directed = TRUE, cutoff, weights = NULL) {
-  lifecycle::deprecate_soft(
-    "1.6.0",
+  lifecycle::deprecate_warn(
+    "2.0.0",
     "estimate_betweenness()",
     "betweenness()",
     details = "with the cutoff argument."
@@ -352,8 +352,8 @@ edge_betweenness <- function(graph, e = E(graph),
 #' @export
 estimate_edge_betweenness <- function(graph, e = E(graph),
                                       directed = TRUE, cutoff, weights = NULL) {
-    lifecycle::deprecate_soft(
-    "1.6.0",
+    lifecycle::deprecate_warn(
+    "2.0.0",
     "estimate_edge_betweenness()",
     "edge_betweenness()",
     details = "with the cutoff argument."
@@ -468,8 +468,8 @@ closeness <- function(graph, vids = V(graph),
 #' @export
 estimate_closeness <- function(graph, vids = V(graph), mode = c("out", "in", "all", "total"), cutoff, weights = NULL, normalized = FALSE) {
 
-  lifecycle::deprecate_soft(
-    "1.6.0",
+  lifecycle::deprecate_warn(
+    "2.0.0",
     "estimate_closeness()",
     "closeness()",
     details = "with the cutoff argument."
@@ -683,8 +683,8 @@ arpack <- function(func, extra = NULL, sym = FALSE, options = arpack_defaults(),
                    env = parent.frame(), complex = !sym) {
 
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "arpack(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
@@ -870,8 +870,8 @@ subgraph_centrality <- function(graph, diag = FALSE) {
 #' @export
 spectrum <- function(graph, algorithm=c("arpack", "auto", "lapack", "comp_auto", "comp_lapack", "comp_arpack"), which=list(), options=arpack_defaults()) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "spectrum(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
@@ -983,8 +983,8 @@ eigen_centrality <- function(graph,
                              options = arpack_defaults()) {
 
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "eigen_centrality(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
@@ -1135,8 +1135,8 @@ diversity <- diversity_impl
 hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
 
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "hub_score(options = 'must be a list')",
       details = c("`arpack_defaults()` is now a function, use `options = arpack_defaults()` instead of `options = arpack_defaults`.")
     )
@@ -1155,8 +1155,8 @@ hub_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()
 #' @export
 authority_score <- function(graph, scale=TRUE, weights=NULL, options=arpack_defaults()) {
   if (is.function(options)) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       I("arpack_defaults"),
       "arpack_defaults()",
       details = c("So the function arpack_defaults(), not an object called arpack_defaults.")

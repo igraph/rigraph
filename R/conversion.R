@@ -1002,7 +1002,7 @@ as_biadjacency_matrix <- function(graph, types = NULL, attr = NULL,
 #' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 as_incidence_matrix <- function(...) { # nocov start
-   lifecycle::deprecate_soft("1.6.0", "as_incidence_matrix()", "as_biadjacency_matrix()")
+   lifecycle::deprecate_warn("2.0.0", "as_incidence_matrix()", "as_biadjacency_matrix()")
    as_biadjacency_matrix(...)
 } # nocov end
 #' @rdname graph_from_data_frame

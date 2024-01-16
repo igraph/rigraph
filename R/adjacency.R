@@ -405,8 +405,8 @@ graph_from_adjacency_matrix <- function(adjmatrix,
   mode <- igraph.match.arg(mode)
 
   if (!is.matrix(adjmatrix) && !inherits(adjmatrix, "Matrix")) {
-    lifecycle::deprecate_soft(
-      "1.6.0",
+    lifecycle::deprecate_warn(
+      "2.0.0",
       "graph_from_adjacency_matrix(adjmatrix = 'must be a matrix')"
     )
     adjmatrix <- as.matrix(1)
@@ -414,8 +414,8 @@ graph_from_adjacency_matrix <- function(adjmatrix,
 
   if (mode == "undirected") {
     if (!is_symmetric(adjmatrix)) {
-      lifecycle::deprecate_soft(
-        "1.6.0",
+      lifecycle::deprecate_warn(
+        "2.0.0",
         "graph_from_adjacency_matrix(adjmatrix = 'must be symmetric with mode = \"undirected\"')",
         details = 'Use mode = "max" to achieve the original behavior.'
       )
