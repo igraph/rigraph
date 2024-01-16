@@ -1574,7 +1574,7 @@ full_bipartite_graph <- function(...) constructor_spec(make_full_bipartite_graph
 #' `is_bipartite()` checks whether the graph is bipartite or not. It just
 #' checks whether the graph has a vertex attribute called `type`.
 #'
-#' @aliases graph.bipartite is.bipartite
+#' @aliases graph.bipartite
 #' @param types A vector giving the vertex types. It will be coerced into
 #'   boolean. The length of the vector gives the number of vertices in the graph.
 #'   When the vector is a named vector, the names will be attached to the graph
