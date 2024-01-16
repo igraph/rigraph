@@ -70,7 +70,7 @@
 <span>  graph <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  nodes <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"out"</span>, <span class="st">"in"</span>, <span class="st">"total"</span><span class="op">)</span>,</span>
-<span>  loops <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="va">loops</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -92,8 +92,7 @@
 
 <dt>loops</dt>
 <dd><p>Logical scalar, whether to consider loops edges when
-calculating the degree. Currently the default value is <code>FALSE</code>,
-but this argument will be required from igraph 1.4.0.</p></dd>
+calculating the degree.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -106,13 +105,13 @@ centrality score for graphs with given order and other parameters.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other centralization related: 
-<code><a href="centr_betw.html">centr_betw</a>()</code>,
 <code><a href="centr_betw_tmax.html">centr_betw_tmax</a>()</code>,
-<code><a href="centr_clo.html">centr_clo</a>()</code>,
+<code><a href="centr_betw.html">centr_betw</a>()</code>,
 <code><a href="centr_clo_tmax.html">centr_clo_tmax</a>()</code>,
+<code><a href="centr_clo.html">centr_clo</a>()</code>,
 <code><a href="centr_degree.html">centr_degree</a>()</code>,
-<code><a href="centr_eigen.html">centr_eigen</a>()</code>,
 <code><a href="centr_eigen_tmax.html">centr_eigen_tmax</a>()</code>,
+<code><a href="centr_eigen.html">centr_eigen</a>()</code>,
 <code><a href="centralize.html">centralize</a>()</code></p></div>
     </div>
 
