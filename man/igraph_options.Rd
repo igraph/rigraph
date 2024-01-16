@@ -2,8 +2,6 @@
 % Please edit documentation in R/par.R
 \name{igraph_options}
 \alias{igraph_options}
-\alias{igraph.options}
-\alias{getIgraphOpt}
 \alias{igraph_opt}
 \title{Parameters for the igraph package}
 \usage{
