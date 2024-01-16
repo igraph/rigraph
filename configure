@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Use pkg-config or xml2-config to get the include directory for libxml-2.0
 xml2_include_dir=""
@@ -11,7 +11,7 @@ else
     exit 1
 fi
 
-if [[ -n "$xml2_include_dir" ]]; then
+if [ -n "$xml2_include_dir" ]; then
     PKG_CFLAGS="-I\"$xml2_include_dir\""
     echo "libxml2 include directory: $xml2_include_dir"
 else
