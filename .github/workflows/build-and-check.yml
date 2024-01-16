@@ -172,7 +172,7 @@ jobs:
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
         with:
-          error-on: '"error"'
+          error-on: '"note"'
 
   coverage:
     runs-on: ubuntu-20.04

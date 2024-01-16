@@ -4,12 +4,11 @@ PKG_CFLAGS=$(C_VISIBILITY)
 PKG_CXXFLAGS=$(CXX_VISIBILITY)
 PKG_FFLAGS=$(F_VISIBILITY)
 
-PKG_CPPFLAGS=@cflags@ -DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor \
+PKG_CPPFLAGS=-DUSING_R -I. -Ivendor -Ivendor/cigraph/src -Ivendor/cigraph/include -Ivendor/cigraph/vendor @cflags@ \
 	-DNDEBUG -DNTIMER -DNPRINT -DINTERNAL_ARPACK -DIGRAPH_THREAD_LOCAL= \
 	-DPRPACK_IGRAPH_SUPPORT \
 	-D_GNU_SOURCE=1
 
-PKG_LIBS = -L"${LIB_XML}/lib" -lxml2 -lz -L"${GLPK_HOME}/lib" \
-  -lglpk -lgmp -L"${LIB_GMP}/lib" $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+PKG_LIBS = -lxml2 -lz -lglpk -lgmp $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 OBJECTS=${SOURCES}

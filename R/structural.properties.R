@@ -1067,6 +1067,7 @@ all_shortest_paths <- function(graph, from,
 #' @param to The target vertex of the shortest paths.
 #' @param k The number of paths to find. They will be returned in order of
 #' increasing length.
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams shortest_paths
 #' @return A named list with two components is returned:
 #' \item{vpaths}{The list of \eqn{k} shortest paths in terms of vertices}

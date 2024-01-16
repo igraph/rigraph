@@ -21,6 +21,8 @@ k_shortest_paths(
 
 \item{to}{The target vertex of the shortest paths.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{k}{The number of paths to find. They will be returned in order of
 increasing length.}
 
