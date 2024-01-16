@@ -124,6 +124,11 @@ reference:
   - has_concept("triangles")
   - starts_with("assortativity")
   - spectrum
+- subtitle: Matrices
+- contents:
+  - laplacian_matrix
+  - as_adjacency_matrix
+  - stochastic_matrix
 - subtitle: Chordal graphs
 - contents:
   - has_concept("chordal")
