@@ -41,19 +41,6 @@ add_class <- function(x, class) {
   x
 }
 
-`%||%` <- function(lhs, rhs) {
-  lres <- withVisible(eval(lhs, envir = parent.frame()))
-  if (is.null(lres$value)) {
-    eval(rhs, envir = parent.frame())
-  } else {
-    if (lres$visible) {
-      lres$value
-    } else {
-      invisible(lres$value)
-    }
-  }
-}
-
 `%&&%` <- function(lhs, rhs) {
   lres <- withVisible(eval(lhs, envir = parent.frame()))
   if (!is.null(lres$value)) {
