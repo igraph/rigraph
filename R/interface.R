@@ -520,15 +520,17 @@ get.edge.ids <- function(
     vp,
     directed = TRUE,
     error = FALSE,
-    multi = FALSE) {
+    # FIXME: change to deprecated() once we have @importFrom lifecycle deprecated,
+    # after igraph:::deprecated() is removed
+    multi = NULL) {
   ensure_igraph(graph)
 
   if (lifecycle::is_present(multi)) {
     if (isTRUE(multi)) {
       lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
-    } else {
-      lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
     }
+
+    lifecycle::deprecate_soft("2.0.0", "get.edge.ids(multi = )")
   }
 
   on.exit(.Call(R_igraph_finalizer))
