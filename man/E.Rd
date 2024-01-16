@@ -73,11 +73,11 @@ Other vertex and edge sequences:
 \code{\link{V}()},
 \code{\link{as_ids}()},
 \code{\link{igraph-es-attributes}},
-\code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},
+\code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-attributes}},
-\code{\link{igraph-vs-indexing2}},
 \code{\link{igraph-vs-indexing}},
+\code{\link{igraph-vs-indexing2}},
 \code{\link{print.igraph.es}()},
 \code{\link{print.igraph.vs}()}
 }

@@ -81,10 +81,10 @@ Other vertex and edge sequences:
 \code{\link{V}()},
 \code{\link{as_ids}()},
 \code{\link{igraph-es-attributes}},
-\code{\link{igraph-es-indexing2}},
 \code{\link{igraph-es-indexing}},
-\code{\link{igraph-vs-indexing2}},
+\code{\link{igraph-es-indexing2}},
 \code{\link{igraph-vs-indexing}},
+\code{\link{igraph-vs-indexing2}},
 \code{\link{print.igraph.es}()},
 \code{\link{print.igraph.vs}()}
 
@@ -92,20 +92,20 @@ Vertex, edge and graph attributes
 \code{\link{delete_edge_attr}()},
 \code{\link{delete_graph_attr}()},
 \code{\link{delete_vertex_attr}()},
+\code{\link{edge_attr}()},
 \code{\link{edge_attr<-}()},
 \code{\link{edge_attr_names}()},
-\code{\link{edge_attr}()},
+\code{\link{graph_attr}()},
 \code{\link{graph_attr<-}()},
 \code{\link{graph_attr_names}()},
-\code{\link{graph_attr}()},
 \code{\link{igraph-attribute-combination}},
 \code{\link{igraph-dollar}},
 \code{\link{set_edge_attr}()},
 \code{\link{set_graph_attr}()},
 \code{\link{set_vertex_attr}()},
+\code{\link{vertex_attr}()},
 \code{\link{vertex_attr<-}()},
-\code{\link{vertex_attr_names}()},
-\code{\link{vertex_attr}()}
+\code{\link{vertex_attr_names}()}
 }
 \concept{attributes}
 \concept{vertex and edge sequences}
