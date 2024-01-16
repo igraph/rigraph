@@ -643,6 +643,9 @@
     <loc>https://r.igraph.org/reference/get.vertex.attribute.html</loc>
   </url>
   <url>
+    <loc>https://r.igraph.org/reference/getIgraphOpt.html</loc>
+  </url>
+  <url>
     <loc>https://r.igraph.org/reference/girth.html</loc>
   </url>
   <url>
@@ -908,6 +911,9 @@
   </url>
   <url>
     <loc>https://r.igraph.org/reference/igraph.from.graphNEL.html</loc>
+  </url>
+  <url>
+    <loc>https://r.igraph.org/reference/igraph.options.html</loc>
   </url>
   <url>
     <loc>https://r.igraph.org/reference/igraph.sample.html</loc>
