@@ -58,6 +58,10 @@ INT:
         IN: |-
             IGRAPH_R_CHECK_INT(%I%);
             %C% = INTEGER(%I%)[0];
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I%=NEW_INTEGER(1));
+            INTEGER(%I%)[0]=(int) %C%;
 
 CSTRING:
     CTYPE: const char*
@@ -65,6 +69,12 @@ CSTRING:
         IN: '%C%'
         OUT: '&%C%'
         INOUT: '&%C%'
+    INCONV:
+        IN: |-
+            %C% = Rf_translateCharUTF8(%I%);
+    OUTCONV:
+        OUT: |-
+            PROTECT(%I% = Rf_mkCharLenCE(%C%, strlen(%C%), CE_UTF8));
 
 REAL:
     CTYPE: igraph_real_t

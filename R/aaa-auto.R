@@ -969,7 +969,7 @@ edge_betweenness_subset_impl <- function(graph, eids=E(graph), directed=TRUE, so
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_edge_betweenness_subset, graph, eids-1, directed, sources-1, targets-1, weights)
-  if (igraph_opt("add.vertex.names") && is_named(graph)) {
+if (igraph_opt("add.vertex.names") && is_named(graph)) {
     names(res) <- vertex_attr(graph, "name", V(graph))
   }
   res
@@ -2297,25 +2297,6 @@ largest_cliques_impl <- function(graph) {
   res
 }
 
-maximal_cliques_subset_impl <- function(graph, subset, outfile=NULL, min.size=0, max.size=0, details=FALSE) {
-  # Argument checks
-  ensure_igraph(graph)
-  subset <- as_igraph_vs(graph, subset)
-  min.size <- as.numeric(min.size)
-  max.size <- as.numeric(max.size)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_maximal_cliques_subset, graph, subset-1, outfile, min.size, max.size)
-  if (igraph_opt("return.vs.es")) {
-    res$res <- lapply(res$res, unsafe_create_vs, graph = graph, verts = V(graph))
-  }
-  if (!details) {
-    res <- res$res
-  }
-  res
-}
-
 maximal_cliques_hist_impl <- function(graph, min.size=0, max.size=0) {
   # Argument checks
   ensure_igraph(graph)
@@ -2703,26 +2684,6 @@ from_hrg_dendrogram_impl <- function(hrg) {
   res
 }
 
-get_adjacency_sparse_impl <- function(graph, type=c("both", "upper", "lower"), weights=NULL, loops=ONCE) {
-  # Argument checks
-  ensure_igraph(graph)
-  type <- switch(igraph.match.arg(type), "upper"=0L, "lower"=1L, "both"=2L)
-  if (is.null(weights) && "weight" %in% edge_attr_names(graph)) {
-    weights <- E(graph)$weight
-  }
-  if (!is.null(weights) && any(!is.na(weights))) {
-    weights <- as.numeric(weights)
-  } else {
-    weights <- NULL
-  }
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_get_adjacency_sparse, graph, type, weights, loops)
-
-  res
-}
-
 get_stochastic_sparse_impl <- function(graph, column.wise=FALSE, weights=NULL) {
   # Argument checks
   ensure_igraph(graph)
@@ -2751,17 +2712,6 @@ to_directed_impl <- function(graph, mode=c("mutual", "arbitrary", "random", "acy
   on.exit( .Call(R_igraph_finalizer) )
   # Function call
   res <- .Call(R_igraph_to_directed, graph, mode)
-
-  res
-}
-
-read_graph_dimacs_flow_impl <- function(instream, directed=TRUE) {
-  # Argument checks
-  directed <- as.logical(directed)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_read_graph_dimacs_flow, instream, directed)
 
   res
 }
@@ -3615,30 +3565,6 @@ dim_select_impl <- function(sv) {
   res
 }
 
-almost_equals_impl <- function(a, b, eps) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_almost_equals, a, b, eps)
-
-
-  res
-}
-
-cmp_epsilon_impl <- function(a, b, eps) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_cmp_epsilon, a, b, eps)
-
-
-  res
-}
-
 solve_lsap_impl <- function(c, n) {
   # Argument checks
   c[] <- as.numeric(c)
@@ -3938,41 +3864,6 @@ stochastic_imitation_impl <- function(graph, vid, algo, quantities, strategies, 
   res
 }
 
-progress_impl <- function(message, percent) {
-  # Argument checks
-  percent <- as.numeric(percent)
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_progress, message, percent)
-
-
-  res
-}
-
-status_impl <- function(message) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_status, message)
-
-
-  res
-}
-
-strerror_impl <- function(igraph.errno) {
-  # Argument checks
-
-
-  on.exit( .Call(R_igraph_finalizer) )
-  # Function call
-  res <- .Call(R_igraph_strerror, igraph.errno)
-
-
-  res
-}
 
 vertex_path_from_edge_path_impl <- function(graph, start, edge.path, mode=c("out", "in", "all", "total")) {
   # Argument checks
