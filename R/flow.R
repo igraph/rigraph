@@ -357,11 +357,15 @@ min_cut <- function(graph, source = NULL, target = NULL, capacity = NULL, value.
 #' called group cohesion.
 #'
 #' The vertex connectivity of two vertices (`source` and `target`) in
-#' a directed graph is the minimum number of vertices needed to remove from the
-#' graph to eliminate all (directed) paths from `source` to `target`.
+#' a directed graph is the minimum number of vertices that must be deleted to
+#'  eliminate all paths paths from `source` to `target`.
 #' `vertex_connectivity()` calculates this quantity if both the
 #' `source` and `target` arguments are given and they're not
 #' `NULL`.
+#'
+#' The vertex connectivity of a pair is the same as the number
+#' of different (i.e. node-independent) paths from source to
+#' target, assuming no direct edges between them.
 #'
 #' The vertex connectivity of a graph is the minimum vertex connectivity of all
 #' (ordered) pairs of vertices in the graph. In other words this is the minimum
@@ -454,6 +458,7 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' The edge connectivity of a graph or two vertices, this is recently also
 #' called group adhesion.
 #'
+#' @section `edge_connectivity()` Edge connectivity:
 #' The edge connectivity of a pair of vertices (`source` and
 #' `target`) is the minimum number of edges needed to remove to eliminate
 #' all (directed) paths from `source` to `target`.
@@ -465,18 +470,34 @@ vertex_connectivity <- function(graph, source = NULL, target = NULL, checks = TR
 #' calculates this quantity if neither the `source` nor the `target`
 #' arguments are given (i.e. they are both `NULL`).
 #'
+#' @section `edge_disjoint_paths()` The maximum number of edge-disjoint paths between two vertices:
+#' A set of paths between two vertices is called edge-disjoint if they do not
+#' share any edges. The maximum number of edge-disjoint paths are calculated
+#' by this function using maximum flow techniques. Directed paths are
+#' considered in directed graphs.
+#'
+#'
 #' A set of edge disjoint paths between two vertices is a set of paths between
 #' them containing no common edges. The maximum number of edge disjoint paths
 #' between two vertices is the same as their edge connectivity.
 #'
+#' When there are no edges from the source to the target, the number of
+#' vertex-disjoint paths is the same as the vertex connectivity of
+#' the two vertices. When some edges are present, each one of them
+#' contributes one extra path.
+#'
+#' @section `adhesion()` Adhesion of a graph:
 #' The adhesion of a graph is the minimum number of edges needed to remove to
 #' obtain a graph which is not strongly connected. This is the same as the edge
 #' connectivity of the graph.
 #'
+#' @section All three functions:
 #' The three functions documented on this page calculate similar properties,
 #' more precisely the most general is `edge_connectivity()`, the others are
 #' included only for having more descriptive function names.
 #'
+#'
+
 #' @param graph The input graph.
 #' @param source The id of the source vertex, for `edge_connectivity()` it
 #'   can be `NULL`, see details below.
