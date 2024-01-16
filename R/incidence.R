@@ -277,7 +277,7 @@ graph_from_biadjacency_matrix <- function(incidence, directed = FALSE,
 #' this naming to avoid confusion with the edge-vertex incidence matrix.
 #' @export
 from_incidence_matrix <- function(...) { # nocov start
-   lifecycle::deprecate_warn("20.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
+   lifecycle::deprecate_warn("2.0.0", "graph_from_incidence_matrix()", "graph_from_biadjacency_matrix()")
    graph_from_biadjacency_matrix(...)
 } # nocov end
 #' From incidence matrix
