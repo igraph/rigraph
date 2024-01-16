@@ -10724,6 +10724,63 @@ SEXP R_igraph_dim_select(SEXP sv) {
   return(r_result);
 }
 
+/*-------------------------------------------/
+/ igraph_almost_equals                       /
+/-------------------------------------------*/
+SEXP R_igraph_almost_equals(SEXP a, SEXP b, SEXP eps) {
+                                        /* Declarations */
+  double c_a;
+  double c_b;
+  double c_eps;
+  igraph_bool_t c_result;
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_REAL(a);
+  c_a = REAL(a)[0];
+  IGRAPH_R_CHECK_REAL(b);
+  c_b = REAL(b)[0];
+  IGRAPH_R_CHECK_REAL(eps);
+  c_eps = REAL(eps)[0];
+                                        /* Call igraph */
+  c_result=igraph_almost_equals(c_a, c_b, c_eps);
+
+                                        /* Convert output */
+
+  PROTECT(r_result=NEW_LOGICAL(1));
+  LOGICAL(r_result)[0]=c_result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
+
+/*-------------------------------------------/
+/ igraph_cmp_epsilon                         /
+/-------------------------------------------*/
+SEXP R_igraph_cmp_epsilon(SEXP a, SEXP b, SEXP eps) {
+                                        /* Declarations */
+  double c_a;
+  double c_b;
+  double c_eps;
+  int c_result;
+  SEXP r_result;
+                                        /* Convert input */
+  IGRAPH_R_CHECK_REAL(a);
+  c_a = REAL(a)[0];
+  IGRAPH_R_CHECK_REAL(b);
+  c_b = REAL(b)[0];
+  IGRAPH_R_CHECK_REAL(eps);
+  c_eps = REAL(eps)[0];
+                                        /* Call igraph */
+  c_result=igraph_cmp_epsilon(c_a, c_b, c_eps);
+
+                                        /* Convert output */
+
+  PROTECT(r_result=NEW_INTEGER(1));
+  INTEGER(r_result)[0]=(int) c_result;
+
+  UNPROTECT(1);
+  return(r_result);
+}
 
 /*-------------------------------------------/
 / igraph_solve_lsap                          /
