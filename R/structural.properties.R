@@ -2481,7 +2481,6 @@ unfold_tree <- function(graph, mode = c("all", "out", "in", "total"), roots) {
 #'   matrix. The `Matrix` package is required for sparse matrices.
 #' @return A numeric matrix.
 #' @author Gabor Csardi \email{csardi.gabor@@gmail.com}
-#' @family structural.properties
 #' @export
 #' @keywords graphs
 #' @examples
