@@ -4,7 +4,7 @@
 \alias{get.edge.ids}
 \title{Find the edge ids based on the incident vertices of the edges}
 \usage{
-get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = FALSE)
+get.edge.ids(graph, vp, directed = TRUE, error = FALSE, multi = NULL)
 }
 \arguments{
 \item{graph}{The input graph.}
@@ -67,8 +67,8 @@ Other structural queries:
 \code{\link{gorder}()},
 \code{\link{gsize}()},
 \code{\link{head_of}()},
-\code{\link{incident}()},
 \code{\link{incident_edges}()},
+\code{\link{incident}()},
 \code{\link{is_directed}()},
 \code{\link{neighbors}()},
 \code{\link{tail_of}()}
