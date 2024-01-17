@@ -1,5 +1,36 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9026
+
+## Features
+
+  - Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
+
+## Continuous integration
+
+  - Go back to stricter checks (#1012).
+
+## Documentation
+
+  - Rm stray alias (#1117).
+
+## Refactoring
+
+  - Use %||% from rlang (#1112).
+
+  - Breaking change: change R/par.R (#1104).
+
+## Testing
+
+  - Remove top-level code in test-indexing.R (#1085).
+
+## Breaking changes
+
+  - Breaking change: change R/par.R (#1104).
+
+  - Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
+
+
 # igraph 1.6.0.9025
 
 ## Chore
