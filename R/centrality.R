@@ -186,8 +186,10 @@ alpha.centrality <- function(graph, nodes = V(graph), alpha = 1, loops = FALSE, 
 
 #' Deprecated version of `betweenness()`
 #'
-#' @description Use [`betweenness()`] with the `cutoff` argument instead.
+#' @description
 #' `r lifecycle::badge("deprecated")`
+#'
+#' Use [`betweenness()`] with the `cutoff` argument instead.
 #' @param vids The vertices for which the vertex betweenness estimation will be
 #'   calculated.
 #' @inheritParams betweenness
@@ -342,9 +344,9 @@ edge_betweenness <- function(graph, e = E(graph),
 #' Deprecated version of `edge_betweenness()`
 #'
 #' @description
-#' Use [`edge_betweenness()`] with the `cutoff` argument instead.
 #' `r lifecycle::badge("deprecated")`
 #'
+#' Use [`edge_betweenness()`] with the `cutoff` argument instead.
 #' @inheritParams edge_betweenness
 #' @keywords internal
 #' @export
@@ -458,9 +460,9 @@ closeness <- function(graph, vids = V(graph),
 #' Deprecated version of `closeness()`
 #'
 #' @description
-#' Use [`closeness()`] with the `cutoff` argument instead.
 #' `r lifecycle::badge("deprecated")`
 #'
+#' Use [`closeness()`] with the `cutoff` argument instead.
 #' @inheritParams closeness
 #' @keywords internal
 #' @export

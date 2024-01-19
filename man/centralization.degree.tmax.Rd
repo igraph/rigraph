@@ -21,8 +21,7 @@ centralization.degree.tmax(
 \code{degree()}.}
 
 \item{loops}{Logical scalar, whether to consider loops edges when
-calculating the degree. Currently the default value is \code{FALSE},
-but this argument will be required from igraph 1.4.0.}
+calculating the degree.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
