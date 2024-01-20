@@ -2149,6 +2149,8 @@ bfs <- function(
     if (father) res$father <- create_vs(graph, res$father, na_ok = TRUE)
     if (pred) res$pred <- create_vs(graph, res$pred, na_ok = TRUE)
     if (succ) res$succ <- create_vs(graph, res$succ, na_ok = TRUE)
+  } else {
+    if (order) res$order <- res$order[res$order != 0]
   }
 
   if (igraph_opt("add.vertex.names") && is_named(graph)) {

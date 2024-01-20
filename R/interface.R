@@ -525,7 +525,8 @@ get.edge.ids <- function(
     multi = NULL) {
   ensure_igraph(graph)
 
-  if (lifecycle::is_present(multi)) {
+  # FIXME: Change to lifecycle::is_present() when using deprecated
+  if (!is.null(multi)) {
     if (isTRUE(multi)) {
       lifecycle::deprecate_stop("2.0.0", "get.edge.ids(multi = )")
     }
