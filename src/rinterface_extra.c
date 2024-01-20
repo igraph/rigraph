@@ -3001,26 +3001,6 @@ SEXP R_igraph_hrg_to_SEXP(const igraph_hrg_t *hrg) {
   return result;
 }
 
-igraph_error_t R_SEXP_to_hrg(SEXP shrg, igraph_hrg_t *hrg) {
-  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 0), &hrg->left));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &hrg->left);
-
-  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 1), &hrg->right));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &hrg->right);
-
-  R_SEXP_to_vector(VECTOR_ELT(shrg, 2), &hrg->prob);
-
-  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 3), &hrg->edges));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &hrg->edges);
-
-  IGRAPH_CHECK(R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 4), &hrg->vertices));
-  IGRAPH_FINALLY(igraph_vector_int_destroy, &hrg->vertices);
-
-  IGRAPH_FINALLY_CLEAN(4);
-
-  return IGRAPH_SUCCESS;
-}
-
 igraph_error_t R_SEXP_to_hrg_copy(SEXP shrg, igraph_hrg_t *hrg) {
   IGRAPH_CHECK(R_SEXP_to_vector_int_copy(VECTOR_ELT(shrg, 0), &hrg->left));
   IGRAPH_FINALLY(igraph_vector_int_destroy, &hrg->left);
