@@ -1,7 +1,7 @@
 test_that("graphNEL conversion works", {
   if (!requireNamespace("graph", quietly = TRUE)) skip("No graph package")
 
-  library(graph, warn.conflicts = FALSE)
+  suppressPackageStartupMessages(library(graph, warn.conflicts = FALSE))
 
   g <- sample_gnp(100, 5 / 100)
   N <- as_graphnel(g)
