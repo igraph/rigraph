@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9027
+
+## Documentation
+
+  - Move deprecation badge to top of doc pages.
+
+
 # igraph 1.6.0.9026
 
 ## Features
