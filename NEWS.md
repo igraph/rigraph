@@ -4,413 +4,413 @@
 
 ## Bug fixes
 
-  - `bfs()` no longer pads `order` with zeros with `igraph_options(return.vs.es = FALSE)` (#1124).
+- `bfs()` no longer pads `order` with zeros with `igraph_options(return.vs.es = FALSE)` (#1124).
 
-  - Remove `R_SEXP_to_hrg` use `R_SEXP_to_hrg_copy` to avoid memory leak (#1075).
+- Remove `R_SEXP_to_hrg` use `R_SEXP_to_hrg_copy` to avoid memory leak (#1075).
 
 ## Features
 
-  - Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
+- Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
 
 ## Breaking changes
 
-  - Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
+- Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
 
 
 # igraph 1.6.0.9027
 
 ## Documentation
 
-  - Move deprecation badge to top of doc pages.
+- Move deprecation badge to top of doc pages.
 
 
 # igraph 1.6.0.9026
 
 ## Features
 
-  - Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
+- Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
 
 ## Continuous integration
 
-  - Go back to stricter checks (#1012).
+- Go back to stricter checks (#1012).
 
 ## Documentation
 
-  - Rm stray alias (#1117).
+- Rm stray alias (#1117).
 
 ## Refactoring
 
-  - Use %||% from rlang (#1112).
+- Use %||% from rlang (#1112).
 
-  - Breaking change: change R/par.R (#1104).
+- Breaking change: change R/par.R (#1104).
 
 ## Testing
 
-  - Remove top-level code in test-indexing.R (#1085).
+- Remove top-level code in test-indexing.R (#1085).
 
 ## Breaking changes
 
-  - Breaking change: change R/par.R (#1104).
+- Breaking change: change R/par.R (#1104).
 
-  - Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
+- Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
 
 
 # igraph 1.6.0.9025
 
 ## Chore
 
-  - Document.
+- Document.
 
-  - Update revdepcheck results.
+- Update revdepcheck results.
 
-  - Bump roxygen2 version (#1100).
+- Bump roxygen2 version (#1100).
 
-  - Remove roxygen2 warnings (#1099).
+- Remove roxygen2 warnings (#1099).
 
-  - Use Conventional Commits in upgrade script.
+- Use Conventional Commits in upgrade script.
 
-  - Update vendored igraph/C to igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe.
+- Update vendored igraph/C to igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe.
 
 ## Documentation
 
-  - Add missing param docs (#1005).
+- Add missing param docs (#1005).
 
 ## Uncategorized
 
-  - Fixes for Makevars.in for unix (revert accidental file updates) (#1092).
+- Fixes for Makevars.in for unix (revert accidental file updates) (#1092).
 
 
 # igraph 1.6.0.9024
 
 ## Bug fixes
 
-  - Temporary remove functions with sparse matrices (#1093).
+- Temporary remove functions with sparse matrices (#1093).
 
 
 # igraph 1.6.0.9023
 
 ## Features
 
-  - Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+- Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
 
 ## Breaking changes
 
-  - Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+- Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
 
 
 # igraph 1.6.0.9022
 
 ## Bug fixes
 
-  - Path to vendor header files (#1089).
+- Path to vendor header files (#1089).
 
 ## Features
 
-  - Use 30 bits of R's RNG (#1079).
+- Use 30 bits of R's RNG (#1079).
 
 ## Chore
 
-  - Reduce warnings from `R CMD check` (#1087).
+- Reduce warnings from `R CMD check` (#1087).
 
 ## Documentation
 
-  - Rm get.adjacency() usage from intro vignettes (#1084).
+- Rm get.adjacency() usage from intro vignettes (#1084).
 
 
 # igraph 1.6.0.9021
 
 ## Bug fixes
 
-  - Restore `hrg_tree()` semantics (#1078).
+- Restore `hrg_tree()` semantics (#1078).
 
 
 # igraph 1.6.0.9020
 
 ## Chore
 
-  - Fix typo in revdepcheck script.
+- Fix typo in revdepcheck script.
 
-  - Tweak revdepcheck scripts.
+- Tweak revdepcheck scripts.
 
 
 # igraph 1.6.0.9019
 
 ## Chore
 
-  - Update revdepcheck results.
+- Update revdepcheck results.
 
 
 # igraph 1.6.0.9018
 
 ## Chore
 
-  - Update revdepcheck results.
+- Update revdepcheck results.
 
-  - Exclude bad packages from checks.
+- Exclude bad packages from checks.
 
 
 # igraph 1.6.0.9017
 
 ## Bug fixes
 
-  - Add scalar conversion checks in a few critical places (#1069).
+- Add scalar conversion checks in a few critical places (#1069).
 
 ## Refactoring
 
-  - Remove unused vectorlist / matrixlist destructors (#1070).
+- Remove unused vectorlist / matrixlist destructors (#1070).
 
-  - Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
+- Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
 
-  - Use integers for mode enum in cluster\_label\_prop.
+- Use integers for mode enum in cluster\_label\_prop.
 
 ## Breaking changes
 
-  - Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
+- Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
 
 ## Uncategorized
 
-  - Check that matrix sizes are in the supported range before passing them to R (#1066).
+- Check that matrix sizes are in the supported range before passing them to R (#1066).
 
 
 # igraph 1.6.0.9016
 
 ## Bug fixes
 
-  - Check that we receive a scalar when expecting a scalar in C code (#1051).
+- Check that we receive a scalar when expecting a scalar in C code (#1051).
 
-  - Local (weighted) transitivity now produces a named vector (#1057).
+- Local (weighted) transitivity now produces a named vector (#1057).
 
 ## Chore
 
-  - Standardize the handling of some stimulus enum types (#1064).
+- Standardize the handling of some stimulus enum types (#1064).
 
-  - Improve readability in rinterface.h.
+- Improve readability in rinterface.h.
 
 
 # igraph 1.6.0.9015
 
 ## Features
 
-  - Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
+- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
 
 ## Chore
 
-  - Revdepcheck and scripts, no new failures.
+- Revdepcheck and scripts, no new failures.
 
 ## Breaking changes
 
-  - Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
+- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
 
 
 # igraph 1.6.0.9014
 
 ## Bug fixes
 
-  - Fix incorrect usage in subgraph.edges() example.
+- Fix incorrect usage in subgraph.edges() example.
 
 ## Features
 
-  - New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
+- New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
 
 ## Chore
 
-  - Remove unused types (#1060).
+- Remove unused types (#1060).
 
-  - Re-generate docs.
+- Re-generate docs.
 
-  - Don't pass attributes to C functions (#1048).
+- Don't pass attributes to C functions (#1048).
 
 ## Refactoring
 
-  - Do not duplicate prototypes, use a common header for rinterface.c / rinterface\_extra.c (#1055).
+- Do not duplicate prototypes, use a common header for rinterface.c / rinterface\_extra.c (#1055).
 
-  - Remove unused stimulus type VERTEXSETLIST\_INT (#1049).
+- Remove unused stimulus type VERTEXSETLIST\_INT (#1049).
 
 ## tests
 
-  - Test transferring colors in isomorphism functions (#1050).
+- Test transferring colors in isomorphism functions (#1050).
 
 ## Uncategorized
 
-  - Refactor/type-refactorings (#1052).
+- Refactor/type-refactorings (#1052).
 
 
 # igraph 1.6.0.9013
 
 ## Bug fixes
 
-  - Remove use of deprecated `STR()` (#1034).
+- Remove use of deprecated `STR()` (#1034).
 
-  - Stimulus argument dependencies (#1037).
+- Stimulus argument dependencies (#1037).
 
 ## Features
 
-  - Use `[]` assignment for converting matrices (#1035).
+- Use `[]` assignment for converting matrices (#1035).
 
 ## Chore
 
-  - Remove unused includes (#1039).
+- Remove unused includes (#1039).
 
-  - Move towards autogenerating all bindings (#1043).
+- Move towards autogenerating all bindings (#1043).
 
-  - Avoid deprecated function (#1041).
+- Avoid deprecated function (#1041).
 
-  - Use new function in favor of deprecated one (#1038).
+- Use new function in favor of deprecated one (#1038).
 
-  - Stabilize `sources.mk` (#1036).
+- Stabilize `sources.mk` (#1036).
 
-  - Regenerate parser (#1030).
+- Regenerate parser (#1030).
 
 ## Refactoring
 
-  - Clean up some auto-generation code (#1031).
+- Clean up some auto-generation code (#1031).
 
-  - Remove unused parts from code generation (#1032).
+- Remove unused parts from code generation (#1032).
 
-  - Replace loop by `lapply()` when returning vertex and edge sets (#1033).
+- Replace loop by `lapply()` when returning vertex and edge sets (#1033).
 
 
 # igraph 1.6.0.9012
 
 ## Bug fixes
 
-  - Fix auto-generation and handling of arpack defaults.
+- Fix auto-generation and handling of arpack defaults.
 
 ## Documentation
 
-  - Fix math formatting in fit\_power\_law() docs.
+- Fix math formatting in fit\_power\_law() docs.
 
 ## Refactoring
 
-  - Use new ARPACK\_DEFAULTS symbol from C core for default arpack options.
+- Use new ARPACK\_DEFAULTS symbol from C core for default arpack options.
 
 
 # igraph 1.6.0.9011
 
 ## Refactoring
 
-  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
+- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
 
-  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
+- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
 
 ## Breaking changes
 
-  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
+- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
 
-  - Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
+- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
 
 
 # igraph 1.6.0.9010
 
 ## Bug fixes
 
-  - Double registration of entrypoint removed.
+- Double registration of entrypoint removed.
 
-  - Fix some deprecated and incompatible pointers warnings (#1020).
+- Fix some deprecated and incompatible pointers warnings (#1020).
 
 ## Chore
 
-  - Update revdepcheck results.
+- Update revdepcheck results.
 
-  - Add tools script and template for moving to lifecycle (#1022).
+- Add tools script and template for moving to lifecycle (#1022).
 
 ## Documentation
 
-  - New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
+- New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
 
 
 # igraph 1.6.0.9009
 
 ## Bug fixes
 
-  - Intersections between edges and rectangle vertices are computed correctly (#1021).
+- Intersections between edges and rectangle vertices are computed correctly (#1021).
 
 
 # igraph 1.6.0.9008
 
 ## Chore
 
-  - Add Aviator configuration.
+- Add Aviator configuration.
 
 ## Documentation
 
-  - Clarify that Infomap considers edge directions.
+- Clarify that Infomap considers edge directions.
 
 
 # igraph 1.6.0.9007
 
 ## Refactoring
 
-  - Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
+- Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
 
-  - Prepare using lifecycle for deprecations (#1001).
+- Prepare using lifecycle for deprecations (#1001).
 
 
 # igraph 1.6.0.9006
 
 ## Bug fixes
 
-  - Fix compilation on Windows with spaces in the Rtools path (#1000).
+- Fix compilation on Windows with spaces in the Rtools path (#1000).
 
 ## Chore
 
-  - Avoid deprecated `R_igraph_automorphisms()` (#999).
+- Avoid deprecated `R_igraph_automorphisms()` (#999).
 
 
 # igraph 1.6.0.9005
 
 ## Chore
 
-  - Fix Stimulus definitions (#997).
+- Fix Stimulus definitions (#997).
 
-  - Remove duplicate vendored libraries (#996).
+- Remove duplicate vendored libraries (#996).
 
-  - Remove igraph/C 0.9 (#995).
+- Remove igraph/C 0.9 (#995).
 
 
 # igraph 1.6.0.9004
 
 ## Refactoring
 
-  - Eliminate the use of some deprecated C functions.
+- Eliminate the use of some deprecated C functions.
 
 
 # igraph 1.6.0.9003
 
 ## Features
 
-  - Upgrade igraph/C to 0.10 (@krlmlr, @Antonov548, #840).
+- Upgrade igraph/C to 0.10 (@krlmlr, @Antonov548, #840).
 
 ## Chore
 
-  - Update check results.
+- Update check results.
 
 
 # igraph 1.6.0.9002
 
-  - Merge branch 'cran-1.6.0'.
+- Merge branch 'cran-1.6.0'.
 
 
 # igraph 1.6.0.9001
 
 ## Chore
 
-  - Add bug report form.
+- Add bug report form.
 
-  - Add bug report form.
+- Add bug report form.
 
-  - Add bug report form.
+- Add bug report form.
 
-  - Add bug report form.
+- Add bug report form.
 
-  - Add bug report form.
+- Add bug report form.
 
 
 # igraph 1.6.0.9000
 
-  - Merge branch 'cran-1.6.0'.
+- Merge branch 'cran-1.6.0'.
 
-  - Merge branch 'main' into cran-1.6.0.
+- Merge branch 'main' into cran-1.6.0.
 
 
 # igraph 1.6.0
@@ -563,7 +563,7 @@ The only supported remedy is to upgrade the igraph package to version 1.5.0 or l
 
 ## Bug fixes
 
-  - Fix error message in `make_graph()` when `simplify = ...` is used with a non-formula (#834).
+- Fix error message in `make_graph()` when `simplify = ...` is used with a non-formula (#834).
 
 ## Testing
 
@@ -600,13 +600,13 @@ The only supported remedy is to upgrade the igraph package to version 1.5.0 or l
 
 ## Internal
 
-  - Fix tests for dev waldo (#779, @hadley).
+- Fix tests for dev waldo (#779, @hadley).
 
-  - Fix linking on Windows: gfortran needs quadmath. (#778).
+- Fix linking on Windows: gfortran needs quadmath. (#778).
 
 ## Documentation
 
-  - Mention limitation of Pajek reader (#776).
+- Mention limitation of Pajek reader (#776).
 
 
 # igraph 1.4.2
