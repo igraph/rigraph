@@ -2,415 +2,119 @@
 
 # igraph 1.6.0.9028
 
-## Bug fixes
+This major release brings development in line with the C core at <https://github.com/igraph/igraph>.
+See <https://github.com/igraph/igraph/blob/9e0eb19a4b27c83ce0a8cdeb40c2b025b9ab808e/CHANGELOG.md> for a complete changelog, in particular the section "Breaking changes".
+Version 1.6.0 of the R package used version 0.9.9 of the C core, the changes in the 0.10 series of the C core are relevant for version 2.0.0 of the R package, but not all C core functions are exposed in the R interface.
 
-- `bfs()` no longer pads `order` with zeros with `igraph_options(return.vs.es = FALSE)` (#1124).
+The change log below is a summary of the changes in the R interface.
+
+## Breaking changes
+
+- `get.edge.ids(multi = TRUE)` and `as_adjacency_matrix(edges = )` are no longer supported (#1101, #1080).
+
+- Remove default value for `loops` argument of `centr_degree_tmax()` (#1114).
+
+- `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
+
+- Remove `graph.isomorphic.34()` (#1065, #1067).
+
+- Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
+
+- Use `lifecycle::deprecate_soft()` for most deprecated functions (#1024, #1025, #1104).
+
+## Bug fixes
 
 - Remove `R_SEXP_to_hrg` use `R_SEXP_to_hrg_copy` to avoid memory leak (#1075).
 
-## Features
-
-- Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
-
-## Breaking changes
-
-- Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
-
-
-# igraph 1.6.0.9027
-
-## Documentation
-
-- Move deprecation badge to top of doc pages.
-
-
-# igraph 1.6.0.9026
-
-## Features
-
-- Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
-
-## Continuous integration
-
-- Go back to stricter checks (#1012).
-
-## Documentation
-
-- Rm stray alias (#1117).
-
-## Refactoring
-
-- Use %||% from rlang (#1112).
-
-- Breaking change: change R/par.R (#1104).
-
-## Testing
-
-- Remove top-level code in test-indexing.R (#1085).
-
-## Breaking changes
-
-- Breaking change: change R/par.R (#1104).
-
-- Breaking change: remove default value for 'loops' argument of centr\_degree\_tmax() (#1114).
-
-
-# igraph 1.6.0.9025
-
-## Chore
-
-- Document.
-
-- Update revdepcheck results.
-
-- Bump roxygen2 version (#1100).
-
-- Remove roxygen2 warnings (#1099).
-
-- Use Conventional Commits in upgrade script.
-
-- Update vendored igraph/C to igraph/igraph@e1203464653cbcb5e87a16881ec99f3485a17efe.
-
-## Documentation
-
-- Add missing param docs (#1005).
-
-## Uncategorized
-
-- Fixes for Makevars.in for unix (revert accidental file updates) (#1092).
-
-
-# igraph 1.6.0.9024
-
-## Bug fixes
-
-- Temporary remove functions with sparse matrices (#1093).
-
-
-# igraph 1.6.0.9023
-
-## Features
-
-- Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
-
-## Breaking changes
-
-- Breaking change: `as_adjacency_matrix()` no longer supports attributes of type `character` (#1072).
-
-
-# igraph 1.6.0.9022
-
-## Bug fixes
+- Temporarily remove functions with sparse matrices (#1093).
 
 - Path to vendor header files (#1089).
 
-## Features
-
-- Use 30 bits of R's RNG (#1079).
-
-## Chore
-
-- Reduce warnings from `R CMD check` (#1087).
-
-## Documentation
-
-- Rm get.adjacency() usage from intro vignettes (#1084).
-
-
-# igraph 1.6.0.9021
-
-## Bug fixes
-
-- Restore `hrg_tree()` semantics (#1078).
-
-
-# igraph 1.6.0.9020
-
-## Chore
-
-- Fix typo in revdepcheck script.
-
-- Tweak revdepcheck scripts.
-
-
-# igraph 1.6.0.9019
-
-## Chore
-
-- Update revdepcheck results.
-
-
-# igraph 1.6.0.9018
-
-## Chore
-
-- Update revdepcheck results.
-
-- Exclude bad packages from checks.
-
-
-# igraph 1.6.0.9017
-
-## Bug fixes
-
 - Add scalar conversion checks in a few critical places (#1069).
-
-## Refactoring
-
-- Remove unused vectorlist / matrixlist destructors (#1070).
-
-- Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
-
-- Use integers for mode enum in cluster\_label\_prop.
-
-## Breaking changes
-
-- Breaking change: remove graph.isomorphic.34(), fixes #1065 (#1067).
-
-## Uncategorized
-
-- Check that matrix sizes are in the supported range before passing them to R (#1066).
-
-
-# igraph 1.6.0.9016
-
-## Bug fixes
 
 - Check that we receive a scalar when expecting a scalar in C code (#1051).
 
+- Check that matrix sizes are in the supported range before passing them to R (#1066).
+
 - Local (weighted) transitivity now produces a named vector (#1057).
 
-## Chore
-
-- Standardize the handling of some stimulus enum types (#1064).
-
-- Improve readability in rinterface.h.
-
-
-# igraph 1.6.0.9015
-
-## Features
-
-- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
-
-## Chore
-
-- Revdepcheck and scripts, no new failures.
-
-## Breaking changes
-
-- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order` . (#1062).
-
-
-# igraph 1.6.0.9014
-
-## Bug fixes
-
-- Fix incorrect usage in subgraph.edges() example.
-
-## Features
-
-- New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
-
-## Chore
-
-- Remove unused types (#1060).
-
-- Re-generate docs.
-
-- Don't pass attributes to C functions (#1048).
-
-## Refactoring
-
-- Do not duplicate prototypes, use a common header for rinterface.c / rinterface\_extra.c (#1055).
-
-- Remove unused stimulus type VERTEXSETLIST\_INT (#1049).
-
-## tests
-
-- Test transferring colors in isomorphism functions (#1050).
-
-## Uncategorized
-
-- Refactor/type-refactorings (#1052).
-
-
-# igraph 1.6.0.9013
-
-## Bug fixes
+- Fix incorrect usage in `subgraph.edges()` example.
 
 - Remove use of deprecated `STR()` (#1034).
 
 - Stimulus argument dependencies (#1037).
 
-## Features
-
-- Use `[]` assignment for converting matrices (#1035).
-
-## Chore
-
-- Remove unused includes (#1039).
-
-- Move towards autogenerating all bindings (#1043).
-
-- Avoid deprecated function (#1041).
-
-- Use new function in favor of deprecated one (#1038).
-
-- Stabilize `sources.mk` (#1036).
-
-- Regenerate parser (#1030).
-
-## Refactoring
-
-- Clean up some auto-generation code (#1031).
-
-- Remove unused parts from code generation (#1032).
-
-- Replace loop by `lapply()` when returning vertex and edge sets (#1033).
-
-
-# igraph 1.6.0.9012
-
-## Bug fixes
-
 - Fix auto-generation and handling of arpack defaults.
-
-## Documentation
-
-- Fix math formatting in fit\_power\_law() docs.
-
-## Refactoring
-
-- Use new ARPACK\_DEFAULTS symbol from C core for default arpack options.
-
-
-# igraph 1.6.0.9011
-
-## Refactoring
-
-- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
-
-- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
-
-## Breaking changes
-
-- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1025).
-
-- Breaking change: Use `lifecycle::deprecate_soft()` for deprecated functions (#1024).
-
-
-# igraph 1.6.0.9010
-
-## Bug fixes
 
 - Double registration of entrypoint removed.
 
 - Fix some deprecated and incompatible pointers warnings (#1020).
 
-## Chore
-
-- Update revdepcheck results.
-
-- Add tools script and template for moving to lifecycle (#1022).
-
-## Documentation
-
-- New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
-
-
-# igraph 1.6.0.9009
-
-## Bug fixes
-
 - Intersections between edges and rectangle vertices are computed correctly (#1021).
-
-
-# igraph 1.6.0.9008
-
-## Chore
-
-- Add Aviator configuration.
-
-## Documentation
-
-- Clarify that Infomap considers edge directions.
-
-
-# igraph 1.6.0.9007
-
-## Refactoring
-
-- Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
-
-- Prepare using lifecycle for deprecations (#1001).
-
-
-# igraph 1.6.0.9006
-
-## Bug fixes
 
 - Fix compilation on Windows with spaces in the Rtools path (#1000).
 
-## Chore
+## Features
 
-- Avoid deprecated `R_igraph_automorphisms()` (#999).
+- Use 30 bits of R's RNG (#1079).
 
+- Breaking change: Remove `NA` padding for `dfs(unreachable = FALSE)$order` and `$order.out` and for `bfs(unreachable = FALSE)$order`, also for `igraph_options(return.vs.es = FALSE)` (#1062, #1124).
 
-# igraph 1.6.0.9005
+- New `k_shortest_paths()` to compute the first k shortest paths between two vertices (#1028).
 
-## Chore
+## Documentation
+
+- Add GitHub bug report form.
+
+- New `vignette("deprecated-dot-case")` that lists deprecated functions and their alternatives (#1013).
+
+- Move deprecation badge to top of doc pages.
+
+- Remove usage of `get.adjacency()` from intro vignettes (#1084).
+
+- Fix math formatting in `fit_power_law()` docs.
+
+- Clarify that Infomap considers edge directions.
+
+## Internal
+
+- Use `[]` assignment for converting matrices (#1035).
+
+- Move towards autogenerating all bindings (#1043).
+
+- Use %\|\|% from rlang (#1112).
+
+- Replace loop by `lapply()` when returning vertex and edge sets (#1033).
+
+- Do not duplicate prototypes, use a common header for `rinterface.c` and `rinterface_extra.c` (#1055).
+
+- Clean up some auto-generation code (#1031), remove unused parts from code generation (#1032), eliminate the use of some deprecated C functions.
+
+- Use integers for mode enum in `cluster_label_prop()`.
+
+- Standardize the handling of some stimulus enum types (#1064).
+
+- Remove unused vectorlist / matrixlist destructors (#1070).
+
+- Remove unused stimulus type VERTEXSETLIST_INT (#1049).
+
+- Remove unused types (#1060).
 
 - Fix Stimulus definitions (#997).
 
-- Remove duplicate vendored libraries (#996).
+- Avoid deprecated `R_igraph_automorphisms()` (#999).
 
-- Remove igraph/C 0.9 (#995).
+- Use new ARPACK_DEFAULTS symbol from C core for default arpack options.
 
+- Ignore upstream CITATION file to avoid R CMD check NOTE (#1007).
 
-# igraph 1.6.0.9004
+- Add Aviator configuration.
 
-## Refactoring
+## Testing
 
-- Eliminate the use of some deprecated C functions.
+- Remove top-level code in `test-indexing.R` (#1085).
 
-
-# igraph 1.6.0.9003
-
-## Features
-
-- Upgrade igraph/C to 0.10 (@krlmlr, @Antonov548, #840).
-
-## Chore
-
-- Update check results.
-
-
-# igraph 1.6.0.9002
-
-- Merge branch 'cran-1.6.0'.
-
-
-# igraph 1.6.0.9001
-
-## Chore
-
-- Add bug report form.
-
-- Add bug report form.
-
-- Add bug report form.
-
-- Add bug report form.
-
-- Add bug report form.
-
-
-# igraph 1.6.0.9000
-
-- Merge branch 'cran-1.6.0'.
-
-- Merge branch 'main' into cran-1.6.0.
+- Test transferring colors in isomorphism functions (#1050).
 
 
 # igraph 1.6.0
