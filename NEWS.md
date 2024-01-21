@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# igraph 1.6.0.9028
+
+## Bug fixes
+
+  - `bfs()` no longer pads `order` with zeros with `igraph_options(return.vs.es = FALSE)` (#1124).
+
+  - Remove `R_SEXP_to_hrg` use `R_SEXP_to_hrg_copy` to avoid memory leak (#1075).
+
+## Features
+
+  - Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
+
+## Breaking changes
+
+  - Breaking change: `get.edge.ids(multi = TRUE)` is no longer supported (#1101).
+
+
 # igraph 1.6.0.9027
 
 ## Documentation
